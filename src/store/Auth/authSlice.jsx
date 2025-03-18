@@ -7,22 +7,28 @@ const initialState = {
 };
 
 export const userLogin = (loginData) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(setLoginLoader(true));
     try {
+
       const response = await axiosInstance.post(`login`, loginData);
 
-      if (response) {
+      if (response?.data?.success) {
         dispatch(setToken(response?.data?.data?.remember_tokens));
+        return response.data;
+      } else {
+          throw new Error(response?.data?.message || "Login failed");
+ 
       }
     } catch (error) {
-    //   dispatch(setAuthError(error?.response?.data?.message));
+      
+      
+      throw error;
     } finally {
       dispatch(setLoginLoader(false));
     }
   };
 };
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -35,13 +41,9 @@ const authSlice = createSlice({
     setLoginLoader(state, action) {
       state.loginLoader = action.payload;
     },
-   
   },
 });
 
-export const {
-  setToken,
-  setLoginLoader,
-} = authSlice.actions;
+export const { setToken, setLoginLoader } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -5,6 +5,7 @@ const initialState = {
     popularList:[],
     popularLoader:false,
     searchServiceLoader:false,
+    service:[]
     
 };
 export const getPopularServiceList = () => {
@@ -29,7 +30,7 @@ export const getPopularServiceList = () => {
         const response = await axiosInstance.post(`search-services`, ServiceData);
   
         if (response) {
-            
+            dispatch(setService(response?.data?.data))
           
         }
       } catch (error) {
@@ -50,6 +51,9 @@ state.popularList = action.payload
     setPopularServiceListLoader(state,action){
         state.popularLoader=action.payload
     },
+    setService(state,action){
+        state.service= action.payload
+    },
   
     setsearchServiceLoader(state,action) {
         state.searchServiceLoader= action.payload
@@ -60,7 +64,7 @@ state.popularList = action.payload
 
 export const {
     setPopularServiceListLoader,setPopularList,
-    setsearchServiceLoader
+    setsearchServiceLoader,setService
   
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

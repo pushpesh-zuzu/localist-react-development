@@ -11,6 +11,9 @@ import ServicePanel from "../component/servicePanel";
 import ServicePanelPage from "../pages/ServicePanelPage";
 import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/ServiceCreateAccount/ServiceCreateAccount";
 
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +32,8 @@ const router = createBrowserRouter([
       },
 
       { path: "*", element: <NotFound /> },
+     
+     
     ],
   },
 ]);

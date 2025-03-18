@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import styles from "./FindLocalJobs.module.css";
 import { PopularServiceData } from "../../../constant/ServicePanel";
 import { useDispatch, useSelector } from "react-redux";
-import { getPopularServiceList, } from "../../../store/FindJobs/findJobSlice";
+import { getPopularServiceList, searchService, setService, } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
+import { LoadingOutlined } from '@ant-design/icons';
 import { generateSlug } from "../../../utils";
+import { Spin } from "antd";
 
 const FindLocalJobs = () => {
     const [Input,setInput] = useState("")
+    const [selectedService, setSelectedService] = useState(null);
     const dispatch = useDispatch()
-    const {popularList,searchService} = useSelector((state) => state.findJobs)
+    const {popularList,service,popularLoader,searchServiceLoader} = useSelector((state) => state.findJobs)
     const navigate = useNavigate();
   const handleServiceClick = (service) => {
     const slug = generateSlug(service.banner_title);
@@ -28,6 +31,16 @@ dispatch(getPopularServiceList())
 
         return () => clearTimeout(delayDebounce);
     }, [Input, dispatch]);
+    const handleSelectService = (item) => {
+        setInput(item.banner_title); 
+        setSelectedService(item);
+    };
+    const handleGetStarted = () => {
+        if (selectedService) {
+            const slug = generateSlug(selectedService.banner_title);
+            navigate(`/sellers/create-account/${slug}`);
+        }
+    };
   return (
     <div className={styles.container}>
       {/* Left Section */}
@@ -44,20 +57,41 @@ dispatch(getPopularServiceList())
           <input
             className={styles.searchInput}
             placeholder="What service do you provide?"
-            onChange={(e)=>setInput(e.target.value)}
+            onChange={(e) => {
+                setInput(e.target.value);
+                if (!e.target.value) {
+                    dispatch(setService([]))
+                }
+                setSelectedService(null); 
+            }}
             value={Input}
           />
-          {
+ 
+        {service?.length > 0 && (
+                        <div className={styles.searchResults}>
+                            {searchServiceLoader ? <Spin indicator={<LoadingOutlined spin  />}/> : <> {service.map((item) => (
+                                <p 
+                                    key={item.id} 
+                                    className={styles.searchItem} 
+                                    onClick={() => handleSelectService(item)}
+                                >
+                                    {item.banner_title}
+                                </p>
+                            ))}</>}
+                           
+                        </div>
+                    )}
+                    
+                
 
-          }
-
-          <button>Get started</button>
+          <button  onClick={handleGetStarted}>Get started</button>
         </div>
       </div>
 
       {/* Right Section */}
       <div className={styles.rightSection}>
         <h3>Popular services</h3>
+        {popularLoader ? <Spin indicator={<LoadingOutlined spin  style={{color:"primary"}}/>} className={styles?.loaderDesign}/> : 
         <div className={styles.servicesList}>
           {popularList.map((service, index) => (
             <div key={service.id} className={styles.serviceItem}  onClick={() => handleServiceClick(service)}>
@@ -66,6 +100,7 @@ dispatch(getPopularServiceList())
             </div>
           ))}
         </div>
+}
       </div>
     </div>
   );

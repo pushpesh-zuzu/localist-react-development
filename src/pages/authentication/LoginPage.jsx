@@ -1,25 +1,39 @@
-import { Form, Button, Checkbox, Typography } from "antd";
+import { Form, Button, Checkbox, Typography, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { LoadingOutlined } from '@ant-design/icons';
 import "./index.css";
 import TextInput from "../../component/customInputs/TextInput";
 import PasswordInput from "../../component/customInputs/PasswordInput";
 import { useDispatch, useSelector } from "react-redux";
-import {  userLogin } from "../../store/Auth/authSlice";
+import { userLogin } from "../../store/Auth/authSlice";
+import { showToast } from "../../utils";
 const { Text } = Typography;
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {loginLoader} = useSelector((state) => state.auth)
+  const { loginLoader } = useSelector((state) => state.auth);
 
   const onFinish = (values) => {
-
-    dispatch(userLogin(values))
-    if (values) {
-      navigate("/");
-    }
+    const { email, password } = values;
+    const payload = { email, password };
+  
+    dispatch(userLogin(payload))
+      .then((result) => {
+        if (result?.success) {
+          showToast("info", result?.message || "Login successful!");
+          navigate("/");
+        } else {
+          showToast("error", result?.message || "Login failed. Please try again.");
+        }
+      })
+      .catch((error) => {
+        console.log(error,"resu")
+        showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
+      });
   };
+  
 
   return (
     <div className="login-container">
@@ -48,7 +62,7 @@ const LoginPage = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className="loginBtn">
-              {loginLoader ? "Loading..." : "Login"}
+              {loginLoader ? <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} /> : "Login"}
             </Button>
           </Form.Item>
 

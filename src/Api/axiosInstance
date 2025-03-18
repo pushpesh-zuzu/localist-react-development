@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const baseURL = 'https://localists.zuzucodes.com/admin/api/users/'
 
 const axiosInstance = axios.create({
@@ -9,9 +8,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const remember_tokens = JSON.parse(localStorage.getItem("barkToken")) || null;
-    if (remember_tokens) {
-      config.headers["Authorization"] = `Bearer ${remember_tokens}`;
+    const token = JSON.parse(localStorage.getItem("barkToken")) || null;
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
