@@ -1,0 +1,168 @@
+.findAnAccountant_container {
+  width: -webkit-fill-available;
+  text-align: center;
+  padding: 54px 88px;
+  background-color: #f9fdff;
+}
+
+.findAnAccountant_container_wrap {
+  width: -webkit-fill-available;
+  height: auto;
+  padding-bottom: 49px;
+  display: flex;
+  gap: 69px;
+  text-align: left;
+}
+
+.findAnAccountant_content {
+  width: 100%;
+}
+.findAnAccountant_heading {
+  font-size: 35px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 29px;
+}
+.findAnAccountant_heading b {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.findAnAccountant_title {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 100%;
+  margin-bottom: 14px;
+}
+
+.findAnAccountant_paragrap {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
+
+.findAnAccountant_listItem {
+  margin-top: 42px;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 29px;
+}
+
+.findAnAccountant_listItem li {
+  margin-bottom: 14px;
+}
+
+.findAnAccountant_bark_paragrap {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.findAnAccountant_image {
+  width: 600px;
+}
+
+.findAnAccountant_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.findAnAccountant_button {
+  padding: 11px 31px;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Media screen */
+
+@media (max-width: 1280px) {
+  .findAnAccountant_container {
+    padding: 54px 41px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .findAnAccountant_container_wrap {
+    gap: 26px;
+  }
+}
+
+@media (max-width: 786px) {
+  .findAnAccountant_container {
+    padding: 30px 20px;
+  }
+  .findAnAccountant_heading {
+    font-size: 32px;
+    margin-bottom: 26px;
+  }
+  .findAnAccountant_title {
+    font-size: 22px;
+  }
+  .findAnAccountant_paragrap {
+    font-size: 16px;
+  }
+  .findAnAccountant_listItem {
+    margin-top: 40px;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+  .findAnAccountant_bark_paragrap {
+    font-size: 16px;
+    line-height: 30px;
+  }
+}
+
+@media (max-width: 700px) {
+  .findAnAccountant_container_wrap {
+    flex-direction: column-reverse;
+    padding-bottom: 32px;
+  }
+  .findAnAccountant_image {
+    width: 100%;
+    height: 280px;
+  }
+
+  .findAnAccountant_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 520px) {
+  .findAnAccountant_container {
+    padding: 26px 20px;
+  }
+  .findAnAccountant_heading {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .findAnAccountant_title {
+    font-size: 20px;
+  }
+
+  .findAnAccountant_paragrap,
+  .findAnAccountant_listItem,
+  .findAnAccountant_bark_paragrap {
+    font-size: 14px;
+  }
+
+  .findAnAccountant_image {
+    width: 100%;
+    height: 240px;
+  }
+}
+
+@media (max-width: 440px) {
+  .findAnAccountant_button {
+    font-size: 14px;
+    padding: 11px 16px;
+  }
+}

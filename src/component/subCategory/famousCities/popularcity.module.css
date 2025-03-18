@@ -1,0 +1,125 @@
+.popularcityContainer {
+  padding: 29px 91px;
+}
+
+.popularcityContainer>div {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  align-items: center;
+  justify-content: center;
+}
+
+.popularcityContainer h1 {
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 52px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text-color);
+}
+
+.popularcityContainer span {
+  font-weight: 700;
+  font-size: 35px;
+  color: var(--primary-color);
+}
+
+.cityContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.cityBox {
+  background: #f9f9fa;
+}
+
+.cityNameBtn {
+  padding: 0px 10px 9px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
+
+.cityName {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 37px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--text-color);
+}
+
+.cityBox img {
+  width: calc(100% - 20px);
+  padding: 9px 10px;
+}
+
+.cityNameBtn button {
+  box-shadow: 0px 0px 3.85px 0px #0000004d;
+  background: var(--primary-color);
+  border: none;
+  padding: 11px;
+  border-radius: 4.5px;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 37px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  color: #ffffff;
+}
+
+@media (max-width: 1280px) {
+  .popularcityContainer {
+    padding: 29px 41px;
+  }
+
+  .cityNameBtn {
+    gap: 26px;
+  }
+
+  .cityNameBtn button {
+    padding: 9px;
+  }
+}
+
+@media (max-width: 920px) {
+  .cityContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 786px) {
+  .popularcityContainer {
+    padding: 29px 20px;
+  }
+
+  .popularcityContainer>div {
+    gap: 22px;
+  }
+
+  .cityName {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .cityNameBtn {
+    gap: 16px;
+  }
+
+  .cityNameBtn button {
+    font-size: 15px;
+    line-height: 30px;
+  }
+}
+
+@media (max-width: 520px) {
+  .cityContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

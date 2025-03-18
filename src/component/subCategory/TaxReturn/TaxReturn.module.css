@@ -1,0 +1,196 @@
+.taxReturn_container {
+  width: -webkit-fill-available;
+  padding: 30px 88px;
+}
+
+.taxReturn_content_wrap {
+  width: -webkit-fill-available;
+  height: auto;
+  display: flex;
+  gap: 41px;
+}
+
+/* .taxReturn_content {
+  width: 100%;
+  margin: 44.5px 0;
+} */
+
+.taxReturn_heading {
+  font-size: 35px;
+  font-weight: 400;
+  margin-bottom: 31px;
+}
+
+.taxReturn_heading b {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.taxReturn_paragrap {
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: 31px;
+}
+
+.taxReturn_content_block_wrap {
+  width: 381.11px;
+  display: flex;
+  align-items: center;
+}
+
+.taxReturn_content_logo {
+  width: 168px;
+  padding-right: 17px;
+  border-right: 1px solid #d9d9d9;
+}
+
+.taxReturn_content_block {
+  width: 178px;
+  padding-left: 17px;
+}
+
+.taxReturn_content_block > p {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.taxReturn_content_block > span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #bbbbbb;
+}
+
+.taxReturn_content_button {
+  padding: 11px 31px;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 112px;
+}
+
+.taxReturn_iamge {
+  width: 447px;
+}
+
+.taxReturn_image_wrap img {
+  /* width: 100%;
+  height: 100%; */
+  border-radius: 15px;
+  margin-bottom: 13px;
+}
+
+.taxReturn_image_text {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 13px;
+}
+
+.taxReturn_image_text > b {
+  font-weight: 700;
+}
+
+.taxReturn_block_text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Media screen */
+
+@media (max-width: 1280px) {
+  .taxReturn_container {
+    padding: 30px 41px;
+  }
+}
+
+@media (max-width: 1020px) {
+  .taxReturn_content_wrap {
+    gap: 26px;
+  }
+}
+
+@media (max-width: 786px) {
+  .taxReturn_container {
+    padding: 30px 20px;
+  }
+
+  .taxReturn_heading {
+    font-size: 32px;
+    margin-bottom: 26px;
+  }
+
+  .taxReturn_paragrap {
+    font-size: 16px;
+  }
+
+  .taxReturn_content {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .taxReturn_content_block_wrap {
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .taxReturn_content_button {
+    margin-top: 70px;
+  }
+
+  .taxReturn_iamge {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .taxReturn_content_wrap {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 520px) {
+  .taxReturn_container {
+    padding: 26px 20px;
+  }
+
+  .taxReturn_heading {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .taxReturn_paragrap {
+    font-size: 14px;
+  }
+
+  .taxReturn_iamge {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .taxReturn_content_block_wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .taxReturn_content_logo {
+    width: 100%;
+  }
+
+  .taxReturn_content_logo img {
+    width: 100%;
+  }
+
+  .taxReturn_content_block {
+    width: 100%;
+  }
+}

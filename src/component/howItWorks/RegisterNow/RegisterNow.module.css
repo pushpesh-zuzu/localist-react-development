@@ -1,0 +1,52 @@
+.registerContainer {
+  background-color: #f9fdff;
+  margin: 25px 88px;
+  text-align: center;
+  border-radius: 8px;
+  padding-top: 67.49px;
+  padding-bottom: 67.49px;
+  text-align: center;
+}
+
+.registerButton {
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 40px;
+  font-weight: 700;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 19px;
+  margin-top: 25px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.iconContainer {
+  width: 34px;
+  height: 34px;
+  background-color: #00afe3;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iconContainer img {
+  color: #00afe3;
+  width: 18px;
+  height: 18px;
+}

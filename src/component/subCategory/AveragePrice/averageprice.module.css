@@ -1,0 +1,136 @@
+.averagePriceContainer {
+  padding: 30px 264.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 29px;
+}
+
+.averagePriceContainer span,
+.averagePriceContainer h1 {
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 35px;
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.averagePriceContainer span {
+  color: var(--primary-color);
+}
+
+.tableContainer {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 5px;
+  overflow-x: scroll;
+  min-width: 650px;
+}
+
+.th,
+.td {
+  text-align: left;
+  color: var(--text-color);
+}
+
+.th {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 32px;
+  letter-spacing: 0;
+  padding: 5px 20px;
+  vertical-align: middle;
+}
+
+.td {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  letter-spacing: 0;
+  color: var(--text-color);
+  padding: 12px 20px;
+  vertical-align: middle;
+}
+
+.tr:nth-child(odd) {
+  background-color: #f9f9fa;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+  background: #f9f9fa;
+  border-radius: 10px;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+  background: #f9f9fa;
+  border-radius: 10px;
+}
+
+.tableContainer {
+  scrollbar-color: #a5a5a549;
+  scrollbar-width: thin;
+}
+
+@media (max-width: 1280px) {
+  .averagePriceContainer {
+    padding: 30px 180px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .averagePriceContainer {
+    padding: 30px 140px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .averagePriceContainer {
+    padding: 30px 50px;
+  }
+}
+
+@media (max-width: 890px) {
+  .averagePriceContainer {
+    padding: 30px 5%;
+    gap: 25px;
+  }
+
+  .th {
+    padding: 5px 15px;
+  }
+
+  .td {
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 786px) {
+  .averagePriceContainer {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 590px) {
+  .averagePriceContainer {
+    padding: 26px 20px;
+  }
+  .th {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .td {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,19 @@
+.inputFiled {
+    border: 1px solid #DEDEDE;
+    height: 45px;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 3px;
+    border-width: 1px;
+    box-shadow: 0px 0px 2px 1px #0000001A;
+    color: var(--text-color);
+}
+
+.lablename {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+
+}

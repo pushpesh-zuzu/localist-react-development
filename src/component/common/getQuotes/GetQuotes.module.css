@@ -1,0 +1,73 @@
+.container {
+  text-align: center;
+  padding: 23px 0;
+  background-color: #f9fdff;
+  margin-bottom: 65px;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 700;
+  font-size: 40px;
+  padding: 8px 23px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.text {
+  font-weight: 400;
+  font-size: 40px;
+  color: #000000;
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .button {
+    font-size: 26px;
+    padding: 10px 20px;
+  }
+
+  .text {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .button {
+    font-size: 28px;
+    padding: 8px 16px;
+  }
+
+  .text {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    font-size: 24px;
+    padding: 6px 14px;
+  }
+
+  .text {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 320px) {
+  .button {
+    font-size: 20px;
+    padding: 5px 12px;
+  }
+
+  .text {
+    font-size: 20px;
+  }
+}

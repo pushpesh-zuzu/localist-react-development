@@ -1,0 +1,32 @@
+import axios from "axios";
+
+
+const baseURL = 'https://localists.zuzucodes.com/admin/api/users/'
+
+const axiosInstance = axios.create({
+  baseURL: baseURL,
+});
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const remember_tokens = JSON.parse(localStorage.getItem("barkToken")) || null;
+    if (remember_tokens) {
+      config.headers["Authorization"] = `Bearer ${remember_tokens}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;
