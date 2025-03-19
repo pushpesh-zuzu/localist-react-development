@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.png";
 
-const ServiceLocationStep = ({ nextStep }) => {
+const ServiceLocationStep = ({ nextStep,handleInputChange,formData,setFormData}) => {
   const [isNational, setIsNational] = useState(false);
 
   return (
@@ -18,7 +18,9 @@ const ServiceLocationStep = ({ nextStep }) => {
         <div className={styles.card}>
           <p className={styles.formHeading}>I serve customers within</p>
           <div className={styles.inputGroup}>
-            <select className={styles.dropdown}>
+            <select className={styles.dropdown}   name="miles"
+              value={formData.miles}
+              onChange={handleInputChange}>
               <option>1 miles</option>
               <option>2 miles</option>
               <option>5 miles</option>
@@ -32,6 +34,9 @@ const ServiceLocationStep = ({ nextStep }) => {
               type="text"
               placeholder="Enter your postcode"
               className={styles.input}
+              name="postcode"
+              value={formData.postcode}
+              onChange={handleInputChange}
             />
           </div>
 

@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
+import { useDispatch } from "react-redux";
+import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 
-const ServiceBusinessAddressStep = ({ nextStep, prevStep }) => {
-  const [website, setWebsite] = useState(null);
-  const [jobCount, setJobCount] = useState(null);
-  const [companySize, setCompanySize] = useState(null);
-  const [salesTeam, setSalesTeam] = useState(null);
-  const [socialMedia, setSocialMedia] = useState(null);
+const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formData,setFormData}) => {
+  // const [website, setWebsite] = useState(null);
+  // const [jobCount, setJobCount] = useState(null);
+  // const [companySize, setCompanySize] = useState(null);
+  // const [salesTeam, setSalesTeam] = useState(null);
+  // const [socialMedia, setSocialMedia] = useState(null);
+  // const dispatch = useDispatch()
+
+  // const handleSubmit = () => {
+  //   dispatch(registerUserData(formData))
+  // }
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>
@@ -21,22 +28,30 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep }) => {
           <form className={styles.form}>
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Street address</label>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} name="apartment"
+                  value={formData.apartment}
+                  onChange={handleInputChange} />
             </div>
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Suite or apt. # (optional)</label>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} name="apartment"
+                  value={formData.apartment}
+                  onChange={handleInputChange}/>
             </div>
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>City</label>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} name="city"
+                  value={formData.city}
+                  onChange={handleInputChange}/>
             </div>
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>State</label>
-              <input type="text" className={styles.input} />
+              <input type="text" className={styles.input} name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}/>
             </div>
 
             <div className={styles.labelInputWrapper}>
@@ -45,33 +60,42 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep }) => {
                 <button
                   type="button"
                   className={
-                    website === "Yes"
+                    formData?.zipcode === 1
                       ? styles.activeButton
                       : styles.toggleButton
                   }
-                  onClick={() => setWebsite("Yes")}
+                  // onClick={() => setFormData("Yes")}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, zipcode: 1 }))
+                  }
                 >
                   Yes
                 </button>
                 <button
                   type="button"
                   className={
-                    website === "No" ? styles.activeButton : styles.toggleButton
+                    formData?.zipcode === 0 ? styles.activeButton : styles.toggleButton
                   }
-                  onClick={() => setWebsite("No")}
+                  // onClick={() => setFormData("No")}
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, zipcode: 0 }))
+                  }
                 >
                   No
                 </button>
               </div>
             </div>
 
-            {website === "Yes" && (
+            {formData?.zipcode === 1 && (
               <>
                 <div className={styles.labelInputWrapper}>
                   <input
                     type="text"
-                    placeholder=" Website address (optional)"
+                    placeholder="Zip Code"
                     className={styles.input}
+                    name="zipcode"
+                  value={formData.zipcode}
+                  onChange={handleInputChange}
                   />
                 </div>
               </>
