@@ -27,14 +27,17 @@ const ServiceCreateAccount = () => {
     zipcode: "",
     apartment: "",
     service_id: "",
-    auto_bid: "",
+    auto_bid: 0,
     miles2:""
   });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+ const handleInputChange = (e) => {
+    const { name, type, checked } = e.target;
+    setFormData((prevData) => ({
+        ...prevData,
+        [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
+    }));
+};
   const nextStep = () => setStep(step + 1);
   const prevStep = () => setStep(step - 1);
 
@@ -67,7 +70,9 @@ const ServiceCreateAccount = () => {
             handleInputChange={handleInputChange}
           />
         )}
-        {step === 4 && <OtherServiceStep prevStep={prevStep} />}
+        {step === 4 && <OtherServiceStep prevStep={prevStep} setFormData={setFormData}
+            formData={formData}
+            handleInputChange={handleInputChange}/>}
       </div>
     </div>
   );

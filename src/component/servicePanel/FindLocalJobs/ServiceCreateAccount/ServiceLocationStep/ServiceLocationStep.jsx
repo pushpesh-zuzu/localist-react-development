@@ -18,8 +18,8 @@ const ServiceLocationStep = ({ nextStep,handleInputChange,formData,setFormData})
         <div className={styles.card}>
           <p className={styles.formHeading}>I serve customers within</p>
           <div className={styles.inputGroup}>
-            <select className={styles.dropdown}   name="miles"
-              value={formData.miles}
+            <select className={styles.dropdown}   name="miles1"
+              value={formData.miles1}
               onChange={handleInputChange}>
               <option>1 miles</option>
               <option>2 miles</option>

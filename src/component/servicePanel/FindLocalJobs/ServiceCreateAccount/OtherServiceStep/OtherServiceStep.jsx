@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { searchService, setService } from "../../../../../store/FindJobs/findJobSlice";
+import { registerUserData, searchService, setService } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 
-const OtherServiceStep = () => {
+const OtherServiceStep = ({handleInputChange,formData,setFormData }) => {
   const [Input, setInput] = useState("");
-  const [selectedServices, setSelectedServices] = useState([]); // ✅ Multiple selected services store karne ke liye
+  const [selectedServices, setSelectedServices] = useState([]);
+  const item = useParams()
+
   const dispatch = useDispatch();
   const { popularList, service, popularLoader, searchServiceLoader } = useSelector((state) => state.findJobs);
 
@@ -22,7 +25,7 @@ const OtherServiceStep = () => {
   }, [Input, dispatch]);
 
   const handleSelectService = (item) => {
-    // ✅ Agar pehle se service selected nahi hai to hi add karein
+  
     if (!selectedServices.some((service) => service.id === item.id)) {
       setSelectedServices((prev) => [...prev, item]);
     }
@@ -33,7 +36,13 @@ const OtherServiceStep = () => {
   const handleRemoveService = (id) => {
     setSelectedServices((prev) => prev.filter((service) => service.id !== id));
   };
+ 
 
+  const handleSubmit = () => {
+    const serviceIds = selectedServices.map(service => service.banner_title).join(", ");
+    const payload = { ...formData,service_id: serviceIds }
+    dispatch(registerUserData(payload))
+  }
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -43,22 +52,20 @@ const OtherServiceStep = () => {
         <div className={styles.card}>
           <p className={styles.label}>
             You've asked for leads for:{" "}
-            <span className={styles.serviceTag}>House Cleaning</span>
+            <span className={styles.serviceTag}>{item?.serviceTitle}</span>
           </p>
 
           <p className={styles.secondaryLabel}>We will also show you leads from</p>
-
-          {/* ✅ Selected Services ko yaha show karein */}
           <div className={styles.selectedServices}>
             {selectedServices.map((service) => (
               <span key={service.id} className={styles.selectedTag}>
-                {service.banner_title}{" "}
+                {service.banner_title}
                 <button className={styles.removeBtn} onClick={() => handleRemoveService(service.id)}>✕</button>
               </span>
             ))}
           </div>
 
-          <div className={styles.searchInputContainer}>
+          {/* <div className={styles.searchInputContainer}>
             <input
               className={styles.searchInput}
               placeholder="What service do you provide?"
@@ -90,17 +97,65 @@ const OtherServiceStep = () => {
                 )}
               </div>
             )}
-          </div>
+          </div> */}
+          <div className={styles.searchInputContainer}>
+  <input
+    className={styles.searchInput}
+    placeholder="What service do you provide?"
+    onChange={(e) => {
+      setInput(e.target.value);
+      if (!e.target.value) {
+        dispatch(setService([]));
+      }
+    }}
+    value={Input}
+  />
+
+  {service?.length > 0 && (
+    <div className={styles.searchResults}>
+      {searchServiceLoader ? (
+        <Spin />
+      ) : (
+        <>
+          {service.map((item) => (
+            <p
+              key={item.id}
+              className={styles.searchItem}
+              onClick={() => handleSelectService(item)}
+            >
+              {item.banner_title}
+            </p>
+          ))}
+        </>
+      )}
+    </div>
+  )}
+</div>
+
 
           <label className={styles.checkboxContainer}>
-            <input type="checkbox" className={styles.checkbox} />
+          <input 
+    type="checkbox" 
+    className={styles.checkbox} 
+    name="auto_bid"
+    checked={formData?.auto_bid === 1}  
+    onChange={(e) => handleInputChange(e)}  
+/>
             Auto Bid
           </label>
 
           <div className={styles.dropdownWrapper}>
-            <select className={styles.dropdown}>
-              <option>5 Miles</option>
-            </select>
+             <select className={styles.dropdown}   name="miles2"
+                          value={formData?.miles2}
+                          onChange={handleInputChange}>
+                          <option>1 miles</option>
+                          <option>2 miles</option>
+                          <option>5 miles</option>
+                          <option>10 miles</option>
+                          <option>30 miles</option>
+                          <option>50 miles</option>
+                          <option>100 miles</option>
+                        </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>
 
@@ -109,7 +164,7 @@ const OtherServiceStep = () => {
             <span className={styles.leadText}>current available leads</span>
           </div>
 
-          <button className={styles.nextBtn}>Next</button>
+          <button className={styles.nextBtn} onClick={handleSubmit}>Next</button>
         </div>
       </div>
     </div>
