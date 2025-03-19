@@ -5,11 +5,12 @@ const initialState = {
     popularList:[],
     popularLoader:false,
     searchServiceLoader:false,
-    service:[]
+    service:[],
+    registerLoader:false
     
 };
 export const getPopularServiceList = () => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       dispatch(setPopularServiceListLoader(true));
       try {
         const response = await axiosInstance.get(`popular-services`);
@@ -24,7 +25,7 @@ export const getPopularServiceList = () => {
     };
   };
   export const searchService = (ServiceData) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
       dispatch(setsearchServiceLoader(true));
       try {
         const response = await axiosInstance.post(`search-services`, ServiceData);
@@ -40,6 +41,26 @@ export const getPopularServiceList = () => {
       }
     };
   };
+  
+  export const registerUserData = (registerData) => {
+    return async (dispatch) => {
+      dispatch(setRegisterLoader(true));
+      try {
+        const response = await axiosInstance.post(`registration`, registerData);
+  
+        if (response) {
+            // dispatch(setService(response?.data?.data))
+          
+        }
+      } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setRegisterLoader(false));
+      }
+    };
+  };
+  
+  
 
 const findJobSlice = createSlice({
   name: "findJobs",
@@ -58,13 +79,16 @@ state.popularList = action.payload
     setsearchServiceLoader(state,action) {
         state.searchServiceLoader= action.payload
     }
+    ,setRegisterLoader(state,action){
+        state.registerLoader = action.payload
+    }
   }
 });
 
 
 export const {
     setPopularServiceListLoader,setPopularList,
-    setsearchServiceLoader,setService
+    setsearchServiceLoader,setService,setRegisterLoader
   
 } = findJobSlice.actions;
 export default findJobSlice.reducer;
