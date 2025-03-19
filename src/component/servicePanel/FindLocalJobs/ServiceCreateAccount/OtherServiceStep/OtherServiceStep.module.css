@@ -141,3 +141,9 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.searchInputContainer {
+  width: min-content;
+  position: relative;
+  display: flex;
+  align-items: center;
+}

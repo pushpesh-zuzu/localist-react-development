@@ -28,8 +28,8 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formD
           <form className={styles.form}>
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Street address</label>
-              <input type="text" className={styles.input} name="apartment"
-                  value={formData.apartment}
+              <input type="text" className={styles.input} name="address"
+                  value={formData.address}
                   onChange={handleInputChange} />
             </div>
 

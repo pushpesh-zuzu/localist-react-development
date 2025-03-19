@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { searchService, setService } from "../../../../../store/FindJobs/findJobSlice";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const OtherServiceStep = () => {
+  const [Input, setInput] = useState("");
+  const [selectedServices, setSelectedServices] = useState([]); // ✅ Multiple selected services store karne ke liye
+  const dispatch = useDispatch();
+  const { popularList, service, popularLoader, searchServiceLoader } = useSelector((state) => state.findJobs);
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (Input.trim() !== "") {
+        dispatch(searchService({ search: Input }));
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [Input, dispatch]);
+
+  const handleSelectService = (item) => {
+    // ✅ Agar pehle se service selected nahi hai to hi add karein
+    if (!selectedServices.some((service) => service.id === item.id)) {
+      setSelectedServices((prev) => [...prev, item]);
+    }
+    setInput(""); // ✅ Input clear kar de
+    dispatch(setService([])); // ✅ Search result ko clear karein
+  };
+
+  const handleRemoveService = (id) => {
+    setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+  };
+
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -14,26 +46,51 @@ const OtherServiceStep = () => {
             <span className={styles.serviceTag}>House Cleaning</span>
           </p>
 
-          <p className={styles.secondaryLabel}>
-            We will also show you leads from
-          </p>
+          <p className={styles.secondaryLabel}>We will also show you leads from</p>
 
+          {/* ✅ Selected Services ko yaha show karein */}
           <div className={styles.selectedServices}>
-            <span className={styles.selectedTag}>
-              We will also show you leads from{" "}
-              <button className={styles.removeBtn}>✕</button>
-            </span>
-            <span className={styles.selectedTag}>
-              We will also show you leads from{" "}
-              <button className={styles.removeBtn}>✕</button>
-            </span>
+            {selectedServices.map((service) => (
+              <span key={service.id} className={styles.selectedTag}>
+                {service.banner_title}{" "}
+                <button className={styles.removeBtn} onClick={() => handleRemoveService(service.id)}>✕</button>
+              </span>
+            ))}
           </div>
 
-          <input
-            type="text"
-            placeholder="Search for more services..."
-            className={styles.searchBox}
-          />
+          <div className={styles.searchInputContainer}>
+            <input
+              className={styles.searchInput}
+              placeholder="What service do you provide?"
+              onChange={(e) => {
+                setInput(e.target.value);
+                if (!e.target.value) {
+                  dispatch(setService([]));
+                }
+              }}
+              value={Input}
+            />
+
+            {service?.length > 0 && (
+              <div className={styles.searchResults}>
+                {searchServiceLoader ? (
+                  <Spin indicator={<LoadingOutlined spin />} />
+                ) : (
+                  <>
+                    {service.map((item) => (
+                      <p
+                        key={item.id}
+                        className={styles.searchItem}
+                        onClick={() => handleSelectService(item)}
+                      >
+                        {item.banner_title}
+                      </p>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
 
           <label className={styles.checkboxContainer}>
             <input type="checkbox" className={styles.checkbox} />

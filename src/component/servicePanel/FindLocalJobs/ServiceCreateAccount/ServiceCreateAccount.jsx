@@ -8,7 +8,7 @@ import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 const ServiceCreateAccount = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    miles: "",
+    miles1: "",
     postcode: "",
     name: "",
     email: "",
@@ -21,12 +21,14 @@ const ServiceCreateAccount = () => {
     websiteAddress: "",
     new_jobs: null,
     social_media: null,
+    address:"",
     state: "",
     city: "",
     zipcode: "",
     apartment: "",
     service_id: "",
     auto_bid: "",
+    miles2:""
   });
 
   const handleInputChange = (e) => {
