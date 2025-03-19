@@ -83,7 +83,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
               <label className={styles.label}>
                 Does your company have a website?
               </label>
-              <div className={styles.toggleGroup}>
+              {/* <div className={styles.toggleGroup}>
                 <button
                   type="button"
                   className={
@@ -123,9 +123,44 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                     onChange={handleInputChange}
                   />
                 </>
-              )}
+              )} */}
 
-              
+<div className={styles.toggleGroup}>
+  <button
+    type="button"
+    className={
+      formData.company_website !== "No" ? styles.activeButton : styles.toggleButton
+    }
+    onClick={() =>
+      setFormData((prev) => ({ ...prev, company_website: prev.company_website || "" }))
+    }
+  >
+    Yes
+  </button>
+  <button
+    type="button"
+    className={
+      formData.company_website === "No" ? styles.activeButton : styles.toggleButton
+    }
+    onClick={() => setFormData({ ...formData, company_website: "No" })}
+  >
+    No
+  </button>
+</div>
+</div>
+{formData.company_website !== "No" && (
+  <input
+    type="text"
+    className={styles.input}
+    name="company_website"
+    placeholder="Website address (optional)"
+    value={formData.company_website || ""}
+    onChange={(e) =>
+      setFormData((prev) => ({ ...prev, company_website: e.target.value }))
+    }
+  />
+)}
+
 
              
 

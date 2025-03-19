@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
+import { showToast } from "../../utils";
 
 const initialState = {
     popularList:[],
@@ -50,10 +51,14 @@ export const getPopularServiceList = () => {
   
         if (response) {
             // dispatch(setService(response?.data?.data))
-          
+            return response.data;
+        }
+        else{
+            showToast("error", response?.message || "Register failed. Please try again.");
         }
       } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
+        console.log(error,"kk")
+        showToast("error", error?.message || "Register failed. Please try again.");
       } finally {
         dispatch(setRegisterLoader(false));
       }

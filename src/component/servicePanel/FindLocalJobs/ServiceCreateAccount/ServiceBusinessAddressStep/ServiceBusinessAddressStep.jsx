@@ -57,49 +57,36 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formD
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>ZIP code</label>
               <div className={styles.toggleGroup}>
-                <button
-                  type="button"
-                  className={
-                    formData?.zipcode === 1
-                      ? styles.activeButton
-                      : styles.toggleButton
-                  }
-                  // onClick={() => setFormData("Yes")}
-                  onClick={() =>
-                    setFormData((prev) => ({ ...prev, zipcode: 1 }))
-                  }
-                >
-                  Yes
-                </button>
-                <button
-                  type="button"
-                  className={
-                    formData?.zipcode === 0 ? styles.activeButton : styles.toggleButton
-                  }
-                  // onClick={() => setFormData("No")}
-                  onClick={() =>
-                    setFormData((prev) => ({ ...prev, zipcode: 0 }))
-                  }
-                >
-                  No
-                </button>
-              </div>
-            </div>
+  <button
+    type="button"
+    className={formData?.zipcode !== 0 ? styles.activeButton : styles.toggleButton}
+    onClick={() => setFormData((prev) => ({ ...prev, zipcode: "" }))}
+  >
+    Yes
+  </button>
+  <button
+    type="button"
+    className={formData?.zipcode === 0 ? styles.activeButton : styles.toggleButton}
+    onClick={() => setFormData((prev) => ({ ...prev, zipcode: 0 }))}
+  >
+    No
+  </button>
+</div>
+</div>
 
-            {formData?.zipcode === 1 && (
-              <>
-                <div className={styles.labelInputWrapper}>
-                  <input
-                    type="text"
-                    placeholder="Zip Code"
-                    className={styles.input}
-                    name="zipcode"
-                  value={formData.zipcode}
-                  onChange={handleInputChange}
-                  />
-                </div>
-              </>
-            )}
+{formData?.zipcode !== 0 && (
+  <div className={styles.labelInputWrapper}>
+    <input
+      type="text"
+      placeholder="Zip Code"
+      className={styles.input}
+      name="zipcode"
+      value={formData.zipcode || ""}
+      onChange={(e) => setFormData((prev) => ({ ...prev, zipcode: e.target.value }))}
+    />
+  </div>
+)}
+
 
             <div className={styles.buttonContainer}>
               <button

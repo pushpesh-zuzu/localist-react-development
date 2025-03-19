@@ -9,6 +9,7 @@ import {
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
+import { showToast } from "../../../../../utils";
 
 const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
@@ -46,7 +47,18 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
       .map((service) => service.banner_title)
       .join(", ");
     const payload = { ...formData, service_id: serviceIds };
-    dispatch(registerUserData(payload));
+    dispatch(registerUserData(payload)).then((result) => {
+            if (result?.success) {
+              showToast("info", result?.message || "Register successful!");
+              // navigate("/");
+            } else {
+             
+            }
+          })
+          .catch((error) => {
+            console.log(error,"resu")
+            showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
+          });
   };
   return (
     <div className={styles.parentContainer}>
