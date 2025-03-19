@@ -44,39 +44,50 @@ const ServiceDetailsStep = ({ nextStep, prevStep }) => {
               <input type="text" className={styles.input} />
             </div>
 
-            <label className={styles.label}>
-              Does your company have a website?
-            </label>
-            <div className={styles.toggleGroup}>
-              <button
-                type="button"
-                className={
-                  website === "Yes" ? styles.activeButton : styles.toggleButton
-                }
-                onClick={() => setWebsite("Yes")}
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className={
-                  website === "No" ? styles.activeButton : styles.toggleButton
-                }
-                onClick={() => setWebsite("No")}
-              >
-                No
-              </button>
+            <div className={styles.labelInputWrapper}>
+              <label className={styles.label}>
+                Does your company have a website?
+              </label>
+              <div className={styles.toggleGroup}>
+                <button
+                  type="button"
+                  className={
+                    website === "Yes"
+                      ? styles.activeButton
+                      : styles.toggleButton
+                  }
+                  onClick={() => setWebsite("Yes")}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className={
+                    website === "No" ? styles.activeButton : styles.toggleButton
+                  }
+                  onClick={() => setWebsite("No")}
+                >
+                  No
+                </button>
+              </div>
             </div>
 
             {website === "Yes" && (
               <>
-                <label className={styles.label}>
-                  Website address (optional)
-                </label>
-                <input type="text" className={styles.input} />
+                <div className={styles.labelInputWrapper}>
+                  {/* <label className={styles.label}>
+                    Website address (optional)
+                  </label> */}
+                  <input
+                    type="text"
+                    placeholder=" Website address (optional)"
+                    className={styles.input}
+                  />
+                </div>
               </>
             )}
 
+            {/* <div className={styles.labelInputWrapper}> */}
             <label className={styles.label}>
               Estimated number of new jobs per month
             </label>
@@ -96,7 +107,9 @@ const ServiceDetailsStep = ({ nextStep, prevStep }) => {
                 </button>
               ))}
             </div>
+            {/* </div> */}
 
+            {/* <div className={styles.labelInputWrapper}> */}
             <label className={styles.label}>Company size, employees</label>
             <div className={styles.optionGroup}>
               {[
@@ -120,59 +133,66 @@ const ServiceDetailsStep = ({ nextStep, prevStep }) => {
                 </button>
               ))}
             </div>
+            {/* </div> */}
 
-            <label className={styles.label}>
-              Does your company have a sales team?
-            </label>
-            <div className={styles.toggleGroup}>
-              <button
-                type="button"
-                className={
-                  salesTeam === "Yes"
-                    ? styles.activeButton
-                    : styles.toggleButton
-                }
-                onClick={() => setSalesTeam("Yes")}
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className={
-                  salesTeam === "No" ? styles.activeButton : styles.toggleButton
-                }
-                onClick={() => setSalesTeam("No")}
-              >
-                No
-              </button>
+            <div className={styles.labelInputWrapper}>
+              <label className={styles.label}>
+                Does your company have a sales team?
+              </label>
+              <div className={styles.toggleGroup}>
+                <button
+                  type="button"
+                  className={
+                    salesTeam === "Yes"
+                      ? styles.activeButton
+                      : styles.toggleButton
+                  }
+                  onClick={() => setSalesTeam("Yes")}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className={
+                    salesTeam === "No"
+                      ? styles.activeButton
+                      : styles.toggleButton
+                  }
+                  onClick={() => setSalesTeam("No")}
+                >
+                  No
+                </button>
+              </div>
             </div>
 
-            <label className={styles.label}>
-              Does your company use social media?
-            </label>
-            <div className={styles.toggleGroup}>
-              <button
-                type="button"
-                className={
-                  socialMedia === "Yes"
-                    ? styles.activeButton
-                    : styles.toggleButton
-                }
-                onClick={() => setSocialMedia("Yes")}
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className={
-                  socialMedia === "No"
-                    ? styles.activeButton
-                    : styles.toggleButton
-                }
-                onClick={() => setSocialMedia("No")}
-              >
-                No
-              </button>
+            <div className={styles.labelInputWrapper}>
+              <label className={styles.label}>
+                Does your company use social media?
+              </label>
+              <div className={styles.toggleGroup}>
+                <button
+                  type="button"
+                  className={
+                    socialMedia === "Yes"
+                      ? styles.activeButton
+                      : styles.toggleButton
+                  }
+                  onClick={() => setSocialMedia("Yes")}
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className={
+                    socialMedia === "No"
+                      ? styles.activeButton
+                      : styles.toggleButton
+                  }
+                  onClick={() => setSocialMedia("No")}
+                >
+                  No
+                </button>
+              </div>
             </div>
 
             <div className={styles.buttonContainer}>

@@ -39,7 +39,6 @@
 .formContainer {
   background: white;
   padding: 37px 50px;
-  width: 553px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -51,6 +50,7 @@
 
 .labelInputWrapper {
   display: flex;
+  gap: 10px;
   flex-direction: column;
 }
 
@@ -64,7 +64,7 @@
 .helperText {
   font-weight: 500;
   font-size: 14px;
-  line-height: 20px;
+  gap: 10px;
   color: #bababa;
 }
 
@@ -73,6 +73,7 @@
   padding: 10px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
+  height: 20px;
   font-size: 14px;
 }
 
@@ -80,46 +81,63 @@
 .optionGroup {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .toggleButton,
 .optionButton {
-  background: #e6e6e6;
-  border: none;
-  padding: 8px 15px;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  padding: 11px 23px;
   border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   transition: background 0.3s;
+  color: #828282;
 }
 
 .activeButton,
 .activeOption {
-  background: #00aaff;
+  background: var(--primary-color);
+  border: 1px solid #d9d9d9;
   color: white;
+  padding: 11px 23px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.3s;
 }
 
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 26px;
 }
 
 .backButton {
   background: black;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 20.5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 3px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
 }
 
 .nextButton {
-  background: #00aaff;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 23px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
 }
