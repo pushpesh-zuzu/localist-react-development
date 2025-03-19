@@ -1,0 +1,125 @@
+.pageContainer {
+  background-color: #f9f9fa;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 100px 0;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.subheading {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.formContainer {
+  background: white;
+  padding: 37px 50px;
+  width: 553px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.labelInputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  color: #828282;
+}
+
+.helperText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #bababa;
+}
+
+.input {
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.toggleGroup,
+.optionGroup {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.toggleButton,
+.optionButton {
+  background: #e6e6e6;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.activeButton,
+.activeOption {
+  background: #00aaff;
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.backButton {
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nextButton {
+  background: #00aaff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
