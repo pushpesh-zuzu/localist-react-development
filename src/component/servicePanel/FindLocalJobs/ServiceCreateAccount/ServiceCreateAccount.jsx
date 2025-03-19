@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./ServiceCreateAccount.module.css";
 import ServiceLocationStep from "./ServiceLocationStep/ServiceLocationStep";
 import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
+import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 
 const ServiceCreateAccount = () => {
   const [step, setStep] = useState(1);
@@ -16,7 +17,7 @@ const ServiceCreateAccount = () => {
         {step === 2 && (
           <ServiceDetailsStep nextStep={nextStep} prevStep={prevStep} />
         )}
-        {/* {step === 3 && <ReviewStep prevStep={prevStep} />} */}
+        {step === 3 && <ServiceBusinessAddressStep prevStep={prevStep} />}
       </div>
     </div>
   );
