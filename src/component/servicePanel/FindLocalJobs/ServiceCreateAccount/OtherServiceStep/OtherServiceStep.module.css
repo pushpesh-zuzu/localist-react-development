@@ -10,42 +10,61 @@
   text-align: center;
 }
 
-.title {
-  font-size: 20px;
-  font-weight: bold;
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 26px;
 }
 
-.subtitle {
-  font-size: 14px;
-  color: gray;
-  margin-bottom: 20px;
+.heading {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.subheading {
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .card {
   background: white;
-  padding: 20px;
+  padding: 37px 50px;
   border-radius: 8px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
 }
 
 .label {
-  font-size: 14px;
-  margin-bottom: 10px;
+  /* font-family: Inter; */
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 39px;
 }
 
 .serviceTag {
-  background: #dff2fd;
-  color: #25aef2;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: bold;
+  background: #e3f6fc;
+  color: var(--primary-color);
+  padding: 4px 20px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 18px;
+  margin-left: 30px;
 }
 
 .secondaryLabel {
-  font-size: 14px;
-  color: gray;
+  /* font-family: Inter; */
+  font-weight: 500;
+  font-size: 18px;
+  color: #828282;
   margin-bottom: 10px;
+  text-align: start;
 }
 
 .selectedServices {
