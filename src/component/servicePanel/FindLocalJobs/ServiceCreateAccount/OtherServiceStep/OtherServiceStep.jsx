@@ -12,10 +12,17 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
-const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) => {
+const OtherServiceStep = ({
+  nextStep,
+  prevStep,
+  handleInputChange,
+  formData,
+  setFormData,
+  errors,
+}) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,7 +58,12 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
-    const payload = { ...formData, service_id: serviceIds, form_status: 1, nation_wide: formData.nation_wide ? 1 : 0  };
+    const payload = {
+      ...formData,
+      service_id: serviceIds,
+      form_status: 1,
+      nation_wide: formData.nation_wide ? 1 : 0,
+    };
     dispatch(registerUserData(payload))
       .then((result) => {
         if (result?.success) {
@@ -61,7 +73,6 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
         }
       })
       .catch((error) => {
-        
         // showToast(
         //   "error",
         //   error?.response?.data?.message ||
@@ -70,13 +81,13 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
       });
   };
   const handleOpenModal = () => {
-    setShow(true)
-  }
+    setShow(true);
+  };
   const handleCloseModal = () => {
-    setShow(false)
+    setShow(false);
 
-    dispatch(setRegisterStep(3))
-  }
+    dispatch(setRegisterStep(3));
+  };
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -176,7 +187,9 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
               </div>
             )}
           </div>
-{errors.service_id && <p className={styles.errorText}>{errors.service_id}</p>}
+          {errors.service_id && (
+            <p className={styles.errorText}>{errors.service_id}</p>
+          )}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -211,14 +224,27 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
               <h1 className={styles.leadCount}>1060</h1>
               <p className={styles.leadText}>current available leads</p>
             </div>
-
-            <button className={styles.nextBtn} onClick={handleOpenModal} >
+          </div>
+          <div className={styles.buttonContainer}>
+            <button
+              type="button"
+              className={styles.backButton}
+              onClick={prevStep}
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              className={styles.nextButton}
+              onClick={handleOpenModal}
+            >
               Next
             </button>
           </div>
         </div>
       </div>
-      {show &&  <div className={styles.modalOverlay}>
+      {show && (
+        <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h2 className={styles.heading}>
               Are you sure that you want to leave?
@@ -236,7 +262,8 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
               </button>
             </div>
           </div>
-        </div>}
+        </div>
+      )}
     </div>
   );
 };
