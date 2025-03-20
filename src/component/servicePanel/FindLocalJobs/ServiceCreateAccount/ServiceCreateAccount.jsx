@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ServiceCreateAccount.module.css";
 import ServiceLocationStep from "./ServiceLocationStep/ServiceLocationStep";
 import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
@@ -7,6 +7,7 @@ import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 
 const ServiceCreateAccount = () => {
   const [step, setStep] = useState(1);
+  const [showExitModal, setShowExitModal] = useState(false);
   const [formData, setFormData] = useState({
     miles1: "",
     postcode: "",
@@ -21,14 +22,14 @@ const ServiceCreateAccount = () => {
     websiteAddress: "",
     new_jobs: null,
     social_media: null,
-    address:"",
+    address: "",
     state: "",
     city: "",
     zipcode: "",
     apartment: "",
     service_id: "",
     auto_bid: 0,
-    miles2:""
+    miles2: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -80,6 +81,26 @@ const ServiceCreateAccount = () => {
   };
   const prevStep = () => setStep(step - 1);
 
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      setShowExitModal(true);
+      return (e.returnValue = "Are you sure you want to leave?");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  const handleCloseModal = () => setShowExitModal(false);
+  const handleExit = () => {
+    setShowExitModal(false);
+    window.removeEventListener("beforeunload", () => {});
+    window.close();
+  };
+
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -112,12 +133,37 @@ const ServiceCreateAccount = () => {
             errors={errors}
           />
         )}
-        {step === 4 && <OtherServiceStep prevStep={prevStep} setFormData={setFormData}
+        {step === 4 && (
+          <OtherServiceStep
+            prevStep={prevStep}
+            setFormData={setFormData}
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
-            />}
+            />)}
       </div>
+
+      {false && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <h2 className={styles.heading}>
+              Are you sure that you want to leave?
+            </h2>
+            <p className={styles.description}>
+              We're asking a few questions so we can find you the right pros,
+              and send you quotes fast and free!
+            </p>
+            <div className={styles.buttonGroup}>
+              <button className={styles.backButton} onClick={handleCloseModal}>
+                Back
+              </button>
+              <button className={styles.continueButton} onClick={handleExit}>
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
