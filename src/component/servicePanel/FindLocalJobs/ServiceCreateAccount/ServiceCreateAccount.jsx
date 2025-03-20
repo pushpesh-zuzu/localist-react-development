@@ -9,7 +9,7 @@ const ServiceCreateAccount = () => {
   const [step, setStep] = useState(1);
   const [showExitModal, setShowExitModal] = useState(false);
   const [formData, setFormData] = useState({
-    miles1: "",
+    miles1: "miles1",
     postcode: "",
     name: "",
     email: "",
@@ -52,14 +52,14 @@ const ServiceCreateAccount = () => {
         newErrors.email = "Invalid email format";
       }
       if (!formData.password.trim()) newErrors.password = "Password is required";
-      if (!formData.phone.trim()) newErrors.phone = "Phone is required";
+      // if (!formData.phone.trim()) newErrors.phone = "Phone is required";
     }
 
     if (step === 3) {
       if (!formData.address.trim()) newErrors.address = "Address is required";
       if (!formData.state.trim()) newErrors.state = "State is required";
       if (!formData.city.trim()) newErrors.city = "City is required";
-      if (!formData.zipcode.trim()) newErrors.zipcode = "Zipcode is required";
+      // if (!formData.zipcode.trim()) newErrors.zipcode = "Zipcode is required";
     }
 
     setErrors(newErrors);
@@ -143,7 +143,7 @@ const ServiceCreateAccount = () => {
             />)}
       </div>
 
-      {false && (
+      {showExitModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h2 className={styles.heading}>

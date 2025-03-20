@@ -62,7 +62,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className={`${styles.input} ${errors.password ? styles.errorBorder : ""}`}
                   name="password"
                   value={formData.password}
@@ -74,7 +74,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number (Optional)</label>
                 <input
-                  type="text"
+                  type="number"
                   className={styles.input}
                   name="phone"
                   value={formData.phone}
@@ -128,43 +128,43 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 </>
               )} */}
 
-<div className={styles.toggleGroup}>
-  <button
-    type="button"
-    className={
-      formData.company_website !== "No" ? styles.activeButton : styles.toggleButton
-    }
-    onClick={() =>
-      setFormData((prev) => ({ ...prev, company_website: prev.company_website || "" }))
-    }
-  >
-    Yes
-  </button>
-  <button
-    type="button"
-    className={
-      formData.company_website === "No" ? styles.activeButton : styles.toggleButton
-    }
-    onClick={() => setFormData({ ...formData, company_website: "No" })}
-  >
-    No
-  </button>
-</div>
-</div>
-{formData.company_website !== "No" && (
-  <input
-    type="text"
-    className={styles.input}
-    name="company_website"
-    placeholder="Website address (optional)"
-    value={formData.company_website || ""}
-    onChange={(e) =>
-      setFormData((prev) => ({ ...prev, company_website: e.target.value }))
-    }
-  />
-)}
+  <div className={styles.toggleGroup}>
+    <button
+      type="button"
+      className={
+        formData.company_website === "Yes" ? styles.activeButton : styles.toggleButton
+      }
+      onClick={() =>
+         setFormData((prev) => ({ ...prev, company_website: "Yes" }))}
+      
+    >
+      Yes
+    </button>
+    <button
+      type="button"
+      className={
+        formData.company_website === "No" ? styles.activeButton : styles.toggleButton
+      }
+      onClick={() => setFormData({ ...formData, company_website: "No" })}
+    >
+      No
+    </button>
+  </div>
+  </div>
+  {formData.company_website !== "No" && (
+    <input
+      type="text"
+      className={styles.input}
+      name="company_website"
+      placeholder="Website address (optional)"
+      value={formData.company_website !== "Yes" ? formData.company_website : ""}
+      onChange={(e) =>
+        setFormData((prev) => ({ ...prev, company_website: e.target.value }))
+      }
+    />
+  )}
 
-{errors.company_website && <p className={styles.errorText}>{errors.company_website}</p>}
+{/* {errors.company_website && <p className={styles.errorText}>{errors.company_website}</p>} */}
              
 
               <div className={styles.labelInputWrapper}>
@@ -190,7 +190,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 ))}
               </div>
               </div>
-              {errors.new_jobs && <p className={styles.errorText}>{errors.new_jobs}</p>}
+              {/* {errors.new_jobs && <p className={styles.errorText}>{errors.new_jobs}</p>} */}
               <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Company size, employees</label>
               <div className={styles.optionGroup}>
@@ -218,7 +218,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 ))}
               </div>
               </div>
-              {errors.company_size && <p className={styles.errorText}>{errors.company_size}</p>}
+              {/* {errors.company_size && <p className={styles.errorText}>{errors.company_size}</p>} */}
 
               <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
@@ -259,7 +259,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 </button>
               </div>
 </div>
-{errors.company_sales_team && <p className={styles.errorText}>{errors.company_sales_team}</p>}
+{/* {errors.company_sales_team && <p className={styles.errorText}>{errors.company_sales_team}</p>} */}
 <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
                 Does your company use social media?
@@ -293,7 +293,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 </button>
               </div>
 </div>
-{errors.social_media && <p className={styles.errorText}>{errors.social_media}</p>}
+{/* {errors.social_media && <p className={styles.errorText}>{errors.social_media}</p>} */}
               <div className={styles.buttonContainer}>
                 <button
                   type="button"

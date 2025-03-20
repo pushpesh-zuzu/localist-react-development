@@ -20,6 +20,9 @@ const FindLocalJobs = () => {
   };
     useEffect(()=>{
 dispatch(getPopularServiceList())
+return(()=> 
+  dispatch(setService([]))
+)
     },[])
     useEffect(() => {
         const delayDebounce = setTimeout(() => {
