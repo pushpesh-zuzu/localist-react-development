@@ -7,7 +7,8 @@ const initialState = {
     popularLoader:false,
     searchServiceLoader:false,
     service:[],
-    registerLoader:false
+    registerLoader:false,
+    registerStep:1
     
 };
 export const getPopularServiceList = () => {
@@ -58,7 +59,7 @@ export const getPopularServiceList = () => {
         }
       } catch (error) {
         console.log(error,"kk")
-        showToast("error", error?.message || "Register failed. Please try again.");
+        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
       } finally {
         dispatch(setRegisterLoader(false));
       }
@@ -86,6 +87,9 @@ state.popularList = action.payload
     }
     ,setRegisterLoader(state,action){
         state.registerLoader = action.payload
+    },
+    setRegisterStep(state,action) {
+      state.registerStep = action.payload
     }
   }
 });
@@ -93,7 +97,8 @@ state.popularList = action.payload
 
 export const {
     setPopularServiceListLoader,setPopularList,
-    setsearchServiceLoader,setService,setRegisterLoader
+    setsearchServiceLoader,setService,setRegisterLoader,
+    setRegisterStep
   
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

@@ -51,8 +51,9 @@ const ServiceLocationStep = ({ nextStep,handleInputChange,formData,setFormData,e
           <label className={styles.checkboxLabel}>
             <input
               type="checkbox"
-              checked={isNational}
-              onChange={() => setIsNational(!isNational)}
+              name="nation_wide"
+              checked={formData?.nation_wide === 1}
+              onChange={(e) => handleInputChange(e)}
               className={styles.checkboxInput}
             />
             <span className={styles.checkboxCustom}></span>Nationwide

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   registerUserData,
   searchService,
+  setRegisterStep,
   setService,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
@@ -11,9 +12,10 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
-const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
+const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
+  const [show,setShow] = useState(false)
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -49,24 +51,32 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
-    const payload = { ...formData, service_id: serviceIds, form_status: 1 };
+    const payload = { ...formData, service_id: serviceIds, form_status: 1, nation_wide: formData.nation_wide ? 1 : 0  };
     dispatch(registerUserData(payload))
       .then((result) => {
         if (result?.success) {
           showToast("info", result?.message || "Register successful!");
-          navigate("/login");
+          navigate("/dashboard");
         } else {
         }
       })
       .catch((error) => {
-        console.log(error, "resu");
-        showToast(
-          "error",
-          error?.response?.data?.message ||
-            "An error occurred. Please try again."
-        );
+        
+        // showToast(
+        //   "error",
+        //   error?.response?.data?.message ||
+        //     "An error occurred. Please try again."
+        // );
       });
   };
+  const handleOpenModal = () => {
+    setShow(true)
+  }
+  const handleCloseModal = () => {
+    setShow(false)
+
+    dispatch(setRegisterStep(3))
+  }
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -164,7 +174,7 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
               </div>
             )}
           </div>
-
+{errors.service_id && <p className={styles.errorText}>{errors.service_id}</p>}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -193,18 +203,38 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
             </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>
+          {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>1060</h1>
               <p className={styles.leadText}>current available leads</p>
             </div>
 
-            <button className={styles.nextBtn} onClick={handleSubmit}>
+            <button className={styles.nextBtn} onClick={handleOpenModal} >
               Next
             </button>
           </div>
         </div>
       </div>
+      {show &&  <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <h2 className={styles.heading}>
+              Are you sure that you want to leave?
+            </h2>
+            <p className={styles.description}>
+              We're asking a few questions so we can find you the right pros,
+              and send you quotes fast and free!
+            </p>
+            <div className={styles.buttonGroup}>
+              <button className={styles.backButton} onClick={handleCloseModal}>
+                Back
+              </button>
+              <button className={styles.continueButton} onClick={handleSubmit}>
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>}
     </div>
   );
 };

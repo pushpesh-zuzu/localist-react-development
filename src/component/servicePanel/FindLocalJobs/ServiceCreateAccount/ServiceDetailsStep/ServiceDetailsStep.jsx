@@ -57,9 +57,9 @@ const ServiceDetailsStep = ({
                   can leave this blank
                 </label>
               </div>
-              {errors.company_name && (
+              {/* {errors.company_name && (
                 <p className={styles.errorText}>{errors.company_name}</p>
-              )}
+              )} */}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Email address</label>
                 <input
@@ -223,9 +223,9 @@ const ServiceDetailsStep = ({
                   ))}
                 </div>
               </div>
-              {errors.new_jobs && (
+              {/* {/* {errors.new_jobs && ( 
                 <p className={styles.errorText}>{errors.new_jobs}</p>
-              )}
+              )} */}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Company size, employees</label>
                 <div className={styles.optionGroup}>
@@ -253,9 +253,9 @@ const ServiceDetailsStep = ({
                   ))}
                 </div>
               </div>
-              {errors.company_size && (
+              {/* {errors.company_size && (
                 <p className={styles.errorText}>{errors.company_size}</p>
-              )}
+              )} */}
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
@@ -296,9 +296,9 @@ const ServiceDetailsStep = ({
                   </button>
                 </div>
               </div>
-              {errors.company_sales_team && (
+              {/* {errors.company_sales_team && (
                 <p className={styles.errorText}>{errors.company_sales_team}</p>
-              )}
+              )} */}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
                   Does your company use social media?
@@ -332,9 +332,9 @@ const ServiceDetailsStep = ({
                   </button>
                 </div>
               </div>
-              {errors.social_media && (
+              {/* {errors.social_media && (
                 <p className={styles.errorText}>{errors.social_media}</p>
-              )}
+              )} */}
               <div className={styles.buttonContainer}>
                 <button
                   type="button"
