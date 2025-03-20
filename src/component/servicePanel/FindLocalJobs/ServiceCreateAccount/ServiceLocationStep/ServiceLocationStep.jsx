@@ -21,7 +21,7 @@ const ServiceLocationStep = ({ nextStep,handleInputChange,formData,setFormData,e
           <div className={styles.inputGroup}>
           <div className={styles.inputWrapper}>
           <span className={styles.fromText}>Miles</span>
-            <select   className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""}`}name="miles1"
+            <select   className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""}`} name="miles1"
               value={formData.miles1}
               onChange={handleInputChange}>
               <option>1 miles</option>

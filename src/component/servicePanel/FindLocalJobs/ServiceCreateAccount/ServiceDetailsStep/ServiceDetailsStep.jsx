@@ -78,7 +78,7 @@ const ServiceDetailsStep = ({
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Password</label>
                 <input
-                  type="text"
+                  type="password"
                   className={`${styles.input} ${
                     errors.password ? styles.errorBorder : ""
                   }`}
@@ -94,7 +94,7 @@ const ServiceDetailsStep = ({
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number (Optional)</label>
                 <input
-                  type="text"
+                  type="number"
                   className={styles.input}
                   name="phone"
                   value={formData.phone}
@@ -152,14 +152,14 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website !== "No"
+                      formData.company_website === "Yes"
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
                       setFormData((prev) => ({
                         ...prev,
-                        company_website: prev.company_website || "",
+                        company_website: "Yes",
                       }))
                     }
                   >
@@ -186,7 +186,11 @@ const ServiceDetailsStep = ({
                   className={styles.input}
                   name="company_website"
                   placeholder="Website address (optional)"
-                  value={formData.company_website || ""}
+                  value={
+                    formData.company_website !== "Yes"
+                      ? formData.company_website
+                      : ""
+                  }
                   onChange={(e) =>
                     setFormData((prev) => ({
                       ...prev,
@@ -194,10 +198,6 @@ const ServiceDetailsStep = ({
                     }))
                   }
                 />
-              )}
-
-              {errors.company_website && (
-                <p className={styles.errorText}>{errors.company_website}</p>
               )}
 
               <div className={styles.labelInputWrapper}>
