@@ -3,6 +3,7 @@ import axiosInstance from "../../Api/axiosInstance";
 
 const initialState = {
   adminToken: JSON.parse(localStorage.getItem("barkToken")) || null,
+  userToken: JSON.parse(localStorage.getItem("barkUserToken")) || null,
   loginLoader: false,
 };
 
@@ -15,6 +16,7 @@ export const userLogin = (loginData) => {
 
       if (response?.data?.success) {
         dispatch(setToken(response?.data?.data?.remember_tokens));
+        dispatch(setUserToken(response?.data?.data));
         return response.data;
       } else {
           throw new Error(response?.data?.message || "Login failed");
@@ -29,6 +31,12 @@ export const userLogin = (loginData) => {
     }
   };
 };
+export const userLogout = () => {
+  return async (dispatch) => {
+    dispatch(setToken(null));
+    dispatch(setUserToken(null));
+  };
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -41,9 +49,13 @@ const authSlice = createSlice({
     setLoginLoader(state, action) {
       state.loginLoader = action.payload;
     },
+    setUserToken(state, action) {
+      state.userToken = action.payload;
+      localStorage.setItem("barkUserToken", JSON.stringify(action.payload));
+    },
   },
 });
 
-export const { setToken, setLoginLoader } = authSlice.actions;
+export const { setToken, setLoginLoader,setUserToken } = authSlice.actions;
 
 export default authSlice.reducer;
