@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -14,6 +15,7 @@ const ServiceDetailsStep = ({
   //   dispatch(registerUserData(formData));
   //   nextStep();
   // };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <>
@@ -75,18 +77,30 @@ const ServiceDetailsStep = ({
               {errors.email && (
                 <p className={styles.errorText}>{errors.email}</p>
               )}
-              <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>Password</label>
-                <input
-                  type="password"
-                  className={`${styles.input} ${
-                    errors.password ? styles.errorBorder : ""
-                  }`}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </div>
+              <div className={styles.labelInputWrapper} style={{ position: "relative" }}>
+      <label className={styles.label}>Password</label>
+      <input
+        type={showPassword ? "text" : "password"}
+        className={`${styles.input} ${errors.password ? styles.errorBorder : ""}`}
+        name="password"
+        value={formData.password}
+        onChange={handleInputChange}
+      />
+      {/* Eye icon for toggling password */}
+      <span
+        onClick={() => setShowPassword(!showPassword)}
+        style={{
+          position: "absolute",
+          right: "10px",
+          top: "57%",
+          transform: "translateY(0%)",
+          cursor: "pointer",
+          color: "#888",
+        }}
+      >
+        {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+      </span>
+    </div>
               {errors.password && (
                 <p className={styles.errorText}>{errors.password}</p>
               )}

@@ -88,7 +88,9 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData,errors }) =
         <div className={styles.card}>
           <p className={styles.label}>
             You've asked for leads for:{" "}
-            <div className={styles.serviceTag}>{item?.serviceTitle}</div>
+            <div className={styles.serviceTag}>{item?.serviceTitle
+                ?.replace(/-/g, " ")
+                .replace(/\b\w/g, (char) => char.toUpperCase())}</div>
           </p>
 
           <p className={styles.secondaryLabel}>

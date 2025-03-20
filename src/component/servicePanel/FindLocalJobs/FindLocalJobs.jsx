@@ -104,7 +104,7 @@ const FindLocalJobs = () => {
         <div className={styles.servicesList}>
           {popularList.map((service, index) => (
             <div key={service.id} className={styles.serviceItem}  onClick={() => handleServiceClick(service)}>
-              <img src={service?.category_icon} alt={service.title} />
+              <img src={`${service?.baseurl}/${service?.category_icon}`} alt={service.title} />
               <span>{service.banner_title}</span>
             </div>
           ))}

@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
+import { useDispatch } from "react-redux";
+import { setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
+  const dispatch =useDispatch()
 
   const handleLoginPage = () => {
     navigate("/login");
@@ -11,6 +14,7 @@ const LogSwitch = () => {
 
   const handleOpen = () => {
     navigate("/sellers/create/");
+    dispatch(setRegisterStep(1))
   };
 
   return (
