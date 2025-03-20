@@ -38,6 +38,8 @@
   background: white;
   padding: 37px 50px;
   border-radius: 8px;
+  width: 100%;
+  max-width: 459px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -63,7 +65,7 @@
   font-weight: 500;
   font-size: 18px;
   color: #828282;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   text-align: start;
 }
 
@@ -77,8 +79,11 @@
   background: black;
   color: white;
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: 3px;
   font-size: 12px;
+  font-family: Poppins;
+  font-weight: 500;
+  vertical-align: middle;
 }
 
 .removeBtn {
@@ -101,64 +106,103 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 39px;
 }
 
 .checkbox {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+}
+
+.labelText {
+  font-weight: 500;
+  font-size: 14px;
+  color: #828282;
 }
 
 .dropdownWrapper {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  gap: 12px;
+  width: 100%;
 }
 
 .dropdown {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  width: 100%;
+  max-width: 278px;
+  height: 40px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #828282;
+
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='16' height='16' fill='%23000000'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 30px;
 }
 
 .expandBtn {
-  background: #009fe3;
-  color: white;
+  font-family: poppins;
+  background: var(--primary-color);
+  color: #ffffff;
   border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 5px 11px;
+  border-radius: 3px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.leadInfo_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e3f6fc;
+  padding: 10px;
 }
 
 .leadInfo {
-  background: #dff2fd;
-  padding: 10px;
   border-radius: 4px;
   text-align: left;
   margin-bottom: 10px;
 }
 
 .leadCount {
-  color: #009fe3;
-  font-size: 18px;
-  font-weight: bold;
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 32px;
+  vertical-align: middle;
 }
 
 .leadText {
-  font-size: 12px;
-  color: gray;
+  font-weight: 300;
+  font-size: 14px;
+  color: #828282;
 }
 
 .nextBtn {
-  background: #009fe3;
+  background: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px;
-  width: 100%;
+  width: fit-content;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+  padding: 8px 23px;
 }
 .searchInputContainer {
   width: min-content;
@@ -167,31 +211,39 @@
   align-items: center;
 }
 .searchInputContainer {
-  position: relative; /* ✅ Position relative for absolute dropdown */
-  width: 100%; /* ✅ Full width */
+  position: relative;
+  width: 100%;
 }
 
 .searchInput {
-  width: 100%; /* ✅ Full width input */
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
   outline: none;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.searchInput::placeholder {
+  color: #828282;
 }
 
 .searchResults {
-  position: absolute; /* ✅ Show below input */
-  top: 100%; /* ✅ Place just below input */
+  position: absolute;
+  top: 100%;
   left: 0;
-  width: 100%; /* ✅ Full width */
+  width: 100%;
   background: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-height: 200px; /* ✅ Add max height */
-  overflow-y: auto; /* ✅ Scroll if too many items */
-  z-index: 10; /* ✅ Keep it above other elements */
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
 }
 
 .searchItem {

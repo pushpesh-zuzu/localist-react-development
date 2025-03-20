@@ -47,18 +47,22 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
       .map((service) => service.banner_title)
       .join(", ");
     const payload = { ...formData, service_id: serviceIds };
-    dispatch(registerUserData(payload)).then((result) => {
-            if (result?.success) {
-              showToast("info", result?.message || "Register successful!");
-              // navigate("/");
-            } else {
-             
-            }
-          })
-          .catch((error) => {
-            console.log(error,"resu")
-            showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
-          });
+    dispatch(registerUserData(payload))
+      .then((result) => {
+        if (result?.success) {
+          showToast("info", result?.message || "Register successful!");
+          // navigate("/");
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log(error, "resu");
+        showToast(
+          "error",
+          error?.response?.data?.message ||
+            "An error occurred. Please try again."
+        );
+      });
   };
   return (
     <div className={styles.parentContainer}>
@@ -127,7 +131,7 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
           <div className={styles.searchInputContainer}>
             <input
               className={styles.searchInput}
-              placeholder="What service do you provide?"
+              placeholder="Search for more services..."
               onChange={(e) => {
                 setInput(e.target.value);
                 if (!e.target.value) {
@@ -166,7 +170,7 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
               checked={formData?.auto_bid === 1}
               onChange={(e) => handleInputChange(e)}
             />
-            Auto Bid
+            <span className={styles.labelText}>Auto Bid</span>
           </label>
 
           <div className={styles.dropdownWrapper}>
@@ -186,15 +190,16 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
             </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>
+          <div className={styles.leadInfo_wrapper}>
+            <div className={styles.leadInfo}>
+              <h1 className={styles.leadCount}>1060</h1>
+              <p className={styles.leadText}>current available leads</p>
+            </div>
 
-          <div className={styles.leadInfo}>
-            <span className={styles.leadCount}>1060</span>
-            <span className={styles.leadText}>current available leads</span>
+            <button className={styles.nextBtn} onClick={handleSubmit}>
+              Next
+            </button>
           </div>
-
-          <button className={styles.nextBtn} onClick={handleSubmit}>
-            Next
-          </button>
         </div>
       </div>
     </div>
