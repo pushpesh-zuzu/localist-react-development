@@ -272,14 +272,63 @@
   border: 2px solid red !important;
 }
 
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 26px;
+}
+
+.backButton {
+  background: black;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  color: white;
+  padding: 10px 20.5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.nextButton {
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
 /* 1024px (Tablets, Small Laptops) */
 @media (max-width: 1024px) {
+  .nextButton,
+  .backButton {
+    font-size: 18px;
+    padding: 9px 20px;
+  }
   .container {
     padding: 60px 0;
+  }
+  .buttonContainer {
+    flex-direction: row;
+    gap: 10px;
   }
 }
 
 @media (max-width: 768px) {
+  .nextButton,
+  .backButton {
+    font-size: 16px;
+    padding: 10px;
+  }
+  .buttonContainer {
+    gap: 15px;
+  }
   .container {
     padding: 40px 0;
   }
@@ -289,6 +338,15 @@
 }
 
 @media (max-width: 480px) {
+  .nextButton,
+  .backButton {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+  .buttonContainer {
+    gap: 15px;
+  }
   .container {
     padding: 20px 0;
   }

@@ -181,6 +181,18 @@
   flex-direction: column;
   margin-top: 10px;
   width: 100%;
+  position: relative;
+}
+
+.inputWrapper img {
+  position: absolute;
+  top: 42px;
+  left: 10px;
+  width: 11.59px;
+  height: 16.56;
+}
+.input {
+  padding-left: 28px;
 }
 
 @media (max-width: 1024px) {
