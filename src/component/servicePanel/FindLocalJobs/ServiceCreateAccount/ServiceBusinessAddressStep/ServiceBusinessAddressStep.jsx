@@ -3,7 +3,7 @@ import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch } from "react-redux";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 
-const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formData,setFormData}) => {
+const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formData,setFormData,errors}) => {
   // const [website, setWebsite] = useState(null);
   // const [jobCount, setJobCount] = useState(null);
   // const [companySize, setCompanySize] = useState(null);
@@ -31,7 +31,9 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formD
               <input type="text" className={styles.input} name="address"
                   value={formData.address}
                   onChange={handleInputChange} />
+                  
             </div>
+                   {errors.name && <p className={styles.errorText}>{errors.name}</p>}
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Suite or apt. # (optional)</label>

@@ -31,14 +31,53 @@ const ServiceCreateAccount = () => {
     miles2:""
   });
 
- const handleInputChange = (e) => {
+  const [errors, setErrors] = useState({});
+
+  // Validation function
+  const validateStep = () => {
+    let newErrors = {};
+
+    if (step === 1) {
+      if (!formData.miles1.trim()) newErrors.miles1 = "Miles is required";
+      if (!formData.postcode.trim()) newErrors.postcode = "Postcode is required";
+    }
+
+    if (step === 2) {
+      if (!formData.name.trim()) newErrors.name = "Name is required";
+      if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
+      if (!formData.email.trim()) {
+        newErrors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = "Invalid email format";
+      }
+      if (!formData.password.trim()) newErrors.password = "Password is required";
+      if (!formData.phone.trim()) newErrors.phone = "Phone is required";
+    }
+
+    if (step === 3) {
+      if (!formData.address.trim()) newErrors.address = "Address is required";
+      if (!formData.state.trim()) newErrors.state = "State is required";
+      if (!formData.city.trim()) newErrors.city = "City is required";
+      if (!formData.zipcode.trim()) newErrors.zipcode = "Zipcode is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (e) => {
     const { name, type, checked } = e.target;
     setFormData((prevData) => ({
-        ...prevData,
-        [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
+      ...prevData,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
     }));
-};
-  const nextStep = () => setStep(step + 1);
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear error when user types
+  };
+  const nextStep = () => {
+    if (validateStep()) {
+      setStep(step + 1);
+    }
+  };
   const prevStep = () => setStep(step - 1);
 
   return (
@@ -50,6 +89,7 @@ const ServiceCreateAccount = () => {
             setFormData={setFormData}
             formData={formData}
             handleInputChange={handleInputChange}
+            errors={errors}
           />
         )}
         {step === 2 && (
@@ -59,6 +99,7 @@ const ServiceCreateAccount = () => {
             formData={formData}
             prevStep={prevStep}
             handleInputChange={handleInputChange}
+            errors={errors}
           />
         )}
         {step === 3 && (
@@ -68,11 +109,14 @@ const ServiceCreateAccount = () => {
             formData={formData}
             nextStep={nextStep}
             handleInputChange={handleInputChange}
+            errors={errors}
           />
         )}
         {step === 4 && <OtherServiceStep prevStep={prevStep} setFormData={setFormData}
             formData={formData}
-            handleInputChange={handleInputChange}/>}
+            handleInputChange={handleInputChange}
+            errors={errors}
+            />}
       </div>
     </div>
   );

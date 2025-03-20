@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 
-const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setFormData }) => {
+const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setFormData,errors}) => {
 
   // const handleSubmit = () => {
   //   dispatch(registerUserData(formData));
@@ -26,18 +26,18 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 <label className={styles.label}>Your name</label>
                 <input
                   type="text"
-                  className={styles.input}
+                  className={`${styles.input} ${errors.name ? styles.errorBorder : ""}`}
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
                 />
               </div>
-
+  {errors.name && <p className={styles.errorText}>{errors.name}</p>}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Company name</label>
                 <input
                   type="text"
-                  className={styles.input}
+                  className={`${styles.input} ${errors.company_name ? styles.errorBorder : ""}`}
                   name="company_name"
                   value={formData.company_name}
                   onChange={handleInputChange}
@@ -47,27 +47,29 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                   can leave this blank
                 </label>
               </div>
-
+              {errors.company_name && <p className={styles.errorText}>{errors.company_name}</p>}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Email address</label>
                 <input
                   type="email"
-                  className={styles.input}
+                  className={`${styles.input} ${errors.email ? styles.errorBorder : ""}`}
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                 />
               </div>
+              {errors.email && <p className={styles.errorText}>{errors.email}</p>}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Password</label>
                 <input
                   type="text"
-                  className={styles.input}
+                  className={`${styles.input} ${errors.password ? styles.errorBorder : ""}`}
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
                 </div>
+                {errors.password && <p className={styles.errorText}>{errors.password}</p>}
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number (Optional)</label>
@@ -79,6 +81,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                   onChange={handleInputChange}
                 />
               </div>
+              {/* {errors.name && <p className={styles.errorText}>{errors.name}</p>} */}
               <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
                 Does your company have a website?
@@ -161,7 +164,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
   />
 )}
 
-
+{errors.company_website && <p className={styles.errorText}>{errors.company_website}</p>}
              
 
               <div className={styles.labelInputWrapper}>
@@ -187,7 +190,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 ))}
               </div>
               </div>
-
+              {errors.new_jobs && <p className={styles.errorText}>{errors.new_jobs}</p>}
               <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Company size, employees</label>
               <div className={styles.optionGroup}>
@@ -215,6 +218,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 ))}
               </div>
               </div>
+              {errors.company_size && <p className={styles.errorText}>{errors.company_size}</p>}
 
               <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
@@ -255,6 +259,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 </button>
               </div>
 </div>
+{errors.company_sales_team && <p className={styles.errorText}>{errors.company_sales_team}</p>}
 <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
                 Does your company use social media?
@@ -288,6 +293,7 @@ const ServiceDetailsStep = ({ nextStep, prevStep,handleInputChange,formData,setF
                 </button>
               </div>
 </div>
+{errors.social_media && <p className={styles.errorText}>{errors.social_media}</p>}
               <div className={styles.buttonContainer}>
                 <button
                   type="button"

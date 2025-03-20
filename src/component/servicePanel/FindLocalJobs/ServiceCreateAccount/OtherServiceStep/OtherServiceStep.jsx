@@ -8,14 +8,14 @@ import {
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
 const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const item = useParams();
-
+const navigate = useNavigate()
   const dispatch = useDispatch();
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
@@ -27,7 +27,9 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
       }
     }, 500);
 
-    return () => clearTimeout(delayDebounce);
+    return () => {clearTimeout(delayDebounce) 
+      dispatch(setService([]))
+    }
   }, [Input, dispatch]);
 
   const handleSelectService = (item) => {
@@ -46,11 +48,11 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
-    const payload = { ...formData, service_id: serviceIds };
+    const payload = { ...formData, service_id: serviceIds,form_status:1 };
     dispatch(registerUserData(payload)).then((result) => {
             if (result?.success) {
               showToast("info", result?.message || "Register successful!");
-              // navigate("/");
+              navigate("/login");
             } else {
              
             }
