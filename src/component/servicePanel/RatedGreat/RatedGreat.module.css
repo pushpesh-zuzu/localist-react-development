@@ -2,11 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 42px 318px;
+  padding: 42px;
 }
 
 .image {
   width: 100%;
   max-width: 804px;
   border-radius: 15px;
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding: 26px;
+  }
 }

@@ -10,6 +10,7 @@ import HowItWorksPage from "../pages/HowItWorksPage";
 import ServicePanel from "../component/servicePanel";
 import ServicePanelPage from "../pages/ServicePanelPage";
 import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/ServiceCreateAccount/ServiceCreateAccount";
+import Dashboard from "../component/dashboard/dashboard";
 
 
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
         path: "/sellers/create-account/:serviceTitle",
         element: <ServiceCreateAccount />,
       },
+      {path:"/dashboard", element: <Dashboard/> },
 
       { path: "*", element: <NotFound /> },
      
