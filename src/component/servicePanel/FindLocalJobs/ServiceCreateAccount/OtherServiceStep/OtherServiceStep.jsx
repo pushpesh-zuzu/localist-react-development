@@ -15,7 +15,7 @@ const OtherServiceStep = ({ handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const item = useParams();
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
@@ -27,9 +27,10 @@ const navigate = useNavigate()
       }
     }, 500);
 
-    return () => {clearTimeout(delayDebounce) 
-      dispatch(setService([]))
-    }
+    return () => {
+      clearTimeout(delayDebounce);
+      dispatch(setService([]));
+    };
   }, [Input, dispatch]);
 
   const handleSelectService = (item) => {
@@ -48,19 +49,23 @@ const navigate = useNavigate()
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
-    const payload = { ...formData, service_id: serviceIds,form_status:1 };
-    dispatch(registerUserData(payload)).then((result) => {
-            if (result?.success) {
-              showToast("info", result?.message || "Register successful!");
-              navigate("/login");
-            } else {
-             
-            }
-          })
-          .catch((error) => {
-            console.log(error,"resu")
-            showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
-          });
+    const payload = { ...formData, service_id: serviceIds, form_status: 1 };
+    dispatch(registerUserData(payload))
+      .then((result) => {
+        if (result?.success) {
+          showToast("info", result?.message || "Register successful!");
+          navigate("/login");
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log(error, "resu");
+        showToast(
+          "error",
+          error?.response?.data?.message ||
+            "An error occurred. Please try again."
+        );
+      });
   };
   return (
     <div className={styles.parentContainer}>
@@ -73,7 +78,7 @@ const navigate = useNavigate()
         <div className={styles.card}>
           <p className={styles.label}>
             You've asked for leads for:{" "}
-            <span className={styles.serviceTag}>{item?.serviceTitle}</span>
+            <div className={styles.serviceTag}>{item?.serviceTitle}</div>
           </p>
 
           <p className={styles.secondaryLabel}>

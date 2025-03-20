@@ -40,19 +40,21 @@ const ServiceCreateAccount = () => {
 
     if (step === 1) {
       if (!formData.miles1.trim()) newErrors.miles1 = "Miles is required";
-      if (!formData.postcode.trim()) newErrors.postcode = "Postcode is required";
+      if (!formData.postcode.trim())
+        newErrors.postcode = "Postcode is required";
     }
 
     if (step === 2) {
       if (!formData.name.trim()) newErrors.name = "Name is required";
-      if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
+      // if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
       if (!formData.email.trim()) {
         newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if (!formData.password.trim()) newErrors.password = "Password is required";
-      if (!formData.phone.trim()) newErrors.phone = "Phone is required";
+      if (!formData.password.trim())
+        newErrors.password = "Password is required";
+      // if (!formData.phone.trim()) newErrors.phone = "Phone is required";
     }
 
     if (step === 3) {
@@ -140,7 +142,8 @@ const ServiceCreateAccount = () => {
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
-            />)}
+          />
+        )}
       </div>
 
       {false && (
