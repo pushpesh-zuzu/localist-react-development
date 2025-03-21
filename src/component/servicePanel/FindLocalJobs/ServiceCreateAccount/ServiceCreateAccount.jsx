@@ -11,8 +11,8 @@ const ServiceCreateAccount = () => {
   const dispatch = useDispatch();
   const { selectedServiceId } = useSelector((state) => state.findJobs);
   const [formData, setFormData] = useState({
-    miles1: "1 miles",
-    postcode: "",
+    miles1: "1",
+    postcode: null,
     nation_wide: 0,
     name: "",
     email: "",
@@ -21,8 +21,8 @@ const ServiceCreateAccount = () => {
     company_name: "",
     company_size: null,
     company_sales_team: null,
-    company_website: "Yes",
-    websiteAddress: "",
+    company_website: 1,
+    is_company_website: "",
     new_jobs: null,
     social_media: null,
     address: "",
@@ -33,7 +33,7 @@ const ServiceCreateAccount = () => {
     suite: "",
     service_id: [selectedServiceId],
     auto_bid: 0,
-    miles2: "1 miles",
+    miles2: "1",
   });
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});

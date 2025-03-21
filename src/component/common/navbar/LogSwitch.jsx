@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,9 @@ const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
-
+  const {selectedServiceId} = useSelector((state) => state.findJobs);
+  const {serviceTitle} = useParams();
+ 
   const handleLoginPage = () => {
     navigate("/login");
   };
@@ -52,14 +54,15 @@ const LogSwitch = () => {
           <div className={styles.loginBtn}>{userToken?.name}</div>
         </Popover>
       ) : (
-        <div className={styles.logsBtns}>
+       <div className={styles.logsBtns}>
           <div className={styles.loginBtn} onClick={handleLoginPage}>
             Login
           </div>
-
+          {!selectedServiceId && !serviceTitle &&
           <div className={styles.professionalBtn} onClick={handleOpen}>
             Join as a Professional
           </div>
+}
         </div>
       )}
     </div>

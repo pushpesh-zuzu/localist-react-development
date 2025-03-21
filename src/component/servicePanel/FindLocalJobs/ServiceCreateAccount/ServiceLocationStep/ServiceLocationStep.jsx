@@ -38,13 +38,13 @@ const ServiceLocationStep = ({
                 value={formData.miles1}
                 onChange={handleInputChange}
               >
-                <option>1 miles</option>
-                <option>2 miles</option>
-                <option>5 miles</option>
-                <option>10 miles</option>
-                <option>30 miles</option>
-                <option>50 miles</option>
-                <option>100 miles</option>
+                <option>1 </option>
+                <option>2 </option>
+                <option>5 </option>
+                <option>10 </option>
+                <option>30 </option>
+                <option>50 </option>
+                <option>100 </option>
               </select>
               {errors.miles1 && (
                 <p className={styles.errorText}>{errors.miles1}</p>
@@ -54,7 +54,7 @@ const ServiceLocationStep = ({
               <span className={styles.fromText}>From</span>
               <img src={LocationIcon} alt="" />
               <input
-                type="text"
+                type="number"
                 placeholder="Enter your postcode"
                 className={`${styles.input} ${
                   errors.postcode ? styles.errorBorder : ""

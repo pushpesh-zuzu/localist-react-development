@@ -173,14 +173,14 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === "Yes"
+                      formData.company_website === 1
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
                       setFormData((prev) => ({
                         ...prev,
-                        company_website: "Yes",
+                        company_website: 1,
                       }))
                     }
                   >
@@ -189,27 +189,27 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === "No"
+                      formData.company_website === 0
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData({ ...formData, company_website: "No" })
+                      setFormData({ ...formData, company_website: 0 })
                     }
                   >
                     No
                   </button>
                 </div>
               </div>
-              {formData.company_website !== "No" && (
+              {formData.company_website !== 0 && (
                 <input
                   type="text"
                   className={styles.input}
                   name="company_website"
                   placeholder="Website address (optional)"
                   value={
-                    formData.company_website !== "Yes"
-                      ? formData.company_website
+                    formData.is_company_website !== "Yes"
+                      ? formData.is_company_website
                       : ""
                   }
                   onChange={(e) =>
