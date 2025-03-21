@@ -76,6 +76,7 @@
 }
 
 .rightSection {
+  min-height: 200px;
   background: #ffffff;
   padding: 35.08px 29.45px;
   border-radius: 15px;
