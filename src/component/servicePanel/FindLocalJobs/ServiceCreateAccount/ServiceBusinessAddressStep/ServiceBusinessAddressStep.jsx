@@ -37,8 +37,8 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formD
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Suite or apt. # (optional)</label>
-              <input type="text" className={styles.input} name="apartment"
-                  value={formData.apartment}
+              <input type="text" className={styles.input} name="suite"
+                  value={formData.suite}
                   onChange={handleInputChange}/>
             </div>
 
@@ -62,30 +62,30 @@ const ServiceBusinessAddressStep = ({ nextStep, prevStep,handleInputChange,formD
               <div className={styles.toggleGroup}>
   <button
     type="button"
-    className={formData?.zipcode !== 0 ? styles.activeButton : styles.toggleButton}
-    onClick={() => setFormData((prev) => ({ ...prev, zipcode: 1, is_zipcode: "" }))}
+    className={formData?.is_zipcode === 1 ? styles.activeButton : styles.toggleButton}
+    onClick={() => setFormData((prev) => ({ ...prev,  is_zipcode: 1, zipcode: "" }))}
   >
     Yes
   </button>
   <button
     type="button"
-    className={formData?.zipcode === 0 ? styles.activeButton : styles.toggleButton}
-    onClick={() => setFormData((prev) => ({ ...prev, zipcode: 0, is_zipcode: "" }))}
+    className={formData?.is_zipcode === 0 ? styles.activeButton : styles.toggleButton}
+    onClick={() => setFormData((prev) => ({ ...prev, is_zipcode: 0, zipcode: "" }))}
   >
     No
   </button>
 </div>
 </div>
 
-{formData?.zipcode === 1 && (
+{formData?.is_zipcode !== 0 && (
   <div className={styles.labelInputWrapper}>
     <input
       type="text"
       placeholder="Zip Code"
       className={styles.input}
-      name="is_zipcode"
-      value={formData.is_zipcode || ""}
-      onChange={(e) => setFormData((prev) => ({ ...prev, is_zipcode: e.target.value }))}
+      name="zipcode"
+      value={formData.zipcode || ""}
+      onChange={(e) => setFormData((prev) => ({ ...prev, zipcode: e.target.value }))}
     />
   </div>
 )}

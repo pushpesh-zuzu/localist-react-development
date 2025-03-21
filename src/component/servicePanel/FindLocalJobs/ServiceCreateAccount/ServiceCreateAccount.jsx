@@ -30,7 +30,7 @@ const ServiceCreateAccount = () => {
     city: "",
     zipcode: "",
     is_zipcode:"",
-    apartment: "",
+    suite: "",
     service_id: "",
     auto_bid: 0,
     miles2: "1 miles",
@@ -56,9 +56,11 @@ const {registerStep} = useSelector((state)=> state.findJobs)
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if (!formData.password.trim())
+      if (!formData.password.trim()) {
         newErrors.password = "Password is required";
-      // if (!formData.phone.trim()) newErrors.phone = "Phone is required";
+      } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(formData.password)) {
+        newErrors.password = "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
+      }
     }
 
     if (registerStep === 3) {

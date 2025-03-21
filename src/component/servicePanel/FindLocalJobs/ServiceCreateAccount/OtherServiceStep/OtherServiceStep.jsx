@@ -59,9 +59,9 @@ const OtherServiceStep = ({
   const validateForm = () => {
     let newErrors = {};
 
-    if (selectedServices.length === 0) {
-      newErrors.service_id = "Please select at least one service.";
-    }
+    // if (selectedServices.length === 0) {
+    //   newErrors.service_id = "Please select at least one service.";
+    // }
 
     if (!formData.miles2) {
       newErrors.miles2 = "Please select a distance range.";
@@ -85,6 +85,9 @@ const OtherServiceStep = ({
       ...formData,
       service_id: serviceIds,
       form_status: 1,
+      user_type:1,
+      active_status:1,
+      loggedUser:1,
       nation_wide: formData.nation_wide ? 1 : 0,
     };
     dispatch(registerUserData(payload))
@@ -212,9 +215,9 @@ const OtherServiceStep = ({
               </div>
             )}
           </div>
-          {errors.service_id && (
+          {/* {errors.service_id && (
             <p className={styles.errorText}>{errors.service_id}</p>
-          )}
+          )} */}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"

@@ -9,7 +9,7 @@ const initialState = {
     service:[],
     registerLoader:false,
     registerStep:1,
-    registerToken:null
+    registerToken:JSON.parse(localStorage.getItem("registerTokens")) || null
     
 };
 export const getPopularServiceList = () => {
@@ -18,7 +18,7 @@ export const getPopularServiceList = () => {
       try {
         const response = await axiosInstance.get(`popular-services`);
         if (response) {
-          console.log(response, "response");
+         
           
           dispatch(setPopularList(response?.data?.data));
         }
@@ -54,6 +54,7 @@ export const getPopularServiceList = () => {
         const response = await axiosInstance.post(`registration`, registerData);
   
         if (response) {
+        
             dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
             return response.data;
         }
@@ -61,8 +62,21 @@ export const getPopularServiceList = () => {
             showToast("error", response?.message || "Register failed. Please try again.");
         }
       } catch (error) {
-        console.log(error,"kk")
-        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+      
+        const errorData = error?.response?.data?.message;
+
+        if (errorData && typeof errorData === "object") {
+        
+          Object.values(errorData).forEach((messages) => {
+            if (Array.isArray(messages)) {
+              messages.forEach((msg) => showToast("error", msg));
+            } else {
+              showToast("error", messages);
+            }
+          });
+        } else {
+          showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        }
       } finally {
         dispatch(setRegisterLoader(false));
       }
@@ -95,7 +109,8 @@ state.popularList = action.payload
       state.registerStep = action.payload
     },
     setRegisterToken(state,action){
-        state.registerToken = action.payload
+        state.registerToken = action.payload;
+        localStorage.setItem("registerTokens", JSON.stringify(action.payload))
     }
   }
 });
