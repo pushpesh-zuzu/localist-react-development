@@ -8,7 +8,8 @@ const initialState = {
     searchServiceLoader:false,
     service:[],
     registerLoader:false,
-    registerStep:1
+    registerStep:1,
+    registerToken:null
     
 };
 export const getPopularServiceList = () => {
@@ -53,7 +54,7 @@ export const getPopularServiceList = () => {
         const response = await axiosInstance.post(`registration`, registerData);
   
         if (response) {
-            // dispatch(setService(response?.data?.data))
+            dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
             return response.data;
         }
         else{
@@ -92,6 +93,9 @@ state.popularList = action.payload
     },
     setRegisterStep(state,action) {
       state.registerStep = action.payload
+    },
+    setRegisterToken(state,action){
+        state.registerToken = action.payload
     }
   }
 });
@@ -100,7 +104,7 @@ state.popularList = action.payload
 export const {
     setPopularServiceListLoader,setPopularList,
     setsearchServiceLoader,setService,setRegisterLoader,
-    setRegisterStep
+    setRegisterStep,setRegisterToken
   
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

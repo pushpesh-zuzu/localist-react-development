@@ -5,6 +5,7 @@ const initialState = {
   adminToken: JSON.parse(localStorage.getItem("barkToken")) || null,
   userToken: JSON.parse(localStorage.getItem("barkUserToken")) || null,
   loginLoader: false,
+  logoutLoader:false
 };
 
 export const userLogin = (loginData) => {
@@ -31,10 +32,23 @@ export const userLogin = (loginData) => {
     }
   };
 };
+
 export const userLogout = () => {
   return async (dispatch) => {
-    dispatch(setToken(null));
-    dispatch(setUserToken(null));
+    dispatch(setLogoutLoader(true));
+    try {
+      const response = await axiosInstance.post("logout");
+      
+      if (response) {
+        dispatch(setToken(null));
+        dispatch(setUserToken(null))
+        return true;
+      }
+    } catch (error) {
+     
+    } finally {
+      dispatch(setLogoutLoader(false));
+    }
   };
 };
 
@@ -53,9 +67,12 @@ const authSlice = createSlice({
       state.userToken = action.payload;
       localStorage.setItem("barkUserToken", JSON.stringify(action.payload));
     },
+    setLogoutLoader(state,action){
+      state.logoutLoader = action.payload
+    }
   },
 });
 
-export const { setToken, setLoginLoader,setUserToken } = authSlice.actions;
+export const { setToken, setLoginLoader,setUserToken,setLogoutLoader} = authSlice.actions;
 
 export default authSlice.reducer;

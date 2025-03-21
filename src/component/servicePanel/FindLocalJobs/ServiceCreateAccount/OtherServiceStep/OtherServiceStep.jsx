@@ -12,6 +12,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
+
+
 const OtherServiceStep = ({
   nextStep,
   prevStep,
@@ -281,7 +283,7 @@ const OtherServiceStep = ({
                 Back
               </button>
               <button className={styles.continueButton} onClick={handleSubmit}>
-                {registerLoader ? "Loading..." :"Continue"}
+                {registerLoader ?  <Spin indicator={<LoadingOutlined spin style={{ color: "primary" }} />} /> :"Continue"}
               </button>
             </div>
           </div>

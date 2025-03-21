@@ -11,6 +11,7 @@ import ServicePanel from "../component/servicePanel";
 import ServicePanelPage from "../pages/ServicePanelPage";
 import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/ServiceCreateAccount/ServiceCreateAccount";
 import Dashboard from "../component/dashboard/dashboard";
+import ProtectedRoute from "./Protected";
 
 
 
@@ -31,7 +32,14 @@ const router = createBrowserRouter([
         path: "/sellers/create-account/:serviceTitle",
         element: <ServiceCreateAccount />,
       },
-      {path:"/dashboard", element: <Dashboard/> },
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
 
       { path: "*", element: <NotFound /> },
      

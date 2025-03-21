@@ -4,6 +4,8 @@ import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Popover } from "antd";
+import { userLogout } from "../../../store/Auth/authSlice";
+import { showToast } from "../../../utils";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -19,6 +21,19 @@ const LogSwitch = () => {
     navigate("/sellers/create/");
     dispatch(setRegisterStep(1))
   };
+  const handleLogout = () => {
+    dispatch(userLogout()) .then((result) => {
+            if (result) {
+         
+              navigate("/login");
+              showToast("info", "logout successful!");
+            } else {
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+  }
 
   return (
     <div className={styles.logSwitchContainer}>
@@ -26,7 +41,7 @@ const LogSwitch = () => {
         <input placeholder="Search for a service" />
         <img src={searchIcon} alt="search-icon" />
       </div>
-      {userToken ?<Popover content={<div className={styles.logoutBtn}>Logout</div>} trigger="hover">
+      {userToken ?<Popover content={<div className={styles.logoutBtn} onClick={()=>handleLogout()}>Logout</div>} trigger="hover" >
   <div className={styles.loginBtn}>
     {userToken?.name}
   </div>
