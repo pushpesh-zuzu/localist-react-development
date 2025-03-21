@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../Api/axiosInstance";
 import { showToast } from "../../utils";
+import axiosInstance from "../../Api/axiosInstance";
 
 const initialState = {
     popularList:[],
@@ -17,6 +17,8 @@ export const getPopularServiceList = () => {
       try {
         const response = await axiosInstance.get(`popular-services`);
         if (response) {
+          console.log(response, "response");
+          
           dispatch(setPopularList(response?.data?.data));
         }
       } catch (error) {

@@ -25,13 +25,13 @@ const formatTitle = (title) => {
 const Services = () => {
   return (
     <div className={styles.serviceContainer}>
-      {services.map((category, index) => (
+      {services?.map((category, index) => (
         <div key={index} className={styles.category}>
           <h2 className={styles.categoryTitile}>
             {formatTitle(category.type)}
           </h2>
           <div className={styles.categoryGrid}>
-            {category.services.map((service, idx) => (
+            {category?.services?.map((service, idx) => (
               <SpecificService service={service} key={idx} />
             ))}
           </div>

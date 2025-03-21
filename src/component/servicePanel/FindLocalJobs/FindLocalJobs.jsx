@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./FindLocalJobs.module.css";
-import { PopularServiceData } from "../../../constant/ServicePanel";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getPopularServiceList,
@@ -79,7 +78,7 @@ const FindLocalJobs = () => {
               ) : (
                 <>
                   {" "}
-                  {service.map((item) => (
+                  {service?.map((item) => (
                     <p
                       key={item.id}
                       className={styles.searchItem}
@@ -100,16 +99,28 @@ const FindLocalJobs = () => {
       {/* Right Section */}
       <div className={styles.rightSection}>
         <h3>Popular services</h3>
-        {popularLoader ? <Spin indicator={<LoadingOutlined spin  style={{color:"primary"}}/>} className={styles?.loaderDesign}/> : 
-        <div className={styles.servicesList}>
-          {popularList.map((service, index) => (
-            <div key={service.id} className={styles.serviceItem}  onClick={() => handleServiceClick(service)}>
-              <img src={`${service?.baseurl}/${service?.category_icon}`} alt={service.title} />
-              <span>{service.banner_title}</span>
-            </div>
-          ))}
-        </div>
-}
+        {popularLoader ? (
+          <Spin
+            indicator={<LoadingOutlined spin style={{ color: "primary" }} />}
+            className={styles?.loaderDesign}
+          />
+        ) : (
+          <div className={styles.servicesList}>
+            {popularList?.map((service, index) => (
+              <div
+                key={service.id}
+                className={styles.serviceItem}
+                onClick={() => handleServiceClick(service)}
+              >
+                <img
+                  src={`${service?.baseurl}/${service?.category_icon}`}
+                  alt={service.title}
+                />
+                <span>{service.banner_title}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

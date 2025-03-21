@@ -18,15 +18,16 @@ const OtherServiceStep = ({
   handleInputChange,
   formData,
   setFormData,
-  errors,
+  
 }) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const [show, setShow] = useState(false);
+  const [errors, setErrors] = useState({});
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { popularList, service, popularLoader, searchServiceLoader } =
+  const { popularList, service, registerLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
 
   useEffect(() => {
@@ -53,8 +54,28 @@ const OtherServiceStep = ({
   const handleRemoveService = (id) => {
     setSelectedServices((prev) => prev.filter((service) => service.id !== id));
   };
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (selectedServices.length === 0) {
+      newErrors.service_id = "Please select at least one service.";
+    }
+
+    if (!formData.miles2) {
+      newErrors.miles2 = "Please select a distance range.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  useEffect(() => {
+    if (selectedServices.length > 0) {
+      setErrors((prev) => ({ ...prev, service_id: undefined }));
+    }
+  }, [selectedServices]);
 
   const handleSubmit = () => {
+   
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
@@ -80,7 +101,9 @@ const OtherServiceStep = ({
         // );
       });
   };
+ 
   const handleOpenModal = () => {
+    if (!validateForm()) return;
     setShow(true);
   };
   const handleCloseModal = () => {
@@ -92,7 +115,7 @@ const OtherServiceStep = ({
     <div className={styles.parentContainer}>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <h2 className={styles.heading}>Add other services you can provide</h2>
+          <h2 className={styles.otherService_heading}>Add other services you can provide</h2>
           <p className={styles.subHeading}>Maximise your leads</p>
         </div>
 
@@ -258,7 +281,7 @@ const OtherServiceStep = ({
                 Back
               </button>
               <button className={styles.continueButton} onClick={handleSubmit}>
-                Continue
+                {registerLoader ? "Loading..." :"Continue"}
               </button>
             </div>
           </div>
