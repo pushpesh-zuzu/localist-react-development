@@ -9,9 +9,8 @@ import { showToast } from "../../../utils";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
-  const dispatch =useDispatch()
-  const {userToken} = useSelector((state)=> state.auth)
-  
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.auth);
 
   const handleLoginPage = () => {
     navigate("/login");
@@ -19,21 +18,21 @@ const LogSwitch = () => {
 
   const handleOpen = () => {
     navigate("/sellers/create/");
-    dispatch(setRegisterStep(1))
+    dispatch(setRegisterStep(1));
   };
   const handleLogout = () => {
-    dispatch(userLogout()) .then((result) => {
-            if (result) {
-         
-              navigate("/login");
-              showToast("info", "logout successful!");
-            } else {
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          });
-  }
+    dispatch(userLogout())
+      .then((result) => {
+        if (result) {
+          navigate("/login");
+          showToast("info", "logout successful!");
+        } else {
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className={styles.logSwitchContainer}>
@@ -41,19 +40,28 @@ const LogSwitch = () => {
         <input placeholder="Search for a service" />
         <img src={searchIcon} alt="search-icon" />
       </div>
-      {userToken ?<Popover content={<div className={styles.logoutBtn} onClick={()=>handleLogout()}>Logout</div>} trigger="hover" >
-  <div className={styles.loginBtn}>
-    {userToken?.name}
-  </div>
-</Popover> : <div className={styles.logsBtns}>
-        <div className={styles.loginBtn} onClick={handleLoginPage}>
-          Login
-        </div>
+      {userToken ? (
+        <Popover
+          content={
+            <div className={styles.logoutBtn} onClick={() => handleLogout()}>
+              Logout
+            </div>
+          }
+          trigger="hover"
+        >
+          <div className={styles.loginBtn}>{userToken?.name}</div>
+        </Popover>
+      ) : (
+        <div className={styles.logsBtns}>
+          <div className={styles.loginBtn} onClick={handleLoginPage}>
+            Login
+          </div>
 
-        <div className={styles.professionalBtn} onClick={handleOpen}>
-          Join as a Professional
+          <div className={styles.professionalBtn} onClick={handleOpen}>
+            Join as a Professional
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   );
 };
