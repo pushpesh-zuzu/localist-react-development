@@ -54,7 +54,7 @@ const LogSwitch = () => {
       ) : (
         <div className={styles.logsBtns}>
           <div className={styles.loginBtn} onClick={handleLoginPage}>
-            Login
+            Logins
           </div>
 
           <div className={styles.professionalBtn} onClick={handleOpen}>

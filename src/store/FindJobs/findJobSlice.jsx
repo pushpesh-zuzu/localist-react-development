@@ -9,7 +9,8 @@ const initialState = {
   service: [],
   registerLoader: false,
   registerStep: 1,
-  registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null
+  registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null,
+  selectedServiceId: null,
 };
 export const getPopularServiceList = () => {
   return async (dispatch) => {
@@ -108,6 +109,9 @@ const findJobSlice = createSlice({
       state.registerToken = action.payload;
       localStorage.setItem("registerTokens", JSON.stringify(action.payload))
     },
+    setSelectedServiceId(state, action) {
+      state.selectedServiceId = action.payload;
+    }
   },
 });
 
@@ -119,5 +123,6 @@ export const {
   setRegisterLoader,
   setRegisterStep,
   setRegisterToken,
+  setSelectedServiceId,
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

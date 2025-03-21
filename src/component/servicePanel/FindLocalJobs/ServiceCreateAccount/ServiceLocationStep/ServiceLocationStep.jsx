@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.png";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
@@ -10,7 +10,7 @@ const ServiceLocationStep = ({
   setFormData,
   errors,
 }) => {
-  const [isNational, setIsNational] = useState(false);
+  
   useEffect(() => {
     window.scroll(0, 0);
   }, []);

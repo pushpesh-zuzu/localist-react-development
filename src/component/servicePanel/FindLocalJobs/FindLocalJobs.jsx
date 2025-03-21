@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getPopularServiceList,
   searchService,
+  setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ const FindLocalJobs = () => {
   const navigate = useNavigate();
   const handleServiceClick = (service) => {
     const slug = generateSlug(service.banner_title);
+    dispatch(setSelectedServiceId(service.id))
     navigate(`/sellers/create-account/${slug}`);
   };
   useEffect(() => {
@@ -42,6 +44,7 @@ const FindLocalJobs = () => {
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.banner_title);
+      dispatch(setSelectedServiceId(selectedService.id))
       navigate(`/sellers/create-account/${slug}`);
     }
   };

@@ -21,6 +21,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const dispatch = useDispatch();
   const { popularList, service, registerLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
+  console.log(formData, "formData");
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -50,10 +51,6 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const validateForm = () => {
     let newErrors = {};
 
-    // if (selectedServices.length === 0) {
-    //   newErrors.service_id = "Please select at least one service.";
-    // }
-
     if (!formData.miles2) {
       newErrors.miles2 = "Please select a distance range.";
     }
@@ -80,16 +77,24 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   }, [show]);
 
   const handleSubmit = () => {
+
     const serviceIds = selectedServices
-      .map((service) => service.banner_title)
+      .map((service) => service.id)
       .join(", ");
+
+
+    const formatedData = [...formData?.service_id, ...serviceIds]
+
+
+    const serviceCategoryData = formatedData?.join(", ")
+
     const payload = {
       ...formData,
-      service_id: serviceIds,
+      service_id: serviceCategoryData,
       form_status: 1,
-      user_type:1,
-      active_status:1,
-      loggedUser:1,
+      user_type: 1,
+      active_status: 1,
+      loggedUser: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
     };
     dispatch(registerUserData(payload)).then((result) => {

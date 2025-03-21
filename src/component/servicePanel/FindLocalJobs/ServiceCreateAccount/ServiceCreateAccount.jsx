@@ -9,7 +9,7 @@ import { setRegisterStep } from "../../../../store/FindJobs/findJobSlice";
 
 const ServiceCreateAccount = () => {
   const dispatch = useDispatch();
-
+  const { selectedServiceId } = useSelector((state) => state.findJobs);
   const [formData, setFormData] = useState({
     miles1: "1 miles",
     postcode: "",
@@ -21,7 +21,7 @@ const ServiceCreateAccount = () => {
     company_name: "",
     company_size: null,
     company_sales_team: null,
-    company_website: null,
+    company_website: "Yes",
     websiteAddress: "",
     new_jobs: null,
     social_media: null,
@@ -29,9 +29,9 @@ const ServiceCreateAccount = () => {
     state: "",
     city: "",
     zipcode: "",
-    is_zipcode:"",
+    is_zipcode: 1,
     suite: "",
-    service_id: "",
+    service_id: [selectedServiceId],
     auto_bid: 0,
     miles2: "1 miles",
   });
@@ -99,7 +99,7 @@ const ServiceCreateAccount = () => {
     dispatch(setRegisterStep(registerStep - 1));
   };
 
- 
+
 
   return (
     <div className={styles.parentContainer}>
@@ -144,7 +144,7 @@ const ServiceCreateAccount = () => {
         )}
       </div>
 
-      
+
     </div>
   );
 };
