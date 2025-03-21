@@ -43,23 +43,30 @@ const ServiceCreateAccount = () => {
     let newErrors = {};
 
     if (registerStep === 1) {
-      if (!formData.miles1.trim()) newErrors.miles1 = "Miles is required";
-      if (!formData.postcode.trim())
+      if (!formData.miles1 || !formData.miles1.trim())
+        newErrors.miles1 = "Miles is required";
+      if (!formData.postcode || !formData.postcode.trim())
         newErrors.postcode = "Postcode is required";
     }
 
     if (registerStep === 2) {
-      if (!formData.name.trim()) newErrors.name = "Name is required";
+      if (!formData.name || !formData.name.trim())
+        newErrors.name = "Name is required";
       // if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
-      if (!formData.email.trim()) {
+      if (!formData.email || !formData.email.trim()) {
         newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if (!formData.password.trim()) {
+      if (!formData.password || !formData.password.trim()) {
         newErrors.password = "Password is required";
-      } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(formData.password)) {
-        newErrors.password = "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
+      } else if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
+          formData.password
+        )
+      ) {
+        newErrors.password =
+          "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
       }
     }
 
@@ -91,6 +98,7 @@ const ServiceCreateAccount = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear error when user types
   };
   const nextStep = () => {
+    window.scrollTo(0, 0);
     if (validateStep()) {
       dispatch(setRegisterStep(registerStep + 1));
     }
@@ -98,8 +106,6 @@ const ServiceCreateAccount = () => {
   const prevStep = () => {
     dispatch(setRegisterStep(registerStep - 1));
   };
-
-
 
   return (
     <div className={styles.parentContainer}>
@@ -143,8 +149,6 @@ const ServiceCreateAccount = () => {
           />
         )}
       </div>
-
-
     </div>
   );
 };

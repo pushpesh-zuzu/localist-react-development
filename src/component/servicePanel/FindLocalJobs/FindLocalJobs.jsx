@@ -20,7 +20,7 @@ const FindLocalJobs = () => {
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const handleServiceClick = (service) => {
-    const slug = generateSlug(service.banner_title);
+    const slug = generateSlug(service.name);
     dispatch(setSelectedServiceId(service.id));
     navigate(`/sellers/create-account/${slug}`);
   };
@@ -38,12 +38,12 @@ const FindLocalJobs = () => {
     return () => clearTimeout(delayDebounce);
   }, [Input, dispatch]);
   const handleSelectService = (item) => {
-    setInput(item.banner_title);
+    setInput(item.name);
     setSelectedService(item);
   };
   const handleGetStarted = () => {
     if (selectedService) {
-      const slug = generateSlug(selectedService.banner_title);
+      const slug = generateSlug(selectedService.name);
       dispatch(setSelectedServiceId(selectedService.id));
       navigate(`/sellers/create-account/${slug}`);
     }
@@ -87,7 +87,7 @@ const FindLocalJobs = () => {
                       className={styles.searchItem}
                       onClick={() => handleSelectService(item)}
                     >
-                      {item.banner_title}
+                      {item.name}
                     </p>
                   ))}
                 </>
@@ -119,7 +119,7 @@ const FindLocalJobs = () => {
                   src={`${service?.baseurl}/${service?.category_icon}`}
                   alt={service.title}
                 />
-                <span>{service.banner_title}</span>
+                <span>{service.name}</span>
               </div>
             ))}
           </div>

@@ -16,8 +16,11 @@ const ServiceDetailsStep = ({
   //   nextStep();
   // };
   const [showPassword, setShowPassword] = useState(false);
+  // useEffect(() => {
+  //   window.scroll(0, 0);
+  // }, []);
   useEffect(() => {
-    window.scroll(0, 0);
+    window.scrollTo(0, 0);
   }, []);
   return (
     <>
@@ -173,14 +176,14 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === 1
+                      formData.is_company_website === 1
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
                       setFormData((prev) => ({
                         ...prev,
-                        company_website: 1,
+                        is_company_website: 1,
                       }))
                     }
                   >
@@ -189,27 +192,27 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === 0
+                      formData.is_company_website === 0
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData({ ...formData, company_website: 0 })
+                      setFormData({ ...formData, is_company_website: 0 })
                     }
                   >
                     No
                   </button>
                 </div>
               </div>
-              {formData.company_website !== 0 && (
+              {formData.is_company_website !== 0 && (
                 <input
                   type="text"
                   className={styles.input}
                   name="company_website"
                   placeholder="Website address (optional)"
                   value={
-                    formData.is_company_website !== "Yes"
-                      ? formData.is_company_website
+                    formData.company_website !== 1
+                      ? formData.company_website
                       : ""
                   }
                   onChange={(e) =>

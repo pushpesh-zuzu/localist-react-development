@@ -29,7 +29,6 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
         dispatch(searchService({ search: Input }));
       }
     }, 500);
-    window.scroll(0, 0);
 
     return () => {
       clearTimeout(delayDebounce);
@@ -77,16 +76,11 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   }, [show]);
 
   const handleSubmit = () => {
+    const serviceIds = selectedServices.map((service) => service.id).join(", ");
 
-    const serviceIds = selectedServices
-      .map((service) => service.id)
-      .join(", ");
+    const formatedData = [...formData?.service_id, ...serviceIds];
 
-
-    const formatedData = [...formData?.service_id, ...serviceIds]
-
-
-    const serviceCategoryData = formatedData?.join(", ")
+    const serviceCategoryData = formatedData?.join(", ");
 
     const payload = {
       ...formData,
@@ -138,7 +132,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
           <div className={styles.selectedServices}>
             {selectedServices.map((service) => (
               <span key={service.id} className={styles.selectedTag}>
-                {service.banner_title}
+                {service.name}
                 <button
                   className={styles.removeBtn}
                   onClick={() => handleRemoveService(service.id)}
@@ -174,7 +168,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
                         className={styles.searchItem}
                         onClick={() => handleSelectService(item)}
                       >
-                        {item.banner_title}
+                        {item.name}
                       </p>
                     ))}
                   </>
@@ -203,13 +197,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               value={formData?.miles2}
               onChange={handleInputChange}
             >
-              <option>1 miles</option>
-              <option>2 miles</option>
-              <option>5 miles</option>
-              <option>10 miles</option>
-              <option>30 miles</option>
-              <option>50 miles</option>
-              <option>100 miles</option>
+              <option>1 </option>
+              <option>2 </option>
+              <option>5 </option>
+              <option>10 </option>
+              <option>30 </option>
+              <option>50 </option>
+              <option>100 </option>
             </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>
