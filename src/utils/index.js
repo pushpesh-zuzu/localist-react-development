@@ -1,10 +1,8 @@
 import { toast } from "react-toastify";
 
- export const generateSlug = (name) => {
-    return name.toLowerCase().replace(/\s+/g, "-");
-  };
-  
- 
+export const generateSlug = (name) => {
+  return name.toLowerCase().replace(/\s+/g, "-");
+};
 
 export const showToast = (type, message) => {
   const options = {

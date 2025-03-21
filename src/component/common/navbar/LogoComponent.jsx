@@ -6,7 +6,7 @@ import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   allSubMenuData,
   otherMenuData,
@@ -23,6 +23,25 @@ const LogoComponent = () => {
   const handleRedirectUrl = () => {
     navigate("/");
   };
+
+  const [placement, setPlacement] = useState("bottomLeft");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1020) {
+        setPlacement("bottomLeft");
+      } else {
+        setPlacement("bottom");
+      }
+    };
+
+    handleResize(); // Initial call to set the placement
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const content = () => {
     return (
@@ -165,10 +184,11 @@ const LogoComponent = () => {
         onClick={handleRedirectUrl}
       />
       <Popover
-        placement="bottomLeft"
+        placement={placement}
         content={content}
         arrow={false}
         trigger="hover"
+        className="popover_wrap"
       >
         <div className={styles.serviceContainer}>
           <h2 className={styles.serviceText}>Explore Our Services</h2>

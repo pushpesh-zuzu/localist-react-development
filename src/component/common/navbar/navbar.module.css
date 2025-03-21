@@ -5,7 +5,7 @@
   z-index: 1000;
   width: 100%;
   background-color: var(--background-color);
-  border-bottom: 1px solid #DEDEDE;
+  border-bottom: 1px solid #dedede;
 }
 
 .navbarItems {
@@ -28,7 +28,7 @@
 .logoContainer {
   display: flex;
   align-items: center;
-  gap: 21PX;
+  gap: 21px;
   cursor: pointer;
 }
 
@@ -59,7 +59,7 @@
 .buttom_icon {
   width: 13px;
   height: 3px;
-  background: #00AFE3;
+  background: #00afe3;
 }
 
 .downIcon img {
@@ -80,13 +80,13 @@
 }
 
 .searchContainer input {
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
   padding: 10px 13px;
   height: 24px;
   gap: 10px;
   border-radius: 10px;
   width: fit-content;
-  color: #B3B3B3;
+  color: #b3b3b3;
   font-weight: 500;
   font-size: 16px;
 }
@@ -110,7 +110,7 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  color: #1E2A2E;
+  color: #1e2a2e;
   cursor: pointer;
 }
 
@@ -123,7 +123,7 @@
   font-size: 1.1rem;
   line-height: 20px;
   text-wrap: nowrap;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .serviceTextMobile {
@@ -134,7 +134,6 @@
   padding: 12px;
   cursor: pointer !important;
 }
-
 
 @media screen and (max-width: 1250px) {
   .navbarItems {
@@ -275,16 +274,7 @@
   }
 }
 
-
-
-
-
 /* Popover styles sheet */
-
-:global(.ant-popover-inner) {
-  padding: 0 !important;
-  z-index: 999;
-}
 
 .popover_container {
   width: 757px;
@@ -313,7 +303,7 @@
   margin-bottom: 0px;
 }
 
-.popover_content:hover>.text_wrap>a {
+.popover_content:hover > .text_wrap > a {
   /* color: var(--text-color); */
   font-weight: 500;
 }
@@ -322,7 +312,7 @@
     filter: drop-shadow(1px 1px 2px black);
   } */
 
-.popover_content:hover>img {
+.popover_content:hover > img {
   filter: brightness(0);
 }
 
@@ -336,18 +326,18 @@
   justify-content: space-between;
 }
 
-.popover_header>span,
-.popover_header>a,
-.popover_header_inner>.popover_about_head,
-.popover_header_inner>.popover_about_head>a {
+.popover_header > span,
+.popover_header > a,
+.popover_header_inner > .popover_about_head,
+.popover_header_inner > .popover_about_head > a {
   color: var(--primary-color);
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 16px;
 }
 
-.popover_header>a,
-.popover_header_inner>.popover_about_head>a {
+.popover_header > a,
+.popover_header_inner > .popover_about_head > a {
   text-decoration: underline;
 }
 
@@ -357,11 +347,11 @@
   align-items: center;
 }
 
-.text_wrap>a {
+.text_wrap > a {
   font-size: 16px;
   font-weight: 500;
   color: #5e5e5e;
-  line-height: 18px
+  line-height: 18px;
 }
 
 .popover_back_explore {
@@ -372,21 +362,12 @@
 }
 
 @media screen and (max-width: 1010px) {
-  :global(.ant-popover) {
-    inset: 64px auto auto 6% !important;
-  }
-
   .popover_container {
     width: 657px;
   }
 }
 
 @media screen and (max-width: 720px) {
-  :global(.ant-popover) {
-    /* inset: 64px auto auto 1% !important; */
-    inset: 64px auto auto auto !important;
-  }
-
   .popover_container {
     width: 650px;
   }
@@ -401,15 +382,15 @@
     padding: 0px 16px;
   }
 
-  .popover_header>span,
-  .popover_header>a,
-  .popover_header_inner>.popover_about_head,
-  .popover_header_inner>.popover_about_head>a {
+  .popover_header > span,
+  .popover_header > a,
+  .popover_header_inner > .popover_about_head,
+  .popover_header_inner > .popover_about_head > a {
     font-size: 16px;
     font-weight: 600;
   }
 
-  .text_wrap>a {
+  .text_wrap > a {
     font-size: 14px;
     cursor: pointer;
     font-weight: 500;
@@ -418,11 +399,6 @@
 }
 
 @media screen and (max-width: 680px) {
-  :global(.ant-popover) {
-    inset: 64px auto auto 4% !important;
-    width: 92%;
-  }
-
   .popover_container {
     width: 550px;
   }
@@ -437,16 +413,16 @@
     padding: 0px 16px;
   }
 
-  .popover_header>span,
-  .popover_header>a,
-  .popover_header_inner>.popover_about_head,
-  .popover_header_inner>.popover_about_head>a {
+  .popover_header > span,
+  .popover_header > a,
+  .popover_header_inner > .popover_about_head,
+  .popover_header_inner > .popover_about_head > a {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
   }
 
-  .text_wrap>a {
+  .text_wrap > a {
     font-size: 14px;
     cursor: pointer;
     font-weight: 500;
@@ -455,11 +431,6 @@
 }
 
 @media screen and (max-width: 610px) {
-  :global(.ant-popover) {
-    inset: 64px auto auto 6% !important;
-    width: 60%;
-  }
-
   .popover_container {
     width: 100%;
     padding: 16px 0;
@@ -492,11 +463,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  :global(.ant-popover) {
-    inset: 64px auto auto 6% !important;
-    width: 80%;
-  }
-
   .popover_container {
     width: 100%;
     padding: 16px 0;
