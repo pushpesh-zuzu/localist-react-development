@@ -1,6 +1,8 @@
 .parentContainer {
   background-color: #f9f9fa;
   padding: 0px 20px;
+  position: relative;
+  z-index: 9999;
 }
 
 .container {
@@ -448,5 +450,6 @@
   border-radius: 3px;
   font-weight: 500;
   font-size: 20px;
+  min-width: 98px;
   vertical-align: middle;
 }

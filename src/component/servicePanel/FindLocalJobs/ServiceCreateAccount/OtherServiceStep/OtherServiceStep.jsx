@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   registerUserData,
   searchService,
-  setRegisterStep,
   setService,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
@@ -12,16 +11,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
-
-
-const OtherServiceStep = ({
-  nextStep,
-  prevStep,
-  handleInputChange,
-  formData,
-  setFormData,
-  
-}) => {
+const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const [Input, setInput] = useState("");
   const [selectedServices, setSelectedServices] = useState([]);
   const [show, setShow] = useState(false);
@@ -38,6 +28,7 @@ const OtherServiceStep = ({
         dispatch(searchService({ search: Input }));
       }
     }, 500);
+    window.scroll(0, 0);
 
     return () => {
       clearTimeout(delayDebounce);
@@ -76,8 +67,19 @@ const OtherServiceStep = ({
     }
   }, [selectedServices]);
 
+  useEffect(() => {
+    if (show) {
+      window.scroll(0, 0);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [show]);
+
   const handleSubmit = () => {
-   
     const serviceIds = selectedServices
       .map((service) => service.banner_title)
       .join(", ");
@@ -87,46 +89,39 @@ const OtherServiceStep = ({
       form_status: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
     };
-    dispatch(registerUserData(payload))
-      .then((result) => {
-        if (result?.success) {
-          showToast("info", result?.message || "Register successful!");
-          navigate("/dashboard");
-        } else {
-        }
-      })
-      .catch((error) => {
-        // showToast(
-        //   "error",
-        //   error?.response?.data?.message ||
-        //     "An error occurred. Please try again."
-        // );
-      });
+    dispatch(registerUserData(payload)).then((result) => {
+      if (result?.success) {
+        showToast("info", result?.message || "Register successful!");
+        navigate("/dashboard");
+      }
+    });
   };
- 
+
   const handleOpenModal = () => {
     if (!validateForm()) return;
     setShow(true);
   };
   const handleCloseModal = () => {
     setShow(false);
-
-    dispatch(setRegisterStep(3));
   };
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
-          <h2 className={styles.otherService_heading}>Add other services you can provide</h2>
+          <h2 className={styles.otherService_heading}>
+            Add other services you can provide
+          </h2>
           <p className={styles.subHeading}>Maximise your leads</p>
         </div>
 
         <div className={styles.card}>
           <p className={styles.label}>
             You've asked for leads for:{" "}
-            <div className={styles.serviceTag}>{item?.serviceTitle
+            <div className={styles.serviceTag}>
+              {item?.serviceTitle
                 ?.replace(/-/g, " ")
-                .replace(/\b\w/g, (char) => char.toUpperCase())}</div>
+                .replace(/\b\w/g, (char) => char.toUpperCase())}
+            </div>
           </p>
 
           <p className={styles.secondaryLabel}>
@@ -146,39 +141,6 @@ const OtherServiceStep = ({
             ))}
           </div>
 
-          {/* <div className={styles.searchInputContainer}>
-            <input
-              className={styles.searchInput}
-              placeholder="What service do you provide?"
-              onChange={(e) => {
-                setInput(e.target.value);
-                if (!e.target.value) {
-                  dispatch(setService([]));
-                }
-              }}
-              value={Input}
-            />
-
-            {service?.length > 0 && (
-              <div className={styles.searchResults}>
-                {searchServiceLoader ? (
-                  <Spin indicator={<LoadingOutlined spin />} />
-                ) : (
-                  <>
-                    {service.map((item) => (
-                      <p
-                        key={item.id}
-                        className={styles.searchItem}
-                        onClick={() => handleSelectService(item)}
-                      >
-                        {item.banner_title}
-                      </p>
-                    ))}
-                  </>
-                )}
-              </div>
-            )}
-          </div> */}
           <div className={styles.searchInputContainer}>
             <input
               className={styles.searchInput}
@@ -283,7 +245,15 @@ const OtherServiceStep = ({
                 Back
               </button>
               <button className={styles.continueButton} onClick={handleSubmit}>
-                {registerLoader ?  <Spin indicator={<LoadingOutlined spin style={{ color: "primary" }} />} /> :"Continue"}
+                {registerLoader ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "white" }} />
+                    }
+                  />
+                ) : (
+                  "Continue"
+                )}
               </button>
             </div>
           </div>

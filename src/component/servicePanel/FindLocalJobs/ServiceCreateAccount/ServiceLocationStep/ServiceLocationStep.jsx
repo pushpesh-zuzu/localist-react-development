@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.png";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
@@ -11,6 +11,9 @@ const ServiceLocationStep = ({
   errors,
 }) => {
   const [isNational, setIsNational] = useState(false);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <div className={styles.parentContainer}>

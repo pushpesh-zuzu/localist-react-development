@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRegisterStep } from "../../../../store/FindJobs/findJobSlice";
 
 const ServiceCreateAccount = () => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     miles1: "1 miles",
     postcode: "",
-    nation_wide:0,
+    nation_wide: 0,
     name: "",
     email: "",
     password: "",
@@ -29,13 +29,13 @@ const ServiceCreateAccount = () => {
     state: "",
     city: "",
     zipcode: "",
-    is_zipcode:"",
+    is_zipcode: "",
     apartment: "",
     service_id: "",
     auto_bid: 0,
     miles2: "1 miles",
   });
-const {registerStep} = useSelector((state)=> state.findJobs)
+  const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
 
   // Validation function
@@ -69,10 +69,10 @@ const {registerStep} = useSelector((state)=> state.findJobs)
       //   newErrors.is_zipcode = "Zipcode is required";
       // }
     }
-    if(registerStep === 4){
+    if (registerStep === 4) {
       if (!formData.miles2.trim()) newErrors.miles2 = "Miles is required";
-      if (!formData.service_id.trim()) newErrors.service_id = "Service Id is required";
-
+      if (!formData.service_id.trim())
+        newErrors.service_id = "Service Id is required";
     }
 
     setErrors(newErrors);
@@ -81,7 +81,7 @@ const {registerStep} = useSelector((state)=> state.findJobs)
 
   const handleInputChange = (e) => {
     const { name, type, checked } = e.target;
-    
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
@@ -93,9 +93,9 @@ const {registerStep} = useSelector((state)=> state.findJobs)
       dispatch(setRegisterStep(registerStep + 1));
     }
   };
-  const prevStep = () =>{dispatch(setRegisterStep(registerStep - 1))};
-
-
+  const prevStep = () => {
+    dispatch(setRegisterStep(registerStep - 1));
+  };
 
   // const handleCloseModal = () => setShowExitModal(false);
   // const handleExit = () => {
