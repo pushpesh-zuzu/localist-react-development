@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   registerUserData,
   searchService,
+  setselectedServices,
   setService,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
@@ -13,20 +14,22 @@ import { showToast } from "../../../../../utils";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const [Input, setInput] = useState("");
-  const [selectedServices, setSelectedServices] = useState([]);
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { popularList, service, registerLoader, searchServiceLoader } =
+  const { service, registerLoader, searchServiceLoader, selectedServices } =
     useSelector((state) => state.findJobs);
-  console.log(formData, "formData");
-
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
-        dispatch(searchService({ search: Input }));
+        dispatch(
+          searchService({
+            search: Input,
+            serviceid: formData?.service_id.toString(),
+          })
+        );
       }
     }, 500);
 
@@ -37,15 +40,17 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   }, [Input, dispatch]);
 
   const handleSelectService = (item) => {
-    if (!selectedServices.some((service) => service.id === item.id)) {
-      setSelectedServices((prev) => [...prev, item]);
+    if (!selectedServices?.some((service) => service.id === item.id)) {
+      dispatch(setselectedServices([...selectedServices, item]));
     }
     setInput("");
     dispatch(setService([]));
   };
 
   const handleRemoveService = (id) => {
-    setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+    dispatch(
+      setselectedServices((prev) => prev.filter((service) => service.id !== id))
+    );
   };
   const validateForm = () => {
     let newErrors = {};
@@ -76,12 +81,25 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   }, [show]);
 
   const handleSubmit = () => {
-    const serviceIds = selectedServices.map((service) => service.id).join(", ");
+    // Ensure selectedServices is an array and map IDs
+    const serviceIds = Array.isArray(selectedServices)
+      ? selectedServices.map((service) => service.id).filter(Boolean) // Remove empty values
+      : [];
 
-    const formatedData = [...formData?.service_id, ...serviceIds];
+    // Ensure formData.service_id is an array and clean it
+    const existingServiceIds = Array.isArray(formData?.service_id)
+      ? formData.service_id.filter(Boolean) // Remove empty values
+      : [];
 
-    const serviceCategoryData = formatedData?.join(", ");
+    // Merge both arrays and remove duplicates
+    const combinedServiceIds = [
+      ...new Set([...existingServiceIds, ...serviceIds]),
+    ];
 
+    // Convert array to a comma-separated string
+    const serviceCategoryData = combinedServiceIds.join(", ");
+
+    // Create final payload
     const payload = {
       ...formData,
       service_id: serviceCategoryData,
@@ -91,6 +109,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       loggedUser: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
     };
+
     dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("info", result?.message || "Register successful!");
@@ -176,9 +195,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               </div>
             )}
           </div>
-          {/* {errors.service_id && (
-            <p className={styles.errorText}>{errors.service_id}</p>
-          )} */}
+         
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -197,13 +214,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               value={formData?.miles2}
               onChange={handleInputChange}
             >
-              <option>1 </option>
-              <option>2 </option>
-              <option>5 </option>
-              <option>10 </option>
-              <option>30 </option>
-              <option>50 </option>
-              <option>100 </option>
+              <option>1</option>
+              <option>2</option>
+              <option>5</option>
+              <option>10</option>
+              <option>30</option>
+              <option>50</option>
+              <option>100</option>
             </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>

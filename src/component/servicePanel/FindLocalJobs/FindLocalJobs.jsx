@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
+import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
@@ -31,7 +32,7 @@ const FindLocalJobs = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
-        dispatch(searchService({ search: Input }));
+        dispatch(searchService({ search: Input}));
       }
     }, 500);
 
@@ -116,7 +117,7 @@ const FindLocalJobs = () => {
                 onClick={() => handleServiceClick(service)}
               >
                 <img
-                  src={`${service?.baseurl}/${service?.category_icon}`}
+                  src={service?.category_icon ? `${service?.baseurl}/${service?.category_icon}` : hiring} 
                   alt={service.title}
                 />
                 <span>{service.name}</span>

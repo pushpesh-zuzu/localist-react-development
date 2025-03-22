@@ -10,10 +10,6 @@ const ServiceLocationStep = ({
   setFormData,
   errors,
 }) => {
-  
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
 
   return (
     <div className={styles.parentContainer}>
