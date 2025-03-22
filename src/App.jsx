@@ -8,24 +8,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUserData } from "./store/FindJobs/findJobSlice";
 
 function App() {
+  const { selectedServiceFormData } = useSelector((state) => state.findJobs);
 
-// useEffect(() => {
-//   const handleBeforeUnload = (event) => {
-//     navigator.sendBeacon(
-//       "https://localists.zuzucodes.com/admin/api/users/registration", 
-//       JSON.stringify({
-//         form_status: 0, 
-//         formData: selectedServiceFormData 
-//       })
-//     );
-//   };
-  
-//   window.addEventListener("beforeunload", handleBeforeUnload);
-  
-//   return () => {
-//     window.removeEventListener("beforeunload", handleBeforeUnload);
-//   };
-// }, [selectedServiceFormData]);
+useEffect(() => {
+  // Only set up the event handler if at least step 3 is completed
+  if (registerUserData >= 3) {
+    const handleBeforeUnload = (event) => {
+      navigator.sendBeacon(
+        "https://localists.zuzucodes.com/admin/api/users/registration", 
+        JSON.stringify({
+          form_status: 0, 
+          formData: selectedServiceFormData 
+        })
+      );
+    };
+    
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }
+}, [registerUserData, selectedServiceFormData]);
 
 // const { selectedServiceFormData } = useSelector((state) => state.findJobs);
 // const dispatch = useDispatch();

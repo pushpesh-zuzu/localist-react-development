@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.png";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
+import { setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
+import { useDispatch } from "react-redux";
 
 const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormData, errors }) => {
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
   const [pincode, setPincode] = useState("");
 
   useEffect(() => {
@@ -21,39 +24,42 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
         initAutocomplete();
       }
     };
-
+  
     // Initialize Google Autocomplete
     const initAutocomplete = () => {
       if (!inputRef.current) return;
-
+  
       const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
         types: ["geocode"],
         componentRestrictions: { country: "IN" }, // Restrict to India
       });
-
+  
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
-
+  
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-
+  
         if (postalCode) {
-          setPincode(postalCode);
-          setFormData((prev) => ({ ...prev, postcode: postalCode }));
+          // dispatch(setSelectedServiceFormData(postalCode));
+  
+          // ✅ Update Input Field with Selected Postal Code
+         dispatch ( setFormData({ postcode: postalCode }));
+          inputRef.current.value = postalCode; // Update input value
         } else {
           alert("No PIN code found! Please try again.");
-          setPincode("");
         }
       });
     };
-
+  
     loadGoogleMapsScript();
-  }, [setFormData]);
+  }, [setFormData,formData]);
+  
 
   return (
     <div className={styles.parentContainer}>
@@ -94,7 +100,7 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
                 ref={inputRef}
                 name="postcode"
                 value={formData.postcode}
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
               />
               {errors.postcode && <p className={styles.errorText}>{errors.postcode}</p>}
             </div>
