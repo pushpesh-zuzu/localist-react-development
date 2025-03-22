@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch } from "react-redux";
-import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 
 const ServiceBusinessAddressStep = ({
   nextStep,
@@ -12,9 +11,8 @@ const ServiceBusinessAddressStep = ({
   errors,
 }) => {
   
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
+
+  const dispatch = useDispatch()
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>
@@ -74,15 +72,15 @@ const ServiceBusinessAddressStep = ({
               <div className={styles.toggleGroup}>
   <button
     type="button"
-    className={formData?.is_zipcode === 1 ? styles.activeButton : styles.toggleButton}
-    onClick={() => setFormData((prev) => ({ ...prev,  is_zipcode: 1, zipcode: "" }))}
+    className={formData?.is_zipcode == 1 ? styles.activeButton : styles.toggleButton}
+    onClick={() => dispatch(setFormData({ is_zipcode: 1, zipcode: "" }))}
   >
     Yes
   </button>
   <button
     type="button"
-    className={formData?.is_zipcode === 0 ? styles.activeButton : styles.toggleButton}
-    onClick={() => setFormData((prev) => ({ ...prev, is_zipcode: 0, zipcode: "" }))}
+    className={formData?.is_zipcode == 0 ? styles.activeButton : styles.toggleButton}
+    onClick={() => dispatch(setFormData({ is_zipcode: 0, zipcode: "" }))}
   >
     No
   </button>
@@ -92,17 +90,27 @@ const ServiceBusinessAddressStep = ({
 {formData?.is_zipcode !== 0 && (
   <div className={styles.labelInputWrapper}>
     <input
-      type="text"
+      type="number"
       placeholder="Zip Code"
       className={styles.input}
+      style={{
+        appearance: "textfield",
+        MozAppearance: "textfield",
+        WebkitAppearance: "none"
+      }}
       name="zipcode"
       value={formData.zipcode || ""}
-      onChange={(e) => setFormData((prev) => ({ ...prev, zipcode: e.target.value }))}
+      onChange={(e) =>
+        dispatch(setFormData({
+          ...formData, 
+          zipcode: e.target.value, 
+        }))
+      }
     />
   </div>
 )}
 
-            {formData?.zipcode === 1 && (
+            {/* {formData?.zipcode === 1 && (
               <div className={styles.labelInputWrapper}>
                 <input
                   type="text"
@@ -111,14 +119,14 @@ const ServiceBusinessAddressStep = ({
                   name="is_zipcode"
                   value={formData.is_zipcode || ""}
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      is_zipcode: e.target.value,
+                    dispatch(setFormData({
+                      ...formData, 
+                      is_zipcode: e.target.value, 
                     }))
                   }
                 />
               </div>
-            )}
+            )} */}
 
             <div className={styles.buttonContainer}>
               <button

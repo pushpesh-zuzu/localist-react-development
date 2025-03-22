@@ -29,7 +29,6 @@ const LoginPage = () => {
         }
       })
       .catch((error) => {
-        console.log(error,"resu")
         showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
       });
   };

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   registerUserData,
   searchService,
+  setselectedServices,
   setService,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
@@ -13,23 +14,20 @@ import { showToast } from "../../../../../utils";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const [Input, setInput] = useState("");
-  const [selectedServices, setSelectedServices] = useState([]);
+  // const [selectedServices, setSelectedServices] = useState([]);
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { popularList, service, registerLoader, searchServiceLoader } =
+  const { service, registerLoader, searchServiceLoader,selectedServices } =
     useSelector((state) => state.findJobs);
-  console.log(formData, "formData");
-
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
-        dispatch(searchService({ search: Input }));
+        dispatch(searchService({ search: Input,serviceid: formData?.service_id.toString() }));
       }
     }, 500);
-    window.scroll(0, 0);
 
     return () => {
       clearTimeout(delayDebounce);
@@ -38,15 +36,15 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   }, [Input, dispatch]);
 
   const handleSelectService = (item) => {
-    if (!selectedServices.some((service) => service.id === item.id)) {
-      setSelectedServices((prev) => [...prev, item]);
+    if (!selectedServices?.some((service) => service.id === item.id)) {
+      dispatch(setselectedServices([...selectedServices, item]));
     }
     setInput("");
     dispatch(setService([]));
   };
 
   const handleRemoveService = (id) => {
-    setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+    dispatch(setselectedServices((prev) => prev.filter((service) => service.id !== id)));
   };
   const validateForm = () => {
     let newErrors = {};
@@ -63,7 +61,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       setErrors((prev) => ({ ...prev, service_id: undefined }));
     }
   }, [selectedServices]);
-
+ 
   useEffect(() => {
     if (show) {
       window.scroll(0, 0);
@@ -76,18 +74,59 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
     };
   }, [show]);
 
+  // const handleSubmit = () => {
+
+  //   // const serviceIds = selectedServices?.map((service) => service.id)
+  //   //   .join(", ");
+
+   
+  //   // const formatedData = [...formData?.service_id, ...serviceIds]
+
+
+  //   // const serviceCategoryData = formatedData?.join(", ")
+  //   const serviceIds = Array.isArray(selectedServices)
+  //   ? selectedServices?.map((service) => service.id).join(", ")
+  //   : "";
+  //   const formatedData = Array.isArray(formData?.service_id)
+  //   ? [...formData.service_id, ...serviceIds]
+  //   : [serviceIds];
+
+  // const serviceCategoryData = formatedData?.join(", ");
+
+  //   const payload = {
+  //     ...formData,
+  //     service_id: serviceCategoryData,
+  //     form_status: 1,
+  //     user_type: 1,
+  //     active_status: 1,
+  //     loggedUser: 1,
+  //     nation_wide: formData.nation_wide ? 1 : 0,
+  //   };
+  //   dispatch(registerUserData(payload)).then((result) => {
+  //     if (result?.success) {
+  //       showToast("info", result?.message || "Register successful!");
+  //       navigate("/dashboard");
+  //     }
+  //   });
+  // };
   const handleSubmit = () => {
-
-    const serviceIds = selectedServices
-      .map((service) => service.id)
-      .join(", ");
-
-
-    const formatedData = [...formData?.service_id, ...serviceIds]
-
-
-    const serviceCategoryData = formatedData?.join(", ")
-
+    // Ensure selectedServices is an array and map IDs
+    const serviceIds = Array.isArray(selectedServices)
+      ? selectedServices.map((service) => service.id).filter(Boolean) // Remove empty values
+      : [];
+  
+    // Ensure formData.service_id is an array and clean it
+    const existingServiceIds = Array.isArray(formData?.service_id)
+      ? formData.service_id.filter(Boolean) // Remove empty values
+      : [];
+  
+    // Merge both arrays and remove duplicates
+    const combinedServiceIds = [...new Set([...existingServiceIds, ...serviceIds])];
+  
+    // Convert array to a comma-separated string
+    const serviceCategoryData = combinedServiceIds.join(", ");
+  
+    // Create final payload
     const payload = {
       ...formData,
       service_id: serviceCategoryData,
@@ -97,6 +136,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       loggedUser: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
     };
+  
     dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("info", result?.message || "Register successful!");
@@ -104,7 +144,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       }
     });
   };
-
+  
   const handleOpenModal = () => {
     if (!validateForm()) return;
     setShow(true);
@@ -138,7 +178,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
           <div className={styles.selectedServices}>
             {selectedServices.map((service) => (
               <span key={service.id} className={styles.selectedTag}>
-                {service.banner_title}
+                {service.name}
                 <button
                   className={styles.removeBtn}
                   onClick={() => handleRemoveService(service.id)}
@@ -174,7 +214,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
                         className={styles.searchItem}
                         onClick={() => handleSelectService(item)}
                       >
-                        {item.banner_title}
+                        {item.name}
                       </p>
                     ))}
                   </>
@@ -203,13 +243,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               value={formData?.miles2}
               onChange={handleInputChange}
             >
-              <option>1 miles</option>
-              <option>2 miles</option>
-              <option>5 miles</option>
-              <option>10 miles</option>
-              <option>30 miles</option>
-              <option>50 miles</option>
-              <option>100 miles</option>
+              <option>1</option>
+              <option>2</option>
+              <option>5</option>
+              <option>10</option>
+              <option>30</option>
+              <option>50</option>
+              <option>100</option>
             </select>
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>

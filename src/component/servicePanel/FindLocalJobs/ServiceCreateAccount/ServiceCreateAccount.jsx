@@ -5,36 +5,38 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterStep } from "../../../../store/FindJobs/findJobSlice";
+import { setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
 
 const ServiceCreateAccount = () => {
   const dispatch = useDispatch();
-  const { selectedServiceId } = useSelector((state) => state.findJobs);
-  const [formData, setFormData] = useState({
-    miles1: "1",
-    postcode: null,
-    nation_wide: 0,
-    name: "",
-    email: "",
-    password: "",
-    phone: "",
-    company_name: "",
-    company_size: null,
-    company_sales_team: null,
-    company_website: 1,
-    is_company_website: "",
-    new_jobs: null,
-    social_media: null,
-    address: "",
-    state: "",
-    city: "",
-    zipcode: "",
-    is_zipcode: 1,
-    suite: "",
-    service_id: [selectedServiceId],
-    auto_bid: 0,
-    miles2: "1",
-  });
+  const { selectedServiceId, selectedServiceFormData } = useSelector((state) => state.findJobs);
+  
+  // const [formData, setFormData] = useState({
+  //   miles1: "1",
+  //   postcode: null,
+  //   nation_wide: 0,
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   phone: "",
+  //   company_name: "",
+  //   company_size: null,
+  //   company_sales_team: null,
+  //   company_website: 1,
+  //   is_company_website: "",
+  //   new_jobs: null,
+  //   social_media: null,
+  //   address: "",
+  //   state: "",
+  //   city: "",
+  //   zipcode: "",
+  //   is_zipcode: 1,
+  //   suite: "",
+  //   service_id: [selectedServiceId],
+  //   auto_bid: 0,
+  //   miles2: "1",
+  // });
+
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
 
@@ -43,22 +45,22 @@ const ServiceCreateAccount = () => {
     let newErrors = {};
 
     if (registerStep === 1) {
-      if (!formData.miles1.trim()) newErrors.miles1 = "Miles is required";
-      if (!formData.postcode.trim())
+      if (!selectedServiceFormData.miles1 || !selectedServiceFormData.miles1.trim()) newErrors.miles1 = "Miles is required";
+      if (!selectedServiceFormData.postcode || !selectedServiceFormData.postcode.trim()) 
         newErrors.postcode = "Postcode is required";
     }
 
     if (registerStep === 2) {
-      if (!formData.name.trim()) newErrors.name = "Name is required";
+      if (!selectedServiceFormData.name || !selectedServiceFormData.name.trim()) newErrors.name = "Name is required";
       // if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
-      if (!formData.email.trim()) {
+      if (!selectedServiceFormData.email || !selectedServiceFormData.email.trim()) {
         newErrors.email = "Email is required";
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      } else if (!/\S+@\S+\.\S+/.test(selectedServiceFormData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if (!formData.password.trim()) {
+      if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
         newErrors.password = "Password is required";
-      } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(formData.password)) {
+      } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(selectedServiceFormData.password)) {
         newErrors.password = "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
       }
     }
@@ -72,8 +74,8 @@ const ServiceCreateAccount = () => {
       // }
     }
     if (registerStep === 4) {
-      if (!formData.miles2.trim()) newErrors.miles2 = "Miles is required";
-      if (!formData.service_id.trim())
+      if (!selectedServiceFormData.miles2 || !selectedServiceFormData.miles2.trim()) newErrors.miles2 = "Miles is required";
+      if (!selectedServiceFormData.service_id || !selectedServiceFormData.service_id.trim())
         newErrors.service_id = "Service Id is required";
     }
 
@@ -84,21 +86,26 @@ const ServiceCreateAccount = () => {
   const handleInputChange = (e) => {
     const { name, type, checked } = e.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
+    // dispatch(setSelectedServiceFormData((prevData) => ({
+    //   ...prevData,
+    //   [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
+    // })));
+    dispatch(setSelectedServiceFormData({
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
     }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); // Clear error when user types
   };
   const nextStep = () => {
+    window.scrollTo(0, 0);
     if (validateStep()) {
       dispatch(setRegisterStep(registerStep + 1));
     }
+  
   };
   const prevStep = () => {
     dispatch(setRegisterStep(registerStep - 1));
   };
-
+ 
 
 
   return (
@@ -107,8 +114,8 @@ const ServiceCreateAccount = () => {
         {registerStep === 1 && (
           <ServiceLocationStep
             nextStep={nextStep}
-            setFormData={setFormData}
-            formData={formData}
+            setFormData={setSelectedServiceFormData}
+            formData={selectedServiceFormData}
             handleInputChange={handleInputChange}
             errors={errors}
           />
@@ -116,8 +123,8 @@ const ServiceCreateAccount = () => {
         {registerStep === 2 && (
           <ServiceDetailsStep
             nextStep={nextStep}
-            setFormData={setFormData}
-            formData={formData}
+            setFormData={setSelectedServiceFormData}
+            formData={selectedServiceFormData}
             prevStep={prevStep}
             handleInputChange={handleInputChange}
             errors={errors}
@@ -126,8 +133,8 @@ const ServiceCreateAccount = () => {
         {registerStep === 3 && (
           <ServiceBusinessAddressStep
             prevStep={prevStep}
-            setFormData={setFormData}
-            formData={formData}
+            setFormData={setSelectedServiceFormData}
+            formData={selectedServiceFormData}
             nextStep={nextStep}
             handleInputChange={handleInputChange}
             errors={errors}
@@ -136,8 +143,8 @@ const ServiceCreateAccount = () => {
         {registerStep === 4 && (
           <OtherServiceStep
             prevStep={prevStep}
-            setFormData={setFormData}
-            formData={formData}
+            setFormData={setSelectedServiceFormData}
+            formData={selectedServiceFormData}
             handleInputChange={handleInputChange}
             errors={errors}
           />

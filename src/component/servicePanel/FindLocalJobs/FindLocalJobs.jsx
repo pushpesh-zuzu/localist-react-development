@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
+import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
@@ -20,7 +21,7 @@ const FindLocalJobs = () => {
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const handleServiceClick = (service) => {
-    const slug = generateSlug(service.banner_title);
+    const slug = generateSlug(service.name);
     dispatch(setSelectedServiceId(service.id));
     navigate(`/sellers/create-account/${slug}`);
   };
@@ -31,19 +32,19 @@ const FindLocalJobs = () => {
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
-        dispatch(searchService({ search: Input }));
+        dispatch(searchService({ search: Input}));
       }
     }, 500);
 
     return () => clearTimeout(delayDebounce);
   }, [Input, dispatch]);
   const handleSelectService = (item) => {
-    setInput(item.banner_title);
+    setInput(item.name);
     setSelectedService(item);
   };
   const handleGetStarted = () => {
     if (selectedService) {
-      const slug = generateSlug(selectedService.banner_title);
+      const slug = generateSlug(selectedService.name);
       dispatch(setSelectedServiceId(selectedService.id));
       navigate(`/sellers/create-account/${slug}`);
     }
@@ -87,7 +88,7 @@ const FindLocalJobs = () => {
                       className={styles.searchItem}
                       onClick={() => handleSelectService(item)}
                     >
-                      {item.banner_title}
+                      {item.name}
                     </p>
                   ))}
                 </>
@@ -116,10 +117,10 @@ const FindLocalJobs = () => {
                 onClick={() => handleServiceClick(service)}
               >
                 <img
-                  src={`${service?.baseurl}/${service?.category_icon}`}
+                  src={service?.category_icon ? `${service?.baseurl}/${service?.category_icon}` : hiring} 
                   alt={service.title}
                 />
-                <span>{service.banner_title}</span>
+                <span>{service.name}</span>
               </div>
             ))}
           </div>

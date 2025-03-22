@@ -11,6 +11,33 @@ const initialState = {
   registerStep: 1,
   registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null,
   selectedServiceId: null,
+  selectedServices:[],
+  selectedServiceFormData:{
+    miles1: "1",
+    postcode: null,
+    nation_wide: 0,
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    company_name: "",
+    company_size: null,
+    company_sales_team: null,
+    company_website: "",
+    is_company_website: 1,
+    new_jobs: null,
+    social_media: null,
+    address: "",
+    state: "",
+    city: "",
+    zipcode: "",
+    is_zipcode: 1,
+    suite: "",
+    service_id: [],
+    auto_bid: 0,
+    miles2: "1",
+  },
+  
 };
 export const getPopularServiceList = () => {
   return async (dispatch) => {
@@ -18,8 +45,6 @@ export const getPopularServiceList = () => {
     try {
       const response = await axiosInstance.get(`popular-services`);
       if (response) {
-        console.log(response, "response");
-
         dispatch(setPopularList(response?.data?.data));
       }
     } catch (error) {
@@ -111,7 +136,17 @@ const findJobSlice = createSlice({
     },
     setSelectedServiceId(state, action) {
       state.selectedServiceId = action.payload;
-    }
+      state.selectedServiceFormData.service_id = [action.payload]
+    },
+    setSelectedServiceFormData(state, action) {
+      state.selectedServiceFormData =  { ...state.selectedServiceFormData, ...action.payload };
+    },
+    setselectedServices(state, action) {
+      state.selectedServices = action.payload;
+    },
+    // clearSelectedServices: (state) => {
+    //   state.selectedServices = [];
+    // },
   },
 });
 
@@ -124,5 +159,7 @@ export const {
   setRegisterStep,
   setRegisterToken,
   setSelectedServiceId,
+  setSelectedServiceFormData,
+  setselectedServices
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

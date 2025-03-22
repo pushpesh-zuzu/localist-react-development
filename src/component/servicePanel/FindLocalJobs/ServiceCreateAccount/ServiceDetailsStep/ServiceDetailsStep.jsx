@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -11,14 +12,8 @@ const ServiceDetailsStep = ({
   setFormData,
   errors,
 }) => {
-  // const handleSubmit = () => {
-  //   dispatch(registerUserData(formData));
-  //   nextStep();
-  // };
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
   return (
     <>
       <div className={styles.pageContainer}>
@@ -93,7 +88,7 @@ const ServiceDetailsStep = ({
                   value={formData.password}
                   onChange={handleInputChange}
                 />
-                {/* Eye icon for toggling password */}
+              
                 <span
                   onClick={() => setShowPassword(!showPassword)}
                   style={{
@@ -173,15 +168,12 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === 1
+                      formData.is_company_website == 1
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        company_website: 1,
-                      }))
+                      dispatch(setFormData({ is_company_website: 1,company_website:"" }))
                     }
                   >
                     Yes
@@ -189,34 +181,33 @@ const ServiceDetailsStep = ({
                   <button
                     type="button"
                     className={
-                      formData.company_website === 0
+                      formData.is_company_website == 0
                         ? styles.activeButton
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData({ ...formData, company_website: 0 })
+                      dispatch(setFormData({ is_company_website: 0,company_website:"" })) 
                     }
                   >
                     No
                   </button>
                 </div>
               </div>
-              {formData.company_website !== 0 && (
+              {formData.is_company_website === 1 && (
                 <input
                   type="text"
                   className={styles.input}
                   name="company_website"
                   placeholder="Website address (optional)"
                   value={
-                    formData.is_company_website !== "Yes"
-                      ? formData.is_company_website
+                    formData.company_website != 1
+                      ? formData.company_website
                       : ""
                   }
                   onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      company_website: e.target.value,
-                    }))
+                   dispatch( setFormData({
+                    company_website: e.target.value,
+                  }))
                   }
                 />
               )}
@@ -236,7 +227,7 @@ const ServiceDetailsStep = ({
                           : styles.optionButton
                       }
                       onClick={() =>
-                        setFormData((prev) => ({ ...prev, new_jobs: count }))
+                       dispatch( setFormData({  new_jobs: count }))
                       }
                     >
                       {count}
@@ -266,7 +257,7 @@ const ServiceDetailsStep = ({
                           : styles.optionButton
                       }
                       onClick={() =>
-                        setFormData((prev) => ({ ...prev, company_size: size }))
+                       dispatch( setFormData({ company_size: size }))
                       }
                     >
                       {size}
@@ -291,8 +282,8 @@ const ServiceDetailsStep = ({
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
+                     dispatch( setFormData( {
+                    
                         company_sales_team: 1,
                       }))
                     }
@@ -307,8 +298,8 @@ const ServiceDetailsStep = ({
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData((prev) => ({
-                        ...prev,
+                      dispatch(setFormData({
+                      
                         company_sales_team: 0,
                       }))
                     }
@@ -333,8 +324,8 @@ const ServiceDetailsStep = ({
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData((prev) => ({ ...prev, social_media: 1 }))
-                    }
+                     dispatch( setFormData({  social_media: 1 })
+                    )}
                   >
                     Yes
                   </button>
@@ -346,7 +337,7 @@ const ServiceDetailsStep = ({
                         : styles.toggleButton
                     }
                     onClick={() =>
-                      setFormData((prev) => ({ ...prev, social_media: 0 }))
+                     dispatch( setFormData({ social_media: 0 }))
                     }
                   >
                     No
