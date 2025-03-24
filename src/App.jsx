@@ -43,12 +43,12 @@ function App() {
         formData.append('suite', selectedServiceFormData.suite);
         formData.append('service_id', selectedServiceFormData.service_id);
         formData.append('auto_bid', selectedServiceFormData.auto_bid);
-        formData.append('active_status', selectedServiceFormData.active_status);
+        formData.append('active_status', 1);
         formData.append('miles2', selectedServiceFormData.miles2);
-        formData.append('user_type', selectedServiceFormData.user_type);
-        formData.append('user_type', selectedServiceFormData.user_type);
-        formData.append('loggedUser', selectedServiceFormData.loggedUser);
-      formData.append('nation_wide', selectedServiceFormData.nation_wide);
+        formData.append('user_type', 1);
+        formData.append('user_type', 1);
+        formData.append('loggedUser', 1);
+      formData.append('nation_wide', nation_window ? 1 : 0);
         formData.append('form_status', 0);
 
         // FormData needs to be sent as-is for multipart/form-data
