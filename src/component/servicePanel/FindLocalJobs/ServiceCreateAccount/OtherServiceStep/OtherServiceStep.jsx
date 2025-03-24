@@ -256,7 +256,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h2 className={styles.heading}>
-              Are you sure that you want to leave?
+              Are you sure that you want to Register?
             </h2>
             <p className={styles.description}>
               We're asking a few questions so we can find you the right pros,

@@ -77,7 +77,7 @@ const LoginPage = () => {
       <div className="bottom-links">
         <Text>
           Offering a service?{" "}
-          <Link to="/register-professional">Join as a professional</Link>
+          <Link to="/sellers/create/">Join as a professional</Link>
         </Text>
         <br />
         <Text>
