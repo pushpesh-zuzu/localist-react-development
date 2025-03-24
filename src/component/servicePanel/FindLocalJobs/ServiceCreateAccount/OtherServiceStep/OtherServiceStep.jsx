@@ -49,7 +49,9 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
 
   const handleRemoveService = (id) => {
     dispatch(
-      setselectedServices((prev) => prev.filter((service) => service.id !== id))
+      setselectedServices(
+        selectedServices?.filter((service) => service.id !== id)
+      )
     );
   };
   const validateForm = () => {
@@ -83,7 +85,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const handleSubmit = () => {
     // Ensure selectedServices is an array and map IDs
     const serviceIds = Array.isArray(selectedServices)
-      ? selectedServices.map((service) => service.id).filter(Boolean) // Remove empty values
+      ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
       : [];
 
     // Ensure formData.service_id is an array and clean it
@@ -149,17 +151,18 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
             We will also show you leads from
           </p>
           <div className={styles.selectedServices}>
-            {selectedServices.map((service) => (
-              <span key={service.id} className={styles.selectedTag}>
-                {service.name}
-                <button
-                  className={styles.removeBtn}
-                  onClick={() => handleRemoveService(service.id)}
-                >
-                  ✕
-                </button>
-              </span>
-            ))}
+            {selectedServices?.length > 0 &&
+              selectedServices.map((service) => (
+                <span key={service.id} className={styles.selectedTag}>
+                  {service.name}
+                  <button
+                    className={styles.removeBtn}
+                    onClick={() => handleRemoveService(service.id)}
+                  >
+                    ✕
+                  </button>
+                </span>
+              ))}
           </div>
 
           <div className={styles.searchInputContainer}>
@@ -195,7 +198,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               </div>
             )}
           </div>
-         
+
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"

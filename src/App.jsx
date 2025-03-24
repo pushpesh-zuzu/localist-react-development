@@ -27,6 +27,28 @@ function App() {
         formData.append('password', selectedServiceFormData.password);
         formData.append('postcode', selectedServiceFormData.postcode);
         formData.append('miles1', selectedServiceFormData.miles1);
+        formData.append('phone', selectedServiceFormData.phone);
+        formData.append('company_name', selectedServiceFormData.company_name);
+        formData.append('company_size', selectedServiceFormData.company_size);
+        formData.append('company_sales_team', selectedServiceFormData.company_sales_team);
+        formData.append('company_website', selectedServiceFormData.company_website);
+        formData.append('is_company_website', selectedServiceFormData.is_company_website);
+        formData.append('new_jobs', selectedServiceFormData.new_jobs);
+        formData.append('social_media', selectedServiceFormData.social_media);
+        formData.append('address', selectedServiceFormData.address);
+        formData.append('state', selectedServiceFormData.state);
+        formData.append('city', selectedServiceFormData.city);
+        formData.append('zipcode', selectedServiceFormData.zipcode);
+        formData.append('is_zipcode', selectedServiceFormData.is_zipcode);
+        formData.append('suite', selectedServiceFormData.suite);
+        formData.append('service_id', selectedServiceFormData.service_id);
+        formData.append('auto_bid', selectedServiceFormData.auto_bid);
+        formData.append('active_status', selectedServiceFormData.active_status);
+        formData.append('miles2', selectedServiceFormData.miles2);
+        formData.append('user_type', selectedServiceFormData.user_type);
+        formData.append('user_type', selectedServiceFormData.user_type);
+        formData.append('loggedUser', selectedServiceFormData.loggedUser);
+      formData.append('nation_wide', selectedServiceFormData.nation_wide);
         formData.append('form_status', 0);
 
         // FormData needs to be sent as-is for multipart/form-data
