@@ -42,7 +42,7 @@
   padding: 37px 50px;
   border-radius: 8px;
   width: -webkit-fill-available;
-  max-width: 459px;
+  max-width: 563px;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -53,7 +53,8 @@
   margin-bottom: 39px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .serviceTag {
@@ -77,6 +78,7 @@
 
 .selectedServices {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
   margin-bottom: 10px;
 }
