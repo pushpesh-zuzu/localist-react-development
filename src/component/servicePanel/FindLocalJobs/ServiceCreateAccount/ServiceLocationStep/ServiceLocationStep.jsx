@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
-import iIcon from "../../../../../assets/Images/iIcon.png";
+import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
 import { setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";

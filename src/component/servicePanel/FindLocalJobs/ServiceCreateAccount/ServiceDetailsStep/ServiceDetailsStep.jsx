@@ -182,7 +182,7 @@ const ServiceDetailsStep = ({
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
-                  Estimated number of new jobs per month
+                What is the estimated number of new jobs per month you would like to help grow your business?
                 </label>
                 <div className={styles.optionGroup}>
                   {["1-5", "6-10", "10-20", "20-30", "30+"].map((count) => (
