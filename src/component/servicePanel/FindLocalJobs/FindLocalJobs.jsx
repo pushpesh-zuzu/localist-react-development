@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getPopularServiceList,
   searchService,
+  setRegisterStep,
   setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
@@ -27,7 +28,10 @@ const FindLocalJobs = () => {
   };
   useEffect(() => {
     dispatch(getPopularServiceList());
-    return () => dispatch(setService([]));
+    return () => {
+      dispatch(setService([])); 
+      
+    };
   }, []);
   useEffect(() => {
     const delayDebounce = setTimeout(() => {

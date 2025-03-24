@@ -11,7 +11,7 @@ const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
-  const {selectedServiceId} = useSelector((state) => state.findJobs);
+  const {selectedServiceId,registerToken,registerData} = useSelector((state) => state.findJobs);
   const {serviceTitle} = useParams();
  
   const handleLoginPage = () => {
@@ -42,7 +42,7 @@ const LogSwitch = () => {
         <input placeholder="Search for a service" />
         <img src={searchIcon} alt="search-icon" />
       </div>
-      {userToken ? (
+      {(registerToken || userToken) ? (
         <Popover
           content={
             <div className={styles.logoutBtn} onClick={() => handleLogout()}>
@@ -51,7 +51,7 @@ const LogSwitch = () => {
           }
           trigger="hover"
         >
-          <div className={styles.loginBtn}>{userToken?.name}</div>
+          <div className={styles.loginBtn}>{userToken ? userToken?.name : registerData?.name}</div>
         </Popover>
       ) : (
        <div className={styles.logsBtns}>
