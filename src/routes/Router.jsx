@@ -7,14 +7,11 @@ import Category from "../pages/Category";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import LocationPage from "../pages/LocationPage";
 import HowItWorksPage from "../pages/HowItWorksPage";
-import ServicePanel from "../component/servicePanel";
 import ServicePanelPage from "../pages/ServicePanelPage";
 import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/ServiceCreateAccount/ServiceCreateAccount";
 import Dashboard from "../component/dashboard/dashboard";
 import ProtectedRoute from "./Protected";
-
-
-
+import BuyerPanelPage from "../pages/BuyerPanelPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +29,7 @@ const router = createBrowserRouter([
         path: "/sellers/create-account/:serviceTitle",
         element: <ServiceCreateAccount />,
       },
+      { path: "/buyers/create", element: <BuyerPanelPage /> },
       {
         path: "/dashboard",
         element: (
@@ -42,8 +40,6 @@ const router = createBrowserRouter([
       },
 
       { path: "*", element: <NotFound /> },
-     
-     
     ],
   },
 ]);
