@@ -149,7 +149,6 @@ const serviceData = [
   { title: "House Cleaning", image: houseCleaning },
   { title: "Web Design", image: webDesign },
   { title: "Gardening", image: gardening },
-  { title: "House Cleaning", image: houseCleaning },
 ];
 function AutoplayPlugin(slider) {
   let timeout;

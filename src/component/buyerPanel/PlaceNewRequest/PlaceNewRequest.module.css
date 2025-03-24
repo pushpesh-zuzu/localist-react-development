@@ -97,6 +97,10 @@
     padding: 30px;
   }
 
+  .header {
+    margin-bottom: 26px;
+  }
+
   .heading {
     font-size: 22px;
     margin-bottom: 25px;
@@ -124,6 +128,10 @@
 
   .card {
     padding: 20px;
+  }
+
+  .header {
+    margin-bottom: 26px;
   }
 
   .heading {
