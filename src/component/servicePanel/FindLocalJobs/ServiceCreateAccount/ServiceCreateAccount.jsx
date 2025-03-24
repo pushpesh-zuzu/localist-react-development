@@ -20,7 +20,7 @@ const ServiceCreateAccount = () => {
 
     if (registerStep === 1) {
       if (!selectedServiceFormData.miles1 || !selectedServiceFormData.miles1.trim()) newErrors.miles1 = "Miles is required";
-      if (!selectedServiceFormData.postcode || !selectedServiceFormData.postcode.trim()) 
+      if (!selectedServiceFormData.postcode || !selectedServiceFormData.postcode.trim())
         newErrors.postcode = "Postcode is required";
     }
 
@@ -34,8 +34,13 @@ const ServiceCreateAccount = () => {
       }
       if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
         newErrors.password = "Password is required";
-      } else if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(selectedServiceFormData.password)) {
-        newErrors.password = "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
+      } else if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
+          selectedServiceFormData.password
+        )
+      ) {
+        newErrors.password =
+          "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
       }
     }
 
@@ -63,19 +68,23 @@ const ServiceCreateAccount = () => {
     dispatch(setSelectedServiceFormData({
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
     }));
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" })); 
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
   const nextStep = () => {
     window.scrollTo(0, 0);
     if (validateStep()) {
       dispatch(setRegisterStep(registerStep + 1));
     }
-  
+
   };
   const prevStep = () => {
     dispatch(setRegisterStep(registerStep - 1));
   };
- 
+  useEffect(() => {
+    return () => {
+      dispatch(setRegisterStep(1));
+    }
+  }, [])
 
 
   return (

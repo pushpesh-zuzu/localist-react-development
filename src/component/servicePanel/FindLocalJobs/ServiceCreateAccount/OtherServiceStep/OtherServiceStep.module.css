@@ -134,7 +134,6 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  justify-content: space-between;
   gap: 12px;
   width: 100%;
 }
@@ -180,7 +179,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #e3f6fc;
-  padding: 10px;
+  padding: 10px 36.5px;
 }
 
 .leadInfo {
@@ -281,7 +280,7 @@
 .buttonContainer {
   display: flex;
   justify-content: space-between;
-  margin-top: 26px;
+  margin-top: 22px;
 }
 
 .backButton {
