@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormData, errors }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const [pincode, setPincode] = useState("");
 
   useEffect(() => {
     // Load Google Places API script dynamically
@@ -100,7 +99,7 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
                 ref={inputRef}
                 name="postcode"
                 value={formData.postcode}
-                // onChange={handleInputChange}
+                onChange={handleInputChange}
               />
               {errors.postcode && <p className={styles.errorText}>{errors.postcode}</p>}
             </div>

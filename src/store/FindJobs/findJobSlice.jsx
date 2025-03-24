@@ -7,8 +7,9 @@ const initialState = {
   popularLoader: false,
   searchServiceLoader: false,
   service: [],
+  registerData:JSON.parse(localStorage.getItem("registerDataToken")) || null,
   registerLoader: false,
-  registerStep: 1,
+  registerStep: 0,
   registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null,
   selectedServiceId: null,
   selectedServices:[],
@@ -78,6 +79,7 @@ export const registerUserData = (registerData) => {
 
       if (response) {
 
+        dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         return response.data;
       }
@@ -144,6 +146,10 @@ const findJobSlice = createSlice({
     setselectedServices(state, action) {
       state.selectedServices = action.payload;
     },
+     setRegisterData(state, action) {
+      state.registerData = action.payload;
+      localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
+    },
     // clearSelectedServices: (state) => {
     //   state.selectedServices = [];
     // },
@@ -160,6 +166,7 @@ export const {
   setRegisterToken,
   setSelectedServiceId,
   setSelectedServiceFormData,
-  setselectedServices
+  setselectedServices,
+  setRegisterData
 } = findJobSlice.actions;
 export default findJobSlice.reducer;
