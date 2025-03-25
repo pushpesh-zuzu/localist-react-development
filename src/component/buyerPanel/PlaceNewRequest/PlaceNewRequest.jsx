@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import styles from "./PlaceNewRequest.module.css";
 import BuyerRegistration from "./BuyerRegistration/BuyerRegistration";
+import { useDispatch, useSelector } from "react-redux";
+import { setBuyerRegistrationModals } from "../../../store/Buyer/BuyerSlice";
 
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { buyerRegistrationModals } = useSelector((state) => state.buyer);
+  const openModal = () => {
+    dispatch(
+      setBuyerRegistrationModals({
+        modalName: "WhatServiceYouNeed",
+        value: "true",
+      })
+    );
+  };
 
-  const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   return (
@@ -36,7 +47,9 @@ const PlaceNewRequest = () => {
         </button>
       </div>
 
-      {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
+      {buyerRegistrationModals.WhatServiceYouNeed && (
+        <BuyerRegistration closeModal={closeModal} />
+      )}
     </div>
   );
 };

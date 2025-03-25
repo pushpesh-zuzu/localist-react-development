@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./BuyerRegistration.module.css";
-import BuyerRegistrationStep1 from "./BuyerRegistrationStep1/BuyerRegistrationStep1";
-// import BuyerRegistrationStep2 from "./BuyerRegistrationStep2/BuyerRegistrationStep2";
-// import BuyerRegistrationStep3 from "./BuyerRegistrationStep3/BuyerRegistrationStep3";
+import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
+import { useDispatch, useSelector } from "react-redux";
+import { setBuyerRegistrationModals } from "../../../../store/Buyer/BuyerSlice";
 
-const BuyerRegistration = ({ closeModal }) => {
-  const [step, setStep] = useState(1);
+const BuyerRegistration = () => {
+  const dispatch = useDispatch();
+  const { buyerRegistrationModals } = useSelector((state) => state.buyer);
+  console.log(buyerRegistrationModals, "lll");
 
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
-  const prevStep = () => setStep((prevStep) => prevStep - 1);
+  const handleToggle = (modalName, value) => {
+    dispatch(setBuyerRegistrationModals({ modalName, value }));
+  };
 
+  // Example usage
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        {step === 1 && <BuyerRegistrationStep1 nextStep={nextStep} />}
-        {/* {step === 2 && <BuyerRegistrationStep2 nextStep={nextStep} prevStep={prevStep} />}
-        {step === 3 && <BuyerRegistrationStep3 prevStep={prevStep} />} */}
+        {buyerRegistrationModals.WhatServiceYouNeed && (
+          <WhatServiceYouNeed
+            nextStep={() => {
+              handleToggle("ServiceYouNeed", {
+                status: true,
+                record: { name: "bhavya", age: "45" },
+              });
+              handleToggle("WhatServiceYouNeed", false);
+            }}
+          />
+        )}
+        {/* {buyerRegistrationModals?.ServiceYouNeed?.status && "hello"} */}
       </div>
     </div>
   );
