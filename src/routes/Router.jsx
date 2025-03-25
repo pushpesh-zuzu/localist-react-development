@@ -12,6 +12,7 @@ import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/Servic
 import Dashboard from "../component/dashboard/dashboard";
 import ProtectedRoute from "./Protected";
 import BuyerPanelPage from "../pages/BuyerPanelPage";
+import BuyerRegistration from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
 const router = createBrowserRouter([
   {
