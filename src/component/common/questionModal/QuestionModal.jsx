@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Progress, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
 
-const QuestionModal = ({ questions, onClose,loading }) => {
+const QuestionModal = ({ questions, onClose, nextStep, previousStep ,loading}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [otherText, setOtherText] = useState("");
@@ -16,14 +16,11 @@ const QuestionModal = ({ questions, onClose,loading }) => {
   const handleNext = () => {
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
+    } else {
+      nextStep();
     }
   };
 
-  const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    }
-  };
   return (
     <>
     
@@ -34,7 +31,7 @@ const QuestionModal = ({ questions, onClose,loading }) => {
         </button>
 
         <div className={styles.headerImage}>
-        <h2>{questions[currentQuestion]?.questions}</h2>
+          <h2>{questions[currentQuestion]?.questions}</h2>
           <Progress
             percent={progressPercent}
             strokeColor="#00AFE3"
@@ -46,12 +43,19 @@ const QuestionModal = ({ questions, onClose,loading }) => {
         </div>
         {loading ? <Spin/> : <>
         <div className={styles.optionsContainer}>
-          {questions[currentQuestion]?.answer?.split(",").map((option, index) => (
-            <label key={index} className={styles.option}>
-              <input type="radio" name="surveyOption" value={option?.trim()}  onChange={handleOptionChange} />
-              {option?.trim()}
-            </label>
-          ))}
+          {questions[currentQuestion]?.answer
+            ?.split(",")
+            .map((option, index) => (
+              <label key={index} className={styles.option}>
+                <input
+                  type="radio"
+                  name="surveyOption"
+                  value={option?.trim()}
+                  onChange={handleOptionChange}
+                />
+                {option?.trim()}
+              </label>
+            ))}
         </div>
         {selectedOption.toLowerCase() === "other" && (
         <input
@@ -66,14 +70,14 @@ const QuestionModal = ({ questions, onClose,loading }) => {
     }
         <div className={styles.buttonContainer}>
           <button
-            onClick={handleBack}
+            onClick={previousStep}
             disabled={currentQuestion === 0}
             className={styles.backButton}
           >
             Back
           </button>
           <button onClick={handleNext} className={styles.nextButton}>
-            {currentQuestion === totalQuestions - 1 ? "Submit" : "Next"}
+            {currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
           </button>
         </div>
       </div>
