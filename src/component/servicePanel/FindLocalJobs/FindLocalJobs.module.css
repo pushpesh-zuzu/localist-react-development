@@ -105,12 +105,15 @@
   width: 20px;
   height: 20px;
 }
+
 .serviceItem span {
   cursor: pointer;
 }
+
 .serviceItem:hover {
   color: var(--primary-color);
 }
+
 .searchResults {
   position: absolute;
   background: white;
@@ -134,6 +137,7 @@
 .searchItem:hover {
   background: #f0f0f0;
 }
+
 .loaderDesign {
   display: flex;
   justify-content: center;
@@ -151,20 +155,82 @@
   .container {
     padding: 40px;
   }
+
   .searchInputContainer button {
     width: 157px;
   }
 }
+
 @media (max-width: 620px) {
   .searchInputContainer {
     width: 100%;
   }
+
   .servicesList {
     grid-template-columns: auto;
   }
 }
+
 @media (max-width: 520px) {
   .container {
     padding: 26px;
+  }
+
+  .leftSection h1 {
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .leftSection p {
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0%;
+    color: #848484;
+  }
+
+}
+
+@media (max-width: 419px) {
+  .searchInputContainer button {
+    width: 100px;
+    height: 30px;
+    font-size: 13px;
+
+
+  }
+
+  .rightSection h3 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 29.11px;
+  }
+
+  .searchInput {
+    height: 40px;
+    
+    padding-left: 10px;
+
+  }
+}
+@media screen and (max-width:350px) {
+  .searchInputContainer button {
+    width: 80px;
+    height: 30px;
+    font-size: 13px;
+
+
+  }
+
+  .rightSection h3 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 29.11px;
+  }
+
+  .searchInput {
+    height: 40px;
+    
+    padding-left: 6px;
+
   }
 }
