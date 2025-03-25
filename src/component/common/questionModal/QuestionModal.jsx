@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { Progress } from "antd";
+import { Progress, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
 
-const QuestionModal = ({ questions, onClose }) => {
+const QuestionModal = ({ questions, onClose,loading }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [otherText, setOtherText] = useState("");
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   const totalQuestions = questions?.length;
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
 
@@ -19,6 +25,8 @@ const QuestionModal = ({ questions, onClose }) => {
     }
   };
   return (
+    <>
+    
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeButton} onClick={onClose}>
@@ -36,15 +44,26 @@ const QuestionModal = ({ questions, onClose }) => {
             className={styles.customProgress}
           />
         </div>
+        {loading ? <Spin/> : <>
         <div className={styles.optionsContainer}>
           {questions[currentQuestion]?.answer?.split(",").map((option, index) => (
             <label key={index} className={styles.option}>
-              <input type="radio" name="surveyOption" value={option?.trim()} />
+              <input type="radio" name="surveyOption" value={option?.trim()}  onChange={handleOptionChange} />
               {option?.trim()}
             </label>
           ))}
         </div>
-
+        {selectedOption.toLowerCase() === "other" && (
+        <input
+          type="text"
+          placeholder="Please Enter..."
+          className={styles.input}
+          value={otherText}
+          onChange={(e) => setOtherText(e.target.value)}
+        />
+      )}
+      </>
+    }
         <div className={styles.buttonContainer}>
           <button
             onClick={handleBack}
@@ -59,6 +78,8 @@ const QuestionModal = ({ questions, onClose }) => {
         </div>
       </div>
     </div>
+
+  </>
   );
 };
 

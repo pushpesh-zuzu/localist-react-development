@@ -8,7 +8,7 @@ import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 
 const BuyerRegistration = ({closeModal}) => {
   const dispatch = useDispatch()
-const {questionanswerData,buyerStep} = useSelector((state)=>state.buyer)
+const {questionanswerData,buyerStep,questionLoader} = useSelector((state)=>state.buyer)
    const nextStep = () => {
         dispatch(setBuyerStep(buyerStep + 1));
     };
@@ -16,7 +16,7 @@ const {questionanswerData,buyerStep} = useSelector((state)=>state.buyer)
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         {buyerStep === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
-        {buyerStep === 2 && <QuestionModal questions={questionanswerData} onClose={closeModal} />}
+        {buyerStep === 2 && <QuestionModal questions={questionanswerData} onClose={closeModal} loading={questionLoader} />}
       </div>
     </div>
   );

@@ -107,10 +107,15 @@ const ServiceDetailsStep = ({
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number (Optional)</label>
                 <input
-                  type="number"
+                  type="text"
                   className={styles.input}
                   name="phone"
                   value={formData.phone}
+                  maxLength={10}
+                  pattern="[0-9]*"
+                  onInput={(e) => {
+                    e.target.value = e.target.value.replace(/\D/g, "");
+                  }}
                   onChange={handleInputChange}
                 />
               </div>

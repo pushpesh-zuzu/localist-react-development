@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./FindLocalJobs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +17,7 @@ import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
@@ -33,19 +34,21 @@ const FindLocalJobs = () => {
       
     };
   }, []);
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      if (Input.trim() !== "") {
-        dispatch(searchService({ search: Input}));
-      }
-    }, 500);
-
-    return () => clearTimeout(delayDebounce);
-  }, [Input, dispatch]);
-  const handleSelectService = (item) => {
-    setInput(item.name);
-    setSelectedService(item);
-  };
+   useEffect(() => {
+      const delayDebounce = setTimeout(() => {
+        if (isDropdownOpen && Input.trim() !== "") {
+          dispatch(searchService({ search: Input }));
+        }
+      }, 500);
+  
+      return () => clearTimeout(delayDebounce);
+    }, [Input, dispatch, isDropdownOpen]);
+    const handleSelectService = useCallback((item) => {
+      setInput(item.name);
+      setSelectedService(item);
+      setIsDropdownOpen(false);
+      setTimeout(() => dispatch(setService([])), 100);
+    }, [dispatch]);
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
@@ -69,17 +72,15 @@ const FindLocalJobs = () => {
           <input
             className={styles.searchInput}
             placeholder="What service do you provide?"
-            onChange={(e) => {
-              setInput(e.target.value);
-              if (!e.target.value) {
-                dispatch(setService([]));
-              }
-              setSelectedService(null);
-            }}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setIsDropdownOpen(!!e.target.value);
+                setSelectedService(null);
+              }}
             value={Input}
           />
 
-          {service?.length > 0 && (
+          {isDropdownOpen && service?.length > 0 && (
             <div className={styles.searchResults}>
               {searchServiceLoader ? (
                 <Spin indicator={<LoadingOutlined spin />} />
