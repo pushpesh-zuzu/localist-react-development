@@ -1,0 +1,165 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 24px 31px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.header h2 {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 30px;
+}
+
+.textareaLabel {
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  color: #828282;
+}
+
+.textarea {
+  width: -webkit-fill-available;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  padding: 14px;
+  margin: 10px 0;
+  resize: none;
+  /* overflow-y: auto; */
+}
+
+.textarea::placeholder {
+  font-family: Poppins;
+}
+
+.fileUpload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background-color: #e6f7ff;
+  color: var(--primary-color);
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: -webkit-fill-available;
+  margin-top: 11px;
+}
+
+.fileUpload:hover {
+  background-color: #d4ebff;
+}
+
+.plusIcon {
+  font-size: 16px;
+}
+
+.fileInput {
+  display: none; /* Hide actual input */
+}
+
+.fileList {
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.fileList li {
+  background-color: #f3f3f3;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.privacyWrapper {
+  display: flex;
+  justify-content: start;
+  text-align: start;
+}
+
+.privacyText {
+  color: #838383;
+  margin-top: 10px;
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.privacyLink {
+  color: var(--primary-color);
+}
+
+.privacyLink:hover {
+  text-decoration: underline;
+}
+
+.progressContainer {
+  margin-top: 16px;
+  text-align: left;
+}
+
+.progressContainer span {
+  color: #828282;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background-color: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.addMoreDetail p {
+  margin-top: 16.5px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #828282;
+  text-align: left;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.checkboxContainer input {
+  margin-right: 10px;
+}
+
+.viewMatchesBtn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 8px 29px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.viewMatchesBtn:hover {
+  background-color: #007bbd;
+}

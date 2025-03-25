@@ -5,10 +5,13 @@ import QuestionModal from "../../../common/questionModal/QuestionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
+import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 
 const BuyerRegistration = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep,questionLoader } = useSelector((state) => state.buyer);
+  const { questionanswerData, buyerStep, questionLoader } = useSelector(
+    (state) => state.buyer
+  );
   const nextStep = () => {
     dispatch(setBuyerStep(buyerStep + 1));
   };
@@ -36,6 +39,9 @@ const BuyerRegistration = ({ closeModal }) => {
             previousStep={previousStep}
             onClose={closeModal}
           />
+        )}
+        {buyerStep === 4 && (
+          <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
         )}
       </div>
     </div>
