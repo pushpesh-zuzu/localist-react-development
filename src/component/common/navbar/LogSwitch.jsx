@@ -18,6 +18,9 @@ const LogSwitch = () => {
     navigate("/login");
   };
 
+  const handleBuyer = () => {
+    navigate("/buyers/create")
+  }
   const handleOpen = () => {
     navigate("/sellers/create/");
     dispatch(setRegisterStep(1));
@@ -44,10 +47,14 @@ const LogSwitch = () => {
       </div>
       {(registerToken || userToken) ? (
         <Popover
-          content={
-            <div className={styles.logoutBtn} onClick={() => handleLogout()}>
-              Logout
+          content={ <>
+            <div className={styles.logoutBtn}  onClick={() => handleBuyer()}>
+              Switch to Buyer
             </div>
+             <div className={styles.logoutBtn}onClick={() => handleLogout()}>
+             Logout
+           </div>
+           </>
           }
           trigger="hover"
         >

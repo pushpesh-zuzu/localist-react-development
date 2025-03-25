@@ -76,7 +76,7 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
               <select
                 className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""}`}
                 name="miles1"
-                value={formData.miles1}
+                value={formData.miles1 || ""}
                 onChange={handleInputChange}
               >
                 <option>1</option>
@@ -98,8 +98,8 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
                 className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""}`}
                 ref={inputRef}
                 name="postcode"
-                value={formData.postcode}
-                onChange={handleInputChange}
+                value={formData.postcode  || ""}
+                onChange={handleInputChange ? handleInputChange : () => {}}
               />
               {errors.postcode && <p className={styles.errorText}>{errors.postcode}</p>}
             </div>
