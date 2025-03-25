@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 
-const initialState = {};
+const initialState = {
+  questionLoader:false,
+  questionanswerData:[]
+};
 
 export const questionAnswerData = (questionData) => {
   return async (dispatch) => {
@@ -13,7 +16,7 @@ export const questionAnswerData = (questionData) => {
       );
 
       if (response) {
-        // dispatch(setService(response?.data?.data));
+        dispatch(setQuestionAnswerData(response?.data?.data));
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -30,9 +33,12 @@ const buyerSlice = createSlice({
     setquestionLoader(state, action) {
       state.questionLoader = action.payload;
     },
+    setQuestionAnswerData(state,action){
+      state.questionanswerData = action.payload
+    }
   },
 });
 
-export const { setquestionLoader } = buyerSlice.actions;
+export const { setquestionLoader,setQuestionAnswerData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

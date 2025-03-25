@@ -9,7 +9,7 @@ import { questionAnswerData } from "../../../../../store/Buyer/BuyerSlice";
 const WhatServiceYouNeed = ({ nextStep }) => {
   const [Input,setInput] = useState("")
    const [selectedService, setSelectedService] = useState(null);
-   const [pincode,setPincode] = useState()
+   const [pincode,setPincode] = useState("")
    const {searchServiceLoader,service} = useSelector((state)=>state.findJobs)
   const dispatch = useDispatch()
   const inputRef = useRef(null);
@@ -29,7 +29,7 @@ const WhatServiceYouNeed = ({ nextStep }) => {
       return () => clearTimeout(delayDebounce);
     }, [Input, dispatch]);
     const handleSelectService = (item) => {
-      setInput(item.id);
+      setInput(item.name);
       setSelectedService(item);
     };
     const handleContinue = () => {

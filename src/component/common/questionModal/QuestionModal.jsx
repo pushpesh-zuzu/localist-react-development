@@ -18,7 +18,7 @@ const QuestionModal = ({ questions, onClose }) => {
       setCurrentQuestion(currentQuestion - 1);
     }
   };
-
+console.log(questions,"question")
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -27,7 +27,7 @@ const QuestionModal = ({ questions, onClose }) => {
         </button>
 
         <div className={styles.headerImage}>
-          <h2>{questions[currentQuestion].question}</h2>
+        <h2>{questions[currentQuestion]?.questions}</h2>
           <Progress
             percent={progressPercent}
             strokeColor="#00AFE3"
@@ -37,12 +37,11 @@ const QuestionModal = ({ questions, onClose }) => {
             className={styles.customProgress}
           />
         </div>
-
         <div className={styles.optionsContainer}>
-          {questions[currentQuestion]?.options?.map((option, index) => (
+          {questions[currentQuestion]?.answer?.split(",").map((option, index) => (
             <label key={index} className={styles.option}>
-              <input type="radio" name="surveyOption" value={option} />
-              {option}
+              <input type="radio" name="surveyOption" value={option.trim()} />
+              {option.trim()}
             </label>
           ))}
         </div>
@@ -51,11 +50,11 @@ const QuestionModal = ({ questions, onClose }) => {
           <button
             onClick={handleBack}
             disabled={currentQuestion === 0}
-            className={styles.navButton}
+            className={styles.backButton}
           >
             Back
           </button>
-          <button onClick={handleNext} className={styles.navButton}>
+          <button onClick={handleNext} className={styles.nextButton}>
             {currentQuestion === totalQuestions - 1 ? "Submit" : "Next"}
           </button>
         </div>
