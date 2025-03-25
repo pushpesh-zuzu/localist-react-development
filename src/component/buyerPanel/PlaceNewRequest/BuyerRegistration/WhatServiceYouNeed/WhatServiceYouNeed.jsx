@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./BuyerRegistrationStep1.module.css";
+import styles from "./WhatServiceYouNeed.module.css";
 
-const BuyerRegistrationStep1 = ({ nextStep }) => {
+const WhatServiceYouNeed = ({ nextStep }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>What service do you need?</h2>
@@ -30,4 +30,4 @@ const BuyerRegistrationStep1 = ({ nextStep }) => {
   );
 };
 
-export default BuyerRegistrationStep1;
+export default WhatServiceYouNeed;
