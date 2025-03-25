@@ -1,14 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
-import WhatServiceYouNeed from "../../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
 
-const initialState = {
-  buyerRegistrationModals: {
-    WhatServiceYouNeed: null,
-    ServiceYouNeed: null,
-    // baki ke steps yaha ayenge
-  },
-};
+const initialState = {};
 
 export const questionAnswerData = (questionData) => {
   return async (dispatch) => {
@@ -37,14 +30,9 @@ const buyerSlice = createSlice({
     setquestionLoader(state, action) {
       state.questionLoader = action.payload;
     },
-    setBuyerRegistrationModals(state, action) {
-      const { modalName, value } = action.payload;
-      state.buyerRegistrationModals[modalName] = value;
-    },
   },
 });
 
-export const { setquestionLoader, setBuyerRegistrationModals } =
-  buyerSlice.actions;
+export const { setquestionLoader } = buyerSlice.actions;
 
 export default buyerSlice.reducer;
