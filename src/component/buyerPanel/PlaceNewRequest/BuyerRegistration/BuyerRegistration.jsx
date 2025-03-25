@@ -1,34 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
-import { useDispatch, useSelector } from "react-redux";
-import { setBuyerRegistrationModals } from "../../../../store/Buyer/BuyerSlice";
+import QuestionModal from "../../../common/questionModal/QuestionModal";
+// import BuyerRegistrationStep2 from "./BuyerRegistrationStep2/BuyerRegistrationStep2";
+// import BuyerRegistrationStep3 from "./BuyerRegistrationStep3/BuyerRegistrationStep3";
 
 const BuyerRegistration = () => {
-  const dispatch = useDispatch();
-  const { buyerRegistrationModals } = useSelector((state) => state.buyer);
-  console.log(buyerRegistrationModals, "lll");
+  const [step, setStep] = useState(1);
 
-  const handleToggle = (modalName, value) => {
-    dispatch(setBuyerRegistrationModals({ modalName, value }));
-  };
+  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const questions = [
+    {
+      question: "What is your web design requirement?",
+      options: [
+        "Create a new website",
+        "Major changes to my website",
+        "Minor changes to my website",
+        "Other",
+      ],
+    },
+    {
+      question: "What type of website do you need?",
+      options: ["E-commerce", "Portfolio", "Business", "Blog", "Other"],
+    },
+    { question: "Do you have existing content?", options: ["Yes", "No"] },
+  ];
 
-  // Example usage
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        {buyerRegistrationModals.WhatServiceYouNeed && (
-          <WhatServiceYouNeed
-            nextStep={() => {
-              handleToggle("ServiceYouNeed", {
-                status: true,
-                record: { name: "bhavya", age: "45" },
-              });
-              handleToggle("WhatServiceYouNeed", false);
-            }}
-          />
-        )}
-        {/* {buyerRegistrationModals?.ServiceYouNeed?.status && "hello"} */}
+        {step === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
+        {step === 2 && <QuestionModal questions={questions} />}
       </div>
     </div>
   );
