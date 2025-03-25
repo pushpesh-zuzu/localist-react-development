@@ -3,7 +3,8 @@ import axiosInstance from "../../Api/axiosInstance";
 
 const initialState = {
   questionLoader:false,
-  questionanswerData:[]
+  questionanswerData:[],
+  buyerStep:1,
 };
 
 export const questionAnswerData = (questionData) => {
@@ -35,10 +36,13 @@ const buyerSlice = createSlice({
     },
     setQuestionAnswerData(state,action){
       state.questionanswerData = action.payload
+    },
+    setBuyerStep(state,action){
+      state.buyerStep = action.payload
     }
   },
 });
 
-export const { setquestionLoader,setQuestionAnswerData } = buyerSlice.actions;
+export const { setquestionLoader,setQuestionAnswerData,setBuyerStep } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

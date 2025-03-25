@@ -2,36 +2,21 @@ import React, { useState } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 
 
-const BuyerRegistration = () => {
-  const [step, setStep] = useState(1);
-const {questionanswerData} = useSelector((state)=>state.buyer)
-console.log(questionanswerData,"questionanswerData")
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
-  // const questions = [
-  //   {
-  //     question: "What is your web design requirement?",
-  //     options: [
-  //       "Create a new website",
-  //       "Major changes to my website",
-  //       "Minor changes to my website",
-  //       "Other",
-  //     ],
-  //   },
-  //   {
-  //     question: "What type of website do you need?",
-  //     options: ["E-commerce", "Portfolio", "Business", "Blog", "Other"],
-  //   },
-  //   { question: "Do you have existing content?", options: ["Yes", "No"] },
-  // ];
-
+const BuyerRegistration = ({closeModal}) => {
+  const dispatch = useDispatch()
+const {questionanswerData,buyerStep} = useSelector((state)=>state.buyer)
+   const nextStep = () => {
+        dispatch(setBuyerStep(buyerStep + 1));
+    };
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        {step === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
-        {step === 2 && <QuestionModal questions={questionanswerData} />}
+        {buyerStep === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
+        {buyerStep === 2 && <QuestionModal questions={questionanswerData} onClose={closeModal} />}
       </div>
     </div>
   );

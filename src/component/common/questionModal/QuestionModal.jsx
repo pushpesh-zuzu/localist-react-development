@@ -18,7 +18,6 @@ const QuestionModal = ({ questions, onClose }) => {
       setCurrentQuestion(currentQuestion - 1);
     }
   };
-console.log(questions,"question")
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -40,8 +39,8 @@ console.log(questions,"question")
         <div className={styles.optionsContainer}>
           {questions[currentQuestion]?.answer?.split(",").map((option, index) => (
             <label key={index} className={styles.option}>
-              <input type="radio" name="surveyOption" value={option.trim()} />
-              {option.trim()}
+              <input type="radio" name="surveyOption" value={option?.trim()} />
+              {option?.trim()}
             </label>
           ))}
         </div>
