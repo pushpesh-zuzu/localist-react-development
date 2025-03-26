@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./DescribeYourRequest.module.css";
 import PlusIcon from "../../../../../assets/Icons/PlusIcon.svg";
+import CheckIcon from "../../../../../assets/Icons/CheckIcon.svg";
 
 const MAX_WORDS = 200;
 
@@ -23,6 +24,10 @@ const DescribeYourRequest = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.successMessage}>
+        <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
+        <span>We've posted your request</span>
+      </div>
       <div className={styles.header}>
         <h2>Describe your request in detail</h2>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
@@ -19,11 +19,23 @@ const BuyerRegistration = ({ closeModal }) => {
     dispatch(setBuyerStep(buyerStep - 1));
   };
 
+  useEffect(() => {
+    if (buyerStep) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [buyerStep]);
+
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         {buyerStep === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
-        {/* {buyerStep === 2 && <QuestionModal questions={questionanswerData} onClose={closeModal} loading={questionLoader} />} */}
+
         {buyerStep === 2 && (
           <QuestionModal
             questions={questionanswerData}
@@ -33,6 +45,7 @@ const BuyerRegistration = ({ closeModal }) => {
             loading={questionLoader}
           />
         )}
+
         {buyerStep === 3 && (
           <ViewYourMatches
             nextStep={nextStep}
@@ -40,6 +53,7 @@ const BuyerRegistration = ({ closeModal }) => {
             onClose={closeModal}
           />
         )}
+
         {buyerStep === 4 && (
           <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
         )}

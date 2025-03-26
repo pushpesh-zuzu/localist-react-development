@@ -105,3 +105,80 @@
   color: #666;
   text-align: left;
 }
+
+@media (max-width: 768px) {
+  .modalContent {
+    width: 70%;
+    padding: 30px;
+  }
+
+  .header h2 {
+    font-size: 20px;
+  }
+
+  .label {
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    font-size: 14px;
+    color: #828282;
+    margin-bottom: 5px;
+  }
+
+  .input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .buttonContainer {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .checkboxContainer input {
+    height: 20px;
+    width: 20px;
+  }
+
+  .checkboxContainer label {
+    font-size: 10px;
+  }
+
+  .backButton,
+  .nextButton {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 80%;
+    padding: 25px;
+  }
+
+  .header h2 {
+    margin-bottom: 20px;
+  }
+
+  .input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .checkboxContainer {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .buttonContainer {
+    margin-bottom: 20px;
+  }
+
+  .backButton,
+  .nextButton {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
