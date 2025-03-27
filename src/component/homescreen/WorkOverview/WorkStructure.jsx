@@ -5,9 +5,9 @@ import styles from "./workstructure.module.css";
 const WorkStructure = () => {
   return (
     <div className={styles.workContainer}>
-      <div className={styles.header}>
+      <h3 className={styles.header}>
         How <span>We Work</span>
-      </div>
+      </h3>
       <div className={styles.description}>
         Get Competitive Home Improvements quotes from leading suppliers in{" "}
         <span>3 Simples Step!</span>

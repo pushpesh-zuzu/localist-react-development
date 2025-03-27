@@ -1,0 +1,155 @@
+.container {
+  padding: 49px 88px;
+  max-width: 791px;
+  width: -webkit-fill-available;
+}
+
+.heading {
+  font-weight: 700;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
+
+.infoBox {
+  background: #e3f6fc;
+  padding: 20px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoBox p {
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.infoBox p span {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.infoBox p span img {
+  margin-top: 4px;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.requestButton {
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  padding: 8px 29px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 14px;
+  align-self: flex-start;
+  margin-left: 20px;
+}
+
+.detailsBox {
+  background: #ffffff;
+  padding: 31px;
+  box-shadow: 0px 0px 10px 0px #0000000f;
+}
+
+.subHeading {
+  font-weight: 700;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-bottom: 15px;
+}
+
+.profileSection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profileImage img {
+  height: 62.36px;
+  width: 62.36px;
+}
+
+.uploadButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 5.7px;
+  margin-left: 29.64px;
+}
+
+.uploadButton {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: 0.83px solid var(--primary-color);
+  box-shadow: 0px 0px 1.26px 0.32px #0000001a;
+  padding: 5px 16px;
+  border-radius: 1.9px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12.64px;
+  vertical-align: middle;
+}
+
+.formGroup {
+  width: 438px;
+  margin-bottom: 22px;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #828282;
+}
+
+.formGroupPassword {
+  width: 438px;
+  margin-bottom: 22px;
+  padding-top: 20px;
+}
+
+.formGroupPassword label {
+  font-weight: 500;
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.inputField {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.changePasswordButton {
+  background: #ffffff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  padding: 8px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.saveButtonWrapper {
+  margin-top: 37px;
+  margin-left: 32px;
+}
+
+.saveButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}

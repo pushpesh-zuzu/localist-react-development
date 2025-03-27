@@ -8,9 +8,9 @@ const formatTitle = (title) => {
   if (parts.length > 1) {
     return (
       <>
-        <span className={styles.categoryTitleText}>{parts[0]}</span>
-        <span className={styles.blackText}>&</span>
-        <span className={styles.categoryTitleText}>{parts[1]}</span>
+        <h4 className={styles.categoryTitleText}>
+          {parts[0]} <span className={styles.blackText}>&</span> {parts[1]}
+        </h4>
       </>
     );
   } else {

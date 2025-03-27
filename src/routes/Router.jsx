@@ -13,6 +13,7 @@ import Dashboard from "../component/dashboard/dashboard";
 import ProtectedRoute from "./Protected";
 import BuyerPanelPage from "../pages/BuyerPanelPage";
 import BuyerRegistration from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
+import BuyerAccountSettings from "../component/buyerAccountSettings/BuyerAccountSettings";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
         element: <ServiceCreateAccount />,
       },
       { path: "/buyers/create", element: <BuyerPanelPage /> },
+      { path: "/buyer-account", element: <BuyerAccountSettings /> },
       {
         path: "/dashboard",
         element: (
