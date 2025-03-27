@@ -14,7 +14,7 @@ export const userLogin = (loginData) => {
     dispatch(setLoginLoader(true));
     try {
 
-      const response = await axiosInstance.post(`login`, loginData);
+      const response = await axiosInstance.post(`users/login`, loginData);
 
       if (response?.data?.success) {
         dispatch(setToken(response?.data?.data?.remember_tokens));
@@ -38,7 +38,7 @@ export const userLogout = () => {
   return async (dispatch) => {
     dispatch(setLogoutLoader(true));
     try {
-      const response = await axiosInstance.post("logout");
+      const response = await axiosInstance.post("users/logout");
       
       if (response) {
         dispatch(setToken(null));

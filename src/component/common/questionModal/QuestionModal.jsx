@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Progress, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setbuyerRequestData, } from "../../../store/Buyer/BuyerSlice";
 
-const QuestionModal = ({ questions, onClose, nextStep, previousStep ,loading}) => {
+const QuestionModal = ({ questions, onClose, nextStep, previousStep ,loading,formData}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState("");
   const [otherText, setOtherText] = useState("");
+  const {buyerRequest} = useSelector((state)=> state.buyer)
 
+const dispatch = useDispatch()
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
@@ -14,7 +18,22 @@ const QuestionModal = ({ questions, onClose, nextStep, previousStep ,loading}) =
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
 
   const handleNext = () => {
+    const updatedAnswer = {
+      ques: questions[currentQuestion]?.questions,
+      ans: selectedOption.toLowerCase() === "other" ? otherText : selectedOption
+    };
+  console.log(updatedAnswer,"prem")
+// dispatch(setQuestions(updatedAnswer))
+const previousAnswers = buyerRequest?.questions || [];
+
+// Add the new answer to the existing array
+const updatedAnswers = [...previousAnswers, updatedAnswer];
+
+// Dispatch the updated answers to Redux inside `questions` array
+dispatch(setbuyerRequestData({ questions: updatedAnswers }));
+ 
     if (currentQuestion < totalQuestions - 1) {
+      setSelectedOption("");
       setCurrentQuestion(currentQuestion + 1);
     } else {
       nextStep();

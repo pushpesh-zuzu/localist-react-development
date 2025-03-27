@@ -4,9 +4,9 @@ import { getPopularServiceList, searchService, setService } from "../../../../..
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { questionAnswerData } from "../../../../../store/Buyer/BuyerSlice";
+import { questionAnswerData, setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep }) => {
+const WhatServiceYouNeed = ({ nextStep,formData}) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -38,9 +38,13 @@ const WhatServiceYouNeed = ({ nextStep }) => {
   // Handle continue button click
   const handleContinue = useCallback(() => {
     if (!selectedService) return;
+    dispatch(setbuyerRequestData({
+      service_id:selectedService.id,
+      postcode:pincode
+    }))
     dispatch(questionAnswerData({ service_id: selectedService.id }));
     nextStep();
-  }, [selectedService, dispatch, nextStep]);
+  }, [selectedService,pincode, dispatch, nextStep]);
 
   // Load Google Maps script and initialize autocomplete
   useEffect(() => {
@@ -100,6 +104,7 @@ const WhatServiceYouNeed = ({ nextStep }) => {
             setInput(e.target.value);
             setIsDropdownOpen(!!e.target.value);
             setSelectedService(null);
+
           }}
           value={input}
         />

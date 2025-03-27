@@ -44,7 +44,7 @@ export const getPopularServiceList = () => {
   return async (dispatch) => {
     dispatch(setPopularServiceListLoader(true));
     try {
-      const response = await axiosInstance.get(`popular-services`);
+      const response = await axiosInstance.get(`users/popular-services`);
       if (response) {
         dispatch(setPopularList(response?.data?.data));
       }
@@ -59,7 +59,7 @@ export const searchService = (ServiceData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`search-services`, ServiceData);
+      const response = await axiosInstance.post(`users/search-services`, ServiceData);
 
       if (response) {
         dispatch(setService(response?.data?.data));
@@ -75,7 +75,7 @@ export const registerUserData = (registerData) => {
   return async (dispatch) => {
     dispatch(setRegisterLoader(true));
     try {
-      const response = await axiosInstance.post(`registration`, registerData);
+      const response = await axiosInstance.post(`users/registration`, registerData);
 
       if (response) {
 

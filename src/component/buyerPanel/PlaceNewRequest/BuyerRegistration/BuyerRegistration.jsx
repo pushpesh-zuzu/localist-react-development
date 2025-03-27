@@ -3,13 +3,13 @@ import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
 import { useDispatch, useSelector } from "react-redux";
-import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
+import { setbuyerRequestData, setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 
 const BuyerRegistration = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep, questionLoader } = useSelector(
+  const { questionanswerData, buyerStep, questionLoader,buyerRequest } = useSelector(
     (state) => state.buyer
   );
   const nextStep = () => {
@@ -34,7 +34,8 @@ const BuyerRegistration = ({ closeModal }) => {
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        {buyerStep === 1 && <WhatServiceYouNeed nextStep={nextStep} />}
+        {buyerStep === 1 && <WhatServiceYouNeed nextStep={nextStep} 
+                    formData={buyerRequest} />}
 
         {buyerStep === 2 && (
           <QuestionModal
@@ -43,6 +44,8 @@ const BuyerRegistration = ({ closeModal }) => {
             previousStep={previousStep}
             onClose={closeModal}
             loading={questionLoader}
+            
+                    formData={buyerRequest}
           />
         )}
 
@@ -51,6 +54,7 @@ const BuyerRegistration = ({ closeModal }) => {
             nextStep={nextStep}
             previousStep={previousStep}
             onClose={closeModal}
+            formData={buyerRequest}
           />
         )}
 

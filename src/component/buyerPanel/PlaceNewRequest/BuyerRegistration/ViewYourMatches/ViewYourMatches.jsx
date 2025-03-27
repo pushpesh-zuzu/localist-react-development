@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// Adjust the import path if needed
 import styles from "./ViewYourMatches.module.css";
+import { createRequestData } from "../../../../../store/Buyer/BuyerSlice";
 
-const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
+const ViewYourMatches = ({ onClose, nextStep, previousStep, formData }) => {
+  const { buyerRequest, } = useSelector(
+    (state) => state.buyer
+  );
+  const dispatch = useDispatch();
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [consent, setConsent] = useState(false); // State to track checkbox
+
+  const handleInputChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
+    setPhoneNumber(value);
+  };
+
+  const handleSubmit = () => {
+    if (phoneNumber.length !== 10) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    const formData = new FormData();
+    // Append required fields to FormData
+    formData.append("service_id",buyerRequest?.service_id)
+    formData.append("postcode",buyerRequest?.postcode)
+    formData.append("questions",JSON.stringify(buyerRequest?.questions))
+    
+    formData.append("phone", phoneNumber);
+    formData.append("recevive_online", consent ? 1 : 0);
+    
+    dispatch(createRequestData(formData));
+
+    nextStep(); // Proceed to the next step
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -19,14 +54,17 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
             placeholder="Phone Number"
             className={styles.input}
             maxLength={10}
-            pattern="[0-9]*"
-            onInput={(e) => {
-              e.target.value = e.target.value.replace(/\D/g, "");
-            }}
+            value={phoneNumber}
+            onChange={handleInputChange}
           />
 
           <div className={styles.checkboxContainer}>
-            <input type="checkbox" id="consent" />
+            <input
+              type="checkbox"
+              id="consent"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+            />
             <label htmlFor="consent">
               I'm happy to receive this online or remotely.
             </label>
@@ -36,7 +74,7 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
             <button className={styles.backButton} onClick={previousStep}>
               Back
             </button>
-            <button className={styles.nextButton} onClick={nextStep}>
+            <button className={styles.nextButton} onClick={handleSubmit}>
               View Matches
             </button>
           </div>
