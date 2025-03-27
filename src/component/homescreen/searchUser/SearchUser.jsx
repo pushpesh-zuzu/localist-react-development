@@ -19,14 +19,14 @@ const SearchProfessionals = () => {
       </div>
 
       <div className={styles.container}>
-        <h2 className={styles.heading}>Find Local</h2>
-        <h2 className={styles.heading}>
+        <h1 className={styles.heading}>Find Local</h1>
+        <h1 className={styles.heading}>
           <span className={styles.highlight}>Services</span> - Fast
-        </h2>
+        </h1>
 
-        <p className={styles.subText}>
+        <h4 className={styles.subText}>
           Get fast quotes from local professionals
-        </p>
+        </h4>
 
         <div className={styles.searchBox}>
           <input
@@ -44,7 +44,9 @@ const SearchProfessionals = () => {
             />
           </div>
           <button className={styles.searchButton}>Search</button>
-          <button className={styles.searchButtonPhone}><SearchOutlined /></button>
+          <button className={styles.searchButtonPhone}>
+            <SearchOutlined />
+          </button>
         </div>
       </div>
     </div>

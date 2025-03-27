@@ -16,9 +16,9 @@ const ServiceCategory = () => {
   return (
     <div className={styles.ServiceCategoryContainer}>
       <div className={styles.servicesInnerContainer}>
-        <div className={styles.ServiceCategoryheading}>
+        <h2 className={styles.ServiceCategoryheading}>
           View Our <span>Service Categories</span>
-        </div>
+        </h2>
         <div className={styles.ServiceCategory}>
           {SERVICE_CATEGORIES.map((category, index) => (
             <SingleCategory
