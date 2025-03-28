@@ -58,10 +58,11 @@ export const createRequestData = (requestData) => {
       );
 
       if (response) {
-        
+        console.log(response,"prem")
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id))
         return response.data
+        // navigate("/buyers/create");
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));

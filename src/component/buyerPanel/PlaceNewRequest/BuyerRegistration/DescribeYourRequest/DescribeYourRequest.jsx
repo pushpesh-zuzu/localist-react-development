@@ -103,7 +103,13 @@ const DescribeYourRequest = () => {
     };
 
     dispatch(addDetailsRequestData(detailsData))
-    navigate("/buyers/create")
+    .then(() => {
+      navigate("/buyers/create")
+    })
+    .catch((error) => {
+      console.error("Navigation failed due to API error:", error);
+    });
+    
      
   };
 

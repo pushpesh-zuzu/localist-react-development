@@ -34,23 +34,27 @@ const LogSwitch = () => {
 
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/buyer-account";
+  const isNotification = location.pathname === "/user/notification";
   const userName = userToken?.name || registerData?.name || "";
   const userInitial = userName.charAt(0).toUpperCase();
 
   return (
     <div className={styles.logSwitchContainer}>
-      {!isBuyerPage && !isAccountPage && (
+      {!isBuyerPage && !isAccountPage && !isNotification && (
         <div className={styles.searchContainer}>
           <input placeholder="Search for a service" />
           <img src={searchIcon} alt="search-icon" />
         </div>
       )}
 
-      {(isBuyerPage || isAccountPage) && (
+      {(isBuyerPage || isAccountPage || isNotification) && (
+        <div className={styles.requestBox}>
         <div className={styles.myrequestText}>My Request</div>
+        
+        </div>
       )}
 
-      {userToken && (isBuyerPage || isAccountPage) && (
+      {userToken && (isBuyerPage || isAccountPage || isNotification) && (
         <div className={styles.nameCircle}>{userInitial}</div>
       )}
 

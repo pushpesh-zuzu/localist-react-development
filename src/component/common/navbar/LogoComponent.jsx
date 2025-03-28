@@ -23,6 +23,7 @@ const LogoComponent = () => {
  
 const location = useLocation() 
 const isAccountPage = location.pathname === "/buyer-account";
+const isNotification = location.pathname === "/user/notification";
   const handleRedirectUrl = () => {
     navigate("/");
   };
@@ -186,7 +187,7 @@ const isAccountPage = location.pathname === "/buyer-account";
         className={styles.mainLogo}
         onClick={handleRedirectUrl}
       />
-   {location.pathname !== "/buyers/create" && !isAccountPage &&  <Popover
+   {location.pathname !== "/buyers/create" && !isAccountPage && !isNotification  &&  <Popover
         placement={placement}
         content={content}
         arrow={false}

@@ -1,5 +1,5 @@
 .navbarContainer {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: white; /* Ya jo bhi color ho */
@@ -133,11 +133,22 @@
   padding: 12px;
   cursor: pointer !important;
 }
+/* .myrequestText {
+  color: #1e2a2e;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: 4px solid underline #00afe3;
+  
+} */
 .myrequestText {
   color: #1e2a2e;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
+  display: inline-block; /* Ensures the border is only as wide as the text */
+  border-bottom: 4px solid #00afe3; /* Underline with thickness and color */
+  padding-bottom: 5px; /* Adds space between text and underline */
 }
 .nameCircle {
   width: 40px;

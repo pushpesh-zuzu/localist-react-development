@@ -30,27 +30,8 @@ const PlaceNewRequest = () => {
           Place new request
         </button>
       </div>
-   {
-    buyerRequestList?.length < 0 &&
-     <div className={styles.card}>
-        <h3 className={styles.heading}>
-          Find services for your business on Localists
-        </h3>
-        <p className={styles.text}>
-          Most business could be getting a better deal on the services they use
-          day to day <br />
-          We got thousands of suppliers ready and waiting to quote.
-        </p>
-        <p className={styles.text}>
-          Find everything from web designers to bookkeepers and telephone
-          systems to office stationary
-        </p>
-        <button className={styles.bottomButton} onClick={openModal}>
-          Place new request
-        </button>
-      </div>
-}
-{buyerrequestListLoader ? <Spin/> : 
+  
+{buyerrequestListLoader ? <Spin/> :  buyerRequestList?.length > 0 ? 
       <div className={styles.cardsContainer}>
         {buyerRequestList?.map((req, index) => (
           <div key={index} className={styles.requestcard}>
@@ -67,6 +48,22 @@ const PlaceNewRequest = () => {
             <button className={styles.viewButton}>View Request</button>
           </div>
         ))}
+      </div> :  <div className={styles.card}>
+        <h3 className={styles.heading}>
+          Find services for your business on Localists
+        </h3>
+        <p className={styles.text}>
+          Most business could be getting a better deal on the services they use
+          day to day <br />
+          We got thousands of suppliers ready and waiting to quote.
+        </p>
+        <p className={styles.text}>
+          Find everything from web designers to bookkeepers and telephone
+          systems to office stationary
+        </p>
+        <button className={styles.bottomButton} onClick={openModal}>
+          Place new request
+        </button>
       </div>
 }
       {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
