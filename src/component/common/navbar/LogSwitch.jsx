@@ -39,7 +39,7 @@ const LogSwitch = () => {
 
   return (
     <div className={styles.logSwitchContainer}>
-      {!isBuyerPage  && !isAccountPage && (
+      {!isBuyerPage && !isAccountPage && (
         <div className={styles.searchContainer}>
           <input placeholder="Search for a service" />
           <img src={searchIcon} alt="search-icon" />
@@ -50,24 +50,39 @@ const LogSwitch = () => {
         <div className={styles.myrequestText}>My Request</div>
       )}
 
-      {userToken && (isBuyerPage || isAccountPage ) && (
+      {userToken && (isBuyerPage || isAccountPage) && (
         <div className={styles.nameCircle}>{userInitial}</div>
       )}
 
-      {(registerToken || userToken) ? (
+      {registerToken || userToken ? (
         <Popover
           content={
             <>
-              <div className={styles.logoutBtn} onClick={() => handleNavigation(isBuyerPage ? "/sellers/create/" : "/buyers/create")}>
+              <div
+                className={styles.logoutBtn}
+                onClick={() => handleNavigation("/user/notification")}
+              >
+                Notification
+              </div>
+              <div
+                className={styles.logoutBtn}
+                onClick={() =>
+                  handleNavigation(
+                    isBuyerPage ? "/sellers/create/" : "/buyers/create"
+                  )
+                }
+              >
                 Switch to {isBuyerPage ? "Seller" : "Buyer"}
               </div>
-              <div className={styles.logoutBtn} onClick={() => handleNavigation("/buyer-account")}>
+              <div
+                className={styles.logoutBtn}
+                onClick={() => handleNavigation("/buyer-account")}
+              >
                 Account Settings
               </div>
               <div className={styles.logoutBtn} onClick={handleLogout}>
                 Logout
               </div>
-            
             </>
           }
           trigger="hover"
@@ -76,14 +91,20 @@ const LogSwitch = () => {
         </Popover>
       ) : (
         <div className={styles.logsBtns}>
-          <div className={styles.loginBtn} onClick={() => handleNavigation("/login")}>
+          <div
+            className={styles.loginBtn}
+            onClick={() => handleNavigation("/login")}
+          >
             Login
           </div>
           {!selectedServiceId && !serviceTitle && (
-            <div className={styles.professionalBtn} onClick={() => {
-              dispatch(setRegisterStep(1));
-              handleNavigation("/sellers/create/");
-            }}>
+            <div
+              className={styles.professionalBtn}
+              onClick={() => {
+                dispatch(setRegisterStep(1));
+                handleNavigation("/sellers/create/");
+              }}
+            >
               Join as a Professional
             </div>
           )}
