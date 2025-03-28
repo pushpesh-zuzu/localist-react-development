@@ -1,7 +1,7 @@
 import styles from "./navbar.module.css";
 import logo from "../../../assets/Images/logo.svg";
 import downArrow from "../../../assets/Images/downarrow.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
@@ -13,13 +13,16 @@ import {
   serviceesData,
   subMenuData,
 } from "../../../constant/Megamenu";
+import { useSelector } from "react-redux";
 
 const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [mouseHover, setMouseHover] = useState("");
-
+ 
+const location = useLocation() 
+const isAccountPage = location.pathname === "/buyer-account";
   const handleRedirectUrl = () => {
     navigate("/");
   };
@@ -183,7 +186,7 @@ const LogoComponent = () => {
         className={styles.mainLogo}
         onClick={handleRedirectUrl}
       />
-      <Popover
+   {location.pathname !== "/buyers/create" && !isAccountPage &&  <Popover
         placement={placement}
         content={content}
         arrow={false}
@@ -196,6 +199,7 @@ const LogoComponent = () => {
           <img src={downArrow} alt="down-arrow" />
         </div>
       </Popover>
+}
     </div>
   );
 };

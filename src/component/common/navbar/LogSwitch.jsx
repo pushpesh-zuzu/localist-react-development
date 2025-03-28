@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,79 +10,80 @@ import { showToast } from "../../../utils";
 const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const { serviceTitle } = useParams();
+
   const { userToken } = useSelector((state) => state.auth);
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-  const { serviceTitle } = useParams();
 
-  const handleLoginPage = () => {
-    navigate("/login");
-  };
+  const handleNavigation = (path) => navigate(path);
 
-  const handleBuyer = () => {
-    navigate("/buyers/create");
-  };
-  const handleOpen = () => {
-    navigate("/sellers/create/");
-    dispatch(setRegisterStep(1));
-  };
-
-  const handleSettings = () => {
-    navigate("/buyer-account");
+  const handleLogout = async () => {
+    try {
+      const result = await dispatch(userLogout());
+      if (result) {
+        showToast("info", "Logout successful!");
+        handleNavigation("/login");
+      }
+    } catch (error) {
+      console.error("Logout Error:", error);
+    }
   };
 
-  const handleLogout = () => {
-    dispatch(userLogout())
-      .then((result) => {
-        if (result) {
-          navigate("/login");
-          showToast("info", "logout successful!");
-        } else {
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const isBuyerPage = location.pathname === "/buyers/create";
+  const isAccountPage = location.pathname === "/buyer-account";
+  const userName = userToken?.name || registerData?.name || "";
+  const userInitial = userName.charAt(0).toUpperCase();
 
   return (
     <div className={styles.logSwitchContainer}>
-      <div className={styles.searchContainer}>
-        <input placeholder="Search for a service" />
-        <img src={searchIcon} alt="search-icon" />
-      </div>
-      {registerToken || userToken ? (
+      {!isBuyerPage  && !isAccountPage && (
+        <div className={styles.searchContainer}>
+          <input placeholder="Search for a service" />
+          <img src={searchIcon} alt="search-icon" />
+        </div>
+      )}
+
+      {(isBuyerPage || isAccountPage) && (
+        <div className={styles.myrequestText}>My Request</div>
+      )}
+
+      {userToken && (isBuyerPage || isAccountPage ) && (
+        <div className={styles.nameCircle}>{userInitial}</div>
+      )}
+
+      {(registerToken || userToken) ? (
         <Popover
           content={
             <>
-              <div className={styles.logoutBtn} onClick={() => handleBuyer()}>
-                Switch to Buyer
+              <div className={styles.logoutBtn} onClick={() => handleNavigation(isBuyerPage ? "/sellers/create/" : "/buyers/create")}>
+                Switch to {isBuyerPage ? "Seller" : "Buyer"}
               </div>
-              <div className={styles.logoutBtn} onClick={() => handleLogout()}>
+              <div className={styles.logoutBtn} onClick={() => handleNavigation("/buyer-account")}>
+                Account Settings
+              </div>
+              <div className={styles.logoutBtn} onClick={handleLogout}>
                 Logout
-              </div>{" "}
-              <div
-                className={styles.logoutBtn}
-                onClick={() => handleSettings()}
-              >
-                Buyer account settings
               </div>
+            
             </>
           }
           trigger="hover"
         >
-          <div className={styles.loginBtn}>
-            {userToken ? userToken?.name : registerData?.name}
-          </div>
+          <div className={styles.loginBtn}>{userName}</div>
         </Popover>
       ) : (
         <div className={styles.logsBtns}>
-          <div className={styles.loginBtn} onClick={handleLoginPage}>
+          <div className={styles.loginBtn} onClick={() => handleNavigation("/login")}>
             Login
           </div>
           {!selectedServiceId && !serviceTitle && (
-            <div className={styles.professionalBtn} onClick={handleOpen}>
+            <div className={styles.professionalBtn} onClick={() => {
+              dispatch(setRegisterStep(1));
+              handleNavigation("/sellers/create/");
+            }}>
               Join as a Professional
             </div>
           )}
