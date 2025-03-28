@@ -1,52 +1,78 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./WhatServiceYouNeed.module.css";
-import { getPopularServiceList, searchService, setService } from "../../../../../store/FindJobs/findJobSlice";
+import {
+  searchService,
+  setService,
+} from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { questionAnswerData, setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
+import {
+  questionAnswerData,
+  setbuyerRequestData,
+} from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep,formData}) => {
+const WhatServiceYouNeed = ({ nextStep }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [errors, setErrors] = useState({ service: "", pincode: "" });
 
-  const { searchServiceLoader, service } = useSelector((state) => state.findJobs);
+  const { searchServiceLoader, service } = useSelector(
+    (state) => state.findJobs
+  );
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
-  // Search API call with debounce
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      if (isDropdownOpen && input.trim() !== "") {
+    if (isDropdownOpen && input.trim() !== "") {
+      const delayDebounce = setTimeout(() => {
         dispatch(searchService({ search: input }));
-      }
-    }, 500);
+      }, 500);
 
-    return () => clearTimeout(delayDebounce);
+      return () => clearTimeout(delayDebounce);
+    }
   }, [input, dispatch, isDropdownOpen]);
 
-  // Handle service selection
-  const handleSelectService = useCallback((item) => {
-    setInput(item.name);
-    setSelectedService(item);
-    setIsDropdownOpen(false);
-    setTimeout(() => dispatch(setService([])), 100);
-  }, [dispatch]);
+  const handleSelectService = useCallback(
+    (item) => {
+      setInput(item.name);
+      setSelectedService(item);
+      setIsDropdownOpen(false);
+      setErrors((prev) => ({ ...prev, service: "" }));
+      setTimeout(() => dispatch(setService([])), 100);
+    },
+    [dispatch]
+  );
 
-  // Handle continue button click
   const handleContinue = useCallback(() => {
-    if (!selectedService) return;
-    dispatch(setbuyerRequestData({
-      service_id:selectedService.id,
-      postcode:pincode
-    }))
-    dispatch(questionAnswerData({ service_id: selectedService.id }));
-    nextStep();
-  }, [selectedService,pincode, dispatch, nextStep]);
+    let newErrors = { service: "", pincode: "" };
 
-  // Load Google Maps script and initialize autocomplete
+    if (!selectedService) {
+      newErrors.service = "Please select a service!";
+    }
+
+    if (!pincode) {
+      newErrors.pincode = "Pincode is required!";
+    } else if (pincode.length < 6 || pincode.length > 10) {
+      newErrors.pincode = "Pincode must be between 6 and 10 characters!";
+    }
+
+    setErrors(newErrors);
+
+    if (!newErrors.service && !newErrors.pincode) {
+      dispatch(
+        setbuyerRequestData({
+          service_id: selectedService.id,
+          postcode: pincode,
+        })
+      );
+      dispatch(questionAnswerData({ service_id: selectedService.id }));
+      nextStep();
+    }
+  }, [selectedService, pincode, dispatch, nextStep]);
+
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -64,10 +90,13 @@ const WhatServiceYouNeed = ({ nextStep,formData}) => {
     const initAutocomplete = () => {
       if (!inputRef.current) return;
 
-      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-        types: ["geocode"],
-        componentRestrictions: { country: "IN" },
-      });
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          types: ["geocode"],
+          componentRestrictions: { country: "IN" },
+        }
+      );
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
@@ -79,6 +108,7 @@ const WhatServiceYouNeed = ({ nextStep,formData}) => {
 
         if (postalCode) {
           setPincode(postalCode);
+          setErrors((prev) => ({ ...prev, pincode: "" }));
           inputRef.current.value = postalCode;
         } else {
           alert("No PIN code found! Please try again.");
@@ -89,27 +119,42 @@ const WhatServiceYouNeed = ({ nextStep,formData}) => {
     loadGoogleMapsScript();
   }, []);
 
+  const handlePincodeChange = (e) => {
+    const value = e.target.value.slice(0, 10);
+    setPincode(value);
+
+    setErrors((prev) => ({
+      ...prev,
+      pincode:
+        value.length > 0 && (value.length < 6 || value.length > 10)
+          ? "Pincode must be between 6 and 10 characters!"
+          : "",
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>What service do you need?</h2>
 
-      {/* Service Selection Input */}
+      {/* Service Input */}
       <div className={styles.formGroup}>
         <label className={styles.label}>What service do you need?</label>
         <input
           type="text"
           placeholder="e.g. Personal Trainers, House Cleaning"
-          className={styles.input}
+          className={`${styles.input} ${
+            errors.service ? styles.errorBorder : ""
+          }`}
           onChange={(e) => {
             setInput(e.target.value);
             setIsDropdownOpen(!!e.target.value);
             setSelectedService(null);
-
+            setErrors((prev) => ({ ...prev, service: "" }));
           }}
           value={input}
         />
+        {errors.service && <p className={styles.errorText}>{errors.service}</p>}
 
-        {/* Dropdown for Service Suggestions */}
         {isDropdownOpen && service?.length > 0 && (
           <div className={styles.searchResults}>
             {searchServiceLoader ? (
@@ -135,17 +180,19 @@ const WhatServiceYouNeed = ({ nextStep,formData}) => {
         <input
           type="text"
           placeholder="Enter your ZIP code or town"
-          className={styles.input}
+          className={`${styles.input} ${
+            errors.pincode ? styles.errorBorder : ""
+          }`}
           ref={inputRef}
           name="pincode"
-          value={pincode || ""}
-          onChange={(e) => setPincode(e.target.value)}
+          value={pincode}
+          onChange={handlePincodeChange}
         />
+        {errors.pincode && <p className={styles.errorText}>{errors.pincode}</p>}
       </div>
 
-      {/* Continue Button */}
       <div className={styles.buttonWrapper}>
-        <button className={styles.button} onClick={handleContinue} disabled={!selectedService}>
+        <button className={styles.button} onClick={handleContinue}>
           Continue
         </button>
       </div>
