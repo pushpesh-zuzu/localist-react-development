@@ -15,7 +15,6 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
     setPhoneNumber(value);
     setError(false);
   };
-
   const handleSubmit = () => {
     if (phoneNumber.length !== 10) {
       setError(true);
