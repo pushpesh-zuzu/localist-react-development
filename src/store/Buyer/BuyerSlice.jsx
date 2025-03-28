@@ -61,6 +61,7 @@ export const createRequestData = (requestData) => {
         
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id))
+        return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));

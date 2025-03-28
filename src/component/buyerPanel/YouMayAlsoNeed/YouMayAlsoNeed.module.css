@@ -43,6 +43,7 @@
   font-size: 14px;
   color: #ffffff;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .serviceTitle:hover {

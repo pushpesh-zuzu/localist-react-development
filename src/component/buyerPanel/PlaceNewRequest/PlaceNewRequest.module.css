@@ -155,6 +155,7 @@
 .cardsContainer {
   display: flex;
   gap: 20px;
+  overflow:auto;
 }
 
 .requestcard {

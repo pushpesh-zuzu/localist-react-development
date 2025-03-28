@@ -47,7 +47,9 @@ function AutoplayPlugin(slider) {
   slider.on("animationEnded", start);
   slider.on("updated", start);
 }
-
+const handleOpen= () => {
+  
+}
 const YouMayAlsoNeed = () => {
   const [sliderRef, slider] = useKeenSlider(
     {
@@ -89,7 +91,7 @@ const YouMayAlsoNeed = () => {
                 className={styles.image}
               />
 
-              <p className={styles.serviceTitle}>{service.title}</p>
+              <p className={styles.serviceTitle} onClick={handleOpen}>{service.title}</p>
             </div>
           ))}
         </div>

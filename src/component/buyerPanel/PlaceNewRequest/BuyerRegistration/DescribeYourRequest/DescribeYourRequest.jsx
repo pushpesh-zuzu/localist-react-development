@@ -10,6 +10,7 @@ import {
 } from "../../../../../store/Buyer/BuyerSlice";
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const MAX_WORDS = 200;
 const MIN_WORDS = 5;
@@ -26,6 +27,7 @@ const DescribeYourRequest = () => {
 
   const { requestId ,qualityData,addDetailLoader} = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   // const handleChange = (e) => {
   //   const words = e.target.value.trim().split(/\s+/);
@@ -100,7 +102,9 @@ const DescribeYourRequest = () => {
       professional_letin: professionalLetin ? 1 : 0,
     };
 
-    dispatch(addDetailsRequestData(detailsData));
+    dispatch(addDetailsRequestData(detailsData))
+    navigate("/buyers/create")
+     
   };
 
   return (
@@ -145,6 +149,7 @@ const DescribeYourRequest = () => {
           multiple
           className={styles.fileInput}
           onChange={handleFileChange}
+          accept="image/png, image/jpg, image/jpeg"
         />
       </label>
       {fileError && (

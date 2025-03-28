@@ -1,29 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./PlaceNewRequest.module.css";
 import BuyerRegistration from "./BuyerRegistration/BuyerRegistration";
+import { useDispatch, useSelector } from "react-redux";
+import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
+import moment from "moment"
+import { Spin } from "antd";
 
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const dispatch = useDispatch(); 
+  const {buyerRequestList,buyerrequestListLoader} = useSelector((state) => state.buyer);
+  useEffect(() => { 
+    dispatch(getbuyerrequestList())
+  }
+  , []);
 
-  const requests = [
-    {
-      title: "Personal Trainer",
-      time: "26 mins ago",
-      message: "Your request has been rejected! Please email",
-      email: "team@localists.com",
-      colorClass: styles.lightBlueBox,
-    },
-    {
-      title: "Web Designer",
-      time: "52 mins ago",
-      message: "Your request has been rejected! Please email",
-      email: "team@localists.com",
-      colorClass: styles.lightRedBox,
-    },
-  ];
+
 
   return (
     <div className={styles.container}>
@@ -35,7 +30,9 @@ const PlaceNewRequest = () => {
           Place new request
         </button>
       </div>
-      {/* <div className={styles.card}>
+   {
+    buyerRequestList?.length < 0 &&
+     <div className={styles.card}>
         <h3 className={styles.heading}>
           Find services for your business on Localists
         </h3>
@@ -51,18 +48,19 @@ const PlaceNewRequest = () => {
         <button className={styles.bottomButton} onClick={openModal}>
           Place new request
         </button>
-      </div> */}
-
+      </div>
+}
+{buyerrequestListLoader ? <Spin/> : 
       <div className={styles.cardsContainer}>
-        {requests.map((req, index) => (
+        {buyerRequestList?.map((req, index) => (
           <div key={index} className={styles.requestcard}>
             <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>{req.title}</h3>
-              <span className={styles.timeAgo}>{req.time}</span>
+              <h3 className={styles.cardTitle}>{req.service_id}</h3>
+              <span className={styles.timeAgo}>{moment(req.created_at).format("hh:mm A")}</span>
             </div>
             <div className={`${styles.messageBox} ${req.colorClass}`}>
               <p>
-                {req.message} <a href={`mailto:${req.email}`}>{req.email}</a>{" "}
+                {req.details} <a href={`mailto:${req.email}`}>{"team@locallists.com"}</a>{" "}
                 for more information.
               </p>
             </div>
@@ -70,7 +68,7 @@ const PlaceNewRequest = () => {
           </div>
         ))}
       </div>
-
+}
       {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
     </div>
   );
