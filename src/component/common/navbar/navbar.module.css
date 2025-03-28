@@ -134,7 +134,7 @@
   cursor: pointer !important;
 }
 .myrequestText {
-  color: #1E2A2E;
+  color: #1e2a2e;
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
@@ -375,6 +375,10 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
 }
 
 @media screen and (max-width: 1010px) {

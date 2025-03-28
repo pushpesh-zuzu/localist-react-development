@@ -8,6 +8,23 @@ const PlaceNewRequest = () => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const requests = [
+    {
+      title: "Personal Trainer",
+      time: "26 mins ago",
+      message: "Your request has been rejected! Please email",
+      email: "team@localists.com",
+      colorClass: styles.lightBlueBox,
+    },
+    {
+      title: "Web Designer",
+      time: "52 mins ago",
+      message: "Your request has been rejected! Please email",
+      email: "team@localists.com",
+      colorClass: styles.lightRedBox,
+    },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -18,7 +35,7 @@ const PlaceNewRequest = () => {
           Place new request
         </button>
       </div>
-      <div className={styles.card}>
+      {/* <div className={styles.card}>
         <h3 className={styles.heading}>
           Find services for your business on Localists
         </h3>
@@ -34,6 +51,24 @@ const PlaceNewRequest = () => {
         <button className={styles.bottomButton} onClick={openModal}>
           Place new request
         </button>
+      </div> */}
+
+      <div className={styles.cardsContainer}>
+        {requests.map((req, index) => (
+          <div key={index} className={styles.requestcard}>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>{req.title}</h3>
+              <span className={styles.timeAgo}>{req.time}</span>
+            </div>
+            <div className={`${styles.messageBox} ${req.colorClass}`}>
+              <p>
+                {req.message} <a href={`mailto:${req.email}`}>{req.email}</a>{" "}
+                for more information.
+              </p>
+            </div>
+            <button className={styles.viewButton}>View Request</button>
+          </div>
+        ))}
       </div>
 
       {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
