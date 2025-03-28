@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./DescribeYourRequest.module.css";
 import PlusIcon from "../../../../../assets/Icons/PlusIcon.svg";
 import CheckIcon from "../../../../../assets/Icons/CheckIcon.svg";
@@ -8,6 +8,8 @@ import {
   addImageSubmittedData,
   textQualityData,
 } from "../../../../../store/Buyer/BuyerSlice";
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from "antd";
 
 const MAX_WORDS = 200;
 const MIN_WORDS = 5;
@@ -22,8 +24,28 @@ const DescribeYourRequest = () => {
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
   const progress = Math.min((wordCount / MAX_WORDS) * 100, 100);
 
-  const { requestId } = useSelector((state) => state.buyer);
+  const { requestId ,qualityData,addDetailLoader} = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
+
+  // const handleChange = (e) => {
+  //   const words = e.target.value.trim().split(/\s+/);
+  //   if (words.filter(Boolean).length <= MAX_WORDS) {
+  //     setText(e.target.value);
+  //     setTextError(false);
+  //   }
+
+  //   const textData = { text: e.target.value };
+  //   dispatch(textQualityData(textData));
+  // };
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (text.trim() !== "") {
+        dispatch(textQualityData({ text }));
+      }
+    }, 5000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [text, dispatch]); 
 
   const handleChange = (e) => {
     const words = e.target.value.trim().split(/\s+/);
@@ -31,9 +53,6 @@ const DescribeYourRequest = () => {
       setText(e.target.value);
       setTextError(false);
     }
-
-    const textData = { text: e.target.value };
-    dispatch(textQualityData(textData));
   };
 
   const handleCheckboxChange = (e) => {
@@ -154,7 +173,7 @@ const DescribeYourRequest = () => {
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
-            style={{ width: `${progress}%` }}
+            style={{ width: `${qualityData}%` }}
           ></div>
         </div>
       </div>
@@ -174,7 +193,7 @@ const DescribeYourRequest = () => {
 
       <div className={styles.buttonWrapper}>
         <button className={styles.viewMatchesBtn} onClick={handleSubmit}>
-          View Matches
+         {addDetailLoader ?  <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} /> :" View Matches"}
         </button>
       </div>
     </div>

@@ -16,7 +16,11 @@ const initialState = {
     questions:[],
     phone:"",
     recevive_online:""
-}
+},
+qualityData:{},
+addDetailLoader:false,
+buyerrequestListLoader:false, 
+buyerRequestList:[] 
 };
 
 export const questionAnswerData = (questionData) => {
@@ -158,7 +162,7 @@ export const textQualityData = (qualityData) => {
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+        dispatch(setQualityData(response?.data?.data?.quality_score));
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -170,7 +174,7 @@ export const textQualityData = (qualityData) => {
 
 export const addDetailsRequestData = (addDetailsData) => {
   return async (dispatch) => {
-    dispatch(setChangePasswordLoader(true));
+    dispatch(setAddDetailLoader(true));
     try {
       const response = await axiosInstance.post(
         `customer/my-request/add-details-to-request`,
@@ -183,11 +187,25 @@ export const addDetailsRequestData = (addDetailsData) => {
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      dispatch(setChangePasswordLoader(false));
+      dispatch(setAddDetailLoader(false));
     }
   };
 };
-
+export const getbuyerrequestList = () => {
+  return async (dispatch) => {
+    dispatch(setbuyerrequestListLoader(true));
+    try {
+      const response = await axiosInstance.get(`customer/my-request/get-submitted-request-list`);
+      if (response) {
+        dispatch(setbuyerRequestList(response?.data?.data));
+      }
+    } catch (error) {
+      console.log("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setbuyerrequestListLoader(false));
+    }
+  };
+};
 
 
 const buyerSlice = createSlice({
@@ -217,13 +235,25 @@ const buyerSlice = createSlice({
     },
     setRequestId(state,action){
       state.requestId = action.payload
-    }
+    },
+    setQualityData(state,action){
+      state.qualityData = action.payload
+    },
+    setAddDetailLoader(state,action){
+      state.addDetailLoader = action.payload
+    },
+    setbuyerrequestListLoader(state,action){
+      state.buyerrequestListLoader = action.payload
+    },
+    setbuyerRequestList(state,action){
+      state.buyerRequestList = action.payload
+    } 
     // setQuestions(state, action) {   
     //   state.buyerRequest.questionData = action.payload;
     // },
   },
 });
 
-export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId } = buyerSlice.actions;
+export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList } = buyerSlice.actions;
 
 export default buyerSlice.reducer;
