@@ -44,13 +44,25 @@
   border: 1px solid #d9d9d9;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   padding: 14px;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   resize: none;
   /* overflow-y: auto; */
 }
 
 .textarea::placeholder {
   font-family: Poppins;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  text-align: left;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.errorBorder {
+  border: 1px solid red !important;
 }
 
 .fileUpload {

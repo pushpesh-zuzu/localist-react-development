@@ -1,40 +1,36 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// Adjust the import path if needed
 import styles from "./ViewYourMatches.module.css";
 import { createRequestData } from "../../../../../store/Buyer/BuyerSlice";
 
-const ViewYourMatches = ({ onClose, nextStep, previousStep, formData }) => {
-  const { buyerRequest, } = useSelector(
-    (state) => state.buyer
-  );
+const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
+  const { buyerRequest } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [consent, setConsent] = useState(false); // State to track checkbox
+  const [consent, setConsent] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleInputChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // Allow only numbers
+    const value = e.target.value.replace(/\D/g, "");
     setPhoneNumber(value);
+    setError(false);
   };
 
   const handleSubmit = () => {
     if (phoneNumber.length !== 10) {
-      alert("Please enter a valid 10-digit phone number.");
+      setError(true);
       return;
     }
 
     const formData = new FormData();
-    // Append required fields to FormData
-    formData.append("service_id",buyerRequest?.service_id)
-    formData.append("postcode",buyerRequest?.postcode)
-    formData.append("questions",JSON.stringify(buyerRequest?.questions))
-    
+    formData.append("service_id", buyerRequest?.service_id);
+    formData.append("postcode", buyerRequest?.postcode);
+    formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
     formData.append("recevive_online", consent ? 1 : 0);
-    
-    dispatch(createRequestData(formData));
 
-    nextStep(); // Proceed to the next step
+    dispatch(createRequestData(formData));
+    nextStep();
   };
 
   return (
@@ -56,7 +52,13 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep, formData }) => {
             maxLength={10}
             value={phoneNumber}
             onChange={handleInputChange}
+            style={{ borderColor: error ? "red" : "" }}
           />
+          {error && (
+            <span className={styles.errorMessage}>
+              Please enter a valid 10-digit phone number.
+            </span>
+          )}
 
           <div className={styles.checkboxContainer}>
             <input
