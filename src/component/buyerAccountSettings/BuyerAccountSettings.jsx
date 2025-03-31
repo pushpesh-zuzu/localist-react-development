@@ -71,7 +71,7 @@ const BuyerAccountSettings = () => {
     };
     dispatch(updateUserIfoData(infoData)).then((result) => {
       if (result?.success) {
-        showToast("info", result?.message || "Password Update successfully!");
+        showToast("info", result?.message || "User Update Details successfully!");
       }
     });
   };
