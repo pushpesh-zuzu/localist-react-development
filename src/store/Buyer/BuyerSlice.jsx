@@ -20,7 +20,10 @@ const initialState = {
 qualityData:{},
 addDetailLoader:false,
 buyerrequestListLoader:false, 
-buyerRequestList:[] 
+buyerRequestList:[] ,
+getuploadImg:[],
+infoLoader:false,
+requestLoader:false
 };
 
 export const questionAnswerData = (questionData) => {
@@ -45,7 +48,7 @@ export const questionAnswerData = (questionData) => {
 export const createRequestData = (requestData) => {
   return async (dispatch) => {
     
-    dispatch(setProfileLoader(true));
+    dispatch(setCreateRequesLoader(true));
     try {
       const response = await axiosInstance.post(
         `customer/my-request/create-new-request`,
@@ -67,22 +70,22 @@ export const createRequestData = (requestData) => {
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      dispatch(setProfileLoader(false));
+      dispatch(setCreateRequesLoader(false));
     }
   };
 };
 
-export const updateProfileData = (profileData) => {
+export const updateProfileData = () => {
   return async (dispatch) => {
     dispatch(setProfileLoader(true));
     try {
-      const response = await axiosInstance.post(
-        `users/update-profile`,
-        profileData
+      const response = await axiosInstance.get(
+        `customer/setting/get-profile-info`,
+        
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+        dispatch(setGetUploadImgData(response?.data?.data));
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -96,9 +99,14 @@ export const updateProfileImageData = (profileImageData) => {
     dispatch(setProfileImageLoader(true));
     try {
       const response = await axiosInstance.post(
-        `users/update-profile-image`,
-        profileImageData
-      );
+        `customer/setting/update-profile-image`,
+        profileImageData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
 
       if (response) {
         // dispatch(setQuestionAnswerData(response?.data?.data));
@@ -126,6 +134,25 @@ export const updatePasswordData = (changeData) => {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setChangePasswordLoader(false));
+    }
+  };
+};
+export const updateUserIfoData = (userData) => {
+  return async (dispatch) => {
+    dispatch(setChangeInfoLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `customer/setting/update-profile-info`,
+        userData
+      );
+
+      if (response) {
+        // dispatch(setQuestionAnswerData(response?.data?.data));
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setChangeInfoLoader(false));
     }
   };
 };
@@ -249,13 +276,22 @@ const buyerSlice = createSlice({
     },
     setbuyerRequestList(state,action){
       state.buyerRequestList = action.payload
-    } 
+    } ,
+    setGetUploadImgData(state,action) {
+      state.getuploadImg = action.payload
+    },
+    setChangeInfoLoader(state,action){
+      state.infoLoader = action.payload
+    },
+    setCreateRequesLoader(state,action){
+      state.requestLoader = action.payload
+    }
     // setQuestions(state, action) {   
     //   state.buyerRequest.questionData = action.payload;
     // },
   },
 });
 
-export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList } = buyerSlice.actions;
+export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

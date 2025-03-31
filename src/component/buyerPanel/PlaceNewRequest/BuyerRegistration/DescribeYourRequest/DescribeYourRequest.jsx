@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const MAX_WORDS = 200;
 const MIN_WORDS = 5;
 
-const DescribeYourRequest = () => {
+const DescribeYourRequest = ({onClose}) => {
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
   const [professionalLetin, setProfessionalLetin] = useState(false);
@@ -44,14 +44,14 @@ const DescribeYourRequest = () => {
       if (text.trim() !== "") {
         dispatch(textQualityData({ text }));
       }
-    }, 5000);
+    }, 2000);
 
     return () => clearTimeout(delayDebounce);
   }, [text, dispatch]); 
 
   const handleChange = (e) => {
-    const words = e.target.value.trim().split(/\s+/);
-    if (words.filter(Boolean).length <= MAX_WORDS) {
+    const qualityData = e.target.value.trim().split(/\s+/);
+    if (qualityData.filter(Boolean).length <= MAX_WORDS) {
       setText(e.target.value);
       setTextError(false);
     }
@@ -103,12 +103,7 @@ const DescribeYourRequest = () => {
     };
 
     dispatch(addDetailsRequestData(detailsData))
-    .then(() => {
-      navigate("/buyers/create")
-    })
-    .catch((error) => {
-      console.error("Navigation failed due to API error:", error);
-    });
+    onClose()
     
      
   };
@@ -158,6 +153,7 @@ const DescribeYourRequest = () => {
           accept="image/png, image/jpg, image/jpeg"
         />
       </label>
+      <p className={styles.textmes}>Image (jpeg, jpg, png) file can be uploaded</p>
       {fileError && (
         <span className={styles.errorMessage}>Please upload a file.</span>
       )}
@@ -184,7 +180,7 @@ const DescribeYourRequest = () => {
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
-            style={{ width: `${qualityData}%` }}
+            style={{ width: qualityData > 0 ? `${qualityData}%` : "0%" }} 
           ></div>
         </div>
       </div>
