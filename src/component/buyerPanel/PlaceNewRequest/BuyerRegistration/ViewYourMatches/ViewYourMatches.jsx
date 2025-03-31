@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ViewYourMatches.module.css";
 import { createRequestData } from "../../../../../store/Buyer/BuyerSlice";
+import { Spin } from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
 
 const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
-  const { buyerRequest } = useSelector((state) => state.buyer);
+  const { buyerRequest,requestLoader } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState(false);
-
+  const { userToken } = useSelector((state) => state.auth);
+  
+  useEffect(() => {
+    if (userToken?.phone) {
+      setPhoneNumber(userToken.phone);
+    }
+  }, [userToken?.phone])
   const handleInputChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     setPhoneNumber(value);
@@ -20,7 +28,7 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
       setError(true);
       return;
     }
-
+   
     const formData = new FormData();
     formData.append("service_id", buyerRequest?.service_id);
     formData.append("postcode", buyerRequest?.postcode);
@@ -44,20 +52,21 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
             Please enter your phone number
           </label>
           <input
-            type="text"
-            id="phoneNumber"
-            placeholder="Phone Number"
-            className={styles.input}
-            maxLength={10}
-            value={phoneNumber}
-            onChange={handleInputChange}
-            style={{ borderColor: error ? "red" : "" }}
-          />
-          {error && (
-            <span className={styles.errorMessage}>
-              Please enter a valid 10-digit phone number.
-            </span>
-          )}
+  type="text"
+  id="phoneNumber"
+  placeholder="Phone Number"
+  className={styles.input}
+  maxLength={10}
+  value={phoneNumber} 
+  onChange={handleInputChange}
+  style={{ borderColor: error ? "red" : "" }}
+  disabled={!!userToken?.phone} 
+/>
+{error && (
+  <span className={styles.errorMessage}>
+    Please enter a valid 10-digit phone number.
+  </span>
+)}
 
           <div className={styles.checkboxContainer}>
             <input
@@ -76,8 +85,8 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
               Back
             </button>
             <button className={styles.nextButton} onClick={handleSubmit}>
-              View Matches
-            </button>
+              {requestLoader ?   <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} />  : "View Matches"
+}            </button>
           </div>
         </div>
 

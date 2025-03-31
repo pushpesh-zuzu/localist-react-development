@@ -1,5 +1,5 @@
 .navbarContainer {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   background-color: white; /* Ya jo bhi color ho */
