@@ -74,6 +74,7 @@
 .profileImage img {
   height: 62.36px;
   width: 62.36px;
+  object-fit: cover;
   cursor: pointer;
 }
 
@@ -218,4 +219,38 @@
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 40px;
+  }
+
+  .formGroup {
+    width: -webkit-fill-available;
+  }
+
+  .formGroupPassword {
+    margin-bottom: 0px;
+  }
+
+  .saveButtonWrapper {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 20px 20px 20px;
+  }
+
+  .detailsBox {
+    padding: 20px;
+  }
+  .formGroupPassword {
+    margin-bottom: 0px;
+  }
+  .saveButtonWrapper {
+    margin-top: 15px;
+  }
 }
