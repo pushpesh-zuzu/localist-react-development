@@ -11,6 +11,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import { showToast } from "../../../../../utils";
 
 const MAX_WORDS = 200;
 const MIN_WORDS = 5;
@@ -104,8 +105,14 @@ const DescribeYourRequest = ({ onClose }) => {
       professional_letin: professionalLetin ? 1 : 0,
     };
 
-    dispatch(addDetailsRequestData(detailsData));
-    onClose();
+    dispatch(addDetailsRequestData(detailsData)).then((result) => {
+              if (result?.success) {
+                showToast("info", result?.message || "Create Request successfully!");
+                
+              }
+              onClose();
+            });;
+   
 
     // .then(() => {
     //   navigate("/buyers/create");

@@ -23,7 +23,8 @@ buyerrequestListLoader:false,
 buyerRequestList:[] ,
 getuploadImg:[],
 infoLoader:false,
-requestLoader:false
+requestLoader:false,
+submitImageLoader:false
 };
 
 export const questionAnswerData = (questionData) => {
@@ -61,7 +62,7 @@ export const createRequestData = (requestData) => {
       );
 
       if (response) {
-        console.log(response,"prem")
+      
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id))
         return response.data
@@ -123,12 +124,12 @@ export const updatePasswordData = (changeData) => {
     dispatch(setChangePasswordLoader(true));
     try {
       const response = await axiosInstance.post(
-        `users/change-password`,
+        `customer/setting/change-password`,
         changeData
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+       return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -147,7 +148,7 @@ export const updateUserIfoData = (userData) => {
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+        return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -158,7 +159,7 @@ export const updateUserIfoData = (userData) => {
 };
 export const addImageSubmittedData = (ImageData) => {
   return async (dispatch) => {
-    dispatch(setChangePasswordLoader(true));
+    dispatch(setSubmitImageLoader(true));
     try {
       const response = await axiosInstance.post(
         `customer/my-request/add-image-to-submitted-request`,
@@ -176,14 +177,14 @@ export const addImageSubmittedData = (ImageData) => {
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      dispatch(setChangePasswordLoader(false));
+      dispatch(setSubmitImageLoader(false));
     }
   };
 };
 
 export const textQualityData = (qualityData) => {
   return async (dispatch) => {
-    dispatch(setChangePasswordLoader(true));
+    // dispatch(setChangePasswordLoader(true));
     try {
       const response = await axiosInstance.post(
         `customer/my-request/check-paragraph-quality`,
@@ -196,7 +197,7 @@ export const textQualityData = (qualityData) => {
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      dispatch(setChangePasswordLoader(false));
+      // dispatch(setChangePasswordLoader(false));
     }
   };
 };
@@ -211,7 +212,7 @@ export const addDetailsRequestData = (addDetailsData) => {
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+        return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -285,6 +286,9 @@ const buyerSlice = createSlice({
     },
     setCreateRequesLoader(state,action){
       state.requestLoader = action.payload
+    },
+    setSubmitImageLoader(state,action){
+      state.submitImageLoader = action.payload
     }
     // setQuestions(state, action) {   
     //   state.buyerRequest.questionData = action.payload;
@@ -292,6 +296,6 @@ const buyerSlice = createSlice({
   },
 });
 
-export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader } = buyerSlice.actions;
+export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

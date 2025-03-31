@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import styles from "./BuyerAccountSettings.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
-import DefaultProfileImage from "../../assets/Images/DefaultProfileImage.svg";
+
 import {
+  updatePasswordData,
   updateProfileData,
   updateProfileImageData,
   updateUserIfoData,
@@ -11,12 +12,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { showToast } from "../../utils";
 
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
-  const { getuploadImg, infoLoader } = useSelector((state) => state.buyer);
+  const navigate = useNavigate()
+  const { getuploadImg, infoLoader,changePasswordLoader} = useSelector((state) => state.buyer);
 
-  // Initial state for user details
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -26,8 +29,6 @@ const BuyerAccountSettings = () => {
   useEffect(() => {
     dispatch(updateProfileData());
   }, [dispatch]);
-
-  // Update state when data is available
   useEffect(() => {
     if (Array.isArray(getuploadImg) && getuploadImg.length > 0) {
       const userData = getuploadImg[0];
@@ -65,16 +66,21 @@ const BuyerAccountSettings = () => {
       email: userDetails.email,
       phone: userDetails.phone,
     };
-    dispatch(updateUserIfoData(infoData));
+    dispatch(updateUserIfoData(infoData)).then((result) => {
+      if (result?.success) {
+        showToast("info", result?.message || "Password Update successfully!");
+        
+      }
+    });;
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   const [formData, setFormData] = useState({
+  
     password: "",
-    newPassword: "",
-    confirmNewPassword: "",
+    password_confirmation: "",
     error: "",
   });
 
@@ -83,16 +89,35 @@ const BuyerAccountSettings = () => {
   };
 
   const handleSavePassword = () => {
-    if (formData.newPassword !== formData.confirmNewPassword) {
+    if (!formData.password || !formData.password_confirmation) {
+      setFormData({
+        ...formData,
+        error: "Please enter password.",
+      });
+      return;
+    }
+    if (formData.password !== formData.password_confirmation) {
       setFormData({
         ...formData,
         error: "New password and confirm password must match.",
       });
       return;
     }
-    console.log("Password updated successfully!");
+    const formDataToSend = new FormData();
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append("password_confirmation", formData.password_confirmation);
+    dispatch(updatePasswordData(formDataToSend)).then((result) => {
+          if (result?.success) {
+            showToast("info", result?.message || "Password Update successfully!");
+            
+          }
+        });
+  
     setIsModalOpen(false);
   };
+  const hanldeRequest = () => {
+    navigate("/buyers/create")
+  }
 
   return (
     <div className={styles.container}>
@@ -100,24 +125,36 @@ const BuyerAccountSettings = () => {
 
       <div className={styles.infoBox}>
         <p>
-          <span>
-            {/* <img src={iIcon} alt="" /> */}
-            <img src={userDetails.profile_image || iIcon} alt="Profile" />
-          </span>
+        <span>
+ 
+    <img src={iIcon} alt="Profile" />
+
+</span>
           Keep your details updated so that professionals can get in touch. If
           you no longer require the service, please close the request.
         </p>
-        <button className={styles.requestButton}>Go to My Requests</button>
+        <button className={styles.requestButton} onClick={hanldeRequest}>Go to My Requests</button>
       </div>
 
       <div className={styles.detailsBox}>
         <h3 className={styles.subHeading}>My details</h3>
         <div className={styles.profileSection}>
           <div className={styles.profileImage}>
-            <img
-              src={userDetails.profile_image || DefaultProfileImage}
-              alt="Profile"
-            />
+          <span>
+  {userDetails?.profile_image ? (
+    <>
+      {console.log("Profile", `https://localists.zuzucodes.com/admin/${userDetails.profile_image}`)}
+      <img 
+        src={`https://localists.zuzucodes.com/admin/${userDetails.profile_image}`} 
+        alt="Profile" 
+        onError={(e) => { e.target.src = iIcon; }}
+        style={{ width: "62px", height: "62px", borderRadius: "50%" }}
+      />
+    </>
+  ) : (
+    <img src={iIcon} alt="Profile" />
+  )}
+</span>
           </div>
           <div className={styles.uploadButtons}>
             <label className={styles.uploadButton}>
@@ -202,8 +239,8 @@ const BuyerAccountSettings = () => {
               <div className={styles.passwordField}>
                 <input
                   type={newPasswordVisible ? "text" : "password"}
-                  name="newPassword"
-                  value={formData.newPassword}
+                  name="password"
+                  value={formData.password}
                   onChange={handleFormChange}
                   className={`${styles.inputField} ${
                     formData.error ? styles.inputError : ""
@@ -231,8 +268,8 @@ const BuyerAccountSettings = () => {
               <div className={styles.passwordField}>
                 <input
                   type={confirmPasswordVisible ? "text" : "password"}
-                  name="confirmNewPassword"
-                  value={formData.confirmNewPassword}
+                  name="password_confirmation"
+                  value={formData.password_confirmation}
                   onChange={handleFormChange}
                   className={`${styles.inputField} ${
                     formData.error ? styles.inputError : ""
@@ -261,7 +298,9 @@ const BuyerAccountSettings = () => {
                 className={styles.modalSaveButton}
                 onClick={handleSavePassword}
               >
-                Save
+               {changePasswordLoader ? <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />  : "Save"}
               </button>
             </div>
           </div>
