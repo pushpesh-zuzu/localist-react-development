@@ -71,7 +71,10 @@ const BuyerAccountSettings = () => {
     };
     dispatch(updateUserIfoData(infoData)).then((result) => {
       if (result?.success) {
-        showToast("info", result?.message || "User Update Details successfully!");
+        showToast(
+          "info",
+          result?.message || "User Update Details successfully!"
+        );
       }
     });
   };
@@ -121,6 +124,19 @@ const BuyerAccountSettings = () => {
   const hanldeRequest = () => {
     navigate("/buyers/create");
   };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.scroll(0, 0);
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
 
   return (
     <div className={styles.container}>
@@ -300,6 +316,12 @@ const BuyerAccountSettings = () => {
             </div>
 
             <div className={styles.saveButtonWrapperModal}>
+              <button
+                className={styles.modalCancelButton}
+                onClick={() => setIsModalOpen(false)} // Modal close on Cancel
+              >
+                Cancel
+              </button>
               <button
                 className={styles.modalSaveButton}
                 onClick={handleSavePassword}

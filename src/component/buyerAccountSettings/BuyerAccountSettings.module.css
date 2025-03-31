@@ -167,7 +167,7 @@
 }
 
 .saveButtonWrapperModal {
-  text-align: center;
+  text-align: right;
 }
 
 .modalSaveButton {
@@ -221,36 +221,32 @@
   cursor: pointer;
 }
 
+.modalCancelButton {
+  background: #e8e8e8;
+  color: #000000;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.modalCancelButton:hover {
+  background: #b3b3b3;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 30px 40px;
   }
 
   .formGroup {
-    width: -webkit-fill-available;
-  }
-
-  .formGroupPassword {
-    margin-bottom: 0px;
-  }
-
-  .saveButtonWrapper {
-    margin-top: 20px;
+    width: -webkit-fill-availbale;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .container {
-    padding: 0 20px 20px 20px;
-  }
-
-  .detailsBox {
-    padding: 20px;
-  }
-  .formGroupPassword {
-    margin-bottom: 0px;
-  }
-  .saveButtonWrapper {
-    margin-top: 15px;
+    padding: 30px 40px;
   }
 }
