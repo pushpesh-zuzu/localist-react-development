@@ -8,14 +8,14 @@ import {
   addImageSubmittedData,
   textQualityData,
 } from "../../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const MAX_WORDS = 200;
 const MIN_WORDS = 5;
 
-const DescribeYourRequest = ({onClose}) => {
+const DescribeYourRequest = ({ onClose }) => {
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
   const [professionalLetin, setProfessionalLetin] = useState(false);
@@ -25,9 +25,11 @@ const DescribeYourRequest = ({onClose}) => {
   const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
   const progress = Math.min((wordCount / MAX_WORDS) * 100, 100);
 
-  const { requestId ,qualityData,addDetailLoader} = useSelector((state) => state.buyer);
+  const { requestId, qualityData, addDetailLoader } = useSelector(
+    (state) => state.buyer
+  );
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // const handleChange = (e) => {
   //   const words = e.target.value.trim().split(/\s+/);
@@ -47,7 +49,7 @@ const DescribeYourRequest = ({onClose}) => {
     }, 2000);
 
     return () => clearTimeout(delayDebounce);
-  }, [text, dispatch]); 
+  }, [text, dispatch]);
 
   const handleChange = (e) => {
     const qualityData = e.target.value.trim().split(/\s+/);
@@ -102,10 +104,15 @@ const DescribeYourRequest = ({onClose}) => {
       professional_letin: professionalLetin ? 1 : 0,
     };
 
-    dispatch(addDetailsRequestData(detailsData))
-    onClose()
-    
-     
+    dispatch(addDetailsRequestData(detailsData));
+    onClose();
+
+    // .then(() => {
+    //   navigate("/buyers/create");
+    // })
+    // .catch((error) => {
+    //   console.error("Navigation failed due to API error:", error);
+    // });
   };
 
   return (
@@ -153,7 +160,9 @@ const DescribeYourRequest = ({onClose}) => {
           accept="image/png, image/jpg, image/jpeg"
         />
       </label>
-      <p className={styles.textmes}>Image (jpeg, jpg, png) file can be uploaded</p>
+      <p className={styles.textmes}>
+        Image (jpeg, jpg, png) file can be uploaded
+      </p>
       {fileError && (
         <span className={styles.errorMessage}>Please upload a file.</span>
       )}
@@ -180,7 +189,7 @@ const DescribeYourRequest = ({onClose}) => {
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
-            style={{ width: qualityData > 0 ? `${qualityData}%` : "0%" }} 
+            style={{ width: qualityData > 0 ? `${qualityData}%` : "0%" }}
           ></div>
         </div>
       </div>
@@ -200,7 +209,13 @@ const DescribeYourRequest = ({onClose}) => {
 
       <div className={styles.buttonWrapper}>
         <button className={styles.viewMatchesBtn} onClick={handleSubmit}>
-         {addDetailLoader ?  <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} /> :" View Matches"}
+          {addDetailLoader ? (
+            <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />
+          ) : (
+            " View Matches"
+          )}
         </button>
       </div>
     </div>

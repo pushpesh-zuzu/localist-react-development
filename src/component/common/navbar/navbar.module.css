@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: white; /* Ya jo bhi color ho */
-  z-index: 1000; /* Ensure it stays on top */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  background-color: white;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbarItems {
@@ -106,6 +106,7 @@
 }
 
 .loginBtn {
+  width: max-content;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -146,13 +147,13 @@
   font-weight: 500;
   font-size: 16px;
   cursor: pointer;
-  display: inline-block; /* Ensures the border is only as wide as the text */
-  border-bottom: 4px solid #00afe3; /* Underline with thickness and color */
-  padding-bottom: 5px; /* Adds space between text and underline */
+  display: inline-block;
+  border-bottom: 4px solid #00afe3;
+  padding-bottom: 5px;
 }
 .nameCircle {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: var(--primary-color);
   display: flex;
@@ -500,6 +501,12 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  .myrequestText {
+    width: max-content;
+    font-size: 12px;
+    border-bottom: 2px solid var(--primary-color);
   }
 
   .popover_wrap {

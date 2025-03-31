@@ -17,7 +17,6 @@ const QuestionModal = ({
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
 
-  // ✅ Last answered question ka index restore karenge, nahi toh 0 se start hoga
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
@@ -25,14 +24,12 @@ const QuestionModal = ({
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
 
-  // ✅ Ensure first question loads on step 2
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
     }
   }, [questions]);
 
-  // ✅ Restore previous answer
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || "";

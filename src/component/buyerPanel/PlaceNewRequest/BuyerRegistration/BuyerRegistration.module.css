@@ -17,3 +17,9 @@
   box-shadow: 0px 0px 10px 0px #0000000f;
   position: relative;
 }
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 90%;
+  }
+}

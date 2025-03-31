@@ -161,6 +161,11 @@
     padding: 30px 10px;
   }
 
+  .closeButton {
+    width: 24px;
+    height: 24px;
+  }
+
   .option {
     font-size: 12px;
     padding: 7px;

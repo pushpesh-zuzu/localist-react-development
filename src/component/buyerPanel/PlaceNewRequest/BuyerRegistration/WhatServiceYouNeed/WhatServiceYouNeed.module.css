@@ -1,6 +1,5 @@
 .container {
-  width: 500px;
-  max-width: 500px;
+  min-width: 480px;
   margin: 0 auto;
   box-shadow: 0px 0px 10px 0px #0000000f;
   padding: 24px 31px 39px 31px;
@@ -102,7 +101,7 @@
     font-size: 20px;
   }
   .input {
-    font-size: 15px;
+    font-size: 12px;
     padding: 10px;
   }
   .button {
@@ -112,8 +111,8 @@
 
 @media (max-width: 480px) {
   .container {
-    max-width: 80%;
-    padding: 20px;
+    min-width: unset;
+    padding: 24px;
   }
   .title {
     font-size: 18px;
@@ -122,7 +121,7 @@
     margin-bottom: 15px;
   }
   .input {
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px;
   }
   .button {

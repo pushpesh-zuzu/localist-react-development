@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import styles from "./BuyerAccountSettings.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import DefaultProfileImage from "../../assets/Images/DefaultProfileImage.svg";
-import { updateProfileData, updateProfileImageData, updateUserIfoData } from "../../store/Buyer/BuyerSlice";
+import {
+  updateProfileData,
+  updateProfileImageData,
+  updateUserIfoData,
+} from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from "@ant-design/icons";
 
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
-  const { getuploadImg,infoLoader } = useSelector((state) => state.buyer);
+  const { getuploadImg, infoLoader } = useSelector((state) => state.buyer);
 
   // Initial state for user details
   const [userDetails, setUserDetails] = useState({
@@ -25,7 +30,7 @@ const BuyerAccountSettings = () => {
   // Update state when data is available
   useEffect(() => {
     if (Array.isArray(getuploadImg) && getuploadImg.length > 0) {
-      const userData = getuploadImg[0]; 
+      const userData = getuploadImg[0];
       setUserDetails({
         name: userData.name || "",
         email: userData.email || "",
@@ -60,8 +65,34 @@ const BuyerAccountSettings = () => {
       email: userDetails.email,
       phone: userDetails.phone,
     };
-    dispatch(updateUserIfoData(infoData))
-  }
+    dispatch(updateUserIfoData(infoData));
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newPasswordVisible, setNewPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+  const [formData, setFormData] = useState({
+    password: "",
+    newPassword: "",
+    confirmNewPassword: "",
+    error: "",
+  });
+
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
+  };
+
+  const handleSavePassword = () => {
+    if (formData.newPassword !== formData.confirmNewPassword) {
+      setFormData({
+        ...formData,
+        error: "New password and confirm password must match.",
+      });
+      return;
+    }
+    console.log("Password updated successfully!");
+    setIsModalOpen(false);
+  };
 
   return (
     <div className={styles.container}>
@@ -83,7 +114,10 @@ const BuyerAccountSettings = () => {
         <h3 className={styles.subHeading}>My details</h3>
         <div className={styles.profileSection}>
           <div className={styles.profileImage}>
-            <img src={userDetails.profile_image || DefaultProfileImage} alt="Profile" />
+            <img
+              src={userDetails.profile_image || DefaultProfileImage}
+              alt="Profile"
+            />
           </div>
           <div className={styles.uploadButtons}>
             <label className={styles.uploadButton}>
@@ -134,12 +168,105 @@ const BuyerAccountSettings = () => {
 
         <div className={styles.formGroupPassword}>
           <label>Password</label>
-          <button className={styles.changePasswordButton}>Change Password</button>
+          <button
+            className={styles.changePasswordButton}
+            onClick={() => setIsModalOpen(true)}
+          >
+            Change Password
+          </button>
         </div>
       </div>
+
       <div className={styles.saveButtonWrapper}>
-        <button className={styles.saveButton} onClick={handleSubmit}>{infoLoader ?  <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} /> : "Save Changes"}</button>
+        <button className={styles.saveButton} onClick={handleSubmit}>
+          {infoLoader ? (
+            <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />
+          ) : (
+            "Save Changes"
+          )}
+        </button>
       </div>
+
+      {isModalOpen && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <div className={styles.modalHeader}>
+              <h3>Change Password</h3>
+            </div>
+
+            {/* New Password Field */}
+            <div className={styles.formGroup}>
+              <label>New Password</label>
+              <div className={styles.passwordField}>
+                <input
+                  type={newPasswordVisible ? "text" : "password"}
+                  name="newPassword"
+                  value={formData.newPassword}
+                  onChange={handleFormChange}
+                  className={`${styles.inputField} ${
+                    formData.error ? styles.inputError : ""
+                  }`}
+                />
+                <span
+                  onClick={() => setNewPasswordVisible(!newPasswordVisible)}
+                  className={styles.eyeIcon}
+                >
+                  {newPasswordVisible ? (
+                    <EyeInvisibleOutlined />
+                  ) : (
+                    <EyeOutlined />
+                  )}
+                </span>
+              </div>
+              {formData.error && (
+                <p className={styles.error}>{formData.error}</p>
+              )}
+            </div>
+
+            {/* Confirm New Password Field */}
+            <div className={styles.formGroup}>
+              <label>Confirm New Password</label>
+              <div className={styles.passwordField}>
+                <input
+                  type={confirmPasswordVisible ? "text" : "password"}
+                  name="confirmNewPassword"
+                  value={formData.confirmNewPassword}
+                  onChange={handleFormChange}
+                  className={`${styles.inputField} ${
+                    formData.error ? styles.inputError : ""
+                  }`}
+                />
+                <span
+                  onClick={() =>
+                    setConfirmPasswordVisible(!confirmPasswordVisible)
+                  }
+                  className={styles.eyeIcon}
+                >
+                  {confirmPasswordVisible ? (
+                    <EyeInvisibleOutlined />
+                  ) : (
+                    <EyeOutlined />
+                  )}
+                </span>
+              </div>
+              {formData.error && (
+                <p className={styles.error}>{formData.error}</p>
+              )}
+            </div>
+
+            <div className={styles.saveButtonWrapperModal}>
+              <button
+                className={styles.modalSaveButton}
+                onClick={handleSavePassword}
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
