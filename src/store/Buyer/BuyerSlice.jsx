@@ -110,7 +110,7 @@ export const updateProfileImageData = (profileImageData) => {
       )
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
+        dispatch(updateProfileData());
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
