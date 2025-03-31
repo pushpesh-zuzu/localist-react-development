@@ -201,6 +201,22 @@ export const textQualityData = (qualityData) => {
     }
   };
 };
+export const getbuyerrequestList = () => {
+  return async (dispatch) => {
+    dispatch(setbuyerrequestListLoader(true));
+    try {
+      const response = await axiosInstance.get(`customer/my-request/get-submitted-request-list`);
+      if (response) {
+        dispatch(setbuyerRequestList(response?.data?.data));
+     
+      }
+    } catch (error) {
+      console.log("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setbuyerrequestListLoader(false));
+    }
+  };
+};
 
 export const addDetailsRequestData = (addDetailsData) => {
   return async (dispatch) => {
@@ -212,6 +228,7 @@ export const addDetailsRequestData = (addDetailsData) => {
       );
 
       if (response) {
+        dispatch(getbuyerrequestList())
         return response.data
       }
     } catch (error) {
@@ -221,21 +238,7 @@ export const addDetailsRequestData = (addDetailsData) => {
     }
   };
 };
-export const getbuyerrequestList = () => {
-  return async (dispatch) => {
-    dispatch(setbuyerrequestListLoader(true));
-    try {
-      const response = await axiosInstance.get(`customer/my-request/get-submitted-request-list`);
-      if (response) {
-        dispatch(setbuyerRequestList(response?.data?.data));
-      }
-    } catch (error) {
-      console.log("error", error?.response?.data?.message);
-    } finally {
-      dispatch(setbuyerrequestListLoader(false));
-    }
-  };
-};
+
 
 
 const buyerSlice = createSlice({

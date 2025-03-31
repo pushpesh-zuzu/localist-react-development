@@ -32,32 +32,22 @@ const DescribeYourRequest = ({ onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const handleChange = (e) => {
-  //   const words = e.target.value.trim().split(/\s+/);
-  //   if (words.filter(Boolean).length <= MAX_WORDS) {
-  //     setText(e.target.value);
-  //     setTextError(false);
-  //   }
-
-  //   const textData = { text: e.target.value };
-  //   dispatch(textQualityData(textData));
-  // };
+  const handlePrivacy = () => {
+    navigate("/privacy-policy")
+  }
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (text.trim() !== "") {
         dispatch(textQualityData({ text }));
       }
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(delayDebounce);
   }, [text, dispatch]);
 
   const handleChange = (e) => {
-    const qualityData = e.target.value.trim().split(/\s+/);
-    if (qualityData.filter(Boolean).length <= MAX_WORDS) {
-      setText(e.target.value);
-      setTextError(false);
-    }
+    setText(e.target.value);
+    setTextError(false);
   };
 
   const handleCheckboxChange = (e) => {
@@ -87,7 +77,7 @@ const DescribeYourRequest = ({ onClose }) => {
   const handleSubmit = () => {
     let hasError = false;
 
-    if (wordCount < MIN_WORDS) {
+    if (text.trim() === "") {
       setTextError(true);
       hasError = true;
     }
@@ -185,7 +175,7 @@ const DescribeYourRequest = ({ onClose }) => {
       <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
           Protected under our{" "}
-          <a href="#" className={styles.privacyLink}>
+          <a href="#" className={styles.privacyLink} onClick={handlePrivacy}>
             privacy policy
           </a>
         </p>
