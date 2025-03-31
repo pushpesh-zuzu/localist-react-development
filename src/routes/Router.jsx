@@ -15,7 +15,7 @@ import BuyerPanelPage from "../pages/BuyerPanelPage";
 import BuyerRegistration from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import BuyerAccountSettings from "../component/buyerAccountSettings/BuyerAccountSettings";
 import BuyerNotification from "../component/buyerPanel/buyerNotification/BuyerNotification";
-import PrivacyPolicy from "../component/common/privacyPolicy/privacyPolicy";
+import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
 
 const router = createBrowserRouter([
   {
