@@ -12,6 +12,7 @@ import timerIcon from "../../../assets/Icons/timer.svg";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const FooterContent = () => (
   <>
@@ -53,6 +54,7 @@ const FooterContent = () => (
 const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,8 +93,8 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <li>Find a Professional</li>
-              <li>How it works</li>
+              <li onClick={()=> navigate("/sellers/create/")}>Find a Professional</li>
+              <li onClick={()=> navigate("/how-it-works")}>How it works</li>
               <li>Login</li>
               <li>Mobile App</li>
             </ul>
@@ -101,9 +103,9 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <li>How it works</li>
+              <li onClick={()=> navigate("/how-it-works")}>How it works</li>
               <li>Pricing</li>
-              <li>Join as a Professional</li>
+              <li onClick={()=> navigate("/sellers/create/")}>Join as a Professional</li>
               <li>Help Centre</li>
               <li>Mobile App</li>
             </ul>
@@ -140,9 +142,9 @@ const Footer = () => {
             key="1"
           >
             <ul>
-              <li>Find a Professional</li>
-              <li>How it works</li>
-              <li>Login</li>
+              <li onClick={()=> navigate("/sellers/create/")}>Find a Professional</li>
+              <li onClick={()=> navigate("/how-it-works")}>How it works</li>
+              <li onClick={()=> navigate("/login")}>Login</li>
               <li>Mobile App</li>
             </ul>
           </Panel>
@@ -152,9 +154,9 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <li>How it works</li>
+              <li onClick={()=> navigate("/how-it-works")}>How it works</li>
               <li>Pricing</li>
-              <li>Join as a Professional</li>
+              <li onClick={()=> navigate("/sellers/create/")}>Join as a Professional</li>
               <li>Help Centre</li>
               <li>Mobile App</li>
             </ul>

@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { HelmetProvider } from "react-helmet-async";
 
 
 function App() {
@@ -90,8 +91,10 @@ function App() {
 
   return (
     <>
+    <HelmetProvider>
       <RouterProvider router={router} />
       <ToastContainer />;
+      </HelmetProvider>
     </>
   );
 }
