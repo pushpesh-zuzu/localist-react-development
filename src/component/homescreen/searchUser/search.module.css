@@ -1,475 +1,454 @@
 .searchContainer {
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    gap: 0px;
-    padding: 54px 0;
-    align-items: end;
-    justify-content: center;
-    position: relative;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  padding: 54px 0;
+  align-items: end;
+  justify-content: center;
+  position: relative;
 }
 
 .popularExamples {
-    margin-bottom: 87px;
-    margin-right: -72px;
+  margin-bottom: 87px;
+  margin-right: -72px;
 }
 
-
-
 .calloutArrow img {
-    width: 8.938rem;
+  width: 8.938rem;
 }
 
 .exampleBox {
-    background: #f5f5f5;
-    padding: 15px;
-    height: 116px;
-    border-radius: 10px;
-    width: 190px;
-    text-align: left;
+  background: #f5f5f5;
+  padding: 15px;
+  height: 116px;
+  border-radius: 10px;
+  width: 190px;
+  text-align: left;
 }
 
 .exampleTitle {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 12px;
-    letter-spacing: 0;
-    margin: 0;
-    margin-bottom: 20px;
-    color: var(--primary-color);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 12px;
+  letter-spacing: 0;
+  margin: 0;
+  margin-bottom: 20px;
+  color: var(--primary-color);
 }
 
 .exampledescription {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 12px;
-    letter-spacing: 0;
-    margin: 0;
-    color: #848484;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 12px;
+  letter-spacing: 0;
+  margin: 0;
+  color: #848484;
 }
 
 .container {
-    text-align: left;
+  text-align: left;
 }
 
 .heading {
-    font-weight: 400;
-    font-size: 2.813rem;
-    line-height: 67.5px;
-    letter-spacing: 0;
-    margin: 0;
-    color: var(--text-color);
+  font-weight: 400;
+  font-size: 2.813rem;
+  line-height: 67.5px;
+  letter-spacing: 0;
+  margin: 0;
+  color: var(--text-color);
 }
 
-
 .highlight {
-    font-weight: 700;
-    font-size: 45px;
-    line-height: 67.5px;
-    letter-spacing: 0;
-    color: var(--primary-color);
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 67.5px;
+  letter-spacing: 0;
+  color: var(--primary-color);
 }
 
 .subText {
-    font-weight: 500;
-    font-size: 1.875rem;
-    line-height: 45px;
-    letter-spacing: 0;
-    color: #848484;
-    margin: 0;
-    margin-bottom: 20px;
+  font-weight: 500;
+  font-size: 1.875rem;
+  line-height: 45px;
+  letter-spacing: 0;
+  color: #848484;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
-
 .searchBox {
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    width: 52vw;
-    height: 51px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  width: 52vw;
+  height: 51px;
 }
 
 .input {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    font-size: 13px;
-    outline: none;
-    font-weight: 600;
-    color: #959595;
-    font-family: var(--font-Poppins);
+  flex: 1;
+  padding: 12px;
+  border: none;
+  font-size: 13px;
+  outline: none;
+  font-weight: 600;
+  color: #959595;
+  font-family: var(--font-Poppins);
 }
 
 .divider {
-    width: 1px;
-    height: 100%;
-    background: #D9D9D9;
+  width: 1px;
+  height: 100%;
+  background: #d9d9d9;
 }
-
 
 .locationWrapper {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
 }
-
 
 .icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }
 
-
 .locationInput {
-    border: none;
-    outline: none;
-    font-weight: 500;
-    font-size: 16px;
-    color: #848484;
-    width: 120px;
-    font-family: var(--font-Poppins);
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 16px;
+  color: #848484;
+  width: 120px;
+  font-family: var(--font-Poppins);
 }
 
 .searchButton {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0;
-    color: #FFFFFF;
-    padding: 13px 59px;
-    border-radius: 3px;
-    background: var(--primary-color);
-    cursor: pointer;
-    border: none;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: #ffffff;
+  padding: 13px 59px;
+  border-radius: 3px;
+  background: var(--primary-color);
+  cursor: pointer;
+  border: none;
 }
 
 .searchButtonPhone {
-    display: none;
+  display: none;
 }
 
 @media screen and (max-width: 1300px) {
-    .input {
-        padding: 12px 8px;
-        font-size: 12px;
-    }
+  .input {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 1200px) {
-    .searchContainer {
-        width: 90%;
-        padding: 40px 5%;
-    }
+  .searchContainer {
+    width: 90%;
+    padding: 40px 5%;
+  }
 
-    .searchBox {
-        width: 60vw;
-    }
+  .searchBox {
+    width: 60vw;
+  }
 
-    .calloutArrow {
-        left: 23%;
-    }
+  .calloutArrow {
+    left: 23%;
+  }
 
-    .input {
-        padding: 12px 6px;
-    }
+  .input {
+    padding: 12px 6px;
+  }
 
-    .locationInput {
-        font-size: 13px;
-    }
+  .locationInput {
+    font-size: 13px;
+  }
 }
 
 @media screen and (max-width: 992px) {
-    .heading {
-        font-size: 2rem;
-        line-height: 57.5px;
-    }
+  .heading {
+    font-size: 2rem;
+    line-height: 57.5px;
+  }
 
+  .highlight {
+    font-size: 2rem;
+    line-height: 57.5px;
+  }
 
-    .highlight {
-        font-size: 2rem;
-        line-height: 57.5px;
-    }
+  .subText {
+    font-size: 1rem;
+    line-height: 35px;
+  }
 
-    .subText {
-        font-size: 1rem;
-        line-height: 35px;
-    }
+  .searchBox {
+    width: 55vw;
+  }
 
+  .exampleBox {
+    height: auto;
+    width: 150px;
+  }
 
-    .searchBox {
-        width: 55vw;
+  .exampleTitle {
+    font-size: 1rem;
+  }
 
-    }
+  .exampledescription {
+    font-size: 0.9rem;
+  }
 
+  .locationInput {
+    width: 8vw;
+  }
 
-    .exampleBox {
-        height: auto;
-        width: 150px;
-    }
-
-    .exampleTitle {
-        font-size: 1rem;
-    }
-
-    .exampledescription {
-        font-size: 0.9rem;
-    }
-
-    .locationInput {
-        width: 8vw;
-    }
-
-    .searchButton {
-        font-size: 1rem;
-        padding: 10px 39px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
+  .searchButton {
+    font-size: 1rem;
+    padding: 10px 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-@media screen and (max-width: 920px){
-    .searchContainer {
-        padding: 30px 5%;
-    }
+@media screen and (max-width: 920px) {
+  .searchContainer {
+    padding: 30px 5%;
+  }
 }
 
 @media screen and (max-width: 838px) {
+  .exampleTitle {
+    font-size: 12px;
+    line-height: 7.68px;
+  }
 
-    .exampleTitle {
-        font-size: 12px;
-        line-height: 7.68px;
-    }
+  .exampledescription {
+    font-size: 12px;
+    line-height: 7.68px;
+  }
 
-    .exampledescription {
-        font-size: 12px;
-        line-height: 7.68px;
-    }
+  .heading {
+    font-size: 35px;
+    line-height: 52.5px;
+  }
 
-    .heading {
-        font-size: 35px;
-        line-height: 52.5px;
-    }
+  .highlight {
+    font-size: 35px;
+    line-height: 52.5px;
+  }
 
+  .subText {
+    font-size: 20px;
+    line-height: 30px;
+  }
 
-    .highlight {
-        font-size: 35px;
-        line-height: 52.5px;
-    }
+  .searchBox {
+    max-width: 455px;
+    height: 33px;
+    width: 100%;
+  }
 
-    .subText {
-        font-size: 20px;
-        line-height: 30px;
-    }
-
-    .searchBox {
-        max-width: 455px;
-        height: 33px;
-        width: 100%;
-    }
-
-    .searchButton {
-        max-width: 150px;
-    }
-
+  .searchButton {
+    max-width: 150px;
+  }
 }
 
-
-
 @media screen and (max-width: 767px) {
+  .searchContainer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 
-    .searchContainer {
-        padding: 20px;
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-    }
+  .heading {
+    font-size: 35px;
+  }
 
-    .heading {
-        font-size: 35px;
-    }
+  .highlight {
+    font-size: 35px;
+  }
 
+  .subText {
+    font-size: 20px;
+  }
 
-    .highlight {
-        font-size: 35px;
-    }
+  .popularExamples {
+    width: 320px;
+    margin-bottom: 0px;
+    margin-right: -68px;
+    margin-top: -50px;
+  }
 
-    .subText {
-        font-size: 20px;
-    }
+  .exampleBox {
+    width: 100%;
+    float: left;
+  }
 
-    .popularExamples {
-        width: 320px;
-        margin-bottom: 0px;
-        margin-right: -68px;
-        margin-top: -50px;
-    }
+  .exampleTitle {
+    font-size: 18px;
+    line-height: 12px;
+    width: fit-content;
+    display: inline-block;
+    margin-bottom: 0;
+  }
 
-    .exampleBox {
-        width: 100%;
-        float: left;
-    }
+  .exampledescription {
+    font-size: 14px;
+    line-height: 12px;
+  }
 
-    .exampleTitle {
-        font-size: 18px;
-        line-height: 12px;
-        width: fit-content;
-        display: inline-block;
-        margin-bottom: 0;
-    }
+  .container {
+    text-align: center;
+  }
 
-    .exampledescription {
-        font-size: 14px;
-        line-height: 12px;
-    }
+  .calloutArrow {
+    transform: rotate(73deg) scaleX(-1);
+    margin-left: -375px;
+    height: 100px;
+  }
 
-    .container {
-        text-align: center;
-    }
-
-    .calloutArrow {
-        transform: rotate(73deg) scaleX(-1);
-        margin-left: -375px;
-        height: 100px;
-    }
-
-    .calloutArrow img {
-        width: 6rem;
-    }
-
+  .calloutArrow img {
+    width: 6rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  .searchContainer {
+    padding: 16px;
+  }
 
-    .searchContainer {
-        padding: 16px;
-    }
+  .input {
+    font-size: 10px;
+  }
 
-    .divider {
-        display: none;
-    }
+  .divider {
+    display: none;
+  }
 
-    .heading {
-        font-size: 40px;
-    }
+  .heading {
+    font-size: 40px;
+  }
 
+  .highlight {
+    font-size: 40px;
+  }
 
-    .highlight {
-        font-size: 40px;
-    }
+  .subText {
+    font-size: 16.19px;
+  }
 
-    .subText {
-        font-size: 16.19px;
-    }
+  .searchBox {
+    height: 37px;
+  }
 
-    .searchBox {
-        height: 37px;
-    }
+  .container {
+    text-align: center;
+    width: 100%;
+  }
 
-    .container {
-        text-align: center;
-        width: 100%;
-    }
+  .searchButton {
+    display: none;
+  }
 
-    .searchButton {
-        display: none;
-    }
+  .locationWrapper {
+    display: none;
+  }
 
-    .locationWrapper {
-        display: none;
-    }
+  .calloutArrow {
+    margin-left: -320px;
+    margin-top: -2px;
+  }
+  .calloutArrow img {
+    width: 5.5rem;
+  }
 
-    .calloutArrow {
-        margin-left: -320px;
-        margin-top: -2px;
-    }
-    .calloutArrow img {
-        width: 5.5rem;
-    }
+  .popularExamples {
+    width: 273px;
+    margin-bottom: 0px;
+    margin-right: -72px;
+    margin-top: -50px;
+    padding: 5px;
+  }
 
+  .exampleBox {
+    padding: 5px;
+  }
 
-    .popularExamples {
-        width: 273px;
-        margin-bottom: 0px;
-        margin-right: -72px;
-        margin-top: -50px;
-        padding: 5px;
-    }
+  .exampleTitle {
+    font-size: 12px;
+    line-height: 5px;
+  }
 
-    .exampleBox{
-        padding: 5px;
-    }
+  .exampledescription {
+    font-size: 12px;
+    line-height: 18px;
+    display: inline-block;
+  }
 
-    .exampleTitle {
-        font-size: 12px;
-        line-height: 5px;
-    }
-
-    .exampledescription {
-        font-size: 12px;
-        line-height: 18px;
-        display: inline-block;
-    }
-
-
-    .searchButtonPhone {
-        display: block;
-        width: 35px;
-        height: 29px;
-        border-radius: 2px;
-        margin-right: 2px;
-        border: none;
-        background: #00AFE3;
-        color: #FFFFFF;
-    }
-
+  .searchButtonPhone {
+    display: block;
+    width: 35px;
+    height: 29px;
+    border-radius: 2px;
+    margin-right: 4px;
+    border: none;
+    background: #00afe3;
+    color: #ffffff;
+  }
 }
 
 @media screen and (max-width: 400px) {
-    .calloutArrow {
-        margin-left: -273px;
-        height: 70px;
-        margin-top: -1px;
-    }
+  .calloutArrow {
+    margin-left: -273px;
+    height: 70px;
+    margin-top: -1px;
+  }
 
-    .popularExamples {
-        margin-right: -45px;
-        width: 230px;
-        padding: 0px;
-    }
+  .popularExamples {
+    margin-right: -45px;
+    width: 230px;
+    padding: 0px;
+  }
 
-    .exampleBox{
-        padding: 6px;
-    }
+  .exampleBox {
+    padding: 6px;
+  }
 
-    .calloutArrow img {
-        width: 4rem;
-    }
+  .calloutArrow img {
+    width: 4rem;
+  }
 
-    .exampleTitle {
-        font-size: 10px;
-        line-height: 15px;
-    }
+  .exampleTitle {
+    font-size: 10px;
+    line-height: 15px;
+  }
 
-    .exampledescription {
-        font-size: 10px;
-        line-height: 15px;
-    }
+  .exampledescription {
+    font-size: 10px;
+    line-height: 15px;
+  }
 }
 
-@media screen and (max-width: 340px){
-    .calloutArrow {
-        margin-left: -260px;
-    }
+@media screen and (max-width: 340px) {
+  .calloutArrow {
+    margin-left: -260px;
+  }
 
-    .popularExamples {
-        width: 222px;
-    }
+  .popularExamples {
+    width: 222px;
+  }
 }

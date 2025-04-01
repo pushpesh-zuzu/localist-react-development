@@ -40,7 +40,7 @@ const LogSwitch = () => {
 
   return (
     <div className={styles.logSwitchContainer}>
-      {!isBuyerPage && !isAccountPage && !isNotification && (
+      {!isBuyerPage && !isAccountPage && !isNotification && userToken && (
         <>
           <div
             className={`${styles.navItem} ${

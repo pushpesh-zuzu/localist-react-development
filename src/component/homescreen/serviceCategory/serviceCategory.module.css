@@ -248,25 +248,20 @@
 
 @media (max-width: 450px) {
   .servicesInnerContainer {
-    padding: 16px 5% 16px 5%;
-  }
-
-  .ServiceCategoryheading {
-    margin-bottom: 24px;
-  }
-
-  .singleCategory {
-    width: 100px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 16px 5%;
   }
 
   .ServiceCategoryheading {
     font-size: 20px;
     line-height: 30px;
+    margin-bottom: 16px;
   }
 
   .ServiceCategory {
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    gap: 6px;
   }
 
   .imageContainer .image {
