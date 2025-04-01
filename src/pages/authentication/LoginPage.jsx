@@ -75,13 +75,13 @@ const LoginPage = () => {
         </Form>
       </div>
       <div className="bottom-links">
-        <Text>
+        <Text className="text">
           Offering a service?{" "}
-          <Link to="/sellers/create/">Join as a professional</Link>
+          <Link to="/sellers/create/" className="text">Join as a professional</Link>
         </Text>
         <br />
-        <Text>
-          Looking for a service? <Link to="/register-client">Get started</Link>
+        <Text className="text">
+          Looking for a service? <Link to="/sellers/create/" className="text">Get started</Link>
         </Text>
       </div>
     </div>

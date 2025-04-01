@@ -155,7 +155,7 @@ const isNotification = location.pathname === "/user/notification";
                 {subMenuData?.map((item, index) => (
                   <div key={index} className={styles.popover_content}>
                     <Link to={item.path} className={styles.text_wrap}>
-                      <Link to="#">{item.name}</Link>
+                      <Link to={item?.path}>{item.name}</Link>
                     </Link>
                   </div>
                 ))}
@@ -167,7 +167,7 @@ const isNotification = location.pathname === "/user/notification";
                 {otherMenuData?.map((item, index) => (
                   <div key={index} className={styles.popover_content}>
                     <Link to={item.path} className={styles.text_wrap}>
-                      <Link to="#">{item.name}</Link>
+                      <Link to={item?.path}>{item.name}</Link>
                     </Link>
                   </div>
                 ))}

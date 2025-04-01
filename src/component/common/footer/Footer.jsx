@@ -95,7 +95,7 @@ const Footer = () => {
             <ul>
               <li onClick={()=> navigate("/sellers/create/")}>Find a Professional</li>
               <li onClick={()=> navigate("/how-it-works")}>How it works</li>
-              <li>Login</li>
+              <li onClick={()=> navigate("/login")}>Login</li>
               <li>Mobile App</li>
             </ul>
           </div>

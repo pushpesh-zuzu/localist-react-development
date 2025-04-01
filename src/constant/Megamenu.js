@@ -64,34 +64,34 @@ export const serviceesData = [
 
 export const subMenuData = [
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Dog & Pet Gromming",
   },
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Dog Training",
   },
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Dog Walking",
   },
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Life Coaching",
   },
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Limousine Hire",
   },
 ];
 
 export const otherMenuData = [
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Magician",
   },
   {
-    path: "#",
+    path: "/sellers/create/",
     name: "Private Investigators",
   },
 ];
@@ -99,100 +99,100 @@ export const otherMenuData = [
 export const allSubMenuData = [
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Accounting",
   },
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Business Consulting",
   },
 
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Mobile Software Delelopment",
   },
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Search Engine Optimization (SEO)Specialists",
   },
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Security Guard Services",
   },
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Social Media Marketing",
   },
   {
     key: "business",
-    path: "#",
+    path: "/sellers/create/",
     name: "Web Design",
   },
   {
     key: "event",
-    path: "#",
+    path: "/sellers/create/",
     name: "Accounting",
   },
   {
     key: "event",
-    path: "#",
+    path: "/sellers/create/",
     name: "Social Media Marketing",
   },
   {
     key: "event",
-    path: "#",
+    path: "/sellers/create/",
     name: "Web Design",
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Airport Transfers",
     icon: airportIcon,
     iconhover: airportIconBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "General Photography",
     icon: photographyIcon,
     iconhover: photographyBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Graphic Design",
     icon: graphicIcon,
     iconhover: graphicBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Immigration Attorneys",
     icon: immigrationIcon,
     iconhover: immigrationBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Limousine Hire",
     icon: limousineIcon,
     iconhover: limousineBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Private Investigators",
     icon: privateicon,
     iconhover: privateBlue,
   },
   {
     key: "more",
-    path: "#",
+    path: "/sellers/create/",
     name: "Wills and Estate Planning",
     icon: willsicon,
     iconhover: willsBlue,
