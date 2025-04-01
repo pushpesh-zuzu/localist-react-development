@@ -41,16 +41,58 @@ const LogSwitch = () => {
   return (
     <div className={styles.logSwitchContainer}>
       {!isBuyerPage && !isAccountPage && !isNotification && (
-        <div className={styles.searchContainer}>
-          <input placeholder="Search for a service" />
-          <img src={searchIcon} alt="search-icon" />
-        </div>
+        <>
+          <div
+            className={`${styles.navItem} ${
+              location.pathname === "/dashboard" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigation("/dashboard")}
+          >
+            Dashboard
+          </div>
+          <div
+            className={`${styles.navItem} ${
+              location.pathname === "/leads" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigation("/leads")}
+          >
+            Leads
+          </div>
+          <div
+            className={`${styles.navItem} ${
+              location.pathname === "/responses" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigation("/responses")}
+          >
+            My Responses
+          </div>
+          <div
+            className={`${styles.navItem} ${
+              location.pathname === "/settings" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigation("/settings")}
+          >
+            Settings
+          </div>
+          <div
+            className={`${styles.navItem} ${
+              location.pathname === "/help" ? styles.active : ""
+            }`}
+            onClick={() => handleNavigation("/help")}
+          >
+            Help
+          </div>
+          {/* <div className={styles.searchContainer}>
+            <input placeholder="Search for a service" />
+            <img src={searchIcon} alt="search-icon" />
+            </div> */}
+          <div className={styles.nameCircle}>{userInitial}</div>
+        </>
       )}
 
       {(isBuyerPage || isAccountPage || isNotification) && (
         <div className={styles.requestBox}>
-        <div className={styles.myrequestText}>My Request</div>
-        
+          <div className={styles.myrequestText}>My Request</div>
         </div>
       )}
 

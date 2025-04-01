@@ -163,6 +163,21 @@
   color: white;
 }
 
+.navItem {
+  padding: 10px 15px;
+  cursor: pointer;
+  width: max-content;
+  transition: background-color 0.3s ease;
+}
+
+.navItem:hover {
+  color: var(--primary-color);
+}
+
+.navItem.active {
+  color: var(--primary-color);
+}
+
 @media screen and (max-width: 1250px) {
   .navbarItems {
     padding: 18px 40px 24px 40px;

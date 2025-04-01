@@ -16,6 +16,7 @@ import BuyerRegistration from "../component/buyerPanel/PlaceNewRequest/BuyerRegi
 import BuyerAccountSettings from "../component/buyerAccountSettings/BuyerAccountSettings";
 import BuyerNotification from "../component/buyerPanel/buyerNotification/BuyerNotification";
 import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
+import Leads from "../component/Leads/Leads";
 
 const router = createBrowserRouter([
   {
@@ -36,12 +37,20 @@ const router = createBrowserRouter([
       { path: "/buyers/create", element: <BuyerPanelPage /> },
       { path: "/buyer-account", element: <BuyerAccountSettings /> },
       { path: "/user/notification", element: <BuyerNotification /> },
-      {path:"/privacy-policy",element:<PrivacyPolicy/>},
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "/dashboard",
         element: (
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/leads",
+        element: (
+          <ProtectedRoute>
+            <Leads />
           </ProtectedRoute>
         ),
       },
