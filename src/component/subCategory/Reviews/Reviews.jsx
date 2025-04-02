@@ -5,6 +5,8 @@ import rightArrowDark from "../../../assets/Images/subcategory/right-arrow.svg";
 import { REVIEWS_DATA } from "../../../constant/subCategory";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
+import SubCategoryReview from "../../../assets/Images/subcategory/SubCategoryReview.svg";
+
 function AutoplayPlugin(slider) {
   let timeout;
   let mouseOver = false;
@@ -72,6 +74,12 @@ const Reviews = () => {
 
           <div className={styles.reviews_slider_wrap}>
             <h1 className={styles.reviews_heading}>Reviews</h1>
+
+            <img
+              src={SubCategoryReview}
+              alt="SubCategory Review"
+              className={styles.subcategory_review_image}
+            />
             <div
               ref={sliderRef}
               className={`keen-slider ${styles.reviews_content_wrapper}`}
@@ -83,6 +91,7 @@ const Reviews = () => {
                 >
                   <div className={styles.reviews_star_Image_wrap}>
                     <img src={reviewsStar} />
+
                     <span>{reviews?.date}</span>
                   </div>
                   <p className={styles.reviews_description}>

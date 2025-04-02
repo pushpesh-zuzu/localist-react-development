@@ -25,7 +25,7 @@
   margin-bottom: 9px;
 }
 
-.headingContainer p {
+.headingContainer h1 {
   font-weight: 700;
   font-size: 45px;
   line-height: 100%;
@@ -129,8 +129,8 @@
     padding: 0 30px;
   }
 
-  .headingContainer p {
-    font-size: 35px;
+  .headingContainer h1 {
+    font-size: 32px;
   }
 
   .inputGroup {
@@ -152,15 +152,30 @@
 
   .formContainer h2 {
     font-size: 18px;
+    line-height: normal;
+  }
+
+  .headingContainer h1 {
+    font-size: 24px;
+    line-height: 30px;
   }
 
   .inputGroup {
     flex-direction: column;
     margin-top: 20px;
   }
+  .innerformContainer {
+    padding: 24px;
+  }
+
+  .inputBox label {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 
   .inputBox input {
-    padding: 5px 10px;
+    padding: 3px 10px;
+    font-size: 12px;
   }
 
   .button {

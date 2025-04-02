@@ -5,10 +5,10 @@ const Accountants = () => {
     <div className={styles.container}>
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
-          <p>
+          <h1>
             Find <span className={styles.blueText}>Business professionals</span>{" "}
             near you
-          </p>
+          </h1>
         </div>
 
         <div className={styles.formContainer}>

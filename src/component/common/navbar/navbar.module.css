@@ -12,6 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 88px 24px 88px;
+  height: 44px;
 }
 
 .navbarLeftContainer,
@@ -293,6 +294,7 @@
 @media (max-width: 570px) {
   .navbarItems {
     padding: 10px;
+    height: 60px;
   }
 
   .logoContainer .mainLogo {

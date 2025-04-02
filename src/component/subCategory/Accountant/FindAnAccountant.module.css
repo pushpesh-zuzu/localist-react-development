@@ -20,7 +20,7 @@
 .findAnAccountant_heading {
   font-size: 35px;
   font-weight: 400;
-  line-height: 100%;
+  /* line-height: 100%; */
   margin-bottom: 29px;
 }
 .findAnAccountant_heading b {
@@ -31,7 +31,6 @@
 .findAnAccountant_title {
   font-size: 28px;
   font-weight: 400;
-  line-height: 100%;
   margin-bottom: 14px;
 }
 
@@ -140,10 +139,13 @@
   .findAnAccountant_container {
     padding: 26px 20px;
   }
+
   .findAnAccountant_heading {
     font-size: 28px;
     margin-bottom: 16px;
+    line-height: normal;
   }
+
   .findAnAccountant_title {
     font-size: 20px;
   }

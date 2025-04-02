@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  padding: 40px 0px;
+  padding: 38px 0 40px 0;
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -17,7 +17,7 @@
 .title {
   font-size: var(--text-size-35);
   font-weight: 400;
-  line-height: 67px;
+  line-height: 100%;
 }
 
 .highlight {
@@ -41,7 +41,6 @@
   vertical-align: middle;
   color: var(--text-color);
 }
-
 
 .button {
   background-color: var(--primary-color) !important;
@@ -85,9 +84,9 @@
     padding: 26px 20px;
   }
 
-  .title {
+  /* .title {
     line-height: 30px;
-  }
+  } */
 
   .descriptionContainer {
     margin: 20px 0px;
@@ -95,6 +94,7 @@
 
   .descriptionContainer p {
     font-size: 14px;
+    line-height: normal;
   }
 
   .button {
