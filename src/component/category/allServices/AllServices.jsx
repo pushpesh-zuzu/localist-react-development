@@ -20,14 +20,15 @@ const AllServicesComponent = () => {
             defaultActiveKey={allPanelKeys}
             bordered={false}
             key={index}
-            expandIcon={({ isActive }) => (
-              <DownOutlined
-                style={{
-                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-                }}
-              />
-            )}
+            // expandIcon={({ isActive }) => (
+            //   <DownOutlined
+            //     style={{
+            //       transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
+            //       transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            //     }}
+            //   />
+            // )}
+            expandIcon={() => null}
             expandIconPosition="end"
             className={styles.category_collapse}
           >

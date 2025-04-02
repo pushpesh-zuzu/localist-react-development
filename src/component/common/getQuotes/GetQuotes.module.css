@@ -14,6 +14,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-family: "poppins" !important;
 }
 
 
@@ -22,6 +23,7 @@
   font-size: 40px;
   color: #000000;
   margin-top: 0;
+  font-family: "poppins" !important;
 }
 
 @media (max-width: 768px) {
@@ -40,6 +42,10 @@
 }
 
 @media (max-width: 600px) {
+  .container {
+   
+    margin-bottom: 15px;
+  }
   .button {
     font-size: 28px;
     padding: 8px 16px;
@@ -51,6 +57,10 @@
 }
 
 @media (max-width: 480px) {
+  .container {
+   
+    margin-bottom: 15px;
+  }
   .button {
     font-size: 24px;
     padding: 6px 14px;
@@ -62,6 +72,10 @@
 }
 
 @media (max-width: 320px) {
+  .container {
+   
+    margin-bottom: 15px;
+  }
   .button {
     font-size: 20px;
     padding: 5px 12px;

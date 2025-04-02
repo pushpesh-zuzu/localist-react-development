@@ -5,6 +5,8 @@ const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
 import mapIcon from "../../../assets/Icons/map-pin.svg";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
+import arrowIcon from "../../../assets/Images/subcategory/arrowicon.svg";
+import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 
 const RegionsComponent = () => {
   const allPanelKeys = regionsData?.map((panel) => panel.key);
@@ -23,14 +25,26 @@ const RegionsComponent = () => {
             defaultActiveKey={allPanelKeys}
             bordered={false}
             key={index}
-            expandIcon={({ isActive }) => (
-              <DownOutlined
-                style={{
-                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.3s ease",
-                }}
-              />
-            )}
+            // expandIcon={({ isActive }) => (
+            //   <DownOutlined
+            //     style={{
+            //       transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
+            //       transition: "transform 0.3s ease",
+            //     }}
+            //   />
+            // )}
+             expandIcon={({ isActive }) => (
+                            <img
+                              src={isActive ? arrowIcon : arrowIcon}
+                              alt="Custom Icon"
+                              style={{
+                                width: "17px", 
+                                height: "17px",
+                                transform: isActive ? "rotate(180deg)" : "rotate(0deg)", // Rotate effect
+                                transition: "transform 0.3s ease",
+                              }}
+                            />
+                          )}
             expandIconPosition="end"
             className={styles.subcategory_collapse}
           >
