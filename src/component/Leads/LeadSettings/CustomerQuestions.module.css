@@ -1,0 +1,154 @@
+.modal {
+  position: absolute;
+  top: 20px;
+  left: 100%;
+  width: 350px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 400px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.subHeader {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.questionBox {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.questionTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.option input {
+  margin-right: 10px;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.dropdownTitle {
+  font-size: 14px;
+}
+
+.arrow {
+  font-size: 14px;
+  color: #777;
+}
+
+.suggestion {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.suggestLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.locations {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.addLocation {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.range {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.removeService {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.saveButton {
+  background: black;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.customerQuestionsWrapper {
+  position: absolute;
+  width: 350px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  padding: 15px;
+}

@@ -6,6 +6,10 @@
   position: relative;
 }
 
+.container:last-child {
+  margin-bottom: 30px;
+}
+
 .heading {
   color: var(--text-color);
   font-weight: 400;
