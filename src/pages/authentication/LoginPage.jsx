@@ -1,6 +1,6 @@
 import { Form, Button, Checkbox, Typography, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from "@ant-design/icons";
 import "./index.css";
 import TextInput from "../../component/customInputs/TextInput";
 import PasswordInput from "../../component/customInputs/PasswordInput";
@@ -18,21 +18,27 @@ const LoginPage = () => {
   const onFinish = (values) => {
     const { email, password } = values;
     const payload = { email, password };
-  
+
     dispatch(userLogin(payload))
       .then((result) => {
         if (result?.success) {
           showToast("info", result?.message || "Login successful!");
           navigate("/");
         } else {
-          showToast("error", result?.message || "Login failed. Please try again.");
+          showToast(
+            "error",
+            result?.message || "Login failed. Please try again."
+          );
         }
       })
       .catch((error) => {
-        showToast("error", error?.response?.data?.message || "An error occurred. Please try again.");
+        showToast(
+          "error",
+          error?.response?.data?.message ||
+            "An error occurred. Please try again."
+        );
       });
   };
-  
 
   return (
     <div className="login-container">
@@ -61,7 +67,15 @@ const LoginPage = () => {
 
           <Form.Item>
             <Button type="primary" htmlType="submit" className="loginBtn">
-              {loginLoader ? <Spin indicator={<LoadingOutlined spin  style={{color:"white"}}/>} /> : "Login"}
+              {loginLoader ? (
+                <Spin
+                  indicator={
+                    <LoadingOutlined spin style={{ color: "white" }} />
+                  }
+                />
+              ) : (
+                "Login"
+              )}
             </Button>
           </Form.Item>
 
@@ -77,11 +91,16 @@ const LoginPage = () => {
       <div className="bottom-links">
         <Text className="text">
           Offering a service?{" "}
-          <Link to="/sellers/create/" className="text">Join as a professional</Link>
+          <Link to="/sellers/create/" className="linkText">
+            Join as a professional
+          </Link>
         </Text>
         <br />
         <Text className="text">
-          Looking for a service? <Link to="/sellers/create/" className="text">Get started</Link>
+          Looking for a service?{" "}
+          <Link to="/sellers/create/" className="linkText">
+            Get started
+          </Link>
         </Text>
       </div>
     </div>

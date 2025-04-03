@@ -18,6 +18,7 @@ const TaxReturn = () => {
               <div className={styles.taxReturn_content_logo}>
                 <img src={logo} />
               </div>
+
               <div className={styles.taxReturn_content_block}>
                 <p>Alex, Staff Writer</p>
                 <span>Monday, 3 May 2021</span>
@@ -37,6 +38,9 @@ const TaxReturn = () => {
             </p>
             <span className={styles.taxReturn_block_text}>Accounting</span>
           </div>
+          <button className={styles.taxReturn_content_button_bottom}>
+            Read the guide
+          </button>
         </div>
       </div>
     </>

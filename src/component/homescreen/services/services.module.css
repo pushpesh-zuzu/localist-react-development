@@ -1,42 +1,126 @@
-.serviceContainer {
-  padding: 40px 88px;
+.container {
+  width: 75%;
   margin: 0 auto;
-}
-
-.serviceContainer > div {
-  padding-bottom: 47px;
-}
-
-.serviceContainer > div:last-child {
-  padding-bottom: 0px;
-}
-
-.categoryTitile {
-  font-weight: 700;
-  font-size: 35px;
-  line-height: 52.5px;
-  letter-spacing: 0;
+  padding: 40px 0px;
   text-align: center;
-  margin: 0;
+  position: relative;
 }
 
-.categoryTitleText {
-  color: var(--primary-color);
-}
-
-.blackText {
+.heading {
   color: var(--text-color);
   font-weight: 400;
+  font-size: 35px;
+  line-height: 40px;
+  letter-spacing: 0;
+  margin: 0 0 40px;
 }
 
-.categoryGrid {
+.heading span {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.sliderWrapper {
+  position: relative;
+  height: 215px;
+}
+
+.card {
+  width: 285px;
+  height: 208px;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.custom_slider > div > div {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 24px 0 40px;
+  column-gap: 20px !important;
 }
 
+/* Custom Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--text-color) !important;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.arrow img {
+  width: 17px;
+  height: 13px;
+}
+
+.arrow:hover {
+  background: var(--primary-color) !important;
+}
+
+.prev {
+  left: -50px;
+}
+
+.next {
+  right: -50px;
+}
+
+.arrowLeft,
+.arrowRight {
+  position: absolute;
+  top: 55%;
+  background: var(--text-color) !important;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.arrowLeft img,
+.arrowRight img {
+  width: 17px;
+  height: 13px;
+}
+
+.arrowLeft {
+  left: -60px;
+}
+.arrowRight {
+  right: -60px;
+}
+
+.arrowLeft,
+.arrowRight {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.arrowLeft:hover,
+.arrowRight:hover,
+.arrowLeft:active {
+  background-color: var(--primary-color) !important;
+}
 .serviceCard {
   display: flex;
   flex-direction: column;
@@ -54,13 +138,12 @@
 .serviceTitle {
   font-weight: 600;
   font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0;
-  margin: 0;
+  margin: 0 auto;
   margin-top: -2px;
   align-items: center;
   display: flex;
   justify-content: center;
+  width: 100%;
   height: 44px;
   color: var(--text-color);
   background-color: #f9f9fa;
@@ -68,9 +151,19 @@
 
 .serviceCard:hover .serviceTitle {
   background: var(--primary-color);
+  color: #ffffff;
 }
 
-.viewAllBtn {
+.categoryTitleText {
+  color: var(--primary-color);
+}
+
+.blackText {
+  color: var(--text-color) !important;
+  font-weight: 400 !important;
+}
+
+/* .viewAllBtn {
   text-align: center;
 }
 
@@ -86,52 +179,47 @@
   cursor: pointer;
   padding: 11px 31px;
   border-radius: 4.67px;
-}
+} */
 
 @media (max-width: 1020px) {
-  .serviceContainer {
-    padding: 40px 40px;
-  }
-
   .serviceImage {
     height: 150px;
+  }
+  .arrowLeft,
+  .arrowRight {
+    top: 48%;
   }
 }
 
 @media (max-width: 920px) {
-  .serviceContainer {
-    padding: 20px 26px;
+  .container {
+    padding: 30px 0px 0 0;
   }
-  .serviceContainer > div {
-    padding-bottom: 26px;
+
+  .container:last-child {
+    padding-bottom: 20px;
   }
-  .categoryGrid {
-    padding: 20px 0 22px;
+
+  .heading {
+    margin: 0 0 22px;
+  }
+
+  .arrow {
+    width: 35px;
+    height: 35px;
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    top: 45%;
   }
 }
 
 @media (max-width: 768px) {
-  .serviceContainer {
-    padding: 20px 28px;
-  }
-
-  .serviceContainer > div {
-    padding-bottom: 22px;
-  }
-
-  .categoryGrid {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 10px 0 22px;
-  }
-
-  .categoryTitile {
+  .heading {
     font-size: 22px;
-    line-height: 30px;
+    margin: 0 0 23px;
   }
-
   .viewAllBtn button {
     font-size: 12px;
     line-height: 18px;
@@ -139,18 +227,56 @@
   }
 }
 
-@media (max-width: 540px) {
-  .serviceContainer {
-    padding: 16px 0px;
-    width: 100%;
+@media (max-width: 560px) {
+  .container {
+    margin-bottom: 25px;
   }
-  .serviceContainer > div {
-    padding-bottom: 16px;
+  .sliderWrapper {
+    height: 165px;
   }
 
-  .serviceImage {
-    width: 171px;
-    height: 114px;
+  .card {
+    width: 285px;
+    height: 166px;
+  }
+
+  .image {
+    width: 210px;
+    height: 156px;
+  }
+
+  .prev {
+    left: -1px;
+  }
+
+  .next {
+    right: -1px;
+  }
+
+  .arrow {
+    top: -25% !important;
+    width: 25px;
+    height: 25px;
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 36px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .arrowLeft {
+    left: 0px;
+  }
+  .arrowRight {
+    right: 0px;
+  }
+
+  .arrowLeft img,
+  .arrowRight img {
+    width: 12px;
   }
 
   .serviceCard {
@@ -158,21 +284,104 @@
     flex: 1 1 calc(33.33% - 5px);
   }
 
-  .categoryGrid {
-    max-width: 95%;
-    margin: 0 auto;
-    gap: 6px;
-    overflow-x: auto;
-  }
-
   .serviceTitle {
     font-size: 12px;
-    line-height: 8.13px;
-    width: 171px;
-    height: 34px;
   }
 }
 
 .categoryGrid::-webkit-scrollbar {
   display: none;
+}
+
+@media (max-width: 488px) {
+  .container {
+    width: 86%;
+    margin: 0 auto 40px;
+  }
+
+  .heading {
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    height: 150px;
+  }
+
+  .card {
+    width: 295px;
+  }
+
+  .image {
+    width: 171px;
+    height: 114px;
+    object-fit: cover;
+  }
+
+  .prev {
+    left: -1px;
+  }
+
+  .next {
+    right: -1px;
+  }
+
+  .arrow {
+    top: -25% !important;
+    width: 25px;
+    height: 25px;
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 30px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .arrowLeft {
+    left: 0px;
+  }
+  .arrowRight {
+    right: 0px;
+  }
+
+  .arrowLeft img,
+  .arrowRight img {
+    width: 12px;
+  }
+
+  .serviceTitle {
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .heading {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+@media (max-width: 340px) {
+  .heading {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .prev {
+    left: 0px;
+  }
+
+  .next {
+    right: 0px;
+  }
+
+  .arrow {
+    width: 23px;
+    height: 23px;
+  }
 }

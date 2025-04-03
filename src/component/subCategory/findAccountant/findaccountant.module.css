@@ -18,8 +18,6 @@
   text-align: center;
   font-weight: 700;
   font-size: 45px;
-  line-height: 57px;
-  letter-spacing: 0;
   margin: 0;
   margin-bottom: 15px;
   color: var(--text-color);
@@ -207,6 +205,10 @@
     padding: 0px 30px;
   }
 
+  .searchcontainer h1 {
+    font-size: 38px;
+  }
+
   .searchBoxContainer {
     padding: 20px 30px;
   }
@@ -230,8 +232,7 @@
   }
 
   .searchcontainer h1 {
-    font-size: 40px;
-    line-height: 57px;
+    font-size: 36px;
   }
 
   .searchBoxContainer {
@@ -240,7 +241,7 @@
   }
 
   .searchBoxContainer p {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 37px;
   }
 
@@ -250,7 +251,13 @@
 
   .searchInputContainer button {
     width: 60px;
-    font-size: 16px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .searchInput {
+    font-size: 12px;
+    height: 30px;
   }
 
   .findAccountInfoContainer {

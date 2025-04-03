@@ -273,11 +273,12 @@
   }
 
   .card {
-    max-width: 90%;
+    width: 80%;
   }
 
   .testimonialCard {
     max-width: 85%;
+    width: 75%;
   }
 
   .testimonialCard::before {
@@ -391,7 +392,7 @@
 
   .testimonialCard::before {
     left: 50%;
-    top: -10px;
+    /* top: -10px; */
     transform: translateX(-50%) rotate(90deg);
   }
 
