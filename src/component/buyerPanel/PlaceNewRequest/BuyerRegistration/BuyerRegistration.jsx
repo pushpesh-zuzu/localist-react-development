@@ -7,7 +7,8 @@ import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 
-const BuyerRegistration = ({ closeModal }) => {
+const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
+  console.log(serviceId,"serviceId")
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
@@ -18,7 +19,7 @@ const BuyerRegistration = ({ closeModal }) => {
 
   const previousStep = () => {
     if (buyerStep === 3) {
-      dispatch(setBuyerStep(2)); // ✅ Step 3 se back aane par Step 2 ke last question pe restore karega
+      dispatch(setBuyerStep(2)); 
     } else {
       dispatch(setBuyerStep(buyerStep - 1));
     }
@@ -39,7 +40,7 @@ const BuyerRegistration = ({ closeModal }) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         {buyerStep === 1 && (
-          <WhatServiceYouNeed nextStep={nextStep} formData={buyerRequest} />
+          <WhatServiceYouNeed nextStep={nextStep} formData={buyerRequest}  serviceId={serviceId} serviceName={serviceName}/>
         )}
 
         {buyerStep === 2 && (

@@ -8,9 +8,9 @@ const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleCategoryClick = (categoryName) => {
-    if (categoryName === "Home & Garden") {
-      setOpenModal(true);
-    }
+    // if (categoryName === "Home & Garden") {
+    //   setOpenModal(true);
+    // }
   };
 
   return (

@@ -27,3 +27,4 @@ export const showToast = (type, message) => {
 };
 
 export const BASE_IMAGE_URL = "https://localists.zuzucodes.com/admin/";
+export const BASE_URL_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/category/"

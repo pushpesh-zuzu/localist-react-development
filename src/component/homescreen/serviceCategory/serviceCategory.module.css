@@ -64,7 +64,7 @@
 .singleCategory:hover {
   background-color: #5bcbec;
   cursor: pointer;
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
 }
 
 .modalOverlay {

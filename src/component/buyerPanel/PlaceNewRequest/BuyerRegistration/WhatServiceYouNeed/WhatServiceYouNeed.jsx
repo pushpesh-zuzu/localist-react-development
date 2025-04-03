@@ -12,7 +12,7 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep }) => {
+const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -24,16 +24,22 @@ const WhatServiceYouNeed = ({ nextStep }) => {
   );
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  console.log(serviceId?.id,"serviceId")
 
   useEffect(() => {
-    if (isDropdownOpen && input.trim() !== "") {
+    if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
       const delayDebounce = setTimeout(() => {
         dispatch(searchService({ search: input }));
       }, 500);
-
       return () => clearTimeout(delayDebounce);
     }
-  }, [input, dispatch, isDropdownOpen]);
+  }, [input, dispatch, isDropdownOpen, serviceName])
+  useEffect(() => {
+    if (serviceName && serviceId) {
+      setInput(serviceName);
+      setSelectedService({ id: serviceId });
+    }
+  }, [serviceName, serviceId]);
 
   const handleSelectService = useCallback(
     (item) => {
@@ -64,14 +70,14 @@ const WhatServiceYouNeed = ({ nextStep }) => {
     if (!newErrors.service && !newErrors.pincode) {
       dispatch(
         setbuyerRequestData({
-          service_id: selectedService.id,
+          service_id: selectedService.id || serviceId,
           postcode: pincode,
         })
       );
-      dispatch(questionAnswerData({ service_id: selectedService.id }));
+      dispatch(questionAnswerData({ service_id: selectedService.id || serviceId }));
       nextStep();
     }
-  }, [selectedService, pincode, dispatch, nextStep]);
+  }, [selectedService, pincode, dispatch,serviceId, nextStep]);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {

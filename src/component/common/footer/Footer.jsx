@@ -74,7 +74,7 @@ const Footer = () => {
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
           <div className={styles.logo}>
-            <img src={logo} alt="Localist Logo" />
+            <img src={logo} alt="Localist Logo" onClick={()=> navigate("/")} />
           </div>
 
           <p className={styles.footerDesc}>

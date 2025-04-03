@@ -33,7 +33,12 @@ export const questionAnswerData = (questionData) => {
     try {
       const response = await axiosInstance.post(
         `users/questions-answer`,
-        questionData
+        questionData,
+        {
+          headers: {
+            Authorization: null,
+          },
+        }
       );
 
       if (response) {
