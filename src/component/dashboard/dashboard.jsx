@@ -179,7 +179,7 @@ function Dashboard() {
 
 
             {/* Buttons */}
-            <div className={styles.actions}>
+            <div className={styles.action}>
               <button className={styles.removeBtn}>🗑 Remove this service</button>
               <button className={styles.saveBtn}>Save</button>
             </div>
