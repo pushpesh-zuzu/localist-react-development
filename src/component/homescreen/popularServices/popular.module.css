@@ -67,7 +67,7 @@
 
 .serviceTitle:hover {
   background: var(--primary-color);
-  color: var(--text-color);
+  color: #ffffff;
 }
 
 /* Custom Arrows */
