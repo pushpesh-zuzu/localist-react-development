@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "./CustomerQuestions.module.css";
 import CustomerQuestionsImg from "../../../assets/Images/Leads/CustomerQuestionsImg.svg";
 import UpArrowIcon from "../../../assets/Images/Leads/UpArrowIcon.svg";
@@ -9,13 +9,15 @@ import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { leadPreferencesData } from "../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../utils";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const CustomerQuestions = ({ setSelectedService }) => {
   const dispatch = useDispatch();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { leadPreferenceData } = useSelector((state) => state.leadSetting)
+  const { leadPreferenceData,leadPreferenceLoader } = useSelector((state) => state.leadSetting)
   const { userToken } = useSelector((state) => state.auth)
 const handleSubmitData = () => {
   const questionIds = Object.keys(selectedAnswers); 
@@ -34,7 +36,17 @@ const handleSubmitData = () => {
     setSelectedAnswers({})
   })
 }
- 
+useEffect(() => {
+  if (leadPreferenceData?.length) {
+    const initialAnswers = {};
+    leadPreferenceData.forEach((item) => {
+      if (item.answers) {
+        initialAnswers[item.id] = item.answers;
+      }
+    });
+    setSelectedAnswers(initialAnswers);
+  }
+}, [leadPreferenceData]);
 
 
   return (
@@ -128,7 +140,9 @@ const handleSubmitData = () => {
           <button className={styles.removeService}>
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
-          <button className={styles.saveButton} onClick={handleSubmitData}>Save</button>
+          <button className={styles.saveButton} onClick={handleSubmitData}>{leadPreferenceLoader ? <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />  : "Save"}</button>
         </div>
       </div>
     </>

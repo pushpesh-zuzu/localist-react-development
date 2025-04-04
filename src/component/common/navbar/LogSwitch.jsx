@@ -24,7 +24,7 @@ const LogSwitch = () => {
     try {
       const result = await dispatch(userLogout());
       if (result) {
-        showToast("info", "Logout successful!");
+        showToast("success", "Logout successful!");
         handleNavigation("/login");
       }
     } catch (error) {

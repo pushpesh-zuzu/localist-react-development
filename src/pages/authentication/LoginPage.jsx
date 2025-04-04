@@ -22,7 +22,7 @@ const LoginPage = () => {
     dispatch(userLogin(payload))
       .then((result) => {
         if (result?.success) {
-          showToast("info", result?.message || "Login successful!");
+          showToast("success", result?.message || "Login successful!");
           navigate("/");
         } else {
           showToast(

@@ -114,7 +114,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
 
     dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
-        showToast("info", result?.message || "Register successful!");
+        showToast("success", result?.message || "Register successful!");
         navigate("/dashboard");
       }
     });

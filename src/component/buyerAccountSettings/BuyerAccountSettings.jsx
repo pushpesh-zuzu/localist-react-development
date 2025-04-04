@@ -115,7 +115,7 @@ const BuyerAccountSettings = () => {
     );
     dispatch(updatePasswordData(formDataToSend)).then((result) => {
       if (result?.success) {
-        showToast("info", result?.message || "Password Update successfully!");
+        showToast("success", result?.message || "Password Update successfully!");
       }
     });
 

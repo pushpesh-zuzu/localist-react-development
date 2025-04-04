@@ -4,8 +4,13 @@ import myProfile from "../../../assets/Images/Setting/profileImg.svg"
 import myLeadSetting from "../../../assets/Images/Setting/settingImg.svg";
 import myCredits from "../../../assets/Images/Setting/creditcard.svg";
 import myNotification from "../../../assets/Images/Setting/notificationImg.svg";
+import { useNavigate } from "react-router-dom";
 
 const SettingsList = () => {
+    const navigate = useNavigate();
+    const handleMyService = () => {
+        navigate("/lead-settings")
+    }
     return (
         <>
             <div className="container">
@@ -35,11 +40,11 @@ const SettingsList = () => {
                         <img src={myLeadSetting} alt="My Profile" />
                         <h2>Lead Setting</h2>
                     </div>
-                    <div className={styles.card} style={{ backgroundColor: "#AAC9D2" }}>
+                    <div className={styles.card} style={{ backgroundColor: "#AAC9D2" }} onClick={handleMyService}>
                         <h3>My Services</h3>
                     </div>
                     <p>Tell us what services you provide so we can send relevant leads.</p>
-                    <div className={styles.card} style={{ backgroundColor: "#AAC9D2" }}>
+                    <div className={styles.card} style={{ backgroundColor: "#AAC9D2" }} onClick={handleMyService}>
                         <h3>My Locations</h3>
                     </div>
                     <p>Tell us what locations you provide your services in.</p>

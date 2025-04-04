@@ -97,7 +97,7 @@ const DescribeYourRequest = ({ onClose }) => {
 
     dispatch(addDetailsRequestData(detailsData)).then((result) => {
               if (result?.success) {
-                showToast("info", result?.message || "Create Request successfully!");
+                showToast("success", result?.message || "Create Request successfully!");
                 
               }
               onClose();
