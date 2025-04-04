@@ -1,4 +1,6 @@
 .leadsOverlay {
   background: #f9f9fa;
   padding: 25px 88px;
+  display: flex;
+  /* justify-content: space-between; */
 }
