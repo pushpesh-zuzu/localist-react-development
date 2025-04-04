@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styles from "./FeelingStuck.module.css";
-import FeelingStuckGirlImg from "../../../assets/Images/Leads/FeelingStuckGirl.svg";
-import FeelingStuckComputer from "../../../assets/Images/Leads/FeelingStuckComputer.svg";
-import FeelingStuckProfileBig from "../../../assets/Images/Leads/FeelingStuckProfileBig.svg";
-import FeelingStuckProfileSmall from "../../../assets/Images/Leads/FeelingStuckProfileSmall.svg";
-import LeadsImg from "../../../assets/Images/Leads/LeadsImg.svg";
+// import FeelingStuckGirlImg from "../../../assets/Images/Leads/FeelingStuckGirl.svg";
+// import FeelingStuckComputer from "../../../assets/Images/Leads/FeelingStuckComputer.svg";
+// import FeelingStuckProfileBig from "../../../assets/Images/Leads/FeelingStuckProfileBig.svg";
+// import FeelingStuckProfileSmall from "../../../assets/Images/Leads/FeelingStuckProfileSmall.svg";
+import LeadsImg from "../../../../assets/Images/Leads/LeadsImg.svg";
 
 const FeelingStuck = () => {
   const [isVisible, setIsVisible] = useState(true);
