@@ -6,7 +6,8 @@ const initialState = {
     preferenceLoader:false,
     preferenceList:[],
     leadPreferenceLoader:false,
-    serviceLoader:false
+    serviceLoader:false,
+    leadPreferenceData:[],
 };
 
 
@@ -34,7 +35,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/lead-preferences`, leadPreferencesData);
   
         if (response) {
-        //   dispatch(setService(response?.data?.data));
+            return response.data;
+        //   dispatch(setLeadPreferenceData(response?.data?.data));
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
@@ -50,7 +52,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-lead-preferences`, leadPreferencesData);
   
         if (response) {
-        //   dispatch(setService(response?.data?.data));
+            dispatch(setLeadPreferenceData(response?.data?.data));
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
@@ -75,11 +77,14 @@ const leadSettingSlice = createSlice({
     },
     setServiceListLoader(state,action){
         state.serviceLoader = action.payload
-    }
+    },
+    setLeadPreferenceData(state, action) {
+        state.leadPreferenceData = action.payload;
+      },
    
   },
 });
 
-export const {setleadPreferencesListLoader,setPreferencesList,setleadPreferencesLoader,setServiceListLoader } = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData } = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

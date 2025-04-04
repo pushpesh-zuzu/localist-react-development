@@ -1,0 +1,86 @@
+.SettingWrapper {
+    padding: 29px 19px;
+    background-color: #E3F6FC;
+}
+.SettingWrapper h1 {   
+font-weight: 600;
+font-size: 24px;
+
+
+}
+.section {
+    background-color: white;
+    box-shadow: 0px 0px 6px 0px #0000001A;
+    padding: 20px;
+    margin-bottom: 30.7px;
+  }
+  .section p {
+    color: #989898;
+font-weight: 500;
+font-size: 16px;
+padding: 8px 8px;
+
+
+  }
+  .sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 10px;
+  }
+  
+  .sectionHeader img {
+    width: 24px;
+    height: 24px;
+  }
+  .sectionHeader h2 {
+font-weight: 600;
+font-size: 20px;
+
+
+  }
+ 
+.leadSetting {
+    background-color: #fce4ec;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .credits {
+    background-color: #e8f5e9;
+    padding: 15px;
+    /* border-radius: 8px; */
+  }
+  
+  .card {
+    background-color: white;
+    padding: 15px;
+    /* border-radius: 8px; */
+    margin: 10px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    background-color: #f1f1f1;
+  }
+  .card h3{
+font-weight: 500;
+font-size: 16px;
+
+
+  }
+  
+  .cardTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .cardDescription {
+    font-size: 14px;
+    color: #555;
+  }

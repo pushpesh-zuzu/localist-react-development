@@ -5,26 +5,33 @@ import WhiteRightArrow from "../../../assets/Images/Leads/WhiteRightArrow.svg";
 import EditIcon from "../../../assets/Images/Leads/EditIcon.svg";
 import CustomerQuestions from "./CustomerQuestions";
 import { useDispatch, useSelector } from "react-redux";
-import { getleadPreferencesList } from "../../../store/LeadSetting/leadSettingSlice";
+import { getleadPreferencesList, leadPreferences } from "../../../store/LeadSetting/leadSettingSlice";
+import { Spin } from "antd";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
-  const [position, setPosition] = useState({ top: 0, left: 0 });
   const serviceRefs = useRef({});
   const dispatch = useDispatch()
 
-  const {preferenceList} = useSelector((state)=> state.leadSetting)
-  const {userToken} = useSelector((state)=> state.auth)
-  console.log(preferenceList,userToken,"preferenceList")
-
-  useEffect(()=>{
-    const data =  {
-user_id : userToken?.remember_tokens
+  const { preferenceList, serviceLoader } = useSelector((state) => state.leadSetting)
+  const { userToken } = useSelector((state) => state.auth)
+ 
+  useEffect(() => {
+    const data = {
+      user_id: userToken?.remember_tokens
     }
     dispatch(getleadPreferencesList(data))
-  },[])
+  }, [])
 
-  const handleServiceClick = (service, event) => {
-    setSelectedService(service);
+  const handleServiceClick = (service, name) => {
+    setSelectedService({
+      name: name,
+      service_id: service,
+    });
+    const questionData = {
+      service_id: service,
+      user_id: userToken?.remember_tokens,
+    }
+    dispatch(leadPreferences(questionData))
   };
 
   return (
@@ -37,68 +44,37 @@ user_id : userToken?.remember_tokens
         <p className={styles.info}>
           Fine-tune the leads you want to be alerted about.
         </p>
-        {/* <div className={styles.serviceList}>
-          {[
-            { name: "House Cleaning", location: "1 location", id: 1 },
-            { name: "Deep Cleaning Services", location: "1 location", id: 2 },
-            { name: "End of Tenancy Cleaning", location: "1 location", id: 3 },
-          ].map((service) => (
-            <div
-              key={service.id}
-              ref={(el) => (serviceRefs.current[service.id] = el)}
-              className={`${styles.serviceItem} ${
-                selectedService?.id === service.id ? styles.selectedService : ""
-              }`}
-              onClick={(e) => handleServiceClick(service, e)}
-            >
-              <div className={styles.serviceNameWrapper}>
-                <p className={styles.serviceName}>{service.name}</p>
-                <p className={styles.serviceDetails}>
-                  All leads <span>|</span> {service.location}
-                </p>
-              </div>
-              <img
-                src={
-                  selectedService?.id === service.id
-                    ? WhiteRightArrow
-                    : BlackRightArrow
-                }
-                alt="arrow"
-                className={styles.arrowImages}
-              />
-            </div>
-          ))}
-        </div> */}
-     <div className={styles.serviceList}>
-  {preferenceList?.map((service) =>
-    service.user_services.map((userService) => (
-      <div
-        key={userService.id}
-        ref={(el) => (serviceRefs.current[userService.id] = el)}
-        className={`${styles.serviceItem} ${
-          selectedService?.id === userService.id ? styles.selectedService : ""
-        }`}
-        onClick={(e) => handleServiceClick(userService, e)}
-      >
-        <div className={styles.serviceNameWrapper}>
-          <p className={styles.serviceName}>{userService.name}</p>
-          <p className={styles.serviceDetails}>
-            All leads <span>|</span> {service.location || "Unknown location"}
-          </p>
-        </div>
-        <img
-          src={
-            selectedService?.id === userService.id
-              ? WhiteRightArrow
-              : BlackRightArrow
-          }
-          alt="arrow"
-          className={styles.arrowImages}
-        />
-      </div>
-    ))
-  )}
-</div>
+        {serviceLoader ? <Spin /> : (
+          <div className={styles.serviceList}>
+            {preferenceList?.map((service) =>
+              service.user_services.map((userService) => (
+                <div
+                  key={userService.id}
+                  ref={(el) => (serviceRefs.current[userService.id] = el)}
+                  className={`${styles.serviceItem} ${selectedService?.id === userService.id ? styles.selectedService : ""
+                    }`}
+                  onClick={(e) => handleServiceClick(userService?.id, userService?.name)}
+                >
+                  <div className={styles.serviceNameWrapper}>
+                    <p className={styles.serviceName}>{userService.name}</p>
+                    <p className={styles.serviceDetails}>
+                      All leads <span>|</span> {service.location || "Unknown location"}
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      selectedService?.id === userService.id
+                        ? WhiteRightArrow
+                        : BlackRightArrow
+                    }
+                    alt="arrow"
+                    className={styles.arrowImages}
+                  />
+                </div>
+              ))
+            )}
+          </div>
+        )}
 
         <button className={styles.addService}>+ Add a service</button>
       </div>

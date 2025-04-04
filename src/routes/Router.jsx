@@ -17,6 +17,7 @@ import BuyerAccountSettings from "../component/buyerAccountSettings/BuyerAccount
 import BuyerNotification from "../component/buyerPanel/buyerNotification/BuyerNotification";
 import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
 import Leads from "../component/Leads/Leads";
+import Settings from "../component/settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Leads />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <ProtectedRoute>
+            <Settings/>
           </ProtectedRoute>
         ),
       },
