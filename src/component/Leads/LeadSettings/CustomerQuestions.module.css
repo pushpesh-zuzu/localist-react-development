@@ -3,6 +3,7 @@
   padding: 40px;
   width: 100%;
   max-width: 525px;
+  padding-bottom: 20px !important;
 }
 
 .header {
@@ -168,7 +169,8 @@
   display: flex;
   justify-content: space-between;
   padding: 31.62px 29px 31.62px 42.27px;
-  margin-top: 20px;
+
+  margin: 20px -40px -40px -40px;
 }
 
 .removeService {

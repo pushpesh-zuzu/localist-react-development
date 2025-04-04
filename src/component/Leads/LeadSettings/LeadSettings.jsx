@@ -7,8 +7,7 @@ import CustomerQuestions from "./CustomerQuestions";
 import { useDispatch, useSelector } from "react-redux";
 import { getleadPreferencesList } from "../../../store/LeadSetting/leadSettingSlice";
 
-const LeadSettings = () => {
-  const [selectedService, setSelectedService] = useState(null);
+const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const serviceRefs = useRef({});
   const dispatch = useDispatch()
@@ -25,8 +24,6 @@ user_id : userToken?.remember_tokens
   },[])
 
   const handleServiceClick = (service, event) => {
-    const rect = serviceRefs.current[service.id].getBoundingClientRect();
-    setPosition({ top: rect.top + window.scrollY, left: rect.right + 20 });
     setSelectedService(service);
   };
 
@@ -143,18 +140,6 @@ user_id : userToken?.remember_tokens
       </div>
 
       <button className={styles.viewLeads}>View leads</button>
-
-      {selectedService && (
-        <div
-          className={styles.customerQuestionsWrapper}
-          style={{ top: position.top, left: position.left }}
-        >
-          <CustomerQuestions
-            service={selectedService}
-            onClose={() => setSelectedService(null)}
-          />
-        </div>
-      )}
     </div>
   );
 };
