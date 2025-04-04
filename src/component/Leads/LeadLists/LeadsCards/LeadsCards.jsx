@@ -1,0 +1,79 @@
+import React from "react";
+import styles from "./LeadsCards.module.css";
+import BlueSmsIcon from "../../../../assets/Images/Leads/BlueSmsIcon.svg";
+import BluePhoneIcon from "../../../../assets/Images/Leads/BluePhoneIcon.svg";
+import VerifiedPhoneIcon from "../../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
+import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
+import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
+import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
+
+const LeadsCards = () => {
+  return (
+    <div className={styles.card}>
+      {/* Left Section - User Info */}
+      <div className={styles.infoContainer}>
+        <div className={styles.userInfo}>
+          <div className={styles.userDetails}>
+            <div className={styles.avatar}>I</div>
+            <div className={styles.details}>
+              <h3>Isabella</h3>
+              <p>London, SE22</p>
+            </div>
+          </div>
+          <span className={styles.category}>House Cleaning</span>
+        </div>
+        <div className={styles.contactContainer}>
+          <div className={styles.contactItem}>
+            <img src={BluePhoneIcon} alt="" />
+            <span>78* *** ****</span>
+          </div>
+          <div className={styles.contactItem}>
+            <img src={BlueSmsIcon} alt="" />
+            <span>isab***.****@gmail.com</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Middle Section - Job Details */}
+      <div className={styles.jobDetails}>
+        <div className={styles.badges}>
+          <span className={styles.verified}>
+            <img src={VerifiedPhoneIcon} alt="" />
+            Verified Phone
+          </span>
+          <span className={styles.additional}>
+            {" "}
+            <img src={AdditionalDetailsIcon} alt="" />
+            Additional details
+          </span>
+          <span className={styles.frequent}>
+            {" "}
+            <img src={FrequentUserIcon} alt="" />
+            Frequent user
+          </span>
+        </div>
+        <div className={styles.jobInfo}>
+          <p>
+            <strong>End of Tenancy Cleaning</strong>
+          </p>
+          <p>Flat / apartment | 3 bedrooms | 1 bathroom</p>
+          <p>
+            <strong>Starting:</strong> In the next month
+          </p>
+        </div>
+      </div>
+
+      {/* Right Section - Lead Purchase */}
+      <div className={styles.leadActions}>
+        <button className={styles.purchaseButton}>Purchase Lead</button>
+        <span className={styles.credits}>6 Credits</span>
+        <p className={styles.responseStatus}>
+          <img src={FirstToRespondImg} alt="" />
+          1st to Responded
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default LeadsCards;
