@@ -5,14 +5,11 @@ import WhiteRightArrow from "../../../assets/Images/Leads/WhiteRightArrow.svg";
 import EditIcon from "../../../assets/Images/Leads/EditIcon.svg";
 import CustomerQuestions from "./CustomerQuestions";
 
-const LeadSettings = () => {
-  const [selectedService, setSelectedService] = useState(null);
+const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const serviceRefs = useRef({});
 
   const handleServiceClick = (service, event) => {
-    const rect = serviceRefs.current[service.id].getBoundingClientRect();
-    setPosition({ top: rect.top + window.scrollY, left: rect.right + 20 });
     setSelectedService(service);
   };
 
@@ -98,18 +95,6 @@ const LeadSettings = () => {
       </div>
 
       <button className={styles.viewLeads}>View leads</button>
-
-      {selectedService && (
-        <div
-          className={styles.customerQuestionsWrapper}
-          style={{ top: position.top, left: position.left }}
-        >
-          <CustomerQuestions
-            service={selectedService}
-            onClose={() => setSelectedService(null)}
-          />
-        </div>
-      )}
     </div>
   );
 };
