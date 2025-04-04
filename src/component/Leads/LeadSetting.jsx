@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import styles from "./Leads.module.css";
+
+import LeadLists from "./LeadLists/LeadLists";
 import LeadSettings from "./LeadSettings/LeadSettings";
 import CustomerQuestions from "./LeadSettings/CustomerQuestions";
-import LeadLists from "./LeadLists/LeadLists";
 
-const Leads = () => {
-  // const [selectedService, setSelectedService] = useState(null);
-  // const [LeadOpen,setLeadOpen] = useState(false)
+const LeadSetting = () => {
+  const [selectedService, setSelectedService] = useState(null);
+ 
   return (
     <>
       <div className={styles.leadsOverlay}>
-        <LeadLists />
-        {/* {LeadOpen && (
           <>
             <LeadSettings
               setSelectedService={setSelectedService}
@@ -21,10 +20,10 @@ const Leads = () => {
               <CustomerQuestions setSelectedService={selectedService} />
             )}
           </>
-        )} */}
+      
       </div>
     </>
   );
 };
 
-export default Leads;
+export default LeadSetting;

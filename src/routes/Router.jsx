@@ -19,6 +19,8 @@ import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
 import Leads from "../component/Leads/Leads";
 import Settings from "../component/settings/Settings";
 
+import LeadSetting from "../component/Leads/LeadSetting";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +65,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {path:"/lead-settings", element:<LeadSetting/>},
 
       { path: "*", element: <NotFound /> },
     ],
