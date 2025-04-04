@@ -36,7 +36,7 @@ const PlaceNewRequest = () => {
         {buyerRequestList?.map((req, index) => (
           <div key={index} className={styles.requestcard}>
             <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>{req.service_id}</h3>
+              <h3 className={styles.cardTitle}>{req.category?.name}</h3>
               <span className={styles.timeAgo}>{moment(req.created_at).format("hh:mm A")}</span>
             </div>
             <div className={`${styles.messageBox} ${req.colorClass}`}>
