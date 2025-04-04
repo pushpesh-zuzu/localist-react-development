@@ -3,11 +3,15 @@ import { SERVICE_CATEGORIES } from "../../../constant/Homepage";
 import styles from "./serviceCategory.module.css";
 import SingleCategory from "./SingleCategory";
 import Modal from "./Modal";
+import { useNavigate } from "react-router-dom";
 
 const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
+  const navigate = useNavigate();
 
-  const handleCategoryClick = (categoryName) => {
+  const handleCategoryClick = () => {
+    navigate("/sellers/create/")
+    window.scrollTo(0, 0);
     // if (categoryName === "Home & Garden") {
     //   setOpenModal(true);
     // }

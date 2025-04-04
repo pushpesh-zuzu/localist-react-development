@@ -1,14 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./LeadSettings.module.css";
 import BlackRightArrow from "../../../assets/Images/Leads/BlackRightArrow.svg";
 import WhiteRightArrow from "../../../assets/Images/Leads/WhiteRightArrow.svg";
 import EditIcon from "../../../assets/Images/Leads/EditIcon.svg";
 import CustomerQuestions from "./CustomerQuestions";
+import { useDispatch, useSelector } from "react-redux";
+import { getleadPreferencesList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const LeadSettings = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const serviceRefs = useRef({});
+  const dispatch = useDispatch()
+
+  const {preferenceList} = useSelector((state)=> state.leadSetting)
+  const {userToken} = useSelector((state)=> state.auth)
+  console.log(preferenceList,userToken,"preferenceList")
+
+  useEffect(()=>{
+    const data =  {
+user_id : userToken?.remember_tokens
+    }
+    dispatch(getleadPreferencesList(data))
+  },[])
 
   const handleServiceClick = (service, event) => {
     const rect = serviceRefs.current[service.id].getBoundingClientRect();
@@ -26,7 +40,7 @@ const LeadSettings = () => {
         <p className={styles.info}>
           Fine-tune the leads you want to be alerted about.
         </p>
-        <div className={styles.serviceList}>
+        {/* <div className={styles.serviceList}>
           {[
             { name: "House Cleaning", location: "1 location", id: 1 },
             { name: "Deep Cleaning Services", location: "1 location", id: 2 },
@@ -57,7 +71,38 @@ const LeadSettings = () => {
               />
             </div>
           ))}
+        </div> */}
+     <div className={styles.serviceList}>
+  {preferenceList?.map((service) =>
+    service.user_services.map((userService) => (
+      <div
+        key={userService.id}
+        ref={(el) => (serviceRefs.current[userService.id] = el)}
+        className={`${styles.serviceItem} ${
+          selectedService?.id === userService.id ? styles.selectedService : ""
+        }`}
+        onClick={(e) => handleServiceClick(userService, e)}
+      >
+        <div className={styles.serviceNameWrapper}>
+          <p className={styles.serviceName}>{userService.name}</p>
+          <p className={styles.serviceDetails}>
+            All leads <span>|</span> {service.location || "Unknown location"}
+          </p>
         </div>
+        <img
+          src={
+            selectedService?.id === userService.id
+              ? WhiteRightArrow
+              : BlackRightArrow
+          }
+          alt="arrow"
+          className={styles.arrowImages}
+        />
+      </div>
+    ))
+  )}
+</div>
+
         <button className={styles.addService}>+ Add a service</button>
       </div>
 

@@ -37,6 +37,7 @@
 .footerLeft .logo img {
     width: 198px;
     height: 48px;
+    cursor: pointer;
 
 }
 
@@ -344,6 +345,7 @@
 
     .footerLeft .logo img {
         width: 175px;
+        cursor: pointer;
     }
 
     .contactMthods {
@@ -385,6 +387,7 @@
 
     .footerLeft .logo img {
         width: 185px;
+        cursor: pointer;
     }
 
     .contactMthods p {
@@ -416,6 +419,7 @@
     .footerLeft .logo img {
         width: 168px;
         height: 38px;
+        cursor: pointer;
     }
 
     .contactSection button {

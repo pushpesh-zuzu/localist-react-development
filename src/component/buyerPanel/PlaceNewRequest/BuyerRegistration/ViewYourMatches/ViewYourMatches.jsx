@@ -60,7 +60,7 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
   value={phoneNumber} 
   onChange={handleInputChange}
   style={{ borderColor: error ? "red" : "" }}
-  disabled={!!userToken?.phone} 
+  // disabled={!!userToken?.phone} 
 />
 {error && (
   <span className={styles.errorMessage}>

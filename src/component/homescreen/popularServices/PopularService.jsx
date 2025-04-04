@@ -14,6 +14,7 @@ import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import imgBanner from "../../../assets/Images/houseCleaner.svg"
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+import { Spin } from "antd";
 // import Modal from "./Modal";
 const serviceData = [
   { title: "Personal Trainers", image: personalTrainers },
@@ -53,23 +54,32 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 
-const PopularService = ({closeModal}) => {
+const PopularService = ({ closeModal }) => {
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
-  const [show,setShow] = useState(false)
-const dispatch = useDispatch()
-   const { popularList } =  useSelector((state) => state.findJobs);
-   const handleOpen = (id, name) => {
+  const [show, setShow] = useState(false)
+  const dispatch = useDispatch()
+  const { popularList, popularLoader } = useSelector((state) => state.findJobs);
+  const handleOpen = (id, name) => {
     setSelectedServiceId({ id, name });
     setShow(true);
   };
-  
+
   const handleClose = () => {
     setShow(false);
     setSelectedServiceId({ id: null, name: "" });
   };
-useEffect(()=>{
-dispatch(getPopularServiceList())
-},[])
+  useEffect(() => {
+    dispatch(getPopularServiceList())
+  }, [])
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (slider.current) {
+        slider.current.update();
+      }
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [popularList]);
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -89,50 +99,52 @@ dispatch(getPopularServiceList())
 
   return (
     <>
-    <div className={styles.container}>
-      <h2 className={styles.heading}>
-        Popular <span>Service</span> Requests{" "}
-      </h2>
-      {/* Left Arrow */}
-      <button
-        className={styles.arrowLeft}
-        onClick={() => slider.current?.prev()}
-      >
-        <img src={leftArrow} alt="Left" />
-      </button>
+      <div className={styles.container}>
+        <h2 className={styles.heading}>
+          Popular <span>Service</span> Requests{" "}
+        </h2>
+        {/* Left Arrow */}
+        <button
+          className={styles.arrowLeft}
+          onClick={() => slider.current?.prev()}
+        >
+          <img src={leftArrow} alt="Left" />
+        </button>
+        {popularLoader ? <Spin /> : <>
+          {/* Slider */}
+          <div className={styles.sliderWrapper} >
+            {popularList.length > 0 && (
+              <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
+                {popularList?.map((service, index) => (
+                  <div key={index} className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id, service?.name)}>
+                    <img
+                      src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
+                      alt={service.name}
+                      className={styles.image}
+                    />
 
-      {/* Slider */}
-      <div className={styles.sliderWrapper} >
-        <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-          {popularList?.map((service, index) => (
-            <div key={index} className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id,service?.name)}>
-              <img
-             src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
-                alt={service.name}
-                className={styles.image}
-              />
-
-              <p className={styles.serviceTitle}>{service.name}</p>
-            </div>
-          ))}
-        </div>
+                    <p className={styles.serviceTitle}>{service.name}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </>}
+        {/* Right Arrow */}
+        <button
+          className={styles.arrowRight}
+          onClick={() => slider.current?.next()}
+        >
+          <img src={rightArrow} alt="Right" />
+        </button>
+        {show && (
+          <>
+            <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
+          </>
+        )}
       </div>
 
-      {/* Right Arrow */}
-      <button
-        className={styles.arrowRight}
-        onClick={() => slider.current?.next()}
-      >
-        <img src={rightArrow} alt="Right" />
-      </button>
-      {show && (
-      <>
-         <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id}  serviceName={selectedServiceId.name} />
-        </>
-      )}
-    </div>
-    
-  
+
     </>
   );
 };
