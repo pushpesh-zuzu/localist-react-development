@@ -95,6 +95,7 @@
 .badges {
   display: flex;
   gap: 8px;
+  cursor: pointer;
 }
 
 .verified,

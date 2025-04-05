@@ -29,7 +29,7 @@ useEffect(() => {
       <div className={styles.infoContainer}>
         <div className={styles.userInfo}>
           <div className={styles.userDetails}>
-            <div className={styles.avatar}>I</div>
+            <div className={styles.avatar}> {item?.customer?.name?.charAt(0).toUpperCase() || "U"}</div>
             <div className={styles.details}>
               <h3>{item?.customer?.name}</h3>
               <p>{item?.postcode}</p>
@@ -52,20 +52,20 @@ useEffect(() => {
       {/* Middle Section - Job Details */}
       <div className={styles.jobDetails}>
         <div className={styles.badges}>
-          <span className={styles.verified}>
+         {item?.is_phone_verified == 1 && <span className={styles.verified}>
             <img src={VerifiedPhoneIcon} alt="" />
             Verified Phone
-          </span>
-          <span className={styles.additional}>
+          </span>}
+         {item?.has_additional_details == 1 && <span className={styles.additional}>
             {" "}
             <img src={AdditionalDetailsIcon} alt="" />
             Additional details
-          </span>
-          <span className={styles.frequent}>
+          </span>}
+         {item?.is_frequent_user == 1 && <span className={styles.frequent}>
             {" "}
             <img src={FrequentUserIcon} alt="" />
             Frequent user
-          </span>
+          </span>}
         </div>
         <div className={styles.jobInfo}>
           <p>
