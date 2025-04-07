@@ -22,7 +22,7 @@ const BuyerAccountSettings = () => {
   const { getuploadImg, infoLoader, changePasswordLoader } = useSelector(
     (state) => state.buyer
   );
-
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -188,9 +188,52 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-            <button className={styles.uploadButton}>Take Photo</button>
+             <label className={styles.uploadButton}>
+    Take Photo
+    <input
+      type="file"
+      accept="image/*"
+      capture="environment" // use "user" for front camera
+      onChange={handleFileUpload}
+      style={{ display: "none" }}
+    />
+  </label>
+
           </div>
         </div>
+        {isCameraOpen && (
+  <div className={styles.modalOverlay}>
+    <div className={styles.modal}>
+      <Camera
+        isImageMirror={false}
+        idealFacingMode="environment"
+        onTakePhoto={(dataUri) => {
+          // Convert base64 data to a File object
+          const byteString = atob(dataUri.split(',')[1]);
+          const mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
+          const ab = new ArrayBuffer(byteString.length);
+          const ia = new Uint8Array(ab);
+          for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+          const blob = new Blob([ab], { type: mimeString });
+          const file = new File([blob], 'camera-photo.jpg', { type: mimeString });
+
+          const formData = new FormData();
+          formData.append('image_file', file);
+          dispatch(updateProfileImageData(formData));
+          setIsCameraOpen(false);
+        }}
+        onCameraStop={() => setIsCameraOpen(false)}
+      />
+      <div className={styles.saveButtonWrapperModal}>
+        <button className={styles.modalCancelButton} onClick={() => setIsCameraOpen(false)}>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
         <div className={styles.formGroup}>
           <label>Name</label>

@@ -4,7 +4,7 @@ import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Popover } from "antd";
-import { userLogout } from "../../../store/Auth/authSlice";
+import { setCurrentUser, switchUser, userLogout } from "../../../store/Auth/authSlice";
 import { showToast } from "../../../utils";
 
 const LogSwitch = () => {
@@ -13,18 +13,45 @@ const LogSwitch = () => {
   const location = useLocation();
   const { serviceTitle } = useParams();
 
-  const { userToken } = useSelector((state) => state.auth);
+  const { userToken ,currentUser} = useSelector((state) => state.auth);
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
 
+  // const newUserType = userToken?.user_type === 1 ? 0 : 1;
   const handleNavigation = (path) => navigate(path);
-
+  const handleSwitchUser = () => {
+    console.log(userToken?.user_type, currentUser, "userToken?.user_type");
+  
+    const newUserType = currentUser == 1 ? 2 : 1;
+  
+    const formData = new FormData();
+    formData.append("user_id", userToken?.remember_tokens);
+    formData.append("user_type", newUserType);
+  
+    dispatch(switchUser(formData)).then((result) => {
+      if (result?.success) {
+        // ✅ Update currentUser in Redux state
+        dispatch(setCurrentUser(newUserType));
+  
+        if (newUserType == 1) {
+          navigate("/sellers/create");
+        } else {
+          navigate("/buyers/create");
+        }
+  
+        showToast("success", result?.message || "Switch successful!");
+      } else {
+        showToast("error", result?.message || "Switch failed. Please try again.");
+      }
+    });
+  };
+  
   const handleLogout = async () => {
     try {
       const result = await dispatch(userLogout());
       if (result) {
-        showToast("success", "Logout successful!");
+        showToast("info", "Logout successful!");
         handleNavigation("/login");
       }
     } catch (error) {
@@ -40,7 +67,7 @@ const LogSwitch = () => {
 
   return (
     <div className={styles.logSwitchContainer}>
-      {!isBuyerPage && !isAccountPage && !isNotification && userToken && (
+      {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken)  && (
         <>
           <div
             className={`${styles.navItem} ${
@@ -113,12 +140,12 @@ const LogSwitch = () => {
               <div
                 className={styles.logoutBtn}
                 onClick={() =>
-                  handleNavigation(
-                    isBuyerPage ? "/sellers/create/" : "/buyers/create"
+                  handleSwitchUser(
+                    
                   )
                 }
               >
-                Switch to {isBuyerPage ? "Seller" : "Buyer"}
+                Switch to {currentUser === 1 ? "Seller" : "Buyer"}
               </div>
               <div
                 className={styles.logoutBtn}

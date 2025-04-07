@@ -24,7 +24,10 @@ buyerRequestList:[] ,
 getuploadImg:[],
 infoLoader:false,
 requestLoader:false,
-submitImageLoader:false
+submitImageLoader:false,
+notificationList:[],
+notificationLoader:false,
+addNotificationLoader:false
 };
 
 export const questionAnswerData = (questionData) => {
@@ -62,6 +65,7 @@ export const createRequestData = (requestData) => {
         {
           headers: {
             "Content-Type": "application/json",
+            
           },
         }
       );
@@ -243,6 +247,49 @@ export const addDetailsRequestData = (addDetailsData) => {
     }
   };
 };
+export const getNotificationData = (NotificationData) => {
+  return async (dispatch) => {
+    dispatch(setNotificationLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `notification/get-notification-settings`,
+        NotificationData
+      );
+
+      if (response) {
+       dispatch(setGetNotificationData(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setNotificationLoader(false));
+    }
+  };
+};
+
+export const addNotificationData = (addNotificationData) => {
+  return async (dispatch) => {
+    dispatch(setAddNotificationLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `notification/add-update-notification-settings`,
+        addNotificationData
+      );
+
+      if (response) {
+      //  dispatch(setGetNotificationData(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setAddNotificationLoader(false));
+    }
+  };
+};
+
+
 
 
 
@@ -297,13 +344,19 @@ const buyerSlice = createSlice({
     },
     setSubmitImageLoader(state,action){
       state.submitImageLoader = action.payload
-    }
-    // setQuestions(state, action) {   
-    //   state.buyerRequest.questionData = action.payload;
-    // },
+    },
+    setGetNotificationData(state, action) {   
+      state.notificationList = action.payload;
+    },
+    setNotificationLoader(state, action) {
+      state.notificationLoader = action.payload;
+    },
+    setAddNotificationLoader(state, action) {
+      state.addNotificationLoader = action.payload;
+    },
   },
 });
 
-export const { setquestionLoader,setQuestionAnswerData,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

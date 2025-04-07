@@ -82,10 +82,10 @@ const DescribeYourRequest = ({ onClose }) => {
       hasError = true;
     }
 
-    if (files.length === 0) {
-      setFileError(true);
-      hasError = true;
-    }
+    // if (files.length === 0) {
+    //   setFileError(true);
+    //   hasError = true;
+    // }
 
     if (hasError) return;
 

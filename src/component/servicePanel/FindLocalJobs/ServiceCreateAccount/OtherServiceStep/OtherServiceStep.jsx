@@ -127,6 +127,12 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const handleCloseModal = () => {
     setShow(false);
   };
+  const [leadCount, setLeadCount] = useState(0);
+
+  useEffect(() => {
+    const randomLead = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
+    setLeadCount(randomLead);
+  }, [])
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -229,10 +235,16 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
           </div>
           {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
           <div className={styles.leadInfo_wrapper}>
-            <div className={styles.leadInfo}>
+            {/* <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>1060</h1>
               <p className={styles.leadText}>current available leads</p>
-            </div>
+            </div> */}
+            <div className={styles.leadInfo}>
+  <h1 className={styles.leadCount}>
+    {leadCount}
+  </h1>
+  <p className={styles.leadText}>current available leads</p>
+</div>
           </div>
           <div className={styles.buttonContainer}>
             <button

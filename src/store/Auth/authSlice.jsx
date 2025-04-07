@@ -1,12 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import { setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
 
+const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
 const initialState = {
   adminToken: JSON.parse(localStorage.getItem("barkToken")) || null,
   userToken: JSON.parse(localStorage.getItem("barkUserToken")) || null,
   loginLoader: false,
-  logoutLoader:false
+  logoutLoader:false,
+  switchUserLoader:false,
+  currentUser:userToken?.user_type || null,
 };
 
 export const userLogin = (loginData) => {
@@ -19,6 +22,7 @@ export const userLogin = (loginData) => {
       if (response?.data?.success) {
         dispatch(setToken(response?.data?.data?.remember_tokens));
         dispatch(setUserToken(response?.data?.data));
+        dispatch(setCurrentUser(response?.data?.data?.user_type));
         return response.data;
       } else {
           throw new Error(response?.data?.message || "Login failed");
@@ -55,6 +59,29 @@ export const userLogout = () => {
   };
 };
 
+export const switchUser = (switchData) => {
+  return async (dispatch) => {
+    dispatch(setSwitchUserLoader(true));
+    try {
+
+      const response = await axiosInstance.post(`users/switch_user`, switchData);
+
+      if (response?.data?.success) {
+       
+        return response.data;
+      } else {
+          throw new Error(response?.data?.message || "Switch User failed");
+ 
+      }
+    } catch (error) {
+      
+      
+      throw error;
+    } finally {
+      dispatch(setSwitchUserLoader(false));
+    }
+  };
+};
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
@@ -72,10 +99,17 @@ const authSlice = createSlice({
     },
     setLogoutLoader(state,action){
       state.logoutLoader = action.payload
-    }
+    },
+    setSwitchUserLoader(state, action) {
+      state.switchUserLoader = action.payload;
+    },
+    setCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    },
+   
   },
 });
 
-export const { setToken, setLoginLoader,setUserToken,setLogoutLoader} = authSlice.actions;
+export const { setToken, setLoginLoader,setUserToken,setLogoutLoader,setSwitchUserLoader,setCurrentUser} = authSlice.actions;
 
 export default authSlice.reducer;

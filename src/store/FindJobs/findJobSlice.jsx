@@ -13,6 +13,8 @@ const initialState = {
   registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null,
   selectedServiceId: null,
   selectedServices:[],
+  categoriesListLoader:false,
+  CategoriesList:[],
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
@@ -107,7 +109,21 @@ export const registerUserData = (registerData) => {
     }
   }
 };
-
+export const getCategoriesList = () => {
+  return async (dispatch) => {
+    dispatch(setCategoriesListLoader(true));
+    try {
+      const response = await axiosInstance.get(`users/get-categories`);
+      if (response) {
+        dispatch(setCategoriesList(response?.data?.data));
+      }
+    } catch (error) {
+      console.log("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setCategoriesListLoader(false));
+    }
+  };
+};
 
 const findJobSlice = createSlice({
   name: "findJobs",
@@ -150,9 +166,13 @@ const findJobSlice = createSlice({
       state.registerData = action.payload;
       localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
     },
-    // clearSelectedServices: (state) => {
-    //   state.selectedServices = [];
-    // },
+    setCategoriesListLoader(state, action) {
+      state.categoriesListLoader = action.payload;
+    },
+    setCategoriesList(state,action) {
+      state.CategoriesList = action.payload
+    }
+
   },
 });
 
@@ -167,6 +187,8 @@ export const {
   setSelectedServiceId,
   setSelectedServiceFormData,
   setselectedServices,
-  setRegisterData
+  setRegisterData,
+  setCategoriesListLoader,
+  setCategoriesList
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

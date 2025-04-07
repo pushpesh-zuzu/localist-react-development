@@ -1,21 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SERVICE_CATEGORIES } from "../../../constant/Homepage";
 import styles from "./serviceCategory.module.css";
 import SingleCategory from "./SingleCategory";
 import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesList } from "../../../store/FindJobs/findJobSlice";
+import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
+import { Spin } from "antd";
 
 const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  
+  const { CategoriesList,categoriesListLoader } = useSelector((state) => state.findJobs);
+  useEffect(()=>{
+dispatch (getCategoriesList())
+  },[])
 
-  const handleCategoryClick = () => {
-    navigate("/sellers/create/")
+  const handleCategoryClick = (id, name) => {
     window.scrollTo(0, 0);
-    // if (categoryName === "Home & Garden") {
-    //   setOpenModal(true);
-    // }
+    setSelectedServiceId({ id, name }); // Save the selected category info
+    setOpenModal(true);
   };
+  const handleClose = () => {
+    setOpenModal(false);
+    setSelectedServiceId({ id: null, name: "" });
+  }
 
   return (
     <div className={styles.ServiceCategoryContainer}>
@@ -23,22 +36,19 @@ const ServiceCategory = () => {
         <h2 className={styles.ServiceCategoryheading}>
           View Our <span>Service Categories</span>
         </h2>
-        <div className={styles.ServiceCategory}>
-          {SERVICE_CATEGORIES.map((category, index) => (
+      { categoriesListLoader ? <Spin style={{color:"white"}}/> : <div className={styles.ServiceCategory}>
+          {CategoriesList?.slice(0, 6)?.map((category, index) => (
             <SingleCategory
               key={index}
               category={category}
-              onClick={handleCategoryClick}
+              onClick={() => handleCategoryClick(category.id, category.name)}
             />
           ))}
-        </div>
+        </div>}
       </div>
 
       {openModal && (
-        <Modal onClose={() => setOpenModal(false)}>
-          <h2>Home & Garden Services</h2>
-          <p>Here you can explore all home and garden services.</p>
-        </Modal>
+          <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
       )}
     </div>
   );

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
+import EmailMatch from "./EmailMatch/EmailMatch";
 
 const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
   console.log(serviceId,"serviceId")
@@ -24,6 +25,9 @@ const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
       dispatch(setBuyerStep(buyerStep - 1));
     }
   };
+  useEffect(()=>{
+dispatch(setBuyerStep(1))
+  },[])
 
   useEffect(() => {
     if (buyerStep) {
@@ -53,8 +57,16 @@ const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
             formData={buyerRequest}
           />
         )}
-
         {buyerStep === 3 && (
+          <EmailMatch
+          nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={closeModal}
+            formData={buyerRequest}
+            />
+        )}
+
+        {buyerStep === 4 && (
           <ViewYourMatches
             nextStep={nextStep}
             previousStep={previousStep}
@@ -63,7 +75,7 @@ const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
           />
         )}
 
-        {buyerStep === 4 && (
+        {buyerStep === 5 && (
           <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
         )}
       </div>
