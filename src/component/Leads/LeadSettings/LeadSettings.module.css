@@ -216,3 +216,54 @@ input:checked + .slider::before {
   transform: translateX(14px);
   background-color: #d9d9d9;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px;
+  }
+
+  .heading {
+    font-size: 28px;
+  }
+
+  .subHeading {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .info {
+    font-size: 13px;
+  }
+
+  .viewLeads {
+    font-size: 18px;
+  }
+
+  .addService,
+  .addLocation {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 24px;
+  }
+
+  .subHeading {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .viewLeads {
+    font-size: 16px;
+  }
+}

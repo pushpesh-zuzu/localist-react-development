@@ -3,6 +3,7 @@ import styles from "./LeadLists.module.css";
 import FeelingStuck from "./FeelingStuck/FeelingStuck";
 import MatchingLeads from "./MatchingLeads/MatchingLeads";
 import LeadsCards from "./LeadsCards/LeadsCards";
+import FeelingStuckFooter from "./FeelingStuckFooter/FeelingStuckFooter";
 
 const LeadLists = () => {
   return (
@@ -11,6 +12,7 @@ const LeadLists = () => {
         <FeelingStuck />
         <MatchingLeads />
         <LeadsCards />
+        <FeelingStuckFooter />
       </div>
     </>
   );

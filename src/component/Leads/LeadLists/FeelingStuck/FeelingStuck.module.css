@@ -5,7 +5,6 @@
   justify-content: space-between;
   background: linear-gradient(180deg, #e3f6fc 0%, #24cdff 100%);
   padding: 0 180px;
-  /* width: ; */
 }
 
 .textContainer {
@@ -19,6 +18,7 @@
   font-size: 35px;
   vertical-align: middle;
   margin-bottom: 10px;
+  text-wrap: nowrap !important;
 }
 
 .textContainer p {
@@ -78,13 +78,69 @@
   color: #ffffff;
 }
 
+@media (max-width: 1120px) {
+  .banner {
+    padding: 0 80px;
+  }
+}
+@media (max-width: 910px) {
+  .textContainer h2 {
+    font-size: 26px;
+  }
+
+  .textContainer p {
+    font-size: 14px;
+    line-height: 27px;
+  }
+
+  .imageContainer img {
+    width: 80%;
+  }
+}
+
 @media (max-width: 768px) {
   .banner {
     flex-direction: column;
+    align-items: center;
     text-align: center;
+    padding: 20px;
+  }
+
+  .textContainer {
+    padding: 20px 0px;
+  }
+
+  .textContainer h2 {
+    font-size: 28px;
+  }
+
+  .textContainer p {
+    font-size: 16px;
+    line-height: 24px;
   }
 
   .imageContainer {
-    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageContainer img {
+    width: 75%;
+  }
+}
+
+@media (max-width: 480px) {
+  .textContainer h2 {
+    font-size: 24px;
+  }
+
+  .textContainer p {
+    font-size: 14px;
+  }
+
+  .closeButton {
+    font-size: 16px;
+    top: 8px;
+    right: 10px;
   }
 }

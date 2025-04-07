@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./MatchingLeads.module.css";
-import { FilterOutlined, EditOutlined } from "@ant-design/icons";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
 import LocationIcon from "../../../../assets/Images/Leads/WhiteLocationIcon.svg";
 import FilterIcon from "../../../../assets/Images/Leads/FilterIcon.svg";
@@ -10,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 const MatchingLeads = () => {
   const navigate = useNavigate();
   const handleEdit = () => {
-    navigate("/lead-settings")
-  }
+    navigate("/lead-settings");
+  };
   return (
     <div className={styles.container}>
       <div className={styles.textSection}>

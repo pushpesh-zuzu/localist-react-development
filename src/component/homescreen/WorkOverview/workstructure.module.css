@@ -1,259 +1,274 @@
 .workContainer {
-    background: var(--primary-color);
-    padding: 40px 8%;
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-    justify-content: center;
-    align-items: center;
+  background: var(--primary-color);
+  padding: 40px 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
-    color: #FFFFFF;
-    font-weight: 400;
-    font-size: 35px;
-    line-height: 52.5px;
-    text-align: center;
-    margin: 0;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 52.5px;
+  text-align: center;
+  margin: 0;
 }
 
 .header span {
-    color: var(--text-color);
-    font-weight: bold;
+  color: var(--text-color);
+  font-weight: bold;
 }
 
 .description {
-    color: #FFFFFF;
-    font-weight: 400;
-    font-size: 1.786rem;
-    line-height: 37.5px;
-    text-align: center;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 1.786rem;
+  line-height: 37.5px;
+  text-align: center;
 }
 
 .description span {
-    font-weight: 700;
-    color: var(--text-color);
+  font-weight: 700;
+  color: var(--text-color);
 }
 
 .footer .quoteButton {
-    background: var(--text-color);
-    padding: 12px 32px;
-    color: #FFFFFF;
-    border: none;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
+  background: var(--text-color);
+  padding: 12px 32px;
+  color: #ffffff;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-
 .workstepContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    width: 100%;
-    margin-top: 71px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  width: 100%;
+  margin-top: 71px;
 }
 
 .stepContainer {
-    width: 266px;
-    padding: 0px 25px;
-    height: 250px;
-    position: relative;
-    background: #FFFFFF;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 266px;
+  padding: 0px 25px;
+  height: 250px;
+  position: relative;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .stepDescription {
-    margin-top: 35px;
-    color: var(--text-color);
-    font-weight: 600;
-    font-size: 1.3rem;
-    line-height: 32px;
+  margin-top: 35px;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 32px;
 }
 
 .descriptionIcon {
-    width: 133px;
-    height: 133px;
-    border-radius: 50%;
-    background: var(--text-color);
-    margin: auto;
-    margin-top: -70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 133px;
+  height: 133px;
+  border-radius: 50%;
+  background: var(--text-color);
+  margin: auto;
+  margin-top: -70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .descriptionIcon img {
-    object-fit: cover;
-    position: relative;
-    width: 60%;
+  object-fit: cover;
+  position: relative;
+  width: 60%;
 }
 
 @media screen and (max-width: 1100px) {
+  .workContainer {
+    padding: 40px 5%;
+  }
 
-    .workContainer {
-        padding: 40px 5%;
-    }
+  .workstepContainer {
+    gap: 50px;
+  }
 
-    .workstepContainer {
-        gap: 50px;
-    }
+  .stepContainer {
+    height: 236px;
+  }
 
-    .stepContainer {
-        height: 236px;
-    }
-
-    .descriptionIcon {
-        width: 110px;
-        height: 110px;
-        margin-top: -60px;
-    }
-
+  .descriptionIcon {
+    width: 110px;
+    height: 110px;
+    margin-top: -60px;
+  }
 }
 
-
 @media screen and (max-width: 920px) {
-    .workContainer {
-        gap: 0px;
-        padding: 20px 5%;
-    }
+  .workContainer {
+    gap: 0px;
+    padding: 20px 5%;
+  }
 
-    .description {
-        font-size: 1.3rem;
-        line-height: 35px;
-    }
+  .description {
+    font-size: 1.3rem;
+    line-height: 35px;
+  }
 
-    .workstepContainer {
-        gap: 30px;
-        margin-top: 71px;
-        margin-bottom: 20px;
-    }
+  .workstepContainer {
+    gap: 30px;
+    margin-top: 71px;
+    margin-bottom: 20px;
+  }
 
-    .descriptionIcon {
-        width: 82px;
-        height: 82px;
-        margin-top: -50px;
-    }
+  .descriptionIcon {
+    width: 82px;
+    height: 82px;
+    margin-top: -50px;
+  }
 
+  .stepContainer {
+    height: 206px;
+    padding: 0px 20px;
+  }
 
-    .stepContainer {
-        height: 206px;
-        padding: 0px 20px;
-    }
-
-    .stepDescription {
-        font-size: 18px;
-        line-height: 27px;
-    }
+  .stepDescription {
+    font-size: 18px;
+    line-height: 27px;
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .header {
-        font-size: 24px;
-        line-height: 30.5px;
-    }
+  .header {
+    font-size: 24px;
+    line-height: 30.5px;
+  }
 
-    .workContainer {
-        gap: 16px;
-        padding: 20px 5%;
-    }
+  .workContainer {
+    gap: 34px;
+    padding: 20px 5%;
+  }
 
-    .description {
-        font-size: 1.3rem;
-        line-height: 35px;
-    }
+  .description {
+    font-size: 1.3rem;
+    line-height: 35px;
+  }
 
-    .workstepContainer {
-        margin-top: 51px;
-        margin-bottom: 0px;
-    }
+  .workstepContainer {
+    margin-top: 51px;
+    margin-bottom: 0px;
+  }
 
-    .description {
-        font-size: 18px;
-    }
+  .description {
+    font-size: 18px;
+  }
 
-    .footer .quoteButton {
-        padding: 7px 21px;
-        font-size: 12.14px;
-    }
+  .footer .quoteButton {
+    padding: 7px 21px;
+    font-size: 12.14px;
+    margin-bottom: 18px;
+  }
 }
 
 @media screen and (max-width: 667px) {
+  .header {
+    font-size: 24px;
+    line-height: 30px;
+  }
 
-    .header {
-        font-size: 24px;
-        line-height: 30px;
-    }
+  .description {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 16px;
+  }
 
-    .description {
+  .footer .quoteButton {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 18px;
+  }
 
-        font-size: 16px;
-        line-height: 28px;
-        text-align: center;
-        vertical-align: middle;
-        margin-bottom: 16px;
-    }
+  .workstepContainer {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    gap: 70px;
+  }
 
-    .footer .quoteButton {
-        padding: 5px 10px;
-        font-size: 12px;
-        line-height: 18px;
-    }
+  .stepContainer {
+    width: 80%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 16px;
+    position: relative;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
 
-    .workstepContainer {
-        width: 100%;
-        flex-direction: column;
-        align-items: end;
-        margin-top: 0;
-    }
+  .descriptionIcon {
+    width: 82.46px;
+    height: 82.46px;
+    background: #000000;
+    border-radius: 50%;
+    position: relative;
+    top: -18px;
+    margin: -50px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .stepContainer {
-        flex-direction: row;
-        gap: 50px;
-        width: 80%;
-        height: 82px;
-        display: flex;
-    }
+  .descriptionIcon img {
+    width: 54.99px;
+    height: 54.99px;
+    object-fit: contain;
+  }
 
-    .descriptionIcon {
-        top: 50%;
-        left: 0%;
-        transform: translate(-50%, -50%);
-        margin-top: 0;
-        position: absolute;
-    }
+  .stepDescription {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-left: 12%;
+    text-align: left;
+    font-size: 16px;
+    margin-top: 0;
+    line-height: 20px;
+  }
 
-    .stepDescription {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        margin-left: 12%;
-        text-align: left;
-        font-size: 16px;
-        margin-top: 0;
-        line-height: 20px;
-    }
+  .stepDescription {
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    color: #000;
+    margin-top: 10px;
+    font-weight: 600;
+  }
 }
 
 @media screen and (max-width: 468px) {
+  .workContainer {
+    padding: 16px 5%;
+  }
 
-    .workContainer {
-        padding: 16px 5%;
-    }
-
-    .stepContainer {
-        width: 78%;
-    }
-
+  .stepContainer {
+    width: 78%;
+  }
 }
 
 @media screen and (max-width: 390px) {
-
-    .stepContainer {
-        width: 72%;
-    }
-
+  .stepContainer {
+    width: 72%;
+  }
 }

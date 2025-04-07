@@ -73,6 +73,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  position: relative;
 }
 
 .searchContainer {
@@ -179,6 +180,33 @@
   color: var(--primary-color);
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  margin-left: auto;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.navMenu {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.activeMenu {
+  display: flex !important;
+}
 
 @media screen and (max-width: 1250px) {
   .navbarItems {
@@ -218,6 +246,42 @@
     right: 5px;
     height: 15px;
     width: 15px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .logSwitchContainer {
+    gap: 0px;
+  }
+  .nameCircle {
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .navMenu {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 250px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logSwitchContainer {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
@@ -549,9 +613,8 @@
     gap: 16px;
   }
   .navbarLeftContainer,
-.navbarRightContainer {
-  display: flex;
-  width: 100%;
-}
-  
+  .navbarRightContainer {
+    display: flex;
+    width: 100%;
+  }
 }

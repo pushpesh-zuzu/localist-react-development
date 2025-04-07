@@ -54,7 +54,6 @@
   height: 78px;
 }
 
-
 .title {
   font-size: 24px;
   font-weight: 700;
@@ -93,14 +92,14 @@
 }
 
 @media screen and (max-width: 920px) {
-  .container{
+  .container {
     gap: 30px;
   }
 
   .stepsContainer {
     margin: 52px auto 0;
   }
-  
+
   .step {
     padding: 0px 20px 20px;
   }
@@ -115,7 +114,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  
   .title {
     font-size: 19px;
   }
@@ -131,7 +129,7 @@
     width: 102px;
     height: 102px;
   }
-  
+
   .imageWrapper img {
     width: 48px;
     height: 48px;
@@ -201,16 +199,14 @@
   }
 
   .imageWrapper {
-  
     width: 100px;
     height: 50px;
   }
-  
+
   .imageWrapper img {
     width: 40px;
     height: 40px;
   }
-
 
   .title {
     font-size: 16px;
