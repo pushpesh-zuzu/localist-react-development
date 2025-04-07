@@ -3,36 +3,58 @@ import styles from "./LeadSettings.module.css";
 import BlackRightArrow from "../../../assets/Images/Leads/BlackRightArrow.svg";
 import WhiteRightArrow from "../../../assets/Images/Leads/WhiteRightArrow.svg";
 import EditIcon from "../../../assets/Images/Leads/EditIcon.svg";
-import CustomerQuestions from "./CustomerQuestions";
 import { useDispatch, useSelector } from "react-redux";
-import { getleadPreferencesList, leadPreferences } from "../../../store/LeadSetting/leadSettingSlice";
+import {
+  getleadPreferencesList,
+  leadPreferences,
+} from "../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { preferenceList, serviceLoader } = useSelector((state) => state.leadSetting)
-  const { userToken } = useSelector((state) => state.auth)
- 
+  const { preferenceList, serviceLoader } = useSelector(
+    (state) => state.leadSetting
+  );
+  const { userToken } = useSelector((state) => state.auth);
+
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  // Check screen size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobileView(window.innerWidth <= 768); // can be adjusted as needed
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  // Fetch preferences
   useEffect(() => {
     const data = {
-      user_id: userToken?.remember_tokens
-    }
-    dispatch(getleadPreferencesList(data))
-  }, [])
+      user_id: userToken?.remember_tokens,
+    };
+    dispatch(getleadPreferencesList(data));
+  }, []);
 
   const handleServiceClick = (service, name) => {
     setSelectedService({
       name: name,
-      service_id: service,
+      id: service,
     });
+
     const questionData = {
       service_id: service,
       user_id: userToken?.remember_tokens,
-    }
-    dispatch(leadPreferences(questionData))
+    };
+    dispatch(leadPreferences(questionData));
   };
+
+  // ✅ Don't render if service is selected on mobile/tablet
+  if (isMobileView && selectedService?.id) return null;
 
   return (
     <div className={styles.container}>
@@ -44,21 +66,29 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <p className={styles.info}>
           Fine-tune the leads you want to be alerted about.
         </p>
-        {serviceLoader ? <Spin /> : (
+        {serviceLoader ? (
+          <Spin />
+        ) : (
           <div className={styles.serviceList}>
             {preferenceList?.map((service) =>
               service.user_services.map((userService) => (
                 <div
                   key={userService.id}
                   ref={(el) => (serviceRefs.current[userService.id] = el)}
-                  className={`${styles.serviceItem} ${selectedService?.id === userService.id ? styles.selectedService : ""
-                    }`}
-                  onClick={(e) => handleServiceClick(userService?.id, userService?.name)}
+                  className={`${styles.serviceItem} ${
+                    selectedService?.id === userService.id
+                      ? styles.selectedService
+                      : ""
+                  }`}
+                  onClick={() =>
+                    handleServiceClick(userService?.id, userService?.name)
+                  }
                 >
                   <div className={styles.serviceNameWrapper}>
                     <p className={styles.serviceName}>{userService.name}</p>
                     <p className={styles.serviceDetails}>
-                      All leads <span>|</span> {service.location || "Unknown location"}
+                      All leads <span>|</span>{" "}
+                      {service.location || "Unknown location"}
                     </p>
                   </div>
                   <img
@@ -75,7 +105,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             )}
           </div>
         )}
-
         <button className={styles.addService}>+ Add a service</button>
       </div>
 
@@ -94,7 +123,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             </p>
           </div>
           <div className={styles.editButton}>
-            <img src={EditIcon} alt="" />
+            <img src={EditIcon} alt="Edit" />
           </div>
         </div>
         <button className={styles.addLocation}>+ Add a location</button>

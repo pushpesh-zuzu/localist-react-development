@@ -17,37 +17,37 @@ const CustomerQuestions = ({ setSelectedService }) => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { leadPreferenceData,leadPreferenceLoader } = useSelector((state) => state.leadSetting)
-  const { userToken } = useSelector((state) => state.auth)
-const handleSubmitData = () => {
-  const questionIds = Object.keys(selectedAnswers); 
-  const answers = Object.values(selectedAnswers);
-  const selectData = {
-    user_id: userToken?.remember_tokens,
-    service_id: setSelectedService?.service_id,
-    question_id: questionIds,
-    answers: answers,
-  }
-  dispatch(leadPreferencesData(selectData)).then((result)=>{
-    if(result?.success){
-
-      showToast("success", result?.message || "Data submitted successfully")
-    }
-    setSelectedAnswers({})
-  })
-}
-useEffect(() => {
-  if (leadPreferenceData?.length) {
-    const initialAnswers = {};
-    leadPreferenceData.forEach((item) => {
-      if (item.answers) {
-        initialAnswers[item.id] = item.answers;
+  const { leadPreferenceData, leadPreferenceLoader } = useSelector(
+    (state) => state.leadSetting
+  );
+  const { userToken } = useSelector((state) => state.auth);
+  const handleSubmitData = () => {
+    const questionIds = Object.keys(selectedAnswers);
+    const answers = Object.values(selectedAnswers);
+    const selectData = {
+      user_id: userToken?.remember_tokens,
+      service_id: setSelectedService?.service_id,
+      question_id: questionIds,
+      answers: answers,
+    };
+    dispatch(leadPreferencesData(selectData)).then((result) => {
+      if (result?.success) {
+        showToast("success", result?.message || "Data submitted successfully");
       }
+      setSelectedAnswers({});
     });
-    setSelectedAnswers(initialAnswers);
-  }
-}, [leadPreferenceData]);
-
+  };
+  useEffect(() => {
+    if (leadPreferenceData?.length) {
+      const initialAnswers = {};
+      leadPreferenceData.forEach((item) => {
+        if (item.answers) {
+          initialAnswers[item.id] = item.answers;
+        }
+      });
+      setSelectedAnswers(initialAnswers);
+    }
+  }, [leadPreferenceData]);
 
   return (
     <>
@@ -67,7 +67,7 @@ useEffect(() => {
           define exactly which type of leads you see.
         </p>
         {leadPreferenceData?.map((item) => {
-           const options = item.answer ? item.answer.split(",") : [];
+          const options = item.answer ? item.answer.split(",") : [];
           const isOpen = openQuestionId === item.id;
 
           return (
@@ -75,7 +75,9 @@ useEffect(() => {
               <p
                 className={styles.questionTitle}
                 onClick={() =>
-                  setOpenQuestionId((prev) => (prev === item.id ? null : item.id))
+                  setOpenQuestionId((prev) =>
+                    prev === item.id ? null : item.id
+                  )
                 }
               >
                 {item.questions}
@@ -87,8 +89,9 @@ useEffect(() => {
               </p>
 
               <div
-                className={`${styles.options} ${isOpen ? styles.showOptions : ""
-                  }`}
+                className={`${styles.options} ${
+                  isOpen ? styles.showOptions : ""
+                }`}
               >
                 {options.map((opt) => (
                   <label key={opt} className={styles.option}>
@@ -140,9 +143,15 @@ useEffect(() => {
           <button className={styles.removeService}>
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
-          <button className={styles.saveButton} onClick={handleSubmitData}>{leadPreferenceLoader ? <Spin
-              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-            />  : "Save"}</button>
+          <button className={styles.saveButton} onClick={handleSubmitData}>
+            {leadPreferenceLoader ? (
+              <Spin
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              />
+            ) : (
+              "Save"
+            )}
+          </button>
         </div>
       </div>
     </>

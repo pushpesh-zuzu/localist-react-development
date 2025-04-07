@@ -1,10 +1,15 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Popover } from "antd";
-import { setCurrentUser, switchUser, userLogout } from "../../../store/Auth/authSlice";
+import {
+  setCurrentUser,
+  switchUser,
+  userLogout,
+} from "../../../store/Auth/authSlice";
 import { showToast } from "../../../utils";
 
 const LogSwitch = () => {
@@ -13,40 +18,36 @@ const LogSwitch = () => {
   const location = useLocation();
   const { serviceTitle } = useParams();
 
-  const { userToken ,currentUser} = useSelector((state) => state.auth);
+  const { userToken, currentUser } = useSelector((state) => state.auth);
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
 
-  // const newUserType = userToken?.user_type === 1 ? 0 : 1;
-  const handleNavigation = (path) => navigate(path);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setMenuOpen(false); // close menu on navigation
+  };
+
   const handleSwitchUser = () => {
-    console.log(userToken?.user_type, currentUser, "userToken?.user_type");
-  
     const newUserType = currentUser == 1 ? 2 : 1;
-  
+
     const formData = new FormData();
     formData.append("user_id", userToken?.remember_tokens);
     formData.append("user_type", newUserType);
-  
+
     dispatch(switchUser(formData)).then((result) => {
       if (result?.success) {
-        // ✅ Update currentUser in Redux state
         dispatch(setCurrentUser(newUserType));
-  
-        if (newUserType == 1) {
-          navigate("/sellers/create");
-        } else {
-          navigate("/buyers/create");
-        }
-  
+        navigate(newUserType == 1 ? "/sellers/create" : "/buyers/create");
         showToast("success", result?.message || "Switch successful!");
       } else {
         showToast("error", result?.message || "Switch failed. Please try again.");
       }
     });
   };
-  
+
   const handleLogout = async () => {
     try {
       const result = await dispatch(userLogout());
@@ -67,67 +68,74 @@ const LogSwitch = () => {
 
   return (
     <div className={styles.logSwitchContainer}>
-      {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken)  && (
-        <>
-          <div
-            className={`${styles.navItem} ${
-              location.pathname === "/dashboard" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigation("/dashboard")}
-          >
-            Dashboard
+      {/* Hamburger Icon */}
+      <div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+
+      {/* Navigation Items */}
+      <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
+        {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken) && (
+          <>
+            <div
+              className={`${styles.navItem} ${
+                location.pathname === "/dashboard" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigation("/dashboard")}
+            >
+              Dashboard
+            </div>
+            <div
+              className={`${styles.navItem} ${
+                location.pathname === "/leads" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigation("/leads")}
+            >
+              Leads
+            </div>
+            <div
+              className={`${styles.navItem} ${
+                location.pathname === "/responses" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigation("/responses")}
+            >
+              My Responses
+            </div>
+            <div
+              className={`${styles.navItem} ${
+                location.pathname === "/settings" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigation("/settings")}
+            >
+              Settings
+            </div>
+            <div
+              className={`${styles.navItem} ${
+                location.pathname === "/help" ? styles.active : ""
+              }`}
+              onClick={() => handleNavigation("/help")}
+            >
+              Help
+            </div>
+            <div className={styles.nameCircle}>{userInitial}</div>
+          </>
+        )}
+
+        {(isBuyerPage || isAccountPage || isNotification) && (
+          <div className={styles.requestBox}>
+            <div className={styles.myrequestText}>My Request</div>
           </div>
-          <div
-            className={`${styles.navItem} ${
-              location.pathname === "/leads" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigation("/leads")}
-          >
-            Leads
-          </div>
-          <div
-            className={`${styles.navItem} ${
-              location.pathname === "/responses" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigation("/responses")}
-          >
-            My Responses
-          </div>
-          <div
-            className={`${styles.navItem} ${
-              location.pathname === "/settings" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigation("/settings")}
-          >
-            Settings
-          </div>
-          <div
-            className={`${styles.navItem} ${
-              location.pathname === "/help" ? styles.active : ""
-            }`}
-            onClick={() => handleNavigation("/help")}
-          >
-            Help
-          </div>
-          {/* <div className={styles.searchContainer}>
-            <input placeholder="Search for a service" />
-            <img src={searchIcon} alt="search-icon" />
-            </div> */}
+        )}
+
+        {userToken && (isBuyerPage || isAccountPage || isNotification) && (
           <div className={styles.nameCircle}>{userInitial}</div>
-        </>
-      )}
+        )}
+      </div>
 
-      {(isBuyerPage || isAccountPage || isNotification) && (
-        <div className={styles.requestBox}>
-          <div className={styles.myrequestText}>My Request</div>
-        </div>
-      )}
-
-      {userToken && (isBuyerPage || isAccountPage || isNotification) && (
-        <div className={styles.nameCircle}>{userInitial}</div>
-      )}
-
-      {registerToken || userToken ? (
+      {/* User Options Popover */}
+      {(registerToken || userToken) ? (
         <Popover
           content={
             <>
@@ -139,11 +147,7 @@ const LogSwitch = () => {
               </div>
               <div
                 className={styles.logoutBtn}
-                onClick={() =>
-                  handleSwitchUser(
-                    
-                  )
-                }
+                onClick={handleSwitchUser}
               >
                 Switch to {currentUser === 1 ? "Seller" : "Buyer"}
               </div>

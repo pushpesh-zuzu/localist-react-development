@@ -74,6 +74,12 @@
   height: 13px;
 }
 
+.arrowLeft:hover,
+.arrowLeft:active,
+.arrowRight:hover,
+.arrowRight:active {
+  background: var(--primary-color) !important;
+}
 .arrowLeft {
   left: -60px;
 }

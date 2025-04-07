@@ -1,3 +1,15 @@
 .settings {
-padding: 21px 88px;
+  padding: 21px 88px;
+}
+
+@media (max-width: 768px) {
+  .settings {
+    padding: 15px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings {
+    padding: 10px 20px;
+  }
 }

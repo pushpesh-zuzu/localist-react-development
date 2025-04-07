@@ -4,3 +4,21 @@
   display: flex;
   /* justify-content: space-between; */
 }
+
+@media (max-width: 1120px) {
+  .leadsOverlay {
+    padding: 25px 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leadsOverlay {
+    padding: 20px 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leadsOverlay {
+    padding: 10px 20px;
+  }
+}
