@@ -112,7 +112,10 @@ setDataSave(updatedUser?.active_status)
   
         showToast("success", result?.message || "Switch successful!");
       } else {
-        showToast("error", result?.message || "Switch failed. Please try again.");
+        showToast(
+          "error",
+          result?.message || "Switch failed. Please try again."
+        );
       }
     });
   };
@@ -131,7 +134,7 @@ setDataSave(updatedUser?.active_status)
   };
 
   const isBuyerPage = location.pathname === "/buyers/create";
-  const isAccountPage = location.pathname === "/buyer-account";
+  const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
   const userName = userToken?.name || registerData?.name || "";
   const userInitial = userName.charAt(0).toUpperCase();
@@ -251,7 +254,7 @@ setDataSave(updatedUser?.active_status)
 </div>
 
       {/* User Options Popover */}
-      {(registerToken || userToken) ? (
+      {registerToken || userToken ? (
         <Popover
           content={
             <>
@@ -269,7 +272,7 @@ setDataSave(updatedUser?.active_status)
               </div>
               <div
                 className={styles.logoutBtn}
-                onClick={() => handleNavigation("/buyer-account")}
+                onClick={() => handleNavigation("/account/setting")}
               >
                 Account Settings
               </div>

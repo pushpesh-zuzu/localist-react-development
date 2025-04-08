@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <ServiceCreateAccount />,
       },
       { path: "/buyers/create", element: <BuyerPanelPage /> },
-      { path: "/buyer-account", element: <BuyerAccountSettings /> },
+      { path: "/account/setting", element: <BuyerAccountSettings /> },
       { path: "/user/notification", element: <BuyerNotification /> },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/lead-settings", element: <LeadSetting /> },
-      { path: "/bids-list", element: <BidsList /> },
+      { path: "/bids-list/:requestId", element: <BidsList /> },
 
       { path: "*", element: <NotFound /> },
     ],

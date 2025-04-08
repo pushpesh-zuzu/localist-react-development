@@ -22,6 +22,7 @@ const BuyerAccountSettings = () => {
   const { getuploadImg, infoLoader, changePasswordLoader } = useSelector(
     (state) => state.buyer
   );
+  const { userToken } = useSelector((state) => state.auth);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -43,6 +44,7 @@ const BuyerAccountSettings = () => {
       });
     }
   }, [getuploadImg]);
+  console.log(userToken?.active_status, "token");
 
   // Handle file upload
   const handleFileUpload = (event) => {
@@ -115,7 +117,10 @@ const BuyerAccountSettings = () => {
     );
     dispatch(updatePasswordData(formDataToSend)).then((result) => {
       if (result?.success) {
-        showToast("success", result?.message || "Password Update successfully!");
+        showToast(
+          "success",
+          result?.message || "Password Update successfully!"
+        );
       }
     });
 
@@ -142,18 +147,20 @@ const BuyerAccountSettings = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Account settings</h2>
 
-      <div className={styles.infoBox}>
-        <p>
-          <span>
-            <img src={iIcon} alt="Profile" />
-          </span>
-          Keep your details updated so that professionals can get in touch. If
-          you no longer require the service, please close the request.
-        </p>
-        <button className={styles.requestButton} onClick={hanldeRequest}>
-          Go to My Requests
-        </button>
-      </div>
+      {userToken?.active_status === 2 && (
+        <div className={styles.infoBox}>
+          <p>
+            <span>
+              <img src={iIcon} alt="Profile" />
+            </span>
+            Keep your details updated so that professionals can get in touch. If
+            you no longer require the service, please close the request.
+          </p>
+          <button className={styles.requestButton} onClick={hanldeRequest}>
+            Go to My Requests
+          </button>
+        </div>
+      )}
 
       <div className={styles.detailsBox}>
         <h3 className={styles.subHeading}>My details</h3>
@@ -188,52 +195,58 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-             <label className={styles.uploadButton}>
-    Take Photo
-    <input
-      type="file"
-      accept="image/*"
-      capture="environment" // use "user" for front camera
-      onChange={handleFileUpload}
-      style={{ display: "none" }}
-    />
-  </label>
-
+            <label className={styles.uploadButton}>
+              Take Photo
+              <input
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleFileUpload}
+                style={{ display: "none" }}
+              />
+            </label>
           </div>
         </div>
         {isCameraOpen && (
-  <div className={styles.modalOverlay}>
-    <div className={styles.modal}>
-      <Camera
-        isImageMirror={false}
-        idealFacingMode="environment"
-        onTakePhoto={(dataUri) => {
-          // Convert base64 data to a File object
-          const byteString = atob(dataUri.split(',')[1]);
-          const mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0];
-          const ab = new ArrayBuffer(byteString.length);
-          const ia = new Uint8Array(ab);
-          for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
-          }
-          const blob = new Blob([ab], { type: mimeString });
-          const file = new File([blob], 'camera-photo.jpg', { type: mimeString });
+          <div className={styles.modalOverlay}>
+            <div className={styles.modal}>
+              <Camera
+                isImageMirror={false}
+                idealFacingMode="environment"
+                onTakePhoto={(dataUri) => {
+                  const byteString = atob(dataUri.split(",")[1]);
+                  const mimeString = dataUri
+                    .split(",")[0]
+                    .split(":")[1]
+                    .split(";")[0];
+                  const ab = new ArrayBuffer(byteString.length);
+                  const ia = new Uint8Array(ab);
+                  for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                  }
+                  const blob = new Blob([ab], { type: mimeString });
+                  const file = new File([blob], "camera-photo.jpg", {
+                    type: mimeString,
+                  });
 
-          const formData = new FormData();
-          formData.append('image_file', file);
-          dispatch(updateProfileImageData(formData));
-          setIsCameraOpen(false);
-        }}
-        onCameraStop={() => setIsCameraOpen(false)}
-      />
-      <div className={styles.saveButtonWrapperModal}>
-        <button className={styles.modalCancelButton} onClick={() => setIsCameraOpen(false)}>
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+                  const formData = new FormData();
+                  formData.append("image_file", file);
+                  dispatch(updateProfileImageData(formData));
+                  setIsCameraOpen(false);
+                }}
+                onCameraStop={() => setIsCameraOpen(false)}
+              />
+              <div className={styles.saveButtonWrapperModal}>
+                <button
+                  className={styles.modalCancelButton}
+                  onClick={() => setIsCameraOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className={styles.formGroup}>
           <label>Name</label>

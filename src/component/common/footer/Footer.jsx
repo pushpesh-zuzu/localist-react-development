@@ -54,7 +54,7 @@ const FooterContent = () => (
 const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -74,7 +74,14 @@ const Footer = () => {
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
           <div className={styles.logo}>
-            <img src={logo} alt="Localist Logo" onClick={()=> {navigate("/"); window.scrollTo(0,0)}} />
+            <img
+              src={logo}
+              alt="Localist Logo"
+              onClick={() => {
+                navigate("/");
+                window.scrollTo(0, 0);
+              }}
+            />
           </div>
 
           <p className={styles.footerDesc}>
@@ -93,9 +100,30 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <li onClick={()=> {navigate("/sellers/create/"); window.scrollTo(0,0)}}>Find a Professional</li>
-              <li onClick={()=>{ navigate("/how-it-works"); window.scrollTo(0,0)}}>How it works</li>
-              <li onClick={()=> {navigate("/login"); window.scrollTo(0,0)}}>Login</li>
+              <li
+                onClick={() => {
+                  navigate("/sellers/create/");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Find a Professional
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/how-it-works");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                How it works
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/login");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Login
+              </li>
               <li>Mobile App</li>
             </ul>
           </div>
@@ -103,9 +131,23 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <li onClick={()=>{ navigate("/how-it-works"); window.scrollTo(0,0)}}>How it works</li>
+              <li
+                onClick={() => {
+                  navigate("/how-it-works");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                How it works
+              </li>
               <li>Pricing</li>
-              <li onClick={()=>{ navigate("/sellers/create/"); window.scrollTo(0,0)}}>Join as a Professional</li>
+              <li
+                onClick={() => {
+                  navigate("/sellers/create/");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Join as a Professional
+              </li>
               <li>Help Centre</li>
               <li>Mobile App</li>
             </ul>
@@ -142,9 +184,30 @@ const Footer = () => {
             key="1"
           >
             <ul>
-              <li onClick={()=> {navigate("/sellers/create/"); window.scrollTo(0,0)}}>Find a Professional</li>
-              <li onClick={()=> {navigate("/how-it-works"); window.scrollTo(0,0)}}>How it works</li>
-              <li onClick={()=>{ navigate("/login"); window.scrollTo(0,0)}}>Login</li>
+              <li
+                onClick={() => {
+                  navigate("/sellers/create/");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Find a Professional
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/how-it-works");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                How it works
+              </li>
+              <li
+                onClick={() => {
+                  navigate("/login");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Login
+              </li>
               <li>Mobile App</li>
             </ul>
           </Panel>
@@ -154,9 +217,23 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <li onClick={()=> {navigate("/how-it-works"); window.scrollTo(0,0)}}>How it works</li>
+              <li
+                onClick={() => {
+                  navigate("/how-it-works");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                How it works
+              </li>
               <li>Pricing</li>
-              <li onClick={()=>{ navigate("/sellers/create/"); window.scrollTo(0,0)}}>Join as a Professional</li>
+              <li
+                onClick={() => {
+                  navigate("/sellers/create/");
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Join as a Professional
+              </li>
               <li>Help Centre</li>
               <li>Mobile App</li>
             </ul>
