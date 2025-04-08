@@ -8,6 +8,7 @@ import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 import EmailMatch from "./EmailMatch/EmailMatch";
 import NameMatch from "./NameMatch/NameMatch";
+import BidsList from "./BidsList/BidsList";
 
 const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
   console.log(serviceId, "serviceId");
@@ -92,6 +93,14 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
 
         {buyerStep === 6 && (
           <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
+        )}
+
+        {buyerStep === 7 && (
+          <BidsList
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={closeModal}
+          />
         )}
       </div>
     </div>
