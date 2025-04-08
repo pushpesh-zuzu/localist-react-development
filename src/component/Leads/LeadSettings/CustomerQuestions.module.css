@@ -152,7 +152,10 @@
   font-weight: 600;
   font-size: 18px;
 }
-
+.ranger {
+  display: flex;
+  flex-direction: column;
+}
 .range {
   font-size: 14px;
   padding-top: 13.99px;

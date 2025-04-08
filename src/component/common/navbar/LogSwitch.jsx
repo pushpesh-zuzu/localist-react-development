@@ -40,7 +40,7 @@ const LogSwitch = () => {
     dispatch(switchUser(formData)).then((result) => {
       if (result?.success) {
         dispatch(setCurrentUser(newUserType));
-        navigate(newUserType == 1 ? "/sellers/create" : "/buyers/create");
+        navigate(newUserType == 1 ?  "/buyers/create": "/sellers/create");
         showToast("success", result?.message || "Switch successful!");
       } else {
         showToast("error", result?.message || "Switch failed. Please try again.");

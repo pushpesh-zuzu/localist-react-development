@@ -14,10 +14,12 @@ import {
 import { Modal, Spin } from "antd";
 import { searchService, setService } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false);
    const [input, setInput] = useState("");
    const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
@@ -32,7 +34,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 const { searchServiceLoader, service } = useSelector(
     (state) => state.findJobs
   );
-
+console.log(selectedService,"selectedService")
   const [locationData, setLocationData] = useState({
     miles1: "",
     postcode: "",
@@ -61,6 +63,9 @@ const { searchServiceLoader, service } = useSelector(
     dispatch(getleadPreferencesList(data));
     dispatch(getLocationLead(data))
   }, []);
+  const handleView = () => {
+    navigate("/leads")
+  }
 
   const handleServiceClick = (service, name) => {
     setSelectedService({
@@ -104,8 +109,16 @@ const handleSubmitData = () => {
     user_id: userToken?.remember_tokens,
     service_id: selectedService?.id,
   }
-  dispatch(addServiceLead(serviceDataList))
-   setIsModalOpen(false);
+  dispatch(addServiceLead(serviceDataList)).then((result) => {
+    if(result?.success) {
+      const data = {
+        user_id: userToken?.remember_tokens,
+      }
+      dispatch(getleadPreferencesList(data))
+       setIsModalOpen(false);
+    
+    }
+  })
 }
 const handleLocationSubmit = () => {
   const locationdata = {
@@ -114,9 +127,17 @@ const handleLocationSubmit = () => {
     postcode: locationData.postcode,
     service_id:selectedService?.id
   };
-  dispatch(addLocationLead(locationdata));
+  dispatch(addLocationLead(locationdata)).then((result) => {
+    console.log("Add", result)
+    if(result?.success){
+      const data = {
+        user_id: userToken?.remember_tokens,
+      }
+      dispatch(getleadPreferencesList(data))
+      setIsLocationModalOpen(false);
+    }
+  })
   
-  setIsLocationModalOpen(false);
 };
   return (
     <>
@@ -220,7 +241,7 @@ const handleLocationSubmit = () => {
         </div>
       </div>
 
-      <button className={styles.viewLeads}>View leads</button>
+      <button className={styles.viewLeads} onClick={handleView}>View leads</button>
       <Modal
   title="Add a New Service"
   open={isModalOpen}

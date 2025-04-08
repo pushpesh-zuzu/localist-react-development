@@ -87,7 +87,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/add_service`, ServiceData);
   
         if (response) {
-            dispatch(setLeadPreferenceData(response?.data?.data));
+            // dispatch(setLeadPreferenceData(response?.data?.data));
+            return response.data
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
@@ -103,7 +104,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/add_location`, locationData);
   
         if (response) {
-            dispatch(setLeadPreferenceData(response?.data?.data));
+            // dispatch(setLeadPreferenceData(response?.data?.data));
+            return response.data
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));

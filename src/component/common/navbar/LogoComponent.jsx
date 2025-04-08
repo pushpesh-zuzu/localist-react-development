@@ -25,7 +25,12 @@ const location = useLocation()
 const isAccountPage = location.pathname === "/buyer-account";
 const isNotification = location.pathname === "/user/notification";
   const handleRedirectUrl = () => {
-    navigate("/");
+    if (location?.pathname === "/sellers/create") {
+      navigate("/leads");
+    } else {
+      // You can uncomment or modify this based on your logic
+      // navigate("/buyers/create");
+    }
   };
 
   const [placement, setPlacement] = useState("bottomLeft");
