@@ -64,6 +64,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             formData={buyerRequest}
             serviceId={serviceId}
             serviceName={serviceName}
+            onClose={closeModal}
           />
         )}
 

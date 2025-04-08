@@ -3,6 +3,7 @@
   margin: 0 auto;
   box-shadow: 0px 0px 10px 0px #0000000f;
   padding: 24px 31px 39px 31px;
+  position: relative;
 }
 
 .title {
@@ -90,6 +91,17 @@
 
 .searchItem:hover {
   background: #f0f0f0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
