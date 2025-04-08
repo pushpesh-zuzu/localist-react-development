@@ -33,8 +33,8 @@ const DescribeYourRequest = ({ onClose }) => {
   const navigate = useNavigate();
 
   const handlePrivacy = () => {
-    navigate("/privacy-policy")
-  }
+    navigate("/privacy-policy");
+  };
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (text.trim() !== "") {
@@ -96,13 +96,12 @@ const DescribeYourRequest = ({ onClose }) => {
     };
 
     dispatch(addDetailsRequestData(detailsData)).then((result) => {
-              if (result?.success) {
-                showToast("success", result?.message || "Create Request successfully!");
-                
-              }
-              onClose();
-            });;
-   
+      if (result?.success) {
+        showToast("success", result?.message || "Create Request successfully!");
+      }
+      onClose();
+      navigate("/bids-list");
+    });
 
     // .then(() => {
     //   navigate("/buyers/create");
@@ -175,7 +174,12 @@ const DescribeYourRequest = ({ onClose }) => {
       <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
           Protected under our{" "}
-          <a href="#" className={styles.privacyLink} onClick={handlePrivacy}>
+          <a
+            href="#"
+            target="blank"
+            className={styles.privacyLink}
+            onClick={handlePrivacy}
+          >
             privacy policy
           </a>
         </p>

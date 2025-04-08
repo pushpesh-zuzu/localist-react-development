@@ -20,6 +20,7 @@ import Leads from "../component/Leads/Leads";
 import Settings from "../component/settings/Settings";
 
 import LeadSetting from "../component/Leads/LeadSetting";
+import BidsList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BidsList/BidsList";
 
 const router = createBrowserRouter([
   {
@@ -61,11 +62,12 @@ const router = createBrowserRouter([
         path: "/settings",
         element: (
           <ProtectedRoute>
-            <Settings/>
+            <Settings />
           </ProtectedRoute>
         ),
       },
-      {path:"/lead-settings", element:<LeadSetting/>},
+      { path: "/lead-settings", element: <LeadSetting /> },
+      { path: "/bids-list", element: <BidsList /> },
 
       { path: "*", element: <NotFound /> },
     ],

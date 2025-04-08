@@ -54,7 +54,7 @@ const EmailMatch = ({ nextStep, previousStep }) => {
           <input
             type="email"
             placeholder="Email"
-            className={styles.input}
+            className={`${styles.input} ${error ? styles.inputError : ""}`}
             value={email}
             onChange={handleEmailChange}
           />
@@ -63,17 +63,6 @@ const EmailMatch = ({ nextStep, previousStep }) => {
               Please enter a valid email address.
             </span>
           )}
-
-          <label htmlFor="name" className={styles.label}>
-            Please enter your name
-          </label>
-          <input
-            type="text"
-            placeholder="Name"
-            className={styles.input}
-            value={name}
-            onChange={handleNameChange}
-          />
 
           <div className={styles.buttonContainer}>
             <button className={styles.backButton} onClick={previousStep}>
@@ -85,7 +74,11 @@ const EmailMatch = ({ nextStep, previousStep }) => {
               disabled={requestLoader}
             >
               {requestLoader ? (
-                <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
+                <Spin
+                  indicator={
+                    <LoadingOutlined spin style={{ color: "white" }} />
+                  }
+                />
               ) : (
                 "View Matches"
               )}
