@@ -21,12 +21,13 @@ const CustomerQuestions = ({ setSelectedService }) => {
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state) => state.auth);
+  console.log(setSelectedService,"setSelectedService")
   const handleSubmitData = () => {
     const questionIds = Object.keys(selectedAnswers);
     const answers = Object.values(selectedAnswers);
     const selectData = {
       user_id: userToken?.remember_tokens,
-      service_id: setSelectedService?.service_id,
+      service_id: setSelectedService?.id,
       question_id: questionIds,
       answers: answers,
     };

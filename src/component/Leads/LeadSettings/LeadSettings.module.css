@@ -217,6 +217,58 @@ input:checked + .slider::before {
   background-color: #d9d9d9;
 }
 
+/* .title {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 20px;
+} */
+
+.formGroup {
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #828282;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.fullWidthInput {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.searchResults {
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  width: 86.7%;
+  max-height: 200px;
+  /* top: 100%; */
+  overflow-y: auto;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.searchItem {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 14px !important;
+  color: #000 !important;
+}
+
+.searchItem:hover {
+  background: #f0f0f0;
+}
 @media (max-width: 768px) {
   .container {
     padding: 24px;

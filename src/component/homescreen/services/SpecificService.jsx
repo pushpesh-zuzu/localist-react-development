@@ -1,16 +1,25 @@
+import { BASE_URL_IMAGE } from "../../../utils";
 import styles from "./services.module.css";
 import PropTypes from "prop-types";
+import imgBanner from "../../../assets/Images/houseCleaner.svg"
+import { useState } from "react";
+import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
 const SpecificService = ({ service }) => {
+   
   return (
-    <div className={styles.serviceCard}>
+    <>
+    <div className={styles.serviceCard} >
       <img
-        src={service.image}
+        src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
         alt={service.title}
         className={styles.serviceImage}
       />
-      <p className={styles.serviceTitle}>{service.title}</p>
+      <p className={styles.serviceTitle}>{service.name}</p>
+   
     </div>
+
+    </>
   );
 };
 

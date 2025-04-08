@@ -15,6 +15,7 @@ const initialState = {
   selectedServices:[],
   categoriesListLoader:false,
   CategoriesList:[],
+  allServiceList:[],
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
@@ -125,6 +126,21 @@ export const getCategoriesList = () => {
   };
 };
 
+export const getAllServiceList = () => {
+  return async (dispatch) => {
+    dispatch(setPopularServiceListLoader(true));
+    try {
+      const response = await axiosInstance.get(`users/all-services`);
+      if (response) {
+        dispatch(setAllServiceList(response?.data?.data));
+      }
+    } catch (error) {
+      console.log("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setPopularServiceListLoader(false));
+    }
+  };
+};
 const findJobSlice = createSlice({
   name: "findJobs",
   initialState: initialState,
@@ -171,6 +187,9 @@ const findJobSlice = createSlice({
     },
     setCategoriesList(state,action) {
       state.CategoriesList = action.payload
+    },
+    setAllServiceList(state, action) {
+      state.allServiceList = action.payload;
     }
 
   },
@@ -189,6 +208,7 @@ export const {
   setselectedServices,
   setRegisterData,
   setCategoriesListLoader,
-  setCategoriesList
+  setCategoriesList,
+  setAllServiceList
 } = findJobSlice.actions;
 export default findJobSlice.reducer;
