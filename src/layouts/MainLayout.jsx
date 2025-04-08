@@ -13,25 +13,24 @@ const pageTitles = {
   "/how-it-works": "How It Works | Localists",
   "/sellers/create": "Create Seller Account | Localists",
   "/buyers/create": "Create Buyer Account | Localists",
-  "/buyer-account": "Buyer Account Settings | Localists",
+  "/account/setting": "Buyer Account Settings | Localists",
   "/user/notification": "Buyer Notifications | Localists",
   "/privacy-policy": "Privacy Policy | Localists",
   "/dashboard": "Dashboard | Localists",
 };
 
 const MainLayout = () => {
-  
   const location = useLocation();
   const title = pageTitles[location.pathname] || "Localists";
 
   useEffect(() => {
-    document.title = title; 
+    document.title = title;
   }, [title]);
   return (
     <div>
       <Navbar />
       <MetaHelmet title={title} />
-      <main style={{minHeight:"50vh"}}>
+      <main style={{ minHeight: "50vh" }}>
         <Outlet />
       </main>
       <Footer />

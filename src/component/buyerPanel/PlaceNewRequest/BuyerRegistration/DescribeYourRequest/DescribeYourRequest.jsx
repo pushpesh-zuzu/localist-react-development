@@ -100,7 +100,7 @@ const DescribeYourRequest = ({ onClose }) => {
         showToast("success", result?.message || "Create Request successfully!");
       }
       onClose();
-      navigate("/bids-list");
+      navigate(`/bids-list/${requestId}`);
     });
 
     // .then(() => {

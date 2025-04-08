@@ -40,10 +40,13 @@ const LogSwitch = () => {
     dispatch(switchUser(formData)).then((result) => {
       if (result?.success) {
         dispatch(setCurrentUser(newUserType));
-        navigate(newUserType == 1 ?  "/buyers/create": "/sellers/create");
+        navigate(newUserType == 1 ? "/buyers/create" : "/sellers/create");
         showToast("success", result?.message || "Switch successful!");
       } else {
-        showToast("error", result?.message || "Switch failed. Please try again.");
+        showToast(
+          "error",
+          result?.message || "Switch failed. Please try again."
+        );
       }
     });
   };
@@ -61,7 +64,7 @@ const LogSwitch = () => {
   };
 
   const isBuyerPage = location.pathname === "/buyers/create";
-  const isAccountPage = location.pathname === "/buyer-account";
+  const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
   const userName = userToken?.name || registerData?.name || "";
   const userInitial = userName.charAt(0).toUpperCase();
@@ -77,51 +80,54 @@ const LogSwitch = () => {
 
       {/* Navigation Items */}
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
-        {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken) && (
-          <>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/dashboard" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/dashboard")}
-            >
-              Dashboard
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/leads" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/leads")}
-            >
-              Leads
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/responses" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/responses")}
-            >
-              My Responses
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/settings" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/settings")}
-            >
-              Settings
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/help" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/help")}
-            >
-              Help
-            </div>
-            <div className={styles.nameCircle}>{userInitial}</div>
-          </>
-        )}
+        {!isBuyerPage &&
+          !isAccountPage &&
+          !isNotification &&
+          (userToken || registerToken) && (
+            <>
+              <div
+                className={`${styles.navItem} ${
+                  location.pathname === "/dashboard" ? styles.active : ""
+                }`}
+                // onClick={() => handleNavigation("/dashboard")}
+              >
+                Dashboard
+              </div>
+              <div
+                className={`${styles.navItem} ${
+                  location.pathname === "/leads" ? styles.active : ""
+                }`}
+                onClick={() => handleNavigation("/leads")}
+              >
+                Leads
+              </div>
+              <div
+                className={`${styles.navItem} ${
+                  location.pathname === "/responses" ? styles.active : ""
+                }`}
+                // onClick={() => handleNavigation("/responses")}
+              >
+                My Responses
+              </div>
+              <div
+                className={`${styles.navItem} ${
+                  location.pathname === "/settings" ? styles.active : ""
+                }`}
+                onClick={() => handleNavigation("/settings")}
+              >
+                Settings
+              </div>
+              <div
+                className={`${styles.navItem} ${
+                  location.pathname === "/help" ? styles.active : ""
+                }`}
+                // onClick={() => handleNavigation("/help")}
+              >
+                Help
+              </div>
+              <div className={styles.nameCircle}>{userInitial}</div>
+            </>
+          )}
 
         {(isBuyerPage || isAccountPage || isNotification) && (
           <div className={styles.requestBox}>
@@ -135,7 +141,7 @@ const LogSwitch = () => {
       </div>
 
       {/* User Options Popover */}
-      {(registerToken || userToken) ? (
+      {registerToken || userToken ? (
         <Popover
           content={
             <>
@@ -145,15 +151,12 @@ const LogSwitch = () => {
               >
                 Notification
               </div>
-              <div
-                className={styles.logoutBtn}
-                onClick={handleSwitchUser}
-              >
+              <div className={styles.logoutBtn} onClick={handleSwitchUser}>
                 Switch to {currentUser === 1 ? "Buyer" : "Seller "}
               </div>
               <div
                 className={styles.logoutBtn}
-                onClick={() => handleNavigation("/buyer-account")}
+                onClick={() => handleNavigation("/account/setting")}
               >
                 Account Settings
               </div>

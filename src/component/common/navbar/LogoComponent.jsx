@@ -20,10 +20,10 @@ const LogoComponent = () => {
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [mouseHover, setMouseHover] = useState("");
- 
-const location = useLocation() 
-const isAccountPage = location.pathname === "/buyer-account";
-const isNotification = location.pathname === "/user/notification";
+
+  const location = useLocation();
+  const isAccountPage = location.pathname === "/account/setting";
+  const isNotification = location.pathname === "/user/notification";
   const handleRedirectUrl = () => {
     if (location?.pathname === "/sellers/create") {
       navigate("/leads");
@@ -192,20 +192,23 @@ const isNotification = location.pathname === "/user/notification";
         className={styles.mainLogo}
         onClick={handleRedirectUrl}
       />
-   {location.pathname !== "/buyers/create" && !isAccountPage && !isNotification  &&  <Popover
-        placement={placement}
-        content={content}
-        arrow={false}
-        trigger="hover"
-        className="popover_wrap"
-      >
-        <div className={styles.serviceContainer}>
-          <h2 className={styles.serviceText}>Explore Our Services</h2>
-          <h2 className={styles.serviceTextMobile}>Our Services</h2>
-          <img src={downArrow} alt="down-arrow" />
-        </div>
-      </Popover>
-}
+      {location.pathname !== "/buyers/create" &&
+        !isAccountPage &&
+        !isNotification && (
+          <Popover
+            placement={placement}
+            content={content}
+            arrow={false}
+            trigger="hover"
+            className="popover_wrap"
+          >
+            <div className={styles.serviceContainer}>
+              <h2 className={styles.serviceText}>Explore Our Services</h2>
+              <h2 className={styles.serviceTextMobile}>Our Services</h2>
+              <img src={downArrow} alt="down-arrow" />
+            </div>
+          </Popover>
+        )}
     </div>
   );
 };
