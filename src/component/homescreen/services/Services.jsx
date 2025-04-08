@@ -40,8 +40,8 @@ const Services = () => {
     <div className={styles.container1}>
       {allServiceList?.map((category, categoryIndex) => (
         <div key={categoryIndex} className={styles.container}>
-          <h2 className={styles.heading}>{formatTitle(category.description)}</h2>
-          <SliderComponent subcategory={category?.subcategory} />
+          {category?.subcategory.length > 0  && <><h2 className={styles.heading}>{formatTitle(category.description)}</h2>
+          <SliderComponent subcategory={category?.subcategory} /></>}
         </div>
       ))}
     </div>

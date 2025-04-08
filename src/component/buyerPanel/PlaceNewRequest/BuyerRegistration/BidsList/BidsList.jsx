@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./BidsList.module.css";
 import StarlinkImage from "../../../../../assets/Images/StarlinkImage.svg";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getAutoBid } from "../../../../../store/LeadSetting/leadSettingSlice";
+import { BASE_IMAGE_URL } from "../../../../../utils";
 
 const BidsList = ({ previousStep }) => {
+  const { autoBidList } = useSelector((state) => state.leadSetting)
+  console.log(autoBidList,"autoBidList")
+  const { requestId } = useSelector((state)=> state?.buyer)
+  const {userToken} = useSelector((state)=> state.auth)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    const data = {
+      user_id:userToken?.rember_token,
+      lead_id:requestId
+    }
+    dispatch(getAutoBid(data))
+  },[])
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
@@ -42,18 +57,21 @@ const BidsList = ({ previousStep }) => {
         <span>Recommended:</span> Request replies from your{" "}
         <strong>top 5 matches</strong> to here back faster
       </div>
-
+      
       <div className={styles.card}>
         <div className={styles.cardLeft}>
-          <div className={styles.imageWrapper}>
-            <img src={StarlinkImage} alt="Starlink" className={styles.image} />
+        {autoBidList?.map((item) => {
+          return(
+            <>
+            <div className={styles.imageWrapper}>
+            <img src={`${BASE_IMAGE_URL}${item?.sellers?.profile_image}`} alt="Starlink" className={styles.image} />
           </div>
           <div className={styles.details}>
             <div className={styles.header}>
               <div>
                 <h3>
                   <img src={GreenTickIcon} alt="" />
-                  Starlink pvt. ltd
+                  {item?.sellers?.company_name}
                 </h3>
                 <p>
                   <img src={AutoBidLocationIcon} alt="" />
@@ -91,6 +109,9 @@ const BidsList = ({ previousStep }) => {
               </div>
             </div>
           </div>
+            </>
+          )
+        })}
 
           <div className={styles.replyBtnWrapper}>
             <button className={styles.replyBtn}>Request reply</button>

@@ -149,7 +149,7 @@ const LogSwitch = () => {
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}
               >
-                Switch to {currentUser === 1 ? "Seller" : "Buyer"}
+                Switch to {currentUser === 1 ? "Buyer" : "Seller "}
               </div>
               <div
                 className={styles.logoutBtn}

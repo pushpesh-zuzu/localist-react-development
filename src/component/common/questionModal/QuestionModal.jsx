@@ -73,7 +73,8 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      dispatch(setBuyerStep(3));
+      nextStep()
+      
     }
   };
 

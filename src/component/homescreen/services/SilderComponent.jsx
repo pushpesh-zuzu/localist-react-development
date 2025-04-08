@@ -63,7 +63,7 @@ const SliderComponent = ({ subcategory }) => {
 
   return (
     <>
-      <button
+     {subcategory?.length > 0 && (<> <button
         className={styles.arrowLeft}
         onClick={() => slider.current?.prev()}
       >
@@ -85,7 +85,7 @@ const SliderComponent = ({ subcategory }) => {
         onClick={() => slider.current?.next()}
       >
         <img src={rightArrow} alt="Right" />
-      </button>
+      </button></>)}
 
       {show && (
           <>

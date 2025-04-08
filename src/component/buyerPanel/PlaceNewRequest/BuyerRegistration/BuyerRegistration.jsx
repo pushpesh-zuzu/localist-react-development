@@ -15,9 +15,22 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
+    const { adminToken } = useSelector((state) => state.auth)
+    console.log(adminToken,"pp")
 
   const nextStep = () => {
-    dispatch(setBuyerStep(buyerStep + 1));
+    
+    if(buyerStep==2){
+      
+      if(adminToken){
+        dispatch(setBuyerStep(buyerStep + 2));
+      }
+      else{
+        dispatch(setBuyerStep(buyerStep + 1));
+      }
+      return;
+    }
+   dispatch(setBuyerStep(buyerStep+1))
   };
 
   const previousStep = () => {
@@ -64,7 +77,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             formData={buyerRequest}
           />
         )}
-        {buyerStep === 3 && (
+        {buyerStep === 3  && (
           <EmailMatch
             nextStep={nextStep}
             previousStep={previousStep}
@@ -82,20 +95,20 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
           />
         )}
 
-        {buyerStep === 5 && (
+        {/* {buyerStep === 5 && (
           <NameMatch
             nextStep={nextStep}
             previousStep={previousStep}
             onClose={closeModal}
             formData={buyerRequest}
           />
-        )}
+        )} */}
 
-        {buyerStep === 6 && (
+        {buyerStep === 5 && (
           <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
         )}
 
-        {buyerStep === 7 && (
+        {buyerStep === 6 && (
           <BidsList
             nextStep={nextStep}
             previousStep={previousStep}
