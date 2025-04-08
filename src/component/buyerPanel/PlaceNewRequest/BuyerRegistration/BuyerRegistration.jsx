@@ -7,9 +7,10 @@ import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 import EmailMatch from "./EmailMatch/EmailMatch";
+import NameMatch from "./NameMatch/NameMatch";
 
-const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
-  console.log(serviceId,"serviceId")
+const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
+  console.log(serviceId, "serviceId");
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
@@ -20,14 +21,14 @@ const BuyerRegistration = ({ closeModal,serviceId,serviceName }) => {
 
   const previousStep = () => {
     if (buyerStep === 3) {
-      dispatch(setBuyerStep(2)); 
+      dispatch(setBuyerStep(2));
     } else {
       dispatch(setBuyerStep(buyerStep - 1));
     }
   };
-  useEffect(()=>{
-dispatch(setBuyerStep(1))
-  },[])
+  useEffect(() => {
+    dispatch(setBuyerStep(1));
+  }, []);
 
   useEffect(() => {
     if (buyerStep) {
@@ -44,7 +45,12 @@ dispatch(setBuyerStep(1))
     <div className={styles.modal}>
       <div className={styles.modalContent}>
         {buyerStep === 1 && (
-          <WhatServiceYouNeed nextStep={nextStep} formData={buyerRequest}  serviceId={serviceId} serviceName={serviceName}/>
+          <WhatServiceYouNeed
+            nextStep={nextStep}
+            formData={buyerRequest}
+            serviceId={serviceId}
+            serviceName={serviceName}
+          />
         )}
 
         {buyerStep === 2 && (
@@ -59,11 +65,11 @@ dispatch(setBuyerStep(1))
         )}
         {buyerStep === 3 && (
           <EmailMatch
-          nextStep={nextStep}
+            nextStep={nextStep}
             previousStep={previousStep}
             onClose={closeModal}
             formData={buyerRequest}
-            />
+          />
         )}
 
         {buyerStep === 4 && (
@@ -76,6 +82,15 @@ dispatch(setBuyerStep(1))
         )}
 
         {buyerStep === 5 && (
+          <NameMatch
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={closeModal}
+            formData={buyerRequest}
+          />
+        )}
+
+        {buyerStep === 6 && (
           <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
         )}
       </div>
