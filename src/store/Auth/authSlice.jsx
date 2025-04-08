@@ -9,7 +9,7 @@ const initialState = {
   loginLoader: false,
   logoutLoader:false,
   switchUserLoader:false,
-  currentUser:userToken?.user_type || null,
+  currentUser:userToken?.active_status || null,
 };
 
 export const userLogin = (loginData) => {

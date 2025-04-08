@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Popover } from "antd";
 import {
   setCurrentUser,
+  setUserToken,
   switchUser,
   userLogout,
 } from "../../../store/Auth/authSlice";
@@ -17,36 +18,105 @@ const LogSwitch = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { serviceTitle } = useParams();
+  const [dataSave,setDataSave] = useState()
 
   const { userToken, currentUser } = useSelector((state) => state.auth);
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-
+useEffect(()=>{
+setDataSave(userToken?.active_status)
+},[userToken])
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigation = (path) => {
     navigate(path);
     setMenuOpen(false); // close menu on navigation
   };
+  console.log(userToken?.active_status,currentUser,"pp")
+
+  // const handleSwitchUser = () => {
+  //   const newUserType = userToken?.active_status == 1 ? 2 : 1;
+
+  //   const formData = new FormData();
+  //   formData.append("user_id", userToken?.remember_tokens);
+  //   formData.append("user_type", newUserType);
+
+  //   dispatch(switchUser(formData)).then((result) => {
+  //     if (result?.success) {
+  //       dispatch(setCurrentUser(newUserType));
+  //       navigate(newUserType == 1 ? "/sellers/create": "/buyers/create");
+  //       showToast("success", result?.message || "Switch successful!");
+  //     } else {
+  //       showToast("error", result?.message || "Switch failed. Please try again.");
+  //     }
+  //   });
+  // };
+  // const handleSwitchUser = () => {
+  //   const newUserType = userToken?.active_status == 1 ? 2 : 1;
+  
+  //   const formData = new FormData();
+  //   formData.append("user_id", userToken?.remember_tokens);
+  //   formData.append("user_type", newUserType);
+  
+  //   dispatch(switchUser(formData)).then((result) => {
+  //     if (result?.success) {
+  //       dispatch(setCurrentUser(newUserType));
+  
+  //       // 👇 Navigate based on *previous* status
+  //       if (userToken?.active_status === 1) {
+  //         navigate("/sellers/create");
+  //       } else {
+  //         navigate("/buyers/create");
+  //       }
+  
+  //       showToast("success", result?.message || "Switch successful!");
+  //     } else {
+  //       showToast("error", result?.message || "Switch failed. Please try again.");
+  //     }
+  //   });
+  // };
 
   const handleSwitchUser = () => {
-    const newUserType = currentUser == 1 ? 2 : 1;
-
+    const newUserType = userToken?.active_status == 1 ? 2 : 1;
+  
     const formData = new FormData();
     formData.append("user_id", userToken?.remember_tokens);
     formData.append("user_type", newUserType);
-
+  
     dispatch(switchUser(formData)).then((result) => {
       if (result?.success) {
-        dispatch(setCurrentUser(newUserType));
-        navigate(newUserType == 1 ?  "/buyers/create": "/sellers/create");
+        // Remove old localStorage user data
+        localStorage.removeItem("barkUserToken");
+  
+        // Set new user data to localStorage
+        const updatedUser = {
+          ...userToken,
+          active_status: newUserType,
+        };
+
+        localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
+        dispatch( setUserToken(updatedUser))
+setDataSave(updatedUser?.active_status)
+        console.log(updatedUser,"updatedUser")
+  
+        // Update redux state if needed
+        dispatch(setCurrentUser(dataSave));
+  
+        // Navigate based on previous user type
+        if (updatedUser?.active_status === 1) {
+          navigate("/sellers/create");
+        } else {
+          navigate("/buyers/create");
+        }
+  
         showToast("success", result?.message || "Switch successful!");
       } else {
         showToast("error", result?.message || "Switch failed. Please try again.");
       }
     });
   };
+  
 
   const handleLogout = async () => {
     try {
@@ -76,7 +146,7 @@ const LogSwitch = () => {
       </div>
 
       {/* Navigation Items */}
-      <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
+      {/* <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
         {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken) && (
           <>
             <div
@@ -132,7 +202,53 @@ const LogSwitch = () => {
         {userToken && (isBuyerPage || isAccountPage || isNotification) && (
           <div className={styles.nameCircle}>{userInitial}</div>
         )}
+      </div> */}
+      <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
+  {userToken?.active_status == 1 && (
+    <>
+      <div
+        className={`${styles.navItem} ${location.pathname === "/settings" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/settings")}
+      >
+        Dashboard
       </div>
+      <div
+        className={`${styles.navItem} ${location.pathname === "/leads" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/leads")}
+      >
+        Leads
+      </div>
+      <div
+        className={`${styles.navItem} ${location.pathname === "#" ? styles.active : ""}`}
+        onClick={() => handleNavigation("#")}
+      >
+        My Responses
+      </div>
+      <div
+        className={`${styles.navItem} ${location.pathname === "/settings" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/settings")}
+      >
+        Settings
+      </div>
+      <div
+        className={`${styles.navItem} ${location.pathname === "/help" ? styles.active : ""}`}
+        onClick={() => handleNavigation("#")}
+      >
+        Help
+      </div>
+      <div className={styles.nameCircle}>{userInitial}</div>
+    </>
+  )}
+
+  {userToken?.active_status === 2 && (
+    <>
+      <div className={styles.requestBox}>
+        <div className={styles.myrequestText}>My Request</div>
+      </div>
+      <div className={styles.nameCircle}>{userInitial}</div>
+    </>
+  )}
+</div>
 
       {/* User Options Popover */}
       {(registerToken || userToken) ? (
@@ -149,7 +265,7 @@ const LogSwitch = () => {
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}
               >
-                Switch to {currentUser === 1 ? "Buyer" : "Seller "}
+                Switch to {dataSave === 1 ? "Buyer" : "Seller "}
               </div>
               <div
                 className={styles.logoutBtn}

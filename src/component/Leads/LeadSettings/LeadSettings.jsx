@@ -99,7 +99,7 @@ console.log(selectedService,"selectedService")
           setInput(item.name);
           setSelectedService(item);
           setIsDropdownOpen(false);
-          setErrors((prev) => ({ ...prev, service: "" }));
+          // setErrors((prev) => ({ ...prev, service: "" }));
           setTimeout(() => dispatch(setService([])), 100);
         },
         [dispatch]
@@ -128,11 +128,13 @@ const handleLocationSubmit = () => {
     service_id:selectedService?.id
   };
   dispatch(addLocationLead(locationdata)).then((result) => {
+    
     console.log("Add", result)
     if(result?.success){
       const data = {
         user_id: userToken?.remember_tokens,
       }
+      dispatch(getLocationLead(data))
       dispatch(getleadPreferencesList(data))
       setIsLocationModalOpen(false);
     }
