@@ -80,6 +80,15 @@
   margin-top: 11.89px;
 }
 
+.lightRedBox {
+  background-color: #fce5e3;
+}
+
+.lightBlueBox {
+  background-color: #e3f6fc;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
   .container {
     padding: 25px 50px;
@@ -155,19 +164,26 @@
   }
 }
 
-/* View request CSS  */
-
+/* View request cards */
 .cardsContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  overflow: auto;
+  justify-content: center;
 }
 
 .requestcard {
   background: #fff;
   box-shadow: 0px 0px 10px 0px #0000001f;
   padding: 30px;
-  width: 562px;
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .requestcard {
+    width: 100%;
+  }
 }
 
 .cardHeader {
@@ -194,7 +210,6 @@
 .messageBox {
   text-align: left;
   padding: 24px;
-  border-radius: 5px;
   margin: 35px 0;
 }
 

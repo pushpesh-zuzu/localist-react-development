@@ -12,7 +12,7 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
+const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -24,7 +24,6 @@ const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
   );
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(serviceId?.id,"serviceId")
 
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
@@ -33,7 +32,8 @@ const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
       }, 500);
       return () => clearTimeout(delayDebounce);
     }
-  }, [input, dispatch, isDropdownOpen, serviceName])
+  }, [input, dispatch, isDropdownOpen, serviceName]);
+
   useEffect(() => {
     if (serviceName && serviceId) {
       setInput(serviceName);
@@ -74,10 +74,12 @@ const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
           postcode: pincode,
         })
       );
-      dispatch(questionAnswerData({ service_id: selectedService.id || serviceId }));
+      dispatch(
+        questionAnswerData({ service_id: selectedService.id || serviceId })
+      );
       nextStep();
     }
-  }, [selectedService, pincode, dispatch,serviceId, nextStep]);
+  }, [selectedService, pincode, dispatch, serviceId, nextStep]);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -140,6 +142,10 @@ const WhatServiceYouNeed = ({ nextStep, serviceId,serviceName}) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.closeButton} onClick={onClose}>
+        x
+      </div>
+
       <h2 className={styles.title}>What service do you need?</h2>
 
       {/* Service Input */}
