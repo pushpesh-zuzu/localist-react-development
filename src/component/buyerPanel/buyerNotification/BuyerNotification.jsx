@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./BuyerNotification.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import { addNotificationData, getNotificationData } from "../../../store/Buyer/BuyerSlice";
+import {
+  addNotificationData,
+  getNotificationData,
+} from "../../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 
@@ -28,10 +31,12 @@ const BuyerNotification = () => {
     };
 
     await dispatch(addNotificationData(data));
-    await dispatch(getNotificationData({
-      user_type: "customer",
-      noti_type: "email",
-    }));
+    await dispatch(
+      getNotificationData({
+        user_type: "customer",
+        noti_type: "email",
+      })
+    );
 
     setLoadingNoti(""); // 👈 reset loader
   };
@@ -50,12 +55,15 @@ const BuyerNotification = () => {
           let notiName = "";
           if (index === 0) notiName = "customer_email_change_in_request";
           else if (index === 1) notiName = "customer_email_reminder_to_reply";
-          else if (index === 2) notiName = "customer_email_update_about_new_feature";
+          else if (index === 2)
+            notiName = "customer_email_update_about_new_feature";
 
           return (
             <div
               key={index}
-              className={`${styles.notificationItem} ${index >= 0 ? styles.shadow : ""}`}
+              className={`${styles.notificationItem} ${
+                index >= 0 ? styles.shadow : ""
+              }`}
             >
               <span>{notification?.noti_name}</span>
               {loadingNoti === notiName ? (

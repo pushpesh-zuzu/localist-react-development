@@ -76,20 +76,19 @@ const { searchServiceLoader, service,registerData } = useSelector(
    
     
   }, []);
-  useEffect(()=>{
-    if(userToken?.active_status == 1){
+  useEffect(() => {
+    if (userToken?.active_status == 1) {
       const data = {
         user_id: userToken?.remember_tokens,
       };
-      dispatch(getLocationLead(data))
+      dispatch(getLocationLead(data));
     } else {
-
       const locationData = {
-        user_id: registerData?.remember_tokens
-      }
-      dispatch(getLocationLead(locationData))
+        user_id: registerData?.remember_tokens,
+      };
+      dispatch(getLocationLead(locationData));
     }
-  },[])
+  }, []);
   const handleView = () => {
     navigate("/leads");
   };

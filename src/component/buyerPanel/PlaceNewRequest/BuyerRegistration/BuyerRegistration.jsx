@@ -17,11 +17,8 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-    const { adminToken } = useSelector((state) => state.auth)
-    const {  registerData } = useSelector(
-      (state) => state.findJobs
-    );
-    
+  const { adminToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
 
   const nextStep = () => {
     
@@ -38,11 +35,21 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
   };
 
   const previousStep = () => {
+    if (buyerStep === 4) {
+      if (adminToken || registerData.remember_tokens) {
+        dispatch(setBuyerStep(2));
+      } else {
+        dispatch(setBuyerStep(3));
+      }
+      return;
+    }
+
     if (buyerStep === 3) {
       dispatch(setBuyerStep(2));
-    } else {
-      dispatch(setBuyerStep(buyerStep - 1));
+      return;
     }
+
+    dispatch(setBuyerStep(buyerStep - 1));
   };
   useEffect(() => {
     dispatch(setBuyerStep(1));
