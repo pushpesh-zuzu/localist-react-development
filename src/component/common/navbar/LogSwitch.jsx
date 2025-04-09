@@ -38,7 +38,7 @@ setDataSave(userToken?.active_status)
   
 
   const handleSwitchUser = () => {
-    const newUserType = userToken?.active_status == 1 ? 2 : 1;
+    const newUserType = userToken?.active_status  == 1 ? 2 : 1;
   
     const formData = new FormData();
     formData.append("user_id", userToken?.remember_tokens);
@@ -48,24 +48,24 @@ setDataSave(userToken?.active_status)
       if (result?.success) {
         // Remove old localStorage user data
         localStorage.removeItem("barkUserToken");
-  localStorage.removeItem("registerDataToken")
+  // localStorage.removeItem("registerDataToken")
         // Set new user data to localStorage
         const updatedUser = {
           ...userToken,
           active_status: newUserType,
         };
-        const updateRegiater = {
-          ...registerData,
-          active_status:newUserType,
-          name:userToken?.name || registerData?.name || ""
-        }
+        // const updateRegiater = {
+        //   ...registerData,
+        //   active_status:newUserType,
+        //   name:userToken?.name || registerData?.name || ""
+        // }
 
         localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
-        localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
-        dispatch( setUserToken(updatedUser))
-        dispatch(setRegisterData(updateRegiater))
+        // localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
+        dispatch(setUserToken(updatedUser))
+        // dispatch(setRegisterData(updateRegiater))
         setDataSave(updatedUser?.active_status)
-        setRegisterDatas(updateRegiater?.active_status)
+        // setRegisterDatas(updateRegiater?.active_status)
         console.log(updatedUser,"updatedUser")
   
         // Update redux state if needed
@@ -116,64 +116,6 @@ setDataSave(userToken?.active_status)
         <div></div>
       </div>
 
-      {/* Navigation Items */}
-      {/* <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
-        {!isBuyerPage && !isAccountPage && !isNotification && (userToken || registerToken) && (
-          <>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/dashboard" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/dashboard")}
-            >
-              Dashboard
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/leads" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/leads")}
-            >
-              Leads
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/responses" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/responses")}
-            >
-              My Responses
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/settings" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/settings")}
-            >
-              Settings
-            </div>
-            <div
-              className={`${styles.navItem} ${
-                location.pathname === "/help" ? styles.active : ""
-              }`}
-              onClick={() => handleNavigation("/help")}
-            >
-              Help
-            </div>
-            <div className={styles.nameCircle}>{userInitial}</div>
-          </>
-        )}
-
-        {(isBuyerPage || isAccountPage || isNotification) && (
-          <div className={styles.requestBox}>
-            <div className={styles.myrequestText}>My Request</div>
-          </div>
-        )}
-
-        {userToken && (isBuyerPage || isAccountPage || isNotification) && (
-          <div className={styles.nameCircle}>{userInitial}</div>
-        )}
-      </div> */}
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
   {(userToken?.active_status === 1 || registerData?.active_status === 1) && (
     <>
@@ -236,7 +178,7 @@ setDataSave(userToken?.active_status)
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}
               >
-                Switch to {dataSave && registerdata === 1 ? "Buyer" : "Seller "}
+                Switch to {dataSave === 1 ? "Buyer" : "Seller "}
               </div>
               <div
                 className={styles.logoutBtn}
@@ -261,7 +203,7 @@ setDataSave(userToken?.active_status)
           >
             Login
           </div>
-          {(!userToken && !selectedServiceId && !serviceTitle) && (
+          {( !selectedServiceId && !serviceTitle) && (
             <div
               className={styles.professionalBtn}
               onClick={() => {
