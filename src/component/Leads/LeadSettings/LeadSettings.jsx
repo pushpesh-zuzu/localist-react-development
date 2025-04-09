@@ -34,11 +34,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { userToken } = useSelector((state) => state.auth);
 
   const [isMobileView, setIsMobileView] = useState(false);
-<<<<<<< HEAD
-const { searchServiceLoader, service,registerData } = useSelector(
-=======
-  const { searchServiceLoader, service } = useSelector(
->>>>>>> 2bb60eb09f55afedf44c8ba6454e0aa691991748
+  const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
   console.log(selectedService, "selectedService");
@@ -64,8 +60,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
 
   // Fetch preferences
   useEffect(() => {
-<<<<<<< HEAD
-    if(userToken?.active_status == 1){
+    if (userToken?.active_status == 1) {
       const data = {
         user_id: userToken?.remember_tokens,
       };
@@ -76,30 +71,20 @@ const { searchServiceLoader, service,registerData } = useSelector(
       };
       dispatch(getleadPreferencesList(data));
     }
-   
-    
-=======
-    const data = {
-      user_id: userToken?.remember_tokens,
-    };
-    dispatch(getleadPreferencesList(data));
-    dispatch(getLocationLead(data));
->>>>>>> 2bb60eb09f55afedf44c8ba6454e0aa691991748
   }, []);
-  useEffect(()=>{
-    if(userToken?.active_status == 1){
+  useEffect(() => {
+    if (userToken?.active_status == 1) {
       const data = {
         user_id: userToken?.remember_tokens,
       };
-      dispatch(getLocationLead(data))
+      dispatch(getLocationLead(data));
     } else {
-
       const locationData = {
-        user_id: registerData?.remember_tokens
-      }
-      dispatch(getLocationLead(locationData))
+        user_id: registerData?.remember_tokens,
+      };
+      dispatch(getLocationLead(locationData));
     }
-  },[])
+  }, []);
   const handleView = () => {
     navigate("/leads");
   };
