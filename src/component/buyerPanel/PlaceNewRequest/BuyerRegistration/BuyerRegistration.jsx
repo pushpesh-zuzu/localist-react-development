@@ -16,13 +16,16 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
     const { adminToken } = useSelector((state) => state.auth)
-    console.log(adminToken,"pp")
+    const {  registerData } = useSelector(
+      (state) => state.findJobs
+    );
+    console.log(adminToken,registerData,"pp")
 
   const nextStep = () => {
     
     if(buyerStep==2){
       
-      if(adminToken){
+      if(adminToken || registerData.remember_tokens){
         dispatch(setBuyerStep(buyerStep + 2));
       }
       else{

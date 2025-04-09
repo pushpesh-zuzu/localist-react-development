@@ -96,7 +96,7 @@ const getUserType=()=>{
         setDataSave(updatedUser?.active_status)
         // setRegisterDatas(updateRegiater?.active_status)
         console.log(updatedUser,"updatedUser")
-  
+        
         // Update redux state if needed
         dispatch(setCurrentUser(dataSave));
       
@@ -133,8 +133,9 @@ const getUserType=()=>{
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
-  const userName = userToken?.name || registerData?.name || "";
 
+  const userName = userToken?.name || registerData?.name || "";
+  
   const userInitial = userName.charAt(0).toUpperCase();
 
   return (
@@ -181,6 +182,7 @@ const getUserType=()=>{
       </div>
       <div className={styles.nameCircle}>{userInitial}</div>
     </>
+
   )}
 
   {getUserType()==2 && (
@@ -188,6 +190,7 @@ const getUserType=()=>{
       <div className={styles.requestBox}>
         <div className={styles.myrequestText}>My Request</div>
       </div>
+      
       <div className={styles.nameCircle}>{userInitial}</div>
     </>
   )}

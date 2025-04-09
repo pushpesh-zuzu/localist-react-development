@@ -31,7 +31,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { userToken } = useSelector((state) => state.auth);
 
   const [isMobileView, setIsMobileView] = useState(false);
-const { searchServiceLoader, service } = useSelector(
+const { searchServiceLoader, service,registerData } = useSelector(
     (state) => state.findJobs
   );
 console.log(selectedService,"selectedService")
@@ -57,12 +57,34 @@ console.log(selectedService,"selectedService")
 
   // Fetch preferences
   useEffect(() => {
-    const data = {
-      user_id: userToken?.remember_tokens,
-    };
-    dispatch(getleadPreferencesList(data));
-    dispatch(getLocationLead(data))
+    if(userToken?.active_status == 1){
+      const data = {
+        user_id: userToken?.remember_tokens,
+      };
+      dispatch(getleadPreferencesList(data));
+    } else {
+      const data = {
+        user_id: registerData?.remember_tokens,
+      };
+      dispatch(getleadPreferencesList(data));
+    }
+   
+    
   }, []);
+  useEffect(()=>{
+    if(userToken?.active_status == 1){
+      const data = {
+        user_id: userToken?.remember_tokens,
+      };
+      dispatch(getLocationLead(data))
+    } else {
+
+      const locationData = {
+        user_id: registerData?.remember_tokens
+      }
+      dispatch(getLocationLead(locationData))
+    }
+  },[])
   const handleView = () => {
     navigate("/leads")
   }
