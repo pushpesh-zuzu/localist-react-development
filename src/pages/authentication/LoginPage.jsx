@@ -7,6 +7,7 @@ import PasswordInput from "../../component/customInputs/PasswordInput";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../store/Auth/authSlice";
 import { showToast } from "../../utils";
+import { useEffect } from "react";
 const { Text } = Typography;
 
 const LoginPage = () => {
@@ -23,7 +24,7 @@ const LoginPage = () => {
       .then((result) => {
         if (result?.success) {
           showToast("success", result?.message || "Login successful!");
-          navigate("/");
+          navigate("/settings");
         } else {
           showToast(
             "error",
@@ -39,6 +40,19 @@ const LoginPage = () => {
         );
       });
   };
+//   const { userToken } = useSelector((state) => state.auth);
+// const { registerToken } = useSelector((state) => state.findJobs);
+
+
+// useEffect(() => {
+//   if (userToken || registerToken) {
+//     showToast("info", "User already logged in");
+//     navigate("/"); 
+//   }
+//   else {
+//     navigate("/login")
+//   }
+// }, [userToken, registerToken, navigate]);
 
   return (
     <div className="login-container">

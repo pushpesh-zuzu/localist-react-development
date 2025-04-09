@@ -14,7 +14,7 @@ const ServiceCategory = () => {
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  
+  const { userToken } = useSelector((state)=> state.auth)
   const { CategoriesList,categoriesListLoader } = useSelector((state) => state.findJobs);
   useEffect(()=>{
 dispatch (getCategoriesList())
@@ -47,7 +47,7 @@ dispatch (getCategoriesList())
         </div>}
       </div>
 
-      {openModal && (
+      {openModal && (userToken?.active_status == 2 || !userToken )  && (
           <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
       )}
     </div>

@@ -21,14 +21,15 @@ import Settings from "../component/settings/Settings";
 
 import LeadSetting from "../component/Leads/LeadSetting";
 import BidsList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BidsList/BidsList";
+import ProtectedLogin from "./ProtectedLogin";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Homepage /> },
-      { path: "/login", element: <LoginPage /> },
+      { index: true, element: <Homepage />  },
+      { path: "/login", element: <ProtectedLogin/> },
       { path: "/category", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/location", element: <LocationPage /> },

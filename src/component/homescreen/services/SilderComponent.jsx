@@ -6,6 +6,7 @@ import rightArrow from "../../../assets/Images/forwordArrow.svg";
 import SpecificService from "./SpecificService";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function AutoplayPlugin(slider) {
   let timeout;
@@ -42,6 +43,7 @@ function AutoplayPlugin(slider) {
 const SliderComponent = ({ subcategory }) => {
     const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
         const [show, setShow] = useState(false)
+        const { userToken } = useSelector((state)=> state.auth)
       const handleOpen = (id, name) => {
         setSelectedServiceId({ id, name });
         setShow(true);
@@ -87,7 +89,7 @@ const SliderComponent = ({ subcategory }) => {
         <img src={rightArrow} alt="Right" />
       </button></>)}
 
-      {show && (
+      {show && (userToken?.active_status == 2 || !userToken )  && (
           <>
             <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
           </>

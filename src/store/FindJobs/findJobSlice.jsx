@@ -38,7 +38,7 @@ const initialState = {
     is_zipcode: 1,
     suite: "",
     service_id: [],
-    auto_bid: 0,
+    auto_bid: 1,
     miles2: "1",
   },
   

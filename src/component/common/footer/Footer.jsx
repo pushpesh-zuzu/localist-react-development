@@ -13,6 +13,8 @@ import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { showToast } from "../../../utils";
 
 const FooterContent = () => (
   <>
@@ -68,6 +70,19 @@ const Footer = () => {
   const onChange = (key) => {
     setActiveKeys(key);
   };
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerToken } = useSelector((state) => state.findJobs);
+  const handleJoinAsProfessional = () => {
+    
+  
+    if (userToken || registerToken) {
+      showToast("info", "You're already logged in.");
+    } else {
+      navigate("/sellers/create");
+      window.scrollTo(0, 0);
+    }
+  };
+  
 
   return (
     <footer className={styles.footer}>
@@ -101,10 +116,7 @@ const Footer = () => {
             <h4>For Customers</h4>
             <ul>
               <li
-                onClick={() => {
-                  navigate("/sellers/create/");
-                  window.scrollTo(0, 0);
-                }}
+                onClick={handleJoinAsProfessional}
               >
                 Find a Professional
               </li>
@@ -117,9 +129,13 @@ const Footer = () => {
                 How it works
               </li>
               <li
-                onClick={() => {
-                  navigate("/login");
-                  window.scrollTo(0, 0);
+                 onClick={() => {
+                  if (userToken || registerToken) {
+                    showToast("info", "You're already logged in.");
+                  } else {
+                    navigate("/login");
+                    window.scrollTo(0, 0);
+                  }
                 }}
               >
                 Login
@@ -141,10 +157,7 @@ const Footer = () => {
               </li>
               <li>Pricing</li>
               <li
-                onClick={() => {
-                  navigate("/sellers/create/");
-                  window.scrollTo(0, 0);
-                }}
+                onClick={handleJoinAsProfessional}
               >
                 Join as a Professional
               </li>
@@ -201,9 +214,13 @@ const Footer = () => {
                 How it works
               </li>
               <li
-                onClick={() => {
-                  navigate("/login");
-                  window.scrollTo(0, 0);
+                 onClick={() => {
+                  if (userToken || registerToken) {
+                    showToast("info", "You're already logged in.");
+                  } else {
+                    navigate("/login");
+                    window.scrollTo(0, 0);
+                  }
                 }}
               >
                 Login
@@ -227,10 +244,7 @@ const Footer = () => {
               </li>
               <li>Pricing</li>
               <li
-                onClick={() => {
-                  navigate("/sellers/create/");
-                  window.scrollTo(0, 0);
-                }}
+                onClick={handleJoinAsProfessional}
               >
                 Join as a Professional
               </li>

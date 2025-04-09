@@ -59,6 +59,7 @@ const PopularService = ({ closeModal }) => {
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { popularList, popularLoader } = useSelector((state) => state.findJobs);
+  const { userToken }  = useSelector((state)=> state.auth)
   const handleOpen = (id, name) => {
     setSelectedServiceId({ id, name });
     setShow(true);
@@ -137,7 +138,7 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={rightArrow} alt="Right" />
         </button>
-        {show && (
+        {show && (userToken?.active_status == 2 || !userToken ) && (
           <>
             <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
           </>

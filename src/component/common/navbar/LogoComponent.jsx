@@ -20,18 +20,36 @@ const LogoComponent = () => {
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [mouseHover, setMouseHover] = useState("");
-
-  const location = useLocation();
+const {userToken} = useSelector((state)=> state.auth)
+const {registerData } = useSelector(
+    (state) => state.findJobs
+  );
+   const location = useLocation();
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
-  const handleRedirectUrl = () => {
-    if (location?.pathname === "/sellers/create") {
-      navigate("/leads");
-    } else {
-      // You can uncomment or modify this based on your logic
-      // navigate("/buyers/create");
-    }
-  };
+//   const handleRedirectUrl = () => {
+//     if (userToken?.active_status  == 1 ) {
+//       navigate("/settings");
+//     }
+//     else if(userToken?.active_status  == 2){
+// navigate("/buyers/create")
+//     }
+//     else {
+//       navigate("/")
+      
+//     }
+//   };
+const handleRedirectUrl = () => {
+  const status = registerData?.active_status || userToken?.active_status;
+
+  if (status == 1) {
+    navigate("/settings");
+  } else if (status == 2) {
+    navigate("/buyers/create");
+  } else {
+    navigate("/");
+  }
+};
 
   const [placement, setPlacement] = useState("bottomLeft");
 
