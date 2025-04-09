@@ -36,6 +36,7 @@
   vertical-align: middle;
   color: #828282;
   margin-top: 5px;
+  margin-bottom: 25px;
 }
 
 .serviceList {
@@ -54,9 +55,9 @@
   margin-bottom: 13.87px;
 }
 
-.serviceItem:first-child {
+/* .serviceItem:first-child {
   margin-top: 25px;
-}
+} */
 
 .selectedService {
   background-color: var(--primary-color);

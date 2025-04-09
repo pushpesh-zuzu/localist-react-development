@@ -12,34 +12,37 @@ import {
   leadPreferences,
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { Modal, Spin } from "antd";
-import { searchService, setService } from "../../../store/FindJobs/findJobSlice";
+import {
+  searchService,
+  setService,
+} from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-   const [input, setInput] = useState("");
-   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-    const [pincode, setPincode] = useState("");
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { preferenceList, serviceLoader ,getlocationData} = useSelector(
+  const [input, setInput] = useState("");
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const [pincode, setPincode] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { preferenceList, serviceLoader, getlocationData } = useSelector(
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state) => state.auth);
 
   const [isMobileView, setIsMobileView] = useState(false);
-const { searchServiceLoader, service } = useSelector(
+  const { searchServiceLoader, service } = useSelector(
     (state) => state.findJobs
   );
-console.log(selectedService,"selectedService")
+  console.log(selectedService, "selectedService");
   const [locationData, setLocationData] = useState({
     miles1: "",
     postcode: "",
   });
-  console.log(getlocationData,"getlocationData")
+  console.log(getlocationData, "getlocationData");
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
@@ -61,11 +64,11 @@ console.log(selectedService,"selectedService")
       user_id: userToken?.remember_tokens,
     };
     dispatch(getleadPreferencesList(data));
-    dispatch(getLocationLead(data))
+    dispatch(getLocationLead(data));
   }, []);
   const handleView = () => {
-    navigate("/leads")
-  }
+    navigate("/leads");
+  };
 
   const handleServiceClick = (service, name) => {
     setSelectedService({
@@ -80,126 +83,125 @@ console.log(selectedService,"selectedService")
     dispatch(leadPreferences(questionData));
   };
 
-  // ✅ Don't render if service is selected on mobile/tablet
+  //  Don't render if service is selected on mobile/tablet
   if (isMobileView && selectedService?.id) return null;
 
   const handleService = () => {
     setIsModalOpen(true);
-  }
-  useEffect(() => {
-      if (isDropdownOpen && input.trim() !== "") {
-        const delayDebounce = setTimeout(() => {
-          dispatch(searchService({ search: input }));
-        }, 500);
-        return () => clearTimeout(delayDebounce);
-      }
-    }, [input, dispatch, isDropdownOpen])
-    const handleSelectService = useCallback(
-        (item) => {
-          setInput(item.name);
-          setSelectedService(item);
-          setIsDropdownOpen(false);
-          // setErrors((prev) => ({ ...prev, service: "" }));
-          setTimeout(() => dispatch(setService([])), 100);
-        },
-        [dispatch]
-      );
-const handleSubmitData = () => {
-  const serviceDataList={
-    user_id: userToken?.remember_tokens,
-    service_id: selectedService?.id,
-  }
-  dispatch(addServiceLead(serviceDataList)).then((result) => {
-    if(result?.success) {
-      const data = {
-        user_id: userToken?.remember_tokens,
-      }
-      dispatch(getleadPreferencesList(data))
-       setIsModalOpen(false);
-    
-    }
-  })
-}
-const handleLocationSubmit = () => {
-  const locationdata = {
-    user_id: userToken?.remember_tokens,
-    miles: locationData.miles1,
-    postcode: locationData.postcode,
-    service_id:selectedService?.id
   };
-  dispatch(addLocationLead(locationdata)).then((result) => {
-    
-    console.log("Add", result)
-    if(result?.success){
-      const data = {
-        user_id: userToken?.remember_tokens,
-      }
-      dispatch(getLocationLead(data))
-      dispatch(getleadPreferencesList(data))
-      setIsLocationModalOpen(false);
+  useEffect(() => {
+    if (isDropdownOpen && input.trim() !== "") {
+      const delayDebounce = setTimeout(() => {
+        dispatch(searchService({ search: input }));
+      }, 500);
+      return () => clearTimeout(delayDebounce);
     }
-  })
-  
-};
+  }, [input, dispatch, isDropdownOpen]);
+  const handleSelectService = useCallback(
+    (item) => {
+      setInput(item.name);
+      setSelectedService(item);
+      setIsDropdownOpen(false);
+      // setErrors((prev) => ({ ...prev, service: "" }));
+      setTimeout(() => dispatch(setService([])), 100);
+    },
+    [dispatch]
+  );
+  const handleSubmitData = () => {
+    const serviceDataList = {
+      user_id: userToken?.remember_tokens,
+      service_id: selectedService?.id,
+    };
+    dispatch(addServiceLead(serviceDataList)).then((result) => {
+      if (result?.success) {
+        const data = {
+          user_id: userToken?.remember_tokens,
+        };
+        dispatch(getleadPreferencesList(data));
+        setIsModalOpen(false);
+      }
+    });
+  };
+  const handleLocationSubmit = () => {
+    const locationdata = {
+      user_id: userToken?.remember_tokens,
+      miles: locationData.miles1,
+      postcode: locationData.postcode,
+      service_id: selectedService?.id,
+    };
+    dispatch(addLocationLead(locationdata)).then((result) => {
+      console.log("Add", result);
+      if (result?.success) {
+        const data = {
+          user_id: userToken?.remember_tokens,
+        };
+        dispatch(getLocationLead(data));
+        dispatch(getleadPreferencesList(data));
+        setIsLocationModalOpen(false);
+      }
+    });
+  };
   return (
     <>
-    <div className={styles.container}>
-      <h1 className={styles.heading}>Lead settings</h1>
-      <p className={styles.subHeading}>Leads you can choose to contact.</p>
+      <div className={styles.container}>
+        <h1 className={styles.heading}>Lead settings</h1>
+        <p className={styles.subHeading}>Leads you can choose to contact.</p>
 
-      <div className={styles.section}>
-        <h4 className={styles.title}>Your services</h4>
-        <p className={styles.info}>
-          Fine-tune the leads you want to be alerted about.
-        </p>
-        {serviceLoader ? (
-          <Spin />
-        ) : (
-          <div className={styles.serviceList}>
-            {preferenceList?.map((service) =>
-              service.user_services.map((userService) => (
-                <div
-                  key={userService.id}
-                  ref={(el) => (serviceRefs.current[userService.id] = el)}
-                  className={`${styles.serviceItem} ${
-                    selectedService?.id === userService.id
-                      ? styles.selectedService
-                      : ""
-                  }`}
-                  onClick={() =>
-                    handleServiceClick(userService?.id, userService?.name)
-                  }
-                >
-                  <div className={styles.serviceNameWrapper}>
-                    <p className={styles.serviceName}>{userService.name}</p>
-                    <p className={styles.serviceDetails}>
-                      All leads <span>|</span>{" "}
-                      {service.location || "Unknown location"}
-                    </p>
-                  </div>
-                  <img
-                    src={
+        <div className={styles.section}>
+          <h3 className={styles.title}>Your services</h3>
+          <p className={styles.info}>
+            Fine-tune the leads you want to be alerted about.
+          </p>
+          {serviceLoader ? (
+            <Spin />
+          ) : (
+            <div className={styles.serviceList}>
+              {preferenceList?.map((service) =>
+                service.user_services.map((userService) => (
+                  <div
+                    key={userService.id}
+                    ref={(el) => (serviceRefs.current[userService.id] = el)}
+                    className={`${styles.serviceItem} ${
                       selectedService?.id === userService.id
-                        ? WhiteRightArrow
-                        : BlackRightArrow
+                        ? styles.selectedService
+                        : ""
+                    }`}
+                    onClick={() =>
+                      handleServiceClick(userService?.id, userService?.name)
                     }
-                    alt="arrow"
-                    className={styles.arrowImages}
-                  />
-                </div>
-              ))
-            )}
-          </div>
-        )}
-        <button className={styles.addService} onClick={handleService}>+ Add a service</button>
-      </div>
+                  >
+                    <div className={styles.serviceNameWrapper}>
+                      <p className={styles.serviceName}>{userService.name}</p>
+                      <p className={styles.serviceDetails}>
+                        All leads <span>|</span>{" "}
+                        {service.location || "Unknown location"}
+                      </p>
+                    </div>
+                    <img
+                      src={
+                        selectedService?.id === userService.id
+                          ? WhiteRightArrow
+                          : BlackRightArrow
+                      }
+                      alt="arrow"
+                      className={styles.arrowImages}
+                    />
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+          <button className={styles.addService} onClick={handleService}>
+            + Add a service
+          </button>
+        </div>
 
-      <div className={styles.section}>
-        <h3 className={styles.title}>Your locations</h3>
-        <p className={styles.info}>
-          Choose where you want to find new customers.
-        </p>
-        {/* <div className={styles.location}>
+        <div className={styles.section}>
+          <h3 className={styles.title}>Your locations</h3>
+          <p className={styles.info}>
+            Choose where you want to find new customers.
+          </p>
+          {/* <div className={styles.location}>
           <div className={styles.yourLocationInputWrapper}>
             <p className={styles.locationInput}>
               Within <strong>150 miles</strong> of <strong>01201</strong>
@@ -208,130 +210,136 @@ const handleLocationSubmit = () => {
               View on map <span>|</span> Remove | 3 services
             </p>
           </div> */}
-  {getlocationData?.map((item) => (
-         <div className={styles.location}>
-    <div key={item.id} className={styles.yourLocationInputWrapper}>
-      <p className={styles.locationInput}>
-        Within <strong>{item.miles} miles</strong> of <strong>{item.postcode}</strong>
-      </p>
-      <p className={styles.locationInputService}>
-        {item.name} <span>|</span> View on map | Remove
-      </p>
-    </div>
-    <div className={styles.editButton}>
-    <img src={EditIcon} alt="Edit" />
-  </div>
-</div>
-  ))}
+          {getlocationData?.map((item) => (
+            <div className={styles.location}>
+              <div key={item.id} className={styles.yourLocationInputWrapper}>
+                <p className={styles.locationInput}>
+                  Within <strong>{item.miles} miles</strong> of{" "}
+                  <strong>{item.postcode}</strong>
+                </p>
+                <p className={styles.locationInputService}>
+                  {item.name} <span>|</span> View on map | Remove
+                </p>
+              </div>
+              <div className={styles.editButton}>
+                <img src={EditIcon} alt="Edit" />
+              </div>
+            </div>
+          ))}
 
-  
-        <button className={styles.addLocation} onClick={() => setIsLocationModalOpen(true)}>+ Add a location</button>
-      </div>
-
-      <div className={styles.section}>
-        <h3 className={styles.title}>Online/remote leads</h3>
-        <p className={styles.info}>
-          Customers tell us if they're happy to receive services online or
-          remotely.
-        </p>
-        <div className={styles.toggle}>
-          <span>See online/remote leads</span>
-          <label className={styles.switch}>
-            <input type="checkbox" />
-            <span className={styles.slider}></span>
-          </label>
+          <button
+            className={styles.addLocation}
+            onClick={() => setIsLocationModalOpen(true)}
+          >
+            + Add a location
+          </button>
         </div>
-      </div>
 
-      <button className={styles.viewLeads} onClick={handleView}>View leads</button>
-      <Modal
-  title="Add a New Service"
-  open={isModalOpen}
-  onCancel={() => setIsModalOpen(false)}
-  onOk={() => {
-    handleSubmitData()
-    // setIsModalOpen(false);
-  }}
->
-
-   <div className={styles.formGroup}>
-          
-          <input
-            type="text"
-            placeholder="e.g. Personal Trainers, House Cleaning"
-            className={styles.fullWidthInput}
-            onChange={(e) => {
-              setInput(e.target.value);
-              setIsDropdownOpen(!!e.target.value);
-              setSelectedService(null);
-            }}
-            value={input}
-          />
-        
-           {isDropdownOpen && service?.length > 0 && (
-                    <div className={styles.searchResults}>
-                      {searchServiceLoader ? (
-                        <Spin indicator={<LoadingOutlined spin />} />
-                      ) : (
-                        service.map((item) => (
-                          <p
-                            key={item.id}
-                            className={styles.searchItem}
-                            onClick={() => handleSelectService(item)}
-                          >
-                            {item.name}
-                          </p>
-                        ))
-                      )}
-                    </div>
-                  )}
+        <div className={styles.section}>
+          <h3 className={styles.title}>Online/remote leads</h3>
+          <p className={styles.info}>
+            Customers tell us if they're happy to receive services online or
+            remotely.
+          </p>
+          <div className={styles.toggle}>
+            <span>See online/remote leads</span>
+            <label className={styles.switch}>
+              <input type="checkbox" />
+              <span className={styles.slider}></span>
+            </label>
           </div>
+        </div>
 
-</Modal>
-
-<Modal
-  title="Add a New Location"
-  open={isLocationModalOpen}
-  onCancel={() => setIsLocationModalOpen(false)}
-  onOk={handleLocationSubmit}
->
-  <div className={styles.formGroup}>
-    <div className={styles.inputGroup} style={{ display: "flex", gap: "10px" }}>
-      <div style={{ flex: 1 }}>
-        <span className={styles.fromText}>Miles</span>
-        <select
-          name="miles1"
-          value={locationData.miles1}
-          onChange={handleLocationChange}
-          style={{ width: "100%",padding:"8px"}}
+        <button className={styles.viewLeads} onClick={handleView}>
+          View leads
+        </button>
+        <Modal
+          title="Add a New Service"
+          open={isModalOpen}
+          onCancel={() => setIsModalOpen(false)}
+          onOk={() => {
+            handleSubmitData();
+            // setIsModalOpen(false);
+          }}
         >
-          {/* <option value="">Select</option> */}
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-      </div>
+          <div className={styles.formGroup}>
+            <input
+              type="text"
+              placeholder="e.g. Personal Trainers, House Cleaning"
+              className={styles.fullWidthInput}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setIsDropdownOpen(!!e.target.value);
+                setSelectedService(null);
+              }}
+              value={input}
+            />
 
-      <div style={{ flex: 1 }}>
-        <span className={styles.fromText}>From</span>
-        <input
-          type="text"
-          placeholder="Enter your postcode"
-          name="postcode"
-          value={locationData.postcode}
-          onChange={handleLocationChange}
-          style={{ width: "100%",padding:"8px" }}
-        />
-      </div>
-    </div>
-  </div>
-</Modal>
+            {isDropdownOpen && service?.length > 0 && (
+              <div className={styles.searchResults}>
+                {searchServiceLoader ? (
+                  <Spin indicator={<LoadingOutlined spin />} />
+                ) : (
+                  service.map((item) => (
+                    <p
+                      key={item.id}
+                      className={styles.searchItem}
+                      onClick={() => handleSelectService(item)}
+                    >
+                      {item.name}
+                    </p>
+                  ))
+                )}
+              </div>
+            )}
+          </div>
+        </Modal>
 
-    </div>
+        <Modal
+          title="Add a New Location"
+          open={isLocationModalOpen}
+          onCancel={() => setIsLocationModalOpen(false)}
+          onOk={handleLocationSubmit}
+        >
+          <div className={styles.formGroup}>
+            <div
+              className={styles.inputGroup}
+              style={{ display: "flex", gap: "10px" }}
+            >
+              <div style={{ flex: 1 }}>
+                <span className={styles.fromText}>Miles</span>
+                <select
+                  name="miles1"
+                  value={locationData.miles1}
+                  onChange={handleLocationChange}
+                  style={{ width: "100%", padding: "8px" }}
+                >
+                  {/* <option value="">Select</option> */}
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+
+              <div style={{ flex: 1 }}>
+                <span className={styles.fromText}>From</span>
+                <input
+                  type="text"
+                  placeholder="Enter your postcode"
+                  name="postcode"
+                  value={locationData.postcode}
+                  onChange={handleLocationChange}
+                  style={{ width: "100%", padding: "8px" }}
+                />
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </div>
     </>
   );
 };

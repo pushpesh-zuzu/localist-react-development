@@ -1,5 +1,5 @@
 .modalOverlay {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: -webkit-fill-available;
@@ -8,6 +8,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.closeButton {
+  position: absolute;
+  color: #828282;
+  top: 16px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .modalContent {

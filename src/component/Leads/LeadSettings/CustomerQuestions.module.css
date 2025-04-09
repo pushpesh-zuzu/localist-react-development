@@ -65,7 +65,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .arrowIcon img {
@@ -177,6 +176,7 @@
 }
 
 .removeService {
+  font-family: "Poppins";
   background: none;
   border: none;
   color: #ffffff;

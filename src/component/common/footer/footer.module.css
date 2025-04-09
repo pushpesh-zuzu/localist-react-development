@@ -1,493 +1,477 @@
 .footer {
-    color: #fff;
-    width: 100%;
-    position: relative;
-    left: 0;
-    bottom: 0;
-    font-family: var(--font-Rubik);
+  color: #fff;
+  width: 100%;
+  position: relative;
+  left: 0;
+  bottom: 0;
 }
 
-
 .trustpilotMobile {
-    display: none;
+  display: none;
 }
 
 .footerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    background-color: #000;
-    padding: 70px 88px 0px 88px;
-    margin: 0 auto;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  background-color: #000;
+  padding: 70px 88px 0px 88px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
 .footerLeft {
-    max-width: 250px;
+  max-width: 250px;
 }
 
 .footerLeft .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .footerLeft .logo img {
-    width: 198px;
-    height: 48px;
-    cursor: pointer;
-
+  width: 198px;
+  height: 48px;
+  cursor: pointer;
 }
 
 .footerLeft img {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 .footerLeft h2 {
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-    color: #00aaff;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: #00aaff;
 }
 
 .footerLeft p {
-    font-size: 14px;
-    color: #ccc;
-    margin-top: 18px;
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 18px;
 }
 
 .contactSection {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .contactSection h2 {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0;
-    color: #FFFFFF;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0;
+  color: #ffffff;
 }
 
 .contactMthods p {
-    margin: 0.5rem 0px;
-    color: #FFFFFF;
-    font-weight: 400;
-    font-size: 15.01px;
+  margin: 0.5rem 0px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 15.01px;
 }
 
 .contactSection button {
-    background: var(--primary-color);
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 25.5px;
-    letter-spacing: 0;
-    text-align: center;
-    color: #FFFFFF;
-    box-shadow: 0px 0px 4px 0px #0000004D;
-    border: none;
-    border-radius: 4px;
-    width: 125px;
-    height: 38px;
-    cursor: pointer;
-    margin-bottom: 20px;
+  background: var(--primary-color);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 25.5px;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0px 0px 4px 0px #0000004d;
+  border: none;
+  border-radius: 4px;
+  width: 125px;
+  height: 38px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .footerDesc {
-    max-width: 250px;
-    color: #FFFFFF !important;
-    font-weight: 400;
-    font-size: 15.84px;
-    line-height: 23.76px;
-    letter-spacing: 0;
-    text-align: left;
+  max-width: 250px;
+  color: #ffffff !important;
+  font-weight: 400;
+  font-size: 15.84px;
+  line-height: 23.76px;
+  letter-spacing: 0;
+  text-align: left;
 }
 
-
 .footerLinks {
-    display: flex;
-    gap: 80px;
+  display: flex;
+  gap: 80px;
 }
 
 .footerLinks h4 {
-    color: #FFFFFF;
-    font-weight: 700;
-    font-size: 19.8px;
-    line-height: 29.69px;
-    letter-spacing: 0%;
-    margin-top: 0;
-    margin-bottom: 14px;
-
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 19.8px;
+  line-height: 29.69px;
+  letter-spacing: 0%;
+  margin-top: 0;
+  margin-bottom: 14px;
 }
 
 .footerLinks ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footerLinks li {
-    font-weight: 400;
-    font-size: 15.84px;
-    line-height: 23.76px;
-    letter-spacing: 0;
-    color: #FFFFFF;
-    transition: color 0.3s ease;
-    margin-bottom: 14px;
-    cursor: pointer;
+  font-weight: 400;
+  font-size: 15.84px;
+  line-height: 23.76px;
+  letter-spacing: 0;
+  color: #ffffff;
+  transition: color 0.3s ease;
+  margin-bottom: 14px;
+  cursor: pointer;
 }
 
 .footerLinks li:hover {
-    color: #00aaff;
+  color: #00aaff;
 }
 
 .footerRight {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
 }
 
 .socialIcons {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .socialIcons img {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .socialIcons img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .countryDropdown {
-    width: 222px;
-    position: relative;
+  width: 222px;
+  position: relative;
 }
 
 .countryDropdown select {
-    background: #222;
-    color: #fff;
-    border: none;
-    width: 100%;
-    padding: 10px 12px;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  background: #222;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .countryDropdown::after {
-    content: "🞃";
-    font-size: 20px;
-    color: #FFFFFF;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-36%);
-    pointer-events: none;
+  content: "🞃";
+  font-size: 20px;
+  color: #ffffff;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-36%);
+  pointer-events: none;
 }
 
 .trustpilot {
-    text-align: right;
+  text-align: right;
 }
 
 .trustpilot img {
-    width: 120px;
+  width: 120px;
 }
 
 .footerContactSection {
-    width: 100%;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    border-top: 0.63px solid #555555;
-    font-weight: 400;
-    font-size: 15.8px;
-    line-height: 23.7px;
-    letter-spacing: 0px;
-    color: #FFFFFF;
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  border-top: 0.63px solid #555555;
+  font-weight: 400;
+  font-size: 15.8px;
+  line-height: 23.7px;
+  letter-spacing: 0px;
+  color: #ffffff;
 }
 
 .contactMthods {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
 }
 
 .footerBottom {
-    text-align: center;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0px;
-    color: var(--text-color);
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: var(--text-color);
 }
 
 .footerBottom p {
-    margin: 0.5rem 0px;
+  margin: 0.5rem 0px;
 }
-
 
 .footer :global(.ant-collapse) {
-    width: 100% !important;
+  width: 100% !important;
 }
 
-
 .footer :global(.ant-collapse-header) {
-    color: #fff !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  color: #fff !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .footer :global(.ant-collapse-item) {
-    border-color: #282828 !important;
-
+  border-color: #282828 !important;
 }
 
 .footerNavLinks ul {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .footerNavLinks ul li {
-    color: #fff;
-    list-style: none;
+  color: #fff;
+  list-style: none;
 }
 
 .footerLinkMobile {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 1224px) {
-    .footerContainer {
-        gap: 30px;
-        padding: 40px 35px 0px 35px;
-    }
+  .footerContainer {
+    gap: 30px;
+    padding: 40px 35px 0px 35px;
+  }
 
-    .footerLinks {
-        gap: 40px;
-    }
+  .footerLinks {
+    gap: 40px;
+  }
 
-    .footerLeft {
-        max-width: 200px;
-    }
+  .footerLeft {
+    max-width: 200px;
+  }
 }
-
 
 @media (max-width: 1054px) {
+  .footerLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+  }
 
-    .footerLeft {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        text-align: center;
-    }
+  .footerContainer {
+    gap: 25px;
+    display: flex;
+  }
 
-    .footerContainer {
-        gap: 25px;
-        display: flex;
-    }
+  .footerLinks {
+    gap: 30px;
+  }
 
-    .footerLinks {
-        gap: 30px;
-    }
+  .footerLinks h4 {
+    font-size: 18px;
+    line-height: 24px;
+  }
 
-    .footerLinks h4 {
-
-        font-size: 18px;
-        line-height: 24px;
-
-    }
-
-    .footerLinks li {
-        font-size: 14px;
-        line-height: 20px;
-        margin-bottom: 10px;
-    }
-
+  .footerLinks li {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
 }
 
-
 @media (max-width: 998px) {
-    .footerRight {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 100%;
-    }
+  .footerRight {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
 
-    .footerContactSection {
-        font-size: 12.8px;
-        line-height: 20px;
-    }
+  .footerContactSection {
+    font-size: 12.8px;
+    line-height: 20px;
+  }
 }
 
 @media (max-width: 740px) {
-    .footerLeft {
-        max-width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
-    }
+  .footerLeft {
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
 
-    .footerLeft .logo img {
-        width: 175px;
-        cursor: pointer;
-    }
+  .footerLeft .logo img {
+    width: 175px;
+    cursor: pointer;
+  }
 
-    .contactMthods {
+  .contactMthods {
+    align-items: center;
+  }
 
-        align-items: center;
-    }
+  .footerLinks {
+    width: 100%;
+    justify-content: space-between;
+  }
 
-    .footerLinks {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .footerDesc {
-        text-align: center;
-    }
+  .footerDesc {
+    text-align: center;
+  }
 }
 
-@media (max-width: 622px) and (min-width:521px) {
-    .footerLeft {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
+@media (max-width: 622px) and (min-width: 521px) {
+  .footerLeft {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
 
-    .footerDesc {
-        text-align: left;
-    }
+  .footerDesc {
+    text-align: left;
+  }
 
-    .footerLeft div:nth-child(3n) {
-        grid-column: span 2;
-    }
+  .footerLeft div:nth-child(3n) {
+    grid-column: span 2;
+  }
 
-    .contactSection {
-        display: flex;
-        flex-direction: row;
-        gap: 40px;
-        align-items: baseline;
-    }
+  .contactSection {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: baseline;
+  }
 
-    .footerLeft .logo img {
-        width: 185px;
-        cursor: pointer;
-    }
+  .footerLeft .logo img {
+    width: 185px;
+    cursor: pointer;
+  }
 
-    .contactMthods p {
-        font-size: 10px;
-    }
+  .contactMthods p {
+    font-size: 10px;
+  }
 
-    .footerLinks {
-        width: 100%;
-        justify-content: space-between;
-    }
+  .footerLinks {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 520px) {
-    .footerLinks {
-        display: none;
-    }
+  .footerLinks {
+    display: none;
+  }
 
-    .footerLinkMobile {
-        display: block;
-    }
+  .footerLinkMobile {
+    display: block;
+  }
 
-    .footerLeft {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
-    }
+  .footerLeft {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
 
-    .footerLeft .logo img {
-        width: 168px;
-        height: 38px;
-        cursor: pointer;
-    }
+  .footerLeft .logo img {
+    width: 168px;
+    height: 38px;
+    cursor: pointer;
+  }
 
-    .contactSection button {
-        width: 120px;
-        margin-bottom: 5px;
-    }
+  .contactSection button {
+    width: 120px;
+    margin-bottom: 5px;
+  }
 
-    .footerContactSection {
-        border: none;
-        line-height: 0px;
-        flex-direction: column;
-    }
+  .footerContactSection {
+    border: none;
+    line-height: 0px;
+    flex-direction: column;
+  }
 
-    .contactCountyWrapper {
-        width: 100%;
-        gap: 20px;
-        display: flex;
-        flex-direction: column-reverse;
-        margin-bottom: 20px;
-    }
+  .contactCountyWrapper {
+    width: 100%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 20px;
+  }
 
-    .contactMthods {
-        gap: 15px;
-    }
+  .contactMthods {
+    gap: 15px;
+  }
 
-    .contactMthods p {
-        margin: 0;
-        color: #FFFFFF;
-        font-weight: 400;
-        font-size: 15.01px;
-    }
+  .contactMthods p {
+    margin: 0;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 15.01px;
+  }
 
-    .contactMthods:last-child {
-        margin-bottom: 20px;
-    }
+  .contactMthods:last-child {
+    margin-bottom: 20px;
+  }
 
-    .contactMthods img {
-        height: 25px;
-        width: 20px;
-    }
+  .contactMthods img {
+    height: 25px;
+    width: 20px;
+  }
 
-    .footerDesc {
-        display: none;
-    }
+  .footerDesc {
+    display: none;
+  }
 
-    .footerRight {
-        flex-direction: column;
-    }
+  .footerRight {
+    flex-direction: column;
+  }
 
-    .trustpilot {
-        display: none;
-    }
+  .trustpilot {
+    display: none;
+  }
 
-    .footerBottom {
-        display: flex;
-        width: 98%;
-    }
+  .footerBottom {
+    display: flex;
+    width: 98%;
+  }
 
-    .footerBottom p{
-        font-size: 14px
-    }
+  .footerBottom p {
+    font-size: 14px;
+  }
 
-    .trustpilotMobile {
-        display: block;
-    }
+  .trustpilotMobile {
+    display: block;
+  }
 
-    .trustpilotMobile img {
-        width: 91px;
-        height: 65px;
-    }
+  .trustpilotMobile img {
+    width: 91px;
+    height: 65px;
+  }
 }

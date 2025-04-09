@@ -7,27 +7,30 @@ import LocationIcon from "../../../assets/Images/Leads/LocationIcon.svg";
 import TickIcon from "../../../assets/Images/Leads/TickIcon.svg";
 import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { addLocationLead, getleadPreferencesList, leadPreferencesData } from "../../../store/LeadSetting/leadSettingSlice";
+import {
+  addLocationLead,
+  getleadPreferencesList,
+  leadPreferencesData,
+} from "../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../utils";
 import { Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
+const CustomerQuestions = ({ setSelectedService, selectedService }) => {
   const dispatch = useDispatch();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const { leadPreferenceData, leadPreferenceLoader,getlocationData } = useSelector(
-    (state) => state.leadSetting
-  );
-     const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-  
+  const { leadPreferenceData, leadPreferenceLoader, getlocationData } =
+    useSelector((state) => state.leadSetting);
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+
   const { userToken } = useSelector((state) => state.auth);
   const [locationData, setLocationData] = useState({
-      miles1: "",
-      postcode: "",
-    });
-  console.log(setSelectedService,"setSelectedService")
+    miles1: "",
+    postcode: "",
+  });
+  console.log(setSelectedService, "setSelectedService");
   const handleSubmitData = () => {
     const questionIds = Object.keys(selectedAnswers);
     const answers = Object.values(selectedAnswers);
@@ -64,18 +67,17 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1,
       postcode: locationData.postcode,
-      service_id:setSelectedService?.id
+      service_id: setSelectedService?.id,
     };
     dispatch(addLocationLead(locationdata)).then((result) => {
-      if(result?.success){
+      if (result?.success) {
         const data = {
           user_id: userToken?.remember_tokens,
-        }
-        dispatch(getleadPreferencesList(data))
+        };
+        dispatch(getleadPreferencesList(data));
         setIsLocationModalOpen(false);
       }
-    })
-    
+    });
   };
 
   return (
@@ -151,7 +153,10 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
           </a>
         </div>
 
-        <div className={styles.locations} onClick={() => setIsLocationModalOpen(true)}>
+        <div
+          className={styles.locations}
+          onClick={() => setIsLocationModalOpen(true)}
+        >
           <span className={styles.locationIcon}>
             <img src={LocationIcon} alt="" /> Your locations
           </span>
@@ -162,19 +167,19 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
 
         <div className={styles.ranger}>
           {getlocationData?.map((item) => {
-            return(
+            return (
               <>
-              <div className={styles.range}>
-              <span>
-            {" "}
-            <img src={TickIcon} alt="" /> Within
-          </span>{" "}
-          <strong>{item?.miles}</strong> of <strong>{item?.postcode}</strong>
-          </div>
+                <div className={styles.range}>
+                  <span>
+                    {" "}
+                    <img src={TickIcon} alt="" /> Within
+                  </span>{" "}
+                  <strong>{item?.miles} miles</strong> of{" "}
+                  <strong>{item?.postcode}</strong>
+                </div>
               </>
-            )
+            );
           })}
-          
         </div>
 
         <div className={styles.footer}>
@@ -199,14 +204,17 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
         onOk={handleLocationSubmit}
       >
         <div className={styles.formGroup}>
-          <div className={styles.inputGroup} style={{ display: "flex", gap: "10px" }}>
+          <div
+            className={styles.inputGroup}
+            style={{ display: "flex", gap: "10px" }}
+          >
             <div style={{ flex: 1 }}>
               <span className={styles.fromText}>Miles</span>
               <select
                 name="miles1"
                 value={locationData.miles1}
                 onChange={handleLocationChange}
-                style={{ width: "100%",padding:"8px"}}
+                style={{ width: "100%", padding: "8px" }}
               >
                 {/* <option value="">Select</option> */}
                 <option value="1">1</option>
@@ -218,7 +226,7 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
                 <option value="100">100</option>
               </select>
             </div>
-      
+
             <div style={{ flex: 1 }}>
               <span className={styles.fromText}>From</span>
               <input
@@ -227,13 +235,12 @@ const CustomerQuestions = ({ setSelectedService ,selectedService}) => {
                 name="postcode"
                 value={locationData.postcode}
                 onChange={handleLocationChange}
-                style={{ width: "100%",padding:"8px" }}
+                style={{ width: "100%", padding: "8px" }}
               />
             </div>
           </div>
         </div>
       </Modal>
-      
     </>
   );
 };
