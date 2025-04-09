@@ -6,6 +6,17 @@
   padding: 24px 31px;
   text-align: center;
   background: #ffffff;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  color: #828282;
+  top: 16px;
+  right: 20px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .successMessage {

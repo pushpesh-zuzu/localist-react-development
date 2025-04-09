@@ -13,9 +13,6 @@ import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 
-const MAX_WORDS = 200;
-const MIN_WORDS = 5;
-
 const DescribeYourRequest = ({ onClose }) => {
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
@@ -23,18 +20,12 @@ const DescribeYourRequest = ({ onClose }) => {
   const [textError, setTextError] = useState(false);
   const [fileError, setFileError] = useState(false);
 
-  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
-  const progress = Math.min((wordCount / MAX_WORDS) * 100, 100);
-
   const { requestId, qualityData, addDetailLoader } = useSelector(
     (state) => state.buyer
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handlePrivacy = () => {
-    navigate("/privacy-policy");
-  };
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (text.trim() !== "") {
@@ -113,6 +104,9 @@ const DescribeYourRequest = ({ onClose }) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.closeButton} onClick={onClose}>
+        x
+      </div>
       <div className={styles.successMessage}>
         <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
         <span>We've posted your request</span>
@@ -175,10 +169,9 @@ const DescribeYourRequest = ({ onClose }) => {
         <p className={styles.privacyText}>
           Protected under our{" "}
           <a
-            href="#"
+            href="/privacy-policy"
             target="blank"
             className={styles.privacyLink}
-            onClick={handlePrivacy}
           >
             privacy policy
           </a>

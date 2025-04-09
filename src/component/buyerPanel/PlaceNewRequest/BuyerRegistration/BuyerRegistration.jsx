@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
@@ -9,9 +9,10 @@ import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 import EmailMatch from "./EmailMatch/EmailMatch";
 import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
+import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 
 const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
-  console.log(serviceId, "serviceId");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
@@ -19,7 +20,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
     const {  registerData } = useSelector(
       (state) => state.findJobs
     );
-    console.log(adminToken,registerData,"pp")
+    
 
   const nextStep = () => {
     
@@ -27,13 +28,12 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
       
       if(adminToken || registerData.remember_tokens){
         dispatch(setBuyerStep(buyerStep + 2));
-      }
-      else{
+      } else {
         dispatch(setBuyerStep(buyerStep + 1));
       }
       return;
     }
-   dispatch(setBuyerStep(buyerStep+1))
+    dispatch(setBuyerStep(buyerStep + 1));
   };
 
   const previousStep = () => {
@@ -58,6 +58,10 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
     };
   }, [buyerStep]);
 
+  const handleClose = () => {
+    setShowConfirmModal(true);
+  };
+
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
@@ -67,7 +71,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             formData={buyerRequest}
             serviceId={serviceId}
             serviceName={serviceName}
-            onClose={closeModal}
+            onClose={handleClose}
           />
         )}
 
@@ -76,16 +80,16 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             questions={questionanswerData}
             nextStep={nextStep}
             previousStep={previousStep}
-            onClose={closeModal}
+            onClose={handleClose}
             loading={questionLoader}
             formData={buyerRequest}
           />
         )}
-        {buyerStep === 3  && (
+        {buyerStep === 3 && (
           <EmailMatch
             nextStep={nextStep}
             previousStep={previousStep}
-            onClose={closeModal}
+            onClose={handleClose}
             formData={buyerRequest}
           />
         )}
@@ -94,7 +98,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
           <ViewYourMatches
             nextStep={nextStep}
             previousStep={previousStep}
-            onClose={closeModal}
+            onClose={handleClose}
             formData={buyerRequest}
           />
         )}
@@ -109,17 +113,27 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
         )} */}
 
         {buyerStep === 5 && (
-          <DescribeYourRequest nextStep={nextStep} onClose={closeModal} />
+          <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
         )}
 
         {buyerStep === 6 && (
           <BidsList
             nextStep={nextStep}
             previousStep={previousStep}
-            onClose={closeModal}
+            onClose={handleClose}
           />
         )}
       </div>
+
+      {showConfirmModal && (
+        <ConfirmationModal
+          onConfirm={() => {
+            setShowConfirmModal(false);
+            closeModal();
+          }}
+          onCancel={() => setShowConfirmModal(false)}
+        />
+      )}
     </div>
   );
 };

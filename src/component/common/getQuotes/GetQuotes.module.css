@@ -2,7 +2,8 @@
   text-align: center;
   padding: 23px 0;
   background-color: #f9fdff;
-  margin-bottom: 65px;
+  margin-bottom: 42px;
+  margin-top: 26px;
 }
 
 .button {
@@ -16,7 +17,6 @@
   cursor: pointer;
   font-family: "poppins" !important;
 }
-
 
 .text {
   font-weight: 400;
@@ -43,7 +43,6 @@
 
 @media (max-width: 600px) {
   .container {
-   
     margin-bottom: 15px;
   }
   .button {
@@ -58,7 +57,6 @@
 
 @media (max-width: 480px) {
   .container {
-   
     margin-bottom: 15px;
   }
   .button {
@@ -73,7 +71,6 @@
 
 @media (max-width: 320px) {
   .container {
-   
     margin-bottom: 15px;
   }
   .button {

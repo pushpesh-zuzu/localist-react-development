@@ -43,6 +43,9 @@ const EmailMatch = ({ nextStep, previousStep }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.closeButton} onClick={onClose}>
+          x
+        </div>
         <div className={styles.header}>
           <h2>View your matches now!</h2>
         </div>
