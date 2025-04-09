@@ -11,8 +11,9 @@ import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 
-const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
+const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [email,setEmails] = useState("")
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
@@ -26,8 +27,8 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
     
     if(buyerStep==2){
       
-      if(adminToken || registerData.remember_tokens){
-        dispatch(setBuyerStep(buyerStep + 2));
+      if(adminToken || registerData?.remember_tokens){
+        dispatch(setBuyerStep(buyerStep + 3));
       } else {
         dispatch(setBuyerStep(buyerStep + 1));
       }
@@ -91,10 +92,20 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             previousStep={previousStep}
             onClose={handleClose}
             formData={buyerRequest}
+            setEmails={setEmails}
           />
         )}
 
-        {buyerStep === 4 && (
+{buyerStep === 4 && (
+          <NameMatch
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={closeModal}
+            formData={buyerRequest}
+            email={email}
+          />
+        )}
+        {buyerStep === 5 && (
           <ViewYourMatches
             nextStep={nextStep}
             previousStep={previousStep}
@@ -103,20 +114,12 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
           />
         )}
 
-        {/* {buyerStep === 5 && (
-          <NameMatch
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={closeModal}
-            formData={buyerRequest}
-          />
-        )} */}
 
-        {buyerStep === 5 && (
+        {buyerStep === 6 && (
           <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
         )}
 
-        {buyerStep === 6 && (
+        {buyerStep === 7 && (
           <BidsList
             nextStep={nextStep}
             previousStep={previousStep}

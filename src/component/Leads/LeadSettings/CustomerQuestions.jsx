@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
   getleadPreferencesList,
+  leadPreferences,
   leadPreferencesData,
+  removeItemData,
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../utils";
 import { Modal, Spin } from "antd";
@@ -24,13 +26,16 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
   const { leadPreferenceData, leadPreferenceLoader, getlocationData } =
     useSelector((state) => state.leadSetting);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-
+  
+  const { registerData } = useSelector(
+      (state) => state.findJobs
+    );
   const { userToken } = useSelector((state) => state.auth);
   const [locationData, setLocationData] = useState({
     miles1: "",
     postcode: "",
   });
-  console.log(setSelectedService, "setSelectedService");
+ 
   const handleSubmitData = () => {
     const questionIds = Object.keys(selectedAnswers);
     const answers = Object.values(selectedAnswers);
@@ -43,6 +48,11 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
     dispatch(leadPreferencesData(selectData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Data submitted successfully");
+        const data = {
+          user_id: userToken?.remember_tokens,
+          service_id: setSelectedService?.id,
+        };
+        dispatch(leadPreferences(data));
       }
       setSelectedAnswers({});
     });
@@ -79,6 +89,70 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
       }
     });
   };
+// const handleRemove = () => {
+  
+//   if(userToken?.active_status == 1){
+//     const data = {
+//       user_id:userToken?.remember_tokens,
+//       service_id:setSelectedService?.id
+//     } 
+//     dispatch(removeItemData(data)).then((result)=> {
+//       if(result?.success){
+//         showToast("success", result?.message || "Remove data successfully");
+
+//         const data = {
+//           user_id:userToken?.remember_tokens
+//         }
+//         dispatch(getleadPreferencesList(data))
+//       }
+//     })
+
+//   } else {
+//     if( registerData?.active_status == 1){
+//       const data = {
+//         user_id:registerData?.remember_tokens,
+//         service_id:setSelectedService?.id
+//       } 
+//       dispatch(removeItemData(data)).then((result)=> {
+//         if(result?.success){
+//           showToast("success", result?.message || "Remove data successfully");
+  
+//           const data = {
+//             user_id:userToken?.remember_tokens
+//           }
+//           dispatch(getleadPreferencesList(data))
+//         }
+//       })
+//     }
+//   }
+ 
+// }
+const handleRemove = () => {
+  const user_id = 
+    userToken?.active_status === 1
+      ? userToken?.remember_tokens
+      : registerData?.active_status === 1
+        ? registerData?.remember_tokens
+        : null;
+  if (user_id && setSelectedService?.id) {
+    const data = {
+      user_id,
+      service_id: setSelectedService?.id
+    };
+
+    dispatch(removeItemData(data)).then((result) => {
+      if (result?.success) {
+        showToast("success", result?.message || "Remove data successfully");
+
+        const fetchData = {
+          user_id: userToken?.remember_tokens
+        };
+
+        dispatch(getleadPreferencesList(fetchData));
+      }
+    });
+  }
+};
 
   return (
     <>
@@ -183,7 +257,7 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
         </div>
 
         <div className={styles.footer}>
-          <button className={styles.removeService}>
+          <button className={styles.removeService} onClick={handleRemove}>
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
           <button className={styles.saveButton} onClick={handleSubmitData}>

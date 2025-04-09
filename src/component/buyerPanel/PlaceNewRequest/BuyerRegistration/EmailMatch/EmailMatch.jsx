@@ -5,12 +5,12 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
 
-const EmailMatch = ({ nextStep, previousStep }) => {
+const EmailMatch = ({onClose, nextStep, previousStep,setEmails}) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
 
-  const [email, setEmail] = useState(buyerRequest?.email || "");
-  const [name, setName] = useState(buyerRequest?.name || "");
+  const [email, setEmail] = useState("");
+  // const [name, setName] = useState(buyerRequest?.name || "");
   const [error, setError] = useState(false);
 
   const handleEmailChange = (e) => {
@@ -27,16 +27,19 @@ const EmailMatch = ({ nextStep, previousStep }) => {
       setError(true);
       return;
     }
+    if(setEmails){
+      setEmails(email)
+    }
+      
+    // const formData = new FormData();
+    // formData.append("email", email);
+    // formData.append("name", name);
+    // formData.append("form_status", 1);
+    // formData.append("loggedUser", 2);
+    // formData.append("active_status", 2);
+    // formData.append("user_type", 2);
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("name", name);
-    formData.append("form_status", 1);
-    formData.append("loggedUser", 2);
-    formData.append("active_status", 2);
-    formData.append("user_type", 2);
-
-    dispatch(registerUserData(formData));
+    // dispatch(registerUserData(formData));
     nextStep();
   };
 

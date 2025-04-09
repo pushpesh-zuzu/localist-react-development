@@ -26,7 +26,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-  const [pincode, setPincode] = useState("");
+  const [isEditingLocation, setIsEditingLocation] = useState(false);
+const [editLocationId, setEditLocationId] = useState(null);
+  // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { preferenceList, serviceLoader, getlocationData } = useSelector(
     (state) => state.leadSetting
@@ -34,11 +36,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { userToken } = useSelector((state) => state.auth);
 
   const [isMobileView, setIsMobileView] = useState(false);
-<<<<<<< HEAD
 const { searchServiceLoader, service,registerData } = useSelector(
-=======
-  const { searchServiceLoader, service } = useSelector(
->>>>>>> 2bb60eb09f55afedf44c8ba6454e0aa691991748
     (state) => state.findJobs
   );
   console.log(selectedService, "selectedService");
@@ -64,7 +62,6 @@ const { searchServiceLoader, service,registerData } = useSelector(
 
   // Fetch preferences
   useEffect(() => {
-<<<<<<< HEAD
     if(userToken?.active_status == 1){
       const data = {
         user_id: userToken?.remember_tokens,
@@ -78,13 +75,6 @@ const { searchServiceLoader, service,registerData } = useSelector(
     }
    
     
-=======
-    const data = {
-      user_id: userToken?.remember_tokens,
-    };
-    dispatch(getleadPreferencesList(data));
-    dispatch(getLocationLead(data));
->>>>>>> 2bb60eb09f55afedf44c8ba6454e0aa691991748
   }, []);
   useEffect(()=>{
     if(userToken?.active_status == 1){
@@ -122,6 +112,10 @@ const { searchServiceLoader, service,registerData } = useSelector(
 
   const handleService = () => {
     setIsModalOpen(true);
+    setInput(""); // reset the input field
+    setSelectedService(null); // clear previously selected service
+    dispatch(setService([]));
+    
   };
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
@@ -153,9 +147,29 @@ const { searchServiceLoader, service,registerData } = useSelector(
         };
         dispatch(getleadPreferencesList(data));
         setIsModalOpen(false);
+        
       }
     });
   };
+  // const handleLocationSubmit = () => {
+  //   const locationdata = {
+  //     user_id: userToken?.remember_tokens,
+  //     miles: locationData.miles1,
+  //     postcode: locationData.postcode,
+  //     service_id: selectedService?.id,
+  //   };
+  //   dispatch(addLocationLead(locationdata)).then((result) => {
+      
+  //     if (result?.success) {
+  //       const data = {
+  //         user_id: userToken?.remember_tokens,
+  //       };
+  //       dispatch(getLocationLead(data));
+  //       dispatch(getleadPreferencesList(data));
+  //       setIsLocationModalOpen(false);
+  //     }
+  //   });
+  // };
   const handleLocationSubmit = () => {
     const locationdata = {
       user_id: userToken?.remember_tokens,
@@ -163,18 +177,41 @@ const { searchServiceLoader, service,registerData } = useSelector(
       postcode: locationData.postcode,
       service_id: selectedService?.id,
     };
-    dispatch(addLocationLead(locationdata)).then((result) => {
-      console.log("Add", result);
-      if (result?.success) {
-        const data = {
-          user_id: userToken?.remember_tokens,
-        };
-        dispatch(getLocationLead(data));
-        dispatch(getleadPreferencesList(data));
-        setIsLocationModalOpen(false);
-      }
-    });
+  
+    if (isEditingLocation && editLocationId) {
+      // Update location logic — You might need to create an `updateLocationLead` thunk
+      dispatch(addLocationLead({ ...locationdata, setvice_id: editLocationId })).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setIsLocationModalOpen(false);
+          setIsEditingLocation(false);
+          setEditLocationId(null);
+        }
+      });
+    } else {
+      dispatch(addLocationLead(locationdata)).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setIsLocationModalOpen(false);
+        }
+      });
+    }
   };
+  
+  const handleEditLocation = (location) => {
+    setLocationData({
+      miles1: location.miles,
+      postcode: location.postcode,
+    });
+    setEditLocationId(location.id);
+    setIsEditingLocation(true);
+    setIsLocationModalOpen(true);
+  };
+  
   return (
     <>
       <div className={styles.container}>
@@ -208,7 +245,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
                       <p className={styles.serviceName}>{userService.name}</p>
                       <p className={styles.serviceDetails}>
                         All leads <span>|</span>{" "}
-                        {service.location || "Unknown location"}
+                        {service?.locations} Location
                       </p>
                     </div>
                     <img
@@ -252,11 +289,11 @@ const { searchServiceLoader, service,registerData } = useSelector(
                   <strong>{item.postcode}</strong>
                 </p>
                 <p className={styles.locationInputService}>
-                  {item.name} <span>|</span> View on map | Remove
+                View on map | Remove | {item?.total_services} services
                 </p>
               </div>
               <div className={styles.editButton}>
-                <img src={EditIcon} alt="Edit" />
+                <img src={EditIcon} alt="Edit" onClick={() => handleEditLocation(item)}/>
               </div>
             </div>
           ))}
@@ -330,9 +367,14 @@ const { searchServiceLoader, service,registerData } = useSelector(
         </Modal>
 
         <Modal
-          title="Add a New Location"
+          title={isEditingLocation ? "Edit Location" : "Add a New Location"}
           open={isLocationModalOpen}
-          onCancel={() => setIsLocationModalOpen(false)}
+          onCancel={() => {
+            setIsLocationModalOpen(false);
+            setIsEditingLocation(false);
+            setEditLocationId(null);
+            setLocationData({ miles1: "", postcode: "" });
+          }}
           onOk={handleLocationSubmit}
         >
           <div className={styles.formGroup}>

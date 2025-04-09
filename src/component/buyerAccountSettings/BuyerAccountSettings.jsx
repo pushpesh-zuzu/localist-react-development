@@ -19,7 +19,7 @@ import { BASE_IMAGE_URL, showToast } from "../../utils";
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { getuploadImg, infoLoader, changePasswordLoader } = useSelector(
+  const { getuploadImg, infoLoader, changePasswordLoader,profileImageLoader } = useSelector(
     (state) => state.buyer
   );
   const { userToken } = useSelector((state) => state.auth);
@@ -168,6 +168,9 @@ const BuyerAccountSettings = () => {
           <div className={styles.profileImage}>
             <span>
               <>
+            {  profileImageLoader ? <Spin
+                    indicator={<LoadingOutlined spin style={{ color: "blue" }} />}
+                  /> :
                 <img
                   src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
                   alt="Profile"
@@ -182,6 +185,7 @@ const BuyerAccountSettings = () => {
                     borderRadius: "50%",
                   }}
                 />
+}
               </>
             </span>
           </div>

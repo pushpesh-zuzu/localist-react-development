@@ -12,7 +12,8 @@ const initialState = {
     leadRequestLoader:false,
     leadRequestList:[], 
     getlocationData:[],
-    autoBidList:[]
+    autoBidList:[],
+    removeLoader:false
 };
 
 
@@ -181,6 +182,22 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const removeItemData = (removeData) => {
+    return async (dispatch) => {
+      dispatch(setRemoveListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/remove-service`, removeData);
+  
+        if (response) {
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setRemoveListLoader(false));
+      }
+    };
+  }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -211,11 +228,14 @@ const leadSettingSlice = createSlice({
       },
       setAutoBidData(state,action){
         state.autoBidList = action.payload
+      },
+      setRemoveListLoader(state,action) {
+        state.removeLoader = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setRemoveListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

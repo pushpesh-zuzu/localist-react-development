@@ -2,29 +2,40 @@ import React, { useState } from "react";
 import styles from "./NameMatch.module.css";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
+import { useDispatch } from "react-redux";
 
-const NameMatch = ({ nextStep, previousStep }) => {
+const NameMatch = ({ nextStep, previousStep,email }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
-
+const dispatch = useDispatch()
   const handleNameChange = (e) => {
     setName(e.target.value);
     setError(false);
   };
-
+console.log(email,"pp")
   const handleSubmit = () => {
     if (!name.trim()) {
       setError(true);
       return;
     }
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      nextStep();
-    }, 1000);
+    const formData = new FormData();
+    formData.append("email", email);
+      formData.append("name", name);
+        formData.append("form_status", 1);
+        formData.append("loggedUser", 2);
+        formData.append("active_status", 2);
+        formData.append("user_type", 2);
+    
+        dispatch(registerUserData(formData));
+        nextStep();
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   nextStep();
+    // }, 1000);
   };
 
   return (

@@ -25,7 +25,7 @@ const [registerdata,setRegisterDatas] = useState()
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-console.log(userToken?.name,"pp")
+
 useEffect(()=>{
 setDataSave(userToken?.active_status)
 },[userToken])
@@ -201,12 +201,12 @@ const getUserType=()=>{
         <Popover
           content={
             <>
-              <div
+             {getUserType() ==2 && <div
                 className={styles.logoutBtn}
                 onClick={() => handleNavigation("/user/notification")}
               >
                 Notification
-              </div>
+              </div>}
               <div
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}
