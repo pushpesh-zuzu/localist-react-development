@@ -23,8 +23,15 @@ const LoginPage = () => {
     dispatch(userLogin(payload))
       .then((result) => {
         if (result?.success) {
+          
           showToast("success", result?.message || "Login successful!");
-          navigate("/settings");
+          if(result?.data?.active_status==1){
+            navigate("/settings");
+          }
+          else if(result?.data?.active_status==2){
+            navigate("/buyers/create");
+          }
+          
         } else {
           showToast(
             "error",
