@@ -14,6 +14,7 @@
   grid-area: info;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 49px;
 }
 

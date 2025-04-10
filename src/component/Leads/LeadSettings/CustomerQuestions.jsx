@@ -20,6 +20,7 @@ import {
 import { showToast } from "../../../utils";
 import { Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import RemoveServiceModal from "../RemoveModal";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     if (selectedService) {
@@ -34,7 +36,7 @@ const CustomerQuestions = ({ selectedService }) => {
     }
   }, [selectedService]);
 
-  const { leadPreferenceData, leadPreferenceLoader, getlocationData } =
+  const { leadPreferenceData, leadPreferenceLoader, getlocationData,removeLoader} =
     useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
@@ -129,7 +131,12 @@ const CustomerQuestions = ({ selectedService }) => {
   };
 
   if (isRemoved) return null;
-
+  const handleRemoveModal = () => {
+    setShow(true)
+  }
+const onHandleCancel = () => {
+  setShow(false)
+}
   return (
     <>
       <div className={styles.modal}>
@@ -222,7 +229,7 @@ const CustomerQuestions = ({ selectedService }) => {
             <div className={styles.range} key={idx}>
               <span>
                 <img src={TickIcon} alt="" /> Within
-              </span>
+              </span>{" "}
               <strong>{item?.miles} miles</strong> of{" "}
               <strong>{item?.postcode}</strong>
             </div>
@@ -230,7 +237,7 @@ const CustomerQuestions = ({ selectedService }) => {
         </div>
 
         <div className={styles.footer}>
-          <button className={styles.removeService} onClick={handleRemove}>
+          <button className={styles.removeService} onClick={handleRemoveModal}>
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
           <button className={styles.saveButton} onClick={handleSubmitData}>
@@ -247,8 +254,7 @@ const CustomerQuestions = ({ selectedService }) => {
 
       <Modal
         title="Add a New Location"
-        open={isLocationModalOpen}
-        onCancel={() => setIsLocationModalOpen(false)}
+        open={isLocationModalOpen}Handle={() => setIsLocationModalOpen(false)}
         onOk={handleLocationSubmit}
       >
         <div className={styles.formGroup}>
@@ -273,7 +279,7 @@ const CustomerQuestions = ({ selectedService }) => {
             </div>
 
             <div style={{ flex: 1 }}>
-              <span className={styles.fromText}>From</span>
+              <span className={styles.fromText}>ZIP Code</span>
               <input
                 type="text"
                 placeholder="Enter your postcode"
@@ -286,6 +292,7 @@ const CustomerQuestions = ({ selectedService }) => {
           </div>
         </div>
       </Modal>
+     {show && <RemoveServiceModal open={show} onCancel={onHandleCancel} onConfirm={handleRemove}/>}
     </>
   );
 };

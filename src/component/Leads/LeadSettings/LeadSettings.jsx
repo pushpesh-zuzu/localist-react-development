@@ -18,6 +18,7 @@ import {
 } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import RemoveServiceModal from "../RemoveModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -430,7 +431,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
               </div>
 
               <div style={{ flex: 1 }}>
-                <span className={styles.fromText}>From</span>
+                <span className={styles.fromText}>ZIP Code</span>
                 <input
                   type="text"
                   placeholder="Enter your postcode"
@@ -443,6 +444,8 @@ const { searchServiceLoader, service,registerData } = useSelector(
             </div>
           </div>
         </Modal>
+
+       
       </div>
     </>
   );

@@ -11,6 +11,9 @@ const SettingsList = () => {
   const handleMyService = () => {
     navigate("/lead-settings");
   };
+  const handleAccountSetting = () => {
+    navigate("/account/setting")
+  }
   return (
     <>
       <div className="container">
@@ -39,7 +42,7 @@ const SettingsList = () => {
             Reviews help you stand out. Learn how to use them to boost your
             business
           </p>
-          <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }}>
+          <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }} onClick={handleAccountSetting}>
             <h3>Account details</h3>
           </div>
           <p>

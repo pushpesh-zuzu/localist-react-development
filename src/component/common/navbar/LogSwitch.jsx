@@ -116,6 +116,9 @@ const getUserType=()=>{
       }
     });
   };
+  const handleMyRequest = () => {
+    navigate("/buyers/create")
+  }
   
 
   const handleLogout = async () => {
@@ -124,6 +127,8 @@ const getUserType=()=>{
       if (result) {
         showToast("info", "Logout successful!");
         handleNavigation("/login");
+        
+        
       }
     } catch (error) {
       console.error("Logout Error:", error);
@@ -188,7 +193,7 @@ const getUserType=()=>{
   {getUserType()==2 && (
     <>
       <div className={styles.requestBox}>
-        <div className={styles.myrequestText}>My Request</div>
+        <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
       </div>
       
       <div className={styles.nameCircle}>{userInitial}</div>
@@ -201,12 +206,12 @@ const getUserType=()=>{
         <Popover
           content={
             <>
-              <div
+             {getUserType() ==2 && <div
                 className={styles.logoutBtn}
                 onClick={() => handleNavigation("/user/notification")}
               >
                 Notification
-              </div>
+              </div>}
               <div
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}

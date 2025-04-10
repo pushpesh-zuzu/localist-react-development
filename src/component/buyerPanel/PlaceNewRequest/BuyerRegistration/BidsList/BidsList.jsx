@@ -24,6 +24,9 @@ const BidsList = ({ previousStep }) => {
     };
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.rember_token, requestId]);
+  const handleChangeMyRequest = () => {
+    navigate("/buyers/create")
+  }
 
   return (
     <div className={styles.container}>
@@ -36,7 +39,7 @@ const BidsList = ({ previousStep }) => {
           </div>
         </div>
         <div className={styles.backBtnWrapper}>
-          <button className={styles.backBtn}>Back</button>
+          <button className={styles.backBtn} onClick={handleChangeMyRequest}>Back</button>
         </div>
       </div>
 

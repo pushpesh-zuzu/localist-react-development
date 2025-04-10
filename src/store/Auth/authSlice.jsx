@@ -1,6 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
-import { setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
+import { setRegisterData, setRegisterToken, setSelectedServiceId } from "../FindJobs/findJobSlice";
 
 const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
 const initialState = {
@@ -49,6 +49,7 @@ export const userLogout = () => {
         dispatch(setUserToken(null))
         dispatch(setRegisterToken(null))
         dispatch(setRegisterData(null))
+        dispatch(setSelectedServiceId(null))
         return true;
       }
     } catch (error) {

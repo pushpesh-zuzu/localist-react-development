@@ -10,7 +10,7 @@ import { Spin } from "antd";
 
 const BuyerNotification = () => {
   const dispatch = useDispatch();
-  const { notificationList } = useSelector((state) => state.buyer);
+  const { notificationList,notificationLoader } = useSelector((state) => state.buyer);
   const [loadingNoti, setLoadingNoti] = useState(""); // 👈 track loading switch
 
   useEffect(() => {
@@ -50,6 +50,7 @@ const BuyerNotification = () => {
         </span>
         <span>Choose what you’d like to be emailed about</span>
       </div>
+      {notificationLoader ? <Spin style={{display:"flex",justifyContent:"center",alignItems:"center"}}/> : 
       <div className={styles.notificationList}>
         {notificationList.map((notification, index) => {
           let notiName = "";
@@ -72,8 +73,6 @@ const BuyerNotification = () => {
     ? "Reminders to reply to Professionals"
     : "Updates about new features on Bark"}
 </span>
-
-              {/* <span>{notification?.noti_name === "customer_email_change_in_request" ? "Changes to my requests" ? notification?.noti_name ==  "customer_email_reminder_to_reply" ? "Reminders to reply to Professionals" : "Updates about new features on Bark"}</span> */}
               {loadingNoti === notiName ? (
                 <Spin size="small" />
               ) : (
@@ -90,6 +89,7 @@ const BuyerNotification = () => {
           );
         })}
       </div>
+}
     </div>
   );
 };

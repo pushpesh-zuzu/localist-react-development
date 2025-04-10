@@ -15,6 +15,7 @@ const LeadsCards = () => {
   const { leadRequestList, leadRequestLoader } = useSelector(
     (state) => state.leadSetting
   );
+  console.log(leadRequestList,"leadRequestList")
 
   useEffect(() => {
     dispatch(getLeadRequestList());
@@ -90,7 +91,7 @@ const LeadsCards = () => {
                         </span>
                       )}
                     </div>
-                    <div className={styles.jobInfo}>
+                    {/* <div className={styles.jobInfo}>
                       <p>
                         <strong>End of Tenancy Cleaning</strong>
                       </p>
@@ -99,7 +100,22 @@ const LeadsCards = () => {
                         <strong>Starting:</strong> In the next month
                       </p>
                     </div>
-                  </div>
+                  </div> */}
+                  <div className={styles.jobInfo}>
+  {item?.questions &&
+    JSON.parse(item?.questions)?.map((qa, index) => (
+      <div key={index}>
+        <p>
+          <strong>{qa?.ques}</strong>
+        </p>
+        <p>{qa?.ans}</p>
+      </div>
+    ))}
+</div>
+<p>
+                        <strong>Starting:</strong> In the next month
+                      </p>
+</div>
 
                   {/* Right Section - Lead Purchase */}
                   <div className={styles.leadActions}>
