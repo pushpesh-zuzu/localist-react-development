@@ -1,11 +1,13 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CustomerQuestions.module.css";
+
 import CustomerQuestionsImg from "../../../assets/Images/Leads/CustomerQuestionsImg.svg";
 import UpArrowIcon from "../../../assets/Images/Leads/UpArrowIcon.svg";
 import DownArrowIcon from "../../../assets/Images/Leads/DownArrowIcon.svg";
 import LocationIcon from "../../../assets/Images/Leads/LocationIcon.svg";
 import TickIcon from "../../../assets/Images/Leads/TickIcon.svg";
 import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
@@ -19,50 +21,29 @@ import { showToast } from "../../../utils";
 import { Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CustomerQuestions = ({ setSelectedService, selectedService }) => {
-  console.log(selectedService,"selectedService")
+const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const [isRemoved, setIsRemoved] = useState(false);
+
+  useEffect(() => {
+    if (selectedService) {
+      setIsRemoved(false);
+    }
+  }, [selectedService]);
+
   const { leadPreferenceData, leadPreferenceLoader, getlocationData } =
     useSelector((state) => state.leadSetting);
-  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-  
-  const { registerData } = useSelector(
-      (state) => state.findJobs
-    );
+  const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
+
   const [locationData, setLocationData] = useState({
     miles1: "",
     postcode: "",
   });
- 
-  const handleSubmitData = () => {
-    const questionIds = Object.keys(selectedAnswers);
-    const answers = Object.values(selectedAnswers);
-    const selectData = {
-      user_id: userToken?.remember_tokens,
-      service_id: setSelectedService?.id,
-      question_id: questionIds,
-      answers: answers,
-    };
-    dispatch(leadPreferencesData(selectData)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Data submitted successfully");
-        const data = {
-          user_id: userToken?.remember_tokens,
-          service_id: setSelectedService?.id,
-        };
-        dispatch(leadPreferences(data));
-      }
-      setSelectedAnswers({});
-    });
-  };
-  const handleLocationChange = (e) => {
-    const { name, value } = e.target;
-    setLocationData((prev) => ({ ...prev, [name]: value }));
-  };
+
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -74,109 +55,102 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
       setSelectedAnswers(initialAnswers);
     }
   }, [leadPreferenceData]);
+
+  const handleSubmitData = () => {
+    const questionIds = Object.keys(selectedAnswers);
+    const answers = Object.values(selectedAnswers);
+
+    const data = {
+      user_id: userToken?.remember_tokens,
+      service_id: selectedService?.id,
+      question_id: questionIds,
+      answers: answers,
+    };
+
+    dispatch(leadPreferencesData(data)).then((result) => {
+      if (result?.success) {
+        showToast("success", result?.message || "Data submitted successfully");
+        dispatch(
+          leadPreferences({
+            user_id: userToken?.remember_tokens,
+            service_id: selectedService?.id,
+          })
+        );
+      }
+      setSelectedAnswers({});
+    });
+  };
+
+  const handleLocationChange = (e) => {
+    const { name, value } = e.target;
+    setLocationData((prev) => ({ ...prev, [name]: value }));
+  };
+
   const handleLocationSubmit = () => {
-    const locationdata = {
+    const data = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1,
       postcode: locationData.postcode,
-      service_id: setSelectedService?.id,
+      service_id: selectedService?.id,
     };
-    dispatch(addLocationLead(locationdata)).then((result) => {
+
+    dispatch(addLocationLead(data)).then((result) => {
       if (result?.success) {
-        const data = {
-          user_id: userToken?.remember_tokens,
-        };
-        dispatch(getLocationLead(data))
+        dispatch(getLocationLead({ user_id: userToken?.remember_tokens }));
         setIsLocationModalOpen(false);
       }
     });
   };
-// const handleRemove = () => {
-  
-//   if(userToken?.active_status == 1){
-//     const data = {
-//       user_id:userToken?.remember_tokens,
-//       service_id:setSelectedService?.id
-//     } 
-//     dispatch(removeItemData(data)).then((result)=> {
-//       if(result?.success){
-//         showToast("success", result?.message || "Remove data successfully");
 
-//         const data = {
-//           user_id:userToken?.remember_tokens
-//         }
-//         dispatch(getleadPreferencesList(data))
-//       }
-//     })
-
-//   } else {
-//     if( registerData?.active_status == 1){
-//       const data = {
-//         user_id:registerData?.remember_tokens,
-//         service_id:setSelectedService?.id
-//       } 
-//       dispatch(removeItemData(data)).then((result)=> {
-//         if(result?.success){
-//           showToast("success", result?.message || "Remove data successfully");
-  
-//           const data = {
-//             user_id:userToken?.remember_tokens
-//           }
-//           dispatch(getleadPreferencesList(data))
-//         }
-//       })
-//     }
-//   }
- 
-// }
-const handleRemove = () => {
-  const user_id = 
-    userToken?.active_status === 1
-      ? userToken?.remember_tokens
-      : registerData?.active_status === 1
+  const handleRemove = () => {
+    const user_id =
+      userToken?.active_status === 1
+        ? userToken?.remember_tokens
+        : registerData?.active_status === 1
         ? registerData?.remember_tokens
         : null;
-  if (user_id && setSelectedService?.id) {
-    const data = {
-      user_id,
-      service_id: setSelectedService?.id
-    };
 
-    dispatch(removeItemData(data)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Remove data successfully");
+    if (user_id && selectedService?.id) {
+      dispatch(
+        removeItemData({ user_id, service_id: selectedService?.id })
+      ).then((result) => {
+        if (result?.success) {
+          showToast(
+            "success",
+            result?.message || "Service removed successfully"
+          );
+          dispatch(
+            getleadPreferencesList({ user_id: userToken?.remember_tokens })
+          );
+          setIsRemoved(true);
+        }
+      });
+    }
+  };
 
-        const fetchData = {
-          user_id: userToken?.remember_tokens
-        };
-
-        dispatch(getleadPreferencesList(fetchData));
-       
-        
-      }
-    });
-  }
-};
+  if (isRemoved) return null;
 
   return (
     <>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h1 className={styles.title}>{setSelectedService?.name}</h1>
+          <h1 className={styles.title}>{selectedService?.name}</h1>
         </div>
 
         <div className={styles.subHeader}>
           <span className={styles.icon}>
             <img src={CustomerQuestionsImg} alt="" />
-          </span>{" "}
+          </span>
           Customer questions
         </div>
+
         <p className={styles.description}>
           Every customer answers this series of questions, allowing you to
           define exactly which type of leads you see.
         </p>
+
         {leadPreferenceData?.map((item) => {
-          const options = item.answer ? item.answer.split(",") : [];
+          const options = item.answer?.split(",") || [];
           const isOpen = openQuestionId === item.id;
 
           return (
@@ -244,20 +218,15 @@ const handleRemove = () => {
         </div>
 
         <div className={styles.ranger}>
-          {getlocationData?.map((item) => {
-            return (
-              <>
-                <div className={styles.range}>
-                  <span>
-                    {" "}
-                    <img src={TickIcon} alt="" /> Within
-                  </span>{" "}
-                  <strong>{item?.miles} miles</strong> of{" "}
-                  <strong>{item?.postcode}</strong>
-                </div>
-              </>
-            );
-          })}
+          {getlocationData?.map((item, idx) => (
+            <div className={styles.range} key={idx}>
+              <span>
+                <img src={TickIcon} alt="" /> Within
+              </span>
+              <strong>{item?.miles} miles</strong> of{" "}
+              <strong>{item?.postcode}</strong>
+            </div>
+          ))}
         </div>
 
         <div className={styles.footer}>
@@ -275,6 +244,7 @@ const handleRemove = () => {
           </button>
         </div>
       </div>
+
       <Modal
         title="Add a New Location"
         open={isLocationModalOpen}
@@ -294,14 +264,11 @@ const handleRemove = () => {
                 onChange={handleLocationChange}
                 style={{ width: "100%", padding: "8px" }}
               >
-                {/* <option value="">Select</option> */}
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                {[1, 2, 5, 10, 30, 50, 100].map((mile) => (
+                  <option key={mile} value={mile}>
+                    {mile}
+                  </option>
+                ))}
               </select>
             </div>
 

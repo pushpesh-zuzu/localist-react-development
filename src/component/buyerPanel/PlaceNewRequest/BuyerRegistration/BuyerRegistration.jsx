@@ -11,46 +11,36 @@ import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 
-const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [email,setEmails] = useState("")
+const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
+  // const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [shouldClose, setShouldClose] = useState(false);
+  const [email, setEmails] = useState("");
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
   const { adminToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
 
+  const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
+
+  const stepFlow = isAdminOrRemembered
+    ? [1, 2, 5, 6, 7]
+    : [1, 2, 3, 4, 5, 6, 7];
+
   const nextStep = () => {
-    
-    if(buyerStep==2){
-      
-      if(adminToken || registerData?.remember_tokens){
-        dispatch(setBuyerStep(buyerStep + 3));
-      } else {
-        dispatch(setBuyerStep(buyerStep + 1));
-      }
-      return;
+    const currentIndex = stepFlow.indexOf(buyerStep);
+    if (currentIndex < stepFlow.length - 1) {
+      dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
     }
-    dispatch(setBuyerStep(buyerStep + 1));
   };
 
   const previousStep = () => {
-    if (buyerStep === 4) {
-      if (adminToken || registerData.remember_tokens) {
-        dispatch(setBuyerStep(2));
-      } else {
-        dispatch(setBuyerStep(3));
-      }
-      return;
+    const currentIndex = stepFlow.indexOf(buyerStep);
+    if (currentIndex > 0) {
+      dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
     }
-
-    if (buyerStep === 3) {
-      dispatch(setBuyerStep(2));
-      return;
-    }
-
-    dispatch(setBuyerStep(buyerStep - 1));
   };
+
   useEffect(() => {
     dispatch(setBuyerStep(1));
   }, []);
@@ -66,9 +56,21 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
     };
   }, [buyerStep]);
 
+  useEffect(() => {
+    if (shouldClose) {
+      dispatch(setBuyerStep(1));
+      closeModal();
+    }
+  }, [shouldClose]);
+
   const handleClose = () => {
-    setShowConfirmModal(true);
+    closeModal();
   };
+
+  // const confirmClose = () => {
+  //   setShowConfirmModal(false);
+  //   setShouldClose(true); // <-- triggers close in effect
+  // };
 
   return (
     <div className={styles.modal}>
@@ -93,6 +95,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
             formData={buyerRequest}
           />
         )}
+
         {buyerStep === 3 && (
           <EmailMatch
             nextStep={nextStep}
@@ -103,15 +106,16 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
           />
         )}
 
-{buyerStep === 4 && (
+        {buyerStep === 4 && (
           <NameMatch
             nextStep={nextStep}
             previousStep={previousStep}
-            onClose={closeModal}
+            onClose={handleClose}
             formData={buyerRequest}
             email={email}
           />
         )}
+
         {buyerStep === 5 && (
           <ViewYourMatches
             nextStep={nextStep}
@@ -120,7 +124,6 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
             formData={buyerRequest}
           />
         )}
-
 
         {buyerStep === 6 && (
           <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
@@ -135,15 +138,12 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName}) => {
         )}
       </div>
 
-      {showConfirmModal && (
+      {/* {showConfirmModal && (
         <ConfirmationModal
-          onConfirm={() => {
-            setShowConfirmModal(false);
-            closeModal();
-          }}
+          onConfirm={confirmClose}
           onCancel={() => setShowConfirmModal(false)}
         />
-      )}
+      )} */}
     </div>
   );
 };

@@ -7,20 +7,30 @@ import CustomerQuestions from "./LeadSettings/CustomerQuestions";
 
 const LeadSetting = () => {
   const [selectedService, setSelectedService] = useState(null);
- 
+  const [isRemoved, setIsRemoved] = useState(false); // ✅ NEW STATE
+
+  const handleServiceClick = (service) => {
+    setSelectedService(service);
+    setIsRemoved(false); // ✅ RESET REMOVE FLAG
+  };
+
   return (
     <>
       <div className={styles.leadsOverlay}>
-          <>
-            <LeadSettings
-              setSelectedService={setSelectedService}
+        <>
+          <LeadSettings
+            setSelectedService={handleServiceClick} // ⬅️ use updated function
+            selectedService={selectedService}
+          />
+
+          {selectedService && !isRemoved && (
+            <CustomerQuestions
               selectedService={selectedService}
+              setSelectedService={setSelectedService}
+              setIsRemoved={setIsRemoved} // ✅ PASS PROP
             />
-            {selectedService && (
-              <CustomerQuestions setSelectedService={selectedService} />
-            )}
-          </>
-      
+          )}
+        </>
       </div>
     </>
   );
