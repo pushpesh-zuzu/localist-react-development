@@ -28,7 +28,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (selectedService) {
@@ -36,8 +36,12 @@ const CustomerQuestions = ({ selectedService }) => {
     }
   }, [selectedService]);
 
-  const { leadPreferenceData, leadPreferenceLoader, getlocationData,removeLoader} =
-    useSelector((state) => state.leadSetting);
+  const {
+    leadPreferenceData,
+    leadPreferenceLoader,
+    getlocationData,
+    removeLoader,
+  } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
 
@@ -121,6 +125,7 @@ const CustomerQuestions = ({ selectedService }) => {
             "success",
             result?.message || "Service removed successfully"
           );
+          setShow(false);
           dispatch(
             getleadPreferencesList({ user_id: userToken?.remember_tokens })
           );
@@ -132,108 +137,110 @@ const CustomerQuestions = ({ selectedService }) => {
 
   if (isRemoved) return null;
   const handleRemoveModal = () => {
-    setShow(true)
-  }
-const onHandleCancel = () => {
-  setShow(false)
-}
+    setShow(true);
+  };
+  const onHandleCancel = () => {
+    setShow(false);
+  };
   return (
     <>
       <div className={styles.modal}>
-        <div className={styles.header}>
-          <h1 className={styles.title}>{selectedService?.name}</h1>
-        </div>
+        <div>
+          <div className={styles.header}>
+            <h1 className={styles.title}>{selectedService?.name}</h1>
+          </div>
 
-        <div className={styles.subHeader}>
-          <span className={styles.icon}>
-            <img src={CustomerQuestionsImg} alt="" />
-          </span>
-          Customer questions
-        </div>
+          <div className={styles.subHeader}>
+            <span className={styles.icon}>
+              <img src={CustomerQuestionsImg} alt="" />
+            </span>
+            Customer questions
+          </div>
 
-        <p className={styles.description}>
-          Every customer answers this series of questions, allowing you to
-          define exactly which type of leads you see.
-        </p>
+          <p className={styles.description}>
+            Every customer answers this series of questions, allowing you to
+            define exactly which type of leads you see.
+          </p>
 
-        {leadPreferenceData?.map((item) => {
-          const options = item.answer?.split(",") || [];
-          const isOpen = openQuestionId === item.id;
+          {leadPreferenceData?.map((item) => {
+            const options = item.answer?.split(",") || [];
+            const isOpen = openQuestionId === item.id;
 
-          return (
-            <div key={item.id} className={styles.questionBox}>
-              <p
-                className={styles.questionTitle}
-                onClick={() =>
-                  setOpenQuestionId((prev) =>
-                    prev === item.id ? null : item.id
-                  )
-                }
-              >
-                {item.questions}
-                <img
-                  src={isOpen ? UpArrowIcon : DownArrowIcon}
-                  alt="Toggle Icon"
-                  className={styles.arrowIcon}
-                />
-              </p>
+            return (
+              <div key={item.id} className={styles.questionBox}>
+                <p
+                  className={styles.questionTitle}
+                  onClick={() =>
+                    setOpenQuestionId((prev) =>
+                      prev === item.id ? null : item.id
+                    )
+                  }
+                >
+                  {item.questions}
+                  <img
+                    src={isOpen ? UpArrowIcon : DownArrowIcon}
+                    alt="Toggle Icon"
+                    className={styles.arrowIcon}
+                  />
+                </p>
 
-              <div
-                className={`${styles.options} ${
-                  isOpen ? styles.showOptions : ""
-                }`}
-              >
-                {options.map((opt) => (
-                  <label key={opt} className={styles.option}>
-                    <input
-                      type="radio"
-                      name={`question-${item.id}`}
-                      value={opt}
-                      checked={selectedAnswers[item.id] === opt}
-                      onChange={() =>
-                        setSelectedAnswers((prev) => ({
-                          ...prev,
-                          [item.id]: opt,
-                        }))
-                      }
-                    />
-                    {opt}
-                  </label>
-                ))}
+                <div
+                  className={`${styles.options} ${
+                    isOpen ? styles.showOptions : ""
+                  }`}
+                >
+                  {options.map((opt) => (
+                    <label key={opt} className={styles.option}>
+                      <input
+                        type="radio"
+                        name={`question-${item.id}`}
+                        value={opt}
+                        checked={selectedAnswers[item.id] === opt}
+                        onChange={() =>
+                          setSelectedAnswers((prev) => ({
+                            ...prev,
+                            [item.id]: opt,
+                          }))
+                        }
+                      />
+                      {opt}
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
-        <div className={styles.suggestion}>
-          <span>Something missing?</span>
-          <a href="#" className={styles.suggestLink}>
-            Suggest a question
-          </a>
-        </div>
+          <div className={styles.suggestion}>
+            <span>Something missing?</span>
+            <a href="#" className={styles.suggestLink}>
+              Suggest a question
+            </a>
+          </div>
 
-        <div
-          className={styles.locations}
-          onClick={() => setIsLocationModalOpen(true)}
-        >
-          <span className={styles.locationIcon}>
-            <img src={LocationIcon} alt="" /> Your locations
-          </span>
-          <a href="#" className={styles.addLocation}>
-            + Add a location
-          </a>
-        </div>
+          <div
+            className={styles.locations}
+            onClick={() => setIsLocationModalOpen(true)}
+          >
+            <span className={styles.locationIcon}>
+              <img src={LocationIcon} alt="" /> Your locations
+            </span>
+            <a href="#" className={styles.addLocation}>
+              + Add a location
+            </a>
+          </div>
 
-        <div className={styles.ranger}>
-          {getlocationData?.map((item, idx) => (
-            <div className={styles.range} key={idx}>
-              <span>
-                <img src={TickIcon} alt="" /> Within
-              </span>{" "}
-              <strong>{item?.miles} miles</strong> of{" "}
-              <strong>{item?.postcode}</strong>
-            </div>
-          ))}
+          <div className={styles.ranger}>
+            {getlocationData?.map((item, idx) => (
+              <div className={styles.range} key={idx}>
+                <span>
+                  <img src={TickIcon} alt="" /> Within
+                </span>
+                <strong>{item?.miles} miles</strong> of{" "}
+                <strong>{item?.postcode}</strong>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className={styles.footer}>
@@ -254,7 +261,8 @@ const onHandleCancel = () => {
 
       <Modal
         title="Add a New Location"
-        open={isLocationModalOpen}Handle={() => setIsLocationModalOpen(false)}
+        open={isLocationModalOpen}
+        Handle={() => setIsLocationModalOpen(false)}
         onOk={handleLocationSubmit}
       >
         <div className={styles.formGroup}>
@@ -292,7 +300,13 @@ const onHandleCancel = () => {
           </div>
         </div>
       </Modal>
-     {show && <RemoveServiceModal open={show} onCancel={onHandleCancel} onConfirm={handleRemove}/>}
+      {show && (
+        <RemoveServiceModal
+          open={show}
+          onCancel={onHandleCancel}
+          onConfirm={handleRemove}
+        />
+      )}
     </>
   );
 };

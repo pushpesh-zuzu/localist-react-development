@@ -26,9 +26,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [selectValue, setSelectValue] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
-const [editLocationId, setEditLocationId] = useState(null);
+  const [editLocationId, setEditLocationId] = useState(null);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { preferenceList, serviceLoader, getlocationData } = useSelector(
@@ -37,7 +38,7 @@ const [editLocationId, setEditLocationId] = useState(null);
   const { userToken } = useSelector((state) => state.auth);
 
   const [isMobileView, setIsMobileView] = useState(false);
-const { searchServiceLoader, service,registerData } = useSelector(
+  const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
   console.log(selectedService, "selectedService");
@@ -45,7 +46,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
     miles1: "",
     postcode: "",
   });
-  console.log(getlocationData, "getlocationData");
+
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
@@ -63,7 +64,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
 
   // Fetch preferences
   useEffect(() => {
-    if(userToken?.active_status == 1){
+    if (userToken?.active_status == 1) {
       const data = {
         user_id: userToken?.remember_tokens,
       };
@@ -74,8 +75,6 @@ const { searchServiceLoader, service,registerData } = useSelector(
       };
       dispatch(getleadPreferencesList(data));
     }
-   
-    
   }, []);
   useEffect(() => {
     if (userToken?.active_status == 1) {
@@ -108,14 +107,12 @@ const { searchServiceLoader, service,registerData } = useSelector(
   };
 
   //  Don't render if service is selected on mobile/tablet
-  if (isMobileView && selectedService?.id) return null;
 
   const handleService = () => {
     setIsModalOpen(true);
     setInput(""); // reset the input field
     setSelectedService(null); // clear previously selected service
     dispatch(setService([]));
-    
   };
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
@@ -128,7 +125,8 @@ const { searchServiceLoader, service,registerData } = useSelector(
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
-      setSelectedService(item);
+      console.log(item, "item");
+      setSelectValue(item);
       setIsDropdownOpen(false);
       // setErrors((prev) => ({ ...prev, service: "" }));
       setTimeout(() => dispatch(setService([])), 100);
@@ -138,7 +136,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
   const handleSubmitData = () => {
     const serviceDataList = {
       user_id: userToken?.remember_tokens,
-      service_id: selectedService?.id,
+      service_id: selectValue?.id,
     };
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
@@ -147,7 +145,6 @@ const { searchServiceLoader, service,registerData } = useSelector(
         };
         dispatch(getleadPreferencesList(data));
         setIsModalOpen(false);
-        
       }
     });
   };
@@ -159,7 +156,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
   //     service_id: selectedService?.id,
   //   };
   //   dispatch(addLocationLead(locationdata)).then((result) => {
-      
+
   //     if (result?.success) {
   //       const data = {
   //         user_id: userToken?.remember_tokens,
@@ -177,10 +174,12 @@ const { searchServiceLoader, service,registerData } = useSelector(
       postcode: locationData.postcode,
       service_id: selectedService?.id,
     };
-  
+
     if (isEditingLocation && editLocationId) {
       // Update location logic — You might need to create an `updateLocationLead` thunk
-      dispatch(addLocationLead({ ...locationdata, setvice_id: editLocationId })).then((result) => {
+      dispatch(
+        addLocationLead({ ...locationdata, setvice_id: editLocationId })
+      ).then((result) => {
         if (result?.success) {
           const data = { user_id: userToken?.remember_tokens };
           dispatch(getLocationLead(data));
@@ -201,7 +200,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
       });
     }
   };
-  
+
   const handleEditLocation = (location) => {
     setLocationData({
       miles1: location.miles,
@@ -211,7 +210,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
     setIsEditingLocation(true);
     setIsLocationModalOpen(true);
   };
-  
+
   return (
     <>
       <div className={styles.container}>
@@ -262,34 +261,35 @@ const { searchServiceLoader, service,registerData } = useSelector(
             //   )}
             // </div>
             <div className={styles.serviceList}>
-  {preferenceList?.map((service) => (
-    <div
-      key={service.id}
-      ref={(el) => (serviceRefs.current[service.id] = el)}
-      className={`${styles.serviceItem} ${
-        selectedService?.id === service.id ? styles.selectedService : ""
-      }`}
-      onClick={() => handleServiceClick(service?.id, service?.name)}
-    >
-      <div className={styles.serviceNameWrapper}>
-        <p className={styles.serviceName}>{service.name}</p>
-        <p className={styles.serviceDetails}>
-          All leads <span>|</span> {service?.locations} Location
-        </p>
-      </div>
-      <img
-        src={
-          selectedService?.id === service.id
-            ? WhiteRightArrow
-            : BlackRightArrow
-        }
-        alt="arrow"
-        className={styles.arrowImages}
-      />
-    </div>
-  ))}
-</div>
-
+              {preferenceList?.map((service) => (
+                <div
+                  key={service.id}
+                  ref={(el) => (serviceRefs.current[service.id] = el)}
+                  className={`${styles.serviceItem} ${
+                    selectedService?.id === service.id
+                      ? styles.selectedService
+                      : ""
+                  }`}
+                  onClick={() => handleServiceClick(service?.id, service?.name)}
+                >
+                  <div className={styles.serviceNameWrapper}>
+                    <p className={styles.serviceName}>{service.name}</p>
+                    <p className={styles.serviceDetails}>
+                      All leads <span>|</span> {service?.locations} Location
+                    </p>
+                  </div>
+                  <img
+                    src={
+                      selectedService?.id === service.id
+                        ? WhiteRightArrow
+                        : BlackRightArrow
+                    }
+                    alt="arrow"
+                    className={styles.arrowImages}
+                  />
+                </div>
+              ))}
+            </div>
           )}
           <button className={styles.addService} onClick={handleService}>
             + Add a service
@@ -301,15 +301,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
           <p className={styles.info}>
             Choose where you want to find new customers.
           </p>
-          {/* <div className={styles.location}>
-          <div className={styles.yourLocationInputWrapper}>
-            <p className={styles.locationInput}>
-              Within <strong>150 miles</strong> of <strong>01201</strong>
-            </p>
-            <p className={styles.locationInputService}>
-              View on map <span>|</span> Remove | 3 services
-            </p>
-          </div> */}
+
           {getlocationData?.map((item) => (
             <div className={styles.location}>
               <div key={item.id} className={styles.yourLocationInputWrapper}>
@@ -318,11 +310,15 @@ const { searchServiceLoader, service,registerData } = useSelector(
                   <strong>{item.postcode}</strong>
                 </p>
                 <p className={styles.locationInputService}>
-                View on map | Remove | {item?.total_services} services
+                  View on map | Remove | {item?.total_services} services
                 </p>
               </div>
               <div className={styles.editButton}>
-                <img src={EditIcon} alt="Edit" onClick={() => handleEditLocation(item)}/>
+                <img
+                  src={EditIcon}
+                  alt="Edit"
+                  onClick={() => handleEditLocation(item)}
+                />
               </div>
             </div>
           ))}
@@ -370,7 +366,7 @@ const { searchServiceLoader, service,registerData } = useSelector(
               onChange={(e) => {
                 setInput(e.target.value);
                 setIsDropdownOpen(!!e.target.value);
-                setSelectedService(null);
+                // setSelectedService(null);
               }}
               value={input}
             />

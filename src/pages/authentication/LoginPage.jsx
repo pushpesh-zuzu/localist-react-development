@@ -23,15 +23,12 @@ const LoginPage = () => {
     dispatch(userLogin(payload))
       .then((result) => {
         if (result?.success) {
-          
           showToast("success", result?.message || "Login successful!");
-          if(result?.data?.active_status==1){
+          if (result?.data?.active_status == 1) {
             navigate("/settings");
-          }
-          else if(result?.data?.active_status==2){
+          } else if (result?.data?.active_status == 2) {
             navigate("/buyers/create");
           }
-          
         } else {
           showToast(
             "error",
@@ -47,19 +44,18 @@ const LoginPage = () => {
         );
       });
   };
-//   const { userToken } = useSelector((state) => state.auth);
-// const { registerToken } = useSelector((state) => state.findJobs);
+  //   const { userToken } = useSelector((state) => state.auth);
+  // const { registerToken } = useSelector((state) => state.findJobs);
 
-
-// useEffect(() => {
-//   if (userToken || registerToken) {
-//     showToast("info", "User already logged in");
-//     navigate("/"); 
-//   }
-//   else {
-//     navigate("/login")
-//   }
-// }, [userToken, registerToken, navigate]);
+  // useEffect(() => {
+  //   if (userToken || registerToken) {
+  //     showToast("info", "User already logged in");
+  //     navigate("/");
+  //   }
+  //   else {
+  //     navigate("/login")
+  //   }
+  // }, [userToken, registerToken, navigate]);
 
   return (
     <div className="login-container">

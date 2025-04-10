@@ -10,11 +10,11 @@ const ProtectedLogin = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerToken } = useSelector((state) => state.findJobs);
 
-  useEffect(() => {
-    if (userToken || registerToken) {
-      toast.info("You're already logged in.");
-    }
-  }, [userToken, registerToken]);
+  // useEffect(() => {
+  //   if (userToken || registerToken) {
+  //     toast.info("You're already logged in.");
+  //   }
+  // }, [userToken, registerToken]);
 
   if (userToken || registerToken) {
     return <Navigate to="/" state={{ from: location }} replace />;

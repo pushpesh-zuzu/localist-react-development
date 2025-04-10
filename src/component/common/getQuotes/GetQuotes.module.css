@@ -1,9 +1,9 @@
 .container {
   text-align: center;
-  padding: 23px 0;
-  background-color: #f9fdff;
-  margin-bottom: 42px;
-  margin-top: 26px;
+  padding: 50px 0;
+  background-color: #0091da;
+  margin-bottom: 40px;
+  margin-top: 10px;
 }
 
 .button {
@@ -19,10 +19,11 @@
 }
 
 .text {
+  margin-top: 10px;
   font-weight: 400;
   font-size: 40px;
   color: #000000;
-  margin-top: 0;
+  line-height: 100%;
   font-family: "poppins" !important;
 }
 

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./Leads.module.css";
-
 import LeadLists from "./LeadLists/LeadLists";
 import LeadSettings from "./LeadSettings/LeadSettings";
 import CustomerQuestions from "./LeadSettings/CustomerQuestions";
@@ -18,10 +17,20 @@ const LeadSetting = () => {
     <>
       <div className={styles.leadsOverlay}>
         <>
-          <LeadSettings
-            setSelectedService={handleServiceClick} // ⬅️ use updated function
-            selectedService={selectedService}
-          />
+          {!selectedService && (
+            <div className={styles.leadSettingsTabView}>
+              <LeadSettings
+                setSelectedService={handleServiceClick} // ⬅️ use updated function
+                selectedService={selectedService}
+              />
+            </div>
+          )}
+          <div className={styles.leadSettingsOverlay}>
+            <LeadSettings
+              setSelectedService={handleServiceClick} // ⬅️ use updated function
+              selectedService={selectedService}
+            />
+          </div>
 
           {selectedService && !isRemoved && (
             <CustomerQuestions

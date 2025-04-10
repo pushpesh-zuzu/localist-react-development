@@ -18,7 +18,6 @@ const PopularCitiesLocation = () => {
           </div>
         </div>
       </div>
-      ;
     </>
   );
 };

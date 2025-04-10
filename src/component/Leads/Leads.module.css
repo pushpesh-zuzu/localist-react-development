@@ -4,6 +4,13 @@
   display: flex;
   /* justify-content: space-between; */
 }
+.leadSettingsOverlay {
+  display: flex !important;
+}
+
+.leadSettingsTabView {
+  display: none;
+}
 
 @media (max-width: 1120px) {
   .leadsOverlay {
@@ -14,6 +21,15 @@
 @media (max-width: 768px) {
   .leadsOverlay {
     padding: 20px 40px;
+    flex-direction: column;
+  }
+  .leadSettingsOverlay {
+    display: none !important;
+    width: -webkit-fill-available;
+  }
+
+  .leadSettingsTabView {
+    display: block;
   }
 }
 

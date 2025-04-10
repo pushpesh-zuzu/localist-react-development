@@ -1,9 +1,24 @@
 .modal {
   background: #e3f6fc;
   padding: 40px;
-  width: 100%;
+  width: -webkit-fill-available;
   max-width: 525px;
   padding-bottom: 20px !important;
+  position: relative;
+  height: 77vh;
+  bottom: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal::-webkit-scrollbar {
+  width: 2px;
+}
+.modal::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 10px;
 }
 
 .header {
@@ -171,7 +186,8 @@
   display: flex;
   justify-content: space-between;
   padding: 31.62px 29px 31.62px 42.27px;
-
+  position: sticky;
+  bottom: -20px;
   margin: 20px -40px -40px -40px;
 }
 
@@ -214,6 +230,7 @@
   .modal {
     padding: 20px;
     max-width: 100%;
+    width: -webkit-fill-available;
   }
 
   .title {
@@ -242,18 +259,16 @@
     font-size: 16px;
   }
 
-  .footer {
+  /* .footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
     padding: 24px;
-  }
+  } */
 
   .removeService,
   .saveButton {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
+    margin-right: 16px;
   }
 }
 
