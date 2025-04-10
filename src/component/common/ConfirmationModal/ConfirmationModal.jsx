@@ -12,7 +12,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 // import { showToast } from "../../../../../utils";
 
-const ConfirmationModal = ({ prevStep, handleInputChange, formData }) => {
+const ConfirmationModal = ({ onCancel, handleInputChange, formData }) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -137,7 +137,7 @@ const ConfirmationModal = ({ prevStep, handleInputChange, formData }) => {
           send you quotes fast and free!
         </p>
         <div className={styles.buttonGroup}>
-          <button className={styles.backButton} onClick={handleCloseModal}>
+          <button className={styles.backButton} onClick={onCancel}>
             Back
           </button>
           <button className={styles.continueButton} onClick={"handleSubmit"}>
