@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
   getleadPreferencesList,
+  getLocationLead,
   leadPreferences,
   leadPreferencesData,
   removeItemData,
@@ -19,6 +20,7 @@ import { Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const CustomerQuestions = ({ setSelectedService, selectedService }) => {
+  console.log(selectedService,"selectedService")
   const dispatch = useDispatch();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
@@ -84,7 +86,7 @@ const CustomerQuestions = ({ setSelectedService, selectedService }) => {
         const data = {
           user_id: userToken?.remember_tokens,
         };
-        dispatch(getleadPreferencesList(data));
+        dispatch(getLocationLead(data))
         setIsLocationModalOpen(false);
       }
     });
@@ -149,6 +151,8 @@ const handleRemove = () => {
         };
 
         dispatch(getleadPreferencesList(fetchData));
+       
+        
       }
     });
   }

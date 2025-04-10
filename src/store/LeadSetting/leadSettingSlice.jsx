@@ -13,7 +13,8 @@ const initialState = {
     leadRequestList:[], 
     getlocationData:[],
     autoBidList:[],
-    removeLoader:false
+    removeLoader:false,
+    bidListLoader:false
 };
 
 
@@ -168,7 +169,7 @@ export const getleadPreferencesList = (serviceId) => {
   }
   export const getAutoBid = (bidData) => {
     return async (dispatch) => {
-      dispatch(setleadPreferencesListLoader(true));
+      dispatch(setAutoBidListLoader(true));
       try {
         const response = await axiosInstance.post(`users/autobid-list`, bidData);
   
@@ -178,7 +179,7 @@ export const getleadPreferencesList = (serviceId) => {
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
       } finally {
-        dispatch(setleadPreferencesListLoader(false));
+        dispatch(setAutoBidListLoader(false));
       }
     };
   }
@@ -231,11 +232,14 @@ const leadSettingSlice = createSlice({
       },
       setRemoveListLoader(state,action) {
         state.removeLoader = action.payload
+      },
+      setAutoBidListLoader(state,action){
+        state.bidListLoader = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setRemoveListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;
