@@ -146,6 +146,29 @@
 .searchButtonPhone {
   display: none;
 }
+.searchResults {
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  width: 43.8%;
+  max-height: 200px;
+  top: 85%;
+  overflow-y: auto;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.searchItem {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 14px !important;
+  color: #000 !important;
+}
+
+.searchItem:hover {
+  background: #f0f0f0;
+}
 
 @media screen and (max-width: 1300px) {
   .input {

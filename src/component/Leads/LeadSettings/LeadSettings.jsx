@@ -225,41 +225,70 @@ const { searchServiceLoader, service,registerData } = useSelector(
           {serviceLoader ? (
             <Spin />
           ) : (
+            // <div className={styles.serviceList}>
+            //   {preferenceList?.map((service) =>
+            //     service.user_services.map((userService) => (
+            //       <div
+            //         key={userService.id}
+            //         ref={(el) => (serviceRefs.current[userService.id] = el)}
+            //         className={`${styles.serviceItem} ${
+            //           selectedService?.id === userService.id
+            //             ? styles.selectedService
+            //             : ""
+            //         }`}
+            //         onClick={() =>
+            //           handleServiceClick(userService?.id, userService?.name)
+            //         }
+            //       >
+            //         <div className={styles.serviceNameWrapper}>
+            //           <p className={styles.serviceName}>{userService.name}</p>
+            //           <p className={styles.serviceDetails}>
+            //             All leads <span>|</span>{" "}
+            //             {service?.locations} Location
+            //           </p>
+            //         </div>
+            //         <img
+            //           src={
+            //             selectedService?.id === userService.id
+            //               ? WhiteRightArrow
+            //               : BlackRightArrow
+            //           }
+            //           alt="arrow"
+            //           className={styles.arrowImages}
+            //         />
+            //       </div>
+            //     ))
+            //   )}
+            // </div>
             <div className={styles.serviceList}>
-              {preferenceList?.map((service) =>
-                service.user_services.map((userService) => (
-                  <div
-                    key={userService.id}
-                    ref={(el) => (serviceRefs.current[userService.id] = el)}
-                    className={`${styles.serviceItem} ${
-                      selectedService?.id === userService.id
-                        ? styles.selectedService
-                        : ""
-                    }`}
-                    onClick={() =>
-                      handleServiceClick(userService?.id, userService?.name)
-                    }
-                  >
-                    <div className={styles.serviceNameWrapper}>
-                      <p className={styles.serviceName}>{userService.name}</p>
-                      <p className={styles.serviceDetails}>
-                        All leads <span>|</span>{" "}
-                        {service?.locations} Location
-                      </p>
-                    </div>
-                    <img
-                      src={
-                        selectedService?.id === userService.id
-                          ? WhiteRightArrow
-                          : BlackRightArrow
-                      }
-                      alt="arrow"
-                      className={styles.arrowImages}
-                    />
-                  </div>
-                ))
-              )}
-            </div>
+  {preferenceList?.map((service) => (
+    <div
+      key={service.id}
+      ref={(el) => (serviceRefs.current[service.id] = el)}
+      className={`${styles.serviceItem} ${
+        selectedService?.id === service.id ? styles.selectedService : ""
+      }`}
+      onClick={() => handleServiceClick(service?.id, service?.name)}
+    >
+      <div className={styles.serviceNameWrapper}>
+        <p className={styles.serviceName}>{service.name}</p>
+        <p className={styles.serviceDetails}>
+          All leads <span>|</span> {service?.locations} Location
+        </p>
+      </div>
+      <img
+        src={
+          selectedService?.id === service.id
+            ? WhiteRightArrow
+            : BlackRightArrow
+        }
+        alt="arrow"
+        className={styles.arrowImages}
+      />
+    </div>
+  ))}
+</div>
+
           )}
           <button className={styles.addService} onClick={handleService}>
             + Add a service

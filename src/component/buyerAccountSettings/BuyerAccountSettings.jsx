@@ -94,38 +94,87 @@ const BuyerAccountSettings = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
   };
 
+  // const handleSavePassword = () => {
+  //   if (!formData.password || !formData.password_confirmation) {
+  //     setFormData({
+  //       ...formData,
+  //       error: "Please enter password.",
+  //     });
+  //     return;
+  //   }
+  //   if (formData.password !== formData.password_confirmation) {
+  //     setFormData({
+  //       ...formData,
+  //       error: "New password and confirm password must match.",
+  //     });
+  //     return;
+  //   }
+  //   const formDataToSend = new FormData();
+  //   formDataToSend.append("password", formData.password);
+  //   formDataToSend.append(
+  //     "password_confirmation",
+  //     formData.password_confirmation
+  //   );
+  //   dispatch(updatePasswordData(formDataToSend)).then((result) => {
+  //     if (result?.success) {
+  //       showToast(
+  //         "success",
+  //         result?.message || "Password Update successfully!"
+  //       );
+  //     }
+  //   });
+
+  //   setIsModalOpen(false);
+  // };
+  
   const handleSavePassword = () => {
-    if (!formData.password || !formData.password_confirmation) {
+    const { password, password_confirmation } = formData;
+  
+    // Validation: Check if fields are empty
+    if (!password || !password_confirmation) {
       setFormData({
         ...formData,
         error: "Please enter password.",
       });
       return;
     }
-    if (formData.password !== formData.password_confirmation) {
+  
+    // Validation: Check if both passwords match
+    if (password !== password_confirmation) {
       setFormData({
         ...formData,
         error: "New password and confirm password must match.",
       });
       return;
     }
+  
+    // Validation: Password strength regex
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]).{8,}$/;
+  
+    if (!passwordRegex.test(password)) {
+      setFormData({
+        ...formData,
+        error:
+          "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+      });
+      return;
+    }
+  
+    // If everything is valid, proceed to submit
     const formDataToSend = new FormData();
-    formDataToSend.append("password", formData.password);
-    formDataToSend.append(
-      "password_confirmation",
-      formData.password_confirmation
-    );
+    formDataToSend.append("password", password);
+    formDataToSend.append("password_confirmation", password_confirmation);
+  
     dispatch(updatePasswordData(formDataToSend)).then((result) => {
       if (result?.success) {
-        showToast(
-          "success",
-          result?.message || "Password Update successfully!"
-        );
+        showToast("success", result?.message || "Password updated successfully!");
       }
     });
-
+  
     setIsModalOpen(false);
   };
+  
   const hanldeRequest = () => {
     navigate("/buyers/create");
   };

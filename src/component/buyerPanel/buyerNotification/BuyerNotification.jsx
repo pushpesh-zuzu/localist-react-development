@@ -65,7 +65,15 @@ const BuyerNotification = () => {
                 index >= 0 ? styles.shadow : ""
               }`}
             >
-              <span>{notification?.noti_name}</span>
+              <span>
+  {notification?.noti_name === "customer_email_change_in_request"
+    ? "Changes to my requests"
+    : notification?.noti_name === "customer_email_reminder_to_reply"
+    ? "Reminders to reply to Professionals"
+    : "Updates about new features on Bark"}
+</span>
+
+              {/* <span>{notification?.noti_name === "customer_email_change_in_request" ? "Changes to my requests" ? notification?.noti_name ==  "customer_email_reminder_to_reply" ? "Reminders to reply to Professionals" : "Updates about new features on Bark"}</span> */}
               {loadingNoti === notiName ? (
                 <Spin size="small" />
               ) : (

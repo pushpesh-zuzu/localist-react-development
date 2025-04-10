@@ -201,12 +201,12 @@ const getUserType=()=>{
         <Popover
           content={
             <>
-             {getUserType() ==2 && <div
+              <div
                 className={styles.logoutBtn}
                 onClick={() => handleNavigation("/user/notification")}
               >
                 Notification
-              </div>}
+              </div>
               <div
                 className={styles.logoutBtn}
                 onClick={handleSwitchUser}
