@@ -5,6 +5,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: "Poppins", sans-serif !important;
+}
+
 body {
   min-height: 100vh;
 }
