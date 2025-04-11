@@ -64,34 +64,34 @@ export const serviceesData = [
 
 export const subMenuData = [
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Dog & Pet Gromming",
   },
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Dog Training",
   },
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Dog Walking",
   },
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Life Coaching",
   },
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Limousine Hire",
   },
 ];
 
 export const otherMenuData = [
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Magician",
   },
   {
-    path: "/sellers/create/",
+    path: "/category",
     name: "Private Investigators",
   },
 ];

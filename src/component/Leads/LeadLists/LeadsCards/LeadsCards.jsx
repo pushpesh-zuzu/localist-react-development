@@ -15,7 +15,9 @@ const LeadsCards = () => {
   const { leadRequestList, leadRequestLoader } = useSelector(
     (state) => state.leadSetting
   );
-  console.log(leadRequestList,"leadRequestList")
+  const data =  leadRequestList?.length
+  console.log(leadRequestList,data,"leadRequestList")
+  
 
   useEffect(() => {
     dispatch(getLeadRequestList());

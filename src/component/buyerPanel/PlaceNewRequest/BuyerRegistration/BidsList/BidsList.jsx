@@ -18,6 +18,7 @@ const BidsList = ({ previousStep }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
+  console.log(autoBidList,"autoBidList")
 const webdesignData = autoBidList?.map((item) => item?.service_name);
   useEffect(() => {
     const data = {
@@ -55,7 +56,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
         <select>
           <option>All response times</option>
         </select>
-        <span className={styles.matchCount}>245 matches</span>
+        <span className={styles.matchCount}>{autoBidList?.length} matches</span>
         <select className={styles.sortDropdown}>
           <option>Sort by: best match</option>
         </select>
@@ -69,13 +70,13 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
       {
         bidListLoader ? <Spin style={{display:"flex",justifyContent:"center",alignItems:"center", marginTop:"24px"}}/> : <>  {autoBidList?.map((item) => (
           <div className={styles.card}>
-            <div className={styles.cardLeft} key={item?.sellers?.id}>
+            <div className={styles.cardLeft} key={item?.id}>
               {/* <div key={item?.sellers?.id} className={styles.cardItem}> */}
               <div className={styles.imageWrapper}>
                 <img
                   src={
-                    item?.sellers?.profile_image
-                      ? `${BASE_IMAGE_URL}${item?.sellers?.profile_image}`
+                    item?.profile_image
+                      ? `${BASE_IMAGE_URL}${item?.profile_image}`
                       : DummyImage
                   }
                   alt="Profile"
@@ -87,7 +88,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
                   <div>
                     <h3>
                       <img src={GreenTickIcon} alt="" />
-                      {item?.sellers?.name}
+                      {item?.name}
                     </h3>
                     <p>
                       <img src={AutoBidLocationIcon} alt="" />
@@ -103,9 +104,9 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
                 </div>
   
                 <div className={styles.badges}>
-                  <span>Full website design</span>
-                  <span>Banner design</span>
-                  <span>New pages</span>
+                  <span>{item?.service_name}</span>
+                  {/* <span>Banner design</span>
+                  <span>New pages</span> */}
                 </div>
   
                 <p className={styles.description}>
