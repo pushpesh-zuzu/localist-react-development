@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
 import moment from "moment";
 import { Spin } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+const navigate = useNavigate()
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ const PlaceNewRequest = () => {
     dispatch(getbuyerrequestList());
   }, []);
 
+  const onViewRequest = (id) => {
+navigate(`/bids-list/${id}`)
+  }
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -60,7 +64,7 @@ const PlaceNewRequest = () => {
                     for more information.
                   </p>
                 </div>
-                <button className={styles.viewButton}>View Request</button>
+                <button className={styles.viewButton} onClick={() => onViewRequest(req.id)}>View Request</button>
               </div>
             ))}
         </div>

@@ -38,27 +38,56 @@ export const userLogin = (loginData) => {
   };
 };
 
+// export const userLogout = () => {
+//   return async (dispatch) => {
+//     dispatch(setLogoutLoader(true));
+//     try {
+//       const response = await axiosInstance.post("users/logout");
+      
+//       if (response) {
+//         dispatch(setToken(null));
+//         dispatch(setUserToken(null))
+//         dispatch(setRegisterToken(null))
+//         dispatch(setRegisterData(null))
+//         dispatch(setSelectedServiceId(null))
+//         return true;
+//       }
+//     } catch (error) {
+     
+//     } finally {
+//       dispatch(setLogoutLoader(false));
+//     }
+//   };
+// };
 export const userLogout = () => {
   return async (dispatch) => {
     dispatch(setLogoutLoader(true));
     try {
       const response = await axiosInstance.post("users/logout");
-      
+
       if (response) {
+        // Clear Redux states
         dispatch(setToken(null));
-        dispatch(setUserToken(null))
-        dispatch(setRegisterToken(null))
-        dispatch(setRegisterData(null))
-        dispatch(setSelectedServiceId(null))
+        dispatch(setUserToken(null));
+        dispatch(setRegisterToken(null));
+        dispatch(setRegisterData(null));
+        dispatch(setSelectedServiceId(null));
+
+        // ✅ Clear relevant localStorage items
+        localStorage.removeItem("barkToken");
+        localStorage.removeItem("barkUserToken");
+        localStorage.removeItem("registerDataToken");
+        localStorage.removeItem("registerTokens");
         return true;
       }
     } catch (error) {
-     
+      console.error("Logout failed:", error);
     } finally {
       dispatch(setLogoutLoader(false));
     }
   };
 };
+
 
 export const switchUser = (switchData) => {
   return async (dispatch) => {

@@ -8,8 +8,10 @@ import { getPopularServiceList, searchService, setSelectedServiceId, setService 
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
+import { questionAnswerData } from "../../../store/Buyer/BuyerSlice";
+import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
-const SearchProfessionals = () => {
+const SearchProfessionals = ({nextStep}) => {
   const [Input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,6 +20,17 @@ const SearchProfessionals = () => {
   const inputRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
+  const { buyerStep } = useSelector((state)=> state.buyer)
+  const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
+  const [show, setShow] = useState(false)
+  const { userToken } = useSelector((state)=> state.auth)
+const handleOpen = (id, name) => {
+  setSelectedServiceId({ id, name });
+  setShow(true);
+};
+const handleClose = () => {
+  setShow(false)
+}
   const navigate = useNavigate();
   // const handleServiceClick = (service) => {
   //   const slug = generateSlug(service.name);
@@ -99,13 +112,22 @@ setPincode(e.target.value)
       
         loadGoogleMapsScript();
       }, []);
-       const handleGetStarted = () => {
-          if (selectedService) {
-            const slug = generateSlug(selectedService.name);
-            dispatch(setSelectedServiceId(selectedService.id));
-            navigate(`/sellers/create-account/${slug}`);
-          }
-        };
+      const handleGetStarted = () => {
+        if (!selectedService) {
+          alert("Please select a service from the suggestions.");
+          return;
+        }
+      
+        const { id, name } = selectedService;
+      
+        dispatch(questionAnswerData({ service_id: id }));
+      
+        // ✅ Update selectedServiceId state before showing the modal
+        setSelectedServiceId({ id, name });
+      
+        setShow(true);
+      };
+      
   return (
     <div className={styles.searchContainer}>
       <div className={styles.popularExamples}>
@@ -184,6 +206,13 @@ setPincode(e.target.value)
                       </div>
                     )}
       </div>
+      {show && (userToken?.active_status == 2 || !userToken )  && (
+          <>
+            <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} 
+      
+      postcode={pincode} />
+          </>
+        )}
     </div>
   );
 };

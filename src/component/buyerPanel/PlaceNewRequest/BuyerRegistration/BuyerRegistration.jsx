@@ -11,7 +11,7 @@ import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 
-const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
+const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   // const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
@@ -82,6 +82,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName }) => {
             serviceId={serviceId}
             serviceName={serviceName}
             onClose={handleClose}
+            pincodes={postcode}
           />
         )}
 

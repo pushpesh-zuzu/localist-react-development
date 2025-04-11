@@ -12,7 +12,7 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose }) => {
+const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose,pincodes }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -24,6 +24,7 @@ const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose }) => {
   );
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  console.log(serviceName,serviceId,"prem")
 
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
@@ -34,13 +35,22 @@ const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose }) => {
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
 
+  // useEffect(() => {
+  //   if (serviceName && serviceId) {
+  //     setInput(serviceName);
+  //     setSelectedService({ id: serviceId });
+  //   }
+  // }, [serviceName, serviceId]);
   useEffect(() => {
     if (serviceName && serviceId) {
       setInput(serviceName);
       setSelectedService({ id: serviceId });
     }
-  }, [serviceName, serviceId]);
-
+  
+    if (pincodes) {
+      setPincode(pincodes);
+    }
+  }, [serviceName, serviceId, pincodes])
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);

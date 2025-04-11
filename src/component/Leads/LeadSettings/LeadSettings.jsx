@@ -11,7 +11,7 @@ import {
   getLocationLead,
   leadPreferences,
 } from "../../../store/LeadSetting/leadSettingSlice";
-import { Modal, Spin } from "antd";
+import { Button, Modal, Spin } from "antd";
 import {
   searchService,
   setService,
@@ -19,6 +19,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
+import ServiceSelectionModal from "./ServiceModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -41,7 +42,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  console.log(selectedService, "selectedService");
+  console.log(selectedService, setSelectedService,"selectedService");
   const [locationData, setLocationData] = useState({
     miles1: "",
     postcode: "",
@@ -167,6 +168,63 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   //     }
   //   });
   // };
+
+const [isNextModalOpen,setIsNextModalOpen] = useState(false)
+const [selectedServices, setSelectedServices] = useState([]);
+  const handleNext = () => {
+    // Optional: Validate the locationData here
+    if (!locationData.postcode || !locationData.miles1) {
+      message.warning("Please fill in both fields");
+      return;
+    }
+  
+    // Close current modal
+    setIsLocationModalOpen(false);
+  
+    // Open next modal
+    setIsNextModalOpen(true); // make sure you have this state defined
+  
+    // You can pass data as props or store in shared state
+  };
+  const handleConfirm = () => {
+    
+    const serviceIds = selectedServices.join(",");
+
+  
+    const locationdata = {
+      user_id: userToken?.remember_tokens,
+      miles: locationData.miles1,
+      postcode: locationData.postcode,
+      service_id: serviceIds,
+    };
+  
+    if (isEditingLocation && editLocationId) {
+      dispatch(
+        addLocationLead({ ...locationdata, location_id: editLocationId }) // ✅ Correct field name
+      ).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setIsLocationModalOpen(false);
+          setIsEditingLocation(false);
+          setEditLocationId(null);
+        }
+      });
+    } else {
+      dispatch(addLocationLead(locationdata)).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setIsLocationModalOpen(false);
+        }
+      });
+    }
+  
+    setIsNextModalOpen(false);
+  };
+   
   const handleLocationSubmit = () => {
     const locationdata = {
       user_id: userToken?.remember_tokens,
@@ -391,7 +449,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           </div>
         </Modal>
 
-        <Modal
+        {/* <Modal
           title={isEditingLocation ? "Edit Location" : "Add a New Location"}
           open={isLocationModalOpen}
           onCancel={() => {
@@ -415,7 +473,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   onChange={handleLocationChange}
                   style={{ width: "100%", padding: "8px" }}
                 >
-                  {/* <option value="">Select</option> */}
+                  {/* <option value="">Select</option> 
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="5">5</option>
@@ -439,7 +497,66 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
               </div>
             </div>
           </div>
-        </Modal>
+        </Modal> */}
+
+<Modal
+  title={isEditingLocation ? "Edit Location" : "Add a New Location"}
+  open={isLocationModalOpen}
+  footer={[
+    <Button key="cancel" onClick={() => {
+      setIsLocationModalOpen(false);
+      setIsEditingLocation(false);
+      setEditLocationId(null);
+      setLocationData({ miles1: "", postcode: "" });
+    }}>
+      Cancel
+    </Button>,
+    <Button key="next" type="primary" onClick={handleNext}>
+      Next
+    </Button>
+  ]}
+>
+  <div className={styles.formGroup}>
+    <div className={styles.inputGroup} style={{ display: "flex", gap: "10px" }}>
+      <div style={{ flex: 1 }}>
+        <span className={styles.fromText}>Miles</span>
+        <select
+          name="miles1"
+          value={locationData.miles1}
+          onChange={handleLocationChange}
+          style={{ width: "100%", padding: "8px" }}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+
+      <div style={{ flex: 1 }}>
+        <span className={styles.fromText}>ZIP Code</span>
+        <input
+          type="text"
+          placeholder="Enter your postcode"
+          name="postcode"
+          value={locationData.postcode}
+          onChange={handleLocationChange}
+          style={{ width: "100%", padding: "8px" }}
+        />
+      </div>
+    </div>
+  </div>
+</Modal>
+{
+  isNextModalOpen && <ServiceSelectionModal  isOpen={isNextModalOpen}
+  onClose={() => setIsNextModalOpen(false)}
+  onConfirm={handleConfirm}
+  selectedServices={selectedServices}
+  setSelectedServices={setSelectedServices}/>
+}
 
        
       </div>

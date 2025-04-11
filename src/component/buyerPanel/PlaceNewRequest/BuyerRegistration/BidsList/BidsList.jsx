@@ -6,7 +6,7 @@ import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { getAutoBid } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL } from "../../../../../utils";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import { Spin } from "antd";
 
@@ -16,7 +16,9 @@ const BidsList = ({ previousStep }) => {
   // const { requestId } = useSelector((state) => state?.buyer);
   const { userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
+const webdesignData = autoBidList?.map((item) => item?.service_name);
   useEffect(() => {
     const data = {
       user_id: userToken?.rember_token,
@@ -32,7 +34,7 @@ const BidsList = ({ previousStep }) => {
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
         <div className={styles.headingTabsWrapper}>
-          <h1 className={styles.heading}>Web Designer</h1>
+          <h1 className={styles.heading}>{webdesignData[0]}</h1>
           <div className={styles.tabs}>
             <button className={styles.activeTab}>Your matches</button>
             <button className={styles.tab}>Replies</button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "antd";
 
-const RemoveServiceModal = ({ open, onCancel, onConfirm }) => {
+const RemoveServiceModal = ({ open, onCancel, onConfirm, loading}) => {
   return (
     <Modal
       open={open}
@@ -13,7 +13,7 @@ const RemoveServiceModal = ({ open, onCancel, onConfirm }) => {
         <h3>Are you sure you want to remove this service?</h3>
         <div style={{ marginTop: 24, display: "flex", justifyContent: "end", gap: "12px" }}>
           <Button onClick={onCancel}>Cancel</Button>
-          <Button danger type="primary" onClick={onConfirm}>
+          <Button danger type="primary" onClick={onConfirm}  loading={loading}>
             Remove
           </Button>
         </div>

@@ -18,9 +18,10 @@ import {
   removeItemData,
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../utils";
-import { Modal, Spin } from "antd";
+import { Button, Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import RemoveServiceModal from "../RemoveModal";
+import ServiceSelectionModal from "./ServiceModal";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
@@ -87,11 +88,53 @@ const CustomerQuestions = ({ selectedService }) => {
     });
   };
 
+const [isNextModalOpen,setIsNextModalOpen] = useState(false)
+const [selectedServices, setSelectedServices] = useState([]);
+  const handleNext = () => {
+    // Optional: Validate the locationData here
+    if (!locationData.postcode || !locationData.miles1) {
+      message.warning("Please fill in both fields");
+      return;
+    }
+  
+    // Close current modal
+    setIsLocationModalOpen(false);
+  
+    // Open next modal
+    setIsNextModalOpen(true); // make sure you have this state defined
+  
+    // You can pass data as props or store in shared state
+  };
+
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleConfirm = () => {
+      
+      const serviceIds = selectedServices.join(",");
+  
+    
+      const locationdata = {
+        user_id: userToken?.remember_tokens,
+        miles: locationData.miles1,
+        postcode: locationData.postcode,
+        service_id: serviceIds,
+      };
+    
+        dispatch(addLocationLead(locationdata)).then((result) => {
+          if (result?.success) {
+            const data = { user_id: userToken?.remember_tokens };
+            dispatch(getLocationLead(data));
+            dispatch(getleadPreferencesList(data));
+            setIsLocationModalOpen(false);
+          }
+        });
+      
+    
+      setIsNextModalOpen(false);
+    };
   const handleLocationSubmit = () => {
     const data = {
       user_id: userToken?.remember_tokens,
@@ -259,7 +302,7 @@ const CustomerQuestions = ({ selectedService }) => {
         </div>
       </div>
 
-      <Modal
+      {/* <Modal
         title="Add a New Location"
         open={isLocationModalOpen}
         Handle={() => setIsLocationModalOpen(false)}
@@ -299,14 +342,73 @@ const CustomerQuestions = ({ selectedService }) => {
             </div>
           </div>
         </div>
+      </Modal> */}
+      <Modal
+        title={"Add a New Location"}
+        open={isLocationModalOpen}
+        footer={[
+          <Button key="cancel" onClick={() => {
+            setIsLocationModalOpen(false);
+            setIsEditingLocation(false);
+            setEditLocationId(null);
+            setLocationData({ miles1: "", postcode: "" });
+          }}>
+            Cancel
+          </Button>,
+          <Button key="next" type="primary" onClick={handleNext}>
+            Next
+          </Button>
+        ]}
+      >
+        <div className={styles.formGroup}>
+          <div className={styles.inputGroup} style={{ display: "flex", gap: "10px" }}>
+            <div style={{ flex: 1 }}>
+              <span className={styles.fromText}>Miles</span>
+              <select
+                name="miles1"
+                value={locationData.miles1}
+                onChange={handleLocationChange}
+                style={{ width: "100%", padding: "8px" }}
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </div>
+      
+            <div style={{ flex: 1 }}>
+              <span className={styles.fromText}>ZIP Code</span>
+              <input
+                type="text"
+                placeholder="Enter your postcode"
+                name="postcode"
+                value={locationData.postcode}
+                onChange={handleLocationChange}
+                style={{ width: "100%", padding: "8px" }}
+              />
+            </div>
+          </div>
+        </div>
       </Modal>
       {show && (
         <RemoveServiceModal
           open={show}
           onCancel={onHandleCancel}
           onConfirm={handleRemove}
+          loading={removeLoader}
         />
       )}
+      {
+        isNextModalOpen && <ServiceSelectionModal  isOpen={isNextModalOpen}
+        onClose={() => setIsNextModalOpen(false)}
+        onConfirm={handleConfirm}
+        selectedServices={selectedServices}
+        setSelectedServices={setSelectedServices}/>
+      }
     </>
   );
 };
