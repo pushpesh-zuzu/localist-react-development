@@ -67,12 +67,12 @@ export const userLogout = () => {
 
       if (response) {
         // Clear Redux states
-        dispatch(setToken(null));
-        dispatch(setUserToken(null));
-        dispatch(setRegisterToken(null));
-        dispatch(setRegisterData(null));
-        dispatch(setSelectedServiceId(null));
-        dispatch( clearServiceFormData())
+        dispatch(setToken());
+        dispatch(setUserToken());
+        dispatch(setRegisterToken());
+        dispatch(setRegisterData());
+        dispatch(setSelectedServiceId());
+        dispatch(clearServiceFormData())
 
         // ✅ Clear relevant localStorage items
         localStorage.removeItem("barkToken");

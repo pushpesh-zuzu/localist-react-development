@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./RemoveModal.module.css";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const RemoveServiceModal = ({
   open,
@@ -31,7 +33,9 @@ const RemoveServiceModal = ({
             onClick={onConfirm}
             disabled={loading}
           >
-            {loading ? "Removing..." : "Remove"}
+            {loading ?  <Spin
+                          indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                        /> : "Remove"}
           </button>
         </div>
       </div>

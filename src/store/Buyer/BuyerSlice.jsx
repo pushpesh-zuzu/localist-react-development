@@ -354,9 +354,18 @@ const buyerSlice = createSlice({
     setAddNotificationLoader(state, action) {
       state.addNotificationLoader = action.payload;
     },
+    clearSetbuyerRequestData(state,action){
+      state.buyerRequest ={
+        service_id:"",
+    postcode:"",
+    questions:[],
+    phone:"",
+    recevive_online:""
+      }
+    }
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,clearSetbuyerRequestData,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

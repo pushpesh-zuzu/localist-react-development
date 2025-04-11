@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addDetailsRequestData,
   addImageSubmittedData,
+  clearSetbuyerRequestData,
+  setQualityData,
   textQualityData,
 } from "../../../../../store/Buyer/BuyerSlice";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -91,6 +93,8 @@ const DescribeYourRequest = ({ onClose }) => {
         showToast("success", result?.message || "Create Request successfully!");
       }
       onClose();
+      dispatch(clearSetbuyerRequestData())
+      dispatch(setQualityData())
       navigate(`/bids-list/${requestId}`);
     });
 

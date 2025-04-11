@@ -13,30 +13,19 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 
 const SearchProfessionals = ({nextStep}) => {
   const [Input, setInput] = useState("");
+  const [pincode,setPincode] = useState("")
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [pincode,setPincode] = useState("")
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const { popularList, service, popularLoader, searchServiceLoader } =
-    useSelector((state) => state.findJobs);
-  const { buyerStep } = useSelector((state)=> state.buyer)
+  const { service, searchServiceLoader } = useSelector((state) => state.findJobs);
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   const [show, setShow] = useState(false)
   const { userToken } = useSelector((state)=> state.auth)
-const handleOpen = (id, name) => {
-  setSelectedServiceId({ id, name });
-  setShow(true);
-};
+
 const handleClose = () => {
   setShow(false)
 }
-  const navigate = useNavigate();
-  // const handleServiceClick = (service) => {
-  //   const slug = generateSlug(service.name);
-  //   dispatch(setSelectedServiceId(service.id));
-  //   navigate(`/sellers/create-account/${slug}`);
-  // };
   useEffect(() => {
     dispatch(getPopularServiceList());
     return () => {
@@ -94,16 +83,13 @@ setPincode(e.target.value)
             let postalCode = "";
             place.address_components.forEach((component) => {
               if (component.types.includes("postal_code")) {
-                postalCode = component.long_name; // Extract postal code correctly
+                postalCode = component.long_name; 
               }
             });
       
             if (postalCode) {
-              // dispatch(setSelectedServiceFormData(postalCode));
-      
-              // ✅ Update Input Field with Selected Postal Code
              setPincode(postalCode);
-              inputRef.current.value = postalCode; // Update input value
+              inputRef.current.value = postalCode;
             } else {
               alert("No PIN code found! Please try again.");
             }
@@ -121,10 +107,9 @@ setPincode(e.target.value)
         const { id, name } = selectedService;
       
         dispatch(questionAnswerData({ service_id: id }));
-      
-        // ✅ Update selectedServiceId state before showing the modal
         setSelectedServiceId({ id, name });
-      
+      setInput("")
+      setPincode("")
         setShow(true);
       };
       

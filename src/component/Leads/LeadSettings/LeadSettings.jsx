@@ -10,6 +10,7 @@ import {
   getleadPreferencesList,
   getLocationLead,
   leadPreferences,
+  removeItemLocationData,
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { Button, Modal, Spin } from "antd";
 import {
@@ -20,6 +21,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
+import { showToast } from "../../../utils";
+
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -33,7 +36,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [editLocationId, setEditLocationId] = useState(null);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { preferenceList, serviceLoader, getlocationData } = useSelector(
+  const { preferenceList, serviceLoader, getlocationData ,removeLocationLoader} = useSelector(
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state) => state.auth);
@@ -149,26 +152,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       }
     });
   };
-  // const handleLocationSubmit = () => {
-  //   const locationdata = {
-  //     user_id: userToken?.remember_tokens,
-  //     miles: locationData.miles1,
-  //     postcode: locationData.postcode,
-  //     service_id: selectedService?.id,
-  //   };
-  //   dispatch(addLocationLead(locationdata)).then((result) => {
-
-  //     if (result?.success) {
-  //       const data = {
-  //         user_id: userToken?.remember_tokens,
-  //       };
-  //       dispatch(getLocationLead(data));
-  //       dispatch(getleadPreferencesList(data));
-  //       setIsLocationModalOpen(false);
-  //     }
-  //   });
-  // };
-
+  
+  const [removeModal, setRemoveModal] = useState({
+    show: false,
+    service_id: null,
+  })
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const handleNext = () => {
@@ -266,7 +254,31 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setIsEditingLocation(true);
     setIsLocationModalOpen(true);
   };
-
+  const handleRemoveOpen = (id) => {
+    setRemoveModal({ show: true, service_id: id });
+  };
+  
+  const onHandleCancel = () => {
+    setRemoveModal({ show: false, service_id: null });
+  };
+  
+  const handleRemove = () => {
+    const removeData = {
+      user_id: userToken?.remember_tokens,
+      service_id: removeModal.service_id,
+    };
+  
+    dispatch(removeItemLocationData(removeData)).then((result)=> {
+      if(result){
+        showToast("success", result?.message || "Remove Location Successfully!");
+        setRemoveModal({ show: false, service_id: null });
+        const data = {
+          user_type:userToken?.remeber_tokens
+        }
+        dispatch(getLocationLead(data))
+      }
+    });
+  };
   return (
     <>
       <div className={styles.container}>
@@ -281,41 +293,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           {serviceLoader ? (
             <Spin />
           ) : (
-            // <div className={styles.serviceList}>
-            //   {preferenceList?.map((service) =>
-            //     service.user_services.map((userService) => (
-            //       <div
-            //         key={userService.id}
-            //         ref={(el) => (serviceRefs.current[userService.id] = el)}
-            //         className={`${styles.serviceItem} ${
-            //           selectedService?.id === userService.id
-            //             ? styles.selectedService
-            //             : ""
-            //         }`}
-            //         onClick={() =>
-            //           handleServiceClick(userService?.id, userService?.name)
-            //         }
-            //       >
-            //         <div className={styles.serviceNameWrapper}>
-            //           <p className={styles.serviceName}>{userService.name}</p>
-            //           <p className={styles.serviceDetails}>
-            //             All leads <span>|</span>{" "}
-            //             {service?.locations} Location
-            //           </p>
-            //         </div>
-            //         <img
-            //           src={
-            //             selectedService?.id === userService.id
-            //               ? WhiteRightArrow
-            //               : BlackRightArrow
-            //           }
-            //           alt="arrow"
-            //           className={styles.arrowImages}
-            //         />
-            //       </div>
-            //     ))
-            //   )}
-            // </div>
             <div className={styles.serviceList}>
               {preferenceList?.map((service) => (
                 <div
@@ -367,7 +344,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 </p>
                 <p className={styles.locationInputService}>
                   <span className={styles.link}>View on map</span> |{" "}
-                  <span className={styles.link}>Remove</span> |{" "}
+                  <span className={styles.link} onClick={()=>handleRemoveOpen(item?.service_id)}>Remove</span> |{" "}
                   <span className={styles.link}>
                     {item?.total_services} services
                   </span>
@@ -377,7 +354,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 <img
                   src={EditIcon}
                   alt="Edit"
-                  // onClick={() => handleEditLocation(item)}
+                  onClick={() => handleEditLocation(item)}
                 />
               </div>
             </div>
@@ -450,57 +427,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             )}
           </div>
         </Modal>
-
-        {/* <Modal
-          title={isEditingLocation ? "Edit Location" : "Add a New Location"}
-          open={isLocationModalOpen}
-          onCancel={() => {
-            setIsLocationModalOpen(false);
-            setIsEditingLocation(false);
-            setEditLocationId(null);
-            setLocationData({ miles1: "", postcode: "" });
-          }}
-          onOk={handleLocationSubmit}
-        >
-          <div className={styles.formGroup}>
-            <div
-              className={styles.inputGroup}
-              style={{ display: "flex", gap: "10px" }}
-            >
-              <div style={{ flex: 1 }}>
-                <span className={styles.fromText}>Miles</span>
-                <select
-                  name="miles1"
-                  value={locationData.miles1}
-                  onChange={handleLocationChange}
-                  style={{ width: "100%", padding: "8px" }}
-                >
-                  {/* <option value="">Select</option> 
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="30">30</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-
-              <div style={{ flex: 1 }}>
-                <span className={styles.fromText}>ZIP Code</span>
-                <input
-                  type="text"
-                  placeholder="Enter your postcode"
-                  name="postcode"
-                  value={locationData.postcode}
-                  onChange={handleLocationChange}
-                  style={{ width: "100%", padding: "8px" }}
-                />
-              </div>
-            </div>
-          </div>
-        </Modal> */}
-
         <Modal
           title={isEditingLocation ? "Edit Location" : "Add a New Location"}
           open={isLocationModalOpen}
@@ -558,6 +484,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             </div>
           </div>
         </Modal>
+        {removeModal?.show && (
+        <RemoveServiceModal
+          open={removeModal?.show}
+          onCancel={onHandleCancel}
+          onConfirm={handleRemove}
+          loading={removeLocationLoader}
+          serviceName={selectedService?.name}
+        />
+      )}
         {isNextModalOpen && (
           <ServiceSelectionModal
             isOpen={isNextModalOpen}

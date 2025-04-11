@@ -94,7 +94,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
                     </h3>
                     <p>
                       <img src={AutoBidLocationIcon} alt="" />
-                      8.6 miles away
+                      {item?.distance} miles away
                     </p>
                   </div>
                   <div className={styles.sidebar}>
