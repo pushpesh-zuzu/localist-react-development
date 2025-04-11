@@ -11,7 +11,7 @@ import { getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSli
 const MatchingLeads = () => {
   const navigate = useNavigate();
   const handleEdit = () => {
-    navigate("/lead-settings");
+    navigate("/leads/settings");
   };
   const dispatch = useDispatch();
   const { leadRequestList } = useSelector(

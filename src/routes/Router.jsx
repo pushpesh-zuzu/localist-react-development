@@ -28,8 +28,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Homepage />  },
-      { path: "/login", element: <ProtectedLogin/> },
+      { index: true, element: <Homepage /> },
+      { path: "/login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/location", element: <LocationPage /> },
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "/lead-settings", element: <LeadSetting /> },
+      { path: "/leads/settings", element: <LeadSetting /> },
       { path: "/bids-list/:requestId", element: <BidsList /> },
 
       { path: "*", element: <NotFound /> },

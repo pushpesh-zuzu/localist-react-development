@@ -366,7 +366,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   <strong>{item.postcode}</strong>
                 </p>
                 <p className={styles.locationInputService}>
-                  View on map | Remove | {item?.total_services} services
+                  <span className={styles.link}>View on map</span> |{" "}
+                  <span className={styles.link}>Remove</span> |{" "}
+                  <span className={styles.link}>
+                    {item?.total_services} services
+                  </span>
                 </p>
               </div>
               <div className={styles.editButton}>

@@ -30,25 +30,27 @@ const FindLocalJobs = () => {
   useEffect(() => {
     dispatch(getPopularServiceList());
     return () => {
-      dispatch(setService([])); 
-      
+      dispatch(setService([]));
     };
   }, []);
-   useEffect(() => {
-      const delayDebounce = setTimeout(() => {
-        if (isDropdownOpen && Input.trim() !== "") {
-          dispatch(searchService({ search: Input }));
-        }
-      }, 500);
-  
-      return () => clearTimeout(delayDebounce);
-    }, [Input, dispatch, isDropdownOpen]);
-    const handleSelectService = useCallback((item) => {
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      if (isDropdownOpen && Input.trim() !== "") {
+        dispatch(searchService({ search: Input }));
+      }
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [Input, dispatch, isDropdownOpen]);
+  const handleSelectService = useCallback(
+    (item) => {
       setInput(item.name);
       setSelectedService(item);
       setIsDropdownOpen(false);
       setTimeout(() => dispatch(setService([])), 100);
-    }, [dispatch]);
+    },
+    [dispatch]
+  );
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
@@ -72,11 +74,11 @@ const FindLocalJobs = () => {
           <input
             className={styles.searchInput}
             placeholder="What service do you provide?"
-              onChange={(e) => {
-                setInput(e.target.value);
-                setIsDropdownOpen(!!e.target.value);
-                setSelectedService(null);
-              }}
+            onChange={(e) => {
+              setInput(e.target.value);
+              setIsDropdownOpen(!!e.target.value);
+              setSelectedService(null);
+            }}
             value={Input}
           />
 
@@ -107,7 +109,7 @@ const FindLocalJobs = () => {
 
       {/* Right Section */}
       <div className={styles.rightSection}>
-        <h3>Popular services</h3>
+        <h2>Popular services</h2>
         {popularLoader ? (
           <Spin
             indicator={<LoadingOutlined spin style={{ color: "primary" }} />}
@@ -122,7 +124,11 @@ const FindLocalJobs = () => {
                 onClick={() => handleServiceClick(service)}
               >
                 <img
-                  src={service?.category_icon ? `${service?.baseurl}/${service?.category_icon}` : hiring} 
+                  src={
+                    service?.category_icon
+                      ? `${service?.baseurl}/${service?.category_icon}`
+                      : hiring
+                  }
                   alt={service.title}
                 />
                 <span>{service.name}</span>

@@ -19,20 +19,6 @@ const ServicesSteps = () => {
                 {index === 0 && (
                   <div className={styles.popover}>Enter Your Requirements</div>
                 )}
-                {index === 2 && (
-                  <div className={styles.overlayIcons}>
-                    <img
-                      src={SearchImg}
-                      alt="Search Icon"
-                      className={styles.searchIcon}
-                    />
-                    <img
-                      src={FormServiceStep}
-                      alt="Form Icon"
-                      className={styles.formIcon}
-                    />
-                  </div>
-                )}
               </div>
               <div className={styles.textContainer}>
                 <p className={styles.stepTitle}>{step.title}</p>

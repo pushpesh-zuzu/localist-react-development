@@ -3,6 +3,7 @@ import Navbar from "../component/common/navbar/Navbar";
 import Footer from "../component/common/footer/Footer";
 import MetaHelmet from "../component/common/helmet/metaHelmet";
 import { useEffect } from "react";
+import ScrollToTop from "../routes/ScrollToTop";
 
 const pageTitles = {
   "/": "Homepage | Localists",
@@ -28,6 +29,7 @@ const MainLayout = () => {
   }, [title]);
   return (
     <div>
+      <ScrollToTop />
       <Navbar />
       <MetaHelmet title={title} />
       <main style={{ minHeight: "50vh" }}>

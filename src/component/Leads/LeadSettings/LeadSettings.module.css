@@ -137,6 +137,17 @@
 .locationInputService {
   font-weight: 500;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.link {
+  color: inherit;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
 }
 
 .editButton {

@@ -141,6 +141,10 @@
 }
 
 @media screen and (max-width: 667px) {
+  .ctaButton {
+    margin-top: -40px;
+  }
+
   .container {
     gap: 70px;
   }

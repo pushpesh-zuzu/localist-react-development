@@ -19,9 +19,8 @@ import { BASE_IMAGE_URL, showToast } from "../../utils";
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { getuploadImg, infoLoader, changePasswordLoader,profileImageLoader } = useSelector(
-    (state) => state.buyer
-  );
+  const { getuploadImg, infoLoader, changePasswordLoader, profileImageLoader } =
+    useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -126,10 +125,10 @@ const BuyerAccountSettings = () => {
 
   //   setIsModalOpen(false);
   // };
-  
+
   const handleSavePassword = () => {
     const { password, password_confirmation } = formData;
-  
+
     // Validation: Check if fields are empty
     if (!password || !password_confirmation) {
       setFormData({
@@ -138,7 +137,7 @@ const BuyerAccountSettings = () => {
       });
       return;
     }
-  
+
     // Validation: Check if both passwords match
     if (password !== password_confirmation) {
       setFormData({
@@ -147,11 +146,11 @@ const BuyerAccountSettings = () => {
       });
       return;
     }
-  
+
     // Validation: Password strength regex
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]).{8,}$/;
-  
+
     if (!passwordRegex.test(password)) {
       setFormData({
         ...formData,
@@ -160,21 +159,24 @@ const BuyerAccountSettings = () => {
       });
       return;
     }
-  
+
     // If everything is valid, proceed to submit
     const formDataToSend = new FormData();
     formDataToSend.append("password", password);
     formDataToSend.append("password_confirmation", password_confirmation);
-  
+
     dispatch(updatePasswordData(formDataToSend)).then((result) => {
       if (result?.success) {
-        showToast("success", result?.message || "Password updated successfully!");
+        showToast(
+          "success",
+          result?.message || "Password updated successfully!"
+        );
       }
     });
-  
+
     setIsModalOpen(false);
   };
-  
+
   const hanldeRequest = () => {
     navigate("/buyers/create");
   };
@@ -217,24 +219,28 @@ const BuyerAccountSettings = () => {
           <div className={styles.profileImage}>
             <span>
               <>
-            {  profileImageLoader ? <Spin
-                    indicator={<LoadingOutlined spin style={{ color: "blue" }} />}
-                  /> :
-                <img
-                  src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
-                  alt="Profile"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = defaultImage;
-                  }}
-                  style={{
-                    width: "62px",
-                    height: "62px",
-                    borderRadius: "50%",
-                  }}
-                />
-}
+                {profileImageLoader ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "blue" }} />
+                    }
+                  />
+                ) : (
+                  <img
+                    src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
+                    alt="Profile"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = defaultImage;
+                    }}
+                    style={{
+                      width: "62px",
+                      height: "62px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                )}
               </>
             </span>
           </div>
@@ -318,7 +324,12 @@ const BuyerAccountSettings = () => {
             type="text"
             name="phone"
             value={userDetails.phone}
-            onChange={handleChange}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^\d*$/.test(value) && value.length <= 10) {
+                handleChange(e);
+              }
+            }}
             className={styles.inputField}
           />
         </div>

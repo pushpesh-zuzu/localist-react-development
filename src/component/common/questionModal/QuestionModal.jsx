@@ -73,8 +73,7 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      nextStep()
-      
+      nextStep();
     }
   };
 
@@ -148,13 +147,15 @@ const QuestionModal = ({
         )}
 
         <div className={styles.buttonContainer}>
-          <button
-            onClick={handleBack}
-            disabled={currentQuestion === 0}
-            className={styles.backButton}
-          >
-            Back
-          </button>
+          {currentQuestion > 0 && (
+            <button
+              onClick={handleBack}
+              disabled={currentQuestion === 0}
+              className={styles.backButton}
+            >
+              Back
+            </button>
+          )}
           <button
             onClick={handleNext}
             disabled={!selectedOption}

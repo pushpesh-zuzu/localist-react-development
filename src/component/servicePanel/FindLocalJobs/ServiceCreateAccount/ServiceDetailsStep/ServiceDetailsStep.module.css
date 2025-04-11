@@ -98,6 +98,7 @@
   font-weight: 500;
   transition: background 0.3s;
   color: #828282;
+  text-wrap: nowrap;
 }
 
 .activeButton,
