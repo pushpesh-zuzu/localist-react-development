@@ -1,24 +1,41 @@
 import React from "react";
-import { Modal, Button } from "antd";
+import styles from "./RemoveModal.module.css";
 
-const RemoveServiceModal = ({ open, onCancel, onConfirm, loading}) => {
+const RemoveServiceModal = ({
+  open,
+  onCancel,
+  onConfirm,
+  loading,
+  serviceName,
+}) => {
+  if (!open) return null;
+
   return (
-    <Modal
-      open={open}
-      onCancel={onCancel}
-      footer={null}
-      centered
-    >
-      <div style={{ textAlign: "start", padding: "20px 0" }}>
-        <h3>Are you sure you want to remove this service?</h3>
-        <div style={{ marginTop: 24, display: "flex", justifyContent: "end", gap: "12px" }}>
-          <Button onClick={onCancel}>Cancel</Button>
-          <Button danger type="primary" onClick={onConfirm}  loading={loading}>
-            Remove
-          </Button>
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <button className={styles.closeButton} onClick={onCancel}>
+          ×
+        </button>
+        <p className={styles.text}>
+          Are you sure you want to remove{" "}
+          <span className={styles.highlight}>
+            Deep Cleaning Services{serviceName}?
+          </span>
+        </p>
+        <div className={styles.actions}>
+          <button className={styles.cancelBtn} onClick={onCancel}>
+            Cancel
+          </button>
+          <button
+            className={styles.removeBtn}
+            onClick={onConfirm}
+            disabled={loading}
+          >
+            {loading ? "Removing..." : "Remove"}
+          </button>
         </div>
       </div>
-    </Modal>
+    </div>
   );
 };
 

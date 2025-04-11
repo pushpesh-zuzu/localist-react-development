@@ -101,6 +101,11 @@
   font-family: var(--font-Poppins);
 }
 
+.input::placeholder {
+  color: #959595;
+  font-size: 12px;
+}
+
 .divider {
   width: 1px;
   height: 100%;

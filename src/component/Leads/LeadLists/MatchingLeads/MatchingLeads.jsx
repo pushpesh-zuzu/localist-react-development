@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const MatchingLeads = () => {
   const navigate = useNavigate();
   const handleEdit = () => {
-    navigate("/lead-settings");
+    navigate("/leads/settings");
   };
   return (
     <div className={styles.container}>

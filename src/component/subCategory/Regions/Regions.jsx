@@ -33,18 +33,18 @@ const RegionsComponent = () => {
             //     }}
             //   />
             // )}
-             expandIcon={({ isActive }) => (
-                            <img
-                              src={isActive ? arrowIcon : arrowIcon}
-                              alt="Custom Icon"
-                              style={{
-                                width: "17px", 
-                                height: "17px",
-                                transform: isActive ? "rotate(180deg)" : "rotate(0deg)", // Rotate effect
-                                transition: "transform 0.3s ease",
-                              }}
-                            />
-                          )}
+            expandIcon={({ isActive }) => (
+              <img
+                src={isActive ? arrowIcon : arrowIcon}
+                alt="Custom Icon"
+                style={{
+                  width: "17px",
+                  height: "17px",
+                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)", // Rotate effect
+                  transition: "transform 0.3s ease",
+                }}
+              />
+            )}
             expandIconPosition="end"
             className={styles.subcategory_collapse}
           >
