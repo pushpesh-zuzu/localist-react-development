@@ -47,7 +47,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const { userToken } = useSelector((state) => state.auth);
 
   const [locationData, setLocationData] = useState({
-    miles1: "",
+    miles1: "1",
     postcode: "",
   });
 

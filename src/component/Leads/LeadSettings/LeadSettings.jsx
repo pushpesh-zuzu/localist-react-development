@@ -44,7 +44,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   );
   console.log(selectedService, setSelectedService, "selectedService");
   const [locationData, setLocationData] = useState({
-    miles1: "",
+    miles1: "1",
     postcode: "",
   });
 
