@@ -19,7 +19,7 @@ const RemoveServiceModal = ({
         <p className={styles.text}>
           Are you sure you want to remove{" "}
           <span className={styles.highlight}>
-            Deep Cleaning Services{serviceName}?
+        {serviceName} ?
           </span>
         </p>
         <div className={styles.actions}>

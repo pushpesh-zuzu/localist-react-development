@@ -110,7 +110,7 @@ const [selectedServices, setSelectedServices] = useState([]);
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
-
+  
   const handleConfirm = () => {
       
       const serviceIds = selectedServices.join(",");
@@ -185,6 +185,7 @@ const [selectedServices, setSelectedServices] = useState([]);
   const onHandleCancel = () => {
     setShow(false);
   };
+  console.log(selectedService?.name,"selectedServices")
   return (
     <>
       <div className={styles.modal}>
@@ -400,6 +401,7 @@ const [selectedServices, setSelectedServices] = useState([]);
           onCancel={onHandleCancel}
           onConfirm={handleRemove}
           loading={removeLoader}
+          serviceName={selectedService?.name}
         />
       )}
       {
@@ -407,7 +409,10 @@ const [selectedServices, setSelectedServices] = useState([]);
         onClose={() => setIsNextModalOpen(false)}
         onConfirm={handleConfirm}
         selectedServices={selectedServices}
-        setSelectedServices={setSelectedServices}/>
+        setSelectedServices={setSelectedServices}
+      
+        
+        />
       }
     </>
   );

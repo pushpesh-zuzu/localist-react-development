@@ -142,16 +142,19 @@ const getUserType=()=>{
   const userName = userToken?.name || registerData?.name || "";
   
   const userInitial = userName.charAt(0).toUpperCase();
-
+const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tokens
   return (
     <div className={styles.logSwitchContainer}>
       {/* Hamburger Icon */}
-      <div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+   
 
+{
+  showHamburgerIcon?<div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>:  <div style={{marginTop:"4px"}}><img src={searchIcon} alt="" width={18} height={18}/></div>
+}
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
   {getUserType()==1 && (
     <>

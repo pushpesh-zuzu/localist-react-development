@@ -4,7 +4,7 @@ import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getAutoBid } from "../../../../../store/LeadSetting/leadSettingSlice";
+import { getAutoBid, getLocationLead } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
@@ -12,21 +12,23 @@ import { Spin } from "antd";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
-  const { autoBidList,bidListLoader } = useSelector((state) => state.leadSetting);
+  const { autoBidList,bidListLoader,getlocationData } = useSelector((state) => state.leadSetting);
   // const { requestId } = useSelector((state) => state?.buyer);
   const { userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-
-  console.log(autoBidList,"autoBidList")
 const webdesignData = autoBidList?.map((item) => item?.service_name);
+
   useEffect(() => {
     const data = {
       user_id: userToken?.rember_token,
       lead_id: requestId,
     };
     dispatch(getAutoBid(data));
+
   }, [dispatch, userToken?.rember_token, requestId]);
+
+ 
   const handleChangeMyRequest = () => {
     navigate("/buyers/create")
   }
@@ -35,7 +37,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
         <div className={styles.headingTabsWrapper}>
-          <h1 className={styles.heading}>{webdesignData[0]}</h1>
+          <h1 className={styles.heading}>{webdesignData && webdesignData?.length > 0 ? webdesignData[0] : "No Service"}</h1>
           <div className={styles.tabs}>
             <button className={styles.activeTab}>Your matches</button>
             <button className={styles.tab}>Replies</button>

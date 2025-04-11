@@ -190,6 +190,35 @@ const findJobSlice = createSlice({
     },
     setAllServiceList(state, action) {
       state.allServiceList = action.payload;
+    },
+    clearServiceFormData(state,action){
+      state.selectedServiceFormData={
+ 
+          miles1: "1",
+          postcode: null,
+          nation_wide: 0,
+          name: "",
+          email: "",
+          password: "",
+          phone: "",
+          company_name: "",
+          company_size: null,
+          company_sales_team: null,
+          company_website: "",
+          is_company_website: 1,
+          new_jobs: null,
+          social_media: null,
+          address: "",
+          state: "",
+          city: "",
+          zipcode: "",
+          is_zipcode: 1,
+          suite: "",
+          service_id: [],
+          auto_bid: 1,
+          miles2: "1",
+    
+      }
     }
 
   },
@@ -209,6 +238,7 @@ export const {
   setRegisterData,
   setCategoriesListLoader,
   setCategoriesList,
-  setAllServiceList
+  setAllServiceList,
+  clearServiceFormData
 } = findJobSlice.actions;
 export default findJobSlice.reducer;
