@@ -151,6 +151,39 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   };
+  export const editLocationLead = (locationData) => {
+    return async (dispatch) => {
+      dispatch(setleadPreferencesListLoader(true));
+      try {
+       
+        const response = await axiosInstance.post(`users/edit-location`, locationData);
+        if (response) {
+          return response.data;
+        }
+
+      } catch (error) {
+        const errorData = error?.response?.data?.message;
+        console.log("Error Data:", errorData);
+
+  
+        if (errorData && typeof errorData === "object") {
+          Object.values(errorData).forEach((messages) => {
+            if (Array.isArray(messages)) {
+              messages.forEach((msg) => showToast("error", msg));
+            } else {
+              showToast("error", messages);
+            }
+          });
+        } else {
+          showToast("error", errorData || "Something went wrong. Please try again.");
+        }
+
+        return { success: false, error: errorData };
+      } finally {
+        dispatch(setleadPreferencesListLoader(false));
+      }
+    };
+  };
   
   export const getLocationLead = (getlocationData) => {
     return async (dispatch) => {

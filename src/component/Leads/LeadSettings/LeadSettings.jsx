@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
   addServiceLead,
+  editLocationLead,
   getleadPreferencesList,
   getLocationLead,
   leadPreferences,
@@ -45,8 +46,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  console.log(preferenceList, "selectedService");
   const ids = preferenceList?.map(item => item.id)
+  console.log(preferenceList,ids, "selectedService");
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -232,7 +233,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     if (isEditingLocation && editLocationId) {
       // Update location logic — You might need to create an `updateLocationLead` thunk
       dispatch(
-        addLocationLead({ ...locationdata, setvice_id: editLocationId })
+        editLocationLead({ ...locationdata, setvice_id: editLocationId })
       ).then((result) => {
         if (result?.success) {
           const data = { user_id: userToken?.remember_tokens };
@@ -275,7 +276,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const handleRemove = () => {
     const removeData = {
       user_id: userToken?.remember_tokens,
-      service_id: removeModal.service_id,
+      service_id: ids.join(),
     };
   
     dispatch(removeItemLocationData(removeData)).then((result)=> {
