@@ -4,6 +4,7 @@ import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
 import { setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
+import { showToast } from "../../../../../utils";
 
 const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormData, errors }) => {
   const inputRef = useRef(null);
@@ -51,7 +52,7 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
          dispatch ( setFormData({ postcode: postalCode }));
           inputRef.current.value = postalCode; // Update input value
         } else {
-          alert("No PIN code found! Please try again.");
+          showToast("error","No PIN code found! Please try again.")
         }
       });
     };

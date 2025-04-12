@@ -66,7 +66,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
 
       <div className={styles.recommendBar}>
         <span>Recommended:</span> Request replies from your{" "}
-        <strong>top 5 matches</strong> to hear back faster
+        <strong>top matches</strong> to hear back faster
       </div>
 
       {
@@ -94,7 +94,7 @@ const webdesignData = autoBidList?.map((item) => item?.service_name);
                     </h3>
                     <p>
                       <img src={AutoBidLocationIcon} alt="" />
-                      {item?.distance} miles away
+                      {item?.distance ? item?.distance : "0"} miles away
                     </p>
                   </div>
                   <div className={styles.sidebar}>

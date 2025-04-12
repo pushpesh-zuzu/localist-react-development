@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getPopularServiceList, searchService, setSelectedServiceId, setService } from "../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { generateSlug } from "../../../utils";
+import { generateSlug, showToast } from "../../../utils";
 import { questionAnswerData } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
@@ -94,7 +94,7 @@ setPincode(e.target.value)
              setPincode(postalCode);
               inputRef.current.value = postalCode;
             } else {
-              alert("No PIN code found! Please try again.");
+              showToast("error","No PIN code found! Please try again.");
             }
           });
         };
@@ -103,7 +103,7 @@ setPincode(e.target.value)
       }, []);
       const handleGetStarted = () => {
         if (!selectedService) {
-          alert("Please select a service from the suggestions.");
+          showToast("error","Please select a service from the suggestions.");
           return;
         }
       

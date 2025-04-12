@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  pendingLeadData,
   registerUserData,
   searchService,
   setselectedServices,
@@ -19,7 +20,8 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { service, registerLoader, searchServiceLoader, selectedServices } =
+  console.log(formData?.service_id[0],"form")
+  const { service, registerLoader, searchServiceLoader, selectedServices,pendingLead } =
     useSelector((state) => state.findJobs);
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -116,6 +118,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");
         navigate("/settings");
+        dispatch(setService())
       }
     });
   };
@@ -128,10 +131,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
     setShow(false);
   };
   const [leadCount, setLeadCount] = useState(0);
+ 
 
   useEffect(() => {
-    const randomLead = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
-    setLeadCount(randomLead);
+    const serviceId = {
+      service_id: formData?.service_id[0]
+    }
+    dispatch(pendingLeadData(serviceId))
   }, [])
   return (
     <div className={styles.parentContainer}>
@@ -158,7 +164,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
           </p>
           <div className={styles.selectedServices}>
             {selectedServices?.length > 0 &&
-              selectedServices.map((service) => (
+              selectedServices?.map((service) => (
                 <span key={service.id} className={styles.selectedTag}>
                   {service.name}
                   <button
@@ -241,7 +247,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
             </div> */}
             <div className={styles.leadInfo}>
   <h1 className={styles.leadCount}>
-    {leadCount}
+    { pendingLead ? pendingLead : "0"}
   </h1>
   <p className={styles.leadText}>current available leads</p>
 </div>

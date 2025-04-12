@@ -65,6 +65,10 @@ const BuyerAccountSettings = () => {
     }));
   };
   const handleSubmit = () => {
+    if (!/^\d{10}$/.test(userDetails?.phone)) {
+      showToast("error", "Please enter a valid 10-digit phone number.");
+      return;
+    }
     const infoData = {
       name: userDetails.name,
       email: userDetails.email,

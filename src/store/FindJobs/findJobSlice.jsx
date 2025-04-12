@@ -14,8 +14,10 @@ const initialState = {
   selectedServiceId: null,
   selectedServices:[],
   categoriesListLoader:false,
+  pendingLoader:false,
   CategoriesList:[],
   allServiceList:[],
+  pendingLead:[],
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
@@ -141,6 +143,31 @@ export const getAllServiceList = () => {
     }
   };
 };
+
+
+export const pendingLeadData = (pendingData) => {
+  return async (dispatch) => {
+    dispatch(setPendingLeadLoader(true));
+    try {
+      const response = await axiosInstance.post(`users/pending-leads`, pendingData, {
+        headers: {
+          Authorization: null, // or pass a valid token if needed
+        },
+      });
+
+      if (response?.data?.data) {
+        dispatch(setPendingLeadData(response.data.data));
+      }
+    } catch (error) {
+      // Optional: handle error properly
+      // dispatch(setAuthError(error?.response?.data?.message));
+      // console.error("Error fetching pending leads:", error);
+    } finally {
+      dispatch(setPendingLeadLoader(false));
+    }
+  };
+};
+
 const findJobSlice = createSlice({
   name: "findJobs",
   initialState: initialState,
@@ -191,6 +218,12 @@ const findJobSlice = createSlice({
     setAllServiceList(state, action) {
       state.allServiceList = action.payload;
     },
+    setPendingLeadLoader(state,action){
+state.pendingLoader = action.payload;
+    },
+    setPendingLeadData(state,action){
+      state.pendingLead = action.payload
+    },
     clearServiceFormData(state,action){
       state.selectedServiceFormData={
  
@@ -239,6 +272,8 @@ export const {
   setCategoriesListLoader,
   setCategoriesList,
   setAllServiceList,
-  clearServiceFormData
+  clearServiceFormData,
+  setPendingLeadLoader,
+  setPendingLeadData
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

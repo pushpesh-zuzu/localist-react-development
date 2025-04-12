@@ -13,18 +13,25 @@ import {
   serviceesData,
   subMenuData,
 } from "../../../constant/Megamenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
+import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
+import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+
 
 const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
+
   const [mouseHover, setMouseHover] = useState("");
 const {userToken} = useSelector((state)=> state.auth)
-const {registerData } = useSelector(
+const {registerData,popularList,CategoriesList } = useSelector(
     (state) => state.findJobs
   );
    const location = useLocation();
+   const dispatch = useDispatch()
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
 //   const handleRedirectUrl = () => {
@@ -39,6 +46,11 @@ const {registerData } = useSelector(
       
 //     }
 //   };
+console.log(popularList,"popularList")
+useEffect(()=>{
+dispatch(getPopularServiceList())
+dispatch(getCategoriesList())
+},[])
 const handleRedirectUrl = () => {
   const status = registerData?.active_status || userToken?.active_status;
 
@@ -69,6 +81,22 @@ const handleRedirectUrl = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const [visibleCount, setVisibleCount] = useState(5);
+  // const [showAllCategories, setShowAllCategories] = useState(false);
+
+  const handleMoreToggle = () => {
+    if (visibleCount + 5 <= CategoriesList.length) {
+      setVisibleCount(visibleCount + 5); // Show next 5 items
+    } else {
+      setVisibleCount(CategoriesList.length); // Show all items
+    }
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(5); // Reset to show only the first 5 items
+  };
+
+  const visibleItems = CategoriesList.slice(0, visibleCount);
 
   const content = () => {
     return (
@@ -92,7 +120,7 @@ const handleRedirectUrl = () => {
                     <Link to="#">See All</Link>
                   </div>
 
-                  {serviceesData?.map((item, index) => (
+                  {/* {CategoriesList?.map((item, index) => (
                     <div
                       key={index}
                       className={styles.popover_content}
@@ -104,11 +132,14 @@ const handleRedirectUrl = () => {
                     >
                       <span className={styles.text_wrap}>
                         <img
-                          src={
-                            item?.iconhover && mouseHover === index
-                              ? item?.iconhover
-                              : item.icon
-                          }
+                          src={item?.category_icon
+                                                ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                                                : hiring
+                                            }
+                            // item?.iconhover && mouseHover === index
+                            //   ? item?.iconhover
+                            //   : item.icon
+                          
                           width={18}
                           height={18}
                           alt="icon"
@@ -117,7 +148,55 @@ const handleRedirectUrl = () => {
                       </span>
                       <img src={arrowIcon} width={8} alt="arrow" />
                     </div>
-                  ))}
+                  ))} */}
+    {visibleItems.map((item, index) => (
+        <div
+          key={index}
+          className={styles.popover_content}
+          onClick={() => {
+            setShowSubMenu(true);
+            setFilterItems(item.key);
+          }}
+          onMouseEnter={() => setMouseHover(index)}
+          onMouseLeave={() => setMouseHover("")}
+        >
+          <span className={styles.text_wrap}>
+            <img
+              src={
+                item?.category_icon
+                  ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                  : hiring
+              }
+              width={18}
+              height={18}
+              alt="icon"
+            />
+            <Link to="#">{item.name}</Link>
+          </span>
+          <img src={arrowIcon} width={8} alt="arrow" />
+        </div>
+      ))}
+
+      {/* Show More / Show Less Toggle */}
+      {CategoriesList.length > 5 && (
+        <div
+          className={styles.popover_content}
+          style={{ cursor: "pointer", fontWeight: "bold" }}
+          onClick={() => {
+            if (visibleCount >= CategoriesList.length) {
+              setShowAllCategories(false);
+              handleShowLess(); // Reset to show only 5
+            } else {
+              setShowAllCategories(true);
+              handleMoreToggle(); // Show next 5 items
+            }
+          }}
+        >
+          <span className={styles.text_wrap}>
+            {showAllCategories ? "Show Less ▲" : "More ▼"}
+          </span>
+        </div>
+      )}
                 </motion.div>
               ) : (
                 <motion.div
@@ -175,13 +254,20 @@ const handleRedirectUrl = () => {
             >
               <div className={styles.popover_header_inner}>
                 <div className={styles.popover_about_head}>Services</div>
-                {subMenuData?.map((item, index) => (
+                {/* {popularList?.map((item, index) => (
                   <div key={index} className={styles.popover_content}>
                     <Link to={item.path} className={styles.text_wrap}>
-                      <Link to={item?.path}>{item.name}</Link>
+                      <Link to={item?.path}>{item?.name}</Link>
                     </Link>
                   </div>
-                ))}
+                ))} */}
+                {popularList?.slice(0, 5)?.map((item, index) => (
+  <div key={index} className={styles.popover_content}>
+    <Link to={item.path} className={styles.text_wrap}>
+      <Link to={item?.path}>{item?.name}</Link>
+    </Link>
+  </div>
+))}
               </div>
               <div className={styles.popover_header_inner}>
                 <div className={styles.popover_about_head}>
