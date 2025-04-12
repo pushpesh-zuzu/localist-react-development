@@ -6,7 +6,13 @@ import { setSelectedServiceFormData } from "../../../../../store/FindJobs/findJo
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../../../utils";
 
-const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormData, errors }) => {
+const ServiceLocationStep = ({
+  nextStep,
+  handleInputChange,
+  formData,
+  setFormData,
+  errors,
+}) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -24,47 +30,51 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
         initAutocomplete();
       }
     };
-  
+
     // Initialize Google Autocomplete
     const initAutocomplete = () => {
       if (!inputRef.current) return;
-  
-      const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-        types: ["geocode"],
-        componentRestrictions: { country: "IN" }, // Restrict to India
-      });
-  
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          types: ["geocode"],
+          componentRestrictions: { country: "IN" }, // Restrict to India
+        }
+      );
+
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
-  
+
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-  
+
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
-  
+
           // ✅ Update Input Field with Selected Postal Code
-         dispatch ( setFormData({ postcode: postalCode }));
+          dispatch(setFormData({ postcode: postalCode }));
           inputRef.current.value = postalCode; // Update input value
         } else {
-          showToast("error","No PIN code found! Please try again.")
+          showToast("error", "No PIN code found! Please try again.");
         }
       });
     };
-  
+
     loadGoogleMapsScript();
-  }, [setFormData,formData]);
-  
+  }, [setFormData, formData]);
 
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Where would you like to see leads from?</h2>
+        <h2 className={styles.heading}>
+          Where would you like to see leads from?
+        </h2>
         <p className={styles.subheading}>
           Tell us the area you cover so we can show you leads for your location
         </p>
@@ -75,7 +85,9 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
             <div className={styles.inputWrapper}>
               <span className={styles.fromText}>Miles</span>
               <select
-                className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""}`}
+                className={`${styles.dropdown} ${
+                  errors.miles1 ? styles.errorBorder : ""
+                }`}
                 name="miles1"
                 value={formData.miles1 || ""}
                 onChange={handleInputChange}
@@ -88,7 +100,9 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
                 <option>50</option>
                 <option>100</option>
               </select>
-              {errors.miles1 && <p className={styles.errorText}>{errors.miles1}</p>}
+              {errors.miles1 && (
+                <p className={styles.errorText}>{errors.miles1}</p>
+              )}
             </div>
             <div className={styles.inputWrapper}>
               <span className={styles.fromText}>From</span>
@@ -96,13 +110,17 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
               <input
                 type="text"
                 placeholder="Enter your postcode"
-                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""}`}
+                className={`${styles.input} ${
+                  errors.postcode ? styles.errorBorder : ""
+                }`}
                 ref={inputRef}
                 name="postcode"
-                value={formData.postcode  || ""}
+                value={formData.postcode || ""}
                 onChange={handleInputChange ? handleInputChange : () => {}}
               />
-              {errors.postcode && <p className={styles.errorText}>{errors.postcode}</p>}
+              {errors.postcode && (
+                <p className={styles.errorText}>{errors.postcode}</p>
+              )}
             </div>
           </div>
           <label className={styles.checkboxLabel}>
@@ -118,7 +136,8 @@ const ServiceLocationStep = ({ nextStep, handleInputChange, formData, setFormDat
 
           <div className={styles.footer}>
             <p className={styles.infoText}>
-              <img src={iIcon} alt="" /> You can change your location at any time
+              <img src={iIcon} alt="" /> You can change your location at any
+              time
             </p>
             <button className={styles.nextButton} onClick={nextStep}>
               Next

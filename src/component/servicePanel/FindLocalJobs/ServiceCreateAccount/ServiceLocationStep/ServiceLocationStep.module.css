@@ -114,7 +114,7 @@
 }
 
 .nextButton {
-  background-color:#000000;
+  background-color: #000000;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: white;
   border: none;
@@ -138,17 +138,14 @@
 
 .checkboxInput {
   display: none;
-  
 }
 
 .checkboxCustom {
   width: 24px;
   height: 24px;
   border: 1px solid #d9d9d9;
-  margin-right: 10px;
   display: inline-block;
   position: relative;
-
 }
 
 .checkboxInput:checked + .checkboxCustom::after {

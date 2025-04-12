@@ -116,7 +116,7 @@ label {
 }
 
 /* Checkbox ka default appearance hide karo (optional) */
-input[type="checkbox"] {
+.scrollable input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   background-color: white;
@@ -129,13 +129,13 @@ input[type="checkbox"] {
 }
 
 /* Jab checkbox checked ho tab background color change ho */
-input[type="checkbox"]:checked {
+.scrollable input[type="checkbox"]:checked {
   background-color: var(--primary-color); /* ya koi bhi color */
   border-color: var(--primary-color);
 }
 
 /* Checkmark banana (optional but stylish banane ke liye) */
-input[type="checkbox"]:checked::after {
+.scrollable input[type="checkbox"]:checked::after {
   content: "✔";
   color: white;
   position: absolute;
