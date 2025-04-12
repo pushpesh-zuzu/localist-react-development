@@ -189,7 +189,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
     if (isEditingLocation && editLocationId) {
       dispatch(
-        addLocationLead({ ...locationdata, location_id: editLocationId }) // ✅ Correct field name
+        editLocationLead({ ...locationdata, location_id: editLocationId }) // ✅ Correct field name
       ).then((result) => {
         if (result?.success) {
           const data = { user_id: userToken?.remember_tokens };
