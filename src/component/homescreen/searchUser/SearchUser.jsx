@@ -25,6 +25,9 @@ const SearchProfessionals = ({nextStep}) => {
 
 const handleClose = () => {
   setShow(false)
+  setInput("")
+  setPincode("")
+  setSelectedService("")
 }
   useEffect(() => {
     dispatch(getPopularServiceList());
@@ -108,8 +111,8 @@ setPincode(e.target.value)
       
         dispatch(questionAnswerData({ service_id: id }));
         setSelectedServiceId({ id, name });
-      setInput("")
-      setPincode("")
+      // setInput("")
+      // setPincode("")
         setShow(true);
       };
       
