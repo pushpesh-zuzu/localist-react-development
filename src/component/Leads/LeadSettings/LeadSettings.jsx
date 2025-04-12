@@ -45,7 +45,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  console.log(selectedService, setSelectedService, "selectedService");
+  console.log(preferenceList, "selectedService");
+  const ids = preferenceList?.map(item => item.id)
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -157,6 +158,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     show: false,
     service_id: null,
   })
+  console.log(removeModal?.service_id,"ll")
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const handleNext = () => {
@@ -281,7 +283,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         showToast("success", result?.message || "Remove Location Successfully!");
         setRemoveModal({ show: false, service_id: null });
         const data = {
-          user_type:userToken?.remeber_tokens
+          user_type:userToken?.remember_tokens
         }
         dispatch(getLocationLead(data))
       }
@@ -352,7 +354,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 </p>
                 <p className={styles.locationInputService}>
                   <span className={styles.link}>View on map</span> |{" "}
-                  <span className={styles.link} onClick={()=>handleRemoveOpen(item?.service_id)}>Remove</span> |{" "}
+                  <span className={styles.link} onClick={()=>handleRemoveOpen(item?.total_services)}>Remove</span> |{" "}
                   <span className={styles.link}>
                     {item?.total_services} services
                   </span>

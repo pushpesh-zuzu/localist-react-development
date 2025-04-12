@@ -14,7 +14,7 @@ import {
   subMenuData,
 } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
+import { getAllServiceList, getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 
@@ -23,45 +23,61 @@ const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
-  const [showAllCategories, setShowAllCategories] = useState(false);
+  // const [showAllCategories, setShowAllCategories] = useState(false);
 
   const [mouseHover, setMouseHover] = useState("");
-const {userToken} = useSelector((state)=> state.auth)
-const {registerData,popularList,CategoriesList } = useSelector(
+  const { userToken } = useSelector((state) => state.auth)
+  const { registerData, popularList, CategoriesList, allServiceList } = useSelector(
     (state) => state.findJobs
   );
-   const location = useLocation();
-   const dispatch = useDispatch()
+  const location = useLocation();
+  const dispatch = useDispatch()
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
-//   const handleRedirectUrl = () => {
-//     if (userToken?.active_status  == 1 ) {
-//       navigate("/settings");
-//     }
-//     else if(userToken?.active_status  == 2){
-// navigate("/buyers/create")
-//     }
-//     else {
-//       navigate("/")
-      
-//     }
-//   };
-console.log(popularList,"popularList")
-useEffect(()=>{
-dispatch(getPopularServiceList())
-dispatch(getCategoriesList())
-},[])
-const handleRedirectUrl = () => {
-  const status = registerData?.active_status || userToken?.active_status;
 
-  if (status == 1) {
-    navigate("/settings");
-  } else if (status == 2) {
-    navigate("/buyers/create");
-  } else {
-    navigate("/");
-  }
-};
+  const [visibleCount, setVisibleCount] = useState(5); // Start with 1
+  const totalItems = allServiceList?.length || 0;
+
+  const handleToggle = () => {
+    if (visibleCount >= totalItems) {
+      // Decrease by 1 until min 1
+      setVisibleCount(prev => Math.max(5, prev - 5));
+    } else {
+      // Increase by 1 until max totalItems
+      setVisibleCount(prev => Math.min(prev + 5, totalItems));
+    }
+  };
+
+  const isAllVisible = visibleCount >= totalItems;
+  //   const handleRedirectUrl = () => {
+  //     if (userToken?.active_status  == 1 ) {
+  //       navigate("/settings");
+  //     }
+  //     else if(userToken?.active_status  == 2){
+  // navigate("/buyers/create")
+  //     }
+  //     else {
+  //       navigate("/")
+
+  //     }
+  //   };
+  console.log(allServiceList, "popularList")
+  useEffect(() => {
+    dispatch(getPopularServiceList())
+    dispatch(getCategoriesList())
+    dispatch(getAllServiceList())
+  }, [])
+  const handleRedirectUrl = () => {
+    const status = registerData?.active_status || userToken?.active_status;
+
+    if (status == 1) {
+      navigate("/settings");
+    } else if (status == 2) {
+      navigate("/buyers/create");
+    } else {
+      navigate("/");
+    }
+  };
 
   const [placement, setPlacement] = useState("bottomLeft");
 
@@ -81,22 +97,6 @@ const handleRedirectUrl = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const [visibleCount, setVisibleCount] = useState(5);
-  // const [showAllCategories, setShowAllCategories] = useState(false);
-
-  const handleMoreToggle = () => {
-    if (visibleCount + 5 <= CategoriesList.length) {
-      setVisibleCount(visibleCount + 5); // Show next 5 items
-    } else {
-      setVisibleCount(CategoriesList.length); // Show all items
-    }
-  };
-
-  const handleShowLess = () => {
-    setVisibleCount(5); // Reset to show only the first 5 items
-  };
-
-  const visibleItems = CategoriesList.slice(0, visibleCount);
 
   const content = () => {
     return (
@@ -149,54 +149,42 @@ const handleRedirectUrl = () => {
                       <img src={arrowIcon} width={8} alt="arrow" />
                     </div>
                   ))} */}
-    {visibleItems.map((item, index) => (
-        <div
-          key={index}
-          className={styles.popover_content}
-          onClick={() => {
-            setShowSubMenu(true);
-            setFilterItems(item.key);
-          }}
-          onMouseEnter={() => setMouseHover(index)}
-          onMouseLeave={() => setMouseHover("")}
-        >
-          <span className={styles.text_wrap}>
-            <img
-              src={
-                item?.category_icon
-                  ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                  : hiring
-              }
-              width={18}
-              height={18}
-              alt="icon"
-            />
-            <Link to="#">{item.name}</Link>
-          </span>
-          <img src={arrowIcon} width={8} alt="arrow" />
-        </div>
-      ))}
+                  {allServiceList?.slice(0, visibleCount).map((item, index) => (
+                    <div
+                      key={index}
+                      className={styles.popover_content}
+                      onClick={() => {
+                        setShowSubMenu(true);
+                        setFilterItems(item.name);
+                      }}
+                      onMouseEnter={() => setMouseHover(index)}
+                      onMouseLeave={() => setMouseHover("")}
+                    >
+                      <span className={styles.text_wrap}>
+                        <img
+                          src={item?.category_icon ? `${BASE_URL_IMAGE}/${item?.category_icon}` : hiring}
+                          width={18}
+                          height={18}
+                          alt="icon"
+                        />
+                        <Link to="#">{item.name}</Link>
+                      </span>
+                      <img src={arrowIcon} width={8} alt="arrow" />
+                    </div>
+                  ))}
 
-      {/* Show More / Show Less Toggle */}
-      {CategoriesList.length > 5 && (
-        <div
-          className={styles.popover_content}
-          style={{ cursor: "pointer", fontWeight: "bold" }}
-          onClick={() => {
-            if (visibleCount >= CategoriesList.length) {
-              setShowAllCategories(false);
-              handleShowLess(); // Reset to show only 5
-            } else {
-              setShowAllCategories(true);
-              handleMoreToggle(); // Show next 5 items
-            }
-          }}
-        >
-          <span className={styles.text_wrap}>
-            {showAllCategories ? "Show Less ▲" : "More ▼"}
-          </span>
-        </div>
-      )}
+                  {/* See More / Show Less Button */}
+                  {totalItems > 5 && (
+                    <div
+                      className={styles.popover_content}
+                      style={{ cursor: 'pointer', fontWeight: 'bold' }}
+                      onClick={handleToggle}
+                    >
+                      <span className={styles.text_wrap}>
+                        {isAllVisible ? 'Show Less ▲' : 'See More ▼'}
+                      </span>
+                    </div>
+                  )}
                 </motion.div>
               ) : (
                 <motion.div
@@ -218,30 +206,64 @@ const handleRedirectUrl = () => {
                     <span>Services</span>
                     <Link to="#">See All</Link>
                   </div>
-                  {allSubMenuData
-                    ?.filter((item) => item?.key == filterItems)
+                  {allServiceList
+                    ?.filter((item) => item?.name == filterItems) // Filter by the selected category key
                     .map((item, index) => (
-                      <div
-                        key={index}
-                        className={styles.popover_content}
-                        onMouseEnter={() => setMouseHover(index)}
-                        onMouseLeave={() => setMouseHover("")}
-                      >
-                        <span className={styles.text_wrap}>
-                          {item.icon && (
-                            <img
-                              src={
-                                item?.iconhover && mouseHover === index
-                                  ? item?.iconhover
-                                  : item.icon
-                              }
-                              width={18}
-                              height={18}
-                              alt="icon"
-                            />
-                          )}
-                          <Link to={item?.path}>{item.name}</Link>
-                        </span>
+                      <div key={index}>
+                        <div
+                          className={styles.popover_content}
+                          onMouseEnter={() => setMouseHover(index)}
+                          onMouseLeave={() => setMouseHover("")}
+                        >
+                          <span className={styles.text_wrap}>
+                            {item.icon && (
+                              <img
+                                src={
+                                  item?.iconhover && mouseHover === index
+                                    ? item?.iconhover
+                                    : item.icon
+                                }
+                                width={18}
+                                height={18}
+                                alt="icon"
+                              />
+                            )}
+                            {/* <Link to={item?.path}>{item.name}</Link> */}
+                          </span>
+                        </div>
+
+                        {/* Display subcategories here */}
+                        {/* {item.subcategory?.map((sub, subIndex) => (
+                          <>
+                        const slug = item.name.toLowerCase().replace(/\s+/g, '-');
+                          <div
+                          key={subIndex}
+                          className={styles.popover_content}
+                          onMouseEnter={() => setMouseHover(subIndex)}
+                          onMouseLeave={() => setMouseHover("")}
+                          >
+                            <span className={styles.text_wrap}>
+                              <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
+                            </span>
+                          </div>
+                          </>
+                        ))} */}
+                        {item.subcategory?.map((sub, subIndex) => {
+  const slug = sub.name.toLowerCase().replace(/\s+/g, '-'); // slug based on subcategory name
+
+  return (
+    <div
+      key={subIndex}
+      className={styles.popover_content}
+      onMouseEnter={() => setMouseHover(subIndex)}
+      onMouseLeave={() => setMouseHover("")}
+    >
+      <span className={styles.text_wrap}>
+        <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
+      </span>
+    </div>
+  );
+})}
                       </div>
                     ))}
                 </motion.div>
@@ -261,13 +283,25 @@ const handleRedirectUrl = () => {
                     </Link>
                   </div>
                 ))} */}
-                {popularList?.slice(0, 5)?.map((item, index) => (
-  <div key={index} className={styles.popover_content}>
-    <Link to={item.path} className={styles.text_wrap}>
-      <Link to={item?.path}>{item?.name}</Link>
-    </Link>
-  </div>
-))}
+                {/* {popularList?.slice(0, 5)?.map((item, index) => (
+                  <div key={index} className={styles.popover_content}>
+                    <Link to={item.path} className={styles.text_wrap}>
+                      <Link to={`${/category}`}>{item?.name}</Link>
+                    </Link>
+                  </div>
+                ))} */}
+                {popularList?.slice(0, 5)?.map((item, index) => {
+  const slug = item.name.toLowerCase().replace(/\s+/g, '-');
+
+  return (
+    <div key={index} className={styles.popover_content}>
+      <Link to={`/category/${slug}`} className={styles.text_wrap}>
+        {/* {item?.name} */}
+        <Link to={`/category/${slug}`}>{item?.name}</Link>
+      </Link>
+    </div>
+  );
+})}
               </div>
               <div className={styles.popover_header_inner}>
                 <div className={styles.popover_about_head}>
@@ -276,7 +310,7 @@ const handleRedirectUrl = () => {
                 {otherMenuData?.map((item, index) => (
                   <div key={index} className={styles.popover_content}>
                     <Link to={item.path} className={styles.text_wrap}>
-                      <Link to={item?.path}>{item.name}</Link>
+                      <Link to={"/category"}>{item.name}</Link>
                     </Link>
                   </div>
                 ))}
