@@ -15,12 +15,13 @@ const LeadsCards = () => {
   const { leadRequestList, leadRequestLoader } = useSelector(
     (state) => state.leadSetting
   );
+  const { userToken } = useSelector((state)=> state.auth)
   const data =  leadRequestList?.length
-  console.log(leadRequestList,data,"leadRequestList")
-  
-
   useEffect(() => {
-    dispatch(getLeadRequestList());
+    const leadRequestData = {
+      user_id:userToken?.remember_tokens
+    }
+    dispatch(getLeadRequestList(leadRequestData));
   }, []);
 
   return (

@@ -195,6 +195,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           setIsLocationModalOpen(false);
           setIsEditingLocation(false);
           setEditLocationId(null);
+          setLocationData({
+            miles1: "1",
+            postcode: "",
+          })
         }
       });
     } else {
@@ -204,6 +208,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           dispatch(getLocationLead(data));
           dispatch(getleadPreferencesList(data));
           setIsLocationModalOpen(false);
+          setLocationData({
+            miles1: "1",
+            postcode: "",
+          })
         }
       });
     }
@@ -490,7 +498,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           onCancel={onHandleCancel}
           onConfirm={handleRemove}
           loading={removeLocationLoader}
-          serviceName={selectedService?.name}
+          serviceName={"This Location"}
+      
         />
       )}
         {isNextModalOpen && (

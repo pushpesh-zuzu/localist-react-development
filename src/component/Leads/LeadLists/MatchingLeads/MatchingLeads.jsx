@@ -6,7 +6,7 @@ import FilterIcon from "../../../../assets/Images/Leads/FilterIcon.svg";
 import EditIcon from "../../../../assets/Images/Leads/EditIconWhite.svg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getLeadRequestList, getLocationLead } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getLocationLead } from "../../../../store/LeadSetting/leadSettingSlice";
 
 const MatchingLeads = () => {
   const navigate = useNavigate();

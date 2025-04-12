@@ -69,11 +69,11 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
-  export const getLeadRequestList = () => {
+  export const getLeadRequestList = (leadRequestData) => {
     return async (dispatch) => {
       dispatch(setLeadListLoader(true));
       try {
-        const response = await axiosInstance.get(`users/get-lead-request`);
+        const response = await axiosInstance.post(`users/get-lead-request`,leadRequestData);
         if (response) {
           dispatch(setLeadRequestListData(response?.data?.data));
         }

@@ -9,6 +9,7 @@ const RemoveServiceModal = ({
   onConfirm,
   loading,
   serviceName,
+
 }) => {
   if (!open) return null;
 
@@ -21,7 +22,7 @@ const RemoveServiceModal = ({
         <p className={styles.text}>
           Are you sure you want to remove{" "}
           <span className={styles.highlight}>
-        {serviceName} ?
+        {serviceName} ? 
           </span>
         </p>
         <div className={styles.actions}>
