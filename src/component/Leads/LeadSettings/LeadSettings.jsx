@@ -47,7 +47,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     (state) => state.findJobs
   );
   const ids = preferenceList?.map(item => item.id)
-  console.log(preferenceList,ids, "selectedService");
+  const locationRemoveId = getlocationData?.map(item => item?.user_service_id)
+  const postCodeData = getlocationData?.map(item => item?.postcode)
+  console.log(getlocationData,"selectedService");
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -162,6 +164,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   console.log(removeModal?.service_id,"ll")
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [previousPostcode, setPreviousPostcode] = useState("")
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
@@ -185,6 +188,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       miles: locationData.miles1,
       postcode: locationData.postcode,
       service_id: serviceIds,
+      postcode_old:previousPostcode
     };
 
     if (isEditingLocation && editLocationId) {
@@ -264,8 +268,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setEditLocationId(location.id);
     setIsEditingLocation(true);
     setIsLocationModalOpen(true);
+    setPreviousPostcode(location.postcode)
   };
   const handleRemoveOpen = (id) => {
+    console.log(id,"id")
     setRemoveModal({ show: true, service_id: id });
   };
   
@@ -276,7 +282,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const handleRemove = () => {
     const removeData = {
       user_id: userToken?.remember_tokens,
-      service_id: ids.join(),
+      // service_id: ids.join(),
+      postcode:removeModal?.service_id,
+      // user_service_id:locationRemoveId
     };
   
     dispatch(removeItemLocationData(removeData)).then((result)=> {
@@ -355,7 +363,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 </p>
                 <p className={styles.locationInputService}>
                   <span className={styles.link}>View on map</span> |{" "}
-                  <span className={styles.link} onClick={()=>handleRemoveOpen(item?.total_services)}>Remove</span> |{" "}
+                  <span className={styles.link} onClick={()=>handleRemoveOpen(item?.postcode)}>Remove</span> |{" "}
                   <span className={styles.link}>
                     {item?.total_services} services
                   </span>
