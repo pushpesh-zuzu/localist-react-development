@@ -12,7 +12,7 @@
   color: white;
   font-size: 40px;
   font-weight: 700;
-  padding: 10px 30px;
+  padding: 8px 30px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -105,6 +105,7 @@
 
   .feature {
     font-size: 14px;
+    text-align: start;
     max-width: 280px;
     width: 100%;
     justify-content: flex-start;
