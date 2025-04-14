@@ -20,9 +20,14 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(formData?.service_id[0],"form")
-  const { service, registerLoader, searchServiceLoader, selectedServices,pendingLead } =
-    useSelector((state) => state.findJobs);
+  console.log(formData?.service_id[0], "form");
+  const {
+    service,
+    registerLoader,
+    searchServiceLoader,
+    selectedServices,
+    pendingLead,
+  } = useSelector((state) => state.findJobs);
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
@@ -118,7 +123,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");
         navigate("/settings");
-        dispatch(setService())
+        dispatch(setService());
       }
     });
   };
@@ -131,14 +136,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
     setShow(false);
   };
   const [leadCount, setLeadCount] = useState(0);
- 
 
   useEffect(() => {
     const serviceId = {
-      service_id: formData?.service_id[0]
-    }
-    dispatch(pendingLeadData(serviceId))
-  }, [])
+      service_id: formData?.service_id[0],
+    };
+    dispatch(pendingLeadData(serviceId));
+  }, []);
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -246,11 +250,11 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
               <p className={styles.leadText}>current available leads</p>
             </div> */}
             <div className={styles.leadInfo}>
-  <h1 className={styles.leadCount}>
-    { pendingLead ? pendingLead : "0"}
-  </h1>
-  <p className={styles.leadText}>current available leads</p>
-</div>
+              <h1 className={styles.leadCount}>
+                {pendingLead ? pendingLead : "0"}
+              </h1>
+              <p className={styles.leadText}>current available leads</p>
+            </div>
           </div>
           <div className={styles.buttonContainer}>
             <button
@@ -274,12 +278,9 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
             <h2 className={styles.heading}>
-              Are you sure that you want to Register?
+              Are you sure that you want <br /> to Register?
             </h2>
-            <p className={styles.description}>
-              We're asking a few questions so we can find you the right pros,
-              and send you quotes fast and free!
-            </p>
+
             <div className={styles.buttonGroup}>
               <button className={styles.backButton} onClick={handleCloseModal}>
                 Back
