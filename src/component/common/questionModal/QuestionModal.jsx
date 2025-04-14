@@ -20,7 +20,7 @@ const QuestionModal = ({
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
 
@@ -32,11 +32,14 @@ const QuestionModal = ({
 
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
-      const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || "";
-      setSelectedOption(
-        savedAnswer.toLowerCase() === "other" ? "other" : savedAnswer
-      );
-      setOtherText(savedAnswer.toLowerCase() === "other" ? savedAnswer : "");
+      const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
+
+      const savedArray =
+        typeof savedAnswer === "string" ? savedAnswer.split(",").map(a => a.trim()) : savedAnswer;
+
+      setSelectedOption(savedArray);
+      const otherVal = savedArray.find((ans) => ans.toLowerCase() !== "yes" && ans.toLowerCase() !== "no" && ans.toLowerCase() !== "maybe");
+      setOtherText(savedArray.includes("other") ? otherVal || "" : "");
     }
   }, [currentQuestion, buyerRequest, questions]);
 
@@ -44,30 +47,46 @@ const QuestionModal = ({
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
 
   const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
+    const { value, checked } = e.target;
+    let updatedOptions = [...selectedOption];
+
+    if (checked) {
+      updatedOptions.push(value);
+    } else {
+      updatedOptions = updatedOptions.filter((opt) => opt !== value);
+    }
+
+    setSelectedOption(updatedOptions);
     setError("");
   };
 
   const handleNext = () => {
-    if (!selectedOption) {
-      setError("Please select an option.");
+    if (selectedOption.length === 0) {
+      setError("Please select at least one option.");
       return;
     }
-    if (selectedOption.toLowerCase() === "other" && !otherText.trim()) {
+
+    if (
+      selectedOption.includes("other") &&
+      (!otherText.trim() || otherText.trim().toLowerCase() === "other")
+    ) {
       setError("Please enter a value for 'Other' option.");
       return;
     }
 
+    const finalAnswer = selectedOption.map((opt) =>
+      opt.toLowerCase() === "other" ? otherText : opt
+    );
+
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
-      ans:
-        selectedOption.toLowerCase() === "other" ? otherText : selectedOption,
+      ans: finalAnswer.join(", "), // Or just `finalAnswer` if API expects array
     };
 
     const previousAnswers = buyerRequest?.questions || [];
     const updatedAnswers = [...previousAnswers];
-
     updatedAnswers[currentQuestion] = updatedAnswer;
+
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
     if (currentQuestion < totalQuestions - 1) {
@@ -121,10 +140,10 @@ const QuestionModal = ({
                 .map((option, index) => (
                   <label key={index} className={styles.option}>
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="surveyOption"
                       value={option.trim()}
-                      checked={selectedOption === option.trim()}
+                      checked={selectedOption.includes(option.trim())}
                       onChange={handleOptionChange}
                     />
                     {option.trim()}
@@ -132,7 +151,7 @@ const QuestionModal = ({
                 ))}
             </div>
 
-            {selectedOption.toLowerCase() === "other" && (
+            {selectedOption.includes("other") && (
               <input
                 type="text"
                 placeholder="Please Enter..."
@@ -158,7 +177,7 @@ const QuestionModal = ({
           )}
           <button
             onClick={handleNext}
-            disabled={!selectedOption}
+            disabled={loading}
             className={styles.nextButton}
           >
             {currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
