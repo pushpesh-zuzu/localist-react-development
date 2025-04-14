@@ -92,13 +92,13 @@ const ServiceLocationStep = ({
                 value={formData.miles1 || ""}
                 onChange={handleInputChange}
               >
-                <option>1</option>
-                <option>2</option>
-                <option>5</option>
-                <option>10</option>
-                <option>30</option>
-                <option>50</option>
-                <option>100</option>
+                <option>1 mile</option>
+                <option>2 miles</option>
+                <option>5 miles</option>
+                <option>10 miles</option>
+                <option>30 miles</option>
+                <option>50 miles</option>
+                <option>100 miles</option>
               </select>
               {errors.miles1 && (
                 <p className={styles.errorText}>{errors.miles1}</p>
