@@ -23,6 +23,7 @@ import { Button, Modal, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
+import LocationModal from "../LocationModal";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
@@ -354,7 +355,7 @@ const [selectedServices, setSelectedServices] = useState([]);
           </div>
         </div>
       </Modal> */}
-      <Modal
+      {/* <Modal
         title={"Add a New Location"}
         open={isLocationModalOpen}
         footer={[
@@ -404,7 +405,20 @@ const [selectedServices, setSelectedServices] = useState([]);
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
+      <LocationModal
+        open={isLocationModalOpen}
+        // isEditing={isEditingLocation}  
+        locationData={locationData}
+        onChange={handleLocationChange}
+        onCancel={() => {
+          setIsLocationModalOpen(false);
+          setIsEditingLocation(false);
+          setEditLocationId(null);
+          setLocationData({ miles1: "", postcode: "" });
+        }}
+        onNext={handleNext}
+      />
       {show && (
         <RemoveServiceModal
           open={show}

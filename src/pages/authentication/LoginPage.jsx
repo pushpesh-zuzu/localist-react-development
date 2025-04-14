@@ -25,7 +25,7 @@ const LoginPage = () => {
         if (result?.success) {
           showToast("success", result?.message || "Login successful!");
           if (result?.data?.active_status == 1) {
-            navigate("/settings");
+            navigate("/leads");
           } else if (result?.data?.active_status == 2) {
             navigate("/buyers/create");
           }

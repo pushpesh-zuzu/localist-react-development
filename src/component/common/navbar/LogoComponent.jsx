@@ -71,7 +71,7 @@ const LogoComponent = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
     if (status == 1) {
-      navigate("/settings");
+      navigate("/leads");
     } else if (status == 2) {
       navigate("/buyers/create");
     } else {

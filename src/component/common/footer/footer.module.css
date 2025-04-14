@@ -91,6 +91,7 @@
   height: 38px;
   cursor: pointer;
   margin-bottom: 20px;
+  text-wrap: nowrap;
 }
 
 .contactSection button:hover {

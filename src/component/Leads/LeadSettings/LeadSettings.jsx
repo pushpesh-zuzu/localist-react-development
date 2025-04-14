@@ -23,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
 import { showToast } from "../../../utils";
+import LocationModal from "../LocationModal";
+import AddServiceModal from "../LeadAddServiceModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -418,7 +420,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <button className={styles.viewLeads} onClick={handleView}>
           View leads
         </button>
-        <Modal
+        {/* <Modal
           title="Add a New Service"
           open={isModalOpen}
           onCancel={() => setIsModalOpen(false)}
@@ -458,8 +460,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
               </div>
             )}
           </div>
-        </Modal>
-        <Modal
+        </Modal> */}
+        {/* <Modal
           title={isEditingLocation ? "Edit Location" : "Add a New Location"}
           open={isLocationModalOpen}
           onCancel={() => {
@@ -519,7 +521,35 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
               </div>
             </div>
           </div>
-        </Modal>
+        </Modal> */}
+
+<AddServiceModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        input={input}
+        setInput={setInput}
+        isDropdownOpen={isDropdownOpen}
+        setIsDropdownOpen={setIsDropdownOpen}
+        service={service}
+        searchServiceLoader={searchServiceLoader}
+        handleSelectService={handleSelectService}
+        handleSubmitData={handleSubmitData}
+      />
+
+<LocationModal
+  open={isLocationModalOpen}
+  isEditing={isEditingLocation}
+  locationData={locationData}
+  onChange={handleLocationChange}
+  onCancel={() => {
+    setIsLocationModalOpen(false);
+    setIsEditingLocation(false);
+    setEditLocationId(null);
+    setLocationData({ miles1: "", postcode: "" });
+  }}
+  onNext={handleNext}
+/>
+
         {removeModal?.show && (
           <RemoveServiceModal
             open={removeModal?.show}
