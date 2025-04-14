@@ -294,6 +294,10 @@
   vertical-align: middle;
 }
 
+.replyBtn:hover {
+  background-color: #0096c4;
+}
+
 @media (max-width: 1200px) {
   .header {
     flex-direction: column;

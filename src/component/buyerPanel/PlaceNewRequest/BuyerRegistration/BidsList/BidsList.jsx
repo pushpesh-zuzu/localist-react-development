@@ -92,7 +92,7 @@ const BidsList = ({ previousStep }) => {
           {" "}
           {autoBidList?.length === 0 ? (
             <div className={styles.noBidWrapper}>
-              <h1 className={styles.noBidText}>No leads available</h1>
+              <h1 className={styles.noBidText}>No seller available</h1>
             </div>
           ) : (
             autoBidList?.map((item) => (

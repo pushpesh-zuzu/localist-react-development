@@ -70,10 +70,10 @@ const DescribeYourRequest = ({ onClose }) => {
   const handleSubmit = () => {
     let hasError = false;
 
-    if (text.trim() === "") {
-      setTextError(true);
-      hasError = true;
-    }
+    // if (text.trim() === "") {
+    //   setTextError(true);
+    //   hasError = true;
+    // }
 
     // if (files.length === 0) {
     //   setFileError(true);
@@ -93,8 +93,8 @@ const DescribeYourRequest = ({ onClose }) => {
         showToast("success", result?.message || "Create Request successfully!");
       }
       onClose();
-      dispatch(clearSetbuyerRequestData())
-      dispatch(setQualityData())
+      dispatch(clearSetbuyerRequestData());
+      dispatch(setQualityData());
       navigate(`/bids-list/${requestId}`);
     });
 
