@@ -102,7 +102,7 @@ const getUserType=()=>{
       
         // Navigate based on previous user type
         if (updatedUser?.active_status === 1) {
-          navigate("/settings");
+          navigate("/leads");
         } else {
           navigate("/buyers/create");
         }
