@@ -198,6 +198,8 @@ const BuyerAccountSettings = () => {
     };
   }, [isModalOpen]);
 
+  console.log(userDetails, "userDetails");
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Account settings</h2>

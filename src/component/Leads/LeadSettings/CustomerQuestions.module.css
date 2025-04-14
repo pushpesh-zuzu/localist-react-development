@@ -201,6 +201,11 @@
   font-size: 18px;
 }
 
+/* .removeService:hover {
+  background-color: #0096c4;
+  border-radius: 4px;
+} */
+
 .removeService img {
   margin-right: 4.71px;
 }
@@ -213,6 +218,10 @@
   border-radius: 3px;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   cursor: pointer;
+}
+
+.saveButton:hover {
+  background-color: #000000cf;
 }
 
 .customerQuestionsWrapper {

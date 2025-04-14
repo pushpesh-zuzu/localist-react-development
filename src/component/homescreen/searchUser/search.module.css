@@ -148,6 +148,10 @@
   border: none;
 }
 
+.searchButton:hover {
+  background: #0096c4;
+}
+
 .searchButtonPhone {
   display: none;
 }

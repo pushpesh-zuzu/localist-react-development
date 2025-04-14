@@ -126,6 +126,10 @@
   margin-top: 15px;
 }
 
+.nextButton:hover {
+  background-color: #000000cf;
+}
+
 .checkboxLabel {
   display: flex;
   align-items: center;
