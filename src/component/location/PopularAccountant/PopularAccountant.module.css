@@ -144,6 +144,10 @@
   font-weight: 700;
 }
 
+.profileButton:hover {
+  background-color: #0096c4;
+}
+
 /* .button:hover {
   background-color: #1070c0;
 } */

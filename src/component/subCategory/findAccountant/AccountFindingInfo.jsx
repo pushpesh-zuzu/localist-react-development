@@ -4,7 +4,8 @@ const AccountFindingInfo = () => {
   return (
     <div className={styles.findAccountInfoContainer}>
       <p className={styles.breadcrumb}>
-        Business / Financial and Accounting / General Accounting / <span>Accounting</span>
+        Business / Financial and Accounting / General Accounting /{" "}
+        <span>Accounting</span>
       </p>
 
       <div className={styles.infoContainer}>

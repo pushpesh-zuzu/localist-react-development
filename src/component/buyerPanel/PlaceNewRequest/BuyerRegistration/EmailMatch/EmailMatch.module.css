@@ -87,6 +87,10 @@
   cursor: pointer;
 }
 
+.backButton:hover {
+  background-color: #000000cf;
+}
+
 .nextButton {
   background: var(--primary-color);
   color: #ffffff;
@@ -98,6 +102,10 @@
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
+}
+
+.nextButton:hover {
+  background-color: #0096c4;
 }
 
 @media (max-width: 768px) {

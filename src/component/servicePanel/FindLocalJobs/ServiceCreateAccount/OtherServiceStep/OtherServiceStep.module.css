@@ -116,7 +116,6 @@
   align-items: center;
   gap: 5px;
   margin-bottom: 39px;
-  
 }
 
 .checkbox {
@@ -298,6 +297,10 @@
   vertical-align: middle;
 }
 
+.backButton:hover {
+  background-color: #000000cf;
+}
+
 .nextButton {
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
@@ -309,6 +312,10 @@
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
+}
+
+.nextButton:hover {
+  background-color: #0096c4;
 }
 
 /* 1024px (Tablets, Small Laptops) */
@@ -456,4 +463,8 @@
   font-size: 20px;
   min-width: 98px;
   vertical-align: middle;
+}
+
+.continueButton:hover {
+  background-color: #0096c4;
 }

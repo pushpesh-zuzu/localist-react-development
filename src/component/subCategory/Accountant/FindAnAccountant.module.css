@@ -80,6 +80,10 @@
   cursor: pointer;
 }
 
+.findAnAccountant_button:hover {
+  background-color: #0096c4;
+}
+
 @media (max-width: 1280px) {
   .findAnAccountant_container {
     padding: 54px 41px;

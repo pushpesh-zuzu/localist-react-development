@@ -46,6 +46,10 @@
   border-radius: 5px;
 }
 
+.quoteButton:hover {
+  background: #000000cf;
+}
+
 .workstepContainer {
   display: flex;
   justify-content: center;

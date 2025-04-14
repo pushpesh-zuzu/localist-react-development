@@ -2,7 +2,7 @@
   padding: 29px 91px;
 }
 
-.popularcityContainer>div {
+.popularcityContainer > div {
   display: flex;
   flex-direction: column;
   gap: 23px;
@@ -72,6 +72,11 @@
   text-align: center;
   vertical-align: middle;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.cityNameBtn button:hover {
+  background-color: #0096c4;
 }
 
 @media (max-width: 1280px) {
@@ -99,7 +104,7 @@
     padding: 29px 20px;
   }
 
-  .popularcityContainer>div {
+  .popularcityContainer > div {
     gap: 22px;
   }
 

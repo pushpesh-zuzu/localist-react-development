@@ -180,6 +180,10 @@
   cursor: pointer;
 }
 
+.modalSaveButton:hover {
+  background: #0096c4;
+}
+
 .passwordField {
   position: relative;
   display: flex;
@@ -220,6 +224,10 @@
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.saveButton:hover {
+  background: #0096c4;
 }
 
 .modalCancelButton {

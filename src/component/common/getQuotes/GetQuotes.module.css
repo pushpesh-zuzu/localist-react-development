@@ -18,6 +18,10 @@
   font-family: "poppins" !important;
 }
 
+.button:hover {
+  background-color: #0096c4;
+}
+
 .text {
   margin-top: 10px;
   font-weight: 400;

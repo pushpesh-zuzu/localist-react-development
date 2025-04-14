@@ -108,6 +108,10 @@
   vertical-align: middle;
 }
 
+.backButton:hover {
+  background-color: #000000cf;
+}
+
 .nextButton {
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
@@ -121,6 +125,11 @@
   vertical-align: middle;
   margin-left: auto;
 }
+
+.nextButton:hover {
+  background-color: #0096c4;
+}
+
 .input {
   width: -webkit-fill-available;
   padding: 12.5px;

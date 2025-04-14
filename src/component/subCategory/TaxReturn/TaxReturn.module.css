@@ -75,6 +75,10 @@
   margin-top: 112px;
 }
 
+.taxReturn_content_button:hover {
+  background-color: #0096c4;
+}
+
 .taxReturn_content_button_bottom {
   padding: 11px 31px;
   font-size: 18px;

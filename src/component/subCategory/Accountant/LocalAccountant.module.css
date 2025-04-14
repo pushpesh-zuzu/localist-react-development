@@ -45,6 +45,10 @@
   cursor: pointer;
 }
 
+.localAccountant_button:hover {
+  background-color: #0096c4;
+}
+
 /* Media screen */
 
 @media (max-width: 1280px) {

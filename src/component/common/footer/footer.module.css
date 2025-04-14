@@ -93,6 +93,10 @@
   margin-bottom: 20px;
 }
 
+.contactSection button:hover {
+  background: #0096c4;
+}
+
 .footerDesc {
   max-width: 250px;
   color: #ffffff !important;

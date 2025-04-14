@@ -77,6 +77,10 @@
   gap: 5px;
 }
 
+.editButton:hover {
+  background-color: #000000cf;
+}
+
 @media (max-width: 910px) {
   .heading {
     font-size: 22px;
