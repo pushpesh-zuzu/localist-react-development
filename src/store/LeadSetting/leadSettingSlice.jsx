@@ -15,7 +15,8 @@ const initialState = {
     autoBidList:[],
     removeLoader:false,
     bidListLoader:false,
-    removeLocationLoader:false
+    removeLocationLoader:false,
+    serviceWiseData:[]
 };
 
 
@@ -248,6 +249,23 @@ export const getleadPreferencesList = (serviceId) => {
         dispatch(setRemoveLocationListLoader(false));
       }
     };
+  } 
+  export const getServiceWiseLocationData = (serviceWiseLocationData) => {
+    return async (dispatch) => {
+      dispatch(setRemoveLocationListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-service-wise-location`, serviceWiseLocationData);
+  
+        if (response) {
+          dispatch(setServiceWiseData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setRemoveLocationListLoader(false));
+      }
+    };
   }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
@@ -288,11 +306,14 @@ const leadSettingSlice = createSlice({
       },
       setRemoveLocationListLoader(state,action) {
         state.removeLocationLoader = action.payload
+      },
+      setServiceWiseData(state,action){
+        state.serviceWiseData = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

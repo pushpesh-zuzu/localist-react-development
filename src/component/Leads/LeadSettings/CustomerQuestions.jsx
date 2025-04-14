@@ -13,6 +13,7 @@ import {
   addLocationLead,
   getleadPreferencesList,
   getLocationLead,
+  getServiceWiseLocationData,
   leadPreferences,
   leadPreferencesData,
   removeItemData,
@@ -30,7 +31,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [show, setShow] = useState(false);
-
+console.log(selectedService?.id,"selectedService")
   useEffect(() => {
     if (selectedService) {
       setIsRemoved(false);
@@ -42,6 +43,7 @@ const CustomerQuestions = ({ selectedService }) => {
     leadPreferenceLoader,
     getlocationData,
     removeLoader,
+    serviceWiseData
   } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
@@ -50,7 +52,8 @@ const CustomerQuestions = ({ selectedService }) => {
     miles1: "1",
     postcode: "",
   });
-
+    
+    console.log(serviceWiseData,"serviceWiseData")
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -62,6 +65,13 @@ const CustomerQuestions = ({ selectedService }) => {
       setSelectedAnswers(initialAnswers);
     }
   }, [leadPreferenceData]);
+  useEffect(()=>{
+const locationWise = {
+  user_id:userToken?.remember_tokens,
+  service_id: selectedService?.id
+}
+dispatch(getServiceWiseLocationData(locationWise))
+  },[selectedService?.id])
 
   const handleSubmitData = () => {
     const questionIds = Object.keys(selectedAnswers);
@@ -275,7 +285,7 @@ const [selectedServices, setSelectedServices] = useState([]);
           </div>
 
           <div className={styles.ranger}>
-            {getlocationData?.map((item, idx) => (
+            {serviceWiseData?.map((item, idx) => (
               <div className={styles.range} key={idx}>
                 <span>
                   <img src={TickIcon} alt="" /> Within

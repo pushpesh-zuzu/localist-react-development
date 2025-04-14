@@ -7,7 +7,7 @@ import CustomerQuestions from "./LeadSettings/CustomerQuestions";
 const LeadSetting = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isRemoved, setIsRemoved] = useState(false); // ✅ NEW STATE
-
+console.log(selectedService,"selectedService")
   const handleServiceClick = (service) => {
     setSelectedService(service);
     setIsRemoved(false); // ✅ RESET REMOVE FLAG

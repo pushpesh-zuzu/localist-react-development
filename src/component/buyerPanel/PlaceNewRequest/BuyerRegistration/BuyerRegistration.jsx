@@ -19,7 +19,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
   const { adminToken } = useSelector((state) => state.auth);
-  const { registerData } = useSelector((state) => state.findJobs);
+  const { registerData,registerLoader } = useSelector((state) => state.findJobs);
 
   const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
 
@@ -114,6 +114,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
             onClose={handleClose}
             formData={buyerRequest}
             email={email}
+            // loading={registerLoader}
           />
         )}
 

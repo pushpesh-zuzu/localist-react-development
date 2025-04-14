@@ -3,7 +3,7 @@ import styles from "./NameMatch.module.css";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { registerUserData } from "../../../../../store/FindJobs/findJobSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
   const [name, setName] = useState("");
@@ -11,6 +11,10 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+   const { registerLoader } = useSelector(
+      (state) => state.findJobs
+    );
+    console.log(registerLoader,"registerLoader")
   const handleNameChange = (e) => {
     setName(e.target.value);
     setError(false);
@@ -28,8 +32,12 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
     formData.append("active_status", 2);
     formData.append("user_type", 2);
 
-    dispatch(registerUserData(formData));
-    nextStep();
+    dispatch(registerUserData(formData)).then((result)=> {
+      if(result?.success) {
+
+        nextStep();
+      }
+    });
     // setLoading(true);
     // setTimeout(() => {
     //   setLoading(false);
@@ -82,9 +90,9 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
             <button
               className={styles.nextButton}
               onClick={handleSubmit}
-              disabled={loading}
+              disabled={registerLoader}
             >
-              {loading ? (
+              {registerLoader ? (
                 <Spin
                   indicator={
                     <LoadingOutlined spin style={{ color: "white" }} />
