@@ -24,10 +24,11 @@ import { LoadingOutlined } from "@ant-design/icons";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
@@ -194,6 +195,9 @@ const CustomerQuestions = ({ selectedService }) => {
   const onHandleCancel = () => {
     setShow(false);
   };
+  const handleRedirctSuggest = () => {
+    navigate("/feedback/questions")   
+  }
   console.log(selectedService?.name, "selectedServices");
   return (
     <>
@@ -266,9 +270,9 @@ const CustomerQuestions = ({ selectedService }) => {
 
           <div className={styles.suggestion}>
             <span>Something missing?</span>
-            <Link to="/feedback/questions" className={styles.suggestLink}>
+            <div className={styles.suggestLink} onClick={handleRedirctSuggest}>
               Suggest a question
-            </Link>
+            </div>
           </div>
 
           <div

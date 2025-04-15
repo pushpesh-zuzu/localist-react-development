@@ -82,6 +82,9 @@ const Footer = () => {
       window.scrollTo(0, 0);
     }
   };
+  const handleHelpCenter = () => {
+    navigate("/help-center")
+  }
   
 
   return (
@@ -161,7 +164,7 @@ const Footer = () => {
               >
                 Join as a Professional
               </li>
-              <li>Help Centre</li>
+              <li onClick={handleHelpCenter}>Help Centre</li>
               <li>Mobile App</li>
             </ul>
           </div>

@@ -267,6 +267,10 @@
   .addLocation {
     font-size: 16px;
   }
+  .suggestLink {
+    color: var(--primary-color);
+    cursor: pointer;
+  }
 
   /* .footer {
     flex-direction: column;

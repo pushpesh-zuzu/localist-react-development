@@ -184,7 +184,7 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
       </div>
       <div
         className={`${styles.navItem} ${location.pathname === "/help" ? styles.active : ""}`}
-        onClick={() => handleNavigation("#")}
+        onClick={() => handleNavigation("/help-center")}
       >
         Help
       </div>

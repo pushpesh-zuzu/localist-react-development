@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./GrowthSteps.module.css";
 import { GrowthStepsData } from "../../../constant/ServicePanel";
+import { useNavigate } from "react-router-dom";
 
 const GrowthSteps = () => {
+  const navigate = useNavigate()
+  
   return (
     <>
       <div className={styles.growContainer}>
@@ -23,7 +26,7 @@ const GrowthSteps = () => {
                   <li>{item.Description2}</li>
                   <li>{item.Description3}</li>
                 </ul>
-                <button className={styles.button}>{item.button}</button>
+                <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button>
               </div>
             ))}
           </div>
