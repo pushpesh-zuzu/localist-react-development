@@ -24,6 +24,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
+import { Link } from "react-router-dom";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [show, setShow] = useState(false);
-console.log(selectedService?.id,"selectedService")
+  console.log(selectedService?.id, "selectedService");
   useEffect(() => {
     if (selectedService) {
       setIsRemoved(false);
@@ -44,7 +45,7 @@ console.log(selectedService?.id,"selectedService")
     leadPreferenceLoader,
     getlocationData,
     removeLoader,
-    serviceWiseData
+    serviceWiseData,
   } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
@@ -53,8 +54,8 @@ console.log(selectedService?.id,"selectedService")
     miles1: "1",
     postcode: "",
   });
-    
-    console.log(serviceWiseData,"serviceWiseData")
+
+  console.log(serviceWiseData, "serviceWiseData");
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -66,13 +67,13 @@ console.log(selectedService?.id,"selectedService")
       setSelectedAnswers(initialAnswers);
     }
   }, [leadPreferenceData]);
-  useEffect(()=>{
-const locationWise = {
-  user_id:userToken?.remember_tokens,
-  service_id: selectedService?.id
-}
-dispatch(getServiceWiseLocationData(locationWise))
-  },[selectedService?.id])
+  useEffect(() => {
+    const locationWise = {
+      user_id: userToken?.remember_tokens,
+      service_id: selectedService?.id,
+    };
+    dispatch(getServiceWiseLocationData(locationWise));
+  }, [selectedService?.id]);
 
   const handleSubmitData = () => {
     const questionIds = Object.keys(selectedAnswers);
@@ -99,21 +100,21 @@ dispatch(getServiceWiseLocationData(locationWise))
     });
   };
 
-const [isNextModalOpen,setIsNextModalOpen] = useState(false)
-const [selectedServices, setSelectedServices] = useState([]);
+  const [isNextModalOpen, setIsNextModalOpen] = useState(false);
+  const [selectedServices, setSelectedServices] = useState([]);
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
       message.warning("Please fill in both fields");
       return;
     }
-  
+
     // Close current modal
     setIsLocationModalOpen(false);
-  
+
     // Open next modal
     setIsNextModalOpen(true); // make sure you have this state defined
-  
+
     // You can pass data as props or store in shared state
   };
 
@@ -121,31 +122,28 @@ const [selectedServices, setSelectedServices] = useState([]);
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
-  
+
   const handleConfirm = () => {
-      
-      const serviceIds = selectedServices.join(",");
-  
-    
-      const locationdata = {
-        user_id: userToken?.remember_tokens,
-        miles: locationData.miles1,
-        postcode: locationData.postcode,
-        service_id: serviceIds,
-      };
-    
-        dispatch(addLocationLead(locationdata)).then((result) => {
-          if (result?.success) {
-            const data = { user_id: userToken?.remember_tokens };
-            dispatch(getLocationLead(data));
-            dispatch(getleadPreferencesList(data));
-            setIsLocationModalOpen(false);
-          }
-        });
-      
-    
-      setIsNextModalOpen(false);
+    const serviceIds = selectedServices.join(",");
+
+    const locationdata = {
+      user_id: userToken?.remember_tokens,
+      miles: locationData.miles1,
+      postcode: locationData.postcode,
+      service_id: serviceIds,
     };
+
+    dispatch(addLocationLead(locationdata)).then((result) => {
+      if (result?.success) {
+        const data = { user_id: userToken?.remember_tokens };
+        dispatch(getLocationLead(data));
+        dispatch(getleadPreferencesList(data));
+        setIsLocationModalOpen(false);
+      }
+    });
+
+    setIsNextModalOpen(false);
+  };
   const handleLocationSubmit = () => {
     const data = {
       user_id: userToken?.remember_tokens,
@@ -196,7 +194,7 @@ const [selectedServices, setSelectedServices] = useState([]);
   const onHandleCancel = () => {
     setShow(false);
   };
-  console.log(selectedService?.name,"selectedServices")
+  console.log(selectedService?.name, "selectedServices");
   return (
     <>
       <div className={styles.modal}>
@@ -268,9 +266,9 @@ const [selectedServices, setSelectedServices] = useState([]);
 
           <div className={styles.suggestion}>
             <span>Something missing?</span>
-            <a href="#" className={styles.suggestLink}>
+            <Link to="/feedback/questions" className={styles.suggestLink}>
               Suggest a question
-            </a>
+            </Link>
           </div>
 
           <div
@@ -408,7 +406,7 @@ const [selectedServices, setSelectedServices] = useState([]);
       </Modal> */}
       <LocationModal
         open={isLocationModalOpen}
-        // isEditing={isEditingLocation}  
+        // isEditing={isEditingLocation}
         locationData={locationData}
         onChange={handleLocationChange}
         onCancel={() => {
@@ -428,16 +426,15 @@ const [selectedServices, setSelectedServices] = useState([]);
           serviceName={selectedService?.name}
         />
       )}
-      {
-        isNextModalOpen && <ServiceSelectionModal  isOpen={isNextModalOpen}
-        onClose={() => setIsNextModalOpen(false)}
-        onConfirm={handleConfirm}
-        selectedServices={selectedServices}
-        setSelectedServices={setSelectedServices}
-      
-        
+      {isNextModalOpen && (
+        <ServiceSelectionModal
+          isOpen={isNextModalOpen}
+          onClose={() => setIsNextModalOpen(false)}
+          onConfirm={handleConfirm}
+          selectedServices={selectedServices}
+          setSelectedServices={setSelectedServices}
         />
-      }
+      )}
     </>
   );
 };

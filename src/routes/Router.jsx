@@ -18,10 +18,12 @@ import BuyerNotification from "../component/buyerPanel/buyerNotification/BuyerNo
 import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
 import Leads from "../component/Leads/Leads";
 import Settings from "../component/settings/Settings";
-
 import LeadSetting from "../component/Leads/LeadSetting";
 import BidsList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BidsList/BidsList";
 import ProtectedLogin from "./ProtectedLogin";
+import HelpCenterPage from "../pages/HelpCenterPage";
+import SuggestQuestions from "../component/Leads/LeadSettings/SuggestQuestions/SuggestQuestions";
+import PricingPage from "../pages/PricingPage";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +73,9 @@ const router = createBrowserRouter([
       },
       { path: "/leads/settings", element: <LeadSetting /> },
       { path: "/bids-list/:requestId", element: <BidsList /> },
+      { path: "/help-center", element: <HelpCenterPage /> },
+      { path: "/pricing", element: <PricingPage /> },
+      { path: "/feedback/questions", element: <SuggestQuestions /> },
 
       { path: "*", element: <NotFound /> },
     ],
