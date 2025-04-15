@@ -75,6 +75,7 @@
   font-weight: 600;
   font-size: 1.3rem;
   line-height: 32px;
+  cursor: pointer;
 }
 
 .descriptionIcon {
@@ -93,6 +94,7 @@
   object-fit: cover;
   position: relative;
   width: 60%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1100px) {

@@ -12,12 +12,17 @@ const pageTitles = {
   "/sub-category": "Sub Categories | Localists",
   "/location": "Locations | Localists",
   "/how-it-works": "How It Works | Localists",
-  "/sellers/create": "Create Seller Account | Localists",
+  "/sellers/create/": "Create Seller Account | Localists",
   "/buyers/create": "Create Buyer Account | Localists",
-  "/account/setting": "Buyer Account Settings | Localists",
+  "/account/setting": "Account Settings | Localists",
   "/user/notification": "Buyer Notifications | Localists",
   "/privacy-policy": "Privacy Policy | Localists",
   "/dashboard": "Dashboard | Localists",
+  "/leads" : "Leads | Localists",
+  "/settings" : "Setting | Localists",
+ "/leads/settings" : "Lead Setting | Locallist" ,
+ 
+  
 };
 
 const MainLayout = () => {

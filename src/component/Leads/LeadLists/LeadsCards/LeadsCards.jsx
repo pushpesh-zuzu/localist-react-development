@@ -115,9 +115,9 @@ const LeadsCards = () => {
       </div>
     ))}
 </div>
-<p>
+{/* <p>
                         <strong>Starting:</strong> In the next month
-                      </p>
+                      </p> */}
 </div>
 
                   {/* Right Section - Lead Purchase */}

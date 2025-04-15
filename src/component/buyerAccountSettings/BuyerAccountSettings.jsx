@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import styles from "./BuyerAccountSettings.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import defaultImage from "../../assets/Images/DefaultProfileImage.svg";
+import Webcam from "react-webcam"; // Add this import
 
 import {
   updatePasswordData,
@@ -23,15 +24,18 @@ const BuyerAccountSettings = () => {
     useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const webcamRef = useRef(null); // Add webcam reference
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     phone: "",
     profile_image: "",
   });
+
   useEffect(() => {
     dispatch(updateProfileData());
   }, [dispatch]);
+
   useEffect(() => {
     if (Array.isArray(getuploadImg) && getuploadImg.length > 0) {
       const userData = getuploadImg[0];
@@ -43,7 +47,6 @@ const BuyerAccountSettings = () => {
       });
     }
   }, [getuploadImg]);
-  console.log(userToken?.active_status, "token");
 
   // Handle file upload
   const handleFileUpload = (event) => {
@@ -56,6 +59,33 @@ const BuyerAccountSettings = () => {
     }
   };
 
+  // Handle camera capture
+  const capturePhoto = () => {
+    if (webcamRef.current) {
+      const imageSrc = webcamRef.current.getScreenshot();
+      if (imageSrc) {
+        // Convert base64 to file
+        const byteString = atob(imageSrc.split(",")[1]);
+        const mimeString = imageSrc.split(",")[0].split(":")[1].split(";")[0];
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+          ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], { type: mimeString });
+        const file = new File([blob], "camera-photo.jpg", {
+          type: mimeString,
+        });
+
+        // Create form data and dispatch
+        const formData = new FormData();
+        formData.append("image_file", file);
+        dispatch(updateProfileImageData(formData));
+        setIsCameraOpen(false);
+      }
+    }
+  };
+
   // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +94,7 @@ const BuyerAccountSettings = () => {
       [name]: value,
     }));
   };
+
   const handleSubmit = () => {
     if (!/^\d{10}$/.test(userDetails?.phone)) {
       showToast("error", "Please enter a valid 10-digit phone number.");
@@ -83,6 +114,7 @@ const BuyerAccountSettings = () => {
       }
     });
   };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newPasswordVisible, setNewPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -96,39 +128,6 @@ const BuyerAccountSettings = () => {
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
   };
-
-  // const handleSavePassword = () => {
-  //   if (!formData.password || !formData.password_confirmation) {
-  //     setFormData({
-  //       ...formData,
-  //       error: "Please enter password.",
-  //     });
-  //     return;
-  //   }
-  //   if (formData.password !== formData.password_confirmation) {
-  //     setFormData({
-  //       ...formData,
-  //       error: "New password and confirm password must match.",
-  //     });
-  //     return;
-  //   }
-  //   const formDataToSend = new FormData();
-  //   formDataToSend.append("password", formData.password);
-  //   formDataToSend.append(
-  //     "password_confirmation",
-  //     formData.password_confirmation
-  //   );
-  //   dispatch(updatePasswordData(formDataToSend)).then((result) => {
-  //     if (result?.success) {
-  //       showToast(
-  //         "success",
-  //         result?.message || "Password Update successfully!"
-  //       );
-  //     }
-  //   });
-
-  //   setIsModalOpen(false);
-  // };
 
   const handleSavePassword = () => {
     const { password, password_confirmation } = formData;
@@ -186,7 +185,7 @@ const BuyerAccountSettings = () => {
   };
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isModalOpen || isCameraOpen) {
       document.body.style.overflow = "hidden";
       window.scroll(0, 0);
     } else {
@@ -196,9 +195,13 @@ const BuyerAccountSettings = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [isModalOpen]);
+  }, [isModalOpen, isCameraOpen]);
 
-  console.log(userDetails, "userDetails");
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "environment" // Use rear camera if available
+  };
 
   return (
     <div className={styles.container}>
@@ -260,53 +263,40 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-            <label className={styles.uploadButton}>
+            <button 
+              className={styles.uploadButton} 
+              onClick={() => setIsCameraOpen(true)}
+            >
               Take Photo
-              <input
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={handleFileUpload}
-                style={{ display: "none" }}
-              />
-            </label>
+            </button>
           </div>
         </div>
+        
+        {/* Camera Modal */}
         {isCameraOpen && (
           <div className={styles.modalOverlay}>
             <div className={styles.modal}>
-              <Camera
-                isImageMirror={false}
-                idealFacingMode="environment"
-                onTakePhoto={(dataUri) => {
-                  const byteString = atob(dataUri.split(",")[1]);
-                  const mimeString = dataUri
-                    .split(",")[0]
-                    .split(":")[1]
-                    .split(";")[0];
-                  const ab = new ArrayBuffer(byteString.length);
-                  const ia = new Uint8Array(ab);
-                  for (let i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                  }
-                  const blob = new Blob([ab], { type: mimeString });
-                  const file = new File([blob], "camera-photo.jpg", {
-                    type: mimeString,
-                  });
-
-                  const formData = new FormData();
-                  formData.append("image_file", file);
-                  dispatch(updateProfileImageData(formData));
-                  setIsCameraOpen(false);
-                }}
-                onCameraStop={() => setIsCameraOpen(false)}
-              />
+              <div className={styles.cameraContainer}>
+                <Webcam
+                  audio={false}
+                  ref={webcamRef}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={videoConstraints}
+                  style={{ width: '100%' }}
+                />
+              </div>
               <div className={styles.saveButtonWrapperModal}>
                 <button
                   className={styles.modalCancelButton}
                   onClick={() => setIsCameraOpen(false)}
                 >
                   Cancel
+                </button>
+                <button
+                  className={styles.modalSaveButton}
+                  onClick={capturePhoto}
+                >
+                  Capture Photo
                 </button>
               </div>
             </div>
@@ -444,7 +434,7 @@ const BuyerAccountSettings = () => {
             <div className={styles.saveButtonWrapperModal}>
               <button
                 className={styles.modalCancelButton}
-                onClick={() => setIsModalOpen(false)} // Modal close on Cancel
+                onClick={() => setIsModalOpen(false)}
               >
                 Cancel
               </button>

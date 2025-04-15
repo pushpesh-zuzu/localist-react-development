@@ -10,7 +10,7 @@ const ServicePanel = () => {
       <FindLocalJobs />
       <GrowthSteps />
       <CustomerSuccessStories />
-      <RatedGreat />
+      {/* <RatedGreat /> */}
     </>
   );
 };
