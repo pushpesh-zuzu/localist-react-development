@@ -158,7 +158,7 @@ const Footer = () => {
               >
                 How it works
               </li>
-              <li>Pricing</li>
+              <li onClick={()=> navigate("/pricing")}>Pricing</li>
               <li
                 onClick={handleJoinAsProfessional}
               >
