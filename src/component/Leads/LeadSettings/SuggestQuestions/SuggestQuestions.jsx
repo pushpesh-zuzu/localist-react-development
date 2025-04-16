@@ -15,7 +15,9 @@ const SuggestQuestions = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Are you sure that you want to leave?</h2>
       <p className={styles.subheading}>
-        We're asking a few questions so we can find you the right pros, <br/> and send you quotes fast and free!
+        We're asking a few questions so we can find you the right pros,{" "}
+        <br className={styles.mobileLineBreak} /> and send you quotes fast and
+        free!
       </p>
 
       <div className={styles.cardWrapper}>
