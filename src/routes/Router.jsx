@@ -24,6 +24,9 @@ import ProtectedLogin from "./ProtectedLogin";
 import HelpCenterPage from "../pages/HelpCenterPage";
 import SuggestQuestions from "../component/Leads/LeadSettings/SuggestQuestions/SuggestQuestions";
 import PricingPage from "../pages/PricingPage";
+import NewQuestion from "../component/Leads/LeadSettings/SuggestQuestions/NewQuestion/NewQuestion";
+import EditQuestion from "../component/Leads/LeadSettings/SuggestQuestions/EditQuestion/EditQuestion";
+import RemoveQuestion from "../component/Leads/LeadSettings/SuggestQuestions/RemoveQuestion/RemoveQuestion";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +79,9 @@ const router = createBrowserRouter([
       { path: "/help-center", element: <HelpCenterPage /> },
       { path: "/pricing", element: <PricingPage /> },
       { path: "/feedback/questions", element: <SuggestQuestions /> },
+      { path: "/feedback/questions/new", element: <NewQuestion /> },
+      { path: "/feedback/questions/edit", element: <EditQuestion /> },
+      { path: "/feedback/questions/remove", element: <RemoveQuestion /> },
 
       { path: "*", element: <NotFound /> },
     ],
