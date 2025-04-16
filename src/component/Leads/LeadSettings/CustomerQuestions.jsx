@@ -28,7 +28,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const CustomerQuestions = ({ selectedService }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [openQuestionId, setOpenQuestionId] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
@@ -196,9 +196,9 @@ const CustomerQuestions = ({ selectedService }) => {
     setShow(false);
   };
   const handleRedirctSuggest = () => {
-    navigate("/feedback/questions")   
-  }
-  console.log(selectedService?.name, "selectedServices");
+    navigate(`/feedback/questions?${selectedService?.id}`);
+  };
+  console.log(selectedService?.id, "selectedServices");
   return (
     <>
       <div className={styles.modal}>

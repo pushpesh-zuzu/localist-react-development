@@ -11,17 +11,17 @@ const faqData = [
   {
     question: "Are follow-up messages extra?",
     answer:
-      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your Bark account using Messenger.",
+      "No, they’re free. We only charge a small one-off fee for you to respond to a lead. Any further messages or contact you have with the customer are completely free.",
   },
   {
     question: "Do Bark credits expire?",
     answer:
-      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your Bark account using Messenger.",
+      "All Credits are valid for 12 months from the date of purchase. For more information please see our Terms and Conditions",
   },
   {
     question: "Are there any hidden costs?",
     answer:
-      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your Bark account using Messenger.",
+      "No, we don’t believe in hidden costs. And we don’t charge commission either. You simply pay a one-off fee to respond to a lead. After that, 100% of the money you make from the job is yours to keep.",
   },
 ];
 
@@ -40,7 +40,12 @@ const PricingFAQ = () => {
       <div className={styles.faqList}>
         {faqData.map((item, index) => (
           <div key={index} className={styles.faqItem}>
-            <div className={styles.question} onClick={() => toggleFAQ(index)}>
+            <div
+              className={
+                openIndex === index ? styles.blueQuestion : styles.question
+              }
+              onClick={() => toggleFAQ(index)}
+            >
               <strong>{item.question}</strong>
               {openIndex === index ? (
                 <UpOutlined className={styles.icon} />

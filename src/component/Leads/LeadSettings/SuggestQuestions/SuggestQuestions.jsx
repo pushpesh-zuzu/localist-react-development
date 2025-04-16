@@ -1,28 +1,45 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./SuggestQuestions.module.css";
 import union from "../../../../assets/Images/SuggestQuestion/union.svg";
 import editIcon from "../../../../assets/Images/SuggestQuestion/editIcon.svg";
 import deleteIcon from "../../../../assets/Images/SuggestQuestion/deleteIcon.svg";
 
 const SuggestQuestions = () => {
+  const navigate = useNavigate();
+
   const cards = [
-    { icon: union, label: "Suggest a new question" },
-    { icon: editIcon, label: "Edit a current question" },
-    { icon: deleteIcon, label: "Suggest a question to remove" },
+    {
+      icon: union,
+      label: "Suggest a new question",
+      path: "/feedback/questions/new",
+    },
+    {
+      icon: editIcon,
+      label: "Edit a current question",
+      path: "/feedback/questions/edit",
+    },
+    {
+      icon: deleteIcon,
+      label: "Suggest a question to remove",
+      path: "/feedback/questions/remove",
+    },
   ];
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Are you sure that you want to leave?</h2>
+      <h2 className={styles.heading}>Branding & Brand Management</h2>
       <p className={styles.subheading}>
-        We're asking a few questions so we can find you the right pros,{" "}
-        <br className={styles.mobileLineBreak} /> and send you quotes fast and
-        free!
+        Are there any questions you'd like to see added, edited or removed?
       </p>
 
       <div className={styles.cardWrapper}>
         {cards.map((card, index) => (
-          <div key={index} className={styles.card}>
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() => navigate(card.path)}
+          >
             <div className={styles.iconWrapper}>
               <img src={card.icon} alt="icon" />
             </div>

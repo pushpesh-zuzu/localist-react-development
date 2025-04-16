@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+/* Card layout */
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5fafd;
+  padding: 2rem;
+  border-radius: 16px;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Alternate layout for every 2nd card */
+.reverse {
+  flex-direction: row-reverse;
+  background-color: #ffffff;
+}
+
+/* Image section */
+.imageSection {
+  flex: 1;
+  text-align: center;
+}
+
+.imageSection img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Text section */
+.textSection {
+  flex: 2;
+}
+
+.textSection h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
+}
+
+.textSection p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.textSection a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .card,
+  .reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .textSection h3 {
+    font-size: 1.5rem;
+  }
+
+  .textSection p {
+    font-size: 0.95rem;
+  }
+
+  .imageSection img {
+    max-width: 250px;
+  }
+}
