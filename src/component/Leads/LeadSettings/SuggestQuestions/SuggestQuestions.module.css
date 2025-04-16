@@ -35,9 +35,9 @@
     transition: transform 0.2s;
   }
   
-  .card:hover {
-    transform: translateY(-4px);
-  }
+  /* .card:hover {
+    /* transform: translateY(-4px); 
+  } */
   
   .iconWrapper {
     background-color: #e6f6fd;
