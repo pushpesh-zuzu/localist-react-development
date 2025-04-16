@@ -24,8 +24,8 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
-    ? [1, 2, 5, 6, 7]
-    : [1, 2, 3, 4, 5, 6, 7];
+    ? [1, 2, 4, 5, 6]
+    : [1, 2, 3, 4, 5, 6];
 
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
@@ -107,7 +107,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
           />
         )}
 
-        {buyerStep === 4 && (
+        {/* {buyerStep === 4 && (
           <NameMatch
             nextStep={nextStep}
             previousStep={previousStep}
@@ -116,9 +116,9 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
             email={email}
             // loading={registerLoader}
           />
-        )}
+        )} */}
 
-        {buyerStep === 5 && (
+        {buyerStep === 4 && (
           <ViewYourMatches
             nextStep={nextStep}
             previousStep={previousStep}
@@ -127,11 +127,11 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
           />
         )}
 
-        {buyerStep === 6 && (
+        {buyerStep === 5 && (
           <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
         )}
 
-        {buyerStep === 7 && (
+        {buyerStep === 6 && (
           <BidsList
             nextStep={nextStep}
             previousStep={previousStep}

@@ -14,6 +14,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
+import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
 
 const DescribeYourRequest = ({ onClose }) => {
   const [text, setText] = useState("");
@@ -94,6 +95,7 @@ const DescribeYourRequest = ({ onClose }) => {
       }
       onClose();
       dispatch(clearSetbuyerRequestData());
+      dispatch(clearBuyerRegisterFormData());
       dispatch(setQualityData());
       navigate(`/bids-list/${requestId}`);
     });

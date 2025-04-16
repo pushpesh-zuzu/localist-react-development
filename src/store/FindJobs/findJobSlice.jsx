@@ -18,6 +18,11 @@ const initialState = {
   CategoriesList:[],
   allServiceList:[],
   pendingLead:[],
+  buyerRegisterFormData: {
+email:"",
+name:'',
+phone:""
+  },
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
@@ -224,6 +229,16 @@ state.pendingLoader = action.payload;
     setPendingLeadData(state,action){
       state.pendingLead = action.payload
     },
+    setbuyerRegisterFormData(state,action){
+      state.buyerRegisterFormData = {...state.buyerRegisterFormData,...action.payload}
+    },
+    clearBuyerRegisterFormData(state,action){
+    state.buyerRegisterFormData={
+        email:"",
+        name:'',
+        phone:""
+          }
+    },
     clearServiceFormData(state,action){
       state.selectedServiceFormData={
  
@@ -274,6 +289,8 @@ export const {
   setAllServiceList,
   clearServiceFormData,
   setPendingLeadLoader,
-  setPendingLeadData
+  setPendingLeadData,
+  setbuyerRegisterFormData,
+  clearBuyerRegisterFormData
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

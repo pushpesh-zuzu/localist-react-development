@@ -1,6 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
-import { clearServiceFormData, setRegisterData, setRegisterToken, setSelectedServiceId, setselectedServices, setService } from "../FindJobs/findJobSlice";
+import { clearBuyerRegisterFormData, clearServiceFormData, setRegisterData, setRegisterToken, setSelectedServiceId, setselectedServices, setService } from "../FindJobs/findJobSlice";
 
 const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
 const initialState = {
@@ -74,6 +74,7 @@ export const userLogout = () => {
         dispatch(setSelectedServiceId());
         dispatch(clearServiceFormData())
         dispatch(setselectedServices([]))
+        dispatch(clearBuyerRegisterFormData())
 
         // ✅ Clear relevant localStorage items
         localStorage.removeItem("barkToken");
