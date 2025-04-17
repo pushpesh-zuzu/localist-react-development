@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./GrowthSteps.module.css";
 import { GrowthStepsData } from "../../../constant/ServicePanel";
 import { useNavigate } from "react-router-dom";
+import LeadInfoModal from "./LeadStaticModal";
 
 const GrowthSteps = () => {
-  const navigate = useNavigate()
   
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleCardClick = (item) => {
+    if (item?.id === 2) {
+      setShowModal(true);
+    } else {
+      navigate(item.path);
+    }
+  };
   return (
     <>
       <div className={styles.growContainer}>
@@ -26,12 +36,19 @@ const GrowthSteps = () => {
                   <li>{item.Description2}</li>
                   <li>{item.Description3}</li>
                 </ul>
-                <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button>
+                {/* <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button> */}
+                <button
+                  className={styles.button}
+                  onClick={() => handleCardClick(item)}
+                >
+                  {item.button}
+                </button>
               </div>
             ))}
           </div>
         </div>
       </div>
+      <LeadInfoModal visible={showModal} onClose={() => setShowModal(false)} />
     </>
   );
 };

@@ -151,10 +151,10 @@ const Footer = () => {
             <h4>For Professionals</h4>
             <ul>
               <li
-                onClick={() => {
-                  navigate("/how-it-works");
-                  window.scrollTo(0, 0);
-                }}
+                // onClick={() => {
+                //   navigate("/how-it-works");
+                //   window.scrollTo(0, 0);
+                // }}
               >
                 How it works
               </li>
@@ -238,14 +238,14 @@ const Footer = () => {
           >
             <ul>
               <li
-                onClick={() => {
-                  navigate("/how-it-works");
-                  window.scrollTo(0, 0);
-                }}
+                // onClick={() => {
+                //   navigate("/how-it-works");
+                //   window.scrollTo(0, 0);
+                // }}
               >
                 How it works
               </li>
-              <li>Pricing</li>
+              <li onClick={()=> navigate("/pricing")}>Pricing</li>
               <li
                 onClick={handleJoinAsProfessional}
               >

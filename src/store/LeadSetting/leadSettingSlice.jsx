@@ -206,7 +206,7 @@ export const getleadPreferencesList = (serviceId) => {
     return async (dispatch) => {
       dispatch(setAutoBidListLoader(true));
       try {
-        const response = await axiosInstance.post(`users/autobid-list`, bidData);
+        const response = await axiosInstance.post(`users/manual-leads`, bidData);
   
         if (response) {
             dispatch(setAutoBidData(response?.data?.data));
