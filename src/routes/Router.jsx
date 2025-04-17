@@ -27,6 +27,7 @@ import PricingPage from "../pages/PricingPage";
 import NewQuestion from "../component/Leads/LeadSettings/SuggestQuestions/NewQuestion/NewQuestion";
 import EditQuestion from "../component/Leads/LeadSettings/SuggestQuestions/EditQuestion/EditQuestion";
 import RemoveQuestion from "../component/Leads/LeadSettings/SuggestQuestions/RemoveQuestion/RemoveQuestion";
+import ManualBidList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ManualBidList/ManualBidList";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
       },
       { path: "/leads/settings", element: <LeadSetting /> },
       { path: "/bids-list/:requestId", element: <BidsList /> },
+      { path: "/manual/bid-list", element: <ManualBidList /> },
       { path: "/help-center", element: <HelpCenterPage /> },
       { path: "/pricing", element: <PricingPage /> },
       { path: "/feedback/questions", element: <SuggestQuestions /> },
