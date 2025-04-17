@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import styles from "./LeadsCards.module.css";
 import BlueSmsIcon from "../../../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../../../assets/Images/Leads/BluePhoneIcon.svg";
@@ -7,22 +7,42 @@ import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDet
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
 import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getAddManualBidData, getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
+import CustomModal from "../ConfirmModal";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
+  const [isModalOpen, setModalOpen] = useState(false)
+  const [selectedItem, setSelectedItem] = useState(null)
   const { leadRequestList, leadRequestLoader } = useSelector(
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state)=> state.auth)
   const data =  leadRequestList?.length
+  console.log(leadRequestList,"leadRequestList")
   useEffect(() => {
     const leadRequestData = {
       user_id:userToken?.remember_tokens
     }
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
+
+  const handleContinue = () => {
+    if (!selectedItem) return;
+  
+    const formData = new FormData();
+    formData.append("buyer_id", selectedItem?.customer_id);
+    formData.append("user_id", userToken?.remember_tokens);
+    formData.append("bid", selectedItem?.credit_score);
+    formData.append("lead_id", selectedItem?.id);
+    formData.append("bidtype", "purchase_leads");
+    formData.append("service_id", selectedItem?.service_id);
+    formData.append("distance", null);
+  
+    dispatch(getAddManualBidData(formData));
+    setModalOpen(false);
+  }
 
   return (
     <>
@@ -94,16 +114,6 @@ const LeadsCards = () => {
                         </span>
                       )}
                     </div>
-                    {/* <div className={styles.jobInfo}>
-                      <p>
-                        <strong>End of Tenancy Cleaning</strong>
-                      </p>
-                      <p>Flat / apartment | 3 bedrooms | 1 bathroom</p>
-                      <p>
-                        <strong>Starting:</strong> In the next month
-                      </p>
-                    </div>
-                  </div> */}
                   <div className={styles.jobInfo}>
   {item?.questions &&
     JSON.parse(item?.questions)?.map((qa, index) => (
@@ -122,7 +132,10 @@ const LeadsCards = () => {
 
                   {/* Right Section - Lead Purchase */}
                   <div className={styles.leadActions}>
-                    <button className={styles.purchaseButton}>
+                    <button className={styles.purchaseButton} onClick={() => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  }}>
                       Purchase Lead
                     </button>
                     <span className={styles.credits}>
@@ -142,6 +155,13 @@ const LeadsCards = () => {
           </div>
         </>
       )}
+        <CustomModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        onContinue={handleContinue}
+        message="Are you sure you want to continue?"
+      />
+    
     </>
   );
 };

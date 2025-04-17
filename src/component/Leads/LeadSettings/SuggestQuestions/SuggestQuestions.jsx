@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./SuggestQuestions.module.css";
-import union from "../../../../assets/Images/SuggestQuestion/union.svg";
+import union from "../../../../assets/Images/SuggestQuestion/Union.svg";
 import editIcon from "../../../../assets/Images/SuggestQuestion/editIcon.svg";
 import deleteIcon from "../../../../assets/Images/SuggestQuestion/deleteIcon.svg";
 

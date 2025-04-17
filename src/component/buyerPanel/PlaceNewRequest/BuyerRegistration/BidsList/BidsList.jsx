@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getAddManualBidData,
   getAutoBid,
   getLocationLead,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
@@ -12,29 +13,49 @@ import { BASE_IMAGE_URL } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import { Spin } from "antd";
+import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
   const { autoBidList, bidListLoader, getlocationData } = useSelector(
     (state) => state.leadSetting
   );
-  // const { requestId } = useSelector((state) => state?.buyer);
+  const [isModalOpen, setModalOpen] = useState(false)
+    const [selectedItem, setSelectedItem] = useState(null)
+  const { registerData } = useSelector((state) => state?.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
-
+console.log(autoBidList,selectedItem,"autoBidList")
   useEffect(() => {
     const data = {
-      user_id: userToken?.rember_token,
+      user_id: userToken?.remember_tokens,
       lead_id: requestId,
     };
     dispatch(getAutoBid(data));
-  }, [dispatch, userToken?.rember_token, requestId]);
+  }, [dispatch, userToken?.remember_tokens, requestId]);
 
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
+
+  const handleContinue = (item) => {
+  
+    console.log(item, "item");
+  
+    const formData = new FormData();
+    formData.append("user_id", userToken?.remember_tokens);
+    formData.append("seller_id", selectedItem?.id);
+    formData.append("bid", selectedItem?.credit_score);
+    formData.append("lead_id", requestId);
+    formData.append("bidtype", "reply");
+    formData.append("service_id", selectedItem?.service_id);
+    formData.append("distance", selectedItem?.distance);
+  
+    dispatch(getAddManualBidData(formData));
+  };
+  
 
   return (
     <div className={styles.container}>
@@ -161,7 +182,10 @@ const BidsList = ({ previousStep }) => {
                   {/* </div> */}
 
                   <div className={styles.replyBtnWrapper}>
-                    <button className={styles.replyBtn}>Request reply</button>
+                    <button className={styles.replyBtn} onClick={() => {
+    setSelectedItem(item);
+    setModalOpen(true);
+  }}>Request reply</button>
                   </div>
                 </div>
               </div>
@@ -169,6 +193,12 @@ const BidsList = ({ previousStep }) => {
           )}
         </>
       )}
+      <CustomModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        onContinue={handleContinue}
+        message="Are you sure you want to continue?"
+      />
     </div>
   );
 };

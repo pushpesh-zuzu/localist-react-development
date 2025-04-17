@@ -16,7 +16,8 @@ const initialState = {
     removeLoader:false,
     bidListLoader:false,
     removeLocationLoader:false,
-    serviceWiseData:[]
+    serviceWiseData:[],
+    autoBidListData:[]
 };
 
 
@@ -218,6 +219,22 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const getAutoBidData = (autoBidData) => {
+    return async (dispatch) => {
+      dispatch(setAutoBidListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/autobid-list`, autoBidData);
+  
+        if (response) {
+            dispatch(setAutoBidListData(response?.data?.data));
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setAutoBidListLoader(false));
+      }
+    };
+  }
   export const removeItemData = (removeData) => {
     return async (dispatch) => {
       dispatch(setRemoveListLoader(true));
@@ -255,6 +272,24 @@ export const getleadPreferencesList = (serviceId) => {
       dispatch(setRemoveLocationListLoader(true));
       try {
         const response = await axiosInstance.post(`users/get-service-wise-location`, serviceWiseLocationData);
+  
+        if (response) {
+          dispatch(setServiceWiseData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setRemoveLocationListLoader(false));
+      }
+    };
+  } 
+
+  export const getAddManualBidData = (manualBidData) => {
+    return async (dispatch) => {
+      dispatch(setRemoveLocationListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/add-manual-bid`, manualBidData);
   
         if (response) {
           dispatch(setServiceWiseData(response?.data?.data))
@@ -309,11 +344,14 @@ const leadSettingSlice = createSlice({
       },
       setServiceWiseData(state,action){
         state.serviceWiseData = action.payload
+      },
+      setAutoBidListData(state,action) {
+        state.autoBidListData = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setAutoBidListData,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;
