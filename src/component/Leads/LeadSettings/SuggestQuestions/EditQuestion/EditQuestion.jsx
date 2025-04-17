@@ -121,7 +121,12 @@ const EditQuestion = () => {
         <div className={styles.card}>
           {editedQuestions.map((question, index) =>
             editIndex === null || editIndex === index ? (
-              <div key={index} className={styles.questionItem}>
+              <div
+                key={index}
+                className={`${styles.questionItem} ${
+                  editIndex === index ? styles.noBorder : ""
+                }`}
+              >
                 {editIndex === index ? (
                   <div className={styles.editBlock}>
                     <div className={styles.editInputBlock}>
@@ -195,7 +200,10 @@ const EditQuestion = () => {
                     )}
                   </div>
                 ) : (
-                  <div onClick={() => handleEditClick(index)}>
+                  <div
+                    onClick={() => handleEditClick(index)}
+                    className={styles.questionRow}
+                  >
                     <span>{question.questions}</span>
                     <span className={styles.arrow}>&#8250;</span>
                   </div>

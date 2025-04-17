@@ -8,7 +8,6 @@
   max-width: 550px;
   margin: 40px auto;
   padding: 0 16px;
-  font-family: sans-serif;
   text-align: center;
 }
 
@@ -40,6 +39,20 @@
   font-size: 15px;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.questionRow {
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.noBorder {
+  border-bottom: none;
 }
 
 .input {
