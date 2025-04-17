@@ -1,5 +1,9 @@
 import React from "react";
 import styles from "./PricingCards.module.css";
+import creditsAtTheReady from "../../../assets/Images/Pricing/creditsAtTheReadyImg.svg";
+import youareincontrol from "../../../assets/Images/Pricing/youAreInControlImg.svg";
+import jobrelatedprice from "../../../assets/Images/Pricing/jobRelatedPricesImg.svg";
+import newbusiness from "../../../assets/Images/Pricing/newBusinessImg.svg"
 
 const cardData = [
   {
@@ -7,25 +11,25 @@ const cardData = [
     description:
       "We use a simple credit system. Buy a credit pack and simply use the credits to contact the customers you’re interested in. Or let your ideal customers reach out to you. ",
     linkText: "No commission, no hidden fees.",
-    image: "/images/credit-girl.png",
+    image: creditsAtTheReady,
   },
   {
     title: "You're in control",
     description:
       "You decide which leads you respond to and you’ll know the cost in credits upfront, or let your ideal customer contact you. That way, you always have control of what you’re spending.",
-    image: "/images/laptop-lead.png",
+    image: youareincontrol,
   },
   {
     title: "Job-related prices",
     description:
       "We calculate the costs of contacting a customer based on the service, the value of the job, and the supply and demand in the area.",
-    image: "/images/job-prices.png",
+    image:jobrelatedprice,
   },
   {
     title: "New business guaranteed",
     description:
       "We’re so confident you’ll win business with your first credit pack, we’ll return all your credits if you don’t. No questions asked.",
-    image: "/images/business-guy.png",
+    image: newbusiness,
   },
 ];
 

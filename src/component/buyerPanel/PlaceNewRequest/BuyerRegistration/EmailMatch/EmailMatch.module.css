@@ -70,6 +70,13 @@
   text-align: left;
   margin-top: 5px;
 }
+.errorText {
+  background-color: pink;
+  color: #000000;
+  padding: 12px 12px;
+  text-align: start;
+  font-size: 12px;
+}
 
 .buttonContainer {
   display: flex;

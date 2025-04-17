@@ -18,6 +18,7 @@ const initialState = {
   CategoriesList:[],
   allServiceList:[],
   pendingLead:[],
+  errorMessage:[],
   buyerRegisterFormData: {
 email:"",
 name:'',
@@ -111,6 +112,7 @@ export const registerUserData = (registerData) => {
         });
       } else {
         showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        dispatch(setErrorMessage(error?.response?.data?.message))
       }
     } finally {
       dispatch(setRegisterLoader(false));
@@ -214,6 +216,9 @@ const findJobSlice = createSlice({
       state.registerData = action.payload;
       localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
     },
+    setErrorMessage(state,action) {
+      state.errorMessage = action.payload
+    },
     setCategoriesListLoader(state, action) {
       state.categoriesListLoader = action.payload;
     },
@@ -291,6 +296,7 @@ export const {
   setPendingLeadLoader,
   setPendingLeadData,
   setbuyerRegisterFormData,
-  clearBuyerRegisterFormData
+  clearBuyerRegisterFormData,
+  setErrorMessage
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

@@ -1,7 +1,12 @@
 import React from "react";
 import styles from "./PricingSection.module.css";
+import { useNavigate } from "react-router-dom";
 
 const PricingSection = () => {
+  const navigate = useNavigate()
+  const onSubmitPageChange = () => {
+    navigate("/sellers/create/")
+  }
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Pricing</h2>
@@ -12,7 +17,7 @@ const PricingSection = () => {
           to contact customers that you think are the right fit for your
           business
         </p>
-        <button className={styles.button}>Join as a Professional</button>
+        <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button>
       </div>
     </div>
   );

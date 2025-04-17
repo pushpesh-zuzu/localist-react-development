@@ -1,11 +1,17 @@
 import React from "react";
 import styles from "./StartWinning.module.css";
+import { useNavigate } from "react-router-dom";
 
 const StartWinning = () => {
+  const navigate = useNavigate()
+  const onSubmitPageChange = () => {
+    navigate("/sellers/create/")
+  }
+  
   return (
     <div className={styles.container}>
       <p className={styles.heading}>Start winning new business today</p>
-      <button className={styles.button}>Join as a Professional</button>
+      <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button>
     </div>
   );
 };
