@@ -21,7 +21,7 @@
 .infoIcon {
   margin-right: 8px;
   font-size: 16px;
-  color: #007aff;
+  color: var(--primary-color);
 }
 
 .notificationList {
@@ -34,7 +34,7 @@
 }
 
 .notificationItem {
-  width: 544px;
+  max-width: 544px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -89,4 +89,52 @@ input:checked + .slider {
 input:checked + .slider::before {
   transform: translateX(14px);
   background-color: #d9d9d9;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 40px 40px;
+  }
+
+  .notificationList {
+    padding: 32px 24px;
+  }
+
+  /* .notificationItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  } */
+
+  .heading {
+    font-size: 22px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 16px;
+  }
+
+  .notificationList {
+    padding: 24px 16px;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .notificationItem {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .heading {
+    font-size: 20px;
+    margin-bottom: 0px;
+  }
+
+  .infoBox {
+    padding: 16px 12px;
+    font-size: 14px;
+  }
 }

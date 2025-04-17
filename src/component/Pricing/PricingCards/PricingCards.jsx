@@ -3,7 +3,7 @@ import styles from "./PricingCards.module.css";
 import creditsAtTheReady from "../../../assets/Images/Pricing/creditsAtTheReadyImg.svg";
 import youareincontrol from "../../../assets/Images/Pricing/youAreInControlImg.svg";
 import jobrelatedprice from "../../../assets/Images/Pricing/jobRelatedPricesImg.svg";
-import newbusiness from "../../../assets/Images/Pricing/newBusinessImg.svg"
+import newbusiness from "../../../assets/Images/Pricing/newBusinessImg.svg";
 
 const cardData = [
   {
@@ -23,7 +23,7 @@ const cardData = [
     title: "Job-related prices",
     description:
       "We calculate the costs of contacting a customer based on the service, the value of the job, and the supply and demand in the area.",
-    image:jobrelatedprice,
+    image: jobrelatedprice,
   },
   {
     title: "New business guaranteed",
@@ -43,20 +43,31 @@ const PricingCards = () => {
             (index + 1) % 2 === 0 ? styles.reverse : ""
           }`}
         >
-          <div className={styles.imageSection}>
+          <div
+            className={`${styles.imageSection} ${styles[`image${index + 1}`]}`}
+          >
             <img src={card.image} alt={card.title} />
           </div>
-          <div className={styles.textSection}>
-            <h3>{card.title}</h3>
-            <p>
-              {card.description}
-              {card.linkText && (
-                <>
-                  {" "}
-                  <a href="#">{card.linkText}</a>
-                </>
-              )}
-            </p>
+
+          <div className={styles.centerLine}></div>
+
+          <div className={styles.textSectionContainer}>
+            <div
+              className={`${styles.textSection} ${
+                index === 1 || index === 3 ? styles.shiftLeft : ""
+              }`}
+            >
+              <h3>{card.title}</h3>
+              <p>
+                {card.description}
+                {card.linkText && (
+                  <>
+                    {" "}
+                    <a href="#">{card.linkText}</a>
+                  </>
+                )}
+              </p>
+            </div>
           </div>
         </div>
       ))}

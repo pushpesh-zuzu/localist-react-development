@@ -1,61 +1,114 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding: 2rem;
+  gap: 85px;
+  margin-bottom: 95px;
 }
 
-/* Card layout */
 .card {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
-  background-color: #f5fafd;
-  padding: 2rem;
-  border-radius: 16px;
-  gap: 2rem;
-  flex-wrap: wrap;
+  background-color: #e9f9ff;
+  position: relative;
 }
 
-/* Alternate layout for every 2nd card */
 .reverse {
   flex-direction: row-reverse;
-  background-color: #ffffff;
+  background-color: #f9f9fa;
 }
 
-/* Image section */
 .imageSection {
   flex: 1;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .imageSection img {
-  width: 100%;
-  max-width: 300px;
+  max-width: 100%;
   height: auto;
   object-fit: contain;
 }
 
-/* Text section */
+.image1 img {
+  margin-top: -70px;
+}
+
+.image2 img {
+  margin-top: -60px;
+}
+
+.image3 img {
+  padding: 35px 0;
+}
+
+.image4 img {
+  padding: 38px 0;
+}
+
+.centerLine {
+  width: 2px;
+  background-color: #d9d9d9;
+  margin: 0 2rem;
+  position: relative;
+}
+
+.card .centerLine::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background-color: #ccc;
+}
+
+.textSectionContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .textSection {
-  flex: 2;
+  display: flex;
+  max-width: 440px;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 34px;
+}
+
+.shiftLeft {
+  margin-left: 100px;
 }
 
 .textSection h3 {
-  font-size: 1.75rem;
-  margin-bottom: 0.75rem;
-  color: #1a1a1a;
+  text-wrap: nowrap;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  font-size: 35px;
 }
 
 .textSection p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #444;
+  font-weight: 400;
+  font-size: 18px;
+  vertical-align: middle;
 }
 
 .textSection a {
-  color: #007bff;
-  text-decoration: underline;
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 1060px) {
+  .textSection {
+    padding: 0 30px 30px 30px;
+    margin-left: 0px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -64,16 +117,47 @@
     flex-direction: column;
     text-align: center;
   }
+  .textSectionContainer {
+    align-items: center;
+  }
 
   .textSection h3 {
-    font-size: 1.5rem;
+    font-size: 24px;
   }
 
   .textSection p {
-    font-size: 0.95rem;
+    font-size: 15.2px;
   }
 
   .imageSection img {
     max-width: 250px;
+  }
+
+  .shiftLeft {
+    margin-left: 0px;
+  }
+
+  .textSection {
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+
+  .container {
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+
+  .image1 img {
+    margin-top: -40px;
+  }
+
+  .image2 img {
+    margin-top: -30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-bottom: 35px;
   }
 }
