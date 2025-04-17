@@ -5,7 +5,7 @@
 }
 
 .container {
-  max-width: 500px;
+  max-width: 550px;
   margin: 40px auto;
   padding: 0 16px;
   font-family: sans-serif;
@@ -35,24 +35,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 36px 20px;
   border-bottom: 1px solid #eee;
   font-size: 15px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
-.questionItem:hover {
-  background: #f9f9f9;
-}
-
 .input {
-  width: 100%;
   padding: 10px;
   font-size: 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
   outline: none;
+  margin-bottom: 20px;
 }
 
 .arrow {
@@ -63,8 +59,8 @@
 .buttonGroup {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 0 24px;
 }
 
 .backButton {
@@ -99,4 +95,91 @@
 
 .saveButton:hover {
   background: #0096c4;
+}
+
+.editInputBlock {
+  display: flex;
+  flex-direction: column;
+  width: -webkit-fill-available;
+}
+
+.editBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.label {
+  font-size: 16px;
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.dropdown {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: -webkit-fill-available;
+}
+
+.suggestedAnswersBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answerInputBlock {
+  display: flex;
+  width: -webkit-fill-available;
+  align-items: center;
+  gap: 20px;
+}
+
+.answerRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0px;
+}
+
+.answerRow input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.removeBtn {
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+}
+
+.addAnswerInput {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.addAnswerInput button {
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.addAnswerInput input {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
 }

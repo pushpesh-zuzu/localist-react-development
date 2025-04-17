@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  padding: 40px 20px;
+  padding: 80px 20px;
   background-color: #f9f9fa;
   min-height: auto;
 }
@@ -83,4 +83,27 @@
 
 .saveButton:hover {
   background: #0096c4;
+}
+
+.suggestedAnswerRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  font-size: 18px;
+}
+
+.addBtn {
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  padding: 6px 12px;
+  margin-top: 10px;
+  cursor: pointer;
 }

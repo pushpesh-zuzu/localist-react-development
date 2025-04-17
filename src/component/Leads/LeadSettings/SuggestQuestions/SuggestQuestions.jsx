@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./SuggestQuestions.module.css";
 import union from "../../../../assets/Images/SuggestQuestion/union.svg";
 import editIcon from "../../../../assets/Images/SuggestQuestion/editIcon.svg";
@@ -7,6 +7,8 @@ import deleteIcon from "../../../../assets/Images/SuggestQuestion/deleteIcon.svg
 
 const SuggestQuestions = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const serviceId = location.state?.serviceId;
 
   const cards = [
     {
@@ -38,7 +40,7 @@ const SuggestQuestions = () => {
           <div
             key={index}
             className={styles.card}
-            onClick={() => navigate(card.path)}
+            onClick={() => navigate(card.path, { state: { serviceId } })}
           >
             <div className={styles.iconWrapper}>
               <img src={card.icon} alt="icon" />
