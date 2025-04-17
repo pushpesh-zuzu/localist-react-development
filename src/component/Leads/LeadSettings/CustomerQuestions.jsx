@@ -196,9 +196,10 @@ const CustomerQuestions = ({ selectedService }) => {
     setShow(false);
   };
   const handleRedirctSuggest = () => {
-    navigate(`/feedback/questions?${selectedService?.id}`);
+    navigate("/feedback/questions", {
+      state: { serviceId: selectedService?.id },
+    });
   };
-  console.log(selectedService?.id, "selectedServices");
   return (
     <>
       <div className={styles.modal}>
