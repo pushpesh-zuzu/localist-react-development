@@ -250,7 +250,11 @@
   }
 
   .formGroup {
-    width: -webkit-fill-availbale;
+    width: -webkit-fill-available;
+  }
+
+  .inputField {
+    width: -webkit-fill-available;
   }
 }
 
