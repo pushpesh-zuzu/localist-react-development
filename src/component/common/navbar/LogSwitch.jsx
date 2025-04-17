@@ -12,6 +12,7 @@ import {
   userLogout,
 } from "../../../store/Auth/authSlice";
 import { showToast } from "../../../utils";
+import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg"
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -234,7 +235,10 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
           }
           trigger="hover"
         >
-          <div className={styles.loginBtn}>{userName}</div>
+          <div >
+          <div className={styles.loginBtn}>{userName}  <img src={downarrowIcon} alt="icon" /></div>
+         
+          </div>
         </Popover>
       ) : (
         <div className={styles.logsBtns}>
