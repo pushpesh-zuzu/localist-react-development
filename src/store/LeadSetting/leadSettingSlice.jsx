@@ -80,6 +80,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-lead-request`,leadRequestData);
         if (response) {
           dispatch(setLeadRequestListData(response?.data?.data));
+          return response.data
         }
       } catch (error) {
         console.log("error", error?.response?.data?.message);

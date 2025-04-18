@@ -30,7 +30,7 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated && !toastShown.current) {
-      showToast("error", "Please log in to continue.");
+      // showToast("error", "Please log in to continue.");
       toastShown.current = true; // ✅ Mark toast as shown
     }
   }, [isAuthenticated]);

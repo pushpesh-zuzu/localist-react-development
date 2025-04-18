@@ -38,7 +38,7 @@ const MatchingLeads = () => {
   const locationLength = getlocationData?.length;
   useEffect(() => {
     const location = {
-      user_id: userToken?.rember_token,
+      user_id: userToken?.remember_tokens,
     };
     dispatch(getLocationLead(location));
   }, []);
