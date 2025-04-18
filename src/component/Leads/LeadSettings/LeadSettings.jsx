@@ -167,7 +167,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     show: false,
     service_id: null,
   });
-  console.log(removeModal?.service_id, "ll");
+ 
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
@@ -199,7 +199,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
     if (isEditingLocation && editLocationId) {
       dispatch(
-        editLocationLead({ ...locationdata, location_id: editLocationId }) // ✅ Correct field name
+        editLocationLead({ ...locationdata, location_id: editLocationId }) 
       ).then((result) => {
         if (result?.success) {
           const data = { user_id: userToken?.remember_tokens };
@@ -231,41 +231,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
     setIsNextModalOpen(false);
   };
-
-  const handleLocationSubmit = () => {
-    const locationdata = {
-      user_id: userToken?.remember_tokens,
-      miles: locationData.miles1,
-      postcode: locationData.postcode,
-      service_id: selectedService?.id,
-    };
-
-    if (isEditingLocation && editLocationId) {
-      // Update location logic — You might need to create an `updateLocationLead` thunk
-      dispatch(
-        editLocationLead({ ...locationdata, setvice_id: editLocationId })
-      ).then((result) => {
-        if (result?.success) {
-          const data = { user_id: userToken?.remember_tokens };
-          dispatch(getLocationLead(data));
-          dispatch(getleadPreferencesList(data));
-          setIsLocationModalOpen(false);
-          setIsEditingLocation(false);
-          setEditLocationId(null);
-        }
-      });
-    } else {
-      dispatch(addLocationLead(locationdata)).then((result) => {
-        if (result?.success) {
-          const data = { user_id: userToken?.remember_tokens };
-          dispatch(getLocationLead(data));
-          dispatch(getleadPreferencesList(data));
-          setIsLocationModalOpen(false);
-        }
-      });
-    }
-  };
-
   const handleEditLocation = (location) => {
     setLocationData({
       miles1: location.miles,
@@ -420,108 +385,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <button className={styles.viewLeads} onClick={handleView}>
           View leads
         </button>
-        {/* <Modal
-          title="Add a New Service"
-          open={isModalOpen}
-          onCancel={() => setIsModalOpen(false)}
-          onOk={() => {
-            handleSubmitData();
-            // setIsModalOpen(false);
-          }}
-        >
-          <div className={styles.formGroup}>
-            <input
-              type="text"
-              placeholder="e.g. Personal Trainers, House Cleaning"
-              className={styles.fullWidthInput}
-              onChange={(e) => {
-                setInput(e.target.value);
-                setIsDropdownOpen(!!e.target.value);
-                // setSelectedService(null);
-              }}
-              value={input}
-            />
-
-            {isDropdownOpen && service?.length > 0 && (
-              <div className={styles.searchResults}>
-                {searchServiceLoader ? (
-                  <Spin indicator={<LoadingOutlined spin />} />
-                ) : (
-                  service.map((item) => (
-                    <p
-                      key={item.id}
-                      className={styles.searchItem}
-                      onClick={() => handleSelectService(item)}
-                    >
-                      {item.name}
-                    </p>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-        </Modal> */}
-        {/* <Modal
-          title={isEditingLocation ? "Edit Location" : "Add a New Location"}
-          open={isLocationModalOpen}
-          onCancel={() => {
-            setIsLocationModalOpen(false);
-            setIsEditingLocation(false);
-          }}
-          footer={[
-            <Button
-              key="cancel"
-              onClick={() => {
-                setIsLocationModalOpen(false);
-                setIsEditingLocation(false);
-                setEditLocationId(null);
-                setLocationData({ miles1: "", postcode: "" });
-              }}
-            >
-              Cancel
-            </Button>,
-            <Button key="next" type="primary" onClick={handleNext}>
-              Next
-            </Button>,
-          ]}
-        >
-          <div className={styles.formGroup}>
-            <div
-              className={styles.inputGroup}
-              style={{ display: "flex", gap: "10px" }}
-            >
-              <div style={{ flex: 1 }}>
-                <span className={styles.fromText}>Miles</span>
-                <select
-                  name="miles1"
-                  value={locationData.miles1}
-                  onChange={handleLocationChange}
-                  style={{ width: "100%", padding: "8px" }}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="30">30</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                </select>
-              </div>
-
-              <div style={{ flex: 1 }}>
-                <span className={styles.fromText}>ZIP Code</span>
-                <input
-                  type="text"
-                  placeholder="Enter your postcode"
-                  name="postcode"
-                  value={locationData.postcode}
-                  onChange={handleLocationChange}
-                  style={{ width: "100%", padding: "8px" }}
-                />
-              </div>
-            </div>
-          </div>
-        </Modal> */}
+       
 
 <AddServiceModal
         isModalOpen={isModalOpen}

@@ -91,7 +91,7 @@ const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
           x
         </div>
         <div className={styles.header}>
-          <h2>View your matches now!</h2>
+          <h2>Enter you details!</h2>
         </div>
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>

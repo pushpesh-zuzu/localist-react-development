@@ -36,7 +36,7 @@ const BidsList = ({ previousStep }) => {
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
   const handleReply = () => {
-    navigate(`/bid-list/reply/${requestId}`)
+    navigate(`/bids-list/reply/${requestId}`)
   }
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
@@ -122,15 +122,17 @@ const BidsList = ({ previousStep }) => {
               <h1 className={styles.noBidText}>No seller available</h1>
             </div>
           ) : (
-            autoBidList?.map((item) => (
+            autoBidList?.map((item) => 
+              item?.sellers?.map((seller) => (
+
               <div className={styles.card}>
-                <div className={styles.cardLeft} key={item?.id}>
+                <div className={styles.cardLeft} key={seller?.id}>
                   {/* <div key={item?.sellers?.id} className={styles.cardItem}> */}
                   <div className={styles.imageWrapper}>
                     <img
                       src={
-                        item?.profile_image
-                          ? `${BASE_IMAGE_URL}${item?.profile_image}`
+                        seller?.profile_image
+                          ? `${BASE_IMAGE_URL}${seller?.profile_image}`
                           : DummyImage
                       }
                       alt="Profile"
@@ -142,11 +144,11 @@ const BidsList = ({ previousStep }) => {
                       <div>
                         <h3>
                           <img src={GreenTickIcon} alt="" />
-                          {item?.name}
+                          {seller?.name}
                         </h3>
                         <p>
                           <img src={AutoBidLocationIcon} alt="" />
-                          {item?.distance ? item?.distance : "0"} miles away
+                          {seller?.distance ? seller?.distance : "0"} miles away
                         </p>
                       </div>
                       <div className={styles.sidebar}>
@@ -158,7 +160,7 @@ const BidsList = ({ previousStep }) => {
                     </div>
 
                     <div className={styles.badges}>
-                      <span>{item?.service_name}</span>
+                      <span>{seller?.service_name}</span>
                       {/* <span>Banner design</span>
                   <span>New pages</span> */}
                     </div>
@@ -189,14 +191,14 @@ const BidsList = ({ previousStep }) => {
 
                   <div className={styles.replyBtnWrapper}>
                     <button className={styles.replyBtn} onClick={() => {
-                      setSelectedItem(item);
+                      setSelectedItem(seller);
                       setModalOpen(true);
                     }}>Request reply</button>
                   </div>
                 </div>
               </div>
             ))
-          )}
+          ))}
         </>
       )}
       <CustomModal

@@ -146,10 +146,10 @@ setModalOpen(false);
                     <span className={styles.credits}>
                       {item?.credit_score}Credits
                     </span>
-                    <p className={styles.responseStatus}>
+                    {/* <p className={styles.responseStatus}>
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </>
