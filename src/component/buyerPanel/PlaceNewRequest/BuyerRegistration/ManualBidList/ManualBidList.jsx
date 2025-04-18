@@ -8,6 +8,7 @@ import { getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlic
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
+import { BASE_IMAGE_URL } from "../../../../../utils";
 
 const ManualBidList = () => {
   const dispatch = useDispatch()
@@ -71,7 +72,12 @@ lead_id:requestId
           <div className={styles.cardLeft}>
             <div className={styles.imageWrapper}>
               <img
-                src={item.profile_image ? item.profile_image : DummyImage}
+                // src={item.profile_image ? item.profile_image : DummyImage}
+                src={
+                  item?.profile_image
+                    ? `${BASE_IMAGE_URL}${item?.profile_image}`
+                    : DummyImage
+                }
                 alt="Profile"
                 className={styles.image}
               />
