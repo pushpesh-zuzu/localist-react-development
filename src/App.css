@@ -79,7 +79,9 @@ p {
   gap: 5px !important;
   width: 300px !important;
 }
-
+.no-scroll {
+  overflow: hidden;
+}
 @media (max-width: 768px) {
   .slick-slide {
     gap: 10px !important;

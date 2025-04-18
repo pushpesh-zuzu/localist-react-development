@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./LeadInfoModal.module.css";
 
 const leadData = [
@@ -14,6 +14,18 @@ const leadData = [
 ];
 
 const LeadInfoModal = ({ visible, onClose }) => {
+    useEffect(() => {
+        if (visible) {
+          document.body.classList.add("no-scroll");
+        } else {
+          document.body.classList.remove("no-scroll");
+        }
+    
+        // Cleanup on unmount
+        return () => {
+          document.body.classList.remove("no-scroll");
+        };
+      }, [visible])
   if (!visible) return null;
 
   return (
