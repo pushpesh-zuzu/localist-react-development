@@ -3,7 +3,7 @@ import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
 import { getPopularServiceList } from "../../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getCreditList, getleadPreferencesList, getLeadRequestList, getLocationLead } from "../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -32,10 +32,16 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  const { leadRequestLoader } = useSelector((state) => state.leadSetting)
+  const { leadRequestLoader,preferenceList,getlocationData,getCreditListData} = useSelector((state) => state.leadSetting)
+ console.log(getlocationData,"getlocationData")
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    dispatch(getPopularServiceList());
+    const data = {
+      user_id: userToken?.remember_tokens
+    }
+    dispatch(getleadPreferencesList(data));
+    dispatch(getLocationLead(data))
+    dispatch(getCreditList())
 
     return () => {
       document.body.style.overflow = "auto";
@@ -156,7 +162,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
           </AccordionSection>
 
           {/* View */}
-          <AccordionSection title="View">
+          {/* <AccordionSection title="View">
             <label>
               <input
                 type="checkbox"
@@ -166,15 +172,24 @@ const MatchingLeadsFilter = ({ onClose }) => {
               />{" "}
               Unread (285)
             </label>
-          </AccordionSection>
+          </AccordionSection> */}
 
           {/* Lead spotlights */}
           <AccordionSection title="Lead spotlights (226)">
+          <label className={styles.checkboxInputs}>
+    <input
+      type="checkbox"
+      className={styles.checkboxInput}
+      checked={filters.leadSpotlights.includes("All lead spotlights")}
+      onChange={() => handleCheckboxChange("leadSpotlights", "All lead spotlights")}
+    />{" "}
+    All lead spotlights (229)
+  </label>
             {[
               // "Be first to respond",
-              "Urgent requests",
-              "Updated requests",
-              "Has additional details",
+              "Urgent requests (12)",
+              "Updated requests (12)",
+              "Has additional details (121)",
             ].map((item) => (
               <label key={item}>
                 <input
@@ -210,12 +225,13 @@ const MatchingLeadsFilter = ({ onClose }) => {
           {/* When the lead was submitted */}
           <AccordionSection title="When the lead was submitted">
             {[
-              "Any time",
-              "Today",
-              "Yesterday",
-              "Last 2-3 days",
-              "Last 7 days",
-              "Last 14+ days",
+              "Any time (12)",
+              // "Last hour",
+              "Today (192)",
+              "Yesterday (12)",
+              "Last 2-3 days (122)",
+              "Last 7 days (126)",
+              "Last 14+ days (12)",
             ].map((option) => (
               <label key={option}>
                 <input
@@ -231,7 +247,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
 
           {/* Services */}
           <AccordionSection title="Services">
-            {popularList?.map((service) => (
+            {preferenceList?.map((service) => (
               <label key={service.name}>
                 <input
                   type="checkbox"
@@ -241,54 +257,54 @@ const MatchingLeadsFilter = ({ onClose }) => {
                     handleCheckboxChange("selectedServices", service.name)
                   }
                 />{" "}
-                {service.name}
+                {service.name} ({service?.leadcount})
               </label>
             ))}
           </AccordionSection>
 
           {/* Locations */}
           <AccordionSection title="Locations">
+  {/* All Option */}
   <label>
     <input
       type="radio"
       name="location"
       checked={filters.location === "All"}
       onChange={() => handleRadioChange("location", "All")}
-    />{" "}
+    />
     All
   </label>
- 
-  <label>
-    <input
-      type="radio"
-      name="location"
-      checked={filters.location === "150 miles from 01201"}
-      onChange={() =>
-        handleRadioChange("location", "150 miles from 01201")
-      }
-    />{" "}
-    150 miles from 01201
-  </label>
+
+  {/* Dynamic Options from getlocationData */}
+  {getlocationData?.map((loc, index) => (
+    <label key={loc.id}>
+      <input
+        type="radio"
+        name="location"
+        checked={
+          filters.location === `${loc.miles} miles from ${loc.postcode}`
+        }
+        onChange={() =>
+          handleRadioChange("location", `${loc.miles} miles from ${loc.postcode}`) 
+        }
+      />
+      {`${loc.miles} miles from ${loc.postcode} (${loc.leadcount})`} 
+    </label>
+  ))}
 </AccordionSection>
+
 
           {/* Credits */}
           <AccordionSection title="Credits">
-  {[
-    "1-5 Credits",
-    "6-10 Credits",
-    "11-15 Credits",
-    "16-20 Credits",
-    "21-25 Credits",
-    "26-30 Credits",
-  ].map((creditRange) => (
-    <label key={creditRange}>
+  {getCreditListData?.map((creditItem) => (
+    <label key={creditItem.id}>
       <input
         type="checkbox"
         className={styles.checkboxInput}
-        checked={filters.credits.includes(creditRange)}
-        onChange={() => handleCheckboxChange("credits", creditRange)}
-      />{" "}
-      {creditRange}
+        checked={filters.credits.includes(creditItem.credits)}
+        onChange={() => handleCheckboxChange("credits", creditItem.credits)}
+      />
+      {creditItem.credits} ({creditItem?.leadcount})
     </label>
   ))}
 </AccordionSection>

@@ -19,7 +19,9 @@ const initialState = {
     serviceWiseData:[],
     autoBidListData:[],
     manualBidLoader:false,
-    autobidLoader:false
+    autobidLoader:false,
+    getCreditLoader:false,
+    getCreditListData:[]
 };
 
 
@@ -305,6 +307,21 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const getCreditList = () => {
+    return async (dispatch) => {
+      dispatch(setGetCreditListLoader(true));
+      try {
+        const response = await axiosInstance.get(`users/get-credit-list`);
+        if (response) {
+          dispatch(setCreditsList(response?.data?.data));
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setGetCreditListLoader(false));
+      }
+    }
+  }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -356,11 +373,17 @@ const leadSettingSlice = createSlice({
       },
       setAutoBidLoader(state,action) {
         state.autobidLoader = action.payload
+      },
+      setGetCreditListLoader(state,action) {
+        state.getCreditLoader = action.payload
+      },
+      setCreditsList(state,action) {
+      state.getCreditListData = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

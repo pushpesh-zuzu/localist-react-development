@@ -114,6 +114,13 @@ label {
   appearance: none;
   border: 1px solid #c90909;
 }
+.checkboxInputs {
+  
+font-weight: 600;
+font-size: 14px;
+color: #000000;
+
+}
 
 /* Checkbox ka default appearance hide karo (optional) */
 .scrollable input[type="checkbox"] {
