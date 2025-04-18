@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './CustomModal.module.css';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import React from "react";
+import styles from "./CustomModal.module.css";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const CustomModal = ({ isOpen, onClose, onContinue, message, loading }) => {
   if (!isOpen) return null;
@@ -9,10 +9,18 @@ const CustomModal = ({ isOpen, onClose, onContinue, message, loading }) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          disabled={loading}
+        >
+          ×
+        </button>
         <p className={styles.message}>{message}</p>
         <div className={styles.actions}>
-          <button className={styles.cancelBtn} onClick={onClose}>Cancel</button>
+          <button className={styles.cancelBtn} onClick={onClose}>
+            Cancel
+          </button>
           <button
             className={styles.continueBtn}
             onClick={onContinue}
@@ -20,10 +28,10 @@ const CustomModal = ({ isOpen, onClose, onContinue, message, loading }) => {
           >
             {loading ? (
               <Spin
-                indicator={<LoadingOutlined spin style={{ color: 'white' }} />}
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
               />
             ) : (
-              'Continue'
+              "Continue"
             )}
           </button>
         </div>

@@ -35,10 +35,17 @@ const QuestionModal = ({
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
 
       const savedArray =
-        typeof savedAnswer === "string" ? savedAnswer.split(",").map(a => a.trim()) : savedAnswer;
+        typeof savedAnswer === "string"
+          ? savedAnswer.split(",").map((a) => a.trim())
+          : savedAnswer;
 
       setSelectedOption(savedArray);
-      const otherVal = savedArray.find((ans) => ans.toLowerCase() !== "yes" && ans.toLowerCase() !== "no" && ans.toLowerCase() !== "maybe");
+      const otherVal = savedArray.find(
+        (ans) =>
+          ans.toLowerCase() !== "yes" &&
+          ans.toLowerCase() !== "no" &&
+          ans.toLowerCase() !== "maybe"
+      );
       setOtherText(savedArray.includes("other") ? otherVal || "" : "");
     }
   }, [currentQuestion, buyerRequest, questions]);
@@ -110,7 +117,11 @@ const QuestionModal = ({
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          disabled={loading}
+        >
           ✖
         </button>
 

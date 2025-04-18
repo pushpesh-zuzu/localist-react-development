@@ -11,10 +11,8 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-   const { registerLoader } = useSelector(
-      (state) => state.findJobs
-    );
-    console.log(registerLoader,"registerLoader")
+  const { registerLoader } = useSelector((state) => state.findJobs);
+  console.log(registerLoader, "registerLoader");
   const handleNameChange = (e) => {
     setName(e.target.value);
     setError(false);
@@ -32,9 +30,8 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
     formData.append("active_status", 2);
     formData.append("user_type", 2);
 
-    dispatch(registerUserData(formData)).then((result)=> {
-      if(result?.success) {
-
+    dispatch(registerUserData(formData)).then((result) => {
+      if (result?.success) {
         nextStep();
       }
     });
@@ -48,7 +45,11 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.closeButton} onClick={onClose}>
+        <div
+          className={styles.closeButton}
+          onClick={onClose}
+          disabled={registerLoader}
+        >
           x
         </div>
 
@@ -84,7 +85,11 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
           </div>
 
           <div className={styles.buttonContainer}>
-            <button className={styles.backButton} onClick={previousStep}>
+            <button
+              className={styles.backButton}
+              onClick={previousStep}
+              disabled={registerLoader}
+            >
               Back
             </button>
             <button

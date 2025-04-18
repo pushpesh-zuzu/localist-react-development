@@ -110,7 +110,11 @@ const DescribeYourRequest = ({ onClose }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.closeButton} onClick={onClose}>
+      <div
+        className={styles.closeButton}
+        onClick={onClose}
+        disabled={addDetailLoader}
+      >
         x
       </div>
       <div className={styles.successMessage}>

@@ -302,7 +302,11 @@ const CustomerQuestions = ({ selectedService }) => {
         </div>
 
         <div className={styles.footer}>
-          <button className={styles.removeService} onClick={handleRemoveModal}>
+          <button
+            className={styles.removeService}
+            onClick={handleRemoveModal}
+            disabled={leadPreferenceLoader}
+          >
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
           <button className={styles.saveButton} onClick={handleSubmitData}>

@@ -137,7 +137,11 @@ const ConfirmationModal = ({ onCancel, handleInputChange, formData }) => {
           send you quotes fast and free!
         </p>
         <div className={styles.buttonGroup}>
-          <button className={styles.backButton} onClick={onCancel}>
+          <button
+            className={styles.backButton}
+            onClick={onCancel}
+            disabled={registerLoader}
+          >
             Back
           </button>
           <button className={styles.continueButton} onClick={"handleSubmit"}>
