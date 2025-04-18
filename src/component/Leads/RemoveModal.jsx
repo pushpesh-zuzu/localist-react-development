@@ -9,24 +9,29 @@ const RemoveServiceModal = ({
   onConfirm,
   loading,
   serviceName,
-
 }) => {
   if (!open) return null;
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={onCancel}>
+        <button
+          className={styles.closeButton}
+          onClick={onCancel}
+          disabled={loading}
+        >
           ×
         </button>
         <p className={styles.text}>
           Are you sure you want to remove{" "}
-          <span className={styles.highlight}>
-        {serviceName} ? 
-          </span>
+          <span className={styles.highlight}>{serviceName} ?</span>
         </p>
         <div className={styles.actions}>
-          <button className={styles.cancelBtn} onClick={onCancel}>
+          <button
+            className={styles.cancelBtn}
+            onClick={onCancel}
+            disabled={loading}
+          >
             Cancel
           </button>
           <button
@@ -34,9 +39,13 @@ const RemoveServiceModal = ({
             onClick={onConfirm}
             disabled={loading}
           >
-            {loading ?  <Spin
-                          indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                        /> : "Remove"}
+            {loading ? (
+              <Spin
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              />
+            ) : (
+              "Remove"
+            )}
           </button>
         </div>
       </div>

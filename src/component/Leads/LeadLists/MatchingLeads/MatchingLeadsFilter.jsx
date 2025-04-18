@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
+import { getPopularServiceList } from "../../../../store/FindJobs/findJobSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const AccordionSection = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -23,12 +25,55 @@ const AccordionSection = ({ title, children }) => {
 };
 
 const MatchingLeadsFilter = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const { popularList } = useSelector((state) => state.findJobs);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    dispatch(getPopularServiceList());
+
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [dispatch]);
+
+  // States to manage selected filters
+  const [filters, setFilters] = useState({
+    keyword: "",
+    unread: false,
+    leadSpotlights: [],
+    buyerActions: [],
+    submittedWhen: "",
+    selectedServices: [],
+    location: "",
+    credits: [],
+    contactPreferences: [],
+  });
+
+  const handleCheckboxChange = (key, value) => {
+    setFilters((prev) => {
+      const list = prev[key];
+      return {
+        ...prev,
+        [key]: list.includes(value)
+          ? list.filter((item) => item !== value)
+          : [...list, value],
+      };
+    });
+  };
+
+  const handleRadioChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleInputChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleApply = () => {
+    console.log("Filters to send to API:", filters);
+    // yahan API call kar sakte ho
+  };
 
   return (
     <div className={styles.overlay}>
@@ -44,7 +89,12 @@ const MatchingLeadsFilter = ({ onClose }) => {
           {/* Keyword Search */}
           <AccordionSection title="Keyword search">
             <div className={styles.searchRow}>
-              <input type="text" placeholder="Keyword (e.g. name)" />
+              <input
+                type="text"
+                placeholder="Keyword (e.g. name)"
+                value={filters.keyword}
+                onChange={(e) => handleInputChange("keyword", e.target.value)}
+              />
               <button className={styles.searchBtn}>Search</button>
             </div>
           </AccordionSection>
@@ -52,128 +102,142 @@ const MatchingLeadsFilter = ({ onClose }) => {
           {/* View */}
           <AccordionSection title="View">
             <label>
-              <input type="checkbox" className={styles.checkboxInput} /> Unread
-              (285)
+              <input
+                type="checkbox"
+                className={styles.checkboxInput}
+                checked={filters.unread}
+                onChange={() => handleInputChange("unread", !filters.unread)}
+              />{" "}
+              Unread (285)
             </label>
           </AccordionSection>
 
           {/* Lead spotlights */}
           <AccordionSection title="Lead spotlights (226)">
-            <label className={styles.checkboxLabel}>
-              <input type="checkbox" className={styles.checkboxInput} /> All
-              lead spotlights (226)
-            </label>
-            <div className={styles.subCheckboxes}>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} />
-                Be first to respond (118)
+            {[
+              "Be first to respond",
+              "Urgent requests",
+              "Updated requests",
+              "Has additional details",
+            ].map((item) => (
+              <label key={item}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.leadSpotlights.includes(item)}
+                  onChange={() => handleCheckboxChange("leadSpotlights", item)}
+                />{" "}
+                {item}
               </label>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} />{" "}
-                Urgent requests (129)
-              </label>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} />{" "}
-                Updated requests (3)
-              </label>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} /> Has
-                additional details (209)
-              </label>
-            </div>
+            ))}
           </AccordionSection>
 
           {/* Actions buyer has taken */}
           <AccordionSection title="Actions buyer has taken">
-            <label className={styles.checkboxLabel}>
-              <input type="checkbox" className={styles.checkboxInput} /> Buyer
-              has taken an action (0)
-            </label>
-            <div className={styles.subCheckboxes}>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} /> Buyer
-                has re-entered info (6)
+            {[
+              "Buyer has re-entered info",
+              "Buyer has been online",
+              "Buyer has added images",
+            ].map((item) => (
+              <label key={item}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.buyerActions.includes(item)}
+                  onChange={() => handleCheckboxChange("buyerActions", item)}
+                />{" "}
+                {item}
               </label>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} /> Buyer
-                has been online (8)
-              </label>
-              <label>
-                <input type="checkbox" className={styles.checkboxInput} /> Buyer
-                has added images (2)
-              </label>
-            </div>
+            ))}
           </AccordionSection>
 
           {/* When the lead was submitted */}
           <AccordionSection title="When the lead was submitted">
-            <label>
-              <input type="radio" name="time" /> Any time
-            </label>
-            <label>
-              <input type="radio" name="time" /> Today (2)
-            </label>
-            <label>
-              <input type="radio" name="time" /> Yesterday (10)
-            </label>
-            <label>
-              <input type="radio" name="time" /> Last 2-3 days (22)
-            </label>
-            <label>
-              <input type="radio" name="time" /> Last 7 days (30)
-            </label>
-            <label>
-              <input type="radio" name="time" /> Last 14+ days (204)
-            </label>
+            {[
+              "Any time",
+              "Today",
+              "Yesterday",
+              "Last 2-3 days",
+              "Last 7 days",
+              "Last 14+ days",
+            ].map((option) => (
+              <label key={option}>
+                <input
+                  type="radio"
+                  name="time"
+                  checked={filters.submittedWhen === option}
+                  onChange={() => handleRadioChange("submittedWhen", option)}
+                />{" "}
+                {option}
+              </label>
+            ))}
           </AccordionSection>
 
           {/* Services */}
           <AccordionSection title="Services">
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} /> House
-              Cleaning (52)
-            </label>
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} /> Deep
-              Cleaning Services (12)
-            </label>
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} />{" "}
-              Post-Tenancy Cleaning (10)
-            </label>
+            {popularList?.map((service) => (
+              <label key={service.name}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.selectedServices.includes(service.name)}
+                  onChange={() =>
+                    handleCheckboxChange("selectedServices", service.name)
+                  }
+                />{" "}
+                {service.name}
+              </label>
+            ))}
           </AccordionSection>
 
           {/* Locations */}
           <AccordionSection title="Locations">
             <label>
-              <input type="radio" name="location" /> 10 miles from SS21
+              <input
+                type="radio"
+                name="location"
+                checked={filters.location === "10 miles from SS21"}
+                onChange={() =>
+                  handleRadioChange("location", "10 miles from SS21")
+                }
+              />{" "}
+              10 miles from SS21
             </label>
           </AccordionSection>
 
           {/* Credits */}
           <AccordionSection title="Credits">
-            {[...Array(12).keys()].map((i) => (
-              <label key={i}>
-                <input type="checkbox" className={styles.checkboxInput} />{" "}
-                {i + 2} Credits ({Math.floor(Math.random() * 20)})
-              </label>
-            ))}
+            {[...Array(12).keys()].map((i) => {
+              const credit = `${i + 2} Credits`;
+              return (
+                <label key={credit}>
+                  <input
+                    type="checkbox"
+                    className={styles.checkboxInput}
+                    checked={filters.credits.includes(credit)}
+                    onChange={() => handleCheckboxChange("credits", credit)}
+                  />{" "}
+                  {credit}
+                </label>
+              );
+            })}
           </AccordionSection>
 
           {/* Contact Preferences */}
           <AccordionSection title="Contact preferences">
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} /> Email
-              (70)
-            </label>
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} /> Text
-              (31)
-            </label>
-            <label>
-              <input type="checkbox" className={styles.checkboxInput} /> Phone
-              (21)
-            </label>
+            {["Email", "Text", "Phone"].map((pref) => (
+              <label key={pref}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.contactPreferences.includes(pref)}
+                  onChange={() =>
+                    handleCheckboxChange("contactPreferences", pref)
+                  }
+                />{" "}
+                {pref}
+              </label>
+            ))}
           </AccordionSection>
         </div>
 
@@ -182,7 +246,9 @@ const MatchingLeadsFilter = ({ onClose }) => {
           <button className={styles.cancelBtn} onClick={onClose}>
             Cancel
           </button>
-          <button className={styles.applyBtn}>Apply</button>
+          <button className={styles.applyBtn} onClick={handleApply}>
+            Apply
+          </button>
         </div>
       </div>
     </div>
