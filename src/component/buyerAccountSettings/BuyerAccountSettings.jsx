@@ -174,10 +174,14 @@ const BuyerAccountSettings = () => {
           "success",
           result?.message || "Password updated successfully!"
         );
+        setFormData({
+          password: "",
+          password_confirmation: "",
+          error: "",
+        });
       }
+      setIsModalOpen(false);
     });
-
-    setIsModalOpen(false);
   };
 
   const hanldeRequest = () => {
@@ -200,7 +204,7 @@ const BuyerAccountSettings = () => {
   const videoConstraints = {
     width: 1280,
     height: 720,
-    facingMode: "environment" // Use rear camera if available
+    facingMode: "environment", // Use rear camera if available
   };
 
   return (
@@ -263,26 +267,26 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-            <button 
-              className={styles.uploadButton} 
+            <button
+              className={styles.uploadButton}
               onClick={() => setIsCameraOpen(true)}
             >
               Take Photo
             </button>
           </div>
         </div>
-        
+
         {/* Camera Modal */}
         {isCameraOpen && (
           <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
+            <div className={styles.cameraModal}>
               <div className={styles.cameraContainer}>
                 <Webcam
                   audio={false}
                   ref={webcamRef}
                   screenshotFormat="image/jpeg"
                   videoConstraints={videoConstraints}
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                 />
               </div>
               <div className={styles.saveButtonWrapperModal}>
@@ -435,6 +439,7 @@ const BuyerAccountSettings = () => {
               <button
                 className={styles.modalCancelButton}
                 onClick={() => setIsModalOpen(false)}
+                disabled={changePasswordLoader}
               >
                 Cancel
               </button>

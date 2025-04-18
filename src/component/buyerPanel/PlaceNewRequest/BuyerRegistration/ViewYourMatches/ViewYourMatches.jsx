@@ -43,7 +43,11 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.closeButton} onClick={onClose}>
+        <div
+          className={styles.closeButton}
+          onClick={onClose}
+          disabled={requestLoader}
+        >
           x
         </div>
         <div className={styles.header}>
@@ -84,7 +88,11 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
           </div>
 
           <div className={styles.buttonContainer}>
-            <button className={styles.backButton} onClick={previousStep}>
+            <button
+              className={styles.backButton}
+              onClick={previousStep}
+              disabled={requestLoader}
+            >
               Back
             </button>
             <button className={styles.nextButton} onClick={handleSubmit}>
