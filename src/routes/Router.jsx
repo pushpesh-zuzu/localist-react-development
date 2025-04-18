@@ -48,8 +48,8 @@ const router = createBrowserRouter([
         element: <ServiceCreateAccount />,
       },
       { path: "/buyers/create", element: <ProtectedRoute><BuyerPanelPage /></ProtectedRoute> },
-      { path: "/account/setting", element: <BuyerAccountSettings /> },
-      { path: "/user/notification", element: <BuyerNotification /> },
+      { path: "/account/setting", element: <ProtectedRoute><BuyerAccountSettings /></ProtectedRoute> },
+      { path: "/user/notification", element: <ProtectedRoute><BuyerNotification /></ProtectedRoute> },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "/dashboard",
