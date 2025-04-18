@@ -77,7 +77,7 @@ const router = createBrowserRouter([
       },
       { path: "/leads/settings", element: <LeadSetting /> },
       { path: "/bids-list/:requestId", element: <BidsList /> },
-      { path: "/manual/bid-list", element: <ManualBidList /> },
+      { path: "/bid-list/reply/:requestId", element: <ManualBidList /> },
       { path: "/help-center", element: <HelpCenterPage /> },
       { path: "/pricing", element: <PricingPage /> },
       { path: "/feedback/questions", element: <SuggestQuestions /> },

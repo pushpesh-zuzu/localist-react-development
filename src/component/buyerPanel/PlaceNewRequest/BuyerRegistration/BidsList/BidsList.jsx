@@ -9,7 +9,7 @@ import {
   getAutoBid,
   getLocationLead,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
-import { BASE_IMAGE_URL } from "../../../../../utils";
+import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import { Spin } from "antd";
@@ -17,17 +17,17 @@ import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
-  const { autoBidList, bidListLoader, getlocationData } = useSelector(
+  const { autoBidList, bidListLoader, getlocationData, manualBidLoader } = useSelector(
     (state) => state.leadSetting
   );
   const [isModalOpen, setModalOpen] = useState(false)
-    const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null)
   const { registerData } = useSelector((state) => state?.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
-console.log(autoBidList,selectedItem,"autoBidList")
+
   useEffect(() => {
     const data = {
       user_id: userToken?.remember_tokens,
@@ -35,15 +35,15 @@ console.log(autoBidList,selectedItem,"autoBidList")
     };
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
-
+  const handleReply = () => {
+    navigate(`/bid-list/reply/${requestId}`)
+  }
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
 
-  const handleContinue = (item) => {
-  
-    console.log(item, "item");
-  
+  const handleContinue = () => {
+    if (!selectedItem) return;
     const formData = new FormData();
     formData.append("user_id", userToken?.remember_tokens);
     formData.append("seller_id", selectedItem?.id);
@@ -52,10 +52,16 @@ console.log(autoBidList,selectedItem,"autoBidList")
     formData.append("bidtype", "reply");
     formData.append("service_id", selectedItem?.service_id);
     formData.append("distance", selectedItem?.distance);
-  
-    dispatch(getAddManualBidData(formData));
+
+    dispatch(getAddManualBidData(formData)).then((result) => {
+      if (result) {
+        showToast("success", result?.message)
+        setModalOpen(false);
+      }
+    });;
+
   };
-  
+
 
   return (
     <div className={styles.container}>
@@ -68,7 +74,7 @@ console.log(autoBidList,selectedItem,"autoBidList")
           </h1>
           <div className={styles.tabs}>
             <button className={styles.activeTab}>Your matches</button>
-            <button className={styles.tab}>Replies</button>
+            <button className={styles.tab} onClick={handleReply}>Replies</button>
           </div>
         </div>
         <div className={styles.backBtnWrapper}>
@@ -183,9 +189,9 @@ console.log(autoBidList,selectedItem,"autoBidList")
 
                   <div className={styles.replyBtnWrapper}>
                     <button className={styles.replyBtn} onClick={() => {
-    setSelectedItem(item);
-    setModalOpen(true);
-  }}>Request reply</button>
+                      setSelectedItem(item);
+                      setModalOpen(true);
+                    }}>Request reply</button>
                   </div>
                 </div>
               </div>
@@ -198,6 +204,7 @@ console.log(autoBidList,selectedItem,"autoBidList")
         onClose={() => setModalOpen(false)}
         onContinue={handleContinue}
         message="Are you sure you want to continue?"
+        loading={manualBidLoader}
       />
     </div>
   );

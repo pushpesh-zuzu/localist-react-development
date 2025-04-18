@@ -1,34 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
+import { getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { Spin } from "antd";
 
 const ManualBidList = () => {
-  const staticBids = [
-    {
-      id: 1,
-      name: "John Doe",
-      distance: 5,
-      profile_image: "",
-      service_name: "Web Design",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      distance: 12,
-      profile_image: "",
-      service_name: "Logo Design",
-    },
-  ];
+  const dispatch = useDispatch()
+  const { requestId } = useParams()
+  const { autoBidListData,autobidLoader } = useSelector((state) => state.leadSetting)
+   const { userToken } = useSelector((state) => state.auth);
+  const navigate = useNavigate()
+  const webData = autoBidListData?.map(item => item?.service_name) || [];
 
+  const handleBack = () => {
+    navigate (`/bids-list/${requestId}`)
+  }
+useEffect(()=>{
+  const data = {
+    user_id:userToken?.remember_tokens,
+lead_id:requestId
+  }
+  dispatch(getAutoBidData(data))
+},[])
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
         <div className={styles.headingTabsWrapper}>
           <h1 className={styles.heading}>
-            {staticBids[0]?.service_name || "No Service"}
+            {webData[0] || "No Service"}
           </h1>
           {/* <div className={styles.tabs}>
             <button className={styles.activeTab}>Your matches</button>
@@ -36,7 +40,7 @@ const ManualBidList = () => {
           </div> */}
         </div>
         <div className={styles.backBtnWrapper}>
-          <button className={styles.backBtn}>Back</button>
+          <button className={styles.backBtn} onClick={handleBack}>Back</button>
         </div>
       </div>
 
@@ -50,7 +54,8 @@ const ManualBidList = () => {
         <select>
           <option>All response times</option>
         </select>
-        <span className={styles.matchCount}>{staticBids.length} matches</span>
+        <span className={styles.matchCount}>{(autoBidListData || []).length} matches</span>
+
         <select className={styles.sortDropdown}>
           <option>Sort by: best match</option>
         </select>
@@ -60,8 +65,8 @@ const ManualBidList = () => {
         <span>Recommended:</span> Request replies from your{" "}
         <strong>top matches</strong> to hear back faster
       </div>
-
-      {staticBids.map((item) => (
+{autobidLoader ? <Spin style={{color:"blue",display:"flex",justifyContent:"center"}}/> : <>
+      {autoBidListData?.map((item) => (
         <div className={styles.card} key={item.id}>
           <div className={styles.cardLeft}>
             <div className={styles.imageWrapper}>
@@ -112,12 +117,13 @@ const ManualBidList = () => {
               </div>
             </div>
 
-            <div className={styles.replyBtnWrapper}>
+            {/* <div className={styles.replyBtnWrapper}>
               <button className={styles.replyBtn}>Request reply</button>
-            </div>
+            </div> */}
           </div>
         </div>
       ))}
+      </>}
     </div>
   );
 };

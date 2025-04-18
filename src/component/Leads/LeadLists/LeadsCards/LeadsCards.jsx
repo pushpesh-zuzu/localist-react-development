@@ -10,12 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAddManualBidData, getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
+import { showToast } from "../../../../utils";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
-  const { leadRequestList, leadRequestLoader } = useSelector(
+  const { leadRequestList, leadRequestLoader,manualBidLoader } = useSelector(
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state)=> state.auth)
@@ -40,8 +41,12 @@ const LeadsCards = () => {
     formData.append("service_id", selectedItem?.service_id);
     formData.append("distance", null);
   
-    dispatch(getAddManualBidData(formData));
-    setModalOpen(false);
+    dispatch(getAddManualBidData(formData)).then((result) => {
+      if(result){
+showToast("success",result?.message)
+setModalOpen(false);
+      }
+    });
   }
 
   return (
@@ -160,6 +165,7 @@ const LeadsCards = () => {
         onClose={() => setModalOpen(false)}
         onContinue={handleContinue}
         message="Are you sure you want to continue?"
+        loading={manualBidLoader}
       />
     
     </>
