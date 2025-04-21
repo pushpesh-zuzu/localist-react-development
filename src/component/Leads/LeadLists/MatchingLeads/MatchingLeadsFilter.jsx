@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
 import { getPopularServiceList } from "../../../../store/FindJobs/findJobSlice";
@@ -32,7 +32,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  const { leadRequestLoader } = useSelector((state) => state.leadSetting)
+  const { leadRequestLoader } = useSelector((state) => state.leadSetting);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     dispatch(getPopularServiceList());
@@ -85,37 +85,35 @@ const MatchingLeadsFilter = ({ onClose }) => {
   //     credits:"",
   //   }
   //   dispatch(getLeadRequestList(filterData))
-  
+
   // };
   const handleApply = () => {
     const formData = new FormData();
-  
+
     formData.append("user_id", userToken?.remember_tokens || "");
     formData.append("name", filters.keyword || "");
     formData.append("lead_time", filters.submittedWhen || "");
     formData.append("distanceFilter", filters.location || "");
-  
-  
+
     const selectedServiceIds = filters.selectedServices
       .map((serviceName) => {
         const match = popularList.find((s) => s.name === serviceName);
-        return match?.id; 
+        return match?.id;
       })
-      .filter(Boolean); 
-  
+      .filter(Boolean);
+
     formData.append("service_id", selectedServiceIds.join(","));
-  
-    
+
     formData.append("credits", filters.credits.join(","));
     // formData.append("contact_preferences", filters.contactPreferences.join(","));
     formData.append("lead_spotlights", filters.leadSpotlights.join(","));
     // formData.append("buyer_actions", filters.buyerActions.join(","));
     // formData.append("unread", filters.unread ? "true" : "false");
     dispatch(getLeadRequestList(formData)).then((result) => {
-      if(result) {
-        showToast("success",result?.message)
+      if (result) {
+        showToast("success", result?.message);
       }
-      onClose()
+      onClose();
       setFilters({
         keyword: "",
         submittedWhen: "",
@@ -126,17 +124,38 @@ const MatchingLeadsFilter = ({ onClose }) => {
         leadSpotlights: [],
         buyerActions: [],
         unread: false,
-      })
+      });
     });
   };
-  
-  
+
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    };
+
+    // Add when component mounts
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Clean up when component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+
   return (
     <div className={styles.overlay}>
-      <div className={styles.modal}>
+      <div className={styles.modal} ref={modalRef}>
         <div className={styles.header}>
           <h3>Filter</h3>
-          <button onClick={onClose} className={styles.closeBtn} disabled={leadRequestLoader}>
+          <button
+            onClick={onClose}
+            className={styles.closeBtn}
+            disabled={leadRequestLoader}
+          >
             ×
           </button>
         </div>
@@ -248,50 +267,50 @@ const MatchingLeadsFilter = ({ onClose }) => {
 
           {/* Locations */}
           <AccordionSection title="Locations">
-  <label>
-    <input
-      type="radio"
-      name="location"
-      checked={filters.location === "All"}
-      onChange={() => handleRadioChange("location", "All")}
-    />{" "}
-    All
-  </label>
- 
-  <label>
-    <input
-      type="radio"
-      name="location"
-      checked={filters.location === "150 miles from 01201"}
-      onChange={() =>
-        handleRadioChange("location", "150 miles from 01201")
-      }
-    />{" "}
-    150 miles from 01201
-  </label>
-</AccordionSection>
+            <label>
+              <input
+                type="radio"
+                name="location"
+                checked={filters.location === "All"}
+                onChange={() => handleRadioChange("location", "All")}
+              />{" "}
+              All
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="location"
+                checked={filters.location === "150 miles from 01201"}
+                onChange={() =>
+                  handleRadioChange("location", "150 miles from 01201")
+                }
+              />{" "}
+              150 miles from 01201
+            </label>
+          </AccordionSection>
 
           {/* Credits */}
           <AccordionSection title="Credits">
-  {[
-    "1-5 Credits",
-    "6-10 Credits",
-    "11-15 Credits",
-    "16-20 Credits",
-    "21-25 Credits",
-    "26-30 Credits",
-  ].map((creditRange) => (
-    <label key={creditRange}>
-      <input
-        type="checkbox"
-        className={styles.checkboxInput}
-        checked={filters.credits.includes(creditRange)}
-        onChange={() => handleCheckboxChange("credits", creditRange)}
-      />{" "}
-      {creditRange}
-    </label>
-  ))}
-</AccordionSection>
+            {[
+              "1-5 Credits",
+              "6-10 Credits",
+              "11-15 Credits",
+              "16-20 Credits",
+              "21-25 Credits",
+              "26-30 Credits",
+            ].map((creditRange) => (
+              <label key={creditRange}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.credits.includes(creditRange)}
+                  onChange={() => handleCheckboxChange("credits", creditRange)}
+                />{" "}
+                {creditRange}
+              </label>
+            ))}
+          </AccordionSection>
 
           {/* Contact Preferences */}
           {/* <AccordionSection title="Contact preferences">
@@ -313,13 +332,21 @@ const MatchingLeadsFilter = ({ onClose }) => {
 
         {/* Buttons */}
         <div className={styles.footer}>
-          <button className={styles.cancelBtn} onClick={onClose} disabled={leadRequestLoader}>
+          <button
+            className={styles.cancelBtn}
+            onClick={onClose}
+            disabled={leadRequestLoader}
+          >
             Cancel
           </button>
           <button className={styles.applyBtn} onClick={handleApply}>
-            {leadRequestLoader ? <Spin
+            {leadRequestLoader ? (
+              <Spin
                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-              /> : "Apply"}
+              />
+            ) : (
+              "Apply"
+            )}
           </button>
         </div>
       </div>

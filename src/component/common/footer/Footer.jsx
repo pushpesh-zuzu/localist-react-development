@@ -8,13 +8,14 @@ import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
 import mailIcon from "../../../assets/Icons/emailIcon.svg";
 import callIcon from "../../../assets/Icons/callIcon.svg";
 import timerIcon from "../../../assets/Icons/timer.svg";
-
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showToast } from "../../../utils";
+import OtpVerification from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/OtpVerification/OtpVerification";
+import NumberVerified from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/NumberVerified/NumberVerified";
 
 const FooterContent = () => (
   <>
@@ -57,6 +58,9 @@ const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
   const navigate = useNavigate();
+  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  const [isNumberVerifiedModalOpen, setIsNumberVerifiedModalOpen] =
+    useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,8 +77,6 @@ const Footer = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerToken } = useSelector((state) => state.findJobs);
   const handleJoinAsProfessional = () => {
-    
-  
     if (userToken || registerToken) {
       showToast("info", "You're already logged in.");
     } else {
@@ -83,9 +85,8 @@ const Footer = () => {
     }
   };
   const handleHelpCenter = () => {
-    navigate("/help-center")
-  }
-  
+    navigate("/help-center");
+  };
 
   return (
     <footer className={styles.footer}>
@@ -118,11 +119,7 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <li
-                onClick={handleJoinAsProfessional}
-              >
-                Find a Professional
-              </li>
+              <li onClick={handleJoinAsProfessional}>Find a Professional</li>
               <li
                 onClick={() => {
                   navigate("/how-it-works");
@@ -132,7 +129,7 @@ const Footer = () => {
                 How it works
               </li>
               <li
-                 onClick={() => {
+                onClick={() => {
                   if (userToken || registerToken) {
                     showToast("info", "You're already logged in.");
                   } else {
@@ -151,19 +148,15 @@ const Footer = () => {
             <h4>For Professionals</h4>
             <ul>
               <li
-                // onClick={() => {
-                //   navigate("/how-it-works");
-                //   window.scrollTo(0, 0);
-                // }}
+              // onClick={() => {
+              //   navigate("/how-it-works");
+              //   window.scrollTo(0, 0);
+              // }}
               >
                 How it works
               </li>
-              <li onClick={()=> navigate("/pricing")}>Pricing</li>
-              <li
-                onClick={handleJoinAsProfessional}
-              >
-                Join as a Professional
-              </li>
+              <li onClick={() => navigate("/pricing")}>Pricing</li>
+              <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
               <li onClick={handleHelpCenter}>Help Centre</li>
               <li>Mobile App</li>
             </ul>
@@ -174,8 +167,8 @@ const Footer = () => {
             <ul>
               <li>About Bark</li>
               <li>Careers</li>
-              <li>Blog</li>
-              <li>Press</li>
+              <li onClick={() => setIsOtpModalOpen(true)}>Blog</li>
+              <li onClick={() => setIsNumberVerifiedModalOpen(true)}>Press</li>
             </ul>
           </div>
         </div>
@@ -217,7 +210,7 @@ const Footer = () => {
                 How it works
               </li>
               <li
-                 onClick={() => {
+                onClick={() => {
                   if (userToken || registerToken) {
                     showToast("info", "You're already logged in.");
                   } else {
@@ -238,19 +231,15 @@ const Footer = () => {
           >
             <ul>
               <li
-                // onClick={() => {
-                //   navigate("/how-it-works");
-                //   window.scrollTo(0, 0);
-                // }}
+              // onClick={() => {
+              //   navigate("/how-it-works");
+              //   window.scrollTo(0, 0);
+              // }}
               >
                 How it works
               </li>
-              <li onClick={()=> navigate("/pricing")}>Pricing</li>
-              <li
-                onClick={handleJoinAsProfessional}
-              >
-                Join as a Professional
-              </li>
+              <li onClick={() => navigate("/pricing")}>Pricing</li>
+              <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
               <li>Help Centre</li>
               <li>Mobile App</li>
             </ul>
@@ -283,6 +272,14 @@ const Footer = () => {
           <img src={trustpilotLogo} alt="Trustpilot Rating" />
         </div>
       </div>
+      <OtpVerification
+        open={isOtpModalOpen}
+        onClose={() => setIsOtpModalOpen(false)}
+      />
+      <NumberVerified
+        open={isNumberVerifiedModalOpen}
+        onClose={() => setIsNumberVerifiedModalOpen(false)}
+      />
     </footer>
   );
 };

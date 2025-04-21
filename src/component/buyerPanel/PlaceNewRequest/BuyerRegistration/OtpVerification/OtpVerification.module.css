@@ -1,0 +1,147 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalContent {
+  box-shadow: 0px 0px 10px 0px #0000000f;
+  background-color: #fff;
+  padding: 32px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  margin: 0 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 24px;
+  color: #000000;
+}
+
+.otpInputs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.otpInput {
+  width: 47px;
+  height: 40px;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  border-radius: 4px;
+}
+
+.instruction {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  color: #828282;
+  margin-bottom: 38px;
+}
+
+.instruction span {
+  color: #000000;
+}
+
+.submitBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 200px;
+}
+
+.submitBtn:hover {
+  background-color: #0096c4;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 24px;
+    max-width: 400px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .otpInputs {
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .otpInput {
+    width: 40px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .instruction {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+
+  .submitBtn {
+    padding: 10px 24px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 20px 16px;
+    max-width: 320px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .otpInputs {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .otpInput {
+    width: 36px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .instruction {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .submitBtn {
+    padding: 8px 20px;
+    font-size: 14px;
+    max-width: 160px;
+  }
+}

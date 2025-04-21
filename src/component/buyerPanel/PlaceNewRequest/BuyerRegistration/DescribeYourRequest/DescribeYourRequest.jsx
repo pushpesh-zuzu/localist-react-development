@@ -34,7 +34,7 @@ const DescribeYourRequest = ({ onClose }) => {
       if (text.trim() !== "") {
         dispatch(textQualityData({ text }));
       }
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(delayDebounce);
   }, [text, dispatch]);
