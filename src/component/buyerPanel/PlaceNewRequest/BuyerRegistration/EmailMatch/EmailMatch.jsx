@@ -58,20 +58,20 @@ const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
     }
     dispatch(setbuyerRegisterFormData({ name, email, phone }));
     // If you want to dispatch the form data:
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("name", name);
-    formData.append("phone", phone);
-    formData.append("form_status", 1);
-    formData.append("loggedUser", 2);
-    formData.append("active_status", 2);
-    formData.append("user_type", 2);
-    dispatch(registerUserData(formData)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message);
-        nextStep();
-      }
-    });
+    // const formData = new FormData();
+    // formData.append("email", email);
+    // formData.append("name", name);
+    // formData.append("phone", phone);
+    // formData.append("form_status", 1);
+    // formData.append("loggedUser", 2);
+    // formData.append("active_status", 2);
+    // formData.append("user_type", 2);
+    // dispatch(registerUserData(formData)).then((result) => {
+    //   if (result?.success) {
+    //     showToast("success", result?.message);
+    //   }
+    // });
+    nextStep();
   };
 
   const [showError, setShowError] = useState(false);

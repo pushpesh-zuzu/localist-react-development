@@ -24,8 +24,8 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
-    ? [1, 2, 4, 5, 6]
-    : [1, 2, 3, 4, 5, 6];
+    ? [1, 2,3, 4, 5, 6,7,8]
+    : [2, 3, 4, 5, 7,8];
 
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
@@ -75,7 +75,77 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-        {buyerStep === 1 && (
+
+      {buyerStep === 1 && (
+         
+          <EmailMatch
+          nextStep={nextStep}
+          previousStep={previousStep}
+          onClose={handleClose}
+          formData={buyerRequest}
+          setEmails={setEmails}
+        />
+        )}
+        {
+          buyerStep === 2 && (
+            <WhatServiceYouNeed
+            nextStep={nextStep}
+            formData={buyerRequest}
+            serviceId={serviceId}
+            serviceName={serviceName}
+            onClose={handleClose}
+            pincodes={postcode}
+          />
+          )
+        }
+
+{buyerStep === 3 && (
+          <QuestionModal
+            questions={questionanswerData}
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={handleClose}
+            loading={questionLoader}
+            formData={buyerRequest}
+          />
+        )}
+
+        {
+          buyerStep === 4 && (
+<>Prem</>
+          )
+        }
+          {
+          buyerStep === 5 && (
+            <>saini</>
+          )
+        }
+          {
+          buyerStep === 6 && (
+            <ViewYourMatches
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={handleClose}
+            formData={buyerRequest}
+          />
+          )
+        }
+  {
+          buyerStep === 7 && (
+            <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
+          )
+        }
+
+{buyerStep === 8 && (
+          <BidsList
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={handleClose}
+          />
+        )}
+
+
+        {/* {buyerStep === 1 && (
           <WhatServiceYouNeed
             nextStep={nextStep}
             formData={buyerRequest}
@@ -116,7 +186,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
             email={email}
             // loading={registerLoader}
           />
-        )} */}
+        )} 
 
         {buyerStep === 4 && (
           <ViewYourMatches
@@ -138,7 +208,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
             onClose={handleClose}
           />
         )}
-      </div>
+      </div> */}
 
       {/* {showConfirmModal && (
         <ConfirmationModal
@@ -146,6 +216,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
           onCancel={() => setShowConfirmModal(false)}
         />
       )} */}
+      </div>
     </div>
   );
 };
