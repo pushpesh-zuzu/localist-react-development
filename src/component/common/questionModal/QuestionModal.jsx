@@ -87,7 +87,7 @@ const QuestionModal = ({
 
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
-      ans: finalAnswer.join(", "), // Or just `finalAnswer` if API expects array
+      ans: finalAnswer.join(", "),
     };
 
     const previousAnswers = buyerRequest?.questions || [];
@@ -125,26 +125,24 @@ const QuestionModal = ({
           ✖
         </button>
 
-        <div className={styles.headerImage}>
-          <h2>
-            {questions.length > 0
-              ? questions[currentQuestion]?.questions
-              : "No Questions Available"}
-          </h2>
-          <Progress
-            percent={progressPercent}
-            strokeColor="#00AFE3"
-            trailColor="#EDEDED"
-            strokeWidth={3}
-            showInfo={false}
-            className={styles.customProgress}
-          />
-        </div>
-
         {loading ? (
-          <Spin />
-        ) : (
+          <div className={styles.loaderContainer}>
+            <Spin size="large" />
+          </div>
+        ) : questions.length > 0 ? (
           <>
+            <div className={styles.headerImage}>
+              <h2>{questions[currentQuestion]?.questions}</h2>
+              <Progress
+                percent={progressPercent}
+                strokeColor="#00AFE3"
+                trailColor="#EDEDED"
+                strokeWidth={3}
+                showInfo={false}
+                className={styles.customProgress}
+              />
+            </div>
+
             <div className={styles.optionsContainer}>
               {questions[currentQuestion]?.answer
                 ?.split(",")
@@ -173,27 +171,27 @@ const QuestionModal = ({
             )}
 
             {error && <p className={styles.errorMessage}>{error}</p>}
-          </>
-        )}
 
-        <div className={styles.buttonContainer}>
-          {currentQuestion > 0 && (
-            <button
-              onClick={handleBack}
-              disabled={currentQuestion === 0}
-              className={styles.backButton}
-            >
-              Back
-            </button>
-          )}
-          <button
-            onClick={handleNext}
-            disabled={loading}
-            className={styles.nextButton}
-          >
-            {currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
-          </button>
-        </div>
+            <div className={styles.buttonContainer}>
+              {currentQuestion > 0 && (
+                <button
+                  onClick={handleBack}
+                  disabled={currentQuestion === 0}
+                  className={styles.backButton}
+                >
+                  Back
+                </button>
+              )}
+              <button
+                onClick={handleNext}
+                disabled={loading}
+                className={styles.nextButton}
+              >
+                {currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
+              </button>
+            </div>
+          </>
+        ) : null}
       </div>
     </div>
   );
