@@ -23,7 +23,7 @@ const QuestionModal = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-
+console.log(buyerRequest,"buyer")
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);

@@ -10,8 +10,10 @@ import EmailMatch from "./EmailMatch/EmailMatch";
 import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
+import OtpVerification from "./OtpVerification/OtpVerification";
+import NumberVerifiedModal from "./NumberVerified/NumberVerified";
 
-const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
+const BuyerRegistration = ({ closeModal, serviceId, serviceName, postcode }) => {
   // const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
@@ -19,13 +21,13 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
   const { adminToken } = useSelector((state) => state.auth);
-  const { registerData,registerLoader } = useSelector((state) => state.findJobs);
+  const { registerData, registerLoader } = useSelector((state) => state.findJobs);
 
   const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
-    ? [1, 2,3, 4, 5, 6,7,8]
-    : [2, 3, 4, 5, 7,8];
+    ? [ 2, 3, 6, 7, 8]
+    : [1,2, 3, 4, 5, 7, 8];
 
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
@@ -42,8 +44,9 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
   };
 
   useEffect(() => {
-    dispatch(setBuyerStep(1));
-  }, []);
+    const initialStep = isAdminOrRemembered ? 2 : 1;
+    dispatch(setBuyerStep(initialStep));
+  }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
     if (buyerStep) {
@@ -76,30 +79,30 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
     <div className={styles.modal}>
       <div className={styles.modalContent}>
 
-      {buyerStep === 1 && (
-         
+        {buyerStep === 1 && (
+
           <EmailMatch
-          nextStep={nextStep}
-          previousStep={previousStep}
-          onClose={handleClose}
-          formData={buyerRequest}
-          setEmails={setEmails}
-        />
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={handleClose}
+            formData={buyerRequest}
+            setEmails={setEmails}
+          />
         )}
         {
           buyerStep === 2 && (
             <WhatServiceYouNeed
-            nextStep={nextStep}
-            formData={buyerRequest}
-            serviceId={serviceId}
-            serviceName={serviceName}
-            onClose={handleClose}
-            pincodes={postcode}
-          />
+              nextStep={nextStep}
+              formData={buyerRequest}
+              serviceId={serviceId}
+              serviceName={serviceName}
+              onClose={handleClose}
+              pincodes={postcode}
+            />
           )
         }
 
-{buyerStep === 3 && (
+        {buyerStep === 3 && (
           <QuestionModal
             questions={questionanswerData}
             nextStep={nextStep}
@@ -112,31 +115,39 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
 
         {
           buyerStep === 4 && (
-<>Prem</>
+            <OtpVerification nextStep={nextStep}
+              previousStep={previousStep}
+              open={true}
+            // onClose={handleClose} 
+            />
           )
         }
-          {
+        {
           buyerStep === 5 && (
-            <>saini</>
-          )
-        }
-          {
-          buyerStep === 6 && (
-            <ViewYourMatches
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-            formData={buyerRequest}
+          <NumberVerifiedModal 
+          nextStep={nextStep}
+          previousStep={previousStep}
+          open={true}
           />
           )
         }
-  {
+        {
+          buyerStep === 6 && (
+            <ViewYourMatches
+              nextStep={nextStep}
+              previousStep={previousStep}
+              onClose={handleClose}
+              formData={buyerRequest}
+            />
+          )
+        }
+        {
           buyerStep === 7 && (
             <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
           )
         }
 
-{buyerStep === 8 && (
+        {buyerStep === 8 && (
           <BidsList
             nextStep={nextStep}
             previousStep={previousStep}
@@ -210,7 +221,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName,postcode}) => {
         )}
       </div> */}
 
-      {/* {showConfirmModal && (
+        {/* {showConfirmModal && (
         <ConfirmationModal
           onConfirm={confirmClose}
           onCancel={() => setShowConfirmModal(false)}

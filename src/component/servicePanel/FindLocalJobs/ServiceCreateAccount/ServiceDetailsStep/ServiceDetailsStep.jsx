@@ -71,7 +71,7 @@ const ServiceDetailsStep = ({
               {errors.email && (
                 <p className={styles.errorText}>{errors.email}</p>
               )}
-              <div
+              {/* <div
                 className={styles.labelInputWrapper}
                 style={{ position: "relative" }}
               >
@@ -102,7 +102,7 @@ const ServiceDetailsStep = ({
               </div>
               {errors.password && (
                 <p className={styles.errorText}>{errors.password}</p>
-              )}
+              )} */}
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number (Optional)</label>

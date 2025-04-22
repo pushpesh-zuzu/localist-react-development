@@ -15,7 +15,8 @@ const initialState = {
     postcode:"",
     questions:[],
     phone:"",
-    recevive_online:""
+    recevive_online:"",email:"",
+    name:""
 },
 qualityData:{},
 addDetailLoader:false,
@@ -360,7 +361,7 @@ const buyerSlice = createSlice({
     postcode:"",
     questions:[],
     phone:"",
-    recevive_online:""
+    recevive_online:"",email:"",name:""
       }
     }
   },

@@ -11,27 +11,33 @@ import { getAddManualBidData, getLeadRequestList } from "../../../../store/LeadS
 import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
+import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
-  const { leadRequestList, leadRequestLoader,manualBidLoader } = useSelector(
+  const [visibleCount, setVisibleCount] = useState(5);
+
+  const { leadRequestList, leadRequestLoader, manualBidLoader } = useSelector(
     (state) => state.leadSetting
   );
-  const { userToken } = useSelector((state)=> state.auth)
-  const data =  leadRequestList?.length
-  console.log(leadRequestList,"leadRequestList")
+  const { userToken } = useSelector((state) => state.auth)
+  const data = leadRequestList?.length
+  console.log(leadRequestList, "leadRequestList")
   useEffect(() => {
     const leadRequestData = {
-      user_id:userToken?.remember_tokens
+      user_id: userToken?.remember_tokens
     }
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
+  const handleViewMore = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
 
   const handleContinue = () => {
     if (!selectedItem) return;
-  
+
     const formData = new FormData();
     formData.append("buyer_id", selectedItem?.customer_id);
     formData.append("user_id", userToken?.remember_tokens);
@@ -40,11 +46,11 @@ const LeadsCards = () => {
     formData.append("bidtype", "purchase_leads");
     formData.append("service_id", selectedItem?.service_id);
     formData.append("distance", null);
-  
+
     dispatch(getAddManualBidData(formData)).then((result) => {
-      if(result){
-showToast("success",result?.message)
-setModalOpen(false);
+      if (result) {
+        showToast("success", result?.message)
+        setModalOpen(false);
       }
     });
   }
@@ -62,7 +68,7 @@ setModalOpen(false);
         />
       ) : (
         <>
-          {leadRequestList?.map((item) => {
+          {leadRequestList?.slice(0, visibleCount)?.map((item) => {
             return (
               <>
                 <div className={styles.card}>
@@ -97,6 +103,9 @@ setModalOpen(false);
 
                   {/* Middle Section - Job Details */}
                   <div className={styles.jobDetails}>
+                    <div className={styles.saveBtnBox}>
+                      <button className={styles.saveBtn}><img src={saveImg} alt="image" />Save For Later</button>
+                    </div>
                     <div className={styles.badges}>
                       {item?.is_phone_verified == 1 && (
                         <span className={styles.verified}>
@@ -119,29 +128,29 @@ setModalOpen(false);
                         </span>
                       )}
                     </div>
-                  <div className={styles.jobInfo}>
-  {item?.questions &&
-    JSON.parse(item?.questions)?.map((qa, index) => (
-      <div key={index}>
-        <p>
-          <strong>{qa?.ques}</strong>
-        </p>
-        <p>{qa?.ans}</p>
-      </div>
-    ))}
-</div>
-{/* <p>
+                    <div className={styles.jobInfo}>
+                      {item?.questions &&
+                        JSON.parse(item?.questions)?.map((qa, index) => (
+                          <div key={index}>
+                            <p>
+                              <strong>{qa?.ques}</strong>
+                            </p>
+                            <p>{qa?.ans}</p>
+                          </div>
+                        ))}
+                    </div>
+                    {/* <p>
                         <strong>Starting:</strong> In the next month
                       </p> */}
-</div>
+                  </div>
 
                   {/* Right Section - Lead Purchase */}
                   <div className={styles.leadActions}>
                     <button className={styles.purchaseButton} onClick={() => {
-    setSelectedItem(item);
-    setModalOpen(true);
-  }}>
-                      Purchase Lead
+                      setSelectedItem(item);
+                      setModalOpen(true);
+                    }}>
+                      Contact Isabella
                     </button>
                     <span className={styles.credits}>
                       {item?.credit_score}Credits
@@ -155,19 +164,25 @@ setModalOpen(false);
               </>
             );
           })}{" "}
-          <div className={styles.viewMoreBtnWrapper}>
+          {/* <div className={styles.viewMoreBtnWrapper}>
             <button>View More</button>
-          </div>
+          </div> */}
+          {leadRequestList?.length > visibleCount && (
+            <div className={styles.viewMoreBtnWrapper}>
+              <button onClick={handleViewMore}>View More</button>
+            </div>
+          )}
+
         </>
       )}
-        <CustomModal
+      <CustomModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         onContinue={handleContinue}
         message="Are you sure you want to continue?"
         loading={manualBidLoader}
       />
-    
+
     </>
   );
 };

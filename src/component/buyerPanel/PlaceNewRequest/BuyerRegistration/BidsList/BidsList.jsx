@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
+import greenCheck from "../../../../../assets/Images/Leads/greenCheckbox.svg"
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,6 +63,7 @@ const BidsList = ({ previousStep }) => {
   };
 
   return (
+    <>
     <div className={styles.container}>
       {bidListLoader ? (
         <div className={styles.loaderWrapper}>
@@ -113,12 +115,18 @@ const BidsList = ({ previousStep }) => {
               <option>Sort by: best match</option>
             </select>
           </div>
-
           <div className={styles.recommendBar}>
+<div className={styles.recommendBox}>
+  <div>
             <span>Recommended:</span> Request replies from your{" "}
             <strong>top matches</strong> to hear back faster
           </div>
-
+            <button className={styles.requestBtn}>Request your best matches here</button>
+          </div> 
+          </div>
+          <div className={styles.requestMatchBox}>
+          <button className={styles.requestBtnMatchBox}>Request your best matches here</button>
+          </div>
           {autoBidList?.length === 0 ? (
             <div className={styles.noBidWrapper}>
               <h1 className={styles.noBidText}>No seller available</h1>
@@ -185,6 +193,10 @@ const BidsList = ({ previousStep }) => {
                     </div>
 
                     <div className={styles.replyBtnWrapper}>
+                    <div className={styles.replyCheckbox}>
+                    {/* <input type="checkbox" /> */}
+                    <img src={greenCheck} alt="..." />
+                    </div>
                       <button
                         className={styles.replyBtn}
                         onClick={() => {
@@ -200,6 +212,7 @@ const BidsList = ({ previousStep }) => {
               ))
             )
           )}
+         
 
           <CustomModal
             isOpen={isModalOpen}
@@ -210,7 +223,12 @@ const BidsList = ({ previousStep }) => {
           />
         </>
       )}
+      <div className={styles.moreProfessionalBtnBox}>
+     <button className={styles.moreProfessionalBtn}>See More Professionals</button>
+   </div>
     </div>
+     
+   </>
   );
 };
 

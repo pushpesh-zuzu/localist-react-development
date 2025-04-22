@@ -4,12 +4,14 @@ import FeelingStuck from "./FeelingStuck/FeelingStuck";
 import MatchingLeads from "./MatchingLeads/MatchingLeads";
 import LeadsCards from "./LeadsCards/LeadsCards";
 import FeelingStuckFooter from "./FeelingStuckFooter/FeelingStuckFooter";
+import CreditMatch from "./CreditMatch/CreditMatch";
 
 const LeadLists = () => {
   return (
     <>
       <div className={styles.leadListsContainer}>
-        <FeelingStuck />
+        {/* <FeelingStuck /> */}
+        <CreditMatch/>
         <MatchingLeads />
         <LeadsCards />
         <FeelingStuckFooter />

@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
-import { getPopularServiceList } from "../../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getCreditList, getleadPreferencesList, getLeadRequestList, getLocationLead } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getfilterListData, getLeadRequestList, } from "../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -32,16 +31,15 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  const { leadRequestLoader,preferenceList,getlocationData,getCreditListData } = useSelector((state) => state.leadSetting)
- console.log(getlocationData,"getlocationData")
+  const { leadRequestLoader, filterListData } = useSelector((state) => state.leadSetting)
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const data = {
       user_id: userToken?.remember_tokens
     }
-    dispatch(getleadPreferencesList(data));
-    dispatch(getLocationLead(data))
-    dispatch(getCreditList())
+
+    dispatch(getfilterListData(data))
 
     return () => {
       document.body.style.overflow = "auto";
@@ -80,19 +78,6 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const handleInputChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
-
-  // const handleApply = () => {
-  //   const filterData = {
-  //     user_id:userToken?.remember_tokens,
-  //     name:"",
-  //     lead_time:"",
-  //     service_id:"",
-  //     distanceFilter:"",
-  //     credits:"",
-  //   }
-  //   dispatch(getLeadRequestList(filterData))
-
-  // };
   const handleApply = () => {
     const formData = new FormData();
 
@@ -192,141 +177,105 @@ const MatchingLeadsFilter = ({ onClose }) => {
               Unread (285)
             </label>
           </AccordionSection> */}
-
-          {/* Lead spotlights */}
-          <AccordionSection title="Lead spotlights (226)">
-          <label className={styles.checkboxInputs}>
-    <input
-      type="checkbox"
-      className={styles.checkboxInput}
-      checked={filters.leadSpotlights.includes("All lead spotlights")}
-      onChange={() => handleCheckboxChange("leadSpotlights", "All lead spotlights")}
-    />{" "}
-    All lead spotlights (229)
-  </label>
-            {[
-              // "Be first to respond",
-              "Urgent requests (12)",
-              "Updated requests (12)",
-              "Has additional details (121)",
-            ].map((item) => (
-              <label key={item}>
-                <input
-                  type="checkbox"
-                  className={styles.checkboxInput}
-                  checked={filters.leadSpotlights.includes(item)}
-                  onChange={() => handleCheckboxChange("leadSpotlights", item)}
-                />{" "}
-                {item}
-              </label>
+          <AccordionSection title={"Lead spotlights"}>
+            {filterListData?.[0]?.leadSpotlights?.map((item) => (
+              <div key={item.spotlight}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <input
+                    type="checkbox"
+                    checked={filters.leadSpotlights.includes(item.spotlight)}
+                    onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
+                  />
+                  {item.spotlight} ({item.count})
+                </label>
+              </div>
             ))}
           </AccordionSection>
 
+
           {/* Actions buyer has taken */}
-          {/* <AccordionSection title="Actions buyer has taken">
-            {[
-              "Buyer has re-entered info",
-              "Buyer has been online",
-              "Buyer has added images",
-            ].map((item) => (
-              <label key={item}>
-                <input
-                  type="checkbox"
-                  className={styles.checkboxInput}
-                  checked={filters.buyerActions.includes(item)}
-                  onChange={() => handleCheckboxChange("buyerActions", item)}
-                />{" "}
-                {item}
-              </label>
-            ))}
-          </AccordionSection> */}
+
 
           {/* When the lead was submitted */}
           <AccordionSection title="When the lead was submitted">
-            {[
-              "Any time (12)",
-              // "Last hour",
-              "Today (192)",
-              "Yesterday (12)",
-              "Last 2-3 days (122)",
-              "Last 7 days (126)",
-              "Last 14+ days (12)",
-            ].map((option) => (
-              <label key={option}>
-                <input
-                  type="radio"
-                  name="time"
-                  checked={filters.submittedWhen === option}
-                  onChange={() => handleRadioChange("submittedWhen", option)}
-                />{" "}
-                {option}
-              </label>
+            {filterListData?.[0]?.leadTime?.map((item) => (
+              <div key={item.time}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <input
+                    type="radio"
+                    name="submittedWhen" // radio buttons ko group karne ke liye
+                    checked={filters.submittedWhen === item.time}
+                    onChange={() => handleRadioChange("submittedWhen", item.time)}
+                  />
+                  {item.time} ({item.count})
+                </label>
+              </div>
             ))}
           </AccordionSection>
 
           {/* Services */}
           <AccordionSection title="Services">
-            {preferenceList?.map((service) => (
-              <label key={service.name}>
-                <input
-                  type="checkbox"
-                  className={styles.checkboxInput}
-                  checked={filters.selectedServices.includes(service.name)}
-                  onChange={() =>
-                    handleCheckboxChange("selectedServices", service.name)
-                  }
-                />{" "}
-                {service.name} ({service?.leadcount})
-              </label>
-            ))}
+            {filterListData?.[0]?.services
+              ?.map((item) => (
+                <div key={item.name}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <input
+                      type="checkbox"
+                      name="submittedWhen" // radio buttons ko group karne ke liye
+                      checked={filters.selectedServices.includes(item.name)}
+                      onChange={() => handleCheckboxChange("selectedServices", item.name)}
+                    />
+                    {item.name} ({item.leadcount})
+                  </label>
+                </div>
+              ))}
           </AccordionSection>
 
           {/* Locations */}
           <AccordionSection title="Locations">
-  {/* All Option */}
-  <label>
-    <input
-      type="radio"
-      name="location"
-      checked={filters.location === "All"}
-      onChange={() => handleRadioChange("location", "All")}
-    />
-    All
-  </label>
+            {/* All Option */}
+            <label>
+              <input
+                type="radio"
+                name="location"
+                checked={filters.location === "All"}
+                onChange={() => handleRadioChange("location", "All")}
+              />
+              All
+            </label>
 
-  {/* Dynamic Options from getlocationData */}
-  {getlocationData?.map((loc, index) => (
-    <label key={loc.id}>
-      <input
-        type="radio"
-        name="location"
-        checked={
-          filters.location === `${loc.miles} miles from ${loc.postcode}`
-        }
-        onChange={() =>
-          handleRadioChange("location", `${loc.miles} miles from ${loc.postcode}`) 
-        }
-      />
-      {`${loc.miles} miles from ${loc.postcode} (${loc.leadcount})`} 
-    </label>
-  ))}
-</AccordionSection>
+            {/* Dynamic Options from getlocationData */}
+
+            {filterListData?.[0]?.location?.map((item) => (
+              <div key={item.time}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <input
+                    type="radio"
+                    name="location" // radio buttons ko group karne ke liye
+                    checked={filters.location === `${item.miles} miles from ${item.postcode}`}
+                    onChange={() => handleRadioChange("location", `${item.miles} miles from ${item.postcode}`)}
+                  />
+                  {`${item.miles} miles from ${item.postcode} (${item.leadcount})`}
+                </label>
+              </div>
+            ))}
+          </AccordionSection>
 
 
           {/* Credits */}
           <AccordionSection title="Credits">
-  {getCreditListData?.map((creditItem) => (
-    <label key={creditItem.id}>
-      <input
-        type="checkbox"
-        className={styles.checkboxInput}
-        checked={filters.credits.includes(creditItem.credits)}
-        onChange={() => handleCheckboxChange("credits", creditItem.credits)}
-      />
-      {creditItem.credits} ({creditItem?.leadcount})
-    </label>
-  ))}
-</AccordionSection>
+            {filterListData?.[0]?.credits?.map((creditItem) => (
+              <label key={creditItem.id}>
+                <input
+                  type="checkbox"
+                  className={styles.checkboxInput}
+                  checked={filters.credits.includes(creditItem.credits)}
+                  onChange={() => handleCheckboxChange("credits", creditItem.credits)}
+                />
+                {creditItem.credits} ({creditItem?.leadcount})
+              </label>
+            ))}
+          </AccordionSection>
 
           {/* Contact Preferences */}
           {/* <AccordionSection title="Contact preferences">

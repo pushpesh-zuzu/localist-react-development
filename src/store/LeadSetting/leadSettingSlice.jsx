@@ -21,7 +21,8 @@ const initialState = {
     manualBidLoader:false,
     autobidLoader:false,
     getCreditLoader:false,
-    getCreditListData:[]
+    getCreditListData:[],
+    filterListData:[]
 };
 
 
@@ -301,6 +302,8 @@ export const getleadPreferencesList = (serviceId) => {
            return response.data
         }
       } catch (error) {
+        
+        showToast("error",error?.response?.data?.message)
         //   dispatch(setAuthError(error?.response?.data?.message));
       } finally {
         dispatch(setManualBidListLoader(false));
@@ -321,6 +324,24 @@ export const getleadPreferencesList = (serviceId) => {
         dispatch(setGetCreditListLoader(false));
       }
     }
+  }
+
+  export const getfilterListData = (filterData) => {
+    return async (dispatch) => {
+      dispatch(setManualBidListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/leads-by-filter`, filterData);
+  
+        if (response) {
+          dispatch(setFilterWiseData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setManualBidListLoader(false));
+      }
+    };
   }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
@@ -379,11 +400,14 @@ const leadSettingSlice = createSlice({
       },
       setCreditsList(state,action) {
       state.getCreditListData = action.payload
+      },
+      setFilterWiseData(state,action) {
+        state.filterListData = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilterWiseData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

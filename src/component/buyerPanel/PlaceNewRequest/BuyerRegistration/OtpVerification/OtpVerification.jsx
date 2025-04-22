@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./OtpVerification.module.css";
 
-const OtpVerification = ({ open, onClose }) => {
+const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
 
@@ -46,6 +46,9 @@ const OtpVerification = ({ open, onClose }) => {
       inputRefs.current[3].focus();
     }
   };
+  const handleSubmit = () => {
+    nextStep()
+  }
 
   return (
     <div className={styles.modalOverlay}>
@@ -75,7 +78,7 @@ const OtpVerification = ({ open, onClose }) => {
           <span>+ 000 000 0000</span>
         </p>
 
-        <button className={styles.submitBtn}>Submit</button>
+        <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );

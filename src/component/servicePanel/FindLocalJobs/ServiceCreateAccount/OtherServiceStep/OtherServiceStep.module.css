@@ -136,7 +136,7 @@
   align-items: center;
   margin-bottom: 20px;
   gap: 12px;
-  width: 100%;
+  width: 55%;
 }
 
 .dropdown {
@@ -158,6 +158,11 @@
   background-position: right 12px center;
   background-size: 16px;
   padding-right: 30px;
+}
+.radiusBtn {
+display: flex;
+justify-content: start;
+margin-bottom: 8px;
 }
 
 .expandBtn {
@@ -277,7 +282,37 @@
 .errorBorder {
   border: 2px solid red !important;
 }
+.milesBox {
+  display: flex;
+  
+}
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-top: -30px;
+ 
+}
 
+.inputWrapper img {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  width: 11.59px;
+  height: 16.56;
+}
+.input {
+  padding-left: 12px;
+  height: 35px;
+}
+.fromText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  margin-bottom: 10px;
+  text-align: start;
+}
 .buttonContainer {
   display: flex;
   justify-content: space-between;

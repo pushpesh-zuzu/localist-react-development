@@ -103,6 +103,18 @@
   vertical-align: middle;
   text-wrap: nowrap;
 }
+.saveBtnBox img {
+margin-right: 4px;
+  
+}
+.saveBtn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 7px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
 
 .badges {
   display: flex;

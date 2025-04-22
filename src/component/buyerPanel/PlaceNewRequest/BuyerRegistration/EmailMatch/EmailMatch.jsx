@@ -8,6 +8,7 @@ import {
   setbuyerRegisterFormData,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../../utils";
+import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
 
 const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
     if (setEmails) {
       setEmails(email);
     }
-    dispatch(setbuyerRegisterFormData({ name, email, phone }));
+    dispatch(setbuyerRequestData({ name, email, phone }));
     // If you want to dispatch the form data:
     // const formData = new FormData();
     // formData.append("email", email);

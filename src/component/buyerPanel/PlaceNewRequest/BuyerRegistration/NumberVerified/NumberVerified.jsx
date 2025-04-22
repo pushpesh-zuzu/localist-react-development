@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./NumberVerified.module.css";
 import { CheckOutlined } from "@ant-design/icons";
 
-const NumberVerifiedModal = ({ open, onClose }) => {
+const NumberVerifiedModal = ({ open, onClose ,nextStep, previousStep}) => {
   if (!open) return null;
+  const handleSubmit = () => {
+    nextStep()
+  }
 
   return (
     <div className={styles.modalOverlay}>
@@ -21,11 +24,9 @@ const NumberVerifiedModal = ({ open, onClose }) => {
             <button className={styles.backButton} onClick={onClose}>
               Back
             </button>
-            <button className={styles.viewMatchesButton}>
-              <span className={styles.checkIcon}>
-                <CheckOutlined />
-              </span>
-              View your matches now.
+            <button className={styles.viewMatchesButton} onClick={handleSubmit}>
+             Next
+              
             </button>
           </div>
           <p className={styles.note}>

@@ -58,9 +58,9 @@ const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
   const navigate = useNavigate();
-  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
-  const [isNumberVerifiedModalOpen, setIsNumberVerifiedModalOpen] =
-    useState(false);
+  // const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  // const [isNumberVerifiedModalOpen, setIsNumberVerifiedModalOpen] =
+  //   useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -167,8 +167,8 @@ const Footer = () => {
             <ul>
               <li>About Bark</li>
               <li>Careers</li>
-              <li onClick={() => setIsOtpModalOpen(true)}>Blog</li>
-              <li onClick={() => setIsNumberVerifiedModalOpen(true)}>Press</li>
+              <li>Blog</li>
+              <li>Press</li>
             </ul>
           </div>
         </div>
@@ -272,14 +272,14 @@ const Footer = () => {
           <img src={trustpilotLogo} alt="Trustpilot Rating" />
         </div>
       </div>
-      <OtpVerification
+      {/* <OtpVerification
         open={isOtpModalOpen}
         onClose={() => setIsOtpModalOpen(false)}
       />
       <NumberVerified
         open={isNumberVerifiedModalOpen}
         onClose={() => setIsNumberVerifiedModalOpen(false)}
-      />
+      /> */}
     </footer>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -12,6 +12,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
+import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const [Input, setInput] = useState("");
@@ -20,6 +21,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
   console.log(formData?.service_id[0], "form");
   const {
     service,
@@ -225,25 +227,45 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
             />
             <span className={styles.labelText}>Auto Bid</span>
           </label>
-
-          <div className={styles.dropdownWrapper}>
-            <select
-              className={styles.dropdown}
-              name="miles2"
-              value={formData?.miles2}
-              onChange={handleInputChange}
-            >
-              <option value="1">1 mile</option>
-              <option value="2">2 miles</option>
-              <option value="5">5 miles</option>
-              <option value="10">10 miles</option>
-              <option value="30">30 miles</option>
-              <option value="50">50 miles</option>
-              <option value="100">100 miles</option>
-            </select>
-            <button className={styles.expandBtn}>Expand Radius</button>
+          <div className={styles.milesBox}>
+            <div className={styles.dropdownWrapper}>
+              <select
+                className={styles.dropdown}
+                name="miles2"
+                value={formData?.miles2}
+                onChange={handleInputChange}
+              >
+                <option value="1">1 mile</option>
+                <option value="2">2 miles</option>
+                <option value="5">5 miles</option>
+                <option value="10">10 miles</option>
+                <option value="30">30 miles</option>
+                <option value="50">50 miles</option>
+                <option value="100">100 miles</option>
+              </select>
+            </div>
+            <div className={styles.inputWrapper}>
+              <span className={styles.fromText}>From</span>
+              <img src={LocationIcon} alt="" />
+              <input
+                type="text"
+                placeholder="Enter your postcode"
+                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
+                  }`}
+                ref={inputRef}
+                name="postcode"
+                // value={formData.postcode || ""}
+                onChange={handleInputChange ? handleInputChange : () => { }}
+              />
+              {/* {errors.postcode && (
+                          <p className={styles.errorText}>{errors.postcode}</p>
+                        )} */}
+            </div>
           </div>
           {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
+          <div className={styles.radiusBtn}>
+            <button className={styles.expandBtn}>Expand Radius</button>
+          </div>
           <div className={styles.leadInfo_wrapper}>
             {/* <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>1060</h1>
@@ -267,9 +289,17 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
             <button
               type="button"
               className={styles.nextButton}
-              onClick={handleOpenModal}
+              onClick={handleSubmit}
             >
-              Next
+             {registerLoader ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "white" }} />
+                    }
+                  />
+                ) : (
+                  "Continue"
+                )}
             </button>
           </div>
         </div>

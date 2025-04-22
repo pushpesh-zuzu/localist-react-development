@@ -123,6 +123,7 @@ const ServiceLocationStep = ({
               )}
             </div>
           </div>
+          <div className={styles.nationwideFooter}>
           <label className={styles.checkboxLabel}>
             <input
               type="checkbox"
@@ -132,8 +133,22 @@ const ServiceLocationStep = ({
               className={styles.checkboxInput}
             />
             <span className={styles.checkboxCustom}></span> Nationwide
+           
           </label>
-
+          <div className={styles.switchWrapper}>
+    <label className={styles.switch}>
+      <input
+        type="checkbox"
+        name="online_lead"
+        checked={formData?.online_lead === 1}
+        onChange={handleInputChange}
+      />
+      <span className={styles.slider}></span>
+    </label>
+    <span className={styles.switchLabel}>Online/Remote Lead</span>
+  </div>
+  <div></div>
+          </div>
           <div className={styles.footer}>
             <p className={styles.infoText}>
               <img src={iIcon} alt="" /> You can change your location at any

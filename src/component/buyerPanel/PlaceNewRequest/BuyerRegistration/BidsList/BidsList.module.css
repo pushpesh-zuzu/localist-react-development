@@ -106,23 +106,52 @@
 .sortDropdown {
   margin-left: auto;
 }
+.recommendBox{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
 .recommendBar {
   background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
   color: white;
   padding: 19.19px 27.12px 23.02px 27.12px;
-  margin-bottom: 35.84px;
+  margin-bottom: 17.84px;
   font-weight: 400;
   font-size: 22px;
   vertical-align: middle;
 }
-
+.requestBtn {
+  background-color: #000000;
+  padding: 6px 16px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
 .recommendBar span {
   color: #fff600;
   font-weight: 600;
 }
 .recommendBar strong {
   font-weight: 700;
+}
+.requestMatchBox {
+  display: flex;
+  justify-content: center;
+}
+.requestBtnMatchBox {
+  background-color: #000000;
+  padding: 6px 16px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 17.5px;
 }
 
 .card {
@@ -279,6 +308,7 @@
   align-items: center;
   background: #e3f6fc;
   width: 265.4px;
+  flex-direction: column;
 }
 
 .replyBtn {
@@ -296,6 +326,34 @@
 
 .replyBtn:hover {
   background-color: #0096c4;
+}
+/* .replyCheckbox input {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  background-color: #1CDD0A;
+}
+.replyCheckbox input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+  accent-color: #1CDD0A;
+  color: #ffffff;
+} */
+.moreProfessionalBtnBox{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+.moreProfessionalBtn {
+  background-color: var(--primary-color);
+  padding: 1px 29px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 17.5px;
 }
 
 @media (max-width: 1200px) {

@@ -38,7 +38,7 @@ const ServiceBusinessAddressStep = ({
             {/* {errors.address && <p className={styles.errorText}>{errors.address}</p>} */}
 
             <div className={styles.labelInputWrapper}>
-              <label className={styles.label}>Suite or apt. # (optional)</label>
+              <label className={styles.label}>Building or House Name/Number</label>
               <input type="text" className={styles.input} name="suite"
                   value={formData.suite}
                   onChange={handleInputChange}/>
@@ -57,7 +57,7 @@ const ServiceBusinessAddressStep = ({
             {/* {errors.city && <p className={styles.errorText}>{errors.city}</p>} */}
 
             <div className={styles.labelInputWrapper}>
-              <label className={styles.label}>State</label>
+              <label className={styles.label}>Country</label>
               <input
                 type="text"
                 className={styles.input}
@@ -68,7 +68,7 @@ const ServiceBusinessAddressStep = ({
             </div>
             {/* {errors.state && <p className={styles.errorText}>{errors.state}</p>} */}
             <div className={styles.labelInputWrapper}>
-              <label className={styles.label}>ZIP code</label>
+              <label className={styles.label}>Postcode</label>
               <div className={styles.toggleGroup}>
   <button
     type="button"
