@@ -64,13 +64,20 @@ const BidsList = ({ previousStep }) => {
     });
   };
   const handleMultple = () => {
+    const bidList=autoBidList?.[0]?.sellers ;
+    
     const multipleData = {
-      service_id:1,
-      seller_id:1,
-      bid:1,
-      distance:1,
-      bidtype:"reply",
-      lead_id:requestId
+      service_id:bidList.map(item=>item?.service_id
+      ),
+      seller_id:bidList.map(item=>item?.id
+      ),
+      bid:bidList.map(item=>item?.credit_score
+      ),
+      distance:bidList.map(item=>item?.distance
+      ),
+      // bidtype:"reply",
+      lead_id:requestId,
+      user_id: userToken?.remember_tokens
     }
     dispatch(getAddMultipleManualBidData(multipleData))
   }

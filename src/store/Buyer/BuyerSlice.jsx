@@ -79,9 +79,9 @@ export const createRequestData = (requestData) => {
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id))
         dispatch(setRequestData(response?.data?.data))
-        dispatch(setCreateRequestToken(response?.data?.data?.token))
+        dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
         dispatch(setRegisterData(response?.data?.data))
-        dispatch(setRegisterToken(response?.data?.data?.token));
+        dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         return response.data
         // navigate("/buyers/create");
       }
