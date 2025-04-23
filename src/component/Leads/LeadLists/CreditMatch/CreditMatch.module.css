@@ -1,175 +1,217 @@
-/* BuyCredits.module.css */
 .buyCreditsContainer {
-    display: flex;
-    align-items: stretch;
-    background-color: #f0f8fa;
-    border-radius: 4px;
-    /* width: 100%;
-    max-width: 1000px; */
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 64px;
+  gap: 20px;
+  background-color: #e3f6fc;
+}
+
+.creditsSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+}
+
+.titleSection {
+  width: 50%;
+  border-right: 3px solid #bcefff;
+}
+
+.titleSection h2 {
+  font-weight: 600;
+  font-size: 36px;
+  vertical-align: middle;
+  max-width: 222px;
+}
+
+.actionSection {
+  width: 50%;
+  max-width: 192px;
+  padding: 8px 0px 8px 40px;
+  text-align: end;
+  border-left: 3px solid #bcefff;
+}
+
+.locationTag {
+  border: 1.06px solid #000000;
+  border-radius: 2.42px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px;
+}
+
+.locationTag img {
+  width: 66px;
+  height: 26px;
+}
+
+.creditsAmount {
+  font-weight: 500;
+  font-size: 16.14px;
+  vertical-align: middle;
+}
+
+.usageInfo {
+  margin-top: 18px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.totalPrice {
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.unitPrice {
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
+  color: #868686;
+}
+
+.autoTopUpContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  text-align: center;
+  gap: 11px;
+}
+
+.buyButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 25.5px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.buyButton:hover {
+  background-color: #0099cc;
+}
+
+.autoTopUpCheckbox {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 1px solid #d9d9d9;
+  /* box-shadow: 0px 0px 2px 0.5px #0000001a; */
+}
+
+.autoTopUpLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .buyCreditsContainer {
+    padding: 22px 20px;
   }
-  
-  .titleSection, .infoSection, .priceSection, .actionSection {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* border-right: 1px dashed #cae6f1; */
-  }
-  
-  .titleSection {
-    width: 20%;
-    border-right: 1px dashed #cae6f1;
-    padding: 22px 64px;
-  }
-  
-  .infoSection {
-    width: 30%;
-    padding: 22px 60px;
-  }
-  
-  .priceSection {
-    width: 20%;
-    border-right: 1px dashed #cae6f1;
-    padding: 22px 60px;
-  }
-  
+
   .actionSection {
-    width: 30%;
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .buyCreditsContainer {
+    flex-direction: column;
+    padding: 20px 30px;
+    gap: 15px;
+  }
+
+  .titleSection {
+    width: 100%;
     border-right: none;
-    display: flex;
+    border-bottom: 3px solid #bcefff;
+    padding-bottom: 15px;
+    text-align: center;
+  }
+
+  .titleSection h2 {
+    max-width: 100%;
+    font-size: 28px;
+  }
+
+  .creditsSection {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 22px 60px;
+    width: 100%;
+    padding: 15px 0;
   }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-    line-height: 1.2;
-    color: #222;
+
+  .actionSection {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    border-left: none;
+    border-top: 3px solid #bcefff;
+    padding-top: 15px;
+    text-align: center;
   }
-  
-  .creditsInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .locationTag {
-    display: flex;
-    align-items: center;
-    background-color: #e2f1f7;
-    border-radius: 20px;
-    padding: 6px 12px;
-    width: fit-content;
-  }
-  
-  .locationIcon {
-    color: #0099cc;
-    margin-right: 5px;
-    font-size: 16px;
-  }
-  
-  .creditsAmount {
-    font-weight: 500;
-    color: #222;
-  }
-  
-  .usageInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .usageText {
-    font-size: 14px;
-    color: #000000;
-    font-weight: 500;
-  }
-  
-  .availabilityBar {
-    background-color: #e6e6e6;
-    border-radius: 12px;
-    padding: 4px 8px;
-    width: fit-content;
-  }
-  
-  .availabilityText {
-    font-size: 12px;
-    color: #666;
-  }
-  
-  .priceInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .totalPrice {
-    font-size: 16px;
-    font-weight: 600;
-    color: #000000;
-  }
-  
-  .unitPrice {
-    font-size: 16px;
-    color: #868686;
-    font-weight: 600;
-  }
-  
-  .buyButton {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .buyButton:hover {
-    background-color: #0099cc;
-  }
-  
+
   .autoTopUpContainer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    justify-content: center;
   }
-  
-  .autoTopUpCheckbox {
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .buyCreditsContainer {
+    padding: 18px 20px;
   }
-  
+
+  .titleSection h2 {
+    font-size: 24px;
+  }
+
+  .buyButton {
+    font-size: 18px;
+    padding: 8px 16px;
+  }
+
+  .creditsInfo,
+  .priceInfo {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .buyCreditsContainer {
+    padding: 15px 12px;
+  }
+
+  .titleSection h2 {
+    font-size: 20px;
+  }
+
+  .buyButton {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
   .autoTopUpLabel {
+    font-size: 12px;
+  }
+
+  .creditsAmount,
+  .totalPrice {
     font-size: 14px;
-    font-weight: 500;
-    color: #000000;
-    cursor: pointer;
   }
-  
-  /* For responsive design */
-  @media (max-width: 768px) {
-    .buyCreditsContainer {
-      flex-direction: column;
-    }
-    
-    .titleSection, .infoSection, .priceSection, .actionSection {
-      width: 100%;
-      border-right: none;
-      border-bottom: 1px dashed #cae6f1;
-      padding: 15px;
-    }
-    
-    .actionSection {
-      border-bottom: none;
-      align-items: center;
-    }
+
+  .usageText,
+  .unitPrice {
+    font-size: 12px;
   }
+}
