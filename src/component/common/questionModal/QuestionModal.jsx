@@ -3,9 +3,12 @@ import { Progress, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  createRequestData,
   setbuyerRequestData,
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
+
+import { LoadingOutlined } from "@ant-design/icons";
 
 const QuestionModal = ({
   questions = [],
@@ -15,7 +18,7 @@ const QuestionModal = ({
   loading,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest } = useSelector((state) => state.buyer);
+  const { buyerRequest,requestLoader } = useSelector((state) => state.buyer);
 
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -99,6 +102,18 @@ console.log(buyerRequest,"buyer")
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+       const formData = new FormData();
+       formData.append("email",buyerRequest?.email);
+       formData.append("name",buyerRequest?.name);
+       formData.append("phone",buyerRequest?.phone);
+          formData.append("service_id", buyerRequest?.service_id);
+          formData.append("postcode", buyerRequest?.postcode);
+          formData.append("questions", JSON.stringify(updatedAnswers))
+          formData.append("form_status", 1);
+          // form_status: 1,
+          // formData.append("recevive_online", consent ? 1 : 0);
+      
+          dispatch(createRequestData(formData));
       nextStep();
     }
   };
@@ -187,7 +202,12 @@ console.log(buyerRequest,"buyer")
                 disabled={loading}
                 className={styles.nextButton}
               >
-                {currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
+                {requestLoader ? (
+                <Spin
+                  indicator={
+                    <LoadingOutlined spin style={{ color: "white" }} />
+                  }
+                />) : currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
               </button>
             </div>
           </>

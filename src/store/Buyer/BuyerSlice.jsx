@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import axios from "axios";
+import { setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
 
 const initialState = {
   questionLoader:false,
@@ -22,13 +23,16 @@ qualityData:{},
 addDetailLoader:false,
 buyerrequestListLoader:false, 
 buyerRequestList:[] ,
+requestDataList:[],
+createRequestToken: JSON.parse(localStorage.getItem("createRequestToken")) || null,
 getuploadImg:[],
 infoLoader:false,
 requestLoader:false,
 submitImageLoader:false,
 notificationList:[],
 notificationLoader:false,
-addNotificationLoader:false
+addNotificationLoader:false,
+verifyPhoneNumberLoader:false
 };
 
 export const questionAnswerData = (questionData) => {
@@ -72,9 +76,12 @@ export const createRequestData = (requestData) => {
       );
 
       if (response) {
-      
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id))
+        dispatch(setRequestData(response?.data?.data))
+        dispatch(setCreateRequestToken(response?.data?.data?.token))
+        dispatch(setRegisterData(response?.data?.data))
+        dispatch(setRegisterToken(response?.data?.data?.token));
         return response.data
         // navigate("/buyers/create");
       }
@@ -289,7 +296,26 @@ export const addNotificationData = (addNotificationData) => {
     }
   };
 };
+export const verifyPhoneNumberData = (verifyData) => {
+  return async (dispatch) => {
+    dispatch(setVerifyPhoneNumberLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `customer/verify-phone-number`,
+        verifyData
+      );
 
+      if (response) {
+      //  dispatch(setGetNotificationData(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setVerifyPhoneNumberLoader(false));
+    }
+  };
+};
 
 
 
@@ -355,6 +381,13 @@ const buyerSlice = createSlice({
     setAddNotificationLoader(state, action) {
       state.addNotificationLoader = action.payload;
     },
+    setRequestData(state,action) {
+      state.requestDataList = action.payload
+    },
+    setCreateRequestToken(state,action) {
+      state.createRequestToken = action.payload
+      localStorage.setItem("createRequestToken", JSON.stringify(action.payload))
+    },
     clearSetbuyerRequestData(state,action){
       state.buyerRequest ={
         service_id:"",
@@ -363,10 +396,13 @@ const buyerSlice = createSlice({
     phone:"",
     recevive_online:"",email:"",name:""
       }
+    },
+    setVerifyPhoneNumberLoader(state,action) {
+      state.verifyPhoneNumberLoader = action.payload
     }
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,clearSetbuyerRequestData,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

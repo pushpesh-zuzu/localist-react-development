@@ -32,16 +32,16 @@ const ServiceCreateAccount = () => {
       } else if (!/\S+@\S+\.\S+/.test(selectedServiceFormData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
-        newErrors.password = "Password is required";
-      } else if (
-        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
-          selectedServiceFormData.password
-        )
-      ) {
-        newErrors.password =
-          "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
-      }
+      // if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
+      //   newErrors.password = "Password is required";
+      // } else if (
+      //   !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
+      //     selectedServiceFormData.password
+      //   )
+      // ) {
+      //   newErrors.password =
+      //     "Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)";
+      // }
     }
 
     if (registerStep === 3) {

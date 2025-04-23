@@ -7,6 +7,7 @@ import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAddManualBidData,
+  getAddMultipleManualBidData,
   getAutoBid,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
@@ -23,6 +24,7 @@ const BidsList = ({ previousStep }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const { userToken } = useSelector((state) => state.auth);
+  const { createRequestToken } = useSelector((state) => state.buyer)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
@@ -61,6 +63,17 @@ const BidsList = ({ previousStep }) => {
       }
     });
   };
+  const handleMultple = () => {
+    const multipleData = {
+      service_id:1,
+      seller_id:1,
+      bid:1,
+      distance:1,
+      bidtype:"reply",
+      lead_id:requestId
+    }
+    dispatch(getAddMultipleManualBidData(multipleData))
+  }
 
   return (
     <>
@@ -121,11 +134,11 @@ const BidsList = ({ previousStep }) => {
             <span>Recommended:</span> Request replies from your{" "}
             <strong>top matches</strong> to hear back faster
           </div>
-            <button className={styles.requestBtn}>Request your best matches here</button>
+            <button className={styles.requestBtn} onClick={handleMultple}>Request your best matches here</button>
           </div> 
           </div>
           <div className={styles.requestMatchBox}>
-          <button className={styles.requestBtnMatchBox}>Request your best matches here</button>
+          <button className={styles.requestBtnMatchBox} onClick={handleMultple}>Request your best matches here</button>
           </div>
           {autoBidList?.length === 0 ? (
             <div className={styles.noBidWrapper}>

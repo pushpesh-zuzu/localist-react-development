@@ -22,7 +22,7 @@ const LogSwitch = () => {
   const [dataSave,setDataSave] = useState()
 const [registerdata,setRegisterDatas] = useState()
   const { userToken, currentUser } = useSelector((state) => state.auth);
-  // const { registerData } = useSelector((state)=> state.findJobs)
+  const { createRequestToken } = useSelector((state)=> state.buyer)
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
@@ -206,7 +206,7 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
 </div>
 
       {/* User Options Popover */}
-      {registerToken || userToken ? (
+      {(registerToken || userToken ) ? (
         <Popover
           content={
             <>

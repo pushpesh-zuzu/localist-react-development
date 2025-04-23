@@ -27,6 +27,7 @@ phone:""
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
+    is_online : 0,
     nation_wide: 0,
     name: "",
     email: "",
@@ -42,12 +43,15 @@ phone:""
     address: "",
     state: "",
     city: "",
+    country: "",
+    apartment :"",
     zipcode: "",
     is_zipcode: 1,
     suite: "",
     service_id: [],
     auto_bid: 1,
     miles2: "1",
+
   },
   
 };

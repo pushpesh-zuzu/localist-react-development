@@ -286,7 +286,7 @@ margin-bottom: 8px;
   display: flex;
   
 }
-.inputWrapper {
+/* .inputWrapper {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -304,7 +304,29 @@ margin-bottom: 8px;
 .input {
   padding-left: 12px;
   height: 35px;
+} */
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 50%;
+  position: relative;
+  margin-top: -30px;
+  
 }
+
+.inputWrapper img {
+  position: absolute;
+  top: 42px;
+  left: 10px;
+  width: 11.59px;
+  height: 16.56;
+}
+.input {
+  padding-left: 12px;
+  height: 35px;
+}
+
 .fromText {
   font-weight: 500;
   font-size: 14px;

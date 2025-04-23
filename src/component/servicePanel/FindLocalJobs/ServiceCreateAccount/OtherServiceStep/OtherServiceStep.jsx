@@ -14,7 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
 
-const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
+const OtherServiceStep = ({ prevStep, handleInputChange, formData,setFormData }) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -22,7 +22,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(formData?.service_id[0], "form");
+  console.log(inputRef, "form");
   const {
     service,
     registerLoader,
@@ -47,10 +47,63 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       dispatch(setService([]));
     };
   }, [Input, dispatch]);
+useEffect(() => {
+    // Load Google Places API script dynamically
+    const loadGoogleMapsScript = () => {
+      if (!window.google) {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places`;
+        script.async = true;
+        script.defer = true;
+        script.onload = initAutocomplete;
+        document.body.appendChild(script);
+      } else {
+        initAutocomplete();
+      }
+    };
+
+    // Initialize Google Autocomplete
+    const initAutocomplete = () => {
+      if (!inputRef.current) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          types: ["geocode"],
+          componentRestrictions: { country: "IN" }, // Restrict to India
+        }
+      );
+
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.address_components) return;
+
+        let postalCode = "";
+        place.address_components.forEach((component) => {
+          if (component.types.includes("postal_code")) {
+            postalCode = component.long_name; // Extract postal code correctly
+          }
+        });
+
+        if (postalCode) {
+          // dispatch(setSelectedServiceFormData(postalCode));
+
+          // ✅ Update Input Field with Selected Postal Code
+          dispatch(setFormData({ postcode_new: postalCode }));
+          inputRef.current.value = postalCode; // Update input value
+        } else {
+          showToast("error", "No PIN code found! Please try again.");
+        }
+      });
+    };
+
+    loadGoogleMapsScript();
+  }, [setFormData, formData]);
 
   const handleSelectService = (item) => {
     if (!selectedServices?.some((service) => service.id === item.id)) {
       dispatch(setselectedServices([...selectedServices, item]));
+
     }
     setInput("");
     dispatch(setService([]));
@@ -119,6 +172,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
       active_status: 1,
       loggedUser: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
+      is_online: formData.is_online ? 1 : 0,
     };
 
     dispatch(registerUserData(payload)).then((result) => {
@@ -140,11 +194,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
   const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
+    const selectedId=selectedServices.map(item=>item.id)
     const serviceId = {
-      service_id: formData?.service_id[0],
+      service_id: [formData?.service_id[0],...selectedId].join(","),
     };
+    
     dispatch(pendingLeadData(serviceId));
-  }, []);
+  }, [selectedServices]);
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -246,20 +302,17 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData }) => {
             </div>
             <div className={styles.inputWrapper}>
               <span className={styles.fromText}>From</span>
-              <img src={LocationIcon} alt="" />
+              {/* <img src={LocationIcon} alt="" /> */}
               <input
-                type="text"
-                placeholder="Enter your postcode"
-                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
-                  }`}
-                ref={inputRef}
-                name="postcode"
-                // value={formData.postcode || ""}
-                onChange={handleInputChange ? handleInputChange : () => { }}
-              />
-              {/* {errors.postcode && (
-                          <p className={styles.errorText}>{errors.postcode}</p>
-                        )} */}
+  type="text"
+  ref={inputRef}
+  name="postcode_new"
+  value={formData.postcode_new || ""}
+  onChange={handleInputChange}
+  placeholder="Enter your postcode"
+  className={`${styles.input} ${errors.postcode_new ? styles.errorBorder : ""}`}
+/>
+            
             </div>
           </div>
           {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}

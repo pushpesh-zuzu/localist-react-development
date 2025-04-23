@@ -1,10 +1,15 @@
 import React, { useRef, useState } from "react";
 import styles from "./OtpVerification.module.css";
+import { verifyPhoneNumberData } from "../../../../../store/Buyer/BuyerSlice";
+import { showToast } from "../../../../../utils";
+import { useDispatch, useSelector } from "react-redux";
 
 const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
-
+  const dispatch = useDispatch()
+  const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
+console.log(requestDataList?.user_id,createRequestToken,"requestDataList")
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -47,8 +52,28 @@ const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
     }
   };
   const handleSubmit = () => {
-    nextStep()
-  }
+    const enteredOtp = otp.join(""); 
+  
+    if (enteredOtp.length < 4) {
+      showToast("error", "Please enter a valid 4-digit OTP.");
+      return;
+    }
+  
+    const data = {
+      user_id: requestDataList?.user_id,
+      otp: enteredOtp,
+    };
+  
+    dispatch(verifyPhoneNumberData(data)).then((result) => {
+      if (result?.success) {
+        showToast("success", result?.message);
+      } else {
+        showToast("error", result?.message || "OTP verification failed");
+      }
+    });
+    nextStep();
+  };
+  
 
   return (
     <div className={styles.modalOverlay}>

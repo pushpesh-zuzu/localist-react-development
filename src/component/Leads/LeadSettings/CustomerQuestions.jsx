@@ -61,13 +61,15 @@ const CustomerQuestions = ({ selectedService }) => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
       leadPreferenceData.forEach((item) => {
-        if (item.answers) {
-          initialAnswers[item.id] = item.answers;
+        if (item.answer) {
+          const options = item.answer.split(",").map((a) => a.trim());
+          initialAnswers[item.id] = options;
         }
       });
       setSelectedAnswers(initialAnswers);
     }
   }, [leadPreferenceData]);
+
   useEffect(() => {
     const locationWise = {
       user_id: userToken?.remember_tokens,
@@ -77,8 +79,23 @@ const CustomerQuestions = ({ selectedService }) => {
   }, [selectedService?.id]);
 
   const handleSubmitData = () => {
+    const hasEmptyAnswers = leadPreferenceData.some((item) => {
+      const selected = selectedAnswers[item.id];
+      return !selected || selected.length === 0;
+    });
+
+
+    if (hasEmptyAnswers) {
+      showToast("error", "At least one option must be selected for each question.");
+      return;
+    }
+
     const questionIds = Object.keys(selectedAnswers);
-    const answers = Object.values(selectedAnswers);
+
+    // Convert each answer array to a comma-separated string
+    const answers = Object.values(selectedAnswers).map((ans) =>
+      Array.isArray(ans) ? ans.join(',') : ans
+    );
 
     const data = {
       user_id: userToken?.remember_tokens,
@@ -90,16 +107,18 @@ const CustomerQuestions = ({ selectedService }) => {
     dispatch(leadPreferencesData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Data submitted successfully");
-        dispatch(
-          leadPreferences({
-            user_id: userToken?.remember_tokens,
-            service_id: selectedService?.id,
-          })
-        );
+        // dispatch(
+        //   leadPreferences({
+        //     user_id: userToken?.remember_tokens,
+        //     service_id: selectedService?.id,
+        //   })
+        // );
       }
-      setSelectedAnswers({});
+      // setSelectedAnswers({});
     });
   };
+
+
 
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -166,8 +185,8 @@ const CustomerQuestions = ({ selectedService }) => {
       userToken?.active_status === 1
         ? userToken?.remember_tokens
         : registerData?.active_status === 1
-        ? registerData?.remember_tokens
-        : null;
+          ? registerData?.remember_tokens
+          : null;
 
     if (user_id && selectedService?.id) {
       dispatch(
@@ -243,24 +262,30 @@ const CustomerQuestions = ({ selectedService }) => {
                 </p>
 
                 <div
-                  className={`${styles.options} ${
-                    isOpen ? styles.showOptions : ""
-                  }`}
+                  className={`${styles.options} ${isOpen ? styles.showOptions : ""
+                    }`}
                 >
                   {options.map((opt) => (
                     <label key={opt} className={styles.option}>
                       <input
-                        type="radio"
+                        type="checkbox"
                         name={`question-${item.id}`}
                         value={opt}
-                        checked={selectedAnswers[item.id] === opt}
-                        onChange={() =>
-                          setSelectedAnswers((prev) => ({
-                            ...prev,
-                            [item.id]: opt,
-                          }))
-                        }
+                        checked={selectedAnswers[item.id]?.includes(opt)}
+                        onChange={() => {
+                          setSelectedAnswers((prev) => {
+                            const current = prev[item.id] || [];
+                            const updated = current.includes(opt)
+                              ? current.filter((o) => o !== opt) // remove if already selected
+                              : [...current, opt]; // add if not selected
+                            return {
+                              ...prev,
+                              [item.id]: updated,
+                            };
+                          });
+                        }}
                       />
+
                       {opt}
                     </label>
                   ))}
@@ -321,98 +346,6 @@ const CustomerQuestions = ({ selectedService }) => {
         </div>
       </div>
 
-      {/* <Modal
-        title="Add a New Location"
-        open={isLocationModalOpen}
-        Handle={() => setIsLocationModalOpen(false)}
-        onOk={handleLocationSubmit}
-      >
-        <div className={styles.formGroup}>
-          <div
-            className={styles.inputGroup}
-            style={{ display: "flex", gap: "10px" }}
-          >
-            <div style={{ flex: 1 }}>
-              <span className={styles.fromText}>Miles</span>
-              <select
-                name="miles1"
-                value={locationData.miles1}
-                onChange={handleLocationChange}
-                style={{ width: "100%", padding: "8px" }}
-              >
-                {[1, 2, 5, 10, 30, 50, 100].map((mile) => (
-                  <option key={mile} value={mile}>
-                    {mile}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div style={{ flex: 1 }}>
-              <span className={styles.fromText}>ZIP Code</span>
-              <input
-                type="text"
-                placeholder="Enter your postcode"
-                name="postcode"
-                value={locationData.postcode}
-                onChange={handleLocationChange}
-                style={{ width: "100%", padding: "8px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal> */}
-      {/* <Modal
-        title={"Add a New Location"}
-        open={isLocationModalOpen}
-        footer={[
-          <Button key="cancel" onClick={() => {
-            setIsLocationModalOpen(false);
-            setIsEditingLocation(false);
-            setEditLocationId(null);
-            setLocationData({ miles1: "", postcode: "" });
-          }}>
-            Cancel
-          </Button>,
-          <Button key="next" type="primary" onClick={handleNext}>
-            Next
-          </Button>
-        ]}
-      >
-        <div className={styles.formGroup}>
-          <div className={styles.inputGroup} style={{ display: "flex", gap: "10px" }}>
-            <div style={{ flex: 1 }}>
-              <span className={styles.fromText}>Miles</span>
-              <select
-                name="miles1"
-                value={locationData.miles1}
-                onChange={handleLocationChange}
-                style={{ width: "100%", padding: "8px" }}
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="30">30</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-      
-            <div style={{ flex: 1 }}>
-              <span className={styles.fromText}>ZIP Code</span>
-              <input
-                type="text"
-                placeholder="Enter your postcode"
-                name="postcode"
-                value={locationData.postcode}
-                onChange={handleLocationChange}
-                style={{ width: "100%", padding: "8px" }}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal> */}
       <LocationModal
         open={isLocationModalOpen}
         // isEditing={isEditingLocation}

@@ -325,6 +325,25 @@ export const getleadPreferencesList = (serviceId) => {
       }
     }
   }
+  export const getAddMultipleManualBidData = (multiplemanualBidData) => {
+    return async (dispatch) => {
+      dispatch(setManualBidListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/add-multiple-manual-bid`, multiplemanualBidData);
+  
+        if (response) {
+          dispatch(setServiceWiseData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        
+        showToast("error",error?.response?.data?.message)
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setManualBidListLoader(false));
+      }
+    };
+  }
 
   export const getfilterListData = (filterData) => {
     return async (dispatch) => {

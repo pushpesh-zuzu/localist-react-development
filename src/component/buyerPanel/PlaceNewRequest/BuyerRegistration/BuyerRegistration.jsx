@@ -22,7 +22,7 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName, postcode }) => 
     useSelector((state) => state.buyer);
   const { adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader } = useSelector((state) => state.findJobs);
-
+console.log(registerData,"registerData")
   const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered

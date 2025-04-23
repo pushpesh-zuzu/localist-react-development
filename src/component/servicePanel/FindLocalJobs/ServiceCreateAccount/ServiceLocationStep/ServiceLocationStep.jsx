@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-
+console.log(inputRef,"ll")
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -139,8 +139,8 @@ const ServiceLocationStep = ({
     <label className={styles.switch}>
       <input
         type="checkbox"
-        name="online_lead"
-        checked={formData?.online_lead === 1}
+        name="is_online"
+        checked={formData?.is_online === 1}
         onChange={handleInputChange}
       />
       <span className={styles.slider}></span>
