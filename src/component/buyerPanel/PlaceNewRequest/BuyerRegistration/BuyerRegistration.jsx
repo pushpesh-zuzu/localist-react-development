@@ -20,10 +20,10 @@ const BuyerRegistration = ({ closeModal, serviceId, serviceName, postcode }) => 
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  const { adminToken } = useSelector((state) => state.auth);
+  const { userToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader } = useSelector((state) => state.findJobs);
 console.log(registerData,"registerData")
-  const isAdminOrRemembered = adminToken || registerData?.remember_tokens;
+  const isAdminOrRemembered = userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
     ? [ 2, 3, 6, 7, 8]

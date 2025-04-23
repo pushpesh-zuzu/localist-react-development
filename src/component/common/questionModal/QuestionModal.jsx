@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Progress, Spin } from "antd";
+import { Progress, Result, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,7 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 
 import { LoadingOutlined } from "@ant-design/icons";
+import { showToast } from "../../../utils";
 
 const QuestionModal = ({
   questions = [],
@@ -113,8 +114,12 @@ console.log(buyerRequest,"buyer")
           // form_status: 1,
           // formData.append("recevive_online", consent ? 1 : 0);
       
-          dispatch(createRequestData(formData));
-      nextStep();
+          dispatch(createRequestData(formData)).then((result)=>{
+            if(result?.success){
+              showToast("succes",result?.success)
+            }
+            nextStep();
+          });
     }
   };
 
