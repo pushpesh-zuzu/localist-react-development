@@ -55,6 +55,9 @@
   font-size: 16.14px;
   vertical-align: middle;
 }
+.creditsInfo {
+  max-width: 241px;
+}
 
 .usageInfo {
   margin-top: 18px;
@@ -92,6 +95,7 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  text-wrap: nowrap;
   transition: background-color 0.2s;
 }
 
@@ -140,7 +144,7 @@
 }
 
 .creditsButton:hover {
-  background-color: #e8e8e8;
+  background-color: #0096c4;
 }
 
 /* Responsive styles */

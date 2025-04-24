@@ -24,7 +24,8 @@ const initialState = {
     getCreditListData:[],
     filterListData:[],
     profileLeadViewData:{},
-    creditPlanList:[]
+    creditPlanList:[],
+    saveLaterLoader:false
 };
 
 
@@ -275,6 +276,22 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const getSaveLaterListData = (removeLocationData) => {
+    return async (dispatch) => {
+      dispatch(setRemoveLocationListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-save-for-later-list`, removeLocationData);
+  
+        if (response) {
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setRemoveLocationListLoader(false));
+      }
+    };
+  }
   export const removeItemLocationData = (removeLocationData) => {
     return async (dispatch) => {
       dispatch(setRemoveLocationListLoader(true));
@@ -396,6 +413,23 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const saveForLaterApi = (saveForLaterData) => {
+    return async (dispatch) => {
+      dispatch(setSaveLaterListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/save-for-later`, saveForLaterData);
+  
+        if (response) {
+          dispatch(setFilterWiseData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSaveLaterListLoader(false));
+      }
+    };
+  }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -462,11 +496,14 @@ const leadSettingSlice = createSlice({
       },
       setCreditsPlanList(state,action) {
         state.creditPlanList = action.payload
+      },
+      setSaveLaterListLoader(state,action){
+        state.saveLaterLoader = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

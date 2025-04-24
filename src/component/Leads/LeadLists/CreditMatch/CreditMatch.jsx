@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CreditMatch.module.css";
 import locallistImgs from "../../../../assets/Images/Leads/localistImg.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCreditPlanList } from "../../../../store/LeadSetting/leadSettingSlice";
+
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(false);
-  const { userToken } = useSelector((state) => state.auth)
-  const { registerData, registerLoader } = useSelector(
-    (state) => state.findJobs
-  );
+  const dispatch = useDispatch();
+
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const { creditPlanList } = useSelector((state) => state.leadSetting);
+
+const filterData =  creditPlanList?.filter((item,index) => index ==0)
   const handleAutoTopUpChange = () => {
     setAutoTopUp(!autoTopUp);
   };
+
+  useEffect(() => {
+    dispatch(getCreditPlanList());
+  }, [dispatch]);
 
   return (
     <>
@@ -18,48 +27,57 @@ const CreditMatch = () => {
         <div className={styles.titleSection}>
           <h2 className={styles.title}>Buy more credits now</h2>
         </div>
-        <div className={styles.creditsSection}>
-          <div className={styles.infoSection}>
-            <div className={styles.creditsInfo}>
-              <div className={styles.locationTag}>
-                <img src={locallistImgs} alt="image" />
-                <span className={styles.creditsAmount}>70 credits</span>
-              </div>
-              <div className={styles.usageInfo}>
-                <span className={styles.usageText}>
-                  Enough for about 10 leads
-                </span>
-              </div>
-            </div>
-          </div>
 
-          <div className={styles.priceSection}>
-            <div className={styles.priceInfo}>
-              <div className={styles.totalPrice}>$123.20 (Excl. tax)</div>
-              <div className={styles.unitPrice}>$1.76/credit</div>
+        {filterData?.map((item, index) => (
+          <div key={item?.id || index} className={styles.creditsSection}>
+            <div className={styles.infoSection}>
+              <div className={styles.creditsInfo}>
+                <div className={styles.locationTag}>
+                  <img src={locallistImgs} alt="credit icon" />
+                  <span className={styles.creditsAmount}>{item?.no_of_leads} credits</span>
+                </div>
+                <div className={styles.usageInfo}>
+                  <span className={styles.usageText}>{item?.description}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.priceSection}>
+              <div className={styles.priceInfo}>
+                <div className={styles.totalPrice}>${item?.price} (Excl. tax)</div>
+                <div className={styles.unitPrice}>${item?.per_credit}/credit</div>
+              </div>
+            </div>
+
+            <div className={styles.actionSection}>
+              <button className={styles.buyButton}>
+                Buy {item?.no_of_leads} credits
+              </button>
+              <div className={styles.autoTopUpContainer}>
+                <input
+                  type="checkbox"
+                  id={`autoTopUp-${index}`}
+                  className={styles.autoTopUpCheckbox}
+                  checked={autoTopUp}
+                  onChange={handleAutoTopUpChange}
+                />
+                <label
+                  htmlFor={`autoTopUp-${index}`}
+                  className={styles.autoTopUpLabel}
+                >
+                  Auto top-up next time
+                </label>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.actionSection}>
-          <button className={styles.buyButton}>Buy 70 credits</button>
-          <div className={styles.autoTopUpContainer}>
-            <input
-              type="checkbox"
-              id="autoTopUp"
-              className={styles.autoTopUpCheckbox}
-              checked={autoTopUp}
-              onChange={handleAutoTopUpChange}
-            />
-            <label htmlFor="autoTopUp" className={styles.autoTopUpLabel}>
-              Auto top-up next time
-            </label>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className={styles.creditsLeftContainer}>
         <button className={styles.creditsButton}>
-          You have 70 Credits Left
+          You have{" "}
+          {userToken?.total_credit ?? registerData?.total_credit ?? 0} Credits
+          Left
         </button>
       </div>
     </>

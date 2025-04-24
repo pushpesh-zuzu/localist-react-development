@@ -7,12 +7,13 @@ import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDet
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
 import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddManualBidData, getLeadRequestList } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getAddManualBidData, getLeadRequestList, saveForLaterApi } from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
 import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
 import { useNavigate } from "react-router-dom";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
@@ -20,13 +21,16 @@ const LeadsCards = () => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [visibleCount, setVisibleCount] = useState(5);
+  const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
 
-  const { leadRequestList, leadRequestLoader, manualBidLoader } = useSelector(
+
+  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader } = useSelector(
     (state) => state.leadSetting
   );
+  const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
   const data = leadRequestList?.length
-  console.log(leadRequestList,userToken?.total_credit, "leadRequestList")
+
   useEffect(() => {
     const leadRequestData = {
       user_id: userToken?.remember_tokens
@@ -59,7 +63,43 @@ const LeadsCards = () => {
   const handleViewProfile = (id) => {
     navigate(`/lead/profile-view/${id}`)
   }
+  // const handleSaveLater =  (item) => {
+  //   setSaveLaterLoaderId(item.id);
 
+  //   const saveLaterData = {
+  //     seller_id: userToken?.remember_tokens || registerData?.remember_tokens,
+  //     lead_id: item?.id,
+  //     buyer_id: item?.customer_id,
+  //   };
+
+  //   try {
+  //     const result =  dispatch(saveForLaterApi(saveLaterData));
+  //     if (result.success) {
+  //       showToast("success", result?.message);
+  //     } else {
+  //       showToast("error", result?.message || "Failed to save for later.");
+  //     }
+  //   } catch (err) {
+  //     showToast("error", "Something went wrong.");
+  //   } finally {
+  //     setSaveLaterLoaderId(null); // Reset loader
+  //   }
+  // };
+  const handleSaveLater = (item) => {
+    setSaveLaterLoaderId(item.id);
+
+    const saveLaterData = {
+      seller_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      lead_id: item?.id,
+      buyer_id: item?.customer_id
+    }
+    dispatch(saveForLaterApi(saveLaterData)).then((result) => {
+      if (result.success) {
+        showToast("success", result?.message)
+      }
+      setSaveLaterLoaderId(null);
+    })
+  }
   return (
     <>
       {leadRequestLoader ? (
@@ -76,7 +116,7 @@ const LeadsCards = () => {
           {leadRequestList?.slice(0, visibleCount)?.map((item) => {
             return (
               <>
-                <div className={styles.card} onClick={() => handleViewProfile(item?.id)}>
+                <div className={styles.card} >
                   {/* Left Section - User Info */}
                   <div className={styles.infoContainer}>
                     <div className={styles.userInfo}>
@@ -85,7 +125,7 @@ const LeadsCards = () => {
                           {" "}
                           {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                         </div>
-                        <div className={styles.details}>
+                        <div className={styles.details} onClick={() => handleViewProfile(item?.id)}>
                           <h3>{item?.customer?.name}</h3>
                           <p>{item?.postcode}</p>
                         </div>
@@ -97,11 +137,11 @@ const LeadsCards = () => {
                     <div className={styles.contactContainer}>
                       <div className={styles.contactItem}>
                         <img src={BluePhoneIcon} alt="" />
-                        <span>{item?.phone ?  `${item?.phone.substring(0, 2)}${'*'.repeat(item?.phone.length - 2)}` : 'N/A'}</span>
+                        <span>{item?.phone ? `${item?.phone.substring(0, 2)}${'*'.repeat(item?.phone.length - 2)}` : 'N/A'}</span>
                       </div>
                       <div className={styles.contactItem}>
                         <img src={BlueSmsIcon} alt="" />
-                        <span>{item?.customer?.email ?  `${item?.customer?.email.split('@')[0].substring(0, 8)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
+                        <span>{item?.customer?.email ? `${item?.customer?.email.split('@')[0].substring(0, 8)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
                       </div>
                     </div>
                   </div>
@@ -109,7 +149,18 @@ const LeadsCards = () => {
                   {/* Middle Section - Job Details */}
                   <div className={styles.jobDetails}>
                     <div className={styles.saveBtnBox}>
-                      <button className={styles.saveBtn}><img src={saveImg} alt="image" />Save For Later</button>
+                      <button className={styles.saveBtn} onClick={() => handleSaveLater(item)}>
+                        {saveLaterLoaderId === item.id ? (
+                         <Spin
+                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                       />
+                        ) : (
+                          <>
+                            <img src={saveImg} alt="image" />
+                            Save For Later
+                          </>
+                        )}
+                      </button>
                     </div>
                     <div className={styles.badges}>
                       {item?.is_phone_verified == 1 && (
@@ -134,14 +185,14 @@ const LeadsCards = () => {
                       )}
                     </div>
                     <div className={styles.jobInfo}>
-  {item?.questions && (
-    <p>
-      {JSON.parse(item?.questions)
-        .map(qa => qa?.ans)
-        .join("/")}
-    </p>
-  )}
-</div>
+                      {item?.questions && (
+                        <p>
+                          {JSON.parse(item?.questions)
+                            .map(qa => qa?.ans)
+                            .join("/")}
+                        </p>
+                      )}
+                    </div>
                     {/* <p>
                         <strong>Starting:</strong> In the next month
                       </p> */}
@@ -153,7 +204,7 @@ const LeadsCards = () => {
                       setSelectedItem(item);
                       setModalOpen(true);
                     }}>
-                      Contact
+                      Contact {item?.customer?.name}
                     </button>
                     <span className={styles.credits}>
                       {item?.credit_score}Credits
