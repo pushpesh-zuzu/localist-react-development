@@ -140,7 +140,11 @@ const QuestionModal = ({
   };
 
   const handleCloseClick = () => {
-    setShowConfirmModal(true);
+    if(!userToken?.remember_tokens){
+      setShowConfirmModal(true);
+    } else{
+      onClose();
+    }
   };
 
   return (

@@ -230,6 +230,7 @@ const BuyerRegistration = ({
           <ConfirmationModal
             onConfirm={confirmClose}
             onCancel={() => setShowConfirmModal(false)}
+            setShowConfirmModal={setShowConfirmModal}
           />
         )}
       </div>

@@ -25,7 +25,7 @@ const WhatServiceYouNeed = ({
   const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
-
+const { userToken } = useSelector((state)=> state.auth)
   const { searchServiceLoader, service } = useSelector(
     (state) => state.findJobs
   );
@@ -158,7 +158,11 @@ const WhatServiceYouNeed = ({
   };
 
   const handleCloseClick = () => {
-    setShowConfirmModal(true);
+    if(!userToken?.remember_tokens){
+      setShowConfirmModal(true);
+    } else{
+      onClose();
+    }
   };
 
   return (

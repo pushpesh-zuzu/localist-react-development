@@ -10,15 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
+import { createRequestData } from "../../../store/Buyer/BuyerSlice";
+import { showToast } from "../../../utils";
 // import { showToast } from "../../../../../utils";
 
-const ConfirmationModal = ({ onCancel, handleInputChange, formData }) => {
+const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal}) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer)
+  const { userToken } = useSelector((state)=> state.auth)
   const { service, registerLoader, searchServiceLoader, selectedServices } =
     useSelector((state) => state.findJobs);
   useEffect(() => {
@@ -83,41 +87,28 @@ const ConfirmationModal = ({ onCancel, handleInputChange, formData }) => {
   }, [show]);
 
   const handleSubmit = () => {
-    // Ensure selectedServices is an array and map IDs
-    const serviceIds = Array.isArray(selectedServices)
-      ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
-      : [];
+if (!userToken) {
+        const formData = new FormData();
+        formData.append("email", buyerRequest?.email);
+        formData.append("name", buyerRequest?.name);
+        formData.append("phone", buyerRequest?.phone);
+        formData.append("service_id", buyerRequest?.service_id);
+        formData.append("postcode", buyerRequest?.postcode);
+        formData.append("questions", JSON.stringify(buyerRequest?.questions));
+        formData.append("form_status", 0);
+        // form_status: 1,
+        // formData.append("recevive_online", consent ? 1 : 0);
 
-    // Ensure formData.service_id is an array and clean it
-    const existingServiceIds = Array.isArray(formData?.service_id)
-      ? formData.service_id.filter(Boolean) // Remove empty values
-      : [];
-
-    // Merge both arrays and remove duplicates
-    const combinedServiceIds = [
-      ...new Set([...existingServiceIds, ...serviceIds]),
-    ];
-
-    // Convert array to a comma-separated string
-    const serviceCategoryData = combinedServiceIds.join(", ");
-
-    // Create final payload
-    const payload = {
-      ...formData,
-      service_id: serviceCategoryData,
-      form_status: 1,
-      user_type: 1,
-      active_status: 1,
-      loggedUser: 1,
-      nation_wide: formData.nation_wide ? 1 : 0,
-    };
-
-    dispatch(registerUserData(payload)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Register successful!");
-        navigate("/settings");
+        dispatch(createRequestData(formData)).then((result) => {
+          if (result?.success) {
+            showToast("succes", result?.success);
+            setShowConfirmModal(false)
+          }
+          // nextStep();
+        });
+      } else {
+        // nextStep();
       }
-    });
   };
 
   const handleOpenModal = () => {
@@ -140,12 +131,12 @@ const ConfirmationModal = ({ onCancel, handleInputChange, formData }) => {
           <button
             className={styles.backButton}
             onClick={onCancel}
-            disabled={registerLoader}
+            disabled={requestLoader}
           >
             Back
           </button>
-          <button className={styles.continueButton} onClick={"handleSubmit"}>
-            {registerLoader ? (
+          <button className={styles.continueButton} onClick={handleSubmit}>
+            {requestLoader ? (
               <Spin
                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
               />

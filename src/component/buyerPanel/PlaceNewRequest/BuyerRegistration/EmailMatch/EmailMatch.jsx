@@ -22,6 +22,7 @@ const EmailMatch = ({
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
     (state) => state.findJobs
   );
+  const { userToken } = useSelector((state) => state.auth)
 
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -93,10 +94,14 @@ const EmailMatch = ({
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
-
-  const handleCloseClick = () => {
+const handleCloseClick = () => {
+  if(!userToken?.remember_tokens){
     setShowConfirmModal(true);
-  };
+  } else{
+    onClose();
+  }
+}
+  
 
   return (
     <div className={styles.modalOverlay}>

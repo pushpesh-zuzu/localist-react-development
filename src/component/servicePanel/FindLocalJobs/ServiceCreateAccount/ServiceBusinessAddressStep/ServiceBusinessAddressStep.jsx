@@ -91,7 +91,7 @@ const ServiceBusinessAddressStep = ({
   <div className={styles.labelInputWrapper}>
     <input
       type="number"
-      placeholder="Zip Code"
+      placeholder="Postcode"
       className={styles.input}
       style={{
         appearance: "textfield",
