@@ -10,7 +10,13 @@ import {
 import { showToast } from "../../../../../utils";
 import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
 
-const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
+const EmailMatch = ({
+  onClose,
+  nextStep,
+  previousStep,
+  setEmails,
+  setShowConfirmModal,
+}) => {
   const dispatch = useDispatch();
   // const { buyerRequest, registerLoader } = useSelector((state) => state.buyer);
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
@@ -87,12 +93,17 @@ const EmailMatch = ({ onClose, nextStep, previousStep, setEmails }) => {
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
+
+  const handleCloseClick = () => {
+    setShowConfirmModal(true);
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button
           className={styles.closeButton}
-          onClick={onClose}
+          onClick={handleCloseClick}
           disabled={registerLoader}
         >
           x

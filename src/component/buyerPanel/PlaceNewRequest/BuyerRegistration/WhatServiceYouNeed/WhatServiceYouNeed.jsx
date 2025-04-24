@@ -12,7 +12,14 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 
-const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose,pincodes }) => {
+const WhatServiceYouNeed = ({
+  nextStep,
+  serviceId,
+  serviceName,
+  onClose,
+  pincodes,
+  setShowConfirmModal,
+}) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -24,7 +31,7 @@ const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose,pincodes
   );
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(serviceName,serviceId,"prem")
+  console.log(serviceName, serviceId, "prem");
 
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
@@ -46,11 +53,11 @@ const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose,pincodes
       setInput(serviceName);
       setSelectedService({ id: serviceId });
     }
-  
+
     if (pincodes) {
       setPincode(pincodes);
     }
-  }, [serviceName, serviceId, pincodes])
+  }, [serviceName, serviceId, pincodes]);
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
@@ -150,9 +157,13 @@ const WhatServiceYouNeed = ({ nextStep, serviceId, serviceName, onClose,pincodes
     }));
   };
 
+  const handleCloseClick = () => {
+    setShowConfirmModal(true);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.closeButton} onClick={onClose}>
+      <div className={styles.closeButton} onClick={handleCloseClick}>
         x
       </div>
 

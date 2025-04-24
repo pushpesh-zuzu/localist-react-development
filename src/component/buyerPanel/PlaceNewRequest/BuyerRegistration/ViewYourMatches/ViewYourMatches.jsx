@@ -5,7 +5,12 @@ import { createRequestData } from "../../../../../store/Buyer/BuyerSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
+const ViewYourMatches = ({
+  onClose,
+  nextStep,
+  previousStep,
+  setShowConfirmModal,
+}) => {
   const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -35,10 +40,14 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
     formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
     formData.append("recevive_online", consent ? 1 : 0);
-    formData.append("form_status",1)
+    formData.append("form_status", 1);
 
     dispatch(createRequestData(formData));
     nextStep();
+  };
+
+  const handleCloseClick = () => {
+    setShowConfirmModal(true);
   };
 
   return (
@@ -46,7 +55,7 @@ const ViewYourMatches = ({ onClose, nextStep, previousStep }) => {
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div
           className={styles.closeButton}
-          onClick={onClose}
+          onClick={handleCloseClick}
           disabled={requestLoader}
         >
           x
