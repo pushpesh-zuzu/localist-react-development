@@ -22,7 +22,9 @@ const initialState = {
     autobidLoader:false,
     getCreditLoader:false,
     getCreditListData:[],
-    filterListData:[]
+    filterListData:[],
+    profileLeadViewData:{},
+    creditPlanList:[]
 };
 
 
@@ -83,6 +85,22 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-lead-request`,leadRequestData);
         if (response) {
           dispatch(setLeadRequestListData(response?.data?.data));
+          return response.data
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setLeadListLoader(false));
+      }
+    };
+  };
+  export const getLeadProfileRequestList = (leadProfileData) => {
+    return async (dispatch) => {
+      dispatch(setLeadListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-lead-profile`,leadProfileData);
+        if (response) {
+          dispatch(setProfileLeadRequestListData(response?.data?.data));
           return response.data
         }
       } catch (error) {
@@ -310,6 +328,21 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const getCreditPlanList = () => {
+    return async (dispatch) => {
+      dispatch(setGetCreditListLoader(true));
+      try {
+        const response = await axiosInstance.get(`users/get-plans`);
+        if (response) {
+          dispatch(setCreditsPlanList(response?.data?.data));
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setGetCreditListLoader(false));
+      }
+    }
+  }
   export const getCreditList = () => {
     return async (dispatch) => {
       dispatch(setGetCreditListLoader(true));
@@ -325,6 +358,7 @@ export const getleadPreferencesList = (serviceId) => {
       }
     }
   }
+  
   export const getAddMultipleManualBidData = (multiplemanualBidData) => {
     return async (dispatch) => {
       dispatch(setManualBidListLoader(true));
@@ -422,11 +456,17 @@ const leadSettingSlice = createSlice({
       },
       setFilterWiseData(state,action) {
         state.filterListData = action.payload
+      },
+      setProfileLeadRequestListData(state,action){
+        state.profileLeadViewData = action.payload
+      },
+      setCreditsPlanList(state,action) {
+        state.creditPlanList = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilterWiseData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

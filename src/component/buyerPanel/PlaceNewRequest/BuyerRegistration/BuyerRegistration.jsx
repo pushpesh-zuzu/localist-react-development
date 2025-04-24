@@ -142,14 +142,14 @@ const BuyerRegistration = ({
             previousStep={previousStep}
             onClose={handleClose}
             formData={buyerRequest}
-            setShowConfirmModal={setShowConfirmModal}
+            // setShowConfirmModal={setShowConfirmModal}
           />
         )}
         {buyerStep === 7 && (
           <DescribeYourRequest
             nextStep={nextStep}
             onClose={handleClose}
-            setShowConfirmModal={setShowConfirmModal}
+            // setShowConfirmModal={setShowConfirmModal}
           />
         )}
 

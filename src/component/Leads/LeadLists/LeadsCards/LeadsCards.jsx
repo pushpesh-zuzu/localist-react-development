@@ -12,9 +12,11 @@ import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
 import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
+import { useNavigate } from "react-router-dom";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [visibleCount, setVisibleCount] = useState(5);
@@ -54,6 +56,9 @@ const LeadsCards = () => {
       }
     });
   }
+  const handleViewProfile = (id) => {
+    navigate(`/lead/profile-view/${id}`)
+  }
 
   return (
     <>
@@ -71,7 +76,7 @@ const LeadsCards = () => {
           {leadRequestList?.slice(0, visibleCount)?.map((item) => {
             return (
               <>
-                <div className={styles.card}>
+                <div className={styles.card} onClick={() => handleViewProfile(item?.id)}>
                   {/* Left Section - User Info */}
                   <div className={styles.infoContainer}>
                     <div className={styles.userInfo}>
@@ -92,11 +97,11 @@ const LeadsCards = () => {
                     <div className={styles.contactContainer}>
                       <div className={styles.contactItem}>
                         <img src={BluePhoneIcon} alt="" />
-                        <span>{item?.phone}</span>
+                        <span>{item?.phone ?  `${item?.phone.substring(0, 2)}${'*'.repeat(item?.phone.length - 2)}` : 'N/A'}</span>
                       </div>
                       <div className={styles.contactItem}>
                         <img src={BlueSmsIcon} alt="" />
-                        <span>{item?.customer?.email}</span>
+                        <span>{item?.customer?.email ?  `${item?.customer?.email.split('@')[0].substring(0, 8)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
                       </div>
                     </div>
                   </div>
@@ -129,16 +134,14 @@ const LeadsCards = () => {
                       )}
                     </div>
                     <div className={styles.jobInfo}>
-                      {item?.questions &&
-                        JSON.parse(item?.questions)?.map((qa, index) => (
-                          <div key={index}>
-                            <p>
-                              <strong>{qa?.ques}</strong>
-                            </p>
-                            <p>{qa?.ans}</p>
-                          </div>
-                        ))}
-                    </div>
+  {item?.questions && (
+    <p>
+      {JSON.parse(item?.questions)
+        .map(qa => qa?.ans)
+        .join("/")}
+    </p>
+  )}
+</div>
                     {/* <p>
                         <strong>Starting:</strong> In the next month
                       </p> */}
@@ -150,7 +153,7 @@ const LeadsCards = () => {
                       setSelectedItem(item);
                       setModalOpen(true);
                     }}>
-                      Contact Isabella
+                      Contact
                     </button>
                     <span className={styles.credits}>
                       {item?.credit_score}Credits

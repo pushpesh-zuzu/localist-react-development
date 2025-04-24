@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(false);
   const { userToken } = useSelector((state) => state.auth)
+  const { registerData, registerLoader } = useSelector(
+    (state) => state.findJobs
+  );
   const handleAutoTopUpChange = () => {
     setAutoTopUp(!autoTopUp);
   };
@@ -19,7 +22,7 @@ const CreditMatch = () => {
           <div className={styles.creditsInfo}>
             <div className={styles.locationTag}>
               <img src={locallistImgs} alt="image" />
-              <span className={styles.creditsAmount}>{userToken?.total_credit} credits</span>
+              <span className={styles.creditsAmount}>{userToken?.total_credit ? userToken?.total_credit : registerData?.total_credit} credits</span>
             </div>
             <div className={styles.usageInfo}>
               <span className={styles.usageText}>
@@ -37,7 +40,7 @@ const CreditMatch = () => {
         </div>
       </div>
       <div className={styles.actionSection}>
-        <button className={styles.buyButton}>Buy {userToken?.total_credit}</button>
+        <button className={styles.buyButton}>Buy {userToken?.total_credit ? userToken?.total_credit : registerData?.total_credit}</button>
         <div className={styles.autoTopUpContainer}>
           <input
             type="checkbox"
