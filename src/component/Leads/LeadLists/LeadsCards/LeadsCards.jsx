@@ -150,7 +150,11 @@ const LeadsCards = () => {
                       </div>
                       <div className={styles.contactItem}>
                         <img src={BlueSmsIcon} alt="" />
-                        <span>{item?.customer?.email ? `${item?.customer?.email.split('@')[0].substring(0, 3)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
+                        <span>
+  {item?.customer?.email 
+    ? `${item?.customer?.email.split('@')[0].substring(0, 2)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 2))}@${item?.customer?.email.split('@')[1]}` 
+    : 'N/A'}
+</span>
                       </div>
                     </div>
                   </div>

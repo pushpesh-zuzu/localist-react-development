@@ -16,7 +16,7 @@ function LeadProfileData () {
     // const webData = profileLeadViewData?.map(item => item?.service_name) || [];
     useEffect(()=>{
         const data = {
-            user_id:userToken?.remember.tokens
+            user_id:userToken?.remember_tokens
         }
         dispatch(getLeadProfileRequestList(data))
     },[])
