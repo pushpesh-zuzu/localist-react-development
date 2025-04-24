@@ -14,6 +14,19 @@ import MatchingLeadsFilter from "./MatchingLeadsFilter";
 
 const MatchingLeads = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState("Newest");
+  const sortOptions = ["Newest", "Popular", "Recommended", "Trending"];
+
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState("Credit Value High");
+  const filterOptions = [
+    "Credit Value High",
+    "Credit Value Medium",
+    "Credit Value Low",
+  ];
+
   const navigate = useNavigate();
   const handleEdit = () => {
     navigate("/leads/settings");
@@ -68,13 +81,74 @@ const MatchingLeads = () => {
           </span>
         </p>
       </div>
-      <div className={styles.actionButtons}>
-        <button className={styles.filterButton} onClick={handleFilterClick}>
-          <img src={FilterIcon} alt="" /> Filter
-        </button>
-        <button className={styles.editButton} onClick={handleEdit}>
-          Edit <img src={EditIcon} alt="" />
-        </button>
+
+      <div className={styles.dualDropdownsContainer}>
+        {/* First Dropdown - Newest */}
+        <div className={styles.dropdownWrapper}>
+          <button
+            className={styles.dropdownTrigger}
+            onClick={() => setIsSortOpen(!isSortOpen)}
+            onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
+          >
+            <span className={styles.selectedOption}>{selectedSort}</span>
+            <span className={styles.dropdownIcon}>
+              {isSortOpen ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {isSortOpen && (
+            <ul className={styles.dropdownMenu}>
+              {sortOptions.map((option) => (
+                <li key={option} className={styles.dropdownItem}>
+                  <button
+                    onClick={() => setSelectedSort(option)}
+                    className={styles.dropdownButton}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Second Dropdown - Credit Value */}
+        <div className={styles.dropdownWrapper}>
+          <button
+            className={styles.dropdownTrigger}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
+          >
+            <span className={styles.selectedOption}>{selectedFilter}</span>
+            <span className={styles.dropdownIcon}>
+              {isFilterOpen ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {isFilterOpen && (
+            <ul className={styles.dropdownMenu}>
+              {filterOptions.map((option) => (
+                <li key={option} className={styles.dropdownItem}>
+                  <button
+                    onClick={() => setSelectedFilter(option)}
+                    className={styles.dropdownButton}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className={styles.actionButtons}>
+          <button className={styles.filterButton} onClick={handleFilterClick}>
+            <img src={FilterIcon} alt="" /> Filter
+          </button>
+          <button className={styles.editButton} onClick={handleEdit}>
+            Edit <img src={EditIcon} alt="" />
+          </button>
+        </div>
       </div>
       {isFilterModalOpen && <MatchingLeadsFilter onClose={handleCloseModal} />}
     </div>
