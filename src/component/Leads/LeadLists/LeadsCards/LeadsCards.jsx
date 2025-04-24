@@ -24,7 +24,7 @@ const LeadsCards = () => {
   );
   const { userToken } = useSelector((state) => state.auth)
   const data = leadRequestList?.length
-  console.log(leadRequestList, "leadRequestList")
+  console.log(leadRequestList,userToken?.total_credit, "leadRequestList")
   useEffect(() => {
     const leadRequestData = {
       user_id: userToken?.remember_tokens

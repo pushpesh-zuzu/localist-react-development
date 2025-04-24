@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styles from "./CreditMatch.module.css";
 import locallistImgs from "../../../../assets/Images/Leads/localistImg.svg";
+import { useSelector } from "react-redux";
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(false);
-
+  const { userToken } = useSelector((state) => state.auth)
   const handleAutoTopUpChange = () => {
     setAutoTopUp(!autoTopUp);
   };
@@ -18,7 +19,7 @@ const CreditMatch = () => {
           <div className={styles.creditsInfo}>
             <div className={styles.locationTag}>
               <img src={locallistImgs} alt="image" />
-              <span className={styles.creditsAmount}>70 credits</span>
+              <span className={styles.creditsAmount}>{userToken?.total_credit} credits</span>
             </div>
             <div className={styles.usageInfo}>
               <span className={styles.usageText}>
@@ -36,7 +37,7 @@ const CreditMatch = () => {
         </div>
       </div>
       <div className={styles.actionSection}>
-        <button className={styles.buyButton}>Buy 70 credits</button>
+        <button className={styles.buyButton}>Buy {userToken?.total_credit}</button>
         <div className={styles.autoTopUpContainer}>
           <input
             type="checkbox"
