@@ -35,10 +35,10 @@ const ManualBidList = () => {
           <h1 className={styles.heading}>
             {webData[0] || "No Service"}
           </h1>
-          {/* <div className={styles.tabs}>
-            <button className={styles.activeTab}>Your matches</button>
+          <div className={styles.tabs}>
+            <button className={styles.activeTab} onClick={handleBack}>Your matches</button>
             <button className={styles.tab}>Replies</button>
-          </div> */}
+          </div>
         </div>
         <div className={styles.backBtnWrapper}>
           <button className={styles.backBtn} onClick={handleBack}>Back</button>

@@ -23,6 +23,7 @@ const BidsList = ({ previousStep }) => {
   );
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(5)
   const { userToken } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer)
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ const BidsList = ({ previousStep }) => {
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
+  const handleSeeMore = () => {
+    setVisibleCount((prevCount) => prevCount + 5);
+  };
+  
 
   const handleContinue = () => {
     if (!selectedItem) return;
@@ -153,7 +158,7 @@ const BidsList = ({ previousStep }) => {
             </div>
           ) : (
             autoBidList?.map((item) =>
-              item?.sellers?.map((seller) => (
+              item?.sellers?.slice(0, visibleCount)?.map((seller,index) => (
                 <div className={styles.card} key={seller?.id}>
                   <div className={styles.cardLeft}>
                     <div className={styles.imageWrapper}>
@@ -171,7 +176,7 @@ const BidsList = ({ previousStep }) => {
                       <div className={styles.header}>
                         <div>
                           <h3>
-                            <img src={GreenTickIcon} alt="" />
+                           {index < 5 && <img src={GreenTickIcon} alt="" />}
                             {seller?.name}
                           </h3>
                           <p>
@@ -215,7 +220,7 @@ const BidsList = ({ previousStep }) => {
                     <div className={styles.replyBtnWrapper}>
                     <div className={styles.replyCheckbox}>
                     {/* <input type="checkbox" /> */}
-                    <img src={greenCheck} alt="..." />
+                    {index < 5 &&<img src={greenCheck} alt="..." />}
                     </div>
                       <button
                         className={styles.replyBtn}
@@ -243,9 +248,9 @@ const BidsList = ({ previousStep }) => {
           />
         </>
       )}
-      <div className={styles.moreProfessionalBtnBox}>
-     <button className={styles.moreProfessionalBtn}>See More Professionals</button>
-   </div>
+     {autoBidList?.map((item) => item.sellers)?.length > visibleCount  && <div className={styles.moreProfessionalBtnBox}>
+     <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
+   </div>}
     </div>
      
    </>

@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-console.log(inputRef,"ll")
+
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
