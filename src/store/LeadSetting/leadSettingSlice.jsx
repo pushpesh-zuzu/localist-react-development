@@ -25,7 +25,9 @@ const initialState = {
     filterListData:[],
     profileLeadViewData:{},
     creditPlanList:[],
-    saveLaterLoader:false
+    saveLaterLoader:false,
+    saveForLaterDataList:[],
+    totalCredit:[]
 };
 
 
@@ -71,6 +73,38 @@ export const getleadPreferencesList = (serviceId) => {
   
         if (response) {
             dispatch(setLeadPreferenceData(response?.data?.data));
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setleadPreferencesListLoader(false));
+      }
+    };
+  }
+  export const isOnlineRemote = (onlineData) => {
+    return async (dispatch) => {
+      dispatch(setleadPreferencesListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/online-remote-switch`, onlineData);
+  
+        if (response) {
+            dispatch(setLeadPreferenceData(response?.data?.data));
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setleadPreferencesListLoader(false));
+      }
+    };
+  }
+  export const totalCreditData = (totalCreditData) => {
+    return async (dispatch) => {
+      dispatch(setleadPreferencesListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/total-credit`, totalCreditData);
+  
+        if (response) {
+            dispatch(setTotalCreditData(response?.data?.data));
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
@@ -283,6 +317,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-save-for-later-list`, removeLocationData);
   
         if (response) {
+          dispatch(setSaveForLaterData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -499,11 +534,17 @@ const leadSettingSlice = createSlice({
       },
       setSaveLaterListLoader(state,action){
         state.saveLaterLoader = action.payload
+      },
+      setSaveForLaterData(state,action){
+        state.saveForLaterDataList = action.payload
+      },
+      setTotalCreditData(state,action) {
+        state.totalCredit = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

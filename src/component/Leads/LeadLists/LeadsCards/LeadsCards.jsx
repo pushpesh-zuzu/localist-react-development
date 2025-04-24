@@ -7,7 +7,7 @@ import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDet
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
 import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddManualBidData, getLeadRequestList, saveForLaterApi } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getAddManualBidData, getLeadRequestList, saveForLaterApi, totalCreditData } from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
@@ -58,6 +58,10 @@ const LeadsCards = () => {
         showToast("success", result?.message)
         setModalOpen(false);
       }
+      const data = {
+        user_id: userToken?.remember_tokens
+      }
+      dispatch(totalCreditData(data))
     });
   }
   const handleViewProfile = (id) => {
@@ -96,6 +100,11 @@ const LeadsCards = () => {
     dispatch(saveForLaterApi(saveLaterData)).then((result) => {
       if (result.success) {
         showToast("success", result?.message)
+        const leadRequestData = {
+          user_id: userToken?.remember_tokens
+        }
+        dispatch(getLeadRequestList(leadRequestData)) 
+       
       }
       setSaveLaterLoaderId(null);
     })
@@ -141,7 +150,7 @@ const LeadsCards = () => {
                       </div>
                       <div className={styles.contactItem}>
                         <img src={BlueSmsIcon} alt="" />
-                        <span>{item?.customer?.email ? `${item?.customer?.email.split('@')[0].substring(0, 8)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
+                        <span>{item?.customer?.email ? `${item?.customer?.email.split('@')[0].substring(0, 3)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 8))}@${item?.customer?.email.split('@')[1]}` : 'N/A'}</span>
                       </div>
                     </div>
                   </div>

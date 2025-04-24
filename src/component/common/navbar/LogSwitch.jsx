@@ -172,8 +172,8 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
         Leads
       </div>
       <div
-        className={`${styles.navItem} ${location.pathname === "#" ? styles.active : ""}`}
-        onClick={() => handleNavigation("#")}
+        className={`${styles.navItem} ${location.pathname === "/lead/save-later" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/lead/save-later")}
       >
         My Responses
       </div>

@@ -29,6 +29,7 @@ import EditQuestion from "../component/Leads/LeadSettings/SuggestQuestions/EditQ
 import RemoveQuestion from "../component/Leads/LeadSettings/SuggestQuestions/RemoveQuestion/RemoveQuestion";
 import ManualBidList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ManualBidList/ManualBidList";
 import LeadProfileData from "../component/Leads/LeadLists/LeadProfileView/LeadProfileView";
+import MyResponse from "../component/myResponses/MyResponse";
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,7 @@ const router = createBrowserRouter([
       { path: "/feedback/questions/edit", element: <ProtectedRoute><EditQuestion /></ProtectedRoute> },
       { path: "/feedback/questions/remove", element: <ProtectedRoute><RemoveQuestion /></ProtectedRoute> },
       { path: "/lead/profile-view/:profileId" , element: <ProtectedRoute><LeadProfileData/></ProtectedRoute>},
+      { path: "/lead/save-later", element:<ProtectedRoute><MyResponse/></ProtectedRoute>},
       { path: "*", element: <NotFound /> },
     ],
   },

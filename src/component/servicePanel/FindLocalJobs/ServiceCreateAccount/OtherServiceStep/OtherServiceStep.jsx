@@ -22,7 +22,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData,setFormData })
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(inputRef, "form");
+  console.log(formData,"form");
   const {
     service,
     registerLoader,
@@ -306,11 +306,11 @@ useEffect(() => {
               <input
   type="text"
   ref={inputRef}
-  name="postcode_new"
-  value={formData.postcode_new || ""}
+  name="postcode"
+  value={formData.postcode|| ""}
   onChange={handleInputChange}
   placeholder="Enter your postcode"
-  className={`${styles.input} ${errors.postcode_new ? styles.errorBorder : ""}`}
+  className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""}`}
 />
             
             </div>

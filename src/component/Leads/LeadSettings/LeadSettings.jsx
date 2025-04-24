@@ -10,6 +10,7 @@ import {
   editLocationLead,
   getleadPreferencesList,
   getLocationLead,
+  isOnlineRemote,
   leadPreferences,
   removeItemLocationData,
 } from "../../../store/LeadSetting/leadSettingSlice";
@@ -36,6 +37,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
+  const [is_online, setIsOnline] = useState(false);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {
@@ -272,6 +274,14 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       }
     });
   };
+  
+  // const isOnlineRemotes = () => {
+  //   const isOnlineData = {
+  //     user_id:userToken?.remember_tokens,
+  //     is_online: is_online ? 1 : 0
+  //   }
+  //   dispatch(isOnlineRemote(isOnlineData))
+  // }
   return (
     <>
       <div className={styles.container}>
@@ -374,12 +384,29 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             remotely.
           </p>
           <div className={styles.toggle}>
-            <span>See online/remote leads</span>
-            <label className={styles.switch}>
-              <input type="checkbox" />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
+  <span>See online/remote leads</span>
+  <label className={styles.switch}>
+    <input 
+      type="checkbox" 
+      checked={is_online}
+      onChange={() => {
+        setIsOnline(!is_online);
+       
+        const isOnlineData = {
+          user_id: userToken?.remember_tokens,
+          is_online: !is_online ? 1 : 0  
+        };
+        dispatch(isOnlineRemote(isOnlineData))
+          .then((result) => {
+            if (result?.success) {
+              showToast("success", result?.message || "Online/Remote status updated successfully");
+            }
+          });
+      }}
+    />
+    <span className={styles.slider}></span>
+  </label>
+</div>
         </div>
 
         <button className={styles.viewLeads} onClick={handleView}>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./CreditMatch.module.css";
 import locallistImgs from "../../../../assets/Images/Leads/localistImg.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getCreditPlanList } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getCreditPlanList, totalCreditData } from "../../../../store/LeadSetting/leadSettingSlice";
 
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(false);
@@ -10,16 +10,24 @@ const CreditMatch = () => {
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { creditPlanList } = useSelector((state) => state.leadSetting);
+  const { creditPlanList ,leadRequestList,totalCredit} = useSelector((state) => state.leadSetting);
+  console.log(totalCredit,"leadRequestList")
 
 const filterData =  creditPlanList?.filter((item,index) => index ==0)
+const leadTotalCredit = leadRequestList?.filter((item,index) => index == 0 )
+console.log(leadTotalCredit?.map((item)=> item?.customer?.total_credit),"leadTotalCredit")
   const handleAutoTopUpChange = () => {
     setAutoTopUp(!autoTopUp);
   };
 
   useEffect(() => {
     dispatch(getCreditPlanList());
+    const data = {
+      user_id: userToken?.remember_tokens
+    }
+    dispatch(totalCreditData(data))
   }, [dispatch]);
+  
 
   return (
     <>
@@ -76,7 +84,7 @@ const filterData =  creditPlanList?.filter((item,index) => index ==0)
       <div className={styles.creditsLeftContainer}>
         <button className={styles.creditsButton}>
           You have{" "}
-          {userToken?.total_credit ?? registerData?.total_credit ?? 0} Credits
+          {totalCredit? totalCredit : "0"} Credits
           Left
         </button>
       </div>
