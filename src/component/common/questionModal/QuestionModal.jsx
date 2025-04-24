@@ -20,7 +20,7 @@ const QuestionModal = ({
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest,requestLoader } = useSelector((state) => state.buyer);
-
+const { userToken } =useSelector((state) => state.auth)
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
@@ -103,23 +103,28 @@ console.log(buyerRequest,"buyer")
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-       const formData = new FormData();
-       formData.append("email",buyerRequest?.email);
-       formData.append("name",buyerRequest?.name);
-       formData.append("phone",buyerRequest?.phone);
-          formData.append("service_id", buyerRequest?.service_id);
-          formData.append("postcode", buyerRequest?.postcode);
-          formData.append("questions", JSON.stringify(updatedAnswers))
-          formData.append("form_status", 1);
-          // form_status: 1,
-          // formData.append("recevive_online", consent ? 1 : 0);
+      if(!userToken) {
+        const formData = new FormData();
+        formData.append("email",buyerRequest?.email);
+        formData.append("name",buyerRequest?.name);
+        formData.append("phone",buyerRequest?.phone);
+           formData.append("service_id", buyerRequest?.service_id);
+           formData.append("postcode", buyerRequest?.postcode);
+           formData.append("questions", JSON.stringify(updatedAnswers))
+           formData.append("form_status", 1);
+           // form_status: 1,
+           // formData.append("recevive_online", consent ? 1 : 0);
+       
+           dispatch(createRequestData(formData)).then((result)=>{
+             if(result?.success){
+               showToast("succes",result?.success)
+             }
+             nextStep();
+           });
+      } else{
+        nextStep()
+      }
       
-          dispatch(createRequestData(formData)).then((result)=>{
-            if(result?.success){
-              showToast("succes",result?.success)
-            }
-            nextStep();
-          });
     }
   };
 
