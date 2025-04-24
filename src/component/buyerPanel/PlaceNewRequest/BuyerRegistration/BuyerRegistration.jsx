@@ -13,21 +13,28 @@ import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationMod
 import OtpVerification from "./OtpVerification/OtpVerification";
 import NumberVerifiedModal from "./NumberVerified/NumberVerified";
 
-const BuyerRegistration = ({ closeModal, serviceId, serviceName, postcode }) => {
-  // const [showConfirmModal, setShowConfirmModal] = useState(false);
+const BuyerRegistration = ({
+  closeModal,
+  serviceId,
+  serviceName,
+  postcode,
+}) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader } = useSelector((state) => state.findJobs);
-console.log(registerData,"registerData")
+  const { registerData, registerLoader } = useSelector(
+    (state) => state.findJobs
+  );
+  console.log(registerData, "registerData");
   const isAdminOrRemembered = userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
-    ? [ 2, 3, 6, 7, 8]
-    : [1,2, 3, 4, 5, 7, 8];
+    ? [2, 3, 6, 7, 8]
+    : [1, 2, 3, 4, 5, 7, 8];
 
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
@@ -70,37 +77,35 @@ console.log(registerData,"registerData")
     closeModal();
   };
 
-  // const confirmClose = () => {
-  //   setShowConfirmModal(false);
-  //   setShouldClose(true); // <-- triggers close in effect
-  // };
+  const confirmClose = () => {
+    setShowConfirmModal(false);
+    setShouldClose(true);
+  };
 
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
-
         {buyerStep === 1 && (
-
           <EmailMatch
             nextStep={nextStep}
             previousStep={previousStep}
             onClose={handleClose}
             formData={buyerRequest}
             setEmails={setEmails}
+            setShowConfirmModal={setShowConfirmModal}
           />
         )}
-        {
-          buyerStep === 2 && (
-            <WhatServiceYouNeed
-              nextStep={nextStep}
-              formData={buyerRequest}
-              serviceId={serviceId}
-              serviceName={serviceName}
-              onClose={handleClose}
-              pincodes={postcode}
-            />
-          )
-        }
+        {buyerStep === 2 && (
+          <WhatServiceYouNeed
+            nextStep={nextStep}
+            formData={buyerRequest}
+            serviceId={serviceId}
+            serviceName={serviceName}
+            onClose={handleClose}
+            pincodes={postcode}
+            setShowConfirmModal={setShowConfirmModal}
+          />
+        )}
 
         {buyerStep === 3 && (
           <QuestionModal
@@ -109,43 +114,44 @@ console.log(registerData,"registerData")
             previousStep={previousStep}
             onClose={handleClose}
             loading={questionLoader}
+            setShowConfirmModal={setShowConfirmModal}
             formData={buyerRequest}
           />
         )}
 
-        {
-          buyerStep === 4 && (
-            <OtpVerification nextStep={nextStep}
-              previousStep={previousStep}
-              open={true}
-            // onClose={handleClose} 
-            />
-          )
-        }
-        {
-          buyerStep === 5 && (
-          <NumberVerifiedModal 
-          nextStep={nextStep}
-          previousStep={previousStep}
-          open={true}
+        {buyerStep === 4 && (
+          <OtpVerification
+            nextStep={nextStep}
+            previousStep={previousStep}
+            open={true}
+            // setShowConfirmModal={setShowConfirmModal}
+            // onClose={handleClose}
           />
-          )
-        }
-        {
-          buyerStep === 6 && (
-            <ViewYourMatches
-              nextStep={nextStep}
-              previousStep={previousStep}
-              onClose={handleClose}
-              formData={buyerRequest}
-            />
-          )
-        }
-        {
-          buyerStep === 7 && (
-            <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
-          )
-        }
+        )}
+        {buyerStep === 5 && (
+          <NumberVerifiedModal
+            nextStep={nextStep}
+            previousStep={previousStep}
+            open={true}
+            setShowConfirmModal={setShowConfirmModal}
+          />
+        )}
+        {buyerStep === 6 && (
+          <ViewYourMatches
+            nextStep={nextStep}
+            previousStep={previousStep}
+            onClose={handleClose}
+            formData={buyerRequest}
+            setShowConfirmModal={setShowConfirmModal}
+          />
+        )}
+        {buyerStep === 7 && (
+          <DescribeYourRequest
+            nextStep={nextStep}
+            onClose={handleClose}
+            setShowConfirmModal={setShowConfirmModal}
+          />
+        )}
 
         {buyerStep === 8 && (
           <BidsList
@@ -154,7 +160,6 @@ console.log(registerData,"registerData")
             onClose={handleClose}
           />
         )}
-
 
         {/* {buyerStep === 1 && (
           <WhatServiceYouNeed
@@ -221,12 +226,12 @@ console.log(registerData,"registerData")
         )}
       </div> */}
 
-        {/* {showConfirmModal && (
-        <ConfirmationModal
-          onConfirm={confirmClose}
-          onCancel={() => setShowConfirmModal(false)}
-        />
-      )} */}
+        {showConfirmModal && (
+          <ConfirmationModal
+            onConfirm={confirmClose}
+            onCancel={() => setShowConfirmModal(false)}
+          />
+        )}
       </div>
     </div>
   );

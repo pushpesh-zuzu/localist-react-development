@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
 
-const DescribeYourRequest = ({ onClose }) => {
+const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const [text, setText] = useState("");
   const [files, setFiles] = useState([]);
   const [professionalLetin, setProfessionalLetin] = useState(false);
@@ -90,7 +90,6 @@ const DescribeYourRequest = ({ onClose }) => {
     };
 
     dispatch(addDetailsRequestData(detailsData)).then((result) => {
-      
       if (result?.success) {
         showToast("success", result?.message || "Create Request successfully!");
       }
@@ -109,11 +108,15 @@ const DescribeYourRequest = ({ onClose }) => {
     // });
   };
 
+  const handleCloseClick = () => {
+    setShowConfirmModal(true);
+  };
+
   return (
     <div className={styles.container}>
       <div
         className={styles.closeButton}
-        onClick={onClose}
+        onClick={handleCloseClick}
         disabled={addDetailLoader}
       >
         x

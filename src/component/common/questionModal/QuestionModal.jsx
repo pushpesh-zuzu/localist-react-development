@@ -17,17 +17,18 @@ const QuestionModal = ({
   nextStep,
   previousStep,
   loading,
+  setShowConfirmModal,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest,requestLoader } = useSelector((state) => state.buyer);
-const { userToken } =useSelector((state) => state.auth)
+  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
+  const { userToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-console.log(buyerRequest,"buyer")
+  console.log(buyerRequest, "buyer");
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
@@ -103,28 +104,27 @@ console.log(buyerRequest,"buyer")
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      if(!userToken) {
+      if (!userToken) {
         const formData = new FormData();
-        formData.append("email",buyerRequest?.email);
-        formData.append("name",buyerRequest?.name);
-        formData.append("phone",buyerRequest?.phone);
-           formData.append("service_id", buyerRequest?.service_id);
-           formData.append("postcode", buyerRequest?.postcode);
-           formData.append("questions", JSON.stringify(updatedAnswers))
-           formData.append("form_status", 1);
-           // form_status: 1,
-           // formData.append("recevive_online", consent ? 1 : 0);
-       
-           dispatch(createRequestData(formData)).then((result)=>{
-             if(result?.success){
-               showToast("succes",result?.success)
-             }
-             nextStep();
-           });
-      } else{
-        nextStep()
+        formData.append("email", buyerRequest?.email);
+        formData.append("name", buyerRequest?.name);
+        formData.append("phone", buyerRequest?.phone);
+        formData.append("service_id", buyerRequest?.service_id);
+        formData.append("postcode", buyerRequest?.postcode);
+        formData.append("questions", JSON.stringify(updatedAnswers));
+        formData.append("form_status", 1);
+        // form_status: 1,
+        // formData.append("recevive_online", consent ? 1 : 0);
+
+        dispatch(createRequestData(formData)).then((result) => {
+          if (result?.success) {
+            showToast("succes", result?.success);
+          }
+          nextStep();
+        });
+      } else {
+        nextStep();
       }
-      
     }
   };
 
@@ -139,12 +139,16 @@ console.log(buyerRequest,"buyer")
     }
   };
 
+  const handleCloseClick = () => {
+    setShowConfirmModal(true);
+  };
+
   return (
     <div className={styles.modalOverlay} onClick={onClose}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button
           className={styles.closeButton}
-          onClick={onClose}
+          onClick={handleCloseClick}
           disabled={loading}
         >
           ✖
@@ -213,11 +217,16 @@ console.log(buyerRequest,"buyer")
                 className={styles.nextButton}
               >
                 {requestLoader ? (
-                <Spin
-                  indicator={
-                    <LoadingOutlined spin style={{ color: "white" }} />
-                  }
-                />) : currentQuestion === totalQuestions - 1 ? "Next" : "Next"}
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "white" }} />
+                    }
+                  />
+                ) : currentQuestion === totalQuestions - 1 ? (
+                  "Next"
+                ) : (
+                  "Next"
+                )}
               </button>
             </div>
           </>
