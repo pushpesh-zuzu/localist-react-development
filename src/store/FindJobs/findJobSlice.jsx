@@ -97,6 +97,7 @@ export const registerUserData = (registerData) => {
 
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
+        dispatch(setAuthToken(response?.data?.data?.remember_tokens))
         return response.data;
       }
       else {
@@ -250,6 +251,7 @@ state.pendingLoader = action.payload;
           }
     },
     setAuthToken(state,action){
+    
       if(!action.payload){
         state.authToken=state.registerToken
       }
