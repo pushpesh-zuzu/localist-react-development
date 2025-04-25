@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { getLeadProfileRequestList } from "../../../../store/LeadSetting/leadSettingSlice"
 import DummyImage from "../../../../assets/Images/DummyImage.svg";
+import { BASE_IMAGE_URL } from "../../../../utils"
 
 function LeadProfileData () {
     const dispatch = useDispatch()

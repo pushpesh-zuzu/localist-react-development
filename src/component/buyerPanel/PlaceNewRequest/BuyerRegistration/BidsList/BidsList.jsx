@@ -73,22 +73,54 @@ const BidsList = ({ previousStep }) => {
       }
     });
   };
+  // const handleMultple = () => {
+  //   const bidList=autoBidList?.[0]?.sellers ;
+    
+  //   const multipleData = {
+  //     service_id:bidList.map(item=>item?.service_id
+  //     ),
+  //     seller_id:bidList.map(item=>item?.id
+  //     ),
+  //     bid:bidList.map(item=>item?.credit_score
+  //     ),
+  //     distance:bidList.map(item=>item?.distance
+  //     ),
+  //     // bidtype:"reply",
+  //     lead_id:requestId,
+  //     user_id: userToken?.remember_tokens
+  //   }
+  //   dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
+  //     if(result) {
+  //       showToast("success", result?.message);
+  //       const data = {
+  //         user_id: userToken?.remember_tokens,
+  //         lead_id: requestId,
+  //       };
+  //       dispatch(getAutoBid(data))
+      
+       
+  //     }
+  //   })
+  // }
   const handleMultple = () => {
-    const bidList=autoBidList?.[0]?.sellers ;
+    // Only include the first 5 sellers (those with green checkboxes)
+    const bidList = autoBidList?.[0]?.sellers?.slice(0, 5);
+    
+    if (!bidList || bidList.length === 0) {
+      showToast("error", "No best matches available");
+      return;
+    }
     
     const multipleData = {
-      service_id:bidList.map(item=>item?.service_id
-      ),
-      seller_id:bidList.map(item=>item?.id
-      ),
-      bid:bidList.map(item=>item?.credit_score
-      ),
-      distance:bidList.map(item=>item?.distance
-      ),
+      service_id: bidList.map(item => item?.service_id),
+      seller_id: bidList.map(item => item?.id),
+      bid: bidList.map(item => item?.credit_score),
+      distance: bidList.map(item => item?.distance),
       // bidtype:"reply",
-      lead_id:requestId,
+      lead_id: requestId,
       user_id: userToken?.remember_tokens
     }
+    
     dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
       if(result) {
         showToast("success", result?.message);
@@ -97,8 +129,6 @@ const BidsList = ({ previousStep }) => {
           lead_id: requestId,
         };
         dispatch(getAutoBid(data))
-      
-       
       }
     })
   }
