@@ -278,13 +278,13 @@ const BuyerRegistration = ({
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader } = useSelector(
+  const { registerData, registerLoader,authToken } = useSelector(
     (state) => state.findJobs
   );
   console.log(registerData, "registerData");
   const isAdminOrRemembered = userToken?.remember_tokens;
 
-  const stepFlow = isAdminOrRemembered
+  const stepFlow = authToken
     ? [2, 3, 6, 7, 8]
     : [1, 2, 3, 4, 5, 7, 8];
 
@@ -303,9 +303,9 @@ const BuyerRegistration = ({
   };
 
   useEffect(() => {
-    const initialStep = isAdminOrRemembered ? 2 : 1;
+    const initialStep = authToken ? 2 : 1;
     dispatch(setBuyerStep(initialStep));
-  }, [dispatch, isAdminOrRemembered]);
+  }, [dispatch, authToken]);
 
   useEffect(() => {
     if (buyerStep) {
@@ -332,6 +332,7 @@ const BuyerRegistration = ({
   const confirmClose = () => {
     setShowConfirmModal(false);
     setShouldClose(true);
+    closeModal();
   };
 
   return (

@@ -27,7 +27,18 @@ const initialState = {
     creditPlanList:[],
     saveLaterLoader:false,
     saveForLaterDataList:[],
-    totalCredit:[]
+    totalCredit:[],
+    filters:{
+      keyword: "",
+      unread: false,
+      leadSpotlights: [],
+      buyerActions: [],
+      submittedWhen: "",
+      selectedServices: [],
+      location: "",
+      credits: [],
+      contactPreferences: [],
+    }
 };
 
 
@@ -540,11 +551,14 @@ const leadSettingSlice = createSlice({
       },
       setTotalCreditData(state,action) {
         state.totalCredit = action.payload
+      },
+      setFilters(state,action) {
+        state.filters = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilters,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

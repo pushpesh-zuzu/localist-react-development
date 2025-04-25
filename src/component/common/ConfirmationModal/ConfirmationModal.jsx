@@ -14,7 +14,7 @@ import { createRequestData } from "../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../utils";
 // import { showToast } from "../../../../../utils";
 
-const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal}) => {
+const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal,confirmClose,onConfirm}) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -85,7 +85,7 @@ const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfir
       document.body.style.overflow = "auto";
     };
   }, [show]);
-
+console.log(buyerRequest,formData,"buyerRequest")
   const handleSubmit = () => {
 if (!userToken) {
         const formData = new FormData();
@@ -94,7 +94,7 @@ if (!userToken) {
         formData.append("phone", buyerRequest?.phone);
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postcode);
-        formData.append("questions", JSON.stringify(buyerRequest?.questions));
+        // formData.append("questions", JSON.stringify(buyerRequest?.questions));
         formData.append("form_status", 0);
         // form_status: 1,
         // formData.append("recevive_online", consent ? 1 : 0);
@@ -102,7 +102,8 @@ if (!userToken) {
         dispatch(createRequestData(formData)).then((result) => {
           if (result?.success) {
             showToast("succes", result?.success);
-            setShowConfirmModal(false)
+            // setShowConfirmModal(false)
+            onConfirm()
           }
           // nextStep();
         });

@@ -23,7 +23,7 @@ const EmailMatch = ({
     (state) => state.findJobs
   );
   const { userToken } = useSelector((state) => state.auth)
-
+console.log(userToken?.remember_tokens,"000")
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -95,9 +95,13 @@ const EmailMatch = ({
     }
   }, [errorMessage]);
 const handleCloseClick = () => {
+  debugger;
   if(!userToken?.remember_tokens){
+    console.log(name,email,phone,"p")
+    dispatch(setbuyerRequestData({ name, email, phone }));
     setShowConfirmModal(true);
   } else{
+
     onClose();
   }
 }
@@ -119,14 +123,14 @@ const handleCloseClick = () => {
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>
 )} */}
-        {showError && String(errorMessage).trim() && (
+        {/* {showError && String(errorMessage).trim() && (
           <Alert
             message={errorMessage}
             type="error"
             showIcon
             style={{ marginBottom: "16px" }}
           />
-        )}
+        )} */}
         <div className={styles.infoWrapper}>
           <label className={styles.label}>Name</label>
           <input

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getfilterListData, getLeadRequestList, } from "../../../../store/LeadSetting/leadSettingSlice";
+import { getfilterListData, getLeadRequestList, setFilters, } from "../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -31,8 +31,9 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  const { leadRequestLoader, filterListData } = useSelector((state) => state.leadSetting)
-
+  const { leadRequestLoader, filterListData,filters } = useSelector((state) => state.leadSetting)
+  const unReadData = filterListData?.map((item)=> item?.unread)
+console.log(filterListData?.map((item)=> item?.unread),"filterListData")
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const data = {
@@ -47,36 +48,70 @@ const MatchingLeadsFilter = ({ onClose }) => {
   }, [dispatch]);
 
   // States to manage selected filters
-  const [filters, setFilters] = useState({
-    keyword: "",
-    unread: false,
-    leadSpotlights: [],
-    buyerActions: [],
-    submittedWhen: "",
-    selectedServices: [],
-    location: "",
-    credits: [],
-    contactPreferences: [],
-  });
+  // const [filters, setFilters] = useState({
+  //   keyword: "",
+  //   unread: false,
+  //   leadSpotlights: [],
+  //   buyerActions: [],
+  //   submittedWhen: "",
+  //   selectedServices: [],
+  //   location: "",
+  //   credits: [],
+  //   contactPreferences: [],
+  // });
+
+  // const handleCheckboxChange = (key, value) => {
+  //   dispatch(setFilters((prev) => {
+  //     const list = prev[key];
+  //     return {
+  //       ...prev,
+  //       [key]: list.includes(value)
+  //         ? list.filter((item) => item !== value)
+  //         : [...list, value],
+  //     };
+  //   }));
+  // };
+
+  // const handleRadioChange = (key, value) => {
+  //  dispatch(setFilters((prev) => ({ ...prev, [key]: value })));
+  // };
+
+  // const handleInputChange = (key, value) => {
+  //  dispatch(setFilters((prev) => ({ ...prev, [key]: value })));
+  // };
 
   const handleCheckboxChange = (key, value) => {
-    setFilters((prev) => {
-      const list = prev[key];
-      return {
-        ...prev,
-        [key]: list.includes(value)
-          ? list.filter((item) => item !== value)
-          : [...list, value],
-      };
-    });
+    // Create a copy of the current filters
+    const updatedFilters = { ...filters };
+    
+    // If the array doesn't exist yet, initialize it
+    if (!Array.isArray(updatedFilters[key])) {
+      updatedFilters[key] = [];
+    }
+    
+    // Toggle the value in the array
+    if (updatedFilters[key].includes(value)) {
+      updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+    } else {
+      updatedFilters[key] = [...updatedFilters[key], value];
+    }
+    
+    // Update the filters
+    dispatch(setFilters(updatedFilters));
   };
-
+  
   const handleRadioChange = (key, value) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    dispatch(setFilters({
+      ...filters,
+      [key]: value
+    }));
   };
-
+  
   const handleInputChange = (key, value) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    dispatch(setFilters({
+      ...filters,
+      [key]: value
+    }));
   };
   const handleApply = () => {
     const formData = new FormData();
@@ -84,7 +119,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
     formData.append("user_id", userToken?.remember_tokens || "");
     formData.append("name", filters.keyword || "");
     formData.append("lead_time", filters.submittedWhen || "");
-    formData.append("distanceFilter", filters.location || "");
+    formData.append("distance_filter", filters.location || "");
 
     const selectedServiceIds = filters.selectedServices
       .map((serviceName) => {
@@ -99,7 +134,8 @@ const MatchingLeadsFilter = ({ onClose }) => {
     // formData.append("contact_preferences", filters.contactPreferences.join(","));
     formData.append("lead_spotlights", filters.leadSpotlights.join(","));
     // formData.append("buyer_actions", filters.buyerActions.join(","));
-    // formData.append("unread", filters.unread ? "true" : "false");
+    formData.append("unread", filters.unread ? 1 : 0);
+
     dispatch(getLeadRequestList(formData)).then((result) => {
       if (result) {
         showToast("success", result?.message);
@@ -166,7 +202,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
           </AccordionSection>
 
           {/* View */}
-          {/* <AccordionSection title="View">
+          <AccordionSection title="View">
             <label>
               <input
                 type="checkbox"
@@ -174,9 +210,9 @@ const MatchingLeadsFilter = ({ onClose }) => {
                 checked={filters.unread}
                 onChange={() => handleInputChange("unread", !filters.unread)}
               />{" "}
-              Unread (285)
+              Unread ({unReadData})
             </label>
-          </AccordionSection> */}
+          </AccordionSection>
           <AccordionSection title={"Lead spotlights"}>
             {filterListData?.[0]?.leadSpotlights?.map((item) => (
               <div key={item.spotlight}>
