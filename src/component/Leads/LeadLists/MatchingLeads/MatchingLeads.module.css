@@ -6,19 +6,21 @@
   box-shadow: 0px 0px 6px 0px #0000001a;
   color: white;
   margin-top: 10.5px;
-  padding: 13.94px 24px 24.86px 41px;
+  padding: 20px 34px;
 }
 
 .textSection {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
 }
 
 .heading {
   font-weight: 600;
   font-size: 24px;
   vertical-align: middle;
-  margin: 0 0 12px 0;
+  align-items: center;
 }
 
 .subText {
@@ -107,6 +109,7 @@
 .selectedOption {
   font-weight: 400;
   font-size: 14px;
+  text-wrap: nowrap;
 }
 
 .dropdownIcon {
@@ -147,6 +150,26 @@
 .dropdownButton:hover {
   background-color: #f9fafb;
 }
+
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .dualDropdownsContainer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px;
+    /* width: 100%; */
+  }
+
+  .dropdownWrapper {
+    width: 48%;
+  }
+}
+
 @media (max-width: 910px) {
   .heading {
     font-size: 22px;
@@ -158,11 +181,12 @@
     align-items: center;
     padding: 20px;
     gap: 16px;
+    justify-content: center;
   }
 
-  .textSection {
+  /* .textSection {
     width: 100%;
-  }
+  } */
 
   .heading {
     font-size: 20px;
@@ -182,11 +206,6 @@
     margin-right: 0;
   }
 
-  /* .actionButtons {
-    width: 100%;
-    justify-content: space-between;
-  } */
-
   .filterButton {
     font-size: 14px;
     padding-right: 10px;
@@ -198,6 +217,21 @@
     font-size: 14px;
     padding: 10px 20px;
     width: fit-content;
+  }
+
+  /* .dropdownWrapper {
+    width: 100%;
+  } */
+
+  .dualDropdownsContainer {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .textSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
 
@@ -222,5 +256,11 @@
     flex-direction: column;
     gap: 8px;
     align-items: stretch;
+  }
+
+  .textSection {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
