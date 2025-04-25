@@ -3,6 +3,16 @@
     position: relative;
     /* width: 100%; */
   }
+  .card {
+    background: #fff;
+    box-shadow: 0px 0px 6px 0px #0000001a;
+    margin: 21.08px auto;
+    padding: 28.25px 25.26px 28.25px 34px;
+    display: grid;
+    grid-template-areas: "info job actions";
+    grid-template-columns: 1fr 1fr 0.3fr;
+    gap: 40px;
+  }
   
   .backBtnWrapper {
     display: flex;
@@ -67,9 +77,37 @@
     color: white;
     border-radius: 4px;
   }
+  .viewQuestion {
+    font-weight: 400;
+    font-size: 12px;
+  }
+  .backBtn {
+    background: #d9d9d9;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 11px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    vertical-align: middle;
+    color: #ffffff;
+  }
   
+  .backBtn:hover {
+    background-color: #d9d9d9df;
+  }
   .activeTab:hover {
     background-color: #0096c4;
+  }
+  .credits {
+    display: block;
+    background: #fce5e3;
+    color: black;
+    padding: 4px 10px;
+    font-weight: 400;
+    font-size: 18.91px;
   }
   
   .tab {

@@ -7,23 +7,27 @@ import DummyImage from "../../../../assets/Images/DummyImage.svg";
 
 function LeadProfileData () {
     const dispatch = useDispatch()
-    const { requestId } = useParams()
+    const { profileId } = useParams()
     const { profileLeadViewData, autobidLoader } = useSelector((state) => state.leadSetting)
     const { userToken } = useSelector((state) => state.auth);
     const navigate = useNavigate()
-    
-    
+    const handleBack = () => {
+      navigate("/leads")
+    }
+    console.log(profileId,"profileId")
     // const webData = profileLeadViewData?.map(item => item?.service_name) || [];
     useEffect(()=>{
         const data = {
-            user_id:userToken?.remember_tokens
+            customer_id:profileId
         }
         dispatch(getLeadProfileRequestList(data))
     },[])
     return (
         <>
           <div className={styles.container}>
+            
       <div className={styles.headerWrapper}>
+        <button className={styles.backBtn} onClick={handleBack}>Back</button>
         <div className={styles.headingTabsWrapper}>
           <h1 className={styles.heading}>
            
@@ -38,7 +42,7 @@ function LeadProfileData () {
         </div> */}
       </div>
 
-      <div className={styles.filters}>
+      {/* <div className={styles.filters}>
         <select>
           <option>All ratings</option>
         </select>
@@ -48,17 +52,17 @@ function LeadProfileData () {
         <select>
           <option>All response times</option>
         </select>
-        {/* <span className={styles.matchCount}>12 matches</span> */}
+       
 
         <select className={styles.sortDropdown}>
           <option>Sort by: best match</option>
         </select>
-      </div>
-
+      </div> */}
+{/* 
       <div className={styles.recommendBar}>
         <span>Recommended:</span> Request replies from your{" "}
         <strong>top matches</strong> to hear back faster
-      </div>
+      </div> */}
       {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
         {/* {profileLeadViewData?.map((item) => ( */}
           <div className={styles.card} key={profileLeadViewData.id}>
@@ -80,17 +84,21 @@ function LeadProfileData () {
                   <div>
                     <h3>
                       {/* <img src={GreenTickIcon} alt="" /> */}
-                      {profileLeadViewData.name}
+                      {profileLeadViewData?.leads?.category?.name}
                     </h3>
                     <p>
                       {/* <img src={AutoBidLocationIcon} alt="" /> */}
                       {profileLeadViewData.email}
                     </p>
+                    <p>
+                      {profileLeadViewData?.phone}
+                    </p>
                   </div>
                   <div className={styles.sidebar}>
-                    <div className={styles.rating}>
+                    <div className={styles.credits}>
                       {/* <span className={styles.stars}>★★★★★</span> */}
                       {/* <span className={styles.ratingCount}>125</span> */}
+                      {profileLeadViewData?.leads?.credit_score} Credits
                     </div>
                   </div>
                 </div>
@@ -99,19 +107,35 @@ function LeadProfileData () {
                   {/* <span>{profileLeadViewData.service_name}</span> */}
                 </div>
 
-                <p className={styles.description}>
-                  This is a static description for demonstration purposes. It
-                  showcases how each bid card might look like in real data.
-                </p>
+                {profileLeadViewData && profileLeadViewData.leads && profileLeadViewData.leads.questions ? (
+  <div className="space-y-4">
+    {(() => {
+      try {
+        const questionsData = JSON.parse(profileLeadViewData.leads.questions);
+        return questionsData.map((item, index) => (
+          <div key={index} className="mb-4">
+            <p className={styles.viewQuestion}>{item.ques}</p>
+            <p className={styles.viewQuestion}>{item.ans}</p>
+          </div>
+        ));
+      } catch (error) {
+        console.error("Error parsing questions data:", error);
+        return <div>Error displaying questions</div>;
+      }
+    })()}
+  </div>
+) : (
+  <div>No questions data available</div>
+)}
 
                 <div className={styles.quickToRespondWrapper}>
                   <a href="#" className={styles.profileLink}>
-                    View Profile →
+                    {/* View Profile → */}
                   </a>
 
                   <div className={styles.quickToRespond}>
-                    {/* <img src={QuickToRespond} alt="" /> */}
-                    Quick to respond
+                  Contact
+                    
                   </div>
                 </div>
               </div>

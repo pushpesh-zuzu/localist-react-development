@@ -264,9 +264,9 @@ const BidsList = ({ previousStep }) => {
           />
         </>
       )}
-     {autoBidList?.map((item) => item.sellers)?.length > visibleCount  && <div className={styles.moreProfessionalBtnBox}>
-     <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
-   </div>}
+    {autoBidList?.[0]?.sellers?.length > visibleCount && <div className={styles.moreProfessionalBtnBox}>
+  <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
+</div>}
     </div>
      
    </>

@@ -64,9 +64,10 @@ const LeadsCards = () => {
       dispatch(totalCreditData(data))
     });
   }
-  const handleViewProfile = (id) => {
-    navigate(`/lead/profile-view/${id}`)
+  const handleViewProfile = (customer_id) => {
+    navigate(`/lead/profile-view/${customer_id}`)
   }
+  console.log(leadRequestList,"leadRequestList")
   // const handleSaveLater =  (item) => {
   //   setSaveLaterLoaderId(item.id);
 
@@ -134,7 +135,7 @@ const LeadsCards = () => {
                           {" "}
                           {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                         </div>
-                        <div className={styles.details} onClick={() => handleViewProfile(item?.id)}>
+                        <div className={styles.details} onClick={() => handleViewProfile(item?.customer_id)}>
                           <h3>{item?.customer?.name}</h3>
                           <p>{item?.postcode}</p>
                         </div>
