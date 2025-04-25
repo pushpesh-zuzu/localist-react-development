@@ -53,6 +53,7 @@ phone:""
     miles2: "1",
 
   },
+  authToken:null,
   
 };
 export const getPopularServiceList = () => {
@@ -248,6 +249,17 @@ state.pendingLoader = action.payload;
         phone:""
           }
     },
+    setAuthToken(state,action){
+      if(!action.payload){
+        state.authToken=state.registerToken
+      }
+      else{
+        state.authToken=action.payload;
+      }
+    },
+    clearAuthToken(state) {
+state.authToken = null
+    },
     clearServiceFormData(state,action){
       state.selectedServiceFormData={
  
@@ -301,6 +313,8 @@ export const {
   setPendingLeadData,
   setbuyerRegisterFormData,
   clearBuyerRegisterFormData,
-  setErrorMessage
+  setErrorMessage,
+  setAuthToken,
+  clearAuthToken
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

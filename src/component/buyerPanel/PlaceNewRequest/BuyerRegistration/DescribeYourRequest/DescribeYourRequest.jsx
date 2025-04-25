@@ -97,6 +97,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       dispatch(clearSetbuyerRequestData());
       dispatch(clearBuyerRegisterFormData());
       dispatch(setQualityData());
+     
       navigate(`/bids-list/${requestId}`);
     });
 

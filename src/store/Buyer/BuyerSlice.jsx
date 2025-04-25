@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import axios from "axios";
-import { setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
+import { setAuthToken, setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
+import { setToken, setUserToken } from "../Auth/authSlice";
 
 const initialState = {
   questionLoader:false,
@@ -32,7 +33,8 @@ submitImageLoader:false,
 notificationList:[],
 notificationLoader:false,
 addNotificationLoader:false,
-verifyPhoneNumberLoader:false
+verifyPhoneNumberLoader:false,
+
 };
 
 export const questionAnswerData = (questionData) => {
@@ -82,6 +84,8 @@ export const createRequestData = (requestData) => {
         dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
         dispatch(setRegisterData(response?.data?.data))
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
+        dispatch(setToken(response?.data?.data?.remember_tokens))
+       
         return response.data
         // navigate("/buyers/create");
       }
@@ -251,6 +255,7 @@ export const addDetailsRequestData = (addDetailsData) => {
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
+      dispatch(setAuthToken())
       dispatch(setAddDetailLoader(false));
     }
   };
@@ -399,7 +404,8 @@ const buyerSlice = createSlice({
     },
     setVerifyPhoneNumberLoader(state,action) {
       state.verifyPhoneNumberLoader = action.payload
-    }
+    },
+  
   },
 });
 

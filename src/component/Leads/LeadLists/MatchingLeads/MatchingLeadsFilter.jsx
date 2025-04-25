@@ -105,17 +105,17 @@ const MatchingLeadsFilter = ({ onClose }) => {
         showToast("success", result?.message);
       }
       onClose();
-      setFilters({
-        keyword: "",
-        submittedWhen: "",
-        location: "",
-        selectedServices: [],
-        credits: [],
-        contactPreferences: [],
-        leadSpotlights: [],
-        buyerActions: [],
-        unread: false,
-      });
+      // setFilters({
+      //   keyword: "",
+      //   submittedWhen: "",
+      //   location: "",
+      //   selectedServices: [],
+      //   credits: [],
+      //   contactPreferences: [],
+      //   leadSpotlights: [],
+      //   buyerActions: [],
+      //   unread: false,
+      // });
     });
   };
 

@@ -393,7 +393,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         setIsOnline(!is_online);
        
         const isOnlineData = {
-          user_id: userToken?.remember_tokens,
+          user_id: registerData?.remember_tokens,
           is_online: !is_online ? 1 : 0  
         };
         dispatch(isOnlineRemote(isOnlineData))

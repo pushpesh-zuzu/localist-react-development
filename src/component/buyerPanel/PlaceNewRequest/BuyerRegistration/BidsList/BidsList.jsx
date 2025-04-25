@@ -65,6 +65,11 @@ const BidsList = ({ previousStep }) => {
       if (result) {
         showToast("success", result?.message);
         setModalOpen(false);
+        const data = {
+          user_id: userToken?.remember_tokens,
+          lead_id: requestId,
+        };
+        dispatch(getAutoBid(data))
       }
     });
   };
@@ -84,7 +89,18 @@ const BidsList = ({ previousStep }) => {
       lead_id:requestId,
       user_id: userToken?.remember_tokens
     }
-    dispatch(getAddMultipleManualBidData(multipleData))
+    dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
+      if(result) {
+        showToast("success", result?.message);
+        const data = {
+          user_id: userToken?.remember_tokens,
+          lead_id: requestId,
+        };
+        dispatch(getAutoBid(data))
+      
+       
+      }
+    })
   }
 
   return (

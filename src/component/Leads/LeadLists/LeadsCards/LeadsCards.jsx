@@ -51,7 +51,7 @@ const LeadsCards = () => {
     formData.append("lead_id", selectedItem?.id);
     formData.append("bidtype", "purchase_leads");
     formData.append("service_id", selectedItem?.service_id);
-    formData.append("distance", null);
+    formData.append("distance", "0");
 
     dispatch(getAddManualBidData(formData)).then((result) => {
       if (result) {

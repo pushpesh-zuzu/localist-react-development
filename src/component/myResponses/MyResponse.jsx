@@ -13,7 +13,7 @@ const MyResponse = () => {
     const { userToken } = useSelector((state) => state.auth);
     const { registerData } = useSelector((state) => state.findJobs);
     const { saveForLaterDataList } = useSelector((state) => state.leadSetting)
-console.log(saveForLaterDataList,"saveForLaterDataList")
+console.log(saveForLaterDataList,registerData,"saveForLaterDataList")
     useEffect(()=>{
 const data = {
     user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
