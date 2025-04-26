@@ -15,6 +15,7 @@ const MyResponse = () => {
     const { saveForLaterDataList } = useSelector((state) => state.leadSetting)
 console.log(saveForLaterDataList,registerData,"saveForLaterDataList")
     useEffect(()=>{
+      
 const data = {
     user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
 }

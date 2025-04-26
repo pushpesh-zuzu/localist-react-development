@@ -103,6 +103,11 @@ if (!userToken) {
           if (result?.success) {
             showToast("succes", result?.success);
             // setShowConfirmModal(false)
+            localStorage.removeItem("barkToken");
+        localStorage.removeItem("barkUserToken");
+        localStorage.removeItem("registerDataToken");
+        localStorage.removeItem("registerTokens");
+        localStorage.removeItem("createRequestToken")
             onConfirm()
           }
           // nextStep();

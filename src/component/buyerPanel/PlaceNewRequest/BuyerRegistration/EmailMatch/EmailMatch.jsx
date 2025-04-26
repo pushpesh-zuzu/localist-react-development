@@ -95,7 +95,7 @@ console.log(userToken?.remember_tokens,"000")
     }
   }, [errorMessage]);
 const handleCloseClick = () => {
-  debugger;
+  
   if(!userToken?.remember_tokens){
     console.log(name,email,phone,"p")
     dispatch(setbuyerRequestData({ name, email, phone }));
