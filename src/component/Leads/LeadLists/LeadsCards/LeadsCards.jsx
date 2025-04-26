@@ -24,7 +24,7 @@ const LeadsCards = () => {
   const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
 
 
-  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader } = useSelector(
+  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader,filters } = useSelector(
     (state) => state.leadSetting
   );
   const { registerData } = useSelector((state) => state.findJobs);
@@ -62,6 +62,7 @@ const LeadsCards = () => {
         user_id: userToken?.remember_tokens
       }
       dispatch(totalCreditData(data))
+      dispatch(getLeadRequestList(data))
     });
   }
   const handleViewProfile = (customer_id) => {
@@ -101,10 +102,37 @@ const LeadsCards = () => {
     dispatch(saveForLaterApi(saveLaterData)).then((result) => {
       if (result.success) {
         showToast("success", result?.message)
-        const leadRequestData = {
-          user_id: userToken?.remember_tokens
-        }
-        dispatch(getLeadRequestList(leadRequestData)) 
+        // const leadRequestData = {
+        //   user_id: userToken?.remember_tokens
+        // }
+        // dispatch(getLeadRequestList(leadRequestData)) 
+          const formData = new FormData();
+        
+            formData.append("user_id", userToken?.remember_tokens || "");
+            formData.append("name", filters.keyword || "");
+            formData.append("lead_time", filters.submittedWhen || "");
+            formData.append("distance_filter", filters.location || "");
+        
+            const selectedServiceIds = filters.selectedServices
+              .map((serviceName) => {
+                const match = popularList.find((s) => s.name === serviceName);
+                return match?.id;
+              })
+              .filter(Boolean);
+        
+            formData.append("service_id", selectedServiceIds.join(","));
+        
+            formData.append("credits", filters.credits.join(","));
+            // formData.append("contact_preferences", filters.contactPreferences.join(","));
+            formData.append("lead_spotlights", filters.leadSpotlights.join(","));
+            // formData.append("buyer_actions", filters.buyerActions.join(","));
+            formData.append("unread", filters.unread ? 1 : 0);
+        
+            dispatch(getLeadRequestList(formData)).then((result) => {
+              if (result) {
+                showToast("success", result?.message);
+              }
+            })
        
       }
       setSaveLaterLoaderId(null);

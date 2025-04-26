@@ -28,6 +28,7 @@ const initialState = {
     saveLaterLoader:false,
     saveForLaterDataList:[],
     totalCredit:[],
+    sellerRecommended:[],
     filters:{
       keyword: "",
       unread: false,
@@ -476,6 +477,24 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  
+  export const getSellerRecommendedApi = (saveForLaterData) => {
+    return async (dispatch) => {
+      dispatch(setSaveLaterListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-seller-recommended-leads`, saveForLaterData);
+  
+        if (response) {
+          dispatch(setSellerRecommendedData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSaveLaterListLoader(false));
+      }
+    };
+  }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -554,11 +573,14 @@ const leadSettingSlice = createSlice({
       },
       setFilters(state,action) {
         state.filters = action.payload
+      },
+      setSellerRecommendedData(state,action){
+        state.sellerRecommended = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilters,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilters,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

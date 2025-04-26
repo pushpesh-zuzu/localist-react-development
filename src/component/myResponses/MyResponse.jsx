@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import styles from "./MyResponse.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { getSaveLaterListData } from "../../store/LeadSetting/leadSettingSlice"
+import { getSaveLaterListData, getSellerRecommendedApi } from "../../store/LeadSetting/leadSettingSlice"
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
 import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
@@ -12,20 +12,21 @@ const MyResponse = () => {
     const dispatch = useDispatch()
     const { userToken } = useSelector((state) => state.auth);
     const { registerData } = useSelector((state) => state.findJobs);
-    const { saveForLaterDataList } = useSelector((state) => state.leadSetting)
-console.log(saveForLaterDataList,registerData,"saveForLaterDataList")
+    const { sellerRecommended } = useSelector((state) => state.leadSetting)
+console.log(registerData,"saveForLaterDataList")
     useEffect(()=>{
       
 const data = {
     user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
 }
-dispatch(getSaveLaterListData(data))
+dispatch(getSellerRecommendedApi(data))
     },[])
     return(
         <>
         <div className={styles.maincontainer}> 
+        <div style={{fontSize:"24px",fontWeight:800,}}>My Response List</div>
         {
-            saveForLaterDataList?.map((item) => {
+            sellerRecommended?.[0]?.leads?.map((item) => {
                 return(
                     <>
                     <div className={styles.card} >

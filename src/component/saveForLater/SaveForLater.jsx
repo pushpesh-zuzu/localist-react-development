@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SaveForLater.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { getSaveLaterListData } from "../../store/LeadSetting/leadSettingSlice"
+import { getAddManualBidData, getSaveLaterListData, totalCreditData } from "../../store/LeadSetting/leadSettingSlice"
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
 import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
+import { showToast } from "../../utils";
+import CustomModal from "../Leads/LeadLists/ConfirmModal";
 
 
 
@@ -14,8 +16,11 @@ const SaveForLater = () => {
      const dispatch = useDispatch()
         const { userToken } = useSelector((state) => state.auth);
         const { registerData } = useSelector((state) => state.findJobs);
-        const { saveForLaterDataList } = useSelector((state) => state.leadSetting)
-    console.log(saveForLaterDataList,registerData,"saveForLaterDataList")
+        const { saveForLaterDataList,manualBidLoader } = useSelector((state) => state.leadSetting)
+        const [selectedItem, setSelectedItem] = useState(null)
+         const [isModalOpen, setModalOpen] = useState(false)
+          
+    console.log(saveForLaterDataList,"saveForLaterDataList")
         useEffect(()=>{
           
     const data = {
@@ -23,12 +28,37 @@ const SaveForLater = () => {
     }
     dispatch(getSaveLaterListData(data))
         },[])
+         const handleContinue = () => {
+            if (!selectedItem) return;
+        
+            const formData = new FormData();
+            formData.append("buyer_id", selectedItem?.customer_id);
+            formData.append("user_id", userToken?.remember_tokens);
+            formData.append("bid", selectedItem?.credit_score);
+            formData.append("lead_id", selectedItem?.id);
+            formData.append("bidtype", "purchase_leads");
+            formData.append("service_id", selectedItem?.service_id);
+            formData.append("distance", "0");
+        
+            dispatch(getAddManualBidData(formData)).then((result) => {
+              if (result) {
+                showToast("success", result?.message)
+                setModalOpen(false);
+              }
+              const datas = {
+                user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
+            }
+            dispatch(getSaveLaterListData(datas))
+             
+            });
+          }
     return(
        <>
               <div className={styles.maincontainer}> 
-              <div style={{fontSize:"24px",fontWeight:500,}}>Save For Later List</div>
+              <div style={{fontSize:"24px",fontWeight:800,}}>Save For Later List</div>
               {
-                  saveForLaterDataList?.map((item) => {
+                  saveForLaterDataList?.[0]?.savedLeads
+                  ?.map((item) => {
                       return(
                           <>
                          
@@ -103,7 +133,7 @@ const SaveForLater = () => {
       
                         {/* Right Section - Lead Purchase */}
                        <div className={styles.leadActions}>
-                         {/*   <button className={styles.purchaseButton} onClick={() => {
+                           <button className={styles.purchaseButton} onClick={() => {
                             setSelectedItem(item);
                             setModalOpen(true);
                           }}>
@@ -111,11 +141,11 @@ const SaveForLater = () => {
                           </button>
                           <span className={styles.credits}>
                             {item?.credit_score}Credits
-                          </span>> */}
-                        
-                        <span className={styles.credits}>
-                            {item?.credit_score}Credits
                           </span>
+                        
+                        {/* <span className={styles.credits}>
+                            {item?.credit_score}Credits
+                          </span> */}
                             </div>
                       </div>
                           </>
@@ -123,7 +153,13 @@ const SaveForLater = () => {
                   })
               }
                </div>
-              
+               <CustomModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        onContinue={handleContinue}
+        message="Are you sure you want to continue?"
+        loading={manualBidLoader}
+      />
               </>
     )
 }
