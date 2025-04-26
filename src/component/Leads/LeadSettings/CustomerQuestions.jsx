@@ -360,7 +360,7 @@ const CustomerQuestions = ({ selectedService }) => {
               + Add a location
             </a>
           </div>
-
+<div className={styles.rangerBox}>
           <div className={styles.ranger}>
             {serviceWiseData?.map((item, idx) => (
               <div className={styles.range} key={idx}>
@@ -372,6 +372,10 @@ const CustomerQuestions = ({ selectedService }) => {
               </div>
             ))}
           </div>
+          <a href="#" className={styles.addLocation}>
+              Change Your Radius
+            </a>
+        </div>
         </div>
 
         <div className={styles.footer}>

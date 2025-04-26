@@ -46,14 +46,14 @@ console.log(inputRef,'inputref')
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
-console.log(place,'place')
+
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-        console.log(postalCode,'postalCode')
+        
 
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
@@ -69,8 +69,7 @@ console.log(place,'place')
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
-  const allScripts = document.getElementsByTagName("script");
-  console.log(allScripts,'allScripts'); 
+
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>

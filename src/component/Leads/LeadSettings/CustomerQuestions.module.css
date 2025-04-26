@@ -80,6 +80,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* color: #000000; */
 }
 
 .arrowIcon img {
@@ -105,6 +106,7 @@
   margin: 14.47px 0;
   font-weight: 500;
   font-size: 13px;
+  color: #000000;
 }
 
 .option input {
@@ -166,6 +168,11 @@
   text-decoration: none;
   font-weight: 600;
   font-size: 18px;
+}
+.rangerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .ranger {
   display: flex;

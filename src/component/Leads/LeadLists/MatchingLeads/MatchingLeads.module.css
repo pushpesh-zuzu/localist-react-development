@@ -121,7 +121,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%;
+  width: fit-content;
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 0.5rem;

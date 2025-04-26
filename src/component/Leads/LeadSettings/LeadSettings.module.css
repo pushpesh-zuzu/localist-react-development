@@ -143,6 +143,7 @@
 .link {
   color: inherit;
   cursor: pointer;
+  color: #828282;
 }
 
 .link:hover {

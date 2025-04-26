@@ -249,7 +249,7 @@ const LeadsCards = () => {
                       Contact {item?.customer?.name}
                     </button>
                     <span className={styles.credits}>
-                      {item?.credit_score}Credits
+                      {item?.credit_score} Credits
                     </span>
                     {/* <p className={styles.responseStatus}>
                       <img src={FirstToRespondImg} alt="" />

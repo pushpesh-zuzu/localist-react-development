@@ -282,9 +282,9 @@ const BuyerRegistration = ({
     (state) => state.findJobs
   );
   console.log(registerData, "registerData");
-  const isAdminOrRemembered = userToken?.remember_tokens;
+  const isAdminOrRemembered = authToken ||  userToken?.remember_tokens;
 
-  const stepFlow = authToken && registerData?.remember_tokens
+  const stepFlow = isAdminOrRemembered 
     ? [2, 3, 6, 7, 8]
     : [1, 2, 3, 4, 5, 7, 8];
 
@@ -303,9 +303,9 @@ const BuyerRegistration = ({
   };
 
   useEffect(() => {
-    const initialStep = authToken ? 2 : 1;
+    const initialStep = isAdminOrRemembered ? 2 : 1;
     dispatch(setBuyerStep(initialStep));
-  }, [dispatch, authToken]);
+  }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
     if (buyerStep) {
