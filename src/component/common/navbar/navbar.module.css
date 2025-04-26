@@ -211,6 +211,14 @@
 .activeMenu {
   display: flex !important;
 }
+.saveForLater {
+  padding: 8px;
+  text-align: start;
+}
+.saveForLater p {
+  cursor: pointer;
+  text-align: start;
+}
 
 @media screen and (max-width: 1250px) {
   .navbarItems {

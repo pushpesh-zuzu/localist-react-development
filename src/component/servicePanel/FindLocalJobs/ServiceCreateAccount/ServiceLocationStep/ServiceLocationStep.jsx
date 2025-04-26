@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-
+console.log(inputRef,'inputref')
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -46,13 +46,14 @@ const ServiceLocationStep = ({
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
-
+console.log(place,'place')
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
+        console.log(postalCode,'postalCode')
 
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
@@ -68,7 +69,8 @@ const ServiceLocationStep = ({
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
-
+  const allScripts = document.getElementsByTagName("script");
+  console.log(allScripts,'allScripts'); 
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>

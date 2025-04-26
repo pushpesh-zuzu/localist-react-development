@@ -14,7 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
 
-const OtherServiceStep = ({ prevStep, handleInputChange, formData,setFormData }) => {
+const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
@@ -22,7 +22,8 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData,setFormData })
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(formData,"form");
+  console.log(inputRef,'inputref')
+  console.log(formData, "form");
   const {
     service,
     registerLoader,
@@ -47,10 +48,13 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData,setFormData })
       dispatch(setService([]));
     };
   }, [Input, dispatch]);
-useEffect(() => {
+  const [newpost,setNewPost]=useState('')
+
+  useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
-      if (!window.google) {
+      // if (!window.google) {
+        if (!window.google) {
         const script = document.createElement("script");
         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places`;
         script.async = true;
@@ -77,6 +81,7 @@ useEffect(() => {
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
+        console.log(place,'place')
 
         let postalCode = "";
         place.address_components.forEach((component) => {
@@ -84,12 +89,12 @@ useEffect(() => {
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-
+console.log(postalCode,'postalCode')
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
 
           // ✅ Update Input Field with Selected Postal Code
-          dispatch(setFormData({ postcode_new: postalCode }));
+          dispatch(setFormData({ postcode: postalCode }));
           inputRef.current.value = postalCode; // Update input value
         } else {
           showToast("error", "No PIN code found! Please try again.");
@@ -99,7 +104,8 @@ useEffect(() => {
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
-
+  const allScripts = document.getElementsByTagName("script");
+  console.log(allScripts,'allScripts'); 
   const handleSelectService = (item) => {
     if (!selectedServices?.some((service) => service.id === item.id)) {
       dispatch(setselectedServices([...selectedServices, item]));
@@ -194,11 +200,11 @@ useEffect(() => {
   const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
-    const selectedId=selectedServices.map(item=>item.id)
+    const selectedId = selectedServices.map(item => item.id)
     const serviceId = {
-      service_id: [formData?.service_id[0],...selectedId].join(","),
+      service_id: [formData?.service_id[0], ...selectedId].join(","),
     };
-    
+
     dispatch(pendingLeadData(serviceId));
   }, [selectedServices]);
   return (
@@ -301,18 +307,20 @@ useEffect(() => {
               </select>
             </div>
             <div className={styles.inputWrapper}>
-              <span className={styles.fromText}>From</span>
-              {/* <img src={LocationIcon} alt="" /> */}
+              <img src={LocationIcon} alt="" />
               <input
-  type="text"
-  ref={inputRef}
-  name="postcode"
-  value={formData.postcode|| ""}
-  onChange={handleInputChange}
-  placeholder="Enter your postcode"
-  className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""}`}
-/>
+                type="text"
+                placeholder="Enter your postcode"
+                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
+                  }`}
+                ref={inputRef}
+                name="postcode"
+                value={formData.postcode ||''}
+                onChange={handleInputChange ? handleInputChange : () => { }}
+                // onChange={(e)=>setNewPost(e.target.value)}
+              />
             
+
             </div>
           </div>
           {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
@@ -320,10 +328,6 @@ useEffect(() => {
             <button className={styles.expandBtn}>Expand Radius</button>
           </div>
           <div className={styles.leadInfo_wrapper}>
-            {/* <div className={styles.leadInfo}>
-              <h1 className={styles.leadCount}>1060</h1>
-              <p className={styles.leadText}>current available leads</p>
-            </div> */}
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>
                 {pendingLead ? pendingLead : "0"}
@@ -344,15 +348,15 @@ useEffect(() => {
               className={styles.nextButton}
               onClick={handleSubmit}
             >
-             {registerLoader ? (
-                  <Spin
-                    indicator={
-                      <LoadingOutlined spin style={{ color: "white" }} />
-                    }
-                  />
-                ) : (
-                  "Continue"
-                )}
+              {registerLoader ? (
+                <Spin
+                  indicator={
+                    <LoadingOutlined spin style={{ color: "white" }} />
+                  }
+                />
+              ) : (
+                "Continue"
+              )}
             </button>
           </div>
         </div>

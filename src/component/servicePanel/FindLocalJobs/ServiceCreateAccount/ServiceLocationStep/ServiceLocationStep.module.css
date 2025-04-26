@@ -44,7 +44,7 @@
 
 .formHeading {
   /* font-family: Inter; */
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   letter-spacing: 0%;
 }
@@ -90,7 +90,7 @@
 }
 
 .fromText {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0%;
@@ -98,7 +98,7 @@
 }
 
 .infoText {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   letter-spacing: 0%;
   color: #000000;
@@ -115,12 +115,13 @@
 .nationwideFooter {
   display: flex;
   justify-content: space-between;
+  margin-top: 18.24px;
 }
 .switchWrapper {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
+ 
 }
 
 .switch {
@@ -155,7 +156,7 @@
   width: 18px;
   left: 3px;
   bottom: 2.5px;
-  background-color: white;
+  background-color: var(--primary-color);
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -166,11 +167,13 @@
 
 .switch input:checked + .slider::before {
   transform: translateX(22px);
+    background-color: #d9d9d9;
+
 }
 
 .switchLabel {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nextButton {
@@ -194,10 +197,9 @@
   display: flex;
   align-items: center;
   font-size: 14px;
-  margin-top: 18.24px;
   cursor: pointer;
   color: #000000;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .checkboxInput {
@@ -250,7 +252,7 @@
 
 .inputWrapper img {
   position: absolute;
-  top: 42px;
+  top: 45px;
   left: 10px;
   width: 11.59px;
   height: 16.56;

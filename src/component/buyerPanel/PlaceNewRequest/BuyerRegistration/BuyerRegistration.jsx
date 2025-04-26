@@ -284,7 +284,7 @@ const BuyerRegistration = ({
   console.log(registerData, "registerData");
   const isAdminOrRemembered = userToken?.remember_tokens;
 
-  const stepFlow = authToken
+  const stepFlow = authToken && registerData?.remember_tokens
     ? [2, 3, 6, 7, 8]
     : [1, 2, 3, 4, 5, 7, 8];
 

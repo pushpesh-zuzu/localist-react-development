@@ -48,7 +48,7 @@
 
 .label {
   /* font-family: Inter; */
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   margin-bottom: 39px;
   display: flex;
@@ -69,7 +69,7 @@
 
 .secondaryLabel {
   /* font-family: Inter; */
-  font-weight: 500;
+  font-weight: 600;
   font-size: 18px;
   color: #000000;
   margin-bottom: 15px;
@@ -126,7 +126,7 @@
 }
 
 .labelText {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   color: #000000;
 }
@@ -162,7 +162,7 @@
 .radiusBtn {
 display: flex;
 justify-content: start;
-margin-bottom: 8px;
+margin-bottom: 20px;
 }
 
 .expandBtn {
@@ -199,12 +199,13 @@ margin-bottom: 8px;
   font-weight: 500;
   font-size: 32px;
   vertical-align: middle;
+  line-height: 37px;
 }
 
 .leadText {
   font-weight: 300;
   font-size: 14px;
-  color: #828282;
+  color: #000000;
 }
 
 .nextBtn {
@@ -229,7 +230,19 @@ margin-bottom: 8px;
   position: relative;
   width: 100%;
 }
-
+/* Add this to your CSS */
+.pac-container {
+  z-index: 10000;
+  width: auto !important;
+  position: absolute !important;
+  display: block !important;
+  border: 1px solid #ccc;
+}
+.postcodeResults{
+  width: '200px';
+  height: '200px';
+  background-color: 'red';
+}
 .searchInput {
   width: 100%;
   padding: 12px;
@@ -241,6 +254,7 @@ margin-bottom: 8px;
   font-size: 14px;
   margin-top: 10px;
   margin-bottom: 20px;
+  color: #858585;
 }
 
 .searchInput::placeholder {
@@ -286,45 +300,30 @@ margin-bottom: 8px;
   display: flex;
   
 }
-/* .inputWrapper {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin-top: -30px;
- 
-}
 
-.inputWrapper img {
-  position: absolute;
-  top: 0px;
-  left: 10px;
-  width: 11.59px;
-  height: 16.56;
-}
-.input {
-  padding-left: 12px;
-  height: 35px;
-} */
 .inputWrapper {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
   width: 50%;
   position: relative;
-  margin-top: -30px;
+  margin-top: 0px;
   
 }
 
 .inputWrapper img {
   position: absolute;
-  top: 42px;
+  top: 11px;
   left: 10px;
   width: 11.59px;
   height: 16.56;
 }
 .input {
-  padding-left: 12px;
+  padding-left: 24px;
   height: 35px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  color: #858585;
 }
 
 .fromText {

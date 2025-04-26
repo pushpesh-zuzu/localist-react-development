@@ -20,6 +20,7 @@ const LogSwitch = () => {
   const location = useLocation();
   const { serviceTitle } = useParams();
   const [dataSave,setDataSave] = useState()
+  const [visible, setVisible] = useState(false)
 const [registerdata,setRegisterDatas] = useState()
   const { userToken, currentUser } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state)=> state.buyer)
@@ -36,6 +37,15 @@ setDataSave(userToken?.active_status)
     navigate(path);
     setMenuOpen(false); // close menu on navigation
   };
+  const handleNavigate = () => {
+    navigate("/lead/save-for-later")
+  }
+  const content = (
+    <div className={styles.saveForLater}>
+      <p onClick={handleNavigate}>Save For Later</p>
+     
+    </div>
+  );
   
 const getUserType=()=>{
 
@@ -165,12 +175,25 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
       >
         Dashboard
       </div>
+      {/* <div
+        className={`${styles.navItem} ${location.pathname === "/leads" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/leads")}
+      >
+        Leads
+      </div> */}
+      <Popover 
+      content={content}
+      trigger="hover"
+      visible={visible}
+      onVisibleChange={setVisible}
+    >
       <div
         className={`${styles.navItem} ${location.pathname === "/leads" ? styles.active : ""}`}
         onClick={() => handleNavigation("/leads")}
       >
         Leads
       </div>
+    </Popover>
       <div
         className={`${styles.navItem} ${location.pathname === "/lead/save-later" ? styles.active : ""}`}
         onClick={() => handleNavigation("/lead/save-later")}
