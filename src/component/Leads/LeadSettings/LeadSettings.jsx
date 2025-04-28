@@ -26,6 +26,7 @@ import ServiceSelectionModal from "./ServiceModal";
 import { showToast } from "../../../utils";
 import LocationModal from "../LocationModal";
 import AddServiceModal from "../LeadAddServiceModal";
+import AddLocationModal from "../AddLocation/AddLocationModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -458,10 +459,24 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           handleSubmitData={handleSubmitData}
         />
 
-        <LocationModal
+        {/* <LocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
           locationData={locationData}
+          onChange={handleLocationChange}
+          onCancel={() => {
+            setIsLocationModalOpen(false);
+            setIsEditingLocation(false);
+            setEditLocationId(null);
+            setLocationData({ miles1: "", postcode: "" });
+          }}
+          onNext={handleNext}
+        /> */}
+
+        <AddLocationModal
+          open={isLocationModalOpen}
+          isEditing={isEditingLocation}
+          // locationData={locationData}
           onChange={handleLocationChange}
           onCancel={() => {
             setIsLocationModalOpen(false);
