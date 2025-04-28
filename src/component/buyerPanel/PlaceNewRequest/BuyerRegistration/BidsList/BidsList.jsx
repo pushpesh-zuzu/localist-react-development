@@ -49,7 +49,6 @@
 //   const handleSeeMore = () => {
 //     setVisibleCount((prevCount) => prevCount + 5);
 //   };
-  
 
 //   const handleContinue = () => {
 //     if (!selectedItem) return;
@@ -76,7 +75,7 @@
 //   };
 //   // const handleMultple = () => {
 //   //   const bidList=autoBidList?.[0]?.sellers ;
-    
+
 //   //   const multipleData = {
 //   //     service_id:bidList.map(item=>item?.service_id
 //   //     ),
@@ -98,20 +97,19 @@
 //   //         lead_id: requestId,
 //   //       };
 //   //       dispatch(getAutoBid(data))
-      
-       
+
 //   //     }
 //   //   })
 //   // }
 //   const handleMultple = () => {
 //     // Only include the first 5 sellers (those with green checkboxes)
 //     const bidList = autoBidList?.[0]?.sellers?.slice(0, 5);
-    
+
 //     if (!bidList || bidList.length === 0) {
 //       showToast("error", "No best matches available");
 //       return;
 //     }
-    
+
 //     const multipleData = {
 //       service_id: bidList.map(item => item?.service_id),
 //       seller_id: bidList.map(item => item?.id),
@@ -121,7 +119,7 @@
 //       lead_id: requestId,
 //       user_id: userToken?.remember_tokens
 //     }
-    
+
 //     dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
 //       if(result) {
 //         showToast("success", result?.message);
@@ -194,7 +192,7 @@
 //             <strong>top matches</strong> to hear back faster
 //           </div>
 //             <button className={styles.requestBtn} onClick={handleMultple}>Request your best matches here</button>
-//           </div> 
+//           </div>
 //           </div>
 //           <div className={styles.requestMatchBox}>
 //           <button className={styles.requestBtnMatchBox} onClick={handleMultple}>Request your best matches here</button>
@@ -267,8 +265,8 @@
 //                     <div className={styles.replyBtnWrapper}>
 //                     <div className={styles.replyCheckbox}>
 //                     {/* <input type="checkbox" /> */}
-//                     {index < 5 && !bidCountList && <input 
-//       type="checkbox" 
+//                     {index < 5 && !bidCountList && <input
+//       type="checkbox"
 //       checked={selectedSellers.includes(seller.id)}
 //       onChange={() => handleCheckboxChange(seller.id)}
 //     />
@@ -289,7 +287,6 @@
 //               ))
 //             )
 //           )}
-         
 
 //           <CustomModal
 //             isOpen={isModalOpen}
@@ -304,7 +301,7 @@
 //   <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
 // </div>}
 //     </div>
-     
+
 //    </>
 //   );
 // };
@@ -344,13 +341,13 @@
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
 //   const webdesignData = autoBidList?.map((item) => item?.service_name);
-  
+
 //   // Get bidcount from API response (assuming it's in the autoBidList[0])
 //   const bidCount = autoBidList?.[0]?.bidcount || 0;
-  
+
 //   // Check if we should show green tick and checkbox (only if bidCount is not 5)
 //   const shouldShowGreenIcons = bidCount !== 5;
-  
+
 //   // State to track selected checkboxes
 //   const [selectedSellers, setSelectedSellers] = useState([]);
 
@@ -391,7 +388,7 @@
 //   const handleSeeMore = () => {
 //     setVisibleCount((prevCount) => prevCount + 5);
 //   };
-  
+
 //   const handleContinue = () => {
 //     if (!selectedItem) return;
 //     const formData = new FormData();
@@ -419,12 +416,12 @@
 //   const handleMultple = () => {
 //     // Use the selected checkboxes instead of just the first 5
 //     const bidList = autoBidList?.[0]?.sellers?.filter(seller => selectedSellers.includes(seller.id));
-    
+
 //     if (!bidList || bidList.length === 0) {
 //       showToast("error", "No best matches selected");
 //       return;
 //     }
-    
+
 //     const multipleData = {
 //       service_id: bidList.map(item => item?.service_id),
 //       seller_id: bidList.map(item => item?.id),
@@ -433,7 +430,7 @@
 //       lead_id: requestId,
 //       user_id: userToken?.remember_tokens
 //     }
-    
+
 //     dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
 //       if(result) {
 //         showToast("success", result?.message);
@@ -506,7 +503,7 @@
 //                 <strong>top matches</strong> to hear back faster
 //               </div>
 //               <button className={styles.requestBtn} onClick={handleMultple}>Request your best matches here</button>
-//             </div> 
+//             </div>
 //           </div>
 //           <div className={styles.requestMatchBox}>
 //             <button className={styles.requestBtnMatchBox} onClick={handleMultple}>Request your best matches here</button>
@@ -579,7 +576,7 @@
 //                     <div className={styles.replyBtnWrapper}>
 //                       <div className={styles.replyCheckbox}>
 //                         {shouldShowGreenIcons && index < 5 && (
-//                           <input 
+//                           <input
 //                             type="checkbox"
 //                             checked={selectedSellers.includes(seller.id)}
 //                             onChange={() => handleCheckboxChange(seller.id)}
@@ -618,7 +615,7 @@
 //   <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
 // </div>}
 //     </div>
-     
+
 //    </>
 //   );
 // };
@@ -658,15 +655,15 @@ const BidsList = ({ previousStep }) => {
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
   const [selectedSellers, setSelectedSellers] = useState([]);
-  
+
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
-  
+
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
-  const showCheckboxes = selectedSellers.length < (5 - bidCount)
-  const shouldShowGreenIcons = bidCount !== 5
-  
+  const showCheckboxes = selectedSellers.length < 5 - bidCount;
+  const shouldShowGreenIcons = bidCount !== 5;
+
   // State to track selected checkboxes
 
   // Handle checkbox change
@@ -699,7 +696,7 @@ const BidsList = ({ previousStep }) => {
   //   } else {
   //     // If checkbox is being checked, first check if we've reached the limit
   //     const maxAllowed = 5 - bidCount;
-      
+
   //     if (selectedSellers.length >= maxAllowed) {
   //       // Show error toast if trying to select more than allowed
   //       showToast("error", "max select five checkbox only")
@@ -728,17 +725,18 @@ const BidsList = ({ previousStep }) => {
   const handleCheckboxChange = (sellerId) => {
     if (selectedSellers.includes(sellerId)) {
       // If checkbox is being unchecked, just remove it from the array
-      setSelectedSellers(selectedSellers.filter(id => id !== sellerId));
+      setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
     } else {
       // If checkbox is being checked, check if we've reached the limit
       const maxAllowed = 5 - bidCount;
-      
+
       if (selectedSellers.length >= maxAllowed) {
         // Show error toast if trying to select more than allowed
-        const remainingMessage = bidCount === 1 ? 
-          "1 bid already applied. You can select only 4 more." : 
-          `${bidCount} bids already applied. You can select only ${maxAllowed} more.`;
-        
+        const remainingMessage =
+          bidCount === 1
+            ? "1 bid already applied. You can select only 4 more."
+            : `${bidCount} bids already applied. You can select only ${maxAllowed} more.`;
+
         showToast("error", remainingMessage);
         return; // Exit the function to prevent adding more sellers
       }
@@ -762,14 +760,17 @@ const BidsList = ({ previousStep }) => {
   //   }
   // }, [autoBidList]);
   // First, modify your useEffect to only pre-select the allowed number of sellers
-useEffect(() => {
-  if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
-    // Only select the allowed number based on bidCount
-    const allowedSelections = 5 - (autoBidList?.[0]?.bidcount || 0);
-    const allowedSellers = autoBidList[0]?.sellers?.slice(0, allowedSelections)?.map(seller => seller.id) || [];
-    setSelectedSellers(allowedSellers);
-  }
-}, [autoBidList]);
+  useEffect(() => {
+    if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
+      // Only select the allowed number based on bidCount
+      const allowedSelections = 5 - (autoBidList?.[0]?.bidcount || 0);
+      const allowedSellers =
+        autoBidList[0]?.sellers
+          ?.slice(0, allowedSelections)
+          ?.map((seller) => seller.id) || [];
+      setSelectedSellers(allowedSellers);
+    }
+  }, [autoBidList]);
 
   const handleReply = () => {
     navigate(`/bids-list/reply/${requestId}`);
@@ -778,15 +779,20 @@ useEffect(() => {
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
-  
+
   const handleSeeMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
-  
+
   const handleContinue = () => {
     if (!selectedItem) return;
     const formData = new FormData();
-    formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+    formData.append(
+      "user_id",
+      userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens
+    );
     formData.append("seller_id", selectedItem?.id);
     formData.append("bid", selectedItem?.credit_score);
     formData.append("lead_id", requestId);
@@ -809,24 +815,26 @@ useEffect(() => {
 
   const handleMultple = () => {
     // Use the selected checkboxes
-    const bidList = autoBidList?.[0]?.sellers?.filter(seller => selectedSellers.includes(seller.id));
-    
+    const bidList = autoBidList?.[0]?.sellers?.filter((seller) =>
+      selectedSellers.includes(seller.id)
+    );
+
     if (!bidList || bidList.length === 0) {
       showToast("error", "No best matches selected");
       return;
     }
-    
+
     const multipleData = {
-      service_id: bidList.map(item => item?.service_id),
-      seller_id: bidList.map(item => item?.id),
-      bid: bidList.map(item => item?.credit_score),
-      distance: bidList.map(item => item?.distance),
+      service_id: bidList.map((item) => item?.service_id),
+      seller_id: bidList.map((item) => item?.id),
+      bid: bidList.map((item) => item?.credit_score),
+      distance: bidList.map((item) => item?.distance),
       lead_id: requestId,
-      user_id: userToken?.remember_tokens
+      user_id: userToken?.remember_tokens,
     };
-    
+
     dispatch(getAddMultipleManualBidData(multipleData)).then((result) => {
-      if(result) {
+      if (result) {
         showToast("success", result?.message);
         const data = {
           user_id: userToken?.remember_tokens,
@@ -839,136 +847,153 @@ useEffect(() => {
 
   return (
     <>
-    <div className={styles.container}>
-      {bidListLoader ? (
-        <div className={styles.loaderWrapper}>
-          <Spin
-            size="large"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "300px",
-            }}
-          />
-        </div>
-      ) : (
-        <>
-          <div className={styles.headerWrapper}>
-            <div className={styles.headingTabsWrapper}>
-              <h1 className={styles.heading}>
-                {webdesignData && webdesignData?.length > 0
-                  ? webdesignData[0]
-                  : "No Service"}
-              </h1>
-              <div className={styles.tabs}>
-                <button className={styles.activeTab}>Your matches</button>
-                <button className={styles.tab} onClick={handleReply}>
-                  Replies
+      <div className={styles.container}>
+        {bidListLoader ? (
+          <div className={styles.loaderWrapper}>
+            <Spin
+              size="large"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "300px",
+              }}
+            />
+          </div>
+        ) : (
+          <>
+            <div className={styles.headerWrapper}>
+              <div className={styles.headingTabsWrapper}>
+                <h1 className={styles.heading}>
+                  {webdesignData && webdesignData?.length > 0
+                    ? webdesignData[0]
+                    : "No Service"}
+                </h1>
+                <div className={styles.tabs}>
+                  <button className={styles.activeTab}>Your matches</button>
+                  <button className={styles.tab} onClick={handleReply}>
+                    Replies
+                  </button>
+                </div>
+              </div>
+              <div className={styles.backBtnWrapper}>
+                <button
+                  className={styles.backBtn}
+                  onClick={handleChangeMyRequest}
+                >
+                  Back
                 </button>
               </div>
             </div>
-            <div className={styles.backBtnWrapper}>
-              <button className={styles.backBtn} onClick={handleChangeMyRequest}>
-                Back
+
+            <div className={styles.filters}>
+              <select>
+                <option>All ratings</option>
+              </select>
+              <select>
+                <option>All locations</option>
+              </select>
+              <select>
+                <option>All response times</option>
+              </select>
+              <span className={styles.matchCount}>
+                {autoBidList?.length} matches
+              </span>
+              <select className={styles.sortDropdown}>
+                <option>Sort by: best match</option>
+              </select>
+            </div>
+            <div className={styles.recommendBar}>
+              <div className={styles.recommendBox}>
+                <div>
+                  <span>Recommended:</span> Request replies from your{" "}
+                  <strong>top matches</strong> to hear back faster
+                </div>
+                <button className={styles.requestBtn} onClick={handleMultple}>
+                  Request your best matches here
+                </button>
+              </div>
+            </div>
+            <div className={styles.requestMatchBox}>
+              <button
+                className={styles.requestBtnMatchBox}
+                onClick={handleMultple}
+              >
+                Request your best matches here
               </button>
             </div>
-          </div>
-
-          <div className={styles.filters}>
-            <select>
-              <option>All ratings</option>
-            </select>
-            <select>
-              <option>All locations</option>
-            </select>
-            <select>
-              <option>All response times</option>
-            </select>
-            <span className={styles.matchCount}>{autoBidList?.length} matches</span>
-            <select className={styles.sortDropdown}>
-              <option>Sort by: best match</option>
-            </select>
-          </div>
-          <div className={styles.recommendBar}>
-            <div className={styles.recommendBox}>
-              <div>
-                <span>Recommended:</span> Request replies from your{" "}
-                <strong>top matches</strong> to hear back faster
+            {autoBidList?.length === 0 ? (
+              <div className={styles.noBidWrapper}>
+                <h1 className={styles.noBidText}>No seller available</h1>
               </div>
-              <button className={styles.requestBtn} onClick={handleMultple}>Request your best matches here</button>
-            </div> 
-          </div>
-          <div className={styles.requestMatchBox}>
-            <button className={styles.requestBtnMatchBox} onClick={handleMultple}>Request your best matches here</button>
-          </div>
-          {autoBidList?.length === 0 ? (
-            <div className={styles.noBidWrapper}>
-              <h1 className={styles.noBidText}>No seller available</h1>
-            </div>
-          ) : (
-            autoBidList?.map((item) =>
-              item?.sellers?.slice(0, visibleCount)?.map((seller, index) => (
-                <div className={styles.card} key={seller?.id}>
-                  <div className={styles.cardLeft}>
-                    <div className={styles.imageWrapper}>
-                      <img
-                        src={
-                          seller?.profile_image
-                            ? `${BASE_IMAGE_URL}${seller?.profile_image}`
-                            : DummyImage
-                        }
-                        alt="Profile"
-                        className={styles.image}
-                      />
-                    </div>
-                    <div className={styles.details}>
-                      <div className={styles.header}>
-                        <div>
-                          <h3>
-                           {shouldShowGreenIcons && index < 5  && <img src={GreenTickIcon} alt="" />}
-                            {seller?.name}
-                          </h3>
-                          <p>
-                            <img src={AutoBidLocationIcon} alt="" />
-                            {seller?.distance ? seller?.distance : "0"} miles away
-                          </p>
+            ) : (
+              autoBidList?.map((item) =>
+                item?.sellers?.slice(0, visibleCount)?.map((seller, index) => (
+                  <div className={styles.card} key={seller?.id}>
+                    <div className={styles.cardLeft}>
+                      <div className={styles.imageWrapper}>
+                        <img
+                          src={
+                            seller?.profile_image
+                              ? `${BASE_IMAGE_URL}${seller?.profile_image}`
+                              : DummyImage
+                          }
+                          alt="Profile"
+                          className={styles.image}
+                        />
+                      </div>
+                      <div className={styles.details}>
+                        <div className={styles.header}>
+                          <div>
+                            <h3>
+                              {shouldShowGreenIcons && index < 5 && (
+                                <img src={GreenTickIcon} alt="" />
+                              )}
+                              {seller?.name}
+                            </h3>
+                            <p>
+                              <img src={AutoBidLocationIcon} alt="" />
+                              {seller?.distance ? seller?.distance : "0"} miles
+                              away
+                            </p>
+                          </div>
+                          <div className={styles.sidebar}>
+                            <div className={styles.rating}>
+                              <span className={styles.stars}>★★★★★</span>
+                              <span className={styles.ratingCount}>125</span>
+                            </div>
+                          </div>
                         </div>
-                        <div className={styles.sidebar}>
-                          <div className={styles.rating}>
-                            <span className={styles.stars}>★★★★★</span>
-                            <span className={styles.ratingCount}>125</span>
+
+                        <div className={styles.badges}>
+                          <span>{seller?.service_name}</span>
+                        </div>
+
+                        <p className={styles.description}>
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry's standard dummy text ever since the 1500s,
+                          when an unknown printer took a galley of type and
+                          scrambled it to make a type specimen book.
+                        </p>
+
+                        <div className={styles.quickToRespondWrapper}>
+                          <Link
+                            to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
+                            className={styles.profileLink}
+                          >
+                            View Profile →
+                          </Link>
+
+                          <div className={styles.quickToRespond}>
+                            <img src={QuickToRespond} alt="" />
+                            Quick to respond
                           </div>
                         </div>
                       </div>
 
-                      <div className={styles.badges}>
-                        <span>{seller?.service_name}</span>
-                      </div>
-
-                      <p className={styles.description}>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the industry's
-                        standard dummy text ever since the 1500s.
-                      </p>
-
-                      <div className={styles.quickToRespondWrapper}>
-                        <Link
-                          to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
-                          className={styles.profileLink}
-                        >
-                          View Profile →
-                        </Link>
-
-                        <div className={styles.quickToRespond}>
-                          <img src={QuickToRespond} alt="" />
-                          Quick to respond
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={styles.replyBtnWrapper}>
-                      {/* <div className={styles.replyCheckbox}>
+                      <div className={styles.replyBtnWrapper}>
+                        {/* <div className={styles.replyCheckbox}>
                         {showCheckboxes && (
                           <input 
                             type="checkbox"
@@ -978,7 +1003,7 @@ useEffect(() => {
                           />
                         )}
                       </div> */}
-           {/* <div className={styles.replyCheckbox}>
+                        {/* <div className={styles.replyCheckbox}>
   <input 
     type="checkbox"
     checked={selectedSellers.includes(seller.id)}
@@ -987,46 +1012,55 @@ useEffect(() => {
     disabled={!selectedSellers.includes(seller.id) && selectedSellers.length >= (5 - bidCount)}
   />
 </div> */}
-<div className={styles.replyCheckbox}>
-  <input 
-    type="checkbox"
-    checked={selectedSellers.includes(seller.id)}
-    onChange={() => handleCheckboxChange(seller.id)}
-    className={styles.checkbox}
-    disabled={!selectedSellers.includes(seller.id) && selectedSellers.length >= (5 - bidCount)}
-  />
-</div>
-                      <button
-                        className={styles.replyBtn}
-                        onClick={() => {
-                          setSelectedItem(seller);
-                          setModalOpen(true);
-                        }}
-                      >
-                        Request reply
-                      </button>
+                        <div className={styles.replyCheckbox}>
+                          <input
+                            type="checkbox"
+                            checked={selectedSellers.includes(seller.id)}
+                            onChange={() => handleCheckboxChange(seller.id)}
+                            className={styles.checkbox}
+                            disabled={
+                              !selectedSellers.includes(seller.id) &&
+                              selectedSellers.length >= 5 - bidCount
+                            }
+                          />
+                        </div>
+                        <button
+                          className={styles.replyBtn}
+                          onClick={() => {
+                            setSelectedItem(seller);
+                            setModalOpen(true);
+                          }}
+                        >
+                          Request reply
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
-            )
-          )}
+                ))
+              )
+            )}
 
-          <CustomModal
-            isOpen={isModalOpen}
-            onClose={() => setModalOpen(false)}
-            onContinue={handleContinue}
-            message="Are you sure you want to continue?"
-            loading={manualBidLoader}
-          />
-        </>
-      )}
-    {autoBidList?.[0]?.sellers?.length > visibleCount && <div className={styles.moreProfessionalBtnBox}>
-  <button className={styles.moreProfessionalBtn} onClick={handleSeeMore}>See More Professionals</button>
-</div>}
-    </div>
-     
-   </>
+            <CustomModal
+              isOpen={isModalOpen}
+              onClose={() => setModalOpen(false)}
+              onContinue={handleContinue}
+              message="Are you sure you want to continue?"
+              loading={manualBidLoader}
+            />
+          </>
+        )}
+        {autoBidList?.[0]?.sellers?.length > visibleCount && (
+          <div className={styles.moreProfessionalBtnBox}>
+            <button
+              className={styles.moreProfessionalBtn}
+              onClick={handleSeeMore}
+            >
+              See More Professionals
+            </button>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

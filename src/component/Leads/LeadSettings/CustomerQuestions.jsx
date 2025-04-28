@@ -34,7 +34,7 @@ const CustomerQuestions = ({ selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [show, setShow] = useState(false);
-  console.log(selectedService?.id,selectedAnswers, "selectedService");
+  console.log(selectedService?.id, selectedAnswers, "selectedService");
   useEffect(() => {
     if (selectedService) {
       setIsRemoved(false);
@@ -72,10 +72,12 @@ const CustomerQuestions = ({ selectedService }) => {
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
-      
+
       // This variable will track if the user has already saved preferences for this service
-      const hasUserSavedData = leadPreferenceData.some(item => item.answers !== item.answer);
-      
+      const hasUserSavedData = leadPreferenceData.some(
+        (item) => item.answers !== item.answer
+      );
+
       leadPreferenceData.forEach((item) => {
         if (hasUserSavedData && item.answers) {
           // If user has saved answers, use the "answers" key
@@ -87,7 +89,7 @@ const CustomerQuestions = ({ selectedService }) => {
           initialAnswers[item.id] = options;
         }
       });
-      
+
       setSelectedAnswers(initialAnswers);
     }
   }, [leadPreferenceData]);
@@ -105,28 +107,31 @@ const CustomerQuestions = ({ selectedService }) => {
       const selected = selectedAnswers[item.id];
       return !selected || selected.length === 0;
     });
-  
+
     if (hasEmptyAnswers) {
-      showToast("error", "At least one option must be selected for each question.");
+      showToast(
+        "error",
+        "At least one option must be selected for each question."
+      );
       return;
     }
-  
+
     const questionIds = Object.keys(selectedAnswers);
     const answers = Object.values(selectedAnswers).map((ans) =>
-      Array.isArray(ans) ? ans.join(',') : ans
+      Array.isArray(ans) ? ans.join(",") : ans
     );
-  
+
     const data = {
       user_id: userToken?.remember_tokens,
       service_id: selectedService?.id,
       question_id: questionIds,
       answers: answers,
     };
-  
+
     dispatch(leadPreferencesData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Data submitted successfully");
-        
+
         // Reload the leadPreferenceData to get updated "answers" values
         dispatch(
           leadPreferences({
@@ -137,8 +142,6 @@ const CustomerQuestions = ({ selectedService }) => {
       }
     });
   };
-
-
 
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
@@ -183,7 +186,7 @@ const CustomerQuestions = ({ selectedService }) => {
           user_id: userToken?.remember_tokens,
           service_id: selectedService?.id,
         };
-        dispatch(getServiceWiseLocationData(locationWise))
+        dispatch(getServiceWiseLocationData(locationWise));
       }
     });
 
@@ -210,8 +213,8 @@ const CustomerQuestions = ({ selectedService }) => {
       userToken?.active_status === 1
         ? userToken?.remember_tokens
         : registerData?.active_status === 1
-          ? registerData?.remember_tokens
-          : null;
+        ? registerData?.remember_tokens
+        : null;
 
     if (user_id && selectedService?.id) {
       dispatch(
@@ -287,8 +290,9 @@ const CustomerQuestions = ({ selectedService }) => {
                 </p>
 
                 <div
-                  className={`${styles.options} ${isOpen ? styles.showOptions : ""
-                    }`}
+                  className={`${styles.options} ${
+                    isOpen ? styles.showOptions : ""
+                  }`}
                 >
                   {/* {options.map((opt) => (
                     <label key={opt} className={styles.option}>
@@ -315,28 +319,28 @@ const CustomerQuestions = ({ selectedService }) => {
                     </label>
                   ))} */}
                   {options.map((opt) => (
-  <label key={opt} className={styles.option}>
-    <input
-      type="checkbox"
-      name={`question-${item.id}`}
-      value={opt}
-      checked={selectedAnswers[item.id]?.includes(opt)}
-      onChange={() => {
-        setSelectedAnswers((prev) => {
-          const current = prev[item.id] || [];
-          const updated = current.includes(opt)
-            ? current.filter((o) => o !== opt) // remove if already selected
-            : [...current, opt]; // add if not selected
-          return {
-            ...prev,
-            [item.id]: updated,
-          };
-        });
-      }}
-    />
-    {opt}
-  </label>
-))}
+                    <label key={opt} className={styles.option}>
+                      <input
+                        type="checkbox"
+                        name={`question-${item.id}`}
+                        value={opt}
+                        checked={selectedAnswers[item.id]?.includes(opt)}
+                        onChange={() => {
+                          setSelectedAnswers((prev) => {
+                            const current = prev[item.id] || [];
+                            const updated = current.includes(opt)
+                              ? current.filter((o) => o !== opt) // remove if already selected
+                              : [...current, opt]; // add if not selected
+                            return {
+                              ...prev,
+                              [item.id]: updated,
+                            };
+                          });
+                        }}
+                      />
+                      {opt}
+                    </label>
+                  ))}
                 </div>
               </div>
             );
@@ -360,22 +364,22 @@ const CustomerQuestions = ({ selectedService }) => {
               + Add a location
             </a>
           </div>
-<div className={styles.rangerBox}>
-          <div className={styles.ranger}>
-            {serviceWiseData?.map((item, idx) => (
-              <div className={styles.range} key={idx}>
-                <span>
-                  <img src={TickIcon} alt="" /> Within
-                </span>{" "}
-                <strong>{item?.miles} miles</strong> of{" "}
-                <strong>{item?.postcode}</strong>
-              </div>
-            ))}
-          </div>
-          <a href="#" className={styles.addLocation}>
+          <div className={styles.rangerBox}>
+            <div className={styles.ranger}>
+              {serviceWiseData?.map((item, idx) => (
+                <div className={styles.range} key={idx}>
+                  <span>
+                    <img src={TickIcon} alt="" /> Within
+                  </span>{" "}
+                  <strong>{item?.miles} miles</strong> of{" "}
+                  <strong>{item?.postcode}</strong>
+                </div>
+              ))}
+            </div>
+            <a href="#" className={styles.addLocation}>
               Change Your Radius
             </a>
-        </div>
+          </div>
         </div>
 
         <div className={styles.footer}>

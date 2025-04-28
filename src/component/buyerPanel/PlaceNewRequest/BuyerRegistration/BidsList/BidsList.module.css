@@ -17,8 +17,8 @@
   height: 24px;
   appearance: none;
   -webkit-appearance: none;
-  background-color: #1CDD0A; /* Your green background */
-  border: 1px solid #1CDD0A;
+  background-color: #1cdd0a; /* Your green background */
+  border: 1px solid #1cdd0a;
   border-radius: 3px;
   cursor: pointer;
   position: relative;
@@ -127,7 +127,7 @@
 .sortDropdown {
   margin-left: auto;
 }
-.recommendBox{
+.recommendBox {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -231,7 +231,7 @@
   height: 12px;
   width: 12px;
   margin-right: 11px;
-  margin-bottom: -2px;
+  margin-bottom: -1px;
 }
 
 .distance {
@@ -298,6 +298,7 @@
   font-size: 22px;
   color: #000000 !important;
   align-items: center;
+  margin-top: 5px;
 }
 
 .quickToRespondWrapper {
@@ -336,7 +337,7 @@
   background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px 30px;
+  padding: 7px 30px;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
@@ -360,7 +361,7 @@
   accent-color: #1CDD0A;
   color: #ffffff;
 } */
-.moreProfessionalBtnBox{
+.moreProfessionalBtnBox {
   display: flex;
   justify-content: center;
   margin-top: 50px;

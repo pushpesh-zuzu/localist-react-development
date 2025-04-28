@@ -14,12 +14,11 @@ import {
   leadPreferences,
   removeItemLocationData,
 } from "../../../store/LeadSetting/leadSettingSlice";
-import { Button, Modal, Spin } from "antd";
+import { Spin } from "antd";
 import {
   searchService,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
-import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
@@ -169,7 +168,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     show: false,
     service_id: null,
   });
- 
+
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
@@ -201,7 +200,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
     if (isEditingLocation && editLocationId) {
       dispatch(
-        editLocationLead({ ...locationdata, location_id: editLocationId }) 
+        editLocationLead({ ...locationdata, location_id: editLocationId })
       ).then((result) => {
         if (result?.success) {
           const data = { user_id: userToken?.remember_tokens };
@@ -274,7 +273,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       }
     });
   };
-  
+
   // const isOnlineRemotes = () => {
   //   const isOnlineData = {
   //     user_id:userToken?.remember_tokens,
@@ -384,62 +383,64 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             remotely.
           </p>
           <div className={styles.toggle}>
-  <span>See online/remote leads</span>
-  <label className={styles.switch}>
-    <input 
-      type="checkbox" 
-      checked={is_online}
-      onChange={() => {
-        setIsOnline(!is_online);
-       
-        const isOnlineData = {
-          user_id: registerData?.remember_tokens,
-          is_online: !is_online ? 1 : 0  
-        };
-        dispatch(isOnlineRemote(isOnlineData))
-          .then((result) => {
-            if (result?.success) {
-              showToast("success", result?.message || "Online/Remote status updated successfully");
-            }
-          });
-      }}
-    />
-    <span className={styles.slider}></span>
-  </label>
-</div>
+            <span>See online/remote leads</span>
+            <label className={styles.switch}>
+              <input
+                type="checkbox"
+                checked={is_online}
+                onChange={() => {
+                  setIsOnline(!is_online);
+
+                  const isOnlineData = {
+                    user_id: registerData?.remember_tokens,
+                    is_online: !is_online ? 1 : 0,
+                  };
+                  dispatch(isOnlineRemote(isOnlineData)).then((result) => {
+                    if (result?.success) {
+                      showToast(
+                        "success",
+                        result?.message ||
+                          "Online/Remote status updated successfully"
+                      );
+                    }
+                  });
+                }}
+              />
+              <span className={styles.slider}></span>
+            </label>
+          </div>
         </div>
 
         <button className={styles.viewLeads} onClick={handleView}>
           View leads
         </button>
-       
 
-<AddServiceModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        input={input}
-        setInput={setInput}
-        isDropdownOpen={isDropdownOpen}
-        setIsDropdownOpen={setIsDropdownOpen}
-        service={service}
-        searchServiceLoader={searchServiceLoader}
-        handleSelectService={handleSelectService}
-        handleSubmitData={handleSubmitData}
-      />
+        <AddServiceModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          input={input}
+          setInput={setInput}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          service={service}
+          searchServiceLoader={searchServiceLoader}
+          handleSelectService={handleSelectService}
+          handleSubmitData={handleSubmitData}
+        />
 
-<LocationModal
-  open={isLocationModalOpen}
-  isEditing={isEditingLocation}
-  locationData={locationData}
-  onChange={handleLocationChange}
-  onCancel={() => {
-    setIsLocationModalOpen(false);
-    setIsEditingLocation(false);
-    setEditLocationId(null);
-    setLocationData({ miles1: "", postcode: "" });
-  }}
-  onNext={handleNext}
-/>
+        <LocationModal
+          open={isLocationModalOpen}
+          isEditing={isEditingLocation}
+          locationData={locationData}
+          onChange={handleLocationChange}
+          onCancel={() => {
+            setIsLocationModalOpen(false);
+            setIsEditingLocation(false);
+            setEditLocationId(null);
+            setLocationData({ miles1: "", postcode: "" });
+          }}
+          onNext={handleNext}
+        />
 
         {removeModal?.show && (
           <RemoveServiceModal

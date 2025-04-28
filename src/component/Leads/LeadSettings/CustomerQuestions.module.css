@@ -164,12 +164,17 @@
 }
 
 .addLocation {
+  position: absolute;
+  top: 0;
+  right: 0;
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
   font-size: 18px;
+  margin-top: 23px;
 }
 .rangerBox {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -180,8 +185,8 @@
 }
 .range {
   font-size: 14px;
-  padding-top: 13.99px;
-  padding-bottom: 15.93px;
+  padding-top: 23px;
+  padding-bottom: 23px;
 }
 
 .range span img {
