@@ -95,7 +95,7 @@ const LeadsCards = () => {
     setSaveLaterLoaderId(item.id);
 
     const saveLaterData = {
-      seller_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
       lead_id: item?.id,
       buyer_id: item?.customer_id
     }

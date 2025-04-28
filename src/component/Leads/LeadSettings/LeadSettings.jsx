@@ -10,6 +10,7 @@ import {
   editLocationLead,
   getleadPreferencesList,
   getLocationLead,
+  getSevenWeekBidApi,
   isOnlineRemote,
   leadPreferences,
   removeItemLocationData,
@@ -37,6 +38,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
   const [is_online, setIsOnline] = useState(false);
+  const [autobid_pause,setAutoBid] = useState(false)
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {
@@ -410,6 +412,34 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             </label>
           </div>
         </div>
+        <div className={styles.toggle}>
+            <span>Pause Auto Bid for 7 Days</span>
+            <label className={styles.switch}>
+              <input
+                type="checkbox"
+                checked={autobid_pause}
+                onChange={() => {
+                  setAutoBid(!autobid_pause);
+
+                  const isAutoBidPauseData = {
+                    user_id: registerData?.remember_tokens,
+                    autobid_pause: !autobid_pause ? 1 : 0
+                   
+                  };
+                  dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then((result) => {
+                    if (result?.success) {
+                      showToast(
+                        "success",
+                        result?.message ||
+                          "Auto Bid updated successfully"
+                      );
+                    }
+                  });
+                }}
+              />
+              <span className={styles.slider}></span>
+            </label>
+          </div>
 
         <button className={styles.viewLeads} onClick={handleView}>
           View leads

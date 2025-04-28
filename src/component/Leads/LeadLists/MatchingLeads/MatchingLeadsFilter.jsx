@@ -213,8 +213,8 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
               Unread ({unReadData})
             </label>
           </AccordionSection>
-          <AccordionSection title={"Lead spotlights"}>
-            {filterListData?.[0]?.leadSpotlights?.map((item) => (
+          {/* <AccordionSection title={"Lead spotlights"}>
+          {filterListData?.[0]?.leadSpotlights?.slice(0)?.map((item) => (
               <div key={item.spotlight}>
                 <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <input
@@ -226,9 +226,53 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
                 </label>
               </div>
             ))}
-          </AccordionSection>
+            {filterListData?.[0]?.leadSpotlights?.slice(1)?.map((item) => (
+              <div key={item.spotlight}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <input
+                    type="checkbox"
+                    checked={filters.leadSpotlights.includes(item.spotlight)}
+                    onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
+                  />
+                  {item.spotlight} ({item.count})
+                </label>
+              </div>
+            ))}
+          </AccordionSection> */}
 
-
+<AccordionSection title={"Lead spotlights"}>
+  {filterListData?.[0]?.leadSpotlights?.length > 0 && (
+    <>
+      {/* Display the first item separately */}
+      <div key={filterListData[0].leadSpotlights[0]?.spotlight}>
+        <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "bold",color:"#000000" }}>
+          <input
+            type="checkbox"
+            checked={filters.leadSpotlights.includes(filterListData[0].leadSpotlights[0]?.spotlight)}
+            onChange={() => handleCheckboxChange("leadSpotlights", filterListData[0].leadSpotlights[0]?.spotlight)}
+          />
+          {filterListData[0].leadSpotlights[0]?.spotlight} ({filterListData[0].leadSpotlights[0]?.count})
+        </label>
+      </div>
+      
+      {/* Display the rest of the items */}
+      <div style={{ marginTop: "4px",marginLeft:"8px" }}>
+        {filterListData[0].leadSpotlights.slice(1).map((item) => (
+          <div key={item.spotlight}>
+            <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <input
+                type="checkbox"
+                checked={filters.leadSpotlights.includes(item.spotlight)}
+                onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
+              />
+              {item.spotlight} ({item.count})
+            </label>
+          </div>
+        ))}
+      </div>
+    </>
+  )}
+</AccordionSection>
           {/* Actions buyer has taken */}
 
 
