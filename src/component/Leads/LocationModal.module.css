@@ -10,17 +10,17 @@
 
 .modalContent {
   background: #fff;
-  border-radius: 10px;
   padding: 24px;
   width: 600px;
   max-width: 95%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .modalHeader {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -33,10 +33,14 @@
 }
 
 .closeButton {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  font-size: 24px;
   background: none;
   border: none;
-  font-size: 22px;
   cursor: pointer;
+  color: #b7b7b7;
 }
 
 .infoBox {
@@ -46,6 +50,11 @@
   padding: 10px;
   font-size: 14px;
   margin-top: 16px;
+}
+
+.infoBox span {
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .infoIcon {
@@ -67,7 +76,9 @@
 
 .inputField label {
   margin-bottom: 6px;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
 }
 
 .inputField input,
@@ -87,26 +98,31 @@
 
 .modalFooter {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   margin-top: 20px;
 }
 
 .cancelBtn {
-  background: #f0f0f0;
+  background: #c6c6c6;
+  color: white;
   padding: 8px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .nextBtn {
-  background: #00aaff;
+  background: var(--primary-color);
   color: white;
-  padding: 8px 20px;
+  padding: 8px 66px;
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .cancelBtn:hover {

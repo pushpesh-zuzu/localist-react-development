@@ -34,7 +34,6 @@ const CustomerQuestions = ({ selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
   const [show, setShow] = useState(false);
-  console.log(selectedService?.id, selectedAnswers, "selectedService");
   useEffect(() => {
     if (selectedService) {
       setIsRemoved(false);
@@ -56,19 +55,6 @@ const CustomerQuestions = ({ selectedService }) => {
     postcode: "",
   });
 
-  console.log(serviceWiseData, "serviceWiseData");
-  // useEffect(() => {
-  //   if (leadPreferenceData?.length) {
-  //     const initialAnswers = {};
-  //     leadPreferenceData.forEach((item) => {
-  //       if (item.answer) {
-  //         const options = item.answer.split(",").map((a) => a.trim());
-  //         initialAnswers[item.id] = options;
-  //       }
-  //     });
-  //     setSelectedAnswers(initialAnswers);
-  //   }
-  // }, [leadPreferenceData]);
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -360,7 +346,7 @@ const CustomerQuestions = ({ selectedService }) => {
             <span className={styles.locationIcon}>
               <img src={LocationIcon} alt="" /> Your locations
             </span>
-            <a href="#" className={styles.addLocation}>
+            <a href="#" className={styles.addLinkLocation}>
               + Add a location
             </a>
           </div>
@@ -401,20 +387,21 @@ const CustomerQuestions = ({ selectedService }) => {
           </button>
         </div>
       </div>
-
-      <LocationModal
-        open={isLocationModalOpen}
-        // isEditing={isEditingLocation}
-        locationData={locationData}
-        onChange={handleLocationChange}
-        onCancel={() => {
-          setIsLocationModalOpen(false);
-          setIsEditingLocation(false);
-          setEditLocationId(null);
-          setLocationData({ miles1: "", postcode: "" });
-        }}
-        onNext={handleNext}
-      />
+      {isLocationModalOpen && (
+        <LocationModal
+          open={isLocationModalOpen}
+          // isEditing={isEditingLocation}
+          locationData={locationData}
+          onChange={handleLocationChange}
+          onClose={() => {
+            setIsLocationModalOpen(false);
+            setIsEditingLocation(false);
+            setEditLocationId(null);
+            setLocationData({ miles1: "", postcode: "" });
+          }}
+          onNext={handleNext}
+        />
+      )}
       {show && (
         <RemoveServiceModal
           open={show}

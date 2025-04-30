@@ -7,18 +7,96 @@ import NationwideIcon from "../../../assets/Icons/NationwideIcon.svg";
 import TravelTimeModal from "./TravelTimeModal";
 import DrawOnMapModal from "./DrawOnMapModal";
 import LocationModal from "../LocationModal";
+import {
+  addLocationLead,
+  editLocationLead,
+  getleadPreferencesList,
+  getLocationLead,
+} from "../../../store/LeadSetting/leadSettingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import ServiceSelectionModal from "../LeadSettings/ServiceModal";
 
-const AddLocationModal = ({ open, onCancel }) => {
+const AddLocationModal = ({
+  open,
+  onCancel,
+  selectedServices,
+  previousPostcode,
+  setSelectedServices,
+  setIsLocationModalOpen,
+}) => {
+  const [isNextModalOpen, setIsNextModalOpen] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState("");
-  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  // const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const [isEditingLocation, setIsEditingLocation] = useState(false);
+  const [editLocationId, setEditLocationId] = useState(null);
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
   });
+  const { userToken } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
 
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleConfirm = () => {
+    const serviceIds = selectedServices.join(",");
+    const locationdata = {
+      user_id: userToken?.remember_tokens,
+      miles: locationData.miles1,
+      postcode: locationData.postcode,
+      service_id: serviceIds,
+      postcode_old: previousPostcode,
+    };
+
+    if (isEditingLocation && editLocationId) {
+      dispatch(
+        editLocationLead({ ...locationdata, location_id: editLocationId })
+      ).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setIsEditingLocation(false);
+          setSelectedOption(false);
+          setIsLocationModalOpen(false);
+          setEditLocationId(null);
+          setLocationData({
+            miles1: "1",
+            postcode: "",
+          });
+        }
+      });
+    } else {
+      dispatch(addLocationLead(locationdata)).then((result) => {
+        if (result?.success) {
+          const data = { user_id: userToken?.remember_tokens };
+          dispatch(getLocationLead(data));
+          dispatch(getleadPreferencesList(data));
+          setSelectedOption(false);
+          setIsLocationModalOpen(false);
+          setLocationData({
+            miles1: "1",
+            postcode: "",
+          });
+        }
+      });
+    }
+
+    setIsNextModalOpen(false);
+  };
+  const handleEditLocation = (location) => {
+    setLocationData({
+      miles1: location.miles,
+      postcode: location.postcode,
+    });
+    setEditLocationId(location.id);
+    setIsEditingLocation(true);
+    // setIsLocationModalOpen(true);
+    // setPreviousPostcode(location.postcode);
   };
 
   if (!open) return null;
@@ -33,7 +111,6 @@ const AddLocationModal = ({ open, onCancel }) => {
 
   return (
     <>
-      {/* Main Add Location Modal */}
       {!selectedOption && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContainer}>
@@ -125,13 +202,10 @@ const AddLocationModal = ({ open, onCancel }) => {
       {/* Child modals based on selected option */}
       {selectedOption === "distance" && (
         <LocationModal
-          open={isLocationModalOpen}
           onClose={handleChildModalClose}
           onChange={handleLocationChange}
-          onCancel={() => {
-            setIsLocationModalOpen(false);
-            setLocationData({ miles1: "", postcode: "" });
-          }}
+          locationData={locationData}
+          onNext={() => setIsNextModalOpen(true)}
         />
       )}
 
@@ -146,6 +220,16 @@ const AddLocationModal = ({ open, onCancel }) => {
       {/* {selectedOption === "nationwide" && (
         <NationwideModal onClose={handleChildModalClose} />
       )} */}
+
+      {isNextModalOpen && (
+        <ServiceSelectionModal
+          isOpen={isNextModalOpen}
+          onClose={() => setIsNextModalOpen(false)}
+          onConfirm={handleConfirm}
+          selectedServices={selectedServices}
+          setSelectedServices={setSelectedServices}
+        />
+      )}
     </>
   );
 };
