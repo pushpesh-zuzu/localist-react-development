@@ -39,7 +39,8 @@
 .description {
   font-weight: 400;
   font-size: 18px;
-  margin-bottom: 25px;
+  margin-bottom: 55px;
+  /* max-width: 700px; */
 }
 
 .infoIcon {
@@ -47,34 +48,34 @@
   color: var(--primary-color);
 }
 
-.form {
+.areaButtonGroup {
   display: flex;
-  gap: 8px;
-  margin-bottom: 30px;
-  width: 100%;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
 }
 
-.inputGroup {
-  display: flex;
-  flex-direction: column;
-  width: -webkit-fill-available;
-}
-
-.inputGroup label {
-  margin-bottom: 6px;
+.areaButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 3px;
+  background-color: #e3f6fc;
+  color: #000;
+  cursor: pointer;
   font-weight: 500;
-  color: #000000;
-  font-size: 16px;
+  font-size: 20px;
+  vertical-align: middle;
+  transition: background-color 0.3s;
 }
 
-.inputGroup input,
-.inputGroup select {
-  padding: 10px;
-  border: 1px solid #d9d9d9;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  font-size: 14px;
-  font-weight: 500;
-  color: #828282;
+.areaButton:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.selected {
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .buttonContainer {

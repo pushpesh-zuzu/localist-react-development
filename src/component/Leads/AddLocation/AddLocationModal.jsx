@@ -4,14 +4,22 @@ import DistanceIcon from "../../../assets/Icons/DistanceIcon.svg";
 import TravelTimeIcon from "../../../assets/Icons/TravelTimeIcon.svg";
 import DrawOnMapIcon from "../../../assets/Icons/DrawOnMapIcon.svg";
 import NationwideIcon from "../../../assets/Icons/NationwideIcon.svg";
-
-// import DistanceModal from "./DistanceModal";
 import TravelTimeModal from "./TravelTimeModal";
-// import DrawOnMapModal from "./DrawOnMapModal";
-// import NationwideModal from "./NationwideModal";
+import DrawOnMapModal from "./DrawOnMapModal";
+import LocationModal from "../LocationModal";
 
 const AddLocationModal = ({ open, onCancel }) => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+  const [locationData, setLocationData] = useState({
+    miles1: "1",
+    postcode: "",
+  });
+
+  const handleLocationChange = (e) => {
+    const { name, value } = e.target;
+    setLocationData((prev) => ({ ...prev, [name]: value }));
+  };
 
   if (!open) return null;
 
@@ -115,17 +123,25 @@ const AddLocationModal = ({ open, onCancel }) => {
       )}
 
       {/* Child modals based on selected option */}
-      {/* {selectedOption === "distance" && (
-        <DistanceModal onClose={handleChildModalClose} />
-      )} */}
+      {selectedOption === "distance" && (
+        <LocationModal
+          open={isLocationModalOpen}
+          onClose={handleChildModalClose}
+          onChange={handleLocationChange}
+          onCancel={() => {
+            setIsLocationModalOpen(false);
+            setLocationData({ miles1: "", postcode: "" });
+          }}
+        />
+      )}
 
       {selectedOption === "travelTime" && (
         <TravelTimeModal onClose={handleChildModalClose} />
       )}
 
-      {/* {selectedOption === "drawOnMap" && (
+      {selectedOption === "drawOnMap" && (
         <DrawOnMapModal onClose={handleChildModalClose} />
-      )} */}
+      )}
 
       {/* {selectedOption === "nationwide" && (
         <NationwideModal onClose={handleChildModalClose} />

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./TravelTimeModal.module.css";
+import iIcon from "../../../assets/Images/iIcon.svg";
 
 const TravelTimeModal = ({ onClose }) => {
   return (
@@ -12,7 +13,9 @@ const TravelTimeModal = ({ onClose }) => {
         <h2 className={styles.title}>Travel time</h2>
 
         <p className={styles.description}>
-          <span className={styles.infoIcon}>ℹ️</span>
+          <span className={styles.infoIcon}>
+            <img src={iIcon} alt="" />
+          </span>
           Enter a Postcode or town, the maximum time you'd spend travelling, and
           the mode of transport you'd use.
         </p>

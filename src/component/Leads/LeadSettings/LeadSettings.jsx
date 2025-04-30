@@ -39,7 +39,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
   const [is_online, setIsOnline] = useState(false);
-  const [autobid_pause,setAutoBid] = useState(false)
+  const [autobid_pause, setAutoBid] = useState(false);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {
@@ -317,13 +317,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     </p>
                   </div>
                   <img
-                    src={
-                      selectedService?.id === service.id
-                        ? WhiteRightArrow
-                        : BlackRightArrow
-                    }
-                    alt="arrow"
-                    className={styles.arrowImages}
+                    src={EditIcon}
+                    alt="Edit"
+                    onClick={() => handleEditLocation(item)}
                   />
                 </div>
               ))}
@@ -414,33 +410,33 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           </div>
         </div>
         <div className={styles.toggle}>
-            <span>Pause Auto Bid for 7 Days</span>
-            <label className={styles.switch}>
-              <input
-                type="checkbox"
-                checked={autobid_pause}
-                onChange={() => {
-                  setAutoBid(!autobid_pause);
+          <span>Pause Auto Bid for 7 Days</span>
+          <label className={styles.switch}>
+            <input
+              type="checkbox"
+              checked={autobid_pause}
+              onChange={() => {
+                setAutoBid(!autobid_pause);
 
-                  const isAutoBidPauseData = {
-                    user_id: registerData?.remember_tokens,
-                    autobid_pause: !autobid_pause ? 1 : 0
-                   
-                  };
-                  dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then((result) => {
+                const isAutoBidPauseData = {
+                  user_id: registerData?.remember_tokens,
+                  autobid_pause: !autobid_pause ? 1 : 0,
+                };
+                dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
+                  (result) => {
                     if (result?.success) {
                       showToast(
                         "success",
-                        result?.message ||
-                          "Auto Bid updated successfully"
+                        result?.message || "Auto Bid updated successfully"
                       );
                     }
-                  });
-                }}
-              />
-              <span className={styles.slider}></span>
-            </label>
-          </div>
+                  }
+                );
+              }}
+            />
+            <span className={styles.slider}></span>
+          </label>
+        </div>
 
         <button className={styles.viewLeads} onClick={handleView}>
           View leads
@@ -459,7 +455,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           handleSubmitData={handleSubmitData}
         />
 
-        {/* <LocationModal
+        <LocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
           locationData={locationData}
@@ -471,9 +467,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             setLocationData({ miles1: "", postcode: "" });
           }}
           onNext={handleNext}
-        /> */}
+        />
 
-        <AddLocationModal
+        {/* <AddLocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
           // locationData={locationData}
@@ -485,7 +481,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             setLocationData({ miles1: "", postcode: "" });
           }}
           onNext={handleNext}
-        />
+        /> */}
 
         {removeModal?.show && (
           <RemoveServiceModal
