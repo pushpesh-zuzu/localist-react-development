@@ -54,7 +54,7 @@ const QuestionModal = ({
           ans.toLowerCase() !== "no" &&
           ans.toLowerCase() !== "maybe"
       );
-      setOtherText(savedArray.includes("other") ? otherVal || "" : "");
+      setOtherText(savedArray.includes("Other") ? otherVal || "" : "");
     }
   }, [currentQuestion, buyerRequest, questions]);
 
@@ -82,7 +82,7 @@ const QuestionModal = ({
     }
 
     if (
-      selectedOption.includes("other") &&
+      selectedOption.includes("Other") &&
       (!otherText.trim() || otherText.trim().toLowerCase() === "other")
     ) {
       setError("Please enter a value for 'Other' option.");
@@ -107,13 +107,14 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      if (!userToken) {
+      if (!userToken?.remember_tokens) {
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postcode);
+        formData?.append("city",buyerRequest?.city)
         formData.append("questions", JSON.stringify(updatedAnswers));
         formData.append("form_status", 1);
         // form_status: 1,
@@ -196,7 +197,7 @@ const QuestionModal = ({
                 ))}
             </div>
 
-            {selectedOption.includes("other") && (
+            {selectedOption.includes("Other") && (
               <input
                 type="text"
                 placeholder="Please Enter..."
