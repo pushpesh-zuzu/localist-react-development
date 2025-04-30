@@ -17,7 +17,7 @@ const MatchingLeads = () => {
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Newest");
-  const sortOptions = ["Newest", "Popular", "Recommend", "Trending"];
+  const sortOptions = ["Newest", "Oldest"];
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("Credit Value High");

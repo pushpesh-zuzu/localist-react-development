@@ -164,7 +164,7 @@ const LocationModal = ({
   });
 
   useEffect(() => {
-    if (!open) return;
+    // if (!open) return;
 
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -318,6 +318,7 @@ const LocationModal = ({
         </div>
 
         {/* Google Map Container */}
+        {console.log(mapRef,"kk")}
         <div 
           ref={mapRef} 
           className={styles.mapContainer}
