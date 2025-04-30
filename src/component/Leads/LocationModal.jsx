@@ -153,6 +153,7 @@ const LocationModal = ({
   onChange,
   onCancel,
   onNext,
+  onClose,
 }) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
@@ -272,16 +273,14 @@ const LocationModal = ({
     }
   }, [open, mapLoaded, locationData.postcode]);
 
-  if (!open) return null;
-
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onClose}>
+          &times;
+        </button>
         <div className={styles.modalHeader}>
           <h2>Distance</h2>
-          <button className={styles.closeButton} onClick={onCancel}>
-            &times;
-          </button>
         </div>
 
         <div className={styles.infoBox}>
@@ -326,7 +325,7 @@ const LocationModal = ({
         />
 
         <div className={styles.modalFooter}>
-          <button className={styles.cancelBtn} onClick={onCancel}>
+          <button className={styles.cancelBtn} onClick={onClose}>
             Cancel
           </button>
           <button className={styles.nextBtn} onClick={onNext}>

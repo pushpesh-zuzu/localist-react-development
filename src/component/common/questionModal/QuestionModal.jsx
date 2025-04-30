@@ -21,9 +21,9 @@ const QuestionModal = ({
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
-  const { searchServiceLoader, service,registerData } = useSelector(
-     (state) => state.findJobs
-   );
+  const { searchServiceLoader, service, registerData } = useSelector(
+    (state) => state.findJobs
+  );
   const { userToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -31,7 +31,6 @@ const QuestionModal = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-  console.log(buyerRequest, "buyer");
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
@@ -144,9 +143,9 @@ const QuestionModal = ({
   };
 
   const handleCloseClick = () => {
-    if(!userToken?.remember_tokens && !registerData?.remember_tokens){
+    if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
       setShowConfirmModal(true);
-    } else{
+    } else {
       onClose();
     }
   };

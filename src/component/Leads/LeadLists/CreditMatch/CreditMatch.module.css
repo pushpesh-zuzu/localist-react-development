@@ -5,6 +5,7 @@
   padding: 22px 64px;
   gap: 20px;
   background-color: #e3f6fc;
+  position: relative;
 }
 
 .creditsSection {
@@ -145,6 +146,14 @@
 
 .creditsButton:hover {
   background-color: #0096c4;
+}
+
+.fixedTop {
+  position: fixed;
+  top: 78px;
+  left: 0;
+  right: 0;
+  z-index: 1001;
 }
 
 /* Responsive styles */

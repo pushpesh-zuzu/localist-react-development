@@ -22,9 +22,7 @@ import {
 } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
-import ServiceSelectionModal from "./ServiceModal";
 import { showToast } from "../../../utils";
-import LocationModal from "../LocationModal";
 import AddServiceModal from "../LeadAddServiceModal";
 import AddLocationModal from "../AddLocation/AddLocationModal";
 
@@ -54,12 +52,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  const ids = preferenceList?.map((item) => item.id);
-  const locationRemoveId = getlocationData?.map(
-    (item) => item?.user_service_id
-  );
-  const postCodeData = getlocationData?.map((item) => item?.postcode);
-  console.log(getlocationData, "selectedService");
+
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -69,10 +62,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
-  // Check screen size
+
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobileView(window.innerWidth <= 768); // can be adjusted as needed
+      setIsMobileView(window.innerWidth <= 768);
     };
 
     checkScreenSize();
@@ -80,7 +73,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Fetch preferences
   useEffect(() => {
     if (userToken?.active_status == 1) {
       const data = {
@@ -132,6 +124,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setSelectedService(null); // clear previously selected service
     dispatch(setService([]));
   };
+
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
       const delayDebounce = setTimeout(() => {
@@ -140,10 +133,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
+
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
-      console.log(item, "item");
       setSelectValue(item);
       setIsDropdownOpen(false);
       // setErrors((prev) => ({ ...prev, service: "" }));
@@ -151,6 +144,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     },
     [dispatch]
   );
+
   const handleSubmitData = () => {
     const serviceDataList = {
       user_id: userToken?.remember_tokens,
@@ -181,60 +175,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       message.warning("Please fill in both fields");
       return;
     }
-
     // Close current modal
     setIsLocationModalOpen(false);
 
     // Open next modal
-    setIsNextModalOpen(true); // make sure you have this state defined
+    setIsNextModalOpen(true);
 
     // You can pass data as props or store in shared state
   };
-  const handleConfirm = () => {
-    const serviceIds = selectedServices.join(",");
 
-    const locationdata = {
-      user_id: userToken?.remember_tokens,
-      miles: locationData.miles1,
-      postcode: locationData.postcode,
-      service_id: serviceIds,
-      postcode_old: previousPostcode,
-    };
-
-    if (isEditingLocation && editLocationId) {
-      dispatch(
-        editLocationLead({ ...locationdata, location_id: editLocationId })
-      ).then((result) => {
-        if (result?.success) {
-          const data = { user_id: userToken?.remember_tokens };
-          dispatch(getLocationLead(data));
-          dispatch(getleadPreferencesList(data));
-          setIsLocationModalOpen(false);
-          setIsEditingLocation(false);
-          setEditLocationId(null);
-          setLocationData({
-            miles1: "1",
-            postcode: "",
-          });
-        }
-      });
-    } else {
-      dispatch(addLocationLead(locationdata)).then((result) => {
-        if (result?.success) {
-          const data = { user_id: userToken?.remember_tokens };
-          dispatch(getLocationLead(data));
-          dispatch(getleadPreferencesList(data));
-          setIsLocationModalOpen(false);
-          setLocationData({
-            miles1: "1",
-            postcode: "",
-          });
-        }
-      });
-    }
-
-    setIsNextModalOpen(false);
-  };
   const handleEditLocation = (location) => {
     setLocationData({
       miles1: location.miles,
@@ -245,8 +194,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setIsLocationModalOpen(true);
     setPreviousPostcode(location.postcode);
   };
+
   const handleRemoveOpen = (id) => {
-    console.log(id, "id");
     setRemoveModal({ show: true, service_id: id });
   };
 
@@ -319,7 +268,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   <img
                     src={EditIcon}
                     alt="Edit"
-                    onClick={() => handleEditLocation(item)}
+                    // onClick={() =>
+                    //   handleServiceClick(service?.id, service?.name)
+                    // }
                   />
                 </div>
               ))}
@@ -455,7 +406,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           handleSubmitData={handleSubmitData}
         />
 
-        <LocationModal
+        {/* <LocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
           locationData={locationData}
@@ -467,13 +418,17 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             setLocationData({ miles1: "", postcode: "" });
           }}
           onNext={handleNext}
-        />
+        /> */}
 
-        {/* <AddLocationModal
+        <AddLocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
           // locationData={locationData}
           onChange={handleLocationChange}
+          selectedServices={selectedServices}
+          previousPostcode={previousPostcode}
+          setSelectedServices={setSelectedServices}
+          setIsLocationModalOpen={setIsLocationModalOpen}
           onCancel={() => {
             setIsLocationModalOpen(false);
             setIsEditingLocation(false);
@@ -481,7 +436,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             setLocationData({ miles1: "", postcode: "" });
           }}
           onNext={handleNext}
-        /> */}
+        />
 
         {removeModal?.show && (
           <RemoveServiceModal
@@ -490,15 +445,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             onConfirm={handleRemove}
             loading={removeLocationLoader}
             serviceName={"This Location"}
-          />
-        )}
-        {isNextModalOpen && (
-          <ServiceSelectionModal
-            isOpen={isNextModalOpen}
-            onClose={() => setIsNextModalOpen(false)}
-            onConfirm={handleConfirm}
-            selectedServices={selectedServices}
-            setSelectedServices={setSelectedServices}
           />
         )}
       </div>
