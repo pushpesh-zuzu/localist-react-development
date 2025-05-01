@@ -45,17 +45,18 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     serviceLoader,
     getlocationData,
     removeLocationLoader,
-    sevenDays,onlineRemote
+    sevenDays,
+    onlineRemote,
   } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth);
   const [autobid_pause, setAutoBid] = useState(sevenDays === 1);
   const [is_online, setIsOnline] = useState(onlineRemote === 1);
 
-// Add this useEffect to keep the checkbox state in sync with Redux
-useEffect(() => {
-  setAutoBid(sevenDays === 1);
-  setIsOnline(onlineRemote === 1)
-}, [sevenDays,onlineRemote]);
+  // Add this useEffect to keep the checkbox state in sync with Redux
+  useEffect(() => {
+    setAutoBid(sevenDays === 1);
+    setIsOnline(onlineRemote === 1);
+  }, [sevenDays, onlineRemote]);
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -174,6 +175,7 @@ useEffect(() => {
   const [isEditModalOpen, setIseditModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
+
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
@@ -182,10 +184,11 @@ useEffect(() => {
     }
     // Close current modal
     setIsLocationModalOpen(false);
+  };
 
-    // Open next modal
-
-    // You can pass data as props or store in shared state
+  const handleLocationNext = () => {
+    setIseditModalOpen(false);
+    setIsNextModalOpen(true);
   };
 
   const handleConfirm = () => {
@@ -375,7 +378,7 @@ useEffect(() => {
                 type="checkbox"
                 checked={is_online}
                 onChange={() => {
-                  const newValue = !is_online
+                  const newValue = !is_online;
                   setIsOnline(newValue);
 
                   const isOnlineData = {
@@ -400,29 +403,29 @@ useEffect(() => {
         <div className={styles.toggle}>
           <span>Pause Auto Bid for 7 Days</span>
           <label className={styles.switch}>
-          <input
-      type="checkbox"
-      checked={autobid_pause}
-      onChange={() => {
-        const newValue = !autobid_pause;
-        setAutoBid(newValue);
+            <input
+              type="checkbox"
+              checked={autobid_pause}
+              onChange={() => {
+                const newValue = !autobid_pause;
+                setAutoBid(newValue);
 
-        const isAutoBidPauseData = {
-          user_id: registerData?.remember_tokens,
-          autobid_pause: newValue ? 1 : 0,
-        };
-        dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
-          (result) => {
-            if (result?.success) {
-              showToast(
-                "success",
-                result?.message || "Auto Bid updated successfully"
-              );
-            }
-          }
-        );
-      }}
-    />
+                const isAutoBidPauseData = {
+                  user_id: registerData?.remember_tokens,
+                  autobid_pause: newValue ? 1 : 0,
+                };
+                dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
+                  (result) => {
+                    if (result?.success) {
+                      showToast(
+                        "success",
+                        result?.message || "Auto Bid updated successfully"
+                      );
+                    }
+                  }
+                );
+              }}
+            />
             {/* <input
               type="checkbox"
               checked={autobid_pause}
@@ -478,7 +481,7 @@ useEffect(() => {
               setEditLocationId(null);
               setLocationData({ miles1: "", postcode: "" });
             }}
-            onNext={() => setIsNextModalOpen(true)}
+            onNext={handleLocationNext}
           />
         )}
 
