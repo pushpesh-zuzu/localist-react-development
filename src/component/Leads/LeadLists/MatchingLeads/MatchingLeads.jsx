@@ -159,7 +159,6 @@
 // };
 
 // export default MatchingLeads;
-
 import React, { useEffect, useState } from "react";
 import styles from "./MatchingLeads.module.css";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
@@ -202,7 +201,7 @@ const MatchingLeads = () => {
     ...new Set(leadRequestList.map((item) => item.category?.name)),
   ];
 
-  // Function to map the credit filter selection to API parameter
+  // Function to get credit filter value
   const getCreditFilterValue = (filterOption) => {
     switch (filterOption) {
       case "Credit Value High":
@@ -216,7 +215,7 @@ const MatchingLeads = () => {
     }
   };
 
-  // Function to map the sort type selection to API parameter
+  // Function to get sort type value
   const getSortTypeValue = (sortOption) => {
     switch (sortOption) {
       case "Newest":
@@ -228,20 +227,36 @@ const MatchingLeads = () => {
     }
   };
 
-  // Apply filters when dropdown selections change
-  useEffect(() => {
+  // Handle changes to sort dropdown
+  const handleSortChange = (option) => {
+    setSelectedSort(option);
+    setIsSortOpen(false);
+    
+    // Apply only sort filter, leave credit filter unchanged
     if (userToken?.remember_tokens) {
-      handleApplyFilters();
+      const filterData = {
+        user_id: userToken?.remember_tokens,
+        sort_type: getSortTypeValue(option),
+        // Don't include credit_filter
+      };
+      dispatch(getLeadFiterApiList(filterData));
     }
-  }, [selectedSort, selectedFilter]);
+  };
 
-  const handleApplyFilters = () => {
-    const filterData = {
-      user_id: userToken?.remember_tokens,
-      sort_type: getSortTypeValue(selectedSort),
-      credit_filter: getCreditFilterValue(selectedFilter)
-    };
-    dispatch(getLeadFiterApiList(filterData));
+  // Handle changes to credit filter dropdown
+  const handleFilterChange = (option) => {
+    setSelectedFilter(option);
+    setIsFilterOpen(false);
+    
+    // Apply only credit filter, leave sort type unchanged
+    if (userToken?.remember_tokens) {
+      const filterData = {
+        user_id: userToken?.remember_tokens,
+        // Don't include sort_type
+        credit_filter: getCreditFilterValue(option)
+      };
+      dispatch(getLeadFiterApiList(filterData));
+    }
   };
 
   const locationLength = getlocationData?.length;
@@ -252,20 +267,14 @@ const MatchingLeads = () => {
         user_id: userToken?.remember_tokens,
       };
       dispatch(getLocationLead(location));
-      // Initial load of leads
-      handleApplyFilters();
+      
+      // Initial load of leads - don't send any filters initially
+      const filterData = {
+        user_id: userToken?.remember_tokens,
+      };
+      dispatch(getLeadFiterApiList(filterData));
     }
-  }, [userToken?.remember_tokens]);
-
-  const handleSortChange = (option) => {
-    setSelectedSort(option);
-    setIsSortOpen(false);
-  };
-
-  const handleFilterChange = (option) => {
-    setSelectedFilter(option);
-    setIsFilterOpen(false);
-  };
+  }, [userToken?.remember_tokens, dispatch]);
 
   const handleEdit = () => {
     navigate("/leads/settings");
