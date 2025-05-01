@@ -6,10 +6,12 @@ import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
 import moment from "moment";
 import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
+import HiredProfessional from "./BuyerRegistration/HiredProfessional/HiredProfessional";
 
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-const navigate = useNavigate()
+  const [isHiredModalOpen, setIsHiredModalOpen] = useState(false);
+  const navigate = useNavigate();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const dispatch = useDispatch();
@@ -22,8 +24,8 @@ const navigate = useNavigate()
   }, []);
 
   const onViewRequest = (id) => {
-navigate(`/bids-list/${id}`)
-  }
+    navigate(`/bids-list/${id}`);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -65,8 +67,19 @@ navigate(`/bids-list/${id}`)
                   </p>
                 </div>
                 <div>
-                <button className={styles.viewButton} onClick={() => onViewRequest(req.id)}>View Request</button></div>
-                <div className={styles.tags}>Choose Request | I Hired Professional</div>
+                  <button
+                    className={styles.viewButton}
+                    onClick={() => onViewRequest(req.id)}
+                  >
+                    View Request
+                  </button>
+                </div>
+                <div
+                  className={styles.tags}
+                  onClick={() => setIsHiredModalOpen(true)}
+                >
+                  Choose Request | I Hired Professional
+                </div>
               </div>
             ))}
         </div>
@@ -91,6 +104,10 @@ navigate(`/bids-list/${id}`)
       )}
 
       {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
+
+      {isHiredModalOpen && (
+        <HiredProfessional closeModal={() => setIsHiredModalOpen(false)} />
+      )}
     </div>
   );
 };
