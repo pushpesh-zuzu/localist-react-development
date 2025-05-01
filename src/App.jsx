@@ -81,6 +81,7 @@ function App() {
           "loggedUser",
           "nation_wide",
           "form_status",
+          "is_online"
         ];
 
         // Loop through fields and append values (or empty string if undefined)
@@ -94,6 +95,7 @@ function App() {
           "nation_wide",
           selectedServiceFormData?.nation_wide ? 1 : 0
         );
+        formData.set("is_online", formData.is_online ? 1 : 0)
         formData.set("active_status", 1);
         formData.set("user_type", 1);
         formData.set("loggedUser", 1);

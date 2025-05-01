@@ -40,7 +40,9 @@ const initialState = {
       credits: [],
       contactPreferences: [],
     },
-    sevenDaysAutoBidLoader:false
+    sevenDaysAutoBidLoader:false,
+    sevenDays:[],
+    onlineRemote:[]
 };
 
 
@@ -101,7 +103,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/online-remote-switch`, onlineData);
   
         if (response) {
-            dispatch(setLeadPreferenceData(response?.data?.data));
+            dispatch(setOnlineRemoteData(response?.data?.data));
+            return response.data
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));
@@ -131,6 +134,22 @@ export const getleadPreferencesList = (serviceId) => {
       dispatch(setLeadListLoader(true));
       try {
         const response = await axiosInstance.post(`users/get-lead-request`,leadRequestData);
+        if (response) {
+          dispatch(setLeadRequestListData(response?.data?.data));
+          return response.data
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setLeadListLoader(false));
+      }
+    };
+  };
+  export const getLeadFiterApiList = (leadFilterData) => {
+    return async (dispatch) => {
+      dispatch(setLeadListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/sort-by-credit-value`,leadFilterData);
         if (response) {
           dispatch(setLeadRequestListData(response?.data?.data));
           return response.data
@@ -503,7 +522,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/seven-days-autobid-pause`, SevenDayData);
   
         if (response) {
-          dispatch(setSellerRecommendedData(response?.data?.data))
+          dispatch(setSevenDaysData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -597,11 +616,17 @@ const leadSettingSlice = createSlice({
       },
       setSevenDaysAutobidLoader(state,action){
         state.sevenDaysAutoBidLoader = action.payload
+      },
+      setSevenDaysData(state,action){
+        state.sevenDays= action.payload
+      },
+      setOnlineRemoteData(state,action){
+        state.onlineRemote =action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setSevenDaysData,setOnlineRemoteData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

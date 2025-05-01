@@ -38,8 +38,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
-  const [is_online, setIsOnline] = useState(false);
-  const [autobid_pause, setAutoBid] = useState(false);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {
@@ -47,8 +45,17 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     serviceLoader,
     getlocationData,
     removeLocationLoader,
+    sevenDays,onlineRemote
   } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth);
+  const [autobid_pause, setAutoBid] = useState(sevenDays === 1);
+  const [is_online, setIsOnline] = useState(onlineRemote === 1);
+
+// Add this useEffect to keep the checkbox state in sync with Redux
+useEffect(() => {
+  setAutoBid(sevenDays === 1);
+  setIsOnline(onlineRemote === 1)
+}, [sevenDays,onlineRemote]);
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -368,11 +375,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 type="checkbox"
                 checked={is_online}
                 onChange={() => {
-                  setIsOnline(!is_online);
+                  const newValue = !is_online
+                  setIsOnline(newValue);
 
                   const isOnlineData = {
                     user_id: registerData?.remember_tokens,
-                    is_online: !is_online ? 1 : 0,
+                    is_online: newValue ? 1 : 0,
                   };
                   dispatch(isOnlineRemote(isOnlineData)).then((result) => {
                     if (result?.success) {
@@ -392,7 +400,30 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <div className={styles.toggle}>
           <span>Pause Auto Bid for 7 Days</span>
           <label className={styles.switch}>
-            <input
+          <input
+      type="checkbox"
+      checked={autobid_pause}
+      onChange={() => {
+        const newValue = !autobid_pause;
+        setAutoBid(newValue);
+
+        const isAutoBidPauseData = {
+          user_id: registerData?.remember_tokens,
+          autobid_pause: newValue ? 1 : 0,
+        };
+        dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
+          (result) => {
+            if (result?.success) {
+              showToast(
+                "success",
+                result?.message || "Auto Bid updated successfully"
+              );
+            }
+          }
+        );
+      }}
+    />
+            {/* <input
               type="checkbox"
               checked={autobid_pause}
               onChange={() => {
@@ -413,7 +444,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   }
                 );
               }}
-            />
+            /> */}
             <span className={styles.slider}></span>
           </label>
         </div>
