@@ -31,6 +31,7 @@ import ManualBidList from "../component/buyerPanel/PlaceNewRequest/BuyerRegistra
 import LeadProfileData from "../component/Leads/LeadLists/LeadProfileView/LeadProfileView";
 import MyResponse from "../component/myResponses/MyResponse";
 import SaveForLater from "../component/saveForLater/SaveForLater";
+import ViewProfile from "../component/myResponses/ViewProfile/viewProfile";
 
 const router = createBrowserRouter([
   {
@@ -90,7 +91,9 @@ const router = createBrowserRouter([
       { path: "/lead/profile-view/:profileId" , element: <ProtectedRoute><LeadProfileData/></ProtectedRoute>},
       { path: "/lead/save-later", element:<ProtectedRoute><MyResponse/></ProtectedRoute>},
       { path: "/lead/save-for-later", element:<ProtectedRoute><SaveForLater/></ProtectedRoute>},
+      { path: "/pending/view-profile/:profileId", element:<ProtectedRoute><ViewProfile/></ProtectedRoute>},
       { path: "*", element: <NotFound /> },
+
     ],
   },
 ]);

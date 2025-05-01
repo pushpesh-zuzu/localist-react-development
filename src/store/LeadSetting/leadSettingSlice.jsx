@@ -607,6 +607,23 @@ export const getleadPreferencesList = (serviceId) => {
     };
   }
 
+  export const getAddHiredLeadDataApi = (AddHiredLeadData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/add-hired-leads`, AddHiredLeadData);
+  
+        if (response) {
+          dispatch(setGetHiredLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
 
 const leadSettingSlice = createSlice({
   name: "leadSetting",

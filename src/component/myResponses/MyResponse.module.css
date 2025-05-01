@@ -77,6 +77,7 @@
   font-weight: 600;
   font-size: 20px;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .details p {
@@ -246,11 +247,11 @@
   background-color: var(--primary-color);
   color: white;
 }
+
 .activeButton {
-  background-color: var(--primary-color); /* Example: Blue background */
+  background-color: var(--primary-color); 
   color: white;
   font-weight: bold;
-  border: 1px solid #007bff;
 }
 
 

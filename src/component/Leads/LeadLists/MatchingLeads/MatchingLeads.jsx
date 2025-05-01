@@ -194,6 +194,7 @@ const MatchingLeads = () => {
   const { leadRequestList, getlocationData } = useSelector(
     (state) => state.leadSetting
   );
+   const { registerData } = useSelector((state) => state.findJobs)
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
 
@@ -233,9 +234,9 @@ const MatchingLeads = () => {
     setIsSortOpen(false);
     
     // Apply only sort filter, leave credit filter unchanged
-    if (userToken?.remember_tokens) {
+    if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
-        user_id: userToken?.remember_tokens,
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
         sort_type: getSortTypeValue(option),
         // Don't include credit_filter
       };
@@ -249,9 +250,9 @@ const MatchingLeads = () => {
     setIsFilterOpen(false);
     
     // Apply only credit filter, leave sort type unchanged
-    if (userToken?.remember_tokens) {
+    if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
-        user_id: userToken?.remember_tokens,
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
         // Don't include sort_type
         credit_filter: getCreditFilterValue(option)
       };

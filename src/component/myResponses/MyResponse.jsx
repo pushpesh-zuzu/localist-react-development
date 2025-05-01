@@ -12,17 +12,22 @@ import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
 import { showToast } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
-  const [selectedTab, setSelectedTab] = useState("all");
+  const navigate = useNavigate()
+  const [selectedTab, setSelectedTab] = useState("pending");
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const { sellerRecommended, getPendingLeadList,getHiredLeadList } = useSelector(
     (state) => state.leadSetting
   );
-
+const handleProfieView = (item) => {
+  console.log(item,"item")
+  navigate(`/pending/view-profile/${item?.customer_id}`)
+}
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
 
   useEffect(() => {
@@ -55,16 +60,16 @@ const MyResponse = () => {
   return (
     <div className={styles.maincontainer}>
       <div className={styles.mainTextBox}>
-        <div style={{ fontSize: "24px", fontWeight: 800 }}>My Response List</div>
+        <div style={{ fontSize: "35px", fontWeight: 800 }}>My Response List</div>
         <div className={styles.buttonGroup}>
-  <button
+  {/* <button
     className={`${styles.filterButton} ${
       selectedTab === "all" ? styles.activeButton : ""
     }`}
     onClick={() => setSelectedTab("all")}
   >
     All
-  </button>
+  </button> */}
   <button
     className={`${styles.filterButton} ${
       selectedTab === "pending" ? styles.activeButton : ""
@@ -93,7 +98,7 @@ const MyResponse = () => {
                 <div className={styles.avatar}>
                   {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                 </div>
-                <div className={styles.details}>
+                <div className={styles.details} onClick={()=>handleProfieView(item)} >
                   <h3>{item?.customer?.name}</h3>
                   <p>{item?.postcode}</p>
                 </div>

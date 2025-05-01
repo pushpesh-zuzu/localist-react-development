@@ -15,8 +15,6 @@ function LeadProfileData () {
     const handleBack = () => {
       navigate("/leads")
     }
-    console.log(profileId,"profileId")
-    // const webData = profileLeadViewData?.map(item => item?.service_name) || [];
     useEffect(()=>{
         const data = {
             customer_id:profileId
