@@ -42,6 +42,7 @@ const AddLocationModal = ({
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
+
   const handleConfirm = () => {
     const serviceIds = selectedServices.join(",");
     const locationdata = {
@@ -88,15 +89,10 @@ const AddLocationModal = ({
 
     setIsNextModalOpen(false);
   };
-  const handleEditLocation = (location) => {
-    setLocationData({
-      miles1: location.miles,
-      postcode: location.postcode,
-    });
-    setEditLocationId(location.id);
-    setIsEditingLocation(true);
-    // setIsLocationModalOpen(true);
-    // setPreviousPostcode(location.postcode);
+
+  const handleNext = () => {
+    setSelectedOption("");
+    setIsNextModalOpen(true);
   };
 
   if (!open) return null;
@@ -111,7 +107,7 @@ const AddLocationModal = ({
 
   return (
     <>
-      {!selectedOption && (
+      {!selectedOption && !isNextModalOpen && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalContainer}>
             <button className={styles.closeButton} onClick={onCancel}>
@@ -205,7 +201,7 @@ const AddLocationModal = ({
           onClose={handleChildModalClose}
           onChange={handleLocationChange}
           locationData={locationData}
-          onNext={() => setIsNextModalOpen(true)}
+          onNext={handleNext}
         />
       )}
 
