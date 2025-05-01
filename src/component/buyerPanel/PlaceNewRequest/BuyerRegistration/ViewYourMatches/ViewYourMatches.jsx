@@ -37,6 +37,7 @@ const ViewYourMatches = ({
     const formData = new FormData();
     formData.append("service_id", buyerRequest?.service_id);
     formData.append("postcode", buyerRequest?.postcode);
+    formData.append("city",buyerRequest?.city);
     formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
     formData.append("recevive_online", consent ? 1 : 0);

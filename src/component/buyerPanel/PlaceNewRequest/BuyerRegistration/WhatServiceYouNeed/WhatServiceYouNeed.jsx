@@ -23,6 +23,7 @@ const WhatServiceYouNeed = ({
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
+  const [city,setCity] = useState("")
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
 const { userToken } = useSelector((state)=> state.auth)
@@ -78,7 +79,7 @@ const { userToken } = useSelector((state)=> state.auth)
 
     if (!pincode) {
       newErrors.pincode = "Pincode is required!";
-    } else if (pincode.length < 6 || pincode.length > 10) {
+    } else if (pincode.length < 6 || pincode.length > 30) {
       newErrors.pincode = "Pincode must be between 6 and 10 characters!";
     }
 
@@ -89,6 +90,7 @@ const { userToken } = useSelector((state)=> state.auth)
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
+          city:city
         })
       );
       dispatch(
@@ -96,7 +98,7 @@ const { userToken } = useSelector((state)=> state.auth)
       );
       nextStep();
     }
-  }, [selectedService, pincode, dispatch, serviceId, nextStep]);
+  }, [selectedService, pincode, dispatch, serviceId,city, nextStep]);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -112,38 +114,88 @@ const { userToken } = useSelector((state)=> state.auth)
       }
     };
 
-    const initAutocomplete = () => {
-      if (!inputRef.current) return;
-
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "IN" },
-        }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
-
-        let postalCode = place.address_components.find((component) =>
-          component.types.includes("postal_code")
-        )?.long_name;
-
-        if (postalCode) {
-          setPincode(postalCode);
-          setErrors((prev) => ({ ...prev, pincode: "" }));
-          inputRef.current.value = postalCode;
-        } else {
-          alert("No PIN code found! Please try again.");
-        }
-      });
-    };
+   
+  const initAutocomplete = () => {
+    if (!inputRef.current) return;
+  
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {
+        types: ["geocode"],
+        componentRestrictions: { country: "IN" },
+      }
+    );
+  
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      if (!place.address_components) return;
+  
+      const postalCode = place.address_components.find((component) =>
+        component.types.includes("postal_code")
+      )?.long_name;
+  
+      const cityName = place.address_components.find((component) =>
+        component.types.includes("locality")
+      )?.long_name;
+      const formattedAddress = place.formatted_address;
+  console.log(cityName,"cityName")
+      if (postalCode) {
+        setPincode(postalCode);
+        inputRef.current.value = postalCode;
+        setErrors((prev) => ({ ...prev, pincode: "" }));
+      }
+  
+      if (cityName) {
+        setCity(cityName); // <- set city state
+      }
+  
+      if (!postalCode && !cityName) {
+        alert("No address or PIN code found! Please try again.");
+      }
+    });
+  };
 
     loadGoogleMapsScript();
   }, []);
 
+
+  // const initAutocomplete = () => {
+  //   if (!inputRef.current) return;
+  
+  //   const autocomplete = new window.google.maps.places.Autocomplete(
+  //     inputRef.current,
+  //     {
+  //       types: ["geocode"],
+  //       componentRestrictions: { country: "IN" },
+  //     }
+  //   );
+  
+  //   autocomplete.addListener("place_changed", () => {
+  //     const place = autocomplete.getPlace();
+  //     if (!place.address_components) return;
+  
+  //     const postalCode = place.address_components.find((component) =>
+  //       component.types.includes("postal_code")
+  //     )?.long_name;
+  
+  //     const formattedAddress = place.formatted_address;
+  
+  //     if (postalCode) {
+  //       setPincode(postalCode);
+  //       inputRef.current.value = postalCode;
+  //       setErrors((prev) => ({ ...prev, pincode: "" }));
+  //     }
+  
+  //     if (formattedAddress) {
+  //       setCity(formattedAddress); // <- set city state
+  //     }
+  
+  //     if (!postalCode && !formattedAddress) {
+  //       alert("No address or PIN code found! Please try again.");
+  //     }
+  //   });
+  // };
+  
   const handlePincodeChange = (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
@@ -166,6 +218,7 @@ const { userToken } = useSelector((state)=> state.auth)
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
+          city:city
         })
       );
     } else{

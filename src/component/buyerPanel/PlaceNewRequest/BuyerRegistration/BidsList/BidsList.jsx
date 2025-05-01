@@ -889,12 +889,17 @@ const BidsList = ({ previousStep }) => {
             <div className={styles.filters}>
               <select>
                 <option>All ratings</option>
+                <option></option>
               </select>
               <select>
-                <option>All locations</option>
+                <option>Farthest to Nearest</option>
+                <option>Nearest to Farthest </option>
+
               </select>
               <select>
-                <option>All response times</option>
+                {/* <option>All response times</option> */}
+                <option>Longest to Shortest</option>
+                <option>Shortest to Longest</option>
               </select>
               <span className={styles.matchCount}>
                 {autoBidList?.length} matches

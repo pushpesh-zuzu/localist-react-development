@@ -111,7 +111,7 @@ dispatch(getSellerRecommendedApi(data))
                     </span>> */}
                   
                   <span className={styles.credits}>
-                      {item?.credit_score}Credits
+                      {item?.credit_score} Credits
                     </span>
                       </div>
                 </div>

@@ -15,6 +15,7 @@ const initialState = {
   buyerRequest:{
     service_id:"",
     postcode:"",
+    city:"",
     questions:[],
     phone:"",
     recevive_online:"",email:"",

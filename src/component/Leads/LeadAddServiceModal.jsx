@@ -3,6 +3,7 @@ import styles from "./AddServiceModal.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import iIcon from "../../assets/Images/iIcon.svg";
+import { useSelector } from "react-redux";
 
 const AddServiceModal = ({
   isModalOpen,
@@ -21,6 +22,7 @@ const AddServiceModal = ({
     { name: "Commercial & Office Cleaning" },
     { name: "Gutter Cleaning" },
   ];
+  const { popularList } = useSelector((state)=> state.findJobs)
 
   if (!isModalOpen) return null;
 
@@ -78,7 +80,7 @@ const AddServiceModal = ({
             We suggest the following services for you. Click to add:
           </p>
           <div className={styles.tags}>
-            {suggestions.map((item, idx) => (
+            {popularList?.map((item, idx) => (
               <span
                 key={idx}
                 className={styles.tag}

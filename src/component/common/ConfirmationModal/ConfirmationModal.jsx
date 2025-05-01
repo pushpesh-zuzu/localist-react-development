@@ -147,7 +147,7 @@ if (!userToken) {
                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
               />
             ) : (
-              "Continue"
+              "Leave"
             )}
           </button>
         </div>

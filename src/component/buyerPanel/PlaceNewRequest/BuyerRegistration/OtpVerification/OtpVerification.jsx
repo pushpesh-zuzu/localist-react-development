@@ -9,7 +9,7 @@ const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
   const inputRefs = useRef([]);
   const dispatch = useDispatch()
   const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
-console.log(requestDataList?.user_id,createRequestToken,"requestDataList")
+console.log(requestDataList?.phone,"requestDataList")
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -100,7 +100,7 @@ console.log(requestDataList?.user_id,createRequestToken,"requestDataList")
         <p className={styles.instruction}>
           Enter the code from the sms we sent to
           <br />
-          <span>+ 000 000 0000</span>
+          <span>+ {requestDataList?.phone}</span>
         </p>
 
         <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>

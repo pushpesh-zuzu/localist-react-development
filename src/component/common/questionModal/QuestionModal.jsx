@@ -106,13 +106,14 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      if (!userToken) {
+      if (!userToken?.remember_tokens) {
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postcode);
+        formData?.append("city",buyerRequest?.city)
         formData.append("questions", JSON.stringify(updatedAnswers));
         formData.append("form_status", 1);
         // form_status: 1,
