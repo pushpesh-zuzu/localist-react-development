@@ -1,4 +1,4 @@
-.modalOverlay {
+ .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -103,4 +103,4 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 20px;
-}
+} 

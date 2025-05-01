@@ -10,7 +10,9 @@ import {
   editLocationLead,
   getleadPreferencesList,
   getLocationLead,
+  getOnlineRemoteApi,
   getSevenWeekBidApi,
+  getSevenWeekPausedBidApi,
   isOnlineRemote,
   leadPreferences,
   removeItemLocationData,
@@ -47,16 +49,20 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     removeLocationLoader,
     sevenDays,
     onlineRemote,
+    sevenPausedData,
+    getOnlineRemote
   } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth);
-  const [autobid_pause, setAutoBid] = useState(sevenDays === 1);
-  const [is_online, setIsOnline] = useState(onlineRemote === 1);
+  const [autobid_pause, setAutoBid] = useState(sevenPausedData?.autobidpause === 1);
+  const [is_online, setIsOnline] = useState(getOnlineRemote?.isonline === 1);
 
   // Add this useEffect to keep the checkbox state in sync with Redux
   useEffect(() => {
-    setAutoBid(sevenDays === 1);
-    setIsOnline(onlineRemote === 1);
-  }, [sevenDays, onlineRemote]);
+    setAutoBid(sevenPausedData?.autobidpause === 1);
+    setIsOnline(getOnlineRemote?.isonline === 1);
+  }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
+
+  
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -89,11 +95,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         user_id: userToken?.remember_tokens,
       };
       dispatch(getleadPreferencesList(data));
+      dispatch(getSevenWeekPausedBidApi(data))
+      dispatch(getOnlineRemoteApi(data))
     } else {
       const data = {
         user_id: registerData?.remember_tokens,
       };
       dispatch(getleadPreferencesList(data));
+      dispatch(getSevenWeekPausedBidApi(data))
+      dispatch(getOnlineRemoteApi(data))
     }
   }, []);
   useEffect(() => {

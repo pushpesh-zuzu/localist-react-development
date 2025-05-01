@@ -42,7 +42,11 @@ const initialState = {
     },
     sevenDaysAutoBidLoader:false,
     sevenDays:[],
-    onlineRemote:[]
+    onlineRemote:[],
+    sevenPausedData:{},
+    getOnlineRemote:{},
+    getPendingLeadList:[],
+    getHiredLeadList:[]
 };
 
 
@@ -532,6 +536,78 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const getSevenWeekPausedBidApi = (SevenPauseData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-seven-days-autobid-pause`, SevenPauseData);
+  
+        if (response) {
+          dispatch(setSevenPausedDaysData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const getOnlineRemoteApi = (remoteData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-online-remote-switch`, remoteData);
+  
+        if (response) {
+          dispatch(setGetOnlineRemoteData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  } 
+
+  export const getPendingLeadDataApi = (remoteData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-pending-leads`, remoteData);
+  
+        if (response) {
+          dispatch(setGetPendingLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+
+  export const getHiredLeadDataApi = (remoteData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-hired-leads`, remoteData);
+  
+        if (response) {
+          dispatch(setGetHiredLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+        //   dispatch(setAuthError(error?.response?.data?.message));
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+
+
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -622,11 +698,23 @@ const leadSettingSlice = createSlice({
       },
       setOnlineRemoteData(state,action){
         state.onlineRemote =action.payload
+      },
+      setSevenPausedDaysData(state,action) {
+        state.sevenPausedData = action.payload
+      },
+      setGetOnlineRemoteData(state,action) {
+        state.getOnlineRemote = action.payload
+      },
+      setGetPendingLeadsData(state,action) {
+        state.getPendingLeadList = action.payload
+      },
+      setGetHiredLeadsData(state,action) {
+        state.getHiredLeadList = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setSevenDaysData,setOnlineRemoteData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

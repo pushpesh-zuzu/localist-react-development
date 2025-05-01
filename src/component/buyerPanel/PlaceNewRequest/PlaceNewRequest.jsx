@@ -64,7 +64,9 @@ navigate(`/bids-list/${id}`)
                     for more information.
                   </p>
                 </div>
-                <button className={styles.viewButton} onClick={() => onViewRequest(req.id)}>View Request</button>
+                <div>
+                <button className={styles.viewButton} onClick={() => onViewRequest(req.id)}>View Request</button></div>
+                <div className={styles.tags}>Choose Request | I Hired Professional</div>
               </div>
             ))}
         </div>

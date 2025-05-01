@@ -87,6 +87,10 @@
 .lightBlueBox {
   background-color: #e3f6fc;
 }
+.tags {
+  margin-top: 16px;
+  cursor: pointer;
+}
 
 /* Responsive styles */
 @media (max-width: 768px) {
