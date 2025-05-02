@@ -107,7 +107,11 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      if (!adminToken || !registerData?.remember_tokens) {
+      if(adminToken ||registerData?.remember_tokens ){
+        nextStep();
+
+      }
+      else {
       
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
@@ -128,8 +132,6 @@ const QuestionModal = ({
           }
           nextStep();
         });
-      } else {
-        nextStep();
       }
     }
   };
