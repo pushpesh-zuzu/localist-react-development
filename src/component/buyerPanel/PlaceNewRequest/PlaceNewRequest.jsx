@@ -11,6 +11,7 @@ import HiredProfessional from "./BuyerRegistration/HiredProfessional/HiredProfes
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiredModalOpen, setIsHiredModalOpen] = useState(false);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
   const navigate = useNavigate();
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -25,6 +26,10 @@ const PlaceNewRequest = () => {
 
   const onViewRequest = (id) => {
     navigate(`/bids-list/${id}`);
+  };
+  const openHiredModal = (serviceId) => {
+    setSelectedServiceId(serviceId);
+    setIsHiredModalOpen(true);
   };
   return (
     <div className={styles.container}>
@@ -76,7 +81,7 @@ const PlaceNewRequest = () => {
                 </div>
                 <div
                   className={styles.tags}
-                  onClick={() => setIsHiredModalOpen(true)}
+                  onClick={() => openHiredModal(req.id)}
                 >
                   Choose Request | I Hired Professional
                 </div>
@@ -106,7 +111,7 @@ const PlaceNewRequest = () => {
       {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
 
       {isHiredModalOpen && (
-        <HiredProfessional closeModal={() => setIsHiredModalOpen(false)} />
+        <HiredProfessional closeModal={() => setIsHiredModalOpen(false)} serviceId={selectedServiceId}/>
       )}
     </div>
   );

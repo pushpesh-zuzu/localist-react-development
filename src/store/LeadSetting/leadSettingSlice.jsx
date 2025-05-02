@@ -618,7 +618,59 @@ export const getleadPreferencesList = (serviceId) => {
            return response.data
         }
       } catch (error) {
-        //   dispatch(setAuthError(error?.response?.data?.message));
+      showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  } 
+
+  export const getAddSumbitLeadDataApi = (AddSubmitLeadData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/submit-leads`, AddSubmitLeadData);
+  
+        if (response) {
+          dispatch(setGetHiredLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const getBuyerActivitiesApi = (ActivitiesData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/buyer-activities`, ActivitiesData);
+  
+        if (response) {
+          dispatch(setGetHiredLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const getBuyerViewProfieApi = (buyerProfileData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/buyer-view-profile`, buyerProfileData);
+  
+        if (response) {
+          dispatch(setGetHiredLeadsData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
       } finally {
         dispatch(setSevenDaysAutobidLoader(false));
       }

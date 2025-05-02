@@ -53,7 +53,7 @@ phone:""
     miles2: "1",
 
   },
-  authToken:null,
+  authToken:JSON.parse(localStorage.getItem("registerTokens")) || null,
   
 };
 export const getPopularServiceList = () => {
@@ -257,6 +257,7 @@ state.pendingLoader = action.payload;
       }
       else{
         state.authToken=action.payload;
+        localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
       }
     },
     clearAuthToken(state) {

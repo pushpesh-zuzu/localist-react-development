@@ -13,12 +13,13 @@ import {
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug, showToast } from "../../../utils";
-import { questionAnswerData } from "../../../store/Buyer/BuyerSlice";
+import { questionAnswerData, setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
   const [pincode, setPincode] = useState("");
+  const [city,setCity] = useState("")
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const SearchProfessionals = ({ nextStep }) => {
   });
   const [show, setShow] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
-
+console.log(city,"city")
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -104,13 +105,21 @@ const SearchProfessionals = ({ nextStep }) => {
             postalCode = component.long_name;
           }
         });
-
+        const cityName = place.address_components.find((component) =>
+          component.types.includes("locality")
+        )?.long_name;
+console.log(cityName,"cityName")
         if (postalCode) {
           setPincode(postalCode);
           inputRef.current.value = postalCode;
         } else {
           showToast("error", "No PIN code found! Please try again.");
         }
+        if (cityName) {
+          setCity(cityName);
+          dispatch(setcitySerach(cityName)) // <- set city state
+        }
+        
       });
     };
 
@@ -220,6 +229,7 @@ const SearchProfessionals = ({ nextStep }) => {
             serviceId={selectedServiceId?.id}
             serviceName={selectedServiceId.name}
             postcode={pincode}
+            // city={city}
           />
         </>
       )}

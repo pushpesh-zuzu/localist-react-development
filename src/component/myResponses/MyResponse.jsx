@@ -32,6 +32,7 @@ const handleProfieView = (item) => {
 
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
+    dispatch(getPendingLeadDataApi({ user_id }))
   }, [dispatch, user_id]);
 
   const handlePendingApi = () => {

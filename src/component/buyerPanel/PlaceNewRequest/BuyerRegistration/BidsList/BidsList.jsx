@@ -631,6 +631,7 @@ import {
   getAddManualBidData,
   getAddMultipleManualBidData,
   getAutoBid,
+  getBuyerViewProfieApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -779,6 +780,20 @@ const BidsList = ({ previousStep }) => {
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
+  const hanleViewProfile = (seller) => {
+    const data = {
+      user_id:userToken?.remember_tokens
+      ? userToken?.remember_tokens
+      : registerData?.remember_tokens,
+      seller_id:seller?.id,
+      lead_id:requestId
+    }
+    dispatch(getBuyerViewProfieApi(data)).then((result) => {
+      if(result){
+        showToast("success",result?.message)
+      }
+    })
+  }
 
   const handleSeeMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
@@ -984,8 +999,9 @@ const BidsList = ({ previousStep }) => {
 
                         <div className={styles.quickToRespondWrapper}>
                           <Link
-                            to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
+                            // to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
                             className={styles.profileLink}
+                            onClick={() =>hanleViewProfile(seller)}
                           >
                             View Profile →
                           </Link>

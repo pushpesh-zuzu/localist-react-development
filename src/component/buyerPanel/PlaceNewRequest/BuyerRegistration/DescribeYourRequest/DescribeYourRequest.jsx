@@ -71,10 +71,10 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const handleSubmit = () => {
     let hasError = false;
 
-    // if (text.trim() === "") {
-    //   setTextError(true);
-    //   hasError = true;
-    // }
+    if (text.trim() === "") {
+      setTextError(true);
+      hasError = true;
+    }
 
     // if (files.length === 0) {
     //   setFileError(true);

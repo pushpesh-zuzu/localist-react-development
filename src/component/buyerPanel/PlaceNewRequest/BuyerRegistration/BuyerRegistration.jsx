@@ -270,6 +270,7 @@ const BuyerRegistration = ({
   serviceId,
   serviceName,
   postcode,
+  city
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
@@ -277,12 +278,12 @@ const BuyerRegistration = ({
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  const { userToken } = useSelector((state) => state.auth);
+  const { userToken,adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader,authToken } = useSelector(
     (state) => state.findJobs
   );
   console.log(registerData, "registerData");
-  const isAdminOrRemembered = authToken ||  userToken?.remember_tokens;
+  const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered 
     ? [2, 3, 6, 7, 8]
@@ -369,6 +370,7 @@ const BuyerRegistration = ({
             loading={questionLoader}
             setShowConfirmModal={setShowConfirmModal}
             formData={buyerRequest}
+            
           />
         )}
 

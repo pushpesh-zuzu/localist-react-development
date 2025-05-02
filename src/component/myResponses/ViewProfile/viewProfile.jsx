@@ -4,7 +4,7 @@ import styles from "./viewProfile.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
-import { getAddHiredLeadDataApi, getLeadProfileRequestList } from "../../../store/LeadSetting/leadSettingSlice";
+import { getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const ViewProfile = () => {
     const navigate = useNavigate()
@@ -12,23 +12,26 @@ const ViewProfile = () => {
     const dispatch = useDispatch()
     const { profileLeadViewData, autobidLoader } = useSelector((state) => state.leadSetting)
     const { userToken } = useSelector((state) => state.auth);
+    const { registerData } = useSelector((state) => state.findJobs);
     const [status, setStatus] = useState("pending")
     const [activeTab, setActiveTab] = useState("tab1")
     const handleBack = () => {
         navigate("/lead/save-later")
     }
+    console.log(profileId?.profileId,"profileId")
     useEffect(() => {
         const data = {
             customer_id: profileId
         }
         dispatch(getLeadProfileRequestList(data))
-        // const addHiredData = {
-        //     lead_id:1,
-        //     status_type:"pending",
-        //     user_id:userToken?.remember_tokens
-        // }
-        // dispatch(getAddHiredLeadDataApi(addHiredData))
     }, [])
+    useEffect(()=>{
+        const activityData= {
+            buyer_id:profileId?.profileId,
+            user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens 
+        }
+        dispatch(getBuyerActivitiesApi(activityData))
+    },[])
     const handleStatusChange = (e) => {
         const selectedStatus = e.target.value.toLowerCase(); // ensure lowercase
         setStatus(selectedStatus);
@@ -68,37 +71,11 @@ const ViewProfile = () => {
                             <h1 className={styles.heading}>
 
                             </h1>
-                            {/* <div className={styles.tabs}>
-            <button className={styles.activeTab} onClick={handleBack}>Your matches</button>
-            <button className={styles.tab}>Replies</button>
-          </div> */}
+                    
                         </div>
-                        {/* <div className={styles.backBtnWrapper}>
-          <button className={styles.backBtn} onClick={handleBack}>Back</button>
-        </div> */}
+                 
                     </div>
-
-                    {/* <div className={styles.filters}>
-        <select>
-          <option>All ratings</option>
-        </select>
-        <select>
-          <option>All locations</option>
-        </select>
-        <select>
-          <option>All response times</option>
-        </select>
-       
-
-        <select className={styles.sortDropdown}>
-          <option>Sort by: best match</option>
-        </select>
-      </div> */}
-                    {/* 
-      <div className={styles.recommendBar}>
-        <span>Recommended:</span> Request replies from your{" "}
-        <strong>top matches</strong> to hear back faster
-      </div> */}
+                 
                     {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
                         {/* {profileLeadViewData?.map((item) => ( */}
                         <div className={styles.card} key={profileLeadViewData.id}>
@@ -176,9 +153,7 @@ const ViewProfile = () => {
                                     </div>
                                 </div>
 
-                                {/* <div className={styles.replyBtnWrapper}>
-              <button className={styles.replyBtn}>Request reply</button>
-            </div> */}
+                      
                             </div>
                                 </div>
                             <div className={styles.customTabs}>
@@ -203,8 +178,6 @@ const ViewProfile = () => {
     <p>This is the content for Tab 2.</p>
   )}
 </div>
-                        {/* )) */}
-                        {/* } */}
                     </>}
                 </div>
             </>

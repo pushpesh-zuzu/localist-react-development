@@ -3,6 +3,7 @@ import axiosInstance from "../../Api/axiosInstance";
 import axios from "axios";
 import { setAuthToken, setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
 import { setToken, setUserToken } from "../Auth/authSlice";
+import { showToast } from "../../utils";
 
 const initialState = {
   questionLoader:false,
@@ -12,6 +13,7 @@ const initialState = {
   profileImageLoader:false,
   changePasswordLoader:false,
   requestId:"",
+  citySerach:"",
   buyerRequest:{
     service_id:"",
     postcode:"",
@@ -91,7 +93,7 @@ export const createRequestData = (requestData) => {
         // navigate("/buyers/create");
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
+    // showToast("error", error?.message)
     } finally {
       dispatch(setCreateRequesLoader(false));
     }
@@ -406,10 +408,13 @@ const buyerSlice = createSlice({
     setVerifyPhoneNumberLoader(state,action) {
       state.verifyPhoneNumberLoader = action.payload
     },
+    setcitySerach(state,action){
+      state.citySerach = action.payload
+    }
   
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

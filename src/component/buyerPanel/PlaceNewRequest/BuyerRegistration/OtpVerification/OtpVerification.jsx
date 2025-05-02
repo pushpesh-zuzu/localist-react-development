@@ -67,11 +67,11 @@ console.log(requestDataList?.phone,"requestDataList")
     dispatch(verifyPhoneNumberData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
+        nextStep();
       } else {
         showToast("error", result?.message || "OTP verification failed");
       }
     });
-    nextStep();
   };
   
 

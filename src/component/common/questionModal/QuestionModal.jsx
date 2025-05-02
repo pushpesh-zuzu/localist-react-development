@@ -20,11 +20,11 @@ const QuestionModal = ({
   setShowConfirmModal,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader,citySerach } = useSelector((state) => state.buyer);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  const { userToken } = useSelector((state) => state.auth);
+  const { userToken,adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
@@ -36,6 +36,7 @@ const QuestionModal = ({
       setCurrentQuestion(0);
     }
   }, [questions]);
+  console.log(citySerach,"citySerach")
 
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
@@ -106,14 +107,15 @@ const QuestionModal = ({
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      if (!userToken?.remember_tokens) {
+      if (!adminToken || !registerData?.remember_tokens) {
+      
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postcode);
-        formData?.append("city",buyerRequest?.city)
+        formData?.append("city",citySerach)
         formData.append("questions", JSON.stringify(updatedAnswers));
         formData.append("form_status", 1);
         // form_status: 1,
@@ -121,6 +123,7 @@ const QuestionModal = ({
 
         dispatch(createRequestData(formData)).then((result) => {
           if (result?.success) {
+            
             showToast("succes", result?.success);
           }
           nextStep();
