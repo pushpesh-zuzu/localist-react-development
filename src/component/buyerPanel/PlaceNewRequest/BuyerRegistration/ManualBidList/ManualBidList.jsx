@@ -4,17 +4,20 @@ import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
-import { getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
+import { getAutoBidData, getBuyerViewProfieApi } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
-import { BASE_IMAGE_URL } from "../../../../../utils";
+import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
 
 const ManualBidList = () => {
   const dispatch = useDispatch()
   const { requestId } = useParams()
   const { autoBidListData, autobidLoader } = useSelector((state) => state.leadSetting)
   const { userToken } = useSelector((state) => state.auth);
+   const {  registerData } = useSelector(
+      (state) => state.findJobs
+    );
   const navigate = useNavigate()
   const webData = autoBidListData?.map(item => item?.service_name) || [];
 
@@ -28,6 +31,21 @@ const ManualBidList = () => {
     }
     dispatch(getAutoBidData(data))
   }, [])
+  const handleReply = (item) => {
+    console.log(item,"item")
+    const viewProfileData = {
+      user_id:userToken?.remember_tokens
+      ? userToken?.remember_tokens
+      : registerData?.remember_tokens,
+      seller_id:item?.id,
+      lead_id:requestId
+    }
+    dispatch(getBuyerViewProfieApi(viewProfileData)).then((result) => {
+          if(result){
+            showToast("success",result?.message)
+          }
+        })
+  }
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
@@ -112,7 +130,7 @@ const ManualBidList = () => {
                 </p>
 
                 <div className={styles.quickToRespondWrapper}>
-                  <a href="#" className={styles.profileLink}>
+                  <a href="#" className={styles.profileLink} onClick={() => handleReply(item)}>
                     View Profile →
                   </a>
 
