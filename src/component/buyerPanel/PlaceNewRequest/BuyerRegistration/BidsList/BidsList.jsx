@@ -621,6 +621,7 @@
 // };
 
 // export default BidsList;
+
 import React, { useEffect, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
@@ -631,6 +632,7 @@ import {
   getAddManualBidData,
   getAddMultipleManualBidData,
   getAutoBid,
+  getBuyerSortByLocationApi,
   getBuyerViewProfieApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
@@ -780,6 +782,7 @@ const BidsList = ({ previousStep }) => {
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
+  
   const hanleViewProfile = (seller) => {
     const data = {
       user_id:userToken?.remember_tokens
@@ -859,6 +862,15 @@ const BidsList = ({ previousStep }) => {
       }
     });
   };
+  const handelChangeSort = (e) => {
+const selectedOption = e.target.value
+
+const sortData = {
+  lead_id:requestId,
+  distance_order: selectedOption
+}
+dispatch(getBuyerSortByLocationApi(sortData))
+  }
 
   return (
     <>
@@ -906,9 +918,11 @@ const BidsList = ({ previousStep }) => {
                 <option>All ratings</option>
                 <option></option>
               </select>
-              <select>
-                <option>Farthest to Nearest</option>
-                <option>Nearest to Farthest </option>
+              <select onChange={handelChangeSort} defaultValue={""}>
+              <option value="" disabled>Sort by Location</option>
+
+                <option value="farthest to nearest">Farthest to Nearest</option>
+                <option value="nearest to farthest">Nearest to Farthest </option>
 
               </select>
               <select>

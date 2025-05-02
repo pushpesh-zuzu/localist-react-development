@@ -71,6 +71,16 @@
   align-items: center;
   justify-content: center;
 }
+.profile_view {
+  display: flex;
+  justify-content: space-between;
+}
+.profile_view p {
+  background-color: #aac9d2;
+  padding: 4px;
+  color: white;
+  border-radius: 2px;
+}
 
 .details h3 {
   margin: 0;

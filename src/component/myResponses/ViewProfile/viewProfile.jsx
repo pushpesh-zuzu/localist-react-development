@@ -5,12 +5,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import { getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList } from "../../../store/LeadSetting/leadSettingSlice";
+import moment from "moment"
 
 const ViewProfile = () => {
     const navigate = useNavigate()
     const profileId = useParams()
     const dispatch = useDispatch()
-    const { profileLeadViewData, autobidLoader } = useSelector((state) => state.leadSetting)
+    const { profileLeadViewData, autobidLoader,getActivies } = useSelector((state) => state.leadSetting)
     const { userToken } = useSelector((state) => state.auth);
     const { registerData } = useSelector((state) => state.findJobs);
     const [status, setStatus] = useState("pending")
@@ -18,7 +19,7 @@ const ViewProfile = () => {
     const handleBack = () => {
         navigate("/lead/save-later")
     }
-    console.log(profileId?.profileId,"profileId")
+    console.log(getActivies,profileLeadViewData,"profileId")
     useEffect(() => {
         const data = {
             customer_id: profileId
@@ -163,17 +164,30 @@ const ViewProfile = () => {
 >
   Activity
 </button>
-<button
+{/* <button
   className={`${styles.tabButton} ${activeTab === "tab2" ? styles.activeTab : ""}`}
   onClick={() => setActiveTab("tab2")}
 >
   Tab 2
-</button>
+</button> */}
 </div>
 
 <div className={styles.tabContent}>
   {activeTab === "tab1" ? (
-    <p>This is the content for Tab 1.</p>
+    // <p>This is the content for Tab 1.</p>
+    <>
+    {getActivies?.map((item) => {
+return(<>
+<div className={styles.activeCard}>
+    <div className={styles.activeBox}>
+        <p>{profileLeadViewData?.name}</p>
+<p>{item?.activity_name}</p>
+</div>
+<p>{moment(item?.created_at).format("hh:mm")}</p>
+</div>
+</>)
+    })}
+    </>
   ) : (
     <p>This is the content for Tab 2.</p>
   )}

@@ -29,7 +29,7 @@ const handleProfieView = (item) => {
   navigate(`/pending/view-profile/${item?.customer_id}`)
 }
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
-
+console.log(getPendingLeadList,"getPendingLeadList")
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
     dispatch(getPendingLeadDataApi({ user_id }))
@@ -133,6 +133,10 @@ const handleProfieView = (item) => {
                 </span>
               </div>
             </div>
+         {item?.profile_view && item?.profile_view_time &&  <div className={styles.profile_view}>
+            <p>{item?.profile_view}</p>
+            <p>{item?.profile_view_time}</p>
+            </div>}
           </div>
 
           <div className={styles.jobDetails}>

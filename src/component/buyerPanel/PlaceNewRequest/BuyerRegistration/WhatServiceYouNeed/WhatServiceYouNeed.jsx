@@ -10,6 +10,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import {
   questionAnswerData,
   setbuyerRequestData,
+  setcitySerach,
 } from "../../../../../store/Buyer/BuyerSlice";
 
 const WhatServiceYouNeed = ({
@@ -30,6 +31,7 @@ const { userToken } = useSelector((state)=> state.auth)
   const { searchServiceLoader, service,registerData } = useSelector(
     (state) => state.findJobs
   );
+  const { citySerach } = useSelector((state)=> state.buyer)
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   console.log(serviceName, serviceId, "prem");
@@ -42,7 +44,7 @@ const { userToken } = useSelector((state)=> state.auth)
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
-
+  console.log(citySerach,"cityName")
   // useEffect(() => {
   //   if (serviceName && serviceId) {
   //     setInput(serviceName);
@@ -90,7 +92,7 @@ const { userToken } = useSelector((state)=> state.auth)
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
-          city:city
+          city:citySerach
         })
       );
       dispatch(
@@ -98,7 +100,7 @@ const { userToken } = useSelector((state)=> state.auth)
       );
       nextStep();
     }
-  }, [selectedService, pincode, dispatch, serviceId,city, nextStep]);
+  }, [selectedService, pincode, dispatch, serviceId,citySerach, nextStep]);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -138,7 +140,7 @@ const { userToken } = useSelector((state)=> state.auth)
         component.types.includes("locality")
       )?.long_name;
       const formattedAddress = place.formatted_address;
-  console.log(cityName,"cityName")
+  
       if (postalCode) {
         setPincode(postalCode);
         inputRef.current.value = postalCode;
@@ -146,7 +148,8 @@ const { userToken } = useSelector((state)=> state.auth)
       }
   
       if (cityName) {
-        setCity(cityName); // <- set city state
+        setCity(cityName); 
+        dispatch(setcitySerach(cityName))// <- set city state
       }
   
       if (!postalCode && !cityName) {
@@ -218,7 +221,7 @@ const { userToken } = useSelector((state)=> state.auth)
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
-          city:city
+          city:citySerach
         })
       );
     } else{

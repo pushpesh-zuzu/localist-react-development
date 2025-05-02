@@ -11,7 +11,7 @@ const ViewYourMatches = ({
   previousStep,
   setShowConfirmModal,
 }) => {
-  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader,citySerach } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [consent, setConsent] = useState(false);
@@ -37,7 +37,8 @@ const ViewYourMatches = ({
     const formData = new FormData();
     formData.append("service_id", buyerRequest?.service_id);
     formData.append("postcode", buyerRequest?.postcode);
-    formData.append("city",buyerRequest?.city);
+    // formData.append("city",buyerRequest?.city);
+    formData?.append("city",citySerach)
     formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
     formData.append("recevive_online", consent ? 1 : 0);
