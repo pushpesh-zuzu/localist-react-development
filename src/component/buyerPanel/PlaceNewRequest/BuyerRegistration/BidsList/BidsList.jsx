@@ -657,8 +657,9 @@ const BidsList = ({ previousStep }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
+  const matchingLength = autoBidList?.map((item)=> item?.sellers?.length)
   const [selectedSellers, setSelectedSellers] = useState([]);
-
+console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
 
@@ -931,7 +932,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 <option>Shortest to Longest</option>
               </select>
               <span className={styles.matchCount}>
-                {autoBidList?.length} matches
+                {matchingLength} matches
               </span>
               <select className={styles.sortDropdown}>
                 <option>Sort by: best match</option>
@@ -956,7 +957,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 Request your best matches here
               </button>
             </div>
-            {autoBidList?.length === 0 ? (
+            {autoBidList?.every(item => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
                 <h1 className={styles.noBidText}>No seller available</h1>
               </div>
@@ -1074,6 +1075,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 ))
               )
             )}
+            
 
             <CustomModal
               isOpen={isModalOpen}

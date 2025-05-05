@@ -26,7 +26,7 @@ const MyResponse = () => {
   );
 const handleProfieView = (item) => {
   console.log(item,"item")
-  navigate(`/pending/view-profile/${item?.customer_id}`)
+  navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`)
 }
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
 console.log(getPendingLeadList,"getPendingLeadList")
@@ -39,7 +39,7 @@ console.log(getPendingLeadList,"getPendingLeadList")
     setSelectedTab("pending");
     dispatch(getPendingLeadDataApi({ user_id })).then((result) => {
       if(result.success){
-        showToast("success",result?.message)
+        // showToast("success",result?.message)
       }
     });
   };
@@ -47,7 +47,7 @@ console.log(getPendingLeadList,"getPendingLeadList")
     setSelectedTab("hired")
     dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
       if(result.success){
-        showToast("success",result?.message)
+        // showToast("success",result?.message)
       }
     });
   }

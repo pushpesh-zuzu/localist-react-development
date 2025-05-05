@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { BASE_IMAGE_URL, showToast } from "../../../utils";
 import styles from "./viewProfile.module.css"
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import { getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList } from "../../../store/LeadSetting/leadSettingSlice";
@@ -11,7 +11,10 @@ const ViewProfile = () => {
     const navigate = useNavigate()
     const profileId = useParams()
     const dispatch = useDispatch()
-    const { profileLeadViewData, autobidLoader,getActivies } = useSelector((state) => state.leadSetting)
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search)
+    const id = queryParams.get("id")
+    const { profileLeadViewData, autobidLoader, getActivies } = useSelector((state) => state.leadSetting)
     const { userToken } = useSelector((state) => state.auth);
     const { registerData } = useSelector((state) => state.findJobs);
     const [status, setStatus] = useState("pending")
@@ -19,20 +22,21 @@ const ViewProfile = () => {
     const handleBack = () => {
         navigate("/lead/save-later")
     }
-    console.log(getActivies,profileLeadViewData,"profileId")
+    console.log(id, profileLeadViewData?.leads?.status, "profileId")
     useEffect(() => {
         const data = {
-            customer_id: profileId
+            customer_id: profileId?.profileId,
+            lead_id: id
         }
         dispatch(getLeadProfileRequestList(data))
     }, [])
-    useEffect(()=>{
-        const activityData= {
-            buyer_id:profileId?.profileId,
-            user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens 
+    useEffect(() => {
+        const activityData = {
+            buyer_id: profileId?.profileId,
+            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
         }
         dispatch(getBuyerActivitiesApi(activityData))
-    },[])
+    }, [])
     const handleStatusChange = (e) => {
         const selectedStatus = e.target.value.toLowerCase(); // ensure lowercase
         setStatus(selectedStatus);
@@ -44,8 +48,8 @@ const ViewProfile = () => {
         };
 
         if (addHiredData.lead_id) {
-            dispatch(getAddHiredLeadDataApi(addHiredData)).then((result)=>{
-                if(result){
+            dispatch(getAddHiredLeadDataApi(addHiredData)).then((result) => {
+                if (result) {
                     showToast("success", result?.message)
                 }
             });
@@ -59,9 +63,22 @@ const ViewProfile = () => {
                     <div className={styles.headerWrapper}>
                         <div className={styles.mainSlectBox}>
                             <button className={styles.backBtn} onClick={handleBack}>Back</button>
-                            <div>
+                            {/* <div>
                                 <span className={styles.currentStatusText}>Current Status</span>
                                 <select className={styles.selectBox} value={status} onChange={handleStatusChange}>
+                                    <option value="pending">Pending</option>
+                                    <option value="hired">Hired</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div> */}
+                            <div>
+                                <span className={styles.currentStatusText}>Current Status</span>
+                                <select
+                                    className={styles.selectBox}
+                                    value={profileLeadViewData?.leads?.status || status}
+                                    onChange={handleStatusChange}
+                                    disabled={profileLeadViewData?.leads?.status === "hired"}
+                                >
                                     <option value="pending">Pending</option>
                                     <option value="hired">Hired</option>
                                     <option value="rejected">Rejected</option>
@@ -72,11 +89,11 @@ const ViewProfile = () => {
                             <h1 className={styles.heading}>
 
                             </h1>
-                    
+
                         </div>
-                 
+
                     </div>
-                 
+
                     {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
                         {/* {profileLeadViewData?.map((item) => ( */}
                         <div className={styles.card} key={profileLeadViewData.id}>
@@ -154,44 +171,44 @@ const ViewProfile = () => {
                                     </div>
                                 </div>
 
-                      
+
                             </div>
-                                </div>
-                            <div className={styles.customTabs}>
+                        </div>
+                        <div className={styles.customTabs}>
                             <button
-  className={`${styles.tabButton} ${activeTab === "tab1" ? styles.activeTab : ""}`}
-  onClick={() => setActiveTab("tab1")}
->
-  Activity
-</button>
-{/* <button
+                                className={`${styles.tabButton} ${activeTab === "tab1" ? styles.activeTab : ""}`}
+                                onClick={() => setActiveTab("tab1")}
+                            >
+                                Activity
+                            </button>
+                            {/* <button
   className={`${styles.tabButton} ${activeTab === "tab2" ? styles.activeTab : ""}`}
   onClick={() => setActiveTab("tab2")}
 >
   Tab 2
 </button> */}
-</div>
+                        </div>
 
-<div className={styles.tabContent}>
-  {activeTab === "tab1" ? (
-    // <p>This is the content for Tab 1.</p>
-    <>
-    {getActivies?.map((item) => {
-return(<>
-<div className={styles.activeCard}>
-    <div className={styles.activeBox}>
-        <p>{profileLeadViewData?.name}</p>
-<p>{item?.activity_name}</p>
-</div>
-<p>{moment(item?.created_at).format("hh:mm")}</p>
-</div>
-</>)
-    })}
-    </>
-  ) : (
-    <p>This is the content for Tab 2.</p>
-  )}
-</div>
+                        <div className={styles.tabContent}>
+                            {activeTab === "tab1" ? (
+                                // <p>This is the content for Tab 1.</p>
+                                <>
+                                    {getActivies?.map((item) => {
+                                        return (<>
+                                            <div className={styles.activeCard}>
+                                                <div className={styles.activeBox}>
+                                                    <p>{profileLeadViewData?.name}</p>
+                                                    <p>{item?.activity_name}</p>
+                                                </div>
+                                                <p>{moment(item?.created_at).format("hh:mm")}</p>
+                                            </div>
+                                        </>)
+                                    })}
+                                </>
+                            ) : (
+                                <p>This is the content for Tab 2.</p>
+                            )}
+                        </div>
                     </>}
                 </div>
             </>

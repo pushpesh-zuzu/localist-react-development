@@ -19,7 +19,7 @@ const PlaceNewRequest = () => {
   const { buyerRequestList, buyerrequestListLoader } = useSelector(
     (state) => state.buyer
   );
-
+console.log("buyerRequestList",buyerRequestList)
   useEffect(() => {
     dispatch(getbuyerrequestList());
   }, []);
@@ -79,12 +79,12 @@ const PlaceNewRequest = () => {
                     View Request
                   </button>
                 </div>
-                <div
+              {req?.status === "hired" ? "" :  <div
                   className={styles.tags}
                   onClick={() => openHiredModal(req.id)}
                 >
                   Choose Request | I Hired Professional
-                </div>
+                </div>}
               </div>
             ))}
         </div>

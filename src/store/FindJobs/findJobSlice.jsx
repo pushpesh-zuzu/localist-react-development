@@ -257,7 +257,7 @@ state.pendingLoader = action.payload;
       }
       else{
         state.authToken=action.payload;
-        localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
+        // localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
       }
     },
     clearAuthToken(state) {

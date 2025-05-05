@@ -47,39 +47,25 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
     };
   }, [dispatch]);
 
-  // States to manage selected filters
-  // const [filters, setFilters] = useState({
-  //   keyword: "",
-  //   unread: false,
-  //   leadSpotlights: [],
-  //   buyerActions: [],
-  //   submittedWhen: "",
-  //   selectedServices: [],
-  //   location: "",
-  //   credits: [],
-  //   contactPreferences: [],
-  // });
-
   // const handleCheckboxChange = (key, value) => {
-  //   dispatch(setFilters((prev) => {
-  //     const list = prev[key];
-  //     return {
-  //       ...prev,
-  //       [key]: list.includes(value)
-  //         ? list.filter((item) => item !== value)
-  //         : [...list, value],
-  //     };
-  //   }));
+  //   // Create a copy of the current filters
+  //   const updatedFilters = { ...filters };
+    
+  //   // If the array doesn't exist yet, initialize it
+  //   if (!Array.isArray(updatedFilters[key])) {
+  //     updatedFilters[key] = [];
+  //   }
+    
+  //   // Toggle the value in the array
+  //   if (updatedFilters[key].includes(value)) {
+  //     updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+  //   } else {
+  //     updatedFilters[key] = [...updatedFilters[key], value];
+  //   }
+    
+  //   // Update the filters
+  //   dispatch(setFilters(updatedFilters));
   // };
-
-  // const handleRadioChange = (key, value) => {
-  //  dispatch(setFilters((prev) => ({ ...prev, [key]: value })));
-  // };
-
-  // const handleInputChange = (key, value) => {
-  //  dispatch(setFilters((prev) => ({ ...prev, [key]: value })));
-  // };
-
   const handleCheckboxChange = (key, value) => {
     // Create a copy of the current filters
     const updatedFilters = { ...filters };
@@ -89,11 +75,48 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
       updatedFilters[key] = [];
     }
     
-    // Toggle the value in the array
-    if (updatedFilters[key].includes(value)) {
-      updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+    // Special handling for "All lead spotlights"
+    if (key === "leadSpotlights" && value === "All lead spotlights") {
+      if (updatedFilters[key].includes(value)) {
+        // If "All lead spotlights" is already selected, deselect everything
+        updatedFilters[key] = [];
+      } else {
+        // If "All lead spotlights" is not selected, select everything
+        updatedFilters[key] = filterListData[0]?.leadSpotlights?.map(item => item.spotlight) || [];
+      }
+    } else if (key === "leadSpotlights") {
+      // For individual spotlight items
+      if (updatedFilters[key].includes(value)) {
+        // Remove this value from selection
+        updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+        
+        // Also remove "All lead spotlights" if it's selected
+        updatedFilters[key] = updatedFilters[key].filter(item => item !== "All lead spotlights");
+      } else {
+        // Add this value to selection
+        updatedFilters[key] = [...updatedFilters[key], value];
+        
+        // Check if all individual spotlights are now selected
+        const allSpotlightsExceptAll = filterListData[0]?.leadSpotlights
+          ?.filter(item => item.spotlight !== "All lead spotlights")
+          ?.map(item => item.spotlight) || [];
+        
+        const allSelected = allSpotlightsExceptAll.every(spotlight => 
+          updatedFilters[key].includes(spotlight) || spotlight === value
+        );
+        
+        // If all individual spotlights are selected, also select "All lead spotlights"
+        if (allSelected && !updatedFilters[key].includes("All lead spotlights")) {
+          updatedFilters[key].push("All lead spotlights");
+        }
+      }
     } else {
-      updatedFilters[key] = [...updatedFilters[key], value];
+      // Original logic for other filter types
+      if (updatedFilters[key].includes(value)) {
+        updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+      } else {
+        updatedFilters[key] = [...updatedFilters[key], value];
+      }
     }
     
     // Update the filters
@@ -141,17 +164,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
         showToast("success", result?.message);
       }
       onClose();
-      // setFilters({
-      //   keyword: "",
-      //   submittedWhen: "",
-      //   location: "",
-      //   selectedServices: [],
-      //   credits: [],
-      //   contactPreferences: [],
-      //   leadSpotlights: [],
-      //   buyerActions: [],
-      //   unread: false,
-      // });
+     
     });
   };
 
@@ -202,77 +215,46 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
           </AccordionSection>
 
           {/* View */}
-          <AccordionSection title="View">
-            <label>
-              <input
-                type="checkbox"
-                className={styles.checkboxInput}
-                checked={filters.unread}
-                onChange={() => handleInputChange("unread", !filters.unread)}
-              />{" "}
-              Unread ({unReadData})
-            </label>
-          </AccordionSection>
-          {/* <AccordionSection title={"Lead spotlights"}>
-          {filterListData?.[0]?.leadSpotlights?.slice(0)?.map((item) => (
-              <div key={item.spotlight}>
-                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <input
-                    type="checkbox"
-                    checked={filters.leadSpotlights.includes(item.spotlight)}
-                    onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
-                  />
-                  {item.spotlight} ({item.count})
-                </label>
-              </div>
-            ))}
-            {filterListData?.[0]?.leadSpotlights?.slice(1)?.map((item) => (
-              <div key={item.spotlight}>
-                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <input
-                    type="checkbox"
-                    checked={filters.leadSpotlights.includes(item.spotlight)}
-                    onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
-                  />
-                  {item.spotlight} ({item.count})
-                </label>
-              </div>
-            ))}
-          </AccordionSection> */}
-
+        
 <AccordionSection title={"Lead spotlights"}>
+  {/* Make sure the first item is "All lead spotlights" */}
   {filterListData?.[0]?.leadSpotlights?.length > 0 && (
     <>
-      {/* Display the first item separately */}
-      <div key={filterListData[0].leadSpotlights[0]?.spotlight}>
-        <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "bold",color:"#000000" }}>
+      {/* Display "All lead spotlights" option first */}
+      <div>
+        <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "bold", color: "#000000" }}>
           <input
             type="checkbox"
-            checked={filters.leadSpotlights.includes(filterListData[0].leadSpotlights[0]?.spotlight)}
-            onChange={() => handleCheckboxChange("leadSpotlights", filterListData[0].leadSpotlights[0]?.spotlight)}
+            checked={filters.leadSpotlights.includes("All lead spotlights")}
+            onChange={() => handleCheckboxChange("leadSpotlights", "All lead spotlights")}
           />
-          {filterListData[0].leadSpotlights[0]?.spotlight} ({filterListData[0].leadSpotlights[0]?.count})
+          All lead spotlights ({filterListData[0]?.leadSpotlights?.reduce((total, item) => 
+            item.spotlight !== "All lead spotlights" ? total + item.count : total, 0)})
         </label>
       </div>
       
-      {/* Display the rest of the items */}
-      <div style={{ marginTop: "4px",marginLeft:"8px" }}>
-        {filterListData[0].leadSpotlights.slice(1).map((item) => (
-          <div key={item.spotlight}>
-            <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <input
-                type="checkbox"
-                checked={filters.leadSpotlights.includes(item.spotlight)}
-                onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
-              />
-              {item.spotlight} ({item.count})
-            </label>
-          </div>
-        ))}
+      {/* Display all other spotlight options */}
+      <div style={{ marginLeft: "8px", marginTop: "4px" }}>
+        {filterListData?.[0]?.leadSpotlights
+          ?.filter(item => item.spotlight !== "All lead spotlights")
+          ?.map((item) => (
+            <div key={item.spotlight}>
+              <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <input
+                  type="checkbox"
+                  checked={filters.leadSpotlights.includes(item.spotlight)}
+                  onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
+                />
+                {item.spotlight} ({item.count})
+              </label>
+            </div>
+          ))}
       </div>
     </>
   )}
 </AccordionSection>
+
+
           {/* Actions buyer has taken */}
 
 

@@ -62,6 +62,7 @@ import styles from "./HiredProfessional.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getAddSumbitLeadDataApi, getAutoBid, getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../../utils";
+import { getbuyerrequestList } from "../../../../../store/Buyer/BuyerSlice";
 
 const HiredProfessional = ({ closeModal,serviceId }) => {
   const [options, setOptions] = useState([]);
@@ -121,6 +122,7 @@ console.log(options,"options")
       if(result){
         showToast("success", result?.message)
         closeModal();
+        dispatch(getbuyerrequestList());
       }
     });
   };
