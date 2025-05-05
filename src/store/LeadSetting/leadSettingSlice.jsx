@@ -694,6 +694,23 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const sellerResponseStatusApi = (sellerResponseStatusData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/response-status`, sellerResponseStatusData);
+  
+        if (response) {
+          // dispatch(setAutoBidData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
 
 const leadSettingSlice = createSlice({
   name: "leadSetting",

@@ -4,7 +4,7 @@ import styles from "./viewProfile.module.css"
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
-import { getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList } from "../../../store/LeadSetting/leadSettingSlice";
+import { getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList, sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import moment from "moment"
 
 const ViewProfile = () => {
@@ -19,6 +19,11 @@ const ViewProfile = () => {
     const { registerData } = useSelector((state) => state.findJobs);
     const [status, setStatus] = useState("pending")
     const [activeTab, setActiveTab] = useState("tab1")
+    const user = {
+        phoneNumber: "918123456789",
+        email: "test@example.com"
+      };
+      
     const handleBack = () => {
         navigate("/lead/save-later")
     }
@@ -55,6 +60,21 @@ const ViewProfile = () => {
             });
         }
     };
+
+    const handleResponseChange = (clickName) => {
+        const responseStatus = {
+            lead_id:profileLeadViewData?.leads?.id,
+            seller_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+            buyer_id:profileLeadViewData?.id,
+            status:"clicked",
+            clicked_name:clickName
+        }
+        dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
+            if(result){
+                showToast("success",result?.message)
+            }
+        })
+    }
     return (
         <>
             <>
@@ -96,7 +116,7 @@ const ViewProfile = () => {
 
                     {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
                         {/* {profileLeadViewData?.map((item) => ( */}
-                        <div className={styles.card} key={profileLeadViewData.id}>
+                        <div className={styles.card} key={profileLeadViewData?.id}>
                             <div className={styles.cardLeft}>
                                 <div className={styles.imageWrapper}>
                                     <img
@@ -119,7 +139,7 @@ const ViewProfile = () => {
                                             </h3>
                                             <p>
                                                 {/* <img src={AutoBidLocationIcon} alt="" /> */}
-                                                {profileLeadViewData.email}
+                                                {profileLeadViewData?.email}
                                             </p>
                                             <p>
                                                 {profileLeadViewData?.phone}
@@ -138,15 +158,15 @@ const ViewProfile = () => {
                                         {/* <span>{profileLeadViewData.service_name}</span> */}
                                     </div>
 
-                                    {profileLeadViewData && profileLeadViewData.leads && profileLeadViewData.leads.questions ? (
+                                    {profileLeadViewData && profileLeadViewData?.leads && profileLeadViewData?.leads?.questions ? (
                                         <div className="space-y-4">
                                             {(() => {
                                                 try {
-                                                    const questionsData = JSON.parse(profileLeadViewData.leads.questions);
-                                                    return questionsData.map((item, index) => (
+                                                    const questionsData = JSON.parse(profileLeadViewData?.leads?.questions);
+                                                    return questionsData?.map((item, index) => (
                                                         <div key={index} className="mb-4">
-                                                            <p className={styles.viewQuestion}>{item.ques}</p>
-                                                            <p className={styles.viewQuestion}>{item.ans}</p>
+                                                            <p className={styles.viewQuestion}>{item?.ques}</p>
+                                                            <p className={styles.viewQuestion}>{item?.ans}</p>
                                                         </div>
                                                     ));
                                                 } catch (error) {
@@ -174,41 +194,70 @@ const ViewProfile = () => {
 
                             </div>
                         </div>
-                        <div className={styles.customTabs}>
-                            <button
-                                className={`${styles.tabButton} ${activeTab === "tab1" ? styles.activeTab : ""}`}
-                                onClick={() => setActiveTab("tab1")}
-                            >
-                                Activity
-                            </button>
-                            {/* <button
-  className={`${styles.tabButton} ${activeTab === "tab2" ? styles.activeTab : ""}`}
-  onClick={() => setActiveTab("tab2")}
->
-  Tab 2
-</button> */}
-                        </div>
+                        <div className={styles.btnBox}>
+  <button
+    className={styles.showNumberBtn}
+    onClick={() => {
+      handleResponseChange("call");
+      window.location.href = `tel:${user.phoneNumber}`;
+    }}
+  >
+    Show Number
+  </button>
 
-                        <div className={styles.tabContent}>
-                            {activeTab === "tab1" ? (
-                                // <p>This is the content for Tab 1.</p>
-                                <>
-                                    {getActivies?.map((item) => {
-                                        return (<>
-                                            <div className={styles.activeCard}>
-                                                <div className={styles.activeBox}>
-                                                    <p>{profileLeadViewData?.name}</p>
-                                                    <p>{item?.activity_name}</p>
-                                                </div>
-                                                <p>{moment(item?.created_at).format("hh:mm")}</p>
-                                            </div>
-                                        </>)
-                                    })}
-                                </>
-                            ) : (
-                                <p>This is the content for Tab 2.</p>
-                            )}
+  <button
+    className={styles.showNumberBtn}
+    onClick={() => {
+      handleResponseChange("whatsapp");
+      window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
+    }}
+  >
+    Send WhatsApp
+  </button>
+
+  <button
+    className={styles.showNumberBtn}
+    onClick={() => {
+      handleResponseChange("email");
+      window.location.href = `mailto:${user.email}`;
+    }}
+  >
+    Send Mail
+  </button>
+</div>
+
+
+<div className={styles.customTabs}>
+    <button
+        className={`${styles.tabButton} ${activeTab === "tab1" ? styles.activeTab : ""}`}
+        onClick={() => setActiveTab("tab1")}
+    >
+        Activity
+    </button>
+</div>
+
+<div className={styles.tabContent}>
+    {activeTab === "tab1" ? (
+        <>
+            {getActivies?.length > 0 ? (
+                getActivies.map((item) => (
+                    <div key={item.id} className={styles.activeCard}>
+                        <div className={styles.activeBox}>
+                            <p>{profileLeadViewData?.name}</p>
+                            <p>{item?.activity_name}</p>
                         </div>
+                        <p>{moment(item?.created_at).format("hh:mm")}</p>
+                    </div>
+                ))
+            ) : (
+                <p>No Data Available</p>
+            )}
+        </>
+    ) : (
+        <p>This is the content for Tab 2.</p>
+    )}
+</div>
+
                     </>}
                 </div>
             </>

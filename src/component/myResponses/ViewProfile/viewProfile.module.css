@@ -73,6 +73,17 @@
     vertical-align: middle;
     margin-top: 20px;
   }
+  .btnBox {
+    display: flex;
+    gap:12px
+  }
+  .showNumberBtn {
+    padding: 8px;
+    border: none;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-radius: 2px;
+  }
   
   .tab,
   .activeTab {
