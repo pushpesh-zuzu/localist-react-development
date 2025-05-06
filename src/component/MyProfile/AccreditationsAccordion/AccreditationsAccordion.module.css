@@ -1,0 +1,160 @@
+.container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.optional {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #00b6f0;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: #00b6f0;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin: 12px 0 20px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.logoSection {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 64px;
+  height: auto;
+}
+
+.accreditationList {
+  flex: 1;
+}
+
+.accreditationItem {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.addButton {
+  background-color: #00b6f0;
+  color: white;
+  border: none;
+  padding: 0 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.cancel {
+  background-color: #ccc;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.save {
+  background-color: #00b6f0;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
