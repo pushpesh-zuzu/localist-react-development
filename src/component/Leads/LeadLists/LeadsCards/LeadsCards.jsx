@@ -65,32 +65,9 @@ const LeadsCards = () => {
       dispatch(getLeadRequestList(data))
     });
   }
-  const handleViewProfile = (customer_id) => {
-    navigate(`/lead/profile-view/${customer_id}`)
+  const handleViewProfile = (item) => {
+    navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`)
   }
-  console.log(leadRequestList,"leadRequestList")
-  // const handleSaveLater =  (item) => {
-  //   setSaveLaterLoaderId(item.id);
-
-  //   const saveLaterData = {
-  //     seller_id: userToken?.remember_tokens || registerData?.remember_tokens,
-  //     lead_id: item?.id,
-  //     buyer_id: item?.customer_id,
-  //   };
-
-  //   try {
-  //     const result =  dispatch(saveForLaterApi(saveLaterData));
-  //     if (result.success) {
-  //       showToast("success", result?.message);
-  //     } else {
-  //       showToast("error", result?.message || "Failed to save for later.");
-  //     }
-  //   } catch (err) {
-  //     showToast("error", "Something went wrong.");
-  //   } finally {
-  //     setSaveLaterLoaderId(null); // Reset loader
-  //   }
-  // };
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);
 
@@ -163,7 +140,7 @@ const LeadsCards = () => {
                           {" "}
                           {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                         </div>
-                        <div className={styles.details} onClick={() => handleViewProfile(item?.customer_id)}>
+                        <div className={styles.details} onClick={() => handleViewProfile(item)}>
                           <h3>{item?.customer?.name}</h3>
                           <p>{item?.postcode}</p>
                         </div>

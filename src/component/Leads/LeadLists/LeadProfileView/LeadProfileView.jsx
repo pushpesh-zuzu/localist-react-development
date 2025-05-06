@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import styles from "./LeadProfileView.module.css"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { getLeadProfileRequestList } from "../../../../store/LeadSetting/leadSettingSlice"
 import DummyImage from "../../../../assets/Images/DummyImage.svg";
 import { BASE_IMAGE_URL } from "../../../../utils"
@@ -12,12 +12,16 @@ function LeadProfileData () {
     const { profileLeadViewData, autobidLoader } = useSelector((state) => state.leadSetting)
     const { userToken } = useSelector((state) => state.auth);
     const navigate = useNavigate()
+    const { search } = useLocation();
+    const queryParams = new URLSearchParams(search)
+    const id = queryParams.get("id")
     const handleBack = () => {
       navigate("/leads")
     }
     useEffect(()=>{
         const data = {
-            customer_id:profileId
+            customer_id:profileId,
+            lead_id:id
         }
         dispatch(getLeadProfileRequestList(data))
     },[])
@@ -64,7 +68,7 @@ function LeadProfileData () {
       </div> */}
       {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
         {/* {profileLeadViewData?.map((item) => ( */}
-          <div className={styles.card} key={profileLeadViewData.id}>
+          <div className={styles.card} key={profileLeadViewData?.id}>
             <div className={styles.cardLeft}>
               <div className={styles.imageWrapper}>
                 <img
@@ -87,7 +91,7 @@ function LeadProfileData () {
                     </h3>
                     <p>
                       {/* <img src={AutoBidLocationIcon} alt="" /> */}
-                      {profileLeadViewData.email}
+                      {profileLeadViewData?.email}
                     </p>
                     <p>
                       {profileLeadViewData?.phone}
@@ -110,11 +114,11 @@ function LeadProfileData () {
   <div className="space-y-4">
     {(() => {
       try {
-        const questionsData = JSON.parse(profileLeadViewData.leads.questions);
-        return questionsData.map((item, index) => (
+        const questionsData = JSON.parse(profileLeadViewData?.leads?.questions);
+        return questionsData?.map((item, index) => (
           <div key={index} className="mb-4">
-            <p className={styles.viewQuestion}>{item.ques}</p>
-            <p className={styles.viewQuestion}>{item.ans}</p>
+            <p className={styles.viewQuestion}>{item?.ques}</p>
+            <p className={styles.viewQuestion}>{item?.ans}</p>
           </div>
         ));
       } catch (error) {

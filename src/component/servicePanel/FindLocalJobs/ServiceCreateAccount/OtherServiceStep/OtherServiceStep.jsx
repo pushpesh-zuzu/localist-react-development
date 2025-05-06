@@ -107,13 +107,21 @@ console.log(postalCode,'postalCode')
   const allScripts = document.getElementsByTagName("script");
   console.log(allScripts,'allScripts'); 
   const handleSelectService = (item) => {
+    // Don't allow more than 2 services
+    if (selectedServices?.length >= 2) {
+      showToast("error", "No more services can be added");
+      return;
+    }
+  
+    // Don't add duplicate services
     if (!selectedServices?.some((service) => service.id === item.id)) {
       dispatch(setselectedServices([...selectedServices, item]));
-
     }
+  
     setInput("");
     dispatch(setService([]));
   };
+  
 
   const handleRemoveService = (id) => {
     dispatch(
@@ -169,6 +177,7 @@ console.log(postalCode,'postalCode')
     // Convert array to a comma-separated string
     const serviceCategoryData = combinedServiceIds.join(", ");
 
+    
     // Create final payload
     const payload = {
       ...formData,
