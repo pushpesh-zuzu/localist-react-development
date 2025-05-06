@@ -8,11 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 const SettingsList = () => {
   const navigate = useNavigate();
+
   const handleMyService = () => {
     navigate("/leads/settings");
   };
+
   const handleAccountSetting = () => {
-    navigate("/account/setting");
+    navigate("/settings/account_details");
+  };
+
+  const handleMyProfile = () => {
+    navigate("/settings/my_profile");
   };
   return (
     <>
@@ -28,7 +34,11 @@ const SettingsList = () => {
             <h2>My Profile</h2>
           </div>
           <div className={styles.sectionContent}>
-            <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }}>
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#FCE5E3" }}
+              onClick={handleMyProfile}
+            >
               <h3>My Profile</h3>
             </div>
 

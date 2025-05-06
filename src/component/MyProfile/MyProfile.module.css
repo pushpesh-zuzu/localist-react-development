@@ -1,0 +1,73 @@
+.container {
+  /* max-width: 600px; */
+  /* margin: 0 auto; */
+  padding: 21px 88px;
+  width: 100%;
+  max-width: 1133px;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 44px;
+  color: #989898;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 35px;
+  vertical-align: middle;
+  margin-bottom: 27px;
+}
+
+.percent {
+  color: var(--primary-color);
+}
+
+.progressBarContainer {
+  margin-bottom: 29px;
+}
+
+.progressBar {
+  width: -webkit-fill-available;
+  height: 21px;
+  background-color: #f2f2f2;
+  overflow: hidden;
+  border-radius: 100px;
+}
+
+.progressFill {
+  width: 27%;
+  height: 100%;
+  background-color: var(--primary-color);
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+}
+
+.subHeading {
+  font-weight: 600;
+  font-size: 18px;
+  vertical-align: middle;
+  margin-bottom: 18px;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.profileLink {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 18px;
+  vertical-align: middle;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0%;
+  text-decoration-skip-ink: auto;
+  padding-bottom: 29px;
+}
