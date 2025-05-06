@@ -633,6 +633,7 @@ import {
   getAddMultipleManualBidData,
   getAutoBid,
   getBuyerSortByLocationApi,
+  getBuyerSortByResponseApi,
   getBuyerViewProfieApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
@@ -872,6 +873,14 @@ const sortData = {
 }
 dispatch(getBuyerSortByLocationApi(sortData))
   }
+  const handelresponseChangeSort = (e) => {
+    const selectedResponse = e.target.value
+
+    const responseData = {
+
+    }
+    // dispatch(getBuyerSortByResponseApi(responseData))
+  }
 
   return (
     <>
@@ -926,10 +935,11 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 <option value="nearest to farthest">Nearest to Farthest </option>
 
               </select>
-              <select>
+              <select onChange={handelresponseChangeSort} defaultValue={""}>
                 {/* <option>All response times</option> */}
-                <option>Longest to Shortest</option>
-                <option>Shortest to Longest</option>
+                <option value="" disabled>All response times</option>
+                <option value="longest to shortest">Longest to Shortest</option>
+                <option value="shortest to longest">Shortest to Longest</option>
               </select>
               <span className={styles.matchCount}>
                 {matchingLength} matches

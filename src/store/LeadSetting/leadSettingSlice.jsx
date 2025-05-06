@@ -684,7 +684,24 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/sort-by-location`, buyerSortByLocationData);
   
         if (response) {
-          dispatch(setAutoBidData(response?.data?.data))
+          // dispatch(setAutoBidData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const getBuyerSortByResponseApi = (buyerSortByResponseData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/sort-by-location`, buyerSortByResponseData);
+  
+        if (response) {
+          // dispatch(setAutoBidData(response?.data?.data))
            return response.data
         }
       } catch (error) {

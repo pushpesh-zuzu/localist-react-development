@@ -63,18 +63,27 @@ const ViewProfile = () => {
 
     const handleResponseChange = (clickName) => {
         const responseStatus = {
-            lead_id:profileLeadViewData?.leads?.id,
-            seller_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-            buyer_id:profileLeadViewData?.id,
-            status:"clicked",
-            clicked_name:clickName
+            lead_id: profileLeadViewData?.leads?.id,
+            seller_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+            buyer_id: profileLeadViewData?.id,
+            // status: "clicked",
+            clicked_name:1
+        };
+        if (clickName === "call") {
+            responseStatus.is_clicked_mobile = "call";
+        } else if (clickName === "whatsapp") {
+            responseStatus.is_clicked_whatsapp = "whatsapp";
+        } else if (clickName === "email") {
+            responseStatus.is_clicked_email = "email";
         }
+    
         dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
-            if(result){
-                showToast("success",result?.message)
+            if (result) {
+                showToast("success", result?.message);
             }
-        })
-    }
+        });
+    };
+    
     return (
         <>
             <>
