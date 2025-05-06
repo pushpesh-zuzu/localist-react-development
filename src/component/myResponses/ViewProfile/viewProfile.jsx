@@ -18,6 +18,7 @@ const ViewProfile = () => {
     const { userToken } = useSelector((state) => state.auth);
     const { registerData } = useSelector((state) => state.findJobs);
     const [status, setStatus] = useState("pending")
+    console.log(status,"status")
     const [activeTab, setActiveTab] = useState("tab1")
     const user = {
         phoneNumber: "918123456789",
@@ -56,6 +57,12 @@ const ViewProfile = () => {
             dispatch(getAddHiredLeadDataApi(addHiredData)).then((result) => {
                 if (result) {
                     showToast("success", result?.message)
+                    const data = {
+                        customer_id: profileId?.profileId,
+                        lead_id: id
+                    }
+                    dispatch(getLeadProfileRequestList(data))
+                
                 }
             });
         }

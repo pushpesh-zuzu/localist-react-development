@@ -11,18 +11,20 @@ const ViewYourMatches = ({
   previousStep,
   setShowConfirmModal,
 }) => {
-  const { buyerRequest, requestLoader,citySerach } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader,citySerach,requestDataList } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (userToken?.phone) {
-      setPhoneNumber(userToken.phone);
-    }
-  }, [userToken?.phone]);
+useEffect(() => {
+  if (requestDataList?.phone) {
+    setPhoneNumber(requestDataList.phone);
+  } else if (userToken?.phone) {
+    setPhoneNumber(userToken.phone);
+  }
+}, [requestDataList?.phone, userToken?.phone])
   const handleInputChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     setPhoneNumber(value);

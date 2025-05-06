@@ -47,7 +47,9 @@ const initialState = {
     getOnlineRemote:{},
     getPendingLeadList:[],
     getHiredLeadList:[],
-    getActivies:[]
+    getActivies:[],
+    getSwitcgAutoBidData:{},
+    addSubmitLeadLoader:false
 };
 
 
@@ -628,7 +630,7 @@ export const getleadPreferencesList = (serviceId) => {
 
   export const getAddSumbitLeadDataApi = (AddSubmitLeadData) => {
     return async (dispatch) => {
-      dispatch(setSevenDaysAutobidLoader(true));
+      dispatch(setAddSubmitLeadLoader(true));
       try {
         const response = await axiosInstance.post(`users/submit-leads`, AddSubmitLeadData);
   
@@ -639,7 +641,7 @@ export const getleadPreferencesList = (serviceId) => {
       } catch (error) {
        showToast("error",error?.message)
       } finally {
-        dispatch(setSevenDaysAutobidLoader(false));
+        dispatch(setAddSubmitLeadLoader(false));
       }
     };
   }
@@ -719,6 +721,42 @@ export const getleadPreferencesList = (serviceId) => {
   
         if (response) {
           // dispatch(setAutoBidData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const switchAutobidApi = (switchAutobidApiData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/switch-autobid`, switchAutobidApiData);
+  
+        if (response) {
+          // dispatch(setAutoBidData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  
+
+  export const getswitchAutobidApi = (switchAutobidApiData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-switch-autobid`, switchAutobidApiData);
+  
+        if (response) {
+          dispatch(setGetSwitchAutoBidData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -834,11 +872,17 @@ const leadSettingSlice = createSlice({
       },
       setGetActivitiesData(state,action){
         state.getActivies = action.payload
+      },
+      setGetSwitchAutoBidData(state,action) {
+        state.getSwitcgAutoBidData = action.payload
+      },
+      setAddSubmitLeadLoader(state,action){
+        state.addSubmitLeadLoader = action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setGetActivitiesData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setleadPreferencesListLoader,setAutoBidData,setGetActivitiesData,setAddSubmitLeadLoader,setGetSwitchAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

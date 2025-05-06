@@ -63,11 +63,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAddSumbitLeadDataApi, getAutoBid, getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../../utils";
 import { getbuyerrequestList } from "../../../../../store/Buyer/BuyerSlice";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const HiredProfessional = ({ closeModal,serviceId }) => {
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState("");
-  const { autoBidList,autoBidListData } = useSelector((state) => state.leadSetting);
+  const { autoBidList,autoBidListData,addSubmitLeadLoader } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 console.log(options,"options")
@@ -162,7 +164,11 @@ console.log(options,"options")
             Cancel
           </button>
           <button onClick={handleSubmit} className={styles.submitBtn}>
-            Submit
+            {addSubmitLeadLoader ?  <Spin
+                              indicator={
+                                <LoadingOutlined spin style={{ color: "white" }} />
+                              }
+                            />: "Submit"}
           </button>
         </div>
       </div>

@@ -20,6 +20,9 @@ const SettingsList = () => {
   const handleMyProfile = () => {
     navigate("/settings/my_profile");
   };
+  // const handleMycredit = () => {
+  //   navigate("/myCredit")
+  // }
   return (
     <>
       <div className="container">
@@ -105,7 +108,9 @@ const SettingsList = () => {
             <h2>My Credits</h2>
           </div>
           <div className={styles.sectionContent}>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }}>
+            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
+            // onClick={handleMycredit}
+            >
               <h3>My credits</h3>
             </div>
             <p>View credit history & buy credits to contact more customers</p>
