@@ -663,69 +663,12 @@ const BidsList = ({ previousStep }) => {
 console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
+  const bidTotal = autoBidList?.[0]?.totalbid || 0;
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
-  const showCheckboxes = selectedSellers.length < 5 - bidCount;
-  const shouldShowGreenIcons = bidCount !== 5;
-
-  // State to track selected checkboxes
-
-  // Handle checkbox change
-  // const handleCheckboxChange = (sellerId) => {
-  //   if (selectedSellers.includes(sellerId)) {
-  //     setSelectedSellers(selectedSellers.filter(id => id !== sellerId));
-  //   } else {
-  //     setSelectedSellers([...selectedSellers, sellerId]);
-  //   }
-  // };
-  // const handleCheckboxChange = (sellerId) => {
-  //   if (selectedSellers.includes(sellerId)) {
-  //     // If checkbox is being unchecked, just remove it from the array
-  //     setSelectedSellers(selectedSellers.filter(id => id !== sellerId));
-  //   } else {
-  //     // If checkbox is being checked, first check if we already have 5 selected
-  //     if (selectedSellers.length >= 5) {
-  //       // Show error toast if trying to select more than 5
-  //       showToast("error", "max select five checkbox only");
-  //       return; // Exit the function to prevent adding more sellers
-  //     }
-  //     // If less than 5 are selected, add the new one
-  //     setSelectedSellers([...selectedSellers, sellerId]);
-  //   }
-  // };
-  // const handleCheckboxChange = (sellerId) => {
-  //   if (selectedSellers.includes(sellerId)) {
-  //     // If checkbox is being unchecked, just remove it from the array
-  //     setSelectedSellers(selectedSellers.filter(id => id !== sellerId));
-  //   } else {
-  //     // If checkbox is being checked, first check if we've reached the limit
-  //     const maxAllowed = 5 - bidCount;
-
-  //     if (selectedSellers.length >= maxAllowed) {
-  //       // Show error toast if trying to select more than allowed
-  //       showToast("error", "max select five checkbox only")
-  //       return; // Exit the function to prevent adding more sellers
-  //     }
-  //     // If less than the limit are selected, add the new one
-  //     setSelectedSellers([...selectedSellers, sellerId]);
-  //   }
-  // };
-  // const handleCheckboxChange = (sellerId) => {
-  //   if (selectedSellers.includes(sellerId)) {
-  //     // If checkbox is being unchecked, just remove it from the array
-  //     setSelectedSellers(selectedSellers.filter(id => id !== sellerId));
-  //   } else {
-  //     // If checkbox is being checked, check if we've reached the limit
-  //     // Only allow (5 - bidCount) total selections
-  //     if (selectedSellers.length >= (5 - bidCount)) {
-  //       showToast("error", "max select five checkbox only")
-  //       return; // Exit the function to prevent adding more sellers
-  //     }
-  //     // If less than the limit are selected, add the new one
-  //     setSelectedSellers([...selectedSellers, sellerId]);
-  //   }
-  // };
+  const showCheckboxes = selectedSellers.length < bidTotal - bidCount;
+  const shouldShowGreenIcons = bidCount !== bidTotal;
 
   const handleCheckboxChange = (sellerId) => {
     if (selectedSellers.includes(sellerId)) {
@@ -733,13 +676,13 @@ console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
       setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
     } else {
       // If checkbox is being checked, check if we've reached the limit
-      const maxAllowed = 5 - bidCount;
+      const maxAllowed = bidTotal - bidCount;
 
       if (selectedSellers.length >= maxAllowed) {
         // Show error toast if trying to select more than allowed
         const remainingMessage =
           bidCount === 1
-            ? "1 bid already applied. You can select only 4 more."
+            ? `1 bid already applied. You can select only ${maxAllowed} more.`
             : `${bidCount} bids already applied. You can select only ${maxAllowed} more.`;
 
         showToast("error", remainingMessage);
@@ -757,18 +700,10 @@ console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
 
-  // Pre-select first 5 sellers when data is loaded
-  // useEffect(() => {
-  //   if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
-  //     const firstFiveSellers = autoBidList[0]?.sellers?.slice(0, 5)?.map(seller => seller.id) || [];
-  //     setSelectedSellers(firstFiveSellers);
-  //   }
-  // }, [autoBidList]);
-  // First, modify your useEffect to only pre-select the allowed number of sellers
   useEffect(() => {
     if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
       // Only select the allowed number based on bidCount
-      const allowedSelections = 5 - (autoBidList?.[0]?.bidcount || 0);
+      const allowedSelections = bidTotal - (autoBidList?.[0]?.bidcount || 0);
       const allowedSellers =
         autoBidList[0]?.sellers
           ?.slice(0, allowedSelections)
@@ -991,7 +926,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                         <div className={styles.header}>
                           <div>
                             <h3>
-                              {shouldShowGreenIcons && index < 5 && (
+                              {shouldShowGreenIcons && index < bidTotal && (
                                 <img src={GreenTickIcon} alt="" />
                               )}
                               {seller?.name}
@@ -1066,7 +1001,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                             className={styles.checkbox}
                             disabled={
                               !selectedSellers.includes(seller.id) &&
-                              selectedSellers.length >= 5 - bidCount
+                              selectedSellers.length >= bidTotal  - bidCount
                             }
                           />
                         </div>

@@ -129,8 +129,8 @@ const QuestionModal = ({
           if (result?.success) {
             
             showToast("succes", result?.success);
+            nextStep();
           }
-          nextStep();
         });
       }
     }

@@ -61,14 +61,34 @@ const ViewProfile = () => {
         }
     };
 
+    useEffect(() => {
+        if (profileLeadViewData?.leads?.id && profileLeadViewData?.id) {
+            const responseStatus = {
+                lead_id: profileLeadViewData.leads.id,
+                seller_id: userToken?.remember_tokens || registerData?.remember_tokens,
+                buyer_id: profileLeadViewData.id,
+                
+                is_clicked_mobile: 0,
+                is_clicked_whatsapp: 0,
+                is_clicked_email: 0,
+                is_clicked_sms: 0
+            };
+            dispatch(sellerResponseStatusApi(responseStatus));
+        }
+    }, [profileLeadViewData]);
+    
     const handleResponseChange = (clickName) => {
         const responseStatus = {
             lead_id: profileLeadViewData?.leads?.id,
             seller_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
             buyer_id: profileLeadViewData?.id,
-            // status: "clicked",
-            clicked_name:1
+          
+            is_clicked_mobile: null,
+            is_clicked_whatsapp: null,
+            is_clicked_email: null,
+            is_clicked_sms:null
         };
+    
         if (clickName === "call") {
             responseStatus.is_clicked_mobile = "call";
         } else if (clickName === "whatsapp") {
