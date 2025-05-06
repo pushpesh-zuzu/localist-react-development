@@ -32,6 +32,8 @@ import LeadProfileData from "../component/Leads/LeadLists/LeadProfileView/LeadPr
 import MyResponse from "../component/myResponses/MyResponse";
 import SaveForLater from "../component/saveForLater/SaveForLater";
 import ViewProfile from "../component/myResponses/ViewProfile/viewProfile";
+import MyProfile from "../component/MyProfile/MyProfile";
+import AccountDetails from "../component/AccountDetails/AccountDetails";
 
 const router = createBrowserRouter([
   {
@@ -51,9 +53,30 @@ const router = createBrowserRouter([
         path: "/sellers/create-account/:serviceTitle",
         element: <ServiceCreateAccount />,
       },
-      { path: "/buyers/create", element: <ProtectedRoute><BuyerPanelPage /></ProtectedRoute> },
-      { path: "/account/setting", element: <ProtectedRoute><BuyerAccountSettings /></ProtectedRoute> },
-      { path: "/user/notification", element: <ProtectedRoute><BuyerNotification /></ProtectedRoute> },
+      {
+        path: "/buyers/create",
+        element: (
+          <ProtectedRoute>
+            <BuyerPanelPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/account/setting",
+        element: (
+          <ProtectedRoute>
+            <BuyerAccountSettings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/user/notification",
+        element: (
+          <ProtectedRoute>
+            <BuyerNotification />
+          </ProtectedRoute>
+        ),
+      },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "/dashboard",
@@ -79,21 +102,113 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "/leads/settings", element: <ProtectedRoute><LeadSetting /></ProtectedRoute> },
-      { path: "/bids-list/:requestId", element: <ProtectedRoute><BidsList /></ProtectedRoute> },
-      { path: "/bids-list/reply/:requestId", element: <ProtectedRoute><ManualBidList /></ProtectedRoute> },
+      {
+        path: "/settings/my_profile",
+        element: (
+          <ProtectedRoute>
+            <MyProfile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/settings/account_details",
+        element: (
+          <ProtectedRoute>
+            <AccountDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/leads/settings",
+        element: (
+          <ProtectedRoute>
+            <LeadSetting />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/bids-list/:requestId",
+        element: (
+          <ProtectedRoute>
+            <BidsList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/bids-list/reply/:requestId",
+        element: (
+          <ProtectedRoute>
+            <ManualBidList />
+          </ProtectedRoute>
+        ),
+      },
       { path: "/help-center", element: <HelpCenterPage /> },
       { path: "/pricing", element: <PricingPage /> },
-      { path: "/feedback/questions", element: <ProtectedRoute><SuggestQuestions /></ProtectedRoute> },
-      { path: "/feedback/questions/new", element: <ProtectedRoute><NewQuestion /></ProtectedRoute> },
-      { path: "/feedback/questions/edit", element: <ProtectedRoute><EditQuestion /></ProtectedRoute> },
-      { path: "/feedback/questions/remove", element: <ProtectedRoute><RemoveQuestion /></ProtectedRoute> },
-      { path: "/lead/profile-view/:profileId" , element: <ProtectedRoute><LeadProfileData/></ProtectedRoute>},
-      { path: "/lead/save-later", element:<ProtectedRoute><MyResponse/></ProtectedRoute>},
-      { path: "/lead/save-for-later", element:<ProtectedRoute><SaveForLater/></ProtectedRoute>},
-      { path: "/pending/view-profile/:profileId", element:<ProtectedRoute><ViewProfile/></ProtectedRoute>},
+      {
+        path: "/feedback/questions",
+        element: (
+          <ProtectedRoute>
+            <SuggestQuestions />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/feedback/questions/new",
+        element: (
+          <ProtectedRoute>
+            <NewQuestion />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/feedback/questions/edit",
+        element: (
+          <ProtectedRoute>
+            <EditQuestion />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/feedback/questions/remove",
+        element: (
+          <ProtectedRoute>
+            <RemoveQuestion />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/lead/profile-view/:profileId",
+        element: (
+          <ProtectedRoute>
+            <LeadProfileData />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/lead/save-later",
+        element: (
+          <ProtectedRoute>
+            <MyResponse />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/lead/save-for-later",
+        element: (
+          <ProtectedRoute>
+            <SaveForLater />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/pending/view-profile/:profileId",
+        element: (
+          <ProtectedRoute>
+            <ViewProfile />
+          </ProtectedRoute>
+        ),
+      },
       { path: "*", element: <NotFound /> },
-
     ],
   },
 ]);

@@ -1,0 +1,31 @@
+.accordionItem {
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  margin-bottom: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.icon {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  padding: 16px;
+  background-color: #fafafa;
+  font-size: 14px;
+}
