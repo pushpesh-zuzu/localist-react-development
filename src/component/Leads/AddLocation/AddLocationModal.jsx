@@ -206,7 +206,7 @@ const AddLocationModal = ({
       )}
 
       {selectedOption === "travelTime" && (
-        <TravelTimeModal onClose={handleChildModalClose} />
+        <TravelTimeModal onClose={handleChildModalClose} onNext={handleNext}/>
       )}
 
       {selectedOption === "drawOnMap" && (

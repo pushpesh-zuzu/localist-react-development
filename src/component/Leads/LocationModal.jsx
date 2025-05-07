@@ -141,6 +141,7 @@
 
 // export default LocationModal;
 
+
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./LocationModal.module.css";
 import { showToast } from "../../utils";
@@ -157,20 +158,46 @@ const LocationModal = ({
 }) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
+  const mapInstance = useRef(null);
+  const markerRef = useRef(null);
+  const circleRef = useRef(null);
+
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
-    lat: 20.5937, // Default center (India)
+    lat: 20.5937,
     lng: 78.9629,
   });
 
-  useEffect(() => {
-    // if (!open) return;
+  // ✅ Function to draw circle based on distance
+  const drawCircle = (center) => {
+    if (!window.google || !mapInstance.current) return;
 
+    // Clear previous circle if exists
+    if (circleRef.current) {
+      circleRef.current.setMap(null);
+    }
+
+    const radiusInMeters =
+      (parseFloat(locationData.miles1) || 1) * 1609.34; // 1 mile = 1609.34 meters
+
+    circleRef.current = new window.google.maps.Circle({
+      center,
+      radius: radiusInMeters,
+      fillColor: "#007BFF",
+      fillOpacity: 0.2,
+      strokeColor: "#007BFF",
+      strokeOpacity: 0.7,
+      strokeWeight: 2,
+      map: mapInstance.current,
+    });
+  };
+
+  useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = () => {
@@ -189,17 +216,17 @@ const LocationModal = ({
     const initMap = () => {
       if (!mapRef.current || !window.google) return;
 
-      const map = new window.google.maps.Map(mapRef.current, {
+      mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center: mapCenter,
         zoom: 10,
       });
 
-      // Add a marker if we have a specific location
       if (locationData.postcode && mapCenter.lat !== 20.5937) {
-        new window.google.maps.Marker({
+        markerRef.current = new window.google.maps.Marker({
           position: mapCenter,
-          map,
+          map: mapInstance.current,
         });
+        drawCircle(mapCenter);
       }
     };
 
@@ -233,18 +260,21 @@ const LocationModal = ({
           inputRef.current.value = postalCode;
 
           if (lat && lng) {
-            setMapCenter({ lat, lng });
-            
-            if (mapRef.current) {
-              const map = new window.google.maps.Map(mapRef.current, {
-                center: { lat, lng },
-                zoom: 12,
+            const newCenter = { lat, lng };
+            setMapCenter(newCenter);
+
+            if (mapInstance.current) {
+              mapInstance.current.setCenter(newCenter);
+              mapInstance.current.setZoom(12);
+
+              if (markerRef.current) markerRef.current.setMap(null);
+
+              markerRef.current = new window.google.maps.Marker({
+                position: newCenter,
+                map: mapInstance.current,
               });
 
-              new window.google.maps.Marker({
-                position: { lat, lng },
-                map,
-              });
+              drawCircle(newCenter);
             }
           }
         } else {
@@ -254,9 +284,9 @@ const LocationModal = ({
     };
 
     loadGoogleMapsScript();
-  }, [open, onChange, locationData.postcode, mapCenter]);
+  }, [open]);
 
-  // If a postcode is already set when opening the modal, try to geocode it
+  // ✅ Geocode on open if postcode is present
   useEffect(() => {
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
@@ -266,12 +296,34 @@ const LocationModal = ({
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng();
-            setMapCenter({ lat, lng });
+            const newCenter = { lat, lng };
+            setMapCenter(newCenter);
+
+            if (mapInstance.current) {
+              mapInstance.current.setCenter(newCenter);
+              mapInstance.current.setZoom(12);
+
+              if (markerRef.current) markerRef.current.setMap(null);
+
+              markerRef.current = new window.google.maps.Marker({
+                position: newCenter,
+                map: mapInstance.current,
+              });
+
+              drawCircle(newCenter);
+            }
           }
         }
       );
     }
   }, [open, mapLoaded, locationData.postcode]);
+
+ 
+  useEffect(() => {
+    if (mapLoaded && mapCenter.lat !== 20.5937) {
+      drawCircle(mapCenter);
+    }
+  }, [locationData.miles1]);
 
   return (
     <div className={styles.modalOverlay}>
@@ -317,12 +369,15 @@ const LocationModal = ({
           </div>
         </div>
 
-        {/* Google Map Container */}
-        {console.log(mapRef,"kk")}
-        <div 
-          ref={mapRef} 
+        <div
+          ref={mapRef}
           className={styles.mapContainer}
-          style={{ width: "100%", height: "250px", marginTop: "20px", borderRadius: "8px" }}
+          style={{
+            width: "100%",
+            height: "250px",
+            marginTop: "20px",
+            borderRadius: "8px",
+          }}
         />
 
         <div className={styles.modalFooter}>

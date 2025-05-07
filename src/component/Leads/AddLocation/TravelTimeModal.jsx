@@ -2,55 +2,114 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
-const TravelTimeModal = ({ onClose }) => {
+const TravelTimeModal = ({ onClose,onNext }) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
+  const mapInstance = useRef(null);
+  const markerRef = useRef(null);
+  const circleRef = useRef(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
-    lat: 20.5937, // Default center (India)
+    lat: 20.5937,
     lng: 78.9629,
   });
+
   const [locationData, setLocationData] = useState({
     postcode: "",
     travelTime: "30 minutes",
-    travelMode: "Driving"
+    travelMode: "Driving",
   });
+
+  const calculateTravelRadius = (time, mode) => {
+    const speedMap = {
+      Driving: 800,
+      "Public Transport": 400,
+      Biking: 250,
+      Walking: 80,
+    };
+
+    let minutes = 30;
+    if (time === "1 hour") minutes = 60;
+    if (time === "1.5 hours") minutes = 90;
+    if (time === "2 hours") minutes = 120;
+
+    return speedMap[mode] * minutes;
+  };
+
+  const drawCircle = (center) => {
+    if (!window.google || !mapInstance.current) return;
+
+    const radiusInMeters = calculateTravelRadius(
+      locationData.travelTime,
+      locationData.travelMode
+    );
+
+    if (circleRef.current) {
+      circleRef.current.setMap(null);
+    }
+
+    circleRef.current = new window.google.maps.Circle({
+      center,
+      radius: radiusInMeters,
+      fillColor: "#4285F4",
+      fillOpacity: 0.15,
+      strokeColor: "#4285F4",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      map: mapInstance.current,
+    });
+
+    mapInstance.current.fitBounds(circleRef.current.getBounds());
+  };
+
+  const updateMarkerAndCircle = () => {
+    if (!mapInstance.current) return;
+
+    // Update marker
+    if (markerRef.current) {
+      markerRef.current.setMap(null);
+    }
+
+    markerRef.current = new window.google.maps.Marker({
+      position: mapCenter,
+      map: mapInstance.current,
+    });
+
+    // Update circle
+    drawCircle(mapCenter);
+  };
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = () => {
           setMapLoaded(true);
-          initAutocomplete();
           initMap();
+          initAutocomplete();
         };
         document.body.appendChild(script);
       } else {
         setMapLoaded(true);
-        initAutocomplete();
         initMap();
+        initAutocomplete();
       }
     };
 
     const initMap = () => {
       if (!mapRef.current || !window.google) return;
 
-      const map = new window.google.maps.Map(mapRef.current, {
+      mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center: mapCenter,
         zoom: 10,
       });
 
-      // Add a marker if we have a specific location
       if (locationData.postcode && mapCenter.lat !== 20.5937) {
-        new window.google.maps.Marker({
-          position: mapCenter,
-          map,
-        });
+        updateMarkerAndCircle();
       }
     };
 
@@ -81,119 +140,41 @@ const TravelTimeModal = ({ onClose }) => {
         });
 
         if (lat && lng) {
-          setMapCenter({ lat, lng });
-          
           const finalLocation = postalCode || placeName;
-          setLocationData({
-            ...locationData,
-            postcode: finalLocation
-          });
-          
-          if (mapRef.current) {
-            const map = new window.google.maps.Map(mapRef.current, {
-              center: { lat, lng },
-              zoom: 12,
-            });
+          setMapCenter({ lat, lng });
+          setLocationData((prev) => ({
+            ...prev,
+            postcode: finalLocation,
+          }));
 
-            const marker = new window.google.maps.Marker({
-              position: { lat, lng },
-              map,
-            });
-
-            // Draw travel radius circle
-            const radiusInMeters = calculateTravelRadius(locationData.travelTime, locationData.travelMode);
-            const circle = new window.google.maps.Circle({
-              map: map,
-              radius: radiusInMeters,
-              fillColor: '#4285F4',
-              fillOpacity: 0.15,
-              strokeColor: '#4285F4',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              center: { lat, lng },
-            });
-
-            // Adjust map to fit the circle
-            map.fitBounds(circle.getBounds());
-          }
-        } else {
-          console.error("Could not get coordinates for the selected place");
+          setTimeout(() => {
+            mapInstance.current?.setCenter({ lat, lng });
+            mapInstance.current?.setZoom(12);
+            updateMarkerAndCircle();
+          }, 100);
         }
       });
     };
 
     loadGoogleMapsScript();
-  }, [locationData, mapCenter]);
+  }, []);
 
-  // Calculate travel radius based on time and mode
-  const calculateTravelRadius = (time, mode) => {
-    // Base speeds in meters per minute
-    const speedMap = {
-      "Driving": 800, // ~48km/h
-      "Public Transport": 400, // ~24km/h
-      "Biking": 250, // ~15km/h
-      "Walking": 80  // ~4.8km/h
-    };
+  useEffect(() => {
+    if (mapLoaded && locationData.postcode && mapCenter.lat !== 20.5937) {
+      updateMarkerAndCircle();
+    }
+  }, [locationData.travelTime, locationData.travelMode]);
 
-    // Extract minutes from time selection
-    let minutes = 30;
-    if (time === "1 hour") minutes = 60;
-    if (time === "1.5 hours") minutes = 90;
-    if (time === "2 hours") minutes = 120;
-
-    // Calculate radius
-    return speedMap[mode] * minutes;
-  };
-
-  // Handle form input changes
   const onChange = (e) => {
     const { name, value } = e.target;
-    setLocationData({
-      ...locationData,
-      [name]: value
-    });
-
-    // If travel time or mode changes, update the map
-    if ((name === "travelTime" || name === "travelMode") && 
-        locationData.postcode && 
-        mapCenter.lat !== 20.5937) {
-      updateMapCircle();
-    }
+    setLocationData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  // Update map circle when travel parameters change
-  const updateMapCircle = () => {
-    if (!mapRef.current || !window.google) return;
-    
-    const map = new window.google.maps.Map(mapRef.current, {
-      center: mapCenter,
-      zoom: 12,
-    });
-
-    const marker = new window.google.maps.Marker({
-      position: mapCenter,
-      map,
-    });
-
-    const radiusInMeters = calculateTravelRadius(locationData.travelTime, locationData.travelMode);
-    const circle = new window.google.maps.Circle({
-      map: map,
-      radius: radiusInMeters,
-      fillColor: '#4285F4',
-      fillOpacity: 0.15,
-      strokeColor: '#4285F4',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      center: mapCenter,
-    });
-
-    map.fitBounds(circle.getBounds());
-  };
-
-  // Handle next button click
   const handleNext = () => {
     console.log("Form submitted with data:", locationData);
-    // Add your logic here
     onClose();
   };
 
@@ -257,19 +238,18 @@ const TravelTimeModal = ({ onClose }) => {
           </div>
         </div>
 
-        {/* Google Map Container */}
-        <div 
-          ref={mapRef} 
+        <div
+          ref={mapRef}
           className={styles.mapContainer}
-          style={{ 
-            width: "100%", 
-            height: "250px", 
-            marginTop: "20px", 
+          style={{
+            width: "100%",
+            height: "250px",
+            marginTop: "20px",
             borderRadius: "8px",
-            border: "1px solid #ccc"
+            border: "1px solid #ccc",
           }}
         />
-        
+
         {!mapLoaded && (
           <div style={{ textAlign: "center", marginTop: "10px" }}>
             Loading map...
@@ -280,7 +260,7 @@ const TravelTimeModal = ({ onClose }) => {
           <button className={styles.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button className={styles.nextButton} onClick={handleNext}>
+          <button className={styles.nextButton} onClick={onNext}>
             Next
           </button>
         </div>
