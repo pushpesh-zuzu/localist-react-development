@@ -39,7 +39,8 @@ const ViewProfile = () => {
     useEffect(() => {
         const activityData = {
             buyer_id: profileId?.profileId,
-            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
+            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+            lead_id:id
         }
         dispatch(getBuyerActivitiesApi(activityData))
     }, [])

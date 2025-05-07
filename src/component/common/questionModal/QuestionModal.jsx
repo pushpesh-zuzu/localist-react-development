@@ -126,9 +126,9 @@ const QuestionModal = ({
         // formData.append("recevive_online", consent ? 1 : 0);
 
         dispatch(createRequestData(formData)).then((result) => {
-          if (result?.success) {
+          if (result) {
             
-            showToast("succes", result?.success);
+            showToast("success", result?.message);
             nextStep();
           }
         });

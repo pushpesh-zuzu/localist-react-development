@@ -46,8 +46,13 @@ useEffect(() => {
     formData.append("recevive_online", consent ? 1 : 0);
     formData.append("form_status", 1);
 
-    dispatch(createRequestData(formData));
-    nextStep();
+    dispatch(createRequestData(formData)).then((result) => {
+      if(result){
+        showToast("success",result?.message)
+        nextStep();
+      }
+    });;
+    
   };
 
   const handleCloseClick = () => {
