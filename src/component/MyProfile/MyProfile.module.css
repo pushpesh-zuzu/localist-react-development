@@ -1,8 +1,6 @@
 .container {
-  /* max-width: 600px; */
-  /* margin: 0 auto; */
   padding: 21px 88px;
-  width: 100%;
+  /* width: 100%; */
   max-width: 1133px;
 }
 
@@ -70,4 +68,57 @@
   text-decoration-thickness: 0%;
   text-decoration-skip-ink: auto;
   padding-bottom: 29px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px 40px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subHeading,
+  .description,
+  .profileLink {
+    font-size: 16px;
+  }
+
+  .backLink {
+    font-size: 15px;
+  }
+
+  .progressBar {
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .percent {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .subHeading,
+  .description,
+  .profileLink {
+    font-size: 15px;
+  }
+
+  .backLink {
+    font-size: 14px;
+  }
+
+  .progressBar {
+    height: 16px;
+  }
 }

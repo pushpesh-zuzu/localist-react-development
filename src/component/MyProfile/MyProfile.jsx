@@ -2,6 +2,11 @@ import React from "react";
 import styles from "./MyProfile.module.css";
 import AccordionItem from "./AccordionItem";
 import AboutAccordion from "./AboutAccordion/AboutAccordion";
+import ReviewsAccordion from "./ReviewsAccordion/ReviewsAccordion";
+import PhotosAccordion from "./PhotosAccordion/PhotosAccordion";
+import SocialMediaAccordion from "./SocialMediaAccordion/SocialMediaAccordion";
+import AccreditationsAccordion from "./AccreditationsAccordion/AccreditationsAccordion";
+import QandAAccordion from "./QandAAccordion/QandAAccordion";
 
 const MyProfile = () => {
   return (
@@ -28,9 +33,31 @@ const MyProfile = () => {
         View public profile
       </a>
 
-      <AccordionItem title="About">
-        <AboutAccordion />
-      </AccordionItem>
+      <div style={{ marginTop: "30px" }}>
+        <AccordionItem title="About">
+          <AboutAccordion />
+        </AccordionItem>
+
+        <AccordionItem title="Reviews">
+          <ReviewsAccordion />
+        </AccordionItem>
+
+        <AccordionItem title="Photos">
+          <PhotosAccordion />
+        </AccordionItem>
+
+        <AccordionItem title="Social media & links">
+          <SocialMediaAccordion />
+        </AccordionItem>
+
+        <AccordionItem title="Accreditations">
+          <AccreditationsAccordion />
+        </AccordionItem>
+
+        <AccordionItem title="Q&As">
+          <QandAAccordion />
+        </AccordionItem>
+      </div>
     </div>
   );
 };

@@ -8,14 +8,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 16px 21px;
   cursor: pointer;
   background-color: #fff;
 }
 
 .title {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .icon {
@@ -24,8 +31,6 @@
   align-items: center;
 }
 
-.content {
-  padding: 16px;
-  background-color: #fafafa;
+/* .content {
   font-size: 14px;
-}
+} */
