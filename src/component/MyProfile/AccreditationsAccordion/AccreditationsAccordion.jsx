@@ -17,6 +17,8 @@ const AccreditationsAccordion = () => {
     }
   };
 
+  const handleAccreditationAdd = () => {};
+
   return (
     <>
       <div className={styles.container}>
@@ -37,28 +39,39 @@ const AccreditationsAccordion = () => {
         </p>
 
         <div className={styles.card}>
-          <div className={styles.logoSection}>
-            <img src={ISSAImage} alt="ISSA" className={styles.logo} />
-          </div>
-          <div className={styles.accreditationList}>
-            {accreditations.map((item, idx) => (
-              <p key={idx} className={styles.accreditationItem}>
-                {item}
-              </p>
-            ))}
-            <div className={styles.inputGroup}>
-              <input
-                type="text"
-                value={newAccreditation}
-                onChange={(e) => setNewAccreditation(e.target.value)}
-                placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
-                className={styles.input}
-              />
-              <button className={styles.addButton} onClick={handleAdd}>
-                Add
-              </button>
+          <div className={styles.logoSectionWrapper}>
+            <div className={styles.logoSection}>
+              <img src={ISSAImage} alt="ISSA" className={styles.logo} />
+            </div>
+            <div className={styles.accreditationList}>
+              {accreditations.map((item, idx) => (
+                <p key={idx} className={styles.accreditationItem}>
+                  {item}
+                </p>
+              ))}
             </div>
           </div>
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              value={newAccreditation}
+              onChange={(e) => setNewAccreditation(e.target.value)}
+              placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
+              className={styles.input}
+            />
+            <button className={styles.addButton} onClick={handleAdd}>
+              Add
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <button
+            className={styles.addAccreditationButton}
+            onClick={handleAccreditationAdd}
+          >
+            + Add Accreditation
+          </button>
         </div>
       </div>
       <div className={styles.footer}>

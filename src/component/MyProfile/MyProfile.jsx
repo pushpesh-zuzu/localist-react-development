@@ -6,6 +6,7 @@ import ReviewsAccordion from "./ReviewsAccordion/ReviewsAccordion";
 import PhotosAccordion from "./PhotosAccordion/PhotosAccordion";
 import SocialMediaAccordion from "./SocialMediaAccordion/SocialMediaAccordion";
 import AccreditationsAccordion from "./AccreditationsAccordion/AccreditationsAccordion";
+import QandAAccordion from "./QandAAccordion/QandAAccordion";
 
 const MyProfile = () => {
   return (
@@ -54,7 +55,7 @@ const MyProfile = () => {
         </AccordionItem>
 
         <AccordionItem title="Q&As">
-          <AboutAccordion />
+          <QandAAccordion />
         </AccordionItem>
       </div>
     </div>

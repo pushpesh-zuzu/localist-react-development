@@ -250,3 +250,81 @@
 .input::placeholder {
   color: #828282;
 }
+
+@media (max-width: 1200px) {
+  .formGroup {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .input {
+    width: -webkit-fill-available;
+  }
+
+  .formGroup {
+    flex-direction: column;
+  }
+
+  .imageSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .flexRow {
+    flex-direction: column;
+  }
+
+  .textarea {
+    width: -webkit-fill-available;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    width: -webkit-fill-available;
+    font-size: 14px;
+  }
+
+  .uploadBtn,
+  .webcamBtn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .card,
+  .infoCard {
+    padding: 16px;
+  }
+
+  .companyLocation,
+  .aboutCompany {
+    font-size: 14px;
+  }
+
+  .secondaryText,
+  .secondaryTextCustomers,
+  .infoSubtext {
+    font-size: 13px;
+  }
+
+  .buttonRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cancelBtn,
+  .saveBtn {
+    width: 100%;
+  }
+}
