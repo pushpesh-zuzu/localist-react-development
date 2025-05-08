@@ -30,14 +30,28 @@ const AddLocationModal = ({
   // const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
+  const [locationType, setLocationType] = useState("");
+
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
+    travel_time:"",
+    travel_by:""
   });
+  console.log(locationData,"locationData")
   const { userToken } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    let type = "";
+    if (option === "distance") type = "Distance";
+    else if (option === "travelTime") type = "Travel Time";
+    else if (option === "drawOnMap") type = "Draw on Map";
+    else if (option === "nationwide") type = "Nationwide";
+  
+    setLocationType(type);
+  };
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
@@ -45,10 +59,16 @@ const AddLocationModal = ({
 
   const handleConfirm = () => {
     const serviceIds = selectedServices.join(",");
+    
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1,
       postcode: locationData.postcode,
+      city: locationData?.city,
+      travel_time:locationData?.travel_time,
+      travel_by: locationData?.travel_by,
+      type: locationType,
+      nation_wide:1,
       service_id: serviceIds,
       postcode_old: previousPostcode,
     };
@@ -78,6 +98,7 @@ const AddLocationModal = ({
           dispatch(getLocationLead(data));
           dispatch(getleadPreferencesList(data));
           setSelectedOption(false);
+          setLocationType("")
           setIsLocationModalOpen(false);
           setLocationData({
             miles1: "1",
@@ -97,9 +118,7 @@ const AddLocationModal = ({
 
   if (!open) return null;
 
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
-  };
+
 
   const handleChildModalClose = () => {
     setSelectedOption("");
@@ -206,7 +225,8 @@ const AddLocationModal = ({
       )}
 
       {selectedOption === "travelTime" && (
-        <TravelTimeModal onClose={handleChildModalClose} onNext={handleNext}/>
+        <TravelTimeModal onClose={handleChildModalClose} onNext={handleNext}  locationData={locationData}
+        setLocationData={setLocationData}/>
       )}
 
       {selectedOption === "drawOnMap" && (

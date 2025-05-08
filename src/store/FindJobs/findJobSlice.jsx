@@ -27,6 +27,7 @@ phone:""
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
+    cities:null,
     is_online : 0,
     nation_wide: 0,
     name: "",
@@ -268,6 +269,7 @@ state.authToken = null
  
           miles1: "1",
           postcode: null,
+          cities:null,
           nation_wide: 0,
           name: "",
           email: "",

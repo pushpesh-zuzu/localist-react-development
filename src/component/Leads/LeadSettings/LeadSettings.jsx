@@ -29,6 +29,7 @@ import { showToast } from "../../../utils";
 import LocationModal from "../LocationModal";
 import AddServiceModal from "../LeadAddServiceModal";
 import AddLocationModal from "../AddLocation/AddLocationModal";
+import TravelTimeModal from "../AddLocation/TravelTimeModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -62,7 +63,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setIsOnline(getOnlineRemote?.isonline === 1);
   }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
 
-  
+
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -185,11 +186,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isEditModalOpen, setIseditModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
+  const [isTravelTimeModalOpen, setIsTravelTimeModalOpen] = useState(false);
+const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
+const type=useRef();
 
+console.log(setEditLocationId,"selectedTravelLocation")
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
-      message.warning("Please fill in both fields");
+      // message.warning("Please fill in both fields");
       return;
     }
     // Close current modal
@@ -201,14 +206,86 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setIsNextModalOpen(true);
   };
 
+  const handleEditLocation = (location) => {
+    console.log("Edit", location?.type);
+    type.current=location.type
+ 
+    if (location?.type === "Travel Time") {
+      setLocationData({
+        travel_time: location?.travel_time || '',    
+        travel_by: location?.travel_by || '',     
+        postcode: location?.postcode || '',                            
+      })
+      setSelectedTravelLocation(location); 
+      setIsTravelTimeModalOpen(true);
+      setEditLocationId(location.id)
+      setPreviousPostcode(location.postcode)
+      return;
+    }
+  
+    // Open regular edit modal
+    setLocationData({
+      miles1: location.miles,
+      postcode: location.postcode,
+    });
+    setEditLocationId(location.id);
+    setIseditModalOpen(true);
+    setPreviousPostcode(location.postcode);
+  };
+  // const handleEditLocation = (location) => {
+  //   console.log("Edit location:", location);
+  //   setEditLocationId(location.id);
+  //   setPreviousPostcode(location.postcode);
+    
+  //   // Handle different location types
+  //   if (location?.type === "Travel Time") {
+  //     setLocationData({
+  //       travel_time: location?.travel_time || '',    
+  //       travel_by: location?.travel_by || '',     
+  //       postcode: location?.postcode || '',
+  //       city: location?.city || '',
+  //       type: "Travel Time" // Explicitly set the type
+  //     });
+  //     setSelectedTravelLocation(location); 
+  //     setIsTravelTimeModalOpen(true);
+  //   } 
+  //   else if (location?.type === "Distance" || !location?.type) {
+  //     // Handle Distance type or default to Distance if type is not specified
+  //     setLocationData({
+  //       miles1: location.miles || "1",
+  //       postcode: location.postcode || "",
+  //       type: "Distance" // Explicitly set the type
+  //     });
+  //     setIseditModalOpen(true);
+  //   }
+  //   else if (location?.type === "Drawn") {
+  //     // Handle Drawn type
+  //     setLocationData({
+  //       postcode: location.postcode || "",
+  //       city: location?.city || '',
+  //       type: "Drawn" // Explicitly set the type
+  //     });
+  //     // Open appropriate modal for Drawn type
+  //     setIseditModalOpen(true);
+  //   }
+  // };
+
   const handleConfirm = () => {
     const serviceIds = selectedServices.join(",");
+    const typeOfTravel=type.current;
+    
     const locationdata = {
       user_id: userToken?.remember_tokens,
-      miles: locationData.miles1,
+      miles: locationData.miles1 ? locationData.miles1 : 0,
       postcode: locationData.postcode,
       service_id: serviceIds,
       postcode_old: previousPostcode,
+      travel_time:locationData?.travel_time,
+      travel_by:locationData?.travel_by,
+      type:typeOfTravel,
+      miles_old: previousPostcode,
+      city:locationData?.city
+
     };
 
     dispatch(
@@ -232,17 +309,20 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     });
   };
 
-  const handleEditLocation = (location) => {
-    console.log("Editing Location:", location);
-    setLocationData({
-      miles1: location.miles,
-      postcode: location.postcode,
-    });
-    setEditLocationId(location.id);
-    setIseditModalOpen(true);
-    // setIsLocationModalOpen(true);
-    setPreviousPostcode(location.postcode);
-  };
+  // const handleEditLocation = (location) => {
+  //   console.log("Edit", location?.type);
+  //   setLocationData({
+  //     miles1: location.miles,
+  //     postcode: location.postcode,
+  //   });
+  //   setEditLocationId(location.id);
+  //   setIseditModalOpen(true);
+  //   // setIsLocationModalOpen(true);
+  //   setPreviousPostcode(location.postcode);
+  // };
+
+  
+  
 
   const handleRemoveOpen = (id) => {
     setRemoveModal({ show: true, service_id: id });
@@ -301,11 +381,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 <div
                   key={service.id}
                   ref={(el) => (serviceRefs.current[service.id] = el)}
-                  className={`${styles.serviceItem} ${
-                    selectedService?.id === service.id
+                  className={`${styles.serviceItem} ${selectedService?.id === service.id
                       ? styles.selectedService
                       : ""
-                  }`}
+                    }`}
                   onClick={() => handleServiceClick(service?.id, service?.name)}
                 >
                   <div className={styles.serviceNameWrapper}>
@@ -317,9 +396,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   <img
                     src={EditIcon}
                     alt="Edit"
-                    // onClick={() =>
-                    //   handleServiceClick(service?.id, service?.name)
-                    // }
+                  // onClick={() =>
+                  //   handleServiceClick(service?.id, service?.name)
+                  // }
                   />
                 </div>
               ))}
@@ -339,10 +418,23 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           {getlocationData?.map((item) => (
             <div className={styles.location}>
               <div key={item.id} className={styles.yourLocationInputWrapper}>
-                <p className={styles.locationInput}>
-                  Within <strong>{item.miles} miles</strong> of{" "}
-                  <strong>{item.postcode}</strong>
-                </p>
+                {item?.type === "Distance" ? (
+                  <p className={styles.locationInput}>
+                    Within <strong>{item.miles} miles</strong> of{" "}
+                    <strong>{item.postcode}</strong>
+                  </p>
+                ) : item?.type === "Drawn" ? (
+                  <p className={styles.locationInput}>
+                    Draws <strong>{item?.travel_time}</strong> of{" "}
+                    <strong>{item.city}</strong>
+                  </p>
+                ) : (
+                  <p className={styles.locationInput}>
+                    Within <strong>{item?.travel_time} </strong> {item?.travel_by} of{" "}
+                    <strong>{item.city}</strong>
+                  </p>
+                )}
+
                 <p className={styles.locationInputService}>
                   <span className={styles.link}>View on map</span> |{" "}
                   <span
@@ -400,7 +492,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                       showToast(
                         "success",
                         result?.message ||
-                          "Online/Remote status updated successfully"
+                        "Online/Remote status updated successfully"
                       );
                     }
                   });
@@ -533,6 +625,18 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             serviceName={"This Location"}
           />
         )}
+
+{isTravelTimeModalOpen && (
+  <TravelTimeModal
+    isOpen={isTravelTimeModalOpen}
+    onClose={() => setIsTravelTimeModalOpen(false)}
+    locationData={locationData}
+    setLocationData={setLocationData}
+    onNext={handleLocationNext}
+ 
+  />
+)}
+
       </div>
     </>
   );

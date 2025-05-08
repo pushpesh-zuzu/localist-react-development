@@ -254,9 +254,13 @@ const LocationModal = ({
             postalCode = component.long_name;
           }
         });
+        const cityName = place.address_components.find((component) =>
+          component.types.includes("locality")
+        )?.long_name;
 
         if (postalCode) {
           onChange({ target: { name: "postcode", value: postalCode } });
+          onChange({ target: { name: "city", value: cityName || "" } })
           inputRef.current.value = postalCode;
 
           if (lat && lng) {

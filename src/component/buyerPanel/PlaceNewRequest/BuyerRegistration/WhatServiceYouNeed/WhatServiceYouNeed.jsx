@@ -139,8 +139,12 @@ const { userToken } = useSelector((state)=> state.auth)
       const cityName = place.address_components.find((component) =>
         component.types.includes("locality")
       )?.long_name;
+      const townName = place.address_components.find((component) =>
+        component.types.includes("administrative_area_level_3")
+      )?.long_name;
+      
       const formattedAddress = place.formatted_address;
-  
+  // const townName = place.formatted_address
       if (postalCode) {
         setPincode(postalCode);
         inputRef.current.value = postalCode;

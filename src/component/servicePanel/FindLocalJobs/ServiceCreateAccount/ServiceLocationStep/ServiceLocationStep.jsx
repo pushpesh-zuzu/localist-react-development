@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-console.log(inputRef,'inputref')
+
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -54,12 +54,13 @@ console.log(inputRef,'inputref')
           }
         });
         
-
+        const cityName = place.address_components.find((component) =>
+          component.types.includes("locality")
+        )?.long_name;
+        
         if (postalCode) {
-          // dispatch(setSelectedServiceFormData(postalCode));
-
-          // ✅ Update Input Field with Selected Postal Code
           dispatch(setFormData({ postcode: postalCode }));
+          dispatch(setFormData({cities: cityName}))
           inputRef.current.value = postalCode; // Update input value
         } else {
           showToast("error", "No PIN code found! Please try again.");

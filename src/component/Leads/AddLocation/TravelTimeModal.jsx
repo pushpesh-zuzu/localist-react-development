@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
-const TravelTimeModal = ({ onClose,onNext }) => {
+const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData,type }) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
@@ -14,11 +14,11 @@ const TravelTimeModal = ({ onClose,onNext }) => {
     lng: 78.9629,
   });
 
-  const [locationData, setLocationData] = useState({
-    postcode: "",
-    travelTime: "30 minutes",
-    travelMode: "Driving",
-  });
+  // const [locationData, setLocationData] = useState({
+  //   postcode: "",
+  //   travel_time: "30 minutes",
+  //   travel_by: "Driving",
+  // });
 
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
@@ -40,8 +40,8 @@ const TravelTimeModal = ({ onClose,onNext }) => {
     if (!window.google || !mapInstance.current) return;
 
     const radiusInMeters = calculateTravelRadius(
-      locationData.travelTime,
-      locationData.travelMode
+      locationData?.travel_time,
+      locationData?.travel_by
     );
 
     if (circleRef.current) {
@@ -108,7 +108,7 @@ const TravelTimeModal = ({ onClose,onNext }) => {
         zoom: 10,
       });
 
-      if (locationData.postcode && mapCenter.lat !== 20.5937) {
+      if (locationData?.postcode && mapCenter.lat !== 20.5937) {
         updateMarkerAndCircle();
       }
     };
@@ -138,6 +138,10 @@ const TravelTimeModal = ({ onClose,onNext }) => {
             postalCode = component.long_name;
           }
         });
+        const cityName = place.address_components.find((component) =>
+          component.types.includes("locality")
+        )?.long_name;
+      
 
         if (lat && lng) {
           const finalLocation = postalCode || placeName;
@@ -145,6 +149,7 @@ const TravelTimeModal = ({ onClose,onNext }) => {
           setLocationData((prev) => ({
             ...prev,
             postcode: finalLocation,
+            city: cityName || "",
           }));
 
           setTimeout(() => {
@@ -160,10 +165,10 @@ const TravelTimeModal = ({ onClose,onNext }) => {
   }, []);
 
   useEffect(() => {
-    if (mapLoaded && locationData.postcode && mapCenter.lat !== 20.5937) {
+    if (mapLoaded && locationData?.postcode && mapCenter.lat !== 20.5937) {
       updateMarkerAndCircle();
     }
-  }, [locationData.travelTime, locationData.travelMode]);
+  }, [locationData?.travel_time, locationData?.travel_by]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -175,6 +180,7 @@ const TravelTimeModal = ({ onClose,onNext }) => {
 
   const handleNext = () => {
     console.log("Form submitted with data:", locationData);
+    onNext(locationData)
     onClose();
   };
 
@@ -202,7 +208,7 @@ const TravelTimeModal = ({ onClose,onNext }) => {
               ref={inputRef}
               type="text"
               name="postcode"
-              value={locationData.postcode}
+              value={locationData?.postcode}
               onChange={onChange}
               placeholder="Enter postcode or city"
               autoComplete="off"
@@ -212,8 +218,8 @@ const TravelTimeModal = ({ onClose,onNext }) => {
           <div className={styles.inputGroup}>
             <label>Travel time</label>
             <select
-              name="travelTime"
-              value={locationData.travelTime}
+              name="travel_time"
+              value={locationData?.travel_time}
               onChange={onChange}
             >
               <option value="30 minutes">30 minutes</option>
@@ -226,8 +232,8 @@ const TravelTimeModal = ({ onClose,onNext }) => {
           <div className={styles.inputGroup}>
             <label>Travelling by</label>
             <select
-              name="travelMode"
-              value={locationData.travelMode}
+              name="travel_by"
+              value={locationData?.travel_by}
               onChange={onChange}
             >
               <option value="Driving">Driving</option>
@@ -260,7 +266,7 @@ const TravelTimeModal = ({ onClose,onNext }) => {
           <button className={styles.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button className={styles.nextButton} onClick={onNext}>
+          <button className={styles.nextButton} onClick={handleNext}>
             Next
           </button>
         </div>
