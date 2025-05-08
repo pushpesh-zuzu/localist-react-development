@@ -7,16 +7,21 @@ const AccountDetails = () => {
     <div className={styles.container}>
       <div className={styles.backText}>← Setting</div>
       <h1 className={styles.heading}>Account Details</h1>
-      <p className={styles.description}>
-        <span className={styles.infoIcon}><img src={iIcon} alt="iIcon" /></span> Manage your account email,
-        phone number, password and login details. We’ll use these details to
-        contact you but won’t share it with customers. You can control the email
-        address and phone number that customers see for your business in{" "}
-        <a href="#" className={styles.link}>
-          My Profile
-        </a>
-        .
-      </p>
+      <div className={styles.manageWrapper}>
+        <span className={styles.infoIcon}>
+          <img src={iIcon} alt="iIcon" />
+        </span>
+        <p className={styles.description}>
+          Manage your account email, phone number, password and login details.
+          We’ll use these details to contact you but won’t share it with
+          customers. You can control the email address and phone number that
+          customers see for your business in{" "}
+          <a href="#" className={styles.link}>
+            My Profile
+          </a>
+          .
+        </p>
+      </div>
 
       <div className={styles.card}>
         <h3 className={styles.subHeading}>Contact details</h3>
