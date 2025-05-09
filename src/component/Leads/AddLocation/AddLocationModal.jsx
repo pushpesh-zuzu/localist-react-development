@@ -66,6 +66,7 @@ const AddLocationModal = ({
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ?? 0,
       postcode: locationData.postcode,
+      // postcode: previousPostcode,
       city: locationData?.city,
       travel_time:locationData?.travel_time,
       travel_by: locationData?.travel_by,

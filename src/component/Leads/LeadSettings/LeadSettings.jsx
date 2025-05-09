@@ -183,6 +183,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
   const handleSelectService = useCallback(
     (item) => {
+      
       setInput(""); // Clear input field
       setIsDropdownOpen(false);
   
@@ -197,6 +198,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   );
   
   const handleSubmitData = () => {
+    
     const serviceIds = selectedServices.map((item) => item.id).join(",");
   
     const serviceDataList = {
@@ -211,6 +213,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         };
         dispatch(getleadPreferencesList(data));
         setIsModalOpen(false);
+        setSelectedServices([])
       }
     });
   };

@@ -452,6 +452,7 @@ const editInitializeMap = () => {
 
   locationData?.forEach((coord, index) => {
     const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
+    console.log(latLng,latLng)
     setTimeout(() => {
       newGeocoder.geocode({ location: latLng }, (results, status) => {
         if (status === 'OK' && results[0]) {
@@ -863,7 +864,7 @@ const addInitializeMap = () => {
           let city = '';
           
           // Log all address components for debugging
-          console.log("All address components:", addressComponents);
+          console.log("All address components:",latLng, addressComponents);
           
           // Extract pincode (postal_code) and city
           addressComponents.forEach(component => {
@@ -1161,10 +1162,18 @@ useEffect(() => {
   
       geocoder.geocode({ location: center }, (results, status) => {
         if (status === 'OK' && results[0]) {
-          const addressComponents = results[0].address_components;
+          // const addressComponents = results[0].address_components;
+          let addressComponents =[];
+           results?.forEach((item)=>{
+            
+            item?.address_components.forEach((chld)=>{
+              if(chld.types.includes('postal_code')){
+              addressComponents=item.address_components}
+            })
+          });
           let pincode = '';
           let city = '';
-  
+  console.log(addressComponents,results,'addressComponents')
           addressComponents.forEach(component => {
             if (component.types.includes('postal_code')) {
               pincode = component.long_name;
@@ -1196,9 +1205,9 @@ useEffect(() => {
         bounds.extend(path.getAt(i));
       }
       const center = bounds.getCenter();
-  
       // Get geocode info
       const { city, pincode } = await getGeocodeDetails(center);
+      console.log(pincode,'pincode')
   
       // Get coordinates
       const coordinates = Array.from({ length: path.getLength() }, (_, i) => {
@@ -1220,7 +1229,7 @@ const data={
   city:allPolygonData?.[0]?.city,
   postcode:allPolygonData?.[0]?.pincode,
   miles:0,
-  coordinates:JSON.stringify(allPolygonData?.[0]?.coordinates)
+  coordinates:JSON.stringify(allPolygonData?.[allPolygonData?.length-1]?.coordinates)
   
 }
 
