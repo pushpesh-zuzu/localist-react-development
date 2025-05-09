@@ -30,6 +30,8 @@ import LocationModal from "../LocationModal";
 import AddServiceModal from "../LeadAddServiceModal";
 import AddLocationModal from "../AddLocation/AddLocationModal";
 import TravelTimeModal from "../AddLocation/TravelTimeModal";
+import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
+import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -187,10 +189,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
   const [isTravelTimeModalOpen, setIsTravelTimeModalOpen] = useState(false);
-const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
-const type=useRef();
+  const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false)
+  const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
+  const [isopenviewModal,setIsOpenViewModal]  = useState(false)
+  const type = useRef();
 
-console.log(setEditLocationId,"selectedTravelLocation")
+  console.log(setEditLocationId, "selectedTravelLocation")
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
@@ -207,23 +211,33 @@ console.log(setEditLocationId,"selectedTravelLocation")
   };
 
   const handleEditLocation = (location) => {
-    console.log("Edit", location?.type);
-    type.current=location.type
- 
+    console.log("Edit", location);
+    type.current = location.type
+
     if (location?.type === "Travel Time") {
       setLocationData({
-        travel_time: location?.travel_time || '',    
-        travel_by: location?.travel_by || '',     
-        postcode: location?.postcode || '',                            
+        travel_time: location?.travel_time || '',
+        travel_by: location?.travel_by || '',
+        postcode: location?.postcode || '',
       })
-      setSelectedTravelLocation(location); 
+      setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
       setEditLocationId(location.id)
       setPreviousPostcode(location.postcode)
       return;
     }
-  
-    // Open regular edit modal
+    if (location?.type === "Draw on Map") {
+      setLocationData({
+        postcode: location?.postcode,
+        city: location?.city
+      })
+      setIsDrawTimeOpen(true)
+      setEditLocationId(location.id)
+      setPreviousPostcode(location.postcode)
+    }
+
+  if(location?.type === "Distance"){
+
     setLocationData({
       miles1: location.miles,
       postcode: location.postcode,
@@ -231,60 +245,34 @@ console.log(setEditLocationId,"selectedTravelLocation")
     setEditLocationId(location.id);
     setIseditModalOpen(true);
     setPreviousPostcode(location.postcode);
-  };
-  // const handleEditLocation = (location) => {
-  //   console.log("Edit location:", location);
-  //   setEditLocationId(location.id);
-  //   setPreviousPostcode(location.postcode);
-    
-  //   // Handle different location types
-  //   if (location?.type === "Travel Time") {
-  //     setLocationData({
-  //       travel_time: location?.travel_time || '',    
-  //       travel_by: location?.travel_by || '',     
-  //       postcode: location?.postcode || '',
-  //       city: location?.city || '',
-  //       type: "Travel Time" // Explicitly set the type
-  //     });
-  //     setSelectedTravelLocation(location); 
-  //     setIsTravelTimeModalOpen(true);
-  //   } 
-  //   else if (location?.type === "Distance" || !location?.type) {
-  //     // Handle Distance type or default to Distance if type is not specified
-  //     setLocationData({
-  //       miles1: location.miles || "1",
-  //       postcode: location.postcode || "",
-  //       type: "Distance" // Explicitly set the type
-  //     });
-  //     setIseditModalOpen(true);
-  //   }
-  //   else if (location?.type === "Drawn") {
-  //     // Handle Drawn type
-  //     setLocationData({
-  //       postcode: location.postcode || "",
-  //       city: location?.city || '',
-  //       type: "Drawn" // Explicitly set the type
-  //     });
-  //     // Open appropriate modal for Drawn type
-  //     setIseditModalOpen(true);
-  //   }
-  // };
+  }
+  if(location?.type === "Nationwide") {
+    setLocationData({
+      miles1: location.miles,
+      postcode: location.postcode,
+      city:location?.city
+    });
+    setIsNextModalOpen(true)
 
+  }
+  };
+
+console.log(locationData,"locationData")
   const handleConfirm = () => {
     const serviceIds = selectedServices.join(",");
-    const typeOfTravel=type.current;
-    
+    const typeOfTravel = type.current;
+
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
       postcode: locationData.postcode,
       service_id: serviceIds,
       postcode_old: previousPostcode,
-      travel_time:locationData?.travel_time,
-      travel_by:locationData?.travel_by,
-      type:typeOfTravel,
+      travel_time: locationData?.travel_time,
+      travel_by: locationData?.travel_by,
+      type: typeOfTravel,
       miles_old: previousPostcode,
-      city:locationData?.city
+      city: locationData?.city
 
     };
 
@@ -308,22 +296,6 @@ console.log(setEditLocationId,"selectedTravelLocation")
       }
     });
   };
-
-  // const handleEditLocation = (location) => {
-  //   console.log("Edit", location?.type);
-  //   setLocationData({
-  //     miles1: location.miles,
-  //     postcode: location.postcode,
-  //   });
-  //   setEditLocationId(location.id);
-  //   setIseditModalOpen(true);
-  //   // setIsLocationModalOpen(true);
-  //   setPreviousPostcode(location.postcode);
-  // };
-
-  
-  
-
   const handleRemoveOpen = (id) => {
     setRemoveModal({ show: true, service_id: id });
   };
@@ -331,6 +303,10 @@ console.log(setEditLocationId,"selectedTravelLocation")
   const onHandleCancel = () => {
     setRemoveModal({ show: false, service_id: null });
   };
+  const handleViewMap = (item) => {
+    setLocationData(item)
+    setIsOpenViewModal(true)
+  }
 
   const handleRemove = () => {
     const removeData = {
@@ -354,14 +330,6 @@ console.log(setEditLocationId,"selectedTravelLocation")
       }
     });
   };
-
-  // const isOnlineRemotes = () => {
-  //   const isOnlineData = {
-  //     user_id:userToken?.remember_tokens,
-  //     is_online: is_online ? 1 : 0
-  //   }
-  //   dispatch(isOnlineRemote(isOnlineData))
-  // }
   return (
     <>
       <div className={styles.container}>
@@ -382,8 +350,8 @@ console.log(setEditLocationId,"selectedTravelLocation")
                   key={service.id}
                   ref={(el) => (serviceRefs.current[service.id] = el)}
                   className={`${styles.serviceItem} ${selectedService?.id === service.id
-                      ? styles.selectedService
-                      : ""
+                    ? styles.selectedService
+                    : ""
                     }`}
                   onClick={() => handleServiceClick(service?.id, service?.name)}
                 >
@@ -423,20 +391,31 @@ console.log(setEditLocationId,"selectedTravelLocation")
                     Within <strong>{item.miles} miles</strong> of{" "}
                     <strong>{item.postcode}</strong>
                   </p>
-                ) : item?.type === "Drawn" ? (
+                ) : item?.type === "Draw on Map" ? (
                   <p className={styles.locationInput}>
-                    Draws <strong>{item?.travel_time}</strong> of{" "}
+                    Draws area near {" "}
                     <strong>{item.city}</strong>
                   </p>
-                ) : (
+                ) : 
+                item?.type === "Nationwide" ? (
+                  <p className={styles.locationInput}>
+                    Nationwide 
+                  </p>
+                  )
+                :
+                (
                   <p className={styles.locationInput}>
                     Within <strong>{item?.travel_time} </strong> {item?.travel_by} of{" "}
                     <strong>{item.city}</strong>
                   </p>
-                )}
+                ) 
+                
+                
+                
+                }
 
                 <p className={styles.locationInputService}>
-                  <span className={styles.link}>View on map</span> |{" "}
+                  <span className={styles.link} onClick={()=> handleViewMap(item)}>View on map</span> |{" "}
                   <span
                     className={styles.link}
                     onClick={() => handleRemoveOpen(item?.postcode)}
@@ -528,28 +507,6 @@ console.log(setEditLocationId,"selectedTravelLocation")
                 );
               }}
             />
-            {/* <input
-              type="checkbox"
-              checked={autobid_pause}
-              onChange={() => {
-                setAutoBid(!autobid_pause);
-
-                const isAutoBidPauseData = {
-                  user_id: registerData?.remember_tokens,
-                  autobid_pause: !autobid_pause ? 1 : 0,
-                };
-                dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
-                  (result) => {
-                    if (result?.success) {
-                      showToast(
-                        "success",
-                        result?.message || "Auto Bid updated successfully"
-                      );
-                    }
-                  }
-                );
-              }}
-            /> */}
             <span className={styles.slider}></span>
           </label>
         </div>
@@ -595,6 +552,8 @@ console.log(setEditLocationId,"selectedTravelLocation")
             onConfirm={handleConfirm}
             selectedServices={selectedServices}
             setSelectedServices={setSelectedServices}
+            locationData={locationData}
+    setLocationData={setLocationData}
           />
         )}
 
@@ -626,17 +585,33 @@ console.log(setEditLocationId,"selectedTravelLocation")
           />
         )}
 
-{isTravelTimeModalOpen && (
-  <TravelTimeModal
-    isOpen={isTravelTimeModalOpen}
-    onClose={() => setIsTravelTimeModalOpen(false)}
-    locationData={locationData}
-    setLocationData={setLocationData}
-    onNext={handleLocationNext}
- 
-  />
-)}
+        {isTravelTimeModalOpen && (
+          <TravelTimeModal
+            isOpen={isTravelTimeModalOpen}
+            onClose={() => setIsTravelTimeModalOpen(false)}
+            locationData={locationData}
+            setLocationData={setLocationData}
+            onNext={handleLocationNext}
 
+          />
+        )}
+        {isDrawTimeOpen && (
+          <DrawOnMapModal
+            locationData={locationData}
+            setLocationData={setLocationData}
+            onNext={handleLocationNext}
+            isOpen={isDrawTimeOpen}
+            onClose={() => setIsDrawTimeOpen(false)}
+          />
+        )}
+{
+  isopenviewModal && (
+    <ViewOnMapModal  locationData={locationData}
+    setLocationData={setLocationData}  
+    isOpen={isopenviewModal}
+    onClose={() => setIsOpenViewModal(false)}/>
+  )
+}
       </div>
     </>
   );

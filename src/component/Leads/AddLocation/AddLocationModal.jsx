@@ -31,7 +31,9 @@ const AddLocationModal = ({
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
   const [locationType, setLocationType] = useState("");
-
+ const {  registerData } = useSelector(
+    (state) => state.findJobs
+  );
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -62,7 +64,7 @@ const AddLocationModal = ({
     
     const locationdata = {
       user_id: userToken?.remember_tokens,
-      miles: locationData.miles1,
+      miles: locationData.miles1 ?? 0,
       postcode: locationData.postcode,
       city: locationData?.city,
       travel_time:locationData?.travel_time,
@@ -104,6 +106,7 @@ const AddLocationModal = ({
             miles1: "1",
             postcode: "",
           });
+          setSelectedServices([])
         }
       });
     }
@@ -192,7 +195,7 @@ const AddLocationModal = ({
                 </div>
               </div>
 
-              <div
+             {registerData?.nationwide == 0 && <div
                 className={styles.option}
                 onClick={() => handleOptionClick("nationwide")}
               >
@@ -208,7 +211,7 @@ const AddLocationModal = ({
                     across the whole country.
                   </p>
                 </div>
-              </div>
+              </div>}
             </div>
           </div>
         </div>
@@ -230,7 +233,8 @@ const AddLocationModal = ({
       )}
 
       {selectedOption === "drawOnMap" && (
-        <DrawOnMapModal onClose={handleChildModalClose} />
+        <DrawOnMapModal onClose={handleChildModalClose} onNext={handleNext}  locationData={locationData}
+        setLocationData={setLocationData} />
       )}
 
       {/* {selectedOption === "nationwide" && (

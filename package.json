@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@react-google-maps/api": "^2.20.6",
     "@reduxjs/toolkit": "^2.5.1",
     "antd": "^5.24.1",
     "axios": "^1.6.5",

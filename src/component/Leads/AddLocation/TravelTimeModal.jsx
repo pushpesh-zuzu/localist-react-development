@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
-const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData,type }) => {
+const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
   const mapInstance = useRef(null);

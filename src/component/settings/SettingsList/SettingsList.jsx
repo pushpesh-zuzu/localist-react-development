@@ -20,9 +20,9 @@ const SettingsList = () => {
   const handleMyProfile = () => {
     navigate("/settings/my_profile");
   };
-  // const handleMycredit = () => {
-  //   navigate("/myCredit")
-  // }
+  const handleMycredit = () => {
+    navigate("/myCredit")
+  }
   return (
     <>
       <div className="container">
@@ -109,7 +109,7 @@ const SettingsList = () => {
           </div>
           <div className={styles.sectionContent}>
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
-            // onClick={handleMycredit}
+            onClick={handleMycredit}
             >
               <h3>My credits</h3>
             </div>
