@@ -110,11 +110,11 @@ const AddLocationModal = ({
             postcode: "",
           });
           setSelectedServices([])
+          setIsNextModalOpen(false);
         }
       });
     }
 
-    setIsNextModalOpen(false);
   };
 
   const handleNext = () => {

@@ -58,7 +58,17 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const { userToken } = useSelector((state) => state.auth);
   const [autobid_pause, setAutoBid] = useState(sevenPausedData?.autobidpause === 1);
   const [is_online, setIsOnline] = useState(getOnlineRemote?.isonline === 1);
-
+  const [isNextModalOpen, setIsNextModalOpen] = useState(false);
+  const [isEditModalOpen, setIseditModalOpen] = useState(false);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [previousPostcode, setPreviousPostcode] = useState("");
+  const [isTravelTimeModalOpen, setIsTravelTimeModalOpen] = useState(false);
+  const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false)
+  const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
+  const [isopenviewModal,setIsOpenViewModal]  = useState(false)
+  const[isEdit,setIsEdit]=useState(false)
+  const [latitude,setLatitude] = useState([])
+  const type = useRef();
   // Add this useEffect to keep the checkbox state in sync with Redux
   useEffect(() => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
@@ -154,37 +164,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
-  // const handleSelectService = useCallback(
-  //   (item) => {
-  //     setInput(item.name);
-  //     setSelectValue(item);
-  //     setIsDropdownOpen(false);
-  //     // setErrors((prev) => ({ ...prev, service: "" }));
-  //     setTimeout(() => dispatch(setService([])), 100);
-  //   },
-  //   [dispatch]
-  // );
-  // const handleSubmitData = () => {
-  //   console.log(selectValue,"selectValue")
-  //   const serviceDataList = {
-  //     user_id: userToken?.remember_tokens,
-  //     service_id: selectValue?.id,
-  //   };
-  //   dispatch(addServiceLead(serviceDataList)).then((result) => {
-  //     if (result?.success) {
-  //       const data = {
-  //         user_id: userToken?.remember_tokens,
-  //       };
-  //       dispatch(getleadPreferencesList(data));
-  //       setIsModalOpen(false);
-  //     }
-  //   });
-  // };
-
+  
   const handleSelectService = useCallback(
     (item) => {
-      
-      setInput(""); // Clear input field
+      setInput("");
       setIsDropdownOpen(false);
   
       setSelectedServices((prev) => {
@@ -196,43 +179,34 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     },
     [dispatch]
   );
-  
-  const handleSubmitData = () => {
-    
+  const handleSubmitData = useCallback(() => {
     const serviceIds = selectedServices.map((item) => item.id).join(",");
   
     const serviceDataList = {
       user_id: userToken?.remember_tokens,
-      service_id: serviceIds, 
+      service_id: serviceIds,
     };
   
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
-        const data = {
-          user_id: userToken?.remember_tokens,
-        };
-        dispatch(getleadPreferencesList(data));
+        dispatch(getleadPreferencesList({ user_id: userToken?.remember_tokens }));
         setIsModalOpen(false);
-        setSelectedServices([])
+        setSelectedServices([]); // Clear after submission
       }
     });
-  };
+  }, [selectedServices, userToken, dispatch]);
   
+  const handleRemoveService = useCallback(
+    (id) => {
+      setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+    },
+    []
+  ); 
   const [removeModal, setRemoveModal] = useState({
     show: false,
     service_id: null,
   });
-  const [isNextModalOpen, setIsNextModalOpen] = useState(false);
-  const [isEditModalOpen, setIseditModalOpen] = useState(false);
-  const [selectedServices, setSelectedServices] = useState([]);
-  const [previousPostcode, setPreviousPostcode] = useState("");
-  const [isTravelTimeModalOpen, setIsTravelTimeModalOpen] = useState(false);
-  const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false)
-  const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
-  const [isopenviewModal,setIsOpenViewModal]  = useState(false)
-  const[isEdit,setIsEdit]=useState(false)
-  const [latitude,setLatitude] = useState([])
-  const type = useRef();
+ 
 
   console.log(setEditLocationId, "selectedTravelLocation")
   const handleNext = () => {
@@ -251,10 +225,51 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   };
 
   const handleEditLocation = (location) => {
+    // setIsEdit(true)
+    // console.log("Edit", location);
+    // type.current = location.type
     setIsEdit(true)
-    console.log("Edit", location);
     type.current = location.type
-
+    
+    // Extract services from location and set them to selectedServices
+    if (location.service_ids) {
+      try {
+        // Handle different possible formats of service_ids
+        let serviceIdsArray = [];
+        if (typeof location.service_ids === 'string') {
+          serviceIdsArray = location.service_ids.split(',');
+        } else if (Array.isArray(location.service_ids)) {
+          serviceIdsArray = location.service_ids;
+        } else if (typeof location.service_ids === 'number') {
+          serviceIdsArray = [location.service_ids.toString()];
+        }
+        
+        const serviceArray = serviceIdsArray.map(id => {
+          // Find the service name from preferenceList if available
+          const service = preferenceList.find(s => s.id.toString() === id.toString());
+          return {
+            id: id,
+            name: service ? service.name : `Service ${id}`
+          };
+        });
+        setSelectedServices(serviceArray);
+      } catch (error) {
+        console.error("Error processing service IDs:", error);
+        setSelectedServices([]);
+      }
+    } else {
+      // If there's no service_ids, try to use total_services if available
+      const total = parseInt(location.total_services);
+      if (total > 0 && preferenceList && preferenceList.length > 0) {
+        // Just set the first service as a fallback
+        setSelectedServices([{
+          id: preferenceList[0].id,
+          name: preferenceList[0].name
+        }]);
+      } else {
+        setSelectedServices([]);
+      }
+    }
     if (location?.type === "Travel Time") {
       setLocationData({
         travel_time: location?.travel_time || '',
@@ -305,9 +320,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   };
 
   const handleConfirm = () => {
-    const serviceIds = selectedServices.join(",");
+    const serviceIds = selectedServices.map((item) => item.id).join(",");
     const typeOfTravel = type.current;
-
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
@@ -573,6 +587,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           searchServiceLoader={searchServiceLoader}
           handleSelectService={handleSelectService}
           handleSubmitData={handleSubmitData}
+          handleRemoveService={handleRemoveService}
+          selectedServices={selectedServices}
+
         />
 
         {isEditModalOpen && (
