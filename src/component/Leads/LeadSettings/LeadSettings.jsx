@@ -154,21 +154,56 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
+  // const handleSelectService = useCallback(
+  //   (item) => {
+  //     setInput(item.name);
+  //     setSelectValue(item);
+  //     setIsDropdownOpen(false);
+  //     // setErrors((prev) => ({ ...prev, service: "" }));
+  //     setTimeout(() => dispatch(setService([])), 100);
+  //   },
+  //   [dispatch]
+  // );
+  // const handleSubmitData = () => {
+  //   console.log(selectValue,"selectValue")
+  //   const serviceDataList = {
+  //     user_id: userToken?.remember_tokens,
+  //     service_id: selectValue?.id,
+  //   };
+  //   dispatch(addServiceLead(serviceDataList)).then((result) => {
+  //     if (result?.success) {
+  //       const data = {
+  //         user_id: userToken?.remember_tokens,
+  //       };
+  //       dispatch(getleadPreferencesList(data));
+  //       setIsModalOpen(false);
+  //     }
+  //   });
+  // };
+
   const handleSelectService = useCallback(
     (item) => {
-      setInput(item.name);
-      setSelectValue(item);
+      setInput(""); // Clear input field
       setIsDropdownOpen(false);
-      // setErrors((prev) => ({ ...prev, service: "" }));
+  
+      setSelectedServices((prev) => {
+        const isAlreadySelected = prev.some((service) => service.id === item.id);
+        return isAlreadySelected ? prev : [...prev, item];
+      });
+  
       setTimeout(() => dispatch(setService([])), 100);
     },
     [dispatch]
   );
+  
   const handleSubmitData = () => {
+    const serviceIds = selectedServices.map((item) => item.id).join(",");
+  
     const serviceDataList = {
       user_id: userToken?.remember_tokens,
-      service_id: selectValue?.id,
+      service_id: serviceIds, 
     };
+  
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
         const data = {
@@ -179,7 +214,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       }
     });
   };
-
+  
   const [removeModal, setRemoveModal] = useState({
     show: false,
     service_id: null,
@@ -192,6 +227,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false)
   const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
   const [isopenviewModal,setIsOpenViewModal]  = useState(false)
+  const[isEdit,setIsEdit]=useState(false)
+  const [latitude,setLatitude] = useState([])
   const type = useRef();
 
   console.log(setEditLocationId, "selectedTravelLocation")
@@ -211,6 +248,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   };
 
   const handleEditLocation = (location) => {
+    setIsEdit(true)
     console.log("Edit", location);
     type.current = location.type
 
@@ -227,6 +265,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       return;
     }
     if (location?.type === "Draw on Map") {
+     
+      const data=JSON.parse(location.
+        coordinates)
+        setLatitude(data)
       setLocationData({
         postcode: location?.postcode,
         city: location?.city
@@ -257,7 +299,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   }
   };
 
-console.log(locationData,"locationData")
   const handleConfirm = () => {
     const serviceIds = selectedServices.join(",");
     const typeOfTravel = type.current;
@@ -272,9 +313,10 @@ console.log(locationData,"locationData")
       travel_by: locationData?.travel_by,
       type: typeOfTravel,
       miles_old: previousPostcode,
-      city: locationData?.city
-
+      city: locationData?.city,
+      coordinates:locationData?.coordinates
     };
+    console.log(locationData,"445566")
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })
@@ -597,11 +639,13 @@ console.log(locationData,"locationData")
         )}
         {isDrawTimeOpen && (
           <DrawOnMapModal
+          isEdit={isEdit}
             locationData={locationData}
             setLocationData={setLocationData}
             onNext={handleLocationNext}
             isOpen={isDrawTimeOpen}
             onClose={() => setIsDrawTimeOpen(false)}
+            data={latitude}
           />
         )}
 {

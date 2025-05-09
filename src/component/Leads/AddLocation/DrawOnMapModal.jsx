@@ -365,9 +365,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./DrawOnMapModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
+import { useSelector } from "react-redux";
 
 
-const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData }) => {
+const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData,data,isEdit }) => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [drawingManager, setDrawingManager] = useState(null);
@@ -377,8 +378,9 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [geocoder, setGeocoder] = useState(null);
   const [polygonAddresses, setPolygonAddresses] = useState([]);
+  const { getlocationData } = useSelector((state) => state.leadSetting)
   // const [locationData,setLocationData] = useState("");
-
+console.log(getlocationData,polygons,data,"locationData")
   useEffect(() => {
     // Load Google Maps API if not already loaded
     const loadGoogleMapsScript = () => {
@@ -392,117 +394,449 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData }) => {
         // Define the callback globally
         window.initMap = () => {
           if (mapRef.current) {
-            initializeMap();
+            // initializeMap();
+            addInitializeMap()
           }
         };
         
         document.body.appendChild(script);
       } else {
-        initializeMap();
+        if(isEdit){
+          editInitializeMap()
+        }else{
+
+          addInitializeMap();
+        }
       }
     };
+const  locationData=data;
 
-    const initializeMap = () => {
-      const center = { lat: 20.5937, lng: 78.9629 }; // Center of India
-      const mapOptions = {
-        center,
-        zoom: 5,
-        mapTypeControl: true,
-        streetViewControl: false,
-        fullscreenControl: true,
-      };
-      
-      const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
-      setMap(newMap);
-      
-      // Initialize geocoder
-      const newGeocoder = new window.google.maps.Geocoder();
-      setGeocoder(newGeocoder);
-      
-      // Initialize DrawingManager but don't activate it yet
-      const manager = new window.google.maps.drawing.DrawingManager({
-        drawingMode: null, // Start with no drawing mode active
-        drawingControl: false, // Hide the default drawing controls
-        polygonOptions: {
-          fillColor: "#4285F4",
-          fillOpacity: 0.3,
-          strokeWeight: 2,
-          strokeColor: "#4285F4",
-          clickable: true,
-          editable: false,
-          zIndex: 1,
-        },
-      });
-      
-      setDrawingManager(manager);
-      
-      // Add listener for polygon completion
-      window.google.maps.event.addListener(manager, "overlaycomplete", (event) => {
-        if (event.type === window.google.maps.drawing.OverlayType.POLYGON) {
-          const polygon = event.overlay;
-          
-          // Add this polygon to our state
-          setPolygons((prev) => [...prev, polygon]);
-          
-          // Extract coordinates
-          const path = polygon.getPath();
-          const coordinates = Array.from({ length: path.getLength() }, (_, i) => {
-            const point = path.getAt(i);
-            return { lat: point.lat(), lng: point.lng() };
+const editInitializeMap = () => {
+  const center = { lat: 20.5937, lng: 78.9629 };
+  const mapOptions = {
+    center,
+    zoom: 5,
+    mapTypeControl: true,
+    streetViewControl: false,
+    fullscreenControl: true,
+  };
+
+  const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
+  setMap(newMap);
+
+  const newGeocoder = new window.google.maps.Geocoder();
+  setGeocoder(newGeocoder);
+
+  const polygon = new window.google.maps.Polygon({
+    paths: locationData,
+    fillColor: "red",
+    fillOpacity: 0.3,
+    strokeWeight: 2,
+    strokeColor: "red",
+    clickable: true,
+    editable: false,
+    map: newMap,
+  });
+
+  setPolygons(prev => [...prev, polygon]);
+
+  const bounds = new window.google.maps.LatLngBounds();
+  locationData?.forEach(coord => {
+    bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+  });
+
+  const centerPoint = bounds.getCenter();
+  console.log("Polygon center for geocoding:", centerPoint.lat(), centerPoint.lng());
+
+  fetchAddressDetails(centerPoint, prev => [...prev, null]);
+
+  locationData?.forEach((coord, index) => {
+    const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
+    setTimeout(() => {
+      newGeocoder.geocode({ location: latLng }, (results, status) => {
+        if (status === 'OK' && results[0]) {
+          const addressComponents = results[0].address_components;
+          let pincode = '';
+          let city = '';
+
+          addressComponents.forEach(component => {
+            if (component.types.includes('postal_code')) {
+              pincode = component.long_name;
+            }
+            if (component.types.includes('locality') || 
+                component.types.includes('administrative_area_level_2')) {
+              city = component.long_name;
+            }
           });
-          
-          console.log("Polygon coordinates:", coordinates);
-          
-          // Get the center point of the polygon for geocoding
-          const bounds = new window.google.maps.LatLngBounds();
-          coordinates.forEach((coord) => {
-            bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
-          });
-          const center = bounds.getCenter();
-          
-          console.log("Polygon center for geocoding:", center.lat(), center.lng());
-          
-          // Fetch address details for this polygon
-          fetchAddressDetails(center, prev => [...prev, null]);
-          
-          // Also geocode each vertex of the polygon to find pincodes and cities
-          coordinates.forEach((coord, index) => {
-            const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
-            console.log(`Geocoding vertex ${index}:`, coord.lat, coord.lng);
-            
-            // Use a timeout to avoid hitting geocoding rate limits
-            setTimeout(() => {
-              geocoder?.geocode({ location: latLng }, (results, status) => {
-                if (status === 'OK' && results[0]) {
-                  const addressComponents = results[0].address_components;
-                  let pincode = '';
-                  let city = '';
-                  
-                  // Extract pincode and city
-                  addressComponents.forEach(component => {
-                    if (component.types.includes('postal_code')) {
-                      pincode = component.long_name;
-                    }
-                    if (component.types.includes('locality') || 
-                        component.types.includes('administrative_area_level_2')) {
-                      city = component.long_name;
-                    }
-                  });
-                  
-                  console.log(`Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'}`);
-                } else {
-                  console.error(`Geocoder failed for vertex ${index} due to: ${status}`);
-                }
-              });
-            }, index * 300); // Stagger requests by 300ms each
-          });
-          
-          // Turn off drawing mode after completion
-          manager.setDrawingMode(null);
-          setIsDrawingActive(false);
+
+          console.log(`Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'}`);
+        } else {
+          console.error(`Geocoder failed for vertex ${index} due to: ${status}`);
         }
       });
-    };
+    }, index * 300);
+  });
+
+  const manager = new window.google.maps.drawing.DrawingManager({
+    drawingMode: null,
+    drawingControl: false,
+    polygonOptions: {
+      fillColor: "red",
+      fillOpacity: 0.3,
+      strokeWeight: 2,
+      strokeColor: "red",
+      clickable: true,
+      editable: false,
+      zIndex: 1,
+    },
+  });
+
+  setDrawingManager(manager);
+};
+const enablePolygonEditing = (polygon) => {
+  polygon.setEditable(true);
+
+  const path = polygon.getPath();
+
+  const logUpdatedPath = () => {
+    const updatedCoords = [];
+    for (let i = 0; i < path.getLength(); i++) {
+      const latLng = path.getAt(i);
+      updatedCoords.push({ lat: latLng.lat(), lng: latLng.lng() });
+    }
+    console.log("Updated1223", updatedCoords);
+  };
+
+  path.addListener('set_at', logUpdatedPath);
+  path.addListener('insert_at', logUpdatedPath);
+  path.addListener('remove_at', logUpdatedPath);
+};
+const handleEditAreaMode = () => {
+  setIsEditMode(!isEditMode);
+
+  if (isEditMode) {
+    // Exiting edit mode
+    polygons.forEach(polygon => polygon.setEditable(false));
+    deselectPolygon();
+  } else {
+    // Entering edit mode
+    if (drawingManager) {
+      drawingManager.setDrawingMode(null);
+      drawingManager.setMap(null);
+    }
+    setIsDrawingActive(false);
+
+    polygons.forEach((polygon, index) => {
+      polygon.addListener('click', () => {
+        polygons.forEach(p => p.setEditable(false));
+        enablePolygonEditing(polygon);
+
+        console.log(polygon,)
+        setSelectedPolygonIndex(index);
+        console.log(`Polygon ${index} selected for editing`);
+      });
+    });
+
+    console.log("Click on a polygon to edit it");
+  }
+};
+
+
+// const editInitializeMap = () => {
+
+//   const center = { lat: 20.5937, lng: 78.9629 }; // Center of India
+//   const mapOptions = {
+//     center,
+//     zoom: 5,
+//     mapTypeControl: true,
+//     streetViewControl: false,
+//     fullscreenControl: true,
+//   };
+
+//   const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
+//   setMap(newMap);
+
+//   const newGeocoder = new window.google.maps.Geocoder();
+//   setGeocoder(newGeocoder);
+
+//   // Draw the polygon based on locationData
+//   const polygon = new window.google.maps.Polygon({
+//     paths: locationData,
+//     fillColor: "red",
+//     fillOpacity: 0.3,
+//     strokeWeight: 2,
+//     strokeColor: "red",
+//     clickable: true,
+//     editable: false,
+//     map: newMap, // Add polygon to the map
+//   });
+
+//   // Save polygon to state
+//   setPolygons(prev => [...prev, polygon]);
+
+//   // Compute center for geocoding
+//   const bounds = new window.google.maps.LatLngBounds();
+//   locationData?.forEach(coord => {
+//     bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+//   });
+//   const centerPoint = bounds.getCenter();
+//   console.log("Polygon center for geocoding:", centerPoint.lat(), centerPoint.lng());
+
+//   fetchAddressDetails(centerPoint, prev => [...prev, null]);
+// console.log(locationData,"loc")
+//   // Geocode each vertex
+//   locationData?.forEach((coord, index) => {
+//     const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
+//     setTimeout(() => {
+//       newGeocoder.geocode({ location: latLng }, (results, status) => {
+//         if (status === 'OK' && results[0]) {
+//           const addressComponents = results[0].address_components;
+//           let pincode = '';
+//           let city = '';
+
+//           addressComponents.forEach(component => {
+//             if (component.types.includes('postal_code')) {
+//               pincode = component.long_name;
+//             }
+//             if (component.types.includes('locality') || 
+//                 component.types.includes('administrative_area_level_2')) {
+//               city = component.long_name;
+//             }
+//           });
+
+//           console.log(`Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'}`);
+//         } else {
+//           console.error(`Geocoder failed for vertex ${index} due to: ${status}`);
+//         }
+//       });
+//     }, index * 300);
+//   });
+
+//   // Optional: setup drawing manager if needed later
+//   const manager = new window.google.maps.drawing.DrawingManager({
+//     drawingMode: null,
+//     drawingControl: false,
+//     polygonOptions: {
+//       fillColor: "red",
+//       fillOpacity: 0.3,
+//       strokeWeight: 2,
+//       strokeColor: "red",
+//       clickable: true,
+//       editable: false,
+//       zIndex: 1,
+//     },
+//   });
+
+//   setDrawingManager(manager);
+  
+// };
+
+const addInitializeMap = () => {
+  const center = { lat: 20.5937, lng: 78.9629 }; // Center of India
+  const mapOptions = {
+    center,
+    zoom: 5,
+    mapTypeControl: true,
+    streetViewControl: false,
+    fullscreenControl: true,
+  };
+  
+  const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
+  setMap(newMap);
+  
+  // Initialize geocoder
+  const newGeocoder = new window.google.maps.Geocoder();
+  setGeocoder(newGeocoder);
+  
+  // Initialize DrawingManager but don't activate it yet
+  const manager = new window.google.maps.drawing.DrawingManager({
+    drawingMode: null, // Start with no drawing mode active
+    drawingControl: false, // Hide the default drawing controls
+    polygonOptions: {
+      fillColor: "#4285F4",
+      fillOpacity: 0.3,
+      strokeWeight: 2,
+      strokeColor: "#4285F4",
+      clickable: true,
+      editable: false,
+      zIndex: 1,
+    },
+  });
+  
+  setDrawingManager(manager);
+  
+  // Add listener for polygon completion
+  window.google.maps.event.addListener(manager, "overlaycomplete", (event) => {
+    if (event.type === window.google.maps.drawing.OverlayType.POLYGON) {
+      const polygon = event.overlay;
+      
+      // Add this polygon to our state
+      setPolygons((prev) => [...prev, polygon]);
+      
+      // Extract coordinates
+      const path = polygon.getPath();
+      const coordinates = Array.from({ length: path.getLength() }, (_, i) => {
+        const point = path.getAt(i);
+        return { lat: point.lat(), lng: point.lng() };
+      });
+      
+      console.log("Polygon coordinates:", coordinates);
+      
+      // Get the center point of the polygon for geocoding
+      const bounds = new window.google.maps.LatLngBounds();
+      coordinates.forEach((coord) => {
+        bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+      });
+      const center = bounds.getCenter();
+      
+      console.log("Polygon center for geocoding:", center.lat(), center.lng());
+      
+      // Fetch address details for this polygon
+      fetchAddressDetails(center, prev => [...prev, null]);
+      
+      // Also geocode each vertex of the polygon to find pincodes and cities
+      coordinates.forEach((coord, index) => {
+        const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
+        // console.log(Geocoding vertex ${index}:, coord.lat, coord.lng);
+        
+        // Use a timeout to avoid hitting geocoding rate limits
+        setTimeout(() => {
+          geocoder?.geocode({ location: latLng }, (results, status) => {
+            if (status === 'OK' && results[0]) {
+              const addressComponents = results[0].address_components;
+              let pincode = '';
+              let city = '';
+              
+              // Extract pincode and city
+              addressComponents.forEach(component => {
+                if (component.types.includes('postal_code')) {
+                  pincode = component.long_name;
+                }
+                if (component.types.includes('locality') || 
+                    component.types.includes('administrative_area_level_2')) {
+                  city = component.long_name;
+                }
+              });
+              
+              // console.log(Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'});
+            } else {
+              // console.error(Geocoder failed for vertex ${index} due to: ${status});
+            }
+          });
+        }, index * 300); // Stagger requests by 300ms each
+      });
+      
+      // Turn off drawing mode after completion
+      manager.setDrawingMode(null);
+      setIsDrawingActive(false);
+    }
+  });
+};
+
+    // const addInitializeMap = () => {
+    
+    //   const center = { lat: 20.5937, lng: 78.9629 }; // Center of India
+    //   const mapOptions = {
+    //     center,
+    //     zoom: 5,
+    //     mapTypeControl: true,
+    //     streetViewControl: false,
+    //     fullscreenControl: true,
+    //   };
+      
+    //   const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
+    //   setMap(newMap);
+      
+    //   // Initialize geocoder
+    //   const newGeocoder = new window.google.maps.Geocoder();
+    //   setGeocoder(newGeocoder);
+      
+    //   // Initialize DrawingManager but don't activate it yet
+    //   const manager = new window.google.maps.drawing.DrawingManager({
+    //     drawingMode: null, // Start with no drawing mode active
+    //     drawingControl: false, // Hide the default drawing controls
+    //     polygonOptions: {
+    //       fillColor: "red",
+    //       fillOpacity: 0.3,
+    //       path: locationData,
+    //       strokeWeight: 2,
+    //       strokeColor: "red",
+    //       clickable: true,
+    //       editable: false,
+    //       zIndex: 1,
+    //     },
+    //   });
+      
+    //   setDrawingManager(manager);
+      
+    //   // Add listener for polygon completion
+    //   window.google.maps.event.addListener(manager, "overlaycomplete", (event) => {
+    //     if (event.type === window.google.maps.drawing.OverlayType.POLYGON) {
+    //       const polygon = event.overlay;
+          
+    //       // Add this polygon to our state
+    //       setPolygons((prev) => [...prev, polygon,locationData]);
+          
+    //       // Extract coordinates
+    //       const path = polygon.getPath();
+    //       const coordinates = Array.from({ length: path.getLength() }, (_, i) => {
+    //         const point = path.getAt(i);
+    //         return { lat: point.lat(), lng: point.lng() };
+    //       });
+          
+    //       console.log("Polygon coordinates:", coordinates);
+    //       const updated=[...locationData]
+    //       console.log(updated,"updated")
+    //       // Get the center point of the polygon for geocoding
+    //       const bounds = new window.google.maps.LatLngBounds();
+    //       coordinates.forEach((coord) => {
+    //         bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+    //       });
+    //       const center = bounds.getCenter();
+          
+    //       console.log("Polygon center for geocoding:", center.lat(), center.lng());
+          
+    //       // Fetch address details for this polygon
+    //       fetchAddressDetails(center, prev => [...prev, null]);
+          
+    //       // Also geocode each vertex of the polygon to find pincodes and cities
+    //       coordinates.forEach((coord, index) => {
+    //         const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
+    //         console.log(`Geocoding vertex ${index}:`, coord.lat, coord.lng);
+            
+    //         // Use a timeout to avoid hitting geocoding rate limits
+    //         setTimeout(() => {
+    //           geocoder?.geocode({ location: latLng }, (results, status) => {
+    //             if (status === 'OK' && results[0]) {
+    //               const addressComponents = results[0].address_components;
+    //               let pincode = '';
+    //               let city = '';
+                  
+    //               // Extract pincode and city
+    //               addressComponents.forEach(component => {
+    //                 if (component.types.includes('postal_code')) {
+    //                   pincode = component.long_name;
+    //                 }
+    //                 if (component.types.includes('locality') || 
+    //                     component.types.includes('administrative_area_level_2')) {
+    //                   city = component.long_name;
+    //                 }
+    //               });
+                  
+    //               console.log(`Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'}`);
+    //             } else {
+    //               console.error(`Geocoder failed for vertex ${index} due to: ${status}`);
+    //             }
+    //           });
+    //         }, index * 300); // Stagger requests by 300ms each
+    //       });
+          
+    //       // Turn off drawing mode after completion
+    //       manager.setDrawingMode(null);
+    //       setIsDrawingActive(false);
+    //     }
+    //   });
+    // };
 
     loadGoogleMapsScript();
     
@@ -633,7 +967,7 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData }) => {
   
   // Make each polygon clickable when created
   useEffect(() => {
-    polygons.forEach((polygon, index) => {
+    polygons?.forEach((polygon, index) => {
       // Add click listener to each polygon
       window.google.maps.event.clearListeners(polygon, 'click');
       
@@ -758,6 +1092,7 @@ useEffect(() => {
 
     // Set the drawing manager on the map
     drawingManager.setMap(map);
+    console.log(map,"sai")
     drawingManager.setDrawingMode(window.google.maps.drawing.OverlayType.POLYGON);
     setIsDrawingActive(true);
     
@@ -878,15 +1213,17 @@ useEffect(() => {
         location: `${city},${pincode}`
       };
     });
-  
+  console.log(polygons,"all")
     const allPolygonData = await Promise.all(polygonPromises);
-
+console.log(allPolygonData,"allPolygonData")
 const data={
   city:allPolygonData?.[0]?.city,
   postcode:allPolygonData?.[0]?.pincode,
-  miles:0
+  miles:0,
+  coordinates:JSON.stringify(allPolygonData?.[0]?.coordinates)
   
 }
+
     setLocationData(data);
     onNext(data);
     onClose();

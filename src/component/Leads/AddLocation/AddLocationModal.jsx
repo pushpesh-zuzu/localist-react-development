@@ -73,6 +73,7 @@ const AddLocationModal = ({
       nation_wide:1,
       service_id: serviceIds,
       postcode_old: previousPostcode,
+      coordinates : locationData?.coordinates 
     };
 
     if (isEditingLocation && editLocationId) {
