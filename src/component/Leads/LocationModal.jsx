@@ -261,6 +261,7 @@ const LocationModal = ({
         if (postalCode) {
           onChange({ target: { name: "postcode", value: postalCode } });
           onChange({ target: { name: "city", value: cityName || "" } })
+          onChange({ target: { name: "coordinates", value: "" } })
           inputRef.current.value = postalCode;
 
           if (lat && lng) {

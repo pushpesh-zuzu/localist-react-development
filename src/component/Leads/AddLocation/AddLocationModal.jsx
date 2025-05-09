@@ -38,7 +38,8 @@ const AddLocationModal = ({
     miles1: "1",
     postcode: "",
     travel_time:"",
-    travel_by:""
+    travel_by:"",
+    coordinates:""
   });
   console.log(locationData,"locationData")
   const { userToken } = useSelector((state) => state.auth);

@@ -150,6 +150,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
             ...prev,
             postcode: finalLocation,
             city: cityName || "",
+            coordinates:""
           }));
 
           setTimeout(() => {

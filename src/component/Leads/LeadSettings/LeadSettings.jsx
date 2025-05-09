@@ -260,6 +260,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         travel_time: location?.travel_time || '',
         travel_by: location?.travel_by || '',
         postcode: location?.postcode || '',
+        coordinates:""
       })
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
@@ -286,6 +287,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setLocationData({
       miles1: location.miles,
       postcode: location.postcode,
+      coordinates:""
     });
     setEditLocationId(location.id);
     setIseditModalOpen(true);
