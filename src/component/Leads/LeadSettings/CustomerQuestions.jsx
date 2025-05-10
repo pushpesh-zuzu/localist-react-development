@@ -56,6 +56,7 @@ const CustomerQuestions = ({ selectedService }) => {
   });
   const nationwideShow = serviceWiseData?.map((item) => item?.nation_wide == 0 )
   const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
+  console.log(serviceWiseData,"serviceWiseData")
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -353,18 +354,37 @@ const CustomerQuestions = ({ selectedService }) => {
           </div>
           <div className={styles.rangerBox}>
             <div className={styles.ranger}>
-           { checkedNationWideShow[0] == 1 &&  <div style={{marginTop:"18px"}}>
+           {/* { checkedNationWideShow[0] == 1 &&  <div style={{marginTop:"18px"}}>
              <label style={{color:"black",fontSize:"14px"}}> 
             <img src={TickIcon} alt="" />   Nationwide</label>
-      </div>}
+      </div>} */}
               {serviceWiseData?.map((item, idx) => (
-                <div className={styles.range} key={idx}>
+                <>
+                {item?.type === "Distance" ? <div className={styles.range} key={idx}>
                   <span>
                     <img src={TickIcon} alt="" /> Within
                   </span>{" "}
                   <strong>{item?.miles} miles</strong> of{" "}
-                  <strong>{item?.postcode}</strong>
-                </div>
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong>
+                </div> : item?.type === "Travel Time" ?  <div className={styles.range} key={idx}> <span>
+                    <img src={TickIcon} alt="" /> Within
+                  </span>{" "}
+                  <strong>{item?.travel_by} {item?.travel_time}</strong> of{" "}
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div> : item?.type === "Draw on Map"  ? <div className={styles.range} key={idx}> <span>
+                    <img src={TickIcon} alt="" />  Draws area near
+                  </span>{" "}
+                  <strong>{item?.city}</strong> of{" "}
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div>  : item?.nation_wide === 0 ? <div className={styles.range} key={idx}>
+                  <span>
+                    <img src={TickIcon} alt="" /> Within
+                  </span>{" "}
+                  <strong>{item?.miles} miles</strong> of{" "}
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong>
+                </div>  : item?.nation_wide === 1 ?  <p style={{marginTop:"18px"}}>
+                <label style={{color:"black",fontSize:"14px"}}> 
+                <img src={TickIcon} alt="" />   Nationwide</label>
+                                  </p>  : ""}
+                </>
               ))}
             </div>
             <a href="#" className={styles.addLocation}>

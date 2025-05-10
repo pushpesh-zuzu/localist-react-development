@@ -484,7 +484,7 @@ console.log(selectedServices,"selectedServices123")
                 (
                   <p className={styles.locationInput}>
                     Within <strong>{item?.travel_time} </strong> {item?.travel_by} of{" "}
-                    <strong>{item.city}</strong>
+                    <strong>{item.city ? item.city : item?.postcode}</strong>
                   </p>
                 ) : 
                 
