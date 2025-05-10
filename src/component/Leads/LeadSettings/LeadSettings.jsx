@@ -74,7 +74,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
     setIsOnline(getOnlineRemote?.isonline === 1);
   }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
-
+console.log(selectedServices,"selectedServices123")
 
 
   const [isMobileView, setIsMobileView] = useState(false);
@@ -225,102 +225,119 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   };
 
   const handleEditLocation = (location) => {
-    // setIsEdit(true)
-    // console.log("Edit", location);
-    // type.current = location.type
-    setIsEdit(true)
-    type.current = location.type
+    // Set edit mode
+    setIsEdit(true);
+    type.current = location.type;
     
-    // Extract services from location and set them to selectedServices
+    // IMPORTANT: First, completely reset selectedServices
+   
+    
+    // Then extract services from location
+    console.log("Location data for edit:", location);
+    
+    // Extract service IDs based on the location format
     if (location.service_ids) {
       try {
-        // Handle different possible formats of service_ids
         let serviceIdsArray = [];
+        
+        // Handle string format (comma-separated)
         if (typeof location.service_ids === 'string') {
-          serviceIdsArray = location.service_ids.split(',');
-        } else if (Array.isArray(location.service_ids)) {
-          serviceIdsArray = location.service_ids;
-        } else if (typeof location.service_ids === 'number') {
+          serviceIdsArray = location.service_ids
+            .split(',')
+            .map(id => id.trim())
+            .filter(id => id !== '');
+        } 
+        // Handle array format
+        else if (Array.isArray(location.service_ids)) {
+          serviceIdsArray = location.service_ids.map(id => id.toString());
+        } 
+        // Handle single number format
+        else if (typeof location.service_ids === 'number') {
           serviceIdsArray = [location.service_ids.toString()];
         }
         
+        console.log("Extracted service IDs:", serviceIdsArray);
+        
+        // Map IDs to service objects with name
         const serviceArray = serviceIdsArray.map(id => {
-          // Find the service name from preferenceList if available
-          const service = preferenceList.find(s => s.id.toString() === id.toString());
+          const serviceObj = preferenceList.find(s => s.id.toString() === id.toString());
           return {
             id: id,
-            name: service ? service.name : `Service ${id}`
+            name: serviceObj ? serviceObj.name : `Service ${id}`
           };
         });
+        
+        console.log("Setting services to:", serviceArray);
         setSelectedServices(serviceArray);
       } catch (error) {
         console.error("Error processing service IDs:", error);
         setSelectedServices([]);
       }
     } else {
-      // If there's no service_ids, try to use total_services if available
-      const total = parseInt(location.total_services);
-      if (total > 0 && preferenceList && preferenceList.length > 0) {
-        // Just set the first service as a fallback
-        setSelectedServices([{
-          id: preferenceList[0].id,
-          name: preferenceList[0].name
-        }]);
-      } else {
-        setSelectedServices([]);
-      }
+      console.log("No service_ids found in location data");
+      setSelectedServices([]);
     }
+  
+    // Handle different location types
     if (location?.type === "Travel Time") {
       setLocationData({
         travel_time: location?.travel_time || '',
         travel_by: location?.travel_by || '',
         postcode: location?.postcode || '',
-        coordinates:""
-      })
+        coordinates: ""
+      });
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
-      setEditLocationId(location.id)
-      setPreviousPostcode(location.postcode)
+      setEditLocationId(location.id);
+      setPreviousPostcode(location.postcode);
       return;
     }
+    
     if (location?.type === "Draw on Map") {
-     
-      const data=JSON.parse(location.
-        coordinates)
-        setLatitude(data)
+      try {
+        const data = JSON.parse(location.coordinates);
+        setLatitude(data);
+      } catch (error) {
+        console.error("Error parsing coordinates:", error);
+        setLatitude([]);
+      }
+      
       setLocationData({
         postcode: location?.postcode,
         city: location?.city
-      })
-      setIsDrawTimeOpen(true)
-      setEditLocationId(location.id)
-      setPreviousPostcode(location.postcode)
+      });
+      setIsDrawTimeOpen(true);
+      setEditLocationId(location.id);
+      setPreviousPostcode(location.postcode);
+      return;
     }
-
-  if(location?.type === "Distance"){
-
-    setLocationData({
-      miles1: location.miles,
-      postcode: location.postcode,
-      coordinates:""
-    });
-    setEditLocationId(location.id);
-    setIseditModalOpen(true);
-    setPreviousPostcode(location.postcode);
-  }
-  if(location?.type === "Nationwide") {
-    setLocationData({
-      miles1: location.miles,
-      postcode: location.postcode,
-      city:location?.city
-    });
-    setIsNextModalOpen(true)
-
-  }
+  
+    if (location?.type === "Distance") {
+      setLocationData({
+        miles1: location.miles,
+        postcode: location.postcode,
+        coordinates: ""
+      });
+      setEditLocationId(location.id);
+      setIseditModalOpen(true);
+      setPreviousPostcode(location.postcode);
+      return;
+    }
+    
+    if (location?.type === "Nationwide") {
+      setLocationData({
+        miles1: location.miles,
+        postcode: location.postcode,
+        city: location?.city
+      });
+      setIsNextModalOpen(true);
+      return;
+    }
   };
 
-  const handleConfirm = () => {
-    const serviceIds = selectedServices.map((item) => item.id).join(",");
+  const handleConfirm = (data) => {
+    const serviceIds = data.join(",");
+    
     const typeOfTravel = type.current;
     const locationdata = {
       user_id: userToken?.remember_tokens,
@@ -611,7 +628,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         {isNextModalOpen && (
           <ServiceSelectionModal
             isOpen={isNextModalOpen}
-            isEditing={isEditingLocation}
+            isEditing={isEdit}
             onClose={() => setIsNextModalOpen(false)}
             onConfirm={handleConfirm}
             selectedServices={selectedServices}

@@ -60,9 +60,9 @@ const AddLocationModal = ({
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleConfirm = () => {
-    const serviceIds = selectedServices.join(",");
-    
+  const handleConfirm = (data) => {
+    const serviceIds = data.join(",");
+    // const serviceIds = selectedServices.map((item) => item.id).join(",");
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ?? 0,
@@ -94,6 +94,7 @@ const AddLocationModal = ({
             miles1: "1",
             postcode: "",
           });
+          setSelectedServices([])
         }
       });
     } else {
@@ -109,7 +110,7 @@ const AddLocationModal = ({
             miles1: "1",
             postcode: "",
           });
-          setSelectedServices([])
+          // setSelectedServices([])
           setIsNextModalOpen(false);
         }
       });
