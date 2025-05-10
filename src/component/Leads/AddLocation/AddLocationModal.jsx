@@ -41,17 +41,22 @@ const AddLocationModal = ({
     travel_by:"",
     coordinates:""
   });
-  console.log(locationData,"locationData")
+  console.log(locationData,locationType,registerData,"locationData")
   const { userToken } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    if (option === "nationwide") {
+      setLocationType("Nationwide");
+      setIsNextModalOpen(true); // Open the service selection modal directly
+      return; // Skip setting selectedOption
+    }
     let type = "";
     if (option === "distance") type = "Distance";
     else if (option === "travelTime") type = "Travel Time";
     else if (option === "drawOnMap") type = "Draw on Map";
-    else if (option === "nationwide") type = "Nationwide";
+    // else if (option === "nationwide") type = "Nationwide";
   
     setLocationType(type);
   };
@@ -66,9 +71,9 @@ const AddLocationModal = ({
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ?? 0,
-      postcode: locationData.postcode,
+      postcode: locationData.postcode ?? "",
       // postcode: previousPostcode,
-      city: locationData?.city,
+      city: locationData?.city ?? "",
       travel_time:locationData?.travel_time,
       travel_by: locationData?.travel_by,
       type: locationType,
@@ -241,9 +246,10 @@ const AddLocationModal = ({
         setLocationData={setLocationData} />
       )}
 
-      {/* {selectedOption === "nationwide" && (
-        <NationwideModal onClose={handleChildModalClose} />
-      )} */}
+      {selectedOption === "nationwide" && (
+        // <NationwideModal onClose={handleChildModalClose} />
+       <></>
+      )}
 
       {isNextModalOpen && (
         <ServiceSelectionModal

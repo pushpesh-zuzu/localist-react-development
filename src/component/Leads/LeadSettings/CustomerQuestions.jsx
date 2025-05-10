@@ -54,7 +54,8 @@ const CustomerQuestions = ({ selectedService }) => {
     miles1: "1",
     postcode: "",
   });
-
+  const nationwideShow = serviceWiseData?.map((item) => item?.nation_wide == 0 )
+  const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -352,6 +353,12 @@ const CustomerQuestions = ({ selectedService }) => {
           </div>
           <div className={styles.rangerBox}>
             <div className={styles.ranger}>
+              <div style={{marginTop:"18px"}}>
+            {nationwideShow && <label style={{color:"black",fontSize:"14px"}}> <input type="checkbox" value={checkedNationWideShow}
+            
+      checked={checkedNationWideShow[0] == 1}
+      readOnly/> Nationwide</label>}
+      </div>
               {serviceWiseData?.map((item, idx) => (
                 <div className={styles.range} key={idx}>
                   <span>

@@ -664,6 +664,8 @@ console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.totalbid || 0;
+  const isButtonDisabled = bidCount === bidTotal
+  console.log(bidCount,bidTotal,"prem")
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
@@ -889,7 +891,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                   <span>Recommended:</span> Request replies from your{" "}
                   <strong>top matches</strong> to hear back faster
                 </div>
-                <button className={styles.requestBtn} onClick={handleMultple}>
+                <button className={styles.requestBtn} onClick={handleMultple} disabled={isButtonDisabled}>
                   Request your best matches here
                 </button>
               </div>
@@ -898,6 +900,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
               <button
                 className={styles.requestBtnMatchBox}
                 onClick={handleMultple}
+                disabled={isButtonDisabled}
               >
                 Request your best matches here
               </button>

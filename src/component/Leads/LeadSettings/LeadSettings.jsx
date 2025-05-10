@@ -277,7 +277,7 @@ console.log(selectedServices,"selectedServices123")
       console.log("No service_ids found in location data");
       setSelectedServices([]);
     }
-  
+  console.log(location,"location123")
     // Handle different location types
     if (location?.type === "Travel Time") {
       setLocationData({
@@ -328,7 +328,8 @@ console.log(selectedServices,"selectedServices123")
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
-        city: location?.city
+        city: location?.city,
+         coordinates: ""
       });
       setIsNextModalOpen(true);
       return;
@@ -474,12 +475,11 @@ console.log(selectedServices,"selectedServices123")
                     Draws area near {" "}
                     <strong>{item.city}</strong>
                   </p>
-                ) : 
-                item?.type === "Nationwide" ? (
+                ) : item?.type === "Nationwide" && item?.nation_wide !== 0 ? (
                   <p className={styles.locationInput}>
-                    Nationwide 
+                    Nationwide
                   </p>
-                  )
+                )
                 :
                 (
                   <p className={styles.locationInput}>
