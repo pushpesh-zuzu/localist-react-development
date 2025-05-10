@@ -379,6 +379,8 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData,data,isEdi
   const [geocoder, setGeocoder] = useState(null);
   const [polygonAddresses, setPolygonAddresses] = useState([]);
   const { getlocationData } = useSelector((state) => state.leadSetting)
+  const[isAreaRemoved,setIsAreaRemoved]=useState(false)
+
   // const [locationData,setLocationData] = useState("");
 console.log(getlocationData,polygons,data,"locationData")
   useEffect(() => {
@@ -402,6 +404,10 @@ console.log(getlocationData,polygons,data,"locationData")
         document.body.appendChild(script);
       } else {
         if(isEdit){
+        
+         
+          
+         
           editInitializeMap()
         }else{
 
@@ -447,12 +453,22 @@ const editInitializeMap = () => {
 
   const centerPoint = bounds.getCenter();
   console.log("Polygon center for geocoding:", centerPoint.lat(), centerPoint.lng());
+  getGeocodeDetails(centerPoint).then(({ city, pincode }) => {
+    const data = {
+      city,
+      postcode: pincode,
+      miles: 0,
+      coordinates: JSON.stringify(locationData),
+    };
+  
+    setLocationData(data);
+  });
 
   fetchAddressDetails(centerPoint, prev => [...prev, null]);
 
   locationData?.forEach((coord, index) => {
     const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
-    console.log(latLng,latLng)
+    console.log(latLng,"latLng")
     setTimeout(() => {
       newGeocoder.geocode({ location: latLng }, (results, status) => {
         if (status === 'OK' && results[0]) {
@@ -633,6 +649,7 @@ const handleEditAreaMode = () => {
 // };
 
 const addInitializeMap = () => {
+ 
   const center = { lat: 20.5937, lng: 78.9629 }; // Center of India
   const mapOptions = {
     center,
@@ -663,7 +680,6 @@ const addInitializeMap = () => {
       zIndex: 1,
     },
   });
-  
   setDrawingManager(manager);
   
   // Add listener for polygon completion
@@ -1093,7 +1109,7 @@ useEffect(() => {
 
     // Set the drawing manager on the map
     drawingManager.setMap(map);
-    console.log(map,"sai")
+    // console.log(map,"sai")
     drawingManager.setDrawingMode(window.google.maps.drawing.OverlayType.POLYGON);
     setIsDrawingActive(true);
     
@@ -1115,6 +1131,7 @@ useEffect(() => {
         drawingManager.setMap(null);
       }
       setIsDrawingActive(false);
+      setSelectedPolygonIndex(null)
       
       // Show instruction to the user
       console.log("Click on a polygon to edit it");
@@ -1123,77 +1140,160 @@ useEffect(() => {
 
   const handleRemoveArea = () => {
     if (polygons.length === 0) return;
-
+  
+    let updatedPolygons = [...polygons];
+  
     if (selectedPolygonIndex !== null) {
-      // Remove the selected polygon
       polygons[selectedPolygonIndex].setMap(null);
-      
-      // Update state
-      setPolygons(prevPolygons => 
-        prevPolygons.filter((_, index) => index !== selectedPolygonIndex)
-      );
-      
-      // Also remove address details
-      setPolygonAddresses(prevAddresses => 
-        prevAddresses.filter((_, index) => index !== selectedPolygonIndex)
-      );
-      
-      // Reset selection
+      updatedPolygons = updatedPolygons.filter((_, index) => index !== selectedPolygonIndex);
+  
+      setPolygonAddresses(prev => prev.filter((_, index) => index !== selectedPolygonIndex));
       setSelectedPolygonIndex(null);
     } else {
-      // If no polygon is selected, remove the last one
       const lastPolygon = polygons[polygons.length - 1];
       lastPolygon.setMap(null);
-      
-      // Update state
-      setPolygons(prevPolygons => prevPolygons.slice(0, -1));
-      setPolygonAddresses(prevAddresses => prevAddresses.slice(0, -1));
+      updatedPolygons.pop();
+  
+      setPolygonAddresses(prev => prev.slice(0, -1));
     }
-    
-    // Exit edit mode if it was active
-    if (isEditMode) {
-      setIsEditMode(false);
+  
+    setPolygons(updatedPolygons);
+    setIsAreaRemoved(true);
+    setIsEditMode(false);
+  
+    // Update the locationData with the new last polygon (if any)
+    if (updatedPolygons.length > 0) {
+      const lastPolygonPath = updatedPolygons[updatedPolygons.length - 1].getPath();
+      const bounds = new window.google.maps.LatLngBounds();
+      for (let i = 0; i < lastPolygonPath.getLength(); i++) {
+        bounds.extend(lastPolygonPath.getAt(i));
+      }
+      const center = bounds.getCenter();
+  
+      getGeocodeDetails(center).then(({ city, pincode }) => {
+        const coordinates = Array.from({ length: lastPolygonPath.getLength() }, (_, i) => {
+          const point = lastPolygonPath.getAt(i);
+          return { lat: point.lat(), lng: point.lng() };
+        });
+  
+        const data = {
+          city,
+          postcode: pincode,
+          miles: 0,
+          coordinates: JSON.stringify(coordinates),
+        };
+  
+        setLocationData(data);
+      });
+    } else {
+      setLocationData(null); // If no polygons remain
     }
   };
-
-  const getGeocodeDetails = (center) => {
-    return new Promise((resolve, reject) => {
-      if (!geocoder) return resolve({ city: '', pincode: '' });
   
-      geocoder.geocode({ location: center }, (results, status) => {
-        if (status === 'OK' && results[0]) {
-          // const addressComponents = results[0].address_components;
-          let addressComponents =[];
-           results?.forEach((item)=>{
-            
-            item?.address_components.forEach((chld)=>{
-              if(chld.types.includes('postal_code')){
-              addressComponents=item.address_components}
-            })
-          });
-          let pincode = '';
+  const getGeocodeDetails = (latLng) => {
+    return new Promise((resolve) => {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode({ location: latLng }, (results, status) => {
+        if (status === "OK" && results[0]) {
           let city = '';
-  console.log(addressComponents,results,'addressComponents')
-          addressComponents.forEach(component => {
+          let pincode = '';
+  
+          results[0].address_components.forEach(component => {
             if (component.types.includes('postal_code')) {
               pincode = component.long_name;
             }
-            if (
-              component.types.includes('locality') || 
-              component.types.includes('administrative_area_level_2')
-            ) {
+            if (component.types.includes('locality') || component.types.includes('administrative_area_level_2')) {
               city = component.long_name;
             }
           });
   
           resolve({ city, pincode });
         } else {
-          console.error('Geocode failed:', status);
-          resolve({ city: '', pincode: '' }); // Return blank if failed
+          resolve({ city: '', pincode: '' });
         }
       });
     });
   };
+  
+  // const handleRemoveArea = () => {
+  //   if (polygons.length === 0) return;
+
+  //   if (selectedPolygonIndex !== null) {
+  //     // Remove the selected polygon
+  //     polygons[selectedPolygonIndex].setMap(null);
+      
+  //     // Update state
+  //     setPolygons(prevPolygons => 
+  //       prevPolygons.filter((_, index) => index !== selectedPolygonIndex)
+  //     );
+  //     // setPolygons([]);
+      
+  //     // Also remove address details
+  //     // setPolygonAddresses(null);
+  //     setIsAreaRemoved(true)
+      
+  //     // // Also remove address details
+  //     setPolygonAddresses(prevAddresses => 
+  //       prevAddresses.filter((_, index) => index !== selectedPolygonIndex)
+  //     );
+      
+  //     // Reset selection
+  //     setSelectedPolygonIndex(null);
+  //   } else {
+  //     // If no polygon is selected, remove the last one
+  //     const lastPolygon = polygons[polygons.length - 1];
+  //     lastPolygon.setMap(null);
+      
+  //     // Update state
+  //     // setPolygons([]);
+  //     setPolygonAddresses(prevAddresses => prevAddresses.slice(0, -1));
+  //     console.log(polygons,"prem")
+  //   }
+    
+  //   // Exit edit mode if it was active
+  //   if (isEditMode) {
+  //     setIsEditMode(false);
+  //   }
+  // };
+
+  // const getGeocodeDetails = (center) => {
+  //   return new Promise((resolve, reject) => {
+  //     if (!geocoder) return resolve({ city: '', pincode: '' });
+  
+  //     geocoder.geocode({ location: center }, (results, status) => {
+  //       if (status === 'OK' && results[0]) {
+  //         // const addressComponents = results[0].address_components;
+  //         let addressComponents =[];
+  //          results?.forEach((item)=>{
+            
+  //           item?.address_components.forEach((chld)=>{
+  //             if(chld.types.includes('postal_code')){
+  //             addressComponents=item.address_components}
+  //           })
+  //         });
+  //         let pincode = '';
+  //         let city = '';
+  // console.log(addressComponents,results,'addressComponents')
+  //         addressComponents.forEach(component => {
+  //           if (component.types.includes('postal_code')) {
+  //             pincode = component.long_name;
+  //           }
+  //           if (
+  //             component.types.includes('locality') || 
+  //             component.types.includes('administrative_area_level_2')
+  //           ) {
+  //             city = component.long_name;
+  //           }
+  //         });
+  
+  //         resolve({ city, pincode });
+  //       } else {
+  //         console.error('Geocode failed:', status);
+  //         resolve({ city: '', pincode: '' }); // Return blank if failed
+  //       }
+  //     });
+  //   });
+  // };
   
   const handleSubmit = async () => {
     const polygonPromises = polygons.map(async (polygon) => {
@@ -1214,6 +1314,7 @@ useEffect(() => {
         const point = path.getAt(i);
         return { lat: point.lat(), lng: point.lng() };
       });
+      console.log(coordinates,"8899")
   
       return {
         coordinates,
@@ -1295,7 +1396,7 @@ const data={
           <button 
             className={styles.nextButton} 
             onClick={handleSubmit}
-            disabled={polygons.length === 0}
+            // disabled={polygons.length === 0}
           >
             Next
           </button>

@@ -343,7 +343,7 @@ console.log(selectedServices,"selectedServices123")
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
-      postcode: locationData.postcode,
+      postcode: locationData.postcode??previousPostcode,
       service_id: serviceIds,
       postcode_old: previousPostcode,
       travel_time: locationData?.travel_time,
@@ -351,7 +351,7 @@ console.log(selectedServices,"selectedServices123")
       type: typeOfTravel,
       miles_old: previousPostcode,
       city: locationData?.city,
-      coordinates:locationData?.coordinates
+      coordinates:locationData?.coordinates??[]
     };
     console.log(locationData,"445566")
 

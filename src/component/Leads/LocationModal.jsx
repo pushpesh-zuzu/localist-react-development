@@ -229,7 +229,7 @@ const LocationModal = ({
         drawCircle(mapCenter);
       }
     };
-
+   
     const initAutocomplete = () => {
       if (!inputRef.current || !window.google) return;
 
