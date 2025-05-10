@@ -480,15 +480,18 @@ console.log(selectedServices,"selectedServices123")
                     Nationwide
                   </p>
                 )
-                :
+                : item?.type === "Travel Time" ? 
                 (
                   <p className={styles.locationInput}>
                     Within <strong>{item?.travel_time} </strong> {item?.travel_by} of{" "}
                     <strong>{item.city}</strong>
                   </p>
-                ) 
+                ) : 
                 
-                
+                <p className={styles.locationInput}>
+                Within <strong>{item.miles} miles</strong> of{" "}
+                <strong>{item.postcode}</strong>
+              </p>
                 
                 }
 
