@@ -353,12 +353,10 @@ const CustomerQuestions = ({ selectedService }) => {
           </div>
           <div className={styles.rangerBox}>
             <div className={styles.ranger}>
-              <div style={{marginTop:"18px"}}>
-            {nationwideShow && <label style={{color:"black",fontSize:"14px"}}> <input type="checkbox" value={checkedNationWideShow}
-            
-      checked={checkedNationWideShow[0] == 1}
-      readOnly/> Nationwide</label>}
-      </div>
+           { checkedNationWideShow[0] == 1 &&  <div style={{marginTop:"18px"}}>
+             <label style={{color:"black",fontSize:"14px"}}> 
+            <img src={TickIcon} alt="" />   Nationwide</label>
+      </div>}
               {serviceWiseData?.map((item, idx) => (
                 <div className={styles.range} key={idx}>
                   <span>
