@@ -9,13 +9,28 @@
   gap: 40px;
 }
 .maincontainer {
-  padding: 42px 42px;
+  padding: 16px 88px;
+   /* width: 100%; */
 }
 .mainTextBox {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+   /* width: 100%; */
+}
+.headerBox {
+  background-color: #000000;
+  padding: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+}
+.headerBtn {
+  display: flex;
+  gap: 22px;
 }
 
 /* Grid Areas */
@@ -184,13 +199,18 @@
 }
 
 .purchaseButton {
-  background: #98e6ff;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 8px 15px;
-  border-radius: 148px;
+border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 21px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 .purchaseButton:hover {
@@ -247,12 +267,16 @@
 
 .filterButton {
   padding: 8px 16px;
-  font-size: 14px;
+  font-size: 21px;
   background-color: #f0f2f5;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
 }
 
 .filterButton:hover {

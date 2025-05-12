@@ -175,13 +175,19 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
       >
         Dashboard
       </div>
-      {/* <div
+      <div
         className={`${styles.navItem} ${location.pathname === "/leads" ? styles.active : ""}`}
         onClick={() => handleNavigation("/leads")}
       >
-        Leads
-      </div> */}
-      <Popover 
+      New Leads
+      </div>
+      <div
+        className={`${styles.navItem} ${location.pathname === "/lead/save-for-later" ? styles.active : ""}`}
+        onClick={() => handleNavigation("/lead/save-for-later")}
+      >
+       Saved Leads
+      </div>
+      {/* <Popover 
       content={content}
       trigger="hover"
       visible={visible}
@@ -193,7 +199,7 @@ const showHamburgerIcon=userToken?.remember_tokens || registerData?.remember_tok
       >
         Leads
       </div>
-    </Popover>
+    </Popover> */}
       <div
         className={`${styles.navItem} ${location.pathname === "/lead/save-later" ? styles.active : ""}`}
         onClick={() => handleNavigation("/lead/save-later")}
