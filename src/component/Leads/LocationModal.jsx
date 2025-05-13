@@ -164,9 +164,19 @@ const LocationModal = ({
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
-    lat: 20.5937,
-    lng: 78.9629,
+    lat: 26.9556924,
+    lng:
+      75.6882696,
   });
+
+  useEffect(() => {
+    if (locationData?.coordinates) {
+      console.log(locationData, JSON.parse(locationData?.coordinates), mapCenter, "isEditing")
+
+      setMapCenter(JSON.parse(locationData?.coordinates))
+    }
+  }, [locationData?.coordinates])
+
 
   // ✅ Function to draw circle based on distance
   const drawCircle = (center) => {
@@ -229,7 +239,7 @@ const LocationModal = ({
         drawCircle(mapCenter);
       }
     };
-   
+
     const initAutocomplete = () => {
       if (!inputRef.current || !window.google) return;
 
@@ -241,6 +251,7 @@ const LocationModal = ({
         }
       );
 
+
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
@@ -248,7 +259,7 @@ const LocationModal = ({
         let postalCode = "";
         let lat = place.geometry?.location?.lat();
         let lng = place.geometry?.location?.lng();
-
+        
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name;
@@ -261,13 +272,15 @@ const LocationModal = ({
         if (postalCode) {
           onChange({ target: { name: "postcode", value: postalCode } });
           onChange({ target: { name: "city", value: cityName || "" } })
-          onChange({ target: { name: "coordinates", value: "" } })
+          // onChange({ target: { name: "coordinates", value: "" } })
           inputRef.current.value = postalCode;
 
           if (lat && lng) {
+            const coordinates = JSON.stringify({ lat, lng });
+            onChange({ target: { name: "coordinates", value: coordinates } })
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
-
+            
             if (mapInstance.current) {
               mapInstance.current.setCenter(newCenter);
               mapInstance.current.setZoom(12);
@@ -289,7 +302,7 @@ const LocationModal = ({
     };
 
     loadGoogleMapsScript();
-  }, [open]);
+  }, [open, mapCenter]);
 
   // ✅ Geocode on open if postcode is present
   useEffect(() => {
@@ -301,6 +314,8 @@ const LocationModal = ({
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng();
+            // const lat =mapCenter.lat;
+            // const lng = mapCenter.lng;
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
 
@@ -317,18 +332,23 @@ const LocationModal = ({
 
               drawCircle(newCenter);
             }
+          } else {
+            console.error("Geocode was not successful: ", status);
+            showToast("Could not fetch location from the postcode.");
           }
         }
       );
     }
   }, [open, mapLoaded, locationData.postcode]);
 
- 
+
+
+
   useEffect(() => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
       drawCircle(mapCenter);
     }
-  }, [locationData.miles1]);
+  }, [locationData.miles1, mapLoaded]);
 
   return (
     <div className={styles.modalOverlay}>

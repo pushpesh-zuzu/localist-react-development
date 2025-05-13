@@ -1326,6 +1326,7 @@ useEffect(() => {
   console.log(polygons,"all")
     const allPolygonData = await Promise.all(polygonPromises);
 console.log(allPolygonData,"allPolygonData")
+// const pincodeData = allPolygonData?.find(item => item?.pincode)
 const data={
   city:allPolygonData?.[0]?.city,
   postcode:allPolygonData?.[0]?.pincode,

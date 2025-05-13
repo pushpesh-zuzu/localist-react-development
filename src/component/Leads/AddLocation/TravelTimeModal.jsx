@@ -19,7 +19,16 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
   //   travel_time: "30 minutes",
   //   travel_by: "Driving",
   // });
-
+  console.log(locationData,"locationData123")
+  useEffect(() => {
+    if (locationData?.coordinates) {
+      const parsedCoordinates = JSON.parse(locationData.coordinates);
+      if (Array.isArray(parsedCoordinates) && parsedCoordinates.length > 0) {
+        setMapCenter(parsedCoordinates[0]);
+      }
+    }
+  }, [locationData?.coordinates]);
+  
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
       Driving: 800,
@@ -150,7 +159,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
             ...prev,
             postcode: finalLocation,
             city: cityName || "",
-            coordinates:""
+            coordinates: JSON.stringify([{ lat, lng }]),
           }));
 
           setTimeout(() => {
@@ -163,7 +172,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
     };
 
     loadGoogleMapsScript();
-  }, []);
+  }, [mapCenter]);
 
   useEffect(() => {
     if (mapLoaded && locationData?.postcode && mapCenter.lat !== 20.5937) {

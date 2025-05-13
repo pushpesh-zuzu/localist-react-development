@@ -284,7 +284,7 @@ console.log(selectedServices,"selectedServices123")
         travel_time: location?.travel_time || '',
         travel_by: location?.travel_by || '',
         postcode: location?.postcode || '',
-        coordinates: ""
+        coordinates: location?.coordinates || ""
       });
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
@@ -316,7 +316,7 @@ console.log(selectedServices,"selectedServices123")
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
-        coordinates: ""
+        coordinates: location?.coordinates
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -338,12 +338,12 @@ console.log(selectedServices,"selectedServices123")
 
   const handleConfirm = (data) => {
     const serviceIds = data.join(",");
-    
+    debugger
     const typeOfTravel = type.current;
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
-      postcode: locationData.postcode??previousPostcode,
+      postcode: locationData.postcode ?? previousPostcode,
       service_id: serviceIds,
       postcode_old: previousPostcode,
       travel_time: locationData?.travel_time,

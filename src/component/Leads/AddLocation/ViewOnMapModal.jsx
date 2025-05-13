@@ -18,22 +18,54 @@ const ViewOnMapModal = ({
     lat: 20.5937, // Default center (India)
     lng: 78.9629,
   });
+  console.log(locationData?.type,"locationData")
 
   // Function to draw a circle on the map
-  const drawCircle = (center) => {
-    if (!window.google || !mapInstance.current) return;
+//   const drawCircle = (center) => {
+//     if (!window.google || !mapInstance.current) return;
     
+//     // Remove existing circle if any
+//     if (circleRef.current) {
+//       circleRef.current.setMap(null);
+//     }
+
+//     // Get radius in miles from locationData and convert to meters
+//     // Default to 1 mile if not provided
+//     const radiusInMiles = parseFloat(locationData.miles1) || 1;
+//     const radiusInMeters = radiusInMiles * 1609.34; // Convert miles to meters
+
+//     // Create a new circle with the specified center and radius
+//     circleRef.current = new window.google.maps.Circle({
+//       center,
+//       radius: radiusInMeters,
+//       fillColor: "#007BFF",
+//       fillOpacity: 0.2,
+//       strokeColor: "#007BFF",
+//       strokeOpacity: 0.7,
+//       strokeWeight: 2,
+//       map: mapInstance.current,
+//     });
+//   };
+const drawCircle = (center) => {
+    if (!window.google || !mapInstance.current) return;
+  
     // Remove existing circle if any
     if (circleRef.current) {
       circleRef.current.setMap(null);
     }
-
-    // Get radius in miles from locationData and convert to meters
-    // Default to 1 mile if not provided
-    const radiusInMiles = parseFloat(locationData.miles1) || 1;
-    const radiusInMeters = radiusInMiles * 1609.34; // Convert miles to meters
-
-    // Create a new circle with the specified center and radius
+  
+    let radiusInMeters = 0;
+  
+    if (locationData.type === "Nationwide") {
+      // Rough estimate to cover India (1500 km ~ 932 miles)
+      radiusInMeters = 1500000;
+    } else {
+      // Use the radius in miles from locationData (default 1 mile)
+      const radiusInMiles = parseFloat(locationData.miles1) || 1;
+      radiusInMeters = radiusInMiles * 1609.34;
+    }
+  
+    // Create the circle
     circleRef.current = new window.google.maps.Circle({
       center,
       radius: radiusInMeters,
@@ -45,6 +77,7 @@ const ViewOnMapModal = ({
       map: mapInstance.current,
     });
   };
+  
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -102,40 +135,40 @@ const ViewOnMapModal = ({
     }
   };
 
-  useEffect(() => {
-    const fetchLatLng = async () => {
-      if (!locationData?.postcode || !mapLoaded || !window.google || !mapInstance.current) return;
+//   useEffect(() => {
+//     const fetchLatLng = async () => {
+//       if (!locationData?.postcode || !mapLoaded || !window.google || !mapInstance.current) return;
 
-      try {
-        const coords = await getLatLngFromPincode(locationData?.postcode);
-        const newCenter = { lat: coords.lat, lng: coords.lng };
-        // setMapCenter(newCenter);
-        console.log(newCenter,"new")
+//       try {
+//         const coords = await getLatLngFromPincode(locationData?.postcode);
+//         const newCenter = { lat: coords.lat, lng: coords.lng };
+//         // setMapCenter(newCenter);
+//         console.log(newCenter,"new")
 
-        // Center the map
-        mapInstance.current.setCenter(newCenter);
-        mapInstance.current.setZoom(12);
+//         // Center the map
+//         mapInstance.current.setCenter(newCenter);
+//         mapInstance.current.setZoom(12);
 
-        // Remove previous marker if exists
-        if (markerRef.current) {
-          markerRef.current.setMap(null);
-        }
+//         // Remove previous marker if exists
+//         if (markerRef.current) {
+//           markerRef.current.setMap(null);
+//         }
 
-        // Create new marker
-        markerRef.current = new window.google.maps.Marker({
-          position: newCenter,
-          map: mapInstance.current,
-        });
+//         // Create new marker
+//         markerRef.current = new window.google.maps.Marker({
+//           position: newCenter,
+//           map: mapInstance.current,
+//         });
 
-        // Draw the circle
-        drawCircle(newCenter);
-      } catch (error) {
-        console.error("Error setting map location:", error);
-      }
-    };
+//         // Draw the circle
+//         drawCircle(newCenter);
+//       } catch (error) {
+//         console.error("Error setting map location:", error);
+//       }
+//     };
 
-    fetchLatLng();
-  }, [mapLoaded, locationData?.postcode]);
+//     fetchLatLng();
+//   }, [mapLoaded, locationData?.postcode]);
 
 
 
@@ -143,6 +176,48 @@ const ViewOnMapModal = ({
 
 
   // Effect to update map when modal opens with a postcode
+ 
+  useEffect(() => {
+    const fetchLatLng = async () => {
+      if (!mapLoaded || !window.google || !mapInstance.current) return;
+  
+      let newCenter;
+  
+      if (locationData?.type === "Nationwide") {
+        newCenter = { lat: 22.9734, lng: 78.6569 }; // Center of India
+      } else if (locationData?.postcode) {
+        try {
+          const coords = await getLatLngFromPincode(locationData.postcode);
+          newCenter = { lat: coords.lat, lng: coords.lng };
+        } catch (error) {
+          console.error("Error fetching location:", error);
+          return;
+        }
+      }
+  
+      if (newCenter) {
+        setMapCenter(newCenter);
+        mapInstance.current.setCenter(newCenter);
+        mapInstance.current.setZoom(locationData.type === "Nationwide" ? 2 : 12);
+  
+        if (markerRef.current) {
+          markerRef.current.setMap(null);
+        }
+  
+        markerRef.current = new window.google.maps.Marker({
+          position: newCenter,
+          map: mapInstance.current,
+        });
+  
+        drawCircle(newCenter);
+      }
+    };
+  
+    fetchLatLng();
+  }, [mapLoaded, locationData?.postcode, locationData?.type]);
+  
+ 
+ 
   useEffect(() => {
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
@@ -154,18 +229,18 @@ const ViewOnMapModal = ({
             const lng = results[0].geometry.location.lng();
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
-            console.log(newCenter,"123")
-
+            
             if (mapInstance.current) {
-              mapInstance.current.setCenter(newCenter);
-              mapInstance.current.setZoom(12);
-
-              if (markerRef.current) markerRef.current.setMap(null);
-
-              markerRef.current = new window.google.maps.Marker({
-                position: newCenter,
-                map: mapInstance.current,
+                mapInstance.current.setCenter(newCenter);
+                mapInstance.current.setZoom(12);
+                
+                if (markerRef.current) markerRef.current.setMap(null);
+                
+                markerRef.current = new window.google.maps.Marker({
+                    position: newCenter,
+                    map: mapInstance.current,
               });
+                    console.log(newCenter,"123")
 
               // Draw the circle with the new center
               drawCircle(newCenter);
@@ -190,7 +265,7 @@ const ViewOnMapModal = ({
           &times;
         </button>
         <div className={styles.modalHeader}>
-          <h2>{locationData?.city}</h2>
+          <h2>{locationData?.type === "Nationwide" ? locationData?.type :locationData?.city}</h2>
         </div>
         <div
           ref={mapRef}

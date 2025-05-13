@@ -164,7 +164,17 @@ const { userToken } = useSelector((state)=> state.auth)
 
     loadGoogleMapsScript();
   }, []);
-
+ // useEffect(() => {
+  //   loadGooglePlacesAutocomplete({
+  //     inputRef,
+  //     setPincode,
+  //     setCity,
+  //     setErrors,
+  //     dispatch,
+  //     setcitySerach,
+  //   });
+  // }, []);
+  
 
   // const initAutocomplete = () => {
   //   if (!inputRef.current) return;
