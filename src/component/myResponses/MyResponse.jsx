@@ -11,31 +11,32 @@ import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
 import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
-import { showToast } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg"
-import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg"
-import saveImg from "../../assets/Images/Leads/saveLaterImg.svg"
+import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
+import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
+import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
+import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("pending");
+  const [selectedLead, setSelectedLead] = useState(null);
+  console.log(selectedLead, "selectedLead");
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { sellerRecommended, getPendingLeadList, getHiredLeadList } = useSelector(
-    (state) => state.leadSetting
-  );
+  const { sellerRecommended, getPendingLeadList, getHiredLeadList } =
+    useSelector((state) => state.leadSetting);
   const handleProfieView = (item) => {
-    console.log(item, "item")
-    navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`)
-  }
+    console.log(item, "item");
+    navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
+  };
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
-  console.log(getPendingLeadList, "getPendingLeadList")
+  console.log(getPendingLeadList, "getPendingLeadList");
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
-    dispatch(getPendingLeadDataApi({ user_id }))
+    dispatch(getPendingLeadDataApi({ user_id }));
   }, [dispatch, user_id]);
 
   const handlePendingApi = () => {
@@ -47,44 +48,44 @@ const MyResponse = () => {
     });
   };
   const handleHiredApi = () => {
-    setSelectedTab("hired")
+    setSelectedTab("hired");
     dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
       if (result.success) {
         // showToast("success",result?.message)
       }
     });
-  }
+  };
 
   const getLeadsToDisplay = () => {
     if (selectedTab === "pending") return getPendingLeadList || [];
     if (selectedTab === "hired") return getHiredLeadList || [];
     return sellerRecommended?.[0]?.leads || [];
-  }
+  };
 
   return (
     <div className={styles.maincontainer}>
       <div className={styles.mainTextBox}>
-      
-
         <div className={styles.headerBox}>
           <div className={styles.headerBtn}>
             <button
-              className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "pending" ? styles.activeButton : ""
+              }`}
               onClick={handlePendingApi}
             >
-           <img src={pendingImg} alt="pendingImg" />   Pending
+              <img src={pendingImg} alt="pendingImg" /> Pending
             </button>
             <button
-              className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "hired" ? styles.activeButton : ""
+              }`}
               onClick={handleHiredApi}
             >
-            <img src={HiredImg} alt="hired" />  Hired
+              <img src={HiredImg} alt="hired" /> Hired
             </button>
           </div>
         </div>
-       </div>
+      </div>
 
       {getLeadsToDisplay().map((item, idx) => (
         <div key={idx} className={styles.card}>
@@ -94,7 +95,10 @@ const MyResponse = () => {
                 <div className={styles.avatar}>
                   {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                 </div>
-                <div className={styles.details} onClick={() => handleProfieView(item)} >
+                <div
+                  className={styles.details}
+                  onClick={() => handleProfieView(item)}
+                >
                   <h3>{item?.customer?.name}</h3>
                   <p>{item?.postcode}</p>
                 </div>
@@ -107,8 +111,8 @@ const MyResponse = () => {
                 <span>
                   {item?.phone
                     ? `${item?.phone.substring(0, 2)}${"*".repeat(
-                      item?.phone.length - 2
-                    )}`
+                        item?.phone.length - 2
+                      )}`
                     : "N/A"}
                 </span>
               </div>
@@ -117,8 +121,8 @@ const MyResponse = () => {
                 <span>
                   {item?.customer?.email
                     ? `${item?.customer?.email
-                      .split("@")[0]
-                      .substring(0, 8)}${"*".repeat(
+                        .split("@")[0]
+                        .substring(0, 8)}${"*".repeat(
                         Math.max(
                           0,
                           item?.customer?.email.split("@")[0].length - 8
@@ -128,29 +132,32 @@ const MyResponse = () => {
                 </span>
               </div>
             </div>
-            {item?.profile_view && item?.profile_view_time && <div className={styles.profile_view}>
-              <p>{item?.profile_view}</p>
-              <p>{item?.profile_view_time}</p>
-            </div>}
+            {item?.profile_view && item?.profile_view_time && (
+              <div className={styles.profile_view}>
+                <p>{item?.profile_view}</p>
+                <p>{item?.profile_view_time}</p>
+              </div>
+            )}
           </div>
 
           <div className={styles.jobDetails}>
-             <div className={styles.saveBtnBox}>
-                                  <button className={styles.saveBtn} 
-                                  // onClick={() => handleSaveLater(item)}
-                                    >
-                                    {/* {saveLaterLoaderId === item.id ? (
+            <div className={styles.saveBtnBox}>
+              <button
+                className={styles.saveBtn}
+                // onClick={() => handleSaveLater(item)}
+              >
+                {/* {saveLaterLoaderId === item.id ? (
                                      <Spin
                                      indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                                    />
                                     ) : (
                                       <> */}
-                                        <img src={saveImg} alt="image" />
-                                        Save For Later
-                                      {/* </>
+                <img src={saveImg} alt="image" />
+                Save For Later
+                {/* </>
                                     )} */}
-                                  </button>
-                                </div>
+              </button>
+            </div>
             <div className={styles.badges}>
               {item?.is_phone_verified == 1 && (
                 <span className={styles.verified}>
@@ -182,27 +189,30 @@ const MyResponse = () => {
             </div>
           </div>
 
-          {/* <div className={styles.leadActions}>
-            <span className={styles.credits}>
-              {item?.credit_score} Credits
-            </span>
-          </div> */}
           <div className={styles.leadActions}>
-            {selectedTab === "pending" && <>
-              <button className={styles.purchaseButton} >
-              <img src={pendingImg} alt="pendingImg" />   {item?.status}
-              </button>
-            </>
-            
-            }
-            {/* <span className={styles.credits}>
-              {item?.credit_score} Credits
-            </span> */}
-            <p className={styles.responseStatus}>
-                                {/* <img src={FirstToRespondImg} alt="" /> */}
-                                Responded 8d ago
-                              </p>
+            {selectedTab === "pending" && (
+              <>
+                <button className={styles.purchaseButton}>
+                  <img src={pendingImg} alt="pendingImg" /> {item?.status}
+                </button>
+              </>
+            )}
+
+            <p
+              className={styles.responseStatus}
+              onClick={() => setSelectedLead(item)}
+            >
+              Responded 8d ago
+              {/* <img src={FirstToRespondImg} alt="" /> */}
+            </p>
           </div>
+
+          {selectedLead && (
+            <MyResponseAccordion
+              lead={selectedLead}
+              onBack={() => setSelectedLead(null)}
+            />
+          )}
         </div>
       ))}
     </div>
