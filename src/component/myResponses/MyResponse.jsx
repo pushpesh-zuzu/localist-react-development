@@ -7,6 +7,7 @@ import {
   getLeadProfileRequestList,
   getPendingLeadDataApi,
   getSellerRecommendedApi,
+  purchaseTypeHiredStatusApi,
   purchaseTypeStatusApi,
 } from "../../store/LeadSetting/leadSettingSlice";
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
@@ -21,6 +22,7 @@ import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg"
 import { Popover, Select } from "antd";
+import moment from "moment";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
@@ -34,11 +36,13 @@ const MyResponse = () => {
   const { sellerRecommended, getPendingLeadList, getHiredLeadList,purchasePendingList,data } =
     useSelector((state) => state.leadSetting);
 
-    console.log(purchasePendingList,"purchasePendingList")
   const handleProfieView = (item) => {
 
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
+   {/* const createdDate = moment(profileLeadViewData?.created_at);
+          const today = moment();
+          const daysAgo = today.diff(createdDate, 'days') */}
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
   
   useEffect(() => {
@@ -115,7 +119,11 @@ if(selectedTab === "pending") {
 
   dispatch(purchaseTypeStatusApi(purchaseData));
 } else {
-
+ const hiredPurchaseData = {
+  user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+  purchase_type: value,
+ }
+ dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData))
 }
  
 };
@@ -277,16 +285,17 @@ if(selectedTab === "pending") {
                 className={styles.responseStatus}
                 onClick={() => handleOpen(item)}
               >
-                Responded 8d ago
+                Responded {moment().diff(moment(item?.created_at), 'days')} days ago
                 <img src={pendingArrowIcon} alt="Response" />
               </p>
             </div>
           </div>
+          
           {selectedLead === item?.id && (
             <MyResponseAccordion
               lead={selectedLead}
               onBack={() => setSelectedLead(null)}
-              getPendingLeadList={getPendingLeadList}
+              getPendingLeadList={data}
 
             />
           )}

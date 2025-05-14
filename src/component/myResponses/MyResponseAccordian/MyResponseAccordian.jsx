@@ -14,6 +14,8 @@ import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
 import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
 import contact from "../../../assets/Images/MyResponse/EmailIcon.svg";
 import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg";
+import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
+import locallistImgs from "../../../assets/Images/Leads/localistImg.svg";
 import {
   addSellerNotesApi,
   getAddHiredLeadDataApi,
@@ -175,61 +177,20 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       });
     }
   };
+  const createdDate = moment(profileLeadViewData?.created_at);
+  const today = moment();
+  const daysAgo = today.diff(createdDate, 'days')
 
-  // const activity = [
-  //   {
-  //     icon: UserImage,
-  //     title: "Viewed your profile",
-  //     time: "19:10",
-  //   },
-  //   {
-  //     icon: CallImage,
-  //     title: "Requested a callback",
-  //     description: "Please call me ASAP on 0000000000",
-  //     time: "19:10",
-  //   },
-  //   {
-  //     icon: EmailImage,
-  //     title: "Sent you an email",
-  //     time: "19:10",
-  //     children: (
-  //       <>
-  //         <p className={styles.desc}>
-  //           Hi, I'm Chander and looking for a job. I'm very hardworking and
-  //           honest with my work.
-  //           <br />
-  //           Regards,
-  //         </p>
-  //         <a href="#" className={styles.link}>
-  //           See More
-  //         </a>
-  //       </>
-  //     ),
-  //   },
-  //   {
-  //     icon: PurchasedImage,
-  //     title: "Purchased the lead",
-  //     time: "19:10",
-  //   },
-  //   {
-  //     icon: AddImage,
-  //     title: "Looking for a Home Care Specialist",
-  //     time: "12:10",
-  //     children: (
-  //       <a href="#" className={styles.link}>
-  //         View details
-  //       </a>
-  //     ),
-  //   },
-  // ];
 
   return (
     <>
       <div className={styles.headerBox}>
-        <div className={styles.lastActivityText}>Last activity 3 days ago</div>
-        <div className={styles.lastActivityText}>
-          Purchase Type: <span>Manual Bid</span>
-        </div>
+        <div className={styles.lastActivityText}>Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago</div>
+        {profileLeadViewData?.leads?.purchase_type && (
+          <div className={styles.lastActivityText}>
+            Purchase Type: <span>{profileLeadViewData?.leads?.purchase_type}</span>
+          </div>
+        )}
         <div>
           <span className={styles.currentStatusText}>Current Status</span>
           <select
@@ -257,7 +218,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
           <span>
             <img src={PhoneImg} alt="phone" />
           </span>
-          {profileLeadViewData?.phone}
+          {profileLeadViewData?.phone} {profileLeadViewData?.leads?.is_phone_verified == 1 && <sapn className={styles.verifiedText}><img src={HiredImg} alt="verified" />Verified</sapn>}
         </div>
         <div className={styles.phoneNumberText}>
           <span>
@@ -304,34 +265,37 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
             <img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp
           </button>
         </div>
-        <div className={styles.contactBox}>
+        {profileLeadViewData?.leads?.is_urgent == 1 && <div className={styles.contactBox}>
           <span>
             <img src={contact} alt="contact" />
           </span>{" "}
-          Contact: Urgently
+          Contact: <span className={styles.urgentText}>Urgently</span>
+        </div>}
+        <div className={styles.locationTag}>
+          <img src={locallistImgs} alt="credit icon" />
+          <span className={styles.creditsAmount}>
+            {profileLeadViewData?.leads?.credit_score} credits
+          </span>
         </div>
         <div className={styles.tabSection}>
           <div className={styles.tabButtons}>
             <button
-              className={`${styles.tabButton} ${
-                activeTab === "activity" ? styles.activeTab : ""
-              }`}
+              className={`${styles.tabButton} ${activeTab === "activity" ? styles.activeTab : ""
+                }`}
               onClick={() => setActiveTab("activity")}
             >
               Activity
             </button>
             <button
-              className={`${styles.tabButton} ${
-                activeTab === "lead" ? styles.activeTab : ""
-              }`}
+              className={`${styles.tabButton} ${activeTab === "lead" ? styles.activeTab : ""
+                }`}
               onClick={() => setActiveTab("lead")}
             >
               Lead
             </button>
             <button
-              className={`${styles.tabButton} ${
-                activeTab === "notes" ? styles.activeTab : ""
-              }`}
+              className={`${styles.tabButton} ${activeTab === "notes" ? styles.activeTab : ""
+                }`}
               onClick={() => setActiveTab("notes")}
             >
               Notes
@@ -349,10 +313,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                       item?.contact_type === "Manual Bid"
                         ? CallImage
                         : item?.contact_type === "Buttons"
-                        ? EmailImage
-                        : item?.contact_type === "Buttons"
-                        ? PurchasedImage
-                        : UserImage
+                          ? EmailImage
+                          : item?.contact_type === "Buttons"
+                            ? PurchasedImage
+                            : UserImage
                     }
                     title={item.activity_name}
                     description={item.description}

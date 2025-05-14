@@ -219,12 +219,41 @@
   margin-bottom: 24px;
   display: flex;
   gap: 8px;
+  align-items: center;
+}
+.verifiedText {
+background-color: #E3F6FC;
+padding: 5px 9px;
+border-radius: 100px;
+font-size: 16px;
+font-weight: 400;
+color: var(--primary-color);
 }
 .contactBox {
   margin-top: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+.urgentText {
+  color: var(--primary-color);
+  font-size: 14px;
+font-weight: 500;
+}
+.locationTag {
+  border: 1.06px solid var(--primary-color);
+  border-radius: 2.42px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px;
+  max-width: 150px;
+  margin-top: 24px;
+}
+
+.locationTag img {
+  width: 66px;
+  height: 26px;
 }
 .tabSection {
   margin-top: 20px;
@@ -243,7 +272,7 @@
   background-color: white;
   cursor: pointer;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 18px;
   color: #828282;
 }

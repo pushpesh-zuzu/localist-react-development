@@ -823,6 +823,23 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   }
+  export const purchaseTypeHiredStatusApi = (purchaseData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/hired-purchase-type-filter`, purchaseData);
+  
+        if (response) {
+          dispatch(setData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
   
 
 const leadSettingSlice = createSlice({
