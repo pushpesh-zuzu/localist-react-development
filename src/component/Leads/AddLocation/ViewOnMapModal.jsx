@@ -31,7 +31,7 @@ const drawCircle = (center) => {
   
     let radiusInMeters = 0;
   
-    if (locationData.type === "Nationwide") {
+    if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
       // Rough estimate to cover India (1500 km ~ 932 miles)
       radiusInMeters = 1500000;
     } else {
@@ -158,7 +158,7 @@ const drawCircle = (center) => {
   
       let newCenter;
   
-      if (locationData?.type === "Nationwide") {
+      if (locationData.type === "Nationwide" && locationData.nation_wide == 1){
         newCenter = { lat: 22.9734, lng: 78.6569 }; // Center of India
       } else if (locationData?.postcode) {
         try {
@@ -173,7 +173,7 @@ const drawCircle = (center) => {
       if (newCenter) {
         setMapCenter(newCenter);
         mapInstance.current.setCenter(newCenter);
-        mapInstance.current.setZoom(locationData.type === "Nationwide" ? 2 : 12);
+        mapInstance.current.setZoom((locationData.type === "Nationwide" && locationData.nation_wide == 1) ? 2 : 12);
   
         if (markerRef.current) {
           markerRef.current.setMap(null);
@@ -240,7 +240,7 @@ const drawCircle = (center) => {
           &times;
         </button>
         <div className={styles.modalHeader}>
-          <h2>{locationData?.type === "Nationwide" ? locationData?.type :locationData?.city}</h2>
+          <h2>{(locationData.type === "Nationwide" && locationData.nation_wide == 1) ? locationData?.type : locationData?.city}</h2>
         </div>
         <div
           ref={mapRef}
