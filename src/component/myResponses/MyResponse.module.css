@@ -11,7 +11,6 @@
 .maincontainer {
   padding: 16px 88px;
   background: #f9f9fa;
-  /* width: 100%; */
 }
 
 .accordionOverlay {
@@ -28,12 +27,15 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* width: 100%; */
+  width: 100%;
+  max-width: 1236px;
+  margin: 0 auto;
 }
 .headerBox {
   background-color: #000000;
   padding: 14px;
   width: 100%;
+  max-width: 1236px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -312,6 +314,10 @@
 }
 /* Tablet */
 @media (max-width: 1200px) {
+  .maincontainer {
+    padding: 16px 60px;
+    background: #f9f9fa;
+  }
   .card {
     gap: 20px;
   }
@@ -326,6 +332,10 @@
 }
 
 @media (max-width: 1024px) {
+  .maincontainer {
+    padding: 16px 40px;
+    background: #f9f9fa;
+  }
   .card {
     grid-template-areas:
       "info"
@@ -355,8 +365,19 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .mainTextBox {
+    width: -webkit-fill-available;
+    padding: 24px;
+  }
+}
+
 /* Mobile */
 @media (max-width: 600px) {
+  .maincontainer {
+    padding: 16px 30px;
+    background: #f9f9fa;
+  }
   .card {
     padding: 16px;
   }
@@ -390,6 +411,11 @@
 }
 
 @media (max-width: 480px) {
+  .headerBox {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+  }
   .details h3 {
     font-size: 16px;
   }
