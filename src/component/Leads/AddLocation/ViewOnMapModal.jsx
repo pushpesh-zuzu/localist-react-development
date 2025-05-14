@@ -18,7 +18,7 @@ const ViewOnMapModal = ({
     lat: 20.5937, // Default center (India)
     lng: 78.9629,
   });
-  console.log(locationData?.type,"locationData")
+  console.log(locationData,"locationData")
 
  
 const drawCircle = (center) => {
@@ -36,7 +36,7 @@ const drawCircle = (center) => {
       radiusInMeters = 1500000;
     } else {
       // Use the radius in miles from locationData (default 1 mile)
-      const radiusInMiles = parseFloat(locationData.miles1) || 1;
+      const radiusInMiles = parseFloat(locationData.miles) || 1;
       radiusInMeters = radiusInMiles * 1609.34;
     }
   
@@ -231,7 +231,7 @@ const drawCircle = (center) => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
       drawCircle(mapCenter);
     }
-  }, [locationData.miles1]);
+  }, [locationData.miles]);
 
   return (
     <div className={styles.modalOverlay}>
