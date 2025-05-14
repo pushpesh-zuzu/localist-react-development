@@ -1,12 +1,20 @@
 .container {
   max-width: 500px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
+.containers {
+  /* max-width: 500px; */
+  /* margin: 0 auto; */
+  background-color: #ffffff;
+  padding: 35px 38px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .date {
   text-align: center;
   color: gray;
@@ -119,4 +127,176 @@
   border-radius: 0.5rem;
   padding: 1rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btnBox {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.buttonSms {
+background-color: var(--primary-color);
+padding: 5px 21px ;
+border-radius: 3px;
+color: #ffffff;
+border: none;
+display: flex;
+gap: 4px;
+}
+.selectBox {
+  padding: 8px 8px;
+  width: 150px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+}
+
+.selectBox option {
+  padding: 10px;
+}
+.mainSlectBox {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.currentStatusText{
+  font-size: 14px;
+  margin-right: 10px;
+}
+.headerBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 1px 32px ;
+}
+.lastActivityText {
+  font-size: 14px;
+  font-weight: 400;
+}
+.ProfileImgBox {
+display: flex;
+align-items: center;
+gap: 7px;
+margin-bottom: 9px;
+}
+.ProfileImgBox img {
+  width: 29px;
+  height: 29px;
+}
+.ProfileImgBox span {
+  font-size: 24px;
+  font-weight: 600;
+}
+.serviceText {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 12px;
+}
+.serviceText span {
+  color: #bbbbbb;
+  font-size: 18px;
+  font-weight: 500;
+}
+.phoneNumberText {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 8px;
+}
+.contactBox {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tabSection {
+  margin-top: 20px;
+}
+
+.tabButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tabButton {
+  padding: 8px 16px;
+  /* border: 1px solid #ccc; */
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #828282;
+}
+
+.activeTab {
+  color: var(--primary-color);
+  
+}
+
+.tabContent {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
+}
+.leadContent {
+  display: flex;
+  justify-content: space-between;
+}
+.notesContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.notesInner {
+  display: flex;
+  flex-direction: column;
+  max-width:500px;
+  gap: 1rem;
+}
+
+.textArea {
+
+  max-width:500px;
+  min-height: 120px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.UpdateBtn {
+  background-color: var(--primary-color);
+padding: 5px 21px ;
+border-radius: 3px;
+color: #ffffff;
+border: none;
+display: flex;
+gap: 4px;
+cursor: pointer;
+}
+.CancelBtn {
+  background-color: #ffffff;
+  padding: 5px 21px ;
+  border-radius: 3px;
+  color: #828282;
+  border: none;
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
 }

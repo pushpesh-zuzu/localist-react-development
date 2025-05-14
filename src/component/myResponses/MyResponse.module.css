@@ -35,7 +35,7 @@
   padding: 14px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 18px;
 }
@@ -241,6 +241,9 @@
   font-weight: 400;
   font-size: 12px;
   vertical-align: middle;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
 }
 
 .responseStatus img {
@@ -300,7 +303,13 @@
   color: white;
   font-weight: bold;
 }
-
+.viewAllText {
+  color: #ffffff;
+  cursor: pointer;
+}
+.purchaseText {
+  color: #ffffff;
+}
 /* Tablet */
 @media (max-width: 1200px) {
   .card {

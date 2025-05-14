@@ -20,32 +20,7 @@ const ViewOnMapModal = ({
   });
   console.log(locationData?.type,"locationData")
 
-  // Function to draw a circle on the map
-//   const drawCircle = (center) => {
-//     if (!window.google || !mapInstance.current) return;
-    
-//     // Remove existing circle if any
-//     if (circleRef.current) {
-//       circleRef.current.setMap(null);
-//     }
-
-//     // Get radius in miles from locationData and convert to meters
-//     // Default to 1 mile if not provided
-//     const radiusInMiles = parseFloat(locationData.miles1) || 1;
-//     const radiusInMeters = radiusInMiles * 1609.34; // Convert miles to meters
-
-//     // Create a new circle with the specified center and radius
-//     circleRef.current = new window.google.maps.Circle({
-//       center,
-//       radius: radiusInMeters,
-//       fillColor: "#007BFF",
-//       fillOpacity: 0.2,
-//       strokeColor: "#007BFF",
-//       strokeOpacity: 0.7,
-//       strokeWeight: 2,
-//       map: mapInstance.current,
-//     });
-//   };
+ 
 const drawCircle = (center) => {
     if (!window.google || !mapInstance.current) return;
   

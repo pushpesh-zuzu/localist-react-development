@@ -49,7 +49,11 @@ const initialState = {
     getHiredLeadList:[],
     getActivies:[],
     getSwitcgAutoBidData:{},
-    addSubmitLeadLoader:false
+    addSubmitLeadLoader:false,
+    getSellerNotes:[],
+    sellerNotesLoader:false,
+    purchasePendingList:[],
+    data:[]
 };
 
 
@@ -581,7 +585,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-pending-leads`, remoteData);
   
         if (response) {
-          dispatch(setGetPendingLeadsData(response?.data?.data))
+          //dispatch(setGetPendingLeadsData(response?.data?.data))
+          dispatch(setData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -599,7 +604,8 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/get-hired-leads`, remoteData);
   
         if (response) {
-          dispatch(setGetHiredLeadsData(response?.data?.data))
+         // dispatch(setGetHiredLeadsData(response?.data?.data))
+         dispatch(setData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -615,9 +621,9 @@ export const getleadPreferencesList = (serviceId) => {
       dispatch(setSevenDaysAutobidLoader(true));
       try {
         const response = await axiosInstance.post(`users/add-hired-leads`, AddHiredLeadData);
-  
+
         if (response) {
-          dispatch(setGetHiredLeadsData(response?.data?.data))
+          dispatch(setData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -765,7 +771,59 @@ export const getleadPreferencesList = (serviceId) => {
         dispatch(setSevenDaysAutobidLoader(false));
       }
     };
+  } 
+  export const addSellerNotesApi = (sellerApiData) => {
+    return async (dispatch) => {
+      dispatch(setSellerNotesLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/seller-notes`, sellerApiData);
+  
+        if (response) {
+          dispatch(setGetSwitchAutoBidData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSellerNotesLoader(false));
+      }
+    };
   }
+  export const getSellerNotesApi = (sellerData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-seller-notes`, sellerData);
+  
+        if (response) {
+          dispatch(setGetSellerNotesData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  export const purchaseTypeStatusApi = (purchaseData) => {
+    return async (dispatch) => {
+      dispatch(setSevenDaysAutobidLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/pending-purchase-type-filter`, purchaseData);
+  
+        if (response) {
+          dispatch(setData(response?.data?.data))
+           return response.data
+        }
+      } catch (error) {
+       showToast("error",error?.message)
+      } finally {
+        dispatch(setSevenDaysAutobidLoader(false));
+      }
+    };
+  }
+  
 
 const leadSettingSlice = createSlice({
   name: "leadSetting",
@@ -878,11 +936,23 @@ const leadSettingSlice = createSlice({
       },
       setAddSubmitLeadLoader(state,action){
         state.addSubmitLeadLoader = action.payload
+      },
+      setGetSellerNotesData(state,action){
+        state.getSellerNotes = action.payload
+      },
+      setSellerNotesLoader(state,action) {
+        state.sellerNotesLoader = action.payload
+      },
+      setPurchasePendingData(state,action) {
+        state.purchasePendingList = action.payload
+      },
+      setData(state,action){
+        state.data=action.payload
       }
    
   },
 });
 
-export const {setleadPreferencesListLoader,setAutoBidData,setGetActivitiesData,setAddSubmitLeadLoader,setGetSwitchAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setData,setleadPreferencesListLoader,setAutoBidData,setSellerNotesLoader,setPurchasePendingData,setGetSellerNotesData,setGetActivitiesData,setAddSubmitLeadLoader,setGetSwitchAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

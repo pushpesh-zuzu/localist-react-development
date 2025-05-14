@@ -312,7 +312,18 @@ console.log(selectedServices,"selectedServices123")
       return;
     }
   
-    if (location?.type === "Distance") {
+    if (location?.type  === "Distance") {
+      setLocationData({
+        miles1: location.miles,
+        postcode: location.postcode,
+        coordinates: location?.coordinates
+      });
+      setEditLocationId(location.id);
+      setIseditModalOpen(true);
+      setPreviousPostcode(location.postcode);
+      return;
+    }
+    if(location?.nation_wide == 0 ){
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
@@ -324,7 +335,7 @@ console.log(selectedServices,"selectedServices123")
       return;
     }
     
-    if (location?.type === "Nationwide") {
+    if (location?.type === "Nationwide" &&  location?.nation_wide == 1) {
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
@@ -338,7 +349,7 @@ console.log(selectedServices,"selectedServices123")
 
   const handleConfirm = (data) => {
     const serviceIds = data.join(",");
-    debugger
+   
     const typeOfTravel = type.current;
     const locationdata = {
       user_id: userToken?.remember_tokens,
