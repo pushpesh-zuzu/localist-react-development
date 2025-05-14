@@ -10,6 +10,7 @@
   /* max-width: 500px; */
   /* margin: 0 auto; */
   background-color: #ffffff;
+  border: 1px solid #d9d9d9;
   padding: 35px 38px;
   display: flex;
   flex-direction: column;
@@ -134,13 +135,13 @@
   margin-top: 16px;
 }
 .buttonSms {
-background-color: var(--primary-color);
-padding: 5px 21px ;
-border-radius: 3px;
-color: #ffffff;
-border: none;
-display: flex;
-gap: 4px;
+  background-color: var(--primary-color);
+  padding: 5px 21px;
+  border-radius: 3px;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  gap: 4px;
 }
 .selectBox {
   padding: 8px 8px;
@@ -163,7 +164,7 @@ gap: 4px;
   gap: 12px;
 }
 
-.currentStatusText{
+.currentStatusText {
   font-size: 14px;
   margin-right: 10px;
 }
@@ -171,18 +172,27 @@ gap: 4px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  padding: 1px 32px ;
+  margin-bottom: 21px;
+  padding: 1px 32px;
 }
 .lastActivityText {
   font-size: 14px;
   font-weight: 400;
 }
+
+.lastActivityText span {
+  border: 1px solid #e3f6fc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: white;
+  margin-left: 14px;
+  font-size: 14px;
+}
 .ProfileImgBox {
-display: flex;
-align-items: center;
-gap: 7px;
-margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 9px;
 }
 .ProfileImgBox img {
   width: 29px;
@@ -240,7 +250,6 @@ margin-bottom: 9px;
 
 .activeTab {
   color: var(--primary-color);
-  
 }
 
 .tabContent {
@@ -260,13 +269,12 @@ margin-bottom: 9px;
 .notesInner {
   display: flex;
   flex-direction: column;
-  max-width:500px;
+  max-width: 500px;
   gap: 1rem;
 }
 
 .textArea {
-
-  max-width:500px;
+  max-width: 500px;
   min-height: 120px;
   padding: 10px;
   resize: vertical;
@@ -282,21 +290,107 @@ margin-bottom: 9px;
 }
 .UpdateBtn {
   background-color: var(--primary-color);
-padding: 5px 21px ;
-border-radius: 3px;
-color: #ffffff;
-border: none;
-display: flex;
-gap: 4px;
-cursor: pointer;
+  padding: 5px 21px;
+  border-radius: 3px;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
 }
 .CancelBtn {
   background-color: #ffffff;
-  padding: 5px 21px ;
+  padding: 5px 21px;
   border-radius: 3px;
   color: #828282;
   border: none;
   display: flex;
   gap: 4px;
   cursor: pointer;
+}
+
+/* Default styles (desktop) */
+/* Already in your code, no change needed here */
+
+@media screen and (max-width: 768px) {
+  .headerBox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .containers {
+    padding: 24px;
+  }
+
+  .btnBox {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ProfileImgBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .phoneNumberText,
+  .serviceText {
+    font-size: 16px;
+  }
+
+  .textArea {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .headerBox {
+    padding: 16px 8px;
+  }
+
+  .container {
+    gap: 16px;
+  }
+
+  .verticalLine {
+    display: none;
+  }
+
+  .containers {
+    padding: 16px;
+  }
+
+  .tabButton {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .iconWrapper img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .UpdateBtn,
+  .CancelBtn {
+    font-size: 14px;
+    padding: 10px 19px;
+  }
+
+  .buttonSms {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .timelineItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .desc {
+    font-size: 14px;
+  }
 }

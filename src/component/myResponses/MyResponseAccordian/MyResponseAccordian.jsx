@@ -5,16 +5,23 @@ import CallImage from "../../../assets/Icons/MyResponse/CallImage.svg";
 import EmailImage from "../../../assets/Icons/MyResponse/EmailImage.svg";
 import PurchasedImage from "../../../assets/Icons/MyResponse/PurchasedImage.svg";
 import AddImage from "../../../assets/Icons/MyResponse/AddImage.svg";
-import ProfileImg from "../../../assets/Images/MyResponse/ProfileIcon.svg"
-import PhoneImg from "../../../assets/Images/MyResponse/PhoneIcon.svg"
-import MailIcon from "../../../assets/Images/MyResponse/mail-02.svg"
-import Mailbtn from "../../../assets/Images/MyResponse/mail-02.svg"
-import smsBtn from "../../../assets/Images/MyResponse/annotation.svg"
-import phoneBtn from "../../../assets/Images/MyResponse/phone.svg"
-import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg"
-import contact from "../../../assets/Images/MyResponse/EmailIcon.svg"
-import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg"
-import { addSellerNotesApi, getAddHiredLeadDataApi, getBuyerActivitiesApi, getLeadProfileRequestList, getSellerNotesApi, sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
+import ProfileImg from "../../../assets/Images/MyResponse/ProfileIcon.svg";
+import PhoneImg from "../../../assets/Images/MyResponse/PhoneIcon.svg";
+import MailIcon from "../../../assets/Images/MyResponse/mail-02.svg";
+import Mailbtn from "../../../assets/Images/MyResponse/mail-02.svg";
+import smsBtn from "../../../assets/Images/MyResponse/annotation.svg";
+import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
+import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
+import contact from "../../../assets/Images/MyResponse/EmailIcon.svg";
+import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg";
+import {
+  addSellerNotesApi,
+  getAddHiredLeadDataApi,
+  getBuyerActivitiesApi,
+  getLeadProfileRequestList,
+  getSellerNotesApi,
+  sellerResponseStatusApi,
+} from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../../utils";
 import moment from "moment";
@@ -24,7 +31,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
-
   <div className={styles.timelineItem}>
     <div className={styles.iconWrapper}>
       <img className={styles.icon} src={icon} alt={title} />
@@ -43,23 +49,31 @@ const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
 );
 
 const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
-  const [activeTab, setActiveTab] = useState("activity")
-  const [status, setStatus] = useState("pending")
-  const [note, setNote] = useState("")
-  const dispatch = useDispatch()
+  const [activeTab, setActiveTab] = useState("activity");
+  const [status, setStatus] = useState("pending");
+  const [note, setNote] = useState("");
+  const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { profileLeadViewData, autobidLoader, getActivies, getSellerNotes, sellerNotesLoader } = useSelector((state) => state.leadSetting)
-  console.log(profileLeadViewData, "profileLeadViewData")
+  const {
+    profileLeadViewData,
+    autobidLoader,
+    getActivies,
+    getSellerNotes,
+    sellerNotesLoader,
+  } = useSelector((state) => state.leadSetting);
+  console.log(profileLeadViewData, "profileLeadViewData");
   const user = {
     phoneNumber: "918123456789",
-    email: "test@example.com"
+    email: "test@example.com",
   };
 
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
-      seller_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      seller_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
 
       type: null,
@@ -72,7 +86,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     } else if (clickName === "email") {
       responseStatus.type = "email";
     } else if (clickName === "sms") {
-      responseStatus.type = "sms"
+      responseStatus.type = "sms";
     }
 
     dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
@@ -94,10 +108,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
   useEffect(() => {
     const data = {
       customer_id: profileLeadViewData?.leads?.customer_id,
-      lead_id: profileLeadViewData?.leads?.id
-    }
-    dispatch(getLeadProfileRequestList(data))
-  }, [])
+      lead_id: profileLeadViewData?.leads?.id,
+    };
+    dispatch(getLeadProfileRequestList(data));
+  }, []);
   const handleSubmit = () => {
     const notesValue = getSellerNotes?.notes;
 
@@ -108,19 +122,19 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
 
     const sellerNote = {
       lead_id: profileLeadViewData?.leads?.id,
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
       note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
-      notes: note
-
-    }
+      notes: note,
+    };
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
       if (result) {
-        showToast("success", result?.message)
+        showToast("success", result?.message);
       }
-    })
-
-  }
+    });
+  };
 
   useEffect(() => {
     if (
@@ -133,13 +147,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
         user_id: userToken?.remember_tokens || registerData?.remember_tokens,
         buyer_id: profileLeadViewData.id,
       };
-  
+
       dispatch(getSellerNotesApi(sellerData));
     }
   }, [profileLeadViewData]);
-  
-
-
 
   const handleStatusChange = (e) => {
     const selectedStatus = e.target.value.toLowerCase(); // ensure lowercase
@@ -154,19 +165,16 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     if (addHiredData.lead_id) {
       dispatch(getAddHiredLeadDataApi(addHiredData)).then((result) => {
         if (result) {
-          showToast("success", result?.message)
+          showToast("success", result?.message);
           const data = {
             customer_id: profileLeadViewData?.leads?.customer_id,
-            lead_id: profileLeadViewData?.leads?.id
-          }
-          dispatch(getLeadProfileRequestList(data))
-
+            lead_id: profileLeadViewData?.leads?.id,
+          };
+          dispatch(getLeadProfileRequestList(data));
         }
       });
     }
   };
-
-
 
   // const activity = [
   //   {
@@ -219,7 +227,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     <>
       <div className={styles.headerBox}>
         <div className={styles.lastActivityText}>Last activity 3 days ago</div>
-        <div className={styles.lastActivityText}>Purchase Type: manual</div>
+        <div className={styles.lastActivityText}>
+          Purchase Type: <span>Manual Bid</span>
+        </div>
         <div>
           <span className={styles.currentStatusText}>Current Status</span>
           <select
@@ -235,50 +245,93 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
         </div>
       </div>
       <div className={styles.containers}>
-
         <div className={styles.ProfileImgBox}>
-          <img src={ProfileImg} alt="Profile" /> <span>{profileLeadViewData?.name}</span>
+          <img src={ProfileImg} alt="Profile" />{" "}
+          <span>{profileLeadViewData?.name}</span>
         </div>
-        <div className={styles.serviceText}>{profileLeadViewData?.leads?.category?.name} | <span>   {profileLeadViewData?.leads?.city}</span></div>
-        <div className={styles.phoneNumberText} ><span><img src={PhoneImg} alt="phone" /></span>{profileLeadViewData?.phone}</div>
-        <div className={styles.phoneNumberText}><span><img src={MailImg} alt="mail" /></span>{profileLeadViewData?.email}</div>
+        <div className={styles.serviceText}>
+          {profileLeadViewData?.leads?.category?.name} |{" "}
+          <span> {profileLeadViewData?.leads?.city}</span>
+        </div>
+        <div className={styles.phoneNumberText}>
+          <span>
+            <img src={PhoneImg} alt="phone" />
+          </span>
+          {profileLeadViewData?.phone}
+        </div>
+        <div className={styles.phoneNumberText}>
+          <span>
+            <img src={MailImg} alt="mail" />
+          </span>
+          {profileLeadViewData?.email}
+        </div>
         <div className={styles.btnBox}>
-          <button className={styles.buttonSms} onClick={() => {
-            handleResponseChange("email");
-            window.location.href = `mailto:${user.email}`;
-          }}> <img src={Mailbtn} alt="mail" /> Send Email</button>
-          <button className={styles.buttonSms} onClick={() => {
-            handleResponseChange("sms");
-            window.location.href = `mailto:${user.email}`;
-          }}><img src={smsBtn} alt="sms" /> Send SMS</button>
-          <button className={styles.buttonSms} onClick={() => {
-            handleResponseChange("mobile");
-            window.location.href = `tel:${user.phoneNumber}`;
-          }}><img src={phoneBtn} alt="phone" /> Phone Number</button>
-          <button className={styles.buttonSms} onClick={() => {
-            handleResponseChange("Whatsapp");
-            window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
-          }}><img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp</button>
+          <button
+            className={styles.buttonSms}
+            onClick={() => {
+              handleResponseChange("email");
+              window.location.href = `mailto:${user.email}`;
+            }}
+          >
+            {" "}
+            <img src={Mailbtn} alt="mail" /> Send Email
+          </button>
+          <button
+            className={styles.buttonSms}
+            onClick={() => {
+              handleResponseChange("sms");
+              window.location.href = `mailto:${user.email}`;
+            }}
+          >
+            <img src={smsBtn} alt="sms" /> Send SMS
+          </button>
+          <button
+            className={styles.buttonSms}
+            onClick={() => {
+              handleResponseChange("mobile");
+              window.location.href = `tel:${user.phoneNumber}`;
+            }}
+          >
+            <img src={phoneBtn} alt="phone" /> Phone Number
+          </button>
+          <button
+            className={styles.buttonSms}
+            onClick={() => {
+              handleResponseChange("Whatsapp");
+              window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
+            }}
+          >
+            <img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp
+          </button>
         </div>
         <div className={styles.contactBox}>
-          <span><img src={contact} alt="contact" /></span> Contact: Urgently
+          <span>
+            <img src={contact} alt="contact" />
+          </span>{" "}
+          Contact: Urgently
         </div>
         <div className={styles.tabSection}>
           <div className={styles.tabButtons}>
             <button
-              className={`${styles.tabButton} ${activeTab === "activity" ? styles.activeTab : ""}`}
+              className={`${styles.tabButton} ${
+                activeTab === "activity" ? styles.activeTab : ""
+              }`}
               onClick={() => setActiveTab("activity")}
             >
               Activity
             </button>
             <button
-              className={`${styles.tabButton} ${activeTab === "lead" ? styles.activeTab : ""}`}
+              className={`${styles.tabButton} ${
+                activeTab === "lead" ? styles.activeTab : ""
+              }`}
               onClick={() => setActiveTab("lead")}
             >
               Lead
             </button>
             <button
-              className={`${styles.tabButton} ${activeTab === "notes" ? styles.activeTab : ""}`}
+              className={`${styles.tabButton} ${
+                activeTab === "notes" ? styles.activeTab : ""
+              }`}
               onClick={() => setActiveTab("notes")}
             >
               Notes
@@ -292,7 +345,15 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                 {getActivies.map((item, index) => (
                   <TimelineItem
                     key={index}
-                    icon={item?.contact_type === "Manual Bid" ? CallImage : item?.contact_type === "Buttons" ? EmailImage : item?.contact_type === "Buttons" ? PurchasedImage : UserImage}
+                    icon={
+                      item?.contact_type === "Manual Bid"
+                        ? CallImage
+                        : item?.contact_type === "Buttons"
+                        ? EmailImage
+                        : item?.contact_type === "Buttons"
+                        ? PurchasedImage
+                        : UserImage
+                    }
                     title={item.activity_name}
                     description={item.description}
                     time={moment(item.updated_at).format("hh:ss A")}
@@ -308,13 +369,15 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
               <div className={styles.leadContent}>
                 <div>
                   {getPendingLeadList?.map((item, index) => {
-                    const questionsArray = item?.questions ? JSON.parse(item.questions) : [];
+                    const questionsArray = item?.questions
+                      ? JSON.parse(item.questions)
+                      : [];
 
                     return (
-                      <div key={index} style={{ marginBottom: '1rem' }}>
+                      <div key={index} style={{ marginBottom: "1rem" }}>
                         {questionsArray.map((qna, qIndex) => (
-                          <div key={qIndex} style={{ marginBottom: '0.5rem' }}>
-                            <p style={{ fontWeight: 'bold' }}>{qna.ques}</p>
+                          <div key={qIndex} style={{ marginBottom: "0.5rem" }}>
+                            <p style={{ fontWeight: "bold" }}>{qna.ques}</p>
                             <hr />
                             <p>{qna.ans}</p>
                           </div>
@@ -331,17 +394,31 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
             {activeTab === "notes" && (
               <div className={styles.notesContent}>
                 <div className={styles.notesInner}>
-                  <textarea className={styles.textArea} placeholder="Enter your notes here..." onChange={(e) => setNote(e.target.value)} value={note?.notes} />
+                  <textarea
+                    className={styles.textArea}
+                    placeholder="Enter your notes here..."
+                    onChange={(e) => setNote(e.target.value)}
+                    value={note?.notes}
+                  />
                   <div className={styles.buttonGroup}>
-                    <button className={styles.CancelBtn} onClick={handleCancel}>Cancel</button>
-                    <button className={styles.UpdateBtn} onClick={handleSubmit}>{sellerNotesLoader ? <Spin
-                      indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                    /> : "Update"}</button>
+                    <button className={styles.CancelBtn} onClick={handleCancel}>
+                      Cancel
+                    </button>
+                    <button className={styles.UpdateBtn} onClick={handleSubmit}>
+                      {sellerNotesLoader ? (
+                        <Spin
+                          indicator={
+                            <LoadingOutlined spin style={{ color: "white" }} />
+                          }
+                        />
+                      ) : (
+                        "Update"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
             )}
-
           </div>
         </div>
 
