@@ -94,6 +94,12 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
       if (result) {
         showToast("success", result?.message);
+       const activityData = {
+             buyer_id: profileLeadViewData?.id,
+             user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+             lead_id: profileLeadViewData?.leads?.id
+           }
+           dispatch(getBuyerActivitiesApi(activityData))
       }
     });
   };
@@ -111,6 +117,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     const data = {
       customer_id: profileLeadViewData?.leads?.customer_id,
       lead_id: profileLeadViewData?.leads?.id,
+      user_id: userToken?.remember_tokens
+      ? userToken?.remember_tokens
+      : registerData?.remember_tokens,
     };
     dispatch(getLeadProfileRequestList(data));
   }, []);
@@ -161,7 +170,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     const addHiredData = {
       lead_id: profileLeadViewData?.leads?.id,
       status_type: selectedStatus,
-      user_id: userToken?.remember_tokens,
+      user_id: userToken?.remember_tokens
+      ? userToken?.remember_tokens
+      : registerData?.remember_tokens,
     };
 
     if (addHiredData.lead_id) {
@@ -171,6 +182,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
           const data = {
             customer_id: profileLeadViewData?.leads?.customer_id,
             lead_id: profileLeadViewData?.leads?.id,
+            user_id:userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
           };
           dispatch(getLeadProfileRequestList(data));
         }

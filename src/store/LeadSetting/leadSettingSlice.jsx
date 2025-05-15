@@ -692,7 +692,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/sort-by-location`, buyerSortByLocationData);
   
         if (response) {
-          // dispatch(setAutoBidData(response?.data?.data))
+          dispatch(setAutoBidData(response?.data?.data))
            return response.data
         }
       } catch (error) {
@@ -709,7 +709,7 @@ export const getleadPreferencesList = (serviceId) => {
         const response = await axiosInstance.post(`users/response-time-filter`, buyerSortByResponseData);
   
         if (response) {
-          // dispatch(setAutoBidData(response?.data?.data))
+          dispatch(setAutoBidData(response?.data?.data))
            return response.data
         }
       } catch (error) {

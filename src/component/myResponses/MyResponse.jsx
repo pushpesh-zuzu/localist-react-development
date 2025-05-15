@@ -33,18 +33,18 @@ const MyResponse = () => {
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { sellerRecommended, getPendingLeadList, getHiredLeadList,purchasePendingList,data } =
+  const { sellerRecommended, getPendingLeadList, getHiredLeadList, purchasePendingList, data } =
     useSelector((state) => state.leadSetting);
 
   const handleProfieView = (item) => {
 
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
-   {/* const createdDate = moment(profileLeadViewData?.created_at);
+  {/* const createdDate = moment(profileLeadViewData?.created_at);
           const today = moment();
           const daysAgo = today.diff(createdDate, 'days') */}
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
-  
+
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
     dispatch(getPendingLeadDataApi({ user_id }));
@@ -68,12 +68,12 @@ const MyResponse = () => {
   };
 
   const getLeadsToDisplay = () => {
-    
-   /** if (selectedTab === "pending") return getPendingLeadList || [];
-    if (selectedTab === "hired") return getHiredLeadList || [];
-    if (purchaseType && selectedTab === "pending") return purchasePendingList || []; 
-    return []; */
-    
+
+    /** if (selectedTab === "pending") return getPendingLeadList || [];
+     if (selectedTab === "hired") return getHiredLeadList || [];
+     if (purchaseType && selectedTab === "pending") return purchasePendingList || []; 
+     return []; */
+
     return data;
   };
 
@@ -96,37 +96,38 @@ const MyResponse = () => {
       if (result) {
         const data = {
           customer_id: item?.customer_id,
-          lead_id: item?.id
+          lead_id: item?.id,
+          user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
         }
         dispatch(getLeadProfileRequestList(data))
       }
     })
   }
-// const handlePurchaseChange = (value) => {
-//   const purchaseData = {
-//     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-//     purchase_type: value
-//   }
-//   dispatch(purchaseTypeStatusApi(purchaseData))
-// } 
-const handlePurchaseChange = (value) => {
-  setPurchaseType(value); 
-if(selectedTab === "pending") {
-  const purchaseData = {
-    user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-    purchase_type: value,
-  };
+  // const handlePurchaseChange = (value) => {
+  //   const purchaseData = {
+  //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+  //     purchase_type: value
+  //   }
+  //   dispatch(purchaseTypeStatusApi(purchaseData))
+  // } 
+  const handlePurchaseChange = (value) => {
+    setPurchaseType(value);
+    if (selectedTab === "pending") {
+      const purchaseData = {
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        purchase_type: value,
+      };
 
-  dispatch(purchaseTypeStatusApi(purchaseData));
-} else {
- const hiredPurchaseData = {
-  user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-  purchase_type: value,
- }
- dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData))
-}
- 
-};
+      dispatch(purchaseTypeStatusApi(purchaseData));
+    } else {
+      const hiredPurchaseData = {
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        purchase_type: value,
+      }
+      dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData))
+    }
+
+  };
 
   return (
     <div className={styles.maincontainer}>
@@ -150,18 +151,18 @@ if(selectedTab === "pending") {
             </button>
           </div>
           <div style={{ display: 'flex' }}>
-      <label className={styles.purchaseText}>Purchase Type:   </label>
-      <Select
-        placeholder="Select Purchase Type"
-        style={{ width: 100 }}
-        onChange={handlePurchaseChange}
-      >    
-        <Option value="Manual Bid">Manual Bid</Option>
-        <Option value="Best Matches">Best Match</Option>
-        <Option value="Autobid">Auto Bid</Option>
-        <Option value="Request Reply">Request Reply</Option>
-      </Select>
-    </div>
+            <label className={styles.purchaseText}>Purchase Type:   </label>
+            <Select
+              placeholder="Select Purchase Type"
+              style={{ width: 100 }}
+              onChange={handlePurchaseChange}
+            >
+              <Option value="Manual Bid">Manual Bid</Option>
+              <Option value="Best Matches">Best Match</Option>
+              <Option value="Autobid">Auto Bid</Option>
+              <Option value="Request Reply">Request Reply</Option>
+            </Select>
+          </div>
         </div>
       </div>
 
@@ -176,7 +177,7 @@ if(selectedTab === "pending") {
                   </div>
                   <div
                     className={styles.details}
-                    // onClick={() => handleProfieView(item)}
+                  // onClick={() => handleProfieView(item)}
                   >
                     <h3>{item?.customer?.name}</h3>
                     <p>{item?.postcode}</p>
@@ -256,6 +257,20 @@ if(selectedTab === "pending") {
                     Frequent user
                   </span>
                 )}
+                {item?.is_urgent == 1 && (
+                  <span className={styles.frequent}>
+                    {" "}
+                    <img src={FrequentUserIcon} alt="" />
+                    Urgent
+                  </span>
+                )}
+                {item?.is_high_hiring == 1 && (
+                  <span className={styles.frequent}>
+                    {" "}
+                    <img src={FrequentUserIcon} alt="" />
+                    High hiring
+                  </span>
+                )}
               </div>
               <div className={styles.jobInfo}>
                 {item?.questions && (
@@ -275,11 +290,11 @@ if(selectedTab === "pending") {
                     <img src={pendingImg} alt="pendingImg" /> {item?.status === "pending" ? "Pending" : "pending"}
                   </button>
                 </>
-              ) :  <>
-              <button className={styles.purchaseButton}>
-                <img src={pendingImg} alt="HiredImg" /> {item?.status === "hired" ? "Hired" : "hired"}
-              </button>
-            </>}
+              ) : <>
+                <button className={styles.purchaseButton}>
+                  <img src={pendingImg} alt="HiredImg" /> {item?.status === "hired" ? "Hired" : "hired"}
+                </button>
+              </>}
 
               <p
                 className={styles.responseStatus}
@@ -290,7 +305,7 @@ if(selectedTab === "pending") {
               </p>
             </div>
           </div>
-          
+
           {selectedLead === item?.id && (
             <MyResponseAccordion
               lead={selectedLead}
