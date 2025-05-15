@@ -21,6 +21,7 @@ import {
   getAddHiredLeadDataApi,
   getBuyerActivitiesApi,
   getLeadProfileRequestList,
+  getPendingLeadDataApi,
   getSellerNotesApi,
   sellerResponseStatusApi,
 } from "../../../store/LeadSetting/leadSettingSlice";
@@ -182,13 +183,14 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
         if (result) {
           showToast("success", result?.message);
           const data = {
-            customer_id: profileLeadViewData?.leads?.customer_id,
-            lead_id: profileLeadViewData?.leads?.id,
+            // customer_id: profileLeadViewData?.leads?.customer_id,
+            // lead_id: profileLeadViewData?.leads?.id,
             user_id:userToken?.remember_tokens
             ? userToken?.remember_tokens
             : registerData?.remember_tokens,
           };
-          dispatch(getLeadProfileRequestList(data));
+          dispatch(getPendingLeadDataApi(data));
+          onBack()
         }
       });
     }
