@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ViewYourMatches.module.css";
-import { createRequestData } from "../../../../../store/Buyer/BuyerSlice";
+import { clearSetbuyerRequestData, createRequestData } from "../../../../../store/Buyer/BuyerSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../../../utils";
+import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
 
 const ViewYourMatches = ({
   onClose,
@@ -12,13 +13,13 @@ const ViewYourMatches = ({
   previousStep,
   setShowConfirmModal,
 }) => {
-  const { buyerRequest, requestLoader,citySerach,requestDataList } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader,citySerach,requestDataList,createRequestToken } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
-
+console.log(createRequestToken,requestDataList?.phone,"createRequestToken")
 useEffect(() => {
   if (requestDataList?.phone) {
     setPhoneNumber(requestDataList?.phone);
@@ -57,11 +58,14 @@ useEffect(() => {
   };
 
   const handleCloseClick = () => {
-    if(!userToken?.remember_tokens){
-      setShowConfirmModal(true);
-    } else{
-      onClose();
-    }
+   onClose()
+   dispatch(clearSetbuyerRequestData())
+   dispatch(clearBuyerRegisterFormData())
+    // if(!userToken?.remember_tokens){
+    //   setShowConfirmModal(true);
+    // } else{
+    //   onClose();
+    // }
   };
 
   return (

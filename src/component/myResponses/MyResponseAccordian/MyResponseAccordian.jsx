@@ -340,7 +340,7 @@ console.log(profileLeadViewData,"profileLeadViewData")
                     }
                     title={item.activity_name}
                     description={item.description}
-                    time={moment(item.updated_at).format("hh:ss A")}
+                    time={moment(item.updated_at).format("hh:mm A")}
                     isLast={index === getActivies.length - 1}
                     name={profileLeadViewData?.id === item?.from_user_id ? "You" : profileLeadViewData?.name}
                   >

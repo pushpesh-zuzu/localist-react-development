@@ -3,6 +3,7 @@ import { Progress, Result, Spin } from "antd";
 import styles from "./QuestionModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearSetbuyerRequestData,
   createRequestData,
   setbuyerRequestData,
   setBuyerStep,
@@ -10,6 +11,7 @@ import {
 
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../utils";
+import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 
 const QuestionModal = ({
   questions = [],
@@ -152,6 +154,8 @@ const QuestionModal = ({
       setShowConfirmModal(true);
     } else {
       onClose();
+      dispatch(clearSetbuyerRequestData())
+         dispatch(clearBuyerRegisterFormData())
     }
   };
 
