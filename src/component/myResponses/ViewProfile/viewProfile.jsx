@@ -138,7 +138,7 @@ const ViewProfile = () => {
                                 >
                                     <option value="pending">Pending</option>
                                     <option value="hired">Hired</option>
-                                    <option value="rejected">Rejected</option>
+                                    {/* <option value="rejected">Rejected</option> */}
                                 </select>
                             </div>
                         </div>

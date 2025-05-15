@@ -200,6 +200,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
 console.log(profileLeadViewData,"profileLeadViewData")
   return (
     <>
+    {leadListLoader ? <Spin /> : <>
       <div className={styles.headerBox}>
         <div className={styles.lastActivityText}>Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago</div>
         {profileLeadViewData?.leads?.purchase_type && (
@@ -217,12 +218,12 @@ console.log(profileLeadViewData,"profileLeadViewData")
           >
             <option value="pending">Pending</option>
             <option value="hired">Hired</option>
-            <option value="rejected">Rejected</option>
+            {/* <option value="rejected">Rejected</option> */}
           </select>
         </div>
       </div>
      <div className={styles.containers}>
-     {leadListLoader ? <Spin /> : <>
+     
         <div className={styles.ProfileImgBox}>
           <img src={ProfileImg} alt="Profile" />{" "}
           <span>{profileLeadViewData?.name}</span>
@@ -453,8 +454,9 @@ console.log(profileLeadViewData,"profileLeadViewData")
             </TimelineItem>
           ))}
         </div> */}
-        </>}
       </div>
+        </>
+        }
     </>
   );
 };

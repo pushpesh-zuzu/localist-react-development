@@ -21,9 +21,9 @@ const ViewYourMatches = ({
 
 useEffect(() => {
   if (requestDataList?.phone) {
-    setPhoneNumber(requestDataList.phone);
+    setPhoneNumber(requestDataList?.phone);
   } else if (userToken?.phone) {
-    setPhoneNumber(userToken.phone);
+    setPhoneNumber(userToken?.phone);
   }
 }, [requestDataList?.phone, userToken?.phone])
   const handleInputChange = (e) => {

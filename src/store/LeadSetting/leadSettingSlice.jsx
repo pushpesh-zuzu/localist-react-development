@@ -688,7 +688,7 @@ export const getleadPreferencesList = (serviceId) => {
   }
   export const getBuyerSortByLocationApi = (buyerSortByLocationData) => {
     return async (dispatch) => {
-      dispatch(setSevenDaysAutobidLoader(true));
+      dispatch(setAutoBidListLoader(true));
       try {
         const response = await axiosInstance.post(`users/sort-by-location`, buyerSortByLocationData);
   
@@ -699,13 +699,13 @@ export const getleadPreferencesList = (serviceId) => {
       } catch (error) {
        showToast("error",error?.message)
       } finally {
-        dispatch(setSevenDaysAutobidLoader(false));
+        dispatch(setAutoBidListLoader(false));
       }
     };
   }
   export const getBuyerSortByResponseApi = (buyerSortByResponseData) => {
     return async (dispatch) => {
-      dispatch(setSevenDaysAutobidLoader(true));
+      dispatch(setAutoBidListLoader(true));
       try {
         const response = await axiosInstance.post(`users/response-time-filter`, buyerSortByResponseData);
   
@@ -716,7 +716,7 @@ export const getleadPreferencesList = (serviceId) => {
       } catch (error) {
        showToast("error",error?.message)
       } finally {
-        dispatch(setSevenDaysAutobidLoader(false));
+        dispatch(setAutoBidListLoader(false));
       }
     };
   }
