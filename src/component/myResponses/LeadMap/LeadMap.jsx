@@ -396,7 +396,7 @@ const LeadMap = ({ getPendingLeadList }) => {
       ref={mapRef}
       style={{
         width: "500px",
-        height: "400px",
+        height: "300px",
         marginTop: "20px",
         borderRadius: "8px",
       }}

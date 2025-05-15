@@ -110,7 +110,8 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   };
 
   const handleCloseClick = () => {
-    setShowConfirmModal(true);
+    // setShowConfirmModal(true);
+    onClose()
   };
 
   return (

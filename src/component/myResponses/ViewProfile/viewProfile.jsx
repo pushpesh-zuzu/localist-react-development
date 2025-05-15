@@ -51,7 +51,7 @@ const ViewProfile = () => {
         const addHiredData = {
             lead_id: profileLeadViewData?.leads?.id,
             status_type: selectedStatus,
-            user_id: userToken?.remember_tokens,
+            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens ,
         };
 
         if (addHiredData.lead_id) {

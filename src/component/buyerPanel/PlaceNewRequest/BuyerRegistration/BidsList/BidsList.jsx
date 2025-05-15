@@ -908,6 +908,7 @@ const BidsList = ({ previousStep }) => {
                 Request your best matches here
               </button>
             </div>
+          {bidListLoader ? <Spin size="small"/> :  <>
             {autoBidList?.every(item => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
                 <h1 className={styles.noBidText}>No seller available</h1>
@@ -1026,6 +1027,8 @@ const BidsList = ({ previousStep }) => {
                 ))
               )
             )}
+            </>
+            }
 
 
             <CustomModal

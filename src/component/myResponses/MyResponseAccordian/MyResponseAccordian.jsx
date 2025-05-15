@@ -32,7 +32,7 @@ import LeadMap from "../LeadMap/LeadMap";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
+const TimelineItem = ({ icon, title, description, time, children, isLast,name }) => (
   <div className={styles.timelineItem}>
     <div className={styles.iconWrapper}>
       <img className={styles.icon} src={icon} alt={title} />
@@ -40,7 +40,7 @@ const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
     </div>
     <div className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.name}>Isabella</span>
+        <span className={styles.name}>{name}</span>
         <span className={styles.time}>{time}</span>
       </div>
       <div className={styles.title}>{title}</div>
@@ -63,6 +63,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     getActivies,
     getSellerNotes,
     sellerNotesLoader,
+    leadListLoader
   } = useSelector((state) => state.leadSetting);
   console.log(profileLeadViewData,item, "profileLeadViewData");
   const user = {
@@ -113,16 +114,17 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     // Reset back to original note
     setNote(getSellerNotes?.notes || "");
   };
-  useEffect(() => {
-    const data = {
-      customer_id: profileLeadViewData?.leads?.customer_id,
-      lead_id: profileLeadViewData?.leads?.id,
-      user_id: userToken?.remember_tokens
-      ? userToken?.remember_tokens
-      : registerData?.remember_tokens,
-    };
-    dispatch(getLeadProfileRequestList(data));
-  }, []);
+  // useEffect(() => {
+   
+  //   const data = {
+  //     customer_id: profileLeadViewData?.leads?.customer_id,
+  //     lead_id: profileLeadViewData?.leads?.id,
+  //     user_id: userToken?.remember_tokens
+  //     ? userToken?.remember_tokens
+  //     : registerData?.remember_tokens,
+  //   };
+  //   dispatch(getLeadProfileRequestList(data));
+  // }, []);
   const handleSubmit = () => {
     const notesValue = getSellerNotes?.notes;
 
@@ -195,7 +197,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
   const today = moment();
   const daysAgo = today.diff(createdDate, 'days')
 
-
+console.log(profileLeadViewData,"profileLeadViewData")
   return (
     <>
       <div className={styles.headerBox}>
@@ -219,7 +221,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
           </select>
         </div>
       </div>
-      <div className={styles.containers}>
+     <div className={styles.containers}>
+     {leadListLoader ? <Spin /> : <>
         <div className={styles.ProfileImgBox}>
           <img src={ProfileImg} alt="Profile" />{" "}
           <span>{profileLeadViewData?.name}</span>
@@ -319,23 +322,26 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
           <div className={styles.tabContent}>
             {activeTab === "activity" && (
               <div className={styles.container}>
-                <div className={styles.date}>Mon 25, April</div>
-                {getActivies.map((item, index) => (
+                <div className={styles.date}>{moment(profileLeadViewData?.created_at).format("MMM-DD")}</div>
+                {getActivies?.map((item, index) => (
                   <TimelineItem
                     key={index}
                     icon={
                       item?.contact_type === "Manual Bid"
                         ? CallImage
-                        : item?.contact_type === "Buttons"
+                        : item?.contact_type === "email"
                           ? EmailImage
-                          : item?.contact_type === "Buttons"
-                            ? PurchasedImage
+                          : item?.contact_type === "Whatsapp" 
+                          ? AddImage 
+                          : item?.contact_type === "mobile" ? CallImage : item?.contact_type === "Buttons"
+                            ? PurchasedImage 
                             : UserImage
                     }
                     title={item.activity_name}
                     description={item.description}
                     time={moment(item.updated_at).format("hh:ss A")}
                     isLast={index === getActivies.length - 1}
+                    name={profileLeadViewData?.id === item?.from_user_id ? "You" : profileLeadViewData?.name}
                   >
                     {item.children}
                   </TimelineItem>
@@ -343,7 +349,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
               </div>
             )}
 
-            {activeTab === "lead" && (
+            {/* {activeTab === "lead" && (
               <div className={styles.leadContent}>
                 <div>
                   {getPendingLeadList?.map((item, index) => {
@@ -368,7 +374,39 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
                   <LeadMap getPendingLeadList={profileLeadViewData?.leads?.postcode} />
                 </div>
               </div>
-            )}
+            )} */}
+            {activeTab === "lead" && (
+  <div className={styles.leadContent}>
+    <div>
+      {(() => {
+        const uniqueQuestionsMap = new Map();
+
+        getPendingLeadList?.forEach((item) => {
+          const questionsArray = item?.questions ? JSON.parse(item.questions) : [];
+
+          questionsArray.forEach((qna) => {
+            if (!uniqueQuestionsMap.has(qna.ques)) {
+              uniqueQuestionsMap.set(qna.ques, qna.ans);
+            }
+          });
+        });
+
+        return Array.from(uniqueQuestionsMap.entries()).map(([question, answer], index) => (
+          <div key={index} style={{ marginBottom: "0.5rem" }}>
+            <p style={{ fontWeight: 600 }}>{question}</p>
+            <hr />
+            <p>{answer}</p>
+          </div>
+        ));
+      })()}
+    </div>
+
+    <div>
+      <LeadMap getPendingLeadList={profileLeadViewData?.leads?.postcode} />
+    </div>
+  </div>
+)}
+
             {activeTab === "notes" && (
               <div className={styles.notesContent}>
                 <div className={styles.notesInner}>
@@ -415,6 +453,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
             </TimelineItem>
           ))}
         </div> */}
+        </>}
       </div>
     </>
   );
