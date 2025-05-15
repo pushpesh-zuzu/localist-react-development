@@ -20,7 +20,7 @@ import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
 import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
-import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg"
+import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
 
@@ -29,20 +29,26 @@ const MyResponse = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("pending");
   const [selectedLead, setSelectedLead] = useState(null);
-  const [purchaseType, setPurchaseType] = useState(null)
+  const [purchaseType, setPurchaseType] = useState(null);
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { sellerRecommended, getPendingLeadList, getHiredLeadList, purchasePendingList, data } =
-    useSelector((state) => state.leadSetting);
+  const {
+    sellerRecommended,
+    getPendingLeadList,
+    getHiredLeadList,
+    purchasePendingList,
+    data,
+  } = useSelector((state) => state.leadSetting);
 
   const handleProfieView = (item) => {
-
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
-  {/* const createdDate = moment(profileLeadViewData?.created_at);
+  {
+    /* const createdDate = moment(profileLeadViewData?.created_at);
           const today = moment();
-          const daysAgo = today.diff(createdDate, 'days') */}
+          const daysAgo = today.diff(createdDate, 'days') */
+  }
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
 
   useEffect(() => {
@@ -68,7 +74,6 @@ const MyResponse = () => {
   };
 
   const getLeadsToDisplay = () => {
-
     /** if (selectedTab === "pending") return getPendingLeadList || [];
      if (selectedTab === "hired") return getHiredLeadList || [];
      if (purchaseType && selectedTab === "pending") return purchasePendingList || []; 
@@ -78,56 +83,81 @@ const MyResponse = () => {
   };
 
   const handleOpen = (item) => {
-
     if (item?.id == selectedLead) {
-      setSelectedLead(null)
-    }
-    else {
-      setSelectedLead(item?.id)
-
+      setSelectedLead(null);
+    } else {
+      setSelectedLead(item?.id);
     }
 
     const activityData = {
       buyer_id: item?.customer_id,
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-      lead_id: item?.id
-    }
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+      lead_id: item?.id,
+    };
     dispatch(getBuyerActivitiesApi(activityData)).then((result) => {
       if (result) {
         const data = {
           customer_id: item?.customer_id,
           lead_id: item?.id,
-          user_id:userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
-        }
-        dispatch(getLeadProfileRequestList(data))
+          user_id: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
+        };
+        dispatch(getLeadProfileRequestList(data));
       }
-    })
-  }
+    });
+  };
   // const handlePurchaseChange = (value) => {
   //   const purchaseData = {
   //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
   //     purchase_type: value
   //   }
   //   dispatch(purchaseTypeStatusApi(purchaseData))
-  // } 
+  // }
   const handlePurchaseChange = (value) => {
     setPurchaseType(value);
     if (selectedTab === "pending") {
       const purchaseData = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
         purchase_type: value,
       };
 
       dispatch(purchaseTypeStatusApi(purchaseData));
     } else {
       const hiredPurchaseData = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
         purchase_type: value,
-      }
-      dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData))
+      };
+      dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData));
     }
-
   };
+  // const handlePurchaseChange = (value) => {
+  //   const purchaseData = {
+  //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+  //     purchase_type: value
+  //   }
+  //   dispatch(purchaseTypeStatusApi(purchaseData))
+  // }
+  // const handlePurchaseChange = (value) => {
+  //   setPurchaseType(value);
+  //   if (selectedTab === "pending") {
+  //     const purchaseData = {
+  //       user_id: userToken?.remember_tokens
+  //         ? userToken?.remember_tokens
+  //         : registerData?.remember_tokens,
+  //       purchase_type: value,
+  //     };
+
+  //     dispatch(purchaseTypeStatusApi(purchaseData));
+  //   } else {
+  //   }
+  // };
 
   return (
     <div className={styles.maincontainer}>
@@ -136,25 +166,27 @@ const MyResponse = () => {
           <div></div>
           <div className={styles.headerBtn}>
             <button
-              className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "pending" ? styles.activeButton : ""
+              }`}
               onClick={handlePendingApi}
             >
               <img src={pendingImg} alt="pendingImg" /> Pending
             </button>
             <button
-              className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "hired" ? styles.activeButton : ""
+              }`}
               onClick={handleHiredApi}
             >
               <img src={HiredImg} alt="hired" /> Hired
             </button>
           </div>
-          <div style={{ display: 'flex' }}>
-            <label className={styles.purchaseText}>Purchase Type:   </label>
+          <div style={{ display: "flex" }}>
+            <label className={styles.purchaseText}>Purchase Type: </label>
             <Select
               placeholder="Select Purchase Type"
-              style={{ width: 100 }}
+              style={{ width: 150, marginLeft: 10 }}
               onChange={handlePurchaseChange}
             >
               <Option value="Manual Bid">Manual Bid</Option>
@@ -167,7 +199,7 @@ const MyResponse = () => {
       </div>
 
       {getLeadsToDisplay()?.map((item, idx) => (
-        <div key={idx}  >
+        <div key={idx}>
           <div className={styles.card}>
             <div className={styles.infoContainer}>
               <div className={styles.userInfo}>
@@ -177,7 +209,7 @@ const MyResponse = () => {
                   </div>
                   <div
                     className={styles.details}
-                  // onClick={() => handleProfieView(item)}
+                    // onClick={() => handleProfieView(item)}
                   >
                     <h3>{item?.customer?.name}</h3>
                     <p>{item?.postcode}</p>
@@ -191,8 +223,8 @@ const MyResponse = () => {
                   <span>
                     {item?.phone
                       ? `${item?.phone.substring(0, 2)}${"*".repeat(
-                        item?.phone.length - 2
-                      )}`
+                          item?.phone.length - 2
+                        )}`
                       : "N/A"}
                   </span>
                 </div>
@@ -201,8 +233,8 @@ const MyResponse = () => {
                   <span>
                     {item?.customer?.email
                       ? `${item?.customer?.email
-                        .split("@")[0]
-                        .substring(0, 8)}${"*".repeat(
+                          .split("@")[0]
+                          .substring(0, 8)}${"*".repeat(
                           Math.max(
                             0,
                             item?.customer?.email.split("@")[0].length - 8
@@ -224,7 +256,7 @@ const MyResponse = () => {
               <div className={styles.saveBtnBox}>
                 <button
                   className={styles.saveBtn}
-                // onClick={() => handleSaveLater(item)}
+                  // onClick={() => handleSaveLater(item)}
                 >
                   {/* {saveLaterLoaderId === item.id ? (
                                      <Spin
@@ -287,20 +319,25 @@ const MyResponse = () => {
               {selectedTab === "pending" ? (
                 <>
                   <button className={styles.purchaseButton}>
-                    <img src={pendingImg} alt="pendingImg" /> {item?.status === "pending" ? "Pending" : "pending"}
+                    <img src={pendingImg} alt="pendingImg" />{" "}
+                    {item?.status === "pending" ? "Pending" : "pending"}
                   </button>
                 </>
-              ) : <>
-                <button className={styles.purchaseButton}>
-                  <img src={pendingImg} alt="HiredImg" /> {item?.status === "hired" ? "Hired" : "hired"}
-                </button>
-              </>}
+              ) : (
+                <>
+                  <button className={styles.purchaseButton}>
+                    <img src={pendingImg} alt="HiredImg" />{" "}
+                    {item?.status === "hired" ? "Hired" : "hired"}
+                  </button>
+                </>
+              )}
 
               <p
                 className={styles.responseStatus}
                 onClick={() => handleOpen(item)}
               >
-                Responded {moment().diff(moment(item?.created_at), 'days')} days ago
+                Responded {moment().diff(moment(item?.created_at), "days")} days
+                ago
                 <img src={pendingArrowIcon} alt="Response" />
               </p>
             </div>
@@ -311,12 +348,10 @@ const MyResponse = () => {
               lead={selectedLead}
               onBack={() => setSelectedLead(null)}
               getPendingLeadList={data}
-
             />
           )}
         </div>
       ))}
-
     </div>
   );
 };
