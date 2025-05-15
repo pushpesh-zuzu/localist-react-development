@@ -54,9 +54,9 @@ const CustomerQuestions = ({ selectedService }) => {
     miles1: "1",
     postcode: "",
   });
-  const nationwideShow = serviceWiseData?.map((item) => item?.nation_wide == 0 )
+  const nationwideShow = serviceWiseData?.map((item) => item?.type )
   const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
-  console.log(serviceWiseData,"serviceWiseData")
+  console.log(serviceWiseData,nationwideShow,"serviceWiseData")
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -154,14 +154,17 @@ const CustomerQuestions = ({ selectedService }) => {
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleConfirm = () => {
-    const serviceIds = selectedServices.join(",");
-
+  const handleConfirm = (data) => {
+    const serviceIds = data.join(",");
+   
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1,
       postcode: locationData.postcode,
       service_id: serviceIds,
+      type:nationwideShow[0],
+      city:locationData?.city,
+      coordinates:locationData?.coordinates??[]
     };
 
     dispatch(addLocationLead(locationdata)).then((result) => {

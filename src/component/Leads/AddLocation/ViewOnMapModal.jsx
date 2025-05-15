@@ -18,28 +18,47 @@ const ViewOnMapModal = ({
     lat: 20.5937, // Default center (India)
     lng: 78.9629,
   });
-  console.log(locationData,"locationData")
+  console.log(locationData?.travel_time,"locationData")
 
  
-const drawCircle = (center) => {
+  const drawCircle = (center) => {
     if (!window.google || !mapInstance.current) return;
-  
+    
     // Remove existing circle if any
     if (circleRef.current) {
       circleRef.current.setMap(null);
     }
-  
+    
     let radiusInMeters = 0;
-  
+    
     if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
       // Rough estimate to cover India (1500 km ~ 932 miles)
       radiusInMeters = 1500000;
+    } else if (locationData?.travel_time) {
+      // Convert travel time to approximate radius in meters
+      // Assuming average travel speed of 30 km/h in urban areas
+      // Parse the travel time value
+      let timeValue = locationData.travel_time;
+      let minutes = 0;
+      
+      if (timeValue.includes("hour") || timeValue.includes("hr")) {
+        // Handle hours format (e.g., "1 hour", "1.5 hours")
+        const hourValue = parseFloat(timeValue.replace(/[^0-9.]/g, ''));
+        minutes = hourValue * 60;
+      } else if (timeValue.includes("min")) {
+        // Handle minutes format (e.g., "30 min", "45 min")
+        minutes = parseFloat(timeValue.replace(/[^0-9.]/g, ''));
+      }
+      
+      // Calculate radius: speed (km/h) * time (h) * 1000 (to meters)
+      // 30 km/h ÷ 60 min/h = 0.5 km/min
+      radiusInMeters = minutes * 0.5 * 1000;
     } else {
       // Use the radius in miles from locationData (default 1 mile)
       const radiusInMiles = parseFloat(locationData.miles) || 1;
       radiusInMeters = radiusInMiles * 1609.34;
     }
-  
+    
     // Create the circle
     circleRef.current = new window.google.maps.Circle({
       center,

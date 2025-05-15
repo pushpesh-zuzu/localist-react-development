@@ -50,7 +50,7 @@ const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
   </div>
 );
 
-const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
+const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
   const [note, setNote] = useState("");
@@ -64,7 +64,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     getSellerNotes,
     sellerNotesLoader,
   } = useSelector((state) => state.leadSetting);
-  console.log(profileLeadViewData, "profileLeadViewData");
+  console.log(profileLeadViewData,item, "profileLeadViewData");
   const user = {
     phoneNumber: "918123456789",
     email: "test@example.com",
@@ -341,7 +341,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                       <div key={index} style={{ marginBottom: "1rem" }}>
                         {questionsArray.map((qna, qIndex) => (
                           <div key={qIndex} style={{ marginBottom: "0.5rem" }}>
-                            <p style={{ fontWeight: "bold" }}>{qna.ques}</p>
+                            <p style={{ fontWeight: 600 }}>{qna.ques}</p>
                             <hr />
                             <p>{qna.ans}</p>
                           </div>
@@ -351,7 +351,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                   })}
                 </div>
                 <div>
-                  {/* <LeadMap getPendingLeadList={getPendingLeadList}/> */}
+                  <LeadMap getPendingLeadList={profileLeadViewData?.leads?.postcode} />
                 </div>
               </div>
             )}

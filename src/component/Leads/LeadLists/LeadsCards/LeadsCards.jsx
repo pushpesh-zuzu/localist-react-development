@@ -202,6 +202,20 @@ const LeadsCards = () => {
                           Frequent user
                         </span>
                       )}
+                       {item?.is_urgent == 1 && (
+                        <span className={styles.frequent}>
+                          {" "}
+                          <img src={FrequentUserIcon} alt="" />
+                          Urgent
+                        </span>
+                      )}
+                       {item?.is_high_hiring == 1 && (
+                        <span className={styles.frequent}>
+                          {" "}
+                          <img src={FrequentUserIcon} alt="" />
+                         High hiring
+                        </span>
+                      )}
                     </div>
                     <div className={styles.jobInfo}>
                       {item?.questions && (

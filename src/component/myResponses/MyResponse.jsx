@@ -176,7 +176,7 @@ if(selectedTab === "pending") {
                   </div>
                   <div
                     className={styles.details}
-                    onClick={() => handleProfieView(item)}
+                    // onClick={() => handleProfieView(item)}
                   >
                     <h3>{item?.customer?.name}</h3>
                     <p>{item?.postcode}</p>

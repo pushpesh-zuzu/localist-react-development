@@ -658,14 +658,14 @@ const BidsList = ({ previousStep }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
-  const matchingLength = autoBidList?.map((item)=> item?.sellers?.length)
+  const matchingLength = autoBidList?.map((item) => item?.sellers?.length)
   const [selectedSellers, setSelectedSellers] = useState([]);
-console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
+  console.log(autoBidList?.map((item) => item?.sellers?.length), "autoBidList")
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.totalbid || 0;
   const isButtonDisabled = bidCount === bidTotal
-  console.log(bidCount,bidTotal,"prem")
+  console.log(bidCount, bidTotal, "prem")
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
@@ -721,18 +721,18 @@ console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
   const handleChangeMyRequest = () => {
     navigate("/buyers/create");
   };
-  
+
   const hanleViewProfile = (seller) => {
     const data = {
-      user_id:userToken?.remember_tokens
-      ? userToken?.remember_tokens
-      : registerData?.remember_tokens,
-      seller_id:seller?.id,
-      lead_id:requestId
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+      seller_id: seller?.id,
+      lead_id: requestId
     }
     dispatch(getBuyerViewProfieApi(data)).then((result) => {
-      if(result){
-        showToast("success",result?.message)
+      if (result) {
+        showToast("success", result?.message)
       }
     })
   }
@@ -802,21 +802,22 @@ console.log(autoBidList?.map((item)=> item?.sellers?.length),"autoBidList")
     });
   };
   const handelChangeSort = (e) => {
-const selectedOption = e.target.value
+    const selectedOption = e.target.value
 
-const sortData = {
-  lead_id:requestId,
-  distance_order: selectedOption
-}
-dispatch(getBuyerSortByLocationApi(sortData))
+    const sortData = {
+      lead_id: requestId,
+      distance_order: selectedOption
+    }
+    dispatch(getBuyerSortByLocationApi(sortData))
   }
   const handelresponseChangeSort = (e) => {
     const selectedResponse = e.target.value
 
     const responseData = {
-
+      lead_id: requestId,
+      response_time: selectedResponse
     }
-    // dispatch(getBuyerSortByResponseApi(responseData))
+    dispatch(getBuyerSortByResponseApi(responseData))
   }
 
   return (
@@ -866,7 +867,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 <option></option>
               </select>
               <select onChange={handelChangeSort} defaultValue={""}>
-              <option value="" disabled>Sort by Location</option>
+                <option value="" disabled>Sort by Location</option>
 
                 <option value="farthest to nearest">Farthest to Nearest</option>
                 <option value="nearest to farthest">Nearest to Farthest </option>
@@ -875,8 +876,10 @@ dispatch(getBuyerSortByLocationApi(sortData))
               <select onChange={handelresponseChangeSort} defaultValue={""}>
                 {/* <option>All response times</option> */}
                 <option value="" disabled>All response times</option>
-                <option value="longest to shortest">Longest to Shortest</option>
-                <option value="shortest to longest">Shortest to Longest</option>
+                <option value="Responds within 10 mins">Responds within 10 mins</option>
+                <option value="Responds within 1 hour">Responds within 1 hour</option>
+                <option value="Responds within 6 hours">Responds within 6 hours</option>
+                <option value="Responds within 24 hours">Responds within 24 hours</option>
               </select>
               <span className={styles.matchCount}>
                 {matchingLength} matches
@@ -964,7 +967,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                           <Link
                             // to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
                             className={styles.profileLink}
-                            onClick={() =>hanleViewProfile(seller)}
+                            onClick={() => hanleViewProfile(seller)}
                           >
                             View Profile →
                           </Link>
@@ -1004,7 +1007,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                             className={styles.checkbox}
                             disabled={
                               !selectedSellers.includes(seller.id) &&
-                              selectedSellers.length >= bidTotal  - bidCount
+                              selectedSellers.length >= bidTotal - bidCount
                             }
                           />
                         </div>
@@ -1023,7 +1026,7 @@ dispatch(getBuyerSortByLocationApi(sortData))
                 ))
               )
             )}
-            
+
 
             <CustomModal
               isOpen={isModalOpen}

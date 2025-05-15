@@ -706,7 +706,7 @@ export const getleadPreferencesList = (serviceId) => {
     return async (dispatch) => {
       dispatch(setSevenDaysAutobidLoader(true));
       try {
-        const response = await axiosInstance.post(`users/sort-by-location`, buyerSortByResponseData);
+        const response = await axiosInstance.post(`users/response-time-filter`, buyerSortByResponseData);
   
         if (response) {
           // dispatch(setAutoBidData(response?.data?.data))

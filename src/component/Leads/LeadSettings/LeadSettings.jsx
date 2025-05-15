@@ -205,6 +205,7 @@ console.log(selectedServices,"selectedServices123")
   const [removeModal, setRemoveModal] = useState({
     show: false,
     service_id: null,
+    nation_wide:null
   });
  
 
@@ -387,11 +388,12 @@ console.log(selectedServices,"selectedServices123")
     });
   };
   const handleRemoveOpen = (id) => {
-    setRemoveModal({ show: true, service_id: id });
+    console.log(id,"id")
+    setRemoveModal({ show: true, service_id: id?.postcode,nation_wide:id?.nation_wide });
   };
 
   const onHandleCancel = () => {
-    setRemoveModal({ show: false, service_id: null });
+    setRemoveModal({ show: false, service_id: null,nation_wide:null });
   };
   const handleViewMap = (item) => {
     setLocationData(item)
@@ -400,13 +402,16 @@ console.log(selectedServices,"selectedServices123")
 
   const handleRemove = () => {
     const removeData = {
-      user_id: userToken?.remember_tokens,
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
       // service_id: ids.join(),
       postcode: removeModal?.service_id,
+      nation_wide: removeModal?.nation_wide
       // user_service_id:locationRemoveId
     };
+    console.log(removeData,"removeData")
 
-    dispatch(removeItemLocationData(removeData)).then((result) => {
+    dispatch(removeItemLocationData(removeData))
+    .then((result) => {
       if (result) {
         showToast(
           "success",
@@ -414,7 +419,7 @@ console.log(selectedServices,"selectedServices123")
         );
         setRemoveModal({ show: false, service_id: null });
         const data = {
-          user_type: userToken?.remember_tokens,
+          user_type: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
         };
         dispatch(getLocationLead(data));
       }
@@ -510,7 +515,7 @@ console.log(selectedServices,"selectedServices123")
                   <span className={styles.link} onClick={()=> handleViewMap(item)}>View on map</span> |{" "}
                   <span
                     className={styles.link}
-                    onClick={() => handleRemoveOpen(item?.postcode)}
+                    onClick={() => handleRemoveOpen(item)}
                   >
                     Remove
                   </span>{" "}
