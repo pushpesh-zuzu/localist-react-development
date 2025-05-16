@@ -778,9 +778,11 @@ export const getleadPreferencesList = (serviceId) => {
       dispatch(setSellerNotesLoader(true));
       try {
         const response = await axiosInstance.post(`users/seller-notes`, sellerApiData);
+        
   
         if (response) {
-          dispatch(setGetSwitchAutoBidData(response?.data?.data))
+          
+          // dispatch(setGetSwitchAutoBidData(response?.data?.data))
            return response.data
         }
       } catch (error) {

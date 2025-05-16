@@ -66,12 +66,12 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     sellerNotesLoader,
     leadListLoader
   } = useSelector((state) => state.leadSetting);
-  console.log(profileLeadViewData,item, "profileLeadViewData");
   const user = {
     phoneNumber: "918123456789",
     email: "test@example.com",
   };
-
+  const userIdActivity = userToken?.id || registerData?.id
+  console.log(userIdActivity,"profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
@@ -127,6 +127,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
   //   dispatch(getLeadProfileRequestList(data));
   // }, []);
   const handleSubmit = () => {
+
     const notesValue = getSellerNotes?.notes;
 
     const isNotesEmpty =
@@ -144,8 +145,16 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
       notes: note,
     };
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
-      if (result) {
+      if (result.success) {
+        
         showToast("success", result?.message);
+        const sellerData = {
+          lead_id: profileLeadViewData.leads.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+          buyer_id: profileLeadViewData.id,
+        };
+  
+        dispatch(getSellerNotesApi(sellerData))
       }
     });
   };
@@ -344,7 +353,7 @@ console.log(profileLeadViewData,"profileLeadViewData")
                     description={item.description}
                     time={moment(item.updated_at).format("hh:mm A")}
                     isLast={index === getActivies.length - 1}
-                    name={profileLeadViewData?.id === item?.from_user_id ? "You" : profileLeadViewData?.name}
+                    name={userIdActivity == item?.from_user_id ? "You" : profileLeadViewData?.name}
                   >
                     {item.children}
                   </TimelineItem>

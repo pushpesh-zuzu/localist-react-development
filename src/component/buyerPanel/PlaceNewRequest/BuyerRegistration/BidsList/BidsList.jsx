@@ -975,10 +975,10 @@ const BidsList = ({ previousStep }) => {
                             View Profile →
                           </Link>
 
-                          <div className={styles.quickToRespond}>
+                        {seller?.quicktorespond == 1 &&  <div className={styles.quickToRespond}>
                             <img src={QuickToRespond} alt="" />
                             Quick to respond
-                          </div>
+                          </div>}
                         </div>
                       </div>
 
