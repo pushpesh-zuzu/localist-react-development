@@ -308,7 +308,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             </div>
             {profileLeadViewData?.leads?.is_urgent == 1 && (
               <div className={styles.contactBox}>
-                <span>
+                <span style={{ display: "flex", alignItems: "center" }}>
                   <img src={contact} alt="contact" />
                 </span>{" "}
                 Contact: <span className={styles.urgentText}>Urgently</span>
@@ -433,9 +433,13 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         return Array.from(uniqueQuestionsMap.entries()).map(
                           ([question, answer], index) => (
                             <div key={index} style={{ marginBottom: "0.5rem" }}>
-                              <p style={{ fontWeight: 600 }}>{question}</p>
+                              <li
+                                style={{ fontWeight: 600, marginTop: "20px" }}
+                              >
+                                {question}
+                              </li>
                               <hr />
-                              <p>{answer}</p>
+                              <p style={{ marginLeft: "20px" }}>{answer}</p>
                             </div>
                           )
                         );

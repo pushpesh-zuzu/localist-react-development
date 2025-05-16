@@ -71,10 +71,12 @@ const MyResponse = () => {
         // showToast("success",result?.message)
         const activityData = {
           buyer_id: item?.customer_id,
-          user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-          lead_id: item?.id
-        }
-        dispatch(getBuyerActivitiesApi(activityData))
+          user_id: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
+          lead_id: item?.id,
+        };
+        dispatch(getBuyerActivitiesApi(activityData));
       }
     });
   };
@@ -169,7 +171,7 @@ const MyResponse = () => {
     <div className={styles.maincontainer}>
       <div className={styles.mainTextBox}>
         <div className={styles.headerBox}>
-          <div></div>
+          <div className={styles.emptySpace}>{""}</div>
           <div className={styles.headerBtn}>
             <button
               className={`${styles.filterButton} ${
@@ -188,7 +190,7 @@ const MyResponse = () => {
               <img src={HiredImg} alt="hired" /> Hired
             </button>
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", marginRight: 20 }}>
             <label className={styles.purchaseText}>Purchase Type: </label>
             <Select
               placeholder="Select Purchase Type"
