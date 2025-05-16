@@ -27,20 +27,24 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
-  max-width: 1236px;
+  width: -webkit-fill-available;
+  /* max-width: 1236px; */
   margin: 0 auto;
 }
 .headerBox {
   background-color: #000000;
-  padding: 14px;
-  width: 100%;
-  max-width: 1236px;
+  padding: 14px 0;
+  width: -webkit-fill-available;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 18px;
 }
+
+.emptySpace {
+  flex-grow: 0.3;
+}
+
 .headerBtn {
   display: flex;
   gap: 22px;
@@ -215,7 +219,7 @@
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 8px 15px;
+  padding: 8px 28px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 21px;
@@ -282,10 +286,9 @@
 }
 
 .filterButton {
-  padding: 8px 16px;
+  padding: 8px 28px;
   font-size: 21px;
   background-color: #f0f2f5;
-  border: 1px solid #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -368,7 +371,6 @@
 @media screen and (max-width: 768px) {
   .mainTextBox {
     width: -webkit-fill-available;
-    padding: 24px;
   }
 }
 
@@ -408,6 +410,11 @@
   .credits {
     font-size: 16px;
   }
+  .headerBox {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 480px) {
@@ -418,6 +425,11 @@
   }
   .details h3 {
     font-size: 16px;
+  }
+
+  .headerBtn {
+    flex-direction: column;
+    margin-bottom: 5px;
   }
 
   .details p {
@@ -444,5 +456,9 @@
 
   .card {
     gap: 20px;
+  }
+
+  .mainTextBox {
+    padding: 12px;
   }
 }

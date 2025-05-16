@@ -33,7 +33,15 @@ import LeadMap from "../LeadMap/LeadMap";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
-const TimelineItem = ({ icon, title, description, time, children, isLast,name }) => (
+const TimelineItem = ({
+  icon,
+  title,
+  description,
+  time,
+  children,
+  isLast,
+  name,
+}) => (
   <div className={styles.timelineItem}>
     <div className={styles.iconWrapper}>
       <img className={styles.icon} src={icon} alt={title} />
@@ -51,7 +59,7 @@ const TimelineItem = ({ icon, title, description, time, children, isLast,name })
   </div>
 );
 
-const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
+const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
   const [note, setNote] = useState("");
@@ -64,7 +72,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     getActivies,
     getSellerNotes,
     sellerNotesLoader,
-    leadListLoader
+    leadListLoader,
   } = useSelector((state) => state.leadSetting);
   const user = {
     phoneNumber: "918123456789",
@@ -96,12 +104,14 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
       if (result) {
         showToast("success", result?.message);
-       const activityData = {
-             buyer_id: profileLeadViewData?.id,
-             user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-             lead_id: profileLeadViewData?.leads?.id
-           }
-           dispatch(getBuyerActivitiesApi(activityData))
+        const activityData = {
+          buyer_id: profileLeadViewData?.id,
+          user_id: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
+          lead_id: profileLeadViewData?.leads?.id,
+        };
+        dispatch(getBuyerActivitiesApi(activityData));
       }
     });
   };
@@ -116,7 +126,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
     setNote(getSellerNotes?.notes || "");
   };
   // useEffect(() => {
-   
+
   //   const data = {
   //     customer_id: profileLeadViewData?.leads?.customer_id,
   //     lead_id: profileLeadViewData?.leads?.id,
@@ -183,8 +193,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
       lead_id: profileLeadViewData?.leads?.id,
       status_type: selectedStatus,
       user_id: userToken?.remember_tokens
-      ? userToken?.remember_tokens
-      : registerData?.remember_tokens,
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
     };
 
     if (addHiredData.lead_id) {
@@ -194,174 +204,197 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,item }) => {
           const data = {
             // customer_id: profileLeadViewData?.leads?.customer_id,
             // lead_id: profileLeadViewData?.leads?.id,
-            user_id:userToken?.remember_tokens
-            ? userToken?.remember_tokens
-            : registerData?.remember_tokens,
+            user_id: userToken?.remember_tokens
+              ? userToken?.remember_tokens
+              : registerData?.remember_tokens,
           };
           dispatch(getPendingLeadDataApi(data));
-          onBack()
+          onBack();
         }
       });
     }
   };
   const createdDate = moment(profileLeadViewData?.created_at);
   const today = moment();
-  const daysAgo = today.diff(createdDate, 'days')
+  const daysAgo = today.diff(createdDate, "days");
 
-console.log(profileLeadViewData,"profileLeadViewData")
   return (
     <>
-    {leadListLoader ? <Spin /> : <>
-      <div className={styles.headerBox}>
-        <div className={styles.lastActivityText}>Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago</div>
-        {profileLeadViewData?.leads?.purchase_type && (
-          <div className={styles.lastActivityText}>
-            Purchase Type: <span>{profileLeadViewData?.leads?.purchase_type}</span>
-          </div>
-        )}
-        <div>
-          <span className={styles.currentStatusText}>Current Status</span>
-          <select
-            className={styles.selectBox}
-            value={profileLeadViewData?.leads?.status || status}
-            onChange={handleStatusChange}
-            disabled={profileLeadViewData?.leads?.status === "hired"}
-          >
-            <option value="pending">Pending</option>
-            <option value="hired">Hired</option>
-            {/* <option value="rejected">Rejected</option> */}
-          </select>
-        </div>
-      </div>
-     <div className={styles.containers}>
-     
-        <div className={styles.ProfileImgBox}>
-          <img src={ProfileImg} alt="Profile" />{" "}
-          <span>{profileLeadViewData?.name}</span>
-        </div>
-        <div className={styles.serviceText}>
-          {profileLeadViewData?.leads?.category?.name} |{" "}
-          <span> {profileLeadViewData?.leads?.city}</span>
-        </div>
-        <div className={styles.phoneNumberText}>
-          <span>
-            <img src={PhoneImg} alt="phone" />
-          </span>
-          {profileLeadViewData?.phone} {profileLeadViewData?.leads?.is_phone_verified == 1 && <sapn className={styles.verifiedText}><img src={HiredImg} alt="verified" />Verified</sapn>}
-        </div>
-        <div className={styles.phoneNumberText}>
-          <span>
-            <img src={MailImg} alt="mail" />
-          </span>
-          {profileLeadViewData?.email}
-        </div>
-        <div className={styles.btnBox}>
-          <button
-            className={styles.buttonSms}
-            onClick={() => {
-              handleResponseChange("email");
-              window.location.href = `mailto:${user.email}`;
-            }}
-          >
-            {" "}
-            <img src={Mailbtn} alt="mail" /> Send Email
-          </button>
-          <button
-            className={styles.buttonSms}
-            onClick={() => {
-              handleResponseChange("sms");
-              window.location.href = `mailto:${user.email}`;
-            }}
-          >
-            <img src={smsBtn} alt="sms" /> Send SMS
-          </button>
-          <button
-            className={styles.buttonSms}
-            onClick={() => {
-              handleResponseChange("mobile");
-              window.location.href = `tel:${user.phoneNumber}`;
-            }}
-          >
-            <img src={phoneBtn} alt="phone" /> Phone Number
-          </button>
-          <button
-            className={styles.buttonSms}
-            onClick={() => {
-              handleResponseChange("Whatsapp");
-              window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
-            }}
-          >
-            <img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp
-          </button>
-        </div>
-        {profileLeadViewData?.leads?.is_urgent == 1 && <div className={styles.contactBox}>
-          <span>
-            <img src={contact} alt="contact" />
-          </span>{" "}
-          Contact: <span className={styles.urgentText}>Urgently</span>
-        </div>}
-        <div className={styles.locationTag}>
-          <img src={locallistImgs} alt="credit icon" />
-          <span className={styles.creditsAmount}>
-            {profileLeadViewData?.leads?.credit_score} credits
-          </span>
-        </div>
-        <div className={styles.tabSection}>
-          <div className={styles.tabButtons}>
-            <button
-              className={`${styles.tabButton} ${activeTab === "activity" ? styles.activeTab : ""
-                }`}
-              onClick={() => setActiveTab("activity")}
-            >
-              Activity
-            </button>
-            <button
-              className={`${styles.tabButton} ${activeTab === "lead" ? styles.activeTab : ""
-                }`}
-              onClick={() => setActiveTab("lead")}
-            >
-              Lead
-            </button>
-            <button
-              className={`${styles.tabButton} ${activeTab === "notes" ? styles.activeTab : ""
-                }`}
-              onClick={() => setActiveTab("notes")}
-            >
-              Notes
-            </button>
-          </div>
-
-          <div className={styles.tabContent}>
-            {activeTab === "activity" && (
-              <div className={styles.container}>
-                <div className={styles.date}>{moment(profileLeadViewData?.created_at).format("MMM-DD")}</div>
-                {getActivies?.map((item, index) => (
-                  <TimelineItem
-                    key={index}
-                    icon={
-                      item?.contact_type === "Manual Bid"
-                        ? CallImage
-                        : item?.contact_type === "email"
-                          ? EmailImage
-                          : item?.contact_type === "Whatsapp" 
-                          ? AddImage 
-                          : item?.contact_type === "mobile" ? CallImage : item?.contact_type === "Buttons"
-                            ? PurchasedImage 
-                            : UserImage
-                    }
-                    title={item.activity_name}
-                    description={item.description}
-                    time={moment(item.updated_at).format("hh:mm A")}
-                    isLast={index === getActivies.length - 1}
-                    name={userIdActivity == item?.from_user_id ? "You" : profileLeadViewData?.name}
-                  >
-                    {item.children}
-                  </TimelineItem>
-                ))}
+      {leadListLoader ? (
+        <Spin />
+      ) : (
+        <>
+          <div className={styles.headerBox}>
+            <div className={styles.lastActivityText}>
+              Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
+            </div>
+            {profileLeadViewData?.leads?.purchase_type && (
+              <div className={styles.lastActivityText}>
+                Purchase Type:{" "}
+                <span>{profileLeadViewData?.leads?.purchase_type}</span>
               </div>
             )}
+            <div>
+              <span className={styles.currentStatusText}>Current Status</span>
+              <select
+                className={styles.selectBox}
+                value={profileLeadViewData?.leads?.status || status}
+                onChange={handleStatusChange}
+                disabled={profileLeadViewData?.leads?.status === "hired"}
+              >
+                <option value="pending">Pending</option>
+                <option value="hired">Hired</option>
+                {/* <option value="rejected">Rejected</option> */}
+              </select>
+            </div>
+          </div>
+          <div className={styles.containers}>
+            <div className={styles.ProfileImgBox}>
+              <img src={ProfileImg} alt="Profile" />{" "}
+              <span>{profileLeadViewData?.name}</span>
+            </div>
+            <div className={styles.serviceText}>
+              {profileLeadViewData?.leads?.category?.name} |{" "}
+              <span> {profileLeadViewData?.leads?.city}</span>
+            </div>
+            <div className={styles.phoneNumberText}>
+              <span>
+                <img src={PhoneImg} alt="phone" />
+              </span>
+              {profileLeadViewData?.phone}{" "}
+              {profileLeadViewData?.leads?.is_phone_verified == 1 && (
+                <sapn className={styles.verifiedText}>
+                  <img src={HiredImg} alt="verified" />
+                  Verified
+                </sapn>
+              )}
+            </div>
+            <div className={styles.phoneNumberText}>
+              <span>
+                <img src={MailImg} alt="mail" />
+              </span>
+              {profileLeadViewData?.email}
+            </div>
+            <div className={styles.btnBox}>
+              <button
+                className={styles.buttonSms}
+                onClick={() => {
+                  handleResponseChange("email");
+                  window.location.href = `mailto:${user.email}`;
+                }}
+              >
+                {" "}
+                <img src={Mailbtn} alt="mail" /> Send Email
+              </button>
+              <button
+                className={styles.buttonSms}
+                onClick={() => {
+                  handleResponseChange("sms");
+                  window.location.href = `mailto:${user.email}`;
+                }}
+              >
+                <img src={smsBtn} alt="sms" /> Send SMS
+              </button>
+              <button
+                className={styles.buttonSms}
+                onClick={() => {
+                  handleResponseChange("mobile");
+                  window.location.href = `tel:${user.phoneNumber}`;
+                }}
+              >
+                <img src={phoneBtn} alt="phone" /> Phone Number
+              </button>
+              <button
+                className={styles.buttonSms}
+                onClick={() => {
+                  handleResponseChange("Whatsapp");
+                  window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
+                }}
+              >
+                <img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp
+              </button>
+            </div>
+            {profileLeadViewData?.leads?.is_urgent == 1 && (
+              <div className={styles.contactBox}>
+                <span style={{ display: "flex", alignItems: "center" }}>
+                  <img src={contact} alt="contact" />
+                </span>{" "}
+                Contact: <span className={styles.urgentText}>Urgently</span>
+              </div>
+            )}
+            <div className={styles.locationTag}>
+              <img src={locallistImgs} alt="credit icon" />
+              <span className={styles.creditsAmount}>
+                {profileLeadViewData?.leads?.credit_score} credits
+              </span>
+            </div>
+            <div className={styles.tabSection}>
+              <div className={styles.tabButtons}>
+                <button
+                  className={`${styles.tabButton} ${
+                    activeTab === "activity" ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab("activity")}
+                >
+                  Activity
+                </button>
+                <button
+                  className={`${styles.tabButton} ${
+                    activeTab === "lead" ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab("lead")}
+                >
+                  Lead
+                </button>
+                <button
+                  className={`${styles.tabButton} ${
+                    activeTab === "notes" ? styles.activeTab : ""
+                  }`}
+                  onClick={() => setActiveTab("notes")}
+                >
+                  Notes
+                </button>
+              </div>
 
-            {/* {activeTab === "lead" && (
+              <div className={styles.tabContent}>
+                {activeTab === "activity" && (
+                  <div className={styles.container}>
+                    <div className={styles.date}>
+                      {moment(profileLeadViewData?.created_at).format("MMM-DD")}
+                    </div>
+                    {getActivies?.map((item, index) => (
+                      <TimelineItem
+                        key={index}
+                        icon={
+                          item?.contact_type === "Manual Bid"
+                            ? CallImage
+                            : item?.contact_type === "email"
+                            ? EmailImage
+                            : item?.contact_type === "Whatsapp"
+                            ? AddImage
+                            : item?.contact_type === "mobile"
+                            ? CallImage
+                            : item?.contact_type === "Buttons"
+                            ? PurchasedImage
+                            : UserImage
+                        }
+                        title={item.activity_name}
+                        description={item.description}
+                        time={moment(item.updated_at).format("hh:mm A")}
+                        isLast={index === getActivies.length - 1}
+                        name={
+                          profileLeadViewData?.id === item?.from_user_id
+                            ? "You"
+                            : profileLeadViewData?.name
+                        }
+                      >
+                        {item.children}
+                      </TimelineItem>
+                    ))}
+                  </div>
+                )}
+
+                {/* {activeTab === "lead" && (
               <div className={styles.leadContent}>
                 <div>
                   {getPendingLeadList?.map((item, index) => {
@@ -387,70 +420,91 @@ console.log(profileLeadViewData,"profileLeadViewData")
                 </div>
               </div>
             )} */}
-            {activeTab === "lead" && (
-  <div className={styles.leadContent}>
-    <div>
-      {(() => {
-        const uniqueQuestionsMap = new Map();
+                {activeTab === "lead" && (
+                  <div className={styles.leadContent}>
+                    <div>
+                      {(() => {
+                        const uniqueQuestionsMap = new Map();
 
-        getPendingLeadList?.forEach((item) => {
-          const questionsArray = item?.questions ? JSON.parse(item.questions) : [];
+                        getPendingLeadList?.forEach((item) => {
+                          const questionsArray = item?.questions
+                            ? JSON.parse(item.questions)
+                            : [];
 
-          questionsArray.forEach((qna) => {
-            if (!uniqueQuestionsMap.has(qna.ques)) {
-              uniqueQuestionsMap.set(qna.ques, qna.ans);
-            }
-          });
-        });
+                          questionsArray.forEach((qna) => {
+                            if (!uniqueQuestionsMap.has(qna.ques)) {
+                              uniqueQuestionsMap.set(qna.ques, qna.ans);
+                            }
+                          });
+                        });
 
-        return Array.from(uniqueQuestionsMap.entries()).map(([question, answer], index) => (
-          <div key={index} style={{ marginBottom: "0.5rem" }}>
-            <p style={{ fontWeight: 600 }}>{question}</p>
-            <hr />
-            <p>{answer}</p>
-          </div>
-        ));
-      })()}
-    </div>
+                        return Array.from(uniqueQuestionsMap.entries()).map(
+                          ([question, answer], index) => (
+                            <div key={index} style={{ marginBottom: "0.5rem" }}>
+                              <li
+                                style={{ fontWeight: 600, marginTop: "20px" }}
+                              >
+                                {question}
+                              </li>
+                              <hr />
+                              <p style={{ marginLeft: "20px" }}>{answer}</p>
+                            </div>
+                          )
+                        );
+                      })()}
+                    </div>
 
-    <div>
-      <LeadMap getPendingLeadList={profileLeadViewData?.leads?.postcode} />
-    </div>
-  </div>
-)}
-
-            {activeTab === "notes" && (
-              <div className={styles.notesContent}>
-                <div className={styles.notesInner}>
-                  <textarea
-                    className={styles.textArea}
-                    placeholder="Enter your notes here..."
-                    onChange={(e) => setNote(e.target.value)}
-                    value={note?.notes}
-                  />
-                  <div className={styles.buttonGroup}>
-                    <button className={styles.CancelBtn} onClick={handleCancel}>
-                      Cancel
-                    </button>
-                    <button className={styles.UpdateBtn} onClick={handleSubmit}>
-                      {sellerNotesLoader ? (
-                        <Spin
-                          indicator={
-                            <LoadingOutlined spin style={{ color: "white" }} />
-                          }
-                        />
-                      ) : (
-                        "Update"
-                      )}
-                    </button>
+                    <div>
+                      <LeadMap
+                        getPendingLeadList={
+                          profileLeadViewData?.leads?.postcode
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+                )}
 
-        {/* <div className={styles.container}>
+                {activeTab === "notes" && (
+                  <div className={styles.notesContent}>
+                    <div className={styles.notesInner}>
+                      <textarea
+                        className={styles.textArea}
+                        placeholder="Enter your notes here..."
+                        onChange={(e) => setNote(e.target.value)}
+                        value={note?.notes}
+                      />
+                      <div className={styles.buttonGroup}>
+                        <button
+                          className={styles.CancelBtn}
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className={styles.UpdateBtn}
+                          onClick={handleSubmit}
+                        >
+                          {sellerNotesLoader ? (
+                            <Spin
+                              indicator={
+                                <LoadingOutlined
+                                  spin
+                                  style={{ color: "white" }}
+                                />
+                              }
+                            />
+                          ) : (
+                            "Update"
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* <div className={styles.container}>
           <div className={styles.date}>Mon 25, April</div>
           {activity.map((item, index) => (
             <TimelineItem
@@ -465,9 +519,9 @@ console.log(profileLeadViewData,"profileLeadViewData")
             </TimelineItem>
           ))}
         </div> */}
-      </div>
+          </div>
         </>
-        }
+      )}
     </>
   );
 };

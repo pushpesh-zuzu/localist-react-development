@@ -188,7 +188,7 @@
 
 //   // Fetch lat/lng from a single postcode
 //   const getLatLngFromPincode = async (pincode) => {
-   
+
 //     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${pincode}&components=country:IN&key=${apiKey}`;
 
 //     try {
@@ -231,32 +231,31 @@
 //   useEffect(() => {
 //     const plotPostcode = async () => {
 //       if (!mapLoaded || !getPendingLeadList) return;
-  
+
 //       // Clear previous markers & circles
 //       markersRef.current.forEach((marker) => marker.setMap(null));
 //       circlesRef.current.forEach((circle) => circle.setMap(null));
 //       markersRef.current = [];
 //       circlesRef.current = [];
-  
+
 //       const pincode = getPendingLeadList; // direct string like "303014"
 //       const coords = await getLatLngFromPincode(pincode);
 //       if (!coords) return;
-  
+
 //       const marker = new window.google.maps.Marker({
 //         position: coords,
 //         map: mapInstance.current,
 //       });
 //       markersRef.current.push(marker);
-  
+
 //       drawCircle(coords);
-  
+
 //       mapInstance.current.setCenter(coords);
 //       mapInstance.current.setZoom(10);
 //     };
-  
+
 //     plotPostcode();
 //   }, [mapLoaded, getPendingLeadList]);
-  
 
 //   return (
 //     <div
@@ -391,12 +390,20 @@ const LeadMap = ({ getPendingLeadList }) => {
     plotPostcode();
   }, [mapLoaded, getPendingLeadList]);
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       ref={mapRef}
       style={{
-        width: "500px",
-        height: "300px",
+        width: windowWidth <= 1024 ? "100%" : "40vw",
+        height: windowWidth <= 480 ? "200px" : "300px",
         marginTop: "20px",
         borderRadius: "8px",
       }}
