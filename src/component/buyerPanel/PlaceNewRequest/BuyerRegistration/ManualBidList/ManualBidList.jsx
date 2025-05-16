@@ -134,10 +134,10 @@ const ManualBidList = () => {
                     View Profile →
                   </a>
 
-                  <div className={styles.quickToRespond}>
+               {item?.quicktorespond == 1 &&  <div className={styles.quickToRespond}>
                     <img src={QuickToRespond} alt="" />
                     Quick to respond
-                  </div>
+                  </div>}
                 </div>
               </div>
 
