@@ -21,6 +21,7 @@ import {
   getAddHiredLeadDataApi,
   getBuyerActivitiesApi,
   getLeadProfileRequestList,
+  getPendingLeadDataApi,
   getSellerNotesApi,
   sellerResponseStatusApi,
 } from "../../../store/LeadSetting/leadSettingSlice";
@@ -192,13 +193,14 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
         if (result) {
           showToast("success", result?.message);
           const data = {
-            customer_id: profileLeadViewData?.leads?.customer_id,
-            lead_id: profileLeadViewData?.leads?.id,
+            // customer_id: profileLeadViewData?.leads?.customer_id,
+            // lead_id: profileLeadViewData?.leads?.id,
             user_id: userToken?.remember_tokens
               ? userToken?.remember_tokens
               : registerData?.remember_tokens,
           };
-          dispatch(getLeadProfileRequestList(data));
+          dispatch(getPendingLeadDataApi(data));
+          onBack();
         }
       });
     }
@@ -370,7 +372,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         }
                         title={item.activity_name}
                         description={item.description}
-                        time={moment(item.updated_at).format("hh:ss A")}
+                        time={moment(item.updated_at).format("hh:mm A")}
                         isLast={index === getActivies.length - 1}
                         name={
                           profileLeadViewData?.id === item?.from_user_id

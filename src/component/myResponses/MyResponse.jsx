@@ -69,6 +69,12 @@ const MyResponse = () => {
     dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
       if (result.success) {
         // showToast("success",result?.message)
+        const activityData = {
+          buyer_id: item?.customer_id,
+          user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+          lead_id: item?.id
+        }
+        dispatch(getBuyerActivitiesApi(activityData))
       }
     });
   };

@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import { clearAuthToken, clearBuyerRegisterFormData, clearServiceFormData, setAuthToken, setRegisterData, setRegisterToken, setSelectedServiceId, setselectedServices, setService } from "../FindJobs/findJobSlice";
-import { setCreateRequestToken } from "../Buyer/BuyerSlice";
+import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 
 const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
 const initialState = {
@@ -79,6 +79,7 @@ export const userLogout = () => {
         dispatch(clearBuyerRegisterFormData())
         dispatch(setCreateRequestToken())
         dispatch(clearAuthToken())
+        dispatch(setRequestData())
 
         // ✅ Clear relevant localStorage items
         localStorage.removeItem("barkToken");
@@ -86,6 +87,7 @@ export const userLogout = () => {
         localStorage.removeItem("registerDataToken");
         localStorage.removeItem("registerTokens");
         localStorage.removeItem("createRequestToken")
+        localStorage.removeItem("createRequest")
         return true;
       }
     } catch (error) {

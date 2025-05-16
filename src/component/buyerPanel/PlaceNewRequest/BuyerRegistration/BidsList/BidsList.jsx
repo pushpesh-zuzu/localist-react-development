@@ -650,6 +650,8 @@ const BidsList = ({ previousStep }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [visibleCount, setVisibleCount] = useState(5);
+  const [locationSort, setLocationSort] = useState("");
+  const [responseSort, setResponseSort] = useState("");
   const { userToken } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -803,7 +805,7 @@ const BidsList = ({ previousStep }) => {
   };
   const handelChangeSort = (e) => {
     const selectedOption = e.target.value
-
+    setLocationSort(selectedOption)
     const sortData = {
       lead_id: requestId,
       distance_order: selectedOption
@@ -812,7 +814,7 @@ const BidsList = ({ previousStep }) => {
   }
   const handelresponseChangeSort = (e) => {
     const selectedResponse = e.target.value
-
+    setResponseSort(selectedResponse)
     const responseData = {
       lead_id: requestId,
       response_time: selectedResponse
@@ -861,33 +863,33 @@ const BidsList = ({ previousStep }) => {
               </div>
             </div>
 
-            <div className={styles.filters}>
-              <select>
-                <option>All ratings</option>
-                <option></option>
-              </select>
-              <select onChange={handelChangeSort} defaultValue={""}>
-                <option value="" disabled>Sort by Location</option>
+              <div className={styles.filters}>
+                <select>
+                  <option>All ratings</option>
+                  <option></option>
+                </select>
+                <select onChange={handelChangeSort} defaultValue={""}value={locationSort} >
+                  <option value="" disabled>Sort by Location</option>
 
-                <option value="farthest to nearest">Farthest to Nearest</option>
-                <option value="nearest to farthest">Nearest to Farthest </option>
+                  <option value="farthest to nearest">Farthest to Nearest</option>
+                  <option value="nearest to farthest">Nearest to Farthest </option>
 
-              </select>
-              <select onChange={handelresponseChangeSort} defaultValue={""}>
-                {/* <option>All response times</option> */}
-                <option value="" disabled>All response times</option>
-                <option value="Responds within 10 mins">Responds within 10 mins</option>
-                <option value="Responds within 1 hour">Responds within 1 hour</option>
-                <option value="Responds within 6 hours">Responds within 6 hours</option>
-                <option value="Responds within 24 hours">Responds within 24 hours</option>
-              </select>
-              <span className={styles.matchCount}>
-                {matchingLength} matches
-              </span>
-              <select className={styles.sortDropdown}>
-                <option>Sort by: best match</option>
-              </select>
-            </div>
+                </select>
+                <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort}>
+                  {/* <option>All response times</option> */}
+                  <option value="" disabled>All response times</option>
+                  <option value="Responds within 10 mins">Responds within 10 mins</option>
+                  <option value="Responds within 1 hour">Responds within 1 hour</option>
+                  <option value="Responds within 6 hours">Responds within 6 hours</option>
+                  <option value="Responds within 24 hours">Responds within 24 hours</option>
+                </select>
+                <span className={styles.matchCount}>
+                  {matchingLength} matches
+                </span>
+                <select className={styles.sortDropdown}>
+                  <option>Sort by: best match</option>
+                </select>
+              </div>
             <div className={styles.recommendBar}>
               <div className={styles.recommendBox}>
                 <div>
@@ -908,7 +910,7 @@ const BidsList = ({ previousStep }) => {
                 Request your best matches here
               </button>
             </div>
-          {bidListLoader ? <Spin size="small"/> :  <>
+          {/* {bidListLoader ? <Spin size="small"/> :  <> */}
             {autoBidList?.every(item => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
                 <h1 className={styles.noBidText}>No seller available</h1>
@@ -1027,8 +1029,7 @@ const BidsList = ({ previousStep }) => {
                 ))
               )
             )}
-            </>
-            }
+          
 
 
             <CustomModal

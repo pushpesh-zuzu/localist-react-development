@@ -112,6 +112,8 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const handleCloseClick = () => {
     // setShowConfirmModal(true);
     onClose()
+     dispatch(clearSetbuyerRequestData())
+       dispatch(clearBuyerRegisterFormData())
   };
 
   return (

@@ -27,7 +27,7 @@ qualityData:{},
 addDetailLoader:false,
 buyerrequestListLoader:false, 
 buyerRequestList:[] ,
-requestDataList:[],
+requestDataList:JSON.parse(localStorage.getItem("createRequest")) || null,
 createRequestToken: JSON.parse(localStorage.getItem("createRequestToken")) || null,
 getuploadImg:[],
 infoLoader:false,
@@ -391,6 +391,8 @@ const buyerSlice = createSlice({
     },
     setRequestData(state,action) {
       state.requestDataList = action.payload
+      localStorage.setItem("createRequest", JSON.stringify(action.payload))
+
     },
     setCreateRequestToken(state,action) {
       state.createRequestToken = action.payload
