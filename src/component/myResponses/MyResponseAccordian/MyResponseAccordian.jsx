@@ -60,9 +60,9 @@ const TimelineItem = ({
 );
 
 const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
+    const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
-  const [note, setNote] = useState("");
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -117,13 +117,14 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   };
   useEffect(() => {
     if (getSellerNotes?.notes) {
-      setNote(getSellerNotes.notes);
+      setNote(getSellerNotes.notes?.notes);
     }
-  }, [getSellerNotes]);
+  }, [getSellerNotes,activeTab]);
+ 
 
   const handleCancel = () => {
     // Reset back to original note
-    setNote(getSellerNotes?.notes || "");
+    setNote(getSellerNotes?.notes?.notes || "");
   };
   // useEffect(() => {
 
@@ -152,8 +153,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
         : registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
       note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
-      notes: note,
+      notes:  note ??getSellerNotes?.notes?.notes ,
     };
+    
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
       if (result.success) {
         
@@ -173,7 +175,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     if (
       profileLeadViewData?.leads?.id &&
       profileLeadViewData?.id &&
-      (userToken?.remember_tokens || registerData?.remember_tokens)
+      (userToken?.remember_tokens || registerData?.remember_tokens) && activeTab === "notes"
     ) {
       const sellerData = {
         lead_id: profileLeadViewData.leads.id,
@@ -471,7 +473,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         className={styles.textArea}
                         placeholder="Enter your notes here..."
                         onChange={(e) => setNote(e.target.value)}
-                        value={note?.notes}
+                        value={note}
                       />
                       <div className={styles.buttonGroup}>
                         <button

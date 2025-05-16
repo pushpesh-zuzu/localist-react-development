@@ -72,7 +72,7 @@ const HiredProfessional = ({ closeModal,serviceId }) => {
   const { autoBidList,autoBidListData,addSubmitLeadLoader } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
-console.log(options,"options")
+
   useEffect(() => {
     // Set options based on API data (autoBidList)
     if (autoBidListData && Array.isArray(autoBidListData)) {
@@ -82,6 +82,10 @@ console.log(options,"options")
       }));
       setOptions(formattedOptions);
     }
+    else{
+      setOptions([])
+    }
+   
    
   }, [autoBidListData]);
   useEffect(()=>{
