@@ -33,6 +33,22 @@ const SearchProfessionals = ({ nextStep }) => {
   });
   const [show, setShow] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
+  const [placeholder, setPlaceholder] = useState("Search service and choose from provided options.");
+
+  useEffect(() => {
+    const updatePlaceholder = () => {
+      if (window.innerWidth <= 768) {
+        setPlaceholder("Search service");
+      } else {
+        setPlaceholder("Search service and choose from provided options.");
+      }
+    };
+
+    updatePlaceholder(); // call on first load
+    window.addEventListener("resize", updatePlaceholder); // update on resize
+
+    return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
+  }, []);
 console.log(city,"city")
   const handleClose = () => {
     setShow(false);
@@ -173,7 +189,7 @@ console.log(city,"city")
         <div className={styles.searchBox}>
           <input
             type="text"
-            placeholder="Type your service and choose from provided options."
+            placeholder={placeholder}
             className={styles.input}
             onChange={(e) => {
               setInput(e.target.value);

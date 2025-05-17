@@ -195,7 +195,7 @@
     line-height: 28px;
     text-align: center;
     vertical-align: middle;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   .footer .quoteButton {
@@ -266,7 +266,10 @@
 @media screen and (max-width: 468px) {
   .workContainer {
     padding: 16px 5%;
+    
   }
+  
+  
 
   .stepContainer {
     width: 78%;
