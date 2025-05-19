@@ -21,6 +21,7 @@
   margin: 0;
   margin-bottom: 15px;
   color: var(--text-color);
+
 }
 
 .searchcontainer span {
@@ -238,6 +239,7 @@
 
   .searchcontainer h1 {
     font-size: 36px;
+    line-height: 45px;
   }
 
   .searchBoxContainer {
@@ -247,7 +249,8 @@
 
   .searchBoxContainer p {
     font-size: 16px;
-    line-height: 37px;
+    line-height: 27px;
+    
   }
 
   .searchBoxContainer span {

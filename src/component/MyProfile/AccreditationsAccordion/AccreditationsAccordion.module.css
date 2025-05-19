@@ -97,6 +97,7 @@
   display: flex;
   gap: 20px;
   align-items: center;
+ 
 }
 
 .logoSection {
@@ -188,4 +189,17 @@
   cursor: pointer;
   font-size: 20px;
   font-weight: 500;
+}
+@media screen and (max-width:480px) {
+  .logoSectionWrapper {
+    flex-wrap: wrap;
+  }
+  .inputGroup {
+
+    flex-direction: column;
+  }
+  .title {
+    font-size: 14px;
+  }
+ 
 }

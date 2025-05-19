@@ -255,3 +255,17 @@
 .viewButton:hover {
   background: #007acc;
 }
+@media screen and (max-width:480px) {
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .messageBox {
+  text-align: center;
+    padding: 0px;
+    margin: 16px 0;
+  }
+  
+}

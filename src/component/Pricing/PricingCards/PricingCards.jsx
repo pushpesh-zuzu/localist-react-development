@@ -49,7 +49,7 @@ const PricingCards = () => {
             <img src={card.image} alt={card.title} />
           </div>
 
-          <div className={styles.centerLine}></div>
+          <div  className={`${styles.centerLine} ${styles[`line${index}`]}`}></div>
 
           <div className={styles.textSectionContainer}>
             <div

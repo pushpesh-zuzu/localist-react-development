@@ -209,3 +209,25 @@
     padding: 10px;
   }
 }
+@media screen and (max-width: 350px) {
+  .modalContent {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .header h2 {
+    font-size: 18px;
+  }
+
+  .input {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+  .backButton,
+  .nextButton {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+}

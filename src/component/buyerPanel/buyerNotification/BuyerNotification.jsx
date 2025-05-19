@@ -10,7 +10,7 @@ import { Spin } from "antd";
 
 const BuyerNotification = () => {
   const dispatch = useDispatch();
-  const { notificationList,notificationLoader } = useSelector((state) => state.buyer);
+  const { notificationList, notificationLoader } = useSelector((state) => state.buyer);
   const [loadingNoti, setLoadingNoti] = useState(""); // 👈 track loading switch
 
   useEffect(() => {
@@ -50,46 +50,46 @@ const BuyerNotification = () => {
         </span>
         <span>Choose what you’d like to be emailed about</span>
       </div>
-      {notificationLoader ? <Spin style={{display:"flex",justifyContent:"center",alignItems:"center"}}/> : 
-      <div className={styles.notificationList}>
-        {notificationList.map((notification, index) => {
-          let notiName = "";
-          if (index === 0) notiName = "customer_email_change_in_request";
-          else if (index === 1) notiName = "customer_email_reminder_to_reply";
-          else if (index === 2)
-            notiName = "customer_email_update_about_new_feature";
+      {notificationLoader ? <Spin style={{ display: "flex", justifyContent: "center", alignItems: "center" }} /> :
+        <div className={styles.notificationList}>
+          {notificationList.map((notification, index) => {
+            let notiName = "";
+            if (index === 0) notiName = "customer_email_change_in_request";
+            else if (index === 1) notiName = "customer_email_reminder_to_reply";
+            else if (index === 2)
+              notiName = "customer_email_update_about_new_feature";
 
-          return (
-            <div
-              key={index}
-              className={`${styles.notificationItem} ${
-                index >= 0 ? styles.shadow : ""
-              }`}
-            >
-              <span>
-  {notification?.noti_name === "customer_email_change_in_request"
-    ? "Changes to my requests"
-    : notification?.noti_name === "customer_email_reminder_to_reply"
-    ? "Reminders to reply to Professionals"
-    : "Updates about new features on Bark"}
-</span>
-              {loadingNoti === notiName ? (
-                <Spin size="small" />
-              ) : (
-                <label className={styles.switch}>
-                  <input
-                    type="checkbox"
-                    checked={notification?.noti_value === 1}
-                    onChange={handleSwitch(notiName)}
-                  />
-                  <span className={styles.slider}></span>
-                </label>
-              )}
-            </div>
-          );
-        })}
-      </div>
-}
+            return (
+              <div
+                key={index}
+                // className={`${styles.notificationItem} ${index >= 0 ? styles.shadow : ""
+                //   }`}
+                className={`${styles.notificationItem} ${styles[`item${index}`]} ${index >= 0 ? styles.shadow : ""}`}
+              >
+                <span>
+                  {notification?.noti_name === "customer_email_change_in_request"
+                    ? "Changes to my requests"
+                    : notification?.noti_name === "customer_email_reminder_to_reply"
+                      ? "Reminders to reply to Professionals"
+                      : "Updates about new features on Bark"}
+                </span>
+                {loadingNoti === notiName ? (
+                  <Spin size="small" />
+                ) : (
+                  <label className={styles.switch}>
+                    <input
+                      type="checkbox"
+                      checked={notification?.noti_value === 1}
+                      onChange={handleSwitch(notiName)}
+                    />
+                    <span className={styles.slider}></span>
+                  </label>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      }
     </div>
   );
 };

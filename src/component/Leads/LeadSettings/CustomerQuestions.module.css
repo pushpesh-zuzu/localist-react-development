@@ -164,14 +164,11 @@
 }
 
 .addLocation {
-  position: absolute;
-  top: 0;
-  right: 0;
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
   font-size: 18px;
-  margin-top: 23px;
+  /* margin-top: 23px; */
 }
 
 .addLinkLocation {
@@ -181,10 +178,11 @@
   font-size: 18px;
 }
 .rangerBox {
-  position: relative;
+  /* position: relative; */
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 .ranger {
   display: flex;
@@ -205,6 +203,7 @@
   background: var(--primary-color);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 31.62px 29px 31.62px 42.27px;
   position: sticky;
   bottom: -20px;
@@ -219,6 +218,7 @@
   cursor: pointer;
   font-weight: 400;
   font-size: 18px;
+  
 }
 
 /* .removeService:hover {
@@ -325,11 +325,22 @@
     gap: 10px;
     align-items: flex-start;
   }
+  .rangerBox {
+    display: block;
+    flex-direction: column;
+    align-items: flex-start;
+      }
 
+      .range{
+        padding-bottom: 10px;
+      }
   .suggestion span,
   .suggestLink,
   .addLocation {
     font-size: 15px;
+  }
+  .addLocation{
+    margin-left: 20px;
   }
 
   .saveButton {

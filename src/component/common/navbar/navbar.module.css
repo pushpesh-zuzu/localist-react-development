@@ -204,7 +204,7 @@
 
 .navMenu {
   display: flex;
-  gap: 16px;
+  gap: 2px;
   align-items: center;
 }
 
@@ -380,7 +380,7 @@
   }
 
   .logSwitchContainer {
-    gap: 13px;
+    gap: 0px;
   }
 
   .professionalBtn {
@@ -522,6 +522,20 @@
     font-weight: 500;
     color: #5e5e5e;
   }
+  .navMenu {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 60px;
+    right: 90px;
+    width: 100px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 1000;
+  }
+  
 }
 
 @media screen and (max-width: 680px) {
@@ -611,7 +625,9 @@
     width: auto;
     padding: 0px 16px;
   }
-
+  .loginBtn {
+    font-size: 10px;
+  }
   .popover_about_wrap {
     width: auto;
     padding: 0px 16px;
@@ -628,5 +644,18 @@
   .navbarRightContainer {
     display: flex;
     width: 100%;
+  }
+  .navMenu {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 60px;
+    right: 90px;
+    width: 100px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 1000;
   }
 }

@@ -234,7 +234,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
       </div>
       
       {/* Display all other spotlight options */}
-      <div style={{ marginLeft: "8px", marginTop: "4px" }}>
+      <div style={{ marginLeft: "32px", marginTop: "4px" }}>
         {filterListData?.[0]?.leadSpotlights
           ?.filter(item => item.spotlight !== "All lead spotlights")
           ?.map((item) => (
@@ -264,6 +264,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
               <div key={item.time}>
                 <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <input
+                  style={{marginTop: "0px" }}
                     type="radio"
                     name="submittedWhen" // radio buttons ko group karne ke liye
                     checked={filters.submittedWhen === item.time}
@@ -298,6 +299,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
             {/* All Option */}
             <label>
               <input
+                  style={{marginTop: "0px" }}
                 type="radio"
                 name="location"
                 checked={filters.location === "All"}
@@ -312,6 +314,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
               <div key={item.time}>
                 <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <input
+                  style={{marginTop: "0px" }}
                     type="radio"
                     name="location" // radio buttons ko group karne ke liye
                     checked={filters.location === `${item.miles} miles from ${item.postcode}`}

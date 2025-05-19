@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./AccordionItem.module.css";
 import { UpOutlined, DownOutlined, CheckOutlined } from "@ant-design/icons";
 import { Progress } from "antd";
+import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
 
 const AccordionItem = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,8 @@ const AccordionItem = ({ title, children }) => {
             format={() => <CheckOutlined />}
           />
           <span className={styles.icon}>
-            {isOpen ? <UpOutlined /> : <DownOutlined />}
+            {/* {isOpen ? <UpOutlined /> : <DownOutlined />} */}
+            <img src={ProfileArrowUp} alt="arrow" className={`${styles.arrow} ${isOpen ? styles.up : styles.down}`} />
           </span>
         </div>
       </div>

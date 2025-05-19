@@ -49,20 +49,40 @@
 
 .centerLine {
   width: 2px;
-  background-color: #d9d9d9;
   margin: 0 2rem;
   position: relative;
 }
 
-.card .centerLine::after {
+/* Apply dynamic styles using index-based classes */
+.card .line0::after,
+.card .line1::after,
+.card .line2::after,
+.card .line3::after {
   content: "";
   display: block;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 64px;
+  bottom: 64px;
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
+  background-color: #ccc; /* default color (can be overridden below) */
+}
+
+/* Override background color for each index */
+.card .line0::after {
+  background-color: white;
+}
+
+.card .line1::after {
+  background-color: #ccc;
+}
+
+.card .line2::after {
+  background-color: white;
+}
+
+.card .line3::after {
   background-color: #ccc;
 }
 
@@ -159,5 +179,8 @@
 @media (max-width: 480px) {
   .container {
     margin-bottom: 35px;
+  }
+  .textSection h3{
+    text-wrap: wrap;
   }
 }

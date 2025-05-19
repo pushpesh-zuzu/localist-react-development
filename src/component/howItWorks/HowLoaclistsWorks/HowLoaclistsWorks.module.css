@@ -150,9 +150,9 @@
     padding: 20px 10px;
   }
 
-  .formContainer h2 {
-    font-size: 18px;
-  }
+.headingContainer{
+  line-height: 45px;
+}
 
   .inputGroup {
     flex-direction: column;

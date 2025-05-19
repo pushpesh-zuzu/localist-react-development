@@ -377,6 +377,7 @@
   border: none;
   cursor: pointer;
   margin-bottom: 17.5px;
+  white-space: nowrap;
 }
 
 @media (max-width: 1200px) {
