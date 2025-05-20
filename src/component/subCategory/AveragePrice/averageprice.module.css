@@ -147,6 +147,7 @@
 
   .tableContainer::-webkit-scrollbar-thumb {
     border-radius: 4px;
+    background-color: #000000;
   }
 
   .tableContainer::-webkit-scrollbar-track {
