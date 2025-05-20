@@ -267,6 +267,7 @@
   .workContainer {
     padding: 16px 5%;
     
+    
   }
   
   
@@ -279,5 +280,10 @@
 @media screen and (max-width: 390px) {
   .stepContainer {
     width: 72%;
+  }
+  .workContainer {
+    padding: 16px 5%;
+  
+    
   }
 }

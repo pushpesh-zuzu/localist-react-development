@@ -87,7 +87,7 @@
         flex-direction: column-reverse;
         text-align: center;
         padding: 20px 40px;
-        margin-top: 20px;
+        /* margin-top: 20px; */
     }
 
     .teamsLeftCotainer,
@@ -129,7 +129,7 @@
 
     .teamsContainer {
         gap: 0;
-        margin-top: 20px;
+        /* margin-top: 20px; */
     }
 
     .info p,
