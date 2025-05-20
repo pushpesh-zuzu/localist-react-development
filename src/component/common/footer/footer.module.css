@@ -466,6 +466,8 @@
   .footerBottom {
     display: flex;
     width: 98%;
+    justify-content: center;
+    align-items: center;
   }
 
   .footerBottom p {

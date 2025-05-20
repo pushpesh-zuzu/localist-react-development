@@ -37,8 +37,8 @@
 
 .singleCategory {
   background-color: #f4f4f4;
-  width: 98px;
-  height: 93px;
+  /* width: 98px; */
+  /* height: 93px; */
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -195,8 +195,8 @@
   }
 
   .singleCategory {
-    width: 90px;
-    height: 83px;
+    /* width: 90px; */
+    /* height: 83px; */
     gap: 5px;
     padding: 10px 12px;
   }
