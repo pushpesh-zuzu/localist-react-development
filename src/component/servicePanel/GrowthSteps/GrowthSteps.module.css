@@ -48,6 +48,7 @@
   font-size: 25px;
   font-weight: 400;
   color: #000000;
+  white-space: nowrap;
 }
 
 .title span {
