@@ -186,6 +186,7 @@
   align-items: center;
   background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
   padding: 16.35px 18px;
+  
   color: #fff;
   cursor: pointer;
   transition: 0.3s ease;
@@ -313,6 +314,34 @@
     font-size: 13px;
     padding: 8px 20px;
   }
+}
+@media screen and (max-width:400px) {
+  .checkboxContainer input {
+    height: 18px;
+    width: 18px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    padding: 10px;
+  }
+  .checkboxContainer label {
+    font-size: 8px;
+  }
+  .checkboxContainer {
+    & input {
+      &:checked {
+          &::after {
+              content: "✔";
+              font-size: 16px;
+              color: var(--primary-color);
+              font-weight: 700;
+              position: absolute;
+              top: -3px;
+              left: 3px;
+          }
+      }
+  }
+  }
+  
 }
 @media screen and (max-width:350px) {
   .checkboxContainer input {

@@ -138,6 +138,21 @@ input:checked + .slider::before {
     font-size: 14px;
   }
 }
+@media screen and (max-width: 420px) {
+  .item1 .switch,
+  .item0 .slider,
+  .item2 .switch {
+    width: 37px; /* or whatever width fits best on mobile */
+    height: 20px;
+  }
+.item0 .slider,
+  .item1 .slider,
+  .item2 .slider {
+    height: 20px;
+    width: 37px;
+  }
+  
+}
 @media screen and (max-width: 350px) {
   .item1 .switch,
   .item2 .switch {
