@@ -56,13 +56,9 @@ const SocialMediaAccordion = () => {
 
       {/* Links Section */}
       <div className={styles.card}>
+          <div className={styles.header}>
         <h3 className={styles.heading}>Links</h3>
-        <div className={styles.labelWrapper}>
-          <p className={styles.subtext}>
-            Link to your own website, articles about your business, or any other
-            content that will help promote your business.
-          </p>
-          <div className={styles.optionalToggle}>
+        <div className={styles.optionalToggle}>
             <img src={iIcon} alt="info" className={styles.icon} />
             <span className={styles.optionalText}>Optional</span>
             <label className={styles.switch}>
@@ -70,6 +66,13 @@ const SocialMediaAccordion = () => {
               <span className={styles.slider}></span>
             </label>
           </div>
+          </div>
+        <div className={styles.labelWrapper}>
+          <p className={styles.subtext}>
+            Link to your own website, articles about your business, or any other
+            content that will help promote your business.
+          </p>
+         
         </div>
         <div className={styles.inputWithToggle}>
           <textarea

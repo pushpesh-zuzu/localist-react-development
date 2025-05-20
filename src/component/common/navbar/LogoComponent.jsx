@@ -97,6 +97,11 @@ const LogoComponent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const handleClose = () => {
+ 
+    setShowSubMenu(false);
+    setMouseHover("");
+  }
 
   const content = () => {
     return (
@@ -115,6 +120,7 @@ const LogoComponent = () => {
                   exit={{ x: 0, height: 0 }}
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
+                   {/* <div className={styles.crossBtn} onClick={handleClose}>x</div> */}
                   <div className={styles.popover_header}>
                     <span>Services</span>
                     <Link to="#">See All</Link>
@@ -202,6 +208,7 @@ const LogoComponent = () => {
                     Back to Explore
                   </div>
                   <hr />
+                 
                   <div className={styles.popover_header}>
                     <span>Services</span>
                     <Link to="#">See All</Link>

@@ -236,6 +236,12 @@
 }
 
 @media (max-width: 512px) {
+  .container {
+    align-items: start;
+    padding: 20px;
+    gap: 16px;
+    /* justify-content: start; */
+  }
   .heading {
     font-size: 16px;
   }
@@ -253,7 +259,7 @@
   }
 
   .actionButtons {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 8px;
     align-items: stretch;
   }

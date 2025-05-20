@@ -108,7 +108,7 @@ const AboutAccordion = () => {
         <label className={styles.label}>
           Can’t give us a particular location?
         </label>
-        <select className={styles.input}>
+        <select className={`${styles.input} ${styles.customSelect}`}>
           <option>Select a reason</option>
         </select>
       </div>
@@ -121,7 +121,7 @@ const AboutAccordion = () => {
         <div className={styles.flexRow}>
           <div className={styles.flexItem}>
             <label className={styles.label}>Company size</label>
-            <select className={styles.input}>
+            <select className={`${styles.input} ${styles.customSelect}`}>
               <option>2–10 employees</option>
             </select>
           </div>

@@ -864,18 +864,18 @@ const BidsList = ({ previousStep }) => {
             </div>
 
               <div className={styles.filters}>
-                <select>
+                <select  className={styles.customSelect}>
                   <option>All ratings</option>
                   <option></option>
                 </select>
-                <select onChange={handelChangeSort} defaultValue={""}value={locationSort} >
+                <select onChange={handelChangeSort} defaultValue={""} value={locationSort} className={styles.customSelect}>
                   <option value="" disabled>Sort by Location</option>
 
                   <option value="farthest to nearest">Farthest to Nearest</option>
                   <option value="nearest to farthest">Nearest to Farthest </option>
 
                 </select>
-                <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort}>
+                <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort}  className={styles.customSelect}>
                   {/* <option>All response times</option> */}
                   <option value="" disabled>All response times</option>
                   <option value="Responds within 10 mins">Responds within 10 mins</option>
@@ -886,7 +886,7 @@ const BidsList = ({ previousStep }) => {
                 <span className={styles.matchCount}>
                   {matchingLength} matches
                 </span>
-                <select className={styles.sortDropdown}>
+                <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
                   <option>Sort by: best match</option>
                 </select>
               </div>

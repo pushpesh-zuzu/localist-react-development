@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./FeelingStuckFooter.module.css";
-import GetHiredImage from "../../../../assets/Images/Leads/GetHiredImage.svg";
+import GetHiredImage from "../../../../assets/Images/Leads/GetHiredImg.svg";
+import FeelingStuckImg from "../../../../assets/Images/Leads/FeelingStuckImg.svg";
 
 const FeelingStuckFooter = () => {
   const [showLeftCard, setShowLeftCard] = useState(true);
@@ -10,7 +11,7 @@ const FeelingStuckFooter = () => {
     <div className={styles.container}>
       {showLeftCard && (
         <div className={styles.card}>
-          <button
+          {/* <button
             className={styles.closeButton}
             onClick={() => setShowLeftCard(false)}
           >
@@ -22,13 +23,14 @@ const FeelingStuckFooter = () => {
               Day or night, our team is available 24/7 to help guide you to
               success
             </p>
-          </div>
+          </div> */}
+          <img src={FeelingStuckImg} alt="feeling" />
         </div>
       )}
 
       {showRightCard && (
         <div className={styles.cardRight}>
-          <button
+          {/* <button
             className={styles.closeButton}
             onClick={() => setShowRightCard(false)}
           >
@@ -42,10 +44,10 @@ const FeelingStuckFooter = () => {
                 try again are <span>22% more likely to land the job!</span>
               </p>
               <div className={styles.imageWrapper}>
-                <img src={GetHiredImage} alt="Get Hired Guarantee" />
               </div>
-            </div>
-          </div>
+              </div>
+              </div> */}
+              <img src={GetHiredImage} alt="Get Hired Guarantee" />
         </div>
       )}
     </div>

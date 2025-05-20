@@ -11,6 +11,11 @@
   padding: 18px;
   background-color: #fff;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .heading {
   font-size: 20px;

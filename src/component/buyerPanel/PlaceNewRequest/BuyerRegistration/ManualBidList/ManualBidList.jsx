@@ -64,18 +64,18 @@ const ManualBidList = () => {
       </div>
 
       <div className={styles.filters}>
-        <select>
+        <select className={styles.customSelect}>
           <option>All ratings</option>
         </select>
-        <select>
+        <select className={styles.customSelect}>
           <option>All locations</option>
         </select>
-        <select>
+        <select className={styles.customSelect}> 
           <option>All response times</option>
         </select>
         <span className={styles.matchCount}>{(autoBidListData || []).length} matches</span>
 
-        <select className={styles.sortDropdown}>
+        <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
           <option>Sort by: best match</option>
         </select>
       </div>

@@ -207,6 +207,12 @@
   gap: 2px;
   align-items: center;
 }
+.crossBtn {
+  display: flex;
+  justify-content: end;
+  color: #000;
+  cursor: pointer;
+}
 
 .activeMenu {
   display: flex !important;
