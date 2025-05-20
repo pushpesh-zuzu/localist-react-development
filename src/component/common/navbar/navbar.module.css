@@ -348,7 +348,9 @@
   .serviceText {
     display: none;
   }
-
+  .nameCircle {
+    margin-right: 0px;
+  }
   .searchContainer {
     margin-top: 6px;
   }
@@ -378,6 +380,9 @@
   .navbarItems {
     padding: 10px;
     height: 60px;
+  }
+  .nameCircle {
+    margin-right: 0px;
   }
 
   .logoContainer .mainLogo {
@@ -615,6 +620,9 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+  .nameCircle {
+    margin-right: 0px;
   }
 
   .myrequestText {

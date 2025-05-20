@@ -116,3 +116,27 @@
     padding: 26px !important;
   }
 }
+@media screen and (max-width: 460px) {
+
+  .card{
+    padding: 20px;
+  }
+  .header{
+    flex-direction: column;
+    display: flex;
+    align-items: start;
+  }
+  .title{
+    white-space: normal;
+    font-size: 23px;
+  }
+
+  .title span{
+    font-size: 22px;
+  }
+  .button {
+    font-size: 16px;
+    padding: 12px;
+  }
+  
+}
