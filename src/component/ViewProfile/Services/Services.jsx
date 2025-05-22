@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import styles from './Services.module.css';
+import styles from './services.module.css';
 import ProfileArrowUp from "../../../assets/Icons/ProfileArrow.svg"
 
 const service = [

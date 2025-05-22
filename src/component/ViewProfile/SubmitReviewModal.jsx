@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./viewProfile.module.css";
+import styles from "./ViewProfile.module.css";
 import { showToast } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { addSubmitReviewApi } from "../../store/MyProfile/myProfileSlice";
