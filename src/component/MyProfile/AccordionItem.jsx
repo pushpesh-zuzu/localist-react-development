@@ -4,12 +4,12 @@ import { UpOutlined, DownOutlined, CheckOutlined } from "@ant-design/icons";
 import { Progress } from "antd";
 import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
 
-const AccordionItem = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const AccordionItem = ({ title, children,isOpen,onClick }) => {
+
 
   return (
     <div className={styles.accordionItem}>
-      <div className={styles.header} onClick={() => setIsOpen(!isOpen)}>
+      <div className={styles.header} onClick={onClick}>
         <span className={styles.title}>{title}</span>
         <div className={styles.rightSection}>
           <Progress

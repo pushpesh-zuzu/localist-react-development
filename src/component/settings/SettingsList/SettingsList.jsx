@@ -23,6 +23,12 @@ const SettingsList = () => {
   const handleMycredit = () => {
     navigate("/myCredit")
   }
+  const handleReview = () => {
+
+    navigate("/settings/my_profile", {
+      state: { review: true }
+    })
+  }
   return (
     <>
       <div className="container">
@@ -50,7 +56,7 @@ const SettingsList = () => {
               explain what makes you different from your competition & why
               people should work with you
             </p>
-            <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }}>
+            <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }} onClick={handleReview}>
               <h3>Reviews</h3>
             </div>
             <p>

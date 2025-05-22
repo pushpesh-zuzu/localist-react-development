@@ -189,7 +189,8 @@ console.log(postalCode,'postalCode')
       nation_wide: formData.nation_wide ? 1 : 0,
       is_online: formData.is_online ? 1 : 0,
     };
-
+    payload.coordinates=JSON.stringify(payload.coordinates)
+ 
     dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");

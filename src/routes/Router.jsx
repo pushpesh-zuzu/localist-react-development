@@ -35,6 +35,7 @@ import ViewProfile from "../component/myResponses/ViewProfile/viewProfile";
 import MyProfile from "../component/MyProfile/MyProfile";
 import AccountDetails from "../component/AccountDetails/AccountDetails";
 import MyCredit from "../component/MyCredit/MyCredit";
+import ViewProfiles from "../component/ViewProfile";
 
 const router = createBrowserRouter([
   {
@@ -214,6 +215,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
            <MyCredit/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/view-profile",
+        element: (
+          <ProtectedRoute>
+          <ViewProfiles/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "admin/review/:profileId",
+        element: (
+          <ProtectedRoute>
+          <ViewProfiles/>
           </ProtectedRoute>
         ),
       },

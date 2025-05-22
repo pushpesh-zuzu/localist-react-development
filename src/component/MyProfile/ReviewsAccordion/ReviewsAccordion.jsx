@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ReviewsAccordion.module.css";
 import FacebookLogo from "../../../assets/Images/FacebookLogo.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getCustomerLinkApi } from "../../../store/MyProfile/myProfileSlice";
 
 const ReviewsAccordion = () => {
-  return (
-    <div className={styles.wrapper}>
-      <div className={styles.alertBox}>
+  const dispatch = useDispatch();
+  const  { customerLinkData } = useSelector((state) => state.myProfile )
+
+  useEffect(() => {
+   
+    dispatch(getCustomerLinkApi()); 
+  }, []);
+  const onCopyUrl = () => {
+    navigator.clipboard.writeText(customerLinkData);
+    
+  }
+   return (
+    <>
+   { <div className={styles.wrapper}>
+      <div className={styles.alertBox} >
         <span>
           You don’t have a rating because you don’t have any customer reviews.
         </span>
@@ -39,10 +53,10 @@ const ReviewsAccordion = () => {
           <input
             type="text"
             className={styles.input}
-            value="www.localist.com/en/us/company/sg-sd-dfs/ld1G4v/?show_reviews=true"
+            value={customerLinkData}
             readOnly
           />
-          <button className={styles.secondaryBtn}>Copy Link</button>
+          <button className={styles.secondaryBtn} onClick={onCopyUrl}>Copy Link</button>
         </div>
       </div>
 
@@ -77,7 +91,8 @@ const ReviewsAccordion = () => {
         <button className={styles.cancelBtn}>Cancel</button>
         <button className={styles.saveBtn}>Save</button>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

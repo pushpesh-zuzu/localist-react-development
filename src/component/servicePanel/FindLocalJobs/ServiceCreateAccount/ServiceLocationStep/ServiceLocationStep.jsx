@@ -53,14 +53,22 @@ const ServiceLocationStep = ({
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-        
+
         const cityName = place.address_components.find((component) =>
           component.types.includes("locality")
         )?.long_name;
-        
+
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+        const coordinates = { lat, lng };
+
+
         if (postalCode) {
           dispatch(setFormData({ postcode: postalCode }));
-          dispatch(setFormData({cities: cityName}))
+          dispatch(setFormData({ cities: cityName }))
+          dispatch(setFormData({ coordinates: { lat, lng } }));
+          // dispatch(setFormData(JSON.stringify({ coordinates: { lat, lng } })));
+          // dispatch(setFormData({ coordinates }))
           inputRef.current.value = postalCode; // Update input value
         } else {
           showToast("error", "No PIN code found! Please try again.");
@@ -87,20 +95,19 @@ const ServiceLocationStep = ({
             <div className={styles.inputWrapper}>
               <span className={styles.fromText}>Miles</span>
               <select
-                className={`${styles.dropdown} ${
-                  errors.miles1 ? styles.errorBorder : ""
-                }`}
+                className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""
+                  }`}
                 name="miles1"
                 value={formData.miles1 || ""}
                 onChange={handleInputChange}
               >
-               <option value="1">1 mile</option>
-  <option value="2">2 miles</option>
-  <option value="5">5 miles</option>
-  <option value="10">10 miles</option>
-  <option value="30">30 miles</option>
-  <option value="50">50 miles</option>
-  <option value="100">100 miles</option>
+                <option value="1">1 mile</option>
+                <option value="2">2 miles</option>
+                <option value="5">5 miles</option>
+                <option value="10">10 miles</option>
+                <option value="30">30 miles</option>
+                <option value="50">50 miles</option>
+                <option value="100">100 miles</option>
               </select>
               {errors.miles1 && (
                 <p className={styles.errorText}>{errors.miles1}</p>
@@ -112,13 +119,12 @@ const ServiceLocationStep = ({
               <input
                 type="text"
                 placeholder="Enter your postcode"
-                className={`${styles.input} ${
-                  errors.postcode ? styles.errorBorder : ""
-                }`}
+                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
+                  }`}
                 ref={inputRef}
                 name="postcode"
                 value={formData.postcode || ""}
-                onChange={handleInputChange ? handleInputChange : () => {}}
+                onChange={handleInputChange ? handleInputChange : () => { }}
               />
               {errors.postcode && (
                 <p className={styles.errorText}>{errors.postcode}</p>
@@ -126,30 +132,30 @@ const ServiceLocationStep = ({
             </div>
           </div>
           <div className={styles.nationwideFooter}>
-          <label className={styles.checkboxLabel}>
-            <input
-              type="checkbox"
-              name="nation_wide"
-              checked={formData?.nation_wide === 1}
-              onChange={handleInputChange}
-              className={styles.checkboxInput}
-            />
-            <span className={styles.checkboxCustom}></span> Nationwide
-           
-          </label>
-          <div className={styles.switchWrapper}>
-    <label className={styles.switch}>
-      <input
-        type="checkbox"
-        name="is_online"
-        checked={formData?.is_online === 1}
-        onChange={handleInputChange}
-      />
-      <span className={styles.slider}></span>
-    </label>
-    <span className={styles.switchLabel}>Online/Remote Lead</span>
-  </div>
-  <div></div>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                name="nation_wide"
+                checked={formData?.nation_wide === 1}
+                onChange={handleInputChange}
+                className={styles.checkboxInput}
+              />
+              <span className={styles.checkboxCustom}></span> Nationwide
+
+            </label>
+            <div className={styles.switchWrapper}>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  name="is_online"
+                  checked={formData?.is_online === 1}
+                  onChange={handleInputChange}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span className={styles.switchLabel}>Online/Remote Lead</span>
+            </div>
+            <div></div>
           </div>
           <div className={styles.footer}>
             <p className={styles.infoText}>

@@ -667,7 +667,7 @@ const BidsList = ({ previousStep }) => {
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.totalbid || 0;
   const isButtonDisabled = bidCount === bidTotal
-  console.log(bidCount, bidTotal, "prem")
+  console.log(autoBidList, "prem")
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
@@ -725,6 +725,7 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
+    navigate("/view-profile")
     const data = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
@@ -946,12 +947,39 @@ const BidsList = ({ previousStep }) => {
                               away
                             </p>
                           </div>
-                          <div className={styles.sidebar}>
+                          {/* <div className={styles.sidebar}>
                             <div className={styles.rating}>
                               <span className={styles.stars}>★★★★★</span>
-                              <span className={styles.ratingCount}>125</span>
+                              <span className={styles.ratingCount}>{seller?.avg_rating}</span>
                             </div>
-                          </div>
+                          </div> */}
+<div className={styles.sidebar}>
+  <div className={styles.rating}>
+    
+    {(() => {
+      const rating = seller?.avg_rating || 0;
+
+      return (
+        <>
+          <span className={styles.stars}>
+            {[...Array(5)].map((_, index) => {
+              if (rating >= index + 1) {
+                return <span key={index}>★</span>; // Full star
+              } else if (rating >= index + 0.5) {
+                return <span key={index}>★</span>; // Half star (or use icon)
+              } else {
+                return <span key={index}>☆</span>; // Empty star
+              }
+            })}
+          </span>
+          <span className={styles.ratingCount}>{rating}</span>
+        </>
+      );
+    })()}
+  </div>
+</div>
+
+
                         </div>
 
                         <div className={styles.badges}>

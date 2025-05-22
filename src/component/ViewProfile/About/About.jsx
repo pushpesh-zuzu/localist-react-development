@@ -1,0 +1,48 @@
+import React from "react";
+import styles from "./About.module.css";
+import EliteProImg from "../../../assets/Images/Setting/eliteProImg.svg";
+import businessImg from "../../../assets/Images/Setting/businessImg.svg";
+import staffImg from "../../../assets/Images/Setting/staffImg.svg";
+import localistHireImg from "../../../assets/Images/Setting/localistHireImg.svg";
+import responseTimeImg from "../../../assets/Images/Setting/responseTimeImg.svg";
+
+const About = () => {
+    const data = [
+        {
+            title: "Elite Pro",
+            icon: EliteProImg,
+        },
+        {
+            title: "12 hires on Localists",
+            icon: businessImg
+        },
+        {
+            title: "4 Years in business",
+            icon: staffImg
+        },
+        {
+            title: "15 mins response time",
+            icon: localistHireImg
+        },
+        {
+            title: "2-10 staff",
+            icon: responseTimeImg
+        },
+    ]
+
+    return (
+        <div className={styles.aboutContainer}>
+            <h2>About</h2>
+            <div className={styles.aboutContent}>
+                {data.map((item, index) => (
+                    <div key={index} className={styles.aboutItem}>
+                        <span><img src={item?.icon} alt="img" /></span>
+                        <h3>{item.title}</h3>
+                    </div>
+                ))}
+            </div>
+
+        </div>
+    );
+}
+export default About;
