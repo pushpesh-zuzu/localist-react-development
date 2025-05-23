@@ -21,7 +21,7 @@ const SettingsList = () => {
     navigate("/settings/my_profile");
   };
   const handleMycredit = () => {
-    navigate("/myCredit")
+    navigate("/mycredits")
   }
   const handleReview = () => {
 

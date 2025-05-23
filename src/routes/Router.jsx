@@ -36,6 +36,7 @@ import MyProfile from "../component/MyProfile/MyProfile";
 import AccountDetails from "../component/AccountDetails/AccountDetails";
 import MyCredit from "../component/MyCredit/MyCredit";
 import ViewProfiles from "../component/ViewProfile";
+import MyCredits from "../component/MyCredit/MyCredit/MyCredit";
 
 const router = createBrowserRouter([
   {
@@ -215,6 +216,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
            <MyCredit/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/mycredits",
+        element: (
+          <ProtectedRoute>
+           <MyCredits/>
           </ProtectedRoute>
         ),
       },

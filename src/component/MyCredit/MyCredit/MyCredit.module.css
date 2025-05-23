@@ -1,0 +1,345 @@
+.container {
+ 
+    /* max-width: 1000px; */
+    padding:  20px 88px;
+    
+  }
+  
+  .backText {
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .heading {
+    font-size: 28px;
+    margin-bottom: 21px;
+  }
+  
+  .manageWrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 28px;
+  }
+  
+  .infoIcon {
+    margin-right: 10px;
+    
+  }
+  
+  .description {
+    font-size: 18px;
+    color: #000000;
+    line-height: 1.5;
+    font-weight: 400;
+    
+  }
+  
+  .link {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+  
+  .note {
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 64px;
+    font-weight: 400;
+    margin-left: 24px;
+  }
+  .note span {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  /* <----- Card Css ----->  */
+  .cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+  
+  .titleBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .badge {
+    background-color: #00bfff;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  
+  .response {
+    font-size: 12px;
+    color: var(--primary-color);
+    border: 1px solid  var(--primary-color);
+    padding: 3px 15px;
+    white-space: nowrap;
+    background-color: #ffffff;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .creditsBox {
+    border: 1px solid #000;
+    padding: 3px 15px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .priceInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .perCredit {
+    font-size: 18px;
+    color: #BEBEBE;
+    font-weight: 600;
+  }
+  
+  .buttonWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+  
+  .buyButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 56px;
+  
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .checkboxWrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    margin-top: 22px;
+  }
+  .checkboxWrap input {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  .checkboxWrap label {
+    font-size: 14px;
+    color: #000000;
+    font-weight: 500;
+  }
+  .getHired {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    max-width: 670px;
+  }
+  .gethiredText {
+    background-color: #E3F6FC;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    padding: 10px 20px;
+
+  }
+  /* ========== Responsive Breakpoints ========== */
+  
+  /* Tablets (≤ 1024px) */
+  @media (max-width: 1024px) {
+    .titleBar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .buttonWrap {
+      align-items: stretch;
+      width: 100%;
+    }
+  
+    .buyButton {
+      width: 100%;
+    }
+  }
+  
+  /* Mobile (≤ 768px) */
+  @media (max-width: 768px) {
+    .card {
+      padding: 15px;
+    }
+  
+    .creditsBox {
+      padding: 5px 10px;
+    }
+  
+    .buyButton {
+      font-size: 13px;
+      padding: 8px 16px;
+    }
+  
+    .priceInfo {
+      font-size: 13px;
+    }
+  
+    .perCredit {
+      font-size: 11px;
+    }
+  
+    .response {
+      font-size: 11px;
+    }
+  }
+  
+  /* Extra small devices (≤ 480px) */
+  @media (max-width: 480px) {
+    .titleBar,
+    .buttonWrap {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .buyButton {
+      width: 100%;
+    }
+  
+    .checkboxWrap {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
+  /* <----- end Card Css ---->  */
+   .bottomText {
+    margin-top: 57px;
+    margin-bottom: 17px;
+  }
+  .bottomText span {
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--primary-color);
+  } 
+  .VisaCard {
+    margin-top: 33px;
+  }
+  .redeemText {
+    margin-top: 54px;
+  }
+  .redeemText label{
+    font-size: 16px;
+    color: #000000;
+    font-weight: 500;
+    
+  }
+  .redeemText input{
+    
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  .redeemButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+  .couponsText {
+    margin-top: 19px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #828282;
+  }
+  
+.toggle {
+  border: 1px solid #d9d9d9;
+padding: 9px 18.66px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 30px;
+max-width: 300px;
+}
+.toggle span {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* Slider handle */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Checked styles */
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+  

@@ -1,0 +1,17 @@
+.container {
+    background-color: #E3F6FC;
+    padding: 11px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.visaCard {
+    display: flex;
+    gap: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.rightText {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 600;
+}

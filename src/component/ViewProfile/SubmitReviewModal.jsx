@@ -57,6 +57,9 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
+            <div className={styles.closeButton} onClick={closeModal}>
+    X
+  </div>
                 <h2>Leave a review for Resolve Energy Ltd</h2>
                 <div className={styles.ratingSection}>
                     <span>Click to rate :</span>

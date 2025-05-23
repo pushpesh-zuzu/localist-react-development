@@ -28,25 +28,36 @@ const ViewProfiles = () => {
     const quesAnsRef = useRef(null);
  
   const closeModal = () => setIsOpen(false);
-    useEffect(() => {
-        const handleScroll = () => {
-            const aboutTop = aboutRef.current?.offsetTop || 0;
-            const servicesTop = servicesRef.current?.offsetTop || 0;
-            const reviewsTop = reviewsRef.current?.offsetTop || 0;
-            const scrollY = window.scrollY + 200; // buffer
+  const rightContainerRef = useRef(null);
 
-            if (scrollY >= reviewsTop) {
-                setActiveTab('Reviews');
-            } else if (scrollY >= servicesTop) {
-                setActiveTab('Services');
-            } else {
-                setActiveTab('About');
-            }
-        };
+useEffect(() => {
+  const container = rightContainerRef.current;
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+  const handleScroll = () => {
+    const scrollY = container.scrollTop;
+    const sections = [
+      { name: 'Photos', ref: photoRef },
+      { name: 'Q+A\'s', ref: quesAnsRef },
+      { name: 'Accreditations', ref: accrediationRef },
+      { name: 'Reviews', ref: reviewsRef },
+      { name: 'Services', ref: servicesRef },
+      { name: 'About', ref: aboutRef },
+    ];
+
+    for (let section of sections) {
+      const offsetTop = section.ref.current?.offsetTop || 0;
+      if (scrollY >= offsetTop) {
+        setActiveTab(section.name);
+        break;
+      }
+    }
+  };
+
+  container?.addEventListener("scroll", handleScroll);
+  return () => container?.removeEventListener("scroll", handleScroll);
+}, []);
+
+  
     return (
         <>
         <div className={styles.mainContainer}>
@@ -90,8 +101,8 @@ const ViewProfiles = () => {
 
             </div>
 
-            <div className={styles.rightContainer}>
-                <div className={styles.tabContainerBox}>
+            <div className={styles.rightContainer} >
+                <div className={styles.tabContainerBox} ref={rightContainerRef}>
                     <TabNav activeTab={activeTab} />
                     <div ref={aboutRef}><About /></div>
                     <div ref={servicesRef}><Services /></div>

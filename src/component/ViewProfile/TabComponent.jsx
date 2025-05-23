@@ -5,7 +5,7 @@ const TabNav = ({ activeTab }) => {
   const tabs = ['About', 'Services', 'Reviews', 'Accreditations', 'Q+A\'s', 'Photos'];
 
   return (
-    <div className={styles.tabContainer}>
+    <div className={styles.tabContainers}>
       {tabs.map(tab => (
         <div
           key={tab}
