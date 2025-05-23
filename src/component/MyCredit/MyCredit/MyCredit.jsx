@@ -10,7 +10,7 @@ import CreditModal from "./CreditModal";
 
 const creditOptions = [
   {
-    title: "Win 60% more business",
+    title: "20 % OFF Boost",
     credits: 400,
     price: "£580.00",
     discount: "1.45",
@@ -19,7 +19,7 @@ const creditOptions = [
     text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits."
   },
   {
-    title: "Win 120% more business",
+    title: "120 % OFF Boost",
     credits: 550,
     price: "£797.50",
     discount: "1.45",
@@ -28,7 +28,7 @@ const creditOptions = [
     text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits."
   },
   {
-    title: "Win 180% more business",
+    title: "180 % OFF Boost",
     credits: 700,
     price: "£1,015.00",
     discount: "1.45",
@@ -78,7 +78,7 @@ const MyCredits = () => {
         <div className={styles.cardList}>
           {creditOptions.map((item, index) => (
             <div className={styles.card} key={index}>
-              {/* <span className={styles.badge}>{item.title}</span> */}
+              <button className={styles.badge}>{item.title}</button>
               <div className={styles.titleBar}>
 
                 <button className={styles.response}>About 5-10 responses</button>

@@ -3,15 +3,58 @@
     padding: 11px 15px;
     display: flex;
     justify-content: space-between;
-}
-.visaCard {
+    align-items: center;
+    flex-wrap: wrap; /* allows wrapping on smaller screens */
+    gap: 10px;
+  }
+  
+  .visaCard {
     display: flex;
+    align-items: center;
     gap: 40px;
     font-size: 18px;
     font-weight: 600;
-}
-.rightText {
+    flex: 1; /* allows it to shrink/grow */
+    min-width: 250px;
+  }
+  
+  .rightText {
     color: var(--primary-color);
     font-size: 18px;
     font-weight: 600;
-}
+    text-align: right;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .visaCard {
+      gap: 20px;
+      font-size: 16px;
+    }
+  
+    .rightText {
+      text-align: left;
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .visaCard {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+    }
+  
+    .rightText {
+      font-size: 14px;
+    }
+  }
+  

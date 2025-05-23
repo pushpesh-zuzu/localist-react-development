@@ -1,13 +1,14 @@
 .container {
     margin-top: 37px;
     background-color: #fff;
-    border-radius: 8px;
+   margin-bottom: 60px;
   }
   
-  .heading {
+  .container h2 {
     font-size: 16px;
     font-weight:500;
     margin-bottom: 16px;
+    color: #000000;
   }
   
   .scrollTable {
@@ -21,19 +22,20 @@
   }
   
   .table th {
-    background-color: #00aaff;
+    background-color: var(--primary-color);
     color: white;
     text-align: left;
     padding: 12px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
   }
   
   .table td {
     padding: 12px;
-    font-size: 15px;
-    border-bottom: 1px solid #ddd;
-    color: #333;
+    font-size: 16px;
+    border-bottom: 1px solid #D9D9D9;
+    color: #000000;
+    font-weight: 400;
   }
    
   .table tbody {
@@ -61,8 +63,25 @@
       font-size: 14px;
     }
   
-    .heading {
-      font-size: 20px;
+    .container h2 {
+        font-size: 16px;
+        font-weight:500;
+        margin-bottom: 16px;
+      }
+      
+  }
+  @media (max-width: 480px) {
+    .table th,
+    .table td {
+      padding: 10px;
+      font-size: 14px;
     }
+  
+    .container h2 {
+        font-size: 16px;
+        font-weight:500;
+        margin-bottom: 16px !important;
+      }
+      
   }
   

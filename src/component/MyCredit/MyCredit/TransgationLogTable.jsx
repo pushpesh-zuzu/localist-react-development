@@ -31,7 +31,7 @@ const transactions = [
 const TransgationLogTable = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Credit transaction log</h2>
+      <h2 >Credit transaction log</h2>
       <div className={styles.scrollTable}>
         <table className={styles.table}>
           <thead>

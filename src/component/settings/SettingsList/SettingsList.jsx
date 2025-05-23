@@ -29,6 +29,12 @@ const SettingsList = () => {
       state: { review: true }
     })
   }
+  const handleInvoice = () => {
+    navigate("/invoice-billing")
+  }
+  const handlePayment = () => {
+    navigate("/payment-details")
+  }
   return (
     <>
       <div className="container">
@@ -120,11 +126,15 @@ const SettingsList = () => {
               <h3>My credits</h3>
             </div>
             <p>View credit history & buy credits to contact more customers</p>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }}>
+            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
+            onClick={handleInvoice}
+            >
               <h3>Invoices and billing details</h3>
             </div>
             <p>View your invoices and manage your billing details</p>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }}>
+            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
+            onClick={handlePayment}
+            >
               <h3>My payment details</h3>
             </div>
             <p>Your payment settings</p>

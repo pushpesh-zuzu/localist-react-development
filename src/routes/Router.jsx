@@ -37,6 +37,8 @@ import AccountDetails from "../component/AccountDetails/AccountDetails";
 import MyCredit from "../component/MyCredit/MyCredit";
 import ViewProfiles from "../component/ViewProfile";
 import MyCredits from "../component/MyCredit/MyCredit/MyCredit";
+import InvoiceAndBilling from "../component/MyCredit/InvoiceAndBilling/InvoiceAndBilling";
+import MyPaymentDetails from "../component/MyCredit/MyPaymentDetails/MyPaymentDetails";
 
 const router = createBrowserRouter([
   {
@@ -224,6 +226,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
            <MyCredits/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/invoice-billing",
+        element: (
+          <ProtectedRoute>
+         <InvoiceAndBilling/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/payment-details",
+        element: (
+          <ProtectedRoute>
+        <MyPaymentDetails/>
           </ProtectedRoute>
         ),
       },

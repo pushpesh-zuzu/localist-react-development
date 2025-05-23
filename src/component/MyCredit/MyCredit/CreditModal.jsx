@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CreditModal.module.css";
 import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
 
@@ -8,7 +8,12 @@ const CreditModal = ({ onClose }) => {
   const handleSliderChange = (e) => {
     setCreditValue(Number(e.target.value));
   };
-
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
   const responseEstimate = Math.floor(creditValue / 8); // Example logic
   const price = (creditValue * 4.4625).toFixed(2); // Example: £1785 for 400 credits
 
@@ -21,9 +26,9 @@ const CreditModal = ({ onClose }) => {
         <p className={styles.subtitle}>Build a pack to suit your business needs</p>
 
         <div className={styles.infoBar}>
-          <span className={styles.credits}>Credits: <strong>{creditValue}</strong></span>
-          <span className={styles.responses}>Responses: <strong>Approximately {responseEstimate}</strong></span>
-          <span className={styles.cost}>Cost: <strong>£{price} (ex VAT)</strong></span>
+          <span className={styles.credits}>Credits: {creditValue}</span>
+          <span className={styles.responses}>Responses: Approximately {responseEstimate}    </span>
+          <span className={styles.cost}>Cost: £{price} (ex VAT)</span>
         </div>
 
         <input

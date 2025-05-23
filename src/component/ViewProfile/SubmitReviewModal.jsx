@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ViewProfile.module.css";
 import { showToast } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +22,12 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
         review: "",
         rating: ""
     });
-
+ useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

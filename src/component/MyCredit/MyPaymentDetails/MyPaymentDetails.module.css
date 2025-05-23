@@ -1,0 +1,55 @@
+.container {
+    max-width: 1030px;
+    padding: 21px 88px;
+  }
+  
+  .backText {
+    color: #999;
+    margin-bottom: 40px;
+    font-size: 14px;
+  }
+  
+  .heading {
+    font-size: 35px;
+    font-weight: 600;
+    margin-bottom: 21px;
+  }
+  
+  .manageWrapper {
+    display: flex;
+    align-items: start;
+    gap: 7px;
+  }
+  
+  .description {
+    font-size: 18px;
+    color: #000000;
+  
+    margin-bottom: 36px;
+  }
+  
+  .infoIcon {
+    align-items: start;
+    color: var(--primary-color);
+    margin-top: 5px;
+  }
+  .description span {
+    margin-top: 4px;
+  }
+  .infoIcon img {
+    width: 18px;
+    height: 18px;
+  }
+  .btnBox {
+    margin-left: 29px;
+  }
+  .addCardBtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 15px;
+  
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
