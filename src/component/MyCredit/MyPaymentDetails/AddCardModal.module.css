@@ -72,23 +72,24 @@
   }
   
   .cancelBtn {
-    background: #e0e0e0;
+    background: #C6C6C6;
     border: none;
     padding: 10px 18px;
     border-radius: 6px;
     cursor: pointer;
-    color: #666;
+    color: #FFFFFF;
     font-size: 14px;
   }
   
   .submitBtn {
-    background-color: #009fe3;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 10px 18px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    margin-right: 64px;
   }
   
   .footerNote {
@@ -97,14 +98,20 @@
     padding: 16px;
     border-radius: 6px;
     font-size: 13px;
-    color: #333;
+    color: #000000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
   }
-  
-  .cards img {
-    height: 24px;
-    margin-left: 8px;
+    
+  .footerNote p {
+    
+    max-width: 370px;
+  }
+  .cards  {
+    gap: 8px;
+    display: flex;
+
   }
   

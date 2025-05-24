@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./AddCardModal.module.css";
+import VisaImg from "../../../assets/Images/Setting/VisaImg.svg"
+import MasterImg from "../../../assets/Images/Setting/masterCard.svg"
+import Amex from "../../../assets/Images/Setting/AmericanImg.svg"
 
 const AddCardModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -84,9 +87,9 @@ const AddCardModal = ({ onClose }) => {
             Your card will be securely stored for future purchases. You can update it in settings at any time.
           </p>
           <div className={styles.cards}>
-            <img src="/visa.png" alt="Visa" />
-            <img src="/mastercard.png" alt="Mastercard" />
-            <img src="/amex.png" alt="Amex" />
+            <img src={VisaImg} alt="Visa" />
+            <img src={MasterImg} alt="Mastercard" />
+            <img src={Amex} alt="Amex" />
           </div>
         </div>
       </div>

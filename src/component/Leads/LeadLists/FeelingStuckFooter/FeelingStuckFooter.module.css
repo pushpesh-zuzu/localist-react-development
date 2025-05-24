@@ -5,7 +5,7 @@
   background-color: #f7f7f7;
 }
 
-.card {
+/* .card {
   flex: 1;
   background: linear-gradient(180deg, #e3f6fc 0%, #24cdff 100%);
   padding: 32.39px 0 0 43.98px;
@@ -19,7 +19,8 @@
   padding: 32.39px 43.98px;
   display: flex;
   justify-content: space-between;
-}
+} */
+
 
 .leftText {
   background-image: url("../../../../assets/Images/Leads/FeelingStuckFooterImage.svg");
@@ -138,3 +139,37 @@
     top: 6px;
   }
 }
+@media screen and (max-width: 480px) {
+  .card,
+  .cardRight {
+    flex-direction: column;
+    padding: 0px;
+  }
+  .card img{
+    width: 400px;
+    height: 175px;
+   }
+  .cardRight img{
+    width: 400px;
+    height: 175px;
+  }
+}
+
+
+@media screen and (max-width: 380px) {
+  .card,
+  .cardRight {
+    flex-direction: column;
+    padding: 0px;
+  }
+  .card img{
+    width: 275px;
+    height: 125px;
+   }
+  .cardRight img{
+    width: 275px;
+    height: 125px;
+  }
+}
+
+
