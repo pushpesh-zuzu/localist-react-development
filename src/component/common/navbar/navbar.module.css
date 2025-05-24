@@ -228,7 +228,7 @@
 
 @media screen and (max-width: 1250px) {
   .navbarItems {
-    padding: 18px 40px 24px 40px;
+    padding: 18px 40px 24px 88px;
   }
 
   .serviceContainer h2 {
@@ -277,7 +277,7 @@
 }
 @media screen and (min-width: 1050px) and (max-width: 1400px) {
   .navbarItems {
-    padding: 18px 10px 24px 10px;
+    padding: 18px 10px 24px 88px;
   }
   .navItem {
     padding: 10px 4px;

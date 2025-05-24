@@ -116,6 +116,8 @@ margin-right: 4px;
   border-radius: 20px;
   border: none;
   cursor: pointer;
+  display: flex;
+    align-items: center
 }
 
 .badges {

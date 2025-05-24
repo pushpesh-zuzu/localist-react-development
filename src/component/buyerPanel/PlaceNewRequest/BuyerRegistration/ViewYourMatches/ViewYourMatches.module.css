@@ -13,10 +13,10 @@
 
 .closeButton {
   position: absolute;
-  color: #828282;
-  top: 16px;
+  color: #000000;
+  top: 7x;
   right: 20px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -228,6 +228,20 @@
   .nextButton {
     font-size: 12px;
     padding: 8px;
+  }
+  .checkboxContainer{
+    display: flex;
+  align-items: center;
+  gap: 3px;
+  }
+  .closeButton {
+    position: absolute;
+    color: #000000;
+    top: 7x;
+    right: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
   }
   
 }

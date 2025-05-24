@@ -3,8 +3,17 @@ import styles from "./Reviews.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewListApi } from "../../../store/MyProfile/myProfileSlice";
 import moment from "moment";
+import SubmitReviewModal from "../SubmitReviewModal";
+import { useParams } from "react-router-dom";
 
 const ReviewSection = () => {
+  const [isopen, setIsOpen] = React.useState(false);
+  const closeModal = () => setIsOpen(false);
+  const profileId = useParams()
+  console.log(profileId,"pro")
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
     const totalReviews = 5;
     const ratingCounts = {
       5: 5,
@@ -23,28 +32,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
     useEffect(()=> {
         dispatch(getReviewListApi())
     },[])
-//   const dummyData = [
-//     {
-//       user: "Chander",
-//       date: "5 May 2025",
-//       sourceIcon: "https://cdn-icons-png.flaticon.com/512/733/733547.png",
-//       rating: 5,
-//       title: "Web designing",
-//       content:
-//         "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC...",
-//       avatar: "https://randomuser.me/api/portraits/women/44.jpg",
-//     },
-//     {
-//       user: "Chander",
-//       date: "5 May 2025",
-//       sourceIcon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-//       rating: 5,
-//       title: "Web designing",
-//       content:
-//         "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC...",
-//       avatar: "https://randomuser.me/api/portraits/women/45.jpg",
-//     },
-//   ];
+
 
   return (
     <>
@@ -52,7 +40,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         <div className={styles.reviewHeader}>
             <h2>Reviews (5)</h2>
             <div>
-                <button className={styles.leaveBtn}>Leave a review</button>
+                <button className={styles.leaveBtn} onClick={handleOpen}>Leave a review</button>
             </div>
         </div>
         <div className={styles.container}>
@@ -124,6 +112,8 @@ const { reviewListData } = useSelector((state) => state.myProfile);
      <button className={`${styles["page-btn"]} ${styles.active}`}>2</button>
      <button className={styles["page-btn"]}>&gt;</button>
    </div>
+
+   {isopen && <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} />}
    </>
   );
 };

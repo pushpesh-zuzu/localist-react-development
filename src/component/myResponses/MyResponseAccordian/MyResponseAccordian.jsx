@@ -239,7 +239,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             <div>
               <span className={styles.currentStatusText}>Current Status</span>
               <select
-                className={styles.selectBox}
+                className={`${styles.selectBox} ${styles.customSelect}`}
+
                 value={profileLeadViewData?.leads?.status || status}
                 onChange={handleStatusChange}
                 disabled={profileLeadViewData?.leads?.status === "hired"}

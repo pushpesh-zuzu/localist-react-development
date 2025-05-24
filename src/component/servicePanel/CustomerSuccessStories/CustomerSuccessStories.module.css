@@ -123,3 +123,14 @@
     margin-right: 0 !important;
   }
 }
+@media screen and (max-width: 360px) {
+  .description::after {
+    content: "";
+    display: block;
+    width: 235px;
+    height: 1.15px;
+    background-color: var(--primary-color);
+    margin-top: 11.6px;
+  }
+  
+}

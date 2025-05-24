@@ -37,7 +37,7 @@ const LogoComponent = () => {
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-
+console.log(userToken,registerData,"prem")
   const handleToggle = () => {
     if (visibleCount >= totalItems) {
       // Decrease by 1 until min 1
@@ -337,9 +337,25 @@ const LogoComponent = () => {
         className={styles.mainLogo}
         onClick={handleRedirectUrl}
       />
-      {location.pathname !== "/buyers/create" &&
+      {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
         !isAccountPage &&
         !isNotification && (
+          <Popover
+            placement={placement}
+            content={content}
+            arrow={false}
+            trigger="hover"
+            className="popover_wrap"
+          >
+            <div className={styles.serviceContainer}>
+              <h2 className={styles.serviceText}>Explore Our Services</h2>
+              <h2 className={styles.serviceTextMobile}>Our Services</h2>
+              <img src={downArrow} alt="down-arrow" />
+            </div>
+          </Popover>
+        )} */}
+         { !userToken?.remember_tokens &&  !registerData?.remember_tokens &&
+        (
           <Popover
             placement={placement}
             content={content}

@@ -321,7 +321,7 @@
   }
 
   .infoText {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .container {
@@ -354,5 +354,13 @@
     flex-direction: column;
     gap: 10px;
     text-align: center;
+  }
+  .switchLabel {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .switchWrapper {
+   margin-left: 4px;
+   
   }
 }

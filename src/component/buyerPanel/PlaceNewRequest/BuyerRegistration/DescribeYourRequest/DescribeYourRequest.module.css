@@ -14,10 +14,10 @@
 
 .closeButton {
   position: absolute;
-  color: #828282;
-  top: 16px;
+  color: #000000;
+  top: 7px;
   right: 20px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -278,6 +278,15 @@
 }
 
 @media (max-width: 480px) {
+  .closeButton {
+    position: absolute;
+    color: #000000;
+    top: 0px;
+    right: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
   .container {
     padding: 16px;
   }
@@ -306,7 +315,7 @@
   }
 
   .checkboxContainer {
-    font-size: 12px;
+    font-size: 10px;
     padding: 12px;
   }
 
@@ -316,6 +325,19 @@
   }
 }
 @media screen and (max-width:400px) {
+  .closeButton {
+    position: absolute;
+    color: #000000;
+    top: 0px;
+    right: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .checkboxContainer {
+    font-size: 10px;
+    padding: 12px;
+  }
   .checkboxContainer input {
     height: 18px;
     width: 18px;
@@ -344,6 +366,20 @@
   
 }
 @media screen and (max-width:350px) {
+  .closeButton {
+    position: absolute;
+    color: #000000;
+    top: 0px;
+    right: 9px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .checkboxContainer {
+    font-size: 10px;
+    padding: 12px;
+  }
+
   .checkboxContainer input {
     height: 20px;
     width: 18px;

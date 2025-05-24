@@ -149,6 +149,24 @@
     flex-direction: column;
     gap: 20px;
   }
+  .rightSection h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 13.11px;
+  }
+  .searchInput {
+    width: 513px;
+    height: 50px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding-left: 18px;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    margin-top: 15px;
+  }
 }
 
 @media (max-width: 980px) {
@@ -157,7 +175,25 @@
   }
 
   .searchInputContainer button {
-    width: 157px;
+    width: 147px;
+  }
+  .rightSection h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 13.11px;
+  }
+  .searchInput {
+    width: 513px;
+    height: 50px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding-left: 18px;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    margin-top: 15px;
   }
 }
 
@@ -175,6 +211,11 @@
   .container {
     padding: 26px;
   }
+  .rightSection h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 13.11px;
+  }
 
   .leftSection h1 {
     font-weight: 700;
@@ -186,6 +227,19 @@
     font-size: 18px;
     letter-spacing: 0%;
     color: #848484;
+  }
+  .searchInput {
+    width: 513px;
+    height: 50px;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 100%;
+    letter-spacing: 0;
+    padding-left: 18px;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    margin-top: 15px;
   }
 }
 
@@ -199,14 +253,15 @@
   .rightSection h2 {
     color: var(--primary-color);
     font-size: 24px;
-    margin-bottom: 29.11px;
+    margin-bottom: 13.11px;
   }
 
   .searchInput {
     height: 40px;
-
+    margin-top: 15px;
     padding-left: 10px;
   }
+  
 }
 @media screen and (max-width: 350px) {
   .searchInputContainer button {
@@ -218,12 +273,13 @@
   .rightSection h2 {
     color: var(--primary-color);
     font-size: 24px;
-    margin-bottom: 29.11px;
+    margin-bottom: 13.11px;
   }
 
   .searchInput {
     height: 40px;
-
+    margin-top: 15px;
     padding-left: 6px;
   }
+  
 }

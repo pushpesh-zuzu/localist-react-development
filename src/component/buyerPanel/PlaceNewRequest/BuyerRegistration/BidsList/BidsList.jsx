@@ -725,7 +725,8 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
-    navigate("/view-profile")
+    
+    navigate(`/view-profile/${seller?.uuid}`)
     const data = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
@@ -864,33 +865,33 @@ const BidsList = ({ previousStep }) => {
               </div>
             </div>
 
-              <div className={styles.filters}>
-                <select  className={styles.customSelect}>
-                  <option>All ratings</option>
-                  <option></option>
-                </select>
-                <select onChange={handelChangeSort} defaultValue={""} value={locationSort} className={styles.customSelect}>
-                  <option value="" disabled>Sort by Location</option>
+            <div className={styles.filters}>
+              <select className={styles.customSelect}>
+                <option>All ratings</option>
+                <option></option>
+              </select>
+              <select onChange={handelChangeSort} defaultValue={""} value={locationSort} className={styles.customSelect}>
+                <option value="" disabled>Sort by Location</option>
 
-                  <option value="farthest to nearest">Farthest to Nearest</option>
-                  <option value="nearest to farthest">Nearest to Farthest </option>
+                <option value="farthest to nearest">Farthest to Nearest</option>
+                <option value="nearest to farthest">Nearest to Farthest </option>
 
-                </select>
-                <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort}  className={styles.customSelect}>
-                  {/* <option>All response times</option> */}
-                  <option value="" disabled>All response times</option>
-                  <option value="Responds within 10 mins">Responds within 10 mins</option>
-                  <option value="Responds within 1 hour">Responds within 1 hour</option>
-                  <option value="Responds within 6 hours">Responds within 6 hours</option>
-                  <option value="Responds within 24 hours">Responds within 24 hours</option>
-                </select>
-                <span className={styles.matchCount}>
-                  {matchingLength} matches
-                </span>
-                <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
-                  <option>Sort by: best match</option>
-                </select>
-              </div>
+              </select>
+              <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort} className={styles.customSelect}>
+                {/* <option>All response times</option> */}
+                <option value="" disabled>All response times</option>
+                <option value="Responds within 10 mins">Responds within 10 mins</option>
+                <option value="Responds within 1 hour">Responds within 1 hour</option>
+                <option value="Responds within 6 hours">Responds within 6 hours</option>
+                <option value="Responds within 24 hours">Responds within 24 hours</option>
+              </select>
+              <span className={styles.matchCount}>
+                {matchingLength} matches
+              </span>
+              <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
+                <option>Sort by: best match</option>
+              </select>
+            </div>
             <div className={styles.recommendBar}>
               <div className={styles.recommendBox}>
                 <div>
@@ -911,7 +912,7 @@ const BidsList = ({ previousStep }) => {
                 Request your best matches here
               </button>
             </div>
-          {/* {bidListLoader ? <Spin size="small"/> :  <> */}
+            {/* {bidListLoader ? <Spin size="small"/> :  <> */}
             {autoBidList?.every(item => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
                 <h1 className={styles.noBidText}>No seller available</h1>
@@ -953,31 +954,31 @@ const BidsList = ({ previousStep }) => {
                               <span className={styles.ratingCount}>{seller?.avg_rating}</span>
                             </div>
                           </div> */}
-<div className={styles.sidebar}>
-  <div className={styles.rating}>
-    
-    {(() => {
-      const rating = seller?.avg_rating || 0;
+                          <div className={styles.sidebar}>
+                            <div className={styles.rating}>
 
-      return (
-        <>
-          <span className={styles.stars}>
-            {[...Array(5)].map((_, index) => {
-              if (rating >= index + 1) {
-                return <span key={index}>★</span>; // Full star
-              } else if (rating >= index + 0.5) {
-                return <span key={index}>★</span>; // Half star (or use icon)
-              } else {
-                return <span key={index}>☆</span>; // Empty star
-              }
-            })}
-          </span>
-          <span className={styles.ratingCount}>{rating}</span>
-        </>
-      );
-    })()}
-  </div>
-</div>
+                              {(() => {
+                                const rating = seller?.avg_rating || 0;
+
+                                return (
+                                  <>
+                                    <span className={styles.stars}>
+                                      {[...Array(5)].map((_, index) => {
+                                        if (rating >= index + 1) {
+                                          return <span key={index}>★</span>; // Full star
+                                        } else if (rating >= index + 0.5) {
+                                          return <span key={index}>★</span>; // Half star (or use icon)
+                                        } else {
+                                          return <span key={index}>☆</span>; // Empty star
+                                        }
+                                      })}
+                                    </span>
+                                    <span className={styles.ratingCount}>{rating}</span>
+                                  </>
+                                );
+                              })()}
+                            </div>
+                          </div>
 
 
                         </div>
@@ -1003,7 +1004,7 @@ const BidsList = ({ previousStep }) => {
                             View Profile →
                           </Link>
 
-                        {seller?.quicktorespond == 1 &&  <div className={styles.quickToRespond}>
+                          {seller?.quicktorespond == 1 && <div className={styles.quickToRespond}>
                             <img src={QuickToRespond} alt="" />
                             Quick to respond
                           </div>}
@@ -1057,7 +1058,7 @@ const BidsList = ({ previousStep }) => {
                 ))
               )
             )}
-          
+
 
 
             <CustomModal

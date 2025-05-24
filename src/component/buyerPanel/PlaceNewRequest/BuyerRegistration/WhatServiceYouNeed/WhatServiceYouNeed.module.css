@@ -95,11 +95,11 @@
 
 .closeButton {
   position: absolute;
-  color: #828282;
-  top: 16px;
+  color: #000000;
+  top: 7px;
   right: 20px;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
 }
 
