@@ -7,6 +7,7 @@ import CreditCard from "./CreditCard";
 import getHired from "../../../assets/Images/Setting/Gethired.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
+import { useNavigate } from "react-router-dom";
 
 const creditOptions = [
   {
@@ -41,6 +42,7 @@ const creditOptions = [
 const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const handleOpen = () => {  
     setIsOpen(true);
   };
@@ -50,10 +52,13 @@ const MyCredits = () => {
 
 
   };
+  const handleBack = () => {
+    navigate("/settings");
+  }
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.backText}>← Setting</div>
+        <div className={styles.backText} onClick={handleBack}>← Setting</div>
         <h1 className={styles.heading}>My credits</h1>
 
         <div className={styles.manageWrapper}>

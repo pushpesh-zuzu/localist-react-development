@@ -58,6 +58,7 @@ import React, { useState } from "react";
 import styles from "./InvoiceAndBilling.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import InvoiceTable from "./InvoiceTable";
+import { useNavigate } from "react-router-dom";
 
 const InvoiceAndBilling = () => {
   const [formData, setFormData] = useState({
@@ -67,7 +68,7 @@ const InvoiceAndBilling = () => {
     postcode: "",
     phoneNumber: "",
   });
-
+const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -75,11 +76,13 @@ const InvoiceAndBilling = () => {
       [name]: value,
     }));
   };
-
+  const handleBack =()=>{
+    navigate("/settings");
+}
   return (
     <>
     <div className={styles.container}>
-      <div className={styles.backText}>← Setting</div>
+      <div className={styles.backText} onClick={handleBack}>← Setting</div>
       <h1 className={styles.heading}>Invoices and billing details</h1>
 
       <div className={styles.manageWrapper}>

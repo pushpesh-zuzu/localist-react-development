@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./InvoiceAndBilling.module.css";
 import GreenTick from "../../../assets/Images/Setting/RightClick.svg"
-import downloadIcon from "../../../assets/Images/Setting/downloadIcon.svg"
+import downloadIcon from "../../../assets/Images/Setting/DownloadIcon.svg"
 
 const InvoiceTable = () => {
     return (
