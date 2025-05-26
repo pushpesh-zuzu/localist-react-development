@@ -726,7 +726,7 @@ const BidsList = ({ previousStep }) => {
 
   const hanleViewProfile = (seller) => {
     
-    navigate(`/view-profile/${seller?.uuid}`)
+    navigate(`/view-profile`)
     const data = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens

@@ -59,14 +59,24 @@ import styles from "./InvoiceAndBilling.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import InvoiceTable from "./InvoiceTable";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AddSellerBillingDetailsApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import { showToast } from "../../../utils";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const InvoiceAndBilling = () => {
+    const dispatch = useDispatch();
+    const { registerData } = useSelector((state) => state.findJobs);
+  const { userToken } = useSelector((state) => state.auth)
+  const { sellerBillingLoader } = useSelector((state) => state.myCredit);
   const [formData, setFormData] = useState({
-    contactName: "chander",
+    contactName: "",
     addressLine2: "",
     city: "",
     postcode: "",
     phoneNumber: "",
+    vatRegister: 1
   });
 const navigate = useNavigate();
   const handleChange = (e) => {
@@ -79,6 +89,34 @@ const navigate = useNavigate();
   const handleBack =()=>{
     navigate("/settings");
 }
+const handleSaveData = () => {
+    const data = {
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        billing_contact_name: formData.contactName,
+        billing_address1: formData.addressLine2,
+        billing_address2: formData.city,
+        billing_city: formData.city,
+        billing_postcode: formData.postcode,
+        billing_phone: formData.phoneNumber,
+        billing_vat_register: formData.vatRegister || "",
+    }
+    dispatch(AddSellerBillingDetailsApi(data))
+    .then((result) => {  
+        if(result) {
+            showToast("success", result?.message);
+            setFormData({
+                contactName: "",
+                addressLine2: "",
+                city: "",
+                postcode: "",
+                phoneNumber: "",
+                vatRegister:""
+            });     
+        } 
+       
+    })
+}
+
   return (
     <>
     <div className={styles.container}>
@@ -144,6 +182,13 @@ const navigate = useNavigate();
           value={formData.phoneNumber}
           onChange={handleChange}
         />
+        <div className={styles.saveButtonBox}>
+           
+              <button className={styles.saveButton} onClick={() => handleSaveData()}>
+              {sellerBillingLoader ?  <Spin
+                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                       /> : "Save"} </button>
+        </div>
       </div>
     <InvoiceTable/>
     </div>

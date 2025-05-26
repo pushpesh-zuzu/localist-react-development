@@ -1,13 +1,19 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MyCredit.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import ActiveFreeTrial from "./ActiveFreeTrial";
 import CreditCard from "./CreditCard";
-import getHired from "../../../assets/Images/Setting/Gethired.svg";
+import getHired from "../../../assets/Images/Setting/HiredNewImg.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
 import { useNavigate } from "react-router-dom";
+import { getCreditPlanList } from "../../../store/LeadSetting/leadSettingSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addBuyCreditApi, AddCoupanApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import { showToast } from "../../../utils";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const creditOptions = [
   {
@@ -42,8 +48,14 @@ const creditOptions = [
 const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleOpen = () => {  
+  const { creditPlanList } = useSelector((state) => state.leadSetting);
+const { registerData } = useSelector((state) => state.findJobs);
+  const { userToken } = useSelector((state) => state.auth)
+  const { buyCreditLoader,addCouanLoader } = useSelector((state) => state.myCredit);
+   const handleOpen = () => {  
     setIsOpen(true);
   };
   const handleToggle = () => {
@@ -52,9 +64,48 @@ const MyCredits = () => {
 
 
   };
+  const handleRedeem = (e) => {
+    setCouponCode(e.target.value)
+  }
   const handleBack = () => {
     navigate("/settings");
   }
+useEffect(()=>{
+dispatch(getCreditPlanList())
+},[])
+const handleBuyNow = (item) => {
+  
+  const creditData = {
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      
+    plan_id: item?.id,   
+  }
+  dispatch(addBuyCreditApi(creditData)).then((result) => {
+    if(result){
+      showToast("success",result?.message)
+      
+    }
+  })
+}
+
+const handleApply = () => {
+  if (!couponCode.trim()) {
+    showToast("error", "Please enter a valid coupon code.");
+    return;
+  }
+
+  const payload = {
+    coupon_code: couponCode.trim(),
+  };
+
+  dispatch(AddCoupanApi(payload)).then((result) => {
+    if (result) {
+      showToast("success", result?.message);
+      setCouponCode(""); 
+    }
+  });
+};
+  
   return (
     <>
       <div className={styles.container}>
@@ -81,43 +132,49 @@ const MyCredits = () => {
         </p>
 
         <div className={styles.cardList}>
-          {creditOptions.map((item, index) => (
+          {creditPlanList?.map((item, index) => (
             <div className={styles.card} key={index}>
-              <button className={styles.badge}>{item.title}</button>
+              {/* <button className={styles.badge}>{item.title}</button> */}
               <div className={styles.titleBar}>
 
-                <button className={styles.response}>About 5-10 responses</button>
-                <div className={styles.creditsBox}>{item.credits} credits</div>
+                <button className={styles.response}>{item?.slug}</button>
+                <div className={styles.creditsBox}>{item?.no_of_leads} credits</div>
 
                 <div className={styles.priceInfo}>
-                  <strong>{item.price} (Excl. tax)</strong>
+                  <strong>{item?.price} (Excl. tax)</strong>
                   <div className={styles.perCredit}>
-                    £{item.discount}/credit
+                    £{item?.per_credit}/credit
                   </div>
                 </div>
 
                 <div className={styles.buttonWrap}>
-                  <button className={styles.buyButton} onClick={handleOpen}>Buy Now</button>
+                  <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
+                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                       />  : "Buy Now"}</button>
                   <div className={styles.checkboxWrap}>
                     <input
                       type="checkbox"
-                      checked={item.autoTopUp}
+                      checked={item.status}
                       readOnly
                     />
                     <label>Auto top-up next time</label>
                   </div>
                 </div>
               </div>
-              {item.autoTopUp !== true && <div className={styles.getHired}>
-                <img src={item.image} alt="getHired" className={styles.getHiredImage} />
-                <div className={styles.gethiredText}>{item.text}</div>
+              {item.status &&  <div className={styles.getHired}>
+                <img src={getHired} alt="getHired" className={styles.getHiredImage} />
+                {
+                  item?.description &&
+                
+                <div className={styles.gethiredText}>{item?.description}</div>
+}
               </div>}
 
             </div>
           ))}
         </div>
 
-        <div className={styles.bottomText}>
+        <div className={styles.bottomText} onClick={handleOpen}>
           <span>Buy higher plan and get more credits</span>
         </div>
 
@@ -127,8 +184,10 @@ const MyCredits = () => {
         </div>
         <div className={styles.redeemText}>
           <label>Redeem coupon</label>
-          <input type="text" placeholder="Redeem a code" />
-          <button className={styles.redeemButton}>Apply</button>
+          <input type="text" placeholder="Redeem a code" onChange={handleRedeem}/>
+          <button className={styles.redeemButton} onClick={handleApply}>{addCouanLoader ? <Spin
+                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                       /> : "Apply"}</button>
         </div>
         <div className={styles.couponsText}>Coupons can't be combined. The higher discount applies.</div>
         <div className={styles.toggle}>
@@ -146,9 +205,9 @@ const MyCredits = () => {
           <TransgationLogTable/>
         
       </div>
-      {isOpen && (
+      {/* {isOpen && (
         <CreditModal onClose={()=>setIsOpen(false)}/>
-      )}
+      )} */}
     </>
   );
 };

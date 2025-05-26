@@ -27,7 +27,7 @@ const LogSwitch = () => {
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-
+const profileId = useParams()
   useEffect(() => {
     setDataSave(userToken?.active_status)
   }, [userToken])
@@ -149,6 +149,9 @@ const LogSwitch = () => {
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
+  const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
+  console.log(viewProfile,getUserType(), profileId?.profileId, "profileId")
+  // path: "admin/review/:profileId",
 
   const userName = userToken?.name || registerData?.name || "";
 
@@ -167,7 +170,7 @@ const LogSwitch = () => {
         </div> : <div style={{ marginTop: "4px" }}><img src={searchIcon} alt="" width={18} height={18} /></div>
       }
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
-        {getUserType() == 1 && (
+        {getUserType() == 1  && (
           <>
             <div
               className={`${styles.navItem} ${location.pathname === "/settings" ? styles.active : ""}`}
@@ -210,7 +213,9 @@ const LogSwitch = () => {
 
         )}
 
-        {getUserType() == 2 && (
+        {
+        
+        getUserType() == 2  && (
           <>
             <div className={styles.requestBox}>
               <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>

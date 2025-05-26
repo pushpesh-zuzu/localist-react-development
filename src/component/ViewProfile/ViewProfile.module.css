@@ -308,15 +308,15 @@
     right: 15px;
     font-size: 12px;
     font-weight: bold;
-    color: #B7B7B7;
+    color: #000000;
     cursor: pointer;
     z-index: 10;
     transition: all 0.3s ease;
   }
   
-  .closeButton:hover {
+   /* .closeButton:hover { 
     color: #ff4d4f;
-  }
+  } */
   
   
   .formRow {

@@ -8,7 +8,7 @@
   .backText {
     color: var(--primary-color);
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
   
   .heading {
@@ -19,12 +19,17 @@
   .manageWrapper {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 28px;
+    margin-bottom: 15px;
   }
   
   .infoIcon {
     margin-right: 10px;
     
+  }
+  .infoIcon img {
+    width: 18px;
+    height: 18px;
+    margin-top: 5px;
   }
   
   .description {
@@ -45,7 +50,7 @@
     color: #000000;
     margin-bottom: 64px;
     font-weight: 400;
-    margin-left: 24px;
+    margin-left: 29px;
   }
   .note span {
     font-weight: 600;
@@ -153,6 +158,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
+    margin: 3px 3px 3px 0px;
   }
   .checkboxWrap label {
     font-size: 14px;
@@ -161,7 +167,7 @@
   }
   .getHired {
     display: flex;
-    gap: 8px;
+    gap: 0px;
     align-items: center;
     max-width: 670px;
   }
@@ -171,6 +177,7 @@
     font-weight: 400;
     color: #000000;
     padding: 10px 20px;
+    margin-top: -15px;
 
   }
   /* ========== Responsive Breakpoints ========== */
@@ -200,15 +207,18 @@
   
     .creditsBox {
       padding: 5px 10px;
+      text-align: center;
     }
   
     .buyButton {
-      font-size: 13px;
+      font-size: 15px;
       padding: 8px 16px;
+      font-weight: 600;
     }
   
     .priceInfo {
       font-size: 13px;
+      text-align: center;
     }
   
     .perCredit {
@@ -225,14 +235,21 @@
     .container{
       padding: 20px 16px;
     }
+    .cardList {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
     .titleBar,
     .buttonWrap {
       flex-direction: column;
       align-items: stretch;
+      margin-top: 16px;
     }
   
     .buyButton {
       width: 100%;
+
     }
   
     .checkboxWrap {
@@ -241,19 +258,24 @@
     }
     .getHired {
       display: flex;
-      gap: 8px;
+      gap: 0px;
       align-items: center;
-      flex-direction: column;
+      /* flex-direction: column; */
       max-width: 670px;
+    }
+    .getHired img {
+      width: 77px;
+      height: 80px;
     }
     .gethiredText {
       background-color: #E3F6FC;
-      font-size: 12px;
+      font-size: 8px;
       font-weight: 400;
       color: #000000;
-      padding: 10px 20px;
-  
+      padding: 5px 8px;
+  margin-top: -8px;
     }
+  
   }
   
   /* <----- end Card Css ---->  */
@@ -365,4 +387,17 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-  
+  @media screen and (max-width:425px) {
+    .bottomText {
+      margin-top: 17px;
+      margin-bottom: 17px;
+    }
+    .checkboxWrap {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    
+  }

@@ -12,7 +12,7 @@ const  CreditCard = () => {
                 
             <div>Buy more credits and get a bigger discount</div>
             </div>
-            <div className={styles.rightText}>Add  |  Change  |  Remove</div>
+            <div className={styles.rightText}> Add  |   Change  |   Remove</div>
         </div>
         </>
     )

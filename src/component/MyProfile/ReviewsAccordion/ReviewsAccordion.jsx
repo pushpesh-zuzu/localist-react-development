@@ -19,6 +19,7 @@ const ReviewsAccordion = () => {
    return (
     <>
    { <div className={styles.wrapper}>
+    <p className={styles.overAllText}>Overall rating</p>
       <div className={styles.alertBox} >
         <span>
           You don’t have a rating because you don’t have any customer reviews.

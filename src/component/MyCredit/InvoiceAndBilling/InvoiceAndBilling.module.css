@@ -6,7 +6,7 @@
   .backText {
     color: var(--primary-color);
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
   
   .heading {
@@ -92,7 +92,7 @@
   .row {
     display: flex;
    
-    margin-top: 14px;
+    margin-top: 0px;
   }
   
   .column {
@@ -129,10 +129,11 @@
   
   .tableSection {
     margin-top: 32px;
+    overflow-x: scroll;
   }
   
   .invoiceTable {
-    width: 100%;
+    width: 95%;
     border-collapse: collapse;
   }
   
@@ -159,8 +160,21 @@
   }
   
   .downloadIcon {
-    width: 18px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
+  }
+  .saveButtonBox {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+    margin-right: 70px;
+  }
+  .saveButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 12px;
   }
   
   
@@ -246,6 +260,9 @@
     .button {
       font-size: 15px;
       padding: 9px;
+    }
+    .infoIcon{
+        margin-top: 1px;
     }
   
     .infoIcon img {

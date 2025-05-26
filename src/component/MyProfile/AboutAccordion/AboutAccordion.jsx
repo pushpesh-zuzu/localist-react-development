@@ -105,6 +105,7 @@ const AboutAccordion = () => {
             </span>
           </label>
         </div>
+        <hr className={styles.hrline}/>
         <label className={styles.label}>
           Can’t give us a particular location?
         </label>

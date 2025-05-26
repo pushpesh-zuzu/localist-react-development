@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TransgationLogTable.module.css";
+import CreditModal from "./CreditModal";
 
 const transactions = [
   {
@@ -29,9 +30,13 @@ const transactions = [
 ];
 
 const TransgationLogTable = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleOpen = () => {
+    setIsOpen(true);
+    }
   return (
     <div className={styles.container}>
-      <h2 >Credit transaction log</h2>
+      <h2 onClick={handleOpen}>Credit transaction log</h2>
       <div className={styles.scrollTable}>
         <table className={styles.table}>
           <thead>
@@ -54,6 +59,9 @@ const TransgationLogTable = () => {
           </tbody>
         </table>
       </div>
+       {isOpen && (
+              <CreditModal onClose={()=>setIsOpen(false)}/>
+            )}
     </div>
   );
 };

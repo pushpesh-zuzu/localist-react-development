@@ -20,7 +20,7 @@ const ManualBidList = () => {
     );
   const navigate = useNavigate()
   const webData = autoBidListData?.map(item => item?.service_name) || [];
-
+console.log(autoBidListData,"autoBidListData")
   const handleBack = () => {
     navigate(`/bids-list/${requestId}`)
   }
@@ -114,8 +114,28 @@ const ManualBidList = () => {
                   </div>
                   <div className={styles.sidebar}>
                     <div className={styles.rating}>
-                      <span className={styles.stars}>★★★★★</span>
-                      <span className={styles.ratingCount}>125</span>
+                      {/* <span className={styles.stars}>★★★★★</span>
+                      <span className={styles.ratingCount}>125</span> */}
+                        {(() => {
+                                                      const rating = item?.avg_rating || 0;
+                      
+                                                      return (
+                                                        <>
+                                                          <span className={styles.stars}>
+                                                            {[...Array(5)].map((_, index) => {
+                                                              if (rating >= index + 1) {
+                                                                return <span key={index}>★</span>; // Full star
+                                                              } else if (rating >= index + 0.5) {
+                                                                return <span key={index}>★</span>; // Half star (or use icon)
+                                                              } else {
+                                                                return <span key={index}>☆</span>; // Empty star
+                                                              }
+                                                            })}
+                                                          </span>
+                                                          <span className={styles.ratingCount}>{rating}</span>
+                                                        </>
+                                                      );
+                                                    })()}
                     </div>
                   </div>
                 </div>

@@ -6,15 +6,17 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
+    padding: 16px;
   }
   
   .modalContent {
     background: white;
-    width: 820px;
+    width: 100%;
+    max-width: 820px;
     padding: 30px;
     border-radius: 8px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
   
   .closeButton {
@@ -28,10 +30,11 @@
   }
   
   .heading {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 1.375rem; /* 22px */
+    font-weight: bold;
     margin-bottom: 24px;
     text-align: center;
+    color: #000;
   }
   
   .form {
@@ -41,55 +44,57 @@
   }
   
   .label {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin-bottom: 4px;
-    display: block;
+    color: #000;
+    font-weight: 600;
   }
   
   .input {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
-    width: 90%;
+    font-size: 0.875rem;
+    width: 93%;
   }
   
   .row {
     display: flex;
     gap: 16px;
+    flex-wrap: wrap;
   }
   
   .inputGroup {
-    flex: 1;
-    max-width: 380px;
-    
+    /* flex: 1; */
+    min-width: 388px;
   }
   
   .actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 16px;
+    gap: 12px;
   }
   
-  .cancelBtn {
-    background: #C6C6C6;
+  .cancelBtn,
+  .submitBtn {
     border: none;
     padding: 10px 18px;
     border-radius: 6px;
+    font-size: 0.875rem;
     cursor: pointer;
-    color: #FFFFFF;
-    font-size: 14px;
+  }
+  
+  .cancelBtn {
+    background: #c6c6c6;
+    color: #fff;
   }
   
   .submitBtn {
     background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 64px;
+    color: #fff;
+    margin-right: 34px;
   }
   
   .footerNote {
@@ -97,21 +102,111 @@
     background: #e6f8fe;
     padding: 16px;
     border-radius: 6px;
-    font-size: 13px;
-    color: #000000;
+    font-size: 0.8125rem;
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
-  }
-    
-  .footerNote p {
-    
-    max-width: 370px;
-  }
-  .cards  {
-    gap: 8px;
-    display: flex;
 
+  }
+  
+  .footerNote p {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .footerNote span {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 0px;
+    margin: 0px;
+    margin-left: 16px;
+
+    margin-top: -15px;
+  }
+  
+  .cards {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  /* 🔁 Responsive Media Queries */
+  @media (max-width: 768px) {
+    .modalContent {
+      padding: 20px;
+    }
+  
+    .row {
+      flex-direction: column;
+    }
+    .input {
+        font-size: 0.8125rem;
+        width: 96.5%;
+      }
+  
+    .submitBtn {
+      margin-right: 0;
+    }
+  
+    .actions {
+      /* flex-direction: column; */
+      align-items: flex-start;
+    }
+  
+    .footerNote {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .cards {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+    .heading {
+      font-size: 1.125rem; /* 18px */
+    }
+  
+    .input {
+      font-size: 0.8125rem;
+      width: 90%;
+    }
+  
+    .cancelBtn,
+    .submitBtn {
+      width: 100%;
+      text-align: center;
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+      }
+      
+      .label {
+        font-size: 0.875rem;
+        margin-bottom: 9px;
+        color: #000;
+        font-weight: 600;
+        margin-top: 16px;
+      }
+      .row {
+        gap: 0px;
+      }
+      .footerNote span {
+        font-size: 10px;
+        font-weight: 500;
+        padding: 0px;
+        margin: 0px;
+        
+      }
+      .inputGroup {
+        /* flex: 1; */
+        min-width: 288px;
+      }
+      
   }
   

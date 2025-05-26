@@ -6,6 +6,7 @@ import { questionAnswerData, setcitySerach } from "../../../store/Buyer/BuyerSli
 import { Spin } from "antd";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { LoadingOutlined } from "@ant-design/icons";
+import { showToast } from "../../../utils";
 
 const HowLoaclistsWorks = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const HowLoaclistsWorks = () => {
     (state) => state.findJobs
   );
 
-  const showToast = (type, content) => message[type](content);
+  // const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
     setShowModal(false);

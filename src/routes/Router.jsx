@@ -39,6 +39,8 @@ import ViewProfiles from "../component/ViewProfile";
 import MyCredits from "../component/MyCredit/MyCredit/MyCredit";
 import InvoiceAndBilling from "../component/MyCredit/InvoiceAndBilling/InvoiceAndBilling";
 import MyPaymentDetails from "../component/MyCredit/MyPaymentDetails/MyPaymentDetails";
+import EmailNotification from "../component/SellerNotification/EmailNotification/EmailNotification";
+import BrowserNotification from "../component/SellerNotification/BrowserNotification/BrowserNotification";
 
 const router = createBrowserRouter([
   {
@@ -246,7 +248,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/view-profile/:profileId",
+        path: "/view-profile",
         element: (
           <ProtectedRoute>
           <ViewProfiles/>
@@ -254,10 +256,26 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "admin/review/:profileId",
+        path: "/review/:profileId",
         element: (
           <ProtectedRoute>
           <ViewProfiles/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/e-mail-notification",
+        element: (
+          <ProtectedRoute>
+         <EmailNotification/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/browser-notification",
+        element: (
+          <ProtectedRoute>
+          <BrowserNotification/>
           </ProtectedRoute>
         ),
       },

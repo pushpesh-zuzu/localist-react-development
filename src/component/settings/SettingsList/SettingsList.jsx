@@ -35,6 +35,12 @@ const SettingsList = () => {
   const handlePayment = () => {
     navigate("/payment-details")
   }
+  const handleMail =()=>{
+    navigate("/e-mail-notification")
+  }
+  const handleBrowser = () => {
+    navigate("/browser-notification")
+  }
   return (
     <>
       <div className="container">
@@ -149,11 +155,15 @@ const SettingsList = () => {
             <h2>Notifications</h2>
           </div>
           <div className={styles.sectionContent}>
-            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}>
+            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
+            onClick={handleMail}
+            >
               <h3>Email</h3>
             </div>
             <p>Set what type of emails you'd like to receive from us</p>
-            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}>
+            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
+             onClick={handleBrowser}
+            >
               <h3>Browser</h3>
             </div>
             <p>

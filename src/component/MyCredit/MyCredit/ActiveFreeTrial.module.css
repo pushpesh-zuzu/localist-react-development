@@ -16,7 +16,7 @@
   }
   
   .leftSection h3 {
-    font-size: 28px;
+    font-size: 26px;
     margin: 0;
   }
   
@@ -48,6 +48,7 @@
     color: #000000;
     font-weight: 400;
     line-height: 1.5;
+    margin-left: 8px;
   }
   
   /* ======== Right Section ======== */

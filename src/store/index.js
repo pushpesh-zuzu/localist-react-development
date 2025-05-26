@@ -5,6 +5,7 @@ import buyerSlice from "./Buyer/BuyerSlice";
 import leadSettingSlice from "./LeadSetting/leadSettingSlice";
 import suggestQuestionsSlice from "./LeadSetting/SuggestQuestionSlice";
 import myprofileSlice from "./MyProfile/myProfileSlice"
+import myCreditSlice from "./MyProfile/MyCredit/MyCreditSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     buyer: buyerSlice,
     leadSetting: leadSettingSlice,
     suggestQuestion: suggestQuestionsSlice,
-    myProfile: myprofileSlice
+    myProfile: myprofileSlice,
+      myCredit: myCreditSlice, // Assuming MyCredit is part of myProfile
   },
 });
 
