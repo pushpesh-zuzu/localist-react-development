@@ -11,6 +11,7 @@ const MyPaymentDetails = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { getSellerCardData } = useSelector((state) => state.myCredit)
+    
 
     useEffect(() => {
         // if (getSellerCardData?.length) {

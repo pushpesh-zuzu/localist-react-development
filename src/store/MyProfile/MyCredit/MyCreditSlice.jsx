@@ -62,9 +62,10 @@ import { showToast } from "../../../utils";
               `users/get-seller-card`,
               
             );
+            console.log("response", response);
       
             if (response) {
-              dispatch(setGetSellerCardData(response?.data?.data));
+              dispatch(setGetSellerCardData(response?.data?.data ??[]));
             }
           } catch (error) {
         //    showToast("error", error?.response?.data?.message || "Something went wrong");
