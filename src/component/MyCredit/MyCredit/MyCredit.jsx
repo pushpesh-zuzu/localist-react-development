@@ -8,12 +8,13 @@ import getHired from "../../../assets/Images/Setting/HiredNewImg.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
 import { useNavigate } from "react-router-dom";
-import { getCreditPlanList } from "../../../store/LeadSetting/leadSettingSlice";
+import { getCreditPlanList, getswitchAutobidApi, switchAutobidApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addBuyCreditApi, AddCoupanApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
 
 const creditOptions = [
   {
@@ -56,15 +57,38 @@ const MyCredits = () => {
 const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
   const { buyCreditLoader,addCouanLoader } = useSelector((state) => state.myCredit);
+  const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
+  
    const handleOpen = () => {  
     setIsOpen(true);
   };
+   const userId =
+      userToken?.remember_tokens ?? registerData?.remember_tokens;
+  
+    // API se data aane ke baad automation state update karo
+    useEffect(() => {
+      if (getSwitcgAutoBidData?.isautobid !== undefined) {
+        setAutomation(getSwitcgAutoBidData.isautobid === 1);
+      }
+    }, [getSwitcgAutoBidData]);
+  
+    // Initial API call
+    useEffect(() => {
+      if (userId) {
+        dispatch(getswitchAutobidApi({ user_id: userId }));
+      }
+    }, [userId, dispatch]);
   const handleToggle = () => {
-    const newValue = !automation;
-    setAutomation(newValue);
-
-
-  };
+     const newValue = !automation;
+     setAutomation(newValue);
+ 
+     dispatch(
+       switchAutobidApi({
+         is_autobid: Number(newValue),
+         user_id: userId,
+       })
+     );
+   };
   const handleRedeem = (e) => {
     setCouponCode(e.target.value)
   }
@@ -135,7 +159,7 @@ const handleApply = () => {
         <div className={styles.cardList}>
           {creditPlanList?.map((item, index) => (
             <div className={styles.card} key={index}>
-              {/* <button className={styles.badge}>{item.title}</button> */}
+             {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
               <div className={styles.titleBar}>
 
                 <button className={styles.response}>{item?.slug}</button>
@@ -174,12 +198,12 @@ const handleApply = () => {
                   </div>
                 </div>
               </div>
-              {item.status &&  <div className={styles.getHired}>
+              {item?.plan_type !== "normal"  &&  <div className={styles.getHired}>
                 <img src={getHired} alt="getHired" className={styles.getHiredImage} />
                 {
-                  item?.description &&
                 
-                <div className={styles.gethiredText}>{item?.description}</div>
+                
+                <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on Bark using these credits.</div>
 }
               </div>}
 

@@ -90,6 +90,10 @@
     font-weight: bold;
     border: none;
     font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     
   }
   
