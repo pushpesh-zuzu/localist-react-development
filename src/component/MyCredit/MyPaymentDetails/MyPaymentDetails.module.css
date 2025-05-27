@@ -43,6 +43,57 @@
   .btnBox {
     margin-left: 29px;
   }
+  .cardWrapper {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 24px;
+  }
+  
+  .card {
+    width: 320px;
+    height: 190px;
+    background: linear-gradient(to bottom right, #0d74ff, #0a5bd3);
+    border-radius: 16px;
+    color: white;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cardTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  
+  .cardBrand {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .cardChange {
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .cardNumber {
+    margin-top: 40px;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  
+  .lastDigits {
+    font-weight: bold;
+  }
+  
+  .cardExpiry {
+    margin-top: 30px;
+    font-size: 16px;
+  }
+  
   .addCardBtn {
     background-color: var(--primary-color);
     color: white;

@@ -212,6 +212,12 @@
   justify-content: end;
   color: #000;
   cursor: pointer;
+  position: relative;
+  top: 0px;
+  z-index: 999;
+  width: 20px;
+  height: 20px;
+  background-color: #000;
 }
 
 .activeMenu {

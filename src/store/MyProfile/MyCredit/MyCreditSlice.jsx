@@ -39,9 +39,46 @@ import { showToast } from "../../../utils";
     }
     export const AddSellerBillingDetailsApi = (billingData) => {
         return async (dispatch) => {
-          dispatch(setSellerBillingLoader(true));
+          dispatch(setSellerCardLoader(true));
           try {
             const response = await axiosInstance.post(`users/seller-billing-details`,billingData);
+            if (response) {
+              // dispatch(setPreferencesList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setSellerCardLoader(false));
+          }
+        };
+      }
+
+    export const getSellerCardApi = () => {
+        return async (dispatch) => {
+       
+          try {
+            const response = await axiosInstance.get(
+              `users/get-seller-card`,
+              
+            );
+      
+            if (response) {
+              dispatch(setGetSellerCardData(response?.data?.data));
+            }
+          } catch (error) {
+        //    showToast("error", error?.response?.data?.message || "Something went wrong");
+          } finally {
+          
+          }
+        };
+      };
+     
+      export const AddSellerCardDetailsApi = (cardData) => {
+        return async (dispatch) => {
+          dispatch(setSellerBillingLoader(true));
+          try {
+            const response = await axiosInstance.post(`users/seller-card-details`,cardData);
             if (response) {
               // dispatch(setPreferencesList(response?.data?.data));
               return response?.data;
@@ -54,32 +91,13 @@ import { showToast } from "../../../utils";
         };
       }
 
-    // export const getReviewListApi = () => {
-    //     return async (dispatch) => {
-       
-    //       try {
-    //         const response = await axiosInstance.get(
-    //           `review/get-reviews`,
-              
-    //         );
-      
-    //         if (response) {
-    //           dispatch(setGetReviewData(response?.data?.data));
-    //         }
-    //       } catch (error) {
-    //     //    showToast("error", error?.response?.data?.message || "Something went wrong");
-    //       } finally {
-          
-    //       }
-    //     };
-    //   };
-  
-
 const initialState = {
    
     sellerBillingLoader: false,
     buyCreditLoader:false,
-    addCouanLoader:false
+    addCouanLoader:false,
+    getSellerCardData:[],
+    sellerCardLoader:false
 };
 
 
@@ -102,10 +120,16 @@ const myCreditSlice = createSlice({
     setAddCouanLoader(state, action) {
       state.addCouanLoader = action.payload;
     },
+    setGetSellerCardData(state, action) {
+      state.getSellerCardData = action.payload;
+    },
+    setSellerCardLoader(state, action) {
+      state.sellerCardLoader = action.payload;
+    },
    
   },
 });
 
-export const {setSellerBillingLoader,setBuyCreditLoader,setAddCouanLoader} = myCreditSlice.actions;
+export const {setSellerBillingLoader,setBuyCreditLoader,setAddCouanLoader,setGetSellerCardData,setSellerCardLoader} = myCreditSlice.actions;
 
 export default myCreditSlice.reducer;

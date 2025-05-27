@@ -155,6 +155,10 @@
   padding-bottom: 15.93px;
   border-bottom: 1px solid #ffffff;
 }
+.locationIcon {
+  display: flex;
+  align-items: center;
+}
 
 .locationIcon img {
   width: 11.5px;
@@ -218,6 +222,8 @@
   cursor: pointer;
   font-weight: 400;
   font-size: 18px;
+  display: flex;
+  align-items: center;
   
 }
 

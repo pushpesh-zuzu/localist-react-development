@@ -37,7 +37,7 @@ const LogoComponent = () => {
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-console.log(userToken,registerData,"prem")
+  console.log(userToken, registerData, "prem")
   const handleToggle = () => {
     if (visibleCount >= totalItems) {
       // Decrease by 1 until min 1
@@ -61,7 +61,6 @@ console.log(userToken,registerData,"prem")
 
   //     }
   //   };
-  console.log(allServiceList, "popularList")
   useEffect(() => {
     dispatch(getPopularServiceList())
     dispatch(getCategoriesList())
@@ -97,15 +96,15 @@ console.log(userToken,registerData,"prem")
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const handleClose = () => {
- 
+  const handleClose = (e) => {
     setShowSubMenu(false);
-    setMouseHover("");
+    setMouseHover(false)
   }
 
   const content = () => {
     return (
       <>
+          {/* <div className={styles.crossBtn}     onClick={(e) => handleClose(e)}>x</div> */}
         <div
           className={styles.popover_container}
           onMouseLeave={() => setShowSubMenu(false)}
@@ -120,7 +119,7 @@ console.log(userToken,registerData,"prem")
                   exit={{ x: 0, height: 0 }}
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
-                   {/* <div className={styles.crossBtn} onClick={handleClose}>x</div> */}
+
                   <div className={styles.popover_header}>
                     <span>Services</span>
                     <Link to="#">See All</Link>
@@ -163,6 +162,7 @@ console.log(userToken,registerData,"prem")
                         setShowSubMenu(true);
                         setFilterItems(item.name);
                       }}
+
                       onMouseEnter={() => setMouseHover(index)}
                       onMouseLeave={() => setMouseHover("")}
                     >
@@ -208,7 +208,7 @@ console.log(userToken,registerData,"prem")
                     Back to Explore
                   </div>
                   <hr />
-                 
+
                   <div className={styles.popover_header}>
                     <span>Services</span>
                     <Link to="#">See All</Link>
@@ -256,21 +256,21 @@ console.log(userToken,registerData,"prem")
                           </>
                         ))} */}
                         {item.subcategory?.map((sub, subIndex) => {
-  const slug = sub.name.toLowerCase().replace(/\s+/g, '-'); // slug based on subcategory name
+                          const slug = sub.name.toLowerCase().replace(/\s+/g, '-'); // slug based on subcategory name
 
-  return (
-    <div
-      key={subIndex}
-      className={styles.popover_content}
-      onMouseEnter={() => setMouseHover(subIndex)}
-      onMouseLeave={() => setMouseHover("")}
-    >
-      <span className={styles.text_wrap}>
-        <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
-      </span>
-    </div>
-  );
-})}
+                          return (
+                            <div
+                              key={subIndex}
+                              className={styles.popover_content}
+                              onMouseEnter={() => setMouseHover(subIndex)}
+                              onMouseLeave={() => setMouseHover("")}
+                            >
+                              <span className={styles.text_wrap}>
+                                <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
+                              </span>
+                            </div>
+                          );
+                        })}
                       </div>
                     ))}
                 </motion.div>
@@ -298,17 +298,17 @@ console.log(userToken,registerData,"prem")
                   </div>
                 ))} */}
                 {popularList?.slice(0, 5)?.map((item, index) => {
-  const slug = item.name.toLowerCase().replace(/\s+/g, '-');
+                  const slug = item.name.toLowerCase().replace(/\s+/g, '-');
 
-  return (
-    <div key={index} className={styles.popover_content}>
-      <Link to={`/category/${slug}`} className={styles.text_wrap}>
-        {/* {item?.name} */}
-        <Link to={`/category/${slug}`}>{item?.name}</Link>
-      </Link>
-    </div>
-  );
-})}
+                  return (
+                    <div key={index} className={styles.popover_content}>
+                      <Link to={`/category/${slug}`} className={styles.text_wrap}>
+                        {/* {item?.name} */}
+                        <Link to={`/category/${slug}`}>{item?.name}</Link>
+                      </Link>
+                    </div>
+                  );
+                })}
               </div>
               <div className={styles.popover_header_inner}>
                 <div className={styles.popover_about_head}>
@@ -354,7 +354,7 @@ console.log(userToken,registerData,"prem")
             </div>
           </Popover>
         )} */}
-         { !userToken?.remember_tokens &&  !registerData?.remember_tokens &&
+      {!userToken?.remember_tokens && !registerData?.remember_tokens &&
         (
           <Popover
             placement={placement}

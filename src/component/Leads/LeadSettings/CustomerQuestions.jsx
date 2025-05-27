@@ -367,7 +367,7 @@ const CustomerQuestions = ({ selectedService }) => {
                   <strong>{item?.miles} miles</strong> of{" "}
                   <strong>{item?.postcode ? item?.postcode : item?.city}</strong>
                 </div> : item?.type === "Travel Time" ?  <div className={styles.range} key={idx}> <span>
-                    <img src={TickIcon} alt="" /> Within
+                    <img src={TickIcon} alt="" /> {" "} Within
                   </span>{" "}
                   <strong>{item?.travel_by} {item?.travel_time}</strong> of{" "}
                   <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div> : item?.type === "Draw on Map"  ? <div className={styles.range} key={idx}> <span>
