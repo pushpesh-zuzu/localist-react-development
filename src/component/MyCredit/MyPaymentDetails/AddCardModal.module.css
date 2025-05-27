@@ -67,6 +67,19 @@
   .inputGroup {
     /* flex: 1; */
     min-width: 388px;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+ 
+ 
+  
+  .cvvIcon {
+    position: absolute;
+    right: 13px;
+    top: 65%;
+    transform: translateY(-50%);
+    height: 20px;
+    pointer-events: none; 
   }
   
   .actions {
@@ -206,6 +219,24 @@
       .inputGroup {
         /* flex: 1; */
         min-width: 288px;
+      }
+      .cvvIcon {
+        position: absolute;
+        right: 19px;
+        top: 75%;
+        transform: translateY(-50%);
+        height: 20px;
+        pointer-events: none; 
+      }
+      .cards {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+      .cards img {
+width: 24px;
+height: 24px;
       }
       
   }

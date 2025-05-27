@@ -72,6 +72,7 @@ const InvoiceAndBilling = () => {
   const { sellerBillingLoader } = useSelector((state) => state.myCredit);
   const [formData, setFormData] = useState({
     contactName: "",
+    addressLine1:"",
     addressLine2: "",
     city: "",
     postcode: "",
@@ -93,8 +94,8 @@ const handleSaveData = () => {
     const data = {
         user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
         billing_contact_name: formData.contactName,
-        billing_address1: formData.addressLine2,
-        billing_address2: formData.city,
+        billing_address1: formData.addressLine1,
+        billing_address2: formData.addressLine2,
         billing_city: formData.city,
         billing_postcode: formData.postcode,
         billing_phone: formData.phoneNumber,
@@ -106,6 +107,7 @@ const handleSaveData = () => {
             showToast("success", result?.message);
             setFormData({
                 contactName: "",
+                addressLine1:"",
                 addressLine2: "",
                 city: "",
                 postcode: "",
@@ -152,7 +154,14 @@ const handleSaveData = () => {
           value={formData.contactName}
           onChange={handleChange}
         />
-
+ <label className={styles.label}>Address line 1</label>
+        <input
+          type="text"
+          name="addressLine1"
+          className={styles.input}
+          value={formData.addressLine1}
+          onChange={handleChange}
+        />
         <label className={styles.label}>Address line 2</label>
         <input
           type="text"

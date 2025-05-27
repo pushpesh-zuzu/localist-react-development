@@ -49,6 +49,7 @@ const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
+  const [activeLoaderId, setActiveLoaderId] = useState(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
@@ -74,7 +75,7 @@ useEffect(()=>{
 dispatch(getCreditPlanList())
 },[])
 const handleBuyNow = (item) => {
-  
+  setActiveLoaderId(item?.id);
   const creditData = {
       user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
       
@@ -83,7 +84,7 @@ const handleBuyNow = (item) => {
   dispatch(addBuyCreditApi(creditData)).then((result) => {
     if(result){
       showToast("success",result?.message)
-      
+      setActiveLoaderId(null);
     }
   })
 }
@@ -148,9 +149,21 @@ const handleApply = () => {
                 </div>
 
                 <div className={styles.buttonWrap}>
-                  <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
+                  {/* <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
                          indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                       />  : "Buy Now"}</button>
+                       />  : "Buy Now"}</button> */}
+                       <button
+  className={styles.buyButton}
+  onClick={() => handleBuyNow(item)}
+>
+  {activeLoaderId === item.id ? (
+    <Spin
+      indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+    />
+  ) : (
+    "Buy Now"
+  )}
+</button>
                   <div className={styles.checkboxWrap}>
                     <input
                       type="checkbox"

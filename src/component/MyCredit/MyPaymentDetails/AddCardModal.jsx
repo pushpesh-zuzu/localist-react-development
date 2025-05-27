@@ -3,6 +3,7 @@ import styles from "./AddCardModal.module.css";
 import VisaImg from "../../../assets/Images/Setting/VisaImg.svg"
 import MasterImg from "../../../assets/Images/Setting/masterCard.svg"
 import Amex from "../../../assets/Images/Setting/AmericanImg.svg"
+import CVVImg from "../../../assets/Images/Setting/CVVImg.svg"
 
 const AddCardModal = ({ onClose }) => {
     const [formData, setFormData] = useState({
@@ -60,6 +61,7 @@ const AddCardModal = ({ onClose }) => {
                         </div>
                         <div className={styles.inputGroup}>
                             <label className={styles.label}>CVC</label>
+                            <img src={CVVImg} alt="CVV" className={styles.cvvIcon} />
                             <input
                                 type="text"
                                 name="cvc"

@@ -85,7 +85,8 @@
     .addCardBtn {
       width: 100%;
       margin-top: 10px;
-      white-space: nowrap;
+      /* white-space: nowrap; */
+      font-size: 18px;
     }
     .btnBox {
         margin-left: 27px;

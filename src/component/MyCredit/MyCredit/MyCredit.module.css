@@ -1,6 +1,6 @@
 .container {
  
-    /* max-width: 1000px; */
+    max-width: 1000px;
     padding:  20px 88px;
     
   }
@@ -262,6 +262,7 @@
       align-items: center;
       /* flex-direction: column; */
       max-width: 670px;
+      margin-top: 15px;
     }
     .getHired img {
       width: 77px;

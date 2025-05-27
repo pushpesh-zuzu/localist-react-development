@@ -145,6 +145,9 @@ const profileId = useParams()
       console.error("Logout Error:", error);
     }
   };
+  const onChange = () => {
+
+  }
 
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/account/setting";
@@ -167,10 +170,18 @@ const profileId = useParams()
           <div></div>
           <div></div>
           <div></div>
-        </div> : <div style={{ marginTop: "4px" }}><img src={searchIcon} alt="" width={18} height={18} /></div>
+        </div> : <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
+  <img src={searchIcon} alt="" className={styles.icon} width={18} height={18} />
+  <input
+    type="text"
+    placeholder={"Search..."}
+    onChange={onChange}
+    className={styles.input}
+  />
+</div>
       }
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
-        {getUserType() == 1  && (
+        {getUserType() == 1 && !viewProfile  && (
           <>
             <div
               className={`${styles.navItem} ${location.pathname === "/settings" ? styles.active : ""}`}
@@ -215,7 +226,7 @@ const profileId = useParams()
 
         {
         
-        getUserType() == 2  && (
+        (getUserType() == 2 || viewProfile)  && (
           <>
             <div className={styles.requestBox}>
               <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
