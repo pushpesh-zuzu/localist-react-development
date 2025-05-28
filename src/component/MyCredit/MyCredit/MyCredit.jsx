@@ -58,9 +58,12 @@ const MyCredits = () => {
   const { userToken } = useSelector((state) => state.auth)
   const { buyCreditLoader, addCouanLoader,addcoupanList ,getInoviceBillingList} = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-
+  const [isChecked, setIsChecked] = useState(false)
   const handleOpen = () => {
     setIsOpen(true);
+  };
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
   };
   const userId =
     userToken?.remember_tokens ?? registerData?.remember_tokens;
@@ -103,8 +106,10 @@ const MyCredits = () => {
   
   const handleBuyNow = (item) => {
     setActiveLoaderId(item?.id);
-  
     let finalPrice = item.price;
+  const vatTotal = item?.billing_vat_register === 0
+  ? 0
+  : Math.floor((finalPrice * 20) / 100)
   
     // ✅ Only apply discount if selectedCoupon is a string and contains '%'
     if (typeof addcoupanList === 'string' && addcoupanList.includes("%")) {
@@ -112,11 +117,17 @@ const MyCredits = () => {
       const discountAmount = (item.price * discountPercent) / 100;
       finalPrice = Math.floor(item.price - discountAmount);
     }
+   
   
     const creditData = {
       amount: finalPrice * 100, // send as paisa / cents
       credits: item?.no_of_leads,
       details: item?.name,
+      discount:finalPrice - item?.price,
+      sub_total:finalPrice,
+      total_amount:finalPrice + vatTotal,
+      vat:vatTotal,
+      top_up: isChecked ? 1 : 0
     };
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result) {
@@ -209,8 +220,8 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
                   <div className={styles.checkboxWrap}>
                     <input
                       type="checkbox"
-                      checked={item.status}
-                      readOnly
+                     checked={isChecked}
+          onChange={handleCheckboxChange}
                     />
                     <label>Auto top-up next time</label>
                   </div>

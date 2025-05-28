@@ -54,13 +54,13 @@
 //     }
 // export default InvoiceAndBilling
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./InvoiceAndBilling.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import InvoiceTable from "./InvoiceTable";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { AddSellerBillingDetailsApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import { AddSellerBillingDetailsApi, getInvoiceListDataApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
@@ -69,7 +69,7 @@ const InvoiceAndBilling = () => {
     const dispatch = useDispatch();
     const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  const { sellerBillingLoader } = useSelector((state) => state.myCredit);
+  const { sellerBillingLoader,getInvoiceList } = useSelector((state) => state.myCredit);
   const [formData, setFormData] = useState({
     contactName: "",
     addressLine1:"",
@@ -80,6 +80,10 @@ const InvoiceAndBilling = () => {
     vatRegister: 1
   });
 const navigate = useNavigate();
+console.log(getInvoiceList,"getInvoiceList")
+useEffect(()=> {
+    dispatch(getInvoiceListDataApi())
+},[])
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -199,7 +203,7 @@ const handleSaveData = () => {
                        /> : "Save"} </button>
         </div>
       </div>
-    <InvoiceTable/>
+    <InvoiceTable data={getInvoiceList}/>
     </div>
     </>
   );

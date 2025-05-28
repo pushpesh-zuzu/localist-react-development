@@ -76,8 +76,23 @@ export const getCustomerLinkApi = () => {
           }
         };
       };
-
-
+      
+      export const sellerUpdateProfileApi = (profileUpdateData) => {
+        return async (dispatch) => {
+          dispatch(setReviewListLoader(true));
+          try {
+            const response = await axiosInstance.post(`users/update-profile`,profileUpdateData);
+            if (response) {
+              dispatch(setEditProfileList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setReviewListLoader(false));
+          }
+        };
+      };
 
 const initialState = {
     customerLinkData:[],
