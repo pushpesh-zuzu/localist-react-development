@@ -40,10 +40,15 @@ const MyPaymentDetails = () => {
                 </div>
                 {getSellerCardData?.map((item, index) => {
                     const maskedCardNumber = `•••• •••• •••• ${item?.card_number?.slice(-4)}`;
-                    const expiryRaw = item?.expiry_date || "";
-                    const formattedExpiry = expiryRaw.length === 4
-                        ? `${expiryRaw.slice(0, 2)}/${expiryRaw.slice(2)}`
-                        : "";
+                    // const expiryRaw = item?.expiry_date || "";
+                    // const formattedExpiry = expiryRaw.length === 4
+                    //     ? `${expiryRaw.slice(0, 2)}/${expiryRaw.slice(2)}`
+                    //     : "";
+                    let formattedExpiry = "";
+                    if (item?.expiry_date) {
+                        const [month, year] = item.expiry_date.split("/");
+                        formattedExpiry = `${month.padStart(2, "0")}/${year.slice(-2)}`;
+                    }
 
                     return (
                         <div key={index} className={styles.cardWrapper}>

@@ -9,7 +9,7 @@ import { showToast } from "../../../utils";
       return async (dispatch) => {
         dispatch(setBuyCreditLoader(true));
         try {
-          const response = await axiosInstance.post(`users/buy-credits`,CreditData);
+          const response = await axiosInstance.post(`payment/buy-credits`,CreditData);
           if (response) {
             // dispatch(setPreferencesList(response?.data?.data));
             return response?.data;
@@ -27,7 +27,7 @@ import { showToast } from "../../../utils";
         try {
           const response = await axiosInstance.post(`users/add-coupon`,couponData);
           if (response) {
-            // dispatch(setPreferencesList(response?.data?.data));
+            dispatch(setAddCoupanData(response?.data?.data));
             return response?.data;
           }
         } catch (error) {
@@ -91,6 +91,29 @@ import { showToast } from "../../../utils";
           }
         };
       }
+      export const getInvoiceBillingListApi = () => {
+        return async (dispatch) => {
+       
+          try {
+            const response = await axiosInstance.get(
+              `payment/get-transaction-logs`,
+              
+            );
+            
+      
+            if (response) {
+              dispatch(setGetInoviceBillingListData(response?.data?.data ?? []));
+            }
+          } catch (error) {
+        //    showToast("error", error?.response?.data?.message || "Something went wrong");
+          } finally {
+          
+          }
+        };
+      }; 
+     
+
+     
 
 const initialState = {
    
@@ -98,7 +121,9 @@ const initialState = {
     buyCreditLoader:false,
     addCouanLoader:false,
     getSellerCardData:[],
-    sellerCardLoader:false
+    sellerCardLoader:false,
+    getInoviceBillingList:[],
+    addcoupanList:{}
 };
 
 
@@ -127,10 +152,16 @@ const myCreditSlice = createSlice({
     setSellerCardLoader(state, action) {
       state.sellerCardLoader = action.payload;
     },
+    setGetInoviceBillingListData(state,action) {
+        state.getInoviceBillingList = action.payload
+    },
+    setAddCoupanData(state,action) {
+        state.addcoupanList = action.payload
+    }
    
   },
 });
 
-export const {setSellerBillingLoader,setBuyCreditLoader,setAddCouanLoader,setGetSellerCardData,setSellerCardLoader} = myCreditSlice.actions;
+export const {setSellerBillingLoader,setBuyCreditLoader,setAddCoupanData,setGetInoviceBillingListData,setAddCouanLoader,setGetSellerCardData,setSellerCardLoader} = myCreditSlice.actions;
 
 export default myCreditSlice.reducer;

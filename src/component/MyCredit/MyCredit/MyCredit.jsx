@@ -10,7 +10,7 @@ import CreditModal from "./CreditModal";
 import { useNavigate } from "react-router-dom";
 import { getCreditPlanList, getswitchAutobidApi, switchAutobidApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addBuyCreditApi, AddCoupanApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import { addBuyCreditApi, AddCoupanApi, getInvoiceBillingListApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -54,83 +54,101 @@ const MyCredits = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
-const { registerData } = useSelector((state) => state.findJobs);
+  const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  const { buyCreditLoader,addCouanLoader } = useSelector((state) => state.myCredit);
+  const { buyCreditLoader, addCouanLoader,addcoupanList ,getInoviceBillingList} = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-  
-   const handleOpen = () => {  
+
+  const handleOpen = () => {
     setIsOpen(true);
   };
-   const userId =
-      userToken?.remember_tokens ?? registerData?.remember_tokens;
-  
-    // API se data aane ke baad automation state update karo
-    useEffect(() => {
-      if (getSwitcgAutoBidData?.isautobid !== undefined) {
-        setAutomation(getSwitcgAutoBidData.isautobid === 1);
-      }
-    }, [getSwitcgAutoBidData]);
-  
-    // Initial API call
-    useEffect(() => {
-      if (userId) {
-        dispatch(getswitchAutobidApi({ user_id: userId }));
-      }
-    }, [userId, dispatch]);
+  const userId =
+    userToken?.remember_tokens ?? registerData?.remember_tokens;
+
+  // API se data aane ke baad automation state update karo
+  useEffect(() => {
+    if (getSwitcgAutoBidData?.isautobid !== undefined) {
+      setAutomation(getSwitcgAutoBidData.isautobid === 1);
+    }
+  }, [getSwitcgAutoBidData]);
+
+  // Initial API call
+  useEffect(() => {
+    if (userId) {
+      dispatch(getswitchAutobidApi({ user_id: userId }));
+    }
+  }, [userId, dispatch]);
   const handleToggle = () => {
-     const newValue = !automation;
-     setAutomation(newValue);
- 
-     dispatch(
-       switchAutobidApi({
-         is_autobid: Number(newValue),
-         user_id: userId,
-       })
-     );
-   };
+    const newValue = !automation;
+    setAutomation(newValue);
+
+    dispatch(
+      switchAutobidApi({
+        is_autobid: Number(newValue),
+        user_id: userId,
+      })
+    );
+  };
   const handleRedeem = (e) => {
     setCouponCode(e.target.value)
   }
   const handleBack = () => {
     navigate("/settings");
   }
-useEffect(()=>{
-dispatch(getCreditPlanList())
-},[])
-const handleBuyNow = (item) => {
-  setActiveLoaderId(item?.id);
-  const creditData = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-      
-    plan_id: item?.id,   
-  }
-  dispatch(addBuyCreditApi(creditData)).then((result) => {
-    if(result){
-      showToast("success",result?.message)
-      setActiveLoaderId(null);
-    }
-  })
-}
-
-const handleApply = () => {
-  if (!couponCode.trim()) {
-    showToast("error", "Please enter a valid coupon code.");
-    return;
-  }
-
-  const payload = {
-    coupon_code: couponCode.trim(),
-  };
-
-  dispatch(AddCoupanApi(payload)).then((result) => {
-    if (result) {
-      showToast("success", result?.message);
-      setCouponCode(""); 
-    }
-  });
-};
+  useEffect(() => {
+    dispatch(getCreditPlanList())
+    dispatch(getInvoiceBillingListApi())
+  }, [])
+  console.log(getInoviceBillingList, "item");
   
+  const handleBuyNow = (item) => {
+    setActiveLoaderId(item?.id);
+  
+    let finalPrice = item.price;
+  
+    // ✅ Only apply discount if selectedCoupon is a string and contains '%'
+    if (typeof addcoupanList === 'string' && addcoupanList.includes("%")) {
+      const discountPercent = parseFloat(addcoupanList.replace("%", ""));
+      const discountAmount = (item.price * discountPercent) / 100;
+      finalPrice = Math.floor(item.price - discountAmount);
+    }
+  
+    const creditData = {
+      amount: finalPrice * 100, // send as paisa / cents
+      credits: item?.no_of_leads,
+      details: item?.name,
+    };
+    dispatch(addBuyCreditApi(creditData)).then((result) => {
+      if (result) {
+        showToast("success", result?.message);
+        setActiveLoaderId(null);
+        dispatch(getInvoiceBillingListApi())
+      }
+    });
+  };
+  
+  
+  
+
+  const handleApply = () => {
+    if (!couponCode.trim()) {
+      showToast("error", "Please enter a valid coupon code.");
+      return;
+    }
+
+    const payload = {
+      coupon_code: couponCode.trim(),
+    };
+
+    dispatch(AddCoupanApi(payload)).then((result) => {
+      if (result) {
+        showToast("success", result?.message);
+        setCouponCode("");
+      }
+    });
+  };
+  const priceCreditPercentage = creditPlanList?.map((item) => item?.no_of_leads)
+console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
   return (
     <>
       <div className={styles.container}>
@@ -159,7 +177,7 @@ const handleApply = () => {
         <div className={styles.cardList}>
           {creditPlanList?.map((item, index) => (
             <div className={styles.card} key={index}>
-             {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
+              {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
               <div className={styles.titleBar}>
 
                 <button className={styles.response}>{item?.slug}</button>
@@ -176,18 +194,18 @@ const handleApply = () => {
                   {/* <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
                          indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                        />  : "Buy Now"}</button> */}
-                       <button
-  className={styles.buyButton}
-  onClick={() => handleBuyNow(item)}
->
-  {activeLoaderId === item.id ? (
-    <Spin
-      indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-    />
-  ) : (
-    "Buy Now"
-  )}
-</button>
+                  <button
+                    className={styles.buyButton}
+                    onClick={() => handleBuyNow(item)}
+                  >
+                    {activeLoaderId === item.id ? (
+                      <Spin
+                        indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                      />
+                    ) : (
+                      "Buy Now"
+                    )}
+                  </button>
                   <div className={styles.checkboxWrap}>
                     <input
                       type="checkbox"
@@ -198,13 +216,13 @@ const handleApply = () => {
                   </div>
                 </div>
               </div>
-              {item?.plan_type !== "normal"  &&  <div className={styles.getHired}>
+              {item?.plan_type !== "normal" && <div className={styles.getHired}>
                 <img src={getHired} alt="getHired" className={styles.getHiredImage} />
                 {
-                
-                
-                <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on Bark using these credits.</div>
-}
+
+
+                  <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on Bark using these credits.</div>
+                }
               </div>}
 
             </div>
@@ -221,10 +239,10 @@ const handleApply = () => {
         </div>
         <div className={styles.redeemText}>
           <label>Redeem coupon</label>
-          <input type="text" placeholder="Redeem a code" onChange={handleRedeem}/>
+          <input type="text" placeholder="Redeem a code" onChange={handleRedeem} />
           <button className={styles.redeemButton} onClick={handleApply}>{addCouanLoader ? <Spin
-                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                       /> : "Apply"}</button>
+            indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+          /> : "Apply"}</button>
         </div>
         <div className={styles.couponsText}>Coupons can't be combined. The higher discount applies.</div>
         <div className={styles.toggle}>
@@ -238,9 +256,9 @@ const handleApply = () => {
             <span className={styles.slider}></span>
           </label>
         </div>
-    
-          <TransgationLogTable/>
-        
+
+        <TransgationLogTable data={getInoviceBillingList} />
+
       </div>
       {/* {isOpen && (
         <CreditModal onClose={()=>setIsOpen(false)}/>

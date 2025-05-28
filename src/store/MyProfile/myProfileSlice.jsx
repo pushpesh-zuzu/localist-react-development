@@ -58,12 +58,32 @@ export const getCustomerLinkApi = () => {
           }
         };
       };
-  
+      
+
+      export const sellerEditProfileApi = (profileData) => {
+        return async (dispatch) => {
+          dispatch(setReviewListLoader(true));
+          try {
+            const response = await axiosInstance.post(`users/edit-profile`,profileData);
+            if (response) {
+              dispatch(setEditProfileList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setReviewListLoader(false));
+          }
+        };
+      };
+
+
 
 const initialState = {
     customerLinkData:[],
     reviewLoader:false,
     reviewListData:[],
+    editProfileList:[]
 };
 
 
@@ -86,10 +106,13 @@ const myprofileSlice = createSlice({
     setGetReviewData(state, action) {
       state.reviewListData = action.payload;
     },
+    setEditProfileList(state,action){
+      state.editProfileList = action.payload
+    }
    
   },
 });
 
-export const {setGetCustomerLinkData ,setReviewListLoader,setGetReviewData} = myprofileSlice.actions;
+export const {setGetCustomerLinkData ,setReviewListLoader,setGetReviewData,setEditProfileList} = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;

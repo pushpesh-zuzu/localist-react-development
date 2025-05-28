@@ -127,6 +127,12 @@ import { showToast } from "../../../utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
+
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import StripeProvider from "./StripeProvider";
+import CardPaymentForm from "./CardForm";
+
 const AddCardModal = ({ onClose }) => {
     const [formData, setFormData] = useState({
         cardNumber: "",
@@ -136,6 +142,7 @@ const AddCardModal = ({ onClose }) => {
 
     const dispatch = useDispatch();
     const { sellerBillingLoader } = useSelector((state) => state.myCredit);
+//    const stripe = useStripe()
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -148,42 +155,58 @@ const AddCardModal = ({ onClose }) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
+    const stripePromise = loadStripe("pk_test_51RTKiSHBbc2ftHcbzkhVXdd7qUBSYhGTzPUNRxKOgFpV4W4y4tjGN68aBCVRqlD15cokCSL2m4iL9wA0Y16tCLCD00f82XQLrk");
+    const options = {
+        mode: 'payment',
+        amount: 1099,
+        currency: 'usd',
+        // Fully customizable with appearance API.
+        appearance: {
+        
+        },
+      };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+const handleSubmit = async(e) => {
+   
+    e.preventDefault();
+}
+    // const handleSubmit = (e) => {
 
-        const { cardNumber, expiryDate, cvc } = formData;
+    //     const { cardNumber, expiryDate, cvc } = formData;
 
-        if (!cardNumber || !expiryDate || !cvc) {
-            alert("Please fill in all fields.");
-            return;
-        }
+    //     if (!cardNumber || !expiryDate || !cvc) {
+    //         alert("Please fill in all fields.");
+    //         return;
+    //     }
 
-        const data = {
-            card_number: cardNumber,
-            expiry_date: expiryDate,
-            cvc: cvc,
-        };
+    //     const data = {
+    //         card_number: cardNumber,
+    //         expiry_date: expiryDate,
+    //         cvc: cvc,
+    //     };
 
-        dispatch(AddSellerCardDetailsApi(data)).then((result) => {
-            if (result) {
-                showToast("success", result?.message);
-                onClose();
-                dispatch(getSellerCardApi());
-            }
-        })
+    //     dispatch(AddSellerCardDetailsApi(data)).then((result) => {
+    //         if (result) {
+    //             showToast("success", result?.message);
+    //             onClose();
+    //             dispatch(getSellerCardApi());
+    //         }
+    //     })
 
 
-    };
+    // };
+    const getPaymentId = async(Id) => {
+console.log(Id,"Id")
+    }
 
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <button className={styles.closeButton} onClick={onClose}>×</button>
-                <h2 className={styles.heading}>Add card details</h2>
+                {/* <h2 className={styles.heading}>Add card details</h2> */}
 
-                <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={styles.label}>Card number</label>
+                {/* <form className={styles.form} onSubmit={handleSubmit}> */}
+                    {/* <label className={styles.label}>Card number</label>
                     <input
                         type="text"
                         name="cardNumber"
@@ -191,9 +214,9 @@ const AddCardModal = ({ onClose }) => {
                         value={formData.cardNumber}
                         onChange={handleChange}
                         className={styles.input}
-                    />
+                    /> */}
 
-                    <div className={styles.row}>
+                    {/* <div className={styles.row}>
                         <div className={styles.inputGroup}>
                             <label className={styles.label}>Expiry date</label>
                             <input
@@ -217,9 +240,17 @@ const AddCardModal = ({ onClose }) => {
                                 className={styles.input}
                             />
                         </div>
-                    </div>
-
-                    <div className={styles.actions}>
+                    </div>  */}
+                    {/* <StripeProvider>
+                     <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
+                     </StripeProvider>*/}
+                    {/* <Elements stripe={stripePromise} options={options}>
+                 <AddCardWrapper /> 
+                 </Elements> */}
+                 <StripeProvider>
+                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose}/>
+                 </StripeProvider>
+                    {/* <div className={styles.actions}>
                         <button type="button" className={styles.cancelBtn} onClick={onClose}>
                             Cancel
                         </button>
@@ -229,7 +260,7 @@ const AddCardModal = ({ onClose }) => {
                             /> : "Add card details"}
                         </button>
                     </div>
-                </form>
+                </form> */}
 
                 <div className={styles.footerNote}>
                     <div>

@@ -635,6 +635,8 @@ import {
   getBuyerSortByLocationApi,
   getBuyerSortByResponseApi,
   getBuyerViewProfieApi,
+  getRatingFilterApi,
+  ratingFilterApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -644,12 +646,13 @@ import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
-  const { autoBidList, bidListLoader, manualBidLoader } = useSelector(
+  const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } = useSelector(
     (state) => state.leadSetting
   );
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [visibleCount, setVisibleCount] = useState(5);
+  const [ratingList,setRatingList] = useState("")
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
   const { userToken } = useSelector((state) => state.auth);
@@ -657,6 +660,7 @@ const BidsList = ({ previousStep }) => {
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
@@ -667,7 +671,7 @@ const BidsList = ({ previousStep }) => {
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.totalbid || 0;
   const isButtonDisabled = bidCount === bidTotal
-  console.log(autoBidList, "prem")
+  console.log(ratingFilterData, "prem")
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
@@ -725,7 +729,7 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
-    
+
     navigate(`/view-profile`)
     const data = {
       user_id: userToken?.remember_tokens
@@ -740,6 +744,15 @@ const BidsList = ({ previousStep }) => {
       }
     })
   }
+
+  useEffect(() => {
+    const data = {
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+    }
+    dispatch(getRatingFilterApi(data))
+  }, [])
 
   const handleSeeMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
@@ -823,6 +836,16 @@ const BidsList = ({ previousStep }) => {
     }
     dispatch(getBuyerSortByResponseApi(responseData))
   }
+  const handleSortRating = (e) => {
+    const selectedRating = e.target.value
+    console.log(selectedRating,"oo")
+    setRatingList(selectedRating)
+    const ratingData = {
+      lead_id:requestId,
+      rating: selectedRating
+    }
+    dispatch(ratingFilterApi(ratingData))
+  }
 
   return (
     <>
@@ -866,9 +889,13 @@ const BidsList = ({ previousStep }) => {
             </div>
 
             <div className={styles.filters}>
-              <select className={styles.customSelect}>
-                <option>All ratings</option>
-                <option></option>
+              <select className={styles.customSelect} onChange={handleSortRating} value={ratingList} defaultValue={""}>
+                <option value="" disabled>All ratings</option>
+                {ratingFilterData[0]?.map((item) => (
+                  <option key={item.value} value={item.value}>
+                    {"⭐".repeat(item.value)} {item.label} ({item.count})
+                  </option>
+                ))}
               </select>
               <select onChange={handelChangeSort} defaultValue={""} value={locationSort} className={styles.customSelect}>
                 <option value="" disabled>Sort by Location</option>
