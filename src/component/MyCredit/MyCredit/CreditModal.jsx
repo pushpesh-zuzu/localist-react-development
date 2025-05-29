@@ -16,7 +16,11 @@ const CreditModal = ({ onClose }) => {
   }, []);
   const responseEstimate = Math.floor(creditValue / 8); // Example logic
   const price = (creditValue * 4.4625).toFixed(2); // Example: £1785 for 400 credits
-
+  const getSliderBackground = (value, min, max) => {
+    const percentage = ((value - min) / (max - min)) * 100;
+    return `linear-gradient(to right, #007bff 0%, #007bff ${percentage}%, #e4e4e4 ${percentage}%, #e4e4e4 100%)`;
+  };
+  
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -32,7 +36,7 @@ const CreditModal = ({ onClose }) => {
           <span className={styles.cost}>Cost: £{price} (ex VAT)</span>
         </div>
 
-        <input
+        {/* <input
           type="range"
           min="0"
           max="800"
@@ -47,7 +51,36 @@ const CreditModal = ({ onClose }) => {
           <span>200</span>
           <span>400</span>
           <span>800</span>
+        </div> */}
+         <div className={styles.sliderWrapper}>
+        <input
+          type="range"
+          min="0"
+          max="800"
+          step="200"
+          value={creditValue}
+          onChange={handleSliderChange}
+          className={styles.slider}
+          style={{
+            background: getSliderBackground(creditValue, 0, 800),
+          }}
+        />
+        <div className={styles.sliderMarkers}>
+          <span style={{ left: "0%" }}></span>
+          <span style={{ left: "25%" }}></span>
+          <span style={{ left: "50%" }}></span>
+          <span style={{ left: "75%" }}></span>
+          <span style={{ left: "100%" }}></span>
         </div>
+      </div>
+
+      <div className={styles.rangeLabels}>
+        <span>0</span>
+        <span>200</span>
+        <span>400</span>
+        <span>600</span>
+        <span>800</span>
+      </div>
 
         <div className={styles.centerBtn}>
           <button className={styles.buyBtn}>Buy credits</button>

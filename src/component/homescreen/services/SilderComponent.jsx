@@ -83,7 +83,7 @@ const SliderComponent = ({ subcategory }) => {
        
       </div>
       <div className={styles.viewAllBtn}>
-        <button >View All </button>
+        <button>View All </button>
         </div>
       <button
         className={styles.arrowRight}

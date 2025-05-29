@@ -35,6 +35,7 @@
 .serviceContainer {
   display: flex;
   gap: 6px;
+  align-items:center
 }
 
 .serviceContainer h2 {
@@ -386,14 +387,14 @@
     padding: 10px 10px 10px 15px; /* left padding for icon */
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
   }
   
   .icon {
     position: absolute;
     top: 50%;
-    right: 2px;
+    right: 7px;
     transform: translateY(-50%);
     color: #888;
     font-size: 18px;

@@ -15,7 +15,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug, showToast } from "../../../utils";
 import { questionAnswerData, setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
-import location from "../../../assets/Images/HowItWorks/LocationImg.svg"
+import location from "../../../assets/Images/HowItWorks/locationImg.svg"
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
