@@ -129,6 +129,7 @@ const LeadsCards = () => {
       ) : (
         <>
           {leadRequestList?.slice(0, visibleCount)?.map((item) => {
+            console.log(item?.view_count,'itemss')
             return (
               <>
                 <div className={styles.card} >
@@ -246,7 +247,7 @@ const LeadsCards = () => {
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded
                     </p> */}
-                 {/* <p>ACT FAST - {item?.view_count === 30 ? item.view_count : item?.random_count}</p> */}
+                 <p>ACT FAST - {item?.view_count == 30 ? item?.view_count : item?.random_count} </p>
 
                   </div>
                 </div>

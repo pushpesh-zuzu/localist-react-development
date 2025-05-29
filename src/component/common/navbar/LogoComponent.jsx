@@ -23,6 +23,8 @@ const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
+  const [showMenu, setShowbMenu] = useState(false);
+
   // const [showAllCategories, setShowAllCategories] = useState(false);
 
   const [mouseHover, setMouseHover] = useState("");
@@ -47,6 +49,24 @@ const LogoComponent = () => {
       setVisibleCount(prev => Math.min(prev + 5, totalItems));
     }
   };
+
+
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+
+  console.log(isMobile, "isMobile");
+  
 
   const isAllVisible = visibleCount >= totalItems;
   //   const handleRedirectUrl = () => {
@@ -99,12 +119,13 @@ const LogoComponent = () => {
   const handleClose = (e) => {
     setShowSubMenu(false);
     setMouseHover(false)
+    setShowbMenu(false)
   }
 
   const content = () => {
     return (
       <>
-          {/* <div className={styles.crossBtn}     onClick={(e) => handleClose(e)}>x</div> */}
+        {/* <div className={styles.crossBtn}     onClick={(e) => handleClose(e)}>x</div> */}
         <div
           className={styles.popover_container}
           onMouseLeave={() => setShowSubMenu(false)}
@@ -154,6 +175,8 @@ const LogoComponent = () => {
                       <img src={arrowIcon} width={8} alt="arrow" />
                     </div>
                   ))} */}
+                 {isMobile && <div className={styles.crossBtn} onClick={handleClose}>×</div>}
+
                   {allServiceList?.slice(0, visibleCount).map((item, index) => (
                     <div
                       key={index}
@@ -358,10 +381,12 @@ const LogoComponent = () => {
         (
           <Popover
             placement={placement}
+            open={isMobile ? showMenu : null}
             content={content}
             arrow={false}
             trigger="hover"
             className="popover_wrap"
+            onClick={() => setShowbMenu(true)}
           >
             <div className={styles.serviceContainer}>
               <h2 className={styles.serviceText}>Explore Our Services</h2>

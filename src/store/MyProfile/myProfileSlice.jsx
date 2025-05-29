@@ -79,7 +79,7 @@ export const getCustomerLinkApi = () => {
       
       export const sellerUpdateProfileApi = (profileUpdateData) => {
         return async (dispatch) => {
-          dispatch(setReviewListLoader(true));
+          dispatch(setSellerUpdateLoader(true));
           try {
             const response = await axiosInstance.post(`users/update-profile`,profileUpdateData);
             if (response) {
@@ -89,7 +89,24 @@ export const getCustomerLinkApi = () => {
           } catch (error) {
             showToast("error", error?.response?.data?.message);
           } finally {
-            dispatch(setReviewListLoader(false));
+            dispatch(setSellerUpdateLoader(false));
+          }
+        };
+      };
+
+      export const sellerUpdatePasswordApi = (UpdateData) => {
+        return async (dispatch) => {
+          dispatch(setSellerUpdateLoader(true));
+          try {
+            const response = await axiosInstance.post(`users/change-password`,UpdateData);
+            if (response) {
+              // dispatch(setEditProfileList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setSellerUpdateLoader(false));
           }
         };
       };
@@ -98,7 +115,8 @@ const initialState = {
     customerLinkData:[],
     reviewLoader:false,
     reviewListData:[],
-    editProfileList:[]
+    editProfileList:[],
+    sellerLoader:false
 };
 
 
@@ -123,11 +141,14 @@ const myprofileSlice = createSlice({
     },
     setEditProfileList(state,action){
       state.editProfileList = action.payload
+    },
+    setSellerUpdateLoader(state,action) {
+      state.sellerLoader =action.payload
     }
    
   },
 });
 
-export const {setGetCustomerLinkData ,setReviewListLoader,setGetReviewData,setEditProfileList} = myprofileSlice.actions;
+export const {setGetCustomerLinkData ,setReviewListLoader,setSellerUpdateLoader,setGetReviewData,setEditProfileList} = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;

@@ -2,22 +2,93 @@ import React, { useEffect, useState } from "react";
 import styles from "./AccountDetails.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { sellerEditProfileApi, sellerUpdateProfileApi } from "../../store/MyProfile/myProfileSlice";
+import { sellerEditProfileApi, sellerUpdatePasswordApi, sellerUpdateProfileApi } from "../../store/MyProfile/myProfileSlice";
 import { useNavigate } from "react-router-dom";
+import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import { showToast } from "../../utils";
+import { updatePasswordData } from "../../store/Buyer/BuyerSlice";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 const AccountDetails = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  const { editProfileList } = useSelector((state) => state.myProfile)
+  const { editProfileList,sellerLoader } = useSelector((state) => state.myProfile)
   const [contactData, setContactData] = useState({
     email: '',
     phone: '',
     sms_notification_no: ''
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [newPasswordVisible, setNewPasswordVisible] = useState(false);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  
+    const [formData, setFormData] = useState({
+      password: "",
+      password_confirmation: "",
+      error: "",
+    });
+  
+    const handleFormChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
+    };
+  
+    const handleSavePassword = () => {
+      const { password, password_confirmation } = formData;
+    
+      if (!password || !password_confirmation) {
+        setFormData({
+          ...formData,
+          error: "Please fill out both password fields.",
+        });
+        return;
+      }
+    
+      if (password !== password_confirmation) {
+        setFormData({
+          ...formData,
+          error: "Passwords do not match.",
+        });
+        return;
+      }
+    
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]).{8,}$/;
+    
+      if (!passwordRegex.test(password)) {
+        setFormData({
+          ...formData,
+          error:
+            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character.",
+        });
+        return;
+      }
+    
+      // ✅ Only send password
+      const formDataToSend = new FormData();
+      formDataToSend.append("password", password);
+    
+      dispatch(sellerUpdatePasswordApi(formDataToSend)).then((result) => {
+        if (result?.success) {
+          showToast("success", result?.message || "Password updated successfully!");
+          setFormData({
+            password: "",
+            password_confirmation: "",
+            error: "",
+          });
+          setIsModalOpen(false);
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            error: result?.message || "Failed to update password.",
+          }));
+        }
+      });
+    };
+    
 
-  console.log(editProfileList,contactData, "editProfileList")
   useEffect(() => {
     if (editProfileList) {
       setContactData({
@@ -37,6 +108,10 @@ const AccountDetails = () => {
   }, [])
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === "phone") {
+      if (!/^\d*$/.test(value)) return; 
+      if (value.length > 10) return;    
+    }
     const updatedData = {
       ...contactData,
       [name]: value,
@@ -54,12 +129,21 @@ const AccountDetails = () => {
       name:editProfileList?.name,
       sms_notification_no: contactData?.sms_notification_no
     }
-    dispatch(sellerUpdateProfileApi(data))
+    dispatch(sellerUpdateProfileApi(data)).then((result)=>{
+      if(result) {
+        showToast("success",result?.message)
+        const data = {
+          user_id: userId
+        }
+        dispatch(sellerEditProfileApi(data))
+      }
+    })
   }
   const handleBack = () => {
     navigate("/settings")
   }
   return (
+    <>
     <div className={styles.container}>
       <div className={styles.backText} onClick={handleBack}>← Setting</div>
       <h1 className={styles.heading}>Account Details</h1>
@@ -105,7 +189,9 @@ const AccountDetails = () => {
           value={contactData.sms_notification_no}
           onChange={handleInputChange} />
         <div className={styles.btnBox}>
-          <button className={styles.saveBtn} onClick={handleSubmit}>Save</button>
+          <button className={styles.saveBtn} onClick={handleSubmit}>{sellerLoader ? <Spin
+                                          indicator={<LoadingOutlined spin style={{ color: "blue" }} />}
+                                      />  :"Save"}</button>
         </div>
       </div>
 
@@ -114,9 +200,28 @@ const AccountDetails = () => {
         <p className={styles.note}>
           It’s important to keep your password up-to-date.
         </p>
-        <button className={styles.button}>change password</button>
+        <button className={styles.button} onClick={() => setIsModalOpen(true)}>change password</button>
       </div>
-    </div>
+      </div>
+       {
+        isModalOpen && 
+
+        // Inside your parent component's return:
+        <ChangePasswordModal
+          isOpen={isModalOpen}
+          formData={formData}
+          newPasswordVisible={newPasswordVisible}
+          confirmPasswordVisible={confirmPasswordVisible}
+          setNewPasswordVisible={setNewPasswordVisible}
+          setConfirmPasswordVisible={setConfirmPasswordVisible}
+          handleFormChange={handleFormChange}
+          handleSavePassword={handleSavePassword}
+          setIsModalOpen={setIsModalOpen}
+          loading={true} // or a loading state from Redux/local state
+        />
+        
+       }
+   </>
   );
 };
 

@@ -105,7 +105,7 @@
 }
 .btnBox {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 12px;
 }
 .saveBtn {
@@ -119,6 +119,113 @@
     border-radius: 3px;
     background-color: #fff;
     cursor: pointer;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cameraModal {
+  background: #ffffff;
+  padding: 20px;
+  width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.saveButtonWrapperModal {
+  text-align: right;
+}
+
+.modalSaveButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modalSaveButton:hover {
+  background: #0096c4;
+}
+
+.passwordField {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: gray;
+}
+
+.eyeIcon:hover {
+  color: black;
+}
+
+.inputError {
+  border: 1px solid red !important;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.saveButtonWrapper {
+  margin-top: 37px;
+  margin-left: 32px;
+}
+
+.saveButton {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.saveButton:hover {
+  background: #0096c4;
+}
+
+.modalCancelButton {
+  background: #e8e8e8;
+  color: #000000;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.modalCancelButton:hover {
+  background: #b3b3b3;
 }
 @media (max-width: 768px) {
   .container {

@@ -258,9 +258,9 @@ const router = createBrowserRouter([
       {
         path: "/review/:profileId",
         element: (
-          <ProtectedRoute>
+          // <ProtectedRoute>
           <ViewProfiles/>
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
       },
       {
