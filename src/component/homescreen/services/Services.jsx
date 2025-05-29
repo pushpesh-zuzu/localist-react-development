@@ -37,6 +37,7 @@ const Services = () => {
   }, [dispatch]);
 
   return (
+    <>
     <div className={styles.container1}>
       {allServiceList?.map((category, categoryIndex) => (
         <div key={categoryIndex} className={styles.container}>
@@ -44,7 +45,9 @@ const Services = () => {
           <SliderComponent subcategory={category?.subcategory} /></>}
         </div>
       ))}
+    
     </div>
+     </>
   );
 };
 

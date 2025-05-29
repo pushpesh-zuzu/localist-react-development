@@ -127,4 +127,10 @@
   .cityContainer {
     grid-template-columns: repeat(1, 1fr);
   }
+  .popularcityContainer h1 {
+    font-size:30px
+  }
+  .popularcityContainer span {
+    font-size:30px
+  }
 }

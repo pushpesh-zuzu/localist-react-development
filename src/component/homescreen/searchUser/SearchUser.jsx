@@ -15,6 +15,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug, showToast } from "../../../utils";
 import { questionAnswerData, setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
+import location from "../../../assets/Images/HowItWorks/LocationImg.svg"
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
@@ -33,14 +34,14 @@ const SearchProfessionals = ({ nextStep }) => {
   });
   const [show, setShow] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
-  const [placeholder, setPlaceholder] = useState("Search service and choose from provided options.");
+  const [placeholder, setPlaceholder] = useState("Search service... ");
 
   useEffect(() => {
     const updatePlaceholder = () => {
       if (window.innerWidth <= 768) {
-        setPlaceholder("Search service");
+        setPlaceholder("Search service...");
       } else {
-        setPlaceholder("Search service and choose from provided options.");
+        setPlaceholder("Search service... ");
       }
     };
 
@@ -201,7 +202,8 @@ console.log(city,"city")
 
           <div className={styles.divider}></div>
           <div className={styles.locationWrapper}>
-            <EnvironmentOutlined />
+            {/* <EnvironmentOutlined /> */}
+            <img src={location} alt="..." />
             <input
               type="text"
               placeholder="Postcode"

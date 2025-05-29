@@ -248,10 +248,10 @@
 }
 
 .input {
-  width: 100%;
-  padding: 10px 10px 10px 15px; /* left padding for icon */
+  width: 93%;
+  padding: 10px 10px 10px 10px; /* left padding for icon */
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 14px;
   outline: none;
 }
@@ -259,12 +259,33 @@
 .icon {
   position: absolute;
   top: 50%;
-  right: 2px;
+  right: 8px;
   transform: translateY(-50%);
   color: #888;
   font-size: 18px;
   pointer-events: none;
 }
+/* By default, show both (optional if using utility classes) */
+
+.mobileOnly {
+  display: none;
+}
+
+.desktopOnly {
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile-specific visibility */
+@media (max-width: 768px) {
+  .mobileOnly {
+    display: block;
+  }
+  .desktopOnly {
+    display: none;
+  }
+}
+
 
 @media screen and (max-width: 1250px) {
   .navbarItems {
@@ -352,7 +373,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap:36px
+    gap:16px
   }
   .inputWrapper {
     position: relative;
@@ -463,7 +484,7 @@
   .icon {
     position: absolute;
     top: 50%;
-    right: 2px;
+    right: 0px;
     transform: translateY(-50%);
     color: #888;
     font-size: 18px;

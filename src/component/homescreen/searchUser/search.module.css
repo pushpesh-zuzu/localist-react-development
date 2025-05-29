@@ -104,6 +104,7 @@
 .input::placeholder {
   color: #959595;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .divider {
@@ -117,6 +118,11 @@
   align-items: center;
   padding: 10px;
   background: #fff;
+}
+.locationWrapper img {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
 }
 
 .icon {
@@ -392,6 +398,8 @@
 
   .subText {
     font-size: 16.19px;
+    line-height: 24px;
+    margin-top: 6px
   }
 
   .searchBox {
@@ -434,12 +442,14 @@
   .exampleTitle {
     font-size: 12px;
     line-height: 5px;
+    margin-left: 6px;
   }
 
   .exampledescription {
     font-size: 12px;
     line-height: 18px;
     display: inline-block;
+    margin-left: 6px;
   }
 
   .searchButtonPhone {
@@ -482,11 +492,13 @@
   .exampleTitle {
     font-size: 10px;
     line-height: 15px;
+    margin-left: 6px;
   }
 
   .exampledescription {
     font-size: 10px;
     line-height: 15px;
+    margin-left: 6px;
   }
 }
 

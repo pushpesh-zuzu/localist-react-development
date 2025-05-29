@@ -80,14 +80,18 @@ const SliderComponent = ({ subcategory }) => {
             </div>
           ))}
         </div>
+       
       </div>
-
+      <div className={styles.viewAllBtn}>
+        <button >View All </button>
+        </div>
       <button
         className={styles.arrowRight}
         onClick={() => slider.current?.next()}
       >
         <img src={rightArrow} alt="Right" />
       </button></>)}
+     
 
       {show && (userToken?.active_status == 2 || !userToken )  && (
           <>

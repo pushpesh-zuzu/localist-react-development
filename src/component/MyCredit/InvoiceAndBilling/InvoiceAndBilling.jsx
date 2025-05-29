@@ -140,7 +140,7 @@ const InvoiceAndBilling = () => {
                         value={formData.phoneNumber}
                         onChange={handleChange}
                     />
-                    <label className={styles.label}>VAT Register</label>
+                   <div className={styles.vatRegisterBox}>
                     <input
                         type="checkbox"
                         name="vatRegister"
@@ -152,6 +152,8 @@ const InvoiceAndBilling = () => {
                             }))
                         }
                     />
+                   <label className={styles.label}>VAT Register</label>
+                   </div>
 
                     <div className={styles.saveButtonBox}>
 

@@ -26,7 +26,7 @@
   color: #ffffff;
   font-weight: 400;
   font-size: 1.786rem;
-  line-height: 37.5px;
+  line-height: 39.5px;
   text-align: center;
 }
 
@@ -179,7 +179,7 @@
   .footer .quoteButton {
     padding: 7px 21px;
     font-size: 12.14px;
-    margin-bottom: 18px;
+    /* margin-bottom: 18px; */
   }
 }
 

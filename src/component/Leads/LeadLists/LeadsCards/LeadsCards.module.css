@@ -167,11 +167,11 @@ margin-right: 4px;
 }
 
 .purchaseButton {
-  background: black;
+  background: #3CAE85;
   color: white;
   border: none;
   padding: 8px 15px;
-  border-radius: 148px;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
 }

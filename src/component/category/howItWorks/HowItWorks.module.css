@@ -103,6 +103,9 @@
   .step {
     padding: 0px 20px 20px;
   }
+  .heading {
+    font-size: 30px;
+  }
 
   .description {
     font-size: 14px;

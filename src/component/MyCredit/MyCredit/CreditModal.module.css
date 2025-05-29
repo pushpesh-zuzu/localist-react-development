@@ -14,7 +14,8 @@
   .modalContent {
     background: white;
     width: 90%;
-    max-width: 900px;
+    max-width: 860px;
+    /* height: 644px; */
     border-radius: 8px;
     padding: 24px;
     position: relative;
@@ -31,63 +32,73 @@
     cursor: pointer;
   }
   
-  .title {
+  .title h2{
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 15px;
     text-align: center;
     color: #000000;
   }
-  
-  .subtitle {
+  .title p{
     font-size: 16px;
     color: #000000;
     text-align: center;
-    margin-bottom: 53px;
+    margin-bottom: 34px;
     font-weight: 500;
   }
+  
+  /* .subtitle {
+    
+  } */
   
   .infoBar {
     display: flex;
     justify-content: space-between;
     background: #eef8fd;
-    padding: 68px 42px;
-    border-radius: 6px;
-  
+    padding: 38px 20px;
     margin-bottom: 20px;
     gap: 8px;
   }
   
   .credits {
-    background: #FCE5E3;
-    padding: 2px 12px;
+    background: var(--primary-color);
+    padding: 7.5px 12px;
     font-size: 20px;
+    color: #ffffff;
+    font-weight: 500;
+    border: 3px solid #ffffff;
   }
   
   .responses {
-    background: #A0F3AC;
-    padding: 2px 12px;
+    background: var(--primary-color);
+    padding: 7.5px 12px;
     font-size: 20px;
+    color: #ffffff;
+    font-weight: 500;
+    border: 3px solid #ffffff;
   }
   
   .cost {
-    background: #EDF8BC;
-    padding: 2px 12px;
-    border-radius: 4px;
+    background: var(--primary-color);
+    padding: 7.5px 12px;
+    border: 3px solid #ffffff;
     font-size: 20px;
+    color: #ffffff;
+    font-weight: 500;
   }
   
   .slider {
     width: 100%;
     margin: 16px 0;
+    
   }
   .rangeLabels {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: #555;
+    color: #000000;
     margin-top: -10px;
-    margin-bottom: 55px;
+    margin-bottom: 33px;
     padding: 0 4px;
   }
   .centerBtn {
@@ -99,9 +110,10 @@
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 5px 42px;  
+    padding: 5px 43px;  
     cursor: pointer;
     font-size: 20px;
+    font-weight: 600;
   }
   
   .partnerSection {
@@ -116,9 +128,13 @@
   
   .partnerSection h4 {
     margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
   }
   .partnerSection p {
     margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
   }
   
   .partnerSection ul {
@@ -129,10 +145,12 @@
   
   .partnerSection li {
     display: flex;
-    gap: 4px;
+    gap: 15px;
     align-items: center;
     color: #000000;
     margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
   }
     .partnerSection li img {
         width: 18px;
@@ -148,5 +166,134 @@
     font-weight: 600;
     cursor: pointer;
     font-size: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .modalContent {
+      width: 95%;
+      padding: 16px;
+    }
+  
+    .title h2 {
+      font-size: 20px;
+    }
+  
+    .title p {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+  
+    .infoBar {
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px 12px;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .credits,
+    .responses,
+    .cost {
+      font-size: 18px;
+      padding: 6px 10px;
+    }
+  
+    .rangeLabels {
+      font-size: 12px;
+    }
+  
+    .buyBtn {
+      font-size: 18px;
+      padding: 6px 30px;
+    }
+  
+    .callbackBtn {
+      font-size: 20px;
+      padding: 5px 10px;
+    }
+  
+    .partnerSection {
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+    }
+  
+    .partnerSection h4,
+    .partnerSection p {
+      font-size: 16px;
+    }
+  
+    .partnerSection li {
+      font-size: 13px;
+      justify-content: center;
+    }
+    .partnerSection ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 8px 0 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+  }
+  
+  @media (max-width: 425px) {
+    .title h2 {
+      font-size: 18px;
+    }
+  
+    .title p {
+      font-size: 13px;
+    }
+  
+    .credits,
+    .responses,
+    .cost {
+      font-size: 16px;
+    }
+  
+    .rangeLabels {
+      font-size: 11px;
+      margin-bottom: 45px;
+    }
+  
+    .buyBtn {
+      font-size: 16px;
+      padding: 5px 20px;
+    }
+  
+    .callbackBtn {
+      font-size: 18px;
+      padding: 4px 8px;
+    }
+  
+    .partnerSection h4 {
+      font-size: 15px;
+    }
+  
+    .partnerSection p {
+      font-size: 14px;
+    }
+  
+    .partnerSection li {
+      font-size: 12px;
+    }
+    .partnerSection ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 8px 0 16px;
+        display: flex ;
+        flex-direction: column;
+        align-items: start;
+    }
+    .closeButton {
+        position: absolute;
+        top: 1px;
+        right: 6px;
+        font-size: 20px;
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
   }
   

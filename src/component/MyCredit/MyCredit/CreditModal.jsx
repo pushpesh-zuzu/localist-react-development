@@ -21,9 +21,10 @@ const CreditModal = ({ onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>×</button>
-
-        <h2 className={styles.title}>Pricing to suit your business</h2>
+<div className={styles.title}>
+        <h2 >Pricing to suit your business</h2>
         <p className={styles.subtitle}>Build a pack to suit your business needs</p>
+        </div>
 
         <div className={styles.infoBar}>
           <span className={styles.credits}>Credits: {creditValue}</span>

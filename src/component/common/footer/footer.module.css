@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 24px;
 }
 
 .contactSection h2 {
@@ -465,7 +466,7 @@
 
   .footerBottom {
     display: flex;
-    width: 98%;
+    width: 97%;
     justify-content: center;
     align-items: center;
   }

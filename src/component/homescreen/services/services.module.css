@@ -173,8 +173,10 @@
   font-weight: 400 !important;
 }
 
-/* .viewAllBtn {
+.viewAllBtn {
   text-align: center;
+  margin-top:48px;
+  
 }
 
 .viewAllBtn button {
@@ -189,7 +191,7 @@
   cursor: pointer;
   padding: 11px 31px;
   border-radius: 4.67px;
-} */
+}
 
 @media (max-width: 1020px) {
   .serviceImage {

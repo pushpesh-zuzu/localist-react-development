@@ -122,6 +122,11 @@
 @media (max-width: 590px) {
   .averagePriceContainer {
     padding: 26px 20px;
+    
+  }
+  .averagePriceContainer h1{
+    padding: 26px 20px;
+    font-size:30px
   }
   .th {
     font-size: 16px;
