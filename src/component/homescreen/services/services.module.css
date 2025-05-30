@@ -90,7 +90,7 @@
 .arrowLeft,
 .arrowRight {
   position: absolute;
-  top: 55%;
+  top: 45%;
   background: var(--text-color) !important;
   border: none;
   width: 40px;
@@ -173,13 +173,13 @@
   font-weight: 400 !important;
 }
 
-.viewAllBtn {
+.viewAllBtnBox {
   text-align: center;
   margin-top:64px;
   
-}
+} 
 
-.viewAllBtn button {
+.viewAllBtn {
   background: #00afe3;
   box-shadow: 0px 0px 4px 0px #0000004d;
   color: #ffffff;
@@ -201,9 +201,9 @@
   .arrowRight {
     top: 48%;
   }
-  .viewAllBtn {
+  .viewAllBtnBox {
     text-align: center;
-    margin-top:48px;
+    margin-top:16px;
     
   }
 }
@@ -225,10 +225,15 @@
     width: 35px;
     height: 35px;
   }
+  .viewAllBtnBox {
+    text-align: center;
+    margin-top:16px;
+    
+  }
 
   .arrowLeft,
   .arrowRight {
-    top: 45%;
+    top: 40%;
   }
 }
 
@@ -237,11 +242,7 @@
     font-size: 22px;
     margin: 0 0 23px;
   }
-  .viewAllBtn button {
-    font-size: 12px;
-    line-height: 18px;
-    padding: 5.72px 10px;
-  }
+ 
 }
 
 @media (max-width: 560px) {
@@ -256,7 +257,11 @@
     width: 285px;
     height: 166px;
   }
-
+  .viewAllBtnBox {
+    text-align: center;
+    margin-top:64px;
+    
+  }
   .image {
     width: 210px;
     height: 156px;

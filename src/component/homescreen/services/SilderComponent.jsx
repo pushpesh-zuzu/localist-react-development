@@ -65,7 +65,7 @@ const SliderComponent = ({ subcategory }) => {
 
   return (
     <>
-     {subcategory?.length > 0 && (<> <button
+     {subcategory?.length > 0 && (<> <div> <button
         className={styles.arrowLeft}
         onClick={() => slider.current?.prev()}
       >
@@ -82,15 +82,19 @@ const SliderComponent = ({ subcategory }) => {
         </div>
        
       </div>
-      <div className={styles.viewAllBtn}>
-        <button>View All </button>
-        </div>
+     
       <button
         className={styles.arrowRight}
         onClick={() => slider.current?.next()}
       >
         <img src={rightArrow} alt="Right" />
-      </button></>)}
+      </button>
+      </div>
+      
+      <div className={styles.viewAllBtnBox}>
+        <button className={styles.viewAllBtn}>View All </button>
+        </div>
+      </>)}
      
 
       {show && (userToken?.active_status == 2 || !userToken )  && (
