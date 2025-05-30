@@ -750,6 +750,7 @@ const BidsList = ({ previousStep }) => {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
+        lead_id:requestId
     }
     dispatch(getRatingFilterApi(data))
   }, [])

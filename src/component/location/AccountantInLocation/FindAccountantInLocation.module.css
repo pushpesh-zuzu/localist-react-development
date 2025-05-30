@@ -30,13 +30,13 @@
 }
 
 .searchBoxContainer {
-  padding: 20px 44px 30px 44px;
+  padding: 50px 44px 50px 44px;
   border-radius: 10px;
   background: #ffffffe5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 16px; */
+  gap: 16px;
 }
 
 .searchBoxContainer p {
@@ -52,7 +52,7 @@
 
 .searchBoxContainer span {
   color: var(--primary-color);
-  line-height: 57px;
+  /* line-height: 57px; */
 }
 
 .searchInputContainer {

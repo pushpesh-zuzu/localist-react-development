@@ -120,7 +120,7 @@ const SettingsList = () => {
 
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
-            <div className={styles.myLeadSettingWrapper}>
+            <div className={styles.myLeadSettingWrappers}>
               <img src={myCredits} alt="My Profile" />
             </div>
             <h2>My Credits</h2>
@@ -149,7 +149,7 @@ const SettingsList = () => {
 
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
-            <div className={styles.myProfileWrapper}>
+            <div className={styles.myProfileWrappers}>
               <img src={myNotification} alt="My Profile" />
             </div>
             <h2>Notifications</h2>

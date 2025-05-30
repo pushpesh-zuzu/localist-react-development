@@ -114,8 +114,9 @@
 }
 .nationwideFooter {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-top: 18.24px;
+  gap: 48px;
 }
 .switchWrapper {
   display: flex;
@@ -362,5 +363,8 @@
   .switchWrapper {
    margin-left: 4px;
    
+  }
+  .nationwideFooter {
+    gap: 12px;
   }
 }

@@ -247,7 +247,7 @@ const LeadsCards = () => {
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded
                     </p> */}
-                 <p>ACT FAST - {item?.view_count == 30 ? item?.view_count : item?.random_count} </p>
+                 <div className={styles?.mainText}> <p>ACT FAST</p>  <span>{item?.view_count} Professionals</span> <br/>  have viewed this lead</div>
 
                   </div>
                 </div>

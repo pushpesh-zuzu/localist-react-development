@@ -16,7 +16,8 @@
   color: #989898;
   font-weight: 500;
   font-size: 16px;
-  padding: 8px 8px;
+  padding: 0px 8px;
+  padding-bottom: 16px;
 }
 .sectionHeader {
   display: flex;
@@ -36,6 +37,15 @@
   height: 58px;
   background-color: #fce5e3;
 }
+.myProfileWrappers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  background-color: #82FFB2;
+}
 
 .myLeadSettingWrapper {
   display: flex;
@@ -44,9 +54,17 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #e3f6fc;
+  background-color: #AAC9D2;
 }
-
+.myLeadSettingWrappers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  background-color: #CBD2AA;
+}
 .myProfileWrapper img {
   width: 24px;
   height: 24px;
@@ -72,7 +90,7 @@
   background-color: white;
   padding: 15px;
   /* border-radius: 8px; */
-  margin: 10px 0;
+  margin: 6px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -168,7 +186,8 @@
 
   .section p {
     font-size: 13px;
-    padding: 6px 4px;
+    padding: 0px 4px;
+    padding-bottom: 12px;
   }
 
   .card {
