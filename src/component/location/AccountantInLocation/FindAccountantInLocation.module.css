@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  /* gap: 16px; */
 }
 
 .searchBoxContainer p {
@@ -239,8 +239,8 @@
   }
 
   .searchcontainer h1 {
-    font-size: 40px;
-    line-height: 57px;
+    font-size: 36px;
+    line-height: 45px;
   }
 
   .searchBoxContainer {
@@ -249,8 +249,8 @@
   }
 
   .searchBoxContainer p {
-    font-size: 20px;
-    line-height: 37px;
+    font-size: 18px;
+    /* line-height: 37px; */
   }
 
   .searchBoxContainer span {
@@ -271,12 +271,13 @@
   }
 
   .infoContainer {
-    gap: 25px;
+    gap: 20px;
     padding: 20px 0px;
   }
 
   .title {
-    font-size: 28px;
+    font-size: 30px;
+    line-height: 45px;
   }
 
   .descriptionContainer p {

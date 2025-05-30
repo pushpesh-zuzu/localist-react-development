@@ -23,7 +23,8 @@ const GrowthSteps = () => {
           <div className={styles.container}>
             {GrowthStepsData.map((item) => (
               <div className={styles.card} key={item.id}>
-                <div className={styles.header}>
+               <div>
+                 <div className={styles.header}>
                   <div className={styles.iconContainer}>
                     <img src={item.image} alt="icon" className={styles.icon} />
                   </div>
@@ -36,6 +37,7 @@ const GrowthSteps = () => {
                   <li>{item.Description2}</li>
                   <li>{item.Description3}</li>
                 </ul>
+               </div>
                 {/* <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button> */}
                 <button
                   className={styles.button}

@@ -95,6 +95,11 @@
   .image {
     margin-right: 40px !important;
   }
+   .container {
+
+  padding: 0px;
+  
+}
 }
 
 @media (max-width: 767px) {
@@ -102,11 +107,12 @@
     margin-right: 26px !important;
     width: 180px;
   }
+ 
 }
 
 @media (max-width: 680px) {
   .container {
-    padding: 26px 20px;
+    padding: 14px 20px;
   }
 
   .content {
@@ -132,5 +138,10 @@
     background-color: var(--primary-color);
     margin-top: 11.6px;
   }
+  .heading {
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
   
 }

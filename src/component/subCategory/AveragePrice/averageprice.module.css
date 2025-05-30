@@ -101,7 +101,7 @@
 @media (max-width: 890px) {
   .averagePriceContainer {
     padding: 30px 5%;
-    gap: 25px;
+    gap: 0px;
   }
 
   .th {

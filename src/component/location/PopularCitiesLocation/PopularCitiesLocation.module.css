@@ -132,5 +132,13 @@
 @media (max-width: 480px) {
   .popularcityContainer {
     padding: 10px 20px;
+    
+  }
+  .popularcityContainer h1 {
+    font-size: 30px;
+    line-height: 45px;
+  }
+   .popularcityContainer > div {
+    gap: 2px;
   }
 }

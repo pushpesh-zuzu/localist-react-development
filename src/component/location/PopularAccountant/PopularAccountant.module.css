@@ -322,6 +322,7 @@
 
   .description {
     font-size: 14px;
+    margin-top: 4px;
   }
 
   .grid {
@@ -348,7 +349,7 @@
   }
 
   .separator {
-    margin: 10px;
+    margin: 0px;
   }
 
   .avatar {
@@ -377,11 +378,23 @@
     font-size: 14px;
     padding: 8px 10px;
   }
+  .heading {
+  margin-bottom: 21px;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
 }
 
 @media screen and (max-width: 320px) {
   .container {
-    padding: 15px 5px;
+    padding: 15px 0px;
+  }
+   .separator {
+    margin: 0px;
   }
 
   .card {

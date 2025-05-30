@@ -122,13 +122,13 @@
     padding: 20px;
   }
   .header{
-    flex-direction: column;
+    /* flex-direction: column; */
     display: flex;
-    align-items: start;
+    align-items: center;
   }
   .title{
     white-space: normal;
-    font-size: 23px;
+    font-size: 22px;
   }
 
   .title span{

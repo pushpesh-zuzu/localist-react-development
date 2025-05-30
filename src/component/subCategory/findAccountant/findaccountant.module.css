@@ -19,7 +19,7 @@
   font-weight: 700;
   font-size: 45px;
   margin: 0;
-  margin-bottom: 15px;
+  margin-bottom: 9px;
   color: var(--text-color);
 
 }
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 26px;
+  /* gap: 26px; */
 }
 
 .searchBoxContainer p {
@@ -244,7 +244,7 @@
 
   .searchBoxContainer {
     padding: 20px 15px;
-    gap: 10px;
+    gap: 6px;
   }
 
   .searchBoxContainer p {
