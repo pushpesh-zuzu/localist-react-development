@@ -4,6 +4,7 @@
   padding: 40px 0px;
   text-align: center;
   position: relative;
+  padding-bottom:0px
 }
 
 .container:last-child {
@@ -16,7 +17,7 @@
   font-size: 35px;
   line-height: 40px;
   letter-spacing: 0;
-  margin: 0 0 40px;
+  margin: 0 0 30px;
 }
 
 .heading span {
@@ -214,7 +215,7 @@
   }
 
   .container:last-child {
-    padding-bottom: 20px;
+    padding-bottom: 0px;
   }
 
   .heading {
@@ -319,6 +320,7 @@
   .container {
     width: 86%;
     margin: 0 auto 40px;
+    margin-bottom:0px
   }
 
   .heading {
@@ -326,7 +328,7 @@
     line-height: 30px;
   }
   .container:last-child {
-    padding-bottom: 32px;
+    padding-bottom: 0px;
   }
 
   .sliderWrapper {
@@ -389,6 +391,7 @@
     font-size: 18px;
     line-height: 30px;
   }
+ 
 }
 
 @media (max-width: 340px) {
