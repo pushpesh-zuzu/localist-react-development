@@ -11,6 +11,11 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
     const [hover, setHover] = useState(null);
     const dispatch = useDispatch();
     const { reviewLoader } = useSelector((state) => state.myProfile);
+    const { userToken } = useSelector((state)=> state.auth)
+       const { registerData } = useSelector(
+          (state) => state.findJobs
+        );
+        const userId = userToken?.id  ? userToken?.id  : registerData?.id
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -56,7 +61,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
             if (result) {
                 showToast("success", result?.message);
                 closeModal();
-                dispatch(getReviewListApi())
+                dispatch(getReviewListApi(userId))
             }
         });
     };

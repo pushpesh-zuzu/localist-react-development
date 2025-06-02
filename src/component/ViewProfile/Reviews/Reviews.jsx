@@ -10,7 +10,12 @@ const ReviewSection = () => {
   const [isopen, setIsOpen] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams()
-  console.log(profileId,"pro")
+  const { userToken } = useSelector((state)=> state.auth)
+   const { registerData } = useSelector(
+      (state) => state.findJobs
+    );
+    const userId = userToken?.id  ? userToken?.id  : registerData?.id
+  console.log(profileId,userToken,userId,"pro")
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -30,7 +35,8 @@ const ReviewSection = () => {
 const { reviewListData } = useSelector((state) => state.myProfile); 
 
     useEffect(()=> {
-        dispatch(getReviewListApi())
+     
+        dispatch(getReviewListApi(userId))
     },[])
 
 

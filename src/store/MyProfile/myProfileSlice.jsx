@@ -39,12 +39,12 @@ export const getCustomerLinkApi = () => {
       };
     };
 
-    export const getReviewListApi = () => {
+    export const getReviewListApi = (reviewUserId) => {
         return async (dispatch) => {
        
           try {
             const response = await axiosInstance.get(
-              `review/get-reviews`,
+              `review/get-reviews/${reviewUserId}`,
               
             );
       

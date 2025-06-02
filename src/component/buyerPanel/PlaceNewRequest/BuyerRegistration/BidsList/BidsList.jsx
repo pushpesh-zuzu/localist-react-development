@@ -729,7 +729,7 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
-
+console.log(seller,"seller")
     navigate(`/view-profile`)
     const data = {
       user_id: userToken?.remember_tokens
