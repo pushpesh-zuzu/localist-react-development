@@ -12,7 +12,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
-import LocationIcon from "../../../../../assets/Icons/LocationIcon.png";
+import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");

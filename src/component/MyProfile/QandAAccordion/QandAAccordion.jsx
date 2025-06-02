@@ -19,19 +19,20 @@ const questions = [
     id: "startBusiness",
     label: "What inspired you to start your own business?",
   },
+   {
+    id:"clientChoose",
+    label:"Why should our clients choose you?"
+  },
   {
     id: "remoteServices",
     label:
       "Can you provide your services online or remotely? If so, please add details.",
   },
-  {
-    id:"clientChoose",
-    label:"Why should our clients choose you?"
-  },
-   {
-    id:"serviceOnline",
-    label:"Can you provide your services online or remotely? If so, please add details."
-  },
+ 
+  //  {
+  //   id:"serviceOnline",
+  //   label:"Can you provide your services online or remotely? If so, please add details."
+  // },
   {
     id: "safeFromCovid",
     label:

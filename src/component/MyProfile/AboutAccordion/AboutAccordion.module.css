@@ -366,6 +366,12 @@
     gap: 4px;
     margin: 15px 0;
   }
+  .checkboxRow input {
+    margin: 3px 3px 3px 0px;
+  }
+  .textarea {
+    margin-top: 4px;
+  }
   .hrline {
     max-width: 100%;
     display: flex;

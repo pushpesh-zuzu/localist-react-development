@@ -65,7 +65,7 @@ const AccreditationsAccordion = () => {
           </div>
         </div>
 
-        <div>
+        <div className={styles.AccreditationsAccordionBox}>
           <button
             className={styles.addAccreditationButton}
             onClick={handleAccreditationAdd}

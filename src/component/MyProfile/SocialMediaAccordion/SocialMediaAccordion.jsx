@@ -7,7 +7,7 @@ const platforms = [
   { label: "Twitter", placeholder: "@username" },
   { label: "Tik Tok", placeholder: "@username" },
   { label: "Instagram", placeholder: "@username" },
-  { label: "Linkedin please", placeholder: "@username" },
+  { label: "Linkedin", placeholder: "@username" },
 ];
 
 const SocialMediaAccordion = () => {
