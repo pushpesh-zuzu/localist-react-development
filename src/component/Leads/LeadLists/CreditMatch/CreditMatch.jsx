@@ -6,19 +6,23 @@ import {
   getCreditPlanList,
   totalCreditData,
 } from "../../../../store/LeadSetting/leadSettingSlice";
+import { useNavigate } from "react-router-dom";
 
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { creditPlanList, leadRequestList, totalCredit } = useSelector(
+  const { creditPlanList, leadRequestList, totalCredit, } = useSelector(
     (state) => state.leadSetting
   );
   console.log(totalCredit, "leadRequestList");
-
+const handleBuyNow = () => {
+  navigate("/payment-details")
+}
   const filterData = creditPlanList?.filter((item, index) => index === 0);
   const leadTotalCredit = leadRequestList?.filter((item, index) => index === 0);
   console.log(
@@ -87,7 +91,7 @@ const CreditMatch = () => {
             </div>
 
             <div className={styles.actionSection}>
-              <button className={styles.buyButton}>
+              <button className={styles.buyButton} onClick={handleBuyNow}>
                 Buy {item?.no_of_leads} credits
               </button>
               <div className={styles.autoTopUpContainer}>

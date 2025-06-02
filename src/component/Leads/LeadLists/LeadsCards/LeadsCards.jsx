@@ -24,7 +24,7 @@ const LeadsCards = () => {
   const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
 
 
-  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader,filters } = useSelector(
+  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader,filters,totalCredit,purchasedData } = useSelector(
     (state) => state.leadSetting
   );
   const { registerData } = useSelector((state) => state.findJobs);
@@ -41,30 +41,66 @@ const LeadsCards = () => {
     setVisibleCount((prev) => prev + 5);
   };
 
+  // const handleContinue = () => {
+  //   if (!selectedItem) return;
+  // if(totalCredit > 0) {
+
+  // }
+
+  //   const formData = new FormData();
+  //   formData.append("buyer_id", selectedItem?.customer_id);
+  //   formData.append("user_id", userToken?.remember_tokens);
+  //   formData.append("bid", selectedItem?.credit_score);
+  //   formData.append("lead_id", selectedItem?.id);
+  //   formData.append("bidtype", "purchase_leads");
+  //   formData.append("service_id", selectedItem?.service_id);
+  //   formData.append("distance", "0");
+
+  //   dispatch(getAddManualBidData(formData)).then((result) => {
+  //     if (result) {
+  //       showToast("success", result?.message)
+  //       setModalOpen(false);
+  //     }
+  //     const data = {
+  //       user_id: userToken?.remember_tokens
+  //     }
+  //     dispatch(totalCreditData(data))
+  //     dispatch(getLeadRequestList(data))
+  //   });
+  // }
+  console.log(purchasedData,"purchasedData")
   const handleContinue = () => {
-    if (!selectedItem) return;
+  if (!selectedItem) return;
 
-    const formData = new FormData();
-    formData.append("buyer_id", selectedItem?.customer_id);
-    formData.append("user_id", userToken?.remember_tokens);
-    formData.append("bid", selectedItem?.credit_score);
-    formData.append("lead_id", selectedItem?.id);
-    formData.append("bidtype", "purchase_leads");
-    formData.append("service_id", selectedItem?.service_id);
-    formData.append("distance", "0");
-
-    dispatch(getAddManualBidData(formData)).then((result) => {
-      if (result) {
-        showToast("success", result?.message)
-        setModalOpen(false);
-      }
-      const data = {
-        user_id: userToken?.remember_tokens
-      }
-      dispatch(totalCreditData(data))
-      dispatch(getLeadRequestList(data))
-    });
+  if (totalCredit <= 0 && selectedItem?.credit_score <= totalCredit) {
+    showToast("error", "Please buy credit");
+    return;
   }
+
+  const formData = new FormData();
+  formData.append("buyer_id", selectedItem?.customer_id);
+  formData.append("user_id", userToken?.remember_tokens);
+  formData.append("bid", selectedItem?.credit_score);
+  formData.append("lead_id", selectedItem?.id);
+  formData.append("bidtype", "purchase_leads");
+  formData.append("service_id", selectedItem?.service_id);
+  formData.append("distance", "0");
+
+  dispatch(getAddManualBidData(formData)).then((result) => {
+    if (result) {
+      showToast("success", result?.message);
+      setModalOpen(false);
+    }
+
+    const data = {
+      user_id: userToken?.remember_tokens
+    };
+
+    dispatch(totalCreditData(data));
+    dispatch(getLeadRequestList(data));
+  });
+};
+
   const handleViewProfile = (item) => {
     navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`)
   }

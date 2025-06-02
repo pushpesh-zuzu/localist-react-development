@@ -171,15 +171,7 @@ const profileId = useParams()
           <div></div>
           <div></div>
         </div> : 
-//         <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
-//   <img src={searchIcon} alt="" className={styles.icon} width={18} height={18} />
-//   <input
-//     type="text"
-//     placeholder={"Search for a service"}
-//     onChange={onChange}
-//     className={styles.input}
-//   />
-// </div>
+
 <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
 <div className={`${styles.mobileOnly}`}>
   <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
@@ -289,6 +281,7 @@ const profileId = useParams()
           </div>
         </Popover>
       ) : (
+        <>
         <div className={styles.logsBtns}>
           <div
             className={styles.loginBtn}
@@ -308,6 +301,7 @@ const profileId = useParams()
             </div>
           )}
         </div>
+        </>
       )}
     </div>
   );

@@ -131,23 +131,53 @@ import { showToast } from "../../../utils";
           }
         };
       }; 
-      export const downloadInvoceApi = (invoiceData) => {
-        return async (dispatch) => {
-          dispatch(setInvoiceLoader(true));
-          try {
-            const response = await axiosInstance.post(`payment/download-invoice`,invoiceData);
-            if (response) {
-              // dispatch(setPreferencesList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setInvoiceLoader(false));
-          }
-        };
-      }
+      // export const downloadInvoceApi = (invoiceData) => {
+      //   return async (dispatch) => {
+      //     dispatch(setInvoiceLoader(true));
+      //     try {
+      //       const response = await axiosInstance.post(`payment/download-invoice`,invoiceData);
+      //       console.log(response,"response")
+      //       if (response) {
+      //         // dispatch(setPreferencesList(response?.data?.data));
+      //         return response?.data;
+      //       }
+      //     } catch (error) {
+      //       showToast("error", error?.response?.data?.message);
+      //     } finally {
+      //       dispatch(setInvoiceLoader(false));
+      //     }
+      //   };
+      // }
      
+      export const downloadInvoceApi = (invoiceData) => {
+  return async () => {
+    try {
+      const response = await axiosInstance.post(
+        `payment/download-invoice`,
+        invoiceData,
+        {
+          responseType: "blob", // 👈 IMPORTANT: ensures we get file blob
+        }
+      );
+
+      // Create blob and download
+      const blob = new Blob([response.data], { type: "application/pdf" }); // Change type if needed
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Invoice-${invoiceData.invoice_id}.pdf`; // Customize file name if needed
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+      showToast("error", error?.response?.data?.message || "Download failed");
+    }
+  };
+};
+
 
      
 

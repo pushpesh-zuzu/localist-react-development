@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./InvoiceAndBilling.module.css";
 import GreenTick from "../../../assets/Images/Setting/RightClick.svg";
 import downloadIcon from "../../../assets/Images/Setting/DownloadIcon.svg";
@@ -11,13 +11,20 @@ const InvoiceTable = ({ data }) => {
   const dispatch = useDispatch();
   const { invoiceLoader } = useSelector((state) => state.myCredit)
 
-  const handleDownload = (item) => {
-    const datas = {
-        invoice_id: item?.id
-    }
-    console.log(datas,"ll")
-    dispatch(downloadInvoceApi(datas));
+  const [downloadingId, setDownloadingId] = useState(null);
+  const handleDownload = async (item) => {
+  setDownloadingId(item.id);
+
+  const datas = {
+    invoice_id: item?.id,
   };
+
+  try {
+    await dispatch(downloadInvoceApi(datas));
+  } finally {
+    setDownloadingId(null);
+  }
+};
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -42,7 +49,7 @@ const InvoiceTable = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {data && data.length > 0 ? (
+             {data && data.length > 0 ? (
             data.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
@@ -50,15 +57,21 @@ const InvoiceTable = ({ data }) => {
                 <td>£{item.total_amount}</td>
                 <td><img src={GreenTick} alt="Paid" /></td>
                 <td>
-                 {invoiceLoader ?  <Spin
-                                          indicator={<LoadingOutlined spin style={{ color: "blue" }} />}
-                                        />  : <img
-                    src={downloadIcon}
-                    alt="Download"
-                    className={styles.downloadIcon}
-                    onClick={() => handleDownload(item)}
-                    style={{ cursor: "pointer" }}
-                  />}
+                  {downloadingId === item.id ? (
+                    <Spin
+                      indicator={
+                        <LoadingOutlined spin style={{ color: "blue" }} />
+                      }
+                    />
+                  ) : (
+                    <img
+                      src={downloadIcon}
+                      alt="Download"
+                      className={styles.downloadIcon}
+                      onClick={() => handleDownload(item)}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
                 </td>
               </tr>
             ))

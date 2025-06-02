@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./ViewProfile.module.css";
 import { showToast } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { addSubmitReviewApi } from "../../store/MyProfile/myProfileSlice";
+import { addSubmitReviewApi, getReviewListApi } from "../../store/MyProfile/myProfileSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
@@ -56,6 +56,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
             if (result) {
                 showToast("success", result?.message);
                 closeModal();
+                dispatch(getReviewListApi())
             }
         });
     };

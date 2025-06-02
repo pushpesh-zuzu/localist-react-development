@@ -350,6 +350,9 @@
     width: 100%;
     padding: 10px;
   }
+   .nextButton {
+   font-weight: 700;
+  }
 
   .footer {
     flex-direction: column;
@@ -366,5 +369,22 @@
   }
   .nationwideFooter {
     gap: 12px;
+  }
+}
+@media (max-width: 380px) {
+  
+  .switchWrapper {
+   margin-left: 0px;
+   
+  }
+  .nationwideFooter {
+    gap: 18px;
+    flex-direction: column;
+  }
+   .infoText {
+    margin-top: 0px;
+  }
+  .nextButton {
+   font-weight: 700;
   }
 }

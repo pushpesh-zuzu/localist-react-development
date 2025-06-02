@@ -310,6 +310,7 @@
   .buttonContainer {
     flex-direction: column;
     gap: 12px;
+    margin-top: 16px;
   }
 
   .nextButton,
@@ -317,5 +318,6 @@
     width: 100%;
     font-size: 14px;
     padding: 10px;
+    font-weight: 700;
   }
 }
