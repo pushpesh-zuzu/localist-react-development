@@ -1,0 +1,145 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 960px;
+  max-width: 964px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.subText {
+  margin-bottom: 20px;
+ text-align: center;
+ 
+}
+.subText h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 24px;
+   color: #000000;
+ 
+}
+
+.subText p {
+ text-align: center;
+  font-size: 16px;
+   color: #000000;
+}
+
+.section {
+  margin: 12px 0;
+}
+
+.accordion {
+  width: 100%;
+  background-color: #f2f9fc;
+  border: none;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #000000;
+  font-size: 18px;
+}
+
+.panel {
+  padding: 10px;
+  background-color: #fafafa;
+  border-left: 3px solid #007bff;
+  margin-top: 5px;
+  
+}
+.panel p {
+color: #000000;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.offerBox {
+  background-color: #f5faff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 20px;
+  border: 1px solid #cde6f7;
+}
+
+.offerHeader {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.offerBadge,
+.discountBadge {
+  background-color: #00aaff;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.creditDetails {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.buyButton {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 5px 99px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.footerNote {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color:#BEBEBE;
+}

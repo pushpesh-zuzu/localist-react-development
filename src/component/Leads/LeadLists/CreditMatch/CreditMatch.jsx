@@ -120,7 +120,7 @@ const handleBuyNow = () => {
         }`}
       >
         <button className={styles.creditsButton}>
-          You have {totalCredit ? totalCredit : "0"} Credits Left
+          You have {totalCredit?.total_credit ? totalCredit?.total_credit : "0"} Credits Left
         </button>
       </div>
     </>

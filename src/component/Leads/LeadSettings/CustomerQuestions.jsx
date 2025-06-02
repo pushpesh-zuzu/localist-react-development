@@ -4,7 +4,7 @@ import styles from "./CustomerQuestions.module.css";
 import CustomerQuestionsImg from "../../../assets/Images/Leads/CustomerQuestionsImg.svg";
 import UpArrowIcon from "../../../assets/Images/Leads/UpArrowIcon.svg";
 import DownArrowIcon from "../../../assets/Images/Leads/DownArrowIcon.svg";
-import LocationIcon from "../../../assets/Images/Leads/LocationIcon.svg";
+import LocationIcon from "../../../assets/Images/HowItWorks/locationImg.svg";
 import TickIcon from "../../../assets/Images/Leads/TickIcon.svg";
 import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
 

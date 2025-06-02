@@ -16,6 +16,7 @@ import { showToast } from "../../../utils";
           }
         } catch (error) {
           showToast("error", error?.response?.data?.message);
+          return error?.response?.data
         } finally {
           dispatch(setBuyCreditLoader(false));
         }

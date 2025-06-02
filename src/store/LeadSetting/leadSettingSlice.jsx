@@ -27,7 +27,7 @@ const initialState = {
     creditPlanList:[],
     saveLaterLoader:false,
     saveForLaterDataList:[],
-    totalCredit:[],
+    totalCredit:{},
     purchasedData:{},
     sellerRecommended:[],
     filters:{
@@ -132,10 +132,10 @@ export const getleadPreferencesList = (serviceId) => {
       dispatch(setleadPreferencesListLoader(true));
       try {
         const response = await axiosInstance.post(`users/total-credit`, totalCreditData);
-  console.log(response?.data?.data?.plan_purchased,"response")
+  console.log(response,"response")
         if (response) {
             dispatch(setTotalCreditData(response?.data?.data));
-            dispatch(setPurchasedData(response?.data?.data?.plan_purchased))
+            // dispatch(setPurchasedData(response?.data?.data?.plan_purchased))
         }
       } catch (error) {
         //   dispatch(setAuthError(error?.response?.data?.message));

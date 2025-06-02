@@ -211,12 +211,16 @@ const handleBuyNow = (item) => {
   console.log(creditData, item?.no_of_leads, credits, vatTotal, 'creditData');
 
   dispatch(addBuyCreditApi(creditData)).then((result) => {
-    if (result) {
-      showToast('success', result?.message);
-      setActiveLoaderId(null);
-      dispatch(getInvoiceBillingListApi());
-    }
-  });
+    
+  if (result?.success) {
+    showToast('success', result?.message);
+    setActiveLoaderId(null);
+    dispatch(getInvoiceBillingListApi());
+  } else if (result?.success === false) {
+    
+    navigate("/payment-details");
+  }
+});
 };
 
   

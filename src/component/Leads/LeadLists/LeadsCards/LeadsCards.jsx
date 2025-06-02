@@ -14,15 +14,17 @@ import { showToast } from "../../../../utils";
 import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
+import ContactConfirmModal from "../ContactConfirmModal";
 
-const LeadsCards = () => {
+const LeadsCards = ({enoughCredit}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [isModalOpen, setModalOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState(null)
   const [visibleCount, setVisibleCount] = useState(5);
   const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
-
+const [isopen,setIsOpen] = useState(false)
+const [planpurcahse,setPlanPurchase] = useState("")
 
   const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader,filters,totalCredit,purchasedData } = useSelector(
     (state) => state.leadSetting
@@ -40,6 +42,7 @@ const LeadsCards = () => {
   const handleViewMore = () => {
     setVisibleCount((prev) => prev + 5);
   };
+  
 
   // const handleContinue = () => {
   //   if (!selectedItem) return;
@@ -69,17 +72,89 @@ const LeadsCards = () => {
   //   });
   // }
   console.log(purchasedData,"purchasedData")
-  const handleContinue = () => {
-  if (!selectedItem) return;
+//   const handleContinue = () => {
+//   if (!selectedItem) return;
+//   if(totalCredit?.plan_purchased === 0){
+//     setIsOpen(true)
+//   }
 
-  if (totalCredit <= 0 && selectedItem?.credit_score <= totalCredit) {
-    showToast("error", "Please buy credit");
+//   if (totalCredit?.total_credit <= 0 && selectedItem?.credit_score <= totalCredit?.total_credit) {
+//    setIsOpen(true)
+//     return;
+//   }
+
+//   const formData = new FormData();
+//   formData.append("buyer_id", selectedItem?.customer_id);
+//   formData.append("user_id", userToken?.remember_tokens);
+//   formData.append("bid", selectedItem?.credit_score);
+//   formData.append("lead_id", selectedItem?.id);
+//   formData.append("bidtype", "purchase_leads");
+//   formData.append("service_id", selectedItem?.service_id);
+//   formData.append("distance", "0");
+
+//   dispatch(getAddManualBidData(formData)).then((result) => {
+//     if (result) {
+//       showToast("success", result?.message);
+//       setModalOpen(false);
+//     }
+
+//     const data = {
+//       user_id: userToken?.remember_tokens
+//     };
+
+//     dispatch(totalCreditData(data));
+//     dispatch(getLeadRequestList(data));
+//   });
+// };
+const handleContinue = (item) => {
+  if (!item) return;
+  setSelectedItem(item)
+setPlanPurchase(totalCredit?.plan_purchased)
+  
+
+  // Condition 1: Plan not purchased
+  if (totalCredit?.plan_purchased === 0) {
+    setIsOpen(true);
+    return;
+  }
+  // Condition 2: Not enough credits
+  if (totalCredit?.total_credit < item?.credit_score) {
+    setIsOpen(true);
+    return;
+  }
+  if(totalCredit?.total_credit > item?.credit_score){
+    setModalOpen(true)
     return;
   }
 
+  // Proceed with API call if conditions are okay
+  // const formData = new FormData();
+  // formData.append("buyer_id", item?.customer_id);
+  // formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+  // formData.append("bid", item?.credit_score);
+  // formData.append("lead_id", item?.id);
+  // formData.append("bidtype", "purchase_leads");
+  // formData.append("service_id", item?.service_id);
+  // formData.append("distance", "0");
+
+  // dispatch(getAddManualBidData(formData)).then((result) => {
+  //   if (result) {
+  //     showToast("success", result?.message);
+  //     setModalOpen(false);
+  //   }
+
+  //   const data = {
+  //     user_id: userToken?.remember_tokens,
+  //   };
+
+  //   dispatch(totalCreditData(data));
+  //   dispatch(getLeadRequestList(data));
+  // });
+};
+const handleContinues = () => {
   const formData = new FormData();
   formData.append("buyer_id", selectedItem?.customer_id);
-  formData.append("user_id", userToken?.remember_tokens);
+  formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
   formData.append("bid", selectedItem?.credit_score);
   formData.append("lead_id", selectedItem?.id);
   formData.append("bidtype", "purchase_leads");
@@ -93,13 +168,14 @@ const LeadsCards = () => {
     }
 
     const data = {
-      user_id: userToken?.remember_tokens
+      user_id: userToken?.remember_tokens,
     };
 
     dispatch(totalCreditData(data));
     dispatch(getLeadRequestList(data));
   });
-};
+}
+
 
   const handleViewProfile = (item) => {
     navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`)
@@ -270,10 +346,15 @@ const LeadsCards = () => {
 
                   {/* Right Section - Lead Purchase */}
                   <div className={styles.leadActions}>
-                    <button className={styles.purchaseButton} onClick={() => {
-                      setSelectedItem(item);
-                      setModalOpen(true);
-                    }}>
+                    <button className={styles.purchaseButton} 
+                    // onClick={() => {
+                    //   // setSelectedItem(item);
+                    //   // setModalOpen(true);
+                      
+                    // }}
+                    onClick={() => handleContinue(item)}
+                    >
+                   
                       Contact {item?.customer?.name}
                     </button>
                     <span className={styles.credits}>
@@ -304,11 +385,14 @@ const LeadsCards = () => {
       <CustomModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
-        onContinue={handleContinue}
+        onContinue={handleContinues}
         message="Are you sure you want to continue?"
         loading={manualBidLoader}
       />
-
+{isopen && <ContactConfirmModal onClose={() => setIsOpen(false)} 
+  enoughCredit={planpurcahse}
+  />}
+  
     </>
   );
 };

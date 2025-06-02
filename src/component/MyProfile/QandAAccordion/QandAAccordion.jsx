@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./QandAAccordion.module.css";
+import { label } from "framer-motion/client";
 
 const questions = [
   {
@@ -22,6 +23,14 @@ const questions = [
     id: "remoteServices",
     label:
       "Can you provide your services online or remotely? If so, please add details.",
+  },
+  {
+    id:"clientChoose",
+    label:"Why should our clients choose you?"
+  },
+   {
+    id:"serviceOnline",
+    label:"Can you provide your services online or remotely? If so, please add details."
   },
   {
     id: "safeFromCovid",
