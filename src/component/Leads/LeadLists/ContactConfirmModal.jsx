@@ -1,17 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ContactConfirmModal.module.css';
 import { useNavigate } from "react-router-dom";
 import { getCreditPlanList } from '../../../store/LeadSetting/leadSettingSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { addBuyCreditApi, getInvoiceBillingListApi } from '../../../store/MyProfile/MyCredit/MyCreditSlice';
+import { showToast } from '../../../utils';
 
 const ContactConfirmModal = ({ onClose,enoughCredit, }) => {
  
   const navigate = useNavigate()
 const dispatch = useDispatch()
+const [activeLoaderId, setActiveLoaderId] = useState(null)
+const [isChecked, setIsChecked] = useState(false)
 const { creditPlanList } =useSelector((state)=> state.leadSetting)
   const handleNavigate = () => {
     navigate("/mycredits")
   }
+    const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
   useEffect(()=>{
 dispatch(getCreditPlanList())
   },[])
@@ -22,6 +29,50 @@ dispatch(getCreditPlanList())
       };
       
     }, []);
+
+
+const handleBuyNow = (item) => {
+  setActiveLoaderId(item?.id);
+
+  let credits = item.no_of_leads; 
+
+  const vatTotal =
+    item?.billing_vat_register === 0
+      ? 0
+      : Math.floor((item?.price * 20) / 100);
+
+  // ✅ If coupon exists and is percentage-based
+  if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
+    const discountPercent = parseFloat(addcoupanList.replace('%', ''));
+    const discountAmount = Math.floor((item.no_of_leads * discountPercent) / 100);
+
+    credits = item.no_of_leads + discountAmount; 
+  }
+
+  const creditData = {
+    amount: item?.price,
+    credits: credits,
+    details: item?.name,
+    total_amount: (item?.price + vatTotal) * 100,
+    vat: vatTotal,
+    top_up: isChecked ? 1 : 0,
+  };
+
+  console.log(creditData, item?.no_of_leads, credits, vatTotal, 'creditData');
+
+  dispatch(addBuyCreditApi(creditData)).then((result) => {
+    
+  if (result?.success) {
+    showToast('success', result?.message);
+    setActiveLoaderId(null);
+    dispatch(getInvoiceBillingListApi());
+  } else if (result?.success === false) {
+    
+    navigate("/payment-details");
+  }
+});
+};
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
@@ -71,9 +122,12 @@ dispatch(getCreditPlanList())
           </div>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.buyButton} onClick={handleNavigate}>Buy {item?.no_of_leads} credits</button>
+            <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>Buy {item?.no_of_leads} credits</button>
             <label className={styles.checkboxLabel}>
-              <input type="checkbox" /> Auto top-up next time
+               <input
+                      type="checkbox"
+                     checked={isChecked}
+          onChange={handleCheckboxChange} ></input> Auto top-up next time
             </label>
           </div>
         </div>

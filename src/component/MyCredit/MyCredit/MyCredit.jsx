@@ -184,7 +184,7 @@ const MyCredits = () => {
 const handleBuyNow = (item) => {
   setActiveLoaderId(item?.id);
 
-  let credits = item.no_of_leads; // Default credits without coupon
+  let credits = item.no_of_leads; 
 
   const vatTotal =
     item?.billing_vat_register === 0

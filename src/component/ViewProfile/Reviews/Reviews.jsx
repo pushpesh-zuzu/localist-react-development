@@ -15,7 +15,7 @@ const ReviewSection = () => {
       (state) => state.findJobs
     );
     const userId = userToken?.id  ? userToken?.id  : registerData?.id
-  console.log(profileId,userToken,userId,"pro")
+  console.log(profileId,"pro")
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -36,7 +36,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
 
     useEffect(()=> {
      
-        dispatch(getReviewListApi(userId))
+        dispatch(getReviewListApi(profileId?.profileId))
     },[])
 
 

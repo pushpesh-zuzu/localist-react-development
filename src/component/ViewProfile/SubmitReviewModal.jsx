@@ -61,7 +61,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
             if (result) {
                 showToast("success", result?.message);
                 closeModal();
-                dispatch(getReviewListApi(userId))
+                dispatch(getReviewListApi(ProfileIDs))
             }
         });
     };
