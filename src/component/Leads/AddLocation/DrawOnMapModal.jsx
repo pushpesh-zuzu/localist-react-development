@@ -366,6 +366,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./DrawOnMapModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import { useSelector } from "react-redux";
+import RemoveLocation from "../../../assets/Images/Leads/RemoveLocationImg.svg"
+import AddLocation from "../../../assets/Images/Leads/AddLocationImg.svg"
+import EditLocation from "../../../assets/Images/Leads/EditlocationImg.svg"
 
 
 const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData,data,isEdit }) => {
@@ -1365,21 +1368,21 @@ const data={
             onClick={handleAddArea}
             disabled={isEditMode}
           >
-            + Add new area
+            <img src={AddLocation} alt="..." /> Add new area
           </button>
           <button 
             className={`${styles.areaButton} ${isEditMode ? styles.activeButton : ''}`}
             onClick={handleEditAreaMode}
             disabled={polygons.length === 0}
           >
-            🖉 Edit an area
+            <img src={EditLocation} alt="..." /> Edit an area
           </button>
           <button 
             className={styles.areaButton} 
             onClick={handleRemoveArea}
             disabled={polygons.length === 0}
           >
-            ⬤ Remove an area {selectedPolygonIndex !== null ? '(Selected)' : ''}
+            <img src={RemoveLocation} alt="..." /> Remove an area {selectedPolygonIndex !== null ? '(Selected)' : ''}
           </button>
         </div>
 
