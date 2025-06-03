@@ -1344,7 +1344,12 @@ const data={
   };
   
   
-  
+  useEffect(() => {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'auto';
+      };
+    }, []);
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContainer}>

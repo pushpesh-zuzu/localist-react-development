@@ -345,6 +345,10 @@ input:checked + .slider::before {
     text-align: left;
     margin-top: 10px;
   }
+  .toggle span {
+  font-weight: 600;
+  font-size: 12px;
+}
 }
 
 @media (max-width: 480px) {

@@ -335,8 +335,7 @@
   }
 
   .suggestion,
-  .locations,
-  .range {
+  .locations {
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
@@ -356,11 +355,43 @@
     font-size: 15px;
   }
   .addLocation{
-    margin-left: 20px;
+    margin-left: 0px;
   }
 
   .saveButton {
     padding: 10px;
     font-size: 16px;
   }
+  .questionBox img {
+    margin-top: -18px;
+  }
+  .removeService {
+    font-size: 12px;
+  }
+  .ranger {
+  display: flex;
+  flex-direction: column;
+  /* width: 50%; */
+}
+.range {
+  font-size: 14px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  width: max-content !important;
+  /* display: flex; */
+}
+  .range span  {
+ 
+  gap: 6px;
+  margin-right: 6px;
+}
+.option {
+  display: flex;
+  align-items: flex-start;
+  margin: 14.47px 0;
+  font-weight: 500;
+  font-size: 13px;
+  color: #000000;
+  line-height: 100%;
+}
 }

@@ -275,3 +275,23 @@
     gap: 8px;
   }
 }
+@media screen and (max-width:480px) {
+   .filterButton {
+    width: 100%;
+    justify-content: center;
+    padding: 0px 0px;
+    font-size: 12px;
+  }
+  
+  .filterButton {
+    font-size: 14px;
+    padding-right: 10px;
+    border-right: 1px solid #ffffff;
+    margin-right: 0;
+  }
+  .actionButtons {
+   
+    gap: 10px;
+    align-items: stretch;
+  }
+}

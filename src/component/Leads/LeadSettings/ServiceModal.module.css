@@ -127,3 +127,22 @@
   font-size: 20px;
   vertical-align: middle;
 }
+@media screen and (max-width:480px) {
+  .modalContent {
+    margin: 0px 10px;
+  }
+  
+.saveBtn {
+  padding: 8px 30px;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+}
+}

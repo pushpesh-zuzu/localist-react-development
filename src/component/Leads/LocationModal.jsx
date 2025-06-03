@@ -350,6 +350,13 @@ const LocationModal = ({
     }
   }, [locationData.miles1, mapLoaded]);
 
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, []);
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>

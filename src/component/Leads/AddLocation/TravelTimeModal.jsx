@@ -193,6 +193,13 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
     onNext(locationData)
     onClose();
   };
+  
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+          document.body.style.overflow = 'auto';
+        };
+      }, []);
 
   return (
     <div className={styles.modalOverlay}>

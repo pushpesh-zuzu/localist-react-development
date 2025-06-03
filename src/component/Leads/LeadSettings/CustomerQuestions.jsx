@@ -364,22 +364,27 @@ const CustomerQuestions = ({ selectedService }) => {
                   <span>
                     <img src={TickIcon} alt="" /> Within
                   </span>{" "}
+                  <span>
+                    {/* <p className=""><b>{item?.miles} miles </b> of <b>{item?.postcode ? item?.postcode : item?.city}</b> </p> */}
                   <strong>{item?.miles} miles {" "}</strong> of{" "}
-                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong>
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></span>
                 </div> : item?.type === "Travel Time" ?  <div className={styles.range} key={idx}> <span>
                     <img src={TickIcon} alt="" /> {" "} Within
                   </span>{" "}
+                  <div>
                   <strong>{item?.travel_by} {item?.travel_time}</strong> of{" "}
-                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div> : item?.type === "Draw on Map"  ? <div className={styles.range} key={idx}> <span>
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div></div> : item?.type === "Draw on Map"  ? <div className={styles.range} key={idx}> <span>
                     <img src={TickIcon} alt="" />  Draws area near
                   </span>{" "}
+                  <div>
                   <strong>{item?.city}</strong> of{" "}
-                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div>  : item?.nation_wide === 0 ? <div className={styles.range} key={idx}>
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div> </div> : item?.nation_wide === 0 ? <div className={styles.range} key={idx}>
                   <span>
                     <img src={TickIcon} alt="" /> Within
                   </span>{" "}
+                  <div>
                   <strong>{item?.miles} miles</strong> of{" "}
-                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong>
+                  <strong>{item?.postcode ? item?.postcode : item?.city}</strong></div>
                 </div>  : item?.nation_wide === 1 ?  <p style={{marginTop:"18px"}}>
                 <label style={{color:"black",fontSize:"14px"}}> 
                 <img src={TickIcon} alt="" />   Nationwide</label>
