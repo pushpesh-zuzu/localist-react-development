@@ -43,10 +43,31 @@
   /* max-width: 700px; */
 }
 
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.infoBox span {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+
+
 .infoIcon {
   margin-right: 6px;
   color: var(--primary-color);
 }
+/* 
+.infoIcon {
+  margin-right: 6px;
+  color: var(--primary-color);
+} */
 
 .areaButtonGroup {
   display: flex;
@@ -185,11 +206,16 @@
   .areaButtonGroup{
  display: flex;
     flex-direction: column;
+    margin: 10px 0px;
   }
 
   .areaButton {
     font-size: 14px;
     padding: 6px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
    
   }
   .buttonContainer{
@@ -209,4 +235,16 @@
     padding: 8px;
     width: 100%;
   }
+   .infoBox {
+  padding: 0px;
+  padding-bottom: 16px;
+}
+.infoBox img {
+  margin-top: -36px;
+}
+.infoBox span {
+ 
+  font-size: 12px;
+  
+}
 }

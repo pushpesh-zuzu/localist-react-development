@@ -1359,13 +1359,18 @@ const data={
 
         <h2 className={styles.title}>Draw on a map</h2>
 
-        <p className={styles.description}>
+        {/* <p className={styles.description}>
           <span className={styles.infoIcon}>
             <img src={iIcon} alt="Info" />
           </span>
           You can add multiple drawn areas to define the specific places you
           provide services.
-        </p>
+        </p> */}
+         <div className={styles.infoBox}>
+                          <img src={iIcon} alt="" />
+                          <span> You can add multiple drawn areas to define the specific places you
+          provide services.</span>
+                        </div>
 
         <div className={styles.areaButtonGroup}>
           <button 

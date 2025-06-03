@@ -362,11 +362,13 @@
     padding: 10px;
     font-size: 16px;
   }
-  .questionBox img {
-    margin-top: -18px;
-  }
+  /* .questionBox img {
+    margin-top: -24px;
+  } */
   .removeService {
-    font-size: 12px;
+    font-size: 14px;
+    gap: 2px;
+    text-align: start;
   }
   .ranger {
   display: flex;
@@ -375,8 +377,8 @@
 }
 .range {
   font-size: 14px;
-  padding-top: 23px;
-  padding-bottom: 23px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   width: max-content !important;
   /* display: flex; */
 }

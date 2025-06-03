@@ -41,6 +41,21 @@
   font-size: 18px;
   margin-bottom: 25px;
 }
+.infoBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.infoBox span {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+
 
 .infoIcon {
   margin-right: 6px;
@@ -213,4 +228,16 @@
     flex-direction: column;
     gap: 12px;
   }
+  .infoBox {
+  padding: 0px;
+  padding-bottom: 16px;
+}
+.infoBox img {
+  margin-top: -32px;
+}
+.infoBox span {
+ 
+  font-size: 12px;
+  
+}
 }

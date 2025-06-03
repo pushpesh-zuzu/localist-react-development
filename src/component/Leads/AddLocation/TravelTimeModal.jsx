@@ -210,13 +210,18 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
 
         <h2 className={styles.title}>Travel time</h2>
 
-        <p className={styles.description}>
-          <span className={styles.infoIcon}>
+        {/* <p className={styles.description}>
             <img src={iIcon} alt="" />
-          </span>
+          
+          <span>
           Enter a Postcode or town, the maximum time you'd spend travelling, and
-          the mode of transport you'd use.
-        </p>
+          the mode of transport you'd use.</span>
+        </p> */}
+        <div className={styles.infoBox}>
+                  <img src={iIcon} alt="" />
+                  <span>Enter a Postcode or town, the maximum time you'd spend travelling, and
+          the mode of transport you'd use.</span>
+                </div>
 
         <div className={styles.form}>
           <div className={styles.inputGroup}>
