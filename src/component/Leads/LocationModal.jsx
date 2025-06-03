@@ -390,6 +390,7 @@ const LocationModal = ({
               name="miles1"
               value={locationData.miles1}
               onChange={onChange}
+              className={styles.customSelect}
             >
               <option value="1">1 mile</option>
               <option value="5">5 miles</option>

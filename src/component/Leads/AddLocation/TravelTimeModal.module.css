@@ -104,6 +104,17 @@
   font-weight: 500;
   font-size: 20px;
 }
+ .customSelect {
+  appearance: none;           
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('../../../assets/Icons/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 5px center; 
+  padding-right: 40px;
+  background-size: 18px 18px;
+} 
+
 /* 💻 Laptops & small desktops (max-width: 1024px) */
 @media screen and (max-width: 1024px) {
   .modalContainer {

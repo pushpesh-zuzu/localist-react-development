@@ -204,7 +204,7 @@
   }
 
   .actions {
-    flex-direction: column;
+    display: flex;
     gap: 12px;
     align-items: center;
   }
@@ -226,7 +226,7 @@
   .modal {
     padding: 20px 15px;
     margin: 0px 10px;
-    height: calc(100vh - 250px);
+    height: calc(100vh - 375px);
     overflow-y: auto;
   }
   
@@ -269,5 +269,18 @@
   .dropdownItem {
     font-size: 14px;
     padding: 6px 10px;
+  }
+  .infoIcon img {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+}
+}
+@media screen and (max-width:350px) {
+   .modal {
+    padding: 20px 15px;
+    margin: 0px 10px;
+    height: calc(100vh - 250px);
+    overflow-y: auto;
   }
 }

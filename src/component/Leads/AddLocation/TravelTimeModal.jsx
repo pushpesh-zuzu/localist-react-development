@@ -238,6 +238,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
               name="travel_time"
               value={locationData?.travel_time}
               onChange={onChange}
+                className={styles.customSelect}
             >
               <option value="30 minutes">30 minutes</option>
               <option value="1 hour">1 hour</option>
@@ -252,6 +253,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
               name="travel_by"
               value={locationData?.travel_by}
               onChange={onChange}
+                className={styles.customSelect}
             >
               <option value="Driving">Driving</option>
               <option value="Walking">Walking</option>
