@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
+  overflow: scroll;
 }
 
 .modal {
@@ -180,3 +181,86 @@
   color: red;
 }
 
+@media (max-width: 768px) {
+  .modal {
+    padding: 30px 20px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    /* flex-direction: column; */
+  }
+
+  .submitButton,
+  .cancelButton {
+    font-size: 18px;
+    padding: 8px 18px;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .tag {
+    font-size: 14px;
+    padding: 7px 15px;
+  }
+
+  .selectedTag {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+}
+
+/* Mobile devices (480px and below) */
+@media (max-width: 480px) {
+  .modal {
+    padding: 20px 15px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+
+  }
+
+  .input {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .submitButton,
+  .cancelButton {
+    font-size: 16px;
+    padding: 6px 14px;
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .tag {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .suggestionText {
+    font-size: 13px;
+  }
+
+  .dropdownItem {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}

@@ -297,7 +297,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
           {/* Locations */}
           <AccordionSection title="Locations">
             {/* All Option */}
-            <label>
+            <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <input
                   style={{marginTop: "0px" }}
                 type="radio"

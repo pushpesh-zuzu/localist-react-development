@@ -192,16 +192,25 @@
 .ranger {
   display: flex;
   flex-direction: column;
+  width: 50%;
 }
 .range {
   font-size: 14px;
   padding-top: 23px;
   padding-bottom: 23px;
+  width: 100%;
+  display: flex;
 }
+/* .ranger img {
+ margin-top: 4px
+} */
 
-.range span img {
+.range span  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   margin-right: 6px;
-  margin-top: 4px;
 }
 
 .footer {

@@ -1375,7 +1375,7 @@ const data={
             onClick={handleEditAreaMode}
             disabled={polygons.length === 0}
           >
-            <img src={EditLocation} alt="..." /> Edit an area
+            <img src={EditLocation} alt="..." width={15} height={15} /> Edit an area
           </button>
           <button 
             className={styles.areaButton} 
