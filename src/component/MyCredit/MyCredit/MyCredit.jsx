@@ -4,7 +4,7 @@ import styles from "./MyCredit.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import ActiveFreeTrial from "./ActiveFreeTrial";
 import CreditCard from "./CreditCard";
-import getHired from "../../../assets/Images/Setting/HiredNewImg.svg";
+import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
 import { useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ const MyCredits = () => {
   const { userToken } = useSelector((state) => state.auth)
   const { buyCreditLoader, addCouanLoader,addcoupanList ,getInoviceBillingList} = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(true)
   const handleOpen = () => {
     setIsOpen(true);
   };

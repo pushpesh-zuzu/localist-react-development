@@ -277,8 +277,12 @@
   height: 26px;
 }
 .tabSection {
-  margin-top: 20px;
+  margin-top: 48px;
 }
+.hrline {
+  margin-left: 20px;
+}
+
 
 /* .tabButtons {
   display: flex;

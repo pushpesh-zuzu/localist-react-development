@@ -192,7 +192,7 @@ const MyResponse = () => {
             </button>
           </div>
           <div style={{ display: "flex", marginRight: 20 }}>
-            <label className={styles.purchaseText}>Purchase Type: </label>
+            <label className={styles.purchaseText}>Purchase Type </label>
             <Select
               placeholder="Select Purchase Type"
               style={{ width: 150, marginLeft: 10 }}
@@ -255,7 +255,7 @@ const MyResponse = () => {
               </div>
               {item?.profile_view && item?.profile_view_time && (
                 <div className={styles.profile_view}>
-                  <p>{item?.profile_view}</p>
+                  <p><span><img src={HiredImg} alt="..." /></span>{item?.profile_view}</p>
                   <p>{item?.profile_view_time}</p>
                 </div>
               )}
@@ -335,7 +335,7 @@ const MyResponse = () => {
               ) : (
                 <>
                   <button className={styles.purchaseButton}>
-                    <img src={pendingImg} alt="HiredImg" />{" "}
+                    <img src={HiredClickImg} alt="HiredImg" />{" "}
                     {item?.status === "hired" ? "Hired" : "hired"}
                   </button>
                 </>

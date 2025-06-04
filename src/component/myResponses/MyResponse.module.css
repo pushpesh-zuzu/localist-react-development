@@ -74,6 +74,7 @@
   grid-area: actions;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
   gap: 24px;
   /* margin-left: -24px; */
@@ -107,13 +108,22 @@
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  
+}
+.profile_view span img {
+  margin-right: 6px;
+  margin-top: 5px;
 }
 .profile_view p {
-  background-color: #aac9d2;
-  padding: 4px;
-  color: white;
+  background-color: #E3F6FC;
+  padding: 4px 9px;
+  color: #000000;
   border-radius: 2px;
   cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+ 
 }
 
 .details h3 {
@@ -246,13 +256,16 @@
 }
 
 .responseStatus {
-  font-weight: 400;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 21px;
   vertical-align: middle;
   cursor: pointer;
   display: flex;
+  padding: 6px 16px;
   gap: 8px;
-  color: #828282;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  white-space: nowrap
 }
 
 .responseStatus img {
@@ -277,6 +290,7 @@
   border: none;
   padding: 11px 18.68px;
 }
+
 
 .viewMoreBtnWrapper button:hover {
   background-color: #0096c4;

@@ -16,6 +16,7 @@ import contact from "../../../assets/Images/MyResponse/EmailIcon.svg";
 import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg";
 import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
 import locallistImgs from "../../../assets/Images/Leads/localistImg.svg";
+import pendingImg from "../../../assets/Images/MyResponse/PendingBtnImg.svg"
 import {
   addSellerNotesApi,
   getAddHiredLeadDataApi,
@@ -232,7 +233,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             </div>
             {profileLeadViewData?.leads?.purchase_type && (
               <div className={styles.lastActivityText}>
-                Purchase Type:{" "}
+                Purchase Type {" "}
                 <span>{profileLeadViewData?.leads?.purchase_type}</span>
               </div>
             )}
@@ -245,8 +246,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 onChange={handleStatusChange}
                 disabled={profileLeadViewData?.leads?.status === "hired"}
               >
-                <option value="pending">Pending</option>
-                <option value="hired">Hired</option>
+                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
+                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
                 {/* <option value="rejected">Rejected</option> */}
               </select>
             </div>
@@ -416,13 +417,13 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
 
                         return Array.from(uniqueQuestionsMap.entries()).map(
                           ([question, answer], index) => (
-                            <div key={index} style={{ marginBottom: "0.5rem" }}>
+                            <div key={index} style={{ marginBottom: "0.5rem"}}>
                               <li
                                 style={{ fontWeight: 600, marginTop: "12px" }}
                               >
                                 {question}
                               </li>
-                              <hr />
+                              <hr className={styles.hrline} />
                               <p style={{ marginLeft: "20px",fontSize:"16px",fontWeight:600,color:"#828282" }}>{answer}</p>
                             </div>
                           )
