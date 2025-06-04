@@ -164,8 +164,8 @@ const handleContinues = () => {
   dispatch(getAddManualBidData(formData)).then((result) => {
     if (result) {
       showToast("success", result?.message);
-      setIsOpen(false)
-      setModalOpen(true);
+      // setIsOpen(false)
+      setModalOpen(false);
     }
 
     const data = {
