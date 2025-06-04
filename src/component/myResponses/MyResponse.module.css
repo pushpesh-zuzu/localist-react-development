@@ -55,7 +55,7 @@
   grid-area: info;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 49px;
 }
 
@@ -247,11 +247,12 @@
 
 .responseStatus {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   vertical-align: middle;
   cursor: pointer;
   display: flex;
   gap: 8px;
+  color: #828282;
 }
 
 .responseStatus img {
@@ -316,6 +317,7 @@
 }
 .purchaseText {
   color: #ffffff;
+  font-size: 16px;
 }
 /* Tablet */
 @media (max-width: 1200px) {

@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const CreditMatch = () => {
-  const [autoTopUp, setAutoTopUp] = useState(false);
+  const [autoTopUp, setAutoTopUp] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate()
@@ -70,11 +70,11 @@ const handleBuyNow = () => {
                 <div className={styles.locationTag}>
                   <img src={locallistImgs} alt="credit icon" />
                   <span className={styles.creditsAmount}>
-                    {item?.no_of_leads} credits
+                    {item?.no_of_leads ? item?.no_of_leads : 0} credits
                   </span>
                 </div>
                 <div className={styles.usageInfo}>
-                  <span className={styles.usageText}>{item?.description}</span>
+                  <span className={styles.usageText}>{item?.description ? item?.description : "20% OFF"}</span>
                 </div>
               </div>
             </div>
@@ -82,17 +82,17 @@ const handleBuyNow = () => {
             <div className={styles.priceSection}>
               <div className={styles.priceInfo}>
                 <div className={styles.totalPrice}>
-                  ${item?.price} (Excl. tax)
+                  ${item?.price ? item?.price : 0} (Excl. tax)
                 </div>
                 <div className={styles.unitPrice}>
-                  ${item?.per_credit}/credit
+                  ${item?.per_credit ? item?.per_credit : 0}/credit
                 </div>
               </div>
             </div>
 
             <div className={styles.actionSection}>
               <button className={styles.buyButton} onClick={handleBuyNow}>
-                Buy {item?.no_of_leads} credits
+                Buy {item?.no_of_leads ? item?.no_of_leads : 0} credits
               </button>
               <div className={styles.autoTopUpContainer}>
                 <input

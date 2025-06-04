@@ -396,33 +396,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                     ))}
                   </div>
                 )}
-
-                {/* {activeTab === "lead" && (
-              <div className={styles.leadContent}>
-                <div>
-                  {getPendingLeadList?.map((item, index) => {
-                    const questionsArray = item?.questions
-                      ? JSON.parse(item.questions)
-                      : [];
-
-                    return (
-                      <div key={index} style={{ marginBottom: "1rem" }}>
-                        {questionsArray.map((qna, qIndex) => (
-                          <div key={qIndex} style={{ marginBottom: "0.5rem" }}>
-                            <p style={{ fontWeight: 600 }}>{qna.ques}</p>
-                            <hr />
-                            <p>{qna.ans}</p>
-                          </div>
-                        ))}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div>
-                  <LeadMap getPendingLeadList={profileLeadViewData?.leads?.postcode} />
-                </div>
-              </div>
-            )} */}
                 {activeTab === "lead" && (
                   <div className={styles.leadContent}>
                     <div>
@@ -445,12 +418,12 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                           ([question, answer], index) => (
                             <div key={index} style={{ marginBottom: "0.5rem" }}>
                               <li
-                                style={{ fontWeight: 600, marginTop: "20px" }}
+                                style={{ fontWeight: 600, marginTop: "12px" }}
                               >
                                 {question}
                               </li>
                               <hr />
-                              <p style={{ marginLeft: "20px" }}>{answer}</p>
+                              <p style={{ marginLeft: "20px",fontSize:"16px",fontWeight:600,color:"#828282" }}>{answer}</p>
                             </div>
                           )
                         );
@@ -506,22 +479,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 )}
               </div>
             </div>
-
-            {/* <div className={styles.container}>
-          <div className={styles.date}>Mon 25, April</div>
-          {activity.map((item, index) => (
-            <TimelineItem
-              key={index}
-              icon={item.icon}
-              title={item.title}
-              description={item.description}
-              time={item.time}
-              isLast={index === activity.length - 1}
-            >
-              {item.children}
-            </TimelineItem>
-          ))}
-        </div> */}
           </div>
         </>
       )}

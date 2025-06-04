@@ -31,6 +31,10 @@
   font-size: 24px;
   cursor: pointer;
 }
+.mainBox h2 {
+  margin-top: 24px;
+  text-align: center;
+}
 
 .subText {
   margin-bottom: 20px;
@@ -52,37 +56,6 @@
   font-size: 16px;
    color: #000000;
 }
-
-.section {
-  margin: 12px 0;
-}
-
-.accordion {
-  width: 100%;
-  background-color: #f2f9fc;
-  border: none;
-  padding: 12px;
-  text-align: left;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
-  color: #000000;
-  font-size: 18px;
-}
-
-.panel {
-  padding: 10px;
-  background-color: #fafafa;
-  border-left: 3px solid #007bff;
-  margin-top: 5px;
-  
-}
-.panel p {
-color: #000000;
-  font-size: 14px;
-  font-weight: 400;
-}
-
 .offerBox {
   background-color: #f5faff;
   padding: 16px;
@@ -142,4 +115,33 @@ color: #000000;
   font-size: 18px;
   font-weight: 600;
   color:#BEBEBE;
+}
+.section {
+  margin-bottom: 10px;
+}
+
+.accordion {
+  background-color: #f2f9fc;
+  color: #444;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: background-color 0.2s ease;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.accordion:hover {
+  background-color: #f2f9fc90;
+}
+
+.panel {
+  padding: 10px 14px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
 }

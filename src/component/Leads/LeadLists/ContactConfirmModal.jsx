@@ -5,14 +5,33 @@ import { getCreditPlanList } from '../../../store/LeadSetting/leadSettingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBuyCreditApi, getInvoiceBillingListApi } from '../../../store/MyProfile/MyCredit/MyCreditSlice';
 import { showToast } from '../../../utils';
+const dummyCreditPlanList = [
+  {
+    description: 'Best Value!',
+    no_of_leads: 50,
+    price: 49.99,
+    per_credit: 1.00,
+  },
+  // {
+  //   description: 'Popular Choice',
+  //   no_of_leads: 30,
+  //   price: 34.99,
+  //   per_credit: 1.16,
+  // },
+];
 
-const ContactConfirmModal = ({ onClose,enoughCredit, }) => {
+const ContactConfirmModal = ({ onClose,enoughCredit,confirmModal }) => {
  
   const navigate = useNavigate()
 const dispatch = useDispatch()
 const [activeLoaderId, setActiveLoaderId] = useState(null)
-const [isChecked, setIsChecked] = useState(false)
+const [isChecked, setIsChecked] = useState(true)
 const { creditPlanList } =useSelector((state)=> state.leadSetting)
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
   const handleNavigate = () => {
     navigate("/mycredits")
   }
@@ -65,6 +84,7 @@ const handleBuyNow = (item) => {
   if (result?.success) {
     showToast('success', result?.message);
     setActiveLoaderId(null);
+    onClose()
     dispatch(getInvoiceBillingListApi());
   } else if (result?.success === false) {
     
@@ -77,14 +97,23 @@ const handleBuyNow = (item) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={onClose}>×</button>
+        <div className={styles.mainBox}>
         <h2>{enoughCredit != 0 ? "You need 6 credits to contact Lorna" : "You have not purchased any plan, Please buy credits"}</h2>
       
         <p className={styles.subText}>
           To get some credits, you need to buy a starter pack of credits (Enough for this lead + roughly another 9 leads)
         </p>
+        </div>
+        <div>
 
-        <div className={styles.section}>
-          <button className={styles.accordion}>What are credits?</button>
+      <div className={styles.section}>
+        <button
+          className={styles.accordion}
+          onClick={() => toggleAccordion(0)}
+        >
+          What are credits?
+        </button>
+        {activeIndex === 0 && (
           <div className={styles.panel}>
             <p>
               Credits are Bark’s online currency. If you see a job that you like and you want to get in contact with that
@@ -92,48 +121,69 @@ const handleBuyNow = (item) => {
               number and email address)...
             </p>
           </div>
-        </div>
+        )}
+      </div>
 
-        <div className={styles.section}>
-          <button className={styles.accordion}>What is the starter pack?</button>
-        </div>
-
-        <div className={styles.section}>
-          <button className={styles.accordion}>What is the Get Hired Guarantee?</button>
-        </div>
-{
-  creditPlanList?.map((item) => {
-    return(<>
-    <div className={styles.offerBox}>
-          <div className={styles.offerHeader}>
-            {/* <span className={styles.offerBadge}>EXCLUSIVE ONE-TIME OFFER</span> */}
-            <span className={styles.discountBadge}>{item?.description}</span>
+      <div className={styles.section}>
+        <button
+          className={styles.accordion}
+          onClick={() => toggleAccordion(1)}
+        >
+          What is the starter pack?
+        </button>
+        {activeIndex === 1 && (
+          <div className={styles.panel}>
+            <p>The starter pack is a bundle of credits for new users to try out Bark’s service.</p>
           </div>
+        )}
+      </div>
 
-          <div className={styles.creditDetails}>
-            <div>
-            <p><strong>🔹 {item?.no_of_leads} credits</strong></p>
-            <p>Enough for about 10 leads</p>
-            </div>
-            <div>
-            <p><strong>${item?.price}</strong> (Excl. tax)</p>
-            <p>${item?.per_credit}/credit</p>
-            </div>
+      <div className={styles.section}>
+        <button
+          className={styles.accordion}
+          onClick={() => toggleAccordion(2)}
+        >
+          What is the Get Hired Guarantee?
+        </button>
+        {activeIndex === 2 && (
+          <div className={styles.panel}>
+            <p>The Get Hired Guarantee ensures you get hired or receive credit refunds under certain conditions.</p>
           </div>
+        )}
+      </div>
+    </div>
+{(creditPlanList && creditPlanList.length > 0 ? creditPlanList : dummyCreditPlanList).map((item, index) => (
+  <div key={index} className={styles.offerBox}>
+    <div className={styles.offerHeader}>
+      <span className={styles.discountBadge}>{item?.description}</span>
+    </div>
 
-          <div className={styles.buttonGroup}>
-            <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>Buy {item?.no_of_leads} credits</button>
-            <label className={styles.checkboxLabel}>
-               <input
-                      type="checkbox"
-                     checked={isChecked}
-          onChange={handleCheckboxChange} ></input> Auto top-up next time
-            </label>
-          </div>
-        </div>
-    </>)
-  })
-}
+    <div className={styles.creditDetails}>
+      <div>
+        <p><strong>🔹 {item?.no_of_leads} credits</strong></p>
+        <p>Enough for about 10 leads</p>
+      </div>
+      <div>
+        <p><strong>${item?.price}</strong> (Excl. tax)</p>
+        <p>${item?.per_credit}/credit</p>
+      </div>
+    </div>
+
+    <div className={styles.buttonGroup}>
+      <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>
+        Buy {item?.no_of_leads} credits
+      </button>
+      <label className={styles.checkboxLabel}>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        /> Auto top-up next time
+      </label>
+    </div>
+  </div>
+))}
+
         
 
         <p className={styles.footerNote}>

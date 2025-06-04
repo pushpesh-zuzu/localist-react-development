@@ -164,7 +164,8 @@ const handleContinues = () => {
   dispatch(getAddManualBidData(formData)).then((result) => {
     if (result) {
       showToast("success", result?.message);
-      setModalOpen(false);
+      setIsOpen(false)
+      setModalOpen(true);
     }
 
     const data = {
@@ -226,6 +227,10 @@ const handleContinues = () => {
       }
       setSaveLaterLoaderId(null);
     })
+  }
+  const handleOpenClose = () => {
+    setIsOpen(false)
+    setModalOpen(true)
   }
   return (
     <>
@@ -389,8 +394,11 @@ const handleContinues = () => {
         message="Are you sure you want to continue?"
         loading={manualBidLoader}
       />
-{isopen && <ContactConfirmModal onClose={() => setIsOpen(false)} 
+{isopen && <ContactConfirmModal 
+// onClose={() => setIsOpen(false)} 
+onClose={handleOpenClose}
   enoughCredit={planpurcahse}
+  confirmModal = {isModalOpen}
   />}
   
     </>

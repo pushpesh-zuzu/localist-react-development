@@ -18,6 +18,7 @@ import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
 import { useNavigate } from "react-router-dom";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
+import HiredClickImg from "../../assets/Images/MyResponse/RightClickHiredImg.svg";
 import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg";
@@ -187,7 +188,7 @@ const MyResponse = () => {
               }`}
               onClick={handleHiredApi}
             >
-              <img src={HiredImg} alt="hired" /> Hired
+              {selectedTab === "hired" ? <img src={HiredClickImg} alt="..." /> :<img src={HiredImg} alt="hired" />} Hired
             </button>
           </div>
           <div style={{ display: "flex", marginRight: 20 }}>
@@ -340,14 +341,14 @@ const MyResponse = () => {
                 </>
               )}
 
-              <p
+              <div
                 className={styles.responseStatus}
                 onClick={() => handleOpen(item)}
               >
-                Responded {moment().diff(moment(item?.created_at), "days")} days
+                Responded {moment().diff(moment(item?.created_at), "days")}d
                 ago
                 <img src={pendingArrowIcon} alt="Response" />
-              </p>
+              </div>
             </div>
           </div>
 
