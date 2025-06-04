@@ -205,11 +205,11 @@ const MyResponse = () => {
               <Option value="Request Reply">Request Reply</Option>
             </Select>
           </div> */}
-          <div style={{ display: "flex", marginRight: 20 }}>
+          <div style={{ display: "flex", marginRight: 20 }} className={styles.purchaseSelect}>
   <label className={styles.purchaseText}>Purchase Type</label>
   <select
     className={`${styles.selectBox} ${styles.customSelect}`}
-    style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+    // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
     value={purchaseType} // controlled value
     onChange={(e) => handlePurchaseChange(e.target.value)}
   >

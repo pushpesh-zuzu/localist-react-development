@@ -69,6 +69,12 @@
   padding: 0 40px;
   /* padding: 0 73px 0 44px; */
 }
+.selectBox {
+  width: 150px;
+  margin-left: 10px;
+  padding: 4px;
+  height: 30px;
+}
 
 .leadActions {
   grid-area: actions;
@@ -426,7 +432,7 @@
 /* Mobile */
 @media (max-width: 600px) {
   .maincontainer {
-    padding: 16px 30px;
+    padding: 8px 10px;
     background: #f9f9fa;
   }
   .card {
@@ -471,14 +477,19 @@
     padding: 12px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 24px;
   }
   .details h3 {
     font-size: 16px;
+  }
+  .selectBox {
+    margin-left: 0px;
   }
 
   .headerBtn {
     flex-direction: column;
     margin-bottom: 5px;
+    gap: 8px;
   }
 
   .details p {
@@ -506,8 +517,21 @@
   .card {
     gap: 20px;
   }
+  .purchaseSelect{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 6px;
+  }
 
   .mainTextBox {
-    padding: 12px;
+    padding: 0px;
   }
+  .jobDetails {
+  grid-area: job;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+padding-bottom: 20px;
+        padding-top: 20px;
+}
 }
