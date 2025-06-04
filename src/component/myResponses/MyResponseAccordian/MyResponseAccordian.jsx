@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styles from "./MyResponseAccordian.module.css";
 import UserImage from "../../../assets/Icons/MyResponse/UserImage.svg";
+import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg"
 import CallImage from "../../../assets/Icons/MyResponse/CallImage.svg";
 import EmailImage from "../../../assets/Icons/MyResponse/EmailImage.svg";
 import PurchasedImage from "../../../assets/Icons/MyResponse/PurchasedImage.svg";
-import AddImage from "../../../assets/Icons/MyResponse/AddImage.svg";
+import AddImage from "../../../assets/Images/MyResponse/WhatsAppIcon.svg";
 import ProfileImg from "../../../assets/Images/MyResponse/ProfileIcon.svg";
 import PhoneImg from "../../../assets/Images/MyResponse/PhoneIcon.svg";
 import MailIcon from "../../../assets/Images/MyResponse/mail-02.svg";
@@ -333,7 +334,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               </span>
             </div>
             <div className={styles.tabSection}>
-              <div className={styles.tabButtons}>
+              {/* <div className={styles.tabButtons}>
                 <button
                   className={`${styles.tabButton} ${
                     activeTab === "activity" ? styles.activeTab : ""
@@ -358,7 +359,49 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 >
                   Notes
                 </button>
-              </div>
+              </div> */}
+     <div className={styles.tabButtons}>
+  <button
+    className={styles.tabButton}
+    onClick={() => setActiveTab("activity")}
+  >
+    <span
+      className={`${styles.tabLabel} ${
+        activeTab === "activity" ? styles.activeTab : ""
+      }`}
+    >
+      Activity
+    </span>
+  </button>
+
+  <button
+    className={styles.tabButton}
+    onClick={() => setActiveTab("lead")}
+  >
+    <span
+      className={`${styles.tabLabel} ${
+        activeTab === "lead" ? styles.activeTab : ""
+      }`}
+    >
+      Lead
+    </span>
+  </button>
+
+  <button
+    className={styles.tabButton}
+    onClick={() => setActiveTab("notes")}
+  >
+    <span
+      className={`${styles.tabLabel} ${
+        activeTab === "notes" ? styles.activeTab : ""
+      }`}
+    >
+      Notes
+    </span>
+  </button>
+</div>
+
+
 
               <div className={styles.tabContent}>
                 {activeTab === "activity" && (
@@ -380,7 +423,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                             ? CallImage
                             : item?.contact_type === "Buttons"
                             ? PurchasedImage
-                            : UserImage
+                            : hirImg
                         }
                         title={item.activity_name}
                         description={item.description}

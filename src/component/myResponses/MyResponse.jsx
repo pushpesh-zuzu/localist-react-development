@@ -24,6 +24,7 @@ import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
+import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg"
 
 const MyResponse = () => {
   const dispatch = useDispatch();
@@ -191,7 +192,7 @@ const MyResponse = () => {
               {selectedTab === "hired" ? <img src={HiredClickImg} alt="..." /> :<img src={HiredImg} alt="hired" />} Hired
             </button>
           </div>
-          <div style={{ display: "flex", marginRight: 20 }}>
+          {/* <div style={{ display: "flex", marginRight: 20 }}>
             <label className={styles.purchaseText}>Purchase Type </label>
             <Select
               placeholder="Select Purchase Type"
@@ -203,7 +204,22 @@ const MyResponse = () => {
               <Option value="Autobid">Auto Bid</Option>
               <Option value="Request Reply">Request Reply</Option>
             </Select>
-          </div>
+          </div> */}
+          <div style={{ display: "flex", marginRight: 20 }}>
+  <label className={styles.purchaseText}>Purchase Type</label>
+  <select
+    className={`${styles.selectBox} ${styles.customSelect}`}
+    style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+    value={purchaseType} // controlled value
+    onChange={(e) => handlePurchaseChange(e.target.value)}
+  >
+    
+    <option value="Manual Bid">Manual Bid</option>
+    <option value="Best Matches">Best Match</option>
+    <option value="Autobid">Auto Bid</option>
+    <option value="Request Reply">Request Reply</option>
+  </select>
+</div>
         </div>
       </div>
 
@@ -306,9 +322,9 @@ const MyResponse = () => {
                   </span>
                 )}
                 {item?.is_high_hiring == 1 && (
-                  <span className={styles.frequent}>
+                  <span className={styles.frequentHir}>
                     {" "}
-                    <img src={FrequentUserIcon} alt="" />
+                    <img src={HireUserIcon} alt="" />
                     High hiring
                   </span>
                 )}
@@ -329,14 +345,14 @@ const MyResponse = () => {
                 <>
                   <button className={styles.purchaseButton}>
                     <img src={pendingImg} alt="pendingImg" />{" "}
-                    {item?.status === "pending" ? "Pending" : "pending"}
+                    {item?.status === "pending" ? "Pending" : "Pending"}
                   </button>
                 </>
               ) : (
                 <>
                   <button className={styles.purchaseButton}>
                     <img src={HiredClickImg} alt="HiredImg" />{" "}
-                    {item?.status === "hired" ? "Hired" : "hired"}
+                    {item?.status === "hired" ? "Hired" : "Hired"} 
                   </button>
                 </>
               )}
@@ -347,7 +363,7 @@ const MyResponse = () => {
               >
                 Responded {moment().diff(moment(item?.created_at), "days")}d
                 ago
-                <img src={pendingArrowIcon} alt="Response" />
+                <img src={pendingArrowIcon} alt="Response"  className={`${styles.arrowIcon} ${selectedLead === item.id ? styles.rotated : ''}`} />
               </div>
             </div>
           </div>

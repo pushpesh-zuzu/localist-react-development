@@ -83,6 +83,7 @@
 .userDetails {
   display: flex;
   gap: 11px;
+  align-items: center;
 }
 
 .userInfo {
@@ -153,19 +154,30 @@
   gap: 5px;
   color: black;
   font-weight: 400;
-  font-size: 19px;
+  font-size: 16px;
   vertical-align: middle;
 }
+.customSelect {
+  appearance: none;           
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('../../assets/Icons/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 5px center; 
+  padding-right: 40px;
+  background-size: 18px 18px;
+} 
 
 .category {
   background: var(--primary-color);
   color: white;
-  padding: 8px 10px;
+  padding: 8px 18px;
   border-radius: 100px;
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
   text-wrap: nowrap;
+  margin-right: 12px;
 }
 .saveBtnBox img {
   margin-right: 4px;
@@ -200,6 +212,16 @@
   border-radius: 100px;
   color: white;
 }
+.frequentHir {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 5px 10px;
+  border-radius: 100px;
+  color: white;
+}
 
 .verified {
   background: #edb1d5;
@@ -211,6 +233,9 @@
 
 .frequent {
   background: #98e6ff;
+}
+.frequentHir {
+  background-color: #FFBEBF;
 }
 
 .jobInfo {
@@ -271,7 +296,13 @@
 .responseStatus img {
   margin-right: 5px;
 }
+.arrowIcon {
+  transition: transform 0.3s ease;
+}
 
+.rotated {
+  transform: rotate(180deg);
+}
 .viewMoreBtnWrapper {
   padding-top: 35.66px;
   display: flex;
@@ -302,10 +333,11 @@
   gap: 12px;
 }
 
+
 .filterButton {
   padding: 8px 28px;
   font-size: 21px;
-  background-color: #f0f2f5;
+  background-color: #FFFFFF;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -315,10 +347,6 @@
   gap: 7px;
 }
 
-.filterButton:hover {
-  background-color: var(--primary-color);
-  color: white;
-}
 
 .activeButton {
   background-color: var(--primary-color);
