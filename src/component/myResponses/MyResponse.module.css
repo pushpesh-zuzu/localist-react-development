@@ -6,7 +6,7 @@
   display: grid;
   grid-template-areas: "info job actions";
   grid-template-columns: 1fr 1fr 0.3fr;
-  gap: 40px;
+  gap: 50px;
 }
 .maincontainer {
   padding: 16px 88px;
@@ -84,6 +84,7 @@
   display: flex;
   gap: 11px;
   align-items: center;
+  width: 220px;
 }
 
 .userInfo {
@@ -166,6 +167,8 @@
   background-position: right 5px center; 
   padding-right: 40px;
   background-size: 18px 18px;
+  outline: none;
+  
 } 
 
 .category {
@@ -177,7 +180,7 @@
   font-size: 16px;
   vertical-align: middle;
   text-wrap: nowrap;
-  margin-right: 12px;
+  
 }
 .saveBtnBox img {
   margin-right: 4px;

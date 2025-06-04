@@ -363,7 +363,7 @@ const MyResponse = () => {
               >
                 Responded {moment().diff(moment(item?.created_at), "days")}d
                 ago
-                <img src={pendingArrowIcon} alt="Response"  className={`${styles.arrowIcon} ${selectedLead === item.id ? styles.rotated : ''}`} />
+                <img src={pendingArrowIcon} alt="Response"  className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated}`} />
               </div>
             </div>
           </div>

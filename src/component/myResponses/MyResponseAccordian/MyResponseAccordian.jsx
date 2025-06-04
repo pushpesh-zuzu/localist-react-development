@@ -17,7 +17,9 @@ import contact from "../../../assets/Images/MyResponse/EmailIcon.svg";
 import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg";
 import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
 import locallistImgs from "../../../assets/Images/Leads/localistImg.svg";
-import pendingImg from "../../../assets/Images/MyResponse/PendingBtnImg.svg"
+import pendingImg from "../../../assets/Images/MyResponse/PendingBtnImg.svg";
+import SMSIcon from "../../../assets/Images/MyResponse/SMSIcon.svg";
+import bidContactIcon from "../../../assets/Images/MyResponse/bidContactIcon.svg";
 import {
   addSellerNotesApi,
   getAddHiredLeadDataApi,
@@ -414,7 +416,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         key={index}
                         icon={
                           item?.contact_type === "Manual Bid"
-                            ? CallImage
+                            ?   bidContactIcon
                             : item?.contact_type === "email"
                             ? EmailImage
                             : item?.contact_type === "Whatsapp"
@@ -423,6 +425,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                             ? CallImage
                             : item?.contact_type === "Buttons"
                             ? PurchasedImage
+                            : item?.contact_type === "sms" ?
+                            SMSIcon
+                            : item?.contact_type === "Auto Bid" ? 
+                           CallImage
                             : hirImg
                         }
                         title={item.activity_name}
