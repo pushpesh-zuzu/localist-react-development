@@ -83,11 +83,13 @@
 }
 
 .name {
-  color: #111827;
+  color: #828282;
+  font-weight: 600;
 }
 
 .time {
-  color: #9ca3af;
+  color: #828282;
+  font-weight: 400;
 }
 
 .title {
