@@ -88,7 +88,7 @@
 }
 
 .time {
-  color: #828282;
+  color: #000000;
   font-weight: 400;
 }
 
@@ -419,12 +419,14 @@
 }
 
 @media screen and (max-width: 768px) {
-  .headerBox {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+ 
+ .headerBox {
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 21px;
+  padding: 1px 3px;
   }
-
   .containers {
     padding: 24px;
   }
@@ -474,7 +476,14 @@
     font-size: 14px;
     margin-left: 0px;
   }
-
+   .textArea {
+    width: 92%;
+  }
+ .headerBox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
   .headerBox {
     padding: 16px 8px;
   }
@@ -490,6 +499,10 @@
   .containers {
     padding: 16px;
   }
+  .time {
+  color: #000000;
+  font-weight: 400;
+}
 
   .tabButton {
     font-size: 14px;
@@ -497,7 +510,7 @@
   }
 
   .card {
-    padding: 16px;
+    padding: 16px 22px;
   }
 
   .iconWrapper img {
@@ -539,6 +552,7 @@
     margin-left: 0px;
     width: 125px;
     border: 1px solid #ccc;
+    padding: 8px 8px;
   }
   /* .dropdownMainBox{
     /* display: flex; 
@@ -568,5 +582,8 @@
 }
 .bullet{
   margin-left: -6px;
+}
+.notesContent {
+  padding: 0rem;
 }
 }

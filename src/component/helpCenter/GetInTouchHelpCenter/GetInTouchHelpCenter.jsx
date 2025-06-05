@@ -16,7 +16,7 @@ const GetInTouchHelpCenter = () => {
         </div>
         <div className={styles.card}>
           <img src={PhoneIcon} alt="Phone Icon" className={styles.icon} />
-          <span className={styles.text}>+44 00 00 000 0000</span>
+          <span className={styles.text}>+44 00 00 000 00000</span>
         </div>
       </div>
     </div>

@@ -71,7 +71,7 @@
 
   .item {
     font-size: 18px;
-    height: 70px;
+    /* height: 70px; */
   }
 }
 
@@ -80,7 +80,9 @@
     font-size: 24px;
     margin-bottom: 8px;
   }
-
+.container{
+  padding-bottom: 30px;
+}
   .column {
     width: 100%;
     max-width: 100%;
@@ -93,9 +95,12 @@ display: flex;
 
   .item {
     font-size: 16px;
-    height: 60px;
+    /* height: 60px; */
     padding: -1px 10px;
     text-align: center;
     margin: 0px 8px;
   }
+  .column .item:last-child {
+  border-bottom: none;
+}
 }
