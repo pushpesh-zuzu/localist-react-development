@@ -108,6 +108,7 @@ const [planpurcahse,setPlanPurchase] = useState("")
 // };
 const handleContinue = (item) => {
   if (!item) return;
+  console.log(item?.credit_score,totalCredit?.total_credit ,"item")
   setSelectedItem(item)
 setPlanPurchase(totalCredit?.plan_purchased)
   
@@ -118,11 +119,11 @@ setPlanPurchase(totalCredit?.plan_purchased)
     return;
   }
   // Condition 2: Not enough credits
-  if (totalCredit?.total_credit < item?.credit_score) {
-    setIsOpen(true);
+  if (Number(totalCredit?.total_credit) < Number(item?.credit_score)) {
+    setIsOpen(true)
     return;
   }
-  if(totalCredit?.total_credit > item?.credit_score){
+  if(Number(totalCredit?.total_credit) > Number(item?.credit_score)){
     setModalOpen(true)
     return;
   }

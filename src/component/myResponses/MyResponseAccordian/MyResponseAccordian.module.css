@@ -185,6 +185,7 @@
 .currentStatusText {
   font-size: 14px;
   margin-right: 10px;
+  margin-bottom: -12px;
 }
 .headerBox {
   display: flex;
@@ -480,6 +481,8 @@
   .iconWrapper img {
     width: 32px;
     height: 32px;
+    position: absolute;
+    left: 22px;
   }
 
   .UpdateBtn,
@@ -494,8 +497,10 @@
   }
 
   .timelineItem {
-    flex-direction: column;
-    align-items: flex-start;
+    /* flex-direction: column;
+    align-items: flex-start; */
+    width: 285px;
+    margin-left: -40px;
   }
 
   .desc {
@@ -509,16 +514,23 @@
   }
   .lastActivityText span {
     margin-left: 0px;
+    width: 90px;
   }
   .dropdownMainBox{
     display: flex;
-    gap: 12px;
+    gap: 24px;
   }
   .tabSection {
   margin-top: 40px;
 }
 .phoneNumberText {
   margin-bottom: 16px;
+}
+
+.currentStatusText {
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: -12px;
 }
 
 }

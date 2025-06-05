@@ -551,4 +551,7 @@ padding-bottom: 20px;
   border: 1px solid var(--primary-color);
   white-space: nowrap
 }
+.purchaseText {
+  margin-bottom: 4px;
+}
 }
