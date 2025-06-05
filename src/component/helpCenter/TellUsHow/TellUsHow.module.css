@@ -24,10 +24,16 @@
   margin-bottom: 15px;
   color: #ffffff;
 }
+.firstLine {
+  color: #ffffff;
 
-.searchcontainer span {
-  color: #000000;
 }
+.secondLine {
+    color: #000000;
+}
+/* .searchcontainer span {
+  color: #000000;
+} */
 
 .searchBoxContainer {
   padding: 44px 91px;
@@ -114,6 +120,8 @@
 
   .searchBoxContainer {
     padding: 20px 30px;
+    margin: 0px 10px;
+    border-radius: 4px;
   }
 
   .searchInputContainer button {
@@ -133,6 +141,7 @@
 @media (max-width: 500px) {
   .findAccountantContainer {
     padding: 0px 20px;
+    
   }
 
   .searchcontainer h1 {
@@ -143,6 +152,7 @@
   .searchBoxContainer {
     padding: 20px 15px;
     gap: 10px;
+    margin: 0px 10px;
   }
 
   .searchBoxContainer span {
@@ -153,6 +163,16 @@
     width: 60px;
     font-size: 16px;
   }
+  .firstLine,
+  .secondLine {
+    display: block;
+    text-align: center;
+  }
+
+  /* .searchcontainer h1 {
+    font-size: 32px;
+    line-height: 38px;
+  } */
 }
 
 @media (max-width: 400px) {

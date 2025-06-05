@@ -64,7 +64,7 @@ const TimelineItem = ({
 );
 
 const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
-    const [note, setNote] = useState("");
+  const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     email: "test@example.com",
   };
   const userIdActivity = userToken?.id || registerData?.id
-  console.log(userIdActivity,"profileLeadViewData");
+  console.log(userIdActivity, "profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
@@ -123,8 +123,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     if (getSellerNotes?.notes) {
       setNote(getSellerNotes.notes?.notes);
     }
-  }, [getSellerNotes,activeTab]);
- 
+  }, [getSellerNotes, activeTab]);
+
 
   const handleCancel = () => {
     // Reset back to original note
@@ -157,19 +157,19 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
         : registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
       note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
-      notes:  note ??getSellerNotes?.notes?.notes ,
+      notes: note ?? getSellerNotes?.notes?.notes,
     };
-    
+
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
       if (result.success) {
-        
+
         showToast("success", result?.message);
         const sellerData = {
           lead_id: profileLeadViewData.leads.id,
           user_id: userToken?.remember_tokens || registerData?.remember_tokens,
           buyer_id: profileLeadViewData.id,
         };
-  
+
         dispatch(getSellerNotesApi(sellerData))
       }
     });
@@ -234,28 +234,30 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             <div className={styles.lastActivityTexts}>
               Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
             </div>
+        
             <div className={styles.dropdownMainBox}>
-            {profileLeadViewData?.leads?.purchase_type && (
-              <div className={styles.lastActivityText}>
-                Purchase Type {" "}
-                <span>{profileLeadViewData?.leads?.purchase_type}</span>
+              {profileLeadViewData?.leads?.purchase_type && (
+                <div className={styles.lastActivityText}>
+                  Purchase Type {" "}
+                  <span>{profileLeadViewData?.leads?.purchase_type}</span>
+                </div>
+              )}
               </div>
-            )}
-            <div>
-              <span className={styles.currentStatusText}>Current Status</span>
-              <select
-                className={`${styles.selectBox} ${styles.customSelect}`}
+              <div>
+                <span className={styles.currentStatusText}>Current Status</span>
+                <select
+                  className={`${styles.selectBox} ${styles.customSelect}`}
 
-                value={profileLeadViewData?.leads?.status || status}
-                onChange={handleStatusChange}
-                disabled={profileLeadViewData?.leads?.status === "hired"}
-              >
-                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
-                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
-                {/* <option value="rejected">Rejected</option> */}
-              </select>
-            </div>
-            </div>
+                  value={profileLeadViewData?.leads?.status || status}
+                  onChange={handleStatusChange}
+                  disabled={profileLeadViewData?.leads?.status === "hired"}
+                >
+                  <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
+                  <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
+                  {/* <option value="rejected">Rejected</option> */}
+                </select>
+              </div>
+          
           </div>
           <div className={styles.containers}>
             <div className={styles.ProfileImgBox}>
@@ -364,46 +366,43 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   Notes
                 </button>
               </div> */}
-     <div className={styles.tabButtons}>
-  <button
-    className={styles.tabButton}
-    onClick={() => setActiveTab("activity")}
-  >
-    <span
-      className={`${styles.tabLabel} ${
-        activeTab === "activity" ? styles.activeTab : ""
-      }`}
-    >
-      Activity
-    </span>
-  </button>
+              <div className={styles.tabButtons}>
+                <button
+                  className={styles.tabButton}
+                  onClick={() => setActiveTab("activity")}
+                >
+                  <span
+                    className={`${styles.tabLabel} ${activeTab === "activity" ? styles.activeTab : ""
+                      }`}
+                  >
+                    Activity
+                  </span>
+                </button>
 
-  <button
-    className={styles.tabButton}
-    onClick={() => setActiveTab("lead")}
-  >
-    <span
-      className={`${styles.tabLabel} ${
-        activeTab === "lead" ? styles.activeTab : ""
-      }`}
-    >
-      Lead
-    </span>
-  </button>
+                <button
+                  className={styles.tabButton}
+                  onClick={() => setActiveTab("lead")}
+                >
+                  <span
+                    className={`${styles.tabLabel} ${activeTab === "lead" ? styles.activeTab : ""
+                      }`}
+                  >
+                    Lead
+                  </span>
+                </button>
 
-  <button
-    className={styles.tabButton}
-    onClick={() => setActiveTab("notes")}
-  >
-    <span
-      className={`${styles.tabLabel} ${
-        activeTab === "notes" ? styles.activeTab : ""
-      }`}
-    >
-      Notes
-    </span>
-  </button>
-</div>
+                <button
+                  className={styles.tabButton}
+                  onClick={() => setActiveTab("notes")}
+                >
+                  <span
+                    className={`${styles.tabLabel} ${activeTab === "notes" ? styles.activeTab : ""
+                      }`}
+                  >
+                    Notes
+                  </span>
+                </button>
+              </div>
 
 
 
@@ -418,20 +417,20 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         key={index}
                         icon={
                           item?.contact_type === "Manual Bid"
-                            ?   bidContactIcon
+                            ? bidContactIcon
                             : item?.contact_type === "email"
-                            ? EmailImage
-                            : item?.contact_type === "Whatsapp"
-                            ? AddImage
-                            : item?.contact_type === "mobile"
-                            ? CallImage
-                            : item?.contact_type === "Buttons"
-                            ? PurchasedImage
-                            : item?.contact_type === "sms" ?
-                            SMSIcon
-                            : item?.contact_type === "Auto Bid" ? 
-                           CallImage
-                            : hirImg
+                              ? EmailImage
+                              : item?.contact_type === "Whatsapp"
+                                ? AddImage
+                                : item?.contact_type === "mobile"
+                                  ? CallImage
+                                  : item?.contact_type === "Buttons"
+                                    ? PurchasedImage
+                                    : item?.contact_type === "sms" ?
+                                      SMSIcon
+                                      : item?.contact_type === "Auto Bid" ?
+                                        CallImage
+                                        : hirImg
                         }
                         title={item.activity_name}
                         description={item.description}
@@ -468,19 +467,48 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
 
                         return Array.from(uniqueQuestionsMap.entries()).map(
                           ([question, answer], index) => (
-                            <div key={index} style={{ marginBottom: "0.5rem"}}>
-                              <li
-                                style={{ fontWeight: 600, marginTop: "12px" }}
-                              >
-                                {question}
-                              </li>
+                            <div key={index} style={{ marginBottom: "0.5rem" }}>
+                              <span className={styles.bullet}>•</span>
+                              <span className={styles.questionText} 
+                              // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
+                              >{question}</span>
                               <hr className={styles.hrline} />
-                              <p style={{ marginLeft: "20px",fontSize:"16px",fontWeight:600,color:"#828282" }}>{answer}</p>
+                              <p 
+                              // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }} 
+                              className={styles.answerText}>{answer}</p>
                             </div>
                           )
                         );
                       })()}
                     </div>
+                    {/* {(() => {
+        const uniqueQuestionsMap = new Map();
+
+        getPendingLeadList?.forEach((item) => {
+          const questionsArray = item?.questions
+            ? JSON.parse(item.questions)
+            : [];
+
+          questionsArray.forEach((qna) => {
+            if (!uniqueQuestionsMap.has(qna.ques)) {
+              uniqueQuestionsMap.set(qna.ques, qna.ans);
+            }
+          });
+        });
+
+        return Array.from(uniqueQuestionsMap.entries()).map(
+          ([question, answer], index) => (
+            <div key={index} className={styles.questionBlock}>
+              <div className={styles.questionRow}>
+                <span className={styles.bullet}>•</span>
+                <span className={styles.questionText}  style={{ fontWeight: 600, marginTop: "12px" }}>{question}</span>
+              </div>
+              <hr className={styles.hrline} />
+              <p style={{ marginLeft: "20px",fontSize:"16px",fontWeight:600,color:"#828282" }}>{answer}</p>
+            </div>
+          )
+        );
+      })()} */}
 
                     <div>
                       <LeadMap

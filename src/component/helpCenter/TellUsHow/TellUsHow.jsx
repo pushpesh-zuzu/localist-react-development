@@ -6,9 +6,13 @@ const TellUsHow = () => {
   return (
     <div className={styles.tellUsHowContainer}>
       <div className={styles.searchcontainer}>
-        <h1>
+        {/* <h1>
           Tell us how <span>we can help</span>
-        </h1>
+        </h1> */}
+        <h1>
+  <span className={styles.firstLine}>Tell us how</span>{" "}
+  <span className={styles.secondLine}>we can help</span>
+</h1>
 
         <div className={styles.searchBoxContainer}>
           <div className={styles.searchInputContainer}>
