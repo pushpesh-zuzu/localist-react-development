@@ -228,9 +228,14 @@ const handleContinues = () => {
       setSaveLaterLoaderId(null);
     })
   }
-  const handleOpenClose = () => {
+  const handleOpenClose = (e) => {
     setIsOpen(false)
-    setModalOpen(true)
+    if(e){
+setTimeout(()=> {
+  setModalOpen(true)
+
+},2000)
+    }
   }
   return (
     <>
@@ -396,7 +401,7 @@ const handleContinues = () => {
       />
 {isopen && <ContactConfirmModal 
 // onClose={() => setIsOpen(false)} 
-onClose={handleOpenClose}
+onClose={(e) => handleOpenClose(e)}
   enoughCredit={planpurcahse}
   confirmModal = {isModalOpen}
   />}

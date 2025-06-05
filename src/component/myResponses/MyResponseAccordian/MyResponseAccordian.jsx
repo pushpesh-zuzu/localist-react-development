@@ -231,9 +231,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
       ) : (
         <>
           <div className={styles.headerBox}>
-            <div className={styles.lastActivityText}>
+            <div className={styles.lastActivityTexts}>
               Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
             </div>
+            <div className={styles.dropdownMainBox}>
             {profileLeadViewData?.leads?.purchase_type && (
               <div className={styles.lastActivityText}>
                 Purchase Type {" "}
@@ -253,6 +254,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
                 {/* <option value="rejected">Rejected</option> */}
               </select>
+            </div>
             </div>
           </div>
           <div className={styles.containers}>

@@ -84,7 +84,7 @@ const handleBuyNow = (item) => {
   if (result?.success) {
     showToast('success', result?.message);
     setActiveLoaderId(null);
-    onClose()
+    onClose(true)
     dispatch(getInvoiceBillingListApi());
   } else if (result?.success === false) {
     
@@ -96,7 +96,7 @@ const handleBuyNow = (item) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={onClose}>×</button>
+        <button className={styles.closeButton} onClick={()=>onClose()}>×</button>
         <div className={styles.mainBox}>
         <h2>{enoughCredit != 0 ? "You need 6 credits to contact Lorna" : "You have not purchased any plan, Please buy credits"}</h2>
       
