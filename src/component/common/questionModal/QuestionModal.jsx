@@ -246,7 +246,9 @@ const QuestionModal = ({
               </button>
             </div>
           </>
-        ) : null}
+        ) :  <div className={styles.noQuestion}>
+    <h2>No questions available</h2>
+  </div>}
       </div>
     </div>
   );
