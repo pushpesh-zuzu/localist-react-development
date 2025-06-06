@@ -202,7 +202,7 @@ const EmailMatch = ({
                   }
                 />
               ) : (
-                "View Matches"
+                "Continue"
               )}
             </button>
           </div>
