@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./NumberVerified.module.css";
 import { CheckOutlined } from "@ant-design/icons";
+import checkboxImg from "../../../../../assets/Images/ServicePanel/checkboxImg.svg"
 
 const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
   if (!open) return null;
@@ -31,7 +32,7 @@ const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
               }}
               onClick={handleSubmit}
             >
-              Next
+            <img src={checkboxImg} alt="..." />  View your matches now.
             </button>
           </div>
           <p className={styles.note}>

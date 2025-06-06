@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.closeButton {
+/* .closeButton {
   position: absolute;
   top: 5px;
   right: 15px;
@@ -22,11 +22,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #000000;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+} */
+ .closeButton {
+  position: absolute;
+  color: #000000;
+  background: white;
+  border: none;
+  top: 7px;
+  right: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .modalContent {

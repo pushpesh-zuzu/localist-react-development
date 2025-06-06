@@ -94,13 +94,22 @@
   background: #f0f0f0;
 }
 
-.closeButton {
+/* .closeButton {
   position: absolute;
   color: #000000;
   top: 7px;
   right: 20px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
+  cursor: pointer;
+} */
+ .closeButton {
+  position: absolute;
+  color: #000000;
+  top: 7px;
+  right: 20px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
 }
 
