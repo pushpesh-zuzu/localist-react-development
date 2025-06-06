@@ -17,6 +17,7 @@
 .formGroup {
   margin-bottom: 22px;
   text-align: left;
+  position: relative;
 }
 
 .label {
@@ -145,4 +146,14 @@
   .searchItem {
     font-size: 13px;
   }
+}
+
+.checkIcon {
+  position: absolute;
+  right: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
 }

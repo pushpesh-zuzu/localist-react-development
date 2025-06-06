@@ -12,6 +12,7 @@ import {
   setbuyerRequestData,
   setcitySerach,
 } from "../../../../../store/Buyer/BuyerSlice";
+import CheckIcon from "../../../../../assets/Icons/greenCheckBox.jpeg";
 
 const WhatServiceYouNeed = ({
   nextStep,
@@ -20,22 +21,27 @@ const WhatServiceYouNeed = ({
   onClose,
   pincodes,
   setShowConfirmModal,
+  postalCodeIsValidate,
 }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
-  const [city,setCity] = useState("")
+  const [city, setCity] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
-const { userToken } = useSelector((state)=> state.auth)
-  const { searchServiceLoader, service,registerData } = useSelector(
+  const { userToken } = useSelector((state) => state.auth);
+  const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  const { citySerach } = useSelector((state)=> state.buyer)
+  const { citySerach } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   console.log(serviceName, serviceId, "prem");
-
+  //NSai
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  useEffect(() => {
+    setPostalCodeValidate(postalCodeIsValidate);
+  }, [postalCodeIsValidate]);
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
       const delayDebounce = setTimeout(() => {
@@ -44,7 +50,7 @@ const { userToken } = useSelector((state)=> state.auth)
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
-  console.log(citySerach,"cityName")
+  console.log(citySerach, "cityName");
   // useEffect(() => {
   //   if (serviceName && serviceId) {
   //     setInput(serviceName);
@@ -63,6 +69,7 @@ const { userToken } = useSelector((state)=> state.auth)
   }, [serviceName, serviceId, pincodes]);
   const handleSelectService = useCallback(
     (item) => {
+      // console.log(item?.name, "clicked");
       setInput(item.name);
       setSelectedService(item);
       setIsDropdownOpen(false);
@@ -92,7 +99,7 @@ const { userToken } = useSelector((state)=> state.auth)
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
-          city:citySerach
+          city: citySerach,
         })
       );
       dispatch(
@@ -100,7 +107,7 @@ const { userToken } = useSelector((state)=> state.auth)
       );
       nextStep();
     }
-  }, [selectedService, pincode, dispatch, serviceId,citySerach, nextStep]);
+  }, [selectedService, pincode, dispatch, serviceId, citySerach, nextStep]);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -116,55 +123,55 @@ const { userToken } = useSelector((state)=> state.auth)
       }
     };
 
-   
-  const initAutocomplete = () => {
-    if (!inputRef.current) return;
-  
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        types: ["geocode"],
-        componentRestrictions: { country: "IN" },
-      }
-    );
-  
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
-  
-      const postalCode = place.address_components.find((component) =>
-        component.types.includes("postal_code")
-      )?.long_name;
-  
-      const cityName = place.address_components.find((component) =>
-        component.types.includes("locality")
-      )?.long_name;
-      const townName = place.address_components.find((component) =>
-        component.types.includes("administrative_area_level_3")
-      )?.long_name;
-      
-      const formattedAddress = place.formatted_address;
-  // const townName = place.formatted_address
-      if (postalCode) {
-        setPincode(postalCode);
-        inputRef.current.value = postalCode;
-        setErrors((prev) => ({ ...prev, pincode: "" }));
-      }
-  
-      if (cityName) {
-        setCity(cityName); 
-        dispatch(setcitySerach(cityName))// <- set city state
-      }
-  
-      if (!postalCode && !cityName) {
-        alert("No address or PIN code found! Please try again.");
-      }
-    });
-  };
+    const initAutocomplete = () => {
+      if (!inputRef.current) return;
+
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          types: ["geocode"],
+          componentRestrictions: { country: "IN" },
+        }
+      );
+
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (!place.address_components) return;
+
+        const postalCode = place.address_components.find((component) =>
+          component.types.includes("postal_code")
+        )?.long_name;
+
+        const cityName = place.address_components.find((component) =>
+          component.types.includes("locality")
+        )?.long_name;
+        const townName = place.address_components.find((component) =>
+          component.types.includes("administrative_area_level_3")
+        )?.long_name;
+
+        const formattedAddress = place.formatted_address;
+        // const townName = place.formatted_address
+        if (postalCode) {
+          setPostalCodeValidate(true);
+          setPincode(postalCode);
+          inputRef.current.value = postalCode;
+          setErrors((prev) => ({ ...prev, pincode: "" }));
+        }
+
+        if (cityName) {
+          setCity(cityName);
+          dispatch(setcitySerach(cityName)); // <- set city state
+        }
+
+        if (!postalCode && !cityName) {
+          alert("No address or PIN code found! Please try again.");
+        }
+      });
+    };
 
     loadGoogleMapsScript();
   }, []);
- // useEffect(() => {
+  // useEffect(() => {
   //   loadGooglePlacesAutocomplete({
   //     inputRef,
   //     setPincode,
@@ -174,11 +181,10 @@ const { userToken } = useSelector((state)=> state.auth)
   //     setcitySerach,
   //   });
   // }, []);
-  
 
   // const initAutocomplete = () => {
   //   if (!inputRef.current) return;
-  
+
   //   const autocomplete = new window.google.maps.places.Autocomplete(
   //     inputRef.current,
   //     {
@@ -186,37 +192,37 @@ const { userToken } = useSelector((state)=> state.auth)
   //       componentRestrictions: { country: "IN" },
   //     }
   //   );
-  
+
   //   autocomplete.addListener("place_changed", () => {
   //     const place = autocomplete.getPlace();
   //     if (!place.address_components) return;
-  
+
   //     const postalCode = place.address_components.find((component) =>
   //       component.types.includes("postal_code")
   //     )?.long_name;
-  
+
   //     const formattedAddress = place.formatted_address;
-  
+
   //     if (postalCode) {
   //       setPincode(postalCode);
   //       inputRef.current.value = postalCode;
   //       setErrors((prev) => ({ ...prev, pincode: "" }));
   //     }
-  
+
   //     if (formattedAddress) {
   //       setCity(formattedAddress); // <- set city state
   //     }
-  
+
   //     if (!postalCode && !formattedAddress) {
   //       alert("No address or PIN code found! Please try again.");
   //     }
   //   });
   // };
-  
+
   const handlePincodeChange = (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
-
+    setPostalCodeValidate(false);
     setErrors((prev) => ({
       ...prev,
       pincode:
@@ -227,18 +233,16 @@ const { userToken } = useSelector((state)=> state.auth)
   };
 
   const handleCloseClick = () => {
-   
-    if(!userToken?.remember_tokens && !registerData?.remember_tokens){
-         
+    if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
       setShowConfirmModal(true);
       dispatch(
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
-          city:citySerach
+          city: citySerach,
         })
       );
-    } else{
+    } else {
       onClose();
     }
   };
@@ -303,6 +307,10 @@ const { userToken } = useSelector((state)=> state.auth)
           value={pincode}
           onChange={handlePincodeChange}
         />
+        {postalCodeValidate && (
+          <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
+        )}
+
         {errors.pincode && <p className={styles.errorText}>{errors.pincode}</p>}
       </div>
 

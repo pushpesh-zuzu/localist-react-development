@@ -13,16 +13,21 @@ import {
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug, showToast } from "../../../utils";
-import { questionAnswerData, setcitySerach } from "../../../store/Buyer/BuyerSlice";
+import {
+  questionAnswerData,
+  setcitySerach,
+} from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
-import location from "../../../assets/Images/HowItWorks/locationImg.svg"
+import location from "../../../assets/Images/HowItWorks/locationImg.svg";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
   const [pincode, setPincode] = useState("");
-  const [city,setCity] = useState("")
+  const [city, setCity] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { service, searchServiceLoader } = useSelector(
@@ -50,7 +55,7 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
-console.log(city,"city")
+  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -83,6 +88,7 @@ console.log(city,"city")
   );
   const handleChange = (e) => {
     setPincode(e.target.value);
+    setPostalCodeValidate(false);
   };
 
   useEffect(() => {
@@ -128,20 +134,21 @@ console.log(city,"city")
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
         )?.long_name;
-      
-    // const townName = place.formatted_address
+
+        // const townName = place.formatted_address
 
         if (postalCode) {
           setPincode(postalCode);
+          setPostalCodeValidate(true);
+
           inputRef.current.value = postalCode;
         } else {
           showToast("error", "No PIN code found! Please try again.");
         }
         if (cityName) {
           setCity(cityName);
-          dispatch(setcitySerach(cityName)) // <- set city state
+          dispatch(setcitySerach(cityName)); // <- set city state
         }
-        
       });
     };
 
@@ -252,6 +259,7 @@ console.log(city,"city")
             serviceId={selectedServiceId?.id}
             serviceName={selectedServiceId.name}
             postcode={pincode}
+            postalCodeValidate={postalCodeValidate}
             // city={city}
           />
         </>

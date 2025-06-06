@@ -22,8 +22,8 @@ const EmailMatch = ({
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
     (state) => state.findJobs
   );
-  const { userToken } = useSelector((state) => state.auth)
-console.log(userToken?.remember_tokens,"000")
+  const { userToken } = useSelector((state) => state.auth);
+  console.log(userToken?.remember_tokens, "000");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -94,18 +94,15 @@ console.log(userToken?.remember_tokens,"000")
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
-const handleCloseClick = () => {
-  
-  if(!userToken?.remember_tokens){
-    console.log(name,email,phone,"p")
-    dispatch(setbuyerRequestData({ name, email, phone }));
-    setShowConfirmModal(true);
-  } else{
-
-    onClose();
-  }
-}
-  
+  const handleCloseClick = () => {
+    if (!userToken?.remember_tokens) {
+      console.log(name, email, phone, "p");
+      dispatch(setbuyerRequestData({ name, email, phone }));
+      setShowConfirmModal(true);
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -182,17 +179,21 @@ const handleCloseClick = () => {
           )}
 
           <div className={styles.buttonContainer}>
-            <button
+            {/* NSai */}
+            {/* <button
               className={styles.backButton}
               onClick={previousStep}
               disabled={registerLoader}
             >
               Back
-            </button>
+            </button> */}
             <button
               className={styles.nextButton}
               onClick={handleSubmit}
               disabled={registerLoader}
+              style={{
+                marginLeft: "auto",
+              }}
             >
               {registerLoader ? (
                 <Spin

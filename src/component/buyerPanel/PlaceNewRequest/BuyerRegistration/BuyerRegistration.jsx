@@ -37,7 +37,7 @@
 //   if(barkToken || registerDataToken){
 //     return true;
 //   }
- 
+
 //   return false;
 // }
 // const isAuthenticated=isAdminOrRemembered|| checkLocalStorage();
@@ -45,7 +45,7 @@
 //   const stepFlow = isAuthenticated
 //     ? [2, 3, 6, 7, 8]
 //     : [1, 2, 3, 4, 5, 7, 8];
- 
+
 //   const nextStep = () => {
 //     const currentIndex = stepFlow.indexOf(buyerStep);
 //     if (currentIndex < stepFlow.length - 1) {
@@ -212,7 +212,7 @@
 //             email={email}
 //             // loading={registerLoader}
 //           />
-//         )} 
+//         )}
 
 //         {buyerStep === 4 && (
 //           <ViewYourMatches
@@ -270,7 +270,8 @@ const BuyerRegistration = ({
   serviceId,
   serviceName,
   postcode,
-  city
+  city,
+  postalCodeValidate,
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
@@ -278,14 +279,14 @@ const BuyerRegistration = ({
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  const { userToken,adminToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader,authToken } = useSelector(
+  const { userToken, adminToken } = useSelector((state) => state.auth);
+  const { registerData, registerLoader, authToken } = useSelector(
     (state) => state.findJobs
   );
   console.log(registerData, "registerData");
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
-  const stepFlow = isAdminOrRemembered 
+  const stepFlow = isAdminOrRemembered
     ? [2, 3, 6, 7, 8]
     : [1, 2, 3, 4, 5, 7, 8];
 
@@ -358,6 +359,7 @@ const BuyerRegistration = ({
             onClose={handleClose}
             pincodes={postcode}
             setShowConfirmModal={setShowConfirmModal}
+            postalCodeIsValidate={postalCodeValidate}
           />
         )}
 
@@ -370,7 +372,6 @@ const BuyerRegistration = ({
             loading={questionLoader}
             setShowConfirmModal={setShowConfirmModal}
             formData={buyerRequest}
-            
           />
         )}
 

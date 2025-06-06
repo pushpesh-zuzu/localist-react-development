@@ -2,11 +2,11 @@ import React from "react";
 import styles from "./NumberVerified.module.css";
 import { CheckOutlined } from "@ant-design/icons";
 
-const NumberVerifiedModal = ({ open, onClose ,nextStep, previousStep}) => {
+const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
   if (!open) return null;
   const handleSubmit = () => {
-    nextStep()
-  }
+    nextStep();
+  };
 
   return (
     <div className={styles.modalOverlay}>
@@ -21,12 +21,17 @@ const NumberVerifiedModal = ({ open, onClose ,nextStep, previousStep}) => {
             </h2>
           </div>
           <div className={styles.buttons}>
-            <button className={styles.backButton} onClick={onClose}>
+            {/* <button className={styles.backButton} onClick={onClose}>
               Back
-            </button>
-            <button className={styles.viewMatchesButton} onClick={handleSubmit}>
-             Next
-              
+            </button> */}
+            <button
+              className={styles.viewMatchesButton}
+              style={{
+                marginLeft: "auto",
+              }}
+              onClick={handleSubmit}
+            >
+              Next
             </button>
           </div>
           <p className={styles.note}>

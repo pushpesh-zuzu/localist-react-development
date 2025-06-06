@@ -28,7 +28,7 @@
 //           <div key={colIndex} className={styles.column}>
 //             {col.map((item, idx) => (
 //               <div key={idx} className={styles.item}>
-//                <p> {item} </p>
+//                 {item}
 //               </div>
 //             ))}
 //           </div>
@@ -39,6 +39,7 @@
 // };
 
 // export default PopularHelpCenter;
+
 
 import React from "react";
 import styles from "./PopularHelpCenter.module.css";

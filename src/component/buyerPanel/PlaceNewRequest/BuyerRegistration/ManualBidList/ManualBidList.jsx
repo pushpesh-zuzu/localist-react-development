@@ -4,62 +4,68 @@ import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
-import { getAutoBidData, getBuyerViewProfieApi } from "../../../../../store/LeadSetting/leadSettingSlice";
+import {
+  getAutoBidData,
+  getBuyerViewProfieApi,
+} from "../../../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
 
 const ManualBidList = () => {
-  const dispatch = useDispatch()
-  const { requestId } = useParams()
-  const { autoBidListData, autobidLoader } = useSelector((state) => state.leadSetting)
+  const dispatch = useDispatch();
+  const { requestId } = useParams();
+  const { autoBidListData, autobidLoader } = useSelector(
+    (state) => state.leadSetting
+  );
   const { userToken } = useSelector((state) => state.auth);
-   const {  registerData } = useSelector(
-      (state) => state.findJobs
-    );
-  const navigate = useNavigate()
-  const webData = autoBidListData?.map(item => item?.service_name) || [];
-console.log(autoBidListData,"autoBidListData")
+  const { registerData } = useSelector((state) => state.findJobs);
+  const navigate = useNavigate();
+  const webData = autoBidListData?.map((item) => item?.service_name) || [];
+  console.log(autoBidListData, "autoBidListData");
   const handleBack = () => {
-    navigate(`/bids-list/${requestId}`)
-  }
+    navigate(`/bids-list/${requestId}`);
+  };
   useEffect(() => {
     const data = {
       user_id: userToken?.remember_tokens,
-      lead_id: requestId
-    }
-    dispatch(getAutoBidData(data))
-  }, [])
+      lead_id: requestId,
+    };
+    dispatch(getAutoBidData(data));
+  }, []);
   const handleReply = (item) => {
-    console.log(item,"item")
+    console.log(item, "item");
     const viewProfileData = {
-      user_id:userToken?.remember_tokens
-      ? userToken?.remember_tokens
-      : registerData?.remember_tokens,
-      seller_id:item?.id,
-      lead_id:requestId
-    }
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+      seller_id: item?.id,
+      lead_id: requestId,
+    };
     dispatch(getBuyerViewProfieApi(viewProfileData)).then((result) => {
-          if(result){
-            showToast("success",result?.message)
-          }
-        })
-  }
+      if (result) {
+        showToast("success", result?.message);
+      }
+    });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
         <div className={styles.headingTabsWrapper}>
-          <h1 className={styles.heading}>
-            {webData[0] || "No Service"}
-          </h1>
+          {/* NSai */}
+          <h1 className={styles.heading}>{webData[0] || "Your Service"}</h1>
           <div className={styles.tabs}>
-            <button className={styles.activeTab} onClick={handleBack}>Your matches</button>
+            <button className={styles.activeTab} onClick={handleBack}>
+              Your matches
+            </button>
             <button className={styles.tab}>Replies</button>
           </div>
         </div>
         <div className={styles.backBtnWrapper}>
-          <button className={styles.backBtn} onClick={handleBack}>Back</button>
+          <button className={styles.backBtn} onClick={handleBack}>
+            Back
+          </button>
         </div>
       </div>
 
@@ -70,10 +76,12 @@ console.log(autoBidListData,"autoBidListData")
         <select className={styles.customSelect}>
           <option>All locations</option>
         </select>
-        <select className={styles.customSelect}> 
+        <select className={styles.customSelect}>
           <option>All response times</option>
         </select>
-        <span className={styles.matchCount}>{(autoBidListData || []).length} matches</span>
+        <span className={styles.matchCount}>
+          {(autoBidListData || []).length} matches
+        </span>
 
         <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
           <option>Sort by: best match</option>
@@ -84,90 +92,104 @@ console.log(autoBidListData,"autoBidListData")
         <span>Recommended:</span> Request replies from your{" "}
         <strong>top matches</strong> to hear back faster
       </div>
-      {autobidLoader ? <Spin style={{ color: "blue", display: "flex", justifyContent: "center" }} /> : <>
-        {autoBidListData?.map((item) => (
-          <div className={styles.card} key={item.id}>
-            <div className={styles.cardLeft}>
-              <div className={styles.imageWrapper}>
-                <img
-                  // src={item.profile_image ? item.profile_image : DummyImage}
-                  src={
-                    item?.profile_image
-                      ? `${BASE_IMAGE_URL}${item?.profile_image}`
-                      : DummyImage
-                  }
-                  alt="Profile"
-                  className={styles.image}
-                />
-              </div>
-              <div className={styles.details}>
-                <div className={styles.header}>
-                  <div>
-                    <h3>
-                      <img src={GreenTickIcon} alt="" />
-                      {item.name}
-                    </h3>
-                    <p>
-                      <img src={AutoBidLocationIcon} alt="" />
-                      {item.distance} miles away
-                    </p>
-                  </div>
-                  <div className={styles.sidebar}>
-                    <div className={styles.rating}>
-                      {/* <span className={styles.stars}>★★★★★</span>
+      {autobidLoader ? (
+        <Spin
+          style={{ color: "blue", display: "flex", justifyContent: "center" }}
+        />
+      ) : (
+        <>
+          {autoBidListData?.map((item) => (
+            <div className={styles.card} key={item.id}>
+              <div className={styles.cardLeft}>
+                <div className={styles.imageWrapper}>
+                  <img
+                    // src={item.profile_image ? item.profile_image : DummyImage}
+                    src={
+                      item?.profile_image
+                        ? `${BASE_IMAGE_URL}${item?.profile_image}`
+                        : DummyImage
+                    }
+                    alt="Profile"
+                    className={styles.image}
+                  />
+                </div>
+                <div className={styles.details}>
+                  <div className={styles.header}>
+                    <div>
+                      <h3>
+                        <img src={GreenTickIcon} alt="" />
+                        {item.name}
+                      </h3>
+                      <p>
+                        <img src={AutoBidLocationIcon} alt="" />
+                        {item.distance} miles away
+                      </p>
+                    </div>
+                    <div className={styles.sidebar}>
+                      <div className={styles.rating}>
+                        {/* <span className={styles.stars}>★★★★★</span>
                       <span className={styles.ratingCount}>125</span> */}
                         {(() => {
-                                                      const rating = item?.avg_rating || 0;
-                      
-                                                      return (
-                                                        <>
-                                                          <span className={styles.stars}>
-                                                            {[...Array(5)].map((_, index) => {
-                                                              if (rating >= index + 1) {
-                                                                return <span key={index}>★</span>; // Full star
-                                                              } else if (rating >= index + 0.5) {
-                                                                return <span key={index}>★</span>; // Half star (or use icon)
-                                                              } else {
-                                                                return <span key={index}>☆</span>; // Empty star
-                                                              }
-                                                            })}
-                                                          </span>
-                                                          <span className={styles.ratingCount}>{rating}</span>
-                                                        </>
-                                                      );
-                                                    })()}
+                          const rating = item?.avg_rating || 0;
+
+                          return (
+                            <>
+                              <span className={styles.stars}>
+                                {[...Array(5)].map((_, index) => {
+                                  if (rating >= index + 1) {
+                                    return <span key={index}>★</span>; // Full star
+                                  } else if (rating >= index + 0.5) {
+                                    return <span key={index}>★</span>; // Half star (or use icon)
+                                  } else {
+                                    return <span key={index}>☆</span>; // Empty star
+                                  }
+                                })}
+                              </span>
+                              <span className={styles.ratingCount}>
+                                {rating}
+                              </span>
+                            </>
+                          );
+                        })()}
+                      </div>
                     </div>
+                  </div>
+
+                  <div className={styles.badges}>
+                    <span>{item.service_name}</span>
+                  </div>
+
+                  <p className={styles.description}>
+                    This is a static description for demonstration purposes. It
+                    showcases how each bid card might look like in real data.
+                  </p>
+
+                  <div className={styles.quickToRespondWrapper}>
+                    <a
+                      href="#"
+                      className={styles.profileLink}
+                      onClick={() => handleReply(item)}
+                    >
+                      View Profile →
+                    </a>
+
+                    {item?.quicktorespond == 1 && (
+                      <div className={styles.quickToRespond}>
+                        <img src={QuickToRespond} alt="" />
+                        Quick to respond
+                      </div>
+                    )}
                   </div>
                 </div>
 
-                <div className={styles.badges}>
-                  <span>{item.service_name}</span>
-                </div>
-
-                <p className={styles.description}>
-                  This is a static description for demonstration purposes. It
-                  showcases how each bid card might look like in real data.
-                </p>
-
-                <div className={styles.quickToRespondWrapper}>
-                  <a href="#" className={styles.profileLink} onClick={() => handleReply(item)}>
-                    View Profile →
-                  </a>
-
-               {item?.quicktorespond == 1 &&  <div className={styles.quickToRespond}>
-                    <img src={QuickToRespond} alt="" />
-                    Quick to respond
-                  </div>}
-                </div>
-              </div>
-
-              {/* <div className={styles.replyBtnWrapper}>
+                {/* <div className={styles.replyBtnWrapper}>
               <button className={styles.replyBtn}>Request reply</button>
             </div> */}
+              </div>
             </div>
-          </div>
-        ))}
-      </>}
+          ))}
+        </>
+      )}
     </div>
   );
 };
