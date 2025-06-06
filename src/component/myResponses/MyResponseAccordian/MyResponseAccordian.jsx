@@ -467,11 +467,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
 
                         return Array.from(uniqueQuestionsMap.entries()).map(
                           ([question, answer], index) => (
-                            <div key={index} style={{ marginBottom: "0.5rem" }}>
+                            <div key={index} style={{ marginBottom: "0.5rem" }} className={styles.questionTextBox}>
                               <span className={styles.bullet}>•</span>
                               <span className={styles.questionText} 
                               // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
-                              >{question}</span>
+                              >{" "} {question}</span>
                               <hr className={styles.hrline} />
                               <p 
                               // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }} 
