@@ -298,9 +298,9 @@ const MatchingLeads = () => {
             <img src={SettingIcon} alt="" /> {uniqueServiceNames?.length}{" "}
             services{" "}
           </span>
-          <span className={styles.subTextSpan}>
+          {/* <span className={styles.subTextSpan}>
             <img src={LocationIcon} alt="" /> {locationLength} Location
-          </span>
+          </span> */}
         </p>
       </div>
 

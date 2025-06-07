@@ -37,6 +37,12 @@
   object-fit: cover;
   cursor: pointer;
 }
+.image:hover {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  cursor: pointer;
+}
 
 .title {
   margin-top: 10px;

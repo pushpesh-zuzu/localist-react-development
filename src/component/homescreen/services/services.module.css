@@ -144,6 +144,11 @@
   height: 208px;
   object-fit: cover;
 }
+.serviceImage:hover {
+  width: 100%;
+  height: 218px;
+  object-fit: cover;
+}
 
 
 .serviceTitle {

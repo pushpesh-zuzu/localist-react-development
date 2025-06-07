@@ -69,7 +69,7 @@ const ServiceBusinessAddressStep = ({
             {/* {errors.state && <p className={styles.errorText}>{errors.state}</p>} */}
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Postcode</label>
-              <div className={styles.toggleGroup}>
+              {/* <div className={styles.toggleGroup}>
   <button
     type="button"
     className={formData?.is_zipcode == 1 ? styles.activeButton : styles.toggleButton}
@@ -84,10 +84,10 @@ const ServiceBusinessAddressStep = ({
   >
     No
   </button>
-</div>
-</div>
+</div> */}
 
-{formData?.is_zipcode !== 0 && (
+
+{/* {formData?.is_zipcode !== 0 && ( */}
   <div className={styles.labelInputWrapper}>
     <input
       type="number"
@@ -108,7 +108,8 @@ const ServiceBusinessAddressStep = ({
       }
     />
   </div>
-)}
+  </div> 
+{/* )} */}
 
             {/* {formData?.zipcode === 1 && (
               <div className={styles.labelInputWrapper}>

@@ -35,7 +35,7 @@ const [planpurcahse,setPlanPurchase] = useState("")
 
   useEffect(() => {
     const leadRequestData = {
-      user_id: userToken?.remember_tokens
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
     }
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
@@ -251,6 +251,17 @@ setTimeout(()=> {
         />
       ) : (
         <>
+        {leadRequestList?.length === 0 ? <div
+        style={{
+          textAlign: "center",
+          marginTop: "40px",
+          fontSize: "24px",
+          fontWeight: "800",
+          color: "#000000",
+        }}
+      >
+       No Leads Available.
+      </div> : <>
           {leadRequestList?.slice(0, visibleCount)?.map((item) => {
             console.log(item?.view_count,'itemss')
             return (
@@ -381,7 +392,7 @@ setTimeout(()=> {
                 </div>
               </>
             );
-          })}{" "}
+          })} </>}{" "}
           {/* <div className={styles.viewMoreBtnWrapper}>
             <button>View More</button>
           </div> */}
