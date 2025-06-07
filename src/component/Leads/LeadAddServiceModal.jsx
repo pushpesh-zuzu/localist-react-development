@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import styles from "./AddServiceModal.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -18,18 +17,16 @@ const AddServiceModal = ({
   handleSelectService,
   handleSubmitData,
   selectedServices,
-  handleRemoveService
+  handleRemoveService,
 }) => {
-  
   const { popularList } = useSelector((state) => state.findJobs);
 
   if (!isModalOpen) return null;
 
   const handleSelect = (item) => {
     handleSelectService(item);
-   
   };
-  
+
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
@@ -79,13 +76,18 @@ const AddServiceModal = ({
           </div>
         )}
         <div className={styles.selectedTags}>
-{selectedServices.map((service) => (
-  <div key={service.id} className={styles.selectedTag}>
-    {service.name}
-    <button className={styles.removeIcon} onClick={() => handleRemoveService(service.id)}>x</button>
-  </div>
-))}
-</div>
+          {selectedServices.map((service) => (
+            <div key={service.id} className={styles.selectedTag}>
+              {service.name}
+              <button
+                className={styles.removeIcon}
+                onClick={() => handleRemoveService(service.id)}
+              >
+                x
+              </button>
+            </div>
+          ))}
+        </div>
         <div className={styles.suggestions}>
           <label className={styles.label}>Suggestions</label>
           <p className={styles.suggestionText}>
@@ -103,9 +105,6 @@ const AddServiceModal = ({
             ))}
           </div>
         </div>
-
-     
-       
 
         <div className={styles.actions}>
           <button

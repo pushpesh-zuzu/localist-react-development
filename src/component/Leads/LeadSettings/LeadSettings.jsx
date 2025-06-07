@@ -53,35 +53,36 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     sevenDays,
     onlineRemote,
     sevenPausedData,
-    getOnlineRemote
+    getOnlineRemote,
   } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth);
-  const [autobid_pause, setAutoBid] = useState(sevenPausedData?.autobidpause === 1);
+  const [autobid_pause, setAutoBid] = useState(
+    sevenPausedData?.autobidpause === 1
+  );
   const [is_online, setIsOnline] = useState(getOnlineRemote?.isonline === 1);
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [isEditModalOpen, setIseditModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const [previousPostcode, setPreviousPostcode] = useState("");
   const [isTravelTimeModalOpen, setIsTravelTimeModalOpen] = useState(false);
-  const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false)
+  const [isDrawTimeOpen, setIsDrawTimeOpen] = useState(false);
   const [selectedTravelLocation, setSelectedTravelLocation] = useState(null);
-  const [isopenviewModal,setIsOpenViewModal]  = useState(false)
-  const[isEdit,setIsEdit]=useState(false)
-  const [latitude,setLatitude] = useState([])
+  const [isopenviewModal, setIsOpenViewModal] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [latitude, setLatitude] = useState([]);
   const type = useRef();
   // Add this useEffect to keep the checkbox state in sync with Redux
   useEffect(() => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
     setIsOnline(getOnlineRemote?.isonline === 1);
   }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
-console.log(selectedServices,"selectedServices123")
-
+  console.log(isLocationModalOpen, "isLocationModalOpen123");
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-
+  console.log(service, "serviceservice");
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -108,15 +109,15 @@ console.log(selectedServices,"selectedServices123")
         user_id: userToken?.remember_tokens,
       };
       dispatch(getleadPreferencesList(data));
-      dispatch(getSevenWeekPausedBidApi(data))
-      dispatch(getOnlineRemoteApi(data))
+      dispatch(getSevenWeekPausedBidApi(data));
+      dispatch(getOnlineRemoteApi(data));
     } else {
       const data = {
         user_id: registerData?.remember_tokens,
       };
       dispatch(getleadPreferencesList(data));
-      dispatch(getSevenWeekPausedBidApi(data))
-      dispatch(getOnlineRemoteApi(data))
+      dispatch(getSevenWeekPausedBidApi(data));
+      dispatch(getOnlineRemoteApi(data));
     }
   }, []);
   useEffect(() => {
@@ -155,6 +156,7 @@ console.log(selectedServices,"selectedServices123")
     setInput(""); // reset the input field
     setSelectedService(null); // clear previously selected service
     dispatch(setService([]));
+    setSelectedServices([]);
   };
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
@@ -164,52 +166,52 @@ console.log(selectedServices,"selectedServices123")
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
-  
+
   const handleSelectService = useCallback(
     (item) => {
       setInput("");
       setIsDropdownOpen(false);
-  
+
       setSelectedServices((prev) => {
-        const isAlreadySelected = prev.some((service) => service.id === item.id);
+        const isAlreadySelected = prev.some(
+          (service) => service.id === item.id
+        );
         return isAlreadySelected ? prev : [...prev, item];
       });
-  
+
       setTimeout(() => dispatch(setService([])), 100);
     },
     [dispatch]
   );
   const handleSubmitData = useCallback(() => {
     const serviceIds = selectedServices.map((item) => item.id).join(",");
-  
+
     const serviceDataList = {
       user_id: userToken?.remember_tokens,
       service_id: serviceIds,
     };
-  
+
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
-        dispatch(getleadPreferencesList({ user_id: userToken?.remember_tokens }));
+        dispatch(
+          getleadPreferencesList({ user_id: userToken?.remember_tokens })
+        );
         setIsModalOpen(false);
         setSelectedServices([]); // Clear after submission
       }
     });
   }, [selectedServices, userToken, dispatch]);
-  
-  const handleRemoveService = useCallback(
-    (id) => {
-      setSelectedServices((prev) => prev.filter((service) => service.id !== id));
-    },
-    []
-  ); 
+
+  const handleRemoveService = useCallback((id) => {
+    setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+  }, []);
   const [removeModal, setRemoveModal] = useState({
     show: false,
     service_id: null,
-    nation_wide:null
+    nation_wide: null,
   });
- 
 
-  console.log(setEditLocationId, "selectedTravelLocation")
+  console.log(setEditLocationId, "selectedTravelLocation");
   const handleNext = () => {
     // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
@@ -229,45 +231,46 @@ console.log(selectedServices,"selectedServices123")
     // Set edit mode
     setIsEdit(true);
     type.current = location.type;
-    
+
     // IMPORTANT: First, completely reset selectedServices
-   
-    
+
     // Then extract services from location
     console.log("Location data for edit:", location);
-    
+
     // Extract service IDs based on the location format
     if (location.service_ids) {
       try {
         let serviceIdsArray = [];
-        
+
         // Handle string format (comma-separated)
-        if (typeof location.service_ids === 'string') {
+        if (typeof location.service_ids === "string") {
           serviceIdsArray = location.service_ids
-            .split(',')
-            .map(id => id.trim())
-            .filter(id => id !== '');
-        } 
+            .split(",")
+            .map((id) => id.trim())
+            .filter((id) => id !== "");
+        }
         // Handle array format
         else if (Array.isArray(location.service_ids)) {
-          serviceIdsArray = location.service_ids.map(id => id.toString());
-        } 
+          serviceIdsArray = location.service_ids.map((id) => id.toString());
+        }
         // Handle single number format
-        else if (typeof location.service_ids === 'number') {
+        else if (typeof location.service_ids === "number") {
           serviceIdsArray = [location.service_ids.toString()];
         }
-        
+
         console.log("Extracted service IDs:", serviceIdsArray);
-        
+
         // Map IDs to service objects with name
-        const serviceArray = serviceIdsArray.map(id => {
-          const serviceObj = preferenceList.find(s => s.id.toString() === id.toString());
+        const serviceArray = serviceIdsArray.map((id) => {
+          const serviceObj = preferenceList.find(
+            (s) => s.id.toString() === id.toString()
+          );
           return {
             id: id,
-            name: serviceObj ? serviceObj.name : `Service ${id}`
+            name: serviceObj ? serviceObj.name : `Service ${id}`,
           };
         });
-        
+
         console.log("Setting services to:", serviceArray);
         setSelectedServices(serviceArray);
       } catch (error) {
@@ -278,14 +281,14 @@ console.log(selectedServices,"selectedServices123")
       console.log("No service_ids found in location data");
       setSelectedServices([]);
     }
-  console.log(location,"location123")
+    console.log(location, "location123");
     // Handle different location types
     if (location?.type === "Travel Time") {
       setLocationData({
-        travel_time: location?.travel_time || '',
-        travel_by: location?.travel_by || '',
-        postcode: location?.postcode || '',
-        coordinates: location?.coordinates || ""
+        travel_time: location?.travel_time || "",
+        travel_by: location?.travel_by || "",
+        postcode: location?.postcode || "",
+        coordinates: location?.coordinates || "",
       });
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
@@ -293,7 +296,7 @@ console.log(selectedServices,"selectedServices123")
       setPreviousPostcode(location.postcode);
       return;
     }
-    
+
     if (location?.type === "Draw on Map") {
       try {
         const data = JSON.parse(location.coordinates);
@@ -302,46 +305,46 @@ console.log(selectedServices,"selectedServices123")
         console.error("Error parsing coordinates:", error);
         setLatitude([]);
       }
-      
+
       setLocationData({
         postcode: location?.postcode,
-        city: location?.city
+        city: location?.city,
       });
       setIsDrawTimeOpen(true);
       setEditLocationId(location.id);
       setPreviousPostcode(location.postcode);
       return;
     }
-  
-    if (location?.type  === "Distance") {
+
+    if (location?.type === "Distance") {
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
-        coordinates: location?.coordinates
+        coordinates: location?.coordinates,
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
       setPreviousPostcode(location.postcode);
       return;
     }
-    if(location?.nation_wide == 0 ){
+    if (location?.nation_wide == 0) {
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
-        coordinates: location?.coordinates
+        coordinates: location?.coordinates,
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
       setPreviousPostcode(location.postcode);
       return;
     }
-    
-    if (location?.type === "Nationwide" &&  location?.nation_wide == 1) {
+
+    if (location?.type === "Nationwide" && location?.nation_wide == 1) {
       setLocationData({
         miles1: location.miles,
         postcode: location.postcode,
         city: location?.city,
-         coordinates: ""
+        coordinates: "",
       });
       setIsNextModalOpen(true);
       return;
@@ -350,22 +353,27 @@ console.log(selectedServices,"selectedServices123")
 
   const handleConfirm = (data) => {
     const serviceIds = data.join(",");
-   
+
     const typeOfTravel = type.current;
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
       postcode: locationData.postcode ?? previousPostcode,
       service_id: serviceIds,
-      postcode_old: previousPostcode,
+      // postcode_old: previousPostcode,
+      postcode_old: locationData.postcode
+        ? locationData.postcode
+        : previousPostcode
+        ? previousPostcode
+        : "0000",
       travel_time: locationData?.travel_time,
       travel_by: locationData?.travel_by,
       type: typeOfTravel,
       miles_old: previousPostcode,
       city: locationData?.city,
-      coordinates:locationData?.coordinates??[]
+      coordinates: locationData?.coordinates ?? [],
+      nation_wide: getlocationData[0]?.nation_wide,
     };
-    console.log(locationData,"445566")
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })
@@ -388,30 +396,35 @@ console.log(selectedServices,"selectedServices123")
     });
   };
   const handleRemoveOpen = (id) => {
-    console.log(id,"id")
-    setRemoveModal({ show: true, service_id: id?.postcode,nation_wide:id?.nation_wide });
+    console.log(id, "id");
+    setRemoveModal({
+      show: true,
+      service_id: id?.postcode,
+      nation_wide: id?.nation_wide,
+    });
   };
 
   const onHandleCancel = () => {
-    setRemoveModal({ show: false, service_id: null,nation_wide:null });
+    setRemoveModal({ show: false, service_id: null, nation_wide: null });
   };
   const handleViewMap = (item) => {
-    setLocationData(item)
-    setIsOpenViewModal(true)
-  }
+    setLocationData(item);
+    setIsOpenViewModal(true);
+  };
 
   const handleRemove = () => {
     const removeData = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
       // service_id: ids.join(),
       postcode: removeModal?.service_id,
-      nation_wide: removeModal?.nation_wide
+      nation_wide: removeModal?.nation_wide,
       // user_service_id:locationRemoveId
     };
-    console.log(removeData,"removeData")
+    console.log(removeData, "removeData");
 
-    dispatch(removeItemLocationData(removeData))
-    .then((result) => {
+    dispatch(removeItemLocationData(removeData)).then((result) => {
       if (result) {
         showToast(
           "success",
@@ -419,12 +432,19 @@ console.log(selectedServices,"selectedServices123")
         );
         setRemoveModal({ show: false, service_id: null });
         const data = {
-          user_type: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+          user_type: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
         };
         dispatch(getLocationLead(data));
       }
     });
   };
+  const handleLocaltionModalOpen = () => {
+    console.log("handleLocaltionModalOpen called");
+    setIsLocationModalOpen(true);
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -444,10 +464,11 @@ console.log(selectedServices,"selectedServices123")
                 <div
                   key={service.id}
                   ref={(el) => (serviceRefs.current[service.id] = el)}
-                  className={`${styles.serviceItem} ${selectedService?.id === service.id
-                    ? styles.selectedService
-                    : ""
-                    }`}
+                  className={`${styles.serviceItem} ${
+                    selectedService?.id === service.id
+                      ? styles.selectedService
+                      : ""
+                  }`}
                   onClick={() => handleServiceClick(service?.id, service?.name)}
                 >
                   <div className={styles.serviceNameWrapper}>
@@ -459,9 +480,9 @@ console.log(selectedServices,"selectedServices123")
                   <img
                     src={EditIcon}
                     alt="Edit"
-                  // onClick={() =>
-                  //   handleServiceClick(service?.id, service?.name)
-                  // }
+                    // onClick={() =>
+                    //   handleServiceClick(service?.id, service?.name)
+                    // }
                   />
                 </div>
               ))}
@@ -488,31 +509,31 @@ console.log(selectedServices,"selectedServices123")
                   </p>
                 ) : item?.type === "Draw on Map" ? (
                   <p className={styles.locationInput}>
-                    Draws area near {" "}
-                    <strong>{item.city}</strong>
+                    Draws area near <strong>{item.city}</strong>
                   </p>
                 ) : item?.type === "Nationwide" && item?.nation_wide !== 0 ? (
+                  <p className={styles.locationInput}>Nationwide</p>
+                ) : item?.type === "Travel Time" ? (
                   <p className={styles.locationInput}>
-                    Nationwide
-                  </p>
-                )
-                : item?.type === "Travel Time" ? 
-                (
-                  <p className={styles.locationInput}>
-                    Within <strong>{item?.travel_time} </strong> {item?.travel_by} of{" "}
+                    Within <strong>{item?.travel_time} </strong>{" "}
+                    {item?.travel_by} of{" "}
                     <strong>{item.city ? item.city : item?.postcode}</strong>
                   </p>
-                ) : 
-                
-                <p className={styles.locationInput}>
-                Within <strong>{item.miles} miles</strong> of{" "}
-                <strong>{item.postcode}</strong>
-              </p>
-                
-                }
+                ) : (
+                  <p className={styles.locationInput}>
+                    Within <strong>{item.miles} miles</strong> of{" "}
+                    <strong>{item.postcode}</strong>
+                  </p>
+                )}
 
                 <p className={styles.locationInputService}>
-                  <span className={styles.link} onClick={()=> handleViewMap(item)}>View on map</span> |{" "}
+                  <span
+                    className={styles.link}
+                    onClick={() => handleViewMap(item)}
+                  >
+                    View on map
+                  </span>{" "}
+                  |{" "}
                   <span
                     className={styles.link}
                     onClick={() => handleRemoveOpen(item)}
@@ -537,7 +558,8 @@ console.log(selectedServices,"selectedServices123")
 
           <button
             className={styles.addLocation}
-            onClick={() => setIsLocationModalOpen(true)}
+            // onClick={() => setIsLocationModalOpen(true)}
+            onClick={() => handleLocaltionModalOpen()}
           >
             + Add a location
           </button>
@@ -568,7 +590,7 @@ console.log(selectedServices,"selectedServices123")
                       showToast(
                         "success",
                         result?.message ||
-                        "Online/Remote status updated successfully"
+                          "Online/Remote status updated successfully"
                       );
                     }
                   });
@@ -625,7 +647,6 @@ console.log(selectedServices,"selectedServices123")
           handleSubmitData={handleSubmitData}
           handleRemoveService={handleRemoveService}
           selectedServices={selectedServices}
-
         />
 
         {isEditModalOpen && (
@@ -653,7 +674,7 @@ console.log(selectedServices,"selectedServices123")
             selectedServices={selectedServices}
             setSelectedServices={setSelectedServices}
             locationData={locationData}
-    setLocationData={setLocationData}
+            setLocationData={setLocationData}
           />
         )}
 
@@ -692,12 +713,11 @@ console.log(selectedServices,"selectedServices123")
             locationData={locationData}
             setLocationData={setLocationData}
             onNext={handleLocationNext}
-
           />
         )}
         {isDrawTimeOpen && (
           <DrawOnMapModal
-          isEdit={isEdit}
+            isEdit={isEdit}
             locationData={locationData}
             setLocationData={setLocationData}
             onNext={handleLocationNext}
@@ -706,14 +726,14 @@ console.log(selectedServices,"selectedServices123")
             data={latitude}
           />
         )}
-{
-  isopenviewModal && (
-    <ViewOnMapModal  locationData={locationData}
-    setLocationData={setLocationData}  
-    isOpen={isopenviewModal}
-    onClose={() => setIsOpenViewModal(false)}/>
-  )
-}
+        {isopenviewModal && (
+          <ViewOnMapModal
+            locationData={locationData}
+            setLocationData={setLocationData}
+            isOpen={isopenviewModal}
+            onClose={() => setIsOpenViewModal(false)}
+          />
+        )}
       </div>
     </>
   );

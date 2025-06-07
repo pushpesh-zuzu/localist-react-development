@@ -141,7 +141,6 @@
 
 // export default LocationModal;
 
-
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./LocationModal.module.css";
 import { showToast } from "../../utils";
@@ -165,18 +164,21 @@ const LocationModal = ({
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
     lat: 26.9556924,
-    lng:
-      75.6882696,
+    lng: 75.6882696,
   });
 
   useEffect(() => {
     if (locationData?.coordinates) {
-      console.log(locationData, JSON.parse(locationData?.coordinates), mapCenter, "isEditing")
+      console.log(
+        locationData,
+        JSON.parse(locationData?.coordinates),
+        mapCenter,
+        "isEditing"
+      );
 
-      setMapCenter(JSON.parse(locationData?.coordinates))
+      setMapCenter(JSON.parse(locationData?.coordinates));
     }
-  }, [locationData?.coordinates])
-
+  }, [locationData?.coordinates]);
 
   // ✅ Function to draw circle based on distance
   const drawCircle = (center) => {
@@ -187,8 +189,7 @@ const LocationModal = ({
       circleRef.current.setMap(null);
     }
 
-    const radiusInMeters =
-      (parseFloat(locationData.miles1) || 1) * 1609.34; // 1 mile = 1609.34 meters
+    const radiusInMeters = (parseFloat(locationData.miles1) || 1) * 1609.34; // 1 mile = 1609.34 meters
 
     circleRef.current = new window.google.maps.Circle({
       center,
@@ -251,7 +252,6 @@ const LocationModal = ({
         }
       );
 
-
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
@@ -259,7 +259,7 @@ const LocationModal = ({
         let postalCode = "";
         let lat = place.geometry?.location?.lat();
         let lng = place.geometry?.location?.lng();
-        
+
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
             postalCode = component.long_name;
@@ -271,16 +271,16 @@ const LocationModal = ({
 
         if (postalCode) {
           onChange({ target: { name: "postcode", value: postalCode } });
-          onChange({ target: { name: "city", value: cityName || "" } })
+          onChange({ target: { name: "city", value: cityName || "" } });
           // onChange({ target: { name: "coordinates", value: "" } })
           inputRef.current.value = postalCode;
 
           if (lat && lng) {
             const coordinates = JSON.stringify({ lat, lng });
-            onChange({ target: { name: "coordinates", value: coordinates } })
+            onChange({ target: { name: "coordinates", value: coordinates } });
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
-            
+
             if (mapInstance.current) {
               mapInstance.current.setCenter(newCenter);
               mapInstance.current.setZoom(12);
@@ -309,7 +309,10 @@ const LocationModal = ({
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode(
-        { address: locationData.postcode, componentRestrictions: { country: "IN" } },
+        {
+          address: locationData.postcode,
+          componentRestrictions: { country: "IN" },
+        },
         (results, status) => {
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();
@@ -341,21 +344,18 @@ const LocationModal = ({
     }
   }, [open, mapLoaded, locationData.postcode]);
 
-
-
-
   useEffect(() => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
       drawCircle(mapCenter);
     }
   }, [locationData.miles1, mapLoaded]);
 
-    useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-          document.body.style.overflow = 'auto';
-        };
-      }, []);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className={styles.modalOverlay}>
@@ -417,7 +417,7 @@ const LocationModal = ({
           <button className={styles.cancelBtn} onClick={onClose}>
             Cancel
           </button>
-          <button className={styles.nextBtn} onClick={onNext}>
+          <button className={styles.nextBtn} onClick={() => onNext("distance")}>
             Next
           </button>
         </div>

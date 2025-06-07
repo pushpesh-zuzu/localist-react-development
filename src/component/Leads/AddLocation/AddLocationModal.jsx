@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AddLocationModal.module.css";
 import DistanceIcon from "../../../assets/Icons/DistanceIcon.svg";
 import TravelTimeIcon from "../../../assets/Icons/TravelTimeIcon.svg";
@@ -31,19 +31,41 @@ const AddLocationModal = ({
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
   const [locationType, setLocationType] = useState("");
- const {  registerData } = useSelector(
-    (state) => state.findJobs
-  );
+  const { registerData } = useSelector((state) => state.findJobs);
+  console.log(registerData, "registerData");
+  const { getlocationData } = useSelector((state) => state.leadSetting);
+  const isNationWide = () => {
+    if (getlocationData[0]?.nation_wide == 1) {
+      return true;
+    }
+    let nationWideCount = 0;
+    getlocationData?.forEach((item) => {
+      if (item?.type === "Nationwide") {
+        nationWideCount++;
+      }
+    });
+    if (nationWideCount > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
-    travel_time:"",
-    travel_by:"",
-    coordinates:""
+    // travel_time: "30 minutes",
+    travel_time: "",
+    // travel_by: "Driving",
+    travel_by: "",
+    coordinates: "",
   });
-  console.log(locationData,locationType,registerData,"locationData")
+  const [isFromTravelTime, setIsFromTravelTime] = useState(false);
+  useEffect(() => {
+    setIsFromTravelTime(false);
+  }, []);
+  console.log(locationData, locationType, registerData, "locationData");
   const { userToken } = useSelector((state) => state.auth);
-
+  console.log(isNextModalOpen, selectedOption, "isNextModalOpen");
   const dispatch = useDispatch();
   const handleOptionClick = (option) => {
     setSelectedOption(option);
@@ -57,7 +79,7 @@ const AddLocationModal = ({
     else if (option === "travelTime") type = "Travel Time";
     else if (option === "drawOnMap") type = "Draw on Map";
     // else if (option === "nationwide") type = "Nationwide";
-  
+
     setLocationType(type);
   };
   const handleLocationChange = (e) => {
@@ -70,17 +92,26 @@ const AddLocationModal = ({
     // const serviceIds = selectedServices.map((item) => item.id).join(",");
     const locationdata = {
       user_id: userToken?.remember_tokens,
-      miles: locationData.miles1 ?? 0,
-      postcode: locationData.postcode ?? "",
+      miles: locationType === "Nationwide" ? 0 : locationData.miles1 ?? 0,
+      postcode: locationData.postcode ? locationData.postcode : "000000",
+
       // postcode: previousPostcode,
       city: locationData?.city ?? "",
-      travel_time:locationData?.travel_time,
+      travel_time: locationData?.travel_time,
       travel_by: locationData?.travel_by,
       type: locationType,
-      nation_wide:1,
+      nation_wide:
+        locationType === "Nationwide"
+          ? 1
+          : isFromTravelTime
+          ? 0
+          : getlocationData[0]?.nation_wide
+          ? getlocationData[0]?.nation_wide
+          : 0,
       service_id: serviceIds,
-      postcode_old: previousPostcode,
-      coordinates : locationData?.coordinates ?? []
+      // postcode_old: previousPostcode,
+      postcode_old: locationData.postcode ? locationData.postcode : "000000",
+      coordinates: locationData?.coordinates ?? [],
     };
 
     if (isEditingLocation && editLocationId) {
@@ -99,7 +130,7 @@ const AddLocationModal = ({
             miles1: "1",
             postcode: "",
           });
-          setSelectedServices([])
+          setSelectedServices([]);
         }
       });
     } else {
@@ -109,7 +140,7 @@ const AddLocationModal = ({
           dispatch(getLocationLead(data));
           dispatch(getleadPreferencesList(data));
           setSelectedOption(false);
-          setLocationType("")
+          setLocationType("");
           setIsLocationModalOpen(false);
           setLocationData({
             miles1: "1",
@@ -120,18 +151,18 @@ const AddLocationModal = ({
         }
       });
     }
-
   };
 
-  const handleNext = () => {
+  const handleNext = (data) => {
+    if (data) {
+      setIsFromTravelTime(true);
+    }
     setSelectedOption("");
     setIsNextModalOpen(true);
   };
 
   if (!open) return null;
-
-
-
+  console.log(open, selectedOption, "isLocationModalOpen123");
   const handleChildModalClose = () => {
     setSelectedOption("");
   };
@@ -204,23 +235,26 @@ const AddLocationModal = ({
                 </div>
               </div>
 
-             {registerData?.nationwide == 0 && <div
-                className={styles.option}
-                onClick={() => handleOptionClick("nationwide")}
-              >
-                <img
-                  src={NationwideIcon}
-                  alt="Nationwide"
-                  className={styles.icon}
-                />
-                <div className={styles.textContainer}>
-                  <h3 className={styles.optionTitle}>Nationwide</h3>
-                  <p className={styles.optionDescription}>
-                    Choose the nationwide location if you provide services
-                    across the whole country.
-                  </p>
+              {/* {registerData?.nationwide == 0 && !isNationWide() && ( */}
+              {!isNationWide() && (
+                <div
+                  className={styles.option}
+                  onClick={() => handleOptionClick("nationwide")}
+                >
+                  <img
+                    src={NationwideIcon}
+                    alt="Nationwide"
+                    className={styles.icon}
+                  />
+                  <div className={styles.textContainer}>
+                    <h3 className={styles.optionTitle}>Nationwide</h3>
+                    <p className={styles.optionDescription}>
+                      Choose the nationwide location if you provide services
+                      across the whole country.
+                    </p>
+                  </div>
                 </div>
-              </div>}
+              )}
             </div>
           </div>
         </div>
@@ -237,24 +271,36 @@ const AddLocationModal = ({
       )}
 
       {selectedOption === "travelTime" && (
-        <TravelTimeModal onClose={handleChildModalClose} onNext={handleNext}  locationData={locationData}
-        setLocationData={setLocationData}/>
+        <TravelTimeModal
+          onClose={handleChildModalClose}
+          onNext={handleNext}
+          locationData={locationData}
+          setLocationData={setLocationData}
+        />
       )}
 
       {selectedOption === "drawOnMap" && (
-        <DrawOnMapModal onClose={handleChildModalClose} onNext={handleNext}  locationData={locationData}
-        setLocationData={setLocationData} />
+        <DrawOnMapModal
+          onClose={handleChildModalClose}
+          onNext={handleNext}
+          locationData={locationData}
+          setLocationData={setLocationData}
+        />
       )}
 
       {selectedOption === "nationwide" && (
         // <NationwideModal onClose={handleChildModalClose} />
-       <></>
+        <></>
       )}
 
       {isNextModalOpen && (
         <ServiceSelectionModal
           isOpen={isNextModalOpen}
-          onClose={() => setIsNextModalOpen(false)}
+          onClose={() => {
+            setIsLocationModalOpen(false);
+            setIsNextModalOpen(false);
+            setSelectedOption("");
+          }}
           onConfirm={handleConfirm}
           selectedServices={selectedServices}
           setSelectedServices={setSelectedServices}

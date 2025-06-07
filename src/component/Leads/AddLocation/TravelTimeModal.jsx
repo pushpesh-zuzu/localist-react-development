@@ -2,7 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
-const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
+const TravelTimeModal = ({
+  onClose,
+  onNext,
+  locationData,
+  setLocationData,
+}) => {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
@@ -19,7 +24,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
   //   travel_time: "30 minutes",
   //   travel_by: "Driving",
   // });
-  console.log(locationData,"locationData123")
+  console.log(locationData, "locationData123");
   useEffect(() => {
     if (locationData?.coordinates) {
       const parsedCoordinates = JSON.parse(locationData.coordinates);
@@ -28,7 +33,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
       }
     }
   }, [locationData?.coordinates]);
-  
+
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
       Driving: 800,
@@ -150,7 +155,6 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
         const cityName = place.address_components.find((component) =>
           component.types.includes("locality")
         )?.long_name;
-      
 
         if (lat && lng) {
           const finalLocation = postalCode || placeName;
@@ -190,16 +194,16 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
 
   const handleNext = () => {
     console.log("Form submitted with data:", locationData);
-    onNext(locationData)
+    onNext(locationData, "travelTime");
     onClose();
   };
-  
-    useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-          document.body.style.overflow = 'auto';
-        };
-      }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className={styles.modalOverlay}>
@@ -218,10 +222,12 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
           the mode of transport you'd use.</span>
         </p> */}
         <div className={styles.infoBox}>
-                  <img src={iIcon} alt="" />
-                  <span>Enter a Postcode or town, the maximum time you'd spend travelling, and
-          the mode of transport you'd use.</span>
-                </div>
+          <img src={iIcon} alt="" />
+          <span>
+            Enter a Postcode or town, the maximum time you'd spend travelling,
+            and the mode of transport you'd use.
+          </span>
+        </div>
 
         <div className={styles.form}>
           <div className={styles.inputGroup}>
@@ -243,7 +249,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
               name="travel_time"
               value={locationData?.travel_time}
               onChange={onChange}
-                className={styles.customSelect}
+              className={styles.customSelect}
             >
               <option value="30 minutes">30 minutes</option>
               <option value="1 hour">1 hour</option>
@@ -258,7 +264,7 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
               name="travel_by"
               value={locationData?.travel_by}
               onChange={onChange}
-                className={styles.customSelect}
+              className={styles.customSelect}
             >
               <option value="Driving">Driving</option>
               <option value="Walking">Walking</option>
@@ -290,7 +296,10 @@ const TravelTimeModal = ({ onClose,onNext,locationData,setLocationData }) => {
           <button className={styles.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button className={styles.nextButton} onClick={handleNext}>
+          <button
+            className={styles.nextButton}
+            onClick={() => handleNext("travelTime")}
+          >
             Next
           </button>
         </div>
