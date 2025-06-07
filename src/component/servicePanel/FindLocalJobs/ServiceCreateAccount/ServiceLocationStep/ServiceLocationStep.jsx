@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
-import { setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
+import { setCity, setCountry, setPostalCode, setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../../../utils";
 
@@ -54,10 +54,16 @@ const ServiceLocationStep = ({
           }
         });
 
+        
         const cityName = place.address_components.find((component) =>
           component.types.includes("locality")
-        )?.long_name;
-
+      )?.long_name;
+      
+      const countryName = place.address_components.find((component) =>
+        component.types.includes("country")
+    )?.long_name;
+    
+    console.log(countryName,"prem")
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
         const coordinates = { lat, lng };
@@ -67,6 +73,13 @@ const ServiceLocationStep = ({
           dispatch(setFormData({ postcode: postalCode }));
           dispatch(setFormData({ cities: cityName }))
           dispatch(setFormData({ coordinates: { lat, lng } }));
+          dispatch(setFormData({city:cityName})),
+          dispatch(setFormData({country: countryName}))
+          dispatch(setFormData({zipcode:postalCode}))
+
+          // dispatch(setCountry({country: countryName}))
+          // dispatch(setCity({city:cityName})),
+          // dispatch(setPostalCode({postalcode:postalCode}))
           // dispatch(setFormData(JSON.stringify({ coordinates: { lat, lng } })));
           // dispatch(setFormData({ coordinates }))
           inputRef.current.value = postalCode; // Update input value

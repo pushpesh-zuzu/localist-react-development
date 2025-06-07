@@ -39,7 +39,7 @@ const [planpurcahse,setPlanPurchase] = useState("")
     }
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
-  const handleViewMore = () => {
+  const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
   };
   
@@ -398,7 +398,7 @@ setTimeout(()=> {
           </div> */}
           {leadRequestList?.length > visibleCount && (
             <div className={styles.viewMoreBtnWrapper}>
-              <button onClick={handleViewMore}>View More</button>
+              <button onMouseEnter={handleMouseEnter}>View More</button>
             </div>
           )}
 

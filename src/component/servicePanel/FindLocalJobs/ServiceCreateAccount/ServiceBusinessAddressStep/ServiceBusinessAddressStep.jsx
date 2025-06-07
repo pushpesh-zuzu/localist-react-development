@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ServiceBusinessAddressStep = ({
   nextStep,
@@ -11,7 +11,8 @@ const ServiceBusinessAddressStep = ({
   errors,
 }) => {
   
-
+const { country ,city,postalcode} = useSelector((state) => state.findJobs)
+console.log(country,city,postalcode,"123")
   const dispatch = useDispatch()
   return (
     <div className={styles.pageContainer}>
@@ -50,7 +51,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="city"
-                value={formData.city}
+                value={formData.city || formData?.city}
                 onChange={handleInputChange}
               />
             </div>
@@ -62,7 +63,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="country"
-                value={formData.country}
+                value={formData.country || formData?.country}
                 onChange={handleInputChange}
               />
             </div>
@@ -99,7 +100,7 @@ const ServiceBusinessAddressStep = ({
         WebkitAppearance: "none"
       }}
       name="zipcode"
-      value={formData.zipcode || ""}
+      value={formData.zipcode || formData?.zipcode}
       onChange={(e) =>
         dispatch(setFormData({
           ...formData, 

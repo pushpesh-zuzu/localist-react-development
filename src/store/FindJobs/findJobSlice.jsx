@@ -24,6 +24,9 @@ email:"",
 name:'',
 phone:""
   },
+  country:{},
+  city:{},
+  postalcode:{},
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
@@ -245,6 +248,15 @@ state.pendingLoader = action.payload;
     setbuyerRegisterFormData(state,action){
       state.buyerRegisterFormData = {...state.buyerRegisterFormData,...action.payload}
     },
+    setCountry(state,action){
+      state.country = action.payload
+    },
+    setCity(state,action) {
+      state.city = action.payload
+    },
+    setPostalCode(state,action){
+      state.postalcode = action.payload
+    },
     clearBuyerRegisterFormData(state,action){
     state.buyerRegisterFormData={
         email:"",
@@ -322,6 +334,8 @@ export const {
   clearBuyerRegisterFormData,
   setErrorMessage,
   setAuthToken,
+  setCountry,
+  setCity,setPostalCode,
   clearAuthToken
 } = findJobSlice.actions;
 export default findJobSlice.reducer;
