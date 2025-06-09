@@ -164,6 +164,15 @@
     font-size: 12px;
     vertical-align: middle;
   }
+  .viewDetailsBtn {
+    padding: 7px 17px;
+    background-color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 500;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 25px;
+  }
   
   .purchaseButton {
     background: black;

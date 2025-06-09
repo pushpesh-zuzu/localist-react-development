@@ -220,9 +220,9 @@ const handleContinues = () => {
             formData.append("unread", filters.unread ? 1 : 0);
         
             dispatch(getLeadRequestList(formData)).then((result) => {
-              if (result) {
-                showToast("success", result?.message);
-              }
+              // if (result) {
+              //   showToast("success", result?.message);
+              // }
             })
        
       }

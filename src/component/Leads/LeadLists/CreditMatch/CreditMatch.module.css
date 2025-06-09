@@ -52,7 +52,7 @@
 }
 
 .creditsAmount {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16.14px;
   vertical-align: middle;
 }
@@ -137,7 +137,6 @@
   font-weight: 500;
   color: #ffffff;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
-  cursor: pointer;
   display: inline-block;
   min-width: 200px;
   text-align: center;

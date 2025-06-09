@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./InvoiceAndBilling.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import InvoiceTable from "./InvoiceTable";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AddSellerBillingDetailsApi, getInvoiceListDataApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../utils";
@@ -14,7 +14,7 @@ const InvoiceAndBilling = () => {
     const dispatch = useDispatch();
     const { registerData } = useSelector((state) => state.findJobs);
     const { userToken } = useSelector((state) => state.auth)
-    const { sellerBillingLoader, getInvoiceList } = useSelector((state) => state.myCredit);
+    const { sellerBillingLoader, sellerCardLoader,getInvoiceList } = useSelector((state) => state.myCredit);
     const [formData, setFormData] = useState({
         contactName: "",
         addressLine1: "",
@@ -82,9 +82,9 @@ const InvoiceAndBilling = () => {
                         We’ll use these account details to contact you but won’t share them
                         with customers. You can control the contact details that customers see
                         for your business in{" "}
-                        <a href="#" className={styles.link}>
+                        <Link to="/settings/my_profile" className={styles.link} >
                             My Profile
-                        </a>
+                        </Link>
                         .
                     </p>
                 </div>
@@ -152,13 +152,13 @@ const InvoiceAndBilling = () => {
                             }))
                         }
                     />
-                   <label className={styles.label}>VAT Register</label>
+                   <label className={styles.labels}>VAT Register</label>
                    </div>
 
                     <div className={styles.saveButtonBox}>
 
                         <button className={styles.saveButton} onClick={() => handleSaveData()}>
-                            {sellerBillingLoader ? <Spin
+                            {sellerCardLoader ? <Spin
                                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                             /> : "Save"} </button>
                     </div>

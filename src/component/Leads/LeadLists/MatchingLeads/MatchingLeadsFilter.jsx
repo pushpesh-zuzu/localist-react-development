@@ -210,7 +210,7 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
                 value={filters.keyword}
                 onChange={(e) => handleInputChange("keyword", e.target.value)}
               />
-              <button className={styles.searchBtn}>Search</button>
+              {/* <button className={styles.searchBtn}>Search</button> */}
             </div>
           </AccordionSection>
 

@@ -83,9 +83,9 @@ const ManualBidList = () => {
           {(autoBidListData || []).length} matches
         </span>
 
-        <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
+        {/* <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
           <option>Sort by: best match</option>
-        </select>
+        </select> */}
       </div>
 
       <div className={styles.recommendBar}>

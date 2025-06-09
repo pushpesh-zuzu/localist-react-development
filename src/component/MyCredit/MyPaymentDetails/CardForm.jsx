@@ -96,9 +96,9 @@ const CardPaymentForm = ({ onPaymentMethodCreated, onClose }) => {
           <CardCvcElement options={ELEMENT_OPTIONS} className={styles.cardInput} />
         </div>
       </div>
-
+<div>
       {error && <div className={styles.error}>{error}</div>}
-
+</div>
       <div className={styles.actions}>
         <button type="button" className={styles.cancelBtn} onClick={onClose}>
           Cancel

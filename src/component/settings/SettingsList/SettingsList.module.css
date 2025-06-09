@@ -103,6 +103,9 @@
   font-weight: 500;
   font-size: 16px;
 }
+.card h3:hover {
+  color: white;
+}
 
 .cardTitle {
   font-size: 16px;

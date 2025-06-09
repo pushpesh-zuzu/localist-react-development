@@ -9,6 +9,7 @@ import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIc
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
 import { showToast } from "../../utils";
 import CustomModal from "../Leads/LeadLists/ConfirmModal";
+import viewDetailsArrow from "../../assets/Images/Setting/viewDetailsArrow.svg"
 
 
 
@@ -55,7 +56,7 @@ const SaveForLater = () => {
   return (
     <>
       <div className={styles.maincontainer}>
-        <div style={{ fontSize: "24px", fontWeight: 800, }}>Save For Later List</div>
+        {/* <div style={{ fontSize: "24px", fontWeight: 800, }}>Save For Later List</div> */}
         {
           saveForLaterDataList?.[0]?.savedLeads
             ?.map((item) => {
@@ -139,6 +140,10 @@ const SaveForLater = () => {
                               .join("/")}
                           </p>
                         )}
+                      </div>
+
+                      <div>
+                        <button className={styles.viewDetailsBtn}>View Details <img src={viewDetailsArrow} alt="..." /></button>
                       </div>
                       {/* <p>
                               <strong>Starting:</strong> In the next month

@@ -7,7 +7,7 @@ import CreditCard from "./CreditCard";
 import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCreditPlanList, getswitchAutobidApi, switchAutobidApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addBuyCreditApi, AddCoupanApi, getInvoiceBillingListApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
@@ -258,9 +258,12 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
           <p className={styles.description}>
             Credits are used to contact customers on Bark. You can find out more
             about credits and how we charge for our service in the{" "}
-            <a href="#" className={styles.link}>
-              Help Center
-            </a>
+            {/* <a href="#" className={styles.link}>
+             
+            </a> */}
+             <Link to="/help-center" className={styles.link} >
+                           Help Center
+                        </Link>
             .
           </p>
         </div>
@@ -271,7 +274,7 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
         </p>
 
         <div className={styles.cardList}>
-          {creditPlanList?.map((item, index) => (
+          {creditPlanList?.length === 0 ? <div className={styles.noPlanText}> {"No Plan Available"} </div> : creditPlanList?.map((item, index) => (
             <div className={styles.card} key={index}>
               {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
               <div className={styles.titleBar}>

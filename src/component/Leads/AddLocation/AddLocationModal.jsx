@@ -34,6 +34,7 @@ const AddLocationModal = ({
   const { registerData } = useSelector((state) => state.findJobs);
   console.log(registerData, "registerData");
   const { getlocationData } = useSelector((state) => state.leadSetting);
+  console.log(getlocationData,'getlocationData')
   const isNationWide = () => {
     if (getlocationData[0]?.nation_wide == 1) {
       return true;
@@ -86,10 +87,11 @@ const AddLocationModal = ({
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
-
+console.log(locationType,"locationType")
   const handleConfirm = (data) => {
     const serviceIds = data.join(",");
     // const serviceIds = selectedServices.map((item) => item.id).join(",");
+    
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationType === "Nationwide" ? 0 : locationData.miles1 ?? 0,
@@ -103,16 +105,17 @@ const AddLocationModal = ({
       nation_wide:
         locationType === "Nationwide"
           ? 1
-          : isFromTravelTime
-          ? 0
-          : getlocationData[0]?.nation_wide
-          ? getlocationData[0]?.nation_wide
+          // : isFromTravelTime
+          // ? 0
+          // : getlocationData[0]?.nation_wide
+          // ? getlocationData[0]?.nation_wide
           : 0,
       service_id: serviceIds,
       // postcode_old: previousPostcode,
       postcode_old: locationData.postcode ? locationData.postcode : "000000",
       coordinates: locationData?.coordinates ?? [],
     };
+     
 
     if (isEditingLocation && editLocationId) {
       dispatch(

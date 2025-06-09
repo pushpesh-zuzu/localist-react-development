@@ -263,7 +263,7 @@ export const getleadPreferencesList = (serviceId) => {
     return async (dispatch) => {
       dispatch(setleadPreferencesListLoader(true));
       try {
-       
+     
         const response = await axiosInstance.post(`users/edit-location`, locationData);
         if (response) {
           return response.data;

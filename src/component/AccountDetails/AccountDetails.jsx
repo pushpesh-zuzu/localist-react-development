@@ -3,7 +3,7 @@ import styles from "./AccountDetails.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { sellerEditProfileApi, sellerUpdatePasswordApi, sellerUpdateProfileApi } from "../../store/MyProfile/myProfileSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { showToast } from "../../utils";
@@ -156,9 +156,9 @@ const AccountDetails = () => {
           We’ll use these details to contact you but won’t share it with
           customers. You can control the email address and phone number that
           customers see for your business in{" "}
-          <a href="#" className={styles.link}>
-            My Profile
-          </a>
+          <Link to="/settings/my_profile" className={styles.link} >
+                            My Profile
+                        </Link>
           .
         </p>
       </div>

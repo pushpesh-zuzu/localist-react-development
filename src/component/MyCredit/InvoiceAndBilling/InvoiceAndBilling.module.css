@@ -72,6 +72,12 @@
     font-weight: 600;
     color: #000000;
   }
+   .labels {
+    margin-top: 6px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #000000;
+  }
 /*   
   .input {
     width: 70%;
@@ -129,7 +135,7 @@
   
   .tableSection {
     margin-top: 32px;
-    overflow-x: scroll;
+    
   }
   
   .invoiceTable {
@@ -181,6 +187,19 @@
     align-items: center;
     gap: 8px;
   }
+
+  @media screen and (max-width:1024px) {
+   .row {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    /* flex-wrap: nowrap; */
+   } 
+   .column {
+    flex: 1;
+    max-width: 100%;
+  }
+  }
   
   @media (max-width: 768px) {
     .container {
@@ -222,6 +241,9 @@
     .container {
       padding: 16px;
     }
+    .tableSection {
+      overflow-x: scroll;
+    }
   
     .backText {
       font-size: 13px;
@@ -237,6 +259,11 @@
       font-size: 14px;
       margin-bottom: 24px;
     }
+    .row {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
   
     .card {
       padding: 16px;

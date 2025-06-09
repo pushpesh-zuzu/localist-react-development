@@ -289,6 +289,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         travel_by: location?.travel_by || "",
         postcode: location?.postcode || "",
         coordinates: location?.coordinates || "",
+        nation_wide:location?.nation_wide
+
       });
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
@@ -309,6 +311,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       setLocationData({
         postcode: location?.postcode,
         city: location?.city,
+        nation_wide:location?.nation_wide
+
       });
       setIsDrawTimeOpen(true);
       setEditLocationId(location.id);
@@ -321,6 +325,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
+        nation_wide:location?.nation_wide
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -332,6 +337,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
+        nation_wide:location?.nation_wide
+
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -345,6 +352,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         postcode: location.postcode,
         city: location?.city,
         coordinates: "",
+        nation_wide:1
+
       });
       setIsNextModalOpen(true);
       return;
@@ -372,8 +381,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       miles_old: previousPostcode,
       city: locationData?.city,
       coordinates: locationData?.coordinates ?? [],
-      nation_wide: getlocationData[0]?.nation_wide,
+      nation_wide:locationData?.nation_wide,
     };
+    console.log(locationData,"typeOfTravel")
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })

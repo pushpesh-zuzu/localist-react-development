@@ -26,7 +26,7 @@
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   padding: 0 40px;
-  cursor: pointer;
+  /* cursor: pointer; */
   /* padding: 0 73px 0 44px; */
 }
 
@@ -42,6 +42,7 @@
 .userDetails {
   display: flex;
   gap: 11px;
+  cursor: pointer;
 }
 
 .userInfo {
@@ -49,7 +50,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 50px;
-  cursor: pointer;
+  
 }
 
 .avatar {
@@ -123,7 +124,6 @@ margin-right: 4px;
 .badges {
   display: flex;
   gap: 8px;
-  cursor: pointer;
   flex-wrap: wrap;
 }
 
@@ -177,7 +177,7 @@ margin-right: 4px;
 }
 
 .purchaseButton:hover {
-  background-color: #000000cf;
+  background-color: #1fc28c;
 }
 
 .credits {
@@ -186,7 +186,8 @@ margin-right: 4px;
   color: black;
   padding: 4px 10px;
   font-weight: 400;
-  font-size: 18.91px;
+  font-size: 16.91px;
+  width: 100px;
 }
 
 .responseStatus {

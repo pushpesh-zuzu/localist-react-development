@@ -215,7 +215,7 @@ const MyResponse = () => {
   >
     
     <option value="Manual Bid">Manual Bid</option>
-    <option value="Best Matches">Best Match</option>
+    {/* <option value="Best Matches">Best Match</option> */}
     <option value="Autobid">Auto Bid</option>
     <option value="Request Reply">Request Reply</option>
   </select>
@@ -223,7 +223,8 @@ const MyResponse = () => {
         </div>
       </div>
 
-      {getLeadsToDisplay()?.map((item, idx) => (
+      {getLeadsToDisplay()?.length ? 
+       getLeadsToDisplay()?.map((item, idx) => (
         <div key={idx}>
           <div className={styles.card}>
             <div className={styles.infoContainer}>
@@ -246,17 +247,18 @@ const MyResponse = () => {
                 <div className={styles.contactItem}>
                   <img src={BluePhoneIcon} alt="" />
                   <span>
-                    {item?.phone
+                    {/* {item?.phone
                       ? `${item?.phone.substring(0, 2)}${"*".repeat(
                           item?.phone.length - 2
                         )}`
-                      : "N/A"}
+                      : "N/A"} */}
+                      {item?.phone}
                   </span>
                 </div>
                 <div className={styles.contactItem}>
                   <img src={BlueSmsIcon} alt="" />
                   <span>
-                    {item?.customer?.email
+                    {/* {item?.customer?.email
                       ? `${item?.customer?.email
                           .split("@")[0]
                           .substring(0, 8)}${"*".repeat(
@@ -265,7 +267,10 @@ const MyResponse = () => {
                             item?.customer?.email.split("@")[0].length - 8
                           )
                         )}@${item?.customer?.email.split("@")[1]}`
-                      : "N/A"}
+                      : "N/A"} */}
+                      {
+                        item?.customer?.email
+                      }
                   </span>
                 </div>
               </div>
@@ -375,7 +380,7 @@ const MyResponse = () => {
             />
           )}
         </div>
-      ))}
+      )) : <div className={styles.NoDataText}>No {selectedTab === "pending" ? "Pending" : "Hired"} Data Available</div>}
     </div>
   );
 };

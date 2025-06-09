@@ -141,7 +141,30 @@
 .panel {
   padding: 10px 14px;
   background-color: white;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-top: none;
   border-radius: 0 0 4px 4px;
+}
+.noPlanText {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+.accordionContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.arrowIcon {
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
