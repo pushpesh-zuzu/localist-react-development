@@ -334,7 +334,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               </div>
             )}
             <div className={styles.locationTag}>
-              <img src={locallistImgs} alt="credit icon" />
+              {/* <img src={locallistImgs} alt="credit icon" /> */}
               <span className={styles.creditsAmount}>
                 {profileLeadViewData?.leads?.credit_score} credits
               </span>

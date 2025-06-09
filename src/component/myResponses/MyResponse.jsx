@@ -278,7 +278,7 @@ const MyResponse = () => {
             </div>
 
             <div className={styles.jobDetails}>
-              <div className={styles.saveBtnBox}>
+              {/* <div className={styles.saveBtnBox}>
                 <button
                   className={styles.saveBtn}
                   // onClick={() => handleSaveLater(item)}
@@ -288,13 +288,12 @@ const MyResponse = () => {
                                      indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                                    />
                                     ) : (
-                                      <> */}
+                                      <> 
                   <img src={saveImg} alt="image" />
                   Save For Later
-                  {/* </>
-                                    )} */}
+                  
                 </button>
-              </div>
+              </div> */}
               <div className={styles.badges}>
                 {item?.is_phone_verified == 1 && (
                   <span className={styles.verified}>
