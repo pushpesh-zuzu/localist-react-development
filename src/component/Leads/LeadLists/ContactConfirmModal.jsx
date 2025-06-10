@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ContactConfirmModal.module.css';
 import { useNavigate } from "react-router-dom";
-import { getCreditPlanList } from '../../../store/LeadSetting/leadSettingSlice';
+import { getAddManualBidData, getCreditPlanList, getLeadRequestList } from '../../../store/LeadSetting/leadSettingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBuyCreditApi, getInvoiceBillingListApi } from '../../../store/MyProfile/MyCredit/MyCreditSlice';
 import { showToast } from '../../../utils';
 import arrowIcons from "../../../assets/Icons/arrow-down.svg"
+import AddCardModal from '../../MyCredit/MyPaymentDetails/AddCardModal';
 const dummyCreditPlanList = [
   {
     description: 'Best Value!',
@@ -21,15 +22,18 @@ const dummyCreditPlanList = [
   // },
 ];
 
-const ContactConfirmModal = ({ onClose,enoughCredit,confirmModal }) => {
+const ContactConfirmModal = ({ onClose,enoughCredit,confirmModal,details }) => {
  
   const navigate = useNavigate()
 const dispatch = useDispatch()
 const [activeLoaderId, setActiveLoaderId] = useState(null)
 const [isChecked, setIsChecked] = useState(true)
+const [creditModal,setCreditModal] = useState(false)
 const { creditPlanList } =useSelector((state)=> state.leadSetting)
   const [activeIndex, setActiveIndex] = useState(null);
-
+  const { registerData } = useSelector((state) => state.findJobs);
+    const { userToken } = useSelector((state) => state.auth)
+console.log(details,"details")
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -50,8 +54,35 @@ dispatch(getCreditPlanList())
       
     }, []);
 
+    const addManualBidData = () => {
+        console.log(details,"sel")
+          const formData = new FormData();
+      formData.append("buyer_id", details?.customer_id);
+      formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+      formData.append("bid", details?.credit_score);
+      formData.append("lead_id", details?.id);
+      formData.append("bidtype", "purchase_leads");
+      formData.append("service_id", details?.service_id);
+      formData.append("distance", "0");
+        
+         dispatch(getAddManualBidData(formData)).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          onClose(true)
+        }
+    
+        const data = {
+          user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        };
+    
+        dispatch(totalCreditData(data));
+        dispatch(getLeadRequestList(data));
+      });
+      }
+
 
 const handleBuyNow = (item) => {
+  console.log(item,"item")
   setActiveLoaderId(item?.id);
 
   let credits = item.no_of_leads; 
@@ -85,16 +116,21 @@ const handleBuyNow = (item) => {
   if (result?.success) {
     showToast('success', result?.message);
     setActiveLoaderId(null);
+addManualBidData()
     onClose(true)
     dispatch(getInvoiceBillingListApi());
+    
   } else if (result?.success === false) {
     
-    navigate("/payment-details");
+    // navigate("/payment-details");
+    setCreditModal(true)
   }
 });
 };
 
   return (
+    <>
+    {creditModal ? <AddCardModal onClose={() => setCreditModal(false)}/> :
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={()=>onClose()}>×</button>
@@ -234,6 +270,8 @@ const handleBuyNow = (item) => {
         </p>
       </div>
     </div>
+}
+</>
   );
 };
 

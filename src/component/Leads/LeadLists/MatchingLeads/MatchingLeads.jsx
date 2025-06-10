@@ -169,6 +169,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLeadFiterApiList,
+  getleadPreferencesList,
   getLeadRequestList,
   getLocationLead,
 } from "../../../../store/LeadSetting/leadSettingSlice";
@@ -191,16 +192,23 @@ const MatchingLeads = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { leadRequestList, getlocationData } = useSelector(
+  const { leadRequestList, getlocationData,preferenceList } = useSelector(
     (state) => state.leadSetting
   );
    const { registerData } = useSelector((state) => state.findJobs)
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
-
+console.log(preferenceList,"preferenceList")
   const uniqueServiceNames = [
     ...new Set(leadRequestList.map((item) => item.category?.name)),
   ];
+
+  useEffect(()=> {
+    const data = {
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens
+    }
+dispatch(getleadPreferencesList(data))
+  },[])
 
   // Function to get credit filter value
   const getCreditFilterValue = (filterOption) => {

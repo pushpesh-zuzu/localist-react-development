@@ -15,6 +15,7 @@ import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import ContactConfirmModal from "../ContactConfirmModal";
+import ContactSuccessModal from "../ContactSuccessModal";
 
 const LeadsCards = ({enoughCredit}) => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const [planpurcahse,setPlanPurchase] = useState("")
   //     dispatch(getLeadRequestList(data))
   //   });
   // }
-  console.log(purchasedData,"purchasedData")
+  console.log(selectedItem,"purchasedData")
 //   const handleContinue = () => {
 //   if (!selectedItem) return;
 //   if(totalCredit?.plan_purchased === 0){
@@ -106,6 +107,32 @@ const [planpurcahse,setPlanPurchase] = useState("")
 //     dispatch(getLeadRequestList(data));
 //   });
 // };
+
+  const addManualBidData = (item) => {
+    console.log(item,"sel")
+      const formData = new FormData();
+  formData.append("buyer_id", item?.customer_id);
+  formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+  formData.append("bid", item?.credit_score);
+  formData.append("lead_id", item?.id);
+  formData.append("bidtype", "purchase_leads");
+  formData.append("service_id", item?.service_id);
+  formData.append("distance", "0");
+    
+     dispatch(getAddManualBidData(formData)).then((result) => {
+    if (result) {
+      showToast("success", result?.message);
+     setModalOpen(true)
+    }
+
+    const data = {
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+    };
+
+    dispatch(totalCreditData(data));
+    dispatch(getLeadRequestList(data));
+  });
+  }
 const handleContinue = (item) => {
   if (!item) return;
   console.log(item?.credit_score,totalCredit?.total_credit ,"item")
@@ -124,8 +151,9 @@ setPlanPurchase(totalCredit?.plan_purchased)
     return;
   }
   if(Number(totalCredit?.total_credit) > Number(item?.credit_score)){
-    setModalOpen(true)
+  addManualBidData(item)
     return;
+    
   }
 
   // Proceed with API call if conditions are okay
@@ -410,18 +438,25 @@ setTimeout(()=> {
 
         </>
       )}
-      <CustomModal
+      {/* <CustomModal
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
         onContinue={handleContinues}
         message="Are you sure you want to continue?"
         loading={manualBidLoader}
+      /> */}
+      <ContactSuccessModal 
+      onClose={() => setModalOpen(false)}
+      //  onContinue={handleContinues}
+       isOpen={isModalOpen}
+       details={selectedItem}
       />
 {isopen && <ContactConfirmModal 
 // onClose={() => setIsOpen(false)} 
 onClose={(e) => handleOpenClose(e)}
   enoughCredit={planpurcahse}
   confirmModal = {isModalOpen}
+  details={selectedItem}
   />}
   
     </>

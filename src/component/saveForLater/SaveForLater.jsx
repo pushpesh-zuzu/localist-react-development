@@ -62,6 +62,7 @@ const SaveForLater = () => {
     <>
       <div className={styles.maincontainer}>
         {/* <div style={{ fontSize: "24px", fontWeight: 800, }}>Save For Later List</div> */}
+        <div className={styles.mainCard}>
         {
           saveForLaterDataList?.[0]?.savedLeads
             ?.map((item) => {
@@ -171,15 +172,16 @@ const SaveForLater = () => {
                             {item?.credit_score}Credits
                           </span> */}
                     </div>
-                         {
-  viewDetailsOpen && <SavedViewDetails/>
- }
+     
                   </div>
                 </>
               )
             })
         }
-
+                            {
+  viewDetailsOpen && <SavedViewDetails saveForLaterDataList={saveForLaterDataList}/>
+ }
+</div>
     
       </div>
       <CustomModal
