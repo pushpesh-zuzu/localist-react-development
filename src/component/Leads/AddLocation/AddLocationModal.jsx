@@ -113,7 +113,7 @@ console.log(locationType,"locationType")
       service_id: serviceIds,
       // postcode_old: previousPostcode,
       postcode_old: locationData.postcode ? locationData.postcode : "000000",
-      coordinates: locationData?.coordinates ?? [],
+      coordinates: locationData?.coordinates ?? "",
     };
      
 

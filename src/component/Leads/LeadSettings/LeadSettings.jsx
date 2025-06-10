@@ -369,18 +369,18 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       miles: locationData.miles1 ? locationData.miles1 : 0,
       postcode: locationData.postcode ?? previousPostcode,
       service_id: serviceIds,
-      // postcode_old: previousPostcode,
-      postcode_old: locationData.postcode
-        ? locationData.postcode
-        : previousPostcode
-        ? previousPostcode
-        : "0000",
+      postcode_old: previousPostcode ? previousPostcode : "000000",
+      // postcode_old: locationData.postcode
+      //   ? locationData.postcode
+      //   : previousPostcode
+      //   ? previousPostcode
+      //   : "0000",
       travel_time: locationData?.travel_time,
       travel_by: locationData?.travel_by,
       type: typeOfTravel,
       miles_old: previousPostcode,
       city: locationData?.city,
-      coordinates: locationData?.coordinates ?? [],
+      coordinates: locationData?.coordinates ?? "",
       nation_wide:locationData?.nation_wide,
     };
     console.log(locationData,"typeOfTravel")

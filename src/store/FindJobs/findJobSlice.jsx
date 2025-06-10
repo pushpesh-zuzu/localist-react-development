@@ -30,7 +30,7 @@ phone:""
   selectedServiceFormData:{
     miles1: "1",
     postcode: null,
-    cities:null,
+    cities:"",
     coordinates:[],
     is_online : 0,
     nation_wide: 0,

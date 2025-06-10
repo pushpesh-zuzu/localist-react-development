@@ -71,7 +71,7 @@ const ServiceLocationStep = ({
 
         if (postalCode) {
           dispatch(setFormData({ postcode: postalCode }));
-          dispatch(setFormData({ cities: cityName }))
+          dispatch(setFormData({ cities: cityName ? cityName : "" }))
           dispatch(setFormData({ coordinates: { lat, lng } }));
           dispatch(setFormData({city:cityName})),
           dispatch(setFormData({country: countryName}))

@@ -10,6 +10,7 @@ import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
 import { showToast } from "../../utils";
 import CustomModal from "../Leads/LeadLists/ConfirmModal";
 import viewDetailsArrow from "../../assets/Images/Setting/viewDetailsArrow.svg"
+import SavedViewDetails from "./SavedViewDetails/SaveViewDetails";
 
 
 
@@ -20,6 +21,7 @@ const SaveForLater = () => {
   const { saveForLaterDataList, manualBidLoader } = useSelector((state) => state.leadSetting)
   const [selectedItem, setSelectedItem] = useState(null)
   const [isModalOpen, setModalOpen] = useState(false)
+  const [viewDetailsOpen,setViewDetaisOpen] = useState(false)
 
   console.log(saveForLaterDataList, "saveForLaterDataList")
   useEffect(() => {
@@ -53,6 +55,9 @@ const SaveForLater = () => {
 
     });
   }
+  const handleViewDetais = () => {
+    setViewDetaisOpen(!viewDetailsOpen)
+  }
   return (
     <>
       <div className={styles.maincontainer}>
@@ -65,7 +70,7 @@ const SaveForLater = () => {
 
                   <div className={styles.card} >
                     {/* Left Section - User Info */}
-                    <div className={styles.infoContainer}>
+                    <div className={styles.infoContainer}>  
                       <div className={styles.userInfo}>
                         <div className={styles.userDetails}>
                           <div className={styles.avatar}>
@@ -143,7 +148,7 @@ const SaveForLater = () => {
                       </div>
 
                       <div>
-                        <button className={styles.viewDetailsBtn}>View Details <img src={viewDetailsArrow} alt="..." /></button>
+                        <button className={styles.viewDetailsBtn} onClick={() =>handleViewDetais(item)}>View Details <img src={viewDetailsArrow} alt="..." /></button>
                       </div>
                       {/* <p>
                               <strong>Starting:</strong> In the next month
@@ -166,11 +171,16 @@ const SaveForLater = () => {
                             {item?.credit_score}Credits
                           </span> */}
                     </div>
+                         {
+  viewDetailsOpen && <SavedViewDetails/>
+ }
                   </div>
                 </>
               )
             })
         }
+
+    
       </div>
       <CustomModal
         isOpen={isModalOpen}
@@ -179,6 +189,9 @@ const SaveForLater = () => {
         message="Are you sure you want to continue?"
         loading={manualBidLoader}
       />
+
+
+
     </>
   )
 }

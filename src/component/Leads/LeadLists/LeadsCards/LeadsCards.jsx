@@ -152,6 +152,12 @@ setPlanPurchase(totalCredit?.plan_purchased)
   //   dispatch(getLeadRequestList(data));
   // });
 };
+useEffect(()=>{
+const data = {
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+    };
+       dispatch(totalCreditData(data));
+},[])
 const handleContinues = () => {
   const formData = new FormData();
   formData.append("buyer_id", selectedItem?.customer_id);
@@ -170,7 +176,7 @@ const handleContinues = () => {
     }
 
     const data = {
-      user_id: userToken?.remember_tokens,
+      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
     };
 
     dispatch(totalCreditData(data));

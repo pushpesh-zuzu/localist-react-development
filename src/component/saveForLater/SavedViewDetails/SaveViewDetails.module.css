@@ -1,0 +1,7 @@
+  .maincontainer {
+    margin-top: 50px;
+  }
+  .viewDetailsBox {
+    display: flex;
+    justify-content: space-between;
+  }
