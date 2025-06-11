@@ -90,7 +90,7 @@ const GrowthStepsData = [
     Description2: "Review leads for free",
     Description3: "Get leads sent to you in real time",
     button: "How it works",
-    // path:"/how-it-works"
+    path:"/how-it-works"
   },
   {
     id: 2,

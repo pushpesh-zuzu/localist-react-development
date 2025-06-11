@@ -198,7 +198,7 @@ const MatchingLeads = () => {
    const { registerData } = useSelector((state) => state.findJobs)
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
-console.log(preferenceList,"preferenceList")
+console.log(preferenceList?.length,"preferenceList")
   const uniqueServiceNames = [
     ...new Set(leadRequestList.map((item) => item.category?.name)),
   ];
@@ -303,7 +303,7 @@ dispatch(getleadPreferencesList(data))
         <h2 className={styles.heading}>{data} matching leads</h2>
         <p className={styles.subText}>
           <span className={styles.subTextSpan}>
-            <img src={SettingIcon} alt="" /> {uniqueServiceNames?.length}{" "}
+            <img src={SettingIcon} alt="" /> {preferenceList?.length}{" "}
             services{" "}
           </span>
           {/* <span className={styles.subTextSpan}>

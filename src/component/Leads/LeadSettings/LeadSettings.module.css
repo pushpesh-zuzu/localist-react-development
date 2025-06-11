@@ -312,6 +312,10 @@ input:checked + .slider::before {
 .searchItem:hover {
   background: #f0f0f0;
 }
+.checkprimayBox {
+  display: flex;
+  gap: 8px;
+}
 @media (max-width: 768px) {
   .container {
     padding: 24px;
