@@ -882,6 +882,22 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   } 
+  export const getleadPrimaryServiceList = (serviceId) => {
+    return async (dispatch) => {
+      dispatch(setServiceListLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/change-primary-service`,serviceId);
+        if (response) {
+          dispatch(setPreferencesList(response?.data?.data));
+          return response.data
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setServiceListLoader(false));
+      }
+    };
+  };
   
 
 const leadSettingSlice = createSlice({

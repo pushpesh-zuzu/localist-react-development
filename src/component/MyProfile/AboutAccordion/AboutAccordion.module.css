@@ -43,9 +43,9 @@
 }
 
 .uploadBtn {
-  border: 0.83px solid #00afe3;
+  border: 1px solid var(--primary-color);
   background-color: #ffffff;
-  box-shadow: 0px 0px 1.26px 0.32px #0000001a;
+  /* box-shadow: 0px 0px 1.26px 0.32px #0000001a; */
   color: var(--primary-color);
   padding: 5px 7.5px;
   border-radius: 1.9px;
@@ -57,9 +57,9 @@
 }
 
 .webcamBtn {
-  border: 0.83px solid #000000;
+  border: 1px solid #000000;
   background-color: #ffffff;
-  box-shadow: 0px 0px 1.26px 0.32px #0000001a;
+  /* box-shadow: 0px 0px 1.26px 0.32px #0000001a; */
   color: #000000;
   padding: 5px 7.5px;
   border-radius: 1.9px;

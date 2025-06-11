@@ -21,7 +21,7 @@ import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
 import HiredClickImg from "../../assets/Images/MyResponse/RightClickHiredImg.svg";
 import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
-import pendingArrowIcon from "../../assets/Images/MyResponse/ArrowIconPending.svg";
+import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg"

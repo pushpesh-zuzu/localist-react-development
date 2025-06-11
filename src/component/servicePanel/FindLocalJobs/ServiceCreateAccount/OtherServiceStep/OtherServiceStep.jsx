@@ -340,7 +340,7 @@ console.log(postalCode,'postalCode')
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>
-                {pendingLead ? pendingLead : "0"}
+                {pendingLead ? pendingLead : Math.floor(Math.random() * (45 - 35 + 1)) + 35}
               </h1>
               <p className={styles.leadText}>current available leads</p>
             </div>

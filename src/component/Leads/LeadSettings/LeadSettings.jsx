@@ -32,6 +32,7 @@ import AddLocationModal from "../AddLocation/AddLocationModal";
 import TravelTimeModal from "../AddLocation/TravelTimeModal";
 import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
 import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
+import CheckPrimary from "../../../assets/Icons/greenCheckBox.jpeg"
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -76,7 +77,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
     setIsOnline(getOnlineRemote?.isonline === 1);
   }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
-  console.log(isLocationModalOpen, "isLocationModalOpen123");
+  console.log(preferenceList, "isLocationModalOpen123");
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
@@ -137,10 +138,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     navigate("/leads");
   };
 
-  const handleServiceClick = (service, name) => {
+  const handleServiceClick = (service, name,primaryService) => {
     setSelectedService({
       name: name,
       id: service,
+      primaryService: primaryService
     });
     const questionData = {
       service_id: service,
@@ -479,7 +481,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                       ? styles.selectedService
                       : ""
                   }`}
-                  onClick={() => handleServiceClick(service?.id, service?.name)}
+                  onClick={() => handleServiceClick(service?.id, service?.name,service?.primaryService)}
                 >
                   <div className={styles.serviceNameWrapper}>
                     <p className={styles.serviceName}>{service.name}</p>
@@ -487,6 +489,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                       All leads <span>|</span> {service?.locations} Location
                     </p>
                   </div>
+                  <div className={styles.checkprimayBox}>
+                 {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>}
                   <img
                     src={EditIcon}
                     alt="Edit"
@@ -494,6 +498,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     //   handleServiceClick(service?.id, service?.name)
                     // }
                   />
+                </div>
                 </div>
               ))}
             </div>

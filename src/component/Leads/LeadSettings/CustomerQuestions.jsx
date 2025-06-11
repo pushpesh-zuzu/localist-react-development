@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
   getleadPreferencesList,
+  getleadPrimaryServiceList,
   getLocationLead,
   getServiceWiseLocationData,
   leadPreferences,
@@ -49,7 +50,7 @@ const CustomerQuestions = ({ selectedService }) => {
   } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-
+console.log(leadPreferenceData,selectedService,"leadPreferenceData")
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -57,6 +58,28 @@ const CustomerQuestions = ({ selectedService }) => {
   const nationwideShow = serviceWiseData?.map((item) => item?.type )
   const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
   console.log(serviceWiseData,nationwideShow,"serviceWiseData")
+const handleUpdateService = () => {
+  
+  const data = {
+    service_id:selectedService?.id
+  }
+  dispatch(getleadPrimaryServiceList(data)).then((result) => {
+    if(result) {
+      showToast("success",result?.message)
+       dispatch(
+          leadPreferences({
+            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+            service_id: selectedService?.id,
+          })
+        );
+         dispatch(
+                  getleadPreferencesList({ user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens })
+                );
+    }
+  })
+}
+
+
   useEffect(() => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
@@ -355,6 +378,17 @@ const CustomerQuestions = ({ selectedService }) => {
               + Add a location
             </a>
           </div>
+           {selectedService?.primaryService != selectedService?.id && <div
+            className={styles.locations}
+            
+          >
+            <span className={styles.locationIcon}>
+              This service is primary
+            </span>
+            <button className={styles.addUpdateLocation} onClick={handleUpdateService}>
+             Update
+            </button>
+          </div>}
           <div className={styles.rangerBox}>
             <div className={styles.ranger}>
           
@@ -396,6 +430,8 @@ const CustomerQuestions = ({ selectedService }) => {
               Change Your Radius
             </a>
           </div>
+
+          
         </div>
 
         <div className={styles.footer}>

@@ -259,7 +259,7 @@
 }
 .contactBox {
   justify-content: start;
-  margin-top: 12px;
+  margin-top: 24px;
   display: flex;
   align-items: center;
   gap: 8px;
