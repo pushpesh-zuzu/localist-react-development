@@ -139,6 +139,7 @@ const SaveForLater = () => {
                         )}
                       </div>
                       <div className={styles.jobInfo}>
+                        {console.log(item?.questions, "item?.questions")}
                         {item?.questions && (
                           <p>
                             {JSON.parse(item?.questions)
