@@ -65,9 +65,14 @@
 }
 
 .offerHeader {
+  position: relative;
   display: flex;
   gap: 10px;
   margin-bottom: 12px;
+}
+.discountBadge {
+  position: absolute;
+  top: -30px;
 }
 
 .offerBadge,
@@ -167,4 +172,31 @@
 
 .rotate {
   transform: rotate(180deg);
+}
+@media screen and (max-width:768px) {
+   .modal {
+    max-width: 720px;
+ margin: 0 20px;
+}
+}
+@media screen and (max-width:480px) {
+  .modal {
+    max-width: 290px;
+ margin: 0 10px;
+}
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.buyButton {
+  white-space: nowrap;
+   padding: 5px 19px;
+}
+.creditDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 }

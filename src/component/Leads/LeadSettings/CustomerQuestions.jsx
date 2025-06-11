@@ -383,7 +383,7 @@ const handleUpdateService = () => {
             
           >
             <span className={styles.locationIcon}>
-              This service is primary
+              Make this service as primary
             </span>
             <button className={styles.addUpdateLocation} onClick={handleUpdateService}>
              Update

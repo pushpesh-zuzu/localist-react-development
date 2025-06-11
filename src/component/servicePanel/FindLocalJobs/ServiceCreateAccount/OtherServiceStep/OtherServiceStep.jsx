@@ -18,6 +18,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
+  const [randomFallback] = useState(() => Math.floor(Math.random() * (45 - 35 + 1)) + 35)
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -340,7 +341,7 @@ console.log(postalCode,'postalCode')
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>
-                {pendingLead ? pendingLead : Math.floor(Math.random() * (45 - 35 + 1)) + 35}
+                {pendingLead != 0  ? pendingLead : randomFallback}
               </h1>
               <p className={styles.leadText}>current available leads</p>
             </div>

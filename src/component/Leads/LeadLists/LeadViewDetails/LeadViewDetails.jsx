@@ -2,13 +2,13 @@
 // import React from "react";
 // import styles from "./LeadViewDetails.module.css"
 
-// import VerifiedPhoneIcon from "../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
-// import AdditionalDetailsIcon from "../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
-// import FrequentUserIcon from "../../../assets/Images/Leads/FrequentUserIcon.svg";
-// import UrgentIcon from "../../../assets/Images/Leads/UrgentIcon.svg";
-// import IntentIcon from "../../../assets/Images/Leads/IntentIcon.svg";
-// import DotIcon from "../../../assets/Images/Leads/DotIcon.svg";
-// import UpdateIcon from "../../../assets/Images/Leads/UpdateIcon.svg";
+// import VerifiedPhoneIcon from "../../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
+// import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
+// import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
+// // import UrgentIcon from "../../../../assets/Images/Leads/UrgentIcon.svg";
+// // import IntentIcon from "../../../../assets/Images/Leads/IntentIcon.svg";
+// import DotIcon from "../../../../assets/Images/Leads/DotIcon.svg";
+// import UpdateIcon from "../../../../assets/Images/Leads/UpdateIcon.svg";
 
 // const LeadViewDetails = ({ saveForLaterDataList }) => {
 //   const savedLeads = saveForLaterDataList?.[0]?.savedLeads || [];
@@ -72,14 +72,14 @@
 //                                     {/* {item?.is_urgent == 1 && ( */}
 //                                       <span className={styles.urgent}>
 //                                         {" "}
-//                                         <img src={UrgentIcon} alt="" />
+//                                         <img src={FrequentUserIcon} alt="" />
 //                                         Urgent
 //                                       </span>
 //                                     {/* )} */}
 //                                     {/* {item?.is_high_hiring == 1 && ( */}
 //                                       <span className={styles.intent}>
 //                                         {" "}
-//                                         <img src={IntentIcon} alt="" />
+//                                         <img src={FrequentUserIcon} alt="" />
 //                                        High hiring intent
 //                                       </span>
 //                                     {/* // )} */}

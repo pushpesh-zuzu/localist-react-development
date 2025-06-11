@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { addBuyCreditApi } from "../../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../../utils";
+import AddCardModal from "../../../MyCredit/MyPaymentDetails/AddCardModal";
 
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(true);
@@ -18,6 +19,7 @@ const CreditMatch = () => {
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
+  const [isAddModalOpen,setIsAddModalOpen] = useState(false)
   const { creditPlanList, leadRequestList, totalCredit, } = useSelector(
     (state) => state.leadSetting
   );
@@ -56,8 +58,8 @@ const CreditMatch = () => {
         showToast('success', result?.message);
        
       } else if (result?.success === false) {
-        
-        navigate("/payment-details");
+        setIsAddModalOpen(true)
+        // navigate("/payment-details");
       }
     });
   }
@@ -163,6 +165,7 @@ const CreditMatch = () => {
           You have {totalCredit?.total_credit ? totalCredit?.total_credit : "0"} Credits Left
         </button>
       </div>
+      {isAddModalOpen && <AddCardModal onClose={() => setIsAddModalOpen(false)}/>}
     </>
   );
 };

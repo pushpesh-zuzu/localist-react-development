@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ContactConfirmModal.module.css';
 import { useNavigate } from "react-router-dom";
-import { getAddManualBidData, getCreditPlanList, getLeadRequestList } from '../../../store/LeadSetting/leadSettingSlice';
+import { getAddManualBidData, getCreditPlanList, getLeadRequestList, totalCreditData } from '../../../store/LeadSetting/leadSettingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBuyCreditApi, getInvoiceBillingListApi } from '../../../store/MyProfile/MyCredit/MyCreditSlice';
 import { showToast } from '../../../utils';
@@ -29,14 +29,15 @@ const dispatch = useDispatch()
 const [activeLoaderId, setActiveLoaderId] = useState(null)
 const [isChecked, setIsChecked] = useState(true)
 const [creditModal,setCreditModal] = useState(false)
-const { creditPlanList } =useSelector((state)=> state.leadSetting)
+const { creditPlanList,totalCredit } =useSelector((state)=> state.leadSetting)
   const [activeIndex, setActiveIndex] = useState(null);
   const { registerData } = useSelector((state) => state.findJobs);
     const { userToken } = useSelector((state) => state.auth)
-console.log(details,"details")
+
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+  const totalRemaingCredit = creditPlanList[0]?.no_of_leads
   const handleNavigate = () => {
     navigate("/mycredits")
   }
@@ -46,6 +47,10 @@ console.log(details,"details")
   useEffect(()=>{
 dispatch(getCreditPlanList())
   },[])
+
+console.log(totalCredit,"12")
+
+
     useEffect(() => {
       document.body.style.overflow = 'hidden';
       return () => {
@@ -135,8 +140,12 @@ addManualBidData()
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={()=>onClose()}>×</button>
         <div className={styles.mainBox}>
-        <h2>{enoughCredit != 0 ? "You need 6 credits to contact Lorna" : "You have not purchased any plan, Please buy credits"}</h2>
-      
+        {/* <h2>{enoughCredit != 0 ? `You need ${totalCredit - details?.credit_score} credits to contact ${details?.customer?.name}` : "Please purchase a Credit Pack"}</h2> */}
+      <h2>
+  {enoughCredit != 0
+    ? `You need ${ Number(details?.credit_score) - Number(totalCredit?.total_credit) } credits to contact ${details?.customer?.name}`
+    : "Please purchase a Credit Pack"}
+</h2>
         <p className={styles.subText}>
           To get some credits, you need to buy a starter pack of credits (Enough for this lead + roughly another 9 leads)
         </p>
@@ -155,7 +164,7 @@ addManualBidData()
   {activeIndex === 0 && (
     <div className={styles.panel}>
       <p>
-        Credits are Bark’s online currency. If you see a job that you like and you want to get in contact with that
+        Credits are Localists online currency. If you see a job that you like and you want to get in contact with that
         customer, then you use credits to purchase their contact details...
       </p>
     </div>
@@ -173,7 +182,7 @@ addManualBidData()
   </button>
   {activeIndex === 1 && (
     <div className={styles.panel}>
-      <p>The starter pack is a bundle of credits for new users to try out Bark’s service.</p>
+      <p>The starter pack is a bundle of credits for new users to try out Localist’s service</p>
     </div>
   )}
 </div>
@@ -181,7 +190,7 @@ addManualBidData()
 <div className={styles.section}>
   <button className={styles.accordion} onClick={() => toggleAccordion(2)}>
     <div className={styles.accordionContent}>
-      <span>What is the Get Hired Guarantee?</span>
+      <span>What is the 100% New Business Guarantee</span>
      <span className={`${styles.arrowIcon} ${activeIndex === 2 ? styles.rotate : ''}`}>
   <img src={arrowIcons} alt="arrow" width={16} height={16} />
 </span>
@@ -237,7 +246,7 @@ addManualBidData()
       <div className={styles.creditDetails}>
         <div>
           <p><strong>🔹 {item?.no_of_leads} credits</strong></p>
-          <p>Enough for about 10 leads</p>
+          {/* <p>Enough for about 10 leads</p> */}
         </div>
         <div>
           <p><strong>${item?.price}</strong> (Excl. tax)</p>
@@ -266,7 +275,7 @@ addManualBidData()
         
 
         <p className={styles.footerNote}>
-          You will use 6 of your 70 purchased credits to contact Lorna
+          {`You will use ${details?.credit_score} of your ${totalRemaingCredit} purchased credits to contact ${details?.customer?.name}`}
         </p>
       </div>
     </div>

@@ -15,6 +15,7 @@ import { showToast } from "../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
+import AddCardModal from "../MyPaymentDetails/AddCardModal";
 
 const creditOptions = [
   {
@@ -59,6 +60,7 @@ const MyCredits = () => {
   const { buyCreditLoader, addCouanLoader,addcoupanList ,getInoviceBillingList} = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
   const [isChecked, setIsChecked] = useState(true)
+  const [isAddCardModal,setIsAddCardModal]= useState(false)
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -217,8 +219,8 @@ const handleBuyNow = (item) => {
     setActiveLoaderId(null);
     dispatch(getInvoiceBillingListApi());
   } else if (result?.success === false) {
-    
-    navigate("/payment-details");
+    setIsAddCardModal(true)
+    // navigate("/payment-details");
   }
 });
 };
@@ -362,6 +364,8 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
       {/* {isOpen && (
         <CreditModal onClose={()=>setIsOpen(false)}/>
       )} */}
+
+      {isAddCardModal && <AddCardModal onClose={()=> setIsAddCardModal(false)} />}
     </>
   );
 };
