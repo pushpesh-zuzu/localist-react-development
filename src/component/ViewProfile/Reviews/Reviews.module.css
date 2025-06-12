@@ -24,7 +24,7 @@
     display: flex;
     align-items: flex-start;
     gap: 32px;
-    border-top: 1px solid #e0e0e0;
+    /* border-top: 1px solid #e0e0e0; */
     padding-top: 24px;
     max-width: 600px;
     
@@ -46,6 +46,8 @@
     font-size: 20px;
     color: #fbc02d;
     text-align: start;
+    display: flex;
+    gap: 4px;
   }
   
   .totalReviews {
@@ -246,7 +248,11 @@
     font-weight: bold;
   }
   
-  
+  .middleBox {
+    border-right: 1px solid #D9D9D9;
+    width: 20px;
+    height: 220px;
+  }
   
   /* For tablets (768px and below) */
 @media (max-width: 768px) {
@@ -305,6 +311,9 @@
       width: 40px;
       height: 40px;
     }
+     .middleBox {
+    display: none;
+  }
   }
   
   /* For mobile devices (480px and below) */
@@ -347,5 +356,8 @@
     .container {
       padding-top: 16px;
     }
+     .middleBox {
+    display: none;
+  }
   }
   
