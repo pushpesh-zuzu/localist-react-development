@@ -170,3 +170,35 @@
   text-decoration: underline;
   margin-left:11px;
 }
+@media screen and (max-width:768px) {
+  .viewDetailsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+.sperator{
+  height: 2px;
+  margin-left: 20px;
+  width: auto;
+  background-color: #E0E0E0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+}
+@media screen and (max-width:480px) {
+  .viewDetailsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+.sperator{
+  height: 2px;
+  margin-left: 20px;
+  width: auto;
+  background-color: #E0E0E0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+}

@@ -71,7 +71,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
                 <div key={index} className={styles.questionBlock}>
                   {parsedQuestions.map((qa, idx) => (
                     <div key={idx} className={styles.questionItem}>
-                      <p className={styles.question}> 
+                      <p className={styles.question}>
                         {/* <span className={styles.dotStyle}>•</span> */}
                         <img src={DotIcon} alt="" />
                         {qa.ques}</p>
@@ -100,54 +100,54 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               <span className={`${styles.tag} ${styles.green}`}>✨ High hiring intent</span>
             </div> */}
             <div className={styles.badges}>
-                                    {/* {item?.is_phone_verified == 1 && ( */}
-                                      <span className={styles.verified}>
-                                        <img src={VerifiedPhoneIcon} alt="" />
-                                        Verified Phone
-                                      </span>
-                                    {/* )} */}
-                                    {/* {item?.has_additional_details == 1 && ( */}
-                                      <span className={styles.additional}>
-                                        {" "}
-                                        <img src={AdditionalDetailsIcon} alt="" />
-                                        Additional details
-                                      </span>
-                                    {/* )} */}
-                                    {/* {item?.is_frequent_user == 1 && ( */}
-                                      <span className={styles.frequent}>
-                                        {" "}
-                                        <img src={FrequentUserIcon} alt="" />
-                                        Frequent user
-                                      </span>
-                                    {/* )} */}
-                                    {/* {item?.is_urgent == 1 && ( */}
-                                      <span className={styles.urgent}>
-                                        {" "}
-                                        <img src={UrgentIcon} alt="" />
-                                        Urgent
-                                      </span>
-                                    {/* )} */}
-                                    {/* {item?.is_high_hiring == 1 && ( */}
-                                      <span className={styles.intent}>
-                                        {" "}
-                                        <img src={IntentIcon} alt="" />
-                                       High hiring intent
-                                      </span>
-                                    {/* // )} */}
-                                  </div>
+              {/* {item?.is_phone_verified == 1 && ( */}
+              <span className={styles.verified}>
+                <img src={VerifiedPhoneIcon} alt="" />
+                Verified Phone
+              </span>
+              {/* )} */}
+              {/* {item?.has_additional_details == 1 && ( */}
+              <span className={styles.additional}>
+                {" "}
+                <img src={AdditionalDetailsIcon} alt="" />
+                Additional details
+              </span>
+              {/* )} */}
+              {/* {item?.is_frequent_user == 1 && ( */}
+              <span className={styles.frequent}>
+                {" "}
+                <img src={FrequentUserIcon} alt="" />
+                Frequent user
+              </span>
+              {/* )} */}
+              {/* {item?.is_urgent == 1 && ( */}
+              <span className={styles.urgent}>
+                {" "}
+                <img src={UrgentIcon} alt="" />
+                Urgent
+              </span>
+              {/* )} */}
+              {/* {item?.is_high_hiring == 1 && ( */}
+              <span className={styles.intent}>
+                {" "}
+                <img src={IntentIcon} alt="" />
+                High hiring intent
+              </span>
+              {/* // )} */}
+            </div>
           </div>
-<div className={styles.mapContainer}>
-          <LeadMap />
-</div>
+          <div className={styles.mapContainer}>
+            <LeadMap />
+          </div>
           <div className={styles.leadFooter}>
             <p className={styles.leadFooterTitle}>Not seeing the right leads?</p>
             <p className={styles.leadFooterText}>
               Stop seeing leads with specific answers by customising your settings.
             </p>
-          {/* <span className={styles.updateIcon}>⚙️</span> */}
-          <div className={styles.updateContainer}>
-           <img src={UpdateIcon} alt="" />
-            <a href="#" className={styles.updateLink}> Update lead settings</a>
+            {/* <span className={styles.updateIcon}>⚙️</span> */}
+            <div className={styles.updateContainer}>
+              <img src={UpdateIcon} alt="" />
+              <a href="#" className={styles.updateLink}> Update lead settings</a>
             </div>
           </div>
         </div>

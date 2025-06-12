@@ -18,7 +18,7 @@ import ContactConfirmModal from "../ContactConfirmModal";
 import ContactSuccessModal from "../ContactSuccessModal";
 import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg"
 // import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
-// import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
+import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 
 const LeadsCards = ({ enoughCredit }) => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const LeadsCards = ({ enoughCredit }) => {
   const [isopen, setIsOpen] = useState(false)
   const [planpurcahse, setPlanPurchase] = useState("")
   const [leadViewDetails, setLeadViewDetails] = useState(false)
-  const [leadRequestDatas,setLeadRequestData] = useState()
+  // const [leadRequestDatas,setLeadRequestData] = useState()
 
   const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader, filters, totalCredit, purchasedData } = useSelector(
     (state) => state.leadSetting
@@ -279,7 +279,7 @@ const LeadsCards = ({ enoughCredit }) => {
     }
   }
   const handleViewDetais = (item) => {
-    setLeadRequestData(item)
+    // setLeadRequestData(item)
     setLeadViewDetails(!leadViewDetails)
   }
   return (
@@ -437,8 +437,8 @@ const LeadsCards = ({ enoughCredit }) => {
                       <div className={styles?.mainText}> <p>ACT FAST</p>  <span>{item?.view_count} Professionals</span> <br />  have viewed this lead</div>
 
                     </div>
-                    {/* {leadViewDetails && <LeadViewDetails leadRequestDatas={leadRequestDatas} />} */}
                   </div>
+                    {leadViewDetails && <LeadViewDetails leadRequestDatas={leadRequestList} />}
                 </>
               );
             })} </div> </>}{" "}
