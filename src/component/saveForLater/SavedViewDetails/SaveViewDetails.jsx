@@ -55,36 +55,37 @@ import DotIcon from "../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../assets/Images/Leads/UpdateIcon.svg";
 
 const SavedViewDetails = ({ saveForLaterDataList }) => {
-  const savedLeads = saveForLaterDataList?.[0]?.savedLeads || [];
+  const savedLeads = saveForLaterDataList || {};
   console.log(savedLeads, "savedLeads");
+  let parsedQuestions = [];
+  if (savedLeads?.questions) {
+    try {
+      parsedQuestions = JSON.parse(savedLeads?.questions);
+    } catch (error) {
+      console.error("Error parsing questions:", error);
+      parsedQuestions = [];
+    }
+  }
   return (
     <div className={styles.maincontainer}>
       <div className={styles.viewDetailsBox}>
         {/* Left: Q&A Section */}
         <div className={styles.leftColumn}>
-          {savedLeads.length > 0 ? (
-            savedLeads.map((item, index) => {
-              const parsedQuestions = item?.questions
-                ? JSON.parse(item.questions)
-                : [];
-
-              return (
-                <div key={index} className={styles.questionBlock}>
-                  {parsedQuestions.map((qa, idx) => (
-                    <div key={idx} className={styles.questionItem}>
-                      <p className={styles.question}>
-                        {/* <span className={styles.dotStyle}>•</span> */}
-                        <img src={DotIcon} alt="" />
-                        {qa.ques}
-                      </p>
-                      <div className={styles.sperator} />
-                      <p className={styles.answer}>{qa.ans}</p>
-                      {/* <hr /> */}
-                    </div>
-                  ))}
+          {savedLeads?.questions ? (
+            <div className={styles.questionBlock}>
+              {parsedQuestions.map((qa, idx) => (
+                <div key={idx} className={styles.questionItem}>
+                  <p className={styles.question}>
+                    {/* <span className={styles.dotStyle}>•</span> */}
+                    <img src={DotIcon} alt="" />
+                    {qa.ques}
+                  </p>
+                  <div className={styles.sperator} />
+                  <p className={styles.answer}>{qa.ans}</p>
+                  {/* <hr /> */}
                 </div>
-              );
-            })
+              ))}
+            </div>
           ) : (
             <p>No saved leads available.</p>
           )}
@@ -102,34 +103,34 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               <span className={`${styles.tag} ${styles.green}`}>✨ High hiring intent</span>
             </div> */}
             <div className={styles.badges}>
-              {savedLeads[0]?.is_phone_verified == 1 && (
+              {savedLeads?.is_phone_verified == 1 && (
                 <span className={styles.verified}>
                   <img src={VerifiedPhoneIcon} alt="" />
                   Verified Phone
                 </span>
               )}
-              {savedLeads[0]?.has_additional_details == 1 && (
+              {savedLeads?.has_additional_details == 1 && (
                 <span className={styles.additional}>
                   {" "}
                   <img src={AdditionalDetailsIcon} alt="" />
                   Additional details
                 </span>
               )}
-              {savedLeads[0]?.is_frequent_user == 1 && (
+              {savedLeads?.is_frequent_user == 1 && (
                 <span className={styles.frequent}>
                   {" "}
                   <img src={FrequentUserIcon} alt="" />
                   Frequent user
                 </span>
               )}
-              {savedLeads[0]?.is_urgent == 1 && (
+              {savedLeads?.is_urgent == 1 && (
                 <span className={styles.frequent}>
                   {" "}
                   <img src={FrequentUserIcon} alt="" />
                   Urgent
                 </span>
               )}
-              {savedLeads[0]?.is_high_hiring == 1 && (
+              {savedLeads?.is_high_hiring == 1 && (
                 <span className={styles.frequent}>
                   {" "}
                   <img src={FrequentUserIcon} alt="" />
@@ -139,7 +140,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
             </div>
           </div>
           <div className={styles.mapContainer}>
-            <LeadMap getPendingLeadList={savedLeads[0]?.postcode} />
+            <LeadMap getPendingLeadList={savedLeads?.postcode} />
           </div>
           <div className={styles.leadFooter}>
             <p className={styles.leadFooterTitle}>

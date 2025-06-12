@@ -24,7 +24,7 @@ import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
-import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg"
+import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
@@ -189,7 +189,12 @@ const MyResponse = () => {
               }`}
               onClick={handleHiredApi}
             >
-              {selectedTab === "hired" ? <img src={HiredClickImg} alt="..." /> :<img src={HiredImg} alt="hired" />} Hired
+              {selectedTab === "hired" ? (
+                <img src={HiredClickImg} alt="..." />
+              ) : (
+                <img src={HiredImg} alt="hired" />
+              )}{" "}
+              Hired
             </button>
           </div>
           {/* <div style={{ display: "flex", marginRight: 20 }}>
@@ -205,60 +210,64 @@ const MyResponse = () => {
               <Option value="Request Reply">Request Reply</Option>
             </Select>
           </div> */}
-          <div style={{ display: "flex", marginRight: 20 }} className={styles.purchaseSelect}>
-  <label className={styles.purchaseText}>Purchase Type</label>
-  <select
-    className={`${styles.selectBox} ${styles.customSelect}`}
-    value={purchaseType} // controlled value
-    onChange={(e) => handlePurchaseChange(e.target.value)}
-    // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
-  >
-    
-    <option value="Manual Bid">Manual Bid</option>
-    {/* <option value="Best Matches">Best Match</option> */}
-    <option value="Autobid">Auto Bid</option>
-    <option value="Request Reply">Request Reply</option>
-  </select>
-</div>
+          <div
+            style={{ display: "flex", marginRight: 20 }}
+            className={styles.purchaseSelect}
+          >
+            <label className={styles.purchaseText}>Purchase Type</label>
+            <select
+              className={`${styles.selectBox} ${styles.customSelect}`}
+              value={purchaseType} // controlled value
+              onChange={(e) => handlePurchaseChange(e.target.value)}
+              // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+            >
+              <option value="Manual Bid">Manual Bid</option>
+              {/* <option value="Best Matches">Best Match</option> */}
+              <option value="Autobid">Auto Bid</option>
+              <option value="Request Reply">Request Reply</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      {getLeadsToDisplay()?.length ? 
-       getLeadsToDisplay()?.map((item, idx) => (
-        <div key={idx}>
-          <div className={styles.card}>
-            <div className={styles.infoContainer}>
-              <div className={styles.userInfo}>
-                <div className={styles.userDetails}>
-                  <div className={styles.avatar}>
-                    {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+      {getLeadsToDisplay()?.length ? (
+        getLeadsToDisplay()?.map((item, idx) => (
+          <div key={idx}>
+            <div className={styles.card}>
+              <div className={styles.infoContainer}>
+                <div className={styles.userInfo}>
+                  <div className={styles.userDetails}>
+                    <div className={styles.avatar}>
+                      {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                    <div
+                      className={styles.details}
+                      // onClick={() => handleProfieView(item)}
+                    >
+                      <h3>{item?.customer?.name}</h3>
+                      <p>{item?.postcode}</p>
+                    </div>
                   </div>
-                  <div
-                    className={styles.details}
-                    // onClick={() => handleProfieView(item)}
-                  >
-                    <h3>{item?.customer?.name}</h3>
-                    <p>{item?.postcode}</p>
-                  </div>
+                  <span className={styles.category}>
+                    {item?.category?.name}
+                  </span>
                 </div>
-                <span className={styles.category}>{item?.category?.name}</span>
-              </div>
-              <div className={styles.contactContainer}>
-                <div className={styles.contactItem}>
-                  <img src={BluePhoneIcon} alt="" />
-                  <span>
-                    {/* {item?.phone
+                <div className={styles.contactContainer}>
+                  <div className={styles.contactItem}>
+                    <img src={BluePhoneIcon} alt="" />
+                    <span>
+                      {/* {item?.phone
                       ? `${item?.phone.substring(0, 2)}${"*".repeat(
                           item?.phone.length - 2
                         )}`
                       : "N/A"} */}
                       {item?.phone}
-                  </span>
-                </div>
-                <div className={styles.contactItem}>
-                  <img src={BlueSmsIcon} alt="" />
-                  <span>
-                    {/* {item?.customer?.email
+                    </span>
+                  </div>
+                  <div className={styles.contactItem}>
+                    <img src={BlueSmsIcon} alt="" />
+                    <span>
+                      {/* {item?.customer?.email
                       ? `${item?.customer?.email
                           .split("@")[0]
                           .substring(0, 8)}${"*".repeat(
@@ -268,22 +277,25 @@ const MyResponse = () => {
                           )
                         )}@${item?.customer?.email.split("@")[1]}`
                       : "N/A"} */}
-                      {
-                        item?.customer?.email
-                      }
-                  </span>
+                      {item?.customer?.email}
+                    </span>
+                  </div>
                 </div>
+                {item?.profile_view && item?.profile_view_time && (
+                  <div className={styles.profile_view}>
+                    <p>
+                      <span>
+                        <img src={HiredImg} alt="..." />
+                      </span>
+                      {item?.profile_view}
+                    </p>
+                    <p>{item?.profile_view_time}</p>
+                  </div>
+                )}
               </div>
-              {item?.profile_view && item?.profile_view_time && (
-                <div className={styles.profile_view}>
-                  <p><span><img src={HiredImg} alt="..." /></span>{item?.profile_view}</p>
-                  <p>{item?.profile_view_time}</p>
-                </div>
-              )}
-            </div>
 
-            <div className={styles.jobDetails}>
-              {/* <div className={styles.saveBtnBox}>
+              <div className={styles.jobDetails}>
+                {/* <div className={styles.saveBtnBox}>
                 <button
                   className={styles.saveBtn}
                   // onClick={() => handleSaveLater(item)}
@@ -299,88 +311,99 @@ const MyResponse = () => {
                   
                 </button>
               </div> */}
-              <div className={styles.badges}>
-                {item?.is_phone_verified == 1 && (
-                  <span className={styles.verified}>
-                    <img src={VerifiedPhoneIcon} alt="" />
-                    Verified Phone
-                  </span>
-                )}
-                {item?.has_additional_details == 1 && (
-                  <span className={styles.additional}>
-                    <img src={AdditionalDetailsIcon} alt="" />
-                    Additional details
-                  </span>
-                )}
-                {item?.is_frequent_user == 1 && (
-                  <span className={styles.frequent}>
-                    <img src={FrequentUserIcon} alt="" />
-                    Frequent user
-                  </span>
-                )}
-                {item?.is_urgent == 1 && (
-                  <span className={styles.frequent}>
-                    {" "}
-                    <img src={FrequentUserIcon} alt="" />
-                    Urgent
-                  </span>
-                )}
-                {item?.is_high_hiring == 1 && (
-                  <span className={styles.frequentHir}>
-                    {" "}
-                    <img src={HireUserIcon} alt="" />
-                    High hiring
-                  </span>
-                )}
+                <div className={styles.badges}>
+                  {item?.is_phone_verified == 1 && (
+                    <span className={styles.verified}>
+                      <img src={VerifiedPhoneIcon} alt="" />
+                      Verified Phone
+                    </span>
+                  )}
+                  {item?.has_additional_details == 1 && (
+                    <span className={styles.additional}>
+                      <img src={AdditionalDetailsIcon} alt="" />
+                      Additional details
+                    </span>
+                  )}
+                  {item?.is_frequent_user == 1 && (
+                    <span className={styles.frequent}>
+                      <img src={FrequentUserIcon} alt="" />
+                      Frequent user
+                    </span>
+                  )}
+                  {item?.is_urgent == 1 && (
+                    <span className={styles.frequent}>
+                      {" "}
+                      <img src={FrequentUserIcon} alt="" />
+                      Urgent
+                    </span>
+                  )}
+                  {item?.is_high_hiring == 1 && (
+                    <span className={styles.frequentHir}>
+                      {" "}
+                      <img src={HireUserIcon} alt="" />
+                      High hiring
+                    </span>
+                  )}
+                </div>
+                <div className={styles.jobInfo}>
+                  {item?.questions && (
+                    <p>
+                      {JSON.parse(item?.questions)
+                        .map((qa) => qa?.ans)
+                        .join("/")}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className={styles.jobInfo}>
-                {item?.questions && (
-                  <p>
-                    {JSON.parse(item?.questions)
-                      .map((qa) => qa?.ans)
-                      .join("/")}
-                  </p>
+
+              <div className={styles.leadActions}>
+                {selectedTab === "pending" ? (
+                  <>
+                    <button className={styles.purchaseButton}>
+                      <img src={pendingImg} alt="pendingImg" />{" "}
+                      {item?.status === "pending" ? "Pending" : "Pending"}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className={styles.purchaseButton}>
+                      <img src={HiredClickImg} alt="HiredImg" />{" "}
+                      {item?.status === "hired" ? "Hired" : "Hired"}
+                    </button>
+                  </>
                 )}
+
+                <div
+                  className={styles.responseStatus}
+                  onClick={() => handleOpen(item)}
+                >
+                  Responded {moment().diff(moment(item?.created_at), "days")}d
+                  ago
+                  <img
+                    src={pendingArrowIcon}
+                    alt="Response"
+                    className={`${styles.arrowIcon} ${
+                      selectedLead === item.id ? "" : styles.rotated
+                    }`}
+                  />
+                </div>
               </div>
             </div>
 
-            <div className={styles.leadActions}>
-              {selectedTab === "pending" ? (
-                <>
-                  <button className={styles.purchaseButton}>
-                    <img src={pendingImg} alt="pendingImg" />{" "}
-                    {item?.status === "pending" ? "Pending" : "Pending"}
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button className={styles.purchaseButton}>
-                    <img src={HiredClickImg} alt="HiredImg" />{" "}
-                    {item?.status === "hired" ? "Hired" : "Hired"} 
-                  </button>
-                </>
-              )}
-
-              <div
-                className={styles.responseStatus}
-                onClick={() => handleOpen(item)}
-              >
-                Responded {moment().diff(moment(item?.created_at), "days")}d
-                ago
-                <img src={pendingArrowIcon} alt="Response"  className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated}`} />
-              </div>
-            </div>
+            {selectedLead === item?.id && (
+              <MyResponseAccordion
+                lead={selectedLead}
+                onBack={() => setSelectedLead(null)}
+                getPendingLeadList={data}
+              />
+            )}
           </div>
-
-          {selectedLead === item?.id && (
-            <MyResponseAccordion
-              lead={selectedLead}
-              onBack={() => setSelectedLead(null)}
-              getPendingLeadList={data}
-            />
-          )}
+        ))
+      ) : (
+        <div className={styles.NoDataText}>
+          No {selectedTab === "pending" ? "Pending" : "Hired"} Data Available
         </div>
-      )) : <div className={styles.NoDataText}>No {selectedTab === "pending" ? "Pending" : "Hired"} Data Available</div>}
+      )}
     </div>
   );
 };
