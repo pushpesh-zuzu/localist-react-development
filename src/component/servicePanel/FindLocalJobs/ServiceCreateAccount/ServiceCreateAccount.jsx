@@ -63,13 +63,22 @@ const ServiceCreateAccount = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, type, checked } = e.target;
+    const { name,value, type, checked } = e.target;
 
     dispatch(setSelectedServiceFormData({
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
     }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
+
+// const handleInputChange = (e) => {
+//   const { name, value, type, checked } = e.target;
+//   setFormData((prev) => ({
+//     ...prev,
+//     [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
+//   }));
+// };
+
   const nextStep = () => {
     window.scrollTo(0, 0);
     if (validateStep()) {
