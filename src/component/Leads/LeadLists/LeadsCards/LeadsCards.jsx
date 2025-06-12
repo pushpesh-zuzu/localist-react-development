@@ -7,49 +7,61 @@ import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDet
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
 import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddManualBidData, getLeadRequestList, saveForLaterApi, totalCreditData } from "../../../../store/LeadSetting/leadSettingSlice";
+import {
+  getAddManualBidData,
+  getLeadRequestList,
+  saveForLaterApi,
+  totalCreditData,
+} from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
 import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
-import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg"
+import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg";
 import { useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import ContactConfirmModal from "../ContactConfirmModal";
 import ContactSuccessModal from "../ContactSuccessModal";
-import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg"
+import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg";
 // import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 
 const LeadsCards = ({ enoughCredit }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const [isModalOpen, setModalOpen] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(null)
+  const navigate = useNavigate();
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [visibleCount, setVisibleCount] = useState(5);
   const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
-  const [isopen, setIsOpen] = useState(false)
-  const [planpurcahse, setPlanPurchase] = useState("")
-  const [leadViewDetails, setLeadViewDetails] = useState(false)
+  const [isopen, setIsOpen] = useState(false);
+  const [planpurcahse, setPlanPurchase] = useState("");
+  const [leadViewDetails, setLeadViewDetails] = useState(false);
   // const [leadRequestDatas,setLeadRequestData] = useState()
 
-  const { leadRequestList, leadRequestLoader, manualBidLoader, saveLaterLoader, filters, totalCredit, purchasedData } = useSelector(
-    (state) => state.leadSetting
-  );
-  console.log(leadRequestList,"leadRequestList")
+  const {
+    leadRequestList,
+    leadRequestLoader,
+    manualBidLoader,
+    saveLaterLoader,
+    filters,
+    totalCredit,
+    purchasedData,
+  } = useSelector((state) => state.leadSetting);
+  console.log(leadRequestList, "leadRequestList");
   const { registerData } = useSelector((state) => state.findJobs);
-  const { userToken } = useSelector((state) => state.auth)
-  const data = leadRequestList?.length
+  const { userToken } = useSelector((state) => state.auth);
+  const data = leadRequestList?.length;
 
   useEffect(() => {
     const leadRequestData = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens
-    }
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+    };
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
   };
-
 
   // const handleContinue = () => {
   //   if (!selectedItem) return;
@@ -78,7 +90,7 @@ const LeadsCards = ({ enoughCredit }) => {
   //     dispatch(getLeadRequestList(data))
   //   });
   // }
-  console.log(selectedItem, "purchasedData")
+  console.log(selectedItem, "purchasedData");
   //   const handleContinue = () => {
   //   if (!selectedItem) return;
   //   if(totalCredit?.plan_purchased === 0){
@@ -115,10 +127,15 @@ const LeadsCards = ({ enoughCredit }) => {
   // };
 
   const addManualBidData = (item) => {
-    console.log(item, "sel")
+    console.log(item, "sel");
     const formData = new FormData();
     formData.append("buyer_id", item?.customer_id);
-    formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+    formData.append(
+      "user_id",
+      userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens
+    );
     formData.append("bid", item?.credit_score);
     formData.append("lead_id", item?.id);
     formData.append("bidtype", "purchase_leads");
@@ -128,23 +145,24 @@ const LeadsCards = ({ enoughCredit }) => {
     dispatch(getAddManualBidData(formData)).then((result) => {
       if (result) {
         showToast("success", result?.message);
-        setModalOpen(true)
+        setModalOpen(true);
       }
 
       const data = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
       };
 
       dispatch(totalCreditData(data));
       dispatch(getLeadRequestList(data));
     });
-  }
+  };
   const handleContinue = (item) => {
     if (!item) return;
-    console.log(item?.credit_score, totalCredit?.total_credit, "item")
-    setSelectedItem(item)
-    setPlanPurchase(totalCredit?.plan_purchased)
-
+    console.log(item?.credit_score, totalCredit?.total_credit, "item");
+    setSelectedItem(item);
+    setPlanPurchase(totalCredit?.plan_purchased);
 
     // Condition 1: Plan not purchased
     if (totalCredit?.plan_purchased === 0) {
@@ -153,13 +171,12 @@ const LeadsCards = ({ enoughCredit }) => {
     }
     // Condition 2: Not enough credits
     if (Number(totalCredit?.total_credit) < Number(item?.credit_score)) {
-      setIsOpen(true)
+      setIsOpen(true);
       return;
     }
     if (Number(totalCredit?.total_credit) > Number(item?.credit_score)) {
-      addManualBidData(item)
+      addManualBidData(item);
       return;
-
     }
 
     // Proceed with API call if conditions are okay
@@ -188,14 +205,21 @@ const LeadsCards = ({ enoughCredit }) => {
   };
   useEffect(() => {
     const data = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
     };
     dispatch(totalCreditData(data));
-  }, [])
+  }, []);
   const handleContinues = () => {
     const formData = new FormData();
     formData.append("buyer_id", selectedItem?.customer_id);
-    formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
+    formData.append(
+      "user_id",
+      userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens
+    );
     formData.append("bid", selectedItem?.credit_score);
     formData.append("lead_id", selectedItem?.id);
     formData.append("bidtype", "purchase_leads");
@@ -210,33 +234,36 @@ const LeadsCards = ({ enoughCredit }) => {
       }
 
       const data = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
       };
 
       dispatch(totalCreditData(data));
       dispatch(getLeadRequestList(data));
     });
-  }
-
+  };
 
   const handleViewProfile = (item) => {
-    navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`)
-  }
+    navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`);
+  };
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);
 
     const saveLaterData = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
       lead_id: item?.id,
-      buyer_id: item?.customer_id
-    }
+      buyer_id: item?.customer_id,
+    };
     dispatch(saveForLaterApi(saveLaterData)).then((result) => {
       if (result.success) {
-        showToast("success", result?.message)
+        showToast("success", result?.message);
         // const leadRequestData = {
         //   user_id: userToken?.remember_tokens
         // }
-        // dispatch(getLeadRequestList(leadRequestData)) 
+        // dispatch(getLeadRequestList(leadRequestData))
         const formData = new FormData();
 
         formData.append("user_id", userToken?.remember_tokens || "");
@@ -263,25 +290,34 @@ const LeadsCards = ({ enoughCredit }) => {
           // if (result) {
           //   showToast("success", result?.message);
           // }
-        })
-
+        });
       }
       setSaveLaterLoaderId(null);
-    })
-  }
+    });
+  };
   const handleOpenClose = (e) => {
-    setIsOpen(false)
+    setIsOpen(false);
     if (e) {
       setTimeout(() => {
-        setModalOpen(true)
-
-      }, 2000)
+        setModalOpen(true);
+      }, 2000);
     }
-  }
+  };
+
+  const [viewDetailsOpen, setViewDetaisOpen] = useState(null);
+
   const handleViewDetais = (item) => {
-    // setLeadRequestData(item)
-    setLeadViewDetails(!leadViewDetails)
-  }
+    // setClickedDetails(item);
+    if (viewDetailsOpen === item?.id) {
+      setViewDetaisOpen(null);
+    } else {
+      setViewDetaisOpen(item?.id);
+    }
+  };
+  // const handleViewDetais = (item) => {
+  //   // setLeadRequestData(item)
+  //   setLeadViewDetails(!leadViewDetails)
+  // }
   return (
     <>
       {leadRequestLoader ? (
@@ -295,162 +331,211 @@ const LeadsCards = ({ enoughCredit }) => {
         />
       ) : (
         <>
-          {leadRequestList?.length === 0 ? <div
-            style={{
-              textAlign: "center",
-              marginTop: "40px",
-              fontSize: "24px",
-              fontWeight: "800",
-              color: "#000000",
-            }}
-          >
-            No Leads Available.
-          </div> : <>
-          <div>
-            {leadRequestList?.slice(0, visibleCount)?.map((item) => {
-              console.log(item?.view_count, 'itemss')
-              return (
-                <>
-                  <div className={styles.card} >
-                    {/* Left Section - User Info */}
-                    <div className={styles.infoContainer}>
-                      <div className={styles.userInfo}>
-                        <div className={styles.userDetails}>
-                          <div className={styles.avatar}>
-                            {" "}
-                            {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+          {leadRequestList?.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                marginTop: "40px",
+                fontSize: "24px",
+                fontWeight: "800",
+                color: "#000000",
+              }}
+            >
+              No Leads Available.
+            </div>
+          ) : (
+            <>
+              <div>
+                {leadRequestList?.slice(0, visibleCount)?.map((item) => {
+                  console.log(item?.view_count, "itemss");
+                  return (
+                    <>
+                      <div className={styles.card}>
+                        {/* Left Section - User Info */}
+                        <div className={styles.infoContainer}>
+                          <div className={styles.userInfo}>
+                            <div className={styles.userDetails}>
+                              <div className={styles.avatar}>
+                                {" "}
+                                {item?.customer?.name
+                                  ?.charAt(0)
+                                  .toUpperCase() || "U"}
+                              </div>
+                              <div
+                                className={styles.details}
+                                onClick={() => handleViewProfile(item)}
+                              >
+                                <h3>{item?.customer?.name}</h3>
+                                <p>{item?.postcode}</p>
+                              </div>
+                            </div>
+                            <span className={styles.category}>
+                              {item?.category?.name}
+                            </span>
                           </div>
-                          <div className={styles.details} onClick={() => handleViewProfile(item)}>
-                            <h3>{item?.customer?.name}</h3>
-                            <p>{item?.postcode}</p>
+                          <div className={styles.contactContainer}>
+                            <div className={styles.contactItem}>
+                              <img src={BluePhoneIcon} alt="" />
+                              <span>
+                                {item?.phone
+                                  ? `${item?.phone.substring(0, 2)}${"*".repeat(
+                                      item?.phone.length - 2
+                                    )}`
+                                  : "N/A"}
+                              </span>
+                            </div>
+                            <div className={styles.contactItem}>
+                              <img src={BlueSmsIcon} alt="" />
+                              <span>
+                                {item?.customer?.email
+                                  ? `${item?.customer?.email
+                                      .split("@")[0]
+                                      .substring(0, 2)}${"*".repeat(
+                                      Math.max(
+                                        0,
+                                        item?.customer?.email.split("@")[0]
+                                          .length - 2
+                                      )
+                                    )}@${item?.customer?.email.split("@")[1]}`
+                                  : "N/A"}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                        <span className={styles.category}>
-                          {item?.category?.name}
-                        </span>
-                      </div>
-                      <div className={styles.contactContainer}>
-                        <div className={styles.contactItem}>
-                          <img src={BluePhoneIcon} alt="" />
-                          <span>{item?.phone ? `${item?.phone.substring(0, 2)}${'*'.repeat(item?.phone.length - 2)}` : 'N/A'}</span>
-                        </div>
-                        <div className={styles.contactItem}>
-                          <img src={BlueSmsIcon} alt="" />
-                          <span>
-                            {item?.customer?.email
-                              ? `${item?.customer?.email.split('@')[0].substring(0, 2)}${'*'.repeat(Math.max(0, item?.customer?.email.split('@')[0].length - 2))}@${item?.customer?.email.split('@')[1]}`
-                              : 'N/A'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
 
-                    {/* Middle Section - Job Details */}
-                    <div className={styles.jobDetails}>
-                      <div className={styles.saveBtnBox}>
-                        <button className={styles.saveBtn} onClick={() => handleSaveLater(item)}>
-                          {saveLaterLoaderId === item.id ? (
-                            <Spin
-                              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                            />
-                          ) : (
-                            <>
-                              <img src={saveImg} alt="image" />
-                              Save For Later
-                            </>
-                          )}
-                        </button>
-                      </div>
-                      <div className={styles.badges}>
-                        {item?.is_phone_verified == 1 && (
-                          <span className={styles.verified}>
-                            <img src={VerifiedPhoneIcon} alt="" />
-                            Verified Phone
-                          </span>
-                        )}
-                        {item?.has_additional_details == 1 && (
-                          <span className={styles.additional}>
-                            {" "}
-                            <img src={AdditionalDetailsIcon} alt="" />
-                            Additional details
-                          </span>
-                        )}
-                        {item?.is_frequent_user == 1 && (
-                          <span className={styles.frequent}>
-                            {" "}
-                            <img src={FrequentUserIcon} alt="" />
-                            Frequent user
-                          </span>
-                        )}
-                        {item?.is_urgent == 1 && (
-                          <span className={styles.frequent}>
-                            {" "}
-                            <img src={FrequentUserIcon} alt="" />
-                            Urgent
-                          </span>
-                        )}
-                        {item?.is_high_hiring == 1 && (
-                          <span className={styles.frequent}>
-                            {" "}
-                            <img src={FrequentUserIcon} alt="" />
-                            High hiring
-                          </span>
-                        )}
-                      </div>
-                      <div className={styles.jobInfo}>
-                        {item?.questions && (
-                          <p>
-                            {JSON.parse(item?.questions)
-                              .map(qa => qa?.ans)
-                              .join("/")}
-                          </p>
-                        )}
-                      </div>
-                      {/* <p>
+                        {/* Middle Section - Job Details */}
+                        <div className={styles.jobDetails}>
+                          <div className={styles.saveBtnBox}>
+                            <button
+                              className={styles.saveBtn}
+                              onClick={() => handleSaveLater(item)}
+                            >
+                              {saveLaterLoaderId === item.id ? (
+                                <Spin
+                                  indicator={
+                                    <LoadingOutlined
+                                      spin
+                                      style={{ color: "white" }}
+                                    />
+                                  }
+                                />
+                              ) : (
+                                <>
+                                  <img src={saveImg} alt="image" />
+                                  Save For Later
+                                </>
+                              )}
+                            </button>
+                          </div>
+                          <div className={styles.badges}>
+                            {item?.is_phone_verified == 1 && (
+                              <span className={styles.verified}>
+                                <img src={VerifiedPhoneIcon} alt="" />
+                                Verified Phone
+                              </span>
+                            )}
+                            {item?.has_additional_details == 1 && (
+                              <span className={styles.additional}>
+                                {" "}
+                                <img src={AdditionalDetailsIcon} alt="" />
+                                Additional details
+                              </span>
+                            )}
+                            {item?.is_frequent_user == 1 && (
+                              <span className={styles.frequent}>
+                                {" "}
+                                <img src={FrequentUserIcon} alt="" />
+                                Frequent user
+                              </span>
+                            )}
+                            {item?.is_urgent == 1 && (
+                              <span className={styles.frequent}>
+                                {" "}
+                                <img src={FrequentUserIcon} alt="" />
+                                Urgent
+                              </span>
+                            )}
+                            {item?.is_high_hiring == 1 && (
+                              <span className={styles.frequent}>
+                                {" "}
+                                <img src={FrequentUserIcon} alt="" />
+                                High hiring
+                              </span>
+                            )}
+                          </div>
+                          <div className={styles.jobInfo}>
+                            {item?.questions && (
+                              <p>
+                                {JSON.parse(item?.questions)
+                                  .map((qa) => qa?.ans)
+                                  .join("/")}
+                              </p>
+                            )}
+                          </div>
+                          {/* <p>
                         <strong>Starting:</strong> In the next month
                       </p> */}
-                      <div>
-                        <button className={styles.viewDetailsBtn} onClick={() => handleViewDetais(item)}>View Details <img src={viewDetailsArrow} alt="..." /></button>
-                      </div>
-                    </div>
+                          <div>
+                            <button
+                              className={styles.viewDetailsBtn}
+                              onClick={() => handleViewDetais(item)}
+                            >
+                              View Details{" "}
+                              <img
+                                src={viewDetailsArrow}
+                                alt="..."
+                                className={`${styles.arrowIcon} ${
+                                  viewDetailsOpen == item?.id
+                                    ? ""
+                                    : styles.rotated
+                                }`}
+                              />
+                            </button>
+                          </div>
+                        </div>
 
-                    {/* Right Section - Lead Purchase */}
-                    <div className={styles.leadActions}>
-                      <button className={styles.purchaseButton}
-                        // onClick={() => {
-                        //   // setSelectedItem(item);
-                        //   // setModalOpen(true);
+                        {/* Right Section - Lead Purchase */}
+                        <div className={styles.leadActions}>
+                          <button
+                            className={styles.purchaseButton}
+                            // onClick={() => {
+                            //   // setSelectedItem(item);
+                            //   // setModalOpen(true);
 
-                        // }}
-                        onClick={() => handleContinue(item)}
-                      >
-
-                        Contact {item?.customer?.name}
-                      </button>
-                      <span className={styles.credits}>
-                        {item?.credit_score} Credits
-                      </span>
-                      {/* <p className={styles.responseStatus}>
+                            // }}
+                            onClick={() => handleContinue(item)}
+                          >
+                            Contact {item?.customer?.name}
+                          </button>
+                          <span className={styles.credits}>
+                            {item?.credit_score} Credits
+                          </span>
+                          {/* <p className={styles.responseStatus}>
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded
                     </p> */}
-                      <div className={styles?.mainText}> <p>ACT FAST</p>  <span>{item?.view_count} Professionals</span> <br />  have viewed this lead</div>
-
-                    </div>
-                  </div>
-                    {leadViewDetails && <LeadViewDetails leadRequestDatas={leadRequestList} />}
-                </>
-              );
-            })} </div> </>}{" "}
-
-            
-          
+                          <div className={styles?.mainText}>
+                            {" "}
+                            <p>ACT FAST</p>{" "}
+                            <span>{item?.view_count} Professionals</span> <br />{" "}
+                            have viewed this lead
+                          </div>
+                        </div>
+                      </div>
+                      {viewDetailsOpen == item?.id && (
+                        <LeadViewDetails leadRequestDatas={item} />
+                      )}
+                    </>
+                  );
+                })}{" "}
+              </div>{" "}
+            </>
+          )}{" "}
           {leadRequestList?.length > visibleCount && (
             <div className={styles.viewMoreBtnWrapper}>
               <button onMouseEnter={handleMouseEnter}>View More</button>
             </div>
           )}
-
         </>
       )}
       {/* <CustomModal
@@ -466,14 +551,15 @@ const LeadsCards = ({ enoughCredit }) => {
         isOpen={isModalOpen}
         details={selectedItem}
       />
-      {isopen && <ContactConfirmModal
-        // onClose={() => setIsOpen(false)} 
-        onClose={(e) => handleOpenClose(e)}
-        enoughCredit={planpurcahse}
-        confirmModal={isModalOpen}
-        details={selectedItem}
-      />}
-
+      {isopen && (
+        <ContactConfirmModal
+          // onClose={() => setIsOpen(false)}
+          onClose={(e) => handleOpenClose(e)}
+          enoughCredit={planpurcahse}
+          confirmModal={isModalOpen}
+          details={selectedItem}
+        />
+      )}
     </>
   );
 };

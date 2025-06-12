@@ -2,7 +2,6 @@
 // import styles from "./SaveViewDetails.module.css"
 // import LeadMap from "../../myResponses/LeadMap/LeadMap"
 
-
 // const SavedViewDetails = ({saveForLaterDataList}) => {
 //     console.log(saveForLaterDataList,"saveForLaterDataList")
 //     return(
@@ -31,8 +30,8 @@
 
 //                 </div>
 //                 <div>
-//                     <LeadMap  
-//                     // getPendingLeadList={getPendingLeadList} 
+//                     <LeadMap
+//                     // getPendingLeadList={getPendingLeadList}
 
 //                     />
 //                 </div>
@@ -56,33 +55,37 @@ import DotIcon from "../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../assets/Images/Leads/UpdateIcon.svg";
 
 const SavedViewDetails = ({ saveForLaterDataList }) => {
-  const savedLeads = saveForLaterDataList?.[0]?.savedLeads || [];
-
+  const savedLeads = saveForLaterDataList || {};
+  console.log(savedLeads, "savedLeads");
+  let parsedQuestions = [];
+  if (savedLeads?.questions) {
+    try {
+      parsedQuestions = JSON.parse(savedLeads?.questions);
+    } catch (error) {
+      console.error("Error parsing questions:", error);
+      parsedQuestions = [];
+    }
+  }
   return (
     <div className={styles.maincontainer}>
       <div className={styles.viewDetailsBox}>
         {/* Left: Q&A Section */}
         <div className={styles.leftColumn}>
-          {savedLeads.length > 0 ? (
-            savedLeads.map((item, index) => {
-              const parsedQuestions = item?.questions ? JSON.parse(item.questions) : [];
-
-              return (
-                <div key={index} className={styles.questionBlock}>
-                  {parsedQuestions.map((qa, idx) => (
-                    <div key={idx} className={styles.questionItem}>
-                      <p className={styles.question}>
-                        {/* <span className={styles.dotStyle}>•</span> */}
-                        <img src={DotIcon} alt="" />
-                        {qa.ques}</p>
-                      <div className={styles.sperator} />
-                      <p className={styles.answer}>{qa.ans}</p>
-                      {/* <hr /> */}
-                    </div>
-                  ))}
+          {savedLeads?.questions ? (
+            <div className={styles.questionBlock}>
+              {parsedQuestions.map((qa, idx) => (
+                <div key={idx} className={styles.questionItem}>
+                  <p className={styles.question}>
+                    {/* <span className={styles.dotStyle}>•</span> */}
+                    <img src={DotIcon} alt="" />
+                    {qa.ques}
+                  </p>
+                  <div className={styles.sperator} />
+                  <p className={styles.answer}>{qa.ans}</p>
+                  {/* <hr /> */}
                 </div>
-              );
-            })
+              ))}
+            </div>
           ) : (
             <p>No saved leads available.</p>
           )}
@@ -100,54 +103,60 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               <span className={`${styles.tag} ${styles.green}`}>✨ High hiring intent</span>
             </div> */}
             <div className={styles.badges}>
-              {/* {item?.is_phone_verified == 1 && ( */}
-              <span className={styles.verified}>
-                <img src={VerifiedPhoneIcon} alt="" />
-                Verified Phone
-              </span>
-              {/* )} */}
-              {/* {item?.has_additional_details == 1 && ( */}
-              <span className={styles.additional}>
-                {" "}
-                <img src={AdditionalDetailsIcon} alt="" />
-                Additional details
-              </span>
-              {/* )} */}
-              {/* {item?.is_frequent_user == 1 && ( */}
-              <span className={styles.frequent}>
-                {" "}
-                <img src={FrequentUserIcon} alt="" />
-                Frequent user
-              </span>
-              {/* )} */}
-              {/* {item?.is_urgent == 1 && ( */}
-              <span className={styles.urgent}>
-                {" "}
-                <img src={UrgentIcon} alt="" />
-                Urgent
-              </span>
-              {/* )} */}
-              {/* {item?.is_high_hiring == 1 && ( */}
-              <span className={styles.intent}>
-                {" "}
-                <img src={IntentIcon} alt="" />
-                High hiring intent
-              </span>
-              {/* // )} */}
+              {savedLeads?.is_phone_verified == 1 && (
+                <span className={styles.verified}>
+                  <img src={VerifiedPhoneIcon} alt="" />
+                  Verified Phone
+                </span>
+              )}
+              {savedLeads?.has_additional_details == 1 && (
+                <span className={styles.additional}>
+                  {" "}
+                  <img src={AdditionalDetailsIcon} alt="" />
+                  Additional details
+                </span>
+              )}
+              {savedLeads?.is_frequent_user == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  Frequent user
+                </span>
+              )}
+              {savedLeads?.is_urgent == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  Urgent
+                </span>
+              )}
+              {savedLeads?.is_high_hiring == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  High hiring
+                </span>
+              )}
             </div>
           </div>
           <div className={styles.mapContainer}>
-            <LeadMap />
+            <LeadMap getPendingLeadList={savedLeads?.postcode} />
           </div>
           <div className={styles.leadFooter}>
-            <p className={styles.leadFooterTitle}>Not seeing the right leads?</p>
+            <p className={styles.leadFooterTitle}>
+              Not seeing the right leads?
+            </p>
             <p className={styles.leadFooterText}>
-              Stop seeing leads with specific answers by customising your settings.
+              Stop seeing leads with specific answers by customising your
+              settings.
             </p>
             {/* <span className={styles.updateIcon}>⚙️</span> */}
             <div className={styles.updateContainer}>
               <img src={UpdateIcon} alt="" />
-              <a href="#" className={styles.updateLink}> Update lead settings</a>
+              <a href="#" className={styles.updateLink}>
+                {" "}
+                Update lead settings
+              </a>
             </div>
           </div>
         </div>
