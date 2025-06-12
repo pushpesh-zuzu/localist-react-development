@@ -13,6 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ContactSuccessModal = ({ isOpen, onClose,details }) => {
     const dispatch =useDispatch()
+    //  useEffect(() => {
+    //           document.body.style.overflow = 'hidden';
+    //           return () => {
+    //             document.body.style.overflow = 'auto';
+    //           };
+              
+    //         }, []);
      const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
     console.log(details,"details")
@@ -45,6 +52,7 @@ const ContactSuccessModal = ({ isOpen, onClose,details }) => {
               showToast("success", result?.message)
             onClose()
         }}) }
+        
     return(
         <>
           <div className={styles.overlay}>

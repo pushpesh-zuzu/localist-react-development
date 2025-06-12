@@ -147,7 +147,7 @@ addManualBidData()
     : "Please purchase a Credit Pack"}
 </h2>
         <p className={styles.subText}>
-          To get some credits, you need to buy a starter pack of credits (Enough for this lead + roughly another 9 leads)
+         To get some credits, you need to buy a starter pack of credits (Enough for this lead)
         </p>
         </div>
         <div>
@@ -275,7 +275,8 @@ addManualBidData()
         
 
         <p className={styles.footerNote}>
-          {`You will use ${details?.credit_score} of your ${totalRemaingCredit} purchased credits to contact ${details?.customer?.name}`}
+          { enoughCredit != 0 ? `You Will use ${ Number(details?.credit_score) - Number(totalCredit?.total_credit)} of your ${totalRemaingCredit} purchased credits to contact ${details?.customer?.name}` :
+          `You will use ${details?.credit_score} of your ${totalRemaingCredit} purchased credits to contact ${details?.customer?.name}`}
         </p>
       </div>
     </div>
