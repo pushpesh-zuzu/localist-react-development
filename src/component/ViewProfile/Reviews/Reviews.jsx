@@ -5,6 +5,8 @@ import { getReviewListApi } from "../../../store/MyProfile/myProfileSlice";
 import moment from "moment";
 import SubmitReviewModal from "../SubmitReviewModal";
 import { useParams } from "react-router-dom";
+import starImg from "../../../assets/Icons/MyResponse/StarImg.svg"
+// import blueStar from "../../../assets/Icons/MyResponse/blueStar"
 
 const ReviewSection = () => {
   const [isopen, setIsOpen] = React.useState(false);
@@ -52,16 +54,23 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.score}>5/5</div>
-        <div className={styles.stars}>{"⭐".repeat(5)}</div>
+        {/* <div className={styles.stars}>{<img src={starImg} alt="image" /> .repeat(5)}</div> */}
+        <div className={styles.stars}>
+  {Array.from({ length: 5 }).map((_, index) => (
+    <img key={index} src={starImg} alt="star" />
+  ))}
+</div>
         <div className={styles.totalReviews}>{totalReviews} customer reviews</div>
       </div>
-
+<div className={styles.middleBox}></div>
       <div className={styles.right}>
         {[5, 4, 3, 2, 1].map((star) => (
           <div key={star} className={styles.row}>
             <label className={styles.ratingLabel}>
               <input type="radio" name="rating" disabled />
-              <span className={styles.starText}>{star} ⭐</span>
+              <span className={styles.starText}>{star}
+                 {/* <img src={blueStar} alt="image" /> */}
+                 </span>
             </label>
             <div className={styles.barWrapper}>
               <div
