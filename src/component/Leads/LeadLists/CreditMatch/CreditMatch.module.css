@@ -58,6 +58,7 @@
 }
 .creditsInfo {
   max-width: 241px;
+  margin-left: 25px;
 }
 
 .usageInfo {
@@ -208,6 +209,7 @@
   .creditsInfo,
   .priceInfo {
     text-align: center;
+    margin-left: 0px;
   }
 }
 

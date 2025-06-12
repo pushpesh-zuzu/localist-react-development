@@ -113,7 +113,7 @@ const CreditMatch = () => {
               <div className={styles.infoSection}>
                 <div className={styles.creditsInfo}>
                   <div className={styles.locationTag}>
-                    <img src={locallistImgs} alt="credit icon" />
+                    {/* <img src={locallistImgs} alt="credit icon" /> */}
                     <span className={styles.creditsAmount}>
                       {item?.no_of_leads ? item?.no_of_leads : 0} credits
                     </span>
@@ -132,8 +132,8 @@ const CreditMatch = () => {
                     ${item?.price ? item?.price : 0} (Excl. tax)
                   </div>
                   {/* <div className={styles.unitPrice}>
-                  ${item?.per_credit ? item?.per_credit : 0}/credit
-                </div> */}
+                    ${item?.per_credit ? item?.per_credit : 0}/credit
+                  </div> */}
                 </div>
               </div>
 

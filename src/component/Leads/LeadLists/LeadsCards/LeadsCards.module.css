@@ -241,6 +241,7 @@
   display: flex;
   gap: 8px;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 /* Tablet */
