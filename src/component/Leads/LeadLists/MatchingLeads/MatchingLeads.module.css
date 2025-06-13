@@ -6,14 +6,14 @@
   box-shadow: 0px 0px 6px 0px #0000001a;
   color: white;
   margin-top: 10.5px;
-  padding: 20px 34px;
+  padding: 20px 45px;
 }
 
 .textSection {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 35px;
 }
 
 .heading {
@@ -85,7 +85,7 @@
 /* components/DualDropdowns/DualDropdowns.module.css */
 .dualDropdownsContainer {
   display: flex;
-  gap: 18px;
+  gap: 25px;
   justify-content: center;
   align-items: center;
 }
@@ -110,11 +110,13 @@
   font-weight: 400;
   font-size: 14px;
   text-wrap: nowrap;
+  margin-top: 1px;
 }
 
 .dropdownIcon {
   font-size: 0.75rem;
   color: #000000;
+  margin-top: 1px;
 }
 
 .dropdownMenu {
@@ -230,7 +232,6 @@
   } */
 
   .textSection {
-    
     align-items: center;
     gap: 12px;
   }
@@ -275,14 +276,14 @@
     gap: 8px;
   }
 }
-@media screen and (max-width:480px) {
-   .filterButton {
+@media screen and (max-width: 480px) {
+  .filterButton {
     width: 100%;
     justify-content: center;
     padding: 0px 0px;
     font-size: 12px;
   }
-  
+
   .filterButton {
     font-size: 14px;
     padding-right: 10px;
@@ -290,7 +291,6 @@
     margin-right: 0;
   }
   .actionButtons {
-   
     gap: 10px;
     align-items: stretch;
   }

@@ -70,7 +70,7 @@
 .totalPrice {
   font-weight: 600;
   font-size: 16px;
-  vertical-align: middle;
+  margin-top: -40px;
 }
 
 .unitPrice {
@@ -213,6 +213,9 @@
   .priceInfo {
     text-align: center;
     margin-left: 0px;
+  }
+  .totalPrice {
+    margin-top: 0px;
   }
 }
 
