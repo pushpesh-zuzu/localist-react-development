@@ -387,7 +387,7 @@ align-items: center
 }
 .moreProfessionalBtn {
   background-color: var(--primary-color);
-  padding: 1px 29px;
+  padding: 3px 29px;
   color: #ffffff;
   border-radius: 4px;
   font-size: 20px;
@@ -505,13 +505,14 @@ align-items: center
   }
 
   .recommendBar {
-    font-size: 16px;
+    font-size: 18px;
     padding: 15px;
     text-align: left;
   }
 
   .badges {
     flex-wrap: wrap;
+    margin-bottom: 16px;
   }
 
   .badges span {
@@ -557,4 +558,28 @@ align-items: center
   font-size: 24px;
   margin-top: 0px;
 }
+.requestBtn {
+  background-color: #F74B00;
+  padding: 6px 15px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+.header p img {
+  height: 12px;
+  width: 12px;
+  margin-right: 9px;
+  margin-bottom: -1px;
+  margin-left: 2px;
+}
+  .sidebar {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
 }

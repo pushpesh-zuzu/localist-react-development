@@ -51,10 +51,13 @@
   align-self: flex-start;
   margin-left: 20px;
 }
+.requestButton:hover {
+  background-color: #0096c4;
+}
 
 .detailsBox {
   background: #ffffff;
-  padding: 31px;
+  padding: 20px;
   box-shadow: 0px 0px 10px 0px #0000000f;
 }
 
@@ -146,6 +149,10 @@
   border-radius: 3px;
   cursor: pointer;
 }
+.changePasswordButton:hover {
+color: #0096c490;
+border: 1px solid #0096c490;
+}
 
 .modalOverlay {
   position: fixed;
@@ -224,7 +231,7 @@
 
 .saveButtonWrapper {
   margin-top: 37px;
-  margin-left: 32px;
+  margin-left: 20px;
 }
 
 .saveButton {
@@ -279,6 +286,6 @@
 }
 .saveButtonWrapper {
   margin-top: 37px;
-  margin-left: 0px;
+  margin-left: 20px;
 }
 }
