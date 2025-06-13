@@ -135,7 +135,8 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap:12px
+  gap:12px;
+align-items: center
 }
 
 .recommendBar {
@@ -541,4 +542,19 @@
     position: static;
     margin-bottom: 10px;
   }
+  .requestMatchBox{
+    display: none;
+  }
+  .headerWrapper {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .stars {
+  
+  font-size: 24px;
+}
+.ratingCount {
+  font-size: 24px;
+  margin-top: 0px;
+}
 }

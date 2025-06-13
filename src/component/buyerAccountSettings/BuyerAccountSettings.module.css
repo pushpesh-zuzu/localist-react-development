@@ -98,6 +98,10 @@
   vertical-align: middle;
   text-align: center;
 }
+.uploadButton:hover {
+  background-color: #0096c4;
+  color: #FFFFFF;
+}
 
 .formGroup {
   width: 438px;
@@ -266,6 +270,15 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 30px 40px;
+    padding: 30px 20px;
   }
+  .detailsBox {
+  background: #ffffff;
+  padding: 24px;
+  box-shadow: 0px 0px 10px 0px #0000000f;
+}
+.saveButtonWrapper {
+  margin-top: 37px;
+  margin-left: 0px;
+}
 }

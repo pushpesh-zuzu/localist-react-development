@@ -31,6 +31,9 @@ const BuyerAccountSettings = () => {
     phone: "",
     profile_image: "",
   });
+   const {  registerData } = useSelector(
+      (state) => state.findJobs
+    );
 
   useEffect(() => {
     dispatch(updateProfileData());
@@ -211,7 +214,7 @@ const BuyerAccountSettings = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Account settings</h2>
 
-      {userToken?.active_status === 2 && (
+      {userToken?.active_status === 2 && registerData?.active_status === 2 && (
         <div className={styles.infoBox}>
           <p>
             <span>

@@ -27,9 +27,9 @@ const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
             </button> */}
             <button
               className={styles.viewMatchesButton}
-              style={{
-                marginLeft: "auto",
-              }}
+              // style={{
+              //   marginLeft: "auto",
+              // }}
               onClick={handleSubmit}
             >
             <img src={checkboxImg} alt="..." />  View your matches now.

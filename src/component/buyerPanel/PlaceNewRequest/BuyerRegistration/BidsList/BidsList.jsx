@@ -643,6 +643,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
+import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
@@ -997,7 +998,7 @@ console.log(seller,"seller")
                                         } else if (rating >= index + 0.5) {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
-                                          return <span key={index}>☆</span>; // Empty star
+                                          return <span key={index}><img src={grayStar} alt="image"/></span>; // Empty star
                                         }
                                       })}
                                     </span>
