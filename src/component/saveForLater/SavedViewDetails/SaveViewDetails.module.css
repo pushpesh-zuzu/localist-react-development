@@ -13,6 +13,7 @@
   background-color: white;
   /* box-shadow: 0px 0px 6px 0px #0000001a; */
   box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.1); /* only bottom and sides */
+  padding-top: 60px;
 }
 
 .viewDetailsBox {
@@ -20,6 +21,8 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 30px;
+  width: 95%;
+  margin: auto;
 }
 
 /* Left column */
@@ -39,6 +42,7 @@
   background-color: #f9f9fa;
   /* padding-left: 10px; */
   flex-direction: row;
+  width: 87%;
 }
 /* .dotStyle {
   font-size: 25px;
