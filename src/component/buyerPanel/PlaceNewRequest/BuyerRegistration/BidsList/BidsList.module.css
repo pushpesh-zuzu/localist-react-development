@@ -51,7 +51,7 @@
 }
 
 .backBtn:hover {
-  background-color: #d9d9d9df;
+  background-color: #f0eaeadf;
 }
 
 .heading {
@@ -101,7 +101,7 @@
 }
 
 .tab:hover {
-  background-color: #000000cf;
+  background-color: #645050c5;
 }
 
 .filters {
@@ -206,7 +206,7 @@ align-items: center
   width: 260.6px;
   height: 186.8px;
   object-fit: cover;
-  margin: 30px 0 30px 22px;
+  margin: 28px 0 30px 22px;
 }
 
 .details {
@@ -400,7 +400,7 @@ align-items: center
 }
 .moreProfessionalBtn {
   background-color: var(--primary-color);
-  padding: 3px 29px;
+  padding: 7px 29px;
   color: #ffffff;
   border-radius: 4px;
   font-size: 20px;
@@ -579,8 +579,8 @@ align-items: center
   padding: 6px 15px;
   color: #ffffff;
   border-radius: 4px;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   border: none;
   cursor: pointer;
 }

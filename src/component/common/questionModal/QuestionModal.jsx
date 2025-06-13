@@ -203,9 +203,7 @@ const QuestionModal = ({
                     {option.trim()}
                   </label>
                 ))}
-            </div>
-
-            {selectedOption.includes("Other") && (
+                       {selectedOption.includes("Other") && (
               <input
                 type="text"
                 placeholder="Please Enter..."
@@ -215,7 +213,10 @@ const QuestionModal = ({
               />
             )}
 
+            </div>
             {error && <p className={styles.errorMessage}>{error}</p>}
+
+     
 
             <div className={styles.buttonContainer}>
               {currentQuestion > 0 && (
