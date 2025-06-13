@@ -70,7 +70,7 @@
 .totalPrice {
   font-weight: 600;
   font-size: 16px;
-  vertical-align: middle;
+  margin-top: -40px;
 }
 
 .unitPrice {
@@ -147,6 +147,9 @@
 .creditsButton:hover {
   background-color: #0096c4;
 }
+.creditsLeftContainer {
+  transition: all 0.3s ease; /* Smooth transition */
+}
 
 .fixedTop {
   position: fixed;
@@ -210,6 +213,9 @@
   .priceInfo {
     text-align: center;
     margin-left: 0px;
+  }
+  .totalPrice {
+    margin-top: 0px;
   }
 }
 
