@@ -158,6 +158,9 @@ align-items: center
   border: none;
   cursor: pointer;
 }
+.requestBtn:hover {
+  background-color: #ee9772;
+}
 .recommendBar span {
   color: #fff600;
   font-weight: 600;
@@ -179,6 +182,9 @@ align-items: center
   border: none;
   cursor: pointer;
   margin-bottom: 17.5px;
+}
+.requestBtnMatchBox:hover {
+  background-color: #F74B0090;
 }
 
 .card {
@@ -233,11 +239,18 @@ align-items: center
   vertical-align: middle;
 }
 
-.header p img {
+/* .header p img {
   height: 12px;
   width: 12px;
   margin-right: 11px;
   margin-bottom: -1px;
+} */
+ .header p img {
+  height: 12px;
+  width: 12px;
+  margin-right: 9px;
+  margin-bottom: -1px;
+  margin-left: 2px;
 }
 
 .distance {
@@ -396,6 +409,9 @@ align-items: center
   cursor: pointer;
   margin-bottom: 17.5px;
   white-space: nowrap;
+}
+.moreProfessionalBtn:hover {
+  background-color: #0096c4;
 }
 
 @media (max-width: 1200px) {
