@@ -214,7 +214,7 @@ const BuyerAccountSettings = () => {
     <div className={styles.container}>
       <h2 className={styles.heading}>Account settings</h2>
 
-      {userToken?.active_status === 2 && registerData?.active_status === 2 && (
+      {/* {userToken?.active_status === 2 && registerData?.active_status === 2 && ( */}
         <div className={styles.infoBox}>
           <p>
             <span>
@@ -227,7 +227,7 @@ const BuyerAccountSettings = () => {
             Go to My Requests
           </button>
         </div>
-      )}
+      {/* // )} */}
 
       <div className={styles.detailsBox}>
         <h3 className={styles.subHeading}>My details</h3>
