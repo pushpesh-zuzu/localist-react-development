@@ -23,6 +23,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
+  const [expandedRadius, setExpandedRadius] = useState(0)
   console.log(inputRef,'inputref')
   console.log(formData, "form");
   const {
@@ -90,12 +91,15 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
             postalCode = component.long_name; // Extract postal code correctly
           }
         });
-console.log(postalCode,'postalCode')
+        const lat = place.geometry.location.lat();
+        const lng = place.geometry.location.lng();
+console.log(postalCode,lat,lng,'postalCode')
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
 
           // ✅ Update Input Field with Selected Postal Code
-          dispatch(setFormData({ postcode: postalCode }));
+          dispatch(setFormData({ postcode2: postalCode }));
+            dispatch(setFormData({ coordinates2: { lat, lng } }))
           inputRef.current.value = postalCode; // Update input value
         } else {
           showToast("error", "No PIN code found! Please try again.");
@@ -189,9 +193,18 @@ console.log(postalCode,'postalCode')
       loggedUser: 1,
       nation_wide: formData.nation_wide ? 1 : 0,
       is_online: formData.is_online ? 1 : 0,
+        miles2: selectedServices.length > 0 ? formData.miles2 : "",
+  postcode2: selectedServices.length > 0 ? formData.postcode2 : "",
+  expanded_radius: selectedServices.length > 0 ? formData.expanded_radius : "",
     };
     payload.coordinates=JSON.stringify(payload.coordinates)
- 
+    delete payload.password
+    delete payload.suite
+    delete payload.is_zipcode
+    delete payload.state
+    // delete payload.password
+ console.log(payload,formData,"payload")
+
     dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");
@@ -218,6 +231,19 @@ console.log(postalCode,'postalCode')
 
     dispatch(pendingLeadData(serviceId));
   }, [selectedServices]);
+
+const disableWithService = selectedServices?.length > 0;
+
+const handleExpandRadius = () => {
+  setExpandedRadius((prev) => {
+    const newRadius = prev + 10;
+
+    // Dispatch the new radius to Redux store
+    dispatch(setFormData({ expanded_radius: newRadius }));
+
+    return newRadius;
+  });
+};
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -307,6 +333,7 @@ console.log(postalCode,'postalCode')
                 name="miles2"
                 value={formData?.miles2}
                 onChange={handleInputChange}
+                disabled = {!disableWithService}
               >
                 <option value="1">1 mile</option>
                 <option value="2">2 miles</option>
@@ -325,9 +352,11 @@ console.log(postalCode,'postalCode')
                 className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
                   }`}
                 ref={inputRef}
-                name="postcode"
-                value={formData.postcode ||''}
+                name="postcode2"
+                // value={formData.postcode ||''}
+                value={formData.postcode2 || ""}
                 onChange={handleInputChange ? handleInputChange : () => { }}
+              disabled = {!disableWithService}
                 // onChange={(e)=>setNewPost(e.target.value)}
               />
             
@@ -336,8 +365,11 @@ console.log(postalCode,'postalCode')
           </div>
           {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
           <div className={styles.radiusBtn}>
-            <button className={styles.expandBtn}>Expand Radius</button>
+            <button className={styles.expandBtn} disabled={!disableWithService} onClick={handleExpandRadius}>Expand Radius</button>
           </div>
+         {expandedRadius > 0 && (
+  <div className={styles.radiusText}>{expandedRadius} miles added</div>
+)}
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>

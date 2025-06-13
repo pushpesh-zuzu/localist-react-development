@@ -179,6 +179,16 @@ margin-bottom: 20px;
   vertical-align: middle;
   min-width: fit-content;
 }
+.expandBtn:disabled {
+cursor: not-allowed;
+}
+.radiusText {
+  text-align: start;
+  background-color: #e3f6fc;
+  margin-bottom: 20px;
+  padding: 20px;
+  color: #000000;
+}
 
 .leadInfo_wrapper {
   width: -webkit-fill-available;

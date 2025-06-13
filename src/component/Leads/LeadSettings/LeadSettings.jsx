@@ -17,7 +17,7 @@ import {
   leadPreferences,
   removeItemLocationData,
 } from "../../../store/LeadSetting/leadSettingSlice";
-import { Spin } from "antd";
+import { Spin, Tooltip } from "antd";
 import {
   searchService,
   setService,
@@ -32,7 +32,7 @@ import AddLocationModal from "../AddLocation/AddLocationModal";
 import TravelTimeModal from "../AddLocation/TravelTimeModal";
 import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
 import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
-import CheckPrimary from "../../../assets/Icons/greenCheckBox.jpeg"
+import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.svg"
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -449,6 +449,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             : registerData?.remember_tokens,
         };
         dispatch(getLocationLead(data));
+        dispatch(getleadPreferencesList(data))
       }
     });
   };
@@ -490,7 +491,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     </p>
                   </div>
                   <div className={styles.checkprimayBox}>
-                 {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>}
+                 {/* {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>} */}
+                 {service?.primaryService === service?.id && (
+  <Tooltip title="Primary Service">
+    <img src={CheckPrimary} alt="Primary Service" width={19} height={19} />
+  </Tooltip>
+)}
                   <img
                     src={EditIcon}
                     alt="Edit"

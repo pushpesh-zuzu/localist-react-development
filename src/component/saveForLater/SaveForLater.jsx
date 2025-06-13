@@ -207,7 +207,7 @@ const SaveForLater = () => {
                       Contact {item?.customer?.name}
                     </button>
                     <span className={styles.credits}>
-                      {item?.credit_score}Credits
+                      {item?.credit_score} Credits
                     </span>
 
                     {/* <span className={styles.credits}>
