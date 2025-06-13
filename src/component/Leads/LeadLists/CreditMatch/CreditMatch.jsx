@@ -89,7 +89,7 @@ const CreditMatch = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      if (scrollTop > 250) {
+      if (scrollTop > 200) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -131,9 +131,9 @@ const CreditMatch = () => {
                   <div className={styles.totalPrice}>
                     ${item?.price ? item?.price : 0} (Excl. tax)
                   </div>
-                  {/* <div className={styles.unitPrice}>
-                    ${item?.per_credit ? item?.per_credit : 0}/credit
-                  </div> */}
+                  <div className={styles.unitPrice}>
+                    {/* ${item?.per_credit ? item?.per_credit : 0}/credit */}
+                  </div>
                 </div>
               </div>
 

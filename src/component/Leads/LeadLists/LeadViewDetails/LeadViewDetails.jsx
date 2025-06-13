@@ -41,7 +41,7 @@ const LeadViewDetails = ({ leadRequestDatas }) => {
           <div className={styles.highlights}>
             <p className={styles.highlightsTitle}>Highlights:</p>
 
-            <div className={styles.badges}>
+            {/* <div className={styles.badges}>
               {leadRequest?.is_phone_verified == 1 && (
                 <span className={styles.verified}>
                   <img src={VerifiedPhoneIcon} alt="" />
@@ -75,6 +75,43 @@ const LeadViewDetails = ({ leadRequestDatas }) => {
                   {" "}
                   <img src={FrequentUserIcon} alt="" />
                   High hiring intent
+                </span>
+              )}
+            </div> */}
+
+            <div className={styles.badges}>
+              {leadRequest?.is_phone_verified == 1 && (
+                <span className={styles.verified}>
+                  <img src={VerifiedPhoneIcon} alt="" />
+                  Verified Phone
+                </span>
+              )}
+              {leadRequest?.has_additional_details == 1 && (
+                <span className={styles.additional}>
+                  {" "}
+                  <img src={AdditionalDetailsIcon} alt="" />
+                  Additional details
+                </span>
+              )}
+              {leadRequest?.is_frequent_user == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  Frequent user
+                </span>
+              )}
+              {leadRequest?.is_urgent == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  Urgent
+                </span>
+              )}
+              {leadRequest?.is_high_hiring == 1 && (
+                <span className={styles.frequent}>
+                  {" "}
+                  <img src={FrequentUserIcon} alt="" />
+                  High hiring
                 </span>
               )}
             </div>
