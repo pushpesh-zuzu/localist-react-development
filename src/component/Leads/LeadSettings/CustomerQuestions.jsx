@@ -427,7 +427,7 @@ const handleUpdateService = () => {
               ))}
             </div>
             <a href="#" className={styles.addLocation}>
-              Change Your Radius
+              {/* Change Your Radius */} Expand Radius
             </a>
           </div>
 

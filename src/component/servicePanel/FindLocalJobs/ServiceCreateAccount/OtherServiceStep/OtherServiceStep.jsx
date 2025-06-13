@@ -368,7 +368,7 @@ const handleExpandRadius = () => {
             <button className={styles.expandBtn} disabled={!disableWithService} onClick={handleExpandRadius}>Expand Radius</button>
           </div>
          {expandedRadius > 0 && (
-  <div className={styles.radiusText}>Radius: {expandedRadius} miles</div>
+  <div className={styles.radiusText}>{expandedRadius} miles added</div>
 )}
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
