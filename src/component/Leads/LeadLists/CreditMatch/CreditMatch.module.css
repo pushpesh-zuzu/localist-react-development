@@ -242,10 +242,11 @@
 @media (max-width: 480px) {
   .buyCreditsContainer {
     padding: 15px 12px;
+    gap: 0px;
   }
 
   .titleSection h2 {
-    font-size: 20px;
+    font-size: 38px;
   }
 
   .buyButton {
@@ -272,5 +273,8 @@
   left: 0;
   right: 0;
   z-index: 100;
+}
+.usageInfo{
+margin-top: 6px;
 }
 }

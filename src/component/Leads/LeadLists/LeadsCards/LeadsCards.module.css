@@ -388,6 +388,20 @@
   .card {
     gap: 20px;
   }
+  .jobDetails {
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+  
+  }
+  .saveBtnBox {
+    margin-top: 10px;
+  }
+  .jobInfo {
+    margin-bottom: 10px;
+  }
+  .leadActions {
+    margin-top: 0px;
+  }
 }
 
 .arrowIcon {

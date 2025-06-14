@@ -163,12 +163,27 @@
     padding: 0px;
   }
   .card img{
-    width: 275px;
-    height: 125px;
+    width: 300px;
+    height: 150px;
    }
   .cardRight img{
-    width: 275px;
-    height: 125px;
+  width: 300px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 380px) {
+  .card,
+  .cardRight {
+    flex-direction: column;
+    padding: 0px;
+  }
+  .card img{
+    width: 250px;
+    height: 150px;
+   }
+  .cardRight img{
+  width: 250px;
+    height: 150px;
   }
 }
 
