@@ -270,20 +270,20 @@ dispatch(getleadPreferencesList(data))
 
   const locationLength = getlocationData?.length;
   
-  useEffect(() => {
-    if (userToken?.remember_tokens) {
-      const location = {
-        user_id: userToken?.remember_tokens,
-      };
-      dispatch(getLocationLead(location));
+  // useEffect(() => {
+  //   if (userToken?.remember_tokens) {
+  //     const location = {
+  //       user_id: userToken?.remember_tokens,
+  //     };
+  //     dispatch(getLocationLead(location));
       
-      // Initial load of leads - don't send any filters initially
-      const filterData = {
-        user_id: userToken?.remember_tokens,
-      };
-      dispatch(getLeadFiterApiList(filterData));
-    }
-  }, [userToken?.remember_tokens, dispatch]);
+  //     // Initial load of leads - don't send any filters initially
+  //     // const filterData = {
+  //     //   user_id: userToken?.remember_tokens,
+  //     // };
+  //     // dispatch(getLeadFiterApiList(filterData));
+  //   }
+  // }, [userToken?.remember_tokens, dispatch]);
 
   const handleEdit = () => {
     navigate("/leads/settings");

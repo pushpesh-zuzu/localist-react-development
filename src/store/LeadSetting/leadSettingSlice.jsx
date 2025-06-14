@@ -151,6 +151,7 @@ export const getleadPreferencesList = (serviceId) => {
       try {
         const response = await axiosInstance.post(`users/get-lead-request`,leadRequestData);
         if (response) {
+          console.log(response,"setLeadRequestListData")
           dispatch(setLeadRequestListData(response?.data?.data));
           return response.data
         }
@@ -167,6 +168,7 @@ export const getleadPreferencesList = (serviceId) => {
       try {
         const response = await axiosInstance.post(`users/sort-by-credit-value`,leadFilterData);
         if (response) {
+          console.log(response,"setLeadRequestListData")
           dispatch(setLeadRequestListData(response?.data?.data));
           return response.data
         }

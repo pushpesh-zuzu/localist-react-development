@@ -15,6 +15,7 @@ import { showToast } from "../../utils";
 import CustomModal from "../Leads/LeadLists/ConfirmModal";
 import viewDetailsArrow from "../../assets/Images/Setting/viewDetailsArrow.svg";
 import SavedViewDetails from "./SavedViewDetails/SaveViewDetails";
+import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
 
 const SaveForLater = () => {
   const dispatch = useDispatch();
@@ -230,6 +231,7 @@ const SaveForLater = () => {
             );
           })}
         </div>
+        <FeelingStuckFooter />
       </div>
       <CustomModal
         isOpen={isModalOpen}

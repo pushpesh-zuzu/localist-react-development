@@ -1,190 +1,56 @@
 .container {
   display: flex;
-  gap: 20px;
-  padding-top: 73.94px;
-  background-color: #f7f7f7;
-}
-
-/* .card {
-  flex: 1;
-  background: linear-gradient(180deg, #e3f6fc 0%, #24cdff 100%);
-  padding: 32.39px 0 0 43.98px;
-  display: flex;
   justify-content: space-between;
-}
-
-.cardRight {
-  flex: 1;
-  background: linear-gradient(180deg, #e3f6fc 0%, #24cdff 100%);
-  padding: 32.39px 43.98px;
-  display: flex;
-  justify-content: space-between;
-} */
-
-
-.leftText {
-  background-image: url("../../../../assets/Images/Leads/FeelingStuckFooterImage.svg");
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: right;
-}
-
-.leftText h2,
-.rightText h2 {
-  font-weight: 600;
-  font-size: 35px;
-  vertical-align: middle;
-  color: #000;
-  margin-bottom: 12px;
-}
-
-.leftText p,
-.rightText p {
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 37px;
-  vertical-align: middle;
-}
-
-.leftText p {
-  width: 260px;
-}
-
-.descriptionImageWrapperRight {
-  display: flex;
-  gap: 34px;
-}
-
-.imageWrapper img {
-  width: 144.5px;
-  margin-right: 20px;
-}
-
-.closeButton {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #ffffff;
+  gap: 16px;
+  /* padding: 20px; */
+  flex-wrap: wrap;
+  margin-top: 72px;
 }
 
 .card,
 .cardRight {
-  position: relative; /* Required for positioning the close button */
+  flex: 1 1 45%;
+  /* background-color: #fff; */
+  border-radius: 12px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  /* padding: 16px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (max-width: 1024px) {
+.card img,
+.cardRight img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Responsive for tablets */
+@media (max-width: 768px) {
+  .card,
+  .cardRight {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+}
+
+/* Responsive for mobile devices */
+@media (max-width: 480px) {
   .container {
     flex-direction: column;
-    padding: 40px 0;
+    /* padding: 16px; */
+    margin-top: 24px;
   }
 
   .card,
   .cardRight {
-    flex-direction: column;
-    padding: 24px;
-  }
-
-  .leftText p {
-    width: 70%;
-  }
-
-  .leftText {
-    background-position: right top;
-  }
-
-  .descriptionImageWrapperRight {
-    /* flex-direction: column; */
-    gap: 20px;
-  }
-
-  /* .imageWrapper img {
-    width: 120px;
-    margin: 0 auto;
-  } */
-}
-
-/* ✅ Mobile view */
-@media (max-width: 600px) {
-  .leftText h2,
-  .rightText h2 {
-    font-size: 24px;
-  }
-
-  .leftText p,
-  .rightText p {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  .imageWrapper img {
-    width: 100px;
-  }
-}
-
-@media (max-width: 600px) {
-  .leftText p {
-    font-size: 12px;
-    width: 60%;
-  }
-  .rightText p {
-    font-size: 12px;
-  }
-  .closeButton {
-    right: 4px;
-    top: 6px;
-  }
-}
-@media screen and (max-width: 480px) {
-  .card,
-  .cardRight {
-    flex-direction: column;
     padding: 0px;
   }
-  .card img{
-    width: 400px;
-    height: 175px;
-   }
-  .cardRight img{
-    width: 400px;
-    height: 175px;
+
+  .card img,
+  .cardRight img {
+    max-width: 90%;
   }
 }
-
-
-@media screen and (max-width: 380px) {
-  .card,
-  .cardRight {
-    flex-direction: column;
-    padding: 0px;
-  }
-  .card img{
-    width: 300px;
-    height: 150px;
-   }
-  .cardRight img{
-  width: 300px;
-    height: 150px;
-  }
-}
-@media screen and (max-width: 380px) {
-  .card,
-  .cardRight {
-    flex-direction: column;
-    padding: 0px;
-  }
-  .card img{
-    width: 250px;
-    height: 150px;
-   }
-  .cardRight img{
-  width: 250px;
-    height: 150px;
-  }
-}
-
-

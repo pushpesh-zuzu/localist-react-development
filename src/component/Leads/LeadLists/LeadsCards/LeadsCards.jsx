@@ -347,7 +347,7 @@ const LeadsCards = ({ enoughCredit }) => {
             <>
               <div>
                 {leadRequestList?.slice(0, visibleCount)?.map((item) => {
-                  console.log(item?.view_count, "itemss");
+                  console.log(item, "itemss");
                   return (
                     <>
                       <div className={styles.cardParent}>
