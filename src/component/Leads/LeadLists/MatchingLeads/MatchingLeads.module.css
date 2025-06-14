@@ -65,10 +65,10 @@
   margin-right: 8px;
 }
 .filterButton:hover {
-  color: #e3f6fc;
+  color: #c4e8f3;
 }
 .filterButton img:hover {
-  color: #e3f6fc;
+  color: #c4e8f3;
 }
 
 .editButton {
@@ -86,7 +86,7 @@
 }
 
 .editButton:hover {
-  background-color: #000000cf;
+  background-color: #615d5dcf;
 }
 /* components/DualDropdowns/DualDropdowns.module.css */
 .dualDropdownsContainer {
@@ -129,12 +129,34 @@
   position: absolute;
   top: 100%;
   left: 0;
+  width: 100px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  /* border-radius: 0.5rem; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0.6px;
+  padding: 0.5rem 0;
+  z-index: 10;
+  list-style: none;
+}
+.dropdownMenus {
+  position: absolute;
+  top: 100%;
+  left: 0;
   width: fit-content;
   background: white;
   border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
+  /* border-radius: 0.5rem; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 0.5rem;
+  margin-top: 0.6px;
   padding: 0.5rem 0;
   z-index: 10;
   list-style: none;
@@ -300,4 +322,40 @@
     gap: 10px;
     align-items: stretch;
   }
+  .dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  /* border-radius: 0.5rem; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0.6px;
+  padding: 0.5rem 0;
+  z-index: 10;
+  list-style: none;
+}
+.dropdownMenus {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 173px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  /* border-radius: 0.5rem; */
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0.6px;
+  padding: 0.5rem 0;
+  z-index: 10;
+  list-style: none;
+}
 }

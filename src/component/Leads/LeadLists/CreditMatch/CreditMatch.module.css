@@ -58,7 +58,7 @@
 }
 .creditsInfo {
   max-width: 241px;
-  margin-left: 25px;
+  margin-left: 0px;
 }
 
 .usageInfo {
@@ -153,7 +153,7 @@
 
 .fixedTop {
   position: fixed;
-  top: 78px;
+  top: 85px;
   left: 0;
   right: 0;
   z-index: 100;
@@ -180,7 +180,7 @@
   .titleSection {
     width: 100%;
     border-right: none;
-    border-bottom: 3px solid #bcefff;
+    border-bottom: 2px solid #bcefff;
     padding-bottom: 15px;
     text-align: center;
   }
@@ -201,7 +201,7 @@
     max-width: 100%;
     padding-left: 0;
     border-left: none;
-    border-top: 3px solid #bcefff;
+    border-top: 2px solid #bcefff;
     padding-top: 15px;
     text-align: center;
   }

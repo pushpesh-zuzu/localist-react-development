@@ -206,11 +206,14 @@
   /* text-decoration: underline; */
   cursor: pointer;
 }
+.viewDetailsBtn:hover {
+  background-color: #0096c4;
+}
 .viewDetailsBtnWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 2px;
+  padding-bottom: 0px;
 }
 .mainText p {
   color: #ff9933;

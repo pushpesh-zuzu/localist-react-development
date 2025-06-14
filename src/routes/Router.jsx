@@ -248,7 +248,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/view-profile",
+        path: "/view-profile/:sellerId",
         element: (
           <ProtectedRoute>
           <ViewProfiles/>

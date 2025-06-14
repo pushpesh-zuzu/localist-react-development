@@ -57,7 +57,8 @@ const initialState = {
     data:[],
     leadListLoader:false,
     ratingFilterData:[],
-    expandRadiusLoader:false
+    expandRadiusLoader:false,
+    viewProfileData:{}
 };
 
 
@@ -917,6 +918,22 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   };
+   export const addViewProfileList = (profileId) => {
+    return async (dispatch) => {
+      dispatch(setExpandRadiusLoader(true));
+      try {
+        const response = await axiosInstance.post(`users/get-seller-profile`,profileId);
+        if (response) {
+          dispatch(setViewProfileData(response?.data?.data))
+          return response.data
+        }
+      } catch (error) {
+        console.log("error", error?.response?.data?.message);
+      } finally {
+        dispatch(setExpandRadiusLoader(false));
+      }
+    };
+  };
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
@@ -1052,11 +1069,14 @@ const leadSettingSlice = createSlice({
       },
       setExpandRadiusLoader(state,action) {
         state.expandRadiusLoader = action.payload
+      },
+      setViewProfileData(state,action){
+        state.viewProfileData = action.payload
       }
    
   },
 });
 
-export const {setData,setleadPreferencesListLoader,setAutoBidData,setExpandRadiusLoader,setRatingFilterData,setPurchasedData,setLeadListProfileLoader,setSellerNotesLoader,setPurchasePendingData,setGetSellerNotesData,setGetActivitiesData,setAddSubmitLeadLoader,setGetSwitchAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
+export const {setData,setleadPreferencesListLoader,setAutoBidData,setViewProfileData,setExpandRadiusLoader,setRatingFilterData,setPurchasedData,setLeadListProfileLoader,setSellerNotesLoader,setPurchasePendingData,setGetSellerNotesData,setGetActivitiesData,setAddSubmitLeadLoader,setGetSwitchAutoBidData,setGetOnlineRemoteData,setGetHiredLeadsData,setGetPendingLeadsData,setSevenDaysData,setOnlineRemoteData,setSevenPausedDaysData,setCreditsList,setFilters,setSevenDaysAutobidLoader,setSellerRecommendedData,setSaveForLaterData,setTotalCreditData,setSaveLaterListLoader,setCreditsPlanList,setFilterWiseData,setProfileLeadRequestListData,setGetCreditListLoader,setAutoBidLoader,setAutoBidListData,setManualBidListLoader,setServiceWiseData,setRemoveLocationListLoader,setRemoveListLoader,setAutoBidListLoader,setGetLocationData,setPreferencesList,setleadPreferencesLoader,setServiceListLoader,setLeadPreferenceData,setLeadListLoader,setLeadRequestListData} = leadSettingSlice.actions;
 
 export default leadSettingSlice.reducer;

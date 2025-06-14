@@ -9,9 +9,15 @@ import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.s
 import DotIcon from "../../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../../assets/Images/Leads/UpdateIcon.svg";
 import LeadMap from "../../../myResponses/LeadMap/LeadMap";
+import { useNavigate } from "react-router-dom";
 
 const LeadViewDetails = ({ leadRequestDatas }) => {
+
   const leadRequest = leadRequestDatas || {};
+const navigate = useNavigate()
+  const handleNavigate =()=>{
+    navigate("/leads/settings")
+  }
 
   console.log(leadRequest, "leadRequestDatas");
   return (
@@ -128,7 +134,7 @@ const LeadViewDetails = ({ leadRequestDatas }) => {
               settings.
             </p>
 
-            <div className={styles.updateContainer}>
+            <div className={styles.updateContainer} onClick={handleNavigate}>
               <img src={UpdateIcon} alt="" />
               <a href="#" className={styles.updateLink}>
                 {" "}

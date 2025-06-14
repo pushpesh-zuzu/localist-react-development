@@ -53,9 +53,15 @@ import UrgentIcon from "../../../assets/Images/Leads/UrgentIcon.svg";
 import IntentIcon from "../../../assets/Images/Leads/IntentIcon.svg";
 import DotIcon from "../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../assets/Images/Leads/UpdateIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 const SavedViewDetails = ({ saveForLaterDataList }) => {
   const savedLeads = saveForLaterDataList || {};
+
+  const navigate = useNavigate()
+    const handleNavigate =()=>{
+      navigate("/leads/settings")
+    }
   console.log(savedLeads, "savedLeads");
   let parsedQuestions = [];
   if (savedLeads?.questions) {
@@ -151,7 +157,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               settings.
             </p>
             {/* <span className={styles.updateIcon}>⚙️</span> */}
-            <div className={styles.updateContainer}>
+            <div className={styles.updateContainer} onClick={handleNavigate}>
               <img src={UpdateIcon} alt="" />
               <a href="#" className={styles.updateLink}>
                 {" "}

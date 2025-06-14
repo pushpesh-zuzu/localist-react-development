@@ -15,27 +15,37 @@ const service = [
   { title: 'Management Accounts', content: '...' },
 ];
 
-const Services = () => {
+const Services = ({details}) => {
+  console.log(details?.services,"de")
+  const data = details?.services;
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section className={styles.section}>
       <h2>Services</h2>
       <div className={styles.accordion}>
-        {service.map((item, index) => (
-          <div key={index}>
-            <div
-              className={styles.accordionHeader}
-              onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            >
-              {item.title}
-              <img src={ProfileArrowUp} alt="arrow" className={`${styles.arrow} ${openIndex === index ? styles.up : styles.down}`} />
-            </div>
-            {openIndex === index && (
-              <div className={styles.accordionContent}>{item.content}</div>
-            )}
-          </div>
-        ))}
+        {data?.map((item, index) => (
+  item?.user_services?.map((service, subIndex) => (
+    <div key={`${index}-${subIndex}`}>
+      <div
+        className={styles.accordionHeader}
+        onClick={() => setOpenIndex(openIndex === `${index}-${subIndex}` ? null : `${index}-${subIndex}`)}
+      >
+        {service.name}
+        <img
+          src={ProfileArrowUp}
+          alt="arrow"
+          className={`${styles.arrow} ${openIndex === `${index}-${subIndex}` ? styles.up : styles.down}`}
+        />
+      </div>
+      {openIndex === `${index}-${subIndex}` && (
+        <div className={styles.accordionContent}>
+          {service.description || "No description available"}
+        </div>
+      )}
+    </div>
+  ))
+))}
       </div>
     </section>
   );

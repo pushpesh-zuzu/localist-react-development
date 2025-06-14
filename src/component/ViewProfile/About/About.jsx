@@ -6,7 +6,8 @@ import staffImg from "../../../assets/Images/Setting/staffImg.svg";
 import localistHireImg from "../../../assets/Images/Setting/localistHireImg.svg";
 import responseTimeImg from "../../../assets/Images/Setting/responseTimeImg.svg";
 
-const About = () => {
+const About = ({details}) => {
+    console.log(details,"details")
     const data = [
         {
             title: "Elite Pro",
@@ -25,7 +26,7 @@ const About = () => {
             icon: localistHireImg
         },
         {
-            title: "2-10 staff",
+            title: details?.company_size || "Not specified",
             icon: responseTimeImg
         },
     ]

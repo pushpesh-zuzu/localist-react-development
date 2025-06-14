@@ -356,7 +356,7 @@ dispatch(getleadPreferencesList(data))
           </button>
 
           {isFilterOpen && (
-            <ul className={styles.dropdownMenu}>
+            <ul className={styles.dropdownMenus}>
               {filterOptions.map((option) => (
                 <li key={option} className={styles.dropdownItem}>
                   <button

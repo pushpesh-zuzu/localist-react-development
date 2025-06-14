@@ -138,12 +138,17 @@ import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Icons/LocationIcon.png";
+import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ViewProfiles = () => {
     const [activeTab, setActiveTab] = useState('About')
     const [isopen, setIsOpen] = useState(true)
+    const dispatch = useDispatch()
     const profileId = useParams()
-    
+    const SellerId = useParams()
+    const { viewProfileData } = useSelector((state)=> state.leadSetting)
+    console.log(viewProfileData,"SellerId")
     const aboutRef = useRef(null);
     const servicesRef = useRef(null);
     const reviewsRef = useRef(null);
@@ -222,22 +227,29 @@ const ViewProfiles = () => {
         return () => container?.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(()=>{
+        const sellerData ={
+            seller_id:profileId?.sellerId
+        }
+        dispatch (addViewProfileList(sellerData))
+    },[])
+
     return (
         <>
         <div className={styles.mainContainer}>
             <div className={styles.container}>
-                <img src={DummyImage} alt="Profile" className={styles.profileImage} />
+                <img src={viewProfileData?.profile_image ? viewProfileData?.profile_image : DummyImage} alt="Profile" className={styles.profileImage} />
                    
                 <div className={styles.viewDetails}>
-                    <h2>Starlink pvt. ltd</h2>
+                    <h2>{viewProfileData?.company_name}</h2>
                     <div className={styles.locationText}>   
                         <img src={LocationIcon} alt="" />
-                        <span>WA4, Warrington,</span>  8.6 miles away
+                        <span>{viewProfileData?.city}</span> | {viewProfileData?.zipcode}
                     </div>
                     <div className={styles.sidebar}>
                         <div className={styles.rating}>
                             <span className={styles.stars}>★★★★★</span>
-                            <span className={styles.ratingCount}>125</span>
+                            <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
                         </div>
                     </div>
                     <div className={styles.badgesBox}>
@@ -260,15 +272,15 @@ const ViewProfiles = () => {
                 <div className={styles.contactDetails}>
                     <div className={styles.mailText}>
                         <img src={emailImg} alt="" /> 
-                        <span>india@localist.com</span>
+                        <span>{viewProfileData?.email}</span>
                     </div>
                     <div className={styles.mailText}>
                         <img src={phoneImg} alt="" />
-                        <span> +91 0000000000</span>
+                        <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
                     </div>
                     <div className={styles.mailText}>
                         <img src={profileImg} alt="" />
-                        <span> facebook.com/profile.</span>
+                        <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "Facebook"}</span>
                     </div>
                 </div>
             </div>
@@ -279,8 +291,8 @@ const ViewProfiles = () => {
                         activeTab={activeTab} 
                         onTabClick={handleTabClick}
                     />
-                    <div ref={aboutRef}><About /></div>
-                    <div ref={servicesRef}><Services /></div>
+                    <div ref={aboutRef}><About details={viewProfileData}/></div>
+                    <div ref={servicesRef}><Services details={viewProfileData}/></div>
                     <div ref={reviewsRef}><ReviewSection /></div>
                     <div ref={accrediationRef}><Accrediations /></div>
                     <div ref={quesAnsRef}><QandAns/></div>
