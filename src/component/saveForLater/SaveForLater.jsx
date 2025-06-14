@@ -105,8 +105,8 @@ const SaveForLater = () => {
                           <span>
                             {item?.phone
                               ? `${item?.phone.substring(0, 2)}${"*".repeat(
-                                  item?.phone.length - 2
-                                )}`
+                                item?.phone.length - 2
+                              )}`
                               : "N/A"}
                           </span>
                         </div>
@@ -115,12 +115,12 @@ const SaveForLater = () => {
                           <span>
                             {item?.customer?.email
                               ? `${item?.customer?.email
-                                  .split("@")[0]
-                                  .substring(0, 8)}${"*".repeat(
+                                .split("@")[0]
+                                .substring(0, 8)}${"*".repeat(
                                   Math.max(
                                     0,
                                     item?.customer?.email.split("@")[0].length -
-                                      8
+                                    8
                                   )
                                 )}@${item?.customer?.email.split("@")[1]}`
                               : "N/A"}
@@ -197,7 +197,12 @@ const SaveForLater = () => {
                       <span className={styles.credits}>
                         {item?.credit_score} Credits
                       </span>
-
+                      <div className={styles.mainText}>
+                        {" "}
+                        <p>ACT FAST</p>{" "}
+                        <span> 0 Professionals</span>{" "}
+                        <br /> have viewed this lead
+                      </div>
                       {/* <span className={styles.credits}>
                             {item?.credit_score}Credits
                           </span> */}
@@ -212,9 +217,8 @@ const SaveForLater = () => {
                       <img
                         src={viewDetailsArrow}
                         alt="..."
-                        className={`${styles.arrowIcon} ${
-                          viewDetailsOpen == item?.id ? "" : styles.rotated
-                        }`}
+                        className={`${styles.arrowIcon} ${viewDetailsOpen == item?.id ? "" : styles.rotated
+                          }`}
                       />
                     </button>
                   </div>

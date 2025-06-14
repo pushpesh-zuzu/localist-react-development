@@ -11,6 +11,7 @@ import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
+  getExpandRadiusList,
   getleadPreferencesList,
   getleadPrimaryServiceList,
   getLocationLead,
@@ -56,8 +57,11 @@ console.log(leadPreferenceData,selectedService,"leadPreferenceData")
     postcode: "",
   });
   const nationwideShow = serviceWiseData?.map((item) => item?.type )
+
   const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
-  console.log(serviceWiseData,nationwideShow,"serviceWiseData")
+  const locationId = serviceWiseData?.map((item) => item?.id)
+  const locationTypes = nationwideShow.some((item) => item === "Distance")
+  console.log(locationId?.[0],locationTypes,"serviceWiseData")
 const handleUpdateService = () => {
   
   const data = {
@@ -261,6 +265,22 @@ const handleUpdateService = () => {
       state: { serviceId: selectedService?.id },
     });
   };
+  const handleExpandRadius = (item) => {
+    console.log(item,"item")
+    const radiusData = {
+      location_id:item?.id
+    }
+    dispatch(getExpandRadiusList(radiusData)).then((result) =>{
+      if(result){
+        showToast("success",result?.message)
+         const locationWise = {
+          user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+          service_id: selectedService?.id,
+        };
+        dispatch(getServiceWiseLocationData(locationWise));
+      }
+    })
+  }
   return (
     <>
       <div className={styles.modal}>
@@ -393,7 +413,8 @@ const handleUpdateService = () => {
             <div className={styles.ranger}>
           
               {serviceWiseData?.map((item, idx) => (
-                <>
+                <div className={styles.mainBox}>
+                <div>
                 {item?.type === "Distance" ? <div className={styles.range} key={idx}>
                   <span>
                     <img src={TickIcon} alt="" /> Within
@@ -423,12 +444,19 @@ const handleUpdateService = () => {
                 <label style={{color:"black",fontSize:"14px"}}> 
                 <img src={TickIcon} alt="" />   Nationwide</label>
                                   </p>  : ""}
-                </>
+                                  </div>
+                                  <div>
+                                    {item?.type=='Distance'? <a href="#" className={styles.addLocation} onClick={() => handleExpandRadius(item)}>
+              {/* Change Your Radius */} Expand Radius
+            </a>:null}
+                                  </div>
+                </div>
               ))}
             </div>
-            <a href="#" className={styles.addLocation}>
-              {/* Change Your Radius */} Expand Radius
-            </a>
+
+           {/* {serviceWiseData?.map((item)=> {return <>
+           
+           </>})} */}
           </div>
 
           

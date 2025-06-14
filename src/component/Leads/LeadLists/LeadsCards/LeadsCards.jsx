@@ -499,7 +499,7 @@ const LeadsCards = ({ enoughCredit }) => {
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded
                     </p> */}
-                            <div className={styles?.mainText}>
+                            <div className={styles.mainText}>
                               {" "}
                               <p>ACT FAST</p>{" "}
                               <span>{item?.view_count} Professionals</span>{" "}

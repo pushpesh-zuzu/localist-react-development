@@ -189,10 +189,15 @@
   align-items: center;
 
 }
+.mainBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .ranger {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 .range {
   font-size: 14px;
@@ -405,5 +410,10 @@
   font-size: 13px;
   color: #000000;
   line-height: 100%;
+}
+.mainBox {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 }

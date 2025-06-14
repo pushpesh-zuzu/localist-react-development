@@ -209,7 +209,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 5px;
+  padding-bottom: 2px;
+}
+.mainText p {
+  color: #ff9933;
+  font-size: 22px;
+  font-weight: 700;
+}
+.mainText span {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .arrowIcon {
@@ -241,6 +251,7 @@
   font-weight: 400;
   font-size: 16.91px;
   width: 100px;
+  text-align: start;
 }
 
 .responseStatus {

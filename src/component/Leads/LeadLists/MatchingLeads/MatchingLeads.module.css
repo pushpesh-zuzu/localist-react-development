@@ -64,6 +64,12 @@
 .filterButton img {
   margin-right: 8px;
 }
+.filterButton:hover {
+  color: #e3f6fc;
+}
+.filterButton img:hover {
+  color: #e3f6fc;
+}
 
 .editButton {
   display: flex;

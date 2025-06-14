@@ -63,14 +63,14 @@
 
 .usageInfo {
   margin-top: 18px;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 20px;
 }
 
 .totalPrice {
   font-weight: 600;
-  font-size: 16px;
-  margin-top: -40px;
+  font-size: 24px;
+  margin-top: -10px;
 }
 
 .unitPrice {
@@ -85,7 +85,7 @@
   align-items: center;
   margin-top: 16px;
   text-align: center;
-  gap: 11px;
+  gap: 6px;
 }
 
 .buyButton {
@@ -115,7 +115,7 @@
 
 .autoTopUpLabel {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000000;
   cursor: pointer;
   text-wrap: nowrap;
@@ -266,4 +266,11 @@
   .unitPrice {
     font-size: 12px;
   }
+  .fixedTop {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
 }
