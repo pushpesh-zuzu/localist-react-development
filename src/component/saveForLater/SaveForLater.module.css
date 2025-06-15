@@ -254,8 +254,8 @@
   padding: 4px 10px;
   font-weight: 400;
   font-size: 16.91px;
-  width: 100px;
-  text-align: start;
+  width: fit-content;
+  text-align: center;
 }
 
 .responseStatus {
@@ -404,7 +404,7 @@
   padding: 42px 20px;
 }
 .mainText {
-  text-align: start;
+  text-align: center;
 }
 .jobDetails {
     border-top: 1px solid #E0E0E0;
@@ -419,6 +419,9 @@
   }
   .leadActions {
     margin-top: 0px;
+    display: flex;
+    align-items: center;
+
   }
   .viewDetailsBtn {
   padding: 7px 17px;
@@ -443,7 +446,7 @@
   margin-top: 12px;
 }
 .cardParent {
-  margin-top: 24px;
+  margin-top: 8px;
 }
 
 }

@@ -138,7 +138,7 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 0.6px;
+  margin-top: 0px;
   padding: 0.5rem 0;
   z-index: 10;
   list-style: none;
@@ -156,7 +156,7 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 0.6px;
+  margin-top: 0px;
   padding: 0.5rem 0;
   z-index: 10;
   list-style: none;
@@ -178,7 +178,8 @@
 }
 
 .dropdownButton:hover {
-  background-color: #f9fafb;
+  background-color: var(--primary-color);
+  color: #FFFFFF;
 }
 
 @media (max-width: 1024px) {

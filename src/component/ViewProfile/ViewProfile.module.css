@@ -27,6 +27,8 @@
     font-size: 12px;
     font-weight: 500;
     color: #828282;
+    display: flex;
+    align-items: center;
   }
   .locationText img {
     width: 8px;
@@ -34,7 +36,8 @@
     margin-right: 5px;
   }
   .locationText span{
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    margin-right: 5px;
     font-size: 12px;
     font-weight: 500;
     color: #000000;
@@ -105,7 +108,9 @@
     cursor: pointer;
     border-radius: 5px;
   }
-  
+  .RequestQuoteBtn:hover {
+    background-color: #0096c4;
+  }
   .contactDetails {
     margin-top: 25px;
     display: flex;

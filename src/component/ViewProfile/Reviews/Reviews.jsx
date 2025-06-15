@@ -6,9 +6,10 @@ import moment from "moment";
 import SubmitReviewModal from "../SubmitReviewModal";
 import { useParams } from "react-router-dom";
 import starImg from "../../../assets/Icons/MyResponse/StarImg.svg"
-// import blueStar from "../../../assets/Icons/MyResponse/blueStar"
+import blueStar from "../../../assets/Icons/MyResponse/blueStarImg.svg"
+import blackStar from "../../../assets/Icons/MyResponse/blackStarImg.svg"
 
-const ReviewSection = () => {
+const ReviewSection = ({details}) => {
   const [isopen, setIsOpen] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams()
@@ -16,6 +17,7 @@ const ReviewSection = () => {
    const { registerData } = useSelector(
       (state) => state.findJobs
     );
+    const data = details?.reviews
     const userId = userToken?.id  ? userToken?.id  : registerData?.id
   console.log(profileId,"pro")
   const handleOpen = () => {
@@ -64,61 +66,86 @@ const { reviewListData } = useSelector((state) => state.myProfile);
       </div>
 <div className={styles.middleBox}></div>
       <div className={styles.right}>
-        {[5, 4, 3, 2, 1].map((star) => (
-          <div key={star} className={styles.row}>
-            <label className={styles.ratingLabel}>
-              <input type="radio" name="rating" disabled />
-              <span className={styles.starText}>{star}
-                 {/* <img src={blueStar} alt="image" /> */}
-                 </span>
-            </label>
-            <div className={styles.barWrapper}>
-              <div
-                className={styles.bar}
-                style={{ width: `${getPercentage(ratingCounts[star])}%`, backgroundColor: star === 5 ? "#00aaff" : "#ccc" }}
-              />
-            </div>
-            <span className={styles.percent}>{getPercentage(ratingCounts[star])}%</span>
-          </div>
-        ))}
+        {[5, 4, 3, 2, 1].map((star, index) => (
+  <div key={star} className={styles.row}>
+    <label className={styles.ratingLabel}>
+      <input type="radio" name="rating" disabled />
+      <span className={styles.starText}>
+        {star}
+        <img
+          src={star === 5 ? blueStar : blackStar}
+          alt="star"
+        />
+      </span>
+    </label>
+    <div className={styles.barWrapper}>
+      <div
+        className={styles.bar}
+        style={{
+          width: `${getPercentage(ratingCounts[star])}%`,
+          backgroundColor: star === 5 ? "#00aaff" : "#ccc",
+        }}
+      />
+    </div>
+    <span className={styles.percent}>
+      {getPercentage(ratingCounts[star])}%
+    </span>
+  </div>
+))}
+
       </div>
     </div>
-      {reviewListData?.map((item, index) => (
-        <div key={index} className={styles.card}>
-          <div className={styles.header}>
-            <div>
-              <h3 className={styles.username}>{item?.name}</h3>
-              <div className={styles.rating}>
-                {"⭐".repeat(item.ratings)}
-                <span className={styles.count}>{item?.ratings}</span>
-                <span className={styles.verified}>Verified</span>
-              </div>
-            </div>
-            <div className={styles.dateSection}>
-              <span className={styles.date}>{moment(item.created_at).format("DD-MM")}</span>
-              <div className={styles.source}>
-                Source:
-                <img src={"https://cdn-icons-png.flaticon.com/512/733/733547.png"} alt="source" className={styles.sourceIcon} />
-              </div>
-            </div>
-          </div>
-
-          <h4 className={styles.title}>{item.review}</h4>
-          <p className={styles.content}>{item.content}</p>
-
-          <div className={styles.commentBox}>
-            <img src={"https://randomuser.me/api/portraits/women/45.jpg"} alt="avatar" className={styles.avatar} />
-            <div>
-              <p className={styles.comment}>
-                Contrary to popular belief, Lorem Ipsum is not simply random text.
-              </p>
-              <strong className={styles.thankYou}>Thank You...</strong>
-            </div>
-          </div>
+    {(profileId?.profileId ? reviewListData : data)?.map((item, index) => (
+  <div key={index} className={styles.card}>
+    <div className={styles.header}>
+      <div>
+        <h3 className={styles.username}>{item?.name}</h3>
+       
+     <div className={styles.rating}>
+  {Array(5).fill(0).map((_, idx) => (
+    <img
+      key={idx}
+      src={idx < item.ratings ? starImg : blackStar}
+      alt="star"
+    />
+  ))}
+  <span className={styles.count}>{item?.ratings}</span>
+  <span className={styles.verified}>Verified</span>
+</div>
+      </div>
+      <div className={styles.dateSection}>
+        <span className={styles.date}>
+          {moment(item.created_at).format("DD-MM")}
+        </span>
+        <div className={styles.source}>
+          Source:
+          <img
+            src={"https://cdn-icons-png.flaticon.com/512/733/733547.png"}
+            alt="source"
+            className={styles.sourceIcon}
+          />
         </div>
-      ))}
-    
-   
+      </div>
+    </div>
+
+    <h4 className={styles.title}>{item.review}</h4>
+    <p className={styles.content}>{item.content}</p>
+
+    <div className={styles.commentBox}>
+      <img
+        src={"https://randomuser.me/api/portraits/women/45.jpg"}
+        alt="avatar"
+        className={styles.avatar}
+      />
+      <div>
+        <p className={styles.comment}>
+          Contrary to popular belief, Lorem Ipsum is not simply random text.
+        </p>
+        <strong className={styles.thankYou}>Thank You...</strong>
+      </div>
+    </div>
+  </div>
+))}
 
     </div>
      <div className={styles.pagination}>

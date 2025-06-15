@@ -3,7 +3,7 @@ import styles from "./Photos.module.css"
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import paginationImg from "../../../assets/Icons/MyResponse/paginationImg.svg"
 import leftpaginationImg from "../../../assets/Icons/MyResponse/rightPagenationImg.svg"
-const Photos = () => {
+const Photos = ({details}) => {
   return (
     <div className={styles.photoContainer} >
       <h2>Photos</h2>

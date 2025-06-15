@@ -131,9 +131,9 @@ const CreditMatch = () => {
                   <div className={styles.totalPrice}>
                     ${item?.price ? item?.price : 0} (Excl. tax)
                   </div>
-                  <div className={styles.unitPrice}>
-                    {/* ${item?.per_credit ? item?.per_credit : 0}/credit */}
-                  </div>
+                  {/* <div className={styles.unitPrice}>
+                    ${item?.per_credit ? item?.per_credit : 0}/credit
+                  </div> */}
                 </div>
               </div>
 

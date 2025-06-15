@@ -26,9 +26,9 @@ const faqData = [
   },
 ];
 
-const QandAns = () => {
+const QandAns = ({details}) => {
   const [openIndex, setOpenIndex] = useState(0);
-
+const data = details?.qa
   const toggleIndex = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -36,10 +36,10 @@ const QandAns = () => {
   return (
     <div className={styles.container}>
       <h2>Q+A's</h2>
-      {faqData.map((item, index) => (
+      {data?.map((item, index) => (
         <div key={index} className={styles.faqItem}>
           <div className={styles.question} onClick={() => toggleIndex(index)}>
-        {item.question}
+        {item.questions}
                <img src={ProfileArrowUp} alt="arrow" className={`${styles.arrow} ${openIndex === index ? styles.up : styles.down}`} />
           </div>
           {openIndex === index && item.answer && (

@@ -23,8 +23,8 @@
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */
-  gap: 49px;
-  margin-top: 35px;
+  gap: 72px;
+  /* margin-top: 35px; */
 }
 
 .jobDetails {
@@ -177,6 +177,7 @@
   font-weight: 400;
   font-size: 12px;
   vertical-align: middle;
+  line-height: 25px;
 }
 
 .purchaseButton {
@@ -197,10 +198,10 @@
   display: block;
   background: #fce5e3;
   color: black;
-  padding: 4px 0px;
+  padding: 4px 10px;
   font-weight: 400;
   font-size: 16.91px;
-  width: 100px;
+  width: fit-content;
   text-align: center;
 }
 
@@ -375,7 +376,7 @@
     margin-top: 0px;
   }
   .mainText {
-  text-align: start;
+  text-align: center;
 }
 .viewDetailsBtn {
   padding: 7px 17px;
@@ -407,6 +408,8 @@
   }
   .leadActions {
     margin-top: 0px;
+    display: flex;
+    align-items: center;
   }
 }
 

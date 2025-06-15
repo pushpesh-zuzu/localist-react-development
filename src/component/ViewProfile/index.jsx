@@ -137,7 +137,8 @@ import Photos from "./Photos/Photos";
 import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
-import LocationIcon from "../../assets/Icons/LocationIcon.png";
+// import LocationIcon from "../../assets/Icons/LocationIcon.png";
+import LocationIcon from "../../assets/Images/HowItWorks/locationImg.svg";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -244,14 +245,26 @@ const ViewProfiles = () => {
                     <h2>{viewProfileData?.company_name}</h2>
                     <div className={styles.locationText}>   
                         <img src={LocationIcon} alt="" />
-                        <span>{viewProfileData?.city}</span> | {viewProfileData?.zipcode}
+                        <span>{viewProfileData?.city} </span>   |  {viewProfileData?.zipcode}
                     </div>
-                    <div className={styles.sidebar}>
+                    {/* <div className={styles.sidebar}>
                         <div className={styles.rating}>
                             <span className={styles.stars}>★★★★★</span>
                             <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
                         </div>
-                    </div>
+                    </div> */}
+                    <div className={styles.sidebar}>
+  <div className={styles.rating}>
+    <span className={styles.stars}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <span key={i}>
+          {i <= viewProfileData?.avg_rating ? "★" : "☆"}
+        </span>
+      ))}
+    </span>
+    <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
+  </div>
+</div>
                     <div className={styles.badgesBox}>
                         <div className={styles.badges}>
                             <span>Electrician</span>
@@ -293,10 +306,10 @@ const ViewProfiles = () => {
                     />
                     <div ref={aboutRef}><About details={viewProfileData}/></div>
                     <div ref={servicesRef}><Services details={viewProfileData}/></div>
-                    <div ref={reviewsRef}><ReviewSection /></div>
-                    <div ref={accrediationRef}><Accrediations /></div>
-                    <div ref={quesAnsRef}><QandAns/></div>
-                    <div ref={photoRef}><Photos/></div>
+                    <div ref={reviewsRef}><ReviewSection  details={viewProfileData} /></div>
+                    <div ref={accrediationRef}><Accrediations details={viewProfileData} /></div>
+                    <div ref={quesAnsRef}><QandAns details={viewProfileData}/></div>
+                    <div ref={photoRef}><Photos details={viewProfileData}/></div>
                 </div>
             </div>
             

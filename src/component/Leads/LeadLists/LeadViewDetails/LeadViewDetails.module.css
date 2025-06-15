@@ -66,7 +66,7 @@
   margin-top: 8px; /* tweak as needed */
 }
 .sperator {
-  height: 2px;
+  height: 1px;
   margin-left: 18px;
   width: 380px;
   background-color: #E0E0E0;
@@ -213,7 +213,7 @@
     gap: 30px;
   }
   .sperator {
-    height: 2px;
+    height: 1px;
     margin-left: 20px;
     width: auto;
     background-color: #e0e0e0;
@@ -230,5 +230,13 @@
 }
 .updateContainer{
   margin-bottom: 24px;
+}
+.questionItem {
+  /* border-bottom: 1px solid #e0e0e0; */
+  padding: 12px 12px;
+  background-color: #f9f9fa;
+  /* padding-left: 10px; */
+  flex-direction: row;
+  width: 91%;
 }
 }
