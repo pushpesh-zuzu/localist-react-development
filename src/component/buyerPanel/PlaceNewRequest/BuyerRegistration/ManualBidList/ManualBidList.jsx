@@ -70,7 +70,7 @@ const ManualBidList = () => {
       </div>
 
       <div className={styles.filters}>
-        <select className={styles.customSelect}>
+        {/* <select className={styles.customSelect}>
           <option>All ratings</option>
         </select>
         <select className={styles.customSelect}>
@@ -81,17 +81,17 @@ const ManualBidList = () => {
         </select>
         <span className={styles.matchCount}>
           {(autoBidListData || []).length} matches
-        </span>
+        </span> */}
 
         {/* <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
           <option>Sort by: best match</option>
         </select> */}
       </div>
 
-      <div className={styles.recommendBar}>
+      {/* <div className={styles.recommendBar}>
         <span>Recommended:</span> Request replies from your{" "}
         <strong>top matches</strong> to hear back faster
-      </div>
+      </div> */}
       {autobidLoader ? (
         <Spin
           style={{ color: "blue", display: "flex", justifyContent: "center" }}
@@ -182,9 +182,9 @@ const ManualBidList = () => {
                   </div>
                 </div>
 
-                {/* <div className={styles.replyBtnWrapper}>
-              <button className={styles.replyBtn}>Request reply</button>
-            </div> */}
+                <div className={styles.replyBtnWrapper}>
+              <button className={styles.replyBtn}>Contact</button>
+            </div>
               </div>
             </div>
           ))}
