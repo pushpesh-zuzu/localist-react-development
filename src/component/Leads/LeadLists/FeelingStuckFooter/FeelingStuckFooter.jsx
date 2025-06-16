@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./FeelingStuckFooter.module.css";
-import GetHiredImage from "../../../../assets/Images/Leads/GetHiredImg.svg";
+import GetHiredImage from "../../../../assets/Images/MyResponse/newhiredbannerImg.svg";
 import FeelingStuckImg from "../../../../assets/Images/Leads/FeelingStuckImg.svg";
 
 const FeelingStuckFooter = () => {

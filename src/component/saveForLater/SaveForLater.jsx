@@ -276,7 +276,7 @@ useEffect(() => {
                       <div className={styles.mainText}>
                         {" "}
                         <p>ACT FAST</p>{" "}
-                        <span> 0 Professionals</span>{" "}
+                        <span> 10 Professionals</span>{" "}
                         <br /> have viewed this lead
                       </div>
                     </div>
