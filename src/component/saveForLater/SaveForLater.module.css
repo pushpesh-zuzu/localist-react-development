@@ -29,7 +29,9 @@
 }
 .maincontainer {
   padding: 42px 42px;
+   /* height: 100%; */
 }
+
 
 /* Grid Areas */
 .infoContainer {
@@ -235,17 +237,18 @@
   transform: rotate(180deg);
 }
 .purchaseButton {
-  background: black;
+  background: #57E202;
   color: white;
   border: none;
   padding: 8px 15px;
-  border-radius: 148px;
+  /* border-radius: 148px; */
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .purchaseButton:hover {
-  background-color: #000000cf;
+  background-color: #4ECF00;
 }
 
 .credits {

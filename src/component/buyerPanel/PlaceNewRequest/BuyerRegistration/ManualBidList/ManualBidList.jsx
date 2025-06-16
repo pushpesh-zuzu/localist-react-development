@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
-import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
+// import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
+import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
+import starImg from "../../../../../assets/Icons/MyResponse/StarImg.svg"
+import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import {
   getAutoBidData,
@@ -137,11 +140,11 @@ const ManualBidList = () => {
                               <span className={styles.stars}>
                                 {[...Array(5)].map((_, index) => {
                                   if (rating >= index + 1) {
-                                    return <span key={index}>★</span>; // Full star
+                                    return <span key={index}><img src={starImg} alt="..." /></span>; // Full star
                                   } else if (rating >= index + 0.5) {
                                     return <span key={index}>★</span>; // Half star (or use icon)
                                   } else {
-                                    return <span key={index}>☆</span>; // Empty star
+                                    return <span key={index}><img src={grayStar} alt="..." /></span>; // Empty star
                                   }
                                 })}
                               </span>

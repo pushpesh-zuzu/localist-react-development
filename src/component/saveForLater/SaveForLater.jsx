@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./SaveForLater.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAddManualBidData,
+  getLeadRequestList,
   getSaveLaterListData,
   totalCreditData,
 } from "../../store/LeadSetting/leadSettingSlice";
@@ -16,12 +17,18 @@ import CustomModal from "../Leads/LeadLists/ConfirmModal";
 import viewDetailsArrow from "../../assets/Images/Setting/viewDetailsArrow.svg";
 import SavedViewDetails from "./SavedViewDetails/SaveViewDetails";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
+import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
+import ContactConfirmModal from "../Leads/LeadLists/ContactConfirmModal";
 
 const SaveForLater = () => {
   const dispatch = useDispatch();
+  const scrollContainerRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
+  const [visibleCount, setVisibleCount] = useState(5);
+  const [isopen, setIsOpen] = useState(false);
+  const [planpurcahse, setPlanPurchase] = useState("");
   const { registerData } = useSelector((state) => state.findJobs);
-  const { saveForLaterDataList, manualBidLoader } = useSelector(
+  const { saveForLaterDataList, manualBidLoader, totalCredit } = useSelector(
     (state) => state.leadSetting
   );
   const [selectedItem, setSelectedItem] = useState(null);
@@ -36,31 +43,63 @@ const SaveForLater = () => {
     };
     dispatch(getSaveLaterListData(data));
   }, []);
-  const handleContinue = () => {
-    if (!selectedItem) return;
-
+const addManualBidData = (item) => {
+    console.log(item, "sel");
     const formData = new FormData();
-    formData.append("buyer_id", selectedItem?.customer_id);
-    formData.append("user_id", userToken?.remember_tokens);
-    formData.append("bid", selectedItem?.credit_score);
-    formData.append("lead_id", selectedItem?.id);
+    formData.append("buyer_id", item?.customer_id);
+    formData.append(
+      "user_id",
+      userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens
+    );
+    formData.append("bid", item?.credit_score);
+    formData.append("lead_id", item?.id);
     formData.append("bidtype", "purchase_leads");
-    formData.append("service_id", selectedItem?.service_id);
+    formData.append("service_id", item?.service_id);
     formData.append("distance", "0");
 
     dispatch(getAddManualBidData(formData)).then((result) => {
       if (result) {
         showToast("success", result?.message);
-        setModalOpen(false);
+        setModalOpen(true);
       }
-      const datas = {
+
+      const data = {
         user_id: userToken?.remember_tokens
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
       };
-      dispatch(getSaveLaterListData(datas));
+
+      dispatch(totalCreditData(data));
+      // dispatch(getLeadRequestList(data));
+    dispatch(getSaveLaterListData(data));
     });
   };
+const handleContinue = (item) => {
+    if (!item) return;
+    console.log(item?.credit_score, totalCredit?.total_credit, "item");
+    setSelectedItem(item);
+    setPlanPurchase(totalCredit?.plan_purchased);
+
+    // Condition 1: Plan not purchased
+    if (totalCredit?.plan_purchased === 0) {
+      setIsOpen(true);
+      return;
+    }
+    // Condition 2: Not enough credits
+    if (Number(totalCredit?.total_credit) < Number(item?.credit_score)) {
+      setIsOpen(true);
+      return;
+    }
+    if (Number(totalCredit?.total_credit) > Number(item?.credit_score)) {
+      addManualBidData(item);
+      return;
+    }
+
+    
+  };
+
   const [clikedDetails, setClickedDetails] = useState({});
   const [viewDetailsOpen, setViewDetaisOpen] = useState(null);
 
@@ -72,12 +111,54 @@ const SaveForLater = () => {
       setViewDetaisOpen(item?.id);
     }
   };
+   const handleMouseEnter = () => {
+    setVisibleCount((prev) => prev + 5);
+  };
+   const handleOpenClose = (e) => {
+    setIsOpen(false);
+    if (e) {
+      setTimeout(() => {
+        setModalOpen(true);
+      }, 2000);
+    }
+  };
+// useEffect(() => {
+//   const scrollContainer = scrollContainerRef.current;
+//   const handleScroll = () => {
+//     const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+//     if (scrollTop + clientHeight >= scrollHeight - 100) {
+//       setVisibleCount((prev) => prev + 5);
+//     }
+//   };
+
+//   scrollContainer.addEventListener("scroll", handleScroll);
+
+//   return () => {
+//     scrollContainer.removeEventListener("scroll", handleScroll);
+//   };
+// }, []);
+useEffect(() => {
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight;
+
+    if (scrollTop + windowHeight >= fullHeight - 100) {
+      setVisibleCount((prev) => prev + 5);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
+
+
   return (
     <>
       <div className={styles.maincontainer}>
-        {/* <div style={{ fontSize: "24px", fontWeight: 800, }}>Save For Later List</div> */}
-        <div>
-          {saveForLaterDataList?.[0]?.savedLeads?.map((item) => {
+        <div className={styles.scrollContainer} ref={scrollContainerRef}>
+          {saveForLaterDataList?.[0]?.savedLeads?.slice(0, visibleCount)?.map((item) => {
             return (
               <>
                 <div className={styles.cardParent}>
@@ -178,22 +259,16 @@ const SaveForLater = () => {
                           </p>
                         )}
                       </div>
-
-                      {/* <p>
-                              <strong>Starting:</strong> In the next month
-                            </p> */}
                     </div>
 
                     {/* Right Section - Lead Purchase */}
                     <div className={styles.leadActions}>
                       <button
                         className={styles.purchaseButton}
-                        onClick={() => {
-                          setSelectedItem(item);
-                          setModalOpen(true);
-                        }}
+                        onClick={() => handleContinue(item)}
                       >
-                        Contact {item?.customer?.name}
+                        Contact 
+                        {/* {item?.customer?.name} */}
                       </button>
                       <span className={styles.credits}>
                         {item?.credit_score} Credits
@@ -204,9 +279,6 @@ const SaveForLater = () => {
                         <span> 0 Professionals</span>{" "}
                         <br /> have viewed this lead
                       </div>
-                      {/* <span className={styles.credits}>
-                            {item?.credit_score}Credits
-                          </span> */}
                     </div>
                   </div>
                   <div className={styles.viewDetailsBtnWrapper}>
@@ -231,15 +303,26 @@ const SaveForLater = () => {
             );
           })}
         </div>
+         {saveForLaterDataList?.[0]?.savedLeads?.length > visibleCount && (
+                    <div className={styles.viewMoreBtnWrapper}>
+                      <button onMouseEnter={handleMouseEnter}>View More</button>
+                    </div>
+                  )}
         <FeelingStuckFooter />
       </div>
-      <CustomModal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        onContinue={handleContinue}
-        message="Are you sure you want to continue?"
-        loading={manualBidLoader}
-      />
+      <ContactSuccessModal
+              onClose={() => setModalOpen(false)}
+              isOpen={isModalOpen}
+              details={selectedItem}
+            />
+            {isopen && (
+              <ContactConfirmModal
+                onClose={(e) => handleOpenClose(e)}
+                enoughCredit={planpurcahse}
+                confirmModal={isModalOpen}
+                details={selectedItem}
+              />
+            )}
     </>
   );
 };

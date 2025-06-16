@@ -181,17 +181,18 @@
 }
 
 .purchaseButton {
-  background: #3cae85;
+  background: #57E202;
   color: white;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .purchaseButton:hover {
-  background-color: #1fc28c;
+  background-color: #4ECF00;
 }
 
 .credits {

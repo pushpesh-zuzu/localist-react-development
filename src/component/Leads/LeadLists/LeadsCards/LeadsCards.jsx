@@ -249,7 +249,10 @@ const LeadsCards = ({ enoughCredit }) => {
   };
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);
-
+ window.scrollTo({
+    top: 0,
+    behavior: 'smooth', // Optional: for smooth animation
+  });
     const saveLaterData = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
@@ -490,7 +493,8 @@ const LeadsCards = ({ enoughCredit }) => {
                               // }}
                               onClick={() => handleContinue(item)}
                             >
-                              Contact {item?.customer?.name}
+                              Contact 
+                              {/* {item?.customer?.name} */}
                             </button>
                             <span className={styles.credits}>
                               {item?.credit_score} Credits
