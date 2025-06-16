@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 // import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
 import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
+import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 
 const ManualBidList = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const ManualBidList = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const navigate = useNavigate();
+  const [isopen,setIsOpen] = useState(false)
   const webData = autoBidListData?.map((item) => item?.service_name) || [];
   console.log(autoBidListData, "autoBidListData");
   const handleBack = () => {
@@ -52,6 +54,9 @@ const ManualBidList = () => {
       }
     });
   };
+  const handleConatct = () => {
+setIsOpen(true)
+  }
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
@@ -71,30 +76,6 @@ const ManualBidList = () => {
           </button>
         </div>
       </div>
-
-      <div className={styles.filters}>
-        {/* <select className={styles.customSelect}>
-          <option>All ratings</option>
-        </select>
-        <select className={styles.customSelect}>
-          <option>All locations</option>
-        </select>
-        <select className={styles.customSelect}>
-          <option>All response times</option>
-        </select>
-        <span className={styles.matchCount}>
-          {(autoBidListData || []).length} matches
-        </span> */}
-
-        {/* <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
-          <option>Sort by: best match</option>
-        </select> */}
-      </div>
-
-      {/* <div className={styles.recommendBar}>
-        <span>Recommended:</span> Request replies from your{" "}
-        <strong>top matches</strong> to hear back faster
-      </div> */}
       {autobidLoader ? (
         <Spin
           style={{ color: "blue", display: "flex", justifyContent: "center" }}
@@ -140,7 +121,7 @@ const ManualBidList = () => {
                               <span className={styles.stars}>
                                 {[...Array(5)].map((_, index) => {
                                   if (rating >= index + 1) {
-                                    return <span key={index}><img src={starImg} alt="..." /></span>; // Full star
+                                    return <span key={index}><img src={starImg} alt="..." width={29} height={27}/></span>; // Full star
                                   } else if (rating >= index + 0.5) {
                                     return <span key={index}>★</span>; // Half star (or use icon)
                                   } else {
@@ -162,10 +143,23 @@ const ManualBidList = () => {
                     <span>{item.service_name}</span>
                   </div>
 
-                  <p className={styles.description}>
+                  {/* <p className={styles.description}>
                     This is a static description for demonstration purposes. It
                     showcases how each bid card might look like in real data.
-                  </p>
+                  </p> */}
+                  {/* <div className={styles.description}>
+
+                  </div> */}
+                  <div className={styles.messageRow}>
+  <div className={styles.description}>
+    <div className={styles.messageText}>
+      <div className={styles.meName}>Me,</div>
+      <div className={styles.meName}>You Requested a Quote</div>
+    </div>
+    <div className={styles.timestamp}>5 May 2025, 15:51</div>
+  </div>
+</div>
+
 
                   <div className={styles.quickToRespondWrapper}>
                     <a
@@ -186,13 +180,18 @@ const ManualBidList = () => {
                 </div>
 
                 <div className={styles.replyBtnWrapper}>
-              <button className={styles.replyBtn}>Contact</button>
+              <button className={styles.replyBtn} onClick={handleConatct}>Contact</button>
             </div>
               </div>
             </div>
           ))}
         </>
       )}
+       { isopen &&<ContactSuccessModal
+              onClose={() => setIsOpen(false)}
+              isOpen={isopen}
+              repliesBtn={autoBidListData}
+            />}
     </div>
   );
 };

@@ -82,7 +82,7 @@ import { showToast } from "../../../utils";
           try {
             const response = await axiosInstance.post(`users/seller-card-details`,cardData);
             if (response) {
-              // dispatch(setPreferencesList(response?.data?.data));
+             
               return response?.data;
             }
           } catch (error) {

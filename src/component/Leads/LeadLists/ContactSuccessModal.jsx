@@ -11,18 +11,12 @@ import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ContactSuccessModal = ({ isOpen, onClose,details }) => {
+const ContactSuccessModal = ({ isOpen, onClose,details,repliesBtn }) => {
     const dispatch =useDispatch()
-    //  useEffect(() => {
-    //           document.body.style.overflow = 'hidden';
-    //           return () => {
-    //             document.body.style.overflow = 'auto';
-    //           };
-              
-    //         }, []);
+    
      const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-    console.log(details,"details")
+    console.log(details,repliesBtn,"details")
     if (!isOpen) return null;
    
        const handleResponseChange = (clickName) => {
@@ -84,9 +78,9 @@ const ContactSuccessModal = ({ isOpen, onClose,details }) => {
           ))}
         </div>
 
-        <p className={styles.skipLink}>Skip, I will contact them later</p>
+        <p className={styles.skipLink} onClick={onClose}>Skip, I will contact them later</p>
 
-        <div className={styles.footer}>
+        {!repliesBtn && <div className={styles.footer}>
           <div className={styles.creditsBox}>
             <img src={locallistImgs} alt="..." /> <strong>70 credits</strong>
           </div>
@@ -94,7 +88,7 @@ const ContactSuccessModal = ({ isOpen, onClose,details }) => {
             Covered by our <strong>Get Hired Guarantee</strong><br />
             If you're not hired during the starter pack, we'll return all the credits.
           </div>
-        </div>
+        </div>}
       </div>
     </div>
         </>
