@@ -5,12 +5,12 @@
   width: 100%;
   max-width: 543px;
   min-width: 250px;
-  height: 75vh;
+  height: 77.3vh;
   overflow: auto;
 }
 
 .container::-webkit-scrollbar {
-  width: 2px;
+  width: 6px;
 }
 
 .container::-webkit-scrollbar-thumb {
