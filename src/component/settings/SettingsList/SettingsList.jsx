@@ -57,10 +57,10 @@ const SettingsList = () => {
           <div className={styles.sectionContent}>
             <div
               className={styles.card}
-              style={{ backgroundColor: "#FCE5E3" }}
+              style={{ backgroundColor: "#FFD5D2" }}
               onClick={handleMyProfile}
             >
-              <h3>My Profile</h3>
+              <span>My Profile</span>
             </div>
 
             <p>
@@ -68,8 +68,8 @@ const SettingsList = () => {
               explain what makes you different from your competition & why
               people should work with you
             </p>
-            <div className={styles.card} style={{ backgroundColor: "#FCE5E3" }} onClick={handleReview}>
-              <h3>Reviews</h3>
+            <div className={styles.card} style={{ backgroundColor: "#FFD5D2" }} onClick={handleReview}>
+              <span>Reviews</span>
             </div>
             <p>
               Reviews help you stand out. Learn how to use them to boost your
@@ -77,10 +77,10 @@ const SettingsList = () => {
             </p>
             <div
               className={styles.card}
-              style={{ backgroundColor: "#FCE5E3" }}
+              style={{ backgroundColor: "#FFD5D2" }}
               onClick={handleAccountSetting}
             >
-              <h3>Account details</h3>
+              <span>Account details</span>
             </div>
             <p>
               The email address and password you use to log in, and the phone
@@ -102,7 +102,7 @@ const SettingsList = () => {
               style={{ backgroundColor: "#AAC9D2" }}
               onClick={handleMyService}
             >
-              <h3>My Services</h3>
+              <span>My Services</span>
             </div>
             <p>
               Tell us what services you provide so we can send relevant leads.
@@ -112,7 +112,7 @@ const SettingsList = () => {
               style={{ backgroundColor: "#AAC9D2" }}
               onClick={handleMyService}
             >
-              <h3>My Locations</h3>
+              <span>My Locations</span>
             </div>
             <p>Tell us what locations you provide your services in.</p>
           </div>
@@ -129,19 +129,19 @@ const SettingsList = () => {
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
             onClick={handleMycredit}
             >
-              <h3>My credits</h3>
+              <span>My credits</span>
             </div>
             <p>View credit history & buy credits to contact more customers</p>
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
             onClick={handleInvoice}
             >
-              <h3>Invoices and billing details</h3>
+              <span>Invoices and billing details</span>
             </div>
             <p>View your invoices and manage your billing details</p>
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
             onClick={handlePayment}
             >
-              <h3>My payment details</h3>
+              <span>My payment details</span>
             </div>
             <p>Your payment settings</p>
           </div>
@@ -158,13 +158,13 @@ const SettingsList = () => {
             <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
             onClick={handleMail}
             >
-              <h3>Email</h3>
+              <span>Email</span>
             </div>
             <p>Set what type of emails you'd like to receive from us</p>
             <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
              onClick={handleBrowser}
             >
-              <h3>Browser</h3>
+              <span>Browser</span>
             </div>
             <p>
               Set what type of notifications from us you'd like to receive in

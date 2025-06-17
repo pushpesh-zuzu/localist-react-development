@@ -447,7 +447,7 @@ useEffect(() => {
         </a>
       </div>
 
-      <div className={styles.card}>
+      {/* <div className={styles.card}>
         <h3>Company Photos</h3>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {formState.company_photosPreview.map((src, i) => (
@@ -475,9 +475,9 @@ useEffect(() => {
           onChange={handleFileChange}
           multiple
         />
-      </div>
+      </div> */}
 
-      <div className={styles.card}>
+      {/* <div className={styles.card}>
         <h3>Online Presence</h3>
         <label className={styles.label}>YouTube Video Link</label>
         <input
@@ -515,9 +515,9 @@ useEffect(() => {
           onChange={handleInputChange}
           placeholder="Link description"
         />
-      </div>
+      </div> */}
 
-      <div className={styles.card}>
+      {/* <div className={styles.card}>
         <h3>Accreditations & Services</h3>
         <label className={styles.label}>Accreditation Name</label>
         <input
@@ -573,7 +573,7 @@ useEffect(() => {
           onChange={handleInputChange}
           placeholder="e.g., 16"
         />
-      </div>
+      </div> */}
 
       
       <div className={styles.buttonRow}>
