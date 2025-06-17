@@ -16,17 +16,19 @@ const ContactSuccessModal = ({ isOpen, onClose,details,repliesBtn }) => {
     
      const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-    console.log(details,repliesBtn,"details")
+    console.log(repliesBtn,"details")
     if (!isOpen) return null;
    
        const handleResponseChange = (clickName) => {
         console.log(clickName,"click")
           const responseStatus = {
-            lead_id: details?.id,
+            lead_id: repliesBtn ? repliesBtn?.id : details?.id,
             seller_id: userToken?.remember_tokens
               ? userToken?.remember_tokens
               : registerData?.remember_tokens,
-            buyer_id: details?.customer_id,
+            buyer_id: repliesBtn ? userToken?.id
+              ? userToken?.id
+              : registerData?.id  : details?.customer_id,
       
             type: null,
           };
@@ -61,21 +63,26 @@ const ContactSuccessModal = ({ isOpen, onClose,details,repliesBtn }) => {
         </p>
 
         <div className={styles.actions}>
-          {[
-            { label: "Give them a call",name:"mobile", btn: "Phone Number",icon:phoneBtn },
-            { label: "Send WhatsApp",name:"Whatsapp", btn: "Send WhatsApp", icon:whatsappBtn },
-            { label: "Send an Email", name:"email", btn: "Send Email",icon:Mailbtn },
-            { label: "Send an SMS",name:"sms", btn: "Send SMS",icon:smsBtn },
-            { label: "Send an estimate",name:"", btn: "Send Estimate",icon:EstimateIcon },
-          ].map((item, idx) => (
-            <div key={idx} className={styles.actionItem}>
-              <div className={styles.actionText}>
-                <strong>{item.label}</strong>
-                <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
-              </div>
-              <button className={styles.actionBtn} onClick={()=> handleResponseChange(item)}>{<img src={item?.icon} alt="..." width={18} height={18}/>} {item.btn}</button>
-            </div>
-          ))}
+         {[
+  { label: "Give them a call", name: "mobile", btn: "Phone Number", icon: phoneBtn },
+  { label: "Send WhatsApp", name: "Whatsapp", btn: "Send WhatsApp", icon: whatsappBtn },
+  { label: "Send an Email", name: "email", btn: "Send Email", icon: Mailbtn },
+  { label: "Send an SMS", name: "sms", btn: "Send SMS", icon: smsBtn },
+  { label: "Send an estimate", name: "", btn: "Send Estimate", icon: EstimateIcon },
+]
+  .filter(item => !(repliesBtn && item.btn === "Send Estimate")) // 👈 filter out "Send Estimate" if repliesBtn exists
+  .map((item, idx) => (
+    <div key={idx} className={styles.actionItem}>
+      <div className={styles.actionText}>
+        <strong>{item.label}</strong>
+        <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
+      </div>
+      <button className={styles.actionBtn} onClick={() => handleResponseChange(item)}>
+        <img src={item?.icon} alt="..." width={18} height={18} /> {item.btn}
+      </button>
+    </div>
+))}
+
         </div>
 
         <p className={styles.skipLink} onClick={onClose}>Skip, I will contact them later</p>
