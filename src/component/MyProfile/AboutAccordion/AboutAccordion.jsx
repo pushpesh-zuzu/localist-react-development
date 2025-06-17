@@ -632,7 +632,7 @@ extra_links: "",
           </a>
           .
         </p>
-        <div className={styles.imageSection}>
+        {/* <div className={styles.imageSection}>
           <img src={defaultImage} alt="Default Contact" />
           <div className={styles.buttonGroup}>
             <button
@@ -655,7 +655,7 @@ extra_links: "",
               onChange={handleFileChange}
             />
           </div>
-        </div>
+        </div> */}
         <div className={styles.formGroup}>
           <div className={styles.halfInput}>
             <label className={styles.label}>Company email address</label>
