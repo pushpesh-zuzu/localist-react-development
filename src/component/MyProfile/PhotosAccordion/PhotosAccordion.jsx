@@ -52,15 +52,18 @@
 // };
 
 // export default PhotosAccordion;
-import React, { useState } from "react";
+
+
+import  { useEffect, useState } from "react";
 import styles from "./PhotosAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import axios from "axios";
-import axiosInstance from "../../../Api/axiosInstance";
 
-const apiUrl = `https://localists.zuzucodes.com/admin/api/users/update-seller-profile`;
-
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { updateSellerPhotos, clearPhotoUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 const PhotosAccordion = () => {
+  const dispatch = useDispatch();
+const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((state) => state.myProfile);
   const [formState, setFormState] = useState({
     type: "photos",
     company_photos: [],
@@ -127,56 +130,30 @@ const PhotosAccordion = () => {
     
   // };
 
-  
-  const handleSubmit = async () => {
-    if (!validate()) {
-      alert("Fix validation errors");
-      return;
-    }
-  
-    const body = new FormData();
-    body.append("type", formState.type || "user_details");
-  
-    // Ensure youtube link is included (even if empty)
-    body.append("company_youtube_link", formState.company_youtube_link || "");
-  
-    // Always include optional fields — even if empty
-    // const optionalFields = ["fb_link", "twitter_link", "link_desc"];
-    // optionalFields.forEach((key) => {
-    //   body.append(key, formState[key] || "");
-    // });
-  
-    // Append multiple photos
-    if (Array.isArray(formState.company_photos)) {
-      formState.company_photos.forEach((file) => {
-        if (file instanceof File) {
-          body.append("company_photos[]", file);
-        }
-      });
-    }
-  
-    // Debug: log actual FormData content
-    for (let pair of body.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-  
-    try {
-      const token = localStorage.getItem("accessToken");
-      const response = await axiosInstance.post(apiUrl, body, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      
-  
-      alert("Profile updated successfully!");
-      console.log(response.data);
-    } catch (err) {
-      console.error("Submission failed:", err);
-      alert("Submission failed.");
-    }
-  };
+ // Inside component
+
+
+// useEffect for toast
+
+
+
+useEffect(() => {
+  if (photoUpdateSuccess) {
+    toast.success("Photos updated successfully!");
+    dispatch(clearPhotoUpdateStatus());
+  } else if (photoUpdateError) {
+    toast.error(`Failed: ${photoUpdateError}`);
+    dispatch(clearPhotoUpdateStatus());
+  }
+}, [photoUpdateSuccess, photoUpdateError, dispatch]);
+
+const handleSubmit = () => {
+  if (!validate()) {
+    toast.warn("Please fix validation errors");
+    return;
+  }
+  dispatch(updateSellerPhotos(formState));
+};
   
   
   

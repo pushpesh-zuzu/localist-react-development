@@ -146,6 +146,40 @@ export const updateSellerProfile = createAsyncThunk(
   }
 );
 
+// Thunk to upload photos and YouTube link
+export const updateSellerPhotos = createAsyncThunk(
+  "myProfile/updateSellerPhotos",
+  async (formState, { rejectWithValue }) => {
+    try {
+      const body = new FormData();
+      body.append("type", formState.type || "photos");
+      body.append("company_youtube_link", formState.company_youtube_link || "");
+
+      if (Array.isArray(formState.company_photos)) {
+        formState.company_photos.forEach((file) => {
+          if (file instanceof File) {
+            body.append("company_photos[]", file);
+          }
+        });
+      }
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        body,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
+
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
@@ -156,6 +190,9 @@ const initialState = {
   // NEW state for update logic
   updateSuccess: false,
   updateError: null,
+    // New for photo upload
+    photoUpdateSuccess: false,
+    photoUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -180,10 +217,17 @@ const myprofileSlice = createSlice({
     clearUpdateStatus(state) {
       state.updateSuccess = false;
       state.updateError = null;
+    },
+    clearPhotoUpdateStatus(state) {
+      state.photoUpdateSuccess = false;
+      state.photoUpdateError = null;
     }
+    
+
   },
   extraReducers: (builder) => {
     builder
+    // for profile
       .addCase(updateSellerProfile.pending, (state) => {
         state.sellerLoader = true;
         state.updateSuccess = false;
@@ -197,7 +241,22 @@ const myprofileSlice = createSlice({
         state.sellerLoader = false;
         state.updateSuccess = false;
         state.updateError = action.payload;
-      });
+      })
+      // for photos
+    .addCase(updateSellerPhotos.pending, (state) => {
+      state.sellerLoader = true;
+      state.photoUpdateSuccess = false;
+      state.photoUpdateError = null;
+    })
+    .addCase(updateSellerPhotos.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.photoUpdateSuccess = true;
+    })
+    .addCase(updateSellerPhotos.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.photoUpdateSuccess = false;
+      state.photoUpdateError = action.payload;
+    });
   },
 });
 
@@ -207,7 +266,8 @@ export const {
   setGetReviewData,
   setEditProfileList,
   setSellerUpdateLoader,
-  clearUpdateStatus
+  clearUpdateStatus,
+  clearPhotoUpdateStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
