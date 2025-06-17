@@ -179,7 +179,43 @@ export const updateSellerPhotos = createAsyncThunk(
     }
   }
 );
+// Thunk for social media links update
+export const updateSellerSocialLinks = createAsyncThunk(
+  "myProfile/updateSellerSocialLinks",
+  async (formState, { rejectWithValue }) => {
+    try {
+      const body = new FormData();
+      body.append("type", "social_media");
 
+      const fields = [
+        "fb_link",
+        "twitter_link",
+        "tiktok_link",
+        "insta_link",
+        "linkedin_link",
+        "extra_links",
+      ];
+
+      fields.forEach((field) => {
+        body.append(field, formState[field] || "");
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        body,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
@@ -192,7 +228,11 @@ const initialState = {
   updateError: null,
     // New for photo upload
     photoUpdateSuccess: false,
-    photoUpdateError: null,
+    photoUpdateError: null, 
+
+    //New for social media links 
+    socialUpdateSuccess: false,
+  socialUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -221,12 +261,19 @@ const myprofileSlice = createSlice({
     clearPhotoUpdateStatus(state) {
       state.photoUpdateSuccess = false;
       state.photoUpdateError = null;
+    },
+    clearSocialUpdateStatus(state) {
+      state.socialUpdateSuccess = false;
+      state.socialUpdateError = null;
     }
+    
     
 
   },
   extraReducers: (builder) => {
     builder
+
+
     // for profile
       .addCase(updateSellerProfile.pending, (state) => {
         state.sellerLoader = true;
@@ -242,6 +289,8 @@ const myprofileSlice = createSlice({
         state.updateSuccess = false;
         state.updateError = action.payload;
       })
+
+
       // for photos
     .addCase(updateSellerPhotos.pending, (state) => {
       state.sellerLoader = true;
@@ -256,7 +305,26 @@ const myprofileSlice = createSlice({
       state.sellerLoader = false;
       state.photoUpdateSuccess = false;
       state.photoUpdateError = action.payload;
+    })
+
+
+     // Social media
+     .addCase(updateSellerSocialLinks.pending, (state) => {
+      state.sellerLoader = true;
+      state.socialUpdateSuccess = false;
+      state.socialUpdateError = null;
+    })
+    .addCase(updateSellerSocialLinks.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.socialUpdateSuccess = true;
+    })
+    .addCase(updateSellerSocialLinks.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.socialUpdateSuccess = false;
+      state.socialUpdateError = action.payload;
     });
+
+
   },
 });
 
@@ -267,7 +335,8 @@ export const {
   setEditProfileList,
   setSellerUpdateLoader,
   clearUpdateStatus,
-  clearPhotoUpdateStatus
+  clearPhotoUpdateStatus,
+  clearSocialUpdateStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;

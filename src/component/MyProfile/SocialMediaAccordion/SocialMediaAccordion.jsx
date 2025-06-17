@@ -1,102 +1,17 @@
-// import React from "react";
-// import styles from "./SocialMediaAccordion.module.css";
-// import iIcon from "../../../assets/Images/iIcon.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import {
+  updateSellerSocialLinks,
+  clearSocialUpdateStatus,
+} from "../../../store/MyProfile/myProfileSlice";
+import { useEffect } from "react";
 
-// const platforms = [
-//   { label: "Facebook", placeholder: "www.facebook.com" },
-//   { label: "Twitter", placeholder: "@username" },
-//   { label: "Tik Tok", placeholder: "@username" },
-//   { label: "Instagram", placeholder: "@username" },
-//   { label: "Linkedin", placeholder: "@username" },
-// ];
-
-// const SocialMediaAccordion = () => {
-//   return (
-//     <div className={styles.container}>
-//       {/* Social Media Section */}
-//       <div className={styles.card}>
-//         <h3 className={styles.heading}>Social media</h3>
-//         <p className={styles.subtext}>
-//           Add your company social media accounts to lend credibility to your
-//           business – it is often something customers will look for to validate
-//           their hiring decisions.
-//         </p>
-
-//         {platforms.map((platform, idx) => (
-//           <div className={styles.inputRow} key={idx}>
-//             <div className={styles.labelWrapper}>
-//               <label className={styles.label}>{platform.label}</label>
-//               <div className={styles.optionalToggle}>
-//                 <img src={iIcon} alt="info" className={styles.icon} />
-//                 <span className={styles.optionalText}>Optional</span>
-//                 <label className={styles.switch}>
-//                   <input type="checkbox" defaultChecked />
-//                   <span className={styles.slider}></span>
-//                 </label>
-//               </div>
-//             </div>
-//             <div className={styles.inputWithToggle}>
-//               <input
-//                 className={styles.input}
-//                 type="text"
-//                 placeholder={platform.placeholder}
-//               />
-//               {/* <div className={styles.optionalToggle}>
-//                 <img src={iIcon} alt="info" className={styles.icon} />
-//                 <span className={styles.optionalText}>Optional</span>
-//                 <label className={styles.switch}>
-//                   <input type="checkbox" defaultChecked />
-//                   <span className={styles.slider}></span>
-//                 </label>
-//               </div> */}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Links Section */}
-//       <div className={styles.card}>
-//           <div className={styles.header}>
-//         <h3 className={styles.heading}>Links</h3>
-//         <div className={styles.optionalToggle}>
-//             <img src={iIcon} alt="info" className={styles.icon} />
-//             <span className={styles.optionalText}>Optional</span>
-//             <label className={styles.switch}>
-//               <input type="checkbox" defaultChecked />
-//               <span className={styles.slider}></span>
-//             </label>
-//           </div>
-//           </div>
-//         <div className={styles.labelWrapper}>
-//           <p className={styles.subtext}>
-//             Link to your own website, articles about your business, or any other
-//             content that will help promote your business.
-//           </p>
-         
-//         </div>
-//         <div className={styles.inputWithToggle}>
-//           <textarea
-//             className={styles.textarea}
-//             rows={3}
-//             placeholder="Enter one link per line"
-//           />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SocialMediaAccordion; 
-
-
-
-
-import React, { useState } from "react";
+import  { useState } from "react";
 import styles from "./SocialMediaAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import axiosInstance from "../../../Api/axiosInstance";
 
-const apiUrl = `https://localists.zuzucodes.com/admin/api/users/update-seller-profile`;
+
 
 const platforms = [
   { key: "fb_link", label: "Facebook", placeholder: "www.facebook.com" },
@@ -116,7 +31,10 @@ const SocialMediaAccordion = () => {
     linkedin_link: "",
     extra_links: "",
   });
-
+  const dispatch = useDispatch();
+  const { socialUpdateSuccess, socialUpdateError, sellerLoader } = useSelector(
+    (state) => state.myProfile
+  );
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState((prev) => ({
@@ -124,45 +42,23 @@ const SocialMediaAccordion = () => {
       [name]: value,
     }));
   };
-
-  const handleSubmit = async () => {
-    const body = new FormData();
-    body.append("type", "social_media");
-
-    const fields = [
-      "fb_link",
-      "twitter_link",
-      "tiktok_link",
-      "insta_link",
-      "linkedin_link",
-      "extra_links",
-    ];
-
-    fields.forEach((field) => {
-      body.append(field, formState[field] || "");
-    });
-
-    // Log what’s being sent (optional)
-    for (let [k, v] of body.entries()) {
-      console.log(k, v);
-    }
-
-    try {
-      const token = localStorage.getItem("accessToken");
-      const response = await axiosInstance.post(apiUrl, body, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      alert("Social media links updated successfully!");
-      console.log(response.data);
-    } catch (err) {
-      console.error("Submission failed:", err);
-      alert("Failed to update social media.");
-    }
+  const handleSubmit = () => {
+    dispatch(updateSellerSocialLinks(formState));
   };
+  
+ 
+  
+  // Toast notifications
+  useEffect(() => {
+    if (socialUpdateSuccess) {
+      toast.success("Social media links updated successfully!");
+      dispatch(clearSocialUpdateStatus());
+    } else if (socialUpdateError) {
+      toast.error(`Error: ${socialUpdateError}`);
+      dispatch(clearSocialUpdateStatus());
+    }
+  }, [socialUpdateSuccess, socialUpdateError, dispatch]);
+  
 
   return (
     <div className={styles.container}>
