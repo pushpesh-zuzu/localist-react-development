@@ -28,7 +28,6 @@
     "react-html5-camera-photo": "^1.5.11",
     "react-redux": "^9.2.0",
     "react-slick": "^0.30.3",
-    "react-stripe-elements": "^6.1.2",
     "react-toastify": "^11.0.5",
     "react-webcam": "^7.2.0",
     "slick-carousel": "^1.8.1"

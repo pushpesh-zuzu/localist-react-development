@@ -322,6 +322,11 @@
 // export default AboutAccordion;
 
 
+
+// company_logo, company_name, profile_image, name, company_email, company_phone, company_website, company_location, company_locaion_reason, company_size, company_total_years, about_company
+
+
+
 import React, { useState, useRef } from "react";
 import styles from "./AboutAccordion.module.css";
 import defaultImage from "../../../assets/Images/DefaultProfileImage.svg";
@@ -437,12 +442,14 @@ extra_links: "",
     }
   };
 
+  
+
   // const handleSubmit = async () => {
   //   if (!validate()) {
   //     alert("Fix validation errors");
   //     return;
   //   }
-
+  //   console.log("Form state before submit:", formState);
   //   const body = new FormData();
   //   Object.entries(formState).forEach(([key, val]) => {
   //     if (val == null || key.endsWith("Preview")) return;
@@ -452,38 +459,56 @@ extra_links: "",
   //       body.append(key, val);
   //     }
   //   });
+  //   console.log("Form state before submit:", formState);
 
+  
   //   try {
-  //     const res = await fetch(apiUrl, { method: "POST", body });
-  //     console.log(res)
-  //     const result = await res.json();
+  //     const response = await axiosInstance.post(apiUrl, body, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     });
+  
   //     alert("Profile updated successfully!");
-  //     console.log(result);
+  //     console.log(response);
   //   } catch (err) {
-  //     console.error(err);
+  //     console.error("Submission failed:", err);
   //     alert("Submission failed.");
   //   }
   // };
   
-
+ 
   const handleSubmit = async () => {
     if (!validate()) {
       alert("Fix validation errors");
       return;
     }
-    console.log("Form state before submit:", formState);
+  
+    const allowedKeys = [
+      "type", // Include this if your backend expects it for `user_details`
+      "company_logo",
+      "company_name",
+      "profile_image",
+      "name",
+      "company_email",
+      "company_phone",
+      "company_website",
+      "company_location",
+      "company_locaion_reason",
+      "company_size",
+      "company_total_years",
+      "about_company",
+    ];
+  
     const body = new FormData();
-    Object.entries(formState).forEach(([key, val]) => {
-      if (val == null || key.endsWith("Preview")) return;
-      if (key === "company_photos") {
-        val.forEach((file) => body.append("company_photos[]", file));
-      } else {
+    allowedKeys.forEach((key) => {
+      const val = formState[key];
+      if (val != null) {
         body.append(key, val);
       }
     });
-    console.log("Form state before submit:", formState);
-
-  
+    console.log(formState)
+  console.log(body)
     try {
       const response = await axiosInstance.post(apiUrl, body, {
         headers: {
@@ -499,6 +524,10 @@ extra_links: "",
     }
   };
   
+ 
+ 
+ 
+ 
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
