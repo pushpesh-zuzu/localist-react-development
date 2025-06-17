@@ -5,7 +5,7 @@
   max-width: 627px;
   padding-bottom: 20px !important;
   position: relative;
-  height: 77vh;
+  height: 79.2vh;
   bottom: 0;
   overflow-y: auto;
   display: flex;
@@ -14,7 +14,7 @@
 }
 
 .modal::-webkit-scrollbar {
-  width: 2px;
+  width: 6px;
 }
 .modal::-webkit-scrollbar-thumb {
   background: #d9d9d9;
@@ -107,6 +107,21 @@
   font-weight: 500;
   font-size: 13px;
   color: #000000;
+  margin-left: 22px;
+}
+.optionSelect {
+  display: flex;
+  align-items: center;
+  margin: 14.47px 0;
+  font-weight: 600;
+  font-size: 13px;
+  color: #000000;
+  margin-left: 5px;
+}
+.optionSelect input {
+  margin-right: 0px;
+  margin-top: 0;
+  margin-bottom: 0px
 }
 
 .option input {
@@ -239,6 +254,7 @@
   font-size: 18px;
   display: flex;
   align-items: center;
+  margin-left: -9px;
   
 }
 .addUpdateLocation {
@@ -258,7 +274,7 @@
 } */
 
 .removeService img {
-  margin-right: 4.71px;
+  margin-right: 8px;
 }
 
 .saveButton {
@@ -269,6 +285,7 @@
   border-radius: 3px;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   cursor: pointer;
+  margin-right: 12px;
 }
 
 .saveButton:hover {
