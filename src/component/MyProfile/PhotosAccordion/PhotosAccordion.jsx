@@ -56,12 +56,13 @@ import React, { useState } from "react";
 import styles from "./PhotosAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import axios from "axios";
+import axiosInstance from "../../../Api/axiosInstance";
 
 const apiUrl = `https://localists.zuzucodes.com/admin/api/users/update-seller-profile`;
 
 const PhotosAccordion = () => {
   const [formState, setFormState] = useState({
-    type: "user_details",
+    type: "photos",
     company_photos: [],
     company_youtube_link: "",
   });
@@ -91,30 +92,84 @@ const PhotosAccordion = () => {
     return true; // Add any required validation logic here
   };
 
+  // const handleSubmit = async () => {
+  //   if (!validate()) {
+  //     alert("Fix validation errors");
+  //     return;
+  //   }
+
+  //   const body = new FormData();
+  //   body.append("type", formState.type);
+
+  //   if (formState.company_youtube_link) {
+  //     body.append("company_youtube_link", formState.company_youtube_link);
+  //   }
+
+  //   formState.company_photos.forEach((file) =>
+  //     body.append("company_photos[]", file)
+  //   );
+  //   for (let pair of body.entries()) {
+  //     console.log(pair[0], pair[1]);
+  //   }
+    
+  //   try {
+  //     const token = localStorage.getItem("accessToken"); // Adjust the key if needed
+    
+  //     const response = await axiosInstance.post(apiUrl, body);
+    
+  //     alert("Profile updated successfully!");
+  //     console.log(response.data);
+  //   } catch (err) {
+  //     console.error("Submission failed:", err);
+  //     alert("Submission failed.");
+  //   }
+    
+    
+  // };
+
+  
   const handleSubmit = async () => {
     if (!validate()) {
       alert("Fix validation errors");
       return;
     }
-
+  
     const body = new FormData();
-    body.append("type", formState.type);
-
-    if (formState.company_youtube_link) {
-      body.append("company_youtube_link", formState.company_youtube_link);
+    body.append("type", formState.type || "user_details");
+  
+    // Ensure youtube link is included (even if empty)
+    body.append("company_youtube_link", formState.company_youtube_link || "");
+  
+    // Always include optional fields — even if empty
+    // const optionalFields = ["fb_link", "twitter_link", "link_desc"];
+    // optionalFields.forEach((key) => {
+    //   body.append(key, formState[key] || "");
+    // });
+  
+    // Append multiple photos
+    if (Array.isArray(formState.company_photos)) {
+      formState.company_photos.forEach((file) => {
+        if (file instanceof File) {
+          body.append("company_photos[]", file);
+        }
+      });
     }
-
-    formState.company_photos.forEach((file) =>
-      body.append("company_photos[]", file)
-    );
-
+  
+    // Debug: log actual FormData content
+    for (let pair of body.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+  
     try {
-      const response = await axios.post(apiUrl, body, {
+      const token = localStorage.getItem("accessToken");
+      const response = await axiosInstance.post(apiUrl, body, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
         },
       });
-
+      
+  
       alert("Profile updated successfully!");
       console.log(response.data);
     } catch (err) {
@@ -122,7 +177,13 @@ const PhotosAccordion = () => {
       alert("Submission failed.");
     }
   };
-
+  
+  
+  
+  
+  
+  
+  
   const handleCancel = () => {
     setFormState({
       type: "user_details",
@@ -149,7 +210,7 @@ const PhotosAccordion = () => {
           onChange={handleFileChange}
           className={styles.fileInput}
         />
-        <div className={styles.previewContainer}>
+        {/* <div className={styles.previewContainer}>
           {photoPreviews.map((src, idx) => (
             <img
               key={idx}
@@ -158,7 +219,7 @@ const PhotosAccordion = () => {
               className={styles.previewImage}
             />
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Videos Section */}
