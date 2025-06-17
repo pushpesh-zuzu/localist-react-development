@@ -100,3 +100,20 @@ export const loadGooglePlacesAutocomplete = ({
 
   loadGoogleMapsScript();
 };
+
+export const updateLocalStorageValue = (storageKey, targetKey, newValue) => {
+  try {
+    const storedData = localStorage.getItem(storageKey);
+    if (!storedData) {
+      // console.warn(No data found in localStorage for key: ${storageKey});
+      return;
+    }
+
+    const parsedData = JSON.parse(storedData);
+    parsedData[targetKey] = newValue;
+
+    localStorage.setItem(storageKey, JSON.stringify(parsedData));
+  } catch (error) {
+    console.error('Error updating localStorage:', error);
+  }
+};
