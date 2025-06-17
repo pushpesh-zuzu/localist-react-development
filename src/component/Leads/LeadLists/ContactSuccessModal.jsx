@@ -78,9 +78,14 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn }) => {
         <div className={styles.modal}>
           <button className={styles.closeBtn} onClick={onClose}>×</button>
 
-          <h2 className={styles.title}>
+          {/* <h2 className={styles.title}>
             {`Great! Now Contact ${repliesBtn ? repliesBtn?.name : details?.customer?.name}`}
-          </h2>
+          </h2> */}
+                 <h2 className={styles.title}>
+  {repliesBtn
+    ? `Contact ${repliesBtn?.name}`
+    : `Great! Now Contact ${details?.customer?.name}`}
+</h2>
           <p className={styles.description}>
             Reference site about Lorem Ipsum, giving information on its <br /> origins, as well as a random Lipsum generator.
           </p>
