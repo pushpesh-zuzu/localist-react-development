@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
-// import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
-import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
+import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
+// import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import starImg from "../../../../../assets/Icons/MyResponse/StarImg.svg"
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
@@ -27,8 +27,9 @@ const ManualBidList = () => {
   const { registerData } = useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const [isopen,setIsOpen] = useState(false)
+  const [autobidDatas,setAutoBidDatas] = useState("")
   const webData = autoBidListData?.map((item) => item?.service_name) || [];
-  console.log(autoBidListData, "autoBidListData");
+  console.log(userToken, "autoBidListData");
   const handleBack = () => {
     navigate(`/bids-list/${requestId}`);
   };
@@ -41,6 +42,7 @@ const ManualBidList = () => {
   }, []);
   const handleReply = (item) => {
     console.log(item, "item");
+    navigate(`/view-profile/${item.id}`)
     const viewProfileData = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
@@ -54,17 +56,18 @@ const ManualBidList = () => {
       }
     });
   };
-  const handleConatct = () => {
+  const handleConatct = (item) => {
+    setAutoBidDatas(item)
 setIsOpen(true)
   }
   return (
     <div className={styles.container}>
       <div className={styles.headerWrapper}>
         <div className={styles.headingTabsWrapper}>
-          {/* NSai */}
+          
           <h1 className={styles.heading}>{webData[0] || "Your Service"}</h1>
           <div className={styles.tabs}>
-            <button className={styles.activeTab} onClick={handleBack}>
+            <button className={styles.activeTab} onClick={handleBack} >
               Your matches
             </button>
             <button className={styles.tab}>Replies</button>
@@ -180,7 +183,7 @@ setIsOpen(true)
                 </div>
 
                 <div className={styles.replyBtnWrapper}>
-              <button className={styles.replyBtn} onClick={handleConatct}>Contact</button>
+              <button className={styles.replyBtn} onClick={() => handleConatct(item)}>Contact</button>
             </div>
               </div>
             </div>
@@ -190,7 +193,7 @@ setIsOpen(true)
        { isopen &&<ContactSuccessModal
               onClose={() => setIsOpen(false)}
               isOpen={isopen}
-              repliesBtn={autoBidListData}
+              repliesBtn={autobidDatas}
             />}
     </div>
   );

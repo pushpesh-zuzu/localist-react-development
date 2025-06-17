@@ -11,87 +11,123 @@ import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ContactSuccessModal = ({ isOpen, onClose,details,repliesBtn }) => {
-    const dispatch =useDispatch()
-    
-     const { registerData } = useSelector((state) => state.findJobs);
+const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn }) => {
+  const dispatch = useDispatch()
+
+  const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-    console.log(details,repliesBtn,"details")
-    if (!isOpen) return null;
-   
-       const handleResponseChange = (clickName) => {
-        console.log(clickName,"click")
-          const responseStatus = {
-            lead_id: details?.id,
-            seller_id: userToken?.remember_tokens
-              ? userToken?.remember_tokens
-              : registerData?.remember_tokens,
-            buyer_id: details?.customer_id,
-      
-            type: null,
-          };
-      
-          if (clickName?.name === "mobile") {
-            responseStatus.type = "mobile";
-          } else if (clickName?.name === "Whatsapp") {
-            responseStatus.type = "Whatsapp";
-          } else if (clickName?.name === "email") {
-            responseStatus.type = "email";
-          } else if (clickName?.name === "sms") {
-            responseStatus.type = "sms";
-          }
-      
-          dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
-            if (result) {
-              showToast("success", result?.message)
-            onClose()
-        }}) }
-        
-    return(
-        <>
-          <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={onClose}>×</button>
+  console.log(repliesBtn, details, "details")
+  if (!isOpen) return null;
 
-        <h2 className={styles.title}>
-          Great! Now Contact Isabella
-        </h2>
-        <p className={styles.description}>
-          Reference site about Lorem Ipsum, giving information on its <br/> origins, as well as a random Lipsum generator.
-        </p>
+  const handleResponseChange = (clickName) => {
+    console.log(clickName, "click")
+    const responseStatus = {
+      lead_id: repliesBtn ? repliesBtn?.id : details?.id,
+      seller_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+      buyer_id: repliesBtn ? userToken?.id
+        ? userToken?.id
+        : registerData?.id : details?.customer_id,
 
-        <div className={styles.actions}>
-          {[
-            { label: "Give them a call",name:"mobile", btn: "Phone Number",icon:phoneBtn },
-            { label: "Send WhatsApp",name:"Whatsapp", btn: "Send WhatsApp", icon:whatsappBtn },
-            { label: "Send an Email", name:"email", btn: "Send Email",icon:Mailbtn },
-            { label: "Send an SMS",name:"sms", btn: "Send SMS",icon:smsBtn },
-            { label: "Send an estimate",name:"", btn: "Send Estimate",icon:EstimateIcon },
-          ].map((item, idx) => (
-            <div key={idx} className={styles.actionItem}>
-              <div className={styles.actionText}>
-                <strong>{item.label}</strong>
-                <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
-              </div>
-              <button className={styles.actionBtn} onClick={()=> handleResponseChange(item)}>{<img src={item?.icon} alt="..." width={18} height={18}/>} {item.btn}</button>
+      type: null,
+    };
+
+    // if (clickName?.name === "mobile") {
+    //   responseStatus.type = "mobile";
+    // } else if (clickName?.name === "Whatsapp") {
+    //   responseStatus.type = "Whatsapp";
+    // } else if (clickName?.name === "email") {
+    //   responseStatus.type = "email";
+    // } else if (clickName?.name === "sms") {
+    //   responseStatus.type = "sms";
+    // }
+    let url = null;
+    if (clickName?.name === "mobile") {
+      responseStatus.type = "mobile";
+      const phoneNumber = details?.mobile || "";
+      url = `tel:${phoneNumber}`;
+    } else if (clickName?.name === "Whatsapp") {
+      responseStatus.type = "Whatsapp";
+      const phoneNumber = details?.mobile || "";
+      url = `https://wa.me/${phoneNumber}`;
+    } else if (clickName?.name === "email") {
+      responseStatus.type = "email";
+      const email = details?.email || "example@example.com";
+      url = `mailto:${email}`;
+    } else if (clickName?.name === "sms") {
+      responseStatus.type = "sms";
+      const phoneNumber = details?.mobile || "";
+      url = `sms:${phoneNumber}`;
+    }
+
+    dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
+      if (result) {
+        showToast("success", result?.message)
+        if (url) {
+          window.open(url, "_blank");
+        }
+        onClose()
+      }
+    })
+  }
+
+  return (
+    <>
+      <div className={styles.overlay}>
+        <div className={styles.modal}>
+          <button className={styles.closeBtn} onClick={onClose}>×</button>
+
+          {/* <h2 className={styles.title}> { repliesBtn ? {` Contact ${repliesBtn ? repliesBtn?.name : details?.customer?.name}`}
+           :
+            {`Great! Now Contact ${repliesBtn ? repliesBtn?.name : details?.customer?.name}`}  }
+          </h2> */}
+          <h2 className={styles.title}>
+  {repliesBtn
+    ? `Contact ${repliesBtn?.name}`
+    : `Great! Now Contact ${details?.customer?.name}`}
+</h2>
+          <p className={styles.description}>
+            Reference site about Lorem Ipsum, giving information on its <br /> origins, as well as a random Lipsum generator.
+          </p>
+
+          <div className={styles.actions}>
+            {[
+              { label: "Give them a call", name: "mobile", btn: "Phone Number", icon: phoneBtn },
+              { label: "Send WhatsApp", name: "Whatsapp", btn: "Send WhatsApp", icon: whatsappBtn },
+              { label: "Send an Email", name: "email", btn: "Send Email", icon: Mailbtn },
+              { label: "Send an SMS", name: "sms", btn: "Send SMS", icon: smsBtn },
+              { label: "Send an estimate", name: "", btn: "Send Estimate", icon: EstimateIcon },
+            ]
+              .filter(item => !(repliesBtn && item.btn === "Send Estimate"))
+              .map((item, idx) => (
+                <div key={idx} className={styles.actionItem}>
+                  <div className={styles.actionText}>
+                    <strong>{item.label}</strong>
+                    <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
+                  </div>
+                  <button className={styles.actionBtn} onClick={() => handleResponseChange(item)}>
+                    <img src={item?.icon} alt="..." width={18} height={18} /> {item.btn}
+                  </button>
+                </div>
+              ))}
+
+          </div>
+
+          <p className={styles.skipLink} onClick={onClose}>Skip, I will contact them later</p>
+
+          {!repliesBtn && <div className={styles.footer}>
+            <div className={styles.creditsBox}>
+              <img src={locallistImgs} alt="..." /> <strong>70 credits</strong>
             </div>
-          ))}
+            <div className={styles.guarantee}>
+              Covered by our <strong>Get Hired Guarantee</strong><br />
+              If you're not hired during the starter pack, we'll return all the credits.
+            </div>
+          </div>}
         </div>
-
-        <p className={styles.skipLink} onClick={onClose}>Skip, I will contact them later</p>
-
-        {!repliesBtn && <div className={styles.footer}>
-          <div className={styles.creditsBox}>
-            <img src={locallistImgs} alt="..." /> <strong>70 credits</strong>
-          </div>
-          <div className={styles.guarantee}>
-            Covered by our <strong>Get Hired Guarantee</strong><br />
-            If you're not hired during the starter pack, we'll return all the credits.
-          </div>
-        </div>}
       </div>
-    </div>
-        </>
-    )
+    </>
+  )
 }
 export default ContactSuccessModal
