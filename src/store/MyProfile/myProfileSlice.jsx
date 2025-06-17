@@ -251,7 +251,65 @@ export const updateSellerAccreditations = createAsyncThunk(
   }
 );
 
+export const updateSellerQandA = createAsyncThunk(
+  "myProfile/updateSellerQandA",
+  async (answersObj, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      const questions = [
+        {
+          id: "businessDuration",
+          label: "How long have you been in business?",
+        },
+        {
+          id: "equipment",
+          label: "Do you bring your own equipment and supplies?",
+        },
+        {
+          id: "jobLove",
+          label: "What do you love most about your job?",
+        },
+        {
+          id: "startBusiness",
+          label: "What inspired you to start your own business?",
+        },
+        {
+          id: "clientChoose",
+          label: "Why should our clients choose you?",
+        },
+        {
+          id: "remoteServices",
+          label:
+            "Can you provide your services online or remotely? If so, please add details.",
+        },
+        {
+          id: "safeFromCovid",
+          label:
+            "What changes have you made to keep your customers safe from Covid-19?",
+        },
+      ];
 
+      questions.forEach((q) => {
+        formData.append("questions[]", q.label);
+        formData.append("answers[]", answersObj[q.id] || "");
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/seller-myprofile-qa",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Submission failed");
+    }
+  }
+);
 
 
 
@@ -277,7 +335,11 @@ const initialState = {
 
 //New for Accreditations
   accreditationsUpdateSuccess: false,
-  accreditationsUpdateError: null,
+  accreditationsUpdateError: null, 
+
+//New for Q&A
+  qnaUpdateSuccess: false,
+  qnaUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -314,6 +376,10 @@ const myprofileSlice = createSlice({
     clearAccreditationsStatus(state) {
       state.accreditationsUpdateSuccess = false;
       state.accreditationsUpdateError = null;
+    },
+    clearQnaStatus(state) {
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = null;
     }
     
     
@@ -387,7 +453,23 @@ const myprofileSlice = createSlice({
       state.sellerLoader = false;
       state.accreditationsUpdateSuccess = false;
       state.accreditationsUpdateError = action.payload;
+    })
+//for Q&A
+    .addCase(updateSellerQandA.pending, (state) => {
+      state.sellerLoader = true;
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = null;
+    })
+    .addCase(updateSellerQandA.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.qnaUpdateSuccess = true;
+    })
+    .addCase(updateSellerQandA.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = action.payload;
     });
+    
   },
 });
 
@@ -400,7 +482,8 @@ export const {
   clearUpdateStatus,
   clearPhotoUpdateStatus,
   clearSocialUpdateStatus,
-  clearAccreditationsStatus
+  clearAccreditationsStatus,
+  clearQnaStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
