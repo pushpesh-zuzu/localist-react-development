@@ -216,6 +216,47 @@ export const updateSellerSocialLinks = createAsyncThunk(
     }
   }
 );
+
+// Thunk to handle accreditations submission
+export const updateSellerAccreditations = createAsyncThunk(
+  "myProfile/updateSellerAccreditations",
+  async (accordionGroups, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("type", "Accreditations");
+
+      accordionGroups.forEach((group) => {
+        group.accreditations.forEach((name) => {
+          formData.append("accre_name[]", name);
+        });
+        if (group.accreImage) {
+          formData.append("accre_image[]", group.accreImage);
+        }
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
+
+
+
+
+
+
+
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
@@ -232,7 +273,11 @@ const initialState = {
 
     //New for social media links 
     socialUpdateSuccess: false,
-  socialUpdateError: null,
+  socialUpdateError: null, 
+
+//New for Accreditations
+  accreditationsUpdateSuccess: false,
+  accreditationsUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -265,6 +310,10 @@ const myprofileSlice = createSlice({
     clearSocialUpdateStatus(state) {
       state.socialUpdateSuccess = false;
       state.socialUpdateError = null;
+    },
+    clearAccreditationsStatus(state) {
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = null;
     }
     
     
@@ -322,9 +371,23 @@ const myprofileSlice = createSlice({
       state.sellerLoader = false;
       state.socialUpdateSuccess = false;
       state.socialUpdateError = action.payload;
+    })
+
+    //For Accreditations
+    .addCase(updateSellerAccreditations.pending, (state) => {
+      state.sellerLoader = true;
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = null;
+    })
+    .addCase(updateSellerAccreditations.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.accreditationsUpdateSuccess = true;
+    })
+    .addCase(updateSellerAccreditations.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = action.payload;
     });
-
-
   },
 });
 
@@ -336,7 +399,8 @@ export const {
   setSellerUpdateLoader,
   clearUpdateStatus,
   clearPhotoUpdateStatus,
-  clearSocialUpdateStatus
+  clearSocialUpdateStatus,
+  clearAccreditationsStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
