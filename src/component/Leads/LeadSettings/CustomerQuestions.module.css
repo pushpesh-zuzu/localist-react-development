@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* border: 1px solid #ccc; */
 }
 
 .modal::-webkit-scrollbar {
@@ -18,7 +19,7 @@
 }
 .modal::-webkit-scrollbar-thumb {
   background: #d9d9d9;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .header {
