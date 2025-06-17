@@ -468,7 +468,9 @@
 
   .badges {
     flex-wrap: wrap;
+    margin: 15px 0px 20px 0px;
   }
+
 
   .badges span {
     font-size: 9px;
@@ -477,6 +479,7 @@
 
   .description {
     font-size: 11px;
+    margin-bottom: 20px;
   }
 
   .tab,
