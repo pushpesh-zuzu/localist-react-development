@@ -352,7 +352,7 @@ const handleUpdateService = () => {
                       {opt}
                     </label>
                   ))} */}
-                  {options.map((opt) => (
+                  {/* {options.map((opt) => (
                     <label key={opt} className={styles.option}>
                       <input
                         type="checkbox"
@@ -374,7 +374,50 @@ const handleUpdateService = () => {
                       />
                       {opt}
                     </label>
-                  ))}
+                  ))} */}
+
+                  <label className={styles.optionSelect}>
+  <input
+    type="checkbox"
+    checked={
+      options.every((opt) => selectedAnswers[item.id]?.includes(opt)) // All selected
+    }
+    onChange={(e) => {
+      const isChecked = e.target.checked;
+      setSelectedAnswers((prev) => ({
+        ...prev,
+        [item.id]: isChecked ? [...options] : [],
+      }));
+    }}
+  />
+  Select All
+</label>
+
+{options.map((opt) => (
+  <label key={opt} className={styles.option}>
+    <input
+      type="checkbox"
+      name={`question-${item.id}`}
+      value={opt}
+      checked={selectedAnswers[item.id]?.includes(opt)}
+      onChange={() => {
+        setSelectedAnswers((prev) => {
+          const current = prev[item.id] || [];
+          const updated = current.includes(opt)
+            ? current.filter((o) => o !== opt)
+            : [...current, opt];
+
+          return {
+            ...prev,
+            [item.id]: updated,
+          };
+        });
+      }}
+    />
+    {opt}
+  </label>
+))}
+
                 </div>
               </div>
             );
