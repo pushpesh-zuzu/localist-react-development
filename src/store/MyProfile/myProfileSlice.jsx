@@ -311,7 +311,27 @@ export const updateSellerQandA = createAsyncThunk(
   }
 );
 
+// Thunk to update Facebook review link
+export const updateFacebookReviewLink = createAsyncThunk(
+  "myProfile/updateFacebookReviewLink",
+  async (fbLink, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("type", "accreditations"); // required by backend
+      formData.append("fb_link", fbLink);
+      formData.append("accre_name", ""); // backend expects it to exist
 
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        formData
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Submission failed");
+    }
+  }
+);
 
 
 
@@ -340,6 +360,10 @@ const initialState = {
 //New for Q&A
   qnaUpdateSuccess: false,
   qnaUpdateError: null,
+
+  //New for Review
+  facebookReviewUpdateSuccess: false,
+  facebookReviewUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -380,7 +404,12 @@ const myprofileSlice = createSlice({
     clearQnaStatus(state) {
       state.qnaUpdateSuccess = false;
       state.qnaUpdateError = null;
+    },
+    clearFacebookReviewStatus(state) {
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = null;
     }
+    
     
     
 
@@ -468,7 +497,23 @@ const myprofileSlice = createSlice({
       state.sellerLoader = false;
       state.qnaUpdateSuccess = false;
       state.qnaUpdateError = action.payload;
+    })
+  //for Reviews
+    .addCase(updateFacebookReviewLink.pending, (state) => {
+      state.sellerLoader = true;
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = null;
+    })
+    .addCase(updateFacebookReviewLink.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.facebookReviewUpdateSuccess = true;
+    })
+    .addCase(updateFacebookReviewLink.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = action.payload;
     });
+    
     
   },
 });
@@ -483,7 +528,8 @@ export const {
   clearPhotoUpdateStatus,
   clearSocialUpdateStatus,
   clearAccreditationsStatus,
-  clearQnaStatus
+  clearQnaStatus,
+  clearFacebookReviewStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
