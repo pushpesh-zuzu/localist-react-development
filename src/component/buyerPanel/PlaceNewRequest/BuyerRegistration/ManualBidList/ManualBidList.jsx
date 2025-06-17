@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
-// import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
-import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
+import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
+// import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import starImg from "../../../../../assets/Icons/MyResponse/StarImg.svg"
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
@@ -42,6 +42,7 @@ const ManualBidList = () => {
   }, []);
   const handleReply = (item) => {
     console.log(item, "item");
+    navigate(`/view-profile/${item.id}`)
     const viewProfileData = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens

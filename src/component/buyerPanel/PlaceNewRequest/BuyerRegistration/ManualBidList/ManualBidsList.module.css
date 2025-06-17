@@ -186,9 +186,9 @@
 .header p {
   font-weight: 600;
   font-size: 12px;
-  display: flex;
-  align-items: center;
-  /* vertical-align: middle; */
+  /* display: flex; */
+  /* align-items: center; */
+  vertical-align: middle;
 }
 
 .header p img {
@@ -243,7 +243,7 @@
   font-size: 12px;
   color: #828282;
   margin-bottom: 13px;
-  width: 92.5%;
+  width: 93%;
   background-color: #FAFAFA;
   padding: 8px 37px 21px 8px;
   /* border-radius: 8px; */
@@ -295,7 +295,7 @@
   font-weight: 500;
 }
 .timestamp {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
 }
 .ratingCount {
@@ -304,7 +304,7 @@
   font-size: 22px;
   color: #000000 !important;
   align-items: center;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .quickToRespondWrapper {
@@ -481,7 +481,7 @@
   .description {
     font-size: 11px;
     margin-bottom: 20px;
-    padding: 8px 16px 21px 8px;
+    padding: 10px 10px 21px 10px;
   }
 
   .tab,
