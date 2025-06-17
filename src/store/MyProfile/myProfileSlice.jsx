@@ -216,6 +216,125 @@ export const updateSellerSocialLinks = createAsyncThunk(
     }
   }
 );
+
+// Thunk to handle accreditations submission
+export const updateSellerAccreditations = createAsyncThunk(
+  "myProfile/updateSellerAccreditations",
+  async (accordionGroups, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("type", "Accreditations");
+
+      accordionGroups.forEach((group) => {
+        group.accreditations.forEach((name) => {
+          formData.append("accre_name[]", name);
+        });
+        if (group.accreImage) {
+          formData.append("accre_image[]", group.accreImage);
+        }
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
+
+export const updateSellerQandA = createAsyncThunk(
+  "myProfile/updateSellerQandA",
+  async (answersObj, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      const questions = [
+        {
+          id: "businessDuration",
+          label: "How long have you been in business?",
+        },
+        {
+          id: "equipment",
+          label: "Do you bring your own equipment and supplies?",
+        },
+        {
+          id: "jobLove",
+          label: "What do you love most about your job?",
+        },
+        {
+          id: "startBusiness",
+          label: "What inspired you to start your own business?",
+        },
+        {
+          id: "clientChoose",
+          label: "Why should our clients choose you?",
+        },
+        {
+          id: "remoteServices",
+          label:
+            "Can you provide your services online or remotely? If so, please add details.",
+        },
+        {
+          id: "safeFromCovid",
+          label:
+            "What changes have you made to keep your customers safe from Covid-19?",
+        },
+      ];
+
+      questions.forEach((q) => {
+        formData.append("questions[]", q.label);
+        formData.append("answers[]", answersObj[q.id] || "");
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/seller-myprofile-qa",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Submission failed");
+    }
+  }
+);
+
+// Thunk to update Facebook review link
+export const updateFacebookReviewLink = createAsyncThunk(
+  "myProfile/updateFacebookReviewLink",
+  async (fbLink, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("type", "accreditations"); // required by backend
+      formData.append("fb_link", fbLink);
+      formData.append("accre_name", ""); // backend expects it to exist
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        formData
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Submission failed");
+    }
+  }
+);
+
+
+
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
@@ -232,7 +351,19 @@ const initialState = {
 
     //New for social media links 
     socialUpdateSuccess: false,
-  socialUpdateError: null,
+  socialUpdateError: null, 
+
+//New for Accreditations
+  accreditationsUpdateSuccess: false,
+  accreditationsUpdateError: null, 
+
+//New for Q&A
+  qnaUpdateSuccess: false,
+  qnaUpdateError: null,
+
+  //New for Review
+  facebookReviewUpdateSuccess: false,
+  facebookReviewUpdateError: null,
 };
 
 const myprofileSlice = createSlice({
@@ -265,7 +396,20 @@ const myprofileSlice = createSlice({
     clearSocialUpdateStatus(state) {
       state.socialUpdateSuccess = false;
       state.socialUpdateError = null;
+    },
+    clearAccreditationsStatus(state) {
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = null;
+    },
+    clearQnaStatus(state) {
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = null;
+    },
+    clearFacebookReviewStatus(state) {
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = null;
     }
+    
     
     
 
@@ -322,9 +466,55 @@ const myprofileSlice = createSlice({
       state.sellerLoader = false;
       state.socialUpdateSuccess = false;
       state.socialUpdateError = action.payload;
+    })
+
+    //For Accreditations
+    .addCase(updateSellerAccreditations.pending, (state) => {
+      state.sellerLoader = true;
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = null;
+    })
+    .addCase(updateSellerAccreditations.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.accreditationsUpdateSuccess = true;
+    })
+    .addCase(updateSellerAccreditations.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.accreditationsUpdateSuccess = false;
+      state.accreditationsUpdateError = action.payload;
+    })
+//for Q&A
+    .addCase(updateSellerQandA.pending, (state) => {
+      state.sellerLoader = true;
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = null;
+    })
+    .addCase(updateSellerQandA.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.qnaUpdateSuccess = true;
+    })
+    .addCase(updateSellerQandA.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.qnaUpdateSuccess = false;
+      state.qnaUpdateError = action.payload;
+    })
+  //for Reviews
+    .addCase(updateFacebookReviewLink.pending, (state) => {
+      state.sellerLoader = true;
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = null;
+    })
+    .addCase(updateFacebookReviewLink.fulfilled, (state) => {
+      state.sellerLoader = false;
+      state.facebookReviewUpdateSuccess = true;
+    })
+    .addCase(updateFacebookReviewLink.rejected, (state, action) => {
+      state.sellerLoader = false;
+      state.facebookReviewUpdateSuccess = false;
+      state.facebookReviewUpdateError = action.payload;
     });
-
-
+    
+    
   },
 });
 
@@ -336,7 +526,10 @@ export const {
   setSellerUpdateLoader,
   clearUpdateStatus,
   clearPhotoUpdateStatus,
-  clearSocialUpdateStatus
+  clearSocialUpdateStatus,
+  clearAccreditationsStatus,
+  clearQnaStatus,
+  clearFacebookReviewStatus
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
