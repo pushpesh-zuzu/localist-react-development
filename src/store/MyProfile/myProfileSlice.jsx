@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import { showToast } from "../../utils";
 
@@ -110,25 +110,57 @@ export const getCustomerLinkApi = () => {
           }
         };
       };
+// Async thunk for submitting seller profile
+export const updateSellerProfile = createAsyncThunk(
+  "myProfile/updateSellerProfile",
+  async (formState, { rejectWithValue }) => {
+    try {
+      const allowedKeys = [
+        "type", "company_logo", "company_name", "profile_image", "name",
+        "company_email", "company_phone", "company_website", "company_location",
+        "company_locaion_reason", "company_size", "company_total_years", "about_company",
+      ];
+
+      const body = new FormData();
+      allowedKeys.forEach((key) => {
+        const val = formState[key];
+        if (val != null && !key.endsWith("Preview")) {
+          body.append(key, val);
+        }
+      });
+
+      const response = await axiosInstance.post(
+        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        body,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
 
 const initialState = {
-    customerLinkData:[],
-    reviewLoader:false,
-    reviewListData:[],
-    editProfileList:[],
-    sellerLoader:false
+  customerLinkData: [],
+  reviewLoader: false,
+  reviewListData: [],
+  editProfileList: [],
+  sellerLoader: false,
+
+  // NEW state for update logic
+  updateSuccess: false,
+  updateError: null,
 };
-
-
-
-
-
-
-
 
 const myprofileSlice = createSlice({
   name: "myProfile",
-  initialState: initialState,
+  initialState,
   reducers: {
     setGetCustomerLinkData(state, action) {
       state.customerLinkData = action.payload;
@@ -139,16 +171,44 @@ const myprofileSlice = createSlice({
     setGetReviewData(state, action) {
       state.reviewListData = action.payload;
     },
-    setEditProfileList(state,action){
-      state.editProfileList = action.payload
+    setEditProfileList(state, action) {
+      state.editProfileList = action.payload;
     },
-    setSellerUpdateLoader(state,action) {
-      state.sellerLoader =action.payload
+    setSellerUpdateLoader(state, action) {
+      state.sellerLoader = action.payload;
+    },
+    clearUpdateStatus(state) {
+      state.updateSuccess = false;
+      state.updateError = null;
     }
-   
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateSellerProfile.pending, (state) => {
+        state.sellerLoader = true;
+        state.updateSuccess = false;
+        state.updateError = null;
+      })
+      .addCase(updateSellerProfile.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.updateSuccess = true;
+      })
+      .addCase(updateSellerProfile.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.updateSuccess = false;
+        state.updateError = action.payload;
+      });
   },
 });
 
-export const {setGetCustomerLinkData ,setReviewListLoader,setSellerUpdateLoader,setGetReviewData,setEditProfileList} = myprofileSlice.actions;
+export const {
+  setGetCustomerLinkData,
+  setReviewListLoader,
+  setGetReviewData,
+  setEditProfileList,
+  setSellerUpdateLoader,
+  clearUpdateStatus
+} = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
+
