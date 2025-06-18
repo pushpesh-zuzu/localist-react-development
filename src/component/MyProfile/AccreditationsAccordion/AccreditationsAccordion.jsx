@@ -64,7 +64,7 @@ const AccreditationsAccordion = () => {
   };
 
   const handleSave = () => {
-   
+   console.log(accordionGroups)
     dispatch(updateSellerAccreditations(accordionGroups));
   };
   

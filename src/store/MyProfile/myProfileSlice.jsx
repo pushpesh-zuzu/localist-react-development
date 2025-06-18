@@ -218,21 +218,32 @@ export const updateSellerSocialLinks = createAsyncThunk(
 );
 
 // Thunk to handle accreditations submission
+
+
+
 export const updateSellerAccreditations = createAsyncThunk(
   "myProfile/updateSellerAccreditations",
   async (accordionGroups, { rejectWithValue }) => {
     try {
       const formData = new FormData();
-      formData.append("type", "Accreditations");
+      formData.append("type", "accreditations");
 
       accordionGroups.forEach((group) => {
-        group.accreditations.forEach((name) => {
-          formData.append("accre_name[]", name);
-        });
+        // Send `newAccreditation` as `accre_name[]`
+        if (group.newAccreditation) {
+          formData.append("accre_name[]", group.newAccreditation);
+        }
+
+        // Send `accreImage` as `accre_image[]`
         if (group.accreImage) {
           formData.append("accre_image[]", group.accreImage);
         }
       });
+
+      // ✅ Log FormData before sending
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
 
       const response = await axiosInstance.post(
         "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
@@ -250,6 +261,14 @@ export const updateSellerAccreditations = createAsyncThunk(
     }
   }
 );
+
+
+
+
+
+
+
+
 
 export const updateSellerQandA = createAsyncThunk(
   "myProfile/updateSellerQandA",
