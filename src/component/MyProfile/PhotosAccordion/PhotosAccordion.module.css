@@ -19,7 +19,7 @@
   padding: 12px;
   color: #828282;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .description {
   font-size: 14px;
@@ -173,6 +173,24 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+@media screen and (max-width:480px) {
+  .paraText{
+    font-size: 14px;
+  }
+  
+.uploadBtn {
+  display: inline-block;
+  background-color: #00b3e3; /* or #00aeef */
+  color: white;
+  padding: 8px 18px;
+   font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
 }
 
 

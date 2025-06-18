@@ -108,12 +108,16 @@
 }
 @media screen and (max-width:480px) {
   .container {
-    padding: 57px 2px 27px 2px;
+    padding: 20px 2px 0px 2px;
   }
   .lastBoxContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   gap: 10px;
 }
+.qaItem {
+  margin-bottom: 0px;
+}
+
 }

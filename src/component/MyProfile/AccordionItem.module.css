@@ -45,8 +45,13 @@
 @media screen and (max-width:480px) {
   .header {
   
-  padding: 16px 14px;
+  padding: 16px 2px;
   
+}
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
 }
 }
 /* .content {
