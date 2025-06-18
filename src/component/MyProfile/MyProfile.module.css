@@ -25,7 +25,7 @@
   color: var(--primary-color);
 }
 
-.progressBarContainer {
+/* .progressBarContainer {
   margin-bottom: 29px;
 }
 
@@ -43,6 +43,39 @@
   background-color: var(--primary-color);
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
+} */
+.progressBarContainer {
+  margin-bottom: 29px;
+}
+
+.progressBar {
+  width: -webkit-fill-available;
+  height: 21px;
+  background-color: #f2f2f2;
+  overflow: visible; /* Changed from hidden to visible */
+  border-radius: 100px;
+  position: relative;
+}
+
+.progressFill {
+  width: 27%;
+  height: 100%;
+  background-color: var(--primary-color);
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  position: relative;
+}
+
+.progressCircle {
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  border: 2px solid var(--primary-color); 
 }
 
 .subHeading {

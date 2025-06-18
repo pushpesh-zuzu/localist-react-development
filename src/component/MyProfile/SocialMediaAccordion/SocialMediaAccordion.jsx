@@ -75,14 +75,14 @@ const SocialMediaAccordion = () => {
           <div className={styles.inputRow} key={idx}>
             <div className={styles.labelWrapper}>
               <label className={styles.label}>{platform.label}</label>
-              <div className={styles.optionalToggle}>
+             {platform?.label != "Linkedin" && <div className={styles.optionalToggle}>
                 <img src={iIcon} alt="info" className={styles.icon} />
                 <span className={styles.optionalText}>Optional</span>
                 <label className={styles.switch}>
                   <input type="checkbox" defaultChecked />
                   <span className={styles.slider}></span>
                 </label>
-              </div>
+              </div>}
             </div>
             <div className={styles.inputWithToggle}>
               <input
