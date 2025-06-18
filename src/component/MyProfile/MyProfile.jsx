@@ -37,11 +37,18 @@ setOpenAccordion("Reviews");
       <h2 className={styles.title}>
         Your profile is <span className={styles.percent}>27% complete</span>
       </h2>
-      <div className={styles.progressBarContainer}>
+      {/* <div className={styles.progressBarContainer}>
         <div className={styles.progressBar}>
           <div className={styles.progressFill}></div>
         </div>
-      </div>
+      </div> */}
+      <div className={styles.progressBarContainer}>
+  <div className={styles.progressBar}>
+    <div className={styles.progressFill}>
+      <div className={styles.progressCircle}></div>
+    </div>
+  </div>
+</div>
       <h4 className={styles.subHeading}>
         Take two minutes to improve your profile
       </h4>

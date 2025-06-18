@@ -11,11 +11,16 @@
 
 .title {
   color: #000000;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 11px;
 }
-
+.paraText {
+  padding: 12px;
+  color: #828282;
+  font-size: 20px;
+  font-weight: 600;
+}
 .description {
   font-size: 14px;
   font-weight: 500;
@@ -35,6 +40,9 @@
   border-radius: 4px;
   cursor: pointer;
   text-align: center;
+}
+.uploadBtn:hover{
+  background-color: #0096c4;
 }
 
 .fileInput {
@@ -130,6 +138,9 @@
   font-size: 20px;
   font-weight: 500;
 }
+.cancelButton:hover{
+  background-color: #ccc;
+}
 
 .saveButton {
   background-color: var(--primary-color);
@@ -208,7 +219,7 @@
 
 .buttonGroup {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -218,6 +229,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .saveBtn {
@@ -227,6 +239,13 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+   font-size: 16px;
+}
+.saveBtn:hover{
+  background-color: #0096c4;
+}
+.saveButton:hover{
+  background-color: #0096c4;
 }
 @media screen and (max-width:480px) {
   .modalContent{

@@ -233,12 +233,12 @@ useEffect(() => {
           >
             Upload new picture
           </button>
-          <button
+          {/* <button
             className={styles.webcamBtn}
             onClick={() => handleCaptureWebcam("company_logo")}
           >
             Upload using Webcam
-          </button>
+          </button> */}
           <input
             type="file"
             name="company_logo"

@@ -180,7 +180,7 @@ const PhotosAccordion = () => {
             className={styles.fileInput}
           />
 <div className={styles.imageContainer}>
-        {photoPreviews.length > 0 && (
+        {photoPreviews.length > 0 ? (
   <div className={styles.imageContainer}>
     {photoPreviews.map((src, idx) => (
       <img
@@ -193,7 +193,7 @@ const PhotosAccordion = () => {
       />
     ))}
   </div>
-)}
+) : <div className={styles.paraText}>Photos you add to your profile will appear here.</div>}
 </div> 
 
           {/* <input
@@ -230,7 +230,7 @@ const PhotosAccordion = () => {
           </p>
           <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube video link</button>
           <div  className={styles.imageContainer}>
-          {formState.company_youtube_links.length > 0 && (
+          {formState.company_youtube_links.length > 0 ? (
   <div className={styles.videoContainer}>
     {formState.company_youtube_links?.map((link, idx) => (
       <iframe
@@ -246,7 +246,7 @@ const PhotosAccordion = () => {
       />
     ))}
   </div>
-)}
+) : <div className={styles.paraText}>YouTube videos you add to your profile will appear here.</div>}
 </div>
           {/* {formState.company_youtube_link && getYoutubeEmbedUrl(formState.company_youtube_link) && (
             <div className={styles.videoPreview}>
