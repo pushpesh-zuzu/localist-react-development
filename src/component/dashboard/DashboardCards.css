@@ -1,0 +1,273 @@
+/* DashboardCards.css */
+.dashboard-container {
+    font-family: sans-serif;
+    padding: 25px 88px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    padding: 1.1% 22px 3% 22px;
+    flex: 0 1 calc(30% - 16px);
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+  .card-header h3{
+font-size: 20px;
+line-height: auto;
+  }
+  @media (max-width: 1024px) {
+    .card {
+      flex: 0 1 calc(48% - 16px);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .card {
+      flex: 0 1 100%;
+    }
+  }
+  
+  .card-title {
+    font-size: 20px;
+    margin-bottom: 4px;
+    
+    line-height: 20px;
+  }
+  
+  .sub-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .highlight-box {
+    background: #fde8e8;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #111;
+    font-size: 14px;
+  }
+  
+  .tags .tag {
+    display: inline-block;
+    margin: 4px 4px 12px 0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+  }
+  
+  .tags2 .tag2{
+    /* margin-top: 40px; */
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+    
+  }
+
+
+  .tag.blue { background: #e0f7ff; }
+  .tag.yellow { background: #fef9c3; }
+  .tag2.gray { background: #AAC9D2; color: #fff; }
+  
+  .view-link, .edit-link {
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #888;
+  }
+  
+  .leads .lead-circle {
+    background: #e1f6fc;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    line-height: 120px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .leads .lead-circle span {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  .unread {
+    text-align: center;
+    font-size: 15px;
+    color: #333;
+  }
+  
+  .add-services form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  
+  .add-services button {
+    background: #00bfff;
+    color: #fff;
+    padding: 6px 24px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .notification-section {
+    text-align: center;
+    margin: 30px 0;
+  }
+  
+  .notification-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    /* display: flex; */
+    /* justify-content: flex-start; */
+  }
+  
+  .notification-button {
+    background: #00bfff;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+  }
+  
+  .notification-banner {
+    width: 100%;
+    background: #fbe8e6;
+    text-align: center;
+    padding: 16px;
+    font-size: 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #000;
+    margin: 10px auto 30px;
+    border: 1px solid #f4d2d0;
+    
+  }
+  
+  .notification-banner strong {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .profile .avatar {
+    background: #ffcfd0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .progress-bar {
+    background: #eee;
+    height: 6px;
+    border-radius: 3px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .progress {
+    background: #00bfff;
+    height: 6px;
+    border-radius: 3px;
+  }
+  
+  .hint-box {
+    background: #eafaff;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .hint-box button {
+    margin-top: 8px;
+    background: #00bfff;
+    color: white;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  
+  .response-msg {
+    background: #ffecec;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #444;
+  }
+  
+  
+.help {
+    font-size: 15px;
+  }
+  
+  .help .link {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+  }
+  .help > span{
+    font-weight: bold;
+    color: #000;
+  }
+  .help .icon {
+    margin-right: 6px;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: middle;
+  }
+  
+  .help-box {
+    background-color: #E3F6FC;
+    padding: 14px;
+    border-radius: 6px;
+    margin-top: 8px;
+    line-height: 1.6;
+  }
+  
+  .help-box p {
+    margin: 6px 0;
+    font-size: 15px;
+  }
+  
+  .help-box .icon {
+    color: #00bfff;
+  }
