@@ -8,14 +8,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 21px;
+  padding: 16px 0px;
   cursor: pointer;
   background-color: #fff;
 }
 
 .title {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   vertical-align: middle;
 }
 

@@ -9,7 +9,7 @@ import {
 
 import React, { useState, useRef } from "react";
 import styles from "./AccreditationsAccordion.module.css";
-import ISSAImage from "../../../assets/Images/ISSAImage.svg";
+import ISSAImage from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import axiosInstance from "../../../Api/axiosInstance";
 
@@ -105,8 +105,15 @@ const AccreditationsAccordion = () => {
   <div key={index} className={styles.card}>
     <div className={styles.logoSectionWrapper}>
       <div className={styles.logoSection}>
-        <img src={ISSAImage} alt="ISSA" className={styles.logo} />
-      </div>
+      {group.accreImage ? (
+  <img
+    src={URL.createObjectURL(group.accreImage)}
+    alt="Uploaded"
+    className={styles.logo}
+  />
+) : (
+  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
+)}</div>
       <div className={styles.accreditationList}>
         {group.accreditations.map((item, idx) => (
           <p key={idx} className={styles.accreditationItem}>
@@ -124,12 +131,12 @@ const AccreditationsAccordion = () => {
         placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
         className={styles.input}
       />
-      <button
+      {/* <button
         className={styles.addButton}
         onClick={() => handleAdd(index)}
       >
         Add
-      </button>
+      </button> */}
     </div>
 
     <div className={styles.AccreditationsAccordionBox} style={{ display: 'flex', gap: '1rem', marginTop: '10px' }}>
@@ -137,13 +144,13 @@ const AccreditationsAccordion = () => {
         className={styles.addAccreditationButton}
         onClick={() => handleClickUpload(index)}
       >
-        Upload Photo
+        {group.accreImage ? "Change Photo " : "Upload Photo"}
       </button>
 
       {/* Only show Add Accreditation button on the last card */}
       {index === accordionGroups.length - 1 && (
         <button
-          className={styles.addAccreditationButton}
+          className={styles.addAccreditationButtons}
           onClick={handleAccreditationAdd}
         >
           + Add Accreditation
@@ -162,11 +169,11 @@ const AccreditationsAccordion = () => {
       />
     </div>
 
-    {group.accreImage && (
+    {/* {group.accreImage && (
       <p style={{ marginTop: "5px", fontSize: "12px" }}>
         Selected: {group.accreImage.name}
       </p>
-    )}
+    )} */}
   </div>
 ))}
 

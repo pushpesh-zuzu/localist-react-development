@@ -28,7 +28,10 @@ const ReviewsAccordion = () => {
   const handleSubmit = () => {
     dispatch(updateFacebookReviewLink(fbLink));
   };
-  
+   useEffect(() => {
+   
+    dispatch(getCustomerLinkApi()); 
+  }, []);
 
   useEffect(() => {
     if (facebookReviewUpdateSuccess) {
