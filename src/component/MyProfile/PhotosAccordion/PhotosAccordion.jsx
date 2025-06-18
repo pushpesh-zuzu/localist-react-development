@@ -221,7 +221,11 @@ const PhotosAccordion = () => {
             <h3 className={styles.title}>Videos</h3>
             <div className={styles.optional}>
               <img src={iIcon} alt="info" className={styles.icon} />
-              <span>Optional</span>
+              <span className={styles.optionalText}>Optional</span>
+               <label className={styles.switch}>
+                                <input type="checkbox" defaultChecked />
+                                <span className={styles.slider}></span>
+                              </label>
             </div>
           </div>
           <p className={styles.description}>
