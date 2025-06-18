@@ -9,6 +9,8 @@ import {
   clearQnaStatus,
 } from "../../../store/MyProfile/myProfileSlice";
 import { useEffect } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const questions = [
   {
@@ -44,6 +46,7 @@ const questions = [
 const QandAAccordion = () => {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
+  const [loadingQuestionId, setLoadingQuestionId] = useState(null)
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -77,7 +80,6 @@ const QandAAccordion = () => {
         Answer common questions upfront to remove customer reservations and
         doubt, bringing them closer to making a hiring decision.
       </p>
-
       {questions.map((question, index) => (
         <div className={styles.qaItem} key={question.id}>
           <label className={styles.label}>{question.label}</label>
@@ -87,27 +89,50 @@ const QandAAccordion = () => {
             className={styles.textarea}
             rows={4}
           />
-          <span className={styles.helperText}>Minimum 50 characters</span>
-
-          {index === 2 && (
+          <div className={styles.lastBoxContainer}>
+            <div className={styles.liftBoxContainer}>
+            <span className={styles.helperText}>Minimum 50 characters</span>
+             {index === 2 && (
             <div className={styles.suggestion}>
               <a href="#" className={styles.link}>
-                Use our free online tool to write the perfect description of
-                your business
+                Use our free online tool to write the perfect description of your business
               </a>
             </div>
           )}
+            </div>
+            <div className={styles.buttonRow}>
+
+              {/* <button
+        className={styles.saveBtn}
+        onClick={() => dispatch(updateSellerQandA({ [question.id]: answers[question.id] }))}
+        disabled={sellerLoader}
+      >
+        {sellerLoader ? "Saving..." : "Save"}
+      </button> */}
+              <button
+                className={styles.saveBtn}
+                onClick={() => {
+                  setLoadingQuestionId(question.id);
+                  dispatch(updateSellerQandA({ [question.id]: answers[question.id] }))
+                    .then(() => setLoadingQuestionId(null))
+                    .catch(() => setLoadingQuestionId(null));
+                }}
+                disabled={loadingQuestionId === question.id}
+              >
+                {loadingQuestionId === question.id ? <Spin
+                  indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                /> : "Save"}
+              </button>
+            </div>
+          </div>
+         
+
+
         </div>
       ))}
 
-      <div className={styles.buttonRow}>
-        <button className={styles.cancelBtn} onClick={() => setAnswers({})}>
-          Cancel
-        </button>
-        <button className={styles.saveBtn} onClick={handleSubmit} disabled={loading}>
-          {loading ? "Saving..." : "Save"}
-        </button>
-      </div>
+
+
     </div>
   );
 };
