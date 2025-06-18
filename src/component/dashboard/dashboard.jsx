@@ -22,15 +22,15 @@ const Dashboard = () => {
             <h5 className="section-sub-title">We will have the options as per below:</h5>
             <ul className="steps-list">
               <li><strong>1</strong> Customers share their needs <p>Customers answer a few key questions to outline their requirements.</p></li>
-              <hr style={{ borderTop: '1px dotted #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
               <li><strong>2</strong> We send you relevant leads <p>You instantly receive leads that match your preferences via email and app.</p></li>
-              <hr style={{ borderTop: '1px dotted #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
               <li><strong>3</strong> You select the leads you want <p>Access customer contact details immediately.</p></li>
-              <hr style={{ borderTop: '1px dotted #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
               <li><strong>4</strong> You reach out to the customer <p>Call or email the customer to offer your services.</p></li>
-              <hr style={{ borderTop: '1px dotted #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
               <li><strong>5</strong> You get hired <p>No commissions, no hidden fees—just a straightforward process.</p></li>
-              <hr style={{ borderTop: '1px dotted #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
             </ul>
             
           </div>
