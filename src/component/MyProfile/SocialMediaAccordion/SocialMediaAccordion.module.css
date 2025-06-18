@@ -138,3 +138,14 @@
 .switch input:checked + .slider:before {
   transform: translateX(16px);
 }
+.saveButton {
+   background-color: var(--primary-color);
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  color: #fff;
+  border: none;
+  padding: 8px 21px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+}
