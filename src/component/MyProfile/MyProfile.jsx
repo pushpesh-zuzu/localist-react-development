@@ -49,7 +49,7 @@ setOpenAccordion("Reviews");
         Make the best first impression with a great profile — this is what
         customers will look at first when choosing which professional to hire.
       </p>
-      <a className={styles.profileLink} href="/public-profile">
+      <a className={styles.profileLink} href="/settings">
         View public profile
       </a>
 

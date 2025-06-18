@@ -1,32 +1,48 @@
 
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./PhotosAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateSellerPhotos, clearPhotoUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
+import AddYoutubeModal from "./AddYoutubeModal";
 const PhotosAccordion = () => {
   const dispatch = useDispatch();
-const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((state) => state.myProfile);
+  const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((state) => state.myProfile);
+  const [addModalOpen, setAddModalOpen] = useState(false)
   const [formState, setFormState] = useState({
     type: "photos",
     company_photos: [],
     company_youtube_link: "",
+    company_youtube_links: [],
   });
 
   const [photoPreviews, setPhotoPreviews] = useState([]);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setFormState((prev) => ({
-      ...prev,
-      company_photos: files,
-    }));
 
-    const previews = files.map((file) => URL.createObjectURL(file));
-    setPhotoPreviews(previews);
-  };
+  // const handleFileChange = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   setFormState((prev) => ({
+  //     ...prev,
+  //     company_photos: files,
+  //   }));
+
+  //   const previews = files.map((file) => URL.createObjectURL(file));
+  //   setPhotoPreviews(previews);
+  // };
+
+  const handleFileChange = (e) => {
+  const files = Array.from(e.target.files);
+
+  setFormState((prev) => ({
+    ...prev,
+    company_photos: [...prev.company_photos, ...files],
+  }));
+
+  const previews = files.map((file) => URL.createObjectURL(file));
+  setPhotoPreviews((prev) => [...prev, ...previews]);
+};
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,53 +75,79 @@ const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((stat
   //   for (let pair of body.entries()) {
   //     console.log(pair[0], pair[1]);
   //   }
-    
+
   //   try {
   //     const token = localStorage.getItem("accessToken"); // Adjust the key if needed
-    
+
   //     const response = await axiosInstance.post(apiUrl, body);
-    
+
   //     alert("Profile updated successfully!");
   //     console.log(response.data);
   //   } catch (err) {
   //     console.error("Submission failed:", err);
   //     alert("Submission failed.");
   //   }
-    
-    
+
+
   // };
 
- // Inside component
+  // Inside component
 
 
-// useEffect for toast
+  // useEffect for toast
 
 
 
-useEffect(() => {
-  if (photoUpdateSuccess) {
-    toast.success("Photos updated successfully!");
-    dispatch(clearPhotoUpdateStatus());
-  } else if (photoUpdateError) {
-    toast.error(`Failed: ${photoUpdateError}`);
-    dispatch(clearPhotoUpdateStatus());
-  }
-}, [photoUpdateSuccess, photoUpdateError, dispatch]);
+  useEffect(() => {
+    if (photoUpdateSuccess) {
+      toast.success("Photos updated successfully!");
+      dispatch(clearPhotoUpdateStatus());
+    } else if (photoUpdateError) {
+      toast.error(`Failed: ${photoUpdateError}`);
+      dispatch(clearPhotoUpdateStatus());
+    }
+  }, [photoUpdateSuccess, photoUpdateError, dispatch]);
 
-const handleSubmit = () => {
-  if (!validate()) {
-    toast.warn("Please fix validation errors");
+  const handleSubmit = () => {
+    if (!validate()) {
+      toast.warn("Please fix validation errors");
+      return;
+    }
+    dispatch(updateSellerPhotos(formState));
+  };
+ const handleSave = () => {
+  const link = formState.company_youtube_link?.trim();
+
+  if (!link) {
+    toast.warn("Please enter a YouTube link.");
     return;
   }
-  dispatch(updateSellerPhotos(formState));
+
+  if (!getYoutubeEmbedUrl(link)) {
+    toast.warn("Invalid YouTube link.");
+    return;
+  }
+
+  setFormState((prev) => ({
+    ...prev,
+    company_youtube_links: [...prev.company_youtube_links, link],
+    company_youtube_link: "", // clear input
+  }));
+
+  setAddModalOpen(false);
 };
-  
-  
-  
-  
-  
-  
-  
+
+
+
+  const handleOpen = () => {
+    setAddModalOpen(true)
+  }
+
+  const getYoutubeEmbedUrl = (url) => {
+  const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+};
+
   const handleCancel = () => {
     setFormState({
       type: "user_details",
@@ -116,23 +158,52 @@ const handleSubmit = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {/* Photos Section */}
-      <div className={styles.section}>
-        <h3 className={styles.title}>Photos</h3>
-        <p className={styles.description}>
-          Showcase what your business can do – for certain services, photos are
-          often what customers look for first – previous projects, locations and
-          venues, or before and after shots for example.
-        </p>
-        <input
+    <>
+      <div className={styles.container}>
+        {/* Photos Section */}
+        <div className={styles.section}>
+          <h3 className={styles.title}>Photos</h3>
+          <p className={styles.description}>
+            Showcase what your business can do – for certain services, photos are
+            often what customers look for first – previous projects, locations and
+            venues, or before and after shots for example.
+          </p>
+          <label htmlFor="photo-upload" className={styles.uploadBtn}>
+            Upload photos
+          </label>
+          <input
+            id="photo-upload"
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleFileChange}
+            className={styles.fileInput}
+          />
+<div className={styles.imageContainer}>
+        {photoPreviews.length > 0 && (
+  <div className={styles.imageContainer}>
+    {photoPreviews.map((src, idx) => (
+      <img
+        key={idx}
+        src={src}
+        alt={`preview-${idx}`}
+        width="150"
+        height="150"
+        className={styles.previewImage}
+      />
+    ))}
+  </div>
+)}
+</div> 
+
+          {/* <input
           type="file"
           accept="image/*"
           multiple
           onChange={handleFileChange}
           className={styles.fileInput}
-        />
-        {/* <div className={styles.previewContainer}>
+        /> */}
+          {/* <div className={styles.previewContainer}>
           {photoPreviews.map((src, idx) => (
             <img
               key={idx}
@@ -142,41 +213,84 @@ const handleSubmit = () => {
             />
           ))}
         </div> */}
-      </div>
-
-      {/* Videos Section */}
-      <div className={styles.section}>
-        <div className={styles.videoHeader}>
-          <h3 className={styles.title}>Videos</h3>
-          <div className={styles.optional}>
-            <img src={iIcon} alt="info" className={styles.icon} />
-            <span>Optional</span>
-          </div>
         </div>
-        <p className={styles.description}>
-          Add YouTube videos to showcase your work and expertise – videos of
-          previous events for example.
-        </p>
-        <input
+
+        {/* Videos Section */}
+        <div className={styles.section}>
+          <div className={styles.videoHeader}>
+            <h3 className={styles.title}>Videos</h3>
+            <div className={styles.optional}>
+              <img src={iIcon} alt="info" className={styles.icon} />
+              <span>Optional</span>
+            </div>
+          </div>
+          <p className={styles.description}>
+            Add YouTube videos to showcase your work and expertise – videos of
+            previous events for example.
+          </p>
+          <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube video link</button>
+          <div  className={styles.imageContainer}>
+          {formState.company_youtube_links.length > 0 && (
+  <div className={styles.videoContainer}>
+    {formState.company_youtube_links?.map((link, idx) => (
+      <iframe
+        key={idx}
+        width="215"
+        height="200"
+        src={getYoutubeEmbedUrl(link)}
+        title={`YouTube video ${idx + 1}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className={styles.videoPreview}
+      />
+    ))}
+  </div>
+)}
+</div>
+          {/* {formState.company_youtube_link && getYoutubeEmbedUrl(formState.company_youtube_link) && (
+            <div className={styles.videoPreview}>
+              <iframe
+                width="50%"
+                height="275"
+                src={getYoutubeEmbedUrl(formState.company_youtube_link)}
+                title="YouTube video preview"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )} */}
+          {/* <input
           type="text"
           placeholder="Enter YouTube video link"
           name="company_youtube_link"
           value={formState.company_youtube_link}
           onChange={handleInputChange}
           className={styles.youtubeInput}
-        />
-      </div>
+        /> */}
+        </div>
 
-      {/* Footer Buttons */}
-      <div className={styles.footer}>
-        <button className={styles.cancelButton} onClick={handleCancel}>
-          Cancel
-        </button>
-        <button className={styles.saveButton} onClick={handleSubmit}>
-          Save
-        </button>
+        {/* Footer Buttons */}
+        <div className={styles.footer}>
+          <button className={styles.cancelButton} onClick={handleCancel}>
+            Cancel
+          </button>
+          <button className={styles.saveButton} onClick={handleSubmit}>
+            Save
+          </button>
+        </div>
       </div>
-    </div>
+      {addModalOpen && <>
+        <AddYoutubeModal
+          isOpen={addModalOpen}
+          onClose={() => setAddModalOpen(false)}
+          onSave={handleSave}
+          formState={formState}
+          handleInputChange={handleInputChange}
+        />
+      </>}
+    </>
   );
 };
 

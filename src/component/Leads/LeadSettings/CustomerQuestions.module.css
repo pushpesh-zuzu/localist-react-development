@@ -5,13 +5,13 @@
   max-width: 627px;
   padding-bottom: 20px !important;
   position: relative;
-  height: 79.2vh;
+  height: 79.1vh;
   bottom: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #d9d9d9;
+  /* border: 1px solid #d9d9d9; */
 }
 
 .modal::-webkit-scrollbar {

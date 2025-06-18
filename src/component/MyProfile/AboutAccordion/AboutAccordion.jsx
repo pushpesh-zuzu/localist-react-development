@@ -8,6 +8,9 @@ import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSellerProfile, clearUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 import { toast } from "react-toastify";
+import { updateLocalStorageValue } from "../../../utils";
+import { setUserToken } from "../../../store/Auth/authSlice";
+import { setRegisterData } from "../../../store/FindJobs/findJobSlice";
 
 
 const AboutAccordion = () => {
@@ -182,6 +185,26 @@ extra_links: "",
 useEffect(() => {
   if (updateSuccess) {
     toast.success("Profile updated successfully!");
+    updateLocalStorageValue('barkUserToken', 'name', formState?.name)
+    updateLocalStorageValue("registerDataToken","name",formState?.name)
+     const storedData = localStorage.getItem("barkUserToken");
+     const registerData = localStorage.getItem("registerDataToken")
+
+
+    const parsedData = JSON.parse(storedData);
+    const registerDatas = JSON.parse(registerData)
+    if(parsedData) {
+
+      parsedData.name = formState?.name;
+      dispatch(setUserToken(parsedData));
+    }
+    if(registerDatas){
+
+      registerDatas.name = formState?.name
+      dispatch(setRegisterData(registerDatas))
+    }
+
+
     dispatch(clearUpdateStatus()); // reset flags
   } else if (updateError) {
     toast.error(`Error: ${updateError}`);
@@ -289,7 +312,7 @@ useEffect(() => {
         <p>
           This information will be seen by customers on Bark. Change the details
           Bark uses to contact you privately in{" "}
-          <a href="#!" className={styles.link}>
+          <a href="/settings/account_details" className={styles.link}>
             Account Details
           </a>
           .
