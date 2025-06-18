@@ -235,7 +235,7 @@ const PhotosAccordion = () => {
     {formState.company_youtube_links?.map((link, idx) => (
       <iframe
         key={idx}
-        width="240"
+        width="215"
         height="200"
         src={getYoutubeEmbedUrl(link)}
         title={`YouTube video ${idx + 1}`}

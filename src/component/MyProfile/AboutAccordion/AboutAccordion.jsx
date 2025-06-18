@@ -312,7 +312,7 @@ useEffect(() => {
         <p>
           This information will be seen by customers on Bark. Change the details
           Bark uses to contact you privately in{" "}
-          <a href="#!" className={styles.link}>
+          <a href="/settings/account_details" className={styles.link}>
             Account Details
           </a>
           .

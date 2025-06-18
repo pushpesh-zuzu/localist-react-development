@@ -104,7 +104,7 @@
 }
 @media screen and (max-width:480px) {
   .container {
-    padding: 57px 24px 27px 24px;
+    padding: 57px 2px 27px 2px;
   }
   .lastBoxContainer {
   display: flex;
