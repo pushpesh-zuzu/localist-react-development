@@ -12,18 +12,20 @@ import styles from "./AccreditationsAccordion.module.css";
 import ISSAImage from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import axiosInstance from "../../../Api/axiosInstance";
+import { BASE_IMAGE, BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 
-const AccreditationsAccordion = () => {
+const AccreditationsAccordion = ({ details }) => {
   const [accordionGroups, setAccordionGroups] = useState([
     {
       accreditations: [
-        
+
       ],
       newAccreditation: "",
       accreImage: null,
     },
   ]);
-  
+
+
   const fileInputRefs = useRef([]);
   const dispatch = useDispatch();
   const { accreditationsUpdateSuccess, accreditationsUpdateError, sellerLoader } =
@@ -37,25 +39,25 @@ const AccreditationsAccordion = () => {
       setAccordionGroups(updated);
     }
   };
-  
+
   const handleInputChange = (index, value) => {
     const updated = [...accordionGroups];
     updated[index].newAccreditation = value;
     setAccordionGroups(updated);
   };
-  
+
   const handleImageUpload = (index, file) => {
     const updated = [...accordionGroups];
     updated[index].accreImage = file;
     setAccordionGroups(updated);
   };
-  
+
   const handleClickUpload = (index) => {
     if (fileInputRefs.current[index]) {
       fileInputRefs.current[index].click();
     }
   };
-  
+
   const handleAccreditationAdd = () => {
     setAccordionGroups([
       ...accordionGroups,
@@ -64,10 +66,10 @@ const AccreditationsAccordion = () => {
   };
 
   const handleSave = () => {
-   console.log(accordionGroups)
+    console.log(accordionGroups)
     dispatch(updateSellerAccreditations(accordionGroups));
   };
-  
+
   // Show toast based on update result
   useEffect(() => {
     if (accreditationsUpdateSuccess) {
@@ -78,8 +80,17 @@ const AccreditationsAccordion = () => {
       dispatch(clearAccreditationsStatus());
     }
   }, [accreditationsUpdateSuccess, accreditationsUpdateError, dispatch]);
-  
-  
+
+  useEffect(() => {
+    if (details && Array.isArray(details)) {
+      const mapped = details.map((item) => ({
+        accreditations: item.name ? [item.name] : [],
+        newAccreditation: "",
+        accreImage: item.image ? { previewUrl: `${BASE_IMAGE}/accreditations/${item.image}` } : null,
+      }));
+      setAccordionGroups(mapped);
+    }
+  }, [details]);
 
   return (
     <>
@@ -102,83 +113,116 @@ const AccreditationsAccordion = () => {
         </p>
 
         {accordionGroups.map((group, index) => (
-  <div key={index} className={styles.card}>
-    <div className={styles.logoSectionWrapper}>
-      <div className={styles.logoSection}>
-      {group.accreImage ? (
-  <img
-    src={URL.createObjectURL(group.accreImage)}
-    alt="Uploaded"
-    className={styles.logo}
-  />
-) : (
-  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
-)}</div>
-      <div className={styles.accreditationList}>
-        {group.accreditations.map((item, idx) => (
-          <p key={idx} className={styles.accreditationItem}>
-            {item}
-          </p>
-        ))}
-      </div>
-    </div>
+          <div key={index} className={styles.card}>
+            <div className={styles.logoSectionWrapper}>
+              {/* <div className={styles.logoSection}>
+                {group.accreImage ? (
+                  <img
+                    src={URL.createObjectURL(group.accreImage)}
+                    alt="Uploaded"
+                    className={styles.logo}
+                  />
+                ) : (
+                  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
+                )}</div> */}
+              <div className={styles.logoSection}>
+                {group.accreImage ? (
+                  <img
+                    src={
+                      group.accreImage.previewUrl
+                        ? group.accreImage.previewUrl
+                        : URL.createObjectURL(group.accreImage)
+                    }
+                    alt="Uploaded"
+                    className={styles.logo}
+                  />
+                ) : (
+                  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
+                )}
 
-    <div className={styles.inputGroup}>
-      <input
-        type="text"
-        value={group.newAccreditation}
-        onChange={(e) => handleInputChange(index, e.target.value)}
-        placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
-        className={styles.input}
-      />
-      {/* <button
+                {/* Show name if it exists */}
+
+              </div>
+              <div className={styles.accreditationList}>
+                {/* {group.accreditations.map((item, idx) => (
+                  <p key={idx} className={styles.accreditationItem}>
+                    {item}
+                  </p>
+                ))} */}
+                {group.accreditations.length > 0 && (
+                  <span className={styles.accreditationItem}>{group.accreditations[0]}</span>
+                )}
+              </div>
+            </div>
+            {group.accreditations.length === 0 && (
+  <div className={styles.inputGroup}>
+    <input
+      type="text"
+      value={group.newAccreditation}
+      onChange={(e) => handleInputChange(index, e.target.value)}
+      placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
+      className={styles.input}
+    />
+  </div>
+)}
+
+            {/* <div className={styles.inputGroup}>
+              <input
+                type="text"
+                value={group.newAccreditation}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+                placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
+                className={styles.input}
+              />
+            
+            </div> */}
+              {/* <button
         className={styles.addButton}
         onClick={() => handleAdd(index)}
       >
         Add
       </button> */}
-    </div>
 
-    <div className={styles.AccreditationsAccordionBox} style={{ display: 'flex', gap: '1rem', marginTop: '10px' }}>
-      <button
-        className={styles.addAccreditationButton}
-        onClick={() => handleClickUpload(index)}
-      >
-        {group.accreImage ? "Change Photo " : "Upload Photo"}
-      </button>
+            <div className={styles.AccreditationsAccordionBox} style={{ display: 'flex', gap: '1rem', marginTop: '10px' }}>
+              <button
+                className={styles.addAccreditationButton}
+                onClick={() => handleClickUpload(index)}
+              >
+                {group.accreImage ? "Change Photo " : "Upload Photo"}
+              </button>
 
-      {/* Only show Add Accreditation button on the last card */}
-      {index === accordionGroups.length - 1 && (
-        <button
-          className={styles.addAccreditationButtons}
-          onClick={handleAccreditationAdd}
-        >
-          + Add Accreditation
-        </button>
-      )}
+              {/* Only show Add Accreditation button on the last card */}
+              {index === accordionGroups.length - 1 && (
+                <button
+                  className={styles.addAccreditationButtons}
+                  onClick={handleAccreditationAdd}
+                >
+                  + Add Accreditation
+                </button>
+              )}
 
-      <input
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        ref={(el) => (fileInputRefs.current[index] = el)}
-        onChange={(e) => {
-          const file = e.target.files[0];
-          if (file) handleImageUpload(index, file);
-        }}
-      />
-    </div>
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                ref={(el) => (fileInputRefs.current[index] = el)}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) handleImageUpload(index, file);
+                }}
+              />
+            </div>
 
-    {/* {group.accreImage && (
+            {/* {group.accreImage && (
       <p style={{ marginTop: "5px", fontSize: "12px" }}>
         Selected: {group.accreImage.name}
       </p>
     )} */}
-  </div>
-))}
+          </div>
+        ))}
 
 
-        
+
       </div>
 
       <div className={styles.footer}>

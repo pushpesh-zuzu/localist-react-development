@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateSellerPhotos, clearPhotoUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 import AddYoutubeModal from "./AddYoutubeModal";
-const PhotosAccordion = () => {
+const PhotosAccordion = ({details}) => {
   const dispatch = useDispatch();
   const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((state) => state.myProfile);
   const [addModalOpen, setAddModalOpen] = useState(false)
@@ -19,7 +19,7 @@ const PhotosAccordion = () => {
   });
 
   const [photoPreviews, setPhotoPreviews] = useState([]);
-
+console.log(details,"details")
 
   // const handleFileChange = (e) => {
   //   const files = Array.from(e.target.files);
@@ -115,6 +115,27 @@ const PhotosAccordion = () => {
     }
     dispatch(updateSellerPhotos(formState));
   };
+//   const handleSubmit = () => {
+//   if (!validate()) {
+//     toast.warn("Please fix validation errors");
+//     return;
+//   }
+
+//   const body = new FormData();
+//   body.append("type", formState.type);
+
+//   // Append each YouTube link (if any)
+//   formState.company_youtube_links.forEach((link, index) => {
+//     body.append(`company_youtube_links[${index}]`, link);
+//   });
+// console.log(formState.company_youtube_links,body,"formState")
+//   // Append photos (if any)
+//   formState.company_photos.forEach((file) =>
+//     body.append("company_photos[]", file)
+//   );
+
+//   dispatch(updateSellerPhotos(body));
+// };
  const handleSave = () => {
   const link = formState.company_youtube_link?.trim();
 
@@ -157,6 +178,33 @@ const PhotosAccordion = () => {
     setPhotoPreviews([]);
   };
 
+  useEffect(() => {
+  if (details) {
+    // Preload YouTube link if it exists
+    const youtubeLink = details.company_youtube_link || "";
+
+    // Convert image filenames into full URLs
+    const photoFilenames = details.company_photos
+      ? details.company_photos.split(",").map((item) => item.trim())
+      : [];
+
+   const BASE_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/users";
+
+    const previews = photoFilenames.map(
+      (filename) => `${BASE_IMAGE}/${filename}`
+    );
+
+    setFormState((prev) => ({
+      ...prev,
+      company_photos: [], 
+      company_youtube_link: "",
+      company_youtube_links: youtubeLink ? [youtubeLink] : [],
+    }));
+
+    setPhotoPreviews(previews);
+  }
+}, [details]);
+
   return (
     <>
       <div className={styles.container}>
@@ -180,7 +228,7 @@ const PhotosAccordion = () => {
             className={styles.fileInput}
           />
 <div className={styles.imageContainer}>
-        {photoPreviews.length > 0 ? (
+       {photoPreviews.length > 0 ? (
   <div className={styles.imageContainer}>
     {photoPreviews.map((src, idx) => (
       <img
@@ -193,7 +241,11 @@ const PhotosAccordion = () => {
       />
     ))}
   </div>
-) : <div className={styles.paraText}>Photos you add to your profile will appear here.</div>}
+) : (
+  <div className={styles.paraText}>
+    Photos you add to your profile will appear here.
+  </div>
+)} 
 </div> 
 
           {/* <input

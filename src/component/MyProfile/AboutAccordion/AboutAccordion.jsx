@@ -8,15 +8,16 @@ import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSellerProfile, clearUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 import { toast } from "react-toastify";
-import { updateLocalStorageValue } from "../../../utils";
+import { BASE_IMAGE, updateLocalStorageValue } from "../../../utils";
 import { setUserToken } from "../../../store/Auth/authSlice";
 import { setRegisterData } from "../../../store/FindJobs/findJobSlice";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 
-const AboutAccordion = () => {
+const AboutAccordion = ({details}) => {
   const dispatch = useDispatch();
   const { sellerLoader, updateSuccess, updateError ,loading, error, success } = useSelector((state) => state.myProfile);
-
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
 tiktok_link: "",
@@ -68,6 +69,30 @@ extra_links: "",
     accre_image: useRef(),
     company_photos: useRef()
   };
+
+  useEffect(()=>{
+    if(details?.id){
+// setFormState(details)
+setFormState({
+  ...formState,company_email:details?.email,
+  company_phone:details?.company_phone,
+  company_name:details?.company_name,
+  name:details?.name,
+  company_website:details?.company_website,
+  company_location:details?.company_location,
+  company_locaion_reason:details?.company_locaion_reason,
+  company_size:details?.company_size,
+  company_total_years:details?.company_total_years,
+  about_company:details?.about_company,
+  profile_imagePreview:details?.profile_image ? `${BASE_IMAGE}/users/${details?.profile_image}`: defaultImage,
+  // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
+  
+ company_logoPreview: details?.company_logo ? `${BASE_IMAGE}/users/${details?.company_logo}` : defaultImage,
+
+
+})
+}
+  },[details])
 
   const previewFile = (file) => URL.createObjectURL(file);
 
@@ -607,7 +632,9 @@ useEffect(() => {
           onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? "Saving..." : "Save"}
+          {loading ? <Spin
+                  indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+                /> : "Save"}
         </button>
       </div>
       {success && <p style={{ color: "green" }}>Profile updated successfully!</p>}

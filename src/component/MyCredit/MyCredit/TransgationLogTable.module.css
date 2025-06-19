@@ -9,6 +9,7 @@
     font-weight:500;
     margin-bottom: 16px;
     color: #000000;
+    cursor: pointer;
   }
   
   .scrollTable {

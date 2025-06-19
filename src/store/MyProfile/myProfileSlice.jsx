@@ -150,10 +150,12 @@ export const updateSellerProfile = createAsyncThunk(
 export const updateSellerPhotos = createAsyncThunk(
   "myProfile/updateSellerPhotos",
   async (formState, { rejectWithValue }) => {
+    console.log(formState,"formState")
     try {
       const body = new FormData();
       body.append("type", formState.type || "photos");
       body.append("company_youtube_link", formState.company_youtube_link || "");
+      body.append("company_youtube_links", formState.company_youtube_links || "");
 
       if (Array.isArray(formState.company_photos)) {
         formState.company_photos.forEach((file) => {

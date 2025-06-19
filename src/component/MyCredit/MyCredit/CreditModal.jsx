@@ -66,11 +66,11 @@ const CreditModal = ({ onClose }) => {
           }}
         />
         <div className={styles.sliderMarkers}>
-          <span style={{ left: "0%" }}></span>
+          <span style={{ left: "5%" }}></span>
           <span style={{ left: "25%" }}></span>
           <span style={{ left: "50%" }}></span>
           <span style={{ left: "75%" }}></span>
-          <span style={{ left: "100%" }}></span>
+          <span style={{ left: "95%" }}></span>
         </div>
       </div>
 

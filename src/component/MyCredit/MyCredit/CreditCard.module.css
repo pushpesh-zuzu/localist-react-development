@@ -25,7 +25,8 @@
     text-align: right;
     flex: 1;
     min-width: 200px;
-    ;
+    cursor: pointer;
+    
   }
   
   /* Responsive Styles */

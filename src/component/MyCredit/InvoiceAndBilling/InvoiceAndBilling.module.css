@@ -180,12 +180,13 @@
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 5px 12px;
+    padding: 8px 20px;
   }
   .vatRegisterBox {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-top: 14px;
   }
 
   @media screen and (max-width:1024px) {

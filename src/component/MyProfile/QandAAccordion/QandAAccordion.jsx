@@ -43,10 +43,11 @@ const questions = [
   },
 ];
 
-const QandAAccordion = () => {
+const QandAAccordion = ({details}) => {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
   const [loadingQuestionId, setLoadingQuestionId] = useState(null)
+  console.log(details,"ll")
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -61,7 +62,20 @@ const QandAAccordion = () => {
     dispatch(updateSellerQandA(answers));
   };
 
-
+useEffect(() => {
+  if (details && Array.isArray(details)) {
+    const initialAnswers = {};
+    details.forEach((item) => {
+      const matchingQuestion = questions.find(
+        (q) => q.label === item.questions
+      );
+      if (matchingQuestion) {
+        initialAnswers[matchingQuestion.id] = item.answer;
+      }
+    });
+    setAnswers(initialAnswers);
+  }
+}, [details]);
 
   useEffect(() => {
     if (qnaUpdateSuccess) {

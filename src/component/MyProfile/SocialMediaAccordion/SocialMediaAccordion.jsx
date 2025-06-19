@@ -21,7 +21,7 @@ const platforms = [
   { key: "linkedin_link", label: "Linkedin", placeholder: "@username" },
 ];
 
-const SocialMediaAccordion = () => {
+const SocialMediaAccordion = ({details}) => {
   const [formState, setFormState] = useState({
     type: "social_media",
     fb_link: "",
@@ -31,6 +31,7 @@ const SocialMediaAccordion = () => {
     linkedin_link: "",
     extra_links: "",
   });
+  console.log(details,"details")
   const dispatch = useDispatch();
   const { socialUpdateSuccess, socialUpdateError, sellerLoader } = useSelector(
     (state) => state.myProfile
@@ -59,7 +60,19 @@ const SocialMediaAccordion = () => {
     }
   }, [socialUpdateSuccess, socialUpdateError, dispatch]);
   
-
+useEffect(() => {
+  if (details) {
+    setFormState((prev) => ({
+      ...prev,
+      fb_link: details.fb_link || "",
+      twitter_link: details.twitter_link || "",
+      tiktok_link: details.tiktok_link || "",
+      insta_link: details.insta_link || "",
+      linkedin_link: details.linkedin_link || "",
+      extra_links: details.extra_links || "",
+    }));
+  }
+}, [details]);
   return (
     <div className={styles.container}>
       {/* Social Media Section */}
