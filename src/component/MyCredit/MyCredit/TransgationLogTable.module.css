@@ -11,8 +11,13 @@
     color: #000000;
     cursor: pointer;
   }
+  .container h2:hover {
+    /* text-decoration: underline; */
+    color: var(--primary-color);
+  }
   
   .scrollTable {
+    width: 100%;
     overflow-x: auto;
   }
   
@@ -20,6 +25,7 @@
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
+    overflow-x: scroll;
   }
   
   .table th {
@@ -84,5 +90,18 @@
         margin-bottom: 16px !important;
       }
       
+       .scrollTable::-webkit-scrollbar {
+    height: 4px;
+    background-color: #f1f1f1;
+  }
+
+  .scrollTable::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #000000;
+  }
+
+  .scrollTable::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
   }
   
