@@ -298,12 +298,13 @@
   @media (max-width: 425px) {
     
     .modalOverlay{
-     overflow-x: auto;
+     overflow-x: scroll;
     
   }
   
   .modalContent {
     margin: 0px 10px;
+    overflow-x: scroll;
   }
   
     .title h2 {
