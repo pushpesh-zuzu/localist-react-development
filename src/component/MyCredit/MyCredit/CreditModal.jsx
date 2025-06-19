@@ -16,10 +16,15 @@ const CreditModal = ({ onClose }) => {
   }, []);
   const responseEstimate = Math.floor(creditValue / 8); // Example logic
   const price = (creditValue * 4.4625).toFixed(2); // Example: £1785 for 400 credits
+  // const getSliderBackground = (value, min, max) => {
+  //   const percentage = ((value - min) / (max - min)) * 100;
+  //   return `linear-gradient(to right, #007bff 0%, #007bff ${percentage}%, #e4e4e4 ${percentage}%, #e4e4e4 100%)`;
+  // };
   const getSliderBackground = (value, min, max) => {
-    const percentage = ((value - min) / (max - min)) * 100;
-    return `linear-gradient(to right, #007bff 0%, #007bff ${percentage}%, #e4e4e4 ${percentage}%, #e4e4e4 100%)`;
-  };
+  const percentage = ((value - min) / (max - min)) * 100;
+  return `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percentage}%, #e4e4e4 ${percentage}%, #e4e4e4 100%)`;
+};
+
   
   return (
     <div className={styles.modalOverlay}>
@@ -66,11 +71,11 @@ const CreditModal = ({ onClose }) => {
           }}
         />
         <div className={styles.sliderMarkers}>
-          <span style={{ left: "5%" }}></span>
+          <span style={{ left: "3%" }}></span>
           <span style={{ left: "25%" }}></span>
           <span style={{ left: "50%" }}></span>
           <span style={{ left: "75%" }}></span>
-          <span style={{ left: "95%" }}></span>
+          <span style={{ left: "98%" }}></span>
         </div>
       </div>
 

@@ -148,21 +148,29 @@
     
   }
   
-  .rangeLabels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #000;
-    margin-top: -20px;
-    margin-bottom: 30px;
-    padding: 0 4px;
-    width: 80%;
-    
-  }
-  .rangeLabels span {
-    font-weight: 500;
-    margin:16px 75px 0px 78px;
-  }
+.rangeLabels {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+  height: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.rangeLabels span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-weight: 500;
+  font-size: 14px;
+  color: #000;
+}
+
+/* Position each label manually */
+.rangeLabels span:nth-child(1) { left: 8%; }
+.rangeLabels span:nth-child(2) { left: 28%; }
+.rangeLabels span:nth-child(3) { left: 50%; }
+.rangeLabels span:nth-child(4) { left: 73%; }
+.rangeLabels span:nth-child(5) { left: 93%; }
   .centerBtn {
     text-align: center;
     margin-bottom: 39px;
@@ -339,16 +347,26 @@
       font-size: 18px;
       padding: 4px 8px;
     }
+     .sliderMarkers span {
+    position: absolute;
+    top: -7px;
+    height: 18px;
+    width: 4px;
+    background: var(--primary-color);
     
+  }
   
     .partnerSection h4 {
       font-size: 14px;
       text-align: start;
     }
-  
+  .partnerSection {
+    align-items: start;
+  }
     .partnerSection p {
       font-size: 13px;
       text-align: start;
+      margin-bottom: 20px;
     }
   
     .partnerSection li {

@@ -189,8 +189,11 @@
   .vatRegisterBox {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     margin-top: 14px;
+  }
+  .vatRegisterBox input{
+    margin-left: 2px;
   }
 
   @media screen and (max-width:1024px) {
@@ -317,5 +320,21 @@
         border: none;
         padding: 5px 12px;
       }
+      .tableSection{
+        overflow-x: scroll;
+      }
+       .tableSection::-webkit-scrollbar {
+    height: 4px;
+    background-color: #f1f1f1;
+  }
+
+  .tableSection::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #000000;
+  }
+
+  .tableSection::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
   }
   
