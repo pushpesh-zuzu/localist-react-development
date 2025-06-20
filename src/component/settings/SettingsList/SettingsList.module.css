@@ -16,7 +16,7 @@
   color: #989898;
   font-weight: 500;
   font-size: 16px;
-  padding: 0px 8px;
+  padding: 0px 15px;
   padding-bottom: 16px;
 }
 .sectionHeader {
@@ -35,7 +35,7 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #fce5e3;
+  background-color: #FFD5D2;
 }
 .myProfileWrappers {
   display: flex;

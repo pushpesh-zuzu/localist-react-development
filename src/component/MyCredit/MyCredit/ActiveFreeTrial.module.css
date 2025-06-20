@@ -8,7 +8,7 @@
     flex-wrap: wrap;
     gap: 16px;
   } */
-   .banner {
+   /* .banner {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -16,9 +16,19 @@
   flex-wrap: wrap;
   gap: 16px;
 
-  background: linear-gradient(to right, var(--primary-color) 60%,var(--primary-color) 100%);
+  background: linear-gradient(to right, var(--primary-color) 10%,var(--primary-color) 100%);
+} */
+  .banner {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  background: linear-gradient(to bottom, #00aee9 0%, #1cc9ff 100%);
 }
-  
+
   /* ======== Left Section ======== */
   .leftSection {
     flex: 1 1 200px;
