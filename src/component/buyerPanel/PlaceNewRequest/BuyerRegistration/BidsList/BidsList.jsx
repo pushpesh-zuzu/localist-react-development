@@ -638,7 +638,7 @@ import {
   getRatingFilterApi,
   ratingFilterApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
-import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
+import { BASE_IMAGE, BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DummyImage from "../../../../../assets/Images/DummyImage.svg";
 import { Spin } from "antd";
@@ -955,7 +955,7 @@ console.log(seller,"seller")
                         <img
                           src={
                             seller?.profile_image
-                              ? `${BASE_IMAGE_URL}${seller?.profile_image}`
+                              ? `${BASE_IMAGE}/users/${seller?.profile_image}`
                               : DummyImage
                           }
                           alt="Profile"
