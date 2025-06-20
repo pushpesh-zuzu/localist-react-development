@@ -59,7 +59,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         {/* <div className={styles.stars}>{<img src={starImg} alt="image" /> .repeat(5)}</div> */}
         <div className={styles.stars}>
   {Array.from({ length: 5 }).map((_, index) => (
-    <img key={index} src={starImg} alt="star" />
+    <img key={index} src={starImg} alt="star" width={19} height={19} />
   ))}
 </div>
         <div className={styles.totalReviews}>{totalReviews} customer reviews</div>
@@ -70,13 +70,13 @@ const { reviewListData } = useSelector((state) => state.myProfile);
   <div key={star} className={styles.row}>
     <label className={styles.ratingLabel}>
       <input type="radio" name="rating" disabled />
-      <span className={styles.starText}>
-        {star}
+      <div className={styles.starText}>
+        <div style={{width:"10px"}}>{star}</div>
         <img
           src={star === 5 ? blueStar : blackStar}
           alt="star"
         />
-      </span>
+      </div>
     </label>
     <div className={styles.barWrapper}>
       <div
@@ -115,7 +115,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
       </div>
       <div className={styles.dateSection}>
         <span className={styles.date}>
-          {moment(item.created_at).format("DD-MM")}
+          {moment(item.created_at).format("DD-MM-YYYY")}
         </span>
         <div className={styles.source}>
           Source:
@@ -131,7 +131,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
     <h4 className={styles.title}>{item.review}</h4>
     <p className={styles.content}>{item.content}</p>
 
-    <div className={styles.commentBox}>
+    {/* <div className={styles.commentBox}>
       <img
         src={"https://randomuser.me/api/portraits/women/45.jpg"}
         alt="avatar"
@@ -143,7 +143,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         </p>
         <strong className={styles.thankYou}>Thank You...</strong>
       </div>
-    </div>
+    </div> */}
   </div>
 ))}
 

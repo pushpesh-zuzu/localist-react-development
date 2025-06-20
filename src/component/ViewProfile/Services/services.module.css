@@ -16,14 +16,14 @@
     justify-content: space-between;
     align-items: center;
     font-weight: 600;
-    padding: 9px 3px;
+    padding: 12px 3px;
     border-top: 1px solid #ccc;
     cursor: pointer;
     font-size: 14px;
   }
   
   .accordionContent {
-    padding: 2px 0;
+    padding: 4px 0px;
     color: #000000;
     font-size: 14px;
     line-height: 1.5;
@@ -34,6 +34,7 @@
     transition: transform 0.3s ease;
     width: 16px;
     height: 16px;
+    margin-right: 16px;
   }
   
   .up {

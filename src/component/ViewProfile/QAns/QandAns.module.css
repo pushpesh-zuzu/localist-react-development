@@ -32,8 +32,9 @@
   .answer {
     margin-top: 10px;
     font-size: 14px;
-    color: #555;
+    color: #000000;
     line-height: 1.5;
+    font-weight: 400;
   }
   
   .arrow {

@@ -157,6 +157,11 @@ useEffect(() => {
   return (
     <>
       <div className={styles.maincontainer}>
+        {saveForLaterDataList?.[0]?.savedLeads?.length === 0 && (
+          <div className={styles.noDataContainer}>  
+            <h2>No Saved Leads Available</h2>
+            </div>
+        )}
         <div className={styles.scrollContainer} ref={scrollContainerRef}>
           {saveForLaterDataList?.[0]?.savedLeads?.slice(0, visibleCount)?.map((item) => {
             return (
@@ -276,7 +281,7 @@ useEffect(() => {
                       <div className={styles.mainText}>
                         {" "}
                         <p>ACT FAST</p>{" "}
-                        <span> 10 Professionals</span>{" "}
+                        <span> {item?.view_count} Professionals</span>{" "}
                         <br /> have viewed this lead
                       </div>
                     </div>

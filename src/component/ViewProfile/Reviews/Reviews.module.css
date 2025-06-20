@@ -1,7 +1,7 @@
 .reviewList {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
     padding: 20px 0px;
     /* max-width: 800px; */
     margin: 0 auto;
@@ -11,6 +11,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    margin-right: 12px;
   }
   .leaveBtn {
     background-color: transparent;
@@ -25,7 +26,7 @@
     align-items: flex-start;
     gap: 32px;
     /* border-top: 1px solid #e0e0e0; */
-    padding-top: 24px;
+    /* padding-top: 24px; */
     max-width: 600px;
     
   }
@@ -111,6 +112,8 @@
     width: 40px;
     font-size: 12px;
     text-align: right;
+    color: #000000;
+    font-weight: 600;
   }
   
   .card {
@@ -144,13 +147,16 @@
   }
   
   .count {
-    color: #333;
+    color: #000000;
+    margin-top: 2px;
   }
   
   .verified {
     color: var(--primary-color);
     font-weight: 500;
     font-size: 14px;
+    margin-top: 2px;
+    margin-left: 18px;
   }
   
   .dateSection {
