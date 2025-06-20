@@ -110,13 +110,13 @@
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
-    border: 2px solid white;
-    margin-top: -7px; /* Align thumb vertically */
+    /* border: 2px solid white; */
+    margin-top: 1px; /* Align thumb vertically */
   }
   
   .slider::-moz-range-thumb {
@@ -142,7 +142,7 @@
   .sliderMarkers span {
     position: absolute;
     top: -6px;
-    height: 18px;
+    height: 16px;
     width: 4px;
     background: var(--primary-color);
     
@@ -153,7 +153,7 @@
   width: 100%;
   margin-top: 12px;
   height: 20px;
-  margin-top: 20px;
+  margin-top: -10px;
   margin-bottom: 30px;
 }
 
@@ -335,9 +335,11 @@
   
     .rangeLabels {
       font-size: 11px;
-      margin-bottom: 45px;
+      margin-bottom: 30px;
     }
-  
+  .centerBtn{
+    margin-bottom: 30px;
+  }
     .buyBtn {
       font-size: 16px;
       padding: 5px 20px;

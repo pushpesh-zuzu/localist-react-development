@@ -180,11 +180,8 @@
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 8px 20px;
-    cursor: pointer;
-  }
-  .saveButton:hover {
-    background-color: #007bbf;
+    padding: 8px 22px;
+    font-size: 18px;
   }
   .vatRegisterBox {
     display: flex;
