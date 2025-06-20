@@ -170,7 +170,7 @@
 .rangeLabels span:nth-child(2) { left: 28%; }
 .rangeLabels span:nth-child(3) { left: 50%; }
 .rangeLabels span:nth-child(4) { left: 73%; }
-.rangeLabels span:nth-child(5) { left: 93%; }
+.rangeLabels span:nth-child(5) { left: 93.5%; }
   .centerBtn {
     text-align: center;
     margin-bottom: 39px;
@@ -197,12 +197,12 @@
   }
   
   .partnerSection h4 {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 18px;
     font-weight: 600;
   }
   .partnerSection p {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -351,8 +351,8 @@
     }
      .sliderMarkers span {
     position: absolute;
-    top: -7px;
-    height: 18px;
+    top: -6px;
+    height: 16px;
     width: 4px;
     background: var(--primary-color);
     
@@ -368,7 +368,7 @@
     .partnerSection p {
       font-size: 13px;
       text-align: start;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
   
     .partnerSection li {
@@ -390,6 +390,9 @@
         border: none;
         background: none;
         cursor: pointer;
+      }
+      .rangeLabels span {
+        font-size: 13px;
       }
   }
   
