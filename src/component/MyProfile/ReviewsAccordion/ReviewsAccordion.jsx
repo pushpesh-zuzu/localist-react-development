@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearFacebookReviewStatus, getCustomerLinkApi, updateFacebookReviewLink } from "../../../store/MyProfile/myProfileSlice";
 import axiosInstance from "../../../Api/axiosInstance";
 import { toast } from "react-toastify";
+import { showToast } from "../../../utils";
 
 
 const ReviewsAccordion = () => {
@@ -15,6 +16,7 @@ const ReviewsAccordion = () => {
   const [fbLink, setFbLink] = useState("");
   const onCopyUrl = () => {
     navigator.clipboard.writeText(customerLinkData);
+    showToast("success", "Link copied to clipboard!");
   };
 
   const dispatch = useDispatch();

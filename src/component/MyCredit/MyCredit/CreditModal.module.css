@@ -141,7 +141,7 @@
   
   .sliderMarkers span {
     position: absolute;
-    top: -6px;
+    top: -5.5px;
     height: 16px;
     width: 4px;
     background: var(--primary-color);
@@ -202,7 +202,7 @@
     font-weight: 600;
   }
   .partnerSection p {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -368,7 +368,7 @@
     .partnerSection p {
       font-size: 13px;
       text-align: start;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
   
     .partnerSection li {

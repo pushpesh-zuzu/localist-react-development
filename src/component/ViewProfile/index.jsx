@@ -18,7 +18,7 @@
 //     const [activeTab, setActiveTab] = useState('About')
 //     const [isopen, setIsOpen] = useState(true)
 //     const profileId = useParams()
-    
+
 
 //     const aboutRef = useRef(null);
 //     const servicesRef = useRef(null);
@@ -26,7 +26,7 @@
 //     const accrediationRef = useRef(null);
 //     const photoRef = useRef(null);
 //     const quesAnsRef = useRef(null);
- 
+
 //   const closeModal = () => setIsOpen(false);
 //   const rightContainerRef = useRef(null);
 
@@ -57,15 +57,15 @@
 //   return () => container?.removeEventListener("scroll", handleScroll);
 // }, []);
 
-  
+
 //     return (
 //         <>
 //         <div className={styles.mainContainer}>
 //             <div className={styles.container}>
-               
-                   
+
+
 //                         <img src={DummyImage} alt="Profile" className={styles.profileImage} />
-                   
+
 //                     <div className={styles.viewDetails}>
 //                         <h2>Starlink pvt. ltd</h2>
 //                         <div className={styles.locationText}>   <img src={LocationIcon} alt="" /><span>WA4, Warrington,</span>  8.6 miles away</div>
@@ -88,7 +88,7 @@
 
 //                         </div>
 //                     </div>
-              
+
 //                 <div className={styles.requestBtnBox}>
 //                     <button className={styles.RequestQuoteBtn}> Request Quote</button>
 //                 </div>
@@ -110,7 +110,7 @@
 //                     <div ref={accrediationRef}><Accrediations /></div>
 //                     <div ref={quesAnsRef}><QandAns/></div>
 //                     <div ref={photoRef}><Photos/></div>
-   
+
 
 //                 </div>
 //             </div>
@@ -138,10 +138,12 @@ import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
 // import LocationIcon from "../../assets/Icons/LocationIcon.png";
-import LocationIcon from "../../assets/Images/HowItWorks/locationImg.svg";
+import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_IMAGE } from "../../utils";
+import starImg from "../../assets/Icons/MyResponse/StarImg.svg"
+import grayStar from "../../assets/Icons/MyResponse/grayStar.svg"
 
 const ViewProfiles = () => {
     const [activeTab, setActiveTab] = useState('About')
@@ -149,25 +151,25 @@ const ViewProfiles = () => {
     const dispatch = useDispatch()
     const profileId = useParams()
     const SellerId = useParams()
-    const { viewProfileData } = useSelector((state)=> state.leadSetting)
-    console.log(viewProfileData,"SellerId")
+    const { viewProfileData } = useSelector((state) => state.leadSetting)
+    console.log(viewProfileData, "SellerId")
     const aboutRef = useRef(null);
     const servicesRef = useRef(null);
     const reviewsRef = useRef(null);
     const accrediationRef = useRef(null);
     const photoRef = useRef(null);
     const quesAnsRef = useRef(null);
- 
+
     const closeModal = () => setIsOpen(false);
     const rightContainerRef = useRef(null);
 
     // Tab click handler function
     const handleTabClick = (tabName) => {
         setActiveTab(tabName);
-        
+
         // Get the corresponding ref based on tab name
         let targetRef;
-        switch(tabName) {
+        switch (tabName) {
             case 'About':
                 targetRef = aboutRef;
                 break;
@@ -194,7 +196,7 @@ const ViewProfiles = () => {
         if (targetRef.current && rightContainerRef.current) {
             const container = rightContainerRef.current;
             const targetPosition = targetRef.current.offsetTop;
-            
+
             container.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -229,95 +231,95 @@ const ViewProfiles = () => {
         return () => container?.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(()=>{
-        const sellerData ={
-            seller_id:profileId?.sellerId
+    useEffect(() => {
+        const sellerData = {
+            seller_id: profileId?.sellerId
         }
-        dispatch (addViewProfileList(sellerData))
-    },[])
+        dispatch(addViewProfileList(sellerData))
+    }, [])
 
     return (
         <>
-        <div className={styles.mainContainer}>
-            <div className={styles.container}>
-                <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage} width={200} height={200} />
-                   
-                <div className={styles.viewDetails}>
-                    <h2>{viewProfileData?.company_name}</h2>
-                    <div className={styles.locationText}>   
-                        <img src={LocationIcon} alt="" />
-                        <span>{viewProfileData?.city} </span>   |  {viewProfileData?.zipcode}
-                    </div>
-                    {/* <div className={styles.sidebar}>
+            <div className={styles.mainContainer}>
+                <div className={styles.container}>
+                    <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage} width={250} height={220} />
+
+                    <div className={styles.viewDetails}>
+                        <h2>{viewProfileData?.company_name}</h2>
+                        <div className={styles.locationText}>
+                            <img src={LocationIcon} alt="" />
+                            <span>{viewProfileData?.city} </span>   |  {viewProfileData?.zipcode}
+                        </div>
+                        {/* <div className={styles.sidebar}>
                         <div className={styles.rating}>
                             <span className={styles.stars}>★★★★★</span>
                             <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
                         </div>
                     </div> */}
-                    <div className={styles.sidebar}>
-  <div className={styles.rating}>
-    <span className={styles.stars}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <span key={i}>
-          {i <= viewProfileData?.avg_rating ? "★" : "☆"}
-        </span>
-      ))}
-    </span>
-    <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
-  </div>
-</div>
-                    <div className={styles.badgesBox}>
-                        <div className={styles.badges}>
-                            <span>Electrician</span>
+                        <div className={styles.sidebar}>
+                            <div className={styles.rating}>
+                                <span className={styles.stars}>
+                                    {[1, 2, 3, 4, 5].map((i) => (
+                                        <span key={i}>
+                                            {i <= viewProfileData?.avg_rating ? <img src={starImg} alt="..." width={29} height={27} /> : <img src={grayStar} alt="..." />}
+                                        </span>
+                                    ))}
+                                </span>
+                                <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
+                            </div>
                         </div>
-                        <div className={styles.badges}>
-                            <span>Web design</span>
+                        <div className={styles.badgesBox}>
+                            <div className={styles.badges}>
+                                <span>LandSpacing</span>
+                            </div>
+                            <div className={styles.badges}>
+                                <span>Web development</span>
+                            </div>
+                            <div className={styles.badges}>
+                                <span>New Pages</span>
+                            </div>
                         </div>
-                        <div className={styles.badges}>
-                            <span>New Pages</span>
-                        </div>
                     </div>
-                </div>
-                
-                <div className={styles.requestBtnBox}>
-                    <button className={styles.RequestQuoteBtn}> Request Quote</button>
-                </div>
-                
-                <div className={styles.contactDetails}>
-                    <div className={styles.mailText}>
-                        <img src={emailImg} alt="" /> 
-                        <span>{viewProfileData?.email}</span>
-                    </div>
-                    <div className={styles.mailText}>
-                        <img src={phoneImg} alt="" />
-                        <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
-                    </div>
-                    <div className={styles.mailText}>
-                        <img src={profileImg} alt="" />
-                        <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "Facebook"}</span>
-                    </div>
-                </div>
-            </div>
 
-            <div className={styles.rightContainer} >
-                <div className={styles.tabContainerBox} ref={rightContainerRef}>
-                    <TabNav 
-                        activeTab={activeTab} 
-                        onTabClick={handleTabClick}
-                    />
-                    <div ref={aboutRef}><About details={viewProfileData}/></div>
-                    <div ref={servicesRef}><Services details={viewProfileData}/></div>
-                    <div ref={reviewsRef}><ReviewSection  details={viewProfileData} /></div>
-                    <div ref={accrediationRef}><Accrediations details={viewProfileData} /></div>
-                    <div ref={quesAnsRef}><QandAns details={viewProfileData}/></div>
-                    <div ref={photoRef}><Photos details={viewProfileData}/></div>
+                    <div className={styles.requestBtnBox}>
+                        <button className={styles.RequestQuoteBtn}> Request Quote</button>
+                    </div>
+
+                    <div className={styles.contactDetails}>
+                        <div className={styles.mailText}>
+                            <img src={emailImg} alt="" />
+                            <span>{viewProfileData?.email}</span>
+                        </div>
+                        <div className={styles.mailText}>
+                            <img src={phoneImg} alt="" />
+                            <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
+                        </div>
+                        <div className={styles.mailText}>
+                            <img src={profileImg} alt="" />
+                            <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "Facebook"}</span>
+                        </div>
+                    </div>
                 </div>
+
+                <div className={styles.rightContainer} >
+                    <div className={styles.tabContainerBox} ref={rightContainerRef}>
+                        <TabNav
+                            activeTab={activeTab}
+                            onTabClick={handleTabClick}
+                        />
+                        <div ref={aboutRef}><About details={viewProfileData} /></div>
+                        <div ref={servicesRef}><Services details={viewProfileData} /></div>
+                        <div ref={reviewsRef}><ReviewSection details={viewProfileData} /></div>
+                        <div ref={accrediationRef}><Accrediations details={viewProfileData} /></div>
+                        <div ref={quesAnsRef}><QandAns details={viewProfileData} /></div>
+                        <div ref={photoRef}><Photos details={viewProfileData} /></div>
+                    </div>
+                </div>
+
+                {isopen && profileId?.profileId &&
+                    <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} />
+                }
             </div>
-            
-            {isopen && profileId?.profileId && 
-                <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId}/>
-            }
-        </div>
         </>
     );
 };

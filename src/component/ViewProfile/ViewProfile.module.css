@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     padding: 20px;
-    gap: 20px;
+    gap: 60px;
   }
   
   .container {
@@ -18,7 +18,7 @@
     border-radius: 8px;
   } */
   .viewDetails {
-    margin-top: 10px;
+    margin-top: 5px;
   }
   .viewDetails h2 {
     display: flex;
@@ -28,7 +28,7 @@
   }
   
   .locationText {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 12px;
     font-weight: 500;
     color: #828282;
@@ -51,9 +51,10 @@
   .sidebar {
     min-width: 150px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    margin-top: 10px;
+    /* flex-direction: column; */
+    /* align-items: flex-start; */
+    /* justify-content: flex-start; */
   }
   
   .rating {
@@ -81,7 +82,7 @@
     flex-wrap: wrap;
     gap: 10px;
     max-width: 250px;
-    margin-top: 25px;
+    margin-top: 20px;
   }
   
   .badges {
@@ -96,7 +97,8 @@
     font-weight: 600;
     font-size: 10px;
     white-space: nowrap;
-    color: #b3b3b3;
+    color: #B3B3B3;
+    background-color: #FFFFFF;
   }
   
   .requestBtnBox {
@@ -105,10 +107,10 @@
   
   .RequestQuoteBtn {
     background: var(--primary-color);
-    padding: 7px 33px;
+    padding: 6px 33px;
     color: #ffffff;
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     border-radius: 5px;
@@ -160,7 +162,7 @@
     }
   
     .RequestQuoteBtn {
-      width: 100%;
+      /* width: 100%; */
       text-align: center;
     }
   }
@@ -195,7 +197,7 @@
       }
     .RequestQuoteBtn {
       font-size: 14px;
-      padding: 8px 15px;
+      padding: 8px 40px;
     }
   
     .badges span {
@@ -235,7 +237,7 @@
     top: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 36px;
     /* padding: 6px; */
     border-bottom: 1px solid #D9D9D9;
     border-top: 1px solid  #D9D9D9;
@@ -252,18 +254,19 @@
     font-weight: 500;
     color: #555;
     font-size: 18px;;
-    padding:  6px 15px;
+    padding:  6px 0px;
     cursor: pointer;
     white-space: nowrap; 
     transition: color 0.3s, border-bottom 0.3s;
     border-bottom: 2px solid transparent;
-    
+    /* margin-left: 16px; */
     flex-shrink: 0;
   }
   
   .active {
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
     
   }
 
@@ -280,6 +283,9 @@
     .tab {
       font-size: 12px;
       padding: 6px 10px;
+    }
+    .tabContainers {
+      gap: 4px;
     }
   }
   

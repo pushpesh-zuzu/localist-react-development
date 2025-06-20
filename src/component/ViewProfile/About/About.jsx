@@ -14,7 +14,7 @@ const About = ({details}) => {
             icon: EliteProImg,
         },
         {
-            title: "12 hires on Localists",
+            title: `${details?.company_total_years} hires on Localists` || "12 hires on Localists",
             icon: businessImg
         },
         {
@@ -26,7 +26,7 @@ const About = ({details}) => {
             icon: localistHireImg
         },
         {
-            title: details?.company_size || "Not specified",
+            title: `${details?.company_size} Staff` || "Not specified",
             icon: responseTimeImg
         },
     ]
