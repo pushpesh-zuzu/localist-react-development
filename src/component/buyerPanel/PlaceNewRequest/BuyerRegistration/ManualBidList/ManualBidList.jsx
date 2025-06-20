@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
-import { BASE_IMAGE_URL, showToast } from "../../../../../utils";
+import { BASE_IMAGE, BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 
 const ManualBidList = () => {
@@ -93,7 +93,7 @@ setIsOpen(true)
                     // src={item.profile_image ? item.profile_image : DummyImage}
                     src={
                       item?.profile_image
-                        ? `${BASE_IMAGE_URL}${item?.profile_image}`
+                        ? `${BASE_IMAGE}/users/${item?.profile_image}`
                         : DummyImage
                     }
                     alt="Profile"

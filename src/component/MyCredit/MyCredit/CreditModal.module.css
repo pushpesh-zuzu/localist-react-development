@@ -167,9 +167,9 @@
 
 /* Position each label manually */
 .rangeLabels span:nth-child(1) { left: 8%; }
-.rangeLabels span:nth-child(2) { left: 28%; }
+.rangeLabels span:nth-child(2) { left: 27.5%; }
 .rangeLabels span:nth-child(3) { left: 50%; }
-.rangeLabels span:nth-child(4) { left: 73%; }
+.rangeLabels span:nth-child(4) { left: 72.5%; }
 .rangeLabels span:nth-child(5) { left: 93.5%; }
   .centerBtn {
     text-align: center;
@@ -197,12 +197,12 @@
   }
   
   .partnerSection h4 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 18px;
     font-weight: 600;
   }
   .partnerSection p {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -368,7 +368,7 @@
     .partnerSection p {
       font-size: 13px;
       text-align: start;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
   
     .partnerSection li {

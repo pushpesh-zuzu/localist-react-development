@@ -141,6 +141,7 @@ import { useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Images/HowItWorks/locationImg.svg";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { BASE_IMAGE } from "../../utils";
 
 const ViewProfiles = () => {
     const [activeTab, setActiveTab] = useState('About')
@@ -239,7 +240,7 @@ const ViewProfiles = () => {
         <>
         <div className={styles.mainContainer}>
             <div className={styles.container}>
-                <img src={viewProfileData?.profile_image ? viewProfileData?.profile_image : DummyImage} alt="Profile" className={styles.profileImage} />
+                <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage} width={200} height={200} />
                    
                 <div className={styles.viewDetails}>
                     <h2>{viewProfileData?.company_name}</h2>
