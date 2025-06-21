@@ -19,7 +19,8 @@ const ReviewSection = ({details}) => {
     );
     const data = details?.reviews
     const userId = userToken?.id  ? userToken?.id  : registerData?.id
-  console.log(profileId,"pro")
+  const UUIDs = profileId?.profileId ? profileId?.profileId : details?.uuid
+  const reviewLength = data?.length || 0;
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -40,7 +41,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
 
     useEffect(()=> {
      
-        dispatch(getReviewListApi(profileId?.profileId))
+        dispatch(getReviewListApi(UUIDs))
     },[])
 
 
@@ -48,7 +49,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
     <>
     <div className={styles.reviewList}>
         <div className={styles.reviewHeader}>
-            <h2>Reviews (5)</h2>
+            <h2>Reviews ({reviewLength})</h2>
             <div>
                 <button className={styles.leaveBtn} onClick={handleOpen}>Leave a review</button>
             </div>
@@ -62,7 +63,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
     <img key={index} src={starImg} alt="star" width={19} height={19} />
   ))}
 </div>
-        <div className={styles.totalReviews}>{totalReviews} customer reviews</div>
+        <div className={styles.totalReviews}>{reviewLength} customer reviews</div>
       </div>
 <div className={styles.middleBox}></div>
       <div className={styles.right}>
@@ -155,7 +156,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
      <button className={styles["page-btn"]}>&gt;</button>
    </div>
 
-   {isopen && <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} />}
+   {isopen && <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} reviewsData={details} />}
    </>
   );
 };

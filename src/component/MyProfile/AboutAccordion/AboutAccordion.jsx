@@ -74,7 +74,7 @@ extra_links: "",
     if(details?.id){
 // setFormState(details)
 setFormState({
-  ...formState,company_email:details?.email,
+  ...formState,company_email:details?.company_email,
   company_phone:details?.company_phone,
   company_name:details?.company_name,
   name:details?.name,

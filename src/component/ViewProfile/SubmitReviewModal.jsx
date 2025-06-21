@@ -6,16 +6,18 @@ import { addSubmitReviewApi, getReviewListApi } from "../../store/MyProfile/myPr
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
+const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData }) => {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(null);
     const dispatch = useDispatch();
     const { reviewLoader } = useSelector((state) => state.myProfile);
     const { userToken } = useSelector((state)=> state.auth)
+    console.log(reviewsData?.uuid,"reviewsData")
        const { registerData } = useSelector(
           (state) => state.findJobs
         );
         const userId = userToken?.id  ? userToken?.id  : registerData?.id
+        const UUIDs = ProfileIDs ? ProfileIDs : reviewsData?.uuid
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -55,13 +57,13 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs }) => {
         const hasErrors = Object.values(newErrors).some((err) => err !== "");
         if (hasErrors) return;
 
-        const data = { ...formData, ratings: rating, uuid: ProfileIDs };
+        const data = { ...formData, ratings: rating, uuid:UUIDs };
 
         dispatch(addSubmitReviewApi(data)).then((result) => {
             if (result) {
                 showToast("success", result?.message);
                 closeModal();
-                dispatch(getReviewListApi(ProfileIDs))
+                dispatch(getReviewListApi(UUIDs))
             }
         });
     };

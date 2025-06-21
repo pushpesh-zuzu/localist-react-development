@@ -18,7 +18,7 @@ const About = ({details}) => {
             icon: businessImg
         },
         {
-            title: "4 Years in business",
+            title: `${details?.company_total_years} Years in business` || "4 Years in business",
             icon: staffImg
         },
         {

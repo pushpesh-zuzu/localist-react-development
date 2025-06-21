@@ -152,7 +152,14 @@ const ViewProfiles = () => {
     const profileId = useParams()
     const SellerId = useParams()
     const { viewProfileData } = useSelector((state) => state.leadSetting)
-    console.log(viewProfileData, "SellerId")
+    const serviceCount = viewProfileData?.services?.filter(
+        (service) => service?.user_services?.name
+    );
+    const servicesArray = viewProfileData?.services || [];
+    const serviceNames = servicesArray
+  .flatMap(service => service.user_services?.map(us => us.name))
+  .filter(Boolean)
+    console.log(viewProfileData, serviceCount,serviceNames,"SellerId")
     const aboutRef = useRef(null);
     const servicesRef = useRef(null);
     const reviewsRef = useRef(null);
@@ -269,7 +276,16 @@ const ViewProfiles = () => {
                             </div>
                         </div>
                         <div className={styles.badgesBox}>
-                            <div className={styles.badges}>
+                            {serviceNames?.map((item)=>{
+                                return(
+                                    <>
+                                     <div className={styles.badges}>
+                                <span>{item}</span>
+                            </div>
+                                    </>
+                                )
+                            })}
+                            {/* <div className={styles.badges}>
                                 <span>LandSpacing</span>
                             </div>
                             <div className={styles.badges}>
@@ -277,7 +293,7 @@ const ViewProfiles = () => {
                             </div>
                             <div className={styles.badges}>
                                 <span>New Pages</span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 
@@ -296,7 +312,7 @@ const ViewProfiles = () => {
                         </div>
                         <div className={styles.mailText}>
                             <img src={profileImg} alt="" />
-                            <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "Facebook"}</span>
+                            <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "LocalList"}</span>
                         </div>
                     </div>
                 </div>
