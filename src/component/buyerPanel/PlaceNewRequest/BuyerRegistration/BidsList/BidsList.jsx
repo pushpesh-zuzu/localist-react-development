@@ -652,7 +652,7 @@ const BidsList = ({ previousStep }) => {
   );
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(0);
   const [ratingList,setRatingList] = useState("")
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
@@ -781,11 +781,17 @@ console.log(seller,"seller")
     }
     dispatch(getRatingFilterApi(data))
   }, [])
+useEffect(() => {
+  const count = parseInt(autoBidList?.[0]?.displayCount || 0);
+  setVisibleCount(count);
+}, [autoBidList]);
+  // const handleSeeMore = () => {
+  //   setVisibleCount((prevCount) => prevCount + 5);
+  // };
 
   const handleSeeMore = () => {
-    setVisibleCount((prevCount) => prevCount + 5);
-  };
-
+  setVisibleCount(autoBidList?.[0]?.sellers?.length || 0);
+};
   const handleContinue = () => {
     if (!selectedItem) return;
     const formData = new FormData();
@@ -1129,7 +1135,7 @@ console.log(seller,"seller")
             />
           </>
         )}
-        {autoBidList?.[0]?.sellers?.length > visibleCount && (
+        {/* {autoBidList?.[0]?.sellers?.length > visibleCount && (
           <div className={styles.moreProfessionalBtnBox}>
             <button
               className={styles.moreProfessionalBtn}
@@ -1138,7 +1144,17 @@ console.log(seller,"seller")
               See More Professionals
             </button>
           </div>
-        )}
+        )} */}
+        {autoBidList?.[0]?.sellers?.length > visibleCount && (
+  <div className={styles.moreProfessionalBtnBox}>
+    <button
+      className={styles.moreProfessionalBtn}
+      onClick={handleSeeMore}
+    >
+      See More Professionals
+    </button>
+  </div>
+)}
       </div>
     </>
   );
