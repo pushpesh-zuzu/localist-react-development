@@ -670,7 +670,7 @@ const BidsList = ({ previousStep }) => {
   console.log(autoBidList?.map((item) => item?.sellers?.length), "autoBidList")
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
-  const bidTotal = autoBidList?.[0]?.totalbid || 0;
+  const bidTotal = autoBidList?.[0]?.displayCount || 0;
   const isButtonDisabled = bidCount === bidTotal
   console.log(ratingFilterData, "prem")
 
@@ -679,28 +679,42 @@ const BidsList = ({ previousStep }) => {
   const showCheckboxes = selectedSellers.length < bidTotal - bidCount;
   const shouldShowGreenIcons = bidCount !== bidTotal;
 
+  // const handleCheckboxChange = (sellerId) => {
+  //   if (selectedSellers.includes(sellerId)) {
+  //     // If checkbox is being unchecked, just remove it from the array
+  //     setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
+  //   } else {
+  //     // If checkbox is being checked, check if we've reached the limit
+  //     const maxAllowed = bidTotal - bidCount;
+
+  //     if (selectedSellers.length >= maxAllowed) {
+  //       // Show error toast if trying to select more than allowed
+  //       const remainingMessage =
+  //         bidCount === 1
+  //           ? `1 bid already applied. You can select only ${maxAllowed} more.`
+  //           : `${bidCount} bids already applied. You can select only ${maxAllowed} more.`;
+
+  //       showToast("error", remainingMessage);
+  //       return; // Exit the function to prevent adding more sellers
+  //     }
+  //     // If less than the limit are selected, add the new one
+  //     setSelectedSellers([...selectedSellers, sellerId]);
+  //   }
+  // };
   const handleCheckboxChange = (sellerId) => {
-    if (selectedSellers.includes(sellerId)) {
-      // If checkbox is being unchecked, just remove it from the array
-      setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
-    } else {
-      // If checkbox is being checked, check if we've reached the limit
-      const maxAllowed = bidTotal - bidCount;
+  const maxAllowed = parseInt(autoBidList?.[0]?.displayCount || 0);
 
-      if (selectedSellers.length >= maxAllowed) {
-        // Show error toast if trying to select more than allowed
-        const remainingMessage =
-          bidCount === 1
-            ? `1 bid already applied. You can select only ${maxAllowed} more.`
-            : `${bidCount} bids already applied. You can select only ${maxAllowed} more.`;
-
-        showToast("error", remainingMessage);
-        return; // Exit the function to prevent adding more sellers
-      }
-      // If less than the limit are selected, add the new one
-      setSelectedSellers([...selectedSellers, sellerId]);
+  if (selectedSellers.includes(sellerId)) {
+    setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
+  } else {
+    if (selectedSellers.length >= maxAllowed) {
+      showToast("error", `You can select only ${maxAllowed} sellers.`);
+      return;
     }
-  };
+    setSelectedSellers([...selectedSellers, sellerId]);
+  }
+};
+
   useEffect(() => {
     const data = {
       user_id: userToken?.remember_tokens,
@@ -709,17 +723,29 @@ const BidsList = ({ previousStep }) => {
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
 
+  // useEffect(() => {
+  //   if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
+  //     // Only select the allowed number based on bidCount
+  //     const allowedSelections = bidTotal - (autoBidList?.[0]?.bidcount || 0);
+  //     const allowedSellers =
+  //       autoBidList[0]?.sellers
+  //         ?.slice(0, allowedSelections)
+  //         ?.map((seller) => seller.id) || [];
+  //     setSelectedSellers(allowedSellers);
+  //   }
+  // }, [autoBidList]);
   useEffect(() => {
-    if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
-      // Only select the allowed number based on bidCount
-      const allowedSelections = bidTotal - (autoBidList?.[0]?.bidcount || 0);
-      const allowedSellers =
-        autoBidList[0]?.sellers
-          ?.slice(0, allowedSelections)
-          ?.map((seller) => seller.id) || [];
-      setSelectedSellers(allowedSellers);
-    }
-  }, [autoBidList]);
+  if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
+    const allowedSelections = parseInt(autoBidList[0]?.displayCount || 0);
+
+    const allowedSellers = autoBidList[0]?.sellers
+      ?.slice(0, allowedSelections)
+      ?.map((seller) => seller.id) || [];
+
+    setSelectedSellers(allowedSellers);
+  }
+}, [autoBidList]);
+
 
   const handleReply = () => {
     navigate(`/bids-list/reply/${requestId}`);
@@ -1066,10 +1092,14 @@ console.log(seller,"seller")
                             checked={selectedSellers.includes(seller.id)}
                             onChange={() => handleCheckboxChange(seller.id)}
                             className={styles.checkbox}
+                            // disabled={
+                            //   !selectedSellers.includes(seller.id) &&
+                            //   selectedSellers.length >= bidTotal - bidCount
+                            // }
                             disabled={
-                              !selectedSellers.includes(seller.id) &&
-                              selectedSellers.length >= bidTotal - bidCount
-                            }
+  !selectedSellers.includes(seller.id) &&
+  selectedSellers.length >= parseInt(autoBidList?.[0]?.displayCount || 0)
+}
                           />
                         </div>
                         <button
