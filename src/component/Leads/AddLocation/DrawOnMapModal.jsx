@@ -392,7 +392,7 @@ console.log(getlocationData,polygons,data,"locationData")
       if (!window.google || !window.google.maps || !window.google.maps.drawing) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE&libraries=places,drawing,geometry&callback=initMap";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places,drawing,geometry&callback=initMap";
         script.async = true;
         script.defer = true;
         
