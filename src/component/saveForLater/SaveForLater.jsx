@@ -152,15 +152,7 @@ useEffect(() => {
   return () => window.removeEventListener("scroll", handleScroll);
 }, []);
 
-const handlePhoneClick = (item) =>{
-  const phoneNumber = item?.phone;
-  if (phoneNumber) {
-    const formattedNumber = `tel:${phoneNumber}`;
-    window.location.href = formattedNumber;
-  } else {  
-    showToast("error", "Phone number not available");
-  }
-}
+
 
   return (
     <>
@@ -195,7 +187,7 @@ const handlePhoneClick = (item) =>{
                         </span>
                       </div>
                       <div className={styles.contactContainer}>
-                        <div className={styles.contactItem} onClick={()=> handlePhoneClick(item)}>
+                        <div className={styles.contactItem}>
                           <img src={BluePhoneIcon} alt="" />
                           <span>
                             {item?.phone
@@ -207,7 +199,7 @@ const handlePhoneClick = (item) =>{
                         </div>
                         <div className={styles.contactItem}>
                           <img src={BlueSmsIcon} alt="" />
-                          <a href={`mailto:${item?.customer?.email}`} target="_blank">
+                          <span>
                             {item?.customer?.email
                               ? `${item?.customer?.email
                                 .split("@")[0]
@@ -219,7 +211,7 @@ const handlePhoneClick = (item) =>{
                                   )
                                 )}@${item?.customer?.email.split("@")[1]}`
                               : "N/A"}
-                          </a>
+                          </span>
                         </div>
                       </div>
                     </div>

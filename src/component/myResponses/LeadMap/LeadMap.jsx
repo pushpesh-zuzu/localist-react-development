@@ -286,7 +286,7 @@ const LeadMap = ({ getPendingLeadList }) => {
     lng: 78.9629,
   });
 
-  const apiKey = "AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE";
+  const apiKey = "AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY";
 
   // Load Google Maps script
   useEffect(() => {
