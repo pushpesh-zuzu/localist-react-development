@@ -642,16 +642,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                         "success",
                         result?.message || "Auto Bid updated successfully"
                       );
-                    } else {
-                      showToast(
-                        "error",
-                        result?.message || "Failed to update Auto Bid"
-                      );
-                      const data = {
-                        user_id: registerData?.remember_tokens ? registerData?.remember_tokens : userToken?.remember_tokens,
-                      }
-                      dispatch(getSevenWeekPausedBidApi(data))
-                    }
+                    } 
 
                   }
                 );

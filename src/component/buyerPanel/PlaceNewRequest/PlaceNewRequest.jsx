@@ -83,7 +83,7 @@ console.log("buyerRequestList",buyerRequestList)
                   className={styles.tags}
                   onClick={() => openHiredModal(req.id)}
                 >
-                  Choose Request | I Hired Professional
+                  Close Request | I Hired Professional
                 </div>}
               </div>
             ))}

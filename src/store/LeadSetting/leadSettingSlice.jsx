@@ -545,7 +545,8 @@ export const getleadPreferencesList = (serviceId) => {
            return response.data
         }
       } catch (error) {
-        //   dispatch(setAuthError(error?.response?.data?.message));
+          // dispatch(setAuthError(error?.response?.data?.message));
+          showToast("error",error?.response?.data?.message)
       } finally {
         dispatch(setSevenDaysAutobidLoader(false));
       }
