@@ -124,10 +124,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./ViewProfile.module.css";
-import DummyImage from "../../assets/Images/DummyImage.svg";
+import DummyImage from "../../assets/Images/Setting/ProfileWebIcon.svg";
 import phoneImg from "../../assets/Images/MyResponse/PhoneIcon.svg";
 import emailImg from "../../assets/Images/MyResponse/mailIcon.svg";
-import profileImg from "../../assets/Images/MyResponse/mailIcon.svg";
+import profileImg from "../../assets/Images/Setting/WebIcon.svg";
 import TabNav from "./TabComponent";
 import About from "./About/About";
 import Services from "./Services/Services";
@@ -144,10 +144,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { BASE_IMAGE } from "../../utils";
 import starImg from "../../assets/Icons/MyResponse/StarImg.svg"
 import grayStar from "../../assets/Icons/MyResponse/grayStar.svg"
+import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 
 const ViewProfiles = () => {
     const [activeTab, setActiveTab] = useState('About')
     const [isopen, setIsOpen] = useState(true)
+    const [customerModal, setCustomerModal] = useState(false);
     const dispatch = useDispatch()
     const profileId = useParams()
     const SellerId = useParams()
@@ -244,15 +246,19 @@ const ViewProfiles = () => {
         }
         dispatch(addViewProfileList(sellerData))
     }, [])
+    const handleRequestOpen = () => {
+        setCustomerModal(true)
+    }
 
     return (
         <>
             <div className={styles.mainContainer}>
                 <div className={styles.container}>
-                    <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage} width={250} height={220} />
-
+                    <div className={styles.backBtnWrapper}>
+                    <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage}  />
+</div>
                     <div className={styles.viewDetails}>
-                        <h2>{viewProfileData?.company_name}</h2>
+                        <h2>{viewProfileData?.name}</h2>
                         <div className={styles.locationText}>
                             <img src={LocationIcon} alt="" />
                             <span>{viewProfileData?.city} </span>   |  {viewProfileData?.zipcode}
@@ -298,7 +304,7 @@ const ViewProfiles = () => {
                     </div>
 
                     <div className={styles.requestBtnBox}>
-                        <button className={styles.RequestQuoteBtn}> Request Quote</button>
+                        <button className={styles.RequestQuoteBtn} onClick={handleRequestOpen}> Request Quote</button>
                     </div>
 
                     <div className={styles.contactDetails}>
@@ -310,10 +316,10 @@ const ViewProfiles = () => {
                             <img src={phoneImg} alt="" />
                             <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
                         </div>
-                        <div className={styles.mailText}>
+                      { viewProfileData?.company_website && <div className={styles.mailTexts}>
                             <img src={profileImg} alt="" />
-                            <span>{viewProfileData?.social_media ? viewProfileData?.social_media : "LocalList"}</span>
-                        </div>
+                            <span>{viewProfileData?.company_website}</span>
+                        </div>}
                     </div>
                 </div>
 
@@ -335,6 +341,16 @@ const ViewProfiles = () => {
                 {isopen && profileId?.profileId &&
                     <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} />
                 }
+                {customerModal && (
+                    <>
+                    <ContactSuccessModal
+                                  onClose={() => setCustomerModal(false)}
+                                  isOpen={customerModal}
+                                  detail={viewProfileData}
+                                  repliesBtn
+                                />
+                    </>
+                )}
             </div>
         </>
     );

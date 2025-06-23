@@ -53,10 +53,12 @@ const ServiceDetailsStep = ({
                   value={formData.company_name}
                   onChange={handleInputChange}
                 />
+                
                 <label className={styles.helperText}>
                   If you aren't a business or don’t have this information, you
                   can leave this blank
                 </label>
+               
               </div>
 
               <div className={styles.labelInputWrapper}>
@@ -111,7 +113,9 @@ const ServiceDetailsStep = ({
                 <label className={styles.label}>Phone number (Optional)</label>
                 <input
                   type="text"
-                  className={styles.input}
+                   className={`${styles.input} ${
+                    errors.email ? styles.errorBorder : ""
+                  }`}
                   name="phone"
                   value={formData.phone}
                   maxLength={10}
@@ -122,6 +126,10 @@ const ServiceDetailsStep = ({
                   onChange={handleInputChange}
                 />
               </div>
+              {errors.phone && (
+                <p className={styles.errorText}>{errors.phone}</p>
+              )}
+              
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
@@ -187,7 +195,9 @@ const ServiceDetailsStep = ({
                   }
                 />
               )}
-
+ {errors.company_website && (
+                  <p className={styles.errorText}>{errors.company_website}</p>
+                )}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
                 What is the estimated number of new jobs per month you would like to help grow your business?

@@ -14,11 +14,11 @@ const About = ({details}) => {
             icon: EliteProImg,
         },
         {
-            title: `${details?.company_total_years} hires on Localists` || "12 hires on Localists",
+            title:  "12 hires on Localists",
             icon: businessImg
         },
         {
-            title: `${details?.company_total_years} Years in business` || "4 Years in business",
+            title: `${details?.company_total_years ?  details?.company_total_years : "0"} Years in business` || "4 Years in business",
             icon: staffImg
         },
         {

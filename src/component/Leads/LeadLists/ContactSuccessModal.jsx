@@ -11,12 +11,12 @@ import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn }) => {
+const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail }) => {
   const dispatch = useDispatch()
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  console.log(repliesBtn, details, "details")
+  console.log( details,detail, "details")
   if (!isOpen) return null;
 
   const handleResponseChange = (clickName) => {
@@ -83,8 +83,8 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn }) => {
           </h2> */}
                  <h2 className={styles.title}>
   {repliesBtn
-    ? `Contact ${repliesBtn?.name}`
-    : `Great! Now Contact ${details?.customer?.name}`}
+    ? `Contact ${repliesBtn?.name ? repliesBtn?.name : detail?.name}`
+    : `Great! Now Contact ${details?.customer?.name ? details?.customer?.name : detail?.name}`}
 </h2>
           <p className={styles.description}>
             Reference site about Lorem Ipsum, giving information on its <br /> origins, as well as a random Lipsum generator.

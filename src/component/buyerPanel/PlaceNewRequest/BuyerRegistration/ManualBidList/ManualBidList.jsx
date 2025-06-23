@@ -194,7 +194,8 @@ setIsOpen(true)
               onClose={() => setIsOpen(false)}
               isOpen={isopen}
               repliesBtn={autobidDatas}
-            />}
+            />
+            }
     </div>
   );
 };
