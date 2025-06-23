@@ -25,6 +25,7 @@ import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
+import { showToast } from "../../utils";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
@@ -147,6 +148,25 @@ const MyResponse = () => {
       dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData));
     }
   };
+  const handlePhoneOpen = (item)=> {
+    const phoneNumber = item?.phone;
+    if (phoneNumber) {
+      const phoneUrl = `tel:${phoneNumber}`;
+      window.open(phoneUrl, "_blank");
+    } else {
+      showToast("error","Phone number is not available.");
+    }
+  }
+const handleEmailOpen = (item) => {
+  const email = item?.customer?.email;
+  console.log(item,email,"item")
+  if (email) {
+    const mailtoUrl = `mailto:${email}`;
+    window.location.href = mailtoUrl;
+  } else {
+    showToast("error", "Email address is not available.");
+  }
+};
   // const handlePurchaseChange = (value) => {
   //   const purchaseData = {
   //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
@@ -255,30 +275,15 @@ const MyResponse = () => {
                 <div className={styles.contactContainer}>
                   <div className={styles.contactItem}>
                     <img src={BluePhoneIcon} alt="" />
-                    <span>
-                      {/* {item?.phone
-                      ? `${item?.phone.substring(0, 2)}${"*".repeat(
-                          item?.phone.length - 2
-                        )}`
-                      : "N/A"} */}
+                    <span onClick={()=>handlePhoneOpen(item)}>
                       {item?.phone}
                     </span>
                   </div>
                   <div className={styles.contactItem}>
                     <img src={BlueSmsIcon} alt="" />
-                    <span>
-                      {/* {item?.customer?.email
-                      ? `${item?.customer?.email
-                          .split("@")[0]
-                          .substring(0, 8)}${"*".repeat(
-                          Math.max(
-                            0,
-                            item?.customer?.email.split("@")[0].length - 8
-                          )
-                        )}@${item?.customer?.email.split("@")[1]}`
-                      : "N/A"} */}
+                    <a href={`mailto:${item?.customer?.email}`} target="_blank">
                       {item?.customer?.email}
-                    </span>
+                    </a>
                   </div>
                 </div>
                 {item?.profile_view && item?.profile_view_time && (

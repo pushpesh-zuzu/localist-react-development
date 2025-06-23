@@ -17,7 +17,7 @@ import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.sv
 const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [ errors, setErrors] = useState({});
   const [randomFallback] = useState(() => Math.floor(Math.random() * (45 - 35 + 1)) + 35)
   const item = useParams();
   const navigate = useNavigate();
@@ -63,6 +63,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
         script.defer = true;
         script.onload = initAutocomplete;
         document.body.appendChild(script);
+        console.log(script,'script...')
       } else {
         initAutocomplete();
       }
@@ -138,11 +139,15 @@ console.log(postalCode,lat,lng,'postalCode')
   const validateForm = () => {
     let newErrors = {};
 
-    if (!formData.miles2) {
-      newErrors.miles2 = "Please select a distance range.";
-    }
+    // if (!formData.miles2) {
+    //   newErrors.miles2 = "Please select a distance range.";
+    // }
+   if (selectedServices.length > 0 && !formData.postcode2) {
+    newErrors.postcode2 = "Please enter your postcode.";
+  } 
 
     setErrors(newErrors);
+    console.log(newErrors,Object.keys(newErrors).length,"newErrors")
     return Object.keys(newErrors).length === 0;
   };
   useEffect(() => {
@@ -164,6 +169,8 @@ console.log(postalCode,lat,lng,'postalCode')
   }, [show]);
 
   const handleSubmit = () => {
+   let apicontion =  validateForm()
+    console.log(validateForm(),"pp")
     // Ensure selectedServices is an array and map IDs
     const serviceIds = Array.isArray(selectedServices)
       ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
@@ -204,14 +211,16 @@ console.log(postalCode,lat,lng,'postalCode')
     delete payload.state
     // delete payload.password
  console.log(payload,formData,"payload")
-
-    dispatch(registerUserData(payload)).then((result) => {
+if(apicontion){
+dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");
         navigate("/leads");
         dispatch(setService());
       }
     });
+}
+    
   };
 
   const handleOpenModal = () => {
@@ -349,7 +358,7 @@ const handleExpandRadius = () => {
               <input
                 type="text"
                 placeholder="Enter your postcode"
-                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
+                className={`${styles.input} ${errors.postcode2 ? styles.errorBorder : ""
                   }`}
                 ref={inputRef}
                 name="postcode2"
@@ -363,7 +372,7 @@ const handleExpandRadius = () => {
 
             </div>
           </div>
-          {errors.miles2 && <p className={styles.errorText}>{errors.miles2}</p>}
+          {errors.postcode2 && <p className={styles.errorText}>{errors.postcode2}</p>}
           <div className={styles.radiusBtn}>
             <button className={styles.expandBtn} disabled={!disableWithService} onClick={handleExpandRadius}>Expand Radius</button>
           </div>

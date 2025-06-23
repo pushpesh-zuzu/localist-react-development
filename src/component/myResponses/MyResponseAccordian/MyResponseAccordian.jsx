@@ -79,11 +79,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     leadListLoader,
   } = useSelector((state) => state.leadSetting);
   const user = {
-    phoneNumber: "918123456789",
-    email: "test@example.com",
+    phoneNumber: profileLeadViewData?.leads?.phone,
+    email: profileLeadViewData?.leads?.customer?.email,
   };
   const userIdActivity = userToken?.id || registerData?.id
-  console.log(userIdActivity, "profileLeadViewData");
+  console.log(profileLeadViewData, "profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
@@ -223,7 +223,15 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const createdDate = moment(profileLeadViewData?.created_at);
   const today = moment();
   const daysAgo = today.diff(createdDate, "days");
-
+  const handlePhoneOpen = (item)=> {
+    const phoneNumber = item?.phone;
+    if (phoneNumber) {
+      const phoneUrl = `tel:${phoneNumber}`;
+      window.open(phoneUrl, "_blank");
+    } else {
+      showToast("error","Phone number is not available.");
+    }
+  }
   return (
     <>
       {leadListLoader ? (
@@ -268,7 +276,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               {profileLeadViewData?.leads?.category?.name} |{" "}
               <span> {profileLeadViewData?.leads?.city}</span>
             </div>
-            <div className={styles.phoneNumberText}>
+            <div className={styles.phoneNumberText} onClick={() => handlePhoneOpen(profileLeadViewData)}>
               <span>
                 <img src={PhoneImg} alt="phone" />
               </span>
@@ -280,12 +288,12 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 </sapn>
               )}
             </div>
-            <div className={styles.phoneNumberText}>
+            <a className={styles.phoneNumberTexts} href={`mailto:${profileLeadViewData?.email}`} target="_blank">
               <span>
                 <img src={MailImg} alt="mail" />
               </span>
               {profileLeadViewData?.email}
-            </div>
+            </a>
             <div className={styles.btnBox}>
               <button
                 className={styles.buttonSms}

@@ -321,6 +321,10 @@ const LeadsCards = ({ enoughCredit }) => {
   //   // setLeadRequestData(item)
   //   setLeadViewDetails(!leadViewDetails)
   // }
+  const handlePhoneCall = (item) => {
+    const phoneNumber = item?.phone || "";
+    window.open(`tel:${phoneNumber}`, "_blank");
+  };  
   return (
     <>
       {leadRequestLoader ? (
@@ -378,7 +382,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               </span>
                             </div>
                             <div className={styles.contactContainer}>
-                              <div className={styles.contactItem}>
+                              <div className={styles.contactItem} onClick={()=> handlePhoneCall(item)}>
                                 <img src={BluePhoneIcon} alt="" />
                                 <span>
                                   {item?.phone
@@ -391,7 +395,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               </div>
                               <div className={styles.contactItem}>
                                 <img src={BlueSmsIcon} alt="" />
-                                <span>
+                                <a href={`mailto:${item?.customer?.email}`} target="_blank">
                                   {item?.customer?.email
                                     ? `${item?.customer?.email
                                         .split("@")[0]
@@ -403,7 +407,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                         )
                                       )}@${item?.customer?.email.split("@")[1]}`
                                     : "N/A"}
-                                </span>
+                                </a>
                               </div>
                             </div>
                           </div>

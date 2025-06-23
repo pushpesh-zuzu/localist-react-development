@@ -151,6 +151,7 @@
   font-size: 16px;
   display: flex;
   gap: 8px;
+  cursor: pointer;
 }
 .selectBox {
   padding: 8px 8px;
@@ -247,6 +248,22 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  cursor: pointer;
+}
+.phoneNumberTexts {
+  text-decoration: none;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  color: #000000;
+}
+.phoneNumberTexts span {
+  margin-top: 4px;
 }
 .verifiedText {
   display: flex;

@@ -106,7 +106,7 @@ const GrowthStepsData = [
     id: 3,
     image: GrowYourBusiness,
     title1: "Grow your",
-    title2: "Business",
+    title2: "business",
     Description1: "Keep 100% of what you earn",
     Description2: "No commission or hidden fees",
     Description3: "Get Hired Guarantee on first leads",
