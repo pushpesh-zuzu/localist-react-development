@@ -382,7 +382,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               </span>
                             </div>
                             <div className={styles.contactContainer}>
-                              <div className={styles.contactItem} onClick={()=> handlePhoneCall(item)}>
+                              <div className={styles.contactItem}>
                                 <img src={BluePhoneIcon} alt="" />
                                 <span>
                                   {item?.phone
@@ -395,7 +395,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               </div>
                               <div className={styles.contactItem}>
                                 <img src={BlueSmsIcon} alt="" />
-                                <a href={`mailto:${item?.customer?.email}`} target="_blank">
+                                <span>
                                   {item?.customer?.email
                                     ? `${item?.customer?.email
                                         .split("@")[0]
@@ -407,7 +407,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                         )
                                       )}@${item?.customer?.email.split("@")[1]}`
                                     : "N/A"}
-                                </a>
+                                </span>
                               </div>
                             </div>
                           </div>

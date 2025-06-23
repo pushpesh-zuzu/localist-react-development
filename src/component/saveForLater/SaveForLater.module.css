@@ -124,13 +124,13 @@
   font-weight: 400;
   font-size: 19px;
   vertical-align: middle;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
-.contactItem a {
+/* .contactItem a {
   text-decoration: none;
   list-style: none;
   color: #000;
-}
+} */
 .category {
   background: var(--primary-color);
   color: white;

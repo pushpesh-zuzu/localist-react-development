@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./CreditMatch.module.css";
 import locallistImgs from "../../../../assets/Images/Leads/localistImg.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,18 +86,43 @@ const CreditMatch = () => {
     dispatch(totalCreditData(data));
   }, [dispatch]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 200) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollTop = window.scrollY;
+  //     if (scrollTop > 170) {
+  //       setIsSticky(true);
+  //     } else {
+  //       setIsSticky(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+  const triggerRef = useRef(null);
+  const stickyRef = useRef(null);
+
+ useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.boundingClientRect.top <= 0) {
+          stickyRef.current.classList.add(styles.fixedTop);
+        } else {
+          stickyRef.current.classList.remove(styles.fixedTop);
+        }
+      },
+      {
+        root: null,
+        threshold: 0,
+      }
+    );
+
+    const trigger = triggerRef.current;
+    if (trigger) observer.observe(trigger);
+
+    return () => {
+      if (trigger) observer.unobserve(trigger);
+    };
   }, []);
 
   return (
@@ -165,7 +190,7 @@ const CreditMatch = () => {
         </div>
       )}
 
-      <div
+      {/* <div
         className={`${styles.creditsLeftContainer} ${
           isSticky ? styles.fixedTop : ""
         }`}
@@ -174,7 +199,17 @@ const CreditMatch = () => {
           You have {totalCredit?.total_credit ? totalCredit?.total_credit : "0"}{" "}
           Credits Left
         </button>
+      </div> */}
+        <div>
+      {/* Invisible spacer that acts as a scroll trigger */}
+      <div ref={triggerRef} style={{ height: '1px' }}></div>
+
+      <div ref={stickyRef} className={styles.creditsLeftContainer}>
+        <button className={styles.creditsButton}>
+          You have {totalCredit?.total_credit ?? '0'} Credits Left
+        </button>
       </div>
+    </div>
       {isAddModalOpen && (
         <AddCardModal onClose={() => setIsAddModalOpen(false)} />
       )}

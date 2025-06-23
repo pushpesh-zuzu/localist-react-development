@@ -104,13 +104,13 @@
   font-weight: 400;
   font-size: 19px;
   vertical-align: middle;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
-.contactItem a {
+/* .contactItem a {
   text-decoration: none;
   color: black;
   list-style: none; 
-}
+} */
 
 .category {
   background: var(--primary-color);

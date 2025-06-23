@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -13,6 +14,8 @@ const ServiceDetailsStep = ({
 }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const serviceParms = useParams()
+  console.log(serviceParms?.serviceTitle, "serviceParms");
   return (
     <>
       <div className={styles.pageContainer}>
@@ -20,7 +23,7 @@ const ServiceDetailsStep = ({
           <div className={styles.headerContainer}>
             <h2 className={styles.heading}>Some details about you</h2>
             <p className={styles.subheading}>
-              You're just a few steps away from viewing our House Cleaning leads
+              You're just a few steps away from viewing our {serviceParms?.serviceTitle} leads
             </p>
           </div>
 

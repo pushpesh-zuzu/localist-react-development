@@ -599,6 +599,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 checked={is_online}
                 onChange={() => {
                   const newValue = !is_online;
+                  setIsOnline(newValue);
 
                   const isOnlineData = {
                     user_id: registerData?.remember_tokens,
@@ -606,8 +607,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   };
                   dispatch(isOnlineRemote(isOnlineData)).then((result) => {
                     if (result?.success) {
-                  setIsOnline(newValue);
-
                       showToast(
                         "success",
                         result?.message ||
@@ -629,7 +628,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
               checked={autobid_pause}
               onChange={() => {
                 const newValue = !autobid_pause;
-                setAutoBid(newValue);
+                
 
                 const isAutoBidPauseData = {
                   user_id: registerData?.remember_tokens ? registerData?.remember_tokens : userToken?.remember_tokens,
@@ -638,6 +637,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
                   (result) => {
                     if (result?.success) {
+                      setAutoBid(newValue);
                       showToast(
                         "success",
                         result?.message || "Auto Bid updated successfully"
