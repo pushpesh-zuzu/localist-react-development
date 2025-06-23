@@ -8,19 +8,24 @@ import { useParams } from "react-router-dom";
 import starImg from "../../../assets/Icons/MyResponse/StarImg.svg"
 import blueStar from "../../../assets/Icons/MyResponse/blueStarImg.svg"
 import blackStar from "../../../assets/Icons/MyResponse/blackStarImg.svg"
+import webIconImg from "../../../assets/Images/Setting/weblogo.svg"
 
-const ReviewSection = ({details}) => {
+const ReviewSection = ({details,disableReviewButton = false}) => {
   const [isopen, setIsOpen] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams()
   const { userToken } = useSelector((state)=> state.auth)
+    const dispatch = useDispatch();
+const { reviewListData } = useSelector((state) => state.myProfile); 
    const { registerData } = useSelector(
       (state) => state.findJobs
     );
     const data = details?.reviews
     const userId = userToken?.id  ? userToken?.id  : registerData?.id
   const UUIDs = profileId?.profileId ? profileId?.profileId : details?.uuid
-  const reviewLength = data?.length || 0;
+  // const reviewLength = data?.length || 0;
+  const updatedReviews = reviewListData?.length > 0 ? reviewListData : details?.reviews;
+const reviewLength = updatedReviews?.length || 0;
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -36,13 +41,19 @@ const ReviewSection = ({details}) => {
     const getPercentage = (count) => {
       return totalReviews > 0 ? Math.round((count / totalReviews) * 100) : 0;
     };
-    const dispatch = useDispatch();
-const { reviewListData } = useSelector((state) => state.myProfile); 
+  
 
-    useEffect(()=> {
+    // useEffect(()=> {
      
-        dispatch(getReviewListApi(UUIDs))
-    },[])
+    //     dispatch(getReviewListApi(UUIDs))
+    // },[UUIDs])
+const fetchReviews = () => {
+  dispatch(getReviewListApi(UUIDs));
+};
+
+useEffect(() => {
+  fetchReviews();
+}, [UUIDs]);
 
 
   return (
@@ -51,13 +62,12 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         <div className={styles.reviewHeader}>
             <h2>Reviews ({reviewLength})</h2>
             <div>
-                <button className={styles.leaveBtn} onClick={handleOpen}>Leave a review</button>
+                <button className={styles.leaveBtn} onClick={handleOpen} disabled={disableReviewButton}>Leave a review</button>
             </div>
         </div>
         <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.score}>5/5</div>
-        {/* <div className={styles.stars}>{<img src={starImg} alt="image" /> .repeat(5)}</div> */}
         <div className={styles.stars}>
   {Array.from({ length: 5 }).map((_, index) => (
     <img key={index} src={starImg} alt="star" width={19} height={19} />
@@ -96,7 +106,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
 
       </div>
     </div>
-    {(profileId?.profileId ? reviewListData : data)?.map((item, index) => (
+    {updatedReviews?.map((item, index) => (
   <div key={index} className={styles.card}>
     <div className={styles.header}>
       <div>
@@ -121,7 +131,7 @@ const { reviewListData } = useSelector((state) => state.myProfile);
         <div className={styles.source}>
           Source:
           <img
-            src={"https://cdn-icons-png.flaticon.com/512/733/733547.png"}
+            src={webIconImg}
             alt="source"
             className={styles.sourceIcon}
           />
@@ -131,32 +141,18 @@ const { reviewListData } = useSelector((state) => state.myProfile);
 
     <h4 className={styles.title}>{item.review}</h4>
     <p className={styles.content}>{item.content}</p>
-
-    {/* <div className={styles.commentBox}>
-      <img
-        src={"https://randomuser.me/api/portraits/women/45.jpg"}
-        alt="avatar"
-        className={styles.avatar}
-      />
-      <div>
-        <p className={styles.comment}>
-          Contrary to popular belief, Lorem Ipsum is not simply random text.
-        </p>
-        <strong className={styles.thankYou}>Thank You...</strong>
-      </div>
-    </div> */}
   </div>
 ))}
 
     </div>
-     <div className={styles.pagination}>
+  { details?.reviews_count > 10 && <div className={styles.pagination}>
      <button className={styles["page-btn"]}>&lt;</button>
      <button className={styles["page-btn"]}>1</button>
      <button className={`${styles["page-btn"]} ${styles.active}`}>2</button>
      <button className={styles["page-btn"]}>&gt;</button>
-   </div>
+   </div>}
 
-   {isopen && <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} reviewsData={details} />}
+   {isopen && <SubmitReviewModal setOpen={isopen} closeModal={closeModal} ProfileIDs={profileId?.profileId} reviewsData={details} onReviewSubmit={fetchReviews}/>}
    </>
   );
 };

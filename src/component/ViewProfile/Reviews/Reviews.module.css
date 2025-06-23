@@ -20,6 +20,10 @@
     border: 1px solid #D9D9D9;
     font-size: 20px;
     font-weight: 600;
+    cursor: pointer;
+  }
+  .leaveBtn:disabled{
+    cursor: not-allowed;
   }
   .container {
     display: flex;

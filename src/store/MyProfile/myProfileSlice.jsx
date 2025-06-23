@@ -141,7 +141,8 @@ export const updateSellerProfile = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || "Unknown error");
+      // return rejectWithValue(error.response?.data || "Unknown error");
+      showToast("error", error?.response?.data?.message || "Something went wrong");
     }
   }
 );

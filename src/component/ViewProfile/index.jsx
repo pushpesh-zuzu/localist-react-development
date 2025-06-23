@@ -153,6 +153,15 @@ const ViewProfiles = () => {
     const dispatch = useDispatch()
     const profileId = useParams()
     const SellerId = useParams()
+    const requestId = useParams()
+    console.log(requestId?.requestId,"requestId")
+    const shouldDisableActions = requestId?.requestId;
+//     const shouldDisableActions =
+//   !!profileId?.profileId && !!SellerId?.sellerId;
+
+// const shouldDisableActions =
+//   !profileId?.profileId || !SellerId?.sellerId;
+
     const { viewProfileData } = useSelector((state) => state.leadSetting)
     const serviceCount = viewProfileData?.services?.filter(
         (service) => service?.user_services?.name
@@ -161,7 +170,7 @@ const ViewProfiles = () => {
     const serviceNames = servicesArray
   .flatMap(service => service.user_services?.map(us => us.name))
   .filter(Boolean)
-    console.log(viewProfileData, serviceCount,serviceNames,"SellerId")
+    console.log(profileId,SellerId,"SellerId")
     const aboutRef = useRef(null);
     const servicesRef = useRef(null);
     const reviewsRef = useRef(null);
@@ -304,7 +313,7 @@ const ViewProfiles = () => {
                     </div>
 
                     <div className={styles.requestBtnBox}>
-                        <button className={styles.RequestQuoteBtn} onClick={handleRequestOpen}> Request Quote</button>
+                        <button className={styles.RequestQuoteBtn} onClick={handleRequestOpen} disabled={shouldDisableActions}> Request Quote</button>
                     </div>
 
                     <div className={styles.contactDetails}>
@@ -316,7 +325,7 @@ const ViewProfiles = () => {
                             <img src={phoneImg} alt="" />
                             <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
                         </div>
-                      { viewProfileData?.company_website && <div className={styles.mailTexts}>
+                      { viewProfileData?.company_website && <div className={styles.mailText}>
                             <img src={profileImg} alt="" />
                             <span>{viewProfileData?.company_website}</span>
                         </div>}
@@ -331,7 +340,7 @@ const ViewProfiles = () => {
                         />
                         <div ref={aboutRef}><About details={viewProfileData} /></div>
                         <div ref={servicesRef}><Services details={viewProfileData} /></div>
-                        <div ref={reviewsRef}><ReviewSection details={viewProfileData} /></div>
+                        <div ref={reviewsRef}><ReviewSection details={viewProfileData}  disableReviewButton={shouldDisableActions}/></div>
                         <div ref={accrediationRef}><Accrediations details={viewProfileData} /></div>
                         <div ref={quesAnsRef}><QandAns details={viewProfileData} /></div>
                         <div ref={photoRef}><Photos details={viewProfileData} /></div>

@@ -8,7 +8,7 @@ import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSellerProfile, clearUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 import { toast } from "react-toastify";
-import { BASE_IMAGE, updateLocalStorageValue } from "../../../utils";
+import { BASE_IMAGE, showToast, updateLocalStorageValue } from "../../../utils";
 import { setUserToken } from "../../../store/Auth/authSlice";
 import { setRegisterData } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -121,8 +121,9 @@ setFormState({
 
   const validate = () => {
     const temp = {};
-    if (!formState.company_name) temp.company_name = "Required";
-    if (!formState.name) temp.name = "Required";
+    if (!formState.company_name) temp.company_name = "Please fill this Required";
+    if (!formState.name) temp.name = "Please fill this Required";
+    if(!formState.company_email) temp.company_email = "Please fill this Required";
     // if (
     //   formState.company_email &&       /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formState.company_email)
     // ) temp.company_email = "Invalid email";
@@ -200,7 +201,7 @@ setFormState({
  
   const handleSubmit = () => {
     if (!validate()) {
-      alert("Fix validation errors");
+      showToast("error", "Please fix validation errors");
       return;
     }
 
@@ -489,10 +490,10 @@ useEffect(() => {
           placeholder="What sets you apart from other businesses?"
         />
         <p className={styles.charLimit}>Minimum 30 characters</p>
-        <a href="#!" className={styles.link}>
+        {/* <a href="#!" className={styles.link}>
           Use our free online tool to write the perfect description of your
           business
-        </a>
+        </a> */}
       </div>
 
       {/* <div className={styles.card}>

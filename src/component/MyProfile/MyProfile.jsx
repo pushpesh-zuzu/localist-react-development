@@ -71,9 +71,12 @@ setOpenAccordion("Reviews");
         Make the best first impression with a great profile — this is what
         customers will look at first when choosing which professional to hire.
       </p>
-      <a className={styles.profileLink}  href={`/view-profile/${user_id}`}>
+      {/* <a className={styles.profileLink}  href={`/view-profile/${user_id}/$key={"admin"}`}>
         View public profile
-      </a>
+      </a> */}
+      <a className={styles.profileLink} href={`/view-profile/${user_id}/key=admin`}>
+  View public profile
+</a>
 
       <div style={{ marginTop: "30px" }}>
         <AccordionItem title="About" isOpen={openAccordion ==="About"} onClick={() => openAccordionHandler("About")}>

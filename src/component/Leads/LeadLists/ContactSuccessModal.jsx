@@ -16,13 +16,13 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail }) =>
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  console.log( details,detail, "details")
+  console.log(detail, "details")
   if (!isOpen) return null;
 
   const handleResponseChange = (clickName) => {
     console.log(clickName, "click")
     const responseStatus = {
-      lead_id: repliesBtn ? repliesBtn?.id : details?.id,
+    lead_id: repliesBtn?.id || detail?.id || details?.id,
       seller_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,

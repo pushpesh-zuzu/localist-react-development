@@ -793,6 +793,7 @@ useEffect(() => {
   setVisibleCount(autoBidList?.[0]?.sellers?.length || 0);
 };
   const handleContinue = () => {
+    
     if (!selectedItem) return;
     const formData = new FormData();
     formData.append(
@@ -1112,7 +1113,8 @@ useEffect(() => {
                           className={styles.replyBtn}
                           onClick={() => {
                             setSelectedItem(seller);
-                            setModalOpen(true);
+                            // setModalOpen(true);
+                            handleContinue()
                           }}
                         >
                           Request reply

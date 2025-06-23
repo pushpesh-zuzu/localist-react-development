@@ -118,6 +118,10 @@
   .RequestQuoteBtn:hover {
     background-color: #0096c4;
   }
+  .RequestQuoteBtn:disabled {
+  cursor: not-allowed;
+  /* opacity: 0.6; */
+}
   .contactDetails {
     margin-top: 25px;
     display: flex;

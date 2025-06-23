@@ -6,7 +6,7 @@ import { addSubmitReviewApi, getReviewListApi } from "../../store/MyProfile/myPr
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData }) => {
+const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onReviewSubmit}) => {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(null);
     const dispatch = useDispatch();
@@ -64,6 +64,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData }) => {
                 showToast("success", result?.message);
                 closeModal();
                 dispatch(getReviewListApi(UUIDs))
+                onReviewSubmit?.()
             }
         });
     };

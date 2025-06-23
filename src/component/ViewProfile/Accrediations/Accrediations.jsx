@@ -1,21 +1,58 @@
 import React from "react"
 import styles from "./Accrediations.module.css" 
 import iIcon from "../../../assets/Images/iIcon.svg";
+import IMG from "../../../assets/Images/Setting/newAccoredationImg.svg"
 
 const Accrediations = ({details}) => {
   const data =details?.accreditations
     return (
         <div className={styles.accrediationsContainer}>
             <h2>Accrediations</h2>
-      {data?.map((item) => {
+      {/* {data?.map((item) => {
         return (
           <>
+          <div className={styles.accrediationsBoxContainer}>
+            <div>
+            <img src={item?.image ? item?.image : IMG} alt="accrediation" className={styles.accrediationImage} width={100} height={50}/>
+         </div>
           <div className={styles.accrediationsBox}>
       {item?.name}
        </div>
+        </div>
           </>
         )
-      }) }
+      }) } */}
+      {data && data.length > 0 ? (
+        // ✅ When accreditations data exists
+        data.map((item, index) => (
+          <div key={index} className={styles.accrediationsBoxContainer}>
+            <div>
+              <img
+                src={item?.image ? item?.image : IMG}
+                alt="accrediation"
+                className={styles.accrediationImage}
+                width={93}
+                height={93}
+              />
+            </div>
+            <div className={styles.accrediationsBox}>{item?.name}</div>
+          </div>
+        ))
+      ) : (
+        
+        <div className={styles.accrediationsBoxContainer}>
+          <div>
+            <img
+              src={IMG}
+              alt="default accrediation"
+              className={styles.accrediationImage}
+              width={93}
+              height={93}
+            />
+          </div>
+            <div className={styles.accrediationsBox}>NO Text</div>
+        </div>
+      )}
        <div className={styles.infoBox}>
                <span className={styles.infoIcon}>
                  <img src={iIcon} alt="" style={{marginTop:"4px"}} />
