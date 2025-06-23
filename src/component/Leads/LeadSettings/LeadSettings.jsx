@@ -138,7 +138,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     navigate("/leads");
   };
 
-  const handleServiceClick = (service, name,primaryService) => {
+  const handleServiceClick = (service, name, primaryService) => {
     setSelectedService({
       name: name,
       id: service,
@@ -291,7 +291,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         travel_by: location?.travel_by || "",
         postcode: location?.postcode || "",
         coordinates: location?.coordinates || "",
-        nation_wide:location?.nation_wide
+        nation_wide: location?.nation_wide
 
       });
       setSelectedTravelLocation(location);
@@ -313,7 +313,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       setLocationData({
         postcode: location?.postcode,
         city: location?.city,
-        nation_wide:location?.nation_wide
+        nation_wide: location?.nation_wide
 
       });
       setIsDrawTimeOpen(true);
@@ -327,7 +327,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
-        nation_wide:location?.nation_wide
+        nation_wide: location?.nation_wide
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -339,7 +339,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
-        nation_wide:location?.nation_wide
+        nation_wide: location?.nation_wide
 
       });
       setEditLocationId(location.id);
@@ -354,7 +354,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         postcode: location.postcode,
         city: location?.city,
         coordinates: "",
-        nation_wide:1
+        nation_wide: 1
 
       });
       setIsNextModalOpen(true);
@@ -383,9 +383,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       miles_old: previousPostcode,
       city: locationData?.city,
       coordinates: locationData?.coordinates ?? "",
-      nation_wide:locationData?.nation_wide,
+      nation_wide: locationData?.nation_wide,
     };
-    console.log(locationData,"typeOfTravel")
+    console.log(locationData, "typeOfTravel")
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })
@@ -477,12 +477,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 <div
                   key={service.id}
                   ref={(el) => (serviceRefs.current[service.id] = el)}
-                  className={`${styles.serviceItem} ${
-                    selectedService?.id === service.id
+                  className={`${styles.serviceItem} ${selectedService?.id === service.id
                       ? styles.selectedService
                       : ""
-                  }`}
-                  onClick={() => handleServiceClick(service?.id, service?.name,service?.primaryService)}
+                    }`}
+                  onClick={() => handleServiceClick(service?.id, service?.name, service?.primaryService)}
                 >
                   <div className={styles.serviceNameWrapper}>
                     <p className={styles.serviceName}>{service.name}</p>
@@ -491,20 +490,20 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     </p>
                   </div>
                   <div className={styles.checkprimayBox}>
-                 {/* {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>} */}
-                 {service?.primaryService === service?.id && (
-  <Tooltip title="Primary Service">
-    <img src={CheckPrimary} alt="Primary Service" width={19} height={19} />
-  </Tooltip>
-)}
-                  <img
-                    src={EditIcon}
-                    alt="Edit"
+                    {/* {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>} */}
+                    {service?.primaryService === service?.id && (
+                      <Tooltip title="Primary Service">
+                        <img src={CheckPrimary} alt="Primary Service" width={19} height={19} />
+                      </Tooltip>
+                    )}
+                    <img
+                      src={EditIcon}
+                      alt="Edit"
                     // onClick={() =>
                     //   handleServiceClick(service?.id, service?.name)
                     // }
-                  />
-                </div>
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -600,7 +599,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 checked={is_online}
                 onChange={() => {
                   const newValue = !is_online;
-                  setIsOnline(newValue);
 
                   const isOnlineData = {
                     user_id: registerData?.remember_tokens,
@@ -608,10 +606,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                   };
                   dispatch(isOnlineRemote(isOnlineData)).then((result) => {
                     if (result?.success) {
+                  setIsOnline(newValue);
+
                       showToast(
                         "success",
                         result?.message ||
-                          "Online/Remote status updated successfully"
+                        "Online/Remote status updated successfully"
                       );
                     }
                   });
@@ -632,7 +632,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                 setAutoBid(newValue);
 
                 const isAutoBidPauseData = {
-                  user_id: registerData?.remember_tokens,
+                  user_id: registerData?.remember_tokens ? registerData?.remember_tokens : userToken?.remember_tokens,
                   autobid_pause: newValue ? 1 : 0,
                 };
                 dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
@@ -642,7 +642,17 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                         "success",
                         result?.message || "Auto Bid updated successfully"
                       );
+                    } else {
+                      showToast(
+                        "error",
+                        result?.message || "Failed to update Auto Bid"
+                      );
+                      const data = {
+                        user_id: registerData?.remember_tokens ? registerData?.remember_tokens : userToken?.remember_tokens,
+                      }
+                      dispatch(getSevenWeekPausedBidApi(data))
                     }
+
                   }
                 );
               }}
