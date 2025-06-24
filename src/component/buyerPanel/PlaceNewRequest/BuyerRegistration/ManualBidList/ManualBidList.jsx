@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
-import { BASE_IMAGE, BASE_IMAGE_URL, showToast } from "../../../../../utils";
+import { BASE_IMAGE, BASE_IMAGE_URL, DEFAULT_PROFILE_IMAGE, showToast } from "../../../../../utils";
 import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 
 const ManualBidList = () => {
@@ -42,19 +42,19 @@ const ManualBidList = () => {
   }, []);
   const handleReply = (item) => {
     console.log(item, "item");
-    navigate(`/view-profile/${item.id}`)
-    const viewProfileData = {
-      user_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-      seller_id: item?.id,
-      lead_id: requestId,
-    };
-    dispatch(getBuyerViewProfieApi(viewProfileData)).then((result) => {
-      if (result) {
-        showToast("success", result?.message);
-      }
-    });
+    navigate(`/view-profile/${item.id}/${requestId}`)
+    // const viewProfileData = {
+    //   user_id: userToken?.remember_tokens
+    //     ? userToken?.remember_tokens
+    //     : registerData?.remember_tokens,
+    //   seller_id: item?.id,
+    //   lead_id: requestId,
+    // };
+    // dispatch(getBuyerViewProfieApi(viewProfileData)).then((result) => {
+    //   if (result) {
+    //     showToast("success", result?.message);
+    //   }
+    // });
   };
   const handleConatct = (item) => {
     setAutoBidDatas(item)
@@ -94,7 +94,7 @@ setIsOpen(true)
                     src={
                       item?.profile_image
                         ? `${BASE_IMAGE}/users/${item?.profile_image}`
-                        : DummyImage
+                        : DEFAULT_PROFILE_IMAGE
                     }
                     alt="Profile"
                     className={styles.image}

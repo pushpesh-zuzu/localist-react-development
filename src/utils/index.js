@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-
+import DummyImage from "../assets/Images/Setting/ProfileWebIcon.svg"; 
 export const generateSlug = (name) => {
   return name.toLowerCase().replace(/\s+/g, "-");
 };
@@ -31,6 +31,8 @@ export const BASE_URL_IMAGE = "https://localists.zuzucodes.com/admin/storage/app
 export const BASE_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/";
 
 
+
+export const DEFAULT_PROFILE_IMAGE = DummyImage;
 export const loadGooglePlacesAutocomplete = ({
   inputRef,
   setPincode,
