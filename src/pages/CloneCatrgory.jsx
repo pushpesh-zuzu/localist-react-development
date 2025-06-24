@@ -40,12 +40,15 @@ import { AllServicesData } from "../constant/CloneCategory";
 
 
 const endpointCategoryMap = {
-  "financial-and-accounting": ["General Accounting"],
+  // "financial-and-accounting": ["General Accounting"],
+  "financial-and-accounting":["Accounting", "Bookkeeping Services"],
   "general-accounting": ["Accounting", "Bookkeeping Services"],
+
   business: ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };
 const endpointServiceMap = {
-  "financial-and-accounting": ["general Accounting"],
+  // "financial-and-accounting": ["general Accounting"],
+  "financial-and-accounting":["Accounting", "Bookkeeping Services"],
   "general-accounting": ["Accounting", "Bookkeeping Services"],
   "business": ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };
@@ -116,22 +119,26 @@ const filteredAllServicesData = AllServicesData
     <div>
       <Accountants header={accountHeader} subHeader={subHeader} />
 
-      <div className={styles.findAccountInfoContainer}>
-        <p className={styles.breadcrumb}>
-          {breadcrumbItems.map((item, index) => {
-            const isLast = index === breadcrumbItems.length - 1;
-            const slug = item.toLowerCase().replace(/ /g, "-");
+      {endpoint !== "business" && (
+  <div className={styles.findAccountInfoContainer}>
+    <p className={styles.breadcrumb}>
+      {breadcrumbItems.map((item, index) => {
+        const isLast = index === breadcrumbItems.length - 1;
+        const slug = item.toLowerCase().replace(/ /g, "-");
 
-            return isLast ? (
-              <span key={index} className={styles.active}>{item}</span>
-            ) : (
-              <span key={index}>
-                <Link to={`/en/gb/${slug}`} className={styles.link}>{item}</Link> /{" "}
-              </span>
-            );
-          })}
-        </p>
-      </div>
+        return isLast ? (
+          <span key={index} className={styles.active}>{item}</span>
+        ) : (
+          <span key={index}>
+          <Link to={`/en/gb/${slug}`} className={styles.link}>{item}</Link>{" "}
+          <span style={{ color:'black' ,padding: "0 4px" }}>/</span>
+        </span>
+        );
+      })}
+    </p>
+  </div>
+)}
+
 
       <FindingBusinessProfessionals header={accountHeader} subHeader={subHeader} />
       <HowItWorks header={accountHeader} subHeader={subHeader} />
