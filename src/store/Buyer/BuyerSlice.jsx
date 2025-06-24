@@ -135,6 +135,7 @@ export const updateProfileImageData = (profileImageData) => {
 
       if (response) {
         dispatch(updateProfileData());
+        return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
