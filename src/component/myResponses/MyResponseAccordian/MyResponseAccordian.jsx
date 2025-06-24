@@ -53,10 +53,10 @@ const TimelineItem = ({
     </div>
     <div className={styles.card}>
       <div className={styles.header}>
-        <span className={styles.name}>{name}</span>
+        <span className={styles.title}>{title}</span>
         <span className={styles.time}>{time}</span>
       </div>
-      <div className={styles.title}>{title}</div>
+      {/* <div className={styles.title}>{title}</div> */}
       {description && <p className={styles.desc}>{description}</p>}
       {children}
     </div>
@@ -87,11 +87,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
-      seller_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-      buyer_id: profileLeadViewData?.id,
-
+      seller_id: userToken?.id
+        ? userToken?.id
+        : registerData?.id,
+      buyer_id: profileLeadViewData?.leads?.customer_id,
+response_type:"seller",
       type: null,
     };
 
@@ -444,11 +444,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         description={item.description}
                         time={moment(item.updated_at).format("hh:mm A")}
                         isLast={index === getActivies.length - 1}
-                        name={
-                          profileLeadViewData?.id === item?.from_user_id
-                            ? "You"
-                            : profileLeadViewData?.name
-                        }
+                        // name={
+                        //   profileLeadViewData?.id === item?.from_user_id
+                        //     ? "You"
+                        //     : profileLeadViewData?.name
+                        // }
                       >
                         {item.children}
                       </TimelineItem>

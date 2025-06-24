@@ -59,7 +59,7 @@
   position: absolute;
   top: 0px;
   width: 2px;
-  height: calc(100% - -90px); /* Or try height: 100% if needed */
+  height: calc(100% - -70px); /* Or try height: 100% if needed */
   background-color: #d9d9d9;
   left: 45%;
   transform: translateX(-50%);
@@ -81,6 +81,7 @@
   font-size: 0.875rem;
   color: #4b5563;
   font-weight: 600;
+  align-items: center;
 }
 
 .name {

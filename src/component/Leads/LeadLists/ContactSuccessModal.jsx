@@ -100,7 +100,7 @@ const handleResponseChange = (clickName) => {
     responseStatus = {
       lead_id: repliesBtn?.lead_id,
       seller_id: repliesBtn?.id,
-      buyer_id: userToken?.id || registerData?.id,
+      buyer_id: userData,
       type: null,
       response_type:"buyer"
     };
