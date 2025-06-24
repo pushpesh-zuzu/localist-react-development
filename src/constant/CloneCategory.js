@@ -235,7 +235,8 @@ const AllServicesData = [
   // },
   {
     key: 12,
-    "General Accounting": [
+    "Accounting": [
+      "Accounting",
       "general Accounting",
       "Bookkeeping Services",
       "Social Media Marketing",
@@ -247,6 +248,9 @@ const AllServicesData = [
       // "Small Business Loans",
     ],
   },
+
+  
+  
   // {
   //   key: 13,
   //   "HR and Recruitment Services": [
