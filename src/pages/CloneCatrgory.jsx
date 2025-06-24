@@ -40,7 +40,7 @@ import { AllServicesData } from "../constant/CloneCategory";
 
 
 const endpointCategoryMap = {
-  "financial-and-accounting": ["Accounting"],
+  "financial-and-accounting": ["General Accounting"],
   "general-accounting": ["Accounting", "Bookkeeping Services"],
   business: ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };

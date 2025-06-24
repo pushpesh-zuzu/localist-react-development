@@ -4,8 +4,8 @@ const HowItWorks = ({header,subHeader}) => {
     return (
       <div className={styles.container}>
         <h2 className={styles.heading}>
-        How Localists Works 
-        {/* <span className={styles.highlight}>We Work</span> */}
+        How  
+        <span className={styles.highlight}> Localists Work</span>
         </h2>
         <div className={styles.stepsContainer}>
           {HowItWorksData.map((item, index) => (

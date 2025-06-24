@@ -56,6 +56,7 @@ const PopularCategoriesData = [
     title: "Accounting",
     image: AccountingImage,
   },
+ 
   {
     id: 2,
     title: "Bookkeeping Services",
@@ -103,6 +104,12 @@ const PopularCategoriesData = [
   //   title: "Web Design",
   //   image: WebDesignImage,
   // },
+  {
+    id: 10,
+    availableOnline: true,
+    title: "General Accounting",
+    image: AccountingImage,
+  },
 
   
 ];
