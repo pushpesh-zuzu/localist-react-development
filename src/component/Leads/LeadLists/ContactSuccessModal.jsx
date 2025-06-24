@@ -11,68 +11,146 @@ import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail }) => {
+const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail,requestId }) => {
   const dispatch = useDispatch()
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  console.log(details, "details")
+  const userData = userToken?.id ? userToken?.id : registerData?.id
+  console.log(details,"details")
   if (!isOpen) return null;
 
-  const handleResponseChange = (clickName) => {
-    console.log(clickName, "click")
-    const responseStatus = {
-    lead_id: details?.id ? details?.id : detail?.id ? detail?.id : repliesBtn?.id,
-      seller_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-      buyer_id: details?.customer_id ? details?.customer_id : detail?.customer_id ? detail?.customer_id : repliesBtn ? userToken?.id
-        ? userToken?.id
-        : registerData?.id :null,
+//   const handleResponseChange = (clickName) => {
+//     console.log(clickName, "click")
+//     if(requestId) {
+//  const responseStatus = {
+//     lead_id: repliesBtn?.lead_id,
+//       seller_id: repliesBtn?.id,
+//       buyer_id: userToken?.id
+//         ? userToken?.id
+//         : registerData?.id,
 
+//       type: null,
+//     };
+//     } else {
+//        const responseStatus = {
+//     lead_id: details?.id ? details?.id : detail?.id ? detail?.id : repliesBtn?.lead_id,
+//       seller_id:  userData ? userData : repliesBtn?.id,
+//       buyer_id: details?.customer_id ? details?.customer_id : detail?.customer_id ? detail?.customer_id : repliesBtn ? userToken?.id
+//         ? userToken?.id
+//         : registerData?.id :null,
+
+//       type: null,
+//     };
+//     }
+   
+
+//     // if (clickName?.name === "mobile") {
+//     //   responseStatus.type = "mobile";
+//     // } else if (clickName?.name === "Whatsapp") {
+//     //   responseStatus.type = "Whatsapp";
+//     // } else if (clickName?.name === "email") {
+//     //   responseStatus.type = "email";
+//     // } else if (clickName?.name === "sms") {
+//     //   responseStatus.type = "sms";
+//     // }
+//     let url = null;
+//     if (clickName?.name === "mobile") {
+//       responseStatus.type = "mobile";
+//       // const phoneNumber = details?.mobile || detail?.mobile || "";
+//       const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone;
+//       console.log(phoneNumber, "phoneNumber")
+//       url = `tel:${phoneNumber}`;
+//     } else if (clickName?.name === "Whatsapp") {
+//       responseStatus.type = "Whatsapp";
+//      const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone
+//       url = `https://wa.me/${phoneNumber}`;
+//     } else if (clickName?.name === "email") {
+//       responseStatus.type = "email";
+//       const email = details?.email ? details?.email : detail?.email || repliesBtn?.email;
+//       url = `mailto:${email}`;
+//     } else if (clickName?.name === "sms") {
+//       responseStatus.type = "sms";
+//        const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone
+//       url = `sms:${phoneNumber}`;
+//     }
+
+//     dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
+//       if (result) {
+//         showToast("success", result?.message)
+//         if (url) {
+//           window.open(url, "_blank");
+//         }
+//         onClose()
+//       }
+//     })
+//   }
+const handleResponseChange = (clickName) => {
+  console.log(clickName, "click");
+
+  let responseStatus = {
+    lead_id: null,
+    seller_id: null,
+    buyer_id: null,
+    type: null,
+    response_type:null
+  };
+
+  if (requestId) {
+    responseStatus = {
+      lead_id: repliesBtn?.lead_id,
+      seller_id: repliesBtn?.id,
+      buyer_id: userToken?.id || registerData?.id,
       type: null,
+      response_type:"buyer"
     };
-
-    // if (clickName?.name === "mobile") {
-    //   responseStatus.type = "mobile";
-    // } else if (clickName?.name === "Whatsapp") {
-    //   responseStatus.type = "Whatsapp";
-    // } else if (clickName?.name === "email") {
-    //   responseStatus.type = "email";
-    // } else if (clickName?.name === "sms") {
-    //   responseStatus.type = "sms";
-    // }
-    let url = null;
-    if (clickName?.name === "mobile") {
-      responseStatus.type = "mobile";
-      // const phoneNumber = details?.mobile || detail?.mobile || "";
-      const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone;
-      console.log(phoneNumber, "phoneNumber")
-      url = `tel:${phoneNumber}`;
-    } else if (clickName?.name === "Whatsapp") {
-      responseStatus.type = "Whatsapp";
-     const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone
-      url = `https://wa.me/${phoneNumber}`;
-    } else if (clickName?.name === "email") {
-      responseStatus.type = "email";
-      const email = details?.email ? details?.email : detail?.email || repliesBtn?.email;
-      url = `mailto:${email}`;
-    } else if (clickName?.name === "sms") {
-      responseStatus.type = "sms";
-       const phoneNumber = details?.phone ? details?.phone : detail?.phone || repliesBtn?.phone
-      url = `sms:${phoneNumber}`;
-    }
-
-    dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
-      if (result) {
-        showToast("success", result?.message)
-        if (url) {
-          window.open(url, "_blank");
-        }
-        onClose()
-      }
-    })
+  } else {
+    responseStatus = {
+      lead_id:
+        details?.id ||
+        detail?.id ||
+        repliesBtn?.lead_id,
+      seller_id: userData || repliesBtn?.id,
+      buyer_id:
+        details?.customer_id ||
+        detail?.customer_id ||
+        (repliesBtn ? (userToken?.id || registerData?.id) : null),
+      type: null,
+      response_type:"seller"
+    };
   }
+
+  let url = null;
+  const phoneNumber =
+    details?.phone || detail?.phone || repliesBtn?.phone || "";
+  const email =
+    details?.email || detail?.email || repliesBtn?.email || "";
+
+  if (clickName?.name === "mobile") {
+    responseStatus.type = "mobile";
+    url = `tel:${phoneNumber}`;
+  } else if (clickName?.name === "Whatsapp") {
+    responseStatus.type = "Whatsapp";
+    url = `https://wa.me/${phoneNumber}`;
+  } else if (clickName?.name === "email") {
+    responseStatus.type = "email";
+    url = `mailto:${email}`;
+  } else if (clickName?.name === "sms") {
+    responseStatus.type = "sms";
+    url = `sms:${phoneNumber}`;
+  }
+
+  dispatch(sellerResponseStatusApi(responseStatus)).then((result) => {
+    if (result) {
+      showToast("success", result?.message);
+      if (url) {
+        window.open(url, "_blank");
+      }
+      onClose();
+    }
+  });
+};
+
 
   return (
     <>
