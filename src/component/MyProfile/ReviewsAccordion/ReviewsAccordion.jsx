@@ -116,9 +116,9 @@ const ReviewsAccordion = () => {
 
       <label className={styles.reviewsLabel}>Localist reviews</label>
       <div className={styles.localistBox}>
-        <strong>You have no reviews on Bark yet</strong>
+        <strong>You have no reviews on Localist yet</strong>
         <p>
-          Your reviews don’t have to just come from customers you found on Bark,
+          Your reviews don’t have to just come from customers you found on Localist,
           they can also be from your existing customers.
         </p>
       </div>

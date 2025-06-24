@@ -640,7 +640,8 @@ import {
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { BASE_IMAGE, BASE_IMAGE_URL, showToast } from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import DummyImage from "../../../../../assets/Images/DummyImage.svg";
+// import DummyImage from "../../../../../assets/Images/DummyImage.svg";
+import DummyImage from "../../../../../assets/Images/Setting/WebIcon.svg"
 import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
@@ -757,13 +758,14 @@ const BidsList = ({ previousStep }) => {
 
   const hanleViewProfile = (seller) => {
 console.log(seller,"seller")
-    navigate(`/view-profile/${seller.id}`)
+    navigate(`/view-profile/${seller.id}/${requestId}`)
     const data = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
       seller_id: seller?.id,
-      lead_id: requestId
+      lead_id: requestId,
+      
     }
     dispatch(getBuyerViewProfieApi(data)).then((result) => {
       if (result) {

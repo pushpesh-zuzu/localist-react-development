@@ -32,14 +32,22 @@ const ServiceCreateAccount = () => {
       } else if (!/\S+@\S+\.\S+/.test(selectedServiceFormData.email)) {
         newErrors.email = "Invalid email format";
       }
-      if(!selectedServiceFormData.phone || !selectedServiceFormData.phone.trim()) {
-        newErrors.phone = "Phone number is required";
-      }
-const urlRegex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
-  const companyInput = selectedServiceFormData.company_website?.trim();
-  if (companyInput && !urlRegex.test(companyInput)) {
-    newErrors.company_website = "Please enter a valid URL (e.g. https://example.com)";
-  }
+     if (
+  !selectedServiceFormData.phone || 
+  !selectedServiceFormData.phone.trim()
+) {
+  newErrors.phone = "Phone number is required";
+} else if (
+  selectedServiceFormData.phone.trim().length < 10
+) {
+  newErrors.phone = "Phone number must be at least 10 digits";
+}
+const companyInput = selectedServiceFormData.company_website?.trim();
+const urlRegex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+(\/[^\s]*)?$/;
+
+if (companyInput && !urlRegex.test(companyInput)) {
+  newErrors.company_website = "Please enter a valid URL (e.g. https://example.com or www.example.com)";
+}
       // if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
       //   newErrors.password = "Password is required";
       // } else if (

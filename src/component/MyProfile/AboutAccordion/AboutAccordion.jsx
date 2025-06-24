@@ -280,7 +280,7 @@ useEffect(() => {
           name="company_name"
           value={formState.company_name}
           onChange={handleInputChange}
-          placeholder="ABC Pvt. Ltd."
+          placeholder="Enter your company name"
         />
         {errors.company_name && (
           <p style={{ color: "red" }}>{errors.company_name}</p>
@@ -290,7 +290,7 @@ useEffect(() => {
       <div className={styles.card}>
         <h3>Name and profile picture</h3>
         <p>
-          This is the person who will be communicating with customers on Bark.
+          This is the person who will be communicating with customers on Localist.
           The photo will appear alongside your messages with customers.
         </p>
         <div className={styles.imageSection}>
@@ -327,7 +327,7 @@ useEffect(() => {
           name="name"
           value={formState.name}
           onChange={handleInputChange}
-          placeholder="Chander"
+          placeholder="Enter your full name"
         />
         {errors.name && (
           <p style={{ color: "red" }}>{errors.name}</p>
@@ -336,8 +336,8 @@ useEffect(() => {
       <div className={styles.card}>
         <h3>Company contact details</h3>
         <p>
-          This information will be seen by customers on Bark. Change the details
-          Bark uses to contact you privately in{" "}
+          This information will be seen by customers on Localist. Change the details
+          Localist uses to contact you privately in{" "}
           <a href="/settings/account_details" className={styles.link}>
             Account Details
           </a>
@@ -390,7 +390,7 @@ useEffect(() => {
               name="company_phone"
               value={formState.company_phone}
               onChange={handleInputChange}
-              placeholder="Company phone number"
+              placeholder="Enter company's phone number"
             />
           </div>
         </div>
@@ -401,7 +401,7 @@ useEffect(() => {
           name="company_website"
           value={formState.company_website}
           onChange={handleInputChange}
-          placeholder="Company Website"
+          placeholder="Enter website url"
         />
       </div>
 
@@ -462,10 +462,11 @@ useEffect(() => {
               onChange={handleInputChange}
             >
               <option value="">Select size</option>
+              <option value="Self-employed, Sole trader">Self-employed, Sole trader</option>
               <option value="2–10">2–10 employees</option>
               <option value="11–50">11–50 employees</option>
-              <option value="51–100">51–100 employees</option>
-              <option value="100+">100+ employees</option>
+              <option value="51–200">51–200 employees</option>
+              <option value="200+">200+ employees</option>
             </select>
           </div>
           <div className={styles.flexItem}>

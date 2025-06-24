@@ -23,7 +23,7 @@ const ServiceDetailsStep = ({
           <div className={styles.headerContainer}>
             <h2 className={styles.heading}>Some details about you</h2>
             <p className={styles.subheading}>
-              You're just a few steps away from viewing our {serviceParms?.serviceTitle} leads
+              You're just a few steps away from viewing our {serviceParms?.serviceTitle?.replace(/-/g, ' ')} leads
             </p>
           </div>
 
@@ -110,11 +110,11 @@ const ServiceDetailsStep = ({
               )} */}
 
               <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>Phone number (Optional)</label>
+                <label className={styles.label}>Phone number</label>
                 <input
                   type="text"
                    className={`${styles.input} ${
-                    errors.email ? styles.errorBorder : ""
+                    errors.phone ? styles.errorBorder : ""
                   }`}
                   name="phone"
                   value={formData.phone}
@@ -178,7 +178,9 @@ const ServiceDetailsStep = ({
               {formData.is_company_website === 1 && (
                 <input
                   type="text"
-                  className={styles.input}
+                    className={`${styles.input} ${
+                    errors.company_website ? styles.errorBorder : ""
+                  }`}
                   name="company_website"
                   placeholder="Website address (optional)"
                   value={

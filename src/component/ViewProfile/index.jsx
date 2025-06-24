@@ -156,12 +156,10 @@ const ViewProfiles = () => {
     const requestId = useParams()
     console.log(requestId?.requestId,"requestId")
     const shouldDisableActions = requestId?.requestId;
-//     const shouldDisableActions =
-//   !!profileId?.profileId && !!SellerId?.sellerId;
-
-// const shouldDisableActions =
-//   !profileId?.profileId || !SellerId?.sellerId;
-
+ const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector(
+    (state) => state.findJobs
+  );
     const { viewProfileData } = useSelector((state) => state.leadSetting)
     const serviceCount = viewProfileData?.services?.filter(
         (service) => service?.user_services?.name
@@ -251,7 +249,9 @@ const ViewProfiles = () => {
 
     useEffect(() => {
         const sellerData = {
-            seller_id: profileId?.sellerId
+            seller_id: profileId?.sellerId,
+            buyer_id: userToken?.id ? userToken?.id : registerData?.id,
+            lead_id:requestId?.requestId
         }
         dispatch(addViewProfileList(sellerData))
     }, [])
