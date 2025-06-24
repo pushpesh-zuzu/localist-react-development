@@ -14,7 +14,7 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CloneAccountants = () => {
+const CloneAccountants = ({header,subHeader}) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
@@ -142,7 +142,7 @@ const CloneAccountants = () => {
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
           <h1>
-          Looking for <span className={styles.blueText}>Business Professionals</span>{" "}
+          Looking for <span className={styles.blueText}>{header} Professionals</span>{" "}
           Near You?
           </h1>
         </div>

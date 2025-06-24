@@ -42,8 +42,11 @@ import InvoiceAndBilling from "../component/MyCredit/InvoiceAndBilling/InvoiceAn
 import MyPaymentDetails from "../component/MyCredit/MyPaymentDetails/MyPaymentDetails";
 import EmailNotification from "../component/SellerNotification/EmailNotification/EmailNotification";
 import BrowserNotification from "../component/SellerNotification/BrowserNotification/BrowserNotification";
-//test
+//test en/gb/bookkeeping-services/
+
+
 const router = createBrowserRouter([
+  
   {
     path: "/",
     element: <MainLayout />,
@@ -51,7 +54,12 @@ const router = createBrowserRouter([
       { index: true, element: <Homepage /> },
       { path: "/login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },
-      { path: "/en/gb/business/", element: <CloneCatrgory /> },
+      { path: "/en/gb/business/", element: <CloneCatrgory accountHeader="Business" subHeader="Business" /> },
+      { path: "/en/gb/general-accounting/", element: <CloneCatrgory accountHeader="General Accounting" subHeader="General Accountant" /> },
+      { path: "/en/gb/financial-and-accounting/", element: <CloneCatrgory accountHeader="Financial & Accounting" subHeader="Financial Accountant" /> },
+      { path: "/en/gb/accountants/", element: <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" /> },
+      { path: "/en/gb/bookkeeping-services/", element: <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /> },
+      
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },

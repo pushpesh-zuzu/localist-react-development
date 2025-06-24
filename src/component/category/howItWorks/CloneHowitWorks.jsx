@@ -1,6 +1,6 @@
 import styles from "./HowItWorks.module.css";
 import { HowItWorksData } from "../../../constant/CloneCategory.js";
-const HowItWorks = () => {
+const HowItWorks = ({header,subHeader}) => {
     return (
       <div className={styles.container}>
         <h2 className={styles.heading}>
@@ -25,7 +25,7 @@ const HowItWorks = () => {
           ))}
         </div>
         <button className={styles.ctaButton}>
-          Get quotes from Business professionals near you
+          Get quotes from {header} professionals near you
         </button>
       </div>
     );

@@ -1,11 +1,11 @@
 import styles from "./findingBusinessProfessionals.module.css";
-const CloneFindingBusinessProfessionals = () => {
+const CloneFindingBusinessProfessionals = ({header,subHeader}) => {
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
         <span className={styles.title}>
           Find the Best {" "}
-          <span className={styles.highlight}>Business Professionals </span>
+          <span className={styles.highlight}>{subHeader} Professionals </span>
           {" "}In Your Area
         </span>
         <div className={styles.descriptionContainer}>
@@ -19,7 +19,7 @@ const CloneFindingBusinessProfessionals = () => {
           <p>Best of all - it&apos;s completely free!</p>
         </div>
         <button type="primary" className={styles.button}>
-          Find a Business professional today
+          Find a {subHeader} professional today
         </button>
       </div>
     </div>
