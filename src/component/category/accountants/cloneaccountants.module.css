@@ -28,13 +28,14 @@
 .headingContainer h1 {
   font-weight: 700;
   font-size: 45px;
-  line-height: 100%;
+  line-height: 120%;
   letter-spacing: 0;
   text-align: center;
 }
 
 .blueText {
   color: var(--primary-color);
+
 }
 
 .formContainer {
