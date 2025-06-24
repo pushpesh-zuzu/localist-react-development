@@ -45,7 +45,7 @@ const endpointCategoryMap = {
   business: ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };
 const endpointServiceMap = {
-  "financial-and-accounting": ["Accounting"],
+  "financial-and-accounting": ["general Accounting"],
   "general-accounting": ["Accounting", "Bookkeeping Services"],
   "business": ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };

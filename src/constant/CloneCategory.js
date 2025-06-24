@@ -3,6 +3,8 @@ import WhatYouNeedIcon from "../assets/Icons/WhatYouNeedIcon.png";
 import FreeQuotesIcon from "../assets/Icons/FreeQuotesIcon.png";
 import BusinessProfessionalsIcon from "../assets/Icons/BusinessProfessionalsIcon.png";
 import AccountingImage from "../assets/Images/AccountingImage.svg";
+import general_accouting from "../assets/Images/general_accouting.svg";
+import gen_acc_img from "../assets/Images/gen_acc_img.svg";
 import BookkeepingImage from "../assets/Images/BookkeepingImage.svg";
 import DebtRecoveryImage from "../assets/Images/DebtRecoveryImage.svg";
 import MobileDevelopmentImage from "../assets/Images/MobileDevelopmentImage.svg";
@@ -108,7 +110,7 @@ const PopularCategoriesData = [
     id: 10,
     availableOnline: true,
     title: "General Accounting",
-    image: AccountingImage,
+    image: gen_acc_img,
   },
 
   
@@ -234,7 +236,7 @@ const AllServicesData = [
   {
     key: 12,
     "General Accounting": [
-      "Accounting",
+      "general Accounting",
       "Bookkeeping Services",
       "Social Media Marketing",
       "Business Consulting",

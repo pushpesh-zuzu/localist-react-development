@@ -117,14 +117,18 @@
   .breadcrumb {
     font-weight: 400;
     font-size: 14px;
-    color: var(--text-color);
-   
+    color: black;
+   line-height: normal;
+   font-style: normal;
+
   }
   
   .breadcrumb span {
-    font-weight: 700;
+    /* font-weight: 700; */
     color: var(--primary-color);
     cursor: pointer;
+    line-height: normal;
+   font-style: normal;
   }
   
   .infoContainer {
