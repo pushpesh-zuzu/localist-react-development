@@ -58,7 +58,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
       // if (!window.google) {
         if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
@@ -357,6 +357,7 @@ const handleExpandRadius = () => {
               <img src={LocationIcon} alt="" />
               <input
                 type="text"
+                id="autocomplete-postcode"
                 placeholder="Enter your postcode"
                 className={`${styles.input} ${errors.postcode2 ? styles.errorBorder : ""
                   }`}
@@ -366,6 +367,7 @@ const handleExpandRadius = () => {
                 value={formData.postcode2 || ""}
                 onChange={handleInputChange ? handleInputChange : () => { }}
               disabled = {!disableWithService}
+              //  readOnly={!disableWithService} 
                 // onChange={(e)=>setNewPost(e.target.value)}
               />
             

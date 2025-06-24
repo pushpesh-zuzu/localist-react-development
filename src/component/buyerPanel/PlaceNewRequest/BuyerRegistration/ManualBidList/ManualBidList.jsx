@@ -156,8 +156,8 @@ setIsOpen(true)
                   <div className={styles.messageRow}>
   <div className={styles.description}>
     <div className={styles.messageText}>
-      <div className={styles.meName}>Me,</div>
-      <div className={styles.meName}>You Requested a Quote</div>
+      <div className={styles.meName}></div>
+      <div className={styles.meName}>Requested a Quote</div>
     </div>
     <div className={styles.timestamp}>5 May 2025, 15:51</div>
   </div>
@@ -194,6 +194,7 @@ setIsOpen(true)
               onClose={() => setIsOpen(false)}
               isOpen={isopen}
               repliesBtn={autobidDatas}
+              requestId={"contact"}
             />
             }
     </div>
