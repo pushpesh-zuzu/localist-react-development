@@ -141,7 +141,7 @@ import { useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_IMAGE } from "../../utils";
+import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../utils";
 import starImg from "../../assets/Icons/MyResponse/StarImg.svg"
 import grayStar from "../../assets/Icons/MyResponse/grayStar.svg"
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
@@ -154,21 +154,21 @@ const ViewProfiles = () => {
     const profileId = useParams()
     const SellerId = useParams()
     const requestId = useParams()
-    console.log(requestId?.requestId,"requestId")
+    console.log(requestId?.requestId, "requestId")
     const shouldDisableActions = requestId?.requestId;
- const { userToken } = useSelector((state) => state.auth);
-  const { registerData } = useSelector(
-    (state) => state.findJobs
-  );
+    const { userToken } = useSelector((state) => state.auth);
+    const { registerData } = useSelector(
+        (state) => state.findJobs
+    );
     const { viewProfileData } = useSelector((state) => state.leadSetting)
     const serviceCount = viewProfileData?.services?.filter(
         (service) => service?.user_services?.name
     );
     const servicesArray = viewProfileData?.services || [];
     const serviceNames = servicesArray
-  .flatMap(service => service.user_services?.map(us => us.name))
-  .filter(Boolean)
-    console.log(profileId,SellerId,"SellerId")
+        .flatMap(service => service.user_services?.map(us => us.name))
+        .filter(Boolean)
+    console.log(profileId, SellerId, "SellerId")
     const aboutRef = useRef(null);
     const servicesRef = useRef(null);
     const reviewsRef = useRef(null);
@@ -251,21 +251,32 @@ const ViewProfiles = () => {
         const sellerData = {
             seller_id: profileId?.sellerId,
             buyer_id: userToken?.id ? userToken?.id : registerData?.id,
-            lead_id:requestId?.requestId
+            lead_id: requestId?.requestId
         }
         dispatch(addViewProfileList(sellerData))
     }, [])
     const handleRequestOpen = () => {
         setCustomerModal(true)
     }
+    const maskPhone = (phone = "") => {
+        if (!phone || phone.length < 3) return "*******";
+        const visible = phone.slice(0, 3);
+        return `${visible}*******`;
+    };
 
+    const maskEmail = (email = "") => {
+        if (!email.includes("@")) return "********";
+        const [name, domain] = email.split("@");
+        const visible = name.charAt(0);
+        return `${visible}***@${domain}`;
+    };
     return (
         <>
             <div className={styles.mainContainer}>
                 <div className={styles.container}>
                     <div className={styles.backBtnWrapper}>
-                    <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DummyImage} alt="Profile" className={styles.profileImage}  />
-</div>
+                        <img src={viewProfileData?.profile_image ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}` : DEFAULT_PROFILE_IMAGE} alt="Profile" className={styles.profileImage} />
+                    </div>
                     <div className={styles.viewDetails}>
                         <h2>{viewProfileData?.name}</h2>
                         <div className={styles.locationText}>
@@ -291,12 +302,12 @@ const ViewProfiles = () => {
                             </div>
                         </div>
                         <div className={styles.badgesBox}>
-                            {serviceNames?.map((item)=>{
-                                return(
+                            {serviceNames?.map((item) => {
+                                return (
                                     <>
-                                     <div className={styles.badges}>
-                                <span>{item}</span>
-                            </div>
+                                        <div className={styles.badges}>
+                                            <span>{item}</span>
+                                        </div>
                                     </>
                                 )
                             })}
@@ -317,15 +328,27 @@ const ViewProfiles = () => {
                     </div>
 
                     <div className={styles.contactDetails}>
-                        <div className={styles.mailText}>
-                            <img src={emailImg} alt="" />
-                            <span>{viewProfileData?.email}</span>
-                        </div>
-                        <div className={styles.mailText}>
-                            <img src={phoneImg} alt="" />
-                            <span>{viewProfileData?.phone ? viewProfileData?.phone : "0000000000"}</span>
-                        </div>
-                      { viewProfileData?.company_website && <div className={styles.mailText}>
+
+                        <>
+                            <div className={styles.mailText}>
+                                <img src={emailImg} alt="Email" />
+                                <span>
+                                    {viewProfileData?.lead_purchased === 1
+                                        ? viewProfileData?.email
+                                        : maskEmail(viewProfileData?.email)}
+                                </span>
+                            </div>
+                            <div className={styles.mailText}>
+                                <img src={phoneImg} alt="Phone" />
+                                <span>
+                                    {viewProfileData?.lead_purchased === 1
+                                        ? viewProfileData?.phone || "0000000000"
+                                        : maskPhone(viewProfileData?.phone)}
+                                </span>
+                            </div>
+                        </> 
+
+                        {viewProfileData?.company_website && <div className={styles.mailText}>
                             <img src={profileImg} alt="" />
                             <span>{viewProfileData?.company_website}</span>
                         </div>}
@@ -340,7 +363,7 @@ const ViewProfiles = () => {
                         />
                         <div ref={aboutRef}><About details={viewProfileData} /></div>
                         <div ref={servicesRef}><Services details={viewProfileData} /></div>
-                        <div ref={reviewsRef}><ReviewSection details={viewProfileData}  disableReviewButton={shouldDisableActions}/></div>
+                        <div ref={reviewsRef}><ReviewSection details={viewProfileData} disableReviewButton={shouldDisableActions} /></div>
                         <div ref={accrediationRef}><Accrediations details={viewProfileData} /></div>
                         <div ref={quesAnsRef}><QandAns details={viewProfileData} /></div>
                         <div ref={photoRef}><Photos details={viewProfileData} /></div>
@@ -352,12 +375,12 @@ const ViewProfiles = () => {
                 }
                 {customerModal && (
                     <>
-                    <ContactSuccessModal
-                                  onClose={() => setCustomerModal(false)}
-                                  isOpen={customerModal}
-                                  detail={viewProfileData}
-                                  repliesBtn
-                                />
+                        <ContactSuccessModal
+                            onClose={() => setCustomerModal(false)}
+                            isOpen={customerModal}
+                            detail={viewProfileData}
+                            repliesBtn
+                        />
                     </>
                 )}
             </div>
