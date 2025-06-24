@@ -15,7 +15,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { BASE_IMAGE_URL, showToast } from "../../utils";
+import { BASE_IMAGE_URL, showToast, updateLocalStorageValue } from "../../utils";
+import { setUserToken } from "../../store/Auth/authSlice";
+import { setRegisterData } from "../../store/FindJobs/findJobSlice";
 
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
@@ -110,6 +112,24 @@ const BuyerAccountSettings = () => {
     };
     dispatch(updateUserIfoData(infoData)).then((result) => {
       if (result?.success) {
+         updateLocalStorageValue('barkUserToken', 'name', userDetails?.name)
+            updateLocalStorageValue("registerDataToken","name",userDetails?.name)
+             const storedData = localStorage.getItem("barkUserToken");
+             const registerData = localStorage.getItem("registerDataToken")
+        
+        
+            const parsedData = JSON.parse(storedData);
+            const registerDatas = JSON.parse(registerData)
+            if(parsedData) {
+
+              parsedData.name = userDetails?.name;
+              dispatch(setUserToken(parsedData));
+            }
+            if(registerDatas){
+
+              registerDatas.name = userDetails?.name
+              dispatch(setRegisterData(registerDatas))
+            }
         showToast(
           "info",
           result?.message || "User Update Details successfully!"
@@ -345,6 +365,7 @@ const BuyerAccountSettings = () => {
             value={userDetails.email}
             onChange={handleChange}
             className={styles.inputField}
+            disabled
           />
         </div>
 
