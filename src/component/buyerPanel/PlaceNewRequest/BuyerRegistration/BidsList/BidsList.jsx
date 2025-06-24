@@ -794,8 +794,8 @@ useEffect(() => {
   const handleSeeMore = () => {
   setVisibleCount(autoBidList?.[0]?.sellers?.length || 0);
 };
-  const handleContinue = () => {
-    
+  const handleContinue = (seller) => {
+    let selectedItem = seller;
     if (!selectedItem) return;
     const formData = new FormData();
     formData.append(
@@ -1116,7 +1116,7 @@ useEffect(() => {
                           onClick={() => {
                             setSelectedItem(seller);
                             // setModalOpen(true);
-                            handleContinue()
+                            handleContinue(seller)
                           }}
                         >
                           Request reply
