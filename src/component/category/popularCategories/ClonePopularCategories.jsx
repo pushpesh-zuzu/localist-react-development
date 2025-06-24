@@ -1,14 +1,27 @@
 import styles from "./PopularCategories.module.css";
 import { PopularCategoriesData } from "../../../constant/CloneCategory";
 
-const PopularCategories = () => {
+
+import { useNavigate } from "react-router-dom";
+
+
+
+
+
+
+
+
+const PopularCategories = ({data}) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>
         Popular <span className={styles.highlight}>Categories</span>
       </h2>
       <div className={styles.grid}>
-        {PopularCategoriesData?.map((row, rowIndex) => (
+        {data?.map((row, rowIndex) => (
           <div key={rowIndex} className={styles.rowWrapper}>
             <div className={styles.row}>
               <div key={row.id} className={styles.card}>
@@ -18,7 +31,13 @@ const PopularCategories = () => {
                     Available Online
                   </span>
                 )}
-                <button className={styles.cardbButton}>{row.title}</button>
+                <button
+  className={styles.cardbButton}
+  onClick={() => navigate(`/inprogress`)}
+>
+  {row.title}
+</button>
+
               </div>
             </div>
           </div>

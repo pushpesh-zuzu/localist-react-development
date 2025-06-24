@@ -4,7 +4,7 @@ import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
 
-const AllServicesComponent = () => {
+const AllServicesComponent = ({data}) => {
   const allPanelKeys = AllServicesData.map((panel) => panel.key);
 
   return (
@@ -12,7 +12,7 @@ const AllServicesComponent = () => {
       <div className={styles.title}>
         All <span className={styles.blueTitle}>Services</span>
       </div>
-      {AllServicesData.map((category, index) => {
+      {data?.map((category, index) => {
         const categoryName = Object?.keys(category)[1];
         const services = category[categoryName];
         return (

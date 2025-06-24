@@ -4,6 +4,7 @@ import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
 import Homepage from "../pages/Homepage";
 import Category from "../pages/Category";
+import InProgressPage from "../pages/InProgressPage"
 import CloneCatrgory  from "../pages/CloneCatrgory";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import LocationPage from "../pages/LocationPage";
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       { index: true, element: <Homepage /> },
       { path: "/login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },
+      { path: "/inprogress", element: <InProgressPage /> },
       { path: "/en/gb/business/", element: <CloneCatrgory accountHeader="Business" subHeader="Business" /> },
       { path: "/en/gb/general-accounting/", element: <CloneCatrgory accountHeader="General Accounting" subHeader="General Accountant" /> },
       { path: "/en/gb/financial-and-accounting/", element: <CloneCatrgory accountHeader="Financial & Accounting" subHeader="Financial Accountant" /> },
@@ -297,6 +299,15 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/inprogress",
+        element: (
+          <ProtectedRoute>
+          <InProgressPage/>
+          </ProtectedRoute>
+        ),
+      },
+      // { path: "/inprogress", element: <InProgressPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },
