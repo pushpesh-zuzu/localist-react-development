@@ -60,7 +60,11 @@ const BuyerAccountSettings = () => {
       const formData = new FormData();
       formData.append("image_file", file);
 
-      dispatch(updateProfileImageData(formData));
+      dispatch(updateProfileImageData(formData)).then((result) => {
+        if(result){
+          showToast("success",result?.message)
+              }
+      });
     }
   };
 

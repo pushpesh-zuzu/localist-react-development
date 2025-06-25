@@ -4,14 +4,14 @@ import searchIcon from "../../../assets/Images/search.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterData, setRegisterStep } from "../../../store/FindJobs/findJobSlice";
-import { Popover } from "antd";
+import { Avatar, Popover } from "antd";
 import {
   setCurrentUser,
   setUserToken,
   switchUser,
   userLogout,
 } from "../../../store/Auth/authSlice";
-import { showToast } from "../../../utils";
+import { BASE_COMPLETE, BASE_IMAGE,  showToast } from "../../../utils";
 import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg"
 
 const LogSwitch = () => {
@@ -46,7 +46,7 @@ const profileId = useParams()
 
     </div>
   );
-
+const userData = userToken?.profile_image ? userToken?.profile_image : registerData?.profile_image
   const getUserType = () => {
 
     if (userToken?.remember_tokens) {
@@ -227,7 +227,17 @@ const profileId = useParams()
             >
               Help
             </div>
-            <div className={styles.nameCircle}>{userInitial}</div>
+            {/* <div className={styles.nameCircle}>{userInitial}</div> */}
+                {userData ? (
+      <Avatar
+        src={`${BASE_IMAGE}/users/${userData}`}
+        alt="Profile"
+        size={40}
+        style={{ backgroundColor: "#f0f0f0" }}
+      />
+    ) : (
+      <div className={styles.nameCircle}>{userInitial}</div>
+    )}
           </>
 
         )}
@@ -240,7 +250,16 @@ const profileId = useParams()
               <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
             </div>
 
-            <div className={styles.nameCircle}>{userInitial}</div>
+             {userData ? (
+      <Avatar
+        src={`${BASE_COMPLETE}/${userData}`}
+        alt="Profile"
+        size={40}
+        style={{ backgroundColor: "#f0f0f0" }}
+      />
+    ) : (
+      <div className={styles.nameCircle}>{userInitial}</div>
+    )}
           </>
         )}
       </div>

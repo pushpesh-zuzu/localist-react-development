@@ -46,7 +46,7 @@ const ServiceLocationStep = ({
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
-
+ console.log(place,place.address_components,'place')
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
@@ -55,9 +55,19 @@ const ServiceLocationStep = ({
         });
 
         
-        const cityName = place.address_components.find((component) =>
-          component.types.includes("locality")
-      )?.long_name;
+      //   const cityName = place.address_components.find((component) =>
+      //     component.types.includes("locality") && component.types.includes("administrative_area_level_3")
+      // )?.long_name;
+      // Try to find city by "locality" first
+let cityName =
+  place.address_components.find(component =>
+    component.types.includes("locality")
+  )?.long_name ||
+  place.address_components.find(component =>
+    component.types.includes("administrative_area_level_3")
+  )?.long_name;
+
+    
       
       const countryName = place.address_components.find((component) =>
         component.types.includes("country")
