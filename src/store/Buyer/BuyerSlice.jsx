@@ -3,7 +3,7 @@ import axiosInstance from "../../Api/axiosInstance";
 import axios from "axios";
 import { setAuthToken, setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
 import { setToken, setUserToken } from "../Auth/authSlice";
-import { showToast } from "../../utils";
+import { showToast, updateLocalStorageValue } from "../../utils";
 
 const initialState = {
   questionLoader:false,
@@ -108,9 +108,13 @@ export const updateProfileData = () => {
         `customer/setting/get-profile-info`,
         
       );
+        console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
 
       if (response) {
         dispatch(setGetUploadImgData(response?.data?.data));
+        updateLocalStorageValue('barkUserToken', 'profile_image', response?.data?.data?.[0]?.profile_image);
+        console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
+        updateLocalStorageValue("registerDataToken", "profile_image", response?.data?.data?.[0]?.profile_image);
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));

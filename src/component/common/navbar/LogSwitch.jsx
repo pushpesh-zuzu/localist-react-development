@@ -11,7 +11,7 @@ import {
   switchUser,
   userLogout,
 } from "../../../store/Auth/authSlice";
-import { BASE_COMPLETE, showToast } from "../../../utils";
+import { BASE_COMPLETE, BASE_IMAGE,  showToast } from "../../../utils";
 import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg"
 
 const LogSwitch = () => {
@@ -227,7 +227,17 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
             >
               Help
             </div>
-            <div className={styles.nameCircle}>{userInitial}</div>
+            {/* <div className={styles.nameCircle}>{userInitial}</div> */}
+                {userData ? (
+      <Avatar
+        src={`${BASE_IMAGE}/users/${userData}`}
+        alt="Profile"
+        size={40}
+        style={{ backgroundColor: "#f0f0f0" }}
+      />
+    ) : (
+      <div className={styles.nameCircle}>{userInitial}</div>
+    )}
           </>
 
         )}

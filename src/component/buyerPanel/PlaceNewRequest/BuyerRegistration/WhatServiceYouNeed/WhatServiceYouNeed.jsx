@@ -142,9 +142,17 @@ const WhatServiceYouNeed = ({
           component.types.includes("postal_code")
         )?.long_name;
 
-        const cityName = place.address_components.find((component) =>
-          component.types.includes("locality")
-        )?.long_name;
+        // const cityName = place.address_components.find((component) =>
+        //   component.types.includes("locality")
+        // )?.long_name;
+        let cityName =
+  place.address_components.find(component =>
+    component.types.includes("locality")
+  )?.long_name ||
+  place.address_components.find(component =>
+    component.types.includes("administrative_area_level_3")
+  )?.long_name;
+  console.log(cityName, "cityName");
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
         )?.long_name;

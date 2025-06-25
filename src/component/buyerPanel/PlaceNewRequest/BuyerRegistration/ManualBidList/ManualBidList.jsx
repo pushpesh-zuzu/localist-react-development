@@ -157,9 +157,9 @@ setIsOpen(true)
   <div className={styles.description}>
     <div className={styles.messageText}>
       <div className={styles.meName}></div>
-      <div className={styles.meName}>Requested a Quote</div>
+      <div className={styles.meName}>{item?.activty_log?.log}</div>
     </div>
-    <div className={styles.timestamp}>5 May 2025, 15:51</div>
+    <div className={styles.timestamp}>{item?.activty_log?.date_time}</div>
   </div>
 </div>
 

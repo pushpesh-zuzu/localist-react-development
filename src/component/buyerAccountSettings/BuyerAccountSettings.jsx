@@ -63,25 +63,7 @@ const BuyerAccountSettings = () => {
       dispatch(updateProfileImageData(formData)).then((result) => {
         if(result){
           showToast("success",result?.message)
-          updateLocalStorageValue('barkUserToken', 'name', userDetails?.name)
-            updateLocalStorageValue("registerDataToken","name",userDetails?.name)
-             const storedData = localStorage.getItem("barkUserToken");
-             const registerData = localStorage.getItem("registerDataToken")
-        
-        
-            const parsedData = JSON.parse(storedData);
-            const registerDatas = JSON.parse(registerData)
-            if(parsedData) {
-
-              parsedData.name = userDetails?.name;
-              dispatch(setUserToken(parsedData));
-            }
-            if(registerDatas){
-
-              registerDatas.name = userDetails?.name
-              dispatch(setRegisterData(registerDatas))
-            }
-        }
+              }
       });
     }
   };

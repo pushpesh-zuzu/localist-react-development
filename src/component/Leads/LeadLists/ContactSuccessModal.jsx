@@ -16,7 +16,7 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail,reque
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  const userData = userToken?.id ? userToken?.id : registerData?.id
+  const userData = userToken?.user_id ? userToken?.user_id : registerData?.user_id
   console.log(details,"details")
   if (!isOpen) return null;
 
