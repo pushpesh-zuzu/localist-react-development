@@ -42,14 +42,14 @@ import { AllServicesData } from "../constant/CloneCategory";
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],
   "financial-and-accounting":["Accounting", "Bookkeeping Services"],
-  "general-accounting": ["Accounting", "Bookkeeping Services"],
+  // "general-accounting": ["Accounting", "Bookkeeping Services"],
 
   business: ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };
 const endpointServiceMap = {
   // "financial-and-accounting": ["general Accounting"],
   "financial-and-accounting":["Accounting", "Bookkeeping Services"],
-  "general-accounting": ["Accounting", "Bookkeeping Services"],
+  // "general-accounting": ["Accounting", "Bookkeeping Services"],
   "business": ["Accounting", "Bookkeeping Services", "Business Consulting", "Social Media Marketing"],
 };
 
@@ -59,7 +59,7 @@ const endpointServiceMap = {
 const breadcrumbHierarchy = {
   business: ["Business"],
   "financial-and-accounting": ["Business", "Financial and Accounting"],
-  "general-accounting": ["Business", "Financial and Accounting", "General Accounting"],
+  // "general-accounting": ["Business", "Financial and Accounting", "General Accounting"],
   accountants: ["Business", "Financial and Accounting", "General Accounting", "Accounting"],
   "bookkeeping-services": ["Business", "Financial and Accounting", "General Accounting", "Bookkeeping Services"]
 };
