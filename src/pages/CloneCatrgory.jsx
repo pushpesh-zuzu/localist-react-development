@@ -76,12 +76,12 @@ const breadcrumbHierarchy = {
 
 const CloneCategory = ({ accountHeader, subHeader }) => {
   const location = useLocation();
-  const panelImage =
-    location.pathname === "/en/gb/business"
-      ? bgImage
-      : location.pathname === "/en/gb/financial-and-accounting"
-      ? financeBg
-      : financeBg;
+// Use includes instead of strict match
+const panelImage = location.pathname.includes("/en/gb/business")
+? bgImage
+: location.pathname.includes("/en/gb/financial-and-accounting")
+? financeBg
+: "";
 
   
   const fullPath = location.pathname;
