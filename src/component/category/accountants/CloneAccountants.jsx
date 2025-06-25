@@ -14,7 +14,8 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CloneAccountants = ({header,subHeader}) => {
+const CloneAccountants = ({header,subHeader,panelImage}) => {
+  console.log(panelImage)
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
@@ -136,9 +137,13 @@ const CloneAccountants = ({header,subHeader}) => {
     dispatch(questionAnswerData({ service_id: selectedService.id }));
     setShowModal(true);
   };
+  
+const style = {
+  backgroundImage: `url(${panelImage})`,
+};
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={style}>
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
           <h1>

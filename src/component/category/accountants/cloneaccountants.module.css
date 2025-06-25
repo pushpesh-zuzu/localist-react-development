@@ -1,6 +1,6 @@
 .container {
   position: relative;
-  background-image: url("../../../assets/Images/bgImage.svg");
+  /* background-image: url("../../../assets/Images/bgImage.svg"); */
   background-size: cover;
   background-position: center; /* Push image down by 30px */
   background-repeat: no-repeat;

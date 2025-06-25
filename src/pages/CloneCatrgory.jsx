@@ -37,7 +37,8 @@ import { useLocation, Link } from "react-router-dom";
 import { PopularCategoriesData } from "../constant/CloneCategory";
 import { AllServicesData } from "../constant/CloneCategory";
 //AllServicesData
-
+import bgImage from "../assets/Images/bgImage.svg";
+import financeBg from "../assets/Images/financeImg.svg"
 
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],
@@ -75,6 +76,14 @@ const breadcrumbHierarchy = {
 
 const CloneCategory = ({ accountHeader, subHeader }) => {
   const location = useLocation();
+  const panelImage =
+    location.pathname === "/en/gb/business"
+      ? bgImage
+      : location.pathname === "/en/gb/financial-and-accounting"
+      ? financeBg
+      : financeBg;
+
+  
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
 
@@ -117,7 +126,7 @@ const filteredAllServicesData = AllServicesData
 
   return (
     <div>
-      <Accountants header={accountHeader} subHeader={subHeader} />
+      <Accountants header={accountHeader} subHeader={subHeader} panelImage={panelImage}/>
 
       {endpoint !== "business" && (
   <div className={styles.findAccountInfoContainer}>
