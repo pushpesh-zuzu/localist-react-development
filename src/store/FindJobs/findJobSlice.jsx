@@ -55,7 +55,7 @@ phone:""
     // suite: "",
     service_id: [],
     auto_bid: 1,
-    miles2: "",
+    miles2: "1",
     expanded_radius:"",
     coordinates2:""
 
