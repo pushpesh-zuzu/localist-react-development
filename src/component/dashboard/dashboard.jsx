@@ -12,8 +12,9 @@ const Dashboard = () => {
         <div className="greeting">Good afternoon, chander!</div>
         <div className="date">Friday, 7 Mar 2:05pm</div>
       </header>
-
+      <div style={{visibility:'hidden'}}>hhh</div>
 <div className="dashboard-content-parent">
+  
       <div className="dashboard-content">
         <div className="dashboard-title">
           <p>
