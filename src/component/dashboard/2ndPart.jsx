@@ -18,8 +18,12 @@ const DashboardCards = () => {
   </div>
 
   <div className="lead-circle">
-    1065<br /><span>Leads</span>
-  </div>
+  <div className="lead-number">1065</div>
+  <div className="lead-label">Leads</div>
+</div>
+
+
+
   <p className="unread">1058 Unread leads</p>
 </div>
 
@@ -41,10 +45,11 @@ const DashboardCards = () => {
         <div className="card add-services">
           <h3>Add New Services</h3>
           <form>
-            <label><input type="checkbox" /> Lorem Ipsum has been the industry’s</label>
-            <label><input type="checkbox" /> Lorem Ipsum has been the</label>
-            <label><input type="checkbox" /> Lorem Ipsum has been the industry’s</label>
-            <label><input type="checkbox" /> Lorem Ipsum</label>
+          <label><input type="checkbox" className="checkbox" /> Lorem Ipsum has been the</label>
+
+            <label><input type="checkbox" className="checkbox" /> Lorem Ipsum has been the</label>
+            <label><input type="checkbox"  className="checkbox"/> Lorem Ipsum has been the industry’s</label>
+            <label><input type="checkbox"  className="checkbox"/> Lorem Ipsum</label>
             <button type="submit">Apply</button>
           </form>
         </div>
@@ -67,13 +72,13 @@ const DashboardCards = () => {
       <div className="row">
         <div className="card profile">
           <div className="avatar">C</div>
-          <h3>Chander</h3>
-          <p>Your profile is 27% complete <span className="edit-link">Edit</span></p>
+          <span className="profilename">Chander</span>
+          <div className="profileheadline">Your profile is 27% complete <span className="edit-link">Edit</span></div>
           <div className="progress-bar">
             <div className="progress" style={{ width: "27%" }}></div>
           </div>
           <div className="hint-box">
-            <p>Completing your profile is a great way to appeal to customers</p>
+            <div>Completing your profile is a great way to appeal to customers</div>
             <button>Edit Profile</button>
           </div>
         </div>
@@ -88,8 +93,8 @@ const DashboardCards = () => {
     <span className="icon">❓</span> Help
   </h3>
   <div className="help-box">
-    <p>
-      Visit <span className="link">help centre</span> for tips & advice.
+    <p >
+      Visit <span className="link" >help centre</span> for tips & advice.
     </p>
     <p>
       <span className="icon">📧</span> 0000000000

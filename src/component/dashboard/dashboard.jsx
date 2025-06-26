@@ -1,20 +1,25 @@
 import React from 'react';
 import './Dashboard.css';
 import DashboardCards from './2ndPart';
-
+import polygon from '../../assets/Icons/polygon.png'
+import PolygonArrowDown from '../../assets/Icons/PolygonArrowDown.png'
+//PolygonArrowDown
 const Dashboard = () => {
   return (
-    <>
+    <div>
     <div className="dashboard-wrapper">
       <header className="dashboard-header">
         <div className="greeting">Good afternoon, chander!</div>
         <div className="date">Friday, 7 Mar 2:05pm</div>
       </header>
 
+<div className="dashboard-content-parent">
       <div className="dashboard-content">
-        <h2 className="dashboard-title">
-          Welcome to your personalised dashboard <span>You can manage everything on your account</span>
-        </h2>
+        <div className="dashboard-title">
+          <p>
+          Welcome to your personalised dashboard <span>You can manage everything on your account</span></p>
+         <div> <span><img src={polygon}/></span></div>
+        </div>
 
         <div className="main-section">
           <div className="left-column">
@@ -22,15 +27,15 @@ const Dashboard = () => {
             <h5 className="section-sub-title">We will have the options as per below:</h5>
             <ul className="steps-list">
               <li><strong>1</strong> Customers share their needs <p>Customers answer a few key questions to outline their requirements.</p></li>
-              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #D9D9D9' ,marginRight:'10%' }} />
               <li><strong>2</strong> We send you relevant leads <p>You instantly receive leads that match your preferences via email and app.</p></li>
-              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #D9D9D9' ,marginRight:'10%' }} />
               <li><strong>3</strong> You select the leads you want <p>Access customer contact details immediately.</p></li>
-              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #D9D9D9' ,marginRight:'10%' }} />
               <li><strong>4</strong> You reach out to the customer <p>Call or email the customer to offer your services.</p></li>
-              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #D9D9D9' ,marginRight:'10%' }} />
               <li><strong>5</strong> You get hired <p>No commissions, no hidden fees—just a straightforward process.</p></li>
-              <hr style={{ borderTop: '1px solid #000' ,marginRight:'10%' }} />
+              <hr style={{ borderTop: '1px solid #D9D9D9' ,marginRight:'10%' }} />
             </ul>
             
           </div>
@@ -78,25 +83,29 @@ const Dashboard = () => {
             </div>
 
             <div className="help-box">
-              <h4>❓&nbsp; Need Help?</h4>
-              <p>You can find lots of tips and tricks for getting the most out of Localist in our help centre.</p>
-              <p>
-                We also have an award-winning customer success team dedicated to helping you.
-              </p>
-              <p className="contact-info">
-              <p>  📞 0000000000 &nbsp; &nbsp; 
-              📧 india@localist.com </p>
-               
-               <span > (open 24 hours a day, 7 days a week)</span>
-              </p>
-            </div>
+  <h4>❓ Need Help?</h4>
+  <p>You can find lots of tips and tricks for getting the most out of Localist in our help centre.</p>
+  <p>We also have an award-winning customer success team dedicated to helping you.</p>
+  
+  <div className="contact-info">
+    <p>📞 0000000000 &nbsp;&nbsp; 📧 india@localist.com</p>
+    <div>(open 24 hours a day, 7 days a week)</div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
-
       <footer className="dashboard-footer">
         No commissions, no hidden fees—just a straightforward process.
       </footer>
+      <div className='hideIcon'>
+      <span>Hide</span>
+      <img src={PolygonArrowDown}/>
+      </div>
+      </div>
+
+      
     </div>
 
 
@@ -106,7 +115,7 @@ const Dashboard = () => {
 
 
     <DashboardCards/>
-    </>
+    </div>
   );
 };
 
