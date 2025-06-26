@@ -223,7 +223,7 @@
   }
 
   .image {
-    width: 171px;
+    width: 200px;
     height: 114px;
     object-fit: cover;
   }
@@ -291,6 +291,11 @@
     top: 25px;
     width: 18px;
     height: 18px;
+  }
+    .image {
+    width: 185px;
+    height: 114px;
+    object-fit: cover;
   }
 }
 
