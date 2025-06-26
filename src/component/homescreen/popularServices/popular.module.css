@@ -278,6 +278,13 @@
     font-size: 18px;
     line-height: 30px;
   }
+  .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 22px;
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 340px) {
@@ -297,5 +304,12 @@
   .arrow {
     width: 23px;
     height: 23px;
+  }
+   .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 24px;
+    width: 18px;
+    height: 18px;
   }
 }
