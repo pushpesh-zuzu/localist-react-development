@@ -3,11 +3,17 @@
     font-family: sans-serif;
     padding: 25px 88px;
   }
-  
+  .help-box p:first-child{
+font-weight: bold;
+  }
+  .help-box p:first-child > span{
+    text-decoration: underline;
+      }
+
   .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 16px;
     margin-bottom: 20px;
   }
@@ -16,14 +22,16 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 1.1% 22px 3% 22px;
+    padding: 14px 28px 22px 28px;
     flex: 0 1 calc(30% - 16px);
     box-sizing: border-box;
     font-size: 15px;
   }
-  .card-header h3{
-font-size: 20px;
-line-height: auto;
+  .card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    /* margin-bottom: 1rem; */
   }
   @media (max-width: 1024px) {
     .card {
@@ -39,8 +47,8 @@ line-height: auto;
   
   .card-title {
     font-size: 20px;
-    margin-bottom: 4px;
-    
+    margin-bottom: 16px;
+    color: black;
     line-height: 20px;
   }
   
@@ -48,7 +56,7 @@ line-height: auto;
     font-size: 14px;
     font-weight: 500;
     color: #222;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     display: flex;
     justify-content: space-between;
   }
@@ -61,11 +69,12 @@ line-height: auto;
     font-weight: bold;
     color: #111;
     font-size: 14px;
+
   }
   
   .tags .tag {
     display: inline-block;
-    margin: 4px 4px 12px 0;
+    margin: 4px 4px 18px 0;
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 13px;
@@ -74,15 +83,15 @@ line-height: auto;
   }
   
   .tags2 .tag2{
-    /* margin-top: 40px; */
-    padding: 6px 12px;
+   
+    padding: 6px 18px;
     border-radius: 20px;
     font-size: 13px;
     font-weight: 600;
-    color: #000;
+    color: #000 !important;
     
   }
-
+ 
 
   .tag.blue { background: #e0f7ff; }
   .tag.yellow { background: #fef9c3; }
@@ -98,13 +107,13 @@ line-height: auto;
   .leads .lead-circle {
     background: #e1f6fc;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 135px;
+    height: 135px;
     text-align: center;
     line-height: 120px;
     font-size: 24px;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 1.1rem auto;
     position: relative;
   }
   
@@ -119,13 +128,22 @@ line-height: auto;
     font-size: 15px;
     color: #333;
   }
-  
-  .add-services form label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 15px;
+
+  .add-services h3{
+    margin-bottom: 1rem;
   }
-  
+  .add-services form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: black;
+    line-height: 20px;
+   
+  }
+  form label:last-of-type {
+    margin-bottom: 1.5rem;
+  }
   .add-services button {
     background: #00bfff;
     color: #fff;
@@ -135,11 +153,16 @@ line-height: auto;
     cursor: pointer;
     font-size: 15px;
     font-weight: bold;
+
   }
+  
+
+
   
   .notification-section {
     text-align: center;
     margin: 30px 0;
+    width: 98%;
   }
   
   .notification-title {
@@ -180,94 +203,367 @@ line-height: auto;
     font-weight: bold;
     color: #000;
   }
+ 
+ 
+
+
+ 
   
-  .profile .avatar {
-    background: #ffcfd0;
+  .lead-circle {
+ 
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    background-color: #00AFE3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
     text-align: center;
-    line-height: 40px;
+    overflow: hidden;
+    /* padding: 50px; */
+  }
+  
+  .lead-number {
+    font-size: 35px;
     font-weight: bold;
-    color: white;
+    line-height: 1;
+    margin: 0;
   }
   
-  .progress-bar {
-    background: #eee;
-    height: 6px;
-    border-radius: 3px;
-    margin-top: 6px;
-    margin-bottom: 10px;
-  }
-  
-  .progress {
-    background: #00bfff;
-    height: 6px;
-    border-radius: 3px;
-  }
-  
-  .hint-box {
-    background: #eafaff;
-    padding: 10px;
-    border-radius: 8px;
+  .lead-label {
     font-size: 14px;
-    margin-top: 10px;
+    margin: 4px 0 0 0;
+    line-height: 1;
   }
   
-  .hint-box button {
-    margin-top: 8px;
-    background: #00bfff;
-    color: white;
-    padding: 4px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  /* === Profile Card === */
+.card.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.avatar {
+  background-color: #f3b3b3;
+  color: white;
+  font-weight: bold;
+  font-size: 32px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.profilename {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.profileheadline {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.profileheadline .edit-link {
+  margin-left: 8px;
+  color: #666;
+  text-decoration: underline;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  background-color: #e0e0e0;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+.progress {
+  background-color: #00AFE3;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.hint-box {
+  background-color: #e6f7fc;
+  padding: 12px 28px;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: -1.4rem;
+  margin-left: -1.74rem;
+  display: flex;
+  justify-content: space-between;
+ align-items: center;
+}
+
+.hint-box>div{
+  /* max-width: 70%; */
+}
+
+.hint-box button {
+  /* margin-top: 12px; */
+  background-color: #00bfff;
+  color: white;
+  padding: 7px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 18px;
+  font-weight: bold;
+  cursor: pointer;
+ white-space: nowrap;
+ /* margin-left: 3%; */
+}
+
+/* === Responses Card === */
+.card.responses h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.response-msg {
+  background-color: #fde8e8;
+  padding: 20px;
+  border-radius: 4px;
+  color: #111;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+/* === Help Card === */
+.card.help .card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.card > .help-box {
+  background-color: #e6f7fc;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.card > .help-box  p {
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card > .help-box > .link {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* -------- Tablet (max-width: 1024px) -------- */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    padding: 25px 30px;
+  }
+
+  .card {
+    flex: 0 1 calc(48% - 16px);
+  }
+
+  .hint-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .hint-box > div {
+    max-width: 100%;
+  }
+
+  .lead-circle {
+    width: 110px;
+    height: 110px;
+  }
+
+  .lead-number {
+    font-size: 28px;
+  }
+
+  .lead-label {
     font-size: 13px;
   }
-  
-  .response-msg {
-    background: #ffecec;
-    padding: 12px;
-    border-radius: 4px;
-    font-size: 15px;
-    color: #444;
+
+  .unread {
+    font-size: 14px;
   }
-  
-  
-.help {
-    font-size: 15px;
-  }
-  
-  .help .link {
-    font-weight: bold;
-    text-decoration: underline;
-    color: #000;
-  }
-  .help > span{
-    font-weight: bold;
-    color: #000;
-  }
-  .help .icon {
-    margin-right: 6px;
-    display: inline-block;
+
+  .notification-title {
+    flex-direction: column;
+    gap: 8px;
     font-size: 16px;
-    vertical-align: middle;
   }
-  
-  .help-box {
-    background-color: #E3F6FC;
-    padding: 14px;
-    border-radius: 6px;
-    margin-top: 8px;
-    line-height: 1.6;
+
+  .notification-button {
+    font-size: 13px;
+    padding: 6px 18px;
   }
-  
-  .help-box p {
-    margin: 6px 0;
+
+  .notification-banner {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+
+/* -------- Mobile (max-width: 640px) -------- */
+@media (max-width: 640px) {
+  .dashboard-container {
+    padding: 20px 16px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    flex: 0 1 100%;
+    padding: 16px 20px 24px 22px;
+  }
+
+  .card-title,
+  .card.responses h3,
+  .card.help .card-title,
+  .profilename {
+    font-size: 17px;
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+
+  .profileheadline {
+    font-size: 13px;
+  }
+
+  .edit-link,
+  .view-link {
+    font-size: 12px;
+  }
+
+  .hint-box {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hint-box button {
+    font-size: 13px;
+    padding: 4px 18px;
+  }
+
+  .highlight-box {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .tags .tag {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .tags2 .tag2{
+    font-size: 14px;
+  }
+
+ 
+
+
+  .add-services label {
+    font-size: 13px;
+    /* flex-direction: column; */
+    align-items: flex-start;
+  }
+
+  .add-services button {
+    font-size: 14px;
+    padding: 5px 20px;
+    /* margin-top: 12px; */
+  }
+
+  .response-msg {
+    font-size: 13px;
+    padding: 22px;
+    margin-top: 2rem;
+  }
+
+  .notification-title {
+    text-align: center;
     font-size: 15px;
+    gap: 10px;
   }
+
+  .notification-button {
+    font-size: 12px;
+    padding: 5px 16px;
+  }
+
+  .notification-banner {
+    font-size: 13px;
+    padding: 10px;
+   
+  }
+.notification-banner strong {
+  line-height: 24px;
+}
+  .card > .help-box {
+    font-size: 13px;
   
-  .help-box .icon {
-    color: #00bfff;
   }
+
+  .card > .help-box { p {
+    flex-direction: row;
+    gap: 6px;
+   
+  }
+ 
+}
+/* Profile Card */
+
+.card.profile .profilename {
+  font-size: 16px;
+}
+
+.card.profile .profileheadline {
+  font-size: 13px;
+}
+
+.card.profile > .hint-box {
+  padding: 12px 23px;
+  margin-bottom: -1.5rem;
+  margin-left: -22px !important;
+}
+
+.card.profile .hint-box button {
+  font-size: 13px;
+  padding: 4px 18px;
+}
+
+.responses{
+  padding: 2rem 1rem 4.5rem 1rem;
+}
+
+
+
+}
