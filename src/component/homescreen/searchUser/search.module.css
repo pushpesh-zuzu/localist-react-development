@@ -184,6 +184,21 @@
 .searchItem:hover {
   background: #f0f0f0;
 }
+@media screen and (max-width: 2000px) and (min-width:1500px){
+  
+  .searchBox {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  width: 39vw;
+  height: 51px;
+}
+  
+}
 
 @media screen and (max-width: 1300px) {
   .input {
