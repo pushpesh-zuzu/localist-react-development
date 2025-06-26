@@ -151,8 +151,8 @@ console.log(details,"details")
 
   setFormState((prev) => ({
     ...prev,
-    company_youtube_links: [...prev.company_youtube_links, link],
-    company_youtube_link: "", // clear input
+    company_youtube_links: "",
+    company_youtube_link: [...prev.company_youtube_links, link], // clear input
   }));
 
   setAddModalOpen(false);
@@ -197,8 +197,8 @@ console.log(details,"details")
     setFormState((prev) => ({
       ...prev,
       company_photos: [], 
-      company_youtube_link: "",
-      company_youtube_links: youtubeLink ? [youtubeLink] : [],
+      company_youtube_links: "",
+      company_youtube_link: youtubeLink ? [youtubeLink] : [],
     }));
 
     setPhotoPreviews(previews);
@@ -286,9 +286,9 @@ console.log(details,"details")
           </p>
           <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube video link</button>
           <div  className={styles.imageContainer}>
-          {formState.company_youtube_links.length > 0 ? (
+          {formState.company_youtube_link.length > 0 ? (
   <div className={styles.videoContainer}>
-    {formState.company_youtube_links?.map((link, idx) => (
+    {formState.company_youtube_link?.map((link, idx) => (
       <iframe
         key={idx}
         width="215"

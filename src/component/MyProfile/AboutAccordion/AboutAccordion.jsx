@@ -69,7 +69,7 @@ extra_links: "",
     accre_image: useRef(),
     company_photos: useRef()
   };
-
+console.log(details?.profile_image,"details")
   useEffect(()=>{
     if(details?.id){
 // setFormState(details)
@@ -213,6 +213,8 @@ useEffect(() => {
     toast.success("Profile updated successfully!");
     updateLocalStorageValue('barkUserToken', 'name', formState?.name)
     updateLocalStorageValue("registerDataToken","name",formState?.name)
+     updateLocalStorageValue('barkUserToken', 'profile_image', details?.profile_image)
+    updateLocalStorageValue("registerDataToken","profile_image",details?.profile_image)
      const storedData = localStorage.getItem("barkUserToken");
      const registerData = localStorage.getItem("registerDataToken")
 
@@ -222,11 +224,13 @@ useEffect(() => {
     if(parsedData) {
 
       parsedData.name = formState?.name;
+      parsedData.profile_image = details?.profile_image;
       dispatch(setUserToken(parsedData));
     }
     if(registerDatas){
 
       registerDatas.name = formState?.name
+      registerDatas.profile_image = details?.profile_image
       dispatch(setRegisterData(registerDatas))
     }
 

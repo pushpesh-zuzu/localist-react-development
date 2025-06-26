@@ -51,14 +51,32 @@ const LeadsCards = ({ enoughCredit }) => {
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
 
+  // useEffect(() => {
+  //   const leadRequestData = {
+  //     user_id: userToken?.remember_tokens
+  //       ? userToken?.remember_tokens
+  //       : registerData?.remember_tokens,
+  //   };
+  //   dispatch(getLeadRequestList(leadRequestData));
+  // }, []);
   useEffect(() => {
-    const leadRequestData = {
-      user_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-    };
+  const leadRequestData = {
+    user_id: userToken?.remember_tokens
+      ? userToken?.remember_tokens
+      : registerData?.remember_tokens,
+  };
+
+  // Initial call
+  dispatch(getLeadRequestList(leadRequestData));
+
+  // Set up interval
+  const intervalId = setInterval(() => {
     dispatch(getLeadRequestList(leadRequestData));
-  }, []);
+  }, 60000);
+
+  return () => clearInterval(intervalId);
+}, []);
+
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
   };
@@ -90,7 +108,7 @@ const LeadsCards = ({ enoughCredit }) => {
   //     dispatch(getLeadRequestList(data))
   //   });
   // }
-  console.log(selectedItem, "purchasedData");
+  // console.log(selectedItem, "purchasedData");
   //   const handleContinue = () => {
   //   if (!selectedItem) return;
   //   if(totalCredit?.plan_purchased === 0){
@@ -321,10 +339,10 @@ const LeadsCards = ({ enoughCredit }) => {
   //   // setLeadRequestData(item)
   //   setLeadViewDetails(!leadViewDetails)
   // }
-  const handlePhoneCall = (item) => {
-    const phoneNumber = item?.phone || "";
-    window.open(`tel:${phoneNumber}`, "_blank");
-  };  
+  // const handlePhoneCall = (item) => {
+  //   const phoneNumber = item?.phone || "";
+  //   window.open(`tel:${phoneNumber}`, "_blank");
+  // };  
   return (
     <>
       {leadRequestLoader ? (

@@ -16,8 +16,10 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail,reque
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
-  const userData = userToken?.user_id ? userToken?.user_id : registerData?.user_id
-  console.log(details,"details")
+  // const userData = userToken?.user_id ? userToken?.user_id : userToken?.id ? userToken?.id : registerData?.user_id ? registerData?.user_id : registerData?.id
+  const userData = userToken?.user_id || userToken?.id || registerData?.user_id || registerData?.id;
+
+  console.log(details,repliesBtn,"details")
   if (!isOpen) return null;
 
 //   const handleResponseChange = (clickName) => {
@@ -124,8 +126,8 @@ const handleResponseChange = (clickName) => {
   const phoneNumber =
     details?.phone || detail?.phone || repliesBtn?.phone || "";
   const email =
-    details?.email || detail?.email || repliesBtn?.email || "";
-
+    details?.customer?.email || detail?.email || repliesBtn?.email || "";
+console.log(phoneNumber,email, "phoneNumber");
   if (clickName?.name === "mobile") {
     responseStatus.type = "mobile";
     url = `tel:${phoneNumber}`;
@@ -144,7 +146,8 @@ const handleResponseChange = (clickName) => {
     if (result) {
       showToast("success", result?.message);
       if (url) {
-        window.open(url, "_blank");
+        // window.open(url);
+        window.location.href = url; 
       }
       onClose();
     }

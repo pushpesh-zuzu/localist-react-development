@@ -223,7 +223,7 @@
   }
 
   .image {
-    width: 171px;
+    width: 200px;
     height: 114px;
     object-fit: cover;
   }
@@ -278,6 +278,25 @@
     font-size: 18px;
     line-height: 30px;
   }
+  .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 22px;
+    width: 20px;
+    height: 20px;
+  }
+    .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+  }
+    .image {
+    width: 185px;
+    height: 114px;
+    object-fit: cover;
+  }
 }
 
 @media (max-width: 340px) {
@@ -297,5 +316,12 @@
   .arrow {
     width: 23px;
     height: 23px;
+  }
+   .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 24px;
+    width: 18px;
+    height: 18px;
   }
 }

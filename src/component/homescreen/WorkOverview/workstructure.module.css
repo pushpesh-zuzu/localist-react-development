@@ -279,11 +279,44 @@
 
 @media screen and (max-width: 390px) {
   .stepContainer {
-    width: 72%;
+    width: 67%;
   }
   .workContainer {
     padding: 16px 5%;
   
     
+  }
+  .workstepContainer {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    gap: 50px;
+  }
+   .descriptionIcon {
+    width: 64.46px;
+    height: 64.46px;
+    background: #000000;
+    border-radius: 50%;
+    position: relative;
+    top: -4px;
+    margin: -50px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .descriptionIcon img {
+    width: 44.99px;
+    height: 44.99px;
+    object-fit: contain;
+  }
+    .stepDescription {
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    color: #000;
+    margin-top: 0px;
+    font-weight: 600;
   }
 }

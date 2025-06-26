@@ -7,32 +7,32 @@ import FeelingStuckFooter from "./FeelingStuckFooter/FeelingStuckFooter";
 import CreditMatch from "./CreditMatch/CreditMatch";
 
 const LeadLists = () => {
-  const timerRef = useRef(null);
+  // const timerRef = useRef(null);
 
-  const resetTimer = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-    }
-    timerRef.current = setTimeout(() => {
-      window.location.reload(); // Refresh the page after 1 minute of inactivity
-    }, 60000); // 60,000 ms = 1 minute
-  };
+  // const resetTimer = () => {
+  //   if (timerRef.current) {
+  //     clearTimeout(timerRef.current);
+  //   }
+  //   timerRef.current = setTimeout(() => {
+  //     window.location.reload(); // Refresh the page after 1 minute of inactivity
+  //   }, 60000); // 60,000 ms = 1 minute
+  // };
 
-  useEffect(() => {
-    const events = ['mousemove', 'keydown', 'scroll', 'click'];
+  // useEffect(() => {
+  //   const events = ['mousemove', 'keydown', 'scroll', 'click'];
 
-    // Attach event listeners
-    events.forEach(event => window.addEventListener(event, resetTimer));
+  //   // Attach event listeners
+  //   events.forEach(event => window.addEventListener(event, resetTimer));
 
-    // Set initial timer
-    resetTimer();
+  //   // Set initial timer
+  //   resetTimer();
 
-    // Cleanup listeners on unmount
-    return () => {
-      events.forEach(event => window.removeEventListener(event, resetTimer));
-      clearTimeout(timerRef.current);
-    };
-  }, []);
+  //   // Cleanup listeners on unmount
+  //   return () => {
+  //     events.forEach(event => window.removeEventListener(event, resetTimer));
+  //     clearTimeout(timerRef.current);
+  //   };
+  // }, []);
 
   return (
     <div className={styles.leadListsContainer}>
