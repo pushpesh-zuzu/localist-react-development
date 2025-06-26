@@ -3,6 +3,10 @@ import './Dashboard.css';
 import DashboardCards from './2ndPart';
 import polygon from '../../assets/Icons/Polygon.png'
 import PolygonArrowDown from '../../assets/Icons/PolygonArrowDown.png'
+import playbtn from '../../assets/Icons/playbtn.png'
+import question from '../../assets/Icons/question.svg'
+import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
+import phone from '../../assets/Icons/phoneIcon.svg'
 //PolygonArrowDown
 const Dashboard = () => {
   return (
@@ -48,7 +52,8 @@ const Dashboard = () => {
             </div> */}
             <div className="video-box">
   <div className="play-button">
-    <svg
+    <img src={playbtn} style={{width:'70px' ,height:'70px'}}/>
+    {/* <svg
       xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
@@ -60,7 +65,7 @@ const Dashboard = () => {
       strokeLinejoin="round"
     >
       <polygon points="5 3 19 12 5 21 5 3" />
-    </svg>
+    </svg> */}
   </div>
 </div>
 
@@ -84,12 +89,12 @@ const Dashboard = () => {
             </div>
 
             <div className="help-box">
-  <h4>❓ Need Help?</h4>
+  <h4><img src={question}/>  Need Help?</h4>
   <p>You can find lots of tips and tricks for getting the most out of Localist in our help centre.</p>
   <p>We also have an award-winning customer success team dedicated to helping you.</p>
   
   <div className="contact-info">
-    <p>📞 0000000000 &nbsp;&nbsp; 📧 india@localist.com</p>
+    <p><img src={emailIcon1}/> &nbsp;  0000000000 &nbsp;&nbsp; <img src={phone}/> &nbsp;  india@localist.com</p>
     <div>(open 24 hours a day, 7 days a week)</div>
   </div>
 </div>

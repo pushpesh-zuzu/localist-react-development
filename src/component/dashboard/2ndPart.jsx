@@ -1,6 +1,8 @@
 import React from "react";
 import "./DashboardCards.css";
-
+import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
+import phone from '../../assets/Icons/phoneIcon.svg'
+import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
 const DashboardCards = () => {
   return (
     <div className="dashboard-container">
@@ -90,17 +92,17 @@ const DashboardCards = () => {
 
         <div className="card help">
   <h3 className="card-title">
-    <span className="icon">❓</span> Help
+    <span className="icon"><img src={questionBlueIcon}/></span> Help
   </h3>
   <div className="help-box">
     <p >
       Visit <span className="link" >help centre</span> for tips & advice.
     </p>
     <p>
-      <span className="icon">📧</span> 0000000000
+      <span className="icon"><img src={emailIcon1}/></span> 0000000000
     </p>
     <p>
-      <span className="icon">🔗</span> india@localist.com
+      <span className="icon"><img src={phone} /></span> india@localist.com
     </p>
     <p>(open 24 hours a day, 7 days a week)</p>
   </div>

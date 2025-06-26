@@ -6,10 +6,23 @@
   .help-box p:first-child{
 font-weight: bold;
   }
+  
   .help-box p:first-child > span{
     text-decoration: underline;
       }
-
+      .help-box p {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* spacing between icon and text */
+        margin: 4px 0;
+      }
+      
+      .help-box .icon img {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
+      
   .row {
     display: flex;
     flex-wrap: wrap;
@@ -20,10 +33,10 @@ font-weight: bold;
   
   .card {
     background: #fff;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 14px 28px 22px 28px;
-    flex: 0 1 calc(30% - 16px);
+    padding: 12px 24px 13px 24px;
+    flex: 0 1 calc(32% - 0px);
     box-sizing: border-box;
     font-size: 15px;
   }
