@@ -31,6 +31,8 @@ margin-bottom: 1rem;
     padding: 19px;
     font-weight: bold;
     color: black;
+    /* text-align: center; */
+    align-items: center;
   }
   
   .dashboard-content {
