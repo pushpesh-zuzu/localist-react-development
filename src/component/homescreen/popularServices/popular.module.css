@@ -285,6 +285,13 @@
     width: 20px;
     height: 20px;
   }
+    .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+  }
 }
 
 @media (max-width: 340px) {
