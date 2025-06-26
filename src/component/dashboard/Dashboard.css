@@ -300,7 +300,7 @@ line-height: 20px;
   }
 
   .video-box {
-    width: 100%;
+    width: 97%;
     height: auto;
     aspect-ratio: 16 / 9;
   }
@@ -331,7 +331,18 @@ line-height: 20px;
     font-size: 22px;
     padding: 20px;
   }
+  .info-box{
+    width: 93.7%;
+  }
+ .help-box{
+  width: 95%;
+ }
+ .dashboard-footer{
+ max-width: 93%;
+  /* margin: 0 auto; */
+  /* margin:0 2% 0 1; */
  
+ }
 }
 
 
@@ -401,7 +412,7 @@ line-height: 20px;
   .video-box {
     aspect-ratio: 16 / 9;
     width: 97%;
-    
+   
   }
 
   .view-leads-blue {
