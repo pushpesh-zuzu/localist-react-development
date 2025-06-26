@@ -58,6 +58,12 @@ const SliderComponent = ({ subcategory }) => {
       breakpoints: {
         "(max-width: 1024px)": { slides: { perView: 3, spacing: 15 } },
         "(max-width: 768px)": { slides: { perView: 2, spacing: 5 } },
+         "(max-width: 480px)": {
+          slides: { perView: 1.7, spacing: 15 },
+        },
+         "(max-width: 380px)": {
+          slides: { perView: 1.6, spacing: 10 },
+        }
       },
     },
     [AutoplayPlugin]

@@ -757,7 +757,8 @@
     padding: 0px 16px;
   }
   .loginBtn {
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 600;
   }
   .popover_about_wrap {
     width: auto;
@@ -802,7 +803,7 @@
   .icon {
     position: absolute;
     top: 50%;
-    right: 35px;
+    right: 15px;
     transform: translateY(-50%);
     color: #888;
     font-size: 18px;
@@ -813,7 +814,7 @@
   .icon {
     position: absolute;
     top: 50%;
-    right: 15px;
+    right: 8px;
     transform: translateY(-50%);
     color: #888;
     font-size: 18px;

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import searchIcon from "../../../assets/Images/search.svg";
+import searchIcon from "../../../assets/Icons/MyResponse/searchIcon.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterData, setRegisterStep } from "../../../store/FindJobs/findJobSlice";
