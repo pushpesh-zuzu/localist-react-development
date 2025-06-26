@@ -57,6 +57,12 @@ const CreditMatch = () => {
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
+        const data = {
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+    };
+    dispatch(totalCreditData(data))
       } else if (result?.success === false) {
         setIsAddModalOpen(true);
         // navigate("/payment-details");

@@ -41,6 +41,7 @@ const CustomerQuestions = ({ selectedService }) => {
       setIsRemoved(false);
     }
   }, [selectedService]);
+  console.log(selectedService, "selectedService");
 
   const {
     leadPreferenceData,
@@ -60,8 +61,8 @@ console.log(leadPreferenceData,selectedService,"leadPreferenceData")
 
   const checkedNationWideShow = serviceWiseData?.map((item) => item?.nation_wide == 1 )
   const locationId = serviceWiseData?.map((item) => item?.id)
-  const locationTypes = nationwideShow.some((item) => item === "Distance")
-  console.log(locationId?.[0],locationTypes,"serviceWiseData")
+  const locationTypes = nationwideShow?.some((item) => item === "Distance")
+  console.log(locationId?.[0],locationTypes,nationwideShow,"serviceWiseData")
 const handleUpdateService = () => {
   
   const data = {
@@ -89,11 +90,11 @@ const handleUpdateService = () => {
       const initialAnswers = {};
 
       // This variable will track if the user has already saved preferences for this service
-      const hasUserSavedData = leadPreferenceData.some(
+      const hasUserSavedData = leadPreferenceData?.some(
         (item) => item.answers !== item.answer
       );
 
-      leadPreferenceData.forEach((item) => {
+      leadPreferenceData?.forEach((item) => {
         if (hasUserSavedData && item.answers) {
           // If user has saved answers, use the "answers" key
           const savedOptions = item.answers.split(",").map((a) => a.trim());
@@ -118,7 +119,7 @@ const handleUpdateService = () => {
   }, [selectedService?.id]);
 
   const handleSubmitData = () => {
-    const hasEmptyAnswers = leadPreferenceData.some((item) => {
+    const hasEmptyAnswers = leadPreferenceData?.some((item) => {
       const selected = selectedAnswers[item.id];
       return !selected || selected.length === 0;
     });
@@ -189,9 +190,9 @@ const handleUpdateService = () => {
       miles: locationData.miles1,
       postcode: locationData.postcode,
       service_id: serviceIds,
-      type:nationwideShow[0],
+      type:nationwideShow[0] ? nationwideShow[0] : "Distance",
       city:locationData?.city,
-      coordinates:locationData?.coordinates??[]
+      coordinates:locationData?.coordinates??[],
     };
 
     dispatch(addLocationLead(locationdata)).then((result) => {
