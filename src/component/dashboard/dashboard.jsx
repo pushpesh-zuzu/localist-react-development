@@ -1,7 +1,7 @@
 import React from 'react';
 import './Dashboard.css';
 import DashboardCards from './2ndPart';
-import polygon from '../../assets/Icons/polygon.png'
+import polygon from '../../assets/Icons/Polygon.png'
 import PolygonArrowDown from '../../assets/Icons/PolygonArrowDown.png'
 //PolygonArrowDown
 const Dashboard = () => {
