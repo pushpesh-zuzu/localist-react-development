@@ -60,7 +60,7 @@ const DashboardCards = () => {
   <div className={styles["notification-section"]}>
     <div className={styles["notification-title"]}>
       Get started &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}>20% OFFSTARTER PACK OFFER</button>
+      <button className={styles["notification-button"]}>20% OFF STARTER PACK OFFER</button>
     </div>
 
     <div className={styles["notification-banner"]}>
@@ -71,8 +71,11 @@ const DashboardCards = () => {
   {/* Second Row */}
   <div className={styles.row}>
     <div className={`${styles.card} ${styles.profile}`}>
+    <div className={styles["profile-header"]}>
       <div className={styles.avatar}>C</div>
       <span className={styles.profilename}>Chander</span>
+      </div>
+
       <div className={styles.profileheadline}>
         Your profile is 27% complete <span className={styles["edit-link"]}>Edit</span>
       </div>

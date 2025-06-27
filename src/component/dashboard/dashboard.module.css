@@ -15,7 +15,8 @@
       font-family: Arial, sans-serif;
       background-color: #fff;
       color: #333;
-      padding: 25px 88px;
+      padding: 25px 88px 8px 88px;
+      /* background-color: red; */
     }
     .greeting{
       color: #000000;
@@ -50,12 +51,14 @@
   .contact-info div:first-child {
     display: flex;
     align-items: center;
+    margin: 1rem 0;
+    /* margin-bottom: 1rem; */
   }
   
   .breaker{
-    border: '1px solid #D9D9D9 ';
-    margin: 0 0 1rem 2.8rem;
-    width: 75%;
+    border: '1px solid #FFFFFF ';
+    margin: 0 0 1rem 3.1rem;
+    width: 80%;
   }
   
   .contact-info div:first-child span {
@@ -357,7 +360,7 @@
   /* --------- Mobile (up to 768px) --------- */
   @media (max-width: 768px) {
    .breaker{
-    margin-left: 3rem;
+    margin-left: 3.1rem;
    }
     .left-column{
       /* background-color: red; */
@@ -388,7 +391,7 @@
      
     }
     .dashboard-title>p{
-      max-width: 95%;
+      max-width: 80%;
     }
     .hiddenDiv{
      display: none;
@@ -427,7 +430,7 @@
     .video-box {
       aspect-ratio: 16 / 9;
       width: 97%;
-     margin-top: -1rem;
+     margin-top: -1.8rem;
     }
   
     .view-leads-blue {
@@ -445,7 +448,7 @@
     .info-box,
     .help-box {
       font-size: 14px;
-      padding: 4px 15px 16px 15px;
+      padding: 4px 2.8px 16px 15px;
       /* background-color: red; */
     }
   
@@ -457,18 +460,18 @@
   
   
     .dashboard-footer {
-      font-size: 18px;
+      font-size: 16px;
       padding: 16px;
       line-height: 24px;
+      /* background-color: red; */
+      width: 88%;
     }
       .help-box {
       margin-top: 1.6rem;
       padding-top: 1rem;
     }
     
-    .contact-info {
-      padding: 1.25rem 0;
-    }
+    
   
     .contact-info > div:first-child {
       flex-direction: column;
@@ -487,6 +490,7 @@
         margin-bottom: -1.2rem;
         /* background-color: red; */
     }
+    
     
   }
   
