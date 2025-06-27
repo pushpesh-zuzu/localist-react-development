@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Dashboard.module.css';
 import DashboardCards from './2ndPart';
 import polygon from '../../assets/Icons/Polygon.png'
