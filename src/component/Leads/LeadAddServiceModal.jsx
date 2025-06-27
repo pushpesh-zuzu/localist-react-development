@@ -37,19 +37,18 @@ const AddServiceModal = ({
           ×
         </button>
 
-        <h2 className={styles.title}>Add service</h2>
+        <h2 className={styles.title}>Add a Service</h2>
         <p className={styles.subtitle}>
           <span className={styles.infoIcon}>
             <img src={iIcon} alt="" />
           </span>{" "}
-          Type the name of your service to start searching our thousands of
-          available services.
+          Start typing the name of your service to search our full directory of available options.
         </p>
 
         <label className={styles.label}>Service</label>
         <input
           type="text"
-          placeholder="Start typing to find services..."
+          placeholder="Start typing to find services fast..."
           className={styles.input}
           value={input}
           onChange={(e) => {
@@ -91,7 +90,7 @@ const AddServiceModal = ({
         <div className={styles.suggestions}>
           <label className={styles.label}>Suggestions</label>
           <p className={styles.suggestionText}>
-            We suggest the following services for you. Click to add:
+        We’ve recommended some services based on your profile. Click to add them instantly:
           </p>
           <div className={styles.tags}>
             {popularList?.map((item, idx) => (

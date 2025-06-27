@@ -264,8 +264,8 @@ console.log(Id,"Id")
 
                 <div className={styles.footerNote}>
                     <div>
-                        <p>🔒 Your payment is secure</p>
-                        <span>Your card will be securely stored for future purchases. You can update it in settings at any time.</span>
+                        <p>🔒 Your Payment Is Secure</p>
+                        <span>Your card details are safely stored for future purchases. You can update or manage your payment info anytime in your settings. You can also securely add multiple cards.</span>
                     </div>
                     <div className={styles.cards}>
                         <img src={VisaImg} alt="Visa" />

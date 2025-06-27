@@ -48,7 +48,7 @@ const BuyerNotification = () => {
         <span className={styles.infoIcon}>
           <img src={iIcon} alt="" />
         </span>
-        <span>Choose what you’d like to be emailed about</span>
+        <span>Please select what you would like to receive Notifications about </span>
       </div>
       {notificationLoader ? <Spin style={{ display: "flex", justifyContent: "center", alignItems: "center" }} /> :
         <div className={styles.notificationList}>

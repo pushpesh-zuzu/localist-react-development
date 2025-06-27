@@ -126,7 +126,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
                     </div>
 
                     <div className={styles.formGroup}>
-                        <label className={styles.label}>Review</label>
+                        <label className={styles.label}>Your Review</label>
                         <textarea
                             name="review"
                             className={styles.textarea}

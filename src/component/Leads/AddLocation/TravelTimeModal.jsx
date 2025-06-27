@@ -216,7 +216,7 @@ const TravelTimeModal = ({
           &times;
         </button>
 
-        <h2 className={styles.title}>Travel time</h2>
+        <h2 className={styles.title}>Travel Time</h2>
 
         {/* <p className={styles.description}>
             <img src={iIcon} alt="" />
@@ -228,8 +228,7 @@ const TravelTimeModal = ({
         <div className={styles.infoBox}>
           <img src={iIcon} alt="" />
           <span>
-            Enter a Postcode or town, the maximum time you'd spend travelling,
-            and the mode of transport you'd use.
+           Enter a postcode or town, how far you're willing to travel, and your mode of transport. We'll use this to match you with the right local leads.
           </span>
         </div>
 

@@ -369,19 +369,19 @@ const LocationModal = ({
 
         <div className={styles.infoBox}>
           <img src={iIcon} alt="" />
-          <span>Enter a ZIP code or town and the distance around it.</span>
+          <span>Enter a postcode or town, and specify how far around that area you’re willing to offer your services</span>
         </div>
 
         <div className={styles.inputRow}>
           <div className={styles.inputField}>
-            <label>ZIP Code / City</label>
+            <label>Postcode / City</label>
             <input
               ref={inputRef}
               type="text"
               name="postcode"
               value={locationData.postcode}
               onChange={onChange}
-              placeholder="Enter ZIP or City"
+              placeholder="Enter Postcode or City"
             />
           </div>
           <div className={styles.inputField}>

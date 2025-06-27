@@ -96,7 +96,7 @@ const AccreditationsAccordion = ({ details }) => {
     <>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h3 className={styles.title}>Accreditations</h3>
+          <h3 className={styles.title}>Showcase Your Accreditations</h3>
           <div className={styles.optional}>
             <img src={iIcon} alt="info" className={styles.icon} />
             <span>Optional</span>
@@ -108,8 +108,7 @@ const AccreditationsAccordion = ({ details }) => {
         </div>
 
         <p className={styles.description}>
-          Increase your chances of getting hired and boost customer confidence
-          by adding your accreditations.
+          Adding your accreditations helps customers on Localists.com feel more confident hiring you and can increase your chances of winning more work.
         </p>
 
         {accordionGroups.map((group, index) => (

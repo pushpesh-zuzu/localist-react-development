@@ -15,32 +15,32 @@ import { Spin } from "antd";
 const questions = [
   {
     id: "businessDuration",
-    label: "How long have you been in business?",
+    label: "Tell us how long you’ve been running your business.",
   },
   {
     id: "equipment",
-    label: "Do you bring your own equipment and supplies?",
+    label: "Do you provide your own tools and materials?",
   },
   {
     id: "jobLove",
-    label: "What do you love most about your job?",
+    label: "What do you enjoy most about your work?",
   },
-  {
-    id: "startBusiness",
-    label: "What inspired you to start your own business?",
-  },
+  // {
+  //   id: "startBusiness",
+  //   label: "What inspired you to start your own business?",
+  // },
   {
     id: "clientChoose",
-    label: "Why should our clients choose you?",
+    label: "Why should Localists.com customers choose your business?",
   },
-  {
-    id: "remoteServices",
-    label: "Can you provide your services online or remotely? If so, please add details.",
-  },
-  {
-    id: "safeFromCovid",
-    label: "What changes have you made to keep your customers safe from Covid-19?",
-  },
+  // {
+  //   id: "remoteServices",
+  //   label: "Can you provide your services online or remotely? If so, please add details.",
+  // },
+  // {
+  //   id: "safeFromCovid",
+  //   label: "What changes have you made to keep your customers safe from Covid-19?",
+  // },
 ];
 
 const QandAAccordion = ({details}) => {
@@ -89,10 +89,9 @@ useEffect(() => {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.heading}>Questions & Answers</h3>
+      <h3 className={styles.heading}>Q&A - Help Customers Choose You</h3>
       <p className={styles.subheading}>
-        Answer common questions upfront to remove customer reservations and
-        doubt, bringing them closer to making a hiring decision.
+        Provide answers to the most common customer questions on Localists.com to build trust and make it easier for customers to hire you with confidence.
       </p>
       {questions.map((question, index) => (
         <div className={styles.qaItem} key={question.id}>
@@ -109,7 +108,7 @@ useEffect(() => {
              {index === 2 && (
             <div className={styles.suggestion}>
               <a href="#" className={styles.link}>
-                Use our free online tool to write the perfect description of your business
+               Use our free online AI tool to help you write a great business description.
               </a>
             </div>
           )}

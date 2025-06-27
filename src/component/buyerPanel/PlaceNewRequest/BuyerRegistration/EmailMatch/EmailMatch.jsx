@@ -115,7 +115,7 @@ const EmailMatch = ({
           x
         </button>
         <div className={styles.header}>
-          <h2>Enter you details!</h2>
+          <h2>Please Enter Your Details</h2>
         </div>
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>

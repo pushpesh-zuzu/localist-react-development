@@ -64,16 +64,13 @@ const SettingsList = () => {
             </div>
 
             <p>
-              Your profile is key to attracting customers on Bark. Use it to
-              explain what makes you different from your competition & why
-              people should work with you
+            Make your profile stand out to win more customers. Highlight what makes your business unique and why people should choose you.
             </p>
             <div className={styles.card} style={{ backgroundColor: "#FFD5D2" }} onClick={handleReview}>
               <span>Reviews</span>
             </div>
             <p>
-              Reviews help you stand out. Learn how to use them to boost your
-              business
+             Download the Localists.com badges and help boost your business Our badges increase the trustworthiness of your website and can help increase online visibility. 
             </p>
             <div
               className={styles.card}
@@ -83,8 +80,7 @@ const SettingsList = () => {
               <span>Account details</span>
             </div>
             <p>
-              The email address and password you use to log in, and the phone
-              numbers we use to contact you privately
+           The login details and contact number we’ll use to reach you directly when needed.
             </p>
           </div>
         </div>
@@ -105,7 +101,7 @@ const SettingsList = () => {
               <span>My Services</span>
             </div>
             <p>
-              Tell us what services you provide so we can send relevant leads.
+           Tell us what you do, and we’ll send you the leads that fit your services best.
             </p>
             <div
               className={styles.card}
@@ -114,7 +110,7 @@ const SettingsList = () => {
             >
               <span>My Locations</span>
             </div>
-            <p>Tell us what locations you provide your services in.</p>
+            <p>Add or Update the locations where you provide your services.</p>
           </div>
         </div>
 
@@ -131,19 +127,19 @@ const SettingsList = () => {
             >
               <span>My credits</span>
             </div>
-            <p>View credit history & buy credits to contact more customers</p>
+            <p>View your credit history and top up credits to connect with more customers.</p>
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
             onClick={handleInvoice}
             >
               <span>Invoices and billing details</span>
             </div>
-            <p>View your invoices and manage your billing details</p>
+            <p>Access invoices & Update Billing Information.</p>
             <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
             onClick={handlePayment}
             >
               <span>My payment details</span>
             </div>
-            <p>Your payment settings</p>
+            <p>Access & Update payment details.</p>
           </div>
         </div>
 
@@ -160,15 +156,14 @@ const SettingsList = () => {
             >
               <span>Email</span>
             </div>
-            <p>Set what type of emails you'd like to receive from us</p>
+            <p>Let us know which emails you’d like to get from us.</p>
             <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
              onClick={handleBrowser}
             >
               <span>Browser</span>
             </div>
             <p>
-              Set what type of notifications from us you'd like to receive in
-              your web browser
+              Select the browser notifications you want to get from us.
             </p>
           </div>
         </div>

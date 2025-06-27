@@ -48,22 +48,21 @@ const ReviewsAccordion = () => {
   
   return (
     <div className={styles.wrapper}>
-      <p className={styles.overAllText}>Overall rating</p>
+      <p className={styles.overAllText}>Your Review Rating</p>
       <div className={styles.alertBox}>
         <span>
-          You don’t have a rating because you don’t have any customer reviews.
+          you don’t have a rating because you haven’t collected any customer reviews. Start collecting or uploading reviews to improve your score.
         </span>
         <p>
-          For nearly 9 in 10 consumers, an online review is as important as a
-          personal recommendation.
+          studies show 90% of customers trust online feedback as much as personal recommendations.
         </p>
       </div>
 
-      <h3 className={styles.sectionTitle}>Get more reviews</h3>
+      <h3 className={styles.sectionTitle}>Collect More Reviews</h3>
 
       <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>
-          Invite your customers to leave reviews
+          Invite your customers to leave a review
         </label>
         <div className={styles.row}>
           <input
@@ -77,7 +76,7 @@ const ReviewsAccordion = () => {
 
       <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>
-          Share this link with your customers
+        Share your review link
         </label>
         <div className={styles.row}>
           <input
@@ -95,10 +94,10 @@ const ReviewsAccordion = () => {
       <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
-          Facebook reviews
+         Import Facebook & Instagram Reviews
         </label>
         <p className={styles.subtext}>
-          Import customer reviews from your company’s Facebook page.
+         Import reviews from your business Facebook page.
         </p>
         <div className={styles.row}>
           <input
@@ -114,12 +113,11 @@ const ReviewsAccordion = () => {
         </div>
       </div>
 
-      <label className={styles.reviewsLabel}>Localist reviews</label>
+      <label className={styles.reviewsLabel}>Localists.com Reviews</label>
       <div className={styles.localistBox}>
-        <strong>You have no reviews on Localist yet</strong>
+        <strong>You don’t have any reviews yet on Localists.com</strong>
         <p>
-          Your reviews don’t have to just come from customers you found on Localist,
-          they can also be from your existing customers.
+          Your reviews can come from any of your customers — not just those found through Localists.com. Add them today add improve new business wins!
         </p>
       </div>
 

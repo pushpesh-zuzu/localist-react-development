@@ -21,9 +21,9 @@ const ServiceDetailsStep = ({
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           <div className={styles.headerContainer}>
-            <h2 className={styles.heading}>Some details about you</h2>
+            <h2 className={styles.heading}>Let’s get to know you a little better</h2>
             <p className={styles.subheading}>
-              You're just a few steps away from viewing our {serviceParms?.serviceTitle?.replace(/-/g, ' ')} leads
+              Just add the information below and you will be able to see {serviceParms?.serviceTitle?.replace(/-/g, ' ')} leads for your business
             </p>
           </div>
 

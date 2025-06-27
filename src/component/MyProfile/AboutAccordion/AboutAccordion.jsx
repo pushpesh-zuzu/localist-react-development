@@ -246,11 +246,10 @@ useEffect(() => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <h3>Company name & logo</h3>
+        <h3>Business Name & Logo</h3>
         <p>
-          This is the first thing customers will see when searching for a
-          professional. <br />
-          As a sole-trader, you can just enter your name.
+          Help Customers recognise your business. This is what customers see first <br /> when browsing for professionals on Localists.com. 
+         
         </p>
         <div className={styles.imageSection}>
           <img
@@ -292,10 +291,9 @@ useEffect(() => {
       </div>
 
       <div className={styles.card}>
-        <h3>Name and profile picture</h3>
+        <h3>Your Name & Profile Picture</h3>
         <p>
-          This is the person who will be communicating with customers on Localist.
-          The photo will appear alongside your messages with customers.
+         Customers on Localists.com will see this information when you message them. Adding a photo helps build trust and makes your profile more personal.
         </p>
         <div className={styles.imageSection}>
           <img
@@ -338,10 +336,9 @@ useEffect(() => {
         )}
       </div>
       <div className={styles.card}>
-        <h3>Company contact details</h3>
+        <h3>Your Contact Information</h3>
         <p>
-          This information will be seen by customers on Localist. Change the details
-          Localist uses to contact you privately in{" "}
+         Customers on Localists.com will see these details when viewing your profile. You can update your private contact info anytime under {" "}
           <a href="/settings/account_details" className={styles.link}>
             Account Details
           </a>
@@ -410,27 +407,26 @@ useEffect(() => {
       </div>
 
       <div className={styles.infoCard}>
-        <h3 className={styles.companyLocation}>Company location</h3>
+        <h3 className={styles.companyLocation}>Business Location</h3>
         <div className={styles.infoSubtext}>
-          This will not affect the areas where you offer or provide services.
+         This won’t affect the areas you’ve selected to receive leads from.
         </div>
         <p className={styles.secondaryText}>
-          Use a specific address to help customers searching for a local
-          business.
+         Please provide your business address to help customers find your local services on Localists.com.
         </p>
-        <label className={styles.label}>What’s the business location?</label>
+        <label className={styles.label}>What’s your business address?</label>
         <input
           className={styles.input}
           type="text"
           name="company_location"
           value={formState.company_location}
           onChange={handleInputChange}
-          placeholder="Enter the company’s address"
+          placeholder="Enter your business location"
         />
         <div className={styles.checkboxRow}>
           <input type="checkbox" id="dontShow" />
           <label className={styles.DontLabel} htmlFor="dontShow">
-            Don’t show this on my profile{" "}
+            Hide this address from my public profile{" "}
             <span className={styles.infoIcon}>
               <img src={iIcon} alt="" />
             </span>
@@ -438,7 +434,7 @@ useEffect(() => {
         </div>
         <hr className={styles.hrline} />
         <label className={styles.label}>
-          Can’t give us a particular location?
+         Can’t provide a specific location?
         </label>
         <select
           className={`${styles.input} ${styles.customSelect}`}
@@ -452,20 +448,20 @@ useEffect(() => {
         </select>
       </div>
       <div className={styles.infoCard}>
-        <h3 className={styles.aboutCompany}>About the company</h3>
+        <h3 className={styles.aboutCompany}>About Your Business</h3>
         <p className={styles.secondaryTextCustomers}>
-          Introduce the company to your customers.
+        Introduce your company to customers on Localists.com.
         </p>
         <div className={styles.flexRow}>
           <div className={styles.flexItem}>
-            <label className={styles.label}>Company size</label>
+            <label className={styles.label}>Team Size</label>
             <select
               className={`${styles.input} ${styles.customSelect}`}
               name="company_size"
               value={formState.company_size}
               onChange={handleInputChange}
             >
-              <option value="">Select size</option>
+              <option value="">How many people work in your business</option>
               <option value="Self-employed, Sole trader">Self-employed, Sole trader</option>
               <option value="2–10">2–10 employees</option>
               <option value="11–50">11–50 employees</option>
@@ -474,30 +470,29 @@ useEffect(() => {
             </select>
           </div>
           <div className={styles.flexItem}>
-            <label className={styles.label}>Years in business</label>
+            <label className={styles.label}>Years in Business</label>
             <input
               className={styles.input}
               type="text"
               name="company_total_years"
               value={formState.company_total_years}
               onChange={handleInputChange}
-              placeholder="Number of years"
+              placeholder="How long have you been operating"
             />
           </div>
         </div>
-        <label className={styles.label}>Describe your company</label>
+        <label className={styles.label}>Describe Your Business</label>
         <textarea
           className={styles.textarea}
           rows={5}
           name="about_company"
           value={formState.about_company}
           onChange={handleInputChange}
-          placeholder="What sets you apart from other businesses?"
+          placeholder="What makes your business stand out? Tell customers why they should choose you."
         />
-        <p className={styles.charLimit}>Minimum 30 characters</p>
+        <p className={styles.charLimit}>Minimum 20 characters</p>
         {/* <a href="#!" className={styles.link}>
-          Use our free online tool to write the perfect description of your
-          business
+         Use our free online AI tool to help you write a great business description
         </a> */}
       </div>
 

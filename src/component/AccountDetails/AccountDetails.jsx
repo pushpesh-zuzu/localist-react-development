@@ -152,13 +152,10 @@ const AccountDetails = () => {
           <img src={iIcon} alt="iIcon" />
         </span>
         <p className={styles.description}>
-          Manage your account email, phone number, password and login details.
-          We’ll use these details to contact you but won’t share it with
-          customers. You can control the email address and phone number that
-          customers see for your business in{" "}
+         Manage your account email, phone number, password, and login information. These details are used to contact you but are not shared with customers. To manage what customers see—like your public email or phone number—visit your {" "}
           <Link to="/settings/my_profile" className={styles.link} >
                             My Profile
-                        </Link>
+                        </Link> settings
           .
         </p>
       </div>

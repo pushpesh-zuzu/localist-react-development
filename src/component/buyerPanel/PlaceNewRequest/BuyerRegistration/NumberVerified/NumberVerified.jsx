@@ -36,13 +36,9 @@ const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
             </button>
           </div>
           <p className={styles.note}>
-            Localists will provide your information to up to 5 professionals who
-            may contact you about your project in accordance with our privacy
-            policy. By submitting this form, you consent that such professionals
-            may call or text you on the phone number you provided to offer their
-            services (these calls may be made using automated phone technology).
-            Consent is not a condition of purchasing or receiving any of the
-            services.
+           Localists may share your information with up to five relevant service providers, who may contact you by phone, text or email to discuss your request. 
+           By submitting this form, you agree that professionals can contact you via phone, text or email to offer their services. Your consent to be contacted is not a condition for purchasing or receiving any services. 
+           All data will be handled in accordance with our Privacy Policy.
           </p>
         </div>
       </div>

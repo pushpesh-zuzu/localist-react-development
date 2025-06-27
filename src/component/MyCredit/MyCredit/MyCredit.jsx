@@ -258,8 +258,9 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
             <img src={iIcon} alt="iIcon" />
           </span>
           <p className={styles.description}>
-            Credits are used to contact customers on Bark. You can find out more
-            about credits and how we charge for our service in the{" "}
+           Credits are used to connect with potential customers on Localists.com. 
+           They let you respond to high-quality, high intent, local leads in your area. 
+           Learn more about how credits work and our pricing in the {" "}
             {/* <a href="#" className={styles.link}>
              
             </a> */}
@@ -271,9 +272,7 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
         </div>
 
         <p className={styles.note}>
-          We charge a small fee for each customer you contact on Bark. Buy a pack
-          of<span> 70 credits </span>and get <span>20% OFF</span>
-        </p>
+       We apply a small fee for each new customer you choose to contact.</p>
 
         <div className={styles.cardList}>
           {creditPlanList?.length === 0 ? <div className={styles.noPlanText}> {"No Plan Available"} </div> : creditPlanList?.map((item, index) => (
