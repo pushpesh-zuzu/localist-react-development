@@ -174,8 +174,8 @@ font-weight: bold;
   
   .notification-section {
     text-align: center;
-    margin: 30px 0;
-    width: 98%;
+    margin: 30px auto;
+    width: 65%;
   }
   
   .notification-title {
@@ -441,17 +441,20 @@ font-weight: bold;
 /* -------- Mobile (max-width: 640px) -------- */
 @media (max-width: 640px) {
   .dashboard-container {
-    padding: 20px 16px;
+    padding: 0px 16px 20px 16px;
+    /* background-color: red; */
   }
 
   .row {
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
+    /* background-color: red; */
   }
 
   .card {
     flex: 0 1 100%;
     padding: 16px 20px 24px 22px;
+    
   }
 
   .card-title,
@@ -500,13 +503,21 @@ font-weight: bold;
     font-size: 14px;
   }
 
- 
+ .notification-banner{
+  width: 115%;
+  /* background-color: red; */
+  /* padding: 0; */
+  margin: 0 0 -0.4rem -1rem;
+ }
 
 
   .add-services label {
     font-size: 13px;
     /* flex-direction: column; */
     align-items: flex-start;
+    /* background-color: red; */
+    padding: 0;
+    text-align:left;
   }
 
   .add-services button {
@@ -520,7 +531,9 @@ font-weight: bold;
     padding: 22px;
     margin-top: 2rem;
   }
-
+.notification-section{
+  margin-top: -0.1rem;
+}
   .notification-title {
     text-align: center;
     font-size: 15px;
@@ -530,12 +543,14 @@ font-weight: bold;
   .notification-button {
     font-size: 12px;
     padding: 5px 16px;
+    margin-top: 0.5rem;
   }
 
   .notification-banner {
     font-size: 13px;
-    padding: 10px;
-   
+    padding: 4px 10px;
+   margin-top: -0.5rem;
+   /* margin-bottom: 1.1rem; */
   }
 .notification-banner strong {
   line-height: 24px;
@@ -579,4 +594,10 @@ font-weight: bold;
 
 
 
+}
+
+@media (max-width: 400px) {
+  .add-services label {
+
+  }
 }

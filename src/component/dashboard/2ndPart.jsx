@@ -1,115 +1,115 @@
 import React from "react";
-import "./DashboardCards.css";
+import styles from "./DashboardCards.module.css";
 import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
 const DashboardCards = () => {
   return (
-    <div className="dashboard-container">
-      {/* First Row */}
-      <div className="row">
-        {/* <div className="card leads">
-          <h3>Leads and Enquiries <span className="view-link">View</span></h3>
-          <div className="lead-circle">1065<br /><span>Leads</span></div>
-          <p className="unread">1058 Unread leads</p>
-        </div> */}
-        <div className="card leads">
-  <div className="card-header">
-    <h3>Leads and Enquiries</h3>
-    <span className="view-link">View</span>
-  </div>
-
-  <div className="lead-circle">
-  <div className="lead-number">1065</div>
-  <div className="lead-label">Leads</div>
-</div>
-
-
-
-  <p className="unread">1058 Unread leads</p>
-</div>
-
-
-        <div className="card lead-settings">
-          <h3 className="card-title">Lead settings </h3>
-          <div className="sub-label">Services <span className="edit-link">Edit</span></div>
-          <div className="highlight-box">You’ll receive leads in these categories</div>
-          <div className="tags">
-            <span className="tag blue">Deep Cleaning Services</span>
-            <span className="tag yellow">House Cleaning</span>
-         
-          </div>
-          <div className="tags2">
-          <span className="tag2 gray">+2</span>
-          </div>
-        </div>
-
-        <div className="card add-services">
-          <h3>Add New Services</h3>
-          <form>
-          <label><input type="checkbox" className="checkbox" /> Lorem Ipsum has been the</label>
-
-            <label><input type="checkbox" className="checkbox" /> Lorem Ipsum has been the</label>
-            <label><input type="checkbox"  className="checkbox"/> Lorem Ipsum has been the industry’s</label>
-            <label><input type="checkbox"  className="checkbox"/> Lorem Ipsum</label>
-            <button type="submit">Apply</button>
-          </form>
-        </div>
+    
+<div className={styles["dashboard-container"]}>
+  {/* First Row */}
+  <div className={styles.row}>
+    <div className={`${styles.card} ${styles.leads}`}>
+      <div className={styles["card-header"]}>
+        <h3>Leads and Enquiries</h3>
+        <span className={styles["view-link"]}>View</span>
       </div>
 
-      {/* Notification Section */}
-      <div className="notification-section">
-        <div className="notification-title">Get started &nbsp;
-        &nbsp;
-        &nbsp;
-        <button className="notification-button">20% OFFSTARTER PACK OFFER</button>
-        </div>
-        
-        <div className="notification-banner">
-          <strong>Starter pack offer</strong> Respond to up to 10 customers <strong>20% OFF</strong> and a <strong>get hired guarantee</strong>.
-        </div>
+      <div className={styles["lead-circle"]}>
+        <div className={styles["lead-number"]}>1065</div>
+        <div className={styles["lead-label"]}>Leads</div>
       </div>
 
-      {/* Second Row */}
-      <div className="row">
-        <div className="card profile">
-          <div className="avatar">C</div>
-          <span className="profilename">Chander</span>
-          <div className="profileheadline">Your profile is 27% complete <span className="edit-link">Edit</span></div>
-          <div className="progress-bar">
-            <div className="progress" style={{ width: "27%" }}></div>
-          </div>
-          <div className="hint-box">
-            <div>Completing your profile is a great way to appeal to customers</div>
-            <button>Edit Profile</button>
-          </div>
-        </div>
+      <p className={styles.unread}>1058 Unread leads</p>
+    </div>
 
-        <div className="card responses">
-          <h3>Responses <span className="view-link">View</span></h3>
-          <div className="response-msg">You haven’t responded to any leads yet.</div>
-        </div>
-
-        <div className="card help">
-  <h3 className="card-title">
-    <span className="icon"><img src={questionBlueIcon}/></span> Help
-  </h3>
-  <div className="help-box">
-    <p >
-      Visit <span className="link" >help centre</span> for tips & advice.
-    </p>
-    <p>
-      <span className="icon"><img src={emailIcon1}/></span> 0000000000
-    </p>
-    <p>
-      <span className="icon"><img src={phone} /></span> india@localist.com
-    </p>
-    <p>(open 24 hours a day, 7 days a week)</p>
-  </div>
-</div>
-
+    <div className={`${styles.card} ${styles["lead-settings"]}`}>
+      <h3 className={styles["card-title"]}>Lead settings</h3>
+      <div className={styles["sub-label"]}>Services <span className={styles["edit-link"]}>Edit</span></div>
+      <div className={styles["highlight-box"]}>You’ll receive leads in these categories</div>
+      <div className={styles.tags}>
+        <span className={`${styles.tag} ${styles.blue}`}>Deep Cleaning Services</span>
+        <span className={`${styles.tag} ${styles.yellow}`}>House Cleaning</span>
+      </div>
+      <div className={styles.tags2}>
+        <span className={`${styles.tag2} ${styles.gray}`}>+2</span>
       </div>
     </div>
+
+    <div className={`${styles.card} ${styles["add-services"]}`}>
+      <h3>Add New Services</h3>
+      <form>
+        <label>
+          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the
+        </label>
+        <label>
+          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the
+        </label>
+        <label>
+          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the industry’s
+        </label>
+        <label>
+          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum
+        </label>
+        <button type="submit">Apply</button>
+      </form>
+    </div>
+  </div>
+
+  {/* Notification Section */}
+  <div className={styles["notification-section"]}>
+    <div className={styles["notification-title"]}>
+      Get started &nbsp;&nbsp;&nbsp;
+      <button className={styles["notification-button"]}>20% OFFSTARTER PACK OFFER</button>
+    </div>
+
+    <div className={styles["notification-banner"]}>
+      <strong>Starter pack offer</strong> Respond to up to 10 customers <strong>20% OFF</strong> and a <strong>get hired guarantee</strong>.
+    </div>
+  </div>
+
+  {/* Second Row */}
+  <div className={styles.row}>
+    <div className={`${styles.card} ${styles.profile}`}>
+      <div className={styles.avatar}>C</div>
+      <span className={styles.profilename}>Chander</span>
+      <div className={styles.profileheadline}>
+        Your profile is 27% complete <span className={styles["edit-link"]}>Edit</span>
+      </div>
+      <div className={styles["progress-bar"]}>
+        <div className={styles.progress} style={{ width: "27%" }}></div>
+      </div>
+      <div className={styles["hint-box"]}>
+        <div>Completing your profile is a great way to appeal to customers</div>
+        <button>Edit Profile</button>
+      </div>
+    </div>
+
+    <div className={`${styles.card} ${styles.responses}`}>
+      <h3>Responses <span className={styles["view-link"]}>View</span></h3>
+      <div className={styles["response-msg"]}>You haven’t responded to any leads yet.</div>
+    </div>
+
+    <div className={`${styles.card} ${styles.help}`}>
+      <h3 className={styles["card-title"]}>
+        <span className={styles.icon}><img src={questionBlueIcon} /></span> Help
+      </h3>
+      <div className={styles["help-box"]}>
+        <p>
+          Visit <span className={styles.link}>help centre</span> for tips & advice.
+        </p>
+        <p>
+          <span className={styles.icon}><img src={emailIcon1} /></span> 0000000000
+        </p>
+        <p>
+          <span className={styles.icon}><img src={phone} /></span> india@localist.com
+        </p>
+        <p>(open 24 hours a day, 7 days a week)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
   );
 };
 
