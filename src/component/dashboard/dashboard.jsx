@@ -1,4 +1,4 @@
-import styles from './Dashboard.module.css';
+import styles from './dashboard.module.css';
 import DashboardCards from './2ndPart';
 import polygon from '../../assets/Icons/Polygon.png'
 import PolygonArrowDown from '../../assets/Icons/PolygonArrowDown.png'

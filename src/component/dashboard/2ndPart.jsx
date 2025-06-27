@@ -1,5 +1,5 @@
 
-import styles from "./DashboardCards.module.css";
+import styles from "./dashboardCards.module.css";
 import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
