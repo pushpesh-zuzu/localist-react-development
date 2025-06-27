@@ -318,9 +318,7 @@ font-weight: bold;
  align-items: center;
 }
 
-.hint-box>div{
-  /* max-width: 70%; */
-}
+
 
 .hint-box button {
   /* margin-top: 12px; */
@@ -590,13 +588,5 @@ font-weight: bold;
 .responses{
   padding: 2rem 1rem 4.5rem 1rem;
 }
-
-
-
 }
 
-@media (max-width: 400px) {
-  .add-services label {
-
-  }
-}
