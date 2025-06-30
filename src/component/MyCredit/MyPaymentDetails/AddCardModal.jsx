@@ -133,7 +133,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import StripeProvider from "./StripeProvider";
 import CardPaymentForm from "./CardForm";
 
-const AddCardModal = ({ onClose }) => {
+const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi }) => {
     const [formData, setFormData] = useState({
         cardNumber: "",
         expiryDate: "",
@@ -248,7 +248,7 @@ console.log(Id,"Id")
                  <AddCardWrapper /> 
                  </Elements> */}
                  <StripeProvider>
-                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose}/>
+                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose} data={detail} topup={topup} closeModal={closeModal} details={details} newLeadApi={newLeadApi}/>
                  </StripeProvider>
                     {/* <div className={styles.actions}>
                         <button type="button" className={styles.cancelBtn} onClick={onClose}>

@@ -9,10 +9,10 @@ import responseTimeImg from "../../../assets/Images/Setting/responseTimeImg.svg"
 const About = ({details}) => {
     console.log(details,"details")
     const data = [
-        {
-            title: "Elite Pro",
-            icon: EliteProImg,
-        },
+        // {
+        //     title: "Elite Pro",
+        //     icon: EliteProImg,
+        // },
         {
             title:  `${details?.hire_count ? details?.hire_count : "0"} hires on Localists`,
             icon: businessImg

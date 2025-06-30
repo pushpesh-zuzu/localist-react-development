@@ -22,7 +22,7 @@ const dummyCreditPlanList = [
   // },
 ];
 
-const ContactConfirmModal = ({ onClose,enoughCredit,confirmModal,details }) => {
+const ContactConfirmModal = ({ onClose,enoughCredit,confirmModal,details, newLeadApi}) => {
  
   const navigate = useNavigate()
 const dispatch = useDispatch()
@@ -38,6 +38,8 @@ const { creditPlanList,totalCredit } =useSelector((state)=> state.leadSetting)
     setActiveIndex(activeIndex === index ? null : index);
   };
   const totalRemaingCredit = creditPlanList[0]?.no_of_leads
+  const creditItems = creditPlanList && creditPlanList.length > 0 ? creditPlanList : dummyCreditPlanList;
+  console.log(creditItems,"creditItems")
   const handleNavigate = () => {
     navigate("/mycredits")
   }
@@ -135,7 +137,7 @@ addManualBidData()
 
   return (
     <>
-    {creditModal ? <AddCardModal onClose={() => setCreditModal(false)}/> :
+    {creditModal ? <AddCardModal onClose={() => setCreditModal(false)} detail={creditItems} topup={isChecked} closeModal={() => onClose()} details={details} newLeadApi={newLeadApi}/> :
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={()=>onClose()}>×</button>

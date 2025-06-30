@@ -298,13 +298,14 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
                     className={styles.buyButton}
                     onClick={() => handleBuyNow(item)}
                   >
-                    {activeLoaderId === item.id ? (
+                    Buy Now
+                    {/* {activeLoaderId === item.id ? (
                       <Spin
                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                       />
                     ) : (
                       "Buy Now"
-                    )}
+                    )} */}
                   </button>
                   <div className={styles.checkboxWrap}>
                     <input
