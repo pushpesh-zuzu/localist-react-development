@@ -462,12 +462,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     <>
       <div className={styles.container}>
         <h1 className={styles.heading}>Lead settings</h1>
-        <p className={styles.subHeading}>Leads you can choose to contact.</p>
+        <p className={styles.subHeading}>Tell us what you’re looking for — we’ll send you the right leads on Localists.com.</p>
 
         <div className={styles.section}>
           <h3 className={styles.title}>Your services</h3>
           <p className={styles.info}>
-            Fine-tune the leads you want to be alerted about.
+           Customise your lead alerts to receive the most relevant opportunities.
           </p>
           {serviceLoader ? (
             <Spin />
@@ -516,7 +516,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <div className={styles.section}>
           <h3 className={styles.title}>Your locations</h3>
           <p className={styles.info}>
-            Choose where you want to find new customers.
+           Tell us what locations you want new leads from
           </p>
 
           {getlocationData?.map((item) => (
@@ -588,8 +588,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         <div className={styles.section}>
           <h3 className={styles.title}>Online/remote leads</h3>
           <p className={styles.info}>
-            Customers tell us if they're happy to receive services online or
-            remotely.
+           Tell us if you can provide your service remotely or online We tell you when a customer is happy to receive your service remotely or online.
           </p>
           <div className={styles.toggle}>
             <span>See online/remote leads</span>

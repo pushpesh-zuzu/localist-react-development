@@ -115,7 +115,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 39px;
+  margin-bottom: 20px;
   margin-top: 18px;
 }
 
@@ -164,6 +164,12 @@
 display: flex;
 justify-content: start;
 margin-bottom: 20px;
+}
+.newContent {
+  color: #000000;
+  text-align: start;
+  margin-bottom: 12px;
+  font-weight: 500;
 }
 
 .expandBtn {

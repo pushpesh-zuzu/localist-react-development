@@ -26,6 +26,7 @@ import { Popover, Select } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
+import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
 
 const MyResponse = () => {
   const dispatch = useDispatch();
@@ -241,8 +242,8 @@ const handleEmailOpen = (item) => {
               onChange={(e) => handlePurchaseChange(e.target.value)}
               // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
             >
+              <option value="">All Option</option>
               <option value="Manual Bid">Manual Bid</option>
-              {/* <option value="Best Matches">Best Match</option> */}
               <option value="Autobid">Auto Bid</option>
               <option value="Request Reply">Request Reply</option>
             </select>
@@ -409,6 +410,8 @@ const handleEmailOpen = (item) => {
           No {selectedTab === "pending" ? "Pending" : "Hired"} Data Available
         </div>
       )}
+
+      <FeelingStuckFooter />
     </div>
   );
 };

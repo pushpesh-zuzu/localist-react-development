@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./FeelingStuckFooter.module.css";
-import GetHiredImage from "../../../../assets/Images/MyResponse/newhiredbannerImg.svg";
-import FeelingStuckImg from "../../../../assets/Images/Leads/FeelingStuckImg.svg";
+import GetHiredImage from "../../../../assets/Images/MyResponse/RightFeelingImg.svg";
+import FeelingStuckImg from "../../../../assets/Images/MyResponse/FeelingStuckLeft.svg";
 
 const FeelingStuckFooter = () => {
   const [showLeftCard, setShowLeftCard] = useState(true);

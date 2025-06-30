@@ -133,7 +133,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import StripeProvider from "./StripeProvider";
 import CardPaymentForm from "./CardForm";
 
-const AddCardModal = ({ onClose }) => {
+const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi }) => {
     const [formData, setFormData] = useState({
         cardNumber: "",
         expiryDate: "",
@@ -248,7 +248,7 @@ console.log(Id,"Id")
                  <AddCardWrapper /> 
                  </Elements> */}
                  <StripeProvider>
-                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose}/>
+                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose} data={detail} topup={topup} closeModal={closeModal} details={details} newLeadApi={newLeadApi}/>
                  </StripeProvider>
                     {/* <div className={styles.actions}>
                         <button type="button" className={styles.cancelBtn} onClick={onClose}>
@@ -264,8 +264,8 @@ console.log(Id,"Id")
 
                 <div className={styles.footerNote}>
                     <div>
-                        <p>🔒 Your payment is secure</p>
-                        <span>Your card will be securely stored for future purchases. You can update it in settings at any time.</span>
+                        <p>🔒 Your Payment Is Secure</p>
+                        <span>Your card details are safely stored for future purchases. You can update or manage your payment info anytime in your settings. You can also securely add multiple cards.</span>
                     </div>
                     <div className={styles.cards}>
                         <img src={VisaImg} alt="Visa" />

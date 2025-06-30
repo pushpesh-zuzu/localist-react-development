@@ -212,12 +212,10 @@ console.log(details,"details")
         <div className={styles.section}>
           <h3 className={styles.title}>Photos</h3>
           <p className={styles.description}>
-            Showcase what your business can do – for certain services, photos are
-            often what customers look for first – previous projects, locations and
-            venues, or before and after shots for example.
+           Add photographs and show customers what your business can do. Photos are often the first thing people check — whether it’s examples of past work, locations, venues, or before-and-after shots.
           </p>
           <label htmlFor="photo-upload" className={styles.uploadBtn}>
-            Upload photos
+            Upload Photos
           </label>
           <input
             id="photo-upload"
@@ -243,7 +241,7 @@ console.log(details,"details")
   </div>
 ) : (
   <div className={styles.paraText}>
-    Photos you add to your profile will appear here.
+    Photos you upload will be displayed on your Localists.com profile.
   </div>
 )} 
 </div> 
@@ -270,7 +268,7 @@ console.log(details,"details")
         {/* Videos Section */}
         <div className={styles.section}>
           <div className={styles.videoHeader}>
-            <h3 className={styles.title}>Videos</h3>
+            <h3 className={styles.title}>Add Videos to Your Profile</h3>
             <div className={styles.optional}>
               <img src={iIcon} alt="info" className={styles.icon} />
               <span className={styles.optionalText}>Optional</span>
@@ -281,10 +279,9 @@ console.log(details,"details")
             </div>
           </div>
           <p className={styles.description}>
-            Add YouTube videos to showcase your work and expertise – videos of
-            previous events for example.
+           Bring your services to life with YouTube, Instagram or TikTok videos. Share past projects, events, or examples of your work to help customers see your expertise in action.
           </p>
-          <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube video link</button>
+          <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube Video Links</button>
           <div  className={styles.imageContainer}>
           {formState.company_youtube_link.length > 0 ? (
   <div className={styles.videoContainer}>
@@ -302,7 +299,7 @@ console.log(details,"details")
       />
     ))}
   </div>
-) : <div className={styles.paraText}>YouTube videos you add to your profile will appear here.</div>}
+) : <div className={styles.paraText}>Your videos will appear directly on your Localists.com profile.</div>}
 </div>
           {/* {formState.company_youtube_link && getYoutubeEmbedUrl(formState.company_youtube_link) && (
             <div className={styles.videoPreview}>

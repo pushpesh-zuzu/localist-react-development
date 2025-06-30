@@ -79,6 +79,7 @@ console.log(requestDataList?.phone,"requestDataList")
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <h2 className={styles.title}>OTP Verification</h2>
+        <div className={styles.VerifyText}>Please verify your account</div>
 
         <div className={styles.otpInputs}>
           {[0, 1, 2, 3].map((index) => (
@@ -98,7 +99,7 @@ console.log(requestDataList?.phone,"requestDataList")
         </div>
 
         <p className={styles.instruction}>
-          Enter the code from the sms we sent to
+          Please enter the code sent by SMS to 
           <br />
           <span>+ {requestDataList?.phone}</span>
         </p>

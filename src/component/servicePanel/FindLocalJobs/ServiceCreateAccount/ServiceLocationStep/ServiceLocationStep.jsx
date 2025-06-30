@@ -106,10 +106,10 @@ let cityName =
     <div className={styles.parentContainer}>
       <div className={styles.container}>
         <h2 className={styles.heading}>
-          Where would you like to see leads from?
+          Tell us where you want to find new customers!
         </h2>
         <p className={styles.subheading}>
-          Tell us the area you cover so we can show you leads for your location
+        Share the areas you cover, and we'll match you with leads right in your location.
         </p>
 
         <div className={styles.card}>

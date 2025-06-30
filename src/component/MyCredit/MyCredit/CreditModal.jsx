@@ -31,8 +31,8 @@ const CreditModal = ({ onClose }) => {
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>×</button>
 <div className={styles.title}>
-        <h2 >Pricing to suit your business</h2>
-        <p className={styles.subtitle}>Build a pack to suit your business needs</p>
+        <h2 >Flexible Pricing to Grow Your Business</h2>
+        <p className={styles.subtitle}>Choose a credit pack that fits your goals and budget</p>
         </div>
 
         <div className={styles.infoBar}>
@@ -93,12 +93,12 @@ const CreditModal = ({ onClose }) => {
 
         <div className={styles.partnerSection}>
           <div>
-            <h4>You now Qualify for partnership Pricing!</h4>
-            <p>Contact our Partners team today and get:</p>
+            <h4>You have been selected for our Partnership Pricing</h4>
+            <p>Speak to our partner success team today to get even more <br/> from your Localists.com membership:</p>
             <ul>
-              <li><img src={HiredImg} alt="hire" /> Win New Business</li>
-              <li><img src={HiredImg} alt="hire" /> Priority support & expert advice</li>
-              <li><img src={HiredImg} alt="hire" /> Account Optimisation</li>
+              <li><img src={HiredImg} alt="hire" /> Win more business</li>
+              <li><img src={HiredImg} alt="hire" /> Enjoy priority support and expert growth advice</li>
+              <li><img src={HiredImg} alt="hire" /> Access account optimisation insights from our team</li>
             </ul>
           </div>
           <button className={styles.callbackBtn}>Request callback</button>

@@ -298,8 +298,7 @@ const handleUpdateService = () => {
           </div>
 
           <p className={styles.description}>
-            Every customer answers this series of questions, allowing you to
-            define exactly which type of leads you see.
+        Set your lead preferences here. Each customer answers specific questions, allowing you to set what type of leads you receive.
           </p>
 
           {leadPreferenceData?.map((item) => {

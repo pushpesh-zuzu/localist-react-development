@@ -65,11 +65,10 @@ setOpenAccordion("Reviews");
   </div>
 </div>
       <h4 className={styles.subHeading}>
-        Take two minutes to improve your profile
+       Take a moment to enhance your profile
       </h4>
       <p className={styles.description}>
-        Make the best first impression with a great profile — this is what
-        customers will look at first when choosing which professional to hire.
+       Your profile is your first chance to impress customers on Localists.com — a complete profile helps you stand out and win more work.
       </p>
       {/* <a className={styles.profileLink}  href={`/view-profile/${user_id}/$key={"admin"}`}>
         View public profile

@@ -1357,7 +1357,7 @@ const data={
           &times;
         </button>
 
-        <h2 className={styles.title}>Draw on a map</h2>
+        <h2 className={styles.title}>Define Your Service Areas - Draw on a map</h2>
 
         {/* <p className={styles.description}>
           <span className={styles.infoIcon}>
@@ -1368,8 +1368,7 @@ const data={
         </p> */}
          <div className={styles.infoBox}>
                           <img src={iIcon} alt="" />
-                          <span> You can add multiple drawn areas to define the specific places you
-          provide services.</span>
+                          <span> You can draw and add multiple service areas on the map to precisely show where you offer your services. </span>
                         </div>
 
         <div className={styles.areaButtonGroup}>

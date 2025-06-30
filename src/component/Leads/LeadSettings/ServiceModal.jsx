@@ -80,7 +80,7 @@ console.log(isEditing,'isEditing')
       <div className={styles.modalContent}>
         <h2 className={styles.title}>Services</h2>
         <p className={styles.subtitle}>
-          Select what services you provide in this location
+        Choose the specific services you offer in this area so we can match you with the most relevant leads.
         </p>
         <div className={styles.checkboxList}>
           {services.map((service) => (

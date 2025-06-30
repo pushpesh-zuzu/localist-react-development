@@ -179,9 +179,9 @@ console.log(locationType,"locationType")
               &times;
             </button>
 
-            <h2 className={styles.title}>Add a location</h2>
+            <h2 className={styles.title}>Add a Location</h2>
             <p className={styles.subtitle}>
-              Choose how you want to set your location
+              Choose how you’d like to set your service area
             </p>
 
             <div className={styles.optionsContainer}>
@@ -197,8 +197,7 @@ console.log(locationType,"locationType")
                 <div className={styles.textContainer}>
                   <h3 className={styles.optionTitle}>Distance</h3>
                   <p className={styles.optionDescription}>
-                    Enter a ZIP code or town and then choose how far from there
-                    - as the crow flies.
+                  Enter a postcode or town, then set how far you’re willing to travel from that point (straight-line radius).
                   </p>
                 </div>
               </div>
@@ -213,10 +212,9 @@ console.log(locationType,"locationType")
                   className={styles.icon}
                 />
                 <div className={styles.textContainer}>
-                  <h3 className={styles.optionTitle}>Travel time</h3>
+                  <h3 className={styles.optionTitle}>Travel Time</h3>
                   <p className={styles.optionDescription}>
-                    Enter a ZIP code or town and tell us how long you want your
-                    maximum drive to be.
+                    Let us know your starting point and the maximum time you're happy to travel—perfect for service zones based on real driving time.
                   </p>
                 </div>
               </div>
@@ -231,9 +229,9 @@ console.log(locationType,"locationType")
                   className={styles.icon}
                 />
                 <div className={styles.textContainer}>
-                  <h3 className={styles.optionTitle}>Draw on a map</h3>
+                  <h3 className={styles.optionTitle}>Draw on a Map</h3>
                   <p className={styles.optionDescription}>
-                    Draw your own specific area on the map.
+                   Custom-draw one or more specific areas directly on the map to define your exact service boundaries.
                   </p>
                 </div>
               </div>
@@ -252,8 +250,7 @@ console.log(locationType,"locationType")
                   <div className={styles.textContainer}>
                     <h3 className={styles.optionTitle}>Nationwide</h3>
                     <p className={styles.optionDescription}>
-                      Choose the nationwide location if you provide services
-                      across the whole country.
+                     Offer services across the entire country? Choose this to appear in searches from any location.
                     </p>
                   </div>
                 </div>

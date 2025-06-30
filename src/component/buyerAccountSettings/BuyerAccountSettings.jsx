@@ -244,8 +244,9 @@ const BuyerAccountSettings = () => {
             <span>
               <img src={iIcon} alt="Profile" />
             </span>
-            Keep your details updated so that professionals can get in touch. If
-            you no longer require the service, please close the request.
+           Make sure your contact details are up to date so professionals can reach you.
+ If you no longer need the service, please remember to close your request.
+
           </p>
           <button className={styles.requestButton} onClick={hanldeRequest}>
             Go to My Requests

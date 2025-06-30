@@ -51,6 +51,9 @@
   font-size: 14px;
   margin-top: 16px;
 }
+.infoBox img {
+  margin-top: -26px;
+}
 
 .infoBox span {
   font-weight: 400;
@@ -191,7 +194,7 @@
   padding: 0px;
 }
 .infoBox img {
-  margin-top: -16px;
+  margin-top: -34px;
 }
 .infoBox span {
  

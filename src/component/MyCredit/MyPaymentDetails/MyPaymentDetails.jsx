@@ -34,7 +34,7 @@ const MyPaymentDetails = () => {
                         <img src={iIcon} alt="iIcon" />
                     </span>
                     <p className={styles.description}>
-                        We don't have any payment information for you yet
+                        We don’t have any payment information on file for you yet.
 
                     </p>
                 </div>

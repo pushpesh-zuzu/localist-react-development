@@ -72,19 +72,17 @@ const InvoiceAndBilling = () => {
         <>
             <div className={styles.container}>
                 <div className={styles.backText} onClick={handleBack}>← Setting</div>
-                <h1 className={styles.heading}>Invoices and billing details</h1>
+                <h1 className={styles.heading}>Invoices & Billing Details</h1>
 
                 <div className={styles.manageWrapper}>
                     <span className={styles.infoIcon}>
                         <img src={iIcon} alt="iIcon" />
                     </span>
                     <p className={styles.description}>
-                        We’ll use these account details to contact you but won’t share them
-                        with customers. You can control the contact details that customers see
-                        for your business in{" "}
+                        We use these details to manage your account and send you billing information. This information is private and won’t be shared with customers. To manage what contact details are visible to customers, visit your {" "}
                         <Link to="/settings/my_profile" className={styles.link} >
                             My Profile
-                        </Link>
+                        </Link> settings
                         .
                     </p>
                 </div>

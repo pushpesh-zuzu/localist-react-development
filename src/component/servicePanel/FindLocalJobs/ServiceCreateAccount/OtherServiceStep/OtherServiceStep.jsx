@@ -258,9 +258,9 @@ const handleExpandRadius = () => {
       <div className={styles.container}>
         <div className={styles.headerContainer}>
           <h2 className={styles.otherService_heading}>
-            Add other services you can provide
+          Add any additional services you can provide
           </h2>
-          <p className={styles.subHeading}>Maximise your leads</p>
+          <p className={styles.subHeading}>Get even more great leads.</p>
         </div>
 
         <div className={styles.card}>
@@ -335,6 +335,7 @@ const handleExpandRadius = () => {
             />
             <span className={styles.labelText}>Auto Bid</span>
           </label>
+          <div className={styles.newContent}>What areas do you provide these additional services in?</div>
           <div className={styles.milesBox}>
             <div className={styles.dropdownWrapper}>
               <select

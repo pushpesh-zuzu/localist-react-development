@@ -77,11 +77,9 @@ useEffect(() => {
     <div className={styles.container}>
       {/* Social Media Section */}
       <div className={styles.card}>
-        <h3 className={styles.heading}>Social media</h3>
+        <h3 className={styles.heading}>Social Media</h3>
         <p className={styles.subtext}>
-          Add your company social media accounts to lend credibility to your
-          business – it is often something customers will look for to validate
-          their hiring decisions.
+         Add your business’s social media profiles to help build trust. Customers often check these when deciding who to hire.
         </p>
 
         {platforms.map((platform, idx) => (
@@ -114,7 +112,7 @@ useEffect(() => {
       {/* Links Section */}
       <div className={styles.card}>
         <div className={styles.header}>
-          <h3 className={styles.heading}>Links</h3>
+          <h3 className={styles.heading}>Promote Your Business</h3>
           <div className={styles.optionalToggle}>
             <img src={iIcon} alt="info" className={styles.icon} />
             <span className={styles.optionalText}>Optional</span>
@@ -126,8 +124,7 @@ useEffect(() => {
         </div>
         <div className={styles.labelWrapper}>
           <p className={styles.subtext}>
-            Link to your own website, articles about your business, or any other
-            content that will help promote your business.
+            Share links to your website, articles, or other online content to help customers learn more about your services & business.
           </p>
         </div>
         <div className={styles.inputWithToggle}>

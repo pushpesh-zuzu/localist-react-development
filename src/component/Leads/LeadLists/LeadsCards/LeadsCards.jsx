@@ -586,6 +586,7 @@ const LeadsCards = ({ enoughCredit }) => {
           enoughCredit={planpurcahse}
           confirmModal={isModalOpen}
           details={selectedItem}
+          newLeadApi={"newLead"}
         />
       )}
     </>

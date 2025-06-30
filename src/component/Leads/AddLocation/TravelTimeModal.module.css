@@ -54,7 +54,9 @@
   font-weight: 400;
   font-size: 18px;
 }
-
+.infoBox img{
+  margin-top: -26px;
+}
 
 
 .infoIcon {
@@ -233,11 +235,23 @@
   padding-bottom: 16px;
 }
 .infoBox img {
-  margin-top: -32px;
+  margin-top: -36px;
 }
 .infoBox span {
  
   font-size: 12px;
   
 }
+}
+@media screen and (max-width: 390px) {
+  .infoBox img {
+  margin-top: -36px;
+}
+  
+}
+@media screen and (max-width: 350px) {
+  .infoBox img {
+  margin-top: -52px;
+}
+  
 }
