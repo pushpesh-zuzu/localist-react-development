@@ -14,6 +14,7 @@ const formatTitle = (title) => {
   if (!title || typeof title !== "string") return null; // 🛡️ Safety check
 
   const parts = title.split("&");
+  const parts1 = title.split("and");
 
   if (parts.length > 1) {
     return (
@@ -21,7 +22,16 @@ const formatTitle = (title) => {
         {parts[0]} <span className={styles.blackText}>&</span> {parts[1]}
       </h4>
     );
-  } else {
+  }
+    else if (parts1.length > 1) {
+    return (
+      <h4 className={styles.categoryTitleText}>
+        {parts1[0]} <span className={styles.blackText}>and</span> {parts1[1]}
+      </h4>
+    );
+  }
+  
+  else {
     return (
       <span className={styles.categoryTitleText}>{parts[0]}</span>
     );
