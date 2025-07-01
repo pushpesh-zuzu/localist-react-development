@@ -15,7 +15,7 @@ const BrowserNotification = () => {
 
     useEffect(() => {
       const data = {
-        user_type: "seller",
+        user_type: "buyer",
         noti_type: "browser",
       };
       dispatch(getNotificationData(data));
@@ -26,7 +26,7 @@ const BrowserNotification = () => {
       setLoadingNoti(notiName); 
   
       const data = {
-        user_type: "seller",
+        user_type: "buyer",
         noti_name: notiName,
         noti_type: "browser",
         noti_value: isChecked ? 1 : 0,
@@ -35,7 +35,7 @@ const BrowserNotification = () => {
       await dispatch(addNotificationData(data));
       await dispatch(
         getNotificationData({
-          user_type: "seller",
+          user_type: "buyer",
           noti_type: "browser",
         })
       );
@@ -57,10 +57,10 @@ const BrowserNotification = () => {
         <div className={styles.notificationList}>
           {notificationList.map((notification, index) => {
             let notiName = "";
-            if (index === 0) notiName = "new_leads_seller_receive";
-            else if (index === 1) notiName = "customers_sending_me_a_message";
+            if (index === 0) notiName = "buyer_browser_new_lead";
+            else if (index === 1) notiName = "buyer_browser_customer_sending_message";
             else if (index === 2)
-              notiName = "new_reviews_on_sellers_profile";
+              notiName = "buyer_browser_new_review";
 
             return (
               <div
@@ -70,9 +70,9 @@ const BrowserNotification = () => {
                 className={`${styles.notificationItem} ${styles[`item${index}`]} ${index >= 0 ? styles.shadow : ""}`}
               >
                 <span>
-                  {notification?.noti_name === "new_leads_seller_receive"
+                  {notification?.noti_name === "buyer_browser_new_lead"
                     ? "New leads I receive"
-                    : notification?.noti_name === "customers_sending_me_a_message"
+                    : notification?.noti_name === "buyer_browser_customer_sending_message"
                       ? "Customers sending me a message"
                       : "New reviews on my profile"}
                 </span>
