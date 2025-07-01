@@ -66,6 +66,7 @@ setIsOpen(true)
         <div className={styles.headingTabsWrapper}>
           
           <h1 className={styles.heading}>{webData[0] || "Your Service"}</h1>
+          <div className={styles.middleText}>Your Top 5 local professional matches are below. You can contact any of the <br/> professionals to get more information using the contact button.</div>
           <div className={styles.tabs}>
             <button className={styles.activeTab} onClick={handleBack} >
               Your matches
@@ -183,7 +184,7 @@ setIsOpen(true)
                 </div>
 
                 <div className={styles.replyBtnWrapper}>
-              <button className={styles.replyBtn} onClick={() => handleConatct(item)}>Contact</button>
+              <button className={styles.replyBtn} onClick={() => handleConatct(item)}>Contact the Professional Now</button>
             </div>
               </div>
             </div>

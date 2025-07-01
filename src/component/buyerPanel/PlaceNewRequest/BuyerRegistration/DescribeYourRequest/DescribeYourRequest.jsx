@@ -144,7 +144,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         value={text}
         rows={6}
         onChange={handleChange}
-        placeholder="What would be helpful for the professional to know?"
+        placeholder="What should the professional know to better understand your request?"
       />
       {textError && (
         <span className={styles.errorMessage}>
@@ -159,7 +159,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         }`}
       >
         <img src={PlusIcon} alt="" />
-        <span>Add photos/files</span>
+        <span>Upload photos or files (optional)</span>
         <input
           type="file"
           multiple
@@ -185,7 +185,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
 
       <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
-          Protected under our{" "}
+        Your information is protected by our privacy policy {" "}
           <a
             href="/privacy-policy"
             target="blank"

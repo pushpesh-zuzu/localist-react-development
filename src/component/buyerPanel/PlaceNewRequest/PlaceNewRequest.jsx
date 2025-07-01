@@ -91,17 +91,18 @@ console.log("buyerRequestList",buyerRequestList)
       ) : (
         <div className={styles.card}>
           <h3 className={styles.heading}>
-            Find services for your business on Localists
+         Find Local Services Professionals with Localists
           </h3>
+          <p className={styles.text}>Need a better deal on local professional services?</p>
           <p className={styles.text}>
-            Most business could be getting a better deal on the services they
-            use day to day <br />
-            We got thousands of suppliers ready and waiting to quote.
+         Localists connect you with trusted local professionals who are specialists in their field —
+         <br/> ready to help you and ready to quote.
           </p>
           <p className={styles.text}>
-            Find everything from web designers to bookkeepers and telephone
-            systems to office stationary
+          From landscapers and gardeners to cleaners and builders,
+          <br/>we find the right expert for your needs in just a few clicks. 
           </p>
+          <p className={styles.lastText}>Get up to 5 quotes from trusted professionals and get the peace of mind you’ve found the best price and professional for your needs - and we’re fast! On average our customers receive 5 quotes from reputable local professionals within 5 days.</p>
           <button className={styles.bottomButton} onClick={openModal}>
             Place new request
           </button>

@@ -192,8 +192,8 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
         {getUserType() == 1 && !viewProfile  && (
           <>
             <div
-              className={`${styles.navItem} ${location.pathname === "/settings" ? styles.active : ""}`}
-              onClick={() => handleNavigation("/settings")}
+              className={`${styles.navItem} ${location.pathname === "/dashboard" ? styles.active : ""}`}
+              onClick={() => handleNavigation("/dashboard")}
             >
               Dashboard
             </div>
