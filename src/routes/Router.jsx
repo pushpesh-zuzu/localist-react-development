@@ -43,6 +43,8 @@ import InvoiceAndBilling from "../component/MyCredit/InvoiceAndBilling/InvoiceAn
 import MyPaymentDetails from "../component/MyCredit/MyPaymentDetails/MyPaymentDetails";
 import EmailNotification from "../component/SellerNotification/EmailNotification/EmailNotification";
 import BrowserNotification from "../component/SellerNotification/BrowserNotification/BrowserNotification";
+import BuyerFirstStep from "../component/buyerPanel/buyerClose/buyerCloseStep/buyerFirstStep";
+import BuyerSecondStep from "../component/buyerPanel/buyerClose/buyerSecondStep/BuyerSecond";
 //test en/gb/bookkeeping-services/
 
 
@@ -307,6 +309,24 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+        {
+        path: "/buyer-close",
+        element: (
+          <ProtectedRoute>
+        <BuyerFirstStep/>
+          </ProtectedRoute>
+        ),
+      },
+       {
+        path: "/buyer-second-step",
+        element: (
+          <ProtectedRoute>
+        <BuyerSecondStep/>
+          </ProtectedRoute>
+        ),
+      },
+
+
       // { path: "/inprogress", element: <InProgressPage /> },
       { path: "*", element: <NotFound /> },
     ],

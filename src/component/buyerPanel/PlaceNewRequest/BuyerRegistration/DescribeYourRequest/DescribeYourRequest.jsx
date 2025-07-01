@@ -197,7 +197,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
 
       <div className={styles.progressContainer}>
-        <span>Quality score</span>
+        <span>Request quality</span>
         <div className={styles.progressBar}>
           <div
             className={styles.progressFill}
@@ -207,7 +207,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
 
       <div className={styles.addMoreDetail}>
-        <p>Add more detail to improve your request</p>
+        <p>Quality score increases as you add more detail</p>
       </div>
 
       <label className={styles.checkboxContainer}>
@@ -226,7 +226,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
               indicator={<LoadingOutlined spin style={{ color: "white" }} />}
             />
           ) : (
-            " View Matches"
+            " See My Matches"
           )}
         </button>
       </div>

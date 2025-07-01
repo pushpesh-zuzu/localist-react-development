@@ -39,6 +39,7 @@
   background-color: #f4f4f4;
   /* width: 98px; */
   /* height: 93px; */
+  width: 175px;
   display: flex;
   flex-direction: column;
   gap: 10px;

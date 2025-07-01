@@ -1,0 +1,52 @@
+import React from "react";
+import styles from "./ImageModal.module.css";
+// import personalTrainers from "./images/personalTrainers.jpg"; // Replace with actual paths
+// import counselling from "./images/counselling.jpg";
+// import massage from "./images/massage.jpg";
+// import wedding from "./images/wedding.jpg";
+// import dj from "./images/dj.jpg";
+// import magician from "./images/magician.jpg";
+import DummyImage from "../../../assets/Images/DummyImage.svg"
+import RightClick from "../../../assets/Images/Setting/RightModalClick.svg"
+
+const services = [
+  { title: "Personal Trainers", image: DummyImage },
+  { title: "Counselling", image: DummyImage },
+  { title: "Massage Therapy", image: DummyImage },
+  { title: "Wedding Photography", image: DummyImage },
+  { title: "DJ", image: DummyImage },
+  { title: "Magician", image: DummyImage },
+];
+
+const ImageModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <div className={styles.icon}><img src={RightClick} alt="..." /></div>
+          <h2>Your request has been closed</h2>
+        </div>
+        <p className={styles.subtext}>Do you need any of these services?</p>
+
+        <div className={styles.grid}>
+          {services.map((service, index) => (
+            <div key={index} className={styles.card}>
+              <img src={service.image} alt={service.title} />
+              <span>{service.title}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.actions}>
+          <button className={styles.skipButton} onClick={onClose}>
+            Skip
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ImageModal;
