@@ -5,6 +5,9 @@ import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegisterData, setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Avatar, Popover } from "antd";
+import { getNotificationList,markNotificationsAsRead } from "../../../store/Seller/notificationService";
+import moment from "moment";
+import bellIcon from "../../../assets/Icons/bell.svg"
 import {
   setCurrentUser,
   setUserToken,
@@ -31,6 +34,14 @@ const profileId = useParams()
   useEffect(() => {
     setDataSave(userToken?.active_status)
   }, [userToken])
+   useEffect(() => {
+    const payload = {
+      user_id:  userToken?.id || registerData?.id || ""
+    };
+    if (payload.user_id) {
+      dispatch(getNotificationList(payload));
+    }
+  }, [dispatch, userToken, registerData]);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigation = (path) => {
@@ -148,7 +159,9 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
   const onChange = () => {
 
   }
-
+  const notifications = useSelector((state) => state.notification.notificationList);
+  const unreadCount = notifications?.filter(n => n.status === "unread").length;
+  const [popoverVisible, setPopoverVisible] = useState(false);
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
@@ -160,6 +173,18 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
 
   const userInitial = userName.charAt(0).toUpperCase();
   const showHamburgerIcon = userToken?.remember_tokens || registerData?.remember_tokens
+  const formatDate = (dateString) => {
+    return moment(dateString).format("Do MMM, YYYY h:mm A");
+  };
+  const handleVisibleChange = (visible) => {
+    setPopoverVisible(visible);
+    if (visible && unreadCount > 0) {
+      const payload = {
+        user_id: userToken?.id || registerData?.id
+      };
+      dispatch(markNotificationsAsRead(payload));
+    }
+  };
   return (
     <div className={styles.logSwitchContainer}>
       {/* Hamburger Icon */}
@@ -227,6 +252,75 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
             >
               Help
             </div>
+            <Popover
+                  trigger="click"
+                  placement="bottomRight"
+                  visible={popoverVisible}
+                  onVisibleChange={handleVisibleChange}
+                  overlayStyle={{ maxHeight: "50vh", overflowY: "auto", width: "360px" }}
+                  content={
+                    <div
+                      style={{
+                        maxHeight: "50vh",
+                        overflowY: "auto",
+                        width: "320px",
+                        padding: "10px",
+                      }}
+                    >
+                      {notifications.length > 0 ? (
+                        notifications.map((noti, index) => (
+                          <div key={noti.id}>
+                            <div style={{ marginBottom: "8px" }}>
+                              <div style={{ fontWeight: "600", fontSize: "14px" }}>{noti.title}</div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                  alignItems: "center",
+                                  gap: "12px",
+                                  marginTop: "4px",
+                                  fontSize: "11px",
+                                }}
+                              >
+                                <span>{noti.message}</span>
+                                <span>{formatDate(noti.created_at)}</span>
+                              </div>
+                            </div>
+                            {index !== notifications.length - 1 && (
+                              <hr style={{ borderTop: "1px solid #eee", margin: "8px 0" }} />
+                            )}
+                          </div>
+                        ))
+                      ) : (
+                        <div style={{ fontSize: "12px", color: "#999" }}>No new notifications</div>
+                      )}
+                    </div>
+                  }
+                >
+                  <div style={{ position: "relative", cursor: "pointer" }}>
+                    <img src={bellIcon} alt="Notifications" width={20} height={20} />
+                    {unreadCount > 0 && (
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "-4px",
+                          right: "-4px",
+                          backgroundColor: "red",
+                          color: "white",
+                          borderRadius: "50%",
+                          width: "16px",
+                          height: "16px",
+                          fontSize: "10px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {unreadCount}
+                      </span>
+                    )}
+                  </div>
+                </Popover>
             {/* <div className={styles.nameCircle}>{userInitial}</div> */}
                 {userData ? (
       <Avatar
