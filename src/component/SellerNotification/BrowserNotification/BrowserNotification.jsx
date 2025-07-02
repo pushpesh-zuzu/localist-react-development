@@ -10,93 +10,109 @@ import { Spin } from "antd";
 
 const BrowserNotification = () => {
   const dispatch = useDispatch();
-  const { notificationList, notificationLoader } = useSelector((state) => state.seller);
-  const [loadingNoti, setLoadingNoti] = useState(""); 
 
-    useEffect(() => {
-      const data = {
-        user_type: "buyer",
-        noti_type: "browser",
-      };
-      dispatch(getNotificationData(data));
-    }, [dispatch]);
+  
+  const { notificationList = [], notificationLoader } = useSelector((state) => state.seller);
 
-    const handleSwitch = (notiName) => async (e) => {
-      const isChecked = e.target.checked;
-      setLoadingNoti(notiName); 
-  
-      const data = {
-        user_type: "buyer",
-        noti_name: notiName,
-        noti_type: "browser",
-        noti_value: isChecked ? 1 : 0,
-      };
-  
-      await dispatch(addNotificationData(data));
-      await dispatch(
-        getNotificationData({
-          user_type: "buyer",
-          noti_type: "browser",
-        })
-      );
-  
-      setLoadingNoti(""); 
+  const [loadingNoti, setLoadingNoti] = useState("");
+
+  const allNotificationTypes = [
+    {
+      notiName: "buyer_browser_new_lead",
+      label: "New leads I receive",
+    },
+    {
+      notiName: "buyer_browser_customer_sending_message",
+      label: "Customers sending me a message",
+    },
+    {
+      notiName: "buyer_browser_new_review",
+      label: "New reviews on my profile",
+    },
+  ];
+
+  useEffect(() => {
+    const data = {
+      user_type: "buyer",
+      noti_type: "browser",
     };
+    dispatch(getNotificationData(data));
+  }, [dispatch]);
+
+  const handleSwitch = (notiName) => async (e) => {
+    const isChecked = e.target.checked;
+    setLoadingNoti(notiName);
+
+    const data = {
+      user_type: "buyer",
+      noti_name: notiName,
+      noti_type: "browser",
+      noti_value: isChecked ? 1 : 0,
+    };
+
+    await dispatch(addNotificationData(data));
+    await dispatch(
+      getNotificationData({
+        user_type: "buyer",
+        noti_type: "browser",
+      })
+    );
+
+    setLoadingNoti("");
+  };
 
   return (
     <div className={styles.container}>
-          <h2 className={styles.heading}>Notifications</h2>
-          <div className={styles.infoBox}>
-            <span className={styles.infoIcon}>
-              <img src={iIcon} alt="" />
-            </span>
-            <span>Please select what you would like to receive Notifications about </span>
-          </div>
+      <h2 className={styles.heading}>Notifications</h2>
+      <div className={styles.infoBox}>
+        <span className={styles.infoIcon}>
+          <img src={iIcon} alt="Info" />
+        </span>
+        <span>
+          Please select what you would like to receive Notifications about
+        </span>
+      </div>
 
-           {notificationLoader ? <Spin style={{ display: "flex", justifyContent: "center", alignItems: "center" }} /> :
+      {notificationLoader ? (
+        <div className={styles.loader}>
+          <Spin />
+        </div>
+      ) : (
         <div className={styles.notificationList}>
-          {notificationList.map((notification, index) => {
-            let notiName = "";
-            if (index === 0) notiName = "buyer_browser_new_lead";
-            else if (index === 1) notiName = "buyer_browser_customer_sending_message";
-            else if (index === 2)
-              notiName = "buyer_browser_new_review";
+          {allNotificationTypes.map((type, index) => {
+            // Find the existing notification or fallback to default (value = 0)
+            const notification =
+              notificationList.find((n) => n.noti_name === type.notiName) || {
+                noti_name: type.notiName,
+                noti_value: 0,
+              };
 
             return (
               <div
                 key={index}
-                // className={`${styles.notificationItem} ${index >= 0 ? styles.shadow : ""
-                //   }`}
-                className={`${styles.notificationItem} ${styles[`item${index}`]} ${index >= 0 ? styles.shadow : ""}`}
+                className={`${styles.notificationItem} ${styles[`item${index}`]} ${styles.shadow}`}
               >
-                <span>
-                  {notification?.noti_name === "buyer_browser_new_lead"
-                    ? "New leads I receive"
-                    : notification?.noti_name === "buyer_browser_customer_sending_message"
-                      ? "Customers sending me a message"
-                      : "New reviews on my profile"}
-                </span>
-                {loadingNoti === notiName ? (
+                <span>{type.label}</span>
+                {loadingNoti === type.notiName ? (
                   <Spin size="small" />
                 ) : (
                   <label className={styles.switch}>
                     <input
                       type="checkbox"
-                      checked={notification?.noti_value === 1}
-                      onChange={handleSwitch(notiName)}
+                      checked={notification.noti_value === 1}
+                      onChange={handleSwitch(type.notiName)}
                     />
                     <span className={styles.slider}></span>
+                    {/* <span>{type.notiName}</span> */}
                   </label>
                 )}
               </div>
             );
           })}
-          
         </div>
-      }
-      {/* <p>This section will contain the browser notification settings.</p> */}
-      {/* Add your browser notification settings components here */}
+      )}
     </div>
   );
-}   
+};
+
 export default BrowserNotification;

@@ -39,7 +39,7 @@ export const addNotificationData = (addNotificationData) => {
       );
 
       if (response) {
-      //  dispatch(setGetNotificationData(response?.data?.data));
+        dispatch(setGetNotificationData(response?.data?.data));
         return response.data
       }
     } catch (error) {
