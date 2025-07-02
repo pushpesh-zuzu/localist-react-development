@@ -65,11 +65,17 @@
   padding: 14px;
   margin: 10px 0 0 0;
   resize: none;
-  /* overflow-y: auto; */
+  font-size: 14px;
+  
 }
-
+/* 
 .textarea::placeholder {
   font-family: Poppins;
+  font-style: italic;
+} */
+.textarea::placeholder {
+  font-style: italic;
+  /* color: #000; */
 }
 
 .errorMessage {
@@ -196,6 +202,7 @@
   font-weight: 500;
   font-size: 14px;
   text-align: start;
+  
 
   input {
     appearance: none;
@@ -223,6 +230,22 @@
       }
     }
   }
+}
+.textLine1 {
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.textLine2 {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 2px;
+  display: inline-block;
+  font-style: italic !important;
+  font-family: 'Poppins', sans-serif;
+  
+ 
 }
 
 .buttonWrapper {

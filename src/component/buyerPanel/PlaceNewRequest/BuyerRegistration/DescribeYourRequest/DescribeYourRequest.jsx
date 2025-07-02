@@ -145,7 +145,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         value={text}
         rows={6}
         onChange={handleChange}
-        placeholder="What should the professional know to better understand your request?"
+        placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
       />
       {textError && (
         <span className={styles.errorMessage}>
@@ -200,17 +200,33 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         <p>Quality score increases as you add more detail</p>
       </div>
 
-      <label className={styles.checkboxContainer}>
+      {/* <label className={styles.checkboxContainer}>
         <input
           type="checkbox"
           checked={professionalLetin}
           onChange={handleCheckboxChange}
         />
-       <span className={styles.TextBox}>Tick if you'd like to hear back quickly</span> <br/>
+       Tick if you'd like to hear back quickly <br/>
+       
  I’m happy to be contacted as soon as possible 
 
-      </label>
-
+      </label> */}
+<label className={styles.checkboxContainer}>
+  <input
+    type="checkbox"
+    checked={professionalLetin}
+    onChange={handleCheckboxChange}
+  />
+  <div style={{ marginLeft:"-4px", flexDirection: "column" }}>
+  <span className={styles.textLine1}>
+    Tick if you'd like to hear back quickly
+  </span>
+  <br />
+  <span className={styles.textLine2}>
+   I’m happy to be contacted as soon as possible
+  </span>
+  </div>
+</label>
       <div className={styles.buttonWrapper}>
         <button className={styles.viewMatchesBtn} onClick={handleSubmit}>
           {addDetailLoader ? (
@@ -224,7 +240,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
         <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
-        Your information is protected by our privacy policy {" "}
+        Your information is protected by our {" "}
           <a
             href="/privacy-policy"
             target="blank"

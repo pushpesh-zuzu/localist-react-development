@@ -47,7 +47,7 @@ console.log("buyerRequestList",buyerRequestList)
 
       {buyerrequestListLoader ? (
         <Spin />
-      ) : buyerRequestList?.length > 0 ? (
+      ) : buyerRequestList?.length < 0 ? (
         <div className={styles.cardsContainer}>
           {[...buyerRequestList]
             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
