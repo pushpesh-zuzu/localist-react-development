@@ -59,6 +59,9 @@
   gap: 12px;
   flex-wrap: wrap;
 }
+.textcolor {
+    color: var(--primary-color);
+}
 
 .cancelBtn,
 .nextBtn {
@@ -109,11 +112,18 @@
 
 /* 🔻 Extra small screens (phones) */
 @media (max-width: 480px) {
+     .container {
+    margin: 30px 0px;
+    padding: 0px 0px;
+  }
   .infoBox {
     font-size: 13px;
     padding: 16px;
+    margin: 10px;
   }
-
+.options {
+    margin: 10px;
+}
   .question {
     font-size: 16px;
   }
@@ -121,6 +131,9 @@
   .radioLabel {
     font-size: 13px;
     padding: 8px;
+  }
+  .buttonGroup {
+    margin: 10px;
   }
 
   .cancelBtn,

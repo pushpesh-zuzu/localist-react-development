@@ -70,11 +70,11 @@
 }
 /* 
 .textarea::placeholder {
+  font-style: italic;
+  } */
+  .textarea::placeholder {
+  /* font-style: italic; */
   font-family: Poppins;
-  font-style: italic;
-} */
-.textarea::placeholder {
-  font-style: italic;
   /* color: #000; */
 }
 

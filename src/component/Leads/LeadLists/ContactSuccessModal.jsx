@@ -7,6 +7,7 @@ import smsBtn from "../../../assets/Images/MyResponse/annotation.svg";
 import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
 import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
 import locallistImgs from "../../../assets/Images/Setting/newLogoCredit.svg";
+import locallistImg from "../../../assets/Images/Leads/localistImg.svg";
 import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -200,11 +201,17 @@ console.log(phoneNumber,email, "phoneNumber");
 
           {!repliesBtn && <div className={styles.footer}>
             <div className={styles.creditsBox}>
-             <img src={locallistImgs} alt="..." />
+             <img src={locallistImg} alt="..." /> <strong>70 credits</strong>
             </div>
+            <div className={styles.midLine}></div>
             <div className={styles.guarantee}>
+              <div className={styles.secondBox}>
+               <img src={locallistImgs} alt="..." />
+               <div className={styles.textcontent}>
               Covered by our <strong>100% New Business Guarantee </strong><br />
               If you're not hired during the starter pack, we'll return all the credits.
+              </div>
+            </div>
             </div>
              {/* <img src={locallistImgs} alt="..." /> */}
           </div>}

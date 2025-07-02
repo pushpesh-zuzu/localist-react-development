@@ -61,12 +61,7 @@
 }
 
 .dropdown {
-  flex: 1 1 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  font-size: 14px;
+
 }
 
 .checkboxGroup {
@@ -106,6 +101,22 @@
   background-color: #00bfff;
   color: #fff;
 }
+ .customSelect {
+  appearance: none;           
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('../../../../assets/Icons/arrow-down.svg');
+  background-repeat: no-repeat;
+  background-position: right 5px center; 
+  padding-right: 40px;
+  background-size: 18px 18px;
+    flex: 1 1 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+} 
 
 /* 🔻 Responsive for tablets and below */
 @media (max-width: 768px) {
@@ -138,13 +149,30 @@
 
 /* 🔻 Extra small screens */
 @media (max-width: 480px) {
+       .container {
+    margin: 30px 0px;
+    padding: 0px 0px;
+  }
   .infoBox {
     font-size: 13px;
     padding: 16px;
+     margin: 10px;
+  }
+  .subtext {
+    margin: 10px;
+  }
+  .checkboxGroup {
+    margin: 10px;
+  }
+  .inputGroup {
+    margin: 10px;
   }
 
   .question {
     font-size: 16px;
+  }
+  .buttonGroup {
+    margin: 10px;
   }
 
   .backBtn,

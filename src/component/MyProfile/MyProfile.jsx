@@ -68,7 +68,7 @@ setOpenAccordion("Reviews");
        Take a moment to enhance your profile
       </h4>
       <p className={styles.description}>
-       Your profile is your first chance to impress customers on Localists.com — a complete profile helps you stand out and win more work.
+       Your profile is your first chance to impress customers on Localists.com — a complete profile helps you stand out <br/> and win more work.
       </p>
       {/* <a className={styles.profileLink}  href={`/view-profile/${user_id}/$key={"admin"}`}>
         View public profile

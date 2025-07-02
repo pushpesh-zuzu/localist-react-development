@@ -103,7 +103,7 @@ console.log("buyerRequestList",buyerRequestList)
           </p>
           <p className={styles.text}>
           From landscapers and gardeners to cleaners and builders,
-          <br/>we find the right expert for your needs in just a few clicks. 
+          we find the right expert <br/> for your needs in just a few clicks. 
           </p>
           <p className={styles.lastText}>Get up to 5 quotes from trusted professionals and get the peace of mind you’ve found the best price and professional for your needs - and we’re fast! On average our customers receive 5 quotes from reputable local professionals within 5 days.</p>
           <button className={styles.bottomButton} onClick={openModal}>

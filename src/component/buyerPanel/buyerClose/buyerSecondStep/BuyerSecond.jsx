@@ -30,7 +30,7 @@ setIsModalOpen(true);
           <span>£</span>
           <input type="number" placeholder="0" />
         </div>
-        <select className={styles.dropdown}>
+        <select  className={styles.customSelect}>
           <option>Total Price</option>
           <option>Hour</option>
           <option>Day</option>

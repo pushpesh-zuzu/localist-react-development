@@ -104,7 +104,7 @@
 /* 🔻 Tablet and below */
 @media (max-width: 768px) {
   .modal {
-    padding: 24px 20px;
+   margin: 0px 10px;
   }
 
  
@@ -135,7 +135,13 @@
 @media (max-width: 480px) {
   .modal {
     /* padding: 20px 16px; */
-    margin: 20px 20px;
+    margin: 10px 0px;
+  }
+  .overlay {
+    padding: 0px;
+    overflow-x: scroll;
+    height: 80vh;
+    top: 0%;
   }
 
   .subtext {
