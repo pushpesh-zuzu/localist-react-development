@@ -158,9 +158,12 @@
     padding: 16px;
      margin: 10px;
   }
-  .subtext {
-    margin: 10px;
+    .subtext  {
+    margin: 10px 10px 20px 10px;
   }
+  /* .subtext {
+    margin: 10px;
+  } */
   .checkboxGroup {
     margin: 10px;
   }
@@ -170,9 +173,11 @@
 
   .question {
     font-size: 16px;
+    margin-top: 16px;
+    margin-bottom: -4px;
   }
   .buttonGroup {
-    margin: 10px;
+    margin: 14px;
   }
 
   .backBtn,
