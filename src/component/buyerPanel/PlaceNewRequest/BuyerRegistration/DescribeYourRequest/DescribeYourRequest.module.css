@@ -128,7 +128,7 @@
 
 .privacyWrapper {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   text-align: start;
 }
 
@@ -180,7 +180,9 @@
   color: #828282;
   text-align: left;
 }
-
+.TextBox {
+  font-weight: 800;
+}
 .checkboxContainer {
   display: flex;
   align-items: center;
@@ -193,6 +195,7 @@
   margin-top: 16px;
   font-weight: 500;
   font-size: 14px;
+  text-align: start;
 
   input {
     appearance: none;

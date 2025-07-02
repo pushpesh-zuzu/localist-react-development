@@ -130,7 +130,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
                         <textarea
                             name="review"
                             className={styles.textarea}
-                            placeholder="Describe what it was like working with Resolve Energy Ltd and the reasoning behind your rating."
+                            placeholder="Tell us what it was like working with Logo Design. What stood out? What worked well? Why did you choose this ratingDescribe what it was like working with Resolve Energy Ltd and the reasoning behind your rating."
                             rows="5"
                             value={formData.review}
                             onChange={handleChange}

@@ -40,6 +40,7 @@ const CreditModal = ({ onClose }) => {
           <span className={styles.responses}>Responses: Approximately {responseEstimate}    </span>
           <span className={styles.cost}>Cost: £{price} (ex VAT)</span>
         </div>
+        <div className={styles.adjustText}>Adjust the slider to select the right number of credits for your needs</div>
 
         {/* <input
           type="range"
@@ -90,6 +91,7 @@ const CreditModal = ({ onClose }) => {
         <div className={styles.centerBtn}>
           <button className={styles.buyBtn}>Buy credits</button>
         </div>
+      <div className={styles.btnbelowText}>Use your credits to connect with high-quality, verified leads in your service area. The more credits you buy, the more targeted opportunities you can unlock.</div>
 
         <div className={styles.partnerSection}>
           <div>

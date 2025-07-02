@@ -331,10 +331,10 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
         </div>
 
         <div className={styles.bottomText} onClick={handleOpen}>
-          <span>Buy higher plan and get more credits</span>
+          <span>BUY MORE CREDITS</span>
         </div>
 
-        <ActiveFreeTrial />
+        {/* <ActiveFreeTrial /> */}
         <div className={styles.VisaCard}>
           <CreditCard />
         </div>

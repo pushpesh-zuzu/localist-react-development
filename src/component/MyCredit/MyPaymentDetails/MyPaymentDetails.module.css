@@ -25,7 +25,13 @@
     font-size: 18px;
     color: #000000;
   
-    margin-bottom: 36px;
+    margin-bottom: 6px;
+  }
+  .addCardText {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 16px;
+    margin-left: 24px;
   }
   
   .infoIcon {
