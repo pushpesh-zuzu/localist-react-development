@@ -65,11 +65,17 @@
   padding: 14px;
   margin: 10px 0 0 0;
   resize: none;
-  /* overflow-y: auto; */
+  font-size: 14px;
+  
 }
-
+/* 
 .textarea::placeholder {
+  font-style: italic;
+  } */
+  .textarea::placeholder {
+  /* font-style: italic; */
   font-family: Poppins;
+  /* color: #000; */
 }
 
 .errorMessage {
@@ -128,7 +134,7 @@
 
 .privacyWrapper {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   text-align: start;
 }
 
@@ -180,7 +186,9 @@
   color: #828282;
   text-align: left;
 }
-
+.TextBox {
+  font-weight: 800;
+}
 .checkboxContainer {
   display: flex;
   align-items: center;
@@ -193,6 +201,8 @@
   margin-top: 16px;
   font-weight: 500;
   font-size: 14px;
+  text-align: start;
+  
 
   input {
     appearance: none;
@@ -220,6 +230,22 @@
       }
     }
   }
+}
+.textLine1 {
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.textLine2 {
+  font-size: 14px;
+  color: #FFFFFF;
+  margin-top: 2px;
+  display: inline-block;
+  font-style: italic !important;
+  font-family: 'Poppins', sans-serif;
+  
+ 
 }
 
 .buttonWrapper {

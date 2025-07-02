@@ -15,6 +15,7 @@ import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
+import { style } from "framer-motion/client";
 
 const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const [text, setText] = useState("");
@@ -127,15 +128,15 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
       <div className={styles.successMessage}>
         <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
-        <span>We've posted your request</span>
+        <span>Your request has been submitted</span>
       </div>
 
       <div className={styles.header}>
-        <h2>Describe your request in detail</h2>
+        <h2>Tell us more about what you need for better responses</h2>
       </div>
 
       <p className={styles.textareaLabel}>
-        Add more details to get faster and more accurate responses
+        The more information you provide, the quicker and more accurately professionals can respond
       </p>
 
       {/* ✅ Textarea Validation */}
@@ -144,7 +145,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         value={text}
         rows={6}
         onChange={handleChange}
-        placeholder="What should the professional know to better understand your request?"
+        placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
       />
       {textError && (
         <span className={styles.errorMessage}>
@@ -183,18 +184,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         </ul>
       )}
 
-      <div className={styles.privacyWrapper}>
-        <p className={styles.privacyText}>
-        Your information is protected by our privacy policy {" "}
-          <a
-            href="/privacy-policy"
-            target="blank"
-            className={styles.privacyLink}
-          >
-            privacy policy
-          </a>
-        </p>
-      </div>
+    
 
       <div className={styles.progressContainer}>
         <span>Request quality</span>
@@ -210,15 +200,33 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         <p>Quality score increases as you add more detail</p>
       </div>
 
-      <label className={styles.checkboxContainer}>
+      {/* <label className={styles.checkboxContainer}>
         <input
           type="checkbox"
           checked={professionalLetin}
           onChange={handleCheckboxChange}
         />
-        Let professionals know I want to be contacted ASAP
-      </label>
+       Tick if you'd like to hear back quickly <br/>
+       
+ I’m happy to be contacted as soon as possible 
 
+      </label> */}
+<label className={styles.checkboxContainer}>
+  <input
+    type="checkbox"
+    checked={professionalLetin}
+    onChange={handleCheckboxChange}
+  />
+  <div style={{ marginLeft:"-4px", flexDirection: "column" }}>
+  <span className={styles.textLine1}>
+    Tick if you'd like to hear back quickly
+  </span>
+  <br />
+  <span className={styles.textLine2}>
+   I’m happy to be contacted as soon as possible
+  </span>
+  </div>
+</label>
       <div className={styles.buttonWrapper}>
         <button className={styles.viewMatchesBtn} onClick={handleSubmit}>
           {addDetailLoader ? (
@@ -229,6 +237,18 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             " See My Matches"
           )}
         </button>
+      </div>
+        <div className={styles.privacyWrapper}>
+        <p className={styles.privacyText}>
+        Your information is protected by our {" "}
+          <a
+            href="/privacy-policy"
+            target="blank"
+            className={styles.privacyLink}
+          >
+            privacy policy
+          </a>
+        </p>
       </div>
     </div>
   );

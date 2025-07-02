@@ -12,7 +12,7 @@ const BuyerFirstStep = () => {
     <div className={styles.container}>
       <div className={styles.infoBox}>
         <p>
-         Thank you for using Localists.com to find your local professional. 
+         Thank you for using <a href='#' className={styles.textcolor}>Localists.com</a>{" "} to find your local professional. 
          To help improve our platform and to provide you with the most accurate matches in future we would be grateful 
          if you could confirm the following pieces of information:
         </p>

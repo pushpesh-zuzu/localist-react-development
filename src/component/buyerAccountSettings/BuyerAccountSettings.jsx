@@ -244,9 +244,11 @@ const BuyerAccountSettings = () => {
             <span>
               <img src={iIcon} alt="Profile" />
             </span>
-           Make sure your contact details are up to date so professionals can reach you.
- If you no longer need the service, please remember to close your request.
-
+            <div>
+          <div style={{fontWeight:"800",marginBottom:"10px"}}> Make sure your contact details are up to date so professionals can reach you.</div>
+         
+ <div >If you no longer need the service, please remember to close your request.</div>
+</div>
           </p>
           <button className={styles.requestButton} onClick={hanldeRequest}>
             Go to My Requests

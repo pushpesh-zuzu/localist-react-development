@@ -113,7 +113,7 @@
   .footerNote {
     margin-top: 30px;
     background: #e6f8fe;
-    padding: 16px;
+    padding:24px;
     border-radius: 6px;
     font-size: 0.8125rem;
     color: #000;
@@ -126,21 +126,22 @@
   .footerNote p {
     font-size: 12px;
     font-weight: 600;
+    margin-left: -15px;
   }
   .footerNote span {
     font-size: 10px;
     font-weight: 500;
     padding: 0px;
     margin: 0px;
-    margin-left: 16px;
-
+    margin-left: 1px;
+text-align: start;
     margin-top: -15px;
   }
   
   .cards {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   

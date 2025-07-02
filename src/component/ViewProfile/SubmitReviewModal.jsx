@@ -74,7 +74,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
             <div className={styles.closeButton} onClick={closeModal}>
     X
   </div>
-                <h2>Leave a review for Resolve Energy Ltd</h2>
+                <h2>Rate your experience with  Resolve Energy Ltd</h2>
                 <div className={styles.ratingSection}>
                     <span>Click to rate :</span>
                     {[...Array(5)].map((_, index) => {
@@ -130,7 +130,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
                         <textarea
                             name="review"
                             className={styles.textarea}
-                            placeholder="Describe what it was like working with Resolve Energy Ltd and the reasoning behind your rating."
+                            placeholder="Tell us what it was like working with Logo Design. What stood out? What worked well? Why did you choose this ratingDescribe what it was like working with Resolve Energy Ltd and the reasoning behind your rating."
                             rows="5"
                             value={formData.review}
                             onChange={handleChange}

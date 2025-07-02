@@ -11,6 +11,9 @@
   max-width: 175px;
   margin-left: -8px;
   }
+  .help-box p {
+    margin-bottom: 12px;
+  }
   .dashboard-wrapper {
       font-family: Arial, sans-serif;
       background-color: #fff;
@@ -85,6 +88,9 @@
       display: flex;
       justify-content: space-between;
       box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+    }
+    .textColor {
+      color: var(--primary-color);
     }
     
     .hideIcon{

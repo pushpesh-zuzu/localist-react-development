@@ -59,12 +59,12 @@ const DashboardCards = () => {
   {/* Notification Section */}
   <div className={styles["notification-section"]}>
     <div className={styles["notification-title"]}>
-      Get started &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}>20% OFF STARTER PACK OFFER</button>
+     Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
+      <button className={styles["notification-button"]}>20% Credit Boost Pack</button>
     </div>
 
     <div className={styles["notification-banner"]}>
-      <strong>Starter pack offer</strong> Respond to up to 10 customers <strong>20% OFF</strong> and a <strong>get hired guarantee</strong>.
+      <strong>Credit Boost Offer </strong> Respond to up to  10 customers <strong>20% OFF</strong> local customers,  <strong>a FREE 20% boost!</strong>.
     </div>
   </div>
 

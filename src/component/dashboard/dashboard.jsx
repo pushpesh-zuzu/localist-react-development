@@ -56,21 +56,21 @@ const Dashboard = () => {
           <button className={styles["view-leads-black"]}>View 1061 live leads</button>
 
           <div className={styles["info-box"]}>
-            <h4>How much do Localists.com charge for leads?</h4>
-            <p>Getting leads on Localists.com is completely free — you only pay when you choose to contact a customer you're interested in. All our leads are priced in credits, depending on the sector, location and the specific requirements of the job.</p>
+            <h4>How much do <a href='#' className={styles.textColor}>Localists.com</a> charge for leads?</h4>
+            <p>Getting leads on <a href='#' className={styles.textColor}>Localists.com</a> is completely free — you only pay when you choose to contact a customer you're interested in. All our leads are priced in credits, depending on the sector, location and the specific requirements of the job.</p>
             <p>We offer all new local professionals a special offer that boosts your credit purchase by 20%. Our Credit Boost Pack gives you more opportunities to contact leads and win more jobs.</p>
             {/* <p>We’re so confident you’ll get hired at least once from this pack, that if you don’t we’ll give you all your credits back.</p> */}
           </div>
 
           <div className={styles["help-box"]}>
             <h4><img src={question} /> Need Assistance?</h4>
-            <p>We’re here to help you get the most out of Localists.com. Explore plenty of tips, guides, and resources in our .</p>
+            <p>We’re here to help you get the most out of Localists.com. Explore plenty of tips, guides, and resources in our <a href='/help-center' className={styles.textColor}>Help Center</a> .</p>
             <p>Our dedicated customer success team is also available 24/7 to support you whenever you need assistance.</p>
 
             <div className={styles["contact-info"]}>
               <div>
-                <span><img src={emailIcon1} /> &nbsp; 0000000000 </span>
-                <span><img src={phone} /> &nbsp; assistance@localists.com</span>
+                <span><img src={emailIcon1} /> &nbsp;  assistance@localists.com </span>
+                {/* <span><img src={phone} /> &nbsp; 0000000000 </span> */}
               </div>
               <div>(Available 24 hours a day, 7 days a week)</div>
             </div>
