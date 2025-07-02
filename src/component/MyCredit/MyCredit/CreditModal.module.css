@@ -57,7 +57,7 @@
     justify-content: space-between;
     background: #eef8fd;
     padding: 38px 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     gap: 8px;
   }
   
@@ -194,6 +194,7 @@
     justify-content: space-around;
 
     align-items: center;
+    margin-top: 39px;
   }
   
   .partnerSection h4 {
@@ -237,7 +238,21 @@
     cursor: pointer;
     font-size: 24px;
   }
-  
+  .adjustText {
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  .btnbelowText {
+
+    text-align: center;
+    color: #989898;
+    font-size: 16px;
+    font-weight: 500;
+    width: 80%;
+    margin: 0 auto;
+  }
   @media (max-width: 768px) {
     .modalContent {
       width: 95%;

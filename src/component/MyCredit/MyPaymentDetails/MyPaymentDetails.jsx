@@ -38,6 +38,7 @@ const MyPaymentDetails = () => {
 
                     </p>
                 </div>
+                    <div className={styles.addCardText}>Adding a card now ensures you’re ready to respond to leads the moment they come in — no delays, no missed opportunities</div>
                 {getSellerCardData?.map((item, index) => {
                     const maskedCardNumber = `•••• •••• •••• ${item?.card_number?.slice(-4)}`;
                     // const expiryRaw = item?.expiry_date || "";

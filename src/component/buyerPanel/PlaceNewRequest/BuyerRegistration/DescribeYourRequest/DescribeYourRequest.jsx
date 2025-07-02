@@ -15,6 +15,7 @@ import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
+import { style } from "framer-motion/client";
 
 const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const [text, setText] = useState("");
@@ -127,15 +128,15 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
       <div className={styles.successMessage}>
         <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
-        <span>We've posted your request</span>
+        <span>Your request has been submitted</span>
       </div>
 
       <div className={styles.header}>
-        <h2>Describe your request in detail</h2>
+        <h2>Tell us more about what you need for better responses</h2>
       </div>
 
       <p className={styles.textareaLabel}>
-        Add more details to get faster and more accurate responses
+        The more information you provide, the quicker and more accurately professionals can respond
       </p>
 
       {/* ✅ Textarea Validation */}
@@ -183,18 +184,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         </ul>
       )}
 
-      <div className={styles.privacyWrapper}>
-        <p className={styles.privacyText}>
-        Your information is protected by our privacy policy {" "}
-          <a
-            href="/privacy-policy"
-            target="blank"
-            className={styles.privacyLink}
-          >
-            privacy policy
-          </a>
-        </p>
-      </div>
+    
 
       <div className={styles.progressContainer}>
         <span>Request quality</span>
@@ -216,7 +206,9 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
           checked={professionalLetin}
           onChange={handleCheckboxChange}
         />
-        Let professionals know I want to be contacted ASAP
+       <span className={styles.TextBox}>Tick if you'd like to hear back quickly</span> <br/>
+ I’m happy to be contacted as soon as possible 
+
       </label>
 
       <div className={styles.buttonWrapper}>
@@ -229,6 +221,18 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             " See My Matches"
           )}
         </button>
+      </div>
+        <div className={styles.privacyWrapper}>
+        <p className={styles.privacyText}>
+        Your information is protected by our privacy policy {" "}
+          <a
+            href="/privacy-policy"
+            target="blank"
+            className={styles.privacyLink}
+          >
+            privacy policy
+          </a>
+        </p>
       </div>
     </div>
   );

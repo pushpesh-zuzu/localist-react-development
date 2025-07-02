@@ -26,9 +26,11 @@ const CreditCard = () => {
 
                     <div>
                         We'll Change The Card Ending *{cardNumber?.[0]?.slice(-4)} That We Have On File
+                        
                     </div>
                 </div>
-                    <div className={styles.rightText} onClick={handleChangeModal}> Change</div></> :
+                    {/* <div className={styles.rightText} onClick={handleChangeModal}> Change</div> */}
+                    </> :
                     <>
                         <div className={styles.visaCard}>
                             <img src={visaImg} alt="Visa" />
