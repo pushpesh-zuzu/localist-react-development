@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   notificationList: [],
+  lastId: null,
   notificationLoader: false,
   addNotificationLoader: false,
 };
@@ -12,7 +13,8 @@ const notificationSlice = createSlice({
   initialState,
   reducers: {
     setNotificationList: (state, action) => {
-      state.notificationList = action.payload;
+      state.notificationList = action.payload.data;
+      state.lastId = action.payload.lastId;
     },
     setNotificationLoader: (state, action) => {
       state.notificationLoader = action.payload;
@@ -29,7 +31,8 @@ export const getNotificationList = (payload) => {
     try {
       const response = await axiosInstance.post("notification/fetch-all-notifications", payload);
       const data = response?.data?.data || [];
-      dispatch(setNotificationList(data));
+      const lastId  =  response?.data?.last_id || [];
+      dispatch(setNotificationList({ data, lastId }));
       return data;
     } catch (err) {
       console.error("Notification fetch failed:", err?.response?.data?.message || err.message);
@@ -42,7 +45,7 @@ export const getNotificationList = (payload) => {
 export const markNotificationsAsRead = (payload) => {
   return async (dispatch) => {
     try {
-      await axiosInstance.post(`notification/mark-as-read`, payload);
+      await axiosInstance.post(`notification/mark-all-read`, payload);
       dispatch(getNotificationList(payload));
     } catch (error) {
       console.log("Failed to mark notifications as read", error);

@@ -161,6 +161,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
   }
   const notifications = useSelector((state) => state.notification.notificationList);
   const unreadCount = notifications?.filter(n => n.status === "unread").length;
+  const lastId = useSelector((state) => state.notification.lastId);
   const [popoverVisible, setPopoverVisible] = useState(false);
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/account/setting";
@@ -178,12 +179,6 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
   };
   const handleVisibleChange = (visible) => {
     setPopoverVisible(visible);
-    if (visible && unreadCount > 0) {
-      const payload = {
-        user_id: userToken?.id || registerData?.id
-      };
-      dispatch(markNotificationsAsRead(payload));
-    }
   };
   return (
     <div className={styles.logSwitchContainer}>
@@ -257,42 +252,85 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
                   placement="bottomRight"
                   visible={popoverVisible}
                   onVisibleChange={handleVisibleChange}
-                  overlayStyle={{ maxHeight: "50vh", overflowY: "auto", width: "360px" }}
+                  overlayStyle={{ maxHeight: "100vh", overflowY: "auto", width: "360px" }}
                   content={
                     <div
                       style={{
-                        maxHeight: "50vh",
-                        overflowY: "auto",
+                        display: "flex",
+                        flexDirection: "column",
+                        maxHeight: "90vh",
+                        overflow: "hidden",
                         width: "320px",
-                        padding: "10px",
                       }}
                     >
-                      {notifications.length > 0 ? (
-                        notifications.map((noti, index) => (
-                          <div key={noti.id}>
-                            <div style={{ marginBottom: "8px" }}>
-                              <div style={{ fontWeight: "600", fontSize: "14px" }}>{noti.title}</div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  alignItems: "center",
-                                  gap: "12px",
-                                  marginTop: "4px",
-                                  fontSize: "11px",
-                                }}
-                              >
-                                <span>{noti.message}</span>
-                                <span>{formatDate(noti.created_at)}</span>
+                      <div
+                        style={{
+                          flex: "1",
+                          overflowY: "auto",
+                          padding: "10px",
+                        }}
+                      >
+                        {notifications.length > 0 ? (
+                          notifications.map((noti, index) => (
+                            <div key={noti.id}>
+                              <div style={{ marginBottom: "8px" }}>
+                                <div style={{ fontWeight: "600", fontSize: "14px" }}>{noti.title}</div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                    gap: "12px",
+                                    marginTop: "4px",
+                                    fontSize: "11px",
+                                  }}
+                                >
+                                  <span>{noti.message}</span>
+                                  <span>{formatDate(noti.created_at)}</span>
+                                </div>
                               </div>
+                              {index !== notifications.length - 1 && (
+                                <hr style={{ borderTop: "1px solid #eee", margin: "8px 0" }} />
+                              )}
                             </div>
-                            {index !== notifications.length - 1 && (
-                              <hr style={{ borderTop: "1px solid #eee", margin: "8px 0" }} />
-                            )}
-                          </div>
-                        ))
-                      ) : (
-                        <div style={{ fontSize: "12px", color: "#999" }}>No new notifications</div>
+                          ))
+                        ) : (
+                          <div style={{ fontSize: "12px", color: "#999" }}>No new notifications</div>
+                        )}
+                      </div>
+
+                      {/* Fixed bottom link */}
+                      {notifications.length > 0 && (
+                        <div
+                          style={{
+                            padding: "10px",
+                            borderTop: "1px solid #eee",
+                            textAlign: "right",
+                            backgroundColor: "#fff",
+                            position: "sticky",
+                            bottom: "0",
+                          }}
+                        >
+                         <a
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (unreadCount > 0) {
+                                const payload = {
+                                  user_id: userToken?.id || registerData?.id,
+                                  last_id: lastId
+                                };
+                                dispatch(markNotificationsAsRead(payload));
+                              }
+
+                              setPopoverVisible(false);
+                            }}
+                            style={{ fontSize: "12px", color: "#1890ff" }}
+                          >
+                            Mark all as read
+                          </a>
+
+                        </div>
                       )}
                     </div>
                   }
@@ -320,7 +358,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
                       </span>
                     )}
                   </div>
-                </Popover>
+            </Popover>
             {/* <div className={styles.nameCircle}>{userInitial}</div> */}
                 {userData ? (
       <Avatar
