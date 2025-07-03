@@ -200,19 +200,36 @@ console.log(phoneNumber,email, "phoneNumber");
           <p className={styles.skipLink} onClick={onClose}>Skip, I will contact them later</p>
 
           {!repliesBtn && <div className={styles.footer}>
-            <div className={styles.creditsBox}>
+            {/* <div className={styles.creditsBox}>
              <img src={locallistImg} alt="..." /> <strong>70 credits</strong>
             </div>
             <div className={styles.midLine}></div>
             <div className={styles.guarantee}>
               <div className={styles.secondBox}>
                <img src={locallistImgs} alt="..." />
-               <div className={styles.textcontent}>
+             
+            </div>
+            </div> */}
+            <div className={styles.creditsWrapper}>
+  {/* Left Box */}
+  <div className={styles.creditsBox}>
+    <img src={locallistImg} alt="credits" />
+    <strong>70 credits</strong>
+  </div>
+
+  {/* Vertical Line */}
+  <div className={styles.midLine}></div>
+
+  {/* Right Box (Image in place of text) */}
+  <div className={styles.guarantee}>
+    <img src={locallistImgs} alt="guarantee" />
+  </div>
+</div>
+
+              {/* <div className={styles.textcontent}>
               Covered by our <strong>100% New Business Guarantee </strong><br />
               If you're not hired during the starter pack, we'll return all the credits.
-              </div>
-            </div>
-            </div>
+              </div> */}
              {/* <img src={locallistImgs} alt="..." /> */}
           </div>}
         </div>

@@ -56,7 +56,7 @@ const QuestionModal = ({
           ans.toLowerCase() !== "no" &&
           ans.toLowerCase() !== "maybe"
       );
-      setOtherText(savedArray.includes("Other") ? otherVal || "" : "");
+      setOtherText(savedArray.includes("Something else (please describe)") ? otherVal || "" : "");
     }
   }, [currentQuestion, buyerRequest, questions]);
 
@@ -84,17 +84,17 @@ const QuestionModal = ({
     }
 
     if (
-      selectedOption.includes("Other") &&
-      (!otherText.trim() || otherText.trim().toLowerCase() === "other")
+      selectedOption.includes("Something else (please describe)") &&
+      (!otherText.trim() || otherText.trim().toLowerCase() === "something else (please describe)")
     ) {
       setError("Please enter a value for 'Other' option.");
       return;
     }
 
     const finalAnswer = selectedOption.map((opt) =>
-      opt.toLowerCase() === "other" ? otherText : opt
+      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
-
+   
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
@@ -203,7 +203,7 @@ const QuestionModal = ({
                     {option.trim()}
                   </label>
                 ))}
-                       {selectedOption.includes("Other") && (
+                       {selectedOption.includes("Something else (please describe)") && (
               <input
                 type="text"
                 placeholder="Please Enter..."

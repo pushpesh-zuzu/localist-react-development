@@ -908,6 +908,7 @@ useEffect(() => {
                     ? webdesignData[0]
                     : "No Service"}
                 </h1>
+                 <div className={styles.middleText}>Your Top 5 local professional matches are below. You can contact any of the <br/> professionals to get more information using the contact button.</div>
                 <div className={styles.tabs}>
                   <button className={styles.activeTab}>Your matches</button>
                   <button className={styles.tab} onClick={handleReply}>
@@ -1119,7 +1120,7 @@ useEffect(() => {
                             handleContinue(seller)
                           }}
                         >
-                          Request reply
+                        Contact the Professional Now
                         </button>
                       </div>
                     </div>

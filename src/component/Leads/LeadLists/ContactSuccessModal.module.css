@@ -102,18 +102,18 @@
 }
 
 .footer {
-  display: flex;
+  /* display: flex; */
   /* justify-content: space-between; */
-  gap: 15px;
+  /* gap: 15px;
   align-items: center;
   border-top: 1px solid #eee;
   padding: 16px;
   margin-top: 16px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
   background-color: #E3F6FC;
 }
 
-.creditsBox {
+/* .creditsBox {
   background-color: #E3F6FC;
   padding: 6px 8px;
   border-radius: 4px;
@@ -137,7 +137,46 @@
 .secondBox {
   display: flex;
   align-items: center;
+} */
+ .creditsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e6f6fa; /* light blue bg */
+  padding: 16px;
+  border-radius: 8px;
+  gap: 18px;
 }
+
+.creditsBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+   background-color: #E3F6FC;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid #000000;
+  
+}
+
+
+
+.midLine {
+  width: 2px;
+  height: 40px;
+  background-color: var(--primary-color);
+  margin: 0 16px;
+}
+
+.guarantee img {
+  max-height: 64px;
+  object-fit: contain;
+  /* margin-top: 12px; */
+}
+
 
 @media screen and (max-width:480px) {
   .modal {
@@ -169,13 +208,13 @@
   gap: 20px;
   flex-direction: column;
 }
-.footer {
-  align-items: center;
+  .creditsWrapper {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
 
-}
-.secondBox {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+  .midLine {
+    display: none;
+  }
 }

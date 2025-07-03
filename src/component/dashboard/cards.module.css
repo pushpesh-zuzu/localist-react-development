@@ -167,9 +167,9 @@ font-weight: bold;
    
   }
   
-  form label:last-of-type {
+  /* form label:last-of-type {
     margin-bottom: 1.5rem;
-  }
+  } */
   .add-services button {
     background: #00bfff;
     color: #fff;
