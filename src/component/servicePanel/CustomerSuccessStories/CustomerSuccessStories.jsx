@@ -9,7 +9,7 @@ const CustomerSuccessStories = () => {
         Customer <span>success stories</span>
       </h2>
       <p className={styles.subHeading}>
-        See what other small businesses have to say about Bark
+        See what other small businesses have to say about localists
       </p>
       <div className={styles.cardsContainer}>
         {CustomerSuccessStoriesData.map((story) => (

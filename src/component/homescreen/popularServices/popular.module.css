@@ -42,6 +42,8 @@
   height: 210px;
   object-fit: cover;
   cursor: pointer;
+  -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 
 .title {

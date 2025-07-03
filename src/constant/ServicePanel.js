@@ -120,24 +120,24 @@ const CustomerSuccessStoriesData = [
     id: 1,
     image: StefanWesley,
     description:
-      "Our biggest client contacted us through Bark and we’ll continue to bring on new clients through the platform.",
-    name: "Stefan Wesley",
+      "Our biggest client contacted us through localists and we’ll continue to bring on new clients through the platform.",
+    name: "Stefan Smith",
     company: "Sigma Digital",
   },
   {
     id: 2,
     image: LeanneOsbourne,
     description:
-      "We get 82% of our clients through Bark. They are coming to us and we can choose who we want to take on.",
-    name: "Leanne Osbourne",
+      "We get 82% of our clients through localists. They are coming to us and we can choose who we want to take on.",
+    name: "Leanne Kim",
     company: "Paradigm Cleaning Solution",
   },
   {
     id: 3,
     image: RichardGray,
     description:
-      "Bark has been far the most effective website I’ve used. It gives me a solid flow of potential work.",
-    name: "Richard Gray",
+      "localists has been far the most effective website I’ve used. It gives me a solid flow of potential work.",
+    name: "Gray Leon",
     company: "Rugfoot Photography",
   },
 ];

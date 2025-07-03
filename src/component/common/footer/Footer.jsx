@@ -165,7 +165,7 @@ const Footer = () => {
           <div>
             <h4>About</h4>
             <ul>
-              <li>About Bark</li>
+              <li>About localist</li>
               <li>Careers</li>
               <li>Blog</li>
               <li>Press</li>
@@ -246,7 +246,7 @@ const Footer = () => {
           </Panel>
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
-              <li>About Bark</li>
+              <li>About localist</li>
               <li>Careers</li>
               <li>Blog</li>
               <li>Press</li>

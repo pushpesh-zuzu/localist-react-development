@@ -242,7 +242,7 @@ const handleEmailOpen = (item) => {
               onChange={(e) => handlePurchaseChange(e.target.value)}
               // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
             >
-              <option value="">All Option</option>
+              <option value="All">All</option>
               <option value="Manual Bid">Manual Bid</option>
               <option value="Autobid">Auto Bid</option>
               <option value="Request Reply">Request Reply</option>

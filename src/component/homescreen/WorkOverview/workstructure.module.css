@@ -28,6 +28,8 @@
   font-size: 1.786rem;
   line-height: 39.5px;
   text-align: center;
+  font-size: 27px;
+  margin-top: -27px;
 }
 
 .description span {
@@ -269,7 +271,13 @@
     
     
   }
-  
+    .description {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 28px;
+  }
   
 
   .stepContainer {

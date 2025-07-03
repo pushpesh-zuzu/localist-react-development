@@ -83,7 +83,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     email: profileLeadViewData?.leads?.customer?.email,
   };
   const userIdActivity = userToken?.id || registerData?.id
-  console.log(profileLeadViewData, "profileLeadViewData");
+  console.log(getSellerNotes, "profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
@@ -124,6 +124,7 @@ response_type:"seller",
       setNote(getSellerNotes.notes?.notes);
     }
   }, [getSellerNotes, activeTab]);
+  
 
 
   const handleCancel = () => {
@@ -164,6 +165,7 @@ response_type:"seller",
       if (result.success) {
 
         showToast("success", result?.message);
+        setNote("")
         const sellerData = {
           lead_id: profileLeadViewData.leads.id,
           user_id: userToken?.remember_tokens || registerData?.remember_tokens,
@@ -232,6 +234,7 @@ response_type:"seller",
       showToast("error","Phone number is not available.");
     }
   }
+    console.log(getSellerNotes?.notes?.notes,"getSellerNotes")
   return (
     <>
       {leadListLoader ? (
@@ -530,6 +533,7 @@ response_type:"seller",
 
                 {activeTab === "notes" && (
                   <div className={styles.notesContent}>
+                    <div className={styles.notesCard}>{getSellerNotes?.notes?.notes}</div>
                     <div className={styles.notesInner}>
                       <textarea
                         className={styles.textArea}

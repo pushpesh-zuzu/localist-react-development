@@ -13,11 +13,17 @@ import { setUserToken } from "../../../store/Auth/authSlice";
 import { setRegisterData } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 
 const AboutAccordion = ({details}) => {
   const dispatch = useDispatch();
   const { sellerLoader, updateSuccess, updateError ,loading, error, success } = useSelector((state) => state.myProfile);
+   const { userToken } = useSelector((state) => state.auth); 
+     const { registerData } = useSelector(
+        (state) => state.findJobs
+      );
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
 tiktok_link: "",
@@ -84,10 +90,10 @@ setFormState({
   company_size:details?.company_size,
   company_total_years:details?.company_total_years,
   about_company:details?.about_company,
-  profile_imagePreview:details?.profile_image ? `${BASE_IMAGE}/users/${details?.profile_image}`: defaultImage,
+  profile_imagePreview:details?.profile_image ? `${BASE_IMAGE}/users/${details?.profile_image}`: null,
   // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
   
- company_logoPreview: details?.company_logo ? `${BASE_IMAGE}/users/${details?.company_logo}` : defaultImage,
+ company_logoPreview: details?.company_logo ? `${BASE_IMAGE}/users/${details?.company_logo}` : null,
 
 
 })
@@ -197,6 +203,10 @@ setFormState({
   //     alert("Submission failed.");
   //   }
   // };
+
+  const CompanyNameFirstLetter = details?.company_name?.[0] || '';
+const ProfileNameFirstLetter = details?.name?.[0] || '';
+  console.log(CompanyNameFirstLetter,ProfileNameFirstLetter,"name")
   
  
   const handleSubmit = () => {
@@ -205,7 +215,14 @@ setFormState({
       return;
     }
 
-    dispatch(updateSellerProfile(formState));
+    dispatch(updateSellerProfile(formState)).then((result)=> {
+      if(result){
+         const sellerData ={
+                     seller_id:user_id
+                 }
+                 dispatch (addViewProfileList(sellerData))
+      }
+    });
   };
  // Show toast on success/failure
 useEffect(() => {
@@ -252,10 +269,10 @@ useEffect(() => {
          
         </p>
         <div className={styles.imageSection}>
-          <img
+         {details?.company_logoPreview || formState.company_logoPreview ? <img
             src={formState.company_logoPreview || defaultImage}
             alt="Default Logo"
-          />
+          />  : <div className={styles.CompanyText}>{CompanyNameFirstLetter.toUpperCase()}</div>}
           <button
             className={styles.uploadBtn}
             onClick={() => fileInputRefs.company_logo.current.click()}
@@ -296,10 +313,14 @@ useEffect(() => {
          Customers on Localists.com will see this information when you message them. Adding a photo helps build trust and makes your profile more personal.
         </p>
         <div className={styles.imageSection}>
-          <img
+          {
+            details?.profile_imagePreview || formState.profile_imagePreview ?   <img
             src={formState.profile_imagePreview || defaultImage}
             alt="Default Profile"
-          />
+          /> : 
+          <div className={styles.CompanyText}>{ProfileNameFirstLetter.toUpperCase()}</div>
+          }
+        
           <div className={styles.buttonGroup}>
             <button
               className={styles.uploadBtn}

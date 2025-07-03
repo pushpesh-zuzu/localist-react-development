@@ -51,7 +51,7 @@ const initialState = {
     getActivies:[],
     getSwitcgAutoBidData:{},
     addSubmitLeadLoader:false,
-    getSellerNotes:[],
+    getSellerNotes:{},
     sellerNotesLoader:false,
     purchasePendingList:[],
     data:[],

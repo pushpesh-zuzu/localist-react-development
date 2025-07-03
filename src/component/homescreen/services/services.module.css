@@ -140,14 +140,17 @@
 }
 
 .serviceImage {
-  width: 100%;
+  width: 110%;
   height: 208px;
   object-fit: cover;
+  
 }
 .serviceImage:hover {
   width: 100%;
   height: 218px;
   object-fit: cover;
+  -webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 }
 
 

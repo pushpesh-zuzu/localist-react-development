@@ -35,7 +35,7 @@ const CreditCard = () => {
                         <div className={styles.visaCard}>
                             <img src={visaImg} alt="Visa" />
 
-                            <div>Buy more credits and get a bigger discount</div>
+                            <div className={styles.textRight}>Buy more credits and get a bigger discount</div>
                         </div>
                         <div className={styles.rightText}> Add  |   Change  |   Remove</div></>}
             </div>

@@ -356,13 +356,12 @@ align-items: center
   background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 7px 30px;
+  padding: 7px 16px;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 18px;
-  text-align: center;
-  vertical-align: middle;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0px 25px 0px 25px;
 }
 
 .replyBtn:hover {

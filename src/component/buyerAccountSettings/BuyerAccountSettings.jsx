@@ -36,6 +36,8 @@ const BuyerAccountSettings = () => {
    const {  registerData } = useSelector(
       (state) => state.findJobs
     );
+    const userNameFirstLetter = userDetails?.name?.[0] || ''
+    console.log(userNameFirstLetter,"pp")
 
   useEffect(() => {
     dispatch(updateProfileData());
@@ -263,27 +265,32 @@ const BuyerAccountSettings = () => {
             <span>
               <>
                 {profileImageLoader ? (
-                  <Spin
-                    indicator={
-                      <LoadingOutlined spin style={{ color: "blue" }} />
-                    }
-                  />
-                ) : (
-                  <img
-                    src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
-                    alt="Profile"
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = defaultImage;
-                    }}
-                    style={{
-                      width: "62px",
-                      height: "62px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                )}
+  <Spin
+    indicator={
+      <LoadingOutlined spin style={{ color: "blue" }} />
+    }
+  />
+) : userDetails?.profile_image ? (
+  <img
+    src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
+    alt="Profile"
+    loading="lazy"
+    onError={(e) => {
+      e.target.onerror = null;
+      e.target.src = defaultImage;
+    }}
+    style={{
+      width: "62px",
+      height: "62px",
+      borderRadius: "50%",
+    }}
+  />
+) : (
+  <div className={styles.CompanyText}>
+    {userNameFirstLetter?.toUpperCase()}
+  </div>
+)}
+
               </>
             </span>
           </div>

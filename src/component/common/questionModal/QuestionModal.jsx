@@ -22,7 +22,7 @@ const QuestionModal = ({
   setShowConfirmModal,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader,citySerach } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader,citySerach,questionanswerData } = useSelector((state) => state.buyer);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
@@ -38,7 +38,7 @@ const QuestionModal = ({
       setCurrentQuestion(0);
     }
   }, [questions]);
-  console.log(citySerach,"citySerach")
+  console.log(citySerach,questionanswerData,"citySerach")
 
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
@@ -137,6 +137,7 @@ const QuestionModal = ({
       }
     }
   };
+  
 
   const handleBack = () => {
     if (currentQuestion > 0) {
@@ -150,6 +151,14 @@ const QuestionModal = ({
   };
 
   const handleCloseClick = () => {
+    if(questionanswerData?.length === 0) {
+onClose()
+dispatch(clearSetbuyerRequestData())
+         dispatch(clearBuyerRegisterFormData())
+    }
+    else {
+
+    
     if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
       setShowConfirmModal(true);
     } else {
@@ -157,6 +166,7 @@ const QuestionModal = ({
       dispatch(clearSetbuyerRequestData())
          dispatch(clearBuyerRegisterFormData())
     }
+  }
   };
 
   return (
