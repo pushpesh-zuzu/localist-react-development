@@ -196,8 +196,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
         dispatch(
-          getleadPreferencesList({ user_id: userToken?.remember_tokens })
+          getleadPreferencesList({ user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens })
         );
+          const data = {
+        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+      };
+      dispatch(getLocationLead(data))
         setIsModalOpen(false);
         setSelectedServices([]); // Clear after submission
       }
