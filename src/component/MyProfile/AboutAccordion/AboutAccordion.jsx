@@ -272,7 +272,7 @@ useEffect(() => {
          {details?.company_logoPreview || formState.company_logoPreview ? <img
             src={formState.company_logoPreview || defaultImage}
             alt="Default Logo"
-          />  : <div className={styles.CompanyText}>{CompanyNameFirstLetter.toUpperCase()}</div>}
+          />  : <div className={styles.CompanyText}>{CompanyNameFirstLetter.toUpperCase() ? CompanyNameFirstLetter.toUpperCase() : "C"}</div>}
           <button
             className={styles.uploadBtn}
             onClick={() => fileInputRefs.company_logo.current.click()}
