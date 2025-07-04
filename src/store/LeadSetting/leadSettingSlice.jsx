@@ -784,12 +784,13 @@ export const getleadPreferencesList = (serviceId) => {
   export const addSellerNotesApi = (sellerApiData) => {
     return async (dispatch) => {
       dispatch(setSellerNotesLoader(true));
+      console.log(sellerApiData,"sellerApiData")
       try {
         const response = await axiosInstance.post(`users/seller-notes`, sellerApiData);
         
   
         if (response) {
-          
+          console.log(response,"response")
           // dispatch(setGetSwitchAutoBidData(response?.data?.data))
            return response.data
         }
@@ -935,6 +936,20 @@ export const getleadPreferencesList = (serviceId) => {
       }
     };
   };
+  export const deleteNoteApi = (noteId) => {
+    return async (dispatch) => {
+      try {
+        const response = await axiosInstance.post(``,noteId);
+        if(response){
+          return response.data
+        }
+      } catch(error) {
+
+      }finally {
+
+      }
+    }
+  }
 const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,

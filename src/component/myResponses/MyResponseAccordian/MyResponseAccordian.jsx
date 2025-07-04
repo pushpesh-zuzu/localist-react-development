@@ -67,6 +67,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
+  const [editNoteId, setEditNoteId] = useState(null);
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -91,7 +92,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
         ? userToken?.id
         : registerData?.id,
       buyer_id: profileLeadViewData?.leads?.customer_id,
-response_type:"seller",
+      response_type: "seller",
       type: null,
     };
 
@@ -124,13 +125,16 @@ response_type:"seller",
       setNote(getSellerNotes.notes?.notes);
     }
   }, [getSellerNotes, activeTab]);
-  
-
 
   const handleCancel = () => {
-    // Reset back to original note
-    setNote(getSellerNotes?.notes?.notes || "");
+    setNote("");
+    setEditNoteId(null);
   };
+
+  // const handleCancel = () => {
+  //   // Reset back to original note
+  //   setNote(getSellerNotes?.notes?.notes || "");
+  // };
   // useEffect(() => {
 
   //   const data = {
@@ -142,40 +146,91 @@ response_type:"seller",
   //   };
   //   dispatch(getLeadProfileRequestList(data));
   // }, []);
-  const handleSubmit = () => {
+  // const handleSubmit = () => {
 
-    const notesValue = getSellerNotes?.notes;
+  //   const notesValue = getSellerNotes?.notes;
 
-    const isNotesEmpty =
-      notesValue === undefined ||
-      notesValue === null ||
-      (typeof notesValue === "string" && notesValue.trim() === "");
+  //   const isNotesEmpty =
+  //     notesValue === undefined ||
+  //     notesValue === null ||
+  //     (typeof notesValue === "string" && notesValue.trim() === "");
 
+  //   const sellerNote = {
+  //     lead_id: profileLeadViewData?.leads?.id,
+  //     user_id: userToken?.remember_tokens
+  //       ? userToken?.remember_tokens
+  //       : registerData?.remember_tokens,
+  //     buyer_id: profileLeadViewData?.id,
+  //     note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
+  //     notes: note ?? getSellerNotes?.notes?.notes,
+  //   };
+
+  //   dispatch(addSellerNotesApi(sellerNote)).then((result) => {
+  //     if (result.success) {
+
+  //       showToast("success", result?.message);
+  //       setNote("")
+  //       const sellerData = {
+  //         lead_id: profileLeadViewData.leads.id,
+  //         user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+  //         buyer_id: profileLeadViewData.id,
+  //       };
+
+  //       dispatch(getSellerNotesApi(sellerData))
+  //     }
+  //   });
+  // };
+  console.log(editNoteId, "editNoteId")
+  const handleSubmit = (id) => {
     const sellerNote = {
       lead_id: profileLeadViewData?.leads?.id,
-      user_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
+      user_id: userToken?.remember_tokens || registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
-      note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
-      notes: note ?? getSellerNotes?.notes?.notes,
+      // note_id: editNoteId ?? 0, // 👈 use tracked note ID
+      notes: note,
     };
+    if (editNoteId) {
+      sellerNote.note_id = editNoteId
+    }
+
+       if (id) {
+      sellerNote.delete_note_id = id
+    }
 
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
-      if (result.success) {
-
+      if (result) {
         showToast("success", result?.message);
-        setNote("")
+        setNote("");
+        setEditNoteId(null); // 👈 clear edit state
+
         const sellerData = {
           lead_id: profileLeadViewData.leads.id,
           user_id: userToken?.remember_tokens || registerData?.remember_tokens,
           buyer_id: profileLeadViewData.id,
         };
 
-        dispatch(getSellerNotesApi(sellerData))
+        dispatch(getSellerNotesApi(sellerData));
       }
     });
   };
+
+  const handleRemove = (id) => {
+    handleSubmit(id)
+    return
+  // implement your delete logic here, example:
+  dispatch(deleteNoteApi({ note_id: id })).then((res) => {
+    if (res.success) {
+      showToast("success", result?.message);
+      const sellerData = {
+          lead_id: profileLeadViewData.leads.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+          buyer_id: profileLeadViewData.id,
+        };
+
+        dispatch(getSellerNotesApi(sellerData));
+    }
+  });
+};
 
   useEffect(() => {
     if (
@@ -225,16 +280,16 @@ response_type:"seller",
   const createdDate = moment(profileLeadViewData?.created_at);
   const today = moment();
   const daysAgo = today.diff(createdDate, "days");
-  const handlePhoneOpen = (item)=> {
+  const handlePhoneOpen = (item) => {
     const phoneNumber = item?.phone;
     if (phoneNumber) {
       const phoneUrl = `tel:${phoneNumber}`;
       window.open(phoneUrl, "_blank");
     } else {
-      showToast("error","Phone number is not available.");
+      showToast("error", "Phone number is not available.");
     }
   }
-    console.log(getSellerNotes?.notes?.notes,"getSellerNotes")
+  console.log(getSellerNotes?.notes?.notes, "getSellerNotes")
   return (
     <>
       {leadListLoader ? (
@@ -245,7 +300,7 @@ response_type:"seller",
             <div className={styles.lastActivityTexts}>
               Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
             </div>
-        
+
             <div className={styles.dropdownMainBox}>
               {profileLeadViewData?.leads?.purchase_type && (
                 <div className={styles.lastActivityText}>
@@ -253,22 +308,22 @@ response_type:"seller",
                   <span>{profileLeadViewData?.leads?.purchase_type}</span>
                 </div>
               )}
-              </div>
-              <div>
-                <span className={styles.currentStatusText}>Current Status</span>
-                <select
-                  className={`${styles.selectBox} ${styles.customSelect}`}
+            </div>
+            <div>
+              <span className={styles.currentStatusText}>Current Status</span>
+              <select
+                className={`${styles.selectBox} ${styles.customSelect}`}
 
-                  value={profileLeadViewData?.leads?.status || status}
-                  onChange={handleStatusChange}
-                  disabled={profileLeadViewData?.leads?.status === "hired"}
-                >
-                  <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
-                  <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
-                  {/* <option value="rejected">Rejected</option> */}
-                </select>
-              </div>
-          
+                value={profileLeadViewData?.leads?.status || status}
+                onChange={handleStatusChange}
+                disabled={profileLeadViewData?.leads?.status === "hired"}
+              >
+                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
+                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
+                {/* <option value="rejected">Rejected</option> */}
+              </select>
+            </div>
+
           </div>
           <div className={styles.containers}>
             <div className={styles.ProfileImgBox}>
@@ -447,11 +502,11 @@ response_type:"seller",
                         description={item.description}
                         time={moment(item.updated_at).format("hh:mm A")}
                         isLast={index === getActivies.length - 1}
-                        // name={
-                        //   profileLeadViewData?.id === item?.from_user_id
-                        //     ? "You"
-                        //     : profileLeadViewData?.name
-                        // }
+                      // name={
+                      //   profileLeadViewData?.id === item?.from_user_id
+                      //     ? "You"
+                      //     : profileLeadViewData?.name
+                      // }
                       >
                         {item.children}
                       </TimelineItem>
@@ -480,13 +535,13 @@ response_type:"seller",
                           ([question, answer], index) => (
                             <div key={index} style={{ marginBottom: "0.5rem" }} className={styles.questionTextBox}>
                               <span className={styles.bullet}>•</span>
-                              <span className={styles.questionText} 
+                              <span className={styles.questionText}
                               // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
                               >{" "} {question}</span>
                               <hr className={styles.hrline} />
-                              <p 
-                              // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }} 
-                              className={styles.answerText}>{answer}</p>
+                              <p
+                                // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }} 
+                                className={styles.answerText}>{answer}</p>
                             </div>
                           )
                         );
@@ -532,42 +587,106 @@ response_type:"seller",
                 )}
 
                 {activeTab === "notes" && (
+                  // <div className={styles.notesContent}>
+                  //   <div className={styles.mainNotesBox}>
+                  //     {
+                  //       getSellerNotes?.notes?.map((item, index) => {
+                  //         return (
+                  //           <>
+                           
+                  //             <div
+                  //               key={item?.id}
+                  //               className={styles.notesCard}
+                  //               onClick={() => {
+                  //                 setNote(item?.notes);         
+                  //                 setEditNoteId(item?.id);         
+                  //               }}
+                  //             >
+                  //               {item.notes}
+                  //             </div>
+                  //           </>
+                  //         )
+                  //       })
+                  //     }
+                  //   </div>
+                  //   <div className={styles.notesInner}>
+                  //     <textarea
+                  //       className={styles.textArea}
+                  //       placeholder="Enter your notes here..."
+                  //       onChange={(e) => setNote(e.target.value)}
+                  //       value={note}
+                  //     />
+                  //     <div className={styles.buttonGroup}>
+                  //       <button
+                  //         className={styles.CancelBtn}
+                  //         onClick={handleCancel}
+                  //       >
+                  //         Cancel
+                  //       </button>
+                  //       <button
+                  //         className={styles.UpdateBtn}
+                  //         onClick={handleSubmit}
+                  //       >
+                  //         {sellerNotesLoader ? (
+                  //           <Spin
+                  //             indicator={
+                  //               <LoadingOutlined
+                  //                 spin
+                  //                 style={{ color: "white" }}
+                  //               />
+                  //             }
+                  //           />
+                  //         ) : (
+                  //           "Update"
+                  //         )}
+                  //       </button>
+                  //     </div>
+                  //   </div>
+                  // </div>
                   <div className={styles.notesContent}>
-                    <div className={styles.notesCard}>{getSellerNotes?.notes?.notes}</div>
-                    <div className={styles.notesInner}>
-                      <textarea
-                        className={styles.textArea}
-                        placeholder="Enter your notes here..."
-                        onChange={(e) => setNote(e.target.value)}
-                        value={note}
-                      />
-                      <div className={styles.buttonGroup}>
-                        <button
-                          className={styles.CancelBtn}
-                          onClick={handleCancel}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className={styles.UpdateBtn}
-                          onClick={handleSubmit}
-                        >
-                          {sellerNotesLoader ? (
-                            <Spin
-                              indicator={
-                                <LoadingOutlined
-                                  spin
-                                  style={{ color: "white" }}
-                                />
-                              }
-                            />
-                          ) : (
-                            "Update"
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+  <div className={styles.mainNotesBox}>
+    {getSellerNotes?.notes?.map((item, index) => (
+      <div key={item?.id} className={styles.noteItem}>
+        <div className={styles.noteText}>{item.notes}</div>
+        <div className={styles.noteActions}>
+          <span
+            onClick={() => {
+              setNote(item?.notes);
+              setEditNoteId(item?.id);
+            }}
+          >
+            Edit
+          </span>
+          |
+          <span onClick={() => handleRemove(item?.id)}>Remove</span>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div className={styles.notesInner}>
+    <textarea
+      className={styles.textArea}
+      placeholder="Write a private note"
+      onChange={(e) => setNote(e.target.value)}
+      value={note}
+    />
+    <div className={styles.buttonGroup}>
+      <button className={styles.CancelBtn} onClick={handleCancel}>
+        Cancel
+      </button>
+      <button className={styles.UpdateBtn} onClick={()=> handleSubmit()}>
+        {/* {sellerNotesLoader ? (
+          <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
+        ) : (
+          "Update"
+        )} */}
+        Update
+      </button>
+    </div>
+  </div>
+</div>
+
                 )}
               </div>
             </div>

@@ -74,13 +74,20 @@
   padding: 1rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
+/* .mainNotesBox {
+
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  
+}
 .notesCard {
   padding: 10px 20px;
   background-color: #ccc;
   color: #000;
   width: max-content;
   margin-bottom: 10px;
-}
+} */
 
 .header {
   display: flex;
@@ -368,10 +375,99 @@
   display: flex;
   justify-content: space-between;
 }
+.mainNotesBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0px 20px 0px 0px;
+}
+
+.noteItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 14px;
+  /* background-color: #f9f9f9; */
+  font-size: 14px;
+}
+
+.noteText {
+  flex: 1;
+  color: #333;
+}
+
+.noteActions {
+  font-size: 13px;
+  color: #999;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.noteActions span:hover {
+  color: #000;
+}
+
 .notesContent {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+}
+
+.notesInner {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 1rem;
+}
+
+.textArea {
+  max-width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.UpdateBtn {
+  background-color: var(--primary-color, #00bfff);
+  padding: 6px 20px;
+  border-radius: 4px;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.CancelBtn {
+  background-color: #ffffff;
+  padding: 6px 20px;
+  border-radius: 4px;
+  color: #828282;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+
+/* .notesContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column
 }
 
 .notesInner {
@@ -415,7 +511,7 @@
   display: flex;
   gap: 4px;
   cursor: pointer;
-}
+} */
 .bullet {
     color: #000;
   font-size: 20px;
