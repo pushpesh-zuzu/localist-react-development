@@ -117,10 +117,7 @@
   }
 }
 @media screen and (max-width: 460px) {
-
-  .card{
-    padding: 20px;
-  }
+ 
   .header{
     /* flex-direction: column; */
     display: flex;
@@ -140,4 +137,26 @@
     margin-top: 0px;
   }
   
+}
+@media screen and (max-width:380px) {
+  .container {
+    padding: 16px !important;
+  }
+
+  .card{
+    padding: 14px;
+  }
+  .list {
+  /* list-style-type: none; */
+  padding: 0 0 0 19px;
+  margin-bottom: 15px;
+}
+ .title{
+    white-space: normal;
+    font-size: 19px;
+  }
+
+  .title span{
+    font-size: 19px;
+  }
 }

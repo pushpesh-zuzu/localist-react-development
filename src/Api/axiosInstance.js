@@ -1,4 +1,5 @@
 import axios from "axios";
+import { clearAuthData } from "../utils";
 const baseURL = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const axiosInstance = axios.create({
@@ -12,7 +13,7 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const token = (JSON.parse(localStorage.getItem("barkToken")) || JSON.parse(localStorage.getItem("registerTokens")) || JSON.parse(localStorage.getItem("createRequestToken"))) ||  null;
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token} `;
     }
     return config;
   },
@@ -26,6 +27,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
+    if(error?.response?.status){
+      clearAuthData()
+      window.location.reload()
+    }
+    console.log(error,"error")
     return Promise.reject(error);
   }
 );

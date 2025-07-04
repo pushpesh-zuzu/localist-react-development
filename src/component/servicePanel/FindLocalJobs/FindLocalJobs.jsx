@@ -13,7 +13,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
-
+import rightArrow from "../../../assets/Images/ServicePanel/rightArrow.svg"
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
@@ -33,6 +33,7 @@ const FindLocalJobs = () => {
       dispatch(setService([]));
     };
   }, []);
+  
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (isDropdownOpen && Input.trim() !== "") {
@@ -42,6 +43,7 @@ const FindLocalJobs = () => {
 
     return () => clearTimeout(delayDebounce);
   }, [Input, dispatch, isDropdownOpen]);
+  const isMobile = window.innerWidth <= 480;
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
@@ -103,7 +105,23 @@ const FindLocalJobs = () => {
             </div>
           )}
 
-          <button onClick={handleGetStarted}>Get started</button>
+          {/* <button onClick={handleGetStarted}>Get started</button> 
+          <img src={rightArrow} alt="arrow" /> */}
+          <div className={styles.responsiveBtnWrapper}>
+  <button
+    onClick={handleGetStarted}
+    className={styles.getStartedBtn}
+  >
+    Get started
+  </button>
+
+  <img
+    src={rightArrow}
+    alt="arrow"
+    onClick={handleGetStarted}
+    className={styles.getStartedArrow}
+  />
+</div>
         </div>
       </div>
 

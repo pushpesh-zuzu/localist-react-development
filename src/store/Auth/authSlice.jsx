@@ -5,8 +5,8 @@ import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 
 const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
 const initialState = {
-  adminToken: JSON.parse(localStorage.getItem("barkToken")) || null,
-  userToken: JSON.parse(localStorage.getItem("barkUserToken")) || null,
+  adminToken: localStorage.getItem("barkToken") ?JSON.parse(localStorage.getItem("barkToken")) : null,
+  userToken: localStorage.getItem("barkUserToken")? JSON.parse(localStorage.getItem("barkUserToken")) : null,
   loginLoader: false,
   logoutLoader:false,
   switchUserLoader:false,

@@ -122,7 +122,7 @@ const CustomerSuccessStoriesData = [
     description:
       "Our biggest client contacted us through localists and we’ll continue to bring on new clients through the platform.",
     name: "Stefan Smith",
-    company: "Sigma Digital",
+    company: "ABC Digital",
   },
   {
     id: 2,
@@ -130,7 +130,7 @@ const CustomerSuccessStoriesData = [
     description:
       "We get 82% of our clients through localists. They are coming to us and we can choose who we want to take on.",
     name: "Leanne Kim",
-    company: "Paradigm Cleaning Solution",
+    company: "Source Cleaning Solution",
   },
   {
     id: 3,
@@ -138,7 +138,7 @@ const CustomerSuccessStoriesData = [
     description:
       "localists has been far the most effective website I’ve used. It gives me a solid flow of potential work.",
     name: "Gray Leon",
-    company: "Rugfoot Photography",
+    company: "Kim Photography",
   },
 ];
 

@@ -122,3 +122,20 @@ export const updateLocalStorageValue = (storageKey, targetKey, newValue) => {
     console.error('Error updating localStorage:', error);
   }
 };
+
+
+
+export function clearAuthData() {
+  const keysToRemove = [
+    "barkToken",
+    "barkUserToken",
+    "registerDataToken",
+    "registerTokens",
+    "createRequestToken",
+    "createRequest"
+  ];
+
+  keysToRemove.forEach((key) => {
+    localStorage.removeItem(key);
+  });
+}

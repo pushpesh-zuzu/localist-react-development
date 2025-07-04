@@ -186,7 +186,25 @@ export const pendingLeadData = (pendingData) => {
       dispatch(setPendingLeadLoader(false));
     }
   };
-};
+};  
+
+export const checkEmailIdApi = (emailData) => {
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`users/check-email-id`, emailData);
+
+      if (response) {
+        // dispatch(setService(response?.data?.data));
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+      showToast("error", error?.response?.data?.message)
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
 
 const findJobSlice = createSlice({
   name: "findJobs",
