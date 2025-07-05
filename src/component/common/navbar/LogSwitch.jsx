@@ -40,6 +40,13 @@ const profileId = useParams()
     };
     if (payload.user_id) {
       dispatch(getNotificationList(payload));
+
+      const intervalId = setInterval(() => {
+      dispatch(getNotificationList(payload));
+    }, 30000);
+
+  
+    return () => clearInterval(intervalId);
     }
   }, [dispatch, userToken, registerData]);
   const [menuOpen, setMenuOpen] = useState(false);
