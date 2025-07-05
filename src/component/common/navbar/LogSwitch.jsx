@@ -259,13 +259,13 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
                   placement="bottomRight"
                   visible={popoverVisible}
                   onVisibleChange={handleVisibleChange}
-                  overlayStyle={{ maxHeight: "100vh", overflowY: "auto", width: "360px" }}
+                  overlayStyle={{ maxHeight: "60vh", overflowY: "auto", width: "360px" }}
                   content={
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
-                        maxHeight: "90vh",
+                        maxHeight: "50vh",
                         overflow: "hidden",
                         width: "320px",
                       }}
