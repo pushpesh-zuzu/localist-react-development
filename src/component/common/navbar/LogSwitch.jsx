@@ -40,6 +40,13 @@ const profileId = useParams()
     };
     if (payload.user_id) {
       dispatch(getNotificationList(payload));
+
+      const intervalId = setInterval(() => {
+      dispatch(getNotificationList(payload));
+    }, 30000);
+
+  
+    return () => clearInterval(intervalId);
     }
   }, [dispatch, userToken, registerData]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -252,13 +259,13 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
                   placement="bottomRight"
                   visible={popoverVisible}
                   onVisibleChange={handleVisibleChange}
-                  overlayStyle={{ maxHeight: "100vh", overflowY: "auto", width: "360px" }}
+                  overlayStyle={{ maxHeight: "60vh", overflowY: "auto", width: "360px" }}
                   content={
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "column",
-                        maxHeight: "90vh",
+                        maxHeight: "50vh",
                         overflow: "hidden",
                         width: "320px",
                       }}
