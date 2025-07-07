@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ServiceCreateAccount.module.css";
 import ServiceLocationStep from "./ServiceLocationStep/ServiceLocationStep";
 import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { checkEmailIdApi, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { showToast } from "../../../../utils";
 
 const ServiceCreateAccount = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,9 @@ const ServiceCreateAccount = () => {
 
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
+  const [emailValue, setEmailValue] = useState("");
+  const [emailCheck,setEmailCheck] = useState(false)
+  console.log(emailCheck,"emailCheck")
 
   // Validation function
   const validateStep = () => {
@@ -77,9 +81,45 @@ if (companyInput && !urlRegex.test(companyInput)) {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+  
+const debounceTimer = useRef(null);
+
+useEffect(() => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailRegex.test(emailValue)) {
+    // Debounce for 500ms
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    debounceTimer.current = setTimeout(() => {
+      const data = {
+        email:emailValue
+      }
+      dispatch(checkEmailIdApi(data)).then((result) => {
+        if(result){
+          showToast("success",result?.message)
+          setEmailCheck(result?.success)
+        }
+      });
+    }, 1000);
+  }
+
+  // Cleanup on unmount
+  return () => {
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+  };
+}, [emailValue, dispatch]);
+
 
   const handleInputChange = (e) => {
     const { name,value, type, checked } = e.target;
+ if (type === "email") {
+    setEmailValue(value); 
+  }
 
     dispatch(setSelectedServiceFormData({
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
@@ -97,6 +137,7 @@ if (companyInput && !urlRegex.test(companyInput)) {
 
   const nextStep = () => {
     window.scrollTo(0, 0);
+    
     if (validateStep()) {
       dispatch(setRegisterStep(registerStep + 1));
     }
@@ -132,6 +173,7 @@ if (companyInput && !urlRegex.test(companyInput)) {
             prevStep={prevStep}
             handleInputChange={handleInputChange}
             errors={errors}
+            emailCheck={emailCheck}
           />
         )}
         {registerStep === 3 && (

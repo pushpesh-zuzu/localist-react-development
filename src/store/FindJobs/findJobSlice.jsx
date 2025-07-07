@@ -196,6 +196,7 @@ export const checkEmailIdApi = (emailData) => {
 
       if (response) {
         // dispatch(setService(response?.data?.data));
+        return response.data
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));

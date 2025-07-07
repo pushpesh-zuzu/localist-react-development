@@ -6,8 +6,18 @@ import playbtn from '../../assets/Icons/playbtn.png'
 import question from '../../assets/Icons/question.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getDashboardListData } from '../../store/Dashboard/dashboardSlice';
 //PolygonArrowDown
 const Dashboard = () => {
+  const dispatch = useDispatch()
+  const { dashboardData } = useSelector((state) => state.dashboard)
+  const [showDashboardContent, setShowDashboardContent] = useState(false)
+  
+  useEffect(()=>{
+dispatch(getDashboardListData())
+  },[])
   return (
     <div>
 <div className={styles["dashboard-wrapper"]}>
@@ -19,12 +29,15 @@ const Dashboard = () => {
   <div className={styles.hiddenDiv} style={{ visibility: 'hidden', backgroundColor: '#F9F9F9' }}>hhh</div>
 
   <div className={styles["dashboard-content-parent"]}>
-    <div className={styles["dashboard-content"]}>
+    <div   className={`${styles["dashboard-content"]} ${
+    showDashboardContent ? styles.show : styles.hide
+  }`}
+>
       <div className={styles["dashboard-title"]}>
         <p>
         Your dashboard is ready. Access everything you need to manage your business and grow with Localists.
         </p>
-        <div><span><img src={polygon} /></span></div>
+        <div ><span><img src={polygon} onClick={() => setShowDashboardContent(!showDashboardContent)} /></span></div>
       </div>
 
       <div className={styles["main-section"]}>
@@ -83,14 +96,14 @@ const Dashboard = () => {
       No commissions, no hidden fees—just a straightforward process.
     </footer>
 
-    <div className={styles.hideIcon}>
+    <div className={styles.hideIcon}  onClick={() => setShowDashboardContent(!showDashboardContent)}>
       <span>Hide</span>
       <img src={PolygonArrowDown} />
     </div>
   </div>
 </div>
 
-    <DashboardCards/>
+    <DashboardCards data={dashboardData}/>
     </div>
   );
 };

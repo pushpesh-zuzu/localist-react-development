@@ -50,16 +50,12 @@ setOpenAccordion("Reviews");
         ← Setting
       </a>
       <h2 className={styles.title}>
-        Your profile is <span className={styles.percent}>27% complete</span>
+        Your profile is <span className={styles.percent}>{viewProfileData?.percentage_completed}% complete</span>
       </h2>
-      {/* <div className={styles.progressBarContainer}>
-        <div className={styles.progressBar}>
-          <div className={styles.progressFill}></div>
-        </div>
-      </div> */}
+     
       <div className={styles.progressBarContainer}>
   <div className={styles.progressBar}>
-    <div className={styles.progressFill}>
+    <div className={styles.progressFill} style={{width: `${viewProfileData?.percentage_completed || 0}%` }}>
       <div className={styles.progressCircle}></div>
     </div>
   </div>

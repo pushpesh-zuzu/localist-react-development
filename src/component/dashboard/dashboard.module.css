@@ -279,7 +279,14 @@
     }
     
    
-  
+  .dashboard-content.hide {
+  display: none;
+}
+
+.dashboard-content.show {
+  display: block;
+}
+
     
     
    

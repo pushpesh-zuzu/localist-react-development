@@ -2,8 +2,11 @@ import styles from './cards.module.css';
 import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
+import { useNavigate } from 'react-router-dom';
 //redeploy work
-const DashboardCards = () => {
+const DashboardCards = ({data}) => {
+  const navigate = useNavigate()
+  console.log(data,"data")
   return (
     
 <div className={styles["dashboard-container"]}>
@@ -12,29 +15,41 @@ const DashboardCards = () => {
     <div className={`${styles.card} ${styles.leads}`}>
       <div className={styles["card-header"]}>
         <h3>Leads and Enquiries</h3>
-        <span className={styles["view-link"]}>View</span>
+        <span className={styles["view-link"]} onClick={() => navigate("/leads")}>View</span>
       </div>
 
       <div className={styles["lead-circle"]}>
-        <div className={styles["lead-number"]}>1065</div>
+        <div className={styles["lead-number"]}>{data?.unread_leads_count}</div>
         <div className={styles["lead-label"]}>Leads</div>
       </div>
 
       <p className={styles.unread}>1058 Unread leads</p>
     </div>
 
-    <div className={`${styles.card} ${styles["lead-settings"]}`}>
-      <h3 className={styles["card-title"]}>Lead settings</h3>
-      <div className={styles["sub-label"]}>Services <span className={styles["edit-link"]}>Edit</span></div>
-      <div className={styles["highlight-box"]}>You’ll receive leads in these categories</div>
-      <div className={styles.tags}>
-        <span className={`${styles.tag} ${styles.blue}`}>Deep Cleaning Services</span>
-        <span className={`${styles.tag} ${styles.yellow}`}>House Cleaning</span>
-      </div>
-      <div className={styles.tags2}>
-        <span className={`${styles.tag2} ${styles.gray}`}>+2</span>
-      </div>
+  <div className={`${styles.card} ${styles["lead-settings"]}`}>
+  <h3 className={styles["card-title"]}>Lead settings</h3>
+  <div className={styles["sub-label"]}>
+    Services <span className={styles["edit-link"]} onClick={()=>navigate("/leads/settings")}>Edit</span>
+  </div>
+  <div className={styles["highlight-box"]}>
+    You’ll receive leads in these categories
+  </div>
+
+  {(data?.services || []).slice(0, 2).map((item, index) => (
+    <div key={index} className={styles.tags}>
+      <span className={`${styles.tag} ${styles.blue}`}>{item?.name}</span>
     </div>
+  ))}
+
+  {data?.services?.length > 2 && (
+    <div className={styles.tags2}>
+      <span className={`${styles.tag2} ${styles.gray}`}>
+        +{data.services.length - 2}
+      </span>
+    </div>
+  )}
+</div>
+
 
     <div className={`${styles.card} ${styles["add-services"]}`}>
       <h3>Add New Services</h3>
@@ -60,7 +75,7 @@ const DashboardCards = () => {
   <div className={styles["notification-section"]}>
     <div className={styles["notification-title"]}>
      Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}>20% Credit Boost Pack</button>
+      <button className={styles["notification-button"]}>{data?.plans?.[0]?.description}</button>
     </div>
 
     <div className={styles["notification-banner"]}>
@@ -73,18 +88,18 @@ const DashboardCards = () => {
     <div className={`${styles.card} ${styles.profile}`}>
     <div className={styles["profile-header"]}>
       <div className={styles.avatar}>C</div>
-      <span className={styles.profilename}>Chander</span>
+      <span className={styles.profilename}>{data?.profile_info?.name}</span>
       </div>
 
       <div className={styles.profileheadline}>
-        Your profile is 27% complete <span className={styles["edit-link"]}>Edit</span>
+        Your profile is {data?.profile_info?.percentage_completed}% complete <span className={styles["edit-link"]} onClick={() => navigate("/settings/my_profile")}>Edit</span>
       </div>
       <div className={styles["progress-bar"]}>
-        <div className={styles.progress} style={{ width: "27%" }}></div>
+        <div className={styles.progress} style={{ width: `${data?.profile_info?.percentage_completed || 0}%` }}></div>
       </div>
       <div className={styles["hint-box"]}>
         <div>Completing your profile is a great way to appeal to customers</div>
-        <button>Edit Profile</button>
+        <button onClick={() => navigate("/settings/my_profile")}>Edit Profile</button>
       </div>
     </div>
 

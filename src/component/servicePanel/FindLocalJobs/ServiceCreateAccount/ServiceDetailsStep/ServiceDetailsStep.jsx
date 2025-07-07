@@ -3,6 +3,7 @@ import styles from "./ServiceDetailsStep.module.css";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { showToast } from "../../../../../utils";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -11,10 +12,18 @@ const ServiceDetailsStep = ({
   formData,
   setFormData,
   errors,
+  emailCheck
 }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams()
+  const handleCheck = () => {
+    if(emailCheck) {
+      nextStep()
+    } else {
+      showToast("error","Please Enter Correct Email")
+    }
+  }
   console.log(serviceParms?.serviceTitle, "serviceParms");
   return (
     <>
@@ -333,7 +342,8 @@ const ServiceDetailsStep = ({
                 <button
                   type="button"
                   className={styles.nextButton}
-                  onClick={nextStep}
+                  onClick={handleCheck}
+                  // disabled={emailCheck === false}
                 >
                   Next
                 </button>
