@@ -19,11 +19,11 @@ const DashboardCards = ({data}) => {
       </div>
 
       <div className={styles["lead-circle"]}>
-        <div className={styles["lead-number"]}>{data?.unread_leads_count}</div>
+        <div className={styles["lead-number"]}>{data?.leads?.total_leads_count}</div>
         <div className={styles["lead-label"]}>Leads</div>
       </div>
 
-      <p className={styles.unread}>1058 Unread leads</p>
+      <p className={styles.unread}>{data?.leads?.unread_leads_count} Unread leads</p>
     </div>
 
   <div className={`${styles.card} ${styles["lead-settings"]}`}>

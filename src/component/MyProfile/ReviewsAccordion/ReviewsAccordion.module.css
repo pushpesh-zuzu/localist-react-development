@@ -213,7 +213,7 @@
     font-size: 14px;
   }
   .sectionTitle {
-    margin-bottom: 0px;
+    margin-bottom: 4px;
     font-size: 16px
   }
   .alertBox{
@@ -234,7 +234,7 @@
     margin-top: 12px;
   }
 
-  .primaryBtn,
+
   
  
   .cancelBtn,
@@ -261,7 +261,7 @@
   }
 
   .buttonRow {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 10px;
   }
 
@@ -278,10 +278,15 @@
   .localistBox p {
     font-size: 13px;
   }
-
+.fbLabel {
+  display: flex;
+  align-items: start;
+  
+}
   .fbIcon {
     width: 18px;
     height: 18px;
+    margin-top: 3px;
   }
   .subtext{
     font-weight: 500;
@@ -292,8 +297,11 @@
   }
   .cancelBtn,
   .saveBtn {
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
+    width: 84px;
+     padding: 8px 10px;
+     font-size: 14px;
   }
   .buttonRow {
     margin-bottom: 24px;

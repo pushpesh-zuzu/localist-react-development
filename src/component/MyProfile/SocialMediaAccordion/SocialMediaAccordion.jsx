@@ -141,6 +141,7 @@ useEffect(() => {
 
       {/* Submit Button */}
       <div className={styles.footer}>
+            <button className={styles.cancelBtn} type="button">Cancel</button>
         <button className={styles.saveButton} onClick={handleSubmit}>
           Save
         </button>

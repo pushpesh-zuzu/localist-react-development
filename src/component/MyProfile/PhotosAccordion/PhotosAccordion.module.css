@@ -192,6 +192,13 @@
   text-align: center;
 }
 }
+@media screen and (max-width:380px) {
+  .videoHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+}
 
 
 /* 
