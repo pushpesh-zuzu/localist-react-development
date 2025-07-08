@@ -78,7 +78,7 @@
 .rightSection {
   min-height: 200px;
   background: #ffffff;
-  padding: 35.08px 29.45px;
+  padding: 20.08px 20.45px;
   border-radius: 15px;
   width: -webkit-fill-available;
 }
@@ -108,6 +108,7 @@
 
 .serviceItem span {
   cursor: pointer;
+  font-size: 15px;
 }
 
 .serviceItem:hover {
@@ -263,6 +264,11 @@
    .container {
     padding: 16px;
   }
+   .leftSection h1 {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 50px;
+  }
   .getStartedArrow {
     display: inline-block;
     width: 24px;
@@ -315,7 +321,8 @@
   }
   .leftSection h1 {
     font-weight: 700;
-    font-size: 29px;
+    font-size: 35px;
+    line-height: 45px;
   }
   
 }
@@ -346,6 +353,11 @@
     height: 40px;
     margin-top: 15px;
     padding-left: 6px;
+  }
+   .leftSection h1 {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 45px;
   }
   
 }

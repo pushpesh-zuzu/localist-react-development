@@ -65,7 +65,7 @@ const FindLocalJobs = () => {
       {/* Left Section */}
       <div className={styles.leftSection}>
         <h1>
-          Find Local Jobs For <br />
+          Find Local Jobs For 
           Your Business Now
         </h1>
         <p>
@@ -150,6 +150,7 @@ const FindLocalJobs = () => {
                   alt={service.title}
                 />
                 <span>{service.name}</span>
+                
               </div>
             ))}
           </div>
