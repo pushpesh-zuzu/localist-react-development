@@ -168,8 +168,8 @@ const ServiceDetailsStep = ({
                     type="button"
                     className={
                       formData.is_company_website == 0
-                        ? styles.activeButton
-                        : styles.toggleButton
+                        ? styles.activeButtonNo
+                        : styles.toggleButtonNo
                     }
                     onClick={() =>
                       dispatch(
@@ -285,8 +285,8 @@ const ServiceDetailsStep = ({
                     type="button"
                     className={
                       formData.company_sales_team === 0
-                        ? styles.activeButton
-                        : styles.toggleButton
+                         ? styles.activeButtonNo
+                        : styles.toggleButtonNo
                     }
                     onClick={() =>
                       dispatch(
@@ -321,8 +321,8 @@ const ServiceDetailsStep = ({
                     type="button"
                     className={
                       formData.social_media === 0
-                        ? styles.activeButton
-                        : styles.toggleButton
+                        ? styles.activeButtonNo
+                        : styles.toggleButtonNo
                     }
                     onClick={() => dispatch(setFormData({ social_media: 0 }))}
                   >
