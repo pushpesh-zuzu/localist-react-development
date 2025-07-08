@@ -523,18 +523,18 @@ cursor: not-allowed;
 .nextButton {
   background: var(--primary-color);
   color: white;
-  padding: 8px 10px;
+  padding: 8px 20px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
   font-weight: 500;
   font-size:14px;
-  width: 84px;
+  width: 105px;
   vertical-align: middle;
 }
 }
 
-.modalOverlay {
+/* .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -561,7 +561,7 @@ cursor: not-allowed;
 }
 
 .heading {
-  /* font-family: Inter; */
+ 
   font-weight: 700;
   font-size: 24px;
   text-align: center;
@@ -569,7 +569,7 @@ cursor: not-allowed;
 }
 
 .description {
-  /* font-family: Inter; */
+ 
   font-weight: 500;
   font-size: 16px;
   text-align: center;
@@ -586,30 +586,30 @@ cursor: not-allowed;
   background: black;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: white;
-  padding: 8px 20.5px;
+  padding: 8px 10.5px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 14px;
   vertical-align: middle;
-  /* width: 84px; */
+
   
 }
 
 .nextButton {
   background: var(--primary-color);
   color: white;
-  padding: 8px 20px;
+  padding: 8px 10px;
   border: none;
   cursor: pointer;
   border-radius: 3px;
   font-weight: 500;
-  font-size:20px;
-  /* width: 84px; */
+  font-size:14px;
+  width: 84px;
   vertical-align: middle;
 }
 
 .continueButton:hover {
   background-color: #0096c4;
-}
+} */
