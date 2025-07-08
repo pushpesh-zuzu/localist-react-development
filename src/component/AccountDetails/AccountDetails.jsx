@@ -193,11 +193,11 @@ const AccountDetails = () => {
       </div>
 
       <div className={styles.passwordSection}>
-        <h4 className={styles.subHeading}>Change password</h4>
+        <h4 className={styles.subHeading}>Change Password</h4>
         <p className={styles.note}>
           It’s important to keep your password up-to-date.
         </p>
-        <button className={styles.button} onClick={() => setIsModalOpen(true)}>change password</button>
+        <button className={styles.button} onClick={() => setIsModalOpen(true)}>Change Password</button>
       </div>
       </div>
        {

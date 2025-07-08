@@ -226,7 +226,8 @@
     flex-direction: column;
   }
   .title {
-    font-size: 14px;
+    font-size: 18px;
+    margin-bottom: 11px;
   }
   .AccreditationsAccordionBox {
     display: flex;

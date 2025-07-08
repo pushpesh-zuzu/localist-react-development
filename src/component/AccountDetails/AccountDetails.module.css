@@ -93,10 +93,10 @@
   font-weight: 500;
   font-size: 18px;
   vertical-align: middle;
-  color: var(--primary-color);
+  color: #FFF;
   border: 1px solid var(--primary-color);
   border-radius: 3px;
-  background-color: #fff;
+  background-color: var(--primary-color);
   cursor: pointer;
 }
 
@@ -110,15 +110,17 @@
 }
 .saveBtn {
   
-    padding: 8px 22px;
+      padding: 4px 0px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 14px;
     vertical-align: middle;
-    color: var(--primary-color);
+    /* color: var(--primary-color); */
     border: 1px solid var(--primary-color);
     border-radius: 3px;
-    background-color: #fff;
+    background-color: var(--primary-color);
     cursor: pointer;
+    width: 70px;
+    color: #FFF;
 }
 
 .modalOverlay {
@@ -250,7 +252,7 @@
   }
 
   .button {
-    font-size: 16px;
+    font-size: 15px;
     padding: 10px;
   }
 
@@ -307,8 +309,8 @@
   }
 
   .button {
-    font-size: 15px;
-    padding: 9px;
+    font-size: 14px;
+    padding: 4px 16px;
   }
 
   .infoIcon img {

@@ -277,7 +277,7 @@ useEffect(() => {
             className={styles.uploadBtn}
             onClick={() => fileInputRefs.company_logo.current.click()}
           >
-            Upload new picture
+            Upload
           </button>
           {/* <button
             className={styles.webcamBtn}
@@ -326,13 +326,13 @@ useEffect(() => {
               className={styles.uploadBtn}
               onClick={() => fileInputRefs.profile_image.current.click()}
             >
-              Upload new picture
+              Upload 
             </button>
             <button
               className={styles.webcamBtn}
               onClick={() => handleCaptureWebcam("profile_image")}
             >
-              Upload using Webcam
+             Take Photo
             </button>
             <input
               type="file"

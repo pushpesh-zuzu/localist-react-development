@@ -191,6 +191,12 @@
   cursor: pointer;
   text-align: center;
 }
+.cancelButton,
+.saveButton {
+   width: 84px;
+     padding: 8px 10px;
+     font-size: 14px;
+}
 }
 @media screen and (max-width:380px) {
   .videoHeader {
