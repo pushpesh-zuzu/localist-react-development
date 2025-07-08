@@ -339,7 +339,8 @@ const handleExpandRadius = () => {
           <div className={styles.milesBox}>
             <div className={styles.dropdownWrapper}>
               <select
-                className={styles.dropdown}
+                // className={styles.dropdown}
+                className={styles.customSelect}
                 name="miles2"
                 value={formData?.miles2}
                 onChange={handleInputChange}
