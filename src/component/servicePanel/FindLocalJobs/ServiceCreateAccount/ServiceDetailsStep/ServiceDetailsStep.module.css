@@ -293,7 +293,7 @@
 
   .toggleGroup,
   .optionGroup {
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
   }
 
@@ -301,23 +301,25 @@
   .optionButton,
   .activeButton,
   .activeOption {
-    width: 100%;
+    /* width: 100%; */
     text-align: center;
     padding: 8px 12px;
     font-size: 14px;
+    border-radius: 25px;
   }
 
   .buttonContainer {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 12px;
     margin-top: 16px;
   }
 
   .nextButton,
   .backButton {
-    width: 100%;
+    /* width: 100%; */
+    width: 84px;
     font-size: 14px;
     padding: 10px;
-    font-weight: 700;
+    font-weight: 500;
   }
 }

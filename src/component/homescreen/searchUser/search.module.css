@@ -88,6 +88,7 @@
   background: #fff;
   width: 52vw;
   height: 51px;
+  outline-color: var(--primary-color);
 }
 
 .input {
@@ -99,6 +100,7 @@
   font-weight: 600;
   color:#848484;;
   font-family: var(--font-Poppins);
+  outline-color: var(--primary-color);
 }
 
 .input::placeholder {

@@ -359,7 +359,7 @@ const handleExpandRadius = () => {
               <input
                 type="text"
                 id="autocomplete-postcode"
-                placeholder="Enter your postcode"
+                placeholder="Postcode"
                 className={`${styles.input} ${errors.postcode2 ? styles.errorBorder : ""
                   }`}
                 ref={inputRef}

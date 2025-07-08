@@ -313,16 +313,17 @@ input[type="number"]::-webkit-inner-spin-button {
   }
 
   .buttonContainer {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 12px;
     margin-top: 16px;
   }
 
   .nextButton,
   .backButton {
-    width: 100%;
+    /* width: 100%; */
+    width: 84px;
     font-size: 14px;
     padding: 10px;
-    font-weight: 700;
+    font-weight: 500;
   }
 }

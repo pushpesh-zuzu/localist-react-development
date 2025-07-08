@@ -505,6 +505,33 @@ cursor: not-allowed;
   .secondaryLabel {
     margin-bottom: 0px;
   }
+  .backButton {
+  background: black;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  color: white;
+  padding: 8px 10.5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  vertical-align: middle;
+  width: 84px;
+  
+}
+
+.nextButton {
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size:14px;
+  width: 84px;
+  vertical-align: middle;
+}
 }
 
 .modalOverlay {
@@ -563,9 +590,11 @@ cursor: not-allowed;
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
+  /* width: 84px; */
+  
 }
 
 .nextButton {
@@ -575,9 +604,9 @@ cursor: not-allowed;
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  font-weight: 600;
-  font-size: 20px;
-  /* min-width: 98px; */
+  font-weight: 500;
+  font-size:20px;
+  /* width: 84px; */
   vertical-align: middle;
 }
 
