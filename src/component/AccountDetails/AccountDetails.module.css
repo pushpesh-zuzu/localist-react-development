@@ -315,4 +315,9 @@
     width: 16px;
     height: 16px;
   }
+  .infoIcon {
+  align-items: start;
+  color: var(--primary-color);
+  margin-top: 2px;
+}
 }

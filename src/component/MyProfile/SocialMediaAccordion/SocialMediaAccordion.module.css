@@ -173,6 +173,14 @@
 .cancelBtn:hover{
   background-color: #ccc;
 }
+@media screen and (max-width:480px) {
+  .heading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 11px;
+  color: #828282;
+}
+}
 
 @media screen and (max-width:380px) {
   .header {
