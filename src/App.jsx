@@ -81,7 +81,8 @@ function App() {
           "loggedUser",
           "nation_wide",
           "form_status",
-          "is_online"
+          "is_online",
+          "company_reg_number"
         ];
 
         // Loop through fields and append values (or empty string if undefined)
