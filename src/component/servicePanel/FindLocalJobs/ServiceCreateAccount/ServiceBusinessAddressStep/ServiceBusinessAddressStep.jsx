@@ -111,7 +111,11 @@ useEffect(() => {
                 type="text"
                 className={styles.input}
                 name="city"
-                value={formData.city}
+                value={
+                  formData.city 
+                    || (!formData.company_reg_number ? formData.city_old : "") 
+                    || ""
+                }
                 onChange={handleInputChange}
               />
             </div>
@@ -123,7 +127,11 @@ useEffect(() => {
                 type="text"
                 className={styles.input}
                 name="country"
-                value={formData.country}
+                value={
+                  formData.country 
+                    || (!formData.company_reg_number ? formData.country_old : "") 
+                    || ""
+                }
                 onChange={handleInputChange}
               />
             </div>
@@ -160,7 +168,11 @@ useEffect(() => {
         WebkitAppearance: "none"
       }}
       name="zipcode"
-      value={formData.zipcode}
+      value={
+        formData.zipcode 
+          || (!formData.company_reg_number ? formData.zipcode_old : "") 
+          || ""
+      }
       onChange={(e) =>
         dispatch(setFormData({
           ...formData, 

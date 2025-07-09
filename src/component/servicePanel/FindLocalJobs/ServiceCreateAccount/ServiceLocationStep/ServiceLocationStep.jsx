@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-
+ 
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -86,6 +86,10 @@ let cityName =
           dispatch(setFormData({city:cityName})),
           dispatch(setFormData({country: countryName}))
           dispatch(setFormData({zipcode:postalCode}))
+          dispatch(setFormData({ postcode_old: postalCode }));
+          dispatch(setFormData({city_old:cityName})),
+          dispatch(setFormData({country_old: countryName}))
+          dispatch(setFormData({zipcode_old:postalCode}))
 
           // dispatch(setCountry({country: countryName}))
           // dispatch(setCity({city:cityName})),
@@ -101,6 +105,8 @@ let cityName =
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
+
+
 
   return (
     <div className={styles.parentContainer}>
