@@ -2,6 +2,7 @@
   margin-top: 1.5rem;
   padding: 1.3rem 0.8rem 1.3rem 0.8rem;
   background-color: #F9F9F9;
+  margin-bottom: 1rem;
 }
 
 .help-box>h4 {
@@ -324,7 +325,9 @@
 }
 
 .dashboard-content {
-  height: 150vh;
+  /* height: 150vh; */
+    height: 100%;
+
   transition: 0.8s !important;
 }
 
@@ -338,7 +341,7 @@
 
 .dashboard-content.show {
   /* display: block; */
-  height: 150vh;
+  height: -webkit-fill-available;
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -347,7 +350,7 @@
 @media screen and (min-width:1280px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 160vh;
+  /* height: 160vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -356,7 +359,7 @@
 @media screen and (min-width:1025px) and (max-width: 1279px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 180vh;
+  /* height: 180vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -365,7 +368,7 @@
 @media screen and (min-width:769px) and (max-width: 1024px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 250vh;
+  /* height: 250vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -374,7 +377,7 @@
 @media screen and (min-width:510px) and (max-width: 768px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 210vh;
+  /* height: 210vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -383,7 +386,7 @@
 @media screen and (min-width:412px) and (max-width: 509px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 235vh;
+  /* height: 235vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -392,7 +395,7 @@
 @media screen and (min-width:360px) and (max-width: 411px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 245vh;
+  /* height: 245vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
@@ -401,7 +404,7 @@
 @media screen and (min-width:310px) and (max-width: 359px) {
 .dashboard-content.show {
   /* display: block; */
-  height: 275vh;
+  /* height: 275vh; */
   overflow: hidden;
   transition: all 0.8s;
 }
