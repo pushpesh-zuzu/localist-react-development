@@ -18,7 +18,8 @@ const ServiceBusinessAddressStep = ({
 const dispatch = useDispatch();
 const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
-  const hasClearedOnce = useRef(false); // ✅ avoid duplicate "0" API calls
+  const hasClearedOnce = useRef(false);
+  const hasPopulatedFromCompany = useRef(false);
 
   useEffect(() => {
     const reg = formData.company_reg_number?.trim();
@@ -34,15 +35,16 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
         dispatch(
           setFormData({
             address: "",
-            address_line: "",
-            locality: "",
+            apartment: "",
+            city: "",
             zipcode: "",
             country: "",
           })
         );
       }
     } else if (reg.length === 8) {
-      hasClearedOnce.current = false; // allow re-trigger if cleared again
+      hasClearedOnce.current = false; 
+      hasPopulatedFromCompany.current = false; 
       dispatch(fetchCompanyDetails(reg));
     }
   }, [formData.company_reg_number, dispatch, setFormData]);
@@ -54,23 +56,19 @@ useEffect(() => {
   if (
     reg?.length === 8 &&
     companyData?.company_name &&
-    companyData?.registered_office_address
+    companyData?.registered_office_address && !hasPopulatedFromCompany.current
   ) {
     const newAddress = {
       address: companyData.registered_office_address?.address_line_1 || "",
-      address_line: companyData.registered_office_address?.address_line_2 || "",
-      locality: companyData.registered_office_address?.locality || "",
+      apartment: companyData.registered_office_address?.address_line_2 || "",
+      city: companyData.registered_office_address?.locality || "",
       zipcode: companyData.registered_office_address?.postal_code || "",
       country: companyData.registered_office_address?.country || "",
     };
 
-    const shouldUpdate = Object.entries(newAddress).some(
-      ([key, value]) => formData[key] !== value
-    );
-
-    if (shouldUpdate) {
-      dispatch(setFormData(newAddress));
-    }
+    dispatch(setFormData(newAddress));
+    hasPopulatedFromCompany.current = true; 
+  
   }
 }, [companyData, formData, dispatch]);
 
@@ -103,7 +101,7 @@ useEffect(() => {
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Building or House Name/Number</label>
               <input type="text" className={styles.input} name="apartment"
-                  value={formData.address_line}
+                  value={formData.apartment}
                   onChange={handleInputChange}/>
             </div>
 
@@ -113,7 +111,7 @@ useEffect(() => {
                 type="text"
                 className={styles.input}
                 name="city"
-                value={formData.locality}
+                value={formData.city}
                 onChange={handleInputChange}
               />
             </div>
