@@ -33,6 +33,7 @@ import TravelTimeModal from "../AddLocation/TravelTimeModal";
 import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
 import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
 import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.svg"
+// import backArrow from "../../../assets/Images/Leads/BackArrow.svg"
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -461,10 +462,13 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     console.log("handleLocaltionModalOpen called");
     setIsLocationModalOpen(true);
   };
-
+const handleBack = () =>{
+  navigate("/settings")
+}
   return (
     <>
       <div className={styles.container}>
+        <div onClick={handleBack} className={styles.arrowBtn}> ←  Back</div>
         <h1 className={styles.heading}>Lead settings</h1>
         <p className={styles.subHeading}>Tell us what you’re looking for — we’ll send you the right leads on Localists.com.</p>
 

@@ -37,6 +37,7 @@ console.log(selectedService,"selectedService")
               selectedService={selectedService}
               setSelectedService={setSelectedService}
               setIsRemoved={setIsRemoved} // ✅ PASS PROP
+              setRemove={isRemoved}
             />
           )}
         </>

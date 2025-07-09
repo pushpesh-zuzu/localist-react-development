@@ -28,7 +28,7 @@ import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
 import { Link, useNavigate } from "react-router-dom";
 
-const CustomerQuestions = ({ selectedService }) => {
+const CustomerQuestions = ({ selectedService,setRemove }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -41,7 +41,7 @@ const CustomerQuestions = ({ selectedService }) => {
       setIsRemoved(false);
     }
   }, [selectedService]);
-  console.log(selectedService, "selectedService");
+  console.log(setRemove, "selectedService");
 
   const {
     leadPreferenceData,
@@ -282,9 +282,13 @@ const handleUpdateService = () => {
       }
     })
   }
+  const handleBack = () => {
+    setIsRemoved(false)
+  }
   return (
     <>
       <div className={styles.modal}>
+       <div onClick={handleBack} className={styles.arrowBtn}> ←  Back</div>
         <div>
           <div className={styles.header}>
             <h1 className={styles.title}>{selectedService?.name}</h1>
@@ -505,7 +509,7 @@ const handleUpdateService = () => {
           
         </div>
 
-        <div className={styles.footer}>
+        <div className={styles.footers}>
           <button
             className={styles.removeService}
             onClick={handleRemoveModal}
@@ -513,6 +517,8 @@ const handleUpdateService = () => {
           >
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
+          <div className={styles.footer}>
+            <button className={styles.backBtn}>Back</button>
           <button className={styles.saveButton} onClick={handleSubmitData}>
             {leadPreferenceLoader ? (
               <Spin
@@ -522,6 +528,7 @@ const handleUpdateService = () => {
               "Save"
             )}
           </button>
+          </div>
         </div>
       </div>
       {isLocationModalOpen && (
