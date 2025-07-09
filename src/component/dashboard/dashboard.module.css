@@ -91,6 +91,7 @@
   transition: transform 0.3s ease;
 }
 
+
 /* /E3F6FC */
 .dashboard-title {
   margin-top: 10px;
@@ -318,10 +319,12 @@
 
 }
 
+.dashboard-content::-webkit-scrollbar{
+  display: none !important;
+}
 
 .dashboard-content {
   height: 150vh;
-  overflow: auto;
   transition: 0.8s !important;
 }
 
@@ -336,10 +339,73 @@
 .dashboard-content.show {
   /* display: block; */
   height: 150vh;
-  overflow: auto;
+  overflow: hidden;
   transition: all 0.8s;
 }
 
+
+@media screen and (min-width:1280px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 160vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:1025px) and (max-width: 1279px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 180vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:769px) and (max-width: 1024px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 250vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:510px) and (max-width: 768px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 210vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:412px) and (max-width: 509px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 235vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:360px) and (max-width: 411px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 245vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
+
+@media screen and (min-width:310px) and (max-width: 359px) {
+.dashboard-content.show {
+  /* display: block; */
+  height: 275vh;
+  overflow: hidden;
+  transition: all 0.8s;
+}
+}
 
 
 
@@ -431,7 +497,7 @@
 /* --------- Mobile (up to 768px) --------- */
 @media (max-width: 768px) {
   .breaker {
-    margin: 0 0 0 3.1rem;
+    margin: 0 0 0 2.8rem;
 
     border: 0.5px solid rgb(196, 194, 194);
   }
@@ -585,13 +651,13 @@
 
 @media (max-width: 480px) {
   .contact-info {
-    padding: 0.4rem 0 0.1rem 0;
+    padding: 0rem 0 0.1rem 0;
   }
 
   .contact-info span img {
     width: 18px;
     height: 18px;
-    margin-top: 4px
+    margin-top: 3px
   }
 
   .contact-info span {
@@ -615,7 +681,7 @@
   margin-top: 2px;
 }
 .help-box p {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .setpPara p b{
   color: black;

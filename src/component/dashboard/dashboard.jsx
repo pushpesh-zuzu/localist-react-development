@@ -37,7 +37,7 @@ dispatch(getDashboardListData())
         <p>
         Your dashboard is ready. Access everything you need to manage your business and grow with Localists.
         </p>
-        <div ><span><img src={polygon} onClick={() => setShowDashboardContent(!showDashboardContent)} /></span></div>
+        <div ><span><img src={polygon} onClick={() => setShowDashboardContent(!showDashboardContent)} className={showDashboardContent ? "" : styles.rotate}/></span></div>
       </div>
 
       <div className={styles["main-section"]}>
@@ -98,7 +98,7 @@ dispatch(getDashboardListData())
 
     <div className={styles.hideIcon}  onClick={() => setShowDashboardContent(!showDashboardContent)}>
       <span>{showDashboardContent ?"Hide":"Show"}</span>
-      <img src={PolygonArrowDown}  className={showDashboardContent ? styles.rotate : ""}/>
+      <img src={PolygonArrowDown}  className={showDashboardContent ? "" : styles.rotate}/>
     </div>
   </div>
 </div>

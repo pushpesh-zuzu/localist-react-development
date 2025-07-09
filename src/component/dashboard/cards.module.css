@@ -159,7 +159,7 @@ font-weight: bold;
     line-height: 120px;
     font-size: 40px;
     font-weight: bold;
-    margin: 1.1rem auto;
+    margin: 3rem auto;
     position: relative;
     display: flex;
     justify-content: center;
@@ -696,7 +696,23 @@ font-weight: bold;
     border-radius: 0;
   }
    .notification-banner{
-  width: 100%;
-  margin: 0 0 -0.4rem -0.6rem;
+        width: 93%;
+        margin: 0 0px -0.4rem 0.1rem;
  }
+  .response {
+     background: #FCE5E3;
+    border-radius: 50%;
+    width: 135px;
+    height: 135px;
+    text-align: center;
+    line-height: 120px;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0.4rem auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
 }
