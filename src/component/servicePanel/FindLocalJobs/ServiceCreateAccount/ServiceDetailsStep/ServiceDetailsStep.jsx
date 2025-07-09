@@ -7,7 +7,7 @@ import { showToast } from "../../../../../utils";
 import {
   fetchCompanyDetails
 } from "../../../../../store/Company/companyLookup";
-
+import { setCompanyError,clearCompanyData } from "../../../../../store/Company/companyLookup";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -29,34 +29,51 @@ const ServiceDetailsStep = ({
     }
   }
   console.log(serviceParms?.serviceTitle, "serviceParms");
-  const companyError = useSelector(state => state.companyLook?.companyError);
-
-  useEffect(() => {
-    if (formData.company_reg_number && formData.company_reg_number.length === 8) {
-      dispatch(setFormData({ company_name: "" }));
-      dispatch(fetchCompanyDetails(formData.company_reg_number));
-    }
-  }, [formData.company_reg_number]);
-
-  useEffect(() => {
-    if (companyError) {
-      showToast("error", companyError);
-    }
-  }, [companyError]);
   const companyData = useSelector((state) => state.companyLook?.companyData);
- 
+  const companyError = useSelector(state => state.companyLook?.companyError);
+useEffect(() => {
+  if (!formData.company_reg_number) {
+    dispatch(setFormData({
+      company_name: "",
+      address: ""
+    }));
+    dispatch(clearCompanyData());
+  }
+}, []);
 
- useEffect(() => {
+// On reg number change: reset fields and fetch if 8 digits
+useEffect(() => {
+  if (!formData.company_reg_number) {
+    dispatch(setFormData({
+      company_name: "",
+      address: ""
+    }));
+    return;
+  }
+
+  if (formData.company_reg_number.length === 8) {
+    dispatch(fetchCompanyDetails(formData.company_reg_number));
+  }
+}, [formData.company_reg_number]);
+
+// On API error
+useEffect(() => {
+  if (companyError && formData.company_reg_number !== "") {
+    showToast("error", companyError);
+    dispatch(setFormData({ company_reg_number: "" }));
+  }
+
+  if (companyError) {
+    dispatch(setCompanyError(null)); // Always clear after handling
+  }
+}, [companyError, formData.company_reg_number, dispatch]);
+
+// When data fetched successfully
+useEffect(() => {
   if (companyData?.company_name) {
-    dispatch(
-      setFormData({
-        company_name: companyData.company_name || "",
-        // address: companyData?.registered_office_address?.address_line_1 || "",
-        // locality: companyData?.registered_office_address?.locality || "",
-        // postcode: companyData?.registered_office_address?.postal_code || "",
-        // country: companyData?.registered_office_address?.country || "",
-      })
-    );
+    dispatch(setFormData({
+      company_name: companyData.company_name || ""
+    }));
   }
 }, [companyData]);
 
@@ -90,7 +107,10 @@ const ServiceDetailsStep = ({
               {errors.name && <p className={styles.errorText}>{errors.name}</p>}
 
               <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>Company registration number</label>
+                <label className={styles.label}>
+                Company registration number<span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>(Optional)</span>
+              </label>
+                
                 <input
                   type="text"
                   className={`${styles.input} ${

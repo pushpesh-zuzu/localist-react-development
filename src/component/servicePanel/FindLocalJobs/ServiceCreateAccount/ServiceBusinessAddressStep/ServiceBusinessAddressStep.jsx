@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchCompanyDetails
+  fetchCompanyDetails,clearCompanyData
 } from "../../../../../store/Company/companyLookup";
 
 
@@ -14,42 +14,65 @@ const ServiceBusinessAddressStep = ({
   setFormData,
   errors,
 }) => {
+
+const dispatch = useDispatch();
+const { country, city, postalcode } = useSelector((state) => state.findJobs);
+const companyData = useSelector((state) => state.companyLook?.companyData);
+  const hasClearedOnce = useRef(false);
+  const hasPopulatedFromCompany = useRef(false);
+
+  useEffect(() => {
+    const reg = formData.company_reg_number?.trim();
+
+    if (!reg) {
+      if (!hasClearedOnce.current) {
+        hasClearedOnce.current = true;
+
+        // Call with dummy reg no to trigger backend cleanup
+        dispatch(fetchCompanyDetails("0"));
+        dispatch(clearCompanyData());
+
+        dispatch(
+          setFormData({
+            address: "",
+            apartment: "",
+            city: "",
+            zipcode: "",
+            country: "",
+          })
+        );
+      }
+    } else if (reg.length === 8) {
+      hasClearedOnce.current = false; 
+      hasPopulatedFromCompany.current = false; 
+      dispatch(fetchCompanyDetails(reg));
+    }
+  }, [formData.company_reg_number, dispatch, setFormData]);
+
+
+useEffect(() => {
+  const reg = formData.company_reg_number?.trim();
+
+  if (
+    reg?.length === 8 &&
+    companyData?.company_name &&
+    companyData?.registered_office_address && !hasPopulatedFromCompany.current
+  ) {
+    const newAddress = {
+      address: companyData.registered_office_address?.address_line_1 || "",
+      apartment: companyData.registered_office_address?.address_line_2 || "",
+      city: companyData.registered_office_address?.locality || "",
+      zipcode: companyData.registered_office_address?.postal_code || "",
+      country: companyData.registered_office_address?.country || "",
+    };
+
+    dispatch(setFormData(newAddress));
+    hasPopulatedFromCompany.current = true; 
   
-const { country ,city,postalcode} = useSelector((state) => state.findJobs)
-console.log(country,city,postalcode,"123")
-  const dispatch = useDispatch()
-    useEffect(() => {
-    if (formData.company_reg_number && formData.company_reg_number.length === 8) {
-      dispatch(
-        setFormData({
-          address: "",
-          address_line: "",
-          locality: "",
-          zipcode: "",
-          country:""
-
-        })
-      );
-      dispatch(fetchCompanyDetails(formData.company_reg_number));
-    }
-    }, [formData.company_reg_number]);
+  }
+}, [companyData, formData, dispatch]);
 
 
-  const companyData = useSelector((state) => state.companyLook?.companyData);
-   useEffect(() => {
-    if (companyData?.company_name) {
-      dispatch(
-        setFormData({
-         
-          address: companyData?.registered_office_address?.address_line_1 || "",
-          address_line: companyData?.registered_office_address?.address_line_2 || "",
-          locality: companyData?.registered_office_address?.locality || "",
-          zipcode: companyData?.registered_office_address?.postal_code || "",
-          country: companyData?.registered_office_address?.country || "",
-        })
-      );
-    }
-  }, [companyData]);
 
   return (
     <div className={styles.pageContainer}>
@@ -78,7 +101,7 @@ console.log(country,city,postalcode,"123")
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Building or House Name/Number</label>
               <input type="text" className={styles.input} name="apartment"
-                  value={formData.address_line}
+                  value={formData.apartment}
                   onChange={handleInputChange}/>
             </div>
 
@@ -88,7 +111,7 @@ console.log(country,city,postalcode,"123")
                 type="text"
                 className={styles.input}
                 name="city"
-                value={formData.locality}
+                value={formData.city}
                 onChange={handleInputChange}
               />
             </div>

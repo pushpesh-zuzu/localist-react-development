@@ -82,7 +82,8 @@ function App() {
           "nation_wide",
           "form_status",
           "is_online",
-          "company_reg_number"
+          "company_reg_number",
+          "apartment"
         ];
 
         // Loop through fields and append values (or empty string if undefined)
