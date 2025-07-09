@@ -93,11 +93,11 @@ dispatch(getDashboardListData())
     </div>
 
     <footer className={styles["dashboard-footer"]}>
-      No commissions, no hidden fees—just a straightforward process.
+      No commissions, no hidden fees—just a straight forward process.
     </footer>
 
     <div className={styles.hideIcon}  onClick={() => setShowDashboardContent(!showDashboardContent)}>
-      <span>Hide</span>
+      <span>{showDashboardContent ?"Hide":"Show"}</span>
       <img src={PolygonArrowDown} />
     </div>
   </div>

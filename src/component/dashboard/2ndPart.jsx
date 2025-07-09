@@ -52,8 +52,8 @@ const DashboardCards = ({data}) => {
 
 
     <div className={`${styles.card} ${styles["add-services"]}`}>
-      <h3>Add New Services</h3>
-      <form>
+      <h3>Account Details</h3>
+      {/* <form>
         <label>
           <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the
         </label>
@@ -67,8 +67,12 @@ const DashboardCards = ({data}) => {
           <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum
         </label>
         <button type="submit">Apply</button>
-      </form>
+      </form> */}
+      <div className={styles["creditText"]}>Credit : <span>{data?.account_details
+?.credits}</span></div>
+<div className={styles["planTypeText"]}> Plan Type : <span>{data?.account_details?.plan_type}</span></div>
     </div>
+    
   </div>
 
   {/* Notification Section */}
@@ -105,7 +109,8 @@ const DashboardCards = ({data}) => {
 
     <div className={`${styles.card} ${styles.responses}`}>
       <h3>Responses <span className={styles["view-link"]}>View</span></h3>
-      <div className={styles["response-msg"]}>You haven’t responded to any leads yet.</div>
+      {/* <div className={styles["response-msg"]}>You haven’t responded to any leads yet.</div> */}
+      <div className={styles["response"]}>{data?.response?.response_count}</div>
     </div>
 
     <div className={`${styles.card} ${styles.help}`}>

@@ -8,11 +8,14 @@ font-weight: bold;
   .card-header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   .profile-header{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 100%;
+    align-items: center;
+    gap: 20px;
   }
 
   .help-box p:first-child > span{
@@ -64,6 +67,12 @@ font-weight: bold;
     .card {
       flex: 0 1 100%;
     }
+     .profile-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
   }
   
   .card-title {
@@ -141,7 +150,49 @@ font-weight: bold;
     margin: 1.1rem auto;
     position: relative;
   }
-  
+  .response {
+     background: #e1f6fc;
+    border-radius: 50%;
+    width: 135px;
+    height: 135px;
+    text-align: center;
+    line-height: 120px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 1.1rem auto;
+    position: relative;
+  }
+  .account_type {
+    
+     display: inline-block;
+    margin: 4px 4px 18px 0;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000;
+  }
+  .account_type.blue {
+    background: #e0f7ff; 
+  }
+  .creditText {
+    color: #EB9F9F;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 42px;
+    margin-bottom: 24px;
+  }
+  .creditText span {
+    color: #000;
+  }
+  .planTypeText {
+  color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .planTypeText span {
+    color: #000;
+  }
   .leads .lead-circle span {
     display: block;
     font-size: 14px;
@@ -479,7 +530,7 @@ font-weight: bold;
     padding: 16px 20px 24px 22px;
     
   }
-
+ 
   .card-title,
   .card.responses h3,
   .card.help .card-title,
@@ -621,3 +672,11 @@ font-weight: bold;
 
 }
 
+@media screen and (max-width:480px) {
+   .profile-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+  }
+}
