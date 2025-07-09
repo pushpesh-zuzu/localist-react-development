@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchCompanyDetails
+  fetchCompanyDetails,clearCompanyData
 } from "../../../../../store/Company/companyLookup";
 
 
@@ -14,42 +14,67 @@ const ServiceBusinessAddressStep = ({
   setFormData,
   errors,
 }) => {
-  
-const { country ,city,postalcode} = useSelector((state) => state.findJobs)
-console.log(country,city,postalcode,"123")
-  const dispatch = useDispatch()
-    useEffect(() => {
-    if (formData.company_reg_number && formData.company_reg_number.length === 8) {
-      dispatch(
-        setFormData({
-          address: "",
-          address_line: "",
-          locality: "",
-          zipcode: "",
-          country:""
 
-        })
-      );
-      dispatch(fetchCompanyDetails(formData.company_reg_number));
+const dispatch = useDispatch();
+const { country, city, postalcode } = useSelector((state) => state.findJobs);
+const companyData = useSelector((state) => state.companyLook?.companyData);
+  const hasClearedOnce = useRef(false); // ✅ avoid duplicate "0" API calls
+
+  useEffect(() => {
+    const reg = formData.company_reg_number?.trim();
+
+    if (!reg) {
+      if (!hasClearedOnce.current) {
+        hasClearedOnce.current = true;
+
+        // Call with dummy reg no to trigger backend cleanup
+        dispatch(fetchCompanyDetails("0"));
+        dispatch(clearCompanyData());
+
+        dispatch(
+          setFormData({
+            address: "",
+            address_line: "",
+            locality: "",
+            zipcode: "",
+            country: "",
+          })
+        );
+      }
+    } else if (reg.length === 8) {
+      hasClearedOnce.current = false; // allow re-trigger if cleared again
+      dispatch(fetchCompanyDetails(reg));
     }
-    }, [formData.company_reg_number]);
+  }, [formData.company_reg_number, dispatch, setFormData]);
 
 
-  const companyData = useSelector((state) => state.companyLook?.companyData);
-   useEffect(() => {
-    if (companyData?.company_name) {
-      dispatch(
-        setFormData({
-         
-          address: companyData?.registered_office_address?.address_line_1 || "",
-          address_line: companyData?.registered_office_address?.address_line_2 || "",
-          locality: companyData?.registered_office_address?.locality || "",
-          zipcode: companyData?.registered_office_address?.postal_code || "",
-          country: companyData?.registered_office_address?.country || "",
-        })
-      );
+useEffect(() => {
+  const reg = formData.company_reg_number?.trim();
+
+  if (
+    reg?.length === 8 &&
+    companyData?.company_name &&
+    companyData?.registered_office_address
+  ) {
+    const newAddress = {
+      address: companyData.registered_office_address?.address_line_1 || "",
+      address_line: companyData.registered_office_address?.address_line_2 || "",
+      locality: companyData.registered_office_address?.locality || "",
+      zipcode: companyData.registered_office_address?.postal_code || "",
+      country: companyData.registered_office_address?.country || "",
+    };
+
+    const shouldUpdate = Object.entries(newAddress).some(
+      ([key, value]) => formData[key] !== value
+    );
+
+    if (shouldUpdate) {
+      dispatch(setFormData(newAddress));
     }
-  }, [companyData]);
+  }
+}, [companyData, formData, dispatch]);
+
+
 
   return (
     <div className={styles.pageContainer}>

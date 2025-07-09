@@ -66,13 +66,7 @@ const companySlice = createSlice({
       state.companyError = action.payload;
     },
     clearCompanyData(state) {
-      state.companyData = {
-        company_name: "",
-        address: "",
-        locality: "",
-        postcode: "",
-        country: ""
-      };
+      state.companyData = {}; 
     }
   },
 });
