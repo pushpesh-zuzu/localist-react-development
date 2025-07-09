@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCompanyDetails
+} from "../../../../../store/Company/companyLookup";
+
 
 const ServiceBusinessAddressStep = ({
   nextStep,
@@ -14,6 +18,29 @@ const ServiceBusinessAddressStep = ({
 const { country ,city,postalcode} = useSelector((state) => state.findJobs)
 console.log(country,city,postalcode,"123")
   const dispatch = useDispatch()
+    useEffect(() => {
+    if (formData.company_reg_number && formData.company_reg_number.length === 8) {
+      dispatch(fetchCompanyDetails(formData.company_reg_number));
+    }
+    }, [formData.company_reg_number]);
+
+
+  const companyData = useSelector((state) => state.companyLook?.companyData);
+   useEffect(() => {
+    if (companyData?.company_name) {
+      dispatch(
+        setFormData({
+         
+          address: companyData?.registered_office_address?.address_line_1 || "",
+          address_line: companyData?.registered_office_address?.address_line_2 || "",
+          locality: companyData?.registered_office_address?.locality || "",
+          zipcode: companyData?.registered_office_address?.postal_code || "",
+          country: companyData?.registered_office_address?.country || "",
+        })
+      );
+    }
+  }, [companyData]);
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.container}>
@@ -41,7 +68,7 @@ console.log(country,city,postalcode,"123")
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Building or House Name/Number</label>
               <input type="text" className={styles.input} name="apartment"
-                  value={formData.apartment }
+                  value={formData.address_line}
                   onChange={handleInputChange}/>
             </div>
 
@@ -51,7 +78,7 @@ console.log(country,city,postalcode,"123")
                 type="text"
                 className={styles.input}
                 name="city"
-                value={formData.city || formData?.city}
+                value={formData.locality}
                 onChange={handleInputChange}
               />
             </div>
@@ -63,7 +90,7 @@ console.log(country,city,postalcode,"123")
                 type="text"
                 className={styles.input}
                 name="country"
-                value={formData.country || formData?.country}
+                value={formData.country}
                 onChange={handleInputChange}
               />
             </div>
@@ -91,7 +118,7 @@ console.log(country,city,postalcode,"123")
 {/* {formData?.is_zipcode !== 0 && ( */}
   <div className={styles.labelInputWrapper}>
     <input
-      type="number"
+      type="text"
       placeholder="Postcode"
       className={styles.input}
       style={{
@@ -100,7 +127,7 @@ console.log(country,city,postalcode,"123")
         WebkitAppearance: "none"
       }}
       name="zipcode"
-      value={formData.zipcode || formData?.zipcode}
+      value={formData.zipcode}
       onChange={(e) =>
         dispatch(setFormData({
           ...formData, 

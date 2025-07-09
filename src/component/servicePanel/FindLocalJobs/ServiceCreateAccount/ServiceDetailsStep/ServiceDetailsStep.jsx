@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
+import {
+  fetchCompanyDetails
+} from "../../../../../store/Company/companyLookup";
+
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -25,6 +29,30 @@ const ServiceDetailsStep = ({
     }
   }
   console.log(serviceParms?.serviceTitle, "serviceParms");
+  useEffect(() => {
+    if (formData.company_reg_number && formData.company_reg_number.length === 8) {
+      dispatch(fetchCompanyDetails(formData.company_reg_number));
+    }
+  }, [formData.company_reg_number]);
+  const companyData = useSelector((state) => state.companyLook?.companyData);
+  console.log(companyData);
+
+ useEffect(() => {
+  if (companyData?.company_name) {
+    dispatch(
+      setFormData({
+        company_name: companyData.company_name || "",
+        // address: companyData?.registered_office_address?.address_line_1 || "",
+        // locality: companyData?.registered_office_address?.locality || "",
+        // postcode: companyData?.registered_office_address?.postal_code || "",
+        // country: companyData?.registered_office_address?.country || "",
+      })
+    );
+  }
+}, [companyData]);
+
+
+
   return (
     <>
       <div className={styles.pageContainer}>
@@ -51,6 +79,23 @@ const ServiceDetailsStep = ({
                 />
               </div>
               {errors.name && <p className={styles.errorText}>{errors.name}</p>}
+
+              <div className={styles.labelInputWrapper}>
+                <label className={styles.label}>Company registration number</label>
+                <input
+                  type="text"
+                  className={`${styles.input} ${
+                    errors.company_reg_number ? styles.errorBorder : ""
+                  }`}
+                  name="company_reg_number"
+                  value={formData.company_reg_number}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {errors.company_reg_number && (
+                <p className={styles.errorText}>{errors.company_reg_number}</p>
+              )}
+
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Company name</label>
                 <input
@@ -120,21 +165,34 @@ const ServiceDetailsStep = ({
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number</label>
-                <input
-                  type="text"
-                   className={`${styles.input} ${
-                    errors.phone ? styles.errorBorder : ""
-                  }`}
-                  name="phone"
-                  value={formData.phone}
-                  maxLength={10}
-                  pattern="[0-9]*"
-                  onInput={(e) => {
-                    e.target.value = e.target.value.replace(/\D/g, "");
-                  }}
-                  onChange={handleInputChange}
-                />
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span
+                    style={{
+                      padding: "7px 8px",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      backgroundColor: "#f9f9f9",
+                    }}
+                  >
+                    +44
+                  </span>
+
+                  <input
+                    type="text"
+                    name="phone"
+                    className={`${styles.input} ${errors.phone ? styles.errorBorder : ""}`}
+                    value={formData.phone}
+                    maxLength={10}
+                    pattern="[0-9]*"
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/\D/g, "");
+                    }}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                
               </div>
+
               {errors.phone && (
                 <p className={styles.errorText}>{errors.phone}</p>
               )}

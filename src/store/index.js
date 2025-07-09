@@ -8,6 +8,7 @@ import leadSettingSlice from "./LeadSetting/leadSettingSlice";
 import suggestQuestionsSlice from "./LeadSetting/SuggestQuestionSlice";
 import myprofileSlice from "./MyProfile/myProfileSlice"
 import myCreditSlice from "./MyProfile/MyCredit/MyCreditSlice";
+import companyLook from "./Company/companyLookup";
 import dashboardSlice from "./Dashboard/dashboardSlice"
 
 const store = configureStore({
@@ -20,8 +21,9 @@ const store = configureStore({
     leadSetting: leadSettingSlice,
     suggestQuestion: suggestQuestionsSlice,
     myProfile: myprofileSlice,
-      myCredit: myCreditSlice, 
-      dashboard:dashboardSlice
+    companyLook: companyLook,
+    myCredit: myCreditSlice, // Assuming MyCredit is part of myProfile 
+    dashboard:dashboardSlice
   },
 });
 
