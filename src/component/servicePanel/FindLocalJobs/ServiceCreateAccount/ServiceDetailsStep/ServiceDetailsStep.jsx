@@ -111,15 +111,22 @@ useEffect(() => {
                 Company registration number<span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>(Optional)</span>
               </label>
                 
-                <input
-                  type="text"
-                  className={`${styles.input} ${
-                    errors.company_reg_number ? styles.errorBorder : ""
-                  }`}
-                  name="company_reg_number"
-                  value={formData.company_reg_number}
-                  onChange={handleInputChange}
-                />
+               <input
+                    type="text"
+                    className={`${styles.input} ${
+                      errors.company_reg_number ? styles.errorBorder : ""
+                    }`}
+                    name="company_reg_number"
+                    value={formData.company_reg_number}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      
+                      const cleanedValue = value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 8);
+                      handleInputChange({ target: { name: "company_reg_number", value: cleanedValue } });
+                    }}
+                    maxLength={8}
+                  />
+
               </div>
               {errors.company_reg_number && (
                 <p className={styles.errorText}>{errors.company_reg_number}</p>

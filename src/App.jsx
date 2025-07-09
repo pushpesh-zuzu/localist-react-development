@@ -83,7 +83,10 @@ function App() {
           "form_status",
           "is_online",
           "company_reg_number",
-          "apartment"
+          "apartment",
+          "city_old",
+          "country_old",
+          "zipcode_old"
         ];
 
         // Loop through fields and append values (or empty string if undefined)
