@@ -29,13 +29,22 @@ const ServiceDetailsStep = ({
     }
   }
   console.log(serviceParms?.serviceTitle, "serviceParms");
+  const companyError = useSelector(state => state.companyLook?.companyError);
+
   useEffect(() => {
     if (formData.company_reg_number && formData.company_reg_number.length === 8) {
+      dispatch(setFormData({ company_name: "" }));
       dispatch(fetchCompanyDetails(formData.company_reg_number));
     }
   }, [formData.company_reg_number]);
+
+  useEffect(() => {
+    if (companyError) {
+      showToast("error", companyError);
+    }
+  }, [companyError]);
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  console.log(companyData);
+ 
 
  useEffect(() => {
   if (companyData?.company_name) {

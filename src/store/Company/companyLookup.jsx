@@ -11,16 +11,41 @@ export const fetchCompanyDetails = (regNumber) => {
   return async (dispatch) => {
     dispatch(setCompanyLoader(true));
     dispatch(clearCompanyData());
+
     try {
       const response = await axiosInstance.get(
         `users/fetch_company_details/${regNumber}`
       );
-      if (response.data) {
+
+      if (
+        response.data &&
+        !response.data.error &&
+        !response.data.body
+      ) {
+
         dispatch(setCompanyData(response.data));
-        return response.data;
+        return true;
+      } else {
+
+        dispatch(setCompanyError("Company not found"));
+        return false;
       }
+
     } catch (error) {
-      dispatch(setCompanyError(error?.response?.data?.message || "Company lookup failed"));
+      let message = "Company lookup failed";
+
+      const body = error?.response?.data?.body;
+      if (body) {
+        try {
+          const parsed = JSON.parse(body);
+          message = parsed.message || message;
+        } catch (e) {
+
+        }
+      }
+
+      dispatch(setCompanyError(message));
+      return false;
     } finally {
       dispatch(setCompanyLoader(false));
     }

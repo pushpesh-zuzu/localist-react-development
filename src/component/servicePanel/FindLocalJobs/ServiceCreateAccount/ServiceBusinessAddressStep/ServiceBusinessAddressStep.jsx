@@ -20,6 +20,16 @@ console.log(country,city,postalcode,"123")
   const dispatch = useDispatch()
     useEffect(() => {
     if (formData.company_reg_number && formData.company_reg_number.length === 8) {
+      dispatch(
+        setFormData({
+          address: "",
+          address_line: "",
+          locality: "",
+          zipcode: "",
+          country:""
+
+        })
+      );
       dispatch(fetchCompanyDetails(formData.company_reg_number));
     }
     }, [formData.company_reg_number]);
