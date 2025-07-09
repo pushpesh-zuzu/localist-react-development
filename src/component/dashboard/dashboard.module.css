@@ -86,7 +86,10 @@
 .contact-info div:last-child {
   font-weight: bold;
 }
-
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
 
 /* /E3F6FC */
 .dashboard-title {
@@ -196,7 +199,23 @@
   font-weight: bold;
   margin-right: 10px;
 }
+.setpPara {
+  display: flex;
+}
 
+.setpPara > p{
+  margin: 0 !important;
+}
+
+.setpPara p b{
+  color: black;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.setpPara > p > p{
+  margin-top: 10px;
+}
 
 .right-column {
   flex: 1;
@@ -370,6 +389,7 @@
 
   .steps-list li>p {
     font-size: 15px;
+   
   }
 
 
@@ -394,6 +414,7 @@
 
   }
 }
+
 
 
 
@@ -457,6 +478,7 @@
   .section-title {
     font-size: 17px;
     line-height: 24px;
+    margin-left: 0px;
   }
 
   .section-sub-title {
@@ -464,6 +486,7 @@
     margin-bottom: 40px;
     /* background-color: red; */
     margin-top: -0.7rem;
+    margin-left: 0px;
   }
 
   .steps-list li {
@@ -568,6 +591,7 @@
   .contact-info span img {
     width: 18px;
     height: 18px;
+    margin-top: 4px
   }
 
   .contact-info span {
@@ -584,5 +608,18 @@
     height: 35px;
     object-fit: contain;
   }
-
+.steps-list li>p{
+   margin: 0px 20px 0px 50px;
+}
+.video-box{
+  margin-top: 2px;
+}
+.help-box p {
+  margin-bottom: 24px;
+}
+.setpPara p b{
+  color: black;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
 }

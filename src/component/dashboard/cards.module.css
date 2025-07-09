@@ -662,7 +662,7 @@ font-weight: bold;
 }
 
 .responses{
-  padding: 2rem 1rem 4.5rem 1rem;
+  padding: 1rem 1rem 2rem 1rem;
 }
 .checkbox{
   margin-top: 4.2px;
@@ -681,5 +681,18 @@ font-weight: bold;
     align-items: center;
     gap: 12px;
     
+  }
+   .creditText {
+    color: #EB9F9F;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+   .notification-section {
+    text-align: center;
+    margin: 30px auto;
+    width: 100%;
+    border-radius: 0;
   }
 }

@@ -45,15 +45,15 @@ dispatch(getDashboardListData())
           <h3 className={styles["section-title"]}>Welcome to Localists.com</h3>
           <h5 className={styles["section-sub-title"]}>We’re here to help you grow your business and connect with more local customers.</h5>
           <ul className={styles["steps-list"]}>
-            <li><strong>1</strong> Customers tell us what they need <p>Local customers share the services they're looking for by answering key questions relating to the service.</p></li>
+            <li className={styles["setpPara"]}><strong>1</strong><p> <b>Customers tell us what they need</b>  <p>Local customers share the services they're looking for by answering key questions relating to the service.</p></p></li>
             <hr className={styles.breaker} />
-            <li><strong>2</strong> Localists.com finds the right leads for you <p>We match your business with leads that fit your services and location, delivered instantly to your inbox and dashboard.</p></li>
+            <li className={styles["setpPara"]} ><strong>2</strong> <p><b>Localists.com finds the right leads for you</b><p>We match your business with leads that fit your services and location, delivered instantly to your inbox and dashboard.</p> </p></li>
             <hr className={styles.breaker} />
-            <li><strong>3</strong> You review and select your leads <p> See full customer details straight away and choose the opportunities that work best for your business.</p></li>
+            <li className={styles["setpPara"]}><strong>3</strong>  <p><b>You review and select your leads</b> <p> See full customer details straight away and choose the opportunities that work best for your business.</p> </p></li>
             <hr className={styles.breaker} />
-            <li><strong>4</strong> You connect with the customer directly <p>Reach out by phone or email to introduce your services and secure new business.</p></li>
+            <li className={styles["setpPara"]}><strong>4</strong>  <p><b>You connect with the customer directly</b>  <p>Reach out by phone or email to introduce your services and secure new business.</p> </p></li>
             <hr className={styles.breaker} />
-            <li><strong>5</strong> You win new work — no hassle,<p>no hidden fees No hidden costs or long term commitment. There are no commissions or extra costs — just a clear, simple way to grow your business through Localists.com.</p></li>
+            <li className={styles["setpPara"]}><strong>5</strong>  <p><b>You win new work — no hassle,</b><p>no hidden fees No hidden costs or long term commitment. There are no commissions or extra costs — just a clear, simple way to grow your business through Localists.com.</p> </p></li>
             <hr className={styles.breaker} />
           </ul>
         </div>
@@ -98,7 +98,7 @@ dispatch(getDashboardListData())
 
     <div className={styles.hideIcon}  onClick={() => setShowDashboardContent(!showDashboardContent)}>
       <span>{showDashboardContent ?"Hide":"Show"}</span>
-      <img src={PolygonArrowDown} />
+      <img src={PolygonArrowDown}  className={showDashboardContent ? styles.rotate : ""}/>
     </div>
   </div>
 </div>
