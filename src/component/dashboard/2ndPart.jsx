@@ -108,7 +108,7 @@ const DashboardCards = ({data}) => {
     </div>
 
     <div className={`${styles.card} ${styles.responses}`}>
-      <h3>Responses <span className={styles["view-link"]}>View</span></h3>
+      <h3>Responses <span className={styles["view-link"]} onClick={()=> navigate("/leads")}>View</span></h3>
       {/* <div className={styles["response-msg"]}>You haven’t responded to any leads yet.</div> */}
       <div className={styles["response"]}>{data?.response?.response_count}</div>
     </div>

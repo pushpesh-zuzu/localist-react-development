@@ -151,16 +151,19 @@ font-weight: bold;
     position: relative;
   }
   .response {
-     background: #e1f6fc;
+     background: #FCE5E3;
     border-radius: 50%;
     width: 135px;
     height: 135px;
     text-align: center;
     line-height: 120px;
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
     margin: 1.1rem auto;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .account_type {
     

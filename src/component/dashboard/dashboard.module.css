@@ -70,7 +70,7 @@
   /* border: '1px solid #FFFFFF '; */
   margin: 0 0 1rem 3.1rem;
   width: 80%;
-  border-color: 1px solid #D9D9D9;
+  border: 1px solid #D9D9D9;
 }
 
 .contact-info div:first-child span {
