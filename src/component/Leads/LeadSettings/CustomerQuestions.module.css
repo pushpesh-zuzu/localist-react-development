@@ -30,6 +30,8 @@
    vertical-align: middle;
    cursor: pointer;
    margin-bottom: 36px;
+   display: flex;
+   gap: 8px;
 }
 
 .header {
@@ -249,7 +251,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10.62px 29px 31.62px 40.27px;
+  padding: 13.62px 29px 31.62px 40.27px;
   position: sticky;
   bottom: -20px;
   margin: 0px -29px -40px -39px;

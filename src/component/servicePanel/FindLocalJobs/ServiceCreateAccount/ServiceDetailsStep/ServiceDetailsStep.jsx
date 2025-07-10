@@ -203,12 +203,13 @@ useEffect(() => {
                 <label className={styles.label}>Phone number</label>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <span
-                    style={{
-                      padding: "7px 8px",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                      backgroundColor: "#f9f9f9",
-                    }}
+                    // style={{
+                    //   padding: "4px 8px",
+                    //   border: "1px solid #ccc",
+                    //   borderRadius: "4px",
+                    //   backgroundColor: "#f9f9f9",
+                    // }}
+                    className={styles.countryLabel}
                   >
                     +44
                   </span>
@@ -216,7 +217,7 @@ useEffect(() => {
                   <input
                     type="text"
                     name="phone"
-                    className={`${styles.input} ${errors.phone ? styles.errorBorder : ""}`}
+                    className={`${styles.inputs} ${errors.phone ? styles.errorBorder : ""}`}
                     value={formData.phone}
                     maxLength={10}
                     pattern="[0-9]*"

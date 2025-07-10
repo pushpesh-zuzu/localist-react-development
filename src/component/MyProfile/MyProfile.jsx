@@ -10,6 +10,7 @@ import QandAAccordion from "./QandAAccordion/QandAAccordion";
 import { useLocation } from "react-router-dom";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg"
 
 const MyProfile = () => {
   const location = useLocation();
@@ -47,7 +48,7 @@ setOpenAccordion("Reviews");
   return (
     <div className={styles.container}>
       <a className={styles.backLink} href="/settings">
-        ← Setting
+        <img src={blackArrow} alt="..." /> Setting
       </a>
       <h2 className={styles.title}>
         Your profile is <span className={styles.percent}>{viewProfileData?.percentage_completed}% complete</span>

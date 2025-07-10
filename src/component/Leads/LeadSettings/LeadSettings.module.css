@@ -26,6 +26,8 @@
    vertical-align: middle;
    cursor: pointer;
    margin-bottom: 36px;
+   display: flex;
+   gap: 8px;
 }
 .heading {
   font-weight: 600;

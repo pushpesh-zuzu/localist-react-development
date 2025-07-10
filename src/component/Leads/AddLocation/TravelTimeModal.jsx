@@ -283,7 +283,7 @@ const TravelTimeModal = ({
           style={{
             width: "100%",
             height: "250px",
-            marginTop: "20px",
+            marginTop: "16px",
             borderRadius: "8px",
             border: "1px solid #ccc",
           }}

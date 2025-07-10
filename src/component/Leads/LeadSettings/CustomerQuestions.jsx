@@ -7,6 +7,8 @@ import DownArrowIcon from "../../../assets/Images/Leads/DownArrowIcon.svg";
 import LocationIcon from "../../../assets/Images/HowItWorks/locationImg.svg";
 import TickIcon from "../../../assets/Images/Leads/TickIcon.svg";
 import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
+
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -289,7 +291,7 @@ const handleUpdateService = () => {
   return (
     <>
       <div className={styles.modal}>
-       <div onClick={handleBack} className={styles.arrowBtn}> ←  Back</div>
+       <div onClick={handleBack} className={styles.arrowBtn}> <img src={blackArrow} alt="..."/>  Back</div>
         <div>
           <div className={styles.header}>
             <h1 className={styles.title}>{selectedService?.name}</h1>

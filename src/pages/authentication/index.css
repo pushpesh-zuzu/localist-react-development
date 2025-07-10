@@ -55,6 +55,9 @@
   color: var(--text-color);
   font-family: "poppins";
 }
+.login-options label {
+  gap:0px
+}
 
 .forgot-password {
   color: var(--primary-color);

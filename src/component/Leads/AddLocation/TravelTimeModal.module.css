@@ -13,7 +13,7 @@
 
 .modalContainer {
   background: #fff;
-  padding: 45px 42px;
+  padding: 24px;
   max-width: 847px;
   position: relative;
 }
@@ -80,7 +80,7 @@
 
 .inputGroup label {
   margin-bottom: 6px;
-  font-weight: 500;
+  font-weight: 600;
   color: #000000;
   font-size: 16px;
 }
@@ -115,7 +115,7 @@
 .nextButton {
   background: var(--primary-color);
   color: white;
-  padding: 8px 66px;
+  padding: 8px 16px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -184,7 +184,7 @@
   .cancelButton,
   .nextButton {
     font-size: 16px;
-    width: 100%;
+    /* width: 100%; */
     padding: 8px 0;
   }
 
@@ -212,6 +212,9 @@
   z-index: 1000;
   overflow-x: auto;
 }
+ .form {
+    margin-bottom: 20px;
+  }
 
 .modalContainer {
   background: #fff;
@@ -232,7 +235,8 @@
   }
 
   .inputGroup label {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
   }
 
   .inputGroup input,
@@ -240,20 +244,42 @@
     font-size: 13px;
   }
 
-  .cancelButton,
+  /* .cancelButton,
   .nextButton {
     font-size: 14px;
     padding: 6px 10px;
-    width: 84px;
+    width: 63px;
+  } */
+  .nextButton {
+     background: var(--primary-color);
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  }
+  .cancelButton{
+      background: #c6c6c6;
+  color: white;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
   }
   .buttonContainer{
     display: flex;
     /* flex-direction: column; */
     /* gap: 12px; */
+    margin-top: 20px;
   }
   .infoBox {
   padding: 0px;
-  padding-bottom: 16px;
+  padding-bottom: 0px;
+  margin-bottom: 20px;
 }
 .infoBox img {
   margin-top: -36px;

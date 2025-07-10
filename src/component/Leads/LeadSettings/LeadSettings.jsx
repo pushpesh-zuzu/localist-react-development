@@ -34,6 +34,7 @@ import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
 import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
 import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.svg"
 // import backArrow from "../../../assets/Images/Leads/BackArrow.svg"
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const serviceRefs = useRef({});
@@ -468,7 +469,7 @@ const handleBack = () =>{
   return (
     <>
       <div className={styles.container}>
-        <div onClick={handleBack} className={styles.arrowBtn}> ←  Back</div>
+        <div onClick={handleBack} className={styles.arrowBtn}> <img src={blackArrow} alt="..."/>  Back</div>
         <h1 className={styles.heading}>Lead settings</h1>
         <p className={styles.subHeading}>Tell us what you’re looking for — we’ll send you the right leads on Localists.com.</p>
 
