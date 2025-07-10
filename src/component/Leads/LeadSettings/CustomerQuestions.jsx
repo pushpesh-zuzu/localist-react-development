@@ -28,7 +28,7 @@ import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
 import { Link, useNavigate } from "react-router-dom";
 
-const CustomerQuestions = ({ selectedService,setRemove ,setSelectedService}) => {
+const CustomerQuestions = ({ selectedService ,setSelectedService}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -41,7 +41,7 @@ const CustomerQuestions = ({ selectedService,setRemove ,setSelectedService}) => 
       setIsRemoved(false);
     }
   }, [selectedService]);
-  console.log(setRemove, "selectedService");
+
 
   const {
     leadPreferenceData,
@@ -245,6 +245,7 @@ const handleUpdateService = () => {
             result?.message || "Service removed successfully"
           );
           setShow(false);
+           setSelectedService()
           dispatch(
             getleadPreferencesList({ user_id: userToken?.remember_tokens })
           );
@@ -518,7 +519,7 @@ const handleUpdateService = () => {
             <img src={TrashIcon} alt="" /> Remove this service
           </button>
           <div className={styles.footer}>
-            <button className={styles.backBtn}>Back</button>
+            <button className={styles.backBtn} onClick={handleBack}>Back</button>
           <button className={styles.saveButton} onClick={handleSubmitData}>
             {leadPreferenceLoader ? (
               <Spin
