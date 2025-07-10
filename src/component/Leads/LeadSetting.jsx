@@ -38,6 +38,8 @@ console.log(selectedService,"selectedService")
               setSelectedService={setSelectedService}
               setIsRemoved={setIsRemoved} // ✅ PASS PROP
               setRemove={isRemoved}
+              // {handleServiceClick}
+
             />
           )}
         </>

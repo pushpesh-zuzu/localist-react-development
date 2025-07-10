@@ -259,7 +259,7 @@ dispatch(clearSetbuyerRequestData())
                 onChange={(e) => setOtherText(e.target.value)}
               />
             )} */}
-              {selectedOption &&
+              {/* {selectedOption &&
     (questions[currentQuestion]?.option_type === "single"
       ? selectedOption === "Something else (please describe)"
       : selectedOption.includes("Something else (please describe)")) && (
@@ -270,7 +270,21 @@ dispatch(clearSetbuyerRequestData())
         value={otherText}
         onChange={(e) => setOtherText(e.target.value)}
       />
-    )}
+    )} */}
+
+{questions[currentQuestion]?.answer
+  ?.includes("Something else (please describe)") &&
+  (questions[currentQuestion]?.option_type === "single"
+    ? selectedOption.includes("Something else (please describe)")
+    : selectedOption.includes("Something else (please describe)")) && (
+    <input
+      type="text"
+      placeholder="Please Enter..."
+      className={styles.input}
+      value={otherText}
+      onChange={(e) => setOtherText(e.target.value)}
+    />
+)}
 
 
             </div>

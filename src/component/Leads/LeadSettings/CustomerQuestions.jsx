@@ -28,7 +28,7 @@ import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
 import { Link, useNavigate } from "react-router-dom";
 
-const CustomerQuestions = ({ selectedService,setRemove }) => {
+const CustomerQuestions = ({ selectedService,setRemove ,setSelectedService}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -283,7 +283,7 @@ const handleUpdateService = () => {
     })
   }
   const handleBack = () => {
-    setIsRemoved(false)
+    setSelectedService()
   }
   return (
     <>
