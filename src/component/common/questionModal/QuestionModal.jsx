@@ -63,19 +63,44 @@ const QuestionModal = ({
   const totalQuestions = questions?.length;
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
 
-  const handleOptionChange = (e) => {
-    const { value, checked } = e.target;
-    let updatedOptions = [...selectedOption];
+  // const handleOptionChange = (e) => {
+  //   const { value, checked } = e.target;
+  //   let updatedOptions = [...selectedOption];
 
-    if (checked) {
-      updatedOptions.push(value);
-    } else {
-      updatedOptions = updatedOptions.filter((opt) => opt !== value);
-    }
+  //   if (checked) {
+  //     updatedOptions.push(value);
+  //   } else {
+  //     updatedOptions = updatedOptions.filter((opt) => opt !== value);
+  //   }
 
-    setSelectedOption(updatedOptions);
-    setError("");
-  };
+  //   setSelectedOption(updatedOptions);
+  //   setError("");
+  // };
+// const handleOptionChange = (e) => {
+//   const { value, checked, type } = e.target;
+//   const isSingle = questions[currentQuestion]?.option_type === "single";
+
+//   if (isSingle) {
+//     setSelectedOption(value); // Only one option at a time
+//   } else {
+//     // Multiple checkboxes
+//     setSelectedOption((prev) =>
+//       checked ? [...prev, value] : prev.filter((opt) => opt !== value)
+//     );
+//   }
+// };
+const handleOptionChange = (e) => {
+  const { value, checked } = e.target;
+  const isSingle = questions[currentQuestion]?.option_type === "single";
+
+  if (isSingle) {
+    setSelectedOption([value]); // Wrap in array
+  } else {
+    setSelectedOption((prev) =>
+      checked ? [...prev, value] : prev.filter((opt) => opt !== value)
+    );
+  }
+};
 
   const handleNext = () => {
     if (selectedOption.length === 0) {
@@ -91,9 +116,9 @@ const QuestionModal = ({
       return;
     }
 
-    const finalAnswer = selectedOption.map((opt) =>
-      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
-    );
+   const finalAnswer = selectedOption?.map((opt) =>
+  opt.toLowerCase() === "something else (please describe)" ? otherText : opt
+);
    
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
@@ -168,6 +193,12 @@ dispatch(clearSetbuyerRequestData())
     }
   }
   };
+  useEffect(() => {
+  setSelectedOption([]);
+  setOtherText("");
+}, [currentQuestion]);
+
+
 
   return (
     <div className={styles.modalOverlay} >
@@ -204,16 +235,22 @@ dispatch(clearSetbuyerRequestData())
                 .map((option, index) => (
                   <label key={index} className={styles.option}>
                     <input
-                      type="checkbox"
+                      type={questions[currentQuestion]?.option_type === "single" ? "radio" : "checkbox"}
                       name="surveyOption"
                       value={option.trim()}
-                      checked={selectedOption.includes(option.trim())}
-                      onChange={handleOptionChange}
+                      // checked={selectedOption.includes(option.trim())}
+                      // onChange={handleOptionChange}
+                checked={
+  questions[currentQuestion]?.option_type === "single"
+    ? selectedOption.includes(option.trim())
+    : selectedOption.includes(option.trim())
+}
+          onChange={handleOptionChange}
                     />
                     {option.trim()}
                   </label>
                 ))}
-                       {selectedOption.includes("Something else (please describe)") && (
+                       {/* {selectedOption.includes("Something else (please describe)") && (
               <input
                 type="text"
                 placeholder="Please Enter..."
@@ -221,7 +258,20 @@ dispatch(clearSetbuyerRequestData())
                 value={otherText}
                 onChange={(e) => setOtherText(e.target.value)}
               />
-            )}
+            )} */}
+              {selectedOption &&
+    (questions[currentQuestion]?.option_type === "single"
+      ? selectedOption === "Something else (please describe)"
+      : selectedOption.includes("Something else (please describe)")) && (
+      <input
+        type="text"
+        placeholder="Please Enter..."
+        className={styles.input}
+        value={otherText}
+        onChange={(e) => setOtherText(e.target.value)}
+      />
+    )}
+
 
             </div>
             {error && <p className={styles.errorMessage}>{error}</p>}
