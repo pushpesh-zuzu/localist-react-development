@@ -15,8 +15,18 @@
   width: 100%;
   max-width: 581px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
-
+.closeButton {
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #b7b7b7;
+}
 .title {
   font-weight: 600;
   font-size: 24px;
@@ -129,9 +139,21 @@
 }
 @media screen and (max-width:480px) {
   .modalContent {
-    margin: 0px 10px;
+    padding: 10px 20px;
+    margin: 20px 20px;
+    height: fit-content;
   }
-  
+  .modalOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: unset;
+  width: 100%;
+  justify-content: center;
+  z-index: 1000;
+  overflow-x: scroll;
+}
 .saveBtn {
   padding: 8px 30px;
   background-color: var(--primary-color);

@@ -78,6 +78,9 @@ console.log(isEditing,'isEditing')
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onClose}>
+                      &times;
+                    </button>
         <h2 className={styles.title}>Services</h2>
         <p className={styles.subtitle}>
         Choose the specific services you offer in this area so we can match you with the most relevant leads.
