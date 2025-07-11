@@ -80,8 +80,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  /* margin-bottom: 10px; */
+  /* margin-top: 6px; */
   /* background-color: var(--primary-color); */
 }
 
@@ -491,6 +491,9 @@ cursor: not-allowed;
     margin-bottom: 20px;
     margin-top: 5px;
     
+  }
+  .selectedServices {
+    margin-top: 6px;
   }
 }
 

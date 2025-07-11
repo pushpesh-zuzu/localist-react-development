@@ -194,7 +194,7 @@ export const checkEmailIdApi = (emailData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`users/check-email-id`, emailData);
+      const response = await axiosInstance.post(`check/email-id`, emailData);
 
       if (response) {
         // dispatch(setService(response?.data?.data));

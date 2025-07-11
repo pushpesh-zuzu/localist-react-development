@@ -167,9 +167,12 @@ let cityName =
                 name="nation_wide"
                 checked={formData?.nation_wide === 1}
                 onChange={handleInputChange}
-                className={styles.checkboxInput}
+                className={styles.checkbox}
+                // className={styles.checkboxInput}
               />
-              <span className={styles.checkboxCustom}></span> Nationwide
+              {/* <span className={styles.checkboxCustom}></span>  */}
+              
+              Nationwide
 
             </label>
             <div className={styles.switchWrapper}>
