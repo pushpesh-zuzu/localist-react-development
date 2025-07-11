@@ -2,17 +2,25 @@
   padding: 50px 88px;
   max-width: 791px;
 }
+.backText {
+  color: #000000;
+  margin-bottom: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .heading {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 35px;
   vertical-align: middle;
   margin-bottom: 32px;
 }
 
 .infoBox {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   background-color: #e3f6fc;
   padding: 23px 18px;
   margin: 16px 0;
@@ -24,15 +32,28 @@
   color: var(--primary-color);
 }
 
+.itemblue {
+  background-color: var(--primary-color);
+  color: black; /* Optional: For better contrast */
+}
+
+.itemwhite {
+  background-color: white;
+  color: black; /* Optional: In case you want black text on white */
+}
+
 .notificationList {
   box-shadow: 0px 0px 10px 0px #0000000f;
   padding: 47px 31px;
   display: flex;
   flex-direction: column;
   gap: 19px;
-  margin-top: 48px;
+  margin-top: 24px;
 }
-
+.emailText{
+    font-size: 18px;
+    font-weight: 600;
+}
 .notificationItem {
   max-width: 544px;
   display: flex;
@@ -131,12 +152,14 @@ input:checked + .slider::before {
   .heading {
     font-size: 20px;
     margin-bottom: 0px;
+    text-align: start;
   }
 
   .infoBox {
     padding: 16px 12px;
     font-size: 14px;
   }
+ 
 }
 @media screen and (max-width: 420px) {
   .item1 .switch,
@@ -158,12 +181,21 @@ input:checked + .slider::before {
   .item2 .switch {
     width: 36px; /* or whatever width fits best on mobile */
     height: 20px;
+     min-width: 35px !important;
   }
 
   .item1 .slider,
   .item2 .slider {
     height: 20px;
     width: 36px;
+  }
+   .notificationItem {
+    font-size: 12px;
+    padding: 12px;
+  }
+   .notificationItem {
+    font-size: 13px;
+    padding: 14px;
   }
   
 }

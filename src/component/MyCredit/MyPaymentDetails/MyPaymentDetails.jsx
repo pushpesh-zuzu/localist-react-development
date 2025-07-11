@@ -5,6 +5,7 @@ import AddCardModal from "./AddCardModal";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSellerCardApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
 
 const MyPaymentDetails = () => {
     const [showModal, setShowModal] = useState(false);
@@ -27,7 +28,7 @@ const MyPaymentDetails = () => {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.backText} onClick={handleBack}>← Setting</div>
+                <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." /> Setting</div>
                 <h1 className={styles.heading}>My Saved Card</h1>
                 <div className={styles.manageWrapper}>
                     <span className={styles.infoIcon}>

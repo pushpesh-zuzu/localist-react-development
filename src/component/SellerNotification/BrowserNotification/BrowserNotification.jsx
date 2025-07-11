@@ -7,9 +7,12 @@ import {
 } from "../../../store/Seller/SellerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
+import { useNavigate } from "react-router-dom";
 
 const BrowserNotification = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   
   const { notificationList = [], notificationLoader } = useSelector((state) => state.seller);
@@ -60,10 +63,13 @@ const BrowserNotification = () => {
 
     setLoadingNoti("");
   };
-
+  const handleBack = () => {
+    navigate("/settings")
+  }
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Notifications</h2>
+       <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." />  Setting</div>
+      <h2 className={styles.heading}>Browser Notifications</h2>
       <div className={styles.infoBox}>
         <span className={styles.infoIcon}>
           <img src={iIcon} alt="Info" />
@@ -72,6 +78,7 @@ const BrowserNotification = () => {
           Please select what you would like to receive Notifications about
         </span>
       </div>
+      <div className={styles.emailText}>Notify me about:</div>
 
       {notificationLoader ? (
         <div className={styles.loader}>
@@ -90,7 +97,10 @@ const BrowserNotification = () => {
             return (
               <div
                 key={index}
-                className={`${styles.notificationItem} ${styles[`item${index}`]} ${styles.shadow}`}
+                className={`${styles.notificationItem} ${styles.shadow}`}
+                style={{
+                  backgroundColor: index%2==0 ? "#E3F6FC" :'#FFFFFF'
+                }}
               >
                 <span>{type.label}</span>
                 {loadingNoti === type.notiName ? (

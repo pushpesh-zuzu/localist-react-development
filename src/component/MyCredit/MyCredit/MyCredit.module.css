@@ -6,9 +6,12 @@
   }
   
   .backText {
-    color: var(--primary-color);
+    color: #000000;
     cursor: pointer;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap:8px
   }
   
   .heading {
@@ -120,6 +123,11 @@
     font-size: 12px;
     font-weight: 600;
   }
+  .btnBox {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+  }
   
   .priceInfo {
     display: flex;
@@ -223,22 +231,24 @@
     }
   
     .buyButton {
-      font-size: 15px;
+      font-size: 18px;
       padding: 8px 16px;
       font-weight: 600;
     }
   
     .priceInfo {
-      font-size: 13px;
+      font-size: 20px;
       text-align: center;
     }
   
     .perCredit {
-      font-size: 11px;
+      font-size: 18px;
     }
   
     .response {
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 600;
+
     }
     .gethiredText {
     background-color: #E3F6FC;
@@ -262,13 +272,26 @@
       flex-direction: column;
       gap: 40px;
     }
-    .titleBar,
+    
+    .priceInfo {
+      font-size: 20px;
+      text-align: center;
+      margin-top: 12px;
+    }
     .buttonWrap {
       flex-direction: column;
-      align-items: stretch;
+      align-items: center;
       margin-top: 16px;
     }
-  
+    .titleBar{
+      display: flex;
+      align-items: center;
+    }
+   .btnBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
     .buyButton {
       width: 100%;
 
@@ -297,6 +320,14 @@
       color: #000000;
       padding: 3px 14px;
  margin-left: -3.4%;
+    }
+    .response{
+      font-size: 18px;
+      font-weight: 600;
+      padding: 5px 10px;
+    }
+    .creditsBox {
+      font-size: 18px;
     }
   
   }
@@ -419,7 +450,7 @@ max-width: 300px;
 }
   @media screen and (max-width:425px) {
     .bottomText {
-      margin-top: 17px;
+      margin-top: 30px;
       margin-bottom: 17px;
     }
     .checkboxWrap {
@@ -430,7 +461,10 @@ max-width: 300px;
       margin-top: 8px;
     }
     .redeemText {
-      margin-top: 33px;
+      margin-top: 30px;
     }
+     .VisaCard {
+    margin-top: 15px;
+  }
     
   }

@@ -451,7 +451,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
             <div
               className={styles.professionalBtn}
               onClick={() => {
-                dispatch(setRegisterStep(1));
+                // dispatch(setRegisterStep(1));
                 handleNavigation("/sellers/create/");
               }}
             >

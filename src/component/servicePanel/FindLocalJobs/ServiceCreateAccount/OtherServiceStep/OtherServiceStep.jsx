@@ -168,7 +168,8 @@ console.log(postalCode,lat,lng,'postalCode')
     };
   }, [show]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
    let apicontion =  validateForm()
     console.log(validateForm(),"pp")
     // Ensure selectedServices is an array and map IDs
@@ -211,6 +212,7 @@ console.log(postalCode,lat,lng,'postalCode')
     delete payload.state
     // delete payload.password
  console.log(payload,formData,"payload")
+
 if(apicontion){
 dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {

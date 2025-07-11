@@ -98,6 +98,8 @@ export const registerUserData = (registerData) => {
   return async (dispatch) => {
     dispatch(setRegisterLoader(true));
     try {
+      
+      // const response = true;
       const response = await axiosInstance.post(`users/registration`, registerData);
 
       if (response) {
@@ -105,7 +107,7 @@ export const registerUserData = (registerData) => {
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         dispatch(setAuthToken(response?.data?.data?.remember_tokens))
-        return response.data;
+        // return response.data;
       }
       else {
         showToast("error", response?.message || "Register failed. Please try again.");

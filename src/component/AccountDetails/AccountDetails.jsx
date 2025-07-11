@@ -9,6 +9,7 @@ import { Spin } from "antd";
 import { showToast } from "../../utils";
 import { updatePasswordData } from "../../store/Buyer/BuyerSlice";
 import ChangePasswordModal from "./ChangePasswordModal";
+import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg"
 
 const AccountDetails = () => {
   const dispatch = useDispatch()
@@ -145,7 +146,7 @@ const AccountDetails = () => {
   return (
     <>
     <div className={styles.container}>
-      <div className={styles.backText} onClick={handleBack}>← Setting</div>
+      <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." />  Setting</div>
       <h1 className={styles.heading}>Account Details</h1>
       <div className={styles.manageWrapper}>
         <span className={styles.infoIcon}>

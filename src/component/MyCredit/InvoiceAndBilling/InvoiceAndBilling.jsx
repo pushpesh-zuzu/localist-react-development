@@ -9,6 +9,7 @@ import { AddSellerBillingDetailsApi, getInvoiceListDataApi } from "../../../stor
 import { showToast } from "../../../utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
 
 const InvoiceAndBilling = () => {
     const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const InvoiceAndBilling = () => {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.backText} onClick={handleBack}>← Setting</div>
+                <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." /> Setting</div>
                 <h1 className={styles.heading}>Invoices & Billing Details</h1>
 
                 <div className={styles.manageWrapper}>

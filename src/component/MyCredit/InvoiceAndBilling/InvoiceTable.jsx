@@ -53,7 +53,7 @@ const InvoiceTable = ({ data }) => {
             data.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td>{formatDate(item.created_at)}</td>
+                <td  style={{minWidth:"100px"}}>{formatDate(item.created_at)}</td>
                 <td>£{item.total_amount}</td>
                 <td><img src={GreenTick} alt="Paid" /></td>
                 <td>

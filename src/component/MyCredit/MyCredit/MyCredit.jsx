@@ -16,6 +16,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
 
 const creditOptions = [
   {
@@ -250,7 +251,7 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.backText} onClick={handleBack}>← Setting</div>
+        <div className={styles.backText} onClick={handleBack}> <img src={blackArrow} alt="..." /> Setting</div>
         <h1 className={styles.heading}>My credits</h1>
 
         <div className={styles.manageWrapper}>
@@ -279,10 +280,10 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
             <div className={styles.card} key={index}>
               {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
               <div className={styles.titleBar}>
-
+<div className={styles.btnBox}>
                 <button className={styles.response}>{item?.slug}</button>
                 <div className={styles.creditsBox}>{item?.no_of_leads} credits</div>
-
+                </div>
                 <div className={styles.priceInfo}>
                   <strong>{item?.price} (Excl. tax)</strong>
                   <div className={styles.perCredit}>
