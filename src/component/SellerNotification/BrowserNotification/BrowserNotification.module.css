@@ -71,6 +71,7 @@
   display: inline-block;
   width: 34px;
   height: 20px;
+  min-width: 35px;
 }
 
 .switch input {
