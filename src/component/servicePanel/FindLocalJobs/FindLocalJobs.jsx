@@ -85,6 +85,8 @@ const FindLocalJobs = () => {
           />
 
           {isDropdownOpen && service?.length > 0 && (
+            <>
+            {/* <div className={styles.hrtop}></div> */}
             <div className={styles.searchResults}>
               {searchServiceLoader ? (
                 <Spin indicator={<LoadingOutlined spin />} />
@@ -103,6 +105,7 @@ const FindLocalJobs = () => {
                 </>
               )}
             </div>
+            </>
           )}
 
           {/* <button onClick={handleGetStarted}>Get started</button> 

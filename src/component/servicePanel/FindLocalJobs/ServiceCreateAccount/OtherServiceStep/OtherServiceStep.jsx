@@ -168,8 +168,8 @@ console.log(postalCode,lat,lng,'postalCode')
     };
   }, [show]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = () => {
+  
    let apicontion =  validateForm()
     console.log(validateForm(),"pp")
     // Ensure selectedServices is an array and map IDs

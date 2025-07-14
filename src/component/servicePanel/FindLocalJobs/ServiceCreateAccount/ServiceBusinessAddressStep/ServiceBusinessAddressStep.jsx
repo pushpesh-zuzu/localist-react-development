@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchCompanyDetails,clearCompanyData
 } from "../../../../../store/Company/companyLookup";
+import { showToast } from "../../../../../utils";
 
 
 const ServiceBusinessAddressStep = ({
@@ -13,6 +14,7 @@ const ServiceBusinessAddressStep = ({
   formData,
   setFormData,
   errors,
+  addressCheck
 }) => {
 
 const dispatch = useDispatch();
@@ -20,6 +22,13 @@ const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
   const hasClearedOnce = useRef(false);
   const hasPopulatedFromCompany = useRef(false);
+  const handleCheck = () => {
+      if(addressCheck || companyData.registered_office_address?.address_line_1) {
+        nextStep()
+      } else {
+        showToast("error","Please Enter Correct Address")
+      }
+    }
 
   useEffect(() => {
     const reg = formData.company_reg_number?.trim();
@@ -213,7 +222,7 @@ useEffect(() => {
               <button
                 type="button"
                 className={styles.nextButton}
-                onClick={nextStep}
+                onClick={handleCheck}
               >
                 Next
               </button>

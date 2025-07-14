@@ -5,7 +5,7 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { checkEmailIdApi, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { checkAddressApi, checkCompanyNameApi, checkEmailIdApi, checkPhoneNumberApi, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../utils";
 
 const ServiceCreateAccount = () => {
@@ -15,9 +15,16 @@ const ServiceCreateAccount = () => {
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
   const [emailValue, setEmailValue] = useState("");
-  const [emailCheck,setEmailCheck] = useState(false)
-  console.log(emailCheck,"emailCheck")
-
+const [companyValue, setCompanyValue] = useState("");
+const [phoneValue, setPhoneValue] = useState("");
+const [addressValue,setAddressValue] = useState("");
+const [emailCheck, setEmailCheck] = useState(false);
+const [companyCheck, setCompanyCheck] = useState(false);
+const [phoneCheck, setPhoneCheck] = useState(false);
+const [addressCheck,setAddressCheck] = useState(false)
+const [type,setType] = useState()
+  console.log(emailCheck,companyCheck,type,"emailCheck")
+console.log(selectedServiceFormData?.company_reg_number,"pp")
   // Validation function
   const validateStep = () => {
     let newErrors = {};
@@ -82,44 +89,86 @@ if (companyInput && !urlRegex.test(companyInput)) {
     return Object.keys(newErrors).length === 0;
   };
   
-const debounceTimer = useRef(null);
+const debounceTimer = useRef({});
 
 useEffect(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
 
-  if (emailRegex.test(emailValue)) {
-    // Debounce for 500ms
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
 
-    debounceTimer.current = setTimeout(() => {
-      const data = {
-        email:emailValue
-      }
-      dispatch(checkEmailIdApi(data)).then((result) => {
-        if(result){
-          showToast("success",result?.message)
-          setEmailCheck(result?.success)
+
+   if (emailRegex.test(emailValue) && type === "email") {
+   
+    if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
+    debounceTimer.current.email = setTimeout(() => {
+      dispatch(checkEmailIdApi({ email: emailValue })).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          setEmailCheck(result?.success);
         }
       });
     }, 1000);
   }
-
+ if (companyValue.trim().length > 1 && type === "company_name") {
+  
+    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+    debounceTimer.current.company_name = setTimeout(() => {
+      dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          setCompanyCheck(result?.success);
+        }
+      });
+    }, 1000);
+  }
+    if (phoneValue.trim().length >= 10 && type === "phone") {
+    if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
+    debounceTimer.current.phone = setTimeout(() => {
+      dispatch(checkPhoneNumberApi({ phone: phoneValue, })).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          setPhoneCheck(result?.success);
+        }
+      });
+    }, 1000);
+  }
+   if (addressValue.trim().length >= 4 && type === "address") {
+    if (debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
+    debounceTimer.current.address = setTimeout(() => {
+      dispatch(checkAddressApi({ company_location: addressValue })).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          setAddressCheck(result?.success);
+        }
+      });
+    }, 1000);
+  }
   // Cleanup on unmount
   return () => {
-    if (debounceTimer.current) {
-      clearTimeout(debounceTimer.current);
-    }
+        if (debounceTimer.current.email) clearTimeout(debounceTimer.current?.email);
+    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+     if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
+     if(debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
   };
-}, [emailValue, dispatch]);
+}, [emailValue,companyValue,phoneValue,addressValue, dispatch]);
 
 
   const handleInputChange = (e) => {
     const { name,value, type, checked } = e.target;
- if (type === "email") {
+    setType(name)
+ if (name === "email") {
     setEmailValue(value); 
   }
+  if(name === "company_name") {
+    setCompanyValue(value)
+  }
+   if (name === "phone") {
+
+     setPhoneValue(value);
+   }
+   if(name === "address"){
+    setAddressValue(value)
+   }
 
     dispatch(setSelectedServiceFormData({
       [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
@@ -174,6 +223,8 @@ useEffect(() => {
             handleInputChange={handleInputChange}
             errors={errors}
             emailCheck={emailCheck}
+            companyCheck={companyCheck}
+            phoneCheck={phoneCheck}
           />
         )}
         {registerStep === 3 && (
@@ -184,6 +235,7 @@ useEffect(() => {
             nextStep={nextStep}
             handleInputChange={handleInputChange}
             errors={errors}
+            addressCheck={addressCheck}
           />
         )}
         {registerStep === 4 && (

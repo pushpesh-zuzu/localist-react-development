@@ -15,6 +15,7 @@ body {
 body {
   font-family: "Poppins", sans-serif;
   background-color: #ffffff;
+  scrollbar-gutter: stable both-edges;
 }
 
 h1,

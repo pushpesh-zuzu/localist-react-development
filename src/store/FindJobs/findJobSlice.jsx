@@ -36,6 +36,7 @@ phone:""
     nation_wide: 0,
     name: "",
     email: "",
+    company_reg_number:"",
     // password: "",
     phone: "",
     company_name: "",
@@ -102,12 +103,12 @@ export const registerUserData = (registerData) => {
       // const response = true;
       const response = await axiosInstance.post(`users/registration`, registerData);
 
+      console.log(response,"user")
       if (response) {
-
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         dispatch(setAuthToken(response?.data?.data?.remember_tokens))
-        // return response.data;
+        return response.data;
       }
       else {
         showToast("error", response?.message || "Register failed. Please try again.");
@@ -208,6 +209,63 @@ export const checkEmailIdApi = (emailData) => {
     }
   };
 }
+export const checkCompanyNameApi = (companyData) => {
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`check/company-name`, companyData);
+
+      if (response) {
+        // dispatch(setService(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+      showToast("error", error?.response?.data?.message)
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
+
+export const checkPhoneNumberApi = (phoneData) => {
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`check/phone-number`, phoneData);
+
+      if (response) {
+        // dispatch(setService(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+      showToast("error", error?.response?.data?.message)
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
+
+export const checkAddressApi = (addressData) => {
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`check/company-location`, addressData);
+
+      if (response) {
+        // dispatch(setService(response?.data?.data));
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+      showToast("error", error?.response?.data?.message)
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
+
 
 const findJobSlice = createSlice({
   name: "findJobs",
@@ -328,6 +386,7 @@ state.authToken = null
           service_id: [],
           auto_bid: 1,
           miles2: "1",
+          company_reg_number:""
     
       }
     }

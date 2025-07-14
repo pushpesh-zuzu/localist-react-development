@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./MyProfile.module.css";
 import AccordionItem from "./AccordionItem";
 import AboutAccordion from "./AboutAccordion/AboutAccordion";
@@ -10,95 +10,163 @@ import QandAAccordion from "./QandAAccordion/QandAAccordion";
 import { useLocation } from "react-router-dom";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg"
+import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
 
 const MyProfile = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [openAccordion, setOpenAccordion] = useState(null);
-  const { userToken } = useSelector((state) => state.auth); 
-   const { registerData } = useSelector(
-      (state) => state.findJobs
-    );
-      const { viewProfileData } = useSelector((state)=> state.leadSetting)
-      const user_id = userToken?.id ? userToken?.id : registerData?.id;
 
-const openAccordionHandler = (accordion) => { 
-if(accordion === openAccordion) {
-  setOpenAccordion(null);
-}
-else{
-  setOpenAccordion(accordion);
-}
-}
- useEffect(()=>{
-const isReview= location?.state?.review;
-if(isReview){
-setOpenAccordion("Reviews");
-}
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const { viewProfileData } = useSelector((state) => state.leadSetting);
 
- },[])
-  useEffect(()=>{
-         const sellerData ={
-             seller_id:user_id
-         }
-         dispatch (addViewProfileList(sellerData))
-     },[])
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
+
+  // Refs for each accordion section
+  const sectionRefs = {
+    About: useRef(null),
+    Reviews: useRef(null),
+    Photos: useRef(null),
+    "Social Media": useRef(null),
+    Accreditations: useRef(null),
+    "Q&As": useRef(null),
+  };
+
+  const openAccordionHandler = (accordion) => {
+    if (accordion === openAccordion) {
+      setOpenAccordion(null);
+    } else {
+      setOpenAccordion(accordion);
+
+      // Scroll with offset to ensure title is visible
+      setTimeout(() => {
+        const el = sectionRefs[accordion]?.current;
+        if (el) {
+          const yOffset = -100; // Adjust this offset based on your header height
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 100);
+    }
+  };
+
+  useEffect(() => {
+    const isReview = location?.state?.review;
+    if (isReview) {
+      setOpenAccordion("Reviews");
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const sellerData = {
+      seller_id: user_id,
+    };
+    dispatch(addViewProfileList(sellerData));
+  }, [dispatch, user_id]);
 
   return (
     <div className={styles.container}>
       <a className={styles.backLink} href="/settings">
         <img src={blackArrow} alt="..." /> Setting
       </a>
+
       <h2 className={styles.title}>
-        Your profile is <span className={styles.percent}>{viewProfileData?.percentage_completed}% complete</span>
+        Your profile is{" "}
+        <span className={styles.percent}>
+          {viewProfileData?.percentage_completed}% complete
+        </span>
       </h2>
-     
+
       <div className={styles.progressBarContainer}>
-  <div className={styles.progressBar}>
-    <div className={styles.progressFill} style={{width: `${viewProfileData?.percentage_completed || 0}%` }}>
-      <div className={styles.progressCircle}></div>
-    </div>
-  </div>
-</div>
+        <div className={styles.progressBar}>
+          <div
+            className={styles.progressFill}
+            style={{
+              width: `${viewProfileData?.percentage_completed || 0}%`,
+            }}
+          >
+            <div className={styles.progressCircle}></div>
+          </div>
+        </div>
+      </div>
+
       <h4 className={styles.subHeading}>
-       Take a moment to enhance your profile
+        Take a moment to enhance your profile
       </h4>
       <p className={styles.description}>
-       Your profile is your first chance to impress customers on Localists.com — a complete profile helps you stand out  and win more work.
+        Your profile is your first chance to impress customers on
+        Localists.com — a complete profile helps you stand out and win more
+        work.
       </p>
-      {/* <a className={styles.profileLink}  href={`/view-profile/${user_id}/$key={"admin"}`}>
+
+      <a
+        className={styles.profileLink}
+        href={`/view-profile/${user_id}/key=admin`}
+      >
         View public profile
-      </a> */}
-      <a className={styles.profileLink} href={`/view-profile/${user_id}/key=admin`}>
-  View public profile
-</a>
+      </a>
 
       <div style={{ marginTop: "30px" }}>
-        <AccordionItem title="About" isOpen={openAccordion ==="About"} onClick={() => openAccordionHandler("About")}>
-          <AboutAccordion details={viewProfileData} />
-        </AccordionItem>
+        <div ref={sectionRefs["About"]}>
+          <AccordionItem
+            title="About"
+            isOpen={openAccordion === "About"}
+            onClick={() => openAccordionHandler("About")}
+          >
+            <AboutAccordion details={viewProfileData} />
+          </AccordionItem>
+        </div>
 
-        <AccordionItem title="Reviews" isOpen={openAccordion ==="Reviews"} onClick={() => openAccordionHandler("Reviews")}>
-          <ReviewsAccordion  
-          />
-        </AccordionItem>
+        <div ref={sectionRefs["Reviews"]}>
+          <AccordionItem
+            title="Reviews"
+            isOpen={openAccordion === "Reviews"}
+            onClick={() => openAccordionHandler("Reviews")}
+          >
+            <ReviewsAccordion />
+          </AccordionItem>
+        </div>
 
-        <AccordionItem title="Photos" isOpen={openAccordion ==="Photos"} onClick={() => openAccordionHandler("Photos")}>
-          <PhotosAccordion details={viewProfileData?.user_details} />
-        </AccordionItem>
+        <div ref={sectionRefs["Photos"]}>
+          <AccordionItem
+            title="Photos"
+            isOpen={openAccordion === "Photos"}
+            onClick={() => openAccordionHandler("Photos")}
+          >
+            <PhotosAccordion details={viewProfileData?.user_details} />
+          </AccordionItem>
+        </div>
 
-        <AccordionItem title="Social media & links"  isOpen={openAccordion ==="Social Media"} onClick={() => openAccordionHandler("Social Media")}>
-          <SocialMediaAccordion details={viewProfileData?.user_details}/>
-        </AccordionItem>
+        <div ref={sectionRefs["Social Media"]}>
+          <AccordionItem
+            title="Social media & links"
+            isOpen={openAccordion === "Social Media"}
+            onClick={() => openAccordionHandler("Social Media")}
+          >
+            <SocialMediaAccordion details={viewProfileData?.user_details} />
+          </AccordionItem>
+        </div>
 
-        <AccordionItem title="Accreditations" isOpen={openAccordion ==="Accreditations"} onClick={() => openAccordionHandler("Accreditations")} >
-          <AccreditationsAccordion details={viewProfileData?.accreditations} />
-        </AccordionItem>
+        <div ref={sectionRefs["Accreditations"]}>
+          <AccordionItem
+            title="Accreditations"
+            isOpen={openAccordion === "Accreditations"}
+            onClick={() => openAccordionHandler("Accreditations")}
+          >
+            <AccreditationsAccordion details={viewProfileData?.accreditations} />
+          </AccordionItem>
+        </div>
 
-        <AccordionItem title="Q&As" isOpen={openAccordion ==="Q&As"} onClick={() =>openAccordionHandler("Q&As")}>
-          <QandAAccordion details={viewProfileData?.qa}/>
-        </AccordionItem>
+        <div ref={sectionRefs["Q&As"]}>
+          <AccordionItem
+            title="Q&As"
+            isOpen={openAccordion === "Q&As"}
+            onClick={() => openAccordionHandler("Q&As")}
+          >
+            <QandAAccordion details={viewProfileData?.qa} />
+          </AccordionItem>
+        </div>
       </div>
     </div>
   );

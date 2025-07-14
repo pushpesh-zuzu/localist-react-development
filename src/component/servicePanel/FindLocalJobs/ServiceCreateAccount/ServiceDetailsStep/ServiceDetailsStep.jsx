@@ -16,13 +16,15 @@ const ServiceDetailsStep = ({
   formData,
   setFormData,
   errors,
-  emailCheck
+  emailCheck,
+  companyCheck,
+  phoneCheck
 }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams()
   const handleCheck = () => {
-    if(emailCheck) {
+    if(emailCheck || companyCheck || phoneCheck) {
       nextStep()
     } else {
       showToast("error","Please Enter Correct Email")

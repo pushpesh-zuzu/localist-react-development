@@ -104,12 +104,15 @@
   justify-content: start;
 }
 
+
 .toggleButton,
 .optionButton {
   background: #ffffff;
   border: 1px solid #d9d9d9;
   padding: 11px 23px;
-  border-radius: 100px;
+  border-radius: 100px !important;
+  overflow: hidden;
+  z-index: 1;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -121,7 +124,9 @@
    background: #ffffff;
   border: 1px solid #d9d9d9;
   padding: 11px 23px;
-  border-radius: 100px;
+  border-radius: 100px !important;
+  overflow: hidden;
+  z-index: 1;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -136,7 +141,9 @@
   border: 1px solid #d9d9d9;
   color: white;
   padding: 11px 23px;
-  border-radius: 100px;
+  border-radius: 100px !important;
+  overflow: hidden;
+  z-index: 1;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -148,13 +155,15 @@
   border: 1px solid #d9d9d9;
   color: white;
   padding: 11px 23px;
-  border-radius: 100px;
+  border-radius: 100px !important;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
-  transition: background 0.3s;
+  transition: background 1s;
   text-wrap: nowrap;
+   
 }
+
 .buttonContainer {
   display: flex;
   justify-content: space-between;
@@ -404,4 +413,5 @@
   border-radius: 4px;
   background-color: #f9f9f9;
 }
+
 }
