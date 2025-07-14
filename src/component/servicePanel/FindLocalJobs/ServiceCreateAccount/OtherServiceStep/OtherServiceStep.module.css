@@ -72,7 +72,7 @@
   font-weight: 600;
   font-size: 18px;
   color: #000000;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: start;
 }
 
@@ -443,7 +443,7 @@ cursor: not-allowed;
     margin-bottom: 0px;
   }
   .label {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
   
   }
   .checkboxContainer {
