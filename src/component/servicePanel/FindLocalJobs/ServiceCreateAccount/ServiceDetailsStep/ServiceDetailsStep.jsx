@@ -27,7 +27,7 @@ const ServiceDetailsStep = ({
     if(emailCheck || companyCheck || phoneCheck) {
       nextStep()
     } else {
-      showToast("error","Please Enter Correct Email")
+      showToast("error","Please Enter Correct Details")
     }
   }
   console.log(serviceParms?.serviceTitle, "serviceParms");

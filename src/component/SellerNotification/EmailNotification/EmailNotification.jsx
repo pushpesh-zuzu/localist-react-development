@@ -17,11 +17,19 @@ const { notificationList = [], notificationLoader } = useSelector((state) => sta
     },
     {
       notiName: "buyer_browser_customer_sending_message",
-      label: "Customers sending me a message",
+      label: "Customers closing leads I've responded to",
     },
     {
       notiName: "buyer_browser_new_review",
-      label: "New reviews on my profile",
+      label: "Customers dismissing my response",
+    },
+    {
+      notiName: "buyer_browser_new_review",
+      label: "Customers hiring me",
+    },
+    {
+      notiName: "buyer_browser_new_review",
+      label: "Customers reading a message I sent",
     },
   ];
 

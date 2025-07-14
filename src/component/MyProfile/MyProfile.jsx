@@ -47,7 +47,7 @@ const MyProfile = () => {
           const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: "smooth" });
         }
-      }, 100);
+      }, 200);
     }
   };
 

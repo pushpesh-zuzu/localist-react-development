@@ -220,8 +220,21 @@ export const checkCompanyNameApi = (companyData) => {
         return response.data
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
-      showToast("error", error?.response?.data?.message)
+      const errorData = error?.response?.data?.message;
+
+      if (errorData && typeof errorData === "object") {
+
+        Object.values(errorData).forEach((messages) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => showToast("error", msg));
+          } else {
+            showToast("error", messages);
+          }
+        });
+      } else {
+        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        dispatch(setErrorMessage(error?.response?.data?.message))
+      }
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
@@ -239,8 +252,21 @@ export const checkPhoneNumberApi = (phoneData) => {
         return response.data
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
-      showToast("error", error?.response?.data?.message)
+   const errorData = error?.response?.data?.message;
+
+      if (errorData && typeof errorData === "object") {
+
+        Object.values(errorData).forEach((messages) => {
+          if (Array.isArray(messages)) {
+            messages.forEach((msg) => showToast("error", msg));
+          } else {
+            showToast("error", messages);
+          }
+        });
+      } else {
+        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        dispatch(setErrorMessage(error?.response?.data?.message))
+      }
     } finally {
       dispatch(setsearchServiceLoader(false));
     }

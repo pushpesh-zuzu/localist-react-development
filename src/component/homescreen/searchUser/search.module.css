@@ -166,19 +166,21 @@
 .searchResults {
   position: absolute;
   background: white;
-  border: 1px solid #ddd;
-  width: 39%;
-  max-height: 200px;
-  top: 85%;
-  overflow-y: auto;
+  /* border: 1px solid #ddd; */
+  width: 27.5%;
+  max-height: fit-content;
+  top: 84.8%;
+  /* overflow-y: auto; */
   z-index: 10;
   border-radius: 4px;
+   box-shadow: 0px 0px 2px 0.5px #0000001a;
+   border-top: 2px solid var(--primary-color);
 }
 
 .searchItem {
   padding: 8px;
   cursor: pointer;
-  border-bottom: 1px solid #eee;
+  /* border-bottom: 1px solid #eee; */
   font-size: 14px !important;
   color: #000 !important;
 }
@@ -199,15 +201,53 @@
   width: 39vw;
   height: 51px;
 }
+.searchResults {
+  position: absolute;
+  background: white;
+  /* border: 1px solid #ddd; */
+  width: 20.6%;
+  max-height: fit-content;
+  top: 84.8%;
+  /* overflow-y: auto; */
+  z-index: 10;
+  border-radius: 4px;
+   box-shadow: 0px 0px 2px 0.5px #0000001a;
+   border-top: 2px solid var(--primary-color);
+}
   
 }
-
-@media screen and (max-width: 1300px) {
+@media screen and (min-width: 1200px) and (max-width: 1320px) {
   .input {
     padding: 12px 8px;
     font-size: 12px;
   }
+
+  .searchResults {
+    position: absolute;
+    background: white;
+    width: 25%;
+    max-height: fit-content;
+    top: 84.8%;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 2px 0.5px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid var(--primary-color);
+  }
 }
+@media screen and (min-width:1321px) and (max-width:1380px) {
+   .searchResults {
+    position: absolute;
+    background: white;
+    width: 26.4%;
+    max-height: fit-content;
+    top: 84.8%;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 2px 0.5px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid var(--primary-color);
+  }
+}
+
 
 @media screen and (max-width: 1200px) {
   .searchContainer {
@@ -337,7 +377,8 @@
   }
 
   .searchResults {
-    top: 59%;
+    top: 57%;
+    width: 26%;
   }
 
   .heading {
@@ -395,6 +436,11 @@
 @media screen and (max-width: 480px) {
   .searchContainer {
     padding: 16px;
+  }
+  .searchResults {
+    top: 58.5%;
+    width: 92.4%;
+    border-radius: 2px;
   }
 
   .input {
@@ -489,7 +535,8 @@
   }
 
   .searchResults {
-    top: 67%;
+    top: 66%;
+    width: 92%;
   }
 
   .popularExamples {
@@ -521,7 +568,11 @@
 
 @media screen and (max-width: 355px) {
   .searchResults {
-    top: 70%;
+    top: 68.9%;
+      
+    
+    width: 91.5%;
+  
   }
 }
 
@@ -537,6 +588,8 @@
 
 @media screen and (max-width: 329px) {
   .searchResults {
-    top: 74%;
+    top: 73%;
+    width: 90%;
+
   }
 }
