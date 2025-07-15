@@ -23,7 +23,7 @@ const [companyCheck, setCompanyCheck] = useState(false);
 const [phoneCheck, setPhoneCheck] = useState(false);
 const [addressCheck,setAddressCheck] = useState(false)
 const [type,setType] = useState()
-  console.log(emailCheck,companyCheck,type,"emailCheck")
+  console.log(emailCheck,companyCheck,phoneCheck,"emailCheck")
 console.log(selectedServiceFormData?.company_reg_number,"pp")
   // Validation function
   const validateStep = () => {

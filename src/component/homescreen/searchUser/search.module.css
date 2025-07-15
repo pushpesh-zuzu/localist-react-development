@@ -102,12 +102,16 @@
   font-family: var(--font-Poppins);
   outline-color: var(--primary-color);
 }
+.input:focus {
+  border-bottom: 2px solid var(--primary-color);
+}
 
 .input::placeholder {
   color: #848484;;
   font-size: 16px;
   font-weight: 500;
 }
+
 
 .divider {
   width: 1px;
@@ -174,7 +178,7 @@
   z-index: 10;
   border-radius: 4px;
    box-shadow: 0px 0px 2px 0.5px #0000001a;
-   border-top: 2px solid var(--primary-color);
+   /* border-top: 2px solid var(--primary-color); */
 }
 
 .searchItem {
