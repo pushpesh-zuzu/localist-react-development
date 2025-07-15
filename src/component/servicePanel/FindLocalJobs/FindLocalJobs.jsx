@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./FindLocalJobs.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,6 +19,7 @@ const FindLocalJobs = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dispatch = useDispatch();
+  const divRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
@@ -53,6 +54,18 @@ const FindLocalJobs = () => {
     },
     [dispatch]
   );
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (divRef.current && !divRef.current.contains(event.target)) {
+          setIsDropdownOpen(false); // Close the div
+        }
+      }
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
@@ -87,7 +100,7 @@ const FindLocalJobs = () => {
           {isDropdownOpen && service?.length > 0 && (
             <>
             {/* <div className={styles.hrtop}></div> */}
-            <div className={styles.searchResults}>
+            <div className={styles.searchResults} ref={divRef}>
               {searchServiceLoader ? (
                 <Spin indicator={<LoadingOutlined spin />} />
               ) : (

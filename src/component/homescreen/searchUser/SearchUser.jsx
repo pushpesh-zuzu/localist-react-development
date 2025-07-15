@@ -40,6 +40,7 @@ const [isFocused, setIsFocused] = useState(false);
   const [show, setShow] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
   const [placeholder, setPlaceholder] = useState("Search service... ");
+  const divRef = useRef(null);
 
   useEffect(() => {
     const updatePlaceholder = () => {
@@ -86,6 +87,22 @@ const [isFocused, setIsFocused] = useState(false);
     },
     [dispatch]
   );
+
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (divRef.current && !divRef.current.contains(event.target)) {
+        setIsDropdownOpen(false); // Close the div
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
   const handleChange = (e) => {
     setPincode(e.target.value);
     setPostalCodeValidate(false);
@@ -244,7 +261,7 @@ const [isFocused, setIsFocused] = useState(false);
           </button>
         </div>
         {isDropdownOpen && service?.length > 0 && (
-          <div className={styles.searchResults}>
+          <div className={styles.searchResults}  ref={divRef}>
             {searchServiceLoader ? (
               <Spin indicator={<LoadingOutlined spin />} />
             ) : (
