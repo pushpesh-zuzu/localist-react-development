@@ -109,11 +109,25 @@ useEffect(() => {
       });
     }, 1000);
   }
- if (companyValue.trim().length > 1 && type === "company_name") {
+//  if (companyValue.trim().length > 1 && type === "company_name") {
   
+//     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+//     debounceTimer.current.company_name = setTimeout(() => {
+//       dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
+//         if (result) {
+//           showToast("success", result?.message);
+//           setCompanyCheck(result?.success);
+//         }
+//       });
+//     }, 1000);
+//   }
+  if (companyValue.trim().length > 1 && type === "company_name") {
     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
     debounceTimer.current.company_name = setTimeout(() => {
-      dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
+      dispatch(checkCompanyNameApi({
+        company_name: companyValue,
+        company_reg_number: selectedServiceFormData?.company_reg_number
+      })).then((result) => {
         if (result) {
           showToast("success", result?.message);
           setCompanyCheck(result?.success);
@@ -150,7 +164,7 @@ useEffect(() => {
      if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
      if(debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
   };
-}, [emailValue,companyValue,phoneValue,addressValue, dispatch]);
+}, [emailValue,companyValue,phoneValue,addressValue,selectedServiceFormData?.company_reg_number, dispatch]);
 
 
   const handleInputChange = (e) => {
@@ -225,6 +239,7 @@ useEffect(() => {
             emailCheck={emailCheck}
             companyCheck={companyCheck}
             phoneCheck={phoneCheck}
+            companyValue={companyValue}
           />
         )}
         {registerStep === 3 && (

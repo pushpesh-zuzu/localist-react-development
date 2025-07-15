@@ -18,7 +18,7 @@ const ServiceDetailsStep = ({
   errors,
   emailCheck,
   companyCheck,
-  phoneCheck
+  phoneCheck,companyValue
 }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -37,9 +37,14 @@ const ServiceDetailsStep = ({
 const handleCheck = () => {
   if (!emailCheck) {
     showToast("error", "Please Enter Correct Email");
-  } else if (!companyCheck) {
+  } 
+  // else if (companyCheck === false) {
+  //   showToast("error", "Please Enter Correct Company Details");
+  // }
+   else if (companyValue.trim().length > 0 && companyCheck === false) {
     showToast("error", "Please Enter Correct Company Details");
-  } else if (!phoneCheck) {
+  } 
+   else if (!phoneCheck) {
     showToast("error", "Please Enter Correct Number");
   } else {
     nextStep();
