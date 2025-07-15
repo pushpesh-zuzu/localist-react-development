@@ -137,20 +137,18 @@
   flex: 1 1 calc(33.33% - 20px);
   text-align: center;
   cursor: pointer;
+ 
 }
 
 .serviceImage {
-  width: 110%;
+  width: 100%;
   height: 208px;
   object-fit: cover;
+    transition: 0.3s;
   
 }
 .serviceImage:hover {
-  width: 100%;
-  height: 218px;
-  object-fit: cover;
-  -webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out;
+   transform: scale(1.1);
 }
 
 
@@ -171,6 +169,7 @@
 .serviceCard:hover .serviceTitle {
   background: var(--primary-color);
   color: #ffffff;
+    transform: scale(1.1);
 }
 
 .categoryTitleText {
