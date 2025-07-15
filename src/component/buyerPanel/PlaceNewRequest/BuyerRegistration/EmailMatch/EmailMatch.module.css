@@ -29,7 +29,7 @@
   transition: all 0.3s ease-in-out;
 } */
  .closeButton {
-  position: absolute;
+  /* position: absolute;
   color: #000000;
   background: white;
   border: none;
@@ -37,12 +37,20 @@
   right: 14px;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer; */
+   position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
   cursor: pointer;
+  color: #000000;
 }
 
 .modalContent {
   background: #ffffff;
-  padding: 41px 31px;
+   padding: 24px 31px 24px 31px;
   width: 500px;
   text-align: center;
 }
@@ -65,7 +73,7 @@
   font-size: 24px;
   text-align: center;
   vertical-align: middle;
-  margin-bottom: 38px;
+  margin-bottom: 24px;
 }
 
 .input {
@@ -124,11 +132,11 @@
 .nextButton {
   background: var(--primary-color);
   color: #ffffff;
-  padding: 8px 29px;
+  padding: 8px 10px;
   border: none;
   border-radius: 4px;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -139,7 +147,7 @@
 }
 @media screen and (max-width: 1024px) {
   .closeButton {
-    position: absolute;
+    /* position: absolute;
     top: 5px;
     right: 5px;
     width: 20px;
@@ -154,7 +162,15 @@
     font-weight: bold;
     color: #000000;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; */
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
   
 }
@@ -210,7 +226,7 @@
     padding: 8px 20px;
   }
   .closeButton {
-    position: absolute;
+    /* position: absolute;
     top: 5px;
     right: 5px;
     width: 20px;
@@ -225,7 +241,15 @@
     font-weight: bold;
     color: #000000;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; */
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
 }
 
@@ -260,7 +284,7 @@
     padding: 6px;
   }
   .closeButton {
-    position: absolute;
+    /* position: absolute;
     top: 2px;
     right: 5px;
     width: 20px;
@@ -275,6 +299,14 @@
     font-weight: bold;
     color: #000000;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; */
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
 }

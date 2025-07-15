@@ -12,13 +12,14 @@
 }
 
 .closeButton {
-  position: absolute;
-  color: #000000;
-  top: 7px;
-  right: 20px;
-  font-size: 16px;
-  font-weight: 700;
+     position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
   cursor: pointer;
+  color: #000000;
 }
 
 .modalContent {
@@ -142,6 +143,16 @@
   .header h2 {
     font-size: 20px;
   }
+  .closeButton {
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  }
 
   .label {
     display: block;
@@ -208,6 +219,16 @@
     font-size: 14px;
     padding: 10px;
   }
+    .closeButton {
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  }
 }
 @media screen and (max-width: 350px) {
   .modalContent {
@@ -234,14 +255,15 @@
   align-items: center;
   gap: 3px;
   }
-  .closeButton {
-    position: absolute;
-    color: #000000;
-    top: 7px;
-    right: 20px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+   .closeButton {
+     position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
   
 }

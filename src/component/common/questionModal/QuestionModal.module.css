@@ -14,7 +14,7 @@
 }
 
 .modalContent {
-  padding: 22px 20px;
+  padding: 24px 24px;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -56,16 +56,17 @@
   background-image: url("../../../assets/Images/RegisterModalQuestionsBg.svg");
   background-size: cover;
   background-position: center;
-  padding: 50px 20px;
+  padding: 25px 20px;
   color: white;
   font-size: 18px;
   font-weight: bold;
+  height: 80px;
 }
 
 .headerImage h2 {
   font-family: Poppins;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
@@ -100,12 +101,12 @@
   background: black;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: white;
-  padding: 10px 20.5px;
+  padding: 8px 27px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 14px;
   vertical-align: middle;
 }
 
@@ -118,11 +119,11 @@
   background: var(--primary-color);
   border-radius: 3px;
   color: white;
-  padding: 10px 23px;
+  padding: 8px 27px;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  font-size: 20px;
+  font-size:14px;
   vertical-align: middle;
   margin-left: auto;
 }
@@ -137,7 +138,7 @@
   padding: 10.5px;
   font-size: 16px;
   border: 1px solid #d9d9d9;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  /* box-shadow: 0px 0px 2px 0.5px #0000001a; */
   outline: none;
   height: 20px;
 }
@@ -157,6 +158,7 @@
 }
 .option input {
   width: 14px;
+  margin-top: -2px;
 }
 @media (max-height: 800px) {
   .modalContent {

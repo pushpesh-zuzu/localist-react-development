@@ -11,6 +11,9 @@ import { useLocation } from "react-router-dom";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
+// import { Collapse } from "antd";
+// import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
+
 
 const MyProfile = () => {
   const location = useLocation();
@@ -20,7 +23,7 @@ const MyProfile = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const { viewProfileData } = useSelector((state) => state.leadSetting);
-
+// const { Panel } = Collapse;
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
 
   // Refs for each accordion section
@@ -64,6 +67,41 @@ const MyProfile = () => {
     };
     dispatch(addViewProfileList(sellerData));
   }, [dispatch, user_id]);
+//   const items = [
+//   {
+//     key: "1",
+//     title: "About",
+//     content: (<>  <AboutAccordion details={viewProfileData} /></>)
+//   },
+//   {
+//     key: "2",
+//     title: "Reviews",
+//     content: (<> <ReviewsAccordion /></>),
+//   },
+//   {
+//     key: "3",
+//     title: "Photos",
+//     content: (<>     <PhotosAccordion details={viewProfileData?.user_details} /></>),
+//   },
+//   {
+//     key: "4",
+//     title: "Social media & links",
+//     content: (<>  <SocialMediaAccordion details={viewProfileData?.user_details} /></>),
+//   },
+//   {
+//     key: "5",
+//     title: "Accreditations",
+//     content: (<> <AccreditationsAccordion details={viewProfileData?.accreditations} /></>)
+//   },
+//   {
+//     key: "6",
+//     title: "Q&As",
+//     content: (
+//      (<>  <QandAAccordion details={viewProfileData?.qa} /></>)
+//     ),
+//   },
+ 
+// ];
 
   return (
     <div className={styles.container}>
@@ -167,6 +205,31 @@ const MyProfile = () => {
             <QandAAccordion details={viewProfileData?.qa} />
           </AccordionItem>
         </div>
+
+         {/* <Collapse
+      accordion
+      expandIconPosition="right"
+      className={styles.custom_collapse}
+      expandIcon={({ isActive }) => (
+        <span>
+          
+           <img src={ProfileArrowUp} alt="arrow"  />
+        </span>
+      )}
+    >
+      {items.map(({ key, title, content }) => (
+        <Panel
+          key={key}
+          header={
+            <div className="custom-header">
+              <span>{title}</span>
+            </div>
+          }
+        >
+          <div className="panel-content">{content}</div>
+        </Panel>
+      ))}
+    </Collapse> */}
       </div>
     </div>
   );

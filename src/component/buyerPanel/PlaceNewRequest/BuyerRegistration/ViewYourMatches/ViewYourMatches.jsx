@@ -76,7 +76,7 @@ useEffect(() => {
           onClick={handleCloseClick}
           disabled={requestLoader}
         >
-          x
+                     &times;
         </div>
         <div className={styles.header}>
           <h2>View your matches now!</h2>

@@ -124,7 +124,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         onClick={handleCloseClick}
         disabled={addDetailLoader}
       >
-        x
+     &times;
       </div>
       <div className={styles.successMessage}>
         <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
@@ -143,7 +143,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       <textarea
         className={`${styles.textarea} ${textError ? styles.errorBorder : ""}`}
         value={text}
-        rows={6}
+        // rows={6}
         onChange={handleChange}
         placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
       />

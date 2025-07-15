@@ -2,24 +2,32 @@
   display: flex;
   flex-direction: column;
   max-width: 500px;
-  max-height: 90vh;
+  /* max-height: 90vh; */
   margin: auto;
   padding: 24px 31px;
   text-align: center;
   background: #ffffff;
   position: relative;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   -webkit-overflow-scrolling: touch;
 }
 
 .closeButton {
-  position: absolute;
+  /* position: absolute;
   color: #000000;
   top: 7px;
   right: 20px;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer; */
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
   cursor: pointer;
+  color: #000000;
 }
 
 .successMessage {
@@ -301,17 +309,28 @@
     font-size: 14px;
     padding: 8px 24px;
   }
+  .closeButton {
+       position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  }
 }
 
 @media (max-width: 480px) {
-  .closeButton {
-    position: absolute;
-    color: #000000;
-    top: 0px;
-    right: 9px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+   .closeButton {
+       position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
   .container {
     padding: 16px;
@@ -322,9 +341,10 @@
     margin-bottom: 16px;
   }
 
-  .textarea {
+ .textarea {
     font-size: 12px;
-    padding: 10px;
+    padding: 10px 20px;
+    height: 100px !important;
   }
 
   .fileUpload {
@@ -351,14 +371,15 @@
   }
 }
 @media screen and (max-width:400px) {
-  .closeButton {
-    position: absolute;
-    color: #000000;
-    top: 0px;
-    right: 9px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+   .closeButton {
+       position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
   .checkboxContainer {
     font-size: 10px;
@@ -389,17 +410,23 @@
       }
   }
   }
+ .textarea {
+    font-size: 12px;
+    padding: 10px 20px;
+    height: 100px !important;
+  }
   
 }
 @media screen and (max-width:350px) {
-  .closeButton {
-    position: absolute;
-    color: #000000;
-    top: 0px;
-    right: 9px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+   .closeButton {
+       position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
   }
   .checkboxContainer {
     font-size: 10px;
@@ -430,6 +457,11 @@
           }
       }
   }
+  }
+   .textarea {
+    font-size: 12px;
+    padding: 10px 20px;
+    height: 100px !important;
   }
   
 }

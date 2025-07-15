@@ -14,9 +14,9 @@
 .modalContent {
   box-shadow: 0px 0px 10px 0px #0000000f;
   background-color: #fff;
-  padding: 32px;
+  padding: 24px 31px;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   text-align: center;
   margin: 0 20px;
 }
@@ -68,14 +68,14 @@
   background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 32px;
-  font-size: 16px;
+  padding: 8px 10px;
+  font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-bottom: 20px;
-  width: 100%;
-  max-width: 200px;
+  margin-bottom: 0px;
+  /* width: 100%;
+  max-width: 200px; */
 }
 
 .submitBtn:hover {

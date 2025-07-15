@@ -258,7 +258,7 @@ const WhatServiceYouNeed = ({
   return (
     <div className={styles.container}>
       <div className={styles.closeButton} onClick={handleCloseClick}>
-        x
+         &times;
       </div>
 
       <h2 className={styles.title}>What service do you need?</h2>
@@ -319,7 +319,7 @@ const WhatServiceYouNeed = ({
           <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
         )}
 
-        {errors.pincode && <p className={styles.errorText}>{errors.pincode}</p>}
+        {errors.pincode ? <p className={styles.errorText}>{errors.pincode}</p> : <p className={styles.errorTexts}>{"."}</p> }
       </div>
 
       <div className={styles.buttonWrapper}>

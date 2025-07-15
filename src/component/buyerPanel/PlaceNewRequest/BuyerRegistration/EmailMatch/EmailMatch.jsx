@@ -112,7 +112,7 @@ const EmailMatch = ({
           onClick={handleCloseClick}
           disabled={registerLoader}
         >
-          x
+           &times;
         </button>
         <div className={styles.header}>
           <h2>Please Enter Your Details</h2>
