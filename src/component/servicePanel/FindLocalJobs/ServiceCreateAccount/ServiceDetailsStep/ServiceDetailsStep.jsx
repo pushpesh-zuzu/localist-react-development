@@ -23,13 +23,29 @@ const ServiceDetailsStep = ({
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams()
-  const handleCheck = () => {
-    if(emailCheck && companyCheck && phoneCheck) {
-      nextStep()
-    } else {
-      showToast("error","Please Enter Correct Details")
-    }
+//   const handleCheck = () => {
+//     if(emailCheck && companyCheck && phoneCheck) {
+//       nextStep()
+//     } else if(!emailCheck) {
+//       showToast("error","Please Enter Correct Email")
+//     } else if (!companyCheck) {
+// showToast("error","Please Enter Correct Comapny Details")
+//     } else {
+//       showToast("error","Please Enter Correct Number")
+//     }
+//   }
+const handleCheck = () => {
+  if (!emailCheck) {
+    showToast("error", "Please Enter Correct Email");
+  } else if (!companyCheck) {
+    showToast("error", "Please Enter Correct Company Details");
+  } else if (!phoneCheck) {
+    showToast("error", "Please Enter Correct Number");
+  } else {
+    nextStep();
   }
+};
+
   console.log(serviceParms?.serviceTitle, "serviceParms");
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const companyError = useSelector(state => state.companyLook?.companyError);
