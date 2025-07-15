@@ -27,7 +27,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
-
+const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { service, searchServiceLoader } = useSelector(
@@ -207,7 +207,10 @@ const SearchProfessionals = ({ nextStep }) => {
           <input
             type="text"
             placeholder={placeholder}
-            className={styles.input}
+             className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
+  onFocus={() => setIsFocused(true)}
+  onBlur={() => setIsFocused(false)}
+
             onChange={(e) => {
               setInput(e.target.value);
               setIsDropdownOpen(!!e.target.value);

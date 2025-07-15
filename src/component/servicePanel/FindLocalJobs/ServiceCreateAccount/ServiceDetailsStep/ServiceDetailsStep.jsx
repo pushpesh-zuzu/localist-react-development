@@ -24,7 +24,7 @@ const ServiceDetailsStep = ({
   const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams()
   const handleCheck = () => {
-    if(emailCheck || companyCheck || phoneCheck) {
+    if(emailCheck && companyCheck && phoneCheck) {
       nextStep()
     } else {
       showToast("error","Please Enter Correct Details")

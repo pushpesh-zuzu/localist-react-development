@@ -102,7 +102,7 @@
   font-family: var(--font-Poppins);
   outline-color: var(--primary-color);
 }
-.input:focus {
+.inputFocus {
   border-bottom: 2px solid var(--primary-color);
 }
 
@@ -187,6 +187,7 @@
   /* border-bottom: 1px solid #eee; */
   font-size: 14px !important;
   color: #000 !important;
+  text-align: start;
 }
 
 .searchItem:hover {
@@ -205,6 +206,9 @@
   width: 39vw;
   height: 51px;
 }
+.input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 .searchResults {
   position: absolute;
   background: white;
@@ -216,7 +220,7 @@
   z-index: 10;
   border-radius: 4px;
    box-shadow: 0px 0px 2px 0.5px #0000001a;
-   border-top: 2px solid var(--primary-color);
+   /* border-top: 2px solid var(--primary-color); */
 }
   
 }
@@ -235,8 +239,11 @@
     z-index: 10;
     border-radius: 4px;
     box-shadow: 0px 0px 2px 0.5px rgba(0, 0, 0, 0.1);
-    border-top: 2px solid var(--primary-color);
+    /* border-top: 2px solid var(--primary-color); */
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 }
 @media screen and (min-width:1321px) and (max-width:1380px) {
    .searchResults {
@@ -248,8 +255,11 @@
     z-index: 10;
     border-radius: 4px;
     box-shadow: 0px 0px 2px 0.5px rgba(0, 0, 0, 0.1);
-    border-top: 2px solid var(--primary-color);
+    /* border-top: 2px solid var(--primary-color); */
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 }
 
 
@@ -274,7 +284,9 @@
   .input {
     padding: 12px 6px;
   }
-
+.input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
   .locationInput {
     font-size: 13px;
   }
@@ -324,6 +336,9 @@
     justify-content: center;
     align-items: center;
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 }
 
 @media screen and (max-width: 920px) {
@@ -331,8 +346,12 @@
     padding: 30px 5%;
   }
   .searchResults {
-    top: 90%;
+    top: 89%;
+    border-top: 2px solid var(--primary-color);
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 }
 
 @media screen and (max-width: 838px) {
@@ -370,6 +389,9 @@
   .searchButton {
     max-width: 150px;
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 }
 
 @media screen and (max-width: 767px) {
@@ -383,8 +405,12 @@
   .searchResults {
     top: 57%;
     width: 26%;
+    border-top: 2px solid var(--primary-color);
   }
 
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
   .heading {
     font-size: 35px;
   }
@@ -445,11 +471,15 @@
     top: 58.5%;
     width: 92.4%;
     border-radius: 2px;
+    border-top: 2px solid var(--primary-color);
   }
 
   .input {
     font-size: 10px;
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 
   .divider {
     display: none;
@@ -541,7 +571,11 @@
   .searchResults {
     top: 66%;
     width: 92%;
+    border-top: 2px solid var(--primary-color);
   }
+  .input:focus {
+  border-bottom: 2px solid var(--primary-color) !important;
+}
 
   .popularExamples {
     margin-right: -45px;
@@ -568,16 +602,22 @@
     line-height: 15px;
     margin-left: 6px;
   }
+   .input:focus {
+  border-bottom: 2px solid var(--primary-color);
+}
 }
 
 @media screen and (max-width: 355px) {
   .searchResults {
     top: 68.9%;
       
-    
+    border-top: 2px solid var(--primary-color);
     width: 91.5%;
   
   }
+   .input:focus {
+  border-bottom: 2px solid var(--primary-color);
+}
 }
 
 @media screen and (max-width: 340px) {
@@ -588,12 +628,20 @@
   .popularExamples {
     width: 222px;
   }
+   .input:focus {
+  border-bottom: 2px solid var(--primary-color);
+}
 }
 
 @media screen and (max-width: 329px) {
   .searchResults {
     top: 73%;
     width: 90%;
+    border-top: 2px solid var(--primary-color);
 
   }
+  /* .inputFocus {
+  border-bottom: 2px solid var(--primary-color);
+} */
+
 }
