@@ -203,6 +203,10 @@
   .modalContent {
     width: 85%;
   }
+   .option {
+    text-align: start;
+   
+  }
 
   .headerImage {
     font-size: 16px;
@@ -218,7 +222,15 @@
     font-size: 12px;
     padding: 7px;
   }
-
+  .nextButton {
+      padding: 8px 23px;
+      font-size: 14px;
+  }
+ .backButton,
+  .nextButton {
+    font-size: 14px;
+    padding: 8px 23px;
+  }
   .input {
     font-size: 14px;
     padding: 8px;
