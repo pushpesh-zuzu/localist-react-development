@@ -193,7 +193,7 @@
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -275,6 +275,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 0px;
+  margin-right: 136px;
 }
 
 /* Tablet */
@@ -302,7 +303,9 @@
     gap: 30px;
     padding: 20px;
   }
-
+ .viewDetailsBtnWrapper {
+    margin-right: 0px;
+  }
   .infoContainer {
     gap: 30px;
   }
@@ -327,7 +330,9 @@
   .card {
     padding: 16px;
   }
-
+ .viewDetailsBtnWrapper {
+    margin-right: 0px;
+  }
   .category {
     font-size: 12px;
     padding: 4px 8px;
@@ -422,6 +427,9 @@
     margin-top: 0px;
     display: flex;
     align-items: center;
+  }
+  .viewDetailsBtnWrapper {
+    margin-right: 0px;
   }
 }
 
