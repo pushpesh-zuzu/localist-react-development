@@ -93,6 +93,7 @@
   font-family: poppins;
   border-radius: 3px;
   color: #000000;
+  text-align: start;
 }
 
 .buttonContainer {
@@ -243,16 +244,26 @@
 
 @media (max-width: 480px) {
   .modalContent {
-    width: 85%;
+    width: 78%;
   }
    .option {
     text-align: start;
+    align-items: start;
    
+  }
+  .option input {
+    margin-top: 3px;
+  }
+  .options{
+    text-align: start;
+    align-items: start;
+  }
+  .options input {
+    margin-top: 3px;
   }
 
   .headerImage {
-    font-size: 16px;
-    padding: 30px 10px;
+   min-height: 120px;
   }
 
   .closeButton {
@@ -261,6 +272,10 @@
   }
 
   .option {
+    font-size: 12px;
+    padding: 7px;
+  }
+  .options {
     font-size: 12px;
     padding: 7px;
   }

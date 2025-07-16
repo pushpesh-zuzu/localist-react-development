@@ -324,8 +324,8 @@
 @media (max-width: 480px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 8px;
   font-size: 24px;
   background: none;
   border: none;
@@ -335,12 +335,21 @@
   .container {
     padding: 16px;
   }
+  .successMessage {
+    align-items: start;
+
+  }
+  .checkIcon{
+    margin-top: 4px;
+  }
 
   .header h2 {
     font-size: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
   }
-
+.textareaLabel {
+  font-size: 14px;
+}
  .textarea {
     font-size: 12px;
     padding: 10px 20px;
@@ -373,8 +382,8 @@
 @media screen and (max-width:400px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 8px;
   font-size: 24px;
   background: none;
   border: none;
@@ -420,8 +429,8 @@
 @media screen and (max-width:350px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 8px;
   font-size: 24px;
   background: none;
   border: none;
