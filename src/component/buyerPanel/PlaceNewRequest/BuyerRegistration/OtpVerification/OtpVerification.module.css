@@ -154,8 +154,9 @@
   }
 
   .submitBtn {
-    padding: 8px 20px;
+   width: 84px;
     font-size: 14px;
-    max-width: 160px;
+    padding: 8px 10px;
+    font-weight: 500;
   }
 }

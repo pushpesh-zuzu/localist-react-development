@@ -95,10 +95,12 @@ const handleOptionChange = (e) => {
 
   if (isSingle) {
     setSelectedOption([value]); // Wrap in array
+    setError("");
   } else {
     setSelectedOption((prev) =>
       checked ? [...prev, value] : prev.filter((opt) => opt !== value)
     );
+    setError("");
   }
 };
 

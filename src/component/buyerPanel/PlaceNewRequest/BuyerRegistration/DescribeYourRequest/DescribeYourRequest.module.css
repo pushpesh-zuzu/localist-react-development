@@ -324,8 +324,8 @@
 @media (max-width: 480px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 8px;
   font-size: 24px;
   background: none;
   border: none;
@@ -335,16 +335,33 @@
   .container {
     padding: 16px;
   }
+  .successMessage {
+    align-items: start;
+    text-align: start;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 12px;
+
+
+  }
+  .header {
+    font-size: 18px;
+  }
+  .checkIcon{
+    margin-top: 0px;
+  }
 
   .header h2 {
     font-size: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
-
+.textareaLabel {
+  font-size: 14px;
+}
  .textarea {
     font-size: 12px;
     padding: 10px 20px;
-    height: 100px !important;
+    height: 80px !important;
   }
 
   .fileUpload {
@@ -373,8 +390,8 @@
 @media screen and (max-width:400px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
@@ -420,8 +437,8 @@
 @media screen and (max-width:350px) {
    .closeButton {
        position: absolute;
-  top: 5px;
-  right: 10px;
+  top: -2px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
@@ -461,7 +478,7 @@
    .textarea {
     font-size: 12px;
     padding: 10px 20px;
-    height: 100px !important;
+    height: 80px !important;
   }
   
 }

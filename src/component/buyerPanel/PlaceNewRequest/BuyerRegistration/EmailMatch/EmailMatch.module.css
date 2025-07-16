@@ -40,7 +40,7 @@
   cursor: pointer; */
    position: absolute;
   top: 0;
-  right: 10px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
@@ -265,12 +265,13 @@
 
 @media (max-width: 480px) {
   .modalContent {
-    width: 80%;
-    padding: 25px;
+    width: 83%;
+    padding: 24px 24px;
   }
 
   .header h2 {
     margin-bottom: 20px;
+    font-size: 20px;
   }
 
   .input {
@@ -282,14 +283,22 @@
     flex-wrap: wrap;
     margin-bottom: 20px;
   }
+  .label {
+    color: #000000;
+    font-weight: 600;
+    font-size: 14px;
+  }
 
   .buttonContainer {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+  }
+  .infoWrapper{
+    margin-bottom: 0px;
   }
 
   .backButton,
   .nextButton {
-    background: var(--primary-color);
+    /* background: var(--primary-color);
   color: #ffffff;
   padding: 8px 10px;
   border: none;
@@ -298,7 +307,11 @@
   font-size: 14px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer; */
+   width: 84px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
   }
   .closeButton {
     /* position: absolute;
@@ -318,8 +331,8 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out; */
      position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
