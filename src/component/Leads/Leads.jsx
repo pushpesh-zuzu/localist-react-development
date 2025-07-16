@@ -4,9 +4,10 @@ import LeadSettings from "./LeadSettings/LeadSettings";
 import CustomerQuestions from "./LeadSettings/CustomerQuestions";
 import LeadLists from "./LeadLists/LeadLists";
 
+
 const Leads = () => {
   // const [selectedService, setSelectedService] = useState(null);
-  // const [LeadOpen,setLeadOpen] = useState(false)
+  // const [LeadOpen,setLeadOpen] = useState(false)yy
   return (
     <>
       <div className={styles.leadsOverlay}>
