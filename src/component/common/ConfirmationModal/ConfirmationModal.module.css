@@ -430,7 +430,7 @@
   font-weight: 500;
   font-size: 16px;
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 36px;
 }
 
 .buttonGroup {
@@ -468,14 +468,26 @@
 @media screen and (max-width:480px) {
   .modal {
   padding: 24px 24px;
-  margin: 0px 10px;
+  margin: 0px 15px;
  
 }
 .buttonGroup {
   display: flex;
-  flex-direction: column;
+ 
   gap: 12px;
-  width: 100%;
+  
+}
+.continueButton {
+  width: 84px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
+} 
+.backButton {
+  width: 84px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
 }
 
 

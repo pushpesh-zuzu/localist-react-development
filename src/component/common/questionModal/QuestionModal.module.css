@@ -283,6 +283,9 @@
       padding: 8px 23px;
       font-size: 14px;
   }
+    .buttonContainer {
+   margin-top: 16px;
+  }
  .backButton,
   .nextButton {
     font-size: 14px;

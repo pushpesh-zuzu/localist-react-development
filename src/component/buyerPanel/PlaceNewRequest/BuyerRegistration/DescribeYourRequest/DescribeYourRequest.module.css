@@ -197,6 +197,14 @@
 .TextBox {
   font-weight: 800;
 }
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  margin-left: -1px;
+}
 .checkboxContainer {
   display: flex;
   align-items: center;
@@ -210,7 +218,8 @@
   font-weight: 500;
   font-size: 14px;
   text-align: start;
-  
+}
+  /* 
 
   input {
     appearance: none;
@@ -238,7 +247,7 @@
       }
     }
   }
-}
+} */
 .textLine1 {
   font-weight: 600;
   display: inline-block;
@@ -360,7 +369,7 @@
 }
  .textarea {
     font-size: 12px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     height: 80px !important;
   }
 
@@ -398,7 +407,10 @@
   cursor: pointer;
   color: #000000;
   }
-  .checkboxContainer {
+   .checkboxContainer label {
+    font-size: 8px;
+  }
+  /* .checkboxContainer {
     font-size: 10px;
     padding: 12px;
   }
@@ -426,10 +438,31 @@
           }
       }
   }
-  }
+  } */
+   .checkbox {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  margin-left: -1px;
+}
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
+  padding: 16.35px 18px;
+  
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 16px;
+  font-weight: 500;
+  font-size: 10px;
+  text-align: start;
+}
  .textarea {
     font-size: 12px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     height: 100px !important;
   }
   
@@ -445,7 +478,7 @@
   cursor: pointer;
   color: #000000;
   }
-  .checkboxContainer {
+  /* .checkboxContainer {
     font-size: 10px;
     padding: 12px;
   }
@@ -474,10 +507,34 @@
           }
       }
   }
+  } */
+    .checkboxContainer label {
+    font-size: 8px;
   }
+    .checkbox {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  margin-left: -1px;
+}
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
+  padding: 16.35px 18px;
+  
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 16px;
+  font-weight: 500;
+  font-size: 10px;
+  text-align: start;
+}
    .textarea {
     font-size: 12px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     height: 80px !important;
   }
   

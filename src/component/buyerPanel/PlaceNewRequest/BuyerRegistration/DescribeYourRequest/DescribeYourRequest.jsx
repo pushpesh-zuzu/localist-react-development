@@ -216,6 +216,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
     type="checkbox"
     checked={professionalLetin}
     onChange={handleCheckboxChange}
+    className={styles.checkbox}
   />
   <div style={{ marginLeft:"-4px", flexDirection: "column" }}>
   <span className={styles.textLine1}>
