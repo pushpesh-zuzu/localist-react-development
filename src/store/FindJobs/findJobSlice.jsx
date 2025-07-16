@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { showToast } from "../../utils";
 import axiosInstance from "../../Api/axiosInstance.js";
-
+import { fetchCompanyDetails } from '../../../src/store/Company/companyLookup';
 const initialState = {
   popularList: [],
   popularLoader: false,
@@ -226,8 +226,13 @@ export const checkCompanyNameApi = (companyData) => {
 
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
+            
             messages.forEach((msg) => showToast("error", msg));
+            if (companyData.company_reg_number) {
+               dispatch(fetchCompanyDetails(companyData.company_reg_number));
+            }
           } else {
+             
             showToast("error", messages);
           }
         });

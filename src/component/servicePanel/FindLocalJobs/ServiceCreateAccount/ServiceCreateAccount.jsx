@@ -90,25 +90,34 @@ if (companyInput && !urlRegex.test(companyInput)) {
   };
   
 const debounceTimer = useRef({});
+const latestEmailRef = useRef("");
 
 useEffect(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
 
-
-
-   if (emailRegex.test(emailValue) && type === "email") {
-   
+  if (emailRegex.test(emailValue) && type === "email") {
     if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
+
     debounceTimer.current.email = setTimeout(() => {
-      dispatch(checkEmailIdApi({ email: emailValue })).then((result) => {
-        if (result) {
-          showToast("success", result?.message);
-          setEmailCheck(result?.success);
-        }
+      const currentEmail = latestEmailRef.current;
+
+      dispatch(checkEmailIdApi({ email: currentEmail })).then((result) => {
+        
+        if (latestEmailRef.current === currentEmail) {
+          if (result?.success === true) {
+           
+            setEmailCheck(true);
+          } else {
+            
+            setEmailCheck(false);
+            
+          }
+        } 
       });
     }, 1000);
   }
+
+
 //  if (companyValue.trim().length > 1 && type === "company_name") {
   
 //     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
@@ -171,7 +180,8 @@ useEffect(() => {
     const { name,value, type, checked } = e.target;
     setType(name)
  if (name === "email") {
-    setEmailValue(value); 
+    setEmailValue(value);
+    latestEmailRef.current = value;  
   }
   if(name === "company_name") {
     setCompanyValue(value)

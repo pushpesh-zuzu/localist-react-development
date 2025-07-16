@@ -23,7 +23,7 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
   const hasClearedOnce = useRef(false);
   const hasPopulatedFromCompany = useRef(false);
   const handleCheck = () => {
-      if(addressCheck || companyData.registered_office_address?.address_line_1) {
+      if(companyData.registered_office_address?.address_line_1) {
         nextStep()
       } else {
         showToast("error","Please Enter Correct Address")
