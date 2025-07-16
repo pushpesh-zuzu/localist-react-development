@@ -910,9 +910,10 @@
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
-  margin-top: 12px;
+  margin-top: 23px;
   max-width: 196px;
   border-radius: 4px;
+  font-size: 14px;
 }
 
 .dropdownItem {
