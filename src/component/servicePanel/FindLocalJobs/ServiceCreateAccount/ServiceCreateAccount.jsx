@@ -90,25 +90,35 @@ if (companyInput && !urlRegex.test(companyInput)) {
   };
   
 const debounceTimer = useRef({});
+const latestEmailRef = useRef("");
+const latestPhoneRef = useRef("");
 
 useEffect(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
 
-
-
-   if (emailRegex.test(emailValue) && type === "email") {
-   
+  if (emailRegex.test(emailValue) && type === "email") {
     if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
+
     debounceTimer.current.email = setTimeout(() => {
-      dispatch(checkEmailIdApi({ email: emailValue })).then((result) => {
-        if (result) {
-          showToast("success", result?.message);
-          setEmailCheck(result?.success);
-        }
+      const currentEmail = latestEmailRef.current;
+
+      dispatch(checkEmailIdApi({ email: currentEmail })).then((result) => {
+        
+        if (latestEmailRef.current === currentEmail) {
+          if (result?.success === true) {
+           
+            setEmailCheck(true);
+          } else {
+            
+            setEmailCheck(false);
+            
+          }
+        } 
       });
     }, 1000);
   }
+
+
 //  if (companyValue.trim().length > 1 && type === "company_name") {
   
 //     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
@@ -135,28 +145,49 @@ useEffect(() => {
       });
     }, 1000);
   }
-    if (phoneValue.trim().length >= 10 && type === "phone") {
+  //   if (phoneValue.trim().length >= 10 && type === "phone") {
+  //   if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
+  //   debounceTimer.current.phone = setTimeout(() => {
+  //     dispatch(checkPhoneNumberApi({ phone: phoneValue, })).then((result) => {
+  //       if (result) {
+  //         showToast("success", result?.message);
+  //         setPhoneCheck(result?.success);
+  //       }
+  //     });
+  //   }, 1000);
+  // }
+
+  if (phoneValue.trim().length >= 10 && type === "phone") {
+    latestPhoneRef.current = phoneValue;
+
     if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
+
     debounceTimer.current.phone = setTimeout(() => {
-      dispatch(checkPhoneNumberApi({ phone: phoneValue, })).then((result) => {
-        if (result) {
-          showToast("success", result?.message);
-          setPhoneCheck(result?.success);
+      const currentPhone = latestPhoneRef.current;
+
+      dispatch(checkPhoneNumberApi({ phone: currentPhone })).then((result) => {
+        if (latestPhoneRef.current === currentPhone) {
+          if (result?.success === true) {
+            setPhoneCheck(true);
+          } else {
+            setPhoneCheck(false);
+            
+          }
         }
       });
     }, 1000);
   }
-   if (addressValue.trim().length >= 4 && type === "address") {
-    if (debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
-    debounceTimer.current.address = setTimeout(() => {
-      dispatch(checkAddressApi({ company_location: addressValue })).then((result) => {
-        if (result) {
-          showToast("success", result?.message);
-          setAddressCheck(result?.success);
-        }
-      });
-    }, 1000);
-  }
+  //  if (addressValue.trim().length >= 4 && type === "address") {
+  //   if (debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
+  //   debounceTimer.current.address = setTimeout(() => {
+  //     dispatch(checkAddressApi({ company_location: addressValue })).then((result) => {
+  //       if (result) {
+  //         showToast("success", result?.message);
+  //         setAddressCheck(result?.success);
+  //       }
+  //     });
+  //   }, 1000);
+  // }
   // Cleanup on unmount
   return () => {
         if (debounceTimer.current.email) clearTimeout(debounceTimer.current?.email);
@@ -171,7 +202,8 @@ useEffect(() => {
     const { name,value, type, checked } = e.target;
     setType(name)
  if (name === "email") {
-    setEmailValue(value); 
+    setEmailValue(value);
+    latestEmailRef.current = value;  
   }
   if(name === "company_name") {
     setCompanyValue(value)

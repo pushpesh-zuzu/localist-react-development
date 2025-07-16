@@ -4,10 +4,7 @@ import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
-import {
-  fetchCompanyDetails
-} from "../../../../../store/Company/companyLookup";
-import { setCompanyError,clearCompanyData } from "../../../../../store/Company/companyLookup";
+import { setCompanyError,clearCompanyData,fetchCompanyDetails } from "../../../../../store/Company/companyLookup";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -34,15 +31,21 @@ const ServiceDetailsStep = ({
 //       showToast("error","Please Enter Correct Number")
 //     }
 //   }
+
 const handleCheck = () => {
+
+  const hasCompanyReg = formData.company_reg_number.trim().length > 0;
+  const hasCompanyName = formData.company_name.trim().length > 0;
+  
   if (!emailCheck) {
     showToast("error", "Please Enter Correct Email");
+    return;
   } 
   // else if (companyCheck === false) {
   //   showToast("error", "Please Enter Correct Company Details");
   // }
-   else if (companyValue.trim().length > 0 && companyCheck === false) {
-    showToast("error", "Please Enter Correct Company Details");
+   else if (hasCompanyReg && !hasCompanyName) {
+    showToast("error", "Please enter company name.");
   } 
    else if (!phoneCheck) {
     showToast("error", "Please Enter Correct Number");
