@@ -907,10 +907,11 @@
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
-  max-height: 200px;
+  /* max-height: 200px; */
   /* overflow-y: auto; */
   z-index: 1000;
   margin-top: 24px;
+  height: fit-content;
   max-width: 196px;
   /* border-radius: 4px; */
   font-size: 14px;
