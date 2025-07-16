@@ -68,22 +68,23 @@ const MyResponse = () => {
       }
     });
   };
-  const handleHiredApi = () => {
-    setSelectedTab("hired");
-    dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
-      if (result.success) {
-        // showToast("success",result?.message)
-        const activityData = {
-          buyer_id: item?.customer_id,
-          user_id: userToken?.remember_tokens
-            ? userToken?.remember_tokens
-            : registerData?.remember_tokens,
-          lead_id: item?.id,
-        };
-        dispatch(getBuyerActivitiesApi(activityData));
-      }
-    });
-  };
+const handleHiredApi = () => {
+  dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
+    if (result?.success) {
+      setSelectedTab("hired");
+
+      const activityData = {
+        buyer_id: item?.customer_id,
+        user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+        lead_id: item?.id,
+      };
+      dispatch(getBuyerActivitiesApi(activityData));
+    } else {
+      showToast("error", result?.message || "Failed to load hired leads.");
+    }
+  });
+};
+
 
   const getLeadsToDisplay = () => {
     /** if (selectedTab === "pending") return getPendingLeadList || [];
