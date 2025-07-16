@@ -26,6 +26,9 @@
   .modalContent {
     width: 90%;
   }
+  .modal {
+    padding: 15px 0px;
+  }
 }
 
 @media (max-height: 768px) {
