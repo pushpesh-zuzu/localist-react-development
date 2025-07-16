@@ -895,3 +895,31 @@
     pointer-events: none;
   }
 }
+
+
+
+/* input dropdown code */
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 12px;
+  max-width: 196px;
+  border-radius: 4px;
+}
+
+.dropdownItem {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background-color: #f2f2f2;
+}

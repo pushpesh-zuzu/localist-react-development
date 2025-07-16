@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import searchIcon from "../../../assets/Icons/MyResponse/searchIcon.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegisterData, setRegisterStep } from "../../../store/FindJobs/findJobSlice";
+import { searchService, setRegisterData, setRegisterStep } from "../../../store/FindJobs/findJobSlice";
 import { Avatar, Popover } from "antd";
-import { getNotificationList,markNotificationsAsRead } from "../../../store/Seller/notificationService";
+import { getNotificationList, markNotificationsAsRead } from "../../../store/Seller/notificationService";
 import moment from "moment";
 import bellIcon from "../../../assets/Icons/bell.svg"
 import {
@@ -14,8 +14,9 @@ import {
   switchUser,
   userLogout,
 } from "../../../store/Auth/authSlice";
-import { BASE_COMPLETE, BASE_IMAGE,  showToast } from "../../../utils";
+import { BASE_COMPLETE, BASE_IMAGE, showToast } from "../../../utils";
 import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg"
+import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const LogSwitch = () => {
   const location = useLocation();
   const { serviceTitle } = useParams();
   const [dataSave, setDataSave] = useState()
+  const [searchText, setSearchText] = useState("");
+  const [debouncedText, setDebouncedText] = useState("");
   const [visible, setVisible] = useState(false)
   const [registerdata, setRegisterDatas] = useState()
   const { userToken, currentUser } = useSelector((state) => state.auth);
@@ -30,23 +33,29 @@ const LogSwitch = () => {
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-const profileId = useParams()
+  const { service, searchServiceLoader } = useSelector(
+    (state) => state.findJobs
+  );
+  const [selectedServiceIds, setSelectedServiceIds] = useState(null);
+const [show, setShow] = useState(false); 
+   const [showDropdown, setShowDropdown] = useState(false);
+  const profileId = useParams()
   useEffect(() => {
     setDataSave(userToken?.active_status)
   }, [userToken])
-   useEffect(() => {
+  useEffect(() => {
     const payload = {
-      user_id:  userToken?.id || registerData?.id || ""
+      user_id: userToken?.id || registerData?.id || ""
     };
     if (payload.user_id) {
       dispatch(getNotificationList(payload));
 
       const intervalId = setInterval(() => {
-      dispatch(getNotificationList(payload));
-    }, 30000);
+        dispatch(getNotificationList(payload));
+      }, 30000);
 
-  
-    return () => clearInterval(intervalId);
+
+      return () => clearInterval(intervalId);
     }
   }, [dispatch, userToken, registerData]);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,7 +73,7 @@ const profileId = useParams()
 
     </div>
   );
-const userData = userToken?.profile_image ? userToken?.profile_image : registerData?.profile_image
+  const userData = userToken?.profile_image ? userToken?.profile_image : registerData?.profile_image
   const getUserType = () => {
 
     if (userToken?.remember_tokens) {
@@ -149,6 +158,36 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
     navigate("/buyers/create")
   }
 
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchText(value); // Store current text
+    setShowDropdown(true);
+  };
+  const handleServiceSelect = (item) => {
+  setSelectedServiceIds(item);     // store selected service (has id & name)
+  setShow(true);                  // show the modal
+  setSearchText(item.name);       // optionally update the input value
+  setShowDropdown(false);         // hide dropdown
+};
+
+  // 2. Debounce input value
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      setDebouncedText(searchText);
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(delayDebounce);
+  }, [searchText]);
+
+  // 3. Dispatch search API
+  useEffect(() => {
+    if (debouncedText.trim() !== "") {
+      dispatch(searchService({ search: debouncedText }));
+    } else {
+      // Optionally: clear search results if input is empty
+      dispatch(searchService({ search: "" }));
+    }
+  }, [debouncedText, dispatch]);
 
   const handleLogout = async () => {
     try {
@@ -163,9 +202,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
       console.error("Logout Error:", error);
     }
   };
-  const onChange = () => {
-
-  }
+  
   const notifications = useSelector((state) => state.notification.notificationList);
   const unreadCount = notifications?.filter(n => n.status === "unread").length;
   const lastId = useSelector((state) => state.notification.lastId);
@@ -174,7 +211,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
   const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
-  console.log(viewProfile,getUserType(), profileId?.profileId, "profileId")
+  console.log(viewProfile, getUserType(), profileId?.profileId, "profileId")
   // path: "admin/review/:profileId",
 
   const userName = userToken?.name || registerData?.name || "";
@@ -188,6 +225,7 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
     setPopoverVisible(visible);
   };
   return (
+    <>
     <div className={styles.logSwitchContainer}>
       {/* Hamburger Icon */}
 
@@ -197,26 +235,41 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
           <div></div>
           <div></div>
           <div></div>
-        </div> : 
+        </div> :
 
-<div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
-<div className={`${styles.mobileOnly}`}>
-  <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
-</div>
-  <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}>
-  <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
-  <input
-    type="text"
-    placeholder="Search for a service"
-    onChange={onChange}
-    className={styles.input}
-  />
-</div>
+          <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
+            <div className={`${styles.mobileOnly}`}>
+              <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
+            </div>
+            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}>
+              <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
+              <input
+                type="text"
+                placeholder="Search for a service"
+                onChange={handleSearch}
+                className={styles.input}
+              />
+            </div>
 
-</div>
+
+          </div>
       }
+      {showDropdown && service?.length > 0 && (
+  <div className={styles.dropdown}>
+    {service?.map((item, index) => (
+      <div
+        key={index}
+        className={styles.dropdownItem}
+        onClick={() => handleServiceSelect(item)}
+      >
+        {item.name}
+      </div>
+    ))}
+  </div>
+)}
+
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
-        {getUserType() == 1 && !viewProfile  && (
+        {getUserType() == 1 && !viewProfile && (
           <>
             <div
               className={`${styles.navItem} ${location.pathname === "/dashboard" ? styles.active : ""}`}
@@ -255,152 +308,152 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
               Help
             </div>
             <Popover
-                  trigger="click"
-                  placement="bottomRight"
-                  visible={popoverVisible}
-                  onVisibleChange={handleVisibleChange}
-                  overlayStyle={{ maxHeight: "60vh", overflowY: "auto", width: "360px" }}
-                  content={
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        maxHeight: "50vh",
-                        overflow: "hidden",
-                        width: "320px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          flex: "1",
-                          overflowY: "auto",
-                          padding: "10px",
-                        }}
-                      >
-                        {notifications.length > 0 ? (
-                          notifications.map((noti, index) => (
-                            <div key={noti.id}>
-                              <div style={{ marginBottom: "8px" }}>
-                                <div style={{ fontWeight: "600", fontSize: "14px" }}>{noti.title}</div>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                    gap: "12px",
-                                    marginTop: "4px",
-                                    fontSize: "11px",
-                                  }}
-                                >
-                                  <span>{noti.message}</span>
-                                  <span>{formatDate(noti.created_at)}</span>
-                                </div>
-                              </div>
-                              {index !== notifications.length - 1 && (
-                                <hr style={{ borderTop: "1px solid #eee", margin: "8px 0" }} />
-                              )}
-                            </div>
-                          ))
-                        ) : (
-                          <div style={{ fontSize: "12px", color: "#999" }}>No new notifications</div>
-                        )}
-                      </div>
-
-                      {/* Fixed bottom link */}
-                      {notifications.length > 0 && (
-                        <div
-                          style={{
-                            padding: "10px",
-                            borderTop: "1px solid #eee",
-                            textAlign: "right",
-                            backgroundColor: "#fff",
-                            position: "sticky",
-                            bottom: "0",
-                          }}
-                        >
-                         <a
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              if (unreadCount > 0) {
-                                const payload = {
-                                  user_id: userToken?.id || registerData?.id,
-                                  last_id: lastId
-                                };
-                                dispatch(markNotificationsAsRead(payload));
-                              }
-
-                              setPopoverVisible(false);
-                            }}
-                            style={{ fontSize: "12px", color: "#1890ff" }}
-                          >
-                            Mark all as read
-                          </a>
-
-                        </div>
-                      )}
-                    </div>
-                  }
+              trigger="click"
+              placement="bottomRight"
+              visible={popoverVisible}
+              onVisibleChange={handleVisibleChange}
+              overlayStyle={{ maxHeight: "60vh", overflowY: "auto", width: "360px" }}
+              content={
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    maxHeight: "50vh",
+                    overflow: "hidden",
+                    width: "320px",
+                  }}
                 >
-                  <div style={{ position: "relative", cursor: "pointer" }}>
-                    <img src={bellIcon} alt="Notifications" width={20} height={20} />
-                    {unreadCount > 0 && (
-                      <span
-                        style={{
-                          position: "absolute",
-                          top: "-4px",
-                          right: "-4px",
-                          backgroundColor: "red",
-                          color: "white",
-                          borderRadius: "50%",
-                          width: "16px",
-                          height: "16px",
-                          fontSize: "10px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {unreadCount}
-                      </span>
+                  <div
+                    style={{
+                      flex: "1",
+                      overflowY: "auto",
+                      padding: "10px",
+                    }}
+                  >
+                    {notifications.length > 0 ? (
+                      notifications.map((noti, index) => (
+                        <div key={noti.id}>
+                          <div style={{ marginBottom: "8px" }}>
+                            <div style={{ fontWeight: "600", fontSize: "14px" }}>{noti.title}</div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                gap: "12px",
+                                marginTop: "4px",
+                                fontSize: "11px",
+                              }}
+                            >
+                              <span>{noti.message}</span>
+                              <span>{formatDate(noti.created_at)}</span>
+                            </div>
+                          </div>
+                          {index !== notifications.length - 1 && (
+                            <hr style={{ borderTop: "1px solid #eee", margin: "8px 0" }} />
+                          )}
+                        </div>
+                      ))
+                    ) : (
+                      <div style={{ fontSize: "12px", color: "#999" }}>No new notifications</div>
                     )}
                   </div>
+
+                  {/* Fixed bottom link */}
+                  {notifications.length > 0 && (
+                    <div
+                      style={{
+                        padding: "10px",
+                        borderTop: "1px solid #eee",
+                        textAlign: "right",
+                        backgroundColor: "#fff",
+                        position: "sticky",
+                        bottom: "0",
+                      }}
+                    >
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (unreadCount > 0) {
+                            const payload = {
+                              user_id: userToken?.id || registerData?.id,
+                              last_id: lastId
+                            };
+                            dispatch(markNotificationsAsRead(payload));
+                          }
+
+                          setPopoverVisible(false);
+                        }}
+                        style={{ fontSize: "12px", color: "#1890ff" }}
+                      >
+                        Mark all as read
+                      </a>
+
+                    </div>
+                  )}
+                </div>
+              }
+            >
+              <div style={{ position: "relative", cursor: "pointer" }}>
+                <img src={bellIcon} alt="Notifications" width={20} height={20} />
+                {unreadCount > 0 && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "-4px",
+                      right: "-4px",
+                      backgroundColor: "red",
+                      color: "white",
+                      borderRadius: "50%",
+                      width: "16px",
+                      height: "16px",
+                      fontSize: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {unreadCount}
+                  </span>
+                )}
+              </div>
             </Popover>
             {/* <div className={styles.nameCircle}>{userInitial}</div> */}
-                {userData ? (
-      <Avatar
-        src={`${BASE_IMAGE}/users/${userData}`}
-        alt="Profile"
-        size={40}
-        style={{ backgroundColor: "#f0f0f0" }}
-      />
-    ) : (
-      <div className={styles.nameCircle}>{userInitial}</div>
-    )}
+            {userData ? (
+              <Avatar
+                src={`${BASE_IMAGE}/users/${userData}`}
+                alt="Profile"
+                size={40}
+                style={{ backgroundColor: "#f0f0f0" }}
+              />
+            ) : (
+              <div className={styles.nameCircle}>{userInitial}</div>
+            )}
           </>
 
         )}
 
         {
-        
-        (getUserType() == 2 || viewProfile)  && (
-          <>
-            <div className={styles.requestBox}>
-              <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
-            </div>
 
-             {userData ? (
-      <Avatar
-        src={`${BASE_COMPLETE}/${userData}`}
-        alt="Profile"
-        size={40}
-        style={{ backgroundColor: "#f0f0f0" }}
-      />
-    ) : (
-      <div className={styles.nameCircle}>{userInitial}</div>
-    )}
-          </>
-        )}
+          (getUserType() == 2 || viewProfile) && (
+            <>
+              <div className={styles.requestBox}>
+                <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
+              </div>
+
+              {userData ? (
+                <Avatar
+                  src={`${BASE_COMPLETE}/${userData}`}
+                  alt="Profile"
+                  size={40}
+                  style={{ backgroundColor: "#f0f0f0" }}
+                />
+              ) : (
+                <div className={styles.nameCircle}>{userInitial}</div>
+              )}
+            </>
+          )}
       </div>
 
       {/* User Options Popover */}
@@ -440,28 +493,38 @@ const userData = userToken?.profile_image ? userToken?.profile_image : registerD
         </Popover>
       ) : (
         <>
-        <div className={styles.logsBtns}>
-          <div
-            className={styles.loginBtn}
-            onClick={() => handleNavigation("/login")}
-          >
-            Login
-          </div>
-          {(!selectedServiceId && !serviceTitle) && (
+          <div className={styles.logsBtns}>
             <div
-              className={styles.professionalBtn}
-              onClick={() => {
-                dispatch(setRegisterStep(1));
-                handleNavigation("/sellers/create/");
-              }}
+              className={styles.loginBtn}
+              onClick={() => handleNavigation("/login")}
             >
-              Join as a Professional
+              Login
             </div>
-          )}
-        </div>
+            {(!selectedServiceId && !serviceTitle) && (
+              <div
+                className={styles.professionalBtn}
+                onClick={() => {
+                  dispatch(setRegisterStep(1));
+                  handleNavigation("/sellers/create/");
+                }}
+              >
+                Join as a Professional
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
+    {show && (userToken?.active_status == 2 || !userToken) && selectedServiceIds && (
+  <BuyerRegistration
+    closeModal={() => setShow(false)}
+    serviceId={selectedServiceIds?.id}
+    serviceName={selectedServiceIds?.name}
+    // postcode={pincode}
+    // postalCodeValidate={postalCodeValidate}
+  />
+)}
+</>
   );
 };
 
