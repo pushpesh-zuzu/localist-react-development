@@ -30,8 +30,8 @@
 
 .closeButton {
   position: absolute;
-  top: 28px;
-  right: 28px;
+  top: 30px;
+  right: 30px;
   width: 29px;
   height: 29px;
   background: white;
@@ -56,11 +56,15 @@
   background-image: url("../../../assets/Images/RegisterModalQuestionsBg.svg");
   background-size: cover;
   background-position: center;
-  padding: 25px 20px;
+  padding: 0px 20px;
   color: white;
   font-size: 18px;
   font-weight: bold;
-  max-height: 80px;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .headerImage h2 {
@@ -179,7 +183,7 @@
 }
 .option input {
   width: 14px;
-  margin-top: -2px;
+  margin: 0px;
 }
 .options {
   display: flex;
@@ -195,7 +199,8 @@
   color: #000000;
 }
 .options input {
-  margin-top: 4px;
+  width: 14px;
+  margin: 0px;
 }
 @media (max-height: 800px) {
   .modalContent {

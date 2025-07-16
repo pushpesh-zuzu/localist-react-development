@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./NumberVerified.module.css";
 import { CheckOutlined } from "@ant-design/icons";
-import checkboxImg from "../../../../../assets/Images/ServicePanel/checkboxImg.svg"
+import checkboxImg from "../../../../../assets/Images/Pricing/matchesCheck.svg"
 
 const NumberVerifiedModal = ({ open, onClose, nextStep, previousStep }) => {
   if (!open) return null;
