@@ -23,11 +23,12 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
   const hasClearedOnce = useRef(false);
   const hasPopulatedFromCompany = useRef(false);
   const handleCheck = () => {
-      if(companyData.registered_office_address?.address_line_1) {
-        nextStep()
-      } else {
-        showToast("error","Please Enter Correct Address")
-      }
+      // if(companyData.registered_office_address?.address_line_1) {
+        
+      // } else {
+      //   showToast("error","Please Enter Correct Address")
+      // }
+      nextStep()
     }
 
   useEffect(() => {
