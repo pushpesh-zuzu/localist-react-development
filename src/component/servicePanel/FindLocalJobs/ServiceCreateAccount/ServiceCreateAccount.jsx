@@ -5,7 +5,7 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAddressApi, checkCompanyNameApi, checkEmailIdApi, checkPhoneNumberApi, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { checkAddressApi, checkCompanyNameApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../utils";
 
 const ServiceCreateAccount = () => {
@@ -121,7 +121,7 @@ useEffect(() => {
 //       });
 //     }, 1000);
 //   }
-  if (companyValue.trim().length > 1 && type === "company_name") {
+  if (companyValue.trim().length > 1 && type === "company_name" &&  selectedServiceFormData?.company_reg_number) {
     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
     debounceTimer.current.company_name = setTimeout(() => {
       dispatch(checkCompanyNameApi({
@@ -212,6 +212,7 @@ useEffect(() => {
   useEffect(() => {
     return () => {
       dispatch(setRegisterStep(1));
+      dispatch(clearServiceFormData())
     }
   }, [])
 

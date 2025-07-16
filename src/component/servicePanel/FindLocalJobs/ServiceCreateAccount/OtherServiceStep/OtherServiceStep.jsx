@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearServiceFormData,
   pendingLeadData,
   registerUserData,
   searchService,
@@ -219,6 +220,7 @@ dispatch(registerUserData(payload)).then((result) => {
         showToast("success", result?.message || "Register successful!");
         navigate("/leads");
         dispatch(setService());
+        dispatch(clearServiceFormData())
       }
     });
 }

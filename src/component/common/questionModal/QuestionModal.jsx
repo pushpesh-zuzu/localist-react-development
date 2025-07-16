@@ -233,7 +233,7 @@ dispatch(clearSetbuyerRequestData())
               {questions[currentQuestion]?.answer
                 ?.split(",")
                 .map((option, index) => (
-                  <label key={index} className={styles.option}>
+                  <label key={index} className={questions[currentQuestion]?.option_type === "single" ? styles.option : styles.options}>
                     <input
                       type={questions[currentQuestion]?.option_type === "single" ? "radio" : "checkbox"}
                       name="surveyOption"

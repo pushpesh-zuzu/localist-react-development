@@ -30,8 +30,8 @@
 
 .closeButton {
   position: absolute;
-  top: 29px;
-  right: 30px;
+  top: 28px;
+  right: 28px;
   width: 29px;
   height: 29px;
   background: white;
@@ -60,14 +60,14 @@
   color: white;
   font-size: 18px;
   font-weight: bold;
-  height: 80px;
+  max-height: 80px;
 }
 
 .headerImage h2 {
   font-family: Poppins;
   font-weight: 700;
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 0px;
 }
 
 .optionsContainer {
@@ -98,7 +98,7 @@
 }
 
 .backButton {
-  background: black;
+  /* background: black;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: white;
   padding: 8px 27px;
@@ -107,6 +107,16 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 14px;
+  vertical-align: middle; */
+   box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: #000000;
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
   vertical-align: middle;
 }
 
@@ -115,7 +125,7 @@
 }
 
 .nextButton {
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  /* box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
   border-radius: 3px;
   color: white;
@@ -124,6 +134,17 @@
   cursor: pointer;
   font-weight: 500;
   font-size:14px;
+  vertical-align: middle;
+  margin-left: auto; */
+   box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
   vertical-align: middle;
   margin-left: auto;
 }
@@ -159,6 +180,22 @@
 .option input {
   width: 14px;
   margin-top: -2px;
+}
+.options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #dedede;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: poppins;
+  border-radius: 3px;
+  color: #000000;
+}
+.options input {
+  margin-top: 4px;
 }
 @media (max-height: 800px) {
   .modalContent {

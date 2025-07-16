@@ -130,7 +130,7 @@
 }
 
 .nextButton {
-  background: var(--primary-color);
+  /* background: var(--primary-color);
   color: #ffffff;
   padding: 8px 10px;
   border: none;
@@ -139,7 +139,17 @@
   font-size: 14px;
   text-align: center;
   vertical-align: middle;
+  cursor: pointer; */
+   box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
   cursor: pointer;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
 }
 
 .nextButton:hover {
