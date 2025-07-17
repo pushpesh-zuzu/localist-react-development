@@ -81,7 +81,7 @@
   overflow: auto;
 }
 
-.option {
+/* .option {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -94,7 +94,7 @@
   border-radius: 3px;
   color: #000000;
   text-align: start;
-}
+} */
 
 .buttonContainer {
   display: flex;
@@ -182,7 +182,7 @@
   font-size: 16px;
   color: #000000;
 }
-.option input {
+/* .option input {
   width: 14px;
   margin: 0px;
 }
@@ -202,7 +202,41 @@
 .options input {
   width: 14px;
   margin: 0px;
+} */
+ /* Common style for both radio and checkbox wrappers */
+.option, .options {
+  display: flex;
+  align-items: center;
+    gap: 10px;
+  border: 1px solid #dedede;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 3px;
+  color: #000000;
 }
+
+/* Allow wrapping */
+.option input {
+  margin-top: 0px;
+}
+.options input {
+  margin-top: 4px; /* adjust to align with multiline */
+}
+
+/* Target long labels (wraps to multiple lines) */
+.option span,
+.options span {
+  display: inline-block;
+}
+
+/* Optional: limit width so text wraps naturally */
+.option, .options {
+  max-width: 100%;
+  word-break: break-word;
+}
+
 @media (max-height: 800px) {
   .modalContent {
     max-height: 80vh;
@@ -248,7 +282,7 @@
     width: 78%;
      
   }
-   .option {
+   /* .option {
     text-align: start;
     align-items: start;
    
@@ -256,13 +290,25 @@
   .option input {
     margin-top: 3px;
   }
-  .options{
+ 
+  .options input {
+    margin-top: 3px;
+  } */
+    .options{
     text-align: start;
     align-items: start;
   }
-  .options input {
-    margin-top: 3px;
+  .option {
+    text-align: start;
+    align-items: start;
+   
   }
+  .option input {
+  margin-top: 3px;
+}
+.options input {
+  margin-top: 4px; /* adjust to align with multiline */
+}
 
   .headerImage {
    min-height: 120px;

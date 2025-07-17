@@ -249,7 +249,7 @@ dispatch(clearSetbuyerRequestData())
 }
           onChange={handleOptionChange}
                     />
-                    {option.trim()}
+                    <span>{option.trim()}</span>
                   </label>
                 ))}
                        {/* {selectedOption.includes("Something else (please describe)") && (

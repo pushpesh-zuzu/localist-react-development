@@ -215,14 +215,15 @@
 
   .backButton,
   .nextButton {
-    width: 100%;
+   /* width: 84px; */
     font-size: 14px;
-    padding: 10px;
+    padding: 8px 10px;
+    font-weight: 500;
   }
     .closeButton {
      position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
@@ -247,8 +248,10 @@
   
   .backButton,
   .nextButton {
-    font-size: 12px;
-    padding: 8px;
+    /* width: 84px; */
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
   }
   .checkboxContainer{
     display: flex;
@@ -257,8 +260,8 @@
   }
    .closeButton {
      position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   font-size: 24px;
   background: none;
   border: none;
