@@ -250,19 +250,21 @@ const [show, setShow] = useState(false);
           <div></div>
         </div> :
 
-          <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
+          <div style={{ marginTop: "4px" }} className={styles.inputWrapper} >
             <div className={`${styles.mobileOnly}`}>
               <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
             </div>
-            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}  ref={wrapperRef}>
+            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}  
+            // ref={wrapperRef}
+            >
               <img src={searchIcon} alt="Search" width={18} height={18}   className={`${styles.icon} ${inputFocused ? styles.iconFocused : styles.iconFocusedNo}`}/>
               <input
                 type="text"
                 placeholder="Search for a service"
                 onChange={handleSearch}
                 className={styles.input}
-                 onFocus={() => setInputFocused(true)}
-  onBlur={() => setInputFocused(false)}
+                //  onFocus={() => setInputFocused(true)}
+  // onBlur={() => setInputFocused(false)}
               />
             </div>
 
