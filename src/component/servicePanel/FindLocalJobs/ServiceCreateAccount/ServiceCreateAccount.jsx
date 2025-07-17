@@ -95,7 +95,7 @@ const latestPhoneRef = useRef("");
 
 useEffect(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+  
   if (emailRegex.test(emailValue) && type === "email") {
     if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
 
@@ -108,6 +108,7 @@ useEffect(() => {
           if (result?.success === true) {
            
             setEmailCheck(true);
+            showToast("success", "Valid email");
           } else {
             
             setEmailCheck(false);
@@ -117,6 +118,7 @@ useEffect(() => {
       });
     }, 1000);
   }
+ 
 
 
 //  if (companyValue.trim().length > 1 && type === "company_name") {
@@ -169,6 +171,7 @@ useEffect(() => {
         if (latestPhoneRef.current === currentPhone) {
           if (result?.success === true) {
             setPhoneCheck(true);
+            showToast("success", "Valid Phone");
           } else {
             setPhoneCheck(false);
             
