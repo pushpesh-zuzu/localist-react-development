@@ -243,8 +243,10 @@
 }
 
 @media (max-width: 480px) {
+  
   .modalContent {
     width: 78%;
+     
   }
    .option {
     text-align: start;

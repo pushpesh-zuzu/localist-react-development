@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
-import { setCity, setCountry, setPostalCode, setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
+import { setCity, setCountry, setPostalCode, setRegisterStep, setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../../../utils";
 
@@ -15,7 +15,7 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
- 
+ console.log(formData,"formData")
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -105,6 +105,10 @@ let cityName =
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
+  
+  useEffect(()=>{
+dispatch(setRegisterStep(1))
+  },[])
 
 
 

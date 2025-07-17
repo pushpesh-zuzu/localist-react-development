@@ -31,7 +31,7 @@
   }
 }
 
-@media (max-height: 708px) {
+@media (max-height: 600px) {
  .modal{
   align-items: unset !important;
  }

@@ -244,7 +244,7 @@ useEffect(() => {
   useEffect(() => {
     return () => {
       dispatch(setRegisterStep(1));
-      dispatch(clearServiceFormData())
+      // dispatch(clearServiceFormData())
     }
   }, [])
 

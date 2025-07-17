@@ -11,7 +11,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { createRequestData } from "../../../store/Buyer/BuyerSlice";
-import { showToast } from "../../../utils";
+import { clearAuthData, showToast } from "../../../utils";
 // import { showToast } from "../../../../../utils";
 
 const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal,confirmClose,onConfirm}) => {
@@ -107,7 +107,9 @@ if (!userToken) {
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
         localStorage.removeItem("registerTokens");
-        localStorage.removeItem("createRequestToken")
+        localStorage.removeItem("createRequestToken");
+        clearAuthData()
+
             onConfirm()
           }
           // nextStep();

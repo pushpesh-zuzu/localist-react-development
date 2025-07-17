@@ -1,5 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import searchIcon from "../../../assets/Icons/MyResponse/searchIcon.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,10 +22,12 @@ const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+    const wrapperRef = useRef(null);
   const { serviceTitle } = useParams();
   const [dataSave, setDataSave] = useState()
   const [searchText, setSearchText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
   const [visible, setVisible] = useState(false)
   const [registerdata, setRegisterDatas] = useState()
   const { userToken, currentUser } = useSelector((state) => state.auth);
@@ -157,7 +159,18 @@ const [show, setShow] = useState(false);
   const handleMyRequest = () => {
     navigate("/buyers/create")
   }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchText(value); // Store current text
@@ -241,13 +254,15 @@ const [show, setShow] = useState(false);
             <div className={`${styles.mobileOnly}`}>
               <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
             </div>
-            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}>
-              <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
+            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}  ref={wrapperRef}>
+              <img src={searchIcon} alt="Search" width={18} height={18}   className={`${styles.icon} ${inputFocused ? styles.iconFocused : styles.iconFocusedNo}`}/>
               <input
                 type="text"
                 placeholder="Search for a service"
                 onChange={handleSearch}
                 className={styles.input}
+                 onFocus={() => setInputFocused(true)}
+  onBlur={() => setInputFocused(false)}
               />
             </div>
 

@@ -255,16 +255,33 @@
   border-radius: 8px;
   font-size: 14px;
   outline: none;
+  color: #000000;
+  font-weight: 600;
 }
-
+.input::placeholder{
+  color: #000000;
+}
 .icon {
   position: absolute;
-  top: 50%;
+  top: 65%;
   right: 8px;
   transform: translateY(-50%);
   color: #888;
   font-size: 18px;
   pointer-events: none;
+  transition: border-bottom 0.2s ease;
+  
+}
+
+
+.iconFocused {
+  border-bottom: 1px solid #007bff; /* or any color */
+  padding-bottom: 10px;
+ 
+}
+.iconFocusedNo {
+  border-bottom: none;
+  padding-bottom: 10px;
 }
 /* By default, show both (optional if using utility classes) */
 
@@ -915,6 +932,7 @@
   max-width: 196px;
   /* border-radius: 4px; */
   font-size: 14px;
+  color: #848484;
   
 }
 
