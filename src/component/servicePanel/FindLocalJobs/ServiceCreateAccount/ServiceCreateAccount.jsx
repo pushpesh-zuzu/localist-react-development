@@ -242,6 +242,7 @@ useEffect(() => {
     dispatch(setRegisterStep(registerStep - 1));
   };
   useEffect(() => {
+      dispatch(setRegisterStep(1))
     return () => {
       dispatch(setRegisterStep(1));
       // dispatch(clearServiceFormData())

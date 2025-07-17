@@ -521,7 +521,7 @@ const [show, setShow] = useState(false);
               <div
                 className={styles.professionalBtn}
                 onClick={() => {
-                  dispatch(setRegisterStep(1));
+                  // dispatch(setRegisterStep(1));
                   handleNavigation("/sellers/create/");
                 }}
               >

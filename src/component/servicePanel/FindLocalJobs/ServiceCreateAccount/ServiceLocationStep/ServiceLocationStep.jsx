@@ -106,9 +106,9 @@ let cityName =
     loadGoogleMapsScript();
   }, [setFormData, formData]);
   
-  useEffect(()=>{
-dispatch(setRegisterStep(1))
-  },[])
+//   useEffect(()=>{
+// dispatch(setRegisterStep(1))
+//   },[])
 
 
 
