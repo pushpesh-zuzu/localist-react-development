@@ -159,18 +159,19 @@ const [show, setShow] = useState(false);
   const handleMyRequest = () => {
     navigate("/buyers/create")
   }
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+  //       setShowDropdown(false);
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //     }
+  //   };
+
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchText(value); // Store current text
@@ -180,7 +181,8 @@ const [show, setShow] = useState(false);
   setSelectedServiceIds(item);     // store selected service (has id & name)
   setShow(true);                  // show the modal
   setSearchText(item.name);       // optionally update the input value
-  setShowDropdown(false);         // hide dropdown
+  // setShowDropdown(false); 
+  setSearchText("")        // hide dropdown
 };
 
   // 2. Debounce input value
@@ -263,8 +265,15 @@ const [show, setShow] = useState(false);
                 placeholder="Search for a service"
                 onChange={handleSearch}
                 className={styles.input}
-                //  onFocus={() => setInputFocused(true)}
-  // onBlur={() => setInputFocused(false)}
+                 onFocus={() => setInputFocused(true)}
+  onBlur={() => {setInputFocused(false)
+    setTimeout(() => {
+      setShowDropdown(false)
+      
+    }, 500);
+  }
+  }
+  value={searchText}
               />
             </div>
 

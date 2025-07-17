@@ -204,38 +204,40 @@
   margin: 0px;
 } */
  /* Common style for both radio and checkbox wrappers */
-.option, .options {
+
+ .option,
+.options {
   display: flex;
-  align-items: center;
-    gap: 10px;
+  align-items: center; /* ensures input aligns to the top of the text */
+  gap: 8px;
   border: 1px solid #dedede;
   padding: 10px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
+ 
   border-radius: 3px;
   color: #000000;
+  text-align: start;
 }
 
-/* Allow wrapping */
+/* Make input stay at top even for multiline */
 .option input {
-  margin-top: 0px;
+margin-top: 0px;
 }
 .options input {
-  margin-top: 4px; /* adjust to align with multiline */
+  margin-top: 3px;
+  flex-shrink: 0;
 }
 
-/* Target long labels (wraps to multiple lines) */
+/* Wrap long text */
 .option span,
 .options span {
   display: inline-block;
+  word-break: break-word;
+  /* width: calc(100% - 24px);  */
 }
 
-/* Optional: limit width so text wraps naturally */
-.option, .options {
-  max-width: 100%;
-  word-break: break-word;
-}
 
 @media (max-height: 800px) {
   .modalContent {
@@ -286,29 +288,29 @@
     text-align: start;
     align-items: start;
    
-  }
+  }*/
   .option input {
-    margin-top: 3px;
+    margin-top: 0px;
   }
  
   .options input {
-    margin-top: 3px;
-  } */
+    margin-top: 0px;
+  } 
     .options{
     text-align: start;
-    align-items: start;
+    align-items: center;
   }
   .option {
     text-align: start;
-    align-items: start;
+    align-items: center;
    
   }
-  .option input {
+  /* .option input {
   margin-top: 3px;
 }
 .options input {
-  margin-top: 4px; /* adjust to align with multiline */
-}
+  margin-top: 4px; 
+} */
 
   .headerImage {
    min-height: 120px;

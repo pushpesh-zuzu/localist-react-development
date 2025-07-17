@@ -263,7 +263,7 @@
 }
 .icon {
   position: absolute;
-  top: 65%;
+  top: 65.5%;
   right: 8px;
   transform: translateY(-50%);
   color: #888;
@@ -276,7 +276,7 @@
 
 .iconFocused {
   border-bottom: 1px solid #007bff; /* or any color */
-  padding-bottom: 10px;
+  padding-bottom: 9px;
  
 }
 .iconFocusedNo {
