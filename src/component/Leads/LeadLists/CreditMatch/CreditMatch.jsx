@@ -11,12 +11,13 @@ import { addBuyCreditApi } from "../../../../store/MyProfile/MyCredit/MyCreditSl
 import { showToast } from "../../../../utils";
 import AddCardModal from "../../../MyCredit/MyPaymentDetails/AddCardModal";
 
+
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -216,6 +217,45 @@ const CreditMatch = () => {
         </button>
       </div>
     </div>
+   
+    {buyCreditLoader && (
+  <div
+    style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      zIndex: 9999,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      color: "#fff",
+      fontSize: "1.2rem",
+    }}
+  >
+
+   <div style={{ marginTop: "25vh", textAlign: "center" }}>
+    <svg
+    className={styles.gearSpinner}
+    xmlns="http://www.w3.org/2000/svg"
+    width="40" 
+    height="40"
+    viewBox="0 0 100 100"
+    fill="white" 
+  >
+    <path
+      d="M94 56.5v-13l-10.6-2.3c-.8-2.7-2-5.2-3.5-7.6l5.8-9.3-9.2-9.2-9.3 5.8c-2.4-1.5-5-2.7-7.6-3.5L56.5 6h-13l-2.3 10.6c-2.7.8-5.2 2-7.6 3.5l-9.3-5.8-9.2 9.2 5.8 9.3c-1.5 2.4-2.7 5-3.5 7.6L6 43.5v13l10.6 2.3c.8 2.7 2 5.2 3.5 7.6l-5.8 9.3 9.2 9.2 9.3-5.8c2.4 1.5 5 2.7 7.6 3.5L43.5 94h13l2.3-10.6c2.7-.8 5.2-2 7.6-3.5l9.3 5.8 9.2-9.2-5.8-9.3c1.5-2.4 2.7-5 3.5-7.6L94 56.5zM50 65a15 15 0 1 1 0-30 15 15 0 0 1 0 30z"
+    />
+  </svg>
+
+  <p>Processing Payment...</p>
+</div>
+  </div>
+)}
+
       {isAddModalOpen && (
         <AddCardModal onClose={() => setIsAddModalOpen(false)} />
       )}
