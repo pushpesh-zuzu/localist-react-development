@@ -28,6 +28,8 @@ const AboutAccordion = ({details}) => {
   // const companyNameData = useSelector((state)=> state.company)
    const companyData = useSelector((state) => state.companyLook?.companyData)
   console.log(companyData?.registered_office_address?.address_line_1,"companyNameData")
+   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
+  const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
 tiktok_link: "",
@@ -144,20 +146,75 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     }
   };
 
-  const handleInputChange = (e) => {
+   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name,value,"value")
-if(name==='company_reg_number'){
+    setFormState((prev) => ({ ...prev, [name]: value }));
+
+    // if (name === "company_reg_number" && value.length === 8) {
+    //   dispatch(fetchCompanyDetails(value));
+    // }
+    if(name==='company_reg_number'){
   phoneAPI(value)
 }
-if(name === "company_location"){
-  companyLocationApi(value)
-}
-if(name === "company_name"){
-  companyNameApi(value)
-}
-    setFormState((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "company_location") {
+      setDebouncedCompanyLocation(value);
+    }
+
+    if (name === "company_name") {
+      setDebouncedCompanyName(value);
+    }
   };
+
+  // Debounce for company_location
+  useEffect(() => {
+    if (debouncedCompanyLocation.length !== 10) return;
+
+    const timeout = setTimeout(() => {
+      dispatch(checkAddressApi({ company_location: debouncedCompanyLocation })).then((result) => {
+        if (result?.success) {
+          showToast("success", result.message);
+        }
+      });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [debouncedCompanyLocation]);
+
+  // Debounce for company_name
+  useEffect(() => {
+    if (!debouncedCompanyName) return;
+
+    const timeout = setTimeout(() => {
+      dispatch(
+        checkCompanyNameApi({
+          company_name: debouncedCompanyName,
+          company_reg_number: formState.company_reg_number
+        })
+      ).then((result) => {
+        if (result?.success) {
+          showToast("success", result.message);
+        }
+      });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [debouncedCompanyName]);
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     console.log(name,value,"value")
+// if(name==='company_reg_number'){
+//   phoneAPI(value)
+// }
+// if(name === "company_location"){
+//   companyLocationApi(value)
+// }
+// if(name === "company_name"){
+//   companyNameApi(value)
+// }
+//     setFormState((prev) => ({ ...prev, [name]: value }));
+//   };
   const phoneAPI=(regNo)=>{
     // const regNo = formState.company_reg_number;
 
@@ -167,42 +224,42 @@ if(name === "company_name"){
   }
   }
 
-  const companyLocationApi =(location) => {
-//  const location = formState?.company_location;
+//   const companyLocationApi =(location) => {
+// //  const location = formState?.company_location;
 
-  // Only proceed if exactly 10 characters
-  if (location) {
-    const handler = setTimeout(() => {
-      dispatch(checkAddressApi({ company_location: location })).then((result) => {
-        if (result.success) {
-          showToast("success", result?.message);
-        }
-      });
-    }, 1000); // 300ms debounce delay
+//   // Only proceed if exactly 10 characters
+//   if (location) {
+//     const handler = setTimeout(() => {
+//       dispatch(checkAddressApi({ company_location: location })).then((result) => {
+//         if (result.success) {
+//           showToast("success", result?.message);
+//         }
+//       });
+//     }, 1000); // 300ms debounce delay
 
-    // Cleanup to cancel previous timer if user types again
-    return () => {
-      clearTimeout(handler);
-    };
-  }
-  }
+//     // Cleanup to cancel previous timer if user types again
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }
+//   }
 
-  const companyNameApi = (name) => {
- if (name) {
-    const handler = setTimeout(() => {
-      dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
-        if (result.success) {
-          showToast("success", result?.message);
-        }
-      });
-    }, 1000); // 300ms debounce delay
+//   const companyNameApi = (name) => {
+//  if (name) {
+//     const handler = setTimeout(() => {
+//       dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
+//         if (result.success) {
+//           showToast("success", result?.message);
+//         }
+//       });
+//     }, 1000); // 300ms debounce delay
 
-    // Cleanup to cancel previous timer if user types again
-    return () => {
-      clearTimeout(handler);
-    };
-  }
-  }
+//     // Cleanup to cancel previous timer if user types again
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }
+//   }
 
   // const validate = () => {
   //   const temp = {};
