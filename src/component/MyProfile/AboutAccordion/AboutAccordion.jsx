@@ -588,6 +588,7 @@ useEffect(() => {
               value={formState.company_phone}
               onChange={handleInputChange}
               placeholder="Enter company's phone number"
+               maxLength={10}
             />
           </div>
         </div>
@@ -612,6 +613,7 @@ useEffect(() => {
           value={formState.company_reg_number}
           onChange={handleInputChange}
           placeholder="Enter Company Reg. No"
+           maxLength={8}
         />
         </div>
         </div>
