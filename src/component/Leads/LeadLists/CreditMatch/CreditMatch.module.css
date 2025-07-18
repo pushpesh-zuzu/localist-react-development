@@ -8,6 +8,24 @@
   position: relative;
 }
 
+/* Spinner.module.css */
+.gearSpinner {
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 .creditsSection {
   display: flex;
   align-items: center;
@@ -240,6 +258,8 @@
   .totalPrice {
     margin-top: 0px;
   }
+
+
 }
 
 @media (max-width: 768px) {
@@ -282,6 +302,7 @@
     padding: 6px 12px;
   }
 
+  
   .autoTopUpLabel {
     font-size: 12px;
   }
