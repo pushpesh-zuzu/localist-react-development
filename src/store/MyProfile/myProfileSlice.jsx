@@ -117,7 +117,7 @@ export const updateSellerProfile = createAsyncThunk(
     try {
       const allowedKeys = [
         "type", "company_logo", "company_name", "profile_image", "name",
-        "company_email", "company_phone", "company_website", "company_location",
+        "company_email", "company_phone", "company_website", "company_location","company_reg_number",
         "company_locaion_reason", "company_size", "company_total_years", "about_company",
       ];
 

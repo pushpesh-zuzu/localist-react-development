@@ -10,10 +10,11 @@ import { updateSellerProfile, clearUpdateStatus } from "../../../store/MyProfile
 import { toast } from "react-toastify";
 import { BASE_IMAGE, showToast, updateLocalStorageValue } from "../../../utils";
 import { setUserToken } from "../../../store/Auth/authSlice";
-import { setRegisterData } from "../../../store/FindJobs/findJobSlice";
+import { checkAddressApi, checkCompanyNameApi, setRegisterData } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
+import { fetchCompanyDetails } from "../../../store/Company/companyLookup";
 
 
 const AboutAccordion = ({details}) => {
@@ -24,6 +25,9 @@ const AboutAccordion = ({details}) => {
         (state) => state.findJobs
       );
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
+  // const companyNameData = useSelector((state)=> state.company)
+   const companyData = useSelector((state) => state.companyLook?.companyData)
+  console.log(companyData?.registered_office_address?.address_line_1,"companyNameData")
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
 tiktok_link: "",
@@ -46,6 +50,7 @@ extra_links: "",
     company_locaion_reason: "",
     company_size: "",
     company_total_years: "",
+    company_reg_number:"",
     about_company: "",
     is_youtube_video: 1,
     company_youtube_link: "",
@@ -89,6 +94,7 @@ setFormState({
   company_locaion_reason:details?.company_locaion_reason,
   company_size:details?.company_size,
   company_total_years:details?.company_total_years,
+  company_reg_number:details?.company_reg_number,
   about_company:details?.about_company,
   profile_imagePreview:details?.profile_image ? `${BASE_IMAGE}/users/${details?.profile_image}`: null,
   // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
@@ -99,6 +105,24 @@ setFormState({
 })
 }
   },[details])
+  useEffect(()=>{
+    let data={...formState}
+
+if(companyData.company_name){
+  data.company_name= companyData?.company_name 
+  // setFormState({...formState,company_name:companyData?.company_name})
+}
+if(companyData?.registered_office_address){
+   data.company_location= companyData?.registered_office_address?.address_line_1 
+  // setFormState({...formState,company_location:companyData?.registered_office_address?.address_line_1})
+}
+if(companyData.company_name || companyData?.registered_office_address ) {
+
+  setFormState({...data})
+}
+
+
+  },[companyData])
 
   const previewFile = (file) => URL.createObjectURL(file);
 
@@ -122,20 +146,171 @@ setFormState({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name,value,"value")
+if(name==='company_reg_number'){
+  phoneAPI(value)
+}
+if(name === "company_location"){
+  companyLocationApi(value)
+}
+if(name === "company_name"){
+  companyNameApi(value)
+}
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
+  const phoneAPI=(regNo)=>{
+    // const regNo = formState.company_reg_number;
+
+  // Only call API if exactly 8 characters
+  if (regNo && regNo.length === 8) {
+    dispatch(fetchCompanyDetails(regNo));
+  }
+  }
+
+  const companyLocationApi =(location) => {
+//  const location = formState?.company_location;
+
+  // Only proceed if exactly 10 characters
+  if (location) {
+    const handler = setTimeout(() => {
+      dispatch(checkAddressApi({ company_location: location })).then((result) => {
+        if (result.success) {
+          showToast("success", result?.message);
+        }
+      });
+    }, 1000); // 300ms debounce delay
+
+    // Cleanup to cancel previous timer if user types again
+    return () => {
+      clearTimeout(handler);
+    };
+  }
+  }
+
+  const companyNameApi = (name) => {
+ if (name) {
+    const handler = setTimeout(() => {
+      dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
+        if (result.success) {
+          showToast("success", result?.message);
+        }
+      });
+    }, 1000); // 300ms debounce delay
+
+    // Cleanup to cancel previous timer if user types again
+    return () => {
+      clearTimeout(handler);
+    };
+  }
+  }
+
+  // const validate = () => {
+  //   const temp = {};
+  //   // if (!formState.company_name) temp.company_name = "Please fill this Required";
+  //   if (!formState.name) temp.name = "Please fill this Required";
+  //   // if(!formState.company_email) temp.company_email = "Please fill this Required";
+  //   // if (
+  //   //   formState.company_email &&       /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formState.company_email)
+  //   // ) temp.company_email = "Invalid email";
+  //   setErrors(temp);
+  //   return Object.keys(temp).length === 0;
+  // };
 
   const validate = () => {
-    const temp = {};
-    if (!formState.company_name) temp.company_name = "Please fill this Required";
-    if (!formState.name) temp.name = "Please fill this Required";
-    if(!formState.company_email) temp.company_email = "Please fill this Required";
-    // if (
-    //   formState.company_email &&       /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formState.company_email)
-    // ) temp.company_email = "Invalid email";
-    setErrors(temp);
-    return Object.keys(temp).length === 0;
-  };
+  const temp = {};
+
+  // 1. Always required
+  if (!formState.name) {
+    temp.name = "Please fill this Required";
+  }
+
+  // 2. If company_reg_number is filled
+  if (formState.company_reg_number) {
+    // 2.a company_name required
+    if (!formState.company_name) {
+      temp.company_name = "Company name is required";
+    }
+
+    // 2.b company_location required
+    if (!formState.company_location) {
+      temp.company_location = "Company location is required";
+    }
+
+    // 2.c handle API validation errors (assuming they're in a variable)
+    // if (companyValidationError?.company_name) {
+    //   temp.company_name = companyValidationError.company_name;
+    // }
+
+    // if (companyValidationError?.company_location) {
+    //   temp.company_location = companyValidationError.company_location;
+    // }
+  }
+
+  setErrors(temp);
+  return Object.keys(temp).length === 0;
+};
+
+// useEffect(() => {
+//   const regNo = formState.company_reg_number;
+
+//   // Only call API if exactly 8 characters
+//   if (regNo && regNo.length === 8) {
+//     dispatch(fetchCompanyDetails(regNo));
+//   }
+ 
+// }, [formState.company_reg_number]);
+
+// useEffect(()=>{
+//  if(formState?.company_location){
+//     dispatch(checkAddressApi({company_location:formState?.company_location})).then((result) => {
+//       if(result.success){
+//         showToast("success",result?.message)
+//       }
+//     })
+//   }
+// },[formState?.company_location])
+// useEffect(() => {
+//   const location = formState?.company_location;
+
+//   // Only proceed if exactly 10 characters
+//   if (location) {
+//     const handler = setTimeout(() => {
+//       dispatch(checkAddressApi({ company_location: location })).then((result) => {
+//         if (result.success) {
+//           showToast("success", result?.message);
+//         }
+//       });
+//     }, 1000); // 300ms debounce delay
+
+//     // Cleanup to cancel previous timer if user types again
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }
+// }, [formState?.company_location]);
+// useEffect(() => {
+//   const name = formState?.company_name;
+
+//   // Only proceed if exactly 10 characters
+//   if (name) {
+//     const handler = setTimeout(() => {
+//       dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
+//         if (result.success) {
+//           showToast("success", result?.message);
+//         }
+//       });
+//     }, 1000); // 300ms debounce delay
+
+//     // Cleanup to cancel previous timer if user types again
+//     return () => {
+//       clearTimeout(handler);
+//     };
+//   }
+// }, [formState?.company_name]);
+
+
+
+
 
   const handleCaptureWebcam = async (target) => {
     try {
@@ -416,6 +591,8 @@ useEffect(() => {
             />
           </div>
         </div>
+         <div className={styles.formGroup}>
+        <div className={styles.halfInput}>
         <label className={styles.label}>Website</label>
         <input
           className={styles.input}
@@ -425,6 +602,19 @@ useEffect(() => {
           onChange={handleInputChange}
           placeholder="Enter website url"
         />
+        </div>
+        <div className={styles.halfInput}>
+        <label className={styles.label}>Company Reg. No</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="company_reg_number"
+          value={formState.company_reg_number}
+          onChange={handleInputChange}
+          placeholder="Enter Company Reg. No"
+        />
+        </div>
+        </div>
       </div>
 
       <div className={styles.infoCard}>
@@ -517,133 +707,7 @@ useEffect(() => {
         </a> */}
       </div>
 
-      {/* <div className={styles.card}>
-        <h3>Company Photos</h3>
-        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-          {formState.company_photosPreview.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`preview-${i}`}
-              width={80}
-              height={80}
-              style={{ objectFit: "cover", borderRadius: 6 }}
-            />
-          ))}
-        </div>
-        <button
-          className={styles.uploadBtn}
-          onClick={() => fileInputRefs.company_photos.current.click()}
-        >
-          Upload new photos
-        </button>
-        <input
-          type="file"
-          name="company_photos"
-          ref={fileInputRefs.company_photos}
-          style={{ display: "none" }}
-          onChange={handleFileChange}
-          multiple
-        />
-      </div> */}
-
-      {/* <div className={styles.card}>
-        <h3>Online Presence</h3>
-        <label className={styles.label}>YouTube Video Link</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="company_youtube_link"
-          value={formState.company_youtube_link}
-          onChange={handleInputChange}
-          placeholder="YouTube link"
-        />
-        <label className={styles.label}>Facebook Link</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="fb_link"
-          value={formState.fb_link}
-          onChange={handleInputChange}
-          placeholder="Facebook link"
-        />
-        <label className={styles.label}>Twitter Link</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="twitter_link"
-          value={formState.twitter_link}
-          onChange={handleInputChange}
-          placeholder="Twitter link"
-        />
-        <label className={styles.label}>Custom Link Description</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="link_desc"
-          value={formState.link_desc}
-          onChange={handleInputChange}
-          placeholder="Link description"
-        />
-      </div> */}
-
-      {/* <div className={styles.card}>
-        <h3>Accreditations & Services</h3>
-        <label className={styles.label}>Accreditation Name</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="accre_name"
-          value={formState.accre_name}
-          onChange={handleInputChange}
-          placeholder="e.g., ISO Certified"
-        />
-        <label className={styles.label}>Accreditation ID(s)</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="accreditation_id"
-          value={formState.accreditation_id}
-          onChange={handleInputChange}
-          placeholder="e.g., 1,2"
-        />
-        <label className={styles.label}>Service Title</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="service_title"
-          value={formState.service_title}
-          onChange={handleInputChange}
-          placeholder="Service title"
-        />
-        <label className={styles.label}>Service Description</label>
-        <textarea
-          className={styles.textarea}
-          rows={3}
-          name="service_desc"
-          value={formState.service_desc}
-          onChange={handleInputChange}
-          placeholder="Describe the service"
-        />
-        <label className={styles.label}>Service Delete ID(s)</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="service_delete_id"
-          value={formState.service_delete_id}
-          onChange={handleInputChange}
-          placeholder="e.g., 2,3"
-        />
-        <label className={styles.label}>Accreditation Delete ID(s)</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="accr_delete_id"
-          value={formState.accr_delete_id}
-          onChange={handleInputChange}
-          placeholder="e.g., 16"
-        />
-      </div> */}
+      
 
       
       <div className={styles.buttonRow}>

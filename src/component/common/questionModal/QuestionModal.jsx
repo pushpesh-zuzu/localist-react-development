@@ -332,3 +332,131 @@ dispatch(clearSetbuyerRequestData())
 };
 
 export default QuestionModal;
+
+{/* <div className={styles.card}>
+        <h3>Company Photos</h3>
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          {formState.company_photosPreview.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`preview-${i}`}
+              width={80}
+              height={80}
+              style={{ objectFit: "cover", borderRadius: 6 }}
+            />
+          ))}
+        </div>
+        <button
+          className={styles.uploadBtn}
+          onClick={() => fileInputRefs.company_photos.current.click()}
+        >
+          Upload new photos
+        </button>
+        <input
+          type="file"
+          name="company_photos"
+          ref={fileInputRefs.company_photos}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+          multiple
+        />
+      </div> */}
+
+      {/* <div className={styles.card}>
+        <h3>Online Presence</h3>
+        <label className={styles.label}>YouTube Video Link</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="company_youtube_link"
+          value={formState.company_youtube_link}
+          onChange={handleInputChange}
+          placeholder="YouTube link"
+        />
+        <label className={styles.label}>Facebook Link</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="fb_link"
+          value={formState.fb_link}
+          onChange={handleInputChange}
+          placeholder="Facebook link"
+        />
+        <label className={styles.label}>Twitter Link</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="twitter_link"
+          value={formState.twitter_link}
+          onChange={handleInputChange}
+          placeholder="Twitter link"
+        />
+        <label className={styles.label}>Custom Link Description</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="link_desc"
+          value={formState.link_desc}
+          onChange={handleInputChange}
+          placeholder="Link description"
+        />
+      </div> */}
+
+      {/* <div className={styles.card}>
+        <h3>Accreditations & Services</h3>
+        <label className={styles.label}>Accreditation Name</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="accre_name"
+          value={formState.accre_name}
+          onChange={handleInputChange}
+          placeholder="e.g., ISO Certified"
+        />
+        <label className={styles.label}>Accreditation ID(s)</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="accreditation_id"
+          value={formState.accreditation_id}
+          onChange={handleInputChange}
+          placeholder="e.g., 1,2"
+        />
+        <label className={styles.label}>Service Title</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="service_title"
+          value={formState.service_title}
+          onChange={handleInputChange}
+          placeholder="Service title"
+        />
+        <label className={styles.label}>Service Description</label>
+        <textarea
+          className={styles.textarea}
+          rows={3}
+          name="service_desc"
+          value={formState.service_desc}
+          onChange={handleInputChange}
+          placeholder="Describe the service"
+        />
+        <label className={styles.label}>Service Delete ID(s)</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="service_delete_id"
+          value={formState.service_delete_id}
+          onChange={handleInputChange}
+          placeholder="e.g., 2,3"
+        />
+        <label className={styles.label}>Accreditation Delete ID(s)</label>
+        <input
+          className={styles.input}
+          type="text"
+          name="accr_delete_id"
+          value={formState.accr_delete_id}
+          onChange={handleInputChange}
+          placeholder="e.g., 16"
+        />
+      </div> */}

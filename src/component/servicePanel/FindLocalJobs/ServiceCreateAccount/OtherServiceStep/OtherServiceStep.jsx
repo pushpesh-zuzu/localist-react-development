@@ -6,6 +6,7 @@ import {
   pendingLeadData,
   registerUserData,
   searchService,
+  setRegisterStep,
   setselectedServices,
   setService,
 } from "../../../../../store/FindJobs/findJobSlice";
@@ -220,7 +221,7 @@ dispatch(registerUserData(payload)).then((result) => {
         showToast("success", result?.message || "Register successful!");
         navigate("/leads");
         dispatch(setService());
-        dispatch(clearServiceFormData())
+         dispatch(setRegisterStep(0));
       }
     });
 }
