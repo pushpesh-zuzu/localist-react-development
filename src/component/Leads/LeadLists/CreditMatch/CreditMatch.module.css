@@ -284,6 +284,9 @@
 
 @media (max-width: 480px) {
   .buyCreditsContainer {
+    display: none;
+  }
+  .buyCreditsContainer {
     padding: 15px 12px;
     gap: 0px;
   }
@@ -305,6 +308,9 @@
   
   .autoTopUpLabel {
     font-size: 12px;
+  }
+  .creditsButton {
+    font-size: 14px;
   }
 
   .creditsAmount,
@@ -335,4 +341,10 @@ margin-top: 6px;
   padding-bottom: 0px;
   margin-top: 5px;
 }
+}
+@media screen and (max-width:380px) {
+  .creditsButton {
+    font-size: 14px;
+  }
+  
 }

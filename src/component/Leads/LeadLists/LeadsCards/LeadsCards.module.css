@@ -35,6 +35,7 @@
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   padding: 0 40px;
+  
   /* cursor: pointer; */
   /* padding: 0 73px 0 44px; */
 }
@@ -122,6 +123,10 @@
   vertical-align: middle;
   text-wrap: nowrap;
 }
+.saveBtnBoxs {
+  display: none;
+}
+
 .saveBtnBox img {
   margin-right: 4px;
 }
@@ -368,15 +373,31 @@
  .card {
     padding: 4px 16px;
   }
+  .saveBtnBox {
+  display: none;
+  
+}
+.badges {
+margin-top: 20px;
+}
+.saveBtnBoxs {
+  display: flex;
+  align-items: center;
+margin-bottom: 12px;
+  justify-content: center;
+}
 
   .details p {
     font-size: 12px;
   }
 
   .userInfo {
-    flex-direction: column;
+    /* flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 24px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .contactContainer {
@@ -417,9 +438,7 @@
     border-bottom: 1px solid #E0E0E0;
   
   }
-  .saveBtnBox {
-    margin-top: 20px;
-  }
+ 
   .jobInfo {
     margin-bottom: 20px;
   }

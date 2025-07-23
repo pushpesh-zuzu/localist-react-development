@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
+import { checkAddressApi, checkCompanyNameApi } from "../FindJobs/findJobSlice";
 
 const initialState = {
   companyData: {},
@@ -24,6 +25,14 @@ export const fetchCompanyDetails = (regNumber) => {
       ) {
 
         dispatch(setCompanyData(response.data));
+       
+          dispatch(
+                checkCompanyNameApi({
+                  company_name: response.data.company_name,
+                  company_reg_number: response.data.company_number,
+                },true)
+              )
+              dispatch(checkAddressApi({ company_location: response.data.registered_office_address.address_line_1 }))
         return true;
       } else {
 

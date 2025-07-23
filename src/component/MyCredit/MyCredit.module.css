@@ -231,7 +231,7 @@
     .cvvIcon {
       position: absolute;
       right: 27px;
-      top: 48.5%;
+      top: 46%;
       transform: translateY(-50%);
       height: 18px;
       pointer-events: none; 
@@ -259,7 +259,7 @@
     .cvvIcon {
       position: absolute;
       right: 27px;
-      top: 48.5%;
+      top: 44.2%;
       transform: translateY(-50%);
       height: 18px;
       pointer-events: none; 
@@ -286,7 +286,7 @@
     .cvvIcon {
       position: absolute;
       right: 27px;
-      top: 46.5%;
+      top: 43%;
       transform: translateY(-50%);
       height: 18px;
       pointer-events: none; 

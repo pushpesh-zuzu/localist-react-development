@@ -19,7 +19,7 @@
   padding: 24px;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  font-family: Arial, sans-serif;
+ 
 }
 
 .closeButton {
@@ -80,7 +80,7 @@
   background-color: #00aaff;
   color: white;
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: 0px;
   font-size: 12px;
   font-weight: bold;
 }
@@ -112,8 +112,82 @@
   align-items: center;
   font-size: 14px;
   gap: 6px;
+  color: #000000;
 }
+ .getHired {
+    display: flex;
+    gap: 0px;
+    align-items: center;
+    max-width: 670px;
+     margin-bottom: 36px;
+  }
+  .getHired img {
+    z-index: 10;
+  }
+  .gethiredText {
+    background-color: #E3F6FC;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    padding: 10px 34px;
+    margin-top: -1px;
+    margin-left: -2.8%;
 
+  }
+  .discountBadges {
+  background-color: #E3F6FC;
+  color: #00AFE3;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute;
+  top: -30px;
+  left:70px;
+}
+.creditbtn{
+border: 1px solid #d9d9d9;
+  padding: 8px;
+  border-radius: 0px;
+  width: fit-content;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.paraText {
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+ .visaCard {
+    background-color: #FFE4E4;
+    padding: 7px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+  .visaText {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+  }
+  /* .visaText img {
+    width: 22px;
+    height: 7px;
+  } */
+ .changeText {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary-color);
+ }
+ .perCreditText {
+  
+  color: #BEBEBE;
+}
 .footerNote {
   margin-top: 20px;
   text-align: center;
@@ -173,6 +247,21 @@
 .rotate {
   transform: rotate(180deg);
 }
+/* .getHired {
+  display: none;
+}
+.creditbtn img {
+  display: none;
+}
+.paraText{
+  display: none;
+}
+.discountBadges {
+  display: none;
+}
+.visaCard {
+  display: none;
+} */
 @media screen and (max-width:768px) {
    .modal {
     max-width: 720px;
@@ -180,23 +269,232 @@
 }
 }
 @media screen and (max-width:480px) {
+  .modalOverlay {
+     overflow-x: auto;
+    align-items: unset !important;
+  }
   .modal {
-    max-width: 290px;
+    max-width: 350px;
  margin: 0 10px;
+ height: fit-content;
 }
 .buttonGroup {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: center;
 }
 .buyButton {
   white-space: nowrap;
    padding: 5px 19px;
+   font-size: 20px;
 }
 .creditDetails {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   gap: 12px;
+}
+.creditbtn{
+border: 1px solid #d9d9d9;
+  padding: 8px;
+  border-radius: 0px;
+  width: fit-content;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.creditbtn img {
+ 
+  display: block;
+}
+.panel {
+  padding: 10px 14px;
+  background-color: #f2f9fc;
+  
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+}
+.paraText {
+  font-size: 10px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.discountBadges {
+  background-color: #E3F6FC;
+  color: #00AFE3;
+  padding: 4px 10px;
+display: block;
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute;
+  top: -30px;
+  left:67px;
+}
+ .getHired {
+    display: flex;
+    gap: 0px;
+    align-items: center;
+    max-width: 670px;
+    margin-bottom: 36px;
+  }
+  .getHired img {
+    z-index: 10;
+  }
+  .gethiredText {
+    background-color: #E3F6FC;
+    font-size: 10px;
+    font-weight: 400;
+    color: #000000;
+    padding: 8px 12px;
+    margin-top: -1px;
+    margin-left: -2.8%;
+
+  }
+  .footerNote {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color:#BEBEBE;
+}
+.checkboxLabel {
+    color: #000000;
+      font-size: 12px;
+      gap: 3px;
+  }
+  .visaCard {
+    background-color: #FFE4E4;
+    padding: 7px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+  .visaText {
+    font-size: 8px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+  }
+  .visaText img {
+    width: 22px;
+    height: 7px;
+  }
+ .changeText {
+  font-size: 8px;
+  font-weight: 600;
+  color: #00aaff;
+ }
+ .priceDetails p {
+  font-size: 12px;
+  font-weight: 600;
+}
+.perCreditText {
+  font-size: 9px;
+  font-weight: 600;
+  color: #BEBEBE;
+}
+}
+
+@media screen and (max-width:370px) {
+  .creditbtn img {
+ 
+    
+  display: block;
+}
+.priceDetails p {
+  font-size: 9px;
+  font-weight: 600;
+}
+.perCreditText {
+  font-size: 9px;
+  font-weight: 600;
+  color: #BEBEBE;
+}
+  .creditbtn{
+border: 1px solid #d9d9d9;
+  padding: 4px;
+  border-radius: 0px;
+  width: fit-content;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+  .discountBadges {
+  background-color: #E3F6FC;
+  color: #00AFE3;
+  padding: 4px 7px;
+display: block;
+  font-size: 10px;
+  font-weight: 500;
+  position: absolute;
+  top: -30px;
+  left:67px;
+}
+ .getHired {
+    display: flex;
+    gap: 0px;
+    align-items: center;
+    max-width: 670px;
+    margin-bottom: 12px;
+  }
+  .getHired img {
+    z-index: 10;
+    width: 80px;
+    height: 80px;
+  }
+  .gethiredText {
+    background-color: #E3F6FC;
+    font-size: 8px;
+    font-weight: 400;
+    color: #000000;
+    padding: 8px 12px;
+    margin-top: -1px;
+    margin-left: -2.8%;
+
+  }
+  .checkboxLabel {
+    color: #000000;
+    font-size: 12px;
+      gap: 3px;
+  }
+ 
+  .footerNote {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color:#BEBEBE;
+}
+.visaText {
+    font-size: 7px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+  }
+  .visaText img {
+    width: 20px;
+    height: 7px;
+  }
+ .changeText {
+  font-size: 8px;
+  font-weight: 600;
+  color: var(--primary-color);
+ }
+ .offerBadge,
+.discountBadge {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4px 9px;
+  border-radius: 0px;
+  font-size: 10px;
+  font-weight: bold;
 }
 }

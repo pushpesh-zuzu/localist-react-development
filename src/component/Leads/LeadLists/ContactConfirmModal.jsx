@@ -7,6 +7,9 @@ import { addBuyCreditApi, getInvoiceBillingListApi } from '../../../store/MyProf
 import { showToast } from '../../../utils';
 import arrowIcons from "../../../assets/Icons/arrow-down.svg"
 import AddCardModal from '../../MyCredit/MyPaymentDetails/AddCardModal';
+import localistImg from "../../../assets/Images/Leads/localistImg.svg";
+import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
+import visaImg from "../../../assets/Images/Setting/Visa.svg";
 const dummyCreditPlanList = [
   {
     description: 'Best Value!',
@@ -192,7 +195,7 @@ addManualBidData()
 <div className={styles.section}>
   <button className={styles.accordion} onClick={() => toggleAccordion(2)}>
     <div className={styles.accordionContent}>
-      <span>What is the 100% New Business Guarantee</span>
+      <span>What is the 100% New Business promise</span>
      <span className={`${styles.arrowIcon} ${activeIndex === 2 ? styles.rotate : ''}`}>
   <img src={arrowIcons} alt="arrow" width={16} height={16} />
 </span>
@@ -243,18 +246,31 @@ addManualBidData()
     <div key={index} className={styles.offerBox}>
       <div className={styles.offerHeader}>
         <span className={styles.discountBadge}>{item?.description}</span>
+        <span  className={styles.discountBadges}>Your Exclusive Sign Up Offer</span>
       </div>
 
       <div className={styles.creditDetails}>
         <div>
-          <p><strong>🔹 {item?.no_of_leads} credits</strong></p>
-          {/* <p>Enough for about 10 leads</p> */}
+          <p className={styles.creditbtn}><img src={localistImg} alt='image'/><strong>{item?.no_of_leads} credits</strong></p>
+          <p className={styles.paraText}>Enough for about 10 leads</p>
         </div>
-        <div>
+        <div className={styles.priceDetails}>
           <p><strong>${item?.price}</strong> (Excl. tax)</p>
-          <p>${item?.per_credit}/credit</p>
+          <p className={styles.perCreditText}>${item?.per_credit}/credit</p>
         </div>
       </div>
+       {item?.plan_type !== "normal" && <div className={styles.getHired}>
+                      <img src={getHired} alt="getHired" className={styles.getHiredImage} />
+                      {
+      
+      
+                        <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on localist using these credits.</div>
+                      }
+                    </div>}
+                    <div className={styles.visaCard}>
+                      <div className={styles.visaText}><img src={visaImg} alt='img' /> Buy more credits and get a bigger discount </div>
+                      <div className={styles.changeText}>Change</div>
+                    </div>
 
       <div className={styles.buttonGroup}>
         <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>

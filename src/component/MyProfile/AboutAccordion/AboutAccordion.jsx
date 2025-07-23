@@ -21,7 +21,7 @@ const AboutAccordion = ({details}) => {
   const dispatch = useDispatch();
   const { sellerLoader, updateSuccess, updateError ,loading, error, success } = useSelector((state) => state.myProfile);
    const { userToken } = useSelector((state) => state.auth); 
-     const { registerData } = useSelector(
+     const { registerData,errorCheckComanyName } = useSelector(
         (state) => state.findJobs
       );
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
@@ -186,6 +186,7 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     if (!debouncedCompanyName) return;
 
     const timeout = setTimeout(() => {
+
       dispatch(
         checkCompanyNameApi({
           company_name: debouncedCompanyName,
@@ -194,6 +195,7 @@ if(companyData.company_name || companyData?.registered_office_address ) {
       ).then((result) => {
         if (result?.success) {
           showToast("success", result.message);
+         
         }
       });
     }, 1000);
@@ -438,7 +440,7 @@ if(companyData.company_name || companyData?.registered_office_address ) {
 
   const CompanyNameFirstLetter = details?.company_name?.[0] || '';
 const ProfileNameFirstLetter = details?.name?.[0] || '';
-  console.log(CompanyNameFirstLetter,ProfileNameFirstLetter,"name")
+  console.log(errorCheckComanyName,"name")
   
  
   const handleSubmit = () => {
@@ -446,7 +448,10 @@ const ProfileNameFirstLetter = details?.name?.[0] || '';
       showToast("error", "Please fix validation errors");
       return;
     }
-
+if( errorCheckComanyName === false){
+  showToast("error", "Company name already exists");
+  return;
+}
     dispatch(updateSellerProfile(formState)).then((result)=> {
       if(result){
          const sellerData ={

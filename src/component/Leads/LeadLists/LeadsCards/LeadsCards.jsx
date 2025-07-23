@@ -532,6 +532,30 @@ const LeadsCards = ({ enoughCredit }) => {
                             </div>
                           </div>
                         </div>
+                        <div>
+                           <div className={styles.saveBtnBoxs}>
+                              <button
+                                className={styles.saveBtn}
+                                onClick={() => handleSaveLater(item)}
+                              >
+                                {saveLaterLoaderId === item.id ? (
+                                  <Spin
+                                    indicator={
+                                      <LoadingOutlined
+                                        spin
+                                        style={{ color: "white" }}
+                                      />
+                                    }
+                                  />
+                                ) : (
+                                  <>
+                                    <img src={saveImg} alt="image" />
+                                    Save For Later
+                                  </>
+                                )}
+                              </button>
+                            </div>
+                        </div>
                         <div className={styles.viewDetailsBtnWrapper}>
                           <button
                             className={styles.viewDetailsBtn}

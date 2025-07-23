@@ -19,6 +19,7 @@ const initialState = {
   allServiceList:[],
   pendingLead:[],
   errorMessage:[],
+  errorCheckComanyName:null,
   buyerRegisterFormData: {
 email:"",
 name:'',
@@ -209,7 +210,7 @@ export const checkEmailIdApi = (emailData) => {
     }
   };
 }
-export const checkCompanyNameApi = (companyData) => {
+export const checkCompanyNameApi = (companyData,isapi=false) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
@@ -217,27 +218,31 @@ export const checkCompanyNameApi = (companyData) => {
 
       if (response) {
         // dispatch(setService(response?.data?.data));
+        console.log(response?.data?.success,"response")
+        dispatch(setErrorCheckComanyName(response?.data?.success))
         return response.data
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-
-      if (errorData && typeof errorData === "object") {
-
+      dispatch(setErrorCheckComanyName(error?.response?.data?.success))
+      console.log(error?.response?.data?.success,"errorData")
+      if (errorData && typeof errorData === "object" && !isapi) {
+        
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
             
             messages.forEach((msg) => showToast("error", msg));
             if (companyData.company_reg_number) {
-               dispatch(fetchCompanyDetails(companyData.company_reg_number));
+              dispatch(fetchCompanyDetails(companyData.company_reg_number));
             }
           } else {
-             
+            
             showToast("error", messages);
           }
         });
       } else {
         showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        
         dispatch(setErrorMessage(error?.response?.data?.message))
       }
     } finally {
@@ -258,6 +263,7 @@ export const checkPhoneNumberApi = (phoneData) => {
       }
     } catch (error) {
    const errorData = error?.response?.data?.message;
+  
 
       if (errorData && typeof errorData === "object") {
 
@@ -341,6 +347,9 @@ const findJobSlice = createSlice({
     },
     setErrorMessage(state,action) {
       state.errorMessage = action.payload
+    },
+    setErrorCheckComanyName(state, action) {
+      state.errorCheckComanyName = action.payload;
     },
     setCategoriesListLoader(state, action) {
       state.categoriesListLoader = action.payload;
@@ -449,6 +458,7 @@ export const {
   setAuthToken,
   setCountry,
   setCity,setPostalCode,
+  setErrorCheckComanyName,
   clearAuthToken
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

@@ -159,6 +159,7 @@
 // };
 
 // export default MatchingLeads;
+
 import React, { useEffect, useState } from "react";
 import styles from "./MatchingLeads.module.css";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
@@ -174,6 +175,7 @@ import {
   getLocationLead,
 } from "../../../../store/LeadSetting/leadSettingSlice";
 import MatchingLeadsFilter from "./MatchingLeadsFilter";
+import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg"
 
 const MatchingLeads = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -298,9 +300,11 @@ dispatch(getleadPreferencesList(data))
   };
 
   return (
+      <>
     <div className={styles.container}>
       <div className={styles.textSection}>
-        <h2 className={styles.heading}>{data} matching leads</h2>
+      {/* <div> */}
+          <h2 className={styles.heading}>{data} matching leads</h2>
         <p className={styles.subText}>
           <span className={styles.subTextSpan}>
             <img src={SettingIcon} alt="" /> {preferenceList?.length}{" "}
@@ -311,6 +315,12 @@ dispatch(getleadPreferencesList(data))
           </span> */}
         </p>
       </div>
+       <div className={styles.btnDisplay}>
+        <button className={styles.editButtons} onClick={handleEdit}>
+            Edit <img src={EditIcon} alt="" />
+          </button>
+          </div>
+      {/* </div> */}
 
       <div className={styles.dualDropdownsContainer}>
         {/* First Dropdown - Newest */}
@@ -380,8 +390,86 @@ dispatch(getleadPreferencesList(data))
           </button>
         </div>
       </div>
+
+
+
+
+      
+
+
       {isFilterModalOpen && <MatchingLeadsFilter onClose={handleCloseModal} />}
     </div>
+  
+     <div className={styles.dualDropdownsContainers}>
+        {/* First Dropdown - Newest */}
+        <div className={styles.dropdownWrappers}>
+          <button
+            className={styles.dropdownTrigger}
+            onClick={() => setIsSortOpen(!isSortOpen)}
+            onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
+          >
+            <span className={styles.selectedOption}>{selectedSort}</span>
+            <span className={styles.dropdownIcon}>
+              {isSortOpen ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {isSortOpen && (
+            <ul className={styles.dropdownMenu}>
+              {sortOptions.map((option) => (
+                <li key={option} className={styles.dropdownItem}>
+                  <button
+                    onClick={() => handleSortChange(option)}
+                    className={styles.dropdownButton}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Second Dropdown - Credit Value */}
+        <div className={styles.dropdownWrapper}>
+          <button
+            className={styles.dropdownTrigger}
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
+          >
+            <span className={styles.selectedOption}>{selectedFilter}</span>
+            <span className={styles.dropdownIcon}>
+              {isFilterOpen ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {isFilterOpen && (
+            <ul className={styles.dropdownMenus}>
+              {filterOptions.map((option) => (
+                <li key={option} className={styles.dropdownItem}>
+                  <button
+                    onClick={() => handleFilterChange(option)}
+                    className={styles.dropdownButton}
+                  >
+                    {option}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className={styles.actionButton}>
+          <button className={styles.filterButtons} onClick={handleFilterClick}>
+            <img src={FilterBlackIcon} alt="" /> Filter
+          </button>
+          {/* <button className={styles.editButton} onClick={handleEdit}>
+            Edit <img src={EditIcon} alt="" />
+          </button> */}
+        </div>
+      </div>
+      
+    </>
   );
 };
 
