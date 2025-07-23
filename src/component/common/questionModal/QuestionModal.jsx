@@ -33,6 +33,7 @@ const QuestionModal = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
+  const [questionHistory, setQuestionHistory] = useState([lastQuestionIndex]);
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
@@ -133,14 +134,17 @@ const handleOptionChange = (e) => {
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
-    if (currentQuestion < totalQuestions - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      if(adminToken ||registerData?.remember_tokens ){
-        nextStep();
+     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
+    (a) => a.option === selectedOption[0]
+  );
 
-      }
-      else {
+  const nextQ = selectedObj?.next_question;
+  if (nextQ === "last") {
+    // If last question, trigger submit or move next
+    if (adminToken || registerData?.remember_tokens) {
+      nextStep();
+    } else {
+    
       
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
@@ -163,19 +167,45 @@ const handleOptionChange = (e) => {
         });
       }
     }
+     else if (nextQ && questionIndexMap[nextQ]) {
+      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+    setCurrentQuestion(questionIndexMap[nextQ]);
+  } else {
+    // Fallback if no next_question found
+    if (currentQuestion < totalQuestions - 1) {
+      setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      nextStep();
+    }
+  }
   };
   
 
+  // const handleBack = () => {
+  //   if (currentQuestion > 0) {
+  //     setCurrentQuestion(currentQuestion - 1);
+  //   } else {
+  //     if (buyerRequest?.questions?.length > 0) {
+  //       setCurrentQuestion(buyerRequest.questions.length - 1);
+  //     }
+  //     previousStep();
+  //   }
+  // };
+
   const handleBack = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
-    } else {
-      if (buyerRequest?.questions?.length > 0) {
-        setCurrentQuestion(buyerRequest.questions.length - 1);
-      }
-      previousStep();
-    }
-  };
+  if (questionHistory.length > 1) {
+    const newHistory = [...questionHistory];
+    newHistory.pop(); 
+    const prevIndex = newHistory[newHistory.length - 1]; 
+    setQuestionHistory(newHistory);
+    setCurrentQuestion(prevIndex);
+  } else {
+    
+    previousStep();
+  }
+};
+
 
   const handleCloseClick = () => {
     if(questionanswerData?.length === 0) {
@@ -199,6 +229,23 @@ dispatch(clearSetbuyerRequestData())
   setSelectedOption([]);
   setOtherText("");
 }, [currentQuestion]);
+
+const formattedQuestions = questions.map(q => ({
+  ...q,
+  parsedAnswers: Array.isArray(q.answer)
+    ? q.answer
+    : (() => {
+        try {
+          return JSON.parse(q.answer);
+        } catch (e) {
+          return [];
+        }
+      })(),
+}));
+const questionIndexMap = {};
+formattedQuestions.forEach((q, index) => {
+  questionIndexMap[q.question_no] = index;
+});
 
 
 
@@ -231,52 +278,35 @@ dispatch(clearSetbuyerRequestData())
               />
             </div>
 
-            <div className={styles.optionsContainer}>
-              {questions[currentQuestion]?.answer
-                ?.split(",")
-                .map((option, index) => (
-                  <label key={index} className={questions[currentQuestion]?.option_type === "single" ? styles.option : styles.options}>
-                    <input
-                      type={questions[currentQuestion]?.option_type === "single" ? "radio" : "checkbox"}
-                      name="surveyOption"
-                      value={option.trim()}
-                      // checked={selectedOption.includes(option.trim())}
-                      // onChange={handleOptionChange}
-                checked={
-  questions[currentQuestion]?.option_type === "single"
-    ? selectedOption.includes(option.trim())
-    : selectedOption.includes(option.trim())
-}
-          onChange={handleOptionChange}
-                    />
-                    <span>{option.trim()}</span>
-                  </label>
-                ))}
-                       {/* {selectedOption.includes("Something else (please describe)") && (
-              <input
-                type="text"
-                placeholder="Please Enter..."
-                className={styles.input}
-                value={otherText}
-                onChange={(e) => setOtherText(e.target.value)}
-              />
-            )} */}
-              {/* {selectedOption &&
-    (questions[currentQuestion]?.option_type === "single"
-      ? selectedOption === "Something else (please describe)"
-      : selectedOption.includes("Something else (please describe)")) && (
-      <input
-        type="text"
-        placeholder="Please Enter..."
-        className={styles.input}
-        value={otherText}
-        onChange={(e) => setOtherText(e.target.value)}
-      />
-    )} */}
 
-{questions[currentQuestion]?.answer
+
+            <div className={styles.optionsContainer}>
+  {formattedQuestions[currentQuestion]?.parsedAnswers.map((opt, index) => (
+    <label
+      key={index}
+      className={
+        formattedQuestions[currentQuestion]?.option_type === "single"
+          ? styles.option
+          : styles.options
+      }
+    >
+      <input
+        type={
+          formattedQuestions[currentQuestion]?.option_type === "single"
+            ? "radio"
+            : "checkbox"
+        }
+        name="surveyOption"
+        value={opt.option}
+        checked={selectedOption.includes(opt.option)}
+        onChange={handleOptionChange}
+      />
+      <span>{opt.option}</span>
+    </label>
+  ))}
+{formattedQuestions[currentQuestion]?.answer
   ?.includes("Something else (please describe)") &&
-  (questions[currentQuestion]?.option_type === "single"
+  (formattedQuestions[currentQuestion]?.option_type === "single"
     ? selectedOption.includes("Something else (please describe)")
     : selectedOption.includes("Something else (please describe)")) && (
     <input
@@ -287,9 +317,9 @@ dispatch(clearSetbuyerRequestData())
       onChange={(e) => setOtherText(e.target.value)}
     />
 )}
+  
+</div>
 
-
-            </div>
             {error && <p className={styles.errorMessage}>{error}</p>}
 
      
