@@ -183,8 +183,10 @@ const
           </div>
           <div className={styles.halfField}>
             <label className={styles.label}>CVC</label>
-            <img src={CVVImg} alt="CVV" className={styles.cvvIcon} />
+            <div className={styles.cvvInputWrapper}> 
             <CardCvcElement options={ELEMENT_OPTIONS} className={styles.cardInput} />
+            <img src={CVVImg} alt="CVV" className={styles.cvvIcon} />
+            </div>
           </div>
         </div>
         <div>

@@ -84,11 +84,16 @@
     margin-bottom: 1rem;
   }
  
+ .cvvInputWrapper{
+    position: relative;
+    width: 100%;
+  }
+  
  
   
   .cvvIcon {
     position: absolute;
-    right: 63px;
+    right: 10px;
     top: 47%;
     transform: translateY(-50%);
     height: 16px;
@@ -115,6 +120,7 @@
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 20px;
+    
   }
   
   .halfField {
@@ -230,7 +236,7 @@
     }
     .cvvIcon {
       position: absolute;
-      right: 27px;
+      right: 10px;
       top: 46%;
       transform: translateY(-50%);
       height: 18px;
@@ -258,8 +264,8 @@
     }
     .cvvIcon {
       position: absolute;
-      right: 27px;
-      top: 44.2%;
+      right: 10px;
+      top: 45.5%;
       transform: translateY(-50%);
       height: 18px;
       pointer-events: none; 
@@ -285,8 +291,8 @@
     }
     .cvvIcon {
       position: absolute;
-      right: 27px;
-      top: 43%;
+      right: 10px;
+      top: 45%;
       transform: translateY(-50%);
       height: 18px;
       pointer-events: none; 
