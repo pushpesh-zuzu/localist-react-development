@@ -29,11 +29,11 @@ const QuestionModal = ({
   const { userToken,adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
-  const [currentQuestion, setCurrentQuestion] = useState(lastQuestionIndex);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-  const [questionHistory, setQuestionHistory] = useState([lastQuestionIndex]);
+  const [questionHistory, setQuestionHistory] = useState([0]);
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
