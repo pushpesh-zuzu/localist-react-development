@@ -218,6 +218,7 @@ useEffect(() => {
 
                     {/* Middle Section - Job Details */}
                     <div className={styles.jobDetails}>
+                        <div className={styles.highlightText}>Highlight :</div>
                       <div className={styles.badges}>
                         {item?.is_phone_verified == 1 && (
                           <span className={styles.verified}>

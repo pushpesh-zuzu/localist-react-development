@@ -209,12 +209,14 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
       </div> */}
         <div>
       {/* Invisible spacer that acts as a scroll trigger */}
+      <div className={styles.creditMatchContainer}> 
       <div ref={triggerRef} style={{ height: '1px' }}></div>
 
       <div ref={stickyRef} className={styles.creditsLeftContainer}>
         <button className={styles.creditsButton}>
           You have {totalCredit?.total_credit ?? '0'} Credits Left
         </button>
+      </div>
       </div>
     </div>
    

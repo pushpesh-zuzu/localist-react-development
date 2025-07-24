@@ -210,7 +210,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px;
+    gap: 15px;
+  }
+  .badges {
+    display: none;
+  }
+  .highlightsTitle {
+    display: none;
   }
   .sperator {
     height: 1px;

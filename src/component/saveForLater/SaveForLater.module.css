@@ -400,11 +400,21 @@
   .details p {
     font-size: 12px;
   }
+  .highlightText {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  display: block;
+}
 
   .userInfo {
     /* flex-direction: column; */
+    /* align-items: center;
+    gap: 4px; */
+     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: space-between;
   }
 
   .contactContainer {
@@ -435,7 +445,10 @@
   
   }
   .badges {
-    margin-top: 20px;
+    margin-top: 0px;
+  }
+  .jobDetails {
+    gap: 20px;
   }
   .jobInfo {
     margin-bottom: 20px;
@@ -475,4 +488,10 @@
   margin-top: 8px;
 }
 
+}
+@media screen and (max-width:370px) {
+  .details h3 {
+    font-size: 12px;
+  }
+  
 }

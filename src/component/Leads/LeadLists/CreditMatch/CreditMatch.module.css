@@ -286,6 +286,9 @@
   .buyCreditsContainer {
     display: none;
   }
+  .creditMatchContainer {
+    display: none;
+  }
   .buyCreditsContainer {
     padding: 15px 12px;
     gap: 0px;

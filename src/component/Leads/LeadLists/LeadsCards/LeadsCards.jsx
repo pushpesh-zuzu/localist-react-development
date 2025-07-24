@@ -432,6 +432,7 @@ const LeadsCards = ({ enoughCredit }) => {
 
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
+                            <div className={styles.highlightText}>Highlight :</div>
                             <div className={styles.saveBtnBox}>
                               <button
                                 className={styles.saveBtn}
@@ -453,7 +454,9 @@ const LeadsCards = ({ enoughCredit }) => {
                                   </>
                                 )}
                               </button>
+                                
                             </div>
+                            
                             <div className={styles.badges}>
                               {item?.is_phone_verified == 1 && (
                                 <span className={styles.verified}>
@@ -528,7 +531,7 @@ const LeadsCards = ({ enoughCredit }) => {
                             <div className={styles.mainText}>
                               <div>ACT FAST</div>{" "}
                               <span>{item?.view_count} Professionals</span>{" "}
-                              <br /> have viewed this lead
+                             <span className={styles.desktopOnlyBreak}><br /></span> have viewed this lead
                             </div>
                           </div>
                         </div>

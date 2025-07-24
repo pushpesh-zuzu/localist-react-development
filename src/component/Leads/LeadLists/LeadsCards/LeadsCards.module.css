@@ -39,7 +39,9 @@
   /* cursor: pointer; */
   /* padding: 0 73px 0 44px; */
 }
-
+.highlightText {
+  display: none;
+}
 .leadActions {
   grid-area: actions;
   display: flex;
@@ -205,6 +207,9 @@
 .purchaseButton:hover {
   background-color: #4ECF00;
 }
+.desktopOnlyBreak {
+  display: inline;
+}
 
 .credits {
   display: block;
@@ -254,7 +259,7 @@
 .mainText div {
   color: #ff9933;
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 900;
   margin-top: -8px;
 }
 .mainText span {
@@ -372,25 +377,42 @@
   }
  .card {
     padding: 4px 16px;
+    margin: 17px auto;
   }
   .saveBtnBox {
   display: none;
   
 }
+.mainText {
+  font-weight: 700;
+  font-size: 14px;
+}
+.desktopOnlyBreak {
+    display: none;
+  }
 .badges {
-margin-top: 20px;
+margin-top: 0px;
 }
 .saveBtnBoxs {
   display: flex;
   align-items: center;
-margin-bottom: 12px;
+margin-bottom: 10px;
   justify-content: center;
 }
 
   .details p {
     font-size: 12px;
   }
-
+  .jobDetails {
+    gap: 20px;
+  }
+.highlightText {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  display: block;
+}
   .userInfo {
     /* flex-direction: column;
     align-items: flex-start;
@@ -450,6 +472,10 @@ margin-bottom: 12px;
   .viewDetailsBtnWrapper {
     margin-right: 0px;
   }
+  .credits {
+    font-size: 12px;
+    padding: 0px 7px;
+  }
 }
 
 .arrowIcon {
@@ -459,5 +485,14 @@ margin-bottom: 12px;
 
 .rotated {
   transform: rotate(180deg);
+}
+@media screen and (max-width:370px) {
+   .details h3 {
+    font-size: 12px;
+  }
+  .desktopOnlyBreak {
+    display: inline;
+  }
+  
 }
 

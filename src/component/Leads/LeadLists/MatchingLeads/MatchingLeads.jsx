@@ -160,7 +160,7 @@
 
 // export default MatchingLeads;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeads.module.css";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
 import LocationIcon from "../../../../assets/Images/Leads/WhiteLocationIcon.svg";
@@ -298,7 +298,34 @@ dispatch(getleadPreferencesList(data))
   const handleCloseModal = () => {
     setIsFilterModalOpen(false);
   };
+const triggerRef = useRef(null);
+  const stickyRef = useRef(null);
+    const {  totalCredit } = useSelector(
+      (state) => state.leadSetting
+    );
 
+ useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.boundingClientRect.top <= 0) {
+          stickyRef.current.classList.add(styles.fixedTop);
+        } else {
+          stickyRef.current.classList.remove(styles.fixedTop);
+        }
+      },
+      {
+        root: null,
+        threshold: 0,
+      }
+    );
+
+    const trigger = triggerRef.current;
+    if (trigger) observer.observe(trigger);
+
+    return () => {
+      if (trigger) observer.unobserve(trigger);
+    };
+  }, []);
   return (
       <>
     <div className={styles.container}>
@@ -463,12 +490,18 @@ dispatch(getleadPreferencesList(data))
           <button className={styles.filterButtons} onClick={handleFilterClick}>
             <img src={FilterBlackIcon} alt="" /> Filter
           </button>
-          {/* <button className={styles.editButton} onClick={handleEdit}>
-            Edit <img src={EditIcon} alt="" />
-          </button> */}
+          
         </div>
       </div>
+      <div className={styles.desktopBtn}>
+       <div ref={triggerRef} style={{ height: '1px' }}></div>
       
+            <div ref={stickyRef} className={styles.creditsLeftContainer}>
+              <button className={styles.creditsButton}>
+                You have {totalCredit?.total_credit ?? '0'} Credits Left
+              </button>
+            </div>
+            </div>
     </>
   );
 };

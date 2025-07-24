@@ -238,6 +238,12 @@
 .leadFooter {
   margin-top: 24px;
 }
+ .badges {
+    display: none;
+  }
+  .highlightsTitle {
+    display: none;
+  }
 
 }
 @media screen and (max-width:380px) {
