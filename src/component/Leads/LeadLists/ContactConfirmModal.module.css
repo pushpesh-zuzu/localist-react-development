@@ -57,11 +57,11 @@
    color: #000000;
 }
 .offerBox {
-  background-color: #f5faff;
+  background-color: #FFFFFF;
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 0px;
   margin-top: 20px;
-  border: 1px solid #cde6f7;
+  border: 1px solid #D9D9D9;
 }
 
 .offerHeader {
@@ -159,7 +159,7 @@ border: 1px solid #d9d9d9;
   margin-top: 10px;
   font-weight: 600;
 }
- .visaCard {
+ /* .visaCard {
     background-color: #FFE4E4;
     padding: 7px 10px;
     display: flex;
@@ -174,15 +174,50 @@ border: 1px solid #d9d9d9;
     align-items: center;
     gap: 8px;
     
-  }
+  } */
   /* .visaText img {
     width: 22px;
     height: 7px;
   } */
+   .visaCard {
+  background-color: #FFE4E4;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  border-radius: 4px;
+}
+
+.visaText {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.visaText img {
+  width: 40px;
+  height: auto;
+}
+
+.verticalLine {
+  height: 18px;
+  width: 2px;
+  background-color: #d9d9d9;
+  display: inline-block;
+}
+
+.message {
+  margin-left: 2px;
+}
  .changeText {
   font-size: 16px;
   font-weight: 600;
   color: var(--primary-color);
+  cursor: pointer;
  }
  .perCreditText {
   
@@ -331,10 +366,10 @@ border: 1px solid #d9d9d9;
   padding: 4px 10px;
 display: block;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   position: absolute;
   top: -30px;
-  left:67px;
+  left:65px;
 }
  .getHired {
     display: flex;
@@ -345,15 +380,17 @@ display: block;
   }
   .getHired img {
     z-index: 10;
+    width: 70px;
+    height: 70px;
   }
   .gethiredText {
     background-color: #E3F6FC;
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 400;
     color: #000000;
-    padding: 8px 12px;
+    padding: 3px 23px;
     margin-top: -1px;
-    margin-left: -2.8%;
+    margin-left: -5.8%;
 
   }
   .footerNote {
@@ -404,12 +441,16 @@ display: block;
 }
 .closeButton {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   background: transparent;
   border: none;
   font-size: 24px;
   cursor: pointer;
+}
+.mainBox h2 {
+  margin-top: 6px;
+  text-align: center;
 }
 }
 
@@ -418,6 +459,10 @@ display: block;
  
     
   display: block;
+}
+.mainBox h2 {
+  margin-top: 6px;
+  text-align: center;
 }
 .priceDetails p {
   font-size: 9px;
@@ -444,10 +489,10 @@ border: 1px solid #d9d9d9;
   padding: 4px 7px;
 display: block;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   position: absolute;
   top: -30px;
-  left:67px;
+  left:55px;
 }
  .getHired {
     display: flex;
@@ -458,17 +503,17 @@ display: block;
   }
   .getHired img {
     z-index: 10;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
   .gethiredText {
-    background-color: #E3F6FC;
-    font-size: 8px;
-    font-weight: 400;
-    color: #000000;
-    padding: 8px 12px;
-    margin-top: -1px;
-    margin-left: -2.8%;
+                  background-color: #E3F6FC;
+        font-size: 8px;
+        font-weight: 400;
+        color: #000000;
+        padding: 1px 6px 1px 26px;
+        margin-top: -1px;
+        margin-left: -10.8%;
 
   }
   .checkboxLabel {
@@ -519,8 +564,8 @@ display: block;
 }
 .closeButton {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 0px;
+  right: 5px;
   background: transparent;
   border: none;
   font-size: 24px;

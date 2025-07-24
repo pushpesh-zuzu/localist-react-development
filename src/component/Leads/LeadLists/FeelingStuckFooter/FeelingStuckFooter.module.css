@@ -42,6 +42,7 @@
     flex-direction: column;
     /* padding: 16px; */
     margin-top: 24px;
+    display:none;
   }
 
   .card,

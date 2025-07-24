@@ -267,10 +267,19 @@ addManualBidData()
                         <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on localist using these credits.</div>
                       }
                     </div>}
-                    <div className={styles.visaCard}>
+                    {/* <div className={styles.visaCard}>
                       <div className={styles.visaText}><img src={visaImg} alt='img' /> Buy more credits and get a bigger discount </div>
                       <div className={styles.changeText}>Change</div>
-                    </div>
+                    </div> */}
+
+                    <div className={styles.visaCard}>
+  <div className={styles.visaText}>
+    <img src={visaImg} alt="VISA" />
+    <span className={styles.verticalLine}></span>
+    <span className={styles.message}>Buy more credits and get a bigger discount</span>
+  </div>
+  <div className={styles.changeText}>Change</div>
+</div>
 
       <div className={styles.buttonGroup}>
         <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>

@@ -519,9 +519,12 @@ height: 13px;
     align-items: center;
     padding: 10px;
   }
-
+.selectedOption  {
+width:100%;
+overflow:hidden
+}
   .dropdownWrapper {
-    width: 45%; /* equal width to fit all in one line */
+    width: 50%; /* equal width to fit all in one line */
   }
   .dropdownWrappers {
 width:30%;
@@ -563,6 +566,7 @@ position: relative;
   .dropdownMenu,
   .dropdownMenus {
     width: 100% !important;
+    top:100%
   }
 }
 
@@ -570,14 +574,16 @@ position: relative;
 @media screen and (max-width: 410px) {
  
 .dropdownWrappers {
-width:100%
+width:35%;
+
   }
    .dropdownWrapper {
-    width: 100%; /* equal width to fit all in one line */
+    width: 50%; 
   }
-  .dropdownWrapper,
+  
   .actionButton {
-    width: 100%; /* take full width when wrapped */
+ 
+    width: 100%; 
   }
 
   .filterButtons {
@@ -586,6 +592,10 @@ width:100%
   .heading {
     font-size:20px;
   }
+  .selectedOption  {
+width:84%;
+overflow:hidden
+}
   
   .dropdownMenu {
   position: absolute;
@@ -629,14 +639,22 @@ width:100%
     font-size: 19px;
   }
   .dropdownWrappers {
-width:35%
+width:35%;
+
   }
    .dropdownWrapper {
-    width: 60%; /* equal width to fit all in one line */
+    width: 60%; 
+    
+   
   }
+   .selectedOption  {
+width:88%;
+overflow:hidden
+}
  
   .actionButton {
-    width: 100%; /* take full width when wrapped */
+    width: 100%; 
+    
   }
    .dualDropdownsContainers {
     flex-wrap: wrap; /* wrap below 410px */

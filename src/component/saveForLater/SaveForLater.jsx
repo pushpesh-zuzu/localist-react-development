@@ -77,6 +77,7 @@ const addManualBidData = (item) => {
     });
   };
 const handleContinue = (item) => {
+  
     if (!item) return;
     console.log(item?.credit_score, totalCredit?.total_credit, "item");
     setSelectedItem(item);
@@ -279,12 +280,17 @@ useEffect(() => {
                       <span className={styles.credits}>
                         {item?.credit_score} Credits
                       </span>
-                      <div className={styles.mainText}>
+                      {/* <div className={styles.mainText}>
                         {" "}
                         <p>ACT FAST</p>{" "}
                         <span> {item?.view_count} Professionals</span>{" "}
                         <br /> have viewed this lead
-                      </div>
+                      </div> */}
+                       <div className={styles.mainText}>
+                                                    <div>ACT FAST</div>{" "}
+                                                    <span>{item?.view_count} Professionals</span>{" "}
+                                                   <span className={styles.desktopOnlyBreak}><br /></span> have viewed this lead
+                                                  </div>
                     </div>
                   </div>
                   <div className={styles.viewDetailsBtnWrapper}>

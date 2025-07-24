@@ -51,31 +51,31 @@ const LeadsCards = ({ enoughCredit }) => {
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
 
-  // useEffect(() => {
-  //   const leadRequestData = {
-  //     user_id: userToken?.remember_tokens
-  //       ? userToken?.remember_tokens
-  //       : registerData?.remember_tokens,
-  //   };
-  //   dispatch(getLeadRequestList(leadRequestData));
-  // }, []);
   useEffect(() => {
-  const leadRequestData = {
-    user_id: userToken?.remember_tokens
-      ? userToken?.remember_tokens
-      : registerData?.remember_tokens,
-  };
-
-  // Initial call
-  dispatch(getLeadRequestList(leadRequestData));
-
-  // Set up interval
-  const intervalId = setInterval(() => {
+    const leadRequestData = {
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+    };
     dispatch(getLeadRequestList(leadRequestData));
-  }, 60000);
+  }, []);
+  // useEffect(() => {
+  // const leadRequestData = {
+  //   user_id: userToken?.remember_tokens
+  //     ? userToken?.remember_tokens
+  //     : registerData?.remember_tokens,
+  // };
 
-  return () => clearInterval(intervalId);
-}, []);
+  // // Initial call
+  // dispatch(getLeadRequestList(leadRequestData));
+
+  // // Set up interval
+  // const intervalId = setInterval(() => {
+  //   dispatch(getLeadRequestList(leadRequestData));
+  // }, 60000);
+
+//   return () => clearInterval(intervalId);
+// }, []);
 
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);

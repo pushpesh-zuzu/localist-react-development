@@ -247,14 +247,16 @@ color: #000000;
   }
 
   .footer {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 10px;
     padding: 12px 16px;
   }
 
   .cancelBtn,
   .applyBtn {
-    width: 100%;
+    width: 84px;
+    padding: 8px 10px;
+    font-size: 14px;
   }
 
   .header h3 {
