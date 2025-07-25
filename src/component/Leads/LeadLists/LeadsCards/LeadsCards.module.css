@@ -379,7 +379,7 @@
   }
  .card {
     padding: 4px 16px;
-    margin: 15px auto;
+    margin: 18px auto;
   }
   .saveBtnBox {
   display: none;
@@ -390,7 +390,8 @@
   font-size: 14px;
 }
 .mainText div {
-  margin-bottom: 4px;
+  margin-bottom: 0px;
+  margin-top: 8px;
 }
 .desktopOnlyBreak {
     display: none;
@@ -473,7 +474,7 @@ margin-bottom: 10px;
     margin-top: 0px;
     display: flex;
     align-items: center;
-    gap:17px
+    gap:10px
   }
   .viewDetailsBtnWrapper {
     margin-right: 0px;

@@ -529,7 +529,7 @@ const LeadsCards = ({ enoughCredit }) => {
                       1st to Responded
                     </p> */}
                             <div className={styles.mainText}>
-                              <div>ACT FAST</div>{" "}
+                              <div>ACT FAST</div>
                               <span>{item?.view_count} Professionals</span>{" "}
                              <span className={styles.desktopOnlyBreak}><br /></span> have viewed this lead
                             </div>
