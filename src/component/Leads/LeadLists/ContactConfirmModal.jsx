@@ -10,6 +10,7 @@ import AddCardModal from '../../MyCredit/MyPaymentDetails/AddCardModal';
 import localistImg from "../../../assets/Images/Leads/localistImg.svg";
 import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import visaImg from "../../../assets/Images/Setting/Visa.svg";
+import useWindowHeight from '../../../utils/customHeigth';
 const dummyCreditPlanList = [
   {
     description: 'Best Value!',
@@ -40,6 +41,7 @@ const { creditPlanList,totalCredit } =useSelector((state)=> state.leadSetting)
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+  const customHeigth = useWindowHeight()
   const totalRemaingCredit = creditPlanList[0]?.no_of_leads
   const creditItems = creditPlanList && creditPlanList.length > 0 ? creditPlanList : dummyCreditPlanList;
   console.log(creditItems,"creditItems")
@@ -141,8 +143,8 @@ addManualBidData()
   return (
     <>
     {creditModal ? <AddCardModal onClose={() => setCreditModal(false)} detail={creditItems} topup={isChecked} closeModal={() => onClose()} details={details} newLeadApi={newLeadApi}/> :
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
+    <div className={styles.modalOverlay} >
+      <div className={styles.modal} style={{ height: customHeigth <= 800 ? customHeigth : '800px'}} >
         <button className={styles.closeButton} onClick={()=>onClose()}>×</button>
         <div className={styles.mainBox}>
         {/* <h2>{enoughCredit != 0 ? `You need ${totalCredit - details?.credit_score} credits to contact ${details?.customer?.name}` : "Please purchase a Credit Pack"}</h2> */}

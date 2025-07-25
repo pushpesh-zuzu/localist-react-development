@@ -132,6 +132,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import StripeProvider from "./StripeProvider";
 import CardPaymentForm from "./CardForm";
+import useWindowHeight from "../../../utils/customHeigth";
 
 const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi }) => {
     const [formData, setFormData] = useState({
@@ -198,10 +199,11 @@ const handleSubmit = async(e) => {
     const getPaymentId = async(Id) => {
 console.log(Id,"Id")
     }
+    // const customHeigth = useWindowHeight()
 
     return (
         <div className={styles.modalOverlay}>
-            <div className={styles.modalContent}>
+            <div className={styles.modalContent} >
                 <button className={styles.closeButton} onClick={onClose}>×</button>
                 {/* <h2 className={styles.heading}>Add card details</h2> */}
 

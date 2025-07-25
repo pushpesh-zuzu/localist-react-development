@@ -9,7 +9,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  
 }
 
 .modal {
@@ -21,6 +22,9 @@
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
  
+}
+.modal::-webkit-scrollbar {
+  display: none;
 }
 
 .closeButton {
@@ -587,4 +591,18 @@ display: block;
   font-size: 24px;
   cursor: pointer;
 }
+}
+
+
+
+@media (max-height: 800px) {
+ .modalOverlay{
+  align-items: unset !important;
+  height: fit-content;
+  /* overflow-y: auto; */
+  
+ }
+ .modal {
+  overflow-y: auto;
+ }
 }
