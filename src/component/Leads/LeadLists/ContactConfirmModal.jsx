@@ -264,7 +264,7 @@ addManualBidData()
                       {
       
       
-                        <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on localist using these credits.</div>
+                        <div className={styles.gethiredText}>Get new local business enquiries - fast. Guaranteed with our New Business Promise..</div>
                       }
                     </div>}
                     {/* <div className={styles.visaCard}>

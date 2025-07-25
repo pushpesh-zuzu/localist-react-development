@@ -125,6 +125,7 @@
   font-size: 14px;
   text-wrap: nowrap;
   margin-top: 1px;
+  width: 100%;
 }
 
 .dropdownIcon {
@@ -521,7 +522,8 @@ height: 13px;
   }
 .selectedOption  {
 width:100%;
-overflow:hidden
+overflow:hidden;
+font-size: 12px;
 }
   .dropdownWrapper {
     width: 50%; /* equal width to fit all in one line */
@@ -594,7 +596,8 @@ width:35%;
   }
   .selectedOption  {
 width:84%;
-overflow:hidden
+overflow:hidden;
+font-size: 11px;
 }
   
   .dropdownMenu {
@@ -649,7 +652,8 @@ width:35%;
   }
    .selectedOption  {
 width:88%;
-overflow:hidden
+overflow:hidden;
+font-size: 11px;
 }
  
   .actionButton {

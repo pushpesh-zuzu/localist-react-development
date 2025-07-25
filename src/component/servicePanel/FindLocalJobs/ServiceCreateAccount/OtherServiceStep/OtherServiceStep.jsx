@@ -15,6 +15,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
+import { clearCompanyData } from "../../../../../store/Company/companyLookup";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
   const [Input, setInput] = useState("");
@@ -222,6 +223,7 @@ dispatch(registerUserData(payload)).then((result) => {
         navigate("/leads");
         dispatch(setService());
          dispatch(setRegisterStep(0));
+         dispatch(clearCompanyData())
       }
     });
 }

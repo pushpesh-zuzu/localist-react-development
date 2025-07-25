@@ -10,8 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { createRequestData } from "../../../store/Buyer/BuyerSlice";
+import { clearSetbuyerRequestData, createRequestData } from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData, showToast } from "../../../utils";
+import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 // import { showToast } from "../../../../../utils";
 
 const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal,confirmClose,onConfirm}) => {
@@ -109,6 +110,8 @@ if (!userToken) {
         localStorage.removeItem("registerTokens");
         localStorage.removeItem("createRequestToken");
         clearAuthData()
+          // dispatch(clearSetbuyerRequestData())
+          //        dispatch(clearBuyerRegisterFormData())
 
             onConfirm()
           }
