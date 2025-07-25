@@ -22,6 +22,7 @@ const WhatServiceYouNeed = ({
   pincodes,
   setShowConfirmModal,
   postalCodeIsValidate,
+  resetServiceTrigger
 }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
@@ -226,7 +227,17 @@ const WhatServiceYouNeed = ({
   //     }
   //   });
   // };
-
+  useEffect(() => {
+    if (resetServiceTrigger) {
+      // Clear form values
+      setSelectedService("");
+      setPincode("");
+      setCity("");
+      setIsDropdownOpen("");
+      setErrors(null);
+      setResetServiceFormTrigger(false);
+    }
+  }, [resetServiceTrigger]);
   const handlePincodeChange = (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);

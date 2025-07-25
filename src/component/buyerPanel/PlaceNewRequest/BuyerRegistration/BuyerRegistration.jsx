@@ -250,7 +250,7 @@
 
 // export default BuyerRegistration;
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
@@ -274,6 +274,12 @@ const BuyerRegistration = ({
   postalCodeValidate,
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const questionModalRef = useRef();
+
+   
+  const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
+  const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
+  const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
   const dispatch = useDispatch();
@@ -331,9 +337,18 @@ const BuyerRegistration = ({
     closeModal();
   };
 
+   useEffect(() => {
+      if (buyerStep === 2) {
+        // Reset QuestionModal when it opens
+        questionModalRef.current?.resetQuestions?.();
+      }
+    }, [buyerStep]);
   const confirmClose = () => {
     setShowConfirmModal(false);
     setShouldClose(true);
+    setResetEmailFormTrigger(true);
+    setResetServiceFormTrigger(true);
+    setResetQasFormTrigger(true);
     closeModal();
   };
 
@@ -348,6 +363,7 @@ const BuyerRegistration = ({
             formData={buyerRequest}
             setEmails={setEmails}
             setShowConfirmModal={setShowConfirmModal}
+            resetTrigger={resetEmailFormTrigger}
           />
         )}
         {buyerStep === 2 && (
@@ -360,11 +376,13 @@ const BuyerRegistration = ({
             pincodes={postcode}
             setShowConfirmModal={setShowConfirmModal}
             postalCodeIsValidate={postalCodeValidate}
+            resetServiceTrigger={resetServiceFormTrigger}
           />
         )}
 
         {buyerStep === 3 && (
           <QuestionModal
+            ref={questionModalRef}
             questions={questionanswerData}
             nextStep={nextStep}
             previousStep={previousStep}
@@ -372,6 +390,8 @@ const BuyerRegistration = ({
             loading={questionLoader}
             setShowConfirmModal={setShowConfirmModal}
             formData={buyerRequest}
+            resetQaTrigger={resetQaFormTrigger}
+            setResetQasFormTrigger={setResetQasFormTrigger}
           />
         )}
 

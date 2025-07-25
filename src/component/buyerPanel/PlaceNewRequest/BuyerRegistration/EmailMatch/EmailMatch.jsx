@@ -16,6 +16,7 @@ const EmailMatch = ({
   previousStep,
   setEmails,
   setShowConfirmModal,
+  resetTrigger
 }) => {
   const dispatch = useDispatch();
   // const { buyerRequest, registerLoader } = useSelector((state) => state.buyer);
@@ -94,6 +95,17 @@ const EmailMatch = ({
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
+
+  useEffect(() => {
+  if (resetTrigger) {
+    // Clear form values
+    setName("");
+    setPhone("");
+    setEmail("");
+    setErrors(null);
+    setResetEmailFormTrigger(false);
+  }
+}, [resetTrigger]);
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens) {
       console.log(name, email, phone, "p");
