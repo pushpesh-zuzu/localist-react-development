@@ -44,6 +44,7 @@
 .subText {
   margin-bottom: 30px;
  text-align: center;
+ margin-top: 20px;
  
 }
 .subText h2 {
@@ -105,7 +106,8 @@
 .buttonGroup {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap:34px
 }
 
 .buyButton {
@@ -173,7 +175,7 @@ border: 1px solid #000000;
   gap: 4px;
 }
 .paraText {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 10px;
   font-weight: 600;
 }
@@ -379,16 +381,25 @@ border: 1px solid #000000;
   margin-top: 10px;
   font-weight: 600;
 }
+.offerBadge,
+.discountBadge {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4px 9px;
+  border-radius: 0px;
+  font-size: 10px;
+  font-weight: bold;
+}
 .discountBadges {
   background-color: #E3F6FC;
   color: #00AFE3;
   padding: 4px 10px;
 display: block;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   position: absolute;
   top: -30px;
-  left:65px;
+  left:56px;
 }
  .getHired {
     display: flex;
@@ -518,7 +529,7 @@ display: block;
   font-weight: 600;
   position: absolute;
   top: -30px;
-  left:55px;
+  left:56px;
 }
  .getHired {
     display: flex;

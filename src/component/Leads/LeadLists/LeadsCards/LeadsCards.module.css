@@ -385,6 +385,10 @@
   display: none;
   
 }
+  .category {
+    text-wrap:wrap;
+    text-align:center
+  }
 .mainText {
   font-weight: 500;
   font-size: 14px;
