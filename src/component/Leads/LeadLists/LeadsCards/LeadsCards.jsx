@@ -432,7 +432,7 @@ const LeadsCards = ({ enoughCredit }) => {
 
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
-                            <div className={styles.highlightText}>Highlight :</div>
+                            <div className={styles.highlightText}>Highlights :</div>
                             <div className={styles.saveBtnBox}>
                               <button
                                 className={styles.saveBtn}
