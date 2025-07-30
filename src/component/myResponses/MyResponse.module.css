@@ -325,7 +325,7 @@
   font-weight: 500;
   font-size: 21px;
   vertical-align: middle;
-  cursor: pointer;
+ 
   display: flex;
   padding: 6px 16px;
   gap: 8px;
@@ -338,6 +338,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
+    cursor: pointer;
   }
 .responseStatus img {
   margin-right: 5px;
@@ -669,7 +670,7 @@ padding-bottom: 20px;
   font-weight: 500;
   font-size: 16px;
   vertical-align: middle;
-  cursor: pointer;
+  
   display: flex;
   padding: 6px 6px;
   gap: 8px;
