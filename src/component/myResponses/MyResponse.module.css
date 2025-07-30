@@ -162,7 +162,7 @@
   font-weight: 600;
   font-size: 20px;
   vertical-align: middle;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .details p {
@@ -186,7 +186,7 @@
   font-weight: 400;
   font-size: 16px;
   vertical-align: middle;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .contactItem a {
   list-style: none;
@@ -195,7 +195,7 @@
   font-weight: 400;
   font-size: 16px;
   vertical-align: middle;
-  cursor: pointer;
+  /* cursor: pointer; */
 
 }
 .customSelect {
