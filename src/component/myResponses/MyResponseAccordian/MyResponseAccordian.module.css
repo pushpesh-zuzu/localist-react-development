@@ -134,7 +134,9 @@
   position: relative;
   /* Ensure there's enough height */
 }
-
+.mobileresponseheadbox {
+  display: none;
+}
 .iconWrapper {
   position: relative;
   display: flex;
@@ -605,17 +607,83 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+    display: none;
   }
   .headerBox {
     padding: 16px 8px;
   }
-
-  .container {
+.mobileresponseheadbox {
+    display: flex;
+    /* flex-direction: column; */
+    margin-bottom: 16px; 
+    align-items: center;
     gap: 16px;
+    
   }
+  .lastActivityTexts {
+    /* text-align: center; */
+    /* margin-bottom: 16px; */
+     color: #000000;
+     font-weight: 600;
+     font-size: 12px;
+  }
+  .selectBox {
+    width: 130px;
+    font-weight: 600;
+    color: #000000;
+  }
+  .serviceText {
+  margin-bottom: 16px;
+}
+  .dropdownMoblieBox {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .mobileresponseheadbox h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+  }
+  .mobileresponseheadbox img {
+    width: 24px;
+    height: 24px;
+}
+  .container {
+    gap: 0px;
+  }
+ .title {
+  font-size: 12px;
+  margin-top: 0px;
+ }
+ .date {
+  margin-bottom: 0px;
+ }
+ .tabContent{
+  padding-top: 0px;
+ }
+ .customSelects {
+   appearance: none;           
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* background-image: url('../../../assets/Icons/arrow-down.svg');
+  background-repeat: no-repeat; */
+  background-position: right 5px center; 
+  padding-right: 40px;
+  background-size: 18px 18px;
+  ;
+ }
 
   .verticalLine {
-    display: none;
+    /* display: none; */
+    position: absolute;
+  top: 0px;
+  width: 2px;
+  height: calc(100% - -42px); /* Or try height: 100% if needed */
+  background-color: #d9d9d9;
+  left: 45%;
+  transform: translateX(-50%);
+  z-index: 0;
   }
 
   .containers {
@@ -624,6 +692,7 @@
   .time {
   color: #000000;
   font-weight: 400;
+  font-size: 12px;
 }
 
   .tabButton {
@@ -632,14 +701,20 @@
   }
 
   .card {
-    padding: 16px 22px;
+    padding: 14px 16px;
+    border-radius: 0px;
+  }
+  .iconWrapper {
+    margin-left: 18px;
+    align-items: start;
+    justify-content: start;
   }
 
   .iconWrapper img {
     width: 32px;
     height: 32px;
     position: absolute;
-    left: 22px;
+    left: -4px;
   }
 
   .UpdateBtn,
@@ -666,9 +741,10 @@
   .lastActivityText {
     display: flex;
     align-items: center;
-    /* flex-direction: column;
-    align-items: start; */
-    gap: 8px;
+    flex-direction: column;
+    align-items: start;
+    gap: 2px;
+    font-size: 10px;
   }
   .lastActivityText span {
     margin-left: 0px;
@@ -686,12 +762,29 @@
 .phoneNumberText {
   margin-bottom: 16px;
 }
-
-.currentStatusText {
+.phoneNumberTexts {
+  text-decoration: none;
+  list-style: none;
   font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  color: #000000;
+}
+.currentStatusText {
+  font-size: 10px;
+  color: #C0C0C0;
+}
+
+/* .currentStatusText {
+  font-size: 10px;
   margin-right: 10px;
   margin-bottom: -12px;
-}
+} */
+
 .hrline {
   margin-left: 0px;
   color: "#e9e9e9";
@@ -708,4 +801,82 @@
 .notesContent {
   padding: 0rem;
 }
+.btnBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  flex-direction: row;
+}
+.buttonSms {
+  background-color: var(--primary-color);
+  padding: 4px 26px;
+  border-radius: 3px;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+  width: 150px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.locationTag {
+  margin-top: 24px;
+}
+}
+@media screen and (max-width:380px) {
+  .mobileresponseheadbox {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    gap: 0px;
+    
+  }
+  .selectBox {
+    width: 150px;
+  }
+  .btnBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  flex-direction: row;
+}
+.buttonSms {
+  background-color: var(--primary-color);
+  padding: 4px 26px;
+  border-radius: 3px;
+  color: #ffffff;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+  width: 125px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+}
+@media  screen and (max-width: 320px) {
+  .lastActivityText span {
+    width: 100px;
+    font-size: 10px;
+  }
+  .lastActivityTexts {
+    color: #000000;
+    font-weight: 600;
+  }
+   .selectBox {
+    height: 33px;
+    padding: 4px 8px;
+    width: 137px;
+    color: #000000;
+    font-size: 12px;
+  }
 }

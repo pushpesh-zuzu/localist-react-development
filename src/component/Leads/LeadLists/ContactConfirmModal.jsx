@@ -266,7 +266,7 @@ addManualBidData()
                       {
       
       
-                        <div className={styles.gethiredText}>Get new local business enquiries - fast. Guaranteed with our New Business Promise..</div>
+                        <div className={styles.gethiredText}>Get new local business enquiries - fast. Guaranteed with our New Business Promise.</div>
                       }
                     </div>}
                     {/* <div className={styles.visaCard}>

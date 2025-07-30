@@ -193,7 +193,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
       sellerNote.note_id = editNoteId
     }
 
-       if (id) {
+    if (id) {
       sellerNote.delete_note_id = id
     }
 
@@ -217,20 +217,20 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const handleRemove = (id) => {
     handleSubmit(id)
     return
-  // implement your delete logic here, example:
-  dispatch(deleteNoteApi({ note_id: id })).then((res) => {
-    if (res.success) {
-      showToast("success", result?.message);
-      const sellerData = {
+    // implement your delete logic here, example:
+    dispatch(deleteNoteApi({ note_id: id })).then((res) => {
+      if (res.success) {
+        showToast("success", result?.message);
+        const sellerData = {
           lead_id: profileLeadViewData.leads.id,
           user_id: userToken?.remember_tokens || registerData?.remember_tokens,
           buyer_id: profileLeadViewData.id,
         };
 
         dispatch(getSellerNotesApi(sellerData));
-    }
-  });
-};
+      }
+    });
+  };
 
   useEffect(() => {
     if (
@@ -325,6 +325,50 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             </div>
 
           </div>
+      
+<div className={styles.mobileresponseheadbox}>
+   <div className={styles.lastActivityTexts}>
+              Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
+            </div>
+            <div className={styles.dropdownMoblieBox}>
+               <div className={styles.dropdownMainBox}>
+                 {/* // <div className={styles.lastActivityText}>
+                //   Purchase Type {" "}
+                //   <span>{profileLeadViewData?.leads?.purchase_type}</span>
+                // </div> */}
+              {profileLeadViewData?.leads?.purchase_type && (
+                <>
+               
+              <span className={styles.currentStatusText}>Purchase Type</span>
+    <select
+      className={`${styles.selectBox} ${styles.customSelects}`}
+      value={profileLeadViewData?.leads?.purchase_type}
+      disabled // disable to make it readonly
+    >
+      <option value={profileLeadViewData?.leads?.purchase_type}>
+        {profileLeadViewData?.leads?.purchase_type}
+      </option>
+    </select>
+              </>
+              )}
+            </div>
+             <div className={styles.currentStatusBox}>
+              <span className={styles.currentStatusText}>Current Status</span>
+              <select
+                className={`${styles.selectBox} ${styles.customSelect}`}
+
+                value={profileLeadViewData?.leads?.status || status}
+                onChange={handleStatusChange}
+                disabled={profileLeadViewData?.leads?.status === "hired"}
+              >
+                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
+                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
+                {/* <option value="rejected">Rejected</option> */}
+              </select>
+            </div>
+            </div>
+</div>
+
           <div className={styles.containers}>
             <div className={styles.ProfileImgBox}>
               <img src={ProfileImg} alt="Profile" />{" "}
@@ -361,7 +405,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 }}
               >
                 {" "}
-                <img src={Mailbtn} alt="mail" /> Send Email
+                <img src={Mailbtn} alt="mail" />  Email
               </button>
               <button
                 className={styles.buttonSms}
@@ -370,7 +414,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   window.location.href = `mailto:${user.email}`;
                 }}
               >
-                <img src={smsBtn} alt="sms" /> Send SMS
+                <img src={smsBtn} alt="sms" />  SMS
               </button>
               <button
                 className={styles.buttonSms}
@@ -379,7 +423,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   window.location.href = `tel:${user.phoneNumber}`;
                 }}
               >
-                <img src={phoneBtn} alt="phone" /> Phone Number
+                <img src={phoneBtn} alt="phone" /> Call
               </button>
               <button
                 className={styles.buttonSms}
@@ -388,7 +432,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
                 }}
               >
-                <img src={whatsappBtn} alt="whatsapp" /> Send WhatsApp
+                <img src={whatsappBtn} alt="whatsapp" />  WhatsApp
               </button>
             </div>
             {profileLeadViewData?.leads?.is_urgent == 1 && (
@@ -593,7 +637,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   //       getSellerNotes?.notes?.map((item, index) => {
                   //         return (
                   //           <>
-                           
+
                   //             <div
                   //               key={item?.id}
                   //               className={styles.notesCard}
@@ -644,48 +688,48 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   //   </div>
                   // </div>
                   <div className={styles.notesContent}>
-  <div className={styles.mainNotesBox}>
-    {getSellerNotes?.notes?.map((item, index) => (
-      <div key={item?.id} className={styles.noteItem}>
-        <div className={styles.noteText}>{item.notes}</div>
-        <div className={styles.noteActions}>
-          <span
-            onClick={() => {
-              setNote(item?.notes);
-              setEditNoteId(item?.id);
-            }}
-          >
-            Edit
-          </span>
-          |
-          <span onClick={() => handleRemove(item?.id)}>Remove</span>
-        </div>
-      </div>
-    ))}
-  </div>
+                    <div className={styles.mainNotesBox}>
+                      {getSellerNotes?.notes?.map((item, index) => (
+                        <div key={item?.id} className={styles.noteItem}>
+                          <div className={styles.noteText}>{item.notes}</div>
+                          <div className={styles.noteActions}>
+                            <span
+                              onClick={() => {
+                                setNote(item?.notes);
+                                setEditNoteId(item?.id);
+                              }}
+                            >
+                              Edit
+                            </span>
+                            |
+                            <span onClick={() => handleRemove(item?.id)}>Remove</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
 
-  <div className={styles.notesInner}>
-    <textarea
-      className={styles.textArea}
-      placeholder="Write a private note"
-      onChange={(e) => setNote(e.target.value)}
-      value={note}
-    />
-    <div className={styles.buttonGroup}>
-      <button className={styles.CancelBtn} onClick={handleCancel}>
-        Cancel
-      </button>
-      <button className={styles.UpdateBtn} onClick={()=> handleSubmit()}>
-        {/* {sellerNotesLoader ? (
+                    <div className={styles.notesInner}>
+                      <textarea
+                        className={styles.textArea}
+                        placeholder="Write a private note"
+                        onChange={(e) => setNote(e.target.value)}
+                        value={note}
+                      />
+                      <div className={styles.buttonGroup}>
+                        <button className={styles.CancelBtn} onClick={handleCancel}>
+                          Cancel
+                        </button>
+                        <button className={styles.UpdateBtn} onClick={() => handleSubmit()}>
+                          {/* {sellerNotesLoader ? (
           <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
         ) : (
           "Update"
         )} */}
-        Update
-      </button>
-    </div>
-  </div>
-</div>
+                          Update
+                        </button>
+                      </div>
+                    </div>
+                  </div>
 
                 )}
               </div>
