@@ -497,7 +497,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                     className={`${styles.tabLabel} ${activeTab === "lead" ? styles.activeTab : ""
                       }`}
                   >
-                    Lead
+                    Lead Details
                   </span>
                 </button>
 
@@ -509,7 +509,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                     className={`${styles.tabLabel} ${activeTab === "notes" ? styles.activeTab : ""
                       }`}
                   >
-                    Notes
+                   My Notes
                   </span>
                 </button>
               </div>
@@ -544,7 +544,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         }
                         title={item.activity_name}
                         description={item.description}
-                        time={moment(item.updated_at).format("hh:mm A")}
+                        time={moment(item.updated_at).format("hh:mm")}
                         isLast={index === getActivies.length - 1}
                       // name={
                       //   profileLeadViewData?.id === item?.from_user_id
