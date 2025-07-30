@@ -328,9 +328,9 @@ const MyResponse = () => {
                 {item?.profile_view && item?.profile_view_time && (
                   <div className={styles.profile_view}>
                     <p>
-                      <span>
+                      {/* <span> */}
                         <img src={HiredImg} alt="..." />
-                      </span>
+                      {/* </span> */}
                       {item?.profile_view}
                     </p>
                     <span>{item?.profile_view_time}</span>
