@@ -339,7 +339,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               {profileLeadViewData?.leads?.purchase_type && (
                 <>
                
-              <span className={styles.currentStatusText}>Purchase Type</span>
+              <span className={styles.currentStatusText}>Purchase Type :</span>
     <select
       className={`${styles.selectBox} ${styles.customSelects}`}
       value={profileLeadViewData?.leads?.purchase_type}
@@ -353,7 +353,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               )}
             </div>
              <div className={styles.currentStatusBox}>
-              <span className={styles.currentStatusText}>Current Status</span>
+              <span className={styles.currentStatusText}>Current Status :</span>
               <select
                 className={`${styles.selectBox} ${styles.customSelect}`}
 
