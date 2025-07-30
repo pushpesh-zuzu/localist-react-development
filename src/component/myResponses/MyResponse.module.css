@@ -757,6 +757,9 @@ padding-bottom: 20px;
   display: flex;
   align-items: center;
 }
+.selectBox {
+  margin-top: -14px;
+}
 }
 @media screen and (max-width:320px) {
    .filterButtonsBox{

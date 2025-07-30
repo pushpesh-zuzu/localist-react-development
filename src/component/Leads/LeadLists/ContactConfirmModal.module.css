@@ -245,7 +245,7 @@ border: 1px solid #000000;
   color: #BEBEBE;
 }
 .footerNote {
-  margin-top: 20px;
+  margin-top: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
@@ -352,7 +352,8 @@ border: 1px solid #000000;
 .creditDetails {
   display: flex;
   /* flex-direction: column; */
-  align-items: center;
+  /* align-items: center; */
+  align-items: start;
   gap: 30px;
 }
 .creditbtn{
@@ -496,11 +497,11 @@ display: block;
   text-align: center;
 }
 .priceDetails p {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
 }
 .perCreditText {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   color: #BEBEBE;
 }
@@ -517,7 +518,8 @@ border: 1px solid #000000;
 .creditDetails {
   display: flex;
   /* flex-direction: column; */
-  align-items: center;
+  /* align-items: center; */
+  align-items: start;
   gap: 10px;
 }
   .discountBadges {
