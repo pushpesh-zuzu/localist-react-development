@@ -279,7 +279,7 @@ const MyResponse = () => {
         >
           <label className={styles.purchaseText}>Purchase Type</label>
           <select
-            className={`${styles.selectBox} ${styles.customSelectt}`}
+            className={`${styles.selectBox} ${styles.customSelect}`}
             value={purchaseType} // controlled value
             onChange={(e) => handlePurchaseChange(e.target.value)}
           // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
