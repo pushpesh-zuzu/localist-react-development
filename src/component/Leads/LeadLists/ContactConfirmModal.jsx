@@ -140,11 +140,16 @@ addManualBidData()
 });
 };
 
+console.log(customHeigth,"---------");
+
+const getWidth = (des='') => {
+return `${des.length + 150}px`
+}
   return (
     <>
     {creditModal ? <AddCardModal onClose={() => setCreditModal(false)} detail={creditItems} topup={isChecked} closeModal={() => onClose()} details={details} newLeadApi={newLeadApi}/> :
     <div className={styles.modalOverlay} >
-      <div className={styles.modal} style={{ height: customHeigth <= 800 ? customHeigth : '800px'}} >
+      <div className={styles.modal} style={{ height: customHeigth <= 820 ? customHeigth-5 : 'auto'}} >
         <button className={styles.closeButton} onClick={()=>onClose()}>×</button>
         <div className={styles.mainBox}>
         {/* <h2>{enoughCredit != 0 ? `You need ${totalCredit - details?.credit_score} credits to contact ${details?.customer?.name}` : "Please purchase a Credit Pack"}</h2> */}
@@ -246,9 +251,11 @@ addManualBidData()
 {creditPlanList && creditPlanList.length > 0 ? (
   creditPlanList.map((item, index) => (
     <div key={index} className={styles.offerBox}>
-      <div className={styles.offerHeader}>
-        <span className={styles.discountBadge}>{item?.description}</span>
-        <span  className={styles.discountBadges}>Your Exclusive Sign Up Offer</span>
+      <div className={styles.offerHeader}
+
+      >
+        <span className={styles.discountBadge} style={{}}>{item?.description}</span>
+        <span  className={styles.discountBadges} >Your Exclusive Sign Up Offer</span>
       </div>
 
       <div className={styles.creditDetails}>

@@ -9,6 +9,7 @@ import {
   getSellerRecommendedApi,
   purchaseTypeHiredStatusApi,
   purchaseTypeStatusApi,
+  setLeadListProfileLoader,
 } from "../../store/LeadSetting/leadSettingSlice";
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
@@ -100,6 +101,8 @@ const MyResponse = () => {
     if (item?.id == selectedLead) {
       setSelectedLead(null);
     } else {
+      dispatch(setLeadListProfileLoader(true));
+
       setSelectedLead(item?.id);
     }
 
@@ -276,7 +279,7 @@ const MyResponse = () => {
         >
           <label className={styles.purchaseText}>Purchase Type</label>
           <select
-            className={`${styles.selectBox} ${styles.customSelect}`}
+            className={`${styles.selectBox} ${styles.customSelectt}`}
             value={purchaseType} // controlled value
             onChange={(e) => handlePurchaseChange(e.target.value)}
           // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
@@ -332,8 +335,9 @@ const MyResponse = () => {
                         <img src={HiredImg} alt="..." />
                       {/* </span> */}
                       {item?.profile_view}
-                    </p>
+                   
                     <span>{item?.profile_view_time}</span>
+                     </p>
                   </div>
                 )}
               </div>

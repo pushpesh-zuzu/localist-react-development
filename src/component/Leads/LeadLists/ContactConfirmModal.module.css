@@ -71,15 +71,16 @@
 }
 
 .offerHeader {
-  position: relative;
+  /* position: relative; */
   display: flex;
-  gap: 10px;
+  gap: 0px;
   margin-bottom: 12px;
+  margin-top: -32px;
+
 }
-.discountBadge {
+/* .discountBadge {
   position: absolute;
-  top: -30px;
-}
+} */
 
 .offerBadge,
 .discountBadge {
@@ -159,9 +160,9 @@
   padding: 4px 10px;
   font-size: 16px;
   font-weight: 500;
-  position: absolute;
-  top: -30px;
-  left:80px;
+  /* position: absolute;
+  top: -30px; 
+  left:80px; */
   border-radius: 3px;
 }
 .creditbtn{
@@ -398,9 +399,9 @@ border: 1px solid #000000;
 display: block;
   font-size: 10px;
   font-weight: 600;
-  position: absolute;
+  /* position: absolute;
   top: -30px;
-  left:56px;
+  left:56px; */
 }
  .getHired {
     display: flex;
@@ -529,9 +530,9 @@ border: 1px solid #000000;
 display: block;
   font-size: 10px;
   font-weight: 600;
-  position: absolute;
+  /* position: absolute;
   top: -30px;
-  left:56px;
+  left:56px; */
 }
  .getHired {
     display: flex;
@@ -611,11 +612,12 @@ display: block;
   font-size: 24px;
   cursor: pointer;
 }
+
 }
 
 
 
-@media (max-height: 800px) {
+@media (max-height: 820px) {
  .modalOverlay{
   align-items: unset !important;
   height: fit-content;

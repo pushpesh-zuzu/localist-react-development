@@ -1,13 +1,10 @@
-.card {
-  background: #fff;
-  /* box-shadow: 0px 0px 6px 0px #0000001a; */
-  margin: 21.08px auto;
-  padding: 18.25px 25.26px 2.25px 34px;
+/* .card {
+ 
   display: grid;
   grid-template-areas: "info job actions";
   grid-template-columns: 1fr 1fr 0.3fr;
   gap: 40px;
-}
+} */
 .cardParent {
   background: #fff;
   box-shadow: 0px 0px 6px 0px #0000001a;
@@ -17,14 +14,35 @@
   margin-top: 12px;
 }
 
-/* Grid Areas */
+.card {
+   background: #fff;
+  /* box-shadow: 0px 0px 6px 0px #0000001a; */
+  margin: 21.08px auto;
+  padding: 18.25px 25.26px 2.25px 34px;
+  display: grid;
+  grid-template-areas: "info job actions";
+  grid-template-columns: 1fr 1fr 0.3fr;
+  gap: 40px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.infoContainer,
+.jobContainer,
+.actionsContainer {
+  min-width: 0; /* Prevents content from forcing column to expand */
+  overflow-wrap: break-word;
+}
+
+
 .infoContainer {
   grid-area: info;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
   gap: 72px;
-  /* margin-top: 35px; */
+  min-width: 0; /* Prevents stretching */
+  overflow: hidden;
+  word-break: break-word; /* Optional, breaks long text */
 }
 
 .jobDetails {
@@ -61,9 +79,9 @@
 
 .userInfo {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  gap: 96px;
+  /* gap: 96px; */
 }
 
 .avatar {
@@ -123,7 +141,8 @@
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
-  text-wrap: nowrap;
+  /* text-wrap: nowrap; */
+  text-align: center;
 }
 .saveBtnBoxs {
   display: none;

@@ -175,7 +175,7 @@
   padding: 8px 8px;
   width: 150px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #FFFFFF;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -186,11 +186,12 @@
   appearance: none;           
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('../../../assets/Icons/arrow-down.svg');
+  background-image: url('../../../assets/Icons/downArrowIcon.svg');
   background-repeat: no-repeat;
   background-position: right 5px center; 
   padding-right: 40px;
-  background-size: 18px 18px;
+  background-size: 14px 14px;
+  
 } 
 
 .selectBox option {
@@ -378,8 +379,9 @@
 }
 .leadContent {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap:40px
+  /* justify-content: space-between; */
+  /* flex-wrap: wrap; */
 }
 .mainNotesBox {
   display: flex;
@@ -523,6 +525,7 @@
   font-size: 20px;
   /* margin-right: 8px; */
   line-height: 1.5;
+  margin-top: 0.6rem;
 }
 .answerText {
   margin-left: 20px;
@@ -531,7 +534,7 @@
    color: #828282;
 }
 .questionText {
-   margin-left: 8px;
+   margin-left: 10px;
    margin-top: 12px;
   font-size: 16px;
   font-weight: 500;
@@ -890,6 +893,9 @@
     width: 310px;
     
     margin-left: -40px;
+  }
+  .lastActivityTexts {
+    margin-bottom: 16px;
   }
 }
 @media  screen and (max-width: 320px) {
