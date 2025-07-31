@@ -251,6 +251,44 @@ export const checkCompanyNameApi = (companyData,isapi=false) => {
   };
 }
 
+export const checkCompanyNameWithoutRegApi = (companyData) => {
+  
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`check/company-name-without-reg`, companyData);
+      
+      if (response) {
+        // dispatch(setService(response?.data?.data));
+
+        return response.data
+      }
+    } catch (error) {
+      const errorData = error?.response?.data?.message;
+      
+      if (errorData && typeof errorData === "object" ) {
+        
+        Object.values(errorData).forEach((messages) => {
+          if (Array.isArray(messages)) {
+            
+            messages.forEach((msg) => showToast("error", msg));
+            
+          } else {
+            
+            showToast("error", messages);
+          }
+        });
+      } else {
+        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
+        
+        dispatch(setErrorMessage(error?.response?.data?.message))
+      }
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
+
 export const checkPhoneNumberApi = (phoneData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));

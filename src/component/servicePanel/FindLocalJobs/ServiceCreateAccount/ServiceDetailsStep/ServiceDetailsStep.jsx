@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +20,36 @@ const ServiceDetailsStep = ({
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams()
+  
+  const debounceTimer = useRef({ company_name: null });
+
+const handleCompanyNameChange = (e) => {
+  const companyValue = e.target.value;
+  setFormData((prev) => ({ ...prev, company_name: companyValue }));
+
+  if (companyValue.trim().length > 1) {
+    if (debounceTimer.current.company_name) {
+      clearTimeout(debounceTimer.current.company_name);
+    }
+
+    debounceTimer.current.company_name = setTimeout(() => {
+      const currentCompanyName = companyValue;
+
+      dispatch(checkCompanyNameWithoutRegApi({ company_name: companyValue }))
+        .then((result) => {
+          if (formData.company_name === currentCompanyName) {
+            if (result?.success === true) {
+              showToast("success", "Valid Company Name");
+              dispatch(setCompanyCheck(true));
+            } else {
+              dispatch(setCompanyCheck(false));
+            }
+          }
+        });
+    }, 1000);
+  }
+};
+  
 //   const handleCheck = () => {
 //     if(emailCheck && companyCheck && phoneCheck) {
 //       nextStep()
@@ -41,9 +71,9 @@ const handleCheck = () => {
     showToast("error", "Please Enter Correct Email");
     return;
   } 
-  // else if (companyCheck === false) {
-  //   showToast("error", "Please Enter Correct Company Details");
-  // }
+  else if (companyValue && companyCheck === false) {
+    showToast("error", "Please Enter Correct Company Details");
+  }
    else if (hasCompanyReg && !hasCompanyName) {
     showToast("error", "Please enter company name.");
   } 
@@ -57,6 +87,10 @@ const handleCheck = () => {
   console.log(serviceParms?.serviceTitle, "serviceParms");
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const companyError = useSelector(state => state.companyLook?.companyError);
+  
+
+
+
 useEffect(() => {
   if (!formData.company_reg_number) {
     dispatch(setFormData({

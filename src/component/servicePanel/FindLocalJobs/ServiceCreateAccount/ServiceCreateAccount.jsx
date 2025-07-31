@@ -5,7 +5,7 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAddressApi, checkCompanyNameApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { checkAddressApi, checkCompanyNameApi,checkCompanyNameWithoutRegApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../utils";
 
 const ServiceCreateAccount = () => {
@@ -92,16 +92,49 @@ if (companyInput && !urlRegex.test(companyInput)) {
 const debounceTimer = useRef({});
 const latestEmailRef = useRef("");
 const latestPhoneRef = useRef("");
+const latestCompanyNameRef = useRef("");
 
+
+useEffect(() => {
+  
+  if (companyValue.trim().length > 1) {
+    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+
+    latestCompanyNameRef.current = companyValue; 
+
+    debounceTimer.current.company_name = setTimeout(() => {
+        const currentCompanyName = latestCompanyNameRef.current;
+
+        dispatch(
+          checkCompanyNameWithoutRegApi({
+            company_name: currentCompanyName,
+          })
+        ).then((result) => {
+          if (latestCompanyNameRef.current === currentCompanyName) {
+            if (result?.success === true) {
+              showToast("success", "Valid Company Name");
+              dispatch(setCompanyCheck(true));
+            } else {
+              dispatch(setCompanyCheck(false));
+            }
+          }
+        });
+      }, 1000);
+  }
+
+  }, [companyValue]);
+  
+  
 useEffect(() => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
   if (emailRegex.test(emailValue) && type === "email") {
+      
     if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
 
     debounceTimer.current.email = setTimeout(() => {
       const currentEmail = latestEmailRef.current;
-
+     
       dispatch(checkEmailIdApi({ email: currentEmail })).then((result) => {
         
         if (latestEmailRef.current === currentEmail) {
@@ -121,18 +154,29 @@ useEffect(() => {
  
 
 
-//  if (companyValue.trim().length > 1 && type === "company_name") {
-  
-//     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
-//     debounceTimer.current.company_name = setTimeout(() => {
-//       dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
-//         if (result) {
-//           showToast("success", result?.message);
-//           setCompanyCheck(result?.success);
-//         }
-//       });
-//     }, 1000);
-//   }
+ if (companyValue.trim().length > 1 && type === "company_name") {
+ 
+    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+    debounceTimer.current.company_name = setTimeout(() => {
+
+      const currentCompanyName = latestCompanyNameRef.current;
+    dispatch(
+  checkCompanyNameWithoutRegApi(
+    { companyname: companyValue }
+  )
+).then((result) => {
+        if (latestCompanyNameRef.current === currentCompanyName) {
+          if (result?.success === true) {
+            setCompanyCheck(true);
+            showToast("success", "Valid Company Name");
+          } else {
+            setCompanyCheck(false);
+            
+          }
+        }
+      });
+    }, 1000);
+  }
   if (companyValue.trim().length > 1 && type === "company_name" &&  selectedServiceFormData?.company_reg_number) {
     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
     debounceTimer.current.company_name = setTimeout(() => {
@@ -147,6 +191,9 @@ useEffect(() => {
       });
     }, 1000);
   }
+
+
+
   //   if (phoneValue.trim().length >= 10 && type === "phone") {
   //   if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
   //   debounceTimer.current.phone = setTimeout(() => {
@@ -210,6 +257,7 @@ useEffect(() => {
   }
   if(name === "company_name") {
     setCompanyValue(value)
+    latestCompanyNameRef.current = value; 
   }
    if (name === "phone") {
 
