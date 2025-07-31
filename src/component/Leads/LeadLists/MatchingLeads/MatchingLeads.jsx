@@ -353,7 +353,7 @@ const triggerRef = useRef(null);
         {/* First Dropdown - Newest */}
         <div className={styles.dropdownWrapper}>
           <button
-            className={styles.dropdownTrigger}
+            className={styles.dropdownTriggers}
             onClick={() => setIsSortOpen(!isSortOpen)}
             onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
           >
@@ -431,7 +431,7 @@ const triggerRef = useRef(null);
         {/* First Dropdown - Newest */}
         <div className={styles.dropdownWrappers}>
           <button
-            className={styles.dropdownTrigger}
+            className={styles.dropdownTriggers}
             onClick={() => setIsSortOpen(!isSortOpen)}
             onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
           >

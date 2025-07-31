@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./FeelingStuckFooter.module.css";
 import GetHiredImage from "../../../../assets/Images/MyResponse/RightFeelingImg.svg";
 import FeelingStuckImg from "../../../../assets/Images/MyResponse/FeelingStuckLeft.svg";
+import newPromiseImg from "../../../../assets/Images/Leads/NewHiringPromise.svg"
+
 
 const FeelingStuckFooter = () => {
   const [showLeftCard, setShowLeftCard] = useState(true);
@@ -47,7 +49,7 @@ const FeelingStuckFooter = () => {
               </div>
               </div>
               </div> */}
-              <img src={GetHiredImage} alt="Get Hired Guarantee" />
+              <img src={newPromiseImg} alt="Get Hired Guarantee" />
         </div>
       )}
     </div>

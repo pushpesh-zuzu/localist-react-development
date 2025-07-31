@@ -413,13 +413,22 @@
   color: #000000;
   display: block;
 }
+ .category {
+    text-wrap:wrap;
+    text-align:center
+  }
 .mainText {
   font-weight: 500;
   font-size: 14px;
 }
+.mainText div {
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
 .desktopOnlyBreak {
     display: none;
   }
+  
 
   .userInfo {
     /* flex-direction: column; */
@@ -470,6 +479,7 @@
     margin-top: 0px;
     display: flex;
     align-items: center;
+    gap:10px
 
   }
    .viewDetailsBtnWrapper {

@@ -432,7 +432,7 @@ const LeadsCards = ({ enoughCredit }) => {
 
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
-                            <div className={styles.highlightText}>Highlight :</div>
+                            <div className={styles.highlightText}>Highlights :</div>
                             <div className={styles.saveBtnBox}>
                               <button
                                 className={styles.saveBtn}
@@ -529,7 +529,7 @@ const LeadsCards = ({ enoughCredit }) => {
                       1st to Responded
                     </p> */}
                             <div className={styles.mainText}>
-                              <div>ACT FAST</div>{" "}
+                              <div>ACT FAST</div>
                               <span>{item?.view_count} Professionals</span>{" "}
                              <span className={styles.desktopOnlyBreak}><br /></span> have viewed this lead
                             </div>

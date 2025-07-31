@@ -21,7 +21,8 @@ import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
 import HiredClickImg from "../../assets/Images/MyResponse/RightClickHiredImg.svg";
 import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
-import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
+// import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
+import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
 import { Popover, Select } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
@@ -68,22 +69,22 @@ const MyResponse = () => {
       }
     });
   };
-const handleHiredApi = () => {
-  dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
-    if (result?.success) {
-      setSelectedTab("hired");
+  const handleHiredApi = () => {
+    dispatch(getHiredLeadDataApi({ user_id })).then((result) => {
+      if (result?.success) {
+        setSelectedTab("hired");
 
-      const activityData = {
-        buyer_id: item?.customer_id,
-        user_id: userToken?.remember_tokens || registerData?.remember_tokens,
-        lead_id: item?.id,
-      };
-      dispatch(getBuyerActivitiesApi(activityData));
-    } else {
-      showToast("error", result?.message || "Failed to load hired leads.");
-    }
-  });
-};
+        const activityData = {
+          buyer_id: item?.customer_id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+          lead_id: item?.id,
+        };
+        dispatch(getBuyerActivitiesApi(activityData));
+      } else {
+        showToast("error", result?.message || "Failed to load hired leads.");
+      }
+    });
+  };
 
 
   const getLeadsToDisplay = () => {
@@ -150,25 +151,25 @@ const handleHiredApi = () => {
       dispatch(purchaseTypeHiredStatusApi(hiredPurchaseData));
     }
   };
-  const handlePhoneOpen = (item)=> {
+  const handlePhoneOpen = (item) => {
     const phoneNumber = item?.phone;
     if (phoneNumber) {
       const phoneUrl = `tel:${phoneNumber}`;
       window.open(phoneUrl, "_blank");
     } else {
-      showToast("error","Phone number is not available.");
+      showToast("error", "Phone number is not available.");
     }
   }
-const handleEmailOpen = (item) => {
-  const email = item?.customer?.email;
-  console.log(item,email,"item")
-  if (email) {
-    const mailtoUrl = `mailto:${email}`;
-    window.location.href = mailtoUrl;
-  } else {
-    showToast("error", "Email address is not available.");
-  }
-};
+  const handleEmailOpen = (item) => {
+    const email = item?.customer?.email;
+    console.log(item, email, "item")
+    if (email) {
+      const mailtoUrl = `mailto:${email}`;
+      window.location.href = mailtoUrl;
+    } else {
+      showToast("error", "Email address is not available.");
+    }
+  };
   // const handlePurchaseChange = (value) => {
   //   const purchaseData = {
   //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
@@ -198,17 +199,15 @@ const handleEmailOpen = (item) => {
           <div className={styles.emptySpace}>{""}</div>
           <div className={styles.headerBtn}>
             <button
-              className={`${styles.filterButton} ${
-                selectedTab === "pending" ? styles.activeButton : ""
-              }`}
+              className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
+                }`}
               onClick={handlePendingApi}
             >
               <img src={pendingImg} alt="pendingImg" /> Pending
             </button>
             <button
-              className={`${styles.filterButton} ${
-                selectedTab === "hired" ? styles.activeButton : ""
-              }`}
+              className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
+                }`}
               onClick={handleHiredApi}
             >
               {selectedTab === "hired" ? (
@@ -241,7 +240,7 @@ const handleEmailOpen = (item) => {
               className={`${styles.selectBox} ${styles.customSelect}`}
               value={purchaseType} // controlled value
               onChange={(e) => handlePurchaseChange(e.target.value)}
-              // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+            // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
             >
               <option value="All">All</option>
               <option value="Manual Bid">Manual Bid</option>
@@ -249,6 +248,44 @@ const handleEmailOpen = (item) => {
               <option value="Request Reply">Request Reply</option>
             </select>
           </div>
+        </div>
+      </div>
+      <div className={styles.filterButtonsBox}>
+        <button
+          className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
+            }`}
+          onClick={handlePendingApi}
+        >
+          <img src={pendingImg} alt="pendingImg" /> Pending
+        </button>
+        <button
+          className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
+            }`}
+          onClick={handleHiredApi}
+        >
+          {selectedTab === "hired" ? (
+            <img src={HiredClickImg} alt="..." />
+          ) : (
+            <img src={HiredImg} alt="hired" />
+          )}{" "}
+          Hired
+        </button>
+        <div
+          style={{ display: "flex", }}
+          className={styles.purchaseSelect}
+        >
+          <label className={styles.purchaseText}>Purchase Type</label>
+          <select
+            className={`${styles.selectBox} ${styles.customSelect}`}
+            value={purchaseType} // controlled value
+            onChange={(e) => handlePurchaseChange(e.target.value)}
+          // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+          >
+            <option value="All">All</option>
+            <option value="Manual Bid">Manual Bid</option>
+            <option value="Autobid">Auto Bid</option>
+            <option value="Request Reply">Request Reply</option>
+          </select>
         </div>
       </div>
 
@@ -264,7 +301,7 @@ const handleEmailOpen = (item) => {
                     </div>
                     <div
                       className={styles.details}
-                      // onClick={() => handleProfieView(item)}
+                    // onClick={() => handleProfieView(item)}
                     >
                       <h3>{item?.customer?.name}</h3>
                       <p>{item?.postcode}</p>
@@ -277,7 +314,7 @@ const handleEmailOpen = (item) => {
                 <div className={styles.contactContainer}>
                   <div className={styles.contactItem}>
                     <img src={BluePhoneIcon} alt="" />
-                    <span onClick={()=>handlePhoneOpen(item)}>
+                    <span onClick={() => handlePhoneOpen(item)}>
                       {item?.phone}
                     </span>
                   </div>
@@ -291,12 +328,12 @@ const handleEmailOpen = (item) => {
                 {item?.profile_view && item?.profile_view_time && (
                   <div className={styles.profile_view}>
                     <p>
-                      <span>
+                      {/* <span> */}
                         <img src={HiredImg} alt="..." />
-                      </span>
+                      {/* </span> */}
                       {item?.profile_view}
                     </p>
-                    <p>{item?.profile_view_time}</p>
+                    <span>{item?.profile_view_time}</span>
                   </div>
                 )}
               </div>
@@ -382,16 +419,55 @@ const handleEmailOpen = (item) => {
 
                 <div
                   className={styles.responseStatus}
-                  onClick={() => handleOpen(item)}
+
                 >
                   Responded {moment().diff(moment(item?.created_at), "days")}d
                   ago
+
+                </div>
+                <div className={styles.moreDetails} onClick={() => handleOpen(item)}>
+                  More Details
                   <img
                     src={pendingArrowIcon}
                     alt="Response"
-                    className={`${styles.arrowIcon} ${
-                      selectedLead === item.id ? "" : styles.rotated
-                    }`}
+                    className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated
+                      }`}
+                  />
+                </div>
+              </div>
+
+              <div className={styles.leadAction}>
+                <div className={styles.responseStatus}
+
+                >
+                  Responded {moment().diff(moment(item?.created_at), "days")}d
+                  ago
+
+                </div>
+                {selectedTab === "pending" ? (
+                  <>
+                    <button className={styles.purchaseButton}>
+                      <img src={pendingImg} alt="pendingImg" />{" "}
+                      {item?.status === "pending" ? "Pending" : "Pending"}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button className={styles.purchaseButton}>
+                      <img src={HiredClickImg} alt="HiredImg" />{" "}
+                      {item?.status === "hired" ? "Hired" : "Hired"}
+                    </button>
+                  </>
+                )}
+
+
+                <div className={styles.moreDetails} onClick={() => handleOpen(item)}>
+                  More Details
+                  <img
+                    src={pendingArrowIcon}
+                    alt="Response"
+                    className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated
+                      }`}
                   />
                 </div>
               </div>

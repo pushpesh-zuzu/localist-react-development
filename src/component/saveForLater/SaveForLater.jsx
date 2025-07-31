@@ -79,7 +79,7 @@ const addManualBidData = (item) => {
 const handleContinue = (item) => {
   
     if (!item) return;
-    console.log(item?.credit_score, totalCredit?.total_credit, "item");
+    console.log(item?.credit_score, totalCredit?.total_credit,item, "item");
     setSelectedItem(item);
     setPlanPurchase(totalCredit?.plan_purchased);
 
@@ -219,7 +219,7 @@ useEffect(() => {
 
                     {/* Middle Section - Job Details */}
                     <div className={styles.jobDetails}>
-                        <div className={styles.highlightText}>Highlight :</div>
+                        <div className={styles.highlightText}>Highlights :</div>
                       <div className={styles.badges}>
                         {item?.is_phone_verified == 1 && (
                           <span className={styles.verified}>

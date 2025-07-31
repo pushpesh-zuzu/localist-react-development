@@ -7,6 +7,7 @@
     align-items: center;
     z-index: 999;
     padding: 16px;
+    overflow-y: auto;
   }
   
   .modalContent {
@@ -247,3 +248,14 @@ height: 24px;
       
   }
   
+  /* @media (max-height: 800px) {
+ .modalOverlay{
+  align-items: unset !important;
+  height: fit-content;
+ 
+  
+ }
+ .modalContent {
+  overflow-y: auto;
+ }
+} */

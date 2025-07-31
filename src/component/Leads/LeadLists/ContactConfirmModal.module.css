@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  /* overflow-y: auto; */
+  
 }
 
 .modal {
@@ -20,6 +22,9 @@
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
  
+}
+.modal::-webkit-scrollbar {
+  display: none;
 }
 
 .closeButton {
@@ -39,6 +44,7 @@
 .subText {
   margin-bottom: 30px;
  text-align: center;
+ margin-top: 20px;
  
 }
 .subText h2 {
@@ -60,7 +66,7 @@
   background-color: #FFFFFF;
   padding: 16px;
   border-radius: 0px;
-  margin-top: 20px;
+  margin-top: 30px;
   border: 1px solid #D9D9D9;
 }
 
@@ -80,21 +86,28 @@
   background-color: #00aaff;
   color: white;
   padding: 4px 10px;
-  border-radius: 0px;
-  font-size: 12px;
+  border-radius: 3px;
+  font-size: 16px;
   font-weight: bold;
+
 }
 
 .creditDetails {
   margin-bottom: 16px;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-between; */
+  gap: 250px;
+  margin-top: 30px;
 }
-
+ .priceDetails p {
+  font-size: 20px;
+  font-weight: 600;
+}
 .buttonGroup {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap:34px
 }
 
 .buyButton {
@@ -102,8 +115,8 @@
   color: white;
   border: none;
   padding: 5px 99px;
-  border-radius: 6px;
-  font-size: 16px;
+  /* border-radius: 6px; */
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -113,13 +126,19 @@
   font-size: 14px;
   gap: 6px;
   color: #000000;
+  font-weight: 600;
+}
+.checkboxLabel input {
+  width: 24px;
+  height: 24px;
 }
  .getHired {
     display: flex;
     gap: 0px;
     align-items: center;
-    max-width: 670px;
+    max-width: 880px;
      margin-bottom: 36px;
+     margin-top: 34px;
   }
   .getHired img {
     z-index: 10;
@@ -129,7 +148,7 @@
     font-size: 18px;
     font-weight: 400;
     color: #000000;
-    padding: 10px 34px;
+    padding: 10px 36px;
     margin-top: -1px;
     margin-left: -2.8%;
 
@@ -138,14 +157,15 @@
   background-color: #E3F6FC;
   color: #00AFE3;
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   position: absolute;
   top: -30px;
-  left:70px;
+  left:80px;
+  border-radius: 3px;
 }
 .creditbtn{
-border: 1px solid #d9d9d9;
+border: 1px solid #000000;
   padding: 8px;
   border-radius: 0px;
   width: fit-content;
@@ -155,7 +175,7 @@ border: 1px solid #d9d9d9;
   gap: 4px;
 }
 .paraText {
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 10px;
   font-weight: 600;
 }
@@ -187,6 +207,7 @@ border: 1px solid #d9d9d9;
   align-items: center;
   margin-bottom: 36px;
   border-radius: 4px;
+  max-width: 850px;
 }
 
 .visaText {
@@ -206,7 +227,7 @@ border: 1px solid #d9d9d9;
 .verticalLine {
   height: 18px;
   width: 2px;
-  background-color: #d9d9d9;
+  background-color: #F9CACA;
   display: inline-block;
 }
 
@@ -224,7 +245,7 @@ border: 1px solid #d9d9d9;
   color: #BEBEBE;
 }
 .footerNote {
-  margin-top: 20px;
+  margin-top: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
@@ -235,7 +256,7 @@ border: 1px solid #d9d9d9;
 }
 
 .accordion {
-  background-color: #f2f9fc;
+  background-color: #E3F6FC;
   color: #444;
   cursor: pointer;
   padding: 14px;
@@ -249,12 +270,12 @@ border: 1px solid #d9d9d9;
 }
 
 .accordion:hover {
-  background-color: #f2f9fc90;
+  background-color: #E3F6FC;
 }
 
 .panel {
   padding: 10px 14px;
-  background-color: white;
+  background-color: #E3F6FC;
   /* border: 1px solid #ddd; */
   border-top: none;
   border-radius: 0 0 4px 4px;
@@ -331,11 +352,12 @@ border: 1px solid #d9d9d9;
 .creditDetails {
   display: flex;
   /* flex-direction: column; */
-  align-items: center;
-  gap: 12px;
+  /* align-items: center; */
+  align-items: start;
+  gap: 30px;
 }
 .creditbtn{
-border: 1px solid #d9d9d9;
+border: 1px solid #000000;
   padding: 8px;
   border-radius: 0px;
   width: fit-content;
@@ -360,16 +382,25 @@ border: 1px solid #d9d9d9;
   margin-top: 10px;
   font-weight: 600;
 }
+.offerBadge,
+.discountBadge {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 4px 9px;
+  border-radius: 0px;
+  font-size: 10px;
+  font-weight: bold;
+}
 .discountBadges {
   background-color: #E3F6FC;
   color: #00AFE3;
   padding: 4px 10px;
 display: block;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   position: absolute;
   top: -30px;
-  left:65px;
+  left:56px;
 }
  .getHired {
     display: flex;
@@ -377,6 +408,7 @@ display: block;
     align-items: center;
     max-width: 670px;
     margin-bottom: 18px;
+    margin-top: 20px;
   }
   .getHired img {
     z-index: 10;
@@ -465,16 +497,16 @@ display: block;
   text-align: center;
 }
 .priceDetails p {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
 }
 .perCreditText {
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 600;
   color: #BEBEBE;
 }
   .creditbtn{
-border: 1px solid #d9d9d9;
+border: 1px solid #000000;
   padding: 4px;
   border-radius: 0px;
   width: fit-content;
@@ -482,6 +514,13 @@ border: 1px solid #d9d9d9;
   display: flex;
   align-items: center;
   gap: 4px;
+}
+.creditDetails {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  align-items: start;
+  gap: 10px;
 }
   .discountBadges {
   background-color: #E3F6FC;
@@ -492,7 +531,7 @@ display: block;
   font-weight: 600;
   position: absolute;
   top: -30px;
-  left:55px;
+  left:56px;
 }
  .getHired {
     display: flex;
@@ -500,6 +539,7 @@ display: block;
     align-items: center;
     max-width: 670px;
     margin-bottom: 12px;
+    margin-top: 15px;
   }
   .getHired img {
     z-index: 10;
@@ -511,7 +551,7 @@ display: block;
         font-size: 8px;
         font-weight: 400;
         color: #000000;
-        padding: 1px 6px 1px 26px;
+        padding: 1px 6px 1px 28px;
         margin-top: -1px;
         margin-left: -10.8%;
 
@@ -571,4 +611,18 @@ display: block;
   font-size: 24px;
   cursor: pointer;
 }
+}
+
+
+
+@media (max-height: 800px) {
+ .modalOverlay{
+  align-items: unset !important;
+  height: fit-content;
+  /* overflow-y: auto; */
+  
+ }
+ .modal {
+  overflow-y: auto;
+ }
 }

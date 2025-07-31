@@ -233,10 +233,11 @@
 }
 
 .viewMoreBtnWrapper {
-  padding-top: 35.66px;
+  /* padding-top: 35.66px; */
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 22px;
 }
 
 .viewMoreBtnWrapper button {
@@ -249,6 +250,7 @@
   font-size: 16px;
   border: none;
   padding: 11px 18.68px;
+  margin-bottom: 12px;
 }
 .viewDetailsBtn:hover {
   background-color: #0096c4;
@@ -377,15 +379,23 @@
   }
  .card {
     padding: 4px 16px;
-    margin: 17px auto;
+    margin: 18px auto;
   }
   .saveBtnBox {
   display: none;
   
 }
+  .category {
+    text-wrap:wrap;
+    text-align:center
+  }
 .mainText {
   font-weight: 500;
   font-size: 14px;
+}
+.mainText div {
+  margin-bottom: 0px;
+  margin-top: 8px;
 }
 .desktopOnlyBreak {
     display: none;
@@ -468,6 +478,7 @@ margin-bottom: 10px;
     margin-top: 0px;
     display: flex;
     align-items: center;
+    gap:10px
   }
   .viewDetailsBtnWrapper {
     margin-right: 0px;
