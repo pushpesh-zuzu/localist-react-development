@@ -8,6 +8,8 @@ const initialState = {
   companyError: null,
 };
 
+
+
 export const fetchCompanyDetails = (regNumber) => {
   return async (dispatch) => {
     dispatch(setCompanyLoader(true));
@@ -41,7 +43,7 @@ export const fetchCompanyDetails = (regNumber) => {
       }
 
     } catch (error) {
-      let message = "Company lookup failed";
+      let message = "Your account is already registered with this Company Name. Please contact us if this is not correct.";
 
       const body = error?.response?.data?.body;
       if (body) {
