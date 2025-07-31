@@ -331,10 +331,11 @@ const MyResponse = () => {
                 {item?.profile_view && item?.profile_view_time && (
                   <div className={styles.profile_view}>
                     <p>
-                      {/* <span> */}
+                     <div>
                         <img src={HiredImg} alt="..." />
-                      {/* </span> */}
+                      
                       {item?.profile_view}
+                      </div>
                    
                     <span>{item?.profile_view_time}</span>
                      </p>
