@@ -284,6 +284,11 @@
 .phoneNumberTexts span {
   margin-top: 4px;
 }
+.phoneNumberText img {
+  width: 17px;
+  height: 17px;
+  margin-top: 4px;
+}
 .verifiedText {
   display: flex;
   gap: 8px;

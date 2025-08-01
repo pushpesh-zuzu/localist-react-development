@@ -109,7 +109,7 @@
   width: 220px; */
    display: flex;
   gap: 11px;
-  cursor: pointer;
+  /* cursor: pointer; */
   align-items: center;
 }
 
@@ -119,6 +119,18 @@
   align-items: center;
   /* gap: 50px; */
 }
+                 /* width: "60px",
+    height: "60px",
+    
+    borderRadius: "50%",
+    color: "#fff",
+    fontSize: "40px",
+  fontWeight: 600,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+  backgroundColor:"#f9b7b7" */
 
 .avatar {
   background: #f9b7b7;
@@ -126,8 +138,9 @@
   font-size: 40px;
   font-weight: 600;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 60px !important;
+  height: 60px !important;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -147,7 +160,7 @@
   padding: 4px 9px;
   color: #000000;
   border-radius: 2px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -165,7 +178,7 @@
   padding: 4px 9px;
   color: #828282;
   border-radius: 2px;
-  cursor: pointer;
+  /* cursor: pointer; */
   font-size: 12px;
   display: flex;
   align-items: center;

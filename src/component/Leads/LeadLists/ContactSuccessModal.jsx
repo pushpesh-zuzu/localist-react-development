@@ -21,6 +21,13 @@ const ContactSuccessModal = ({ isOpen, onClose, details, repliesBtn,detail,reque
   const userData = userToken?.user_id || userToken?.id || registerData?.user_id || registerData?.id;
 
   console.log(details,repliesBtn,"details")
+  //  useEffect(() => {
+  //       document.body.style.overflow = 'hidden';
+  //       return () => {
+  //         document.body.style.overflow = 'auto';
+  //       };
+        
+  //     }, []);
   if (!isOpen) return null;
 
 //   const handleResponseChange = (clickName) => {
@@ -165,30 +172,35 @@ console.log(phoneNumber,email, "phoneNumber");
           {/* <h2 className={styles.title}>
             {`Great! Now Contact ${repliesBtn ? repliesBtn?.name : details?.customer?.name}`}
           </h2> */}
-                 <h2 className={styles.title}>
+                 {/* <h2 className={styles.title}>
   {repliesBtn
     ? `Excellent! You're ready to contact  ${repliesBtn?.name ? repliesBtn?.name : detail?.name}`
-    : `Excellent! You're ready to contact  ${details?.customer?.name ? details?.customer?.name : detail?.name}`}
+    : `Excellent! You're ready <br/> to contact  ${details?.customer?.name ? details?.customer?.name : detail?.name}`}
+</h2> */}
+<h2 className={styles.title}>
+ <span className={styles.excellentText}> Excellent! </span> You're ready
+  <br />
+  to contact {repliesBtn?.name ? repliesBtn?.name : details?.customer?.name || detail?.name}
 </h2>
-          <p className={styles.description}>
+          {/* <p className={styles.description}>
           Reach out now to introduce your services and discuss how you can help. <br/> Contacting customers within an hour can result in a 37% increase in job wins!
-          </p>
+          </p> */}
 
           <div className={styles.actions}>
             {[
-              { label: "Give Them A call", name: "mobile", btn: "Phone Number", icon: phoneBtn },
-              { label: "Send a WhatsApp", name: "Whatsapp", btn: "Send WhatsApp", icon: whatsappBtn },
-              { label: "Send an Email", name: "email", btn: "Send Email", icon: Mailbtn },
-              { label: "Send an SMS", name: "sms", btn: "Send SMS", icon: smsBtn },
+              { label: "Give Them A call", name: "mobile", btn: "Call Now", icon: phoneBtn },
+              { label: "Send a WhatsApp", name: "Whatsapp", btn: "WhatsApp", icon: whatsappBtn },
+              { label: "Send an Email", name: "email", btn: "Email", icon: Mailbtn },
+              { label: "Send an SMS", name: "sms", btn: "SMS", icon: smsBtn },
               // { label: "Send an estimate", name: "", btn: "Send Estimate", icon: EstimateIcon },
             ]
               .filter(item => !(repliesBtn && item.btn === "Send Estimate"))
               .map((item, idx) => (
                 <div key={idx} className={styles.actionItem}>
-                  <div className={styles.actionText}>
-                    <strong>{item.label}</strong>
-                    <p>Reference site about Lorem Ipsum, giving information on its origins.</p>
-                  </div>
+                  {/* <div className={styles.actionText}> */}
+                    {/* <strong>{item.label}</strong> */}
+                    {/* <p>Reference site about Lorem Ipsum, giving information on its origins.</p> */}
+                  {/* </div> */}
                   <button className={styles.actionBtn} onClick={() => handleResponseChange(item)}>
                     <img src={item?.icon} alt="..." width={18} height={18} /> {item.btn}
                   </button>

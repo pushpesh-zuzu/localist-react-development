@@ -99,6 +99,7 @@
   height: 60px;
   display: flex;
   align-items: center;
+   flex-shrink: 0;
   justify-content: center;
 }
 

@@ -299,7 +299,15 @@ const MyResponse = () => {
               <div className={styles.infoContainer}>
                 <div className={styles.userInfo}>
                   <div className={styles.userDetails}>
-                    <div className={styles.avatar}>
+                    <div 
+                    className={styles.avatar}
+                    // style={{
+   
+
+
+                    // }}
+
+                    >
                       {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                     </div>
                     <div
@@ -323,9 +331,9 @@ const MyResponse = () => {
                   </div>
                   <div className={styles.contactItem}>
                     <img src={BlueSmsIcon} alt="" />
-                    <a href={`mailto:${item?.customer?.email}`} target="_blank">
+                    {/* <a href={`mailto:${item?.customer?.email}`} target="_blank"> */}
                       {item?.customer?.email}
-                    </a>
+                    {/* </a> */}
                   </div>
                 </div>
                 {item?.profile_view && item?.profile_view_time && (
