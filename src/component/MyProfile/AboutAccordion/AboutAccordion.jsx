@@ -29,6 +29,7 @@ const AboutAccordion = ({details}) => {
    const companyData = useSelector((state) => state.companyLook?.companyData)
   console.log(companyData?.registered_office_address?.address_line_1,"companyNameData")
    const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
+    const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
@@ -82,7 +83,7 @@ extra_links: "",
     accre_image: useRef(),
     company_photos: useRef()
   };
-console.log(details?.profile_image,"details")
+console.log(details?.profile_image,formState.company_size,details?.company_size,"details")
   useEffect(()=>{
     if(details?.id){
 // setFormState(details)
@@ -369,7 +370,9 @@ if(companyData.company_name || companyData?.registered_office_address ) {
 
 
 
-
+const handleCheckboxChange = (e) => {
+    setHideAddress(e.target.checked);
+  };
 
   const handleCaptureWebcam = async (target) => {
     try {
@@ -689,7 +692,8 @@ useEffect(() => {
         <p className={styles.secondaryText}>
          Please provide your business address to help customers find your local services on Localists.com.
         </p>
-        <label className={styles.label}>What’s your business address?</label>
+       {!hideAddress && <>
+       <label className={styles.label}>What’s your business address?</label>
         <input
           className={styles.input}
           type="text"
@@ -698,8 +702,10 @@ useEffect(() => {
           onChange={handleInputChange}
           placeholder="Enter your business location"
         />
+        </>}
         <div className={styles.checkboxRow}>
-          <input type="checkbox" id="dontShow" />
+          <input type="checkbox" id="dontShow" checked={hideAddress}
+          onChange={handleCheckboxChange} />
           <label className={styles.DontLabel} htmlFor="dontShow">
             Hide this address from my public profile{" "}
             <span className={styles.infoIcon}>
@@ -733,14 +739,15 @@ useEffect(() => {
             <select
               className={`${styles.input} ${styles.customSelect}`}
               name="company_size"
-              value={formState.company_size}
+              value={details?.company_size}
+              // value={String(formState.company_size)}
               onChange={handleInputChange}
             >
               <option value="">How many people work in your business</option>
               <option value="Self-employed, Sole trader">Self-employed, Sole trader</option>
-              <option value="2–10">2–10 employees</option>
-              <option value="11–50">11–50 employees</option>
-              <option value="51–200">51–200 employees</option>
+              <option value="2-10">2–10 employees</option>
+              <option value="11-50">11–50 employees</option>
+              <option value='51-200'>51–200 employees</option>
               <option value="200+">200+ employees</option>
             </select>
           </div>

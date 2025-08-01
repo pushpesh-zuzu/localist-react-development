@@ -156,7 +156,7 @@ export const updateSellerPhotos = createAsyncThunk(
       const body = new FormData();
       body.append("type", formState.type || "photos");
       body.append("company_youtube_link", formState.company_youtube_link || "");
-      body.append("company_youtube_links", formState.company_youtube_links || "");
+      // body.append("company_youtube_links", formState.company_youtube_links || "");
 
       if (Array.isArray(formState.company_photos)) {
         formState.company_photos.forEach((file) => {

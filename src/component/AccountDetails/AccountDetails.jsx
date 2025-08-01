@@ -185,7 +185,7 @@ const AccountDetails = () => {
         <label className={styles.label}>SMS notification number</label>
         <input type="text" className={styles.input} name="sms_notification_no"
           value={contactData.sms_notification_no}
-          onChange={handleInputChange} />
+          onChange={handleInputChange} maxLength={10}/>
         <div className={styles.btnBox}>
           <button className={styles.saveBtn} onClick={handleSubmit}>{sellerLoader ? <Spin
                                           indicator={<LoadingOutlined spin style={{ color: "blue" }} />}

@@ -161,7 +161,7 @@ width: 170px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 16px;
+ 
    background-color: #E3F6FC;
   padding: 6px 8px;
   border-radius: 4px;
@@ -217,15 +217,40 @@ width: 170px;
   flex-direction: column;
 }
   .creditsWrapper {
-    flex-direction: column;
-    gap: 12px;
+    /* flex-direction: column; */
+    /* gap: 12px; */
     text-align: center;
+    padding: 10px;
+   
+    
   }
+.creditsBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+   background-color: #E3F6FC;
+  padding: 6px 6px;
+  border-radius: 4px;
+  border: 1px solid #000000;
+  
+}
 
-  .midLine {
+.midLine {
+  width: 2px;
+  height: 40px;
+  background-color: var(--primary-color);
+  margin: 0 4px;
+}
+  /* .midLine {
     display: none;
-  }
+  } */
   .title{
     font-size: 18px;
+  }
+  .guarantee img {
+    width: 62px;
+    height: 55px;
   }
 }

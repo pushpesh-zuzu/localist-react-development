@@ -25,7 +25,7 @@ const CreditCard = () => {
                     <img src={visaImg} alt="Visa" />
 
                     <div>
-                        We'll Change The Card Ending *{cardNumber?.[0]?.slice(-4)} That We Have On File
+                        We'll charge The Card Ending *{cardNumber?.[0]?.slice(-4)} That We Have On File
                         
                     </div>
                 </div>

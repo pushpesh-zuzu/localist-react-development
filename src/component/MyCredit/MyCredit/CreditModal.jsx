@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CreditModal.module.css";
 import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
+import useWindowHeight from "../../../utils/customHeigth";
 
 const CreditModal = ({ onClose }) => {
   const [creditValue, setCreditValue] = useState(400);
@@ -14,6 +15,7 @@ const CreditModal = ({ onClose }) => {
       document.body.style.overflow = 'auto';
     };
   }, []);
+   const customHeigth = useWindowHeight()
   const responseEstimate = Math.floor(creditValue / 8); // Example logic
   const price = (creditValue * 4.4625).toFixed(2); // Example: £1785 for 400 credits
   // const getSliderBackground = (value, min, max) => {
@@ -28,7 +30,7 @@ const CreditModal = ({ onClose }) => {
   
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContent}>
+      <div className={styles.modalContent} style={{ height: customHeigth <= 820 ? customHeigth-20 : 'auto'}}>
         <button className={styles.closeButton} onClick={onClose}>×</button>
 <div className={styles.title}>
         <h2 >Flexible Pricing to Grow Your Business</h2>

@@ -14,7 +14,7 @@ const PhotosAccordion = ({details}) => {
   const [formState, setFormState] = useState({
     type: "photos",
     company_photos: [],
-    company_youtube_link: "",
+    company_youtube_link: [],
     company_youtube_links: [],
   });
 
@@ -283,7 +283,7 @@ console.log(details,"details")
           </p>
           <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube Video Links</button>
           <div  className={styles.imageContainer}>
-          {formState.company_youtube_link.length > 0 ? (
+          {Array.isArray(formState.company_youtube_link) && formState.company_youtube_link.length > 0 ? (
   <div className={styles.videoContainer}>
     {formState.company_youtube_link?.map((link, idx) => (
       <iframe

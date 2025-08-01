@@ -22,6 +22,9 @@
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
+  .modalContent::-webkit-scrollbar {
+  display: none;
+}
   
   .closeButton {
     position: absolute;
@@ -411,3 +414,15 @@
       }
   }
   
+  
+@media (max-height: 820px) {
+ .modalOverlay{
+  align-items: unset !important;
+  height: fit-content;
+  /* overflow-y: auto; */
+  
+ }
+ .modalContent {
+  overflow-y: auto;
+ }
+}

@@ -121,12 +121,12 @@ const ReviewsAccordion = () => {
         </p>
       </div>
 
-      <div className={styles.buttonRow}>
+      {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>
         <button className={styles.saveBtn} onClick={handleSubmit}>
           Save
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
