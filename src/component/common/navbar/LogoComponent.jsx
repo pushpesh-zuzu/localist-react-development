@@ -212,7 +212,7 @@ const LogoComponent = () => {
                 <hr />
 
                 <div className={styles.popover_header}>
-                  <span>Services</span>
+                  <span>{filterItems}</span>
                   <Link to="#">See All</Link>
                 </div>
                 {allServiceList
