@@ -1,5 +1,6 @@
 import LogoComponent from "./LogoComponent";
 import LogSwitch from "./LogSwitch";
+import MobileSlideInSearch from "./MobileSlideInSearch";
 import styles from "./navbar.module.css";
 const Navbar = () => {
   return (

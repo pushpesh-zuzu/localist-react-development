@@ -128,21 +128,15 @@ const LogoComponent = () => {
   };
 
   const content = () => {
-    const pastelColors = [
-      "#FFF5F5", // Very light pink
-      "#F0F8FF", // Very light blue (Alice Blue)
-      "#F5F5DC", // Very light beige
-      "#F0FFF0", // Very light green (Honeydew)
-    ];
     return (
       <div
-        className={styles.popover_container}
+        className="w-72 py-4 overflow-hidden flex "
         onMouseLeave={() => {
           setShowSubMenu(false);
           setShowThirdLevel(false);
         }}
       >
-        <div className={styles.popover_wrap}>
+        <div className="w-full px-4 bg-white">
           <AnimatePresence mode="wait">
             {!showSubMenu && !showThirdLevel ? (
               <motion.div
@@ -153,20 +147,30 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 {isMobile && (
-                  <div className={styles.crossBtn} onClick={handleClose}>
+                  <div
+                    className="absolute top-2.5 right-2.5 cursor-pointer text-lg font-bold z-[9999]"
+                    onClick={handleClose}
+                  >
                     ×
                   </div>
                 )}
 
-                <div className={styles.popover_header}>
-                  <span>Services</span>
-                  <Link to="#">See All</Link>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[var(--primary-color)] text-lg font-semibold">
+                    Services
+                  </span>
+                  <Link
+                    to="#"
+                    className="text-[var(--primary-color)] text-lg font-semibold underline"
+                  >
+                    See All
+                  </Link>
                 </div>
 
                 {allServiceList?.slice(0, visibleCount).map((item, index) => (
                   <div
                     key={index}
-                    className={styles.popover_content}
+                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
                     onClick={() => {
                       setShowSubMenu(true);
                       setFilterItems(item.name);
@@ -174,9 +178,9 @@ const LogoComponent = () => {
                     onMouseEnter={() => setMouseHover(index)}
                     onMouseLeave={() => setMouseHover("")}
                   >
-                    <span className={`${styles.text_wrap} group`}>
+                    <span className="flex items-center gap-[9px] group">
                       <img
-                        className={`group-hover:bg-green-200 transition-colors duration-200`}
+                        className="group-hover:bg-green-200 transition-colors duration-200"
                         src={
                           item?.category_icon
                             ? `${BASE_URL_IMAGE}/${item?.category_icon}`
@@ -184,33 +188,37 @@ const LogoComponent = () => {
                         }
                         width={18}
                         height={18}
-                        alt="icon"
+                        alt={item.name}
                       />
                       {item.name === "Other Services" ? (
-                        <h4 style={{ fontWeight: "normal", color: "#5e5e5e" }}>
+                        <h4 className="font-normal text-[#5e5e5e]">
                           {item.name}
                         </h4>
                       ) : (
                         <Link
-                          className="hover:font-extrabold 
-                        hover:underline hover:text-black text-[#5e5e5e]"
+                          className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e]"
                           to="#"
                         >
                           {item.name}
                         </Link>
                       )}
                     </span>
-                    <img src={arrowIcon} width={8} alt="arrow" />
+                    <img
+                      src={arrowIcon}
+                      width={8}
+                      alt="arrow"
+                      className="group-hover:brightness-0"
+                    />
                   </div>
                 ))}
 
                 {totalItems > 5 && (
                   <div
-                    className={styles.popover_content}
-                    style={{ cursor: "pointer", fontWeight: "bold" }}
+                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group font-bold"
                     onClick={handleToggle}
                   >
-                    <span className={styles.text_wrap}>
+                    <span className="flex items-center gap-[9px]">
+                      <div className="w-[18px] h-[18px]"></div>
                       {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
@@ -225,28 +233,35 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className={styles.popover_back_explore}
+                  className="flex items-center gap-2 cursor-pointer font-semibold text-lg text-black"
                   onClick={() => setShowSubMenu(false)}
                 >
                   <img src={arrowLeft} width={24} alt="back" />
                   Back to Explore
                 </div>
-                <hr />
+                <hr className="my-4" />
 
-                <div className={styles.popover_header}>
-                  <span>{filterItems}</span>
-                  <Link to="#">See All</Link>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[var(--primary-color)] text-lg font-semibold">
+                    {filterItems}
+                  </span>
+                  <Link
+                    to="#"
+                    className="text-[var(--primary-color)] text-lg font-semibold underline"
+                  >
+                    See All
+                  </Link>
                 </div>
                 {allServiceList
                   ?.filter((item) => item?.name == filterItems)
                   .map((item, index) => (
                     <div key={index}>
                       <div
-                        className={styles.popover_content}
+                        className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
                         onMouseEnter={() => setMouseHover(index)}
                         onMouseLeave={() => setMouseHover("")}
                       >
-                        <span className={styles.text_wrap}>
+                        <span className="flex items-center gap-[9px]">
                           {item.icon && (
                             <img
                               src={
@@ -256,7 +271,7 @@ const LogoComponent = () => {
                               }
                               width={18}
                               height={18}
-                              alt="icon"
+                              alt={`${item.name}`}
                             />
                           )}
                         </span>
@@ -269,7 +284,7 @@ const LogoComponent = () => {
                         return (
                           <div
                             key={subIndex}
-                            className={styles.popover_content}
+                            className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
                             onMouseEnter={() => setMouseHover(subIndex)}
                             onMouseLeave={() => setMouseHover("")}
                             onClick={() => {
@@ -277,7 +292,7 @@ const LogoComponent = () => {
                               setShowThirdLevel(true);
                             }}
                           >
-                            <span className={styles.text_wrap}>
+                            <span className="flex items-center gap-[9px]">
                               <Link
                                 to={`/sub-category/${slug}`}
                                 className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
@@ -285,7 +300,12 @@ const LogoComponent = () => {
                                 {sub.name}
                               </Link>
                             </span>
-                            <img src={arrowIcon} width={8} alt="arrow" />
+                            <img
+                              src={arrowIcon}
+                              width={8}
+                              alt="arrow"
+                              className="group-hover:brightness-0"
+                            />
                           </div>
                         );
                       })}
@@ -301,27 +321,26 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className={styles.popover_back_explore}
+                  className="flex items-center gap-2 cursor-pointer font-semibold text-lg text-black"
                   onClick={() => setShowThirdLevel(false)}
                 >
                   <img src={arrowLeft} width={24} alt="back" />
                   {filterItems}
                 </div>
-                <hr />
+                <hr className="my-4" />
 
-                <div className={styles.popover_header}>
-                  <span>{selectedSubcategory}</span>
+                <div className="flex justify-between items-center mb-4">
+                  <span className="text-[var(--primary-color)] text-lg font-semibold">
+                    {selectedSubcategory}
+                  </span>
                 </div>
 
                 {locationData.map((location, index) => (
                   <div
                     key={index}
-                    className={styles.popover_content}
-                    // onClick={() => {
-                    //   console.log(`${location} selected for ${selectedSubcategory}`);
-                    // }}
+                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
                   >
-                    <span className={styles.text_wrap}>
+                    <span className="flex items-center gap-[9px]">
                       <Link
                         className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
                         to="#"
@@ -340,11 +359,11 @@ const LogoComponent = () => {
   };
 
   return (
-    <div className={styles.logoContainer}>
+    <div className="flex align-center gap-[21px] cursor-pointer">
       <img
         src={logo}
         alt="logo"
-        className={styles.mainLogo}
+        className="w-[90px] h-[19px] md:[125px] md:h-[35px] lg:w-[168px] lg:h-[35px]"
         onClick={handleRedirectUrl}
       />
       {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
