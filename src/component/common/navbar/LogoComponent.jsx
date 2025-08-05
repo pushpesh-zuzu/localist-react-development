@@ -14,10 +14,13 @@ import {
   subMenuData,
 } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllServiceList, getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
+import {
+  getAllServiceList,
+  getCategoriesList,
+  getPopularServiceList,
+} from "../../../store/FindJobs/findJobSlice";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
-
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -28,27 +31,27 @@ const LogoComponent = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
 
-  const { userToken } = useSelector((state) => state.auth)
-  const { registerData, popularList, CategoriesList, allServiceList } = useSelector(
-    (state) => state.findJobs
-  );
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData, popularList, CategoriesList, allServiceList } =
+    useSelector((state) => state.findJobs);
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-  
+
   const [isMobile, setIsMobile] = useState(false);
 
   // Sample location data
   const locationData = [
     "Cheshire",
-    "Cumbria", 
+    "Cumbria",
     "Manchester",
     "Lancashire",
-    "Merseyside"
+    "Merseyside",
+    "London ",
   ];
 
   useEffect(() => {
@@ -61,11 +64,11 @@ const LogoComponent = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-   const handleToggle = () => {
+  const handleToggle = () => {
     if (visibleCount >= totalItems) {
-      setVisibleCount(prev => Math.max(5, prev - 5));
+      setVisibleCount((prev) => Math.max(5, prev - 5));
     } else {
-      setVisibleCount(prev => Math.min(prev + 5, totalItems));
+      setVisibleCount((prev) => Math.min(prev + 5, totalItems));
     }
   };
 
@@ -83,10 +86,10 @@ const LogoComponent = () => {
   //     }
   //   };
   useEffect(() => {
-    dispatch(getPopularServiceList())
-    dispatch(getCategoriesList())
-    dispatch(getAllServiceList())
-  }, [])
+    dispatch(getPopularServiceList());
+    dispatch(getCategoriesList());
+    dispatch(getAllServiceList());
+  }, []);
   const handleRedirectUrl = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
@@ -119,12 +122,18 @@ const LogoComponent = () => {
   }, []);
   const handleClose = (e) => {
     setShowSubMenu(false);
-    setMouseHover(false)
-    setShowbMenu(false)
-    setShowThirdLevel(false)
-  }
+    setMouseHover(false);
+    setShowbMenu(false);
+    setShowThirdLevel(false);
+  };
 
   const content = () => {
+    const pastelColors = [
+      "#FFF5F5", // Very light pink
+      "#F0F8FF", // Very light blue (Alice Blue)
+      "#F5F5DC", // Very light beige
+      "#F0FFF0", // Very light green (Honeydew)
+    ];
     return (
       <div
         className={styles.popover_container}
@@ -143,11 +152,11 @@ const LogoComponent = () => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.2 }}
               >
-              {isMobile && (
-                <div className={styles.crossBtn} onClick={handleClose}>
-                  ×
-                </div>
-              )}
+                {isMobile && (
+                  <div className={styles.crossBtn} onClick={handleClose}>
+                    ×
+                  </div>
+                )}
 
                 <div className={styles.popover_header}>
                   <span>Services</span>
@@ -165,23 +174,31 @@ const LogoComponent = () => {
                     onMouseEnter={() => setMouseHover(index)}
                     onMouseLeave={() => setMouseHover("")}
                   >
-                    <span className={styles.text_wrap}>
+                    <span className={`${styles.text_wrap} group`}>
                       <img
-                      src={
-                        item?.category_icon
-                          ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                          : hiring
-                      }
+                        className={`group-hover:bg-green-200 transition-colors duration-200`}
+                        src={
+                          item?.category_icon
+                            ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                            : hiring
+                        }
                         width={18}
                         height={18}
                         alt="icon"
                       />
-                      {item.name ==='Other Services'? 
-                      <h4 style={{fontWeight:'normal', color:'#5e5e5e'}}>
-                      {item.name}
-                      </h4>
-                      :
-                      <Link to="#">{item.name}</Link>}
+                      {item.name === "Other Services" ? (
+                        <h4 style={{ fontWeight: "normal", color: "#5e5e5e" }}>
+                          {item.name}
+                        </h4>
+                      ) : (
+                        <Link
+                          className="hover:font-extrabold 
+                        hover:underline hover:text-black text-[#5e5e5e]"
+                          to="#"
+                        >
+                          {item.name}
+                        </Link>
+                      )}
                     </span>
                     <img src={arrowIcon} width={8} alt="arrow" />
                   </div>
@@ -190,11 +207,11 @@ const LogoComponent = () => {
                 {totalItems > 5 && (
                   <div
                     className={styles.popover_content}
-                  style={{ cursor: "pointer", fontWeight: "bold" }}
+                    style={{ cursor: "pointer", fontWeight: "bold" }}
                     onClick={handleToggle}
                   >
                     <span className={styles.text_wrap}>
-                    {isAllVisible ? "Show Less ▲" : "See More ▼"}
+                      {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
                 )}
@@ -246,9 +263,9 @@ const LogoComponent = () => {
                       </div>
 
                       {item.subcategory?.map((sub, subIndex) => {
-                      const slug = sub.name
-                        .toLowerCase()
-                        .replace(/\s+/g, "-");
+                        const slug = sub.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-");
                         return (
                           <div
                             key={subIndex}
@@ -261,7 +278,10 @@ const LogoComponent = () => {
                             }}
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={`/sub-category/${slug}`}>
+                              <Link
+                                to={`/sub-category/${slug}`}
+                                className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
+                              >
                                 {sub.name}
                               </Link>
                             </span>
@@ -302,7 +322,12 @@ const LogoComponent = () => {
                     // }}
                   >
                     <span className={styles.text_wrap}>
-                      <Link to="#">{selectedSubcategory} in {location}</Link>
+                      <Link
+                        className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
+                        to="#"
+                      >
+                        {selectedSubcategory} in {location}
+                      </Link>
                     </span>
                   </div>
                 ))}
@@ -339,8 +364,7 @@ const LogoComponent = () => {
             </div>
           </Popover>
         )} */}
-      {!userToken?.remember_tokens && !registerData?.remember_tokens &&
-        (
+      {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <Popover
           placement={placement}
           open={isMobile ? showMenu : null}
