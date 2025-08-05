@@ -147,6 +147,43 @@ setIsOpen(true)
                     <span>{item.service_name}</span>
                   </div>
 
+                  
+                  <div className={styles.mobileBadge}>
+                      <div className={styles.badge}>
+                    <span>{item.service_name}</span>
+                  </div>
+                  <div>
+                      <div className={styles.sidebar}>
+                      <div className={styles.ratings}>
+                        {/* <span className={styles.stars}>★★★★★</span>
+                      <span className={styles.ratingCount}>125</span> */}
+                        {(() => {
+                          const rating = item?.avg_rating || 0;
+
+                          return (
+                            <>
+                              <span className={styles.stars}>
+                                {[...Array(5)].map((_, index) => {
+                                  if (rating >= index + 1) {
+                                    return <span key={index}><img src={starImg} alt="..." width={29} height={27}/></span>; // Full star
+                                  } else if (rating >= index + 0.5) {
+                                    return <span key={index}>★</span>; // Half star (or use icon)
+                                  } else {
+                                    return <span key={index}><img src={grayStar} alt="..." /></span>; // Empty star
+                                  }
+                                })}
+                              </span>
+                              <span className={styles.ratingCount}>
+                                {rating}
+                              </span>
+                            </>
+                          );
+                        })()}
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
                   {/* <p className={styles.description}>
                     This is a static description for demonstration purposes. It
                     showcases how each bid card might look like in real data.

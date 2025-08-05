@@ -304,12 +304,12 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-            <button
+            {/* <button
               className={styles.uploadButton}
               onClick={() => setIsCameraOpen(true)}
             >
               Take Photo
-            </button>
+            </button> */}
           </div>
         </div>
 

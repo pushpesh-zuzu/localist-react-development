@@ -47,7 +47,7 @@ const QandAAccordion = ({details}) => {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
   const [loadingQuestionId, setLoadingQuestionId] = useState(null)
-  console.log(details,"ll")
+  console.log(details,"details")
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -62,20 +62,38 @@ const QandAAccordion = ({details}) => {
     dispatch(updateSellerQandA(answers));
   };
 
+// useEffect(() => {
+//   if (details && Array.isArray(details)) {
+//     const initialAnswers = {};
+//     details.forEach((item) => {
+//       const matchingQuestion = questions.find(
+//         (q) => q.label === item.questions
+//       );
+//       if (matchingQuestion) {
+//         initialAnswers[matchingQuestion.id] = item.answer;
+//       }
+//     });
+//     setAnswers(initialAnswers);
+//   }
+// }, [details]);
 useEffect(() => {
   if (details && Array.isArray(details)) {
     const initialAnswers = {};
     details.forEach((item) => {
-      const matchingQuestion = questions.find(
-        (q) => q.label === item.questions
+      console.log(item,"item")
+      const match = questions.find((q) =>
+        q.label.toLowerCase().trim() === item.questions.toLowerCase().trim()
       );
-      if (matchingQuestion) {
-        initialAnswers[matchingQuestion.id] = item.answer;
+      if (match) {
+        initialAnswers[match.id] = item.answer;
+      } else {
+        console.warn("No match found for:", item.questions);
       }
     });
     setAnswers(initialAnswers);
   }
 }, [details]);
+
 
   useEffect(() => {
     if (qnaUpdateSuccess) {

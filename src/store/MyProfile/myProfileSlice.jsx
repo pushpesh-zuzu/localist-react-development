@@ -281,15 +281,15 @@ export const updateSellerQandA = createAsyncThunk(
       const questions = [
         {
           id: "businessDuration",
-          label: "How long have you been in business?",
+          label: "Tell us how long you’ve been running your business.",
         },
         {
           id: "equipment",
-          label: "Do you bring your own equipment and supplies?",
+          label: "Do you provide your own tools and materials?",
         },
         {
           id: "jobLove",
-          label: "What do you love most about your job?",
+          label: "What do you enjoy most about your work?",
         },
         {
           id: "startBusiness",
@@ -297,7 +297,7 @@ export const updateSellerQandA = createAsyncThunk(
         },
         {
           id: "clientChoose",
-          label: "Why should our clients choose you?",
+          label: "Why should Localists.com customers choose your business?",
         },
         {
           id: "remoteServices",

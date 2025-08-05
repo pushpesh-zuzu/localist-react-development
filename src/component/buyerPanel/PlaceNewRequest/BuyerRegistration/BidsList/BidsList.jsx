@@ -654,7 +654,7 @@ const BidsList = ({ previousStep }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [ratingList,setRatingList] = useState("")
+  const [ratingList, setRatingList] = useState("")
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
   const { userToken } = useSelector((state) => state.auth);
@@ -703,18 +703,18 @@ const BidsList = ({ previousStep }) => {
   //   }
   // };
   const handleCheckboxChange = (sellerId) => {
-  const maxAllowed = parseInt(autoBidList?.[0]?.displayCount || 0);
+    const maxAllowed = parseInt(autoBidList?.[0]?.displayCount || 0);
 
-  if (selectedSellers.includes(sellerId)) {
-    setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
-  } else {
-    if (selectedSellers.length >= maxAllowed) {
-      showToast("error", `You can select only ${maxAllowed} sellers.`);
-      return;
+    if (selectedSellers.includes(sellerId)) {
+      setSelectedSellers(selectedSellers.filter((id) => id !== sellerId));
+    } else {
+      if (selectedSellers.length >= maxAllowed) {
+        showToast("error", `You can select only ${maxAllowed} sellers.`);
+        return;
+      }
+      setSelectedSellers([...selectedSellers, sellerId]);
     }
-    setSelectedSellers([...selectedSellers, sellerId]);
-  }
-};
+  };
 
   useEffect(() => {
     const data = {
@@ -736,16 +736,16 @@ const BidsList = ({ previousStep }) => {
   //   }
   // }, [autoBidList]);
   useEffect(() => {
-  if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
-    const allowedSelections = parseInt(autoBidList[0]?.displayCount || 0);
+    if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
+      const allowedSelections = parseInt(autoBidList[0]?.displayCount || 0);
 
-    const allowedSellers = autoBidList[0]?.sellers
-      ?.slice(0, allowedSelections)
-      ?.map((seller) => seller.id) || [];
+      const allowedSellers = autoBidList[0]?.sellers
+        ?.slice(0, allowedSelections)
+        ?.map((seller) => seller.id) || [];
 
-    setSelectedSellers(allowedSellers);
-  }
-}, [autoBidList]);
+      setSelectedSellers(allowedSellers);
+    }
+  }, [autoBidList]);
 
 
   const handleReply = () => {
@@ -757,7 +757,7 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
-console.log(seller,"seller")
+    console.log(seller, "seller")
     navigate(`/view-profile/${seller.id}/${requestId}`)
     // const data = {
     //   user_id: userToken?.remember_tokens
@@ -765,7 +765,7 @@ console.log(seller,"seller")
     //     : registerData?.remember_tokens,
     //   seller_id: seller?.id,
     //   lead_id: requestId,
-      
+
     // }
     // dispatch(getBuyerViewProfieApi(data)).then((result) => {
     //   if (result) {
@@ -779,21 +779,21 @@ console.log(seller,"seller")
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
-        lead_id:requestId
+      lead_id: requestId
     }
     dispatch(getRatingFilterApi(data))
   }, [])
-useEffect(() => {
-  const count = parseInt(autoBidList?.[0]?.displayCount || 0);
-  setVisibleCount(count);
-}, [autoBidList]);
+  useEffect(() => {
+    const count = parseInt(autoBidList?.[0]?.displayCount || 0);
+    setVisibleCount(count);
+  }, [autoBidList]);
   // const handleSeeMore = () => {
   //   setVisibleCount((prevCount) => prevCount + 5);
   // };
 
   const handleSeeMore = () => {
-  setVisibleCount(autoBidList?.[0]?.sellers?.length || 0);
-};
+    setVisibleCount(autoBidList?.[0]?.sellers?.length || 0);
+  };
   const handleContinue = (seller) => {
     let selectedItem = seller;
     if (!selectedItem) return;
@@ -875,10 +875,10 @@ useEffect(() => {
   }
   const handleSortRating = (e) => {
     const selectedRating = e.target.value
-    console.log(selectedRating,"oo")
+    console.log(selectedRating, "oo")
     setRatingList(selectedRating)
     const ratingData = {
-      lead_id:requestId,
+      lead_id: requestId,
       rating: selectedRating
     }
     dispatch(ratingFilterApi(ratingData))
@@ -908,7 +908,7 @@ useEffect(() => {
                     ? webdesignData[0]
                     : "No Service"}
                 </h1>
-                 <div className={styles.middleText}>Your Top 5 local professional matches are below. You can contact any of the <br/> professionals to get more information using the contact button.</div>
+                <div className={styles.middleText}>Your Top 5 local professional matches are below. You can contact any of the <br /> professionals to get more information using the contact button.</div>
                 <div className={styles.tabs}>
                   <button className={styles.activeTab}>Your matches</button>
                   <button className={styles.tab} onClick={handleReply}>
@@ -926,12 +926,23 @@ useEffect(() => {
               </div>
             </div>
 
-            <div className={styles.filters}>
-              <select className={styles.customSelect} onChange={handleSortRating} value={ratingList} defaultValue={""}>
+            {/* <div className={styles.filters}>
+
+ <div className={styles.matchCountWrapper}>
+              <span className={styles.matchCount}>
+                {matchingLength} matches
+              </span>
+             </div>
+              <select
+                className={styles.customSelect}
+                onChange={handleSortRating}
+                value={ratingList}
+                defaultValue=""
+              >
                 <option value="" disabled>All ratings</option>
                 {ratingFilterData[0]?.map((item) => (
                   <option key={item.value} value={item.value}>
-                    {"⭐".repeat(item.value)} {item.label} ({item.count})
+                    {item.value < 5 ? `${item.value} Star & up` : `${item.value} Star`}
                   </option>
                 ))}
               </select>
@@ -943,20 +954,69 @@ useEffect(() => {
 
               </select>
               <select onChange={handelresponseChangeSort} defaultValue={""} value={responseSort} className={styles.customSelect}>
-                {/* <option>All response times</option> */}
-                <option value="" disabled>All response times</option>
-                <option value="Responds within 10 mins">Responds within 10 mins</option>
-                <option value="Responds within 1 hour">Responds within 1 hour</option>
-                <option value="Responds within 6 hours">Responds within 6 hours</option>
-                <option value="Responds within 24 hours">Responds within 24 hours</option>
+              
+                <option value="" disabled>Response time</option>
+                <option value="Responds within 10 mins">within 10 mins</option>
+                <option value="Responds within 1 hour">within 1 hour</option>
+                <option value="Responds within 6 hours">within 6 hours</option>
+                <option value="Responds within 24 hours">within 24 hours</option>
               </select>
-              <span className={styles.matchCount}>
-                {matchingLength} matches
-              </span>
-              {/* <select className={`${styles.sortDropdown} ${styles.customSelect}`}>
-                <option>Sort by: best match</option>
-              </select> */}
-            </div>
+             
+            </div> */}
+
+
+<div className={styles.filters}>
+  {/* Match Count on top */}
+  <div className={styles.matchCountWrapper}>
+    <span className={styles.matchCount}>{matchingLength} matches</span>
+  </div>
+
+  {/* Selects below */}
+  <div className={styles.selectsWrapper}>
+    <select
+      className={styles.customSelect}
+      onChange={handleSortRating}
+      value={ratingList}
+      defaultValue=""
+    >
+      <option value="" disabled>All ratings</option>
+      {ratingFilterData[0]?.map((item) => (
+        <option key={item.value} value={item.value}>
+          {item.value < 5 ? `${item.value} Star & up` : `${item.value} Star`}
+        </option>
+      ))}
+    </select>
+
+    <select
+      onChange={handelChangeSort}
+      defaultValue=""
+      value={locationSort}
+      className={styles.customSelect}
+    >
+      <option value="" disabled>Sort by Location</option>
+      <option value="farthest to nearest">Farthest to Nearest</option>
+      <option value="nearest to farthest">Nearest to Farthest</option>
+    </select>
+
+    <select
+      onChange={handelresponseChangeSort}
+      defaultValue=""
+      value={responseSort}
+      className={styles.customSelect}
+    >
+      <option value="" disabled>Response time</option>
+      <option value="Responds within 10 mins">within 10 mins</option>
+      <option value="Responds within 1 hour">within 1 hour</option>
+      <option value="Responds within 6 hours">within 6 hours</option>
+      <option value="Responds within 24 hours">within 24 hours</option>
+    </select>
+  </div>
+</div>
+
+          
+
+
+
             <div className={styles.recommendBar}>
               <div className={styles.recommendBox}>
                 <div>
@@ -974,7 +1034,7 @@ useEffect(() => {
                 onClick={handleMultple}
                 disabled={isButtonDisabled}
               >
-                Request your best matches here
+                Request Your 5 Top Matches Here
               </button>
             </div>
             {/* {bidListLoader ? <Spin size="small"/> :  <> */}
@@ -1034,7 +1094,7 @@ useEffect(() => {
                                         } else if (rating >= index + 0.5) {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
-                                          return <span key={index}><img src={grayStar} alt="image"/></span>; // Empty star
+                                          return <span key={index}><img src={grayStar} alt="image" /></span>; // Empty star
                                         }
                                       })}
                                     </span>
@@ -1047,7 +1107,65 @@ useEffect(() => {
 
 
                         </div>
+                        <div className={styles.mobileImageWrapper}>
+                          <div className={styles.imageWrapper}>
+                            <img
+                              src={
+                                seller?.profile_image
+                                  ? `${BASE_IMAGE}/users/${seller?.profile_image}`
+                                  : DEFAULT_PROFILE_IMAGE
+                              }
+                              alt="Profile"
+                              className={styles.images}
+                            />
+                          </div>
+                          <div className={styles.mobileHeader}>
+                            <h3>
+                              {shouldShowGreenIcons && index < bidTotal && (
+                                <img src={GreenTickIcon} alt="" />
+                              )}
+                              {seller?.name}
+                            </h3>
+                            <p>
+                              <img src={AutoBidLocationIcon} alt="" />
+                              {seller?.distance ? seller?.distance : "0"} miles
+                              away
+                            </p>
+                          </div>
 
+                        </div>
+                        <div>
+                          <div className={styles.sidebar}>
+                            <div className={styles.badge}>
+                              <span>{seller?.service_name}</span>
+                            </div>
+                            <div className={styles.ratings}>
+
+                              {(() => {
+                                const rating = seller?.avg_rating || 0;
+
+                                return (
+                                  <>
+                                    <span className={styles.stars}>
+                                      {[...Array(5)].map((_, index) => {
+                                        if (rating >= index + 1) {
+                                          return <span key={index}>★</span>; // Full star
+                                        } else if (rating >= index + 0.5) {
+                                          return <span key={index}>★</span>; // Half star (or use icon)
+                                        } else {
+                                          return <span key={index}><img src={grayStar} alt="image" /></span>; // Empty star
+                                        }
+                                      })}
+                                    </span>
+                                    <span className={styles.ratingCount}>{rating}</span>
+                                  </>
+                                );
+                              })()}
+                            </div>
+                          </div>
+
+
+                        </div>
                         <div className={styles.badges}>
                           <span>{seller?.service_name}</span>
                         </div>
@@ -1107,9 +1225,9 @@ useEffect(() => {
                             //   selectedSellers.length >= bidTotal - bidCount
                             // }
                             disabled={
-  !selectedSellers.includes(seller.id) &&
-  selectedSellers.length >= parseInt(autoBidList?.[0]?.displayCount || 0)
-}
+                              !selectedSellers.includes(seller.id) &&
+                              selectedSellers.length >= parseInt(autoBidList?.[0]?.displayCount || 0)
+                            }
                           />
                         </div>
                         <button
@@ -1120,7 +1238,7 @@ useEffect(() => {
                             handleContinue(seller)
                           }}
                         >
-                        Contact the Professional Now
+                          Contact the Professional Now
                         </button>
                       </div>
                     </div>
@@ -1151,15 +1269,15 @@ useEffect(() => {
           </div>
         )} */}
         {autoBidList?.[0]?.sellers?.length > visibleCount && (
-  <div className={styles.moreProfessionalBtnBox}>
-    <button
-      className={styles.moreProfessionalBtn}
-      onClick={handleSeeMore}
-    >
-      See More Professionals
-    </button>
-  </div>
-)}
+          <div className={styles.moreProfessionalBtnBox}>
+            <button
+              className={styles.moreProfessionalBtn}
+              onClick={handleSeeMore}
+            >
+              See More Professionals
+            </button>
+          </div>
+        )}
       </div>
     </>
   );

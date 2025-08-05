@@ -163,7 +163,9 @@
   flex: 1;
   padding: 20px 0;
 }
-
+.mobileBadge {
+  display: none;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -448,7 +450,7 @@
   }
 
   .tabs {
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
     align-items: center;
   }
@@ -467,6 +469,9 @@
 @media (max-width: 480px) {
   .heading {
     font-size: 20px;
+  }
+  .middleText {
+    font-size: 14px;
   }
 
   .recommendBar {
@@ -489,22 +494,47 @@
   .description {
     font-size: 11px;
     margin-bottom: 20px;
-    padding: 10px 10px 21px 10px;
+    padding: 10px 10px 10px 10px;
   }
 
   .tab,
   .activeTab {
     text-align: center;
     width: 100%;
+    padding: 8px 8px;
   }
-
+   .backBtn {
+  padding: 6px 12px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .activeTab {
+    padding: 4.5px 10px;
+    width: 132px;
+    font-size: 15px;
+  }
+  .tab{
+    padding: 4px 10px;
+    width: 90px;
+    font-size: 15px;
+  }
+.mobileBadge {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
   .profileLink {
     font-size: 11px;
   }
-
+ .replyBtnWrapper {
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+  }
   .replyBtn {
-    font-size: 16px;
+    font-size: 14px;
     padding: 8px 20px;
+    margin: 10px;
   }
 
   .backBtnWrapper {
@@ -515,4 +545,65 @@
     display: flex;
     flex-direction: column-reverse;
   }
+  .mobileHeader {
+  display: flex;
+  justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.mobileHeader h3 {
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.mobileHeader h3 img {
+  height: 17.47px;
+  width: 17.47px;
+  margin-right: 7px;
+  margin-bottom: -2px;
+}
+
+.mobileHeader p {
+  font-weight: 600;
+  font-size: 12px;
+  vertical-align: middle;
+  display: flex;
+  gap: 7px;
+}
+.image {
+  width: 130px;
+
+  height: 90px;
+}
+.badges {
+  display: none;
+}
+.rating{
+  display: none;
+}
+.badge {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+.ratings {
+  display: flex;
+  font-size: 1.2rem;
+  text-align: center;
+  gap: 5px;
+}
+
+.badge span {
+  border: 1px solid #b3b3b3;
+  padding: 5px 10px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 10px;
+  vertical-align: middle;
+  color: #b3b3b3;
+  text-wrap: nowrap;
+}
 }

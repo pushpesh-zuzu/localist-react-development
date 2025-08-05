@@ -14,16 +14,37 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const { dashboardData } = useSelector((state) => state.dashboard)
   const [showDashboardContent, setShowDashboardContent] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date());
 const contentRef = useRef(null);
+const userName =dashboardData?.profile_info?.name
+
   useEffect(() => {
     dispatch(getDashboardListData())
   }, [])
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 60000); 
+    return () => clearInterval(timer);
+  }, []);
+  const formatTime = (date) => {
+    return date.toLocaleString("en-US", {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
   return (
     <div>
       <div className={styles["dashboard-wrapper"]}>
         <header className={styles["dashboard-header"]}>
-          <div className={styles.greeting}>Good afternoon, chander!</div>
-          <div className={styles.date}>Friday, 7 Mar 2:05pm</div>
+          <div className={styles.greeting}> Hello, {userName}!</div>
+          <div className={styles.date}>{formatTime(currentTime)}</div>
         </header>
 
         <div className={styles.hiddenDiv} style={{ visibility: 'hidden', backgroundColor: '#F9F9F9' }}>hhh</div>

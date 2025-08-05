@@ -22,10 +22,28 @@ const InvoiceAndBilling = () => {
         addressLine2: "",
         city: "",
         postcode: "",
+        country:"",
         phoneNumber: "",
-        vatRegister: ""
+        vatRegister: 0
     });
     const navigate = useNavigate();
+    const userData = userToken || registerData;
+    console.log(userData,"pp")
+    useEffect(()=>{
+        if (userData) {
+            setFormData({
+                contactName: userData?.name || "",
+                addressLine1: userData?.address || "",
+                addressLine2: userData?.apartment || "",
+                city: userData?.city || "",
+                postcode: userData?.zipcode || "",
+                country:userData?.country || "",
+                phoneNumber: userData?.phone || "",
+                vatRegister: userData?.billing_vat_register ? 1 : 0
+            });
+        }
+
+    },[userData])
    
     useEffect(() => {
         dispatch(getInvoiceListDataApi())
@@ -49,21 +67,22 @@ const InvoiceAndBilling = () => {
             billing_city: formData.city,
             billing_postcode: formData.postcode,
             billing_phone: formData.phoneNumber,
-            billing_vat_register: formData.vatRegister || "",
+            country:formData.country,
+            billing_vat_register:  Number(formData.vatRegister),
         }
         dispatch(AddSellerBillingDetailsApi(data))
             .then((result) => {
                 if (result) {
                     showToast("success", result?.message);
-                    setFormData({
-                        contactName: "",
-                        addressLine1: "",
-                        addressLine2: "",
-                        city: "",
-                        postcode: "",
-                        phoneNumber: "",
-                        vatRegister: ""
-                    });
+                    // setFormData({
+                    //     contactName: "",
+                    //     addressLine1: "",
+                    //     addressLine2: "",
+                    //     city: "",
+                    //     postcode: "",
+                    //     phoneNumber: "",
+                    //     vatRegister: ""
+                    // });
                 }
 
             })
@@ -102,7 +121,7 @@ const InvoiceAndBilling = () => {
                         value={formData.contactName}
                         onChange={handleChange}
                     />
-                    <label className={styles.label}>Address line 1</label>
+                    <label className={styles.label}>Street address</label>
                     <input
                         type="text"
                         name="addressLine1"
@@ -110,7 +129,7 @@ const InvoiceAndBilling = () => {
                         value={formData.addressLine1}
                         onChange={handleChange}
                     />
-                    <label className={styles.label}>Address line 2</label>
+                    <label className={styles.label}>Building or House Name/Number</label>
                     <input
                         type="text"
                         name="addressLine2"
@@ -130,7 +149,14 @@ const InvoiceAndBilling = () => {
                             <input type="text" name="postcode" value={formData.postcode} onChange={handleChange} className={styles.input} />
                         </div>
                     </div>
-
+                    <label className={styles.label}>Country</label>
+<input
+                        type="text"
+                        name="country"
+                        className={styles.input}
+                        value={formData.country}
+                        onChange={handleChange}
+                    />
                     <label className={styles.label}>Phone number</label>
                     <input
                         type="text"
@@ -141,15 +167,26 @@ const InvoiceAndBilling = () => {
                     />
                    <div className={styles.vatRegisterBox}>
                     <input
-                        type="checkbox"
-                        name="vatRegister"
-                        checked={formData.vatRegister === 1}
-                        onChange={(e) =>
-                            setFormData((prev) => ({
-                                ...prev,
-                                vatRegister: e.target.checked ? 1 : 0,
-                            }))
-                        }
+                        // type="checkbox"
+                        // name="vatRegister"
+                        // checked={formData.vatRegister === 1}
+                        // onChange={(e) =>
+                        //     setFormData((prev) => ({
+                        //         ...prev,
+                        //         vatRegister: e.target.checked ? 1 : 0,
+                        //     }))
+                        // }
+                         type="checkbox"
+          id="vatRegister"
+          name="vatRegister"
+          checked={formData.vatRegister === 1}
+          onChange={(e) => {
+            const isChecked = e.target.checked;
+            setFormData((prev) => ({
+              ...prev,
+              vatRegister: isChecked ? 1 : 0,
+            }));
+          }}
                     />
                    <label className={styles.labels}>VAT Register</label>
                    </div>
