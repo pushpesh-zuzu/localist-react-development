@@ -173,7 +173,8 @@
   position: absolute;
   background: white;
   /* border: 1px solid #ddd; */
-  width: 27.5%;
+  /* width: 28.5%; */
+  border-radius: 6px;
   max-height: fit-content;
   top: 84.8%;
   /* overflow-y: auto; */
@@ -215,7 +216,7 @@
   position: absolute;
   background: white;
   /* border: 1px solid #ddd; */
-  width: 20.6%;
+  width: 16%;
   max-height: fit-content;
   top: 84.8%;
   /* overflow-y: auto; */

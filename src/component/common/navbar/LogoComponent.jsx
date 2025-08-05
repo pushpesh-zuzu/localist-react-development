@@ -176,7 +176,12 @@ const LogoComponent = () => {
                         height={18}
                         alt="icon"
                       />
-                      <Link to="#">{item.name}</Link>
+                      {item.name ==='Other Services'? 
+                      <h4 style={{fontWeight:'normal', color:'#5e5e5e'}}>
+                      {item.name}
+                      </h4>
+                      :
+                      <Link to="#">{item.name}</Link>}
                     </span>
                     <img src={arrowIcon} width={8} alt="arrow" />
                   </div>
