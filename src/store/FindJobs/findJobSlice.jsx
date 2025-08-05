@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { showToast } from "../../utils";
 import axiosInstance from "../../Api/axiosInstance.js";
 import { fetchCompanyDetails } from '../../../src/store/Company/companyLookup';
+import { changeSequenceServices } from "../../utils/allservices.js";
 const initialState = {
   popularList: [],
   popularLoader: false,
@@ -396,7 +397,7 @@ const findJobSlice = createSlice({
       state.CategoriesList = action.payload
     },
     setAllServiceList(state, action) {
-      state.allServiceList = action.payload;
+      state.allServiceList = changeSequenceServices(action.payload, 2);
     },
     setPendingLeadLoader(state,action){
 state.pendingLoader = action.payload;
