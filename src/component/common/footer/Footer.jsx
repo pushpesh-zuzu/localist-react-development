@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
 
           <p className={styles.footerDesc}>
-            Localist is the world’s fastest-growing marketplace, and we have no
+            Localists is the world’s fastest-growing marketplace, and we have no
             intention of slowing down any time soon.
           </p>
 

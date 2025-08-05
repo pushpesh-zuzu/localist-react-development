@@ -24,10 +24,10 @@ const LogoComponent = () => {
   const [filterItems, setFilterItems] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showMenu, setShowbMenu] = useState(false);
-
-  // const [showAllCategories, setShowAllCategories] = useState(false);
-
+  const [showThirdLevel, setShowThirdLevel] = useState(false);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
+
   const { userToken } = useSelector((state) => state.auth)
   const { registerData, popularList, CategoriesList, allServiceList } = useSelector(
     (state) => state.findJobs
@@ -39,20 +39,17 @@ const LogoComponent = () => {
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-  console.log(userToken, registerData, "prem")
-  const handleToggle = () => {
-    if (visibleCount >= totalItems) {
-      // Decrease by 1 until min 1
-      setVisibleCount(prev => Math.max(5, prev - 5));
-    } else {
-      // Increase by 1 until max totalItems
-      setVisibleCount(prev => Math.min(prev + 5, totalItems));
-    }
-  };
-
-
-
+  
   const [isMobile, setIsMobile] = useState(false);
+
+  // Sample location data
+  const locationData = [
+    "Cheshire",
+    "Cumbria", 
+    "Manchester",
+    "Lancashire",
+    "Merseyside"
+  ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -64,9 +61,13 @@ const LogoComponent = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-
-  console.log(isMobile, "isMobile");
-  
+   const handleToggle = () => {
+    if (visibleCount >= totalItems) {
+      setVisibleCount(prev => Math.max(5, prev - 5));
+    } else {
+      setVisibleCount(prev => Math.min(prev + 5, totalItems));
+    }
+  };
 
   const isAllVisible = visibleCount >= totalItems;
   //   const handleRedirectUrl = () => {
@@ -120,235 +121,191 @@ const LogoComponent = () => {
     setShowSubMenu(false);
     setMouseHover(false)
     setShowbMenu(false)
+    setShowThirdLevel(false)
   }
 
   const content = () => {
     return (
-      <>
-        {/* <div className={styles.crossBtn}     onClick={(e) => handleClose(e)}>x</div> */}
-        <div
-          className={styles.popover_container}
-          onMouseLeave={() => setShowSubMenu(false)}
-        >
-          <div className={styles.popover_wrap}>
-            <AnimatePresence mode="wait">
-              {!showSubMenu ? (
-                <motion.div
-                  key="mainMenu"
-                  initial={{ x: "-100%", height: 0 }}
-                  animate={{ x: 0, height: "auto" }}
-                  exit={{ x: 0, height: 0 }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
-
-                  <div className={styles.popover_header}>
-                    <span>Services</span>
-                    <Link to="#">See All</Link>
-                  </div>
-
-                  {/* {CategoriesList?.map((item, index) => (
-                    <div
-                      key={index}
-                      className={styles.popover_content}
-                      onClick={() => {
-                        setShowSubMenu(true), setFilterItems(item.key);
-                      }}
-                      onMouseEnter={() => setMouseHover(index)}
-                      onMouseLeave={() => setMouseHover("")}
-                    >
-                      <span className={styles.text_wrap}>
-                        <img
-                          src={item?.category_icon
-                                                ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                                                : hiring
-                                            }
-                            // item?.iconhover && mouseHover === index
-                            //   ? item?.iconhover
-                            //   : item.icon
-                          
-                          width={18}
-                          height={18}
-                          alt="icon"
-                        />
-                        <Link to="#">{item.name}</Link>
-                      </span>
-                      <img src={arrowIcon} width={8} alt="arrow" />
-                    </div>
-                  ))} */}
-                 {isMobile && <div className={styles.crossBtn} onClick={handleClose}>×</div>}
-
-                  {allServiceList?.slice(0, visibleCount).map((item, index) => (
-                    <div
-                      key={index}
-                      className={styles.popover_content}
-                      onClick={() => {
-                        setShowSubMenu(true);
-                        setFilterItems(item.name);
-                      }}
-
-                      onMouseEnter={() => setMouseHover(index)}
-                      onMouseLeave={() => setMouseHover("")}
-                    >
-                      <span className={styles.text_wrap}>
-                        <img
-                          src={item?.category_icon ? `${BASE_URL_IMAGE}/${item?.category_icon}` : hiring}
-                          width={18}
-                          height={18}
-                          alt="icon"
-                        />
-                        <Link to="#">{item.name}</Link>
-                      </span>
-                      <img src={arrowIcon} width={8} alt="arrow" />
-                    </div>
-                  ))}
-
-                  {/* See More / Show Less Button */}
-                  {totalItems > 5 && (
-                    <div
-                      className={styles.popover_content}
-                      style={{ cursor: 'pointer', fontWeight: 'bold' }}
-                      onClick={handleToggle}
-                    >
-                      <span className={styles.text_wrap}>
-                        {isAllVisible ? 'Show Less ▲' : 'See More ▼'}
-                      </span>
-                    </div>
-                  )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="subMenu"
-                  initial={{ x: "100%", height: 0 }}
-                  animate={{ x: 0, height: "auto" }}
-                  exit={{ x: "0", height: 0 }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
-                  <div
-                    className={styles.popover_back_explore}
-                    onClick={() => setShowSubMenu(false)}
-                  >
-                    <img src={arrowLeft} width={24} />
-                    Back to Explore
-                  </div>
-                  <hr />
-
-                  <div className={styles.popover_header}>
-                    <span>Services</span>
-                    <Link to="#">See All</Link>
-                  </div>
-                  {allServiceList
-                    ?.filter((item) => item?.name == filterItems) // Filter by the selected category key
-                    .map((item, index) => (
-                      <div key={index}>
-                        <div
-                          className={styles.popover_content}
-                          onMouseEnter={() => setMouseHover(index)}
-                          onMouseLeave={() => setMouseHover("")}
-                        >
-                          <span className={styles.text_wrap}>
-                            {item.icon && (
-                              <img
-                                src={
-                                  item?.iconhover && mouseHover === index
-                                    ? item?.iconhover
-                                    : item.icon
-                                }
-                                width={18}
-                                height={18}
-                                alt="icon"
-                              />
-                            )}
-                            {/* <Link to={item?.path}>{item.name}</Link> */}
-                          </span>
-                        </div>
-
-                        {/* Display subcategories here */}
-                        {/* {item.subcategory?.map((sub, subIndex) => (
-                          <>
-                        const slug = item.name.toLowerCase().replace(/\s+/g, '-');
-                          <div
-                          key={subIndex}
-                          className={styles.popover_content}
-                          onMouseEnter={() => setMouseHover(subIndex)}
-                          onMouseLeave={() => setMouseHover("")}
-                          >
-                            <span className={styles.text_wrap}>
-                              <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
-                            </span>
-                          </div>
-                          </>
-                        ))} */}
-                        {item.subcategory?.map((sub, subIndex) => {
-                          const slug = sub.name.toLowerCase().replace(/\s+/g, '-'); // slug based on subcategory name
-
-                          return (
-                            <div
-                              key={subIndex}
-                              className={styles.popover_content}
-                              onMouseEnter={() => setMouseHover(subIndex)}
-                              onMouseLeave={() => setMouseHover("")}
-                            >
-                              <span className={styles.text_wrap}>
-                                <Link to={`/sub-category/${slug}`}>{sub.name}</Link>
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ))}
-                </motion.div>
+      <div
+        className={styles.popover_container}
+        onMouseLeave={() => {
+          setShowSubMenu(false);
+          setShowThirdLevel(false);
+        }}
+      >
+        <div className={styles.popover_wrap}>
+          <AnimatePresence mode="wait">
+            {!showSubMenu && !showThirdLevel ? (
+              <motion.div
+                key="mainMenu"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+              {isMobile && (
+                <div className={styles.crossBtn} onClick={handleClose}>
+                  ×
+                </div>
               )}
-            </AnimatePresence>
-          </div>
-          <div className={styles.popover_about_wrap}>
-            <div
-              className={`${styles.popover_header} ${styles.popover_header_height}`}
-            >
-              <div className={styles.popover_header_inner}>
-                <div className={styles.popover_about_head}>Services</div>
-                {/* {popularList?.map((item, index) => (
-                  <div key={index} className={styles.popover_content}>
-                    <Link to={item.path} className={styles.text_wrap}>
-                      <Link to={item?.path}>{item?.name}</Link>
-                    </Link>
-                  </div>
-                ))} */}
-                {/* {popularList?.slice(0, 5)?.map((item, index) => (
-                  <div key={index} className={styles.popover_content}>
-                    <Link to={item.path} className={styles.text_wrap}>
-                      <Link to={`${/category}`}>{item?.name}</Link>
-                    </Link>
-                  </div>
-                ))} */}
-                {popularList?.slice(0, 5)?.map((item, index) => {
-                  const slug = item.name.toLowerCase().replace(/\s+/g, '-');
 
-                  return (
-                    <div key={index} className={styles.popover_content}>
-                      <Link to={`/category/${slug}`} className={styles.text_wrap}>
-                        {/* {item?.name} */}
-                        <Link to={`/category/${slug}`}>{item?.name}</Link>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className={styles.popover_header_inner}>
-                <div className={styles.popover_about_head}>
+                <div className={styles.popover_header}>
+                  <span>Services</span>
                   <Link to="#">See All</Link>
                 </div>
-                {otherMenuData?.map((item, index) => (
-                  <div key={index} className={styles.popover_content}>
-                    <Link to={item.path} className={styles.text_wrap}>
-                      <Link to={"/category"}>{item.name}</Link>
-                    </Link>
+
+                {allServiceList?.slice(0, visibleCount).map((item, index) => (
+                  <div
+                    key={index}
+                    className={styles.popover_content}
+                    onClick={() => {
+                      setShowSubMenu(true);
+                      setFilterItems(item.name);
+                    }}
+                    onMouseEnter={() => setMouseHover(index)}
+                    onMouseLeave={() => setMouseHover("")}
+                  >
+                    <span className={styles.text_wrap}>
+                      <img
+                      src={
+                        item?.category_icon
+                          ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                          : hiring
+                      }
+                        width={18}
+                        height={18}
+                        alt="icon"
+                      />
+                      <Link to="#">{item.name}</Link>
+                    </span>
+                    <img src={arrowIcon} width={8} alt="arrow" />
                   </div>
                 ))}
-              </div>
-            </div>
-          </div>
+
+                {totalItems > 5 && (
+                  <div
+                    className={styles.popover_content}
+                  style={{ cursor: "pointer", fontWeight: "bold" }}
+                    onClick={handleToggle}
+                  >
+                    <span className={styles.text_wrap}>
+                    {isAllVisible ? "Show Less ▲" : "See More ▼"}
+                    </span>
+                  </div>
+                )}
+              </motion.div>
+            ) : showSubMenu && !showThirdLevel ? (
+              <motion.div
+                key="subMenu"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div
+                  className={styles.popover_back_explore}
+                  onClick={() => setShowSubMenu(false)}
+                >
+                  <img src={arrowLeft} width={24} alt="back" />
+                  Back to Explore
+                </div>
+                <hr />
+
+                <div className={styles.popover_header}>
+                  <span>Services</span>
+                  <Link to="#">See All</Link>
+                </div>
+                {allServiceList
+                  ?.filter((item) => item?.name == filterItems)
+                  .map((item, index) => (
+                    <div key={index}>
+                      <div
+                        className={styles.popover_content}
+                        onMouseEnter={() => setMouseHover(index)}
+                        onMouseLeave={() => setMouseHover("")}
+                      >
+                        <span className={styles.text_wrap}>
+                          {item.icon && (
+                            <img
+                              src={
+                                item?.iconhover && mouseHover === index
+                                  ? item?.iconhover
+                                  : item.icon
+                              }
+                              width={18}
+                              height={18}
+                              alt="icon"
+                            />
+                          )}
+                        </span>
+                      </div>
+
+                      {item.subcategory?.map((sub, subIndex) => {
+                      const slug = sub.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-");
+                        return (
+                          <div
+                            key={subIndex}
+                            className={styles.popover_content}
+                            onMouseEnter={() => setMouseHover(subIndex)}
+                            onMouseLeave={() => setMouseHover("")}
+                            onClick={() => {
+                              setSelectedSubcategory(sub.name);
+                              setShowThirdLevel(true);
+                            }}
+                          >
+                            <span className={styles.text_wrap}>
+                              <Link to={`/sub-category/${slug}`}>
+                                {sub.name}
+                              </Link>
+                            </span>
+                            <img src={arrowIcon} width={8} alt="arrow" />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="thirdLevel"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div
+                  className={styles.popover_back_explore}
+                  onClick={() => setShowThirdLevel(false)}
+                >
+                  <img src={arrowLeft} width={24} alt="back" />
+                  {filterItems}
+                </div>
+                <hr />
+
+                <div className={styles.popover_header}>
+                  <span>{selectedSubcategory}</span>
+                </div>
+
+                {locationData.map((location, index) => (
+                  <div
+                    key={index}
+                    className={styles.popover_content}
+                    // onClick={() => {
+                    //   console.log(`${location} selected for ${selectedSubcategory}`);
+                    // }}
+                  >
+                    <span className={styles.text_wrap}>
+                      <Link to="#">{selectedSubcategory} in {location}</Link>
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </>
+      </div>
     );
   };
 
@@ -379,22 +336,22 @@ const LogoComponent = () => {
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens &&
         (
-          <Popover
-            placement={placement}
-            open={isMobile ? showMenu : null}
-            content={content}
-            arrow={false}
-            trigger="hover"
-            className="popover_wrap"
-            onClick={() => setShowbMenu(true)}
-          >
-            <div className={styles.serviceContainer}>
-              <h2 className={styles.serviceText}>Explore Our Services</h2>
-              <h2 className={styles.serviceTextMobile}>Our Services</h2>
-              <img src={downArrow} alt="down-arrow" />
-            </div>
-          </Popover>
-        )}
+        <Popover
+          placement={placement}
+          open={isMobile ? showMenu : null}
+          content={content}
+          arrow={false}
+          trigger="hover"
+          className="popover_wrap"
+          onClick={() => setShowbMenu(true)}
+        >
+          <div className={styles.serviceContainer}>
+            <h2 className={styles.serviceText}>Explore Our Services</h2>
+            <h2 className={styles.serviceTextMobile}>Our Services</h2>
+            <img src={downArrow} alt="down-arrow" />
+          </div>
+        </Popover>
+      )}
     </div>
   );
 };

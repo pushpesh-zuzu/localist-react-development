@@ -256,7 +256,7 @@ const [show, setShow] = useState(false);
             <div className={`${styles.mobileOnly}`}>
               <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
             </div>
-            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}  
+            <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}   style={{position:'relative'}}
             // ref={wrapperRef}
             >
               <img src={searchIcon} alt="Search" width={18} height={18}   className={`${styles.icon} ${inputFocused ? styles.iconFocused : styles.iconFocusedNo}`}/>
@@ -277,11 +277,8 @@ const [show, setShow] = useState(false);
               />
             </div>
 
-
-          </div>
-      }
-      {showDropdown && service?.length > 0 && (
-  <div className={styles.dropdown}>
+   {showDropdown && service?.length > 0 && (
+  <div style={{position:'absolute', top:'18px'}} className={styles.dropdown}>
     {service?.map((item, index) => (
       <div
         key={index}
@@ -293,6 +290,9 @@ const [show, setShow] = useState(false);
     ))}
   </div>
 )}
+          </div>
+      }
+   
 
       <div className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}>
         {getUserType() == 1 && !viewProfile && (

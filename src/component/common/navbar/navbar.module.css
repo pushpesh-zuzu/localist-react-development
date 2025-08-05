@@ -544,16 +544,17 @@
 /* Popover styles sheet */
 
 .popover_container {
-  width: 757px;
+  width: 302px;
   padding: 16px 0;
+  overflow: hidden; 
   display: flex;
 }
 
 .popover_wrap {
-  width: 40%;
-  padding: 0px 26px;
-  border-right: 2px solid #d9d9d9;
-  overflow: hidden;
+  width: 100%; /* Take full width now */
+  padding: 0 16px;
+  border-right: none; /* Remove border since we don't have two columns anymore */
+   background: white;
 }
 
 .popover_about_wrap {
@@ -634,17 +635,17 @@
 
 @media screen and (max-width: 1010px) {
   .popover_container {
-    width: 657px;
+    width: 302px;
   }
 }
 
 @media screen and (max-width: 720px) {
   .popover_container {
-    width: 650px;
+    width: 302px;
   }
 
   .popover_wrap {
-    width: 40%;
+    width: 100%;
     padding: 0px 16px;
   }
 
@@ -929,7 +930,7 @@
   z-index: 1000;
   margin-top: 24px;
   height: fit-content;
-  max-width: 196px;
+  max-width: 206px;
   /* border-radius: 4px; */
   font-size: 14px;
   color: #848484;
