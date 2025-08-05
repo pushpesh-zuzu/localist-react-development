@@ -271,7 +271,9 @@
   margin-left: 16px;
 }
 
-
+.mobileImageWrapper {
+  display: none;
+}
 .profileLink {
   color: var(--primary-color);
   font-weight: 600;
@@ -473,6 +475,12 @@
   .middleText {
     font-size: 14px;
   }
+  .imageWrapper {
+  width: 50%;
+}
+.ratingCount {
+  margin-top: 0px;
+}
 
   .recommendBar {
     font-size: 16px;
@@ -480,11 +488,17 @@
     text-align: left;
   }
 
+.stars {
+  color: #ffd633;
+  font-size: 0px;
+}
   .badges {
     flex-wrap: wrap;
     margin: 15px 0px 20px 0px;
   }
-
+.header {
+   display: none;
+}
 
   .badges span {
     font-size: 9px;
@@ -522,6 +536,8 @@
 display: flex;
 justify-content: space-between;
 align-items: center;
+
+/* margin-bottom: 8px; */
 }
   .profileLink {
     font-size: 11px;
@@ -573,10 +589,15 @@ align-items: center;
   display: flex;
   gap: 7px;
 }
-.image {
+.images {
   width: 130px;
-
-  height: 90px;
+  height: 93px;
+}
+.mobileImageWrapper {
+  display: flex;
+}
+.image {
+  display: none;
 }
 .badges {
   display: none;

@@ -147,7 +147,31 @@ setIsOpen(true)
                     <span>{item.service_name}</span>
                   </div>
 
+                   <div className={styles.mobileImageWrapper}>
+                                            <div className={styles.imageWrapper}>
+                                              <img
+                                                src={
+                                                  item?.profile_image
+                                                    ? `${BASE_IMAGE}/users/${item?.profile_image}`
+                                                    : DEFAULT_PROFILE_IMAGE
+                                                }
+                                                alt="Profile"
+                                                className={styles.images}
+                                              />
+                                            </div>
+                                            <div className={styles.mobileHeader}>
+                                              <h3>
+                        <img src={GreenTickIcon} alt="" />
+                        {item.name}
+                      </h3>
+                                              <p>
+                                                <img src={AutoBidLocationIcon} alt="" />
+                                                {item?.distance ? item?.distance : "0"} miles
+                                                away
+                                              </p>
+                                            </div>
                   
+                                          </div>
                   <div className={styles.mobileBadge}>
                       <div className={styles.badge}>
                     <span>{item.service_name}</span>
