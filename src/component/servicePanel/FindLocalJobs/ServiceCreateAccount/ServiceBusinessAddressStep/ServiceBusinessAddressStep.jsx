@@ -22,6 +22,8 @@ const ServiceBusinessAddressStep = ({
 const dispatch = useDispatch();
 const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
+
+
 const hasPopulatedFromCompany = useSelector(
     (state) => state.findJobs.hasPopulatedFromCompany
   );
@@ -42,15 +44,15 @@ const hasPopulatedFromCompany = useSelector(
 
 useEffect(() => {
   const reg = formData.company_reg_number?.trim();
+  
 
   if (
     reg?.length === 8 &&
     companyData?.company_name &&
-    companyData?.registered_office_address &&
-    !hasPopulatedFromCompany
+    companyData?.registered_office_address
   ) {
    
-     
+     console.log('companyData:', companyData.registered_office_address?.address_line_1);
     
     const newAddress = {
       address: companyData.registered_office_address?.address_line_1 || formData.address,
