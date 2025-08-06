@@ -14,14 +14,19 @@ const ServiceBusinessAddressStep = ({
   formData,
   setFormData,
   errors,
-  addressCheck
+  addressCheck,
+  setHasPopulatedFromCompany
+  
 }) => {
 
 const dispatch = useDispatch();
 const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
+const hasPopulatedFromCompany = useSelector(
+    (state) => state.findJobs.hasPopulatedFromCompany
+  );
+  
   const hasClearedOnce = useRef(false);
-  const hasPopulatedFromCompany = useRef(false);
   const handleCheck = () => {
       // if(companyData.registered_office_address?.address_line_1) {
         
@@ -31,33 +36,8 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
       nextStep()
     }
 
-  useEffect(() => {
-    const reg = formData.company_reg_number?.trim();
 
-    if (!reg) {
-      if (!hasClearedOnce.current) {
-        hasClearedOnce.current = true;
 
-        // Call with dummy reg no to trigger backend cleanup
-        dispatch(fetchCompanyDetails("0"));
-        dispatch(clearCompanyData());
-
-        dispatch(
-          setFormData({
-            address: "",
-            apartment: "",
-            city: "",
-            zipcode: "",
-            country: "",
-          })
-        );
-      }
-    } else if (reg.length === 8) {
-      hasClearedOnce.current = false; 
-      hasPopulatedFromCompany.current = false; 
-      dispatch(fetchCompanyDetails(reg));
-    }
-  }, [formData.company_reg_number, dispatch, setFormData]);
 
 
 useEffect(() => {
@@ -66,21 +46,53 @@ useEffect(() => {
   if (
     reg?.length === 8 &&
     companyData?.company_name &&
-    companyData?.registered_office_address && !hasPopulatedFromCompany.current
+    companyData?.registered_office_address &&
+    !hasPopulatedFromCompany
   ) {
+   
+     
+    
     const newAddress = {
-      address: companyData.registered_office_address?.address_line_1 || "",
-      apartment: companyData.registered_office_address?.address_line_2 || "",
-      city: companyData.registered_office_address?.locality || "",
-      zipcode: companyData.registered_office_address?.postal_code || "",
-      country: companyData.registered_office_address?.country || "",
+      address: companyData.registered_office_address?.address_line_1 || formData.address,
+      apartment: companyData.registered_office_address?.address_line_2 || formData.apartment,
+      city: companyData.registered_office_address?.locality || formData.city,
+      zipcode: companyData.registered_office_address?.postal_code || formData.zipcode,
+      country: companyData.registered_office_address?.country || formData.country,
     };
 
     dispatch(setFormData(newAddress));
-    hasPopulatedFromCompany.current = true; 
-  
+    dispatch(setHasPopulatedFromCompany(true));
+
+
+    
   }
-}, [companyData, formData, dispatch]);
+}, [companyData]);
+
+useEffect(() => {
+  const reg = formData.company_reg_number?.trim();
+
+  if (!reg) {
+    if (hasPopulatedFromCompany) {
+      // Clear only if company data was populated earlier
+      dispatch(clearCompanyData());
+
+      dispatch(
+          setFormData({
+            address: "",
+            apartment: "",
+            city: "",
+            zipcode: "",
+            country: "",
+          })
+        );
+    //dispatch(fetchCompanyDetails(0));
+      dispatch(setHasPopulatedFromCompany(false));
+    }
+  } else if (reg.length === 8) {
+    dispatch(fetchCompanyDetails(reg));
+  }
+}, [formData.company_reg_number]);
+
 
 
 
