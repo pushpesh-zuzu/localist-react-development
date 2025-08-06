@@ -22,7 +22,7 @@
 .exampleBox {
   background: #f5f5f5;
   padding: 15px;
-  height: 116px;
+  /* height: 116px; */
   border-radius: 10px;
   width: 190px;
   text-align: left;

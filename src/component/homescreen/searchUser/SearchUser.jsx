@@ -27,7 +27,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
-const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { service, searchServiceLoader } = useSelector(
@@ -88,7 +88,6 @@ const [isFocused, setIsFocused] = useState(false);
     [dispatch]
   );
 
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (divRef.current && !divRef.current.contains(event.target)) {
@@ -101,7 +100,6 @@ const [isFocused, setIsFocused] = useState(false);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
 
   const handleChange = (e) => {
     setPincode(e.target.value);
@@ -145,18 +143,18 @@ const [isFocused, setIsFocused] = useState(false);
             postalCode = component.long_name;
           }
         });
-              let cityName =
-  place.address_components.find(component =>
-    component.types.includes("locality")
-  )?.long_name ||
-  place.address_components.find(component =>
-    component.types.includes("administrative_area_level_3")
-  )?.long_name;
-  console.log(cityName, "cityName");
+        let cityName =
+          place.address_components.find((component) =>
+            component.types.includes("locality")
+          )?.long_name ||
+          place.address_components.find((component) =>
+            component.types.includes("administrative_area_level_3")
+          )?.long_name;
+        console.log(cityName, "cityName");
         // const cityName = place.address_components.find((component) =>
         //   component.types.includes("locality")
         // )?.long_name;
-        
+
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
         )?.long_name;
@@ -198,8 +196,10 @@ const [isFocused, setIsFocused] = useState(false);
   return (
     <div className={styles.searchContainer}>
       <div className={styles.popularExamples}>
-        <div className={styles.exampleBox}>
-          <p className={styles.exampleTitle}>Popular examples:</p>
+        <div className={styles.exampleBox} style={{ minWidth: "min-content" }}>
+          <p className="xl:font-bold xl:text-[18px] xl:whitespace-nowrap xl:leading-[12px] xl:tracking-[0] xl:m-0 xl:mb-[20px] xl:text-[color:var(--primary-color)]">
+            Popular examples:
+          </p>
           <span className={styles.exampledescription}>
             Driveway Installation, Gardening Services, Web Design....
           </span>
@@ -224,10 +224,9 @@ const [isFocused, setIsFocused] = useState(false);
           <input
             type="text"
             placeholder={placeholder}
-             className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
-  onFocus={() => setIsFocused(true)}
-  onBlur={() => setIsFocused(false)}
-
+            className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             onChange={(e) => {
               setInput(e.target.value);
               setIsDropdownOpen(!!e.target.value);
@@ -261,7 +260,7 @@ const [isFocused, setIsFocused] = useState(false);
           </button>
         </div>
         {isDropdownOpen && service?.length > 0 && (
-          <div className={styles.searchResults}  ref={divRef}>
+          <div className={styles.searchResults} ref={divRef}>
             {searchServiceLoader ? (
               <Spin indicator={<LoadingOutlined spin />} />
             ) : (

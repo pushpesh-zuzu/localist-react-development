@@ -1,4 +1,4 @@
-/* @tailwind base; */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 :root {
@@ -14,5 +14,9 @@
 
 body {
   min-height: 100vh;
+  margin: 0px;
+  padding: 0px;
 }
-html{scroll-behavior: smooth}
+html {
+  scroll-behavior: smooth;
+}
