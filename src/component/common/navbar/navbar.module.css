@@ -1,29 +1,29 @@
-.navbarContainer {
+/* .navbarContainer {
   position: fixed;
   top: 0;
   width: 100%;
   background-color: white;
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+} */
 
-.navbarItems {
+/* .navbarItems {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 88px 24px 88px;
   height: 44px;
-}
+} */
 
-.navbarLeftContainer,
+/* .navbarLeftContainer,
 .navbarRightContainer {
   display: flex;
   width: 50%;
-}
+} */
 
-.navbarRightContainer {
+/* .navbarRightContainer {
   justify-content: end;
-}
+} */
 
 .logoContainer {
   display: flex;
@@ -275,8 +275,8 @@
 
 
 .iconFocused {
-  border-bottom: 1px solid #007bff; /* or any color */
-  padding-bottom: 9px;
+  border-bottom: 2.5px solid #007bff; /* or any color */
+  padding-bottom: 4px;
  
 }
 .iconFocusedNo {
@@ -525,7 +525,7 @@
   }
 
   .logSwitchContainer {
-    gap: 0px;
+    gap: 10px;
   }
 
   .professionalBtn {
@@ -543,12 +543,12 @@
 
 /* Popover styles sheet */
 
-.popover_container {
+/* .popover_container {
   width: 302px;
   padding: 16px 0;
   overflow: hidden; 
   display: flex;
-}
+} */
 
 .popover_wrap {
   width: 100%; /* Take full width now */
@@ -616,7 +616,7 @@
 }
 
 .text_wrap > a {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #5e5e5e;
   line-height: 18px;
@@ -633,16 +633,16 @@
   vertical-align: middle;
 }
 
-@media screen and (max-width: 1010px) {
+/* @media screen and (max-width: 1010px) {
   .popover_container {
     width: 302px;
   }
-}
+} */
 
 @media screen and (max-width: 720px) {
-  .popover_container {
+  /* .popover_container {
     width: 302px;
-  }
+  } */
 
   .popover_wrap {
     width: 100%;
@@ -685,9 +685,9 @@
 }
 
 @media screen and (max-width: 680px) {
-  .popover_container {
+  /* .popover_container {
     width: 550px;
-  }
+  } */
 
   .popover_wrap {
     width: 40%;
@@ -717,13 +717,13 @@
 }
 
 @media screen and (max-width: 610px) {
-  .popover_container {
+  /* .popover_container {
     width: 100%;
     padding: 16px 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
+  } */
 
   .popover_wrap {
     border-right: unset;
@@ -749,13 +749,13 @@
 }
 
 @media screen and (max-width: 480px) {
-  .popover_container {
+  /* .popover_container {
     width: 100%;
     padding: 16px 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
+  } */
   .nameCircle {
     margin-right: 0px;
   }
@@ -790,11 +790,11 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .navbarLeftContainer,
+  /* .navbarLeftContainer,
   .navbarRightContainer {
     display: flex;
     width: 100%;
-  }
+  } */
   .navMenu {
     display: none;
     flex-direction: column;
@@ -923,6 +923,7 @@
   top: 100%;
   left: 0;
   right: 0;
+  border-radius: 6px;
   background-color: white;
   border: 1px solid #ccc;
   /* max-height: 200px; */
@@ -944,4 +945,5 @@
 
 .dropdownItem:hover {
   background-color: #f2f2f2;
+  border-radius: 8px;
 }

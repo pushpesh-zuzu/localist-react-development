@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -11,5 +14,9 @@
 
 body {
   min-height: 100vh;
+  margin: 0px;
+  padding: 0px;
 }
-html{scroll-behavior: smooth}
+html {
+  scroll-behavior: smooth;
+}
