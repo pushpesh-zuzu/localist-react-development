@@ -3,7 +3,11 @@ import LogSwitch from "./LogSwitch";
 import styles from "./navbar.module.css";
 const Navbar = () => {
   return (
-    <div className={styles.navbarContainer}>
+    <nav
+      role="tablist"
+      aria-label="Professional matches navigation"
+      className={styles.navbarContainer}
+    >
       <div className={styles.navbarItems}>
         <div className={styles.navbarLeftContainer}>
           <LogoComponent />
@@ -12,7 +16,7 @@ const Navbar = () => {
           <LogSwitch />
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
