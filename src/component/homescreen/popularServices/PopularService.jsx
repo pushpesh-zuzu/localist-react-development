@@ -15,6 +15,7 @@ import imgBanner from "../../../assets/Images/houseCleaner.svg"
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 import { Spin } from "antd";
+import { memo } from "react";
 // import Modal from "./Modal";
 const serviceData = [
   { title: "Personal Trainers", image: personalTrainers },
@@ -54,8 +55,8 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 
-const PopularService = ({ closeModal }) => {
-  const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
+const PopularService = memo(function PopularService({ closeModal }) {
+    const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   const [show, setShow] = useState(false)
   const dispatch = useDispatch()
   const { popularList, popularLoader } = useSelector((state) => state.findJobs);
@@ -125,10 +126,15 @@ const PopularService = ({ closeModal }) => {
                 {popularList?.map((service, index) => (
                   <div key={index} className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id, service?.name)}>
                     <img
-                      src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
-                      alt={service.name}
-                      className={styles.image}
-                    />
+                        src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image.replace('.jpg', '.webp')}` : imgBanner}
+                        alt={service.name}
+                        className={styles.image}
+                        loading="lazy"          
+                        decoding="async"      
+                        width={300}           
+                        height={200}           
+                        style={{objectFit: 'cover'}} // Layout shift रोकने के लिए
+/>
 
                     <p className={styles.serviceTitle}>{service.name}</p>
                   </div>
@@ -154,6 +160,6 @@ const PopularService = ({ closeModal }) => {
 
     </>
   );
-};
+});
 
 export default PopularService;

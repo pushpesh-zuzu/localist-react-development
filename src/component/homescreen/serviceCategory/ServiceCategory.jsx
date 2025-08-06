@@ -15,12 +15,11 @@ const ServiceCategory = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { userToken } = useSelector((state)=> state.auth)
-  const { CategoriesList,categoriesListLoader,allServiceList ,popularLoader} = useSelector((state) => state.findJobs);
+  const { allServiceList ,popularLoader} = useSelector((state) => state.findJobs);
   useEffect(()=>{
 // dispatch (getCategoriesList())
   dispatch(getAllServiceList());
   },[])
-  console.log("allServiceList",allServiceList)
 
   const handleCategoryClick = (id, name) => {
     window.scrollTo(0, 0);

@@ -1,19 +1,43 @@
-import PopularService from "../component/homescreen/popularServices/PopularService";
+import { lazy, Suspense } from "react";
+
 import SearchProfessionals from "../component/homescreen/searchUser/SearchUser";
-import ServiceCategory from "../component/homescreen/serviceCategory/ServiceCategory";
-import Services from "../component/homescreen/services/Services";
-import OurTeams from "../component/homescreen/team/OurTeams";
-import WorkStructure from "../component/homescreen/WorkOverview/WorkStructure";
+
+const PopularService = lazy(() =>
+  import("../component/homescreen/popularServices/PopularService")
+);
+const ServiceCategory = lazy(() =>
+  import("../component/homescreen/serviceCategory/ServiceCategory")
+);
+const Services = lazy(() =>
+  import("../component/homescreen/services/Services")
+);
+const WorkStructure = lazy(() =>
+  import("../component/homescreen/WorkOverview/WorkStructure")
+);
+const OurTeams = lazy(() => import("../component/homescreen/team/OurTeams"));
 
 const Homepage = () => {
   return (
     <div>
       <SearchProfessionals />
-      <PopularService />
-      <ServiceCategory />
-      <Services />
-      <WorkStructure />
-      <OurTeams />
+
+      <Suspense fallback={null}>
+        <PopularService />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <ServiceCategory />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <Services />
+      </Suspense>
+      <Suspense fallback={null}>
+        <WorkStructure />
+      </Suspense>
+      <Suspense fallback={null}>
+        <OurTeams />
+      </Suspense>
     </div>
   );
 };

@@ -1,9 +1,6 @@
 // Services.jsx
-
 import styles from "./services.module.css";
-import leftArrow from "../../../assets/Images/backwordArrow.svg";
-import rightArrow from "../../../assets/Images/forwordArrow.svg";
-import SpecificService from "./SpecificService";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllServiceList } from "../../../store/FindJobs/findJobSlice";
