@@ -110,6 +110,41 @@ export const getCustomerLinkApi = () => {
           }
         };
       };
+
+
+  export const sellerPhoneNumberVerifyApi = (phoneData) => {
+        return async (dispatch) => {
+          dispatch(setSellerUpdateLoader(true));
+          try {
+            const response = await axiosInstance.post(`request-otp`,phoneData);
+            if (response) {
+              // dispatch(setEditProfileList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setSellerUpdateLoader(false));
+          }
+        };
+      };
+ export const sellerPhoneNumberVerifyDataApi = (otpData) => {
+        return async (dispatch) => {
+          dispatch(setSellerUpdateLoader(true));
+          try {
+            const response = await axiosInstance.post(`verify-otp`,otpData);
+            if (response) {
+              // dispatch(setEditProfileList(response?.data?.data));
+              return response?.data;
+            }
+          } catch (error) {
+            showToast("error", error?.response?.data?.message);
+          } finally {
+            dispatch(setSellerUpdateLoader(false));
+          }
+        };
+      };
+
 // Async thunk for submitting seller profile
 export const updateSellerProfile = createAsyncThunk(
   "myProfile/updateSellerProfile",

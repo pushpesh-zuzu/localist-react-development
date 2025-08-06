@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./AccountDetails.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { sellerEditProfileApi, sellerUpdatePasswordApi, sellerUpdateProfileApi } from "../../store/MyProfile/myProfileSlice";
+import { sellerEditProfileApi, sellerPhoneNumberVerifyApi, sellerUpdatePasswordApi, sellerUpdateProfileApi } from "../../store/MyProfile/myProfileSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
@@ -10,6 +10,7 @@ import { showToast } from "../../utils";
 import { updatePasswordData } from "../../store/Buyer/BuyerSlice";
 import ChangePasswordModal from "./ChangePasswordModal";
 import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg"
+import OtpModal from "./OtpModal";
 
 const AccountDetails = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const AccountDetails = () => {
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth)
   const { editProfileList,sellerLoader } = useSelector((state) => state.myProfile)
+  const [show,setShow] = useState(false)
+  const [btndisable,setBtnDisble] = useState(false)
   const [contactData, setContactData] = useState({
     email: '',
     phone: '',
@@ -111,7 +114,8 @@ const AccountDetails = () => {
     const { name, value } = e.target;
     if (name === "phone") {
       if (!/^\d*$/.test(value)) return; 
-      if (value.length > 10) return;    
+      if (value.length > 10) return;   
+      setBtnDisble(false) 
     }
     const updatedData = {
       ...contactData,
@@ -142,6 +146,18 @@ const AccountDetails = () => {
   }
   const handleBack = () => {
     navigate("/settings")
+  }
+  const handleVerifyNumber = () => {
+    const data = {
+      phone_number:contactData?.phone
+    }
+    dispatch(sellerPhoneNumberVerifyApi(data)).then((result) => {
+      if(result) {
+        showToast("success",result.message)
+        setShow(true)
+          setBtnDisble(true) 
+      }
+    })
   }
   return (
     <>
@@ -181,17 +197,17 @@ const AccountDetails = () => {
         <input type="text" className={styles.input} name="phone"
           value={contactData.phone}
           onChange={handleInputChange} />
-          <button className={styles.verifyNumberBtn}>Verify Number</button>
+          <button className={styles.verifyNumberBtn} onClick={handleVerifyNumber}>Verify Number</button>
 
         <label className={styles.label}>SMS notification number</label>
         <input type="text" className={styles.input} name="sms_notification_no"
           value={contactData.sms_notification_no}
           onChange={handleInputChange} maxLength={10}/>
-        <div className={styles.btnBox}>
-          <button className={styles.saveBtn} onClick={handleSubmit}>{sellerLoader ? <Spin
+     {   <div className={styles.btnBox}>
+          <button className={styles.saveBtn} onClick={handleSubmit} disabled={!btndisable } >{sellerLoader ? <Spin
                                           indicator={<LoadingOutlined spin style={{ color: "blue" }} />}
                                       />  :"Save"}</button>
-        </div>
+        </div>}
       </div>
 
       <div className={styles.passwordSection}>
@@ -220,6 +236,8 @@ const AccountDetails = () => {
         />
         
        }
+
+       {show && <OtpModal open={show} phoneData={contactData?.phone} onClose={()=>setShow(false)}/>}
    </>
   );
 };

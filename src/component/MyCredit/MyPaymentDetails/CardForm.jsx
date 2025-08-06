@@ -28,7 +28,7 @@ const ELEMENT_OPTIONS = {
 };
 
 const
-  CardPaymentForm = ({ onPaymentMethodCreated, onClose, data, topup, closeModal, details,newLeadApi }) => {
+  CardPaymentForm = ({ onPaymentMethodCreated, onClose, data, topup, closeModal, details,newLeadApi ,noLeadApiCall=false,newLeadData}) => {
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch();
@@ -39,7 +39,8 @@ const
     const { sellerBillingLoader } = useSelector((state) => state.myCredit);
     console.log(data, "data")
     const item = data?.map((item) => item)[0] || {};
-    console.log(item, "ll")
+    const items = newLeadData?.map((item) => item)[0] || {}
+    console.log(item,details,items, newLeadData,"88")
 
     const addManualBidData = () => {
       console.log(details, "sel")
@@ -67,58 +68,114 @@ const
       });
     }
 
-    const handleBuyNow = () => {
-      console.log(item, "item")
+//     const handleBuyNow = () => {
+//       console.log(item, "item")
 
 
-      let credits = item.no_of_leads;
+//       let credits = items.no_of_leads ?  items.no_of_leads : item?.no_of_leads;
 
-      const vatTotal =
-        item?.billing_vat_register === 0
-          ? 0
-          : Math.floor((item?.price * 20) / 100);
+//       const vatTotal =
+//         items?.billing_vat_register === 0
+//           ? 0
+//           : Math.floor((items?.price * 20) / 100);
 
-      // ✅ If coupon exists and is percentage-based
-      if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
-        const discountPercent = parseFloat(addcoupanList.replace('%', ''));
-        const discountAmount = Math.floor((item.no_of_leads * discountPercent) / 100);
+//       // ✅ If coupon exists and is percentage-based
+//       if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
+//         const discountPercent = parseFloat(addcoupanList.replace('%', ''));
+//         const discountAmount = Math.floor((items.no_of_leads * discountPercent) / 100);
 
-        credits = item.no_of_leads + discountAmount;
+//         credits = items.no_of_leads + discountAmount;
+//       }
+
+//       const creditData = {
+//         amount: items?.price ? items?.price : item?.price,
+//         credits: credits,
+//         details: items?.name ? items?.name : item?.name,
+//         total_amount: (items?.price + vatTotal) * 100 ? (items?.price + vatTotal) * 100 : (item?.price + vatTotal) * 100,
+//         vat: vatTotal,
+//         top_up: topup ? 1 : 0,
+//       };
+
+//       console.log(creditData, items?.no_of_leads, credits, vatTotal, 'creditData');
+//       dispatch(addBuyCreditApi(creditData)).then((result) => {
+
+//         if (result?.success) {
+//           showToast('success', result?.message);
+//           // setActiveLoaderId(null);
+       
+
+          
+//           // onClose(false)
+//           closeModal()
+//           dispatch(getInvoiceBillingListApi());
+//           if(!noLeadApiCall) {
+
+//   addManualBidData()
+// }
+//           const data = {
+//             user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+//           };
+
+//           dispatch(totalCreditData(data));
+
+//         } else if (result?.success === false) {
+
+//           // navigate("/payment-details");
+//           setCreditModal(true)
+//         }
+//       });
+//     };
+
+const handleBuyNow = () => {
+  console.log(item, "item");
+
+  let credits = items?.no_of_leads ? items.no_of_leads : item?.no_of_leads;
+
+  const price = items?.price ? items.price : item?.price;
+  const no_of_leads = items?.no_of_leads ? items.no_of_leads : item?.no_of_leads;
+  const name = items?.name ? items.name : item?.name;
+  const billing_vat_register = items?.billing_vat_register ?? item?.billing_vat_register;
+
+  const vatTotal = billing_vat_register === 0 ? 0 : Math.floor((price * 20) / 100);
+
+  // ✅ If coupon exists and is percentage-based
+  if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
+    const discountPercent = parseFloat(addcoupanList.replace('%', ''));
+    const discountAmount = Math.floor((no_of_leads * discountPercent) / 100);
+    credits = no_of_leads + discountAmount;
+  }
+
+  const creditData = {
+    amount: price,
+    credits: credits,
+    details: name,
+    total_amount: (price + vatTotal) * 100,
+    vat: vatTotal,
+    top_up: topup ? 1 : 0,
+  };
+
+  console.log(creditData, no_of_leads, credits, vatTotal, 'creditData');
+
+  dispatch(addBuyCreditApi(creditData)).then((result) => {
+    if (result?.success) {
+      showToast('success', result?.message);
+      dispatch(getInvoiceBillingListApi());
+      const data = {
+        user_id: userToken?.remember_tokens ? userToken.remember_tokens : registerData?.remember_tokens,
+      };
+      dispatch(totalCreditData(data));
+      closeModal();
+
+      if (!noLeadApiCall) {
+        addManualBidData();
       }
 
-      const creditData = {
-        amount: item?.price,
-        credits: credits,
-        details: item?.name,
-        total_amount: (item?.price + vatTotal) * 100,
-        vat: vatTotal,
-        top_up: topup ? 1 : 0,
-      };
-
-      console.log(creditData, item?.no_of_leads, credits, vatTotal, 'creditData');
-      dispatch(addBuyCreditApi(creditData)).then((result) => {
-
-        if (result?.success) {
-          showToast('success', result?.message);
-          // setActiveLoaderId(null);
-          addManualBidData()
-          // onClose(false)
-          closeModal()
-          dispatch(getInvoiceBillingListApi());
-          const data = {
-            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-          };
-
-          dispatch(totalCreditData(data));
-
-        } else if (result?.success === false) {
-
-          // navigate("/payment-details");
-          setCreditModal(true)
-        }
-      });
-    };
-
+    
+    } else if (result?.success === false) {
+      setCreditModal(true);
+    }
+  });
+};
 
     const handleSubmit = async (e) => {
       e.preventDefault();

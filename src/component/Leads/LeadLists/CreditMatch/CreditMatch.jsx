@@ -260,7 +260,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
 )}
 
       {isAddModalOpen && (
-        <AddCardModal onClose={() => setIsAddModalOpen(false)} />
+        <AddCardModal onClose={() => setIsAddModalOpen(false)} newLeadApi={true} newLeadData={filterData} noLeadApiCall={true}/>
       )}
     </>
   );

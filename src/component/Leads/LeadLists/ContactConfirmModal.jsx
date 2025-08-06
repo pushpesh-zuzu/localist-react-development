@@ -94,7 +94,7 @@ console.log(totalCredit,"12")
 
 
 const handleBuyNow = (item) => {
-  console.log(item,"item")
+  console.log(item,"itemee")
   setActiveLoaderId(item?.id);
 
   let credits = item.no_of_leads; 

@@ -134,7 +134,7 @@ import StripeProvider from "./StripeProvider";
 import CardPaymentForm from "./CardForm";
 import useWindowHeight from "../../../utils/customHeigth";
 
-const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi }) => {
+const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi,noLeadApiCall,newLeadData }) => {
     const [formData, setFormData] = useState({
         cardNumber: "",
         expiryDate: "",
@@ -200,7 +200,7 @@ const handleSubmit = async(e) => {
 console.log(Id,"Id")
     }
     // const customHeigth = useWindowHeight()
-
+console.log(details,newLeadData,"details")
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent} >
@@ -250,7 +250,7 @@ console.log(Id,"Id")
                  <AddCardWrapper /> 
                  </Elements> */}
                  <StripeProvider>
-                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose} data={detail} topup={topup} closeModal={closeModal} details={details} newLeadApi={newLeadApi}/>
+                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose} data={detail} topup={topup} closeModal={closeModal} details={details} newLeadApi={newLeadApi} noLeadApiCall={noLeadApiCall} newLeadData={newLeadData}/>
                  </StripeProvider>
                     {/* <div className={styles.actions}>
                         <button type="button" className={styles.cancelBtn} onClick={onClose}>
