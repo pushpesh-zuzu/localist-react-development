@@ -91,15 +91,6 @@ const handleCheck = () => {
 
 
 
-useEffect(() => {
-  if (!formData.company_reg_number) {
-    dispatch(setFormData({
-      company_name: "",
-      address: ""
-    }));
-    dispatch(clearCompanyData());
-  }
-}, []);
 
 // On reg number change: reset fields and fetch if 8 digits
 useEffect(() => {
@@ -108,6 +99,7 @@ useEffect(() => {
       company_name: "",
       address: ""
     }));
+    dispatch(clearCompanyData());  // Clears redux data so it doesn't refill company_name
     return;
   }
 
@@ -202,6 +194,7 @@ useEffect(() => {
                   name="company_name"
                   value={formData.company_name}
                   onChange={handleInputChange}
+                  readOnly
                 />
                 
                 <label className={styles.helperText}>

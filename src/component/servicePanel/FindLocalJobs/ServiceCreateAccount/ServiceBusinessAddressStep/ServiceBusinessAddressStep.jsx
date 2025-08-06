@@ -14,14 +14,21 @@ const ServiceBusinessAddressStep = ({
   formData,
   setFormData,
   errors,
-  addressCheck
+  addressCheck,
+  setHasPopulatedFromCompany
+  
 }) => {
 
 const dispatch = useDispatch();
 const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
+
+
+const hasPopulatedFromCompany = useSelector(
+    (state) => state.findJobs.hasPopulatedFromCompany
+  );
+  
   const hasClearedOnce = useRef(false);
-  const hasPopulatedFromCompany = useRef(false);
   const handleCheck = () => {
       // if(companyData.registered_office_address?.address_line_1) {
         
@@ -31,18 +38,47 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
       nextStep()
     }
 
-  useEffect(() => {
-    const reg = formData.company_reg_number?.trim();
 
-    if (!reg) {
-      if (!hasClearedOnce.current) {
-        hasClearedOnce.current = true;
 
-        // Call with dummy reg no to trigger backend cleanup
-        dispatch(fetchCompanyDetails("0"));
-        dispatch(clearCompanyData());
 
-        dispatch(
+
+useEffect(() => {
+  const reg = formData.company_reg_number?.trim();
+  
+
+  if (
+    reg?.length === 8 &&
+    companyData?.company_name &&
+    companyData?.registered_office_address
+  ) {
+   
+     console.log('companyData:', companyData.registered_office_address?.address_line_1);
+    
+    const newAddress = {
+      address: companyData.registered_office_address?.address_line_1 || formData.address,
+      apartment: companyData.registered_office_address?.address_line_2 || formData.apartment,
+      city: companyData.registered_office_address?.locality || formData.city,
+      zipcode: companyData.registered_office_address?.postal_code || formData.zipcode,
+      country: companyData.registered_office_address?.country || formData.country,
+    };
+
+    dispatch(setFormData(newAddress));
+    dispatch(setHasPopulatedFromCompany(true));
+
+
+    
+  }
+}, [companyData]);
+
+useEffect(() => {
+  const reg = formData.company_reg_number?.trim();
+
+  if (!reg) {
+    if (hasPopulatedFromCompany) {
+      // Clear only if company data was populated earlier
+      dispatch(clearCompanyData());
+
+      dispatch(
           setFormData({
             address: "",
             apartment: "",
@@ -51,36 +87,14 @@ const companyData = useSelector((state) => state.companyLook?.companyData);
             country: "",
           })
         );
-      }
-    } else if (reg.length === 8) {
-      hasClearedOnce.current = false; 
-      hasPopulatedFromCompany.current = false; 
-      dispatch(fetchCompanyDetails(reg));
+    //dispatch(fetchCompanyDetails(0));
+      dispatch(setHasPopulatedFromCompany(false));
     }
-  }, [formData.company_reg_number, dispatch, setFormData]);
-
-
-useEffect(() => {
-  const reg = formData.company_reg_number?.trim();
-
-  if (
-    reg?.length === 8 &&
-    companyData?.company_name &&
-    companyData?.registered_office_address && !hasPopulatedFromCompany.current
-  ) {
-    const newAddress = {
-      address: companyData.registered_office_address?.address_line_1 || "",
-      apartment: companyData.registered_office_address?.address_line_2 || "",
-      city: companyData.registered_office_address?.locality || "",
-      zipcode: companyData.registered_office_address?.postal_code || "",
-      country: companyData.registered_office_address?.country || "",
-    };
-
-    dispatch(setFormData(newAddress));
-    hasPopulatedFromCompany.current = true; 
-  
+  } else if (reg.length === 8) {
+    dispatch(fetchCompanyDetails(reg));
   }
-}, [companyData, formData, dispatch]);
+}, [formData.company_reg_number]);
+
 
 
 

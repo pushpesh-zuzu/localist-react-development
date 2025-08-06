@@ -6,6 +6,7 @@ import { changeSequenceServices } from "../../utils/allservices.js";
 const initialState = {
   popularList: [],
   popularLoader: false,
+  hasPopulatedFromCompany: false,
   searchServiceLoader: false,
   service: [],
   registerData:JSON.parse(localStorage.getItem("registerDataToken")) || null,
@@ -343,6 +344,7 @@ export const checkAddressApi = (addressData) => {
 }
 
 
+
 const findJobSlice = createSlice({
   name: "findJobs",
   initialState: initialState,
@@ -356,7 +358,9 @@ const findJobSlice = createSlice({
     setService(state, action) {
       state.service = action.payload;
     },
-
+     setHasPopulatedFromCompany: (state, action) => {
+      state.hasPopulatedFromCompany = action.payload;
+    },
     setsearchServiceLoader(state, action) {
       state.searchServiceLoader = action.payload;
     },
@@ -498,6 +502,7 @@ export const {
   setCountry,
   setCity,setPostalCode,
   setErrorCheckComanyName,
+  setHasPopulatedFromCompany,
   clearAuthToken
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

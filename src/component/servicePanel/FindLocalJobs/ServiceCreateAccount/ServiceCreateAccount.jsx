@@ -5,7 +5,7 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAddressApi, checkCompanyNameApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData } from "../../../../store/FindJobs/findJobSlice";
+import { checkAddressApi, checkCompanyNameApi,checkCompanyNameWithoutRegApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData,setHasPopulatedFromCompany } from "../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../utils";
 
 const ServiceCreateAccount = () => {
@@ -288,6 +288,7 @@ useEffect(() => {
             handleInputChange={handleInputChange}
             errors={errors}
             addressCheck={addressCheck}
+            setHasPopulatedFromCompany={setHasPopulatedFromCompany}
           />
         )}
         {registerStep === 4 && (
