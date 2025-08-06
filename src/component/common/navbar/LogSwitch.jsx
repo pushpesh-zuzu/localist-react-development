@@ -17,6 +17,7 @@ import {
 import { BASE_COMPLETE, BASE_IMAGE, showToast } from "../../../utils";
 import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg"
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
+import MobileSlideInSearch from "./MobileSlideInSearch";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -32,6 +33,9 @@ const LogSwitch = () => {
   const [registerdata, setRegisterDatas] = useState()
   const { userToken, currentUser } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer)
+    const [showMobileSearch, setShowMobileSearch] = useState(false);
+  const [mobileSearchText, setMobileSearchText] = useState("");
+
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
@@ -253,28 +257,42 @@ const [show, setShow] = useState(false);
         </div> :
 
           <div style={{ marginTop: "4px" }} className={styles.inputWrapper} >
-            <div className={`${styles.mobileOnly}`}>
-              <img src={searchIcon} alt="Search" className={styles.icon} width={18} height={18} />
+            <div className={`${styles.mobileOnly}`} style={{cursor:'pointer !important'}}>
+              <img src={searchIcon} 
+              onClick={() => setShowMobileSearch((prev) => !prev)}
+              alt="Search" className={styles.icon} width={18} height={18} />
             </div>
             <div className={`${styles.inputWrapper} ${styles.desktopOnly}`}   style={{position:'relative'}}
             // ref={wrapperRef}
             >
               <img src={searchIcon} alt="Search" width={18} height={18}   className={`${styles.icon} ${inputFocused ? styles.iconFocused : styles.iconFocusedNo}`}/>
               <input
-                type="text"
-                placeholder="Search for a service"
-                onChange={handleSearch}
-                className={styles.input}
-                 onFocus={() => setInputFocused(true)}
-  onBlur={() => {setInputFocused(false)
-    setTimeout(() => {
-      setShowDropdown(false)
-      
-    }, 500);
-  }
-  }
-  value={searchText}
-              />
+                    type="text"
+                    placeholder="Search for a service"
+                    onChange={handleSearch}
+                    className={styles.input}
+                    style={
+                    showDropdown && service?.length > 0
+                      ? {
+                          borderTopLeftRadius: "0.5rem",
+                          borderTopRightRadius: "0.5rem",
+                          borderBottomLeftRadius: "0",
+                          borderBottomRightRadius: "0",
+                        }
+                      : {
+                          borderRadius: "0.5rem"
+                        }
+                    }
+                    onFocus={() => setInputFocused(true)}
+                    onBlur={() => {
+                    setInputFocused(false);
+                    setTimeout(() => {
+                      setShowDropdown(false);
+                    }, 500);
+                    }}
+                    value={searchText}
+                    />
+
             </div>
 
    {showDropdown && service?.length > 0 && (
@@ -550,6 +568,16 @@ const [show, setShow] = useState(false);
     // postalCodeValidate={postalCodeValidate}
   />
 )}
+      <MobileSlideInSearch
+        isOpen={showMobileSearch}
+        setIsOpen={setShowMobileSearch}
+        services={service} 
+        handleServiceSelect={handleServiceSelect} 
+        dispatch={dispatch}
+        searchService={searchService}
+        mobileSearchText={mobileSearchText}
+        setMobileSearchText={setMobileSearchText}
+      />
 </>
   );
 };

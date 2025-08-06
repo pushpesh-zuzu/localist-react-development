@@ -177,7 +177,7 @@ const LogoComponent = () => {
                         alt="icon"
                       />
                       {item.name ==='Other Services'? 
-                      <h4 style={{fontWeight:'normal', color:'#5e5e5e'}}>
+                      <h4  className={styles.othertext}>
                       {item.name}
                       </h4>
                       :

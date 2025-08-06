@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import "./MobileSlideInSearch.css";
 
 export default function MobileSlideInSearch({
   isOpen,
@@ -64,29 +65,17 @@ export default function MobileSlideInSearch({
 
   return (
     <>
-      <div className="relative md:hidden font-poppins">
+      <div className="mobile-search-container">
         {/* Modal Overlay */}
-        {isOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
-            onClick={closeSearch}
-          />
-        )}
+        {isOpen && <div className="modal-overlay" onClick={closeSearch} />}
 
-        <div
-          className={`fixed inset-0 bg-white z-50 transform transition-transform duration-500 ease-in-out ${
-            isOpen ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
-          <div className="h-full flex flex-col px-4 pt-6 pb-6 font-poppins">
+        <div className={`modal-content ${isOpen ? "open" : ""}`}>
+          <div className={isOpen ? "modal-inner" : ""}>
             {/* Search Input Row */}
-            <div className="flex items-center gap-3 mb-4">
-              <button
-                onClick={closeSearch}
-                className="text-gray-600 focus:outline-none p-1"
-              >
+            <div className="search-input-row">
+              <button onClick={closeSearch} className="close-button">
                 <svg
-                  className="w-6 h-6"
+                  className="close-icon"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -103,7 +92,7 @@ export default function MobileSlideInSearch({
                 ref={searchInputRef}
                 type="text"
                 placeholder="Search for a service"
-                className="flex-1 p-3 text-base  outline-none font-[poppins]"
+                className="search-input"
                 value={mobileSearchText}
                 onChange={handleInputChange}
                 onFocus={() => setShowSuggestions(true)}
@@ -112,23 +101,23 @@ export default function MobileSlideInSearch({
 
             {/* Suggestions List */}
             {showSuggestions && (
-              <div className="border-t border-gray-200 flex-1 overflow-hidden">
-                <ul className="h-full overflow-y-auto">
+              <div className="suggestions-container">
+                <ul className="suggestions-list">
                   {services && services.length > 0 ? (
                     services.map((serviceItem, index) => (
                       <li
                         key={index}
                         onClick={() => handleServiceClickLocal(serviceItem)}
-                        className="py-3 px-3 text-[15px] text-gray-700 cursor-pointer transition-all duration-200 hover:bg-gray-50 hover:font-semibold rounded-md border-b border-gray-100"
+                        className="service-item"
                       >
                         {serviceItem.name}
                       </li>
                     ))
                   ) : (
-                    <li className="text-center text-gray-400 py-6 font-poppins">
+                    <li className="no-results">
                       {mobileSearchText && mobileSearchText.trim() !== ""
                         ? "No services found"
-                        : "Start typing to search services. example: patio, business,home etc."}
+                        : "Start typing to search services. example: patio, business, home etc."}
                     </li>
                   )}
                 </ul>
