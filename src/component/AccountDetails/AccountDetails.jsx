@@ -181,6 +181,7 @@ const AccountDetails = () => {
         <input type="text" className={styles.input} name="phone"
           value={contactData.phone}
           onChange={handleInputChange} />
+          <button className={styles.verifyNumberBtn}>Verify Number</button>
 
         <label className={styles.label}>SMS notification number</label>
         <input type="text" className={styles.input} name="sms_notification_no"

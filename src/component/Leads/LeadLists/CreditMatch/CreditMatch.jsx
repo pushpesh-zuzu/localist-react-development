@@ -27,6 +27,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
   const handleBuyNow = (item) => {
     console.log(item, "item");
     // navigate("/payment-details")
+   
     let credits = item.no_of_leads;
 
     const vatTotal =
@@ -53,7 +54,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
       top_up: autoTopUp ? 1 : 0,
     };
 
-    console.log(creditData, item?.no_of_leads, credits, vatTotal, "creditData");
+   
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {

@@ -194,6 +194,7 @@ align-items: center
   overflow: hidden;
   gap: 15px;
   margin-bottom: 16px;
+  
 }
 
 .cardLeft {
@@ -559,11 +560,15 @@ align-items: center
   .heading {
     font-size: 20px;
   }
+  .card {
+    padding: 0px 8px;
+     box-shadow: 0px 0px 2px 0.5px #0000001a;
+  }
 
   .recommendBar {
     font-size: 14px;
     padding: 15px 8px;
-    text-align: left;
+    text-align: center;
   }
   .filters {
      flex-direction: column;
@@ -649,7 +654,7 @@ align-items: center
   }
   .stars {
   
-  font-size: 24px;
+  font-size: 18px;
 }
 .ratingCount {
   font-size: 24px;
@@ -723,7 +728,7 @@ align-items: center
   align-items: center;
 }
 .images {
-  width: 130px;
+  width: 180px;
   height: 93px;
 }
 .mobileImageWrapper {
@@ -748,6 +753,15 @@ align-items: center
   font-size: 1.2rem;
   text-align: center;
   gap: 5px;
+  align-items: center;
+}
+.grayImg img {
+  width: 24px;
+  height: 24px;
+}
+.stars span {
+    width: 24px;
+  height: 24px;
 }
 
 .badge span {
@@ -817,6 +831,7 @@ align-items: center
   gap: 7px;
 }
 
+
 }
 @media screen and (min-width: 371px) and (max-width: 420px) {
   .filters select {
@@ -825,7 +840,7 @@ align-items: center
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
     color: #000000;
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .customSelect {
@@ -837,6 +852,10 @@ align-items: center
     background-position: right 4px center;
     padding-right: 40px;
     background-size: 10px 10px;
+  }
+  .images {
+    width: 140px;
+    height: 90px;
   }
 }
 
@@ -859,4 +878,47 @@ align-items: center
   padding-right: 40px;
   background-size: 10px 10px;
 }
+ .images {
+    width: 140px;
+    height: 90px;
+  }
+}
+@media screen and (max-width:350px) {
+   .images {
+    width: 120px;
+    height: 90px;
+  }
+  .filters select {
+  width: 88px;
+  padding: 8px 6px;
+  border: 1px solid #d9d9d9;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 8px;
+}
+.customSelect {
+  appearance: none;           
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('../../../../../assets/Icons/downArrowIcon.svg');
+  background-repeat: no-repeat;
+  background-position: right 4px center; 
+  padding-right: 40px;
+  background-size: 10px 10px;
+}
+ .images {
+    width: 140px;
+    height: 90px;
+  }
+}
+@media screen and (max-width:320px) {
+  .filters select {
+  width: 85px;
+  padding: 6px 4px;
+  border: 1px solid #d9d9d9;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 8px;
+  }
+  
 }

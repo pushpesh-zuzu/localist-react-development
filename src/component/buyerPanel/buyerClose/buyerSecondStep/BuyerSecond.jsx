@@ -1,17 +1,43 @@
 import React, { useState } from 'react';
 import styles from './BuyerSecondStep.module.css';
 import ImageModal from '../ImageModal';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { closeRequestData } from '../../../../store/Buyer/BuyerSlice';
+import { showToast } from '../../../../utils';
 
 const BuyerSecondStep = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [price, setPrice] = useState('');
+const [unitType, setUnitType] = useState('Total Price');
+const [disclose, setDisclose] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
+const { leadId, sellerId } = location.state || {};
+
+console.log('Lead', sellerId,leadId);
     const handleSubmit = () => {
-setIsModalOpen(true);
+      const data = {
+      lead_id: leadId,
+    seller_id: sellerId,
+    final_price: Number(price), // Convert to number if needed
+    unit_type: unitType,
+    disclose_information: disclose ? 1 : 0
+      }
+      dispatch(closeRequestData(data)).then((result) => {
+        if (result?.success) {
+          showToast("success", result?.message);
+          navigate("/buyers/create")
+        }
+      }
+      );
+// setIsModalOpen(true);
     }
     const handleBack = () => {
         navigate(-1);
     }
+// closeRequestData
   return (
     <div className={styles.container}>
       <div className={styles.infoBox}>
@@ -28,23 +54,37 @@ setIsModalOpen(true);
       <div className={styles.inputGroup}>
         <div className={styles.priceInput}>
           <span>£</span>
-          <input type="number" placeholder="0" />
+          <input
+    type="number"
+    placeholder="0"
+    value={price}
+    onChange={(e) => setPrice(e.target.value)}
+  />
         </div>
-        <select  className={styles.customSelect}>
-          <option>Total Price</option>
-          <option>Hour</option>
-          <option>Day</option>
-          <option>Visit</option>
-          <option>Sessions</option>
-          <option>Week</option>
-          <option>Month</option>
-        </select>
+       <select
+  className={styles.customSelect}
+  value={unitType}
+  onChange={(e) => setUnitType(e.target.value)}
+>
+  <option>Total Price</option>
+  <option>Hour</option>
+  <option>Day</option>
+  <option>Visit</option>
+  <option>Sessions</option>
+  <option>Week</option>
+  <option>Month</option>
+</select>
       </div>
 
-      <div className={styles.checkboxGroup}>
-        <input type="checkbox" id="hidePrice" />
-        <label htmlFor="hidePrice">I don't want to disclose this information</label>
-      </div>
+     <div className={styles.checkboxGroup}>
+  <input
+    type="checkbox"
+    id="hidePrice"
+    checked={disclose}
+    onChange={(e) => setDisclose(e.target.checked)}
+  />
+  <label htmlFor="hidePrice">I don't want to disclose this information</label>
+</div>
 
       <div className={styles.buttonGroup}>
         <button className={styles.backBtn} onClick={handleBack}>Back</button>

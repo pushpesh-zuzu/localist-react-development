@@ -1153,7 +1153,7 @@ const BidsList = ({ previousStep }) => {
                                         } else if (rating >= index + 0.5) {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
-                                          return <span key={index}><img src={grayStar} alt="image" /></span>; // Empty star
+                                          return <span key={index} className={styles.grayImg}><img src={grayStar} alt="image" /></span>; // Empty star
                                         }
                                       })}
                                     </span>
@@ -1171,11 +1171,7 @@ const BidsList = ({ previousStep }) => {
                         </div>
 
                         <p className={styles.description}>
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry's standard dummy text ever since the 1500s,
-                          when an unknown printer took a galley of type and
-                          scrambled it to make a type specimen book.
+                        {item?.about_company ? item?.about_company : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."}
                         </p>
 
                         <div className={styles.quickToRespondWrapper}>

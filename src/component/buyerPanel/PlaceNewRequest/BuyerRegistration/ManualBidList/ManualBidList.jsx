@@ -173,11 +173,12 @@ setIsOpen(true)
                   
                                           </div>
                   <div className={styles.mobileBadge}>
+                      <div className={styles.sidebar}>
                       <div className={styles.badge}>
                     <span>{item.service_name}</span>
                   </div>
                   <div>
-                      <div className={styles.sidebar}>
+                    
                       <div className={styles.ratings}>
                         {/* <span className={styles.stars}>★★★★★</span>
                       <span className={styles.ratingCount}>125</span> */}
@@ -189,11 +190,11 @@ setIsOpen(true)
                               <span className={styles.stars}>
                                 {[...Array(5)].map((_, index) => {
                                   if (rating >= index + 1) {
-                                    return <span key={index}><img src={starImg} alt="..." width={29} height={27}/></span>; // Full star
+                                    return <span key={index}><img src={starImg} alt="..." /></span>; // Full star
                                   } else if (rating >= index + 0.5) {
                                     return <span key={index}>★</span>; // Half star (or use icon)
                                   } else {
-                                    return <span key={index}><img src={grayStar} alt="..." /></span>; // Empty star
+                                    return <span key={index} className={styles.grayImg}><img src={grayStar} alt="..." /></span>; // Empty star
                                   }
                                 })}
                               </span>

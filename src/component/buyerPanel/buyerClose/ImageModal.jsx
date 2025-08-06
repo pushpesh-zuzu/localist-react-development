@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ImageModal.module.css";
 // import personalTrainers from "./images/personalTrainers.jpg"; // Replace with actual paths
 // import counselling from "./images/counselling.jpg";
@@ -8,6 +8,9 @@ import styles from "./ImageModal.module.css";
 // import magician from "./images/magician.jpg";
 import DummyImage from "../../../assets/Images/DummyImage.svg"
 import RightClick from "../../../assets/Images/Setting/RightModalClick.svg"
+import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { BASE_URL_IMAGE } from "../../../utils";
 
 const services = [
   { title: "Personal Trainers", image: DummyImage },
@@ -20,6 +23,11 @@ const services = [
 
 const ImageModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+  const dispatch = useDispatch();
+   const { popularList,popularLoader } =  useSelector((state) => state.findJobs);
+ useEffect(()=>{
+  dispatch(getPopularServiceList())
+  },[])
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -31,10 +39,19 @@ const ImageModal = ({ isOpen, onClose }) => {
         <p className={styles.subtext}>Do you need any of these services?</p>
 
         <div className={styles.grid}>
-          {services.map((service, index) => (
+          {popularList?.slice(0, 6)?.map((service, index) => (
             <div key={index} className={styles.card}>
-              <img src={service.image} alt={service.title} />
-              <span>{service.title}</span>
+              {/* <img src={service.image} alt={service.title} /> */}
+                <img
+                        src={
+                          service.banner_image
+                            ? `${BASE_URL_IMAGE}${service.banner_image}`
+                            : imgBanner
+                        }
+                        alt={service.name}
+                        // className={styles.image}
+                      />
+              <span>{service.name}</span>
             </div>
           ))}
         </div>

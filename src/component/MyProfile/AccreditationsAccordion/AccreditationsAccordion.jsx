@@ -111,6 +111,13 @@ const AccreditationsAccordion = ({ details }) => {
           Adding your accreditations helps customers on Localists.com feel more confident hiring you and can increase your chances of winning more work.
         </p>
 
+       {accordionGroups?.length === 1 &&  <button
+                  className={styles.addAccreditationButtons}
+                  onClick={handleAccreditationAdd}
+                >
+                  + Add Accreditation
+                </button>}
+
         {accordionGroups.map((group, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.logoSectionWrapper}>
@@ -189,7 +196,7 @@ const AccreditationsAccordion = ({ details }) => {
               >
                 {group.accreImage ? "Change Photo " : "Upload Photo"}
               </button>
-
+{console.log(accordionGroups,index,"accordionGroups")}
               {/* Only show Add Accreditation button on the last card */}
               {index === accordionGroups.length - 1 && (
                 <button

@@ -37,7 +37,7 @@ const CreditCard = () => {
 
                             <div className={styles.textRight}>Buy more credits and get a bigger discount</div>
                         </div>
-                        <div className={styles.rightText}> Add  |   Change  |   Remove</div></>}
+                        <div className={styles.rightText} onClick={handleChangeModal}> Add  |   Change  |   Remove</div></>}
             </div>
             {isopen && <AddCardModal onClose={() => setIsOpen(false)} />}
         </>

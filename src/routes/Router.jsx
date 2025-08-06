@@ -310,7 +310,7 @@ const router = createBrowserRouter([
         ),
       },
         {
-        path: "/buyer-close",
+        path: "/buyer-close/:id",
         element: (
           <ProtectedRoute>
         <BuyerFirstStep/>

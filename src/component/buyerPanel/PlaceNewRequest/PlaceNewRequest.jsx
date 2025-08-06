@@ -31,8 +31,8 @@ console.log("buyerRequestList",buyerRequestList)
     setSelectedServiceId(serviceId);
     setIsHiredModalOpen(true);
   };
-  const handleClose = () => {
-    navigate("/buyer-close")
+  const handleClose = (id) => {
+    navigate(`/buyer-close/${id}`)
   }
   return (
     <div className={styles.container}>
@@ -82,7 +82,7 @@ console.log("buyerRequestList",buyerRequestList)
                     View Request
                   </button>
                 </div>
-              {req?.status === "hired" ? "" : <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}> <div style={{marginTop:"16px",marginRight:"4px"}} onClick={handleClose}> Close Request</div> <div
+              {req?.status === "hired" ? "" : <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}> <div style={{marginTop:"16px",marginRight:"4px",cursor:"pointer"}} onClick={() => handleClose(req.id)}> Close Request</div> <div
                   className={styles.tags}
                   onClick={() => openHiredModal(req.id)}
                 >

@@ -8,6 +8,7 @@ import { showToast } from "../../../utils";
   export const addBuyCreditApi = (CreditData) => {
       return async (dispatch) => {
         dispatch(setBuyCreditLoader(true));
+        console.log(CreditData, "CreditData")
         try {
           const response = await axiosInstance.post(`payment/buy-credits`,CreditData);
           if (response) {

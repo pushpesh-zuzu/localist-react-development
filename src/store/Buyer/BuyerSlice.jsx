@@ -330,6 +330,26 @@ export const verifyPhoneNumberData = (verifyData) => {
   };
 };
 
+export const closeRequestData = (closeData) => {
+  return async (dispatch) => {
+    dispatch(setChangeInfoLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/submit-leads`,
+        closeData
+      );
+
+      if (response) {
+        return response.data
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setChangeInfoLoader(false));
+    }
+  };
+};
+
 
 
 
