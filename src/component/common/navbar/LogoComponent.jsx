@@ -14,13 +14,10 @@ import {
   subMenuData,
 } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllServiceList,
-  getCategoriesList,
-  getPopularServiceList,
-} from "../../../store/FindJobs/findJobSlice";
+import { getAllServiceList, getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -31,27 +28,27 @@ const LogoComponent = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
 
-  const { userToken } = useSelector((state) => state.auth);
-  const { registerData, popularList, CategoriesList, allServiceList } =
-    useSelector((state) => state.findJobs);
+  const { userToken } = useSelector((state) => state.auth)
+  const { registerData, popularList, CategoriesList, allServiceList } = useSelector(
+    (state) => state.findJobs
+  );
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-
+  
   const [isMobile, setIsMobile] = useState(false);
 
   // Sample location data
   const locationData = [
     "Cheshire",
-    "Cumbria",
+    "Cumbria", 
     "Manchester",
     "Lancashire",
-    "Merseyside",
-    "London ",
+    "Merseyside"
   ];
 
   useEffect(() => {
@@ -64,11 +61,11 @@ const LogoComponent = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleToggle = () => {
+   const handleToggle = () => {
     if (visibleCount >= totalItems) {
-      setVisibleCount((prev) => Math.max(5, prev - 5));
+      setVisibleCount(prev => Math.max(5, prev - 5));
     } else {
-      setVisibleCount((prev) => Math.min(prev + 5, totalItems));
+      setVisibleCount(prev => Math.min(prev + 5, totalItems));
     }
   };
 
@@ -86,10 +83,10 @@ const LogoComponent = () => {
   //     }
   //   };
   useEffect(() => {
-    dispatch(getPopularServiceList());
-    dispatch(getCategoriesList());
-    dispatch(getAllServiceList());
-  }, []);
+    dispatch(getPopularServiceList())
+    dispatch(getCategoriesList())
+    dispatch(getAllServiceList())
+  }, [])
   const handleRedirectUrl = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
@@ -122,21 +119,21 @@ const LogoComponent = () => {
   }, []);
   const handleClose = (e) => {
     setShowSubMenu(false);
-    setMouseHover(false);
-    setShowbMenu(false);
-    setShowThirdLevel(false);
-  };
+    setMouseHover(false)
+    setShowbMenu(false)
+    setShowThirdLevel(false)
+  }
 
   const content = () => {
     return (
       <div
-        className="w-72 py-4 overflow-hidden flex "
+        className={styles.popover_container}
         onMouseLeave={() => {
           setShowSubMenu(false);
           setShowThirdLevel(false);
         }}
       >
-        <div className="w-full px-4 bg-white">
+        <div className={styles.popover_wrap}>
           <AnimatePresence mode="wait">
             {!showSubMenu && !showThirdLevel ? (
               <motion.div
@@ -146,31 +143,21 @@ const LogoComponent = () => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                {isMobile && (
-                  <div
-                    className="absolute top-2.5 right-2.5 cursor-pointer text-lg font-bold z-[9999]"
-                    onClick={handleClose}
-                  >
-                    ×
-                  </div>
-                )}
+              {isMobile && (
+                <div className={styles.crossBtn} onClick={handleClose}>
+                  ×
+                </div>
+              )}
 
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[var(--primary-color)] text-lg font-semibold">
-                    Services
-                  </span>
-                  <Link
-                    to="#"
-                    className="text-[var(--primary-color)] text-lg font-semibold underline"
-                  >
-                    See All
-                  </Link>
+                <div className={styles.popover_header}>
+                  <span>Services</span>
+                  <Link to="#">See All</Link>
                 </div>
 
                 {allServiceList?.slice(0, visibleCount).map((item, index) => (
                   <div
                     key={index}
-                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
+                    className={styles.popover_content}
                     onClick={() => {
                       setShowSubMenu(true);
                       setFilterItems(item.name);
@@ -178,48 +165,36 @@ const LogoComponent = () => {
                     onMouseEnter={() => setMouseHover(index)}
                     onMouseLeave={() => setMouseHover("")}
                   >
-                    <span className="flex items-center gap-[9px] group">
+                    <span className={styles.text_wrap}>
                       <img
-                        className="group-hover:bg-green-200 transition-colors duration-200"
-                        src={
-                          item?.category_icon
-                            ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                            : hiring
-                        }
+                      src={
+                        item?.category_icon
+                          ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                          : hiring
+                      }
                         width={18}
                         height={18}
-                        alt={item.name}
+                        alt="icon"
                       />
-                      {item.name === "Other Services" ? (
-                        <h4 className="font-normal text-[#5e5e5e]">
-                          {item.name}
-                        </h4>
-                      ) : (
-                        <Link
-                          className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e]"
-                          to="#"
-                        >
-                          {item.name}
-                        </Link>
-                      )}
+                      {item.name ==='Other Services'? 
+                      <h4 style={{fontWeight:'normal', color:'#5e5e5e'}}>
+                      {item.name}
+                      </h4>
+                      :
+                      <Link to="#">{item.name}</Link>}
                     </span>
-                    <img
-                      src={arrowIcon}
-                      width={8}
-                      alt="arrow"
-                      className="group-hover:brightness-0"
-                    />
+                    <img src={arrowIcon} width={8} alt="arrow" />
                   </div>
                 ))}
 
                 {totalItems > 5 && (
                   <div
-                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group font-bold"
+                    className={styles.popover_content}
+                  style={{ cursor: "pointer", fontWeight: "bold" }}
                     onClick={handleToggle}
                   >
-                    <span className="flex items-center gap-[9px]">
-                      <div className="w-[18px] h-[18px]"></div>
-                      {isAllVisible ? "Show Less ▲" : "See More ▼"}
+                    <span className={styles.text_wrap}>
+                    {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
                 )}
@@ -233,35 +208,28 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className="flex items-center gap-2 cursor-pointer font-semibold text-lg text-black"
+                  className={styles.popover_back_explore}
                   onClick={() => setShowSubMenu(false)}
                 >
                   <img src={arrowLeft} width={24} alt="back" />
                   Back to Explore
                 </div>
-                <hr className="my-4" />
+                <hr />
 
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[var(--primary-color)] text-lg font-semibold">
-                    {filterItems}
-                  </span>
-                  <Link
-                    to="#"
-                    className="text-[var(--primary-color)] text-lg font-semibold underline"
-                  >
-                    See All
-                  </Link>
+                <div className={styles.popover_header}>
+                  <span>{filterItems}</span>
+                  <Link to="#">See All</Link>
                 </div>
                 {allServiceList
                   ?.filter((item) => item?.name == filterItems)
                   .map((item, index) => (
                     <div key={index}>
                       <div
-                        className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
+                        className={styles.popover_content}
                         onMouseEnter={() => setMouseHover(index)}
                         onMouseLeave={() => setMouseHover("")}
                       >
-                        <span className="flex items-center gap-[9px]">
+                        <span className={styles.text_wrap}>
                           {item.icon && (
                             <img
                               src={
@@ -271,20 +239,20 @@ const LogoComponent = () => {
                               }
                               width={18}
                               height={18}
-                              alt={`${item.name}`}
+                              alt="icon"
                             />
                           )}
                         </span>
                       </div>
 
                       {item.subcategory?.map((sub, subIndex) => {
-                        const slug = sub.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-");
+                      const slug = sub.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-");
                         return (
                           <div
                             key={subIndex}
-                            className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
+                            className={styles.popover_content}
                             onMouseEnter={() => setMouseHover(subIndex)}
                             onMouseLeave={() => setMouseHover("")}
                             onClick={() => {
@@ -292,20 +260,12 @@ const LogoComponent = () => {
                               setShowThirdLevel(true);
                             }}
                           >
-                            <span className="flex items-center gap-[9px]">
-                              <Link
-                                to={`/sub-category/${slug}`}
-                                className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
-                              >
+                            <span className={styles.text_wrap}>
+                              <Link to={`/sub-category/${slug}`}>
                                 {sub.name}
                               </Link>
                             </span>
-                            <img
-                              src={arrowIcon}
-                              width={8}
-                              alt="arrow"
-                              className="group-hover:brightness-0"
-                            />
+                            <img src={arrowIcon} width={8} alt="arrow" />
                           </div>
                         );
                       })}
@@ -321,32 +281,28 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div
-                  className="flex items-center gap-2 cursor-pointer font-semibold text-lg text-black"
+                  className={styles.popover_back_explore}
                   onClick={() => setShowThirdLevel(false)}
                 >
                   <img src={arrowLeft} width={24} alt="back" />
                   {filterItems}
                 </div>
-                <hr className="my-4" />
+                <hr />
 
-                <div className="flex justify-between items-center mb-4">
-                  <span className="text-[var(--primary-color)] text-lg font-semibold">
-                    {selectedSubcategory}
-                  </span>
+                <div className={styles.popover_header}>
+                  <span>{selectedSubcategory}</span>
                 </div>
 
                 {locationData.map((location, index) => (
                   <div
                     key={index}
-                    className="cursor-pointer mb-3 last:mb-0 flex justify-between items-center group"
+                    className={styles.popover_content}
+                    // onClick={() => {
+                    //   console.log(`${location} selected for ${selectedSubcategory}`);
+                    // }}
                   >
-                    <span className="flex items-center gap-[9px]">
-                      <Link
-                        className="hover:font-extrabold hover:underline hover:text-black text-[#5e5e5e] transition-all duration-200"
-                        to="#"
-                      >
-                        {selectedSubcategory} in {location}
-                      </Link>
+                    <span className={styles.text_wrap}>
+                      <Link to="#">{selectedSubcategory} in {location}</Link>
                     </span>
                   </div>
                 ))}
@@ -359,11 +315,11 @@ const LogoComponent = () => {
   };
 
   return (
-    <div className="flex align-center gap-[21px] cursor-pointer">
+    <div className={styles.logoContainer}>
       <img
         src={logo}
         alt="logo"
-        className="w-[90px] h-[19px] md:[125px] md:h-[35px] lg:w-[168px] lg:h-[35px]"
+        className={styles.mainLogo}
         onClick={handleRedirectUrl}
       />
       {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
@@ -383,7 +339,8 @@ const LogoComponent = () => {
             </div>
           </Popover>
         )} */}
-      {!userToken?.remember_tokens && !registerData?.remember_tokens && (
+      {!userToken?.remember_tokens && !registerData?.remember_tokens &&
+        (
         <Popover
           placement={placement}
           open={isMobile ? showMenu : null}
