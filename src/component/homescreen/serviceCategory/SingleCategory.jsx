@@ -11,24 +11,15 @@ const SingleCategory = ({ category, onClick }) => {
     >
       <div className={styles.imageContainer}>
         {/* <img src={category.icon} alt={category.name} className={styles.image} /> */}
-       <img
-            alt={category.name}
-            src={
-                  category.category_icon
-                  ? `${BASE_URL_IMAGE}${category.category_icon}` // Convert to WebP
-                  : hiring
-                  }
-                  className={styles.image}
-                  loading="lazy"           
-                  decoding="async"         
-                  width={80}              
-                  height={80}             
-                  style={{objectFit: 'contain'}}
-                            onError={(e) => {
-                            e.target.src = hiring;
-                            }}
-                   
-            />
+        <img
+          alt={category.name}
+          src={
+            category.category_icon
+              ? `${BASE_URL_IMAGE}${category.category_icon}`
+              : hiring
+          }
+          className={styles.image}
+        />
       </div>
       <div className={styles.title}>{category.name}</div>
     </div>
