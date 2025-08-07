@@ -373,7 +373,7 @@ const handleExpandRadius = () => {
                 ref={inputRef}
                 name="postcode2"
                 // value={formData.postcode ||''}
-                value={formData.postcode2 || ""}
+                value={formData?.postcode2 || formData?.postcode || ""}
                 onChange={handleInputChange ? handleInputChange : () => { }}
               disabled = {!disableWithService}
               //  readOnly={!disableWithService} 
