@@ -111,7 +111,7 @@ const AccreditationsAccordion = ({ details }) => {
           Adding your accreditations helps customers on Localists.com feel more confident hiring you and can increase your chances of winning more work.
         </p>
 
-       {accordionGroups?.length === 1 &&  <button
+       {accordionGroups?.length === 0 &&  <button
                   className={styles.addAccreditationButtons}
                   onClick={handleAccreditationAdd}
                 >
