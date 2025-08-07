@@ -656,7 +656,7 @@ align-items: center
   }
   .stars {
   
-  font-size: 18px;
+  font-size: 25px;
 }
 .ratingCount {
   font-size: 24px;
@@ -765,8 +765,9 @@ align-items: center
      width: 15px;
   height: 25px;
 } */
- .grayImg img {
-  width: 15px;
+ .grayImg  {
+  color: #D9D9D9;
+  font-size: 25px;
   /* height: 49px;
   margin-top: 4px; */
 }
