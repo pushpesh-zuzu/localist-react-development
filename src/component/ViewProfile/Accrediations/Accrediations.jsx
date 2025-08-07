@@ -1,13 +1,14 @@
 import React from "react"
-import styles from "./Accrediations.module.css" 
+import styles from "./Accrediations.module.css"
 import iIcon from "../../../assets/Images/iIcon.svg";
 import IMG from "../../../assets/Images/Setting/newAccoredationImg.svg"
+import { BASE_IMAGE_URL } from "../../../utils";
 
-const Accrediations = ({details}) => {
-  const data =details?.accreditations
-    return (
-        <div className={styles.accrediationsContainer}>
-            <h2>Accrediations</h2>
+const Accrediations = ({ details }) => {
+  const data = details?.accreditations
+  return (
+    <div className={styles.accrediationsContainer}>
+      <h2>Accrediations</h2>
       {/* {data?.map((item) => {
         return (
           <>
@@ -28,7 +29,7 @@ const Accrediations = ({details}) => {
           <div key={index} className={styles.accrediationsBoxContainer}>
             <div>
               <img
-                src={item?.image ? item?.image : IMG}
+                src={item?.image ? `${"https://localists.zuzucodes.com/admin/storage/app/public/images/accreditations"}/${item.image}` : IMG}
                 alt="accrediation"
                 className={styles.accrediationImage}
                 width={93}
@@ -39,7 +40,7 @@ const Accrediations = ({details}) => {
           </div>
         ))
       ) : (
-        
+
         <div className={styles.accrediationsBoxContainer}>
           <div>
             <img
@@ -50,17 +51,17 @@ const Accrediations = ({details}) => {
               height={93}
             />
           </div>
-            <div className={styles.accrediationsBox}>NO Text</div>
+          <div className={styles.accrediationsBox}>NO Text</div>
         </div>
       )}
-       <div className={styles.infoBox}>
-               <span className={styles.infoIcon}>
-                 <img src={iIcon} alt="" style={{marginTop:"4px"}} />
-               </span>
-               <span>
-               Professionals report their own accrediations. Please ask them for more details if required. </span>
-             </div>
-        </div>
-    )
+      <div className={styles.infoBox}>
+        <span className={styles.infoIcon}>
+          <img src={iIcon} alt="" style={{ marginTop: "4px" }} />
+        </span>
+        <span>
+          Professionals report their own accrediations. Please ask them for more details if required. </span>
+      </div>
+    </div>
+  )
 }
 export default Accrediations
