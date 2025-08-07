@@ -20,6 +20,7 @@
   }
   .viewDetails {
     margin-top: 5px;
+    cursor: default;
   }
   .viewDetails h2 {
     display: flex;
@@ -84,6 +85,7 @@
     gap: 10px;
     max-width: 250px;
     margin-top: 20px;
+    cursor: default;
   }
   
   .badges {
@@ -100,6 +102,7 @@
     white-space: nowrap;
     color: #B3B3B3;
     background-color: #FFFFFF;
+    cursor: default;
   }
   
   .requestBtnBox {
