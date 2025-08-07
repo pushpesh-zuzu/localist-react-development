@@ -194,7 +194,7 @@ setIsOpen(true)
                                   } else if (rating >= index + 0.5) {
                                     return <span key={index}>★</span>; // Half star (or use icon)
                                   } else {
-                                    return <span key={index} className={styles.grayImg}><img src={grayStar} alt="..." /></span>; // Empty star
+                                    return <span key={index} className={styles.grayImg}>★</span>; // Empty star
                                   }
                                 })}
                               </span>

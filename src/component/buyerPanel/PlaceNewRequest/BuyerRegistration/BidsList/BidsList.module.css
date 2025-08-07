@@ -317,7 +317,12 @@ align-items: center
   color: #ffd633;
   font-size: 35px;
 }
-
+ .grayImg  {
+  color: #D9D9D9;
+  font-size: 35px;
+  /* height: 49px;
+  margin-top: 4px; */
+}
 .ratingCount {
   display: flex;
   font-weight: 600;

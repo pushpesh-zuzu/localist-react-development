@@ -301,6 +301,10 @@
   color: #ffd633;
   font-size: 35px;
 }
+ .grayImg  {
+    color: #D9D9D9;
+ font-size: 35px;
+}
 .meName{
   font-size: 12px;
   font-weight: 500;
@@ -479,9 +483,9 @@
     padding: 0px 8px;
      box-shadow: 0px 0px 2px 0.5px #0000001a;
   }
-  .grayImg img {
-  width: 17px;
-  height: 16px;
+  .grayImg  {
+    color: #D9D9D9;
+ font-size: 25px;
 }
   .imageWrapper {
   width: 50%;
@@ -499,7 +503,7 @@
 
 .stars {
   color: #ffd633;
-  font-size: 0px;
+  font-size: 25px;
 }
 
 
