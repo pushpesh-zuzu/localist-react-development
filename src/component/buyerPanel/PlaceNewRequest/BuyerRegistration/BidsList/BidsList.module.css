@@ -119,6 +119,7 @@
   border: 1px solid #d9d9d9;
   background-color: #ffffff;
   color: #000000;
+  outline: none;
 }
 
 .matchCount {
@@ -584,6 +585,7 @@ align-items: center
   background-color: #ffffff;
   color: #000000;
   font-size: 9px;
+  outline: none;
 }
 .customSelect {
   appearance: none;           
@@ -755,13 +757,18 @@ align-items: center
   gap: 5px;
   align-items: center;
 }
-.grayImg img {
+/* .grayImg img {
   width: 24px;
   height: 24px;
-}
-.stars span {
-    width: 24px;
-  height: 24px;
+} */
+/* .stars span {
+     width: 15px;
+  height: 25px;
+} */
+ .grayImg img {
+  width: 15px;
+  /* height: 49px;
+  margin-top: 4px; */
 }
 
 .badge span {
