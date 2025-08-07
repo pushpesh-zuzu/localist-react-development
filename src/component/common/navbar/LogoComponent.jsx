@@ -83,9 +83,12 @@ const LogoComponent = () => {
   //     }
   //   };
   useEffect(() => {
-    dispatch(getPopularServiceList())
+    if(!userToken?.remember_tokens && !registerData?.remember_tokens) {
+ dispatch(getPopularServiceList())
     dispatch(getCategoriesList())
     dispatch(getAllServiceList())
+    }
+   
   }, [])
   const handleRedirectUrl = () => {
     const status = registerData?.active_status || userToken?.active_status;

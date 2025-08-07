@@ -110,6 +110,9 @@
 .textColor {
   color: var(--primary-color);
 }
+.arrowMain {
+  cursor: pointer;
+}
 
 .hideIcon {
   display: flex;
@@ -117,6 +120,7 @@
   width: 98%;
   margin-top: 1rem;
   align-items: center;
+  cursor: pointer;
 }
 
 .hideIcon>span {

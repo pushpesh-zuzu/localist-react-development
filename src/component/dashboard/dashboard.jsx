@@ -68,7 +68,7 @@ const userName =dashboardData?.profile_info?.name
               <p>
                 Your dashboard is ready. Access everything you need to manage your business and grow with Localists.
               </p>
-              <div ><span><img src={polygon} onClick={() => setShowDashboardContent(!showDashboardContent)} className={showDashboardContent ? "" : styles.rotate} /></span></div>
+              <div className={styles.arrowMain} ><span><img src={polygon} onClick={() => setShowDashboardContent(!showDashboardContent)} className={showDashboardContent ? "" : styles.rotate} /></span></div>
             </div>
 
             <div className={styles["main-section"]}>

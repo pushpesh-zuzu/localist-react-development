@@ -199,14 +199,29 @@ const [show, setShow] = useState(false);
   }, [searchText]);
 
   // 3. Dispatch search API
-  useEffect(() => {
+//   useEffect(() => {
+//     if(!userToken?.remember_tokens && !registerData?.remember_tokens){
+//  if (debouncedText.trim() !== "") {
+//       dispatch(searchService({ search: debouncedText }));
+//     } else {
+//       // Optionally: clear search results if input is empty
+//       dispatch(searchService({ search: "" }));
+//     }
+//     }
+   
+//   }, [debouncedText, dispatch]);
+useEffect(() => {
+  const isUserLoggedIn = userToken?.remember_tokens || registerData?.remember_tokens;
+
+  if (!isUserLoggedIn) {
     if (debouncedText.trim() !== "") {
       dispatch(searchService({ search: debouncedText }));
     } else {
-      // Optionally: clear search results if input is empty
       dispatch(searchService({ search: "" }));
     }
-  }, [debouncedText, dispatch]);
+  }
+}, [debouncedText, dispatch, userToken, registerData]);
+
 
   const handleLogout = async () => {
     try {
