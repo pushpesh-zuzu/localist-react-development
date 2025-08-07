@@ -10,15 +10,19 @@ const initialState = {
 
 
 
-export const fetchCompanyDetails = (regNumber) => {
+export const fetchCompanyDetails = (regNumber, user_id = null) => {
   return async (dispatch) => {
     dispatch(setCompanyLoader(true));
     dispatch(clearCompanyData());
 
     try {
-      const response = await axiosInstance.get(
-        `users/fetch_company_details/${regNumber}`
-      );
+
+      let url = `users/fetch_company_details/${regNumber}`;
+      if (user_id) {
+        url += `?user_id=${user_id}`;
+      }
+
+      const response = await axiosInstance.get(url);
 
       if (
         response.data &&
@@ -37,7 +41,6 @@ export const fetchCompanyDetails = (regNumber) => {
               dispatch(checkAddressApi({ company_location: response.data.registered_office_address.address_line_1 }))
         return true;
       } else {
-
         dispatch(setCompanyError("Company not found"));
         return false;
       }

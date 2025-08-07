@@ -14,7 +14,7 @@ import { checkAddressApi, checkCompanyNameApi, setRegisterData } from "../../../
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
-import { fetchCompanyDetails } from "../../../store/Company/companyLookup";
+import { setCompanyError,fetchCompanyDetails } from "../../../store/Company/companyLookup";
 
 
 const AboutAccordion = ({details}) => {
@@ -84,6 +84,8 @@ extra_links: "",
     company_photos: useRef()
   };
 console.log(details?.profile_image,formState.company_size,details?.company_size,"details")
+const companyError = useSelector(state => state.companyLook?.companyError);
+
   useEffect(()=>{
     if(details?.id){
 // setFormState(details)
@@ -155,8 +157,13 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     //   dispatch(fetchCompanyDetails(value));
     // }
     if(name==='company_reg_number'){
-  phoneAPI(value)
-}
+        setFormState((prev) => ({
+        ...prev,
+        [name]: value,
+        company_name: '', // reset company_name
+      }));
+      phoneAPI(value)
+    }
 
     if (name === "company_location") {
       setDebouncedCompanyLocation(value);
@@ -183,6 +190,22 @@ if(companyData.company_name || companyData?.registered_office_address ) {
   }, [debouncedCompanyLocation]);
 
   // Debounce for company_name
+
+  useEffect(() => {
+    if (companyError && formState.company_reg_number !== "") {
+      showToast("error", companyError);
+      setFormState((prev) => ({
+      ...prev,
+      company_reg_number: "",
+    }));
+    }
+  
+    if (companyError) {
+      dispatch(setCompanyError(null)); // Always clear after handling
+    }
+  }, [companyError, formState.company_reg_number, dispatch]);
+
+
   useEffect(() => {
     if (!debouncedCompanyName) return;
 
@@ -223,7 +246,7 @@ if(companyData.company_name || companyData?.registered_office_address ) {
 
   // Only call API if exactly 8 characters
   if (regNo && regNo.length === 8) {
-    dispatch(fetchCompanyDetails(regNo));
+    dispatch(fetchCompanyDetails(regNo , user_id));
   }
   }
 
@@ -531,6 +554,7 @@ useEffect(() => {
             ref={fileInputRefs.company_logo}
             style={{ display: "none" }}
             onChange={handleFileChange}
+            
           />
         </div>
         <label className={styles.label}>Company name</label>
@@ -541,6 +565,7 @@ useEffect(() => {
           value={formState.company_name}
           onChange={handleInputChange}
           placeholder="Enter your company name"
+          readOnly
         />
         {errors.company_name && (
           <p style={{ color: "red" }}>{errors.company_name}</p>
