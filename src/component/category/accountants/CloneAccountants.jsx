@@ -156,7 +156,7 @@ const style = {
           <div className={styles.innerformContainer}>
             <h2>
               Do you need{" "}
-              <span className={styles.blueText}>Accountants?</span>
+              <span className={styles.blueText}> {subHeader} Professionals?</span>
             </h2>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>

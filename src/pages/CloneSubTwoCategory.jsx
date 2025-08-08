@@ -1,31 +1,4 @@
-// import Accountants from "../component/category/accountants/CloneAccountants";
-// import HowItWorks from "../component/category/howItWorks/CloneHowitWorks";
-// import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
-// import AllServicesComponent from "../component/category/allServices/CloneAllServices";
-// import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
-// import GetQuotes from "../component/common/getQuotes/GetQuotes";
-
-// const CloneCategory = () => {
-
-//     const propsData={
-//         accountHeader:""
-//     }
-//   return (
-//     <div>
-//       <Accountants />
-//       <FindingBusinessProfessionals />
-//       <HowItWorks />
-//       <PopularCategories />
-//       <AllServicesComponent />
-//       <GetQuotes message="from Business professional today" />
-//     </div>
-//   );
-// };
-
-// export default CloneCategory;
-
 import Accountants from "../component/category/accountants/CloneAccountants";
-import HowItWorks from "../component/category/howItWorks/CloneHowitWorks";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
 import AllServicesComponent from "../component/category/allServices/CloneAllServices";
 import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
@@ -37,48 +10,49 @@ import {
   PopularCategoriesData,
 } from "../constant/CloneCategory";
 import { AllServicesData } from "../constant/CloneCategory";
+import SocialMediaImage from "../assets/Images/SocialMediaImage.svg";
+import WebDesignImage from "../assets/Images/WebDesignImage.svg";
+import TaxPreparationImage from "../assets/Images/TaxPreparationImage.svg";
+
 //AllServicesData
 import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
 
-const endpointCategoryMap = {
-  // "financial-and-accounting": ["General Accounting"],
-  "financial-and-accounting": ["Accounting", "Bookkeeping Services"],
-  // "general-accounting": ["Accounting", "Bookkeeping Services"],
-  business: [
-    "Accounting",
-    "Bookkeeping Services",
-    "Business Consulting",
-    "Social Media Marketing",
-  ],
-  home: [
-    "General Builders",
-    "Landscaping",
-    "Property Extensions",
-    "Architectural Services",
-    "Fence & Gate Installation",
-    "Driveway Installation",
-    "Patio Services",
-    "Home Insulation",
-  ],
-};
+const popularFilterLevelTwo = [
+  {
+    builders: [
+      {
+        id: 1,
+        title: "Fence & Gate Installation",
+        image: WebDesignImage,
+      },
+      {
+        id: 2,
+        title: "Driveway Installation",
+        image: TaxPreparationImage,
+      },
+      {
+        id: 3,
+        title: "Patio Services",
+        image: SocialMediaImage,
+      },
+    ],
+  },
+];
+
 const endpointServiceMap = {
-  // "financial-and-accounting": ["general Accounting"],
-  "financial-and-accounting": ["Accounting", "Bookkeeping Services"],
-  // "general-accounting": ["Accounting", "Bookkeeping Services"],
-  business: [
-    "Accounting",
-    "Bookkeeping Services",
-    "Business Consulting",
-    "Social Media Marketing",
-  ],
   home: [
     "Fence & Gate Installation",
     "Driveway Installation",
     "Patio Services",
     "Landscaping",
     "Artificial Grass Installation",
+  ],
+  builders: [
+    "Fence & Gate Installation",
+    "Driveway Installation",
+    "Patio Services",
   ],
 };
 
@@ -100,7 +74,7 @@ const breadcrumbHierarchy = {
   ],
 };
 
-const CloneCategory = ({
+const CloneSubTwoCategory = ({
   accountHeader,
   subHeader,
   bestText = `Best of all - it's completely free!`,
@@ -116,20 +90,10 @@ const CloneCategory = ({
 
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
-
+  console.log(endpoint, "endpointendpointendpoint");
   const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
   const message = `from ${subHeader} professionals today`;
-
-  ///// logics for popular categories
-
-  const pathSegments = location.pathname.split("/").filter(Boolean); // ['en', 'gb', 'business']
-  const endpoint1 = pathSegments[pathSegments.length - 1]; // e.g., 'business'
-
-  const allowedTitles = endpointCategoryMap[endpoint1] || [];
-  const filteredCategories = PopularCategoriesData.filter((item) =>
-    allowedTitles.includes(item.title)
-  );
 
   const allowedServices = endpointServiceMap[endpoint] || [];
 
@@ -147,23 +111,26 @@ const CloneCategory = ({
     }
     return null;
   }).filter(Boolean);
+  function getFilterLevelTwoByKey(key) {
+    const match = popularFilterLevelTwo.find((group) => group[key]);
+    return match ? match[key] : [];
+  }
 
-  const howItWorksData = HowItWorksData[endpoint1] || HowItWorksData.business;
   return (
     <div>
       <Helmet>
         <title>
-          Find Trusted Home & Garden Professionals Near Me - Localists
+          Builders Near Me | Find Local Professional Builders - Localists
         </title>
         <meta
           name="description"
-          content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
+          content="Find the best builder near you. Get free quotes from trusted local builders for home extensions, renovations, and new builds. Start your project today."
         />
       </Helmet>
       <Accountants
         header={accountHeader}
         subHeader={subHeader}
-        panelImage={panelImage}
+        panelImage={bgImage}
       />
 
       {endpoint !== routeName && (
@@ -195,16 +162,11 @@ const CloneCategory = ({
         subHeader={subHeader}
         bestText={bestText}
       />
-      <HowItWorks
-        howItWorksData={howItWorksData}
-        header={accountHeader}
-        subHeader={subHeader}
-      />
-      <PopularCategories data={filteredCategories} />
+      <PopularCategories data={getFilterLevelTwoByKey("builders")} />
       <AllServicesComponent data={filteredAllServicesData} />
       <GetQuotes message={message} />
     </div>
   );
 };
 
-export default CloneCategory;
+export default CloneSubTwoCategory;

@@ -28,212 +28,212 @@ const POPULAR_CITIES = [
     city_image: liverpool,
     city_name: "Liverpool",
   },
+  
 ];
 
 const HowItWorksData = [
   {
     id: 1,
-    title: "Find a local Accountant",
+    title: "Start Search for Local ",
     image: WhatYouNeedIcon,
-    heading1: "Find a local ",
+    heading1: "Start Search for Local ",
     heading2: "Accountant",
     description:
-      "Are you looking to outsource your accounting, or need some expert advice on your bookkeeping or maybe you simply need a tax accountant? Whether you’re a large or small business, or want a personal accountant, let Bark know what you need. We’ll set about finding the best local chartered accountants.",
+      "We will help you find the best accountants in your area for your needs. Whether you are looking to hire a personal accountant, or a professional for small or large businesses, Localists is here to help. From expert bookkeeping support to finding a trusted tax accountant during tax year, we make it simple. A few quick details are all we need to recommend the best quality local accountants near you.",
   },
   {
     id: 2,
-    title: "Get free quotes from",
+    title: "Request Free Quotes from ",
     image: FreeQuotesIcon,
-    heading1: "Get free quotes from ",
+    heading1: "Request Free Quotes ",
     heading2: "Accountant",
     description:
-      "From the details you’ve given, we’ll put together a selection of bespoke quotes from trusted accountants near you. You can opt to receive notifications so you stay up to date with your latest quotes, or look over your list when it suits you.",
+      "We will match your request with qualified local accountants near you and send you personalised quotes for free. Take your time to review profiles, compare quotes, and ask questions if you need to. There’s no obligation to make a hire until you are sure.",
   },
   {
     id: 3,
-    title: "Hire your local Accountant",
+    title: "Hire your local",
     image: accountant,
     heading1: "Hire your local ",
     heading2: "Accountant",
     description:
-      "Now all that’s left to do is to choose which professional accountant you’d like to go with. Look over your personal quotes, browse customer feedback, or pose questions to each professional. All the information and resources are there to help you hire your local accountant.",
+      "When you’ve found the right professional accountant for the job, all that is left to do is hire them directly. Whether it’s one-off advice or ongoing support, managing payroll or long-term financial planning, your local accountant will be ready to support you from day one.",
   },
 ];
 
 const regionsData = [
-  {
-    key: 1,
-    "South East England": [
-      "Berkshire",
-      "Buckinghamshire",
-      "East Sussex",
-      "Hampshire",
-      "Isle of Wight",
-      "Kent",
-      "Oxfordshire",
-      "Surrey",
-      "West Sussex",
-    ],
-  },
-  {
-    key: 2,
-    London: [
-      "Central London",
-      "East London",
-      "London",
-      "North London",
-      "South London",
-      "West London",
-    ],
-  },
+  // {
+  //   key: 1,
+  //   "South East England": [
+  //     "Berkshire",
+  //     "Buckinghamshire",
+  //     "East Sussex",
+  //     "Hampshire",
+  //     "Isle of Wight",
+  //     "Kent",
+  //     "Oxfordshire",
+  //     "Surrey",
+  //     "West Sussex",
+  //   ],
+  // },
+  // {
+  //   key: 2,
+  //   London: [
+  //     "Central London",
+  //     "East London",
+  //     "London",
+  //     "North London",
+  //     "South London",
+  //     "West London",
+  //   ],
+  // },
   {
     key: 3,
     "North West England": [
       "Cheshire",
-      "Cumbria",
       "Greater Manchester",
       "Lancashire",
       "Merseyside",
     ],
   },
-  {
-    key: 4,
-    "East of England": [
-      "Bedfordshire",
-      "Cambridgeshire",
-      "Essex",
-      "Hertfordshire",
-      "Norfolk",
-      "Suffolk",
-    ],
-  },
-  {
-    key: 5,
-    "West Midlands": [
-      "Herefordshire",
-      "Shropshire",
-      "Staffordshire",
-      "Warwickshire",
-      "West Midlands",
-      "Worcestershire",
-    ],
-  },
-  {
-    key: 6,
-    "South West England": [
-      "Bristol",
-      "Cornwall",
-      "Devon",
-      "Dorset",
-      "Gloucestershire",
-      "Somerset",
-      "Wiltshire",
-    ],
-  },
-  {
-    key: 7,
-    "Yorkshire and the Humber": [
-      "East Riding of Yorkshire",
-      "Lincolnshire",
-      "North Yorkshire",
-      "South Yorkshire",
-      "West Yorkshire",
-    ],
-  },
-  {
-    key: 8,
-    Scotland: [
-      "Aberdeen City",
-      "Aberdeenshire",
-      "Angus",
-      "Argyll and Bute",
-      "Clackmannanshire",
-      "Dumfries and Galloway",
-      "Dundee City",
-      "East Ayrshire",
-      "East Dunbartonshire",
-      "East Lothian",
-      "East Renfrewshire",
-      "Edinburgh",
-      "Falkirk",
-      "Fife",
-      "Glasgow City",
-      "Highland",
-      "Inverclyde",
-      "Midlothian",
-      "Moray",
-      "Na h-Eileanan Siar",
-      "North Ayrshire",
-      "North Lanarkshire",
-      "Orkney Islands",
-      "Perth and Kinross",
-      "Renfrewshire",
-      "Scottish Borders",
-      "Shetland Islands",
-      "South Ayrshire",
-      "South Lanarkshire",
-      "Stirling",
-      "West Dunbartonshire",
-      "West Lothian",
-    ],
-  },
-  {
-    key: 9,
-    "East Midlands": [
-      "Derbyshire",
-      "Leicestershire",
-      "Northamptonshire",
-      "Nottinghamshire",
-      "Rutland",
-    ],
-  },
-  {
-    key: 10,
-    Wales: [
-      "Blaenau Gwent",
-      "Bridgend County",
-      "Caerphilly County",
-      "Cardiff",
-      "Carmarthenshire",
-      "Ceredigion",
-      "City and County of Swansea",
-      "Conwy County Borough",
-      "Denbighshire",
-      "Flintshire",
-      "Gwynedd",
-      "Isle of Anglesey",
-      "Merthyr Tydfil County Borough",
-      "Monmouthshire",
-      "Neath Port Talbot",
-      "Newport",
-      "Pembrokeshire",
-      "Powys",
-      "Rhondda Cynon Taf",
-      "Torfaen",
-      "Vale of Glamorgan",
-      "Wrexham",
-    ],
-  },
-  {
-    key: 11,
-    "North East England": ["County Durham", "Northumberland", "Tyne and Wear"],
-  },
-  {
-    key: 12,
-    "Northern Ireland": [
-      "Antrim and Newtownabbey",
-      "Ards and North Down",
-      "Armagh City, Banbridge and Craigavon",
-      "Belfast",
-      "Causeway Coast and Glens",
-      "Derry City and Strabane",
-      "Fermanagh and Omagh",
-      "Lisburn and Castlereagh",
-      "Mid and East Antrim",
-      "Mid Ulster",
-      "Newry, Mourne and Down",
-    ],
-  },
+  // {
+  //   key: 4,
+  //   "East of England": [
+  //     "Bedfordshire",
+  //     "Cambridgeshire",
+  //     "Essex",
+  //     "Hertfordshire",
+  //     "Norfolk",
+  //     "Suffolk",
+  //   ],
+  // },
+  // {
+  //   key: 5,
+  //   "West Midlands": [
+  //     "Herefordshire",
+  //     "Shropshire",
+  //     "Staffordshire",
+  //     "Warwickshire",
+  //     "West Midlands",
+  //     "Worcestershire",
+  //   ],
+  // },
+  // {
+  //   key: 6,
+  //   "South West England": [
+  //     "Bristol",
+  //     "Cornwall",
+  //     "Devon",
+  //     "Dorset",
+  //     "Gloucestershire",
+  //     "Somerset",
+  //     "Wiltshire",
+  //   ],
+  // },
+  // {
+  //   key: 7,
+  //   "Yorkshire and the Humber": [
+  //     "East Riding of Yorkshire",
+  //     "Lincolnshire",
+  //     "North Yorkshire",
+  //     "South Yorkshire",
+  //     "West Yorkshire",
+  //   ],
+  // },
+  // {
+  //   key: 8,
+  //   Scotland: [
+  //     "Aberdeen City",
+  //     "Aberdeenshire",
+  //     "Angus",
+  //     "Argyll and Bute",
+  //     "Clackmannanshire",
+  //     "Dumfries and Galloway",
+  //     "Dundee City",
+  //     "East Ayrshire",
+  //     "East Dunbartonshire",
+  //     "East Lothian",
+  //     "East Renfrewshire",
+  //     "Edinburgh",
+  //     "Falkirk",
+  //     "Fife",
+  //     "Glasgow City",
+  //     "Highland",
+  //     "Inverclyde",
+  //     "Midlothian",
+  //     "Moray",
+  //     "Na h-Eileanan Siar",
+  //     "North Ayrshire",
+  //     "North Lanarkshire",
+  //     "Orkney Islands",
+  //     "Perth and Kinross",
+  //     "Renfrewshire",
+  //     "Scottish Borders",
+  //     "Shetland Islands",
+  //     "South Ayrshire",
+  //     "South Lanarkshire",
+  //     "Stirling",
+  //     "West Dunbartonshire",
+  //     "West Lothian",
+  //   ],
+  // },
+  // {
+  //   key: 9,
+  //   "East Midlands": [
+  //     "Derbyshire",
+  //     "Leicestershire",
+  //     "Northamptonshire",
+  //     "Nottinghamshire",
+  //     "Rutland",
+  //   ],
+  // },
+  // {
+  //   key: 10,
+  //   Wales: [
+  //     "Blaenau Gwent",
+  //     "Bridgend County",
+  //     "Caerphilly County",
+  //     "Cardiff",
+  //     "Carmarthenshire",
+  //     "Ceredigion",
+  //     "City and County of Swansea",
+  //     "Conwy County Borough",
+  //     "Denbighshire",
+  //     "Flintshire",
+  //     "Gwynedd",
+  //     "Isle of Anglesey",
+  //     "Merthyr Tydfil County Borough",
+  //     "Monmouthshire",
+  //     "Neath Port Talbot",
+  //     "Newport",
+  //     "Pembrokeshire",
+  //     "Powys",
+  //     "Rhondda Cynon Taf",
+  //     "Torfaen",
+  //     "Vale of Glamorgan",
+  //     "Wrexham",
+  //   ],
+  // },
+  // {
+  //   key: 11,
+  //   "North East England": ["County Durham", "Northumberland", "Tyne and Wear"],
+  // },
+  // {
+  //   key: 12,
+  //   "Northern Ireland": [
+  //     "Antrim and Newtownabbey",
+  //     "Ards and North Down",
+  //     "Armagh City, Banbridge and Craigavon",
+  //     "Belfast",
+  //     "Causeway Coast and Glens",
+  //     "Derry City and Strabane",
+  //     "Fermanagh and Omagh",
+  //     "Lisburn and Castlereagh",
+  //     "Mid and East Antrim",
+  //     "Mid Ulster",
+  //     "Newry, Mourne and Down",
+  //   ],
+  // },
 ];
 
 const AVERAGE_PRICE = [
@@ -308,38 +308,30 @@ const AVERAGE_PRICE = [
 const FREQUENTLY_DATA = [
   {
     key: "1",
-    title: "How long have you been in business?",
+    title: "What is the difference between an accountant and chartered accountant?",
     description:
-      "We’ve been operating as a team of chartered accountants for the last 75 years. Our company is well-established, with some of our clients working with us for over 40 years. This is something that we’re really proud of because we’ve been able to form lasting relationships with our clients. As a result, we’ve built up a reputation for being honest, transparent and efficient.",
+      "The main difference between a general accountant and a chartered accountant lies in their level of qualification, accreditation, and the scope of services they provide. While a general accountant can be highly skilled in tasks like bookkeeping, payroll, and managing financial records, they may not always hold a formal certification. For general accountants, their expertise is often suitable for day-to-day financial management in smaller businesses or sole trader operations.\n\nOn the other hand, a chartered accountant is a finance professional who has undergone extensive training and is formally accredited by internationally recognised professional bodies such as ACCA or ICAS. Typically, chartered accountants are called upon when it has to do with complex financial tasks, including audit, tax planning, compliance, strategic advice, and forensic accounting.\n\nHowever, it ultimately comes down to your specific need. Simply start your search today, let us know requirements, and we will match you with the right financial accountant near you."
   },
-
   {
     key: "2",
-    title: "Will my account be handled by a single person?",
+    title: "How to change your accountant?",
     description:
-      "We’ve been operating as a team of chartered accountants for the last 75 years. Our company is well-established, with some of our clients working with us for over 40 years. This is something that we’re really proud of because we’ve been able to form lasting relationships with our clients. As a result, we’ve built up a reputation for being honest, transparent and efficient.",
+      "If you're no longer satisfied with your current service provider or simply looking for a better fit, making the switch doesn't have to be complicated. At Localists, we make the transition easy by connecting you with qualified accounting professionals near you. Whether you prefer an online accountant or someone local, you will find one here.\n\nThe first step, however, is to inform your current accounting professional of your decision to move on. Next, gather all the information you need, from financial records to reports and account details. This way, the transition is smooth, and your new accountant can access all previous financial records."
   },
   {
     key: "3",
-    title: "Which accounting system do we need to use?",
+    title: "How to choose an accountant in the UK?",
     description:
-      "We’ve been operating as a team of chartered accountants for the last 75 years. Our company is well-established, with some of our clients working with us for over 40 years. This is something that we’re really proud of because we’ve been able to form lasting relationships with our clients. As a result, we’ve built up a reputation for being honest, transparent and efficient.",
+      "To find a qualified accountant in the UK, start by researching and comparing local accountancy firms or accounting professionals near you. Look for candidates with strong client reviews and ask for recommendations when possible. Also ensure they are registered under the right professional body.\n\nLocalists will connect you with the best quality professionals, whether you're looking for support with your personal finances or a qualified accountant for your small business, we’ve got you covered."
   },
   {
     key: "4",
-    title:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    title: "How much do accountants charge for self-assessment in the UK?",
     description:
-      "We’ve been operating as a team of chartered accountants for the last 75 years. Our company is well-established, with some of our clients working with us for over 40 years. This is something that we’re really proud of because we’ve been able to form lasting relationships with our clients. As a result, we’ve built up a reputation for being honest, transparent and efficient.",
-  },
-  {
-    key: "5",
-    title:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    description:
-      "We’ve been operating as a team of chartered accountants for the last 75 years. Our company is well-established, with some of our clients working with us for over 40 years. This is something that we’re really proud of because we’ve been able to form lasting relationships with our clients. As a result, we’ve built up a reputation for being honest, transparent and efficient.",
-  },
+      "Depending on the complexity of your self-assessment tax return, charges may vary. However, the average cost of hiring an accountant in the UK typically ranges anywhere from £150 to over £300. Other factors such as, level of experience and hourly rates, can also determine what cost you will incur for these professional services.\n\nStart your search now and obtain free quotes from quality accounting professionals anywhere you are in the UK."
+  }
 ];
+
 
 const OTHER_SERVICES_DATA = [
   {

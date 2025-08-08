@@ -1,36 +1,38 @@
 import styles from "./findaccountant.module.css";
 
-const AccountFindingInfo = () => {
+const AccountFindingInfo = ({
+  title = "Accountant",
+  findingHeading = "Accounting",
+  breadcrumb = "Business / Financial and Accounting / General Accounting",
+}) => {
   return (
     <div className={styles.findAccountInfoContainer}>
       <p className={styles.breadcrumb}>
-        Business / Financial and Accounting / General Accounting /{" "}
-        <span>Accounting</span>
+        {breadcrumb} /<span>{findingHeading}</span>
       </p>
 
       <div className={styles.infoContainer}>
         <h1 className={styles.title}>
-          Need help finding an
-          <span className={styles.highlight}> Accountant?</span>
+          Find the Best
+          <span className={styles.highlight}> {title} </span>
+          In Your Area
         </h1>
 
         <div className={styles.descriptionContainer}>
           <p>
-            You can find the best Accountants on Localists. Start your search
-            and get free quotes now!
+            Looking for local accountants near me or reliable accountancy firms?
+            Not sure who to trust with your accounting needs?
           </p>
           <p>
-            First time looking for an Accountant and not sure where to start?
-            Tell us about your project and we’ll send you a list of Accountants
-            to review. There’s no pressure to hire, so you can compare profiles,
-            read previous reviews and ask for more information before you make
-            your decision.
+            Localists will help you find the best quality accountants in your
+            area. Whether you need help filing taxes, starting a business, or
+            getting your finances on track, we simplify the process. Just tell
+            us what you are looking for, and we will connect you with qualified
+            accounting professionals in your local area.
           </p>
-          <p>Best of all - it&apos;s completely free!</p>
+          <p>Start your search now and obtain free, no obligation quotes.</p>
         </div>
-        <button className={styles.accountantBtn}>
-          Find an Accountant today
-        </button>
+        {/* <button className={styles.accountantBtn}>Find an {title} today</button> */}
       </div>
     </div>
   );

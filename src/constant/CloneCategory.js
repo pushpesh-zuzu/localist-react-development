@@ -21,35 +21,69 @@ const CATEGORIES = [
   },
 ];
 
-const HowItWorksData = [
-  {
-    id: 1,
-    title: "the Best Match",
-    image: WhatYouNeedIcon,
-    heading1: "Find ",
-    heading2: "what you need",
-    description:
-      "To ensure you get the right Business Professionals in your area, let us know your requirements, and Localists will match you with the best service provider to help you",
-  },
-  {
-    id: 2,
-    title: "Free Quotes",
-    image: FreeQuotesIcon,
-    heading1: "Request",
-    heading2: "Free Quotes",
-    description:
-      "Compare profiles from Business Professionals near you. Read verified reviews, see what makes them stand out, and request free, no-obligation quotes - instantly.",
-  },
-  {
-    id: 3,
-    title: "Business Professional",
-    image: BusinessProfessionalsIcon,
-    heading1: "Work",
-    heading2: "With Your Busniness Professional",
-    description:
-      "Once you’ve found the right Business Professional, you can contact them straight away. Discuss your project, ask questions, and get things moving with confidence.",
-  },
-];
+    const HowItWorksData = {
+    // Business category data
+    business: [
+      {
+        id: 1,
+        title: "the Best Match",
+        image: WhatYouNeedIcon,
+        heading1: "Find ",
+        heading2: "the Best Match",
+        description:
+          "We will help you find quality Business Professionals in your local area. Let us know your requirements, and Localists will match you with the best service provider to help you.",
+      },
+      {
+        id: 2,
+        title: "Free Quotes",
+        image: FreeQuotesIcon,
+        heading1: "Request ",
+        heading2: "Free Quotes",
+        description:
+          "We will send you quotes from local Business Professionals for free. You can then compare profiles from Business Professionals near you, read verified reviews, see what makes them stand out, and pick the best Business Professional for you.",
+      },
+      {
+        id: 3,
+        title: "Business Professional",
+        image: BusinessProfessionalsIcon,
+        heading1: "Work With Your ",
+        heading2: "Business Professional",
+        description:
+          "Once you've found the right Business Professional, you can contact them straight away. Discuss your project, ask questions, and get things moving with confidence.",
+      },
+    ],
+
+    // Home category data
+    home: [
+      {
+        id: 1,
+        title: "the Best Match",
+        image: WhatYouNeedIcon, // Same icon as business
+        heading1: "Find ",
+        heading2: "the Best Match",
+        description:
+          "We will help you find quality Home & Garden Professionals in your local area. Let us know your requirements, and Localists will match you with the best service provider to help you.",
+      },
+      {
+        id: 2,
+        title: "Free Quotes",
+        image: FreeQuotesIcon, // Same icon as business
+        heading1: "Request ",
+        heading2: "Free Quotes",
+        description:
+          "We will send you quotes from local Home & Garden Professionals for free. You can then compare profiles from House & Home Professionals near you, read verified reviews, see what makes them stand out, and pick the best Home & Garden Professional for you.",
+      },
+      {
+        id: 3,
+        title: "Home & Garden Professional",
+        image: BusinessProfessionalsIcon, // Same icon as business
+        heading1: "Work With Your ",
+        heading2: "Home & Garden Professional",
+        description:
+          "Once you've found the right Home & Garden Professional, you can contact them straight away. Discuss your project, ask questions, and get things moving with confidence.",
+      },
+    ],
+    };
 
 const PopularCategoriesData = [
   {
@@ -58,7 +92,7 @@ const PopularCategoriesData = [
     title: "Accounting",
     image: AccountingImage,
   },
- 
+
   {
     id: 2,
     title: "Bookkeeping Services",
@@ -112,8 +146,21 @@ const PopularCategoriesData = [
     title: "General Accounting",
     image: gen_acc_img,
   },
-
-  
+  {
+    id: 11,
+    title: "Architectural Services",
+    image: BusinessConsulting,
+  }, 
+  {
+    id: 12,
+    title: "Property Extensions",
+    image: TaxPreparationImage,
+  },
+  {
+    id: 13,
+    title: "Patio Services",
+    image: SecurityServicesImage,
+  },
 ];
 
 const AllServicesData = [
@@ -280,7 +327,7 @@ const AllServicesData = [
   },
   {
     key: 13,
-    "Marketing": [
+    Marketing: [
       // "Accounting",
       // "general Accounting",
       // "Bookkeeping Services",
@@ -308,7 +355,7 @@ const AllServicesData = [
   //     // "Small Business Loans",
   //   ],
   // },
-  
+
   // {
   //   key: 13,
   //   "HR and Recruitment Services": [
@@ -505,6 +552,38 @@ const AllServicesData = [
   //     "Video Design & Production",
   //   ],
   // },
+    {
+    key: 32,
+    "Builders": [
+      "Fence & Gate Installation",
+      "Driveway Installation",
+      "Patio Services"
+    ]
+  },
+  {
+    key: 33,
+    "Gardening & Landscaping": [
+      "Landscaping",
+      "Artificial Grass Installation"
+    ]
+  },
+  {
+    key: 34,
+    "Financial & Accounting": [
+      "Accounting",
+      "Bookkeeping Services"
+    ]
+  },
+  {
+    key: 35,
+    "Business Services": [
+      "Accounting",
+      "Bookkeeping Services",
+      "Business Consulting",
+      "Social Media Marketing"
+    ]
+  }
+
 ];
 
 export { CATEGORIES, HowItWorksData, PopularCategoriesData, AllServicesData };
