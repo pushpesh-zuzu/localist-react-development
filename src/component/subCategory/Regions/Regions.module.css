@@ -4,6 +4,14 @@
   padding: 48px 91px 56px 91px;
 }
 
+.disabledPanel {
+  cursor: pointer !important; /* Maintains pointer cursor */
+}
+
+.disabledPanel .ant-collapse-header {
+  color: inherit !important; /* Keeps original text color */
+  cursor: pointer !important; /* Shows pointer cursor */
+}
 .subcategory_collapse {
   margin-bottom: 50px;
   background-color: transparent;

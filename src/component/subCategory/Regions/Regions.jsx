@@ -1,5 +1,5 @@
 import { Collapse } from "antd";
-import { regionsData } from "../../../constant/subCategory";
+// import { regionsData } from "../../../constant/subCategory";
 import styles from "./Regions.module.css";
 const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
@@ -8,7 +8,7 @@ import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowIcon from "../../../assets/Images/subcategory/arrowicon.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 
-const RegionsComponent = () => {
+const RegionsComponent = ({ regionsData }) => {
   const allPanelKeys = regionsData?.map((panel) => panel.key);
 
   return (
@@ -20,42 +20,39 @@ const RegionsComponent = () => {
       {regionsData.map((category, index) => {
         const categoryName = Object?.keys(category)[1];
         const services = category[categoryName];
+        const isNorthWestEngland = categoryName === "North West England";
+
         return (
           <Collapse
             defaultActiveKey={allPanelKeys}
             bordered={false}
             key={index}
-            // expandIcon={({ isActive }) => (
-            //   <DownOutlined
-            //     style={{
-            //       transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
-            //       transition: "transform 0.3s ease",
-            //     }}
-            //   />
-            // )}
             expandIcon={({ isActive }) => (
               <img
-                src={isActive ? arrowIcon : arrowIcon}
+                src={arrowIcon}
                 alt="Custom Icon"
                 style={{
                   width: "17px",
                   height: "17px",
-                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)", // Rotate effect
+                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.3s ease",
+                  visibility: isNorthWestEngland ? "hidden" : "visible",
                 }}
               />
             )}
             expandIconPosition="end"
             className={styles.subcategory_collapse}
+            collapsible={isNorthWestEngland ? "disabled" : undefined}
           >
             <Panel
-              className={styles.categoryTitle}
+              className={`${styles.categoryTitle} ${
+                isNorthWestEngland ? styles.disabledPanel : ""
+              }`}
               header={categoryName}
               key={category?.key}
+              showArrow={!isNorthWestEngland}
             >
               <div key={index} className={styles.categoryContainer}>
-                {/* <div className={styles.categoryTitle}>{categoryName}</div> */}
-                {/* <hr className={styles.separator} /> */}
                 <div className={styles.servicesContainer}>
                   {services?.map((service, idx) => (
                     <span key={idx} className={styles.serviceItem}>

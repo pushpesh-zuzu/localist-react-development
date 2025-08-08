@@ -2,7 +2,7 @@ import styles from "./Reviews.module.css";
 import reviewsStar from "../../../assets/Images/subcategory/reviews-star.svg";
 import leftArrowDark from "../../../assets/Images/subcategory/left-arrow.svg";
 import rightArrowDark from "../../../assets/Images/subcategory/right-arrow.svg";
-import { REVIEWS_DATA } from "../../../constant/subCategory";
+// import { REVIEWS_DATA } from "../../../constant/subCategory";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import SubCategoryReview from "../../../assets/Images/subcategory/SubCategoryReview.svg";
@@ -38,7 +38,7 @@ function AutoplayPlugin(slider) {
   slider.on("animationEnded", start);
   slider.on("updated", start);
 }
-const Reviews = () => {
+const Reviews = ({ RELATED_REVIEW }) => {
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -84,7 +84,7 @@ const Reviews = () => {
               ref={sliderRef}
               className={`keen-slider ${styles.reviews_content_wrapper}`}
             >
-              {REVIEWS_DATA?.map((reviews) => (
+              {RELATED_REVIEW?.map((reviews) => (
                 <div
                   key={reviews.id}
                   className={`keen-slider__slide ${styles.reviews_slide}`}

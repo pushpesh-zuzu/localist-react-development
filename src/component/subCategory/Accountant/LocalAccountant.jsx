@@ -1,6 +1,7 @@
+import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./LocalAccountant.module.css";
 
-const LocalAccountant = ({title=''}) => {
+const LocalAccountant = ({ title = "" }) => {
   return (
     <>
       <div className={styles.localAccountant_container}>
@@ -25,19 +26,22 @@ const LocalAccountant = ({title=''}) => {
               How much does an <b>{title} cost?</b>
             </h1>
             <p className={styles.localAccountant_paragrap}>
-              {title}s are there to manage your financials in order to help
-              you make more informed business decisions when it comes to
-              managing your company's money.
+              {title}s are there to manage your financials in order to help you
+              make more informed business decisions when it comes to managing
+              your company's money.
             </p>
             <p className={styles.localAccountant_paragrap}>
-              On average, an {title} in the UK will charge between £100-£360
-              per month. Although, this is variable depending on the size of the
+              On average, an {title} in the UK will charge between £100-£360 per
+              month. Although, this is variable depending on the size of the
               business and what services are required. Tell us what you need
               from an {title} and receive free quotes in minutes.
             </p>
           </div>
         </div>
-        <button className={styles.localAccountant_button}>
+        <button
+          onClick={() => handleScrollToBottom()}
+          className={styles.localAccountant_button}
+        >
           Get quotes from {title}s near you
         </button>
       </div>

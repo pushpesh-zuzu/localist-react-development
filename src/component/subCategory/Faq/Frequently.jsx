@@ -2,9 +2,8 @@ import { Collapse } from "antd";
 import styles from "./Frequently.module.css";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
-import { FREQUENTLY_DATA } from "../../../constant/subCategory";
 const { Panel } = Collapse;
-const Frequently = () => {
+const Frequently = ({ FrequentlyQuestion }) => {
   return (
     <>
       <div className={styles.frequently_container}>
@@ -31,7 +30,7 @@ const Frequently = () => {
               )}
               expandIconPosition="end"
             >
-              {FREQUENTLY_DATA?.map((item) => (
+              {FrequentlyQuestion?.map((item) => (
                 <Panel header={item?.title} key={item?.key}>
                   <p className={styles.frequently_collapse_description}>
                     {item?.description}

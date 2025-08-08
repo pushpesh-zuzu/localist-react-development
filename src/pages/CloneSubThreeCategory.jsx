@@ -12,15 +12,52 @@ import Reviews from "../component/subCategory/Reviews/Reviews";
 import TaxReturn from "../component/subCategory/TaxReturn/TaxReturn";
 import HowItWorks from "../component/subCategory/workSteps/HowItWorks";
 import { POPULAR_CITIES_LEVERL_THREE } from "../constant/cloneLeverThreeData";
+import FenchandGet from "../assets/Images/FenchandGet.jpg";
+
 import {
+  AVERAGE_PRICE,
+  CONTENT_CONFIG,
+  FREQUENTLY_DATA,
+  HowItWorksData,
   OTHER_SERVICES_DATA,
+  POPULARCITY,
+  regionsData,
   RELATED_PRICE_DATA,
   RELATED_SERVICES_DATA,
+  REVIEWS_DATA,
+  TAXRETURNDATA,
 } from "../constant/subCategory";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import financeBg from "../assets/Images/financeImg.svg";
+import { getDataByKey } from "../utils/databyKey";
+const transformFenceInstallersData = (rawData) => {
+  return rawData["fence-installers"].map((region) => ({
+    key: region.id, // Convert id to key
+    [region.title]: region.items, // Create dynamic key with region title
+  }));
+};
 
-const CloneSubThreeCategory = () => {
+const CloneSubThreeCategory = ({
+  title = "Fencer",
+  categoryKey = "fence-installers",
+}) => {
+  function getHowItWorksData(key) {
+    return HowItWorksData["fence-installers"] || null;
+  }
+  const transformedData = transformFenceInstallersData(regionsData);
+
+  const popularCity = getDataByKey(POPULARCITY, "fence-installers");
+  const RELATED_PRICE = getDataByKey(RELATED_PRICE_DATA, "fence-installers");
+  const RELATED_SEERVICE = getDataByKey(
+    RELATED_SERVICES_DATA,
+    "fence-installers"
+  );
+  const RELATED_REVIEW = getDataByKey(REVIEWS_DATA, "fence-installers");
+  const RELATED_OTHER = getDataByKey(OTHER_SERVICES_DATA, "fence-installers");
+  const RELTED_PRICE = getDataByKey(AVERAGE_PRICE, "fence-installers");
+  const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, "fence-installers");
+  const TaxData = TAXRETURNDATA["fence-installers"];
+  console.log(FrequentlyQuestion, "FrequentlyQuestion");
   return (
     <>
       <Helmet>
@@ -30,38 +67,52 @@ const CloneSubThreeCategory = () => {
           content="Find top-rated local fencers for fence and gate installation. Compare quotes, read reviews, and hire professionals near you with Localists."
         />
       </Helmet>
-      <BannerWithBreadCrum level={1} panelImage={financeBg} service={true} />
+      <BannerWithBreadCrum
+        header="Fence Installation"
+        subHeader="Professional Fencing Services"
+        accountHeader="Fence Installation"
+        level={2}
+        breadcrumb="Home & Garden / Builders / Fence & Gate Installation"
+        service={true}
+        panelImage={FenchandGet}
+        title="Fencing Professionals"
+        para1={CONTENT_CONFIG[categoryKey].para1}
+        para2={CONTENT_CONFIG[categoryKey].para2}
+        para3={CONTENT_CONFIG[categoryKey].para3}
+      />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
-      <HowItWorks />
-      <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} />
-      <RegionsComponent />
-      <FindAnAccountant />
+      <HowItWorks HowItWorksData={getHowItWorksData("fence-installers")} />
+      {/* <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} /> */}
+      <Slider sliderdata={popularCity} title={<b>Popular Cities</b>} />
+
+      <RegionsComponent
+        regionsData={transformedData}
+        category="fence-installers" // Optional: if you need to know the category
+      />
+      <FindAnAccountant title={"fencher"} />
       <LocalAccountant title="Fencer" />
-      <TaxReturn />
-      <Frequently />
-      <AveragePrice title="Fencers " />
+      <TaxReturn TaxData={TaxData} />
+      <Frequently FrequentlyQuestion={FrequentlyQuestion} />
+      <AveragePrice title="Fencers " RELTED_PRICE={RELTED_PRICE} />
       <Slider
-        sliderdata={OTHER_SERVICES_DATA}
+        sliderdata={RELATED_OTHER}
         title="You May Be Interested In"
         blueTitle="Other Services "
       />
       {/* no need to change only data change*/}
-      <Reviews />
+      <Reviews RELATED_REVIEW={RELATED_REVIEW} />
       {/* no need to change only data change*/}
 
       <Slider
-        sliderdata={RELATED_SERVICES_DATA}
+        sliderdata={RELATED_SEERVICE}
         title={<b>Related Service Guides</b>}
       />
       {/* no need to change only data change*/}
 
-      <Slider
-        sliderdata={RELATED_PRICE_DATA}
-        title={<b>Related Price Guides</b>}
-      />
+      <Slider sliderdata={RELATED_PRICE} title={<b>Related Price Guides</b>} />
       {/* no need to change only data change*/}
 
-      <GetQuotes message="from Accountants near you" />
+      <GetQuotes title={title} />
       {/* no need to change  */}
     </>
   );

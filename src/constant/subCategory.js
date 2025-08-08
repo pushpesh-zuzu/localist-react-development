@@ -28,415 +28,259 @@ const POPULAR_CITIES = [
     city_image: liverpool,
     city_name: "Liverpool",
   },
-  
 ];
+export const POPULARCITY = {
+  "fence-installers": [
+    { id: 1, title: "London", image: london },
+    { id: 2, title: "Birmingham", image: birmingham },
+    { id: 3, title: "Liverpool", image: liverpool },
+    { id: 4, title: "Chester", image: london },
+    { id: 5, title: "Warrington", image: london },
+  ],
+};
 
-const HowItWorksData = [
-  {
-    id: 1,
-    title: "Start Search for Local ",
-    image: WhatYouNeedIcon,
-    heading1: "Start Search for Local ",
-    heading2: "Accountant",
-    description:
-      "We will help you find the best accountants in your area for your needs. Whether you are looking to hire a personal accountant, or a professional for small or large businesses, Localists is here to help. From expert bookkeeping support to finding a trusted tax accountant during tax year, we make it simple. A few quick details are all we need to recommend the best quality local accountants near you.",
-  },
-  {
-    id: 2,
-    title: "Request Free Quotes from ",
-    image: FreeQuotesIcon,
-    heading1: "Request Free Quotes ",
-    heading2: "Accountant",
-    description:
-      "We will match your request with qualified local accountants near you and send you personalised quotes for free. Take your time to review profiles, compare quotes, and ask questions if you need to. There’s no obligation to make a hire until you are sure.",
-  },
-  {
-    id: 3,
-    title: "Hire your local",
-    image: accountant,
-    heading1: "Hire your local ",
-    heading2: "Accountant",
-    description:
-      "When you’ve found the right professional accountant for the job, all that is left to do is hire them directly. Whether it’s one-off advice or ongoing support, managing payroll or long-term financial planning, your local accountant will be ready to support you from day one.",
-  },
-];
+const HowItWorksData = {
+  "fence-installers": [
+    {
+      id: 1,
+      title: "Start Search for Local ",
+      image: WhatYouNeedIcon,
+      heading1: "Start Search for Local ",
+      heading2: "Fenchers",
+      description:
+        "We will help you find the best fenchers in your area for your needs. Whether you are looking to hire a personal fencher, or a professional for small or large businesses, Localists is here to help. From expert fencing support to finding a trusted fencing contractor during installation season, we make it simple. A few quick details are all we need to recommend the best quality local fenchers near you.",
+    },
+    {
+      id: 2,
+      title: "Request Free Quotes from ",
+      image: FreeQuotesIcon,
+      heading1: "Request Free Quotes ",
+      heading2: "Fenchers",
+      description:
+        "We will match your request with qualified local fenchers near you and send you personalised quotes for free. Take your time to review profiles, compare quotes, and ask questions if you need to. There's no obligation to make a hire until you are sure.",
+    },
+    {
+      id: 3,
+      title: "Hire your local",
+      image: accountant, // Note: You might want to rename this variable to 'fencher' or similar
+      heading1: "Hire your local ",
+      heading2: "Fenchers",
+      description:
+        "When you've found the right professional fencher for the job, all that is left to do is hire them directly. Whether it's one-off advice or ongoing support, managing fence installation or long-term property boundary planning, your local fencher will be ready to support you from day one.",
+    },
+  ],
+};
 
-const regionsData = [
-  // {
-  //   key: 1,
-  //   "South East England": [
-  //     "Berkshire",
-  //     "Buckinghamshire",
-  //     "East Sussex",
-  //     "Hampshire",
-  //     "Isle of Wight",
-  //     "Kent",
-  //     "Oxfordshire",
-  //     "Surrey",
-  //     "West Sussex",
-  //   ],
-  // },
-  // {
-  //   key: 2,
-  //   London: [
-  //     "Central London",
-  //     "East London",
-  //     "London",
-  //     "North London",
-  //     "South London",
-  //     "West London",
-  //   ],
-  // },
-  {
-    key: 3,
-    "North West England": [
-      "Cheshire",
-      "Greater Manchester",
-      "Lancashire",
-      "Merseyside",
-    ],
-  },
-  // {
-  //   key: 4,
-  //   "East of England": [
-  //     "Bedfordshire",
-  //     "Cambridgeshire",
-  //     "Essex",
-  //     "Hertfordshire",
-  //     "Norfolk",
-  //     "Suffolk",
-  //   ],
-  // },
-  // {
-  //   key: 5,
-  //   "West Midlands": [
-  //     "Herefordshire",
-  //     "Shropshire",
-  //     "Staffordshire",
-  //     "Warwickshire",
-  //     "West Midlands",
-  //     "Worcestershire",
-  //   ],
-  // },
-  // {
-  //   key: 6,
-  //   "South West England": [
-  //     "Bristol",
-  //     "Cornwall",
-  //     "Devon",
-  //     "Dorset",
-  //     "Gloucestershire",
-  //     "Somerset",
-  //     "Wiltshire",
-  //   ],
-  // },
-  // {
-  //   key: 7,
-  //   "Yorkshire and the Humber": [
-  //     "East Riding of Yorkshire",
-  //     "Lincolnshire",
-  //     "North Yorkshire",
-  //     "South Yorkshire",
-  //     "West Yorkshire",
-  //   ],
-  // },
-  // {
-  //   key: 8,
-  //   Scotland: [
-  //     "Aberdeen City",
-  //     "Aberdeenshire",
-  //     "Angus",
-  //     "Argyll and Bute",
-  //     "Clackmannanshire",
-  //     "Dumfries and Galloway",
-  //     "Dundee City",
-  //     "East Ayrshire",
-  //     "East Dunbartonshire",
-  //     "East Lothian",
-  //     "East Renfrewshire",
-  //     "Edinburgh",
-  //     "Falkirk",
-  //     "Fife",
-  //     "Glasgow City",
-  //     "Highland",
-  //     "Inverclyde",
-  //     "Midlothian",
-  //     "Moray",
-  //     "Na h-Eileanan Siar",
-  //     "North Ayrshire",
-  //     "North Lanarkshire",
-  //     "Orkney Islands",
-  //     "Perth and Kinross",
-  //     "Renfrewshire",
-  //     "Scottish Borders",
-  //     "Shetland Islands",
-  //     "South Ayrshire",
-  //     "South Lanarkshire",
-  //     "Stirling",
-  //     "West Dunbartonshire",
-  //     "West Lothian",
-  //   ],
-  // },
-  // {
-  //   key: 9,
-  //   "East Midlands": [
-  //     "Derbyshire",
-  //     "Leicestershire",
-  //     "Northamptonshire",
-  //     "Nottinghamshire",
-  //     "Rutland",
-  //   ],
-  // },
-  // {
-  //   key: 10,
-  //   Wales: [
-  //     "Blaenau Gwent",
-  //     "Bridgend County",
-  //     "Caerphilly County",
-  //     "Cardiff",
-  //     "Carmarthenshire",
-  //     "Ceredigion",
-  //     "City and County of Swansea",
-  //     "Conwy County Borough",
-  //     "Denbighshire",
-  //     "Flintshire",
-  //     "Gwynedd",
-  //     "Isle of Anglesey",
-  //     "Merthyr Tydfil County Borough",
-  //     "Monmouthshire",
-  //     "Neath Port Talbot",
-  //     "Newport",
-  //     "Pembrokeshire",
-  //     "Powys",
-  //     "Rhondda Cynon Taf",
-  //     "Torfaen",
-  //     "Vale of Glamorgan",
-  //     "Wrexham",
-  //   ],
-  // },
-  // {
-  //   key: 11,
-  //   "North East England": ["County Durham", "Northumberland", "Tyne and Wear"],
-  // },
-  // {
-  //   key: 12,
-  //   "Northern Ireland": [
-  //     "Antrim and Newtownabbey",
-  //     "Ards and North Down",
-  //     "Armagh City, Banbridge and Craigavon",
-  //     "Belfast",
-  //     "Causeway Coast and Glens",
-  //     "Derry City and Strabane",
-  //     "Fermanagh and Omagh",
-  //     "Lisburn and Castlereagh",
-  //     "Mid and East Antrim",
-  //     "Mid Ulster",
-  //     "Newry, Mourne and Down",
-  //   ],
-  // },
-];
+const regionsData = {
+  "fence-installers": [
+    {
+      id: 3,
+      title: "North West England",
+      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+    },
+  ],
+};
 
-const AVERAGE_PRICE = [
-  {
-    Region: "Nationwide",
-    "Great Value": "£150",
-    Average: "£200",
-    Premium: "£400",
-  },
-  {
-    Region: "East Midlands",
-    "Great Value": "£150",
-    Average: "£175",
-    Premium: "£350",
-  },
-  {
-    Region: "East of England",
-    "Great Value": "£150",
-    Average: "£200",
-    Premium: "£350",
-  },
-  {
-    Region: "London",
-    "Great Value": "£150",
-    Average: "£225",
-    Premium: "£450",
-  },
-  {
-    Region: "North East England",
-    "Great Value": "£125",
-    Average: "£165",
-    Premium: "£200",
-  },
-  {
-    Region: "North West England",
-    "Great Value": "£125",
-    Average: "£175",
-    Premium: "£420",
-  },
-  {
-    Region: "Scotland",
-    "Great Value": "£125",
-    Average: "£180",
-    Premium: "£350",
-  },
-  {
-    Region: "South East England",
-    "Great Value": "£150",
-    Average: "£240",
-    Premium: "£500",
-  },
-  {
-    Region: "South West England",
-    "Great Value": "£150",
-    Average: "£200",
-    Premium: "£450",
-  },
-  {
-    Region: "West Midlands",
-    "Great Value": "£130",
-    Average: "£200",
-    Premium: "£350",
-  },
-  {
-    Region: "Yorkshire and the Humber",
-    "Great Value": "£125",
-    Average: "£200",
-    Premium: "£400",
-  },
-];
+const AVERAGE_PRICE = {
+  "fence-installers": [
+    {
+      Region: "Nationwide",
+      "Great Value": "£150",
+      Average: "£200",
+      Premium: "£400",
+    },
+    {
+      Region: "East Midlands",
+      "Great Value": "£150",
+      Average: "£150",
+      Premium: "£350",
+    },
+    {
+      Region: "East of England",
+      "Great Value": "£150",
+      Average: "150",
+      Premium: "£375",
+    },
+  ],
+};
 
-const FREQUENTLY_DATA = [
-  {
+const TAXRETURNDATA = {
+  "fence-installers": {
     key: "1",
-    title: "What is the difference between an accountant and chartered accountant?",
-    description:
-      "The main difference between a general accountant and a chartered accountant lies in their level of qualification, accreditation, and the scope of services they provide. While a general accountant can be highly skilled in tasks like bookkeeping, payroll, and managing financial records, they may not always hold a formal certification. For general accountants, their expertise is often suitable for day-to-day financial management in smaller businesses or sole trader operations.\n\nOn the other hand, a chartered accountant is a finance professional who has undergone extensive training and is formally accredited by internationally recognised professional bodies such as ACCA or ICAS. Typically, chartered accountants are called upon when it has to do with complex financial tasks, including audit, tax planning, compliance, strategic advice, and forensic accounting.\n\nHowever, it ultimately comes down to your specific need. Simply start your search today, let us know requirements, and we will match you with the right financial accountant near you."
+    heading1: "What is involve with",
+    heading2: "fence and gate installation",
+    shortDes:
+      "Professional installation of fences and gates including measurement, setup, and finishing.",
+    name: "Alex, Staff Writer",
+    date: "2025-11-15",
   },
-  {
-    key: "2",
-    title: "How to change your accountant?",
-    description:
-      "If you're no longer satisfied with your current service provider or simply looking for a better fit, making the switch doesn't have to be complicated. At Localists, we make the transition easy by connecting you with qualified accounting professionals near you. Whether you prefer an online accountant or someone local, you will find one here.\n\nThe first step, however, is to inform your current accounting professional of your decision to move on. Next, gather all the information you need, from financial records to reports and account details. This way, the transition is smooth, and your new accountant can access all previous financial records."
-  },
-  {
-    key: "3",
-    title: "How to choose an accountant in the UK?",
-    description:
-      "To find a qualified accountant in the UK, start by researching and comparing local accountancy firms or accounting professionals near you. Look for candidates with strong client reviews and ask for recommendations when possible. Also ensure they are registered under the right professional body.\n\nLocalists will connect you with the best quality professionals, whether you're looking for support with your personal finances or a qualified accountant for your small business, we’ve got you covered."
-  },
-  {
-    key: "4",
-    title: "How much do accountants charge for self-assessment in the UK?",
-    description:
-      "Depending on the complexity of your self-assessment tax return, charges may vary. However, the average cost of hiring an accountant in the UK typically ranges anywhere from £150 to over £300. Other factors such as, level of experience and hourly rates, can also determine what cost you will incur for these professional services.\n\nStart your search now and obtain free quotes from quality accounting professionals anywhere you are in the UK."
-  }
-];
+};
 
+const FREQUENTLY_DATA = {
+  "fence-installers": [
+    {
+      key: "1",
+      title: "How long does it take to install automatic gates?",
+      description:
+        "Usually 2–3 days, depending on the size and complexity of the gates",
+    },
+    {
+      key: "2",
+      title: "How long does it take to install fences?",
+      description: "Most standard fences can be installed in 1–3 days.",
+    },
+    {
+      key: "3",
+      title: "Do I need planning permission for driveway gates?",
+      description:
+        " Yes, if the gate will be taller than 1 metre and is next to a public road or footpath.",
+    },
+    {
+      key: "4",
+      title: " Do I need planning permission for fences?",
+      description:
+        "Yes, if the fence is more than 2 metres high, or over 1 metre and next to a road or footpath.",
+    },
+  ],
+};
 
-const OTHER_SERVICES_DATA = [
-  {
-    id: 1,
-    image: TaxPreparationImg,
-    description: "Tax Preparation",
-    availableOnline: true,
-  },
-  {
-    id: 2,
-    image: TaxResolutionImg,
-    description: "Tax Resolution",
-  },
-  {
-    id: 3,
-    image: PayrollServicesImg,
-    description: "Payroll Services",
-    availableOnline: true,
-  },
-  {
-    id: 4,
-    image: TaxResolutionImg,
-    description: "Tax Resolution",
-  },
-];
+const OTHER_SERVICES_DATA = {
+  "fence-installers": [
+    {
+      id: 1,
+      image: TaxPreparationImg, // Original image kept
+      description: "Driveway Installation",
+      availableOnline: true,
+    },
+    {
+      id: 2,
+      image: TaxResolutionImg, // Original image kept
+      description: "Patio Services",
+    },
+    {
+      id: 3,
+      image: PayrollServicesImg, // Original image kept
+      description: "Landscaping",
+      availableOnline: true,
+    },
+    {
+      id: 4,
+      image: TaxResolutionImg, // Original image kept
+      description: "Artificial Grass Installation",
+    },
+  ],
+};
 
-const RELATED_SERVICES_DATA = [
-  {
-    id: 1,
-    title: "Accounting",
-    image: TaxReturn,
-    description: "Your 2025 tax return: Everything you need to know in the UK",
-    availableOnline: true,
-  },
-  {
-    id: 2,
-    title: "Accounting",
-    image: AccountentBusiness,
-    description: "Here's why you need an accountant for your new business",
-  },
-  {
-    id: 3,
-    title: "Accounting",
-    image: BasicAccounting,
-    description: "What are the basics of Accounting?",
-    availableOnline: true,
-  },
-  {
-    id: 4,
-    title: "Accounting",
-    image: AccountentBusiness,
-    description: "Here's why you need an accountant for your new business",
-  },
-];
+const RELATED_SERVICES_DATA = {
+  "fence-installers": [
+    {
+      id: 1,
+      title: "Fence Installation",
+      image: TaxReturn, // Original image kept
+      description:
+        "Your 2025 fence installation guide: Everything you need to know in the UK",
+      availableOnline: true,
+    },
+    {
+      id: 2,
+      title: "Fence Repair",
+      image: AccountentBusiness, // Original image kept
+      description: "Here's why you need professional fence maintenance",
+    },
+    {
+      id: 3,
+      title: "Fence Materials",
+      image: BasicAccounting, // Original image kept
+      description: "What are the best materials for fencing?",
+      availableOnline: true,
+    },
+    {
+      id: 4,
+      title: "Garden Fencing",
+      image: AccountentBusiness, // Original image kept
+      description: "Complete guide to choosing garden fencing",
+    },
+  ],
+};
 
-const RELATED_PRICE_DATA = [
-  {
-    id: 1,
-    title: "Accounting",
-    image: AccountingCost,
-    description: "How much does an accountant cost?",
-    availableOnline: true,
-  },
-  {
-    id: 2,
-    title: "Tax Preparation",
-    image: TaxAccountent,
-    description: "How much does a Tax Accountant cost in 2025?",
-  },
-  {
-    id: 3,
-    title: "Payroll Services",
-    image: FinancialCost,
-    description: "How much does Business Financial Planning cost?",
-    availableOnline: true,
-  },
-  {
-    id: 4,
-    title: "Accounting",
-    image: AccountentBusiness,
-    description: "Here's why you need an accountant for your new business",
-  },
-];
+const RELATED_PRICE_DATA = {
+  "fence-installers": [
+    {
+      id: 1,
+      title: "Fence Installation",
+      image: AccountingCost, // Original image kept
+      description: "How much does fence installation cost?",
+      availableOnline: true,
+    },
+    {
+      id: 2,
+      title: "Wood Fencing",
+      image: TaxAccountent, // Original image kept
+      description: "How much does wood fencing cost in 2025?",
+    },
+    {
+      id: 3,
+      title: "Chain Link Fencing",
+      image: FinancialCost, // Original image kept
+      description: "How much does chain link fence installation cost?",
+      availableOnline: true,
+    },
+    {
+      id: 4,
+      title: "Fence Repair",
+      image: AccountentBusiness, // Original image kept
+      description: "Here's why you need professional fence maintenance",
+    },
+  ],
+};
 
-const REVIEWS_DATA = [
-  {
-    id: 1,
-    name: "Cara",
-    title: "( Loram Text)",
-    date: "13 Feb 2025",
-    image: ReviewsImage,
-    description:
-      "I highly recommend 123 Bookkeeping and accountancy. Monica Tangen worked at our dental practice for nearly 3 years. During that time, she ran the day to day book keeping and accounting and acted as our finance manager for the business. She carried out her work with excellence, managing the day to day cashflow and banking of the practice and filing accounts promptly and efficiently. She also dealt with our staff payroll, pensions and our suppliers. Thanks to Monica, our business cashflow was always in good order. I highly recommend her services.",
+const REVIEWS_DATA = {
+  "fence-installers": [
+    {
+      id: 1,
+      name: "Daniel Kennedy",
+      title: "(Residential Fencing)",
+      date: "13 Feb 2025",
+      image: ReviewsImage, // Original image kept
+      description:
+        "Great job on my fence! He did exactly what I wanted. Definitely recommend. I am going to use them on my next property.",
+    },
+    {
+      id: 2,
+      name: "Fatima H.",
+      title: "(Commercial Fencing)",
+      date: "13 Feb 2025",
+      image: ReviewsImage, // Original image kept
+      description:
+        "Great job on my fence! He did exactly what I wanted. Definitely recommend. I am going to use them on my next property.",
+    },
+    {
+      id: 3,
+      name: "James Wilson",
+      title: "(Garden Fencing)",
+      date: "15 Mar 2025",
+      image: ReviewsImage, // Original image kept
+      description:
+        "Professional fence installation with excellent results. Will hire again for future projects!",
+    },
+  ],
+};
+const CONTENT_CONFIG = {
+  "fence-installers": {
+    para1:
+      "Find skilled fencing professionals in your area with Localists.com – and get free, no-obligation quotes in minutes.",
+    para2:
+      "Not sure where to begin? Just tell us a little about your project, and we’ll connect you with reliable fencing experts near you. There’s no pressure to hire – you can compare profiles, read genuine customer reviews, and request extra details before making your choice.",
+    para3: "It's super fast and easy!",
   },
-  {
-    id: 1,
-    name: "Rome",
-    title: "( Loram Text )",
-    date: "13 Feb 2025",
-    image: ReviewsImage,
-    description:
-      "I highly recommend 123 Bookkeeping and accountancy. Monica Tangen worked at our dental practice for nearly 3 years. During that time, she ran the day to day book keeping and accounting and acted as our finance manager for the business. She carried out her work with excellence, managing the day to day cashflow and banking of the practice.",
-  },
-];
-
+};
+const BREADCRUMB_CONFIG = {
+  "fence-installers": [
+    { title: "Home & Garden", path: "/home-garden" },
+    { title: "Builders", path: "/home-garden/builders" },
+    { title: "Fence & Gate Installation", path: "/fence-install" },
+  ],
+};
 export {
   POPULAR_CITIES,
   regionsData,
@@ -447,4 +291,7 @@ export {
   RELATED_SERVICES_DATA,
   RELATED_PRICE_DATA,
   REVIEWS_DATA,
+  TAXRETURNDATA,
+  CONTENT_CONFIG,
+  BREADCRUMB_CONFIG,
 };

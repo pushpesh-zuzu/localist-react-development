@@ -3,16 +3,16 @@ import styles from "./findaccountant.module.css";
 const AccountFindingInfo = ({
   title = "Accountant",
   findingHeading = "Accounting",
-  breadcrumb = "Business / Financial and Accounting / General Accounting",
-  service=false,
+  breadcrumb,
+  service = false,
   para1,
   para2,
-  para3
+  para3,
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
       <p className={styles.breadcrumb}>
-    {service && <span> {breadcrumb}</span>}
+        {service && <span> {breadcrumb}</span>}
       </p>
 
       <div className={styles.infoContainer}>

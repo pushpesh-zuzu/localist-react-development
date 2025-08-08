@@ -146,7 +146,7 @@ const style = {
     <div className={styles.container} style={style}>
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
-          <h1>
+          <h1 style={{color:'white'}}>
           Looking for <span className={styles.blueText}>{header} </span>{" "}
           Professionals Near You?
           </h1>

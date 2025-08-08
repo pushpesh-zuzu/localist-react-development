@@ -1,12 +1,12 @@
-import { HowItWorksData } from "../../../constant/subCategory";
+// import { HowItWorksData } from "../../../constant/subCategory";
 import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowItWorks.module.css";
 
-const HowItWorks = () => {
+const HowItWorks = ({ HowItWorksData = [] }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-       How <span className={styles.highlight}>Localists</span> Works
+        How <span className={styles.highlight}>Localists</span> Works
       </h2>
       <div className={styles.stepsContainer}>
         {HowItWorksData.map((item, index) => (
@@ -25,7 +25,10 @@ const HowItWorks = () => {
           </div>
         ))}
       </div>
-      <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
+      <button
+        onClick={() => handleScrollToBottom()}
+        className={styles.ctaButton}
+      >
         Get quotes from Accountants near you
       </button>
     </div>
