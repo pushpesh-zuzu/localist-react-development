@@ -42,6 +42,7 @@ import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
+import Home from "../assets/Images/servicesLevels/Home.jpg";
 
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],
@@ -161,7 +162,17 @@ const CloneCategory = ({
         subHeader={subHeader}
         panelImage={financeBg}
       /> */}
-      <BannerWithBreadCrum level={2}  panelImage={financeBg} />
+      <BannerWithBreadCrum
+        header={accountHeader}
+        subHeader={subHeader}
+        accountHeader="Home and Garden"
+        level={2}
+        panelImage={Home}
+        title="Home & Garden"
+        para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
+        para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotation for the work you require."
+        para3={`It's super fast and easy!`}
+      />
 
       {/* {endpoint !== routeName && (
         <div className={styles.findAccountInfoContainer}>

@@ -4,7 +4,10 @@ const AccountFindingInfo = ({
   title = "Accountant",
   findingHeading = "Accounting",
   breadcrumb = "Business / Financial and Accounting / General Accounting",
-  service=false
+  service=false,
+  para1,
+  para2,
+  para3
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
@@ -21,17 +24,19 @@ const AccountFindingInfo = ({
 
         <div className={styles.descriptionContainer}>
           <p>
-            Looking for local accountants near me or reliable accountancy firms?
-            Not sure who to trust with your accounting needs?
+            {/* Looking for local accountants near me or reliable accountancy firms?
+            Not sure who to trust with your accounting needs? */}
+            {para1}
           </p>
           <p>
-            Localists will help you find the best quality accountants in your
+            {/* Localists will help you find the best quality accountants in your
             area. Whether you need help filing taxes, starting a business, or
             getting your finances on track, we simplify the process. Just tell
             us what you are looking for, and we will connect you with qualified
-            accounting professionals in your local area.
+            accounting professionals in your local area. */}
+            {para2}
           </p>
-          <p>Start your search now and obtain free, no obligation quotes.</p>
+          <p>{para3}</p>
         </div>
         {/* <button className={styles.accountantBtn}>Find an {title} today</button> */}
       </div>

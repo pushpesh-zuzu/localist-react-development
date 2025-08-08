@@ -14,6 +14,11 @@ import SocialMediaImage from "../assets/Images/SocialMediaImage.svg";
 import TaxPreparationImage from "../assets/Images/TaxPreparationImage.svg";
 import WebDesignImage from "../assets/Images/WebDesignImage.svg";
 import BusinessConsulting from "../assets/Images/business_consulting.svg";
+import FenchandGet from "../assets/Images/FenchandGet.jpg";
+import PatioPatioServices from "../assets/Images/PatioServices.jpg";
+import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
+
+
 const CATEGORIES = [
   {
     title: "Business Professionals",
@@ -98,6 +103,16 @@ const PopularCategoriesData = [
     title: "Bookkeeping Services",
     image: BookkeepingImage,
   },
+    {
+  id: 14,
+  title: "Fence & Gate Installation",
+  image: FenchandGet, // apna image import karke lagao
+},
+{
+  id: 15,
+  title: "Driveway Installation",
+  image: DrivewayInstallation, // apna image import karke lagao
+},
   // {
   //   id: 3,
   //   availableOnline: true,
@@ -146,20 +161,20 @@ const PopularCategoriesData = [
     title: "General Accounting",
     image: gen_acc_img,
   },
-  {
-    id: 11,
-    title: "Architectural Services",
-    image: BusinessConsulting,
-  }, 
-  {
-    id: 12,
-    title: "Property Extensions",
-    image: TaxPreparationImage,
-  },
+  // {
+  //   id: 11,
+  //   title: "Architectural Services",
+  //   image: BusinessConsulting,
+  // }, 
+  // {
+  //   id: 12,
+  //   title: "Property Extensions",
+  //   image: TaxPreparationImage,
+  // },
   {
     id: 13,
     title: "Patio Services",
-    image: SecurityServicesImage,
+    image: PatioPatioServices,
   },
 ];
 

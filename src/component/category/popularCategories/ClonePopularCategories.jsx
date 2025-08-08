@@ -1,15 +1,7 @@
 import styles from "./PopularCategories.module.css";
 import { PopularCategoriesData } from "../../../constant/CloneCategory";
 
-
 import { useNavigate } from "react-router-dom";
-
-
-
-
-
-
-
 
 const PopularCategories = ({data}) => {
 
@@ -33,7 +25,7 @@ const PopularCategories = ({data}) => {
                 )}
                 <button
   className={styles.cardbButton}
-  onClick={() => navigate(`/inprogress`)}
+  // onClick={() => navigate(`/inprogress`)}
 >
   {row.title}
 </button>

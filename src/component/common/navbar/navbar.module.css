@@ -570,8 +570,15 @@
 }
 
 .popover_content {
+<<<<<<< Updated upstream
   cursor: pointer !important;
+=======
+  /* cursor: pointer; */
+>>>>>>> Stashed changes
   margin-bottom: 12px;
+}
+.popover_content img[alt="arrow"] {
+  cursor: pointer;
 }
 
 .popover_content:last-child {

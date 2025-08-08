@@ -18,6 +18,10 @@ import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
+import FenchandGet from "../assets/Images/FenchandGet.jpg";
+import PatioPatioServices from "../assets/Images/PatioServices.jpg";
+import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
+import Builders from "../assets/Images/servicesLevels/Builders.jpg";
 
 const popularFilterLevelTwo = [
   {
@@ -25,17 +29,17 @@ const popularFilterLevelTwo = [
       {
         id: 1,
         title: "Fence & Gate Installation",
-        image: WebDesignImage,
+        image: FenchandGet,
       },
       {
         id: 2,
         title: "Driveway Installation",
-        image: TaxPreparationImage,
+        image: DrivewayInstallation,
       },
       {
         id: 3,
         title: "Patio Services",
-        image: SocialMediaImage,
+        image: PatioPatioServices,
       },
     ],
   },
@@ -120,10 +124,21 @@ const CloneSubTwoCategory = ({
         />
       </Helmet>
       <BannerWithBreadCrum
+        header={accountHeader}
+        subHeader={subHeader}
+        accountHeader="Builders"
         level={2}
-        panelImage={financeBg}
-        breadcrumb="Home & Garden / Builders"
         service={true}
+        panelImage={Builders}
+        title="Builders"
+        breadcrumb=" Home & Garden / Builders / Fence & Gate Installation"
+        para1={
+          "Localists help you find the best Builders Professionals near you and obtain free, no obligation quotes"
+        }
+        para2={
+          "Our local Builders Professionals are ready to help with any project you may have. Just tell us what you’re looking for, where you require the service, and Localists will do the rest. Get tailored matches of the best, qualified Builders Professionals near you, compare services, check reviews, and obtain free, no obligation quotes. No time wasted - It’s that easy. Also, there’s no obligation to commit or hire, just helpful tools to guide your decision and make the hiring process quicker and easier"
+        }
+        para3={"Get started with Localists today!"}
       />
       <PopularCategories data={getFilterLevelTwoByKey("builders")} />
       <AllServicesComponent data={filteredAllServicesData} />

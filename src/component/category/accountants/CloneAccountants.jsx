@@ -147,8 +147,8 @@ const style = {
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
           <h1>
-          Looking for <span className={styles.blueText}>{header} Professionals</span>{" "}
-          Near You?
+          Looking for <span className={styles.blueText}>{header} </span>{" "}
+          Professionals Near You?
           </h1>
         </div>
 
@@ -156,7 +156,7 @@ const style = {
           <div className={styles.innerformContainer}>
             <h2>
               Do you need{" "}
-              <span className={styles.blueText}> {subHeader} Professionals?</span>
+              <span className={styles.blueText}> {subHeader} </span>Professionals?
             </h2>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>

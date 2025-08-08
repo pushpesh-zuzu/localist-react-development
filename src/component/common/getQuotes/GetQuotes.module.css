@@ -1,6 +1,6 @@
 .container {
   text-align: center;
-  padding: 50px 0;
+  padding: 50px 20;
   background-color: #f9fdff;
   margin-bottom: 40px;
   margin-top: 10px;
@@ -14,7 +14,12 @@
   padding: 8px 23px;
   border: none;
   border-radius: 5px;
+<<<<<<< Updated upstream
   cursor: pointer !important;
+=======
+  margin-bottom: 15px;
+  cursor: pointer;
+>>>>>>> Stashed changes
   font-family: "poppins" !important;
 }
 
