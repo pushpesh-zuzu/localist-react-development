@@ -7,22 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
-<<<<<<< Updated upstream
-// import {
-//   allSubMenuData,
-//   megaMenu,
-//   otherMenuData,
-//   serviceesData,
-//   subMenuData,
-// } from "../../../constant/Megamenu";
-=======
 import {
   allSubMenuData,
   otherMenuData,
   serviceesData,
   subMenuData,
 } from "../../../constant/Megamenu";
->>>>>>> Stashed changes
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllServiceList,
@@ -180,11 +170,7 @@ const LogoComponent = () => {
                   {/* <Link to="#">See All</Link> */}
                 </div>
 
-<<<<<<< Updated upstream
                 {megaMenu?.map((item, index) => (
-=======
-                {allServiceList?.slice(0, visibleCount).map((item, index) => (
->>>>>>> Stashed changes
                   <div
                     key={index}
                     className={styles.popover_content}
