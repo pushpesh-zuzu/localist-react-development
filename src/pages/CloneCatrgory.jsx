@@ -41,6 +41,7 @@ import { AllServicesData } from "../constant/CloneCategory";
 import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
+import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],
@@ -108,11 +109,6 @@ const CloneCategory = ({
 }) => {
   const location = useLocation();
   // Use includes instead of strict match
-  const panelImage = location.pathname.includes("/en/gb/business")
-    ? bgImage
-    : location.pathname.includes("/en/gb/financial-and-accounting")
-    ? financeBg
-    : "";
 
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
@@ -160,13 +156,14 @@ const CloneCategory = ({
           content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
         />
       </Helmet>
-      <Accountants
+      {/* <Accountants
         header={accountHeader}
         subHeader={subHeader}
-        panelImage={panelImage}
-      />
+        panelImage={financeBg}
+      /> */}
+      <BannerWithBreadCrum level={2}  panelImage={financeBg} />
 
-      {endpoint !== routeName && (
+      {/* {endpoint !== routeName && (
         <div className={styles.findAccountInfoContainer}>
           <p className={styles.breadcrumb}>
             {breadcrumbItems.map((item, index) => {
@@ -188,13 +185,13 @@ const CloneCategory = ({
             })}
           </p>
         </div>
-      )}
+      )} */}
 
-      <FindingBusinessProfessionals
+      {/* <FindingBusinessProfessionals
         header={accountHeader}
         subHeader={subHeader}
         bestText={bestText}
-      />
+      /> */}
       <HowItWorks
         howItWorksData={howItWorksData}
         header={accountHeader}

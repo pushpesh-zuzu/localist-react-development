@@ -4,11 +4,12 @@ const AccountFindingInfo = ({
   title = "Accountant",
   findingHeading = "Accounting",
   breadcrumb = "Business / Financial and Accounting / General Accounting",
+  service=false
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
       <p className={styles.breadcrumb}>
-        {breadcrumb} /<span>{findingHeading}</span>
+    {service && <span> {breadcrumb}</span>}
       </p>
 
       <div className={styles.infoContainer}>
