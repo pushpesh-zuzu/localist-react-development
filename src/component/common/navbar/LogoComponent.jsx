@@ -9,6 +9,7 @@ import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
 import {
   allSubMenuData,
+  megaMenu,
   otherMenuData,
   serviceesData,
   subMenuData,
@@ -29,6 +30,7 @@ const LogoComponent = () => {
   const [showMenu, setShowbMenu] = useState(false);
   const [showThirdLevel, setShowThirdLevel] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [selectedCategoryChildren, setSelectedCategoryChildren] = useState([]);
   const [mouseHover, setMouseHover] = useState("");
 
   const { userToken } = useSelector((state) => state.auth);
@@ -48,20 +50,13 @@ const LogoComponent = () => {
     const routesMap = {
       "House & Home": "en/gb/home",
       Business: "en/gb/business",
-      "General Builders":"/en/gb/builders/"
-      // "Lessons & Training": "en/gb/lessons-training",
+      "Lessons & Training": "en/gb/lessons-training",
+      More: "en/gb/more",
+      "General Builders": "/en/gb/builders/",
     };
-
     return routesMap[categoryName] || "#";
   }
   // Sample location data
-  const locationData = [
-    "Cheshire",
-    "Cumbria",
-    "Manchester",
-    "Lancashire",
-    "Merseyside",
-  ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -102,17 +97,17 @@ const LogoComponent = () => {
     }
    
   }, []);
-  const handleRedirectUrl = () => {
-    const status = registerData?.active_status || userToken?.active_status;
+  // const handleRedirectUrl = () => {
+  //   const status = registerData?.active_status || userToken?.active_status;
 
-    if (status == 1) {
-      navigate("/leads");
-    } else if (status == 2) {
-      navigate("/buyers/create");
-    } else {
-      navigate("/");
-    }
-  };
+  //   if (status == 1) {
+  //     navigate("/leads");
+  //   } else if (status == 2) {
+  //     navigate("/buyers/create");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
 
   const [placement, setPlacement] = useState("bottomLeft");
 
@@ -166,10 +161,9 @@ const LogoComponent = () => {
 
                 <div className={styles.popover_header}>
                   <span>Services</span>
-                  {/* <Link to="#">See All</Link> */}
                 </div>
 
-                {allServiceList?.slice(0, visibleCount).map((item, index) => (
+                {megaMenu.map((item, index) => (
                   <div
                     key={index}
                     className={styles.popover_content}
@@ -177,21 +171,10 @@ const LogoComponent = () => {
                     onMouseLeave={() => setMouseHover("")}
                   >
                     <span className={styles.text_wrap}>
-                      <img
-                        src={
-                          item?.category_icon
-                            ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                            : hiring
-                        }
-                        width={18}
-                        height={18}
-                        alt="icon"
-                      />
-                      {item.name === "Other Services" ? (
-                        <h4 className={styles.othertext}>{item.name}</h4>
-                      ) : (
-                        <Link to={getRouteForCategory(item.name)}>{item.name}</Link>
-                      )}
+                      <img src={item.icon} width={16} height={16} alt="icon" />
+                      <Link to={getRouteForCategory(item.name)}>
+                        {item.name}
+                      </Link>
                     </span>
                     <img
                       onClick={() => {
@@ -238,35 +221,11 @@ const LogoComponent = () => {
                   <span>{filterItems}</span>
                   {/* <Link to="#">See All</Link> */}
                 </div>
-                {allServiceList
-                  ?.filter((item) => item?.name == filterItems)
-                  .map((item, index) => (
-                    <div key={index}>
-                      <div
-                        className={styles.popover_content}
-                        onMouseEnter={() => setMouseHover(index)}
-                        onMouseLeave={() => setMouseHover("")}
-                      >
-                        <span className={styles.text_wrap}>
-                          {item.icon && (
-                            <img
-                              src={
-                                item?.iconhover && mouseHover === index
-                                  ? item?.iconhover
-                                  : item.icon
-                              }
-                              width={18}
-                              height={18}
-                              alt="icon"
-                            />
-                          )}
-                        </span>
-                      </div>
-
-                      {item.subcategory?.map((sub, subIndex) => {
-                        const slug = sub.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-");
+                {megaMenu
+                  .filter((item) => item.name === filterItems)
+                  .map((item) => (
+                    <div key={item.name}>
+                      {item.subcategory.map((sub, subIndex) => {
                         return (
                           <div
                             key={subIndex}
@@ -279,15 +238,18 @@ const LogoComponent = () => {
                                 {sub.name}
                               </Link>
                             </span>
-                            <img
-                              onClick={() => {
-                                setSelectedSubcategory(sub.name);
-                                setShowThirdLevel(true);
-                              }}
-                              src={arrowIcon}
-                              width={8}
-                              alt="arrow"
-                            />
+                            {sub.children && sub.children.length > 0 && (
+                              <img
+                                onClick={() => {
+                                  setSelectedSubcategory(sub.name);
+                                  setSelectedCategoryChildren(sub.children);
+                                  setShowThirdLevel(true);
+                                }}
+                                src={arrowIcon}
+                                width={8}
+                                alt="arrow"
+                              />
+                            )}
                           </div>
                         );
                       })}
@@ -315,18 +277,10 @@ const LogoComponent = () => {
                   <span>{selectedSubcategory}</span>
                 </div>
 
-                {locationData.map((location, index) => (
-                  <div
-                    key={index}
-                    className={styles.popover_content}
-                    // onClick={() => {
-                    //   console.log(`${location} selected for ${selectedSubcategory}`);
-                    // }}
-                  >
+                {selectedCategoryChildren.map((child, index) => (
+                  <div key={index} className={styles.popover_content}>
                     <span className={styles.text_wrap}>
-                      <Link to="#">
-                        {selectedSubcategory} in {location}
-                      </Link>
+                      <Link to="#">{child}</Link>
                     </span>
                   </div>
                 ))}
@@ -336,6 +290,10 @@ const LogoComponent = () => {
         </div>
       </div>
     );
+  };
+
+  const handleRedirectUrl = () => {
+    navigate("/");
   };
 
   return (

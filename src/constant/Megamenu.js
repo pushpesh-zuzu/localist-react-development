@@ -213,3 +213,105 @@ export const allSubMenuData = [
     name: "Location",
   },
 ];
+
+export const locationDatas = [
+  "Cheshire",
+  "Cumbria",
+  "Manchester",
+  "Lancashire",
+  "Merseyside",
+];
+export const megaMenu = [
+  {
+    name: "House & Home",
+    icon: houseIcon,
+    subcategory: [
+      {
+        name: "General Builders",
+        children: locationDatas.map((loc) => `General Builders in ${loc}`),
+      },
+      {
+        name: "Property Extensions",
+        children: locationDatas.map((loc) => `Property Extensions in ${loc}`),
+      },
+      {
+        name: "Architectural Services",
+        children: locationDatas.map(
+          (loc) => `Architectural Services in ${loc}`
+        ),
+      },
+      {
+        name: "Home Insulation",
+        children: locationDatas.map((loc) => `Home Insulation in ${loc}`),
+      },
+    ],
+  },
+  {
+    name: "Business",
+    icon: businessIcon,
+    subcategory: [
+      {
+        name: "Bookkeeping Services",
+        children: locationDatas.map((loc) => `Bookkeeping Services in ${loc}`),
+      },
+      {
+        name: "Social Media Marketing",
+        children: locationDatas.map(
+          (loc) => `Social Media Marketing in ${loc}`
+        ),
+      },
+      {
+        name: "Business Consulting",
+        children: locationDatas.map((loc) => `Business Consulting in ${loc}`),
+      },
+      {
+        name: "Accounting",
+        children: locationDatas.map((loc) => `Accounting in ${loc}`),
+      },
+    ],
+  },
+  {
+    name: "Lessons & Training",
+    icon: lessonsIcon,
+    subcategory: [
+      {
+        name: "Business & Career Coaching",
+        children: locationDatas.map(
+          (loc) => `Business & Career Coaching in ${loc}`
+        ),
+      },
+      {
+        name: "Music Lessons",
+        children: locationDatas.map((loc) => `Music Lessons in ${loc}`),
+      },
+      {
+        name: "Academic Tutoring",
+        children: locationDatas.map((loc) => `Academic Tutoring in ${loc}`),
+      },
+      {
+        name: "Fitness Training",
+        children: locationDatas.map((loc) => `Fitness Training in ${loc}`),
+      },
+    ],
+  },
+  {
+    name: "More",
+    icon: moreIcon,
+    subcategory: [
+      {
+        name: "Web Design",
+        children: locationDatas.map((loc) => `Web Design in ${loc}`),
+      },
+      {
+        name: "Logo Design",
+        children: locationDatas.map((loc) => `Logo Design in ${loc}`),
+      },
+      {
+        name: "Home & Domiciliary Care",
+        children: locationDatas.map(
+          (loc) => `Home & Domiciliary Care in ${loc}`
+        ),
+      },
+    ],
+  },
+];

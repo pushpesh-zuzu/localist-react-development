@@ -2,14 +2,20 @@ import AccountFindingInfo from "./AccountFindingInfo";
 import styles from "./findaccountant.module.css";
 import SearchAccountant from "./SearchAccountant";
 
-const FindAccountant = ({title,breadcrumb,findingHeading}) => {
+const FindAccountant = ({ title, breadcrumb, findingHeading, level = 1 }) => {
   return (
     <>
-      <div className={styles.findAccountantContainer}>
-        <SearchAccountant title={title}/>
-      </div>
+      {level == 1 && (
+        <div className={styles.findAccountantContainer}>
+          <SearchAccountant title={title} />
+        </div>
+      )}
       <div>
-        <AccountFindingInfo breadcrumb={breadcrumb} findingHeading={findingHeading} title={title} />
+        <AccountFindingInfo
+          breadcrumb={breadcrumb}
+          findingHeading={findingHeading}
+          title={title}
+        />
       </div>
     </>
   );

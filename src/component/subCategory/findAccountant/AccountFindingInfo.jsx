@@ -8,7 +8,7 @@ const AccountFindingInfo = ({
   return (
     <div className={styles.findAccountInfoContainer}>
       <p className={styles.breadcrumb}>
-        {breadcrumb} /<span>{findingHeading}</span>
+    <span> {breadcrumb}</span>
       </p>
 
       <div className={styles.infoContainer}>
