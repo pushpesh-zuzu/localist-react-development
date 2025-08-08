@@ -37,7 +37,7 @@
   padding: 12px;
   border-bottom: 1px solid #eee;
   font-size: 15px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background 0.2s;
 }
 
@@ -52,7 +52,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 15px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background 0.2s;
 }
 
@@ -87,7 +87,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .backButton:hover {
@@ -104,7 +104,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .saveButton:hover {
@@ -170,7 +170,7 @@
 }
 
 .removeBtn {
-  cursor: pointer;
+  cursor: pointer !important;
   color: red;
   font-size: 18px;
 }
@@ -186,7 +186,7 @@
   border: 1px dashed #ccc;
   padding: 6px 12px;
   margin-top: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .addAnswerInput input {

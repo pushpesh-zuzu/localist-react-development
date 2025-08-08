@@ -52,7 +52,7 @@
   padding: 11px 31px;
   text-align: center;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .button:hover {

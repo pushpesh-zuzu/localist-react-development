@@ -61,7 +61,7 @@ align-items: center;
   padding: 5px 7.5px;
   border-radius: 1.9px;
   font-size: 13px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   font-size: 12.64px;
   vertical-align: middle;
@@ -75,7 +75,7 @@ align-items: center;
   padding: 5px 7.5px;
   border-radius: 1.9px;
   font-size: 13px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   font-size: 12.64px;
   vertical-align: middle;
@@ -133,7 +133,7 @@ align-items: center;
 
 .link {
   color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
@@ -212,7 +212,7 @@ align-items: center;
 }
 
 .infoIcon {
-  cursor: pointer;
+  cursor: pointer !important;
   padding-top: 4px;
 }
 
@@ -265,7 +265,7 @@ align-items: center;
   border: none;
   padding: 8px 10px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }
@@ -280,7 +280,7 @@ align-items: center;
   border: none;
   padding: 8px 21px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }

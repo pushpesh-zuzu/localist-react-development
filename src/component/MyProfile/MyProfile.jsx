@@ -162,7 +162,7 @@ const MyProfile = () => {
             isOpen={openAccordion === "Reviews"}
             onClick={() => openAccordionHandler("Reviews")}
           >
-            <ReviewsAccordion />
+            <ReviewsAccordion details={viewProfileData?.reviews}/>
           </AccordionItem>
         </div>
 

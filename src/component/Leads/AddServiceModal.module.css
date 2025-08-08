@@ -28,7 +28,7 @@
   background: none;
   border: none;
   font-size: 20px;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #b7b7b7;
 }
 
@@ -84,7 +84,7 @@
 
 .dropdownItem {
   padding: 8px 12px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .dropdownItem:hover {
@@ -113,7 +113,7 @@
   color: #000000;
   border-radius: 4px;
   padding: 9px 19px;
-  cursor: pointer;
+  cursor: pointer !important;
   border-radius: 5px;
   user-select: none;
   font-weight: 500;
@@ -133,7 +133,7 @@
   padding: 8px 16px;
   border: none;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 20px;
 }
@@ -144,7 +144,7 @@
   padding: 8px 23px;
   border: none;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 20px;
 }
@@ -174,7 +174,7 @@
   border: none;
   font-size: 14px;
   margin-left: 8px;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #888;
 }
 

@@ -18,7 +18,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
 }
 
@@ -103,7 +103,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .backButton:hover {
@@ -120,7 +120,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .nextButton:hover {
@@ -150,7 +150,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
 
@@ -227,7 +227,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
 }
@@ -265,7 +265,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
   

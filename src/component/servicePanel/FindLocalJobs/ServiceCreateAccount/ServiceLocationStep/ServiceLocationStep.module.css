@@ -54,7 +54,7 @@
   align-items: center;
   font-size: 16px;
   margin-bottom: 0.75rem;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #6c7191;
 }
 
@@ -140,7 +140,7 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;
@@ -186,7 +186,7 @@
   border-radius: 3px;
   font-size: 20px;
   font-weight: 500;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-top: 15px;
 }
 
@@ -198,7 +198,7 @@
   display: flex;
   align-items: center;
   font-size: 14px;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   font-weight: 600;
 }
@@ -406,7 +406,7 @@
   border-radius: 3px;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-top: 15px;
   width: 84px;
 }
@@ -455,7 +455,7 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;

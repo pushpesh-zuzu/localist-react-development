@@ -28,11 +28,13 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
+  cursor: pointer;
 }
 .image:hover {
    width: 100%;
   height: 210px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .serviceTitle {
@@ -48,7 +50,7 @@
   font-size: 14px;
   color: #ffffff;
   white-space: nowrap;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .serviceTitle:hover {
@@ -66,7 +68,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -17,7 +17,7 @@
   padding: 10px 0px;
   border: none;
   border-radius: 4.5px;
-  cursor: pointer;
+  cursor: pointer !important;
   width: 100%;
   line-height: 20px;
   letter-spacing: 0%;

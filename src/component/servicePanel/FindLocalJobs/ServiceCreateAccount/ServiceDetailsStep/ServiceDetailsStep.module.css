@@ -113,7 +113,7 @@
   border-radius: 100px !important;
   overflow: hidden;
   z-index: 1;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 16px;
   font-weight: 500;
   transition: background 0.3s;
@@ -127,7 +127,7 @@
   border-radius: 100px !important;
   overflow: hidden;
   z-index: 1;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 16px;
   font-weight: 500;
   transition: background 0.3s;
@@ -144,7 +144,7 @@
   border-radius: 100px !important;
   overflow: hidden;
   z-index: 1;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 16px;
   font-weight: 500;
   transition: background 0.3s;
@@ -156,7 +156,7 @@
   color: white;
   padding: 11px 23px;
   border-radius: 100px !important;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 16px;
   font-weight: 500;
   transition: background 1s;
@@ -177,7 +177,7 @@
   padding: 10px 20.5px;
   border: none;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
@@ -194,7 +194,7 @@
   color: white;
   padding: 10px 23px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;

@@ -7,7 +7,7 @@ const SingleCategory = ({ category, onClick }) => {
     <div
       className={styles.singleCategory}
       onClick={() => onClick(category.name)}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer !important" }}
     >
       <div className={styles.imageContainer}>
         {/* <img src={category.icon} alt={category.name} className={styles.image} /> */}

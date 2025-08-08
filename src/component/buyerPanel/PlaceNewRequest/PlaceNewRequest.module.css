@@ -36,7 +36,7 @@
   border: none;
   padding: 8px 29px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 15px;
   text-align: center;
@@ -75,7 +75,7 @@
   border: none;
   padding: 8px 29px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 15px;
   text-align: center;
@@ -92,7 +92,7 @@
 }
 .tags {
   margin-top: 16px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .lastText {
   font-weight: 500;
@@ -258,7 +258,7 @@
   border: none;
   padding: 8px 29px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 15px;
   font-weight: 500;
 }

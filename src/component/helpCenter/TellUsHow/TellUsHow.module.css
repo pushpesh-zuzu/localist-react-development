@@ -85,7 +85,7 @@
   border: none;
   letter-spacing: 0;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 5px 0px;
   position: absolute;
   right: 6.8px;

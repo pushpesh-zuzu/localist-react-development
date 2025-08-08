@@ -19,14 +19,14 @@
   right: 20px;
   font-size: 16px;
   font-weight: 700;
-  cursor: pointer; */
+  cursor: pointer !important; */
   position: absolute;
   top: 0;
   right: 10px;
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
 }
 
@@ -108,7 +108,7 @@
   padding: 8px 12px;
   font-size: 12px;
   font-weight: 500;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background 0.3s;
   width: -webkit-fill-available;
   margin-top: 11px;
@@ -220,7 +220,7 @@
   padding: 16.35px 18px;
   
   color: #fff;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.3s ease;
   margin-top: 16px;
   font-weight: 500;
@@ -238,7 +238,7 @@
   border-radius: 4px;
   background-color: white;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
-  cursor: pointer;
+  cursor: pointer !important;
   position: relative;
   transition: all 0.2s ease-in-out;
 }
@@ -267,7 +267,7 @@
   padding: 16.35px 18px;
   
   color: #fff;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.3s ease;
   margin-top: 16px;
   font-weight: 500;
@@ -287,7 +287,7 @@
     margin-right: 10px;
     display: inline-block;
     position: relative;
-    cursor: pointer;
+    cursor: pointer !important;
     background: #ffffff;
 
     &:checked {
@@ -333,7 +333,7 @@
   padding: 9px 29px;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 15px;
   text-align: center;
@@ -383,7 +383,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
 }
@@ -396,7 +396,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
   .container {
@@ -462,7 +462,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
    .checkboxContainer label {
@@ -511,7 +511,7 @@
   padding: 16.35px 18px;
   
   color: #fff;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.3s ease;
   margin-top: 16px;
   font-weight: 500;
@@ -533,7 +533,7 @@
   font-size: 24px;
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
   }
   /* .checkboxContainer {
@@ -583,7 +583,7 @@
   padding: 16.35px 18px;
   
   color: #fff;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.3s ease;
   margin-top: 16px;
   font-weight: 500;

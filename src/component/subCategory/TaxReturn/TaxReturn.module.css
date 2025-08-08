@@ -71,7 +71,7 @@
   border: none;
   border-radius: 4px;
   color: #ffffff;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-top: 112px;
 }
 
@@ -87,7 +87,7 @@
   border: none;
   border-radius: 4px;
   color: #ffffff;
-  cursor: pointer;
+  cursor: pointer !important;
   display: none;
 }
 

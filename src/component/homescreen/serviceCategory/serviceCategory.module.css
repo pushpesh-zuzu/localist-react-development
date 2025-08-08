@@ -64,7 +64,7 @@
 
 .singleCategory:hover {
   background-color: #5bcbec;
-  cursor: pointer;
+  cursor: pointer !important;
   /* transform: translateY(-5px); */
 }
 
@@ -110,7 +110,7 @@
   font-size: 18px;
   font-weight: bold;
   color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
   transition: all 0.3s ease-in-out;
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
@@ -155,7 +155,7 @@
   gap: 10px;
   border: 1px solid #dedede;
   padding: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 14px;
   font-weight: 500;
   font-family: poppins;
@@ -176,7 +176,7 @@
   border-radius: 4px;
   font-size: 16px;
   font-weight: 500;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   justify-content: center;
   align-items: center;

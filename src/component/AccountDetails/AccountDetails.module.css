@@ -52,7 +52,7 @@
   border: none;
   font-weight: 600;
   padding: 8px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .link {
@@ -111,7 +111,7 @@
   border: 1px solid var(--primary-color);
   border-radius: 3px;
   background-color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .button:hover {
@@ -132,7 +132,7 @@
     border: 1px solid var(--primary-color);
     border-radius: 3px;
     background-color: var(--primary-color);
-    cursor: pointer;
+    cursor: pointer !important;
     width: 70px;
     color: #FFF;
 }
@@ -177,7 +177,7 @@
   border: none;
   padding: 10px 15px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .modalSaveButton:hover {
@@ -193,7 +193,7 @@
 .eyeIcon {
   position: absolute;
   right: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 18px;
   color: gray;
 }
@@ -223,7 +223,7 @@
   border: none;
   padding: 10px 15px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .saveButton:hover {
@@ -235,7 +235,7 @@
   color: #000000;
   padding: 10px 15px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   border-radius: 4px;
   margin-right: 10px;
 }

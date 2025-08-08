@@ -20,7 +20,7 @@
   padding: 10px 23px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background-color 0.3s ease;
 }
 

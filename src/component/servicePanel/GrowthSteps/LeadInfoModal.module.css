@@ -39,7 +39,7 @@
     background: none;
     border: none;
     font-size: 24px;
-    cursor: pointer;
+    cursor: pointer !important;
     color: #666;
   }
   

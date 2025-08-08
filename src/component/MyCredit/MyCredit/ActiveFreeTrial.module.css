@@ -87,7 +87,7 @@
     border: none;
     border-radius: 5px;
     font-weight: bold;
-    /* cursor: pointer; */
+    /* cursor: pointer !important; */
     margin-bottom: 5px;
     width: 100%;
     max-width: 180px;

@@ -30,7 +30,7 @@
   /* The slider */
   .slider {
     position: absolute;
-    cursor: pointer;
+    cursor: pointer !important;
     top: 0; left: 0;
     right: 0; bottom: 0;
     background-color: #ccc;
@@ -98,7 +98,6 @@
     transform: translateY(-50%);
     height: 16px;
     width: 18px;
-    pointer-events: none; 
   }
   
   .label {
@@ -164,7 +163,7 @@
     border: none;
     padding: 10px 16px;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .footer {
@@ -242,7 +241,7 @@
       top: 46%;
       transform: translateY(-50%);
       height: 18px;
-      pointer-events: none; 
+      /* pointer !important-events: none;  */
     }
   }
  
@@ -270,7 +269,7 @@
       top: 45.5%;
       transform: translateY(-50%);
       height: 18px;
-      pointer-events: none; 
+      /* pointer !important-events: none;  */
     }
   }
   @media screen and (max-width: 320px) {
@@ -297,7 +296,7 @@
       top: 45%;
       transform: translateY(-50%);
       height: 18px;
-      pointer-events: none; 
+      /* pointer !important-events: none;  */
     }
   }
   

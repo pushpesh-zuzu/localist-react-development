@@ -31,7 +31,7 @@
   border-radius: 8px;
   width: 250px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
+  cursor: pointer !important;
   transition: transform 0.2s;
 }
 

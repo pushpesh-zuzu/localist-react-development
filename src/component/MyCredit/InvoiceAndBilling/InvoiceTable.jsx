@@ -69,7 +69,7 @@ const InvoiceTable = ({ data }) => {
                       alt="Download"
                       className={styles.downloadIcon}
                       onClick={() => handleDownload(item)}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer !important" }}
                     />
                   )}
                 </td>

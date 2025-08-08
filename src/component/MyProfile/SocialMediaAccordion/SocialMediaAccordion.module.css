@@ -113,7 +113,7 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;
@@ -156,7 +156,7 @@
   border: none;
   padding: 8px 21px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }
@@ -170,7 +170,7 @@
   border: none;
   padding: 8px 10px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }

@@ -24,7 +24,7 @@
   font-weight: 400;
   font-size: 16px;
    vertical-align: middle;
-   cursor: pointer;
+   cursor: pointer !important;
    margin-bottom: 36px;
    display: flex;
    gap: 8px;
@@ -73,7 +73,7 @@
   border: 1px solid #d9d9d9;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   padding: 10px 18.66px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: all 0.3s ease;
   margin-bottom: 13.87px;
 }
@@ -136,7 +136,7 @@
   background: none;
   border: none;
   color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 14px;
   vertical-align: middle;
@@ -166,12 +166,12 @@
 .locationInputService {
   font-weight: 500;
   font-size: 12px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .link {
   color: inherit;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #828282;
 }
 
@@ -183,7 +183,7 @@
 .editButton {
   background: none;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
 }
@@ -205,7 +205,7 @@
 .switch {
   width: 40px;
   height: 20px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .viewLeads {
@@ -214,7 +214,7 @@
   border: none;
   padding: 8px 12.5px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-top: 36.1px;
   font-weight: 500;
   font-size: 20px;
@@ -240,7 +240,7 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;
@@ -314,7 +314,7 @@ input:checked + .slider::before {
 
 .searchItem {
   padding: 8px;
-  cursor: pointer;
+  cursor: pointer !important;
   border-bottom: 1px solid #eee;
   font-size: 14px !important;
   color: #000 !important;

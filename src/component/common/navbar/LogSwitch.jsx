@@ -272,7 +272,7 @@ useEffect(() => {
         </div> :
 
           <div style={{ marginTop: "4px" }} className={styles.inputWrapper} >
-            <div className={`${styles.mobileOnly}`} style={{cursor:'pointer !important'}}>
+            <div className={`${styles.mobileOnly}`} style={{cursor:'pointer !important !important'}}>
               <img src={searchIcon} 
               onClick={() => setShowMobileSearch((prev) => !prev)}
               alt="Search" className={styles.icon} width={18} height={18} />
@@ -454,7 +454,7 @@ useEffect(() => {
                 </div>
               }
             >
-              <div style={{ position: "relative", cursor: "pointer" }}>
+              <div style={{ position: "relative", cursor: "pointer !important" }}>
                 <img src={bellIcon} alt="Notifications" width={20} height={20} />
                 {unreadCount > 0 && (
                   <span

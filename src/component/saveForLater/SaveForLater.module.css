@@ -131,7 +131,7 @@
   font-weight: 400;
   font-size: 19px;
   vertical-align: middle;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
 }
 /* .contactItem a {
   text-decoration: none;
@@ -157,13 +157,13 @@
   padding: 7px 15px;
   border-radius: 20px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .badges {
   display: flex;
   gap: 8px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   flex-wrap: wrap;
 }
 
@@ -221,7 +221,7 @@
   display: flex;
   gap: 8px;
   /* text-decoration: underline; */
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .viewDetailsBtn:hover {
   background-color: #0096c4;
@@ -258,7 +258,7 @@
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size:20px;
   font-weight: 600;
 }
@@ -299,7 +299,7 @@
 .viewMoreBtnWrapper button {
   border-radius: 186.83px;
   gap: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
   background-color: var(--primary-color);
   color: #ffffff;
   font-weight: 600;
@@ -497,7 +497,7 @@
   display: flex;
   /* gap: 8px; */
   /* text-decoration: underline; */
-  cursor: pointer;
+  cursor: pointer !important;
 }
  .maincontainer {
   margin-top: -12px;

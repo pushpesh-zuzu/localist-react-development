@@ -5,7 +5,7 @@
   
   .backText {
     color: #000000;
-    cursor: pointer;
+    cursor: pointer !important;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
@@ -85,7 +85,7 @@
   .cardChange {
     font-size: 14px;
     text-decoration: underline;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .cardNumber {
@@ -110,7 +110,7 @@
     padding: 5px 15px;
   
     font-size: 20px;
-    cursor: pointer;
+    cursor: pointer !important;
   }
 
   @media screen and (max-width:768px) {

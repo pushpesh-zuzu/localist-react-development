@@ -54,7 +54,7 @@
 
 .link {
   color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   font-size: 16px;
   vertical-align: middle;
@@ -87,7 +87,7 @@
   border: none;
   padding: 8px 10px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }
@@ -99,7 +99,7 @@
   border: none;
   padding: 8px 21px;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 20px;
   font-weight: 500;
 }

@@ -69,7 +69,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .viewMatchesButton {
@@ -82,7 +82,7 @@
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
   gap: 10px;

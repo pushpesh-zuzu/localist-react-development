@@ -60,7 +60,7 @@
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;

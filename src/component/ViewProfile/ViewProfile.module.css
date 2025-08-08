@@ -116,7 +116,7 @@
     border: none;
     font-size: 18px;
     font-weight: 500;
-    cursor: pointer;
+    cursor: pointer !important;
     border-radius: 5px;
   }
   .RequestQuoteBtn:hover {
@@ -276,7 +276,7 @@
     color: #555;
     font-size: 18px;;
     padding:  6px 0px;
-    cursor: pointer;
+    cursor: pointer !important;
     white-space: nowrap; 
     transition: color 0.3s, border-bottom 0.3s;
     border-bottom: 2px solid transparent;
@@ -351,7 +351,7 @@
     font-size: 12px;
     font-weight: bold;
     color: #000000;
-    cursor: pointer;
+    cursor: pointer !important;
     z-index: 10;
     transition: all 0.3s ease;
   }
@@ -402,7 +402,7 @@
     border: none;
     font-size: 14px;
     color: #ffffff;
-    cursor: pointer;
+    cursor: pointer !important;
     padding: 5px 16px;
   }
   
@@ -413,7 +413,7 @@
     font-size: 14px;
     border: none;
    
-    cursor: pointer;
+    cursor: pointer !important;
   }
   .ratingSection {
     display: flex;
@@ -429,7 +429,7 @@
   }
   
   .star {
-    cursor: pointer;
+    cursor: pointer !important;
     color: #e4e4e4; 
     transition: color 0.2s ease-in-out;
   }

@@ -27,7 +27,7 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #b7b7b7;
 }
 
@@ -58,7 +58,7 @@
   background-color: #e3f6fc;
   padding: 10px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background-color 0.2s ease;
 }
 

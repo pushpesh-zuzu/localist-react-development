@@ -7,13 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
-import {
-  allSubMenuData,
-  megaMenu,
-  otherMenuData,
-  serviceesData,
-  subMenuData,
-} from "../../../constant/Megamenu";
+// import {
+//   allSubMenuData,
+//   megaMenu,
+//   otherMenuData,
+//   serviceesData,
+//   subMenuData,
+// } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllServiceList,
@@ -22,6 +22,7 @@ import {
 } from "../../../store/FindJobs/findJobSlice";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+import { megaMenu } from "../../../constant/Megamenu";
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -163,7 +164,7 @@ const LogoComponent = () => {
                   <span>Services</span>
                 </div>
 
-                {megaMenu.map((item, index) => (
+                {megaMenu?.map((item, index) => (
                   <div
                     key={index}
                     className={styles.popover_content}
@@ -191,7 +192,7 @@ const LogoComponent = () => {
                 {totalItems > 5 && (
                   <div
                     className={styles.popover_content}
-                    style={{ cursor: "pointer", fontWeight: "bold" }}
+                    style={{ cursor: "pointer !important", fontWeight: "bold" }}
                     onClick={handleToggle}
                   >
                     <span className={styles.text_wrap}>

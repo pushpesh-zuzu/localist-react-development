@@ -6,7 +6,7 @@
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
   width: 100%;
   text-align: center;
 }

@@ -79,7 +79,7 @@
   padding: 14px 27.5px;
   font-size: 24px;
   font-weight: 700;
-  cursor: pointer;
+  cursor: pointer !important;
   border-radius: 4px;
 }
 

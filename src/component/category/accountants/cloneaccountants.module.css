@@ -105,7 +105,7 @@
   border: none;
   border-radius: 5px;
   margin-top: 25px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .button:hover {
@@ -125,7 +125,7 @@
 
 .searchItem {
   padding: 8px;
-  cursor: pointer;
+  cursor: pointer !important;
   border-bottom: 1px solid #eee;
   font-size: 14px !important;
   color: #000 !important;

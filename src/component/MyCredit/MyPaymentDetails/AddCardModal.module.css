@@ -27,7 +27,7 @@
     font-size: 24px;
     border: none;
     background: none;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .heading {
@@ -80,7 +80,7 @@
     top: 65%;
     transform: translateY(-50%);
     height: 20px;
-    pointer-events: none; 
+    /* pointer !important-events: none;  */
   }
   
   .actions {
@@ -97,7 +97,7 @@
     padding: 10px 18px;
     border-radius: 6px;
     font-size: 0.875rem;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .cancelBtn {
@@ -233,7 +233,7 @@ text-align: start;
         top: 75%;
         transform: translateY(-50%);
         height: 20px;
-        pointer-events: none; 
+        /* pointer !important-events: none;  */
       }
       .cards {
         display: flex;

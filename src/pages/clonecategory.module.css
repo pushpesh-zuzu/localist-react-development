@@ -96,7 +96,7 @@
     border: none;
     letter-spacing: 0;
     vertical-align: middle;
-    cursor: pointer;
+    cursor: pointer !important;
     padding: 5px 0px;
     position: absolute;
     right: 7px;
@@ -129,7 +129,7 @@
   .breadcrumb span {
     /* font-weight: 700; */
     color: var(--primary-color);
-    cursor: pointer;
+    cursor: pointer !important;
     line-height: normal;
    font-style: normal;
   }
@@ -188,7 +188,7 @@
     border: none;
     border-radius: 4.67px;
     box-shadow: 0px 0px 4px 0px #0000004d;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .accountantBtn:hover {

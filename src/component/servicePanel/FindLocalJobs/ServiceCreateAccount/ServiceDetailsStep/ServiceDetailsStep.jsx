@@ -241,7 +241,7 @@ useEffect(() => {
                     right: "10px",
                     top: "57%",
                     transform: "translateY(0%)",
-                    cursor: "pointer",
+                    cursor: "pointer !important",
                     color: "#888",
                   }}
                 >

@@ -36,7 +36,7 @@
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: transform 0.3s ease;
 }
 

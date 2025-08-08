@@ -109,7 +109,7 @@
   width: 220px; */
    display: flex;
   gap: 11px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   align-items: center;
 }
 
@@ -148,7 +148,7 @@
 /* .profile_view {
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
+  cursor: pointer !important;
   
 } */
 .profile_view  img {
@@ -160,7 +160,7 @@
   padding: 4px 9px;
   color: #000000;
   border-radius: 2px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -178,7 +178,7 @@
   padding: 4px 9px;
   color: #828282;
   border-radius: 2px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -190,7 +190,7 @@
   font-weight: 600;
   font-size: 20px;
   vertical-align: middle;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
 }
 
 .details p {
@@ -214,7 +214,7 @@
   font-weight: 400;
   font-size: 16px;
   vertical-align: middle;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
 }
 .contactItem a {
   list-style: none;
@@ -223,7 +223,7 @@
   font-weight: 400;
   font-size: 16px;
   vertical-align: middle;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
 
 }
 .customSelect {
@@ -262,7 +262,7 @@
   padding: 7px 15px;
   border-radius: 20px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
     align-items: center
 }
@@ -270,7 +270,7 @@
 .badges {
   display: flex;
   gap: 8px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   flex-wrap: wrap;
 }
 
@@ -332,7 +332,7 @@
   border: none;
   padding: 8px 28px;
   border-radius: 5px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   font-size: 21px;
   font-weight: 500;
   display: flex;
@@ -371,7 +371,7 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-size: 18px;
     font-weight: 600;
   }
@@ -398,7 +398,7 @@
 .viewMoreBtnWrapper button {
   border-radius: 186.83px;
   gap: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
   background-color: var(--primary-color);
   color: #ffffff;
   font-weight: 600;
@@ -424,7 +424,7 @@
   font-size: 21px;
   background-color: #FFFFFF;
   border-radius: 6px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: all 0.3s ease;
   display: flex;
   justify-content: center;
@@ -441,7 +441,7 @@
 }
 .viewAllText {
   color: #ffffff;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .purchaseText {
   color: #ffffff;
@@ -736,7 +736,7 @@ padding-bottom: 20px;
 /* .profile_view {
   display: flex;
   justify-content: space-between;
-  cursor: pointer;
+  cursor: pointer !important;
   
 } */
 .profile_view span img {
@@ -748,7 +748,7 @@ padding-bottom: 20px;
   padding: 4px 7px;
   color: #000000;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -760,7 +760,7 @@ padding-bottom: 20px;
   padding: 4px 9px;
    color: #828282;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -782,7 +782,7 @@ padding-bottom: 20px;
   padding: 4px 7px;
   color: #000000;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 10px;
   display: flex;
   align-items: center;
@@ -794,7 +794,7 @@ padding-bottom: 20px;
   padding: 4px 9px;
   color: #828282;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 8px;
   display: flex;
   align-items: center;
@@ -829,7 +829,7 @@ justify-content: space-between;
   padding: 4px 7px;
   color: #000000;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 9px;
   display: flex;
   align-items: center;
@@ -841,7 +841,7 @@ justify-content: space-between;
   padding: 4px 9px;
   color: #828282;
   border-radius: 2px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 8px;
   display: flex;
   align-items: center;

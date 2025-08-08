@@ -14,7 +14,7 @@
   padding: 8px 23px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-family: "poppins" !important;
 }
 

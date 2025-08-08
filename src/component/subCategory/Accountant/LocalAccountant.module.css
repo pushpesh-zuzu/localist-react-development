@@ -42,7 +42,7 @@
   border: none;
   border-radius: 4px;
   color: #ffffff;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .localAccountant_button:hover {

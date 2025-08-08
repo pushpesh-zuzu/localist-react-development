@@ -67,7 +67,7 @@
   overflow: hidden;
   text-align: center;
   background: #fafafa;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: transform 0.2s ease;
 }
 
@@ -100,7 +100,7 @@
   border: none;
   padding: 10px 24px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-size: 14px;
 }
 

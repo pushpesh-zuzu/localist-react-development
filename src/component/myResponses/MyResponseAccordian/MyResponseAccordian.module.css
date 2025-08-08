@@ -169,7 +169,7 @@
   font-size: 16px;
   display: flex;
   gap: 8px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .selectBox {
   padding: 8px 8px;
@@ -178,7 +178,7 @@
   border: 1px solid #FFFFFF;
   border-radius: 4px;
   outline: none;
-  cursor: pointer;
+  cursor: pointer !important;
   background-color: #fff;
   color: #333;
 }
@@ -267,7 +267,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .phoneNumberTexts {
   text-decoration: none;
@@ -278,7 +278,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
 }
 .phoneNumberTexts span {
@@ -346,7 +346,7 @@
   background: none;
   border: none;
   padding: 12px 20px 8px; /* reduced bottom padding to bring text closer to border */
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .tabLabel {
@@ -419,7 +419,7 @@
   color: #999;
   display: flex;
   gap: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .noteActions span:hover {
@@ -462,7 +462,7 @@
   border-radius: 4px;
   color: #ffffff;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
 }
 
@@ -472,7 +472,7 @@
   border-radius: 4px;
   color: #828282;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
 }
 
@@ -513,7 +513,7 @@
   border: none;
   display: flex;
   gap: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .CancelBtn {
   background-color: #ffffff;
@@ -523,7 +523,7 @@
   border: none;
   display: flex;
   gap: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
 } */
 .bullet {
     color: #000;
@@ -794,7 +794,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  cursor: pointer;
+  cursor: pointer !important;
   color: #000000;
 }
 .currentStatusText {
@@ -840,7 +840,7 @@
   font-size: 14px;
   display: flex;
   gap: 6px;
-  cursor: pointer;
+  cursor: pointer !important;
   width: 150px;
   text-align: center;
   align-items: center;
@@ -885,7 +885,7 @@
   font-size: 14px;
   display: flex;
   gap: 6px;
-  cursor: pointer;
+  cursor: pointer !important;
   width: 125px;
   text-align: center;
   align-items: center;

@@ -34,7 +34,7 @@
   background: transparent;
   border: none;
   font-size: 24px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .mainBox h2 {
   margin-top: 24px;
@@ -118,7 +118,7 @@
   padding: 5px 99px;
   /* border-radius: 6px; */
   font-size: 20px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .checkboxLabel {
@@ -239,7 +239,7 @@ border: 1px solid #000000;
   font-size: 16px;
   font-weight: 600;
   color: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
  }
  .perCreditText {
   
@@ -259,7 +259,7 @@ border: 1px solid #000000;
 .accordion {
   background-color: #E3F6FC;
   color: #444;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 14px;
   width: 100%;
   text-align: left;
@@ -479,7 +479,7 @@ display: block;
   background: transparent;
   border: none;
   font-size: 24px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .mainBox h2 {
   margin-top: 6px;
@@ -610,7 +610,7 @@ display: block;
   background: transparent;
   border: none;
   font-size: 24px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 }

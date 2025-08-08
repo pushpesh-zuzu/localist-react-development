@@ -29,7 +29,7 @@
     border-radius: 4px;
     padding: 8px 11px;
     margin-bottom: 10px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-weight: 500;
     font-size: 15px;
     text-align: center;
@@ -89,7 +89,7 @@
   .activeTab {
     padding: 8px 29px;
     border: none;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .activeTab {
@@ -107,7 +107,7 @@
     border-radius: 4px;
     padding: 8px 11px;
     margin-bottom: 10px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-weight: 500;
     font-size: 15px;
     text-align: center;
@@ -346,7 +346,7 @@
     border: none;
     padding: 10px 30px;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-weight: 500;
     font-size: 18px;
     text-align: center;
@@ -363,7 +363,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
-    cursor: pointer;
+    cursor: pointer !important;
     background-color: #fff;
     color: #333;
   }
@@ -395,7 +395,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-weight: 500;
-    cursor: pointer;
+    cursor: pointer !important;
     transition: background-color 0.3s ease;
   }
   

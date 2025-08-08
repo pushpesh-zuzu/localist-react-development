@@ -28,7 +28,7 @@
   background: none;
   border: none;
   font-size: 20px;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .message {
@@ -51,7 +51,7 @@
   color: white;
   border-radius: 6px;
   font-size: 16px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.2s ease;
 }
 
@@ -66,7 +66,7 @@
   color: #fff;
   border-radius: 6px;
   font-size: 16px;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: 0.2s ease;
 }
 

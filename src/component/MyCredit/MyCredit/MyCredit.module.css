@@ -7,7 +7,7 @@
   
   .backText {
     color: #000000;
-    cursor: pointer;
+    cursor: pointer !important;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
@@ -157,7 +157,7 @@
     padding: 5px 56px;
   
     font-size: 20px;
-    cursor: pointer;
+    cursor: pointer !important;
   }
   
   .checkboxWrap {
@@ -170,7 +170,7 @@
   .checkboxWrap input {
     width: 24px;
     height: 24px;
-    cursor: pointer;
+    cursor: pointer !important;
     margin: 3px 3px 3px 0px;
   }
   .checkboxWrap label {
@@ -378,7 +378,7 @@
     padding: 6px 15px;
     
     font-size: 15px;
-    cursor: pointer;
+    cursor: pointer !important;
     margin-top: 10px;
     margin-left: 10px;
     border-radius: 2px;
@@ -419,7 +419,7 @@ max-width: 300px;
 
 .slider {
   position: absolute;
-  cursor: pointer;
+  cursor: pointer !important;
   top: 0;
   left: 0;
   right: 0;

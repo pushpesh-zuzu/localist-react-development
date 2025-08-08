@@ -112,7 +112,7 @@
 .badges {
   display: flex;
   gap: 12px;
-  /* cursor: pointer; */
+  /* cursor: pointer !important; */
   flex-wrap: wrap;
   width: "30%";
 }

@@ -26,7 +26,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
     const [errors, setErrors] = useState({
         name: "",
         email: "",
-        review: "",
+        // review: "",
         rating: ""
     });
  useEffect(() => {
@@ -80,7 +80,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
             : !emailRegex.test(email)
                 ? "Enter a valid email."
                 : "",
-        review: !review.trim() ? "Review is required." : "",
+        // review: !review.trim() ? "Review is required." : "",SS
         rating: !rating ? "Rating is required." : ""
     };
 
@@ -167,7 +167,7 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
                             value={formData.review}
                             onChange={handleChange}
                         />
-                        {errors.review && <p className={styles.error}>{errors.review}</p>}
+                        {/* {errors.review && <p className={styles.error}>{errors.review}</p>}SSS */}
                     </div>
 
                 </div>

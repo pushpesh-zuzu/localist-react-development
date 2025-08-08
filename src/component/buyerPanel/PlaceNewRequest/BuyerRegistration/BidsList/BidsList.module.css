@@ -22,7 +22,7 @@
   background-color: #1cdd0a; /* Your green background */
   border: 1px solid #1cdd0a;
   border-radius: 3px;
-  cursor: pointer;
+  cursor: pointer !important;
   position: relative;
 }
 
@@ -42,7 +42,7 @@
   border-radius: 4px;
   padding: 8px 11px;
   margin-bottom: 10px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 500;
   font-size: 15px;
   text-align: center;
@@ -82,7 +82,7 @@
 .activeTab {
   padding: 8px 29px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .activeTab {
@@ -159,7 +159,7 @@ align-items: center
   font-size: 18px;
   font-weight: 500;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 .requestBtn:hover {
   background-color: #ee9772;
@@ -183,7 +183,7 @@ align-items: center
   font-size: 18px;
   font-weight: 500;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-bottom: 17.5px;
 }
 .requestBtnMatchBox:hover {
@@ -298,6 +298,7 @@ align-items: center
   font-size: 12px;
   vertical-align: middle;
   text-decoration: none;
+  cursor: pointer !important;
 }
 
 .sidebar {
@@ -372,7 +373,7 @@ align-items: center
   border: none;
   padding: 7px 16px;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   font-size: 16px;
   margin: 0px 25px 0px 25px;
@@ -427,7 +428,7 @@ align-items: center
   font-size: 20px;
   font-weight: 500;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   margin-bottom: 17.5px;
   white-space: nowrap;
 }
@@ -655,7 +656,7 @@ align-items: center
     font-size: 15px;
     font-weight: 600;
     border: none;
-    cursor: pointer;
+    cursor: pointer !important;
     margin-bottom: 17.5px;
   }
   .headerWrapper {
@@ -678,7 +679,7 @@ align-items: center
   font-size: 13px;
   font-weight: 600;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
   display: none;
 }
 .header p img {

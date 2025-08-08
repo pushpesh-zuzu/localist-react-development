@@ -64,7 +64,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,7 +136,7 @@
   flex-direction: column;
   flex: 1 1 calc(33.33% - 20px);
   text-align: center;
-  cursor: pointer;
+  cursor: pointer !important;
  
 }
 
@@ -201,7 +201,7 @@
   font-size: 18px;
   line-height: 27px;
   letter-spacing: 0;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 11px 31px;
   border-radius: 4.67px;
 }
@@ -403,7 +403,7 @@
   border: none;
   font-weight: 700;
   font-size: 12px;
-  cursor: pointer;
+  cursor: pointer !important;
   padding: 0px 8px;
   border-radius: 4.67px;
 }

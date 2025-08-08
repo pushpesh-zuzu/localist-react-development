@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 0px;
-  cursor: pointer;
+  cursor: pointer !important;
   background-color: #fff;
 }
 

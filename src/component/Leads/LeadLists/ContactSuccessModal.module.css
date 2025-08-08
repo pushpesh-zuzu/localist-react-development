@@ -28,7 +28,7 @@
   background: none;
   font-size: 24px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .title {
@@ -83,7 +83,7 @@ width: 170px;
   border: none;
   border-radius: 4px;
   font-weight: 500;
-  cursor: pointer;
+  cursor: pointer !important;
   transition: background 0.2s ease;
   display: flex;
   align-items: center;
@@ -101,7 +101,7 @@ width: 170px;
   font-size: 12px;
   color: #AEAEAE;
   margin: 20px 14px;
-  cursor: pointer;
+  cursor: pointer !important;
   font-weight: 600;
   text-decoration: underline;
 }
@@ -204,7 +204,7 @@ width: 170px;
   background: none;
   font-size: 24px;
   border: none;
-  cursor: pointer;
+  cursor: pointer !important;
 }
   .actionItem {
   display: flex;

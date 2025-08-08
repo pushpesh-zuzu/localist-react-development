@@ -103,6 +103,7 @@
 .linkText {
   color: var(--primary-color) !important;
   text-decoration: underline !important;
+  cursor:  pointer !important;
 }
 
 @media (max-width: 515px) {

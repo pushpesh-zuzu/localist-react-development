@@ -39,7 +39,7 @@
     font-size: 24px;
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: pointer !important;
     color: #b7b7b7;
   }
   
@@ -109,7 +109,7 @@
     padding: 8px 16px;
     border: none;
     border-radius: 3px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-weight: 500;
     font-size: 20px;
   }
@@ -120,7 +120,7 @@
     padding: 8px 66px;
     border: none;
     border-radius: 3px;
-    cursor: pointer;
+    cursor: pointer !important;
     font-weight: 500;
     font-size: 20px;
   }

@@ -85,7 +85,7 @@ const OurTeams = () => {
                   height: "12px",
                   borderRadius: "50%",
                   border: "none",
-                  cursor: "pointer",
+                  cursor: "pointer !important",
                   backgroundColor: index === currentIndex ? "#007bff" : "#ccc",
                   transition: "background-color 0.3s ease",
                   outline: "none",

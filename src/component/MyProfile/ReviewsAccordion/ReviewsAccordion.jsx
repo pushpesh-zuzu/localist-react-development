@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { showToast } from "../../../utils";
 
 
-const ReviewsAccordion = () => {
+const ReviewsAccordion = ({details}) => {
   
   const [fbLink, setFbLink] = useState("");
   const onCopyUrl = () => {
@@ -48,15 +48,15 @@ const ReviewsAccordion = () => {
   
   return (
     <div className={styles.wrapper}>
-      <p className={styles.overAllText}>Your Review Rating</p>
-      <div className={styles.alertBox}>
+      {/* <p className={styles.overAllText}>Your Review Rating</p> */}
+      {/* <div className={styles.alertBox}>
         <span>
           you don’t have a rating because you haven’t collected any customer reviews. Start collecting or uploading reviews to improve your score.
         </span>
         <p>
           studies show 90% of customers trust online feedback as much as personal recommendations.
         </p>
-      </div>
+      </div> */}
 
       <h3 className={styles.sectionTitle}>Collect More Reviews</h3>
 

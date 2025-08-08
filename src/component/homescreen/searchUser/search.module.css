@@ -158,7 +158,7 @@
   padding: 13px 59px;
   border-radius: 3px;
   background: var(--primary-color);
-  cursor: pointer;
+  cursor: pointer !important;
   border: none;
 }
 
@@ -186,7 +186,7 @@
 
 .searchItem {
   padding: 12px;
-  cursor: pointer;
+  cursor: pointer !important;
   /* border-bottom: 1px solid #eee; */
   font-size: 16px !important;
   color: #848484 !important;
