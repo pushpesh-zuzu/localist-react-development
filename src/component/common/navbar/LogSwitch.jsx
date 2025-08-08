@@ -213,7 +213,7 @@ const [show, setShow] = useState(false);
 useEffect(() => {
   const isUserLoggedIn = userToken?.remember_tokens || registerData?.remember_tokens;
 
-  if (!isUserLoggedIn) {
+  if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
     if (debouncedText.trim() !== "") {
       dispatch(searchService({ search: debouncedText }));
     } else {
