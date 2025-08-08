@@ -17,7 +17,8 @@ import BusinessConsulting from "../assets/Images/business_consulting.svg";
 import FenchandGet from "../assets/Images/FenchandGet.jpg";
 import PatioPatioServices from "../assets/Images/PatioServices.jpg";
 import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
-
+import Landscaping from "../assets/Images/servicesLevels/Landscaping.jpg";
+import ArtificialGrass from "../assets/Images/servicesLevels/ArtificialGrass.jpg";
 
 const CATEGORIES = [
   {
@@ -113,6 +114,7 @@ const PopularCategoriesData = [
   title: "Driveway Installation",
   image: DrivewayInstallation, // apna image import karke lagao
 },
+
   // {
   //   id: 3,
   //   availableOnline: true,
@@ -176,6 +178,16 @@ const PopularCategoriesData = [
     title: "Patio Services",
     image: PatioPatioServices,
   },
+  {
+  id: 16,
+  title: "Landscaping",
+  image: Landscaping
+},
+{
+  id: 17,
+  title: "Artificial Grass Installation",
+  image: ArtificialGrass
+}
 ];
 
 const AllServicesData = [

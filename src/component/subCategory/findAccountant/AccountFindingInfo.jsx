@@ -16,11 +16,11 @@ const AccountFindingInfo = ({
       </p>
 
       <div className={styles.infoContainer}>
-        <h1 className={styles.title}>
+        <h2 className={styles.title}>
           Find the Best
           <span className={styles.highlight}> {title} </span>
           In Your Area
-        </h1>
+        </h2>
 
         <div className={styles.descriptionContainer}>
           <p>

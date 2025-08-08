@@ -20,6 +20,7 @@ import fenchinstal from "../assets/Images/servicesLevels/Fence-&-Gate-Installati
 import Home from "../assets/Images/servicesLevels/Home.jpg";
 import Landscaping from "../assets/Images/servicesLevels/Landscaping.jpg";
 import Patio from "../assets/Images/servicesLevels/Patio-Services.jpg";
+import ArtificialGrass from "../assets/Images/servicesLevels/ArtificialGrass.jpg";
 
 const POPULAR_CITIES = [
   {
@@ -168,7 +169,7 @@ const OTHER_SERVICES_DATA = {
     },
     {
       id: 4,
-      image: Landscaping, // Original image kept
+      image: ArtificialGrass, // Original image kept
       description: "Artificial Grass Installation",
     },
   ],

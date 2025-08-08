@@ -63,6 +63,7 @@ const endpointCategoryMap = {
     "Driveway Installation",
     "Patio Services",
     "Home Insulation",
+     "Artificial Grass Installation"
   ],
 };
 const endpointServiceMap = {
