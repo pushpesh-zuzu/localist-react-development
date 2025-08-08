@@ -123,6 +123,7 @@ const CloneSubTwoCategory = ({
         level={2}
         panelImage={financeBg}
         breadcrumb="Home & Garden / Builders"
+        service={true}
       />
       <PopularCategories data={getFilterLevelTwoByKey("builders")} />
       <AllServicesComponent data={filteredAllServicesData} />

@@ -161,7 +161,7 @@ const CloneCategory = ({
         subHeader={subHeader}
         panelImage={financeBg}
       /> */}
-      <BannerWithBreadCrum level={2} panelImage={financeBg} />
+      <BannerWithBreadCrum level={2}  panelImage={financeBg} />
 
       {/* {endpoint !== routeName && (
         <div className={styles.findAccountInfoContainer}>

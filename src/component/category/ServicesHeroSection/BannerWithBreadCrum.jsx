@@ -10,6 +10,7 @@ function BannerWithBreadCrum({
   panelImage,
   accountHeader,
   breadcrumb = " Home & Garden / Builders / Fence & Gate Installation",
+  service= false
 }) {
   return (
     <>
@@ -21,7 +22,7 @@ function BannerWithBreadCrum({
         />
       )}
 
-      <FindAccountant level={level} title={"Fencer"} breadcrumb={breadcrumb} />
+      <FindAccountant level={level} title={"Fencer"} breadcrumb={breadcrumb} service={service} />
     </>
   );
 }

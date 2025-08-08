@@ -30,7 +30,7 @@ const CloneSubThreeCategory = () => {
           content="Find top-rated local fencers for fence and gate installation. Compare quotes, read reviews, and hire professionals near you with Localists."
         />
       </Helmet>
-      <BannerWithBreadCrum level={1} panelImage={financeBg} />
+      <BannerWithBreadCrum level={1} panelImage={financeBg} service={true} />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks />
       <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} />
