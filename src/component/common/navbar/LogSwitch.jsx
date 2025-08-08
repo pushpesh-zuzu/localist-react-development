@@ -478,8 +478,8 @@ useEffect(() => {
                 )}
               </div>
             </Popover>
-            {/* <div className={styles.nameCircle}>{userInitial}</div> */}
-            {userData ? (
+            <div className={styles.nameCircle}>{userInitial}</div>
+            {/* {userData ? (
               <Avatar
                 src={`${BASE_IMAGE}/users/${userData}`}
                 alt="Profile"
@@ -488,7 +488,7 @@ useEffect(() => {
               />
             ) : (
               <div className={styles.nameCircle}>{userInitial}</div>
-            )}
+            )} */}
           </>
 
         )}
@@ -500,8 +500,9 @@ useEffect(() => {
               <div className={styles.requestBox}>
                 <div className={styles.myrequestText} onClick={handleMyRequest}>My Request</div>
               </div>
+                <div className={styles.nameCircle}>{userInitial}</div>
 
-              {userData ? (
+              {/* {userData ? (
                 <Avatar
                   src={`${BASE_COMPLETE}/${userData}`}
                   alt="Profile"
@@ -510,7 +511,7 @@ useEffect(() => {
                 />
               ) : (
                 <div className={styles.nameCircle}>{userInitial}</div>
-              )}
+              )} */}
             </>
           )}
       </div>

@@ -153,6 +153,7 @@ const BuyerAccountSettings = () => {
     password_confirmation: "",
     error: "",
   });
+const BASE_IMAGE_URLs = "https://localists.zuzucodes.com/admin/storage/app/public/images/users"
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
@@ -272,7 +273,7 @@ const BuyerAccountSettings = () => {
   />
 ) : userDetails?.profile_image ? (
   <img
-    src={`${BASE_IMAGE_URL}${userDetails.profile_image}`}
+    src={`${BASE_IMAGE_URLs}/${userDetails.profile_image}`}
     alt="Profile"
     loading="lazy"
     onError={(e) => {
