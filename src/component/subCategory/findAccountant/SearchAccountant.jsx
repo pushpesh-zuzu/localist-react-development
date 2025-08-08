@@ -4,7 +4,7 @@ const SearchAccountant = ({title='Accountant',panelImage}) => {
 
   return (
     <div className={styles.searchcontainer} >
-      <h1>
+      <h1 style={{color:'white'}}>
         Looking for <span>{title}s</span> Near Me?
       </h1>
 

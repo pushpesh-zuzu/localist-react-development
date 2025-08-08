@@ -10,7 +10,7 @@ const GetQuotes = ({ message, title }) => {
           onClick={() => handleScrollToBottom()}
           className={styles.button}
         >
-          from {title} near you
+         Get quotes from {title} near you
         </button>
       ) : (
         <button

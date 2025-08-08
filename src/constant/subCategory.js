@@ -52,7 +52,6 @@ const HowItWorksData = {
       title: "Start Search for Local ",
       image: WhatYouNeedIcon,
       heading1: "Start Search for Local ",
-      heading2: "Fenchers",
       description:
         "Share what you need and where you need it, and we’ll introduce you to local fencing specialists. Whether you’re after stylish picket fencing, secure garden panels, or a custom gate, we have trusted professionals ready to get started quickly.",
     },
@@ -61,7 +60,6 @@ const HowItWorksData = {
       title: "Request Free Quotes from ",
       image: FreeQuotesIcon,
       heading1: "Request Free Quotes ",
-      heading2: "Fenchers",
       description:
         "We’ll match you with vetted fencing and gate installation experts based on your requirements. You’ll receive tailored quotes from local professionals – at no cost. You can choose to get instant notifications or review your quotes whenever it suits you.",
     },
@@ -70,7 +68,6 @@ const HowItWorksData = {
       title: "Hire your local",
       image: accountant, // Note: You might want to rename this variable to 'fencher' or similar
       heading1: "Hire your local ",
-      heading2: "Fenchers",
       description:
         "View detailed profiles, browse previous work, and read verified reviews – all in one place. Once you’ve found your perfect match, simply get in touch and finalise the job. Finding and hiring a fencer has never been easier.",
     },
