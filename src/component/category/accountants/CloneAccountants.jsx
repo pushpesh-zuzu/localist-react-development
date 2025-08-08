@@ -209,15 +209,15 @@ const style = {
         </div>
       </div>
 
-      {showModal && (userToken?.active_status === 2 || !userToken) && (
-        <BuyerRegistration
-          closeModal={handleClose}
-          serviceId={selectedService?.id}
-          serviceName={selectedService?.name}
-          postcode={pincode}
-        />
-      )}
-    </div>
+        {showModal && (userToken?.active_status === 2 || !userToken) && (
+          <BuyerRegistration
+            closeModal={handleClose}
+            serviceId={selectedService?.id}
+            serviceName={selectedService?.name}
+            postcode={pincode}
+          />
+        )}
+      </div>
   );
 };
 
