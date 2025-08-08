@@ -14,6 +14,12 @@ import AccountingCost from "../assets/Images/subcategory/accounting-cost.png";
 import TaxAccountent from "../assets/Images/subcategory/tax-acc-cost.png";
 import FinancialCost from "../assets/Images/subcategory/financial-cost.png";
 import ReviewsImage from "../assets/Images/subcategory/reviews_girl.png";
+import Builders from "../assets/Images/servicesLevels/Builders.jpg";
+import Driveway from "../assets/Images/servicesLevels/Driveway-Installation.jpg";
+import fenchinstal from "../assets/Images/servicesLevels/Fence-&-Gate-Installation.jpg";
+import Home from "../assets/Images/servicesLevels/Home.jpg";
+import Landscaping from "../assets/Images/servicesLevels/Landscaping.jpg";
+import Patio from "../assets/Images/servicesLevels/Patio-Services.jpg";
 
 const POPULAR_CITIES = [
   {
@@ -31,11 +37,11 @@ const POPULAR_CITIES = [
 ];
 export const POPULARCITY = {
   "fence-installers": [
-    { id: 1, title: "London", image: london },
-    { id: 2, title: "Birmingham", image: birmingham },
-    { id: 3, title: "Liverpool", image: liverpool },
-    { id: 4, title: "Chester", image: london },
-    { id: 5, title: "Warrington", image: london },
+    { id: 1, title: "Liverpool", image: london },
+    { id: 2, title: "Manchester", image: birmingham },
+    { id: 3, title: "Chester", image: liverpool },
+    { id: 4, title: "Warrington", image: london },
+    { id: 5, title: "Ellesmere Port", image: london },
   ],
 };
 
@@ -48,7 +54,7 @@ const HowItWorksData = {
       heading1: "Start Search for Local ",
       heading2: "Fenchers",
       description:
-        "We will help you find the best fenchers in your area for your needs. Whether you are looking to hire a personal fencher, or a professional for small or large businesses, Localists is here to help. From expert fencing support to finding a trusted fencing contractor during installation season, we make it simple. A few quick details are all we need to recommend the best quality local fenchers near you.",
+        "Share what you need and where you need it, and we’ll introduce you to local fencing specialists. Whether you’re after stylish picket fencing, secure garden panels, or a custom gate, we have trusted professionals ready to get started quickly.",
     },
     {
       id: 2,
@@ -57,7 +63,7 @@ const HowItWorksData = {
       heading1: "Request Free Quotes ",
       heading2: "Fenchers",
       description:
-        "We will match your request with qualified local fenchers near you and send you personalised quotes for free. Take your time to review profiles, compare quotes, and ask questions if you need to. There's no obligation to make a hire until you are sure.",
+        "We’ll match you with vetted fencing and gate installation experts based on your requirements. You’ll receive tailored quotes from local professionals – at no cost. You can choose to get instant notifications or review your quotes whenever it suits you.",
     },
     {
       id: 3,
@@ -66,7 +72,7 @@ const HowItWorksData = {
       heading1: "Hire your local ",
       heading2: "Fenchers",
       description:
-        "When you've found the right professional fencher for the job, all that is left to do is hire them directly. Whether it's one-off advice or ongoing support, managing fence installation or long-term property boundary planning, your local fencher will be ready to support you from day one.",
+        "View detailed profiles, browse previous work, and read verified reviews – all in one place. Once you’ve found your perfect match, simply get in touch and finalise the job. Finding and hiring a fencer has never been easier.",
     },
   ],
 };
@@ -107,10 +113,10 @@ const AVERAGE_PRICE = {
 const TAXRETURNDATA = {
   "fence-installers": {
     key: "1",
-    heading1: "What is involve with",
+    heading1: "What is involve with fence and gate installation",
     heading2: "fence and gate installation",
     shortDes:
-      "Professional installation of fences and gates including measurement, setup, and finishing.",
+      "Get the low-down on what's involved in a fence and gate installation project",
     name: "Alex, Staff Writer",
     date: "2025-11-15",
   },
@@ -148,24 +154,24 @@ const OTHER_SERVICES_DATA = {
   "fence-installers": [
     {
       id: 1,
-      image: TaxPreparationImg, // Original image kept
+      image: Driveway, // Original image kept
       description: "Driveway Installation",
       availableOnline: true,
     },
     {
       id: 2,
-      image: TaxResolutionImg, // Original image kept
+      image: Patio, // Original image kept
       description: "Patio Services",
     },
     {
       id: 3,
-      image: PayrollServicesImg, // Original image kept
+      image: Landscaping, // Original image kept
       description: "Landscaping",
       availableOnline: true,
     },
     {
       id: 4,
-      image: TaxResolutionImg, // Original image kept
+      image: Landscaping, // Original image kept
       description: "Artificial Grass Installation",
     },
   ],
@@ -176,7 +182,7 @@ const RELATED_SERVICES_DATA = {
     {
       id: 1,
       title: "Fence Installation",
-      image: TaxReturn, // Original image kept
+      image: fenchinstal, // Original image kept
       description:
         "Your 2025 fence installation guide: Everything you need to know in the UK",
       availableOnline: true,
@@ -184,20 +190,20 @@ const RELATED_SERVICES_DATA = {
     {
       id: 2,
       title: "Fence Repair",
-      image: AccountentBusiness, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "Here's why you need professional fence maintenance",
     },
     {
       id: 3,
       title: "Fence Materials",
-      image: BasicAccounting, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "What are the best materials for fencing?",
       availableOnline: true,
     },
     {
       id: 4,
       title: "Garden Fencing",
-      image: AccountentBusiness, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "Complete guide to choosing garden fencing",
     },
   ],
@@ -208,27 +214,27 @@ const RELATED_PRICE_DATA = {
     {
       id: 1,
       title: "Fence Installation",
-      image: AccountingCost, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "How much does fence installation cost?",
       availableOnline: true,
     },
     {
       id: 2,
       title: "Wood Fencing",
-      image: TaxAccountent, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "How much does wood fencing cost in 2025?",
     },
     {
       id: 3,
       title: "Chain Link Fencing",
-      image: FinancialCost, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "How much does chain link fence installation cost?",
       availableOnline: true,
     },
     {
       id: 4,
       title: "Fence Repair",
-      image: AccountentBusiness, // Original image kept
+      image: fenchinstal, // Original image kept
       description: "Here's why you need professional fence maintenance",
     },
   ],

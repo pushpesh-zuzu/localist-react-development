@@ -1,8 +1,9 @@
 import styles from "./findaccountant.module.css";
 
-const SearchAccountant = ({title='Accountant'}) => {
+const SearchAccountant = ({title='Accountant',panelImage}) => {
+
   return (
-    <div className={styles.searchcontainer}>
+    <div className={styles.searchcontainer} >
       <h1>
         Looking for <span>{title}s</span> Near Me?
       </h1>

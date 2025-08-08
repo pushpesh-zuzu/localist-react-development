@@ -2,7 +2,7 @@
 import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowItWorks.module.css";
 
-const HowItWorks = ({ HowItWorksData = [] }) => {
+const HowItWorks = ({ HowItWorksData = [] ,title }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
@@ -29,7 +29,7 @@ const HowItWorks = ({ HowItWorksData = [] }) => {
         onClick={() => handleScrollToBottom()}
         className={styles.ctaButton}
       >
-        Get quotes from Accountants near you
+        Get quotes from {title}s near you
       </button>
     </div>
   );

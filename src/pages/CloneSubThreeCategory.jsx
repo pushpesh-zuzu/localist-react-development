@@ -71,7 +71,7 @@ const CloneSubThreeCategory = ({
         header="Fence Installation"
         subHeader="Professional Fencing Services"
         accountHeader="Fence Installation"
-        level={2}
+        level={1}
         breadcrumb="Home & Garden / Builders / Fence & Gate Installation"
         service={true}
         panelImage={FenchandGet}
@@ -81,7 +81,7 @@ const CloneSubThreeCategory = ({
         para3={CONTENT_CONFIG[categoryKey].para3}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
-      <HowItWorks HowItWorksData={getHowItWorksData("fence-installers")} />
+      <HowItWorks HowItWorksData={getHowItWorksData("fence-installers")} title={title} />
       {/* <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} /> */}
       <Slider sliderdata={popularCity} title={<b>Popular Cities</b>} />
 
@@ -90,8 +90,8 @@ const CloneSubThreeCategory = ({
         category="fence-installers" // Optional: if you need to know the category
       />
       <FindAnAccountant title={"fencher"} />
-      <LocalAccountant title="Fencer" />
-      <TaxReturn TaxData={TaxData} />
+      {/* <LocalAccountant title="Fencer" /> */}
+      <TaxReturn TaxData={TaxData} panelImage={FenchandGet} title={title} />
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
       <AveragePrice title="Fencers " RELTED_PRICE={RELTED_PRICE} />
       <Slider
