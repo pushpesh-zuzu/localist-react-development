@@ -21,6 +21,9 @@ const pageTitles = {
   "/leads" : "Leads | Localists",
   "/settings" : "Setting | Localists",
  "/leads/settings" : "Lead Setting | Locallist" ,
+ "/lead/save-for-later" : "Saved Lead | Locallist",
+ "/lead/save-later": "My Response | Locallist",
+ "/help-center" : "Help | Locallist",
  
   
 };

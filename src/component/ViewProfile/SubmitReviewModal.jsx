@@ -44,30 +44,62 @@ const SubmitReviewModal = ({ setOpen, closeModal, ProfileIDs,reviewsData ,onRevi
         }));
     };
 
+    // const handleSubmit = () => {
+    //     const { name, email, review } = formData;
+    //     const newErrors = {
+    //         name: !name.trim() ? "Name is required." : "",
+    //         email: !email.trim() ? "Email is required." : "",
+    //         review: !review.trim() ? "Review is required." : "",
+    //         rating: !rating ? "Rating is required." : ""
+    //     };
+
+    //     setErrors(newErrors);
+    //     const hasErrors = Object.values(newErrors).some((err) => err !== "");
+    //     if (hasErrors) return;
+
+    //     const data = { ...formData, ratings: rating, uuid:UUIDs };
+
+    //     dispatch(addSubmitReviewApi(data)).then((result) => {
+    //         if (result) {
+    //             showToast("success", result?.message);
+    //             closeModal();
+    //             dispatch(getReviewListApi(UUIDs))
+    //             onReviewSubmit?.()
+    //         }
+    //     });
+    // };
     const handleSubmit = () => {
-        const { name, email, review } = formData;
-        const newErrors = {
-            name: !name.trim() ? "Name is required." : "",
-            email: !email.trim() ? "Email is required." : "",
-            review: !review.trim() ? "Review is required." : "",
-            rating: !rating ? "Rating is required." : ""
-        };
+    const { name, email, review } = formData;
 
-        setErrors(newErrors);
-        const hasErrors = Object.values(newErrors).some((err) => err !== "");
-        if (hasErrors) return;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        const data = { ...formData, ratings: rating, uuid:UUIDs };
-
-        dispatch(addSubmitReviewApi(data)).then((result) => {
-            if (result) {
-                showToast("success", result?.message);
-                closeModal();
-                dispatch(getReviewListApi(UUIDs))
-                onReviewSubmit?.()
-            }
-        });
+    const newErrors = {
+        name: !name.trim() ? "Name is required." : "",
+        email: !email.trim()
+            ? "Email is required."
+            : !emailRegex.test(email)
+                ? "Enter a valid email."
+                : "",
+        review: !review.trim() ? "Review is required." : "",
+        rating: !rating ? "Rating is required." : ""
     };
+
+    setErrors(newErrors);
+    const hasErrors = Object.values(newErrors).some((err) => err !== "");
+    if (hasErrors) return;
+
+    const data = { ...formData, ratings: rating, uuid: UUIDs };
+
+    dispatch(addSubmitReviewApi(data)).then((result) => {
+        if (result) {
+            showToast("success", result?.message);
+            closeModal();
+            dispatch(getReviewListApi(UUIDs));
+            onReviewSubmit?.();
+        }
+    });
+};
+
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
