@@ -8,9 +8,9 @@ const Frequently = ({ FrequentlyQuestion }) => {
     <>
       <div className={styles.frequently_container}>
         <div className={styles.frequently_container_wrap}>
-          <h1 className={styles.frequently_heading}>
+          <h2 className={styles.frequently_heading}>
             Frequently Asked <b>Questions</b>
-          </h1>
+          </h2>
           <div className={styles.frequently_collapse}>
             <Collapse
               defaultActiveKey={["1"]}
@@ -31,7 +31,7 @@ const Frequently = ({ FrequentlyQuestion }) => {
               expandIconPosition="end"
             >
               {FrequentlyQuestion?.map((item) => (
-                <Panel header={item?.title} key={item?.key}>
+                <Panel header={<h4>{item?.title}</h4>} key={item?.key}>
                   <p className={styles.frequently_collapse_description}>
                     {item?.description}
                   </p>

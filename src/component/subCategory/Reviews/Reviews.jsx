@@ -73,7 +73,7 @@ const Reviews = ({ RELATED_REVIEW }) => {
           </span>
 
           <div className={styles.reviews_slider_wrap}>
-            <h1 className={styles.reviews_heading}>Reviews</h1>
+            <h2 className={styles.reviews_heading}>Reviews</h2>
 
             <img
               src={SubCategoryReview}

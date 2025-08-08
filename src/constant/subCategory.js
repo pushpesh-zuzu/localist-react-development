@@ -50,25 +50,25 @@ const HowItWorksData = {
   "fence-installers": [
     {
       id: 1,
-      title: "Start Search for Local ",
+      title: "Find Expert Fencers Near You",
       image: WhatYouNeedIcon,
-      heading1: "Start Search for Local ",
+      heading1: "Find Expert Fencers Near You",
       description:
         "Share what you need and where you need it, and we’ll introduce you to local fencing specialists. Whether you’re after stylish picket fencing, secure garden panels, or a custom gate, we have trusted professionals ready to get started quickly.",
     },
     {
       id: 2,
-      title: "Request Free Quotes from ",
+      title: "Get Free Quotes – Fast",
       image: FreeQuotesIcon,
-      heading1: "Request Free Quotes ",
+      heading1: "Get Free Quotes – Fast",
       description:
         "We’ll match you with vetted fencing and gate installation experts based on your requirements. You’ll receive tailored quotes from local professionals – at no cost. You can choose to get instant notifications or review your quotes whenever it suits you.",
     },
     {
       id: 3,
-      title: "Hire your local",
+      title: "Choose the Right Fencer",
       image: accountant, // Note: You might want to rename this variable to 'fencher' or similar
-      heading1: "Hire your local ",
+      heading1: "Choose the Right Fencer",
       description:
         "View detailed profiles, browse previous work, and read verified reviews – all in one place. Once you’ve found your perfect match, simply get in touch and finalise the job. Finding and hiring a fencer has never been easier.",
     },

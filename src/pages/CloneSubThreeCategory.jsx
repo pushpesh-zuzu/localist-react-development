@@ -83,7 +83,7 @@ const CloneSubThreeCategory = ({
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks HowItWorksData={getHowItWorksData("fence-installers")} title={title} />
       {/* <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} /> */}
-      <Slider sliderdata={popularCity} title={<b>Popular Cities</b>} />
+      <Slider sliderdata={popularCity} title={'Popular Cities'} />
 
       <RegionsComponent
         regionsData={transformedData}

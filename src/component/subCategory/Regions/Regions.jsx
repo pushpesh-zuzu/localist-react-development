@@ -13,10 +13,10 @@ const RegionsComponent = ({ regionsData }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>
+      <h2 className={styles.title}>
         <span className={styles.blueTitle}>Regions</span>
         We Work In <img src={arrowDownIcon} width={44} />
-      </div>
+      </h2>
       {regionsData.map((category, index) => {
         const categoryName = Object?.keys(category)[1];
         const services = category[categoryName];

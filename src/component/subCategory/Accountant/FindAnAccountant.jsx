@@ -81,7 +81,7 @@ const FindAnAccountant = ({ title }) => {
               areas, folding neatly away, while vertical pivot gates offer a
               striking and space-saving solution
             </p >
-            <h3>Find trusted fence & gate installers near you today.</h3>
+            <h2>Find trusted fence & gate installers near you today.</h2>
             <p className={styles.findAnAccountant_paragrap}>
               Get free quotes, compare reviews, and choose the right
               professional for your home – all in one place at{" "}

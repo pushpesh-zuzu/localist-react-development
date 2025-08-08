@@ -9,10 +9,10 @@ const AveragePrice = ({
 }) => {
   return (
     <div className={styles.averagePriceContainer}>
-      <h1>
+      <h2>
         The average price of {title} is {avg_price}
         <span></span>
-      </h1>
+      </h2>
 
       <AveragePriceTable AVERAGE_PRICE_LEVELTHREE={RELTED_PRICE} />
     </div>
