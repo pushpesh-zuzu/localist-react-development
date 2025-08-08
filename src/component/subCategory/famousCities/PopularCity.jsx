@@ -2,7 +2,7 @@ import { POPULAR_CITIES } from "../../../constant/subCategory";
 import CityBox from "./CityBox";
 import styles from "./popularcity.module.css";
 
-const PopularCity = () => {
+const PopularCity = ({POPULAR_CITIES_LEVERL_THREE=POPULAR_CITIES}) => {
   return (
     <div className={styles.popularcityContainer}>
       <div>
@@ -11,7 +11,7 @@ const PopularCity = () => {
         </h1>
 
         <div className={styles.cityContainer}>
-          {POPULAR_CITIES.map((city) => (
+          {POPULAR_CITIES_LEVERL_THREE.map((city) => (
             <CityBox key={city?.city_name} city={city} />
           ))}
         </div>

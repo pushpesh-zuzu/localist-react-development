@@ -1,6 +1,6 @@
+import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowItWorks.module.css";
-import { HowItWorksData } from "../../../constant/CloneCategory.js";
-const HowItWorks = ({header,subHeader}) => {
+const HowItWorks = ({header,subHeader,howItWorksData}) => {
     return (
       <div className={styles.container}>
         <h2 className={styles.heading}>
@@ -8,7 +8,7 @@ const HowItWorks = ({header,subHeader}) => {
         <span className={styles.highlight}> Localists Work</span>
         </h2>
         <div className={styles.stepsContainer}>
-          {HowItWorksData.map((item, index) => (
+          {howItWorksData.map((item, index) => (
             <div className={styles.step} key={index}>
               <div className={styles.imageWrapper}>
                 <img src={item.image} alt={item.title} className={styles.icon} />
@@ -24,7 +24,7 @@ const HowItWorks = ({header,subHeader}) => {
             </div>
           ))}
         </div>
-        <button className={styles.ctaButton}>
+        <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
           Get quotes from {header} professionals near you
         </button>
       </div>

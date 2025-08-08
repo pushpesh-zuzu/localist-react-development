@@ -1,7 +1,6 @@
-import { AVERAGE_PRICE } from "../../../constant/subCategory";
 import styles from "./averageprice.module.css";
 
-const AveragePriceTable = () => {
+const AveragePriceTable = ({AVERAGE_PRICE_LEVELTHREE}) => {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
@@ -14,7 +13,7 @@ const AveragePriceTable = () => {
           </tr>
         </thead>
         <tbody>
-          {AVERAGE_PRICE.map((row, index) => (
+          {AVERAGE_PRICE_LEVELTHREE.map((row, index) => (
             <tr key={index} className={styles.tr}>
               <td className={styles.td}>{row?.Region}</td>
               <td className={styles.td}>{row["Great Value"]}</td>

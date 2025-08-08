@@ -8,26 +8,33 @@ const FindAnAccountant = () => {
         <div className={styles.findAnAccountant_container_wrap}>
           <div className={styles.findAnAccountant_content}>
             <h1 className={styles.findAnAccountant_heading}>
-              How do I find an <b>accountant?</b>
+              How to find an <b>Accountant?</b>
             </h1>
-            <h2 className={styles.findAnAccountant_title}>
+            {/* <h2 className={styles.findAnAccountant_title}>
               Choose a certified or chartered accountant
-            </h2>
+            </h2> */}
             <p className={styles.findAnAccountant_paragrap}>
-              To keep your mind at ease and your business profitable, you should
-              choose an accountant that’s regulated by a professional body.
+              Getting professional financial help can be a game-changer for your
+              personal or business needs. When choosing a financial expert, it
+              is best to hire a certified accountant or chartered accountant.
+              Choosing a qualified accounting expert, regulated by a
+              professional body, can save you from costly mistakes.
             </p>
             <p className={styles.findAnAccountant_paragrap}>
-              An experienced local accountant can add measurable value to your
-              business from day one. Below are certifications to check when
-              finding a local accountant.
+              At Localists, we help you find quality local accounting
+              professionals, from certified general accountants to forensic,
+              fund, and management accountants. No matter your need, we’ll find
+              the right professional near you. But before you make that hire,
+              ensure you check for the following:
             </p>
+              <h3>Check Qualifications</h3>
+              Look out for accounting professionals with recognised certifications such as:
 
             <ul className={styles.findAnAccountant_listItem}>
-              <li>Certified Public Accountant</li>
-              <li>Chartered Accountant</li>
-              <li>member of the Association of International Accountants</li>
-              <li>member of the Institute of Financial Accountants</li>
+              <li>Chartered Accountant (ACA, ACCA, or CIMA).</li>
+              <li>Certified Public Accountant (CPA).</li>
+              <li>Association of Accounting Technicians (AAT)</li>
+              <li>Member of the Association of International Accountants (AIA)</li>
             </ul>
             <p className={styles.findAnAccountant_bark_paragrap}>
               At Bark we have a choice of qualified and experienced accountants

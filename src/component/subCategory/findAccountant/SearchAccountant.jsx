@@ -1,15 +1,15 @@
 import styles from "./findaccountant.module.css";
 
-const SearchAccountant = () => {
+const SearchAccountant = ({title='Accountant'}) => {
   return (
     <div className={styles.searchcontainer}>
       <h1>
-        Find <span>Accountants</span> near you
+        Looking for <span>{title}s</span> Near Me?
       </h1>
 
       <div className={styles.searchBoxContainer}>
         <p>
-          Where do you need <span>Accountants?</span>
+          Where do you need <span>{title}s ?</span>
         </p>
 
         <div className={styles.searchInputContainer}>

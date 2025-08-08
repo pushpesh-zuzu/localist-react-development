@@ -14,10 +14,13 @@ import {
   subMenuData,
 } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllServiceList, getCategoriesList, getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
+import {
+  getAllServiceList,
+  getCategoriesList,
+  getPopularServiceList,
+} from "../../../store/FindJobs/findJobSlice";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
-
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -28,27 +31,36 @@ const LogoComponent = () => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
 
-  const { userToken } = useSelector((state) => state.auth)
-  const { registerData, popularList, CategoriesList, allServiceList } = useSelector(
-    (state) => state.findJobs
-  );
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData, popularList, CategoriesList, allServiceList } =
+    useSelector((state) => state.findJobs);
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = allServiceList?.length || 0;
-  
+
   const [isMobile, setIsMobile] = useState(false);
 
+  function getRouteForCategory(categoryName) {
+    const routesMap = {
+      "House & Home": "en/gb/home",
+      Business: "en/gb/business",
+      "General Builders":"/en/gb/builders/"
+      // "Lessons & Training": "en/gb/lessons-training",
+    };
+
+    return routesMap[categoryName] || "#";
+  }
   // Sample location data
   const locationData = [
     "Cheshire",
-    "Cumbria", 
+    "Cumbria",
     "Manchester",
     "Lancashire",
-    "Merseyside"
+    "Merseyside",
   ];
 
   useEffect(() => {
@@ -61,11 +73,11 @@ const LogoComponent = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-   const handleToggle = () => {
+  const handleToggle = () => {
     if (visibleCount >= totalItems) {
-      setVisibleCount(prev => Math.max(5, prev - 5));
+      setVisibleCount((prev) => Math.max(5, prev - 5));
     } else {
-      setVisibleCount(prev => Math.min(prev + 5, totalItems));
+      setVisibleCount((prev) => Math.min(prev + 5, totalItems));
     }
   };
 
@@ -83,13 +95,10 @@ const LogoComponent = () => {
   //     }
   //   };
   useEffect(() => {
-    if(!userToken?.remember_tokens && !registerData?.remember_tokens) {
- dispatch(getPopularServiceList())
-    dispatch(getCategoriesList())
-    dispatch(getAllServiceList())
-    }
-   
-  }, [])
+    dispatch(getPopularServiceList());
+    dispatch(getCategoriesList());
+    dispatch(getAllServiceList());
+  }, []);
   const handleRedirectUrl = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
@@ -122,10 +131,10 @@ const LogoComponent = () => {
   }, []);
   const handleClose = (e) => {
     setShowSubMenu(false);
-    setMouseHover(false)
-    setShowbMenu(false)
-    setShowThirdLevel(false)
-  }
+    setMouseHover(false);
+    setShowbMenu(false);
+    setShowThirdLevel(false);
+  };
 
   const content = () => {
     return (
@@ -146,58 +155,61 @@ const LogoComponent = () => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.2 }}
               >
-              {isMobile && (
-                <div className={styles.crossBtn} onClick={handleClose}>
-                  ×
-                </div>
-              )}
+                {isMobile && (
+                  <div className={styles.crossBtn} onClick={handleClose}>
+                    ×
+                  </div>
+                )}
 
                 <div className={styles.popover_header}>
                   <span>Services</span>
-                  <Link to="#">See All</Link>
+                  {/* <Link to="#">See All</Link> */}
                 </div>
 
                 {allServiceList?.slice(0, visibleCount).map((item, index) => (
                   <div
                     key={index}
                     className={styles.popover_content}
-                    onClick={() => {
-                      setShowSubMenu(true);
-                      setFilterItems(item.name);
-                    }}
                     onMouseEnter={() => setMouseHover(index)}
                     onMouseLeave={() => setMouseHover("")}
                   >
                     <span className={styles.text_wrap}>
                       <img
-                      src={
-                        item?.category_icon
-                          ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                          : hiring
-                      }
+                        src={
+                          item?.category_icon
+                            ? `${BASE_URL_IMAGE}/${item?.category_icon}`
+                            : hiring
+                        }
                         width={18}
                         height={18}
                         alt="icon"
                       />
-                      {item.name ==='Other Services'? 
-                      <h4  className={styles.othertext}>
-                      {item.name}
-                      </h4>
-                      :
-                      <Link to="#">{item.name}</Link>}
+                      {item.name === "Other Services" ? (
+                        <h4 className={styles.othertext}>{item.name}</h4>
+                      ) : (
+                        <Link to={getRouteForCategory(item.name)}>{item.name}</Link>
+                      )}
                     </span>
-                    <img src={arrowIcon} width={8} alt="arrow" />
+                    <img
+                      onClick={() => {
+                        setShowSubMenu(true);
+                        setFilterItems(item.name);
+                      }}
+                      src={arrowIcon}
+                      width={8}
+                      alt="arrow"
+                    />
                   </div>
                 ))}
 
                 {totalItems > 5 && (
                   <div
                     className={styles.popover_content}
-                  style={{ cursor: "pointer", fontWeight: "bold" }}
+                    style={{ cursor: "pointer", fontWeight: "bold" }}
                     onClick={handleToggle}
                   >
                     <span className={styles.text_wrap}>
-                    {isAllVisible ? "Show Less ▲" : "See More ▼"}
+                      {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
                 )}
@@ -221,7 +233,7 @@ const LogoComponent = () => {
 
                 <div className={styles.popover_header}>
                   <span>{filterItems}</span>
-                  <Link to="#">See All</Link>
+                  {/* <Link to="#">See All</Link> */}
                 </div>
                 {allServiceList
                   ?.filter((item) => item?.name == filterItems)
@@ -249,26 +261,30 @@ const LogoComponent = () => {
                       </div>
 
                       {item.subcategory?.map((sub, subIndex) => {
-                      const slug = sub.name
-                        .toLowerCase()
-                        .replace(/\s+/g, "-");
+                        const slug = sub.name
+                          .toLowerCase()
+                          .replace(/\s+/g, "-");
                         return (
                           <div
                             key={subIndex}
                             className={styles.popover_content}
                             onMouseEnter={() => setMouseHover(subIndex)}
                             onMouseLeave={() => setMouseHover("")}
-                            onClick={() => {
-                              setSelectedSubcategory(sub.name);
-                              setShowThirdLevel(true);
-                            }}
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={`/sub-category/${slug}`}>
+                              <Link to={getRouteForCategory(sub.name)}>
                                 {sub.name}
                               </Link>
                             </span>
-                            <img src={arrowIcon} width={8} alt="arrow" />
+                            <img
+                              onClick={() => {
+                                setSelectedSubcategory(sub.name);
+                                setShowThirdLevel(true);
+                              }}
+                              src={arrowIcon}
+                              width={8}
+                              alt="arrow"
+                            />
                           </div>
                         );
                       })}
@@ -305,7 +321,9 @@ const LogoComponent = () => {
                     // }}
                   >
                     <span className={styles.text_wrap}>
-                      <Link to="#">{selectedSubcategory} in {location}</Link>
+                      <Link to="#">
+                        {selectedSubcategory} in {location}
+                      </Link>
                     </span>
                   </div>
                 ))}
@@ -342,8 +360,7 @@ const LogoComponent = () => {
             </div>
           </Popover>
         )} */}
-      {!userToken?.remember_tokens && !registerData?.remember_tokens &&
-        (
+      {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <Popover
           placement={placement}
           open={isMobile ? showMenu : null}
