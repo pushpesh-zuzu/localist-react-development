@@ -5,7 +5,7 @@ import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 
-const SearchAccountant = ({ title = '', panelImage }) => {
+const SearchAccountant = ({ title = "", panelImage }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
@@ -24,10 +24,13 @@ const SearchAccountant = ({ title = '', panelImage }) => {
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
 
-    const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-      types: ["geocode"],
-      componentRestrictions: { country: "IN" },
-    });
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {
+        types: ["geocode"],
+        componentRestrictions: { country: "IN" },
+      }
+    );
 
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -38,9 +41,8 @@ const SearchAccountant = ({ title = '', panelImage }) => {
       )?.long_name;
 
       const cityName =
-        place.address_components.find((c) =>
-          c.types.includes("locality")
-        )?.long_name ||
+        place.address_components.find((c) => c.types.includes("locality"))
+          ?.long_name ||
         place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
@@ -91,8 +93,8 @@ const SearchAccountant = ({ title = '', panelImage }) => {
   };
 
   return (
-    <div className={styles.searchcontainer} style={{ backgroundImage: `url(${panelImage})` }}>
-      <h1 style={{ color: 'white' }}>
+    <div className={styles.searchcontainer}>
+      <h1 style={{ color: "white" }}>
         Looking for <span>{title}</span> Professionals Near Me?
       </h1>
 
