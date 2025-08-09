@@ -1084,23 +1084,39 @@ const CONTENT_CONFIG = {
 };
 
 const BREADCRUMB_CONFIG = {
-  // "fence-installers": [
-  //   { title: "Home & Garden", path: "/home-garden" },
-  //   { title: "Builders", path: "/home-garden/builders" },
-  //   { title: "Fence & Gate Installation", path: "/fence-install" },
-  // ],
-  // "driveway-installers": [
-  //   { title: "Home & Garden", path: "/home-garden" },
-  //   { title: "Builders", path: "/home-garden/builders" },
-  //   { title: "Driveway Installation", path: "/driveway-install" },
-  // ],
-  "fence-installers": "Home & Garden / Builders / Fence & Gate Installation",
-  "driveway-installers": "Home & Garden / Builders / Driveway Installation",
-  "patio-services": "Home & Garden / Builders / Patio & Paving Services",
-  landscaping: "Home & Garden / Gardening & Landscaping / Landscaping",
-  "artificial-grass-installation":
-    "Home & Garden / Gardening & Landscaping / Artificial Grass Installation",
+  "fence-installers": [
+    { title: "Home & Garden", path: "/home" },
+    { title: "Builders", path: "/builders" },
+    { title: "Fence & Gate Installation" }, // no path for last item
+  ],
+  "driveway-installers": [
+    { title: "Home & Garden", path: "/home" },
+    { title: "Builders", path: "/builders" },
+    { title: "Driveway Installation" }, // no path
+  ],
+  "patio-services": [
+    { title: "Home & Garden", path: "/home" },
+    { title: "Builders", path: "/builders" },
+    { title: "Patio & Paving Services" }, // no path
+  ],
+  landscaping: [
+    { title: "Home & Garden", path: "/home" },
+    {
+      title: "Gardening & Landscaping",
+      path: "/gardening-landscaping",
+    },
+    { title: "Landscaping" }, // no path
+  ],
+  "artificial-grass-installation": [
+    { title: "Home & Garden", path: "/home" },
+    {
+      title: "Gardening & Landscaping",
+      path: "/home/gardening-landscaping",
+    },
+    { title: "Artificial Grass Installation" }, // no path
+  ],
 };
+
 const CONTENT_CONFIG_TOP = {
   "fence-installers": {
     accountHeader: "Fence Installation",

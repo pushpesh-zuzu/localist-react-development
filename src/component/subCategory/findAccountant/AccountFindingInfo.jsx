@@ -1,3 +1,4 @@
+import Breadcrumb from "../../common/BreadCrum/Breadcrum";
 import styles from "./findaccountant.module.css";
 
 const AccountFindingInfo = ({
@@ -11,10 +12,12 @@ const AccountFindingInfo = ({
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
-      <p className={styles.breadcrumb}>
-        {service && <span> {breadcrumb}</span>}
-      </p>
-
+      {/* <p className={styles.breadcrumb}> */}
+      {/* {service && <span> {breadcrumb}</span>} */}
+      <Breadcrumb
+        breadcrumb={breadcrumb}
+      />
+      {/* </p> */}
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>
           Find the Best

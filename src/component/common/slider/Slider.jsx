@@ -79,7 +79,7 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
             />
           </span>
 
-          <h2 className={styles.heading} style={{fontWeight:600}}>
+          <h2 className={styles.heading} style={{ fontWeight: 600 }}>
             {/* <span className={styles.highlight}>{blueTitle}</span> */}
             {title}
           </h2>

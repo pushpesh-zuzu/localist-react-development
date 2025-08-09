@@ -87,7 +87,6 @@ const CloneSubTwoCategory = ({
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
   console.log(endpoint, "endpointendpointendpoint");
-  const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
   const message = `from ${subHeader} professionals today`;
 
@@ -131,7 +130,7 @@ const CloneSubTwoCategory = ({
         service={true}
         panelImage={Builders}
         title="Builders"
-        breadcrumb=" Home & Garden / Builders / Fence & Gate Installation"
+        breadcrumb={[{title :"Home & Garden",path:'/home'},{title :"Builders"}]}
         para1={
           "Localists help you find the best Builders Professionals near you and obtain free, no obligation quotes"
         }

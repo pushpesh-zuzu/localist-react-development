@@ -1,0 +1,38 @@
+.breadcrumb {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+/* Last item - active state */
+.lastItem {
+  color: var(--text-color) !important; /* Force black color */
+font-weight: 800;
+}
+
+.active {
+  font-weight: 700 !important; /* Force bold */
+}
+
+/* Clickable items */
+.link {
+  color: var(--primary-color) !important; /* Force blue color */
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.separator {
+  color: var(--text-color);
+  margin: 0 4px;
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .breadcrumb {
+    font-size: 12px;
+  }
+}

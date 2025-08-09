@@ -112,7 +112,7 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
         service={true}
         panelImage={LandscapingGardeningBanner}
         title="Gardening & Landscaping"
-        breadcrumb="Home & Garden / Gardening & Landscaping"
+        breadcrumb={[{title :"Home & Garden",path:'/home'},{title :"Garden & Gardening"}]}
         para1={
           "Localists help you find the best Gardening & Landscaping Professionals near you and obtain free, no obligation quotes."
         }

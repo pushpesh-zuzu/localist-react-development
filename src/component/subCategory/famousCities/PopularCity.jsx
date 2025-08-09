@@ -65,7 +65,10 @@ const PopularCity = ({ sliderdata, title }) => {
     <>
       <div className={styles.container}>
         <div className={styles.titleWrapper}>
-          <h2 className={styles.heading} style={{fontWeight:600, flex: 1, textAlign: 'center'}}>
+          <h2
+            className={styles.heading}
+            style={{ fontWeight: 600, flex: 1, textAlign: "center" }}
+          >
             {title}
           </h2>
           <span
@@ -103,7 +106,7 @@ const PopularCity = ({ sliderdata, title }) => {
                 key={service.id}
                 className={`keen-slider__slide ${styles.slide}`}
               >
-              <CityBox city={service}/>
+                <CityBox city={service} />
               </div>
             ))}
           </div>
