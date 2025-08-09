@@ -222,7 +222,7 @@
   width: 16px;
   min-width: 16px;
   height: 16px;
-  background-color: blue;
+  background-color: var(--primary-color);;
   padding: 10px;
   border-radius: 50%;
   display: flex;
@@ -289,6 +289,7 @@
     width: 12px;
     min-width: 12px;
     height: 12px;
+    display:none
   }
   .slide img {
     width: 100%;
