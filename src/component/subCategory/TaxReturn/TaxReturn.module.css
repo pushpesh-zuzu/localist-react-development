@@ -8,6 +8,7 @@
   height: auto;
   display: flex;
   gap: 41px;
+   justify-content: space-between;
 }
 
 /* .taxReturn_content {

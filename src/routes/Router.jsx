@@ -69,7 +69,7 @@ const router = createBrowserRouter([
       { path: "/en/gb/bookkeeping-services/", element: <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /> },
       { path: "/en/gb/builders/", element: <CloneSubTwoCategory routeName="Home & Garden / Builders" accountHeader="Builders" subHeader="builders" /> },
       
-      { path: "/en/gb/fence-installers/", element: <CloneSubThreeCategory routeName="Home & Garden / Gardening & Landscaping" accountHeader="General Accounting" subHeader="General Accountant" /> },
+      { path: "/en/gb/:slug/", element: <CloneSubThreeCategory routeName="Home & Garden / Gardening & Landscaping" accountHeader="General Accounting" subHeader="General Accountant" /> },
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },

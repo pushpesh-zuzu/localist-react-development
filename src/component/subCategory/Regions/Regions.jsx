@@ -1,5 +1,5 @@
 import { Collapse } from "antd";
-// import { regionsData } from "../../../constant/subCategory";
+// import { regionsData? } from "../../../constant/subCategory";
 import styles from "./Regions.module.css";
 const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
@@ -17,7 +17,7 @@ const RegionsComponent = ({ regionsData }) => {
         <span className={styles.blueTitle}>Regions</span>
         We Work In <img src={arrowDownIcon} width={44} />
       </h2>
-      {regionsData.map((category, index) => {
+      {regionsData?.map((category, index) => {
         const categoryName = Object?.keys(category)[1];
         const services = category[categoryName];
         const isNorthWestEngland = categoryName === "North West England";

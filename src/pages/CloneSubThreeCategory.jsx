@@ -12,11 +12,15 @@ import Reviews from "../component/subCategory/Reviews/Reviews";
 import TaxReturn from "../component/subCategory/TaxReturn/TaxReturn";
 import HowItWorks from "../component/subCategory/workSteps/HowItWorks";
 import { POPULAR_CITIES_LEVERL_THREE } from "../constant/cloneLeverThreeData";
-import FenchandGet from "../assets/Images/FenchandGet.jpg";
 
 import {
   AVERAGE_PRICE,
+  BREADCRUMB_CONFIG,
   CONTENT_CONFIG,
+  CONTENT_CONFIG_BANNER,
+  CONTENT_CONFIG_META,
+  CONTENT_CONFIG_TOP,
+  FIND_SERVICE_CONTENT,
   FREQUENTLY_DATA,
   HowItWorksData,
   OTHER_SERVICES_DATA,
@@ -30,70 +34,69 @@ import {
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import financeBg from "../assets/Images/financeImg.svg";
 import { getDataByKey } from "../utils/databyKey";
-const transformFenceInstallersData = (rawData) => {
-  return rawData["fence-installers"].map((region) => ({
+import { useParams } from "react-router-dom";
+import ServiceBannerWithBreadcrumb from "../component/category/ServicesHeroSection/ServiceBannerWithBreadcrumb";
+
+const transformFenceInstallersData = (rawData, id) => {
+  return rawData[id]?.map((region) => ({
     key: region.id, // Convert id to key
     [region.title]: region.items, // Create dynamic key with region title
   }));
 };
-
-const CloneSubThreeCategory = ({
-  title = "Fencer",
-  categoryKey = "fence-installers",
-}) => {
+const CloneSubThreeCategory = ({  }) => {
+  const { slug } = useParams();
   function getHowItWorksData(key) {
-    return HowItWorksData["fence-installers"] || null;
+    return HowItWorksData[slug] || null;
   }
-  const transformedData = transformFenceInstallersData(regionsData);
-
-  const popularCity = getDataByKey(POPULARCITY, "fence-installers");
-  const RELATED_PRICE = getDataByKey(RELATED_PRICE_DATA, "fence-installers");
-  const RELATED_SEERVICE = getDataByKey(
-    RELATED_SERVICES_DATA,
-    "fence-installers"
-  );
-  const RELATED_REVIEW = getDataByKey(REVIEWS_DATA, "fence-installers");
-  const RELATED_OTHER = getDataByKey(OTHER_SERVICES_DATA, "fence-installers");
-  const RELTED_PRICE = getDataByKey(AVERAGE_PRICE, "fence-installers");
-  const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, "fence-installers");
-  const TaxData = TAXRETURNDATA["fence-installers"];
-  console.log(FrequentlyQuestion, "FrequentlyQuestion");
+  const transformedData = transformFenceInstallersData(regionsData, slug);
+  const popularCity = getDataByKey(POPULARCITY, slug);
+  const RELATED_PRICE = getDataByKey(RELATED_PRICE_DATA, slug);
+  const RELATED_SEERVICE = getDataByKey(RELATED_SERVICES_DATA, slug);
+  const RELATED_REVIEW = getDataByKey(REVIEWS_DATA, slug);
+  const RELATED_OTHER = getDataByKey(OTHER_SERVICES_DATA, slug);
+  const RELTED_PRICE = getDataByKey(AVERAGE_PRICE, slug);
+  const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, slug);
+  const TaxData = TAXRETURNDATA[slug];
+const contentBlocks = FIND_SERVICE_CONTENT[slug]
   return (
     <>
       <Helmet>
-        <title>Fencers Near Me | Find Fence Installers - Localists</title>
+        <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
-          name="description"
-          content="Find top-rated local fencers for fence and gate installation. Compare quotes, read reviews, and hire professionals near you with Localists."
+          name={CONTENT_CONFIG_META[slug]?.name}
+          content={CONTENT_CONFIG_META[slug]?.content}
         />
       </Helmet>
-      <BannerWithBreadCrum
-        header="Fence Installation"
-        subHeader="Professional Fencing Services"
-        accountHeader="Fence Installation"
+      <ServiceBannerWithBreadcrumb
+        accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
+        title={CONTENT_CONFIG_TOP[slug]?.title}
         level={1}
-        breadcrumb="Home & Garden / Builders / Fence & Gate Installation"
+        breadcrumb={BREADCRUMB_CONFIG[slug]}
+        // breadcrumb="Home & Garden / Builders / Fence & Gate Installation"
         service={true}
-        panelImage={FenchandGet}
-        title="Fencing"
-        para1={CONTENT_CONFIG[categoryKey].para1}
-        para2={CONTENT_CONFIG[categoryKey].para2}
-        para3={CONTENT_CONFIG[categoryKey].para3}
+        panelImage={CONTENT_CONFIG_BANNER[slug]?.banner}
+        para1={CONTENT_CONFIG[slug]?.para1}
+        para2={CONTENT_CONFIG[slug]?.para2}
+        para3={CONTENT_CONFIG[slug]?.para3}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
-      <HowItWorks HowItWorksData={getHowItWorksData("fence-installers")} title={title} />
+      <HowItWorks HowItWorksData={getHowItWorksData(slug)} title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
       {/* <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} /> */}
-      <Slider sliderdata={popularCity} title={'Popular Cities'} />
+      <Slider sliderdata={popularCity} title={"Popular Cities"} />
 
       <RegionsComponent
         regionsData={transformedData}
-        category="fence-installers" // Optional: if you need to know the category
+        category={slug} // Optional: if you need to know the category
       />
-      <FindAnAccountant title={"fencher"} />
+      <FindAnAccountant contentBlocks={contentBlocks}  title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
       {/* <LocalAccountant title="Fencer" /> */}
-      <TaxReturn TaxData={TaxData} panelImage={FenchandGet} title={title} />
+      <TaxReturn
+        TaxData={TaxData}
+        panelImage={CONTENT_CONFIG_BANNER[slug]?.reltatedImage}
+        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+      />
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
-      <AveragePrice title="Fencers " RELTED_PRICE={RELTED_PRICE} />
+      <AveragePrice title={CONTENT_CONFIG_TOP[slug]?.mainTitle} RELTED_PRICE={RELTED_PRICE} />
       <Slider
         sliderdata={RELATED_OTHER}
         title="You May Be Interested In"
@@ -112,7 +115,7 @@ const CloneSubThreeCategory = ({
       <Slider sliderdata={RELATED_PRICE} title={<b>Related Price Guides</b>} />
       {/* no need to change only data change*/}
 
-      <GetQuotes title={title} />
+      <GetQuotes title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
       {/* no need to change  */}
     </>
   );

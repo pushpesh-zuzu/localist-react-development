@@ -125,7 +125,7 @@ const CloneSubTwoCategory = ({
       </Helmet>
       <BannerWithBreadCrum
         header={accountHeader}
-        subHeader={subHeader}
+        LevelOneTwoTitle={subHeader}
         accountHeader="Builders"
         level={2}
         service={true}

@@ -106,8 +106,6 @@ const breadcrumbHierarchy = {
 const CloneCategory = ({
   accountHeader,
   subHeader,
-  bestText = `Best of all - it's completely free!`,
-  routeName = "",
 }) => {
   const location = useLocation();
   // Use includes instead of strict match
@@ -165,7 +163,7 @@ const CloneCategory = ({
       /> */}
       <BannerWithBreadCrum
         header={accountHeader}
-        subHeader={subHeader}
+        LevelOneTwoTitle={subHeader}
         accountHeader="Home and Garden"
         level={2}
         panelImage={Home}

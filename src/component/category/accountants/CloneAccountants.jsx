@@ -14,7 +14,7 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CloneAccountants = ({header,subHeader,panelImage}) => {
+const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
   console.log(panelImage)
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -156,7 +156,7 @@ const style = {
           <div className={styles.innerformContainer}>
             <h2>
               Do you need{" "}
-              <span className={styles.blueText}> {subHeader} </span>Professionals?
+              <span className={styles.blueText}> {LevelOneTwoTitle} </span>Professionals?
             </h2>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>

@@ -9,7 +9,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
         How <span className={styles.highlight}>Localists</span> Works
       </h2>
       <div className={styles.stepsContainer}>
-        {HowItWorksData.map((item, index) => (
+        {HowItWorksData && HowItWorksData.map((item, index) => (
           <div className={styles.step} key={index}>
             <div className={styles.imageWrapper}>
               <img src={item.image} alt={item.title} className={styles.icon} />

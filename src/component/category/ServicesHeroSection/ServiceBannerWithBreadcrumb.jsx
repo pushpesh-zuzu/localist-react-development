@@ -2,9 +2,8 @@ import React from "react";
 import FindAccountant from "../../subCategory/findAccountant/FindAccountant";
 import CloneAccountants from "../accountants/CloneAccountants";
 
-function BannerWithBreadCrum({
+function ServiceBannerWithBreadcrumb({
   level,
-  LevelOneTwoTitle='',
   panelImage,
   accountHeader,
   breadcrumb,
@@ -19,7 +18,6 @@ function BannerWithBreadCrum({
       {level === 2 && (
         <CloneAccountants
           header={accountHeader}
-          LevelOneTwoTitle={LevelOneTwoTitle}
           panelImage={panelImage}
         />
       )}
@@ -38,4 +36,4 @@ function BannerWithBreadCrum({
   );
 }
 
-export default BannerWithBreadCrum;
+export default ServiceBannerWithBreadcrumb;
