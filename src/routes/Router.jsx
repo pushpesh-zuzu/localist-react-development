@@ -47,6 +47,7 @@ import BuyerFirstStep from "../component/buyerPanel/buyerClose/buyerCloseStep/bu
 import BuyerSecondStep from "../component/buyerPanel/buyerClose/buyerSecondStep/BuyerSecond";
 import CloneSubThreeCategory from "../pages/CloneSubThreeCategory";
 import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
+import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
 //test en/gb/bookkeeping-services/
 
 
@@ -61,14 +62,15 @@ const router = createBrowserRouter([
       { path: "/category", element: <Category /> },
       { path: "/inprogress", element: <InProgressPage /> },
       { path: "/en/gb/home/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
-      { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
+      // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
 
       { path: "/en/gb/business/", element: <CloneCatrgory routeName='business' accountHeader="Business" subHeader="Business" /> },
       { path: "/en/gb/financial-and-accounting/", element: <CloneCatrgory accountHeader="Financial & Accounting" subHeader="Financial Accountant" /> },
       { path: "/en/gb/accountants/", element: <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" /> },
       { path: "/en/gb/bookkeeping-services/", element: <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /> },
       { path: "/en/gb/builders/", element: <CloneSubTwoCategory routeName="Home & Garden / Builders" accountHeader="Builders" subHeader="builders" /> },
-      
+      { path: "/en/gb/gardening-landscaping/", element: <CloneSubCategoryTwoGardening routeName="gardening-landscaping" accountHeader="Gardening & Landscaping" subHeader="Gardening & Landscaping" /> },
+
       { path: "/en/gb/:slug/", element: <CloneSubThreeCategory routeName="Home & Garden / Gardening & Landscaping" accountHeader="General Accounting" subHeader="General Accountant" /> },
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
