@@ -98,7 +98,7 @@ const SearchAccountant = ({ title = "", panelImage }) => {
         Looking for <span>{title}</span> Professionals Near Me?
       </h1>
 
-      <div className={styles.searchBoxContainer}>
+      <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <p>
           Where do you need <span>{title}s ?</span>
         </p>

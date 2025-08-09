@@ -7,7 +7,9 @@
 .disabledPanel {
   cursor: pointer !important; /* Maintains pointer cursor */
 }
-
+.subcategory_collapse :global(.ant-collapse-header) {
+  color: black !important;
+}
 .disabledPanel .ant-collapse-header {
   color: inherit !important; /* Keeps original text color */
   cursor: pointer !important; /* Shows pointer cursor */

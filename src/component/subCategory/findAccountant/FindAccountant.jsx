@@ -12,16 +12,16 @@ const FindAccountant = ({
   para1,
   para2,
   para3,
-  panelImage
+  panelImage,
 }) => {
   const style = {
-  backgroundImage: `url(${panelImage})`,
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  width: "100%", // full width
-  height: "400px", 
-};
+    backgroundImage: `url(${panelImage})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    height: "400px",
+    color: "white",
+  };
 
   return (
     <>

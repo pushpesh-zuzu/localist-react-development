@@ -30,6 +30,12 @@ import BuildersBanner from "../assets/Images/servicesLevels/banner/BuildersBanne
 import DrivewayInstallationBanner from "../assets/Images/servicesLevels/banner/DrivewayInstallationBanner.jpg";
 import FenceGateInstallationBanner from "../assets/Images/servicesLevels/banner/FenceGate-InstallationBanner.jpg";
 import HomeBanner from "../assets/Images/servicesLevels/banner/HomeBanner.jpg";
+import EllesmerePort from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
+import Liverpool from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
+import Manchester from "../assets/Images/servicesLevels/cities/Manchester.jpg";
+import Warrington from "../assets/Images/servicesLevels/cities/Chester.jpg";
+import Chester from "../assets/Images/servicesLevels/cities/Chester.jpg";
+
 const POPULAR_CITIES = [
   {
     city_image: london,
@@ -872,39 +878,39 @@ const regionsData = {
 
 export const POPULARCITY = {
   "fence-installers": [
-    { id: 1, title: "Liverpool", image: london },
-    { id: 2, title: "Manchester", image: birmingham },
-    { id: 3, title: "Chester", image: liverpool },
-    { id: 4, title: "Warrington", image: london },
-    { id: 5, title: "Ellesmere Port", image: london },
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: Manchester },
+    { id: 3, city_name: "Chester", city_image: Chester },
+    { id: 4, city_name: "Warrington", city_image: Warrington },
+    { id: 5, city_name: "Ellesmere Port", city_image: EllesmerePort },
   ],
   "driveway-installers": [
-    { id: 1, title: "Liverpool", image: london },
-    { id: 2, title: "Manchester", image: birmingham },
-    { id: 3, title: "Chester", image: liverpool },
-    { id: 4, title: "Warrington", image: london },
-    { id: 5, title: "Ellesmere Port", image: london },
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere Port", city_image: london },
   ],
   "patio-services": [
-    { id: 1, title: "Liverpool", image: london },
-    { id: 2, title: "Manchester", image: birmingham },
-    { id: 3, title: "Chester", image: liverpool },
-    { id: 4, title: "Warrington", image: london },
-    { id: 5, title: "Ellesmere Port", image: london },
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere Port", city_image: london },
   ],
   landscaping: [
-    { id: 1, title: "Liverpool", image: london },
-    { id: 2, title: "Manchester", image: birmingham },
-    { id: 3, title: "Chester", image: liverpool },
-    { id: 4, title: "Warrington", image: london },
-    { id: 5, title: "Ellesmere Port", image: london },
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere Port", city_image: london },
   ],
   "artificial-grass-installation": [
-    { id: 1, title: "Liverpool", image: london },
-    { id: 2, title: "Manchester", image: birmingham },
-    { id: 3, title: "Chester", image: liverpool },
-    { id: 4, title: "Warrington", image: london },
-    { id: 5, title: "Ellesmere Port", image: london },
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere Port", city_image: london },
   ],
 };
 

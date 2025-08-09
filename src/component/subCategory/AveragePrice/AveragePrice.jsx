@@ -10,7 +10,7 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2>
-        The average price of {title} is {avg_price}
+        The average price of {title} is <span>{avg_price}</span>
         <span></span>
       </h2>
 

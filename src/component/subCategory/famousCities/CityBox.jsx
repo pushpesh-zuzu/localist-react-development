@@ -3,7 +3,7 @@ import styles from "./popularcity.module.css";
 
 const CityBox = ({ city }) => {
   return (
-    <div className={styles.cityBox}>
+    <div className={`${styles.cityBox}`}>
       <img src={city?.city_image} alt={city?.city_name} />
 
       <div className={styles.cityNameBtn}>

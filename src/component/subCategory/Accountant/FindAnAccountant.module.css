@@ -17,6 +17,14 @@
 .findAnAccountant_content {
   width: 100%;
 }
+.btntext {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 40px;
+  color: #000000;
+  line-height: 100%;
+  font-family: "poppins" !important;
+}
 
 .findAnAccountant_heading {
   font-size: 35px;
@@ -100,6 +108,9 @@
   .findAnAccountant_container {
     padding: 30px 20px;
   }
+  .btntext {
+    font-size: 32px;
+  }
 
   .findAnAccountant_heading {
     font-size: 30px;
@@ -151,6 +162,10 @@
 @media (max-width: 520px) {
   .findAnAccountant_container {
     padding: 26px 20px;
+  }
+  .btntext {
+    font-size: 28px;
+    line-height: 27px;
   }
 
   .findAnAccountant_listItem {

@@ -43,7 +43,7 @@ const transformFenceInstallersData = (rawData, id) => {
     [region.title]: region.items, // Create dynamic key with region title
   }));
 };
-const CloneSubThreeCategory = ({  }) => {
+const CloneSubThreeCategory = ({}) => {
   const { slug } = useParams();
   function getHowItWorksData(key) {
     return HowItWorksData[slug] || null;
@@ -57,7 +57,7 @@ const CloneSubThreeCategory = ({  }) => {
   const RELTED_PRICE = getDataByKey(AVERAGE_PRICE, slug);
   const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, slug);
   const TaxData = TAXRETURNDATA[slug];
-const contentBlocks = FIND_SERVICE_CONTENT[slug]
+  const contentBlocks = FIND_SERVICE_CONTENT[slug];
   return (
     <>
       <Helmet>
@@ -80,15 +80,24 @@ const contentBlocks = FIND_SERVICE_CONTENT[slug]
         para3={CONTENT_CONFIG[slug]?.para3}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
-      <HowItWorks HowItWorksData={getHowItWorksData(slug)} title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
-      {/* <PopularCity POPULAR_CITIES_LEVERL_THREE={POPULAR_CITIES_LEVERL_THREE} /> */}
-      <Slider sliderdata={popularCity} title={"Popular Cities"} />
+      <HowItWorks
+        HowItWorksData={getHowItWorksData(slug)}
+        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+      />
+      <PopularCity
+        POPULAR_CITIES_LEVERL_THREE={popularCity}
+        title="Popular City"
+      />
+      {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
 
       <RegionsComponent
         regionsData={transformedData}
         category={slug} // Optional: if you need to know the category
       />
-      <FindAnAccountant contentBlocks={contentBlocks}  title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
+      <FindAnAccountant
+        contentBlocks={contentBlocks}
+        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+      />
       {/* <LocalAccountant title="Fencer" /> */}
       <TaxReturn
         TaxData={TaxData}
@@ -96,7 +105,10 @@ const contentBlocks = FIND_SERVICE_CONTENT[slug]
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
-      <AveragePrice title={CONTENT_CONFIG_TOP[slug]?.mainTitle} RELTED_PRICE={RELTED_PRICE} />
+      <AveragePrice
+        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+        RELTED_PRICE={RELTED_PRICE}
+      />
       <Slider
         sliderdata={RELATED_OTHER}
         title="You May Be Interested In"

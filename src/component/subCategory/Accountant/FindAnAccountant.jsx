@@ -2,7 +2,6 @@ import styles from "./FindAnAccountant.module.css";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
 const FindService = ({ title, contentBlocks, buttonText }) => {
-  
   return (
     <div className={styles.findAnAccountant_container}>
       <div className={styles.findAnAccountant_container_wrap}>
@@ -39,10 +38,10 @@ const FindService = ({ title, contentBlocks, buttonText }) => {
           onClick={() => handleScrollToBottom()}
           className={styles.findAnAccountant_button}
         >
-                    Get quotes from {title}s near you
-
+          Get quotes
         </button>
       )}
+      <p className={styles.btntext}>from {title}s near you</p>
     </div>
   );
 };

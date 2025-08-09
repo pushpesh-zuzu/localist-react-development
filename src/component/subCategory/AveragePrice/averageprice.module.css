@@ -11,7 +11,7 @@
 .averagePriceContainer h1 {
   color: var(--text-color);
   font-weight: 700;
-  font-size: 35px;
+  font-size: 32px;
   letter-spacing: 0;
   text-align: center;
   vertical-align: middle;
@@ -122,15 +122,13 @@
 @media (max-width: 590px) {
   .averagePriceContainer {
     padding: 26px 20px;
-    
   }
-  .averagePriceContainer h1{
+  .averagePriceContainer h1 {
     padding: 26px 20px;
-    font-size:30px
+    font-size: 30px;
   }
-  .averagePriceContainer span{
-    
-    font-size:30px
+  .averagePriceContainer span {
+    font-size: 30px;
   }
   .th {
     font-size: 16px;
@@ -146,7 +144,7 @@
 @media screen and (max-width: 450px) {
   .tableContainer {
     overflow-x: scroll;
-    scrollbar-width: auto; 
+    scrollbar-width: auto;
   }
 
   .tableContainer::-webkit-scrollbar {
@@ -162,5 +160,4 @@
   .tableContainer::-webkit-scrollbar-track {
     background-color: #f1f1f1;
   }
-  
 }
