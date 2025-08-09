@@ -179,13 +179,10 @@ const LogoComponent = () => {
                   >
                     <span className={styles.text_wrap}>
                       <img
-                        src={
-                          item?.category_icon
-                            ? `${BASE_URL_IMAGE}/${item?.category_icon}`
-                            : hiring
+                        src={item?.icon
                         }
-                        width={18}
-                        height={18}
+                        width={16}
+                        height={16}
                         alt="icon"
                       />
                       {item.name === "Other Services" ? (
