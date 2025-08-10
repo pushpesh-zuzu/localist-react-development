@@ -3,6 +3,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import leftArrow from "../../../assets/Images/backwordArrow.svg";
 import rightArrow from "../../../assets/Images/forwordArrow.svg";
+import { Link } from "react-router-dom";
 function AutoplayPlugin(slider) {
   let timeout;
   let mouseOver = false;
@@ -35,6 +36,7 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 const Slider = ({ sliderdata, blueTitle, title }) => {
+  console.log(sliderdata, "</Link>{service?.title}");
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -105,7 +107,15 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
                 className={`keen-slider__slide ${styles.slide}`}
               >
                 <img src={service.image} alt={service.title} />
-                <p>{service.description}</p>
+                {service?.path ? (
+                  <p>
+                    <Link className={styles.link} to={`/en/gb/${service.path}`}>
+                      {service.description}
+                    </Link>
+                  </p>
+                ) : (
+                  <p>{service.description}</p>
+                )}
                 {service.title && (
                   <span className={styles.slider_title}>{service?.title}</span>
                 )}

@@ -2,7 +2,15 @@
   text-align: center;
   padding: 30px 88px;
 }
+.link {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer !important;
+}
 
+.link:hover {
+  text-decoration: underline;
+}
 .heading {
   font-size: var(--text-size-35);
   font-weight: 400;
