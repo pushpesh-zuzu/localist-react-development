@@ -1,10 +1,9 @@
 import styles from "./PopularCategories.module.css";
 import { PopularCategoriesData } from "../../../constant/CloneCategory";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const PopularCategories = ({data}) => {
-
+const PopularCategories = ({ data }) => {
   const navigate = useNavigate();
 
   return (
@@ -23,13 +22,13 @@ const PopularCategories = ({data}) => {
                     Available Online
                   </span>
                 )}
-                <button
-  className={styles.cardbButton}
-  // onClick={() => navigate(`/inprogress`)}
->
-  {row.title}
-</button>
-
+                <Link
+                  className={styles.cardbButton}
+                  style={{ textDecoration: "none" }}
+                  to={`/en/gb/${row.path}`}
+                >
+                  {row.title}
+                </Link>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@ import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
 import {
   allSubMenuData,
+  locationData,
   otherMenuData,
   serviceesData,
   subMenuData,
@@ -41,28 +42,28 @@ const LogoComponent = () => {
   const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
-  const totalItems = allServiceList?.length || 0;
+  const totalItems = megaMenu?.length || 0;
 
   const [isMobile, setIsMobile] = useState(false);
 
   function getRouteForCategory(categoryName) {
     const routesMap = {
       "House & Home": "en/gb/home",
-      Business: "en/gb/business",
-      "General Builders": "/en/gb/builders/",
+      // Business: "en/gb/business",
+      // "General Builders": "/en/gb/builders/",
       // "Lessons & Training": "en/gb/lessons-training",
     };
 
     return routesMap[categoryName] || "#";
   }
   // Sample location data
-  const locationData = [
-    "Cheshire",
-    "Cumbria",
-    "Manchester",
-    "Lancashire",
-    "Merseyside",
-  ];
+  // const locationData = [
+  //   "Cheshire",
+  //   "Cumbria",
+  //   "Manchester",
+  //   "Lancashire",
+  //   "Merseyside",
+  // ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -231,7 +232,7 @@ const LogoComponent = () => {
                   <span>{filterItems}</span>
                   {/* <Link to="#">See All</Link> */}
                 </div>
-                {allServiceList
+                {megaMenu
                   ?.filter((item) => item?.name == filterItems)
                   .map((item, index) => (
                     <div key={index}>
@@ -240,7 +241,7 @@ const LogoComponent = () => {
                         onMouseEnter={() => setMouseHover(index)}
                         onMouseLeave={() => setMouseHover("")}
                       >
-                        <span className={styles.text_wrap}>
+                        {/* <span className={styles.text_wrap}>
                           {item.icon && (
                             <img
                               src={
@@ -253,7 +254,7 @@ const LogoComponent = () => {
                               alt="icon"
                             />
                           )}
-                        </span>
+                        </span> */}
                       </div>
 
                       {item.subcategory?.map((sub, subIndex) => {
@@ -268,7 +269,7 @@ const LogoComponent = () => {
                             onMouseLeave={() => setMouseHover("")}
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={getRouteForCategory(sub.name)}>
+                              <Link to={`/en/gb/${sub.path}`}>
                                 {sub.name}
                               </Link>
                             </span>

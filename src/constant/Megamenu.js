@@ -214,12 +214,16 @@ export const allSubMenuData = [
   },
 ];
 
-export const locationDatas = [
+export const locationData = [
   "Cheshire",
-  "Cumbria",
+  "Warrington",
+  "Chester",
   "Manchester",
-  "Lancashire",
-  "Merseyside",
+  "Bolton",
+  "Skelmersdale",
+  "Ormskirk",
+  "Liverpool",
+  "Birkenhead",
 ];
 export const megaMenu = [
   {
@@ -227,23 +231,48 @@ export const megaMenu = [
     icon: houseIcon,
     subcategory: [
       {
-        name: "General Builders",
-        children: locationDatas.map((loc) => `General Builders in ${loc}`),
+        name: "Fence & Gate Installation",
+        path:"fence-installers",
+        children: locationData.map((loc) => `Fench installers in ${loc}`),
       },
       {
-        name: "Property Extensions",
-        children: locationDatas.map((loc) => `Property Extensions in ${loc}`),
+        name: "Driveway Installation",
+        path:'driveway-installers',
+        children: locationData.map((loc) => `Driveway Installers in ${loc}`),
       },
       {
-        name: "Architectural Services",
-        children: locationDatas.map(
-          (loc) => `Architectural Services in ${loc}`
+        name: "Patio Services",
+        path:"patio-services",
+        children: locationData.map((loc) => `Patio Installers in ${loc}`),
+      },
+      {
+        name: "Artificial Grass Installation",
+        path:"artificial-grass-installation",
+        children: locationData.map(
+          (loc) => `Artificial Grass Installers in ${loc}`
         ),
       },
       {
-        name: "Home Insulation",
-        children: locationDatas.map((loc) => `Home Insulation in ${loc}`),
+        name: "Landscaping",
+        path:"landscaping",
+        children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
       },
+      // {
+      //   name: "General Builders",
+      //   children: locationData.map((loc) => `General Builders in ${loc}`),
+      // },
+      // {
+      //   name: "Property Extensions",
+      //   children: locationData.map((loc) => `Home Extensions in ${loc}`),
+      // },
+      // {
+      //   name: "Architectural Services",
+      //   children: locationData.map((loc) => `Architectural Services in ${loc}`),
+      // },
+      // {
+      //   name: "Home Insulation",
+      //   children: locationData.map((loc) => `Insulation Installers in ${loc}`),
+      // },
     ],
   },
   {
@@ -252,21 +281,19 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Bookkeeping Services",
-        children: locationDatas.map((loc) => `Bookkeeping Services in ${loc}`),
+        children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
       },
       {
         name: "Social Media Marketing",
-        children: locationDatas.map(
-          (loc) => `Social Media Marketing in ${loc}`
-        ),
+        children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
       },
       {
         name: "Business Consulting",
-        children: locationDatas.map((loc) => `Business Consulting in ${loc}`),
+        children: locationData.map((loc) => `Business Consulting in ${loc}`),
       },
       {
         name: "Accounting",
-        children: locationDatas.map((loc) => `Accounting in ${loc}`),
+        children: locationData.map((loc) => `Accounting in ${loc}`),
       },
     ],
   },
@@ -276,21 +303,21 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Business & Career Coaching",
-        children: locationDatas.map(
+        children: locationData.map(
           (loc) => `Business & Career Coaching in ${loc}`
         ),
       },
       {
         name: "Music Lessons",
-        children: locationDatas.map((loc) => `Music Lessons in ${loc}`),
+        children: locationData.map((loc) => `Music Lessons in ${loc}`),
       },
       {
         name: "Academic Tutoring",
-        children: locationDatas.map((loc) => `Academic Tutoring in ${loc}`),
+        children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
       },
       {
         name: "Fitness Training",
-        children: locationDatas.map((loc) => `Fitness Training in ${loc}`),
+        children: locationData.map((loc) => `Fitness Training in ${loc}`),
       },
     ],
   },
@@ -300,15 +327,15 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Web Design",
-        children: locationDatas.map((loc) => `Web Design in ${loc}`),
+        children: locationData.map((loc) => `Web Designer in ${loc}`),
       },
       {
         name: "Logo Design",
-        children: locationDatas.map((loc) => `Logo Design in ${loc}`),
+        children: locationData.map((loc) => `Logo Designer in ${loc}`),
       },
       {
         name: "Home & Domiciliary Care",
-        children: locationDatas.map(
+        children: locationData.map(
           (loc) => `Home & Domiciliary Care in ${loc}`
         ),
       },
