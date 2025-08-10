@@ -49,7 +49,7 @@ const LogoComponent = () => {
     const routesMap = {
       "House & Home": "en/gb/home",
       Business: "en/gb/business",
-      "General Builders":"/en/gb/builders/"
+      "General Builders": "/en/gb/builders/",
       // "Lessons & Training": "en/gb/lessons-training",
     };
 
@@ -96,12 +96,11 @@ const LogoComponent = () => {
   //     }
   //   };
   useEffect(() => {
-    if(!userToken?.remember_tokens && !registerData?.remember_tokens) {
- dispatch(getPopularServiceList());
-    dispatch(getCategoriesList());
-    dispatch(getAllServiceList());
+    if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
+      dispatch(getPopularServiceList());
+      dispatch(getCategoriesList());
+      dispatch(getAllServiceList());
     }
-   
   }, []);
   const handleRedirectUrl = () => {
     const status = registerData?.active_status || userToken?.active_status;
@@ -178,17 +177,13 @@ const LogoComponent = () => {
                     onMouseLeave={() => setMouseHover("")}
                   >
                     <span className={styles.text_wrap}>
-                      <img
-                        src={item?.icon
-                        }
-                        width={16}
-                        height={16}
-                        alt="icon"
-                      />
+                      <img src={item?.icon} width={16} height={16} alt="icon" />
                       {item.name === "Other Services" ? (
                         <h4 className={styles.othertext}>{item.name}</h4>
                       ) : (
-                        <Link to={getRouteForCategory(item.name)}>{item.name}</Link>
+                        <Link to={getRouteForCategory(item.name)}>
+                          {item.name}
+                        </Link>
                       )}
                     </span>
                     <img
@@ -370,6 +365,7 @@ const LogoComponent = () => {
           trigger="hover"
           className="popover_wrap"
           onClick={() => setShowbMenu(true)}
+          getPopupContainer={(trigger) => trigger.parentNode}
         >
           <div className={styles.serviceContainer}>
             <h2 className={styles.serviceText}>Explore Our Services</h2>
