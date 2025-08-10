@@ -584,6 +584,7 @@
 .popover_content:hover > .text_wrap > a {
   /* color: var(--text-color); */
   font-weight: 500;
+  cursor: pointer;
 }
 
 /* .popover_content:hover > .text_wrap > img {
