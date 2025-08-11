@@ -31,9 +31,9 @@ import DrivewayInstallationBanner from "../assets/Images/servicesLevels/banner/D
 import FenceGateInstallationBanner from "../assets/Images/servicesLevels/banner/FenceGate-InstallationBanner.jpg";
 import HomeBanner from "../assets/Images/servicesLevels/banner/HomeBanner.jpg";
 import EllesmerePort from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
-import Liverpool from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
+import Liverpool from "../assets/Images/servicesLevels/cities/Liverpool.jpg";
 import Manchester from "../assets/Images/servicesLevels/cities/Manchester.jpg";
-import Warrington from "../assets/Images/servicesLevels/cities/Chester.jpg";
+import Warrington from "../assets/Images/servicesLevels/cities/Warrington.jpg";
 import Chester from "../assets/Images/servicesLevels/cities/Chester.jpg";
 
 const POPULAR_CITIES = [
