@@ -29,16 +29,19 @@ const popularFilterLevelTwo = [
       {
         id: 1,
         title: "Fence & Gate Installation",
+        path:'fence-installers',
         image: FenchandGet,
       },
       {
         id: 2,
         title: "Driveway Installation",
+        path:'driveway-installers',
         image: DrivewayInstallation,
       },
       {
         id: 3,
         title: "Patio Services",
+        path:'patio-services',
         image: PatioPatioServices,
       },
     ],
