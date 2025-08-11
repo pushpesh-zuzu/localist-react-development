@@ -40,16 +40,17 @@ const POPULAR_CITIES = [
   {
     city_image: london,
     city_name: "London",
-  },
+},
   {
     city_image: birmingham,
     city_name: "Birmingham",
-  },
+},
   {
     city_image: liverpool,
     city_name: "Liverpool",
-  },
+},
 ];
+
 
 const RELATED_PRICE_DATA = {
   "fence-installers": [
@@ -1182,7 +1183,7 @@ const CONTENT_CONFIG_TOP = {
   },
   "patio-services": {
     accountHeader: "Patio Construction",
-    title: "Patio Installers",
+    title: "Patio Installer",
     mainTitle: "Patio Installer",
   },
   landscaping: {
