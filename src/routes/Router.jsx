@@ -79,7 +79,7 @@ const router = createBrowserRouter([
           <CloneCatrgory
             routeName="business"
             accountHeader="Business"
-            subHeader="Business"
+            subHeader="Busines"
           />
         ),
       },
