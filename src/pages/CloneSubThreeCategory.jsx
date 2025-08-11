@@ -23,6 +23,7 @@ import {
   FIND_SERVICE_CONTENT,
   FREQUENTLY_DATA,
   HowItWorksData,
+  LEVEL_THIRD_SERVICES_NAME,
   OTHER_SERVICES_DATA,
   POPULARCITY,
   regionsData,
@@ -78,6 +79,7 @@ const CloneSubThreeCategory = ({}) => {
         para1={CONTENT_CONFIG[slug]?.para1}
         para2={CONTENT_CONFIG[slug]?.para2}
         para3={CONTENT_CONFIG[slug]?.para3}
+        defaultService = {LEVEL_THIRD_SERVICES_NAME[slug]}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks

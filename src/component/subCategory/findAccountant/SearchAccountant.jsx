@@ -5,7 +5,7 @@ import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 
-const SearchAccountant = ({ title = "", panelImage }) => {
+const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
@@ -100,7 +100,7 @@ const SearchAccountant = ({ title = "", panelImage }) => {
 
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <p>
-          Where do you need <span>{title}s ?</span>
+          Where do you need <span>{title}s</span>?
         </p>
 
         <div className={styles.searchInputContainer}>
@@ -120,7 +120,7 @@ const SearchAccountant = ({ title = "", panelImage }) => {
         <BuyerRegistration
           closeModal={handleClose}
           postcode={pincode}
-          serviceName={title}
+          serviceName={defaultService}
         />
       )}
     </div>

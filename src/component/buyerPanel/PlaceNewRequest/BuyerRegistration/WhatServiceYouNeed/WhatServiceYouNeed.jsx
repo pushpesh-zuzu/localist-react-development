@@ -22,7 +22,7 @@ const WhatServiceYouNeed = ({
   pincodes,
   setShowConfirmModal,
   postalCodeIsValidate,
-  resetServiceTrigger
+  resetServiceTrigger,
 }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
@@ -68,6 +68,24 @@ const WhatServiceYouNeed = ({
       setPincode(pincodes);
     }
   }, [serviceName, serviceId, pincodes]);
+  useEffect(() => {
+    if (serviceName && !service) {
+      setInput(serviceName);
+      setIsDropdownOpen(true);
+      dispatch(searchService({ search: serviceName }));
+    }
+    if (service?.length > 0) {
+      const match = service.find(
+        (s) => s.name.trim().toLowerCase() === input.trim().toLowerCase()
+      );
+      if (match) {
+        setSelectedService(match);
+        setIsDropdownOpen(false);
+      } else {
+        setSelectedService(null); // clear if no match
+      }
+    }
+  }, [serviceName, dispatch, service]);
   const handleSelectService = useCallback(
     (item) => {
       // console.log(item?.name, "clicked");
@@ -147,13 +165,13 @@ const WhatServiceYouNeed = ({
         //   component.types.includes("locality")
         // )?.long_name;
         let cityName =
-  place.address_components.find(component =>
-    component.types.includes("locality")
-  )?.long_name ||
-  place.address_components.find(component =>
-    component.types.includes("administrative_area_level_3")
-  )?.long_name;
-  console.log(cityName, "cityName");
+          place.address_components.find((component) =>
+            component.types.includes("locality")
+          )?.long_name ||
+          place.address_components.find((component) =>
+            component.types.includes("administrative_area_level_3")
+          )?.long_name;
+        console.log(cityName, "cityName");
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
         )?.long_name;
@@ -269,7 +287,7 @@ const WhatServiceYouNeed = ({
   return (
     <div className={styles.container}>
       <div className={styles.closeButton} onClick={handleCloseClick}>
-         &times;
+        &times;
       </div>
 
       <h2 className={styles.title}>What service do you need?</h2>
@@ -330,7 +348,11 @@ const WhatServiceYouNeed = ({
           <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
         )}
 
-        {errors.pincode ? <p className={styles.errorText}>{errors.pincode}</p> : <p className={styles.errorTexts}>{"."}</p> }
+        {errors.pincode ? (
+          <p className={styles.errorText}>{errors.pincode}</p>
+        ) : (
+          <p className={styles.errorTexts}>{"."}</p>
+        )}
       </div>
 
       <div className={styles.buttonWrapper}>

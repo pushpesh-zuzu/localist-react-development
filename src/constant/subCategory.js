@@ -1366,6 +1366,13 @@ const FIND_SERVICE_CONTENT = {
     },
   ],
 };
+const LEVEL_THIRD_SERVICES_NAME = {
+  "fence-installers": "Fence & Gate Installation",
+  "driveway-installers": "Driveway Installation",
+  "patio-services": "Patio Services",
+  "landscaping": "Landscaping",
+  "artificial-grass-installation": "Artificial Grass Installation",
+};
 
 export {
   POPULAR_CITIES,
@@ -1384,4 +1391,5 @@ export {
   CONTENT_CONFIG_BANNER,
   CONTENT_CONFIG_META,
   FIND_SERVICE_CONTENT,
+  LEVEL_THIRD_SERVICES_NAME
 };
