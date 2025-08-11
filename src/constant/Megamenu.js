@@ -215,7 +215,7 @@ export const allSubMenuData = [
 ];
 
 export const locationData = [
-  "Cheshire",
+  // "Cheshire",
   "Warrington",
   "Chester",
   "Manchester",
@@ -228,6 +228,7 @@ export const locationData = [
 export const megaMenu = [
   {
     name: "House & Home",
+    path:"home",
     icon: houseIcon,
     subcategory: [
       {
@@ -277,6 +278,7 @@ export const megaMenu = [
   },
   {
     name: "Business",
+    path:"",
     icon: businessIcon,
     subcategory: [
       {
@@ -300,6 +302,7 @@ export const megaMenu = [
   {
     name: "Lessons & Training",
     icon: lessonsIcon,
+    path:"",
     subcategory: [
       {
         name: "Business & Career Coaching",
@@ -324,6 +327,7 @@ export const megaMenu = [
   {
     name: "More",
     icon: moreIcon,
+    path:"",
     subcategory: [
       {
         name: "Web Design",

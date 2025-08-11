@@ -27,6 +27,8 @@ import { megaMenu } from "../../../constant/Megamenu";
 const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
+  const [filterRoute, setFilteRoute] = useState("");
+
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showMenu, setShowbMenu] = useState(false);
   const [showThirdLevel, setShowThirdLevel] = useState(false);
@@ -182,7 +184,7 @@ const LogoComponent = () => {
                       {item.name === "Other Services" ? (
                         <h4 className={styles.othertext}>{item.name}</h4>
                       ) : (
-                        <Link to={getRouteForCategory(item.name)}>
+                        <Link to={item.path ? `en/gb/${item.path}` : "#"}>
                           {item.name}
                         </Link>
                       )}
@@ -191,6 +193,7 @@ const LogoComponent = () => {
                       onClick={() => {
                         setShowSubMenu(true);
                         setFilterItems(item.name);
+                        setFilteRoute(item.path);
                       }}
                       src={arrowIcon}
                       width={8}
@@ -229,7 +232,12 @@ const LogoComponent = () => {
                 <hr />
 
                 <div className={styles.popover_header}>
-                  <span>{filterItems}</span>
+                  <Link
+                    style={{ cursor: "pointer !important" }}
+                    to={`en/gb/${filterRoute}`}
+                  >
+                    <span>{filterItems}</span>
+                  </Link>
                   {/* <Link to="#">See All</Link> */}
                 </div>
                 {megaMenu
@@ -269,9 +277,7 @@ const LogoComponent = () => {
                             onMouseLeave={() => setMouseHover("")}
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={`/en/gb/${sub.path}`}>
-                                {sub.name}
-                              </Link>
+                              <Link to={`/en/gb/${sub.path}`}>{sub.name}</Link>
                             </span>
                             <img
                               onClick={() => {
@@ -309,21 +315,16 @@ const LogoComponent = () => {
                   <span>{selectedSubcategory}</span>
                 </div>
 
-                {locationData.map((location, index) => (
-                  <div
-                    key={index}
-                    className={styles.popover_content}
-                    // onClick={() => {
-                    //   console.log(`${location} selected for ${selectedSubcategory}`);
-                    // }}
-                  >
-                    <span className={styles.text_wrap}>
-                      <Link to="#">
-                        {selectedSubcategory} in {location}
-                      </Link>
-                    </span>
-                  </div>
-                ))}
+                {megaMenu
+                  .find((item) => item.name === filterItems)
+                  ?.subcategory?.find((sub) => sub.name === selectedSubcategory)
+                  ?.children?.map((child, index) => (
+                    <div key={index} className={styles.popover_content}>
+                      <span className={styles.text_wrap}>
+                        <Link to="#">{child}</Link>
+                      </span>
+                    </div>
+                  ))}
               </motion.div>
             )}
           </AnimatePresence>
