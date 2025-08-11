@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import styles from "./MyCredit.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
@@ -8,15 +7,23 @@ import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
 import { Link, useNavigate } from "react-router-dom";
-import { getCreditPlanList, getswitchAutobidApi, switchAutobidApi } from "../../../store/LeadSetting/leadSettingSlice";
+import {
+  getCreditPlanList,
+  getswitchAutobidApi,
+  switchAutobidApi,
+} from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addBuyCreditApi, AddCoupanApi, getInvoiceBillingListApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import {
+  addBuyCreditApi,
+  AddCoupanApi,
+  getInvoiceBillingListApi,
+} from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
-import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 
 const creditOptions = [
   {
@@ -26,7 +33,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: false,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits."
+    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
   },
   {
     title: "120 % OFF Boost",
@@ -35,7 +42,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: true,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits."
+    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
   },
   {
     title: "180 % OFF Boost",
@@ -44,7 +51,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: true,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits."
+    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
   },
 ];
 
@@ -52,24 +59,28 @@ const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-  const [activeLoaderId, setActiveLoaderId] = useState(null)
+  const [activeLoaderId, setActiveLoaderId] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { userToken } = useSelector((state) => state.auth)
-  const { buyCreditLoader, addCouanLoader,addcoupanList ,getInoviceBillingList} = useSelector((state) => state.myCredit);
+  const { userToken } = useSelector((state) => state.auth);
+  const {
+    buyCreditLoader,
+    addCouanLoader,
+    addcoupanList,
+    getInoviceBillingList,
+  } = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-  const [isChecked, setIsChecked] = useState(true)
-  const [isAddCardModal,setIsAddCardModal]= useState(false)
+  const [isChecked, setIsChecked] = useState(true);
+  const [isAddCardModal, setIsAddCardModal] = useState(false);
   const handleOpen = () => {
     setIsOpen(true);
   };
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
   };
-  const userId =
-    userToken?.remember_tokens ?? registerData?.remember_tokens;
+  const userId = userToken?.remember_tokens ?? registerData?.remember_tokens;
 
   // API se data aane ke baad automation state update karo
   useEffect(() => {
@@ -96,34 +107,33 @@ const MyCredits = () => {
     );
   };
   const handleRedeem = (e) => {
-    setCouponCode(e.target.value)
-  }
+    setCouponCode(e.target.value);
+  };
   const handleBack = () => {
     navigate("/settings");
-  }
+  };
   useEffect(() => {
-    dispatch(getCreditPlanList())
-    dispatch(getInvoiceBillingListApi())
-  }, [])
+    dispatch(getCreditPlanList());
+    dispatch(getInvoiceBillingListApi());
+  }, []);
   console.log(getInoviceBillingList, "item");
-  
+
   // const handleBuyNow = (item) => {
   //   setActiveLoaderId(item?.id);
   //   let finalPrice = item.no_of_leads;
   // const vatTotal = item?.billing_vat_register === 0
   // ? 0
   // : Math.floor((item?.price * 20) / 100)
-  
+
   //   // ✅ Only apply discount if selectedCoupon is a string and contains '%'
   //   if (typeof addcoupanList === 'string' && addcoupanList.includes("%")) {
   //     const discountPercent = parseFloat(addcoupanList.replace("%", ""));
   //     const discountAmount = (item.no_of_leads * discountPercent) / 100;
   //     finalPrice = Math.floor(item.no_of_leads - discountAmount);
   //   }
-   
-  
+
   //   const creditData = {
-  //     amount: item?.price, 
+  //     amount: item?.price,
   //     credits: item?.no_of_leads + finalPrice,
   //     details: item?.name,
   //     // discount:finalPrice - item?.price,
@@ -142,92 +152,89 @@ const MyCredits = () => {
   //   // });
   // };
 
-  
-//   const handleBuyNow = (item) => {
-//   setActiveLoaderId(item?.id);
+  //   const handleBuyNow = (item) => {
+  //   setActiveLoaderId(item?.id);
 
-//   let finalPrice = item.no_of_leads;
+  //   let finalPrice = item.no_of_leads;
 
-//   const vatTotal =
-//     item?.billing_vat_register === 0
-//       ? 0
-//       : Math.floor((item?.price * 20) / 100);
+  //   const vatTotal =
+  //     item?.billing_vat_register === 0
+  //       ? 0
+  //       : Math.floor((item?.price * 20) / 100);
 
-//   let credits = item.no_of_leads; // default
+  //   let credits = item.no_of_leads; // default
 
-//   // ✅ Apply coupon logic
-//   if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
-//     const discountPercent = parseFloat(addcoupanList.replace('%', ''));
-//     const discountAmount = (item.no_of_leads * discountPercent) / 100;
-//     finalPrice = Math.floor(item.no_of_leads - discountAmount);
+  //   // ✅ Apply coupon logic
+  //   if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
+  //     const discountPercent = parseFloat(addcoupanList.replace('%', ''));
+  //     const discountAmount = (item.no_of_leads * discountPercent) / 100;
+  //     finalPrice = Math.floor(item.no_of_leads - discountAmount);
 
-//     credits = item.no_of_leads + finalPrice;
-//   }
+  //     credits = item.no_of_leads + finalPrice;
+  //   }
 
-//   const creditData = {
-//     amount: item?.price,
-//     credits: credits,
-//     details: item?.name,
-//     total_amount:  (item?.price + vatTotal) * 100,
-//     vat: vatTotal,
-//     top_up: isChecked ? 1 : 0,
-//   };
+  //   const creditData = {
+  //     amount: item?.price,
+  //     credits: credits,
+  //     details: item?.name,
+  //     total_amount:  (item?.price + vatTotal) * 100,
+  //     vat: vatTotal,
+  //     top_up: isChecked ? 1 : 0,
+  //   };
 
-//   console.log(creditData, finalPrice,item?.price, vatTotal, 'creditData');
+  //   console.log(creditData, finalPrice,item?.price, vatTotal, 'creditData');
 
-//   // dispatch(addBuyCreditApi(creditData)).then((result) => {
-//   //   if (result) {
-//   //     showToast('success', result?.message);
-//   //     setActiveLoaderId(null);
-//   //     dispatch(getInvoiceBillingListApi());
-//   //   }
-//   // });
-// };
+  //   // dispatch(addBuyCreditApi(creditData)).then((result) => {
+  //   //   if (result) {
+  //   //     showToast('success', result?.message);
+  //   //     setActiveLoaderId(null);
+  //   //     dispatch(getInvoiceBillingListApi());
+  //   //   }
+  //   // });
+  // };
 
-const handleBuyNow = (item) => {
-  setActiveLoaderId(item?.id);
+  const handleBuyNow = (item) => {
+    setActiveLoaderId(item?.id);
 
-  let credits = item.no_of_leads; 
+    let credits = item.no_of_leads;
 
-  const vatTotal =
-    item?.billing_vat_register === 0
-      ? 0
-      : Math.floor((item?.price * 20) / 100);
+    const vatTotal =
+      item?.billing_vat_register === 0
+        ? 0
+        : Math.floor((item?.price * 20) / 100);
 
-  // ✅ If coupon exists and is percentage-based
-  if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
-    const discountPercent = parseFloat(addcoupanList.replace('%', ''));
-    const discountAmount = Math.floor((item.no_of_leads * discountPercent) / 100);
+    // ✅ If coupon exists and is percentage-based
+    if (typeof addcoupanList === "string" && addcoupanList.includes("%")) {
+      const discountPercent = parseFloat(addcoupanList.replace("%", ""));
+      const discountAmount = Math.floor(
+        (item.no_of_leads * discountPercent) / 100
+      );
 
-    credits = item.no_of_leads + discountAmount; 
-  }
+      credits = item.no_of_leads + discountAmount;
+    }
 
-  const creditData = {
-    amount: item?.price,
-    credits: credits,
-    details: item?.name,
-    total_amount: (item?.price + vatTotal) * 100,
-    vat: vatTotal,
-    top_up: isChecked ? 1 : 0,
+    const creditData = {
+      amount: item?.price,
+      credits: credits,
+      details: item?.name,
+      total_amount: (item?.price + vatTotal) * 100,
+      vat: vatTotal,
+      top_up: isChecked ? 1 : 0,
+    };
+
+    console.log(creditData, item?.no_of_leads, credits, vatTotal, "creditData");
+
+    dispatch(addBuyCreditApi(creditData)).then((result) => {
+      if (result?.success) {
+        showToast("success", result?.message);
+        setActiveLoaderId(null);
+        dispatch(getInvoiceBillingListApi());
+      } else if (result?.success === false) {
+        setIsAddCardModal(true);
+        // navigate("/payment-details");
+      }
+    });
   };
-
-  console.log(creditData, item?.no_of_leads, credits, vatTotal, 'creditData');
-
-  dispatch(addBuyCreditApi(creditData)).then((result) => {
-    
-  if (result?.success) {
-    showToast('success', result?.message);
-    setActiveLoaderId(null);
-    dispatch(getInvoiceBillingListApi());
-  } else if (result?.success === false) {
-    setIsAddCardModal(true)
-    // navigate("/payment-details");
-  }
-});
-};
-
-  
-  
 
   const handleApply = () => {
     if (!couponCode.trim()) {
@@ -246,12 +253,17 @@ const handleBuyNow = (item) => {
       }
     });
   };
-  const priceCreditPercentage = creditPlanList?.map((item) => item?.no_of_leads)
-console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
+  const priceCreditPercentage = creditPlanList?.map(
+    (item) => item?.no_of_leads
+  );
+  console.log(addcoupanList, priceCreditPercentage, "addcoupanList");
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.backText} onClick={handleBack}> <img src={blackArrow} alt="..." /> Setting</div>
+        <div className={styles.backText} onClick={handleBack}>
+          {" "}
+          <img src={blackArrow} alt="..." /> Setting
+        </div>
         <h1 className={styles.heading}>My credits</h1>
 
         <div className={styles.manageWrapper}>
@@ -259,76 +271,97 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
             <img src={iIcon} alt="iIcon" />
           </span>
           <p className={styles.description}>
-           Credits are used to connect with potential customers on Localists.com. 
-           They let you respond to high-quality, high intent, local leads in your area. 
-           Learn more about how credits work and our pricing in the {" "}
+            Credits are used to connect with potential customers on
+            Localists.com. They let you respond to high-quality, high intent,
+            local leads in your area. Learn more about how credits work and our
+            pricing in the{" "}
             {/* <a href="#" className={styles.link}>
              
             </a> */}
-             <Link to="/help-center" className={styles.link} >
-                           Help Center
-                        </Link>
+            <Link to="/help-center" className={styles.link}>
+              Help Center
+            </Link>
             .
           </p>
         </div>
 
         <p className={styles.note}>
-       We apply a small fee for each new customer you choose to contact.</p>
+          We apply a small fee for each new customer you choose to contact.
+        </p>
 
         <div className={styles.cardList}>
-          {creditPlanList?.length === 0 ? <div className={styles.noPlanText}> {"No Plan Available"} </div> : creditPlanList?.map((item, index) => (
-            <div className={styles.card} key={index}>
-              {item?.plan_type !== "normal" ? <button className={styles.badge}>{item.description}<img src={airoImg} alt="..." /> </button> : <button className={styles.badge}>{item.description}</button>}
-              <div className={styles.titleBar}>
-<div className={styles.btnBox}>
-                <button className={styles.response}>{item?.slug}</button>
-                <div className={styles.creditsBox}>{item?.no_of_leads} credits</div>
-                </div>
-                <div className={styles.priceInfo}>
-                  <strong>{item?.price} (Excl. tax)</strong>
-                  <div className={styles.perCredit}>
-                    £{item?.per_credit}/credit
+          {creditPlanList?.length === 0 ? (
+            <div className={styles.noPlanText}> {"No Plan Available"} </div>
+          ) : (
+            creditPlanList?.map((item, index) => (
+              <div className={styles.card} key={index}>
+                {item?.plan_type !== "normal" ? (
+                  <button className={styles.badge}>
+                    {item.description}
+                    <img src={airoImg} alt="..." />{" "}
+                  </button>
+                ) : (
+                  <button className={styles.badge}>{item.description}</button>
+                )}
+                <div className={styles.titleBar}>
+                  <div className={styles.btnBox}>
+                    <button className={styles.response}>{item?.slug}</button>
+                    <div className={styles.creditsBox}>
+                      {item?.no_of_leads} credits
+                    </div>
                   </div>
-                </div>
+                  <div className={styles.priceInfo}>
+                    <strong>{item?.price} (Excl. tax)</strong>
+                    <div className={styles.perCredit}>
+                      £{item?.per_credit}/credit
+                    </div>
+                  </div>
 
-                <div className={styles.buttonWrap}>
-                  {/* <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
+                  <div className={styles.buttonWrap}>
+                    {/* <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
                          indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                        />  : "Buy Now"}</button> */}
-                  <button
-                    className={styles.buyButton}
-                    onClick={() => handleBuyNow(item)}
-                  >
-                    Buy Now
-                    {/* {activeLoaderId === item.id ? (
+                    <button
+                      className={styles.buyButton}
+                      onClick={() => handleBuyNow(item)}
+                    >
+                      Buy Now
+                      {/* {activeLoaderId === item.id ? (
                       <Spin
                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
                       />
                     ) : (
                       "Buy Now"
                     )} */}
-                  </button>
-                  <div className={styles.checkboxWrap}>
-                    <input
-                      type="checkbox"
-                     checked={isChecked}
-          onChange={handleCheckboxChange}
-                    />
-                    <label>Auto top-up next time</label>
+                    </button>
+                    <div className={styles.checkboxWrap}>
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                      />
+                      <label>Auto top-up next time</label>
+                    </div>
                   </div>
                 </div>
+                {item?.plan_type !== "normal" && (
+                  <div className={styles.getHired}>
+                    <img
+                      src={getHired}
+                      alt="getHired"
+                      className={styles.getHiredImage}
+                    />
+                    {
+                      <div className={styles.gethiredText}>
+                        We'll give you your credits back if you don't secure at
+                        least one job on Bark using these credits.
+                      </div>
+                    }
+                  </div>
+                )}
               </div>
-              {item?.plan_type !== "normal" && <div className={styles.getHired}>
-                <img src={getHired} alt="getHired" className={styles.getHiredImage} />
-                {
-
-
-                  <div className={styles.gethiredText}>We'll give you your credits back if you don't secure at least one job on Bark using these credits.</div>
-                }
-              </div>}
-
-            </div>
-          ))}
+            ))
+          )}
         </div>
 
         <div className={styles.bottomText} onClick={handleOpen}>
@@ -341,12 +374,24 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
         </div>
         <div className={styles.redeemText}>
           <label>Redeem coupon</label>
-          <input type="text" placeholder="Redeem a code" onChange={handleRedeem} />
-          <button className={styles.redeemButton} onClick={handleApply}>{addCouanLoader ? <Spin
-            indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-          /> : "Apply"}</button>
+          <input
+            type="text"
+            placeholder="Redeem a code"
+            onChange={handleRedeem}
+          />
+          <button className={styles.redeemButton} onClick={handleApply}>
+            {addCouanLoader ? (
+              <Spin
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              />
+            ) : (
+              "Apply"
+            )}
+          </button>
         </div>
-        <div className={styles.couponsText}>Coupons can't be combined. The higher discount applies.</div>
+        <div className={styles.couponsText}>
+          Coupons can't be combined. The higher discount applies.
+        </div>
         <div className={styles.toggle}>
           <span>Auto bid</span>
           <label className={styles.switch}>
@@ -360,13 +405,14 @@ console.log(addcoupanList,priceCreditPercentage,"addcoupanList")
         </div>
 
         <TransgationLogTable data={getInoviceBillingList} />
-
       </div>
       {/* {isOpen && (
         <CreditModal onClose={()=>setIsOpen(false)}/>
       )} */}
 
-      {isAddCardModal && <AddCardModal onClose={()=> setIsAddCardModal(false)} />}
+      {isAddCardModal && (
+        <AddCardModal onClose={() => setIsAddCardModal(false)} />
+      )}
     </>
   );
 };

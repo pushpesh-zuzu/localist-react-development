@@ -4,8 +4,8 @@ import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
 import Homepage from "../pages/Homepage";
 import Category from "../pages/Category";
-import InProgressPage from "../pages/InProgressPage"
-import CloneCatrgory  from "../pages/CloneCatrgory";
+import InProgressPage from "../pages/InProgressPage";
+import CloneCatrgory from "../pages/CloneCatrgory";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import LocationPage from "../pages/LocationPage";
 import HowItWorksPage from "../pages/HowItWorksPage";
@@ -50,28 +50,91 @@ import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
 import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
 //test en/gb/bookkeeping-services/
 
-
 const router = createBrowserRouter([
-  
   {
     path: "/",
     element: <MainLayout />,
     children: [
       { index: true, element: <Homepage /> },
       { path: "/login", element: <ProtectedLogin /> },
+      { path: "/passwordless_login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },
       { path: "/inprogress", element: <InProgressPage /> },
-      { path: "/en/gb/home/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
+      {
+        path: "/en/gb/home/",
+        element: (
+          <CloneCatrgory
+            routeName="home"
+            accountHeader="Home & Garden"
+            subHeader="Home & Garden"
+            bestText={`It's super fast and easy!`}
+          />
+        ),
+      },
       // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
 
-      { path: "/en/gb/business/", element: <CloneCatrgory routeName='business' accountHeader="Business" subHeader="Business" /> },
-      { path: "/en/gb/financial-and-accounting/", element: <CloneCatrgory accountHeader="Financial & Accounting" subHeader="Financial Accountant" /> },
-      { path: "/en/gb/accountants/", element: <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" /> },
-      { path: "/en/gb/bookkeeping-services/", element: <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /> },
-      { path: "/en/gb/builders/", element: <CloneSubTwoCategory routeName="Home & Garden / Builders" accountHeader="Builders" subHeader="builders" /> },
-      { path: "/en/gb/gardening-landscaping/", element: <CloneSubCategoryTwoGardening routeName="gardening-landscaping" accountHeader="Gardening & Landscaping" subHeader="Gardening & Landscaping" /> },
+      {
+        path: "/en/gb/business/",
+        element: (
+          <CloneCatrgory
+            routeName="business"
+            accountHeader="Business"
+            subHeader="Business"
+          />
+        ),
+      },
+      {
+        path: "/en/gb/financial-and-accounting/",
+        element: (
+          <CloneCatrgory
+            accountHeader="Financial & Accounting"
+            subHeader="Financial Accountant"
+          />
+        ),
+      },
+      {
+        path: "/en/gb/accountants/",
+        element: (
+          <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
+        ),
+      },
+      {
+        path: "/en/gb/bookkeeping-services/",
+        element: (
+          <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
+        ),
+      },
+      {
+        path: "/en/gb/builders/",
+        element: (
+          <CloneSubTwoCategory
+            routeName="Home & Garden / Builders"
+            accountHeader="Builders"
+            subHeader="builders"
+          />
+        ),
+      },
+      {
+        path: "/en/gb/gardening-landscaping/",
+        element: (
+          <CloneSubCategoryTwoGardening
+            routeName="gardening-landscaping"
+            accountHeader="Gardening & Landscaping"
+            subHeader="Gardening & Landscaping"
+          />
+        ),
+      },
 
-      { path: "/en/gb/:slug/", element: <CloneSubThreeCategory routeName="Home & Garden / Gardening & Landscaping" accountHeader="General Accounting" subHeader="General Accountant" /> },
+      {
+        path: "/en/gb/:slug/",
+        element: (
+          <CloneSubThreeCategory
+            routeName="Home & Garden / Gardening & Landscaping"
+            accountHeader="General Accounting"
+            subHeader="General Accountant"
+          />
+        ),
+      },
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
@@ -241,7 +304,7 @@ const router = createBrowserRouter([
         path: "/mycredit",
         element: (
           <ProtectedRoute>
-           <MyCredit/>
+            <MyCredit />
           </ProtectedRoute>
         ),
       },
@@ -249,7 +312,7 @@ const router = createBrowserRouter([
         path: "/mycredits",
         element: (
           <ProtectedRoute>
-           <MyCredits/>
+            <MyCredits />
           </ProtectedRoute>
         ),
       },
@@ -257,7 +320,7 @@ const router = createBrowserRouter([
         path: "/invoice-billing",
         element: (
           <ProtectedRoute>
-         <InvoiceAndBilling/>
+            <InvoiceAndBilling />
           </ProtectedRoute>
         ),
       },
@@ -265,7 +328,7 @@ const router = createBrowserRouter([
         path: "/payment-details",
         element: (
           <ProtectedRoute>
-        <MyPaymentDetails/>
+            <MyPaymentDetails />
           </ProtectedRoute>
         ),
       },
@@ -273,15 +336,15 @@ const router = createBrowserRouter([
         path: "/view-profile/:sellerId/:requestId",
         element: (
           <ProtectedRoute>
-          <ViewProfiles/>
+            <ViewProfiles />
           </ProtectedRoute>
         ),
       },
-       {
+      {
         path: "/view-profile/:sellerId/:requestId",
         element: (
           <ProtectedRoute>
-          <ViewProfiles/>
+            <ViewProfiles />
           </ProtectedRoute>
         ),
       },
@@ -289,7 +352,7 @@ const router = createBrowserRouter([
         path: "/review/:profileId",
         element: (
           // <ProtectedRoute>
-          <ViewProfiles/>
+          <ViewProfiles />
           // </ProtectedRoute>
         ),
       },
@@ -297,7 +360,7 @@ const router = createBrowserRouter([
         path: "/e-mail-notification",
         element: (
           <ProtectedRoute>
-         <EmailNotification/>
+            <EmailNotification />
           </ProtectedRoute>
         ),
       },
@@ -305,7 +368,7 @@ const router = createBrowserRouter([
         path: "/browser-notification",
         element: (
           <ProtectedRoute>
-          <BrowserNotification/>
+            <BrowserNotification />
           </ProtectedRoute>
         ),
       },
@@ -313,27 +376,26 @@ const router = createBrowserRouter([
         path: "/inprogress",
         element: (
           <ProtectedRoute>
-          <InProgressPage/>
+            <InProgressPage />
           </ProtectedRoute>
         ),
       },
-        {
+      {
         path: "/buyer-close/:id",
         element: (
           <ProtectedRoute>
-        <BuyerFirstStep/>
+            <BuyerFirstStep />
           </ProtectedRoute>
         ),
       },
-       {
+      {
         path: "/buyer-second-step",
         element: (
           <ProtectedRoute>
-        <BuyerSecondStep/>
+            <BuyerSecondStep />
           </ProtectedRoute>
         ),
       },
-
 
       // { path: "/inprogress", element: <InProgressPage /> },
       { path: "*", element: <NotFound /> },

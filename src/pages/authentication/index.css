@@ -4,7 +4,8 @@
   justify-content: center;
   align-items: center;
   gap: 51px;
-  padding: 20px;
+  padding-top: 60px;
+  padding-bottom: 50px;
 }
 
 .login-container :where(.ant-form-item:last-child) {
@@ -56,7 +57,7 @@
   font-family: "poppins";
 }
 .login-options label {
-  gap:0px
+  gap: 0px;
 }
 
 .forgot-password {
@@ -85,6 +86,11 @@
   margin-top: 12px;
   font-size: 16px;
   font-family: "poppins";
+  cursor: pointer !important;
+}
+
+.btnLink span {
+  cursor: pointer !important;
 }
 .bottom-links {
   text-align: center;
@@ -103,7 +109,7 @@
 .linkText {
   color: var(--primary-color) !important;
   text-decoration: underline !important;
-  cursor:  pointer !important;
+  cursor: pointer !important;
 }
 
 @media (max-width: 515px) {
