@@ -86,7 +86,7 @@ const CloneSubThreeCategory = ({}) => {
       />
       <PopularCity
         POPULAR_CITIES_LEVERL_THREE={popularCity}
-        title="Popular City"
+        title="Popular Cities"
       />
       {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
 

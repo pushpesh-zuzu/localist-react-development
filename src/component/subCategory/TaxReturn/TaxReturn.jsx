@@ -1,16 +1,16 @@
 import styles from "./TaxReturn.module.css";
 import taxReturnImage from "../../../assets/Images/subcategory/tax-return-image.png";
 import logo from "../../../assets/Images/logo.svg";
-const TaxReturn = ({ TaxData ,panelImage,title}) => {
+const TaxReturn = ({ TaxData, panelImage, title }) => {
   return (
     <>
       <div className={styles.taxReturn_container}>
         <div className={styles.taxReturn_content_wrap}>
           <div className={styles.taxReturn_content}>
-            <h1 className={styles.taxReturn_heading}>
+            <h2 className={styles.taxReturn_heading}>
               {/* <b>{TaxData?.heading1}: </b> */}
               {TaxData?.heading1}
-            </h1>
+            </h2>
             <p className={styles.taxReturn_paragrap}>{TaxData?.shortDes}</p>
             <div className={styles.taxReturn_content_block_wrap}>
               <div className={styles.taxReturn_content_logo}>
@@ -18,7 +18,10 @@ const TaxReturn = ({ TaxData ,panelImage,title}) => {
               </div>
 
               <div className={styles.taxReturn_content_block}>
-                <p>{TaxData?.name}</p>
+                <h3 style={{ fontWeight: "normal" }}>
+                  {TaxData?.name}
+                </h3>
+
                 <span>{TaxData?.date}</span>
               </div>
             </div>
