@@ -133,6 +133,24 @@
   .popularcityContainer span {
     font-size: 30px;
   }
+  .cityName {
+    font-size: 18px;
+    line-height: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 5px;
+  }
+  .cityNameBtn button {
+    font-size: 13px;
+    padding: 8px;
+    white-space: nowrap;
+  }
+
+  .cityNameBtn {
+    gap: 10px;
+    padding: 0 4px 4px 4px;
+  }
 }
 
 /* below new css  */
@@ -222,7 +240,7 @@
   width: 16px;
   min-width: 16px;
   height: 16px;
-  background-color: var(--primary-color);;
+  background-color: var(--primary-color);
   padding: 10px;
   border-radius: 50%;
   display: flex;
@@ -289,7 +307,7 @@
     width: 12px;
     min-width: 12px;
     height: 12px;
-    display:none
+    display: none;
   }
   .slide img {
     width: 100%;
