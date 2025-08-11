@@ -13,7 +13,7 @@
 }
 .heading {
   font-size: var(--text-size-35);
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .highlight {
@@ -135,7 +135,7 @@
 @media (max-width: 884px) {
   .heading {
     font-size: 28px;
-    font-weight: 400;
+    font-weight: 600;
   }
   .availableOnline {
     font-size: 11.72px;
@@ -167,7 +167,7 @@
   }
   .heading {
     font-size: 22px;
-    font-weight: 400;
+    font-weight: 600;
   }
   .availableOnline {
     font-size: 8px;

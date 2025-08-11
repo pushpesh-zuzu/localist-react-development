@@ -118,10 +118,7 @@ const CloneSubThreeCategory = ({}) => {
       <Reviews RELATED_REVIEW={RELATED_REVIEW} />
       {/* no need to change only data change*/}
 
-      <Slider
-        sliderdata={RELATED_SEERVICE}
-        title={<b>Related Service Guides</b>}
-      />
+      <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} />
       {/* no need to change only data change*/}
 
       <Slider sliderdata={RELATED_PRICE} title={<b>Related Price Guides</b>} />
