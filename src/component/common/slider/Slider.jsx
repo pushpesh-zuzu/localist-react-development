@@ -82,7 +82,7 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
           </span>
 
           <h2 className={styles.heading}>
-            {/* <span className={styles.highlight}>{blueTitle}</span> */}
+            {blueTitle && <span className={styles.highlight}>{blueTitle}</span>}
             {title}
           </h2>
           <span
