@@ -88,7 +88,6 @@ const CloneSubTwoCategory = ({
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
   console.log(endpoint, "endpointendpointendpoint");
 
-  const message = `from ${subHeader} professionals today`;
 
   const allowedServices = endpointServiceMap[endpoint] || [];
 
@@ -145,7 +144,7 @@ const CloneSubTwoCategory = ({
       />
       <PopularCategories data={getFilterLevelTwoByKey("builders")} />
       <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={message} />
+      <GetQuotes message={subHeader} />
     </div>
   );
 };
