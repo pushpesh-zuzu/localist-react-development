@@ -9,6 +9,8 @@ import PatioPatioServices from "../../assets/Images/PatioServices.jpg";
 import DrivewayInstallation from "../../assets/Images/DrivewayInstallation.jpg";
 import { AllServicesData } from "../../constant/CloneCategory";
 import LandscapingGardeningBanner from "../../assets/Images/servicesLevels/banner/landscapingandgardeningBanner.jpg";
+import Landscaping from "../../assets/Images/servicesLevels/Landscaping.jpg";
+import ArtificialGrass from "../../assets/Images/servicesLevels/ArtificialGrass.jpg";
 
 const popularFilterLevelTwo = [
   {
@@ -28,6 +30,21 @@ const popularFilterLevelTwo = [
         title: "Patio Services",
         image: PatioPatioServices,
       },
+    ],
+  },
+  {
+    "gardening-landscaping": [
+      {
+        id: 1,
+        title: "Landscaping",
+        image: Landscaping,
+      },
+      {
+        id: 2,
+        title: "Artificial Grass Installation",
+        image: ArtificialGrass,
+      },
+    
     ],
   },
 ];
@@ -112,7 +129,11 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
         service={true}
         panelImage={LandscapingGardeningBanner}
         title="Gardening & Landscaping"
-        breadcrumb={[{title :"Home & Garden",path:'/home'},{title :"Garden & Gardening"}]}
+        defaultServiceName={"Gardening & Landscaping"}
+        breadcrumb={[
+          { title: "Home & Garden", path: "/home" },
+          { title: "Garden & Gardening" },
+        ]}
         para1={
           "Localists help you find the best Gardening & Landscaping Professionals near you and obtain free, no obligation quotes."
         }
@@ -121,7 +142,9 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
         }
         para3={"Get started with Localists today!"}
       />
-      <PopularCategories data={getFilterLevelTwoByKey("builders")} />
+      <PopularCategories
+        data={getFilterLevelTwoByKey("gardening-landscaping")}
+      />
       <AllServicesComponent data={filteredAllServicesData} />
       <GetQuotes message={message} />
     </div>

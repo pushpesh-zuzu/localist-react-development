@@ -234,7 +234,7 @@ export const megaMenu = [
       {
         name: "Fence & Gate Installation",
         path:"fence-installers",
-        children: locationData.map((loc) => `Fench installers in ${loc}`),
+        children: locationData.map((loc) => `Fence Installers in ${loc}`),
       },
       {
         name: "Driveway Installation",

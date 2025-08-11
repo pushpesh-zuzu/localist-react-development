@@ -95,7 +95,7 @@ const SearchAccountant = ({ title = "", panelImage }) => {
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-        Looking for <span>{title}</span> Professionals Near Me?
+        Looking for <span>{title}s</span> Professionals Near Me?
       </h1>
 
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>

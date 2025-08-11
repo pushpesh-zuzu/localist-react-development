@@ -1108,7 +1108,7 @@ const CONTENT_CONFIG = {
     para3: "It's super fast and easy!",
   },
   "driveway-installers": {
-    para1: "Find the Best Driveway Installers In Your Area",
+    para1: "",
     para2:
       "Looking for a skilled driveway installer but not sure where to start? At Localists, we make it simple. Tell us about your project, and we'll connect you with trusted driveway contractors near you - all with no pressure to hire. Compare profiles, read genuine reviews, and request more details before making your choice.",
     para3: "Best of all - our service is completely free!",
@@ -1187,13 +1187,13 @@ const CONTENT_CONFIG_TOP = {
   },
   landscaping: {
     accountHeader: "Landscaping",
-    title: "Lanscapers",
+    title: "Landscaper",
     mainTitle: "Landscape Gardener",
   },
   "artificial-grass-installation": {
     accountHeader: "Artificial Grass Installation",
     title: "Artificial Grass Installer",
-    mainTitle: "Artificial Installers",
+    mainTitle: "Artificial Installer",
   },
 };
 

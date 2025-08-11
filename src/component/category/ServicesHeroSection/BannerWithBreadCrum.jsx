@@ -5,6 +5,7 @@ import CloneAccountants from "../accountants/CloneAccountants";
 function BannerWithBreadCrum({
   level,
   LevelOneTwoTitle='',
+  defaultServiceName,
   panelImage,
   accountHeader,
   breadcrumb,
@@ -21,6 +22,8 @@ function BannerWithBreadCrum({
           header={accountHeader}
           LevelOneTwoTitle={LevelOneTwoTitle}
           panelImage={panelImage}
+          title={title}
+          defaultServiceName={defaultServiceName}
         />
       )}
 

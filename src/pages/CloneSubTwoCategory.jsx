@@ -127,10 +127,14 @@ const CloneSubTwoCategory = ({
         subHeader={subHeader}
         accountHeader="Builders"
         level={2}
+        defaultServiceName={"Builders"}
         service={true}
         panelImage={Builders}
-        title="Builders"
-        breadcrumb={[{title :"Home & Garden",path:'/home'},{title :"Builders"}]}
+        title="Builder"
+        breadcrumb={[
+          { title: "Home & Garden", path: "/home" },
+          { title: "Builders" },
+        ]}
         para1={
           "Localists help you find the best Builders Professionals near you and obtain free, no obligation quotes"
         }

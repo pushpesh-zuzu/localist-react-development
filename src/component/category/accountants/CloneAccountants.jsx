@@ -14,8 +14,13 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
-  console.log(panelImage)
+const CloneAccountants = ({
+  header,
+  title,
+  panelImage,
+  defaultServiceName = "",
+}) => {
+  console.log(panelImage);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
@@ -30,8 +35,27 @@ const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
   const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
-
   const showToast = (type, content) => message[type](content);
+  useEffect(() => {
+    if (defaultServiceName) {
+      setInput(defaultServiceName);
+      setIsDropdownOpen(true);
+      dispatch(searchService({ search: defaultServiceName }));
+    }
+  }, [defaultServiceName, dispatch]);
+  useEffect(() => {
+    if (service?.length > 0) {
+      const match = service.find(
+        (s) => s.name.trim().toLowerCase() === input.trim().toLowerCase()
+      );
+      if (match) {
+        setSelectedService(match);
+        setIsDropdownOpen(false);
+      } else {
+        setSelectedService(null); // clear if no match
+      }
+    }
+  }, [service, input]);
 
   const handleClose = () => {
     setShowModal(false);
@@ -71,10 +95,13 @@ const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
 
-    const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-      types: ["geocode"],
-      componentRestrictions: { country: "IN" },
-    });
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {
+        types: ["geocode"],
+        componentRestrictions: { country: "IN" },
+      }
+    );
 
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -85,9 +112,8 @@ const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
       )?.long_name;
 
       const cityName =
-        place.address_components.find((c) =>
-          c.types.includes("locality")
-        )?.long_name ||
+        place.address_components.find((c) => c.types.includes("locality"))
+          ?.long_name ||
         place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
@@ -137,26 +163,26 @@ const CloneAccountants = ({header,LevelOneTwoTitle,panelImage}) => {
     dispatch(questionAnswerData({ service_id: selectedService.id }));
     setShowModal(true);
   };
-  
-const style = {
-  backgroundImage: `url(${panelImage})`,
-};
+
+  const style = {
+    backgroundImage: `url(${panelImage})`,
+  };
 
   return (
     <div className={styles.container} style={style}>
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
-          <h1 style={{color:'white'}}>
-          Looking for <span className={styles.blueText}>{header} </span>{" "}
-          Professionals Near You?
+          <h1 style={{ color: "white" }}>
+            Looking for <span className={styles.blueText}>{header} </span>{" "}
+            Professionals Near You?
           </h1>
         </div>
 
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
             <h2>
-              Do you need{" "}
-              <span className={styles.blueText}> {LevelOneTwoTitle} </span>Professionals?
+              Do you need <span className={styles.blueText}> {title} </span>
+              Professionals?
             </h2>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>
@@ -209,15 +235,15 @@ const style = {
         </div>
       </div>
 
-        {showModal && (userToken?.active_status === 2 || !userToken) && (
-          <BuyerRegistration
-            closeModal={handleClose}
-            serviceId={selectedService?.id}
-            serviceName={selectedService?.name}
-            postcode={pincode}
-          />
-        )}
-      </div>
+      {showModal && (userToken?.active_status === 2 || !userToken) && (
+        <BuyerRegistration
+          closeModal={handleClose}
+          serviceId={selectedService?.id}
+          serviceName={selectedService?.name}
+          postcode={pincode}
+        />
+      )}
+    </div>
   );
 };
 

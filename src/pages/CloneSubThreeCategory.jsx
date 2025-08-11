@@ -121,7 +121,7 @@ const CloneSubThreeCategory = ({}) => {
       <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} />
       {/* no need to change only data change*/}
 
-      <Slider sliderdata={RELATED_PRICE} title={<b>Related Price Guides</b>} />
+      <Slider sliderdata={RELATED_PRICE} title={'Related Price Guides'} />
       {/* no need to change only data change*/}
 
       <GetQuotes title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
