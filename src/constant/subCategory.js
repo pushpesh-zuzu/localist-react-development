@@ -37,20 +37,12 @@ import Warrington from "../assets/Images/servicesLevels/cities/Chester.jpg";
 import Chester from "../assets/Images/servicesLevels/cities/Chester.jpg";
 
 const POPULAR_CITIES = [
-  {
-    city_image: london,
-    city_name: "London",
-},
-  {
-    city_image: birmingham,
-    city_name: "Birmingham",
-},
-  {
-    city_image: liverpool,
-    city_name: "Liverpool",
-},
+  { city_image: Liverpool, city_name: "Liverpool" },
+  { city_image: Manchester, city_name: "Manchester" },
+  { city_image: Chester, city_name: "Chester" },
+  { city_image: Warrington, city_name: "Warrington" },
+  { city_image: EllesmerePort, city_name: "Ellesmere Port" },
 ];
-
 
 const RELATED_PRICE_DATA = {
   "fence-installers": [
@@ -1371,7 +1363,7 @@ const LEVEL_THIRD_SERVICES_NAME = {
   "fence-installers": "Fence & Gate Installation",
   "driveway-installers": "Driveway Installation",
   "patio-services": "Patio Services",
-  "landscaping": "Landscaping",
+  landscaping: "Landscaping",
   "artificial-grass-installation": "Artificial Grass Installation",
 };
 
@@ -1392,5 +1384,5 @@ export {
   CONTENT_CONFIG_BANNER,
   CONTENT_CONFIG_META,
   FIND_SERVICE_CONTENT,
-  LEVEL_THIRD_SERVICES_NAME
+  LEVEL_THIRD_SERVICES_NAME,
 };
