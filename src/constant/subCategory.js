@@ -1156,7 +1156,7 @@ const BREADCRUMB_CONFIG = {
     { title: "Home & Garden", path: "/home" },
     {
       title: "Gardening & Landscaping",
-      path: "/home/gardening-landscaping",
+      path: "/gardening-landscaping",
     },
     { title: "Artificial Grass Installation" }, // no path
   ],
