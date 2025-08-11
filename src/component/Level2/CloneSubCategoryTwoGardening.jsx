@@ -89,8 +89,6 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
   console.log(endpoint, "endpointendpointendpoint");
   const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
-  const message = `from ${subHeader} professionals today`;
-
   const allowedServices = endpointServiceMap[endpoint] || [];
 
   const filteredAllServicesData = AllServicesData.map((categoryObj) => {
@@ -146,7 +144,7 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
         data={getFilterLevelTwoByKey("gardening-landscaping")}
       />
       <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={message} />
+      <GetQuotes message={subHeader} needSString={false} />
     </div>
   );
 };
