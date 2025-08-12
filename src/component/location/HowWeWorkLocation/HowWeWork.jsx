@@ -1,7 +1,6 @@
-import { HowWeWorkLocationData } from "../../../constant/Location";
 import styles from "./HowWeWork.module.css";
 
-const HowWeWork = () => {
+const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData}) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
@@ -25,7 +24,7 @@ const HowWeWork = () => {
         ))}
       </div>
       <button className={styles.ctaButton}>
-        Get quotes from Accountants near you
+        Get quotes from {title}{isNeedS? 's':''} near you
       </button>
     </div>
   );

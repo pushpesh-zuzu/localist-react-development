@@ -31,6 +31,7 @@ import {
   RELATED_SERVICES_DATA,
   REVIEWS_DATA,
   TAXRETURNDATA,
+  POPULAR_CITIES
 } from "../constant/subCategory";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import financeBg from "../assets/Images/financeImg.svg";
@@ -87,7 +88,7 @@ const CloneSubThreeCategory = ({}) => {
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       <PopularCity
-        POPULAR_CITIES_LEVERL_THREE={popularCity}
+        POPULAR_CITIES={POPULAR_CITIES}
         title="Popular Cities"
       />
       {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}

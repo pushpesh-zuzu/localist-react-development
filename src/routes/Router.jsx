@@ -138,7 +138,7 @@ const router = createBrowserRouter([
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
-      { path: "/location", element: <LocationPage /> },
+      { path: "/en/gb/:service/:location", element: <LocationPage /> },
       { path: "/how-it-works", element: <HowItWorksPage /> },
       { path: "/sellers/create", element: <ServicePanelPage /> },
       {

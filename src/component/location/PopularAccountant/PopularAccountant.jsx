@@ -1,11 +1,12 @@
-import { PopularAccountantData } from "../../../constant/Location";
+import { title } from "framer-motion/client";
+// import { PopularAccountantData } from "../../../constant/Location";
 import styles from "./PopularAccountant.module.css";
 
-const PopularAccountant = () => {
+const PopularAccountant = ({title,PopularAccountantData}) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        Popular <span className={styles.highlight}>Accountant?</span>
+        Popular <span className={styles.highlight}>{title}?</span>
       </h2>
       <div className={styles.grid}>
         {PopularAccountantData.map((accountant) => (
