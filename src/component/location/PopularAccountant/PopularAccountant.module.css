@@ -127,7 +127,7 @@
 
 .readMore {
   color: var(--primary-color);
-  cursor: pointer !important;
+  /* cursor: pointer !important; */
   font-weight: 400;
   text-decoration: underline;
 }

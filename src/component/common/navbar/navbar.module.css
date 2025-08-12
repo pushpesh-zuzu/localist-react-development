@@ -979,3 +979,21 @@
 .dropdownItem:hover {
   background-color: #f2f2f2;
 }
+
+.clickableLink {
+  cursor: pointer !important;
+}
+
+.popover_header .clickableLink {
+  cursor: pointer !important;
+}
+
+.popover_header .clickableLink span {
+  cursor: pointer !important;
+}
+
+/* Toggle button for See More/Show Less */
+.toggleButton {
+  cursor: pointer !important;
+  font-weight: bold;
+}

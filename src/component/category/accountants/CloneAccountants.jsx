@@ -39,7 +39,7 @@ const CloneAccountants = ({
   useEffect(() => {
     if (defaultServiceName) {
       setInput(defaultServiceName);
-      setIsDropdownOpen(true);
+      setIsDropdownOpen(false);
       dispatch(searchService({ search: defaultServiceName }));
     }
   }, [defaultServiceName, dispatch]);

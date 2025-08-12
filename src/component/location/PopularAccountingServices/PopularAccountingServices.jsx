@@ -38,7 +38,7 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 
-const PopularAccountingServices = () => {
+const PopularAccountingServices = ({popularHeading,PopularServicesData}) => {
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -50,6 +50,12 @@ const PopularAccountingServices = () => {
         },
         "(max-width: 600px)": {
           slides: { perView: 1, spacing: 5 },
+        },
+        "(max-width: 480px)": {
+          slides: { perView: 1.7, spacing: 15 },
+        },
+        "(max-width: 380px)": {
+          slides: { perView: 1.6, spacing: 10 },
         },
       },
     },
@@ -81,7 +87,8 @@ const PopularAccountingServices = () => {
         </span>
 
         <h2 className={styles.heading}>
-          Popular <span className={styles.highlight}>Accounting Services</span>
+          Popular <span className={styles.highlight}>{popularHeading}</span>
+          {/* eg Accounting Services */}
         </h2>
         <span className={styles.rightArrowWrapper}>
           <img
@@ -96,7 +103,7 @@ const PopularAccountingServices = () => {
       {/* Slider */}
       <div className={styles.sliderWrapper}>
         <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-          {PopularAccountingServicesData.map((service) => (
+          {PopularServicesData.map((service) => (
             <div
               key={service.id}
               className={`keen-slider__slide ${styles.slide}`}

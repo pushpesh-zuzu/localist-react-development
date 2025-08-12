@@ -13,6 +13,7 @@ const FindAccountant = ({
   para2,
   para3,
   panelImage,
+  defaultService,
 }) => {
   const style = {
     backgroundImage: `url(${panelImage})`,
@@ -27,7 +28,7 @@ const FindAccountant = ({
     <>
       {level == 1 && (
         <div className={styles.findAccountantContainer} style={style}>
-          <SearchAccountant title={title} panelImage={panelImage} />
+          <SearchAccountant defaultService={defaultService} title={title} panelImage={panelImage} />
         </div>
       )}
       <div>

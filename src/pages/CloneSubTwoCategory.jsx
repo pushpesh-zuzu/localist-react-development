@@ -29,16 +29,19 @@ const popularFilterLevelTwo = [
       {
         id: 1,
         title: "Fence & Gate Installation",
+        path:'fence-installers',
         image: FenchandGet,
       },
       {
         id: 2,
         title: "Driveway Installation",
+        path:'driveway-installers',
         image: DrivewayInstallation,
       },
       {
         id: 3,
         title: "Patio Services",
+        path:'patio-services',
         image: PatioPatioServices,
       },
     ],
@@ -88,7 +91,6 @@ const CloneSubTwoCategory = ({
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
   console.log(endpoint, "endpointendpointendpoint");
 
-  const message = `from ${subHeader} professionals today`;
 
   const allowedServices = endpointServiceMap[endpoint] || [];
 
@@ -145,7 +147,7 @@ const CloneSubTwoCategory = ({
       />
       <PopularCategories data={getFilterLevelTwoByKey("builders")} />
       <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={message} />
+      <GetQuotes message={subHeader} />
     </div>
   );
 };

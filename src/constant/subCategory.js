@@ -31,24 +31,17 @@ import DrivewayInstallationBanner from "../assets/Images/servicesLevels/banner/D
 import FenceGateInstallationBanner from "../assets/Images/servicesLevels/banner/FenceGate-InstallationBanner.jpg";
 import HomeBanner from "../assets/Images/servicesLevels/banner/HomeBanner.jpg";
 import EllesmerePort from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
-import Liverpool from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
+import Liverpool from "../assets/Images/servicesLevels/cities/Liverpool.jpg";
 import Manchester from "../assets/Images/servicesLevels/cities/Manchester.jpg";
-import Warrington from "../assets/Images/servicesLevels/cities/Chester.jpg";
+import Warrington from "../assets/Images/servicesLevels/cities/Warrington.jpg";
 import Chester from "../assets/Images/servicesLevels/cities/Chester.jpg";
 
 const POPULAR_CITIES = [
-  {
-    city_image: london,
-    city_name: "London",
-  },
-  {
-    city_image: birmingham,
-    city_name: "Birmingham",
-  },
-  {
-    city_image: liverpool,
-    city_name: "Liverpool",
-  },
+  { city_image: Liverpool, city_name: "Liverpool" },
+  { city_image: Manchester, city_name: "Manchester" },
+  { city_image: Chester, city_name: "Chester" },
+  { city_image: Warrington, city_name: "Warrington" },
+  { city_image: EllesmerePort, city_name: "Ellesmere" },
 ];
 
 const RELATED_PRICE_DATA = {
@@ -934,35 +927,35 @@ export const POPULARCITY = {
     { id: 2, city_name: "Manchester", city_image: Manchester },
     { id: 3, city_name: "Chester", city_image: Chester },
     { id: 4, city_name: "Warrington", city_image: Warrington },
-    { id: 5, city_name: "Ellesmere Port", city_image: EllesmerePort },
+    { id: 5, city_name: "Ellesmere", city_image: EllesmerePort },
   ],
   "driveway-installers": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   "patio-services": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   landscaping: [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   "artificial-grass-installation": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
 };
 
@@ -1163,7 +1156,7 @@ const BREADCRUMB_CONFIG = {
     { title: "Home & Garden", path: "/home" },
     {
       title: "Gardening & Landscaping",
-      path: "/home/gardening-landscaping",
+      path: "/gardening-landscaping",
     },
     { title: "Artificial Grass Installation" }, // no path
   ],
@@ -1182,7 +1175,7 @@ const CONTENT_CONFIG_TOP = {
   },
   "patio-services": {
     accountHeader: "Patio Construction",
-    title: "Patio Installers",
+    title: "Patio Installer",
     mainTitle: "Patio Installer",
   },
   landscaping: {
@@ -1366,6 +1359,13 @@ const FIND_SERVICE_CONTENT = {
     },
   ],
 };
+const LEVEL_THIRD_SERVICES_NAME = {
+  "fence-installers": "Fence & Gate Installation",
+  "driveway-installers": "Driveway Installation",
+  "patio-services": "Patio Services",
+  landscaping: "Landscaping",
+  "artificial-grass-installation": "Artificial Grass Installation",
+};
 
 export {
   POPULAR_CITIES,
@@ -1384,4 +1384,5 @@ export {
   CONTENT_CONFIG_BANNER,
   CONTENT_CONFIG_META,
   FIND_SERVICE_CONTENT,
+  LEVEL_THIRD_SERVICES_NAME,
 };

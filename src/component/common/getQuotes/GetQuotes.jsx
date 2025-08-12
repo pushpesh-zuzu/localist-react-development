@@ -2,25 +2,18 @@ import PropTypes from "prop-types";
 import styles from "./GetQuotes.module.css";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
-const GetQuotes = ({ message, title }) => {
+const GetQuotes = ({ message,needSString=true }) => {
   return (
     <div className={styles.container}>
-      {title ? (
-        <button
-          onClick={() => handleScrollToBottom()}
-          className={styles.button}
-        >
-         Get quotes from {title} near you
-        </button>
-      ) : (
-        <button
-          onClick={() => handleScrollToBottom()}
-          className={styles.button}
-        >
-          Get quotes
-        </button>
+      <button onClick={() => handleScrollToBottom()} className={styles.button}>
+        Get quotes
+      </button>
+
+      {message && (
+        <p className={styles.text}>
+          from professional {message.toLowerCase()}{needSString?'s':''} today
+        </p>
       )}
-      {message && <p className={styles.text}>{message}</p>}
     </div>
   );
 };

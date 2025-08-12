@@ -28,7 +28,7 @@ const LogoComponent = () => {
   const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [filterRoute, setFilteRoute] = useState("");
-
+  const [selectedThirdLevelRoute, setSlectedThirdLevelRoute] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showMenu, setShowbMenu] = useState(false);
   const [showThirdLevel, setShowThirdLevel] = useState(false);
@@ -204,8 +204,7 @@ const LogoComponent = () => {
 
                 {totalItems > 5 && (
                   <div
-                    className={styles.popover_content}
-                    style={{ cursor: "pointer !important", fontWeight: "bold" }}
+                    className={`${styles.popover_content} ${styles.toggleButton}`}
                     onClick={handleToggle}
                   >
                     <span className={styles.text_wrap}>
@@ -233,7 +232,7 @@ const LogoComponent = () => {
 
                 <div className={styles.popover_header}>
                   <Link
-                    style={{ cursor: "pointer !important" }}
+                    className={styles.clickableLink}
                     to={`en/gb/${filterRoute}`}
                   >
                     <span>{filterItems}</span>
@@ -248,6 +247,7 @@ const LogoComponent = () => {
                         className={styles.popover_content}
                         onMouseEnter={() => setMouseHover(index)}
                         onMouseLeave={() => setMouseHover("")}
+                        
                       >
                         {/* <span className={styles.text_wrap}>
                           {item.icon && (
@@ -275,14 +275,16 @@ const LogoComponent = () => {
                             className={styles.popover_content}
                             onMouseEnter={() => setMouseHover(subIndex)}
                             onMouseLeave={() => setMouseHover("")}
+                            
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={`/en/gb/${sub.path}`}>{sub.name}</Link>
+                              <Link  to={`/en/gb/${sub.path}`}>{sub.name}</Link>
                             </span>
                             <img
                               onClick={() => {
                                 setSelectedSubcategory(sub.name);
                                 setShowThirdLevel(true);
+                                setSlectedThirdLevelRoute(sub.path)
                               }}
                               src={arrowIcon}
                               width={8}
@@ -311,8 +313,14 @@ const LogoComponent = () => {
                 </div>
                 <hr />
 
-                <div className={styles.popover_header}>
-                  <span>{selectedSubcategory}</span>
+                  <div className={styles.popover_header}>
+                  <Link
+                    className={styles.clickableLink}
+                    to={`en/gb/${selectedThirdLevelRoute}`}
+                  >
+                                      <span>{selectedSubcategory}</span>
+
+                  </Link>
                 </div>
 
                 {megaMenu

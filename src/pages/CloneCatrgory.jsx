@@ -115,7 +115,6 @@ const CloneCategory = ({
 
   const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
-  const message = `from ${subHeader} professionals today`;
 
   ///// logics for popular categories
 
@@ -209,7 +208,7 @@ const CloneCategory = ({
       />
       <PopularCategories data={filteredCategories} />
       <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={message} />
+      <GetQuotes message={subHeader} />
     </div>
   );
 };

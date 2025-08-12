@@ -23,6 +23,7 @@ import {
   FIND_SERVICE_CONTENT,
   FREQUENTLY_DATA,
   HowItWorksData,
+  LEVEL_THIRD_SERVICES_NAME,
   OTHER_SERVICES_DATA,
   POPULARCITY,
   regionsData,
@@ -30,6 +31,7 @@ import {
   RELATED_SERVICES_DATA,
   REVIEWS_DATA,
   TAXRETURNDATA,
+  POPULAR_CITIES
 } from "../constant/subCategory";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import financeBg from "../assets/Images/financeImg.svg";
@@ -78,6 +80,7 @@ const CloneSubThreeCategory = ({}) => {
         para1={CONTENT_CONFIG[slug]?.para1}
         para2={CONTENT_CONFIG[slug]?.para2}
         para3={CONTENT_CONFIG[slug]?.para3}
+        defaultService = {LEVEL_THIRD_SERVICES_NAME[slug]}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks
@@ -85,7 +88,7 @@ const CloneSubThreeCategory = ({}) => {
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       <PopularCity
-        POPULAR_CITIES_LEVERL_THREE={popularCity}
+        POPULAR_CITIES={POPULAR_CITIES}
         title="Popular Cities"
       />
       {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
@@ -124,7 +127,7 @@ const CloneSubThreeCategory = ({}) => {
       <Slider sliderdata={RELATED_PRICE} title={'Related Price Guides'} />
       {/* no need to change only data change*/}
 
-      <GetQuotes title={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
+      <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
       {/* no need to change  */}
     </>
   );

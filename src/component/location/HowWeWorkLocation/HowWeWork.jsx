@@ -1,7 +1,7 @@
-import { HowWeWorkLocationData } from "../../../constant/Location";
+import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowWeWork.module.css";
 
-const HowWeWork = () => {
+const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData}) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
@@ -24,8 +24,8 @@ const HowWeWork = () => {
           </div>
         ))}
       </div>
-      <button className={styles.ctaButton}>
-        Get quotes from Accountants near you
+      <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
+        Get quotes from {title}{isNeedS? 's':''} near you
       </button>
     </div>
   );

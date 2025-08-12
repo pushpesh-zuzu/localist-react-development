@@ -28,8 +28,8 @@ const FooterContent = () => (
       <div className={styles.countryDropdown}>
         <select>
           <option>🇬🇧 UK</option>
-          <option>🇮🇳 India</option>
-          <option>🇺🇸 USA</option>
+          {/* <option>🇮🇳 India</option>
+          <option>🇺🇸 USA</option> */}
         </select>
       </div>
       <div className={styles.trustpilot}>
@@ -119,7 +119,7 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <li onClick={handleJoinAsProfessional}>Find a Professional</li>
+              <li onClick={() => navigate("/")}>Find a Professional</li>
               <li
                 onClick={() => {
                   navigate("/how-it-works");
@@ -140,7 +140,7 @@ const Footer = () => {
               >
                 Login
               </li>
-              <li>Mobile App</li>
+              {/* <li>Mobile App</li> */}
             </ul>
           </div>
 
@@ -158,7 +158,7 @@ const Footer = () => {
               <li onClick={() => navigate("/pricing")}>Pricing</li>
               <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
               <li onClick={handleHelpCenter}>Help Centre</li>
-              <li>Mobile App</li>
+              {/* <li>Mobile App</li> */}
             </ul>
           </div>
 
@@ -166,9 +166,9 @@ const Footer = () => {
             <h4>About</h4>
             <ul>
               <li>About localist</li>
-              <li>Careers</li>
+              {/* <li>Careers</li>
               <li>Blog</li>
-              <li>Press</li>
+              <li>Press</li> */}
             </ul>
           </div>
         </div>
@@ -195,7 +195,7 @@ const Footer = () => {
             <ul>
               <li
                 onClick={() => {
-                  navigate("/sellers/create/");
+                  navigate("/");
                   window.scrollTo(0, 0);
                 }}
               >
@@ -221,7 +221,7 @@ const Footer = () => {
               >
                 Login
               </li>
-              <li>Mobile App</li>
+              {/* <li>Mobile App</li> */}
             </ul>
           </Panel>
           <Panel
@@ -241,15 +241,15 @@ const Footer = () => {
               <li onClick={() => navigate("/pricing")}>Pricing</li>
               <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
               <li>Help Centre</li>
-              <li>Mobile App</li>
+              {/* <li>Mobile App</li> */}
             </ul>
           </Panel>
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <li>About localist</li>
-              <li>Careers</li>
+              {/* <li>Careers</li>
               <li>Blog</li>
-              <li>Press</li>
+              <li>Press</li> */}
             </ul>
           </Panel>
         </Collapse>

@@ -12,17 +12,16 @@ function ServiceBannerWithBreadcrumb({
   para1,
   para2,
   para3,
+  defaultService,
 }) {
   return (
     <>
       {level === 2 && (
-        <CloneAccountants
-          header={accountHeader}
-          panelImage={panelImage}
-        />
+        <CloneAccountants header={accountHeader} panelImage={panelImage} />
       )}
 
       <FindAccountant
+        defaultService={defaultService}
         level={level}
         title={title}
         breadcrumb={breadcrumb}
