@@ -133,8 +133,11 @@ import "./index.css";
 import TextInput from "../../component/customInputs/TextInput";
 import PasswordInput from "../../component/customInputs/PasswordInput";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../store/Auth/authSlice";
-// import { sendPasswordlessLink } from "../../store/Auth/authSlice";
+import {
+  userLogin,
+  sendPasswordlessLink,
+  fetchProfileFromMagicLink,
+} from "../../store/Auth/authSlice";
 import { showToast } from "../../utils";
 import { useEffect, useState } from "react";
 
@@ -152,20 +155,37 @@ const LoginPage = () => {
   const { loginLoader, passwordlessLoader } = useSelector(
     (state) => state.auth
   );
-  // ^ assuming you'll have separate loader for passwordless mode in redux
 
-  // Handle normal login
+  // 🔹 Check if magic link was clicked (client_id in URL)
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientIdBase64 = urlParams.get("client_id");
+
+    if (clientIdBase64) {
+      dispatch(fetchProfileFromMagicLink())
+        .then((res) => {
+          if (res?.profileData?.active_status === 1) {
+            navigate("/leads");
+          } else if (res?.profileData?.active_status === 2) {
+            navigate("/buyers/create");
+          }
+        })
+        .catch((err) => {
+          showToast("error", err.message);
+        });
+    }
+  }, [dispatch, navigate]);
+
+  // 🔹 Normal Login with password
   const handleLogin = (values) => {
     const { email, password } = values;
-    const payload = { email, password };
-
-    dispatch(userLogin(payload))
+    dispatch(userLogin({ email, password }))
       .then((result) => {
         if (result?.success) {
           showToast("success", result?.message || "Login successful!");
-          if (result?.data?.active_status == 1) {
+          if (result?.data?.active_status === 1) {
             navigate("/leads");
-          } else if (result?.data?.active_status == 2) {
+          } else if (result?.data?.active_status === 2) {
             navigate("/buyers/create");
           }
         } else {
@@ -184,29 +204,26 @@ const LoginPage = () => {
       });
   };
 
-  // Handle passwordless send link
+  // 🔹 Send magic link
   const handlePasswordlessSend = (values) => {
-    const { email } = values;
-    const payload = { email };
-
-    // dispatch(sendPasswordlessLink(payload))
-    //   .then((result) => {
-    //     if (result?.success) {
-    //       showToast(
-    //         "success",
-    //         result?.message || "Login link sent to your email!"
-    //       );
-    //     } else {
-    //       showToast("error", result?.message || "Failed to send login link.");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     showToast(
-    //       "error",
-    //       error?.response?.data?.message ||
-    //         "An error occurred. Please try again."
-    //     );
-    //   });
+    dispatch(sendPasswordlessLink({ email: values.email }))
+      .then((result) => {
+        if (result?.success) {
+          showToast(
+            "success",
+            result?.message || "Magic link sent to your email."
+          );
+        } else {
+          showToast("error", result?.message || "Failed to send magic link.");
+        }
+      })
+      .catch((error) => {
+        console.error("Passwordless send error:", error);
+        showToast(
+          "error",
+          error?.message || "An error occurred. Please try again."
+        );
+      });
   };
 
   const onFinish = (values) => {
@@ -215,16 +232,6 @@ const LoginPage = () => {
     } else {
       handleLogin(values);
     }
-  };
-
-  const handlePasswordlessClick = () => {
-    setPasswordless(true);
-    navigate("/passwordless_login");
-  };
-
-  const handleBackToLogin = () => {
-    setPasswordless(false);
-    navigate("/login");
   };
 
   return (
@@ -239,6 +246,7 @@ const LoginPage = () => {
             "Login"
           )}
         </h2>
+
         <Form
           name="login"
           initialValues={{ remember: true }}
@@ -293,7 +301,10 @@ const LoginPage = () => {
                 <Button
                   block
                   className="btnLink"
-                  onClick={handlePasswordlessClick}
+                  onClick={() => {
+                    setPasswordless(true);
+                    navigate("/passwordless_login");
+                  }}
                 >
                   Send me a link to log in
                 </Button>
@@ -304,17 +315,11 @@ const LoginPage = () => {
           {passwordless && (
             <div style={{ textAlign: "left" }}>
               <Text
-                style={{
-                  cursor: "pointer",
-                  fontFamily: "Poppins",
-                  fontWeight: 400,
-                  fontSize: "16px",
-                  lineHeight: "100%",
-                  letterSpacing: "0",
-                  color: "#ABABAB",
-                  textDecoration: "none",
+                style={{ cursor: "pointer", color: "#ABABAB" }}
+                onClick={() => {
+                  setPasswordless(false);
+                  navigate("/login");
                 }}
-                onClick={handleBackToLogin}
               >
                 Back to Login
               </Text>

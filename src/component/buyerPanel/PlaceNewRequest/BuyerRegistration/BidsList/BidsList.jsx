@@ -638,23 +638,27 @@ import {
   getRatingFilterApi,
   ratingFilterApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
-import { BASE_IMAGE, BASE_IMAGE_URL, DEFAULT_PROFILE_IMAGE, showToast } from "../../../../../utils";
+import {
+  BASE_IMAGE,
+  BASE_IMAGE_URL,
+  DEFAULT_PROFILE_IMAGE,
+  showToast,
+} from "../../../../../utils";
 import { Link, useNavigate, useParams } from "react-router-dom";
 // import DummyImage from "../../../../../assets/Images/DummyImage.svg";
-import DummyImage from "../../../../../assets/Images/Setting/ProfileWebIcon.svg"
+import DummyImage from "../../../../../assets/Images/Setting/ProfileWebIcon.svg";
 import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
-import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg"
+import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
-  const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } = useSelector(
-    (state) => state.leadSetting
-  );
+  const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } =
+    useSelector((state) => state.leadSetting);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [ratingList, setRatingList] = useState("")
+  const [ratingList, setRatingList] = useState("");
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
   const { userToken } = useSelector((state) => state.auth);
@@ -666,14 +670,17 @@ const BidsList = ({ previousStep }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const webdesignData = autoBidList?.map((item) => item?.service_name);
-  const matchingLength = autoBidList?.map((item) => item?.sellers?.length)
+  const matchingLength = autoBidList?.map((item) => item?.sellers?.length);
   const [selectedSellers, setSelectedSellers] = useState([]);
-  console.log(autoBidList?.map((item) => item?.sellers?.length), "autoBidList")
+  console.log(
+    autoBidList?.map((item) => item?.sellers?.length),
+    "autoBidList"
+  );
   // Get bidcount from API response
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.displayCount || 0;
-  const isButtonDisabled = bidCount === bidTotal
-  console.log(ratingFilterData, "prem")
+  const isButtonDisabled = bidCount === bidTotal;
+  console.log(ratingFilterData, "prem");
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
   // const showCheckboxes = bidCount !== 5;
@@ -739,14 +746,14 @@ const BidsList = ({ previousStep }) => {
     if (autoBidList?.length > 0 && autoBidList[0]?.sellers?.length > 0) {
       const allowedSelections = parseInt(autoBidList[0]?.displayCount || 0);
 
-      const allowedSellers = autoBidList[0]?.sellers
-        ?.slice(0, allowedSelections)
-        ?.map((seller) => seller.id) || [];
+      const allowedSellers =
+        autoBidList[0]?.sellers
+          ?.slice(0, allowedSelections)
+          ?.map((seller) => seller.id) || [];
 
       setSelectedSellers(allowedSellers);
     }
   }, [autoBidList]);
-
 
   const handleReply = () => {
     navigate(`/bids-list/reply/${requestId}`);
@@ -757,8 +764,8 @@ const BidsList = ({ previousStep }) => {
   };
 
   const hanleViewProfile = (seller) => {
-    console.log(seller, "seller")
-    navigate(`/view-profile/${seller.id}/${requestId}`)
+    console.log(seller, "seller");
+    navigate(`/view-profile/${seller.id}/${requestId}`);
     // const data = {
     //   user_id: userToken?.remember_tokens
     //     ? userToken?.remember_tokens
@@ -772,17 +779,17 @@ const BidsList = ({ previousStep }) => {
     //     showToast("success", result?.message)
     //   }
     // })
-  }
+  };
 
   useEffect(() => {
     const data = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
-      lead_id: requestId
-    }
-    dispatch(getRatingFilterApi(data))
-  }, [])
+      lead_id: requestId,
+    };
+    dispatch(getRatingFilterApi(data));
+  }, []);
   useEffect(() => {
     const count = parseInt(autoBidList?.[0]?.displayCount || 0);
     setVisibleCount(count);
@@ -856,33 +863,33 @@ const BidsList = ({ previousStep }) => {
     });
   };
   const handelChangeSort = (e) => {
-    const selectedOption = e.target.value
-    setLocationSort(selectedOption)
+    const selectedOption = e.target.value;
+    setLocationSort(selectedOption);
     const sortData = {
       lead_id: requestId,
-      distance_order: selectedOption
-    }
-    dispatch(getBuyerSortByLocationApi(sortData))
-  }
+      distance_order: selectedOption,
+    };
+    dispatch(getBuyerSortByLocationApi(sortData));
+  };
   const handelresponseChangeSort = (e) => {
-    const selectedResponse = e.target.value
-    setResponseSort(selectedResponse)
+    const selectedResponse = e.target.value;
+    setResponseSort(selectedResponse);
     const responseData = {
       lead_id: requestId,
-      response_time: selectedResponse
-    }
-    dispatch(getBuyerSortByResponseApi(responseData))
-  }
+      response_time: selectedResponse,
+    };
+    dispatch(getBuyerSortByResponseApi(responseData));
+  };
   const handleSortRating = (e) => {
-    const selectedRating = e.target.value
-    console.log(selectedRating, "oo")
-    setRatingList(selectedRating)
+    const selectedRating = e.target.value;
+    console.log(selectedRating, "oo");
+    setRatingList(selectedRating);
     const ratingData = {
       lead_id: requestId,
-      rating: selectedRating
-    }
-    dispatch(ratingFilterApi(ratingData))
-  }
+      rating: selectedRating,
+    };
+    dispatch(ratingFilterApi(ratingData));
+  };
 
   return (
     <>
@@ -908,7 +915,11 @@ const BidsList = ({ previousStep }) => {
                     ? webdesignData[0]
                     : "No Service"}
                 </h1>
-                <div className={styles.middleText}>Your Top 5 local professional matches are below. You can contact any of the <br /> professionals to get more information using the contact button.</div>
+                <div className={styles.middleText}>
+                  Your Top 5 local professional matches are below. You can
+                  contact any of the <br /> professionals to get more
+                  information using the contact button.
+                </div>
                 <div className={styles.tabs}>
                   <button className={styles.activeTab}>Your matches</button>
                   <button className={styles.tab} onClick={handleReply}>
@@ -964,58 +975,73 @@ const BidsList = ({ previousStep }) => {
              
             </div> */}
 
+            <div className={styles.filters}>
+              {/* Match Count on top */}
+              <div className={styles.matchCountWrapper}>
+                <span className={styles.matchCount}>
+                  {matchingLength} matches
+                </span>
+              </div>
 
-<div className={styles.filters}>
-  {/* Match Count on top */}
-  <div className={styles.matchCountWrapper}>
-    <span className={styles.matchCount}>{matchingLength} matches</span>
-  </div>
+              {/* Selects below */}
+              <div className={styles.selectsWrapper}>
+                <select
+                  className={styles.customSelect}
+                  onChange={handleSortRating}
+                  value={ratingList}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    All ratings
+                  </option>
+                  {ratingFilterData[0]?.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.value < 5
+                        ? `${item.value} Star & up`
+                        : `${item.value} Star`}
+                    </option>
+                  ))}
+                </select>
 
-  {/* Selects below */}
-  <div className={styles.selectsWrapper}>
-    <select
-      className={styles.customSelect}
-      onChange={handleSortRating}
-      value={ratingList}
-      defaultValue=""
-    >
-      <option value="" disabled>All ratings</option>
-      {ratingFilterData[0]?.map((item) => (
-        <option key={item.value} value={item.value}>
-          {item.value < 5 ? `${item.value} Star & up` : `${item.value} Star`}
-        </option>
-      ))}
-    </select>
+                <select
+                  onChange={handelChangeSort}
+                  defaultValue=""
+                  value={locationSort}
+                  className={styles.customSelect}
+                >
+                  <option value="" disabled>
+                    Sort by Location
+                  </option>
+                  <option value="farthest to nearest">
+                    Farthest to Nearest
+                  </option>
+                  <option value="nearest to farthest">
+                    Nearest to Farthest
+                  </option>
+                </select>
 
-    <select
-      onChange={handelChangeSort}
-      defaultValue=""
-      value={locationSort}
-      className={styles.customSelect}
-    >
-      <option value="" disabled>Sort by Location</option>
-      <option value="farthest to nearest">Farthest to Nearest</option>
-      <option value="nearest to farthest">Nearest to Farthest</option>
-    </select>
-
-    <select
-      onChange={handelresponseChangeSort}
-      defaultValue=""
-      value={responseSort}
-      className={styles.customSelect}
-    >
-      <option value="" disabled>Response time</option>
-      <option value="Responds within 10 mins">within 10 mins</option>
-      <option value="Responds within 1 hour">within 1 hour</option>
-      <option value="Responds within 6 hours">within 6 hours</option>
-      <option value="Responds within 24 hours">within 24 hours</option>
-    </select>
-  </div>
-</div>
-
-          
-
-
+                <select
+                  onChange={handelresponseChangeSort}
+                  defaultValue=""
+                  value={responseSort}
+                  className={styles.customSelect}
+                >
+                  <option value="" disabled>
+                    Response time
+                  </option>
+                  <option value="Responds within 10 mins">
+                    within 10 mins
+                  </option>
+                  <option value="Responds within 1 hour">within 1 hour</option>
+                  <option value="Responds within 6 hours">
+                    within 6 hours
+                  </option>
+                  <option value="Responds within 24 hours">
+                    within 24 hours
+                  </option>
+                </select>
+              </div>
+            </div>
 
             <div className={styles.recommendBar}>
               <div className={styles.recommendBox}>
@@ -1023,7 +1049,11 @@ const BidsList = ({ previousStep }) => {
                   <span>Recommended:</span> Request replies from your{" "}
                   <strong>top matches</strong> to hear back faster
                 </div>
-                <button className={styles.requestBtn} onClick={handleMultple} disabled={isButtonDisabled}>
+                <button
+                  className={styles.requestBtn}
+                  onClick={handleMultple}
+                  disabled={isButtonDisabled}
+                >
                   Request your best matches here
                 </button>
               </div>
@@ -1038,7 +1068,7 @@ const BidsList = ({ previousStep }) => {
               </button>
             </div>
             {/* {bidListLoader ? <Spin size="small"/> :  <> */}
-            {autoBidList?.every(item => item?.sellers?.length === 0) ? (
+            {autoBidList?.every((item) => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
                 <h1 className={styles.noBidText}>No seller available</h1>
               </div>
@@ -1081,7 +1111,6 @@ const BidsList = ({ previousStep }) => {
                           </div> */}
                           <div className={styles.sidebar}>
                             <div className={styles.rating}>
-
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
@@ -1094,18 +1123,22 @@ const BidsList = ({ previousStep }) => {
                                         } else if (rating >= index + 0.5) {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
-                                          return <span key={index}><img src={grayStar} alt="image" /></span>; // Empty star
+                                          return (
+                                            <span key={index}>
+                                              <img src={grayStar} alt="image" />
+                                            </span>
+                                          ); // Empty star
                                         }
                                       })}
                                     </span>
-                                    <span className={styles.ratingCount}>{rating}</span>
+                                    <span className={styles.ratingCount}>
+                                      {rating}
+                                    </span>
                                   </>
                                 );
                               })()}
                             </div>
                           </div>
-
-
                         </div>
                         <div className={styles.mobileImageWrapper}>
                           <div className={styles.imageWrapper}>
@@ -1132,7 +1165,6 @@ const BidsList = ({ previousStep }) => {
                               away
                             </p>
                           </div>
-
                         </div>
                         <div>
                           <div className={styles.sidebar}>
@@ -1140,7 +1172,6 @@ const BidsList = ({ previousStep }) => {
                               <span>{seller?.service_name}</span>
                             </div>
                             <div className={styles.ratings}>
-
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
@@ -1153,25 +1184,34 @@ const BidsList = ({ previousStep }) => {
                                         } else if (rating >= index + 0.5) {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
-                                          return <span key={index} className={styles.grayImg}>★</span>; // Empty star
+                                          return (
+                                            <span
+                                              key={index}
+                                              className={styles.grayImg}
+                                            >
+                                              ★
+                                            </span>
+                                          ); // Empty star
                                         }
                                       })}
                                     </span>
-                                    <span className={styles.ratingCount}>{rating}</span>
+                                    <span className={styles.ratingCount}>
+                                      {rating}
+                                    </span>
                                   </>
                                 );
                               })()}
                             </div>
                           </div>
-
-
                         </div>
                         <div className={styles.badges}>
                           <span>{seller?.service_name}</span>
                         </div>
 
                         <p className={styles.description}>
-                        {item?.about_company ? item?.about_company : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."}
+                          {item?.about_company
+                            ? item?.about_company
+                            : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."}
                         </p>
 
                         <div className={styles.quickToRespondWrapper}>
@@ -1183,10 +1223,12 @@ const BidsList = ({ previousStep }) => {
                             View Profile →
                           </Link>
 
-                          {seller?.quicktorespond == 1 && <div className={styles.quickToRespond}>
-                            <img src={QuickToRespond} alt="" />
-                            Quick to respond
-                          </div>}
+                          {seller?.quicktorespond == 1 && (
+                            <div className={styles.quickToRespond}>
+                              <img src={QuickToRespond} alt="" />
+                              Quick to respond
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -1222,7 +1264,8 @@ const BidsList = ({ previousStep }) => {
                             // }
                             disabled={
                               !selectedSellers.includes(seller.id) &&
-                              selectedSellers.length >= parseInt(autoBidList?.[0]?.displayCount || 0)
+                              selectedSellers.length >=
+                                parseInt(autoBidList?.[0]?.displayCount || 0)
                             }
                           />
                         </div>
@@ -1231,7 +1274,7 @@ const BidsList = ({ previousStep }) => {
                           onClick={() => {
                             setSelectedItem(seller);
                             // setModalOpen(true);
-                            handleContinue(seller)
+                            handleContinue(seller);
                           }}
                         >
                           Contact the Professional Now
@@ -1242,8 +1285,6 @@ const BidsList = ({ previousStep }) => {
                 ))
               )
             )}
-
-
 
             <CustomModal
               isOpen={isModalOpen}

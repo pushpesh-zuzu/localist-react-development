@@ -160,6 +160,348 @@
 
 // export default MatchingLeads;
 
+// import React, { useEffect, useRef, useState } from "react";
+// import styles from "./MatchingLeads.module.css";
+// import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
+// import LocationIcon from "../../../../assets/Images/Leads/WhiteLocationIcon.svg";
+// import FilterIcon from "../../../../assets/Images/Leads/FilterIcon.svg";
+// import EditIcon from "../../../../assets/Images/Leads/EditIconWhite.svg";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import {
+//   getLeadFiterApiList,
+//   getleadPreferencesList,
+//   getLeadRequestList,
+//   getLocationLead,
+// } from "../../../../store/LeadSetting/leadSettingSlice";
+// import MatchingLeadsFilter from "./MatchingLeadsFilter";
+// import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg"
+
+// const MatchingLeads = () => {
+//   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+
+//   const [isSortOpen, setIsSortOpen] = useState(false);
+//   const [selectedSort, setSelectedSort] = useState("Newest");
+//   const sortOptions = ["Newest", "Oldest"];
+
+//   const [isFilterOpen, setIsFilterOpen] = useState(false);
+//   const [selectedFilter, setSelectedFilter] = useState("Credit Value High");
+//   const filterOptions = [
+//     "Credit Value High",
+//     "Credit Value Medium",
+//     "Credit Value Low",
+//   ];
+
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+//   const { leadRequestList, getlocationData,preferenceList } = useSelector(
+//     (state) => state.leadSetting
+//   );
+//    const { registerData } = useSelector((state) => state.findJobs)
+//   const { userToken } = useSelector((state) => state.auth);
+//   const data = leadRequestList?.length;
+// console.log(preferenceList?.length,"preferenceList")
+//   const uniqueServiceNames = [
+//     ...new Set(leadRequestList.map((item) => item.category?.name)),
+//   ];
+
+//   useEffect(()=> {
+//     const data = {
+//       user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens
+//     }
+// dispatch(getleadPreferencesList(data))
+//   },[])
+
+//   // Function to get credit filter value
+//   const getCreditFilterValue = (filterOption) => {
+//     switch (filterOption) {
+//       case "Credit Value High":
+//         return "High";
+//       case "Credit Value Medium":
+//         return "Medium";
+//       case "Credit Value Low":
+//         return "Low";
+//       default:
+//         return "High";
+//     }
+//   };
+
+//   // Function to get sort type value
+//   const getSortTypeValue = (sortOption) => {
+//     switch (sortOption) {
+//       case "Newest":
+//         return "Newest";
+//       case "Oldest":
+//         return "Oldest";
+//       default:
+//         return "Newest";
+//     }
+//   };
+
+//   // Handle changes to sort dropdown
+//   const handleSortChange = (option) => {
+//     setSelectedSort(option);
+//     setIsSortOpen(false);
+
+//     // Apply only sort filter, leave credit filter unchanged
+//     if (userToken?.remember_tokens || registerData?.remember_tokens) {
+//       const filterData = {
+//         user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
+//         sort_type: getSortTypeValue(option),
+//         // Don't include credit_filter
+//       };
+//       dispatch(getLeadFiterApiList(filterData));
+//     }
+//   };
+
+//   // Handle changes to credit filter dropdown
+//   const handleFilterChange = (option) => {
+//     setSelectedFilter(option);
+//     setIsFilterOpen(false);
+
+//     // Apply only credit filter, leave sort type unchanged
+//     if (userToken?.remember_tokens || registerData?.remember_tokens) {
+//       const filterData = {
+//         user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
+//         // Don't include sort_type
+//         credit_filter: getCreditFilterValue(option)
+//       };
+//       dispatch(getLeadFiterApiList(filterData));
+//     }
+//   };
+
+//   const locationLength = getlocationData?.length;
+
+//   // useEffect(() => {
+//   //   if (userToken?.remember_tokens) {
+//   //     const location = {
+//   //       user_id: userToken?.remember_tokens,
+//   //     };
+//   //     dispatch(getLocationLead(location));
+
+//   //     // Initial load of leads - don't send any filters initially
+//   //     // const filterData = {
+//   //     //   user_id: userToken?.remember_tokens,
+//   //     // };
+//   //     // dispatch(getLeadFiterApiList(filterData));
+//   //   }
+//   // }, [userToken?.remember_tokens, dispatch]);
+
+//   const handleEdit = () => {
+//     navigate("/leads/settings");
+//   };
+
+//   const handleFilterClick = () => {
+//     setIsFilterModalOpen(true);
+//   };
+
+//   const handleCloseModal = () => {
+//     setIsFilterModalOpen(false);
+//   };
+// const triggerRef = useRef(null);
+//   const stickyRef = useRef(null);
+//     const {  totalCredit } = useSelector(
+//       (state) => state.leadSetting
+//     );
+
+//  useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.boundingClientRect.top <= 0) {
+//           stickyRef.current.classList.add(styles.fixedTop);
+//         } else {
+//           stickyRef.current.classList.remove(styles.fixedTop);
+//         }
+//       },
+//       {
+//         root: null,
+//         threshold: 0,
+//       }
+//     );
+
+//     const trigger = triggerRef.current;
+//     if (trigger) observer.observe(trigger);
+
+//     return () => {
+//       if (trigger) observer.unobserve(trigger);
+//     };
+//   }, []);
+//   return (
+//       <>
+//     <div className={styles.container}>
+//       <div className={styles.textSection}>
+//       {/* <div> */}
+//           <h2 className={styles.heading}>{data} matching leads</h2>
+//         <p className={styles.subText}>
+//           <span className={styles.subTextSpan}>
+//             <img src={SettingIcon} alt="" /> {preferenceList?.length}{" "}
+//             services{" "}
+//           </span>
+//           {/* <span className={styles.subTextSpan}>
+//             <img src={LocationIcon} alt="" /> {locationLength} Location
+//           </span> */}
+//         </p>
+//       </div>
+//        <div className={styles.btnDisplay}>
+//         <button className={styles.editButtons} onClick={handleEdit}>
+//             Edit <img src={EditIcon} alt="" />
+//           </button>
+//           </div>
+//       {/* </div> */}
+
+//       <div className={styles.dualDropdownsContainer}>
+//         {/* First Dropdown - Newest */}
+//         <div className={styles.dropdownWrapper}>
+//           <button
+//             className={styles.dropdownTriggers}
+//             onClick={() => setIsSortOpen(!isSortOpen)}
+//             onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
+//           >
+//             <span className={styles.selectedOption}>{selectedSort}</span>
+//             <span className={styles.dropdownIcon}>
+//               {isSortOpen ? "▲" : "▼"}
+//             </span>
+//           </button>
+
+//           {isSortOpen && (
+//             <ul className={styles.dropdownMenu}>
+//               {sortOptions.map((option) => (
+//                 <li key={option} className={styles.dropdownItem}>
+//                   <button
+//                     onClick={() => handleSortChange(option)}
+//                     className={styles.dropdownButton}
+//                   >
+//                     {option}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         {/* Second Dropdown - Credit Value */}
+//         <div className={styles.dropdownWrapper}>
+//           <button
+//             className={styles.dropdownTrigger}
+//             onClick={() => setIsFilterOpen(!isFilterOpen)}
+//             onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
+//           >
+//             <span className={styles.selectedOption}>{selectedFilter}</span>
+//             <span className={styles.dropdownIcon}>
+//               {isFilterOpen ? "▲" : "▼"}
+//             </span>
+//           </button>
+
+//           {isFilterOpen && (
+//             <ul className={styles.dropdownMenus}>
+//               {filterOptions.map((option) => (
+//                 <li key={option} className={styles.dropdownItem}>
+//                   <button
+//                     onClick={() => handleFilterChange(option)}
+//                     className={styles.dropdownButton}
+//                   >
+//                     {option}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         <div className={styles.actionButtons}>
+//           <button className={styles.filterButton} onClick={handleFilterClick}>
+//             <img src={FilterIcon} alt="" /> Filter
+//           </button>
+//           <button className={styles.editButton} onClick={handleEdit}>
+//             Edit <img src={EditIcon} alt="" />
+//           </button>
+//         </div>
+//       </div>
+
+//       {isFilterModalOpen && <MatchingLeadsFilter onClose={handleCloseModal} />}
+//     </div>
+
+//      <div className={styles.dualDropdownsContainers}>
+//         {/* First Dropdown - Newest */}
+//         <div className={styles.dropdownWrappers}>
+//           <button
+//             className={styles.dropdownTriggers}
+//             onClick={() => setIsSortOpen(!isSortOpen)}
+//             onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
+//           >
+//             <span className={styles.selectedOption}>{selectedSort}</span>
+//             <span className={styles.dropdownIcon}>
+//               {isSortOpen ? "▲" : "▼"}
+//             </span>
+//           </button>
+
+//           {isSortOpen && (
+//             <ul className={styles.dropdownMenu}>
+//               {sortOptions.map((option) => (
+//                 <li key={option} className={styles.dropdownItem}>
+//                   <button
+//                     onClick={() => handleSortChange(option)}
+//                     className={styles.dropdownButton}
+//                   >
+//                     {option}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         {/* Second Dropdown - Credit Value */}
+//         <div className={styles.dropdownWrapper}>
+//           <button
+//             className={styles.dropdownTrigger}
+//             onClick={() => setIsFilterOpen(!isFilterOpen)}
+//             onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
+//           >
+//             <span className={styles.selectedOption}>{selectedFilter}</span>
+//             <span className={styles.dropdownIcon}>
+//               {isFilterOpen ? "▲" : "▼"}
+//             </span>
+//           </button>
+
+//           {isFilterOpen && (
+//             <ul className={styles.dropdownMenus}>
+//               {filterOptions.map((option) => (
+//                 <li key={option} className={styles.dropdownItem}>
+//                   <button
+//                     onClick={() => handleFilterChange(option)}
+//                     className={styles.dropdownButton}
+//                   >
+//                     {option}
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         <div className={styles.actionButton}>
+//           <button className={styles.filterButtons} onClick={handleFilterClick}>
+//             <img src={FilterBlackIcon} alt="" /> Filter
+//           </button>
+
+//         </div>
+//       </div>
+//       <div className={styles.desktopBtn}>
+//        <div ref={triggerRef} style={{ height: '1px' }}></div>
+
+//             <div ref={stickyRef} className={styles.creditsLeftContainer}>
+//               <button className={styles.creditsButton}>
+//                 You have {totalCredit?.total_credit ?? '0'} Credits Left
+//               </button>
+//             </div>
+//             </div>
+//     </>
+//   );
+// };
+
+// export default MatchingLeads;
+
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeads.module.css";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
@@ -175,16 +517,13 @@ import {
   getLocationLead,
 } from "../../../../store/LeadSetting/leadSettingSlice";
 import MatchingLeadsFilter from "./MatchingLeadsFilter";
-import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg"
+import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg";
 
 const MatchingLeads = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
-
-  const [isSortOpen, setIsSortOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
 
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState("Credit Value High");
   const filterOptions = [
     "Credit Value High",
@@ -194,25 +533,26 @@ const MatchingLeads = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { leadRequestList, getlocationData,preferenceList } = useSelector(
-    (state) => state.leadSetting
-  );
-   const { registerData } = useSelector((state) => state.findJobs)
+  const { leadRequestList, getlocationData, preferenceList, totalCredit } =
+    useSelector((state) => state.leadSetting);
+  const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
+
   const data = leadRequestList?.length;
-console.log(preferenceList?.length,"preferenceList")
-  const uniqueServiceNames = [
-    ...new Set(leadRequestList.map((item) => item.category?.name)),
-  ];
+  const locationLength = getlocationData?.length;
 
-  useEffect(()=> {
+  const triggerRef = useRef(null);
+  const stickyRef = useRef(null);
+
+  useEffect(() => {
     const data = {
-      user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens
-    }
-dispatch(getleadPreferencesList(data))
-  },[])
+      user_id: userToken?.remember_tokens
+        ? userToken?.remember_tokens
+        : registerData?.remember_tokens,
+    };
+    dispatch(getleadPreferencesList(data));
+  }, []);
 
-  // Function to get credit filter value
   const getCreditFilterValue = (filterOption) => {
     switch (filterOption) {
       case "Credit Value High":
@@ -226,7 +566,6 @@ dispatch(getleadPreferencesList(data))
     }
   };
 
-  // Function to get sort type value
   const getSortTypeValue = (sortOption) => {
     switch (sortOption) {
       case "Newest":
@@ -238,54 +577,31 @@ dispatch(getleadPreferencesList(data))
     }
   };
 
-  // Handle changes to sort dropdown
   const handleSortChange = (option) => {
     setSelectedSort(option);
-    setIsSortOpen(false);
-    
-    // Apply only sort filter, leave credit filter unchanged
     if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
         sort_type: getSortTypeValue(option),
-        // Don't include credit_filter
       };
       dispatch(getLeadFiterApiList(filterData));
     }
   };
 
-  // Handle changes to credit filter dropdown
   const handleFilterChange = (option) => {
     setSelectedFilter(option);
-    setIsFilterOpen(false);
-    
-    // Apply only credit filter, leave sort type unchanged
     if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens :  registerData?.remember_tokens,
-        // Don't include sort_type
-        credit_filter: getCreditFilterValue(option)
+        user_id: userToken?.remember_tokens
+          ? userToken?.remember_tokens
+          : registerData?.remember_tokens,
+        credit_filter: getCreditFilterValue(option),
       };
       dispatch(getLeadFiterApiList(filterData));
     }
   };
-
-  const locationLength = getlocationData?.length;
-  
-  // useEffect(() => {
-  //   if (userToken?.remember_tokens) {
-  //     const location = {
-  //       user_id: userToken?.remember_tokens,
-  //     };
-  //     dispatch(getLocationLead(location));
-      
-  //     // Initial load of leads - don't send any filters initially
-  //     // const filterData = {
-  //     //   user_id: userToken?.remember_tokens,
-  //     // };
-  //     // dispatch(getLeadFiterApiList(filterData));
-  //   }
-  // }, [userToken?.remember_tokens, dispatch]);
 
   const handleEdit = () => {
     navigate("/leads/settings");
@@ -298,13 +614,8 @@ dispatch(getleadPreferencesList(data))
   const handleCloseModal = () => {
     setIsFilterModalOpen(false);
   };
-const triggerRef = useRef(null);
-  const stickyRef = useRef(null);
-    const {  totalCredit } = useSelector(
-      (state) => state.leadSetting
-    );
 
- useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.boundingClientRect.top <= 0) {
@@ -326,182 +637,116 @@ const triggerRef = useRef(null);
       if (trigger) observer.unobserve(trigger);
     };
   }, []);
+
   return (
-      <>
-    <div className={styles.container}>
-      <div className={styles.textSection}>
-      {/* <div> */}
+    <>
+      <div className={styles.container}>
+        <div className={styles.textSection}>
           <h2 className={styles.heading}>{data} matching leads</h2>
-        <p className={styles.subText}>
-          <span className={styles.subTextSpan}>
-            <img src={SettingIcon} alt="" /> {preferenceList?.length}{" "}
-            services{" "}
-          </span>
-          {/* <span className={styles.subTextSpan}>
-            <img src={LocationIcon} alt="" /> {locationLength} Location
-          </span> */}
-        </p>
-      </div>
-       <div className={styles.btnDisplay}>
-        <button className={styles.editButtons} onClick={handleEdit}>
+          <p className={styles.subText}>
+            <span className={styles.subTextSpan}>
+              <img src={SettingIcon} alt="" /> {preferenceList?.length} services{" "}
+            </span>
+          </p>
+        </div>
+        <div className={styles.btnDisplay}>
+          <button className={styles.editButtons} onClick={handleEdit}>
             Edit <img src={EditIcon} alt="" />
           </button>
-          </div>
-      {/* </div> */}
+        </div>
 
-      <div className={styles.dualDropdownsContainer}>
-        {/* First Dropdown - Newest */}
-        <div className={styles.dropdownWrapper}>
-          <button
-            className={styles.dropdownTriggers}
-            onClick={() => setIsSortOpen(!isSortOpen)}
-            onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
-          >
-            <span className={styles.selectedOption}>{selectedSort}</span>
-            <span className={styles.dropdownIcon}>
-              {isSortOpen ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {isSortOpen && (
-            <ul className={styles.dropdownMenu}>
+        <div className={styles.dualDropdownsContainer}>
+          {/* First Dropdown - Newest */}
+          <div className={styles.dropdownWrapper}>
+            <select
+              className={styles.dropdownTriggers}
+              value={selectedSort}
+              onChange={(e) => handleSortChange(e.target.value)}
+            >
               {sortOptions.map((option) => (
-                <li key={option} className={styles.dropdownItem}>
-                  <button
-                    onClick={() => handleSortChange(option)}
-                    className={styles.dropdownButton}
-                  >
-                    {option}
-                  </button>
-                </li>
+                <option key={option} value={option}>
+                  {option}
+                </option>
               ))}
-            </ul>
-          )}
-        </div>
+            </select>
+          </div>
 
-        {/* Second Dropdown - Credit Value */}
-        <div className={styles.dropdownWrapper}>
-          <button
-            className={styles.dropdownTrigger}
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
-          >
-            <span className={styles.selectedOption}>{selectedFilter}</span>
-            <span className={styles.dropdownIcon}>
-              {isFilterOpen ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {isFilterOpen && (
-            <ul className={styles.dropdownMenus}>
+          {/* Second Dropdown - Credit Value */}
+          <div className={styles.dropdownWrapper}>
+            <select
+              className={styles.dropdownTrigger}
+              value={selectedFilter}
+              onChange={(e) => handleFilterChange(e.target.value)}
+            >
               {filterOptions.map((option) => (
-                <li key={option} className={styles.dropdownItem}>
-                  <button
-                    onClick={() => handleFilterChange(option)}
-                    className={styles.dropdownButton}
-                  >
-                    {option}
-                  </button>
-                </li>
+                <option key={option} value={option}>
+                  {option}
+                </option>
               ))}
-            </ul>
-          )}
+            </select>
+          </div>
+
+          <div className={styles.actionButtons}>
+            <button className={styles.filterButton} onClick={handleFilterClick}>
+              <img src={FilterIcon} alt="" /> Filter
+            </button>
+            <button className={styles.editButton} onClick={handleEdit}>
+              Edit <img src={EditIcon} alt="" />
+            </button>
+          </div>
         </div>
 
-        <div className={styles.actionButtons}>
-          <button className={styles.filterButton} onClick={handleFilterClick}>
-            <img src={FilterIcon} alt="" /> Filter
-          </button>
-          <button className={styles.editButton} onClick={handleEdit}>
-            Edit <img src={EditIcon} alt="" />
-          </button>
-        </div>
+        {isFilterModalOpen && (
+          <MatchingLeadsFilter onClose={handleCloseModal} />
+        )}
       </div>
 
-
-
-
-      
-
-
-      {isFilterModalOpen && <MatchingLeadsFilter onClose={handleCloseModal} />}
-    </div>
-  
-     <div className={styles.dualDropdownsContainers}>
+      <div className={styles.dualDropdownsContainers}>
         {/* First Dropdown - Newest */}
         <div className={styles.dropdownWrappers}>
-          <button
+          <select
             className={styles.dropdownTriggers}
-            onClick={() => setIsSortOpen(!isSortOpen)}
-            onBlur={() => setTimeout(() => setIsSortOpen(false), 200)}
+            value={selectedSort}
+            onChange={(e) => handleSortChange(e.target.value)}
           >
-            <span className={styles.selectedOption}>{selectedSort}</span>
-            <span className={styles.dropdownIcon}>
-              {isSortOpen ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {isSortOpen && (
-            <ul className={styles.dropdownMenu}>
-              {sortOptions.map((option) => (
-                <li key={option} className={styles.dropdownItem}>
-                  <button
-                    onClick={() => handleSortChange(option)}
-                    className={styles.dropdownButton}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+            {sortOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Second Dropdown - Credit Value */}
-        <div className={styles.dropdownWrapper}>
-          <button
-            className={styles.dropdownTrigger}
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            onBlur={() => setTimeout(() => setIsFilterOpen(false), 200)}
-          >
-            <span className={styles.selectedOption}>{selectedFilter}</span>
-            <span className={styles.dropdownIcon}>
-              {isFilterOpen ? "▲" : "▼"}
-            </span>
-          </button>
-
-          {isFilterOpen && (
-            <ul className={styles.dropdownMenus}>
-              {filterOptions.map((option) => (
-                <li key={option} className={styles.dropdownItem}>
-                  <button
-                    onClick={() => handleFilterChange(option)}
-                    className={styles.dropdownButton}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/* <div className={styles.dropdownWrapper}> */}
+        <select
+          className={styles.dropdownTrigger}
+          value={selectedFilter}
+          onChange={(e) => handleFilterChange(e.target.value)}
+        >
+          {filterOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        {/* </div> */}
 
         <div className={styles.actionButton}>
           <button className={styles.filterButtons} onClick={handleFilterClick}>
             <img src={FilterBlackIcon} alt="" /> Filter
           </button>
-          
         </div>
       </div>
+
       <div className={styles.desktopBtn}>
-       <div ref={triggerRef} style={{ height: '1px' }}></div>
-      
-            <div ref={stickyRef} className={styles.creditsLeftContainer}>
-              <button className={styles.creditsButton}>
-                You have {totalCredit?.total_credit ?? '0'} Credits Left
-              </button>
-            </div>
-            </div>
+        <div ref={triggerRef} style={{ height: "1px" }}></div>
+        <div ref={stickyRef} className={styles.creditsLeftContainer}>
+          <button className={styles.creditsButton}>
+            You have {totalCredit?.total_credit ?? "0"} Credits Left
+          </button>
+        </div>
+      </div>
     </>
   );
 };
