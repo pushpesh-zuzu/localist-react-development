@@ -11,7 +11,7 @@ const GetQuotes = ({ message,needSString=true }) => {
 
       {message && (
         <p className={styles.text}>
-          from {message.toLowerCase()}{needSString?'s':''} professionals today
+          from professional {message.toLowerCase()}{needSString?'s':''} today
         </p>
       )}
     </div>
