@@ -124,6 +124,7 @@
 }
 
 @media (max-width: 520px) {
+  /* Keep existing styles */
   .cityContainer {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -133,23 +134,55 @@
   .popularcityContainer span {
     font-size: 30px;
   }
+  
+  /* Modified styles for centering */
   .cityName {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 24px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 5px;
+    white-space: normal; /* Changed from nowrap */
+    text-align: center; /* Added */
+    padding: 0 10px; /* Increased padding */
+    overflow: visible; /* Changed from hidden */
   }
+  
   .cityNameBtn button {
-    font-size: 13px;
-    padding: 8px;
+    font-size: 11px; /* Slightly increased from 10px */
+    padding: 8px 12px;
+    margin: 0 auto; /* Center button */
+    display: block; /* Needed for margin auto */
     white-space: nowrap;
   }
 
   .cityNameBtn {
     gap: 10px;
-    padding: 0 4px 4px 4px;
+    padding: 10px; /* Increased padding */
+    align-items: center; /* Added */
+  }
+
+  /* New styles for image centering */
+  .cityBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .cityBox img {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  /* Slider container adjustments */
+  .slider {
+    padding: 0 10px;
+  }
+
+  .keen-slider__slide {
+    display: flex !important;
+    justify-content: center;
   }
 }
 
