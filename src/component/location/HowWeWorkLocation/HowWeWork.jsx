@@ -1,3 +1,4 @@
+import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowWeWork.module.css";
 
 const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData}) => {
@@ -23,7 +24,7 @@ const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData}) => {
           </div>
         ))}
       </div>
-      <button className={styles.ctaButton}>
+      <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
         Get quotes from {title}{isNeedS? 's':''} near you
       </button>
     </div>

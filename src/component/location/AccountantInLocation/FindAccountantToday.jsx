@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./FindAccountantInLocation.module.css";
 import Breadcrumb from "../../common/BreadCrum/Breadcrum";
-import ScrollToTop from "../../../routes/ScrollToTop";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 const FindAccountantToday = ({
   breadcrumb,
@@ -28,7 +28,7 @@ const FindAccountantToday = ({
           <p>{findData?.para2}</p>
           {findData?.para3 && <p>{findData?.para3}</p>}
         </div>
-        <button onClick={() => ScrollToTop()} className={styles.accountantBtn}>
+        <button onClick={() => handleScrollToBottom()} className={styles.accountantBtn}>
           Find an {title} today
         </button>
       </div>
