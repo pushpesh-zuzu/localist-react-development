@@ -1,11 +1,11 @@
 import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowWeWork.module.css";
 
-const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData}) => {
+const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData,heading =''}) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        How <span className={styles.highlight}>We Work</span>
+        How <span className={styles.highlight}>{heading? heading :"We"} Work</span>
       </h2>
       <div className={styles.stepsContainer}>
         {HowWeWorkLocationData.map((item, index) => (

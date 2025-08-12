@@ -6,7 +6,7 @@ const GetQuotesLocation = ({ service,needSString=true,location }) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleScrollToBottom()} className={styles.button}>
-        Get quotes
+        Get Quotes
       </button>
 
       {service && (

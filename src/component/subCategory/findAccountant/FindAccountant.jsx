@@ -14,6 +14,7 @@ const FindAccountant = ({
   para3,
   panelImage,
   defaultService,
+  isNeedS
 }) => {
   const style = {
     backgroundImage: `url(${panelImage})`,
@@ -40,6 +41,7 @@ const FindAccountant = ({
           para1={para1}
           para2={para2}
           para3={para3}
+          isNeedS={isNeedS}
         />
       </div>
     </>

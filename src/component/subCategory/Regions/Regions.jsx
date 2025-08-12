@@ -8,14 +8,17 @@ import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowIcon from "../../../assets/Images/subcategory/arrowicon.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 
-const RegionsComponent = ({ regionsData }) => {
+const RegionsComponent = ({ regionsData, heading = "" }) => {
   const allPanelKeys = regionsData?.map((panel) => panel.key);
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>
-        <span className={styles.blueTitle}>Regions</span>
-        We Work In <img src={arrowDownIcon} width={44} />
+        <span className={styles.blueTitle}>
+          {heading ? heading : "Regions"}
+        </span>
+        {heading ? "Places" : "We Work In"}{" "}
+        {heading ? "" : <img src={arrowDownIcon} width={44} />}
       </h2>
       {regionsData?.map((category, index) => {
         const categoryName = Object?.keys(category)[1];
@@ -48,7 +51,7 @@ const RegionsComponent = ({ regionsData }) => {
               className={`${styles.categoryTitle} ${
                 isNorthWestEngland ? styles.disabledPanel : ""
               }`}
-              header={categoryName}
+              header={heading ? "" : categoryName}
               key={category?.key}
               showArrow={!isNorthWestEngland}
             >

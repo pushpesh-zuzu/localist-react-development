@@ -27,9 +27,14 @@ const FindAccountantToday = ({
           <p>{findData?.para1}</p>
           <p>{findData?.para2}</p>
           {findData?.para3 && <p>{findData?.para3}</p>}
+          {findData?.para4 && <p>{findData?.para4}</p>}
+          {findData?.para5 && <p>{findData?.para5}</p>}
         </div>
-        <button onClick={() => handleScrollToBottom()} className={styles.accountantBtn}>
-          Find an {title} today
+        <button
+          onClick={() => handleScrollToBottom()}
+          className={styles.accountantBtn}
+        >
+          Find a {title} in {locationsName} today
         </button>
       </div>
     </div>

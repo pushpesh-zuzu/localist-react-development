@@ -125,6 +125,7 @@ const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
         accountHeader="Gardening & Landscaping"
         level={2}
         service={true}
+        isNeedS={false}
         panelImage={LandscapingGardeningBanner}
         title="Gardening & Landscaping"
         defaultServiceName={"Gardening & Landscaping"}

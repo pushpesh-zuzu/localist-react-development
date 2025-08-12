@@ -48,6 +48,7 @@ import BuyerSecondStep from "../component/buyerPanel/buyerClose/buyerSecondStep/
 import CloneSubThreeCategory from "../pages/CloneSubThreeCategory";
 import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
 import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
+import SublocationPage from "../pages/SublocationPage";
 //test en/gb/bookkeeping-services/
 
 const router = createBrowserRouter([
@@ -139,6 +140,8 @@ const router = createBrowserRouter([
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       { path: "/en/gb/:service/:location", element: <LocationPage /> },
+      { path: "/en/gb/:service/:location/:subLocation", element: <SublocationPage /> },
+
       { path: "/how-it-works", element: <HowItWorksPage /> },
       { path: "/sellers/create", element: <ServicePanelPage /> },
       {

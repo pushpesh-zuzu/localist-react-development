@@ -1165,7 +1165,7 @@ const BREADCRUMB_CONFIG = {
 const CONTENT_CONFIG_TOP = {
   "fence-installers": {
     accountHeader: "Fence Installation",
-    title: "Fencing",
+    title: "Fencer",
     mainTitle: "Fencer",
   },
   "driveway-installers": {
@@ -1175,8 +1175,8 @@ const CONTENT_CONFIG_TOP = {
   },
   "patio-services": {
     accountHeader: "Patio Construction",
-    title: "Patio Installer",
-    mainTitle: "Patio Installer",
+    title: "Patio and Paving Service",
+    mainTitle: "Patio and Paving Service",
   },
   landscaping: {
     accountHeader: "Landscaping",

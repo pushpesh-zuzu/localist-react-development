@@ -165,6 +165,7 @@ const CloneCategory = ({
         LevelOneTwoTitle={subHeader}
         accountHeader="Home and Garden"
         level={2}
+        isNeedS={false}
         panelImage={Home}
         title="Home & Garden"
         para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
@@ -208,7 +209,7 @@ const CloneCategory = ({
       />
       <PopularCategories data={filteredCategories} />
       <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={subHeader} />
+      <GetQuotes message={subHeader} needSString={false} />
     </div>
   );
 };

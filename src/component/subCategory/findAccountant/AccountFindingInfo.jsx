@@ -9,6 +9,7 @@ const AccountFindingInfo = ({
   para1,
   para2,
   para3,
+  isNeedS=true
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
@@ -21,7 +22,7 @@ const AccountFindingInfo = ({
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>
           Find the Best
-          <span className={styles.highlight}> {title} </span>
+          <span className={styles.highlight}> {title}{isNeedS?"s":""} </span>
           In Your Area
         </h2>
 

@@ -6,12 +6,12 @@ const GetQuotes = ({ message,needSString=true }) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleScrollToBottom()} className={styles.button}>
-        Get quotes
+        Get Quotes
       </button>
 
       {message && (
         <p className={styles.text}>
-          from professional {message.toLowerCase()}{needSString?'s':''} today
+          from {message}{needSString?'s':''} today
         </p>
       )}
     </div>
