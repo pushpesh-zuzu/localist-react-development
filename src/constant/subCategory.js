@@ -41,7 +41,7 @@ const POPULAR_CITIES = [
   { city_image: Manchester, city_name: "Manchester" },
   { city_image: Chester, city_name: "Chester" },
   { city_image: Warrington, city_name: "Warrington" },
-  { city_image: EllesmerePort, city_name: "Ellesmere Port" },
+  { city_image: EllesmerePort, city_name: "Ellesmere" },
 ];
 
 const RELATED_PRICE_DATA = {
@@ -927,35 +927,35 @@ export const POPULARCITY = {
     { id: 2, city_name: "Manchester", city_image: Manchester },
     { id: 3, city_name: "Chester", city_image: Chester },
     { id: 4, city_name: "Warrington", city_image: Warrington },
-    { id: 5, city_name: "Ellesmere Port", city_image: EllesmerePort },
+    { id: 5, city_name: "Ellesmere", city_image: EllesmerePort },
   ],
   "driveway-installers": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   "patio-services": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   landscaping: [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
   "artificial-grass-installation": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
     { id: 4, city_name: "Warrington", city_image: london },
-    { id: 5, city_name: "Ellesmere Port", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
   ],
 };
 
