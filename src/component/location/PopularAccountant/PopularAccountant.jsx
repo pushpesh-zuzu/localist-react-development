@@ -2,11 +2,15 @@ import { title } from "framer-motion/client";
 // import { PopularAccountantData } from "../../../constant/Location";
 import styles from "./PopularAccountant.module.css";
 
-const PopularAccountant = ({title,PopularAccountantData}) => {
+const PopularAccountant = ({ title, PopularAccountantData, isNeedS=true }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        Popular <span className={styles.highlight}>{title}?</span>
+        Popular{" "}
+        <span className={styles.highlight}>
+          {title}
+          {isNeedS ? "s" : ""}
+        </span>
       </h2>
       <div className={styles.grid}>
         {PopularAccountantData.map((accountant) => (

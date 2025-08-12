@@ -1,10 +1,10 @@
 import React from "react";
 import AccountantInLocation from "./AccountantInLocation/AccountantInLocation";
 import HowWeWork from "./HowWeWorkLocation/HowWeWork";
-import PopularAccountingServices from "./PopularAccountingServices/PopularAccountingServices";
+// import PopularAccountingServices from "./PopularAccountingServices/PopularAccountingServices";
 import AveragePriceLocation from "./AveragePriceLocation/AveragePriceLocation";
 import PopularAccountant from "./PopularAccountant/PopularAccountant";
-import PopularCitiesLocation from "./PopularCitiesLocation/PopularCitiesLocation";
+// import PopularCitiesLocation from "./PopularCitiesLocation/PopularCitiesLocation";
 import GetQuotes from "../common/getQuotes/GetQuotes";
 import { useParams } from "react-router-dom";
 import {
@@ -19,6 +19,7 @@ import {
 } from "../../constant/levelFourData";
 import PopularCity from "../subCategory/famousCities/PopularCity";
 import { Helmet } from "react-helmet-async";
+import GetQuotesLocation from "../common/getQuotes/GetQuotesLocation";
 
 const Location = () => {
   const { service, location } = useParams();
@@ -62,7 +63,10 @@ const Location = () => {
         location={capitalizeFirstLetter(location)}
         POPULAR_CITIES={POPULAR_CITIES}
       />
-      <GetQuotes message={CONTENT_CONFIG_LEVEL4_TOP[service]?.title} />
+      <GetQuotesLocation
+        service={CONTENT_CONFIG_LEVEL4_TOP[service]?.title}
+        location={capitalizeFirstLetter(location)}
+      />
     </>
   );
 };
