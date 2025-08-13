@@ -37,8 +37,6 @@ const WhatServiceYouNeed = ({
   const { citySerach } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  console.log(serviceName, serviceId, "prem");
-  //NSai
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   useEffect(() => {
     setPostalCodeValidate(postalCodeIsValidate);
@@ -51,7 +49,6 @@ const WhatServiceYouNeed = ({
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
-  console.log(citySerach, "cityName");
   // useEffect(() => {
   //   if (serviceName && serviceId) {
   //     setInput(serviceName);
@@ -100,7 +97,7 @@ const WhatServiceYouNeed = ({
 
   const handleContinue = useCallback(() => {
     let newErrors = { service: "", pincode: "" };
-
+debugger;
     if (!selectedService) {
       newErrors.service = "Please select a service!";
     }
@@ -171,7 +168,6 @@ const WhatServiceYouNeed = ({
           place.address_components.find((component) =>
             component.types.includes("administrative_area_level_3")
           )?.long_name;
-        console.log(cityName, "cityName");
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
         )?.long_name;

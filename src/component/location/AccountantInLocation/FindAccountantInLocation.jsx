@@ -129,7 +129,7 @@ const FindAccountantInLocation = ({
           <button onClick={handleContinue}>Go</button>
         </div>
       </div>
-      {showModal && (userToken?.active_status === 2 || !userToken) && (
+      {showModal && defaultService && (userToken?.active_status === 2 || !userToken) && (
         <BuyerRegistration
           closeModal={handleClose}
           postcode={pincode}

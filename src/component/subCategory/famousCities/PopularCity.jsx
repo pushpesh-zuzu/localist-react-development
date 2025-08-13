@@ -36,7 +36,7 @@ function AutoplayPlugin(slider) {
   slider.on("animationEnded", start);
   slider.on("updated", start);
 }
-const PopularCity = ({ sliderdata, title }) => {
+const PopularCity = ({ sliderdata, title, location }) => {
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -75,7 +75,7 @@ const PopularCity = ({ sliderdata, title }) => {
             className={styles.heading}
             style={{ fontWeight: 600, flex: 1, textAlign: "center" }}
           >
-            {title}
+            {title} <span>{location ?location:""}</span>
           </h2>
           <span
             className={styles.leftArrowWrapper}
@@ -107,7 +107,7 @@ const PopularCity = ({ sliderdata, title }) => {
         {/* Slider */}
         <div className={styles.sliderWrapper}>
           <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-            {POPULAR_CITIES.map((service) => (
+            {sliderdata?.map((service) => (
               <div
                 key={service.id}
                 className={`keen-slider__slide ${styles.slide}`}

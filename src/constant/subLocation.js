@@ -19,122 +19,135 @@ import {
 
 const CONTENT_LEVEL5_CONFIG_META = {
   "fence-installers": {
-    title: "Fencers in Warrington | Find Local Fencing Experts – Localists",
-    name: "description",
-    content:
-      "Get free quotes, check genuine reviews, and choose trusted local fencing experts in Warrington for your home or business with Localists.",
+    warrington: {
+      title: "Fencers in Warrington | Find Local Fencing Experts – Localists",
+      name: "description",
+      content:
+        "Get free quotes, check genuine reviews, and choose trusted local fencing experts in Warrington for your home or business with Localists.",
+    },
   },
 };
 const CONTENT_CONFIG_LEVEL5_TOP = {
   "fence-installers": {
-    accountHeader: "Fence Installation",
-    title: "Fencer",
-    mainTitle: "Fencer",
+    warrington: {
+      accountHeader: "Fence Installation",
+      title: "Fencer",
+      mainTitle: "Fencer",
+    },
   },
 };
 const BREADCRUMB_LEVEL5_CONFIG = {
-  "fence-installers": [
-    { title: "Home & Garden", path: "/home" },
-    { title: "Builders", path: "/builders" },
-    { title: "Fence & Gate Installation", path: "/fence-installers" }, // no path for last item
-    { title: "Cheshire", path: "/fence-installers/cheshire" },
-    { title: "Warrington" },
-  ],
+  "fence-installers": {
+    warrington: [
+      { title: "Home & Garden", path: "/home" },
+      { title: "Builders", path: "/builders" },
+      { title: "Fence & Gate Installation", path: "/fence-installers" }, // no path for last item
+      { title: "Cheshire", path: "/fence-installers/cheshire" },
+      { title: "Warrington" },
+    ],
+  },
 };
 const FIND_CONTENT_LEVEL5_CONFIG = {
   "fence-installers": {
-    para1:
-      "We’ll connect you with the best fencers in Warrington in minutes. Start your search and get free quotes today!",
-    para2:
-      "Whether you’re looking for quotes, ready to hire, or want to speak directly with experienced Warrington-based fencers, we can help.",
-    para3:
-      "If it’s your first time hiring a fencer and you’re unsure where to start, let us do the hard work for you. Simply tell us about your project, and we’ll send you a list of trusted fencers in Warrington to review.",
-    para4:
-      "There’s no pressure to hire – you can compare profiles, read genuine customer reviews, and request more information before making your choice.",
-    para5: "Best of all – it’s completely free!",
+    warrington: {
+      para1:
+        "We’ll connect you with the best fencers in Warrington in minutes. Start your search and get free quotes today!",
+      para2:
+        "Whether you’re looking for quotes, ready to hire, or want to speak directly with experienced Warrington-based fencers, we can help.",
+      para3:
+        "If it’s your first time hiring a fencer and you’re unsure where to start, let us do the hard work for you. Simply tell us about your project, and we’ll send you a list of trusted fencers in Warrington to review.",
+      para4:
+        "There’s no pressure to hire – you can compare profiles, read genuine customer reviews, and request more information before making your choice.",
+      para5: "Best of all – it’s completely free!",
+    },
   },
 };
 const HOW_WORK_LEVEL5 = {
-  "fence-installers": [
-    {
-      id: 1,
-      title: "What you need icon",
-      image: WhatYouNeedImg,
-      heading1: "Tell us",
-      heading2: " Your Requirements",
-      description:
-        "Let us know what kind of fencing service you’re looking for in Warrington. Share your details and preferences, and we’ll connect you with trusted local fencers who can help.",
-    },
-    {
-      id: 2,
-      title: "Free quotes icon",
-      image: FreeQuotesImg,
-      heading1: "Get",
-      heading2: "Free Quotes",
-      description:
-        "Receive free, no-obligation quotes from fencing professionals in Warrington. You’ll be notified quickly via our website or app, so you can compare options without the hassle.",
-    },
-    {
-      id: 3,
-      title: "Choose your accountant icon",
-      image: AccountantImg,
-      heading1: "Choose your",
-      heading2: " Ideal Fencer",
-      description:
-        "Review profiles, read genuine customer feedback, and contact fencers directly. With top-rated providers at your fingertips, you can hire with complete confidence.",
-    },
-  ],
+  "fence-installers": {
+    warrington: [
+      {
+        id: 1,
+        title: "What you need icon",
+        image: WhatYouNeedImg,
+        heading1: "Tell us",
+        heading2: " Your Requirements",
+        description:
+          "Let us know what kind of fencing service you’re looking for in Warrington. Share your details and preferences, and we’ll connect you with trusted local fencers who can help.",
+      },
+      {
+        id: 2,
+        title: "Free quotes icon",
+        image: FreeQuotesImg,
+        heading1: "Get",
+        heading2: "Free Quotes",
+        description:
+          "Receive free, no-obligation quotes from fencing professionals in Warrington. You’ll be notified quickly via our website or app, so you can compare options without the hassle.",
+      },
+      {
+        id: 3,
+        title: "Choose your accountant icon",
+        image: AccountantImg,
+        heading1: "Choose your",
+        heading2: " Ideal Fencer",
+        description:
+          "Review profiles, read genuine customer feedback, and contact fencers directly. With top-rated providers at your fingertips, you can hire with complete confidence.",
+      },
+    ],
+  },
 };
 const POPULAR_SERVICES_LEVEL5_COMPANIES = {
-  "fence-installers": [
-    {
-      id: 1,
-      logo: OakmanorAccountancyImg,
-      name: "DecKing Warrington",
-      stars: 5,
-      certificate: "Certificate of Excellence",
-      description:
-        "Our commitment to exceptional customer service and high-quality workmanship sets us apart in the market. Based in Wilmslow, we are a trusted fencing and decking contractor serving South Manchester and Cheshire. We use only premium materials, including Jacksons Fencing, Durapost, and Millboard – each backed by an impressive 25-year guarantee.",
-      testimonial: {
-        name: "Robert Simpson",
-        initial: "R",
+  "fence-installers": {
+    warrington: [
+      {
+        id: 1,
+        logo: OakmanorAccountancyImg,
+        name: "DecKing Warrington",
         stars: 5,
-        text: "The result is excellent. The team removed my old decking and built a beautiful new one with stairs. They were professional, helpful, and left everything immaculate.” – Mr B. Price",
+        certificate: "Certificate of Excellence",
+        description:
+          "Our commitment to exceptional customer service and high-quality workmanship sets us apart in the market. Based in Wilmslow, we are a trusted fencing and decking contractor serving South Manchester and Cheshire. We use only premium materials, including Jacksons Fencing, Durapost, and Millboard – each backed by an impressive 25-year guarantee.",
+        testimonial: {
+          name: "Robert Simpson",
+          initial: "R",
+          stars: 5,
+          text: "The result is excellent. The team removed my old decking and built a beautiful new one with stairs. They were professional, helpful, and left everything immaculate.” – Mr B. Price",
+        },
       },
-    },
-    {
-      id: 2,
-      logo: TunstallAccountingImg,
-      name: "First Choice Gardens & Landscapes",
-      stars: 5,
-      description:
-        "Fully qualified Chartered accountant dedicated to providing a friendly and straight forward service bespoke to the needs of each and every client.",
-      testimonial: {
-        name: "Tokyo Matilda",
-        initial: "T",
+      {
+        id: 2,
+        logo: TunstallAccountingImg,
+        name: "First Choice Gardens & Landscapes",
         stars: 5,
-        text: `“Absolutely first-class work – attention to detail was superb. The site was left clean and tidy every day. Highly recommended.” – Nick Shotton`,
+        description:
+          "Fully qualified Chartered accountant dedicated to providing a friendly and straight forward service bespoke to the needs of each and every client.",
+        testimonial: {
+          name: "Tokyo Matilda",
+          initial: "T",
+          stars: 5,
+          text: `“Absolutely first-class work – attention to detail was superb. The site was left clean and tidy every day. Highly recommended.” – Nick Shotton`,
+        },
       },
-    },
-    {
-      id: 3,
-      logo: OakmanorImg,
-      name: "Edge Fencing",
-      stars: 5,
-      certificate: "Certificate of Excellence",
-      description:
-        "We are a local, family-run business specialising in the supply and installation of high-quality timber and composite decking. Our expertise also includes fencing, gates, pergolas, gazebos, sheds, summer houses, log cabins, garden buildings, playhouses, hot tubs, spas, and much more.",
-      testimonial: {
-        name: "Jade Marie",
-        initial: "J",
+      {
+        id: 3,
+        logo: OakmanorImg,
+        name: "Edge Fencing",
         stars: 5,
-        text: "“Really good service. Left my garden looking lovely.” – Jane",
+        certificate: "Certificate of Excellence",
+        description:
+          "We are a local, family-run business specialising in the supply and installation of high-quality timber and composite decking. Our expertise also includes fencing, gates, pergolas, gazebos, sheds, summer houses, log cabins, garden buildings, playhouses, hot tubs, spas, and much more.",
+        testimonial: {
+          name: "Jade Marie",
+          initial: "J",
+          stars: 5,
+          text: "“Really good service. Left my garden looking lovely.” – Jane",
+        },
       },
-    },
-  ],
+    ],
+  },
 };
 const FIND_SERVICE_CONTENT_LEVEL5 = {
-  "fence-installers": [
+  "fence-installers": {
+    warrington:[
     {
       type: "h2",
       text: "Find Trusted Fencers in Warrington",
@@ -152,9 +165,11 @@ const FIND_SERVICE_CONTENT_LEVEL5 = {
       text: "Start your search today and find qualified fencers in Warrington who can deliver the perfect fencing solution for your home or business.",
     },
   ],
+  }
 };
 const OTHER_SERVICES_DATA_LEVEL5 = {
-  "fence-installers": [
+  "fence-installers": {
+    warrington:[
     {
       id: 1,
       image: Driveway,
@@ -182,6 +197,7 @@ const OTHER_SERVICES_DATA_LEVEL5 = {
       path: "artificial-grass-installation",
     },
   ],
+  }
 };
 const LEVEL5_SERVICES_NAME = {
   "fence-installers": "Fence & Gate Installation",

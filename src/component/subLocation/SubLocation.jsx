@@ -21,28 +21,30 @@ import RegionsComponent from "../subCategory/Regions/Regions";
 import Slider from "../common/slider/Slider";
 import FindAnAccountant from "../../component/subCategory/Accountant/FindAnAccountant";
 
-const transformFenceInstallersData = (rawData, id) => {
-  return rawData[id]?.map((region) => ({
+const transformFenceInstallersData = (rawData, locationKey) => {
+  return rawData?.[locationKey]?.map((region) => ({
     key: region.id, // Convert id to key
-    [region.title]: region.items, // Create dynamic key with region title
+    [region.title]: region.items, // Dynamic key with region title
   }));
 };
 const regionsData = {
-  "fence-installers": [
-    {
-      id: 3,
-      title: "North West England",
-      items: [
-        "Chester",
-        "Ellesmere Port",
-        "Nantwich",
-        "Winsford",
-        "Neston",
-        "Runcorn",
-        "Frodsham",
-      ],
-    },
-  ],
+  "fence-installers": {
+    warrington: [
+      {
+        id: 3,
+        title: "North West England",
+        items: [
+          "Chester",
+          "Ellesmere Port",
+          "Nantwich",
+          "Winsford",
+          "Neston",
+          "Runcorn",
+          "Frodsham",
+        ],
+      },
+    ],
+  },
 };
 
 const SubLocation = () => {
@@ -51,47 +53,58 @@ const SubLocation = () => {
     if (!str) return ""; // agar empty ya undefined ho
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-  const findContents = FIND_CONTENT_LEVEL5_CONFIG[service];
-  const transformedData = transformFenceInstallersData(regionsData, service);
-  const contentBlocks = FIND_SERVICE_CONTENT_LEVEL5[service];
+  const findContents = FIND_CONTENT_LEVEL5_CONFIG[service]?.[subLocation];
+  const transformedData = transformFenceInstallersData(
+    regionsData[service],
+    subLocation
+  );
+  const contentBlocks = FIND_SERVICE_CONTENT_LEVEL5[service]?.subLocation;
 
   return (
     <>
       <Helmet>
-        <title>{CONTENT_LEVEL5_CONFIG_META[service]?.title}</title>
+        <title>
+          {CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].title}
+        </title>
         <meta
-          name={CONTENT_LEVEL5_CONFIG_META[service]?.name}
-          content={CONTENT_LEVEL5_CONFIG_META[service]?.content}
+          name={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].name}
+          content={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].content}
         />
       </Helmet>
       <AccountantInLocation
         defaultService={LEVEL5_SERVICES_NAME[service]}
-        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
-        breadcrumb={BREADCRUMB_LEVEL5_CONFIG[service]}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.title}
+        breadcrumb={BREADCRUMB_LEVEL5_CONFIG[service]?.[subLocation]}
         locationsName={capitalizeFirstLetter(subLocation)}
-        findData={findContents}
+        findData={FIND_CONTENT_LEVEL5_CONFIG[service]?.[subLocation]}
       />
+
       <HowWeWork
         heading="Localist"
-        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
-        HowWeWorkLocationData={HOW_WORK_LEVEL5[service]}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.title}
+        HowWeWorkLocationData={HOW_WORK_LEVEL5[service]?.[subLocation]}
       />
+
       <PopularAccountant
-        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
-        PopularAccountantData={POPULAR_SERVICES_LEVEL5_COMPANIES[service]}
-      />
-      <FindAnAccountant
-        contentBlocks={contentBlocks}
-        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.mainTitle}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation].title}
+        PopularAccountantData={
+          POPULAR_SERVICES_LEVEL5_COMPANIES[service]?.[subLocation]
+        }
       />
       <RegionsComponent heading="NearBy" regionsData={transformedData} />
+      <FindAnAccountant
+        contentBlocks={FIND_SERVICE_CONTENT_LEVEL5[service]?.[subLocation]}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.mainTitle}
+      />
+
       <Slider
-        sliderdata={OTHER_SERVICES_DATA_LEVEL5[service]}
+        sliderdata={OTHER_SERVICES_DATA_LEVEL5[service]?.[subLocation]}
         title="You May Be Interested In"
         blueTitle="Other Services "
       />
+
       <GetQuotesLocation
-        service={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
+        service={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.title}
         location={capitalizeFirstLetter(subLocation)}
       />
     </>
