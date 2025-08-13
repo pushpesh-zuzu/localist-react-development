@@ -141,8 +141,8 @@ const router = createBrowserRouter([
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       { path: "/en/gb/:service/:location", element: <LocationPage /> },
-      // { path: "/en/gb/:service/:location/:subLocation", element: <SublocationPage /> },
-      { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
+      { path: "/en/gb/:service/:location/:subLocation", element: <SublocationPage /> },
+      // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
 
       { path: "/how-it-works", element: <HowItWorksPage /> },
       { path: "/sellers/create", element: <ServicePanelPage /> },
