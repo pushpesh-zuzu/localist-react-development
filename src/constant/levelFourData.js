@@ -12,6 +12,18 @@ import Warrington from "../assets/Images/servicesLevels/cities/Warrington.jpg";
 import Runcorn from "../assets/Images/servicesLevels/cities/Runcorn.jpg";
 import Frodsham from "../assets/Images/servicesLevels/cities/Frodsham.jpg";
 import Winsford from "../assets/Images/servicesLevels/cities/Winsford.jpg";
+import {
+  Bolton,
+  Bury,
+  Manchester,
+  Oldham,
+  Rochdale,
+  sale,
+  Salford,
+  Stockport,
+  Wigan,
+  Wythenshawe,
+} from "../assets/Images/servicesLevels/cities";
 
 const CONTENT_LEVEL4_CONFIG_META = {
   "fence-installers": {
@@ -274,30 +286,31 @@ const LEVEL4_SERVICES_NAME = {
   "artificial-grass-installation": "Artificial Grass Installation",
 };
 const POPULAR_CITIES_LEVEL4 = {
-  "fence-installers" : {cheshire: [
-    { city_image: Chester, city_name: "Chester" },
-    { city_image: EllesmerePort, city_name: "Ellesmere" },
-    { city_image: Warrington, city_name: "Warrington" },
-    { city_image: Chester, city_name: "Nantwich" },
-    { city_image: Winsford, city_name: "Winsford" },
-    { city_image: Neston, city_name: "Neston" },
-    { city_image: Runcorn, city_name: "Runcorn" },
-    { city_image: Frodsham, city_name: "Frodsham" },
-  ],
-  "greater-manchester": [
-    { city_image: Chester, city_name: "Manchester" },
-    { city_image: EllesmerePort, city_name: "Bolton" },
-    { city_image: Warrington, city_name: "Wythenshawe" },
-    { city_image: Chester, city_name: "Wigan" },
-    { city_image: Winsford, city_name: "Stockport" },
-    { city_image: Neston, city_name: "Oldham" },
-    { city_image: Runcorn, city_name: "Rochdale" },
-    { city_image: Frodsham, city_name: "Salford" },
-    { city_image: Chester, city_name: "Bury" },
-    { city_image: EllesmerePort, city_name: "Sale" },
-  ]}
+  "fence-installers": {
+    cheshire: [
+      { city_image: Chester, city_name: "Chester" },
+      { city_image: EllesmerePort, city_name: "Ellesmere" },
+      { city_image: Warrington, city_name: "Warrington" },
+      { city_image: Chester, city_name: "Nantwich" },
+      { city_image: Winsford, city_name: "Winsford" },
+      { city_image: Neston, city_name: "Neston" },
+      { city_image: Runcorn, city_name: "Runcorn" },
+      { city_image: Frodsham, city_name: "Frodsham" },
+    ],
+    "greater-manchester": [
+      { city_image: Manchester, city_name: "Manchester" },
+      { city_image: Bolton, city_name: "Bolton" },
+      { city_image: Wythenshawe, city_name: "Wythenshawe" },
+      { city_image: Wigan, city_name: "Wigan" },
+      { city_image: Stockport, city_name: "Stockport" },
+      { city_image: Oldham, city_name: "Oldham" },
+      { city_image: Rochdale, city_name: "Rochdale" },
+      { city_image: Salford, city_name: "Salford" },
+      { city_image: Bury, city_name: "Bury" },
+      { city_image: sale, city_name: "Sale" },
+    ],
+  },
 };
-
 
 export {
   CONTENT_LEVEL4_CONFIG_META,

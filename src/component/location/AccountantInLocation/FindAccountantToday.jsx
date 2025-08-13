@@ -18,10 +18,10 @@ const FindAccountantToday = ({
       <Breadcrumb breadcrumb={breadcrumb} />
 
       <div className={styles.infoContainer}>
-        <h1 className={styles.title}>
+        <h2 className={styles.title}>
           Looking for a<span className={styles.highlight}> {title} </span>
           in {locationsName}?
-        </h1>
+        </h2>
 
         <div className={styles.descriptionContainer}>
           <p>{findData?.para1}</p>
