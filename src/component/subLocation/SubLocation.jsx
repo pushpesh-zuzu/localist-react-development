@@ -1,9 +1,4 @@
 import React from "react";
-// import AccountantInLocation from "./AccountantInLocation/AccountantInLocation";
-// import HowWeWork from "./HowWeWorkLocation/HowWeWork";
-// import AveragePriceLocation from "./AveragePriceLocation/AveragePriceLocation";
-// import PopularAccountant from "./PopularAccountant/PopularAccountant";
-// import GetQuotes from "../common/getQuotes/GetQuotes";
 import { useParams } from "react-router-dom";
 import {
   BREADCRUMB_LEVEL5_CONFIG,
@@ -12,6 +7,7 @@ import {
   FIND_CONTENT_LEVEL5_CONFIG,
   FIND_SERVICE_CONTENT_LEVEL5,
   HOW_WORK_LEVEL5,
+  LEVEL5_SERVICES_NAME,
   OTHER_SERVICES_DATA_LEVEL5,
   POPULAR_SERVICES_LEVEL5_COMPANIES,
 } from "../../constant/subLocation";
@@ -61,6 +57,7 @@ const SubLocation = () => {
         />
       </Helmet>
       <AccountantInLocation
+        defaultService={LEVEL5_SERVICES_NAME[service]}
         title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
         breadcrumb={BREADCRUMB_LEVEL5_CONFIG[service]}
         locationsName={capitalizeFirstLetter(subLocation)}
@@ -85,7 +82,6 @@ const SubLocation = () => {
         title="You May Be Interested In"
         blueTitle="Other Services "
       />
-
       <GetQuotesLocation
         service={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
         location={capitalizeFirstLetter(subLocation)}

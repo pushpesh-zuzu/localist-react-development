@@ -8,11 +8,16 @@ const AccountantInLocation = ({
   breadcrumb,
   findData,
   locationsName,
+  defaultService,
 }) => {
   return (
     <>
       <div className={styles.findAccountantContainer}>
-        <FindAccountantInLocation title={title} locationName={locationsName} />
+        <FindAccountantInLocation
+          title={title}
+          locationName={locationsName}
+          defaultService={defaultService}
+        />
       </div>
       <div>
         <FindAccountantToday

@@ -101,7 +101,7 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
         {/* Slider */}
         <div className={styles.sliderWrapper}>
           <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-            {sliderdata.map((service) => (
+            {sliderdata?.map((service) => (
               <div
                 key={service.id}
                 className={`keen-slider__slide ${styles.slide}`}

@@ -1,14 +1,22 @@
 import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowWeWork.module.css";
 
-const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData,heading =''}) => {
+const HowWeWork = ({
+  title,
+  isNeedS = true,
+  HowWeWorkLocationData,
+  heading = "",
+}) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        How <span className={styles.highlight}>{heading? heading :"We"} Work</span>
+        How{" "}
+        <span className={styles.highlight}>
+          {heading ? heading : "We"} Work
+        </span>
       </h2>
       <div className={styles.stepsContainer}>
-        {HowWeWorkLocationData.map((item, index) => (
+        {HowWeWorkLocationData?.map((item, index) => (
           <div className={styles.step} key={index}>
             <div className={styles.imageWrapper}>
               <img src={item.image} alt={item.title} className={styles.icon} />
@@ -24,8 +32,12 @@ const HowWeWork = ({title,isNeedS=true,HowWeWorkLocationData,heading =''}) => {
           </div>
         ))}
       </div>
-      <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
-        Get quotes from {title}{isNeedS? 's':''} near you
+      <button
+        onClick={() => handleScrollToBottom()}
+        className={styles.ctaButton}
+      >
+        Get quotes from {title}
+        {isNeedS ? "s" : ""} near you
       </button>
     </div>
   );

@@ -31,7 +31,7 @@ const PopularAccountant = ({
         </span>
       </h2>
       <div className={styles.grid}>
-        {PopularAccountantData.map((accountant) => {
+        {PopularAccountantData?.map((accountant) => {
           const isExpanded = expandedItems[accountant.id];
           const shouldShowReadMore = accountant.description.length > 100;
 

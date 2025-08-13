@@ -1,11 +1,10 @@
 import React from "react";
 import AccountantInLocation from "./AccountantInLocation/AccountantInLocation";
 import HowWeWork from "./HowWeWorkLocation/HowWeWork";
-// import PopularAccountingServices from "./PopularAccountingServices/PopularAccountingServices";
 import AveragePriceLocation from "./AveragePriceLocation/AveragePriceLocation";
+// import PopularAccountingServices from "./PopularAccountingServices/PopularAccountingServices";
 import PopularAccountant from "./PopularAccountant/PopularAccountant";
 // import PopularCitiesLocation from "./PopularCitiesLocation/PopularCitiesLocation";
-import GetQuotes from "../common/getQuotes/GetQuotes";
 import { useParams } from "react-router-dom";
 import {
   BREADCRUMB_LEVEL4_CONFIG,
@@ -15,7 +14,6 @@ import {
   HOW_WORK_LEVEL4,
   POPULAR_ACCOUNTS_COMPANIES,
   POPULAR_CITIES,
-  POPULAR_SERVICE_DATA,
 } from "../../constant/levelFourData";
 import PopularCity from "../subCategory/famousCities/PopularCity";
 import { Helmet } from "react-helmet-async";
@@ -38,6 +36,7 @@ const Location = () => {
         />
       </Helmet>
       <AccountantInLocation
+        defaultService={LEVEL4_SERVICES_NAME[service]}
         title={CONTENT_CONFIG_LEVEL4_TOP[service]?.title}
         breadcrumb={BREADCRUMB_LEVEL4_CONFIG[service]}
         locationsName={capitalizeFirstLetter(location)}

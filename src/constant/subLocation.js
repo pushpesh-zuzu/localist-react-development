@@ -183,6 +183,13 @@ const OTHER_SERVICES_DATA_LEVEL5 = {
     },
   ],
 };
+const LEVEL5_SERVICES_NAME = {
+  "fence-installers": "Fence & Gate Installation",
+  "driveway-installers": "Driveway Installation",
+  "patio-services": "Patio Services",
+  landscaping: "Landscaping",
+  "artificial-grass-installation": "Artificial Grass Installation",
+};
 
 export {
   CONTENT_LEVEL5_CONFIG_META,
@@ -193,4 +200,5 @@ export {
   POPULAR_SERVICES_LEVEL5_COMPANIES,
   OTHER_SERVICES_DATA_LEVEL5,
   FIND_SERVICE_CONTENT_LEVEL5,
+  LEVEL5_SERVICES_NAME,
 };
