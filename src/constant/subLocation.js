@@ -10,6 +10,7 @@ import {
   TaxResolutionImg,
   TunstallAccountingImg,
 } from "../assets/Images/location";
+import { fence2 } from "../assets/Images/servicesLevels/banner/Fence";
 import {
   ArtificialGrass,
   Driveway,
@@ -206,7 +207,11 @@ const LEVEL5_SERVICES_NAME = {
   landscaping: "Landscaping",
   "artificial-grass-installation": "Artificial Grass Installation",
 };
-
+const BannerImageLevel5 = {
+  "fence-installers": {
+    warrington: fence2,
+  },
+};
 export {
   CONTENT_LEVEL5_CONFIG_META,
   CONTENT_CONFIG_LEVEL5_TOP,
@@ -217,4 +222,5 @@ export {
   OTHER_SERVICES_DATA_LEVEL5,
   FIND_SERVICE_CONTENT_LEVEL5,
   LEVEL5_SERVICES_NAME,
+  BannerImageLevel5
 };

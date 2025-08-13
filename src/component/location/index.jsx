@@ -7,6 +7,7 @@ import PopularAccountant from "./PopularAccountant/PopularAccountant";
 // import PopularCitiesLocation from "./PopularCitiesLocation/PopularCitiesLocation";
 import { useParams } from "react-router-dom";
 import {
+  BannerImageLevel4,
   BREADCRUMB_LEVEL4_CONFIG,
   CONTENT_CONFIG_LEVEL4_TOP,
   CONTENT_LEVEL4_CONFIG_META,
@@ -45,6 +46,7 @@ function capitalizeFirstLetter(str) {
       </Helmet>
 
       <AccountantInLocation
+      bgImage={BannerImageLevel4[service]?.[location]}
         defaultService={LEVEL4_SERVICES_NAME[service]}
         title={CONTENT_CONFIG_LEVEL4_TOP[service]?.[location]?.title}
         breadcrumb={BREADCRUMB_LEVEL4_CONFIG[service]?.[location]}

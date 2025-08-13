@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import {
+  BannerImageLevel5,
   BREADCRUMB_LEVEL5_CONFIG,
   CONTENT_CONFIG_LEVEL5_TOP,
   CONTENT_LEVEL5_CONFIG_META,
@@ -72,6 +73,7 @@ const SubLocation = () => {
         />
       </Helmet>
       <AccountantInLocation
+       bgImage={BannerImageLevel5[service]?.[subLocation]}
         defaultService={LEVEL5_SERVICES_NAME[service]}
         title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.title}
         breadcrumb={BREADCRUMB_LEVEL5_CONFIG[service]?.[subLocation]}

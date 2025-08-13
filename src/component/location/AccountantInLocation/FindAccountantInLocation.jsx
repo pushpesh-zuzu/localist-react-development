@@ -98,7 +98,7 @@ const FindAccountantInLocation = ({
 
   return (
     <div className={styles.searchcontainer}>
-      <h1>
+      <h1 style={{ color: "white" }}>
         Find a{" "}
         <span>
           {title}
@@ -129,13 +129,15 @@ const FindAccountantInLocation = ({
           <button onClick={handleContinue}>Go</button>
         </div>
       </div>
-      {showModal && defaultService && (userToken?.active_status === 2 || !userToken) && (
-        <BuyerRegistration
-          closeModal={handleClose}
-          postcode={pincode}
-          serviceName={defaultService}
-        />
-      )}
+      {showModal &&
+        defaultService &&
+        (userToken?.active_status === 2 || !userToken) && (
+          <BuyerRegistration
+            closeModal={handleClose}
+            postcode={pincode}
+            serviceName={defaultService}
+          />
+        )}
     </div>
   );
 };

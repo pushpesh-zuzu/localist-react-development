@@ -22,4 +22,6 @@ export {
   fence8,
   fence9,
   fence10,
+  fence11,
+  fence12
 };

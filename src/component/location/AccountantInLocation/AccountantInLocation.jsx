@@ -9,10 +9,16 @@ const AccountantInLocation = ({
   findData,
   locationsName,
   defaultService,
+  bgImage
 }) => {
   return (
     <>
-      <div className={styles.findAccountantContainer}>
+      <div
+        className={styles.findAccountantContainer}
+        style={{
+          backgroundImage: `url(${bgImage})`,
+        }}
+      >
         <FindAccountantInLocation
           title={title}
           locationName={locationsName}

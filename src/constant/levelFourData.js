@@ -24,6 +24,7 @@ import {
   Wigan,
   Wythenshawe,
 } from "../assets/Images/servicesLevels/cities";
+import { fence1 } from "../assets/Images/servicesLevels/banner/Fence";
 
 const CONTENT_LEVEL4_CONFIG_META = {
   "fence-installers": {
@@ -311,6 +312,11 @@ const POPULAR_CITIES_LEVEL4 = {
     ],
   },
 };
+const BannerImageLevel4 = {
+  "fence-installers": {
+    cheshire: fence1,
+  },
+};
 
 export {
   CONTENT_LEVEL4_CONFIG_META,
@@ -322,4 +328,5 @@ export {
   POPULAR_ACCOUNTS_COMPANIES,
   POPULAR_CITIES_LEVEL4,
   LEVEL4_SERVICES_NAME,
+  BannerImageLevel4
 };
