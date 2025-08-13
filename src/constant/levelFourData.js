@@ -136,6 +136,13 @@ const POPULAR_ACCOUNTS_COMPANIES = {
     },
   ],
 };
+const LEVEL4_SERVICES_NAME = {
+  "fence-installers": "Fence & Gate Installation",
+  "driveway-installers": "Driveway Installation",
+  "patio-services": "Patio Services",
+  landscaping: "Landscaping",
+  "artificial-grass-installation": "Artificial Grass Installation",
+};
 const POPULAR_CITIES = [
   { city_image: Chester, city_name: "Chester" },
   { city_image: EllesmerePort, city_name: "Ellesmere" },
@@ -156,4 +163,5 @@ export {
   POPULAR_SERVICE_DATA,
   POPULAR_ACCOUNTS_COMPANIES,
   POPULAR_CITIES,
+  LEVEL4_SERVICES_NAME
 };
