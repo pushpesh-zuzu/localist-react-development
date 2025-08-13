@@ -1,5 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import axiosInstance from "../../Api/axiosInstance";
+import axiosInstance, { baseURL } from "../../Api/axiosInstance";
 import {
   clearAuthToken,
   clearBuyerRegisterFormData,
@@ -130,64 +130,64 @@ export const sendPasswordlessLink = (data) => {
   };
 };
 
-export const fetchProfileFromMagicLink = () => {
-  return async (dispatch) => {
-    try {
-      // URL se client_id nikaalna
-      const urlParams = new URLSearchParams(window.location.search);
-      const clientIdBase64 = urlParams.get("client_id");
+// export const fetchProfileFromMagicLink = () => {
+//   return async (dispatch) => {
+//     try {
+//       // URL se client_id nikaalna
+//       const urlParams = new URLSearchParams(window.location.search);
+//       const clientIdBase64 = urlParams.get("client_id");
 
-      if (!clientIdBase64) {
-        throw new Error("client_id not found in URL");
-      }
+//       if (!clientIdBase64) {
+//         throw new Error("client_id not found in URL");
+//       }
 
-      // Decode helper
-      const decodeBase64 = (str) => {
-        try {
-          const decodedUrlPart = decodeURIComponent(str);
-          return atob(decodedUrlPart);
-        } catch (err) {
-          console.error("Base64 decode failed:", err);
-          return null;
-        }
-      };
+//       // Decode helper
+//       const decodeBase64 = (str) => {
+//         try {
+//           const decodedUrlPart = decodeURIComponent(str);
+//           return atob(decodedUrlPart);
+//         } catch (err) {
+//           console.error("Base64 decode failed:", err);
+//           return null;
+//         }
+//       };
 
-      const decodedClientId = decodeBase64(clientIdBase64);
-      if (!decodedClientId) {
-        throw new Error("Invalid client_id format");
-      }
+//       const decodedClientId = decodeBase64(clientIdBase64);
+//       if (!decodedClientId) {
+//         throw new Error("Invalid client_id format");
+//       }
 
-      console.log("Decoded Client ID:", decodedClientId);
+//       console.log("Decoded Client ID:", decodedClientId);
 
-      // Profile API call
-      const profileResponse = await axiosInstance.get(
-        `/users/get-seller-profile`,
-        { params: { client_id: decodedClientId } }
-      );
+//       // Profile API call
+//       const profileResponse = await axiosInstance.post(
+//         `/users/get-seller-profile`,
+//         { params: { client_id: decodedClientId } }
+//       );
 
-      if (!profileResponse?.data?.success) {
-        throw new Error(
-          profileResponse?.data?.message || "Failed to get seller profile"
-        );
-      }
+//       if (!profileResponse?.data?.success) {
+//         throw new Error(
+//           profileResponse?.data?.message || "Failed to get seller profile"
+//         );
+//       }
 
-      // Redux store update
-      dispatch(setUserProfile(profileResponse.data.data));
+//       // Redux store update
+//       dispatch(setUserProfile(profileResponse.data.data));
 
-      return {
-        success: true,
-        profileData: profileResponse.data.data,
-      };
-    } catch (error) {
-      console.error("fetchProfileFromMagicLink error:", error);
-      throw new Error(
-        error?.response?.data?.message ||
-          error?.message ||
-          "An error occurred while fetching profile"
-      );
-    }
-  };
-};
+//       return {
+//         success: true,
+//         profileData: profileResponse.data.data,
+//       };
+//     } catch (error) {
+//       console.error("fetchProfileFromMagicLink error:", error);
+//       throw new Error(
+//         error?.response?.data?.message ||
+//           error?.message ||
+//           "An error occurred while fetching profile"
+//       );
+//     }
+//   };
+// };
 
 // export const sendPasswordlessLink = (data) => {
 //   return async (dispatch) => {
@@ -291,6 +291,119 @@ export const fetchProfileFromMagicLink = () => {
 //     }
 //   };
 // };
+
+let magicLinkProcessed = false; // guard to prevent multiple calls
+
+export const fetchProfileFromMagicLink = () => {
+  return async (dispatch, getState) => {
+    try {
+      // Guard: agar pehle hi process ho chuka hai, to skip
+      if (magicLinkProcessed) return;
+      magicLinkProcessed = true;
+
+      // Agar profile pehle se store me hai, skip
+      const { user } = getState();
+      if (user?.profile) return;
+
+      // URL se client_id nikaalna
+      const urlParams = new URLSearchParams(window.location.search);
+      const clientIdBase64 = urlParams.get("client_id");
+
+      if (!clientIdBase64) {
+        throw new Error("client_id not found in URL");
+      }
+
+      // Decode helper
+      const decodeBase64 = (str) => {
+        try {
+          const base64Decoded = atob(str);
+
+          return decodeURIComponent(base64Decoded);
+        } catch (err) {
+          console.error("Base64 decode failed:", err);
+          return null;
+        }
+      };
+
+      const decodedClientId = decodeBase64(clientIdBase64);
+      console.log("Decoded Client ID:", decodedClientId);
+      if (!decodedClientId) {
+        throw new Error("Invalid client_id format");
+      }
+
+      // Profile API call (params ko config me bhejna)
+      // const profileResponse = await axiosInstance.post(
+      //   `/users/get-seller-profile?client_id=313|uTApWD0iF7DehXBthwKPZ3NDyx7b8xRdB0mlMdt593e76905`,
+      //   undefined
+      // );
+
+      // const profileResponse = await fetch(
+      //   `${baseURL}users/get-seller-profile?client_id=312|GbIJPAipis61y2XQn4OYSZkLHsutEwo669OqVNJj8eaec68b`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       // Agar token chahiye to add:
+      //       // Authorization: `Bearer ${localStorage.getItem("auth_token")}`
+      //     },
+      //     body: null, // POST request me empty body
+      //   }
+      // );
+      // const profileResponse = await axiosInstance.post(
+      //   `users/get-seller-profile`,
+      //   {
+      //     client_id: "317|0v0XdJQVku2sWbu0N13dvWA7xKLN5DLExKqc2789050efaa2",
+      //   }
+      // );
+      const api =
+        "https://localists.zuzucodes.com/admin/api/users/get-seller-profile";
+
+      const res = await fetch(api, {
+        method: "POST",
+
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${decodedClientId}`,
+        },
+        body: null,
+      });
+
+      // Parse JSON
+      const profileResponse = await res.json();
+
+      if (!profileResponse?.data?.success) {
+        throw new Error(
+          profileResponse?.data?.message || "Failed to get seller profile"
+        );
+      }
+
+      // Agar API token bhi bhejti hai to store kar lo
+      if (profileResponse.data.token) {
+        localStorage.setItem("auth_token", profileResponse.data.token);
+        axiosInstance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${profileResponse.data.token}`;
+      }
+
+      // Redux store update
+      dispatch(setUserProfile(profileResponse.data.data));
+
+      return {
+        success: true,
+        profileData: profileResponse.data.data,
+      };
+    } catch (error) {
+      console.error("fetchProfileFromMagicLink error:", error);
+      throw new Error(
+        error?.response?.data?.message ||
+          error?.message ||
+          "An error occurred while fetching profile"
+      );
+    }
+  };
+};
+
 export const userLogout = () => {
   return async (dispatch) => {
     dispatch(setLogoutLoader(true));

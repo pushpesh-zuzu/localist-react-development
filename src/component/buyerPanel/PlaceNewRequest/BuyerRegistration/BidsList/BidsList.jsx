@@ -994,13 +994,23 @@ const BidsList = ({ previousStep }) => {
                   <option value="" disabled>
                     All ratings
                   </option>
-                  {ratingFilterData[0]?.map((item) => (
-                    <option key={item.value} value={item.value}>
-                      {item.value < 5
-                        ? `${item.value} Star & up`
-                        : `${item.value} Star`}
-                    </option>
-                  ))}
+
+                  {ratingFilterData[0]
+                    ?.slice()
+                    .sort((a, b) => {
+                      if (a.value === "no_rating") return -1;
+                      if (b.value === "no_rating") return 1;
+                      return 0;
+                    })
+                    .map((item) => (
+                      <option key={item.value} value={item.value}>
+                        {item.value === "no_rating"
+                          ? "No Rating"
+                          : item.value < 5
+                          ? `${item.value} Star & up`
+                          : `${item.value} Star`}
+                      </option>
+                    ))}
                 </select>
 
                 <select
@@ -1114,6 +1124,12 @@ const BidsList = ({ previousStep }) => {
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
+                                const sellerId = item?.id;
+                                const matchedSeller = item?.sellers?.find(
+                                  (seller) => seller?.id === sellerId
+                                );
+                                console.log(matchedSeller, "bhaaaa");
+
                                 return (
                                   <>
                                     <span className={styles.stars}>
@@ -1208,11 +1224,15 @@ const BidsList = ({ previousStep }) => {
                           <span>{seller?.service_name}</span>
                         </div>
 
-                        <p className={styles.description}>
-                          {item?.about_company
-                            ? item?.about_company
-                            : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."}
-                        </p>
+                        {seller?.about_company && (
+                          <p className={styles.description}>
+                            {seller.about_company}
+                            {console.log(
+                              seller?.about_company,
+                              "about_company"
+                            )}
+                          </p>
+                        )}
 
                         <div className={styles.quickToRespondWrapper}>
                           <Link

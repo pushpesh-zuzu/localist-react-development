@@ -164,10 +164,12 @@ const LoginPage = () => {
     if (clientIdBase64) {
       dispatch(fetchProfileFromMagicLink())
         .then((res) => {
-          if (res?.profileData?.active_status === 1) {
-            navigate("/leads");
-          } else if (res?.profileData?.active_status === 2) {
-            navigate("/buyers/create");
+          if (res?.success) {
+            if (res?.profileData?.active_status === 1) {
+              navigate("/leads");
+            } else if (res?.profileData?.active_status === 2) {
+              navigate("/buyers/create");
+            }
           }
         })
         .catch((err) => {
