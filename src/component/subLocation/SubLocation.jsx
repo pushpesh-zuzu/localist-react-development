@@ -32,7 +32,15 @@ const regionsData = {
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+      items: [
+        "Chester",
+        "Ellesmere Port",
+        "Nantwich",
+        "Winsford",
+        "Neston",
+        "Runcorn",
+        "Frodsham",
+      ],
     },
   ],
 };
