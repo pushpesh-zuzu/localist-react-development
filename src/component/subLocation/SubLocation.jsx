@@ -77,16 +77,7 @@ const SubLocation = () => {
         title="You May Be Interested In"
         blueTitle="Other Services "
       />
-      {/* <AveragePriceLocation
-        title={CONTENT_CONFIG_LEVEL4_TOP[service]?.title}
-        locationName={location}
-        isNeedS
-      /> */}
-      {/* <PopularCity
-        title={"Popular Cities in"}
-        location={capitalizeFirstLetter(location)}
-        POPULAR_CITIES={POPULAR_CITIES}
-      /> */}
+  
       <GetQuotesLocation
         service={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
         location={capitalizeFirstLetter(subLocation)}
