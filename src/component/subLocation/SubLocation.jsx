@@ -10,6 +10,7 @@ import {
   CONTENT_CONFIG_LEVEL5_TOP,
   CONTENT_LEVEL5_CONFIG_META,
   FIND_CONTENT_LEVEL5_CONFIG,
+  FIND_SERVICE_CONTENT_LEVEL5,
   HOW_WORK_LEVEL5,
   OTHER_SERVICES_DATA_LEVEL5,
   POPULAR_SERVICES_LEVEL5_COMPANIES,
@@ -22,6 +23,8 @@ import HowWeWork from "../location/HowWeWorkLocation/HowWeWork";
 import PopularAccountant from "../location/PopularAccountant/PopularAccountant";
 import RegionsComponent from "../subCategory/Regions/Regions";
 import Slider from "../common/slider/Slider";
+import FindAnAccountant from "../../component/subCategory/Accountant/FindAnAccountant";
+
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
     key: region.id, // Convert id to key
@@ -36,7 +39,7 @@ const regionsData = {
       items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
     },
   ],
-}
+};
 
 const SubLocation = () => {
   const { service, location, subLocation } = useParams();
@@ -45,7 +48,8 @@ const SubLocation = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
   const findContents = FIND_CONTENT_LEVEL5_CONFIG[service];
-    const transformedData = transformFenceInstallersData(regionsData, service);
+  const transformedData = transformFenceInstallersData(regionsData, service);
+  const contentBlocks = FIND_SERVICE_CONTENT_LEVEL5[service];
 
   return (
     <>
@@ -67,17 +71,21 @@ const SubLocation = () => {
         title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
         HowWeWorkLocationData={HOW_WORK_LEVEL5[service]}
       />
-        <PopularAccountant
-          title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
-          PopularAccountantData={POPULAR_SERVICES_LEVEL5_COMPANIES[service]}
-        />
-        <RegionsComponent heading="NearBy" regionsData={transformedData} />
-         <Slider
+      <PopularAccountant
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
+        PopularAccountantData={POPULAR_SERVICES_LEVEL5_COMPANIES[service]}
+      />
+      <FindAnAccountant
+        contentBlocks={contentBlocks}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.mainTitle}
+      />
+      <RegionsComponent heading="NearBy" regionsData={transformedData} />
+      <Slider
         sliderdata={OTHER_SERVICES_DATA_LEVEL5[service]}
         title="You May Be Interested In"
         blueTitle="Other Services "
       />
-  
+
       <GetQuotesLocation
         service={CONTENT_CONFIG_LEVEL5_TOP[service]?.title}
         location={capitalizeFirstLetter(subLocation)}

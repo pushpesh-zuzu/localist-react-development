@@ -10,7 +10,12 @@ import {
   TaxResolutionImg,
   TunstallAccountingImg,
 } from "../assets/Images/location";
-import { ArtificialGrass, Driveway, Landscaping, Patio } from "../assets/Images/servicesLevels/services";
+import {
+  ArtificialGrass,
+  Driveway,
+  Landscaping,
+  Patio,
+} from "../assets/Images/servicesLevels/services";
 
 const CONTENT_LEVEL5_CONFIG_META = {
   "fence-installers": {
@@ -128,6 +133,26 @@ const POPULAR_SERVICES_LEVEL5_COMPANIES = {
     },
   ],
 };
+const FIND_SERVICE_CONTENT_LEVEL5 = {
+  "fence-installers": [
+    {
+      type: "h2",
+      text: "Find Trusted Fencers in Warrington",
+    },
+    {
+      type: "p",
+      text: "Looking to create a little more peace and privacy at home? Installing a new fence is a great way to enhance security, reduce noise, and give your property a stylish finishing touch. Whether you prefer classic picket fencing, durable overlap panels, sleek aluminium, or sturdy brickwork, Localists connects you with skilled fence and gate installers in Warrington who can bring your vision to life.",
+    },
+    {
+      type: "p",
+      text: "Finding the right professional has never been easier. Simply tell us what you need and where you need it, and we’ll match you with top-rated local fencers suited to your project. We’ll send you a tailored list of trusted experts so you can compare options, read genuine reviews, request more details, and receive free quotes—all in one convenient place",
+    },
+    {
+      type: "p",
+      text: "Start your search today and find qualified fencers in Warrington who can deliver the perfect fencing solution for your home or business.",
+    },
+  ],
+};
 const OTHER_SERVICES_DATA_LEVEL5 = {
   "fence-installers": [
     {
@@ -157,7 +182,6 @@ const OTHER_SERVICES_DATA_LEVEL5 = {
       path: "artificial-grass-installation",
     },
   ],
-  
 };
 
 export {
@@ -167,5 +191,6 @@ export {
   FIND_CONTENT_LEVEL5_CONFIG,
   HOW_WORK_LEVEL5,
   POPULAR_SERVICES_LEVEL5_COMPANIES,
-  OTHER_SERVICES_DATA_LEVEL5
+  OTHER_SERVICES_DATA_LEVEL5,
+  FIND_SERVICE_CONTENT_LEVEL5,
 };
