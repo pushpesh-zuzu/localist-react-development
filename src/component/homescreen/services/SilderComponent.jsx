@@ -7,6 +7,7 @@ import SpecificService from "./SpecificService";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function AutoplayPlugin(slider) {
   let timeout;
@@ -40,7 +41,8 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 
-const SliderComponent = ({ subcategory }) => {
+const SliderComponent = ({ subcategory ,categoryName }) => {
+  const navigate = useNavigate()
     const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
         const [show, setShow] = useState(false)
         const { userToken } = useSelector((state)=> state.auth)
@@ -97,7 +99,7 @@ const SliderComponent = ({ subcategory }) => {
       </button>
       </div>
       
-      <div className={styles.viewAllBtnBox}>
+      <div onClick={()=>{categoryName ==="House & Home" && navigate('/en/gb/home')}} className={styles.viewAllBtnBox}>
         <button className={styles.viewAllBtn}>View All </button>
         </div>
       </>)}
