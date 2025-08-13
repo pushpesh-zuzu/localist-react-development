@@ -49,6 +49,7 @@ import CloneSubThreeCategory from "../pages/CloneSubThreeCategory";
 import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
 import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
 import SublocationPage from "../pages/SublocationPage";
+import SubLocationLevel5 from "../component/subLocation/SubLocationLevel5/SubLocationLevel5";
 //test en/gb/bookkeeping-services/
 
 const router = createBrowserRouter([
@@ -140,7 +141,8 @@ const router = createBrowserRouter([
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       { path: "/en/gb/:service/:location", element: <LocationPage /> },
-      { path: "/en/gb/:service/:location/:subLocation", element: <SublocationPage /> },
+      // { path: "/en/gb/:service/:location/:subLocation", element: <SublocationPage /> },
+      { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
 
       { path: "/how-it-works", element: <HowItWorksPage /> },
       { path: "/sellers/create", element: <ServicePanelPage /> },
