@@ -64,11 +64,11 @@ const SubLocation = () => {
     <>
       <Helmet>
         <title>
-          {CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].title}
+          {CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation]?.title}
         </title>
         <meta
-          name={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].name}
-          content={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation].content}
+          name={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation]?.name}
+          content={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation]?.content}
         />
       </Helmet>
       <AccountantInLocation
@@ -86,7 +86,7 @@ const SubLocation = () => {
       />
 
       <PopularAccountant
-        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation].title}
+        title={CONTENT_CONFIG_LEVEL5_TOP[service]?.[subLocation]?.title}
         PopularAccountantData={
           POPULAR_SERVICES_LEVEL5_COMPANIES[service]?.[subLocation]
         }
