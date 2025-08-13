@@ -20,7 +20,6 @@ import GetQuotesLocation from "../common/getQuotes/GetQuotesLocation";
 import AccountantInLocation from "../location/AccountantInLocation/AccountantInLocation";
 import HowWeWork from "../location/HowWeWorkLocation/HowWeWork";
 import PopularAccountant from "../location/PopularAccountant/PopularAccountant";
-import NearbyPlaces from "./NearByPlace";
 import RegionsComponent from "../subCategory/Regions/Regions";
 import Slider from "../common/slider/Slider";
 const transformFenceInstallersData = (rawData, id) => {
