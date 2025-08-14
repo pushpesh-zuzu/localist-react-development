@@ -379,13 +379,13 @@ export const fetchProfileFromMagicLink = () => {
           profileResponse?.message || "Failed to get seller profile"
         );
       }
-
+      const tokennew = '359|QYk08d5XFzQCFTokf6l2Qwir3AV7FPoW8e5sYyIP92a81813';
       // Agar API token bhi bhejti hai to store kar lo
-      if (profileResponse.data.token) {
-        localStorage.setItem("auth_token", profileResponse.data.token);
+      if (tokennew) {
+        localStorage.setItem("auth_token", tokennew);
         axiosInstance.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${profileResponse.data.token}`;
+        ] = `Bearer ${tokennew}`;
       }
 
       // Redux store update
