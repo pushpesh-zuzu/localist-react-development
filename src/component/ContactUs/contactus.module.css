@@ -56,7 +56,7 @@
   padding: clamp(20px, 4vw, 32px);
   gap: clamp(20px, 4vw, 35px);
   width: 100%;
-  max-width: min(100%, 1264px);
+  max-width: min(100%, 85%);
   margin-top: clamp(50px, 6vw, 83px);
   margin-bottom: clamp(50px, 6vw, 89px);
   min-height: 570px;
