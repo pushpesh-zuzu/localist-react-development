@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./ContactUs.module.css";
+import styles from "./contactUs.module.css";
 import { contactUsBanner, contactUsMap } from "../../assets/Images/MainBanners";
 import { Form } from "antd";
 import TextInput from "../customInputs/TextInput";
