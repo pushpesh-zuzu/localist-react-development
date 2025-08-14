@@ -372,20 +372,20 @@ export const fetchProfileFromMagicLink = () => {
       // Parse JSON
       const profileResponse = await res.json();
 
-      console.log("📩 Raw API response:", profileResponse?.data?.success);
+      console.log("📩 Raw API response new:", profileResponse?.data?.success);
 
       if (!profileResponse?.success) {
         throw new Error(
           profileResponse?.message || "Failed to get seller profile"
         );
       }
-      const tokennew = '359|QYk08d5XFzQCFTokf6l2Qwir3AV7FPoW8e5sYyIP92a81813';
+
       // Agar API token bhi bhejti hai to store kar lo
-      if (tokennew) {
-        localStorage.setItem("auth_token", tokennew);
+      if (profileResponse.data.token) {
+        localStorage.setItem("auth_token", profileResponse.data.token);
         axiosInstance.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${tokennew}`;
+        ] = `Bearer ${profileResponse.data.token}`;
       }
 
       // Redux store update
