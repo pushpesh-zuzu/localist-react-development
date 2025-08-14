@@ -379,6 +379,9 @@ export const fetchProfileFromMagicLink = () => {
           profileResponse?.message || "Failed to get seller profile"
         );
       }
+      else{
+        navigate("/dashboard");
+      }
 
       // Agar API token bhi bhejti hai to store kar lo
       if (profileResponse.data.token) {
