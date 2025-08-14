@@ -657,14 +657,19 @@ const MatchingLeads = () => {
 
         <div className={styles.dualDropdownsContainer}>
           {/* First Dropdown - Newest */}
-          <div className={styles.dropdownWrapper}>
+          <div style={{ cursor: "pointer" }} className={styles.dropdownWrapper}>
             <select
+              style={{ cursor: "pointer" }}
               className={styles.dropdownTriggers}
               value={selectedSort}
               onChange={(e) => handleSortChange(e.target.value)}
             >
               {sortOptions.map((option) => (
-                <option key={option} value={option}>
+                <option
+                  key={option}
+                  value={option}
+                  style={{ cursor: "pointer" }}
+                >
                   {option}
                 </option>
               ))}
@@ -672,14 +677,19 @@ const MatchingLeads = () => {
           </div>
 
           {/* Second Dropdown - Credit Value */}
-          <div className={styles.dropdownWrapper}>
+          <div className={styles.dropdownWrapper} style={{ cursor: "pointer" }}>
             <select
+              style={{ cursor: "pointer" }}
               className={styles.dropdownTrigger}
               value={selectedFilter}
               onChange={(e) => handleFilterChange(e.target.value)}
             >
               {filterOptions.map((option) => (
-                <option key={option} value={option}>
+                <option
+                  key={option}
+                  value={option}
+                  style={{ cursor: "pointer" }}
+                >
                   {option}
                 </option>
               ))}
@@ -688,7 +698,8 @@ const MatchingLeads = () => {
 
           <div className={styles.actionButtons}>
             <button className={styles.filterButton} onClick={handleFilterClick}>
-              <img src={FilterIcon} alt="" /> Filter
+              <img style={{ cursor: "pointer" }} src={FilterIcon} alt="" />{" "}
+              Filter
             </button>
             <button className={styles.editButton} onClick={handleEdit}>
               Edit <img src={EditIcon} alt="" />
