@@ -14,8 +14,10 @@ import {
 } from "../FindJobs/findJobSlice";
 import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 import { clearCompanyData } from "../Company/companyLookup";
+import { Link, useNavigate } from "react-router-dom";
 
 const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
+const navigate = useNavigate()
 const initialState = {
   adminToken: localStorage.getItem("barkToken")
     ? JSON.parse(localStorage.getItem("barkToken"))
