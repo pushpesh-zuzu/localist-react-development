@@ -51,6 +51,7 @@ import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTw
 import SublocationPage from "../pages/SublocationPage";
 import SubLocationLevel5 from "../component/subLocation/SubLocationLevel5/SubLocationLevel5";
 import ContactUs from "../component/ContactUs/ContactUs";
+import AboutUs from "../component/AboutUs/AboutUs";
 //test en/gb/bookkeeping-services/
 
 const router = createBrowserRouter([
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Homepage /> },
       { path: "/contact-us", element: <ContactUs /> },
+      { path: "/about-us", element: <AboutUs /> },
       { path: "/login", element: <ProtectedLogin /> },
       { path: "/passwordless_login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },

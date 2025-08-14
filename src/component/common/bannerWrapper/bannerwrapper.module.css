@@ -1,0 +1,30 @@
+.bannerImage {
+  width: 100%;
+  height: clamp(250px, 40vw, 400px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.bannerTitle {
+  position: relative;
+  z-index: 1;
+  color: white;
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 600;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  padding: 0 20px;
+}
