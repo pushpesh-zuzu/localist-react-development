@@ -74,7 +74,7 @@ const ContactUs = () => {
             </div>
             <div className={styles.inputGroup}>
               <div className={styles.customerTypeGroup}>
-                <span className={styles.buttonlable}>Customer Type</span>
+                <span style={{visibility:'hidden'}} className={styles.buttonlable}>''</span>
                 <div className={styles.buttonContainer}>
                   <div
                     className={`${styles.buttonSlider} ${
