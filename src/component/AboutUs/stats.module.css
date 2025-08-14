@@ -39,9 +39,10 @@
   font-weight: 700;
   font-size: 2.27vw;
   line-height: 100%;
+  margin-bottom: 14px;
   letter-spacing: 0%;
   text-align: center;
-  margin: 0;
+  margin: 0px 0px 14px 0px;
 }
 
 .descriptionText {
@@ -59,19 +60,36 @@
   .container {
     max-width: 90%;
   }
-
   .numberText {
     font-size: 2.5vw;
   }
-
   .descriptionText {
     font-size: 1.3vw;
   }
 }
 
 @media (max-width: 768px) {
+  .container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
   .frameContainer {
     gap: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .statsWrapper {
+    width: 50%;
+    border-right: none !important;
+    border-bottom: 2px solid #00afe3;
+    padding-right: 0px !important;
+  }
+
+  /* Remove bottom border from last card */
+  .statsWrapper:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
   }
 
   .numberText {
@@ -87,16 +105,14 @@
   .container {
     max-width: 95%;
     margin-bottom: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
-
-  .frameContainer {
-    gap: 15px;
-    flex-direction: column;
-    align-items: center;
-  }
-
   .statsWrapper {
     width: 70%;
-    min-width: auto;
+    border-right: none !important; /* Remove all right borders on mobile */
+    border-bottom: 2px solid #00afe3; /* Add bottom border for all cards */
+
+    padding-right: 0px !important;
   }
 }

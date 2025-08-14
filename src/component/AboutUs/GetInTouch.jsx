@@ -6,13 +6,13 @@ import WithBlueTextBlack from "../common/headings/WithBlueTextBlack";
 const contactMethods = [
   {
     id: 1,
-    icon: <MailOutlined style={{fontSize:'32px', color: "#00AFE3" }} className={styles.icon} />,
+    icon: <MailOutlined  style={{fontSize:'32px', color: "#00AFE3" }} className={styles.icon} />,
     text: "team@localists.com",
     onClick: () => window.location.href = "mailto:team@localists.com"
   },
   {
     id: 2,
-    icon: <PhoneOutlined  style={{fontSize:'32px', color: "#00AFE3" }} className={styles.icon} />,
+    icon: <PhoneOutlined rotate={90} style={{fontSize:'32px', color: "#00AFE3" }} className={styles.icon} />,
     text: "+1 (555) 123-4567",
     onClick: () => window.location.href = "tel:+15551234567"
   }

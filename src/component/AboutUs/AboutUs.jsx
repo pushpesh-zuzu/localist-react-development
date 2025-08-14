@@ -7,15 +7,23 @@ import Stats from "./Stats";
 import LeadershipCard from "./LeaderShipCard";
 import OurInvestor from "./OurInvestor";
 import GetInTouchButton from "./GetInTouch";
+import { Helmet } from "react-helmet-async";
 function AboutUs() {
   return (
     <div>
+      <Helmet>
+        <title>Meet Our Leadership Team & Investors - Localists</title>
+        <meta
+          name="description"
+          content="Meet our experienced leadership team and the investors driving Localists, the world’s fastest-growing local services marketplace. Get free quotes."
+        />
+      </Helmet>
       <BannerWrapper image={aboutUsBanner} />
       <WhoWeAre />
       <Stats />
-      <LeadershipCard/>
-      <OurInvestor/>
-      <GetInTouchButton/>
+      <LeadershipCard />
+      {/* <OurInvestor/> */}
+      <GetInTouchButton />
     </div>
   );
 }

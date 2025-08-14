@@ -1,39 +1,121 @@
-.breadcrumb {
+.container {
+  width: 100%;
+  height: auto;
+  min-height: 172.7px;
+  background: #e3f6fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 3.3%;
+  padding: 2% 0;
+}
+
+.frameContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 0;
+  gap: 3.25%;
+  height: auto;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statsWrapper {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1% 0;
+  min-width: 120px;
+  border-right: 2px solid #00AFE3; /* Default border for all cards */
+}
+
+/* Remove border-right from last card in desktop */
+.statsWrapper:last-child {
+  border-right: none;
+}
+
+.numberText {
+  font-family: "Poppins", sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  color: var(--text-color);
+  font-size: 2.27vw;
+  line-height: 100%;
+  margin-bottom: 14px;
+  letter-spacing: 0%;
+  text-align: center;
+  margin: 0px 0px 14px 0px;
 }
 
-/* Last item - active state */
-.lastItem {
-  color: var(--primary-color) !important; /* Force black color */
-font-weight: 600;
+.descriptionText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 1.17vw;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  margin: 0;
+  margin-top: 0.26%;
 }
 
-.active {
-  font-weight: 600 !important; /* Force bold */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .numberText {
+    font-size: 2.5vw;
+  }
+
+  .descriptionText {
+    font-size: 1.3vw;
+  }
 }
 
-/* Clickable items */
-.link {
-  color: var(--text-color) !important; /* Force blue color */
-  text-decoration: none;
-  font-weight: 500;
-  cursor: pointer !important;
+@media (max-width: 768px) {
+  .frameContainer {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .statsWrapper {
+    border-right: none; /* Remove all right borders */
+    border-bottom: 2px solid #00AFE3; /* Add bottom border */
+    padding-bottom: 20px; /* Add some spacing */
+    width: 100%; /* Make cards full width */
+    max-width: 300px; /* But limit max width */
+  }
+
+  /* Remove border from last card */
+  .statsWrapper:last-child {
+    border-bottom: none;
+  }
+
+  .numberText {
+    font-size: 24px;
+  }
+
+  .descriptionText {
+    font-size: 14px;
+  }
 }
 
-.link:hover {
-  text-decoration: underline;
-}
+@media (max-width: 480px) {
+  .container {
+    max-width: 95%;
+    margin-bottom: 5%;
+  }
 
-.separator {
-  color: var(--text-color);
-  margin: 0 4px;
-}
+  .frameContainer {
+    gap: 15px;
+  }
 
-/* Mobile */
-@media screen and (max-width: 768px) {
-  .breadcrumb {
-    font-size: 12px;
+  .statsWrapper {
+    width: 70%;
+    min-width: auto;
   }
 }
