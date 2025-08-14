@@ -111,7 +111,7 @@ const Footer = () => {
           <div className={styles.contactSection}>
             <h2>Need Help?</h2>
 
-            <button>Contact Us</button>
+            <button onClick={()=>navigate('/contact-us')}>Contact Us</button>
           </div>
         </div>
 
