@@ -28,6 +28,7 @@ const initialState = {
   switchUserLoader: false,
   passwordlessLoader: false, // ✅ Added loader for passwordless login
   currentUser: userToken?.active_status || null,
+  profile: null,
 };
 
 export const userLogin = (loginData) => {
@@ -41,6 +42,7 @@ export const userLogin = (loginData) => {
         dispatch(setUserToken(response?.data?.data));
         dispatch(setCurrentUser(response?.data?.data?.user_type));
         dispatch(setAuthToken(response?.data?.data?.remember_tokens));
+         console.log('userdataallcdlogon',response.data);
         return response.data;
       } else {
         throw new Error(response?.data?.message || "Login failed");
@@ -126,6 +128,7 @@ export const sendPasswordlessLink = (data) => {
       );
     } finally {
       dispatch(setPasswordlessLoader(false));
+      
     }
   };
 };
@@ -294,7 +297,114 @@ export const sendPasswordlessLink = (data) => {
 
 let magicLinkProcessed = false; // guard to prevent multiple calls
 
-export const fetchProfileFromMagicLink = () => {
+
+
+export const userLogout = () => {
+  return async (dispatch) => {
+    dispatch(setLogoutLoader(true));
+    try {
+      const response = await axiosInstance.post("users/logout");
+
+      if (response) {
+        // Clear Redux states
+        dispatch(setToken());
+        dispatch(setUserToken());
+        dispatch(setRegisterToken());
+        dispatch(setRegisterData());
+        dispatch(setSelectedServiceId());
+        dispatch(clearServiceFormData());
+        dispatch(setselectedServices([]));
+        dispatch(clearBuyerRegisterFormData());
+        dispatch(setCreateRequestToken());
+        dispatch(clearAuthToken());
+        dispatch(setRequestData());
+        dispatch(setRegisterStep(0));
+        dispatch(clearCompanyData());
+
+        // ✅ Clear relevant localStorage items
+        localStorage.removeItem("barkToken");
+        localStorage.removeItem("barkUserToken");
+        localStorage.removeItem("registerDataToken");
+        localStorage.removeItem("registerTokens");
+        localStorage.removeItem("createRequestToken");
+        localStorage.removeItem("createRequest");
+        return true;
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      dispatch(setLogoutLoader(false));
+    }
+  };
+};
+
+export const switchUser = (switchData) => {
+  return async (dispatch) => {
+    dispatch(setSwitchUserLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/switch_user`,
+        switchData
+      );
+
+      if (response?.data?.success) {
+        return response.data;
+      } else {
+        throw new Error(response?.data?.message || "Switch User failed");
+      }
+    } catch (error) {
+      throw error;
+    } finally {
+      dispatch(setSwitchUserLoader(false));
+    }
+  };
+};
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialState,
+  reducers: {
+    setToken(state, action) {
+      state.adminToken = action.payload;
+      localStorage.setItem("barkToken", JSON.stringify(action.payload));
+    },
+    setLoginLoader(state, action) {
+      state.loginLoader = action.payload;
+    },
+    setUserToken(state, action) {
+      state.userToken = action.payload;
+      localStorage.setItem("barkUserToken", JSON.stringify(action.payload));
+    },
+    setUserProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    setLogoutLoader(state, action) {
+      state.logoutLoader = action.payload;
+    },
+    setSwitchUserLoader(state, action) {
+      state.switchUserLoader = action.payload;
+    },
+    setPasswordlessLoader(state, action) {
+      // ✅ Added reducer for passwordless loader
+      state.passwordlessLoader = action.payload;
+    },
+    setCurrentUser(state, action) {
+      state.currentUser = action.payload;
+    },
+  },
+});
+
+export const {
+  setToken,
+  setLoginLoader,
+  setUserToken,
+  setLogoutLoader,
+  setSwitchUserLoader,
+  setCurrentUser,
+  setPasswordlessLoader,
+  setUserProfile
+} = authSlice.actions;
+
+export const fetchProfileFromMagicLink = (navigate) => {
   return async (dispatch, getState) => {
     try {
       // Guard: agar pehle hi process ho chuka hai, to skip
@@ -372,31 +482,40 @@ export const fetchProfileFromMagicLink = () => {
       // Parse JSON
       const profileResponse = await res.json();
 
-      console.log("📩 Raw API response success:",  profileResponse.success);
+      console.log("📩 Raw API response success:",  profileResponse.data);
 
       if (!profileResponse?.success) {
         throw new Error(
           profileResponse?.message || "Failed to get seller profile"
         );
       }
-      else{
+
+      dispatch(setUserProfile(profileResponse.data));
+
+    
+      // Agar API token bhi bhejti hai to store kar lo
+      if (profileResponse.data) {
+        console.log('usersettoken',profileResponse.data);
+        console.log('usersettoken',profileResponse.data?.user_type);
+        console.log('usersettoken',profileResponse.data?.remember_token);
+        
+        dispatch(setToken(decodedClientId));
+        dispatch(setUserToken(profileResponse.data));
+        dispatch(setCurrentUser(profileResponse.data?.user_type));
+        dispatch(setAuthToken(decodedClientId));
+        alert(decodedClientId);
+        axiosInstance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${decodedClientId}`;
+         return profileResponse.data;
         
       }
 
-      // Agar API token bhi bhejti hai to store kar lo
-      if (profileResponse.data.token) {
-        localStorage.setItem("auth_token", profileResponse.data.token);
-        axiosInstance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${profileResponse.data.token}`;
-      }
-
       // Redux store update
-      dispatch(setUserProfile(profileResponse.data.data));
 
       return {
         success: true,
-        profileData: profileResponse.data.data,
+        profileData: profileResponse.data,
       };
     } catch (error) {
       console.error("fetchProfileFromMagicLink error:", error);
@@ -408,106 +527,5 @@ export const fetchProfileFromMagicLink = () => {
     }
   };
 };
-
-export const userLogout = () => {
-  return async (dispatch) => {
-    dispatch(setLogoutLoader(true));
-    try {
-      const response = await axiosInstance.post("users/logout");
-
-      if (response) {
-        // Clear Redux states
-        dispatch(setToken());
-        dispatch(setUserToken());
-        dispatch(setRegisterToken());
-        dispatch(setRegisterData());
-        dispatch(setSelectedServiceId());
-        dispatch(clearServiceFormData());
-        dispatch(setselectedServices([]));
-        dispatch(clearBuyerRegisterFormData());
-        dispatch(setCreateRequestToken());
-        dispatch(clearAuthToken());
-        dispatch(setRequestData());
-        dispatch(setRegisterStep(0));
-        dispatch(clearCompanyData());
-
-        // ✅ Clear relevant localStorage items
-        localStorage.removeItem("barkToken");
-        localStorage.removeItem("barkUserToken");
-        localStorage.removeItem("registerDataToken");
-        localStorage.removeItem("registerTokens");
-        localStorage.removeItem("createRequestToken");
-        localStorage.removeItem("createRequest");
-        return true;
-      }
-    } catch (error) {
-      console.error("Logout failed:", error);
-    } finally {
-      dispatch(setLogoutLoader(false));
-    }
-  };
-};
-
-export const switchUser = (switchData) => {
-  return async (dispatch) => {
-    dispatch(setSwitchUserLoader(true));
-    try {
-      const response = await axiosInstance.post(
-        `users/switch_user`,
-        switchData
-      );
-
-      if (response?.data?.success) {
-        return response.data;
-      } else {
-        throw new Error(response?.data?.message || "Switch User failed");
-      }
-    } catch (error) {
-      throw error;
-    } finally {
-      dispatch(setSwitchUserLoader(false));
-    }
-  };
-};
-const authSlice = createSlice({
-  name: "auth",
-  initialState: initialState,
-  reducers: {
-    setToken(state, action) {
-      state.adminToken = action.payload;
-      localStorage.setItem("barkToken", JSON.stringify(action.payload));
-    },
-    setLoginLoader(state, action) {
-      state.loginLoader = action.payload;
-    },
-    setUserToken(state, action) {
-      state.userToken = action.payload;
-      localStorage.setItem("barkUserToken", JSON.stringify(action.payload));
-    },
-    setLogoutLoader(state, action) {
-      state.logoutLoader = action.payload;
-    },
-    setSwitchUserLoader(state, action) {
-      state.switchUserLoader = action.payload;
-    },
-    setPasswordlessLoader(state, action) {
-      // ✅ Added reducer for passwordless loader
-      state.passwordlessLoader = action.payload;
-    },
-    setCurrentUser(state, action) {
-      state.currentUser = action.payload;
-    },
-  },
-});
-
-export const {
-  setToken,
-  setLoginLoader,
-  setUserToken,
-  setLogoutLoader,
-  setSwitchUserLoader,
-  setCurrentUser,
-  setPasswordlessLoader,
-} = authSlice.actions;
 
 export default authSlice.reducer;
