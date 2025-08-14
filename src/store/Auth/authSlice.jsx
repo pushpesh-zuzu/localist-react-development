@@ -374,9 +374,9 @@ export const fetchProfileFromMagicLink = () => {
 
       console.log("📩 Raw API response:", profileResponse?.data?.success);
 
-      if (!profileResponse?.data?.success) {
+      if (!profileResponse?.success) {
         throw new Error(
-          profileResponse?.data?.message || "Failed to get seller profile"
+          profileResponse?.message || "Failed to get seller profile"
         );
       }
 
