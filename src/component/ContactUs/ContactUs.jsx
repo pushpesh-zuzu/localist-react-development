@@ -25,7 +25,7 @@ const ContactUs = () => {
   return (
     <div className={styles.contactSection}>
       <div className={styles.bannerImage} style={bannerImage}>
-        <h1 className={styles.bannerTitle}>Contact us</h1>
+        <h1 className={styles.bannerTitle}>Contact Us</h1>
       </div>
 
       <div className={styles.formContainer}>
