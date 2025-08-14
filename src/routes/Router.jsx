@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <Homepage /> },
-      { path: "/contactus", element: <ContactUs /> },
+      { path: "/contact-us", element: <ContactUs /> },
       { path: "/login", element: <ProtectedLogin /> },
       { path: "/passwordless_login", element: <ProtectedLogin /> },
       { path: "/category", element: <Category /> },
