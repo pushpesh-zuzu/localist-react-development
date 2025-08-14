@@ -499,14 +499,14 @@ export const fetchProfileFromMagicLink = (navigate) => {
         console.log('usersettoken',profileResponse.data?.user_type);
         console.log('usersettoken',profileResponse.data?.remember_tokens);
         
-        dispatch(setToken(profileResponse.data?.remember_tokens));
+        dispatch(setToken(decodedClientId));
         dispatch(setUserToken(profileResponse.data));
         dispatch(setCurrentUser(profileResponse.data?.user_type));
-        dispatch(setAuthToken(profileResponse.data?.remember_tokens));
+        dispatch(setAuthToken(decodedClientId));
         
         axiosInstance.defaults.headers.common[
           "Authorization"
-        ] = `Bearer ${profileResponse.data?.remember_tokens}`;
+        ] = `Bearer ${decodedClientId}`;
         
       }
 
