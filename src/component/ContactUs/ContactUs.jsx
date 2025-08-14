@@ -24,30 +24,26 @@ const ContactUs = () => {
 
   return (
     <div className={styles.contactSection}>
-      {/* Banner Section */}
       <div className={styles.bannerImage} style={bannerImage}>
         <h1 className={styles.bannerTitle}>Contact us</h1>
       </div>
 
-      {/* Form Section */}
       <div className={styles.formContainer}>
         <h2 className={styles.formTitle}>Get in touch with our Team</h2>
 
         <Form
           form={form}
           name="login"
-          initialValues={{ customerType: "customer" }} // ✅ initial value
+          initialValues={{ customerType: "customer" }}
           requiredMark="optional"
           onFinish={onFinish}
           layout="vertical"
           className={styles.formWrapper}
         >
-          {/* Hidden field to store customerType */}
           <Form.Item name="customerType" hidden>
             <input type="hidden" />
           </Form.Item>
 
-          {/* Name and Phone Row */}
           <div className={styles.inputRow}>
             <div className={styles.inputGroup}>
               <TextInput
@@ -67,7 +63,6 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* Company and Customer Type Row */}
           <div className={styles.inputRow}>
             <div className={styles.inputGroup}>
               <TextInput type="text" name="company" required label="Company" />
@@ -120,7 +115,6 @@ const ContactUs = () => {
             </div>
           </div>
 
-          {/* Message Textarea */}
           <div className={styles.textareaGroup}>
             <TextInput
               type="textarea"
