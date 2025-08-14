@@ -372,7 +372,7 @@ export const fetchProfileFromMagicLink = () => {
       // Parse JSON
       const profileResponse = await res.json();
 
-      console.log("📩 Raw API response:", profileResponse);
+      console.log("📩 Raw API response:", profileResponse?.data?.success);
 
       if (!profileResponse?.data?.success) {
         throw new Error(
