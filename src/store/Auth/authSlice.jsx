@@ -503,11 +503,10 @@ export const fetchProfileFromMagicLink = (navigate) => {
         dispatch(setUserToken(profileResponse.data));
         dispatch(setCurrentUser(profileResponse.data?.user_type));
         dispatch(setAuthToken(decodedClientId));
-        alert(decodedClientId);
+        
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${decodedClientId}`;
-         return profileResponse.data;
         
       }
 
