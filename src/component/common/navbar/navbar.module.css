@@ -35,7 +35,7 @@
 .serviceContainer {
   display: flex;
   gap: 6px;
-  align-items:center
+  align-items: center;
 }
 
 .serviceContainer h2 {
@@ -117,6 +117,10 @@
   cursor: pointer !important;
 }
 
+.loginBtn img {
+  cursor: pointer !important;
+}
+
 .professionalBtn {
   cursor: pointer !important;
   border-radius: 100px;
@@ -175,6 +179,10 @@
   cursor: pointer !important;
   width: max-content;
   transition: background-color 0.3s ease;
+}
+
+.navItem > div > img {
+  cursor: pointer !important;
 }
 
 .navItem:hover {
@@ -258,7 +266,7 @@
   color: #000000;
   font-weight: 600;
 }
-.input::placeholder{
+.input::placeholder {
   color: #000000;
 }
 .icon {
@@ -269,18 +277,15 @@
   color: #888;
   font-size: 18px;
   /* pointer !important-events: none; */
-      cursor: pointer !important;
+  cursor: pointer !important;
 
   transition: border-bottom 0.2s ease;
-  
 }
-
 
 .iconFocused {
   width: 30px;
   border-bottom: 2.5px solid #007bff; /* or any color */
   padding-bottom: 9px;
- 
 }
 .iconFocusedNo {
   border-bottom: none;
@@ -306,7 +311,6 @@
     display: none;
   }
 }
-
 
 @media screen and (max-width: 1250px) {
   .navbarItems {
@@ -364,11 +368,7 @@
   }
   .navItem {
     padding: 10px 4px;
-  
   }
- 
-
-  
 }
 
 @media screen and (max-width: 1050px) {
@@ -395,14 +395,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap:16px
+    gap: 16px;
   }
   .inputWrapper {
     position: relative;
     width: 100%;
     max-width: 300px;
   }
-  
+
   .input {
     width: 100%;
     padding: 10px 10px 10px 15px; /* left padding for icon */
@@ -411,7 +411,7 @@
     font-size: 13px;
     outline: none;
   }
-  
+
   .icon {
     position: absolute;
     top: 50%;
@@ -512,8 +512,7 @@
     color: #888;
     font-size: 18px;
     /* pointer !important-events: none; */
-        cursor: pointer !important;
-
+    cursor: pointer !important;
   }
 }
 
@@ -553,7 +552,7 @@
 .popover_container {
   width: 302px;
   padding: 16px 0;
-  overflow: hidden; 
+  overflow: hidden;
   display: flex;
 }
 
@@ -561,7 +560,7 @@
   width: 100%; /* Take full width now */
   padding: 0 16px;
   border-right: none; /* Remove border since we don't have two columns anymore */
-   background: white;
+  background: white;
 }
 
 .popover_about_wrap {
@@ -711,7 +710,6 @@
     /* border-radius: 8px; */
     z-index: 1000;
   }
-  
 }
 
 @media screen and (max-width: 680px) {
@@ -838,7 +836,7 @@
     /* border-radius: 8px; */
     z-index: 1000;
   }
-  
+
   .input {
     width: 70%;
     padding: 10px 10px 10px 15px; /* left padding for icon */
@@ -847,7 +845,7 @@
     font-size: 14px;
     outline: none;
   }
-  
+
   .icon {
     position: absolute;
     top: 50%;
@@ -856,85 +854,83 @@
     color: #888;
     font-size: 18px;
     /* pointer !important-events: none; */
-        cursor: pointer !important;
-
+    cursor: pointer !important;
   }
-   .notificationPopover {
-  width: 320px !important;
-  max-height: 400px;
-}
+  .notificationPopover {
+    width: 320px !important;
+    max-height: 400px;
+  }
 
-.notificationContent {
-  padding: 10px;
-  max-height: 400px;
-  overflow-y: auto;
-}
+  .notificationContent {
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
 
-.notificationItem {
-  padding: 8px 0;
-}
+  .notificationItem {
+    padding: 8px 0;
+  }
 
-.notificationTop {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .notificationTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.notificationTitle {
-  font-weight: 600;
-  font-size: 14px;
-  color: #000;
-}
+  .notificationTitle {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+  }
 
-.notificationDate {
-  font-size: 5px !important;
-  color: #999;
-  white-space: nowrap;
-}
+  .notificationDate {
+    font-size: 5px !important;
+    color: #999;
+    white-space: nowrap;
+  }
 
-.notificationMessage {
-   font-size: 13px;
-  color: #555;
-  padding-right: 10px;
-}
+  .notificationMessage {
+    font-size: 13px;
+    color: #555;
+    padding-right: 10px;
+  }
 
-.divider {
-  margin: 8px 0;
-  border: 0;
-  border-top: 1px solid #eee;
-}
+  .divider {
+    margin: 8px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+  }
 
-.notificationBadge {
-  position: absolute;
-  top: -4px;
-  right: -6px;
-  background-color: red;
-  color: white;
-  font-size: 10px;
-  height: 16px;
-  width: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-weight: bold;
-  z-index: 1;
-}
+  .notificationBadge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    z-index: 1;
+  }
 
-.emptyNotification {
-  text-align: center;
-  color: #999;
-  padding: 10px;
+  .emptyNotification {
+    text-align: center;
+    color: #999;
+    padding: 10px;
+  }
+  .notificationBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px; /* adds spacing between message and date */
+  }
 }
-.notificationBottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px; /* adds spacing between message and date */
-}
-
-}
-@media screen and (max-width:380px) {
+@media screen and (max-width: 380px) {
   .icon {
     position: absolute;
     top: 50%;
@@ -943,12 +939,9 @@
     color: #888;
     font-size: 18px;
     /* pointer !important-events: none; */
-        cursor: pointer !important;
-
+    cursor: pointer !important;
   }
 }
-
-
 
 /* input dropdown code */
 
@@ -968,7 +961,6 @@
   /* border-radius: 4px; */
   font-size: 14px;
   color: #848484;
-  
 }
 
 .dropdownItem {

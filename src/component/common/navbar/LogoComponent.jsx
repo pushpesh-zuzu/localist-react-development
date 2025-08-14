@@ -247,7 +247,6 @@ const LogoComponent = () => {
                         className={styles.popover_content}
                         onMouseEnter={() => setMouseHover(index)}
                         onMouseLeave={() => setMouseHover("")}
-                        
                       >
                         {/* <span className={styles.text_wrap}>
                           {item.icon && (
@@ -275,16 +274,15 @@ const LogoComponent = () => {
                             className={styles.popover_content}
                             onMouseEnter={() => setMouseHover(subIndex)}
                             onMouseLeave={() => setMouseHover("")}
-                            
                           >
                             <span className={styles.text_wrap}>
-                              <Link  to={`/en/gb/${sub.path}`}>{sub.name}</Link>
+                              <Link to={`/en/gb/${sub.path}`}>{sub.name}</Link>
                             </span>
                             <img
                               onClick={() => {
                                 setSelectedSubcategory(sub.name);
                                 setShowThirdLevel(true);
-                                setSlectedThirdLevelRoute(sub.path)
+                                setSlectedThirdLevelRoute(sub.path);
                               }}
                               src={arrowIcon}
                               width={8}
@@ -313,13 +311,12 @@ const LogoComponent = () => {
                 </div>
                 <hr />
 
-                  <div className={styles.popover_header}>
+                <div className={styles.popover_header}>
                   <Link
                     className={styles.clickableLink}
                     to={`en/gb/${selectedThirdLevelRoute}`}
                   >
-                                      <span>{selectedSubcategory}</span>
-
+                    <span>{selectedSubcategory}</span>
                   </Link>
                 </div>
 
@@ -329,7 +326,15 @@ const LogoComponent = () => {
                   ?.children?.map((child, index) => (
                     <div key={index} className={styles.popover_content}>
                       <span className={styles.text_wrap}>
-                        <Link to="#">{child}</Link>
+                        <Link
+                          to={
+                            child === "Fence Installers in Warrington"
+                              ? "en/gb/fence-installers/cheshire/warrington"
+                              : "#"
+                          }
+                        >
+                          {child}
+                        </Link>
                       </span>
                     </div>
                   ))}

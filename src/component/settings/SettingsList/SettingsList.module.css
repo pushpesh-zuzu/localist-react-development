@@ -35,7 +35,7 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #FFD5D2;
+  background-color: #ffd5d2;
 }
 .myProfileWrappers {
   display: flex;
@@ -44,7 +44,7 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #82FFB2;
+  background-color: #82ffb2;
 }
 
 .myLeadSettingWrapper {
@@ -54,7 +54,7 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #AAC9D2;
+  background-color: #aac9d2;
 }
 .myLeadSettingWrappers {
   display: flex;
@@ -63,7 +63,7 @@
   border-radius: 50%;
   width: 58px;
   height: 58px;
-  background-color: #CBD2AA;
+  background-color: #cbd2aa;
 }
 .myProfileWrapper img {
   width: 24px;

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Form, Input } from "antd";
-import styles from './customeInput.module.css'
+import styles from "./customeInput.module.css";
 
 const TextInput = ({ label, name, type = "text", rules, required = true }) => {
   const defaultRules = [
@@ -20,7 +20,19 @@ const TextInput = ({ label, name, type = "text", rules, required = true }) => {
       name={name}
       rules={rules || defaultRules}
     >
-      <Input type={type} placeholder={`Enter ${label}`} className={styles.inputFiled} />
+      {type === "textarea" ? (
+        <Input.TextArea
+          placeholder={`Enter ${label}`}
+          className={styles.inputFiled}
+          rows={4} // rows customise kar sakte ho
+        />
+      ) : (
+        <Input
+          type={type}
+          placeholder={`Enter ${label}`}
+          className={styles.inputFiled}
+        />
+      )}
     </Form.Item>
   );
 };
@@ -28,7 +40,7 @@ const TextInput = ({ label, name, type = "text", rules, required = true }) => {
 TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(["text", "email", "number"]),
+  type: PropTypes.oneOf(["text", "email", "number", "textarea"]),
   rules: PropTypes.arrayOf(PropTypes.object),
   required: PropTypes.bool,
 };

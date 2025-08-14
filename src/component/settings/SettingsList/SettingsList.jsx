@@ -21,26 +21,25 @@ const SettingsList = () => {
     navigate("/settings/my_profile");
   };
   const handleMycredit = () => {
-    navigate("/mycredits")
-  }
+    navigate("/mycredits");
+  };
   const handleReview = () => {
-
     navigate("/settings/my_profile", {
-      state: { review: true }
-    })
-  }
+      state: { review: true },
+    });
+  };
   const handleInvoice = () => {
-    navigate("/invoice-billing")
-  }
+    navigate("/invoice-billing");
+  };
   const handlePayment = () => {
-    navigate("/payment-details")
-  }
-  const handleMail =()=>{
-    navigate("/e-mail-notification")
-  }
+    navigate("/payment-details");
+  };
+  const handleMail = () => {
+    navigate("/e-mail-notification");
+  };
   const handleBrowser = () => {
-    navigate("/browser-notification")
-  }
+    navigate("/browser-notification");
+  };
   return (
     <>
       <div className="container">
@@ -60,27 +59,35 @@ const SettingsList = () => {
               style={{ backgroundColor: "#FFD5D2" }}
               onClick={handleMyProfile}
             >
-              <span>My Profile</span>
+              <span style={{ cursor: "pointer" }}>My Profile</span>
             </div>
 
             <p>
-            Make your profile stand out to win more customers. Highlight what makes your business unique and why people should choose you.
+              Make your profile stand out to win more customers. Highlight what
+              makes your business unique and why people should choose you.
             </p>
-            <div className={styles.card} style={{ backgroundColor: "#FFD5D2" }} onClick={handleReview}>
-              <span>Reviews</span>
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#FFD5D2" }}
+              onClick={handleReview}
+            >
+              <span style={{ cursor: "pointer" }}>Reviews</span>
             </div>
             <p>
-             Download the Localists.com badges and help boost your business Our badges increase the trustworthiness of your website and can help increase online visibility. 
+              Download the Localists.com badges and help boost your business Our
+              badges increase the trustworthiness of your website and can help
+              increase online visibility.
             </p>
             <div
               className={styles.card}
               style={{ backgroundColor: "#FFD5D2" }}
               onClick={handleAccountSetting}
             >
-              <span>Account details</span>
+              <span style={{ cursor: "pointer" }}>Account details</span>
             </div>
             <p>
-           The login details and contact number we’ll use to reach you directly when needed.
+              The login details and contact number we’ll use to reach you
+              directly when needed.
             </p>
           </div>
         </div>
@@ -98,17 +105,18 @@ const SettingsList = () => {
               style={{ backgroundColor: "#AAC9D2" }}
               onClick={handleMyService}
             >
-              <span>My Services</span>
+              <span style={{ cursor: "pointer" }}>My Services</span>
             </div>
             <p>
-           Tell us what you do, and we’ll send you the leads that fit your services best.
+              Tell us what you do, and we’ll send you the leads that fit your
+              services best.
             </p>
             <div
               className={styles.card}
               style={{ backgroundColor: "#AAC9D2" }}
               onClick={handleMyService}
             >
-              <span>My Locations</span>
+              <span style={{ cursor: "pointer" }}>My Locations</span>
             </div>
             <p>Add or Update the locations where you provide your services.</p>
           </div>
@@ -122,22 +130,33 @@ const SettingsList = () => {
             <h2>My Credits</h2>
           </div>
           <div className={styles.sectionContent}>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
-            onClick={handleMycredit}
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#CBD2AA" }}
+              onClick={handleMycredit}
             >
-              <span>My credits</span>
+              <span style={{ cursor: "pointer" }}>My credits</span>
             </div>
-            <p>View your credit history and top up credits to connect with more customers.</p>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
-            onClick={handleInvoice}
+            <p>
+              View your credit history and top up credits to connect with more
+              customers.
+            </p>
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#CBD2AA" }}
+              onClick={handleInvoice}
             >
-              <span>Invoices and billing details</span>
+              <span style={{ cursor: "pointer" }}>
+                Invoices and billing details
+              </span>
             </div>
             <p>Access invoices & Update Billing Information.</p>
-            <div className={styles.card} style={{ backgroundColor: "#CBD2AA" }} 
-            onClick={handlePayment}
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#CBD2AA" }}
+              onClick={handlePayment}
             >
-              <span>My payment details</span>
+              <span style={{ cursor: "pointer" }}>My payment details</span>
             </div>
             <p>Access & Update payment details.</p>
           </div>
@@ -151,20 +170,22 @@ const SettingsList = () => {
             <h2>Notifications</h2>
           </div>
           <div className={styles.sectionContent}>
-            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
-            onClick={handleMail}
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#82FFB2" }}
+              onClick={handleMail}
             >
-              <span>Email</span>
+              <span style={{ cursor: "pointer" }}>Email</span>
             </div>
             <p>Let us know which emails you’d like to get from us.</p>
-            <div className={styles.card} style={{ backgroundColor: "#82FFB2" }}
-             onClick={handleBrowser}
+            <div
+              className={styles.card}
+              style={{ backgroundColor: "#82FFB2" }}
+              onClick={handleBrowser}
             >
-              <span>Browser</span>
+              <span style={{ cursor: "pointer" }}>Browser</span>
             </div>
-            <p>
-              Select the browser notifications you want to get from us.
-            </p>
+            <p>Select the browser notifications you want to get from us.</p>
           </div>
         </div>
       </div>

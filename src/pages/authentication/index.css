@@ -44,6 +44,10 @@
   font-family: "poppins";
 }
 
+.loginBtn img {
+  cursor: pointer !important;
+}
+
 .login-options {
   display: flex;
   justify-content: space-between;

@@ -46,7 +46,7 @@ function capitalizeFirstLetter(str) {
       </Helmet>
 
       <AccountantInLocation
-      bgImage={BannerImageLevel4[service]?.[location]}
+        bgImage={BannerImageLevel4[service]?.[location]}
         defaultService={LEVEL4_SERVICES_NAME[service]}
         title={CONTENT_CONFIG_LEVEL4_TOP[service]?.[location]?.title}
         breadcrumb={BREADCRUMB_LEVEL4_CONFIG[service]?.[location]}
