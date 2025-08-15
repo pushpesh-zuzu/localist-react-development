@@ -49,6 +49,12 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
         "(max-width: 600px)": {
           slides: { perView: 2, spacing: 5 },
         },
+         "(max-width: 520px)": {
+          slides: { perView: 1.5, spacing: 5 },
+        },
+        "(max-width: 375px)": {
+          slides: { perView: 1.2, spacing: 5 },
+        },
       },
     },
 
