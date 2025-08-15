@@ -140,6 +140,7 @@ const LogoComponent = () => {
     setMouseHover(false);
     setShowbMenu(false);
     setShowThirdLevel(false);
+    setShowbMenu(false);
   };
 
   const content = () => {
@@ -149,6 +150,7 @@ const LogoComponent = () => {
         onMouseLeave={() => {
           setShowSubMenu(false);
           setShowThirdLevel(false);
+          setShowbMenu(false);
         }}
       >
         <div className={styles.popover_wrap}>
@@ -162,7 +164,10 @@ const LogoComponent = () => {
                 transition={{ duration: 0.2 }}
               >
                 {isMobile && (
-                  <div className={styles.crossBtn} onClick={handleClose}>
+                  <div
+                    className={styles.crossBtn}
+                    onClick={() => handleClose()}
+                  >
                     ×
                   </div>
                 )}
@@ -184,7 +189,12 @@ const LogoComponent = () => {
                       {item.name === "Other Services" ? (
                         <h4 className={styles.othertext}>{item.name}</h4>
                       ) : (
-                        <Link to={item.path ? `en/gb/${item.path}` : "#"}>
+                        <Link
+                          onClick={() => {
+                            handleClose();
+                          }}
+                          to={item.path ? `en/gb/${item.path}` : "#"}
+                        >
                           {item.name}
                         </Link>
                       )}
@@ -232,6 +242,7 @@ const LogoComponent = () => {
 
                 <div className={styles.popover_header}>
                   <Link
+                    onClick={() => handleClose()}
                     className={styles.clickableLink}
                     to={`en/gb/${filterRoute}`}
                   >
@@ -276,7 +287,14 @@ const LogoComponent = () => {
                             onMouseLeave={() => setMouseHover("")}
                           >
                             <span className={styles.text_wrap}>
-                              <Link to={`/en/gb/${sub.path}`}>{sub.name}</Link>
+                              <Link
+                                onClick={() => {
+                                  handleClose();
+                                }}
+                                to={`/en/gb/${sub.path}`}
+                              >
+                                {sub.name}
+                              </Link>
                             </span>
                             <img
                               onClick={() => {
@@ -327,6 +345,9 @@ const LogoComponent = () => {
                     <div key={index} className={styles.popover_content}>
                       <span className={styles.text_wrap}>
                         <Link
+                          onClick={() => {
+                            handleClose();
+                          }}
                           to={
                             child === "Fence Installers in Warrington"
                               ? "en/gb/fence-installers/cheshire/warrington"
@@ -373,8 +394,10 @@ const LogoComponent = () => {
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <Popover
+          onMouseEnter={() => setShowbMenu(true)}
           placement={placement}
-          open={isMobile ? showMenu : null}
+          // open={isMobile ? showMenu : null}
+          open={showMenu}
           content={content}
           arrow={false}
           trigger="hover"
