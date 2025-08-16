@@ -104,6 +104,7 @@ const AccountDetails = () => {
   }, [editProfileList]);
   const userId =
     userToken?.remember_tokens ?? registerData?.remember_tokens;
+  const userIdNew = userToken?.id  ? userToken?.id  : registerData?.id
   useEffect(() => {
     const data = {
       user_id: userId
@@ -149,7 +150,8 @@ const AccountDetails = () => {
   }
   const handleVerifyNumber = () => {
     const data = {
-      phone_number:contactData?.phone
+      phone_number:contactData?.phone,
+      user_id: userIdNew
     }
     dispatch(sellerPhoneNumberVerifyApi(data)).then((result) => {
       if(result) {
