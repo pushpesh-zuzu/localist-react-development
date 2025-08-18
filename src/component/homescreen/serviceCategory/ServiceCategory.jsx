@@ -20,7 +20,6 @@ const ServiceCategory = () => {
 // dispatch (getCategoriesList())
   dispatch(getAllServiceList());
   },[])
-  console.log("allServiceList",allServiceList)
 
   const handleCategoryClick = (id, name) => {
     window.scrollTo(0, 0);

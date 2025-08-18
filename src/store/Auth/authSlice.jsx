@@ -14,14 +14,15 @@ import {
 } from "../FindJobs/findJobSlice";
 import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 import { clearCompanyData } from "../Company/companyLookup";
+import { safeLocalStorage } from "../../utils/localStorage";
 
-const userToken = JSON.parse(localStorage.getItem("barkUserToken"));
+const userToken = JSON.parse(safeLocalStorage.getItem("barkUserToken"));
 const initialState = {
-  adminToken: localStorage.getItem("barkToken")
-    ? JSON.parse(localStorage.getItem("barkToken"))
+  adminToken: safeLocalStorage.getItem("barkToken")
+    ? JSON.parse(safeLocalStorage.getItem("barkToken"))
     : null,
-  userToken: localStorage.getItem("barkUserToken")
-    ? JSON.parse(localStorage.getItem("barkUserToken"))
+  userToken: safeLocalStorage.getItem("barkUserToken")
+    ? JSON.parse(safeLocalStorage.getItem("barkUserToken"))
     : null,
   loginLoader: false,
   logoutLoader: false,
@@ -321,13 +322,13 @@ export const userLogout = () => {
         dispatch(setRegisterStep(0));
         dispatch(clearCompanyData());
 
-        // ✅ Clear relevant localStorage items
-        localStorage.removeItem("barkToken");
-        localStorage.removeItem("barkUserToken");
-        localStorage.removeItem("registerDataToken");
-        localStorage.removeItem("registerTokens");
-        localStorage.removeItem("createRequestToken");
-        localStorage.removeItem("createRequest");
+        // ✅ Clear relevant safeLocalStorage items
+        safeLocalStorage.removeItem("barkToken");
+        safeLocalStorage.removeItem("barkUserToken");
+        safeLocalStorage.removeItem("registerDataToken");
+        safeLocalStorage.removeItem("registerTokens");
+        safeLocalStorage.removeItem("createRequestToken");
+        safeLocalStorage.removeItem("createRequest");
         return true;
       }
     } catch (error) {
@@ -365,14 +366,14 @@ const authSlice = createSlice({
   reducers: {
     setToken(state, action) {
       state.adminToken = action.payload;
-      localStorage.setItem("barkToken", JSON.stringify(action.payload));
+      safeLocalStorage.setItem("barkToken", JSON.stringify(action.payload));
     },
     setLoginLoader(state, action) {
       state.loginLoader = action.payload;
     },
     setUserToken(state, action) {
       state.userToken = action.payload;
-      localStorage.setItem("barkUserToken", JSON.stringify(action.payload));
+      safeLocalStorage.setItem("barkUserToken", JSON.stringify(action.payload));
     },
     setUserProfile: (state, action) => {
       state.profile = action.payload;
@@ -454,7 +455,7 @@ export const fetchProfileFromMagicLink = (navigate) => {
       //     headers: {
       //       "Content-Type": "application/json",
       //       // Agar token chahiye to add:
-      //       // Authorization: `Bearer ${localStorage.getItem("auth_token")}`
+      //       // Authorization: `Bearer ${safeLocalStorage.getItem("auth_token")}`
       //     },
       //     body: null, // POST request me empty body
       //   }

@@ -139,7 +139,6 @@ const [show, setShow] = useState(false);
         dispatch(setRegisterData(updatedUser))
         setDataSave(updatedUser?.active_status)
         // setRegisterDatas(updateRegiater?.active_status)
-        console.log(updatedUser, "updatedUser")
 
         // Update redux state if needed
         dispatch(setCurrentUser(dataSave));
@@ -245,7 +244,6 @@ useEffect(() => {
   const isAccountPage = location.pathname === "/account/setting";
   const isNotification = location.pathname === "/user/notification";
   const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
-  console.log(viewProfile, getUserType(), profileId?.profileId, "profileId")
   // path: "admin/review/:profileId",
 
   const userName = userToken?.name || registerData?.name || "";
