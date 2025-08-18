@@ -15,6 +15,7 @@ export default function MobileSlideInSearch({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchInputRef = useRef(null);
 
+  console.log(services, "serviceItems");
 
   const closeSearch = () => {
     setIsOpen(false);
@@ -29,6 +30,7 @@ export default function MobileSlideInSearch({
   };
 
   const handleServiceClickLocal = (serviceItem) => {
+    console.log("Service selected:", serviceItem);
     handleServiceSelect(serviceItem);
     setMobileSearchText(serviceItem.name);
     setShowSuggestions(false);

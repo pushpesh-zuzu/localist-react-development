@@ -56,6 +56,7 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
+  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");

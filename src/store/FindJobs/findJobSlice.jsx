@@ -3,17 +3,16 @@ import { showToast } from "../../utils";
 import axiosInstance from "../../Api/axiosInstance.js";
 import { fetchCompanyDetails } from '../../../src/store/Company/companyLookup';
 import { changeSequenceServices } from "../../utils/allservices.js";
-import { safeLocalStorage } from "../../utils/localStorage.js";
 const initialState = {
   popularList: [],
   popularLoader: false,
   hasPopulatedFromCompany: false,
   searchServiceLoader: false,
   service: [],
-  registerData:JSON.parse(safeLocalStorage.getItem("registerDataToken")) || null,
+  registerData:JSON.parse(localStorage.getItem("registerDataToken")) || null,
   registerLoader: false,
   registerStep: 0,
-  registerToken: JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
+  registerToken: JSON.parse(localStorage.getItem("registerTokens")) || null,
   selectedServiceId: null,
   selectedServices:[],
   categoriesListLoader:false,
@@ -65,7 +64,7 @@ phone:""
     coordinates2:""
 
   },
-  authToken:JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
+  authToken:JSON.parse(localStorage.getItem("registerTokens")) || null,
   
 };
 export const getPopularServiceList = () => {
@@ -373,7 +372,7 @@ const findJobSlice = createSlice({
     },
     setRegisterToken(state, action) {
       state.registerToken = action.payload;
-      safeLocalStorage.setItem("registerTokens", JSON.stringify(action.payload))
+      localStorage.setItem("registerTokens", JSON.stringify(action.payload))
     },
     setSelectedServiceId(state, action) {
       state.selectedServiceId = action.payload;
@@ -387,7 +386,7 @@ const findJobSlice = createSlice({
     },
      setRegisterData(state, action) {
       state.registerData = action.payload;
-      safeLocalStorage.setItem("registerDataToken", JSON.stringify(action.payload))
+      localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
     },
     setErrorMessage(state,action) {
       state.errorMessage = action.payload
@@ -436,7 +435,7 @@ state.pendingLoader = action.payload;
       }
       else{
         state.authToken=action.payload;
-        // safeLocalStorage.setItem("registerDataToken", JSON.stringify(action.payload))
+        // localStorage.setItem("registerDataToken", JSON.stringify(action.payload))
       }
     },
     clearAuthToken(state) {

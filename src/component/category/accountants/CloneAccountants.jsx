@@ -20,6 +20,7 @@ const CloneAccountants = ({
   panelImage,
   defaultServiceName = "",
 }) => {
+  console.log(panelImage);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
