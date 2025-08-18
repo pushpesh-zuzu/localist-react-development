@@ -4,7 +4,6 @@ import axios from "axios";
 import { setAuthToken, setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
 import { setToken, setUserToken } from "../Auth/authSlice";
 import { showToast, updateLocalStorageValue } from "../../utils";
-import { safeLocalStorage } from "../../utils/localStorage";
 
 const initialState = {
   questionLoader:false,
@@ -28,8 +27,8 @@ qualityData:{},
 addDetailLoader:false,
 buyerrequestListLoader:false, 
 buyerRequestList:[] ,
-requestDataList: safeLocalStorage.getItem("createRequest") ? JSON.parse(safeLocalStorage.getItem("createRequest")) : null,
-createRequestToken: safeLocalStorage.getItem("createRequestToken") ?  JSON.parse(safeLocalStorage.getItem("createRequestToken")) : null,
+requestDataList: localStorage.getItem("createRequest") ? JSON.parse(localStorage.getItem("createRequest")) : null,
+createRequestToken: localStorage.getItem("createRequestToken") ?  JSON.parse(localStorage.getItem("createRequestToken")) : null,
 getuploadImg:[],
 infoLoader:false,
 requestLoader:false,
@@ -417,12 +416,12 @@ const buyerSlice = createSlice({
     },
     setRequestData(state,action) {
       state.requestDataList = action.payload
-      safeLocalStorage.setItem("createRequest", JSON.stringify(action.payload))
+      localStorage.setItem("createRequest", JSON.stringify(action.payload))
 
     },
     setCreateRequestToken(state,action) {
       state.createRequestToken = action.payload
-      safeLocalStorage.setItem("createRequestToken", JSON.stringify(action.payload))
+      localStorage.setItem("createRequestToken", JSON.stringify(action.payload))
     },
     clearSetbuyerRequestData(state,action){
       state.buyerRequest ={

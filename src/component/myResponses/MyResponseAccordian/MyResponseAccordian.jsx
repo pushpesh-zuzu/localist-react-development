@@ -217,19 +217,19 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   const handleRemove = (id) => {
     handleSubmit(id)
     return
-    // // implement your delete logic here, example:
-    // dispatch(deleteNoteApi({ note_id: id })).then((res) => {
-    //   if (res.success) {
-    //     showToast("success", result?.message);
-    //     const sellerData = {
-    //       lead_id: profileLeadViewData.leads.id,
-    //       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
-    //       buyer_id: profileLeadViewData.id,
-    //     };
+    // implement your delete logic here, example:
+    dispatch(deleteNoteApi({ note_id: id })).then((res) => {
+      if (res.success) {
+        showToast("success", result?.message);
+        const sellerData = {
+          lead_id: profileLeadViewData.leads.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+          buyer_id: profileLeadViewData.id,
+        };
 
-    //     dispatch(getSellerNotesApi(sellerData));
-    //   }
-    // });
+        dispatch(getSellerNotesApi(sellerData));
+      }
+    });
   };
 
   useEffect(() => {

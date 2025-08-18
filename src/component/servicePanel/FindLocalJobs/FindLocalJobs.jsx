@@ -13,33 +13,28 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
-import rightArrow from "../../../assets/Images/ServicePanel/rightArrow.svg";
-
+import rightArrow from "../../../assets/Images/ServicePanel/rightArrow.svg"
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // ✅ State में move किया
-
   const dispatch = useDispatch();
   const divRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
-
   const handleServiceClick = (service) => {
     const slug = generateSlug(service.name);
     dispatch(setSelectedServiceId(service.id));
     navigate(`/sellers/create-account/${slug}`);
   };
-
   useEffect(() => {
     dispatch(getPopularServiceList());
     return () => {
       dispatch(setService([]));
     };
   }, []);
-
+  
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (isDropdownOpen && Input.trim() !== "") {
@@ -49,20 +44,7 @@ const FindLocalJobs = () => {
 
     return () => clearTimeout(delayDebounce);
   }, [Input, dispatch, isDropdownOpen]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMobile(window.innerWidth <= 480);
-
-      const handleResize = () => {
-        setIsMobile(window.innerWidth <= 480);
-      };
-
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, []);
-
+  const isMobile = window.innerWidth <= 480;
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
@@ -72,23 +54,18 @@ const FindLocalJobs = () => {
     },
     [dispatch]
   );
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (divRef.current && !divRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (divRef.current && !divRef.current.contains(event.target)) {
+          setIsDropdownOpen(false); // Close the div
+        }
       }
-    }
-
-    // ✅ Browser check add की
-    if (typeof document !== "undefined") {
+  
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }
-  }, []);
-
+    }, []);
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
@@ -96,12 +73,14 @@ const FindLocalJobs = () => {
       navigate(`/sellers/create-account/${slug}`);
     }
   };
-
   return (
     <div className={styles.container}>
       {/* Left Section */}
       <div className={styles.leftSection}>
-        <h1>Find Local Jobs For Your Business Now</h1>
+        <h1>
+          Find Local Jobs For 
+          Your Business Now
+        </h1>
         <p>
           1000’s of local and remote clients are already waiting for your
           services
@@ -120,38 +99,45 @@ const FindLocalJobs = () => {
 
           {isDropdownOpen && service?.length > 0 && (
             <>
-              <div className={styles.searchResults} ref={divRef}>
-                {searchServiceLoader ? (
-                  <Spin indicator={<LoadingOutlined spin />} />
-                ) : (
-                  <>
-                    {service?.map((item) => (
-                      <p
-                        key={item.id}
-                        className={styles.searchItem}
-                        onClick={() => handleSelectService(item)}
-                      >
-                        {item.name}
-                      </p>
-                    ))}
-                  </>
-                )}
-              </div>
+            {/* <div className={styles.hrtop}></div> */}
+            <div className={styles.searchResults} ref={divRef}>
+              {searchServiceLoader ? (
+                <Spin indicator={<LoadingOutlined spin />} />
+              ) : (
+                <>
+                  {" "}
+                  {service?.map((item) => (
+                    <p
+                      key={item.id}
+                      className={styles.searchItem}
+                      onClick={() => handleSelectService(item)}
+                    >
+                      {item.name}
+                    </p>
+                  ))}
+                </>
+              )}
+            </div>
             </>
           )}
 
+          {/* <button onClick={handleGetStarted}>Get started</button> 
+          <img src={rightArrow} alt="arrow" /> */}
           <div className={styles.responsiveBtnWrapper}>
-            <button onClick={handleGetStarted} className={styles.getStartedBtn}>
-              Get started
-            </button>
+  <button
+    onClick={handleGetStarted}
+    className={styles.getStartedBtn}
+  >
+    Get started
+  </button>
 
-            <img
-              src={rightArrow}
-              alt="arrow"
-              onClick={handleGetStarted}
-              className={styles.getStartedArrow}
-            />
-          </div>
+  <img
+    src={rightArrow}
+    alt="arrow"
+    onClick={handleGetStarted}
+    className={styles.getStartedArrow}
+  />
+</div>
         </div>
       </div>
 
@@ -180,6 +166,7 @@ const FindLocalJobs = () => {
                   alt={service.title}
                 />
                 <span>{service.name}</span>
+                
               </div>
             ))}
           </div>
