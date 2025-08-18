@@ -388,6 +388,7 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData,data,isEdi
 console.log(getlocationData,polygons,data,"locationData")
   useEffect(() => {
     // Load Google Maps API if not already loaded
+    
     const loadGoogleMapsScript = () => {
       if (!window.google || !window.google.maps || !window.google.maps.drawing) {
         const script = document.createElement("script");

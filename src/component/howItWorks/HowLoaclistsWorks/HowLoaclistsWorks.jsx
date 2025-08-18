@@ -69,6 +69,7 @@ const HowLoaclistsWorks = () => {
       componentRestrictions: { country: "UK" },
     });
 
+    
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (!place.address_components) return;
