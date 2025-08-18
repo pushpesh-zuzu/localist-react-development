@@ -9,6 +9,9 @@
 .trustpilotMobile {
   display: none;
 }
+.link {
+  text-decoration: none;
+}
 
 .footerContainer {
   display: flex;
