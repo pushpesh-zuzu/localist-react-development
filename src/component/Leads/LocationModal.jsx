@@ -208,7 +208,7 @@ const LocationModal = ({
       if (!window.google) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places,geometry";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = () => {
@@ -248,7 +248,7 @@ const LocationModal = ({
         inputRef.current,
         {
           types: ["geocode"],
-          componentRestrictions: { country: "IN" },
+          componentRestrictions: { country: "UK" },
         }
       );
 
@@ -311,7 +311,7 @@ const LocationModal = ({
       geocoder.geocode(
         {
           address: locationData.postcode,
-          componentRestrictions: { country: "IN" },
+          componentRestrictions: { country: "UK" },
         },
         (results, status) => {
           if (status === "OK" && results && results[0]) {

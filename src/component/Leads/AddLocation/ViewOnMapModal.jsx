@@ -79,7 +79,7 @@ const ViewOnMapModal = ({
       if (!window.google) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places,geometry";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = () => {
@@ -111,7 +111,7 @@ const ViewOnMapModal = ({
 
   const getLatLngFromPincode = async (pincode) => {
     const apiKey = "AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE"; // Replace with your real API key
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${locationData?.postcode}&components=country:IN&key=${apiKey}`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${locationData?.postcode}&components=country:UK&key=${apiKey}`;
 
     try {
       const response = await fetch(url);
@@ -216,7 +216,7 @@ const ViewOnMapModal = ({
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode(
-        { address: locationData.postcode, componentRestrictions: { country: "IN" } },
+        { address: locationData.postcode, componentRestrictions: { country: "UK" } },
         (results, status) => {
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();

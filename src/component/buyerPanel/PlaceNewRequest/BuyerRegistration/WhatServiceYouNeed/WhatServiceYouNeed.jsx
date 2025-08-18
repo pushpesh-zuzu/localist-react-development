@@ -104,12 +104,19 @@ const WhatServiceYouNeed = ({
 
     if (!pincode) {
       newErrors.pincode = "Pincode is required!";
-    } else if (pincode.length < 6 || pincode.length > 30) {
-      newErrors.pincode = "Pincode must be between 6 and 10 characters!";
+    } else if (pincode.length < 5 || pincode.length > 8) {
+      newErrors.pincode = "Pincode must be between 5 and 8 characters!";
+    }
+
+    
+
+    if(!city){
+           showToast("error", "Please provide valid pincode!");
+          return;
     }
 
     setErrors(newErrors);
-
+    
     if (!newErrors.service && !newErrors.pincode) {
       dispatch(
         setbuyerRequestData({
@@ -129,7 +136,7 @@ const WhatServiceYouNeed = ({
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
@@ -146,7 +153,7 @@ const WhatServiceYouNeed = ({
         inputRef.current,
         {
           types: ["geocode"],
-          componentRestrictions: { country: "IN" },
+          componentRestrictions: { country: "UK" },
         }
       );
 
@@ -163,10 +170,10 @@ const WhatServiceYouNeed = ({
         // )?.long_name;
         let cityName =
           place.address_components.find((component) =>
-            component.types.includes("locality")
+            component.types.includes("postal_town")
           )?.long_name ||
           place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_3")
+            component.types.includes("administrative_area_level_2")
           )?.long_name;
         const townName = place.address_components.find((component) =>
           component.types.includes("administrative_area_level_3")
@@ -182,6 +189,7 @@ const WhatServiceYouNeed = ({
         }
 
         if (cityName) {
+          
           setCity(cityName);
           dispatch(setcitySerach(cityName)); // <- set city state
         }
@@ -259,8 +267,8 @@ const WhatServiceYouNeed = ({
     setErrors((prev) => ({
       ...prev,
       pincode:
-        value.length > 0 && (value.length < 6 || value.length > 10)
-          ? "Pincode must be between 6 and 10 characters!"
+        value.length > 0 && (value.length < 5 || value.length > 8)
+          ? "Pincode must be between 5 and 8 characters!"
           : "",
     }));
   };
