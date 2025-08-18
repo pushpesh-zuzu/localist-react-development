@@ -104,7 +104,7 @@ const HowLoaclistsWorks = () => {
       if (!window.google) {
         const script = document.createElement("script");
         // script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBIdwxC-hvTxiXdHvrqYEuCGvOvpEV-wNE&libraries=places`;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places`
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBSUJdKHdCCiTAhOp9YD7Ttl3ifO_7qCvQ&libraries=places`
         script.async = true;
         script.defer = true;
         script.onload = initGoogleAutocomplete;
