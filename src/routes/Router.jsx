@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createMemoryRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
@@ -54,365 +54,745 @@ import ContactUs from "../component/ContactUs/ContactUs";
 import AboutUs from "../component/AboutUs/AboutUs";
 //test en/gb/bookkeeping-services/
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      { index: true, element: <Homepage /> },
-      { path: "/contact-us", element: <ContactUs /> },
-      { path: "/about-us", element: <AboutUs /> },
-      { path: "/login", element: <ProtectedLogin /> },
-      { path: "/passwordless_login", element: <ProtectedLogin /> },
-      { path: "/category", element: <Category /> },
-      { path: "/inprogress", element: <InProgressPage /> },
-      {
-        path: "/en/gb/home/",
-        element: (
-          <CloneCatrgory
-            routeName="home"
-            accountHeader="Home & Garden"
-            subHeader="Home & Garden"
-            bestText={`It's super fast and easy!`}
-          />
-        ),
-      },
-      // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
+const router =
+  typeof window !== "undefined"
+    ? createBrowserRouter([
+        {
+          path: "/",
+          element: <MainLayout />,
+          children: [
+            { index: true, element: <Homepage /> },
+            { path: "/contact-us", element: <ContactUs /> },
+            { path: "/about-us", element: <AboutUs /> },
+            { path: "/login", element: <ProtectedLogin /> },
+            { path: "/passwordless_login", element: <ProtectedLogin /> },
+            { path: "/category", element: <Category /> },
+            { path: "/inprogress", element: <InProgressPage /> },
+            {
+              path: "/en/gb/home/",
+              element: (
+                <CloneCatrgory
+                  routeName="home"
+                  accountHeader="Home & Garden"
+                  subHeader="Home & Garden"
+                  bestText={`It's super fast and easy!`}
+                />
+              ),
+            },
+            // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
 
-      {
-        path: "/en/gb/business/",
-        element: (
-          <CloneCatrgory
-            routeName="business"
-            accountHeader="Business"
-            subHeader="Busines"
-          />
-        ),
-      },
-      {
-        path: "/en/gb/financial-and-accounting/",
-        element: (
-          <CloneCatrgory
-            accountHeader="Financial & Accounting"
-            subHeader="Financial Accountant"
-          />
-        ),
-      },
-      {
-        path: "/en/gb/accountants/",
-        element: (
-          <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
-        ),
-      },
-      {
-        path: "/en/gb/bookkeeping-services/",
-        element: (
-          <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
-        ),
-      },
-      {
-        path: "/en/gb/builders/",
-        element: (
-          <CloneSubTwoCategory
-            routeName="Home & Garden / Builders"
-            accountHeader="Builders"
-            subHeader="builder"
-          />
-        ),
-      },
-      {
-        path: "/en/gb/gardening-landscaping/",
-        element: (
-          <CloneSubCategoryTwoGardening
-            routeName="gardening-landscaping"
-            accountHeader="Gardening & Landscaping"
-            subHeader="Gardening & Landscaping"
-          />
-        ),
-      },
+            {
+              path: "/en/gb/business/",
+              element: (
+                <CloneCatrgory
+                  routeName="business"
+                  accountHeader="Business"
+                  subHeader="Busines"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/financial-and-accounting/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Financial & Accounting"
+                  subHeader="Financial Accountant"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/accountants/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Accountants"
+                  subHeader="Accountant"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/bookkeeping-services/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Bookkeepers"
+                  subHeader="Bookkeeper"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/builders/",
+              element: (
+                <CloneSubTwoCategory
+                  routeName="Home & Garden / Builders"
+                  accountHeader="Builders"
+                  subHeader="builder"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/gardening-landscaping/",
+              element: (
+                <CloneSubCategoryTwoGardening
+                  routeName="gardening-landscaping"
+                  accountHeader="Gardening & Landscaping"
+                  subHeader="Gardening & Landscaping"
+                />
+              ),
+            },
 
-      {
-        path: "/en/gb/:slug/",
-        element: (
-          <CloneSubThreeCategory
-            routeName="Home & Garden / Gardening & Landscaping"
-            accountHeader="General Accounting"
-            subHeader="General Accountant"
-          />
-        ),
-      },
-      { path: "/category/:serviceName", element: <Category /> },
-      { path: "/sub-category", element: <SubCategoryPage /> },
-      { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
-      { path: "/en/gb/:service/:location", element: <LocationPage /> },
-      {
-        path: "/en/gb/:service/:location/:subLocation",
-        element: <SublocationPage />,
-      },
-      // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
+            {
+              path: "/en/gb/:slug/",
+              element: (
+                <CloneSubThreeCategory
+                  routeName="Home & Garden / Gardening & Landscaping"
+                  accountHeader="General Accounting"
+                  subHeader="General Accountant"
+                />
+              ),
+            },
+            { path: "/category/:serviceName", element: <Category /> },
+            { path: "/sub-category", element: <SubCategoryPage /> },
+            {
+              path: "/sub-category/:serviceSubName",
+              element: <SubCategoryPage />,
+            },
+            { path: "/en/gb/:service/:location", element: <LocationPage /> },
+            {
+              path: "/en/gb/:service/:location/:subLocation",
+              element: <SublocationPage />,
+            },
+            // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
 
-      { path: "/how-it-works", element: <HowItWorksPage /> },
-      { path: "/sellers/create", element: <ServicePanelPage /> },
-      {
-        path: "/sellers/create-account/:serviceTitle",
-        element: <ServiceCreateAccount />,
-      },
-      {
-        path: "/buyers/create",
-        element: (
-          <ProtectedRoute>
-            <BuyerPanelPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/account/setting",
-        element: (
-          <ProtectedRoute>
-            <BuyerAccountSettings />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/user/notification",
-        element: (
-          <ProtectedRoute>
-            <BuyerNotification />
-          </ProtectedRoute>
-        ),
-      },
-      { path: "/privacy-policy", element: <PrivacyPolicy /> },
-      {
-        path: "/dashboard",
-        element: (
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/leads",
-        element: (
-          <ProtectedRoute>
-            <Leads />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/settings",
-        element: (
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/settings/my_profile",
-        element: (
-          <ProtectedRoute>
-            <MyProfile />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/settings/account_details",
-        element: (
-          <ProtectedRoute>
-            <AccountDetails />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/leads/settings",
-        element: (
-          <ProtectedRoute>
-            <LeadSetting />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/bids-list/:requestId",
-        element: (
-          <ProtectedRoute>
-            <BidsList />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/bids-list/reply/:requestId",
-        element: (
-          <ProtectedRoute>
-            <ManualBidList />
-          </ProtectedRoute>
-        ),
-      },
-      { path: "/help-center", element: <HelpCenterPage /> },
-      { path: "/pricing", element: <PricingPage /> },
-      {
-        path: "/feedback/questions",
-        element: (
-          <ProtectedRoute>
-            <SuggestQuestions />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/feedback/questions/new",
-        element: (
-          <ProtectedRoute>
-            <NewQuestion />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/feedback/questions/edit",
-        element: (
-          <ProtectedRoute>
-            <EditQuestion />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/feedback/questions/remove",
-        element: (
-          <ProtectedRoute>
-            <RemoveQuestion />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/lead/profile-view/:profileId",
-        element: (
-          <ProtectedRoute>
-            <LeadProfileData />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/lead/save-later",
-        element: (
-          <ProtectedRoute>
-            <MyResponse />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/lead/save-for-later",
-        element: (
-          <ProtectedRoute>
-            <SaveForLater />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/pending/view-profile/:profileId",
-        element: (
-          <ProtectedRoute>
-            <ViewProfile />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/mycredit",
-        element: (
-          <ProtectedRoute>
-            <MyCredit />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/mycredits",
-        element: (
-          <ProtectedRoute>
-            <MyCredits />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/invoice-billing",
-        element: (
-          <ProtectedRoute>
-            <InvoiceAndBilling />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/payment-details",
-        element: (
-          <ProtectedRoute>
-            <MyPaymentDetails />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/view-profile/:sellerId/:requestId",
-        element: (
-          <ProtectedRoute>
-            <ViewProfiles />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/view-profile/:sellerId/:requestId",
-        element: (
-          <ProtectedRoute>
-            <ViewProfiles />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/review/:profileId",
-        element: (
-          // <ProtectedRoute>
-          <ViewProfiles />
-          // </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/e-mail-notification",
-        element: (
-          <ProtectedRoute>
-            <EmailNotification />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/browser-notification",
-        element: (
-          <ProtectedRoute>
-            <BrowserNotification />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/inprogress",
-        element: (
-          <ProtectedRoute>
-            <InProgressPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/buyer-close/:id",
-        element: (
-          <ProtectedRoute>
-            <BuyerFirstStep />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/buyer-second-step",
-        element: (
-          <ProtectedRoute>
-            <BuyerSecondStep />
-          </ProtectedRoute>
-        ),
-      },
+            { path: "/how-it-works", element: <HowItWorksPage /> },
+            { path: "/sellers/create", element: <ServicePanelPage /> },
+            {
+              path: "/sellers/create-account/:serviceTitle",
+              element: <ServiceCreateAccount />,
+            },
+            {
+              path: "/buyers/create",
+              element: (
+                <ProtectedRoute>
+                  <BuyerPanelPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/account/setting",
+              element: (
+                <ProtectedRoute>
+                  <BuyerAccountSettings />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/user/notification",
+              element: (
+                <ProtectedRoute>
+                  <BuyerNotification />
+                </ProtectedRoute>
+              ),
+            },
+            { path: "/privacy-policy", element: <PrivacyPolicy /> },
+            {
+              path: "/dashboard",
+              element: (
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/leads",
+              element: (
+                <ProtectedRoute>
+                  <Leads />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings",
+              element: (
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings/my_profile",
+              element: (
+                <ProtectedRoute>
+                  <MyProfile />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings/account_details",
+              element: (
+                <ProtectedRoute>
+                  <AccountDetails />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/leads/settings",
+              element: (
+                <ProtectedRoute>
+                  <LeadSetting />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/bids-list/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <BidsList />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/bids-list/reply/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ManualBidList />
+                </ProtectedRoute>
+              ),
+            },
+            { path: "/help-center", element: <HelpCenterPage /> },
+            { path: "/pricing", element: <PricingPage /> },
+            {
+              path: "/feedback/questions",
+              element: (
+                <ProtectedRoute>
+                  <SuggestQuestions />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/new",
+              element: (
+                <ProtectedRoute>
+                  <NewQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/edit",
+              element: (
+                <ProtectedRoute>
+                  <EditQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/remove",
+              element: (
+                <ProtectedRoute>
+                  <RemoveQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/profile-view/:profileId",
+              element: (
+                <ProtectedRoute>
+                  <LeadProfileData />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/save-later",
+              element: (
+                <ProtectedRoute>
+                  <MyResponse />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/save-for-later",
+              element: (
+                <ProtectedRoute>
+                  <SaveForLater />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/pending/view-profile/:profileId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfile />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/mycredit",
+              element: (
+                <ProtectedRoute>
+                  <MyCredit />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/mycredits",
+              element: (
+                <ProtectedRoute>
+                  <MyCredits />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/invoice-billing",
+              element: (
+                <ProtectedRoute>
+                  <InvoiceAndBilling />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/payment-details",
+              element: (
+                <ProtectedRoute>
+                  <MyPaymentDetails />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/view-profile/:sellerId/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfiles />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/view-profile/:sellerId/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfiles />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/review/:profileId",
+              element: (
+                // <ProtectedRoute>
+                <ViewProfiles />
+                // </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/e-mail-notification",
+              element: (
+                <ProtectedRoute>
+                  <EmailNotification />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/browser-notification",
+              element: (
+                <ProtectedRoute>
+                  <BrowserNotification />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/inprogress",
+              element: (
+                <ProtectedRoute>
+                  <InProgressPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/buyer-close/:id",
+              element: (
+                <ProtectedRoute>
+                  <BuyerFirstStep />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/buyer-second-step",
+              element: (
+                <ProtectedRoute>
+                  <BuyerSecondStep />
+                </ProtectedRoute>
+              ),
+            },
 
-      // { path: "/inprogress", element: <InProgressPage /> },
-      { path: "*", element: <NotFound /> },
-    ],
-  },
-]);
+            // { path: "/inprogress", element: <InProgressPage /> },
+            { path: "*", element: <NotFound /> },
+          ],
+        },
+      ])
+    : createMemoryRouter([
+        {
+          path: "/",
+          element: <MainLayout />,
+          children: [
+            { index: true, element: <Homepage /> },
+            { path: "/contact-us", element: <ContactUs /> },
+            { path: "/about-us", element: <AboutUs /> },
+            { path: "/login", element: <ProtectedLogin /> },
+            { path: "/passwordless_login", element: <ProtectedLogin /> },
+            { path: "/category", element: <Category /> },
+            { path: "/inprogress", element: <InProgressPage /> },
+            {
+              path: "/en/gb/home/",
+              element: (
+                <CloneCatrgory
+                  routeName="home"
+                  accountHeader="Home & Garden"
+                  subHeader="Home & Garden"
+                  bestText={`It's super fast and easy!`}
+                />
+              ),
+            },
+            // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
+
+            {
+              path: "/en/gb/business/",
+              element: (
+                <CloneCatrgory
+                  routeName="business"
+                  accountHeader="Business"
+                  subHeader="Busines"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/financial-and-accounting/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Financial & Accounting"
+                  subHeader="Financial Accountant"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/accountants/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Accountants"
+                  subHeader="Accountant"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/bookkeeping-services/",
+              element: (
+                <CloneCatrgory
+                  accountHeader="Bookkeepers"
+                  subHeader="Bookkeeper"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/builders/",
+              element: (
+                <CloneSubTwoCategory
+                  routeName="Home & Garden / Builders"
+                  accountHeader="Builders"
+                  subHeader="builder"
+                />
+              ),
+            },
+            {
+              path: "/en/gb/gardening-landscaping/",
+              element: (
+                <CloneSubCategoryTwoGardening
+                  routeName="gardening-landscaping"
+                  accountHeader="Gardening & Landscaping"
+                  subHeader="Gardening & Landscaping"
+                />
+              ),
+            },
+
+            {
+              path: "/en/gb/:slug/",
+              element: (
+                <CloneSubThreeCategory
+                  routeName="Home & Garden / Gardening & Landscaping"
+                  accountHeader="General Accounting"
+                  subHeader="General Accountant"
+                />
+              ),
+            },
+            { path: "/category/:serviceName", element: <Category /> },
+            { path: "/sub-category", element: <SubCategoryPage /> },
+            {
+              path: "/sub-category/:serviceSubName",
+              element: <SubCategoryPage />,
+            },
+            { path: "/en/gb/:service/:location", element: <LocationPage /> },
+            {
+              path: "/en/gb/:service/:location/:subLocation",
+              element: <SublocationPage />,
+            },
+            // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
+
+            { path: "/how-it-works", element: <HowItWorksPage /> },
+            { path: "/sellers/create", element: <ServicePanelPage /> },
+            {
+              path: "/sellers/create-account/:serviceTitle",
+              element: <ServiceCreateAccount />,
+            },
+            {
+              path: "/buyers/create",
+              element: (
+                <ProtectedRoute>
+                  <BuyerPanelPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/account/setting",
+              element: (
+                <ProtectedRoute>
+                  <BuyerAccountSettings />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/user/notification",
+              element: (
+                <ProtectedRoute>
+                  <BuyerNotification />
+                </ProtectedRoute>
+              ),
+            },
+            { path: "/privacy-policy", element: <PrivacyPolicy /> },
+            {
+              path: "/dashboard",
+              element: (
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/leads",
+              element: (
+                <ProtectedRoute>
+                  <Leads />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings",
+              element: (
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings/my_profile",
+              element: (
+                <ProtectedRoute>
+                  <MyProfile />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/settings/account_details",
+              element: (
+                <ProtectedRoute>
+                  <AccountDetails />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/leads/settings",
+              element: (
+                <ProtectedRoute>
+                  <LeadSetting />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/bids-list/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <BidsList />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/bids-list/reply/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ManualBidList />
+                </ProtectedRoute>
+              ),
+            },
+            { path: "/help-center", element: <HelpCenterPage /> },
+            { path: "/pricing", element: <PricingPage /> },
+            {
+              path: "/feedback/questions",
+              element: (
+                <ProtectedRoute>
+                  <SuggestQuestions />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/new",
+              element: (
+                <ProtectedRoute>
+                  <NewQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/edit",
+              element: (
+                <ProtectedRoute>
+                  <EditQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/feedback/questions/remove",
+              element: (
+                <ProtectedRoute>
+                  <RemoveQuestion />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/profile-view/:profileId",
+              element: (
+                <ProtectedRoute>
+                  <LeadProfileData />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/save-later",
+              element: (
+                <ProtectedRoute>
+                  <MyResponse />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/lead/save-for-later",
+              element: (
+                <ProtectedRoute>
+                  <SaveForLater />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/pending/view-profile/:profileId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfile />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/mycredit",
+              element: (
+                <ProtectedRoute>
+                  <MyCredit />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/mycredits",
+              element: (
+                <ProtectedRoute>
+                  <MyCredits />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/invoice-billing",
+              element: (
+                <ProtectedRoute>
+                  <InvoiceAndBilling />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/payment-details",
+              element: (
+                <ProtectedRoute>
+                  <MyPaymentDetails />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/view-profile/:sellerId/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfiles />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/view-profile/:sellerId/:requestId",
+              element: (
+                <ProtectedRoute>
+                  <ViewProfiles />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/review/:profileId",
+              element: (
+                // <ProtectedRoute>
+                <ViewProfiles />
+                // </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/e-mail-notification",
+              element: (
+                <ProtectedRoute>
+                  <EmailNotification />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/browser-notification",
+              element: (
+                <ProtectedRoute>
+                  <BrowserNotification />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/inprogress",
+              element: (
+                <ProtectedRoute>
+                  <InProgressPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/buyer-close/:id",
+              element: (
+                <ProtectedRoute>
+                  <BuyerFirstStep />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: "/buyer-second-step",
+              element: (
+                <ProtectedRoute>
+                  <BuyerSecondStep />
+                </ProtectedRoute>
+              ),
+            },
+
+            // { path: "/inprogress", element: <InProgressPage /> },
+            { path: "*", element: <NotFound /> },
+          ],
+        },
+      ]);
 
 export default router;
