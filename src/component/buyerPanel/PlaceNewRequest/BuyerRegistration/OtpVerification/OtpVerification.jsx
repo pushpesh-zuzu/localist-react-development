@@ -101,7 +101,7 @@ console.log(requestDataList?.phone,"requestDataList")
         <p className={styles.instruction}>
           Please enter the code sent by SMS to 
           <br />
-          <span>+ {requestDataList?.phone}</span>
+          <span>+44{requestDataList?.phone}</span>
         </p>
 
         <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
