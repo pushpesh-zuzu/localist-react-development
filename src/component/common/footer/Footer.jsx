@@ -56,7 +56,7 @@ const FooterContent = () => (
 
 const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth < 520);
   const navigate = useNavigate();
   // const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
   // const [isNumberVerifiedModalOpen, setIsNumberVerifiedModalOpen] =
