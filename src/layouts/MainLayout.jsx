@@ -32,9 +32,11 @@ const MainLayout = () => {
   const location = useLocation();
   const title = pageTitles[location.pathname] || "Localists";
 
-  useEffect(() => {
+ useEffect(() => {
+  if (typeof document !== 'undefined') {
     document.title = title;
-  }, [title]);
+  }
+}, [title]);
   return (
     <div>
       <ScrollToTop />
