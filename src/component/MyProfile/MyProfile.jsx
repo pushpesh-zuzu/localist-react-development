@@ -14,7 +14,6 @@ import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
 // import { Collapse } from "antd";
 // import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
 
-
 const MyProfile = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ const MyProfile = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const { viewProfileData } = useSelector((state) => state.leadSetting);
-// const { Panel } = Collapse;
+  // const { Panel } = Collapse;
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
 
   // Refs for each accordion section
@@ -47,7 +46,8 @@ const MyProfile = () => {
         const el = sectionRefs[accordion]?.current;
         if (el) {
           const yOffset = -100; // Adjust this offset based on your header height
-          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          const y =
+            el.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: "smooth" });
         }
       }, 200);
@@ -67,41 +67,42 @@ const MyProfile = () => {
     };
     dispatch(addViewProfileList(sellerData));
   }, [dispatch, user_id]);
-//   const items = [
-//   {
-//     key: "1",
-//     title: "About",
-//     content: (<>  <AboutAccordion details={viewProfileData} /></>)
-//   },
-//   {
-//     key: "2",
-//     title: "Reviews",
-//     content: (<> <ReviewsAccordion /></>),
-//   },
-//   {
-//     key: "3",
-//     title: "Photos",
-//     content: (<>     <PhotosAccordion details={viewProfileData?.user_details} /></>),
-//   },
-//   {
-//     key: "4",
-//     title: "Social media & links",
-//     content: (<>  <SocialMediaAccordion details={viewProfileData?.user_details} /></>),
-//   },
-//   {
-//     key: "5",
-//     title: "Accreditations",
-//     content: (<> <AccreditationsAccordion details={viewProfileData?.accreditations} /></>)
-//   },
-//   {
-//     key: "6",
-//     title: "Q&As",
-//     content: (
-//      (<>  <QandAAccordion details={viewProfileData?.qa} /></>)
-//     ),
-//   },
- 
-// ];
+
+  //   const items = [
+  //   {
+  //     key: "1",
+  //     title: "About",
+  //     content: (<>  <AboutAccordion details={viewProfileData} /></>)
+  //   },
+  //   {
+  //     key: "2",
+  //     title: "Reviews",
+  //     content: (<> <ReviewsAccordion /></>),
+  //   },
+  //   {
+  //     key: "3",
+  //     title: "Photos",
+  //     content: (<>     <PhotosAccordion details={viewProfileData?.user_details} /></>),
+  //   },
+  //   {
+  //     key: "4",
+  //     title: "Social media & links",
+  //     content: (<>  <SocialMediaAccordion details={viewProfileData?.user_details} /></>),
+  //   },
+  //   {
+  //     key: "5",
+  //     title: "Accreditations",
+  //     content: (<> <AccreditationsAccordion details={viewProfileData?.accreditations} /></>)
+  //   },
+  //   {
+  //     key: "6",
+  //     title: "Q&As",
+  //     content: (
+  //      (<>  <QandAAccordion details={viewProfileData?.qa} /></>)
+  //     ),
+  //   },
+
+  // ];
 
   return (
     <div className={styles.container}>
@@ -133,9 +134,8 @@ const MyProfile = () => {
         Take a moment to enhance your profile
       </h4>
       <p className={styles.description}>
-        Your profile is your first chance to impress customers on
-        Localists.com — a complete profile helps you stand out and win more
-        work.
+        Your profile is your first chance to impress customers on Localists.com
+        — a complete profile helps you stand out and win more work.
       </p>
 
       <a
@@ -162,7 +162,7 @@ const MyProfile = () => {
             isOpen={openAccordion === "Reviews"}
             onClick={() => openAccordionHandler("Reviews")}
           >
-            <ReviewsAccordion details={viewProfileData?.reviews}/>
+            <ReviewsAccordion details={viewProfileData?.reviews} />
           </AccordionItem>
         </div>
 
@@ -192,7 +192,9 @@ const MyProfile = () => {
             isOpen={openAccordion === "Accreditations"}
             onClick={() => openAccordionHandler("Accreditations")}
           >
-            <AccreditationsAccordion details={viewProfileData?.accreditations} />
+            <AccreditationsAccordion
+              details={viewProfileData?.accreditations}
+            />
           </AccordionItem>
         </div>
 
@@ -206,7 +208,7 @@ const MyProfile = () => {
           </AccordionItem>
         </div>
 
-         {/* <Collapse
+        {/* <Collapse
       accordion
       expandIconPosition="right"
       className={styles.custom_collapse}
