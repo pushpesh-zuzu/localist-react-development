@@ -86,6 +86,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
+        
         if (!place.address_components) return;
         console.log(place,'place')
 

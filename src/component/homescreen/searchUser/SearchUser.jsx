@@ -142,6 +142,7 @@ const SearchProfessionals = ({ nextStep }) => {
             postalCode = component.long_name;
           }
         });
+        
         let cityName =
           place.address_components.find((component) =>
             component.types.includes("locality")
