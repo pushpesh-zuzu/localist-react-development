@@ -28,6 +28,7 @@ const WhatServiceYouNeed = ({
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
+  
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
   const { userToken } = useSelector((state) => state.auth);
@@ -108,11 +109,9 @@ const WhatServiceYouNeed = ({
       newErrors.pincode = "Pincode must be between 5 and 8 characters!";
     }
 
-    
-
-    if(!city){
-           showToast("error", "Please provide valid pincode!");
-          return;
+    if (!citySerach) {
+      alert("Please provide valid pincode!");
+      return;
     }
 
     setErrors(newErrors);
@@ -189,6 +188,7 @@ const WhatServiceYouNeed = ({
           setErrors((prev) => ({ ...prev, pincode: "" }));
         }
 
+        
         if (cityName) {
           
           setCity(cityName);

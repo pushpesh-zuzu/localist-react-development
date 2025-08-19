@@ -184,6 +184,22 @@ const SearchProfessionals = ({ nextStep }) => {
       return;
     }
 
+
+    if (!pincode) {
+      showToast("error", "Please enter a pincode");
+      return;
+    }  
+    if (pincode.length < 5 || pincode.length > 8) {
+      showToast("error", "Pincode must be between 5 and 8 characters!");
+      return;
+    }
+
+
+    if(!city){
+       showToast("error", "Please provide valid pincode!");
+      return;
+    }
+
     const { id, name } = selectedService;
 
     dispatch(questionAnswerData({ service_id: id }));
