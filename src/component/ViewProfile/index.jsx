@@ -132,7 +132,6 @@ import Photos from "./Photos/Photos";
 import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
-// import LocationIcon from "../../assets/Icons/LocationIcon.png";
 import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -140,6 +139,7 @@ import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../utils";
 import starImg from "../../assets/Icons/MyResponse/StarImg.svg";
 import grayStar from "../../assets/Icons/MyResponse/grayStar.svg";
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
+import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
 
 const ViewProfiles = () => {
   const [activeTab, setActiveTab] = useState("About");
@@ -292,15 +292,40 @@ const ViewProfiles = () => {
             <div className={styles.sidebar}>
               <div className={styles.rating}>
                 <span className={styles.stars}>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <span key={i}>
-                      {i <= viewProfileData?.avg_rating ? (
-                        <img src={starImg} alt="..." width={29} height={27} />
-                      ) : (
-                        <img src={grayStar} alt="..." />
-                      )}
-                    </span>
-                  ))}
+                  {Array.from({ length: 5 }).map((_, index) => {
+                    const rating = viewProfileData?.avg_rating ?? 0;
+                    if (index < Math.floor(rating)) {
+                      return (
+                        <img
+                          key={index}
+                          src={starImg}
+                          alt="star"
+                          width={19}
+                          height={19}
+                        />
+                      );
+                    } else if (index < rating) {
+                      return (
+                        <img
+                          key={index}
+                          src={halfStar}
+                          alt="half-star"
+                          width={21}
+                          height={21}
+                        />
+                      );
+                    } else {
+                      return (
+                        <img
+                          key={index}
+                          src={grayStar}
+                          alt="empty-star"
+                          width={19}
+                          height={19}
+                        />
+                      );
+                    }
+                  })}
                 </span>
                 <span className={styles.ratingCount}>
                   {viewProfileData?.avg_rating}

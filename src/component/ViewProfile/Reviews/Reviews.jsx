@@ -273,7 +273,7 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
       }
       return acc;
     },
-    { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 } // <-- safe initialization
+    { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
   );
 
   const getPercentage = (count) => {
@@ -400,7 +400,7 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
               return (
                 <div key={star} className={styles.row}>
                   <label className={styles.ratingLabel}>
-                    <input type="radio" name="rating" disabled />
+                    {/* <input type="radio" name="rating" disabled /> */}
                     <div className={styles.starText}>
                       <div style={{ width: "10px" }}>{star}</div>
                       <img src={count > 0 ? blueStar : blackStar} alt="star" />
