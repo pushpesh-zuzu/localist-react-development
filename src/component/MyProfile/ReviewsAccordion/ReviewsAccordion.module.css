@@ -136,13 +136,19 @@
   padding: 22px 19px;
   margin-bottom: 27px;
   font-size: 14px;
-  height: 1000px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .localistBox strong {
   font-weight: 500;
   font-size: 20px;
   color: #828282;
+}
+
+.scrollBox {
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .localistBox p {

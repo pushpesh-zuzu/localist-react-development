@@ -124,7 +124,11 @@ const ReviewsAccordion = ({ details }) => {
         </p>
         <ReviewSection details={viewProfileData} showSummary={false} />
       </div> */}
-      <div className={styles.localistBox}>
+      <div
+        className={`${styles.localistBox} ${
+          (viewProfileData?.reviews_count ?? 0) > 5 ? styles.scrollBox : ""
+        }`}
+      >
         {viewProfileData?.reviews_count > 0 ? (
           <ReviewSection details={viewProfileData} showSummary={false} />
         ) : (
