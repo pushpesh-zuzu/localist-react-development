@@ -5,42 +5,56 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSellerCardApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
 
-
 const CreditCard = () => {
-    const [isopen,setIsOpen] = useState(false) 
-    const dispatch = useDispatch()
-    const { getSellerCardData } = useSelector((state) => state.myCredit)
-    const cardNumber = getSellerCardData?.map((item) => item?.card_number)
-    
-    useEffect(() => {
-        dispatch(getSellerCardApi())
-    }, [])
-    const handleChangeModal = () => {
-        setIsOpen(true)
-    }
-    return (
-        <>
-            <div className={styles.container}>
-                {getSellerCardData?.length ? <>  <div className={styles.visaCard}>
-                    <img src={visaImg} alt="Visa" />
+  const [isopen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { getSellerCardData } = useSelector((state) => state.myCredit);
+  const cardNumber = getSellerCardData?.map((item) => item?.card_number);
 
-                    <div>
-                        We'll charge The Card Ending *{cardNumber?.[0]?.slice(-4)} That We Have On File
-                        
-                    </div>
-                </div>
-                    {/* <div className={styles.rightText} onClick={handleChangeModal}> Change</div> */}
-                    </> :
-                    <>
-                        <div className={styles.visaCard}>
-                            <img src={visaImg} alt="Visa" />
+  useEffect(() => {
+    dispatch(getSellerCardApi());
+  }, []);
+  const handleChangeModal = () => {
+    setIsOpen(true);
+  };
+  return (
+    <>
+      <div className={styles.container}>
+        {getSellerCardData?.length ? (
+          <>
+            {" "}
+            <div className={styles.visaCard}>
+              <img src={visaImg} alt="Visa" />
 
-                            <div className={styles.textRight}>Buy more credits and get a bigger discount</div>
-                        </div>
-                        <div className={styles.rightText} onClick={handleChangeModal}> Add  |   Change  |   Remove</div></>}
+              <div>
+                We'll charge The Card Ending *{cardNumber?.[0]?.slice(-4)} That
+                We Have On File
+              </div>
             </div>
-            {isopen && <AddCardModal onClose={() => setIsOpen(false)} />}
-        </>
-    )
-}
+            <div className={styles.rightText} onClick={handleChangeModal}>
+              {" "}
+              Change
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.visaCard}>
+              <img src={visaImg} alt="Visa" />
+
+              <div className={styles.textRight}>
+                Buy more credits and get a bigger discount
+              </div>
+            </div>
+            <div className={styles.rightText} onClick={handleChangeModal}>
+              {" "}
+              Add
+              {/* | Change | Remove */}
+            </div>
+          </>
+        )}
+      </div>
+      {isopen && <AddCardModal onClose={() => setIsOpen(false)} />}
+    </>
+  );
+};
 export default CreditCard;

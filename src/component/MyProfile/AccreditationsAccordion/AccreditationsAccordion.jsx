@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
@@ -17,19 +16,19 @@ import { BASE_IMAGE, BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 const AccreditationsAccordion = ({ details }) => {
   const [accordionGroups, setAccordionGroups] = useState([
     {
-      accreditations: [
-
-      ],
+      accreditations: [],
       newAccreditation: "",
       accreImage: null,
     },
   ]);
 
-
   const fileInputRefs = useRef([]);
   const dispatch = useDispatch();
-  const { accreditationsUpdateSuccess, accreditationsUpdateError, sellerLoader } =
-    useSelector((state) => state.myProfile);
+  const {
+    accreditationsUpdateSuccess,
+    accreditationsUpdateError,
+    sellerLoader,
+  } = useSelector((state) => state.myProfile);
   const handleAdd = (index) => {
     const updated = [...accordionGroups];
     const text = updated[index].newAccreditation.trim();
@@ -66,7 +65,7 @@ const AccreditationsAccordion = ({ details }) => {
   };
 
   const handleSave = () => {
-    console.log(accordionGroups)
+    console.log(accordionGroups);
     dispatch(updateSellerAccreditations(accordionGroups));
   };
 
@@ -86,7 +85,9 @@ const AccreditationsAccordion = ({ details }) => {
       const mapped = details.map((item) => ({
         accreditations: item.name ? [item.name] : [],
         newAccreditation: "",
-        accreImage: item.image ? { previewUrl: `${BASE_IMAGE}/accreditations/${item.image}` } : null,
+        accreImage: item.image
+          ? { previewUrl: `${BASE_IMAGE}/accreditations/${item.image}` }
+          : null,
       }));
       setAccordionGroups(mapped);
     }
@@ -108,15 +109,19 @@ const AccreditationsAccordion = ({ details }) => {
         </div>
 
         <p className={styles.description}>
-          Adding your accreditations helps customers on Localists.com feel more confident hiring you and can increase your chances of winning more work.
+          Adding your accreditations helps customers on Localists.com feel more
+          confident hiring you and can increase your chances of winning more
+          work.
         </p>
 
-       {accordionGroups?.length === 0 &&  <button
-                  className={styles.addAccreditationButtons}
-                  onClick={handleAccreditationAdd}
-                >
-                  + Add Accreditation
-                </button>}
+        {accordionGroups?.length === 0 && (
+          <button
+            className={styles.addAccreditationButtons}
+            onClick={handleAccreditationAdd}
+          >
+            + Add Accreditation
+          </button>
+        )}
 
         {accordionGroups.map((group, index) => (
           <div key={index} className={styles.card}>
@@ -147,7 +152,6 @@ const AccreditationsAccordion = ({ details }) => {
                 )}
 
                 {/* Show name if it exists */}
-
               </div>
               <div className={styles.accreditationList}>
                 {/* {group.accreditations.map((item, idx) => (
@@ -156,21 +160,23 @@ const AccreditationsAccordion = ({ details }) => {
                   </p>
                 ))} */}
                 {group.accreditations.length > 0 && (
-                  <span className={styles.accreditationItem}>{group.accreditations[0]}</span>
+                  <span className={styles.accreditationItem}>
+                    {group.accreditations[0]}
+                  </span>
                 )}
               </div>
             </div>
             {group.accreditations.length === 0 && (
-  <div className={styles.inputGroup}>
-    <input
-      type="text"
-      value={group.newAccreditation}
-      onChange={(e) => handleInputChange(index, e.target.value)}
-      placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
-      className={styles.input}
-    />
-  </div>
-)}
+              <div className={styles.inputGroup}>
+                <input
+                  type="text"
+                  value={group.newAccreditation}
+                  onChange={(e) => handleInputChange(index, e.target.value)}
+                  placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
+                  className={styles.input}
+                />
+              </div>
+            )}
 
             {/* <div className={styles.inputGroup}>
               <input
@@ -182,21 +188,24 @@ const AccreditationsAccordion = ({ details }) => {
               />
             
             </div> */}
-              {/* <button
+            {/* <button
         className={styles.addButton}
         onClick={() => handleAdd(index)}
       >
         Add
       </button> */}
 
-            <div className={styles.AccreditationsAccordionBox} style={{ display: 'flex', gap: '1rem', marginTop: '10px' }}>
+            <div
+              className={styles.AccreditationsAccordionBox}
+              style={{ display: "flex", gap: "1rem", marginTop: "10px" }}
+            >
               <button
                 className={styles.addAccreditationButton}
                 onClick={() => handleClickUpload(index)}
               >
                 {group.accreImage ? "Change Photo " : "Upload Photo"}
               </button>
-{console.log(accordionGroups,index,"accordionGroups")}
+              {console.log(accordionGroups, index, "accordionGroups")}
               {/* Only show Add Accreditation button on the last card */}
               {index === accordionGroups.length - 1 && (
                 <button
@@ -226,9 +235,6 @@ const AccreditationsAccordion = ({ details }) => {
     )} */}
           </div>
         ))}
-
-
-
       </div>
 
       <div className={styles.footer}>
