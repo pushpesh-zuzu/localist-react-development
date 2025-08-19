@@ -223,7 +223,11 @@ import halfStar from "../../../assets/Icons/MyResponse/halfStar.svg";
 // import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
-const ReviewSection = ({ details, disableReviewButton = false }) => {
+const ReviewSection = ({
+  details,
+  disableReviewButton = false,
+  showSummary = true,
+}) => {
   const [isopen, setIsOpen] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams();
@@ -295,24 +299,27 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
   return (
     <>
       <div className={styles.reviewList}>
-        <div className={styles.reviewHeader}>
-          <h2>Reviews ({reviewLength})</h2>
-          <div>
-            <button
-              className={styles.leaveBtn}
-              onClick={handleOpen}
-              disabled={disableReviewButton}
-            >
-              Leave a review
-            </button>
-          </div>
-        </div>
-        <div className={styles.container}>
-          <div className={styles.left}>
-            <div className={styles.score}>
-              {viewProfileData?.avg_rating ?? 0}/5
+        {showSummary && (
+          <div className={styles.reviewHeader}>
+            <h2>Reviews ({reviewLength})</h2>
+            <div>
+              <button
+                className={styles.leaveBtn}
+                onClick={handleOpen}
+                disabled={disableReviewButton}
+              >
+                Leave a review
+              </button>
             </div>
-            {/* <div className={styles.stars}>
+          </div>
+        )}
+        {showSummary && (
+          <div className={styles.container}>
+            <div className={styles.left}>
+              <div className={styles.score}>
+                {viewProfileData?.avg_rating ?? 0}/5
+              </div>
+              {/* <div className={styles.stars}>
               {Array.from({ length: 5 }).map((_, index) => (
                 <img
                   key={index}
@@ -323,48 +330,48 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
                 />
               ))}
             </div> */}
-            <div className={styles.stars}>
-              {Array.from({ length: 5 }).map((_, index) => {
-                const rating = viewProfileData?.avg_rating ?? 0;
-                if (index < Math.floor(rating)) {
-                  return (
-                    <img
-                      key={index}
-                      src={starImg}
-                      alt="star"
-                      width={19}
-                      height={19}
-                    />
-                  );
-                } else if (index < rating) {
-                  return (
-                    <img
-                      key={index}
-                      src={halfStar}
-                      alt="half-star"
-                      width={21}
-                      height={21}
-                    />
-                  );
-                } else {
-                  return (
-                    <img
-                      key={index}
-                      src={blackStar}
-                      alt="empty-star"
-                      width={19}
-                      height={19}
-                    />
-                  );
-                }
-              })}
+              <div className={styles.stars}>
+                {Array.from({ length: 5 }).map((_, index) => {
+                  const rating = viewProfileData?.avg_rating ?? 0;
+                  if (index < Math.floor(rating)) {
+                    return (
+                      <img
+                        key={index}
+                        src={starImg}
+                        alt="star"
+                        width={19}
+                        height={19}
+                      />
+                    );
+                  } else if (index < rating) {
+                    return (
+                      <img
+                        key={index}
+                        src={halfStar}
+                        alt="half-star"
+                        width={21}
+                        height={21}
+                      />
+                    );
+                  } else {
+                    return (
+                      <img
+                        key={index}
+                        src={blackStar}
+                        alt="empty-star"
+                        width={19}
+                        height={19}
+                      />
+                    );
+                  }
+                })}
+              </div>
+              <div className={styles.totalReviews}>
+                {reviewLength} customer reviews
+              </div>
             </div>
-            <div className={styles.totalReviews}>
-              {reviewLength} customer reviews
-            </div>
-          </div>
-          <div className={styles.middleBox}></div>
-          {/* <div className={styles.right}>
+            <div className={styles.middleBox}></div>
+            {/* <div className={styles.right}>
             {[5, 4, 3, 2, 1].map((star, index) => (
               <div key={star} className={styles.row}>
                 <label className={styles.ratingLabel}>
@@ -394,35 +401,39 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
             ))}
           </div> */}
 
-          <div className={styles.right}>
-            {[5, 4, 3, 2, 1].map((star) => {
-              const count = ratingCounts[star] ?? 0; // ✅ safe
-              return (
-                <div key={star} className={styles.row}>
-                  <label className={styles.ratingLabel}>
-                    {/* <input type="radio" name="rating" disabled /> */}
-                    <div className={styles.starText}>
-                      <div style={{ width: "10px" }}>{star}</div>
-                      <img src={count > 0 ? blueStar : blackStar} alt="star" />
+            <div className={styles.right}>
+              {[5, 4, 3, 2, 1].map((star) => {
+                const count = ratingCounts[star] ?? 0; // ✅ safe
+                return (
+                  <div key={star} className={styles.row}>
+                    <label className={styles.ratingLabel}>
+                      {/* <input type="radio" name="rating" disabled /> */}
+                      <div className={styles.starText}>
+                        <div style={{ width: "10px" }}>{star}</div>
+                        <img
+                          src={count > 0 ? blueStar : blackStar}
+                          alt="star"
+                        />
+                      </div>
+                    </label>
+
+                    <div className={styles.barWrapper}>
+                      <div
+                        className={styles.bar}
+                        style={{
+                          width: `${getPercentage(count)}%`,
+                          backgroundColor: count > 0 ? "#00aaff" : "#ccc",
+                        }}
+                      />
                     </div>
-                  </label>
 
-                  <div className={styles.barWrapper}>
-                    <div
-                      className={styles.bar}
-                      style={{
-                        width: `${getPercentage(count)}%`,
-                        backgroundColor: count > 0 ? "#00aaff" : "#ccc",
-                      }}
-                    />
+                    <span className={styles.percent}>{count}</span>
                   </div>
-
-                  <span className={styles.percent}>{count}</span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
         {updatedReviews?.map((item, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.header}>
@@ -447,14 +458,16 @@ const ReviewSection = ({ details, disableReviewButton = false }) => {
                 <span className={styles.date}>
                   {moment(item.created_at).format("DD-MM-YYYY")}
                 </span>
-                <div className={styles.source}>
-                  Source:
-                  <img
-                    src={webIconImg}
-                    alt="source"
-                    className={styles.sourceIcon}
-                  />
-                </div>
+                {showSummary && (
+                  <div className={styles.source}>
+                    Source:
+                    <img
+                      src={webIconImg}
+                      alt="source"
+                      className={styles.sourceIcon}
+                    />
+                  </div>
+                )}
               </div>
             </div>
 

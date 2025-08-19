@@ -12,10 +12,13 @@
 .modalContent {
   background-color: white;
   padding: 24px;
-  width: 100%;
+  width: 80%;
   max-width: 581px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .closeButton {
   position: absolute;
@@ -137,62 +140,61 @@
   font-size: 20px;
   vertical-align: middle;
 }
-@media screen and (max-width:480px) {
-  .modalContent {
+@media screen and (max-width: 480px) {
+  /* .modalContent {
     padding: 10px 20px;
     margin: 20px 10px;
     height: fit-content;
-  }
+  } */
   .modalOverlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: unset;
-  /* width: 100%; */
-  justify-content: center;
-  z-index: 1000;
-  overflow-x: scroll;
-}
-.subtitle {
-  font-size: 12px;
-  line-height: 16px;
-  margin-bottom: 24px;
-}
-.saveBtn {
-  padding: 6px 10px;
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer !important;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  font-weight: 500;
-  font-size: 14px;
-  /* vertical-align: middle; */
-}
-.cancelBtn {
-  padding: 6px 10px;
-  background-color: #c6c6c6;
-  border: none;
-  border-radius: 3px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer !important;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  font-weight: 500;
-  font-size: 14px;
-  /* vertical-align: middle; */
-}
-.buttonRow {
-  margin-bottom: 18px;
-}
-.checkboxList {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  margin-bottom: 24px;
-}
-
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: unset;
+    /* width: 100%; */
+    justify-content: center;
+    z-index: 1000;
+    overflow-x: scroll;
+  }
+  .subtitle {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 24px;
+  }
+  .saveBtn {
+    padding: 6px 10px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer !important;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    font-weight: 500;
+    font-size: 14px;
+    /* vertical-align: middle; */
+  }
+  .cancelBtn {
+    padding: 6px 10px;
+    background-color: #c6c6c6;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer !important;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    font-weight: 500;
+    font-size: 14px;
+    /* vertical-align: middle; */
+  }
+  .buttonRow {
+    margin-bottom: 18px;
+  }
+  .checkboxList {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 24px;
+  }
 }

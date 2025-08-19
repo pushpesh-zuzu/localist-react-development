@@ -6,17 +6,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .modalContent {
   background: #fff;
   padding: 24px;
   width: 600px;
-  max-width: 95%;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modalHeader {
@@ -128,16 +131,16 @@
   font-weight: 500;
   font-size: 20px;
 }
- .customSelect {
-  appearance: none;           
+.customSelect {
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('../../assets/Icons/arrow-down.svg');
+  background-image: url("../../assets/Icons/arrow-down.svg");
   background-repeat: no-repeat;
-  background-position: right 5px center; 
+  background-position: right 5px center;
   padding-right: 40px;
   background-size: 18px 18px;
-} 
+}
 
 .cancelBtn:hover {
   background: #e0e0e0;
@@ -146,71 +149,69 @@
 .nextBtn:hover {
   background: #0090dd;
 }
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .infoBox img {
-  margin-top: 0px;
-}
+    margin-top: 0px;
+  }
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .modalOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
-  display: flex;
-  align-items: unset !important;
-  justify-content: center;
-  overflow-x: scroll;
-}
- .modalContent {
-  background: #fff;
-   padding: 20px 16px;
-  margin: 20px 10px;
-  /* max-width: 75%; */
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 84vh;
-}
-.cancelBtn {
-  background: #c6c6c6;
-  color: white;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer !important;
-  font-weight: 500;
-  font-size: 14px;
-}
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: unset !important;
+    justify-content: center;
+    overflow-x: scroll;
+  }
+  /* .modalContent {
+    background: #fff;
+    padding: 20px 16px;
+    margin: 20px 10px;
+    max-width: 75%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 84vh;
+  } */
+  .cancelBtn {
+    background: #c6c6c6;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
 
-.nextBtn {
-  background: var(--primary-color);
-  color: white;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer !important;
-  font-weight: 500;
-  font-size: 14px;
-}
+  .nextBtn {
+    background: var(--primary-color);
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer !important;
+    font-weight: 500;
+    font-size: 14px;
+  }
 
-.cancelBtn:hover {
-  background: #e0e0e0;
-}
+  .cancelBtn:hover {
+    background: #e0e0e0;
+  }
 
-.nextBtn:hover {
-  background: #0090dd;
-}
-.infoBox {
-  padding: 0px;
-}
-.infoBox img {
-  margin-top: -34px;
-}
-.infoBox span {
- 
-  font-size: 12px;
-  
-}
+  .nextBtn:hover {
+    background: #0090dd;
+  }
+  .infoBox {
+    padding: 0px;
+  }
+  .infoBox img {
+    margin-top: -34px;
+  }
+  .infoBox span {
+    font-size: 12px;
+  }
 }

@@ -108,15 +108,13 @@ const WhatServiceYouNeed = ({
       newErrors.pincode = "Pincode must be between 5 and 8 characters!";
     }
 
-    
-
-    if(!city){
-           showToast("error", "Please provide valid pincode!");
-          return;
+    if (!city) {
+      showToast("error", "Please provide valid pincode!");
+      return;
     }
 
     setErrors(newErrors);
-    
+
     if (!newErrors.service && !newErrors.pincode) {
       dispatch(
         setbuyerRequestData({
@@ -132,7 +130,6 @@ const WhatServiceYouNeed = ({
     }
   }, [selectedService, pincode, dispatch, serviceId, citySerach, nextStep]);
 
-  
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -190,7 +187,6 @@ const WhatServiceYouNeed = ({
         }
 
         if (cityName) {
-          
           setCity(cityName);
           dispatch(setcitySerach(cityName)); // <- set city state
         }

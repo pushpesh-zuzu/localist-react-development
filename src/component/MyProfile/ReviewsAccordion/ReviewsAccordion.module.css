@@ -74,7 +74,7 @@
   font-size: 18px;
   vertical-align: middle;
 }
-.primaryBtn:hover{
+.primaryBtn:hover {
   background-color: #0096c4;
 }
 
@@ -89,7 +89,7 @@
   font-size: 18px;
   vertical-align: middle;
 }
-.importBtn:hover{
+.importBtn:hover {
   background-color: #0096c4;
 }
 .secondaryBtn {
@@ -103,7 +103,7 @@
   font-size: 18px;
   vertical-align: middle;
 }
-.secondaryBtn:hover{
+.secondaryBtn:hover {
   background-color: #0096c4;
   color: #fff;
 }
@@ -136,7 +136,7 @@
   padding: 22px 19px;
   margin-bottom: 27px;
   font-size: 14px;
-  height: 138px;
+  height: 1000px;
 }
 
 .localistBox strong {
@@ -214,9 +214,9 @@
   }
   .sectionTitle {
     margin-bottom: 4px;
-    font-size: 16px
+    font-size: 16px;
   }
-  .alertBox{
+  .alertBox {
     margin-bottom: 15px;
   }
 
@@ -234,23 +234,20 @@
     margin-top: 12px;
   }
 
-
-  
- 
   .cancelBtn,
   .saveBtn {
     font-size: 15px;
     padding: 9px 14px;
     width: 100%;
   }
-  .secondaryBtn{
+  .secondaryBtn {
     font-size: 15px;
     white-space: nowrap;
     color: #ffffff;
     background-color: var(--primary-color);
   }
   .row {
-    gap:5px;
+    gap: 5px;
     flex-direction: column;
     align-items: normal;
   }
@@ -278,21 +275,20 @@
   .localistBox p {
     font-size: 13px;
   }
-.fbLabel {
-  display: flex;
-  align-items: start;
-  
-}
+  .fbLabel {
+    display: flex;
+    align-items: start;
+  }
   .fbIcon {
     width: 18px;
     height: 18px;
     margin-top: 1px;
   }
-  .subtext{
+  .subtext {
     font-weight: 500;
     margin-bottom: 5px;
   }
-  .reviewsLabel{
+  .reviewsLabel {
     font-weight: 600;
   }
   .cancelBtn,
@@ -300,8 +296,8 @@
     font-weight: 500;
     text-align: center;
     width: 84px;
-     padding: 8px 10px;
-     font-size: 14px;
+    padding: 8px 10px;
+    font-size: 14px;
   }
   .buttonRow {
     margin-bottom: 24px;

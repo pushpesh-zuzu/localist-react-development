@@ -1,23 +1,30 @@
-
 // export default ReviewsAccordion;
- 
-import  { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
 import styles from "./ReviewsAccordion.module.css";
 import FacebookLogo from "../../../assets/Images/FacebookLogo.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFacebookReviewStatus, getCustomerLinkApi, updateFacebookReviewLink } from "../../../store/MyProfile/myProfileSlice";
+import {
+  clearFacebookReviewStatus,
+  getCustomerLinkApi,
+  updateFacebookReviewLink,
+} from "../../../store/MyProfile/myProfileSlice";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 import axiosInstance from "../../../Api/axiosInstance";
 import { toast } from "react-toastify";
 import { showToast } from "../../../utils";
+import ReviewSection from "../../ViewProfile/Reviews/Reviews";
+import { useParams } from "react-router-dom";
 
-
-const ReviewsAccordion = ({details}) => {
-  
+const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
   const onCopyUrl = () => {
     navigator.clipboard.writeText(customerLinkData);
     showToast("success", "Link copied to clipboard!");
   };
+  const { viewProfileData } = useSelector((state) => state.leadSetting);
+  const requestId = useParams();
+  const shouldDisableActions = requestId?.requestId;
 
   const dispatch = useDispatch();
   const {
@@ -26,13 +33,12 @@ const ReviewsAccordion = ({details}) => {
     facebookReviewUpdateError,
     sellerLoader,
   } = useSelector((state) => state.myProfile);
-  
+
   const handleSubmit = () => {
     dispatch(updateFacebookReviewLink(fbLink));
   };
-   useEffect(() => {
-   
-    dispatch(getCustomerLinkApi()); 
+  useEffect(() => {
+    dispatch(getCustomerLinkApi());
   }, []);
 
   useEffect(() => {
@@ -44,8 +50,7 @@ const ReviewsAccordion = ({details}) => {
       dispatch(clearFacebookReviewStatus());
     }
   }, [facebookReviewUpdateSuccess, facebookReviewUpdateError, dispatch]);
-  
-  
+
   return (
     <div className={styles.wrapper}>
       {/* <p className={styles.overAllText}>Your Review Rating</p> */}
@@ -75,9 +80,7 @@ const ReviewsAccordion = ({details}) => {
       </div>
 
       <div className={styles.fieldGroup}>
-        <label className={styles.reviewsLabel}>
-        Share your review link
-        </label>
+        <label className={styles.reviewsLabel}>Share your review link</label>
         <div className={styles.row}>
           <input
             type="text"
@@ -94,10 +97,10 @@ const ReviewsAccordion = ({details}) => {
       <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
-         Import Facebook & Instagram Reviews
+          Import Facebook & Instagram Reviews
         </label>
         <p className={styles.subtext}>
-         Import reviews from your business Facebook page.
+          Import reviews from your business Facebook page.
         </p>
         <div className={styles.row}>
           <input
@@ -114,11 +117,26 @@ const ReviewsAccordion = ({details}) => {
       </div>
 
       <label className={styles.reviewsLabel}>Localists.com Reviews</label>
-      <div className={styles.localistBox}>
+      {/* <div className={styles.localistBox}>
         <strong>You don’t have any reviews yet on Localists.com</strong>
         <p>
           Your reviews can come from any of your customers — not just those found through Localists.com. Add them today add improve new business wins!
         </p>
+        <ReviewSection details={viewProfileData} showSummary={false} />
+      </div> */}
+      <div className={styles.localistBox}>
+        {viewProfileData?.reviews_count > 0 ? (
+          <ReviewSection details={viewProfileData} showSummary={false} />
+        ) : (
+          <>
+            <strong>You don’t have any reviews yet on Localists.com</strong>
+            <p>
+              Your reviews can come from any of your customers — not just those
+              found through Localists.com. Add them today and improve new
+              business wins!
+            </p>
+          </>
+        )}
       </div>
 
       {/* <div className={styles.buttonRow}>
@@ -132,4 +150,3 @@ const ReviewsAccordion = ({details}) => {
 };
 
 export default ReviewsAccordion;
-

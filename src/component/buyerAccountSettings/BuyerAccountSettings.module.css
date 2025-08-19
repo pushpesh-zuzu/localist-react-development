@@ -45,10 +45,10 @@
   border-radius: 50%;
   background-color: #ccc;
   color: #000;
-text-align: center;
-display: flex;
-justify-content: center;
-align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .requestButton {
   background: var(--primary-color);
@@ -113,7 +113,7 @@ align-items: center;
 }
 .uploadButton:hover {
   background-color: #0096c4;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .formGroup {
@@ -160,8 +160,8 @@ align-items: center;
   cursor: pointer !important;
 }
 .changePasswordButton:hover {
-color: #0096c490;
-border: 1px solid #0096c490;
+  color: #0096c490;
+  border: 1px solid #0096c490;
 }
 
 .modalOverlay {
@@ -184,9 +184,13 @@ border: 1px solid #0096c490;
 }
 
 .modal {
-  background: #ffffff;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .modalHeader {
@@ -290,12 +294,12 @@ border: 1px solid #0096c490;
     padding: 30px 20px;
   }
   .detailsBox {
-  background: #ffffff;
-  padding: 24px;
-  box-shadow: 0px 0px 10px 0px #0000000f;
-}
-.saveButtonWrapper {
-  margin-top: 37px;
-  margin-left: 20px;
-}
+    background: #ffffff;
+    padding: 24px;
+    box-shadow: 0px 0px 10px 0px #0000000f;
+  }
+  .saveButtonWrapper {
+    margin-top: 37px;
+    margin-left: 20px;
+  }
 }

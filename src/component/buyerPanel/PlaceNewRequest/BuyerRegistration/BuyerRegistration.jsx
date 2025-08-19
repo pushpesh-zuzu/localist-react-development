@@ -276,7 +276,6 @@ const BuyerRegistration = ({
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
 
-   
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
@@ -337,12 +336,12 @@ const BuyerRegistration = ({
     closeModal();
   };
 
-   useEffect(() => {
-      if (buyerStep === 2) {
-        // Reset QuestionModal when it opens
-        questionModalRef.current?.resetQuestions?.();
-      }
-    }, [buyerStep]);
+  useEffect(() => {
+    if (buyerStep === 2) {
+      // Reset QuestionModal when it opens
+      questionModalRef.current?.resetQuestions?.();
+    }
+  }, [buyerStep]);
   const confirmClose = () => {
     setShowConfirmModal(false);
     setShouldClose(true);

@@ -2,7 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./MatchingLeadsFilter.module.css";
 import ArrowUpIcon from "../../../../assets/Icons/arrow-up.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getfilterListData, getLeadRequestList, setFilters, } from "../../../../store/LeadSetting/leadSettingSlice";
+import {
+  getfilterListData,
+  getLeadRequestList,
+  setFilters,
+} from "../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -31,16 +35,21 @@ const MatchingLeadsFilter = ({ onClose }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  const { leadRequestLoader, filterListData,filters } = useSelector((state) => state.leadSetting)
-  const unReadData = filterListData?.map((item)=> item?.unread)
-console.log(filterListData?.map((item)=> item?.unread),"filterListData")
+  const { leadRequestLoader, filterListData, filters } = useSelector(
+    (state) => state.leadSetting
+  );
+  const unReadData = filterListData?.map((item) => item?.unread);
+  console.log(
+    filterListData?.map((item) => item?.unread),
+    "filterListData"
+  );
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const data = {
-      user_id: userToken?.remember_tokens
-    }
+      user_id: userToken?.remember_tokens,
+    };
 
-    dispatch(getfilterListData(data))
+    dispatch(getfilterListData(data));
 
     return () => {
       document.body.style.overflow = "auto";
@@ -50,31 +59,31 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
   // const handleCheckboxChange = (key, value) => {
   //   // Create a copy of the current filters
   //   const updatedFilters = { ...filters };
-    
+
   //   // If the array doesn't exist yet, initialize it
   //   if (!Array.isArray(updatedFilters[key])) {
   //     updatedFilters[key] = [];
   //   }
-    
+
   //   // Toggle the value in the array
   //   if (updatedFilters[key].includes(value)) {
   //     updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
   //   } else {
   //     updatedFilters[key] = [...updatedFilters[key], value];
   //   }
-    
+
   //   // Update the filters
   //   dispatch(setFilters(updatedFilters));
   // };
   const handleCheckboxChange = (key, value) => {
     // Create a copy of the current filters
     const updatedFilters = { ...filters };
-    
+
     // If the array doesn't exist yet, initialize it
     if (!Array.isArray(updatedFilters[key])) {
       updatedFilters[key] = [];
     }
-    
+
     // Special handling for "All lead spotlights"
     if (key === "leadSpotlights" && value === "All lead spotlights") {
       if (updatedFilters[key].includes(value)) {
@@ -82,59 +91,76 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
         updatedFilters[key] = [];
       } else {
         // If "All lead spotlights" is not selected, select everything
-        updatedFilters[key] = filterListData[0]?.leadSpotlights?.map(item => item.spotlight) || [];
+        updatedFilters[key] =
+          filterListData[0]?.leadSpotlights?.map((item) => item.spotlight) ||
+          [];
       }
     } else if (key === "leadSpotlights") {
       // For individual spotlight items
       if (updatedFilters[key].includes(value)) {
         // Remove this value from selection
-        updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
-        
+        updatedFilters[key] = updatedFilters[key].filter(
+          (item) => item !== value
+        );
+
         // Also remove "All lead spotlights" if it's selected
-        updatedFilters[key] = updatedFilters[key].filter(item => item !== "All lead spotlights");
+        updatedFilters[key] = updatedFilters[key].filter(
+          (item) => item !== "All lead spotlights"
+        );
       } else {
         // Add this value to selection
         updatedFilters[key] = [...updatedFilters[key], value];
-        
+
         // Check if all individual spotlights are now selected
-        const allSpotlightsExceptAll = filterListData[0]?.leadSpotlights
-          ?.filter(item => item.spotlight !== "All lead spotlights")
-          ?.map(item => item.spotlight) || [];
-        
-        const allSelected = allSpotlightsExceptAll.every(spotlight => 
-          updatedFilters[key].includes(spotlight) || spotlight === value
+        const allSpotlightsExceptAll =
+          filterListData[0]?.leadSpotlights
+            ?.filter((item) => item.spotlight !== "All lead spotlights")
+            ?.map((item) => item.spotlight) || [];
+
+        const allSelected = allSpotlightsExceptAll.every(
+          (spotlight) =>
+            updatedFilters[key].includes(spotlight) || spotlight === value
         );
-        
+
         // If all individual spotlights are selected, also select "All lead spotlights"
-        if (allSelected && !updatedFilters[key].includes("All lead spotlights")) {
+        if (
+          allSelected &&
+          !updatedFilters[key].includes("All lead spotlights")
+        ) {
           updatedFilters[key].push("All lead spotlights");
         }
       }
     } else {
       // Original logic for other filter types
       if (updatedFilters[key].includes(value)) {
-        updatedFilters[key] = updatedFilters[key].filter(item => item !== value);
+        updatedFilters[key] = updatedFilters[key].filter(
+          (item) => item !== value
+        );
       } else {
         updatedFilters[key] = [...updatedFilters[key], value];
       }
     }
-    
+
     // Update the filters
     dispatch(setFilters(updatedFilters));
   };
-  
+
   const handleRadioChange = (key, value) => {
-    dispatch(setFilters({
-      ...filters,
-      [key]: value
-    }));
+    dispatch(
+      setFilters({
+        ...filters,
+        [key]: value,
+      })
+    );
   };
-  
+
   const handleInputChange = (key, value) => {
-    dispatch(setFilters({
-      ...filters,
-      [key]: value
-    }));
+    dispatch(
+      setFilters({
+        ...filters,
+        [key]: value,
+      })
+    );
   };
   const handleApply = () => {
     const formData = new FormData();
@@ -164,7 +190,6 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
         showToast("success", result?.message);
       }
       onClose();
-     
     });
   };
 
@@ -215,60 +240,97 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
           </AccordionSection>
 
           {/* View */}
-        
-<AccordionSection title={"Lead spotlights"}>
-  {/* Make sure the first item is "All lead spotlights" */}
-  {filterListData?.[0]?.leadSpotlights?.length > 0 && (
-    <>
-      {/* Display "All lead spotlights" option first */}
-      <div>
-        <label style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: "bold", color: "#000000" }}>
-          <input
-            type="checkbox"
-            checked={filters.leadSpotlights.includes("All lead spotlights")}
-            onChange={() => handleCheckboxChange("leadSpotlights", "All lead spotlights")}
-          />
-          All lead spotlights ({filterListData[0]?.leadSpotlights?.reduce((total, item) => 
-            item.spotlight !== "All lead spotlights" ? total + item.count : total, 0)})
-        </label>
-      </div>
-      
-      {/* Display all other spotlight options */}
-      <div style={{ marginLeft: "32px", marginTop: "4px" }}>
-        {filterListData?.[0]?.leadSpotlights
-          ?.filter(item => item.spotlight !== "All lead spotlights")
-          ?.map((item) => (
-            <div key={item.spotlight}>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <input
-                  type="checkbox"
-                  checked={filters.leadSpotlights.includes(item.spotlight)}
-                  onChange={() => handleCheckboxChange("leadSpotlights", item.spotlight)}
-                />
-                {item.spotlight} ({item.count})
-              </label>
-            </div>
-          ))}
-      </div>
-    </>
-  )}
-</AccordionSection>
 
+          <AccordionSection title={"Lead spotlights"}>
+            {/* Make sure the first item is "All lead spotlights" */}
+            {filterListData?.[0]?.leadSpotlights?.length > 0 && (
+              <>
+                {/* Display "All lead spotlights" option first */}
+                <div>
+                  <label
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontWeight: "bold",
+                      color: "#000000",
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={filters.leadSpotlights.includes(
+                        "All lead spotlights"
+                      )}
+                      onChange={() =>
+                        handleCheckboxChange(
+                          "leadSpotlights",
+                          "All lead spotlights"
+                        )
+                      }
+                    />
+                    All lead spotlights (
+                    {filterListData[0]?.leadSpotlights?.reduce(
+                      (total, item) =>
+                        item.spotlight !== "All lead spotlights"
+                          ? total + item.count
+                          : total,
+                      0
+                    )}
+                    )
+                  </label>
+                </div>
+
+                {/* Display all other spotlight options */}
+                <div style={{ marginLeft: "32px", marginTop: "4px" }}>
+                  {filterListData?.[0]?.leadSpotlights
+                    ?.filter((item) => item.spotlight !== "All lead spotlights")
+                    ?.map((item) => (
+                      <div key={item.spotlight}>
+                        <label
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={filters.leadSpotlights.includes(
+                              item.spotlight
+                            )}
+                            onChange={() =>
+                              handleCheckboxChange(
+                                "leadSpotlights",
+                                item.spotlight
+                              )
+                            }
+                          />
+                          {item.spotlight} ({item.count})
+                        </label>
+                      </div>
+                    ))}
+                </div>
+              </>
+            )}
+          </AccordionSection>
 
           {/* Actions buyer has taken */}
-
 
           {/* When the lead was submitted */}
           <AccordionSection title="When the lead was submitted">
             {filterListData?.[0]?.leadTime?.map((item) => (
               <div key={item.time}>
-                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <label
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
                   <input
-                  style={{marginTop: "0px" }}
+                    style={{ marginTop: "0px" }}
                     type="radio"
                     name="submittedWhen" // radio buttons ko group karne ke liye
                     checked={filters.submittedWhen === item.time}
-                    onChange={() => handleRadioChange("submittedWhen", item.time)}
+                    onChange={() =>
+                      handleRadioChange("submittedWhen", item.time)
+                    }
                   />
                   {item.time} ({item.count})
                 </label>
@@ -278,28 +340,33 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
 
           {/* Services */}
           <AccordionSection title="Services">
-            {filterListData?.[0]?.services
-              ?.map((item) => (
-                <div key={item.name}>
-                  <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <input
-                      type="checkbox"
-                      name="submittedWhen" // radio buttons ko group karne ke liye
-                      checked={filters.selectedServices.includes(item.name)}
-                      onChange={() => handleCheckboxChange("selectedServices", item.name)}
-                    />
-                    {item.name} ({item.leadcount})
-                  </label>
-                </div>
-              ))}
+            {filterListData?.[0]?.services?.map((item) => (
+              <div key={item.name}>
+                <label
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  <input
+                    type="checkbox"
+                    name="submittedWhen" // radio buttons ko group karne ke liye
+                    checked={filters.selectedServices.includes(item.name)}
+                    onChange={() =>
+                      handleCheckboxChange("selectedServices", item.name)
+                    }
+                  />
+                  {item.name} ({item.leadcount})
+                </label>
+              </div>
+            ))}
           </AccordionSection>
 
           {/* Locations */}
           <AccordionSection title="Locations">
             {/* All Option */}
-            <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <label
+              style={{ display: "flex", alignItems: "center", gap: "8px" }}
+            >
               <input
-                  style={{marginTop: "0px" }}
+                style={{ marginTop: "0px" }}
                 type="radio"
                 name="location"
                 checked={filters.location === "All"}
@@ -312,20 +379,29 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
 
             {filterListData?.[0]?.location?.map((item) => (
               <div key={item.time}>
-                <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <label
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
                   <input
-                  style={{marginTop: "0px" }}
+                    style={{ marginTop: "0px" }}
                     type="radio"
                     name="location" // radio buttons ko group karne ke liye
-                    checked={filters.location === `${item.miles} miles from ${item.postcode}`}
-                    onChange={() => handleRadioChange("location", `${item.miles} miles from ${item.postcode}`)}
+                    checked={
+                      filters.location ===
+                      `${item.miles} miles from ${item.postcode}`
+                    }
+                    onChange={() =>
+                      handleRadioChange(
+                        "location",
+                        `${item.miles} miles from ${item.postcode}`
+                      )
+                    }
                   />
                   {`${item.miles} miles from ${item.postcode} (${item.leadcount})`}
                 </label>
               </div>
             ))}
           </AccordionSection>
-
 
           {/* Credits */}
           <AccordionSection title="Credits">
@@ -335,7 +411,9 @@ console.log(filterListData?.map((item)=> item?.unread),"filterListData")
                   type="checkbox"
                   className={styles.checkboxInput}
                   checked={filters.credits.includes(creditItem.credits)}
-                  onChange={() => handleCheckboxChange("credits", creditItem.credits)}
+                  onChange={() =>
+                    handleCheckboxChange("credits", creditItem.credits)
+                  }
                 />
                 {creditItem.credits} ({creditItem?.leadcount})
               </label>

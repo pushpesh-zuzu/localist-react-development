@@ -24,14 +24,18 @@ label {
 }
 
 .modal {
-  position: relative;
+  /* position: relative; */
   background: #fff;
   width: 400px;
-  max-height: 74vh;
+  max-height: 70vh;
   padding: 49.08px 0 31px 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .header {
@@ -115,11 +119,9 @@ label {
   border: 1px solid #c90909;
 }
 .checkboxInputs {
-  
-font-weight: 600;
-font-size: 14px;
-color: #000000;
-
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
 }
 
 /* Checkbox ka default appearance hide karo (optional) */
