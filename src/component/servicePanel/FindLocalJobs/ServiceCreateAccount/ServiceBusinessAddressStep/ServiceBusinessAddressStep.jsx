@@ -7,6 +7,7 @@ import {
 import { showToast } from "../../../../../utils";
 
 
+
 const ServiceBusinessAddressStep = ({
   nextStep,
   prevStep,
@@ -20,9 +21,10 @@ const ServiceBusinessAddressStep = ({
 }) => {
 
 const dispatch = useDispatch();
+console.log('formdata',formData);
 const { country, city, postalcode } = useSelector((state) => state.findJobs);
 const companyData = useSelector((state) => state.companyLook?.companyData);
-
+ 
 
 const hasPopulatedFromCompany = useSelector(
     (state) => state.findJobs.hasPopulatedFromCompany
@@ -75,6 +77,7 @@ useEffect(() => {
 
   if (!reg) {
     if (hasPopulatedFromCompany) {
+      alert('hi');
       // Clear only if company data was populated earlier
       dispatch(clearCompanyData());
 
@@ -193,7 +196,7 @@ useEffect(() => {
       }}
       name="zipcode"
       value={
-        formData.zipcode 
+        formData.postcode 
           || (!formData.company_reg_number ? formData.zipcode_old : "") 
           || ""
       }

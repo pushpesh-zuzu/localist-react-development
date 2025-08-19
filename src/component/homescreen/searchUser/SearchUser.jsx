@@ -56,7 +56,6 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
-  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -143,6 +142,7 @@ const SearchProfessionals = ({ nextStep }) => {
             postalCode = component.long_name;
           }
         });
+        
         let cityName =
           place.address_components.find((component) =>
             component.types.includes("locality")

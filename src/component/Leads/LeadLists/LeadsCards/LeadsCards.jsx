@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import styles from "./LeadsCards.module.css";
 import BlueSmsIcon from "../../../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../../../assets/Images/Leads/BluePhoneIcon.svg";

@@ -50,10 +50,11 @@ export const loadGooglePlacesAutocomplete = ({
       inputRef.current,
       {
         types: ["geocode"], // Allows both city and pincode based search
-        componentRestrictions: { country: "IN" },
+        componentRestrictions: { country: "UK" },
       }
     );
 
+    
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (!place.address_components) return;

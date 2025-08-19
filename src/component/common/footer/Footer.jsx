@@ -11,11 +11,9 @@ import timerIcon from "../../../assets/Icons/timer.svg";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showToast } from "../../../utils";
-import OtpVerification from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/OtpVerification/OtpVerification";
-import NumberVerified from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/NumberVerified/NumberVerified";
 
 const FooterContent = () => (
   <>
@@ -56,11 +54,10 @@ const FooterContent = () => (
 
 const Footer = () => {
   const [activeKeys, setActiveKeys] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 520
+  );
   const navigate = useNavigate();
-  // const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
-  // const [isNumberVerifiedModalOpen, setIsNumberVerifiedModalOpen] =
-  //   useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -76,12 +73,10 @@ const Footer = () => {
   };
   const { userToken } = useSelector((state) => state.auth);
   const { registerToken } = useSelector((state) => state.findJobs);
+
   const handleJoinAsProfessional = () => {
     if (userToken || registerToken) {
       showToast("info", "You're already logged in.");
-    } else {
-      navigate("/sellers/create");
-      window.scrollTo(0, 0);
     }
   };
   const handleHelpCenter = () => {
@@ -92,17 +87,11 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
-          <div className={styles.logo}>
-            <img
-              src={logo}
-              alt="Localist Logo"
-              onClick={() => {
-                navigate("/");
-                window.scrollTo(0, 0);
-              }}
-            />
-          </div>
-
+          <Link to="/" className={styles.link}>
+            <div className={styles.logo}>
+              <img src={logo} alt="Localist Logo" />
+            </div>
+          </Link>
           <p className={styles.footerDesc}>
             Localists is the world’s fastest-growing marketplace, and we have no
             intention of slowing down any time soon.
@@ -110,69 +99,91 @@ const Footer = () => {
 
           <div className={styles.contactSection}>
             <h2>Need Help?</h2>
-
-            <button onClick={()=>navigate('/contact-us')}>Contact Us</button>
+            <Link to="/contact-us" className={styles.link}>
+              <button>Contact Us</button>
+            </Link>
           </div>
         </div>
 
+        {/* Desktop Links */}
         <div className={styles.footerLinks}>
           <div>
             <h4>For Customers</h4>
             <ul>
-              <li onClick={() => navigate("/")}>Find a Professional</li>
-              <li
-                onClick={() => {
-                  navigate("/how-it-works");
-                  window.scrollTo(0, 0);
-                }}
-              >
-                How it works
-              </li>
-              <li
-                onClick={() => {
-                  if (userToken || registerToken) {
-                    showToast("info", "You're already logged in.");
-                  } else {
-                    navigate("/login");
+              <Link to="/" className={styles.link}>
+                <li>Find a Professional</li>
+              </Link>
+
+              <Link className={styles.link} to="/how-it-works">
+                <li
+                  onClick={() => {
                     window.scrollTo(0, 0);
-                  }
-                }}
+                  }}
+                >
+                  How it works
+                </li>
+              </Link>
+
+              <Link
+                to={(!userToken || !registerToken) && "/login"}
+                className={styles.link}
               >
-                Login
-              </li>
-              {/* <li>Mobile App</li> */}
+                <li
+                  onClick={() => {
+                    if (userToken || registerToken) {
+                      showToast("info", "You're already logged in.");
+                    } else {
+                      navigate("/login");
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  Login
+                </li>
+              </Link>
             </ul>
           </div>
 
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <li
-              // onClick={() => {
-              //   navigate("/how-it-works");
-              //   window.scrollTo(0, 0);
-              // }}
+              <Link to="/how-it-works" className={styles.link}>
+                <li>How it works</li>
+              </Link>
+              <Link className={styles.link} to="/pricing">
+                <li>Pricing</li>
+              </Link>
+              <Link
+                className={styles.link}
+                to={(!userToken || !registerToken) && "/sellers/create"}
               >
-                How it works
-              </li>
-              <li onClick={() => navigate("/pricing")}>Pricing</li>
-              <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
-              <li onClick={handleHelpCenter}>Help Centre</li>
-              {/* <li>Mobile App</li> */}
+                <li
+                  onClick={() => {
+                    (userToken || registerToken) && handleJoinAsProfessional();
+                  }}
+                >
+                  Join as a Professional
+                </li>
+              </Link>
+              <Link to="/help-center" className={styles.link}>
+                <li onClick={handleHelpCenter}>Help Centre</li>
+              </Link>
             </ul>
           </div>
 
           <div>
-            <h4>About</h4>
+            <Link to="/about-us" className={styles.link}>
+              <h4>About</h4>
+            </Link>
             <ul>
-              <li>About localist</li>
-              {/* <li>Careers</li>
-              <li>Blog</li>
-              <li>Press</li> */}
+              <Link className={styles.link} to="/about-us">
+                <li>About localist</li>
+              </Link>
             </ul>
           </div>
         </div>
 
+        {/* Mobile Links (NO styles.link here) */}
         <Collapse
           defaultActiveKey={activeKeys}
           accordion
@@ -193,63 +204,57 @@ const Footer = () => {
             key="1"
           >
             <ul>
-              <li
-                onClick={() => {
-                  navigate("/");
-                  window.scrollTo(0, 0);
-                }}
-              >
-                Find a Professional
-              </li>
-              <li
-                onClick={() => {
-                  navigate("/how-it-works");
-                  window.scrollTo(0, 0);
-                }}
-              >
-                How it works
-              </li>
-              <li
-                onClick={() => {
-                  if (userToken || registerToken) {
-                    showToast("info", "You're already logged in.");
-                  } else {
-                    navigate("/login");
-                    window.scrollTo(0, 0);
-                  }
-                }}
-              >
-                Login
-              </li>
-              {/* <li>Mobile App</li> */}
+              <Link to="/">
+                <li>Find a Professional</li>
+              </Link>
+              <Link to="/how-it-works">
+                <li>How it works</li>
+              </Link>
+              <Link to={(!userToken || !registerToken) && "/login"}>
+                <li
+                  onClick={() => {
+                    if (userToken || registerToken) {
+                      showToast("info", "You're already logged in.");
+                    } else {
+                      navigate("/login");
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  Login
+                </li>
+              </Link>
             </ul>
           </Panel>
+
           <Panel
             className={styles.footerNavLinks}
             header="For Professionals"
             key="2"
           >
             <ul>
-              <li
-              // onClick={() => {
-              //   navigate("/how-it-works");
-              //   window.scrollTo(0, 0);
-              // }}
-              >
-                How it works
-              </li>
-              <li onClick={() => navigate("/pricing")}>Pricing</li>
-              <li onClick={handleJoinAsProfessional}>Join as a Professional</li>
-              <li>Help Centre</li>
-              {/* <li>Mobile App</li> */}
+              <Link to="/how-it-works">
+                <li>How it works</li>
+              </Link>
+              <Link to="/pricing">
+                <li>Pricing</li>
+              </Link>
+              <Link to={(!userToken || !registerToken) && "/sellers/create"}>
+                <li onClick={handleJoinAsProfessional}>
+                  Join as a Professional
+                </li>
+              </Link>
+              <Link to="/help-center">
+                <li>Help Centre</li>
+              </Link>
             </ul>
           </Panel>
+
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
-              <li>About localist</li>
-              {/* <li>Careers</li>
-              <li>Blog</li>
-              <li>Press</li> */}
+              <Link to="/about-us">
+                <li>About localist</li>
+              </Link>
             </ul>
           </Panel>
         </Collapse>
@@ -272,14 +277,6 @@ const Footer = () => {
           <img src={trustpilotLogo} alt="Trustpilot Rating" />
         </div>
       </div>
-      {/* <OtpVerification
-        open={isOtpModalOpen}
-        onClose={() => setIsOtpModalOpen(false)}
-      />
-      <NumberVerified
-        open={isNumberVerifiedModalOpen}
-        onClose={() => setIsNumberVerifiedModalOpen(false)}
-      /> */}
     </footer>
   );
 };

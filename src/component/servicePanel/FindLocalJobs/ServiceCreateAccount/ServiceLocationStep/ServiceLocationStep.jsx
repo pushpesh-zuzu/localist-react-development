@@ -15,13 +15,14 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const [city, setCity] = useState("");
  console.log(formData,"formData")
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
@@ -39,10 +40,11 @@ const ServiceLocationStep = ({
         inputRef.current,
         {
           types: ["geocode"],
-          componentRestrictions: { country: "IN" }, // Restrict to India
+          componentRestrictions: { country: "UK" }, // Restrict to India
         }
       );
 
+      
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
@@ -61,15 +63,15 @@ const ServiceLocationStep = ({
       // Try to find city by "locality" first
 let cityName =
   place.address_components.find(component =>
-    component.types.includes("locality")
+    component.types.includes("postal_town")
   )?.long_name ||
   place.address_components.find(component =>
-    component.types.includes("administrative_area_level_3")
+    component.types.includes("administrative_area_level_2")
   )?.long_name;
 
     
       
-      const countryName = place.address_components.find((component) =>
+      let countryName = place.address_components.find((component) =>
         component.types.includes("country")
     )?.long_name;
     
@@ -80,23 +82,24 @@ let cityName =
 
 
         if (postalCode) {
-          dispatch(setFormData({ postcode: postalCode }));
-          dispatch(setFormData({ cities: cityName ? cityName : "" }))
-          dispatch(setFormData({ coordinates: { lat, lng } }));
-          dispatch(setFormData({city:cityName})),
-          dispatch(setFormData({country: countryName}))
-          dispatch(setFormData({zipcode:postalCode}))
-          dispatch(setFormData({ postcode_old: postalCode }));
-          dispatch(setFormData({city_old:cityName})),
-          dispatch(setFormData({country_old: countryName}))
-          dispatch(setFormData({zipcode_old:postalCode}))
+          dispatch(setFormData({
+            postcode: postalCode,
+            zipcode: postalCode,
+            postcode_old: postalCode,
+            zipcode_old: postalCode,
+            city: cityName || "",
+            cities: cityName || "",
+            city_old: cityName || "",
+            country: countryName || "",
+            country_old: countryName || "",
+            coordinates: { lat, lng }
+          }));
 
-          // dispatch(setCountry({country: countryName}))
-          // dispatch(setCity({city:cityName})),
-          // dispatch(setPostalCode({postalcode:postalCode}))
-          // dispatch(setFormData(JSON.stringify({ coordinates: { lat, lng } })));
-          // dispatch(setFormData({ coordinates }))
-          inputRef.current.value = postalCode; // Update input value
+          dispatch(setCity({ city: cityName || "" }));
+          dispatch(setPostalCode({ postalcode: postalCode }));
+          dispatch(setCountry({ country: countryName || "" }));
+
+          inputRef.current.value = postalCode;
         } else {
           showToast("error", "No PIN code found! Please try again.");
         }
@@ -198,7 +201,14 @@ let cityName =
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button className={styles.nextButton} onClick={nextStep}>
+            <button className={styles.nextButton} onClick={() => {
+                if (!formData.postcode || formData.postcode.length < 5 || formData.postcode.length > 8 || !city)
+                {
+                  showToast("error", "Please  enter valid pincode!");
+                  return;
+                }
+                nextStep();
+              }}>
               Next
             </button>
           </div>

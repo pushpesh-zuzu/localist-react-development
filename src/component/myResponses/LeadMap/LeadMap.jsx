@@ -68,6 +68,7 @@
 //     loadGoogleMapsScript();
 //   }, []);
 
+
 //   // Get lat/lng from postcode
 //   const getLatLngFromPincode = async (pincode) => {
 //     const apiKey = "AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE";
@@ -286,7 +287,7 @@ const LeadMap = ({ getPendingLeadList }) => {
     lng: 78.9629,
   });
 
-  const apiKey = "AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY";
+  const apiKey = "AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw";
 
   // Load Google Maps script
   useEffect(() => {
@@ -321,7 +322,7 @@ const LeadMap = ({ getPendingLeadList }) => {
 
   // Convert pincode to lat/lng
   const getLatLngFromPincode = async (pincode) => {
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${pincode}&components=country:IN&key=${apiKey}`;
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${pincode}&components=country:UK&key=${apiKey}`;
 
     try {
       const response = await fetch(url);

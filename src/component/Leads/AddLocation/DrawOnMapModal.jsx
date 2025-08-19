@@ -388,11 +388,12 @@ const DrawOnMapModal = ({ onClose,onNext,locationData,setLocationData,data,isEdi
 console.log(getlocationData,polygons,data,"locationData")
   useEffect(() => {
     // Load Google Maps API if not already loaded
+    
     const loadGoogleMapsScript = () => {
       if (!window.google || !window.google.maps || !window.google.maps.drawing) {
         const script = document.createElement("script");
         script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places,drawing,geometry&callback=initMap";
+          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,drawing,geometry&callback=initMap";
         script.async = true;
         script.defer = true;
         
