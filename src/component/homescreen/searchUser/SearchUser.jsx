@@ -56,6 +56,7 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
+  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -110,7 +111,7 @@ const SearchProfessionals = ({ nextStep }) => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCDR6sXvlQktXyC_0YsdiwlglSL2OkMSzY&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
@@ -128,7 +129,7 @@ const SearchProfessionals = ({ nextStep }) => {
         inputRef.current,
         {
           types: ["geocode"],
-          componentRestrictions: { country: "IN" }, // Restrict to India
+          componentRestrictions: { country: "UK" }, // Restrict to India
         }
       );
 
@@ -142,13 +143,12 @@ const SearchProfessionals = ({ nextStep }) => {
             postalCode = component.long_name;
           }
         });
-        
         let cityName =
           place.address_components.find((component) =>
-            component.types.includes("locality")
+            component.types.includes("postal_town")
           )?.long_name ||
           place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_3")
+            component.types.includes("administrative_area_level_2")
           )?.long_name;
         console.log(cityName, "cityName");
         // const cityName = place.address_components.find((component) =>
@@ -181,6 +181,22 @@ const SearchProfessionals = ({ nextStep }) => {
   const handleGetStarted = () => {
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
+      return;
+    }
+
+
+    if (!pincode) {
+      showToast("error", "Please enter a pincode");
+      return;
+    }  
+    if (pincode.length < 5 || pincode.length > 8) {
+      showToast("error", "Pincode must be between 5 and 8 characters!");
+      return;
+    }
+
+
+    if(!city){
+       showToast("error", "Please provide valid pincode!");
       return;
     }
 
