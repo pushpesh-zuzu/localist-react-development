@@ -39,14 +39,13 @@
 //         }
 //         dispatch(AddSellerCardDetailsApi(data))
 
-
 //     };
 
 //     return (
 //         <div className={styles.modalOverlay}>
 //             <div className={styles.modalContent}>
 //                 <button className={styles.closeButton} onClick={onClose}>×</button>
-//                 <h2 className={styles.heading}>Add card details</h2>
+//                 <h2 className={styles.heading}>Card details</h2>
 
 //                 <div className={styles.form}>
 //                     <label className={styles.label}>Card number</label>
@@ -85,14 +84,13 @@
 //                         </div>
 //                     </div>
 
-
 //                 </div>
 //                 <div className={styles.actions}>
 //                     <button type="button" className={styles.cancelBtn} onClick={onClose}>
 //                         Cancel
 //                     </button>
 //                     <button type="submit" className={styles.submitBtn} onClick={handleSubmit} >
-//                         Add card details
+//                         Card details
 //                     </button>
 //                 </div>
 
@@ -121,12 +119,14 @@ import VisaImg from "../../../assets/Images/Setting/VisaImg.svg";
 import MasterImg from "../../../assets/Images/Setting/masterCard.svg";
 import Amex from "../../../assets/Images/Setting/AmericanImg.svg";
 import CVVImg from "../../../assets/Images/Setting/CVVImg.svg";
-import { AddSellerCardDetailsApi, getSellerCardApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import {
+  AddSellerCardDetailsApi,
+  getSellerCardApi,
+} from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../../utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -134,81 +134,90 @@ import StripeProvider from "./StripeProvider";
 import CardPaymentForm from "./CardForm";
 import useWindowHeight from "../../../utils/customHeigth";
 
-const AddCardModal = ({ onClose,detail,topup,closeModal,details,newLeadApi,noLeadApiCall,newLeadData }) => {
-    const [formData, setFormData] = useState({
-        cardNumber: "",
-        expiryDate: "",
-        cvc: "",
-    });
+const AddCardModal = ({
+  onClose,
+  detail,
+  topup,
+  closeModal,
+  details,
+  newLeadApi,
+  noLeadApiCall,
+  newLeadData,
+}) => {
+  const [formData, setFormData] = useState({
+    cardNumber: "",
+    expiryDate: "",
+    cvc: "",
+  });
 
-    const dispatch = useDispatch();
-    const { sellerBillingLoader } = useSelector((state) => state.myCredit);
-//    const stripe = useStripe()
+  const dispatch = useDispatch();
+  const { sellerBillingLoader } = useSelector((state) => state.myCredit);
+  //    const stripe = useStripe()
 
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = "auto";
-        };
-    }, []);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
     };
-    const stripePromise = loadStripe("pk_test_51RTKiSHBbc2ftHcbzkhVXdd7qUBSYhGTzPUNRxKOgFpV4W4y4tjGN68aBCVRqlD15cokCSL2m4iL9wA0Y16tCLCD00f82XQLrk");
-    const options = {
-        mode: 'payment',
-        amount: 1099,
-        currency: 'usd',
-        // Fully customizable with appearance API.
-        appearance: {
-        
-        },
-      };
+  }, []);
 
-const handleSubmit = async(e) => {
-   
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  const stripePromise = loadStripe(
+    "pk_test_51RTKiSHBbc2ftHcbzkhVXdd7qUBSYhGTzPUNRxKOgFpV4W4y4tjGN68aBCVRqlD15cokCSL2m4iL9wA0Y16tCLCD00f82XQLrk"
+  );
+  const options = {
+    mode: "payment",
+    amount: 1099,
+    currency: "usd",
+    // Fully customizable with appearance API.
+    appearance: {},
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-}
-    // const handleSubmit = (e) => {
+  };
+  // const handleSubmit = (e) => {
 
-    //     const { cardNumber, expiryDate, cvc } = formData;
+  //     const { cardNumber, expiryDate, cvc } = formData;
 
-    //     if (!cardNumber || !expiryDate || !cvc) {
-    //         alert("Please fill in all fields.");
-    //         return;
-    //     }
+  //     if (!cardNumber || !expiryDate || !cvc) {
+  //         alert("Please fill in all fields.");
+  //         return;
+  //     }
 
-    //     const data = {
-    //         card_number: cardNumber,
-    //         expiry_date: expiryDate,
-    //         cvc: cvc,
-    //     };
+  //     const data = {
+  //         card_number: cardNumber,
+  //         expiry_date: expiryDate,
+  //         cvc: cvc,
+  //     };
 
-    //     dispatch(AddSellerCardDetailsApi(data)).then((result) => {
-    //         if (result) {
-    //             showToast("success", result?.message);
-    //             onClose();
-    //             dispatch(getSellerCardApi());
-    //         }
-    //     })
+  //     dispatch(AddSellerCardDetailsApi(data)).then((result) => {
+  //         if (result) {
+  //             showToast("success", result?.message);
+  //             onClose();
+  //             dispatch(getSellerCardApi());
+  //         }
+  //     })
 
+  // };
+  const getPaymentId = async (Id) => {
+    console.log(Id, "Id");
+  };
+  // const customHeigth = useWindowHeight()
+  console.log(details, newLeadData, "details");
+  return (
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onClose}>
+          ×
+        </button>
+        {/* <h2 className={styles.heading}>Card details</h2> */}
 
-    // };
-    const getPaymentId = async(Id) => {
-console.log(Id,"Id")
-    }
-    // const customHeigth = useWindowHeight()
-console.log(details,newLeadData,"details")
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modalContent} >
-                <button className={styles.closeButton} onClick={onClose}>×</button>
-                {/* <h2 className={styles.heading}>Add card details</h2> */}
-
-                {/* <form className={styles.form} onSubmit={handleSubmit}> */}
-                    {/* <label className={styles.label}>Card number</label>
+        {/* <form className={styles.form} onSubmit={handleSubmit}> */}
+        {/* <label className={styles.label}>Card number</label>
                     <input
                         type="text"
                         name="cardNumber"
@@ -218,7 +227,7 @@ console.log(details,newLeadData,"details")
                         className={styles.input}
                     /> */}
 
-                    {/* <div className={styles.row}>
+        {/* <div className={styles.row}>
                         <div className={styles.inputGroup}>
                             <label className={styles.label}>Expiry date</label>
                             <input
@@ -243,41 +252,55 @@ console.log(details,newLeadData,"details")
                             />
                         </div>
                     </div>  */}
-                    {/* <StripeProvider>
+        {/* <StripeProvider>
                      <CardElement options={{ style: { base: { fontSize: "16px" } } }} />
                      </StripeProvider>*/}
-                    {/* <Elements stripe={stripePromise} options={options}>
+        {/* <Elements stripe={stripePromise} options={options}>
                  <AddCardWrapper /> 
                  </Elements> */}
-                 <StripeProvider>
-                    <CardPaymentForm onPaymentMethodCreated={getPaymentId} onClose={onClose} data={detail} topup={topup} closeModal={closeModal} details={details} newLeadApi={newLeadApi} noLeadApiCall={noLeadApiCall} newLeadData={newLeadData}/>
-                 </StripeProvider>
-                    {/* <div className={styles.actions}>
+        <StripeProvider>
+          <CardPaymentForm
+            onPaymentMethodCreated={getPaymentId}
+            onClose={onClose}
+            data={detail}
+            topup={topup}
+            closeModal={closeModal}
+            details={details}
+            newLeadApi={newLeadApi}
+            noLeadApiCall={noLeadApiCall}
+            newLeadData={newLeadData}
+          />
+        </StripeProvider>
+        {/* <div className={styles.actions}>
                         <button type="button" className={styles.cancelBtn} onClick={onClose}>
                             Cancel
                         </button>
                         <button type="submit" className={styles.submitBtn}>
                             {sellerBillingLoader ? <Spin
                                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                            /> : "Add card details"}
+                            /> : "Card details"}
                         </button>
                     </div>
                 </form> */}
 
-                <div className={styles.footerNote}>
-                    <div>
-                        <p>🔒 Your Payment Is Secure</p>
-                        <span>Your card details are safely stored for future purchases. You can update or manage your payment info anytime in your settings. You can also securely add multiple cards.</span>
-                    </div>
-                    <div className={styles.cards}>
-                        <img src={VisaImg} alt="Visa" />
-                        <img src={MasterImg} alt="Mastercard" />
-                        <img src={Amex} alt="Amex" />
-                    </div>
-                </div>
-            </div>
+        <div className={styles.footerNote}>
+          <div>
+            <p>🔒 Your Payment Is Secure</p>
+            <span>
+              Your card details are safely stored for future purchases. You can
+              update or manage your payment info anytime in your settings. You
+              can also securely add multiple cards.
+            </span>
+          </div>
+          <div className={styles.cards}>
+            <img src={VisaImg} alt="Visa" />
+            <img src={MasterImg} alt="Mastercard" />
+            <img src={Amex} alt="Amex" />
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default AddCardModal;
