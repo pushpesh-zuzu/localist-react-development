@@ -137,7 +137,7 @@
 .username {
   font-size: 16px;
   margin: 0;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .rating {
@@ -184,8 +184,9 @@
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
+  color: #828282;
   margin: 0;
 }
 

@@ -435,6 +435,45 @@ const ReviewSection = ({
           </div>
         )}
         {updatedReviews?.map((item, index) => (
+          // <div key={index} className={styles.card}>
+          //   <div className={styles.header}>
+          //     <div>
+          //       <h3 className={styles.username}>{item?.name}</h3>
+
+          //       <div className={styles.rating}>
+          //         {Array(5)
+          //           .fill(0)
+          //           .map((_, idx) => (
+          //             <img
+          //               key={idx}
+          //               src={idx < item.ratings ? starImg : blackStar}
+          //               alt="star"
+          //             />
+          //           ))}
+          //         <span className={styles.count}>{item?.ratings}</span>
+          //         <span className={styles.verified}>Verified</span>
+          //       </div>
+          //     </div>
+          //     <div className={styles.dateSection}>
+          //       <span className={styles.date}>
+          //         {moment(item.created_at).format("DD-MM-YYYY")}
+          //       </span>
+          //       {showSummary && (
+          //         <div className={styles.source}>
+          //           Source:
+          //           <img
+          //             src={webIconImg}
+          //             alt="source"
+          //             className={styles.sourceIcon}
+          //           />
+          //         </div>
+          //       )}
+          //     </div>
+          //   </div>
+
+          //   <h4 className={styles.title}>{item.review}</h4>
+          //   <p className={styles.content}>{item.content}</p>
+          // </div>
           <div key={index} className={styles.card}>
             <div className={styles.header}>
               <div>
@@ -471,7 +510,7 @@ const ReviewSection = ({
               </div>
             </div>
 
-            <h4 className={styles.title}>{item.review}</h4>
+            {item.review && <h4 className={styles.title}>{item.review}</h4>}
             <p className={styles.content}>{item.content}</p>
           </div>
         ))}
