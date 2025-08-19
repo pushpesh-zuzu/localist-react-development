@@ -217,6 +217,7 @@ import SubmitReviewModal from "../SubmitReviewModal";
 import { useParams } from "react-router-dom";
 import starImg from "../../../assets/Icons/MyResponse/StarImg.svg";
 import blueStar from "../../../assets/Icons/MyResponse/blueStarImg.svg";
+import greyStar from "../../../assets/Icons/MyResponse/grayStar.svg";
 import blackStar from "../../../assets/Icons/MyResponse/blackStarImg.svg";
 import webIconImg from "../../../assets/Images/Setting/weblogo.svg";
 import halfStar from "../../../assets/Icons/MyResponse/halfStar.svg";
@@ -357,7 +358,7 @@ const ReviewSection = ({
                     return (
                       <img
                         key={index}
-                        src={blackStar}
+                        src={greyStar}
                         alt="empty-star"
                         width={19}
                         height={19}
@@ -410,10 +411,7 @@ const ReviewSection = ({
                       {/* <input type="radio" name="rating" disabled /> */}
                       <div className={styles.starText}>
                         <div style={{ width: "10px" }}>{star}</div>
-                        <img
-                          src={count > 0 ? blueStar : blackStar}
-                          alt="star"
-                        />
+                        <img src={count > 0 ? blueStar : greyStar} alt="star" />
                       </div>
                     </label>
 
@@ -485,7 +483,7 @@ const ReviewSection = ({
                     .map((_, idx) => (
                       <img
                         key={idx}
-                        src={idx < item.ratings ? starImg : blackStar}
+                        src={idx < item.ratings ? starImg : greyStar}
                         alt="star"
                       />
                     ))}

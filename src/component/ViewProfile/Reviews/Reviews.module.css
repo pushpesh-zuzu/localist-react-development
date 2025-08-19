@@ -120,10 +120,10 @@
 }
 
 .card {
-  padding: 30px 57px 29px 19px;
+  padding: 21px 57px 17px 19px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  /* gap: 16px; */
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #d9d9d9;
 }
@@ -188,6 +188,7 @@
   font-weight: 500;
   color: #828282;
   margin: 0;
+  padding-top: 16px;
 }
 
 .content {
