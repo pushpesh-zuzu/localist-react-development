@@ -20,7 +20,7 @@ export default defineConfig({
     }
   },
   ssr: {
-    // Ant Design को completely external रखते हैं SSR के लिए
+    // We keep Ant Design completely external for SSR.
     external: [
       'antd',
       /^antd\//,
