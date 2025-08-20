@@ -5,6 +5,7 @@ import { Form } from "antd";
 import TextInput from "../customInputs/TextInput";
 import { Helmet } from "react-helmet-async";
 import axiosInstance from "../../Api/axiosInstance";
+import { showToast } from "../../utils";
 
 const ContactUs = () => {
   const [form] = Form.useForm();
@@ -18,24 +19,32 @@ const ContactUs = () => {
 
   
    const onFinish = async (values) => {
-    try {
-      console.log("Form values:", values);
+      try {
+        console.log("Form values:", values);
 
-      // ✅ Use axiosInstance, only pass the endpoint (no need for full base URL)
-      // const response = await axiosInstance.post(
-      //   "users/update-seller-profile",
-      //   values
-      // );
+        const userType = values.customerType === "customer" ? 1 : 2;
 
-      if (1==1) {
-        message.success("Profile updated successfully ✅");
-      } else {
-        message.error(response.data.message || "Something went wrong");
+        const payload = {
+          full_name: values.fullName,
+          phone: values.phoneNumber,
+          company: values.company,
+          user_type: userType,
+          message: values.message,
+        };
+
+        const response = await axiosInstance.post("contact-us", payload);
+
+        if (response.data.success) {
+          
+          showToast("success", "Details Saved successfully");
+          form.resetFields();
+        } else {
+          showToast("error", response.data.message || "Please try again after some time");
+        }
+      } catch (error) {
+          showToast("error", "Please try again after some time ");
       }
-    } catch (error) {
-      console.error("API Error:", error);
-      message.error("Failed to update profile ❌");
-    }
+
   };
 
   const bannerImage = {
