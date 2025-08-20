@@ -20,18 +20,27 @@ import {
 import PopularCity from "../subCategory/famousCities/PopularCity";
 import { Helmet } from "react-helmet-async";
 import GetQuotesLocation from "../common/getQuotes/GetQuotesLocation";
+import NotFound from "../../pages/NotFound";
 
 const Location = () => {
   const { service, location } = useParams();
+  const serviceConfig = BREADCRUMB_LEVEL4_CONFIG[service];
+  if (!serviceConfig) {
+    return <NotFound />;
+  }
 
-function capitalizeFirstLetter(str) {
-  if (!str) return "";
-  
-  return str
-    .split('-') 
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
-    .join(' '); 
-}
+  const locationConfig = serviceConfig[location];
+  if (!locationConfig) {
+    return <NotFound />;
+  }
+  function capitalizeFirstLetter(str) {
+    if (!str) return "";
+
+    return str
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
 
   const findContents = FIND_CONTENT_LEVEL4_CONFIG[service]?.[location];
 
