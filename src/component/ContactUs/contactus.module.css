@@ -41,11 +41,12 @@
   position: relative;
   z-index: 1;
   color: white;
-  font-size: clamp(28px, 6vw, 48px);
+  font-size: clamp(28px, 6vw, 45px);
   font-weight: 600;
   text-align: center;
   font-family: "Poppins", sans-serif;
   padding: 0 20px;
+  font-size: 45px;
 }
 
 .formContainer {
@@ -283,6 +284,18 @@
   }
 }
 
+@media (max-width: 767px) {
+  .buttonlable {
+    display: none;
+  }
+  .customerTypeGroup {
+    margin-bottom: 24px;
+  }
+  .inputRow {
+    gap: 0px;
+  }
+}
+
 @media (max-width: 576px) {
   .formContainer {
     padding: 16px;
@@ -299,16 +312,7 @@
   .mapSection {
     height: 100px;
   }
-}
-
-@media (max-width: 767px) {
-  .buttonlable {
-    display: none;
-  }
-  .customerTypeGroup {
-    margin-bottom: 24px;
-  }
-  .inputRow {
-    gap: 0px;
+  .bannerTitle {
+    font-size: 40px;
   }
 }

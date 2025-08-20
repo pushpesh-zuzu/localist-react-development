@@ -1,6 +1,9 @@
 .container {
   text-align: center;
 }
+.heading{
+
+}
 .primaryText {
   color: var(--primary-color); /* blue */
   font-size: 35px;
@@ -15,13 +18,49 @@
 @media (max-width:768px) {
   .primaryText {
   color: var(--primary-color); /* blue */
-  font-size: 22px;
   font-weight: 700;
+  line-height: 45px;
 }
 
 .textColor {
   color: var(--text-color); /* black */
   font-weight: 600;
-  font-size: 22px;
+  line-height: 45px;
+}
+}
+.headingH1{
+  text-align: center;
+}
+/* for heading h1 tag css */
+.primaryTextH1 {
+  color: var(--primary-color); /* blue */
+  font-size: 45px;
+  font-weight: 700;
+    line-height: 45px;
+
+}
+
+.textColorH1 {
+  color: var(--text-color); /* black */
+  font-weight: 600;
+  font-size: 45px;
+    line-height: 45px;
+
+}
+@media (max-width:768px) {
+  .primaryTextH1 {
+  color: var(--primary-color); /* blue */
+  font-size: 40px;
+  font-weight: 700;
+    line-height: 45px;
+
+}
+
+.textColorH1 {
+  color: var(--text-color); /* black */
+  font-weight: 600;
+  font-size: 40px;
+    line-height: 45px;
+
 }
 }

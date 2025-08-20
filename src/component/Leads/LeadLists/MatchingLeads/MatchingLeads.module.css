@@ -630,7 +630,7 @@
     text-align: justify;
   }
   .dropdownTrigger {
-    width: 160px;
+    width: 165px;
     padding: 5px 5px;
     font-size: 13px;
     display: flex;
@@ -715,7 +715,7 @@
     flex-wrap: wrap; /* wrap below 410px */
   }
   .dropdownTrigger {
-    width: 160px;
+    width: 165px;
     padding: 5px 5px;
     font-size: 13px;
     display: flex;

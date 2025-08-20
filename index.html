@@ -3,45 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- 1. Preconnect for Google Fonts -->
+
+    <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- 3. Defer Non-Critical CSS -->
-    <link
+    <!-- ✅ Force CSS preload - UPDATE THESE PATHS -->
+    <!-- <link rel="preload" href="/assets/index-BZF1Aw-v.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="/assets/main-Cn3_gwXh.css" as="style" onload="this.rel='stylesheet'"> -->
+       <link
       rel="stylesheet"
       href="/src/index.css"
       media="print"
       onload="this.media='all'"
     />
     <noscript><link rel="stylesheet" href="/src/index.css" /></noscript>
+    <!-- CSS placeholder -->
+    <!--css-outlet-->
 
-    <!-- 4. Optimized Google Fonts (Single Request) -->
+    <!-- Google Fonts -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap"
       media="print"
       onload="this.media='all'"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap"
-      />
-    </noscript>
 
-    <!-- 5. Preload Important JS -->
-    <link rel="modulepreload" href="/src/main.jsx" />
-
-    <!-- Static SEO Meta Tags -->
+    <!-- SEO Meta Tags -->
+    <title>LocalLists</title>
     <meta
       name="description"
-      content="Find trusted professionals for home care, patio, web design, landscaping, business coaching, and more. Compare verified service providers, read reviews, and get instant quotes from local experts."
+      content="Find trusted professionals for home care, patio, web design, landscaping, business coaching, and more."
     />
     <meta
       name="keywords"
@@ -63,8 +56,10 @@
     <meta property="og:type" content="website" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- SSR Content Will Be Injected Here -->
+    <div id="root"><!--ssr-outlet--></div>
+
+    <!-- Client Hydration Script -->
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>
-

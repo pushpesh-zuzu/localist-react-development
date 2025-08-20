@@ -12,7 +12,7 @@ const serviceStepsData = [
   {
     id: 2,
     title: "Step 2",
-    heading: "Receive up to 5 quotes from local lending suppliers",
+    heading: "Receive up to 5 quotes from local Landing suppliers",
     image: Step2Img,
   },
   {

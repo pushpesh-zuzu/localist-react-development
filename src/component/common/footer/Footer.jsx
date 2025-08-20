@@ -114,7 +114,7 @@ const Footer = () => {
                 <li>Find a Professional</li>
               </Link>
 
-              <Link className={styles.link} to="/how-it-works">
+              <Link className={styles.link} to="en/gb/how-it-works-for-customers">
                 <li
                   onClick={() => {
                     window.scrollTo(0, 0);
@@ -147,10 +147,10 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <Link to="/how-it-works" className={styles.link}>
+              <Link to="/en/gb/how-it-works-for-sellers/" className={styles.link}>
                 <li>How it works</li>
               </Link>
-              <Link className={styles.link} to="/pricing">
+              <Link className={styles.link} to="/sellers/pricing/">
                 <li>Pricing</li>
               </Link>
               <Link
@@ -165,9 +165,9 @@ const Footer = () => {
                   Join as a Professional
                 </li>
               </Link>
-              <Link to="/help-center" className={styles.link}>
+              {/* <Link to="/help-center" className={styles.link}>
                 <li onClick={handleHelpCenter}>Help Centre</li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
 
@@ -177,7 +177,7 @@ const Footer = () => {
             </Link>
             <ul>
               <Link className={styles.link} to="/about-us">
-                <li>About localist</li>
+                <li>About localists</li>
               </Link>
             </ul>
           </div>
@@ -207,7 +207,7 @@ const Footer = () => {
               <Link to="/">
                 <li>Find a Professional</li>
               </Link>
-              <Link to="/how-it-works">
+              <Link to="/en/gb/how-it-works-for-customers">
                 <li>How it works</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/login"}>
@@ -233,10 +233,10 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <Link to="/how-it-works">
+              <Link to="/en/gb/how-it-works-for-sellers/">
                 <li>How it works</li>
               </Link>
-              <Link to="/pricing">
+              <Link to="/sellers/pricing/">
                 <li>Pricing</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/sellers/create"}>
@@ -244,16 +244,16 @@ const Footer = () => {
                   Join as a Professional
                 </li>
               </Link>
-              <Link to="/help-center">
+              {/* <Link to="/help-center">
                 <li>Help Centre</li>
-              </Link>
+              </Link> */}
             </ul>
           </Panel>
 
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <Link to="/about-us">
-                <li>About localist</li>
+                <li>About localists</li>
               </Link>
             </ul>
           </Panel>

@@ -9,7 +9,7 @@ const PricingSection = () => {
   }
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Pricing</h2>
+      <h1 className={styles.title}>Pricing</h1>
       <div className={styles.box}>
         <p className={styles.text}>
           From the moment you sign up, we’ll send you{" "}
