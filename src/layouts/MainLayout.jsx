@@ -37,6 +37,10 @@ const pageTitles = {
     title: "Login | Localists",
     description: ""
   },
+  "/sellers/dashboard": {
+    title: "Localists.com - Connect with Customers & Grow Your Business",
+    description: "Join Localists for free and connect with customers actively searching for talented professionals like you. Pitch confidently and grow your business today."
+  },
   "/category": {
     title: "Categories | Localists",
     description: ""
