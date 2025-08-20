@@ -267,18 +267,61 @@ const ViewProfiles = () => {
       <div className={styles.mainContainer}>
         <div className={styles.container}>
           <div className={styles.backBtnWrapper}>
-            <img
-              src={
-                viewProfileData?.profile_image
-                  ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}`
-                  : DEFAULT_PROFILE_IMAGE
-              }
-              alt="Profile"
-              className={styles.profileImage}
-            />
+            {/* <img
+          src={
+            viewProfileData?.company_logo
+              ? `${BASE_IMAGE}/users/${viewProfileData?.company_logo}`
+              : viewProfileData?.profile_image
+                ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}`
+                : DEFAULT_PROFILE_IMAGE
+          }
+          alt="Profile"
+          style={{
+            width: "140px",
+            height: "140px",
+            borderRadius: "50%",
+            objectFit: "contain",  // show entire image (no crop)
+            backgroundColor: "#fff", // optional: background behind image
+            padding: "6px"
+          }}
+        /> */}
+
+        <div
+  style={{
+    width: "140px",
+    height: "140px",
+    borderRadius: "50%",
+    overflow: "hidden",    // ensures image stays inside circle
+    backgroundColor: "#fff",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }}
+>
+<img
+  src={
+    viewProfileData?.company_logo
+      ? `${BASE_IMAGE}/users/${viewProfileData?.company_logo}`
+      : viewProfileData?.profile_image
+        ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}`
+        : DEFAULT_PROFILE_IMAGE
+        }
+        alt="Profile"
+        style={{
+          width: "140px",
+          height: "140px",
+          borderRadius: "50%",
+          backgroundColor: "#fff" // optional, fills empty space
+        }}
+      />
+
+
+
+</div>
+
           </div>
           <div className={styles.viewDetails}>
-            <h2>{viewProfileData?.name}</h2>
+            <h2>{viewProfileData?.company_name || viewProfileData?.name}</h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
               <span>{viewProfileData?.city} </span> | {viewProfileData?.zipcode}
@@ -371,16 +414,16 @@ const ViewProfiles = () => {
                 <img src={emailImg} alt="Email" />
                 <span>
                   {viewProfileData?.lead_purchased === 1
-                    ? viewProfileData?.email
-                    : maskEmail(viewProfileData?.email)}
+                    ? (viewProfileData?.company_email || viewProfileData?.email)
+                    : maskEmail(viewProfileData?.company_email || viewProfileData?.email)}
                 </span>
               </div>
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
                   {viewProfileData?.lead_purchased === 1
-                    ? viewProfileData?.phone || "0000000000"
-                    : maskPhone(viewProfileData?.phone)}
+                  ? (viewProfileData?.company_phone || viewProfileData?.phone || "0000000000")
+                  : maskPhone(viewProfileData?.company_phone || viewProfileData?.phone || "0000000000")}
                 </span>
               </div>
             </>

@@ -32,6 +32,7 @@ const ViewProfile = () => {
     useEffect(() => {
         const data = {
             customer_id: profileId?.profileId,
+            user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
             lead_id: id
         }
         dispatch(getLeadProfileRequestList(data))

@@ -54,6 +54,15 @@ const MyProfile = () => {
     }
   };
 
+const companySlug =
+  viewProfileData?.company_name
+    ? viewProfileData.company_name.replace(/\s+/g, "-")
+    : viewProfileData?.name
+      ? viewProfileData.name.replace(/\s+/g, "-")
+      : "";
+
+const randomKey = Math.random().toString(36).substring(2, 8);
+
   useEffect(() => {
     const isReview = location?.state?.review;
     if (isReview) {
@@ -138,12 +147,15 @@ const MyProfile = () => {
         — a complete profile helps you stand out and win more work.
       </p>
 
-      <a
-        className={styles.profileLink}
-        href={`/view-profile/${user_id}/key=admin`}
-      >
-        View public profile
-      </a>
+     {companySlug && (
+        <a
+          className={styles.profileLink}
+          href={`/view-profile/${companySlug}/${randomKey}`}
+        >
+          View public profile
+        </a>
+      )}
+
 
       <div style={{ marginTop: "30px" }}>
         <div ref={sectionRefs["About"]}>

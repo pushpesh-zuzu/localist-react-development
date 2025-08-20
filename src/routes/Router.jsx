@@ -345,7 +345,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/view-profile/:sellerId/:requestId",
+        path: "/view-profile/:company_name/:requestId",
         element: (
           <ProtectedRoute>
             <ViewProfiles />
@@ -353,7 +353,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/view-profile/:sellerId/:requestId",
+        path: "/view-profile/:company_name/:requestId",
         element: (
           <ProtectedRoute>
             <ViewProfiles />
