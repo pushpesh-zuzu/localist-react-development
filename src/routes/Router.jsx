@@ -250,7 +250,7 @@ const router = createBrowserRouter([
         ),
       },
       { path: "/help-center", element: <HelpCenterPage /> },
-      { path: "/pricing", element: <PricingPage /> },
+      { path: "/sellers/pricing/", element: <PricingPage /> },
       {
         path: "/feedback/questions",
         element: (
