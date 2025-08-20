@@ -71,7 +71,7 @@
 /* Mobile view (480px and down) */
 @media (max-width: 480px) {
   .title {
-    font-size: 28px;
+    font-size: 40px;
   }
 
   .box {

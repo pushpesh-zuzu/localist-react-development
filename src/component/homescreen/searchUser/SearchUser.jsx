@@ -178,25 +178,24 @@ const SearchProfessionals = ({ nextStep }) => {
 
     loadGoogleMapsScript();
   }, []);
-  const handleGetStarted = () => {
+  const handleGetStarted = (requireValidationPin) => {
+    debugger;
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
       return;
     }
 
-
-    if (!pincode) {
+    if (!pincode && !!requireValidationPin) {
       showToast("error", "Please enter a pincode");
       return;
-    }  
-    if (pincode.length < 5 || pincode.length > 8) {
+    }
+    if ((pincode.length < 5 || pincode.length > 8) && !!requireValidationPin) {
       showToast("error", "Pincode must be between 5 and 8 characters!");
       return;
     }
 
-
-    if(!city){
-       showToast("error", "Please provide valid pincode!");
+    if (!city && !!requireValidationPin) {
+      showToast("error", "Please provide valid pincode!");
       return;
     }
 
@@ -265,12 +264,19 @@ const SearchProfessionals = ({ nextStep }) => {
               onChange={handleChange}
             />
           </div>
-          <button className={styles.searchButton} onClick={handleGetStarted}>
+          <button
+            className={styles.searchButton}
+            onClick={() => {
+              handleGetStarted(true);
+            }}
+          >
             Search
           </button>
           <button
             className={styles.searchButtonPhone}
-            onClick={handleGetStarted}
+            onClick={() => {
+              handleGetStarted(false);
+            }}
           >
             <SearchOutlined />
           </button>
