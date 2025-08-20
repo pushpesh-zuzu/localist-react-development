@@ -8,7 +8,6 @@ import InProgressPage from "../pages/InProgressPage";
 import CloneCatrgory from "../pages/CloneCatrgory";
 import SubCategoryPage from "../pages/SubCategoryPage";
 import LocationPage from "../pages/LocationPage";
-import HowItWorksPage from "../pages/HowItWorksPage";
 import ServicePanelPage from "../pages/ServicePanelPage";
 import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/ServiceCreateAccount/ServiceCreateAccount";
 import Dashboard from "../component/dashboard/dashboard";
@@ -52,6 +51,8 @@ import SublocationPage from "../pages/SublocationPage";
 import SubLocationLevel5 from "../component/subLocation/SubLocationLevel5/SubLocationLevel5";
 import ContactUs from "../component/ContactUs/ContactUs";
 import AboutUs from "../component/AboutUs/AboutUs";
+import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
+import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 //test en/gb/bookkeeping-services/
 
 const router = createBrowserRouter([
@@ -151,7 +152,9 @@ const router = createBrowserRouter([
       },
       // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
 
-      { path: "/how-it-works", element: <HowItWorksPage /> },
+      { path: "/en/gb/how-it-works-for-customers", element: <HowItWorksCustomerPage /> },
+      { path: "/en/gb/how-it-works-for-sellers", element: <HowItWorkSeller /> },
+
       { path: "/sellers/create", element: <ServicePanelPage /> },
       {
         path: "/sellers/create-account/:serviceTitle",

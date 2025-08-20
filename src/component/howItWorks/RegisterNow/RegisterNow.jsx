@@ -3,11 +3,12 @@ import styles from "./RegisterNow.module.css";
 import userIcon from "../../../assets/Images/HowItWorks/userIcon.png"; // Replace with your actual path
 import filterIcon from "../../../assets/Images/HowItWorks/filterIcon.png";
 import cancelIcon from "../../../assets/Images/HowItWorks/cancelIcon.png";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 const RegisterNow = () => {
   return (
     <div className={styles.registerContainer}>
-      <button className={styles.registerButton}>Register now</button>
+      <button onClick={()=>handleScrollToBottom()} className={styles.registerButton}>Register now</button>
       <div className={styles.features}>
         <div className={styles.feature}>
           <div className={styles.iconContainer}>

@@ -9,19 +9,19 @@
 
 .textColor {
   color: var(--text-color); /* black */
-  font-weight: 500;
+  font-weight: 600;
   font-size: 35px;
 }
 @media (max-width:768px) {
   .primaryText {
   color: var(--primary-color); /* blue */
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
 }
 
 .textColor {
   color: var(--text-color); /* black */
-  font-weight: 500;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 22px;
 }
 }
