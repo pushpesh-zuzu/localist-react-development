@@ -5,32 +5,158 @@ import MetaHelmet from "../component/common/helmet/metaHelmet";
 import { useEffect } from "react";
 import ScrollToTop from "../routes/ScrollToTop";
 
-const pageTitles = {
-  "/": "Homepage | Localists",
-  "/login": "Login | Localists",
-  "/category": "Categories | Localists",
-  "/sub-category": "Sub Categories | Localists",
-  "/location": "Locations | Localists",
-  "/how-it-works": "How It Works | Localists",
-  "/sellers/create/": "Create Seller Account | Localists",
-  "/buyers/create": "Create Buyer Account | Localists",
-  "/account/setting": "Account Settings | Localists",
-  "/user/notification": "Buyer Notifications | Localists",
-  "/privacy-policy": "Privacy Policy | Localists",
-  "/dashboard": "Dashboard | Localists",
-  "/leads" : "Leads | Localists",
-  "/settings" : "Setting | Localists",
- "/leads/settings" : "Lead Setting | Locallist" ,
- "/lead/save-for-later" : "Saved Lead | Locallist",
- "/lead/save-later": "My Response | Locallist",
- "/help-center" : "Help | Locallist",
+// const pageTitles = {
+//   "/": "Homepage | Localists",
+//   "/login": "Login | Localists",
+//   "/category": "Categories | Localists",
+//   "/sub-category": "Sub Categories | Localists",
+//   "/location": "Locations | Localists",
+//   "/how-it-works": "How It Works | Localists",
+//   "/sellers/create/": "Create Seller Account | Localists",
+//   "/buyers/create": "Create Buyer Account | Localists",
+//   "/account/setting": "Account Settings | Localists",
+//   "/user/notification": "Buyer Notifications | Localists",
+//   "/privacy-policy": "Privacy Policy | Localists",
+//   "/sellers/dashboard": "Dashboard | Localists",
+//   "/sellers/leads" : "Leads | Localists",
+//   "/settings" : "Setting | Localists",
+//  "/leads/settings" : "Lead Setting | Locallist" ,
+//  "/lead/save-for-later" : "Saved Lead | Locallist",
+//  "/lead/save-later": "My Response | Locallist",
+//  "/help-center" : "Help | Locallist",
  
+  
+// };
+
+const pageTitles = {
+  "/": {
+    title: "Homepage | Localists",
+    description: ""
+  },
+  "/login": {
+    title: "Login | Localists",
+    description: ""
+  },
+  "/sellers/dashboard": {
+    title: "Localists.com - Connect with Customers & Grow Your Business",
+    description: "Join Localists for free and connect with customers actively searching for talented professionals like you. Pitch confidently and grow your business today."
+  },
+  "/category": {
+    title: "Categories | Localists",
+    description: ""
+  },
+  "/view-profile": {
+    title: "Localists.com - View Profile",
+    description: ""
+  },
+  "/sub-category": {
+    title: "Sub Categories | Localists",
+    description: ""
+  },
+  "/location": {
+    title: "Locations | Localists",
+    description: ""
+  },
+   "/how-it-works": {
+    title: "How It Works | Localists",
+    description: ""
+  },
+
+   "/sellers/create/": {
+    title: "Create Seller Account | Localists",
+    description: ""
+  },
+   "/buyers/create": {
+    title: "Localists.com - Create Your Request",
+    description: "Find trusted local service professionals with Localists. Get free quotes quickly for your home, business, garden, or Lesson & trainings needs."
+  },
+   "/user/settings": {
+    title: "Localists.com - Account Settings",
+    description: "Update your Localists profile, customize notification preferences, manage security settings, and personalize your experience—your account, your way.”"
+  },
+   "/user/notification": {
+    title: "Localists.com - Notification Settings",
+    description: "Manage your Localists notification preferences - choose how you receive updates about leads, alerts, and messages to stay informed your way."
+  },
+     "/privacy-policy": {
+    title: "Localists.com - Privacy Policy",
+    description: ""
+  },
+   "/settings/leads": {
+    title: "Localists.com - Settings - Lead Settings",
+    description: "Control how you receive leads on Localists. Adjust preferences, manage notifications, and optimise settings to connect with the right customers."
+  },
+    "/sellers/leads/save-for-later": {
+    title: "Localists.com - Save Leads for Later & Organize Your Leads",
+    description: "Keep track of valuable leads by saving them for later on Localists. Return when you're ready and stay organized."
+  },
+   "/sellers/leads/my-responses": {
+    title: "Localists.com - My Responses",
+    description: "Manage and track your responses to customer leads on Localists. Review past messages, follow up quickly, and grow your business with timely replies."
+  },
+  "/sellers/leads": {
+    title: "Localists.com - Manage Your Leads & Connect with Customers",
+    description: "Access your local leads for free to view, manage, and respond to customer leads efficiently. Manage all your leads effortlessly from one dashboard."
+  },
+  "/settings": {
+    title: "Localists.com - Settings",
+    description: "Manage your Localists account preferences—update your profile, notification settings, and more to customize your experience."
+  },
+  "/settings/my-profile": {
+    title: "Localists.com - Settings - My Profile",
+    description: "Manage and update your Localists profile. Edit personal details, showcase your expertise, and keep your information accurate to attract more customers."
+  },
+  "/settings/account-details": {
+    title: "Localists.com - Settings - Account Details",
+    description: "Easily update your Localists account details. Keep your login, security, and personal information up to date for a seamless experience."
+  },
+   "/settings/my-credits": {
+    title: "Localists.com - Settings - My Credits",
+    description: "Track and manage your Localists credits. View balances, monitor usage, and stay in control of your spending while growing your business."
+  },
+  "/settings/invoice-billing": {
+    title: "Localists.com - Settings - Invoice Billing",
+    description: "Access and manage your Localists invoices and billing history. Download receipts, view past payments, and stay organised with your account records."
+  },
+  "/settings/payment-details": {
+    title: "Localists.com - Settings - Payment Details",
+    description: "Securely manage your Localists payment methods. Update card information, add new payment options, and ensure smooth transactions every time."
+  },
+    "/settings/e-mail-notification": {
+    title: "Localists.com - Settings - Email Notification",
+    description: "Customise your Localists email notification preferences. Stay updated on leads, messages, and platform updates without overwhelming your inbox."
+  },
+  "/settings/browser-notification": {
+    title: "Localists.com - Settings - Browser Notification",
+    description: "Manage your Localists browser notifications. Choose real-time alerts for new leads and updates, so you never miss an opportunity."
+  },
+  "/help-center": {
+    title: "Localists.com - Help",
+    description: ""
+  },
   
 };
 
+
 const MainLayout = () => {
   const location = useLocation();
-  const title = pageTitles[location.pathname] || "Localists";
+
+  let meta = pageTitles[location.pathname];
+
+  // Handle dynamic route for /view-profile/:companyName/:id
+  if (!meta && location.pathname.startsWith("/view-profile")) {
+    const parts = location.pathname.split("/");
+    const companyName = decodeURIComponent(parts[2] || "");
+    meta = {
+      title: `${companyName} | Localists`,
+      description: `Discover more about ${companyName} on Localists. View company details, services, and connect directly.`
+    };
+  }
+
+  const { title, description } = meta || {
+    title: "Localists",
+    description: "Discover and connect with local businesses on Localists."
+  };
 
  useEffect(() => {
   if (typeof document !== 'undefined') {
@@ -41,7 +167,7 @@ const MainLayout = () => {
     <div>
       <ScrollToTop />
       <Navbar />
-      <MetaHelmet title={title} />
+      <MetaHelmet title={title} description={description} />
       <main style={{ minHeight: "50vh" }}>
         <Outlet />
       </main>

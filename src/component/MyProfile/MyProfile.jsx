@@ -151,6 +151,8 @@ const randomKey = Math.random().toString(36).substring(2, 8);
         <a
           className={styles.profileLink}
           href={`/view-profile/${companySlug}/${randomKey}`}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           View public profile
         </a>

@@ -625,7 +625,7 @@ useEffect(() => {
         <h3>Your Contact Information</h3>
         <p>
          Customers on Localists.com will see these details when viewing your profile. You can update your private contact info anytime under {" "}
-          <a href="/settings/account_details" className={styles.link}>
+          <a href="/settings/account-details" className={styles.link}>
             Account Details
           </a>
           .

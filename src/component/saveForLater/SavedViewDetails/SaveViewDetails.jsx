@@ -60,7 +60,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
 
   const navigate = useNavigate()
     const handleNavigate =()=>{
-      navigate("/leads/settings")
+      navigate("/settings/leads")
     }
   console.log(savedLeads, "savedLeads");
   let parsedQuestions = [];

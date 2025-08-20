@@ -16,7 +16,7 @@ const LeadViewDetails = ({ leadRequestDatas }) => {
   const leadRequest = leadRequestDatas || {};
 const navigate = useNavigate()
   const handleNavigate =()=>{
-    navigate("/leads/settings")
+    navigate("/settings/leads")
   }
 
   console.log(leadRequest, "leadRequestDatas");

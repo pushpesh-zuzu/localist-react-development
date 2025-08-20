@@ -46,7 +46,7 @@ const PricingFAQ = () => {
               }
               onClick={() => toggleFAQ(index)}
             >
-              <strong>{item.question}</strong>
+              <h4>{item.question}</h4>
               {openIndex === index ? (
                 <UpOutlined className={styles.icon} />
               ) : (

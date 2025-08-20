@@ -7,6 +7,7 @@ import { Spin } from "antd";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../utils";
+import BlueBlackTextForH1 from "../../common/headings/BlueBlackTextForH1";
 
 const HowLoaclistsWorks = () => {
   const dispatch = useDispatch();
@@ -136,17 +137,18 @@ const HowLoaclistsWorks = () => {
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
-        <div className={styles.headingContainer}>
+        {/* <div className={styles.headingContainer}>
           <p>
             How <span className={styles.blueText}>Localists.com</span> Works
           </p>
-        </div>
+        </div> */}
+        <BlueBlackTextForH1 firstblue={false} secondText="How" firstblueText="Localists.com" thirdText="Works" />
 
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
-            <h2>
+            <p>
               Now you know how it works, start looking for a professional.
-            </h2>
+            </p>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>
                 <label>What service do you need?</label>

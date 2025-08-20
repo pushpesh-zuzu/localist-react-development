@@ -71,7 +71,7 @@ const [show, setShow] = useState(false);
     setMenuOpen(false); // close menu on navigation
   };
   const handleNavigate = () => {
-    navigate("/lead/save-for-later")
+    navigate("sellers/leads/save-for-later")
   }
   const content = (
     <div className={styles.saveForLater}>
@@ -145,7 +145,7 @@ const [show, setShow] = useState(false);
 
         // Navigate based on previous user type
         if (updatedUser?.active_status === 1) {
-          navigate("/leads");
+          navigate("sellers/leads");
         } else {
           navigate("/buyers/create");
         }
@@ -241,7 +241,7 @@ useEffect(() => {
   const lastId = useSelector((state) => state.notification.lastId);
   const [popoverVisible, setPopoverVisible] = useState(false);
   const isBuyerPage = location.pathname === "/buyers/create";
-  const isAccountPage = location.pathname === "/account/setting";
+  const isAccountPage = location.pathname === "/user/settings";
   const isNotification = location.pathname === "/user/notification";
   const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
   // path: "admin/review/:profileId",
@@ -329,26 +329,26 @@ useEffect(() => {
         {getUserType() == 1 && !viewProfile && (
           <>
             <div
-              className={`${styles.navItem} ${location.pathname === "/dashboard" ? styles.active : ""}`}
-              onClick={() => handleNavigation("/dashboard")}
+              className={`${styles.navItem} ${location.pathname === "sellers/dashboard" ? styles.active : ""}`}
+              onClick={() => handleNavigation("sellers/dashboard")}
             >
               Dashboard
             </div>
             <div
-              className={`${styles.navItem} ${location.pathname === "/leads" ? styles.active : ""}`}
-              onClick={() => handleNavigation("/leads")}
+              className={`${styles.navItem} ${location.pathname === "sellers/leads" ? styles.active : ""}`}
+              onClick={() => handleNavigation("sellers/leads")}
             >
               New Leads
             </div>
             <div
-              className={`${styles.navItem} ${location.pathname === "/lead/save-for-later" ? styles.active : ""}`}
-              onClick={() => handleNavigation("/lead/save-for-later")}
+              className={`${styles.navItem} ${location.pathname === "sellers/leads/save-for-later" ? styles.active : ""}`}
+              onClick={() => handleNavigation("sellers/leads/save-for-later")}
             >
               Saved Leads
             </div>
             <div
-              className={`${styles.navItem} ${location.pathname === "/lead/save-later" ? styles.active : ""}`}
-              onClick={() => handleNavigation("/lead/save-later")}
+              className={`${styles.navItem} ${location.pathname === "sellers/leads/my-responses" ? styles.active : ""}`}
+              onClick={() => handleNavigation("sellers/leads/my-responses")}
             >
               My Responses
             </div>
@@ -533,7 +533,7 @@ useEffect(() => {
               </div>
               <div
                 className={styles.logoutBtn}
-                onClick={() => handleNavigation("/account/setting")}
+                onClick={() => handleNavigation("/user/settings")}
               >
                 Account Settings
               </div>

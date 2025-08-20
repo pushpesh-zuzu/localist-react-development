@@ -170,7 +170,7 @@ const LoginPage = () => {
             
             if (res?.profileData?.active_status === 1) {
               
-              navigate("/leads");
+              navigate("sellers/leads");
             } else if (res?.profileData?.active_status === 2) {
               navigate("/buyers/create");
             }
@@ -194,7 +194,7 @@ const LoginPage = () => {
         if (result?.success) {
           showToast("success", result?.message || "Login successful!");
           if (result?.data?.active_status === 1) {
-            navigate("/leads");
+            navigate("sellers/leads");
           } else if (result?.data?.active_status === 2) {
             navigate("/buyers/create");
           }

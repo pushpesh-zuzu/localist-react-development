@@ -604,7 +604,7 @@ const MatchingLeads = () => {
   };
 
   const handleEdit = () => {
-    navigate("/leads/settings");
+    navigate("/settings/leads");
   };
 
   const handleFilterClick = () => {
