@@ -485,6 +485,7 @@ const ReviewSection = ({
                         key={idx}
                         src={idx < item.ratings ? starImg : greyStar}
                         alt="star"
+                        height={27}
                       />
                     ))}
                   <span className={styles.count}>{item?.ratings}</span>
