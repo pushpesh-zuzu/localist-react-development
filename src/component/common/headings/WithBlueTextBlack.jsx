@@ -3,21 +3,31 @@ function WithBlueTextBlack({
   firstblueText = "",
   secondText = "",
   firstblue = true,
+  thirdText = "",
 }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
         {firstblue ? (
           <>
-            <span className={styles.primaryText}>{firstblueText} </span>{" "}
-            <span className={styles.textColor}>{secondText}</span>
+            {firstblueText && (
+              <span className={styles.primaryText}>{firstblueText} </span>
+            )}{" "}
+            {secondText && (
+              <span className={styles.textColor}>{secondText}</span>
+            )}
           </>
         ) : (
           <>
-            <span className={styles.textColor}>{secondText} </span>
-            <span className={styles.primaryText}>{firstblueText}</span>
+            {secondText && (
+              <span className={styles.textColor}>{secondText} </span>
+            )}
+            {firstblueText && (
+              <span className={styles.primaryText}>{firstblueText}</span>
+            )}{" "}
           </>
         )}
+        {thirdText && <span className={styles.textColor}>{thirdText}</span>}
       </h2>
     </div>
   );
