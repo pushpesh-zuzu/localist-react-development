@@ -38,5 +38,11 @@ export default defineConfig({
   },
   define: {
     global: 'globalThis'
+  },
+    server: {
+    host: true,
+    allowedHosts: ['dev.localists.com']
   }
+
+  
 });
