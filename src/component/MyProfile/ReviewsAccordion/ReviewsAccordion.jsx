@@ -65,7 +65,7 @@ const ReviewsAccordion = ({ details }) => {
 
       <h3 className={styles.sectionTitle}>Collect More Reviews</h3>
 
-      <div className={styles.fieldGroup}>
+      {/* <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>
           Invite your customers to leave a review
         </label>
@@ -77,7 +77,7 @@ const ReviewsAccordion = ({ details }) => {
           />
           <button className={styles.primaryBtn}>Invite</button>
         </div>
-      </div>
+      </div> */}
 
       <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>Share your review link</label>
@@ -94,7 +94,7 @@ const ReviewsAccordion = ({ details }) => {
         </div>
       </div>
 
-      <div className={styles.fieldGroup}>
+      {/* <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
           Import Facebook & Instagram Reviews
@@ -114,7 +114,7 @@ const ReviewsAccordion = ({ details }) => {
             Import Reviews
           </button>
         </div>
-      </div>
+      </div> */}
 
       <label className={styles.reviewsLabel}>Localists.com Reviews</label>
       {/* <div className={styles.localistBox}>

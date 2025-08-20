@@ -732,7 +732,7 @@
     align-items: center;
   }
   .images {
-    width: 140px;
+    object-fit: cover;
     height: 93px;
   }
   .mobileImageWrapper {
@@ -863,7 +863,7 @@
     background-size: 10px 10px;
   }
   .images {
-    width: 140px;
+    object-fit: cover;
     height: 90px;
   }
 }
