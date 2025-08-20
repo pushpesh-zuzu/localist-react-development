@@ -147,10 +147,10 @@ const router = createBrowserRouter([
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       { path: "/en/gb/:service/:location", element: <LocationPage /> },
       {
-        path: "/en/gb/:service/:location/:subLocation",
+        path: "/en/gb/:service/:location:subLocation",
         element: <SublocationPage />,
       },
-      // { path: "/en/gb/:service/:location/:sublocation", element: <SubLocationLevel5 /> },
+      { path: "/en/gb/:service/:location:sublocation", element: <SubLocationLevel5 /> },
 
       { path: "/en/gb/how-it-works-for-customers", element: <HowItWorksCustomerPage /> },
       { path: "/en/gb/how-it-works-for-sellers", element: <HowItWorkSeller /> },

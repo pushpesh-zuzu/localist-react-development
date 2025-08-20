@@ -31,13 +31,14 @@ import {
   RELATED_SERVICES_DATA,
   REVIEWS_DATA,
   TAXRETURNDATA,
-  POPULAR_CITIES
+  POPULAR_CITIES,
 } from "../constant/subCategory";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import financeBg from "../assets/Images/financeImg.svg";
 import { getDataByKey } from "../utils/databyKey";
 import { useParams } from "react-router-dom";
 import ServiceBannerWithBreadcrumb from "../component/category/ServicesHeroSection/ServiceBannerWithBreadcrumb";
+import NotFound from "./NotFound";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -47,6 +48,11 @@ const transformFenceInstallersData = (rawData, id) => {
 };
 const CloneSubThreeCategory = ({}) => {
   const { slug } = useParams();
+  const breadcrumb = BREADCRUMB_CONFIG[slug];
+  const lastItem = breadcrumb?.[breadcrumb.length - 1]; // last element le lo safely
+  const isServiceAvailable = lastItem?.path === slug;
+
+  if (!isServiceAvailable) return <NotFound />;
   function getHowItWorksData(key) {
     return HowItWorksData[slug] || null;
   }
@@ -60,6 +66,7 @@ const CloneSubThreeCategory = ({}) => {
   const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, slug);
   const TaxData = TAXRETURNDATA[slug];
   const contentBlocks = FIND_SERVICE_CONTENT[slug];
+
   return (
     <>
       <Helmet>
@@ -80,17 +87,14 @@ const CloneSubThreeCategory = ({}) => {
         para1={CONTENT_CONFIG[slug]?.para1}
         para2={CONTENT_CONFIG[slug]?.para2}
         para3={CONTENT_CONFIG[slug]?.para3}
-        defaultService = {LEVEL_THIRD_SERVICES_NAME[slug]}
+        defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
       />
       {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks
         HowItWorksData={getHowItWorksData(slug)}
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
-      <PopularCity
-        POPULAR_CITIES={POPULAR_CITIES}
-        title="Popular Cities"
-      />
+      <PopularCity POPULAR_CITIES={POPULAR_CITIES} title="Popular Cities" />
       {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
 
       <RegionsComponent
@@ -124,7 +128,7 @@ const CloneSubThreeCategory = ({}) => {
       <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} />
       {/* no need to change only data change*/}
 
-      <Slider sliderdata={RELATED_PRICE} title={'Related Price Guides'} />
+      <Slider sliderdata={RELATED_PRICE} title={"Related Price Guides"} />
       {/* no need to change only data change*/}
 
       <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.mainTitle} />

@@ -1132,17 +1132,17 @@ const BREADCRUMB_CONFIG = {
   "fence-installers": [
     { title: "Home & Garden", path: "/home" },
     { title: "Builders", path: "/builders" },
-    { title: "Fence & Gate Installation" }, // no path for last item
+    { title: "Fence & Gate Installation", path: "fence-installers" }, // no path for last item
   ],
   "driveway-installers": [
     { title: "Home & Garden", path: "/home" },
     { title: "Builders", path: "/builders" },
-    { title: "Driveway Installation" }, // no path
+    { title: "Driveway Installation", path: "driveway-installers" }, // no path
   ],
   "patio-services": [
     { title: "Home & Garden", path: "/home" },
     { title: "Builders", path: "/builders" },
-    { title: "Patio & Paving Services" }, // no path
+    { title: "Patio & Paving Services", path: "patio-services" }, // no path
   ],
   landscaping: [
     { title: "Home & Garden", path: "/home" },
@@ -1150,7 +1150,7 @@ const BREADCRUMB_CONFIG = {
       title: "Gardening & Landscaping",
       path: "/gardening-landscaping",
     },
-    { title: "Landscaping" }, // no path
+    { title: "Landscaping", path: "landscaping" }, // no path
   ],
   "artificial-grass-installation": [
     { title: "Home & Garden", path: "/home" },
@@ -1158,7 +1158,10 @@ const BREADCRUMB_CONFIG = {
       title: "Gardening & Landscaping",
       path: "/gardening-landscaping",
     },
-    { title: "Artificial Grass Installation" }, // no path
+    {
+      title: "Artificial Grass Installation",
+      path: "artificial-grass-installation",
+    }, // no path
   ],
 };
 

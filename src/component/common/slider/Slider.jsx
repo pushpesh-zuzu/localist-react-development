@@ -36,7 +36,6 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 const Slider = ({ sliderdata, blueTitle, title }) => {
-  console.log(sliderdata, "</Link>{service?.title}");
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
