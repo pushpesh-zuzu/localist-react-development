@@ -63,7 +63,7 @@ const endpointCategoryMap = {
     "Driveway Installation",
     "Patio Services",
     "Home Insulation",
-     "Artificial Grass Installation"
+    "Artificial Grass Installation",
   ],
 };
 const endpointServiceMap = {
@@ -103,10 +103,7 @@ const breadcrumbHierarchy = {
   ],
 };
 
-const CloneCategory = ({
-  accountHeader,
-  subHeader,
-}) => {
+const CloneCategory = ({ accountHeader, subHeader }) => {
   const location = useLocation();
   // Use includes instead of strict match
 
@@ -114,7 +111,6 @@ const CloneCategory = ({
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
 
   const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
-
 
   ///// logics for popular categories
 
@@ -145,7 +141,7 @@ const CloneCategory = ({
 
   const howItWorksData = HowItWorksData[endpoint1] || HowItWorksData.business;
   return (
-    <div>
+    <>
       <Helmet>
         <title>
           Find Trusted Home & Garden Professionals Near Me - Localists
@@ -155,62 +151,64 @@ const CloneCategory = ({
           content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
         />
       </Helmet>
-      {/* <Accountants
-        header={accountHeader}
-        subHeader={subHeader}
-        panelImage={financeBg}
-      /> */}
-      <BannerWithBreadCrum
-        header={accountHeader}
-        LevelOneTwoTitle={subHeader}
-        accountHeader="Home and Garden"
-        level={2}
-        isNeedS={false}
-        panelImage={Home}
-        title="Home & Garden"
-        para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
-        para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotation for the work you require."
-        para3={`It's super fast and easy!`}
-      />
+      <div>
+        {/* <Accountants
+      header={accountHeader}
+      subHeader={subHeader}
+      panelImage={financeBg}
+    /> */}
+        <BannerWithBreadCrum
+          header={accountHeader}
+          LevelOneTwoTitle={subHeader}
+          accountHeader="Home and Garden"
+          level={2}
+          isNeedS={false}
+          panelImage={Home}
+          title="Home & Garden"
+          para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
+          para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotation for the work you require."
+          para3={`It's super fast and easy!`}
+        />
 
-      {/* {endpoint !== routeName && (
-        <div className={styles.findAccountInfoContainer}>
-          <p className={styles.breadcrumb}>
-            {breadcrumbItems.map((item, index) => {
-              const isLast = index === breadcrumbItems.length - 1;
-              const slug = item.toLowerCase().replace(/ /g, "-");
+        {/* {endpoint !== routeName && (
+      <div className={styles.findAccountInfoContainer}>
+        <p className={styles.breadcrumb}>
+          {breadcrumbItems.map((item, index) => {
+            const isLast = index === breadcrumbItems.length - 1;
+            const slug = item.toLowerCase().replace(/ /g, "-");
 
-              return isLast ? (
-                <span key={index} className={styles.active}>
+            return isLast ? (
+              <span key={index} className={styles.active}>
+                {item}
+              </span>
+            ) : (
+              <span key={index}>
+                <Link to={`/en/gb/${slug}`} className={styles.link}>
                   {item}
-                </span>
-              ) : (
-                <span key={index}>
-                  <Link to={`/en/gb/${slug}`} className={styles.link}>
-                    {item}
-                  </Link>{" "}
-                  <span style={{ color: "black", padding: "0 4px" }}>/</span>
-                </span>
-              );
-            })}
-          </p>
-        </div>
-      )} */}
+                </Link>{" "}
+                <span style={{ color: "black", padding: "0 4px" }}>/</span>
+              </span>
+            );
+          })}
+        </p>
+      </div>
+    )} */}
 
-      {/* <FindingBusinessProfessionals
-        header={accountHeader}
-        subHeader={subHeader}
-        bestText={bestText}
-      /> */}
-      <HowItWorks
-        howItWorksData={howItWorksData}
-        header={accountHeader}
-        subHeader={subHeader}
-      />
-      <PopularCategories data={filteredCategories} />
-      <AllServicesComponent data={filteredAllServicesData} />
-      <GetQuotes message={subHeader} needSString={false} />
-    </div>
+        {/* <FindingBusinessProfessionals
+      header={accountHeader}
+      subHeader={subHeader}
+      bestText={bestText}
+    /> */}
+        <HowItWorks
+          howItWorksData={howItWorksData}
+          header={accountHeader}
+          subHeader={subHeader}
+        />
+        <PopularCategories data={filteredCategories} />
+        <AllServicesComponent data={filteredAllServicesData} />
+        <GetQuotes message={subHeader} needSString={false} />
+      </div>
+    </>
   );
 };
 
