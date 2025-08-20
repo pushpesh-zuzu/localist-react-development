@@ -81,8 +81,8 @@ async function createServer() {
   );
   app.use(express.static(path.resolve(__dirname, "dist/client")));
 
-  const port = process.env.PORT || 5173;
-  const host = process.env.HOST || "localhost";
+  const port = 3000;
+  const host = "0.0.0.0";
 
   app.listen(port, host, () => {
     console.log(`SSR server running at http://${host}:${port}`);
