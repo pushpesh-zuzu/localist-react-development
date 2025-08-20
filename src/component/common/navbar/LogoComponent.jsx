@@ -40,7 +40,7 @@ const LogoComponent = () => {
     useSelector((state) => state.findJobs);
   const location = useLocation();
   const dispatch = useDispatch();
-  const isAccountPage = location.pathname === "/account/setting";
+  const isAccountPage = location.pathname === "/user/settings";
   const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
@@ -109,7 +109,7 @@ const LogoComponent = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
     if (status == 1) {
-      navigate("/leads");
+      navigate("sellers/leads");
     } else if (status == 2) {
       navigate("/buyers/create");
     } else {

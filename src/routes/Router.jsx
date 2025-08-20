@@ -169,7 +169,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/account/setting",
+        path: "/user/settings",
         element: (
           <ProtectedRoute>
             <BuyerAccountSettings />
@@ -186,10 +186,18 @@ const router = createBrowserRouter([
       },
       { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
-        path: "/dashboard",
+        path: "sellers/dashboard",
         element: (
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "sellers/leads",
+        element: (
+          <ProtectedRoute>
+            <Leads />
           </ProtectedRoute>
         ),
       },
@@ -210,7 +218,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/my_profile",
+        path: "/settings/my-profile",
         element: (
           <ProtectedRoute>
             <MyProfile />
@@ -218,7 +226,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/account_details",
+        path: "/settings/account-details",
         element: (
           <ProtectedRoute>
             <AccountDetails />
@@ -226,7 +234,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/leads/settings",
+        path: "/settings/leads",
         element: (
           <ProtectedRoute>
             <LeadSetting />
@@ -292,7 +300,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/lead/save-later",
+        path: "/sellers/leads/my-responses",
         element: (
           <ProtectedRoute>
             <MyResponse />
@@ -300,7 +308,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/lead/save-for-later",
+        path: "sellers/leads/save-for-later",
         element: (
           <ProtectedRoute>
             <SaveForLater />
@@ -324,7 +332,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/mycredits",
+        path: "/settings/my-credits",
         element: (
           <ProtectedRoute>
             <MyCredits />
@@ -332,7 +340,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/invoice-billing",
+        path: "/settings/invoice-billing",
         element: (
           <ProtectedRoute>
             <InvoiceAndBilling />
@@ -340,7 +348,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/payment-details",
+        path: "/settings/payment-details",
         element: (
           <ProtectedRoute>
             <MyPaymentDetails />
@@ -372,7 +380,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/e-mail-notification",
+        path: "/settings/e-mail-notification",
         element: (
           <ProtectedRoute>
             <EmailNotification />
@@ -380,7 +388,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/browser-notification",
+        path: "/settings/browser-notification",
         element: (
           <ProtectedRoute>
             <BrowserNotification />

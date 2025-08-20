@@ -26,7 +26,7 @@ const ViewProfile = () => {
       };
       
     const handleBack = () => {
-        navigate("/lead/save-later")
+        navigate("/sellers/leads/my-responses")
     }
     console.log(id, profileLeadViewData?.leads?.status, "profileId")
     useEffect(() => {

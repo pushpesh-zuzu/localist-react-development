@@ -172,7 +172,7 @@ const AccountDetails = () => {
         </span>
         <p className={styles.description}>
          Manage your account email, phone number, password, and login information. These details are used to contact you but are not shared with customers. To manage what customers see—like your public email or phone number—visit your {" "}
-          <Link to="/settings/my_profile" className={styles.link} >
+          <Link to="/settings/my-profile" className={styles.link} >
                             My Profile
                         </Link> settings
           .

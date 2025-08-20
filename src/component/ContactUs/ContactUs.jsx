@@ -4,6 +4,7 @@ import { contactUsBanner, contactUsMap } from "../../assets/Images/MainBanners";
 import { Form } from "antd";
 import TextInput from "../customInputs/TextInput";
 import { Helmet } from "react-helmet-async";
+import axiosInstance from "../../Api/axiosInstance";
 
 const ContactUs = () => {
   const [form] = Form.useForm();
@@ -15,8 +16,26 @@ const ContactUs = () => {
     message: "",
   });
 
-  const onFinish = (values) => {
-    console.log(values, "values");
+  
+   const onFinish = async (values) => {
+    try {
+      console.log("Form values:", values);
+
+      // ✅ Use axiosInstance, only pass the endpoint (no need for full base URL)
+      // const response = await axiosInstance.post(
+      //   "users/update-seller-profile",
+      //   values
+      // );
+
+      if (1==1) {
+        message.success("Profile updated successfully ✅");
+      } else {
+        message.error(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("API Error:", error);
+      message.error("Failed to update profile ❌");
+    }
   };
 
   const bannerImage = {
@@ -157,7 +176,7 @@ const ContactUs = () => {
           className={styles.mapSection}
           style={{ backgroundImage: `url(${contactUsMap})` }}
         >
-          <span className={styles.mapText}>Contact Us Map</span>
+          {/* <span className={styles.mapText}>Contact Us Map</span> */}
         </div>
       </div>
     </>
