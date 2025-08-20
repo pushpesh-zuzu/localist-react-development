@@ -26,8 +26,9 @@
   z-index: 1;
   color: white;
   font-size: clamp(28px, 6vw, 48px);
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
+  font-size: 45px;
   font-family: "Poppins", sans-serif;
   padding: 0 20px;
 }
@@ -40,5 +41,9 @@
   }
   .bannerImage {
     padding: 0px;
+  }
+  .bannerTitle{
+    font-size: 40px;
+    font-weight: 700;
   }
 }
