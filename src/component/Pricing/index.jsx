@@ -11,10 +11,10 @@ const Pricing = () => {
   return (
     <>
       <Helmet>
-        <title>How It Works for Professionals & Businesses - Localists</title>
+        <title>Pricing | Join Free & Connect with Customers - Localists</title>
         <meta
           name="description"
-          content=" Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
+          content=" Register free on Localists and get customer leads. Only pay a small fee to connect with the ones you want. Keep 100% of what you earn."
         />
       </Helmet>
 

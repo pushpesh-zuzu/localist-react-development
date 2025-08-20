@@ -18,7 +18,6 @@
 @media (max-width:768px) {
   .primaryText {
   color: var(--primary-color); /* blue */
-  font-size: 22px;
   font-weight: 700;
   line-height: 45px;
 }
@@ -26,7 +25,6 @@
 .textColor {
   color: var(--text-color); /* black */
   font-weight: 600;
-  font-size: 22px;
   line-height: 45px;
 }
 }
