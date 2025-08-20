@@ -10,7 +10,7 @@
     "build:server": "vite build --outDir dist/server --ssr src/entry-server.jsx",
     "preview": "vite preview",
     "preview:ssr": "cross-env NODE_ENV=production node server",
-    "start": "cross-env NODE_ENV=production PORT=443 HOST=0.0.0.0 node server",
+    "start": "node server",
     "lint": "eslint ."
   },
   "dependencies": {
