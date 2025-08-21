@@ -100,7 +100,7 @@ const InvoiceAndBilling = () => {
                     </span>
                     <p className={styles.description}>
                         We use these details to manage your account and send you billing information. This information is private and won’t be shared with customers. To manage what contact details are visible to customers, visit your {" "}
-                        <Link to="/settings/my-profile" className={styles.link} >
+                        <Link to="/settings/profile/my-profile" className={styles.link} >
                             My Profile
                         </Link> settings
                         .

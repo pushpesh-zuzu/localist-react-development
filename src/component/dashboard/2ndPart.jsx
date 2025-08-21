@@ -29,7 +29,7 @@ const DashboardCards = ({data}) => {
   <div className={`${styles.card} ${styles["lead-settings"]}`}>
   <h3 className={styles["card-title"]}>Lead settings</h3>
   <div className={styles["sub-label"]}>
-    Services <span className={styles["edit-link"]} onClick={()=>navigate("/settings/leads")}>Edit</span>
+    Services <span className={styles["edit-link"]} onClick={()=>navigate("/settings/leads/my-services")}>Edit</span>
   </div>
   <div className={styles["highlight-box"]}>
     You’ll receive leads in these categories
@@ -96,14 +96,14 @@ const DashboardCards = ({data}) => {
       </div>
 
       <div className={styles.profileheadline}>
-        Your profile is {data?.profile_info?.percentage_completed}% complete <span className={styles["edit-link"]} onClick={() => navigate("/settings/my-profile")}>Edit</span>
+        Your profile is {data?.profile_info?.percentage_completed}% complete <span className={styles["edit-link"]} onClick={() => navigate("/settings/profile/my-profile")}>Edit</span>
       </div>
       <div className={styles["progress-bar"]}>
         <div className={styles.progress} style={{ width: `${data?.profile_info?.percentage_completed || 0}%` }}></div>
       </div>
       <div className={styles["hint-box"]}>
         <div>Completing your profile is a great way to appeal to customers</div>
-        <button onClick={() => navigate("/settings/my-profile")}>Edit Profile</button>
+        <button onClick={() => navigate("/settings/profile/my-profile")}>Edit Profile</button>
       </div>
     </div>
 

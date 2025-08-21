@@ -61,7 +61,7 @@ const NewQuestion = () => {
       if (result?.success) {
         showToast("success", result?.message);
       }
-      navigate("/settings/leads");
+      navigate("/settings/leads/my-services");
     });
   };
 
