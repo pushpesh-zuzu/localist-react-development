@@ -74,11 +74,11 @@ const LogSwitch = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigation = (path) => {
-    navigate("/" + path);
+    navigate(path);
     setMenuOpen(false); // close menu on navigation
   };
   const handleNavigate = () => {
-    navigate("sellers/leads/save-for-later");
+    navigate("/sellers/leads/save-for-later");
   };
   const content = (
     <div className={styles.saveForLater}>
@@ -145,7 +145,7 @@ const LogSwitch = () => {
 
         // Navigate based on previous user type
         if (updatedUser?.active_status === 1) {
-          navigate("sellers/leads");
+          navigate("/sellers/leads");
         } else {
           navigate("/buyers/create");
         }
@@ -358,7 +358,7 @@ const LogSwitch = () => {
                 className={`${styles.navItem} ${
                   location.pathname === "login/sellers/dashboard" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("sellers/dashboard")}
+                onClick={() => handleNavigation("/sellers/dashboard")}
               >
                 Dashboard
               </div>
@@ -366,7 +366,7 @@ const LogSwitch = () => {
                 className={`${styles.navItem} ${
                   location.pathname === "login/sellers/leads" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("sellers/leads")}
+                onClick={() => handleNavigation("/sellers/leads")}
               >
                 New Leads
               </div>
@@ -376,7 +376,7 @@ const LogSwitch = () => {
                     ? styles.active
                     : ""
                 }`}
-                onClick={() => handleNavigation("sellers/leads/save-for-later")}
+                onClick={() => handleNavigation("/sellers/leads/save-for-later")}
               >
                 Saved Leads
               </div>
@@ -386,7 +386,7 @@ const LogSwitch = () => {
                     ? styles.active
                     : ""
                 }`}
-                onClick={() => handleNavigation("sellers/leads/my-responses")}
+                onClick={() => handleNavigation("/sellers/leads/my-responses")}
               >
                 My Responses
               </div>
@@ -394,7 +394,7 @@ const LogSwitch = () => {
                 className={`${styles.navItem} ${
                   location.pathname === "settings" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("settings")}
+                onClick={() => handleNavigation("/settings")}
               >
                 Settings
               </div>
@@ -402,7 +402,7 @@ const LogSwitch = () => {
                 className={`${styles.navItem} ${
                   location.pathname === "help" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("help-center")}
+                onClick={() => handleNavigation("/help-center")}
               >
                 Help
               </div>

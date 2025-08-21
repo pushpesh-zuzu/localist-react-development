@@ -109,7 +109,7 @@ const LogoComponent = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
     if (status == 1) {
-      navigate("sellers/leads");
+      navigate("/sellers/leads");
     } else if (status == 2) {
       navigate("/buyers/create");
     } else {
