@@ -74,7 +74,7 @@ const LogSwitch = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNavigation = (path) => {
-    //  navigate(path);
+    navigate("/" + path);
     setMenuOpen(false); // close menu on navigation
   };
   const handleNavigate = () => {
@@ -356,7 +356,7 @@ const LogSwitch = () => {
             <>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "sellers/dashboard" ? styles.active : ""
+                  location.pathname === "login/sellers/dashboard" ? styles.active : ""
                 }`}
                 onClick={() => handleNavigation("sellers/dashboard")}
               >
@@ -364,7 +364,7 @@ const LogSwitch = () => {
               </div>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "sellers/leads" ? styles.active : ""
+                  location.pathname === "login/sellers/leads" ? styles.active : ""
                 }`}
                 onClick={() => handleNavigation("sellers/leads")}
               >
@@ -372,7 +372,7 @@ const LogSwitch = () => {
               </div>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "sellers/leads/save-for-later"
+                  location.pathname === "login/sellers/leads/save-for-later"
                     ? styles.active
                     : ""
                 }`}
@@ -382,7 +382,7 @@ const LogSwitch = () => {
               </div>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "sellers/leads/my-responses"
+                  location.pathname === "login/sellers/leads/my-responses"
                     ? styles.active
                     : ""
                 }`}
@@ -392,17 +392,17 @@ const LogSwitch = () => {
               </div>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "/settings" ? styles.active : ""
+                  location.pathname === "settings" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("/settings")}
+                onClick={() => handleNavigation("settings")}
               >
                 Settings
               </div>
               <div
                 className={`${styles.navItem} ${
-                  location.pathname === "/help" ? styles.active : ""
+                  location.pathname === "help" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("/help-center")}
+                onClick={() => handleNavigation("help-center")}
               >
                 Help
               </div>
