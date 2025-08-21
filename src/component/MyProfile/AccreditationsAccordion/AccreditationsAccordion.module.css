@@ -216,6 +216,21 @@
 .cancel:hover {
   background-color: #ccc;
 }
+
+.closeButton {
+  background-color: #c6c6c6;
+  color: white;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  vertical-align: middle;
+  margin-top: 0px;
+  cursor: pointer !important;
+}
+
 @media screen and (max-width:480px) {
   .logoSectionWrapper {
     flex-direction: column;
@@ -284,5 +299,7 @@
      padding: 8px 10px;
      font-size: 14px;
 }
+
+
 
 }
