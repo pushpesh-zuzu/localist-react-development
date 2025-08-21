@@ -57,7 +57,7 @@ const OurTeams = () => {
         </div>
 
         {[...Array(testimonials[currentIndex].rating)].map((_, index) => (
-          <div className={styles.rating}>
+          <div className={styles.rating} key={index}>
             <img src={rating} alt="rating" />
           </div>
         ))}
