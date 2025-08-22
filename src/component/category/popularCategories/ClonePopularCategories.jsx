@@ -16,7 +16,21 @@ const PopularCategories = ({ data }) => {
           <div key={rowIndex} className={styles.rowWrapper}>
             <div className={styles.row}>
               <div key={row.id} className={styles.card}>
-                <img src={row.image} alt={row.title} className={styles.image} />
+                {row.path ? (
+                  <Link to={`/en/gb/${row.path}`}>
+                    <img
+                      src={row.image}
+                      alt={row.title}
+                      className={styles.image}
+                    />
+                  </Link>
+                ) : (
+                  <img
+                    src={row.image}
+                    alt={row.title}
+                    className={styles.image}
+                  />
+                )}
                 {row?.availableOnline && (
                   <span className={styles.availableOnline}>
                     Available Online
