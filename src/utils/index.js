@@ -26,11 +26,11 @@ export const showToast = (type, message) => {
   }
 };
 
-export const BASE_IMAGE_URL = "https://localists.zuzucodes.com/admin/";
-export const BASE_URL_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/category/";
-export const BASE_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/";
-export const BASE_COMPLETE = "https://localists.zuzucodes.com/admin/"
-// export const BASE_URL_IMAGE_MAIN = "https://localists.zuzucodes.com/admin/public/images/"
+export const BASE_IMAGE_URL = import.meta.env.VITE_REACT_APP_BASE_URL;
+export const BASE_URL_IMAGE = `${BASE_IMAGE_URL}storage/app/public/images/category/`;
+export const BASE_IMAGE = `${BASE_IMAGE_URL}storage/app/public/images/`;
+export const BASE_COMPLETE = `${BASE_IMAGE_URL}`;
+// export const BASE_URL_IMAGE_MAIN = `${BASE_IMAGE_URL}public/images/`
 
 
 
