@@ -35,7 +35,7 @@ function AutoplayPlugin(slider) {
   slider.on("animationEnded", start);
   slider.on("updated", start);
 }
-const Slider = ({ sliderdata, blueTitle, title }) => {
+const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -48,7 +48,7 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
         "(max-width: 600px)": {
           slides: { perView: 2, spacing: 5 },
         },
-         "(max-width: 520px)": {
+        "(max-width: 520px)": {
           slides: { perView: 1.5, spacing: 5 },
         },
         "(max-width: 375px)": {
@@ -111,7 +111,13 @@ const Slider = ({ sliderdata, blueTitle, title }) => {
                 key={service.id}
                 className={`keen-slider__slide ${styles.slide}`}
               >
-                <img src={service.image} alt={service.title} />
+                {service.path ? (
+                  <Link to={`/en/gb/${service.path}`}>
+                    <img src={service.image} alt={service.title} />
+                  </Link>
+                ) : (
+                  <img src={service.image} alt={service.title} />
+                )}
                 {service?.path ? (
                   <p>
                     <Link className={styles.link} to={`/en/gb/${service.path}`}>

@@ -90,6 +90,6 @@ p {
     width: 280px !important;
   }
 }
-*:not(input):not(textarea):not([contenteditable="true"]) {
+/* *:not(input):not(textarea):not([contenteditable="true"]) {
   cursor: default ;
-}
+} */
