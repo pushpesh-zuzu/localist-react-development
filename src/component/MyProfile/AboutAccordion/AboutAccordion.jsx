@@ -6,38 +6,51 @@ import defaultImage from "../../../assets/Images/DefaultProfileImage.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSellerProfile, clearUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
+import {
+  updateSellerProfile,
+  clearUpdateStatus,
+} from "../../../store/MyProfile/myProfileSlice";
 import { toast } from "react-toastify";
 import { BASE_IMAGE, showToast, updateLocalStorageValue } from "../../../utils";
 import { setUserToken } from "../../../store/Auth/authSlice";
-import { checkAddressApi, checkCompanyNameApi, setRegisterData } from "../../../store/FindJobs/findJobSlice";
+import {
+  checkAddressApi,
+  checkCompanyNameApi,
+  setRegisterData,
+} from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
-import { setCompanyError,fetchCompanyDetails } from "../../../store/Company/companyLookup";
+import {
+  setCompanyError,
+  fetchCompanyDetails,
+} from "../../../store/Company/companyLookup";
+import Cropper from "react-easy-crop";
 
-
-const AboutAccordion = ({details}) => {
+const AboutAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { sellerLoader, updateSuccess, updateError ,loading, error, success } = useSelector((state) => state.myProfile);
-   const { userToken } = useSelector((state) => state.auth); 
-     const { registerData,errorCheckComanyName } = useSelector(
-        (state) => state.findJobs
-      );
+  const { sellerLoader, updateSuccess, updateError, loading, error, success } =
+    useSelector((state) => state.myProfile);
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData, errorCheckComanyName } = useSelector(
+    (state) => state.findJobs
+  );
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // const companyNameData = useSelector((state)=> state.company)
-   const companyData = useSelector((state) => state.companyLook?.companyData)
-  console.log(companyData?.registered_office_address?.address_line_1,"companyNameData")
-   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
-    const [hideAddress, setHideAddress] = useState(false);
+  const companyData = useSelector((state) => state.companyLook?.companyData);
+  console.log(
+    companyData?.registered_office_address?.address_line_1,
+    "companyNameData"
+  );
+  const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
+  const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
-tiktok_link: "",
-insta_link: "",
-linkedin_link: "",
-extra_links: "",
-
+    tiktok_link: "",
+    insta_link: "",
+    linkedin_link: "",
+    extra_links: "",
     company_logo: null,
     company_logoPreview: null,
     profile_image: null,
@@ -53,7 +66,7 @@ extra_links: "",
     company_locaion_reason: "",
     company_size: "",
     company_total_years: "",
-    company_reg_number:"",
+    company_reg_number: "",
     about_company: "",
     is_youtube_video: 1,
     company_youtube_link: "",
@@ -73,96 +86,158 @@ extra_links: "",
     user_service_id: 0,
     deleteData: 0,
     accr_delete_id: "",
-    service_delete_id: ""
+    service_delete_id: "",
   });
 
   const [errors, setErrors] = useState({});
   const fileInputRefs = {
     company_logo: useRef(),
-    profile_image: useRef(),
+    profile_image: useRef(null),
     accre_image: useRef(),
-    company_photos: useRef()
+    company_photos: useRef(),
   };
-console.log(details?.profile_image,formState.company_size,details?.company_size,"details")
-const companyError = useSelector(state => state.companyLook?.companyError);
+  console.log(
+    details?.profile_image,
+    formState.company_size,
+    details?.company_size,
+    "details"
+  );
 
-  useEffect(()=>{
-    if(details?.id){
-// setFormState(details)
-setFormState({
-  ...formState,company_email:details?.company_email,
-  company_phone:details?.company_phone,
-  company_name:details?.company_name,
-  name:details?.name,
-  company_website:details?.company_website,
-  company_location:details?.company_location,
-  company_locaion_reason:details?.company_locaion_reason,
-  company_size:details?.company_size,
-  company_total_years:details?.company_total_years,
-  company_reg_number:details?.company_reg_number,
-  about_company:details?.about_company,
-  profile_imagePreview:details?.profile_image ? `${BASE_IMAGE}/users/${details?.profile_image}`: null,
-  // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
-  
- company_logoPreview: details?.company_logo ? `${BASE_IMAGE}/users/${details?.company_logo}` : null,
+  const [imageSrc, setImageSrc] = useState(null); // Uploaded/Webcam image
+  const [isCropping, setIsCropping] = useState(false);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedPreview, setCroppedPreview] = useState(null);
 
+  const companyError = useSelector((state) => state.companyLook?.companyError);
 
-})
-}
-  },[details])
-  useEffect(()=>{
-    let data={...formState}
+  useEffect(() => {
+    if (details?.id) {
+      // setFormState(details)
+      setFormState({
+        ...formState,
+        company_email: details?.company_email,
+        company_phone: details?.company_phone,
+        company_name: details?.company_name,
+        name: details?.name,
+        company_website: details?.company_website,
+        company_location: details?.company_location,
+        company_locaion_reason: details?.company_locaion_reason,
+        company_size: details?.company_size,
+        company_total_years: details?.company_total_years,
+        company_reg_number: details?.company_reg_number,
+        about_company: details?.about_company,
+        profile_imagePreview: details?.profile_image
+          ? `${BASE_IMAGE}/users/${details?.profile_image}`
+          : null,
+        // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
 
-if(companyData.company_name){
-  data.company_name= companyData?.company_name 
-  // setFormState({...formState,company_name:companyData?.company_name})
-}
-if(companyData?.registered_office_address){
-   data.company_location= companyData?.registered_office_address?.address_line_1 
-  // setFormState({...formState,company_location:companyData?.registered_office_address?.address_line_1})
-}
-if(companyData.company_name || companyData?.registered_office_address ) {
+        company_logoPreview: details?.company_logo
+          ? `${BASE_IMAGE}/users/${details?.company_logo}`
+          : null,
+      });
+    }
+  }, [details]);
+  useEffect(() => {
+    let data = { ...formState };
 
-  setFormState({...data})
-}
-
-
-  },[companyData])
+    if (companyData.company_name) {
+      data.company_name = companyData?.company_name;
+      // setFormState({...formState,company_name:companyData?.company_name})
+    }
+    if (companyData?.registered_office_address) {
+      data.company_location =
+        companyData?.registered_office_address?.address_line_1;
+      // setFormState({...formState,company_location:companyData?.registered_office_address?.address_line_1})
+    }
+    if (companyData.company_name || companyData?.registered_office_address) {
+      setFormState({ ...data });
+    }
+  }, [companyData]);
 
   const previewFile = (file) => URL.createObjectURL(file);
 
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (!file) return;
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     setImageSrc(reader.result);
+  //     setIsCropping(true);
+  //     setZoom(1);
+  //     setCrop({ x: 0, y: 0 });
+  //   };
+  //   reader.readAsDataURL(file);
+  //   const { name, files } = e.target;
+  //   if (name === "company_photos") {
+  //     const arr = Array.from(files);
+  //     setFormState((prev) => ({
+  //       ...prev,
+  //       company_photos: arr,
+  //       company_photosPreview: arr.map(previewFile),
+  //     }));
+  //   } else {
+  //     setFormState((prev) => ({
+  //       ...prev,
+  //       [name]: files[0],
+  //       [`${name}Preview`]: previewFile(files[0]),
+  //     }));
+  //   }
+  // };
+
   const handleFileChange = (e) => {
-    const { name, files } = e.target;
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const { name } = e.target;
+
+    // For profile image, open cropper modal
+    if (name === "profile_image") {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        setIsCropping(true);
+        setZoom(1);
+        setCrop({ x: 0, y: 0 });
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    // For company photos
     if (name === "company_photos") {
-      const arr = Array.from(files);
+      const arr = Array.from(e.target.files);
       setFormState((prev) => ({
         ...prev,
         company_photos: arr,
-        company_photosPreview: arr.map(previewFile),
+        company_photosPreview: arr.map((f) => URL.createObjectURL(f)),
       }));
-    } else {
-      setFormState((prev) => ({
-        ...prev,
-        [name]: files[0],
-        [`${name}Preview`]: previewFile(files[0]),
-      }));
+      return;
     }
+
+    // For company logo & accreditations
+    setFormState((prev) => ({
+      ...prev,
+      [name]: file,
+      [`${name}Preview`]: URL.createObjectURL(file),
+    }));
   };
 
-   const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
 
     // if (name === "company_reg_number" && value.length === 8) {
     //   dispatch(fetchCompanyDetails(value));
     // }
-    if(name==='company_reg_number'){
-        setFormState((prev) => ({
+    if (name === "company_reg_number") {
+      setFormState((prev) => ({
         ...prev,
         [name]: value,
-        company_name: '', // reset company_name
+        company_name: "", // reset company_name
       }));
-      phoneAPI(value)
+      phoneAPI(value);
     }
 
     if (name === "company_location") {
@@ -179,7 +254,9 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     if (debouncedCompanyLocation.length !== 10) return;
 
     const timeout = setTimeout(() => {
-      dispatch(checkAddressApi({ company_location: debouncedCompanyLocation })).then((result) => {
+      dispatch(
+        checkAddressApi({ company_location: debouncedCompanyLocation })
+      ).then((result) => {
         if (result?.success) {
           showToast("success", result.message);
         }
@@ -195,31 +272,28 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     if (companyError && formState.company_reg_number !== "") {
       showToast("error", companyError);
       setFormState((prev) => ({
-      ...prev,
-      company_reg_number: "",
-    }));
+        ...prev,
+        company_reg_number: "",
+      }));
     }
-  
+
     if (companyError) {
       dispatch(setCompanyError(null)); // Always clear after handling
     }
   }, [companyError, formState.company_reg_number, dispatch]);
 
-
   useEffect(() => {
     if (!debouncedCompanyName) return;
 
     const timeout = setTimeout(() => {
-
       dispatch(
         checkCompanyNameApi({
           company_name: debouncedCompanyName,
-          company_reg_number: formState.company_reg_number
+          company_reg_number: formState.company_reg_number,
         })
       ).then((result) => {
         if (result?.success) {
           showToast("success", result.message);
-         
         }
       });
     }, 1000);
@@ -227,173 +301,40 @@ if(companyData.company_name || companyData?.registered_office_address ) {
     return () => clearTimeout(timeout);
   }, [debouncedCompanyName]);
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     console.log(name,value,"value")
-// if(name==='company_reg_number'){
-//   phoneAPI(value)
-// }
-// if(name === "company_location"){
-//   companyLocationApi(value)
-// }
-// if(name === "company_name"){
-//   companyNameApi(value)
-// }
-//     setFormState((prev) => ({ ...prev, [name]: value }));
-//   };
-  const phoneAPI=(regNo)=>{
+  const phoneAPI = (regNo) => {
     // const regNo = formState.company_reg_number;
 
-  // Only call API if exactly 8 characters
-  if (regNo && regNo.length === 8) {
-    dispatch(fetchCompanyDetails(regNo , user_id));
-  }
-  }
-
-//   const companyLocationApi =(location) => {
-// //  const location = formState?.company_location;
-
-//   // Only proceed if exactly 10 characters
-//   if (location) {
-//     const handler = setTimeout(() => {
-//       dispatch(checkAddressApi({ company_location: location })).then((result) => {
-//         if (result.success) {
-//           showToast("success", result?.message);
-//         }
-//       });
-//     }, 1000); // 300ms debounce delay
-
-//     // Cleanup to cancel previous timer if user types again
-//     return () => {
-//       clearTimeout(handler);
-//     };
-//   }
-//   }
-
-//   const companyNameApi = (name) => {
-//  if (name) {
-//     const handler = setTimeout(() => {
-//       dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
-//         if (result.success) {
-//           showToast("success", result?.message);
-//         }
-//       });
-//     }, 1000); // 300ms debounce delay
-
-//     // Cleanup to cancel previous timer if user types again
-//     return () => {
-//       clearTimeout(handler);
-//     };
-//   }
-//   }
-
-  // const validate = () => {
-  //   const temp = {};
-  //   // if (!formState.company_name) temp.company_name = "Please fill this Required";
-  //   if (!formState.name) temp.name = "Please fill this Required";
-  //   // if(!formState.company_email) temp.company_email = "Please fill this Required";
-  //   // if (
-  //   //   formState.company_email &&       /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formState.company_email)
-  //   // ) temp.company_email = "Invalid email";
-  //   setErrors(temp);
-  //   return Object.keys(temp).length === 0;
-  // };
+    // Only call API if exactly 8 characters
+    if (regNo && regNo.length === 8) {
+      dispatch(fetchCompanyDetails(regNo, user_id));
+    }
+  };
 
   const validate = () => {
-  const temp = {};
+    const temp = {};
 
-  // 1. Always required
-  if (!formState.name) {
-    temp.name = "Please fill this Required";
-  }
-
-  // 2. If company_reg_number is filled
-  if (formState.company_reg_number) {
-    // 2.a company_name required
-    if (!formState.company_name) {
-      temp.company_name = "Company name is required";
+    // 1. Always required
+    if (!formState.name) {
+      temp.name = "Please fill this Required";
     }
 
-    // 2.b company_location required
-    if (!formState.company_location) {
-      temp.company_location = "Company location is required";
+    // 2. If company_reg_number is filled
+    if (formState.company_reg_number) {
+      // 2.a company_name required
+      if (!formState.company_name) {
+        temp.company_name = "Company name is required";
+      }
+
+      if (!formState.company_location) {
+        temp.company_location = "Company location is required";
+      }
     }
 
-    // 2.c handle API validation errors (assuming they're in a variable)
-    // if (companyValidationError?.company_name) {
-    //   temp.company_name = companyValidationError.company_name;
-    // }
+    setErrors(temp);
+    return Object.keys(temp).length === 0;
+  };
 
-    // if (companyValidationError?.company_location) {
-    //   temp.company_location = companyValidationError.company_location;
-    // }
-  }
-
-  setErrors(temp);
-  return Object.keys(temp).length === 0;
-};
-
-// useEffect(() => {
-//   const regNo = formState.company_reg_number;
-
-//   // Only call API if exactly 8 characters
-//   if (regNo && regNo.length === 8) {
-//     dispatch(fetchCompanyDetails(regNo));
-//   }
- 
-// }, [formState.company_reg_number]);
-
-// useEffect(()=>{
-//  if(formState?.company_location){
-//     dispatch(checkAddressApi({company_location:formState?.company_location})).then((result) => {
-//       if(result.success){
-//         showToast("success",result?.message)
-//       }
-//     })
-//   }
-// },[formState?.company_location])
-// useEffect(() => {
-//   const location = formState?.company_location;
-
-//   // Only proceed if exactly 10 characters
-//   if (location) {
-//     const handler = setTimeout(() => {
-//       dispatch(checkAddressApi({ company_location: location })).then((result) => {
-//         if (result.success) {
-//           showToast("success", result?.message);
-//         }
-//       });
-//     }, 1000); // 300ms debounce delay
-
-//     // Cleanup to cancel previous timer if user types again
-//     return () => {
-//       clearTimeout(handler);
-//     };
-//   }
-// }, [formState?.company_location]);
-// useEffect(() => {
-//   const name = formState?.company_name;
-
-//   // Only proceed if exactly 10 characters
-//   if (name) {
-//     const handler = setTimeout(() => {
-//       dispatch(checkCompanyNameApi({ company_name: name, company_reg_number:formState.company_reg_number})).then((result) => {
-//         if (result.success) {
-//           showToast("success", result?.message);
-//         }
-//       });
-//     }, 1000); // 300ms debounce delay
-
-//     // Cleanup to cancel previous timer if user types again
-//     return () => {
-//       clearTimeout(handler);
-//     };
-//   }
-// }, [formState?.company_name]);
-
-
-
-const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e) => {
     setHideAddress(e.target.checked);
   };
 
@@ -410,20 +351,125 @@ const handleCheckboxChange = (e) => {
         [target]: file,
         [`${target}Preview`]: URL.createObjectURL(blob),
       }));
+      const photoBlob = await webcamRef.current.getScreenshot();
+      if (!photoBlob) return;
+      setImageSrc(photoBlob);
+      setIsCropping(true);
     } catch (err) {
       console.error("Webcam capture failed:", err);
     }
+    setIsCropping(true);
+    setZoom(1);
+    setCrop({ x: 0, y: 0 });
   };
 
-  
+  const onCropComplete = (_, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+  const createImage = (url) =>
+    new Promise((resolve, reject) => {
+      const image = new Image();
+      image.addEventListener("load", () => resolve(image));
+      image.addEventListener("error", (err) => reject(err));
+      image.setAttribute("crossOrigin", "anonymous");
+      image.src = url;
+    });
 
- 
+  // Generate cropped image
+  // const getCroppedImg = async (imageSrc, pixelCrop) => {
+  //   const image = await createImage(imageSrc);
+  //   const canvas = document.createElement("canvas");
+  //   const ctx = canvas.getContext("2d");
+
+  //   canvas.width = pixelCrop.width;
+  //   canvas.height = pixelCrop.height;
+
+  //   const scaleX = image.naturalWidth / image.width;
+  //   const scaleY = image.naturalHeight / image.height;
+
+  //   ctx.drawImage(
+  //     image,
+  //     pixelCrop.x * scaleX,
+  //     pixelCrop.y * scaleY,
+  //     pixelCrop.width * scaleX,
+  //     pixelCrop.height * scaleY,
+  //     0,
+  //     0,
+  //     outputSize,
+  //     outputSize
+  //   );
+
+  //   return new Promise((resolve) => {
+  //     canvas.toBlob((blob) => {
+  //       const dataUrl = canvas.toDataURL("image/jpeg");
+  //       resolve({ blob, dataUrl });
+  //     }, "image/jpeg");
+  //   });
+  // };
+
+  const getCroppedImg = (imageSrc, croppedAreaPixels) => {
+    return new Promise((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous"; // Important for CORS issues
+      image.src = imageSrc;
+
+      image.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Set canvas size to the cropped area size
+        canvas.width = croppedAreaPixels.width;
+        canvas.height = croppedAreaPixels.height;
+
+        // Draw the cropped image on canvas
+        ctx.drawImage(
+          image,
+          croppedAreaPixels.x,
+          croppedAreaPixels.y,
+          croppedAreaPixels.width,
+          croppedAreaPixels.height,
+          0,
+          0,
+          croppedAreaPixels.width,
+          croppedAreaPixels.height
+        );
+
+        // Generate blob + dataURL
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            reject(new Error("Canvas is empty"));
+            return;
+          }
+          const dataUrl = canvas.toDataURL("image/jpeg");
+          resolve({ blob, dataUrl });
+        }, "image/jpeg");
+      };
+
+      image.onerror = (error) => reject(error);
+    });
+  };
+
+  // const handleApplyCropped = async () => {
+  //   if (!imageSrc || !croppedAreaPixels) return;
+  //   const { blob, dataUrl } = await getCroppedImg(imageSrc, croppedAreaPixels);
+  //   setCroppedPreview(dataUrl);
+  //   const croppedFile = new File([blob], "profile_image.jpg", {
+  //     type: "image/jpeg",
+  //   });
+  //   setFormState((prev) => ({
+  //     ...prev,
+  //     profile_image: croppedFile,
+  //     profile_imagePreview: dataUrl,
+  //   }));
+  //   setIsCropping(false);
+  // };
+
   // const handleSubmit = async () => {
   //   if (!validate()) {
   //     alert("Fix validation errors");
   //     return;
   //   }
-  
+
   //   const allowedKeys = [
   //     "type", // Include this if your backend expects it for `user_details`
   //     "company_logo",
@@ -439,7 +485,7 @@ const handleCheckboxChange = (e) => {
   //     "company_total_years",
   //     "about_company",
   //   ];
-  
+
   //   const body = new FormData();
   //   allowedKeys.forEach((key) => {
   //     const val = formState[key];
@@ -455,7 +501,7 @@ const handleCheckboxChange = (e) => {
   //         "Content-Type": "multipart/form-data",
   //       },
   //     });
-  
+
   //     alert("Profile updated successfully!");
   //     console.log(response);
   //   } catch (err) {
@@ -464,97 +510,135 @@ const handleCheckboxChange = (e) => {
   //   }
   // };
 
-  const CompanyNameFirstLetter = details?.company_name?.[0] || '';
-const ProfileNameFirstLetter = details?.name?.[0] || '';
-  console.log(errorCheckComanyName,"name")
-  
- 
+  const handleApplyCropped = async () => {
+    if (!imageSrc || !croppedAreaPixels) return;
+
+    try {
+      const { blob, dataUrl } = await getCroppedImg(
+        imageSrc,
+        croppedAreaPixels
+      );
+      const croppedFile = new File([blob], "profile_image.jpg", {
+        type: "image/jpeg",
+      });
+
+      setFormState((prev) => ({
+        ...prev,
+        profile_image: croppedFile,
+        profile_imagePreview: dataUrl,
+      }));
+
+      setCroppedPreview(dataUrl);
+      setIsCropping(false); // Close the crop modal
+    } catch (error) {
+      console.error("Error while cropping image:", error);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageSrc(URL.createObjectURL(file));
+      setIsCropping(true);
+    }
+  };
+
+  const CompanyNameFirstLetter = details?.company_name?.[0] || "";
+  const ProfileNameFirstLetter = details?.name?.[0] || "";
+  console.log(errorCheckComanyName, "name");
+
   const handleSubmit = () => {
     if (!validate()) {
       showToast("error", "Please fix validation errors");
       return;
     }
-if( errorCheckComanyName === false){
-  showToast("error", "Company name already exists");
-  return;
-}
-    dispatch(updateSellerProfile(formState)).then((result)=> {
-      if(result){
-         const sellerData ={
-                     seller_id:user_id
-                 }
-                 dispatch (addViewProfileList(sellerData))
+    if (errorCheckComanyName === false) {
+      showToast("error", "Company name already exists");
+      return;
+    }
+    dispatch(updateSellerProfile(formState)).then((result) => {
+      if (result) {
+        const sellerData = {
+          seller_id: user_id,
+        };
+        dispatch(addViewProfileList(sellerData));
       }
     });
   };
- // Show toast on success/failure
-useEffect(() => {
-  if (updateSuccess) {
-    toast.success("Profile updated successfully!");
-    updateLocalStorageValue('barkUserToken', 'name', formState?.name)
-    updateLocalStorageValue("registerDataToken","name",formState?.name)
-     updateLocalStorageValue('barkUserToken', 'profile_image', details?.profile_image)
-    updateLocalStorageValue("registerDataToken","profile_image",details?.profile_image)
-     const storedData = localStorage.getItem("barkUserToken");
-     const registerData = localStorage.getItem("registerDataToken")
 
+  // Show toast on success/failure
+  useEffect(() => {
+    if (updateSuccess) {
+      toast.success("Profile updated successfully!");
+      updateLocalStorageValue("barkUserToken", "name", formState?.name);
+      updateLocalStorageValue("registerDataToken", "name", formState?.name);
+      updateLocalStorageValue(
+        "barkUserToken",
+        "profile_image",
+        details?.profile_image
+      );
+      updateLocalStorageValue(
+        "registerDataToken",
+        "profile_image",
+        details?.profile_image
+      );
+      const storedData = localStorage.getItem("barkUserToken");
+      const registerData = localStorage.getItem("registerDataToken");
 
-    const parsedData = JSON.parse(storedData);
-    const registerDatas = JSON.parse(registerData)
-    if(parsedData) {
+      const parsedData = JSON.parse(storedData);
+      const registerDatas = JSON.parse(registerData);
+      if (parsedData) {
+        parsedData.name = formState?.name;
+        parsedData.profile_image = details?.profile_image;
+        dispatch(setUserToken(parsedData));
+      }
+      if (registerDatas) {
+        registerDatas.name = formState?.name;
+        registerDatas.profile_image = details?.profile_image;
+        dispatch(setRegisterData(registerDatas));
+      }
 
-      parsedData.name = formState?.name;
-      parsedData.profile_image = details?.profile_image;
-      dispatch(setUserToken(parsedData));
+      dispatch(clearUpdateStatus()); // reset flags
+    } else if (updateError) {
+      toast.error(`Error: ${updateError}`);
+      dispatch(clearUpdateStatus());
     }
-    if(registerDatas){
+  }, [updateSuccess, updateError, dispatch]);
 
-      registerDatas.name = formState?.name
-      registerDatas.profile_image = details?.profile_image
-      dispatch(setRegisterData(registerDatas))
-    }
-
-
-    dispatch(clearUpdateStatus()); // reset flags
-  } else if (updateError) {
-    toast.error(`Error: ${updateError}`);
-    dispatch(clearUpdateStatus());
-  }
-}, [updateSuccess, updateError, dispatch]);
-
- 
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <h3>Business Name & Logo</h3>
         <p>
-          Help Customers recognise your business. This is what customers see first <br /> when browsing for professionals on Localists.com. 
-         
+          Help Customers recognise your business. This is what customers see
+          first <br /> when browsing for professionals on Localists.com.
         </p>
         <div className={styles.imageSection}>
-         {details?.company_logoPreview || formState.company_logoPreview ? <img
-            src={formState.company_logoPreview || defaultImage}
-            alt="Default Logo"
-          />  : <div className={styles.CompanyText}>{CompanyNameFirstLetter.toUpperCase() ? CompanyNameFirstLetter.toUpperCase() : "C"}</div>}
+          {details?.company_logoPreview || formState.company_logoPreview ? (
+            <img
+              src={formState.company_logoPreview || defaultImage}
+              alt="Default Logo"
+            />
+          ) : (
+            <div className={styles.CompanyText}>
+              {CompanyNameFirstLetter.toUpperCase()
+                ? CompanyNameFirstLetter.toUpperCase()
+                : "C"}
+            </div>
+          )}
           <button
             className={styles.uploadBtn}
             onClick={() => fileInputRefs.company_logo.current.click()}
           >
             Upload
           </button>
-          {/* <button
-            className={styles.webcamBtn}
-            onClick={() => handleCaptureWebcam("company_logo")}
-          >
-            Upload using Webcam
-          </button> */}
+
           <input
             type="file"
             name="company_logo"
             ref={fileInputRefs.company_logo}
             style={{ display: "none" }}
             onChange={handleFileChange}
-            
           />
         </div>
         <label className={styles.label}>Company name</label>
@@ -575,38 +659,112 @@ useEffect(() => {
       <div className={styles.card}>
         <h3>Your Name & Profile Picture</h3>
         <p>
-         Customers on Localists.com will see this information when you message them. Adding a photo helps build trust and makes your profile more personal.
+          Customers on Localists.com will see this information when you message
+          them. Adding a photo helps build trust and makes your profile more
+          personal.
         </p>
         <div className={styles.imageSection}>
-          {
-            details?.profile_imagePreview || formState.profile_imagePreview ?   <img
-            src={formState.profile_imagePreview || defaultImage}
-            alt="Default Profile"
-          /> : 
-          <div className={styles.CompanyText}>{ProfileNameFirstLetter.toUpperCase()}</div>
-          }
-        
-          <div className={styles.buttonGroup}>
-            <button
-              className={styles.uploadBtn}
-              onClick={() => fileInputRefs.profile_image.current.click()}
-            >
-              Upload 
-            </button>
-            <button
-              className={styles.webcamBtn}
-              onClick={() => handleCaptureWebcam("profile_image")}
-            >
-             Take Photo
-            </button>
-            <input
-              type="file"
-              name="profile_image"
-              ref={fileInputRefs.profile_image}
-              style={{ display: "none" }}
-              onChange={handleFileChange}
+          {details?.profile_imagePreview || formState.profile_imagePreview ? (
+            <img
+              src={formState.profile_imagePreview || defaultImage}
+              alt="Default Profile"
             />
+          ) : (
+            <div className={styles.CompanyText}>
+              {ProfileNameFirstLetter.toUpperCase()}
+            </div>
+          )}
+
+          <div className={styles.wrapper}>
+            <div className={styles.buttonGroup}>
+              <button
+                className={styles.uploadBtn}
+                onClick={() => fileInputRefs.profile_image.current.click()}
+              >
+                Upload
+              </button>
+              <button
+                className={styles.webcamBtn}
+                onClick={() => handleCaptureWebcam("profile_image")}
+              >
+                Take Photo
+              </button>
+              <input
+                type="file"
+                name="profile_image"
+                ref={fileInputRefs.profile_image}
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+            </div>
           </div>
+          {isCropping && imageSrc && (
+            <div className={styles.cropOverlay}>
+              <div className={styles.cropCard}>
+                <div className={styles.cropArea}>
+                  <div className={styles.cropContainer}>
+                    <Cropper
+                      style={{
+                        containerStyle: {
+                          width: "30%",
+                          height: "30%",
+                          position: "relative",
+                          background: "#000",
+                        },
+                      }}
+                      image={imageSrc}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      cropShape="rect"
+                      showGrid={false}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={(_, croppedPixels) =>
+                        setCroppedAreaPixels(croppedPixels)
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.controls}>
+                  <label>Zoom</label>
+                  <input
+                    type="range"
+                    min={1}
+                    max={3}
+                    step={0.1}
+                    value={zoom}
+                    onChange={(e) => setZoom(Number(e.target.value))}
+                  />
+                  <div className={styles.actions}>
+                    <button
+                      className={styles.cancelBtn}
+                      onClick={() => setIsCropping(false)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className={styles.applyBtn}
+                      onClick={handleApplyCropped}
+                    >
+                      Use Photo
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* {croppedPreview && (
+            <div className={styles.previewWrap}>
+              <img
+                src={croppedPreview}
+                alt="Cropped"
+                className={styles.previewImg}
+              />
+            </div>
+          )} */}
         </div>
         <label className={styles.label}>Name</label>
         <input
@@ -617,14 +775,13 @@ useEffect(() => {
           onChange={handleInputChange}
           placeholder="Enter your full name"
         />
-        {errors.name && (
-          <p style={{ color: "red" }}>{errors.name}</p>
-        )}
+        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
       </div>
       <div className={styles.card}>
         <h3>Your Contact Information</h3>
         <p>
-         Customers on Localists.com will see these details when viewing your profile. You can update your private contact info anytime under {" "}
+          Customers on Localists.com will see these details when viewing your
+          profile. You can update your private contact info anytime under{" "}
           <a href="/settings/account-details" className={styles.link}>
             Account Details
           </a>
@@ -678,59 +835,68 @@ useEffect(() => {
               value={formState.company_phone}
               onChange={handleInputChange}
               placeholder="Enter company's phone number"
-               maxLength={10}
+              maxLength={10}
             />
           </div>
         </div>
-         <div className={styles.formGroup}>
-        <div className={styles.halfInput}>
-        <label className={styles.label}>Website</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="company_website"
-          value={formState.company_website}
-          onChange={handleInputChange}
-          placeholder="Enter website url"
-        />
-        </div>
-        <div className={styles.halfInput}>
-        <label className={styles.label}>Company Reg. No</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="company_reg_number"
-          value={formState.company_reg_number}
-          onChange={handleInputChange}
-          placeholder="Enter Company Reg. No"
-           maxLength={8}
-        />
-        </div>
+        <div className={styles.formGroup}>
+          <div className={styles.halfInput}>
+            <label className={styles.label}>Website</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_website"
+              value={formState.company_website}
+              onChange={handleInputChange}
+              placeholder="Enter website url"
+            />
+          </div>
+          <div className={styles.halfInput}>
+            <label className={styles.label}>Company Reg. No</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_reg_number"
+              value={formState.company_reg_number}
+              onChange={handleInputChange}
+              placeholder="Enter Company Reg. No"
+              maxLength={8}
+            />
+          </div>
         </div>
       </div>
 
       <div className={styles.infoCard}>
         <h3 className={styles.companyLocation}>Business Location</h3>
         <div className={styles.infoSubtext}>
-         This won’t affect the areas you’ve selected to receive leads from.
+          This won’t affect the areas you’ve selected to receive leads from.
         </div>
         <p className={styles.secondaryText}>
-         Please provide your business address to help customers find your local services on Localists.com.
+          Please provide your business address to help customers find your local
+          services on Localists.com.
         </p>
-       {!hideAddress && <>
-       <label className={styles.label}>What’s your business address?</label>
-        <input
-          className={styles.input}
-          type="text"
-          name="company_location"
-          value={formState.company_location}
-          onChange={handleInputChange}
-          placeholder="Enter your business location"
-        />
-        </>}
+        {!hideAddress && (
+          <>
+            <label className={styles.label}>
+              What’s your business address?
+            </label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_location"
+              value={formState.company_location}
+              onChange={handleInputChange}
+              placeholder="Enter your business location"
+            />
+          </>
+        )}
         <div className={styles.checkboxRow}>
-          <input type="checkbox" id="dontShow" checked={hideAddress}
-          onChange={handleCheckboxChange} />
+          <input
+            type="checkbox"
+            id="dontShow"
+            checked={hideAddress}
+            onChange={handleCheckboxChange}
+          />
           <label className={styles.DontLabel} htmlFor="dontShow">
             Hide this address from my public profile{" "}
             <span className={styles.infoIcon}>
@@ -740,7 +906,7 @@ useEffect(() => {
         </div>
         <hr className={styles.hrline} />
         <label className={styles.label}>
-         Can’t provide a specific location?
+          Can’t provide a specific location?
         </label>
         <select
           className={`${styles.input} ${styles.customSelect}`}
@@ -756,7 +922,7 @@ useEffect(() => {
       <div className={styles.infoCard}>
         <h3 className={styles.aboutCompany}>About Your Business</h3>
         <p className={styles.secondaryTextCustomers}>
-        Introduce your company to customers on Localists.com.
+          Introduce your company to customers on Localists.com.
         </p>
         <div className={styles.flexRow}>
           <div className={styles.flexItem}>
@@ -769,10 +935,12 @@ useEffect(() => {
               onChange={handleInputChange}
             >
               <option value="">How many people work in your business</option>
-              <option value="Self-employed, Sole trader">Self-employed, Sole trader</option>
+              <option value="Self-employed, Sole trader">
+                Self-employed, Sole trader
+              </option>
               <option value="2-10">2–10 employees</option>
               <option value="11-50">11–50 employees</option>
-              <option value='51-200'>51–200 employees</option>
+              <option value="51-200">51–200 employees</option>
               <option value="200+">200+ employees</option>
             </select>
           </div>
@@ -803,33 +971,31 @@ useEffect(() => {
         </a> */}
       </div>
 
-      
-
-      
       <div className={styles.buttonRow}>
-        <button className={styles.cancelBtn} type="button">Cancel</button>
+        <button className={styles.cancelBtn} type="button">
+          Cancel
+        </button>
         <button
           className={styles.saveBtn}
           type="button"
           onClick={handleSubmit}
           disabled={loading}
         >
-          {loading ? <Spin
-                  indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                /> : "Save"}
+          {loading ? (
+            <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />
+          ) : (
+            "Save"
+          )}
         </button>
       </div>
-      {success && <p style={{ color: "green" }}>Profile updated successfully!</p>}
+      {success && (
+        <p style={{ color: "green" }}>Profile updated successfully!</p>
+      )}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      
     </div>
-  
   );
 };
 
 export default AboutAccordion;
-
-
-
-
-
