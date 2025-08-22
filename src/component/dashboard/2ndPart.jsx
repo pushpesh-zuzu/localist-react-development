@@ -15,7 +15,27 @@ const DashboardCards = ({data}) => {
     <div className={`${styles.card} ${styles.leads}`}>
       <div className={styles["card-header"]}>
         <h3>Leads and Enquiries</h3>
-        <span className={styles["view-link"]} onClick={() => navigate("sellers/leads")}>View</span>
+        {/* <span className={styles["view-link"]} onClick={() => navigate("/sellers/leads")}>View</span> */}
+        <a
+          href="/sellers/leads"
+          style={{color:"black" }}
+          className={styles["view-link"]}
+          onClick={(e) => {
+            // handle only normal left click
+            if (
+              e.button === 0 && // left click
+              !e.metaKey &&
+              !e.ctrlKey &&
+              !e.shiftKey &&
+              !e.altKey
+            ) {
+              e.preventDefault();
+              navigate("/sellers/leads");
+            }
+          }}
+        >
+          View
+        </a>
       </div>
 
       <div className={styles["lead-circle"]}>
@@ -79,7 +99,7 @@ const DashboardCards = ({data}) => {
   <div className={styles["notification-section"]}>
     <div className={styles["notification-title"]}>
      Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}>{data?.plans?.[0]?.description}</button>
+      <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description}</button>
     </div>
 
     <div className={styles["notification-banner"]}>
@@ -108,7 +128,26 @@ const DashboardCards = ({data}) => {
     </div>
 
     <div className={`${styles.card} ${styles.responses}`}>
-      <h3>Responses <span className={styles["view-link"]} onClick={()=> navigate("sellers/leads")}>View</span></h3>
+      <h3>Responses  <a
+          href="/sellers/leads/my-responses"
+          style={{color:"black" }}
+          className={styles["view-link"]}
+          onClick={(e) => {
+            // handle only normal left click
+            if (
+              e.button === 0 && // left click
+              !e.metaKey &&
+              !e.ctrlKey &&
+              !e.shiftKey &&
+              !e.altKey
+            ) {
+              e.preventDefault();
+              navigate("/sellers/leads/my-responses");
+            }
+          }}
+        >
+          View
+        </a></h3>
       {/* <div className={styles["response-msg"]}>You haven’t responded to any leads yet.</div> */}
       <div className={styles["response"]}>{data?.response?.response_count}</div>
     </div>
@@ -119,7 +158,28 @@ const DashboardCards = ({data}) => {
       </h3>
       <div className={styles["help-box"]}>
         <p>
-          Visit <span className={styles.link}>help centre</span> for tips & advice.
+          Visit 
+          <a
+            href="/contact-us"
+            style={{color:"black" }}
+            className={styles["view-link"]}
+            onClick={(e) => {
+              // handle only normal left click
+              if (
+                e.button === 0 && // left click
+                !e.metaKey &&
+                !e.ctrlKey &&
+                !e.shiftKey &&
+                !e.altKey
+              ) {
+                e.preventDefault();
+                navigate("/contact-us");
+              }
+            }}
+          >
+            help center
+          </a>
+           for tips & advice.
         </p>
         <p>
           <span className={styles.icon}><img src={emailIcon1} /></span> 0000000000
