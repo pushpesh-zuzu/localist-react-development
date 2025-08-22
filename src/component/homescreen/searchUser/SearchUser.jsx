@@ -179,7 +179,7 @@ const SearchProfessionals = ({ nextStep }) => {
     loadGoogleMapsScript();
   }, []);
   const handleGetStarted = (requireValidationPin) => {
-    debugger;
+    // debugger;
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
       return;
