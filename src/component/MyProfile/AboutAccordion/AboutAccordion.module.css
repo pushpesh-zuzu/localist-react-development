@@ -2,6 +2,7 @@
 } */
 
 .card {
+  width: -webkit-fill-available;
   margin-top: 30px;
   border: 1px solid #d9d9d9;
   padding: 24px 21px;
@@ -143,6 +144,7 @@
 }
 
 .infoCard {
+  width: -webkit-fill-available;
   background: #fff;
   border: 1px solid #ddd;
   padding: 24px 21px;
@@ -398,7 +400,6 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 12px;
 }
 
