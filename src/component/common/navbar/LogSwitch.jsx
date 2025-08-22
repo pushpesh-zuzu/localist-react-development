@@ -43,7 +43,7 @@ const LogSwitch = () => {
   const { createRequestToken } = useSelector((state) => state.buyer);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [mobileSearchText, setMobileSearchText] = useState("");
-
+const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
@@ -54,9 +54,14 @@ const LogSwitch = () => {
   const [show, setShow] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const profileId = useParams();
+
+  // Refs for detecting outside clicks
+  const menuRef = useRef(null);
+
   useEffect(() => {
     setDataSave(userToken?.active_status);
   }, [userToken]);
+
   useEffect(() => {
     const payload = {
       user_id: userToken?.id || registerData?.id || "",
@@ -71,23 +76,66 @@ const LogSwitch = () => {
       return () => clearInterval(intervalId);
     }
   }, [dispatch, userToken, registerData]);
+
   const [menuOpen, setMenuOpen] = useState(false);
+  const [popoverVisible, setPopoverVisible] = useState(false);
+
+  // Close menus when clicking outside or scrolling
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Close search dropdown
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+
+      // Close hamburger menu
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      // Close all menus on scroll
+      setMenuOpen(false);
+      setShowDropdown(false);
+      setUserDropdownOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Close menus when route changes
+  useEffect(() => {
+    setMenuOpen(false);
+    setShowDropdown(false);
+    setUserDropdownOpen(false);
+  }, [location.pathname]);
 
   const handleNavigation = (path) => {
     navigate(path);
     setMenuOpen(false); // close menu on navigation
   };
+
   const handleNavigate = () => {
     navigate("/sellers/leads/save-for-later");
   };
+
   const content = (
     <div className={styles.saveForLater}>
       <p onClick={handleNavigate}>Save For Later</p>
     </div>
   );
+
   const userData = userToken?.profile_image
     ? userToken?.profile_image
     : registerData?.profile_image;
+
   const getUserType = () => {
     if (userToken?.remember_tokens) {
       return userToken?.active_status;
@@ -95,6 +143,7 @@ const LogSwitch = () => {
       return registerData?.active_status;
     }
   };
+
   const handleSwitchUser = () => {
     const newUserType = getUserType() == 1 ? 2 : 1;
 
@@ -112,7 +161,6 @@ const LogSwitch = () => {
       if (result?.success) {
         // Remove old localStorage user data
         localStorage.removeItem("barkUserToken");
-        // localStorage.removeItem("registerDataToken")
         // Set new user data to localStorage
         let updatedUser = {};
         if (userToken?.remember_tokens) {
@@ -126,19 +174,12 @@ const LogSwitch = () => {
             active_status: newUserType,
           };
         }
-        // const updateRegiater = {
-        //   ...registerData,
-        //   active_status:newUserType,
-        //   name:userToken?.name || registerData?.name || ""
-        // }
 
         localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
-        // localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
         dispatch(setUserToken(updatedUser));
 
         dispatch(setRegisterData(updatedUser));
         setDataSave(updatedUser?.active_status);
-        // setRegisterDatas(updateRegiater?.active_status)
 
         // Update redux state if needed
         dispatch(setCurrentUser(dataSave));
@@ -159,36 +200,25 @@ const LogSwitch = () => {
       }
     });
   };
+
   const handleMyRequest = () => {
     navigate("/buyers/create");
   };
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-  //       setShowDropdown(false);
 
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchText(value); // Store current text
     setShowDropdown(true);
   };
+
   const handleServiceSelect = (item) => {
     setSelectedServiceIds(item); // store selected service (has id & name)
     setShow(true); // show the modal
     setSearchText(item.name); // optionally update the input value
-    // setShowDropdown(false);
-    setSearchText(""); // hide dropdown
+    setShowDropdown(false); // hide dropdown
   };
 
-  // 2. Debounce input value
+  // Debounce input value
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       setDebouncedText(searchText);
@@ -197,18 +227,6 @@ const LogSwitch = () => {
     return () => clearTimeout(delayDebounce);
   }, [searchText]);
 
-  // 3. Dispatch search API
-  //   useEffect(() => {
-  //     if(!userToken?.remember_tokens && !registerData?.remember_tokens){
-  //  if (debouncedText.trim() !== "") {
-  //       dispatch(searchService({ search: debouncedText }));
-  //     } else {
-  //       // Optionally: clear search results if input is empty
-  //       dispatch(searchService({ search: "" }));
-  //     }
-  //     }
-
-  //   }, [debouncedText, dispatch]);
   useEffect(() => {
     const isUserLoggedIn =
       userToken?.remember_tokens || registerData?.remember_tokens;
@@ -241,33 +259,33 @@ const LogSwitch = () => {
     (n) => n.status === "unread"
   ).length;
   const lastId = useSelector((state) => state.notification.lastId);
-  const [popoverVisible, setPopoverVisible] = useState(false);
   const isBuyerPage = location.pathname === "/buyers/create";
   const isAccountPage = location.pathname === "/user/settings";
   const isNotification = location.pathname === "/user/notification";
   const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
-  // path: "admin/review/:profileId",
 
   const userName = userToken?.name || registerData?.name || "";
-
   const userInitial = userName.charAt(0).toUpperCase();
   const showHamburgerIcon =
     userToken?.remember_tokens || registerData?.remember_tokens;
+
   const formatDate = (dateString) => {
     return moment(dateString).format("Do MMM, YYYY h:mm A");
   };
+
   const handleVisibleChange = (visible) => {
     setPopoverVisible(visible);
   };
+
   return (
     <>
       <div className={styles.logSwitchContainer}>
         {/* Hamburger Icon */}
-
         {showHamburgerIcon ? (
           <div
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
+            ref={menuRef}
           >
             <div></div>
             <div></div>
@@ -277,7 +295,7 @@ const LogSwitch = () => {
           <div style={{ marginTop: "4px" }} className={styles.inputWrapper}>
             <div
               className={`${styles.mobileOnly}`}
-              style={{ cursor: "pointer !important !important" }}
+              style={{ cursor: "pointer !important" }}
             >
               <img
                 src={searchIcon}
@@ -291,7 +309,7 @@ const LogSwitch = () => {
             <div
               className={`${styles.inputWrapper} ${styles.desktopOnly}`}
               style={{ position: "relative" }}
-              // ref={wrapperRef}
+              ref={wrapperRef}
             >
               <img
                 src={searchIcon}
@@ -351,14 +369,17 @@ const LogSwitch = () => {
 
         <div
           className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}
+          ref={menuRef}
         >
           {getUserType() == 1 && !viewProfile && (
             <>
               <a
                 href="/sellers/dashboard"
-                style={{ textDecoration: "none" , color: "black" }}
+                style={{ textDecoration: "none", color: "black" }}
                 className={`${styles.navItem} ${
-                  location.pathname === "/sellers/dashboard" ? styles.active : ""
+                  location.pathname === "/sellers/dashboard"
+                    ? styles.active
+                    : ""
                 }`}
                 onClick={(e) => {
                   // only handle normal left-clicks
@@ -376,115 +397,119 @@ const LogSwitch = () => {
               >
                 Dashboard
               </a>
-                <a
-                  href="/sellers/leads"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${styles.navItem} ${
-                    location.pathname === "/sellers/leads" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/sellers/leads");
-                    }
-                  }}
-                >
-                  New Leads
-                </a>
+              <a
+                href="/sellers/leads"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.navItem} ${
+                  location.pathname === "/sellers/leads" ? styles.active : ""
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.button === 0 &&
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
+                    handleNavigation("/sellers/leads");
+                  }
+                }}
+              >
+                New Leads
+              </a>
 
-                <a
-                  href="/sellers/leads/save-for-later"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${styles.navItem} ${
-                    location.pathname === "/sellers/leads/save-for-later" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/sellers/leads/save-for-later");
-                    }
-                  }}
-                >
-                  Saved Leads
-                </a>
+              <a
+                href="/sellers/leads/save-for-later"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.navItem} ${
+                  location.pathname === "/sellers/leads/save-for-later"
+                    ? styles.active
+                    : ""
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.button === 0 &&
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
+                    handleNavigation("/sellers/leads/save-for-later");
+                  }
+                }}
+              >
+                Saved Leads
+              </a>
 
-                <a
-                  href="/sellers/leads/my-responses"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${styles.navItem} ${
-                    location.pathname === "/sellers/leads/my-responses" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/sellers/leads/my-responses");
-                    }
-                  }}
-                >
-                  My Responses
-                </a>
+              <a
+                href="/sellers/leads/my-responses"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.navItem} ${
+                  location.pathname === "/sellers/leads/my-responses"
+                    ? styles.active
+                    : ""
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.button === 0 &&
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
+                    handleNavigation("/sellers/leads/my-responses");
+                  }
+                }}
+              >
+                My Responses
+              </a>
 
-                <a
-                  href="/settings"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${styles.navItem} ${
-                    location.pathname === "/settings" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/settings");
-                    }
-                  }}
-                >
-                  Settings
-                </a>
+              <a
+                href="/settings"
+                style={{ textDecoration: "none", color: "black" }}
+                className={`${styles.navItem} ${
+                  location.pathname === "/settings" ? styles.active : ""
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.button === 0 &&
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
+                    handleNavigation("/settings");
+                  }
+                }}
+              >
+                Settings
+              </a>
 
-                <a
-                  href="/help-center"
+              <a
+                href="/help-center"
                   style={{ textDecoration: "none" , color: "black" }}
-                  className={`${styles.navItem} ${
-                    location.pathname === "/help-center" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
+                className={`${styles.navItem} ${
+                  location.pathname === "/help-center" ? styles.active : ""
+                }`}
+                onClick={(e) => {
+                  if (
+                    e.button === 0 &&
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
                       handleNavigation("/contact-us");
-                    }
-                  }}
-                >
-                  Help
-                </a>
+                  }
+                }}
+              >
+                Help
+              </a>
 
               {/* <div
                 className={`${styles.navItem} ${
@@ -591,7 +616,7 @@ const LogSwitch = () => {
                           </div>
                         ))
                       ) : (
-                        <div style={{ fontSize: "12px", color: "#999" }}>
+                        <div style={{ fontSize: "12px", color: "##999" }}>
                           No new notifications
                         </div>
                       )}
@@ -632,9 +657,7 @@ const LogSwitch = () => {
                   </div>
                 }
               >
-                <div
-                  style={{ position: "relative", cursor: "pointer !important" }}
-                >
+                <div style={{ position: "relative", cursor: "pointer" }}>
                   <img
                     src={bellIcon}
                     alt="Notifications"
@@ -664,16 +687,6 @@ const LogSwitch = () => {
                 </div>
               </Popover>
               <div className={styles.nameCircle}>{userInitial}</div>
-              {/* {userData ? (
-              <Avatar
-                src={`${BASE_IMAGE}/users/${userData}`}
-                alt="Profile"
-                size={40}
-                style={{ backgroundColor: "#f0f0f0" }}
-              />
-            ) : (
-              <div className={styles.nameCircle}>{userInitial}</div>
-            )} */}
             </>
           )}
 
@@ -684,18 +697,7 @@ const LogSwitch = () => {
                   My Request
                 </div>
               </div>
-              <div className={styles.nameCircle}>{userInitial}</div>
-
-              {/* {userData ? (
-                <Avatar
-                  src={`${BASE_COMPLETE}/${userData}`}
-                  alt="Profile"
-                  size={40}
-                  style={{ backgroundColor: "#f0f0f0" }}
-                />
-              ) : (
-                <div className={styles.nameCircle}>{userInitial}</div>
-              )} */}
+              <div className={`${styles.nameCircle} ${styles.nameCircleHide}`}>{userInitial}</div>
             </>
           )}
         </div>
@@ -708,108 +710,53 @@ const LogSwitch = () => {
                 {getUserType() == 2 && (
                   <div
                     className={styles.logoutBtn}
+                    onClick={() => handleNavigation("/user/notification")}
                   >
-                    
-                     <a
-                  href="/user/notification"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${
-                    location.pathname === "/user/notification" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/user/notification");
-                    }
-                  }}
-                >
-                  Notification
-                </a>
+                    Notification
                   </div>
                 )}
-                <div className={styles.logoutBtn} >
-                  <a
-                  href={getUserType() == 1 ? "/buyers/create" : "/sellers/leads"}
-                  style={{ textDecoration: "none", color: "black" }}
-                  
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleSwitchUser();
-                    }
-                  }}
-                >
-                  Switch to {getUserType() == 1 ? "Buyer" : "Seller"}
-                </a>
-
+                <div className={styles.logoutBtn} onClick={handleSwitchUser}>
+                  Switch to {getUserType() == 1 ? "Buyer" : "Seller "}
                 </div>
                 <div
                   className={styles.logoutBtn}
-                >
-                  <a
-                  href="/user/settings"
-                  style={{ textDecoration: "none" , color: "black" }}
-                  className={`${
-                    location.pathname === "/user/settings" ? styles.active : ""
-                  }`}
-                  onClick={(e) => {
-                    if (
-                      e.button === 0 &&
-                      !e.metaKey &&
-                      !e.ctrlKey &&
-                      !e.shiftKey &&
-                      !e.altKey
-                    ) {
-                      e.preventDefault();
-                      handleNavigation("/user/settings");
-                    }
-                  }}
+                  onClick={() => handleNavigation("/user/settings")}
                 >
                   Account Settings
-                </a>
                 </div>
-
-                
                 <div className={styles.logoutBtn} onClick={handleLogout}>
                   Logout
                 </div>
               </>
             }
-            trigger="hover"
+              trigger="click"
+              open={userDropdownOpen}
+              onVisibleChange={setUserDropdownOpen}
           >
             <div>
-              <div className={styles.loginBtn}>
-                {userName} <img src={downarrowIcon} alt="icon" />
+              <div  onClick={() => setUserDropdownOpen(!userDropdownOpen)} className={styles.loginBtn}>
+                {userName}
+                 <img src={downarrowIcon} alt="icon" />
               </div>
             </div>
           </Popover>
         ) : (
           <>
             <div className={styles.logsBtns}>
-              <Link to='/login'
+              <Link
+                to="/login"
                 className={`${styles.loginBtn} ${styles.link}`}
-                onClick={()=>{setMenuOpen(false)}}
+                onClick={() => {
+                  setMenuOpen(false);
+                }}
               >
                 Login
               </Link>
               {!selectedServiceId && !serviceTitle && (
-                <Link to={'/sellers/create/'}
+                <Link
+                  to={"/sellers/create/"}
                   className={styles.professionalBtn}
                   onClick={() => {
-                    // dispatch(setRegisterStep(1));
-                    // handleNavigation("/sellers/create/");
                     setMenuOpen(false);
                   }}
                 >
@@ -827,8 +774,6 @@ const LogSwitch = () => {
             closeModal={() => setShow(false)}
             serviceId={selectedServiceIds?.id}
             serviceName={selectedServiceIds?.name}
-            // postcode={pincode}
-            // postalCodeValidate={postalCodeValidate}
           />
         )}
       <MobileSlideInSearch

@@ -353,7 +353,7 @@ const LoginPage = () => {
           <br />
           <Text className="text">
             Looking for a service?{" "}
-            <Link to="/sellers/create/" className="linkText">
+            <Link to="#" className="linkText">
               Get started
             </Link>
           </Text>
