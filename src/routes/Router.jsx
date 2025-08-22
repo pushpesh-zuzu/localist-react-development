@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
@@ -54,7 +54,7 @@ import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 //test en/gb/bookkeeping-services/
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <MainLayout />,

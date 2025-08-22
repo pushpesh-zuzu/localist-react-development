@@ -85,7 +85,7 @@ function App() {
         
         if (params) {
           navigator.sendBeacon(
-            "https://localists.zuzucodes.com/admin/api/users/registration",
+            "https://dev.localists.com/admin/api/users/registration",
             params
           );
         }
