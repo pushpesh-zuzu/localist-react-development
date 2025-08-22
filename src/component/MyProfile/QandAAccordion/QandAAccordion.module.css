@@ -20,6 +20,14 @@
   max-width: 831px;
 }
 
+.subheading2 {
+  font-weight: 500;
+  font-size: 14px;
+  color: #828282;
+  margin-bottom: 12px;
+  text-align: justify;
+}
+
 .qaItem {
   margin-bottom: 23px;
 }

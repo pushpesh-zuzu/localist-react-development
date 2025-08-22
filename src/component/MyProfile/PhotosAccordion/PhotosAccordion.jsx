@@ -326,10 +326,10 @@ console.log(details,"details")
 
         {/* Footer Buttons */}
         <div className={styles.footer}>
-          <button className={styles.cancelButton} onClick={handleCancel}>
+          {/* <button className={styles.cancelButton} onClick={handleCancel}>
             Cancel
-          </button>
-          <button className={styles.saveButton} onClick={handleSubmit}>
+          </button> */}
+          <button className={styles.saveButton}  style={{ marginLeft: "auto" }} onClick={handleSubmit}>
             Save
           </button>
         </div>

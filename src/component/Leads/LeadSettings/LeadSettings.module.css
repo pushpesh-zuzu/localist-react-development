@@ -221,6 +221,22 @@
   line-height: 100%;
 }
 
+
+.viewLeadsLink {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer !important;
+  padding: 3px 10.5px;
+  margin-top: 36.1px;
+  display: inline-block;     /* make <a> behave like button */
+  text-decoration: none;     /* remove underline */
+  text-align: center;        /* center text */
+}
+
 .viewLeads:hover {
   background: #0096c4;
 }

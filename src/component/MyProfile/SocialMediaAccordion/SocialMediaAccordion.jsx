@@ -359,8 +359,8 @@ const SocialMediaAccordion = ({ details }) => {
       </div>
 
       <div className={styles.footer}>
-        <button className={styles.cancelBtn} type="button">Cancel</button>
-        <button className={styles.saveButton} onClick={handleSubmit}>
+        {/* <button className={styles.cancelBtn} type="button">Cancel</button> */}
+        <button className={styles.saveButton}  style={{ marginLeft: "auto" }} onClick={handleSubmit}>
           Save
         </button>
       </div>

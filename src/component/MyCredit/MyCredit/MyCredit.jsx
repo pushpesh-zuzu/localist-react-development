@@ -278,7 +278,7 @@ const MyCredits = () => {
             {/* <a href="#" className={styles.link}>
              
             </a> */}
-            <Link to="/help-center" className={styles.link}>
+            <Link to="/contact-us" className={styles.link}>
               Help Center
             </Link>
             .

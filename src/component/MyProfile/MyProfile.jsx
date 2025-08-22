@@ -116,7 +116,7 @@ const randomKey = Math.random().toString(36).substring(2, 8);
   return (
     <div className={styles.container}>
       <a className={styles.backLink} href="/settings">
-        <img src={blackArrow} alt="..." /> Setting
+        <img src={blackArrow} alt="..." /> Settings
       </a>
 
       <h2 className={styles.title}>

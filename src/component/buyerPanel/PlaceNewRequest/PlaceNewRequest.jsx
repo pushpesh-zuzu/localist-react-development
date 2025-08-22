@@ -75,12 +75,20 @@ console.log("buyerRequestList",buyerRequestList)
                   </p>
                 </div>
                 <div>
-                  <button
+
+                  <a
+                    href={`/bids-list/${req.id}`}
+                    style={{ textDecoration: "none"}}
                     className={styles.viewButton}
-                    onClick={() => onViewRequest(req.id)}
+                    onClick={(e) => {
+                      e.preventDefault();       
+                      onViewRequest(req.id);   
+                    }}
                   >
                     View Request
-                  </button>
+                  </a>
+
+
                 </div>
               {req?.status === "hired" ? "" : <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}> <div style={{marginTop:"16px",marginRight:"4px",cursor:"pointer"}} onClick={() => handleClose(req.id)}> Close Request</div> <div
                   className={styles.tags}

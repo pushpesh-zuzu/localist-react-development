@@ -182,6 +182,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   // };
   console.log(editNoteId, "editNoteId")
   const handleSubmit = (id) => {
+    if (!note || note.trim() === "") {
+      showToast("error", 'Please give any note ');
+      return; // stop execution if note is empty
+    }
     const sellerNote = {
       lead_id: profileLeadViewData?.leads?.id,
       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
@@ -215,8 +219,38 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   };
 
   const handleRemove = (id) => {
-    handleSubmit(id)
-    return
+  
+    const sellerNote = {
+      lead_id: profileLeadViewData?.leads?.id,
+      user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+      buyer_id: profileLeadViewData?.id,
+      // note_id: editNoteId ?? 0, // 👈 use tracked note ID
+      notes: note,
+    };
+    if (editNoteId) {
+      sellerNote.note_id = editNoteId
+    }
+
+    if (id) {
+      sellerNote.delete_note_id = id
+    }
+
+    dispatch(addSellerNotesApi(sellerNote)).then((result) => {
+      if (result) {
+        showToast("success",'Notes Removed Successfully');
+        setNote("");
+        setEditNoteId(null); // 👈 clear edit state
+
+        const sellerData = {
+          lead_id: profileLeadViewData.leads.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+          buyer_id: profileLeadViewData.id,
+        };
+
+        dispatch(getSellerNotesApi(sellerData));
+      }
+    });
+    
     // // implement your delete logic here, example:
     // dispatch(deleteNoteApi({ note_id: id })).then((res) => {
     //   if (res.success) {
@@ -520,7 +554,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 {activeTab === "activity" && (
                   <div className={styles.container}>
                     <div className={styles.date}>
-                  {moment(profileLeadViewData?.created_at).format("ddd D, MMMM")}
+                  {moment(profileLeadViewData?.updated_at).format("ddd D, MMMM")}
                     </div>
                     {getActivies?.map((item, index) => (
                       <TimelineItem

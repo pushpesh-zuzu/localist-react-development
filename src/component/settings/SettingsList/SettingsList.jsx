@@ -97,7 +97,7 @@ const SettingsList = () => {
             <div className={styles.myLeadSettingWrapper}>
               <img src={myLeadSetting} alt="My Profile" />
             </div>
-            <h2>Lead Setting</h2>
+            <h2>Lead Settings</h2>
           </div>
           <div className={styles.sectionContent}>
             <div

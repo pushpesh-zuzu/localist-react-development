@@ -96,6 +96,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleNavigation = (path) => {
+    navigate(path);
+    setMenuOpen(false); // close menu on navigation
+  };
+
   useEffect(() => {
     const checkScreenSize = () => {
       setIsMobileView(window.innerWidth <= 768);
@@ -137,7 +142,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     }
   }, []);
   const handleView = () => {
-    navigate("/leads");
+    navigate("/sellers/leads");
   };
 
   const handleServiceClick = (service, name, primaryService) => {
@@ -660,9 +665,28 @@ const handleBack = () =>{
           </label>
         </div>
 
-        <button className={styles.viewLeads} onClick={handleView}>
-          View leads
-        </button>
+        <a
+              href="/sellers/leads"
+              style={{ textDecoration: "none"}}
+              className={`${styles.viewLeadsLink} ${
+                location.pathname === "/sellers/leads" ? styles.active : ""
+              }`}
+              onClick={(e) => {
+                if (
+                  e.button === 0 &&
+                  !e.metaKey &&
+                  !e.ctrlKey &&
+                  !e.shiftKey &&
+                  !e.altKey
+                ) {
+                  e.preventDefault();
+                  handleNavigation("/sellers/leads");
+                }
+              }}
+            >
+              View leads
+            </a>
+
 
         <AddServiceModal
           isModalOpen={isModalOpen}

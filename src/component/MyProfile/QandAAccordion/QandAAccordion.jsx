@@ -108,7 +108,7 @@ useEffect(() => {
   return (
     <div className={styles.container}>
       <h3 className={styles.heading}>Q&A - Help Customers Choose You</h3>
-      <p className={styles.subheading}>
+      <p className={styles.subheading2}>
         Provide answers to the most common customer questions on Localists.com to build trust and make it easier for customers to hire you with confidence.
       </p>
       {questions.map((question, index) => (
@@ -125,9 +125,9 @@ useEffect(() => {
             <span className={styles.helperText}>Minimum 50 characters</span>
              {index === 2 && (
             <div className={styles.suggestion}>
-              <a href="#" className={styles.link}>
+              {/* <a href="#" className={styles.link}>
                Use our free online AI tool to help you write a great business description.
-              </a>
+              </a> */}
             </div>
           )}
             </div>

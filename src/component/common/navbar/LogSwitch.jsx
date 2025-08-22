@@ -479,7 +479,7 @@ const LogSwitch = () => {
                       !e.altKey
                     ) {
                       e.preventDefault();
-                      handleNavigation("/help-center");
+                      handleNavigation("/contact-us");
                     }
                   }}
                 >
@@ -708,20 +708,80 @@ const LogSwitch = () => {
                 {getUserType() == 2 && (
                   <div
                     className={styles.logoutBtn}
-                    onClick={() => handleNavigation("/user/notification")}
                   >
-                    Notification
+                    
+                     <a
+                  href="/user/notification"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${
+                    location.pathname === "/user/notification" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/user/notification");
+                    }
+                  }}
+                >
+                  Notification
+                </a>
                   </div>
                 )}
-                <div className={styles.logoutBtn} onClick={handleSwitchUser}>
-                  Switch to {getUserType() == 1 ? "Buyer" : "Seller "}
+                <div className={styles.logoutBtn} >
+                  <a
+                  href={getUserType() == 1 ? "/buyers/create" : "/sellers/leads"}
+                  style={{ textDecoration: "none", color: "black" }}
+                  
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleSwitchUser();
+                    }
+                  }}
+                >
+                  Switch to {getUserType() == 1 ? "Buyer" : "Seller"}
+                </a>
+
                 </div>
                 <div
                   className={styles.logoutBtn}
-                  onClick={() => handleNavigation("/user/settings")}
+                >
+                  <a
+                  href="/user/settings"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${
+                    location.pathname === "/user/settings" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/user/settings");
+                    }
+                  }}
                 >
                   Account Settings
+                </a>
                 </div>
+
+                
                 <div className={styles.logoutBtn} onClick={handleLogout}>
                   Logout
                 </div>

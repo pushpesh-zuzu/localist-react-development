@@ -28,7 +28,8 @@
   font-size: 14px;
   color: #828282;
   margin-bottom: 16px;
-  max-width: 830px;
+  text-align: justify;
+  /* max-width: 830px; */
 }
 
 .inputRow {

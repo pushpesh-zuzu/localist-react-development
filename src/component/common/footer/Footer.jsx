@@ -168,7 +168,7 @@ const Footer = () => {
                   Join as a Professional
                 </li>
               </Link>
-              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+              {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>
                   <li > New Leads</li>
                 </Link>
@@ -192,7 +192,7 @@ const Footer = () => {
                 <Link to="/help-center" className={styles.link}>
                   <li >  Help</li>
                 </Link>
-              )}
+              )} */}
               {/* <Link to="/help-center" className={styles.link}>
                 <li onClick={handleHelpCenter}>Help Centre</li>
               </Link> */}
