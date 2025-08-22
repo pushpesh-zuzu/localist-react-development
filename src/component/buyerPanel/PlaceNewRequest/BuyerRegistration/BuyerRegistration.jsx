@@ -383,6 +383,7 @@ const BuyerRegistration = ({
           <QuestionModal
             ref={questionModalRef}
             questions={questionanswerData}
+            serviceName={serviceName}
             nextStep={nextStep}
             previousStep={previousStep}
             onClose={handleClose}

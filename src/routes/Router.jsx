@@ -218,7 +218,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/my-profile",
+        path: "/settings/profile/my-profile",
         element: (
           <ProtectedRoute>
             <MyProfile />
@@ -226,7 +226,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/account-details",
+        path: "/settings/profile/account-details",
         element: (
           <ProtectedRoute>
             <AccountDetails />
@@ -234,7 +234,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/leads",
+        path: "/settings/leads/my-services",
         element: (
           <ProtectedRoute>
             <LeadSetting />
@@ -332,7 +332,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/my-credits",
+        path: "/settings/billing/my-credits",
         element: (
           <ProtectedRoute>
             <MyCredits />
@@ -340,7 +340,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/invoice-billing",
+        path: "/settings/billing/invoice-billing-details",
         element: (
           <ProtectedRoute>
             <InvoiceAndBilling />
@@ -348,7 +348,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/payment-details",
+        path: "/settings/billing/payment-details",
         element: (
           <ProtectedRoute>
             <MyPaymentDetails />
@@ -380,7 +380,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/e-mail-notification",
+        path: "/settings/notifications/e-mail-notification",
         element: (
           <ProtectedRoute>
             <EmailNotification />
@@ -388,7 +388,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/browser-notification",
+        path: "/settings/notifications/browser-notification",
         element: (
           <ProtectedRoute>
             <BrowserNotification />

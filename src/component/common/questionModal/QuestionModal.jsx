@@ -15,6 +15,7 @@ import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice
 
 const QuestionModal = ({
   questions = [],
+  serviceName,
   onClose,
   nextStep,
   previousStep,
@@ -26,6 +27,8 @@ const QuestionModal = ({
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
+
+  console.log('service_name',serviceName); 
   const { userToken,adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -266,7 +269,25 @@ formattedQuestions.forEach((q, index) => {
           </div>
         ) : questions.length > 0 ? (
           <>
-            <div className={styles.headerImage}>
+            <div className={
+                serviceName === "Patio Services"
+                  ? styles.headerImage
+                  : serviceName === "Artificial Grass Installation"
+                  ? styles.headerImage1
+                  : serviceName === "General Builders"
+                  ? styles.headerImage2
+                  : serviceName === "Driveway Installation"
+                  ? styles.headerImage3
+                  : serviceName === "Fence & Gate Installation"
+                  ? styles.headerImage4
+                  : serviceName === "Gardening"
+                  ? styles.headerImage5
+                  : serviceName === "Home and Garden"
+                  ? styles.headerImage6
+                  : serviceName === "Landscaping"
+                  ? styles.headerImage7
+                  : styles.headerImage // default fallback
+              }>
               <h2>{questions[currentQuestion]?.questions}</h2>
               <Progress
                 percent={progressPercent}

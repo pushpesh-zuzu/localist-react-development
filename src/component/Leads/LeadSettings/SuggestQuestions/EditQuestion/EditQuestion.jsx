@@ -106,7 +106,7 @@ const EditQuestion = () => {
       if (result?.success) {
         showToast("success", result?.message);
       }
-      navigate("/settings/leads");
+      navigate("/settings/leads/my-services");
     });
   };
 

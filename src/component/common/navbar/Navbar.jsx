@@ -1,7 +1,10 @@
+import { useLocation } from "react-router-dom";
 import LogoComponent from "./LogoComponent";
 import LogSwitch from "./LogSwitch";
 import styles from "./navbar.module.css";
 const Navbar = () => {
+  const location = useLocation(); // gives you current route info
+  console.log("Current path:", location.pathname); // e.g. "/sellers/leads"
   return (
     <nav
       role="tablist"
