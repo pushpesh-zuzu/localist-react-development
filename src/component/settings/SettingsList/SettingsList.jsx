@@ -10,35 +10,35 @@ const SettingsList = () => {
   const navigate = useNavigate();
 
   const handleMyService = () => {
-    navigate("/settings/leads");
+    navigate("/settings/leads/my-services");
   };
 
   const handleAccountSetting = () => {
-    navigate("/settings/account-details");
+    navigate("/settings/profile/account-details");
   };
 
   const handleMyProfile = () => {
-    navigate("/settings/my-profile");
+    navigate("/settings/profile/my-profile");
   };
   const handleMycredit = () => {
-    navigate("/settings/my-credits");
+    navigate("/settings/billing/my-credits");
   };
   const handleReview = () => {
-    navigate("/settings/my-profile", {
+    navigate("/settings/profile/my-profile", {
       state: { review: true },
     });
   };
   const handleInvoice = () => {
-    navigate("/settings/invoice-billing");
+    navigate("/settings/billing/invoice-billing-details");
   };
   const handlePayment = () => {
-    navigate("/settings/payment-details");
+    navigate("/settings/billing/payment-details");
   };
   const handleMail = () => {
-    navigate("/settings/e-mail-notification");
+    navigate("/settings/notifications/e-mail-notification");
   };
   const handleBrowser = () => {
-    navigate("/settings/browser-notification");
+    navigate("/settings/notifications/browser-notification");
   };
   return (
     <>

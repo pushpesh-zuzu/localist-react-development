@@ -69,6 +69,13 @@ const AccreditationsAccordion = ({ details }) => {
     dispatch(updateSellerAccreditations(accordionGroups));
   };
 
+  const handleRemoveAccreditation = (index) => {
+    const updated = [...accordionGroups];
+    updated.splice(index, 1);
+    setAccordionGroups(updated);
+  };
+
+
   // Show toast based on update result
   useEffect(() => {
     if (accreditationsUpdateSuccess) {
@@ -126,6 +133,7 @@ const AccreditationsAccordion = ({ details }) => {
         {accordionGroups.map((group, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.logoSectionWrapper}>
+
               {/* <div className={styles.logoSection}>
                 {group.accreImage ? (
                   <img
@@ -165,6 +173,12 @@ const AccreditationsAccordion = ({ details }) => {
                   </span>
                 )}
               </div>
+              <button
+                  className={styles.closeButton}
+                  onClick={() => handleRemoveAccreditation(index)}
+                >
+                  Close
+              </button>
             </div>
             {group.accreditations.length === 0 && (
               <div className={styles.inputGroup}>
@@ -238,8 +252,8 @@ const AccreditationsAccordion = ({ details }) => {
       </div>
 
       <div className={styles.footer}>
-        <button className={styles.cancel}>Cancel</button>
-        <button className={styles.save} onClick={handleSave}>
+        {/* <button className={styles.cancel}>Cancel</button> */}
+        <button className={styles.save} onClick={handleSave}  style={{ marginLeft: "auto" }}>
           Save
         </button>
       </div>

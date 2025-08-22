@@ -48,7 +48,6 @@ import CloneSubThreeCategory from "../pages/CloneSubThreeCategory";
 import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
 import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
 import SublocationPage from "../pages/SublocationPage";
-import SubLocationLevel5 from "../component/subLocation/SubLocationLevel5/SubLocationLevel5";
 import ContactUs from "../component/ContactUs/ContactUs";
 import AboutUs from "../component/AboutUs/AboutUs";
 import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
@@ -147,12 +146,13 @@ const router = createBrowserRouter([
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       { path: "/en/gb/:service/:location", element: <LocationPage /> },
       {
-        path: "/en/gb/:service/:location:subLocation",
+        path: "/en/gb/:service/:location/:subLocation",
         element: <SublocationPage />,
       },
-      { path: "/en/gb/:service/:location:sublocation", element: <SubLocationLevel5 /> },
-
-      { path: "/en/gb/how-it-works-for-customers", element: <HowItWorksCustomerPage /> },
+      {
+        path: "/en/gb/how-it-works-for-customers",
+        element: <HowItWorksCustomerPage />,
+      },
       { path: "/en/gb/how-it-works-for-sellers", element: <HowItWorkSeller /> },
 
       { path: "/sellers/create", element: <ServicePanelPage /> },
@@ -218,7 +218,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/my-profile",
+        path: "/settings/profile/my-profile",
         element: (
           <ProtectedRoute>
             <MyProfile />
@@ -226,7 +226,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/account-details",
+        path: "/settings/profile/account-details",
         element: (
           <ProtectedRoute>
             <AccountDetails />
@@ -234,7 +234,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/leads",
+        path: "/settings/leads/my-services",
         element: (
           <ProtectedRoute>
             <LeadSetting />
@@ -332,7 +332,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/my-credits",
+        path: "/settings/billing/my-credits",
         element: (
           <ProtectedRoute>
             <MyCredits />
@@ -340,7 +340,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/invoice-billing",
+        path: "/settings/billing/invoice-billing-details",
         element: (
           <ProtectedRoute>
             <InvoiceAndBilling />
@@ -348,7 +348,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/payment-details",
+        path: "/settings/billing/payment-details",
         element: (
           <ProtectedRoute>
             <MyPaymentDetails />
@@ -380,7 +380,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/e-mail-notification",
+        path: "/settings/notifications/e-mail-notification",
         element: (
           <ProtectedRoute>
             <EmailNotification />
@@ -388,7 +388,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/settings/browser-notification",
+        path: "/settings/notifications/browser-notification",
         element: (
           <ProtectedRoute>
             <BrowserNotification />

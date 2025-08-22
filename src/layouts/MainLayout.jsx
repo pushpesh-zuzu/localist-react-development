@@ -33,10 +33,10 @@ const pageTitles = {
     title: "Homepage | Localists",
     description: ""
   },
-  "/login": {
-    title: "Login | Localists",
-    description: ""
-  },
+  // "/login": {
+  //   title: "Login | Localists",
+  //   description: ""
+  // },
   "/sellers/dashboard": {
     title: "Localists.com - Connect with Customers & Grow Your Business",
     description: "Join Localists for free and connect with customers actively searching for talented professionals like you. Pitch confidently and grow your business today."
@@ -63,8 +63,8 @@ const pageTitles = {
   },
 
    "/sellers/create/": {
-    title: "Create Seller Account | Localists",
-    description: ""
+    title: "Join Localists for Professionals | Free Sign-Up",
+    description: "Join Localists free as a professional. Get verified leads with no hidden fees. Pay only for the customers you want and keep all your earnings."
   },
    "/buyers/create": {
     title: "Localists.com - Create Your Request",
@@ -82,7 +82,7 @@ const pageTitles = {
     title: "Localists.com - Privacy Policy",
     description: ""
   },
-   "/settings/leads": {
+   "/settings/leads/my-services": {
     title: "Localists.com - Settings - Lead Settings",
     description: "Control how you receive leads on Localists. Adjust preferences, manage notifications, and optimise settings to connect with the right customers."
   },
@@ -102,37 +102,57 @@ const pageTitles = {
     title: "Localists.com - Settings",
     description: "Manage your Localists account preferences—update your profile, notification settings, and more to customize your experience."
   },
-  "/settings/my-profile": {
+  "/settings/profile/my-profile": {
     title: "Localists.com - Settings - My Profile",
     description: "Manage and update your Localists profile. Edit personal details, showcase your expertise, and keep your information accurate to attract more customers."
   },
-  "/settings/account-details": {
+  "/settings/profile/account-details": {
     title: "Localists.com - Settings - Account Details",
     description: "Easily update your Localists account details. Keep your login, security, and personal information up to date for a seamless experience."
   },
-   "/settings/my-credits": {
+   "/settings/billing/my-credits": {
     title: "Localists.com - Settings - My Credits",
     description: "Track and manage your Localists credits. View balances, monitor usage, and stay in control of your spending while growing your business."
   },
-  "/settings/invoice-billing": {
-    title: "Localists.com - Settings - Invoice Billing",
+  "/settings/billing/invoice-billing-details": {
+    title: "Localists.com - Settings - Invoice Billing Details",
     description: "Access and manage your Localists invoices and billing history. Download receipts, view past payments, and stay organised with your account records."
   },
-  "/settings/payment-details": {
+  "/settings/billing/payment-details": {
     title: "Localists.com - Settings - Payment Details",
     description: "Securely manage your Localists payment methods. Update card information, add new payment options, and ensure smooth transactions every time."
   },
-    "/settings/e-mail-notification": {
+    "/settings/notifications/e-mail-notification": {
     title: "Localists.com - Settings - Email Notification",
     description: "Customise your Localists email notification preferences. Stay updated on leads, messages, and platform updates without overwhelming your inbox."
   },
-  "/settings/browser-notification": {
+  "/settings/notifications/browser-notification": {
     title: "Localists.com - Settings - Browser Notification",
     description: "Manage your Localists browser notifications. Choose real-time alerts for new leads and updates, so you never miss an opportunity."
   },
   "/help-center": {
     title: "Localists.com - Help",
     description: ""
+  },
+   "/feedback/questions": {
+    title: "Localists.com - Feedback Questions",
+    description: "Explore customer feedback questions on Localists. Review insights, share experiences, and help improve services by engaging with our feedback platform."
+  },
+   "/feedback/questions/new": {
+    title: "Localists.com - Submit a New Feedback Question",
+    description: "Share your thoughts and experiences on Localists by submitting a new feedback question. Help shape better services for local professionals and customers."
+  },
+   "/feedback/questions/edit": {
+    title: "Localists.com - Edit Feedback Question",
+    description: "Update and refine your existing feedback on Localists. Edit your questions to ensure your voice is heard and your experience is accurately shared."
+  },
+   "/feedback/questions/remove": {
+    title: "Localists.com - Remove Feedback Question",
+    description: "Manage your contributions on Localists by removing feedback questions you no longer wish to share. Keep your profile and insights up to date."
+  },
+   "/login": {
+    title: "Localists Login | Access Your Account",
+    description: "Log in to your Localists account to manage leads, connect with customers, and grow your business with trusted local opportunities."
   },
   
 };

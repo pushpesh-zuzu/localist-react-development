@@ -354,15 +354,139 @@ const LogSwitch = () => {
         >
           {getUserType() == 1 && !viewProfile && (
             <>
-              <div
+              <a
+                href="/sellers/dashboard"
+                style={{ textDecoration: "none" , color: "black" }}
                 className={`${styles.navItem} ${
-                  location.pathname === "login/sellers/dashboard" ? styles.active : ""
+                  location.pathname === "/sellers/dashboard" ? styles.active : ""
                 }`}
-                onClick={() => handleNavigation("/sellers/dashboard")}
+                onClick={(e) => {
+                  // only handle normal left-clicks
+                  if (
+                    e.button === 0 && // left click
+                    !e.metaKey &&
+                    !e.ctrlKey &&
+                    !e.shiftKey &&
+                    !e.altKey
+                  ) {
+                    e.preventDefault();
+                    handleNavigation("/sellers/dashboard");
+                  }
+                }}
               >
                 Dashboard
-              </div>
-              <div
+              </a>
+                <a
+                  href="/sellers/leads"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${styles.navItem} ${
+                    location.pathname === "/sellers/leads" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/sellers/leads");
+                    }
+                  }}
+                >
+                  New Leads
+                </a>
+
+                <a
+                  href="/sellers/leads/save-for-later"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${styles.navItem} ${
+                    location.pathname === "/sellers/leads/save-for-later" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/sellers/leads/save-for-later");
+                    }
+                  }}
+                >
+                  Saved Leads
+                </a>
+
+                <a
+                  href="/sellers/leads/my-responses"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${styles.navItem} ${
+                    location.pathname === "/sellers/leads/my-responses" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/sellers/leads/my-responses");
+                    }
+                  }}
+                >
+                  My Responses
+                </a>
+
+                <a
+                  href="/settings"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${styles.navItem} ${
+                    location.pathname === "/settings" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/settings");
+                    }
+                  }}
+                >
+                  Settings
+                </a>
+
+                <a
+                  href="/help-center"
+                  style={{ textDecoration: "none" , color: "black" }}
+                  className={`${styles.navItem} ${
+                    location.pathname === "/help-center" ? styles.active : ""
+                  }`}
+                  onClick={(e) => {
+                    if (
+                      e.button === 0 &&
+                      !e.metaKey &&
+                      !e.ctrlKey &&
+                      !e.shiftKey &&
+                      !e.altKey
+                    ) {
+                      e.preventDefault();
+                      handleNavigation("/help-center");
+                    }
+                  }}
+                >
+                  Help
+                </a>
+
+              {/* <div
                 className={`${styles.navItem} ${
                   location.pathname === "login/sellers/leads" ? styles.active : ""
                 }`}
@@ -405,7 +529,7 @@ const LogSwitch = () => {
                 onClick={() => handleNavigation("/help-center")}
               >
                 Help
-              </div>
+              </div> */}
               <Popover
                 trigger="click"
                 placement="bottomRight"

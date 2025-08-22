@@ -57,7 +57,63 @@
 }
 
 .headerImage {
-  background-image: url("../../../assets/Images/RegisterModalQuestionsBg.svg");
+  background-image: url("../../../assets/Images/Patio-&-Paving-Services.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage1 {
+  background-image: url("../../../assets/Images/Artificial-Grass-Installation.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage2 {
+  background-image: url("../../../assets/Images/Builders.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage3 {
+  background-image: url("../../../assets/Images/Driveway-Installation.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage4 {
+  background-image: url("../../../assets/Images/Fence-&-Gate-Installation.jpg");
   background-size: cover;
   background-position: center;
   padding: 0px 20px;
@@ -71,7 +127,98 @@
   flex-direction: column;
 }
 
+
+.headerImage5 {
+  background-image: url("../../../assets/Images/Gardening-&-Landscaping.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.headerImage6 {
+  background-image: url("../../../assets/Images/Home-&-Garden.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.headerImage7 {
+  background-image: url("../../../assets/Images/Landscaping.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 .headerImage h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+
+.headerImage1 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage2 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage3 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage4 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage5 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage6 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage7 h2 {
   font-family: Poppins;
   font-weight: 700;
   font-size: 20px;
@@ -258,6 +405,36 @@
     font-size: clamp(16px, 4vw, 20px);
     padding: 40px 15px;
   }
+
+  .headerImage1 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage2 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage3 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage4 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage5 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage6 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+  .headerImage7 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+
 
   .option {
     font-size: 12px;

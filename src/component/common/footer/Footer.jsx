@@ -72,6 +72,9 @@ const Footer = () => {
     setActiveKeys(key);
   };
   const { userToken } = useSelector((state) => state.auth);
+
+  console.log('user_type',userToken?.user_type);
+ 
   const { registerToken } = useSelector((state) => state.findJobs);
 
   const handleJoinAsProfessional = () => {
@@ -165,6 +168,31 @@ const Footer = () => {
                   Join as a Professional
                 </li>
               </Link>
+              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+                <Link to="/sellers/leads" className={styles.link}>
+                  <li > New Leads</li>
+                </Link>
+              )}
+              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+                <Link to="/sellers/leads/save-for-later" className={styles.link}>
+                  <li > Saved Leads</li>
+                </Link>
+              )}
+              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+                <Link to="/sellers/leads/my-responses" className={styles.link}>
+                  <li >  My Responses</li>
+                </Link>
+              )}
+              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+                <Link to="/settings" className={styles.link}>
+                  <li >  Settings</li>
+                </Link>
+              )}
+              {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
+                <Link to="/help-center" className={styles.link}>
+                  <li >  Help</li>
+                </Link>
+              )}
               {/* <Link to="/help-center" className={styles.link}>
                 <li onClick={handleHelpCenter}>Help Centre</li>
               </Link> */}
