@@ -23,9 +23,10 @@ import styles from "./Photos.module.css";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import paginationImg from "../../../assets/Icons/MyResponse/paginationImg.svg";
 import leftpaginationImg from "../../../assets/Icons/MyResponse/rightPagenationImg.svg";
+import { baseURL } from "../../../Api/axiosInstance";
 
 // ✅ Correct base URL
-const BASE_IMAGE = "https://localists.zuzucodes.com/admin/storage/app/public/images/users";
+const BASE_IMAGE = `${baseURL}/storage/app/public/images/users`;
 
 const Photos = ({ details }) => {
   // ✅ Access company_photos string
