@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styles from "./ImageModal.module.css";
+import { useNavigate, useParams } from 'react-router-dom';
 // import personalTrainers from "./images/personalTrainers.jpg"; // Replace with actual paths
 // import counselling from "./images/counselling.jpg";
 // import massage from "./images/massage.jpg";
@@ -22,12 +23,18 @@ const services = [
 ];
 
 const ImageModal = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   if (!isOpen) return null;
   const dispatch = useDispatch();
    const { popularList,popularLoader } =  useSelector((state) => state.findJobs);
  useEffect(()=>{
   dispatch(getPopularServiceList())
   },[])
+
+  const handleSkip = () => {
+  onClose(); // close modal first
+  navigate("/buyers/create"); // go to buyers/create
+};
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -40,7 +47,9 @@ const ImageModal = ({ isOpen, onClose }) => {
 
         <div className={styles.grid}>
           {popularList?.slice(0, 6)?.map((service, index) => (
-            <div key={index} className={styles.card}>
+            <div key={index} className={styles.card} onClick={() => {
+              navigate("/buyers/create", { state: { selectedService: service,from: "ImageModal" } });
+            }}>
               {/* <img src={service.image} alt={service.title} /> */}
                 <img
                         src={
@@ -57,7 +66,7 @@ const ImageModal = ({ isOpen, onClose }) => {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.skipButton} onClick={onClose}>
+          <button className={styles.skipButton} onClick={handleSkip}>
             Skip
           </button>
         </div>
