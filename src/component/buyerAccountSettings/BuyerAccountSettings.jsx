@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { BASE_IMAGE_URL, showToast, updateLocalStorageValue } from "../../utils";
 import { setUserToken } from "../../store/Auth/authSlice";
 import { setRegisterData } from "../../store/FindJobs/findJobSlice";
+import { baseURL } from "../../Api/axiosInstance";
 
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
@@ -153,7 +154,7 @@ const BuyerAccountSettings = () => {
     password_confirmation: "",
     error: "",
   });
-const BASE_IMAGE_URLs = "https://localists.zuzucodes.com/admin/storage/app/public/images/users"
+const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });

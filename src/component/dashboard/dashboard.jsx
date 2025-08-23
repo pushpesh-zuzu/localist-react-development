@@ -171,9 +171,9 @@ const Dashboard = () => {
                 <a className={styles["view-leads-blue"]} href="#">
                   View 76 Live Leads Now - Start winning jobs now*
                 </a>
-                <button className={styles["view-leads-black"]}>
+                <a href="/#/sellers/leads" className={styles["view-leads-black"]}>
                   View 1061 live leads
-                </button>
+                </a>
 
                 <div className={styles["info-box"]}>
                   <h4>
@@ -209,7 +209,7 @@ const Dashboard = () => {
                   <p>
                     We’re here to help you get the most out of Localists.com.
                     Explore plenty of tips, guides, and resources in our{" "}
-                    <a href="/help-center" className={styles.textColor}>
+                    <a href="/contact-us" className={styles.textColor}>
                       Help Center
                     </a>{" "}
                     .

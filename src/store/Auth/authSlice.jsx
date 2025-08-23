@@ -15,6 +15,7 @@ import {
 import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 import { clearCompanyData } from "../Company/companyLookup";
 import { safeLocalStorage } from "../../utils/localStorage";
+import { BASE_URL_IMAGE } from "../../utils";
 
 const userToken = JSON.parse(safeLocalStorage.getItem("barkUserToken"));
 const initialState = {
@@ -467,7 +468,7 @@ export const fetchProfileFromMagicLink = (navigate) => {
       //   }
       // );
       const api =
-        "https://localists.zuzucodes.com/admin/api/users/get-seller-profile";
+        `${BASE_URL_IMAGE}api/users/get-seller-profile`;
 
       const res = await fetch(api, {
         method: "POST",

@@ -90,12 +90,19 @@ console.log("buyerRequestList",buyerRequestList)
 
 
                 </div>
-              {req?.status === "hired" ? "" : <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}> <div style={{marginTop:"16px",marginRight:"4px",cursor:"pointer"}} onClick={() => handleClose(req.id)}> Close Request</div> <div
-                  className={styles.tags}
-                  onClick={() => openHiredModal(req.id)}
-                >
-                  | Hired Professional
-                </div></div>}
+              {req?.status === "hired" ? "" : 
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px", marginTop:'16px' }}>
+                <div style={{ cursor: "pointer" }} onClick={() => handleClose(req.id)}>
+                Close Request
+                </div>
+
+                <div >|</div>
+
+                <div className={styles.tags} onClick={() => openHiredModal(req.id)}>
+                Hired Professional
+                </div>
+                </div>
+}
               </div>
             ))}
         </div>
