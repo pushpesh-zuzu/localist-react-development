@@ -5,16 +5,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
 import moment from "moment";
 import { Spin } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 import HiredProfessional from "./BuyerRegistration/HiredProfessional/HiredProfessional";
-
+import WhatService from "./BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiredModalOpen, setIsHiredModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const navigate = useNavigate();
   const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+  setIsModalOpen(false);
+  setSelectedService(null); // ✅ reset selectedService when modal closes
+};
+const [fromImageModal, setFromImageModal] = useState(false); 
+const [selectedService, setSelectedService] = useState(null);
+
+useEffect(() => {
+  if (!selectedServiceId) {
+    setIsModalOpen(false);
+  }
+}, [selectedServiceId]);
+
   const dispatch = useDispatch();
   const { buyerRequestList, buyerrequestListLoader } = useSelector(
     (state) => state.buyer
@@ -34,13 +46,54 @@ console.log("buyerRequestList",buyerRequestList)
   const handleClose = (id) => {
     navigate(`/buyer-close/${id}`)
   }
+
+
+  const location = useLocation();
+useEffect(() => {
+  if (location.state?.selectedService) {
+    if (location.state?.from === "ImageModal") {
+      setFromImageModal(true);
+      setSelectedService(location.state.selectedService);
+    } else {
+      setSelectedService(null);
+    }
+
+    // ✅ Clear location.state after using it
+    navigate(location.pathname, { replace: true });
+  }
+}, [location.state, navigate]);
+
+
+useEffect(() => {
+  if (selectedService) {
+    if (fromImageModal) {
+      
+      console.log("✅ Service came from ImageModal");
+    } else {
+       
+      console.log("✅ Service came from normal flow");
+    }
+    openModal();
+  }
+}, [selectedService, fromImageModal]);
+
+useEffect(() => {
+  console.log("🔎 Location state:", location.state);
+}, [location.state]);
+
+useEffect(() => {
+  console.log("🔎 SelectedService state:", selectedService);
+}, [selectedService]);
+
+console.log('selectService',selectedService);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.title}>
           Your <span className={styles.highlight}>requests</span>
         </h2>
-        <button className={styles.topButton} onClick={openModal}>
+       <button className={styles.topButton} onClick={openModal}>
           Place new request
         </button>
       </div>
@@ -98,7 +151,7 @@ console.log("buyerRequestList",buyerRequestList)
 
                 <div >|</div>
 
-                <div className={styles.tags} onClick={() => openHiredModal(req.id)}>
+                <div className={styles.tags} style={{ marginTop: "0px" }} onClick={() => openHiredModal(req.id)}>
                 Hired Professional
                 </div>
                 </div>
@@ -127,11 +180,14 @@ console.log("buyerRequestList",buyerRequestList)
         </div>
       )}
 
-      {isModalOpen && <BuyerRegistration closeModal={closeModal} />}
+      {isModalOpen && <BuyerRegistration closeModal={closeModal} serviceId={selectedService?.id}
+            serviceName={selectedService?.name} setSelectedService={setSelectedService} setFromImageModal={setFromImageModal}     />}
 
       {isHiredModalOpen && (
         <HiredProfessional closeModal={() => setIsHiredModalOpen(false)} serviceId={selectedServiceId}/>
       )}
+      
+
     </div>
   );
 };

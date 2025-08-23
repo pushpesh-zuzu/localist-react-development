@@ -57,34 +57,63 @@ const WhatServiceYouNeed = ({
   //     setSelectedService({ id: serviceId });
   //   }
   // }, [serviceName, serviceId]);
-  useEffect(() => {
-    if (serviceName && serviceId) {
-      setInput(serviceName);
-      setSelectedService({ id: serviceId });
-    }
+  // useEffect(() => {
+  //   if (serviceName && serviceId) {
+  //     setInput(serviceName);
+  //     setSelectedService({ id: serviceId });
+  //   }
 
-    if (pincodes) {
-      setPincode(pincodes);
+  //   if (pincodes) {
+  //     setPincode(pincodes);
+  //   }
+  // }, [serviceName, serviceId, pincodes]);
+  // useEffect(() => {
+  //   if (serviceName && !service) {
+  //     setInput(serviceName);
+  //     setIsDropdownOpen(true);
+  //     dispatch(searchService({ search: serviceName }));
+  //   }
+  //   if (service?.length > 0) {
+  //     const match = service.find(
+  //       (s) => s.name.trim().toLowerCase() === input.trim().toLowerCase()
+  //     );
+  //     if (match) {
+  //       setSelectedService(match);
+  //       setIsDropdownOpen(false);
+  //     } else {
+  //       setSelectedService(null); // clear if no match
+  //     }
+  //   }
+  // }, [serviceName, dispatch, service]);
+  // ✅ Pre-fill from props
+useEffect(() => {
+  if (serviceName) {
+    setInput(serviceName);
+    setIsDropdownOpen(true);
+    dispatch(searchService({ search: serviceName })); // trigger API
+  }
+
+  if (pincodes) {
+    setPincode(pincodes);
+  }
+}, [serviceName, pincodes, dispatch]);
+
+// ✅ Sync when service list updates
+useEffect(() => {
+  if (serviceName && service?.length > 0) {
+    const match = service.find(
+      (s) => s.name.trim().toLowerCase() === serviceName.trim().toLowerCase()
+    );
+
+    if (match) {
+      setSelectedService(match);
+      setIsDropdownOpen(false); // close dropdown after match
+    } else {
+      setSelectedService(null);
     }
-  }, [serviceName, serviceId, pincodes]);
-  useEffect(() => {
-    if (serviceName && !service) {
-      setInput(serviceName);
-      setIsDropdownOpen(true);
-      dispatch(searchService({ search: serviceName }));
-    }
-    if (service?.length > 0) {
-      const match = service.find(
-        (s) => s.name.trim().toLowerCase() === input.trim().toLowerCase()
-      );
-      if (match) {
-        setSelectedService(match);
-        setIsDropdownOpen(false);
-      } else {
-        setSelectedService(null); // clear if no match
-      }
-    }
-  }, [serviceName, dispatch, service]);
+  }
+}, [serviceName, service]);
+
   const handleSelectService = useCallback(
     (item) => {
       // console.log(item?.name, "clicked");
@@ -274,6 +303,7 @@ const WhatServiceYouNeed = ({
 
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
+      
       setShowConfirmModal(true);
       dispatch(
         setbuyerRequestData({
@@ -283,7 +313,12 @@ const WhatServiceYouNeed = ({
         })
       );
     } else {
-      onClose();
+      setInput("");
+    setSelectedService(null);
+    setPincode("");
+    setCity("");
+      
+      onClose(); // close modal
     }
   };
 

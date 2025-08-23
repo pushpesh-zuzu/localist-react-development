@@ -1,403 +1,391 @@
 .container {
- 
-    max-width: 1000px;
-    padding:  20px 88px;
-    
-  }
-  
-  .backText {
-    color: #000000;
-    cursor: pointer !important;
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap:8px
-  }
-  
-  .heading {
-    font-size: 28px;
-    margin-bottom: 21px;
-  }
-  
-  .manageWrapper {
-    display: flex;
+  max-width: 1000px;
+  padding: 20px 88px;
+}
+
+.backText {
+  color: #000000;
+  cursor: pointer !important;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.heading {
+  font-size: 28px;
+  margin-bottom: 21px;
+}
+
+.manageWrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.infoIcon {
+  margin-right: 10px;
+}
+.infoIcon img {
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
+}
+
+.description {
+  font-size: 18px;
+  color: #000000;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.link {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.note {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 64px;
+  font-weight: 400;
+  margin-left: 29px;
+}
+.note span {
+  font-weight: 600;
+  font-size: 14px;
+}
+/* <----- Card Css ----->  */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #d9d9d9;
+  padding: 20px;
+  background-color: #fff;
+  position: relative;
+}
+
+.titleBar {
+  margin-top: 21px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  position: absolute;
+
+  top: -15px;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  border: none;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.response {
+  font-size: 12px;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  padding: 3px 15px;
+  white-space: nowrap;
+  background-color: #ffffff;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.creditsBox {
+  border: 1px solid #000;
+  padding: 3px 15px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.btnBox {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.perCredit {
+  font-size: 18px;
+  color: #bebebe;
+  font-weight: 600;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+
+.buyButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 5px 56px;
+
+  font-size: 20px;
+  cursor: pointer !important;
+}
+
+.checkboxWrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  margin-top: 22px;
+}
+.checkboxWrap input {
+  width: 24px;
+  height: 24px;
+  cursor: pointer !important;
+  margin: 3px 3px 3px 0px;
+}
+.checkboxWrap label {
+  font-size: 14px;
+  color: #000000;
+  font-weight: 500;
+}
+.getHired {
+  display: flex;
+  gap: 0px;
+  align-items: center;
+  max-width: 670px;
+}
+.getHired img {
+  z-index: 10;
+}
+.gethiredText {
+  background-color: #e3f6fc;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  padding: 10px 34px;
+  margin-top: -1px;
+  margin-left: -2.8%;
+}
+.noPlanText {
+  font-size: 18px;
+}
+/* ========== Responsive Breakpoints ========== */
+
+/* Tablets (≤ 1024px) */
+@media (max-width: 1024px) {
+  .titleBar {
+    flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 15px;
   }
-  
-  .infoIcon {
-    margin-right: 10px;
-    
+
+  .buttonWrap {
+    align-items: stretch;
+    width: 100%;
   }
-  .infoIcon img {
-    width: 18px;
-    height: 18px;
-    margin-top: 5px;
+
+  .buyButton {
+    width: 100%;
   }
-  
-  .description {
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+  }
+
+  .creditsBox {
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+  .buyButton {
     font-size: 18px;
-    color: #000000;
-    line-height: 1.5;
-    font-weight: 400;
-    
-  }
-  
-  .link {
-    color: var(--primary-color);
-    text-decoration: underline;
-  }
-  
-  .note {
-    font-size: 14px;
-    color: #000000;
-    margin-bottom: 64px;
-    font-weight: 400;
-    margin-left: 29px;
-  }
-  .note span {
+    padding: 8px 16px;
     font-weight: 600;
-    font-size: 14px;
   }
-  /* <----- Card Css ----->  */
+
+  .priceInfo {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .perCredit {
+    font-size: 18px;
+  }
+
+  .response {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .gethiredText {
+    background-color: #e3f6fc;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    padding: 1px 34px;
+
+    margin-left: -4%;
+  }
+}
+
+/* Extra small devices (≤ 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
   .cardList {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
   }
-  
-  .card {
-    border: 1px solid #D9D9D9;
-    padding: 20px;
-    background-color: #fff;
-    position: relative;
-  }
-  
-  .titleBar {
-    margin-top: 21px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-    
-  }
-  
-  .badge {
-    position: absolute;
 
-    top: -15px;
-    background-color: var(--primary-color);
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    border: none;
-    font-size: 13px;
+  .priceInfo {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .buttonWrap {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+  .titleBar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    
-  }
-  
-  .response {
-    font-size: 12px;
-    color: var(--primary-color);
-    border: 1px solid  var(--primary-color);
-    padding: 3px 15px;
-    white-space: nowrap;
-    background-color: #ffffff;
-  }
-  
-  .row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .creditsBox {
-    border: 1px solid #000;
-    padding: 3px 15px;
-    font-size: 12px;
-    font-weight: 600;
   }
   .btnBox {
-    width: 35%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
   }
-  
-  .priceInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-  .perCredit {
-    font-size: 18px;
-    color: #BEBEBE;
-    font-weight: 600;
-  }
-  
-  .buttonWrap {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: flex-start;
-  }
-  
   .buyButton {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 5px 56px;
-  
-    font-size: 20px;
-    cursor: pointer !important;
+    width: 100%;
   }
-  
+
   .checkboxWrap {
-    display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    margin-top: 22px;
-  }
-  .checkboxWrap input {
-    width: 24px;
-    height: 24px;
-    cursor: pointer !important;
-    margin: 3px 3px 3px 0px;
-  }
-  .checkboxWrap label {
-    font-size: 14px;
-    color: #000000;
-    font-weight: 500;
   }
   .getHired {
     display: flex;
     gap: 0px;
     align-items: center;
+    /* flex-direction: column; */
     max-width: 670px;
+    margin-top: 25px;
   }
   .getHired img {
-    z-index: 10;
+    width: 77px;
+    height: 80px;
   }
   .gethiredText {
-    background-color: #E3F6FC;
-    font-size: 18px;
+    background-color: #e3f6fc;
+    font-size: 8px;
     font-weight: 400;
     color: #000000;
-    padding: 10px 34px;
-    margin-top: -1px;
-    margin-left: -2.8%;
-
+    padding: 3px 14px;
+    margin-left: -3.4%;
   }
-  .noPlanText {
-    font-size: 18px;
-  }
-  /* ========== Responsive Breakpoints ========== */
-  
-  /* Tablets (≤ 1024px) */
-  @media (max-width: 1024px) {
-    .titleBar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .buttonWrap {
-      align-items: stretch;
-      width: 100%;
-    }
-  
-    .buyButton {
-      width: 100%;
-    }
-  }
-  
-  /* Mobile (≤ 768px) */
-  @media (max-width: 768px) {
-    .card {
-      padding: 15px;
-    }
-  
-    .creditsBox {
-      padding: 5px 10px;
-      text-align: center;
-    }
-  
-    .buyButton {
-      font-size: 18px;
-      padding: 8px 16px;
-      font-weight: 600;
-    }
-  
-    .priceInfo {
-      font-size: 20px;
-      text-align: center;
-    }
-  
-    .perCredit {
-      font-size: 18px;
-    }
-  
-    .response {
-      font-size: 12px;
-      font-weight: 600;
-
-    }
-    .gethiredText {
-    background-color: #E3F6FC;
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-    padding: 1px 34px;
-    
-    margin-left: -4%;
-
-  }
-  }
-  
-  /* Extra small devices (≤ 480px) */
-  @media (max-width: 480px) {
-    .container{
-      padding: 20px 16px;
-    }
-    .cardList {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-    
-    .priceInfo {
-      font-size: 20px;
-      text-align: center;
-      margin-top: 12px;
-    }
-    .buttonWrap {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 16px;
-    }
-    .titleBar{
-      display: flex;
-      align-items: center;
-    }
-   .btnBox {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-    .buyButton {
-      width: 100%;
-
-    }
-  
-    .checkboxWrap {
-     
-      align-items: center;
-    }
-    .getHired {
-      display: flex;
-      gap: 0px;
-      align-items: center;
-      /* flex-direction: column; */
-      max-width: 670px;
-      margin-top: 25px;
-    }
-    .getHired img {
-      width: 77px;
-      height: 80px;
-    }
-    .gethiredText {
-      background-color: #E3F6FC;
-      font-size: 8px;
-      font-weight: 400;
-      color: #000000;
-      padding: 3px 14px;
- margin-left: -3.4%;
-    }
-    .response{
-      font-size: 12px;
-      font-weight: 600;
-      padding: 5px 10px;
-    }
-    .creditsBox {
-      font-size: 12px;
-    }
-  
-  }
-  @media screen and (max-width:350px) {
-     .gethiredText {
-      background-color: #E3F6FC;
-      font-size: 8px;
-      font-weight: 400;
-      color: #000000;
-      padding: 3px 18px;
- margin-left: -3.8%;
-    }
-  }
-  
-  /* <----- end Card Css ---->  */
-   .bottomText {
-    margin-top: 57px;
-    margin-bottom: 17px;
-  }
-  .bottomText span {
-    font-weight: 600;
-    font-size: 24px;
-    color: var(--primary-color);
-  } 
-  .VisaCard {
-    margin-top: 33px;
-  }
-  .redeemText {
-    margin-top: 54px;
-  }
-  .redeemText label{
-    font-size: 16px;
-    color: #000000;
-    font-weight: 500;
-    
-  }
-  .redeemText input{
-    
-    padding: 6px 12px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-  }
-  .redeemButton {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 6px 15px;
-    
-    font-size: 15px;
-    cursor: pointer !important;
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 2px;
-  }
-  .couponsText {
-    margin-top: 19px;
+  .response {
     font-size: 12px;
-    font-weight: 500;
-    color: #828282;
+    font-weight: 600;
+    padding: 5px 10px;
   }
-  
+  .creditsBox {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .gethiredText {
+    background-color: #e3f6fc;
+    font-size: 8px;
+    font-weight: 400;
+    color: #000000;
+    padding: 3px 18px;
+    margin-left: -3.8%;
+  }
+}
+
+/* <----- end Card Css ---->  */
+.bottomText {
+  cursor: pointer !important;
+  margin-top: 57px;
+  margin-bottom: 17px;
+}
+.bottomText span {
+  font-weight: 600;
+  font-size: 24px;
+  cursor: pointer !important;
+  color: var(--primary-color);
+}
+.VisaCard {
+  margin-top: 33px;
+}
+.redeemText {
+  margin-top: 54px;
+}
+.redeemText label {
+  font-size: 16px;
+  color: #000000;
+  font-weight: 500;
+}
+.redeemText input {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+.redeemButton {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 6px 15px;
+
+  font-size: 15px;
+  cursor: pointer !important;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 2px;
+}
+.couponsText {
+  margin-top: 19px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #828282;
+}
+
 .toggle {
   border: 1px solid #d9d9d9;
-padding: 9px 12px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: 30px;
-max-width: 300px;
+  padding: 9px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  max-width: 300px;
 }
 .toggle span {
   font-size: 14px;
@@ -436,7 +424,7 @@ max-width: 300px;
   width: 14px;
   left: 3px;
   bottom: 3px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   transition: 0.3s;
   border-radius: 50%;
 }
@@ -448,23 +436,22 @@ max-width: 300px;
 .switch input:checked + .slider:before {
   transform: translateX(16px);
 }
-  @media screen and (max-width:425px) {
-    .bottomText {
-      margin-top: 30px;
-      margin-bottom: 17px;
-    }
-    .checkboxWrap {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 13px;
-      margin-top: 8px;
-    }
-    .redeemText {
-      margin-top: 30px;
-    }
-     .VisaCard {
+@media screen and (max-width: 425px) {
+  .bottomText {
+    margin-top: 30px;
+    margin-bottom: 17px;
+  }
+  .checkboxWrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  .redeemText {
+    margin-top: 30px;
+  }
+  .VisaCard {
     margin-top: 15px;
   }
-    
-  }
+}

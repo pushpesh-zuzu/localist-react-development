@@ -66,7 +66,7 @@ const userData = userToken?.user_id || userToken?.id || registerData?.user_id ||
         </p>
       </div>
       <h2 className={styles.question}>Which professional did you hire?</h2>
-     <div className={styles.options}>
+     <div className={styles.options} style={{ marginBottom: "10px" }}>
               {options.map((option) => (
                 <label key={option.id} className={styles.radioLabel}>
                   <input

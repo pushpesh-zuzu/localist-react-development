@@ -272,6 +272,8 @@ const BuyerRegistration = ({
   postcode,
   city,
   postalCodeValidate,
+  setSelectedService,
+  setFromImageModal
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -332,9 +334,12 @@ const BuyerRegistration = ({
     }
   }, [shouldClose]);
 
-  const handleClose = () => {
-    closeModal();
-  };
+const handleClose = () => {
+  setSelectedService(null);
+  setFromImageModal(false);
+  closeModal();
+};
+
 
   useEffect(() => {
     if (buyerStep === 2) {

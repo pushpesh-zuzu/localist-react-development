@@ -24,6 +24,11 @@ console.log('Lead', sellerId);
       return; // stop submit
     }
 
+    if (!price || Number(price) <= 0) {
+      showToast("error", "Please enter a valid price");
+      return;
+    }
+
     const data = {
     lead_id: leadId['id'],
     seller_id: sellerId === "someone_else" ? 0 : sellerId,
@@ -59,13 +64,13 @@ console.log('Lead', sellerId);
 
       <div className={styles.inputGroup}>
         <div className={styles.priceInput}>
-          <span>£</span>
+          {unitType === "Total Price" && <span>£</span>}
           <input
-    type="number"
-    placeholder="0"
-    value={price}
-    onChange={(e) => setPrice(e.target.value)}
-  />
+            type="number"
+            placeholder="0"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+          />
         </div>
        <select
   className={styles.customSelect}
@@ -96,7 +101,10 @@ console.log('Lead', sellerId);
         <button className={styles.backBtn} onClick={handleBack}>Back</button>
         <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
       </div>
-      {isModalOpen && (<ImageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />)}
+      {isModalOpen && (<ImageModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}  onSelectService={(service) => {
+      setIsModalOpen(false);   // close modal
+      setSelectedService(service); // open WhatService
+    }} />)}
     </div>
   );
 };

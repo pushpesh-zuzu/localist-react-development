@@ -52,6 +52,7 @@ import ContactUs from "../component/ContactUs/ContactUs";
 import AboutUs from "../component/AboutUs/AboutUs";
 import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
+import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
 //test en/gb/bookkeeping-services/
 
 const router = createBrowserRouter([
@@ -411,6 +412,17 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
+      {
+        path: "/whats-service",
+        element: (
+          <ProtectedRoute>
+            <WhatServiceYouNeed />
+          </ProtectedRoute>
+        ),
+      },
+
+      
 
       // { path: "/inprogress", element: <InProgressPage /> },
       { path: "*", element: <NotFound /> },
