@@ -423,9 +423,7 @@ const MyCredits = () => {
 
         <TransgationLogTable data={getInoviceBillingList} />
       </div>
-      {/* {isOpen && (
-        <CreditModal onClose={()=>setIsOpen(false)}/>
-      )} */}
+      {isOpen && <CreditModal onClose={() => setIsOpen(false)} />}
 
       {isAddCardModal && (
         <AddCardModal onClose={() => setIsAddCardModal(false)} />

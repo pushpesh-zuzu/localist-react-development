@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import styles from "./TransgationLogTable.module.css";
 import CreditModal from "./CreditModal";
 
+const TransgationLogTable = ({ data }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-
-const TransgationLogTable = ({data}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    
-    const handleOpen = () => {
+  const handleOpen = () => {
     setIsOpen(true);
-    }
+  };
   return (
     <div className={styles.container}>
       <h2 onClick={handleOpen}>Credit transaction log</h2>
@@ -35,9 +33,9 @@ const TransgationLogTable = ({data}) => {
           </tbody>
         </table>
       </div>
-       {isOpen && (
+      {/* {isOpen && (
               <CreditModal onClose={()=>setIsOpen(false)}/>
-            )}
+            )} */}
     </div>
   );
 };
