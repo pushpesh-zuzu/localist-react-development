@@ -37,7 +37,6 @@ const ReviewSection = ({
   const reviewLength = viewProfileData?.reviews_count || 0;
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
-  console.log(reviewListData, "detailsData");
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -256,7 +255,7 @@ const ReviewSection = ({
           ProfileIDs={profileId?.profileId}
           reviewsData={details}
           onReviewSubmit={fetchReviews}
-          viewProfileData={details}
+          reviewProfileData={details}
         />
       )}
     </>
