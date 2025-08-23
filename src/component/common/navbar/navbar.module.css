@@ -381,11 +381,11 @@
     flex-direction: column;
     background-color: #fff;
     position: absolute;
-    top: 60px;
     right: 0;
     width: 250px;
+    top: 35px;
+    padding: 12px 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 16px;
     /* border-radius: 8px; */
     z-index: 1000;
   }
@@ -708,11 +708,11 @@
     flex-direction: column;
     background-color: #fff;
     position: absolute;
-    top: 60px;
+   padding: 12px 16px;
+        top: 35px;
     right: 90px;
     width: 100px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 16px;
     /* border-radius: 8px; */
     z-index: 1000;
   }
