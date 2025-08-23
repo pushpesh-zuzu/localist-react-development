@@ -15,12 +15,18 @@ const [disclose, setDisclose] = useState(false);
     const dispatch = useDispatch();
     const location = useLocation();
 const { leadId, sellerId } = location.state || {};
+const [selected, setSelected] = useState("");
 
-console.log('Lead', sellerId,leadId);
+console.log('Lead', sellerId);
     const handleSubmit = () => {
-      const data = {
-      lead_id: leadId,
-    seller_id: sellerId,
+    if (!sellerId && sellerId !== "someone_else") {
+      showToast("error", "Please select any of the option");
+      return; // stop submit
+    }
+
+    const data = {
+    lead_id: leadId['id'],
+    seller_id: sellerId === "someone_else" ? 0 : sellerId,
     final_price: Number(price), // Convert to number if needed
     unit_type: unitType,
     disclose_information: disclose ? 1 : 0
