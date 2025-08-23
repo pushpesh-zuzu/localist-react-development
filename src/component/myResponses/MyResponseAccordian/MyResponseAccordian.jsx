@@ -554,8 +554,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 {activeTab === "activity" && (
                   <div className={styles.container}>
                     <div className={styles.date}>
-                  {moment(profileLeadViewData?.updated_at).format("ddd D, MMMM")}
+                      {getActivies?.length > 0
+                        ? moment(getActivies[getActivies.length - 1]?.created_at).format("ddd D, MMMM")
+                        : moment(profileLeadViewData?.created_at).format("ddd D, MMMM")}
                     </div>
+
                     {getActivies?.map((item, index) => (
                       <TimelineItem
                         key={index}
