@@ -3,6 +3,7 @@ import styles from './BuyerFirstStep.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAutoBidData } from '../../../../store/LeadSetting/leadSettingSlice';
+import { showToast } from '../../../../utils';
 
 const BuyerFirstStep = () => {
     const navigate = useNavigate();
@@ -40,9 +41,14 @@ const userData = userToken?.user_id || userToken?.id || registerData?.user_id ||
           
          }, [autoBidListData]);
    const handleNext = () => {
+    if (!selected && selected !== "someone_else") {
+      showToast("error", "Please select any of the option");
+      return; // stop submit
+    }
+   
   navigate('/buyer-second-step', {
     state: {
-      leadId: leadIdData,
+      leadId: id,
       sellerId: selected,
     },
   });
@@ -73,6 +79,18 @@ const userData = userToken?.user_id || userToken?.id || registerData?.user_id ||
                   {option.name}
                 </label>
               ))}
+            </div>
+                    <div className={styles.options}>
+              <label className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="hired"
+                  value="someone_else"
+                  checked={selected === "someone_else"}
+                  onChange={() => setSelected("someone_else")}
+                />
+                Someone not on Localist
+              </label>
             </div>
       <div className={styles.buttonGroup}>
         <button className={styles.cancelBtn} onClick={handleCancel}>Cancel</button>

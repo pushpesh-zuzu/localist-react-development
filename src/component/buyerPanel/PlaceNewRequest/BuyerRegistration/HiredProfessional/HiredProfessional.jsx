@@ -117,6 +117,11 @@ const HiredProfessional = ({ closeModal,serviceId }) => {
       const selectedOption = options.find(option => option.id === selected);
       name = selectedOption ? selectedOption.name : "";
     }
+
+    if (!selected && selected !== "someone_else") {
+          showToast("error", "Please select any of the option");
+          return; // stop submit
+    }
     
     const data = {
       lead_id: serviceId,
