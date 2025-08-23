@@ -99,7 +99,7 @@ const DashboardCards = ({data}) => {
   <div className={styles["notification-section"]}>
     <div className={styles["notification-title"]}>
      Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description}</button>
+      <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description} Patio Service</button>
     </div>
 
     <div className={styles["notification-banner"]}>

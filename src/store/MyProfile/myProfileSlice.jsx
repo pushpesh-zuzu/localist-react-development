@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axiosInstance from "../../Api/axiosInstance";
+import axiosInstance, { baseURL } from "../../Api/axiosInstance";
 import { showToast } from "../../utils";
-
 export const getCustomerLinkApi = () => {
     return async (dispatch) => {
    
@@ -163,9 +162,9 @@ export const updateSellerProfile = createAsyncThunk(
           body.append(key, val);
         }
       });
-
+      console.log(baseURL,'baseURL')
       const response = await axiosInstance.post(
-        "https://localists.zuzucodes.com/admin/api/users/update-seller-profile",
+        `${baseURL}users/update-seller-profile`,
         body,
         {
           headers: {

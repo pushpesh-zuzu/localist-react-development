@@ -513,10 +513,10 @@ const LogSwitch = () => {
               </a>
 
               <a
-                href="/help-center"
+                href="/contact-center"
                 style={{ textDecoration: "none", color: "black" }}
                 className={`${styles.navItem} ${
-                  location.pathname === "/help-center" ? styles.active : ""
+                  location.pathname === "/contact-center" ? styles.active : ""
                 }`}
                 onClick={(e) => {
                   if (

@@ -12,12 +12,12 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     const token =
-      JSON.parse(localStorage.getItem("barkToken")) ||
-      JSON.parse(localStorage.getItem("registerTokens")) ||
-      JSON.parse(localStorage.getItem("createRequestToken")) ||
-      null;
+  JSON.parse(localStorage.getItem("barkToken")) ||
+  JSON.parse(localStorage.getItem("registerTokens")) ||
+  JSON.parse(localStorage.getItem("createRequestToken")) ||
+  null;
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token} `;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
