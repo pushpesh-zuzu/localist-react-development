@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     preview: {
-      host: url.hostname, // take host from env
+      // host: url.hostname, // take host from env
       port: 3001,         // always force port 3001
     },
   };
