@@ -150,7 +150,7 @@ const randomKey = Math.random().toString(36).substring(2, 8);
      {companySlug && (
         <a
           className={styles.profileLink}
-          href={`/view-profile/${companySlug}/${randomKey}`}
+          href={`/#/view-profile/${companySlug}/${randomKey}`}
           target="_blank"
           rel="noopener noreferrer"
         >

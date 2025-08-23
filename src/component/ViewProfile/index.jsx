@@ -152,13 +152,20 @@ const ViewProfiles = () => {
   const shouldDisableActions = requestId?.requestId;
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
+
     const { reviewProfileData } = useSelector((state) => state.leadSetting);
       const { viewProfileData } = useSelector((state) => state.leadSetting);
-  const serviceCount = reviewProfileData?.services?.filter(
+ 
+  const profileData = Object.keys(viewProfileData || {}).length > 0
+  ? viewProfileData
+  : reviewProfileData;
+      const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
-  // const reviewProfileData ={}
-  const servicesArray = reviewProfileData?.services || [];
+ 
+  console.log(profileData,'profileDataprofileDataprofileDataprofileData')
+  // const profileData ={}
+  const servicesArray = profileData?.services || [];
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
     .filter(Boolean);
@@ -272,10 +279,10 @@ const ViewProfiles = () => {
           <div className={styles.backBtnWrapper}>
             {/* <img
           src={
-            reviewProfileData?.company_logo
-              ? `${BASE_IMAGE}/users/${reviewProfileData?.company_logo}`
-              : reviewProfileData?.profile_image
-                ? `${BASE_IMAGE}/users/${reviewProfileData?.profile_image}`
+            profileData?.company_logo
+              ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
+              : profileData?.profile_image
+                ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
                 : DEFAULT_PROFILE_IMAGE
           }
           alt="Profile"
@@ -303,10 +310,10 @@ const ViewProfiles = () => {
 >
 <img
   src={
-    reviewProfileData?.company_logo
-      ? `${BASE_IMAGE}/users/${reviewProfileData?.company_logo}`
-      : reviewProfileData?.profile_image
-        ? `${BASE_IMAGE}/users/${reviewProfileData?.profile_image}`
+    profileData?.company_logo
+      ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
+      : profileData?.profile_image
+        ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
         : DEFAULT_PROFILE_IMAGE
         }
         alt="Profile"
@@ -324,22 +331,22 @@ const ViewProfiles = () => {
 
           </div>
           <div className={styles.viewDetails}>
-            <h2>{reviewProfileData?.company_name || reviewProfileData?.name}</h2>
+            <h2>{profileData?.company_name || profileData?.name}</h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
-              <span>{reviewProfileData?.city} </span> | {reviewProfileData?.zipcode}
+              <span>{profileData?.city} </span> | {profileData?.zipcode}
             </div>
             {/* <div className={styles.sidebar}>
                         <div className={styles.rating}>
                             <span className={styles.stars}>★★★★★</span>
-                            <span className={styles.ratingCount}>{reviewProfileData?.avg_rating}</span>
+                            <span className={styles.ratingCount}>{profileData?.avg_rating}</span>
                         </div>
                     </div> */}
             <div className={styles.sidebar}>
               <div className={styles.rating}>
                 <span className={styles.stars}>
                   {Array.from({ length: 5 }).map((_, index) => {
-                    const rating = reviewProfileData?.avg_rating ?? 0;
+                    const rating = profileData?.avg_rating ?? 0;
                     if (index < Math.floor(rating)) {
                       return (
                         <img
@@ -374,7 +381,7 @@ const ViewProfiles = () => {
                   })}
                 </span>
                 <span className={styles.ratingCount}>
-                  {reviewProfileData?.avg_rating}
+                  {profileData?.avg_rating}
                 </span>
               </div>
             </div>
@@ -416,25 +423,25 @@ const ViewProfiles = () => {
               <div className={styles.mailText}>
                 <img src={emailImg} alt="Email" />
                 <span>
-                  {reviewProfileData?.lead_purchased === 1
-                    ? (reviewProfileData?.company_email || reviewProfileData?.email)
-                    : maskEmail(reviewProfileData?.company_email || reviewProfileData?.email)}
+                  {profileData?.lead_purchased === 1
+                    ? (profileData?.company_email || profileData?.email)
+                    : maskEmail(profileData?.company_email || profileData?.email)}
                 </span>
               </div>
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
-                  {reviewProfileData?.lead_purchased === 1
-                  ? (reviewProfileData?.company_phone || reviewProfileData?.phone || "0000000000")
-                  : maskPhone(reviewProfileData?.company_phone || reviewProfileData?.phone || "0000000000")}
+                  {profileData?.lead_purchased === 1
+                  ? (profileData?.company_phone || profileData?.phone || "0000000000")
+                  : maskPhone(profileData?.company_phone || profileData?.phone || "0000000000")}
                 </span>
               </div>
             </>
 
-            {reviewProfileData?.company_website && (
+            {profileData?.company_website && (
               <div className={styles.mailText}>
                 <img src={profileImg} alt="" />
-                <span>{reviewProfileData?.company_website}</span>
+                <span>{profileData?.company_website}</span>
               </div>
             )}
           </div>
@@ -444,25 +451,25 @@ const ViewProfiles = () => {
           <div className={styles.tabContainerBox} ref={rightContainerRef}>
             <TabNav activeTab={activeTab} onTabClick={handleTabClick} />
             <div ref={aboutRef}>
-              <About details={reviewProfileData} />
+              <About details={profileData} />
             </div>
             <div ref={servicesRef}>
-              <Services details={reviewProfileData} />
+              <Services details={profileData} />
             </div>
             <div ref={reviewsRef}>
               <ReviewSection
-                details={reviewProfileData}
+                details={profileData}
                 disableReviewButton={shouldDisableActions}
               />
             </div>
             <div ref={accrediationRef}>
-              <Accrediations details={reviewProfileData} />
+              <Accrediations details={profileData} />
             </div>
             <div ref={quesAnsRef}>
-              <QandAns details={reviewProfileData} />
+              <QandAns details={profileData} />
             </div>
             <div ref={photoRef}>
-              <Photos details={reviewProfileData} />
+              <Photos details={profileData} />
             </div>
           </div>
         </div>
@@ -472,7 +479,7 @@ const ViewProfiles = () => {
             setOpen={isopen}
             closeModal={closeModal}
             ProfileIDs={profileId?.profileId}
-            reviewProfileData={reviewProfileData}
+            reviewProfileData={profileData}
           />
         )}
         {customerModal && (
@@ -480,7 +487,7 @@ const ViewProfiles = () => {
             <ContactSuccessModal
               onClose={() => setCustomerModal(false)}
               isOpen={customerModal}
-              detail={reviewProfileData}
+              detail={profileData}
               repliesBtn
             />
           </>
