@@ -61,7 +61,7 @@ const companySlug =
       ? viewProfileData.name.replace(/\s+/g, "-")
       : "";
 
-const randomKey = Math.random().toString(36).substring(2, 8);
+const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
 
   useEffect(() => {
     const isReview = location?.state?.review;
