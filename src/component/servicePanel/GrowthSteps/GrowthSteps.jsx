@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import styles from "./GrowthSteps.module.css";
 import { GrowthStepsData } from "../../../constant/ServicePanel";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LeadInfoModal from "./LeadStaticModal";
 
 const GrowthSteps = () => {
   
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
 
   const handleCardClick = (item) => {
     if (item?.id === 2) {
       setShowModal(true);
-    } else {
-      navigate(item.path);
     }
   };
   return (
@@ -39,12 +36,12 @@ const GrowthSteps = () => {
                 </ul>
                </div>
                 {/* <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button> */}
-                <button
+                <Link style={{textDecoration:'none',textAlign:'center'}} to={(item.id==1 || item.id==3) ? item.path:'#'}
                   className={styles.button}
                   onClick={() => handleCardClick(item)}
                 >
                   {item.button}
-                </button>
+                </Link>
               </div>
             ))}
           </div>

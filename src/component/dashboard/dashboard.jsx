@@ -171,23 +171,25 @@ const Dashboard = () => {
                 <a className={styles["view-leads-blue"]} href="#">
                   View 76 Live Leads Now - Start winning jobs now*
                 </a>
-                <a href="/#/sellers/leads" className={styles["view-leads-black"]}>
+                <button className={styles["view-leads-black"]}>
                   View 1061 live leads
-                </a>
+                </button>
 
                 <div className={styles["info-box"]}>
                   <h4>
                     How much do{" "}
-                    <a href="#" className={styles.textColor}>
+                    {/* <a href="#" className={styles.textColor}>
                       Localists.com
-                    </a>{" "}
+                    </a>{" "} */}
+                    <span className={styles.textColor}> Localists.com </span>
                     charge for leads?
                   </h4>
                   <p>
                     Getting leads on{" "}
-                    <a href="#" className={styles.textColor}>
+                    {/* <a href="#" className={styles.textColor}>
                       Localists.com
-                    </a>{" "}
+                    </a>{" "} */}
+                    <span className={styles.textColor}>Localists.com </span>
                     is completely free — you only pay when you choose to contact
                     a customer you're interested in. All our leads are priced in
                     credits, depending on the sector, location and the specific

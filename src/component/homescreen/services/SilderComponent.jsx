@@ -7,7 +7,7 @@ import SpecificService from "./SpecificService";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function AutoplayPlugin(slider) {
   let timeout;
@@ -99,8 +99,8 @@ const SliderComponent = ({ subcategory ,categoryName }) => {
       </button>
       </div>
       
-      <div onClick={()=>{categoryName ==="House & Home" && navigate('/en/gb/home')}} className={styles.viewAllBtnBox}>
-        <button className={styles.viewAllBtn}>View All </button>
+      <div  className={styles.viewAllBtnBox}>
+        <Link style={{textDecoration:'none'}} to={categoryName ==="House & Home" && '/en/gb/home'} className={styles.viewAllBtn}>View All </Link>
         </div>
       </>)}
      

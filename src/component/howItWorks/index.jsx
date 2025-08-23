@@ -8,7 +8,7 @@ const HowItWorks = () => {
   return (
     <>
       <Helmet>
-        <title> How It Works for Sellers - Localists</title>
+        <title> How It Works for Customers - Localists</title>
         <meta
           name="description"
           content="Learn how Localists connect you with ready-to-hire customers in your

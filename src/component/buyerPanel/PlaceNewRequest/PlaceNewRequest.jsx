@@ -143,8 +143,9 @@ console.log('selectService',selectedService);
 
 
                 </div>
+                <div style={{marginTop:16}}>
               {req?.status === "hired" ? "" : 
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px", marginTop:'16px' }}>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px" }}>
                 <div style={{ cursor: "pointer" }} onClick={() => handleClose(req.id)}>
                 Close Request
                 </div>
@@ -156,6 +157,7 @@ console.log('selectService',selectedService);
                 </div>
                 </div>
 }
+              </div>
               </div>
             ))}
         </div>
