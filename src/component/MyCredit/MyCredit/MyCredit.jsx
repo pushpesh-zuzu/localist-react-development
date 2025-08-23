@@ -295,17 +295,34 @@ const MyCredits = () => {
           ) : (
             creditPlanList?.map((item, index) => (
               <div className={styles.card} key={index}>
-                {item?.plan_type !== "normal" ? (
+                {/* {item?.plan_type !== "normal" ? (
                   <button className={styles.badge}>
                     {item.description}
                     <img src={airoImg} alt="..." />{" "}
                   </button>
                 ) : (
                   <button className={styles.badge}>{item.description}</button>
+                )} */}
+
+                {item?.plan_type !== "normal" ? (
+                  <button className={styles.badge}>
+                    {item?.description && item?.description.trim() !== ""
+                      ? item.description
+                      : item.name}
+                    <img src={airoImg} alt="..." />
+                  </button>
+                ) : (
+                  <button className={styles.badge}>
+                    {item?.description && item?.description.trim() !== ""
+                      ? item.description
+                      : item.name}
+                  </button>
                 )}
                 <div className={styles.titleBar}>
                   <div className={styles.btnBox}>
-                    <button className={styles.response}>{item?.slug}</button>
+                    <button className={styles.response}>
+                      {item?.no_of_responses} Responses
+                    </button>
                     <div className={styles.creditsBox}>
                       {item?.no_of_leads} credits
                     </div>
