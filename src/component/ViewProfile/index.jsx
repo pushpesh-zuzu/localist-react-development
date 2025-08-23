@@ -147,6 +147,7 @@ const ViewProfiles = () => {
   const [customerModal, setCustomerModal] = useState(false);
   const dispatch = useDispatch();
   const profileId = useParams();
+  const {company_name } = useParams()
   const SellerId = useParams();
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
@@ -163,7 +164,7 @@ const ViewProfiles = () => {
     (service) => service?.user_services?.name
   );
  
-  console.log(profileData,'profileDataprofileDataprofileDataprofileData')
+  // console.log(profileData,'profileDataprofileDataprofileDataprofileData')
   // const profileData ={}
   const servicesArray = profileData?.services || [];
   const serviceNames = servicesArray
@@ -250,7 +251,7 @@ const ViewProfiles = () => {
 
   useEffect(() => {
     const sellerData = {
-      seller_id: profileId?.sellerId,
+      seller_id: company_name ? company_name : profileId?.sellerId,
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
