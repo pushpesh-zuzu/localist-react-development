@@ -256,6 +256,7 @@ const ReviewSection = ({
           ProfileIDs={profileId?.profileId}
           reviewsData={details}
           onReviewSubmit={fetchReviews}
+          viewProfileData={details}
         />
       )}
     </>

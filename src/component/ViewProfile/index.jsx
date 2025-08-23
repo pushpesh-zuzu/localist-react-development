@@ -469,6 +469,7 @@ const ViewProfiles = () => {
             setOpen={isopen}
             closeModal={closeModal}
             ProfileIDs={profileId?.profileId}
+            viewProfileData={viewProfileData}
           />
         )}
         {customerModal && (
