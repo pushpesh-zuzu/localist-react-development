@@ -73,7 +73,6 @@ const Footer = () => {
   };
   const { userToken } = useSelector((state) => state.auth);
 
-  console.log('user_type',userToken?.user_type);
  
   const { registerToken } = useSelector((state) => state.findJobs);
 

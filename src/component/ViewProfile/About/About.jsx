@@ -7,7 +7,6 @@ import localistHireImg from "../../../assets/Images/Setting/localistHireImg.svg"
 import responseTimeImg from "../../../assets/Images/Setting/responseTimeImg.svg";
 
 const About = ({details}) => {
-    console.log(details,"details")
     const data = [
         // {
         //     title: "Elite Pro",

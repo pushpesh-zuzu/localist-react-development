@@ -15,6 +15,7 @@ const SubmitReviewModal = ({
   ProfileIDs,
   reviewsData,
   onReviewSubmit,
+  reviewProfileData,
 }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -112,7 +113,7 @@ const SubmitReviewModal = ({
         <div className={styles.closeButton} onClick={closeModal}>
           X
         </div>
-        <h2>Rate your experience with Resolve Energy Ltd</h2>
+        <h2>Rate your experience with { reviewProfileData?.company_name || reviewProfileData?.name }</h2>
         <div className={styles.ratingSection}>
           <span>Click to rate :</span>
           {[...Array(5)].map((_, index) => {

@@ -20,7 +20,7 @@ const [selected, setSelected] = useState("");
 console.log('Lead', sellerId);
     const handleSubmit = () => {
     if (!sellerId && sellerId !== "someone_else") {
-      showToast("error", "Please select any of the option");
+      showToast("error", "Please select option");
       return; // stop submit
     }
 
@@ -32,13 +32,13 @@ console.log('Lead', sellerId);
     disclose_information: disclose ? 1 : 0
       }
       dispatch(closeRequestData(data)).then((result) => {
-        if (result?.success) {
-          showToast("success", result?.message);
-          navigate("/buyers/create")
-        }
+        // if (result?.success) {
+        //   showToast("success", result?.message);
+        //   navigate("/buyers/create")
+        // }
       }
       );
-// setIsModalOpen(true);
+    setIsModalOpen(true);
     }
     const handleBack = () => {
         navigate(-1);

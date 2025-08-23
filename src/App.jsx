@@ -85,7 +85,7 @@ function App() {
         
         if (params) {
           navigator.sendBeacon(
-            "https://dev.localists.com/admin/api/users/registration",
+             `${import.meta.env.VITE_REACT_APP_API_BASE_URL}users/registration`,
             params
           );
         }

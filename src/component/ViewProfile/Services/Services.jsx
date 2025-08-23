@@ -16,7 +16,6 @@ const service = [
 ];
 
 const Services = ({details}) => {
-  console.log(details?.services,"de")
   const data = details?.services;
   const [openIndex, setOpenIndex] = useState(0);
 

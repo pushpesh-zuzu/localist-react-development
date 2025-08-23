@@ -42,7 +42,7 @@ const userData = userToken?.user_id || userToken?.id || registerData?.user_id ||
          }, [autoBidListData]);
    const handleNext = () => {
     if (!selected && selected !== "someone_else") {
-      showToast("error", "Please select any of the option");
+      showToast("error", "Please select option");
       return; // stop submit
     }
    

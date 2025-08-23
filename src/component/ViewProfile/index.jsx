@@ -133,7 +133,7 @@ import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
-import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
+import { addViewProfileList, ReviewProfile } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../utils";
 import starImg from "../../assets/Icons/MyResponse/StarImg.svg";
@@ -152,11 +152,20 @@ const ViewProfiles = () => {
   const shouldDisableActions = requestId?.requestId;
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const { viewProfileData } = useSelector((state) => state.leadSetting);
-  const serviceCount = viewProfileData?.services?.filter(
+
+    const { reviewProfileData } = useSelector((state) => state.leadSetting);
+      const { viewProfileData } = useSelector((state) => state.leadSetting);
+ 
+  const profileData = Object.keys(viewProfileData || {}).length > 0
+  ? viewProfileData
+  : reviewProfileData;
+      const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
-  const servicesArray = viewProfileData?.services || [];
+ 
+  console.log(profileData,'profileDataprofileDataprofileDataprofileData')
+  // const profileData ={}
+  const servicesArray = profileData?.services || [];
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
     .filter(Boolean);
@@ -245,6 +254,7 @@ const ViewProfiles = () => {
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
+    dispatch(ReviewProfile(profileId?.profileId))
     dispatch(addViewProfileList(sellerData));
   }, []);
   const handleRequestOpen = () => {
@@ -269,10 +279,10 @@ const ViewProfiles = () => {
           <div className={styles.backBtnWrapper}>
             {/* <img
           src={
-            viewProfileData?.company_logo
-              ? `${BASE_IMAGE}/users/${viewProfileData?.company_logo}`
-              : viewProfileData?.profile_image
-                ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}`
+            profileData?.company_logo
+              ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
+              : profileData?.profile_image
+                ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
                 : DEFAULT_PROFILE_IMAGE
           }
           alt="Profile"
@@ -300,10 +310,10 @@ const ViewProfiles = () => {
 >
 <img
   src={
-    viewProfileData?.company_logo
-      ? `${BASE_IMAGE}/users/${viewProfileData?.company_logo}`
-      : viewProfileData?.profile_image
-        ? `${BASE_IMAGE}/users/${viewProfileData?.profile_image}`
+    profileData?.company_logo
+      ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
+      : profileData?.profile_image
+        ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
         : DEFAULT_PROFILE_IMAGE
         }
         alt="Profile"
@@ -321,22 +331,22 @@ const ViewProfiles = () => {
 
           </div>
           <div className={styles.viewDetails}>
-            <h2>{viewProfileData?.company_name || viewProfileData?.name}</h2>
+            <h2>{profileData?.company_name || profileData?.name}</h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
-              <span>{viewProfileData?.city} </span> | {viewProfileData?.zipcode}
+              <span>{profileData?.city} </span> | {profileData?.zipcode}
             </div>
             {/* <div className={styles.sidebar}>
                         <div className={styles.rating}>
                             <span className={styles.stars}>★★★★★</span>
-                            <span className={styles.ratingCount}>{viewProfileData?.avg_rating}</span>
+                            <span className={styles.ratingCount}>{profileData?.avg_rating}</span>
                         </div>
                     </div> */}
             <div className={styles.sidebar}>
               <div className={styles.rating}>
                 <span className={styles.stars}>
                   {Array.from({ length: 5 }).map((_, index) => {
-                    const rating = viewProfileData?.avg_rating ?? 0;
+                    const rating = profileData?.avg_rating ?? 0;
                     if (index < Math.floor(rating)) {
                       return (
                         <img
@@ -371,7 +381,7 @@ const ViewProfiles = () => {
                   })}
                 </span>
                 <span className={styles.ratingCount}>
-                  {viewProfileData?.avg_rating}
+                  {profileData?.avg_rating}
                 </span>
               </div>
             </div>
@@ -413,25 +423,25 @@ const ViewProfiles = () => {
               <div className={styles.mailText}>
                 <img src={emailImg} alt="Email" />
                 <span>
-                  {viewProfileData?.lead_purchased === 1
-                    ? (viewProfileData?.company_email || viewProfileData?.email)
-                    : maskEmail(viewProfileData?.company_email || viewProfileData?.email)}
+                  {profileData?.lead_purchased === 1
+                    ? (profileData?.company_email || profileData?.email)
+                    : maskEmail(profileData?.company_email || profileData?.email)}
                 </span>
               </div>
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
-                  {viewProfileData?.lead_purchased === 1
-                  ? (viewProfileData?.company_phone || viewProfileData?.phone || "0000000000")
-                  : maskPhone(viewProfileData?.company_phone || viewProfileData?.phone || "0000000000")}
+                  {profileData?.lead_purchased === 1
+                  ? (profileData?.company_phone || profileData?.phone || "0000000000")
+                  : maskPhone(profileData?.company_phone || profileData?.phone || "0000000000")}
                 </span>
               </div>
             </>
 
-            {viewProfileData?.company_website && (
+            {profileData?.company_website && (
               <div className={styles.mailText}>
                 <img src={profileImg} alt="" />
-                <span>{viewProfileData?.company_website}</span>
+                <span>{profileData?.company_website}</span>
               </div>
             )}
           </div>
@@ -441,25 +451,25 @@ const ViewProfiles = () => {
           <div className={styles.tabContainerBox} ref={rightContainerRef}>
             <TabNav activeTab={activeTab} onTabClick={handleTabClick} />
             <div ref={aboutRef}>
-              <About details={viewProfileData} />
+              <About details={profileData} />
             </div>
             <div ref={servicesRef}>
-              <Services details={viewProfileData} />
+              <Services details={profileData} />
             </div>
             <div ref={reviewsRef}>
               <ReviewSection
-                details={viewProfileData}
+                details={profileData}
                 disableReviewButton={shouldDisableActions}
               />
             </div>
             <div ref={accrediationRef}>
-              <Accrediations details={viewProfileData} />
+              <Accrediations details={profileData} />
             </div>
             <div ref={quesAnsRef}>
-              <QandAns details={viewProfileData} />
+              <QandAns details={profileData} />
             </div>
             <div ref={photoRef}>
-              <Photos details={viewProfileData} />
+              <Photos details={profileData} />
             </div>
           </div>
         </div>
@@ -469,6 +479,7 @@ const ViewProfiles = () => {
             setOpen={isopen}
             closeModal={closeModal}
             ProfileIDs={profileId?.profileId}
+            reviewProfileData={profileData}
           />
         )}
         {customerModal && (
@@ -476,7 +487,7 @@ const ViewProfiles = () => {
             <ContactSuccessModal
               onClose={() => setCustomerModal(false)}
               isOpen={customerModal}
-              detail={viewProfileData}
+              detail={profileData}
               repliesBtn
             />
           </>

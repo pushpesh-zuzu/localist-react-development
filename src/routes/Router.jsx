@@ -1,4 +1,4 @@
-import { createHashRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
@@ -54,7 +54,7 @@ import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 //test en/gb/bookkeeping-services/
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -352,14 +352,6 @@ const router = createHashRouter([
         element: (
           <ProtectedRoute>
             <MyPaymentDetails />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/view-profile/:company_name/:requestId",
-        element: (
-          <ProtectedRoute>
-            <ViewProfiles />
           </ProtectedRoute>
         ),
       },

@@ -119,7 +119,7 @@ const HiredProfessional = ({ closeModal,serviceId }) => {
     }
 
     if (!selected && selected !== "someone_else") {
-          showToast("error", "Please select any of the option");
+          showToast("error", "Please select option");
           return; // stop submit
     }
     
