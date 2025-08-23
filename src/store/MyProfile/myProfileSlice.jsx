@@ -201,7 +201,7 @@ export const updateSellerPhotos = createAsyncThunk(
       }
 
       const response = await axiosInstance.post(
-        `${baseURL}api/users/update-seller-profile`,
+        `${baseURL}users/update-seller-profile`,
         body,
         {
           headers: {
@@ -238,7 +238,7 @@ export const updateSellerSocialLinks = createAsyncThunk(
       });
 
       const response = await axiosInstance.post(
-        `${baseURL}api/users/update-seller-profile`,
+        `${baseURL}users/update-seller-profile`,
         body,
         {
           headers: {
@@ -283,7 +283,7 @@ export const updateSellerAccreditations = createAsyncThunk(
       }
 
       const response = await axiosInstance.post(
-        `${baseURL}api/users/update-seller-profile`,
+        `${baseURL}users/update-seller-profile`,
         formData,
         {
           headers: {
@@ -351,7 +351,7 @@ export const updateSellerQandA = createAsyncThunk(
       });
 
       const response = await axiosInstance.post(
-        `${baseURL}api/users/seller-myprofile-qa`,
+        `${baseURL}users/seller-myprofile-qa`,
         formData,
         {
           headers: {
@@ -378,7 +378,7 @@ export const updateFacebookReviewLink = createAsyncThunk(
       formData.append("accre_name", ""); // backend expects it to exist
 
       const response = await axiosInstance.post(
-        `${baseURL}api/users/update-seller-profile`,
+        `${baseURL}users/update-seller-profile`,
         formData
       );
 
