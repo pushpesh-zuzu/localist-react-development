@@ -262,7 +262,7 @@ const MyCredits = () => {
       <div className={styles.container}>
         <div className={styles.backText} onClick={handleBack}>
           {" "}
-          <img src={blackArrow} alt="..." /> Setting
+          <img src={blackArrow} alt="..." /> Settings
         </div>
         <h1 className={styles.heading}>My credits</h1>
 
