@@ -151,7 +151,7 @@ console.log('selectService',selectedService);
 
                 <div >|</div>
 
-                <div className={styles.tags} onClick={() => openHiredModal(req.id)}>
+                <div className={styles.tags} style={{ marginTop: "0px" }} onClick={() => openHiredModal(req.id)}>
                 Hired Professional
                 </div>
                 </div>
