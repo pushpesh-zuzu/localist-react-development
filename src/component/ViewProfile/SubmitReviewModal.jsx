@@ -169,7 +169,7 @@ const SubmitReviewModal = ({
             <textarea
               name="review"
               className={styles.textarea}
-              placeholder="What stood out? What worked well? Why did you choose this rating? Describe what it was like working with Resolve Energy Ltd and the reasoning behind your rating."
+              placeholder="What stood out? What worked well? Why did you choose this rating?"
               rows="5"
               value={formData.review}
               onChange={handleChange}
