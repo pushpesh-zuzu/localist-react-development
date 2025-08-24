@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { updateSellerPhotos, clearPhotoUpdateStatus } from "../../../store/MyProfile/myProfileSlice";
 import AddYoutubeModal from "./AddYoutubeModal";
 import { baseURL } from "../../../Api/axiosInstance";
+import { BASE_IMAGE } from "../../../utils";
 const PhotosAccordion = ({details}) => {
   const dispatch = useDispatch();
   const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector((state) => state.myProfile);
@@ -189,10 +190,9 @@ console.log(details,"details")
       ? details.company_photos.split(",").map((item) => item.trim())
       : [];
 
-   const BASE_IMAGE = `${baseURL}storage/app/public/images/users`;
 
     const previews = photoFilenames.map(
-      (filename) => `${BASE_IMAGE}/${filename}`
+      (filename) => `${BASE_IMAGE}/users/${filename}`
     );
 
     setFormState((prev) => ({
