@@ -248,10 +248,10 @@ const ViewProfiles = () => {
     container?.addEventListener("scroll", handleScroll);
     return () => container?.removeEventListener("scroll", handleScroll);
   }, []);
-
+  
   useEffect(() => {
     const sellerData = {
-      seller_id: company_name ? company_name : profileId?.sellerId,
+      seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
