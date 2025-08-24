@@ -23,10 +23,11 @@ import styles from "./Photos.module.css";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import paginationImg from "../../../assets/Icons/MyResponse/paginationImg.svg";
 import leftpaginationImg from "../../../assets/Icons/MyResponse/rightPagenationImg.svg";
+import { BASE_IMAGE, BASE_IMAGE_URL } from "../../../utils";
 import { baseURL } from "../../../Api/axiosInstance";
 
-// ✅ Correct base URL
-const BASE_IMAGE = `${baseURL}/storage/app/public/images/users`;
+// // ✅ Correct base URL
+// const BASE_IMAGE = `${baseURL}/storage/app/public/images/users`;
 
 const Photos = ({ details }) => {
   // ✅ Access company_photos string
@@ -42,7 +43,7 @@ const Photos = ({ details }) => {
           photoArray.map((img, index) => (
             <img
               key={index}
-              src={`${BASE_IMAGE}/${img.trim()}`}
+              src={`${BASE_IMAGE}/users/${img.trim()}`}
               alt={`Company Photo ${index + 1}`}
               className={styles.profileImg}
             />

@@ -2,7 +2,7 @@ import React from "react"
 import styles from "./Accrediations.module.css"
 import iIcon from "../../../assets/Images/iIcon.svg";
 import IMG from "../../../assets/Images/Setting/newAccoredationImg.svg"
-import { BASE_IMAGE_URL } from "../../../utils";
+import { BASE_IMAGE, BASE_IMAGE_URL } from "../../../utils";
 import { baseURL } from "../../../Api/axiosInstance";
 
 const Accrediations = ({ details }) => {
@@ -30,7 +30,7 @@ const Accrediations = ({ details }) => {
           <div key={index} className={styles.accrediationsBoxContainer}>
             <div>
               <img
-                src={item?.image ? `${baseURL}${"storage/app/public/images/accreditations"}/${item.image}` : IMG}
+                src={item?.image ? `${BASE_IMAGE}/accreditations/${item.image}` : IMG}
                 alt="accrediation"
                 className={styles.accrediationImage}
                 width={93}
