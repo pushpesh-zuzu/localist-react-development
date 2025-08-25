@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Form, Input } from "antd";
 import styles from "./customeInput.module.css";
 
-const TextInput = ({ label, name, type = "text", rules, required = true }) => {
+const TextInput = ({ label, name, type = "text", rules, required = true, ...rest }) => {
   const defaultRules = [
     { required: true, message: `${label} is required!` },
     ...(type === "email"
@@ -31,6 +31,7 @@ const TextInput = ({ label, name, type = "text", rules, required = true }) => {
           type={type}
           placeholder={`Enter ${label}`}
           className={styles.inputFiled}
+          {...rest} 
         />
       )}
     </Form.Item>
