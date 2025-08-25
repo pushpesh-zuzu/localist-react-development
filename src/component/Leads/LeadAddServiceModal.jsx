@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styles from "./AddServiceModal.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import iIcon from "../../assets/Images/iIcon.svg";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+
+
 
 const AddServiceModal = ({
   isModalOpen,
@@ -18,8 +20,12 @@ const AddServiceModal = ({
   handleSubmitData,
   selectedServices,
   handleRemoveService,
+  popularList = [],
 }) => {
-  const { popularList } = useSelector((state) => state.findJobs);
+ 
+  const dispatch = useDispatch();
+  
+
 
   if (!isModalOpen) return null;
 
