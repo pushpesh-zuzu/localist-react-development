@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_IMAGE_URL, showToast, updateLocalStorageValue } from "../../utils";
 import { setUserToken } from "../../store/Auth/authSlice";
 import { setRegisterData } from "../../store/FindJobs/findJobSlice";
@@ -254,9 +254,9 @@ const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
  <div >If you no longer need the service, please remember to close your request.</div>
 </div>
           </p>
-          <button className={styles.requestButton} onClick={hanldeRequest}>
+          <Link className={styles.requestButton} to='/buyers/create'>
             Go to My Requests
-          </button>
+          </Link>
         </div>
       {/* // )} */}
 

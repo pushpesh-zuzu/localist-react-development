@@ -235,7 +235,7 @@ if(apicontion){
 dispatch(registerUserData(payload)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message || "Register successful!");
-        navigate("/leads");
+        navigate("/sellers/leads");
         dispatch(setService());
          dispatch(setRegisterStep(0));
          dispatch(clearCompanyData())

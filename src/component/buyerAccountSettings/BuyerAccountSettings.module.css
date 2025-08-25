@@ -51,6 +51,7 @@
   align-items: center;
 }
 .requestButton {
+  text-decoration: none;
   background: var(--primary-color);
   color: #ffffff;
   border: none;
@@ -60,6 +61,7 @@
   margin-top: 20px;
   align-self: flex-start;
   margin-left: 20px;
+  font-size: 13.5px;
 }
 .requestButton:hover {
   background-color: #0096c4;
