@@ -71,6 +71,11 @@ const SubLocation = () => {
           name={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation]?.name}
           content={CONTENT_LEVEL5_CONFIG_META[service]?.[subLocation]?.content}
         />
+         <link
+          rel="preload"
+          href={BannerImageLevel5[service]?.[subLocation]}
+          as="image"
+        />
       </Helmet>
       <AccountantInLocation
        bgImage={BannerImageLevel5[service]?.[subLocation]}

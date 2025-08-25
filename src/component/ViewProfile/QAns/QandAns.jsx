@@ -34,10 +34,10 @@ const data = details?.qa
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{borderBottom:'1px solid #eee', marginBottom:'12px'}}>
       <h2>Q+A's</h2>
       {data?.map((item, index) => (
-        <div key={index} className={styles.faqItem}>
+        <div key={index} className={styles.faqItem} >
           <div className={styles.question} onClick={() => toggleIndex(index)}>
         {item.questions}
                <img src={ProfileArrowUp} alt="arrow" className={`${styles.arrow} ${openIndex === index ? styles.up : styles.down}`} />
