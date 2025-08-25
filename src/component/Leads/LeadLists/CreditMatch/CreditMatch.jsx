@@ -155,7 +155,7 @@ const CreditMatch = () => {
                   </div>
                   <div className={styles.usageInfo}>
                     <span className={styles.usageText}>
-                      {item?.description ? item?.description : "20% OFF"}
+                      {item?.description ? item?.description : item?.name}
                     </span>
                   </div>
                 </div>
