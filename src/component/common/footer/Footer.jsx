@@ -297,7 +297,7 @@ const Footer = () => {
 
       <div className={styles.footerBottom}>
         <p>
-          © 2025 Localist. Terms & Conditions / Cookie policy / Privacy policy
+          © 2025 Localists. Terms & Conditions / Cookie policy / Privacy policy
         </p>
 
         <div className={styles.trustpilotMobile}>

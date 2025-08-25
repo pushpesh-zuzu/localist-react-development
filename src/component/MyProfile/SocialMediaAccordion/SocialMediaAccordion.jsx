@@ -184,14 +184,17 @@ const platforms = [
   { key: "twitter_link", label: "Twitter", placeholder: "https://twitter.com/yourhandle" },
   { key: "tiktok_link", label: "Tik Tok", placeholder: "https://www.tiktok.com/@yourname" },
   { key: "insta_link", label: "Instagram", placeholder: "https://www.instagram.com/yourhandle" },
-  { key: "linkedin_link", label: "Linkedin", placeholder: "https://www.linkedin.com/in/yourname" },
+  // { key: "linkedin_link", label: "Linkedin", placeholder: "https://www.linkedin.com/in/yourname" },
+    { key: "linkedin_link", label: "Linkedin", placeholder: "https://uk.linkedin.com/in/yourname" },
+
 ];
 
 const urlPatterns = {
   fb_link: /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9_.-]+$/,
   twitter_link: /^(https?:\/\/)?(www\.)?twitter\.com\/[A-Za-z0-9_]+$/,
   insta_link: /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9_.]+$/,
-  linkedin_link: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+$/,
+  // linkedin_link: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+$/,
+  linkedin_link: /^(https?:\/\/)?(uk\.)linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/,
   tiktok_link: /^(https?:\/\/)?(www\.)?tiktok\.com\/@[A-Za-z0-9_.-]+$/,
 };
 
