@@ -246,7 +246,6 @@ const ViewProfiles = () => {
     container?.addEventListener("scroll", handleScroll);
     return () => container?.removeEventListener("scroll", handleScroll);
   }, []);
-  console.log(SellerId,'SellerIdSellerId')
   useEffect(() => {
     const sellerData = {
       // seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
