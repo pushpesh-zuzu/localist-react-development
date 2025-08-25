@@ -132,14 +132,28 @@ console.log(postalCode,lat,lng,'postalCode')
     dispatch(setService([]));
   };
   
-
   const handleRemoveService = (id) => {
-    dispatch(
-      setselectedServices(
-        selectedServices?.filter((service) => service.id !== id)
-      )
-    );
-  };
+  const updated = selectedServices?.filter((service) => service.id !== id);
+
+  dispatch(setselectedServices(updated));
+
+  // ✅ If no services left, reset postcode
+  if (updated.length === 0) {
+    setFormData((prev) => ({
+      ...prev,
+      postcode2: "", // clear postcode2
+    }));
+  }
+};
+
+
+  // const handleRemoveService = (id) => {
+  //   dispatch(
+  //     setselectedServices(
+  //       selectedServices?.filter((service) => service.id !== id)
+  //     )
+  //   );
+  // };
   const validateForm = () => {
     let newErrors = {};
 
