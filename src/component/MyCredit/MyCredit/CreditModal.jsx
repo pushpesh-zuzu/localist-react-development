@@ -338,6 +338,7 @@ import AddCardModal from "../../MyCredit/MyPaymentDetails/AddCardModal";
 
 const CreditModal = ({ onClose }) => {
   const [creditValue, setCreditValue] = useState(50);
+  const [responseValue, setResponseValue] = useState(50);
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -345,7 +346,7 @@ const CreditModal = ({ onClose }) => {
   const dispatch = useDispatch();
 
   // Mapping of credits → responses
-  const creditToResponseMap = {
+  const responseToCreditMap = {
     50: 950,
     60: 1140,
     70: 1330,
@@ -366,7 +367,7 @@ const CreditModal = ({ onClose }) => {
 
   // Always reset credit value when modal opens
   useEffect(() => {
-    setCreditValue(50); // ✅ Default value = 50 when modal opens
+    setCreditValue(50); //  Default value = 50 when modal opens
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
@@ -376,17 +377,16 @@ const CreditModal = ({ onClose }) => {
   // ✅ Restrict slider from going below 50
   const handleSliderChange = (e) => {
     let value = Number(e.target.value);
-
-    // Agar 50 se neeche jata hai toh 50 pe lock kar do
     if (value < 50) {
       value = 50;
     }
-    setCreditValue(value);
+    setResponseValue(value);
   };
 
   const customHeigth = useWindowHeight();
-  const responseEstimate = creditToResponseMap[creditValue] || 0;
-  const price = Math.trunc(creditValue * 1.45);
+  // const responseEstimate = creditToResponseMap[creditValue] || 0;
+  const credits = responseToCreditMap[responseValue] || 0;
+  const price = Math.trunc(credits * 1.45);
 
   const getSliderBackground = (value, min, max) => {
     const percentage = ((value - min) / (max - min)) * 100;
@@ -452,9 +452,9 @@ const CreditModal = ({ onClose }) => {
           </div>
 
           <div className={styles.infoBar}>
-            <span className={styles.credits}>Credits: {creditValue}</span>
+            <span className={styles.credits}>Credits: {credits}</span>
             <span className={styles.responses}>
-              Responses: Approximately {responseEstimate}
+              Responses: Approximately {responseValue}
             </span>
             <span className={styles.cost}>Cost: £{price} (ex VAT)</span>
           </div>
@@ -470,11 +470,11 @@ const CreditModal = ({ onClose }) => {
               min="0" // ✅ 0 is visible on slider
               max="200"
               step="10"
-              value={creditValue}
+              value={responseValue}
               onChange={handleSliderChange}
               className={styles.slider}
               style={{
-                background: getSliderBackground(creditValue, 0, 200),
+                background: getSliderBackground(responseValue, 0, 200),
               }}
             />
             <div className={styles.sliderMarkers}>
