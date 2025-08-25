@@ -105,18 +105,29 @@ const LogoComponent = () => {
       dispatch(getAllServiceList());
     }
   }, []);
-  const handleRedirectUrl = () => {
+  // const handleRedirectUrl = () => {
+  //   const status = registerData?.active_status || userToken?.active_status;
+
+  //   if (status == 1) {
+  //     navigate("/sellers/leads");
+  //   } else if (status == 2) {
+  //     navigate("/buyers/create");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+
+  const getRedirectPath = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
-    if (status == 1) {
-      navigate("/sellers/leads");
-    } else if (status == 2) {
-      navigate("/buyers/create");
-    } else {
-      navigate("/");
-    }
-  };
-
+  if (status == 1) {
+    return "/sellers/leads";
+  } else if (status == 2) {
+    return "/buyers/create";
+  } else {
+    return "/";
+  }
+};
   const [placement, setPlacement] = useState("bottomLeft");
 
   useEffect(() => {
@@ -366,15 +377,16 @@ const LogoComponent = () => {
       </div>
     );
   };
-
+const redirectPath = getRedirectPath();
   return (
     <div className={styles.logoContainer}>
+     <Link to={redirectPath}>
       <img
         src={logo}
         alt="logo"
         className={styles.mainLogo}
-        onClick={handleRedirectUrl}
       />
+</Link>
       {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
         !isAccountPage &&
         !isNotification && (

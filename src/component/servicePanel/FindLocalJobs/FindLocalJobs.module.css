@@ -108,6 +108,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  color:var(--text-color);
 }
 
 .serviceItem img {
@@ -120,8 +121,9 @@
   font-size: 15px;
 }
 
-.serviceItem:hover {
+.serviceName:hover{
   color: var(--primary-color);
+
 }
 
 .searchResults {
