@@ -293,7 +293,7 @@ const CardPaymentForm = ({
               indicator={<LoadingOutlined spin style={{ color: "white" }} />}
             />
           ) : (
-            "Card details"
+            "Add card"
           )}
         </button>
       </div>
