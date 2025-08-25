@@ -430,7 +430,7 @@ const CreditModal = ({ onClose }) => {
         onClose();
         setTimeout(() => {
           window.location.reload();
-        }, 1500);
+        }, 1200);
       } else if (result?.success === false) {
         setIsAddModalOpen(true);
       }
