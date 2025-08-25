@@ -921,18 +921,13 @@ const BidsList = ({ previousStep }) => {
     <>
       <div className={styles.container}>
         {bidListLoader ? (
-          <><div className={styles.loaderWrapper}>
-            <Spin
-              size="large"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "300px",
-              }} />
+          <div className={styles.loaderWrapper}>
+          <div className={styles.centeredContent}>
+            <Spin size="large" />
+            <span className={styles.loadingText}>{loadingTextInfo[index]}</span>
           </div>
-          <div style={{textAlign:'center'}}><span>{loadingTextInfo[index]}</span></div>
-          </>
+        </div>
+
         ) : (
           <>
             <div className={styles.headerWrapper}>

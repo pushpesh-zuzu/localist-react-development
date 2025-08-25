@@ -3,7 +3,25 @@
   position: relative;
   /* width: 100%; */
 }
+.loaderWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
 
+.centeredContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px; /* This creates 25px vertical space between spinner and text */
+}
+
+.loadingText {
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-color);
+}
 .backBtnWrapper {
   display: flex;
   justify-content: space-between;
