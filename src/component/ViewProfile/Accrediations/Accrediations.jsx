@@ -42,18 +42,19 @@ const Accrediations = ({ details }) => {
         ))
       ) : (
 
-        <div className={styles.accrediationsBoxContainer}>
-          <div>
-            <img
-              src={IMG}
-              alt="default accrediation"
-              className={styles.accrediationImage}
-              width={93}
-              height={93}
-            />
-          </div>
-          <div className={styles.accrediationsBox}>NO Text</div>
-        </div>
+        // <div className={styles.accrediationsBoxContainer}>
+        //   <div>
+        //     <img
+        //       src={IMG}
+        //       alt="default accrediation"
+        //       className={styles.accrediationImage}
+        //       width={93}
+        //       height={93}
+        //     />
+        //   </div>
+        //   <div className={styles.accrediationsBox}>NO Text</div>
+        // </div>
+        ''
       )}
       <div className={styles.infoBox}>
         <span className={styles.infoIcon}>

@@ -222,6 +222,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     show: false,
     service_id: null,
     nation_wide: null,
+    miles:null
   });
 
   console.log(setEditLocationId, "selectedTravelLocation");
@@ -424,6 +425,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       show: true,
       service_id: id?.postcode,
       nation_wide: id?.nation_wide,
+      miles:id?.miles
     });
   };
 
@@ -443,6 +445,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       // service_id: ids.join(),
       postcode: removeModal?.service_id,
       nation_wide: removeModal?.nation_wide,
+      miles: removeModal?.miles
       // user_service_id:locationRemoveId
     };
     console.log(removeData, "removeData");
