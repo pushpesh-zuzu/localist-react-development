@@ -42,6 +42,7 @@ const AboutAccordion = ({ details }) => {
     companyData?.registered_office_address?.address_line_1,
     "companyNameData"
   );
+
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
@@ -122,7 +123,7 @@ const AboutAccordion = ({ details }) => {
         company_name: details?.company_name,
         name: details?.name,
         company_website: details?.company_website,
-        company_location: details?.company_location,
+        company_location: details?.address,
         company_locaion_reason: details?.company_locaion_reason,
         company_size: details?.company_size,
         company_total_years: details?.company_total_years,
