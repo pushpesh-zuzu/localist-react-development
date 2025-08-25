@@ -2,7 +2,7 @@ import styles from './cards.module.css';
 import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 //redeploy work
 const DashboardCards = ({data}) => {
   const navigate = useNavigate()
@@ -49,7 +49,7 @@ const DashboardCards = ({data}) => {
   <div className={`${styles.card} ${styles["lead-settings"]}`}>
   <h3 className={styles["card-title"]}>Lead settings</h3>
   <div className={styles["sub-label"]}>
-    Services <span className={styles["edit-link"]} onClick={()=>navigate("/settings/leads/my-services")}>Edit</span>
+    Services <Link className={styles["edit-link"]} to='/settings/leads/my-services'>Edit</Link>
   </div>
   <div className={styles["highlight-box"]}>
     You’ll receive leads in these categories
@@ -116,14 +116,14 @@ const DashboardCards = ({data}) => {
       </div>
 
       <div className={styles.profileheadline}>
-        Your profile is {data?.profile_info?.percentage_completed}% complete <span className={styles["edit-link"]} onClick={() => navigate("/settings/profile/my-profile")}>Edit</span>
+        Your profile is {data?.profile_info?.percentage_completed}% complete <Link to='/settings/profile/my-profile' className={styles["edit-link"]}>Edit</Link>
       </div>
       <div className={styles["progress-bar"]}>
         <div className={styles.progress} style={{ width: `${data?.profile_info?.percentage_completed || 0}%` }}></div>
       </div>
       <div className={styles["hint-box"]}>
         <div>Completing your profile is a great way to appeal to customers</div>
-        <button onClick={() => navigate("/settings/profile/my-profile")}>Edit Profile</button>
+        <Link className={styles.hintButton} to='/settings/profile/my-profile'>Edit Profile</Link>
       </div>
     </div>
 

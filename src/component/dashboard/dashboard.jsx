@@ -9,6 +9,7 @@ import phone from "../../assets/Icons/phoneIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getDashboardListData } from "../../store/Dashboard/dashboardSlice";
+import { Link } from "react-router-dom";
 //PolygonArrowDown
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -171,9 +172,9 @@ const Dashboard = () => {
                 <a className={styles["view-leads-blue"]} href="#">
                   View 76 Live Leads Now - Start winning jobs now*
                 </a>
-                <button className={styles["view-leads-black"]}>
+                <Link to='/sellers/leads' className={styles["view-leads-black"]}>
                   View 1061 live leads
-                </button>
+                </Link>
 
                 <div className={styles["info-box"]}>
                   <h4>
