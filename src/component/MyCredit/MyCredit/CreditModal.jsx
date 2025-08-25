@@ -506,7 +506,7 @@ const CreditModal = ({ onClose }) => {
             opportunities you can unlock.
           </div>
 
-          <div className={styles.partnerSection}>
+          {/* <div className={styles.partnerSection}>
             <div>
               <h4>You have been selected for our Partnership Pricing</h4>
               <p>
@@ -528,7 +528,7 @@ const CreditModal = ({ onClose }) => {
               </ul>
             </div>
             <button className={styles.callbackBtn}>Request callback</button>
-          </div>
+          </div> */}
         </div>
       </div>
 
