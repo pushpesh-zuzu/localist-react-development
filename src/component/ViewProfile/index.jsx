@@ -147,8 +147,6 @@ const ViewProfiles = () => {
   const [customerModal, setCustomerModal] = useState(false);
   const dispatch = useDispatch();
   const profileId = useParams();
-  const {company_name } = useParams()
-  const SellerId = useParams();
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
   const { userToken } = useSelector((state) => state.auth);
@@ -248,10 +246,10 @@ const ViewProfiles = () => {
     container?.addEventListener("scroll", handleScroll);
     return () => container?.removeEventListener("scroll", handleScroll);
   }, []);
-  
   useEffect(() => {
     const sellerData = {
-      seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
+      // seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
+      seller_id: requestId?.requestId,
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
