@@ -663,9 +663,35 @@ const BidsList = ({ previousStep }) => {
   const [responseSort, setResponseSort] = useState("");
   const { userToken } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer);
+    const [index, setIndex] = useState(0);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
+
+  const loadingTextInfo = [
+  "Discovering the best possible matches for you...",
+  "Evaluating options with smart precision...",
+  "Measuring distances to ensure convenience...",
+  "Organizing results for clarity and impact...",
+  "Preparing your personalized list of matches..."
+];
+
+
+  useEffect(() => {
+    let interval = null;
+
+    if (bidListLoader) {
+      // Start rotating if loader is true
+      interval = setInterval(() => {
+        setIndex(prevIndex => (prevIndex + 1) % loadingTextInfo.length);
+      }, 3000);
+    }
+
+    // Cleanup on component unmount or when bidListLoader becomes false
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [bidListLoader]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -895,7 +921,7 @@ const BidsList = ({ previousStep }) => {
     <>
       <div className={styles.container}>
         {bidListLoader ? (
-          <div className={styles.loaderWrapper}>
+          <><div className={styles.loaderWrapper}>
             <Spin
               size="large"
               style={{
@@ -903,9 +929,10 @@ const BidsList = ({ previousStep }) => {
                 justifyContent: "center",
                 alignItems: "center",
                 minHeight: "300px",
-              }}
-            />
+              }} />
           </div>
+          <div style={{textAlign:'center'}}><span>{loadingTextInfo[index]}</span></div>
+          </>
         ) : (
           <>
             <div className={styles.headerWrapper}>
