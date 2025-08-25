@@ -22,6 +22,8 @@ import {
   searchService,
   setService,
   searchAvailableService,
+  getPopularServiceList,
+  setPopularList,
 } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
@@ -49,6 +51,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [editLocationId, setEditLocationId] = useState(null);
   // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+
   const {
     preferenceList,
     serviceLoader,
@@ -74,8 +78,16 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [isopenviewModal, setIsOpenViewModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [latitude, setLatitude] = useState([]);
+  const { popularList } = useSelector((state) => state.findJobs);
+
+
   const type = useRef();
   // Add this useEffect to keep the checkbox state in sync with Redux
+
+  useEffect(() => {
+    dispatch(getPopularServiceList());
+  }, [dispatch]);
+
   useEffect(() => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
     setIsOnline(getOnlineRemote?.isonline === 1);
@@ -706,6 +718,7 @@ const handleBack = () =>{
           handleSubmitData={handleSubmitData}
           handleRemoveService={handleRemoveService}
           selectedServices={selectedServices}
+          popularList={popularList} 
         />
 
         {isEditModalOpen && (
