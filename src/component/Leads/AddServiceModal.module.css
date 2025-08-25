@@ -19,11 +19,11 @@
   max-width: 747px;
   position: fixed;
   background-color: white;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: 65vh;
 }
 
 .closeButton {
