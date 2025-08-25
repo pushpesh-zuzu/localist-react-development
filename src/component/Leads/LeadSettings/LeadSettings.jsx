@@ -22,7 +22,7 @@ import {
   searchService,
   setService,
   searchAvailableService,
-  getPopularServiceList,
+  getPopularServiceListUser,
   setPopularList,
 } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
@@ -85,7 +85,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   // Add this useEffect to keep the checkbox state in sync with Redux
 
   useEffect(() => {
-    dispatch(getPopularServiceList());
+    dispatch(getPopularServiceListUser({ user_id: userToken?.id  ? userToken?.id  : registerData?.id }));
   }, [dispatch]);
 
   useEffect(() => {
