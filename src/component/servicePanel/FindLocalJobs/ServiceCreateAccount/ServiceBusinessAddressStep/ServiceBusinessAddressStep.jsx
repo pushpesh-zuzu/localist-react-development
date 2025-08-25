@@ -77,7 +77,7 @@ useEffect(() => {
 
   if (!reg) {
     if (hasPopulatedFromCompany) {
-      alert('hi');
+      
       // Clear only if company data was populated earlier
       dispatch(clearCompanyData());
 
