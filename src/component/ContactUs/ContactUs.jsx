@@ -94,11 +94,17 @@ const ContactUs = () => {
               </div>
               <div className={styles.inputGroup}>
                 <TextInput
-                  type="number"
-                  name="phoneNumber"
-                  required
-                  label="Phone Number"
-                />
+                    type="text"
+                    name="phoneNumber"
+                    label="Phone Number"
+                    required
+                    maxLength={10} // ✅ now works
+                    prefix="+44" 
+                    onInput={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
+                    }}
+                  />
+
               </div>
             </div>
 
