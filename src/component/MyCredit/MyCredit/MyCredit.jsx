@@ -222,13 +222,14 @@ const MyCredits = () => {
       top_up: isChecked ? 1 : 0,
     };
 
-    console.log(creditData, item?.no_of_leads, credits, vatTotal, "creditData");
-
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
         setActiveLoaderId(null);
         dispatch(getInvoiceBillingListApi());
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else if (result?.success === false) {
         setIsAddCardModal(true);
         // navigate("/payment-details");

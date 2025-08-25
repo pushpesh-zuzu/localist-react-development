@@ -184,6 +184,9 @@ const CardPaymentForm = ({
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
         dispatch(getInvoiceBillingListApi());
         const data = {
           user_id: userToken?.remember_tokens
@@ -198,6 +201,9 @@ const CardPaymentForm = ({
         }
       } else if (result?.success === false) {
         setCreditModal(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
     });
   };
