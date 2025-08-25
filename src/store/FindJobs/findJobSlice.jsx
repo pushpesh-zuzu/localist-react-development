@@ -99,6 +99,22 @@ export const searchService = (ServiceData) => {
     }
   };
 }
+export const searchAvailableService = (ServiceData) => {
+  return async (dispatch) => {
+    dispatch(setsearchServiceLoader(true));
+    try {
+      const response = await axiosInstance.post(`users/search-available-services`, ServiceData);
+
+      if (response) {
+        dispatch(setAvailableService(response?.data?.data));
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setsearchServiceLoader(false));
+    }
+  };
+}
 export const registerUserData = (registerData) => {
   return async (dispatch) => {
     dispatch(setRegisterLoader(true));
@@ -359,6 +375,9 @@ const findJobSlice = createSlice({
     setService(state, action) {
       state.service = action.payload;
     },
+    setAvailableService(state, action) {
+      state.service = action.payload;
+    },
      setHasPopulatedFromCompany: (state, action) => {
       state.hasPopulatedFromCompany = action.payload;
     },
@@ -483,6 +502,7 @@ export const {
   setPopularList,
   setsearchServiceLoader,
   setService,
+  setAvailableService,
   setRegisterLoader,
   setRegisterStep,
   setRegisterToken,

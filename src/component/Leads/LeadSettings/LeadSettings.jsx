@@ -21,6 +21,7 @@ import { Spin, Tooltip } from "antd";
 import {
   searchService,
   setService,
+  searchAvailableService,
 } from "../../../store/FindJobs/findJobSlice";
 import { useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
@@ -170,8 +171,9 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
       const delayDebounce = setTimeout(() => {
-        dispatch(searchService({ search: input }));
+        dispatch(searchAvailableService({ user_id: userToken?.id  ? userToken?.id  : registerData?.id, search: input }));
       }, 500);
+      
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
