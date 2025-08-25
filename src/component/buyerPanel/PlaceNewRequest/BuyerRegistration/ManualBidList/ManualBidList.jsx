@@ -229,9 +229,9 @@ setIsOpen(true)
 
                   <div className={styles.quickToRespondWrapper}>
                     <a
-                      href="#"
+                      href={`/view-profile/${requestId}/${item.id}`}
                       className={styles.profileLink}
-                      onClick={() => handleReply(item)}
+                      // onClick={() => handleReply(item)}
                     >
                       View Profile →
                     </a>

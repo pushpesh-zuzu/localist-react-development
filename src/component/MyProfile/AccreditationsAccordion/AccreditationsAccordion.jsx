@@ -104,9 +104,8 @@ const AccreditationsAccordion = ({ details }) => {
     <>
       <div className={styles.container}>
         <div className={styles.header}>
-          {/* <h3 className={styles.title}>Showcase Your Accreditations</h3> */}
-          
-          <div className={styles.optional} style={{marginLeft:'auto'}}>
+          <h3 className={styles.title}>Showcase Your Accreditations</h3>
+          <div className={styles.optional}>
             <img src={iIcon} alt="info" className={styles.icon} />
             <span>Optional</span>
             <label className={styles.switch}>
@@ -116,11 +115,11 @@ const AccreditationsAccordion = ({ details }) => {
           </div>
         </div>
 
-        {/* <p className={styles.description}>
+        <p className={styles.description}>
           Adding your accreditations helps customers on Localists.com feel more
           confident hiring you and can increase your chances of winning more
           work.
-        </p> */}
+        </p>
 
         {accordionGroups?.length === 0 && (
           <button
@@ -157,8 +156,7 @@ const AccreditationsAccordion = ({ details }) => {
                     className={styles.logo}
                   />
                 ) : (
-                  // <img src={ISSAImage} alt="ISSA" className={styles.logo} />
-                  ''
+                  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
                 )}
 
                 {/* Show name if it exists */}
@@ -189,7 +187,7 @@ const AccreditationsAccordion = ({ details }) => {
                   value={group.newAccreditation}
                   onChange={(e) => handleInputChange(index, e.target.value)}
                   // placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
-                  placeholder="Accredition Name"
+                  placeholder=" Accredition Name"
                   className={styles.input}
                 />
               </div>
