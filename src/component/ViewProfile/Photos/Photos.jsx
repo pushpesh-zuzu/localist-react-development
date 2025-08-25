@@ -49,8 +49,9 @@ const Photos = ({ details }) => {
             />
           ))
         ) : (
-          <img src={DummyImage} alt="Profile" className={styles.profileImg} />
-        )}
+          // <img src={DummyImage} alt="Profile" className={styles.profileImg} />
+          ''
+)}
       </div>
 
       {photoArray.length > 1 && (
