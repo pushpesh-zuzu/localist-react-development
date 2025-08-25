@@ -11,13 +11,14 @@ import { addBuyCreditApi } from "../../../../store/MyProfile/MyCredit/MyCreditSl
 import { showToast } from "../../../../utils";
 import AddCardModal from "../../../MyCredit/MyPaymentDetails/AddCardModal";
 
-
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
+  const buyCreditLoader = useSelector(
+    (state) => state.myCredit.buyCreditLoader
+  );
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -27,7 +28,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
   const handleBuyNow = (item) => {
     console.log(item, "item");
     // navigate("/payment-details")
-   
+
     let credits = item.no_of_leads;
 
     const vatTotal =
@@ -54,17 +55,15 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
       top_up: autoTopUp ? 1 : 0,
     };
 
-   
-
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
         const data = {
-      user_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-    };
-    dispatch(totalCreditData(data))
+          user_id: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
+        };
+        dispatch(totalCreditData(data));
       } else if (result?.success === false) {
         setIsAddModalOpen(true);
         // navigate("/payment-details");
@@ -110,7 +109,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
   const triggerRef = useRef(null);
   const stickyRef = useRef(null);
 
- useEffect(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.boundingClientRect.top <= 0) {
@@ -162,7 +161,7 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
               <div className={styles.priceSection}>
                 <div className={styles.priceInfo}>
                   <div className={styles.totalPrice}>
-                    ${item?.price ? item?.price : 0} (Excl. tax)
+                    £{item?.price ? item?.price : 0} (Excl. tax)
                   </div>
                   {/* <div className={styles.unitPrice}>
                     ${item?.per_credit ? item?.per_credit : 0}/credit
@@ -208,59 +207,61 @@ const buyCreditLoader = useSelector((state) => state.myCredit.buyCreditLoader);
           Credits Left
         </button>
       </div> */}
-        <div>
-      {/* Invisible spacer that acts as a scroll trigger */}
-      <div className={styles.creditMatchContainer}> 
-      <div ref={triggerRef} style={{ height: '1px' }}></div>
+      <div>
+        {/* Invisible spacer that acts as a scroll trigger */}
+        <div className={styles.creditMatchContainer}>
+          <div ref={triggerRef} style={{ height: "1px" }}></div>
 
-      <div ref={stickyRef} className={styles.creditsLeftContainer}>
-        <button className={styles.creditsButton}>
-          You have {totalCredit?.total_credit ?? '0'} Credits Left
-        </button>
+          <div ref={stickyRef} className={styles.creditsLeftContainer}>
+            <button className={styles.creditsButton}>
+              You have {totalCredit?.total_credit ?? "0"} Credits Left
+            </button>
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
-   
-    {buyCreditLoader && (
-  <div
-    style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 9999,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      color: "#fff",
-      fontSize: "1.2rem",
-    }}
-  >
 
-   <div style={{ marginTop: "25vh", textAlign: "center" }}>
-    <svg
-    className={styles.gearSpinner}
-    xmlns="http://www.w3.org/2000/svg"
-    width="40" 
-    height="40"
-    viewBox="0 0 100 100"
-    fill="white" 
-  >
-    <path
-      d="M94 56.5v-13l-10.6-2.3c-.8-2.7-2-5.2-3.5-7.6l5.8-9.3-9.2-9.2-9.3 5.8c-2.4-1.5-5-2.7-7.6-3.5L56.5 6h-13l-2.3 10.6c-2.7.8-5.2 2-7.6 3.5l-9.3-5.8-9.2 9.2 5.8 9.3c-1.5 2.4-2.7 5-3.5 7.6L6 43.5v13l10.6 2.3c.8 2.7 2 5.2 3.5 7.6l-5.8 9.3 9.2 9.2 9.3-5.8c2.4 1.5 5 2.7 7.6 3.5L43.5 94h13l2.3-10.6c2.7-.8 5.2-2 7.6-3.5l9.3 5.8 9.2-9.2-5.8-9.3c1.5-2.4 2.7-5 3.5-7.6L94 56.5zM50 65a15 15 0 1 1 0-30 15 15 0 0 1 0 30z"
-    />
-  </svg>
+      {buyCreditLoader && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 9999,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            color: "#fff",
+            fontSize: "1.2rem",
+          }}
+        >
+          <div style={{ marginTop: "25vh", textAlign: "center" }}>
+            <svg
+              className={styles.gearSpinner}
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 100 100"
+              fill="white"
+            >
+              <path d="M94 56.5v-13l-10.6-2.3c-.8-2.7-2-5.2-3.5-7.6l5.8-9.3-9.2-9.2-9.3 5.8c-2.4-1.5-5-2.7-7.6-3.5L56.5 6h-13l-2.3 10.6c-2.7.8-5.2 2-7.6 3.5l-9.3-5.8-9.2 9.2 5.8 9.3c-1.5 2.4-2.7 5-3.5 7.6L6 43.5v13l10.6 2.3c.8 2.7 2 5.2 3.5 7.6l-5.8 9.3 9.2 9.2 9.3-5.8c2.4 1.5 5 2.7 7.6 3.5L43.5 94h13l2.3-10.6c2.7-.8 5.2-2 7.6-3.5l9.3 5.8 9.2-9.2-5.8-9.3c1.5-2.4 2.7-5 3.5-7.6L94 56.5zM50 65a15 15 0 1 1 0-30 15 15 0 0 1 0 30z" />
+            </svg>
 
-  <p>Processing Payment...</p>
-</div>
-  </div>
-)}
+            <p>Processing Payment...</p>
+          </div>
+        </div>
+      )}
 
       {isAddModalOpen && (
-        <AddCardModal onClose={() => setIsAddModalOpen(false)} newLeadApi={true} newLeadData={filterData} noLeadApiCall={true}/>
+        <AddCardModal
+          onClose={() => setIsAddModalOpen(false)}
+          newLeadApi={true}
+          newLeadData={filterData}
+          noLeadApiCall={true}
+        />
       )}
     </>
   );
