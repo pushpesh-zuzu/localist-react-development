@@ -76,6 +76,12 @@ p {
   height: 100%;
 }
 
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
+
 .slick-slide {
   display: flex !important;
   gap: 5px !important;
