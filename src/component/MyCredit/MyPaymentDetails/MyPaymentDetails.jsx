@@ -28,7 +28,7 @@ const MyPaymentDetails = () => {
     return (
         <>
             <div className={styles.container}>
-                <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." /> Setting</div>
+                <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." /> Settings</div>
                 <h1 className={styles.heading}>My Saved Card</h1>
                 <div className={styles.manageWrapper}>
                     <span className={styles.infoIcon}>

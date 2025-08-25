@@ -94,7 +94,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       if (result?.success) {
         showToast("success", result?.message || "Create Request successfully!");
       }
-      onClose();
+      // onClose();
       dispatch(clearSetbuyerRequestData());
       dispatch(clearBuyerRegisterFormData());
       dispatch(setQualityData());

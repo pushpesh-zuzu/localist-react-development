@@ -650,6 +650,7 @@ import DummyImage from "../../../../../assets/Images/Setting/ProfileWebIcon.svg"
 import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
+import { Helmet } from "react-helmet-async";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
@@ -919,6 +920,15 @@ const BidsList = ({ previousStep }) => {
 
   return (
     <>
+       <Helmet>
+            <title>
+               Localists.com - Request Your 5 Top Matches Here Today
+            </title>
+            <meta
+              name="description"
+              content="Request Your 5 Top Matches Here on Localists. Connect with verified local professionals, get free quotes, and hire the right expert for your needs"
+            />
+          </Helmet>
       <div className={styles.container}>
         {bidListLoader ? (
           <div className={styles.loaderWrapper}>
