@@ -64,6 +64,9 @@ const CreditMatch = () => {
             : registerData?.remember_tokens,
         };
         dispatch(totalCreditData(data));
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } else if (result?.success === false) {
         setIsAddModalOpen(true);
         // navigate("/payment-details");
@@ -255,12 +258,27 @@ const CreditMatch = () => {
         </div>
       )}
 
+      {/* {isAddModalOpen && (
+        <AddCardModal
+          onClose={() => setIsAddModalOpen(false)}
+          newLeadApi={true}
+          newLeadData={filterData}
+          noLeadApiCall={true}
+        />
+      )} */}
+
       {isAddModalOpen && (
         <AddCardModal
           onClose={() => setIsAddModalOpen(false)}
           newLeadApi={true}
           newLeadData={filterData}
           noLeadApiCall={true}
+          onPaymentSuccess={() => {
+            showToast("success", "Payment completed successfully!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          }}
         />
       )}
     </>

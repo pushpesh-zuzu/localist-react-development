@@ -36,7 +36,7 @@ const ContactUs = () => {
 
         if (response.data.success) {
           
-          showToast("success", "Details Saved successfully");
+          showToast("success", "Thank You, We'll get back to you soon!");
           form.resetFields();
         } else {
           showToast("error", response.data.message || "Please try again after some time");
