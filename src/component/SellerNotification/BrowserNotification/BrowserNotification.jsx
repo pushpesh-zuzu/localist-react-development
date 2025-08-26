@@ -68,7 +68,7 @@ const BrowserNotification = () => {
   }
   return (
     <div className={styles.container}>
-       <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." />  Setting</div>
+       <div className={styles.backText} onClick={handleBack}><img src={blackArrow} alt="..." />  Settings</div>
       <h2 className={styles.heading}>Browser Notifications</h2>
       <div className={styles.infoBox}>
         <span className={styles.infoIcon}>

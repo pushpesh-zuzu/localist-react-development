@@ -508,7 +508,7 @@ import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
 import LocationIcon from "../../../../assets/Images/Leads/WhiteLocationIcon.svg";
 import FilterIcon from "../../../../assets/Images/Leads/FilterIcon.svg";
 import EditIcon from "../../../../assets/Images/Leads/EditIconWhite.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLeadFiterApiList,
@@ -701,9 +701,9 @@ const MatchingLeads = () => {
               <img style={{ cursor: "pointer" }} src={FilterIcon} alt="" />{" "}
               Filter
             </button>
-            <button className={styles.editButton} onClick={handleEdit}>
+             <Link style={{textDecoration:'none'}} to='/settings/leads/my-services' className={styles.editButton}>
               Edit <img src={EditIcon} alt="" />
-            </button>
+            </Link>
           </div>
         </div>
 

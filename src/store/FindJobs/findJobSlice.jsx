@@ -83,6 +83,23 @@ export const getPopularServiceList = () => {
     }
   };
 };
+
+export const getPopularServiceListUser = (ServiceData) => {
+  return async (dispatch) => {
+    dispatch(setPopularServiceListLoader(true));
+    try {
+      const response = await axiosInstance.post(`users/user-available-popular-services`,ServiceData);
+      if (response) {
+        dispatch(setPopularList(response?.data?.data));
+      }
+    } catch (error) {
+      console.log("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setPopularServiceListLoader(false));
+    }
+  };
+};
+
 export const searchService = (ServiceData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));

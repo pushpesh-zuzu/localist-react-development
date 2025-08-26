@@ -52,6 +52,11 @@ const Location = () => {
           name={CONTENT_LEVEL4_CONFIG_META[service]?.[location]?.name}
           content={CONTENT_LEVEL4_CONFIG_META[service]?.[location]?.content}
         />
+        <link
+          rel="preload"
+          href={BannerImageLevel4[service]?.[location]}
+          as="image"
+        />
       </Helmet>
 
       <AccountantInLocation

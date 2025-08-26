@@ -204,7 +204,7 @@ let cityName =
             <button className={styles.nextButton} onClick={() => {
                 if (!formData.postcode || formData.postcode.length < 5 || formData.postcode.length > 8 || !city)
                 {
-                  showToast("error", "Please  enter valid pincode!");
+                  showToast("error", "Please  enter valid Postcode!");
                   return;
                 }
                 nextStep();

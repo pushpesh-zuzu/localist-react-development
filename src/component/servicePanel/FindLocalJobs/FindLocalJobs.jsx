@@ -8,7 +8,7 @@ import {
   setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
@@ -165,11 +165,17 @@ const FindLocalJobs = () => {
           />
         ) : (
           <div className={styles.servicesList}>
-            {popularList?.map((service, index) => (
-              <div
+          {popularList?.map((service) => {
+            const slug = generateSlug(service.name);
+            const path = `/sellers/create-account/${slug}`;
+
+            return (
+              <Link
                 key={service.id}
+                to={path}
+                style={{textDecoration:'none'}}
                 className={styles.serviceItem}
-                onClick={() => handleServiceClick(service)}
+                onClick={() => dispatch(setSelectedServiceId(service.id))}
               >
                 <img
                   src={
@@ -179,9 +185,10 @@ const FindLocalJobs = () => {
                   }
                   alt={service.title}
                 />
-                <span>{service.name}</span>
-              </div>
-            ))}
+                <span className={styles.serviceName}>{service.name}</span>
+              </Link>
+            );
+            })}
           </div>
         )}
       </div>

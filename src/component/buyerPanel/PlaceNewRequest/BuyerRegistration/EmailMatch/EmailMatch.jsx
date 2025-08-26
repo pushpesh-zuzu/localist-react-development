@@ -46,8 +46,11 @@ const EmailMatch = ({
   };
 
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
-    setErrors((prev) => ({ ...prev, phone: false }));
+    const value = e.target.value.replace(/\D/g, ""); // remove all non-digits
+    if (value.length <= 10) {
+      setPhone(value);
+      setErrors((prev) => ({ ...prev, phone: false }));
+    }
   };
 
   const handleSubmit = () => {
@@ -173,9 +176,11 @@ const EmailMatch = ({
             </span>
           )}
 
-          <label className={styles.label}>Phone Number</label>
+          <label className={styles.label}>Phone Numbers</label>
+          <div className={styles.phoneWrapper}>
+            <span className={styles.prefix}>+44</span>
           <input
-            type="text"
+            type="tel"
             placeholder="Phone Number"
             className={`${styles.input} ${
               errors.phone ? styles.inputError : ""
@@ -189,6 +194,7 @@ const EmailMatch = ({
               Please enter a valid 10-digit phone number.
             </span>
           )}
+          </div>
 
           <div className={styles.buttonContainer}>
             {/* NSai */}

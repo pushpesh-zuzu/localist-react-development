@@ -122,7 +122,7 @@ const ViewOnMapModal = ({
         const { lat, lng } = data.results[0].geometry.location;
         return { lat, lng };
       } else {
-        throw new Error("Location not found for the given pincode");
+        throw new Error("Location not found for the given postcode");
       }
     } catch (error) {
       console.error("Geocoding error:", error.message);

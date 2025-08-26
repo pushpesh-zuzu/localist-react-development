@@ -235,6 +235,19 @@ font-weight: bold;
     font-weight: bold;
 
   }
+  .hintButton{
+      /* margin-top: 12px; */
+  background-color: #00bfff;
+  color: white;
+  padding: 7px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 18px;
+  font-weight: bold;
+  cursor: pointer !important;
+ white-space: nowrap;
+ text-decoration: none;
+  }
   
 
 

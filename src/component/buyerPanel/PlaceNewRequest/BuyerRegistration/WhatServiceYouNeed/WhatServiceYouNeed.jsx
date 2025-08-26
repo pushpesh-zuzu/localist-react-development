@@ -40,6 +40,8 @@ const WhatServiceYouNeed = ({
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
+
   useEffect(() => {
     setPostalCodeValidate(postalCodeIsValidate);
   }, [postalCodeIsValidate]);
@@ -126,41 +128,42 @@ useEffect(() => {
     [dispatch]
   );
 
-  const handleContinue = useCallback(() => {
-    let newErrors = { service: "", pincode: "" };
+const handleContinue = useCallback(() => {
+  let newErrors = { service: "", pincode: "" };
 
-    if (!selectedService) {
-      newErrors.service = "Please select a service!";
-    }
+  if (!selectedService) {
+    newErrors.service = "Please select a service!";
+  }
 
-    if (!pincode) {
-      newErrors.pincode = "Pincode is required!";
-    } else if (pincode.length < 5 || pincode.length > 8) {
-      newErrors.pincode = "Pincode must be between 5 and 8 characters!";
-    }
+  if (!pincode) {
+    newErrors.pincode = "Postcode is required!";
+  } else if (pincode.length < 5 || pincode.length > 8) {
+    newErrors.pincode = "Postcode must be between  5 or 8 characters!";
+  }
 
-    if (!citySerach) {
-      alert("Please provide valid pincode!");
-      return;
-    }
+  // if (!isPincodeFromDropdown) {
+  //   showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
+  //   return;
+  // }
 
-    setErrors(newErrors);
+  setErrors(newErrors);
 
-    if (!newErrors.service && !newErrors.pincode) {
-      dispatch(
-        setbuyerRequestData({
-          service_id: selectedService.id || serviceId,
-          postcode: pincode,
-          city: citySerach,
-        })
-      );
-      dispatch(
-        questionAnswerData({ service_id: selectedService.id || serviceId })
-      );
-      nextStep();
-    }
-  }, [selectedService, pincode, dispatch, serviceId, citySerach, nextStep]);
+  if (!newErrors.service && !newErrors.pincode) {
+    dispatch(
+      setbuyerRequestData({
+        service_id: selectedService.id || serviceId,
+        postcode: pincode,
+        city: citySerach,
+      })
+    );
+    dispatch(
+      questionAnswerData({ service_id: selectedService.id || serviceId })
+    );
+    nextStep();
+  }
+}, [selectedService, pincode, dispatch, serviceId, citySerach, nextStep, isPincodeFromDropdown]);
 
+ 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -187,45 +190,39 @@ useEffect(() => {
       );
 
       autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
+  const place = autocomplete.getPlace();
+  if (!place.address_components) return;
 
-        const postalCode = place.address_components.find((component) =>
-          component.types.includes("postal_code")
-        )?.long_name;
+  const postalCode = place.address_components.find((component) =>
+    component.types.includes("postal_code")
+  )?.long_name;
 
-        // const cityName = place.address_components.find((component) =>
-        //   component.types.includes("locality")
-        // )?.long_name;
-        let cityName =
-          place.address_components.find((component) =>
-            component.types.includes("postal_town")
-          )?.long_name ||
-          place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_2")
-          )?.long_name;
-        const townName = place.address_components.find((component) =>
-          component.types.includes("administrative_area_level_3")
-        )?.long_name;
+  let cityName =
+    place.address_components.find((component) =>
+      component.types.includes("postal_town")
+    )?.long_name ||
+    place.address_components.find((component) =>
+      component.types.includes("administrative_area_level_2")
+    )?.long_name;
 
-        const formattedAddress = place.formatted_address;
-        // const townName = place.formatted_address
-        if (postalCode) {
-          setPostalCodeValidate(true);
-          setPincode(postalCode);
-          inputRef.current.value = postalCode;
-          setErrors((prev) => ({ ...prev, pincode: "" }));
-        }
+  if (postalCode) {
+    setPostalCodeValidate(true);
+    setPincode(postalCode);
+    inputRef.current.value = postalCode;
+    setErrors((prev) => ({ ...prev, pincode: "" }));
+    setIsPincodeFromDropdown(true); // ✅ mark as selected from dropdown
+  }
 
-        if (cityName) {
-          setCity(cityName);
-          dispatch(setcitySerach(cityName)); // <- set city state
-        }
+  if (cityName) {
+    setCity(cityName);
+    dispatch(setcitySerach(cityName));
+  }
 
-        if (!postalCode && !cityName) {
-          alert("No address or PIN code found! Please try again.");
-        }
-      });
+  if (!postalCode && !cityName) {
+    showToast("error", "Please select Postcode from dropdown");
+  }
+});
+
     };
 
     loadGoogleMapsScript();
@@ -289,17 +286,19 @@ useEffect(() => {
     }
   }, [resetServiceTrigger]);
   const handlePincodeChange = (e) => {
-    const value = e.target.value.slice(0, 10);
-    setPincode(value);
-    setPostalCodeValidate(false);
-    setErrors((prev) => ({
-      ...prev,
-      pincode:
-        value.length > 0 && (value.length < 5 || value.length > 8)
-          ? "Pincode must be between 5 and 8 characters!"
-          : "",
-    }));
-  };
+  const value = e.target.value.slice(0, 10);
+  setPincode(value);
+  setPostalCodeValidate(false);
+  setIsPincodeFromDropdown(false); // ❌ typing resets validation
+  setErrors((prev) => ({
+    ...prev,
+    pincode:
+      value.length > 0 && (value.length < 5 || value.length > 8)
+        ? "Postcode must be between 5 and 8 characters!"
+        : "",
+  }));
+};
+
 
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
@@ -373,7 +372,7 @@ useEffect(() => {
         <label className={styles.label}>Where do you need it?</label>
         <input
           type="text"
-          placeholder="Enter your ZIP code or town"
+          placeholder="Enter your Postcode or town"
           className={`${styles.input} ${
             errors.pincode ? styles.errorBorder : ""
           }`}

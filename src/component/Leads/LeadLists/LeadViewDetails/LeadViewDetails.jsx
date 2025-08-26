@@ -134,9 +134,9 @@ const navigate = useNavigate()
               settings.
             </p>
 
-            <div className={styles.updateContainer} onClick={handleNavigate}>
+            <div className={styles.updateContainer}>
               <img src={UpdateIcon} alt="" />
-              <a href="#" className={styles.updateLink}>
+              <a href="/settings/leads/my-services" className={styles.updateLink}>
                 {" "}
                 Update lead settings
               </a>
