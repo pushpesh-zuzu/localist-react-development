@@ -447,7 +447,7 @@ const MatchingLeads = () => {
             trigger="click"
             placement="bottom"
             autoAdjustOverflow={false}
-            overlayStyle={{ minWidth: "200px" }}
+            overlayStyle={{ minWidth: "100px" }}
             open={openPopover === "sort"}
             onOpenChange={(visible) => setOpenPopover(visible ? "sort" : null)}
           >

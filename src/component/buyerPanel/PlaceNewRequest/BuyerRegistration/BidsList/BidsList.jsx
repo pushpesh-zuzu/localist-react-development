@@ -705,8 +705,8 @@ const BidsList = ({
     }));
 
   const locationOptions = [
-    { value: "farthest to nearest", label: "Farthest to Nearest" },
-    { value: "nearest to farthest", label: "Nearest to Farthest" },
+    { value: "Farthest to Nearest", label: "Farthest to Nearest" },
+    { value: "Nearest to Farthest", label: "Nearest to Farthest" },
   ];
 
   const responseOptions = [

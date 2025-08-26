@@ -30,12 +30,14 @@ import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
 
+const purchaseOptions = ["All", "Manual Bid", "Autobid", "Request Reply"];
 const MyResponse = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [popoverOpen, setPopoverOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pending");
   const [selectedLead, setSelectedLead] = useState(null);
-  const [purchaseType, setPurchaseType] = useState(null);
+  const [purchaseType, setPurchaseType] = useState("All");
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -47,6 +49,8 @@ const MyResponse = () => {
     data,
   } = useSelector((state) => state.leadSetting);
 
+  const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
+
   const handleProfieView = (item) => {
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
@@ -55,7 +59,23 @@ const MyResponse = () => {
           const today = moment();
           const daysAgo = today.diff(createdDate, 'days') */
   }
-  const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
+
+  const popoverContent = (
+    <div className={styles.popoverMenu}>
+      {purchaseOptions.map((option) => (
+        <div
+          key={option}
+          className={styles.popoverItem}
+          onClick={() => {
+            handlePurchaseChange(option);
+            setPopoverOpen(false);
+          }}
+        >
+          {option}
+        </div>
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
@@ -86,7 +106,6 @@ const MyResponse = () => {
       }
     });
   };
-
 
   const getLeadsToDisplay = () => {
     /** if (selectedTab === "pending") return getPendingLeadList || [];
@@ -126,13 +145,7 @@ const MyResponse = () => {
       }
     });
   };
-  // const handlePurchaseChange = (value) => {
-  //   const purchaseData = {
-  //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-  //     purchase_type: value
-  //   }
-  //   dispatch(purchaseTypeStatusApi(purchaseData))
-  // }
+
   const handlePurchaseChange = (value) => {
     setPurchaseType(value);
     if (selectedTab === "pending") {
@@ -162,10 +175,10 @@ const MyResponse = () => {
     } else {
       showToast("error", "Phone number is not available.");
     }
-  }
+  };
   const handleEmailOpen = (item) => {
     const email = item?.customer?.email;
-    console.log(item, email, "item")
+    console.log(item, email, "item");
     if (email) {
       const mailtoUrl = `mailto:${email}`;
       window.location.href = mailtoUrl;
@@ -202,15 +215,17 @@ const MyResponse = () => {
           <div className={styles.emptySpace}>{""}</div>
           <div className={styles.headerBtn}>
             <button
-              className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "pending" ? styles.activeButton : ""
+              }`}
               onClick={handlePendingApi}
             >
               <img src={pendingImg} alt="pendingImg" /> Pending
             </button>
             <button
-              className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
-                }`}
+              className={`${styles.filterButton} ${
+                selectedTab === "hired" ? styles.activeButton : ""
+              }`}
               onClick={handleHiredApi}
             >
               {selectedTab === "hired" ? (
@@ -221,49 +236,51 @@ const MyResponse = () => {
               Hired
             </button>
           </div>
-          {/* <div style={{ display: "flex", marginRight: 20 }}>
-            <label className={styles.purchaseText}>Purchase Type </label>
-            <Select
-              placeholder="Select Purchase Type"
-              style={{ width: 150, marginLeft: 10 }}
-              onChange={handlePurchaseChange}
-            >
-              <Option value="Manual Bid">Manual Bid</Option>
-              <Option value="Best Matches">Best Match</Option>
-              <Option value="Autobid">Auto Bid</Option>
-              <Option value="Request Reply">Request Reply</Option>
-            </Select>
-          </div> */}
+
           <div
-            style={{ display: "flex", marginRight: 20 }}
+            style={{ display: "flex", marginRight: 20, gap: 10 }}
             className={styles.purchaseSelect}
           >
             <label className={styles.purchaseText}>Purchase Type</label>
-            <select
+            {/* <select
               className={`${styles.selectBox} ${styles.customSelect}`}
               value={purchaseType} // controlled value
               onChange={(e) => handlePurchaseChange(e.target.value)}
-            // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+              // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
             >
               <option value="All">All</option>
               <option value="Manual Bid">Manual Bid</option>
               <option value="Autobid">Auto Bid</option>
               <option value="Request Reply">Request Reply</option>
-            </select>
+            </select> */}
+            <Popover
+              content={popoverContent}
+              trigger="click"
+              open={popoverOpen}
+              onOpenChange={setPopoverOpen}
+              placement="bottom"
+              overlayStyle={{ minWidth: "100px" }}
+            >
+              <button className={styles.popoverBtn}>
+                {purchaseType || "All"} ▼
+              </button>
+            </Popover>
           </div>
         </div>
       </div>
       <div className={styles.filterButtonsBox}>
         <button
-          className={`${styles.filterButton} ${selectedTab === "pending" ? styles.activeButton : ""
-            }`}
+          className={`${styles.filterButton} ${
+            selectedTab === "pending" ? styles.activeButton : ""
+          }`}
           onClick={handlePendingApi}
         >
           <img src={pendingImg} alt="pendingImg" /> Pending
         </button>
         <button
-          className={`${styles.filterButton} ${selectedTab === "hired" ? styles.activeButton : ""
-            }`}
+          className={`${styles.filterButton} ${
+            selectedTab === "hired" ? styles.activeButton : ""
+          }`}
           onClick={handleHiredApi}
         >
           {selectedTab === "hired" ? (
@@ -273,22 +290,33 @@ const MyResponse = () => {
           )}{" "}
           Hired
         </button>
-        <div
-          style={{ display: "flex", }}
-          className={styles.purchaseSelect}
-        >
+        <div style={{ display: "flex" }} className={styles.purchaseSelect}>
           <label className={styles.purchaseText}>Purchase Type</label>
-          <select
+          {/* <select
             className={`${styles.selectBox} ${styles.customSelect}`}
             value={purchaseType} // controlled value
             onChange={(e) => handlePurchaseChange(e.target.value)}
-          // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+            // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
           >
             <option value="All">All</option>
             <option value="Manual Bid">Manual Bid</option>
             <option value="Autobid">Auto Bid</option>
             <option value="Request Reply">Request Reply</option>
-          </select>
+          </select> */}
+          <div style={{ width: "60px" }}>
+            <Popover
+              content={popoverContent}
+              trigger="click"
+              open={popoverOpen}
+              onOpenChange={setPopoverOpen}
+              placement="bottom"
+              overlayStyle={{ minWidth: "100px" }}
+            >
+              <button className={styles.popoverBtn}>
+                {purchaseType || "All"} ▼
+              </button>
+            </Popover>
+          </div>
         </div>
       </div>
 
@@ -299,20 +327,17 @@ const MyResponse = () => {
               <div className={styles.infoContainer}>
                 <div className={styles.userInfo}>
                   <div className={styles.userDetails}>
-                    <div 
-                    className={styles.avatar}
-                    // style={{
-   
+                    <div
+                      className={styles.avatar}
+                      // style={{
 
-
-                    // }}
-
+                      // }}
                     >
                       {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                     </div>
                     <div
                       className={styles.details}
-                    // onClick={() => handleProfieView(item)}
+                      // onClick={() => handleProfieView(item)}
                     >
                       <h3>{item?.customer?.name}</h3>
                       <p>{item?.postcode}</p>
@@ -332,21 +357,21 @@ const MyResponse = () => {
                   <div className={styles.contactItem}>
                     <img src={BlueSmsIcon} alt="" />
                     {/* <a href={`mailto:${item?.customer?.email}`} target="_blank"> */}
-                      {item?.customer?.email}
+                    {item?.customer?.email}
                     {/* </a> */}
                   </div>
                 </div>
                 {item?.profile_view && item?.profile_view_time && (
                   <div className={styles.profile_view}>
                     <p>
-                     <div>
+                      <div>
                         <img src={HiredImg} alt="..." />
-                      
-                      {item?.profile_view}
+
+                        {item?.profile_view}
                       </div>
-                   
-                    <span>{item?.profile_view_time}</span>
-                     </p>
+
+                      <span>{item?.profile_view_time}</span>
+                    </p>
                   </div>
                 )}
               </div>
@@ -430,32 +455,29 @@ const MyResponse = () => {
                   </>
                 )}
 
-                <div
-                  className={styles.responseStatus}
-
-                >
+                <div className={styles.responseStatus}>
                   Responded {moment().diff(moment(item?.created_at), "days")}d
                   ago
-
                 </div>
-                <div className={styles.moreDetails} onClick={() => handleOpen(item)}>
+                <div
+                  className={styles.moreDetails}
+                  onClick={() => handleOpen(item)}
+                >
                   More Details
                   <img
                     src={pendingArrowIcon}
                     alt="Response"
-                    className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated
-                      }`}
+                    className={`${styles.arrowIcon} ${
+                      selectedLead === item.id ? "" : styles.rotated
+                    }`}
                   />
                 </div>
               </div>
 
               <div className={styles.leadAction}>
-                <div className={styles.responseStatus}
-
-                >
+                <div className={styles.responseStatus}>
                   Responded {moment().diff(moment(item?.created_at), "days")}d
                   ago
-
                 </div>
                 {selectedTab === "pending" ? (
                   <>
@@ -473,14 +495,17 @@ const MyResponse = () => {
                   </>
                 )}
 
-
-                <div className={styles.moreDetails} onClick={() => handleOpen(item)}>
+                <div
+                  className={styles.moreDetails}
+                  onClick={() => handleOpen(item)}
+                >
                   More Details
                   <img
                     src={pendingArrowIcon}
                     alt="Response"
-                    className={`${styles.arrowIcon} ${selectedLead === item.id ? "" : styles.rotated
-                      }`}
+                    className={`${styles.arrowIcon} ${
+                      selectedLead === item.id ? "" : styles.rotated
+                    }`}
                   />
                 </div>
               </div>
