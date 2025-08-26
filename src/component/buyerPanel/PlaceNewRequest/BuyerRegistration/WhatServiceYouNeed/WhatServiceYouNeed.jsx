@@ -141,10 +141,10 @@ const handleContinue = useCallback(() => {
     newErrors.pincode = "Postcode must be exactly 5 or 8 characters!";
   }
 
-  if (!isPincodeFromDropdown) {
-    showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
-    return;
-  }
+  // if (!isPincodeFromDropdown) {
+  //   showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
+  //   return;
+  // }
 
   setErrors(newErrors);
 
