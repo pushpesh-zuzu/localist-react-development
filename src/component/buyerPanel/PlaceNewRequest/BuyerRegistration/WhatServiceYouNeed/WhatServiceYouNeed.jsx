@@ -137,14 +137,14 @@ const handleContinue = useCallback(() => {
 
   if (!pincode) {
     newErrors.pincode = "Postcode is required!";
-  } else if (!(pincode.length === 5 || pincode.length === 8)) {
-    newErrors.pincode = "Postcode must be exactly 5 or 8 characters!";
+  } else if (pincode.length < 5 || pincode.length > 8) {
+    newErrors.pincode = "Postcode must be between  5 or 8 characters!";
   }
 
-  if (!isPincodeFromDropdown) {
-    showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
-    return;
-  }
+  // if (!isPincodeFromDropdown) {
+  //   showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
+  //   return;
+  // }
 
   setErrors(newErrors);
 
