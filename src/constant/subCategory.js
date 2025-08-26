@@ -28,7 +28,7 @@ import PatioServicesBanner from "../assets/Images/servicesLevels/banner/PatioSer
 import ArtificialGrassInstallationBanner from "../assets/Images/servicesLevels/banner/ArtificialGrassInstallationBanner.jpg";
 import BuildersBanner from "../assets/Images/servicesLevels/banner/BuildersBanner.jpg";
 import DrivewayInstallationBanner from "../assets/Images/servicesLevels/banner/DrivewayInstallationBanner.jpg";
-import FenceGateInstallationBanner from "../assets/Images/servicesLevels/banner/FenceGate-InstallationBanner.jpg";
+import FenceGateInstallationBanner from "../assets/banners/FenceGate-InstallationBanner.jpg";
 import HomeBanner from "../assets/Images/servicesLevels/banner/HomeBanner.jpg";
 import EllesmerePort from "../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
 import Liverpool from "../assets/Images/servicesLevels/cities/Liverpool.jpg";
