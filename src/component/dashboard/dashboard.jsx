@@ -173,7 +173,7 @@ const Dashboard = () => {
                   View 76 Live Leads Now - Start winning jobs now*
                 </a>
                 <Link to='/sellers/leads' className={styles["view-leads-black"]}>
-                  View 1061 live leads
+                  View live leads
                 </Link>
 
                 <div className={styles["info-box"]}>
