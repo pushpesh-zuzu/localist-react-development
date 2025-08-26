@@ -37,6 +37,8 @@ const MyResponse = () => {
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pending");
   const [selectedLead, setSelectedLead] = useState(null);
+  const [popoverOpenTop, setPopoverOpenTop] = useState(false);
+  const [popoverOpenMobile, setPopoverOpenMobile] = useState(false);
   const [purchaseType, setPurchaseType] = useState("All");
 
   const { userToken } = useSelector((state) => state.auth);
@@ -146,6 +148,31 @@ const MyResponse = () => {
     });
   };
 
+  const renderPopoverContent = (closeSetter) => (
+    <div className={styles.popoverMenu}>
+      {purchaseOptions.map((option) => (
+        <div
+          key={option}
+          role="button"
+          tabIndex={0}
+          className={styles.popoverItem}
+          onClick={() => {
+            handlePurchaseChange(option);
+            closeSetter(false);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              handlePurchaseChange(option);
+              closeSetter(false);
+            }
+          }}
+        >
+          {option}
+        </div>
+      ))}
+    </div>
+  );
+
   const handlePurchaseChange = (value) => {
     setPurchaseType(value);
     if (selectedTab === "pending") {
@@ -254,12 +281,12 @@ const MyResponse = () => {
               <option value="Request Reply">Request Reply</option>
             </select> */}
             <Popover
-              content={popoverContent}
+              content={renderPopoverContent(setPopoverOpenTop)}
               trigger="click"
-              open={popoverOpen}
-              onOpenChange={setPopoverOpen}
+              open={popoverOpenTop}
+              onOpenChange={(open) => setPopoverOpenTop(open)}
               placement="bottom"
-              overlayStyle={{ minWidth: "100px" }}
+              style={{ minWidth: 100 }}
             >
               <button className={styles.popoverBtn}>
                 {purchaseType || "All"} ▼
@@ -305,12 +332,12 @@ const MyResponse = () => {
           </select> */}
           <div style={{ width: "60px" }}>
             <Popover
-              content={popoverContent}
+              content={renderPopoverContent(setPopoverOpenMobile)}
               trigger="click"
-              open={popoverOpen}
-              onOpenChange={setPopoverOpen}
+              open={popoverOpenMobile}
+              onOpenChange={(open) => setPopoverOpenMobile(open)}
               placement="bottom"
-              overlayStyle={{ minWidth: "100px" }}
+              style={{ minWidth: 100 }}
             >
               <button className={styles.popoverBtn}>
                 {purchaseType || "All"} ▼

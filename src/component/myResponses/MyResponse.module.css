@@ -450,6 +450,10 @@
   margin-right: 150px;
 }
 
+.popoverBtn {
+  cursor: pointer !important;
+}
+
 /* Tablet */
 @media (max-width: 1200px) {
   .maincontainer {
