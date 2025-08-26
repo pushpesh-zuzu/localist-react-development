@@ -6,6 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import {
   registerUserData,
   setbuyerRegisterFormData,
+  checkEmailIdApi 
 } from "../../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../../utils";
 import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
@@ -24,10 +25,10 @@ const EmailMatch = ({
     (state) => state.findJobs
   );
   const { userToken } = useSelector((state) => state.auth);
-  console.log(userToken?.remember_tokens, "000");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+
 
   const [errors, setErrors] = useState({
     email: false,
@@ -35,10 +36,34 @@ const EmailMatch = ({
     phone: false,
   });
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+const handleEmailChange = (e) => {
+  setEmail(e.target.value); // keep it simple
+  setErrors((prev) => ({ ...prev, email: false }));
+};
+
+const handleEmailBlur = async () => {
+  if (!email) return;
+
+  try {
+    // no `.unwrap()` since it's not createAsyncThunk
+    const res = await dispatch(checkEmailIdApi({ email }));
+
+    if (res?.success) {
+      setErrors((prev) => ({ ...prev, email: false }));
+    } else {
+      setEmail("");  // clear instantly
+      if (setEmails) setEmails("");
+    }
+  } catch (err) {
+    console.error("Error checking email:", err);
     setErrors((prev) => ({ ...prev, email: false }));
-  };
+  }
+};
+
+
+
+
+
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -169,6 +194,7 @@ const EmailMatch = ({
             }`}
             value={email}
             onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
           />
           {errors.email && (
             <span className={styles.errorMessage}>

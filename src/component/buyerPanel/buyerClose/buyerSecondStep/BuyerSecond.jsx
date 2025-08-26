@@ -16,6 +16,7 @@ const [disclose, setDisclose] = useState(false);
     const location = useLocation();
 const { leadId, sellerId } = location.state || {};
 const [selected, setSelected] = useState("");
+const [errors, setErrors] = useState({ price: false }); 
 
 console.log('Lead', sellerId);
     const handleSubmit = () => {
@@ -26,6 +27,7 @@ console.log('Lead', sellerId);
 
     if (!price || Number(price) <= 0) {
       showToast("error", "Please enter a valid price");
+      setErrors((prev) => ({ ...prev, price: true }));
       return;
     }
 
@@ -69,9 +71,18 @@ console.log('Lead', sellerId);
             type="number"
             placeholder="0"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </div>
+            onChange={(e) => {
+              setPrice(e.target.value);
+              setErrors((prev) => ({ ...prev, price: false })); // reset error while typing
+            }}
+                  className={`${errors.price ? styles.inputError : ""}`} // highlight input red
+                />
+              </div>
+
+              {errors.price && (
+                <span className={styles.errorText}>Please fill this field</span>
+              )}
+
        <select
   className={styles.customSelect}
   value={unitType}

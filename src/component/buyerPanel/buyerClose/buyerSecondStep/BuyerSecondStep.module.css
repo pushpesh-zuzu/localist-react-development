@@ -16,6 +16,11 @@
   line-height: 1.6;
 }
 
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px;
+}
 .question {
   font-size: 20px;
   font-weight: 700;
