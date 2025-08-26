@@ -650,8 +650,18 @@ import DummyImage from "../../../../../assets/Images/Setting/ProfileWebIcon.svg"
 import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
+import { Popover } from "antd";
 
-const BidsList = ({ previousStep }) => {
+const BidsList = ({
+  previousStep,
+  // ratingList,
+  // ratingFilterData,
+  // handleSortRating,
+  // locationSort,
+  // handelChangeSort,
+  // responseSort,
+  // handelresponseChangeSort,
+}) => {
   const { requestId } = useParams();
   const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } =
     useSelector((state) => state.leadSetting);
@@ -661,21 +671,68 @@ const BidsList = ({ previousStep }) => {
   const [ratingList, setRatingList] = useState("");
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
+  const [openPopover, setOpenPopover] = useState(null);
   const { userToken } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer);
-    const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
 
   const loadingTextInfo = [
-  "Discovering the best possible matches for you...",
-  "Evaluating options with smart precision...",
-  "Measuring distances to ensure convenience...",
-  "Organizing results for clarity and impact...",
-  "Preparing your personalized list of matches..."
-];
+    "Discovering the best possible matches for you...",
+    "Evaluating options with smart precision...",
+    "Measuring distances to ensure convenience...",
+    "Organizing results for clarity and impact...",
+    "Preparing your personalized list of matches...",
+  ];
+  const ratingOptions = (ratingFilterData?.[0] || [])
+    .slice()
+    .sort((a, b) => {
+      if (a.value === "no_rating") return -1;
+      if (b.value === "no_rating") return 1;
+      return 0;
+    })
+    .map((item) => ({
+      value: String(item.value),
+      label:
+        item.value === "no_rating"
+          ? "No Rating"
+          : item.value < 5
+          ? `${item.value} Star & up`
+          : `${item.value} Star`,
+    }));
 
+  const locationOptions = [
+    { value: "farthest to nearest", label: "Farthest to Nearest" },
+    { value: "nearest to farthest", label: "Nearest to Farthest" },
+  ];
+
+  const responseOptions = [
+    { value: "Responds within 10 mins", label: "within 10 mins" },
+    { value: "Responds within 1 hour", label: "within 1 hour" },
+    { value: "Responds within 6 hours", label: "within 6 hours" },
+    { value: "Responds within 24 hours", label: "within 24 hours" },
+  ];
+
+  const renderOptions = (options, currentValue, onChange) => (
+    <div className={styles.popoverContent}>
+      {options.map((opt) => (
+        <div
+          key={opt.value}
+          className={`${styles.optionItem} ${
+            currentValue === opt.value ? styles.active : ""
+          }`}
+          onClick={() => {
+            onChange({ target: { value: String(opt.value) } });
+            setOpenPopover(null);
+          }}
+        >
+          {opt.label}
+        </div>
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     let interval = null;
@@ -683,7 +740,7 @@ const BidsList = ({ previousStep }) => {
     if (bidListLoader) {
       // Start rotating if loader is true
       interval = setInterval(() => {
-        setIndex(prevIndex => (prevIndex + 1) % loadingTextInfo.length);
+        setIndex((prevIndex) => (prevIndex + 1) % loadingTextInfo.length);
       }, 3000);
     }
 
@@ -922,12 +979,13 @@ const BidsList = ({ previousStep }) => {
       <div className={styles.container}>
         {bidListLoader ? (
           <div className={styles.loaderWrapper}>
-          <div className={styles.centeredContent}>
-            <Spin size="large" />
-            <span className={styles.loadingText}>{loadingTextInfo[index]}</span>
+            <div className={styles.centeredContent}>
+              <Spin size="large" />
+              <span className={styles.loadingText}>
+                {loadingTextInfo[index]}
+              </span>
+            </div>
           </div>
-        </div>
-
         ) : (
           <>
             <div className={styles.headerWrapper}>
@@ -1006,7 +1064,7 @@ const BidsList = ({ previousStep }) => {
               </div>
 
               {/* Selects below */}
-              <div className={styles.selectsWrapper}>
+              {/* <div className={styles.selectsWrapper}>
                 <select
                   className={styles.customSelect}
                   onChange={handleSortRating}
@@ -1072,6 +1130,68 @@ const BidsList = ({ previousStep }) => {
                     within 24 hours
                   </option>
                 </select>
+              </div> */}
+
+              <div className={styles.selectsWrapper}>
+                <Popover
+                  content={renderOptions(
+                    ratingOptions,
+                    ratingList,
+                    handleSortRating
+                  )}
+                  trigger="click"
+                  placement="bottom"
+                  autoAdjustOverflow={false}
+                  overlayStyle={{ minWidth: "150px" }}
+                  open={openPopover === "rating"}
+                  onOpenChange={(visible) =>
+                    setOpenPopover(visible ? "rating" : null)
+                  }
+                >
+                  <button className={styles.customSelect}>
+                    {ratingList || "All ratings"}
+                  </button>
+                </Popover>
+
+                <Popover
+                  content={renderOptions(
+                    locationOptions,
+                    locationSort,
+                    handelChangeSort
+                  )}
+                  trigger="click"
+                  placement="bottom"
+                  autoAdjustOverflow={false}
+                  overlayStyle={{ minWidth: "150px" }}
+                  open={openPopover === "location"}
+                  onOpenChange={(visible) =>
+                    setOpenPopover(visible ? "location" : null)
+                  }
+                >
+                  <button className={styles.customSelect}>
+                    {locationSort || "Sort by Location"}
+                  </button>
+                </Popover>
+
+                <Popover
+                  content={renderOptions(
+                    responseOptions,
+                    responseSort,
+                    handelresponseChangeSort
+                  )}
+                  trigger="click"
+                  placement="bottom"
+                  autoAdjustOverflow={false}
+                  overlayStyle={{ minWidth: "150px" }}
+                  open={openPopover === "response"}
+                  onOpenChange={(visible) =>
+                    setOpenPopover(visible ? "response" : null)
+                  }
+                >
+                  <button className={styles.customSelect}>
+                    {responseSort || "Response time"}
+                  </button>
+                </Popover>
               </div>
             </div>
 

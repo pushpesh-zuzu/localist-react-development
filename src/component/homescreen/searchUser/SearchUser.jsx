@@ -28,6 +28,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { service, searchServiceLoader } = useSelector(
@@ -56,7 +57,6 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
-  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -104,6 +104,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const handleChange = (e) => {
     setPincode(e.target.value);
     setPostalCodeValidate(false);
+    setIsPostcodeSelected(false);
   };
 
   useEffect(() => {
@@ -164,10 +165,10 @@ const SearchProfessionals = ({ nextStep }) => {
         if (postalCode) {
           setPincode(postalCode);
           setPostalCodeValidate(true);
-
           inputRef.current.value = postalCode;
+          setIsPostcodeSelected(true);
         } else {
-          showToast("error", "No PIN code found! Please try again.");
+          showToast("error", "No Postcode found! Please try again.");
         }
         if (cityName) {
           setCity(cityName);
@@ -182,6 +183,11 @@ const SearchProfessionals = ({ nextStep }) => {
     // debugger;
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
+      return;
+    }
+
+    if (!isPostcodeSelected && !!requireValidationPin) {
+      showToast("error", "Please select a postcode from the suggestions.");
       return;
     }
 

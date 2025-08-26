@@ -416,6 +416,13 @@
   background-position: right 5px center;
   padding-right: 40px;
   background-size: 16px 16px;
+  width: 205px;
+  /* padding: 8px 10px; */
+  border: 1px solid #d9d9d9;
+  background-color: #ffffff;
+  color: #000000;
+  outline: none;
+  height: 40px;
 }
 
 /* .replyCheckbox input {
@@ -459,7 +466,7 @@
 .filters {
   display: flex;
   flex-direction: row;
-  padding: 8px 4px;
+  padding: 8px;
   gap: 4px;
   align-items: center;
 }
@@ -690,6 +697,11 @@
     box-shadow: 0px 0px 2px 0.5px #0000001a;
   }
 
+  .selectsWrapper {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
   .recommendBar {
     font-size: 14px;
     padding: 15px 8px;
@@ -703,7 +715,7 @@
     gap: 4px;
   }
   .filters select {
-    width: 120px;
+    /* width: 120px; */
     padding: 8px 6px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
@@ -968,12 +980,17 @@
 }
 @media screen and (min-width: 371px) and (max-width: 420px) {
   .filters select {
-    width: 105px;
+    /* width: 105px; */
     padding: 8px 6px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
     color: #000000;
     font-size: 9px;
+  }
+
+  .selectsWrapper {
+    width: 100%;
+    flex-wrap: wrap;
   }
 
   .customSelect {
@@ -985,7 +1002,10 @@
     background-position: right 4px center;
     padding-right: 40px;
     background-size: 10px 10px;
+    height: 30px;
+    width: 150px;
   }
+
   /* .images {
     object-fit: cover;
     height: 90px;
@@ -994,7 +1014,7 @@
 
 @media screen and (max-width: 370px) {
   .filters select {
-    width: 100px;
+    /* width: 100px; */
     padding: 8px 6px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
@@ -1011,10 +1031,15 @@
     padding-right: 40px;
     background-size: 10px 10px;
   }
+
+  .selectsWrapper {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }
 @media screen and (max-width: 350px) {
   .filters select {
-    width: 88px;
+    /* width: 88px; */
     padding: 8px 6px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
@@ -1034,7 +1059,7 @@
 }
 @media screen and (max-width: 320px) {
   .filters select {
-    width: 85px;
+    /* width: 85px; */
     padding: 6px 4px;
     border: 1px solid #d9d9d9;
     background-color: #ffffff;
