@@ -82,11 +82,11 @@ select {
   font-size: 16px !important;
 }
 
-input {
+/* input {
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
-}
+} */
 
 .slick-slide {
   display: flex !important;
