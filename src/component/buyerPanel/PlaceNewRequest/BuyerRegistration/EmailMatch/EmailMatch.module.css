@@ -10,6 +10,19 @@
   justify-content: center;
 }
 
+.phoneWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.prefix {
+  padding: 12px;
+  background: #f3f3f3;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+}
+
 /* .closeButton {
   position: absolute;
   top: 5px;
