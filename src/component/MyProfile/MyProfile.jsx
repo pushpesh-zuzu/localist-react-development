@@ -24,7 +24,6 @@ const MyProfile = () => {
   const { viewProfileData } = useSelector((state) => state.leadSetting);
   // const { Panel } = Collapse;
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
-
   // Refs for each accordion section
   const sectionRefs = {
     About: useRef(null),
@@ -151,6 +150,7 @@ const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
         <a
           className={styles.profileLink}
           href={`/view-profile/${companySlug.toLowerCase()}/${randomKey}`}
+          // href={`/review/${companySlug.toLowerCase()}/${userToken.uuid}`}
           target="_blank"
           rel="noopener noreferrer"
         >

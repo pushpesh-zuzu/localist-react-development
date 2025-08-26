@@ -42,7 +42,7 @@ import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
-import Home from "../assets/Images/servicesLevels/Home.jpg";
+import Home from "../assets/banners/Home.jpg";
 
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],

@@ -359,9 +359,9 @@ const router = createBrowserRouter([
       {
         path: "/view-profile/:company_name/:requestId",
         element: (
-          <ProtectedRoute>
+          // <ProtectedRoute>
             <ViewProfiles />
-          </ProtectedRoute>
+          // </ProtectedRoute>
         ),
       },
       {
