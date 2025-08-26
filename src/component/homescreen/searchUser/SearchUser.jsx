@@ -29,6 +29,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { service, searchServiceLoader } = useSelector(
@@ -57,7 +58,6 @@ const SearchProfessionals = ({ nextStep }) => {
 
     return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
   }, []);
-  console.log(city, "city");
   const handleClose = () => {
     setShow(false);
     setInput("");
@@ -105,6 +105,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const handleChange = (e) => {
     setPincode(e.target.value);
     setPostalCodeValidate(false);
+    setIsPostcodeSelected(false);
     setIsPincodeFromDropdown(false); // ❌ mark as invalid if typed
   };
 
@@ -124,8 +125,7 @@ const SearchProfessionals = ({ nextStep }) => {
       }
     };
 
-
-        const initAutocomplete = () => {
+    const initAutocomplete = () => {
       if (!inputRef.current) return;
 
       const autocomplete = new window.google.maps.places.Autocomplete(
@@ -157,7 +157,9 @@ const SearchProfessionals = ({ nextStep }) => {
           setPostalCodeValidate(true);
           setIsPincodeFromDropdown(true); // ✅ valid only when chosen
           inputRef.current.value = postalCode;
+          setIsPostcodeSelected(true);
         } else {
+          showToast("error", "No Postcode found! Please try again.");
           showToast("error", "No Postcode  found! Please try again.");
         }
 
@@ -178,8 +180,17 @@ const SearchProfessionals = ({ nextStep }) => {
       return;
     }
 
-    if (!pincode && requireValidationPin) {
-      showToast("error", "Please enter a postcode");
+    if (!isPostcodeSelected && !!requireValidationPin) {
+      showToast("error", "Please select a postcode from the suggestions.");
+      return;
+    }
+
+    if (!pincode && !!requireValidationPin) {
+      showToast("error", "Please enter a pincode");
+      return;
+    }
+    if ((pincode.length < 5 || pincode.length > 8) && !!requireValidationPin) {
+      showToast("error", "Pincode must be between 5 and 8 characters!");
       return;
     }
 
@@ -203,8 +214,6 @@ const SearchProfessionals = ({ nextStep }) => {
     setSelectedServiceId({ id, name });
     setShow(true);
   };
-
-
 
   // useEffect(() => {
   //   // Load Google Places API script dynamically

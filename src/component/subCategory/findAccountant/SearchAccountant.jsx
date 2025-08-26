@@ -5,7 +5,7 @@ import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 
-const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
+const SearchAccountant = ({ title = "", panelImage, defaultService }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
@@ -13,12 +13,14 @@ const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
 
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
     setShowModal(false);
     setPincode("");
+    setIsPostcodeSelected(false);
   };
 
   const initGoogleAutocomplete = () => {
@@ -32,7 +34,6 @@ const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
       }
     );
 
-    
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (!place.address_components) return;
@@ -51,6 +52,7 @@ const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
       if (postalCode) {
         setPincode(postalCode);
         inputRef.current.value = postalCode;
+        setIsPostcodeSelected(true);
       } else {
         showToast("error", "No PIN code found! Please try again.");
       }
@@ -85,6 +87,12 @@ const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
       return;
     }
 
+    if (!isPostcodeSelected) {
+      //  prevent manual typing
+      showToast("error", "Please select a postcode from the suggestions.");
+      return;
+    }
+
     if (userToken?.active_status === 1) {
       showToast("error", "You are not a buyer.");
       return;
@@ -110,7 +118,10 @@ const SearchAccountant = ({ title = "", panelImage,defaultService }) => {
             placeholder="Enter your postcode or town"
             ref={inputRef}
             value={pincode}
-            onChange={(e) => setPincode(e.target.value)}
+            onChange={(e) => {
+              setPincode(e.target.value);
+              setIsPostcodeSelected(false);
+            }}
           />
 
           <button onClick={handleContinue}>Go</button>
