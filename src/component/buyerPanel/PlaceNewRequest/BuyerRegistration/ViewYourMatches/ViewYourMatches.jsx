@@ -84,8 +84,10 @@ useEffect(() => {
 
         <div className={styles.infoWrapper}>
           <label htmlFor="phoneNumber" className={styles.label}>
-            Please enter your phone number
+            Please enter your phone numbers
           </label>
+          <div className={styles.phoneWrapper}>
+          <span className={styles.prefix}>+44</span>
           <input
             type="text"
             id="phoneNumber"
@@ -102,6 +104,7 @@ useEffect(() => {
               Please enter a valid 10-digit phone number.
             </span>
           )}
+          </div>
 
           <div className={styles.checkboxContainer}>
             <input
