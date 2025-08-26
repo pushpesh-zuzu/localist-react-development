@@ -365,6 +365,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/review/:company_name/:profileId",
+        element: (
+          // <ProtectedRoute>
+          <ViewProfiles />
+          // </ProtectedRoute>
+        ),
+      },
+      {
         path: "/review/:profileId",
         element: (
           // <ProtectedRoute>
