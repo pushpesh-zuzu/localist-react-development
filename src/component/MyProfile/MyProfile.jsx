@@ -149,8 +149,8 @@ const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
      {companySlug && (
         <a
           className={styles.profileLink}
-          // href={`/view-profile/${companySlug.toLowerCase()}/${randomKey}`}
-          href={`/review/${companySlug.toLowerCase()}/${userToken.uuid}`}
+          href={`/view-profile/${companySlug.toLowerCase()}/${randomKey}`}
+          // href={`/review/${companySlug.toLowerCase()}/${userToken.uuid}`}
           target="_blank"
           rel="noopener noreferrer"
         >
