@@ -1,14 +1,12 @@
 import axios from "axios";
 import { RouterProvider } from "react-router-dom";
-import "./App.css";
-import router from "./routes/Router";
+import createAppRouter from "./routes/Router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { HelmetProvider } from "react-helmet-async";
 
-function App() {
+function App({ initialUrl }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
@@ -79,13 +77,11 @@ function App() {
         event.returnValue = confirmationMessage;
         return confirmationMessage;
       };
-      
-      
+
       const handleUnload = () => {
-        
         if (params) {
           navigator.sendBeacon(
-             `${import.meta.env.VITE_REACT_APP_API_BASE_URL}users/registration`,
+            `${import.meta.env.VITE_REACT_APP_API_BASE_URL}users/registration`,
             params
           );
         }
@@ -101,12 +97,12 @@ function App() {
     }
   }, [registerStep, selectedServiceFormData]);
 
+  const router = createAppRouter(initialUrl);
+
   return (
     <>
-      <HelmetProvider>
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </HelmetProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
     </>
   );
 }

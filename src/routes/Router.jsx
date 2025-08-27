@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, createMemoryRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
@@ -53,9 +53,9 @@ import AboutUs from "../component/AboutUs/AboutUs";
 import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
-//test en/gb/bookkeeping-services/
 
-const router = createBrowserRouter([
+// Build routes once and reuse for both client and server routers
+const routes = [
   {
     path: "/",
     element: <MainLayout />,
@@ -78,8 +78,6 @@ const router = createBrowserRouter([
           />
         ),
       },
-      // { path: "en/gb/gardening-landscaping/", element: <CloneCatrgory routeName='home' accountHeader="Home & Garden" subHeader="Home & Garden" bestText={`It's super fast and easy!`} /> },
-
       {
         path: "/en/gb/business/",
         element: (
@@ -131,7 +129,6 @@ const router = createBrowserRouter([
           />
         ),
       },
-
       {
         path: "/en/gb/:slug/",
         element: (
@@ -412,7 +409,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
       {
         path: "/whats-service",
         element: (
@@ -421,13 +417,22 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
-      
-
-      // { path: "/inprogress", element: <InProgressPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },
-]);
+];
 
-export default router;
+// Create a router suitable for the current environment
+export function createAppRouter(initialUrl) {
+  if (typeof window === "undefined") {
+    // Server-side: use memory router seeded with the incoming URL
+    return createMemoryRouter(routes, {
+      initialEntries: [initialUrl || "/"],
+    });
+  }
+  // Client-side
+  return createBrowserRouter(routes);
+}
+
+// Default export is the factory for flexibility
+export default createAppRouter;

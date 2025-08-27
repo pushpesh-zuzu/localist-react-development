@@ -4,10 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "cross-env NODE_ENV=development node server.js", 
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist/server",
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.jsx --outDir dist/server",
+
+    "serve": "cross-env NODE_ENV=production node server.js", 
+    "preview": "vite preview",
+
+    "lint": "eslint ."
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",

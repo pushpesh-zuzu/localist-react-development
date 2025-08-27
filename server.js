@@ -1,91 +1,106 @@
+import "dotenv/config";
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import express from "express";
 import { createServer as createViteServer } from "vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const resolve = (p) => path.resolve(__dirname, p);
 
 async function createServer() {
   const app = express();
+  const isProd = process.env.NODE_ENV === "production";
 
-  // Vite in middleware mode
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: "custom",
-  });
-
-  app.use(vite.middlewares);
-
-  // Load manifest
+  let vite, template, render;
   let manifest = {};
-  const manifestPath = path.resolve(
-    __dirname,
-    "dist/client/.vite/manifest.json"
-  );
-  if (fs.existsSync(manifestPath)) {
-    manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+
+  if (isProd) {
+    template = fs.readFileSync(resolve("dist/client/index.html"), "utf-8");
+
+    const manifestPath = resolve("dist/client/.vite/manifest.json");
+    if (fs.existsSync(manifestPath)) {
+      manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+    }
+
+    const serverEntry = resolve("dist/server/entry-server.js");
+    const mod = await import(pathToFileURL(serverEntry).href);
+    render = mod.render;
+
+    app.use(
+      "/assets",
+      express.static(resolve("dist/client/assets"), {
+        maxAge: "1y",
+        immutable: true,
+      })
+    );
+    // Serve static assets but do NOT serve index.html so SSR can inject HTML
+    app.use(
+      express.static(resolve("dist/client"), {
+        maxAge: "1h",
+        index: false,
+      })
+    );
+  } else {
+    vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "custom",
+    });
+    app.use(vite.middlewares);
   }
 
-  // ✅ SSR handler should come BEFORE static serving
-  app.use(/(.*)/, async (req, res, next) => {
-    const url = req.originalUrl;
-
+  app.use(async (req, res, next) => {
     try {
-      let template = fs.readFileSync(
-        path.resolve(__dirname, "index.html"),
-        "utf-8"
-      );
+      const url = req.originalUrl;
 
-      template = await vite.transformIndexHtml(url, template);
-
-      const { render } = await vite.ssrLoadModule("/src/entry-server.jsx");
+      let tpl = template;
+      if (!isProd) {
+        tpl = fs.readFileSync(resolve("index.html"), "utf-8");
+        tpl = await vite.transformIndexHtml(url, tpl);
+        const { render: devRender } = await vite.ssrLoadModule(
+          "/src/entry-server.jsx"
+        );
+        render = devRender;
+      }
 
       const rendered = await render(url);
-      const appHtml = typeof rendered === "string" ? rendered : rendered.html;
-      const headContent = rendered.head || "";
+      const appHtml = typeof rendered === "string" ? rendered : rendered.html || "";
+      const headContent = (rendered && rendered.head) || "";
 
-      console.log("SSR rendering:", url, "length:", appHtml.length);
-
-      // Inline CSS
       let cssInline = "";
-      Object.values(manifest).forEach((entry) => {
-        if (entry.css) {
-          entry.css.forEach((href) => {
-            const cssPath = path.resolve(__dirname, "dist/client", href);
-            if (fs.existsSync(cssPath)) {
-              cssInline += `<style>${fs.readFileSync(
-                cssPath,
-                "utf-8"
-              )}</style>\n`;
-            }
-          });
-        }
-      });
+      if (isProd && manifest) {
+        Object.values(manifest).forEach((entry) => {
+          if (entry?.css) {
+            entry.css.forEach((href) => {
+              const cssPath = resolve(path.join("dist/client", href));
+              if (fs.existsSync(cssPath)) {
+                cssInline += `<style>${fs.readFileSync(cssPath, "utf-8")}</style>\n`;
+              }
+            });
+          }
+        });
+      }
 
-      const html = template
-        .replace(`<!--ssr-outlet-->`, appHtml || "")
-        .replace(`<!--css-outlet-->`, `${headContent}\n${cssInline}`);
+      const html = tpl
+        .replace("<!--ssr-outlet-->", appHtml)
+        .replace("<!--css-outlet-->", `${headContent}\n${cssInline}`);
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
-      vite.ssrFixStacktrace(e);
+      if (!isProd && vite) {
+        vite.ssrFixStacktrace(e);
+      }
       next(e);
     }
   });
 
-  // ✅ static after SSR handler
-  app.use(
-    "/assets",
-    express.static(path.resolve(__dirname, "dist/client/assets"))
-  );
-  app.use(express.static(path.resolve(__dirname, "dist/client")));
-
-  const port = "3000";
-  const host =  "127.0.0.1";
+  const port = process.env.SSR_PORT || 3000;
+  const host = process.env.SSR_HOST || "127.0.0.1";
 
   app.listen(port, host, () => {
-    console.log(`SSR server running at http://${host}:${port}`);
+    console.log(
+      `SSR server running at http://${host}:${port} (mode: ${isProd ? "production" : "development"})`
+    );
   });
 }
 

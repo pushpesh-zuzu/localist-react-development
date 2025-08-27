@@ -13,14 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- 3. Defer Non-Critical CSS -->
-    <link
-      rel="stylesheet"
-      href="/src/index.css"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript><link rel="stylesheet" href="/src/index.css" /></noscript>
+    <!-- 3. Global CSS: render-blocking to prevent FOUC during SSR dev -->
+    <link rel="stylesheet" href="/src/index.css" />
+    <link rel="stylesheet" href="/src/App.css" />
 
     <!-- 4. Optimized Google Fonts (Single Request) -->
     <link
@@ -37,7 +32,7 @@
     </noscript>
 
     <!-- 5. Preload Important JS -->
-    <link rel="modulepreload" href="/src/main.jsx" />
+    <link rel="modulepreload" href="/src/entry-client.jsx" />
 
     <!-- Static SEO Meta Tags -->
     <meta
@@ -62,10 +57,11 @@
       content="Find trusted professionals for home care, web design, landscaping, business coaching, and more."
     />
     <meta property="og:type" content="website" />
+    <!--css-outlet-->
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>
 
