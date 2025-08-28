@@ -647,7 +647,9 @@ const AboutAccordion = ({ details }) => {
           className={styles.input}
           type="text"
           name="company_name"
-          value={formState.company_name}
+          value={details?.business_profile_name?.trim() !== "" 
+                    ? details?.business_profile_name
+                    : formState.company_name}
           onChange={handleInputChange}
           placeholder="Enter your company name"
           readOnly

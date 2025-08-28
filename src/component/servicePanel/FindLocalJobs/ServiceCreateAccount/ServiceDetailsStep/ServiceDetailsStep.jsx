@@ -22,33 +22,9 @@ const ServiceDetailsStep = ({
   const serviceParms = useParams()
   
   const debounceTimer = useRef({ company_name: null });
+  const [hasCompanyReg, setHasCompanyReg] = useState(null); 
 
-const handleCompanyNameChange = (e) => {
-  const companyValue = e.target.value;
-  setFormData((prev) => ({ ...prev, company_name: companyValue }));
 
-  if (companyValue.trim().length > 1) {
-    if (debounceTimer.current.company_name) {
-      clearTimeout(debounceTimer.current.company_name);
-    }
-
-    debounceTimer.current.company_name = setTimeout(() => {
-      const currentCompanyName = companyValue;
-
-      dispatch(checkCompanyNameWithoutRegApi({ company_name: companyValue }))
-        .then((result) => {
-          if (formData.company_name === currentCompanyName) {
-            if (result?.success === true) {
-              showToast("success", "Valid Company Name");
-              dispatch(setCompanyCheck(true));
-            } else {
-              dispatch(setCompanyCheck(false));
-            }
-          }
-        });
-    }, 1000);
-  }
-};
   
 //   const handleCheck = () => {
 //     if(emailCheck && companyCheck && phoneCheck) {
@@ -66,6 +42,11 @@ const handleCheck = () => {
 
   const hasCompanyReg = formData.company_reg_number.trim().length > 0;
   const hasCompanyName = formData.company_name.trim().length > 0;
+
+   if (!formData.profile_name || formData.profile_name.trim() === "") {
+    showToast("error", "Business Profile Name is required");
+    return;
+  }
   
   if (!emailCheck) {
     showToast("error", "Please Enter Correct Email");
@@ -90,6 +71,34 @@ const handleCheck = () => {
   
 
 
+  const handleToggleCompanyReg = (value) => {
+  setHasCompanyReg(value);
+
+  if (value === 0) {
+    dispatch(setFormData({
+      company_reg_number: "",
+      company_name: ""
+    }));
+    // user selected "No"
+    setFormData(prev => ({
+      ...prev,
+      company_reg_number: "",
+      company_name: ""
+    }));
+    dispatch(clearCompanyData());
+  }
+
+  if (value === 1) {
+    // user selected "Yes" -> reset fresh
+    setFormData(prev => ({
+      ...prev,
+      company_reg_number: "",
+      company_name: ""
+    }));
+    
+    dispatch(clearCompanyData());
+  }
+};
 
 
 // On reg number change: reset fields and fetch if 8 digits
@@ -129,7 +138,14 @@ useEffect(() => {
   }
 }, [companyData]);
 
-
+useEffect(() => {
+  if (companyData?.company_name && hasCompanyReg === 1) {
+    setFormData(prev => ({
+      ...prev,
+      company_name: companyData.company_name || ""
+    }));
+  }
+}, [companyData, hasCompanyReg]);
 
   return (
     <>
@@ -157,12 +173,58 @@ useEffect(() => {
                 />
               </div>
               {errors.name && <p className={styles.errorText}>{errors.name}</p>}
+              
+              {/* Business Profile Name */}
+                <div className={styles.labelInputWrapper}>
+                  <label className={styles.label}>
+                    Business Profile Name
+                  </label>
+                  <input
+                    type="text"
+                    className={`${styles.input} ${errors.profile_name ? styles.errorBorder : ""}`}
+                    name="profile_name"
+                    value={formData.profile_name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                {errors.profile_name && <p className={styles.errorText}>{errors.profile_name}</p>}
 
+              
+                
+              {/* Do you have a company reg number? 
+              <div className={styles.labelInputWrapper}>
+                <label className={styles.label}>Do you have a company registration number?</label>
+                <div className={styles.toggleGroup}>
+                  <button
+                    type="button"
+                    className={formData.has_company_reg === 1 ? styles.activeButton : styles.toggleButton}
+                    onClick={() => setFormData(prev => ({ ...prev, has_company_reg: 1 }))}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    className={formData.has_company_reg === 0 ? styles.activeButtonNo : styles.toggleButtonNo}
+                    onClick={() => setFormData(prev => ({
+                      ...prev,
+                      has_company_reg: 0,
+                      company_reg_number: "",
+                      company_name: ""
+                    }))}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
+
+              {/* If Yes → show registration number + prefilled company name 
+              {formData.has_company_reg === 1 && (
+                <>
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
                 Company registration number<span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>(Optional)</span>
               </label>
-                
                <input
                     type="text"
                     className={`${styles.input} ${
@@ -184,6 +246,7 @@ useEffect(() => {
                 <p className={styles.errorText}>{errors.company_reg_number}</p>
               )}
 
+
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Company name</label>
                 <input
@@ -203,6 +266,70 @@ useEffect(() => {
                 </label>
                
               </div>
+
+              </>
+            )}
+              */}
+
+              <div className={styles.labelInputWrapper}>
+  <label className={styles.label}>Do you have a company registration number?</label>
+  <div className={styles.toggleGroup}>
+    <button
+      type="button"
+      className={hasCompanyReg === 1 ? styles.activeButton : styles.toggleButton}
+      onClick={() => handleToggleCompanyReg(1)}
+    >
+      Yes
+    </button>
+    <button
+      type="button"
+      className={hasCompanyReg === 0 ? styles.activeButtonNo : styles.toggleButtonNo}
+      onClick={() => handleToggleCompanyReg(0)}
+    >
+      No
+    </button>
+  </div>
+</div>
+
+
+
+              {/* Only show registration number + company name if Yes */}
+              {hasCompanyReg === 1 && (
+                <>
+                  <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>
+                      Company registration number
+                      <span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>
+                        (Optional)
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${errors.company_reg_number ? styles.errorBorder : ""}`}
+                      name="company_reg_number"
+                      value={formData.company_reg_number}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 8);
+                        handleInputChange({ target: { name: "company_reg_number", value } });
+                      }}
+                      maxLength={8}
+                    />
+                  </div>
+
+                  <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company name</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${errors.company_name ? styles.errorBorder : ""}`}
+                      name="company_name"
+                      value={formData.company_name}
+                      onChange={handleInputChange}
+                      readOnly
+                    />
+                  </div>
+                </>
+              )}
+
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Email address</label>

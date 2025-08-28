@@ -217,6 +217,7 @@ console.log(postalCode,lat,lng,'postalCode')
       user_type: 1,
       active_status: 1,
       loggedUser: 1,
+      businessname: formData.profile_name,
       nation_wide: formData.nation_wide ? 1 : 0,
       is_online: formData.is_online ? 1 : 0,
         miles2: selectedServices.length > 0 ? formData.miles2 : "",
