@@ -32,7 +32,7 @@ const LeadInfoModal = ({ visible, onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h3>An example lead on Locallist</h3>
+          <h3>An example lead on Localists for a Personal Trainer</h3>
           <button className={styles.closeBtn} onClick={onClose}>
             &times;
           </button>

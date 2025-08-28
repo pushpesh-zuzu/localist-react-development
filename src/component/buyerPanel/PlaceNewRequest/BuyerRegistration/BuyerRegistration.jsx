@@ -272,8 +272,8 @@ const BuyerRegistration = ({
   postcode,
   city,
   postalCodeValidate,
-  setSelectedService,
-  setFromImageModal
+  setSelectedService = () => {},  
+  setFromImageModal = () => {},
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -335,9 +335,9 @@ const BuyerRegistration = ({
   }, [shouldClose]);
 
 const handleClose = () => {
-  setSelectedService(null);
-  setFromImageModal(false);
-  closeModal();
+  if (typeof setSelectedService === "function") setSelectedService(null);
+  if (typeof setFromImageModal === "function") setFromImageModal(false);
+  if (typeof closeModal === "function") closeModal();
 };
 
 
