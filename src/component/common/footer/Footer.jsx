@@ -150,10 +150,10 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <Link to="/en/gb/how-it-works-for-sellers/" className={styles.link}>
+              <Link to="/en/gb/how-it-works-for-sellers" className={styles.link}>
                 <li>How it works</li>
               </Link>
-              <Link className={styles.link} to="/sellers/pricing/">
+              <Link className={styles.link} to="/sellers/pricing">
                 <li>Pricing</li>
               </Link>
               <Link
@@ -261,10 +261,10 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <Link to="/en/gb/how-it-works-for-sellers/">
+              <Link to="/en/gb/how-it-works-for-sellers">
                 <li>How it works</li>
               </Link>
-              <Link to="/sellers/pricing/">
+              <Link to="/sellers/pricing">
                 <li>Pricing</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/sellers/create"}>

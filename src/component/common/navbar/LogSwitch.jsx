@@ -872,7 +872,7 @@ const LogSwitch = () => {
               </Link>
               {!selectedServiceId && !serviceTitle && (
                 <Link
-                  to={"/sellers/create/"}
+                  to={"/sellers/create"}
                   className={styles.professionalBtn}
                   onClick={() => {
                     // dispatch(setRegisterStep(1));

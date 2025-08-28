@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const PricingSection = () => {
   const navigate = useNavigate()
   const onSubmitPageChange = () => {
-    navigate("/sellers/create/")
+    navigate("/sellers/create")
   }
   return (
     <div className={styles.container}>
