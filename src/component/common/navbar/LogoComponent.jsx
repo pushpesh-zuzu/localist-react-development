@@ -146,14 +146,40 @@ const LogoComponent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const handleClose = (e) => {
-    setShowSubMenu(false);
-    setMouseHover(false);
-    setShowbMenu(false);
-    setShowThirdLevel(false);
-    setShowbMenu(false);
+  const handleClose = () => {
+  setShowSubMenu(false);
+  setMouseHover(false);
+  setShowbMenu(false);
+  setShowThirdLevel(false);
+  setSelectedSubcategory(null);
+  setFilterItems("");
+  setFilteRoute("");
+  setSlectedThirdLevelRoute("");
+};
+useEffect(() => {
+  let lastScrollY = window.scrollY;
+  
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > 200 || Math.abs(currentScrollY - lastScrollY) > 50) {
+      handleClose();
+    }
+    
+    lastScrollY = currentScrollY;
   };
 
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+useEffect(() => {
+  handleClose();
+}, [location.pathname]);
+  
   const content = () => {
     return (
       <div

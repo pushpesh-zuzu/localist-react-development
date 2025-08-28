@@ -246,7 +246,6 @@
 }
 
 .footer :global(.ant-collapse-header) {
-  color: #fff !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
@@ -261,7 +260,7 @@
 }
 
 .footerNavLinks ul li {
-  color: #fff;
+  color: #000;
   list-style: none;
 }
 
