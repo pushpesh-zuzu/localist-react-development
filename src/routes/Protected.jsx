@@ -1,45 +1,51 @@
-// import { useSelector } from "react-redux";
-// import { Navigate } from "react-router-dom";
-
-// const ProtectedRoute = ({ children }) => {
-//  const { userToken } = useSelector((state) => state.auth);
-//  const { registerToken } = useSelector((state) => state.findJobs);
-
-
-//   if ((!userToken  && !registerToken )) {
-//     return <Navigate to="/login" />;
-//   }
-
-//   return children;
-// };
-
-// export default ProtectedRoute;
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { showToast } from "../utils";
-// Adjust the path if needed
 
+/**
+* SSR-safe ProtectedRoute
+* - On the server, always render children to avoid SSR/CSR mismatches.
+* - On the client, wait until mounted before deciding to redirect.
+* - When unauthenticated, redirect to login and preserve "from" location.
+*/
 const ProtectedRoute = ({ children }) => {
-  const { userToken } = useSelector((state) => state.auth);
-  const { registerToken } = useSelector((state) => state.findJobs);
-  const toastShown = useRef(false); // 🛑 Prevent double toast
+ const location = useLocation();
+ const { userToken } = useSelector((state) => state.auth);
+ const { registerToken } = useSelector((state) => state.findJobs);
+ const toastShown = useRef(false);
 
-  const isAuthenticated = userToken || registerToken;
+ // Avoid redirecting during server render to prevent hydration mismatches
+ const isServer = typeof window === "undefined";
+ if (isServer) {
+   return children;
+ }
 
-  useEffect(() => {
-    if (!isAuthenticated && !toastShown.current) {
-      // showToast("error", "Please log in to continue.");
-      toastShown.current = true; // ✅ Mark toast as shown
-    }
-  }, [isAuthenticated]);
+ // Ensure we only decide after first client mount
+ const [mounted, setMounted] = useState(false);
+ useEffect(() => {
+   setMounted(true);
+ }, []);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+ const isAuthenticated = Boolean(userToken || registerToken);
 
-  return children;
+ useEffect(() => {
+   if (mounted && !isAuthenticated && !toastShown.current) {
+     // showToast("error", "Please log in to continue.");
+     toastShown.current = true;
+   }
+ }, [mounted, isAuthenticated]);
+
+ // While mounting, render a non-empty placeholder to avoid a blank outlet
+ if (!mounted) {
+   return <div style={{ minHeight: "40vh" }} />;
+ }
+
+ if (!isAuthenticated) {
+   return <Navigate to="/login" replace state={{ from: location }} />;
+ }
+
+ return children;
 };
 
 export default ProtectedRoute;

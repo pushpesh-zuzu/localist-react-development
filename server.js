@@ -94,12 +94,13 @@ async function createServer() {
     }
   });
 
-  const port = process.env.SSR_PORT || 3000;
-  const host = process.env.SSR_HOST || "127.0.0.1";
-
+  const port = isProd ? process.env.SSR_PORT || 5102 : process.env.PORT || 5100;
+  const host = isProd ? process.env.SSR_HOST || '127.0.0.1' : process.env.HOST || '127.0.0.1';
+  const serverType = isProd ? "SSR server" : "Server";
+  
   app.listen(port, host, () => {
     console.log(
-      `SSR server running at http://${host}:${port} (mode: ${isProd ? "production" : "development"})`
+      `${serverType} running at http://${host}:${port} (mode: ${isProd ? "production" : "development"})`
     );
   });
 }

@@ -238,8 +238,8 @@ dispatch(registerUserData(payload)).then((result) => {
         showToast("success", result?.message || "Register successful!");
         navigate("/settings/billing/my-credits");
         dispatch(setService());
-         dispatch(setRegisterStep(0));
-         dispatch(clearCompanyData())
+        dispatch(setRegisterStep(0));
+        dispatch(clearCompanyData())
       }
     });
 }

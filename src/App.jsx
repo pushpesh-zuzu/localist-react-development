@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import createAppRouter from "./routes/Router";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 function App({ initialUrl }) {
@@ -97,7 +97,8 @@ function App({ initialUrl }) {
     }
   }, [registerStep, selectedServiceFormData]);
 
-  const router = createAppRouter(initialUrl);
+  // Create the router once to avoid re-instantiation on every render (which can blank the Outlet on navigation in SSR/CSR)
+  const router = useMemo(() => createAppRouter(initialUrl), []);
 
   return (
     <>
