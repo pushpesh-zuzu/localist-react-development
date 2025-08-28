@@ -20,7 +20,7 @@ const FindLocalJobs = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false); // ✅ State में move किया
-
+  const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
   const divRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
@@ -89,12 +89,25 @@ const FindLocalJobs = () => {
     }
   }, []);
 
+  const DEBOUNCE_MS = 250;
+  const debounceRef = useRef(null);
+
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
       dispatch(setSelectedServiceId(selectedService.id));
       navigate(`/sellers/create-account/${slug}`);
     }
+  };
+
+  const triggerSearch = (value) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      const trimmed = value.trim();
+      dispatch(
+        searchService({ search: trimmed === "" ? "" : trimmed.slice(0, 4) })
+      );
+    }, DEBOUNCE_MS);
   };
 
   return (
@@ -110,10 +123,24 @@ const FindLocalJobs = () => {
           <input
             className={styles.searchInput}
             placeholder="What service do you provide?"
+            onFocus={() => {
+              setIsFocused(true);
+              setIsDropdownOpen(true);        // open dropdown on focus
+              // if field is empty on focus, load ALL services so dropdown isn't blank
+              if (Input.trim() === "") {
+                dispatch(searchService({ search: "" /*, serviceid*/ }));
+              }
+            }}
+            onBlur={() => {
+              setIsFocused(false);
+              
+            }}
             onChange={(e) => {
-              setInput(e.target.value);
-              setIsDropdownOpen(!!e.target.value);
+              const value = e.target.value;
+              setInput(value);
+              setIsDropdownOpen(true);
               setSelectedService(null);
+              triggerSearch(value);
             }}
             value={Input}
           />

@@ -173,6 +173,8 @@ const SearchProfessionals = ({ nextStep }) => {
     loadGoogleMapsScript();
   }, []);
 
+  const DEBOUNCE_MS = 250;
+  const debounceRef = useRef(null);
   // --- VALIDATION BEFORE CONTINUE ---
   const handleGetStarted = (requireValidationPin) => {
     if (!selectedService) {
@@ -317,6 +319,16 @@ const SearchProfessionals = ({ nextStep }) => {
   //   setShow(true);
   // };
 
+  const triggerSearch = (value) => {
+  if (debounceRef.current) clearTimeout(debounceRef.current);
+  debounceRef.current = setTimeout(() => {
+    const trimmed = value.trim();
+    dispatch(
+      searchService({ search: trimmed === "" ? "" : trimmed.slice(0, 4) })
+    );
+  }, DEBOUNCE_MS);
+};
+
   return (
     <div className={styles.searchContainer}>
       <div className={styles.popularExamples}>
@@ -345,19 +357,32 @@ const SearchProfessionals = ({ nextStep }) => {
         </h4>
 
         <div className={styles.searchBox}>
-          <input
-            type="text"
-            placeholder={placeholder}
-            className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            onChange={(e) => {
-              setInput(e.target.value);
-              setIsDropdownOpen(!!e.target.value);
-              setSelectedService(null);
-            }}
-            value={Input}
-          />
+           <input
+        type="text"
+        placeholder={placeholder}
+        className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
+        onFocus={() => {
+          setIsFocused(true);
+          setIsDropdownOpen(true);        // open dropdown on focus
+          // if field is empty on focus, load ALL services so dropdown isn't blank
+          if (Input.trim() === "") {
+            dispatch(searchService({ search: "" /*, serviceid*/ }));
+          }
+        }}
+        onBlur={() => {
+          setIsFocused(false);
+          // optionally close dropdown here, or keep it open for clicks inside the list
+          // setIsDropdownOpen(false);
+        }}
+        onChange={(e) => {
+          const value = e.target.value;
+          setInput(value);
+          setIsDropdownOpen(true);        // keep dropdown open while typing/clearing
+          setSelectedService(null);       // your existing line
+          triggerSearch(value);           // 👉 refresh dropdown results on every change
+        }}
+        value={Input}
+      />
 
           <div className={styles.divider}></div>
           <div className={styles.locationWrapper}>
