@@ -229,6 +229,7 @@
 }
 
 .footerBottom {
+  background-color: #F7F7F7;
   text-align: center;
   font-weight: 400;
   font-size: 12px;
@@ -238,7 +239,7 @@
 }
 
 .footerBottom p {
-  margin: 0.5rem 0px;
+  padding: 0.5rem 0px;
 }
 
 .footer :global(.ant-collapse) {

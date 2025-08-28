@@ -128,7 +128,7 @@ const WORK_STEPS = [
   {
     id: 1,
     icon: formStep,
-    description: "Click get a free quote’ below and fill in your details",
+    description: "Click get a free quote below and fill in your details",
   },
   {
     id: 2,
