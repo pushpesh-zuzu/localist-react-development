@@ -50,10 +50,10 @@ const LogoComponent = () => {
 
   function getRouteForCategory(categoryName) {
     const routesMap = {
-      "House & Home": "en/gb/home",
-      // Business: "en/gb/business",
-      // "General Builders": "/en/gb/builders/",
-      // "Lessons & Training": "en/gb/lessons-training",
+      "House & Home": "/home",
+      // Business: "/business",
+      // "General Builders": "/builders/",
+      // "Lessons & Training": "/lessons-training",
     };
 
     return routesMap[categoryName] || "#";
@@ -230,7 +230,7 @@ useEffect(() => {
                           onClick={() => {
                             handleClose();
                           }}
-                          to={item.path ? `en/gb/${item.path}` : "#"}
+                          to={item.path ? `/${item.path}` : "#"}
                         >
                           {item.name}
                         </Link>
@@ -281,7 +281,7 @@ useEffect(() => {
                   <Link
                     onClick={() => handleClose()}
                     className={styles.clickableLink}
-                    to={`en/gb/${filterRoute}`}
+                    to={`/${filterRoute}`}
                   >
                     <span>{filterItems}</span>
                   </Link>
@@ -328,7 +328,7 @@ useEffect(() => {
                                 onClick={() => {
                                   handleClose();
                                 }}
-                                to={`/en/gb/${sub.path}`}
+                                to={`/${sub.path}`}
                               >
                                 {sub.name}
                               </Link>
@@ -369,7 +369,7 @@ useEffect(() => {
                 <div className={styles.popover_header}>
                   <Link
                     className={styles.clickableLink}
-                    to={`en/gb/${selectedThirdLevelRoute}`}
+                    to={`/${selectedThirdLevelRoute}`}
                   >
                     <span>{selectedSubcategory}</span>
                   </Link>
@@ -387,7 +387,7 @@ useEffect(() => {
                           }}
                           to={
                             child === "Fence Installers in Warrington"
-                              ? "en/gb/fence-installers/cheshire/warrington"
+                              ? "/fence-installers/cheshire/warrington"
                               : "#"
                           }
                         >

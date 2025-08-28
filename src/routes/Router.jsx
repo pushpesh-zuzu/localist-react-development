@@ -54,110 +54,134 @@ import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
 
+import LocaleRedirect from "./LocaleRedirect";
+
 // Build routes once and reuse for both client and server routers
 const routes = [
+  // localized routes
   {
-    path: "/",
+    path: "/:lang/:country",
     element: <MainLayout />,
     children: [
-      { index: true, element: <Homepage /> },
-      { path: "/contact-us", element: <ContactUs /> },
-      { path: "/about-us", element: <AboutUs /> },
-      { path: "/login", element: <ProtectedLogin /> },
-      { path: "/passwordless_login", element: <ProtectedLogin /> },
-      { path: "/category", element: <Category /> },
-      { path: "/inprogress", element: <InProgressPage /> },
+      { index: true, element: <LocaleRedirect><Homepage /></LocaleRedirect> },
+      { path: "contact-us", element: <LocaleRedirect><ContactUs /></LocaleRedirect> },
+      { path: "about-us", element: <LocaleRedirect><AboutUs /></LocaleRedirect> },
+      { path: "login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
+      { path: "passwordless_login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
       {
-        path: "/en/gb/home/",
+        path: "home/",
         element: (
-          <CloneCatrgory
+          <LocaleRedirect><CloneCatrgory
             routeName="home"
             accountHeader="Home & Garden"
             subHeader="Home & Garden"
             bestText={`It's super fast and easy!`}
-          />
+          /></LocaleRedirect>
         ),
       },
       {
-        path: "/en/gb/business/",
+        path: "builders/",
         element: (
-          <CloneCatrgory
-            routeName="business"
-            accountHeader="Business"
-            subHeader="Busines"
-          />
-        ),
-      },
-      {
-        path: "/en/gb/financial-and-accounting/",
-        element: (
-          <CloneCatrgory
-            accountHeader="Financial & Accounting"
-            subHeader="Financial Accountant"
-          />
-        ),
-      },
-      {
-        path: "/en/gb/accountants/",
-        element: (
-          <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
-        ),
-      },
-      {
-        path: "/en/gb/bookkeeping-services/",
-        element: (
-          <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
-        ),
-      },
-      {
-        path: "/en/gb/builders/",
-        element: (
-          <CloneSubTwoCategory
+          <LocaleRedirect><CloneSubTwoCategory
             routeName="Home & Garden / Builders"
             accountHeader="Builders"
             subHeader="builder"
-          />
+          /></LocaleRedirect>
         ),
       },
       {
-        path: "/en/gb/gardening-landscaping/",
+        path: "gardening-landscaping/",
         element: (
-          <CloneSubCategoryTwoGardening
+          <LocaleRedirect><CloneSubCategoryTwoGardening
             routeName="gardening-landscaping"
             accountHeader="Gardening & Landscaping"
             subHeader="Gardening & Landscaping"
-          />
+          /></LocaleRedirect>
         ),
       },
       {
-        path: "/en/gb/:slug/",
+        path: "business/",
         element: (
-          <CloneSubThreeCategory
+          <LocaleRedirect><CloneCatrgory
+            routeName="business"
+            accountHeader="Business"
+            subHeader="Busines"
+          /></LocaleRedirect>
+        ),
+      },
+      {
+        path: "financial-and-accounting/",
+        element: (
+          <LocaleRedirect><CloneCatrgory
+            accountHeader="Financial & Accounting"
+            subHeader="Financial Accountant"
+          /></LocaleRedirect>
+        ),
+      },
+      {
+        path: "accountants/",
+        element: (
+          <LocaleRedirect><CloneCatrgory accountHeader="Accountants" subHeader="Accountant" /></LocaleRedirect>
+        ),
+      },
+      {
+        path: "bookkeeping-services/",
+        element: (
+          <LocaleRedirect><CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /></LocaleRedirect>
+        ),
+      },
+      {
+        path: ":slug/",
+        element: (
+          <LocaleRedirect>
+            <CloneSubThreeCategory
             routeName="Home & Garden / Gardening & Landscaping"
             accountHeader="General Accounting"
             subHeader="General Accountant"
           />
+          </LocaleRedirect>
         ),
       },
+      { path: ":service/:location", element: <LocaleRedirect><LocationPage /></LocaleRedirect> },
+      {
+        path: ":service/:location/:subLocation",
+        element: <LocaleRedirect><SublocationPage /></LocaleRedirect>,
+      },
+      {
+        path: "how-it-works-for-customers",
+        element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect>,
+      },
+      { path: "how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
+      { path: "sellers/pricing/", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
+      { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
+      { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
+
+    ],
+  },
+
+  // non-localized routes
+  {
+    path: "/",
+    element: <MainLayout />, // or another layout if needed
+    children: [
+      // Redirect bare homepage to localized homepage (e.g., /en/in)
+      { index: true, element: <LocaleRedirect><Homepage /></LocaleRedirect> },
+      // Localized login routes when accessed without locale prefix
+      { path: "/login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
+      { path: "/passwordless_login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
+      { path: "/contact-us", element: <LocaleRedirect><ContactUs /></LocaleRedirect> },
+      { path: "/about-us", element: <LocaleRedirect><AboutUs /></LocaleRedirect> },
+      { path: "/how-it-works-for-customers", element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect> },
+      { path: "/how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
+      { path: "/sellers/pricing/", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
+      { path: "/sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
+      { path: "/sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
+ 
+      { path: "/category", element: <Category /> },
+      { path: "/inprogress", element: <InProgressPage /> },
       { path: "/category/:serviceName", element: <Category /> },
       { path: "/sub-category", element: <SubCategoryPage /> },
       { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
-      { path: "/en/gb/:service/:location", element: <LocationPage /> },
-      {
-        path: "/en/gb/:service/:location/:subLocation",
-        element: <SublocationPage />,
-      },
-      {
-        path: "/en/gb/how-it-works-for-customers",
-        element: <HowItWorksCustomerPage />,
-      },
-      { path: "/en/gb/how-it-works-for-sellers", element: <HowItWorkSeller /> },
-
-      { path: "/sellers/create", element: <ServicePanelPage /> },
-      {
-        path: "/sellers/create-account/:serviceTitle",
-        element: <ServiceCreateAccount />,
-      },
       {
         path: "/buyers/create",
         element: (
@@ -256,7 +280,7 @@ const routes = [
         ),
       },
       { path: "/help-center", element: <HelpCenterPage /> },
-      { path: "/sellers/pricing/", element: <PricingPage /> },
+      
       {
         path: "/feedback/questions",
         element: (

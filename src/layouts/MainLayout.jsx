@@ -29,18 +29,18 @@ import ScrollToTop from "../routes/ScrollToTop";
 // };
 
 const pageTitles = {
-  "/": {
-    title: "Homepage | Localists",
-    description: ""
-  },
-  // "/login": {
-  //   title: "Login | Localists",
-  //   description: ""
-  // },
-  "/sellers/dashboard": {
-    title: "Localists.com - Connect with Customers & Grow Your Business",
-    description: "Join Localists for free and connect with customers actively searching for talented professionals like you. Pitch confidently and grow your business today."
-  },
+ "/": {
+   title: "Homepage | Localists",
+   description: ""
+ },
+ "/login": {
+   title: "Localists Login | Access Your Account",
+   description: "Log in to your Localists account to manage leads, connect with customers, and grow your business with trusted local opportunities."
+ },
+ "/sellers/dashboard": {
+   title: "Localists.com - Connect with Customers & Grow Your Business",
+   description: "Join Localists for free and connect with customers actively searching for talented professionals like you. Pitch confidently and grow your business today."
+ },
   "/category": {
     title: "Categories | Localists",
     description: ""
@@ -150,33 +150,39 @@ const pageTitles = {
     title: "Localists.com - Remove Feedback Question",
     description: "Manage your contributions on Localists by removing feedback questions you no longer wish to share. Keep your profile and insights up to date."
   },
-   "/login": {
-    title: "Localists Login | Access Your Account",
-    description: "Log in to your Localists account to manage leads, connect with customers, and grow your business with trusted local opportunities."
-  },
-  
 };
 
 
 const MainLayout = () => {
-  const location = useLocation();
+ const location = useLocation();
 
-  let meta = pageTitles[location.pathname];
+ // Support localized URLs by stripping "/:lang/:country" before lookup
+ const stripLocalePrefix = (path) => {
+   const m = path.match(/^\/[a-z]{2}\/[a-z]{2}(\/.*)?$/);
+   if (m) {
+     const rest = m[1] || "/";
+     return rest;
+   }
+   return path;
+ };
 
-  // Handle dynamic route for /view-profile/:companyName/:id
-  if (!meta && location.pathname.startsWith("/view-profile")) {
-    const parts = location.pathname.split("/");
-    const companyName = decodeURIComponent(parts[2] || "");
-    meta = {
-      title: `${companyName} | Localists`,
-      description: `Discover more about ${companyName} on Localists. View company details, services, and connect directly.`
-    };
-  }
+ const lookupPath = stripLocalePrefix(location.pathname);
+ let meta = pageTitles[lookupPath];
 
-  const { title, description } = meta || {
-    title: "Localists",
-    description: "Discover and connect with local businesses on Localists."
-  };
+ // Handle dynamic route for /view-profile/:companyName/:id
+ if (!meta && lookupPath.startsWith("/view-profile")) {
+   const parts = lookupPath.split("/");
+   const companyName = decodeURIComponent(parts[2] || "");
+   meta = {
+     title: `${companyName} | Localists`,
+     description: `Discover more about ${companyName} on Localists. View company details, services, and connect directly.`
+   };
+ }
+
+ const { title, description } = meta || {
+   title: "Localists",
+   description: "Discover and connect with local businesses on Localists."
+ };
 
  useEffect(() => {
   if (typeof document !== 'undefined') {

@@ -117,7 +117,7 @@ const Footer = () => {
                 <li>Find a Professional</li>
               </Link>
 
-              <Link className={styles.link} to="en/gb/how-it-works-for-customers">
+              <Link className={styles.link} to="/how-it-works-for-customers">
                 <li
                   onClick={() => {
                     window.scrollTo(0, 0);
@@ -150,7 +150,7 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <Link to="/en/gb/how-it-works-for-sellers" className={styles.link}>
+              <Link to="/how-it-works-for-sellers" className={styles.link}>
                 <li>How it works</li>
               </Link>
               <Link className={styles.link} to="/sellers/pricing">
@@ -235,7 +235,7 @@ const Footer = () => {
               <Link to="/">
                 <li>Find a Professional</li>
               </Link>
-              <Link to="/en/gb/how-it-works-for-customers">
+              <Link to="/how-it-works-for-customers">
                 <li>How it works</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/login"}>
@@ -261,7 +261,7 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <Link to="/en/gb/how-it-works-for-sellers">
+              <Link to="/how-it-works-for-sellers">
                 <li>How it works</li>
               </Link>
               <Link to="/sellers/pricing">
