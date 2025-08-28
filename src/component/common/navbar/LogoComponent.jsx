@@ -23,6 +23,7 @@ import {
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 import { megaMenu } from "../../../constant/Megamenu";
+import HiddenSeoLinks from "../../HiddenSEOLinks/HiddenSEOLinks";
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -431,6 +432,7 @@ const redirectPath = getRedirectPath();
           </Popover>
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
+        <>
         <Popover
           onMouseEnter={() => setShowbMenu(true)}
           placement={placement}
@@ -444,11 +446,13 @@ const redirectPath = getRedirectPath();
           getPopupContainer={(trigger) => trigger.parentNode}
         >
           <div className={styles.serviceContainer}>
-            <h2 className={styles.serviceText}>Explore Our Services</h2>
-            <h2 className={styles.serviceTextMobile}>Our Services</h2>
+            <span className={styles.serviceText}>Explore Our Services</span>
+            <span className={styles.serviceTextMobile}>Our Services</span>
             <img src={downArrow} alt="down-arrow" />
           </div>
         </Popover>
+        <HiddenSeoLinks />
+        </>
       )}
     </div>
   );

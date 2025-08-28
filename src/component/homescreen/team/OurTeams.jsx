@@ -68,14 +68,7 @@ const OurTeams = () => {
         </div>
 
         <div className={styles.dotSlider}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "8px",
-              alignItems: "center",
-            }}
-          >
+          
             {testimonials.map((_, index) => (
               <button
                 key={index}
@@ -86,14 +79,13 @@ const OurTeams = () => {
                   borderRadius: "50%",
                   border: "none",
                   cursor: "pointer !important",
-                  backgroundColor: index === currentIndex ? "#007bff" : "#ccc",
+                  backgroundColor: index === currentIndex ? "#00AFE3" : "#ccc",
                   transition: "background-color 0.3s ease",
                   outline: "none",
                 }}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
-          </div>
         </div>
       </div>
 
