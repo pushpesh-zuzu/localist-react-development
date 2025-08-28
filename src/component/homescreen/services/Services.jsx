@@ -48,16 +48,21 @@ const Services = () => {
 
   return (
     <>
-    <div className={styles.container1}>
-      {allServiceList?.map((category, categoryIndex) => (
-        <div key={categoryIndex} className={styles.container}>
-          {category?.subcategory.length > 0  && <><h2 className={styles.heading}>{formatTitle(category.name)}</h2>
-          <SliderComponent subcategory={category?.subcategory} categoryName = {category.name} /></>}
-        </div>
-      ))}
-    
-    </div>
-     </>
+      <div className={styles.container1}>
+        {allServiceList?.map(
+          (category, categoryIndex) =>
+            category?.subcategory.length > 0 && (
+              <div style={{paddingBottom:category?.subcategory.length-1 && '0px'}} key={categoryIndex} className={styles.container}>
+                <h2 className={styles.heading}>{formatTitle(category.name)}</h2>
+                <SliderComponent
+                  subcategory={category?.subcategory}
+                  categoryName={category.name}
+                />
+              </div>
+            )
+        )}
+      </div>
+    </>
   );
 };
 

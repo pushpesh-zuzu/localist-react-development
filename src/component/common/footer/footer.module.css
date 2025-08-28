@@ -18,7 +18,7 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
-  background-color: #000;
+  background-color: #F7F7F7;
   padding: 70px 88px 0px 88px;
   margin: 0 auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -54,7 +54,7 @@
 
 .footerLeft p {
   font-size: 14px;
-  color: #ccc;
+  color: #000;
   margin-top: 18px;
 }
 
@@ -70,12 +70,12 @@
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 0;
-  color: #ffffff;
+  color: #000;
 }
 
 .contactMthods p {
   margin: 0.5rem 0px;
-  color: #ffffff;
+  color: #000;
   font-weight: 400;
   font-size: 15.01px;
 }
@@ -87,7 +87,7 @@
   line-height: 25.5px;
   letter-spacing: 0;
   text-align: center;
-  color: #ffffff;
+  color: #000;
   box-shadow: 0px 0px 4px 0px #0000004d;
   border: none;
   border-radius: 4px;
@@ -104,7 +104,7 @@
 
 .footerDesc {
   max-width: 250px;
-  color: #ffffff !important;
+  color: #000 !important;
   font-weight: 400;
   font-size: 15.84px;
   line-height: 23.76px;
@@ -118,7 +118,7 @@
 }
 
 .footerLinks h4 {
-  color: #ffffff;
+  color: #000;
   font-weight: 700;
   font-size: 19.8px;
   line-height: 29.69px;
@@ -138,7 +138,7 @@
   font-size: 15.84px;
   line-height: 23.76px;
   letter-spacing: 0;
-  color: #ffffff;
+  color: #000;
   transition: color 0.3s ease;
   margin-bottom: 14px;
   cursor: pointer !important;
@@ -177,8 +177,8 @@
 }
 
 .countryDropdown select {
-  background: #222;
-  color: #fff;
+  background: #EAEAEA;
+  color: #000;
   border: none;
   width: 100%;
   padding: 10px 12px;
@@ -193,7 +193,7 @@
 .countryDropdown::after {
   content: "🞃";
   font-size: 20px;
-  color: #ffffff;
+  color: #000;
   position: absolute;
   right: 10px;
   top: 30%;
@@ -219,7 +219,7 @@
   font-size: 15.8px;
   line-height: 23.7px;
   letter-spacing: 0px;
-  color: #ffffff;
+  color: #000;
   margin-top: 22px;
 }
 
@@ -441,7 +441,7 @@
 
   .contactMthods p {
     margin: 0;
-    color: #ffffff;
+    color: #000;
     font-weight: 400;
     font-size: 15.01px;
   }
@@ -493,7 +493,7 @@
   font-size: 16px;
   line-height: 30px;
   letter-spacing: 0;
-  color: #ffffff;
+  color: #000;
 }
 .contactSection button {
   background: var(--primary-color);
@@ -502,7 +502,7 @@
   line-height: 25.5px;
   letter-spacing: 0;
   text-align: center;
-  color: #ffffff;
+  color: #000;
   box-shadow: 0px 0px 4px 0px #0000004d;
   border: none;
   border-radius: 4px;
