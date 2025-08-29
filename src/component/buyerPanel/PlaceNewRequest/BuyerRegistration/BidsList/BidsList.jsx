@@ -671,28 +671,32 @@ const BidsList = ({ previousStep }) => {
                   <span>Recommended:</span> Request replies from your{" "}
                   <strong>top matches</strong> to hear back faster
                 </div>
-                <button
-                  className={styles.requestBtn}
-                  onClick={handleMultple}
-                  disabled={isButtonDisabled}
-                >
-                  Request your best matches here
-                </button>
+                 {matchingLength > 0 && (
+                  <button
+                    className={styles.requestBtn}
+                    onClick={handleMultple}
+                    disabled={isButtonDisabled}
+                  >
+                    Request your best matches here
+                  </button>
+                )}
               </div>
             </div>
             <div className={styles.requestMatchBox}>
-              <button
-                className={styles.requestBtnMatchBox}
-                onClick={handleMultple}
-                disabled={isButtonDisabled}
-              >
-                Request Your 5 Top Matches Here
-              </button>
+              {matchingLength > 0 && (
+                <button
+                  className={styles.requestBtnMatchBox}
+                  onClick={handleMultple}
+                  disabled={isButtonDisabled}
+                >
+                  Request Your 5 Top Matches Here
+                </button>
+              )}
             </div>
             {/* {bidListLoader ? <Spin size="small"/> :  <> */}
             {autoBidList?.every((item) => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
-                <h1 className={styles.noBidText}>No seller available</h1>
+                <h1 className={styles.noBidText}>Local services professionals are preparing to contact you now. Keep and eye out for any communications</h1>
               </div>
             ) : (
               autoBidList?.map((item) =>
