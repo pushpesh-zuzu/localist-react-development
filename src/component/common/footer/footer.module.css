@@ -530,5 +530,8 @@
   }
 }
 .mobileItem {
-  padding: 8px 0px;
+  padding: 4px 0px;
+}
+.footerNavLinks :global(.ant-collapse-header) {
+  padding: 8px 16px !important; /* top/bottom 8px, left/right same rakha */
 }
