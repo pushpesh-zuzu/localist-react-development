@@ -23,6 +23,7 @@ import {
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 import { megaMenu } from "../../../constant/Megamenu";
+import HiddenSeoLinks from "../../HiddenSEOLinks/HiddenSEOLinks";
 
 const LogoComponent = () => {
   const navigate = useNavigate();
@@ -50,10 +51,10 @@ const LogoComponent = () => {
 
   function getRouteForCategory(categoryName) {
     const routesMap = {
-      "House & Home": "en/gb/home",
-      // Business: "en/gb/business",
-      // "General Builders": "/en/gb/builders/",
-      // "Lessons & Training": "en/gb/lessons-training",
+      "House & Home": "/home",
+      // Business: "/business",
+      // "General Builders": "/builders/",
+      // "Lessons & Training": "/lessons-training",
     };
 
     return routesMap[categoryName] || "#";
@@ -146,14 +147,40 @@ const LogoComponent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const handleClose = (e) => {
-    setShowSubMenu(false);
-    setMouseHover(false);
-    setShowbMenu(false);
-    setShowThirdLevel(false);
-    setShowbMenu(false);
+  const handleClose = () => {
+  setShowSubMenu(false);
+  setMouseHover(false);
+  setShowbMenu(false);
+  setShowThirdLevel(false);
+  setSelectedSubcategory(null);
+  setFilterItems("");
+  setFilteRoute("");
+  setSlectedThirdLevelRoute("");
+};
+useEffect(() => {
+  let lastScrollY = window.scrollY;
+  
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY > 200 || Math.abs(currentScrollY - lastScrollY) > 50) {
+      handleClose();
+    }
+    
+    lastScrollY = currentScrollY;
   };
 
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  return () => {
+    window.removeEventListener('scroll', handleScroll);
+  };
+}, []);
+
+useEffect(() => {
+  handleClose();
+}, [location.pathname]);
+  
   const content = () => {
     return (
       <div
@@ -204,7 +231,7 @@ const LogoComponent = () => {
                           onClick={() => {
                             handleClose();
                           }}
-                          to={item.path ? `en/gb/${item.path}` : "#"}
+                          to={item.path ? `/${item.path}` : "#"}
                         >
                           {item.name}
                         </Link>
@@ -255,7 +282,7 @@ const LogoComponent = () => {
                   <Link
                     onClick={() => handleClose()}
                     className={styles.clickableLink}
-                    to={`en/gb/${filterRoute}`}
+                    to={`/${filterRoute}`}
                   >
                     <span>{filterItems}</span>
                   </Link>
@@ -302,7 +329,7 @@ const LogoComponent = () => {
                                 onClick={() => {
                                   handleClose();
                                 }}
-                                to={`/en/gb/${sub.path}`}
+                                to={`/${sub.path}`}
                               >
                                 {sub.name}
                               </Link>
@@ -343,7 +370,7 @@ const LogoComponent = () => {
                 <div className={styles.popover_header}>
                   <Link
                     className={styles.clickableLink}
-                    to={`en/gb/${selectedThirdLevelRoute}`}
+                    to={`/${selectedThirdLevelRoute}`}
                   >
                     <span>{selectedSubcategory}</span>
                   </Link>
@@ -361,7 +388,7 @@ const LogoComponent = () => {
                           }}
                           to={
                             child === "Fence Installers in Warrington"
-                              ? "en/gb/fence-installers/cheshire/warrington"
+                              ? "/fence-installers/cheshire/warrington"
                               : "#"
                           }
                         >
@@ -405,6 +432,7 @@ const redirectPath = getRedirectPath();
           </Popover>
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
+        <>
         <Popover
           onMouseEnter={() => setShowbMenu(true)}
           placement={placement}
@@ -418,11 +446,13 @@ const redirectPath = getRedirectPath();
           getPopupContainer={(trigger) => trigger.parentNode}
         >
           <div className={styles.serviceContainer}>
-            <h2 className={styles.serviceText}>Explore Our Services</h2>
-            <h2 className={styles.serviceTextMobile}>Our Services</h2>
+            <span className={styles.serviceText}>Explore Our Services</span>
+            <span className={styles.serviceTextMobile}>Our Services</span>
             <img src={downArrow} alt="down-arrow" />
           </div>
         </Popover>
+        <HiddenSeoLinks />
+        </>
       )}
     </div>
   );

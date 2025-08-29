@@ -253,8 +253,8 @@ const ViewProfiles = () => {
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
-    dispatch(ReviewProfile(profileId?.profileId))
-    dispatch(addViewProfileList(sellerData));
+    profileId?.profileId && dispatch(ReviewProfile(profileId?.profileId))
+    requestId?.requestId && dispatch(addViewProfileList(sellerData));
   }, []);
   const handleRequestOpen = () => {
     setCustomerModal(true);
@@ -473,7 +473,7 @@ const ViewProfiles = () => {
           </div>
         </div>
 
-        {isopen && profileId?.profileId && (
+        {isopen && profileId?.profileId && profileData?.name && (
           <SubmitReviewModal
             setOpen={isopen}
             closeModal={closeModal}

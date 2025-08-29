@@ -69,6 +69,7 @@
   background: #ffffff;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
 .stepDescription {
@@ -84,7 +85,7 @@
   width: 133px;
   height: 133px;
   border-radius: 50%;
-  background: var(--text-color);
+  background: #111637;
   margin: auto;
   margin-top: -70px;
   display: flex;
@@ -179,7 +180,7 @@
   }
 
   .footer .quoteButton {
-    padding: 7px 21px;
+    padding: 10px 21px;
     font-size: 12.14px;
     /* margin-bottom: 18px; */
   }
@@ -202,7 +203,7 @@
   }
 
   .footer .quoteButton {
-    padding: 5px 10px;
+    padding: 5.5px 12px;
     font-size: 12px;
     line-height: 18px;
   }
@@ -288,7 +289,7 @@
 
 @media screen and (max-width: 390px) {
   .stepContainer {
-    width: 67%;
+    width: 68%;
   }
   .workContainer {
     padding: 16px 5%;

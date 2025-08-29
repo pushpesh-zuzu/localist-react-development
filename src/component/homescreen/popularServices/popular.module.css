@@ -12,7 +12,7 @@
   font-size: 35px;
   line-height: 40px;
   letter-spacing: 0;
-  margin: 0 0 40px;
+  margin: 0 0 34px;
 }
 
 .heading span {
@@ -23,6 +23,24 @@
 .sliderWrapper {
   position: relative;
   height: 215px;
+  overflow: hidden;
+}
+.slider {
+  overflow: visible !important;
+}
+
+.slide {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.slider {
+  overflow: visible !important;
+}
+
+.slide {
+  padding: 8px;
+  overflow: visible;
 }
 
 .card {
@@ -36,11 +54,13 @@
   height: 200px;
   object-fit: cover;
   cursor: pointer !important;
-   transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 20px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
 }
+
 .image:hover {
-  
- transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .title {
@@ -70,6 +90,7 @@
   color: #ffffff;
   white-space: nowrap;
   cursor: pointer !important;
+  border-radius: 10px;
 }
 
 .serviceTitle:hover {
@@ -284,14 +305,14 @@
     width: 20px;
     height: 20px;
   }
-    .arrowLeft,
+  .arrowLeft,
   .arrowRight {
     position: absolute;
     top: 25px;
     width: 18px;
     height: 18px;
   }
-    .image {
+  .image {
     width: 185px;
     height: 114px;
     object-fit: cover;
@@ -316,7 +337,7 @@
     width: 23px;
     height: 23px;
   }
-   .arrowLeft,
+  .arrowLeft,
   .arrowRight {
     position: absolute;
     top: 24px;
