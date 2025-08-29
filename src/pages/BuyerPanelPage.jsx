@@ -9,4 +9,5 @@ const BuyerPanelPage = () => {
   );
 };
 
+
 export default BuyerPanelPage;
