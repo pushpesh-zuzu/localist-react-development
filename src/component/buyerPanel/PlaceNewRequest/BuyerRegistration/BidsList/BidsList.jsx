@@ -162,6 +162,7 @@ const BidsList = ({ previousStep }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const repliesListCount = autoBidList?.map((item) => item?.repliesListCount);
   const webdesignData = autoBidList?.map((item) => item?.service_name);
   const matchingLength = autoBidList?.map((item) => item?.sellers?.length);
   const [selectedSellers, setSelectedSellers] = useState([]);
@@ -696,7 +697,14 @@ const BidsList = ({ previousStep }) => {
             {/* {bidListLoader ? <Spin size="small"/> :  <> */}
             {autoBidList?.every((item) => item?.sellers?.length === 0) ? (
               <div className={styles.noBidWrapper}>
-                <h1 className={styles.noBidText}>Local services professionals are preparing to contact you now. Keep and eye out for any communications</h1>
+                <h1 className={styles.noBidText}>
+                  {repliesListCount > 0
+                    ? "Your Matches Can Be Viewed in Request Replies"
+                    : "Local services professionals are preparing to contact you now. Keep and eye out for any communications"
+                  }
+                  
+
+                </h1>
               </div>
             ) : (
               autoBidList?.map((item) =>
