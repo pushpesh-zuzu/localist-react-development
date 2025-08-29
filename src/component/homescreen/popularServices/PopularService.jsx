@@ -103,7 +103,7 @@ const PopularService = ({ closeModal }) => {
         }
       },
     },
-    // [AutoplayPlugin]
+    [AutoplayPlugin]
   );
 
 
