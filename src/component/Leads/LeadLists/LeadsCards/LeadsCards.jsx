@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./LeadsCards.module.css";
 import BlueSmsIcon from "../../../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../../../assets/Images/Leads/BluePhoneIcon.svg";
@@ -74,8 +74,8 @@ const LeadsCards = ({ enoughCredit }) => {
   //   dispatch(getLeadRequestList(leadRequestData));
   // }, 60000);
 
-//   return () => clearInterval(intervalId);
-// }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
@@ -267,10 +267,10 @@ const LeadsCards = ({ enoughCredit }) => {
   };
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);
- window.scrollTo({
-    top: 0,
-    behavior: 'smooth', // Optional: for smooth animation
-  });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: for smooth animation
+    });
     const saveLaterData = {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
@@ -342,7 +342,7 @@ const LeadsCards = ({ enoughCredit }) => {
   // const handlePhoneCall = (item) => {
   //   const phoneNumber = item?.phone || "";
   //   window.open(`tel:${phoneNumber}`, "_blank");
-  // };  
+  // };
   return (
     <>
       {leadRequestLoader ? (
@@ -371,7 +371,7 @@ const LeadsCards = ({ enoughCredit }) => {
           ) : (
             <>
               <div>
-                {leadRequestList?.slice(0, visibleCount)?.map((item) => {
+                {leadRequestList?.slice(0, visibleCount)?.map((item, index) => {
                   console.log(item, "itemss");
                   return (
                     <>
@@ -395,7 +395,10 @@ const LeadsCards = ({ enoughCredit }) => {
                                   <p>{item?.postcode}</p>
                                 </div>
                               </div>
-                              <span className={styles.category}>
+                              <span
+                                className={styles.category}
+                                style={{ background: "#f9b7b7" }}
+                              >
                                 {item?.category?.name}
                               </span>
                             </div>
@@ -432,9 +435,19 @@ const LeadsCards = ({ enoughCredit }) => {
 
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
-                            <div className={styles.highlightText}>Highlights :</div>
-                            <div className={styles.saveBtnBox}>
+                            <div className={styles.highlightText}>
+                              Highlights :
+                            </div>
+                            <div
+                              className={styles.saveBtnBox}
+                              style={{ position: "relative" }}
+                            >
                               <button
+                                style={{
+                                  position: "absolute",
+                                  top: "10px",
+                                  right: "10px",
+                                }}
                                 className={styles.saveBtn}
                                 onClick={() => handleSaveLater(item)}
                               >
@@ -450,13 +463,12 @@ const LeadsCards = ({ enoughCredit }) => {
                                 ) : (
                                   <>
                                     <img src={saveImg} alt="image" />
-                                    Save For Later
+                                    Save
                                   </>
                                 )}
                               </button>
-                                
                             </div>
-                            
+
                             <div className={styles.badges}>
                               {item?.is_phone_verified == 1 && (
                                 <span className={styles.verified}>
@@ -518,7 +530,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               // }}
                               onClick={() => handleContinue(item)}
                             >
-                              Contact 
+                              Contact
                               {/* {item?.customer?.name} */}
                             </button>
                             <span className={styles.credits}>
@@ -531,33 +543,36 @@ const LeadsCards = ({ enoughCredit }) => {
                             <div className={styles.mainText}>
                               <div>ACT FAST</div>
                               <span>{item?.view_count} Professionals</span>{" "}
-                             <span className={styles.desktopOnlyBreak}><br /></span> have viewed this lead
+                              <span className={styles.desktopOnlyBreak}>
+                                <br />
+                              </span>{" "}
+                              have viewed this lead
                             </div>
                           </div>
                         </div>
                         <div>
-                           <div className={styles.saveBtnBoxs}>
-                              <button
-                                className={styles.saveBtn}
-                                onClick={() => handleSaveLater(item)}
-                              >
-                                {saveLaterLoaderId === item.id ? (
-                                  <Spin
-                                    indicator={
-                                      <LoadingOutlined
-                                        spin
-                                        style={{ color: "white" }}
-                                      />
-                                    }
-                                  />
-                                ) : (
-                                  <>
-                                    <img src={saveImg} alt="image" />
-                                    Save For Later
-                                  </>
-                                )}
-                              </button>
-                            </div>
+                          <div className={styles.saveBtnBoxs}>
+                            <button
+                              className={styles.saveBtn}
+                              onClick={() => handleSaveLater(item)}
+                            >
+                              {saveLaterLoaderId === item.id ? (
+                                <Spin
+                                  indicator={
+                                    <LoadingOutlined
+                                      spin
+                                      style={{ color: "white" }}
+                                    />
+                                  }
+                                />
+                              ) : (
+                                <>
+                                  <img src={saveImg} alt="image" />
+                                  Save For Later
+                                </>
+                              )}
+                            </button>
+                          </div>
                         </div>
                         <div className={styles.viewDetailsBtnWrapper}>
                           <button

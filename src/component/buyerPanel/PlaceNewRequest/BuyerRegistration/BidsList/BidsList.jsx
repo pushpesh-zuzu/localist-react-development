@@ -680,6 +680,19 @@ const BidsList = ({
     (state) => state.findJobs
   );
 
+  useEffect(() => {
+    // Delay se exact top pe le jayega
+    const timeout = setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant", // instant rakho smooth nahi
+      });
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   const loadingTextInfo = [
     "Discovering the best possible matches for you...",
     "Evaluating options with smart precision...",
@@ -1274,11 +1287,18 @@ const BidsList = ({
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
+                                if (rating === 0) {
+                                  return (
+                                    <span className={styles.noReviews}>
+                                      No Reviews
+                                    </span>
+                                  );
+                                }
+
                                 const sellerId = item?.id;
                                 const matchedSeller = item?.sellers?.find(
                                   (seller) => seller?.id === sellerId
                                 );
-                                console.log(matchedSeller, "bhaaaa");
 
                                 return (
                                   <>

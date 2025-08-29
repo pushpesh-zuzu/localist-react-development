@@ -133,7 +133,10 @@ import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
 import { useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
-import { addViewProfileList, ReviewProfile } from "../../store/LeadSetting/leadSettingSlice";
+import {
+  addViewProfileList,
+  ReviewProfile,
+} from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../utils";
 import starImg from "../../assets/Icons/MyResponse/StarImg.svg";
@@ -152,16 +155,17 @@ const ViewProfiles = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
 
-    const { reviewProfileData } = useSelector((state) => state.leadSetting);
-      const { viewProfileData } = useSelector((state) => state.leadSetting);
- 
-  const profileData = Object.keys(viewProfileData || {}).length > 0
-  ? viewProfileData
-  : reviewProfileData;
-      const serviceCount = profileData?.services?.filter(
+  const { reviewProfileData } = useSelector((state) => state.leadSetting);
+  const { viewProfileData } = useSelector((state) => state.leadSetting);
+
+  const profileData =
+    Object.keys(viewProfileData || {}).length > 0
+      ? viewProfileData
+      : reviewProfileData;
+  const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
- 
+
   // console.log(profileData,'profileDataprofileDataprofileDataprofileData')
   // const profileData ={}
   const servicesArray = profileData?.services || [];
@@ -295,39 +299,35 @@ const ViewProfiles = () => {
           }}
         /> */}
 
-        <div
-  style={{
-    width: "140px",
-    height: "140px",
-    borderRadius: "50%",
-    overflow: "hidden",    // ensures image stays inside circle
-    backgroundColor: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }}
->
-<img
-  src={
-    profileData?.company_logo
-      ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
-      : profileData?.profile_image
-        ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
-        : DEFAULT_PROFILE_IMAGE
-        }
-        alt="Profile"
-        style={{
-          width: "140px",
-          height: "140px",
-          borderRadius: "50%",
-          backgroundColor: "#fff" // optional, fills empty space
-        }}
-      />
-
-
-
-</div>
-
+            <div
+              style={{
+                width: "140px",
+                height: "140px",
+                borderRadius: "50%",
+                overflow: "hidden", // ensures image stays inside circle
+                backgroundColor: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src={
+                  profileData?.company_logo
+                    ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
+                    : profileData?.profile_image
+                    ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
+                    : DEFAULT_PROFILE_IMAGE
+                }
+                alt="Profile"
+                style={{
+                  width: "140px",
+                  height: "140px",
+                  borderRadius: "50%",
+                  backgroundColor: "#fff", // optional, fills empty space
+                }}
+              />
+            </div>
           </div>
           <div className={styles.viewDetails}>
             <h2>{profileData?.company_name || profileData?.name}</h2>
@@ -341,49 +341,116 @@ const ViewProfiles = () => {
                             <span className={styles.ratingCount}>{profileData?.avg_rating}</span>
                         </div>
                     </div> */}
-            <div className={styles.sidebar}>
+            {/* <div className={styles.sidebar}>
               <div className={styles.rating}>
-                <span className={styles.stars}>
-                  {Array.from({ length: 5 }).map((_, index) => {
-                    const rating = profileData?.avg_rating ?? 0;
-                    if (index < Math.floor(rating)) {
-                      return (
-                        <img
-                          key={index}
-                          src={starImg}
-                          alt="star"
-                          width={19}
-                          height={19}
-                        />
-                      );
-                    } else if (index < rating) {
-                      return (
-                        <img
-                          key={index}
-                          src={halfStar}
-                          alt="half-star"
-                          width={21}
-                          height={21}
-                        />
-                      );
-                    } else {
-                      return (
-                        <img
-                          key={index}
-                          src={grayStar}
-                          alt="empty-star"
-                          width={19}
-                          height={19}
-                        />
-                      );
-                    }
-                  })}
-                </span>
+                {profileData?.avg_rating === 0 ? (
+                  <span className={styles.noReviews}>No Reviews</span>
+                ) : (
+                  <>
+                    <span className={styles.stars}>
+                      {Array.from({ length: 5 }).map((_, index) => {
+                        const rating = profileData?.avg_rating ?? 0;
+                        if (index < Math.floor(rating)) {
+                          return (
+                            <img
+                              key={index}
+                              src={starImg}
+                              alt="star"
+                              width={19}
+                              height={19}
+                            />
+                          );
+                        } else if (index < rating) {
+                          return (
+                            <img
+                              key={index}
+                              src={halfStar}
+                              alt="half-star"
+                              width={21}
+                              height={21}
+                            />
+                          );
+                        } else {
+                          return (
+                            <img
+                              key={index}
+                              src={grayStar}
+                              alt="empty-star"
+                              width={19}
+                              height={19}
+                            />
+                          );
+                        }
+                      })}
+                    </span>
+                    {profileData?.avg_rating > 0 && (
+                      <span className={styles.ratingCount}>
+                        {profileData?.avg_rating}
+                      </span>
+                    )}
+                  </>
+                )}
                 <span className={styles.ratingCount}>
                   {profileData?.avg_rating}
                 </span>
               </div>
+            </div> */}
+            <div className={styles.sidebar}>
+              <div className={styles.rating}>
+                {profileData?.avg_rating === 0 ? (
+                  // Sirf "No Reviews" dikhana jab rating 0 ho
+                  <span className={styles.noReviews}>No Reviews</span>
+                ) : (
+                  <>
+                    <span className={styles.stars}>
+                      {Array.from({ length: 5 }).map((_, index) => {
+                        const rating = profileData?.avg_rating ?? 0;
+
+                        if (index < Math.floor(rating)) {
+                          return (
+                            <img
+                              key={index}
+                              src={starImg}
+                              alt="star"
+                              width={19}
+                              height={19}
+                            />
+                          );
+                        } else if (index < rating) {
+                          return (
+                            <img
+                              key={index}
+                              src={halfStar}
+                              alt="half-star"
+                              width={21}
+                              height={21}
+                            />
+                          );
+                        } else {
+                          return (
+                            <img
+                              key={index}
+                              src={grayStar}
+                              alt="empty-star"
+                              width={19}
+                              height={19}
+                            />
+                          );
+                        }
+                      })}
+                    </span>
+
+                    {/* Yaha sirf rating > 0 hone par hi rating count dikhana */}
+                    {profileData?.avg_rating > 0 ? (
+                      <span className={styles.ratingCount}>
+                        {profileData?.avg_rating}
+                      </span>
+                    ) : null}
+                  </>
+                )}
+              </div>
             </div>
+
             <div className={styles.badgesBox}>
               {serviceNames?.map((item) => {
                 return (
@@ -423,16 +490,24 @@ const ViewProfiles = () => {
                 <img src={emailImg} alt="Email" />
                 <span>
                   {profileData?.lead_purchased === 1
-                    ? (profileData?.company_email || profileData?.email)
-                    : maskEmail(profileData?.company_email || profileData?.email)}
+                    ? profileData?.company_email || profileData?.email
+                    : maskEmail(
+                        profileData?.company_email || profileData?.email
+                      )}
                 </span>
               </div>
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
                   {profileData?.lead_purchased === 1
-                  ? (profileData?.company_phone || profileData?.phone || "0000000000")
-                  : maskPhone(profileData?.company_phone || profileData?.phone || "0000000000")}
+                    ? profileData?.company_phone ||
+                      profileData?.phone ||
+                      "0000000000"
+                    : maskPhone(
+                        profileData?.company_phone ||
+                          profileData?.phone ||
+                          "0000000000"
+                      )}
                 </span>
               </div>
             </>
