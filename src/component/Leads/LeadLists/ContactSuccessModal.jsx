@@ -222,21 +222,21 @@ console.log(phoneNumber,email, "phoneNumber");
              
             </div>
             </div> */}
-            <div className={styles.creditsWrapper}>
+            {/* <div className={styles.creditsWrapper}> */}
   {/* Left Box */}
-  <div className={styles.creditsBox}>
+  {/* <div className={styles.creditsBox}>
     <img src={locallistImg} alt="credits" />
     <strong>70 credits</strong>
-  </div>
+  </div> */}
 
   {/* Vertical Line */}
-  <div className={styles.midLine}></div>
+  {/* <div className={styles.midLine}></div> */}
 
   {/* Right Box (Image in place of text) */}
-  <div className={styles.guarantee}>
+  {/* <div className={styles.guarantee}>
     <img src={locallistImgs} alt="guarantee" />
   </div>
-</div>
+</div> */}
 
               {/* <div className={styles.textcontent}>
               Covered by our <strong>100% New Business Guarantee </strong><br />
