@@ -86,8 +86,11 @@ const PopularService = ({ closeModal }) => {
       loop: true,
       slides: { perView: 4, spacing: 20 },
       breakpoints: {
+        "(max-width: 1400px)": {
+          slides: { perView: 3, spacing: 10 },
+        },
         "(max-width: 1024px)": {
-          slides: { perView: 3, spacing: 15 },
+          slides: { perView: 2.5, spacing: 8 },
         },
         "(max-width: 768px)": {
           slides: { perView: 2, spacing: 5 },
@@ -100,7 +103,7 @@ const PopularService = ({ closeModal }) => {
         }
       },
     },
-    [AutoplayPlugin]
+    // [AutoplayPlugin]
   );
 
 
