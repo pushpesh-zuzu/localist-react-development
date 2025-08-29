@@ -18,6 +18,9 @@ font-weight: bold;
     gap: 20px;
   }
 
+.oddCardBg{
+  background-color: #f7f7f7 !important;
+}
   .help-box p:first-child > span{
     text-decoration: underline;
       }

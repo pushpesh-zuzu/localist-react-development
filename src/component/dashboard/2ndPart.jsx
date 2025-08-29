@@ -12,7 +12,7 @@ const DashboardCards = ({data}) => {
 <div className={styles["dashboard-container"]}>
   {/* First Row */}
   <div className={styles.row}>
-    <div className={`${styles.card} ${styles.leads}`}>
+    <div className={`${styles.card} ${styles.leads} ${styles.oddCardBg}`}>
       <div className={styles["card-header"]}>
         <h3>Leads and Enquiries</h3>
         {/* <span className={styles["view-link"]} onClick={() => navigate("/sellers/leads")}>View</span> */}
@@ -71,7 +71,7 @@ const DashboardCards = ({data}) => {
 </div>
 
 
-    <div className={`${styles.card} ${styles["add-services"]}`}>
+    <div className={`${styles.card} ${styles["add-services"]} ${styles.oddCardBg}`}>
       <h3>Account Details</h3>
       {/* <form>
         <label>
@@ -96,7 +96,7 @@ const DashboardCards = ({data}) => {
   </div>
 
   {/* Notification Section */}
-  <div className={styles["notification-section"]}>
+  <div className={`${styles["notification-section"]}`}>
     <div className={styles["notification-title"]}>
      Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
       <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description} Patio Service</button>
@@ -127,7 +127,7 @@ const DashboardCards = ({data}) => {
       </div>
     </div>
 
-    <div className={`${styles.card} ${styles.responses}`}>
+    <div className={`${styles.card} ${styles.responses} ${styles.oddCardBg}`}>
       <h3>Responses  <a
           href="/sellers/leads/my-responses"
           style={{color:"black" }}
@@ -152,7 +152,7 @@ const DashboardCards = ({data}) => {
       <div className={styles["response"]}>{data?.response?.response_count}</div>
     </div>
 
-    <div className={`${styles.card} ${styles.help}`}>
+    <div className={`${styles.card} ${styles.help} `}>
       <h3 className={styles["card-title"]}>
         <span className={styles.icon}><img src={questionBlueIcon} /></span> Help
       </h3>
