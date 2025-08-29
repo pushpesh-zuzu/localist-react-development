@@ -111,7 +111,7 @@ const GrowthStepsData = [
     Description2: "No commission or hidden fees",
     Description3: "Get Hired Guarantee on first leads",
     button: "See more about pricing",
-     path: "/pricing"
+     path: "/sellers/pricing"
   },
 ];
 
