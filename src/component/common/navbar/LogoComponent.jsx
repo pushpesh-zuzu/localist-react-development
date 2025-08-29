@@ -444,8 +444,8 @@ const redirectPath = getRedirectPath();
           getPopupContainer={(trigger) => trigger.parentNode}
         >
           <div className={styles.serviceContainer}>
-            <h2 className={styles.serviceText}>Explore Our Services</h2>
-            <h2 className={styles.serviceTextMobile}>Our Services</h2>
+             <span className={styles.serviceText}>Explore Our Services</span>
+            <span className={styles.serviceTextMobile}>Our Services</span>
             <img src={downArrow} alt="down-arrow" />
           </div>
         </Popover>
