@@ -109,7 +109,7 @@ const DashboardCards = ({data}) => {
 
   {/* Second Row */}
   <div className={styles.row}>
-    <div className={`${styles.card} ${styles.profile}`}>
+    <div className={`${styles.card} ${styles.profile} ${styles.oddCardBg}`}>
     <div className={styles["profile-header"]}>
       <div className={styles.avatar}>C</div>
       <span className={styles.profilename}>{data?.profile_info?.name}</span>
@@ -127,7 +127,7 @@ const DashboardCards = ({data}) => {
       </div>
     </div>
 
-    <div className={`${styles.card} ${styles.responses} ${styles.oddCardBg}`}>
+    <div className={`${styles.card} ${styles.responses} `}>
       <h3>Responses  <a
           href="/sellers/leads/my-responses"
           style={{color:"black" }}
@@ -152,7 +152,7 @@ const DashboardCards = ({data}) => {
       <div className={styles["response"]}>{data?.response?.response_count}</div>
     </div>
 
-    <div className={`${styles.card} ${styles.help} `}>
+    <div className={`${styles.card} ${styles.help} ${styles.oddCardBg}`}>
       <h3 className={styles["card-title"]}>
         <span className={styles.icon}><img src={questionBlueIcon} /></span> Help
       </h3>
