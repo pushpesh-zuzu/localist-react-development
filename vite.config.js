@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     ssr: {
-      noExternal: ["react-helmet-async"],
+      noExternal: ["react-helmet-async", "react-easy-crop"],
     },
     build: {
       outDir: "dist/client",
