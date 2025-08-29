@@ -104,7 +104,7 @@ onClose()
         <p className={styles.instruction}>
           Please enter the code sent by SMS to 
           <br />
-          <span>+44{phoneData}</span>
+          <span>{phoneData}</span>
         </p>
 
         <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
