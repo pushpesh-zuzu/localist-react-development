@@ -1,5 +1,7 @@
+import FourZeroFour from "../component/FourZeroFour/FourZeroFour";
+
 const NotFound = () => {
-  return <div>NotFound</div>;
+  return <FourZeroFour />;
 };
 
 export default NotFound;

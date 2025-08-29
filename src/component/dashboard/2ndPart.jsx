@@ -54,7 +54,7 @@ const DashboardCards = ({data}) => {
   <div className={styles["highlight-box"]}>
     You’ll receive leads in these categories
   </div>
-<div className={styles.tagsContainer}>
+  <div className={styles.tagsContainer}>
   {(data?.services || []).slice(0, 2).map((item, index) => (
     <div key={index} className={styles.tags}>
       <span className={`${styles.tag} ${styles.blue}`}>{item?.name}</span>
