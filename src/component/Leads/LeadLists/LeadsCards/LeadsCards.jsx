@@ -371,7 +371,7 @@ const LeadsCards = ({ enoughCredit }) => {
           ) : (
             <>
               <div>
-                {leadRequestList?.slice(0, visibleCount)?.map((item,index) => {
+                {leadRequestList?.slice(0, visibleCount)?.map((item) => {
                   console.log(item, "itemss");
                   return (
                     <>
@@ -395,7 +395,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                   <p>{item?.postcode}</p>
                                 </div>
                               </div>
-                              <span className={styles.category} style={{ background: "#f9b7b7" }}>
+                              <span className={styles.category}>
                                 {item?.category?.name}
                               </span>
                             </div>
@@ -433,9 +433,8 @@ const LeadsCards = ({ enoughCredit }) => {
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
                             <div className={styles.highlightText}>Highlights :</div>
-                            <div className={styles.saveBtnBox} style={{ position: "relative" }}>
+                            <div className={styles.saveBtnBox}>
                               <button
-                                style={{ position: "absolute", top: "10px", right: "10px" }}
                                 className={styles.saveBtn}
                                 onClick={() => handleSaveLater(item)}
                               >
@@ -451,7 +450,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                 ) : (
                                   <>
                                     <img src={saveImg} alt="image" />
-                                    Save
+                                    Save For Later
                                   </>
                                 )}
                               </button>

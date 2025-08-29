@@ -10,7 +10,6 @@ import {
   purchaseTypeHiredStatusApi,
   purchaseTypeStatusApi,
   setLeadListProfileLoader,
-  getSellerNotesApi
 } from "../../store/LeadSetting/leadSettingSlice";
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
@@ -145,18 +144,6 @@ const MyResponse = () => {
             : registerData?.remember_tokens,
         };
         dispatch(getLeadProfileRequestList(data));
-      }
-    });
-    dispatch(getSellerNotesApi(activityData)).then((result) => {
-      if (result) {
-        const data = {
-          customer_id: item?.customer_id,
-          lead_id: item?.id,
-          user_id: userToken?.remember_tokens
-            ? userToken?.remember_tokens
-            : registerData?.remember_tokens,
-        };
-        
       }
     });
   };

@@ -732,25 +732,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         <div key={item?.id} className={styles.noteItem}>
                           <div className={styles.noteText}>{item.notes}</div>
                           <div className={styles.noteActions}>
-                            <span>
-                                {item?.created_at
-                                  ? (() => {
-                                      const d = new Date(item.created_at);
-                                      const year = d.getFullYear();
-                                      const month = String(d.getMonth() + 1).padStart(2, "0");
-                                      const day = String(d.getDate()).padStart(2, "0");
-
-                                      let hours = d.getHours();
-                                      const minutes = String(d.getMinutes()).padStart(2, "0");
-                                      const seconds = String(d.getSeconds()).padStart(2, "0");
-                                      const ampm = hours >= 12 ? "PM" : "AM";
-                                      hours = hours % 12 || 12; // convert to 12-hour format
-
-                                      return `${year}-${month}-${day} ${String(hours).padStart(2, "0")}:${minutes}:${seconds} ${ampm}`;
-                                    })()
-                                  : ""}
-                              </span>
-                            |
                             <span
                               onClick={() => {
                                 setNote(item?.notes);
