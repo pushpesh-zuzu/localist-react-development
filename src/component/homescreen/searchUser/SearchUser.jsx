@@ -347,8 +347,9 @@ const SearchProfessionals = ({ nextStep }) => {
       </div>
 
       <div className={styles.container}>
-         <h1 className={styles.heading}>Find Local
-          <span className={styles.highlight}> Services</span> <span className={styles.heading}>- Fast</span>
+        <h1 className={styles.heading}>Find Local</h1>
+        <h1 className={styles.heading}>
+          <span className={styles.highlight}>Services</span> - Fast
         </h1>
 
         <h4 className={styles.subText}>

@@ -101,7 +101,7 @@ const Footer = () => {
           </p>
 
           <div className={styles.contactSection}>
-            <span>Need Help?</span>
+            <h2>Need Help?</h2>
             <Link to="/contact-us" className={styles.link}>
               <button>Contact Us</button>
             </Link>
@@ -233,13 +233,13 @@ const Footer = () => {
           >
             <ul>
               <Link to="/">
-                <li className={styles.mobileItem}>Find a Professional</li>
+                <li>Find a Professional</li>
               </Link>
-              <Link to="/en/gb/how-it-works-for-customers">
-                <li className={styles.mobileItem}>How it works</li>
+              <Link to="/how-it-works-for-customers">
+                <li>How it works</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/login"}>
-                <li className={styles.mobileItem}
+                <li
                   onClick={() => {
                     if (userToken || registerToken) {
                       showToast("info", "You're already logged in.");
@@ -261,14 +261,14 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <Link to="/en/gb/how-it-works-for-sellers">
-                <li className={styles.mobileItem}>How it works</li>
+              <Link to="/how-it-works-for-sellers">
+                <li>How it works</li>
               </Link>
               <Link to="/sellers/pricing">
-                <li className={styles.mobileItem}>Pricing</li>
+                <li>Pricing</li>
               </Link>
               <Link to={(!userToken || !registerToken) && "/sellers/create"}>
-                <li className={styles.mobileItem} onClick={handleJoinAsProfessional}>
+                <li onClick={handleJoinAsProfessional}>
                   Join as a Professional
                 </li>
               </Link>
@@ -281,7 +281,7 @@ const Footer = () => {
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <Link to="/about-us">
-                <li className={styles.mobileItem}>About Localists</li>
+                <li>About Localists</li>
               </Link>
             </ul>
           </Panel>

@@ -20,7 +20,7 @@
 .teamsLeftCotainer {
     flex-direction: column;
     text-align: left;
-    gap: 17px;
+    gap: 15px;
 }
 
 .teamsLeftCotainer .quotes {
@@ -32,10 +32,6 @@
 .dotSlider,
 .rating {
     width: 100%;
-    display: flex;
-    justify-content: start;
-    gap: 8px;
-    align-items: center;    
 }
 
 .info p {
@@ -45,7 +41,6 @@
     line-height: 36px;
     letter-spacing: 0;
     margin: 0;
-    margin-bottom: 17px;
 }
 
 .info strong {
@@ -88,10 +83,6 @@
 }
 
 @media (max-width: 768px) {
-    .dotSlider,
-    .rating{
-        justify-content: center;
-    }
     .teamsContainer {
         flex-direction: column-reverse;
         text-align: center;
