@@ -155,10 +155,11 @@
 }
 .serviceCard {
   transition: transform 0.3s ease;
+  border-radius: 20px;
 }
 
 .serviceCard:hover {
-  transform: scale(1.05);
+  transform: scale(1.025);
 }
 
 

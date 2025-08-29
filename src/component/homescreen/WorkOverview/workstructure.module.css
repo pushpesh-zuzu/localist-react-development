@@ -229,8 +229,8 @@
   }
 
   .descriptionIcon {
-    width: 82.46px;
-    height: 82.46px;
+    width: 64.46px;
+    height: 64.46px;
     background: #000000;
     border-radius: 50%;
     position: relative;
@@ -242,8 +242,8 @@
   }
 
   .descriptionIcon img {
-    width: 54.99px;
-    height: 54.99px;
+    width: 44.99px;
+    height: 44.99px;
     object-fit: contain;
   }
 
@@ -304,8 +304,8 @@
     gap: 50px;
   }
    .descriptionIcon {
-    width: 64.46px;
-    height: 64.46px;
+    width: 56.46px;
+    height: 56.46px;
     background: #000000;
     border-radius: 50%;
     position: relative;
@@ -317,8 +317,8 @@
   }
 
   .descriptionIcon img {
-    width: 44.99px;
-    height: 44.99px;
+    width: 36.99px;
+    height: 36.99px;
     object-fit: contain;
   }
     .stepDescription {

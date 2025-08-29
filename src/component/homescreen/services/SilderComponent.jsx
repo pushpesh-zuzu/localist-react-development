@@ -84,7 +84,7 @@ const SliderComponent = ({ subcategory ,categoryName }) => {
         <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
           {subcategory?.map((service, index) => (
             <div key={index} style={{borderRadius:'20px'}} className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id, service?.name)}>
-              <div style={{padding:'8px',borderRadius:'20px'}}>
+              <div style={{padding:'9px',borderRadius:'20px'}}>
               <SpecificService service={service} />
               </div>
             </div>
