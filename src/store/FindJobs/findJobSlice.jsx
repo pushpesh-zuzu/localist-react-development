@@ -32,7 +32,7 @@ phone:""
   city:{},
   postalcode:{},
   selectedServiceFormData:{
-    miles1: "1",
+    miles1: "30",
     postcode: null,
     cities:"",
     coordinates:[],
@@ -60,7 +60,7 @@ phone:""
     // suite: "",
     service_id: [],
     auto_bid: 1,
-    miles2: "1",
+    miles2: "30",
     expanded_radius:"",
     coordinates2:""
 
@@ -481,7 +481,7 @@ state.authToken = null
     clearServiceFormData(state,action){
       state.selectedServiceFormData={
  
-          miles1: "1",
+          miles1: "30",
           postcode: null,
           cities:null,
           coordinates:[],
@@ -505,7 +505,7 @@ state.authToken = null
           suite: "",
           service_id: [],
           auto_bid: 1,
-          miles2: "1",
+          miles2: "30",
           company_reg_number:""
     
       }
