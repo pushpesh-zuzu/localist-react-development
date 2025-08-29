@@ -28,7 +28,8 @@ import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
 import { Popover } from "antd";
 import { Helmet } from "react-helmet-async";
-import { Select } from "antd";
+import { Select, Modal, Radio, Tabs } from "antd";
+// import TabPane from "antd/es/tabs/TabPane";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
@@ -41,6 +42,13 @@ const BidsList = ({ previousStep }) => {
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
   const [openPopover, setOpenPopover] = useState(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [openSortModal, setOpenSortModal] = useState(false);
+  const [activeSortType, setActiveSortType] = useState("");
+
+  const [activeTab, setActiveTab] = useState("matches");
+
   const { userToken } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer);
   const [index, setIndex] = useState(0);
@@ -48,6 +56,25 @@ const BidsList = ({ previousStep }) => {
     (state) => state.findJobs
   );
   const { Option } = Select;
+  const { TabPane } = Tabs;
+
+  useEffect(() => {
+    // ✅ handleResize ko if ke bahar define karo
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth <= 480);
+      }
+    };
+
+    // ✅ Initial call (first render pe check karne ke liye)
+    handleResize();
+
+    // ✅ Event listener add karo
+    window.addEventListener("resize", handleResize);
+
+    // ✅ Cleanup event listener jab component unmount ho
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     // Delay se exact top pe le jayega
@@ -190,6 +217,7 @@ const BidsList = ({ previousStep }) => {
 
   const handleReply = () => {
     navigate(`/bids-list/reply/${requestId}`);
+    setActiveTab("replies");
   };
 
   const handleChangeMyRequest = () => {
@@ -338,15 +366,60 @@ const BidsList = ({ previousStep }) => {
                 </h1>
                 <div className={styles.middleText}>
                   Your Top 5 local professional matches are below. You can
-                  contact any of the <br /> professionals to get more
-                  information using the contact button.
+                  contact any of the <br className={styles.lineBreak} />{" "}
+                  professionals to get more information using the contact
+                  button.
                 </div>
-                <div className={styles.tabs}>
+                {/* <div className={styles.tabs}>
                   <button className={styles.activeTab}>Your matches</button>
                   <button className={styles.tab} onClick={handleReply}>
                     Replies
                   </button>
-                </div>
+                </div> */}
+
+                <>
+                  {isMobile ? (
+                    // ✅ Mobile view → Ant Design Tabs
+                    <Tabs
+                      activeKey={activeTab}
+                      onChange={(key) => setActiveTab(key)}
+                      centered
+                      tabBarGutter={24}
+                      className={styles.mobileTabs}
+                    >
+                      <TabPane tab="Your Matches" key="matches">
+                        {/* Your Matches content here */}
+                      </TabPane>
+                      <TabPane tab="Replies" key="replies">
+                        {/* Replies content here */}
+                      </TabPane>
+                    </Tabs>
+                  ) : (
+                    // ✅ Desktop view → Old custom buttons
+                    <div className={styles.tabs}>
+                      <button
+                        className={
+                          activeTab === "matches"
+                            ? styles.activeTab
+                            : styles.tab
+                        }
+                        onClick={() => setActiveTab("matches")}
+                      >
+                        Your Matches
+                      </button>
+                      <button
+                        className={
+                          activeTab === "replies"
+                            ? styles.activeTab
+                            : styles.tab
+                        }
+                        onClick={handleReply}
+                      >
+                        Replies
+                      </button>
+                    </div>
+                  )}
+                </>
               </div>
               {/* <div className={styles.backBtnWrapper}>
                 <button
@@ -358,8 +431,7 @@ const BidsList = ({ previousStep }) => {
               </div> */}
             </div>
 
-            <div className={styles.filters}>
-              {/* Match Count on top */}
+            {/* <div className={styles.filters}>
               <div className={styles.matchCountWrapper}>
                 <span className={styles.matchCount}>
                   {matchingLength} matches
@@ -367,25 +439,6 @@ const BidsList = ({ previousStep }) => {
               </div>
 
               <div className={styles.selectsWrapper}>
-                {/* <Popover
-                  content={renderOptions(
-                    ratingOptions,
-                    ratingList,
-                    handleSortRating
-                  )}
-                  trigger="click"
-                  placement="bottom"
-                  autoAdjustOverflow={false}
-                  overlayStyle={{ minWidth: "150px" }}
-                  open={openPopover === "rating"}
-                  onOpenChange={(visible) =>
-                    setOpenPopover(visible ? "rating" : null)
-                  }
-                >
-                  <button className={styles.customSelect}>
-                    {ratingList || "All ratings"}
-                  </button>
-                </Popover> */}
                 <Select
                   style={{ border: "none" }}
                   value={ratingList || "All ratings"}
@@ -404,34 +457,14 @@ const BidsList = ({ previousStep }) => {
                   ))}
                 </Select>
 
-                {/* <Popover
-                  content={renderOptions(
-                    locationOptions,
-                    locationSort,
-                    handelChangeSort
-                  )}
-                  trigger="click"
-                  placement="bottom"
-                  autoAdjustOverflow={false}
-                  overlayStyle={{ minWidth: "150px" }}
-                  open={openPopover === "location"}
-                  onOpenChange={(visible) =>
-                    setOpenPopover(visible ? "location" : null)
-                  }
-                >
-                  <button className={styles.customSelect}>
-                    {locationSort || "Sort by Location"}
-                  </button>
-                </Popover> */}
-
                 <Select
-                  value={locationSort || "Sort by Location"}
+                  value={locationSort || "Farthest to Nearest"}
                   onChange={(value) => {
                     setLocationSort(value);
                     handelChangeSort({ target: { value } });
                   }}
                   className={styles.customSelect}
-                  dropdownMatchSelectWidth={false}
+                  popupMatchSelectWidth={false}
                   suffixIcon={
                     <span
                       onClick={(e) => {
@@ -457,26 +490,6 @@ const BidsList = ({ previousStep }) => {
                   ))}
                 </Select>
 
-                {/* <Popover
-                  content={renderOptions(
-                    responseOptions,
-                    responseSort,
-                    handelresponseChangeSort
-                  )}
-                  trigger="click"
-                  placement="bottom"
-                  autoAdjustOverflow={false}
-                  overlayStyle={{ minWidth: "150px" }}
-                  open={openPopover === "response"}
-                  onOpenChange={(visible) =>
-                    setOpenPopover(visible ? "response" : null)
-                  }
-                >
-                  <button className={styles.customSelect}>
-                    {responseSort || "Response time"}
-                  </button>
-                </Popover> */}
-
                 <Select
                   value={responseSort || "Response time"}
                   onChange={(value) => {
@@ -494,7 +507,163 @@ const BidsList = ({ previousStep }) => {
                   ))}
                 </Select>
               </div>
+            </div> */}
+
+            <div className={styles.filters}>
+              <div className={styles.matchCountWrapper}>
+                <span className={styles.matchCount}>
+                  {matchingLength} matches
+                </span>
+              </div>
+
+              {/* Desktop View - Original Selects */}
+              {!isMobile ? (
+                <div className={styles.selectsWrapper}>
+                  {/* Ratings */}
+                  <Select
+                    value={ratingList || "All ratings"}
+                    onChange={(value) => {
+                      setRatingList(value);
+                      handleSortRating({ target: { value } });
+                    }}
+                    className={styles.customSelect}
+                    dropdownMatchSelectWidth={false}
+                  >
+                    <Option value="">All ratings</Option>
+                    {ratingOptions.map((opt) => (
+                      <Option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </Option>
+                    ))}
+                  </Select>
+
+                  {/* Location */}
+                  <Select
+                    value={locationSort || "Farthest to Nearest"}
+                    onChange={(value) => {
+                      setLocationSort(value);
+                      handelChangeSort({ target: { value } });
+                    }}
+                    className={styles.customSelect}
+                    popupMatchSelectWidth={false}
+                  >
+                    {locationOptions.map((opt) => (
+                      <Option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </Option>
+                    ))}
+                  </Select>
+
+                  {/* Response Time */}
+                  <Select
+                    value={responseSort || "Response time"}
+                    onChange={(value) => {
+                      setResponseSort(value);
+                      handelresponseChangeSort({ target: { value } });
+                    }}
+                    className={styles.customSelect}
+                    dropdownMatchSelectWidth={false}
+                  >
+                    <Option value="">Response time</Option>
+                    {responseOptions.map((opt) => (
+                      <Option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+              ) : (
+                /* Mobile View - Sort Buttons */
+                <div className={styles.mobileSortButtons}>
+                  <button
+                    className={styles.sortBtn}
+                    onClick={() => {
+                      setActiveSortType("rating");
+                      setOpenSortModal(true);
+                    }}
+                  >
+                    {ratingList || "All Ratings"}
+                  </button>
+                  <button
+                    className={styles.sortBtn}
+                    onClick={() => {
+                      setActiveSortType("location");
+                      setOpenSortModal(true);
+                    }}
+                  >
+                    {locationSort || "Sort by Location"}
+                  </button>
+                  <button
+                    className={styles.sortBtn}
+                    onClick={() => {
+                      setActiveSortType("response");
+                      setOpenSortModal(true);
+                    }}
+                  >
+                    {responseSort || "Response Time"}
+                  </button>
+                </div>
+              )}
             </div>
+
+            <Modal
+              open={openSortModal}
+              onCancel={() => setOpenSortModal(false)}
+              footer={null}
+              closable={false}
+              className={styles.bottomModal}
+            >
+              <div className={styles.modalHeader}>
+                <h3>
+                  {activeSortType === "rating"
+                    ? "Sort by Ratings"
+                    : activeSortType === "location"
+                    ? "Sort by Location"
+                    : "Sort by Response Time"}
+                </h3>
+              </div>
+              <Radio.Group
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  if (activeSortType === "rating") {
+                    setRatingList(value);
+                    handleSortRating({ target: { value } });
+                  } else if (activeSortType === "location") {
+                    setLocationSort(value);
+                    handelChangeSort({ target: { value } });
+                  } else if (activeSortType === "response") {
+                    setResponseSort(value);
+                    handelresponseChangeSort({ target: { value } });
+                  }
+
+                  setOpenSortModal(false);
+                }}
+                value={
+                  activeSortType === "rating"
+                    ? ratingList
+                    : activeSortType === "location"
+                    ? locationSort
+                    : responseSort
+                }
+                className={styles.radioGroup}
+              >
+                {(activeSortType === "rating"
+                  ? ratingOptions
+                  : activeSortType === "location"
+                  ? locationOptions
+                  : responseOptions
+                ).map((opt) => (
+                  <Radio
+                    key={opt.value}
+                    value={opt.value}
+                    className={styles.radioItem}
+                  >
+                    {opt.label}
+                  </Radio>
+                ))}
+              </Radio.Group>
+            </Modal>
 
             <div className={styles.recommendBar}>
               <div className={styles.recommendBox}>

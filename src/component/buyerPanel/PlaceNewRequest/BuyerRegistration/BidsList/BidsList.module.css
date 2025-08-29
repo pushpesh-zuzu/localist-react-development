@@ -414,6 +414,56 @@
   border: none !important;
 }
 
+.customSelect :global(.ant-select-arrow) {
+  color: black !important;
+}
+
+/* Mobile Buttons */
+.mobileSortButtons {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.sortBtn {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Bottom Modal */
+.bottomModal .ant-modal-content {
+  position: fixed;
+  bottom: 0;
+  margin: 0;
+  width: 100% !important;
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+}
+
+.modalHeader {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  gap: 12px;
+}
+
+.radioItem {
+  font-size: 14px;
+}
+
 .customSelect {
   appearance: none;
   -webkit-appearance: none;
@@ -581,9 +631,25 @@
 
 .cropContainer {
   position: relative;
-  background: #111;
+  background: #000;
   border-radius: 8px;
   overflow: hidden;
+}
+
+.mobileTabs .ant-tabs-nav {
+  margin: 0 !important;
+}
+
+.mobileTabs .ant-tabs-tab {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  padding: 8px 12px;
+}
+
+.mobileTabs .ant-tabs-tab-active {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 @media screen and (max-width: 1393px) and (min-width: 540px) {
@@ -646,6 +712,12 @@
   }
 }
 
+@media (max-width: 860px) {
+  .customSelect {
+    width: 200px;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 20px;
@@ -692,6 +764,12 @@
   }
 }
 
+@media (max-width: 665px) {
+  .customSelect {
+    width: 120px;
+  }
+}
+
 @media (max-width: 480px) {
   .details {
     width: 85%;
@@ -709,10 +787,13 @@
     flex-wrap: wrap;
   }
 
+  .sortBtn {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
   .recommendBar {
-    font-size: 14px;
-    padding: 15px 8px;
-    text-align: center;
+    display: none !important;
   }
   .filters {
     flex-direction: column;
@@ -737,7 +818,7 @@
     background-image: url("../../../../../assets/Icons/downArrowIcon.svg");
     background-repeat: no-repeat;
     background-position: right 4px center;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     background-size: 10px 10px;
   }
   .matchCount {
@@ -767,6 +848,7 @@
     width: 100%;
   }
   .tabs {
+    margin: 10px;
     flex-direction: row;
     gap: 8px;
     align-items: center;
@@ -789,7 +871,8 @@
     font-weight: 600;
     border: none;
     cursor: pointer !important;
-    margin-bottom: 17.5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
   .headerWrapper {
     display: flex;
@@ -843,8 +926,9 @@
     font-size: 15px;
   }
   .middleText {
-    font-size: 14px;
+    font-size: 12px;
     text-align: center;
+    line-height: normal;
   }
   .replyBtnWrapper {
     display: flex;
@@ -984,6 +1068,10 @@
     display: flex;
     gap: 7px;
   }
+
+  .lineBreak {
+    display: none;
+  }
 }
 @media screen and (min-width: 371px) and (max-width: 420px) {
   .filters select {
@@ -1007,7 +1095,7 @@
     background-image: url("../../../../../assets/Icons/downArrowIcon.svg");
     background-repeat: no-repeat;
     background-position: right 4px center;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     background-size: 10px 10px;
     height: 30px;
     width: 220px;
@@ -1035,13 +1123,18 @@
     background-image: url("../../../../../assets/Icons/downArrowIcon.svg");
     background-repeat: no-repeat;
     background-position: right 4px center;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     background-size: 10px 10px;
   }
 
   .selectsWrapper {
     width: 100%;
     flex-wrap: wrap;
+  }
+
+  .sortBtn {
+    padding: 4px;
+    font-size: 10px;
   }
 }
 @media screen and (max-width: 350px) {
@@ -1057,10 +1150,9 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("../../../../../assets/Icons/downArrowIcon.svg");
     background-repeat: no-repeat;
     background-position: right 4px center;
-    padding-right: 40px;
+    /* padding-right: 40px; */
     background-size: 10px 10px;
   }
 }
