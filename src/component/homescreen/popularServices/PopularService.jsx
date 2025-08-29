@@ -124,13 +124,15 @@ const PopularService = ({ closeModal }) => {
               <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
                 {popularList?.map((service, index) => (
                   <div style={{borderRadius:'20px'}} key={index}  className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id, service?.name)}>
+                    <div style={{padding:'9px',borderRadius:'20px'}}>
                     <img
                       src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
                       alt={service.name}
                       className={styles.image}
-                    />
+                      />
 
                     <p className={styles.serviceTitle}>{service.name}</p>
+                      </div>
                   </div>
                 ))}
               </div>
