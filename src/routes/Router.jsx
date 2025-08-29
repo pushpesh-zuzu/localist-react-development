@@ -206,7 +206,7 @@ const routes = [
           </ProtectedRoute>
         ),
       },
-      // { path: "/privacy-policy", element: <PrivacyPolicy /> },
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "sellers/dashboard",
         element: (

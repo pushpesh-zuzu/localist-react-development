@@ -77,7 +77,9 @@ const ReviewSection = ({
       <div className={styles.reviewList}>
         {showSummary && (
           <div className={styles.reviewHeader}>
-            <h2>Reviews ({reviewLength})</h2>
+            {/* <h2>Reviews ({reviewLength})</h2> */}
+            <h2>Reviews{reviewLength > 0 && ` (${reviewLength})`}</h2>
+
             <div>
               <button
                 className={styles.leaveBtn}

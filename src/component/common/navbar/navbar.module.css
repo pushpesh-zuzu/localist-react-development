@@ -43,7 +43,7 @@
   align-items: center;
 }
 
-.serviceContainer span {
+.serviceContainer h2 {
   color: var(--text-color);
   font-weight: 600;
   font-size: 16px;
@@ -324,7 +324,7 @@
     padding: 18px 40px 24px 88px;
   }
 
-  .serviceContainer span {
+  .serviceContainer h2 {
     font-size: 16px;
     line-height: 14px;
   }
@@ -436,7 +436,7 @@
     padding: 18px 30px;
   }
 
-  .serviceContainer span {
+  .serviceContainer h2 {
     font-size: 13px;
     line-height: 12px;
   }

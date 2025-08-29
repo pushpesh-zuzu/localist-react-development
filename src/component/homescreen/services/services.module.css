@@ -200,7 +200,7 @@
 
 .viewAllBtnBox {
   text-align: center;
-  margin-top:87px;
+  margin-top:64px;
   
 } 
 
@@ -228,7 +228,7 @@
   }
   .viewAllBtnBox {
     text-align: center;
-    margin-top:40px;
+    margin-top:16px;
     
   }
 }
@@ -252,7 +252,7 @@
   }
   .viewAllBtnBox {
     text-align: center;
-    margin-top:40px;
+    margin-top:16px;
     
   }
 
@@ -418,7 +418,7 @@
   font-weight: 700;
   font-size: 12px;
   cursor: pointer !important;
-  padding: 5.5px 10px;
+  padding: 0px 8px;
   border-radius: 4.67px;
 }
    .serviceImage {
@@ -426,7 +426,7 @@
   }
    .viewAllBtnBox {
     text-align: center;
-    margin-top:72px;
+    margin-top:48px;
     
   }
 }
@@ -448,7 +448,7 @@
   }
    .viewAllBtnBox {
     text-align: center;
-    margin-top:48px;
+    margin-top:24px;
     
   }
 }
@@ -483,7 +483,7 @@
   }
    .viewAllBtnBox {
     text-align: center;
-    margin-top:30px;
+    margin-top:14px;
     
   }
 }
