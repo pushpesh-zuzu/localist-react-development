@@ -92,7 +92,7 @@
   color: #ffffff;
   white-space: nowrap;
   cursor: pointer !important;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 .serviceTitle:hover {

@@ -434,7 +434,7 @@
 
 @media (max-width: 390px) {
   .heading {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 30px;
   }
   .arrowLeft,
@@ -456,7 +456,7 @@
 
 @media (max-width: 340px) {
   .heading {
-    font-size: 16px;
+    /* font-size: px; */
     line-height: 28px;
   }
 

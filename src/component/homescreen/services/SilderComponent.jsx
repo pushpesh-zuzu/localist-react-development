@@ -64,7 +64,7 @@ const SliderComponent = ({ subcategory ,categoryName }) => {
           slides: { perView: 1.7, spacing: 15 },
         },
          "(max-width: 380px)": {
-          slides: { perView: 1.6, spacing: 10 },
+          slides: { perView: 1.4, spacing: 0 },
         }
       },
     },
