@@ -278,7 +278,9 @@
   .sliderWrapper {
     height: 165px;
   }
-
+ .serviceTitle{
+  height: 35px;
+ }
   .card {
     width: 285px;
     height: 166px;
@@ -349,7 +351,9 @@
     margin: 0 auto 40px;
     margin-bottom:0px
   }
-
+  .serviceTitle{
+    height: 27px;
+  }
   .heading {
     font-size: 20px;
     line-height: 30px;
@@ -360,9 +364,11 @@
 
   .sliderWrapper {
     width: 100%;
-    height: 150px;
+    height: 170px;
   }
-
+ .serviceImage {
+    height: 117px;
+  }
   .card {
     width: 295px;
   }
@@ -480,7 +486,7 @@
     height: 20px;
   }
    .serviceImage {
-    height: 100px;
+    height: 117px;
   }
    .viewAllBtnBox {
     text-align: center;
