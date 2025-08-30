@@ -30,6 +30,7 @@
   text-align: center;
   font-size: 27px;
   margin-top: -27px;
+  margin: auto;
 }
 
 .description span {
@@ -122,8 +123,8 @@
 
 @media screen and (max-width: 920px) {
   .workContainer {
-    gap: 0px;
-    padding: 20px 5%;
+    gap: 24px;
+    padding: 20px 9%;
   }
 
   .description {
@@ -161,8 +162,8 @@
   }
 
   .workContainer {
-    gap: 34px;
-    padding: 20px 5%;
+    gap: 24px;
+    padding: 20px 8%;
   }
 
   .description {
@@ -192,7 +193,9 @@
     line-height: 30px;
     margin-bottom: -20px;
   }
-
+  .workContainer {
+    gap: 34px;
+  }
   .description {
     font-size: 16px;
     line-height: 28px;
@@ -212,7 +215,8 @@
     width: 100%;
     flex-direction: column;
     align-items: center;
-    margin-top: 0;
+    margin: 0px;
+    /* margin-top: 18px; */
     gap: 70px;
   }
 
@@ -292,7 +296,7 @@
     width: 70%;
   }
   .workContainer {
-    padding: 16px 5%;
+    padding: 16px 5.9%;
   
     
   }
@@ -328,5 +332,12 @@
     color: #000;
     margin-top: 0px;
     font-weight: 600;
+  }
+}
+
+@media screen and (max-width: 360px) {
+
+  .workContainer {
+    padding: 16px 8%;
   }
 }

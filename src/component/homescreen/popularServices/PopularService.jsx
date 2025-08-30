@@ -92,10 +92,10 @@ const PopularService = ({ closeModal }) => {
         "(max-width: 1024px)": {
           slides: { perView: 2.5, spacing: 8 },
         },
-        "(max-width: 768px)": {
+        "(max-width: 820px)": {
           slides: { perView: 2, spacing: 5 },
         },
-         "(max-width: 480px)": {
+         "(max-width: 540px)": {
           slides: { perView: 1.7, spacing: 15 },
         },
          "(max-width: 380px)": {

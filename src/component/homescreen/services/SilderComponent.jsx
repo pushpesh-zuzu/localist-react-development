@@ -58,9 +58,10 @@ const SliderComponent = ({ subcategory ,categoryName }) => {
       loop: true,
       slides: { perView: 3, spacing: 20 },
       breakpoints: {
-        "(max-width: 1024px)": { slides: { perView: 3, spacing: 15 } },
-        "(max-width: 768px)": { slides: { perView: 2, spacing: 5 } },
-         "(max-width: 480px)": {
+        "(max-width: 1024px)": { slides: { perView: 2.5, spacing: 10 } },
+        "(max-width: 820px)": { slides: { perView: 2, spacing: 5 } },
+         "(max-width: 768px)": { slides: { perView: 2, spacing: 5 } },
+         "(max-width: 540px)": {
           slides: { perView: 1.7, spacing: 15 },
         },
          "(max-width: 380px)": {

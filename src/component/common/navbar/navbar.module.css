@@ -308,6 +308,12 @@
   display: flex;
   align-items: center;
 }
+@media (max-width: 1068px) {
+  .iconFocusedNo {
+    border-bottom: none;
+    padding-bottom: 0px;
+  }
+}
 
 /* Mobile-specific visibility */
 @media (max-width: 768px) {
@@ -407,7 +413,7 @@
   }
   .inputWrapper {
     position: relative;
-    width: 100%;
+    width: 210px;
     max-width: 300px;
   }
 
@@ -488,6 +494,11 @@
   .serviceText {
     display: none;
   }
+   .inputWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+  }
   .nameCircle {
     margin-right: 0px;
   }
@@ -541,7 +552,7 @@
   }
 
   .logSwitchContainer {
-    gap: 0px;
+    gap: 10px;
   }
 
   .professionalBtn {
