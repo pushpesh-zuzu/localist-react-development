@@ -3,7 +3,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import leftArrow from "../../../assets/Images/backwordArrow.svg";
 import rightArrow from "../../../assets/Images/forwordArrow.svg";
-import { POPULAR_CITIES } from "../../../constant/subCategory";
+// import { POPULAR_CITIES } from "../../../constant/subCategory";
 import CityBox from "./CityBox";
 function AutoplayPlugin(slider) {
   let timeout;

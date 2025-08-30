@@ -22,7 +22,7 @@ import FenchandGet from "../assets/Images/FenchandGet.jpg";
 import PatioPatioServices from "../assets/Images/PatioServices.jpg";
 import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
 import Builders from "../assets/Images/servicesLevels/Builders.jpg";
-
+// This is level 2 page 
 const popularFilterLevelTwo = [
   {
     builders: [
@@ -63,22 +63,6 @@ const endpointServiceMap = {
   ],
 };
 
-const breadcrumbHierarchy = {
-  business: ["Business"],
-  "financial-and-accounting": ["Business", "Financial and Accounting"],
-  accountants: [
-    "Business",
-    "Financial and Accounting",
-    "General Accounting",
-    "Accounting",
-  ],
-  "bookkeeping-services": [
-    "Business",
-    "Financial and Accounting",
-    "General Accounting",
-    "Bookkeeping Services",
-  ],
-};
 
 const CloneSubTwoCategory = ({
   accountHeader,

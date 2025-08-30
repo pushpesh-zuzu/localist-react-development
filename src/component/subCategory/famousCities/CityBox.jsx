@@ -8,7 +8,7 @@ const CityBox = ({ city }) => {
 
       <div className={styles.cityNameBtn}>
         <p className={styles.cityName}>{city?.city_name}</p>
-        <button>{`Search ${city?.city_name}`}</button>
+        <button>{`${city?.city_name}`}</button>
       </div>
     </div>
   );

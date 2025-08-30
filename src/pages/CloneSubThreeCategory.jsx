@@ -99,7 +99,7 @@ const CloneSubThreeCategory = ({}) => {
         HowItWorksData={getHowItWorksData(slug)}
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
-      <PopularCity POPULAR_CITIES={POPULAR_CITIES} title="Popular Cities" />
+      <PopularCity sliderdata={POPULAR_CITIES} title="Popular Cities" />
       {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
 
       <RegionsComponent
