@@ -2,32 +2,22 @@ import React, { useEffect, useState } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
-// import AutoBidLocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import starImg from "../../../../../assets/Icons/MyResponse/StarImg.svg";
 import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
-import DummyImage from "../../../../../assets/Images/DummyImage.svg";
-import {
-  getAutoBidData,
-  getBuyerViewProfieApi,
-} from "../../../../../store/LeadSetting/leadSettingSlice";
+import { getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
-import {
-  BASE_IMAGE,
-  BASE_IMAGE_URL,
-  DEFAULT_PROFILE_IMAGE,
-  showToast,
-} from "../../../../../utils";
+import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../../../../utils";
 import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 import { Helmet } from "react-helmet-async";
-
-
+import { Tabs } from "antd";
 
 const ManualBidList = () => {
   const dispatch = useDispatch();
   const { requestId } = useParams();
+  const { TabPane } = Tabs;
   const { autoBidListData, autobidLoader } = useSelector(
     (state) => state.leadSetting
   );
@@ -35,12 +25,36 @@ const ManualBidList = () => {
   const { registerData } = useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const [isopen, setIsOpen] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  const [activeTab, setActiveTab] = useState("replies");
+
   const [autobidDatas, setAutoBidDatas] = useState("");
   const webData = autoBidListData?.map((item) => item?.service_name) || [];
-  console.log(userToken, "autoBidListData");
+
   const handleBack = () => {
     navigate(`/bids-list/${requestId}`);
   };
+
+  useEffect(() => {
+    // ✅ handleResize ko if ke bahar define karo
+    const handleResize = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth <= 480);
+      }
+    };
+
+    // ✅ Initial call (first render pe check karne ke liye)
+    handleResize();
+
+    // ✅ Event listener add karo
+    window.addEventListener("resize", handleResize);
+
+    // ✅ Cleanup event listener jab component unmount ho
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const data = {
       user_id: userToken?.remember_tokens,
@@ -64,6 +78,12 @@ const ManualBidList = () => {
     //   }
     // });
   };
+
+  const handleMatches = () => {
+    navigate(`/bids-list/${requestId}`);
+    setActiveTab("matches");
+  };
+
   const handleConatct = (item) => {
     setAutoBidDatas(item);
     setIsOpen(true);
@@ -81,24 +101,82 @@ const ManualBidList = () => {
         <div className={styles.headerWrapper}>
           <div className={styles.headingTabsWrapper}>
             <h1 className={styles.heading}>{webData[0] || "Your Service"}</h1>
-            <div className={styles.middleText}>
+            {/* <div className={styles.middleText}>
               Your Top 5 local professional matches are below. You can contact
-              any of the <br/> professionals to get more information using the
+              any of the <br /> professionals to get more information using the
               contact button.
-            </div>
-            <div className={styles.tabs}>
+            </div> */}
+
+            {isMobile ? (
+              <div className={styles.mobileMiddleText}>
+                Your Top 5 local professional matches are below. Request replies
+                from your top matches to hear back faster
+              </div>
+            ) : (
+              <div className={styles.middleText}>
+                Your Top 5 local professional matches are below. You can contact
+                any of the <br className={styles.lineBreak} /> professionals to
+                get more information using the contact button.
+              </div>
+            )}
+
+            {/* <div className={styles.tabs}>
               <button className={styles.activeTab} onClick={handleBack}>
                 Your matches
               </button>
               <button className={styles.tab}>Replies</button>
-            </div>
+            </div> */}
           </div>
-          <div className={styles.backBtnWrapper}>
+
+          {/* <div className={styles.backBtnWrapper}>
             <button className={styles.backBtn} onClick={handleBack}>
               Back
             </button>
-          </div>
+          </div> */}
         </div>
+        <>
+          {isMobile ? (
+            // ✅ Mobile view → Ant Design Tabs
+            <Tabs
+              activeKey={activeTab}
+              onChange={(key) => {
+                setActiveTab(key);
+                if (key === "matches") {
+                  handleMatches();
+                }
+              }}
+              centered
+              tabBarGutter={24}
+              className={styles.mobileTabs}
+            >
+              <TabPane tab="Your Matches" key="matches">
+                {/* Your Matches content here */}
+              </TabPane>
+              <TabPane tab="Replies" key="replies">
+                {/* Replies content here */}
+              </TabPane>
+            </Tabs>
+          ) : (
+            <div className={styles.tabs}>
+              <button
+                className={
+                  activeTab === "matches" ? styles.activeTab : styles.tab
+                }
+                onClick={() => handleMatches}
+              >
+                Your Matches
+              </button>
+              <button
+                className={
+                  activeTab === "replies" ? styles.activeTab : styles.tab
+                }
+                onClick={handleReply}
+              >
+                Replies
+              </button>
+            </div>
+          )}
+        </>
         {autobidLoader ? (
           <Spin
             style={{ color: "blue", display: "flex", justifyContent: "center" }}

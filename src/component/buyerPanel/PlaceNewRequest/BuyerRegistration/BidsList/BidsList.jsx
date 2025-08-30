@@ -365,25 +365,32 @@ const BidsList = ({ previousStep }) => {
                     ? webdesignData[0]
                     : "No Service"}
                 </h1>
-                <div className={styles.middleText}>
-                  Your Top 5 local professional matches are below. You can
-                  contact any of the <br className={styles.lineBreak} />{" "}
-                  professionals to get more information using the contact
-                  button.
-                </div>
-                {/* <div className={styles.tabs}>
-                  <button className={styles.activeTab}>Your matches</button>
-                  <button className={styles.tab} onClick={handleReply}>
-                    Replies
-                  </button>
-                </div> */}
+
+                {isMobile ? (
+                  <div className={styles.mobileMiddleText}>
+                    Your Top 5 local professional matches are below. Request
+                    replies from your top matches to hear back faster
+                  </div>
+                ) : (
+                  <div className={styles.middleText}>
+                    Your Top 5 local professional matches are below. You can
+                    contact any of the <br className={styles.lineBreak} />{" "}
+                    professionals to get more information using the contact
+                    button.
+                  </div>
+                )}
 
                 <>
                   {isMobile ? (
                     // ✅ Mobile view → Ant Design Tabs
                     <Tabs
                       activeKey={activeTab}
-                      onChange={(key) => setActiveTab(key)}
+                      onChange={(key) => {
+                        setActiveTab(key);
+                        if (key === "replies") {
+                          handleReply();
+                        }
+                      }}
                       centered
                       tabBarGutter={24}
                       className={styles.mobileTabs}
@@ -396,7 +403,6 @@ const BidsList = ({ previousStep }) => {
                       </TabPane>
                     </Tabs>
                   ) : (
-                    // ✅ Desktop view → Old custom buttons
                     <div className={styles.tabs}>
                       <button
                         className={
@@ -431,84 +437,6 @@ const BidsList = ({ previousStep }) => {
                 </button>
               </div> */}
             </div>
-
-            {/* <div className={styles.filters}>
-              <div className={styles.matchCountWrapper}>
-                <span className={styles.matchCount}>
-                  {matchingLength} matches
-                </span>
-              </div>
-
-              <div className={styles.selectsWrapper}>
-                <Select
-                  style={{ border: "none" }}
-                  value={ratingList || "All ratings"}
-                  onChange={(value) => {
-                    setRatingList(value);
-                    handleSortRating({ target: { value } });
-                  }}
-                  className={styles.customSelect}
-                  dropdownMatchSelectWidth={false}
-                >
-                  <Option value="">All ratings</Option>
-                  {ratingOptions.map((opt) => (
-                    <Option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </Option>
-                  ))}
-                </Select>
-
-                <Select
-                  value={locationSort || "Farthest to Nearest"}
-                  onChange={(value) => {
-                    setLocationSort(value);
-                    handelChangeSort({ target: { value } });
-                  }}
-                  className={styles.customSelect}
-                  popupMatchSelectWidth={false}
-                  suffixIcon={
-                    <span
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        // Toggle between Farthest and Nearest
-                        const newSort =
-                          locationSort === "Farthest to Nearest"
-                            ? "Nearest to Farthest"
-                            : "Farthest to Nearest";
-                        setLocationSort(newSort);
-                        handelChangeSort({ target: { value: newSort } });
-                      }}
-                      style={{ cursor: "pointer" }}
-                    >
-                      ⇅
-                    </span>
-                  }
-                >
-                  {locationOptions.map((opt) => (
-                    <Option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </Option>
-                  ))}
-                </Select>
-
-                <Select
-                  value={responseSort || "Response time"}
-                  onChange={(value) => {
-                    setResponseSort(value);
-                    handelresponseChangeSort({ target: { value } });
-                  }}
-                  className={styles.customSelect}
-                  dropdownMatchSelectWidth={false}
-                >
-                  <Option value="">Response time</Option>
-                  {responseOptions.map((opt) => (
-                    <Option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-            </div> */}
 
             <div className={styles.filters}>
               <div className={styles.matchCountWrapper}>

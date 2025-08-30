@@ -771,6 +771,17 @@
 }
 
 @media (max-width: 480px) {
+  .mobileMiddleText {
+    background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
+    color: white;
+    padding: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: 10px;
+    cursor: default;
+  }
+
   .details {
     width: 85%;
   }

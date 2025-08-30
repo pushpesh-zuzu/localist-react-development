@@ -47,15 +47,15 @@
   gap: 11px;
 }
 .customSelect {
-  appearance: none;           
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('../../../../../assets/Icons/arrow-down.svg');
+  background-image: url("../../../../../assets/Icons/arrow-down.svg");
   background-repeat: no-repeat;
-  background-position: right 5px center; 
+  background-position: right 5px center;
   padding-right: 40px;
   background-size: 18px 18px;
-} 
+}
 
 .noBidText {
   font-weight: 600;
@@ -90,7 +90,6 @@
 
 .tab:hover {
   background-color: #0096c4;
-  
 }
 
 /* .filters {
@@ -232,7 +231,7 @@
   background-color: #FAFAFA;
   padding: 24px 24px;
 } */
- .messageRow {
+.messageRow {
   display: flex;
   justify-content: flex-start;
 }
@@ -246,18 +245,18 @@
   color: #828282;
   margin-bottom: 13px;
   width: 93%;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 14px 37px 14px 8px;
   /* border-radius: 8px; */
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1); /* optional for subtle depth */
 }
-.middleText{
+.middleText {
   font-weight: 400;
-    text-align: center;
-    padding: 4px;
-    font-size: 16px;
-    line-height: 24px;
-    margin-top: 10px;
+  text-align: center;
+  padding: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  margin-top: 10px;
 }
 .messageText {
   display: flex;
@@ -302,11 +301,11 @@
   color: #ffd633;
   font-size: 35px;
 }
- .grayImg  {
-    color: #D9D9D9;
- font-size: 35px;
+.grayImg {
+  color: #d9d9d9;
+  font-size: 35px;
 }
-.meName{
+.meName {
   font-size: 12px;
   font-weight: 500;
 }
@@ -474,27 +473,38 @@
 }
 
 @media (max-width: 480px) {
+  .mobileMiddleText {
+    background: linear-gradient(90deg, #8ed5ec 0%, #00afe3 100%);
+    color: white;
+    padding: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: 10px;
+    cursor: default;
+  }
+
   .heading {
     font-size: 20px;
   }
   .middleText {
     font-size: 14px;
   }
-   .card {
+  .card {
     padding: 0px 8px;
-     box-shadow: 0px 0px 2px 0.5px #0000001a;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
   }
-  .grayImg  {
-    color: #D9D9D9;
- font-size: 25px;
-}
+  .grayImg {
+    color: #d9d9d9;
+    font-size: 25px;
+  }
   .imageWrapper {
-  width: 50%;
-}
-.ratingCount {
-  margin-top: 0px;
-  font-size: 18px;
-}
+    width: 50%;
+  }
+  .ratingCount {
+    margin-top: 0px;
+    font-size: 18px;
+  }
 
   .recommendBar {
     font-size: 16px;
@@ -502,11 +512,10 @@
     text-align: left;
   }
 
-.stars {
-  color: #ffd633;
-  font-size: 25px;
-}
-
+  .stars {
+    color: #ffd633;
+    font-size: 25px;
+  }
 
   .cardLeft {
     flex-direction: column;
@@ -533,14 +542,14 @@
 
   .badges span {
     font-size: 10px;
-}
+  }
   .badges {
     flex-wrap: wrap;
     margin: 15px 0px 20px 0px;
   }
-.header {
-   display: none;
-}
+  .header {
+    display: none;
+  }
 
   .badges span {
     font-size: 9px;
@@ -559,8 +568,8 @@
     width: 100%;
     padding: 8px 8px;
   }
-   .backBtn {
-  padding: 6px 12px;
+  .backBtn {
+    padding: 6px 12px;
     font-size: 14px;
     margin-bottom: 10px;
   }
@@ -569,23 +578,23 @@
     width: 132px;
     font-size: 15px;
   }
-  .tab{
+  .tab {
     padding: 4px 10px;
     width: 90px;
     font-size: 15px;
   }
-.mobileBadge {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  .mobileBadge {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-/* margin-bottom: 8px; */
-}
+    /* margin-bottom: 8px; */
+  }
   .profileLink {
     font-size: 11px;
     cursor: pointer !important;
   }
- .replyBtnWrapper {
+  .replyBtnWrapper {
     width: 100%;
     height: auto;
     padding: 10px 0;
@@ -600,79 +609,79 @@ align-items: center;
     position: static;
     margin-bottom: 10px;
   }
-   .headerWrapper {
+  .headerWrapper {
     display: flex;
     flex-direction: column-reverse;
   }
   .mobileHeader {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
-}
+  }
 
-.mobileHeader h3 {
-  font-weight: 600;
-  font-size: 16px;
-  vertical-align: middle;
-}
+  .mobileHeader h3 {
+    font-weight: 600;
+    font-size: 16px;
+    vertical-align: middle;
+  }
 
-.mobileHeader h3 img {
-  height: 17.47px;
-  width: 17.47px;
-  margin-right: 7px;
-  margin-bottom: -2px;
-}
+  .mobileHeader h3 img {
+    height: 17.47px;
+    width: 17.47px;
+    margin-right: 7px;
+    margin-bottom: -2px;
+  }
 
-.mobileHeader p {
-  font-weight: 600;
-  font-size: 12px;
-  vertical-align: middle;
-  display: flex;
-  gap: 7px;
-}
-.images {
-  width: 130px;
-  height: 93px;
-}
-.mobileImageWrapper {
-  display: flex;
-}
-.image {
-  display: none;
-}
-.badges {
-  display: none;
-}
-.rating{
-  display: none;
-}
-.badge {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-.ratings {
-  display: flex;
-  font-size: 1.2rem;
-  text-align: center;
-  gap: 5px;
-  align-items: center;
-}
+  .mobileHeader p {
+    font-weight: 600;
+    font-size: 12px;
+    vertical-align: middle;
+    display: flex;
+    gap: 7px;
+  }
+  .images {
+    width: 130px;
+    height: 93px;
+  }
+  .mobileImageWrapper {
+    display: flex;
+  }
+  .image {
+    display: none;
+  }
+  .badges {
+    display: none;
+  }
+  .rating {
+    display: none;
+  }
+  .badge {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+  }
+  .ratings {
+    display: flex;
+    font-size: 1.2rem;
+    text-align: center;
+    gap: 5px;
+    align-items: center;
+  }
 
-.badge span {
-  border: 1px solid #b3b3b3;
-  padding: 5px 10px;
-  border-radius: 100px;
-  font-weight: 600;
-  font-size: 10px;
-  vertical-align: middle;
-  color: #b3b3b3;
-  text-wrap: nowrap;
+  .badge span {
+    border: 1px solid #b3b3b3;
+    padding: 5px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 10px;
+    vertical-align: middle;
+    color: #b3b3b3;
+    text-wrap: nowrap;
+  }
 }
-}
-@media screen and (max-width:330px) {
+@media screen and (max-width: 330px) {
   .images {
     width: 120px;
     height: 85px;
@@ -681,8 +690,7 @@ align-items: center;
     width: 100%;
     justify-content: space-between;
   }
-  .mobileHeader h3{
+  .mobileHeader h3 {
     font-size: 14px;
   }
-  
 }
