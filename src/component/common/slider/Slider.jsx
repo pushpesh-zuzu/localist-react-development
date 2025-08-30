@@ -3,7 +3,7 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import leftArrow from "../../../assets/Images/backwordArrow.svg";
 import rightArrow from "../../../assets/Images/forwordArrow.svg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 function AutoplayPlugin(slider) {
   let timeout;
   let mouseOver = false;
