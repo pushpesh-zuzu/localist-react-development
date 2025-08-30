@@ -9,7 +9,7 @@ import phone from "../../assets/Icons/phoneIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getDashboardListData } from "../../store/Dashboard/dashboardSlice";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 //PolygonArrowDown
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -18,6 +18,9 @@ const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const contentRef = useRef(null);
   const userName = dashboardData?.profile_info?.name;
+        const { lang, country } = useParams(); 
+        const currentLang = lang || "en";
+        const currentCountry = country || "gb";
 
   useEffect(() => {
     dispatch(getDashboardListData());
@@ -212,7 +215,7 @@ const Dashboard = () => {
                   <p>
                     We’re here to help you get the most out of Localists.com.
                     Explore plenty of tips, guides, and resources in our{" "}
-                    <a href="/contact-us" className={styles.textColor}>
+                    <a href={`/${currentLang}/${currentCountry}/contact-us`} className={styles.textColor}>
                       Help Center
                     </a>{" "}
                     .

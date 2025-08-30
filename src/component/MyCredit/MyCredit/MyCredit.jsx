@@ -6,7 +6,7 @@ import CreditCard from "./CreditCard";
 import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   getCreditPlanList,
   getswitchAutobidApi,
@@ -65,6 +65,9 @@ const MyCredits = () => {
   const { creditPlanList } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
+        const { lang, country } = useParams(); 
+        const currentLang = lang || "en";
+        const currentCountry = country || "gb";
   const {
     buyCreditLoader,
     addCouanLoader,
@@ -279,7 +282,7 @@ const MyCredits = () => {
             {/* <a href="#" className={styles.link}>
              
             </a> */}
-            <Link to="/contact-us" className={styles.link}>
+            <Link to={`/${currentLang}/${currentCountry}/contact-us`} className={styles.link}>
               Help Center
             </Link>
             .

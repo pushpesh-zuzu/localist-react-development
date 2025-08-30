@@ -1,10 +1,12 @@
 import styles from "./PopularCategories.module.css";
 import { PopularCategoriesData } from "../../../constant/CloneCategory";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PopularCategories = ({ data }) => {
-  const navigate = useNavigate();
+  const { lang, country } = useParams(); 
+      const currentLang = lang || "en";
+      const currentCountry = country || "gb";
 
   return (
     <div className={styles.container}>
@@ -17,7 +19,7 @@ const PopularCategories = ({ data }) => {
             <div className={styles.row}>
               <div key={row.id} className={styles.card}>
                 {row.path ? (
-                  <Link to={`/en/gb/${row.path}`}>
+                  <Link to={`/${currentLang}/${currentCountry}/${row.path}`}>
                     <img
                       src={row.image}
                       alt={row.title}
@@ -39,7 +41,7 @@ const PopularCategories = ({ data }) => {
                 <Link
                   className={styles.cardbButton}
                   style={{ textDecoration: "none" }}
-                  to={`/en/gb/${row.path}`}
+                  to={`/${currentLang}/${currentCountry}/${row.path}`}
                 >
                   {row.title}
                 </Link>

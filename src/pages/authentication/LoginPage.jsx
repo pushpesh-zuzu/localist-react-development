@@ -127,7 +127,7 @@
 // export default LoginPage;
 
 import { Form, Button, Checkbox, Typography, Spin } from "antd";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import "./index.css";
 import TextInput from "../../component/customInputs/TextInput";
@@ -148,7 +148,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const { lang, country } = useParams(); 
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
   const [passwordless, setPasswordless] = useState(
     location.pathname === "/passwordless_login"
   );
@@ -332,7 +334,7 @@ const LoginPage = () => {
                 style={{ cursor: "pointer", color: "#ABABAB" }}
                 onClick={() => {
                   setPasswordless(false);
-                  navigate("/login");
+                  navigate(`/${currentLang}/${currentCountry}/login`);
                 }}
               >
                 Back to Login
@@ -346,14 +348,14 @@ const LoginPage = () => {
         <div className="bottom-links">
           <Text className="text">
             Offering a service?{" "}
-            <Link to="/sellers/create/" className="linkText">
+            <Link to={`/${currentLang}/${currentCountry}/sellers/create/`} className="linkText">
               Join as a professional
             </Link>
           </Text>
           <br />
           <Text className="text">
             Looking for a service?{" "}
-            <Link to="/" className="linkText">
+            <Link to={`/${currentLang}/${currentCountry}`} className="linkText">
               Get started
             </Link>
           </Text>

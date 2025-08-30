@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styles from "./GrowthSteps.module.css";
 import { GrowthStepsData } from "../../../constant/ServicePanel";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LeadInfoModal from "./LeadStaticModal";
 
 const GrowthSteps = () => {
-  
+         const { lang, country } = useParams(); 
+          const currentLang = lang || "en";
+          const currentCountry = country || "gb";
   const [showModal, setShowModal] = useState(false);
 
   const handleCardClick = (item) => {
@@ -36,7 +38,7 @@ const GrowthSteps = () => {
                 </ul>
                </div>
                 {/* <button className={styles.button} onClick={() => navigate(item.path)}>{item.button}</button> */}
-                <Link style={{textDecoration:'none',textAlign:'center'}} to={(item.id==1 || item.id==3) ? item.path:'#'}
+                <Link style={{textDecoration:'none',textAlign:'center'}} to={(item.id==1 || item.id==3) ? `/${currentLang}/${currentCountry}/${item.path}`:'#'}
                   className={styles.button}
                   onClick={() => handleCardClick(item)}
                 >

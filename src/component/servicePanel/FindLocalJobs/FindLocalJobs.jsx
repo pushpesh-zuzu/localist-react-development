@@ -8,7 +8,7 @@ import {
   setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
@@ -22,16 +22,19 @@ const FindLocalJobs = () => {
   const [isMobile, setIsMobile] = useState(false); // ✅ State में move किया
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
+        const { lang, country } = useParams(); 
+        const currentLang = lang || "en";
+        const currentCountry = country || "gb";
   const divRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
 
-  const handleServiceClick = (service) => {
-    const slug = generateSlug(service.name);
-    dispatch(setSelectedServiceId(service.id));
-    navigate(`/sellers/create-account/${slug}`);
-  };
+  // const handleServiceClick = (service) => {
+  //   const slug = generateSlug(service.name);
+  //   dispatch(setSelectedServiceId(service.id));
+  //   navigate(`/sellers/create-account/${slug}`);
+  // };
 
   useEffect(() => {
     dispatch(getPopularServiceList());
@@ -96,7 +99,7 @@ const FindLocalJobs = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
       dispatch(setSelectedServiceId(selectedService.id));
-      navigate(`/sellers/create-account/${slug}`);
+      navigate(`/${currentLang}/${currentCountry}/sellers/create-account/${slug}`);
     }
   };
 
@@ -194,7 +197,7 @@ const FindLocalJobs = () => {
           <div className={styles.servicesList}>
           {popularList?.map((service) => {
             const slug = generateSlug(service.name);
-            const path = `/sellers/create-account/${slug}`;
+            const path = `/${currentLang}/${currentCountry}/sellers/create-account/${slug}`;
 
             return (
               <Link

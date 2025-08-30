@@ -7,9 +7,12 @@ import {
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const AllServicesComponent = ({ data }) => {
+        const { lang, country } = useParams(); 
+        const currentLang = lang || "en";
+        const currentCountry = country || "gb";
   const allPanelKeys = AllServicesData.map((panel) => panel.key);
   return (
     <div className={styles.container}>
@@ -34,7 +37,7 @@ const AllServicesComponent = ({ data }) => {
               header={
                 <Link
                   style={{ color: "#000", cursor: "pointer" }}
-                  to={`/en/gb${categoryPath}`}
+                  to={`/${currentLang}/${currentCountry}${categoryPath}`}
                   className={styles.categoryLink}
                 >
                   {categoryName}
@@ -45,7 +48,7 @@ const AllServicesComponent = ({ data }) => {
               <div key={index} className={styles.categoryContainer}>
                 <div className={styles.servicesContainer}>
                   {services?.map((service, idx) => {
-                    const servicePath = `/en/gb${
+                    const servicePath = `/${currentLang}/${currentCountry}${
                       serviceRoutes[service] || "#"
                     }`;
 

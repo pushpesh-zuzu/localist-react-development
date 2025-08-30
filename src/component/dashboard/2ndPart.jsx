@@ -2,11 +2,14 @@ import styles from './cards.module.css';
 import questionBlueIcon from '../../assets/Icons/questionBlueIcon.svg'
 import phone from '../../assets/Icons/phoneIcon.svg'
 import emailIcon1 from '../../assets/Icons/emailIcon1.svg'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 //redeploy work
 const DashboardCards = ({data}) => {
   const navigate = useNavigate()
   console.log(data,"data")
+          const { lang, country } = useParams(); 
+          const currentLang = lang || "en";
+          const currentCountry = country || "gb";
   return (
     
 <div className={styles["dashboard-container"]}>
@@ -162,7 +165,7 @@ const DashboardCards = ({data}) => {
         <p>
           Visit 
           <a
-            href="/contact-us"
+            href={`/${currentLang}/${currentCountry}/contact-us`}
             style={{color:"black" }}
             className={styles["view-link"]}
             onClick={(e) => {
@@ -175,7 +178,7 @@ const DashboardCards = ({data}) => {
                 !e.altKey
               ) {
                 e.preventDefault();
-                navigate("/contact-us");
+                navigate(`/${currentLang}/${currentCountry}/contact-us`);
               }
             }}
           >

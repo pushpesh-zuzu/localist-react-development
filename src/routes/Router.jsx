@@ -152,7 +152,6 @@ const routes = [
         element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect>,
       },
       { path: "how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
-      { path: "sellers/pricing/", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
       { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
       { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
 
@@ -173,7 +172,7 @@ const routes = [
       { path: "/about-us", element: <LocaleRedirect><AboutUs /></LocaleRedirect> },
       { path: "/how-it-works-for-customers", element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect> },
       { path: "/how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
-      { path: "/sellers/pricing/", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
+      { path: "/sellers/pricing", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
       { path: "/sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
       { path: "/sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
  

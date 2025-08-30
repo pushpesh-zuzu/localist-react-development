@@ -90,7 +90,7 @@ const GrowthStepsData = [
     Description2: "Review leads for free",
     Description3: "Get leads sent to you in real time",
     button: "How it works",
-    path:"/en/gb/how-it-works-for-sellers/"
+    path:"how-it-works-for-sellers"
   },
   {
     id: 2,
@@ -111,7 +111,7 @@ const GrowthStepsData = [
     Description2: "No commission or hidden fees",
     Description3: "Get Hired Guarantee on first leads",
     button: "See more about pricing",
-     path: "/sellers/pricing"
+     path: "sellers/pricing"
   },
 ];
 

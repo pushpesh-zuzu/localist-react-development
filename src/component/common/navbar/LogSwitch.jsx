@@ -516,7 +516,7 @@ const LogSwitch = () => {
               </a>
 
               <a
-                href="/contact-us"
+                href={`/${currentLang}/${currentCountry}/contact-us`}
                 style={{ textDecoration: "none", color: "black" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/contact-us" ? styles.active : ""
@@ -530,7 +530,7 @@ const LogSwitch = () => {
                     !e.altKey
                   ) {
                     e.preventDefault();
-                    handleNavigation("/contact-us");
+                    handleNavigation(`/${currentLang}/${currentCountry}/contact-us`);
                   }
                 }}
               >

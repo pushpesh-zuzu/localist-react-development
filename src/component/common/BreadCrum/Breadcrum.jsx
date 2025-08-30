@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./breadcrum.module.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Breadcrumb = ({ breadcrumb }) => {
   if (!Array.isArray(breadcrumb) || breadcrumb.length === 1 || 0) return null;
+      const { lang, country } = useParams(); 
+      const currentLang = lang || "en";
+      const currentCountry = country || "gb";
 
   return (
     <nav aria-label="breadcrumb">
@@ -20,7 +23,7 @@ const Breadcrumb = ({ breadcrumb }) => {
               ) : (
                 <>
                   {/* All other items: blue color and clickable */}
-                  <Link to={`/en/gb${item.path}`} className={styles.link}>
+                  <Link to={`/${currentLang}/${currentCountry}${item.path}`} className={styles.link}>
                     {item.title}
                   </Link>
                   <span className={styles.separator}> / </span>

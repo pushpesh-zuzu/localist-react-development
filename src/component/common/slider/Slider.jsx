@@ -36,6 +36,9 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
+          const { lang, country } = useParams(); 
+          const currentLang = lang || "en";
+          const currentCountry = country || "gb";
   const [sliderRef, slider] = useKeenSlider(
     {
       loop: true,
@@ -112,7 +115,7 @@ const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
                 className={`keen-slider__slide ${styles.slide}`}
               >
                 {service.path ? (
-                  <Link to={`/en/gb/${service.path}`}>
+                  <Link to={`/${currentLang}/${currentCountry}/${service.path}`}>
                     <img src={service.image} alt={service.title} />
                   </Link>
                 ) : (
@@ -120,7 +123,7 @@ const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
                 )}
                 {service?.path ? (
                   <p>
-                    <Link className={styles.link} to={`/en/gb/${service.path}`}>
+                    <Link className={styles.link} to={`/${currentLang}/${currentCountry}/${service.path}`}>
                       {service.description}
                     </Link>
                   </p>
