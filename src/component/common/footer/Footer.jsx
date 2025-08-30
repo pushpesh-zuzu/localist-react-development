@@ -12,7 +12,7 @@ import timerIcon from "../../../assets/Icons/timer.svg";
 import { Collapse } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showToast } from "../../../utils";
 
@@ -54,6 +54,10 @@ const FooterContent = () => (
 );
 
 const Footer = () => {
+      const { lang, country } = useParams(); 
+      const currentLang = lang || "en";
+      const currentCountry = country || "gb";
+  
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" && window.innerWidth < 520
@@ -90,7 +94,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
-          <Link to="/" className={styles.link}>
+          <Link to={`/${currentLang}/${currentCountry}`} className={styles.link}>
             <div className={styles.logo}>
               <img src={logo} alt="Localist Logo" />
             </div>
@@ -102,7 +106,7 @@ const Footer = () => {
 
           <div className={styles.contactSection}>
             <span>Need Help?</span>
-            <Link to="/contact-us" className={styles.link}>
+            <Link to={`/${currentLang}/${currentCountry}/contact-us`} className={styles.link}>
               <button>Contact Us</button>
             </Link>
           </div>
@@ -113,11 +117,11 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <Link to="/" className={styles.link}>
+              <Link to={`/${currentLang}/${currentCountry}`} className={styles.link}>
                 <li>Find a Professional</li>
               </Link>
 
-              <Link className={styles.link} to="/how-it-works-for-customers">
+              <Link className={styles.link} to={`/${currentLang}/${currentCountry}/how-it-works-for-customers`}>
                 <li
                   onClick={() => {
                     window.scrollTo(0, 0);
@@ -128,7 +132,7 @@ const Footer = () => {
               </Link>
 
               <Link
-                to={(!userToken || !registerToken) && "/login"}
+                to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/login`}
                 className={styles.link}
               >
                 <li
@@ -136,7 +140,7 @@ const Footer = () => {
                     if (userToken || registerToken) {
                       showToast("info", "You're already logged in.");
                     } else {
-                      navigate("/login");
+                      navigate(`/${currentLang}/${currentCountry}/login`);
                       window.scrollTo(0, 0);
                     }
                   }}
@@ -150,15 +154,15 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <Link to="/how-it-works-for-sellers" className={styles.link}>
+              <Link to={`/${currentLang}/${currentCountry}/how-it-works-for-sellers`} className={styles.link}>
                 <li>How it works</li>
               </Link>
-              <Link className={styles.link} to="/sellers/pricing">
+              <Link className={styles.link} to={`/${currentLang}/${currentCountry}/sellers/pricing`}>
                 <li>Pricing</li>
               </Link>
               <Link
                 className={styles.link}
-                to={(!userToken || !registerToken) && "/sellers/create"}
+                to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/sellers/create`}
               >
                 <li
                   onClick={() => {
@@ -200,11 +204,9 @@ const Footer = () => {
           </div>
 
           <div>
-            <Link to="/about-us" className={styles.link}>
               <h4>About</h4>
-            </Link>
             <ul>
-              <Link className={styles.link} to="/about-us">
+              <Link className={styles.link} to={`/${currentLang}/${currentCountry}/about-us`}>
                 <li>About Localists</li>
               </Link>
             </ul>
@@ -235,16 +237,16 @@ const Footer = () => {
               <Link to="/">
                 <li className={styles.mobileItem}>Find a Professional</li>
               </Link>
-              <Link to="/en/gb/how-it-works-for-customers">
+              <Link to={`/${currentLang}/${currentCountry}/how-it-works-for-customers`}>
                 <li className={styles.mobileItem}>How it works</li>
               </Link>
-              <Link to={(!userToken || !registerToken) && "/login"}>
+              <Link to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/login`}>
                 <li className={styles.mobileItem}
                   onClick={() => {
                     if (userToken || registerToken) {
                       showToast("info", "You're already logged in.");
                     } else {
-                      navigate("/login");
+                      navigate(`/${currentLang}/${currentCountry}/login`);
                       window.scrollTo(0, 0);
                     }
                   }}
@@ -261,13 +263,13 @@ const Footer = () => {
             key="2"
           >
             <ul>
-              <Link to="/how-it-works-for-sellers">
+              <Link to={`/${currentLang}/${currentCountry}/how-it-works-for-sellers`}>
                 <li className={styles.mobileItem}>How it works</li>
               </Link>
-              <Link to="/sellers/pricing">
+              <Link to={`/${currentLang}/${currentCountry}/sellers/pricing`}>
                 <li className={styles.mobileItem}>Pricing</li>
               </Link>
-              <Link to={(!userToken || !registerToken) && "/sellers/create"}>
+              <Link to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/sellers/create`}>
                 <li className={styles.mobileItem} onClick={handleJoinAsProfessional}>
                   Join as a Professional
                 </li>
@@ -280,7 +282,7 @@ const Footer = () => {
 
           <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
-              <Link to="/about-us">
+              <Link to={`/${currentLang}/${currentCountry}/about-us`}>
                 <li className={styles.mobileItem}>About Localists</li>
               </Link>
             </ul>

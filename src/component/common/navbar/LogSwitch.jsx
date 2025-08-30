@@ -31,6 +31,9 @@ const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const { lang, country } = useParams(); 
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
   const wrapperRef = useRef(null);
   const { serviceTitle } = useParams();
   const [dataSave, setDataSave] = useState();
@@ -862,7 +865,7 @@ const LogSwitch = () => {
           <>
             <div className={styles.logsBtns}>
               <Link
-                to="/login"
+                to={`/${currentLang}/${currentCountry}/login`}
                 className={`${styles.loginBtn} ${styles.link}`}
                 onClick={() => {
                   setMenuOpen(false);
@@ -872,7 +875,7 @@ const LogSwitch = () => {
               </Link>
               {!selectedServiceId && !serviceTitle && (
                 <Link
-                  to={"/sellers/create"}
+                  to={`/${currentLang}/${currentCountry}/sellers/create`}
                   className={styles.professionalBtn}
                   onClick={() => {
                     // dispatch(setRegisterStep(1));
