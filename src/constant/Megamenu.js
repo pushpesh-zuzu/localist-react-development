@@ -327,6 +327,7 @@ export const megaMenu = [
       },
       {
         name: "Fitness Training",
+        path:"",
         children: locationData.map((loc) => `Fitness Training in ${loc}`),
       },
     ],
