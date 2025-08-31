@@ -433,6 +433,7 @@ const redirectPath = getRedirectPath();
           </Popover>
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
+        <>
         <Popover
           onMouseEnter={() => setShowbMenu(true)}
           placement={placement}
@@ -446,11 +447,35 @@ const redirectPath = getRedirectPath();
           getPopupContainer={(trigger) => trigger.parentNode}
         >
           <div className={styles.serviceContainer}>
-             <span className={styles.serviceText}>Explore Our Services</span>
+            <span className={styles.serviceText}>Explore Our Services</span>
             <span className={styles.serviceTextMobile}>Our Services</span>
             <img src={downArrow} alt="down-arrow" />
           </div>
         </Popover>
+        <div style={{ display: "none" }}>
+            {megaMenu.map((item, i) => (
+              <div key={i}>
+                <a href={`/${currentLang}/${currentCountry}/${item.path}`}>{item.name}</a>
+
+                {item.subcategory?.map((sub, j) => (
+                  <div key={j}>
+                    <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>{sub.name}</a>
+
+                    {sub.children?.map((child, k) => (
+                      <a
+                        key={k}
+                        href={`/${currentLang}/${currentCountry}/${sub.path}/${child
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                      >
+                        {child}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div></>
       )}
     </div>
   );

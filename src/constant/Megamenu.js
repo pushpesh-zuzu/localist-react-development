@@ -283,18 +283,22 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Bookkeeping Services",
+        path:'',
         children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
       },
       {
         name: "Social Media Marketing",
+            path:"",
         children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
       },
       {
         name: "Business Consulting",
+        path:"",
         children: locationData.map((loc) => `Business Consulting in ${loc}`),
       },
       {
         name: "Accounting",
+        path:"",
         children: locationData.map((loc) => `Accounting in ${loc}`),
       },
     ],
@@ -306,16 +310,19 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Business & Career Coaching",
+        path:"",
         children: locationData.map(
           (loc) => `Business & Career Coaching in ${loc}`
         ),
       },
       {
         name: "Music Lessons",
+        path:"",
         children: locationData.map((loc) => `Music Lessons in ${loc}`),
       },
       {
         name: "Academic Tutoring",
+        path:"",
         children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
       },
       {
@@ -331,14 +338,17 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Web Design",
+        path:"",
         children: locationData.map((loc) => `Web Designer in ${loc}`),
       },
       {
         name: "Logo Design",
+        path:"",
         children: locationData.map((loc) => `Logo Designer in ${loc}`),
       },
       {
         name: "Home & Domiciliary Care",
+        path:"",
         children: locationData.map(
           (loc) => `Home & Domiciliary Care in ${loc}`
         ),
