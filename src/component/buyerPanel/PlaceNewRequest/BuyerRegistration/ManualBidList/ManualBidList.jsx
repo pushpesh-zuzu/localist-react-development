@@ -38,20 +38,16 @@ const ManualBidList = () => {
   };
 
   useEffect(() => {
-    // ✅ handleResize ko if ke bahar define karo
     const handleResize = () => {
       if (typeof window !== "undefined") {
         setIsMobile(window.innerWidth <= 480);
       }
     };
 
-    // ✅ Initial call (first render pe check karne ke liye)
     handleResize();
 
-    // ✅ Event listener add karo
     window.addEventListener("resize", handleResize);
 
-    // ✅ Cleanup event listener jab component unmount ho
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -62,22 +58,6 @@ const ManualBidList = () => {
     };
     dispatch(getAutoBidData(data));
   }, []);
-  const handleReply = (item) => {
-    console.log(item, "item");
-    navigate(`/view-profile/${item.id}/${requestId}`);
-    // const viewProfileData = {
-    //   user_id: userToken?.remember_tokens
-    //     ? userToken?.remember_tokens
-    //     : registerData?.remember_tokens,
-    //   seller_id: item?.id,
-    //   lead_id: requestId,
-    // };
-    // dispatch(getBuyerViewProfieApi(viewProfileData)).then((result) => {
-    //   if (result) {
-    //     showToast("success", result?.message);
-    //   }
-    // });
-  };
 
   const handleMatches = () => {
     navigate(`/bids-list/${requestId}`);
@@ -101,11 +81,6 @@ const ManualBidList = () => {
         <div className={styles.headerWrapper}>
           <div className={styles.headingTabsWrapper}>
             <h1 className={styles.heading}>{webData[0] || "Your Service"}</h1>
-            {/* <div className={styles.middleText}>
-              Your Top 5 local professional matches are below. You can contact
-              any of the <br /> professionals to get more information using the
-              contact button.
-            </div> */}
 
             {isMobile ? (
               <div className={styles.mobileMiddleText}>
@@ -119,24 +94,11 @@ const ManualBidList = () => {
                 get more information using the contact button.
               </div>
             )}
-
-            {/* <div className={styles.tabs}>
-              <button className={styles.activeTab} onClick={handleBack}>
-                Your matches
-              </button>
-              <button className={styles.tab}>Replies</button>
-            </div> */}
           </div>
-
-          {/* <div className={styles.backBtnWrapper}>
-            <button className={styles.backBtn} onClick={handleBack}>
-              Back
-            </button>
-          </div> */}
         </div>
         <>
           {isMobile ? (
-            // ✅ Mobile view → Ant Design Tabs
+            //  Mobile view → Ant Design Tabs
             <Tabs
               activeKey={activeTab}
               onChange={(key) => {
@@ -162,7 +124,7 @@ const ManualBidList = () => {
                 className={
                   activeTab === "matches" ? styles.activeTab : styles.tab
                 }
-                onClick={() => handleMatches}
+                onClick={handleMatches}
               >
                 Your Matches
               </button>
@@ -170,7 +132,6 @@ const ManualBidList = () => {
                 className={
                   activeTab === "replies" ? styles.activeTab : styles.tab
                 }
-                onClick={handleReply}
               >
                 Replies
               </button>
@@ -212,8 +173,6 @@ const ManualBidList = () => {
                       </div>
                       <div className={styles.sidebar}>
                         <div className={styles.rating}>
-                          {/* <span className={styles.stars}>★★★★★</span>
-                  <span className={styles.ratingCount}>125</span> */}
                           {(() => {
                             const rating = item?.avg_rating || 0;
 
@@ -233,7 +192,7 @@ const ManualBidList = () => {
                                         </span>
                                       ); // Full star
                                     } else if (rating >= index + 0.5) {
-                                      return <span key={index}>★</span>; // Half star (or use icon)
+                                      return <span key={index}>★</span>;
                                     } else {
                                       return (
                                         <span key={index}>
@@ -287,8 +246,6 @@ const ManualBidList = () => {
                         </div>
                         <div>
                           <div className={styles.ratings}>
-                            {/* <span className={styles.stars}>★★★★★</span>
-                  <span className={styles.ratingCount}>125</span> */}
                             {(() => {
                               const rating = item?.avg_rating || 0;
 
@@ -303,7 +260,7 @@ const ManualBidList = () => {
                                           </span>
                                         ); // Full star
                                       } else if (rating >= index + 0.5) {
-                                        return <span key={index}>★</span>; // Half star (or use icon)
+                                        return <span key={index}>★</span>;
                                       } else {
                                         return (
                                           <span
@@ -327,13 +284,6 @@ const ManualBidList = () => {
                       </div>
                     </div>
 
-                    {/* <p className={styles.description}>
-                      This is a static description for demonstration purposes. It
-                      showcases how each bid card might look like in real data.
-                    </p> */}
-                    {/* <div className={styles.description}>
-  
-                    </div> */}
                     <div className={styles.messageRow}>
                       <div className={styles.description}>
                         <div className={styles.messageText}>
@@ -350,7 +300,7 @@ const ManualBidList = () => {
 
                     <div className={styles.quickToRespondWrapper}>
                       <a
-                        href={`/view-profile/${requestId}/${item.id}`}
+                        href={`/view-profile/${requestId}/${item.id}?from=replies`}
                         className={styles.profileLink}
                       >
                         View Profile →

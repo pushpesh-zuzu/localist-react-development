@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
@@ -96,22 +96,28 @@ const BidsList = ({ previousStep }) => {
     "Organizing results for clarity and impact...",
     "Preparing your personalized list of matches...",
   ];
-  const ratingOptions = (ratingFilterData?.[0] || [])
-    .slice()
-    .sort((a, b) => {
-      if (a.value === "no_rating") return -1;
-      if (b.value === "no_rating") return 1;
-      return 0;
-    })
-    .map((item) => ({
-      value: String(item.value),
-      label:
-        item.value === "no_rating"
-          ? "No Rating"
-          : item.value < 5
-          ? `${item.value} Star & up`
-          : `${item.value} Star`,
-    }));
+  // const ratingOptions = ratingFilterData?.[0] || [];
+
+  const ratingOptions = useMemo(() => {
+    if (!ratingFilterData || !ratingFilterData[0]) return [];
+
+    return ratingFilterData[0]
+      .slice()
+      .sort((a, b) => {
+        if (a.value === "no_rating") return -1;
+        if (b.value === "no_rating") return 1;
+        return 0;
+      })
+      .map((item) => ({
+        value: String(item.value),
+        label:
+          item.value === "no_rating"
+            ? "No Rating"
+            : item.value < 5
+            ? `${item.value} Star & up`
+            : `${item.value} Star`,
+      }));
+  }, [ratingFilterData]);
 
   const locationOptions = [
     { value: "Farthest to Nearest", label: "Farthest to Nearest" },
@@ -449,6 +455,7 @@ const BidsList = ({ previousStep }) => {
               {!isMobile ? (
                 <div className={styles.selectsWrapper}>
                   {/* Ratings */}
+
                   <Select
                     value={ratingList || "All ratings"}
                     onChange={(value) => {
@@ -457,6 +464,11 @@ const BidsList = ({ previousStep }) => {
                     }}
                     className={styles.customSelect}
                     dropdownMatchSelectWidth={false}
+                    notFoundContent={
+                      !ratingFilterData || ratingFilterData.length === 0
+                        ? "Loading..."
+                        : null
+                    }
                   >
                     <Option value="">All ratings</Option>
                     {ratingOptions.map((opt) => (
@@ -600,7 +612,7 @@ const BidsList = ({ previousStep }) => {
                   <span>Recommended:</span> Request replies from your{" "}
                   <strong>top matches</strong> to hear back faster
                 </div>
-                 {matchingLength > 0 && (
+                {matchingLength > 0 && (
                   <button
                     className={styles.requestBtn}
                     onClick={handleMultple}
@@ -628,10 +640,7 @@ const BidsList = ({ previousStep }) => {
                 <h1 className={styles.noBidText}>
                   {repliesListCount > 0
                     ? "Your Matches Can Be Viewed in Request Replies"
-                    : "Local services professionals are preparing to contact you now. Keep and eye out for any communications"
-                  }
-                  
-
+                    : "Local services professionals are preparing to contact you now. Keep and eye out for any communications"}
                 </h1>
               </div>
             ) : (

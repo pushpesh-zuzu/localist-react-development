@@ -131,11 +131,13 @@ import Accrediations from "./Accrediations/Accrediations";
 import Photos from "./Photos/Photos";
 import QandAns from "./QAns/QandAns";
 import SubmitReviewModal from "./SubmitReviewModal";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import LocationIcon from "../../assets/Images/AutoBidLocationIcon.svg";
 import {
   addViewProfileList,
   ReviewProfile,
+  setViewProfileData,
+  setReviewProfile,
 } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../utils";
@@ -143,8 +145,14 @@ import starImg from "../../assets/Icons/MyResponse/StarImg.svg";
 import grayStar from "../../assets/Icons/MyResponse/grayStar.svg";
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
+import { Spin } from "antd";
 
 const ViewProfiles = () => {
+  const location = useLocation();
+  const isFromManualBids =
+    new URLSearchParams(location.search).get("from") === "replies";
+  const queryParams = new URLSearchParams(location.search);
+  const isCustomButton = queryParams.get("customBtn") === "true";
   const [activeTab, setActiveTab] = useState("About");
   const [isopen, setIsOpen] = useState(true);
   const [customerModal, setCustomerModal] = useState(false);
@@ -166,8 +174,17 @@ const ViewProfiles = () => {
     (service) => service?.user_services?.name
   );
 
-  // console.log(profileData,'profileDataprofileDataprofileDataprofileData')
-  // const profileData ={}
+  const expandRadiusLoader = useSelector(
+    (state) => state?.leadSetting?.expandRadiusLoader
+  );
+
+  useEffect(() => {
+    return () => {
+      dispatch(setViewProfileData({}));
+      dispatch(setReviewProfile({}));
+    };
+  }, []);
+
   const servicesArray = profileData?.services || [];
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
@@ -257,7 +274,8 @@ const ViewProfiles = () => {
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
-    dispatch(ReviewProfile(profileId?.profileId))
+    // setIsFetching(true);
+    dispatch(ReviewProfile(profileId?.profileId));
     dispatch(addViewProfileList(sellerData));
   }, []);
   const handleRequestOpen = () => {
@@ -275,36 +293,32 @@ const ViewProfiles = () => {
     const visible = name.charAt(0);
     return `${visible}***@${domain}`;
   };
+  // if (expandRadiusLoader === true) {
+  //   return (
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         height: "100vh",
+  //         alignItems: "center",
+  //         width: "100%",
+  //       }}
+  //     >
+  //       <Spin />
+  //     </div>
+  //   );
+  // }
   return (
     <>
       <div className={styles.mainContainer}>
         <div className={styles.container}>
           <div className={styles.backBtnWrapper}>
-            {/* <img
-          src={
-            profileData?.company_logo
-              ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
-              : profileData?.profile_image
-                ? `${BASE_IMAGE}/users/${profileData?.profile_image}`
-                : DEFAULT_PROFILE_IMAGE
-          }
-          alt="Profile"
-          style={{
-            width: "140px",
-            height: "140px",
-            borderRadius: "50%",
-            objectFit: "contain",  // show entire image (no crop)
-            backgroundColor: "#fff", // optional: background behind image
-            padding: "6px"
-          }}
-        /> */}
-
             <div
               style={{
                 width: "140px",
                 height: "140px",
                 borderRadius: "50%",
-                overflow: "hidden", // ensures image stays inside circle
+                overflow: "hidden",
                 backgroundColor: "#fff",
                 display: "flex",
                 alignItems: "center",
@@ -324,7 +338,7 @@ const ViewProfiles = () => {
                   width: "140px",
                   height: "140px",
                   borderRadius: "50%",
-                  backgroundColor: "#fff", // optional, fills empty space
+                  backgroundColor: "#fff",
                 }}
               />
             </div>
@@ -335,70 +349,10 @@ const ViewProfiles = () => {
               <img src={LocationIcon} alt="" />
               <span>{profileData?.city} </span> | {profileData?.zipcode}
             </div>
-            {/* <div className={styles.sidebar}>
-                        <div className={styles.rating}>
-                            <span className={styles.stars}>★★★★★</span>
-                            <span className={styles.ratingCount}>{profileData?.avg_rating}</span>
-                        </div>
-                    </div> */}
-            {/* <div className={styles.sidebar}>
-              <div className={styles.rating}>
-                {profileData?.avg_rating === 0 ? (
-                  <span className={styles.noReviews}>No Reviews</span>
-                ) : (
-                  <>
-                    <span className={styles.stars}>
-                      {Array.from({ length: 5 }).map((_, index) => {
-                        const rating = profileData?.avg_rating ?? 0;
-                        if (index < Math.floor(rating)) {
-                          return (
-                            <img
-                              key={index}
-                              src={starImg}
-                              alt="star"
-                              width={19}
-                              height={19}
-                            />
-                          );
-                        } else if (index < rating) {
-                          return (
-                            <img
-                              key={index}
-                              src={halfStar}
-                              alt="half-star"
-                              width={21}
-                              height={21}
-                            />
-                          );
-                        } else {
-                          return (
-                            <img
-                              key={index}
-                              src={grayStar}
-                              alt="empty-star"
-                              width={19}
-                              height={19}
-                            />
-                          );
-                        }
-                      })}
-                    </span>
-                    {profileData?.avg_rating > 0 && (
-                      <span className={styles.ratingCount}>
-                        {profileData?.avg_rating}
-                      </span>
-                    )}
-                  </>
-                )}
-                <span className={styles.ratingCount}>
-                  {profileData?.avg_rating}
-                </span>
-              </div>
-            </div> */}
+
             <div className={styles.sidebar}>
               <div className={styles.rating}>
                 {profileData?.avg_rating === 0 ? (
-                  // Sirf "No Reviews" dikhana jab rating 0 ho
                   <span className={styles.noReviews}>No Reviews</span>
                 ) : (
                   <>
@@ -440,7 +394,6 @@ const ViewProfiles = () => {
                       })}
                     </span>
 
-                    {/* Yaha sirf rating > 0 hone par hi rating count dikhana */}
                     {profileData?.avg_rating > 0 ? (
                       <span className={styles.ratingCount}>
                         {profileData?.avg_rating}
@@ -461,15 +414,6 @@ const ViewProfiles = () => {
                   </>
                 );
               })}
-              {/* <div className={styles.badges}>
-                                <span>LandSpacing</span>
-                            </div>
-                            <div className={styles.badges}>
-                                <span>Web development</span>
-                            </div>
-                            <div className={styles.badges}>
-                                <span>New Pages</span>
-                            </div> */}
             </div>
           </div>
 
@@ -480,7 +424,7 @@ const ViewProfiles = () => {
               disabled={shouldDisableActions}
             >
               {" "}
-              Request Quote
+              {isFromManualBids ? "Contact Professional" : "Request Quote"}
             </button>
           </div>
 
@@ -548,7 +492,7 @@ const ViewProfiles = () => {
           </div>
         </div>
 
-        {isopen && profileId?.profileId &&  profileData?.name && (
+        {isopen && profileId?.profileId && profileData?.name && (
           <SubmitReviewModal
             setOpen={isopen}
             closeModal={closeModal}
