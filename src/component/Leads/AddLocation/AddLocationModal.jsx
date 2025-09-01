@@ -34,7 +34,7 @@ const AddLocationModal = ({
   const { registerData } = useSelector((state) => state.findJobs);
   console.log(registerData, "registerData");
   const { getlocationData } = useSelector((state) => state.leadSetting);
-  console.log(getlocationData,'getlocationData')
+  console.log(getlocationData, "getlocationData");
   const isNationWide = () => {
     if (getlocationData[0]?.nation_wide == 1) {
       return true;
@@ -87,11 +87,11 @@ const AddLocationModal = ({
     const { name, value } = e.target;
     setLocationData((prev) => ({ ...prev, [name]: value }));
   };
-console.log(locationType,"locationType")
+  console.log(locationType, "locationType");
   const handleConfirm = (data) => {
     const serviceIds = data.join(",");
     // const serviceIds = selectedServices.map((item) => item.id).join(",");
-    
+
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationType === "Nationwide" ? 0 : locationData.miles1 ?? 0,
@@ -105,17 +105,16 @@ console.log(locationType,"locationType")
       nation_wide:
         locationType === "Nationwide"
           ? 1
-          // : isFromTravelTime
-          // ? 0
-          // : getlocationData[0]?.nation_wide
-          // ? getlocationData[0]?.nation_wide
-          : 0,
+          : // : isFromTravelTime
+            // ? 0
+            // : getlocationData[0]?.nation_wide
+            // ? getlocationData[0]?.nation_wide
+            0,
       service_id: serviceIds,
       // postcode_old: previousPostcode,
       postcode_old: locationData.postcode ? locationData.postcode : "000000",
       coordinates: locationData?.coordinates ?? "",
     };
-     
 
     if (isEditingLocation && editLocationId) {
       dispatch(
@@ -197,12 +196,13 @@ console.log(locationType,"locationType")
                 <div className={styles.textContainer}>
                   <h3 className={styles.optionTitle}>Distance</h3>
                   <p className={styles.optionDescription}>
-                  Enter a postcode or town, then set how far you’re willing to travel from that point (straight-line radius).
+                    Enter a postcode or town, then set how far you’re willing to
+                    travel from that point (straight-line radius).
                   </p>
                 </div>
               </div>
 
-              <div
+              {/* <div
                 className={styles.option}
                 onClick={() => handleOptionClick("travelTime")}
               >
@@ -217,9 +217,9 @@ console.log(locationType,"locationType")
                     Let us know your starting point and the maximum time you're happy to travel—perfect for service zones based on real driving time.
                   </p>
                 </div>
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className={styles.option}
                 onClick={() => handleOptionClick("drawOnMap")}
               >
@@ -234,7 +234,7 @@ console.log(locationType,"locationType")
                    Custom-draw one or more specific areas directly on the map to define your exact service boundaries.
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               {/* {registerData?.nationwide == 0 && !isNationWide() && ( */}
               {!isNationWide() && (
@@ -250,7 +250,8 @@ console.log(locationType,"locationType")
                   <div className={styles.textContainer}>
                     <h3 className={styles.optionTitle}>Nationwide</h3>
                     <p className={styles.optionDescription}>
-                     Offer services across the entire country? Choose this to appear in searches from any location.
+                      Offer services across the entire country? Choose this to
+                      appear in searches from any location.
                     </p>
                   </div>
                 </div>
