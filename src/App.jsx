@@ -7,7 +7,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
-function App({ initialUrl }) {
+function App({ initialUrl,hostname }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
@@ -100,10 +100,12 @@ function App({ initialUrl }) {
 
   // Create the router once to avoid re-instantiation on every render (which can blank the Outlet on navigation in SSR/CSR)
   const router = useMemo(() => createAppRouter(initialUrl), []);
-const isDevEnvironment = typeof window !== 'undefined' && 
-                          window.location.hostname === 'dev.localists.com';
+const isDevEnvironment = typeof window !== 'undefined' 
+    ? window.location.hostname === 'dev.localists.com'
+    : hostname === 'dev.localists.com';
                           console.log(isDevEnvironment,'isDevEnvironment')
                           console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
+                          console.log(hostname,'hostname')
   return (
     <> 
       {isDevEnvironment && (
