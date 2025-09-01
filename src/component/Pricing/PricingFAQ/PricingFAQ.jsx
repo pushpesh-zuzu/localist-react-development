@@ -6,7 +6,7 @@ const faqData = [
   {
     question: "Do I get the customer's phone number or email address?",
     answer:
-      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your Bark account using Messenger.",
+      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your localists account using Messenger.",
   },
   {
     question: "Are follow-up messages extra?",
@@ -14,7 +14,7 @@ const faqData = [
       "No, they’re free. We only charge a small one-off fee for you to respond to a lead. Any further messages or contact you have with the customer are completely free.",
   },
   {
-    question: "Do Bark credits expire?",
+    question: "Do localists credits expire?",
     answer:
       "All Credits are valid for 12 months from the date of purchase. For more information please see our Terms and Conditions",
   },

@@ -276,84 +276,84 @@ export const megaMenu = [
       // },
     ],
   },
-  {
-    name: "Business",
-    path:"",
-    icon: businessIcon,
-    subcategory: [
-      {
-        name: "Bookkeeping Services",
-        path:'',
-        children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
-      },
-      {
-        name: "Social Media Marketing",
-            path:"",
-        children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
-      },
-      {
-        name: "Business Consulting",
-        path:"",
-        children: locationData.map((loc) => `Business Consulting in ${loc}`),
-      },
-      {
-        name: "Accounting",
-        path:"",
-        children: locationData.map((loc) => `Accounting in ${loc}`),
-      },
-    ],
-  },
-  {
-    name: "Lessons & Training",
-    icon: lessonsIcon,
-    path:"",
-    subcategory: [
-      {
-        name: "Business & Career Coaching",
-        path:"",
-        children: locationData.map(
-          (loc) => `Business & Career Coaching in ${loc}`
-        ),
-      },
-      {
-        name: "Music Lessons",
-        path:"",
-        children: locationData.map((loc) => `Music Lessons in ${loc}`),
-      },
-      {
-        name: "Academic Tutoring",
-        path:"",
-        children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
-      },
-      {
-        name: "Fitness Training",
-        path:"",
-        children: locationData.map((loc) => `Fitness Training in ${loc}`),
-      },
-    ],
-  },
-  {
-    name: "More",
-    icon: moreIcon,
-    path:"",
-    subcategory: [
-      {
-        name: "Web Design",
-        path:"",
-        children: locationData.map((loc) => `Web Designer in ${loc}`),
-      },
-      {
-        name: "Logo Design",
-        path:"",
-        children: locationData.map((loc) => `Logo Designer in ${loc}`),
-      },
-      {
-        name: "Home & Domiciliary Care",
-        path:"",
-        children: locationData.map(
-          (loc) => `Home & Domiciliary Care in ${loc}`
-        ),
-      },
-    ],
-  },
+  // {
+  //   name: "Business",
+  //   path:"",
+  //   icon: businessIcon,
+  //   subcategory: [
+  //     {
+  //       name: "Bookkeeping Services",
+  //       path:'',
+  //       children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
+  //     },
+  //     {
+  //       name: "Social Media Marketing",
+  //           path:"",
+  //       children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
+  //     },
+  //     {
+  //       name: "Business Consulting",
+  //       path:"",
+  //       children: locationData.map((loc) => `Business Consulting in ${loc}`),
+  //     },
+  //     {
+  //       name: "Accounting",
+  //       path:"",
+  //       children: locationData.map((loc) => `Accounting in ${loc}`),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Lessons & Training",
+  //   icon: lessonsIcon,
+  //   path:"",
+  //   subcategory: [
+  //     {
+  //       name: "Business & Career Coaching",
+  //       path:"",
+  //       children: locationData.map(
+  //         (loc) => `Business & Career Coaching in ${loc}`
+  //       ),
+  //     },
+  //     {
+  //       name: "Music Lessons",
+  //       path:"",
+  //       children: locationData.map((loc) => `Music Lessons in ${loc}`),
+  //     },
+  //     {
+  //       name: "Academic Tutoring",
+  //       path:"",
+  //       children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
+  //     },
+  //     {
+  //       name: "Fitness Training",
+  //       path:"",
+  //       children: locationData.map((loc) => `Fitness Training in ${loc}`),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "More",
+  //   icon: moreIcon,
+  //   path:"",
+  //   subcategory: [
+  //     {
+  //       name: "Web Design",
+  //       path:"",
+  //       children: locationData.map((loc) => `Web Designer in ${loc}`),
+  //     },
+  //     {
+  //       name: "Logo Design",
+  //       path:"",
+  //       children: locationData.map((loc) => `Logo Designer in ${loc}`),
+  //     },
+  //     {
+  //       name: "Home & Domiciliary Care",
+  //       path:"",
+  //       children: locationData.map(
+  //         (loc) => `Home & Domiciliary Care in ${loc}`
+  //       ),
+  //     },
+  //   ],
+  // },
 ];
