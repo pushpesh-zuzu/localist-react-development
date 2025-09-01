@@ -157,7 +157,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               settings.
             </p>
             {/* <span className={styles.updateIcon}>⚙️</span> */}
-            <div className={styles.updateContainer} onClick={handleNavigate}>
+            <div className={styles.updateContainer} >
               <img src={UpdateIcon} alt="" />
                <a href="/settings/leads/my-services" className={styles.updateLink}>
 

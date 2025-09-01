@@ -25,7 +25,7 @@ import {
   getPopularServiceListUser,
   setPopularList,
 } from "../../../store/FindJobs/findJobSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
 import { showToast } from "../../../utils";
@@ -40,6 +40,7 @@ import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.sv
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
+  const location = useLocation();
   const serviceRefs = useRef({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
