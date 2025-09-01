@@ -1,50 +1,39 @@
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   updateSellerAccreditations,
   clearAccreditationsStatus,
+  deleteSellerAccreditation
 } from "../../../store/MyProfile/myProfileSlice";
 
-import React, { useState, useRef } from "react";
 import styles from "./AccreditationsAccordion.module.css";
 import ISSAImage from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import axiosInstance from "../../../Api/axiosInstance";
-import { BASE_IMAGE, BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+import { BASE_IMAGE } from "../../../utils";
 
 const AccreditationsAccordion = ({ details }) => {
-  const [accordionGroups, setAccordionGroups] = useState([
-    {
-      accreditations: [],
-      newAccreditation: "",
-      accreImage: null,
-    },
-  ]);
+  const [accordionGroups, setAccordionGroups] = useState([]);
 
   const fileInputRefs = useRef([]);
   const dispatch = useDispatch();
-  const {
-    accreditationsUpdateSuccess,
-    accreditationsUpdateError,
-    sellerLoader,
-  } = useSelector((state) => state.myProfile);
-  const handleAdd = (index) => {
-    const updated = [...accordionGroups];
-    const text = updated[index].newAccreditation.trim();
-    if (text !== "") {
-      updated[index].accreditations.push(text);
-      updated[index].newAccreditation = "";
-      setAccordionGroups(updated);
-    }
-  };
+  const { accreditationsUpdateSuccess, accreditationsUpdateError } =
+    useSelector((state) => state.myProfile);
 
+  // Input change → update name
   const handleInputChange = (index, value) => {
     const updated = [...accordionGroups];
-    updated[index].newAccreditation = value;
+    if (updated[index].id) {
+      // existing accreditation → update accreditations[0]
+      updated[index].accreditations[0] = value;
+    } else {
+      // new accreditation
+      updated[index].newAccreditation = value;
+    }
     setAccordionGroups(updated);
   };
 
+  // Upload image
   const handleImageUpload = (index, file) => {
     const updated = [...accordionGroups];
     updated[index].accreImage = file;
@@ -57,26 +46,49 @@ const AccreditationsAccordion = ({ details }) => {
     }
   };
 
+  // Add new blank accreditation
   const handleAccreditationAdd = () => {
     setAccordionGroups([
       ...accordionGroups,
-      { accreditations: [], newAccreditation: "", accreImage: null },
+      { id: null, accreditations: [], newAccreditation: "", accreImage: null },
     ]);
   };
 
+  // Remove accreditation
+const handleRemoveAccreditation = (index) => {
+  const updated = [...accordionGroups];
+
+  // Capture the group being removed
+  const removedGroup = updated[index];
+
+  // Remove it from UI
+  updated.splice(index, 1);
+  setAccordionGroups(updated);
+
+  // If it's an existing accreditation, dispatch an API call to delete it
+  if (removedGroup.id) {
+    dispatch(deleteSellerAccreditation(removedGroup.id));
+  }
+};
+
+
+  // Save handler
   const handleSave = () => {
-    console.log(accordionGroups);
-    dispatch(updateSellerAccreditations(accordionGroups));
+    const payload = accordionGroups.map((g) => ({
+      id: g.id ?? "",
+      accreditations:
+        Array.isArray(g.accreditations) && g.accreditations.length > 0
+          ? [g.accreditations[0]]
+          : [],
+      newAccreditation: g.newAccreditation || "",
+      image: g.accreImage || null, // File OR { previewUrl } OR null
+    }));
+
+    console.log("🚀 Final payload before dispatch:", payload);
+    dispatch(updateSellerAccreditations(payload));
   };
 
-  const handleRemoveAccreditation = (index) => {
-    const updated = [...accordionGroups];
-    updated.splice(index, 1);
-    setAccordionGroups(updated);
-  };
-
-
-  // Show toast based on update result
+  // Toast messages
   useEffect(() => {
     if (accreditationsUpdateSuccess) {
       toast.success("Accreditations saved successfully!");
@@ -87,9 +99,11 @@ const AccreditationsAccordion = ({ details }) => {
     }
   }, [accreditationsUpdateSuccess, accreditationsUpdateError, dispatch]);
 
+  // Populate existing details
   useEffect(() => {
     if (details && Array.isArray(details)) {
       const mapped = details.map((item) => ({
+        id: item.id,
         accreditations: item.name ? [item.name] : [],
         newAccreditation: "",
         accreImage: item.image
@@ -133,17 +147,6 @@ const AccreditationsAccordion = ({ details }) => {
         {accordionGroups.map((group, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.logoSectionWrapper}>
-
-              {/* <div className={styles.logoSection}>
-                {group.accreImage ? (
-                  <img
-                    src={URL.createObjectURL(group.accreImage)}
-                    alt="Uploaded"
-                    className={styles.logo}
-                  />
-                ) : (
-                  <img src={ISSAImage} alt="ISSA" className={styles.logo} />
-                )}</div> */}
               <div className={styles.logoSection}>
                 {group.accreImage ? (
                   <img
@@ -158,57 +161,34 @@ const AccreditationsAccordion = ({ details }) => {
                 ) : (
                   <img src={ISSAImage} alt="ISSA" className={styles.logo} />
                 )}
-
-                {/* Show name if it exists */}
               </div>
+
               <div className={styles.accreditationList}>
-                {/* {group.accreditations.map((item, idx) => (
-                  <p key={idx} className={styles.accreditationItem}>
-                    {item}
-                  </p>
-                ))} */}
-                {group.accreditations.length > 0 && (
+                {(group.accreditations[0] || group.newAccreditation) && (
                   <span className={styles.accreditationItem}>
-                    {group.accreditations[0]}
+                    {group.accreditations[0] || group.newAccreditation}
                   </span>
                 )}
               </div>
+
               <button
-                  className={styles.closeButton}
-                  onClick={() => handleRemoveAccreditation(index)}
-                >
-                  Close
+                className={styles.closeButton}
+                onClick={() => handleRemoveAccreditation(index)}
+              >
+                Close
               </button>
             </div>
-            {group.accreditations.length === 0 && (
-              <div className={styles.inputGroup}>
-                <input
-                  type="text"
-                  value={group.newAccreditation}
-                  onChange={(e) => handleInputChange(index, e.target.value)}
-                  // placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
-                  placeholder=" Accredition Name"
-                  className={styles.input}
-                />
-              </div>
-            )}
 
-            {/* <div className={styles.inputGroup}>
+            <div className={styles.inputGroup}>
               <input
                 type="text"
-                value={group.newAccreditation}
+                value={group.accreditations[0] || group.newAccreditation}
                 onChange={(e) => handleInputChange(index, e.target.value)}
-                placeholder="ARCSI (Association of Residential Cleaning Services International, a division of ISSA)"
+                placeholder="Accreditation Name"
                 className={styles.input}
+                required
               />
-            
-            </div> */}
-            {/* <button
-        className={styles.addButton}
-        onClick={() => handleAdd(index)}
-      >
-        Add
-      </button> */}
+            </div>
 
             <div
               className={styles.AccreditationsAccordionBox}
@@ -220,8 +200,7 @@ const AccreditationsAccordion = ({ details }) => {
               >
                 {group.accreImage ? "Change Photo " : "Upload Photo"}
               </button>
-              {console.log(accordionGroups, index, "accordionGroups")}
-              {/* Only show Add Accreditation button on the last card */}
+
               {index === accordionGroups.length - 1 && (
                 <button
                   className={styles.addAccreditationButtons}
@@ -242,19 +221,16 @@ const AccreditationsAccordion = ({ details }) => {
                 }}
               />
             </div>
-
-            {/* {group.accreImage && (
-      <p style={{ marginTop: "5px", fontSize: "12px" }}>
-        Selected: {group.accreImage.name}
-      </p>
-    )} */}
           </div>
         ))}
       </div>
 
       <div className={styles.footer}>
-        {/* <button className={styles.cancel}>Cancel</button> */}
-        <button className={styles.save} onClick={handleSave}  style={{ marginLeft: "auto" }}>
+        <button
+          className={styles.save}
+          onClick={handleSave}
+          style={{ marginLeft: "auto" }}
+        >
           Save
         </button>
       </div>

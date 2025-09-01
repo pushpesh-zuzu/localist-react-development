@@ -15,9 +15,15 @@ import { toast } from "react-toastify";
 import { showToast } from "../../../utils";
 import ReviewSection from "../../ViewProfile/Reviews/Reviews";
 import { useParams } from "react-router-dom";
-
+import facebookIcon from "../../../assets/Icons/facebook.svg";
+import whatsUpIcon from "../../../assets/Icons/whatsup.svg";
+import linkedInIcon from "../../../assets/Icons/linkedin.svg";
+import twitterIcon from "../../../assets/Icons/twitter.svg";
+import shareIcon from "../../../assets/Icons/share.svg";
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
+
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const onCopyUrl = () => {
     navigator.clipboard.writeText(customerLinkData);
     showToast("success", "Link copied to clipboard!");
@@ -50,6 +56,21 @@ const ReviewsAccordion = ({ details }) => {
       dispatch(clearFacebookReviewStatus());
     }
   }, [facebookReviewUpdateSuccess, facebookReviewUpdateError, dispatch]);
+
+  const shareLinks = {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(
+      `Check my review link: ${customerLinkData}`
+    )}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      customerLinkData
+    )}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      customerLinkData
+    )}&text=${encodeURIComponent("Check my review link!")}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      customerLinkData
+    )}`,
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -91,8 +112,57 @@ const ReviewsAccordion = ({ details }) => {
           <button className={styles.secondaryBtn} onClick={onCopyUrl}>
             Copy Link
           </button>
+          {customerLinkData && (
+            <button
+              className={styles.secondaryBtn}
+              onClick={() => setIsShareOpen(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px", // space between text and icon
+                justifyContent: "center",
+              }}
+            >
+              <span>Share</span>
+              <img
+                src={shareIcon}
+                alt="Share"
+                style={{ height: "18px", width: "18px" }}
+              />
+            </button>
+
+          )}
         </div>
       </div>
+
+       {isShareOpen && (
+        <div className={styles.shareOverlay}>
+          <div className={styles.shareBox}>
+            <h3>Share via</h3>
+            <div className={styles.iconRow}>
+              <a href={shareLinks.whatsapp} target="_blank" rel="noreferrer">
+                <img src={whatsUpIcon} alt="WhatsApp" style={{ height: "36px", width: "36px" }}  />
+              </a>
+              <a href={shareLinks.facebook} target="_blank" rel="noreferrer">
+                <img src={facebookIcon} alt="Facebook" style={{ height: "36px", width: "36px" }}  />
+              </a>
+              <a href={shareLinks.twitter} target="_blank" rel="noreferrer">
+                 <img src={twitterIcon} alt="Twitter" style={{ height: "36px", width: "36px" }}  />
+              </a>
+              <a href={shareLinks.linkedin} target="_blank" rel="noreferrer">
+               <img src={linkedInIcon} alt="LinkedIn" style={{ height: "36px", width: "36px" }}  />
+              </a>
+            </div>
+            <button
+              onClick={() => setIsShareOpen(false)}
+              className={styles.secondaryBtn}
+              style={{ marginTop: "15px" }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>

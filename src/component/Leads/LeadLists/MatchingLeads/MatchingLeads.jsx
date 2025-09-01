@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState ,useCallback } from "react";
 import styles from "./MatchingLeads.module.css";
 import SettingIcon from "../../../../assets/Images/Leads/SettingIcon.svg";
 import LocationIcon from "../../../../assets/Images/Leads/WhiteLocationIcon.svg";
@@ -11,13 +11,25 @@ import {
   getleadPreferencesList,
   getLeadRequestList,
   getLocationLead,
+  addServiceLead
 } from "../../../../store/LeadSetting/leadSettingSlice";
+
+
+import {
+  searchService,
+  setService,
+  searchAvailableService,
+  getPopularServiceListUser,
+  setPopularList,
+} from "../../../../store/FindJobs/findJobSlice";
 import MatchingLeadsFilter from "./MatchingLeadsFilter";
 import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg";
 import { Select } from "antd";
 import { SwapOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
+import { Popover } from "antd";
+import AddServiceModal from "../../LeadAddServiceModal";
 
 const MatchingLeads = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -25,6 +37,11 @@ const MatchingLeads = () => {
   const sortOptions = ["Newest", "Oldest"];
 
   const [selectedFilter, setSelectedFilter] = useState("Sort by Credit Value");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [input, setInput] = useState("");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+ const { popularList } = useSelector((state) => state.findJobs);
+
   const filterOptions = [
     "Credit Value High",
     "Credit Value Medium",
@@ -35,9 +52,9 @@ const MatchingLeads = () => {
   const dispatch = useDispatch();
   const { leadRequestList, getlocationData, preferenceList, totalCredit } =
     useSelector((state) => state.leadSetting);
-  const { registerData } = useSelector((state) => state.findJobs);
+  const { searchServiceLoader, service,registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-
+  const [selectedServices, setSelectedServices] = useState([]);
   const data = leadRequestList?.length;
   const locationLength = getlocationData?.length;
 
@@ -65,6 +82,64 @@ const MatchingLeads = () => {
         return "High";
     }
   };
+  const handleService = () => {
+    setIsModalOpen(true);
+    setInput(""); // reset the input field
+    dispatch(setService([]));
+    setSelectedServices([]);
+  };
+    useEffect(() => {
+      if (isDropdownOpen && input.trim() !== "") {
+        const delayDebounce = setTimeout(() => {
+          dispatch(searchAvailableService({ user_id: userToken?.id  ? userToken?.id  : registerData?.id, search: input }));
+        }, 500);
+        
+        return () => clearTimeout(delayDebounce);
+      }
+    }, [input, dispatch, isDropdownOpen]);
+
+    const handleSelectService = useCallback(
+      (item) => {
+        setInput("");
+        setIsDropdownOpen(false);
+  
+        setSelectedServices((prev) => {
+          const isAlreadySelected = prev.some(
+            (service) => service.id === item.id
+          );
+          return isAlreadySelected ? prev : [...prev, item];
+        });
+  
+        setTimeout(() => dispatch(setService([])), 100);
+      },
+      [dispatch]
+    );
+    const handleSubmitData = useCallback(() => {
+      const serviceIds = selectedServices.map((item) => item.id).join(",");
+  
+      const serviceDataList = {
+        user_id: userToken?.remember_tokens,
+        service_id: serviceIds,
+      };
+  
+      dispatch(addServiceLead(serviceDataList)).then((result) => {
+        if (result?.success) {
+          dispatch(
+            getleadPreferencesList({ user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens })
+          );
+            const data = {
+          user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
+        };
+        dispatch(getLocationLead(data))
+          setIsModalOpen(false);
+          setSelectedServices([]); // Clear after submission
+        }
+      });
+    }, [selectedServices, userToken, dispatch]);
+  
+    const handleRemoveService = useCallback((id) => {
+      setSelectedServices((prev) => prev.filter((service) => service.id !== id));
+    }, []);
 
   const getSortTypeValue = (sortOption) => {
     switch (sortOption) {
@@ -138,17 +213,55 @@ const MatchingLeads = () => {
     };
   }, []);
 
+  // ✅ Popover dropdown content renderer
+  const renderOptions = (options, currentValue, onChange) => (
+    <div className={styles.popoverContent}>
+      {options.map((opt) => (
+        <div
+          key={opt}
+          className={`${styles.optionItem} ${
+            currentValue === opt ? styles.active : ""
+          }`}
+          onClick={() => {
+            onChange(opt);
+            setOpenPopover(null);
+          }}
+        >
+          {opt}
+        </div>
+      ))}
+    </div>
+  );
+
+
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.textSection}>
           <h2 className={styles.heading}>{data} matching leads</h2>
           <p className={styles.subText}>
-            <span className={styles.subTextSpan}>
+            <span className={styles.subTextSpan} onClick={() => setIsModalOpen(true)} >
               <img src={SettingIcon} alt="" /> {preferenceList?.length} services{" "}
             </span>
           </p>
         </div>
+
+        <AddServiceModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          input={input}
+          setInput={setInput}
+          isDropdownOpen={isDropdownOpen}
+          setIsDropdownOpen={setIsDropdownOpen}
+          service={service}
+          searchServiceLoader={searchServiceLoader}
+          handleSelectService={handleSelectService}
+          handleSubmitData={handleSubmitData}
+          handleRemoveService={handleRemoveService}
+          selectedServices={selectedServices}
+          popularList={popularList} 
+        />
         <div className={styles.btnDisplay}>
           <button className={styles.editButtons} onClick={handleEdit}>
             Edit <img src={EditIcon} alt="" />

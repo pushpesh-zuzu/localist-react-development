@@ -401,7 +401,7 @@ const LogSwitch = () => {
             <>
               <a
                 href="/sellers/dashboard"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none"}}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/dashboard"
                     ? styles.active
@@ -425,7 +425,7 @@ const LogSwitch = () => {
               </a>
               <a
                 href="/sellers/leads"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none"}}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads" ? styles.active : ""
                 }`}
@@ -447,7 +447,7 @@ const LogSwitch = () => {
 
               <a
                 href="/sellers/leads/save-for-later"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none"}}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads/save-for-later"
                     ? styles.active
@@ -471,7 +471,7 @@ const LogSwitch = () => {
 
               <a
                 href="/sellers/leads/my-responses"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads/my-responses"
                     ? styles.active
@@ -495,7 +495,7 @@ const LogSwitch = () => {
 
               <a
                 href="/settings"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none"}}
                 className={`${styles.navItem} ${
                   location.pathname === "/settings" ? styles.active : ""
                 }`}
@@ -517,7 +517,7 @@ const LogSwitch = () => {
 
               <a
                 href={`/${currentLang}/${currentCountry}/contact-us`}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none"}}
                 className={`${styles.navItem} ${
                   location.pathname === "/contact-us" ? styles.active : ""
                 }`}
@@ -769,7 +769,7 @@ const LogSwitch = () => {
                   <div className={styles.logoutBtn}>
                     <a
                       href="/user/notification"
-                      style={{ textDecoration: "none", color: "black" }}
+                      style={{ textDecoration: "none" ,color:"#000"}}
                       className={`${
                         location.pathname === "/user/notification"
                           ? styles.active
@@ -797,7 +797,7 @@ const LogSwitch = () => {
                     href={
                       getUserType() == 1 ? "/buyers/create" : "/sellers/leads"
                     }
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: "none" ,color:"#000" }}
                     onClick={(e) => {
                       if (
                         e.button === 0 &&
@@ -818,7 +818,7 @@ const LogSwitch = () => {
                   <div className={styles.logoutBtn}>
                     <a
                       href="/user/settings"
-                      style={{ textDecoration: "none", color: "black" }}
+                      style={{ textDecoration: "none" ,color:"#000" }}
                       className={`${
                         location.pathname === "/user/settings"
                           ? styles.active

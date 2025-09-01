@@ -9,6 +9,15 @@
   padding: 20px 45px;
 }
 
+.subtitle {
+  color: #333 !important; /* override inherited white */
+}
+
+.title {
+  color: #333 !important; /* override inherited white */
+}
+
+
 .textSection {
   display: flex;
   justify-content: space-between;

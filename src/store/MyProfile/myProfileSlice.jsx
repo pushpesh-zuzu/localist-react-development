@@ -184,20 +184,16 @@ export const updateSellerProfile = createAsyncThunk(
 // Thunk to upload photos and YouTube link
 export const updateSellerPhotos = createAsyncThunk(
   "myProfile/updateSellerPhotos",
-  async (formState, { rejectWithValue }) => {
-    console.log(formState,"formState")
+  async (body, { rejectWithValue }) => {
     try {
-      const body = new FormData();
-      body.append("type", formState.type || "photos");
-      body.append("company_youtube_link", formState.company_youtube_link || "");
-      // body.append("company_youtube_links", formState.company_youtube_links || "");
-
-      if (Array.isArray(formState.company_photos)) {
-        formState.company_photos.forEach((file) => {
-          if (file instanceof File) {
-            body.append("company_photos[]", file);
-          }
-        });
+      // 🔎 Log FormData contents
+      console.log("🔎 Final FormData (updateSellerPhotos):");
+      for (let [key, value] of body.entries()) {
+        if (value instanceof File) {
+          console.log(`${key}: [File] ${value.name}`);
+        } else {
+          console.log(`${key}:`, value);
+        }
       }
 
       const response = await axiosInstance.post(
@@ -216,6 +212,7 @@ export const updateSellerPhotos = createAsyncThunk(
     }
   }
 );
+
 // Thunk for social media links update
 export const updateSellerSocialLinks = createAsyncThunk(
   "myProfile/updateSellerSocialLinks",
@@ -265,17 +262,33 @@ export const updateSellerAccreditations = createAsyncThunk(
       const formData = new FormData();
       formData.append("type", "accreditations");
 
-      accordionGroups.forEach((group) => {
-        // Send `newAccreditation` as `accre_name[]`
-        if (group.newAccreditation) {
-          formData.append("accre_name[]", group.newAccreditation);
-        }
+accordionGroups.forEach((group,index) => {
+  // Send ID (empty if new)
+formData.append(`accre_id[${index}]`, group.id ?? ""); 
 
-        // Send `accreImage` as `accre_image[]`
-        if (group.accreImage) {
-          formData.append("accre_image[]", group.accreImage);
-        }
-      });
+  // Accreditation name
+  const name =
+    Array.isArray(group.accreditations) && group.accreditations.length > 0
+      ? group.accreditations[0]
+      : group.newAccreditation || "";
+  formData.append(`accre_name[${index}]`, name);
+
+  // Image (new or existing)
+  if (group.image instanceof File) {
+    formData.append(`accre_file[${index}]`, group.image); // new upload
+    formData.append(`accre_existing[${index}]`, "");      // no old
+  } else if (group.image && group.image.previewUrl) {
+    const parts = group.image.previewUrl.split("/");
+    const filename = parts[parts.length - 1];
+    formData.append(`accre_file[${index}]`, "");          // no new upload
+    formData.append(`accre_existing[${index}]`, filename); // keep old
+  } else {
+    formData.append(`accre_file[${index}]`, "");
+    formData.append(`accre_existing[${index}]`, "");
+  }
+});
+
+
 
       // ✅ Log FormData before sending
       for (let [key, value] of formData.entries()) {
@@ -298,6 +311,29 @@ export const updateSellerAccreditations = createAsyncThunk(
     }
   }
 );
+
+
+export const deleteSellerAccreditation = createAsyncThunk(
+  "myProfile/deleteSellerAccreditation",
+  async (id, { rejectWithValue }) => {
+    try {
+      const formData = new FormData();
+      formData.append("type", "delete_accreditation");
+      formData.append("accre_id", id);
+
+      const response = await axiosInstance.post(
+        `${baseURL}users/update-seller-profile`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      return { id, data: response.data };
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Unknown error");
+    }
+  }
+);
+
 
 
 

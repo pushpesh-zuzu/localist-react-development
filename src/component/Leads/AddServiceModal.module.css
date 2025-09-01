@@ -44,6 +44,7 @@
   vertical-align: middle;
   margin-bottom: 36px;
   text-align: center;
+  color: #0a0a0a !important;
 }
 
 .subtitle {
@@ -51,6 +52,7 @@
   font-size: 18px;
   margin-bottom: 24px;
   display: flex;
+  color: #0a0a0a !important;
 }
 
 .infoIcon {
@@ -80,6 +82,7 @@
 
 .dropdown {
   background: #fff;
+  color:#0a0a0a;
   border: 1px solid #d9d9d9;
   max-height: 150px;
   overflow-y: auto;
@@ -167,6 +170,7 @@
 
 .selectedTag {
   background-color: #e3f6fc;
+  color:#0a0a0a;
   padding: 6px 10px;
   border-radius: 16px;
   display: inline-flex;

@@ -20,8 +20,19 @@ const PhotosAccordion = ({details}) => {
     company_youtube_links: [],
   });
 
+  const [existingPhotos, setExistingPhotos] = useState([]);
   const [photoPreviews, setPhotoPreviews] = useState([]);
 console.log(details,"details")
+
+const handleRemovePhoto = (indexToRemove) => {
+  setPhotoPreviews((prevPhotos) =>
+    prevPhotos.filter((_, idx) => idx !== indexToRemove)
+  );
+
+  setExistingPhotos((prev) =>
+    prev.filter((_, idx) => idx !== indexToRemove)
+  );
+};
 
   // const handleFileChange = (e) => {
   //   const files = Array.from(e.target.files);
@@ -115,7 +126,40 @@ console.log(details,"details")
       toast.warn("Please fix validation errors");
       return;
     }
-    dispatch(updateSellerPhotos(formState));
+    const body = new FormData();
+    
+    body.append("type", formState.type);
+
+  if (existingPhotos.length > 0) {
+      existingPhotos.forEach((filename, index) => {
+        body.append(`existing_photos[${index}]`, filename);
+      });
+    }
+    console.log('company photos',formState.company_photos);
+    // ✅ Append new uploads
+    if (formState.company_photos.length > 0) {
+      formState.company_photos.forEach((file, index) => {
+        body.append(`company_photos[${index}]`, file);
+      });
+    }
+
+    // ✅ Append YouTube links
+    if (formState.company_youtube_link.length > 0) {
+      formState.company_youtube_link.forEach((link, index) => {
+        body.append(`company_youtube_link[${index}]`, link);
+      });
+    }
+    console.log('setbody',body);
+
+    for (let [key, value] of body.entries()) {
+        if (value instanceof File) {
+          console.log(`${key}: [File] ${value.name}`);
+        } else {
+          console.log(`${key}:`, value);
+        }
+      }
+
+    dispatch(updateSellerPhotos(body));
   };
 //   const handleSubmit = () => {
 //   if (!validate()) {
@@ -166,10 +210,20 @@ console.log(details,"details")
     setAddModalOpen(true)
   }
 
-  const getYoutubeEmbedUrl = (url) => {
-  const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/);
+const getYoutubeEmbedUrl = (url) => {
+  if (!url) return null;
+
+  // Make sure it's always treated as a string
+  const strUrl = String(url).trim();
+
+  const match = strUrl.match(
+    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/
+  );
+
   return match ? `https://www.youtube.com/embed/${match[1]}` : null;
 };
+
+
 
   const handleCancel = () => {
     setFormState({
@@ -183,7 +237,16 @@ console.log(details,"details")
   useEffect(() => {
   if (details) {
     // Preload YouTube link if it exists
-    const youtubeLink = details.company_youtube_link || "";
+     let youtubeLinks = [];
+    if (details.company_youtube_link) {
+      try {
+        // Try parsing JSON (["link1", "link2"])
+        youtubeLinks = JSON.parse(details.company_youtube_link);
+      } catch (e) {
+        // If not JSON, treat as a single string
+        youtubeLinks = [details.company_youtube_link];
+      }
+    }
 
     // Convert image filenames into full URLs
     const photoFilenames = details.company_photos
@@ -194,12 +257,13 @@ console.log(details,"details")
     const previews = photoFilenames.map(
       (filename) => `${BASE_IMAGE}/users/${filename}`
     );
+    setExistingPhotos(photoFilenames);
+    setPhotoPreviews(previews);
 
     setFormState((prev) => ({
       ...prev,
-      company_photos: [], 
       company_youtube_links: "",
-      company_youtube_link: youtubeLink ? [youtubeLink] : [],
+      company_youtube_link: youtubeLinks ? [youtubeLinks] : [],
     }));
 
     setPhotoPreviews(previews);
@@ -226,26 +290,75 @@ console.log(details,"details")
             onChange={handleFileChange}
             className={styles.fileInput}
           />
-<div className={styles.imageContainer}>
-       {photoPreviews.length > 0 ? (
-  <div className={styles.imageContainer}>
-    {photoPreviews.map((src, idx) => (
-      <img
-        key={idx}
-        src={src}
-        alt={`preview-${idx}`}
-        width="150"
-        height="150"
-        className={styles.previewImage}
-      />
-    ))}
-  </div>
-) : (
-  <div className={styles.paraText}>
-    Photos you upload will be displayed on your Localists.com profile.
-  </div>
-)} 
-</div> 
+          <div className={styles.imageContainer}>
+            {photoPreviews.length > 0 ? (
+              <div className={styles.imageContainer}>
+                {photoPreviews.map((src, idx) => (
+                  <div key={idx} className={styles.photoWrapper} style={{ position: "relative", display: "inline-block", margin: "10px" }}>
+                    <button
+                      type="button"
+                     style={{
+                      position: "absolute",
+                      top: "5px",
+                      right: "5px",
+                      background: "#fff",
+                      border: "none",
+                      color: "#333",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                      borderRadius: "50%",
+                      width: "22px",
+                      height: "22px",
+                      lineHeight: "20px",
+                      textAlign: "center",
+                      boxShadow: "0 0 4px rgba(0,0,0,0.2)",
+                    }}
+                      
+                      onClick={() => handleRemovePhoto(idx)}
+                    >
+                      ×
+                    </button>
+                    <img
+                      src={src}
+                      alt={`preview-${idx}`}
+                      width="150"
+                      height="150"
+                      className={styles.previewImage}
+                    />
+                    {/* ❌ Delete button */}
+                    
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className={styles.paraText}>
+                Photos you upload will be displayed on your Localists.com profile.
+              </div>
+            )}
+          </div>
+
+          {/* <div className={styles.imageContainer}>
+                {photoPreviews.length > 0 ? (
+            <div className={styles.imageContainer}>
+              {photoPreviews.map((src, idx) => (
+                <img
+                  key={idx}
+                  src={src}
+                  alt={`preview-${idx}`}
+                  width="150"
+                  height="150"
+                  className={styles.previewImage}
+                />
+                
+              ))}
+            </div>
+          ) : (
+            <div className={styles.paraText}>
+              Photos you upload will be displayed on your Localists.com profile.
+            </div>
+          )} 
+          </div>  */}
 
           {/* <input
           type="file"
@@ -285,14 +398,14 @@ console.log(details,"details")
           <button className={styles.uploadBtn} onClick={handleOpen}>Add YouTube Video Links</button>
           <div  className={styles.imageContainer}>
           {Array.isArray(formState.company_youtube_link) && formState.company_youtube_link.length > 0 ? (
-  <div className={styles.videoContainer}>
+    <div className={styles.videoContainer}>
     {formState.company_youtube_link?.map((link, idx) => (
       <iframe
         key={idx}
         width="215"
         height="200"
         src={getYoutubeEmbedUrl(link)}
-        title={`YouTube video ${idx + 1}`}
+        title={`YouTubes video ${idx + 1}`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen

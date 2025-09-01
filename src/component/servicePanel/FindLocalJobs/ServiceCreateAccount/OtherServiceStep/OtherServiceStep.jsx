@@ -118,8 +118,8 @@ console.log(postalCode,lat,lng,'postalCode')
   console.log(allScripts,'allScripts'); 
   const handleSelectService = (item) => {
     // Don't allow more than 2 services
-    if (selectedServices?.length >= 2) {
-      showToast("error", "No more services can be added");
+    if (selectedServices?.length >= 5) {
+      showToast("error", "Please add more services in Lead Settings");
       return;
     }
   
