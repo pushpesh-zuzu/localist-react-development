@@ -29,7 +29,6 @@ import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
 import { Popover } from "antd";
 import { Helmet } from "react-helmet-async";
 import { Select, Modal, Radio, Tabs } from "antd";
-// import TabPane from "antd/es/tabs/TabPane";
 
 const BidsList = ({ previousStep }) => {
   const { requestId } = useParams();
@@ -59,30 +58,25 @@ const BidsList = ({ previousStep }) => {
   const { TabPane } = Tabs;
 
   useEffect(() => {
-    // ✅ handleResize ko if ke bahar define karo
     const handleResize = () => {
       if (typeof window !== "undefined") {
         setIsMobile(window.innerWidth <= 480);
       }
     };
 
-    // ✅ Initial call (first render pe check karne ke liye)
     handleResize();
 
-    // ✅ Event listener add karo
     window.addEventListener("resize", handleResize);
 
-    // ✅ Cleanup event listener jab component unmount ho
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    // Delay se exact top pe le jayega
     const timeout = setTimeout(() => {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: "instant", // instant rakho smooth nahi
+        behavior: "instant",
       });
     }, 1000);
 
@@ -180,10 +174,8 @@ const BidsList = ({ previousStep }) => {
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.displayCount || 0;
   const isButtonDisabled = bidCount === bidTotal;
-  console.log(ratingFilterData, "prem");
 
   // Hide checkboxes if bidCount is 5 (API has been hit)
-  // const showCheckboxes = bidCount !== 5;
   const showCheckboxes = selectedSellers.length < bidTotal - bidCount;
   const shouldShowGreenIcons = bidCount !== bidTotal;
 
@@ -532,7 +524,7 @@ const BidsList = ({ previousStep }) => {
                       setOpenSortModal(true);
                     }}
                   >
-                    {locationSort || "Sort by Location"}
+                    {locationSort || "Sort by Distance"}
                   </button>
                   <button
                     className={styles.sortBtn}
@@ -559,7 +551,7 @@ const BidsList = ({ previousStep }) => {
                   {activeSortType === "rating"
                     ? "Sort by Ratings"
                     : activeSortType === "location"
-                    ? "Sort by Location"
+                    ? "Sort by Distance"
                     : "Sort by Response Time"}
                 </h3>
               </div>
@@ -709,7 +701,13 @@ const BidsList = ({ previousStep }) => {
                                         } else {
                                           return (
                                             <span key={index}>
-                                              <img src={grayStar} alt="image" />
+                                              <img
+                                                src={grayStar}
+                                                alt="image"
+                                                height={23}
+                                                width={23}
+                                              />
+                                              {/* ★ */}
                                             </span>
                                           ); // Empty star
                                         }
@@ -758,6 +756,14 @@ const BidsList = ({ previousStep }) => {
                             <div className={styles.ratings}>
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
+
+                                if (rating === 0) {
+                                  return (
+                                    <span className={styles.noReviews}>
+                                      No Reviews
+                                    </span>
+                                  );
+                                }
 
                                 return (
                                   <>

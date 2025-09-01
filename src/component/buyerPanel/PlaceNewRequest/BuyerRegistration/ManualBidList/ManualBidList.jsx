@@ -176,6 +176,14 @@ const ManualBidList = () => {
                           {(() => {
                             const rating = item?.avg_rating || 0;
 
+                            if (rating === 0) {
+                              return (
+                                <span className={styles.noReviews}>
+                                  No Reviews
+                                </span>
+                              );
+                            }
+
                             return (
                               <>
                                 <span className={styles.stars}>
@@ -186,8 +194,8 @@ const ManualBidList = () => {
                                           <img
                                             src={starImg}
                                             alt="..."
-                                            width={29}
-                                            height={27}
+                                            width={23}
+                                            height={23}
                                           />
                                         </span>
                                       ); // Full star
@@ -196,7 +204,12 @@ const ManualBidList = () => {
                                     } else {
                                       return (
                                         <span key={index}>
-                                          <img src={grayStar} alt="..." />
+                                          <img
+                                            src={grayStar}
+                                            alt="..."
+                                            width={21}
+                                            height={21}
+                                          />
                                         </span>
                                       ); // Empty star
                                     }
@@ -248,6 +261,14 @@ const ManualBidList = () => {
                           <div className={styles.ratings}>
                             {(() => {
                               const rating = item?.avg_rating || 0;
+
+                              if (rating === 0) {
+                                return (
+                                  <span className={styles.noReviews}>
+                                    No Reviews
+                                  </span>
+                                );
+                              }
 
                               return (
                                 <>
