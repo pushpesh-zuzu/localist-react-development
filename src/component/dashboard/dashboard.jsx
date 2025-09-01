@@ -228,7 +228,7 @@ const Dashboard = () => {
                   <div className={styles["contact-info"]}>
                     <div>
                       <span>
-                        <img src={emailIcon1} /> &nbsp; assistance@localists.com{" "}
+                        <img src={emailIcon1} /> &nbsp; contact@localists.com{" "}
                       </span>
                       {/* <span><img src={phone} /> &nbsp; 0000000000 </span> */}
                     </div>

@@ -106,7 +106,7 @@ const SliderComponent = ({ subcategory ,categoryName }) => {
       </div>
       
       <div  className={styles.viewAllBtnBox}>
-        <Link style={{textDecoration:'none'}} to={categoryName ==="House & Home" && `/${currentLang}/${currentCountry}/home`} className={styles.viewAllBtn}>View All </Link>
+        {/* <Link style={{textDecoration:'none'}} to={categoryName ==="House & Home" && `/${currentLang}/${currentCountry}/home`} className={styles.viewAllBtn}>View All </Link>  later we uncomment this view all button when need */
         </div>
       </>)}
      
