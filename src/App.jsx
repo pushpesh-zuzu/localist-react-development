@@ -5,8 +5,9 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
-function App({ initialUrl }) {
+function App({isNoIndex, initialUrl }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
@@ -101,7 +102,10 @@ function App({ initialUrl }) {
   const router = useMemo(() => createAppRouter(initialUrl), []);
 
   return (
-    <>
+    <> 
+      <Helmet>
+        {isNoIndex && <meta name="robots" content="noindex" />}
+      </Helmet>
       <RouterProvider router={router} />
       <ToastContainer />
     </>
