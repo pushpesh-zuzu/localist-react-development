@@ -50,7 +50,7 @@ const LeadershipTeam = () => {
       name: "Michael Marshall",
       position: "Director",
       imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/png-hispanic-man-portrait-cartoon-adult.png",
       linkedinUrl: "#",
       xUrl: "#",
     },
@@ -60,7 +60,7 @@ const LeadershipTeam = () => {
       name: "Nathan O'Connor",
       position: "Director",
       imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/cartoon-man-with-glasses-orange-backpack-photorealistic-portraits-unreal-engine-5.png",
       linkedinUrl: "#",
       xUrl: "#",
     },
@@ -69,7 +69,7 @@ const LeadershipTeam = () => {
       name: "Danny Browne",
       position: "SEO Manager",
       imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/3d-male-cartoon-character-progress-concept-illustration.png",
       linkedinUrl: "#",
       xUrl: "#",
     },
@@ -78,7 +78,7 @@ const LeadershipTeam = () => {
       name: "John Driffield",
       position: "Paid Advertising Manager",
       imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+        "/John.jpg",
       linkedinUrl: "#",
       xUrl: "#",
     },
