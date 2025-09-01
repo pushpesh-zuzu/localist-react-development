@@ -544,7 +544,7 @@
     background-color: #e3f6fc;
     display: flex;
     flex-direction: row; /* horizontal layout */
-    flex-wrap: wrap; /* no wrap by default */
+    /* flex-wrap: wrap;  */
     gap: 4px;
     justify-content: space-between;
     align-items: center;
@@ -630,9 +630,9 @@
     text-align: justify;
   }
 
-  .dualDropdownsContainers {
+  /* .dualDropdownsContainers {
     flex-wrap: wrap;
-  }
+  } */
   .dropdownTrigger {
     width: 205px;
     padding: 5px 5px;
@@ -727,9 +727,7 @@
   .actionButton {
     width: 100%;
   }
-  .dualDropdownsContainers {
-    flex-wrap: wrap; /* wrap below 410px */
-  }
+
   .dropdownTrigger {
     width: 205px;
     padding: 5px 5px;
