@@ -18,7 +18,7 @@ function HowItWorkSeller() {
         <title>How It Works for Professionals & Businesses - Localists</title>
         <meta
           name="description"
-          content="Learn how Localists connect you with ready-to-hire"
+          content="Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
         />
       </Helmet>
       <div className={styles.container} style={style}>
