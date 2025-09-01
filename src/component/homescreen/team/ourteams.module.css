@@ -6,8 +6,16 @@
     padding: 14px 88px;
     gap: 20px;
 }
-
-
+.start{
+    color: #00afe3;
+    font-size: 40px;
+}
+.ratingWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px; /* Optional spacing between stars */
+}
 .teamsLeftCotainer,
 .teamsRightCotainer {
     width: 50%;
@@ -135,7 +143,9 @@
 }
 
 @media (max-width: 480px) {
-
+    .start {
+        font-size: 30px;
+    }
     .teamsContainer {
         gap: 0;
         /* margin-top: 20px; */

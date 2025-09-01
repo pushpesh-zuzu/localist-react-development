@@ -38,7 +38,7 @@ const ServiceCategory = () => {
           View Our <span>Service Categories</span>
         </h2>
       { popularLoader ? <Spin style={{color:"white"}}/> : <div className={styles.ServiceCategory}>
-          {allServiceList?.slice(0, 6)?.map((category, index) => (
+          {allServiceList?.slice(0, 1)?.map((category, index) => (
             <SingleCategory
               key={index}
               category={category}

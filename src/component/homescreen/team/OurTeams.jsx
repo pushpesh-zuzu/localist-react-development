@@ -5,29 +5,30 @@ import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.svg";
 import quotes from "../../../assets/Images/quote.svg";
 import rating from "../../../assets/Images/ratings.svg";
 import dotSlider from "../../../assets/Images/dotSlider.svg";
+import { StarFilled } from '@ant-design/icons';
 
 const OurTeams = () => {
   // Static testimonial data
   const testimonials = [
     {
-      text: "Within 10 minutes of making my enquiry, I had contact from 2 interested companies ready to assist me.",
-      name: "Meera",
-      rating: 1,
+      text: "Brilliant experience! The platform quickly connected me with trustworthy providers. I’d recommend it to anyone in need of reliable, high-quality services.",
+      name: "Charlotte",
+      rating: 5,
     },
     {
-      text: "Excellent service and quick response. The team was very professional and helped me find exactly what I was looking for.",
-      name: "Rajesh",
-      rating: 1,
+      text: "Fantastic support and such an easy process. I received several quotes almost instantly and was able to choose the right professional for my needs.",
+      name: "Oliver",
+      rating: 5,
     },
     {
-      text: "Amazing experience! The platform connected me with reliable vendors in no time. Highly recommended for anyone looking for quality services.",
-      name: "Priya",
-      rating: 1,
+      text: "Great service with a fast response. The team were professional, efficient, and helped me find exactly what I needed without any hassle.",
+      name: "Amelia",
+      rating: 5,
     },
     {
-      text: "Outstanding support and seamless process. I got multiple quotes within minutes and found the perfect match for my requirements.",
-      name: "Amit",
-      rating: 1,
+      text: "Within minutes of submitting my request, I heard back from two local companies ready to help. Couldn’t have asked for a quicker service.",
+      name: "George",
+      rating: 5,
     },
   ];
 
@@ -56,11 +57,13 @@ const OurTeams = () => {
           <img src={quotes} alt="quotes" />
         </div>
 
-        {[...Array(testimonials[currentIndex].rating)].map((_, index) => (
-          <div className={styles.rating} key={index}>
-            <img src={rating} alt="rating" />
-          </div>
-        ))}
+        <div className={styles.ratingWrapper}>
+  {[...Array(testimonials[currentIndex].rating)].map((_, index) => (
+                //  <img src={rating} alt="rating" /> 
+
+    <StarFilled className={styles.start} key={index} />
+  ))}
+</div>
 
         <div className={styles.info}>
           <p>{testimonials[currentIndex].text}</p>

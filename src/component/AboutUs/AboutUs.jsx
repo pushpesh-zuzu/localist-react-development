@@ -20,7 +20,7 @@ function AboutUs() {
       </Helmet>
       <BannerWrapper headingText="About Us" image={aboutUsBanner} />
       <WhoWeAre />
-      <Stats />
+      {/* <Stats /> */}
       <LeadershipCard />
       {/* <OurInvestor/> */}
       <GetInTouchButton />

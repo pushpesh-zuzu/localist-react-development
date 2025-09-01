@@ -19,7 +19,7 @@ const LeadershipCard = ({ name, position, imageUrl, linkedinUrl, xUrl }) => {
       </div>
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.position}>{position}</p>
-      <div className={styles.socialIcons}>
+      {/* <div className={styles.socialIcons}>
         <a
           href={linkedinUrl}
           className={styles.socialIcon}
@@ -36,7 +36,7 @@ const LeadershipCard = ({ name, position, imageUrl, linkedinUrl, xUrl }) => {
         >
           <XIcon />
         </a>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -47,8 +47,8 @@ const LeadershipTeam = () => {
   const teamData = [
     {
       id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
+      name: "Michael Marshall",
+      position: "Director",
       imageUrl:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       linkedinUrl: "#",
@@ -57,8 +57,8 @@ const LeadershipTeam = () => {
     // Add 5 more team members with similar structure
     {
       id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
+      name: "Nathan O'Connor",
+      position: "Director",
       imageUrl:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       linkedinUrl: "#",
@@ -66,8 +66,8 @@ const LeadershipTeam = () => {
     },
     {
       id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
+      name: "Danny Browne",
+      position: "SEO Manager",
       imageUrl:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       linkedinUrl: "#",
@@ -75,31 +75,14 @@ const LeadershipTeam = () => {
     },
     {
       id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
+      name: "John Driffield",
+      position: "Paid Advertising Manager",
       imageUrl:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       linkedinUrl: "#",
       xUrl: "#",
     },
-    {
-      id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
-      imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      linkedinUrl: "#",
-      xUrl: "#",
-    },
-    {
-      id: 1,
-      name: "Abhiraj Singh Bhal",
-      position: "Managing Director & CEO",
-      imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      linkedinUrl: "#",
-      xUrl: "#",
-    },
+ 
   ];
 
   return (
