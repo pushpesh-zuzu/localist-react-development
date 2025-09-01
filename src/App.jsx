@@ -7,7 +7,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
-function App({isNoIndex, initialUrl }) {
+function App({ initialUrl }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
@@ -100,12 +100,17 @@ function App({isNoIndex, initialUrl }) {
 
   // Create the router once to avoid re-instantiation on every render (which can blank the Outlet on navigation in SSR/CSR)
   const router = useMemo(() => createAppRouter(initialUrl), []);
-
+const isDevEnvironment = typeof window !== 'undefined' && 
+                          window.location.hostname === 'dev.localists.com';
+                          console.log(isDevEnvironment,'isDevEnvironment')
+                          console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
   return (
     <> 
-      <Helmet>
-        {isNoIndex && <meta name="robots" content="noindex" />}
-      </Helmet>
+      {isDevEnvironment && (
+        <Helmet>
+          <meta name="robots" content="noindex" />
+        </Helmet>
+      )}
       <RouterProvider router={router} />
       <ToastContainer />
     </>
