@@ -348,7 +348,7 @@ const LoginPage = () => {
         <div className="bottom-links">
           <Text className="text">
             Offering a service?{" "}
-            <Link to={`/${currentLang}/${currentCountry}/sellers/create/`} className="linkText">
+            <Link to={`/${currentLang}/${currentCountry}/sellers/create`} className="linkText">
               Join as a professional
             </Link>
           </Text>

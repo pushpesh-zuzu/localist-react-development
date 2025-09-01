@@ -39,12 +39,12 @@ const FooterContent = () => (
     <div className={styles.footerContactSection}>
       <div className={styles.contactMthods}>
         <img src={mailIcon} alt="email" />
-        <p>india@localist.com</p>
+        <p>contact@localists.com</p>
       </div>
-      <div className={styles.contactMthods}>
+      {/* <div className={styles.contactMthods}>
         <img src={callIcon} alt="phone" />
         <p>+91 0000000000</p>
-      </div>
+      </div> */}
       <div className={styles.contactMthods}>
         <img src={timerIcon} alt="working hours" />
         <p>(Mon-Fri, 9:00am-6:00pm)</p>
