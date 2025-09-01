@@ -705,6 +705,18 @@
     width: 60%;
   }
 
+  .customSelect .ant-select-arrow {
+    color: #000 !important;
+  }
+
+  .selectDropdown .ant-select-arrow {
+    color: #000 !important;
+  }
+
+  .customSelect {
+    color: #000000;
+  }
+
   .selectedOption {
     width: 88%;
     overflow: hidden;

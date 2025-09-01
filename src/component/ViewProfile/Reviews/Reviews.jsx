@@ -149,7 +149,12 @@ const ReviewSection = ({
                       {/* <input type="radio" name="rating" disabled /> */}
                       <div className={styles.starText}>
                         <div style={{ width: "10px" }}>{star}</div>
-                        <img src={count > 0 ? blueStar : greyStar} alt="star" />
+                        <img
+                          src={count > 0 ? blueStar : greyStar}
+                          alt="star"
+                          height={23}
+                          width={23}
+                        />
                       </div>
                     </label>
 

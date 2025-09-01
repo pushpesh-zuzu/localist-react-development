@@ -10,7 +10,7 @@ import {
   purchaseTypeHiredStatusApi,
   purchaseTypeStatusApi,
   setLeadListProfileLoader,
-  getSellerNotesApi
+  getSellerNotesApi,
 } from "../../store/LeadSetting/leadSettingSlice";
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
@@ -21,11 +21,9 @@ import { useNavigate } from "react-router-dom";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
 import HiredClickImg from "../../assets/Images/MyResponse/RightClickHiredImg.svg";
-import saveImg from "../../assets/Images/Leads/saveLaterImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
-// import pendingArrowIcon from "../../assets/Images/MyResponse/responseArrow.svg";
 import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
-import { Popover, Select } from "antd";
+import { Select } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
@@ -33,6 +31,7 @@ import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStu
 
 const purchaseOptions = ["All", "Manual Bid", "Autobid", "Request Reply"];
 const MyResponse = () => {
+  const { Option } = Select;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [popoverOpen, setPopoverOpen] = useState(false);
@@ -57,11 +56,6 @@ const MyResponse = () => {
   const handleProfieView = (item) => {
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
-  {
-    /* const createdDate = moment(profileLeadViewData?.created_at);
-          const today = moment();
-          const daysAgo = today.diff(createdDate, 'days') */
-  }
 
   const popoverContent = (
     <div className={styles.popoverMenu}>
@@ -156,7 +150,6 @@ const MyResponse = () => {
             ? userToken?.remember_tokens
             : registerData?.remember_tokens,
         };
-        
       }
     });
   };
@@ -226,27 +219,6 @@ const MyResponse = () => {
       showToast("error", "Email address is not available.");
     }
   };
-  // const handlePurchaseChange = (value) => {
-  //   const purchaseData = {
-  //     user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-  //     purchase_type: value
-  //   }
-  //   dispatch(purchaseTypeStatusApi(purchaseData))
-  // }
-  // const handlePurchaseChange = (value) => {
-  //   setPurchaseType(value);
-  //   if (selectedTab === "pending") {
-  //     const purchaseData = {
-  //       user_id: userToken?.remember_tokens
-  //         ? userToken?.remember_tokens
-  //         : registerData?.remember_tokens,
-  //       purchase_type: value,
-  //     };
-
-  //     dispatch(purchaseTypeStatusApi(purchaseData));
-  //   } else {
-  //   }
-  // };
 
   return (
     <div className={styles.maincontainer}>
@@ -282,29 +254,18 @@ const MyResponse = () => {
             className={styles.purchaseSelect}
           >
             <label className={styles.purchaseText}>Purchase Type</label>
-            {/* <select
-              className={`${styles.selectBox} ${styles.customSelect}`}
-              value={purchaseType} // controlled value
-              onChange={(e) => handlePurchaseChange(e.target.value)}
-              // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+            <Select
+              value={purchaseType}
+              onChange={handlePurchaseChange}
+              className={styles.antSelect}
+              dropdownMatchSelectWidth={false}
             >
-              <option value="All">All</option>
-              <option value="Manual Bid">Manual Bid</option>
-              <option value="Autobid">Auto Bid</option>
-              <option value="Request Reply">Request Reply</option>
-            </select> */}
-            <Popover
-              content={renderPopoverContent(setPopoverOpenTop)}
-              trigger="click"
-              open={popoverOpenTop}
-              onOpenChange={(open) => setPopoverOpenTop(open)}
-              placement="bottom"
-              style={{ minWidth: 100 }}
-            >
-              <button className={styles.popoverBtn}>
-                {purchaseType || "All"} ▼
-              </button>
-            </Popover>
+              {purchaseOptions.map((option) => (
+                <Option key={option} value={option}>
+                  {option}
+                </Option>
+              ))}
+            </Select>
           </div>
         </div>
       </div>
@@ -330,33 +291,21 @@ const MyResponse = () => {
           )}{" "}
           Hired
         </button>
+
         <div style={{ display: "flex" }} className={styles.purchaseSelect}>
           <label className={styles.purchaseText}>Purchase Type</label>
-          {/* <select
-            className={`${styles.selectBox} ${styles.customSelect}`}
-            value={purchaseType} // controlled value
-            onChange={(e) => handlePurchaseChange(e.target.value)}
-            // style={{ width: 150, marginLeft: 10,height:"30px",padding:"4px"}}
+          <Select
+            value={purchaseType}
+            onChange={handlePurchaseChange}
+            className={styles.antSelect}
+            dropdownMatchSelectWidth={false}
           >
-            <option value="All">All</option>
-            <option value="Manual Bid">Manual Bid</option>
-            <option value="Autobid">Auto Bid</option>
-            <option value="Request Reply">Request Reply</option>
-          </select> */}
-          <div style={{ width: "60px" }}>
-            <Popover
-              content={renderPopoverContent(setPopoverOpenMobile)}
-              trigger="click"
-              open={popoverOpenMobile}
-              onOpenChange={(open) => setPopoverOpenMobile(open)}
-              placement="bottom"
-              style={{ minWidth: 100 }}
-            >
-              <button className={styles.popoverBtn}>
-                {purchaseType || "All"} ▼
-              </button>
-            </Popover>
-          </div>
+            {purchaseOptions.map((option) => (
+              <Option key={option} value={option}>
+                {option}
+              </Option>
+            ))}
+          </Select>
         </div>
       </div>
 
@@ -417,22 +366,6 @@ const MyResponse = () => {
               </div>
 
               <div className={styles.jobDetails}>
-                {/* <div className={styles.saveBtnBox}>
-                <button
-                  className={styles.saveBtn}
-                  // onClick={() => handleSaveLater(item)}
-                >
-                  {/* {saveLaterLoaderId === item.id ? (
-                                     <Spin
-                                     indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                                   />
-                                    ) : (
-                                      <> 
-                  <img src={saveImg} alt="image" />
-                  Save For Later
-                  
-                </button>
-              </div> */}
                 <div className={styles.badges}>
                   {item?.is_phone_verified == 1 && (
                     <span className={styles.verified}>

@@ -15,7 +15,7 @@
 }
 
 .card {
-   background: #fff;
+  background: #fff;
   /* box-shadow: 0px 0px 6px 0px #0000001a; */
   margin: 21.08px auto;
   padding: 18.25px 25.26px 2.25px 34px;
@@ -33,7 +33,6 @@
   min-width: 0; /* Prevents content from forcing column to expand */
   overflow-wrap: break-word;
 }
-
 
 .infoContainer {
   grid-area: info;
@@ -53,7 +52,7 @@
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   padding: 0 40px;
-  
+
   /* cursor: pointer !important; */
   /* padding: 0 73px 0 44px; */
 }
@@ -93,7 +92,7 @@
   width: 60px;
   height: 60px;
   display: flex;
-   flex-shrink: 0;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
 }
@@ -214,7 +213,7 @@
 }
 
 .purchaseButton {
-  background: #57E202;
+  background: #57e202;
   color: white;
   border: none;
   padding: 8px 15px;
@@ -225,7 +224,7 @@
 }
 
 .purchaseButton:hover {
-  background-color: #4ECF00;
+  background-color: #4ecf00;
 }
 .desktopOnlyBreak {
   display: inline;
@@ -335,7 +334,7 @@
     gap: 30px;
     padding: 20px;
   }
- .viewDetailsBtnWrapper {
+  .viewDetailsBtnWrapper {
     margin-right: 0px;
   }
   .infoContainer {
@@ -362,7 +361,7 @@
   .card {
     padding: 16px;
   }
- .viewDetailsBtnWrapper {
+  .viewDetailsBtnWrapper {
     margin-right: 0px;
   }
   .category {
@@ -397,38 +396,37 @@
   .details h3 {
     font-size: 16px;
   }
- .card {
+  .card {
     padding: 4px 16px;
     margin: 18px auto;
   }
   .saveBtnBox {
-  display: none;
-  
-}
-  .category {
-    text-wrap:wrap;
-    text-align:center
-  }
-.mainText {
-  font-weight: 500;
-  font-size: 14px;
-}
-.mainText div {
-  margin-bottom: 0px;
-  margin-top: 8px;
-}
-.desktopOnlyBreak {
     display: none;
   }
-.badges {
-margin-top: 0px;
-}
-.saveBtnBoxs {
-  display: flex;
-  align-items: center;
-margin-bottom: 10px;
-  justify-content: center;
-}
+  .category {
+    text-wrap: wrap;
+    text-align: center;
+  }
+  .mainText {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .mainText div {
+    margin-bottom: 0px;
+    margin-top: 8px;
+  }
+  .desktopOnlyBreak {
+    display: none;
+  }
+  .badges {
+    margin-top: 0px;
+  }
+  .saveBtnBoxs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
 
   .details p {
     font-size: 12px;
@@ -436,13 +434,13 @@ margin-bottom: 10px;
   .jobDetails {
     gap: 20px;
   }
-.highlightText {
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #000000;
-  display: block;
-}
+  .highlightText {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    display: block;
+  }
   .userInfo {
     /* flex-direction: column;
     align-items: flex-start;
@@ -466,31 +464,32 @@ margin-bottom: 10px;
     margin-top: 0px;
   }
   .mainText {
-  text-align: center;
-}
-.viewDetailsBtn {
-  padding: 7px 17px;
-  background-color: var(--primary-color);
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  border: none;
-  border-radius: 25px;
-  display: flex;
-  /* gap: 8px; */
-  /* text-decoration: underline; */
-  cursor: pointer !important;
-}
+    text-align: center;
+  }
+  .viewDetailsBtn {
+    padding: 7px 17px;
+    background-color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 8px; */
+    /* text-decoration: underline; */
+    cursor: pointer !important;
+  }
 
   .card {
     gap: 20px;
   }
   .jobDetails {
-    border-top: 1px solid #E0E0E0;
-    border-bottom: 1px solid #E0E0E0;
-  
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
   }
- 
+
   .jobInfo {
     margin-bottom: 20px;
   }
@@ -498,7 +497,7 @@ margin-bottom: 10px;
     margin-top: 0px;
     display: flex;
     align-items: center;
-    gap:10px
+    gap: 10px;
   }
   .viewDetailsBtnWrapper {
     margin-right: 0px;
@@ -517,13 +516,11 @@ margin-bottom: 10px;
 .rotated {
   transform: rotate(180deg);
 }
-@media screen and (max-width:370px) {
-   .details h3 {
+@media screen and (max-width: 370px) {
+  .details h3 {
     font-size: 12px;
   }
   .desktopOnlyBreak {
     display: inline;
   }
-  
 }
-

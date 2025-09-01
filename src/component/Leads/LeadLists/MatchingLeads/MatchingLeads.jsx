@@ -14,8 +14,11 @@
 // } from "../../../../store/LeadSetting/leadSettingSlice";
 // import MatchingLeadsFilter from "./MatchingLeadsFilter";
 // import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg";
+// import { Popover } from "antd";
+// import { Select } from "antd";
 
 // const MatchingLeads = () => {
+//   const { Option } = Select;
 //   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 //   const [selectedSort, setSelectedSort] = useState("Newest");
 //   const sortOptions = ["Newest", "Oldest"];
@@ -26,6 +29,8 @@
 //     "Credit Value Medium",
 //     "Credit Value Low",
 //   ];
+
+//   const [openPopover, setOpenPopover] = useState(null);
 
 //   const navigate = useNavigate();
 //   const dispatch = useDispatch();
@@ -134,6 +139,26 @@
 //     };
 //   }, []);
 
+//   // ✅ Popover dropdown content renderer
+//   const renderOptions = (options, currentValue, onChange) => (
+//     <div className={styles.popoverContent}>
+//       {options.map((opt) => (
+//         <div
+//           key={opt}
+//           className={`${styles.optionItem} ${
+//             currentValue === opt ? styles.active : ""
+//           }`}
+//           onClick={() => {
+//             onChange(opt);
+//             setOpenPopover(null);
+//           }}
+//         >
+//           {opt}
+//         </div>
+//       ))}
+//     </div>
+//   );
+
 //   return (
 //     <>
 //       <div className={styles.container}>
@@ -153,44 +178,36 @@
 
 //         <div className={styles.dualDropdownsContainer}>
 //           {/* First Dropdown - Newest */}
-//           <div style={{ cursor: "pointer" }} className={styles.dropdownWrapper}>
-//             <select
-//               style={{ cursor: "pointer" }}
-//               className={styles.dropdownTriggers}
-//               value={selectedSort}
-//               onChange={(e) => handleSortChange(e.target.value)}
-//             >
-//               {sortOptions.map((option) => (
-//                 <option
-//                   key={option}
-//                   value={option}
-//                   style={{ cursor: "pointer" }}
-//                 >
-//                   {option}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
+//           <Popover
+//             content={renderOptions(sortOptions, selectedSort, handleSortChange)}
+//             trigger="click"
+//             placement="bottom"
+//             autoAdjustOverflow={false}
+//             overlayStyle={{ minWidth: "100px" }}
+//             open={openPopover === "sort"}
+//             onOpenChange={(visible) => setOpenPopover(visible ? "sort" : null)}
+//           >
+//             <button className={styles.dropdownTriggers}>{selectedSort}</button>
+//           </Popover>
 
 //           {/* Second Dropdown - Credit Value */}
-//           <div className={styles.dropdownWrapper} style={{ cursor: "pointer" }}>
-//             <select
-//               style={{ cursor: "pointer" }}
-//               className={styles.dropdownTrigger}
-//               value={selectedFilter}
-//               onChange={(e) => handleFilterChange(e.target.value)}
-//             >
-//               {filterOptions.map((option) => (
-//                 <option
-//                   key={option}
-//                   value={option}
-//                   style={{ cursor: "pointer" }}
-//                 >
-//                   {option}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
+//           <Popover
+//             content={renderOptions(
+//               filterOptions,
+//               selectedFilter,
+//               handleFilterChange
+//             )}
+//             trigger="click"
+//             placement="bottom"
+//             autoAdjustOverflow={false}
+//             overlayStyle={{ minWidth: "200px" }}
+//             open={openPopover === "filter"}
+//             onOpenChange={(visible) =>
+//               setOpenPopover(visible ? "filter" : null)
+//             }
+//           >
+//             <button className={styles.dropdownTrigger}>{selectedFilter}</button>
+//           </Popover>
 
 //           <div className={styles.actionButtons}>
 //             <button className={styles.filterButton} onClick={handleFilterClick}>
@@ -212,36 +229,37 @@
 //         )}
 //       </div>
 
+//       {/* ✅ Mobile Version bhi Popover me badal diya */}
 //       <div className={styles.dualDropdownsContainers}>
-//         {/* First Dropdown - Newest */}
-//         <div className={styles.dropdownWrappers}>
-//           <select
-//             className={styles.dropdownTriggers}
-//             value={selectedSort}
-//             onChange={(e) => handleSortChange(e.target.value)}
-//           >
-//             {sortOptions.map((option) => (
-//               <option key={option} value={option}>
-//                 {option}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
-
-//         {/* Second Dropdown - Credit Value */}
-//         {/* <div className={styles.dropdownWrapper}> */}
-//         <select
-//           className={styles.dropdownTrigger}
-//           value={selectedFilter}
-//           onChange={(e) => handleFilterChange(e.target.value)}
+//         <Popover
+//           content={renderOptions(sortOptions, selectedSort, handleSortChange)}
+//           trigger="click"
+//           placement="bottomLeft"
+//           autoAdjustOverflow={false}
+//           open={openPopover === "sortMobile"}
+//           onOpenChange={(visible) =>
+//             setOpenPopover(visible ? "sortMobile" : null)
+//           }
 //         >
-//           {filterOptions.map((option) => (
-//             <option key={option} value={option}>
-//               {option}
-//             </option>
-//           ))}
-//         </select>
-//         {/* </div> */}
+//           <button className={styles.dropdownTriggers}>{selectedSort}</button>
+//         </Popover>
+
+//         <Popover
+//           content={renderOptions(
+//             filterOptions,
+//             selectedFilter,
+//             handleFilterChange
+//           )}
+//           trigger="click"
+//           placement="bottomLeft"
+//           autoAdjustOverflow={false}
+//           open={openPopover === "filterMobile"}
+//           onOpenChange={(visible) =>
+//             setOpenPopover(visible ? "filterMobile" : null)
+//           }
+//         >
+//           <button className={styles.dropdownTrigger}>{selectedFilter}</button>
+//         </Popover>
 
 //         <div className={styles.actionButton}>
 //           <button className={styles.filterButtons} onClick={handleFilterClick}>
@@ -280,7 +298,9 @@ import {
 } from "../../../../store/LeadSetting/leadSettingSlice";
 import MatchingLeadsFilter from "./MatchingLeadsFilter";
 import FilterBlackIcon from "../../../../assets/Images/Leads/blackFilter.svg";
-import { Popover } from "antd";
+import { Select } from "antd";
+
+const { Option } = Select;
 
 const MatchingLeads = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
@@ -293,8 +313,6 @@ const MatchingLeads = () => {
     "Credit Value Medium",
     "Credit Value Low",
   ];
-
-  const [openPopover, setOpenPopover] = useState(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -342,27 +360,27 @@ const MatchingLeads = () => {
     }
   };
 
-  const handleSortChange = (option) => {
-    setSelectedSort(option);
+  const handleSortChange = (value) => {
+    setSelectedSort(value);
     if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
         user_id: userToken?.remember_tokens
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
-        sort_type: getSortTypeValue(option),
+        sort_type: getSortTypeValue(value),
       };
       dispatch(getLeadFiterApiList(filterData));
     }
   };
 
-  const handleFilterChange = (option) => {
-    setSelectedFilter(option);
+  const handleFilterChange = (value) => {
+    setSelectedFilter(value);
     if (userToken?.remember_tokens || registerData?.remember_tokens) {
       const filterData = {
         user_id: userToken?.remember_tokens
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
-        credit_filter: getCreditFilterValue(option),
+        credit_filter: getCreditFilterValue(value),
       };
       dispatch(getLeadFiterApiList(filterData));
     }
@@ -403,26 +421,6 @@ const MatchingLeads = () => {
     };
   }, []);
 
-  // ✅ Popover dropdown content renderer
-  const renderOptions = (options, currentValue, onChange) => (
-    <div className={styles.popoverContent}>
-      {options.map((opt) => (
-        <div
-          key={opt}
-          className={`${styles.optionItem} ${
-            currentValue === opt ? styles.active : ""
-          }`}
-          onClick={() => {
-            onChange(opt);
-            setOpenPopover(null);
-          }}
-        >
-          {opt}
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <>
       <div className={styles.container}>
@@ -440,38 +438,35 @@ const MatchingLeads = () => {
           </button>
         </div>
 
+        {/* Desktop Dropdowns */}
         <div className={styles.dualDropdownsContainer}>
           {/* First Dropdown - Newest */}
-          <Popover
-            content={renderOptions(sortOptions, selectedSort, handleSortChange)}
-            trigger="click"
-            placement="bottom"
-            autoAdjustOverflow={false}
-            overlayStyle={{ minWidth: "100px" }}
-            open={openPopover === "sort"}
-            onOpenChange={(visible) => setOpenPopover(visible ? "sort" : null)}
+          <Select
+            value={selectedSort}
+            onChange={handleSortChange}
+            className={styles.selectDropdown}
+            dropdownMatchSelectWidth={false}
           >
-            <button className={styles.dropdownTriggers}>{selectedSort}</button>
-          </Popover>
+            {sortOptions.map((opt) => (
+              <Option key={opt} value={opt}>
+                {opt}
+              </Option>
+            ))}
+          </Select>
 
           {/* Second Dropdown - Credit Value */}
-          <Popover
-            content={renderOptions(
-              filterOptions,
-              selectedFilter,
-              handleFilterChange
-            )}
-            trigger="click"
-            placement="bottom"
-            autoAdjustOverflow={false}
-            overlayStyle={{ minWidth: "200px" }}
-            open={openPopover === "filter"}
-            onOpenChange={(visible) =>
-              setOpenPopover(visible ? "filter" : null)
-            }
+          <Select
+            value={selectedFilter}
+            onChange={handleFilterChange}
+            className={styles.selectDropdown}
+            dropdownMatchSelectWidth={false}
           >
-            <button className={styles.dropdownTrigger}>{selectedFilter}</button>
-          </Popover>
+            {filterOptions.map((opt) => (
+              <Option key={opt} value={opt}>
+                {opt}
+              </Option>
+            ))}
+          </Select>
 
           <div className={styles.actionButtons}>
             <button className={styles.filterButton} onClick={handleFilterClick}>
@@ -493,37 +488,35 @@ const MatchingLeads = () => {
         )}
       </div>
 
-      {/* ✅ Mobile Version bhi Popover me badal diya */}
+      {/* ✅ Mobile Version bhi Ant Design Select me badal diya */}
       <div className={styles.dualDropdownsContainers}>
-        <Popover
-          content={renderOptions(sortOptions, selectedSort, handleSortChange)}
-          trigger="click"
-          placement="bottomLeft"
-          autoAdjustOverflow={false}
-          open={openPopover === "sortMobile"}
-          onOpenChange={(visible) =>
-            setOpenPopover(visible ? "sortMobile" : null)
-          }
+        <Select
+          value={selectedSort}
+          onChange={handleSortChange}
+          // className={styles.selectDropdown}
+          dropdownMatchSelectWidth={false}
+          className={styles.customSelect}
         >
-          <button className={styles.dropdownTriggers}>{selectedSort}</button>
-        </Popover>
+          {sortOptions.map((opt) => (
+            <Option key={opt} value={opt}>
+              {opt}
+            </Option>
+          ))}
+        </Select>
 
-        <Popover
-          content={renderOptions(
-            filterOptions,
-            selectedFilter,
-            handleFilterChange
-          )}
-          trigger="click"
-          placement="bottomLeft"
-          autoAdjustOverflow={false}
-          open={openPopover === "filterMobile"}
-          onOpenChange={(visible) =>
-            setOpenPopover(visible ? "filterMobile" : null)
-          }
+        <Select
+          value={selectedFilter}
+          onChange={handleFilterChange}
+          // className={styles.selectDropdown}
+          dropdownMatchSelectWidth={false}
+          className={styles.customSelect}
         >
-          <button className={styles.dropdownTrigger}>{selectedFilter}</button>
-        </Popover>
+          {filterOptions.map((opt) => (
+            <Option key={opt} value={opt}>
+              {opt}
+            </Option>
+          ))}
+        </Select>
 
         <div className={styles.actionButton}>
           <button className={styles.filterButtons} onClick={handleFilterClick}>
