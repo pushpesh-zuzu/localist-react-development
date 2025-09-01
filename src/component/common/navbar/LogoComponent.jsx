@@ -453,7 +453,7 @@ const redirectPath = getRedirectPath();
           </div>
         </Popover>
         <div style={{ display: "none" }}>
-            {megaMenu.map((item, i) => (
+            {megaMenu.filter((item) => item.name === "House & Home").map((item, i) => (
               <div key={i}>
                 <a href={`/${currentLang}/${currentCountry}/${item.path}`}>{item.name}</a>
 
