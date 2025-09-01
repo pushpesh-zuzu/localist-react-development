@@ -787,3 +787,10 @@
     list-style: none;
   }
 }
+
+@media screen and (max-width: 385px) {
+  .dualDropdownsContainers {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+}
