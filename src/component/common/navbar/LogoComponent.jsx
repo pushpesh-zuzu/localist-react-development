@@ -9,6 +9,7 @@ import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
 import {
   allSubMenuData,
+  getChildRoute,
   locationData,
   otherMenuData,
   serviceesData,
@@ -453,29 +454,41 @@ const redirectPath = getRedirectPath();
           </div>
         </Popover>
         <div style={{ display: "none" }}>
-            {megaMenu.filter((item) => item.name === "House & Home").map((item, i) => (
+          {megaMenu
+            .filter((item) => item.name === "House & Home")
+            .map((item, i) => (
               <div key={i}>
-                <a href={`/${currentLang}/${currentCountry}/${item.path}`}>{item.name}</a>
+                <a href={`/${currentLang}/${currentCountry}/${item.path}`}>
+                  {item.name}
+                </a>
 
                 {item.subcategory?.map((sub, j) => (
                   <div key={j}>
-                    <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>{sub.name}</a>
+                    <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>
+                      {sub.name}
+                    </a>
 
-                    {sub.children?.map((child, k) => (
-                      <a
-                        key={k}
-                        href={`/${currentLang}/${currentCountry}/${sub.path}/${child
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                      >
-                        {child}
-                      </a>
-                    ))}
+                    {sub.children?.map((child, k) => {
+                      const childRoute = getChildRoute(sub.path, child);
+                      return (
+                        <a
+                          key={k}
+                          href={
+                            childRoute
+                              ? `/${currentLang}/${currentCountry}/${childRoute}`
+                              : "#"
+                          }
+                        >
+                          {child}
+                        </a>
+                      );
+                    })}
                   </div>
                 ))}
               </div>
             ))}
-          </div></>
+        </div>
+        </>
       )}
     </div>
   );

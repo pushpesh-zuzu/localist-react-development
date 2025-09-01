@@ -357,3 +357,83 @@ export const megaMenu = [
   //   ],
   // },
 ];
+
+// export const getChildRoute = (subPath, child) => {
+//   switch (child) {
+//     case "Fence Installers in Warrington":
+//       return `${subPath}/cheshire/warrington`;
+//     case "Fence Installers in Chester":
+//       return `${subPath}/cheshire/chester`;
+//     case "Fence Installers in Manchester":
+//       return `${subPath}/greater-manchester/manchester`;
+//     case "Fence Installers in Bolton":
+//       return `${subPath}/greater-manchester/bolton`;
+//     case "Fence Installers in Liverpool":
+//       return `${subPath}/merseyside/liverpool`;
+//     default:
+//       return ""; 
+//   }
+// };
+export const getChildRoute = (subPath, child) => {
+  switch (child) {
+    case "Fence Installers in Warrington":
+    case "Driveway Installers in Warrington":
+    case "Patio Installers in Warrington":
+    case "Artificial Grass Installers in Warrington":
+    case "Landscape Gardeners in Warrington":
+      return `${subPath}/cheshire/warrington`;
+
+    case "Fence Installers in Chester":
+    case "Driveway Installers in Chester":
+    case "Patio Installers in Chester":
+    case "Artificial Grass Installers in Chester":
+    case "Landscape Gardeners in Chester":
+      return `${subPath}/cheshire/chester`;
+
+    case "Fence Installers in Manchester":
+    case "Driveway Installers in Manchester":
+    case "Patio Installers in Manchester":
+    case "Artificial Grass Installers in Manchester":
+    case "Landscape Gardeners in Manchester":
+      return `${subPath}/greater-manchester/manchester`;
+
+    case "Fence Installers in Bolton":
+    case "Driveway Installers in Bolton":
+    case "Patio Installers in Bolton":
+    case "Artificial Grass Installers in Bolton":
+    case "Landscape Gardeners in Bolton":
+      return `${subPath}/greater-manchester/bolton`;
+
+    case "Fence Installers in Skelmersdale":
+    case "Driveway Installers in Skelmersdale":
+    case "Patio Installers in Skelmersdale":
+    case "Artificial Grass Installers in Skelmersdale":
+    case "Landscape Gardeners in Skelmersdale":
+      return `${subPath}/lancashire/skelmersdale`;
+
+    case "Fence Installers in Ormskirk":
+    case "Driveway Installers in Ormskirk":
+    case "Patio Installers in Ormskirk":
+    case "Artificial Grass Installers in Ormskirk":
+    case "Landscape Gardeners in Ormskirk":
+      return `${subPath}/lancashire/ormskirk`;
+
+    case "Fence Installers in Liverpool":
+    case "Driveway Installers in Liverpool":
+    case "Patio Installers in Liverpool":
+    case "Artificial Grass Installers in Liverpool":
+    case "Landscape Gardeners in Liverpool":
+      return `${subPath}/merseyside/liverpool`;
+
+    case "Fence Installers in Birkenhead":
+    case "Driveway Installers in Birkenhead":
+    case "Patio Installers in Birkenhead":
+    case "Artificial Grass Installers in Birkenhead":
+    case "Landscape Gardeners in Birkenhead":
+      return `${subPath}/merseyside/birkenhead`;
+
+    default:
+      return "";
+  }
+};
+
