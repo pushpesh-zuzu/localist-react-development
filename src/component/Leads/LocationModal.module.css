@@ -133,13 +133,8 @@
 }
 .customSelect {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("../../assets/Icons/arrow-down.svg");
-  background-repeat: no-repeat;
-  background-position: right 5px center;
-  padding-right: 40px;
-  background-size: 18px 18px;
+
+  height: -webkit-fill-available;
 }
 
 .cancelBtn:hover {

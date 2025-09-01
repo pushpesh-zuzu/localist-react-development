@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./MyResponseAccordian.module.css";
 import UserImage from "../../../assets/Icons/MyResponse/UserImage.svg";
-import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg"
+import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg";
 import CallImage from "../../../assets/Icons/MyResponse/CallImage.svg";
 import EmailImage from "../../../assets/Icons/MyResponse/EmailImage.svg";
 import PurchasedImage from "../../../assets/Icons/MyResponse/PurchasedImage.svg";
@@ -35,7 +35,7 @@ import moment from "moment";
 import LeadMap from "../LeadMap/LeadMap";
 
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import { Spin, Select } from "antd";
 
 const TimelineItem = ({
   icon,
@@ -64,6 +64,7 @@ const TimelineItem = ({
 );
 
 const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
+  const { Option } = Select;
   const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
   const [status, setStatus] = useState("pending");
@@ -83,14 +84,12 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     phoneNumber: profileLeadViewData?.leads?.phone,
     email: profileLeadViewData?.leads?.customer?.email,
   };
-  const userIdActivity = userToken?.id || registerData?.id
+  const userIdActivity = userToken?.id || registerData?.id;
   console.log(getSellerNotes, "profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,
-      seller_id: userToken?.id
-        ? userToken?.id
-        : registerData?.id,
+      seller_id: userToken?.id ? userToken?.id : registerData?.id,
       buyer_id: profileLeadViewData?.leads?.customer_id,
       response_type: "seller",
       type: null,
@@ -180,10 +179,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   //     }
   //   });
   // };
-  console.log(editNoteId, "editNoteId")
+  console.log(editNoteId, "editNoteId");
   const handleSubmit = (id) => {
     if (!note || note.trim() === "") {
-      showToast("error", 'Please give any note ');
+      showToast("error", "Please give any note ");
       return; // stop execution if note is empty
     }
     const sellerNote = {
@@ -194,11 +193,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
       notes: note,
     };
     if (editNoteId) {
-      sellerNote.note_id = editNoteId
+      sellerNote.note_id = editNoteId;
     }
 
     if (id) {
-      sellerNote.delete_note_id = id
+      sellerNote.delete_note_id = id;
     }
 
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
@@ -219,7 +218,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
   };
 
   const handleRemove = (id) => {
-  
     const sellerNote = {
       lead_id: profileLeadViewData?.leads?.id,
       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
@@ -228,16 +226,16 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
       notes: note,
     };
     if (editNoteId) {
-      sellerNote.note_id = editNoteId
+      sellerNote.note_id = editNoteId;
     }
 
     if (id) {
-      sellerNote.delete_note_id = id
+      sellerNote.delete_note_id = id;
     }
 
     dispatch(addSellerNotesApi(sellerNote)).then((result) => {
       if (result) {
-        showToast("success",'Notes Removed Successfully');
+        showToast("success", "Notes Removed Successfully");
         setNote("");
         setEditNoteId(null); // 👈 clear edit state
 
@@ -250,7 +248,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
         dispatch(getSellerNotesApi(sellerData));
       }
     });
-    
+
     // // implement your delete logic here, example:
     // dispatch(deleteNoteApi({ note_id: id })).then((res) => {
     //   if (res.success) {
@@ -270,7 +268,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     if (
       profileLeadViewData?.leads?.id &&
       profileLeadViewData?.id &&
-      (userToken?.remember_tokens || registerData?.remember_tokens) && activeTab === "notes"
+      (userToken?.remember_tokens || registerData?.remember_tokens) &&
+      activeTab === "notes"
     ) {
       const sellerData = {
         lead_id: profileLeadViewData.leads.id,
@@ -322,8 +321,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     } else {
       showToast("error", "Phone number is not available.");
     }
-  }
-  console.log(getSellerNotes?.notes?.notes, "getSellerNotes")
+  };
+  console.log(getSellerNotes?.notes?.notes, "getSellerNotes");
   return (
     <>
       {leadListLoader ? (
@@ -338,70 +337,72 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
             <div className={styles.dropdownMainBox}>
               {profileLeadViewData?.leads?.purchase_type && (
                 <div className={styles.lastActivityText}>
-                  Purchase Type {" "}
+                  Purchase Type{" "}
                   <span>{profileLeadViewData?.leads?.purchase_type}</span>
                 </div>
               )}
             </div>
             <div>
               <span className={styles.currentStatusText}>Current Status</span>
-              <select
-                className={`${styles.selectBox} ${styles.customSelect}`}
-
+              <Select
                 value={profileLeadViewData?.leads?.status || status}
-                onChange={handleStatusChange}
+                onChange={(value) => handleStatusChange({ target: { value } })}
+                className={styles.antSelect}
                 disabled={profileLeadViewData?.leads?.status === "hired"}
+                dropdownMatchSelectWidth={false}
               >
-                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
-                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
-                {/* <option value="rejected">Rejected</option> */}
-              </select>
+                <Option value="pending">Pending</Option>
+                <Option value="hired">Hired</Option>
+              </Select>
             </div>
-
           </div>
-      
-<div className={styles.mobileresponseheadbox}>
-   <div className={styles.lastActivityTexts}>
+
+          <div className={styles.mobileresponseheadbox}>
+            <div className={styles.lastActivityTexts}>
               Last activity {daysAgo} {daysAgo === 1 ? "day" : "days"} ago
             </div>
             <div className={styles.dropdownMoblieBox}>
-               <div className={styles.dropdownMainBox}>
-                 {/* // <div className={styles.lastActivityText}>
+              <div className={styles.dropdownMainBox}>
+                {/* // <div className={styles.lastActivityText}>
                 //   Purchase Type {" "}
                 //   <span>{profileLeadViewData?.leads?.purchase_type}</span>
                 // </div> */}
-              {profileLeadViewData?.leads?.purchase_type && (
-                <>
-               
-              <span className={styles.currentStatusText}>Purchase Type :</span>
-    <select
-      className={`${styles.selectBox} ${styles.customSelects}`}
-      value={profileLeadViewData?.leads?.purchase_type}
-      disabled // disable to make it readonly
-    >
-      <option value={profileLeadViewData?.leads?.purchase_type}>
-        {profileLeadViewData?.leads?.purchase_type}
-      </option>
-    </select>
-              </>
-              )}
+                {profileLeadViewData?.leads?.purchase_type && (
+                  <>
+                    <span className={styles.currentStatusText}>
+                      Purchase Type :
+                    </span>
+                    <select
+                      className={`${styles.selectBox} ${styles.customSelects}`}
+                      value={profileLeadViewData?.leads?.purchase_type}
+                      disabled // disable to make it readonly
+                    >
+                      <option value={profileLeadViewData?.leads?.purchase_type}>
+                        {profileLeadViewData?.leads?.purchase_type}
+                      </option>
+                    </select>
+                  </>
+                )}
+              </div>
+              <div className={styles.currentStatusBox}>
+                <span className={styles.currentStatusText}>
+                  Current Status :
+                </span>
+                <Select
+                  value={profileLeadViewData?.leads?.status || status}
+                  onChange={(value) =>
+                    handleStatusChange({ target: { value } })
+                  }
+                  className={styles.antSelect}
+                  disabled={profileLeadViewData?.leads?.status === "hired"}
+                  dropdownMatchSelectWidth={false}
+                >
+                  <Option value="pending">Pending</Option>
+                  <Option value="hired">Hired</Option>
+                </Select>
+              </div>
             </div>
-             <div className={styles.currentStatusBox}>
-              <span className={styles.currentStatusText}>Current Status :</span>
-              <select
-                className={`${styles.selectBox} ${styles.customSelect}`}
-
-                value={profileLeadViewData?.leads?.status || status}
-                onChange={handleStatusChange}
-                disabled={profileLeadViewData?.leads?.status === "hired"}
-              >
-                <option value="pending"><span><img src={pendingImg} alt="pending" /></span> Pending</option>
-                <option value="hired"><span><img src={HiredImg} alt="pending" /></span> Hired</option>
-                {/* <option value="rejected">Rejected</option> */}
-              </select>
-            </div>
-            </div>
-</div>
+          </div>
 
           <div className={styles.containers}>
             <div className={styles.ProfileImgBox}>
@@ -412,7 +413,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
               {profileLeadViewData?.leads?.category?.name} |{" "}
               <span> {profileLeadViewData?.leads?.city}</span>
             </div>
-            <div className={styles.phoneNumberText} onClick={() => handlePhoneOpen(profileLeadViewData)}>
+            <div
+              className={styles.phoneNumberText}
+              onClick={() => handlePhoneOpen(profileLeadViewData)}
+            >
               <span>
                 <img src={PhoneImg} alt="phone" />
               </span>
@@ -424,7 +428,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 </sapn>
               )}
             </div>
-            <a className={styles.phoneNumberTexts} href={`mailto:${profileLeadViewData?.email}`} target="_blank">
+            <a
+              className={styles.phoneNumberTexts}
+              href={`mailto:${profileLeadViewData?.email}`}
+              target="_blank"
+            >
               <span>
                 <img src={MailImg} alt="mail" />
               </span>
@@ -439,7 +447,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 }}
               >
                 {" "}
-                <img src={Mailbtn} alt="mail" />  Email
+                <img src={Mailbtn} alt="mail" /> Email
               </button>
               <button
                 className={styles.buttonSms}
@@ -448,7 +456,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   window.location.href = `mailto:${user.email}`;
                 }}
               >
-                <img src={smsBtn} alt="sms" />  SMS
+                <img src={smsBtn} alt="sms" /> SMS
               </button>
               <button
                 className={styles.buttonSms}
@@ -466,7 +474,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
                 }}
               >
-                <img src={whatsappBtn} alt="whatsapp" />  WhatsApp
+                <img src={whatsappBtn} alt="whatsapp" /> WhatsApp
               </button>
             </div>
             {profileLeadViewData?.leads?.is_urgent == 1 && (
@@ -516,8 +524,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   onClick={() => setActiveTab("activity")}
                 >
                   <span
-                    className={`${styles.tabLabel} ${activeTab === "activity" ? styles.activeTab : ""
-                      }`}
+                    className={`${styles.tabLabel} ${
+                      activeTab === "activity" ? styles.activeTab : ""
+                    }`}
                   >
                     Activity
                   </span>
@@ -528,8 +537,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   onClick={() => setActiveTab("lead")}
                 >
                   <span
-                    className={`${styles.tabLabel} ${activeTab === "lead" ? styles.activeTab : ""
-                      }`}
+                    className={`${styles.tabLabel} ${
+                      activeTab === "lead" ? styles.activeTab : ""
+                    }`}
                   >
                     Lead Details
                   </span>
@@ -540,23 +550,26 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   onClick={() => setActiveTab("notes")}
                 >
                   <span
-                    className={`${styles.tabLabel} ${activeTab === "notes" ? styles.activeTab : ""
-                      }`}
+                    className={`${styles.tabLabel} ${
+                      activeTab === "notes" ? styles.activeTab : ""
+                    }`}
                   >
-                   My Notes
+                    My Notes
                   </span>
                 </button>
               </div>
-
-
 
               <div className={styles.tabContent}>
                 {activeTab === "activity" && (
                   <div className={styles.container}>
                     <div className={styles.date}>
                       {getActivies?.length > 0
-                        ? moment(getActivies[getActivies.length - 1]?.created_at).format("ddd D, MMMM")
-                        : moment(profileLeadViewData?.created_at).format("ddd D, MMMM")}
+                        ? moment(
+                            getActivies[getActivies.length - 1]?.created_at
+                          ).format("ddd D, MMMM")
+                        : moment(profileLeadViewData?.created_at).format(
+                            "ddd D, MMMM"
+                          )}
                     </div>
 
                     {getActivies?.map((item, index) => (
@@ -566,28 +579,28 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                           item?.contact_type === "Manual Bid"
                             ? bidContactIcon
                             : item?.contact_type === "email"
-                              ? EmailImage
-                              : item?.contact_type === "Whatsapp"
-                                ? AddImage
-                                : item?.contact_type === "mobile"
-                                  ? CallImage
-                                  : item?.contact_type === "Buttons"
-                                    ? PurchasedImage
-                                    : item?.contact_type === "sms" ?
-                                      SMSIcon
-                                      : item?.contact_type === "Auto Bid" ?
-                                        CallImage
-                                        : hirImg
+                            ? EmailImage
+                            : item?.contact_type === "Whatsapp"
+                            ? AddImage
+                            : item?.contact_type === "mobile"
+                            ? CallImage
+                            : item?.contact_type === "Buttons"
+                            ? PurchasedImage
+                            : item?.contact_type === "sms"
+                            ? SMSIcon
+                            : item?.contact_type === "Auto Bid"
+                            ? CallImage
+                            : hirImg
                         }
                         title={item.activity_name}
                         description={item.description}
                         time={moment(item.updated_at).format("hh:mm")}
                         isLast={index === getActivies.length - 1}
-                      // name={
-                      //   profileLeadViewData?.id === item?.from_user_id
-                      //     ? "You"
-                      //     : profileLeadViewData?.name
-                      // }
+                        // name={
+                        //   profileLeadViewData?.id === item?.from_user_id
+                        //     ? "You"
+                        //     : profileLeadViewData?.name
+                        // }
                       >
                         {item.children}
                       </TimelineItem>
@@ -614,17 +627,30 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
 
                         return Array.from(uniqueQuestionsMap.entries()).map(
                           ([question, answer], index) => (
-                            <div key={index} style={{ marginBottom: "0.5rem", }} className={styles.questionTextBox}>
-                              <div style={{display: "flex", alignItems: "start",}}>
-                              <div className={styles.bullet}>•</div>
-                              <span className={styles.questionText}
-                              // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
-                              >{" "} {question}</span>
+                            <div
+                              key={index}
+                              style={{ marginBottom: "0.5rem" }}
+                              className={styles.questionTextBox}
+                            >
+                              <div
+                                style={{ display: "flex", alignItems: "start" }}
+                              >
+                                <div className={styles.bullet}>•</div>
+                                <span
+                                  className={styles.questionText}
+                                  // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
+                                >
+                                  {" "}
+                                  {question}
+                                </span>
                               </div>
                               <hr className={styles.hrline} />
                               <p
-                                // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }} 
-                                className={styles.answerText}>{answer}</p>
+                                // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }}
+                                className={styles.answerText}
+                              >
+                                {answer}
+                              </p>
                             </div>
                           )
                         );
@@ -681,8 +707,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                   //               key={item?.id}
                   //               className={styles.notesCard}
                   //               onClick={() => {
-                  //                 setNote(item?.notes);         
-                  //                 setEditNoteId(item?.id);         
+                  //                 setNote(item?.notes);
+                  //                 setEditNoteId(item?.id);
                   //               }}
                   //             >
                   //               {item.notes}
@@ -733,23 +759,37 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                           <div className={styles.noteText}>{item.notes}</div>
                           <div className={styles.noteActions}>
                             <span>
-                                {item?.created_at
-                                  ? (() => {
-                                      const d = new Date(item.created_at);
-                                      const year = d.getFullYear();
-                                      const month = String(d.getMonth() + 1).padStart(2, "0");
-                                      const day = String(d.getDate()).padStart(2, "0");
+                              {item?.created_at
+                                ? (() => {
+                                    const d = new Date(item.created_at);
+                                    const year = d.getFullYear();
+                                    const month = String(
+                                      d.getMonth() + 1
+                                    ).padStart(2, "0");
+                                    const day = String(d.getDate()).padStart(
+                                      2,
+                                      "0"
+                                    );
 
-                                      let hours = d.getHours();
-                                      const minutes = String(d.getMinutes()).padStart(2, "0");
-                                      const seconds = String(d.getSeconds()).padStart(2, "0");
-                                      const ampm = hours >= 12 ? "PM" : "AM";
-                                      hours = hours % 12 || 12; // convert to 12-hour format
+                                    let hours = d.getHours();
+                                    const minutes = String(
+                                      d.getMinutes()
+                                    ).padStart(2, "0");
+                                    const seconds = String(
+                                      d.getSeconds()
+                                    ).padStart(2, "0");
+                                    const ampm = hours >= 12 ? "PM" : "AM";
+                                    hours = hours % 12 || 12; // convert to 12-hour format
 
-                                      return `${year}-${month}-${day} ${String(hours).padStart(2, "0")}:${minutes}:${seconds} ${ampm}`;
-                                    })()
-                                  : ""}
-                              </span>
+                                    return `${year}-${month}-${day} ${String(
+                                      hours
+                                    ).padStart(
+                                      2,
+                                      "0"
+                                    )}:${minutes}:${seconds} ${ampm}`;
+                                  })()
+                                : ""}
+                            </span>
                             |
                             <span
                               onClick={() => {
@@ -760,7 +800,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                               Edit
                             </span>
                             |
-                            <span onClick={() => handleRemove(item?.id)}>Remove</span>
+                            <span onClick={() => handleRemove(item?.id)}>
+                              Remove
+                            </span>
                           </div>
                         </div>
                       ))}
@@ -774,10 +816,16 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                         value={note}
                       />
                       <div className={styles.buttonGroup}>
-                        <button className={styles.CancelBtn} onClick={handleCancel}>
+                        <button
+                          className={styles.CancelBtn}
+                          onClick={handleCancel}
+                        >
                           Cancel
                         </button>
-                        <button className={styles.UpdateBtn} onClick={() => handleSubmit()}>
+                        <button
+                          className={styles.UpdateBtn}
+                          onClick={() => handleSubmit()}
+                        >
                           {/* {sellerNotesLoader ? (
           <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
         ) : (
@@ -788,7 +836,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                       </div>
                     </div>
                   </div>
-
                 )}
               </div>
             </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
+import { Select } from "antd";
 
 const TravelTimeModal = ({
   onClose,
@@ -8,6 +9,7 @@ const TravelTimeModal = ({
   locationData,
   setLocationData,
 }) => {
+  const { Option } = Select;
   const inputRef = useRef(null);
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
@@ -93,8 +95,6 @@ const TravelTimeModal = ({
     drawCircle(mapCenter);
   };
 
-  
-
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -155,12 +155,12 @@ const TravelTimeModal = ({
           }
         });
         let cityName =
-  place.address_components.find(component =>
-    component.types.includes("locality")
-  )?.long_name ||
-  place.address_components.find(component =>
-    component.types.includes("administrative_area_level_3")
-  )?.long_name;
+          place.address_components.find((component) =>
+            component.types.includes("locality")
+          )?.long_name ||
+          place.address_components.find((component) =>
+            component.types.includes("administrative_area_level_3")
+          )?.long_name;
 
         if (lat && lng) {
           const finalLocation = postalCode || placeName;
@@ -230,7 +230,9 @@ const TravelTimeModal = ({
         <div className={styles.infoBox}>
           <img src={iIcon} alt="" />
           <span>
-           Enter a postcode or town, how far you're willing to travel, and your mode of transport. We'll use this to match you with the right local leads.
+            Enter a postcode or town, how far you're willing to travel, and your
+            mode of transport. We'll use this to match you with the right local
+            leads.
           </span>
         </div>
 
@@ -250,32 +252,42 @@ const TravelTimeModal = ({
 
           <div className={styles.inputGroup}>
             <label>Travel time</label>
-            <select
-              name="travel_time"
+            <Select
               value={locationData?.travel_time}
-              onChange={onChange}
+              onChange={(value) =>
+                setLocationData((prev) => ({
+                  ...prev,
+                  travel_time: value,
+                }))
+              }
               className={styles.customSelect}
+              dropdownMatchSelectWidth={false}
             >
-              <option value="30 minutes">30 minutes</option>
-              <option value="1 hour">1 hour</option>
-              <option value="1.5 hours">1.5 hours</option>
-              <option value="2 hours">2 hours</option>
-            </select>
+              <Option value="30 minutes">30 minutes</Option>
+              <Option value="1 hour">1 hour</Option>
+              <Option value="1.5 hours">1.5 hours</Option>
+              <Option value="2 hours">2 hours</Option>
+            </Select>
           </div>
 
           <div className={styles.inputGroup}>
             <label>Travelling by</label>
-            <select
-              name="travel_by"
+            <Select
               value={locationData?.travel_by}
-              onChange={onChange}
+              onChange={(value) =>
+                setLocationData((prev) => ({
+                  ...prev,
+                  travel_by: value,
+                }))
+              }
               className={styles.customSelect}
+              dropdownMatchSelectWidth={false}
             >
-              <option value="Driving">Driving</option>
-              <option value="Walking">Walking</option>
-              <option value="Biking">Biking</option>
-              <option value="Public Transport">Public Transport</option>
-            </select>
+              <Option value="Driving">Driving</Option>
+              <Option value="Walking">Walking</Option>
+              <Option value="Biking">Biking</Option>
+              <Option value="Public Transport">Public Transport</Option>
+            </Select>
           </div>
         </div>
 
