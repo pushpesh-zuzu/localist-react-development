@@ -42,10 +42,15 @@ import NotFound from "./NotFound";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
-    key: region.id, // Convert id to key
-    [region.title]: region.items, // Create dynamic key with region title
+    key: region.id,
+    title: region.title,
+    items: region.items.map((item) => ({
+      name: item.name,
+      path: item.path,
+    })),
   }));
 };
+
 const CloneSubThreeCategory = ({}) => {
   const { slug } = useParams();
   const breadcrumb = BREADCRUMB_CONFIG[slug];
@@ -86,7 +91,6 @@ const CloneSubThreeCategory = ({}) => {
         title={CONTENT_CONFIG_TOP[slug]?.title}
         level={1}
         breadcrumb={BREADCRUMB_CONFIG[slug]}
-        // breadcrumb="Home & Garden / Builders / Fence & Gate Installation"
         service={true}
         panelImage={CONTENT_CONFIG_BANNER[slug]?.banner}
         para1={CONTENT_CONFIG[slug]?.para1}
@@ -94,13 +98,11 @@ const CloneSubThreeCategory = ({}) => {
         para3={CONTENT_CONFIG[slug]?.para3}
         defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
       />
-      {/* <FindAccountant title={'Fencer'} breadcrumb=' Home & Garden / Builders / Fence & Gate Installation'/> */}
       <HowItWorks
         HowItWorksData={getHowItWorksData(slug)}
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       <PopularCity sliderdata={POPULAR_CITIES} title="Popular Cities" />
-      {/* <Slider sliderdata={popularCity} title={"Popular Cities"} /> */}
 
       <RegionsComponent
         regionsData={transformedData}
@@ -111,11 +113,14 @@ const CloneSubThreeCategory = ({}) => {
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       {/* <LocalAccountant title="Fencer" /> */}
-      <TaxReturn
+
+
+      {/* later we add */}
+      {/* <TaxReturn
         TaxData={TaxData}
         panelImage={CONTENT_CONFIG_BANNER[slug]?.reltatedImage}
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
-      />
+      /> */}
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
       <AveragePrice
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
@@ -130,11 +135,11 @@ const CloneSubThreeCategory = ({}) => {
       <Reviews RELATED_REVIEW={RELATED_REVIEW} />
       {/* no need to change only data change*/}
 
-      <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} />
-      {/* no need to change only data change*/}
+      {/* <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} /> */}
+      {/* Later we need to uncomment or use again*/}
 
-      <Slider sliderdata={RELATED_PRICE} title={"Related Price Guides"} />
-      {/* no need to change only data change*/}
+      {/* <Slider sliderdata={RELATED_PRICE} title={"Related Price Guides"} /> */}
+      {/* Later we need to uncomment or use again*/}
 
       <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
       {/* no need to change  */}

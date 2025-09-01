@@ -888,35 +888,60 @@ const regionsData = {
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+      items: [
+        { name: "Cheshire", path: "fence-installers/cheshire" },
+        { name: "Greater Manchester", path: "" },
+        { name: "Lancashire", path: "" },
+        { name: "Merseyside", path: "" },
+      ],
     },
   ],
   "driveway-installers": [
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+      items: [
+        { name: "Cheshire", path: "" },
+        { name: "Greater Manchester", path: "" },
+        { name: "Lancashire", path: "" },
+        { name: "Merseyside", path: "" },
+      ],
     },
   ],
   "patio-services": [
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+     items: [
+        { name: "Cheshire", path: "" },
+        { name: "Greater Manchester", path: "" },
+        { name: "Lancashire", path: "" },
+        { name: "Merseyside", path: "" },
+      ],
     },
   ],
   landscaping: [
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+       items: [
+        { name: "Cheshire", path: "" },
+        { name: "Greater Manchester", path: "" },
+        { name: "Lancashire", path: "" },
+        { name: "Merseyside", path: "" },
+      ],
     },
   ],
   "artificial-grass-installation": [
     {
       id: 3,
       title: "North West England",
-      items: ["Cheshire", "Greater Manchester", "Lancashire", "Merseyside"],
+       items: [
+        { name: "Cheshire", path: "" },
+        { name: "Greater Manchester", path: "" },
+        { name: "Lancashire", path: "" },
+        { name: "Merseyside", path: "" },
+      ],
     },
   ],
 };

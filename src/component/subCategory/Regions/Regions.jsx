@@ -21,8 +21,8 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
         {heading ? "" : <img src={arrowDownIcon} width={44} />}
       </h2>
       {regionsData?.map((category, index) => {
-        const categoryName = Object?.keys(category)[1];
-        const services = category[categoryName];
+        const categoryName = category.title;
+        const services = category.items;
         const isNorthWestEngland = categoryName === "North West England";
 
         return (
@@ -59,7 +59,14 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
                 <div className={styles.servicesContainer}>
                   {services?.map((service, idx) => (
                     <span key={idx} className={styles.serviceItem}>
-                      <img src={mapIcon} width={24} /> {service}
+                      <img src={mapIcon} width={24} />
+                      {service.path ? (
+                        <a style={{ color: "#000" }} href={service.path}>
+                          {service.name}
+                        </a>
+                      ) : (
+                        service?.name
+                      )}
                     </span>
                   ))}
                 </div>
