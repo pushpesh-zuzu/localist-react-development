@@ -244,7 +244,7 @@ const DashboardCards = ({ data }) => {
               </span>{" "}
               contact@localists.com
             </p>
-            <p>(open 24 hours a day, 7 days a week)</p>
+            {/* <p>(open 24 hours a day, 7 days a week)</p> */}
           </div>
         </div>
       </div>

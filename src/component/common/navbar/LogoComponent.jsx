@@ -438,13 +438,13 @@ const redirectPath = getRedirectPath();
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <>
         <Popover
-          onMouseEnter={() => setShowbMenu(true)}
+          // onMouseEnter={() => setShowbMenu(true)} later uncomment when you want to show menu
           placement={placement}
           // open={isMobile ? showMenu : null}
-          open={showMenu}
-          content={content}
+          // open={showMenu} later uncomment when you want to show menu
+          // content={content}  later uncomment when you want to show menu
           arrow={false}
-          trigger="hover"
+          // trigger="hover" later uncomment when you want to show menu
           className="popover_wrap"
           onClick={() => setShowbMenu(true)}
           getPopupContainer={(trigger) => trigger.parentNode}

@@ -6,7 +6,8 @@ const CustomerSuccessStories = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        Customer <span>success stories</span>
+        What successful professionals  
+ <span> on localists have to say</span>
       </h2>
       <p className={styles.subHeading}>
         See what other small businesses have to say about localists

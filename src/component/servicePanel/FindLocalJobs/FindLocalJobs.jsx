@@ -117,10 +117,9 @@ const FindLocalJobs = () => {
     <div className={styles.container}>
       {/* Left Section */}
       <div className={styles.leftSection}>
-        <h1>Find Local Jobs For Your Business Now</h1>
+        <h1>Connect with Clients Who Need You Now </h1>
         <p>
-          1000’s of local and remote clients are already waiting for your
-          services
+          Get matched with 1000s of local customers who need your services
         </p>
         <div className={styles.searchInputContainer}>
           <input
