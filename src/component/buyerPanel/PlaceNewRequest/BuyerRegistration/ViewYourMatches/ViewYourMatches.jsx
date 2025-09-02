@@ -22,9 +22,9 @@ const ViewYourMatches = ({
 console.log(createRequestToken,requestDataList?.phone,"createRequestToken")
 useEffect(() => {
   if (requestDataList?.phone) {
-    setPhoneNumber(requestDataList?.phone);
+    setPhoneNumber(requestDataList?.phone.replace(/^\+44/, ""));
   } else if (userToken?.phone) {
-    setPhoneNumber(userToken?.phone);
+    setPhoneNumber(userToken?.phone.replace(/^\+44/, ""));
   }
 }, [requestDataList?.phone, userToken?.phone])
   const handleInputChange = (e) => {
@@ -33,6 +33,7 @@ useEffect(() => {
     setError(false);
   };
   const handleSubmit = () => {
+    
     if (phoneNumber.length !== 10) {
       setError(true);
       return;
@@ -94,7 +95,7 @@ useEffect(() => {
             placeholder="Phone Number"
             className={styles.input}
             maxLength={10}
-            value={phoneNumber}
+            value={phoneNumber.replace(/^\+44/, "")} 
             onChange={handleInputChange}
             style={{ borderColor: error ? "red" : "" }}
             // disabled={!!userToken?.phone}
