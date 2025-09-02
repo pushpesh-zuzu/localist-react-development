@@ -17,7 +17,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "h3") {
               return (
-                <h3 key={index} className={styles.findAnAccountant_heading}>
+                <h3 key={index} className={styles.findAnAccountant_h3}>
                   {block.text}
                 </h3>
               );

@@ -28,7 +28,12 @@
 
 .findAnAccountant_heading {
   font-size: 35px;
-  font-weight: 700;
+  font-weight: 500;
+  margin-bottom: 29px;
+}
+.findAnAccountant_h3 {
+  font-size: 30px;
+  font-weight: 500;
   margin-bottom: 29px;
 }
 
@@ -116,6 +121,11 @@
     font-size: 30px;
     margin-bottom: 20px;
   }
+  .findAnAccountant_h3{
+        font-size: 25px;
+    margin-bottom: 20px;
+
+  }
 
   .findAnAccountant_title {
     font-size: 22px;
@@ -178,7 +188,12 @@
     margin-bottom: 16px;
     line-height: 42px;
   }
-
+  
+ .findAnAccountant_h3 {
+    font-size: 25px;
+    margin-bottom: 16px;
+    line-height: 42px;
+  }
   .findAnAccountant_title {
     font-size: 20px;
   }
