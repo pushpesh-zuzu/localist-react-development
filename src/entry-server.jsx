@@ -4,14 +4,14 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { createStore } from "./store/index.js";
 
-export function render(url) {
+export function render(url,hostname) {
   const helmetContext = {};
   const store = createStore(); // fresh store per request
 
   const appHtml = renderToString(
     <Provider store={store}>
       <HelmetProvider context={helmetContext}>
-        <App initialUrl={url} />
+        <App initialUrl={url} hostname={hostname} />
       </HelmetProvider>
     </Provider>
   );

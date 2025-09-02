@@ -203,20 +203,20 @@ useEffect(() => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                {isMobile && (
+                {/* {isMobile && (
                   <div
                     className={styles.crossBtn}
                     onClick={() => handleClose()}
                   >
                     ×
                   </div>
-                )}
+                )} */}
 
                 <div className={styles.popover_header}>
                   <span>Services</span>
                   {/* <Link to="#">See All</Link> */}
                 </div>
-
+{/* 
                 {megaMenu?.map((item, index) => (
                   <div
                     key={index}
@@ -261,145 +261,147 @@ useEffect(() => {
                       {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
-                )}
+                )} */}
               </motion.div>
             ) : showSubMenu && !showThirdLevel ? (
-              <motion.div
-                key="subMenu"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div
-                  className={styles.popover_back_explore}
-                  onClick={() => setShowSubMenu(false)}
-                >
-                  <img src={arrowLeft} width={24} alt="back" />
-                  Back to Explore
-                </div>
-                <hr />
+              // <motion.div
+              //   key="subMenu"
+              //   initial={{ opacity: 0, x: 20 }}
+              //   animate={{ opacity: 1, x: 0 }}
+              //   exit={{ opacity: 0, x: 20 }}
+              //   transition={{ duration: 0.2 }}
+              // >
+              //   <div
+              //     className={styles.popover_back_explore}
+              //     onClick={() => setShowSubMenu(false)}
+              //   >
+              //     <img src={arrowLeft} width={24} alt="back" />
+              //     Back to Explore
+              //   </div>
+              //   <hr />
 
-                <div className={styles.popover_header}>
-                  <Link
-                    onClick={() => handleClose()}
-                    className={styles.clickableLink}
-                    to={`/${currentLang}/${currentCountry}/${filterRoute}`}
-                  >
-                    <span>{filterItems}</span>
-                  </Link>
-                  {/* <Link to="#">See All</Link> */}
-                </div>
-                {megaMenu
-                  ?.filter((item) => item?.name == filterItems)
-                  .map((item, index) => (
-                    <div key={index}>
-                      <div
-                        className={styles.popover_content}
-                        onMouseEnter={() => setMouseHover(index)}
-                        onMouseLeave={() => setMouseHover("")}
-                      >
-                        {/* <span className={styles.text_wrap}>
-                          {item.icon && (
-                            <img
-                              src={
-                                item?.iconhover && mouseHover === index
-                                  ? item?.iconhover
-                                  : item.icon
-                              }
-                              width={18}
-                              height={18}
-                              alt="icon"
-                            />
-                          )}
-                        </span> */}
-                      </div>
+              //   <div className={styles.popover_header}>
+              //     <Link
+              //       onClick={() => handleClose()}
+              //       className={styles.clickableLink}
+              //       to={`/${currentLang}/${currentCountry}/${filterRoute}`}
+              //     >
+              //       <span>{filterItems}</span>
+              //     </Link>
+              //     {/* <Link to="#">See All</Link> */}
+              //   </div>
+              //   {megaMenu
+              //     ?.filter((item) => item?.name == filterItems)
+              //     .map((item, index) => (
+              //       <div key={index}>
+              //         <div
+              //           className={styles.popover_content}
+              //           onMouseEnter={() => setMouseHover(index)}
+              //           onMouseLeave={() => setMouseHover("")}
+              //         >
+              //           {/* <span className={styles.text_wrap}>
+              //             {item.icon && (
+              //               <img
+              //                 src={
+              //                   item?.iconhover && mouseHover === index
+              //                     ? item?.iconhover
+              //                     : item.icon
+              //                 }
+              //                 width={18}
+              //                 height={18}
+              //                 alt="icon"
+              //               />
+              //             )}
+              //           </span> */}
+              //         </div>
 
-                      {item.subcategory?.map((sub, subIndex) => {
-                        const slug = sub.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-");
-                        return (
-                          <div
-                            key={subIndex}
-                            className={styles.popover_content}
-                            onMouseEnter={() => setMouseHover(subIndex)}
-                            onMouseLeave={() => setMouseHover("")}
-                          >
-                            <span className={styles.text_wrap}>
-                              <Link
-                                onClick={() => {
-                                  handleClose();
-                                }}
-                                to={`/${currentLang}/${currentCountry}/${sub.path}`}
-                              >
-                                {sub.name}
-                              </Link>
-                            </span>
-                            <img
-                              onClick={() => {
-                                setSelectedSubcategory(sub.name);
-                                setShowThirdLevel(true);
-                                setSlectedThirdLevelRoute(sub.path);
-                              }}
-                              src={arrowIcon}
-                              width={8}
-                              alt="arrow"
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ))}
-              </motion.div>
+              //         {item.subcategory?.map((sub, subIndex) => {
+              //           const slug = sub.name
+              //             .toLowerCase()
+              //             .replace(/\s+/g, "-");
+              //           return (
+              //             <div
+              //               key={subIndex}
+              //               className={styles.popover_content}
+              //               onMouseEnter={() => setMouseHover(subIndex)}
+              //               onMouseLeave={() => setMouseHover("")}
+              //             >
+              //               <span className={styles.text_wrap}>
+              //                 <Link
+              //                   onClick={() => {
+              //                     handleClose();
+              //                   }}
+              //                   to={`/${currentLang}/${currentCountry}/${sub.path}`}
+              //                 >
+              //                   {sub.name}
+              //                 </Link>
+              //               </span>
+              //               <img
+              //                 onClick={() => {
+              //                   setSelectedSubcategory(sub.name);
+              //                   setShowThirdLevel(true);
+              //                   setSlectedThirdLevelRoute(sub.path);
+              //                 }}
+              //                 src={arrowIcon}
+              //                 width={8}
+              //                 alt="arrow"
+              //               />
+              //             </div>
+              //           );
+              //         })}
+              //       </div>
+              //     ))}
+              // </motion.div>
+              ''
             ) : (
-              <motion.div
-                key="thirdLevel"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div
-                  className={styles.popover_back_explore}
-                  onClick={() => setShowThirdLevel(false)}
-                >
-                  <img src={arrowLeft} width={24} alt="back" />
-                  {filterItems}
-                </div>
-                <hr />
+              // <motion.div
+              //   key="thirdLevel"
+              //   initial={{ opacity: 0, x: 20 }}
+              //   animate={{ opacity: 1, x: 0 }}
+              //   exit={{ opacity: 0, x: 20 }}
+              //   transition={{ duration: 0.2 }}
+              // >
+              //   <div
+              //     className={styles.popover_back_explore}
+              //     onClick={() => setShowThirdLevel(false)}
+              //   >
+              //     <img src={arrowLeft} width={24} alt="back" />
+              //     {filterItems}
+              //   </div>
+              //   <hr />
 
-                <div className={styles.popover_header}>
-                  <Link
-                    className={styles.clickableLink}
-                    to={`/${currentLang}/${currentCountry}/${selectedThirdLevelRoute}`}
-                  >
-                    <span>{selectedSubcategory}</span>
-                  </Link>
-                </div>
+              //   <div className={styles.popover_header}>
+              //     <Link
+              //       className={styles.clickableLink}
+              //       to={`/${currentLang}/${currentCountry}/${selectedThirdLevelRoute}`}
+              //     >
+              //       <span>{selectedSubcategory}</span>
+              //     </Link>
+              //   </div>
 
-                {megaMenu
-                  .find((item) => item.name === filterItems)
-                  ?.subcategory?.find((sub) => sub.name === selectedSubcategory)
-                  ?.children?.map((child, index) => (
-                    <div key={index} className={styles.popover_content}>
-                      <span className={styles.text_wrap}>
-                        <Link
-                          onClick={() => {
-                            handleClose();
-                          }}
-                          to={
-                            child === "Fence Installers in Warrington"
-                              ? `/${currentLang}/${currentCountry}/fence-installers/cheshire/warrington`
-                              : "#"
-                          }
-                        >
-                          {child}
-                        </Link>
-                      </span>
-                    </div>
-                  ))}
-              </motion.div>
+              //   {megaMenu
+              //     .find((item) => item.name === filterItems)
+              //     ?.subcategory?.find((sub) => sub.name === selectedSubcategory)
+              //     ?.children?.map((child, index) => (
+              //       <div key={index} className={styles.popover_content}>
+              //         <span className={styles.text_wrap}>
+              //           <Link
+              //             onClick={() => {
+              //               handleClose();
+              //             }}
+              //             to={
+              //               child === "Fence Installers in Warrington"
+              //                 ? `/${currentLang}/${currentCountry}/fence-installers/cheshire/warrington`
+              //                 : "#"
+              //             }
+              //           >
+              //             {child}
+              //           </Link>
+              //         </span>
+              //       </div>
+              //     ))}
+              // </motion.div>
+              ''
             )}
           </AnimatePresence>
         </div>
@@ -453,7 +455,7 @@ const redirectPath = getRedirectPath();
             <img src={downArrow} alt="down-arrow" />
           </div>
         </Popover>
-        <div style={{ display: "none" }}>
+        {/* <div style={{ display: "none" }}>
           {megaMenu
             .filter((item) => item.name === "House & Home")
             .map((item, i) => (
@@ -487,7 +489,7 @@ const redirectPath = getRedirectPath();
                 ))}
               </div>
             ))}
-        </div>
+        </div> */}
         </>
       )}
     </div>

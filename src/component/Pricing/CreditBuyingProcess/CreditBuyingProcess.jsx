@@ -5,32 +5,56 @@ import CompletePurchaseIcon from "../../../assets/Images/Pricing/CompletePurchas
 import RedeemCreditsIcon from "../../../assets/Images/Pricing/RedeemCreditsIcon.svg";
 
 const CreditBuyingProcess = () => {
+  // const HowItWorksData = [
+  //   {
+  //     id: 1,
+  //     title: "ChooseRightCreditIcon",
+  //     image: ChooseRightCreditIcon,
+  //     description: "Choose the right credit package based on your needs.",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "CompletePurchaseIcon",
+  //     image: CompletePurchaseIcon,
+  //     description:
+  //       "Complete the purchase securely using your preferred payment method.",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "RedeemCreditsIcon",
+  //     image: RedeemCreditsIcon,
+  //     description:
+  //       "Redeem credits to access products, services, or subscriptions easily.",
+  //   },
+  // ];/
   const HowItWorksData = [
     {
       id: 1,
       title: "ChooseRightCreditIcon",
       image: ChooseRightCreditIcon,
-      description: "Choose the right credit package based on your needs.",
+      description: " Pick a credit pack that fits your business needs. Basic or premium, there’s an option for you.",
     },
     {
       id: 2,
       title: "CompletePurchaseIcon",
       image: CompletePurchaseIcon,
       description:
-        "Complete the purchase securely using your preferred payment method.",
+        "Buy credits quickly and safely using your preferred payment method.",
     },
     {
       id: 3,
       title: "RedeemCreditsIcon",
       image: RedeemCreditsIcon,
       description:
-        "Redeem credits to access products, services, or subscriptions easily.",
+        "Spend credits to contact customers you’re interested in. Once unlocked, you’ll get their phone number and email so you can reach out directly.",
     },
   ];
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        Credit <span className={styles.highlight}>buying process</span>
+        {/* Credit <span className={styles.highlight}>buying process</span> */}
+         How to Access <span className={styles.highlight}> Your Leads</span>
+
       </h2>
       <div className={styles.stepsContainer}>
         {HowItWorksData.map((item, index) => (

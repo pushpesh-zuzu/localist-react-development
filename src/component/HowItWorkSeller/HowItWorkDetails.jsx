@@ -10,42 +10,40 @@ import plumber from "../../assets/Images/HowItWorks/plumber.jpg";
 const data = [
   {
     id: 1,
-    title: "Customers Come to Localists with Their Needs",
+    title: "Customers Come To Us with Their Need",
     paragraphs: [
-      "We help people find the right professional for almost any service — whether for individuals, households, or small businesses.",
-      "When customers post a request, we collect detailed information about exactly what they’re looking for, so you get high-quality leads that match your skills.",
-      "Savvy customers use Localists instead of spending hours searching online. They know we’ll connect them with relevant, verified, and professional businesses that can deliver results.",
+      "At Localists, we make it easy for local professionals and businesses like you to win more work. Every day, we connect thousands of service providers from builders and gardeners to accountants and business consultants, with high-quality clients who are ready to hire.At Localists, we make it easy for local professionals and businesses like you to win more work. Every day, we connect thousands of service providers from builders and gardeners to accountants and business consultants, with high-quality clients who are ready to hire.",
+      "When customers post a request, telling us exactly what they’re after and where they need it done. We match them with the right service provider in their area.",
+      "We don’t just take a vague request; we ask the right questions so you get proper, detailed leads that actually fit your skills.",
     ],
     images: [howitworkyouprofessionseller],
   },
   {
     id: 2,
-    title: "Customers Find You on Localists",
+    title: "We Match Them With You",
     paragraphs: [
-      `Once a customer’s request matches your services, they’ll see your profile and can contact you directly.
-       We also send you all relevant leads so you never miss an opportunity.`,
-      `You’ll pay a small fee for each introduction, and in return, you’ll receive the customer’s phone number and email so you can reach out right away.
-`,
+      `When a request matches your services, customers can see your profile and reach out directly. You’ll also get the lead straight to your inbox, so you never miss a chance.`,
+      `You only pay a small fee for each introduction, and in return, you’ll get the customer contact details (phone number and email), so you can make contact or provide a quote right away.`,
     ],
     images: [howitworkdigitalmanseller],
   },
   {
     id: 3,
-    title: "Grow Your Business – Fast",
+    title: "You Win the Work and Grow Your Business",
     paragraphs: [
-      "We take the stress out of marketing your services.",
-      "With Localists, you’ll receive hot, real-time leads as soon as they’re posted. Join a professional today and get instant access to opportunities in your area.",
+      "We make it simple for you to win new work without the stress of marketing. We bring the opportunities to you - fresh, relevant, and local. The quicker you respond, the more work you’ll win. And we’ll be right here with support if you ever need it.",
     ],
     images: [howitworkwommenseller],
   },
   {
     id: 4,
-    title: " Why Join Localists?",
-    paragraphs: ["When you join Localists as a professional, you’ll get:"],
+    title: " Why Professionals Love Localists?",
+    paragraphs: ["When you join Localists as a seller you’ll get:"],
     list: [
-      "A high-visibility online profile to boost your presence and showcase your work.",
-      "Instant access to quality leads that match your services.",
-      "Support from our award-winning customer success team via email and phone, guiding you every step of the way.",
+      "High visibility profile that shows off your work and builds your reputation.",
+      "Steady flow of quality leads that aren’t just clicks, but genuine customers looking to book your services.",
+      "Full control over the jobs you accept",
+      "Friendly support from our customer success team whenever you need it."
     ],
     images: [plumber,smileyman],
   },

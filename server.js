@@ -52,6 +52,7 @@ async function createServer() {
   app.use(async (req, res, next) => {
     try {
       const url = req.originalUrl;
+      const hostname = req.hostname; // Extract hostname from request
 
       let tpl = template;
       if (!isProd) {
@@ -63,7 +64,8 @@ async function createServer() {
         render = devRender;
       }
 
-      const rendered = await render(url);
+      // Pass hostname to the render function
+      const rendered = await render(url, hostname);
       const appHtml = typeof rendered === "string" ? rendered : rendered.html || "";
       const headContent = (rendered && rendered.head) || "";
 

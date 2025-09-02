@@ -233,17 +233,17 @@ const DashboardCards = ({ data }) => {
               </a>
               for tips & advice.
             </p>
-            <p>
+            {/* <p>
               <span className={styles.icon}>
                 <img src={emailIcon1} />
               </span>{" "}
               0000000000
-            </p>
+            </p> */}
             <p>
               <span className={styles.icon}>
                 <img src={phone} />
               </span>{" "}
-              india@localist.com
+              contact@localists.com
             </p>
             <p>(open 24 hours a day, 7 days a week)</p>
           </div>
