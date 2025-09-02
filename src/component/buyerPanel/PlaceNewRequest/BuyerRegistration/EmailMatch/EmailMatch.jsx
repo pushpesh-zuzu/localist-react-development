@@ -197,12 +197,30 @@ const EmailMatch = ({
           )}
 
           <label className={styles.label}>Phone Numbers</label>
-          <div className={styles.phoneWrapper}>
+          {/* <div className={styles.phoneWrapper}>
             <span className={styles.prefix}>+44</span>
             <input
               type="tel"
               placeholder="Phone Number"
               className={`${styles.input} ${
+                errors.phone ? styles.inputError : ""
+              }`}
+              value={phone}
+              maxLength={10}
+              onChange={handlePhoneChange}
+            />
+            {errors.phone && (
+              <span className={styles.errorMessage}>
+                Please enter a valid 10-digit phone number.
+              </span>
+            )}
+          </div> */}
+
+          <div className={styles.phoneWrapper}>
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className={`${styles.phoneInput} ${
                 errors.phone ? styles.inputError : ""
               }`}
               value={phone}
