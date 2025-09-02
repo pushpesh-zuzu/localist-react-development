@@ -3,13 +3,12 @@ import questionBlueIcon from "../../assets/Icons/questionBlueIcon.svg";
 import phone from "../../assets/Icons/phoneIcon.svg";
 import emailIcon1 from "../../assets/Icons/emailIcon1.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useUserGeo } from "../../utils/geo";
 //redeploy work
 const DashboardCards = ({ data }) => {
   const navigate = useNavigate();
-  console.log(data, "data");
-  const { lang, country } = useParams();
-  const currentLang = lang || "en";
-  const currentCountry = country || "gb";
+  const { country, lang } = useUserGeo();
+  
   return (
     <div className={styles["dashboard-container"]}>
       {/* First Row */}
@@ -212,7 +211,7 @@ const DashboardCards = ({ data }) => {
             <p>
               Visit
               <a
-                href={`/${currentLang}/${currentCountry}/contact-us`}
+                href={`/${lang}/${country}/contact-us`}
                 style={{ color: "black" }}
                 className={styles["view-link"]}
                 onClick={(e) => {
@@ -225,7 +224,7 @@ const DashboardCards = ({ data }) => {
                     !e.altKey
                   ) {
                     e.preventDefault();
-                    navigate(`/${currentLang}/${currentCountry}/contact-us`);
+                    navigate(`/${lang}/${country}/contact-us`);
                   }
                 }}
               >
