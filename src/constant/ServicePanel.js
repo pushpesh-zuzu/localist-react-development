@@ -123,7 +123,7 @@ const CustomerSuccessStoriesData = [
     image: StefanWesley,
     description:
       "Localists brought us our biggest client. Now, most of our new work comes through the platform, it’s been such a game changer for my business.",
-    name: "Sarah Patel ",
+    name: "Sarah Patel, ",
     company: "Web Designer",
   },
   {
@@ -139,7 +139,7 @@ const CustomerSuccessStoriesData = [
     image: LeanneOsbourne,
     description:
       "It’s hands-down the most effective way I’ve found to grow. Consistent leads, reliable clients, and real results.",
-    name: "Sheila C",
+    name: "Sheila C,",
     company: "Personal Trainer",
   },
 ];
