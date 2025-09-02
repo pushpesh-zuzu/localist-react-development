@@ -490,12 +490,12 @@ const OTHER_SERVICES_DATA = {
       availableOnline: true,
       // path: "driveway-installers",
     },
-    // {
-    //   id: 2,
-    //   image: Patio,
-    //   description: "Patio Services",
-    //   path: "patio-services",
-    // },
+    {
+      id: 2,
+      image: Patio,
+      description: "Patio Services",
+      // path: "patio-services",
+    },
     {
       id: 3,
       image: Landscaping,
