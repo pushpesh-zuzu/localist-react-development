@@ -82,8 +82,6 @@ const PlaceNewRequest = () => {
     console.log("🔎 SelectedService state:", selectedService);
   }, [selectedService]);
 
-  console.log("selectService", selectedService);
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -106,7 +104,7 @@ const PlaceNewRequest = () => {
                 <div className={styles.cardHeader}>
                   <h3 className={styles.cardTitle}>{req.category?.name}</h3>
                   <span className={styles.timeAgo}>
-                   {moment(req.created_at).tz("Europe/London").fromNow()}
+                   {moment.tz(req.created_at, "Europe/London").fromNow()}
                   </span>
                 </div>
                 <div

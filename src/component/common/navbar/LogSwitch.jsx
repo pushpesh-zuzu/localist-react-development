@@ -873,7 +873,7 @@ const LogSwitch = () => {
               >
                 Login
               </Link>
-              {/* {!selectedServiceId && !serviceTitle && (
+              {!selectedServiceId && !serviceTitle && (
                 <Link
                   to={`/${currentLang}/${currentCountry}/sellers/create`}
                   className={styles.professionalBtn}
@@ -885,7 +885,7 @@ const LogSwitch = () => {
                 >
                   Join as a Professional
                 </Link>
-              )} */}
+              )}
             </div>
           </>
         )}
