@@ -32,15 +32,17 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
   const formatTime = (date) => {
-    return date.toLocaleString("en-US", {
+    return date.toLocaleString("en-GB", {
       weekday: "long",
       day: "numeric",
       month: "short",
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
+      timeZone: "Europe/London", // ✅ UK timezone
     });
   };
+  console.log(currentTime, "currentTimecurrentTimecurrentTime");
   return (
     <div>
       <div className={styles["dashboard-wrapper"]}>
@@ -174,7 +176,10 @@ const Dashboard = () => {
                 <a className={styles["view-leads-blue"]} href="#">
                   View 76 Live Leads Now - Start winning jobs now*
                 </a>
-                <Link to='/sellers/leads' className={styles["view-leads-black"]}>
+                <Link
+                  to="/sellers/leads"
+                  className={styles["view-leads-black"]}
+                >
                   View live leads
                 </Link>
 
@@ -214,7 +219,10 @@ const Dashboard = () => {
                   <p>
                     We’re here to help you get the most out of Localists.com.
                     Explore plenty of tips, guides, and resources in our{" "}
-                    <a href={`/${lang}/${country}/contact-us`} className={styles.textColor}>
+                    <a
+                      href={`/${lang}/${country}/contact-us`}
+                      className={styles.textColor}
+                    >
                       Help Center
                     </a>{" "}
                     .
