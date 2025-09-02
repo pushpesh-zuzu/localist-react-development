@@ -32,9 +32,10 @@ const Frequently = ({ FrequentlyQuestion }) => {
             >
               {FrequentlyQuestion?.map((item) => (
                 <Panel header={<h4>{item?.title}</h4>} key={item?.key}>
-                  <p className={styles.frequently_collapse_description}>
-                    {item?.description}
-                  </p>
+                  <div
+                    className={styles.frequently_collapse_description}
+                    dangerouslySetInnerHTML={{ __html: item?.description }}
+                  />
                 </Panel>
               ))}
             </Collapse>

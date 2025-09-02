@@ -103,9 +103,9 @@ function App({ initialUrl,hostname }) {
 const isDevEnvironment = typeof window !== 'undefined' 
     ? window.location.hostname === 'dev.localists.com'
     : hostname === 'dev.localists.com';
-                          console.log(isDevEnvironment,'isDevEnvironment')
-                          console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
-                          console.log(hostname,'hostname')
+                          // console.log(isDevEnvironment,'isDevEnvironment')
+                          // console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
+                          // console.log(hostname,'hostname')
   return (
     <> 
       {isDevEnvironment && (

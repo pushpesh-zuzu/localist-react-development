@@ -5,7 +5,7 @@ const HowItWorks = ({header,subHeader,howItWorksData}) => {
       <div className={styles.container}>
         <h2 className={styles.heading}>
         How  
-        <span className={styles.highlight}> Localists Work</span>
+        <span className={styles.highlight}> Localists Works</span>
         </h2>
         <div className={styles.stepsContainer}>
           {howItWorksData.map((item, index) => (

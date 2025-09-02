@@ -32,13 +32,12 @@ import {
   REVIEWS_DATA,
   TAXRETURNDATA,
   POPULAR_CITIES,
-} from "../constant/subCategory";
-import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
-import financeBg from "../assets/Images/financeImg.svg";
+} from "../component/level3/level3Data";
 import { getDataByKey } from "../utils/databyKey";
 import { useParams } from "react-router-dom";
-import ServiceBannerWithBreadcrumb from "../component/category/ServicesHeroSection/ServiceBannerWithBreadcrumb";
 import NotFound from "./NotFound";
+import SearchAndFindAnAccountant from "../component/level3/SearchAndFindAnAccountant";
+import FindServiceLevel3 from "../component/level3/FindServiceLevel3";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -51,7 +50,7 @@ const transformFenceInstallersData = (rawData, id) => {
   }));
 };
 
-const CloneSubThreeCategory = ({}) => {
+const LevelThreePage = ({}) => {
   const { slug } = useParams();
   const breadcrumb = BREADCRUMB_CONFIG[slug];
   const lastItem = breadcrumb?.[breadcrumb.length - 1]; // last element le lo safely
@@ -74,7 +73,7 @@ const CloneSubThreeCategory = ({}) => {
 
   return (
     <>
-        <Helmet>
+      <Helmet>
         <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
           name={CONTENT_CONFIG_META[slug]?.name}
@@ -86,17 +85,28 @@ const CloneSubThreeCategory = ({}) => {
           as="image"
         />
       </Helmet>
-      <ServiceBannerWithBreadcrumb
+      {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}
         level={1}
         breadcrumb={BREADCRUMB_CONFIG[slug]}
-        service={true}
+        isNeedS={false}
         panelImage={CONTENT_CONFIG_BANNER[slug]?.banner}
         para1={CONTENT_CONFIG[slug]?.para1}
         para2={CONTENT_CONFIG[slug]?.para2}
         para3={CONTENT_CONFIG[slug]?.para3}
         defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
+      /> */}
+      <SearchAndFindAnAccountant
+        title={CONTENT_CONFIG_TOP[slug]?.title}
+        findingHeading={CONTENT_CONFIG_TOP[slug]?.findingHeading}
+        breadcrumb={BREADCRUMB_CONFIG[slug]}
+        bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
+        para1={CONTENT_CONFIG[slug]?.para1}
+        para2={CONTENT_CONFIG[slug]?.para2}
+        para3={CONTENT_CONFIG[slug]?.para3}
+        defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
+        isNeedS={false}
       />
       <HowItWorks
         HowItWorksData={getHowItWorksData(slug)}
@@ -108,12 +118,11 @@ const CloneSubThreeCategory = ({}) => {
         regionsData={transformedData}
         category={slug} // Optional: if you need to know the category
       />
-      <FindAnAccountant
+      <FindServiceLevel3
         contentBlocks={contentBlocks}
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       />
       {/* <LocalAccountant title="Fencer" /> */}
-
 
       {/* later we add */}
       {/* <TaxReturn
@@ -147,4 +156,4 @@ const CloneSubThreeCategory = ({}) => {
   );
 };
 
-export default CloneSubThreeCategory;
+export default LevelThreePage;

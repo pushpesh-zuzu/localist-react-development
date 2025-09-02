@@ -10,7 +10,7 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        The average price of {title} is <span>{avg_price}</span>
+        Average cost of hiring {title} is <span>{avg_price}</span> specialists by region
         <span></span>
       </h2>
 

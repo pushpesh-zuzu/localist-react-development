@@ -43,7 +43,7 @@ const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
     {
       loop: true,
       infinite: true,
-      slides: { perView: 3, spacing: 15 },
+      slides: { perView: 2.7, spacing: 20 },
       breakpoints: {
         "(max-width: 1024px)": {
           slides: { perView: 2, spacing: 10 },
