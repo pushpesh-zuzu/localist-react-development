@@ -1061,6 +1061,7 @@ export const addViewProfileList = (profileId) => {
         return response.data;
       }
     } catch (error) {
+      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setExpandRadiusLoader(false));
     }

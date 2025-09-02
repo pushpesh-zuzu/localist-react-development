@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import {
   registerUserData,
   setbuyerRegisterFormData,
-  checkEmailIdApi 
+  checkEmailIdApi,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../../utils";
 import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
@@ -17,7 +17,7 @@ const EmailMatch = ({
   previousStep,
   setEmails,
   setShowConfirmModal,
-  resetTrigger
+  resetTrigger,
 }) => {
   const dispatch = useDispatch();
   // const { buyerRequest, registerLoader } = useSelector((state) => state.buyer);
@@ -29,41 +29,35 @@ const EmailMatch = ({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
-
   const [errors, setErrors] = useState({
     email: false,
     name: false,
     phone: false,
   });
 
-const handleEmailChange = (e) => {
-  setEmail(e.target.value); // keep it simple
-  setErrors((prev) => ({ ...prev, email: false }));
-};
-
-const handleEmailBlur = async () => {
-  if (!email) return;
-
-  try {
-    // no `.unwrap()` since it's not createAsyncThunk
-    const res = await dispatch(checkEmailIdApi({ email }));
-
-    if (res?.success) {
-      setErrors((prev) => ({ ...prev, email: false }));
-    } else {
-      setEmail("");  // clear instantly
-      if (setEmails) setEmails("");
-    }
-  } catch (err) {
-    console.error("Error checking email:", err);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value); // keep it simple
     setErrors((prev) => ({ ...prev, email: false }));
-  }
-};
+  };
 
+  const handleEmailBlur = async () => {
+    if (!email) return;
 
+    try {
+      // no `.unwrap()` since it's not createAsyncThunk
+      const res = await dispatch(checkEmailIdApi({ email }));
 
-
-
+      if (res?.success) {
+        setErrors((prev) => ({ ...prev, email: false }));
+      } else {
+        setEmail(""); // clear instantly
+        if (setEmails) setEmails("");
+      }
+    } catch (err) {
+      console.error("Error checking email:", err);
+      setErrors((prev) => ({ ...prev, email: false }));
+    }
+  };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -125,15 +119,15 @@ const handleEmailBlur = async () => {
   }, [errorMessage]);
 
   useEffect(() => {
-  if (resetTrigger) {
-    // Clear form values
-    setName("");
-    setPhone("");
-    setEmail("");
-    setErrors(null);
-    setResetEmailFormTrigger(false);
-  }
-}, [resetTrigger]);
+    if (resetTrigger) {
+      // Clear form values
+      setName("");
+      setPhone("");
+      setEmail("");
+      setErrors(null);
+      setResetEmailFormTrigger(false);
+    }
+  }, [resetTrigger]);
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens) {
       console.log(name, email, phone, "p");
@@ -152,7 +146,7 @@ const handleEmailBlur = async () => {
           onClick={handleCloseClick}
           disabled={registerLoader}
         >
-           &times;
+          &times;
         </button>
         <div className={styles.header}>
           <h2>Please Enter Your Details</h2>
@@ -205,21 +199,21 @@ const handleEmailBlur = async () => {
           <label className={styles.label}>Phone Numbers</label>
           <div className={styles.phoneWrapper}>
             <span className={styles.prefix}>+44</span>
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className={`${styles.input} ${
-              errors.phone ? styles.inputError : ""
-            }`}
-            value={phone}
-            maxLength={10}
-            onChange={handlePhoneChange}
-          />
-          {errors.phone && (
-            <span className={styles.errorMessage}>
-              Please enter a valid 10-digit phone number.
-            </span>
-          )}
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className={`${styles.input} ${
+                errors.phone ? styles.inputError : ""
+              }`}
+              value={phone}
+              maxLength={10}
+              onChange={handlePhoneChange}
+            />
+            {errors.phone && (
+              <span className={styles.errorMessage}>
+                Please enter a valid 10-digit phone number.
+              </span>
+            )}
           </div>
 
           <div className={styles.buttonContainer}>

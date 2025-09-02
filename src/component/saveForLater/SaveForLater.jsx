@@ -3,6 +3,7 @@ import styles from "./SaveForLater.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAddManualBidData,
+  getLeadFiterApiList,
   getLeadRequestList,
   getSaveLaterListData,
   totalCreditData,
@@ -20,6 +21,7 @@ import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStu
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import ContactConfirmModal from "../Leads/LeadLists/ContactConfirmModal";
 import FilterIcon from "../../assets/Images/Leads/FilterIcon.svg";
+import FilterBlackIcon from "../../assets/Images/Leads/blackFilter.svg";
 import { useNavigate } from "react-router";
 import { Select } from "antd";
 import { SwapOutlined } from "@ant-design/icons";
@@ -49,13 +51,25 @@ const SaveForLater = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
-  const data = leadRequestList?.length;
+  const data = saveForLaterDataList[0]?.savedLeads?.length;
   const [selectedFilter, setSelectedFilter] = useState("Sort by Credit Value");
+
   const filterOptions = [
     "Credit Value High",
     "Credit Value Medium",
     "Credit Value Low",
   ];
+
+  const getSortTypeValue = (sortOption) => {
+    switch (sortOption) {
+      case "Newest":
+        return "Newest";
+      case "Oldest":
+        return "Oldest";
+      default:
+        return "Newest";
+    }
+  };
 
   const handleSortChange = (value) => {
     setSelectedSort(value);
@@ -65,8 +79,22 @@ const SaveForLater = () => {
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
         sort_type: getSortTypeValue(value),
+        page_type: "saved_leads",
       };
-      dispatch(getLeadFiterApiList(filterData));
+      dispatch(getSaveLaterListData(filterData));
+    }
+  };
+
+  const getCreditFilterValue = (filterOption) => {
+    switch (filterOption) {
+      case "Credit Value High":
+        return "High";
+      case "Credit Value Medium":
+        return "Medium";
+      case "Credit Value Low":
+        return "Low";
+      default:
+        return "High";
     }
   };
 
@@ -86,8 +114,9 @@ const SaveForLater = () => {
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
         credit_filter: getCreditFilterValue(value),
+        page_type: "saved_leads",
       };
-      dispatch(getLeadFiterApiList(filterData));
+      dispatch(getSaveLaterListData(filterData));
     }
   };
 
@@ -96,11 +125,14 @@ const SaveForLater = () => {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
+      sort_type: getSortTypeValue(selectedSort),
+      credit_filter: getCreditFilterValue(selectedFilter),
+      page_type: "saved_leads",
     };
     dispatch(getSaveLaterListData(data));
   }, []);
+
   const addManualBidData = (item) => {
-    console.log(item, "sel");
     const formData = new FormData();
     formData.append("buyer_id", item?.customer_id);
     formData.append(
@@ -125,6 +157,7 @@ const SaveForLater = () => {
         user_id: userToken?.remember_tokens
           ? userToken?.remember_tokens
           : registerData?.remember_tokens,
+        page_type: "saved_leads",
       };
 
       dispatch(totalCreditData(data));
@@ -135,7 +168,6 @@ const SaveForLater = () => {
 
   const handleContinue = (item) => {
     if (!item) return;
-    console.log(item?.credit_score, totalCredit?.total_credit, item, "item");
     setSelectedItem(item);
     setPlanPurchase(totalCredit?.plan_purchased);
 
@@ -210,7 +242,7 @@ const SaveForLater = () => {
   return (
     <>
       <div className={styles.maincontainer}>
-        {/* <div className={styles.container}>
+        <div className={styles.container}>
           <div className={styles.textSection}>
             <h2 className={styles.heading}>{data} matching leads</h2>
           </div>
@@ -276,14 +308,76 @@ const SaveForLater = () => {
                 <img style={{ cursor: "pointer" }} src={FilterIcon} alt="" />{" "}
                 Filter
               </button>
-            
             </div>
           </div>
 
           {isFilterModalOpen && (
             <MatchingLeadsFilter onClose={handleCloseModal} />
           )}
-        </div> */}
+        </div>
+
+        <div className={styles.dualDropdownsContainers}>
+          <Select
+            value={selectedSort}
+            onChange={handleSortChange}
+            dropdownMatchSelectWidth={false}
+            className={styles.customSelect}
+            suffixIcon={
+              <SwapOutlined
+                style={{
+                  fontSize: "14px",
+                  color: "#000",
+                  paddingBottom: "8px",
+                  transform: "rotate(90deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              />
+            }
+          >
+            {sortOptions.map((opt) => (
+              <Option key={opt} value={opt}>
+                {opt}
+              </Option>
+            ))}
+          </Select>
+
+          <Select
+            value={selectedFilter}
+            onChange={handleFilterChange}
+            dropdownMatchSelectWidth={false}
+            className={styles.customSelect}
+            suffixIcon={
+              <SwapOutlined
+                style={{
+                  fontSize: "14px",
+                  color: "#000",
+                  transform: "rotate(90deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              />
+            }
+          >
+            {/* Default Disabled Option */}
+            <Option value="Sort by Credit Value" disabled>
+              Sort by Credit Value
+            </Option>
+
+            {filterOptions.map((opt) => (
+              <Option key={opt} value={opt}>
+                {opt}
+              </Option>
+            ))}
+          </Select>
+
+          <div className={styles.actionButton}>
+            <button
+              className={styles.filterButtons}
+              onClick={handleFilterClick}
+            >
+              <img src={FilterBlackIcon} alt="" /> Filter
+            </button>
+          </div>
+        </div>
 
         {saveForLaterDataList?.[0]?.savedLeads?.length === 0 && (
           <div className={styles.noDataContainer}>
@@ -386,7 +480,6 @@ const SaveForLater = () => {
                           )}
                         </div>
                         <div className={styles.jobInfo}>
-                          {console.log(item?.questions, "item?.questions")}
                           {item?.questions && (
                             <p>
                               {JSON.parse(item?.questions)

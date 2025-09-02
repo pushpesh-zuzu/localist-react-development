@@ -32,6 +32,10 @@
   /* height: 100%; */
 }
 
+.dualDropdownsContainers {
+  display: none;
+}
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -39,7 +43,6 @@
   background-color: var(--primary-color);
   box-shadow: 0px 0px 6px 0px #0000001a;
   color: white;
-  margin-bottom: 10.5px;
   padding: 20px 45px;
 }
 
@@ -373,6 +376,26 @@
   background-color: #0096c4;
 }
 
+.actionButton {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.filterButtons {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  /* border-right: 1px solid #ffffff; */
+  color: #000000;
+  font-weight: 600;
+  font-size: 12px;
+  vertical-align: middle;
+  cursor: pointer !important;
+  gap: 4px;
+}
+
 /* Tablet */
 @media (max-width: 1200px) {
   .card {
@@ -537,6 +560,27 @@
 }
 
 @media (max-width: 480px) {
+  .dualDropdownsContainers {
+    background-color: #e3f6fc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 13px;
+  }
+
+  .filterButtons {
+    width: 100%;
+    padding: 8px;
+    font-size: 13px;
+
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-right: 12px;
+  }
+
   .details h3 {
     font-size: 16px;
   }
@@ -680,7 +724,6 @@
   .maincontainer {
     margin-top: -12px;
     padding: 10px 20px;
-    padding-top: 24px;
     background-color: white;
     box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.1); /* only bottom and sides */
     margin-bottom: 10px;
@@ -695,9 +738,44 @@
   }
 }
 
+@media screen and (max-width: 425px) {
+  .dualDropdownsContainers {
+    background-color: #e3f6fc;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .actionButton {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+}
+
 @media screen and (max-width: 410px) {
   .heading {
     font-size: 20px;
+  }
+
+  .filterButtons {
+    width: 100%;
+  }
+
+  .actionButton {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+}
+
+@media screen and (max-width: 385px) {
+  .dualDropdownsContainers {
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 }
 
@@ -711,8 +789,23 @@
   .heading {
     font-size: 19px;
   }
+  .customSelect .ant-select-arrow {
+    color: #000 !important;
+  }
 
   .selectDropdown .ant-select-arrow {
     color: #000 !important;
+  }
+
+  .customSelect {
+    color: #000000;
+  }
+
+  .selectDropdown .ant-select-arrow {
+    color: #000 !important;
+  }
+
+  .actionButton {
+    width: 100%;
   }
 }

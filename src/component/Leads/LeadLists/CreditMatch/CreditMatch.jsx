@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { addBuyCreditApi } from "../../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { showToast } from "../../../../utils";
 import AddCardModal from "../../../MyCredit/MyPaymentDetails/AddCardModal";
+import { CheckCircleOutlined } from "@ant-design/icons";
 
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(true);
@@ -138,66 +139,103 @@ const CreditMatch = () => {
   return (
     <>
       {filterData?.length > 0 && (
-        <div className={styles.buyCreditsContainer}>
-          <div className={styles.titleSection}>
-            <h2 className={styles.title}>Buy more credits now</h2>
-          </div>
+        <>
+          {/* <div className={styles.buyCreditsContainer}>
+            <div className={styles.titleSection}>
+              <h2 className={styles.title}>Buy more credits now</h2>
+            </div>
 
-          {filterData?.map((item, index) => (
-            <div key={item?.id || index} className={styles.creditsSection}>
-              <div className={styles.infoSection}>
-                <div className={styles.creditsInfo}>
-                  <div className={styles.locationTag}>
-                    {/* <img src={locallistImgs} alt="credit icon" /> */}
-                    <span className={styles.creditsAmount}>
-                      {item?.no_of_leads ? item?.no_of_leads : 0} credits
-                    </span>
-                  </div>
-                  <div className={styles.usageInfo}>
-                    <span className={styles.usageText}>
-                      {item?.description ? item?.description : item?.name}
-                    </span>
+            {filterData?.map((item, index) => (
+              <div key={item?.id || index} className={styles.creditsSection}>
+                <div className={styles.infoSection}>
+                  <div className={styles.creditsInfo}>
+                    <div className={styles.locationTag}>
+                     
+                      <span className={styles.creditsAmount}>
+                        {item?.no_of_leads ? item?.no_of_leads : 0} credits
+                      </span>
+                    </div>
+                    <div className={styles.usageInfo}>
+                      <span className={styles.usageText}>
+                        {item?.description ? item?.description : item?.name}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className={styles.priceSection}>
-                <div className={styles.priceInfo}>
-                  <div className={styles.totalPrice}>
-                    £{item?.price ? item?.price : 0} (Excl. tax)
+                <div className={styles.priceSection}>
+                  <div className={styles.priceInfo}>
+                    <div className={styles.totalPrice}>
+                      £{item?.price ? item?.price : 0} (Excl. tax)
+                    </div>
+                    
                   </div>
-                  {/* <div className={styles.unitPrice}>
-                    ${item?.per_credit ? item?.per_credit : 0}/credit
-                  </div> */}
                 </div>
-              </div>
 
-              <div className={styles.actionSection}>
-                <button
-                  className={styles.buyButton}
-                  onClick={() => handleBuyNow(item)}
-                >
-                  Buy {item?.no_of_leads ? item?.no_of_leads : 0} credits
-                </button>
-                <div className={styles.autoTopUpContainer}>
-                  <input
-                    type="checkbox"
-                    id={`autoTopUp-${index}`}
-                    className={styles.autoTopUpCheckbox}
-                    checked={autoTopUp}
-                    onChange={handleAutoTopUpChange}
-                  />
-                  <label
-                    htmlFor={`autoTopUp-${index}`}
-                    className={styles.autoTopUpLabel}
+                <div className={styles.actionSection}>
+                  <button
+                    className={styles.buyButton}
+                    onClick={() => handleBuyNow(item)}
                   >
-                    Auto top-up next time
-                  </label>
+                    Buy {item?.no_of_leads ? item?.no_of_leads : 0} credits
+                  </button>
+                  <div className={styles.autoTopUpContainer}>
+                    <input
+                      type="checkbox"
+                      id={`autoTopUp-${index}`}
+                      className={styles.autoTopUpCheckbox}
+                      checked={autoTopUp}
+                      onChange={handleAutoTopUpChange}
+                    />
+                    <label
+                      htmlFor={`autoTopUp-${index}`}
+                      className={styles.autoTopUpLabel}
+                    >
+                      Auto top-up next time
+                    </label>
+                  </div>
                 </div>
+              </div>
+            ))}
+          </div> */}
+          <div className={styles._container}>
+            <h2 className={styles._heading}>
+              AI-Verified Leads.{" "}
+              <span className={styles._highlight}>No Subscriptions.</span> Win
+              new jobs today.
+            </h2>
+
+            <div className={styles._featuresWrapper}>
+              <div className={styles._featureItem}>
+                <CheckCircleOutlined className={styles._icon} />
+                <span>Browse AI verified leads for free</span>
+              </div>
+
+              <div className={styles._divider}></div>
+
+              <div className={styles._featureItem}>
+                <CheckCircleOutlined className={styles._icon} />
+                <span>Only pay when you connect</span>
+              </div>
+
+              <div className={styles._divider}></div>
+
+              <div className={styles._featureItem}>
+                <CheckCircleOutlined className={styles._icon} />
+                <span>Buy credits anytime — zero commitments</span>
+              </div>
+
+              <div className={styles._divider}></div>
+
+              <div className={styles._featureItem}>
+                <CheckCircleOutlined className={styles._icon} />
+                <span>Buy credits and win jobs now</span>
               </div>
             </div>
-          ))}
-        </div>
+
+            <button className={styles._buyBtn}>Buy Credits</button>
+          </div>
+        </>
       )}
 
       {/* <div

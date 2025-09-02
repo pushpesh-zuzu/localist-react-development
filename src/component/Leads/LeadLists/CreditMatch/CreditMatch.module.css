@@ -1,3 +1,77 @@
+._container {
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(101.13deg, #00afe3 8.67%, #f9b7b7 85.44%);
+  padding: 30px 20px;
+  border-radius: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+._heading {
+  color: #fff;
+  font-family: Poppins;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 35px;
+  line-height: 30px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 25px;
+}
+
+._highlight {
+  color: #111637;
+}
+
+._featuresWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+._featureItem {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+  gap: 8px;
+  font-weight: 500;
+}
+
+._icon {
+  color: #fff;
+  font-size: 16px;
+}
+
+._divider {
+  height: 16px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+._buyBtn {
+  background-color: #0c1634;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+._buyBtn:hover {
+  background-color: #1a2547;
+}
+
 .buyCreditsContainer {
   display: flex;
   justify-content: space-between;
@@ -23,8 +97,6 @@
     transform: rotate(360deg);
   }
 }
-
-
 
 .creditsSection {
   display: flex;
@@ -152,13 +224,13 @@
 } */
 .creditsLeftContainer {
   padding: 10px 88px;
-  
+
   transition: all 0.3s ease;
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .fixedTop {
@@ -166,10 +238,9 @@
   top: 0;
   left: 0;
   right: 0;
-   
+
   /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
 }
-
 
 .creditsButton {
   background-color: var(--primary-color);
@@ -258,8 +329,6 @@
   .totalPrice {
     margin-top: 0px;
   }
-
-
 }
 
 @media (max-width: 768px) {
@@ -297,18 +366,17 @@
   .titleSection h2 {
     font-size: 38px;
   }
-.titleSection{
-  width: 94%;
-}
-.actionSection {
-  width: 94%;
-}
+  .titleSection {
+    width: 94%;
+  }
+  .actionSection {
+    width: 94%;
+  }
   .buyButton {
     font-size: 16px;
     padding: 6px 12px;
   }
 
-  
   .autoTopUpLabel {
     font-size: 12px;
   }
@@ -326,28 +394,27 @@
     font-size: 12px;
   }
   .fixedTop {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  right: 0;
-  z-index: 100;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  .usageInfo {
+    margin-top: 6px;
+  }
+  .creditsSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    padding-bottom: 0px;
+    margin-top: 5px;
+  }
 }
-.usageInfo{
-margin-top: 6px;
-}
-.creditsSection {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  width: 100%;
-  padding-bottom: 0px;
-  margin-top: 5px;
-}
-}
-@media screen and (max-width:380px) {
+@media screen and (max-width: 380px) {
   .creditsButton {
     font-size: 14px;
   }
-  
 }
