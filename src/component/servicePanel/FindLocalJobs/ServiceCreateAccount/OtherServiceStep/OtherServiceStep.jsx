@@ -18,7 +18,11 @@ import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.sv
 import { clearCompanyData } from "../../../../../store/Company/companyLookup";
 
 const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
+
   const [Input, setInput] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [ errors, setErrors] = useState({});
   const [randomFallback] = useState(() => Math.floor(Math.random() * (45 - 35 + 1)) + 35)
@@ -43,6 +47,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
           searchService({
             search: Input,
             serviceid: formData?.service_id.toString(),
+            serviceTitle: item?.serviceTitle || ""
           })
         );
       }
@@ -253,6 +258,22 @@ dispatch(registerUserData(payload)).then((result) => {
   const handleCloseModal = () => {
     setShow(false);
   };
+
+    const DEBOUNCE_MS = 250;
+    const debounceRef = useRef(null);
+
+  const triggerSearch = (value) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      const trimmed = value.trim();
+      dispatch(
+        searchService({ search: trimmed === "" ? "" : trimmed.slice(0, 4),
+          serviceTitle: item?.serviceTitle || ""
+         })
+      );
+    }, DEBOUNCE_MS);
+  };
+
   const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
@@ -318,8 +339,24 @@ const handleExpandRadius = () => {
             <input
               className={styles.searchInput}
               placeholder="Search for more services..."
+              onFocus={() => {
+                setIsFocused(true);
+                setIsDropdownOpen(true);        // open dropdown on focus
+                // if field is empty on focus, load ALL services so dropdown isn't blank
+                if (Input.trim() === "") {
+                  dispatch(searchService({ search: "", serviceTitle: item?.serviceTitle || "" /*, serviceid*/ }));
+                }
+              }}
+              onBlur={() => {
+                setIsFocused(false);
+                
+              }}
               onChange={(e) => {
-                setInput(e.target.value);
+                const value = e.target.value;
+                setInput(value);
+                setIsDropdownOpen(true);
+                setSelectedService(null);
+                triggerSearch(value);
                 if (!e.target.value) {
                   dispatch(setService([]));
                 }
