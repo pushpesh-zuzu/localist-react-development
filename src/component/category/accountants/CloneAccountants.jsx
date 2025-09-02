@@ -173,8 +173,8 @@ const CloneAccountants = ({
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
           <h1 style={{ color: "white" }}>
-            Looking for <span className={styles.blueText}>{header} </span>{" "}
-            Professionals Near You?
+            LOOKING FOR <span className={styles.blueText}>{header} </span>{" "}
+            PROFESSIONALS NEAR YOU?
           </h1>
         </div>
 

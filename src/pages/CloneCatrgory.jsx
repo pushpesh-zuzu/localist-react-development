@@ -143,7 +143,7 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
         <BannerWithBreadCrum
           header={accountHeader}
           LevelOneTwoTitle={subHeader}
-          accountHeader="Home and Garden"
+          accountHeader="HOME & GARDEN"
           level={2}
           isNeedS={false}
           panelImage={Home}

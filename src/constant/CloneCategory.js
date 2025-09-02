@@ -65,8 +65,8 @@ const HowItWorksData = {
       id: 1,
       title: "the Best Match",
       image: WhatYouNeedIcon, // Same icon as business
-      heading1: "Find ",
-      heading2: "the Best Match",
+      heading1: "Find the ",
+      heading2: "best match",
       description:
         "We’ll help you find quality Home & Garden professionals in your local area. Just let us know your requirements, and Localists will match you with the best service providers to help you",
     },
@@ -75,7 +75,7 @@ const HowItWorksData = {
       title: "Free Quotes",
       image: FreeQuotesIcon, // Same icon as business
       heading1: "Request ",
-      heading2: "Free Quotes",
+      heading2: "free quotes",
       description:
         "We’ll send you free quotes from local Home & Garden professionals. Compare profiles, read verified reviews, see what makes each provider stand out, and choose the right one for you.",
     },
@@ -83,8 +83,9 @@ const HowItWorksData = {
       id: 3,
       title: "Home & Garden Professional",
       image: BusinessProfessionalsIcon, // Same icon as business
-      heading1: "Work With Your ",
-      heading2: "Home & Garden Professional",
+      heading1: "Work with your ",
+      heading2: "home & garden ",
+      heading3:'professional',  
       description:
         "Once you’ve found the right professional, you can contact them straight away. Discuss your project, ask questions, and move forward with confidence.",
     },

@@ -21,9 +21,9 @@ const AccountFindingInfo = ({
       {/* </p> */}
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>
-          Find the Best
-          <span className={styles.highlight}> {title}{isNeedS?"s":""} </span>
-          In Your Area
+          Find the best
+          <span className={styles.highlight}> {title.toLowerCase()}{isNeedS?"s":""} </span>
+          professionals in your area
         </h2>
 
         <div className={styles.descriptionContainer}>
