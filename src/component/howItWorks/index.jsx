@@ -11,9 +11,7 @@ const HowItWorks = () => {
         <title> How It Works for Customers - Localists</title>
         <meta
           name="description"
-          content="Learn how Localists connect you with ready-to-hire customers in your
-          area. Get quality leads, grow your business, and boost your visibility
-          online today. pending"
+          content="Find trusted local professionals fast with Localists.com. Enter your details, get up to 5 free quotes, compare, and save – no commission or hidden fees."
         />
       </Helmet>
       <HowLoaclistsWorks />

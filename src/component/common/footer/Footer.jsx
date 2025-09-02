@@ -31,9 +31,9 @@ const FooterContent = () => (
           <option>🇺🇸 USA</option> */}
         </select>
       </div>
-      <div className={styles.trustpilot}>
+      {/* <div className={styles.trustpilot}>
         <img src={trustpilotLogo} alt="Trustpilot Rating" />
-      </div>
+      </div> */}
     </div>
 
     <div className={styles.footerContactSection}>
@@ -45,10 +45,10 @@ const FooterContent = () => (
         <img src={callIcon} alt="phone" />
         <p>+91 0000000000</p>
       </div> */}
-      <div className={styles.contactMthods}>
+      {/* <div className={styles.contactMthods}>
         <img src={timerIcon} alt="working hours" />
         <p>(Mon-Fri, 9:00am-6:00pm)</p>
-      </div>
+      </div> */}
     </div>
   </>
 );
@@ -303,9 +303,9 @@ const Footer = () => {
           © 2025 Localists. Terms & Conditions / Cookie policy / Privacy policy
         </p>
 
-        <div className={styles.trustpilotMobile}>
+        {/* <div className={styles.trustpilotMobile}>
           <img src={trustpilotLogo} alt="Trustpilot Rating" />
-        </div>
+        </div> */}
       </div>
     </footer>
   );
