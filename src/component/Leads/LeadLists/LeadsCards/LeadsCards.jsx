@@ -371,7 +371,7 @@ const LeadsCards = ({ enoughCredit }) => {
           ) : (
             <>
               <div>
-                {leadRequestList?.slice(0, visibleCount)?.map((item,index) => {
+                {leadRequestList?.slice(0, visibleCount)?.map((item, index) => {
                   console.log(item, "itemss");
                   return (
                     <>
@@ -395,7 +395,10 @@ const LeadsCards = ({ enoughCredit }) => {
                                   <p>{item?.postcode}</p>
                                 </div>
                               </div>
-                              <span className={styles.category} style={{ background: "#f9b7b7" }}>
+                              <span
+                                className={styles.category}
+                                style={{ background: "#f9b7b7" }}
+                              >
                                 {item?.category?.name}
                               </span>
                             </div>
@@ -432,10 +435,19 @@ const LeadsCards = ({ enoughCredit }) => {
 
                           {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
-                            <div className={styles.highlightText}>Highlights :</div>
-                            <div className={styles.saveBtnBox} style={{ position: "relative" }}>
+                            <div className={styles.highlightText}>
+                              Highlights :
+                            </div>
+                            <div
+                              className={styles.saveBtnBox}
+                              style={{ position: "relative" }}
+                            >
                               <button
-                                style={{ position: "absolute", top: "10px", right: "10px" }}
+                                style={{
+                                  position: "absolute",
+                                  // top: "10px",
+                                  right: "0px",
+                                }}
                                 className={styles.saveBtn}
                                 onClick={() => handleSaveLater(item)}
                               >
@@ -521,9 +533,17 @@ const LeadsCards = ({ enoughCredit }) => {
                               Contact
                               {/* {item?.customer?.name} */}
                             </button>
-                            <span className={styles.credits}>
-                              {item?.credit_score} Credits
-                            </span>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <span className={styles.credits}>
+                                {item?.credit_score} Credits
+                              </span>
+                            </div>
                             {/* <p className={styles.responseStatus}>
                       <img src={FirstToRespondImg} alt="" />
                       1st to Responded

@@ -11,6 +11,7 @@ import { addBuyCreditApi } from "../../../../store/MyProfile/MyCredit/MyCreditSl
 import { showToast } from "../../../../utils";
 import AddCardModal from "../../../MyCredit/MyPaymentDetails/AddCardModal";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import CheckCircle from "../../../../assets/Icons/CheckCircle.svg";
 
 const CreditMatch = () => {
   const [autoTopUp, setAutoTopUp] = useState(true);
@@ -27,52 +28,51 @@ const CreditMatch = () => {
     (state) => state.leadSetting
   );
   const handleBuyNow = (item) => {
-    console.log(item, "item");
-    // navigate("/payment-details")
+    navigate("/settings/billing/my-credits");
 
-    let credits = item.no_of_leads;
+    // let credits = item.no_of_leads;
 
-    const vatTotal =
-      item?.billing_vat_register === 0
-        ? 0
-        : Math.floor((item?.price * 20) / 100);
+    // const vatTotal =
+    //   item?.billing_vat_register === 0
+    //     ? 0
+    //     : Math.floor((item?.price * 20) / 100);
 
-    // ✅ If coupon exists and is percentage-based
-    if (typeof addcoupanList === "string" && addcoupanList.includes("%")) {
-      const discountPercent = parseFloat(addcoupanList.replace("%", ""));
-      const discountAmount = Math.floor(
-        (item.no_of_leads * discountPercent) / 100
-      );
+    // //  If coupon exists and is percentage-based
+    // if (typeof addcoupanList === "string" && addcoupanList.includes("%")) {
+    //   const discountPercent = parseFloat(addcoupanList.replace("%", ""));
+    //   const discountAmount = Math.floor(
+    //     (item.no_of_leads * discountPercent) / 100
+    //   );
 
-      credits = item.no_of_leads + discountAmount;
-    }
+    //   credits = item.no_of_leads + discountAmount;
+    // }
 
-    const creditData = {
-      amount: item?.price,
-      credits: credits,
-      details: item?.name,
-      total_amount: (item?.price + vatTotal) * 100,
-      vat: vatTotal,
-      top_up: autoTopUp ? 1 : 0,
-    };
+    // const creditData = {
+    //   amount: item?.price,
+    //   credits: credits,
+    //   details: item?.name,
+    //   total_amount: (item?.price + vatTotal) * 100,
+    //   vat: vatTotal,
+    //   top_up: autoTopUp ? 1 : 0,
+    // };
 
-    dispatch(addBuyCreditApi(creditData)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message);
-        const data = {
-          user_id: userToken?.remember_tokens
-            ? userToken?.remember_tokens
-            : registerData?.remember_tokens,
-        };
-        dispatch(totalCreditData(data));
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
-      } else if (result?.success === false) {
-        setIsAddModalOpen(true);
-        // navigate("/payment-details");
-      }
-    });
+    // dispatch(addBuyCreditApi(creditData)).then((result) => {
+    //   if (result?.success) {
+    //     showToast("success", result?.message);
+    //     const data = {
+    //       user_id: userToken?.remember_tokens
+    //         ? userToken?.remember_tokens
+    //         : registerData?.remember_tokens,
+    //     };
+    //     dispatch(totalCreditData(data));
+    //     setTimeout(() => {
+    //       window.location.reload();
+    //     }, 1500);
+    //   } else if (result?.success === false) {
+    //     setIsAddModalOpen(true);
+    //     // navigate("/payment-details");
+    //   }
+    // });
   };
   const filterData = creditPlanList?.filter((item, index) => index === 0);
   const leadTotalCredit = leadRequestList?.filter((item, index) => index === 0);
@@ -207,33 +207,38 @@ const CreditMatch = () => {
 
             <div className={styles._featuresWrapper}>
               <div className={styles._featureItem}>
-                <CheckCircleOutlined className={styles._icon} />
+                <img src={CheckCircle} alt="check" className={styles._icon} />
                 <span>Browse AI verified leads for free</span>
               </div>
 
               <div className={styles._divider}></div>
 
               <div className={styles._featureItem}>
-                <CheckCircleOutlined className={styles._icon} />
+                <img src={CheckCircle} alt="check" className={styles._icon} />
                 <span>Only pay when you connect</span>
               </div>
 
               <div className={styles._divider}></div>
 
               <div className={styles._featureItem}>
-                <CheckCircleOutlined className={styles._icon} />
+                <img src={CheckCircle} alt="check" className={styles._icon} />
                 <span>Buy credits anytime — zero commitments</span>
               </div>
 
               <div className={styles._divider}></div>
 
               <div className={styles._featureItem}>
-                <CheckCircleOutlined className={styles._icon} />
+                <img src={CheckCircle} alt="check" className={styles._icon} />
                 <span>Buy credits and win jobs now</span>
               </div>
             </div>
 
-            <button className={styles._buyBtn}>Buy Credits</button>
+            <button
+              className={styles._buyBtn}
+              onClick={() => handleBuyNow(filterData[0])}
+            >
+              Buy Credits
+            </button>
           </div>
         </>
       )}
@@ -254,7 +259,10 @@ const CreditMatch = () => {
           <div ref={triggerRef} style={{ height: "1px" }}></div>
 
           <div ref={stickyRef} className={styles.creditsLeftContainer}>
-            <button className={styles.creditsButton}>
+            <button
+              className={styles.creditsButton}
+              onClick={() => filterData?.[0] && handleBuyNow(filterData[0])}
+            >
               You have {totalCredit?.total_credit ?? "0"} Credits Left
             </button>
           </div>
