@@ -159,7 +159,7 @@ const Footer = () => {
               <Link className={styles.link} to={`/${lang}/${country}/sellers/pricing`}>
                 <li>Pricing</li>
               </Link>
-              {/* <Link
+              <Link
                 className={styles.link}
                 to={(!userToken || !registerToken) && `/${lang}/${country}/sellers/create`}
               >
@@ -170,7 +170,7 @@ const Footer = () => {
                 >
                   Join as a Professional
                 </li>
-              </Link> */}
+              </Link>
               {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>
                   <li > New Leads</li>
@@ -268,11 +268,11 @@ const Footer = () => {
               <Link to={`/${lang}/${country}/sellers/pricing`}>
                 <li className={styles.mobileItem}>Pricing</li>
               </Link>
-              {/* <Link to={(!userToken || !registerToken) && `/${lang}/${country}/sellers/create`}>
+              <Link to={(!userToken || !registerToken) && `/${lang}/${country}/sellers/create`}>
                 <li className={styles.mobileItem} onClick={handleJoinAsProfessional}>
                   Join as a Professional
                 </li>
-              </Link> */}
+              </Link>
               {/* <Link to="/help-center">
                 <li>Help Centre</li>
               </Link> */}

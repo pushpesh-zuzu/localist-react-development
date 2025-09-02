@@ -233,31 +233,31 @@ export const megaMenu = [
     subcategory: [
       {
         name: "Fence & Gate Installation",
-        path:"fence-installers",
+        path:"fencing-contractors-near-me",
         children: locationData.map((loc) => `Fence Installers in ${loc}`),
       },
-      {
-        name: "Driveway Installation",
-        path:'driveway-installers',
-        children: locationData.map((loc) => `Driveway Installers in ${loc}`),
-      },
-      {
-        name: "Patio Services",
-        path:"patio-services",
-        children: locationData.map((loc) => `Patio Installers in ${loc}`),
-      },
-      {
-        name: "Artificial Grass Installation",
-        path:"artificial-grass-installation",
-        children: locationData.map(
-          (loc) => `Artificial Grass Installers in ${loc}`
-        ),
-      },
-      {
-        name: "Landscaping",
-        path:"landscaping",
-        children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
-      },
+      // {
+      //   name: "Driveway Installation",
+      //   path:'driveway-installers',
+      //   children: locationData.map((loc) => `Driveway Installers in ${loc}`),
+      // },
+      // {
+      //   name: "Patio Services",
+      //   path:"patio-services",
+      //   children: locationData.map((loc) => `Patio Installers in ${loc}`),
+      // },
+      // {
+      //   name: "Artificial Grass Installation",
+      //   path:"artificial-grass-installation",
+      //   children: locationData.map(
+      //     (loc) => `Artificial Grass Installers in ${loc}`
+      //   ),
+      // },
+      // {
+      //   name: "Landscaping",
+      //   path:"landscaping",
+      //   children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
+      // },
       // {
       //   name: "General Builders",
       //   children: locationData.map((loc) => `General Builders in ${loc}`),

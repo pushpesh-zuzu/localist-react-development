@@ -110,7 +110,7 @@ const LevelThreePage = ({}) => {
       />
       <HowItWorks
         HowItWorksData={getHowItWorksData(slug)}
-        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+        title={CONTENT_CONFIG_TOP[slug]?.ctaText}
       />
       <PopularCity sliderdata={POPULAR_CITIES} title="Popular Cities" />
 
@@ -120,7 +120,7 @@ const LevelThreePage = ({}) => {
       />
       <FindServiceLevel3
         contentBlocks={contentBlocks}
-        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+        title={CONTENT_CONFIG_TOP[slug]?.ctaText}
       />
       {/* <LocalAccountant title="Fencer" /> */}
 
@@ -150,7 +150,7 @@ const LevelThreePage = ({}) => {
       {/* <Slider sliderdata={RELATED_PRICE} title={"Related Price Guides"} /> */}
       {/* Later we need to uncomment or use again*/}
 
-      <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.mainTitle} />
+      <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.ctaText} />
       {/* no need to change  */}
     </>
   );

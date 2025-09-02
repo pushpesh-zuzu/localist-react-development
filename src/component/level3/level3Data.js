@@ -938,7 +938,7 @@ const regionsData = {
       id: 3,
       title: "North West England",
       items: [
-        { name: "Cheshire", path: "fencing-contractors-near-me/cheshire" },
+        { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
@@ -1240,6 +1240,7 @@ const CONTENT_CONFIG_TOP = {
     findingHeading: " Fence and gate installation",
     title: "FENCING",
     mainTitle: "fence & gate installation",
+    ctaText:'Fencer'
   },
   "driveway-installers": {
     findingHeading: "Driveway Installation",

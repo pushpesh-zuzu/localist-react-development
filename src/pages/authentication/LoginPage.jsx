@@ -346,13 +346,13 @@ const LoginPage = () => {
 
       {!passwordless && (
         <div className="bottom-links">
-          {/* <Text className="text">
+          <Text className="text">
             Offering a service?{" "}
             <Link to={`/${currentLang}/${currentCountry}/sellers/create`} className="linkText">
               Join as a professional
             </Link>
           </Text>
-          <br /> */}
+          <br/>
           <Text className="text">
             Looking for a service?{" "}
             <Link to={`/${currentLang}/${currentCountry}`} className="linkText">
