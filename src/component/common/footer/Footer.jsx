@@ -40,7 +40,7 @@ const FooterContent = () => (
     <div className={styles.footerContactSection}>
       <div className={styles.contactMthods}>
         <img src={mailIcon} alt="email" />
-        <p>contact@localists.com</p>
+        <p>contact@localists.com - 2</p>
       </div>
       {/* <div className={styles.contactMthods}>
         <img src={callIcon} alt="phone" />
