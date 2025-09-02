@@ -19,6 +19,7 @@ import PatioPatioServices from "../assets/Images/PatioServices.jpg";
 import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
 import Landscaping from "../assets/Images/servicesLevels/Landscaping.jpg";
 import ArtificialGrass from "../assets/Images/servicesLevels/ArtificialGrass.jpg";
+import { path } from "framer-motion/client";
 
 const CATEGORIES = [
   {
@@ -85,7 +86,7 @@ const HowItWorksData = {
       image: BusinessProfessionalsIcon, // Same icon as business
       heading1: "Work with your ",
       heading2: "home & garden ",
-      heading3:'professional',  
+      heading3: "professional",
       description:
         "Once you’ve found the right professional, you can contact them straight away. Discuss your project, ask questions, and move forward with confidence.",
     },
@@ -109,12 +110,13 @@ const PopularCategoriesData = [
     id: 14,
     title: "Fence & Gate Installation",
     image: FenchandGet,
-    path: "fence-installers",
+    path: "fencing-contractors-near-me",
   },
   {
     id: 15,
     title: "Driveway Installation",
-    path: "driveway-installers",
+    path: "",
+    // path: "driveway-installers",
 
     image: DrivewayInstallation, // apna image import karke lagao
   },
@@ -181,19 +183,22 @@ const PopularCategoriesData = [
     id: 13,
     title: "Patio Services",
     image: PatioPatioServices,
-    path: "patio-services",
+    // path: "patio-services",
+    path: "",
   },
   {
     id: 16,
     title: "Landscaping",
-    path: "landscaping",
+    path: "",
+    // path: "landscaping",
 
     image: Landscaping,
   },
   {
     id: 17,
     title: "Artificial Grass Installation",
-    path: "artificial-grass-installation",
+    path: "",
+    // path: "artificial-grass-installation",
 
     image: ArtificialGrass,
   },

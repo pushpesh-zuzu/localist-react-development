@@ -4,9 +4,9 @@ import { PopularCategoriesData } from "../../../constant/CloneCategory";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 const PopularCategories = ({ data }) => {
-  const { lang, country } = useParams(); 
-      const currentLang = lang || "en";
-      const currentCountry = country || "gb";
+  const { lang, country } = useParams();
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
 
   return (
     <div className={styles.container}>
@@ -38,13 +38,17 @@ const PopularCategories = ({ data }) => {
                     Available Online
                   </span>
                 )}
-                <Link
-                  className={styles.cardbButton}
-                  style={{ textDecoration: "none" }}
-                  to={`/${currentLang}/${currentCountry}/${row.path}`}
-                >
-                  {row.title}
-                </Link>
+                {row.path ? (
+                  <Link
+                    className={styles.cardbButton}
+                    style={{ textDecoration: "none" }}
+                    to={`/${currentLang}/${currentCountry}/${row.path}`}
+                  >
+                    {row.title}
+                  </Link>
+                ) : (
+                  <button className={styles.cardbButton}>{row.title}</button>
+                )}
               </div>
             </div>
           </div>
