@@ -1,4 +1,6 @@
 // src/utils/geo.js
+import { useEffect, useState } from "react";
+
 export async function getUserCountry() {
   try {
     const res = await fetch("https://ipapi.co/json/");
@@ -17,3 +19,27 @@ export function getUserLanguage() {
     : "en";
   return lang || "en";
 }
+
+export function useUserGeo(defaultCountry = "in", defaultLang = "en") {
+  const [country, setCountry] = useState(defaultCountry);
+  const [lang, setLang] = useState(defaultLang);
+
+  useEffect(() => {
+    async function fetchGeo() {
+      try {
+        const detectedCountry = await getUserCountry();
+        setCountry(detectedCountry);
+      } catch {
+        setCountry(defaultCountry);
+      }
+
+      const detectedLang = getUserLanguage();
+      setLang(detectedLang);
+    }
+
+    fetchGeo();
+  }, [defaultCountry, defaultLang]);
+
+  return { country, lang };
+}
+

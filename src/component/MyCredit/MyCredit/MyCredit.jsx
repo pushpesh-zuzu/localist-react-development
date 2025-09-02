@@ -6,7 +6,7 @@ import CreditCard from "./CreditCard";
 import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
 import TransgationLogTable from "./TransgationLogTable";
 import CreditModal from "./CreditModal";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   getCreditPlanList,
   getswitchAutobidApi,
@@ -24,6 +24,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
+import { useUserGeo } from "../../../utils/geo";
 
 const creditOptions = [
   {
@@ -65,9 +66,8 @@ const MyCredits = () => {
   const { creditPlanList } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-        const { lang, country } = useParams(); 
-        const currentLang = lang || "en";
-        const currentCountry = country || "gb";
+  const { country, lang } = useUserGeo();
+        
   const {
     buyCreditLoader,
     addCouanLoader,
@@ -282,7 +282,7 @@ const MyCredits = () => {
             {/* <a href="#" className={styles.link}>
              
             </a> */}
-            <Link to={`/${currentLang}/${currentCountry}/contact-us`} className={styles.link}>
+            <Link to={`/${lang}/${country}/contact-us`} className={styles.link}>
               Help Center
             </Link>
             .
