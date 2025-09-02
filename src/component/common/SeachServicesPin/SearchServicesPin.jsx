@@ -10,9 +10,9 @@ import styles from './searchservices.module.css'
 const SearchServicesPin = ({ 
   title = "Now you know how it works, start looking for a professional.",
   buttonText = "Continue",
-  serviceLabel = "What service do you need?",
+  serviceLabel = "What service do you provide?",
   servicePlaceholder = "Driveway Installation, Gardening Services, etc...",
-  locationLabel = "Where do you need it?",
+  locationLabel = "Where do you want to find new customers?",
   locationPlaceholder = "Enter your postcode or town",
   className = "",
   onCustomContinue = null // Optional custom callback
