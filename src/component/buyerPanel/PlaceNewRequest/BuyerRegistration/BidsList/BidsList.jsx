@@ -119,10 +119,10 @@ const BidsList = ({ previousStep }) => {
   ];
 
   const responseOptions = [
-    { value: "within 10 mins", label: "within 10 mins" },
-    { value: "within 1 hour", label: "within 1 hour" },
-    { value: "within 6 hours", label: "within 6 hours" },
-    { value: "within 24 hours", label: "within 24 hours" },
+    { value: "Responds within 10 mins", label: "Responds within 10 mins" },
+    { value: "Responds within 1 hour", label: "Responds within 1 hour" },
+    { value: "Responds within 6 hours", label: "Responds within 6 hours" },
+    { value: "Responds within 24 hours", label: "Responds within 24 hours" },
   ];
 
   const renderOptions = (options, currentValue, onChange) => (
@@ -462,7 +462,7 @@ const BidsList = ({ previousStep }) => {
                         : null
                     }
                   >
-                    <Option value="">All ratings</Option>
+                    <Option value="all">All ratings</Option>
                     {ratingOptions.map((opt) => (
                       <Option key={opt.value} value={opt.value}>
                         {opt.label}
@@ -515,7 +515,11 @@ const BidsList = ({ previousStep }) => {
                       setOpenSortModal(true);
                     }}
                   >
-                    {ratingList || "All Ratings"}
+                    {/* {ratingList || "All Ratings"} */}
+                    {ratingList
+                      ? ratingOptions.find((opt) => opt.value === ratingList)
+                          ?.label || "All Ratings"
+                      : "All Ratings"}
                   </button>
                   <button
                     className={styles.sortBtn}
