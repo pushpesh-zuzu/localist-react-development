@@ -116,7 +116,7 @@ const SearchAccountantLeve3 = ({ title = "", defaultService,isNeedS=false }) => 
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
-            placeholder="Enter your postcode or town"
+            placeholder="Enter your postcode"
             ref={inputRef}
             value={pincode}
             onChange={(e) => {
