@@ -48,6 +48,7 @@ const FooterContent = () => (
       {/* <div className={styles.contactMthods}>
         <img src={timerIcon} alt="working hours" />
         <p>(Mon-Fri, 9:00am-6:00pm)</p>
+        
       </div> */}
     </div>
   </>
