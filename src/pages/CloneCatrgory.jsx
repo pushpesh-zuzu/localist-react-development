@@ -37,12 +37,12 @@ import {
   PopularCategoriesData,
 } from "../constant/CloneCategory";
 import { AllServicesData } from "../constant/CloneCategory";
-//AllServicesData
 import bgImage from "../assets/Images/bgImage.svg";
 import financeBg from "../assets/Images/financeImg.svg";
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import Home from "../assets/banners/Home.jpg";
+import AllServiceLevel1 from "../component/category/allServices/AllServiceLevel1";
 
 const endpointCategoryMap = {
   // "financial-and-accounting": ["General Accounting"],
@@ -85,34 +85,23 @@ const endpointServiceMap = {
   ],
 };
 
-const breadcrumbHierarchy = {
-  business: ["Business"],
-  "financial-and-accounting": ["Business", "Financial and Accounting"],
-  // "general-accounting": ["Business", "Financial and Accounting", "General Accounting"],
-  accountants: [
-    "Business",
-    "Financial and Accounting",
-    "General Accounting",
-    "Accounting",
-  ],
-  "bookkeeping-services": [
-    "Business",
-    "Financial and Accounting",
-    "General Accounting",
-    "Bookkeeping Services",
+const AllServicesNewData = {
+  home: [
+    "Fence & Gate Installation",
+    "Driveway Installation",
+    "Patio Services",
+    "Landscaping",
+    "Artificial Grass Installation",
   ],
 };
 
 const CloneCategory = ({ accountHeader, subHeader }) => {
   const location = useLocation();
-  // Use includes instead of strict match
 
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
 
-  const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
-  ///// logics for popular categories
 
   const pathSegments = location.pathname.split("/").filter(Boolean); // ['en', 'gb', 'business']
   const endpoint1 = pathSegments[pathSegments.length - 1]; // e.g., 'business'
@@ -138,7 +127,6 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
     }
     return null;
   }).filter(Boolean);
-
   const howItWorksData = HowItWorksData[endpoint1] || HowItWorksData.business;
   return (
     <>
@@ -152,11 +140,6 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
         />
       </Helmet>
       <div>
-        {/* <Accountants
-      header={accountHeader}
-      subHeader={subHeader}
-      panelImage={financeBg}
-    /> */}
         <BannerWithBreadCrum
           header={accountHeader}
           LevelOneTwoTitle={subHeader}
@@ -166,46 +149,29 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
           panelImage={Home}
           title="Home & Garden"
           para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
-          para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotation for the work you require."
+          para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotations for the work you require"
           para3={`It's super fast and easy!`}
         />
 
-        {/* {endpoint !== routeName && (
-      <div className={styles.findAccountInfoContainer}>
-        <p className={styles.breadcrumb}>
-          {breadcrumbItems.map((item, index) => {
-            const isLast = index === breadcrumbItems.length - 1;
-            const slug = item.toLowerCase().replace(/ /g, "-");
-
-            return isLast ? (
-              <span key={index} className={styles.active}>
-                {item}
-              </span>
-            ) : (
-              <span key={index}>
-                <Link to={`/en/gb/${slug}`} className={styles.link}>
-                  {item}
-                </Link>{" "}
-                <span style={{ color: "black", padding: "0 4px" }}>/</span>
-              </span>
-            );
-          })}
-        </p>
-      </div>
-    )} */}
-
-        {/* <FindingBusinessProfessionals
-      header={accountHeader}
-      subHeader={subHeader}
-      bestText={bestText}
-    /> */}
         <HowItWorks
           howItWorksData={howItWorksData}
           header={accountHeader}
           subHeader={subHeader}
         />
         <PopularCategories data={filteredCategories} />
-        <AllServicesComponent data={filteredAllServicesData} />
+        {/* <AllServicesComponent data={filteredAllServicesData} /> */}
+        <AllServiceLevel1
+          data={[
+            {
+              name: "Fence & Gate Installation",
+              path: "/fencing-contractors-near-me",
+            },
+            { name: "Driveway Installation", path: "" },
+            { name: "Patio Services", path: "" },
+            { name: "Landscaping", path: "" },
+            { name: "Artificial Grass Installation", path: "" },
+          ]}
+        />
         <GetQuotes message={subHeader} needSString={false} />
       </div>
     </>

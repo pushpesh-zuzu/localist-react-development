@@ -69,7 +69,7 @@ const routes = [
       { path: "login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
       { path: "passwordless_login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
       {
-        path: "home/",
+        path: "home",
         element: (
           <LocaleRedirect><CloneCatrgory
             routeName="home"

@@ -181,7 +181,7 @@ const CloneAccountants = ({
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
             <h2>
-              Do you need <span className={styles.blueText}> {title} </span>
+              Do you need trusted <span className={styles.blueText}> {title} </span>
               Professionals?
             </h2>
             <div className={styles.inputGroup}>
