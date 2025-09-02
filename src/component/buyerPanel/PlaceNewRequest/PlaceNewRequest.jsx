@@ -3,7 +3,8 @@ import styles from "./PlaceNewRequest.module.css";
 import BuyerRegistration from "./BuyerRegistration/BuyerRegistration";
 import { useDispatch, useSelector } from "react-redux";
 import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
-import moment from "moment";
+// import moment from "moment";
+import moment from "moment-timezone";
 import { Spin } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import HiredProfessional from "./BuyerRegistration/HiredProfessional/HiredProfessional";
@@ -105,7 +106,7 @@ const PlaceNewRequest = () => {
                 <div className={styles.cardHeader}>
                   <h3 className={styles.cardTitle}>{req.category?.name}</h3>
                   <span className={styles.timeAgo}>
-                    {moment(req.created_at).fromNow()}
+                   {moment(req.created_at).tz("Europe/London").fromNow()}
                   </span>
                 </div>
                 <div
