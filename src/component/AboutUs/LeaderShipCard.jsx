@@ -50,7 +50,7 @@ const LeadershipTeam = () => {
       name: "Michael Marshall",
       position: "Director",
       imageUrl:
-        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/png-hispanic-man-portrait-cartoon-adult.png",
+        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/cartoon-man-with-glasses-orange-backpack-photorealistic-portraits-unreal-engine-5.png",
       linkedinUrl: "#",
       xUrl: "#",
     },
@@ -60,7 +60,7 @@ const LeadershipTeam = () => {
       name: "Nathan O'Connor",
       position: "Director",
       imageUrl:
-        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/cartoon-man-with-glasses-orange-backpack-photorealistic-portraits-unreal-engine-5.png",
+        "https://internetmediagroupltd.com/wp-content/uploads/2025/08/png-hispanic-man-portrait-cartoon-adult.png",
       linkedinUrl: "#",
       xUrl: "#",
     },

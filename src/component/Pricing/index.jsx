@@ -14,7 +14,7 @@ const Pricing = () => {
         <title>Pricing | Join Free & Connect with Customers - Localists</title>
         <meta
           name="description"
-          content=" Register free on Localists and get customer leads. Only pay a small fee to connect with the ones you want. Keep 100% of what you earn."
+          content="Register free on Localists and get customer leads. Only pay a small fee to connect with the ones you want. Keep 100% of what you earn."
         />
       </Helmet>
 
