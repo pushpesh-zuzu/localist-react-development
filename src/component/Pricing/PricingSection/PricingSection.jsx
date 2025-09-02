@@ -12,12 +12,11 @@ const PricingSection = () => {
       <h1 className={styles.title}>Pricing</h1>
       <div className={styles.box}>
         <p className={styles.text}>
-          From the moment you sign up, we’ll send you{" "}
-          <span className={styles.linkText}>leads for free</span>. You only pay
-          to contact customers that you think are the right fit for your
+          At Localists, there are no surprises. From the moment you sign up, you’ll start receiving{" "}
+          <span className={styles.linkText}>leads for free</span>. You only pay when you choose to contact a customer that feels right for your business.
           business
         </p>
-        <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button>
+        {/* <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button> */}
       </div>
     </div>
   );

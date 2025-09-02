@@ -203,14 +203,14 @@ useEffect(() => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.2 }}
               >
-                {isMobile && (
+                {/* {isMobile && (
                   <div
                     className={styles.crossBtn}
                     onClick={() => handleClose()}
                   >
                     ×
                   </div>
-                )}
+                )} */}
 
                 <div className={styles.popover_header}>
                   <span>Services</span>

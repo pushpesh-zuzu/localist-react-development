@@ -160,7 +160,7 @@ const Footer = () => {
               <Link className={styles.link} to={`/${currentLang}/${currentCountry}/sellers/pricing`}>
                 <li>Pricing</li>
               </Link>
-              <Link
+              {/* <Link
                 className={styles.link}
                 to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/sellers/create`}
               >
@@ -171,7 +171,7 @@ const Footer = () => {
                 >
                   Join as a Professional
                 </li>
-              </Link>
+              </Link> */}
               {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>
                   <li > New Leads</li>
@@ -203,14 +203,14 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
               <h4>About</h4>
             <ul>
               <Link className={styles.link} to={`/${currentLang}/${currentCountry}/about-us`}>
                 <li>About Localists</li>
               </Link>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Links (NO styles.link here) */}
@@ -269,24 +269,24 @@ const Footer = () => {
               <Link to={`/${currentLang}/${currentCountry}/sellers/pricing`}>
                 <li className={styles.mobileItem}>Pricing</li>
               </Link>
-              <Link to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/sellers/create`}>
+              {/* <Link to={(!userToken || !registerToken) && `/${currentLang}/${currentCountry}/sellers/create`}>
                 <li className={styles.mobileItem} onClick={handleJoinAsProfessional}>
                   Join as a Professional
                 </li>
-              </Link>
+              </Link> */}
               {/* <Link to="/help-center">
                 <li>Help Centre</li>
               </Link> */}
             </ul>
           </Panel>
 
-          <Panel className={styles.footerNavLinks} header="About" key="3">
+          {/* <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <Link to={`/${currentLang}/${currentCountry}/about-us`}>
                 <li className={styles.mobileItem}>About Localists</li>
               </Link>
             </ul>
-          </Panel>
+          </Panel> */}
         </Collapse>
 
         {isMobile ? (

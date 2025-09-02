@@ -31,7 +31,7 @@ function HowItWorkSeller() {
           />
           <SearchServicesPin
             className={styles.search}
-            title="Localists is the go-to marketplace for connecting customers with trusted local professionals. Every day, people across the UK turn to us to find reliable experts for their projects — from home improvements to business services"
+            title="More than 5,000 professionals across the UK already use Localists to grow their businesses, and we’re adding new opportunities daily. Instead of wasting time chasing cold leads or paying for ads that don’t work, Localists brings the right clients straight to you."
           />
         </div>
       </div>

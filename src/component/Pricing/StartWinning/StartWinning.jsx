@@ -11,7 +11,7 @@ const StartWinning = () => {
   return (
     <div className={styles.container}>
       <p className={styles.heading}>Start winning new business today</p>
-      <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button>
+      {/* <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button> */}
     </div>
   );
 };

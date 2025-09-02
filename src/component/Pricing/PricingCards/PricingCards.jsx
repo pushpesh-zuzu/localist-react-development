@@ -7,26 +7,26 @@ import newbusiness from "../../../assets/Images/Pricing/newBusinessImg.svg";
 
 const cardData = [
   {
-    title: "Credits at the ready",
+    title: "No commission. No hidden fees.",
     description:
-      "We use a simple credit system. Buy a credit pack and simply use the credits to contact the customers you’re interested in. Or let your ideal customers reach out to you. ",
+      "We use a straightforward credit system. Buy a credit pack, and use your credits to connect with the customers you want. It's that easy.",
     linkText: "No commission, no hidden fees.",
     image: creditsAtTheReady,
   },
   {
-    title: "You're in control",
+    title: " You have Total Control",
     description:
-      "You decide which leads you respond to and you’ll know the cost in credits upfront, or let your ideal customer contact you. That way, you always have control of what you’re spending.",
+      "When we send you leads, you decide which leads are worth it. Every lead shows its cost in credits upfront, so you know exactly what you’re spending.",
     image: youareincontrol,
   },
   {
-    title: "Job-related prices",
+    title: "Transparent Pricing",
     description:
-      "We calculate the costs of contacting a customer based on the service, the value of the job, and the supply and demand in the area.",
+      "The credit cost of a lead depends on the service, the size of the job, and demand in your area, keeping things fair and flexible.",
     image: jobrelatedprice,
   },
   {
-    title: "New business guaranteed",
+    title: "Our Pricing Promise",
     description:
       "We’re so confident you’ll win business with your first credit pack, we’ll return all your credits if you don’t. No questions asked.",
     image: newbusiness,

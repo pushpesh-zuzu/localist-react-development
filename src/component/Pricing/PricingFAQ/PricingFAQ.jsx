@@ -4,24 +4,24 @@ import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 const faqData = [
   {
-    question: "Do I get the customer's phone number or email address?",
+    question: "Do I get the customer’s contact details?",
     answer:
-      "Yes. When you pay to respond to a lead you'll get the customer's phone number and email. You can also contact them directly through your localists account using Messenger.",
+      "Yes, once you unlock a lead, you’ll receive the customer’s phone number and email.",
   },
   {
-    question: "Are follow-up messages extra?",
+    question: "Do I pay for sending follow-up messages?",
     answer:
-      "No, they’re free. We only charge a small one-off fee for you to respond to a lead. Any further messages or contact you have with the customer are completely free.",
+      " No. There is no cost associated with follow-up messages. Once you’ve unlocked the lead, you can contact the customer as much as needed to finalise your project details.",
   },
   {
-    question: "Do localists credits expire?",
+    question: "How long do my credits last?",
     answer:
-      "All Credits are valid for 12 months from the date of purchase. For more information please see our Terms and Conditions",
+      "No. Your credits stay valid until you use them.",
   },
   {
-    question: "Are there any hidden costs?",
+    question: "Will I be charged extra along the way?",
     answer:
-      "No, we don’t believe in hidden costs. And we don’t charge commission either. You simply pay a one-off fee to respond to a lead. After that, 100% of the money you make from the job is yours to keep.",
+      "At Localists, we value transparency. So you can rest assured there are no commissions or surprise fees along the way. You only pay for the credits you use to unlock potential leads. ",
   },
 ];
 
