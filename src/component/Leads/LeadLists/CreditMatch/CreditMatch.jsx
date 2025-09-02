@@ -258,11 +258,12 @@ const CreditMatch = () => {
         <div className={styles.creditMatchContainer}>
           <div ref={triggerRef} style={{ height: "1px" }}></div>
 
-          <div ref={stickyRef} className={styles.creditsLeftContainer}>
-            <button
-              className={styles.creditsButton}
-              onClick={() => filterData?.[0] && handleBuyNow(filterData[0])}
-            >
+          <div
+            ref={stickyRef}
+            className={styles.creditsLeftContainer}
+            onClick={() => handleBuyNow()}
+          >
+            <button className={styles.creditsButton}>
               You have {totalCredit?.total_credit ?? "0"} Credits Left
             </button>
           </div>

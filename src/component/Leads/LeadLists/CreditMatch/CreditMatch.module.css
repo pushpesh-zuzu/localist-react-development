@@ -260,7 +260,7 @@
   text-align: center;
   border: none;
   cursor: pointer !important;
-  z-index: 9999;
+  /* z-index: 9999; */
   pointer-events: none;
 }
 

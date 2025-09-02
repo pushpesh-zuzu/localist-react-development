@@ -81,7 +81,7 @@ const SaveForLater = () => {
         sort_type: getSortTypeValue(value),
         page_type: "saved_leads",
       };
-      dispatch(getSaveLaterListData(filterData));
+      dispatch(getLeadFiterApiList(filterData));
     }
   };
 
@@ -116,7 +116,7 @@ const SaveForLater = () => {
         credit_filter: getCreditFilterValue(value),
         page_type: "saved_leads",
       };
-      dispatch(getSaveLaterListData(filterData));
+      dispatch(getLeadFiterApiList(filterData));
     }
   };
 
