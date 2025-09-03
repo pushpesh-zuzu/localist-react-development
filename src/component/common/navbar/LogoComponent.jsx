@@ -126,7 +126,7 @@ const LogoComponent = () => {
   if (status == 1) {
     return "/sellers/leads";
   } else if (status == 2) {
-    return "/buyers/create";
+    return "/";
   } else {
     return "/";
   }
