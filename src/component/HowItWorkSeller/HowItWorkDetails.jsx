@@ -37,7 +37,7 @@ const data = [
   },
   {
     id: 4,
-    title: " Why Professionals Love Localists?",
+    title: "Why Professionals Love Localists?",
     paragraphs: ["When you join Localists as a seller you’ll get:"],
     list: [
       "High visibility profile that shows off your work and builds your reputation.",
@@ -107,7 +107,7 @@ const HowItWorksDetail = () => {
                     key={imgIndex}
                     src={image}
                     alt={`${step.title} - Image ${imgIndex + 1}`}
-                   className={`${styles.stepImage} ${imgIndex === 1 ? styles.singleImageDisplayed : ""}`}
+                   className={`${styles.stepImage} ${(step.id ===4 && imgIndex === 0) ? styles.singleImageDisplayed : ""}`}
                     style={{marginTop:imgIndex ===1?'30px':''}}
                   />
                 ))}

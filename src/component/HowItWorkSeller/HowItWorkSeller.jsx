@@ -26,7 +26,7 @@ function HowItWorkSeller() {
           <BlueBlackTextForH1
             firstblue={false}
             secondText=" How It Works –"
-            firstblueText="localists"
+            firstblueText="Localists"
             thirdText="for Professionals"
           />
           <SearchServicesPin

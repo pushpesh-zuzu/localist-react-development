@@ -69,8 +69,8 @@
 }
 
 .imageContainer:nth-child(even) {
-  flex: 1.25;
-  padding-left: 10%;
+  flex: 1;
+  padding-left: 0%;
 }
 
 .imageContainer:nth-child(odd) {
@@ -90,7 +90,7 @@
   display: flex;
   gap: 14px;
   flex-direction: column;
-  max-width: 75%;
+  max-width: 100%;
 }
 .stepTitle {
   /* color: var(--primary-color); */
@@ -175,11 +175,18 @@
     border-width: 10px;
   }
 }
-
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1250px) {
+  .singleImageDisplayed {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 1024px) {
   .stepsContainer {
     padding: 0 40px;
     gap: 50px;
+  }
+  .singleImageDisplayed {
+    display: none !important;
   }
 
   .stepHeading {
@@ -210,7 +217,9 @@
     padding: 0 30px;
     gap: 30px;
   }
-
+  .singleImageDisplayed {
+    display: block !important;
+  }
   .stepWrapper {
     display: flex;
     flex-direction: column;
@@ -220,6 +229,11 @@
   }
   .stepWrapper:nth-child(odd) {
     flex-direction: column-reverse;
+  }
+}
+@media screen and (max-width: 540px) {
+  .singleImageDisplayed {
+    display: none !important;
   }
 }
 
@@ -245,7 +259,7 @@
     flex-direction: column;
     max-width: 100%;
   }
-  .singleImageDisplayed{
+  .singleImageDisplayed {
     display: none !important;
   }
 }
