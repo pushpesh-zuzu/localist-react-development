@@ -198,6 +198,8 @@ const BidsList = ({ previousStep }) => {
       user_id: userToken?.remember_tokens,
       lead_id: requestId,
     };
+    console.log(data, "data");
+
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
 
@@ -270,6 +272,7 @@ const BidsList = ({ previousStep }) => {
           user_id: userToken?.remember_tokens,
           lead_id: requestId,
         };
+        console.log(data, "lead");
         dispatch(getAutoBid(data));
       }
     });

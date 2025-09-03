@@ -104,7 +104,7 @@ const PlaceNewRequest = () => {
                 <div className={styles.cardHeader}>
                   <h3 className={styles.cardTitle}>{req.category?.name}</h3>
                   <span className={styles.timeAgo}>
-                   {moment.tz(req.created_at, "Europe/London").fromNow()}
+                    {moment.tz(req.created_at, "Europe/London").fromNow()}
                   </span>
                 </div>
                 <div

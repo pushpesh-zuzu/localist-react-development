@@ -4,13 +4,17 @@ import { verifyPhoneNumberData } from "../../../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 
-const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
+const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
-  const dispatch = useDispatch()
-  const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
-  const { requestUserId,createrequestUserId } = useSelector((state)=> state.buyer)
-console.log(requestUserId,"requestDataList")
+  const dispatch = useDispatch();
+  const { requestDataList, createRequestToken, requestId } = useSelector(
+    (state) => state.buyer
+  );
+  const { requestUserId, createrequestUserId } = useSelector(
+    (state) => state.buyer
+  );
+  console.log(requestUserId, "requestDataList");
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -53,18 +57,19 @@ console.log(requestUserId,"requestDataList")
     }
   };
   const handleSubmit = () => {
-    const enteredOtp = otp.join(""); 
-  
+    const enteredOtp = otp.join("");
+
     if (enteredOtp.length < 4) {
       showToast("error", "Please enter a valid 4-digit OTP.");
       return;
     }
-  
+
     const data = {
       user_id: requestUserId,
       otp: enteredOtp,
+      request_id: requestId,
     };
-  
+
     dispatch(verifyPhoneNumberData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
@@ -74,7 +79,6 @@ console.log(requestUserId,"requestDataList")
       }
     });
   };
-  
 
   return (
     <div className={styles.modalOverlay}>
@@ -100,12 +104,14 @@ console.log(requestUserId,"requestDataList")
         </div>
 
         <p className={styles.instruction}>
-          Please enter the code sent by SMS to 
+          Please enter the code sent by SMS to
           <br />
           <span>{requestDataList?.phone}</span>
         </p>
 
-        <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
+        <button className={styles.submitBtn} onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </div>
   );

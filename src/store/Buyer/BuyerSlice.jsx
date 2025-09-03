@@ -1,45 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
 import axios from "axios";
-import { setAuthToken, setRegisterData, setRegisterToken } from "../FindJobs/findJobSlice";
+import {
+  setAuthToken,
+  setRegisterData,
+  setRegisterToken,
+} from "../FindJobs/findJobSlice";
 import { setToken, setUserToken } from "../Auth/authSlice";
 import { showToast, updateLocalStorageValue } from "../../utils";
 import { safeLocalStorage } from "../../utils/localStorage";
 
 const initialState = {
-  questionLoader:false,
-  questionanswerData:[],
-  buyerStep:1,
-  profileLoader:false,
-  profileImageLoader:false,
-  changePasswordLoader:false,
-  requestId:"",
-  citySerach:"",
-  buyerRequest:{
-    service_id:"",
-    postcode:"",
-    city:"",
-    questions:[],
-    phone:"",
-    recevive_online:"",email:"",
-    name:""
-},
-qualityData:{},
-addDetailLoader:false,
-buyerrequestListLoader:false, 
-buyerRequestList:[] ,
-requestDataList: safeLocalStorage.getItem("createRequest") ? JSON.parse(safeLocalStorage.getItem("createRequest")) : null,
-createRequestToken: safeLocalStorage.getItem("createRequestToken") ?  JSON.parse(safeLocalStorage.getItem("createRequestToken")) : null,
-getuploadImg:[],
-requestUserId:[],
-infoLoader:false,
-requestLoader:false,
-submitImageLoader:false,
-notificationList:[],
-notificationLoader:false,
-addNotificationLoader:false,
-verifyPhoneNumberLoader:false,
-
+  questionLoader: false,
+  questionanswerData: [],
+  buyerStep: 1,
+  profileLoader: false,
+  profileImageLoader: false,
+  changePasswordLoader: false,
+  requestId: "",
+  citySerach: "",
+  buyerRequest: {
+    service_id: "",
+    postcode: "",
+    city: "",
+    questions: [],
+    phone: "",
+    recevive_online: "",
+    email: "",
+    name: "",
+  },
+  qualityData: {},
+  addDetailLoader: false,
+  buyerrequestListLoader: false,
+  buyerRequestList: [],
+  requestDataList: safeLocalStorage.getItem("createRequest")
+    ? JSON.parse(safeLocalStorage.getItem("createRequest"))
+    : null,
+  createRequestToken: safeLocalStorage.getItem("createRequestToken")
+    ? JSON.parse(safeLocalStorage.getItem("createRequestToken"))
+    : null,
+  getuploadImg: [],
+  requestUserId: [],
+  infoLoader: false,
+  requestLoader: false,
+  submitImageLoader: false,
+  notificationList: [],
+  notificationLoader: false,
+  addNotificationLoader: false,
+  verifyPhoneNumberLoader: false,
 };
 
 export const questionAnswerData = (questionData) => {
@@ -68,7 +76,6 @@ export const questionAnswerData = (questionData) => {
 };
 export const createRequestData = (requestData) => {
   return async (dispatch) => {
-    
     dispatch(setCreateRequesLoader(true));
     try {
       const response = await axiosInstance.post(
@@ -77,7 +84,6 @@ export const createRequestData = (requestData) => {
         {
           headers: {
             "Content-Type": "application/json",
-            
           },
         }
       );
@@ -85,18 +91,18 @@ export const createRequestData = (requestData) => {
       if (response) {
         dispatch(setRequestUserId(response.data.data?.user_id));
         // dispatch(setQuestionAnswerData(response?.data?.data));
-        // dispatch(setRequestId(response?.data?.data?.request_id))
+        dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
         // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
         // dispatch(setRegisterData(response?.data?.data))
         // dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         // dispatch(setToken(response?.data?.data?.remember_tokens))
-       
-        return response.data
+
+        return response.data;
         // navigate("/buyers/create");
       }
     } catch (error) {
-    showToast("error", error?.message)
+      showToast("error", error?.message);
     } finally {
       dispatch(setCreateRequesLoader(false));
     }
@@ -108,16 +114,23 @@ export const updateProfileData = () => {
     dispatch(setProfileLoader(true));
     try {
       const response = await axiosInstance.get(
-        `customer/setting/get-profile-info`,
-        
+        `customer/setting/get-profile-info`
       );
-        console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
+      console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
 
       if (response) {
         dispatch(setGetUploadImgData(response?.data?.data));
-        updateLocalStorageValue('barkUserToken', 'profile_image', response?.data?.data?.[0]?.profile_image);
+        updateLocalStorageValue(
+          "barkUserToken",
+          "profile_image",
+          response?.data?.data?.[0]?.profile_image
+        );
         console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
-        updateLocalStorageValue("registerDataToken", "profile_image", response?.data?.data?.[0]?.profile_image);
+        updateLocalStorageValue(
+          "registerDataToken",
+          "profile_image",
+          response?.data?.data?.[0]?.profile_image
+        );
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -138,11 +151,11 @@ export const updateProfileImageData = (profileImageData) => {
             "Content-Type": "multipart/form-data",
           },
         }
-      )
+      );
 
       if (response) {
         dispatch(updateProfileData());
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -161,7 +174,7 @@ export const updatePasswordData = (changeData) => {
       );
 
       if (response) {
-       return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -180,7 +193,7 @@ export const updateUserIfoData = (userData) => {
       );
 
       if (response) {
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -237,10 +250,11 @@ export const getbuyerrequestList = () => {
   return async (dispatch) => {
     dispatch(setbuyerrequestListLoader(true));
     try {
-      const response = await axiosInstance.get(`customer/my-request/get-submitted-request-list`);
+      const response = await axiosInstance.get(
+        `customer/my-request/get-submitted-request-list`
+      );
       if (response) {
         dispatch(setbuyerRequestList(response?.data?.data));
-     
       }
     } catch (error) {
       console.log("error", error?.response?.data?.message);
@@ -260,13 +274,13 @@ export const addDetailsRequestData = (addDetailsData) => {
       );
 
       if (response) {
-        dispatch(getbuyerrequestList())
-        return response.data
+        dispatch(getbuyerrequestList());
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      dispatch(setAuthToken())
+      dispatch(setAuthToken());
       dispatch(setAddDetailLoader(false));
     }
   };
@@ -281,8 +295,8 @@ export const getNotificationData = (NotificationData) => {
       );
 
       if (response) {
-       dispatch(setGetNotificationData(response?.data?.data));
-        return response.data
+        dispatch(setGetNotificationData(response?.data?.data));
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -302,8 +316,8 @@ export const addNotificationData = (addNotificationData) => {
       );
 
       if (response) {
-      //  dispatch(setGetNotificationData(response?.data?.data));
-        return response.data
+        //  dispatch(setGetNotificationData(response?.data?.data));
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -315,24 +329,24 @@ export const addNotificationData = (addNotificationData) => {
 export const verifyPhoneNumberData = (verifyData) => {
   return async (dispatch) => {
     dispatch(setVerifyPhoneNumberLoader(true));
-    console.log(verifyData);
+    console.log(verifyData, "verifyData");
     try {
       const response = await axiosInstance.post(
         `customer/verify-phone-number`,
         verifyData
       );
-      console.log('verify number',response?.data?.data);
+      console.log("verify number", response?.data?.data);
       if (response?.data?.success) {
-        
+        console.log("response1234", response);
         dispatch(setQuestionAnswerData(response?.data?.data));
-        dispatch(setRequestId(response?.data?.data?.request_id));
+        // dispatch(setRequestId(response?.data?.data?.request_id));
         dispatch(setRequestData(response?.data?.data));
         dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens));
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         dispatch(setToken(response?.data?.data?.remember_tokens));
         //dispatch(setGetNotificationData(response?.data?.data));
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -352,7 +366,7 @@ export const closeRequestData = (closeData) => {
       );
 
       if (response) {
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
@@ -362,9 +376,6 @@ export const closeRequestData = (closeData) => {
   };
 };
 
-
-
-
 const buyerSlice = createSlice({
   name: "buyer",
   initialState: initialState,
@@ -372,52 +383,52 @@ const buyerSlice = createSlice({
     setquestionLoader(state, action) {
       state.questionLoader = action.payload;
     },
-    setQuestionAnswerData(state,action){
-      state.questionanswerData = action.payload
+    setQuestionAnswerData(state, action) {
+      state.questionanswerData = action.payload;
     },
-    setBuyerStep(state,action){
-      state.buyerStep = action.payload
+    setBuyerStep(state, action) {
+      state.buyerStep = action.payload;
     },
-    setProfileLoader(state,action){
-      state.profileLoader = action.payload
+    setProfileLoader(state, action) {
+      state.profileLoader = action.payload;
     },
-    setProfileImageLoader(state,action){
-      state.profileImageLoader = action.payload
+    setProfileImageLoader(state, action) {
+      state.profileImageLoader = action.payload;
     },
-    setChangePasswordLoader(state,action){
-      state.changePasswordLoader = action.payload
+    setChangePasswordLoader(state, action) {
+      state.changePasswordLoader = action.payload;
     },
     setbuyerRequestData(state, action) {
-      state.buyerRequest =  { ...state.buyerRequest, ...action.payload };
+      state.buyerRequest = { ...state.buyerRequest, ...action.payload };
     },
-    setRequestId(state,action){
-      state.requestId = action.payload
+    setRequestId(state, action) {
+      state.requestId = action.payload;
     },
-    setQualityData(state,action){
-      state.qualityData = action.payload
+    setQualityData(state, action) {
+      state.qualityData = action.payload;
     },
-    setAddDetailLoader(state,action){
-      state.addDetailLoader = action.payload
+    setAddDetailLoader(state, action) {
+      state.addDetailLoader = action.payload;
     },
-    setbuyerrequestListLoader(state,action){
-      state.buyerrequestListLoader = action.payload
+    setbuyerrequestListLoader(state, action) {
+      state.buyerrequestListLoader = action.payload;
     },
-    setbuyerRequestList(state,action){
-      state.buyerRequestList = action.payload
-    } ,
-    setGetUploadImgData(state,action) {
-      state.getuploadImg = action.payload
+    setbuyerRequestList(state, action) {
+      state.buyerRequestList = action.payload;
     },
-    setChangeInfoLoader(state,action){
-      state.infoLoader = action.payload
+    setGetUploadImgData(state, action) {
+      state.getuploadImg = action.payload;
     },
-    setCreateRequesLoader(state,action){
-      state.requestLoader = action.payload
+    setChangeInfoLoader(state, action) {
+      state.infoLoader = action.payload;
     },
-    setSubmitImageLoader(state,action){
-      state.submitImageLoader = action.payload
+    setCreateRequesLoader(state, action) {
+      state.requestLoader = action.payload;
     },
-    setGetNotificationData(state, action) {   
+    setSubmitImageLoader(state, action) {
+      state.submitImageLoader = action.payload;
+    },
+    setGetNotificationData(state, action) {
       state.notificationList = action.payload;
     },
     setNotificationLoader(state, action) {
@@ -426,39 +437,68 @@ const buyerSlice = createSlice({
     setAddNotificationLoader(state, action) {
       state.addNotificationLoader = action.payload;
     },
-    setRequestData(state,action) {
-      state.requestDataList = action.payload
-      safeLocalStorage.setItem("createRequest", JSON.stringify(action.payload))
-
+    setRequestData(state, action) {
+      state.requestDataList = action.payload;
+      safeLocalStorage.setItem("createRequest", JSON.stringify(action.payload));
     },
 
     setRequestUserId: (state, action) => {
       state.requestUserId = action.payload;
     },
 
-    setCreateRequestToken(state,action) {
-      state.createRequestToken = action.payload
-      safeLocalStorage.setItem("createRequestToken", JSON.stringify(action.payload))
+    setCreateRequestToken(state, action) {
+      state.createRequestToken = action.payload;
+      safeLocalStorage.setItem(
+        "createRequestToken",
+        JSON.stringify(action.payload)
+      );
     },
-    clearSetbuyerRequestData(state,action){
-      state.buyerRequest ={
-        service_id:"",
-    postcode:"",
-    questions:[],
-    phone:"",
-    recevive_online:"",email:"",name:""
-      }
+    clearSetbuyerRequestData(state, action) {
+      state.buyerRequest = {
+        service_id: "",
+        postcode: "",
+        questions: [],
+        phone: "",
+        recevive_online: "",
+        email: "",
+        name: "",
+      };
     },
-    setVerifyPhoneNumberLoader(state,action) {
-      state.verifyPhoneNumberLoader = action.payload
+    setVerifyPhoneNumberLoader(state, action) {
+      state.verifyPhoneNumberLoader = action.payload;
     },
-    setcitySerach(state,action){
-      state.citySerach = action.payload
-    }
-  
+    setcitySerach(state, action) {
+      state.citySerach = action.payload;
+    },
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestUserId,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const {
+  setquestionLoader,
+  setAddNotificationLoader,
+  setcitySerach,
+  clearSetbuyerRequestData,
+  setCreateRequestToken,
+  setRequestData,
+  setVerifyPhoneNumberLoader,
+  setQuestionAnswerData,
+  setNotificationLoader,
+  setBuyerStep,
+  setProfileLoader,
+  setProfileImageLoader,
+  setSubmitImageLoader,
+  setChangePasswordLoader,
+  setbuyerRequestData,
+  setRequestUserId,
+  setRequestId,
+  setQualityData,
+  setAddDetailLoader,
+  setbuyerrequestListLoader,
+  setbuyerRequestList,
+  setGetUploadImgData,
+  setChangeInfoLoader,
+  setCreateRequesLoader,
+  setGetNotificationData,
+} = buyerSlice.actions;
 
 export default buyerSlice.reducer;
