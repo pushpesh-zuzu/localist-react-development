@@ -29,6 +29,12 @@ const EmailMatch = ({
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [emailErrorMessage, setEmailErrorMessage] = useState("");
+
+  const [isMobileValid, setIsMobileValid] = useState(true);
+  const [mobileErrorMessage, setMobileErrorMessage] = useState("");
+
   const [errors, setErrors] = useState({
     email: false,
     name: false,
@@ -49,13 +55,19 @@ const EmailMatch = ({
 
       if (res?.success) {
         setErrors((prev) => ({ ...prev, email: false }));
+        setIsEmailValid(true);
+        setEmailErrorMessage("");
       } else {
         setEmail(""); // clear instantly
         if (setEmails) setEmails("");
+        setIsEmailValid(false);
+        setEmailErrorMessage("Email is already registered.");
       }
     } catch (err) {
       console.error("Error checking email:", err);
       setErrors((prev) => ({ ...prev, email: false }));
+      setIsEmailValid(false);
+      setEmailErrorMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -79,10 +91,17 @@ const EmailMatch = ({
       phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
     };
 
+    if (newErrors.email && !emailErrorMessage) {
+      setEmailErrorMessage("Please enter a valid email address.");
+    }
+
     setErrors(newErrors);
 
     const hasError = Object.values(newErrors).some((e) => e);
-    if (hasError) return;
+    if (hasError || !isEmailValid) {
+      setErrors((prev) => ({ ...prev, email: true }));
+      return;
+    }
 
     if (setEmails) {
       setEmails(email);
@@ -235,7 +254,6 @@ const EmailMatch = ({
           </div>
 
           <div className={styles.buttonContainer}>
-            {/* NSai */}
             {/* <button
               className={styles.backButton}
               onClick={previousStep}

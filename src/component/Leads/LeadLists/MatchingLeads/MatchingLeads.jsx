@@ -191,7 +191,7 @@ const MatchingLeads = () => {
   };
 
   const handleEdit = () => {
-    navigate("/settings/leads/my-services");
+    navigate("/settings/billing/my-credits");
   };
 
   const handleFilterClick = () => {
