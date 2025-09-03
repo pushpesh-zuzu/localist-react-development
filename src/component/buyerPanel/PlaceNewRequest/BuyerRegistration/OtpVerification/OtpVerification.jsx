@@ -10,6 +10,7 @@ const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
   const dispatch = useDispatch()
   const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
   const { requestUserId,createrequestUserId } = useSelector((state)=> state.buyer)
+  const { requestUserPhone,createrequestUserPhone } = useSelector((state)=> state.buyer)
 console.log(requestUserId,"requestDataList")
   if (!open) return null;
 
@@ -100,9 +101,9 @@ console.log(requestUserId,"requestDataList")
         </div>
 
         <p className={styles.instruction}>
-          Please enter the code sent by SMS to 
+          Please enter the code sent by SMS to
           <br />
-          <span>{requestDataList?.phone}</span>
+          <span>{requestUserPhone}</span>
         </p>
 
         <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>

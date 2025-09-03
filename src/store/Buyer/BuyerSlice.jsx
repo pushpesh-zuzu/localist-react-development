@@ -32,6 +32,7 @@ requestDataList: safeLocalStorage.getItem("createRequest") ? JSON.parse(safeLoca
 createRequestToken: safeLocalStorage.getItem("createRequestToken") ?  JSON.parse(safeLocalStorage.getItem("createRequestToken")) : null,
 getuploadImg:[],
 requestUserId:[],
+requestUserPhone:[],
 infoLoader:false,
 requestLoader:false,
 submitImageLoader:false,
@@ -84,6 +85,7 @@ export const createRequestData = (requestData) => {
 
       if (response) {
         dispatch(setRequestUserId(response.data.data?.user_id));
+         dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
         // dispatch(setRequestId(response?.data?.data?.request_id))
         // dispatch(setRequestData(response?.data?.data))
@@ -435,6 +437,9 @@ const buyerSlice = createSlice({
     setRequestUserId: (state, action) => {
       state.requestUserId = action.payload;
     },
+    setRequestUserPhone: (state, action) => {
+      state.requestUserPhone = action.payload;
+    },
 
     setCreateRequestToken(state,action) {
       state.createRequestToken = action.payload
@@ -459,6 +464,6 @@ const buyerSlice = createSlice({
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestUserId,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestUserId,setRequestUserPhone,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;
