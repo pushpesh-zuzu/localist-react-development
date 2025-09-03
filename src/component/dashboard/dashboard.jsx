@@ -239,7 +239,7 @@ const Dashboard = () => {
                       </span>
                       {/* <span><img src={phone} /> &nbsp; 0000000000 </span> */}
                     </div>
-                    <div>(Available 24 hours a day, 7 days a week)</div>
+                    {/* <div>(Available 24 hours a day, 7 days a week)</div> */}
                   </div>
                 </div>
               </div>
