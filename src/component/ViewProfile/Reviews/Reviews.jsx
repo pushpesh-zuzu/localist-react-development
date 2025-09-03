@@ -33,8 +33,11 @@ const ReviewSection = ({
   const updatedReviews =
     reviewListData?.length > 0 ? reviewListData : details?.reviews;
   // const reviewLength = updatedReviews?.length || 0;
-  const { viewProfileData } = useSelector((state) => state.leadSetting);
-  const reviewLength = viewProfileData?.reviews_count || 0;
+  const { viewProfileData, reviewProfileData } = useSelector(
+    (state) => state.leadSetting
+  );
+  const datata = useSelector((state) => state.leadSetting);
+  const reviewLength = reviewProfileData?.reviews_count || 0;
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
@@ -42,6 +45,7 @@ const ReviewSection = ({
     setIsOpen(true);
   };
   const totalReviews = 5;
+  console.log(reviewProfileData, "viewProfileData");
 
   const initialCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
@@ -95,12 +99,12 @@ const ReviewSection = ({
           <div className={styles.container}>
             <div className={styles.left}>
               <div className={styles.score}>
-                {viewProfileData?.avg_rating ?? 0}/5
+                {reviewProfileData?.avg_rating ?? 0}/5
               </div>
 
               <div className={styles.stars}>
                 {Array.from({ length: 5 }).map((_, index) => {
-                  const rating = viewProfileData?.avg_rating ?? 0;
+                  const rating = reviewProfileData?.avg_rating ?? 0;
                   if (index < Math.floor(rating)) {
                     return (
                       <img
@@ -135,7 +139,7 @@ const ReviewSection = ({
                 })}
               </div>
               <div className={styles.totalReviews}>
-                {reviewLength} customer reviews
+                {reviewLength} customer reviews1
               </div>
             </div>
             <div className={styles.middleBox}></div>

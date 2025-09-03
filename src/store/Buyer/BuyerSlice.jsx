@@ -503,6 +503,7 @@ export const {
   setChangeInfoLoader,
   setCreateRequesLoader,
   setGetNotificationData,
+  setRequestUserPhone,
 } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

@@ -8,9 +8,8 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
   const dispatch = useDispatch();
-  const { requestDataList, createRequestToken, requestId } = useSelector(
-    (state) => state.buyer
-  );
+  const { requestDataList, createRequestToken, requestId, requestUserPhone } =
+    useSelector((state) => state.buyer);
   const { requestUserId, createrequestUserId } = useSelector(
     (state) => state.buyer
   );
