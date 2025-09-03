@@ -411,13 +411,9 @@ useEffect(() => {
 const redirectPath = getRedirectPath();
   return (
     <div className={styles.logoContainer}>
-     <Link to={redirectPath}>
-      <img
-        src={logo}
-        alt="logo"
-        className={styles.mainLogo}
-      />
-</Link>
+      <Link to={redirectPath}>
+        <img src={logo} alt="logo" className={styles.mainLogo} />
+      </Link>
       {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
         !isAccountPage &&
         !isNotification && (
@@ -437,40 +433,40 @@ const redirectPath = getRedirectPath();
         )} */}
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <>
-        <Popover
-          onMouseEnter={() => setShowbMenu(true)}
-          placement={placement}
-          // open={isMobile ? showMenu : null}
-          open={showMenu}
-          content={content}
-          arrow={false}
-          trigger="hover"
-          className="popover_wrap"
-          onClick={() => setShowbMenu(true)}
-          getPopupContainer={(trigger) => trigger.parentNode}
-        >
-          <div className={styles.serviceContainer}>
-            <span className={styles.serviceText}>Explore Our Services</span>
-            <span className={styles.serviceTextMobile}>Our Services</span>
-            <img src={downArrow} alt="down-arrow" />
-          </div>
-        </Popover>
-        {/* <div style={{ display: "none" }}>
-          {megaMenu
-            .filter((item) => item.name === "House & Home")
-            .map((item, i) => (
-              <div key={i}>
-                <a href={`/${currentLang}/${currentCountry}/${item.path}`}>
-                  {item.name}
-                </a>
+          <Popover
+            onMouseEnter={() => setShowbMenu(true)}
+            placement={placement}
+            // open={isMobile ? showMenu : null}
+            open={showMenu}
+            content={content}
+            arrow={false}
+            trigger="hover"
+            className="popover_wrap"
+            onClick={() => setShowbMenu(true)}
+            getPopupContainer={(trigger) => trigger.parentNode}
+          >
+            <div className={styles.serviceContainer}>
+              <span className={styles.serviceText}>Explore Our Services</span>
+              <span className={styles.serviceTextMobile}>Our Services</span>
+              <img src={downArrow} alt="down-arrow" />
+            </div>
+          </Popover>
+          <div style={{ display: "none" }}>
+            {megaMenu
+              .filter((item) => item.name === "House & Home")
+              .map((item, i) => (
+                <div key={i}>
+                  <a href={`/${currentLang}/${currentCountry}/${item.path}`}>
+                    {item.name}
+                  </a>
 
-                {item.subcategory?.map((sub, j) => (
-                  <div key={j}>
-                    <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>
-                      {sub.name}
-                    </a>
+                  {item.subcategory?.map((sub, j) => (
+                    <div key={j}>
+                      <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>
+                        {sub.name}
+                      </a>
 
-                    {sub.children?.map((child, k) => {
+                      {/* {sub.children?.map((child, k) => {
                       const childRoute = getChildRoute(sub.path, child);
                       return (
                         <a
@@ -484,12 +480,12 @@ const redirectPath = getRedirectPath();
                           {child}
                         </a>
                       );
-                    })}
-                  </div>
-                ))}
-              </div>
-            ))}
-        </div> */}
+                    })} */}
+                    </div>
+                  ))}
+                </div>
+              ))}
+          </div>
         </>
       )}
     </div>
