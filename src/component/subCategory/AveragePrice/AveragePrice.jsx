@@ -13,7 +13,7 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        Average Cost Of Hiring {capitalizeEachWord(title)} Is <span>{avg_price}</span> Specialists By Region
+        Average cost of hiring {title} is <span>{avg_price}</span> specialists by region
         <span></span>
       </h2>
 

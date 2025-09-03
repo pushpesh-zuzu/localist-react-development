@@ -6,7 +6,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        How <span className={styles.highlight}>Localists</span> Works
+        How <span className={styles.highlight}>localists</span> works
       </h2>
       <div className={styles.stepsContainer}>
         {HowItWorksData && HowItWorksData.map((item, index) => (

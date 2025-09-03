@@ -9,7 +9,7 @@ const Frequently = ({ FrequentlyQuestion }) => {
       <div className={styles.frequently_container}>
         <div className={styles.frequently_container_wrap}>
           <h2 className={styles.frequently_heading}>
-            Frequently Asked <b>Questions</b>
+            Frequently asked <b>questions</b>
           </h2>
           <div className={styles.frequently_collapse}>
             <Collapse

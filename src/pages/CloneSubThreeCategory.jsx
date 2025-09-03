@@ -112,7 +112,7 @@ const LevelThreePage = ({}) => {
         HowItWorksData={getHowItWorksData(slug)}
         title={CONTENT_CONFIG_TOP[slug]?.ctaText}
       />
-      <PopularCity sliderdata={POPULAR_CITIES} title="Popular Cities" />
+      <PopularCity sliderdata={POPULAR_CITIES} title="Popular cities" />
 
       <RegionsComponent
         regionsData={transformedData}
@@ -137,8 +137,8 @@ const LevelThreePage = ({}) => {
       />
       <Slider
         sliderdata={RELATED_OTHER}
-        title="You May Be Interested In"
-        blueTitle="Other Services "
+        title="you may be interested in"
+        blueTitle="Other services "
       />
       {/* no need to change only data change*/}
       <Reviews RELATED_REVIEW={RELATED_REVIEW} />

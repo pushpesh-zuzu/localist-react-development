@@ -17,7 +17,7 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
         <span className={styles.blueTitle}>
           {heading ? heading : "Regions"}
         </span>
-        {heading ? "Places" : "We Work In"}{" "}
+        {heading ? "Places" : "we work in"}{" "}
         {heading ? "" : <img src={arrowDownIcon} width={44} />}
       </h2>
       {regionsData?.map((category, index) => {
