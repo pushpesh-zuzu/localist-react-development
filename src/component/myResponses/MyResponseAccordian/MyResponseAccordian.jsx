@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import styles from "./MyResponseAccordian.module.css";
 import UserImage from "../../../assets/Icons/MyResponse/UserImage.svg";
 import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg";
@@ -20,6 +21,7 @@ import locallistImgs from "../../../assets/Images/Leads/localistImg.svg";
 import pendingImg from "../../../assets/Images/MyResponse/PendingBtnImg.svg";
 import SMSIcon from "../../../assets/Images/MyResponse/SMSIcon.svg";
 import bidContactIcon from "../../../assets/Images/MyResponse/bidContactIcon.svg";
+
 import {
   addSellerNotesApi,
   getAddHiredLeadDataApi,
@@ -759,36 +761,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                           <div className={styles.noteText}>{item.notes}</div>
                           <div className={styles.noteActions}>
                             <span>
-                              {item?.created_at
-                                ? (() => {
-                                    const d = new Date(item.created_at);
-                                    const year = d.getFullYear();
-                                    const month = String(
-                                      d.getMonth() + 1
-                                    ).padStart(2, "0");
-                                    const day = String(d.getDate()).padStart(
-                                      2,
-                                      "0"
-                                    );
-
-                                    let hours = d.getHours();
-                                    const minutes = String(
-                                      d.getMinutes()
-                                    ).padStart(2, "0");
-                                    const seconds = String(
-                                      d.getSeconds()
-                                    ).padStart(2, "0");
-                                    const ampm = hours >= 12 ? "PM" : "AM";
-                                    hours = hours % 12 || 12; // convert to 12-hour format
-
-                                    return `${year}-${month}-${day} ${String(
-                                      hours
-                                    ).padStart(
-                                      2,
-                                      "0"
-                                    )}:${minutes}:${seconds} ${ampm}`;
-                                  })()
-                                : ""}
+                               {item?.created_at
+                                  ? moment.tz(item.created_at, "UTC").format("YYYY-MM-DD hh:mm:ss A")
+                                  : ""}
                             </span>
                             |
                             <span
