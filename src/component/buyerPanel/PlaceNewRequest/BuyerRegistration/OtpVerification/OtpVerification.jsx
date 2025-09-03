@@ -9,7 +9,8 @@ const OtpVerification = ({ open, onClose ,nextStep, previousStep}) => {
   const inputRefs = useRef([]);
   const dispatch = useDispatch()
   const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
-console.log(requestDataList?.phone,"requestDataList")
+  const { requestUserId,createrequestUserId } = useSelector((state)=> state.buyer)
+console.log(requestUserId,"requestDataList")
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -60,7 +61,7 @@ console.log(requestDataList?.phone,"requestDataList")
     }
   
     const data = {
-      user_id: requestDataList?.user_id,
+      user_id: requestUserId,
       otp: enteredOtp,
     };
   

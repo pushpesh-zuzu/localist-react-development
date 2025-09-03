@@ -73,20 +73,63 @@ const handleRemoveAccreditation = (index) => {
 
 
   // Save handler
-  const handleSave = () => {
-    const payload = accordionGroups.map((g) => ({
-      id: g.id ?? "",
-      accreditations:
-        Array.isArray(g.accreditations) && g.accreditations.length > 0
-          ? [g.accreditations[0]]
-          : [],
-      newAccreditation: g.newAccreditation || "",
-      image: g.accreImage || null, // File OR { previewUrl } OR null
-    }));
+  // const handleSave = () => {
+  //   const payload = accordionGroups.map((g) => ({
+  //     id: g.id ?? "",
+  //     accreditations:
+  //       Array.isArray(g.accreditations) && g.accreditations.length > 0
+  //         ? [g.accreditations[0]]
+  //         : [],
+  //     newAccreditation: g.newAccreditation || "",
+  //     image: g.accreImage || null, // File OR { previewUrl } OR null
+  //   }));
 
-    console.log("🚀 Final payload before dispatch:", payload);
-    dispatch(updateSellerAccreditations(payload));
-  };
+  //   console.log("🚀 Final payload before dispatch:", payload);
+  //   dispatch(updateSellerAccreditations(payload));
+  // };
+
+  // Save handler
+// Save handler
+const handleSave = () => {
+  // Filter out groups without a name
+  const filtered = accordionGroups.filter(
+    (g) =>
+      (Array.isArray(g.accreditations) &&
+        g.accreditations[0] &&
+        g.accreditations[0].trim() !== "") ||
+      (g.newAccreditation && g.newAccreditation.trim() !== "")
+  );
+
+  if (filtered.length === 0) {
+    toast.error("Please enter at least one accreditation name before saving.");
+    return;
+  }
+
+  const payload = filtered.map((g) => ({
+    id: g.id ?? "",
+    accreditations:
+      Array.isArray(g.accreditations) &&
+      g.accreditations[0] &&
+      g.accreditations[0].trim() !== ""
+        ? [g.accreditations[0].trim()]
+        : [],
+    newAccreditation:
+      g.newAccreditation && g.newAccreditation.trim() !== ""
+        ? g.newAccreditation.trim()
+        : "",
+    image: g.accreImage || null, // File OR { previewUrl } OR null
+  }));
+
+  if (payload.length === 0) {
+    toast.error("Accreditation name cannot be empty.");
+    return;
+  }
+
+  console.log("🚀 Final payload before dispatch:", payload);
+  dispatch(updateSellerAccreditations(payload));
+};
+
+
 
   // Toast messages
   useEffect(() => {

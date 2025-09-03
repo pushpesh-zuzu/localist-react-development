@@ -404,6 +404,7 @@ const handleClose = () => {
           <OtpVerification
             nextStep={nextStep}
             previousStep={previousStep}
+            formData={buyerRequest}
             open={true}
             // setShowConfirmModal={setShowConfirmModal}
             // onClose={handleClose}

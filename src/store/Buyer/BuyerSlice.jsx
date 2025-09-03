@@ -31,6 +31,7 @@ buyerRequestList:[] ,
 requestDataList: safeLocalStorage.getItem("createRequest") ? JSON.parse(safeLocalStorage.getItem("createRequest")) : null,
 createRequestToken: safeLocalStorage.getItem("createRequestToken") ?  JSON.parse(safeLocalStorage.getItem("createRequestToken")) : null,
 getuploadImg:[],
+requestUserId:[],
 infoLoader:false,
 requestLoader:false,
 submitImageLoader:false,
@@ -82,13 +83,14 @@ export const createRequestData = (requestData) => {
       );
 
       if (response) {
+        dispatch(setRequestUserId(response.data.data?.user_id));
         // dispatch(setQuestionAnswerData(response?.data?.data));
-        dispatch(setRequestId(response?.data?.data?.request_id))
-        dispatch(setRequestData(response?.data?.data))
-        dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
-        dispatch(setRegisterData(response?.data?.data))
-        dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
-        dispatch(setToken(response?.data?.data?.remember_tokens))
+        // dispatch(setRequestId(response?.data?.data?.request_id))
+        // dispatch(setRequestData(response?.data?.data))
+        // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
+        // dispatch(setRegisterData(response?.data?.data))
+        // dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
+        // dispatch(setToken(response?.data?.data?.remember_tokens))
        
         return response.data
         // navigate("/buyers/create");
@@ -313,14 +315,23 @@ export const addNotificationData = (addNotificationData) => {
 export const verifyPhoneNumberData = (verifyData) => {
   return async (dispatch) => {
     dispatch(setVerifyPhoneNumberLoader(true));
+    console.log(verifyData);
     try {
       const response = await axiosInstance.post(
         `customer/verify-phone-number`,
         verifyData
       );
-
-      if (response) {
-      //  dispatch(setGetNotificationData(response?.data?.data));
+      console.log('verify number',response?.data?.data);
+      if (response?.data?.success) {
+        
+        dispatch(setQuestionAnswerData(response?.data?.data));
+        dispatch(setRequestId(response?.data?.data?.request_id));
+        dispatch(setRequestData(response?.data?.data));
+        dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens));
+        dispatch(setRegisterData(response?.data?.data));
+        dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
+        dispatch(setToken(response?.data?.data?.remember_tokens));
+        //dispatch(setGetNotificationData(response?.data?.data));
         return response.data
       }
     } catch (error) {
@@ -420,6 +431,11 @@ const buyerSlice = createSlice({
       safeLocalStorage.setItem("createRequest", JSON.stringify(action.payload))
 
     },
+
+    setRequestUserId: (state, action) => {
+      state.requestUserId = action.payload;
+    },
+
     setCreateRequestToken(state,action) {
       state.createRequestToken = action.payload
       safeLocalStorage.setItem("createRequestToken", JSON.stringify(action.payload))
@@ -443,6 +459,6 @@ const buyerSlice = createSlice({
   },
 });
 
-export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
+export const { setquestionLoader,setAddNotificationLoader,setcitySerach,clearSetbuyerRequestData,setCreateRequestToken,setRequestData,setVerifyPhoneNumberLoader,setQuestionAnswerData,setNotificationLoader,setBuyerStep,setProfileLoader,setProfileImageLoader,setSubmitImageLoader,setChangePasswordLoader,setbuyerRequestData,setRequestUserId,setRequestId,setQualityData,setAddDetailLoader,setbuyerrequestListLoader,setbuyerRequestList,setGetUploadImgData,setChangeInfoLoader,setCreateRequesLoader,setGetNotificationData } = buyerSlice.actions;
 
 export default buyerSlice.reducer;
