@@ -439,6 +439,7 @@ export const fetchProfileFromMagicLink = (navigate) => {
 
       const decodedClientId = decodeBase64(clientIdBase64);
       console.log("Decoded Client ID:", decodedClientId);
+     
       if (!decodedClientId) {
         throw new Error("Invalid client_id format");
       }
@@ -478,7 +479,9 @@ export const fetchProfileFromMagicLink = (navigate) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${decodedClientId}`,
         },
-        body: null,
+        body: JSON.stringify({
+          seller_id_magic: decodedClientId,
+        }),
       });
 
       // Parse JSON
