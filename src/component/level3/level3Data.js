@@ -729,13 +729,13 @@ const FREQUENTLY_DATA = {
   "fencing-contractors-near-me": [
     {
       key: "1",
-      title: "Which Is the best fencing company near me?",
+      title: "Which Is The Best Fencing Company Near Me?",
       description:
         "The best fencing company near you is one that’s reliable, well-reviewed, fully insured, and experienced with projects similar to yours. Rather than spend hours searching the internet, <b>Localists</b> simplifies the process. All you need to do is share a few project details, and we’ll connect you with top-rated local fencing contractors who fit your needs.",
     },
     {
       key: "2",
-      title: "How much does fence and gate installation cost?",
+      title: "How Much Does Fence And Gate Installation Cost?",
       description: `<p>The cost of installing fences and gates can vary based on several factors -<b> the size of your project, the materials you choose, and the type of fencing or gate you need</b> (manual or automated, wooden or metal, decorative or security-focused).</p>
       <p>Naturally, more complex or custom installations will cost more, and the number of fences or gates you want to install will affect the final price too.</p>
       <p>When you connect with a professional through Localists, you’ll get clear, tailored quotes based on your specific needs. Your local fence installer can walk you through your options and help you choose the best solution to fit your budget and style.</p>
@@ -743,19 +743,19 @@ const FREQUENTLY_DATA = {
     },
     {
       key: "3",
-      title: "How long does a fence take to install?",
+      title: "How Long Does A Fence Take To Install?",
       description:
         "<p>Most fencing projects take between 1 to 3 days, but the timeline can vary based on the size of the project, style, materials, and even the weather. Simple wooden fences are generally quicker to install, while custom metal fencing might take longer. If time is a factor, just let us know. Localists will match you with professionals who can work to your timeline and deliver quality results.<p>",
     },
     {
       key: "4",
-      title: "What  is a fencing contractor?",
+      title: "What Is A Fencing Contractor?",
       description:
         "A fence contractor is a skilled professional who manages everything involved in building or repairing fences or gates. From sorting materials to hiring tradespeople for the job, and providing guidance for budgeting to project completion. They bring both expertise and efficiency. Whether you're building new gate or just replacing your  old fencing, a fencing contractor ensures it’s done right. Let Localists help you find trusted, vetted fencing contractors local to you - quickly and easily.",
     },
     {
       key: "5",
-      title: "How do I choose a fence or gate installation professional?",
+      title: "How Do I Choose A Fence Or Gate Installation Professional?",
       description: `<p>
 Choosing the right fencing or gate professional isn’t just about price - it’s about ensuring they’re properly qualified, experienced, and capable of delivering a safe, high-quality job that lasts. Here’s what to look for: 
 </p>
@@ -810,7 +810,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
     },
     {
       key: "6",
-      title: "How much is fencing per metre in the UK?",
+      title: "How Much Is Fencing Per Metre In The UK?",
       description:
         "<p>On average, fencing in the UK costs <b>around £49 per metre</b>, excluding labour. Labour typically ranges between <b>£25–£30</b> per hour. Final costs depend on materials, fence design, location, and any groundwork or repairs needed. Want to get a detailed estimate for your property? With Localists, one quick request gets you matched with local experts who can break down the full costs clearly.</p>",
     },
@@ -1037,9 +1037,9 @@ const HowItWorksData = {
   "fencing-contractors-near-me": [
     {
       id: 1,
-      title: "Start your search for fencing contractors",
+      title: "Start Your Search For Fencing Contractors",
       image: WhatYouNeedIcon,
-      heading1: "Start your search for fencing contractors",
+      heading1: "Start Your Search For Fencing Contractors",
       description:
         "Share your project details and we’ll match you with experienced local fencing contractors. Whether it’s a garden fence, driveway gate, or a larger commercial project, we’ll get you started with vetted experts you can trust.",
     },
@@ -1047,7 +1047,7 @@ const HowItWorksData = {
       id: 2,
       title: "Request free quotes from contractors.",
       image: FreeQuotesIcon,
-      heading1: "Request free quotes from contractors.",
+      heading1: "Request Free Quotes From Contractors.",
       description:
         "Once you share your requirements, we’ll send over a selection of free, no-obligation quotes tailored to your project. No need to dig through endless listings. Just compare your offers from specialists and choose the best fit.",
     },
@@ -1055,7 +1055,7 @@ const HowItWorksData = {
       id: 3,
       title: "Hire your chosen local fencing contractor",
       image: accountant, // Note: You might want to rename this variable to 'fencerIcon' or similar
-      heading1: "Hire your chosen local fencing contractor",
+      heading1: "Hire Your Chosen Local Fencing Contractor",
       description:
         "With Localists, you stay in control. There is no obligation to hire immediately. Take your time. Once you’re ready, go with the fence installers who meet your needs, preferences, and budget.",
     },
@@ -1237,7 +1237,7 @@ const BREADCRUMB_CONFIG = {
 
 const CONTENT_CONFIG_TOP = {
   "fencing-contractors-near-me": {
-    findingHeading: " Fence and gate installation",
+    findingHeading: " Fence And Gate Installation",
     title: "FENCING",
     mainTitle: "fence & gate installation",
     ctaText: "Fencer",
@@ -1325,7 +1325,7 @@ const FIND_SERVICE_CONTENT = {
   "fencing-contractors-near-me": [
     {
       type: "h2",
-      text: "Find top rated fencing companies near you",
+      text: "Find Top Rated Fencing Companies Near You",
     },
     {
       type: "p",
@@ -1334,7 +1334,7 @@ You can find any type of specialist you need to cover everything from : resident
     },
     {
       type: "h3",
-      text: "Why hire fencing contractors through Localists.",
+      text: "Why Hire Fencing Contractors Through Localists.",
     },
     {
       type: "p",
@@ -1378,7 +1378,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
 
     {
       type: "h2",
-      text: "Fence and Gate Installation: Network of Qualified Contractors Wherever You Are",
+      text: "Fence And Gate Installation: Network Of Qualified Contractors Wherever You Are",
     },
     {
       type: "uili",

@@ -90,6 +90,7 @@ export const createRequestData = (requestData) => {
 
       if (response) {
         dispatch(setRequestUserId(response.data.data?.user_id));
+        dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
         dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
@@ -444,6 +445,9 @@ const buyerSlice = createSlice({
 
     setRequestUserId: (state, action) => {
       state.requestUserId = action.payload;
+    },
+    setRequestUserPhone: (state, action) => {
+      state.requestUserPhone = action.payload;
     },
 
     setCreateRequestToken(state, action) {
