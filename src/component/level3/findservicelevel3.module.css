@@ -49,9 +49,12 @@
 }
 
 .findAnAccountant_paragrap {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 14px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    letter-spacing: 0;
+    color: var(--text-color);
+    margin-bottom: 16px;
 }
 
 .findAnAccountant_listItem {
@@ -206,6 +209,7 @@
   .findAnAccountant_listItem,
   .findAnAccountant_bark_paragrap {
     font-size: 14px;
+    line-height: 25px;
   }
 
   .findAnAccountant_image {
