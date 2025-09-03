@@ -7,10 +7,13 @@ const AveragePrice = ({
   avg_price = "£200",
   RELTED_PRICE,
 }) => {
+  function capitalizeEachWord(str) {
+  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+}
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        Average cost of hiring {title} is <span>{avg_price}</span> specialists by region
+        Average Cost Of Hiring {capitalizeEachWord(title)} Is <span>{avg_price}</span> Specialists By Region
         <span></span>
       </h2>
 
