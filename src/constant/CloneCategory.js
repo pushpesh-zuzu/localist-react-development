@@ -115,7 +115,7 @@ const PopularCategoriesData = [
   {
     id: 15,
     title: "Driveway Installation",
-    path: "",
+    path: "driveway-installers-near-me",
     // path: "driveway-installers",
 
     image: DrivewayInstallation, // apna image import karke lagao

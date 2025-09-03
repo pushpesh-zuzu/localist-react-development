@@ -4,8 +4,9 @@ import { AVERAGE_PRICE } from "../../../constant/subCategory";
 
 const AveragePrice = ({
   title = "Accountants",
-  avg_price = "£200",
+  avg_price ,
   RELTED_PRICE,
+  showSpeicialits=false
 }) => {
   function capitalizeEachWord(str) {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -13,7 +14,7 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        Average cost of hiring {title} is <span>{avg_price}</span> specialists by region
+        Average cost of hiring {title} is {avg_price && <span>{avg_price}</span> }{" "}{showSpeicialits && 'specialists'} by region
         <span></span>
       </h2>
 

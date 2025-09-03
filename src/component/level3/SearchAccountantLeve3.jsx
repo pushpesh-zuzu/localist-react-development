@@ -104,7 +104,7 @@ const SearchAccountantLeve3 = ({ title = "", defaultService,isNeedS=false }) => 
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-              Find <span>{title}{isNeedS ? "s" : ""}</span> Contractors Near You</h1>
+              Find <span>{title}{isNeedS ? "s" : ""}</span> Near You</h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <p>
           {/* Where do you need <span>{title}s</span>? */}

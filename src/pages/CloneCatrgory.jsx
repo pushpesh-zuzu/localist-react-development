@@ -165,7 +165,7 @@ const CloneCategory = ({ accountHeader }) => {
               name: "Fence & Gate Installation",
               path: "/fencing-contractors-near-me",
             },
-            { name: "Driveway Installation", path: "" },
+            { name: "Driveway Installation", path: "/driveway-installers-near-me" },
             { name: "Patio Services", path: "" },
             { name: "Landscaping", path: "" },
             { name: "Artificial Grass Installation", path: "" },

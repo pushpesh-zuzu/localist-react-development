@@ -38,6 +38,7 @@ import { useParams } from "react-router-dom";
 import NotFound from "./NotFound";
 import SearchAndFindAnAccountant from "../component/level3/SearchAndFindAnAccountant";
 import FindServiceLevel3 from "../component/level3/FindServiceLevel3";
+import GetQuotesLevel3 from "../component/level3/GetQuotesLevel3";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -134,6 +135,8 @@ const LevelThreePage = ({}) => {
       <AveragePrice
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
         RELTED_PRICE={RELTED_PRICE}
+        avg_price={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}
+        showSpeicialits={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}
       />
       <Slider
         sliderdata={RELATED_OTHER}
@@ -150,7 +153,7 @@ const LevelThreePage = ({}) => {
       {/* <Slider sliderdata={RELATED_PRICE} title={"Related Price Guides"} /> */}
       {/* Later we need to uncomment or use again*/}
 
-      <GetQuotes message={CONTENT_CONFIG_TOP[slug]?.ctaText} />
+      <GetQuotesLevel3 message={CONTENT_CONFIG_TOP[slug]?.ctaText} />
       {/* no need to change  */}
     </>
   );

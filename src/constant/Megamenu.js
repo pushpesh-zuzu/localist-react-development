@@ -228,19 +228,19 @@ export const locationData = [
 export const megaMenu = [
   {
     name: "House & Home",
-    path:"home",
+    path: "home",
     icon: houseIcon,
     subcategory: [
       {
         name: "Fence & Gate Installation",
-        path:"fencing-contractors-near-me",
+        path: "fencing-contractors-near-me",
         children: locationData.map((loc) => `Fence Installers in ${loc}`),
       },
-      // {
-      //   name: "Driveway Installation",
-      //   path:'driveway-installers',
-      //   children: locationData.map((loc) => `Driveway Installers in ${loc}`),
-      // },
+      {
+        name: "Driveway Installation",
+        path: "driveway-installers-near-me",
+        children: locationData.map((loc) => `Driveway Installers in ${loc}`),
+      },
       // {
       //   name: "Patio Services",
       //   path:"patio-services",
@@ -371,7 +371,7 @@ export const megaMenu = [
 //     case "Fence Installers in Liverpool":
 //       return `${subPath}/merseyside/liverpool`;
 //     default:
-//       return ""; 
+//       return "";
 //   }
 // };
 export const getChildRoute = (subPath, child) => {
@@ -436,4 +436,3 @@ export const getChildRoute = (subPath, child) => {
       return "";
   }
 };
-

@@ -19,7 +19,7 @@ const AccountFindingInfoLevel3 = ({
       {/* </p> */}
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>
-              Vetted <span className={styles.highlight}> {findingHeading}{isNeedS ? "s" : ""} </span> experts you can trust
+              Vetted <span className={styles.highlight}> {findingHeading}{isNeedS ? "s" : ""} </span> you can trust
         </h2>
 
         <div className={styles.descriptionContainer}>

@@ -43,6 +43,36 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             </ul>
               );
             }
+            if (block.type === "table") {
+  return (
+    <div key={index} className={styles.tableWrapper}>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            {block?.tableHeaders.map((header, i) => (
+              <th key={i}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block?.rowData.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, colIndex) => (
+                <td
+                  key={colIndex}
+                  className={colIndex === 0 ? styles.firstCol : ""}
+                >
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
             return null;
           })}
         </div>
