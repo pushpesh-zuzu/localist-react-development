@@ -241,11 +241,11 @@ export const megaMenu = [
         path: "driveway-installers-near-me",
         children: locationData.map((loc) => `Driveway Installers in ${loc}`),
       },
-      // {
-      //   name: "Patio Services",
-      //   path:"patio-services",
-      //   children: locationData.map((loc) => `Patio Installers in ${loc}`),
-      // },
+      {
+        name: "Patio Services",
+        path:"patio-layers-near-me",
+        children: locationData.map((loc) => `Patio Installers in ${loc}`),
+      },
       // {
       //   name: "Artificial Grass Installation",
       //   path:"artificial-grass-installation",

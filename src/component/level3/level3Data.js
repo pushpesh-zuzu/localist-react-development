@@ -20,6 +20,7 @@ import Liverpool from "../../assets/Images/servicesLevels/cities/Liverpool.jpg";
 import Manchester from "../../assets/Images/servicesLevels/cities/Manchester.jpg";
 import Warrington from "../../assets/Images/servicesLevels/cities/Warrington.jpg";
 import Chester from "../../assets/Images/servicesLevels/cities/Chester.jpg";
+import { title } from "framer-motion/client";
 
 const POPULAR_CITIES = [
   { city_image: Liverpool, city_name: "Liverpool" },
@@ -126,7 +127,7 @@ const RELATED_PRICE_DATA = {
       price: "From £20",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 1,
       title: "Patio Installation Cost",
@@ -249,7 +250,7 @@ const RELATED_SERVICES_DATA = {
       description: "Complete guide to choosing residential driveways",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 1,
       title: "Installing a New Patio on a Budget",
@@ -392,33 +393,33 @@ const REVIEWS_DATA = {
         "After a bad experience with a previous installer, I was hesitant to try again. But the contractor I found on Localists was professional, fast, and delivered exactly what I wanted. My new tarmac driveway looks fantastic and feels built to last.",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 1,
-      name: "Daniel Kennedy",
-      title: "(Patio Construction)",
-      date: "10 Apr 2025",
+      name: "Harry W., ",
+      title: "Surrey",
+      date: "17 Apr 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "I used Localists to find a patio installer near me and couldn’t be happier. The contractor was friendly, turned up on time every day, and the work was flawless. My new sandstone patio completely transformed the garden. I’ve already recommended them to my neighbour!",
     },
     {
       id: 2,
-      name: "Fatima H.",
-      title: "(Patio Installer)",
-      date: "22 Apr 2025",
+      name: "James R.,",
+      title: "Manchester",
+      date: "26 Apr 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "I needed a quick turnaround for a gravel patio before a family event. Localists matched me with a brilliant local patio builder who had great reviews. The quote was fair, and the job was finished ahead of schedule. Couldn’t ask for better service.",
     },
     {
       id: 3,
-      name: "Laura M",
-      title: "(Outdoor Patio Specialist)",
-      date: "5 May 2025",
+      name: "Helen M.,",
+      title: "London",
+      date: "5 june 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "After weeks of searching for patio construction near me, I found Localists. Within the same day, I had three quotes from three different patio companies near me and picked the one that best suited my budget. The new porcelain patio looks incredible and has already made the garden our favourite spot.",
     },
   ],
   landscaping: [
@@ -494,7 +495,7 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Patio,
       description: "Patio Services",
-      // path: "patio-services",
+      // path: "patio-layers-near-me",
     },
     {
       id: 3,
@@ -521,7 +522,7 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Patio,
       description: "Patio Services",
-      // path: "patio-services",
+      // path: "patio-layers-near-me",
     },
     {
       id: 3,
@@ -537,7 +538,7 @@ const OTHER_SERVICES_DATA = {
       // path: "artificial-grass-installation",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 1,
       image: fenchinstal,
@@ -583,7 +584,7 @@ const OTHER_SERVICES_DATA = {
       id: 3,
       image: Patio,
       description: "Patio Services",
-      path: "patio-services",
+      path: "patio-layers-near-me",
     },
     {
       id: 4,
@@ -610,7 +611,7 @@ const OTHER_SERVICES_DATA = {
       id: 3,
       image: Patio,
       description: "Patio Services",
-      path: "patio-services",
+      path: "patio-layers-near-me",
     },
     {
       id: 4,
@@ -657,24 +658,18 @@ const AVERAGE_PRICE = {
       Premium: "£7950",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       Region: "Nationwide",
-      "Great Value": "£120",
-      Average: "£180",
-      Premium: "£350",
+      "Great Value": "£2350",
+      Average: "£3300",
+      Premium: "£10000",
     },
     {
       Region: "East Midlands",
-      "Great Value": "£110",
-      Average: "£160",
-      Premium: "£320",
-    },
-    {
-      Region: "East of England",
-      "Great Value": "£115",
-      Average: "£170",
-      Premium: "£340",
+      "Great Value": "£4500",
+      Average: "£5900",
+      Premium: "£9200",
     },
   ],
   landscaping: [
@@ -900,18 +895,42 @@ Choosing the right fencing or gate professional isn’t just about price - it’
         "Gravel driveways are generally the most affordable to install, thanks to the low cost of materials and straightforward installation process. They’re also quick to lay and come in a wide range of colours and/or stone sizes. However, what they offer in affordability, they can lack in long-term durability compared to paved options. They do require periodic maintenance, such as topping up the gravel and keeping weeds at bay.",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
-      key: "1",
-      title: "How much does it cost to hire a patio contractor?",
-      description:
-        "The cost depends on factors like the size of the patio, the materials you choose, the complexity of the design, and your location. On average in the UK, prices can range from £50–£120 per square metre, including labour and materials.",
+      key: "6",
+      title: " How do I find a patio construction company near me?",
+      description: `
+  <p>
+    Good news - You’re already halfway there! Use Localists to search for reputable <strong>patio contractors</strong> wherever you are. Simply tell us your project vision, your location, and we'll match you with trusted professionals who can bring it to life. Pick your builder, get the ball rolling, and relax.
+  </p>
+`,
     },
     {
-      key: "2",
-      title: "Do I need planning permission for a new patio?",
-      description:
-        "In most cases, you don’t need planning permission for a patio, as it’s considered a permitted development. However, if your property is listed, in a conservation area, or you are altering drainage, you may need approval.",
+      key: "7",
+      title: "How long does patio installation take?",
+      description: `
+  <p>
+    A typical <strong>patio construction</strong> job usually takes anywhere from 2 to 7 days, depending on size, design complexity, and prep needed. For example, a straightforward 10 m² project might be finished in around 2–2.5 days, while a more expansive or complex project may take up to a week. Weather and groundwork (like excavation and base preparation) can lengthen the schedule, but your <strong>patio installer</strong> will walk you through what to expect.
+  </p>
+`,
+    },
+    {
+      key: "8",
+      title: "What’s the best patio on a budget?",
+      description: `
+  <p>
+    If you're keeping costs down, <strong>gravel patios</strong> are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable <strong>patio construction near me</strong>, Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
+  </p>
+`,
+    },
+    {
+      key: "9",
+      title: "Can I see designs before construction?",
+      description: `
+  <p>
+    Absolutely! Most experienced patio contractors or builders will share past work, photos and customer reviews, to help you make a confident decision. Many local patio companies even offer design consultations or mood boards before they begin. If you'd like help choosing a style or material, your matched <strong>patio installer</strong> here on Localists will be happy to guide you with real examples.
+  </p>
+`,
     },
   ],
   landscaping: [
@@ -963,7 +982,7 @@ const TAXRETURNDATA = {
     name: "Alex, Staff Writer",
     date: "2025-06-15",
   },
-  "patio-services": {
+  "patio-layers-near-me": {
     key: "2",
     heading1: "Installing a new Patio on a budget",
     heading2: "Patio installation",
@@ -1016,7 +1035,7 @@ const regionsData = {
       ],
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 3,
       title: "North West England",
@@ -1069,7 +1088,7 @@ export const POPULARCITY = {
     { id: 4, city_name: "Warrington", city_image: london },
     { id: 5, city_name: "Ellesmere", city_image: london },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
@@ -1145,30 +1164,30 @@ const HowItWorksData = {
         "Once you’ve found the perfect match, all you need to do is sit back while your new driveway takes shape.",
     },
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       id: 1,
-      title: "Tell Us What You Need",
+      title: "Search for local patio contractors",
       image: WhatYouNeedIcon,
-      heading1: "Tell Us What You Need",
+      heading1: "Search for local patio contractors",
       description:
-        "Share the type of patio service you’re looking for and your location. Not sure what’s best for your space? We can connect you with an experienced patio specialist who can guide you on design options, materials, and costs based on your preferences, budget, and property.",
+        "Tell us about your project, size, style, and budget, and we’ll match you with vetted local patio contractors. Whether you want a low-maintenance concrete patio, a warm and textured sandstone surface, or a fully customised layout, we connect you with an expert nearby ready to help.",
     },
     {
       id: 2,
-      title: "Receive Free Quotes",
+      title: "Request free quotes from patio layers",
       image: FreeQuotesIcon,
-      heading1: "Receive Free Quotes",
+      heading1: "Request free quotes from patio layers",
       description:
-        "We’ll search through a network of quality patio contractors near you and match you with the best fit. You’ll receive tailored quotes from interested professionals at no cost. Choose to get notifications instantly or review your offers whenever it suits you.",
+        "Once we know your needs, we’ll match you with trusted patio companies near you. Compare free, no-obligation quotes, see their work, and choose the one who feels right for you.",
     },
     {
       id: 3,
-      title: "Hire with Confidence",
+      title: "Hire your local contractor",
       image: accountant, // Consider renaming for clarity if needed
-      heading1: "Hire with Confidence",
+      heading1: "Hire your local contractor",
       description:
-        "View reviews, explore examples of previous work, and request more information—all in one place. Once you’ve found the right contractor, hiring them is quick and straightforward.",
+        "When you’re ready, hire with confidence. Every local patio builder on our platform is vetted for quality, professionalism, and reliability. So you can move forward knowing your project is in safe hands.",
     },
   ],
   landscaping: [
@@ -1239,12 +1258,12 @@ const CONTENT_CONFIG = {
       "No matter your location in the UK, we match you with trusted driveway installers nearby, who specialise in all kinds of installation. From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
     para3: "No fees, no catch, just expert help at no cost!",
   },
-  "patio-services": {
+  "patio-layers-near-me": {
     para1:
-      "Looking for a skilled patio contractor? We make it simple. Start your search today and get free, no-obligation quotes from local experts.",
+      "At Localists, we make it simple to find trusted patio installers near me who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts",
     para2:
-      "If it’s your first time hiring a patio installer and you’re not sure where to begin, just tell us about your project. We’ll send you a shortlist of trusted contractors to review. Take your time, compare profiles, read genuine customer reviews, and request more details before making your choice.",
-    para3: "Best of all – it’s completely free!",
+      "Whether you’re picturing a modern porcelain patio, a classic sandstone patio, or a budget-friendly gravel patio, we’ll help you find the right patio contractors for the job. Compare fair, transparent quotes and choose a professional who shares your vision.",
+    para3: "It’s free from start to finish !",
   },
   landscaping: {
     para1:
@@ -1270,9 +1289,9 @@ const BREADCRUMB_CONFIG = {
     { title: "Home & Garden", path: "/home" },
     { title: "Driveway Installation", path: "driveway-installers-near-me" }, // no path
   ],
-  "patio-services": [
+  "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio & Paving Services", path: "patio-services" }, // no path
+    { title: "Patio Services", path: "patio-layers-near-me" }, // no path
   ],
   landscaping: [
     { title: "Home & Garden", path: "/home" },
@@ -1301,19 +1320,23 @@ const CONTENT_CONFIG_TOP = {
     title: "Fencing Contractors",
     mainTitle: "fence & gate installation",
     ctaText: "Fencer",
-    avgPrice:'£200',
-    showSpeicialits:true
+    avgPrice: "£200",
+    showSpeicialits: true,
+    avgPriceTitle: "fence & gate installation",
   },
   "driveway-installers-near-me": {
     findingHeading: "driveway companies",
     title: "Driveway Companies",
     mainTitle: "driveway installers",
     ctaText: "Driveway Installer",
+    avgPriceTitle: "driveway installers",
   },
-  "patio-services": {
-    findingHeading: "Patio Construction",
-    title: "Patio and Paving Service",
+  "patio-layers-near-me": {
+    findingHeading: "patio contractors",
+    title: "Patio Installers",
     mainTitle: "Patio and Paving Service",
+    ctaText: "Patio Service",
+    avgPriceTitle: "a patio",
   },
   landscaping: {
     findingHeading: "Landscaping",
@@ -1336,7 +1359,7 @@ const CONTENT_CONFIG_BANNER = {
     banner: DrivewayInstallationBanner,
     reltatedImage: Driveway,
   },
-  "patio-services": {
+  "patio-layers-near-me": {
     banner: PatioServicesBanner,
     reltatedImage: Patio,
   },
@@ -1363,11 +1386,11 @@ const CONTENT_CONFIG_META = {
     content:
       " Find the best local driveway installers and contractors near you. Need resin bound, gravel or tarmac driveways? Get free quotes from local specialists nearby.",
   },
-  "patio-services": {
-    title: "Patio Construction Near Me | Local Patio Installers - Localists",
+  "patio-layers-near-me": {
+    title: "Find Patio Contractors and Patio Layers Near me | Localists",
     name: "description",
     content:
-      "Find trusted patio installers near you. Localists connects you with skilled patio contractors for stunning patio construction and paving. Get free quotes today!",
+      "Looking for patio installers near you? Find trusted patio contractors and patio layers in your local area. Get free quotes and start today at Localists.",
   },
   landscaping: {
     title: "Landscape Gardeners Near Me | Local Garden landscaper - Localists",
@@ -1559,46 +1582,230 @@ Whether you're securing your home, upgrading your garden, or managing a large co
       text: "To help you choose the best surface for your property, here’s a quick look at the most popular driveway types available on Localists, along with their key benefits and possible considerations:",
     },
     {
-  type: "table",
-  tableHeaders: ["Driveway Type", "Pros", "Cons"],
-  rowData: [
-    [
-      "Resin bound driveway",
-      "Stylish, wide choice of colours and textures, permeable (reduces puddles), prevents weed growth, quick to install",
-      "May need upkeep in high-traffic areas, quality depends on expert installation",
-    ],
-    [
-      "Tarmac driveway",
-      "Fast and simple to lay, very durable, low maintenance, cost-effective, handles heavy traffic",
-      "Fewer design options, can soften in extreme heat",
-    ],
-    [
-      "Block paving / stone driveway",
-      "Premium look, versatile patterns, great for small or unusual shapes, frost-resistant surface",
-      "Longer installation time, higher cost, freeze-thaw can affect joints",
-    ],
-    [
-      "Gravel driveway",
-      "Budget-friendly, great for long driveways, wide colour options, easy to replenish",
-      "Needs regular raking and topping up, harder to clear snow, weeds without membrane",
-    ],
-    [
-      "Concrete driveway",
-      "Strong, long-lasting, low maintenance, can be coloured or patterned",
-      "Can crack over time, repairs may be visible, less permeable unless modified",
-    ],
-  ],
-}
+      type: "table",
+      tableHeaders: ["Driveway Type", "Pros", "Cons"],
+      rowData: [
+        [
+          "Resin bound driveway",
+          "Stylish, wide choice of colours and textures, permeable (reduces puddles), prevents weed growth, quick to install",
+          "May need upkeep in high-traffic areas, quality depends on expert installation",
+        ],
+        [
+          "Tarmac driveway",
+          "Fast and simple to lay, very durable, low maintenance, cost-effective, handles heavy traffic",
+          "Fewer design options, can soften in extreme heat",
+        ],
+        [
+          "Block paving / stone driveway",
+          "Premium look, versatile patterns, great for small or unusual shapes, frost-resistant surface",
+          "Longer installation time, higher cost, freeze-thaw can affect joints",
+        ],
+        [
+          "Gravel driveway",
+          "Budget-friendly, great for long driveways, wide colour options, easy to replenish",
+          "Needs regular raking and topping up, harder to clear snow, weeds without membrane",
+        ],
+        [
+          "Concrete driveway",
+          "Strong, long-lasting, low maintenance, can be coloured or patterned",
+          "Can crack over time, repairs may be visible, less permeable unless modified",
+        ],
+      ],
+    },
   ],
 
-  "patio-services": [
+  "patio-layers-near-me": [
     {
       type: "h2",
-      text: "Create the Outdoor Space You’ve Been Dreaming Of",
+      text: "Top tips in choosing the best patio contractors near you",
     },
     {
       type: "p",
-      text: "Whether you’re planning a stylish al-fresco dining area or want to add structure and charm to your garden, we’ll help you find reliable local patio installers.\nFind trusted patio contractors today and bring your vision to life.",
+      text: "Finding the right patio contractors near me isn’t just about who can start the quickest or who gives the cheapest quote. It’s about making sure your project is done right the first time. Here are a few practical tips to help you hire with confidence:",
+    },
+    {
+      type: "uili",
+      heading: "Get at least three quotes –\u00A0",
+      text: "Prices can vary more than you think. Having a few quotes to compare gives you a better sense of what’s fair and helps you spot anyone who’s too high or suspiciously low.",
+    },
+    {
+      type: "uili",
+      heading: "Ask for tailored design suggestions –\u00A0",
+      text: "A good local patio builder won’t just say “yes” to everything; they’ll offer creative ideas that work with your garden’s size, shape, and style.",
+    },
+    {
+      type: "uili",
+      heading: "See real examples of past projects –\u00A0",
+      text: "Photos speak volumes. Ask to see finished patios in materials you’re considering, like sandstone patios or porcelain patios, so you can judge the quality for yourself.",
+    },
+    {
+      type: "uili",
+      heading: "Avoid paying everything upfront –\u00A0",
+      text: "A trusted patio installer will be happy to work with staged payments, so you only pay in full when you’re completely satisfied.",
+    },
+    {
+      type: "uili",
+      heading: "Check genuine local recommendations –\u00A0",
+      text: "It’s one thing to have online reviews, but hearing from someone in your own area gives extra peace of mind that the contractor delivers on their promises.",
+    },
+    {
+      type: "h2",
+      text: "Why choose patio contractors at Localists?",
+    },
+    {
+      type: "p",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you to the best specialists in your local area. The best part is, these builders know your area’s climate, understand planning requirements, and design trends, meaning your patio will be built to last. Here’s why hiring a patio installer near you makes sense:",
+    },
+    {
+      type: "li",
+      heading: "Faster site visits and easier communication.",
+    },
+    {
+      type: "li",
+      heading: "Materials that suit your region’s weather conditions.",
+    },
+    {
+      type: "li",
+      heading: "Designs that blend with your house style.",
+    },
+    {
+      type: "li",
+      heading: "Easy-to-check reputation from nearby customers.",
+    },
+    {
+      type: "li",
+      heading: "Support for your local economy.",
+    },
+    {
+      type: "li",
+      heading: "Quicker help if anything needs adjusting later",
+    },
+    {
+      type: "h3",
+      text: "Questions to ask your local patio contractor",
+    },
+    {
+      type: "p",
+      text: "If you are hiring a Local patio designer or installer for the first time, and you don’t know where to start, we have put together a few questions below. Even if you’ve done it before, having a few key questions prepared makes sure you get clear answers and avoid surprises later. When you receive your quote from a specialist here on Localists, try asking::",
+    },
+    {
+      type: "libold",
+      heading: "Can I see reviews or testimonials from recent clients?",
+    },
+    {
+      type: "libold",
+      heading: "Do you have insurance in case something goes wrong?",
+    },
+    {
+      type: "libold",
+      heading: "How long have you been building patios?",
+    },
+    {
+      type: "libold",
+      heading: "Do you offer a guarantee for your work?",
+    },
+    {
+      type: "libold",
+      heading: "Can I have a detailed written quote?",
+    },
+    {
+      type: "libold",
+      heading: "How long will the installation take from start to finish?",
+    },
+    {
+      type: "libold",
+      heading: "Are you a member of any trade organisations?",
+    },
+    {
+      type: "libold",
+      heading: "Can we agree on a staged payment plan?",
+    },
+    {
+      type: "libold",
+      heading: "When could you start the job?",
+    },
+    {
+      type: "libold",
+      heading:
+        "Do you have photos or examples of similar projects you’ve done?",
+    },
+    {
+      type: "h2",
+      text: "How much does it cost to have a patio laid?",
+    },
+    {
+      type: "p",
+      text: "How much a patio layer charges to lay a patio varies across the UK. The total cost depends on your location, the size of your project, the materials choice, labour & site prep, for example, removing old patios, ensuring drainage, or levelling over uneven ground adds time and cost.",
+    },
+    {
+      type: "p",
+      text: "A simple gravel or concrete-style patio will generally cost less than a premium porcelain or sandstone finish. On average, you can expect to spend around £80–£120 per m² for materials and labour combined, or around £2,800 on a new complete patio installation. Though this figure can be significantly higher or slightly lower depending on your location. Here’s a rough guide based on popular options:",
+    },
+    {
+      type: "uili",
+      heading: "Gravel patio",
+      text: "– £40–£60 per m² (budget-friendly)",
+    },
+    {
+      type: "uili",
+      heading: "Concrete patio",
+      text: "– £70–£90 per m²",
+    },
+    {
+      type: "uili",
+      heading: "Sandstone patio ",
+      text: "– £90–£120 per m²",
+    },
+    {
+      type: "uili",
+      heading: "Porcelain patio",
+      text: " – £100–£140 per m² (premium, sleek look)",
+    },
+    {
+      type: "p",
+      text: "Labour typically makes up 50–70% of the cost, so location and contractor experience can also affect the final price. If you need a custom estimate, there’s no need to stress. Localists can connect you with local patio installers who’ll provide free, no-obligation quotes tailored to your garden, materials, and budget.",
+    },
+    {
+      type: "h2",
+      text: "What to look for when choosing a patio contractor",
+    },
+    {
+      type: "p",
+      text: "Every patio contractor has their own way of working, so it’s worth taking a bit of time to find the one that matches your vision, budget, and expectations. Here’s what’s worth keeping an eye out for:",
+    },
+    {
+      type: "uili",
+      heading: "Experience and skill",
+      text: "– They should be confident in working with materials that you intend to use for your project, whether it's sandstone, gravel, or concrete, and have a portfolio to prove it.",
+    },
+    {
+      type: "uili",
+      heading: "Trustworthiness",
+      text: "– Someone who communicates clearly, turns up on time, and delivers what they promise. They should also be ready to provide a written contract and clear timelines.",
+    },
+    {
+      type: "uili",
+      heading: "Knowledge",
+      text: "– They can provide expert advice on what works best for your garden, soil, climate and even any local regulations you need to adhere to.",
+    },
+    {
+      type: "uili",
+      heading: "Insurance and guarantees",
+      text: "– This protects you if anything goes wrong.",
+    },
+    {
+      type: "uili",
+      heading: "Good reputation",
+      text: "– Positive feedback from previous clients speaks volumes. Ensure you look at testimonials from previous clients.",
+    },
+    {
+      type: "uili",
+      heading: "Willingness to answer questions",
+      text: "– A good contractor won’t rush you; they’ll take time to explain options, next steps and are happy to hold your hands throughout the project.",
+    },
+    {
+      type: "p",
+      text: "Remember, all specialists here on Localists are verified and vetted, so you can skip the risky guesswork. We’ve already done the legwork - you just go ahead and choose a builder who feels right for your project.",
     },
   ],
 
@@ -1635,7 +1842,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
 const LEVEL_THIRD_SERVICES_NAME = {
   "fencing-contractors-near-me": "Fence & Gate Installation",
   "driveway-installers-near-me": "Driveway Installation",
-  "patio-services": "Patio Services",
+  "patio-layers-near-me": "Patio Services",
   landscaping: "Landscaping",
   "artificial-grass-installation": "Artificial Grass Installation",
 };

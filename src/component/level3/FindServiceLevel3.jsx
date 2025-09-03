@@ -29,49 +29,72 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
                 </p>
               );
             }
-              if (block.type === "pbold") {
+            if (block.type === "pbold") {
               return (
-                <p  key={index} className={styles.findAnAccountant_paragrap}>
+                <p key={index} className={styles.findAnAccountant_paragrap}>
                   <b>{block.text}</b>
                 </p>
               );
             }
-           if (block.type === "uili") {
+            if (block.type === "uili") {
               return (
                 <ul>
-              <li className={styles.findAnAccountant_paragrap}><b> {block.heading}</b>{block.text}</li>
-            </ul>
+                  <li className={styles.findAnAccountant_paragrap}>
+                    <b> {block.heading}</b>
+                    {block.text}
+                  </li>
+                </ul>
+              );
+            }
+            if (block.type === "li") {
+              return (
+                <ul>
+                  <li className={styles.findAnAccountant_paragrap}>
+                    {" "}
+                    {block.heading}
+                  </li>
+                </ul>
+              );
+            }
+            if (block.type === "libold") {
+              return (
+                <ul>
+                  <li className={styles.findAnAccountant_paragrap}>
+                    {" "}
+                    <b>{block.heading}</b>
+                  </li>
+                </ul>
               );
             }
             if (block.type === "table") {
-  return (
-    <div key={index} className={styles.tableWrapper}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            {block?.tableHeaders.map((header, i) => (
-              <th key={i}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {block?.rowData.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              {row.map((cell, colIndex) => (
-                <td
-                  key={colIndex}
-                  className={colIndex === 0 ? styles.firstCol : ""}
-                >
-                  {cell}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+              return (
+                <div key={index} className={styles.tableWrapper}>
+                  <table className={styles.table}>
+                    <thead>
+                      <tr>
+                        {block?.tableHeaders.map((header, i) => (
+                          <th key={i}>{header}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {block?.rowData.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {row.map((cell, colIndex) => (
+                            <td
+                              key={colIndex}
+                              className={colIndex === 0 ? styles.firstCol : ""}
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
 
             return null;
           })}

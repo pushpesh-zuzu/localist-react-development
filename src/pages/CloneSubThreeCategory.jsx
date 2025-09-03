@@ -133,7 +133,7 @@ const LevelThreePage = ({}) => {
       /> */}
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
       <AveragePrice
-        title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
+        title={CONTENT_CONFIG_TOP[slug]?.avgPriceTitle}
         RELTED_PRICE={RELTED_PRICE}
         avg_price={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}
         showSpeicialits={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}

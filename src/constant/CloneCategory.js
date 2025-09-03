@@ -183,8 +183,7 @@ const PopularCategoriesData = [
     id: 13,
     title: "Patio Services",
     image: PatioPatioServices,
-    // path: "patio-services",
-    path: "",
+    path: "patio-layers-near-me",
   },
   {
     id: 16,
