@@ -5,6 +5,7 @@
   background-position: center;
   background-repeat: no-repeat;
   justify-content: center;
+  padding: 40px 90px;
   display: flex;
   align-items: center;
 }
@@ -208,7 +209,7 @@
 
 @media (max-width: 768px) {
   .findAccountantContainer {
-    padding: 0px 30px;
+    padding: 40px 30px;
   }
 
   .searchcontainer h1 {
