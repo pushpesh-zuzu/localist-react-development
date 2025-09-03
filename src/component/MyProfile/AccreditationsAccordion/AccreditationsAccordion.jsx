@@ -218,7 +218,7 @@ const handleSave = () => {
                 className={styles.closeButton}
                 onClick={() => handleRemoveAccreditation(index)}
               >
-                Close
+                Delete
               </button>
             </div>
 
