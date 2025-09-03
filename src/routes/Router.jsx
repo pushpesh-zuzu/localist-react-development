@@ -74,7 +74,6 @@ const routes = [
           <LocaleRedirect><CloneCatrgory
             routeName="home"
             accountHeader="Home & Garden"
-            subHeader="Home & Garden"
             bestText={`It's super fast and easy!`}
           /></LocaleRedirect>
         ),

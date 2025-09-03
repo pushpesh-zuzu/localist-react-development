@@ -95,9 +95,8 @@ const AllServicesNewData = {
   ],
 };
 
-const CloneCategory = ({ accountHeader, subHeader }) => {
+const CloneCategory = ({ accountHeader }) => {
   const location = useLocation();
-
   const fullPath = location.pathname;
   const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
 
@@ -142,8 +141,8 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
       <div>
         <BannerWithBreadCrum
           header={accountHeader}
-          LevelOneTwoTitle={subHeader}
-          accountHeader="HOME & GARDEN"
+          LevelOneTwoTitle={'Home & Garden'}
+          accountHeader="Home & Garden"
           level={2}
           isNeedS={false}
           panelImage={Home}
@@ -156,7 +155,7 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
         <HowItWorks
           howItWorksData={howItWorksData}
           header={accountHeader}
-          subHeader={subHeader}
+          subHeader={'Home & Garden'}
         />
         <PopularCategories data={filteredCategories} />
         {/* <AllServicesComponent data={filteredAllServicesData} /> */}
@@ -172,7 +171,7 @@ const CloneCategory = ({ accountHeader, subHeader }) => {
             { name: "Artificial Grass Installation", path: "" },
           ]}
         />
-        <GetQuotes message={subHeader} needSString={false} />
+        <GetQuotes message={'home & garden'} needSString={false} />
       </div>
     </>
   );

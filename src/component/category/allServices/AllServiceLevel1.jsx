@@ -9,9 +9,9 @@ const AllServiceLevel1 = ({ data }) => {
   return (
     <div className={styles.container}>
       {/* Keep this title only once */}
-      <div className={styles.title}>
-        All <span className={styles.blueTitle}>Services</span>
-      </div>
+      <h2 className={styles.title}>
+        All <span className={styles.blueTitle}>services</span>
+      </h2>
 
       <div className={styles.categoryContainer}>
         <div className={styles.servicesContainer}>

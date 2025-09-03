@@ -11,7 +11,7 @@ const GetQuotes = ({ message,needSString=true }) => {
 
       {message && (
         <p className={styles.text}>
-          from {message}{needSString?'s':''} today
+          from {message}{needSString?'s':''} service providers today
         </p>
       )}
     </div>
