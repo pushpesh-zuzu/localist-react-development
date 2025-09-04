@@ -176,13 +176,13 @@ const ManualBidList = () => {
                           {(() => {
                             const rating = item?.avg_rating || 0;
 
-                            if (rating === 0) {
-                              return (
-                                <span className={styles.noReviews}>
-                                  No Reviews
-                                </span>
-                              );
-                            }
+                            // if (rating === 0) {
+                            //   return (
+                            //     <span className={styles.noReviews}>
+                            //       No Reviews
+                            //     </span>
+                            //   );
+                            // }
 
                             return (
                               <>
@@ -203,21 +203,21 @@ const ManualBidList = () => {
                                       return <span key={index}>★</span>;
                                     } else {
                                       return (
-                                        <span key={index}>
-                                          <img
-                                            src={grayStar}
-                                            alt="..."
-                                            width={21}
-                                            height={21}
-                                          />
+                                        <span
+                                          key={index}
+                                          className={styles.grayImg}
+                                        >
+                                          ★
                                         </span>
                                       ); // Empty star
                                     }
                                   })}
                                 </span>
-                                <span className={styles.ratingCount}>
-                                  {rating}
-                                </span>
+                                {rating > 0 && (
+                                  <span className={styles.ratingCount}>
+                                    {rating}
+                                  </span>
+                                )}
                               </>
                             );
                           })()}
@@ -262,13 +262,13 @@ const ManualBidList = () => {
                             {(() => {
                               const rating = item?.avg_rating || 0;
 
-                              if (rating === 0) {
-                                return (
-                                  <span className={styles.noReviews}>
-                                    No Reviews
-                                  </span>
-                                );
-                              }
+                              // if (rating === 0) {
+                              //   return (
+                              //     <span className={styles.noReviews}>
+                              //       No Reviews
+                              //     </span>
+                              //   );
+                              // }
 
                               return (
                                 <>
@@ -294,9 +294,11 @@ const ManualBidList = () => {
                                       }
                                     })}
                                   </span>
-                                  <span className={styles.ratingCount}>
-                                    {rating}
-                                  </span>
+                                  {rating > 0 && (
+                                    <span className={styles.ratingCount}>
+                                      {rating}
+                                    </span>
+                                  )}
                                 </>
                               );
                             })()}

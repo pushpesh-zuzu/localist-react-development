@@ -118,7 +118,7 @@ const PlaceNewRequest = () => {
                 >
                   <p>
                     {req.details} If you need to hire faster, email{" "}
-                    <a href={`mailto:${req.email}`}>{"team@locallists.com"}</a>{" "}
+                    <a href={`mailto:${req.email}`}>{"team@localists.com"}</a>{" "}
                     for assistance.
                   </p>
                 </div>

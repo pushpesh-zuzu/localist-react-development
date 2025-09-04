@@ -684,13 +684,13 @@ const BidsList = ({ previousStep }) => {
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
-                                if (rating === 0) {
-                                  return (
-                                    <span className={styles.noReviews}>
-                                      No Reviews
-                                    </span>
-                                  );
-                                }
+                                // if (rating === 0) {
+                                //   return (
+                                //     <span className={styles.noReviews}>
+                                //       No Reviews
+                                //     </span>
+                                //   );
+                                // }
 
                                 const sellerId = item?.id;
                                 const matchedSeller = item?.sellers?.find(
@@ -707,22 +707,24 @@ const BidsList = ({ previousStep }) => {
                                           return <span key={index}>★</span>; // Half star (or use icon)
                                         } else {
                                           return (
-                                            <span key={index}>
-                                              <img
-                                                src={grayStar}
-                                                alt="image"
-                                                height={23}
-                                                width={23}
-                                              />
-                                              {/* ★ */}
+                                            <span
+                                              key={index}
+                                              className={styles.grayImg}
+                                            >
+                                              ★
                                             </span>
                                           ); // Empty star
                                         }
                                       })}
                                     </span>
-                                    <span className={styles.ratingCount}>
+                                    {rating > 0 && (
+                                      <span className={styles.ratingCount}>
+                                        {rating}
+                                      </span>
+                                    )}
+                                    {/* <span className={styles.ratingCount}>
                                       {rating}
-                                    </span>
+                                    </span> */}
                                   </>
                                 );
                               })()}
@@ -764,13 +766,13 @@ const BidsList = ({ previousStep }) => {
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
-                                if (rating === 0) {
-                                  return (
-                                    <span className={styles.noReviews}>
-                                      No Reviews
-                                    </span>
-                                  );
-                                }
+                                // if (rating === 0) {
+                                //   return (
+                                //     <span className={styles.noReviews}>
+                                //       No Reviews
+                                //     </span>
+                                //   );
+                                // }
 
                                 return (
                                   <>
@@ -792,9 +794,11 @@ const BidsList = ({ previousStep }) => {
                                         }
                                       })}
                                     </span>
-                                    <span className={styles.ratingCount}>
-                                      {rating}
-                                    </span>
+                                    {rating > 0 && (
+                                      <span className={styles.ratingCount}>
+                                        {rating}
+                                      </span>
+                                    )}
                                   </>
                                 );
                               })()}

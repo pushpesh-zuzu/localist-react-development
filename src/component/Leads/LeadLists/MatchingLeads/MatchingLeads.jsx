@@ -35,7 +35,7 @@ const MatchingLeads = () => {
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
 
-  const [selectedFilter, setSelectedFilter] = useState("Sort by Credit Value");
+  const [selectedFilter, setSelectedFilter] = useState("Sort by Credits");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -327,8 +327,8 @@ const MatchingLeads = () => {
             }
           >
             {/* Default Disabled Option */}
-            <Option value="Sort by Credit Value" disabled>
-              Sort by Credit Value
+            <Option value="Sort by Credits" disabled>
+              Sort by Credits
             </Option>
 
             {filterOptions.map((opt) => (
@@ -400,8 +400,8 @@ const MatchingLeads = () => {
           }
         >
           {/* Default Disabled Option */}
-          <Option value="Sort by Credit Value" disabled>
-            Sort by Credit Value
+          <Option value="Sort by Credits" disabled>
+            Sort by Credits
           </Option>
 
           {filterOptions.map((opt) => (

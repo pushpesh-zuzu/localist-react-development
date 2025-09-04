@@ -52,7 +52,7 @@ const SaveForLater = () => {
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
   const data = saveForLaterDataList[0]?.savedLeads?.length;
-  const [selectedFilter, setSelectedFilter] = useState("Sort by Credit Value");
+  const [selectedFilter, setSelectedFilter] = useState("Sort by Credits");
 
   const filterOptions = [
     "Credit Value High",
@@ -289,8 +289,8 @@ const SaveForLater = () => {
                 />
               }
             >
-              <Option value="Sort by Credit Value" disabled>
-                Sort by Credit Value
+              <Option value="Sort by Credits" disabled>
+                Sort by Credits
               </Option>
 
               {filterOptions.map((opt) => (
@@ -358,8 +358,8 @@ const SaveForLater = () => {
             }
           >
             {/* Default Disabled Option */}
-            <Option value="Sort by Credit Value" disabled>
-              Sort by Credit Value
+            <Option value="Sort by Credits" disabled>
+              Sort by Credits
             </Option>
 
             {filterOptions.map((opt) => (

@@ -17,7 +17,6 @@
   color: #333 !important; /* override inherited white */
 }
 
-
 .textSection {
   display: flex;
   justify-content: space-between;
@@ -796,10 +795,10 @@
     list-style: none;
   }
 }
-
+/* 
 @media screen and (max-width: 385px) {
   .dualDropdownsContainers {
     flex-direction: column;
     flex-wrap: wrap;
   }
-}
+} */
