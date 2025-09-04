@@ -286,7 +286,7 @@
 
 @media (max-width: 884px) {
   .heading {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 400;
   }
   .availableOnline {
@@ -319,7 +319,6 @@
     object-fit: cover;
   }
   .heading {
-    font-size: 22px;
     font-weight: 400;
   }
   .availableOnline {
@@ -330,10 +329,10 @@
     margin: 4px 0 0 4px;
   }
   .slide > p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
   }
   .slider_title {
-    font-size: 14px;
+    font-size: 16px;
   }
 }

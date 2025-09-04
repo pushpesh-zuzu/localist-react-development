@@ -53,7 +53,7 @@
 }
 
 .frequently_collapse_description {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
 }
 
@@ -91,6 +91,6 @@
   }
 
   .frequently_collapse_description {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
