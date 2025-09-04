@@ -4,7 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 // Your Stripe public key
 const stripePromise = loadStripe(
-  "pk_test_51RTKiSHBbc2ftHcbzkhVXdd7qUBSYhGTzPUNRxKOgFpV4W4y4tjGN68aBCVRqlD15cokCSL2m4iL9wA0Y16tCLCD00f82XQLrk"
+  "pk_live_51RvtSuGf1poUBxLKkKI9gWvqJZrMTQIpajKGLHwk8PwVEnvQEtzP4b0xXYG0teNs4Pq6oVhdOQluJBhN4vQovYlP00Xh1xZZbc"
 );
 
 const StripeProvider = ({ children }) => (
