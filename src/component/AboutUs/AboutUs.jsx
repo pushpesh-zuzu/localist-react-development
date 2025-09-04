@@ -21,7 +21,7 @@ function AboutUs() {
       <BannerWrapper headingText="About Us" image={aboutUsBanner} />
       <WhoWeAre />
       {/* <Stats /> */}
-      <LeadershipCard />
+      {/* <LeadershipCard /> */}
       {/* <OurInvestor/> */}
       <GetInTouchButton />
     </div>
