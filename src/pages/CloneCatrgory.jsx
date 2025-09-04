@@ -154,8 +154,8 @@ const CloneCategory = ({ accountHeader }) => {
 
         <HowItWorks
           howItWorksData={howItWorksData}
-          header={accountHeader}
-          subHeader={'Home & Garden'}
+          header={'home & garden'}
+          subHeader={'home & garden'}
         />
         <PopularCategories data={filteredCategories} />
         {/* <AllServicesComponent data={filteredAllServicesData} /> */}
