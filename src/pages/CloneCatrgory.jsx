@@ -168,7 +168,7 @@ const CloneCategory = ({ accountHeader }) => {
             { name: "Driveway Installation", path: "/driveway-installers-near-me" },
             { name: "Patio Services", path: "/patio-layers-near-me" },
             { name: "Landscaping", path: "" },
-            { name: "Artificial Grass Installation", path: "" },
+            { name: "Artificial Grass Installation", path: "artificial-grass-installers-near-me" },
           ]}
         />
         <GetQuotes message={'home & garden'} needSString={false} />

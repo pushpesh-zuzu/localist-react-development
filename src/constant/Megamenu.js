@@ -246,13 +246,13 @@ export const megaMenu = [
         path:"patio-layers-near-me",
         children: locationData.map((loc) => `Patio Installers in ${loc}`),
       },
-      // {
-      //   name: "Artificial Grass Installation",
-      //   path:"artificial-grass-installation",
-      //   children: locationData.map(
-      //     (loc) => `Artificial Grass Installers in ${loc}`
-      //   ),
-      // },
+      {
+        name: "Artificial Grass Installation",
+        path:"artificial-grass-installers-near-me",
+        children: locationData.map(
+          (loc) => `Artificial Grass Installers in ${loc}`
+        ),
+      },
       // {
       //   name: "Landscaping",
       //   path:"landscaping",

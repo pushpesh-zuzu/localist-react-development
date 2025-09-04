@@ -158,7 +158,7 @@ const RELATED_PRICE_DATA = {
       price: "From £20",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 1,
       title: "Artificial Grass Installation Cost",
@@ -305,7 +305,7 @@ const RELATED_SERVICES_DATA = {
         "Everything you need to know about fence and gate installation",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 1,
       title: "A Guide to the Different Types of Artificial Grass",
@@ -451,33 +451,33 @@ const REVIEWS_DATA = {
         "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 1,
-      name: "Daniel Kennedy",
-      title: "(Artificial Grass Installation)",
-      date: "12 Jan 2025",
+      name: "Mason L",
+      title: "Birmingham",
+      date: "2 Jan 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "Our local installer was brilliant! They removed our old turf, prepped the ground, and fitted a soft synthetic lawn the kids can play on year-round. Looks amazing and no mud!",
     },
     {
       id: 2,
-      name: "Fatima H.",
-      title: "(Artificial Turf Specialist)",
-      date: "25 Jan 2025",
+      name: "Christian T.,",
+      title: "Bristol",
+      date: "30 Jan 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "We were tired of mowing and dealing with patchy grass. Localists matched us with a fantastic installer who suggested the right type of turf for our shaded garden. It transformed the space completely. Definitely the best decision we made for our graden! This Miss loves it so much. ",
     },
     {
       id: 3,
-      name: "Laura M",
-      title: "(Synthetic Grass Installer)",
+      name: "Georgina P. ",
+      title: "Glasgow",
       date: "8 Feb 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "The whole installation only took two days. The artificial grass and fitting specialists we found through Localist were tidy, polite, and very professional. They left us with a garden that looks perfect every day. Couldn’t recommend them enough. ",
     },
   ],
 };
@@ -495,7 +495,7 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Patio,
       description: "Patio Services",
-      // path: "patio-layers-near-me",
+      path: "patio-layers-near-me",
     },
     {
       id: 3,
@@ -508,7 +508,7 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: ArtificialGrass,
       description: "Artificial Grass Installation",
-      // path: "artificial-grass-installation",
+      path: "artificial-grass-installers-near-me",
     },
   ],
   "driveway-installers-near-me": [
@@ -535,7 +535,7 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: ArtificialGrass,
       description: "Artificial Grass Installation",
-      // path: "artificial-grass-installation",
+      // path: "artificial-grass-installers-near-me",
     },
   ],
   "patio-layers-near-me": [
@@ -563,7 +563,7 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: ArtificialGrass,
       description: "Artificial Grass Installation",
-      path: "artificial-grass-installation",
+      path: "artificial-grass-installers-near-me",
     },
   ],
   landscaping: [
@@ -590,10 +590,10 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: ArtificialGrass,
       description: "Artificial Grass Installation",
-      path: "artificial-grass-installation",
+      path: "artificial-grass-installers-near-me",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 1,
       image: fenchinstal,
@@ -692,24 +692,18 @@ const AVERAGE_PRICE = {
       Premium: "£310",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       Region: "Nationwide",
-      "Great Value": "£80",
-      Average: "£120",
-      Premium: "£250",
+      "Great Value": "£1200",
+      Average: "£1750",
+      Premium: "£3300",
     },
     {
-      Region: "East Midlands",
-      "Great Value": "£75",
-      Average: "£110",
-      Premium: "£230",
-    },
-    {
-      Region: "East of England",
-      "Great Value": "£85",
-      Average: "£115",
-      Premium: "£240",
+      Region: "London",
+      "Great Value": "£1350",
+      Average: "£1620",
+      Premium: "£3850",
     },
   ],
 };
@@ -947,18 +941,60 @@ Choosing the right fencing or gate professional isn’t just about price - it’
         "It depends on the scope. A small garden refresh may take a few days, while a full redesign could take several weeks.",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       key: "1",
-      title: "How long does artificial grass installation take?",
+      title: "How long does artificial grass last?",
       description:
-        "Most installations are completed within 1–3 days, depending on the size of your lawn and site preparation requirements.",
+        "Generally, high-quality artificial grass installation can last between 15 and 20 years, depending on usage, material quality, and upkeep. Factors such as heavy foot traffic or pets may shorten its lifespan slightly. However, with proper care, most modern synthetic turf installations stay lush and green for decades. For long-lasting results, it’s worth investing in premium turf and hiring professional artificial lawn installers.",
     },
     {
       key: "2",
-      title: "Is artificial grass pet-friendly?",
+      title: "Do I need to prepare the ground myself?",
       description:
-        "Yes! Quality artificial grass is safe for pets, easy to clean, and durable enough to handle active use.",
+        "In most cases, no. Professional artificial lawn installers will handle the entire process, from removing old turf or concrete to laying a stable sub-base and weed membrane. However, if you clear furniture, garden décor, or obstacles beforehand, it could help get the process started faster and keep costs lower.",
+    },
+    {
+      key: "3",
+      title: "Is artificial grass suitable for pets?",
+      description:
+        "Yes! Artificial lawn installation is highly popular with pet owners because it’s durable, non-toxic, and easy to clean. Pet urine drains through the turf, and solid waste can be picked up as usual. ",
+    },
+    {
+      key: "4",
+      title: "Will it drain properly in heavy rain?",
+      description: `
+    <p>
+      When fitted correctly, synthetic grass installation drains just as well as natural lawns. Sometimes even better. The base layer of crushed stone or sharp sand allows water to flow away quickly, preventing puddles.
+    </p> 
+    <p style="margin-top:16px">
+      That’s why choosing experienced artificial grass and fitting specialists is important. 
+    </p>
+  `,
+    },
+    {
+      key: "5",
+      title: "Can you install artificial grass over concrete or decking?",
+      description: `
+    <p>
+      Yes, it’s possible to lay turf over concrete, tarmac, or decking with the right preparation. Your artificial grass installation specialist may add an underlay for cushioning and drainage, making the surface softer underfoot. This option is ideal for small gardens, balconies, and roof terraces where natural turf isn’t possible.
+    </p> 
+    <p style="margin-top:16px">
+      When you hire through Localists, you’ll be connected with vetted artificial grass installation specialists who can guide you through every step and answer all your questions with complete transparency.
+    </p>
+  `,
+    },
+    {
+      key: "6",
+      title: "What’s the difference between synthetic turf and fake grass? ",
+      description:
+        "The terms are often used interchangeably. “Fake grass installation” is just a casual phrase, while “synthetic turf installation” usually refers to more advanced, realistic products often used in sports grounds or premium landscaping projects. Both create a green, low-maintenance lawn, but synthetic turf is generally the higher-quality option.",
+    },
+    {
+      key: "7",
+      title: " How do I maintain artificial grass after installation?",
+      description:
+        "Unlike natural lawns, false grass installation requires very little upkeep. There’s no mowing, fertilising, or reseeding -  just occasional brushing to keep fibres upright, rinsing to remove dust, and clearing away leaves or debris. For pet owners, a quick rinse keeps the lawn hygienic. Most artificial lawn installers will provide aftercare guidance to ensure your turf looks great for years.",
     },
   ],
 };
@@ -999,7 +1035,7 @@ const TAXRETURNDATA = {
     name: "Alex, Staff Writer",
     date: "2021-03-10",
   },
-  "artificial-grass-installation": {
+  "artificial-grass-installers-near-me": {
     key: "4",
     heading1: "A guide to the different types of Artificial Grass",
     heading2: "Artificial Grass Installation",
@@ -1059,7 +1095,7 @@ const regionsData = {
       ],
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 3,
       title: "North West England",
@@ -1102,7 +1138,7 @@ export const POPULARCITY = {
     { id: 4, city_name: "Warrington", city_image: london },
     { id: 5, city_name: "Ellesmere", city_image: london },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
@@ -1216,30 +1252,30 @@ const HowItWorksData = {
         "Check reviews, see before-and-after photos, and explore detailed profiles—all in one place. With all the information at your fingertips, hiring the right landscaper becomes simple. Once you’ve found your match, you can get started transforming your outdoor space.",
     },
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       id: 1,
-      title: "Tell Us Your Needs",
+      title: "Start your search for artificial grass installers near me",
       image: WhatYouNeedIcon,
-      heading1: "Tell Us Your Needs",
+      heading1: "Start your search for artificial grass installers near me",
       description:
-        "Share your requirements, and we’ll match you with the most suitable installers in your area.",
+        "Share your project details - what you’d like to achieve and where you need it. We’ll connect you with vetted artificial grass installation specialists who specialise in everything from small garden patches to full-scale artificial turf installations.",
     },
     {
       id: 2,
-      title: "Get Free Quotes",
+      title: "Get free quotes from artificial grass installers",
       image: FreeQuotesIcon,
-      heading1: "Get Free Quotes",
+      heading1: "Get free quotes from artificial grass installers",
       description:
-        "Receive multiple free quotes from professionals, plus instant updates via our website or app. We do all the hard work for you.",
+        "Once you submit your project details, you’ll get free, no-obligation quotes sent to you directly in a matter of minutes. You can compare offers and review profiles of artificial lawn installers near you. No pressure to hire until you are ready.",
     },
     {
       id: 3,
-      title: "Choose Your Installer",
+      title: "Hire a specialist installer in your local area",
       image: accountant,
-      heading1: "Choose Your Installer",
+      heading1: "Hire a specialist installer in your local area",
       description:
-        "Compare reviews, check credentials, and speak directly with providers before making your choice.",
+        "Once you’ve compared options, choose the installer that best suits your style, budget, and timeline. Get started with your project.  ",
     },
   ],
 };
@@ -1271,12 +1307,12 @@ const CONTENT_CONFIG = {
     para2: "",
     para3: "Best of all – it’s completely free!",
   },
-  "artificial-grass-installation": {
+  "artificial-grass-installers-near-me": {
     para1:
-      "Looking for top-quality Artificial Grass Installers? Start your search today and get free, no-obligation quotes in minutes!",
+      "Not sure where to find artificial grass fitters near you? Localists connects you with fully vetted specialists in your area who can handle everything from fake grass installation to synthetic turf installation.",
     para2:
-      "If it’s your first time hiring an Artificial Grass Installer and you’re unsure where to begin, simply tell us about your project. We’ll connect you with trusted local professionals so you can review profiles, read real customer feedback, and request more details—without any pressure to commit.",
-    para3: "Best of all – it’s completely free!",
+      "Whether you’re after a child-friendly lawn, a low-maintenance garden, or a neat commercial green space, we’ll link you up with trusted local professionals. Let us know what you need, and we’ll match you with reliable expert installers in your local area.",
+    para3: "Say goodbye to endless phone calls - Get free quotes!",
   },
 };
 
@@ -1301,15 +1337,11 @@ const BREADCRUMB_CONFIG = {
     },
     { title: "Landscaping", path: "landscaping" }, // no path
   ],
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     { title: "Home & Garden", path: "/home" },
     {
-      title: "Gardening & Landscaping",
-      path: "/gardening-landscaping",
-    },
-    {
       title: "Artificial Grass Installation",
-      path: "artificial-grass-installation",
+      path: "artificial-grass-installers-near-me",
     }, // no path
   ],
 };
@@ -1343,10 +1375,14 @@ const CONTENT_CONFIG_TOP = {
     title: "Landscaper",
     mainTitle: "Landscape Gardener",
   },
-  "artificial-grass-installation": {
+  "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
-    title: "Artificial Grass Installer",
+    title: "Artificial Grass Installers",
     mainTitle: "Artificial Installer",
+    findingHeading: "artificial grass installers",
+    ctaText: "artificial grass installer",
+    avgPriceTitle: "artificial grass installation",
+    showSpeicialits: true,
   },
 };
 
@@ -1367,7 +1403,7 @@ const CONTENT_CONFIG_BANNER = {
     banner: LandscapingBanner,
     reltatedImage: Landscaping,
   },
-  "artificial-grass-installation": {
+  "artificial-grass-installers-near-me": {
     banner: ArtificialGrassBanner,
     reltatedImage: ArtificialGrass,
   },
@@ -1398,12 +1434,11 @@ const CONTENT_CONFIG_META = {
     content:
       "Find skilled landscape gardeners near you for stunning outdoor designs, lawn care, and garden makeovers. Quality local services at affordable rates.",
   },
-  "artificial-grass-installation": {
-    title:
-      "Artificial Grass Installation | Find Installers Near You - Localists",
+  "artificial-grass-installers-near-me": {
+    title: " Find Artificial Grass Installers Near Me - Localists",
     name: "description",
     content:
-      "Find trusted artificial grass installers near you with Localists. Get free quotes for expert artificial grass installation and transform your outdoor space today.",
+      "Get instant quotes from artificial grass installation specialists near you. View their past projects and read reviews before you hire. Get started today at Localists",
   },
 };
 const FIND_SERVICE_CONTENT = {
@@ -1828,14 +1863,170 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
   ],
 
-  "artificial-grass-installation": [
+  "artificial-grass-installers-near-me": [
     {
       type: "h2",
-      text: "Find Artificial Grass Installation near you",
+      text: "Artificial grass installation: hire professionals you can trust",
     },
     {
       type: "p",
-      text: "Artificial grass is a fantastic way to maintain your garden. Keeping on top of your lawn can be tricky, especially with the forces of nature making your job even harder. With an artificial lawn, you can keep your garden looking pristine the whole year-round. Thankfully, finding the right artificial lawn installation specialist isn’t difficult - Localists can help you get free quotes in a matter of minutes.",
+      text: "At Localists, hundreds of people use our platform every single day to find trusted artificial grass installers near them, and not just for homes. Whether it’s a back garden, a school playground, a commercial outdoor space, or even an event setup, we make it simple to connect with the right experts.",
+    },
+    {
+      type: "pbold",
+      text: "Here’s why so many trust us to find the best artificial grass installers:",
+    },
+    {
+      type: "uili",
+      heading: "Trusted and vetted professionals\u00A0",
+      text: "– Every installer on Localists is carefully screened for skill, reliability, and customer satisfaction, so you only connect with genuine experts.",
+    },
+    {
+      type: "uili",
+      heading: "Specialisation\u00A0",
+      text: "– Find experts who handle all types of artificial grass installation, from residential lawns and pet-friendly turf to sports surfaces, commercial spaces, and roof terraces.",
+    },
+    {
+      type: "uili",
+      heading: "Easy from the start\u00A0",
+      text: "– Tell us what you need once, and get matched with artificial grass fitters near you ready to provide custom quotes.",
+    },
+    {
+      type: "uili",
+      heading: "Choice and transparency\u00A0",
+      text: "– Compare multiple installers, view real photos of their past work, and read genuine customer reviews before you decide.",
+    },
+    {
+      type: "uili",
+      heading: "Local expertise\u00A0",
+      text: "– Because installers are based near you, they understand the ground conditions and drainage issues common in your area. That means your artificial lawn won’t just look amazing only on day one. It will be fitted with the right base, drainage, and finish to stay smooth, safe, and durable for years, whatever the weather.",
+    },
+    {
+      type: "h3",
+      text: "How to install artificial grass?",
+    },
+    {
+      type: "p",
+      text: "Installing artificial grass is more than just rolling out turf – it’s a process that requires skill, preparation, and the right materials for a long-lasting result. A typical artificial lawn installation involves:",
+    },
+    {
+      type: "uili",
+      heading: "Ground preparation\u00A0",
+      text: "– It starts with groundworks. Existing grass, weeds, or soil are removed to create a clean, stable foundation. Installers may dig down and level the area, making sure it’s firm and free from obstacles, so your new lawn sits perfectly flat.",
+    },
+    {
+      type: "uili",
+      heading: "Base layer\u00A0",
+      text: "– A sub-base of crushed stone or sharp sand is spread and compacted. This gives stability, allows water to drain properly, and prevents the grass from sinking or becoming uneven over time.",
+    },
+    {
+      type: "uili",
+      heading: "Weed membrane\u00A0",
+      text: "– A specialist membrane is laid to block weeds from growing up through the turf. This means your new lawn stays neat and maintenance-free.",
+    },
+    {
+      type: "uili",
+      heading: "Laying the turf\u00A0",
+      text: "– The artificial grass is carefully rolled out, cut to shape around edges and corners, and then fixed in place with adhesive or pins. This ensures it stays secure in all weather conditions.",
+    },
+    {
+      type: "uili",
+      heading: "Brushing & infill\u00A0",
+      text: "– To finish, the grass fibres are brushed upright for a natural look, and a layer of sand infill may be added for extra weight, stability, and softness underfoot.",
+    },
+    {
+      type: "h2",
+      text: "Choosing the right expert near you",
+    },
+    {
+      type: "p",
+      text: "While DIY installation is possible, getting the base and drainage right can be challenging. That’s why most people choose to hire professionals for the job. But how do you choose the right expert? That’s where Localists comes in.",
+    },
+    {
+      type: "pbold",
+      text: "When comparing installers, it’s worth looking beyond just price. Consider asking:",
+    },
+    {
+      type: "li",
+      heading: "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
+    },
+    {
+      type: "li",
+      heading: "What installation method will you use?\u00A0 – There are different approaches depending on soil, drainage, or intended use (lawn, pets, sports, balconies, etc.).",
+    },
+    {
+      type: "li",
+      heading: "How long will the project take?\u00A0 – Timelines can vary, so it helps to set clear expectations.",
+          },
+    {
+      type: "li",
+      heading: "Do you provide a guarantee?\u00A0 – A good installer should stand by their work with some form of warranty.",
+      },
+    {
+      type: "h2",
+      text: "How much does it cost to install artificial grass?",
+    },
+    {
+      type: "p",
+      text: "The cost of artificial grass installation varies depending on the size of your lawn, the quality of turf you choose, and how much groundwork is required. For example, a small, flat garden with minimal preparation will cost less than a large lawn that needs significant levelling, edging, or drainage work.",
+    },
+    {
+      type: "p",
+      text: "Groundworks (like levelling, adding a base layer, or fitting edging) often account for a big part of the price, so getting a clear breakdown in your quote is essential.",
+    },
+    {
+      type: "p",
+      text: "With Localists, you can get free quotes instantly and compare prices from vetted artificial lawn installers near you, ensuring you find the right fit for your budget and project.",
+    },
+    {
+      type: "pbold",
+      text: "As a guide:",
+    },
+    {
+      type: "uili",
+      heading: "Budget installation\u00A0",
+      text: "– From £60–£75 per m², including fitting. Best for smaller areas or temporary use.",
+    },
+    {
+      type: "uili",
+      heading: "Mid-range installation\u00A0",
+      text: "– Around £80–£100 per m², offering a good balance of durability and realistic appearance.",
+    },
+    {
+      type: "uili",
+      heading: "Premium installation\u00A0",
+      text: "– £100–£120+ per m², for high-quality turf with longer pile height, natural tones, and a luxurious feel.",
+    },
+    {
+      type: "p",
+      text: "On average, UK homeowners spend £2,000–£3,500 for a standard back garden. Larger commercial projects, pet-friendly lawns with advanced drainage, or bespoke designs such as putting greens can be significantly higher.",
+    },
+    {
+      type: "h2",
+      text: "Do I need a permit to install artificial grass?",
+    },
+    {
+      type: "p",
+      text: "For most homeowners in the UK, installing artificial grass is considered a straightforward improvement — meaning no planning permission is required. However, there are exceptions where it’s best to double-check:",
+    },
+    {
+      type: "li",
+      heading:
+        "Listed buildings or conservation areas – If your property is in a protected area, there may be restrictions on changes to your garden.",
+    },
+    {
+      type: "li",
+      heading:
+        "Front gardens with hard surfaces – If you’re replacing natural grass with an impermeable base that affects drainage, local regulations may apply.",
+    },
+    {
+      type: "li",
+      heading:
+        "Large commercial or public projects – Schools, sports fields, and community spaces may need planning consent depending on size and usage.",
+    },
+    {
+      type: "p",
+      text: "Many standard home installations don’t require a permit, but it’s always wise to check with your local council before starting, especially for larger or more unusual projects. Localists connects you with local artificial grass installation experts who understand not just the installation process, but also the local regulations that might apply in your area. Start your search now!",
     },
   ],
 };
@@ -1844,7 +2035,7 @@ const LEVEL_THIRD_SERVICES_NAME = {
   "driveway-installers-near-me": "Driveway Installation",
   "patio-layers-near-me": "Patio Services",
   landscaping: "Landscaping",
-  "artificial-grass-installation": "Artificial Grass Installation",
+  "artificial-grass-installers-near-me": "Artificial Grass Installation",
 };
 
 export {

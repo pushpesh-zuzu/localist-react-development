@@ -196,8 +196,7 @@ const PopularCategoriesData = [
   {
     id: 17,
     title: "Artificial Grass Installation",
-    path: "",
-    // path: "artificial-grass-installation",
+    path: "artificial-grass-installers-near-me",
 
     image: ArtificialGrass,
   },
