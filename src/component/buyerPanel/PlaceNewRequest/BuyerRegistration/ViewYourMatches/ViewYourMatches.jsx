@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ViewYourMatches.module.css";
-import { clearSetbuyerRequestData, createRequestData } from "../../../../../store/Buyer/BuyerSlice";
+import {
+  clearSetbuyerRequestData,
+  createRequestData,
+} from "../../../../../store/Buyer/BuyerSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../../../utils";
@@ -13,27 +16,32 @@ const ViewYourMatches = ({
   previousStep,
   setShowConfirmModal,
 }) => {
-  const { buyerRequest, requestLoader,citySerach,requestDataList,createRequestToken } = useSelector((state) => state.buyer);
+  const {
+    buyerRequest,
+    requestLoader,
+    citySerach,
+    requestDataList,
+    createRequestToken,
+  } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
-console.log(createRequestToken,requestDataList?.phone,"createRequestToken")
-useEffect(() => {
-  if (requestDataList?.phone) {
-    setPhoneNumber(requestDataList?.phone.replace(/^\+44/, ""));
-  } else if (userToken?.phone) {
-    setPhoneNumber(userToken?.phone.replace(/^\+44/, ""));
-  }
-}, [requestDataList?.phone, userToken?.phone])
+  console.log(createRequestToken, requestDataList?.phone, "createRequestToken");
+  useEffect(() => {
+    if (requestDataList?.phone) {
+      setPhoneNumber(requestDataList?.phone.replace(/^\+44/, ""));
+    } else if (userToken?.phone) {
+      setPhoneNumber(userToken?.phone.replace(/^\+44/, ""));
+    }
+  }, [requestDataList?.phone, userToken?.phone]);
   const handleInputChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
     setPhoneNumber(value);
     setError(false);
   };
   const handleSubmit = () => {
-    
     if (phoneNumber.length !== 10) {
       setError(true);
       return;
@@ -43,25 +51,24 @@ useEffect(() => {
     formData.append("service_id", buyerRequest?.service_id);
     formData.append("postcode", buyerRequest?.postcode);
     // formData.append("city",buyerRequest?.city);
-    formData?.append("city",citySerach)
+    formData?.append("city", citySerach);
     formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
     formData.append("recevive_online", consent ? 1 : 0);
     formData.append("form_status", 1);
 
     dispatch(createRequestData(formData)).then((result) => {
-      if(result?.success){
-        showToast("success",result?.message)
+      if (result?.success) {
+        showToast("success", result?.message);
         nextStep();
       }
-    });;
-    
+    });
   };
 
   const handleCloseClick = () => {
-   onClose()
-   dispatch(clearSetbuyerRequestData())
-   dispatch(clearBuyerRegisterFormData())
+    onClose();
+    dispatch(clearSetbuyerRequestData());
+    dispatch(clearBuyerRegisterFormData());
     // if(!userToken?.remember_tokens){
     //   setShowConfirmModal(true);
     // } else{
@@ -77,7 +84,7 @@ useEffect(() => {
           onClick={handleCloseClick}
           disabled={requestLoader}
         >
-                     &times;
+          &times;
         </div>
         <div className={styles.header}>
           <h2>View your matches now!</h2>
@@ -87,7 +94,7 @@ useEffect(() => {
           <label htmlFor="phoneNumber" className={styles.label}>
             Please enter your phone numbers
           </label>
-          <div className={styles.phoneWrapper}>
+          {/* <div className={styles.phoneWrapper}>
           <span className={styles.prefix}>+44</span>
           <input
             type="text"
@@ -105,6 +112,40 @@ useEffect(() => {
               Please enter a valid 10-digit phone number.
             </span>
           )}
+          </div> */}
+
+          <div className={styles.phoneWrapper}>
+            <input
+              type="text"
+              id="phoneNumber"
+              placeholder="+44 XXXXX XXXXXX"
+              className={styles.input}
+              maxLength={13} // +44 + 10 digits => 13 total
+              value={"+44 " + phoneNumber}
+              onChange={(e) => {
+                let value = e.target.value;
+
+                // Remove everything except numbers
+                value = value.replace(/\D/g, "");
+
+                // If value starts with "44", remove it (to avoid double +44)
+                if (value.startsWith("44 ")) {
+                  value = value.slice(2);
+                }
+
+                // Limit to 10 digits only
+                if (value.length <= 10) {
+                  setPhoneNumber(value);
+                }
+                setError(false);
+              }}
+              style={{ borderColor: error ? "red" : "" }}
+            />
+            {error && (
+              <span className={styles.errorMessage}>
+                Please enter a valid 10-digit phone number.
+              </span>
+            )}
           </div>
 
           <div className={styles.checkboxContainer}>

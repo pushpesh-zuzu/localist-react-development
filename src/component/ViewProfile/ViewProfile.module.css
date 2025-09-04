@@ -448,7 +448,8 @@
   }
 
   .formGroup {
-    min-width: 100%;
+    width: -webkit-fill-available;
+    min-width: -webkit-fill-available;
   }
 
   .buttonRow {
@@ -472,9 +473,9 @@
     flex-direction: column;
   }
 
-  .formGroup {
+  /* .formGroup {
     min-width: 100%;
-  }
+  } */
 
   .buttonRow {
     /* flex-direction: column; */
@@ -497,9 +498,9 @@
     flex-direction: column;
   }
 
-  .formGroup {
+  /* .formGroup {
     min-width: 100%;
-  }
+  } */
 
   .buttonRow {
     /* flex-direction: column; */
