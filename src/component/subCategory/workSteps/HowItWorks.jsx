@@ -6,7 +6,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        How <span className={styles.highlight}>localists</span> works
+        How <span className={styles.highlight}>Localists</span> works
       </h2>
       <div className={styles.stepsContainer}>
         {HowItWorksData && HowItWorksData.map((item, index) => (
@@ -17,6 +17,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
             <div className={styles.content}>
               <h3 className={styles.title}>
                 {item.heading1} <br className={styles.lineBreak} />
+                {item?.lBreak && <br className={styles.lineBreak} />}
                 {/* <span className={styles.blueText}> {item.heading2}</span> */}
               </h3>
 

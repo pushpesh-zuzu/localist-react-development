@@ -126,7 +126,7 @@ const CloneCategory = ({ accountHeader }) => {
     }
     return null;
   }).filter(Boolean);
-  const howItWorksData = HowItWorksData[endpoint1] || HowItWorksData.business;
+  const howItWorksData = HowItWorksData[endpoint1];
   return (
     <>
       <Helmet>
@@ -148,7 +148,7 @@ const CloneCategory = ({ accountHeader }) => {
           panelImage={Home}
           title="Home & Garden"
           para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
-          para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotations for the work you require"
+          para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotations for the work you require."
           para3={`It's super fast and easy!`}
         />
 
@@ -168,7 +168,7 @@ const CloneCategory = ({ accountHeader }) => {
             { name: "Driveway Installation", path: "/driveway-installers-near-me" },
             { name: "Patio Services", path: "/patio-layers-near-me" },
             { name: "Landscaping", path: "" },
-            { name: "Artificial Grass Installation", path: "artificial-grass-installers-near-me" },
+            { name: "Artificial Grass Installation", path: "/artificial-grass-installers-near-me" },
           ]}
         />
         <GetQuotes message={'home & garden'} needSString={false} />

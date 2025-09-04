@@ -522,7 +522,7 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Patio,
       description: "Patio Services",
-      // path: "patio-layers-near-me",
+      path: "patio-layers-near-me",
     },
     {
       id: 3,
@@ -535,7 +535,7 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: ArtificialGrass,
       description: "Artificial Grass Installation",
-      // path: "artificial-grass-installers-near-me",
+      path: "artificial-grass-installers-near-me",
     },
   ],
   "patio-layers-near-me": [
@@ -557,7 +557,7 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       availableOnline: true,
-      path: "landscaping",
+      path: "",
     },
     {
       id: 4,
@@ -618,7 +618,7 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       availableOnline: true,
-      path: "landscaping",
+      path: "",
     },
   ],
 };
@@ -714,12 +714,12 @@ const FREQUENTLY_DATA = {
       key: "1",
       title: "Which is the best fencing company near me?",
       description:
-        "The best fencing company near you is one that’s reliable, well-reviewed, fully insured, and experienced with projects similar to yours. Rather than spend hours searching the internet, <b>Localists</b> simplifies the process. All you need to do is share a few project details, and we’ll connect you with top-rated local fencing contractors who fit your needs.",
+        "The best fencing company near you is one that’s reliable, well-reviewed, fully insured, and experienced with projects similar to yours. Rather than spend hours searching the internet, Localists simplifies the process. All you need to do is share a few project details, and we’ll connect you with top-rated local fencing contractors who fit your needs.",
     },
     {
       key: "2",
       title: "How much does fence and gate installation cost?",
-      description: `<p>The cost of installing fences and gates can vary based on several factors -<b> the size of your project, the materials you choose, and the type of fencing or gate you need</b> (manual or automated, wooden or metal, decorative or security-focused).</p>
+      description: `<p>The cost of installing fences and gates can vary based on several factors - the size of your project, the materials you choose, and the type of fencing or gate you need (manual or automated, wooden or metal, decorative or security-focused).</p>
       <p>Naturally, more complex or custom installations will cost more, and the number of fences or gates you want to install will affect the final price too.</p>
       <p>When you connect with a professional through Localists, you’ll get clear, tailored quotes based on your specific needs. Your local fence installer can walk you through your options and help you choose the best solution to fit your budget and style.</p>
       <p>Want an accurate quote? With Localists, you can quickly get free, no-obligation estimates from qualified fencing contractors nearby, so you know exactly what to expect before committing.</p>`,
@@ -744,45 +744,45 @@ Choosing the right fencing or gate professional isn’t just about price - it’
 </p>
 
         <ul>
-  <li><strong>Relevant qualifications & certifications</strong></li>
+  <li>Relevant qualifications & certifications</li>
 </ul>
 <p>
-  For fencing, look for professionals with a <strong>Level 2 Diploma in Fencing (NVQ)</strong> or a 
-  <strong>FISS/CSCS card</strong> (Fencing Industry Skills Scheme/Construction Skills Certification Scheme). 
+  For fencing, look for professionals with a Level 2 Diploma in Fencing (NVQ) or a 
+  FISS/CSCS card (Fencing Industry Skills Scheme/Construction Skills Certification Scheme). 
   For gate installation, check for qualifications like the NVQ in Specialist Installation Occupations – 
   Door, Gate and Shutter Systems, as well as accreditations such as BFT approval or Gate Safe training.
 </p>
 
 <ul>
-  <li><strong>Proven track record</strong></li>
+  <li>Proven track record</li>
 </ul>
 <p>
   Asking to see examples of past work of previous fence and gate installations can give you a clear sense of their workmanship, style, and attention to detail.
 </p>
 
 <ul>
-  <li><strong>Reviews & reputation</strong></li>
+  <li>Reviews & reputation</li>
 </ul>
 <p>
   Browse through verified customer reviews, testimonials, or ratings to get a sense of how reliable and professional they are.
 </p>
 
 <ul>
-  <li><strong>Transparent quotes & timelines</strong></li>
+  <li>Transparent quotes & timelines</li>
 </ul>
 <p>
   A trustworthy professional will give you a clear, itemised quote and realistic timeframes, so there are no surprises along the way.
 </p>
 
 <ul>
-  <li><strong>Proper licensing & insurance</strong></li>
+  <li>Proper licensing & insurance</li>
 </ul>
 <p>
   Make sure they’re fully insured and compliant with local regulations. This is especially important for automated gate systems.
 </p>
 
 <ul>
-  <li><strong>Written agreements</strong></li>
+  <li>Written agreements</li>
 </ul>
 <p>
   Always request a formal contract or service agreement that outlines scope, timelines, cost, and warranty (if available).
@@ -795,7 +795,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "6",
       title: "How much is fencing per metre in the uk?",
       description:
-        "<p>On average, fencing in the UK costs <b>around £49 per metre</b>, excluding labour. Labour typically ranges between <b>£25–£30</b> per hour. Final costs depend on materials, fence design, location, and any groundwork or repairs needed. Want to get a detailed estimate for your property? With Localists, one quick request gets you matched with local experts who can break down the full costs clearly.</p>",
+        "<p>On average, fencing in the UK costs around £49 per metre, excluding labour. Labour typically ranges between £25–£30 per hour. Final costs depend on materials, fence design, location, and any groundwork or repairs needed. Want to get a detailed estimate for your property? With Localists, one quick request gets you matched with local experts who can break down the full costs clearly.</p>",
     },
   ],
   "driveway-installers-near-me": [
@@ -803,10 +803,10 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "1",
       title: "How much does it cost to install a driveway?",
       description: `
-       Driveway installation costs can vary widely depending on the <strong> surface material, size of your driveway, your location</strong>, and any <strong> extra features</strong> you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price. You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown.
+       Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price. You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown.
   <br/>
   <p style="margin-top:12px;">
-    As a general rule, <strong>the larger the driveway, the lower the cost per square metre</strong> — so it’s worth asking for quotes based on your exact dimensions. A typical full installation might cost around <strong>£4,500 across the UK</strong> and <strong>£4,800 in London.</strong>
+    As a general rule, the larger the driveway, the lower the cost per square metre — so it’s worth asking for quotes based on your exact dimensions. A typical full installation might cost around £4,500 across the UK and £4,800 in London.
   </p>
 
   <p style="margin-top:20px;">
@@ -817,7 +817,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
     .driveway-table {
       border-collapse: collapse;
       width: 100%;
-      min-width: 400px;
+       max-width: 450px;
       text-align: left;
       font-size: 16px;
     }
@@ -874,13 +874,13 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "2",
       title: "Do you need planning permission for a driveway?",
       description:
-        "In most cases, planning permission may not be required to install or replace a driveway. However, if your new driveway is over <strong>5 square metres</strong> and uses <strong>impermeable materials</strong> without a drainage solution, you’ll need permission under UK regulations. Smaller installations, or those using permeable surfaces such as gravel, permeable block paving, or porous asphalt, are generally exempt. If you’re unsure, Localists can connect you with a vetted driveway contractor near you who can advise on the latest rules in your area.",
+        "In most cases, planning permission may not be required to install or replace a driveway. However, if your new driveway is over 5 square metres and uses impermeable materials without a drainage solution, you’ll need permission under UK regulations. Smaller installations, or those using permeable surfaces such as gravel, permeable block paving, or porous asphalt, are generally exempt. If you’re unsure, Localists can connect you with a vetted driveway contractor near you who can advise on the latest rules in your area.",
     },
     {
       key: "3",
       title: "How long does it take to build a driveway?",
       description:
-        "The time to build a driveway depends on its size, the surface material, and site conditions. On average, most driveway installations take <strong>3 to 7 days</strong> from start to finish. For example, gravel driveways are often the quickest to install, while block paving or decorative stonework can take longer due to the precision involved. Weather conditions (especially for concrete), site preparation, and contractor availability can also affect the timeline. Hiring an experienced driveway installer through Localists ensures your project runs smoothly and on schedule.",
+        "The time to build a driveway depends on its size, the surface material, and site conditions. On average, most driveway installations take 3 to 7 days from start to finish. For example, gravel driveways are often the quickest to install, while block paving or decorative stonework can take longer due to the precision involved. Weather conditions (especially for concrete), site preparation, and contractor availability can also affect the timeline. Hiring an experienced driveway installer through Localists ensures your project runs smoothly and on schedule.",
     },
     {
       key: "4",
@@ -895,7 +895,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: " How do I find a patio construction company near me?",
       description: `
   <p>
-    Good news - You’re already halfway there! Use Localists to search for reputable <strong>patio contractors</strong> wherever you are. Simply tell us your project vision, your location, and we'll match you with trusted professionals who can bring it to life. Pick your builder, get the ball rolling, and relax.
+    Good news - You’re already halfway there! Use Localists to search for reputable patio contractors wherever you are. Simply tell us your project vision, your location, and we'll match you with trusted professionals who can bring it to life. Pick your builder, get the ball rolling, and relax.
   </p>
 `,
     },
@@ -904,7 +904,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: "How long does patio installation take?",
       description: `
   <p>
-    A typical <strong>patio construction</strong> job usually takes anywhere from 2 to 7 days, depending on size, design complexity, and prep needed. For example, a straightforward 10 m² project might be finished in around 2–2.5 days, while a more expansive or complex project may take up to a week. Weather and groundwork (like excavation and base preparation) can lengthen the schedule, but your <strong>patio installer</strong> will walk you through what to expect.
+    A typical patio construction job usually takes anywhere from 2 to 7 days, depending on size, design complexity, and prep needed. For example, a straightforward 10 m² project might be finished in around 2–2.5 days, while a more expansive or complex project may take up to a week. Weather and groundwork (like excavation and base preparation) can lengthen the schedule, but your patio installer will walk you through what to expect.
   </p>
 `,
     },
@@ -913,7 +913,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: "What’s the best patio on a budget?",
       description: `
   <p>
-    If you're keeping costs down, <strong>gravel patios</strong> are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable <strong>patio construction near me</strong>, Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
+    If you're keeping costs down, gravel patios are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable patio construction near me, Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
   </p>
 `,
     },
@@ -922,7 +922,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: "Can I see designs before construction?",
       description: `
   <p>
-    Absolutely! Most experienced patio contractors or builders will share past work, photos and customer reviews, to help you make a confident decision. Many local patio companies even offer design consultations or mood boards before they begin. If you'd like help choosing a style or material, your matched <strong>patio installer</strong> here on Localists will be happy to guide you with real examples.
+    Absolutely! Most experienced patio contractors or builders will share past work, photos and customer reviews, to help you make a confident decision. Many local patio companies even offer design consultations or mood boards before they begin. If you'd like help choosing a style or material, your matched patio installer here on Localists will be happy to guide you with real examples.
   </p>
 `,
     },
@@ -1151,6 +1151,7 @@ const HowItWorksData = {
   "fencing-contractors-near-me": [
     {
       id: 1,
+      lBreak: false,
       title: "Start Your Search For Fencing Contractors",
       image: WhatYouNeedIcon,
       heading1: "Start your search for fencing contractors",
@@ -1159,14 +1160,16 @@ const HowItWorksData = {
     },
     {
       id: 2,
+      lBreak: false,
       title: "Request free quotes from contractors.",
       image: FreeQuotesIcon,
-      heading1: "Request free quotes from contractors.",
+      heading1: "Request free quotes from contractors",
       description:
         "Once you share your requirements, we’ll send over a selection of free, no-obligation quotes tailored to your project. No need to dig through endless listings. Just compare your offers from specialists and choose the best fit.",
     },
     {
       id: 3,
+      lBreak: false,
       title: "Hire your chosen local fencing contractor",
       image: accountant, // Note: You might want to rename this variable to 'fencerIcon' or similar
       heading1: "Hire your chosen local fencing contractor",
@@ -1177,6 +1180,7 @@ const HowItWorksData = {
   "driveway-installers-near-me": [
     {
       id: 1,
+      lBreak: false,
       title: "Search for driveway installers near you",
       image: WhatYouNeedIcon,
       heading1: "Search for driveway installers near you",
@@ -1185,6 +1189,7 @@ const HowItWorksData = {
     },
     {
       id: 2,
+      lBreak: false,
       title: "Get free quotes from driveway installers near you",
       image: FreeQuotesIcon,
       heading1: "Get free quotes from driveway installers near you",
@@ -1193,6 +1198,7 @@ const HowItWorksData = {
     },
     {
       id: 3,
+      lBreak: true,
       title: "Hire a local driveway installer",
       image: accountant, // Consider renaming to 'installerIcon' for consistency
       heading1: "Hire a local driveway installer",
@@ -1203,6 +1209,8 @@ const HowItWorksData = {
   "patio-layers-near-me": [
     {
       id: 1,
+      lBreak: false,
+
       title: "Search for local patio contractors",
       image: WhatYouNeedIcon,
       heading1: "Search for local patio contractors",
@@ -1211,6 +1219,8 @@ const HowItWorksData = {
     },
     {
       id: 2,
+      lBreak: false,
+
       title: "Request free quotes from patio layers",
       image: FreeQuotesIcon,
       heading1: "Request free quotes from patio layers",
@@ -1219,6 +1229,7 @@ const HowItWorksData = {
     },
     {
       id: 3,
+      lBreak: true,
       title: "Hire your local contractor",
       image: accountant, // Consider renaming for clarity if needed
       heading1: "Hire your local contractor",
@@ -1255,6 +1266,8 @@ const HowItWorksData = {
   "artificial-grass-installers-near-me": [
     {
       id: 1,
+      lBreak: false,
+
       title: "Start your search for artificial grass installers near me",
       image: WhatYouNeedIcon,
       heading1: "Start your search for artificial grass installers near me",
@@ -1263,6 +1276,8 @@ const HowItWorksData = {
     },
     {
       id: 2,
+      lBreak: false,
+
       title: "Get free quotes from artificial grass installers",
       image: FreeQuotesIcon,
       heading1: "Get free quotes from artificial grass installers",
@@ -1271,6 +1286,8 @@ const HowItWorksData = {
     },
     {
       id: 3,
+      lBreak: false,
+
       title: "Hire a specialist installer in your local area",
       image: accountant,
       heading1: "Hire a specialist installer in your local area",
@@ -1351,7 +1368,7 @@ const CONTENT_CONFIG_TOP = {
     findingHeading: " fence and gate installation experts",
     title: "Fencing Contractors",
     mainTitle: "fence & gate installation",
-    ctaText: "Fencer",
+    ctaText: "fencer",
     avgPrice: "£200",
     showSpeicialits: true,
     avgPriceTitle: "fence & gate installation",
@@ -1360,14 +1377,14 @@ const CONTENT_CONFIG_TOP = {
     findingHeading: "driveway companies",
     title: "Driveway Companies",
     mainTitle: "driveway installers",
-    ctaText: "Driveway Installer",
+    ctaText: "driveway installer",
     avgPriceTitle: "driveway installers",
   },
   "patio-layers-near-me": {
     findingHeading: "patio contractors",
     title: "Patio Installers",
     mainTitle: "Patio and Paving Service",
-    ctaText: "Patio Service",
+    ctaText: "patio service",
     avgPriceTitle: "a patio",
   },
   landscaping: {
@@ -1454,7 +1471,7 @@ You can find any type of specialist you need to cover everything from : resident
     },
     {
       type: "h3",
-      text: "Why hire fencing contractors through localists.",
+      text: "Why hire fencing contractors through localists?",
     },
     {
       type: "p",
@@ -1497,7 +1514,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
 
     {
-      type: "h2",
+      type: "h3",
       text: "Fence and gate installation: network of qualified contractors wherever you are",
     },
     {
@@ -1802,7 +1819,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "h2",
-      text: "What to look for when choosing a patio contractor",
+      text: "What to look for when choosing a patio contractor?",
     },
     {
       type: "p",
@@ -1821,7 +1838,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "uili",
       heading: "Knowledge",
-      text: "– They can provide expert advice on what works best for your garden, soil, climate and even any local regulations you need to adhere to.",
+      text: "– They can provide expert advice on what works best for your garden, soil, climate & even any local regulations you need to adhere to.",
     },
     {
       type: "uili",
@@ -1948,20 +1965,24 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "li",
-      heading: "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
+      heading:
+        "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
     },
     {
       type: "li",
-      heading: "What installation method will you use?\u00A0 – There are different approaches depending on soil, drainage, or intended use (lawn, pets, sports, balconies, etc.).",
+      heading:
+        "What installation method will you use?\u00A0 – There are different approaches depending on soil, drainage, or intended use (lawn, pets, sports, balconies, etc.).",
     },
     {
       type: "li",
-      heading: "How long will the project take?\u00A0 – Timelines can vary, so it helps to set clear expectations.",
-          },
+      heading:
+        "How long will the project take?\u00A0 – Timelines can vary, so it helps to set clear expectations.",
+    },
     {
       type: "li",
-      heading: "Do you provide a guarantee?\u00A0 – A good installer should stand by their work with some form of warranty.",
-      },
+      heading:
+        "Do you provide a guarantee?\u00A0 – A good installer should stand by their work with some form of warranty.",
+    },
     {
       type: "h2",
       text: "How much does it cost to install artificial grass?",

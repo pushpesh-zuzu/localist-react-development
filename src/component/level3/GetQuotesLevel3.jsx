@@ -6,7 +6,7 @@ const GetQuotesLevel3 = ({ message,needSString=true }) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleScrollToBottom()} className={styles.button}>
-        Get Quotes
+        Get quotes
       </button>
 
       {message && (

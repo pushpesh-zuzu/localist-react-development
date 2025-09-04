@@ -4,9 +4,9 @@
   padding: 48px 91px 56px 91px;
 }
 
-.disabledPanel {
-  cursor: pointer !important; /* Maintains pointer cursor */
-}
+/* .disabledPanel {
+  cursor: pointer !important; 
+} */
 .subcategory_collapse :global(.ant-collapse-header) {
   color: black !important;
 }

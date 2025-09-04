@@ -41,7 +41,7 @@
 .frequently_collapse :global(.ant-collapse-header) {
   font-size: 20px;
   font-weight: 700;
-  padding: 16px 23px !important;
+  padding: 16px 16px !important;
 }
 
 .frequently_collapse :global(.ant-collapse-item-active) {

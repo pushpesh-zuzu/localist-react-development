@@ -1,13 +1,17 @@
 import { BASE_URL_IMAGE } from "../../../utils";
 import styles from "./serviceCategory.module.css";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
+import { Link } from "react-router-dom";
+import { useUserGeo } from "../../../utils/geo";
 
 const SingleCategory = ({ category, onClick }) => {
+  const { country, lang } = useUserGeo();
   return (
-    <div
+    <Link
+    to={`/${lang}/${country}/home`}
       className={styles.singleCategory}
-      onClick={() => onClick(category.name)}
-      style={{ cursor: "pointer !important" }}
+      // onClick={() => onClick(category.name)}
+      style={{ cursor: "pointer !important",textDecoration:'none' }}
     >
       <div className={styles.imageContainer}>
         {/* <img src={category.icon} alt={category.name} className={styles.image} /> */}
@@ -22,7 +26,7 @@ const SingleCategory = ({ category, onClick }) => {
         />
       </div>
       <div className={styles.title}>{category.name}</div>
-    </div>
+    </Link>
   );
 };
 
