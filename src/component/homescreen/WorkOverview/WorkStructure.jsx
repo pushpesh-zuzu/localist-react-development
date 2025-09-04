@@ -20,8 +20,8 @@ const WorkStructure = () => {
         How <span>We Work</span>
       </h3>
       <div className={styles.description}>
-        Get Competitive Home Improvements quotes from leading suppliers in{" "}
-        <span>3 Simples Step!</span>
+        Get competitive home improvements quotes from leading suppliers in{" "}
+        <span>3 simples step!</span>
       </div>
       <div className={styles.workstepContainer}>
         {WORK_STEPS.map((item) => (
