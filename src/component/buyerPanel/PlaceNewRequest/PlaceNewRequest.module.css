@@ -83,13 +83,13 @@
   margin-top: 18.89px;
 }
 
-.lightRedBox {
+/* .lightRedBox {
   background-color: #fce5e3;
 }
 
 .lightBlueBox {
   background-color: #e3f6fc;
-}
+} */
 .tags {
   margin-top: 16px;
   cursor: pointer !important;
@@ -223,7 +223,7 @@
 }
 
 .messageBox {
-  text-align: left;
+  /* text-align: left; */
   padding: 24px;
   margin: 35px 0;
 }
@@ -244,13 +244,13 @@
   text-decoration-skip-ink: auto;
 }
 
-.lightBlueBox {
+/* .lightBlueBox {
   background-color: #e3f6fc;
 }
 
 .lightRedBox {
   background-color: #fce5e3;
-}
+} */
 
 .viewButton {
   background: var(--primary-color);
@@ -266,7 +266,7 @@
 .viewButton:hover {
   background: #007acc;
 }
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .cardHeader {
     display: flex;
     justify-content: space-between;
@@ -274,13 +274,12 @@
     /* flex-direction: column; */
   }
   .messageBox {
-  text-align: center;
+    text-align: center;
     padding: 12px;
     margin: 16px 0;
   }
-  
 }
-@media screen and (max-width:380px) {
+@media screen and (max-width: 380px) {
   .cardHeader {
     display: flex;
     justify-content: space-between;
@@ -288,9 +287,8 @@
     flex-direction: column;
   }
   .messageBox {
-  text-align: center;
+    text-align: center;
     padding: 12px;
     margin: 16px 0;
   }
-  
 }

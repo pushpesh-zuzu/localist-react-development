@@ -67,7 +67,7 @@ const MyCredits = () => {
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const { country, lang } = useUserGeo();
-        
+
   const {
     buyCreditLoader,
     addCouanLoader,
@@ -332,7 +332,7 @@ const MyCredits = () => {
                     </div>
                   </div>
                   <div className={styles.priceInfo}>
-                    <strong>{item?.price} (Excl. tax)</strong>
+                    <strong>£{item?.price} (Excl. tax)</strong>
                     <div className={styles.perCredit}>
                       £{item?.per_credit}/credit
                     </div>
