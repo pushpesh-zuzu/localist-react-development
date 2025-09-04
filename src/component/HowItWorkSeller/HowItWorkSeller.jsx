@@ -31,7 +31,7 @@ function HowItWorkSeller() {
           />
           <SearchServicesPin
             className={styles.search}
-            title="More than 5,000 professionals across the UK already use Localists to grow their businesses, and we’re adding new opportunities daily. Instead of wasting time chasing cold leads or paying for ads that don’t work, Localists brings the right clients straight to you."
+            title="5,000+ UK professionals trust Localists to grow. Get new jobs every day, select only the ones you want, and connect instantly with clients."
           />
         </div>
       </div>

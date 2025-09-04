@@ -16,7 +16,7 @@ const faqData = [
   {
     question: "How long do my credits last?",
     answer:
-      "No. Your credits stay valid until you use them.",
+      "Your credits are valid up to 12 months from the date of purchase",
   },
   {
     question: "Will I be charged extra along the way?",

@@ -10,7 +10,7 @@ import styles from './searchservices.module.css';
 import { useNavigate, useParams } from "react-router-dom";
 
 const SearchServicesPin = ({ 
-  title = "Now you know how it works, start looking for a professional.",
+  title = "",
   buttonText = "Continue",
   serviceLabel = "What service do you provide?",
   servicePlaceholder = "Driveway Installation, Gardening Services, etc...",
