@@ -714,7 +714,7 @@ const FREQUENTLY_DATA = {
       key: "1",
       title: "Which is the best fencing company near me?",
       description:
-        "The best fencing company near you is one that’s reliable, well-reviewed, fully insured, and experienced with projects similar to yours. Rather than spend hours searching the internet, Localists simplifies the process. All you need to do is share a few project details, and we’ll connect you with top-rated local fencing contractors who fit your needs.",
+        "When looking for a fencing company, it’s important to find one that’s well-reviewed, fully insured and one that has wide portfolio of projects. Reviews can be a good indicator as to what kind of professional you’re going to get - and with Localists you get all their reviews in one place! Though it’s not completely necessary, looking at whether your fencing contractor is a member of regulatory bodies such as the association of fencing industries might also be an indicator of their quality (link to afiorg.uk). Rather than spending hours searching the internet, we bring the best fencing contractors near you - straight to your inbox. So you can get the best fencing companies for the best price!",
     },
     {
       key: "2",
