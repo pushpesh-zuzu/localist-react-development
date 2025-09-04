@@ -418,14 +418,32 @@ const ViewProfiles = () => {
           </div>
 
           <div className={styles.requestBtnBox}>
-            <button
+            {/* <button
               className={styles.RequestQuoteBtn}
               onClick={handleRequestOpen}
               disabled={shouldDisableActions}
             >
               {" "}
               {isFromManualBids ? "Contact Professional" : "Request Quote"}
-            </button>
+            </button> */}
+            {isFromManualBids ? (
+              <button
+                className={styles.RequestQuoteBtn}
+                onClick={() => {
+                  handleRequestOpen();
+                }}
+                // disabled={shouldDisableActions}
+              >
+                Contact Professionals
+              </button>
+            ) : (
+              <button
+                className={styles.RequestQuoteBtn}
+                disabled={shouldDisableActions}
+              >
+                Request Quote
+              </button>
+            )}
           </div>
 
           <div className={styles.contactDetails}>
