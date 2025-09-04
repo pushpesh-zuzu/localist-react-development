@@ -95,7 +95,7 @@ const RELATED_PRICE_DATA = {
       price: "Varies",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 1,
       title: "Landscaping Cost in 2025",
@@ -276,7 +276,7 @@ const RELATED_SERVICES_DATA = {
       description: "Learn what to expect during fence or gate installation",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 1,
       title: "How to Landscape Your Garden on a Budget",
@@ -422,33 +422,33 @@ const REVIEWS_DATA = {
         "After weeks of searching for patio construction near me, I found Localists. Within the same day, I had three quotes from three different patio companies near me and picked the one that best suited my budget. The new porcelain patio looks incredible and has already made the garden our favourite spot.",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 1,
-      name: "Daniel Kennedy",
-      title: "(Garden Landscaping)",
-      date: "2 Mar 2025",
+      name: "Rebecca T.,",
+      title: "Hartlepool",
+      date: "2 july 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "We needed our back garden completely re-landscaped with a new patio and lawn. The local landscaper we found through Localists was fantastic – clear quotes, turned up on time, and gave us design suggestions we hadn’t even thought of. The patio looks amazing, and the kids love the new grassed area. Couldn’t be happier.",
     },
     {
       id: 2,
-      name: "Fatima H.",
-      title: "(Commercial Landscaping)",
+      name: "Daniel M.,",
+      title: "Salisbury",
       date: "18 Mar 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "Our space was overgrown and difficult to maintain. The landscaper handled everything – from clearing the site to installing raised beds, new fencing, and low-maintenance planting. They even built in a small water feature which has made the garden feel so peaceful. The whole process was stress-free and worth every penny.",
     },
     {
       id: 3,
-      name: "Laura M",
-      title: "(Residential Landscaping)",
-      date: "30 Mar 2025",
+      name: "Jamie K.,",
+      title: "Bristol",
+      date: "10 Feb 2025",
       image: ReviewsImage,
       description:
-        "I would recommend Tumbers brickwork and landscapes. Elliot and his colleague worked so hard on the hottest day to replace my old fence and did a lovely job. They also did a fence for a friend who recommended them to me as she was also very pleased.",
+        "I only wanted some soft landscaping at first (new shrubs and borders), but the contractor also helped with drainage issues and suggested lighting that really makes the garden shine at night. They kept everything tidy, updated me throughout, and the price was fair. Highly recommend using Localists to find trusted landscapers.",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -502,7 +502,7 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       availableOnline: true,
-      // path: "landscaping",
+      path: "landscape-gardeners-near-me",
     },
     {
       id: 4,
@@ -528,7 +528,7 @@ const OTHER_SERVICES_DATA = {
       id: 3,
       image: Landscaping,
       description: "Landscaping",
-      // path: "landscaping",
+      path: "landscape-gardeners-near-me",
       availableOnline: true,
     },
     {
@@ -557,7 +557,7 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       availableOnline: true,
-      path: "",
+      path: "landscape-gardeners-near-me",
     },
     {
       id: 4,
@@ -566,7 +566,7 @@ const OTHER_SERVICES_DATA = {
       path: "artificial-grass-installers-near-me",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 1,
       image: fenchinstal,
@@ -618,7 +618,7 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       availableOnline: true,
-      path: "",
+      path: "landscape-gardeners-near-me",
     },
   ],
 };
@@ -672,24 +672,18 @@ const AVERAGE_PRICE = {
       Premium: "£9200",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       Region: "Nationwide",
-      "Great Value": "£100",
-      Average: "£150",
-      Premium: "£300",
+      "Great Value": "£2350",
+      Average: "£4250",
+      Premium: "£7600",
     },
     {
       Region: "East Midlands",
-      "Great Value": "£95",
-      Average: "£140",
-      Premium: "£280",
-    },
-    {
-      Region: "East of England",
-      "Great Value": "£105",
-      Average: "£145",
-      Premium: "£310",
+      "Great Value": "£1000",
+      Average: "£3500",
+      Premium: "£5000",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -927,18 +921,42 @@ Choosing the right fencing or gate professional isn’t just about price - it’
 `,
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       key: "1",
-      title: "Do I need planning permission for landscaping?",
+      title: "How long will a landscaping project take?",
       description:
-        "Most landscaping projects don’t require planning permission, but certain changes—like adding large structures or altering boundaries—may need approval from your local council.",
+        "Small projects can be completed in a few days, while full garden transformations may take several weeks, depending on weather, materials, and complexity. Your landscaper will give you a realistic timeline before work begins.",
     },
     {
       key: "2",
-      title: "How long does a landscaping project take?",
+      title: "Do I need a gardener or landscaper?",
       description:
-        "It depends on the scope. A small garden refresh may take a few days, while a full redesign could take several weeks.",
+        "If you want regular upkeep, such as mowing, weeding, and pruning, a gardener is perfect. If you’re looking to design and build a new outdoor space (patio, planting scheme, water features), a landscaper is the right choice.",
+    },
+    {
+      key: "3",
+      title: "Does a landscaped garden add value to your home?",
+      description:
+        "Yes, a well-designed garden can increase property value by up to 20% in some cases, and it boosts curb appeal for potential buyers.",
+    },
+    {
+      key: "4",
+      title: "How do I choose the right garden landscaping company?",
+      description:
+        "Look for verified reviews, ask for examples of past work, and make sure they’re experienced with projects like yours. Get at least three quotes so you can compare options.",
+    },
+    {
+      key: "5",
+      title: "Can you help with low-maintenance garden designs?",
+      description:
+        "Absolutely. Many of our local patio designers and landscapers specialise in creating stylish gardens that are easy to care for. Think drought-tolerant plants, gravel beds, and minimal weeding.",
+    },
+    {
+      key: "6",
+      title: "Do your gardeners use sustainable and eco-friendly practices?",
+      description:
+        "Yes, many of our landscapers use native plants, permeable materials, and eco-friendly techniques to create gardens that look great and are better for the environment.",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -1026,7 +1044,7 @@ const TAXRETURNDATA = {
     name: "Alex, Staff Writer",
     date: "2021-04-21",
   },
-  landscaping: {
+  "landscape-gardeners-near-me": {
     key: "3",
     heading1: "How to Landscape your garden on a budget",
     heading2: "Landscaping",
@@ -1083,7 +1101,7 @@ const regionsData = {
       ],
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 3,
       title: "North West England",
@@ -1131,7 +1149,7 @@ export const POPULARCITY = {
     { id: 4, city_name: "Warrington", city_image: london },
     { id: 5, city_name: "Ellesmere", city_image: london },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     { id: 1, city_name: "Liverpool", city_image: Liverpool },
     { id: 2, city_name: "Manchester", city_image: birmingham },
     { id: 3, city_name: "Chester", city_image: liverpool },
@@ -1237,30 +1255,30 @@ const HowItWorksData = {
         "When you’re ready, hire with confidence. Every local patio builder on our platform is vetted for quality, professionalism, and reliability. So you can move forward knowing your project is in safe hands.",
     },
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       id: 1,
-      title: "Find a Landscaper Near You",
+      title: "Start search for landscape gardeners",
       image: WhatYouNeedIcon,
-      heading1: "Find a Landscaper Near You",
+      heading1: "Start search for landscape gardeners",
       description:
-        "Tell us what you need and where you need it, and we’ll do the searching for you. Whether you dream of a classic English rose garden, a modern outdoor living space, or a low-maintenance design, provide as many details as possible so we can match you with the ideal landscaping specialist in your area.",
+        "Tell us about your garden landscaping project, whether you're looking for a full redesign, new planting schemes, or practical additions like patios or raised beds. We’ll match you with the right specialists in your area who have experience with projects like yours.",
     },
     {
       id: 2,
-      title: "Get Free Quotes from Local Landscapers",
+      title: "Request free quotes from landscape gardeners",
       image: FreeQuotesIcon,
-      heading1: "Get Free Quotes from Local Landscapers",
+      heading1: "Request free quotes from landscape gardeners",
       description:
-        "We’ll review hundreds of landscaping experts near you and handpick the best matches for your project. You’ll receive free, no-obligation quotes from interested professionals. You can choose to get instant notifications or check your quotes whenever it suits you.",
+        "We will send you free no obligation quotes from local garden landscapers. Review profiles, compare quotes, and select the gardening company near you that aligns with your vision and budget.",
     },
     {
       id: 3,
-      title: "Hire with Confidence",
+      title: "Hire your local landscape gardener",
       image: accountant,
-      heading1: "Hire with Confidence",
+      heading1: "Hire your local landscape gardener",
       description:
-        "Check reviews, see before-and-after photos, and explore detailed profiles—all in one place. With all the information at your fingertips, hiring the right landscaper becomes simple. Once you’ve found your match, you can get started transforming your outdoor space.",
+        "When you find a builder or contractor  that fits your project requirements, you can go ahead and hire with confidence as all contractors here on Localists are vetted for quality and reliability.",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -1318,11 +1336,12 @@ const CONTENT_CONFIG = {
       "Whether you’re picturing a modern porcelain patio, a classic sandstone patio, or a budget-friendly gravel patio, we’ll help you find the right patio contractors for the job. Compare fair, transparent quotes and choose a professional who shares your vision.",
     para3: "It’s free from start to finish !",
   },
-  landscaping: {
+  "landscape-gardeners-near-me": {
     para1:
-      "Looking for a skilled landscaper but not sure where to begin? At Localists.com, we make it easy. Simply tell us about your project, and we’ll connect you with trusted local landscaping professionals. Compare quotes, browse reviews, and view past work—all at no cost to you. There’s no pressure to hire until you’re ready.",
-    para2: "",
-    para3: "Best of all – it’s completely free!",
+      "Need a trusted landscape gardener nearby? Localists connects you with skilled local landscape gardeners who can transform your outdoor space into something special.",
+    para2:
+      "From sleek, modern layouts to classic cottage-style gardens bursting with greenery, our vetted garden landscapers near you blend creativity with practical know-how. We will send you free quotes to compare, read reviews and proceed to hire.",
+    para3: "Fast, Easy, and No-Obligation - Start Now!",
   },
   "artificial-grass-installers-near-me": {
     para1:
@@ -1346,13 +1365,9 @@ const BREADCRUMB_CONFIG = {
     { title: "Home & Garden", path: "/home" },
     { title: "Patio Services", path: "patio-layers-near-me" }, // no path
   ],
-  landscaping: [
+  "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
-    {
-      title: "Gardening & Landscaping",
-      path: "/gardening-landscaping",
-    },
-    { title: "Landscaping", path: "landscaping" }, // no path
+    { title: "Landscaping", path: "landscape-gardeners-near-me" }, // no path
   ],
   "artificial-grass-installers-near-me": [
     { title: "Home & Garden", path: "/home" },
@@ -1387,10 +1402,11 @@ const CONTENT_CONFIG_TOP = {
     ctaText: "patio service",
     avgPriceTitle: "a patio",
   },
-  landscaping: {
-    findingHeading: "Landscaping",
-    title: "Landscaper",
+  "landscape-gardeners-near-me": {
+    findingHeading: "landscape gardeners",
+    title: "Landscape Gardeners",
     mainTitle: "Landscape Gardener",
+    ctaText: "landscape gardener",
   },
   "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
@@ -1416,7 +1432,7 @@ const CONTENT_CONFIG_BANNER = {
     banner: PatioServicesBanner,
     reltatedImage: Patio,
   },
-  landscaping: {
+  "landscape-gardeners-near-me": {
     banner: LandscapingBanner,
     reltatedImage: Landscaping,
   },
@@ -1445,11 +1461,11 @@ const CONTENT_CONFIG_META = {
     content:
       "Looking for patio installers near you? Find trusted patio contractors and patio layers in your local area. Get free quotes and start today at Localists.",
   },
-  landscaping: {
-    title: "Landscape Gardeners Near Me | Local Garden landscaper - Localists",
+  "landscape-gardeners-near-me": {
+    title: "Find Landscape Gardeners Near Me - Localists",
     name: "description",
     content:
-      "Find skilled landscape gardeners near you for stunning outdoor designs, lawn care, and garden makeovers. Quality local services at affordable rates.",
+      "Looking to hire expert landscape gardeners or landscape architects in your local area? Start today at Localists. Obtain free no obligation quotes.",
   },
   "artificial-grass-installers-near-me": {
     title: " Find Artificial Grass Installers Near Me - Localists",
@@ -1861,22 +1877,214 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
   ],
 
-  landscaping: [
+  "landscape-gardeners-near-me": [
     {
       type: "h2",
-      text: "Transform Your Garden Today",
+      text: "Benefits of hiring a professional landscape gardener near you",
     },
     {
       type: "p",
-      text: "From small garden makeovers to large-scale landscaping projects, we’ll connect you with skilled landscapers who can bring your vision to life. Whether it’s a new patio, fresh planting, or a complete garden redesign, our experts can add beauty, functionality, and value to your property.",
+      text: "Landscape gardening is more than just planting flowers. It’s the art and science of designing, creating, and maintaining outdoor spaces to make them functional, beautiful, and in harmony with their surroundings",
+    },
+    {
+      type: "p",
+      text: "While DIY can be rewarding, hiring an expert often saves time, money, and headaches in the long run. A professional landscape gardener near you will:",
+    },
+    {
+      type: "uili",
+      heading: "Local expertise ",
+      text: "They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
+    },
+    {
+      type: "uili",
+      heading: "Smart, lasting design ",
+      text: "Bespoke layouts are tailored to your lifestyle – from low-maintenance gardens to family lawns or showpiece patios.",
+    },
+    {
+      type: "uili",
+      heading: "Access to quality materials ",
+      text: "Professionals source high-quality plants, stone, and timber at competitive prices through trusted suppliers.",
+    },
+    {
+      type: "uili",
+      heading: "Avoid costly mistakes ",
+      text: "Proper drainage, soil preparation, and plant selection save you from expensive fixes later.",
+    },
+    {
+      type: "uili",
+      heading: "Boost property value ",
+      text: "A professionally landscaped garden adds kerb appeal and increases your home’s market value.",
+    },
+    {
+      type: "uili",
+      heading: "Full-service installation ",
+      text: "From patios, decking, and fencing to pathways and lighting, everything is built to complement your space.",
+    },
+    {
+      type: "uili",
+      heading: "Seasonal care ",
+      text: "Lawn care, hedge trimming, planting, and regular upkeep keep your garden looking its best year-round.",
+    },
+    {
+      type: "uili",
+      heading: "Creative extras ",
+      text: "Water features, raised beds, and eco-friendly solutions (like sustainable planting) can transform your garden into a unique retreat.",
+    },
+    {
+      type: "h2",
+      text: "Why hire a landscape architect or gardener on Localists?",
+    },
+    {
+      type: "p",
+      text: "When you hire through Localists, you’re not just picking a random name online. We’ve already done the vetting, checking that each contractor we connect you with:",
+    },
+    {
+      type: "li",
+      heading: "Has local experience and a proven track record.",
+    },
+    {
+      type: "li",
+      heading: "Is insured and qualified.",
+    },
+    {
+      type: "li",
+      heading: "Offers competitive, transparent quotes.",
+    },
+    {
+      type: "li",
+      heading: "Has genuine customer reviews you can read.",
+    },
+    {
+      type: "p",
+      text: "By working with local professionals, you’ll also benefit from faster site visits, better communication, and designs suited to your climate and community.",
+    },
+    {
+      type: "h2",
+      text: "What's the difference between a gardener and a landscaper?",
+    },
+    {
+      type: "p",
+      text: "A gardener usually focuses on the ongoing care and maintenance of plants, lawns, and beds. Think pruning, mowing, and seasonal planting.",
+    },
+    {
+      type: "p",
+      text: "A landscaper, on the other hand, goes beyond maintenance. A landscape garden designer or landscape architect can design and build outdoor spaces, often from the ground up. They handle both hard landscaping (paths, patios, walls) and soft landscaping (planting schemes, turfing). Many landscapers also provide maintenance services, so the line can blur.",
+    },
+    {
+      type: "h2",
+      text: "What are the different types of landscaping services?",
+    },
+    {
+      type: "p",
+      text: "Whether you're doing a full garden makeover or just sprucing up sections of your outdoor space, the right landscape gardener can turn ideas into reality.",
+    },
+    {
+      type: "p",
+      text: "Here's a rundown of what landscape architect or landscape garden designers commonly offer:",
     },
     {
       type: "h3",
-      text: "How Much Does Landscaping Cost?",
+      text: "Garden design & consultation",
     },
     {
       type: "p",
-      text: "On average, UK garden landscapers charge between £20 and £25 per hour. Prices can vary depending on location, project size, and the complexity of the design.\n\nIf you’d like a more detailed breakdown, our Landscaping Cost Guide explains hourly rates, typical services included, and how to budget for your garden transformation.",
+      text: "Landscape gardeners and garden designers provide planning and consultation services, creating tailored layouts that reflect the client’s taste, lifestyle, and local climate. They assess the site’s potential and produce design plans to guide planting, structures, and features.",
+    },
+    {
+      type: "h3",
+      text: "Planting & softscape services",
+    },
+    {
+      type: "p",
+      text: "This covers all the living elements of a garden. Services include planting flower beds, shrubs, trees, perennials, and seasonal displays, as well as soil preparation and mulching. Landscape gardeners ensure planting schemes are healthy, attractive, and suited to the conditions of the site.",
+    },
+    {
+      type: "h3",
+      text: "Hardscaping (structures & surfaces)",
+    },
+    {
+      type: "p",
+      text: "Landscapers also construct non-living features such as paths, patios, decking, pergolas, driveways, and retaining walls. These hardscape elements provide structure, access, and style within the garden.",
+    },
+    {
+      type: "h3",
+      text: "Lawn creation & maintenance",
+    },
+    {
+      type: "p",
+      text: "From seeding new lawns and laying turf to aeration, mowing, and fertilisation, landscapers handle both the creation and upkeep of lawns to keep them green and healthy.",
+    },
+    {
+      type: "h3",
+      text: "Seasonal clean-up & garden care",
+    },
+    {
+      type: "p",
+      text: "Landscape gardeners provide regular maintenance, including leaf clearance, pruning, mulching, and preparing beds for new planting seasons. These services keep gardens tidy and thriving all year round.",
+    },
+    {
+      type: "h3",
+      text: "Garden features & outdoor living elements",
+    },
+    {
+      type: "p",
+      text: "Many landscapers install features such as fire pits, raised beds, seating areas, water features, and lighting. These additions enhance both the usability and aesthetic of a garden.",
+    },
+    {
+      type: "h3",
+      text: "Eco-friendly & sustainable landscaping",
+    },
+    {
+      type: "p",
+      text: "Some landscapers specialise in sustainable practices such as xeriscaping (low-water gardens), native planting, composting solutions, and tree placement designed to improve energy efficiency in homes.",
+    },
+    {
+      type: "h3",
+      text: "Specialty & wildlife-friendly gardening",
+    },
+    {
+      type: "p",
+      text: "Services may also include wildlife-focused landscaping such as rain gardens, pollinator-friendly planting, wildflower meadows, and foodscaping (edible gardens that blend with the landscape). These projects support biodiversity while adding beauty and function.",
+    },
+    {
+      type: "h2",
+      text: "How much does a landscape gardener cost?",
+    },
+    {
+      type: "p",
+      text: "The cost of landscaping depends on several factors - the size of your garden, the type of materials (sandstone vs. porcelain paving), the plants you choose, and even the level of detail in your design can make costs significantly higher or lower.",
+    },
+    {
+      type: "p",
+      text: "For example, a residential landscaping project might involve lawn installation, planting, and a simple patio area. A commercial landscaping project on the other hand, could require larger-scale groundwork, drainage, lighting, or structural features. This makes it more labour-intensive and expensive.",
+    },
+    {
+      type: "p",
+      text: "However, on average in the UK, here’s what you can expect to spend:",
+    },
+    {
+      type: "uili",
+      heading: "Basic garden tidy-up and planting ",
+      text: "- From £800 to £1,500",
+    },
+    {
+      type: "uili",
+      heading: "Small garden landscaping with lawn, patio, and beds ",
+      text: "- Around £4,000 to £6,000",
+    },
+    {
+      type: "uili",
+      heading: "Medium-sized residential garden with more complex design ",
+      text: "- Between £6,000 and £10,000+ (includes decking, lighting, water features, raised beds)",
+    },
+    {
+      type: "uili",
+      heading: "Commercial or large-scale landscaping projects ",
+      text: "- Typically £15,000 upwards, depending on size, design, and required features",
+    },
+    {
+      type: "p",
+      text: "For more accurate cost estimates, simply start your search at Localists today, and we will match you with trusted local landscape gardeners or gardening companies near you, who’ll provide free, no-obligation quotes tailored to your needs.",
     },
   ],
 
@@ -2055,7 +2263,7 @@ const LEVEL_THIRD_SERVICES_NAME = {
   "fencing-contractors-near-me": "Fence & Gate Installation",
   "driveway-installers-near-me": "Driveway Installation",
   "patio-layers-near-me": "Patio Services",
-  landscaping: "Landscaping",
+  "landscape-gardeners-near-me": "Landscaping",
   "artificial-grass-installers-near-me": "Artificial Grass Installation",
 };
 

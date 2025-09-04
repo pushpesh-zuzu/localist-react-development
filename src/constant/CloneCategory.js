@@ -116,7 +116,6 @@ const PopularCategoriesData = [
     id: 15,
     title: "Driveway Installation",
     path: "driveway-installers-near-me",
-    // path: "driveway-installers",
 
     image: DrivewayInstallation, // apna image import karke lagao
   },
@@ -188,8 +187,7 @@ const PopularCategoriesData = [
   {
     id: 16,
     title: "Landscaping",
-    path: "",
-    // path: "landscaping",
+    path: "landscape-gardeners-near-me",
 
     image: Landscaping,
   },

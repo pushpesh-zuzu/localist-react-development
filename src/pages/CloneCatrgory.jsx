@@ -167,7 +167,7 @@ const CloneCategory = ({ accountHeader }) => {
             },
             { name: "Driveway Installation", path: "/driveway-installers-near-me" },
             { name: "Patio Services", path: "/patio-layers-near-me" },
-            { name: "Landscaping", path: "" },
+            { name: "Landscaping", path: "/landscape-gardeners-near-me" },
             { name: "Artificial Grass Installation", path: "/artificial-grass-installers-near-me" },
           ]}
         />

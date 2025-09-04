@@ -253,11 +253,11 @@ export const megaMenu = [
           (loc) => `Artificial Grass Installers in ${loc}`
         ),
       },
-      // {
-      //   name: "Landscaping",
-      //   path:"landscaping",
-      //   children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
-      // },
+      {
+        name: "Landscaping",
+        path:"landscape-gardeners-near-me",
+        children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
+      },
       // {
       //   name: "General Builders",
       //   children: locationData.map((loc) => `General Builders in ${loc}`),
