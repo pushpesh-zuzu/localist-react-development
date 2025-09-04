@@ -612,10 +612,20 @@
   }
   .filterButtonsBox {
     display: flex;
+    flex-direction: column;
+    gap: 30px;
     align-items: center;
     background-color: #000000;
     justify-content: space-between;
     padding: 20px 8px;
+  }
+
+  .mobileTabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
   }
   .filterButton {
     font-size: 14px;

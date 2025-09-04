@@ -29,7 +29,12 @@ import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
 
-const purchaseOptions = ["All", "Manual Bid", "Autobid", "Request Reply"];
+const purchaseOptions = [
+  "All Purchase Types",
+  "Manual Bid",
+  "Autobid",
+  "Request Reply",
+];
 const MyResponse = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
@@ -39,7 +44,7 @@ const MyResponse = () => {
   const [selectedLead, setSelectedLead] = useState(null);
   const [popoverOpenTop, setPopoverOpenTop] = useState(false);
   const [popoverOpenMobile, setPopoverOpenMobile] = useState(false);
-  const [purchaseType, setPurchaseType] = useState("All");
+  const [purchaseType, setPurchaseType] = useState("All Purchase Types");
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -253,7 +258,7 @@ const MyResponse = () => {
             style={{ display: "flex", marginRight: 20, gap: 10 }}
             className={styles.purchaseSelect}
           >
-            <label className={styles.purchaseText}>Purchase Type</label>
+            {/* <label className={styles.purchaseText}>Purchase Type</label> */}
             <Select
               value={purchaseType}
               onChange={handlePurchaseChange}
@@ -270,30 +275,32 @@ const MyResponse = () => {
         </div>
       </div>
       <div className={styles.filterButtonsBox}>
-        <button
-          className={`${styles.filterButton} ${
-            selectedTab === "pending" ? styles.activeButton : ""
-          }`}
-          onClick={handlePendingApi}
-        >
-          <img src={pendingImg} alt="pendingImg" /> Pending
-        </button>
-        <button
-          className={`${styles.filterButton} ${
-            selectedTab === "hired" ? styles.activeButton : ""
-          }`}
-          onClick={handleHiredApi}
-        >
-          {selectedTab === "hired" ? (
-            <img src={HiredClickImg} alt="..." />
-          ) : (
-            <img src={HiredImg} alt="hired" />
-          )}{" "}
-          Hired
-        </button>
+        <div className={styles.mobileTabs}>
+          <button
+            className={`${styles.filterButton} ${
+              selectedTab === "pending" ? styles.activeButton : ""
+            }`}
+            onClick={handlePendingApi}
+          >
+            <img src={pendingImg} alt="pendingImg" /> Pending
+          </button>
+          <button
+            className={`${styles.filterButton} ${
+              selectedTab === "hired" ? styles.activeButton : ""
+            }`}
+            onClick={handleHiredApi}
+          >
+            {selectedTab === "hired" ? (
+              <img src={HiredClickImg} alt="..." />
+            ) : (
+              <img src={HiredImg} alt="hired" />
+            )}{" "}
+            Hired
+          </button>
+        </div>
 
         <div style={{ display: "flex" }} className={styles.purchaseSelect}>
-          <label className={styles.purchaseText}>Purchase Type</label>
+          {/* <label className={styles.purchaseText}>Purchase Type</label> */}
           <Select
             value={purchaseType}
             onChange={handlePurchaseChange}
