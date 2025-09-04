@@ -108,7 +108,7 @@
   }
 
   .description {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .imageWrapper {
@@ -121,9 +121,6 @@
     font-size: 19px;
   }
 
-  .description {
-    font-size: 15px;
-  }
   .stepsContainer {
     margin: 45px auto 0;
   }
@@ -139,7 +136,7 @@
   }
 
   .ctaButton {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
@@ -193,7 +190,6 @@
   }
 
   .description {
-    font-size: 14px;
     margin: 0;
   }
 
@@ -211,12 +207,8 @@
     font-size: 16px;
   }
 
-  .description {
-    font-size: 12px;
-  }
-
   .ctaButton {
-    font-size: 12px;
+    /* font-size: 12px; */
     padding: 10px;
   }
 }

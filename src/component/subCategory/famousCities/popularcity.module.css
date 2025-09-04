@@ -286,7 +286,7 @@
 
 @media (max-width: 884px) {
   .heading {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 400;
   }
   .availableOnline {
@@ -319,6 +319,7 @@
     object-fit: cover;
   }
   .heading {
+    font-size: 22px;
     font-weight: 400;
   }
   .availableOnline {
