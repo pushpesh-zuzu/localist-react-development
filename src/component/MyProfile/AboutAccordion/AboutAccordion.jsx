@@ -189,7 +189,9 @@ const AboutAccordion = ({ details }) => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    setIsDirty(true);
     if (!file) return;
+    alert("ji");
 
     const { name } = e.target;
 
@@ -226,6 +228,7 @@ const AboutAccordion = ({ details }) => {
   };
 
   const handleInputChange = (e) => {
+    setIsDirty(true);
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
 
@@ -249,6 +252,20 @@ const AboutAccordion = ({ details }) => {
       setDebouncedCompanyName(value);
     }
   };
+  const [isDirty, setIsDirty] = useState(false);
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (isDirty) {
+        e.preventDefault();
+        e.returnValue = ""; // Chrome requires returnValue to be set
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [isDirty]);
 
   // Debounce for company_location
   useEffect(() => {
@@ -562,7 +579,11 @@ const AboutAccordion = ({ details }) => {
         const sellerData = {
           seller_id: user_id,
         };
-        dispatch(addViewProfileList(sellerData));
+        dispatch(addViewProfileList(sellerData))?.then((res) => {
+          if (res?.success) {
+            setIsDirty(false);
+          }
+        });
       }
     });
   };

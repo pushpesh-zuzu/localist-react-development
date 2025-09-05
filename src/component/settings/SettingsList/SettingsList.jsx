@@ -74,9 +74,8 @@ const SettingsList = () => {
               <span style={{ cursor: "pointer" }}>Reviews</span>
             </div>
             <p>
-              Download the Localists.com badges and help boost your business Our
-              badges increase the trustworthiness of your website and can help
-              increase online visibility.
+              Get your dynamic review link and get reviews to help
+              boost your profile.
             </p>
             <div
               className={styles.card}

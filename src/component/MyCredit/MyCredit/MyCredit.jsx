@@ -34,7 +34,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: false,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
+    text: "We'll give you your credits back if you don't secure at least one job on Localists using these credits.",
   },
   {
     title: "120 % OFF Boost",
@@ -43,7 +43,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: true,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
+    text: "We'll give you your credits back if you don't secure at least one job on Localists using these credits.",
   },
   {
     title: "180 % OFF Boost",
@@ -52,7 +52,7 @@ const creditOptions = [
     discount: "1.45",
     autoTopUp: true,
     image: getHired,
-    text: "We'll give you your credits back if you don't secure at least one job on Bark using these credits.",
+    text: "We'll give you your credits back if you don't secure at least one job on Localists using these credits.",
   },
 ];
 
@@ -375,7 +375,7 @@ const MyCredits = () => {
                     {
                       <div className={styles.gethiredText}>
                         We'll give you your credits back if you don't secure at
-                        least one job on Bark using these credits.
+                        least one job on Localists using these credits.
                       </div>
                     }
                   </div>
