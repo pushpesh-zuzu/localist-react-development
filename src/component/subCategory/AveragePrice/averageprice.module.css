@@ -11,7 +11,7 @@
 .averagePriceContainer h1 {
   color: var(--text-color);
   font-weight: 600;
-  font-size: 32px;
+  font-size: 35px;
   letter-spacing: 0;
   text-align: center;
   vertical-align: middle;
@@ -20,6 +20,10 @@
   font-size: var(--text-size-35);
   font-weight: 500;
 }
+.title {
+  color: var(--primary-color);
+    font-size: var(--text-size-35);
+}
 @media (max-width: 884px) {
   .heading {
     font-size: 28px;
@@ -27,7 +31,7 @@
   }
 }
 .title {
-  color: var(--primary-color);
+  font-size: 28px;
 }
 .averagePriceContainer span {
   color: var(--primary-color);

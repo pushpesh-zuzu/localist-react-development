@@ -632,13 +632,13 @@ const AVERAGE_PRICE = {
       Premium: "£2300",
     },
     {
-      Region: "East Midlands",
+      Region: "London",
       "Great Value": "£240",
       Average: "£1000",
       Premium: "£2300",
     },
     {
-      Region: "East of England",
+      Region: "South West England",
       "Great Value": "£350",
       Average: "£950",
       Premium: "£2550",
@@ -666,7 +666,7 @@ const AVERAGE_PRICE = {
       Premium: "£10000",
     },
     {
-      Region: "East Midlands",
+      Region: "West Midlands",
       "Great Value": "£4500",
       Average: "£5900",
       Premium: "£9200",
@@ -680,7 +680,7 @@ const AVERAGE_PRICE = {
       Premium: "£7600",
     },
     {
-      Region: "East Midlands",
+      Region: "London",
       "Great Value": "£1000",
       Average: "£3500",
       Premium: "£5000",
