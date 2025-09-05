@@ -707,8 +707,11 @@ const FREQUENTLY_DATA = {
     {
       key: "1",
       title: "Which is the best fencing company near me?",
-      description:
-        "When looking for a fencing company, it’s important to find one that’s well-reviewed, fully insured and one that has wide portfolio of projects. Reviews can be a good indicator as to what kind of professional you’re going to get - and with Localists you get all their reviews in one place! Though it’s not completely necessary, looking at whether your fencing contractor is a member of regulatory bodies such as the association of fencing industries might also be an indicator of their quality (link to afiorg.uk). Rather than spending hours searching the internet, we bring the best fencing contractors near you - straight to your inbox. So you can get the best fencing companies for the best price!",
+      description: `
+      When looking for a fencing company, it’s important to find one that’s well-reviewed, fully insured and one that has wide portfolio of projects. Reviews can be a good indicator as to what kind of professional you’re going to get - and with Localists you get all their reviews in one place! Though it’s not completely necessary, looking at whether your fencing contractor is a member of regulatory bodies such as the 
+      <a href="https://afiorg.uk/" style="text-decoration:none; color:#00afe3;" target="_blank" rel="noopener noreferrer">association of fencing industries</a> 
+      might also be an indicator of their quality. Rather than spending hours searching the internet, we bring the best fencing contractors near you - straight to your inbox. So you can get the best fencing companies for the best price!
+     `,
     },
     {
       key: "2",

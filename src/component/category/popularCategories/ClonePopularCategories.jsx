@@ -11,7 +11,7 @@ const PopularCategories = ({ data }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>
-        Popular <span className={styles.highlight}>categories</span>
+        Popular <span className={styles.highlight}>Categories</span>
       </h2>
       <div className={styles.grid}>
         {data?.map((row, rowIndex) => (
