@@ -82,12 +82,13 @@
 .findAnAccountant_heading {
   font-size: 35px;
   font-weight: 500;
-  margin-bottom: 12px;
+  /* margin-bottom: 12px; */
+  margin-top: 8px;
 }
 .findAnAccountant_h3 {
   font-size: 24px;
   font-weight: 500;
-  margin-bottom: 29px;
+  margin-top: 8px;
 }
 
 .findAnAccountant_heading b {
@@ -98,7 +99,7 @@
 .findAnAccountant_title {
   font-size: 28px;
   font-weight: 400;
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
 }
 
 .findAnAccountant_paragrap {
@@ -107,18 +108,18 @@
     line-height: 32px;
     letter-spacing: 0;
     color: var(--text-color);
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
 }
 
 .findAnAccountant_listItem {
   margin-top: 42px;
   font-size: 18px;
   font-weight: 400;
-  margin-bottom: 29px;
+  /* margin-bottom: 29px; */
 }
 
 .findAnAccountant_listItem li {
-  margin-bottom: 14px;
+  /* margin-bottom: 14px; */
 }
 
 .findAnAccountant_bark_paragrap {
@@ -175,10 +176,12 @@
 
   .findAnAccountant_heading {
     font-size: 28px;
+    line-height: 32px;
   }
   .findAnAccountant_h3{
         font-size: 20px;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
+    line-height: 30px;
 
   }
 
@@ -202,7 +205,7 @@
 
   .findAnAccountant_bark_paragrap {
     font-size: 16px;
-    line-height: 30px;
+    /* line-height: 30px; */
   }
 }
 
@@ -243,11 +246,11 @@
   }
 
   .findAnAccountant_heading {
-    line-height: 42px;
+    /* line-height: 42px; */
   }
   
  .findAnAccountant_h3 {
-    line-height: 42px;
+    /* line-height: 42px; */
   }
   .findAnAccountant_title {
     font-size: 20px;
@@ -259,9 +262,11 @@
 
   .findAnAccountant_paragrap,
   .findAnAccountant_listItem,
-  .findAnAccountant_bark_paragrap {
+  .findAnAccountant_bark_paragrap b {
     line-height: 25px;
+    
   }
+
 
   .findAnAccountant_image {
     width: 100%;

@@ -38,7 +38,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "uili") {
               return (
-                <ul>
+                <ul style={{margin:'4px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     <b> {block.heading}</b>
                     {block.text}
