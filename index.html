@@ -2,14 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <!-- <link rel="icon" type="image/jpeg" href="./favicon.jpeg" /> -->
-    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" type="image/jpeg" href="./favicon.jpeg" /> -->
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=AW-17528251553"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "AW-17528251553");
+    </script>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0,  maximum-scale=1"
+    />
     <!-- 1. Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +52,6 @@
     <!-- 5. Preload Important JS -->
     <link rel="modulepreload" href="/src/entry-client.jsx" />
 
-    
     <meta property="og:type" content="website" />
     <!--css-outlet-->
   </head>
@@ -44,4 +60,3 @@
     <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>
-
