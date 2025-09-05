@@ -741,7 +741,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
 </p>
 
         <ul>
-  <li>Relevant qualifications & certifications</li>
+  <li><strong>Relevant qualifications & certifications</strong></li>
 </ul>
 <p>
   For fencing, look for professionals with a Level 2 Diploma in Fencing (NVQ) or a 
@@ -751,35 +751,35 @@ Choosing the right fencing or gate professional isn’t just about price - it’
 </p>
 
 <ul>
-  <li>Proven track record</li>
+  <li><strong>Proven track record</strong></li>
 </ul>
 <p>
   Asking to see examples of past work of previous fence and gate installations can give you a clear sense of their workmanship, style, and attention to detail.
 </p>
 
 <ul>
-  <li>Reviews & reputation</li>
+  <li><strong>Reviews & reputation</strong></li>
 </ul>
 <p>
   Browse through verified customer reviews, testimonials, or ratings to get a sense of how reliable and professional they are.
 </p>
 
 <ul>
-  <li>Transparent quotes & timelines</li>
+  <li><strong>Transparent quotes & timelines</strong></li>
 </ul>
 <p>
   A trustworthy professional will give you a clear, itemised quote and realistic timeframes, so there are no surprises along the way.
 </p>
 
 <ul>
-  <li>Proper licensing & insurance</li>
+  <li><strong>Proper licensing & insurance</strong></li>
 </ul>
 <p>
   Make sure they’re fully insured and compliant with local regulations. This is especially important for automated gate systems.
 </p>
 
 <ul>
-  <li>Written agreements</li>
+  <li><strong>Written agreements</strong></li>
 </ul>
 <p>
   Always request a formal contract or service agreement that outlines scope, timelines, cost, and warranty (if available).
@@ -1366,7 +1366,7 @@ const BREADCRUMB_CONFIG = {
   ],
   "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio Services", path: "patio-layers-near-me" }, // no path
+    { title: "Patio Installation", path: "patio-layers-near-me" }, // no path
   ],
   "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
@@ -1386,7 +1386,7 @@ const CONTENT_CONFIG_TOP = {
     findingHeading: " fence and gate installation experts",
     title: "Fencing Contractors",
     mainTitle: "fence & gate installation",
-    ctaText: "fencer",
+    ctaText: "Fencing Contractor",
     avgPrice: "£200",
     showSpeicialits: true,
     avgPriceTitle: "fence & gate installation",
@@ -1395,28 +1395,28 @@ const CONTENT_CONFIG_TOP = {
     findingHeading: "driveway companies",
     title: "Driveway Companies",
     mainTitle: "driveway installers",
-    ctaText: "driveway installer",
+    ctaText: "Driveway Installer",
     avgPriceTitle: "driveway installers",
   },
   "patio-layers-near-me": {
     findingHeading: "patio contractors",
     title: "Patio Installers",
     mainTitle: "Patio and Paving Service",
-    ctaText: "patio service",
+    ctaText: "Patio Contractor",
     avgPriceTitle: "a patio",
   },
   "landscape-gardeners-near-me": {
     findingHeading: "landscape gardeners",
     title: "Landscape Gardeners",
     mainTitle: "Landscape Gardener",
-    ctaText: "landscape gardener",
+    ctaText: "Landscape Gardener",
   },
   "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
     title: "Artificial Grass Installers",
     mainTitle: "Artificial Installer",
     findingHeading: "artificial grass installers",
-    ctaText: "artificial grass installer",
+    ctaText: "Artificial Installer",
     avgPriceTitle: "artificial grass installation",
     showSpeicialits: true,
   },
@@ -1450,7 +1450,7 @@ const CONTENT_CONFIG_META = {
     title: "Fencing Companies & Fencing Contractors Near Me | Localists",
     name: "description",
     content:
-      "Searching for secure fence and gate installation experts near you? Get matched instantly with fencing companies  in your area on localists using free quotes.",
+      "Searching for secure fence and gate installation experts near you? Get matched instantly with fencing companies  in your area on Localists using free quotes.",
   },
   "driveway-installers-near-me": {
     title: "Find Driveway Companies & Driveway Contractors Near Me - Localists",
@@ -1490,7 +1490,7 @@ You can find any type of specialist you need to cover everything from : resident
     },
     {
       type: "h3",
-      text: "Why hire fencing contractors through localists?",
+      text: "Why hire fencing contractors through Localists?",
     },
     {
       type: "p",
@@ -1589,7 +1589,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "h2",
-      text: "Why hire driveway contractors through localists?",
+      text: "Why hire driveway contractors through Localists?",
     },
     {
       type: "p",

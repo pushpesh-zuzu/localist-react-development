@@ -30,7 +30,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
         onClick={() => handleScrollToBottom()}
         className={styles.ctaButton}
       >
-        Get quotes from {title}s near you
+        Get Quotes From {title}s Near You
       </button>
     </div>
   );
