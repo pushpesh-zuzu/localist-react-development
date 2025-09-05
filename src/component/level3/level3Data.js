@@ -1535,7 +1535,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
 
     {
       type: "h3",
-      text: "Fence and gate installation: network of qualified contractors wherever you are?",
+      text: "Fence and gate installation: network of qualified contractors wherever you are",
     },
     {
       type: "uili",
