@@ -610,9 +610,9 @@ const AboutAccordion = ({ details }) => {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <h3>Business Name & Logo</h3>
-        <p className={styles.subheading2} >
-          Help Customers recognise your business. This is what customers see first when browsing for professionals on Localists.com. 
-         
+        <p className={styles.subheading2}>
+          Help Customers recognise your business. This is what customers see
+          first when browsing for professionals on Localists.com.
         </p>
         <div className={styles.imageSection}>
           {details?.company_logoPreview || formState.company_logoPreview ? (
@@ -647,9 +647,11 @@ const AboutAccordion = ({ details }) => {
           className={styles.input}
           type="text"
           name="company_name"
-          value={details?.business_profile_name?.trim() !== "" 
-                    ? details?.business_profile_name
-                    : formState.company_name}
+          value={
+            details?.business_profile_name?.trim() !== ""
+              ? details?.business_profile_name
+              : formState.company_name
+          }
           onChange={handleInputChange}
           placeholder="Enter your company name"
           readOnly
@@ -662,7 +664,9 @@ const AboutAccordion = ({ details }) => {
       <div className={styles.card}>
         <h3>Your Name & Profile Picture</h3>
         <p className={styles.subheading2}>
-         Customers on Localists.com will see this information when you message them. Adding a photo helps build trust and makes your profile more personal.
+          Customers on Localists.com will see this information when you message
+          them. Adding a photo helps build trust and makes your profile more
+          personal.
         </p>
         <div className={styles.imageSection}>
           {details?.profile_imagePreview || formState.profile_imagePreview ? (
@@ -781,7 +785,8 @@ const AboutAccordion = ({ details }) => {
       <div className={styles.card}>
         <h3>Your Contact Information</h3>
         <p>
-         Customers on Localists.com will see these details when viewing your profile. You can update your private contact info anytime under {" "}
+          Customers on Localists.com will see these details when viewing your
+          profile. You can update your private contact info anytime under{" "}
           <a href="/settings/profile/account-details" className={styles.link}>
             Account Details
           </a>

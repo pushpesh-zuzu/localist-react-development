@@ -17,34 +17,34 @@ const ContactUs = () => {
     message: "",
   });
 
-  
-   const onFinish = async (values) => {
-      try {
-        console.log("Form values:", values);
+  const onFinish = async (values) => {
+    try {
+      console.log("Form values:", values);
 
-        const userType = values.customerType === "customer" ? 1 : 2;
+      const userType = values.customerType === "customer" ? 1 : 2;
 
-        const payload = {
-          full_name: values.fullName,
-          phone: values.phoneNumber,
-          company: values.company,
-          user_type: userType,
-          message: values.message,
-        };
+      const payload = {
+        full_name: values.fullName,
+        phone: `+44${values.phoneNumber}`,
+        email: values.email,
+        user_type: userType,
+        message: values.message,
+      };
 
-        const response = await axiosInstance.post("contact-us", payload);
+      const response = await axiosInstance.post("contact-us", payload);
 
-        if (response.data.success) {
-          
-          showToast("success", "Thank You, We'll get back to you soon!");
-          form.resetFields();
-        } else {
-          showToast("error", response.data.message || "Please try again after some time");
-        }
-      } catch (error) {
-          showToast("error", "Please try again after some time ");
+      if (response.data.success) {
+        showToast("success", "Thank You, We'll get back to you soon!");
+        form.resetFields();
+      } else {
+        showToast(
+          "error",
+          response.data.message || "Please try again after some time"
+        );
       }
-
+    } catch (error) {
+      showToast("error", "Please try again after some time ");
+    }
   };
 
   const bannerImage = {
@@ -94,27 +94,29 @@ const ContactUs = () => {
               </div>
               <div className={styles.inputGroup}>
                 <TextInput
-                    type="text"
-                    name="phoneNumber"
-                    label="Phone Number"
-                    required
-                    maxLength={10} // ✅ now works
-                    prefix="+44" 
-                    onInput={(e) => {
-                      e.target.value = e.target.value.replace(/[^0-9]/g, "").slice(0, 10);
-                    }}
-                  />
-
+                  type="text"
+                  name="phoneNumber"
+                  label="Phone Number"
+                  required
+                  maxLength={10} // ✅ now works
+                  prefix="+44"
+                  onInput={(e) => {
+                    e.target.value = e.target.value
+                      .replace(/[^0-9]/g, "")
+                      .slice(0, 10);
+                  }}
+                />
               </div>
             </div>
 
             <div className={styles.inputRow}>
               <div className={styles.inputGroup}>
                 <TextInput
-                  type="text"
-                  name="company"
+                  type="email"
+                  name="email"
                   required
-                  label="Company"
+                  label="Email"
+                  placeholder="Enter Email"
                 />
               </div>
               <div className={styles.inputGroup}>

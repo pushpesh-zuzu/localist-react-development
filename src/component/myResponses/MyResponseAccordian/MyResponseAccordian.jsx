@@ -761,9 +761,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                           <div className={styles.noteText}>{item.notes}</div>
                           <div className={styles.noteActions}>
                             <span>
-                               {item?.created_at
-                                  ? moment.tz(item.created_at, "UTC").format("YYYY-MM-DD hh:mm:ss A")
-                                  : ""}
+                              {item?.created_at
+                                ? moment
+                                    .tz(item.created_at, "Europe/London")
+                                    .format("YYYY-MM-DD hh:mm:ss A")
+                                : ""}
                             </span>
                             |
                             <span
