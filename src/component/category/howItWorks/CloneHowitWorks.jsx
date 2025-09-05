@@ -1,6 +1,6 @@
 import { handleScrollToBottom } from "../../../utils/scroll";
 import styles from "./HowItWorks.module.css";
-const HowItWorks = ({header,subHeader,howItWorksData}) => {
+const HowItWorks = ({ctaText,howItWorksData}) => {
     return (
       <div className={styles.container}>
         <h2 className={styles.heading}>
@@ -26,7 +26,7 @@ const HowItWorks = ({header,subHeader,howItWorksData}) => {
           ))}
         </div>
         <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
-          Get quotes from {header} professionals near you
+          Get Quotes From {ctaText} Professionals Near You
         </button>
       </div>
     );

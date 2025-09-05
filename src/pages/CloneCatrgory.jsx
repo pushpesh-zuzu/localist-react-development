@@ -154,8 +154,7 @@ const CloneCategory = ({ accountHeader }) => {
 
         <HowItWorks
           howItWorksData={howItWorksData}
-          header={'home & garden'}
-          subHeader={'home & garden'}
+          ctaText={'Home & Garden'}
         />
         <PopularCategories data={filteredCategories} />
         {/* <AllServicesComponent data={filteredAllServicesData} /> */}
@@ -171,7 +170,7 @@ const CloneCategory = ({ accountHeader }) => {
             { name: "Artificial Grass Installation", path: "/artificial-grass-installers-near-me" },
           ]}
         />
-        <GetQuotes message={'home & garden'} needSString={false} />
+        <GetQuotes ctaText={'Home & Garden'} needSString={false} />
       </div>
     </>
   );

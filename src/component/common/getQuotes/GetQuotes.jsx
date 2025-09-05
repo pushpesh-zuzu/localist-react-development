@@ -2,17 +2,17 @@ import PropTypes from "prop-types";
 import styles from "./GetQuotes.module.css";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
-const GetQuotes = ({ message, needSString = true }) => {
+const GetQuotes = ({ ctaText, needSString = true }) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleScrollToBottom()} className={styles.button}>
-        Get quotes
+        Get Quotes
       </button>
 
-      {message && (
+      {ctaText && (
         <p className={styles.text}>
-          from {message}
-          {needSString ? "s" : ""} service providers today
+          From {ctaText}
+          {needSString ? "s" : ""} Service Providers Today
         </p>
       )}
     </div>
@@ -20,6 +20,6 @@ const GetQuotes = ({ message, needSString = true }) => {
 };
 
 // GetQuotes.propTypes = {
-//   message: PropTypes.string.isRequired,
+//   ctaText: PropTypes.string.isRequired,
 // };
 export default GetQuotes;

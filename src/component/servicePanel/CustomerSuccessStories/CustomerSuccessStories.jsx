@@ -6,11 +6,11 @@ const CustomerSuccessStories = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        What successful professionals  
- <span> on localists have to say</span>
+        What successful professionals on
+ <span>  Localists </span> have to say
       </h2>
       <p className={styles.subHeading}>
-        See what other small businesses have to say about localists
+        See what other small businesses have to say about Localists
       </p>
       <div className={styles.cardsContainer}>
         {CustomerSuccessStoriesData.map((story) => (
