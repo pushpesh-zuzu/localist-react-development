@@ -43,7 +43,12 @@
     padding: 0px;
   }
   .bannerTitle{
-    font-size: 40px;
-    font-weight: 700;
+    font-size: 38px;
+    font-weight: 600;
+  }
+}
+@media (max-width: 540px) {
+  .bannerTitle{
+    font-size: 32px;
   }
 }

@@ -17,7 +17,7 @@
   text-align: center;
   margin: 0 0 24px 0;
 }
-.link{
+.link {
   text-decoration: none;
   color: var(--primary-color);
 }
@@ -36,8 +36,8 @@
   line-height: 32px;
   text-align: center;
   color: var(--text-color);
-    /* max-width: 76.5%; */
-  max-width: 1119px;
+  max-width: 76.5%;
+  /* max-width: 1119px; */
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -50,7 +50,8 @@
   line-height: 32px;
   text-align: left;
   color: var(--text-color);
-  max-width: 1119px;
+  /* max-width: 1119px; */
+  max-width: 76.5%;
   width: 100%;
   margin: 0 auto;
   padding: 0 20px;
@@ -58,12 +59,19 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  gap: 10px;
   width: "100%";
   margin-left: 20;
   text-align: "left";
 }
-.detailHeading {
+.detail h3 {
+  font-size: 24px;
+}
+.detail ul {
+  margin: 4px;
+  padding-left: 50px;
+}
+.detail p {
+  margin-bottom: 16px;
 }
 @media (max-width: 1024px) {
   .content .detail {
@@ -73,9 +81,11 @@
 
 @media (max-width: 768px) {
   .mainContainer {
-    margin: 40px 0;
+    margin: 32px 0;
   }
-
+  .detail h3 {
+    font-size: 20px;
+  }
   .heading {
     font-size: 28px;
     line-height: 32px;
@@ -85,14 +95,16 @@
   .content,
   .detail {
     font-size: 16px;
-    padding: 0 15px;
+    padding: 0px;
   }
 }
 
 @media (max-width: 480px) {
   .mainContainer {
-    margin: 32px 0;
-    padding: 0 15px;
+    margin: 16px 0;
+  }
+  .detail ul {
+    padding-left: 24px;
   }
 
   .heading {
@@ -100,12 +112,11 @@
     margin-bottom: 16px;
   }
 
-  .content,.detail {
+  .content,
+  .detail {
+    max-width: 100%;
     font-size: 16px;
     line-height: 26px;
-    /* text-align: center;  */
-    padding: 0 10px;
     text-justify: auto;
   }
-
 }

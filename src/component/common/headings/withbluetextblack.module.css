@@ -1,19 +1,17 @@
 .container {
   text-align: center;
 }
-.heading{
-
+.container h2{
+  font-size: 35px;
 }
 .primaryText {
   color: var(--primary-color); /* blue */
-  font-size: 35px;
   font-weight: 700;
 }
 
 .textColor {
   color: var(--text-color); /* black */
   font-weight: 600;
-  font-size: 35px;
 }
 @media (max-width:768px) {
   .primaryText {
@@ -62,5 +60,8 @@
   font-size: 40px;
     line-height: 45px;
 
+}
+.container h2{
+  font-size: 28px;
 }
 }

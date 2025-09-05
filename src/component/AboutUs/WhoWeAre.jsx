@@ -35,7 +35,7 @@ const WhoWeAre = () => {
         standards.
       </p>
       <div className={styles.detail}>
-        <h3 style={{ textAlign: "left", marginBottom: "4px" }}>
+        <h3>
           Setting the Standard
         </h3>
         <p>

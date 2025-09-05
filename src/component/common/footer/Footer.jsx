@@ -202,14 +202,14 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* <div>
+          <div>
               <h4>About</h4>
             <ul>
               <Link className={styles.link} to={`/${lang}/${country}/about-us`}>
                 <li>About Localists</li>
               </Link>
             </ul>
-          </div> */}
+          </div>
         </div>
 
         {/* Mobile Links (NO styles.link here) */}
@@ -279,13 +279,13 @@ const Footer = () => {
             </ul>
           </Panel>
 
-          {/* <Panel className={styles.footerNavLinks} header="About" key="3">
+          <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <Link to={`/${lang}/${country}/about-us`}>
                 <li className={styles.mobileItem}>About Localists</li>
               </Link>
             </ul>
-          </Panel> */}
+          </Panel>
         </Collapse>
 
         {isMobile ? (

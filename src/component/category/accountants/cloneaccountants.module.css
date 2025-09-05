@@ -180,7 +180,7 @@
   }
 
   .headingContainer h1 {
-    font-size: 32px;
+    font-size: 38px;
   }
 
   .inputGroup {
@@ -204,7 +204,12 @@
     border-radius: 4px;
   }
 }
-
+@media (max-width: 540px) {
+    .headingContainer h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
 @media (max-width: 480px) {
   .container {
     height: auto;
@@ -216,10 +221,7 @@
     line-height: normal;
   }
 
-  .headingContainer h1 {
-    font-size: 36px;
-    line-height: 40px;
-  }
+
 
   .inputGroup {
     flex-direction: column;
