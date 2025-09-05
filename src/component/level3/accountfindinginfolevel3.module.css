@@ -287,8 +287,11 @@
   }
 
   .title {
-    font-size: 30px;
+    font-size: 28px;
     line-height:40px
+  }
+  .highlight{
+    font-size: 28px;
   }
 
   .descriptionContainer p {
