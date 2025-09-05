@@ -98,8 +98,9 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       dispatch(clearSetbuyerRequestData());
       dispatch(clearBuyerRegisterFormData());
       dispatch(setQualityData());
-     
-      navigate(`/bids-list/${requestId}`);
+      navigate(`/conversion-redirect/${requestId}`);
+      // navigate(`/bids-list/${requestId}`);
+      setShowConfirmModal(false)
     });
 
     // .then(() => {
@@ -242,13 +243,13 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
         Your information is protected by our {" "}
-          <a
+          {/* <a
             href="/privacy-policy"
             target="blank"
             className={styles.privacyLink}
           >
             privacy policy
-          </a>
+          </a> */}
         </p>
       </div>
     </div>

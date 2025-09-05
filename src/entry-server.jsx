@@ -21,7 +21,8 @@ export function render(url,hostname) {
     head: helmetContext.helmet
       ? `${helmetContext.helmet.title.toString()}
            ${helmetContext.helmet.meta.toString()}
-           ${helmetContext.helmet.link.toString()}`
+           ${helmetContext.helmet.link.toString()}
+           ${helmetContext.helmet.script.toString()}`
       : "",
   };
 }

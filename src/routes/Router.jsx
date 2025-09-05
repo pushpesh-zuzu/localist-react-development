@@ -55,6 +55,7 @@ import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
 
 import LocaleRedirect from "./LocaleRedirect";
+import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -153,6 +154,7 @@ const routes = [
       { path: "how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
       { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
       { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
+      { path:"conversion-redirect/:requestId", element: <ConversionRedirect /> },
 
     ],
   },
