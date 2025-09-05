@@ -12,13 +12,13 @@
 
 .frequently_heading {
   font-size: 35px;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 31px;
 }
 
 .frequently_heading b {
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .frequently_collapse {
@@ -73,6 +73,9 @@
   .frequently_container {
     padding: 30px 20px;
   }
+  .frequently_heading {
+    font-size: 28px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -81,7 +84,6 @@
   }
 
   .frequently_heading {
-    font-size: 30px;
     margin-bottom: 28px;
   }
 

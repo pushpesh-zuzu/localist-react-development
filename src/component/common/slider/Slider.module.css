@@ -13,12 +13,12 @@
 }
 .heading {
   font-size: var(--text-size-35);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .highlight {
   color: #00aaff;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .sliderWrapper {
@@ -135,7 +135,7 @@
 @media (max-width: 884px) {
   .heading {
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 500;
   }
   .availableOnline {
     font-size: 11.72px;
@@ -165,10 +165,7 @@
     height: 116px;
     object-fit: cover;
   }
-  .heading {
-    font-size: 22px;
-    font-weight: 600;
-  }
+ 
   .availableOnline {
     font-size: 8px;
     padding: 4px 8px;

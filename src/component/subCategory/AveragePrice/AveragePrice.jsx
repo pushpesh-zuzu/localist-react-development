@@ -3,7 +3,7 @@ import AveragePriceTable from "./AveragePriceTable";
 import { AVERAGE_PRICE } from "../../../constant/subCategory";
 
 const AveragePrice = ({
-  title = "Accountants",
+  title = "",
   avg_price ,
   RELTED_PRICE,
   showSpeicialits=false
@@ -14,7 +14,7 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        Average cost of hiring {title} is {avg_price && <span>{avg_price}</span> }{" "}{showSpeicialits && 'specialists'} by region
+        Average cost of hiring <span className={styles.title}>{title}</span> is {avg_price && <span>{avg_price}</span> }{" "}{showSpeicialits && 'specialists'} by region
         <span></span>
       </h2>
 

@@ -115,7 +115,7 @@
 
 @media screen and (max-width: 768px) {
   .title {
-    font-size: 19px;
+    font-size: 20px;
   }
 
 
@@ -184,7 +184,7 @@
   }
 
   .title {
-    font-size: 18px;
+    /* font-size: 18px; */
     margin-bottom: 10px;
   }
 
@@ -203,9 +203,9 @@
     padding: 26px 5%;
   }
 
-  .title {
+  /* .title {
     font-size: 16px;
-  }
+  } */
 
   .ctaButton {
     font-size: 15px;

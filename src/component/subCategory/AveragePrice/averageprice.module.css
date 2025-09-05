@@ -10,7 +10,7 @@
 .averagePriceContainer span,
 .averagePriceContainer h1 {
   color: var(--text-color);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 32px;
   letter-spacing: 0;
   text-align: center;
@@ -18,7 +18,7 @@
 }
 .heading {
   font-size: var(--text-size-35);
-  font-weight: 600;
+  font-weight: 500;
 }
 @media (max-width: 884px) {
   .heading {
@@ -26,14 +26,9 @@
     font-weight: 600;
   }
 }
-@media (max-width: 520px) {
-  .heading {
-    font-size: 22px;
-    font-weight: 600;
-  }
+.title {
+  color: var(--primary-color);
 }
-
-
 .averagePriceContainer span {
   color: var(--primary-color);
 }

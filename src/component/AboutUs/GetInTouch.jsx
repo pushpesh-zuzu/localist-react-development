@@ -32,7 +32,7 @@ const GetInTouchButton = () => {
           <button 
             key={method.id} 
             className={styles.button} 
-            onClick={method.onClick}
+            // onClick={method.onClick}
           >
             {method.icon}
             <span>{method.text}</span>

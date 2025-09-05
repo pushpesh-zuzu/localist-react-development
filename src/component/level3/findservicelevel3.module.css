@@ -82,17 +82,17 @@
 .findAnAccountant_heading {
   font-size: 35px;
   font-weight: 500;
-  margin-bottom: 29px;
+  margin-bottom: 12px;
 }
 .findAnAccountant_h3 {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 500;
   margin-bottom: 29px;
 }
 
 .findAnAccountant_heading b {
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .findAnAccountant_title {
@@ -140,7 +140,7 @@
 
 .findAnAccountant_button {
   padding: 11px 31px;
-  font-size: 18px;
+  font-size: 40px;
   font-weight: 700;
   background-color: var(--primary-color);
   border: none;
@@ -174,12 +174,11 @@
   }
 
   .findAnAccountant_heading {
-    font-size: 30px;
-    margin-bottom: 20px;
+    font-size: 28px;
   }
   .findAnAccountant_h3{
-        font-size: 25px;
-    margin-bottom: 20px;
+        font-size: 20px;
+    margin-bottom: 12px;
 
   }
 
@@ -212,6 +211,10 @@
     flex-direction: column-reverse;
     padding-bottom: 32px;
   }
+  .findAnAccountant_button {
+    font-size: 26px;
+    padding: 11px 16px;
+  }
 
   .findAnAccountant_image {
     width: 100%;
@@ -240,14 +243,10 @@
   }
 
   .findAnAccountant_heading {
-    font-size: 30px;
-    margin-bottom: 16px;
     line-height: 42px;
   }
   
  .findAnAccountant_h3 {
-    font-size: 25px;
-    margin-bottom: 16px;
     line-height: 42px;
   }
   .findAnAccountant_title {
@@ -270,9 +269,3 @@
   }
 }
 
-@media (max-width: 440px) {
-  .findAnAccountant_button {
-    font-size: 14px;
-    padding: 11px 16px;
-  }
-}

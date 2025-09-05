@@ -1410,6 +1410,7 @@ const CONTENT_CONFIG_TOP = {
     title: "Landscape Gardeners",
     mainTitle: "Landscape Gardener",
     ctaText: "Landscape Gardener",
+    avgPriceTitle:'landscape gardener'
   },
   "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
