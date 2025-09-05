@@ -71,7 +71,7 @@ const BuyerNotification = () => {
                     ? "Changes to my requests"
                     : notification?.noti_name === "customer_email_reminder_to_reply"
                       ? "Reminders to reply to Professionals"
-                      : "Updates about new features on Bark"}
+                      : "Updates about new features on Localists"}
                 </span>
                 {loadingNoti === notiName ? (
                   <Spin size="small" />

@@ -10,7 +10,7 @@ const FindingBusinessProfessionals = () => {
         </span>
         <div className={styles.descriptionContainer}>
           <p>
-            You can find the best Business professionals on Bark. Start your
+            You can find the best Business professionals on Localists. Start your
             search and get free quotes now!
           </p>
           <p>

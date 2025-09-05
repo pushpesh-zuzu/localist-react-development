@@ -1538,6 +1538,10 @@ Whether you're securing your home, upgrading your garden, or managing a large co
       text: "Fence and gate installation: network of qualified contractors wherever you are",
     },
     {
+      type:'p',
+      text:'Localists works with a wide network of professionals, covering every type of fence and gate installation. Whether you prefer to hire a trusted fencing company near you or independent fence builders, we’ll match you with the right local expert. Just tell us what you need - our system does the rest. No matter where you’re based in the UK, you’ll find qualified, nearby fencing contractors who can help with:'
+    },
+    {
       type: "uili",
       heading: "Wooden fence & gate Installation:\u00A0",
       text: "A classic, traditional option that adds charm and privacy.",
