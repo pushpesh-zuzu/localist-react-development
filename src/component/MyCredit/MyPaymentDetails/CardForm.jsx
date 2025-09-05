@@ -56,7 +56,8 @@ const CardPaymentForm = ({
   const { sellerBillingLoader } = useSelector((state) => state.myCredit);
   console.log(data, "data");
   const item = data?.map((item) => item)[0] || {};
-  const items = newLeadData?.map((item) => item)[0] || {};
+  // const items = newLeadData?.map((item) => item)[0] || {};
+  const items = newLeadData?.[0] || {};
   console.log(item, details, items, newLeadData, "88");
 
   const addManualBidData = () => {
