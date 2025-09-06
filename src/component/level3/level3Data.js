@@ -419,7 +419,7 @@ const REVIEWS_DATA = {
       date: "5 june 2025",
       image: ReviewsImage,
       description:
-        "After weeks of searching for patio construction near me, I found Localists. Within the same day, I had three quotes from three different patio companies near me and picked the one that best suited my budget. The new porcelain patio looks incredible and has already made the garden our favourite spot.",
+        "After weeks of searching for patio contractors near me, I found Localists. Within the same day, I had three quotes from three different patio companies and picked the one that best suited my budget. The new porcelain patio looks incredible and has already made the garden our favourite spot.",
     },
   ],
   "landscape-gardeners-near-me": [
@@ -889,12 +889,8 @@ Choosing the right fencing or gate professional isn’t just about price - it’
   "patio-layers-near-me": [
     {
       key: "6",
-      title: " How do I find a patio construction company near me?",
-      description: `
-  <p>
-    Good news - You’re already halfway there! Use Localists to search for reputable patio contractors wherever you are. Simply tell us your project vision, your location, and we'll match you with trusted professionals who can bring it to life. Pick your builder, get the ball rolling, and relax.
-  </p>
-`,
+      title: "How do I find a patio contractor near me?",
+      description: `Good news - You’re already halfway there! Use Localists to search for reputable patio contractors wherever you are. Simply tell us your project vision, your location, and we'll match you with trusted professionals who can bring it to life. Pick your builder, get the ball rolling, and relax.`,
     },
     {
       key: "7",
@@ -1236,7 +1232,7 @@ const HowItWorksData = {
       image: WhatYouNeedIcon,
       heading1: "Search for local patio contractors",
       description:
-        "Tell us about your project, size, style, and budget, and we’ll match you with vetted local patio contractors. Whether you want a low-maintenance concrete patio, a warm and textured sandstone surface, or a fully customised layout, we connect you with an expert nearby ready to help.",
+        "Tell us about your project, size, style, and budget, and we’ll match you with vetted local patio contractors. Whether you want a low-maintenance concrete patio, a warm and textured sandstone surface, or a fully customised layout, we’ll connect you with an expert nearby ready to help.",
     },
     {
       id: 2,
@@ -1255,7 +1251,7 @@ const HowItWorksData = {
       image: accountant, // Consider renaming for clarity if needed
       heading1: "Hire your local contractor",
       description:
-        "When you’re ready, hire with confidence. Every local patio builder on our platform is vetted for quality, professionalism, and reliability. So you can move forward knowing your project is in safe hands.",
+        "When you’re ready, hire with confidence. Every local patio contractor on our platform is vetted for quality, professionalism, and reliability. So you can move forward knowing your project is in safe hands.",
     },
   ],
   "landscape-gardeners-near-me": [
@@ -1334,7 +1330,7 @@ const CONTENT_CONFIG = {
   },
   "patio-layers-near-me": {
     para1:
-      "At Localists, we make it simple to find trusted patio installers near me who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts",
+      "At Localists, we make it simple to find trusted patio layers who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts",
     para2:
       "Whether you’re picturing a modern porcelain patio, a classic sandstone patio, or a budget-friendly gravel patio, we’ll help you find the right patio contractors for the job. Compare fair, transparent quotes and choose a professional who shares your vision.",
     para3: "It’s free from start to finish !",
@@ -1400,17 +1396,18 @@ const CONTENT_CONFIG_TOP = {
   },
   "patio-layers-near-me": {
     findingHeading: "patio contractors",
-    title: "Patio Installers",
+    title: "Patio Layers",
     mainTitle: "Patio and Paving Service",
     ctaText: "Patio Contractor",
-    avgPriceTitle: "a patio",
+    avgPriceTitle: "patio contractor",
+    isSingular:true
   },
   "landscape-gardeners-near-me": {
     findingHeading: "landscape gardeners",
     title: "Landscape Gardeners",
     mainTitle: "Landscape Gardener",
     ctaText: "Landscape Gardener",
-    avgPriceTitle:'landscape gardener'
+    avgPriceTitle: "landscape gardener",
   },
   "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
@@ -1538,8 +1535,8 @@ Whether you're securing your home, upgrading your garden, or managing a large co
       text: "Fence and gate installation: network of qualified contractors wherever you are",
     },
     {
-      type:'p',
-      text:'Localists works with a wide network of professionals, covering every type of fence and gate installation. Whether you prefer to hire a trusted fencing company near you or independent fence builders, we’ll match you with the right local expert. Just tell us what you need - our system does the rest. No matter where you’re based in the UK, you’ll find qualified, nearby fencing contractors who can help with:'
+      type: "p",
+      text: "Localists works with a wide network of professionals, covering every type of fence and gate installation. Whether you prefer to hire a trusted fencing company near you or independent fence builders, we’ll match you with the right local expert. Just tell us what you need - our system does the rest. No matter where you’re based in the UK, you’ll find qualified, nearby fencing contractors who can help with:",
     },
     {
       type: "uili",
@@ -1730,7 +1727,11 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "p",
-      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you to the best specialists in your local area. The best part is, these builders know your area’s climate, understand planning requirements, and design trends, meaning your patio will be built to last. Here’s why hiring a patio installer near you makes sense:",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your local area. The best part is, the local patio layers we connect you with are local to your area. So you’re safe in the knowledge that the patio company you hire knows your area’s climate, understands local planning requirements, and understands the local design trends, local character and design - which can be insisted on by many local councils. A meaning your patio will be built to last.",
+    },
+    {
+      type: "p",
+      text: "Here’s why hiring a local patio contractor through Localists makes sense:",
     },
     {
       type: "li",
@@ -1739,6 +1740,11 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "li",
       heading: "Materials that suit your region’s weather conditions.",
+    },
+    {
+      type: "li",
+      heading:
+        "Designs that reflect and preserve the local character of your neighbourhood.",
     },
     {
       type: "li",
@@ -1754,7 +1760,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "li",
-      heading: "Quicker help if anything needs adjusting later",
+      heading: "Quicker help if anything needs adjusting later.",
     },
     {
       type: "h3",
@@ -1819,12 +1825,12 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "uili",
-      heading: "Gravel patio",
+      heading: "Gravel patio ",
       text: "– £40–£60 per m² (budget-friendly)",
     },
     {
       type: "uili",
-      heading: "Concrete patio",
+      heading: "Concrete patio ",
       text: "– £70–£90 per m²",
     },
     {
@@ -1834,7 +1840,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "uili",
-      heading: "Porcelain patio",
+      heading: "Porcelain patio ",
       text: " – £100–£140 per m² (premium, sleek look)",
     },
     {
@@ -1851,37 +1857,42 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "uili",
-      heading: "Experience and skill",
+      heading: "Experience and skill ",
       text: "– They should be confident in working with materials that you intend to use for your project, whether it's sandstone, gravel, or concrete, and have a portfolio to prove it.",
     },
     {
       type: "uili",
-      heading: "Trustworthiness",
+      heading: "Trustworthiness ",
       text: "– Someone who communicates clearly, turns up on time, and delivers what they promise. They should also be ready to provide a written contract and clear timelines.",
     },
     {
       type: "uili",
-      heading: "Knowledge",
-      text: "– They can provide expert advice on what works best for your garden, soil, climate & even any local regulations you need to adhere to.",
+      heading: "Knowledge ",
+      text: "– They can provide expert advice on what works best for your garden, soil, climate and even any local regulations you need to adhere to.",
     },
     {
       type: "uili",
+      heading: "Insurance and guarantees ",
+      text: "– This protects you if anything goes wrong.",
+    },
+    {
+      type: "uili ",
       heading: "Insurance and guarantees",
       text: "– This protects you if anything goes wrong.",
     },
     {
       type: "uili",
-      heading: "Good reputation",
+      heading: "Good reputation ",
       text: "– Positive feedback from previous clients speaks volumes. Ensure you look at testimonials from previous clients.",
     },
     {
       type: "uili",
-      heading: "Willingness to answer questions",
+      heading: "Willingness to answer questions ",
       text: "– A good contractor won’t rush you; they’ll take time to explain options, next steps and are happy to hold your hands throughout the project.",
     },
     {
       type: "p",
-      text: "Remember, all specialists here on Localists are verified and vetted, so you can skip the risky guesswork. We’ve already done the legwork - you just go ahead and choose a builder who feels right for your project.",
+      text: "Remember, all specialists here on Localists are vetted and verified, so you can skip the risky guesswork. We’ve already done the legwork - you just go ahead and choose a builder who feels right for your project.",
     },
   ],
 
