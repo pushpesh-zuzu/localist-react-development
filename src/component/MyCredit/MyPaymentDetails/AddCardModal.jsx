@@ -165,9 +165,6 @@ const AddCardModal = ({
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  const stripePromise = loadStripe(
-    "pk_live_51RvtSuGf1poUBxLKkKI9gWvqJZrMTQIpajKGLHwk8PwVEnvQEtzP4b0xXYG0teNs4Pq6oVhdOQluJBhN4vQovYlP00Xh1xZZbc"
-  );
   const options = {
     mode: "payment",
     amount: 1099,
