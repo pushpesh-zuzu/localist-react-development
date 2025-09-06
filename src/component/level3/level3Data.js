@@ -477,7 +477,7 @@ const REVIEWS_DATA = {
       date: "8 Feb 2025",
       image: ReviewsImage,
       description:
-        "The whole installation only took two days. The artificial grass and fitting specialists we found through Localist were tidy, polite, and very professional. They left us with a garden that looks perfect every day. Couldn’t recommend them enough. ",
+        "The whole installation only took two days. The artificial grass and fitting specialists we found through Localists were tidy, polite, and very professional. They left us with a garden that looks perfect every day. Couldn’t recommend them enough. ",
     },
   ],
 };
@@ -670,6 +670,12 @@ const AVERAGE_PRICE = {
       "Great Value": "£4500",
       Average: "£5900",
       Premium: "£9200",
+    },
+    {
+      Region: "North Midlands",
+      "Great Value": "£",
+      Average: "£",
+      Premium: "£",
     },
   ],
   "landscape-gardeners-near-me": [
@@ -937,7 +943,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "3",
       title: "Does a landscaped garden add value to your home?",
       description:
-        "Yes, a well-designed garden can increase property value by up to 20% in some cases, and it boosts curb appeal for potential buyers.",
+        "Yes, a well-designed garden can increase property value by up to 20% in some cases, and it boosts appeal for potential buyers.",
     },
     {
       key: "4",
@@ -1257,9 +1263,9 @@ const HowItWorksData = {
   "landscape-gardeners-near-me": [
     {
       id: 1,
-      title: "Start search for landscape gardeners",
+      title: "Start your search for landscape gardeners",
       image: WhatYouNeedIcon,
-      heading1: "Start search for landscape gardeners",
+      heading1: "Start your search for landscape gardeners",
       description:
         "Tell us about your garden landscaping project, whether you're looking for a full redesign, new planting schemes, or practical additions like patios or raised beds. We’ll match you with the right specialists in your area who have experience with projects like yours.",
     },
@@ -1277,7 +1283,7 @@ const HowItWorksData = {
       image: accountant,
       heading1: "Hire your local landscape gardener",
       description:
-        "When you find a builder or contractor  that fits your project requirements, you can go ahead and hire with confidence as all contractors here on Localists are vetted for quality and reliability.",
+        "When you find a builder or contractor that fits your project requirements, you can go ahead and hire with confidence as all contractors here on Localists are vetted for quality and reliability.",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -1337,9 +1343,9 @@ const CONTENT_CONFIG = {
   },
   "landscape-gardeners-near-me": {
     para1:
-      "Need a trusted landscape gardener nearby? Localists connects you with skilled local landscape gardeners who can transform your outdoor space into something special.",
+      "Is your outdoor space looking more like a wild jungle than a pristine garden? We’ll connect you with landscapers near you who can tame the weeds, sculpt the shrubs to make your garden the envy of the neighbourhood.",
     para2:
-      "From sleek, modern layouts to classic cottage-style gardens bursting with greenery, our vetted garden landscapers near you blend creativity with practical know-how. We will send you free quotes to compare, read reviews and proceed to hire.",
+      "Our local landscapers give you competitive quotes to ensure you get the garden of your dreams. From sleek, modern layouts to classic cottage-style gardens bursting with greenery, our vetted garden landscapers near you blend creativity with practical know-how. We will send you free quotes to compare, read reviews and proceed to hire.",
     para3: "Fast, Easy, and No-Obligation - Start Now!",
   },
   "artificial-grass-installers-near-me": {
@@ -1408,6 +1414,7 @@ const CONTENT_CONFIG_TOP = {
     mainTitle: "Landscape Gardener",
     ctaText: "Landscape Gardener",
     avgPriceTitle: "landscape gardener",
+    isSingular:true
   },
   "artificial-grass-installers-near-me": {
     findingHeading: "Artificial Grass Installation",
@@ -1899,54 +1906,54 @@ Whether you're securing your home, upgrading your garden, or managing a large co
   "landscape-gardeners-near-me": [
     {
       type: "h2",
-      text: "Benefits of hiring a professional landscape gardener near you",
+      text: "Benefits of hiring a professional landscape gardener",
     },
     {
       type: "p",
-      text: "Landscape gardening is more than just planting flowers. It’s the art and science of designing, creating, and maintaining outdoor spaces to make them functional, beautiful, and in harmony with their surroundings",
+      text: "Landscape gardening is more than just planting flowers. It’s the art and science of designing, creating, and maintaining outdoor spaces to make them functional, beautiful, and in harmony with their surroundings.",
     },
     {
       type: "p",
-      text: "While DIY can be rewarding, hiring an expert often saves time, money, and headaches in the long run. A professional landscape gardener near you will:",
+      text: "While DIY can be rewarding, hiring an expert often saves time, money, and headaches in the long run. A professional landscape gardener near you will help you with:",
     },
     {
       type: "uili",
-      heading: "Local expertise ",
-      text: "They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
+      heading: "Local expertise: ",
+      text: "Local expertise: They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
     },
     {
       type: "uili",
-      heading: "Smart, lasting design ",
-      text: "Bespoke layouts are tailored to your lifestyle – from low-maintenance gardens to family lawns or showpiece patios.",
+      heading: "Smart, lasting design: ",
+      text: "Smart, lasting design: Bespoke layouts and materials tailored to your lifestyle can ensure a long lasting garden, and the landscapers here at Localists can advise you on such.",
     },
     {
       type: "uili",
-      heading: "Access to quality materials ",
-      text: "Professionals source high-quality plants, stone, and timber at competitive prices through trusted suppliers.",
+      heading: "Access to quality materials: ",
+      text: "Access to quality materials: Professionals source high-quality plants, stone, and timber at competitive prices through trusted suppliers.",
     },
     {
       type: "uili",
-      heading: "Avoid costly mistakes ",
+      heading: "Avoid costly mistakes: ",
       text: "Proper drainage, soil preparation, and plant selection save you from expensive fixes later.",
     },
     {
       type: "uili",
-      heading: "Boost property value ",
-      text: "A professionally landscaped garden adds kerb appeal and increases your home’s market value.",
+      heading: "Boost property value: ",
+      text: "Landscaping can often boost your property value, and some landscapers may be able to give you pointers on the types of design that can help boost your properties value.",
     },
     {
       type: "uili",
-      heading: "Full-service installation ",
+      heading: "Full-service installation: ",
       text: "From patios, decking, and fencing to pathways and lighting, everything is built to complement your space.",
     },
     {
       type: "uili",
-      heading: "Seasonal care ",
+      heading: "Seasonal care: ",
       text: "Lawn care, hedge trimming, planting, and regular upkeep keep your garden looking its best year-round.",
     },
     {
       type: "uili",
-      heading: "Creative extras ",
+      heading: "Creative extras: ",
       text: "Water features, raised beds, and eco-friendly solutions (like sustainable planting) can transform your garden into a unique retreat.",
     },
     {
@@ -1972,10 +1979,6 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "li",
       heading: "Has genuine customer reviews you can read.",
-    },
-    {
-      type: "p",
-      text: "By working with local professionals, you’ll also benefit from faster site visits, better communication, and designs suited to your climate and community.",
     },
     {
       type: "h2",
@@ -2084,7 +2087,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "uili",
       heading: "Basic garden tidy-up and planting ",
-      text: "- From £800 to £1,500",
+      text: " - from £800 to £1,500",
     },
     {
       type: "uili",
@@ -2093,13 +2096,13 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "uili",
-      heading: "Medium-sized residential garden with more complex design ",
-      text: "- Between £6,000 and £10,000+ (includes decking, lighting, water features, raised beds)",
+      heading: "Medium-sized residential garden with more complex design (decking, lighting, water features, raised beds) ",
+      text: "- Between £6,000 and £10,000+",
     },
     {
       type: "uili",
       heading: "Commercial or large-scale landscaping projects ",
-      text: "- Typically £15,000 upwards, depending on size, design, and required features",
+      text: "- Typically £15,000 upwards, depending on size, design, and required features.",
     },
     {
       type: "p",

@@ -105,10 +105,10 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
           onClick={() => handleScrollToBottom()}
           className={styles.findAnAccountant_button}
         >
-          Get Quotes
+          Get Quotes Now
         </button>
       )}
-      <p className={styles.btntext}>From {title}s Near You</p>
+      {/* <p className={styles.btntext}>From {title}s Near You</p> */}
     </div>
   );
 };

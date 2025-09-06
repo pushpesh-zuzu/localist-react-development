@@ -31,7 +31,7 @@ const HowItWorks = ({ HowItWorksData = [] ,title }) => {
         className={styles.ctaButton}
       >
         {/* Get Quotes From {title}s Near You */}
-        Get Quote Now
+        Get Quotes Now
       </button>
     </div>
   );
