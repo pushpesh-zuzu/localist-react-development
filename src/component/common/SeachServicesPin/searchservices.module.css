@@ -9,7 +9,7 @@
   padding: 32px 33px 33.5px;
 }
 
-.innerformContainer h2 {
+.innerformContainer p {
   font-weight: 700;
   font-size: 22px;
   line-height: 37px;
@@ -22,7 +22,7 @@
   margin: auto;
   color: var(--primary-color);
 }
-.titleContainer .h2 {
+.titleContainer p {
   margin: auto;
 }
 .inputGroup {
@@ -123,7 +123,7 @@
     padding: 32px 33px 33.5px;
   }
 
-  .innerformContainer h2 {
+  .innerformContainer p {
     font-weight: 700;
     font-size: 18px;
     line-height: 30px;

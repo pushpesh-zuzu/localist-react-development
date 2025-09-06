@@ -228,6 +228,11 @@
     border-bottom: 2px solid #FFFFFF;
   }
 }
+@media (max-width: 768px) {
+  .leftSection h1 {
+    font-size: 38px;
+  }
+}
 
 @media (max-width: 620px) {
   .searchInputContainer {
@@ -251,7 +256,7 @@
 
   .leftSection h1 {
     font-weight: 700;
-    font-size: 35px;
+    font-size: 32px;
   }
 
   .leftSection p {
@@ -304,7 +309,6 @@
   }
    .leftSection h1 {
     font-weight: 700;
-    font-size: 42px;
     line-height: 50px;
   }
   .getStartedArrow {
@@ -377,7 +381,6 @@
   }
   .leftSection h1 {
     font-weight: 700;
-    font-size: 35px;
     line-height: 45px;
   }
   
@@ -412,7 +415,6 @@
   }
    .leftSection h1 {
     font-weight: 700;
-    font-size: 35px;
     line-height: 45px;
   }
   .searchResults {

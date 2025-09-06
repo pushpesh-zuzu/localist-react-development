@@ -131,7 +131,6 @@ const CloneAccountants = ({
     });
   };
 
-  
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -173,16 +172,18 @@ const CloneAccountants = ({
       <div className={styles.overlay}>
         <div className={styles.headingContainer}>
           <h1 style={{ color: "white" }}>
-  Looking For <span className={styles.blueText}>{header} </span>{" "}Professionals Near You?
+            Looking For <span className={styles.blueText}>{header} </span>{" "}
+            Professionals Near You?
           </h1>
         </div>
 
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
-            <h2>
-              Do you need trusted <span className={styles.blueText}> {title.toLowerCase()} </span>
+            <span>
+              Do you need trusted{" "}
+              <span className={styles.blueText}> {title.toLowerCase()} </span>
               professionals?
-            </h2>
+            </span>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>
                 <label>What service do you require?</label>

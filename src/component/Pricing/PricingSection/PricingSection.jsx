@@ -14,7 +14,6 @@ const PricingSection = () => {
         <p className={styles.text}>
           At Localists, there are no surprises. From the moment you sign up, you’ll start receiving{" "}
           <span className={styles.linkText}>leads for free</span>. You only pay when you choose to contact a customer that feels right for your business.
-          business
         </p>
         {/* <button className={styles.button} onClick={onSubmitPageChange}>Join as a Professional</button> */}
       </div>

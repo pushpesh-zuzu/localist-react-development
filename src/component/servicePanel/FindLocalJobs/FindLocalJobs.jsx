@@ -186,7 +186,7 @@ const FindLocalJobs = () => {
 
       {/* Right Section */}
       <div className={styles.rightSection}>
-        <h2>Popular services</h2>
+        <h2>Popular Services</h2>
         {popularLoader ? (
           <Spin
             indicator={<LoadingOutlined spin style={{ color: "primary" }} />}

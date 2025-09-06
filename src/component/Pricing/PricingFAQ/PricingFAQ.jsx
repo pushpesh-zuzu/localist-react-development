@@ -16,7 +16,7 @@ const faqData = [
   {
     question: "How long do my credits last?",
     answer:
-      "Your credits are valid up to 12 months from the date of purchase",
+      "Your credits are valid up to 12 months from the date of purchase.",
   },
   {
     question: "Will I be charged extra along the way?",
@@ -35,7 +35,7 @@ const PricingFAQ = () => {
   return (
     <div className={styles.faqWrapper}>
       <h2 className={styles.heading}>
-        Frequently Asked <span>Questions</span>
+        Frequently asked <span>questions</span>
       </h2>
       <div className={styles.faqList}>
         {faqData.map((item, index) => (

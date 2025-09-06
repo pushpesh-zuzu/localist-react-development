@@ -109,7 +109,7 @@ const SearchServicesPin = ({
     <>
       <div className={`${styles?.formContainer || ''} ${className}`}>
         <div className={styles?.innerformContainer || ''}>
-          <h2 className={styles.titleContainer}>{title}</h2>
+          <p className={styles.titleContainer}>{title}</p>
           <div className={styles?.inputGroup || ''}>
             <div className={styles?.inputBox || ''} ref={divRef}>
               <label>{serviceLabel}</label>

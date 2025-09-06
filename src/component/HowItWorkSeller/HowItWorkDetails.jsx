@@ -10,7 +10,7 @@ import plumber from "../../assets/Images/HowItWorks/plumber.jpg";
 const data = [
   {
     id: 1,
-    title: "Customers Come To Us with Their Need",
+    title: "Customers come to us with their need",
     paragraphs: [
       "At Localists, we make it easy for local professionals and businesses like you to win more work. Every day, we connect thousands of service providers from builders and gardeners to accountants and business consultants, with high-quality clients who are ready to hire.At Localists, we make it easy for local professionals and businesses like you to win more work. Every day, we connect thousands of service providers from builders and gardeners to accountants and business consultants, with high-quality clients who are ready to hire.",
       "When customers post a request, telling us exactly what they’re after and where they need it done. We match them with the right service provider in their area.",
@@ -20,7 +20,7 @@ const data = [
   },
   {
     id: 2,
-    title: "We Match Them With You",
+    title: "We match them with you",
     paragraphs: [
       `When a request matches your services, customers can see your profile and reach out directly. You’ll also get the lead straight to your inbox, so you never miss a chance.`,
       `You only pay a small fee for each introduction, and in return, you’ll get the customer contact details (phone number and email), so you can make contact or provide a quote right away.`,
@@ -29,7 +29,7 @@ const data = [
   },
   {
     id: 3,
-    title: "You Win the Work and Grow Your Business",
+    title: "You win the work and grow your business",
     paragraphs: [
       "We make it simple for you to win new work without the stress of marketing. We bring the opportunities to you - fresh, relevant, and local. The quicker you respond, the more work you’ll win. And we’ll be right here with support if you ever need it.",
     ],
@@ -37,7 +37,7 @@ const data = [
   },
   {
     id: 4,
-    title: "Why Professionals Love Localists?",
+    title: "Why professionals love localists?",
     paragraphs: ["When you join Localists as a seller you’ll get:"],
     list: [
       "High visibility profile that shows off your work and builds your reputation.",

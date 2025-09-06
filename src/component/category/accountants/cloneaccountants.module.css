@@ -49,7 +49,7 @@
   padding: 44px 33px 46px 33px;
 }
 
-.innerformContainer h2 {
+.innerformContainer span {
   font-weight: 700;
   font-size: 22px;
   line-height: 37px;
@@ -216,7 +216,7 @@
     padding: 20px 10px;
   }
 
-  .formContainer h2 {
+  .formContainer span {
     font-size: 18px;
     line-height: normal;
   }

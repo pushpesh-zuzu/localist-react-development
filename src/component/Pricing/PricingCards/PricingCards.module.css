@@ -118,7 +118,7 @@
   vertical-align: middle;
 }
 
-.textSection a {
+.textSection span {
   color: var(--primary-color);
   font-weight: 700;
   text-decoration: none;

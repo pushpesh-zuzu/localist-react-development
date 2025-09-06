@@ -14,19 +14,19 @@ const cardData = [
     image: creditsAtTheReady,
   },
   {
-    title: " You have Total Control",
+    title: "You have total control",
     description:
       "When we send you leads, you decide which leads are worth it. Every lead shows its cost in credits upfront, so you know exactly what you’re spending.",
     image: youareincontrol,
   },
   {
-    title: "Transparent Pricing",
+    title: "Transparent pricing",
     description:
       "The credit cost of a lead depends on the service, the size of the job, and demand in your area, keeping things fair and flexible.",
     image: jobrelatedprice,
   },
   {
-    title: "Our Pricing Promise",
+    title: "Our pricing promise",
     description:
       "We’re so confident you’ll win business with your first credit pack, we’ll return all your credits if you don’t. No questions asked.",
     image: newbusiness,
@@ -63,7 +63,7 @@ const PricingCards = () => {
                 {card.linkText && (
                   <>
                     {" "}
-                    <a href="#">{card.linkText}</a>
+                    <span href="#">{card.linkText}</span>
                   </>
                 )}
               </p>
