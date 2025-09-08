@@ -1413,7 +1413,6 @@ const CONTENT_CONFIG_TOP = {
     mainTitle: "driveway installers",
     ctaText: "Driveway Installer",
     avgPriceTitle: "driveway installers",
-    monthlyText: true,
   },
   "patio-layers-near-me": {
     findingHeading: "patio contractors",
@@ -1518,7 +1517,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: `When it comes to finding trusted local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
+      text: `When it comes to finding trusted, local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
     },
     {
       type: "p",
