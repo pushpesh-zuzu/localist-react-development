@@ -1775,7 +1775,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your local area. The best part is, the local patio layers we connect you with are local to your area. So you’re safe in the knowledge that the patio company you hire knows your area’s climate, understands local planning requirements, and understands the local design trends, local character and design - which can be insisted on by many local councils. A meaning your patio will be built to last.Here’s why hiring a local patio contractor through Localists makes sense:",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your local area. The best part is, the local patio layers we connect you with are local to your area. So you’re safe in the knowledge that the patio company you hire knows your area’s climate, understands local planning requirements, and understands the local design trends, local character and design - which can be insisted on by many local councils. A meaning your patio will be built to last. Here’s why hiring a local patio contractor through Localists makes sense:",
     },
     {
       type: "li",

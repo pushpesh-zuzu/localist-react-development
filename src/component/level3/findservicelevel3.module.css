@@ -1,7 +1,7 @@
 .findAnAccountant_container {
   width: -webkit-fill-available;
   text-align: center;
-  padding: 27px 88px;
+  padding: 12px 88px;
   background-color: #f9fdff;
 }
 .tableWrapper {
@@ -158,7 +158,7 @@
 
 @media (max-width: 1280px) {
   .findAnAccountant_container {
-    padding: 27px 41px;
+    padding: 12px 41px;
   }
 }
 
@@ -173,7 +173,7 @@
     font-size: 16px;
   }
   .findAnAccountant_container {
-    padding: 20px 20px;
+    padding: 12px 20px;
   }
   .btntext {
     font-size: 32px;
@@ -238,7 +238,7 @@
 
 @media (max-width: 520px) {
   .findAnAccountant_container {
-    padding: 15px 20px;
+    padding: 12px 20px;
   }
   .btntext {
     font-size: 28px;
