@@ -172,7 +172,9 @@ const MatchingLeadsFilter = ({ onClose }) => {
 
     const selectedServiceIds = filters.selectedServices
       .map((serviceName) => {
-        const match = popularList.find((s) => s.name === serviceName);
+        const match = filterListData?.[0]?.services.find(
+          (s) => s.name === serviceName
+        );
         return match?.id;
       })
       .filter(Boolean);
