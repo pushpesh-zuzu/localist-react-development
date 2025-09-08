@@ -712,7 +712,7 @@ const AVERAGE_PRICE = {
       Premium: "£3850",
     },
     {
-      Region: "North Wesr",
+      Region: "North West",
       "Great Value": "£1000",
       Average: "£1600",
       Premium: "£3200",
@@ -758,52 +758,52 @@ const FREQUENTLY_DATA = {
 Choosing the right fencing or gate professional isn’t just about price - it’s about ensuring they’re properly qualified, experienced, and capable of delivering a safe, high-quality job that lasts. Here’s what to look for: 
 </p>
 
-        <ul>
+        <ul style="margin:0px; padding-left:18px; margin-top:12px">
   <li><strong>Relevant qualifications & certifications</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   For fencing, look for professionals with a Level 2 Diploma in Fencing (NVQ) or a 
   FISS/CSCS card (Fencing Industry Skills Scheme/Construction Skills Certification Scheme). 
   For gate installation, check for qualifications like the NVQ in Specialist Installation Occupations – 
   Door, Gate and Shutter Systems, as well as accreditations such as BFT approval or Gate Safe training.
 </p>
 
-<ul>
+<ul style="margin:0px; padding-left:18px">
   <li><strong>Proven track record</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   Asking to see examples of past work of previous fence and gate installations can give you a clear sense of their workmanship, style, and attention to detail.
 </p>
 
-<ul>
+<ul style="margin:0px; padding-left:18px">
   <li><strong>Reviews & reputation</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   Browse through verified customer reviews, testimonials, or ratings to get a sense of how reliable and professional they are.
 </p>
 
-<ul>
+<ul style="margin:0px; padding-left:18px">
   <li><strong>Transparent quotes & timelines</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   A trustworthy professional will give you a clear, itemised quote and realistic timeframes, so there are no surprises along the way.
 </p>
 
-<ul>
+<ul style="margin:0px; padding-left:18px">
   <li><strong>Proper licensing & insurance</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   Make sure they’re fully insured and compliant with local regulations. This is especially important for automated gate systems.
 </p>
 
-<ul>
+<ul style="margin:0px; padding-left:18px">
   <li><strong>Written agreements</strong></li>
 </ul>
-<p>
+<p style="margin:0px; padding-left:18px">
   Always request a formal contract or service agreement that outlines scope, timelines, cost, and warranty (if available).
 </p>
 
-<p>Don’t worry about doing all the research yourself. Localists takes the guesswork out of it. Just tell us what you need, and we’ll match you with vetted, qualified fencing contractors near you, so you can hire with confidence. </p>
+<p >Don’t worry about doing all the research yourself. Localists takes the guesswork out of it. Just tell us what you need, and we’ll match you with vetted, qualified fencing contractors near you, so you can hire with confidence. </p>
         `,
     },
     {
@@ -1325,7 +1325,7 @@ const HowItWorksData = {
       image: accountant,
       heading1: "Hire a specialist installer in your local area",
       description:
-        "Once you’ve compared options, choose the installer that best suits your style, budget, and timeline. And away you go! Your lush green project is just a few clicks away, ready to",
+        "Once you’ve compared options, choose the installer that best suits your style, budget, and timeline. And away you go! Your lush green project is just a few clicks away.",
     },
   ],
 };
@@ -1343,7 +1343,7 @@ const CONTENT_CONFIG = {
 
   "driveway-installers-near-me": {
     para1:
-      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or pavered driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust",
+      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or pavered driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust.",
     para2:
       "From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
     para3: "No fees, no catch, just expert help at no cost!",
@@ -1512,8 +1512,8 @@ const FIND_SERVICE_CONTENT = {
       text: "You can find any type of specialist you need to cover everything from : residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
     },
     {
-      type: "h3",
-      text: "Why hire fencing contractors through Localists?",
+      type: "h2",
+      text: "Why hire fencing contractors through Localists.",
     },
     {
       type: "p",
@@ -1524,13 +1524,14 @@ const FIND_SERVICE_CONTENT = {
       text: "Whether you're securing your home, upgrading your garden, or managing a large commercial project, we make it simple to find the right expert for the job. All professionals we recommend are checked, approved, and reviewed, so you can hire with complete peace of mind. ",
     },
     {
-      type: "pbold",
+      type: "p",
       text: "When you hire from Localists you get:",
     },
     {
       type: "uili",
       heading: "Reliable local experts:\u00A0",
       text: "We match you with local fencing contractors who are familiar with your region. That means better communication, faster service, and local insight you can rely on.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1570,6 +1571,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Wooden fence & gate Installation:\u00A0",
       text: "A classic, traditional option that adds charm and privacy.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1619,7 +1621,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why hire driveway contractors through Localists?",
+      text: "Why hire driveway contractors through Localists",
     },
     {
       type: "p",
@@ -1633,6 +1635,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Streamlined hiring process:\u00A0",
       text: "No endless searching or unanswered calls. Tell us what you need, and we’ll instantly match you with experienced people who specialise in your preferred surface. Be it resin bound, gravel, tarmac, block paving, or concrete. You call the shots.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1656,7 +1659,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "What to look for in a driveway installation professional?",
+      text: "What to look for in a driveway installation professional",
     },
     {
       type: "p",
@@ -1748,6 +1751,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Get at least three quotes –\u00A0",
       text: "Prices can vary more than you think. Having a few quotes to compare gives you a better sense of what’s fair and helps you spot anyone who’s too high or suspiciously low.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1780,6 +1784,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading: "Faster site visits and easier communication.",
+      marginTop: "12px",
     },
     {
       type: "li",
@@ -1817,6 +1822,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "libold",
       heading: "Can I see reviews or testimonials from recent clients?",
+      marginTop: "12px",
     },
     {
       type: "libold",
@@ -1871,6 +1877,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Gravel patio ",
       text: "– £40–£60 per m² (budget-friendly)",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1903,6 +1910,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Experience and skill ",
       text: "– They should be confident in working with materials that you intend to use for your project, whether it's sandstone, gravel, or concrete, and have a portfolio to prove it.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -1957,6 +1965,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Local expertise: ",
       text: " They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -2004,6 +2013,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading: "Has local experience and a proven track record.",
+      marginTop: "12px",
     },
     {
       type: "li",
@@ -2035,7 +2045,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Whether you're doing a full garden makeover or just sprucing up sections of your outdoor space, the right landscape gardener can turn ideas into reality.Here's a rundown of what landscape architect or landscape garden designers commonly offer:",
+      text: "Whether you're doing a full garden makeover or just sprucing up sections of your outdoor space, the right landscape gardener can turn ideas into reality. Here's a rundown of what landscape architect or landscape garden designers commonly offer:",
     },
     {
       type: "h3",
@@ -2116,12 +2126,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "However, on average in the UK, here’s what you can expect to spend:",
-      className: "marginTop"
+      className: "marginTop",
     },
     {
       type: "uili",
       heading: "Basic garden tidy-up and planting ",
       text: " - from £800 to £1,500",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -2155,13 +2166,14 @@ const FIND_SERVICE_CONTENT = {
       text: "At Localists, hundreds of people use our platform every single day to find trusted artificial grass installers and not just for homes. Whether it’s a back garden, a school playground, a commercial outdoor space, or even an event setup, we make it simple to connect with the right experts for the job.",
     },
     {
-      type: "pbold",
+      type: "p",
       text: "Here’s why so many trust us to find the best artificial grass installers:",
     },
     {
       type: "uili",
       heading: "Trusted and vetted professionals\u00A0",
       text: "– Every installer on Localists is carefully screened for skill, reliability, and customer satisfaction, so you only connect with genuine experts.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -2195,6 +2207,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Ground preparation\u00A0",
       text: "– It starts with groundworks. Existing grass, weeds, or soil are removed to create a clean, stable foundation. Installers may dig down and level the area, making sure it’s firm and free from obstacles, so your new lawn sits perfectly flat.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -2225,13 +2238,14 @@ const FIND_SERVICE_CONTENT = {
       text: "While DIY installation is possible, getting the base and drainage right can be challenging. That’s why most people choose to hire professionals for the job. But how do you choose the right expert? Asking plenty of questions can help you get closer to picking the perfect artificial grass installer.",
     },
     {
-      type: "pbold",
+      type: "p",
       text: "When comparing installers, it’s worth looking beyond just price. Consider asking:",
     },
     {
       type: "li",
       heading:
         "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
+      marginTop: "12px",
     },
     {
       type: "li",
@@ -2265,13 +2279,14 @@ const FIND_SERVICE_CONTENT = {
       text: "With Localists, you can get free quotes instantly and compare prices from vetted artificial lawn installers near you, ensuring you find the right fit for your budget and project.",
     },
     {
-      type: "pbold",
+      type: "p",
       text: "As a guide:",
     },
     {
       type: "uili",
       heading: "Budget installation\u00A0",
       text: "– From £60–£75 per m², including fitting. Best for smaller areas or temporary use.",
+      marginTop: "12px",
     },
     {
       type: "uili",
@@ -2299,6 +2314,7 @@ const FIND_SERVICE_CONTENT = {
       type: "li",
       heading:
         "Listed buildings or conservation areas – If your property is in a protected area, there may be restrictions on changes to your garden.",
+      marginTop: "12px",
     },
     {
       type: "li",

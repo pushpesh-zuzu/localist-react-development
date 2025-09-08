@@ -38,7 +38,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "uili") {
               return (
-                <ul style={{marginTop:'4px', marginBottom:'0px'}}>
+                <ul style={{marginTop:'4px', marginBottom:'0px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     <b> {block.heading}</b>
                     {block.text}
@@ -48,7 +48,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "li") {
               return (
-                <ul style={{margin:'2px'}}>
+                <ul style={{margin:'2px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     {" "}
                     {block.heading}
@@ -58,7 +58,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "libold") {
               return (
-                <ul style={{margin:'4px'}}>
+                <ul style={{margin:'4px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     {" "}
                     <b>{block.heading}</b>
