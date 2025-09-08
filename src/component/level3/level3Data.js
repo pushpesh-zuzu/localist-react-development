@@ -472,7 +472,7 @@ const REVIEWS_DATA = {
     },
     {
       id: 3,
-      name: "Georgina P. ",
+      name: "Georgina P.",
       title: "Glasgow",
       date: "8 Feb 2025",
       image: ReviewsImage,
@@ -758,7 +758,7 @@ const FREQUENTLY_DATA = {
 Choosing the right fencing or gate professional isn’t just about price - it’s about ensuring they’re properly qualified, experienced, and capable of delivering a safe, high-quality job that lasts. Here’s what to look for: 
 </p>
 
-        <ul style="margin:0px; padding-left:18px; margin-top:12px; margin-left:30px">
+        <ul style="margin:0px; padding-left:18px; margin-top:8px; margin-left:30px">
   <li><strong>Relevant qualifications & certifications</strong></li>
 </ul>
 <p style="margin:0px; padding-left:18px; margin-left:30px">
@@ -820,7 +820,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       description: `
        Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price.You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown. 
   <br/>
-  <p style="margin-top:12px;">
+  <p style="margin-top:8px;">
     As a general rule, the larger the driveway, the lower the cost per square metre — so it’s worth asking for quotes based on your exact dimensions. A typical full installation might cost around £4,500 across the UK and £4,800 in London.
   </p>
 
