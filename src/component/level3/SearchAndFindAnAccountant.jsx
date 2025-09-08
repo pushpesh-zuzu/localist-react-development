@@ -10,6 +10,7 @@ const SearchAndFindAnAccountant = ({
   para1,
   para2,
   para3,
+  para4,
   defaultService,
   isNeedS = false,
 }) => {
@@ -38,6 +39,7 @@ const SearchAndFindAnAccountant = ({
           para1={para1}
           para2={para2}
           para3={para3}
+          para4={para4}
           isNeedS={isNeedS}
         />
       </div>

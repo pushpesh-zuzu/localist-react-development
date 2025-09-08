@@ -361,7 +361,7 @@ const REVIEWS_DATA = {
       date: "15 Mar 2025",
       image: ReviewsImage,
       description:
-        "Excellent service from start to finish. Localists helped me compare a few different installers, and I found someone local who did an amazing job on my driveway fencing. Polite, skilled, and no mess left behind",
+        "Excellent service from start to finish. Localists helped me compare a few different installers, and I found someone local who did an amazing job on my driveway fencing. Polite, skilled, and no mess left behind.",
     },
   ],
   "driveway-installers-near-me": [
@@ -1333,10 +1333,14 @@ const HowItWorksData = {
 const CONTENT_CONFIG = {
   "fencing-contractors-near-me": {
     para1:
-      "Looking to upgrade your property with a secure fence or gate? With Localists, you’re instantly matched with trusted fencing contractors near you - no combing through an endless list.",
+      "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylish fence to your own little castle? Get matched instantly with trusted fencing contractors near you who can build boundaries the right way.",
     para2:
-      "Whether you're planning a new build, replacing an old fence, securing a commercial space or adding an automatic gate, we’ll connect you with the best fencing company and fence builders near you for your needs. From start to finish, we make the process simple. Just tell us what you need, and we’ll connect you with the best hands.",
+      "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project.. So no more shopping around for the best quote, we bring the quotes to you!",
+    para3: `Whether you're planning a new build, replacing an old fence, securing a commercial space or adding an automatic gate, we’ll connect you with the best fencing companies near you. From start to finish, we make the process simple. Just tell us what you need, and we’ll connect you with the best hands.`,
+    para4:
+      "Professional fence installers - qualified, reviewed, and ready to go!",
   },
+
   "driveway-installers-near-me": {
     para1:
       "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or pavered driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust",
@@ -1467,7 +1471,7 @@ const CONTENT_CONFIG_META = {
     title: "Fencing Companies & Fencing Contractors Near Me | Localists",
     name: "description",
     content:
-      "Searching for secure fence and gate installation experts near you? Get matched instantly with fencing companies  in your area on Localists using free quotes.",
+      "Searching for secure fence and gate installation experts near you? Get matched instantly with fencing companies  in your area on localists using free quotes.",
   },
   "driveway-installers-near-me": {
     title: "Find Driveway Companies & Driveway Contractors Near Me - Localists",
@@ -1502,8 +1506,11 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: `From residential gardens to commercial properties, we match you with local and trusted fencing companies. Just give us a few details and we’ll do the legwork. 
-You can find any type of specialist you need to cover everything from : residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.`,
+      text: `From residential gardens to commercial properties, we match you with local and trusted fencing companies. Just give us a few details and we’ll do the legwork.`,
+    },
+    {
+      type: "p",
+      text: "You can find any type of specialist you need to cover everything from : residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
     },
     {
       type: "h3",
@@ -1511,8 +1518,11 @@ You can find any type of specialist you need to cover everything from : resident
     },
     {
       type: "p",
-      text: `When it comes to finding trusted, local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.
-Whether you're securing your home, upgrading your garden, or managing a large commercial project, we make it simple to find the right expert for the job. All professionals we recommend are checked, approved, and reviewed, so you can hire with complete peace of mind.`,
+      text: `When it comes to finding trusted local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
+    },
+    {
+      type: "p",
+      text: "Whether you're securing your home, upgrading your garden, or managing a large commercial project, we make it simple to find the right expert for the job. All professionals we recommend are checked, approved, and reviewed, so you can hire with complete peace of mind. ",
     },
     {
       type: "pbold",
@@ -1541,7 +1551,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "uili",
       heading: "Design flexibility:\u00A0",
-      text: `Have something specific in mind? Whether you're after inspiration or already know exactly what you want, the right fence and gate installation specialist, is just a few clicks away`,
+      text: ` Have something specific in mind? Whether you're after inspiration or already know exactly what you want, the right fence and gate installation specialist is just a few clicks away.`,
     },
     {
       type: "uili",
@@ -1550,8 +1560,8 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
 
     {
-      type: "h3",
-      text: "Fence and gate installation: network of qualified contractors wherever you are",
+      type: "h2",
+      text: "A Network of qualified professionals that can cover any type of fence installation",
     },
     {
       type: "p",
