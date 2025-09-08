@@ -679,9 +679,9 @@ const AVERAGE_PRICE = {
     },
     {
       Region: "North West",
-      "Great Value": "",
-      Average: "",
-      Premium: "",
+      "Great Value": "£3800",
+      Average: "£4200",
+      Premium: "£8500",
     },
   ],
   "landscape-gardeners-near-me": [
