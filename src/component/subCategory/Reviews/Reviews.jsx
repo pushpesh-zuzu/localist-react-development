@@ -97,10 +97,10 @@ const Reviews = ({ RELATED_REVIEW }) => {
                   <p className={styles.reviews_description}>
                     {reviews?.description}
                   </p>
-                  <img
+                  {/* <img
                     src={reviews?.image}
                     className={styles.reviews_image_wrap}
-                  />
+                  /> */}
                   <h4 className={styles.reviews_name_content}>
                     <b>{reviews?.name} </b> {reviews?.title}
                   </h4>

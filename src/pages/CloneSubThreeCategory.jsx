@@ -147,7 +147,7 @@ const LevelThreePage = ({}) => {
         blueTitle="Other services "
       />
       {/* no need to change only data change*/}
-      {/* <Reviews RELATED_REVIEW={RELATED_REVIEW} /> */}
+      <Reviews RELATED_REVIEW={RELATED_REVIEW} />
       {/* no need to change only data change*/}
 
       {/* <Slider sliderdata={RELATED_SEERVICE} title={"Related Service Guides"} /> */}

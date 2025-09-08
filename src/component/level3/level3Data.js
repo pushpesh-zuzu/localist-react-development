@@ -712,10 +712,10 @@ const AVERAGE_PRICE = {
       Premium: "£3850",
     },
     {
-      Region: "NORTH WEST",
-      "Great Value": "",
-      Average: "",
-      Premium: "",
+      Region: "North Wesr",
+      "Great Value": "£1000",
+      Average: "£1600",
+      Premium: "£3200",
     },
   ],
 };
@@ -1438,7 +1438,7 @@ const CONTENT_CONFIG_TOP = {
     ctaText: "Artificial Installer",
     avgPriceTitle: "artificial grass installation",
     showSpeicialits: true,
-    monthlyText: true,
+    // monthlyText: true,
   },
 };
 
