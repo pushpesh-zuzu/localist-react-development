@@ -1,15 +1,15 @@
 import styles from "./averageprice.module.css";
 
-const AveragePriceTable = ({ AVERAGE_PRICE_LEVELTHREE }) => {
+const AveragePriceTable = ({ AVERAGE_PRICE_LEVELTHREE, monthlyText =false }) => {
   return (
     <div className={styles.tableContainer}>
       <table className={styles.table}>
         <thead>
           <tr className={styles.tr}>
             <th className={styles.th}>Service Area</th>
-            <th className={styles.th}>Budget Value</th>
-            <th className={styles.th}>Standard Rate</th>
-            <th className={styles.th}>Premium Rate</th>
+            <th className={styles.th}>Budget Value {monthlyText && <><br /> (per month)</>}</th>
+            <th className={styles.th}>Standard Rate {monthlyText && <><br /> (per month)</>}</th>
+            <th className={styles.th}>Premium Rate {monthlyText && <><br /> (per month)</>}</th>
           </tr>
         </thead>
         <tbody>

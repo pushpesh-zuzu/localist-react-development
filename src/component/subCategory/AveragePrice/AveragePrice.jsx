@@ -7,7 +7,8 @@ const AveragePrice = ({
   avg_price ,
   RELTED_PRICE,
   showSpeicialits=false,
-  isSingular=false
+  isSingular=false,
+  monthlyText
 }) => {
   function capitalizeEachWord(str) {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -15,11 +16,11 @@ const AveragePrice = ({
   return (
     <div className={styles.averagePriceContainer}>
       <h2 className={styles.heading}>
-        Average cost of hiring {isSingular?'a':''} <span className={styles.title}>{title}</span> is {avg_price && <span>{avg_price}</span> }{" "}{showSpeicialits && 'specialists'} by region
+        Average cost of hiring {isSingular?'a':''} <span className={styles.title}>{title}</span> {avg_price && <span>{avg_price}</span> }{" "}{showSpeicialits && 'specialists'} by region
         <span></span>
       </h2>
 
-      <AveragePriceTable AVERAGE_PRICE_LEVELTHREE={RELTED_PRICE} />
+      <AveragePriceTable monthlyText={monthlyText} AVERAGE_PRICE_LEVELTHREE={RELTED_PRICE} />
     </div>
   );
 };

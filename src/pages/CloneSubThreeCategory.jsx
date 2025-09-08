@@ -138,6 +138,7 @@ const LevelThreePage = ({}) => {
         avg_price={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}
         showSpeicialits={CONTENT_CONFIG_TOP[slug]?.showSpeicialits}
         isSingular={CONTENT_CONFIG_TOP[slug]?.isSingular}
+        monthlyText={CONTENT_CONFIG_TOP[slug]?.monthlyText}
       />
       <Slider
         sliderdata={RELATED_OTHER}
