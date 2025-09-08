@@ -45,11 +45,19 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
             )}
             expandIconPosition="end"
             className={styles.subcategory_collapse}
-            collapsible={isNorthWestEngland ? "disabled" : undefined}
+            activeKey={allPanelKeys.filter(
+              (key) => key !== "north-west-england" // prevent this from opening
+            )}
+            onChange={(keys) => {
+              // prevent "North West England" panel from opening
+              const filteredKeys = keys.filter(
+                (key) => key !== "north-west-england"
+              );
+            }}
           >
             <Panel
               className={`${styles.categoryTitle} ${
-                isNorthWestEngland ? styles.disabledPanel : ""
+                isNorthWestEngland ? styles.nonInteractive : ""
               }`}
               header={heading ? "" : categoryName}
               key={category?.key}

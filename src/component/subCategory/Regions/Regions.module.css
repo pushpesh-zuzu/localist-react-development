@@ -14,6 +14,11 @@
   color: inherit !important; /* Keeps original text color */
   cursor: pointer !important; /* Shows pointer cursor */
 }
+.nonInteractive {
+  pointer-events: none;
+  cursor: default !important;
+  background-color: inherit; /* optional: avoid hover effects */
+}
 .subcategory_collapse {
   margin-bottom: 50px;
   background-color: transparent;

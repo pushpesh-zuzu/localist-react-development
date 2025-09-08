@@ -7,7 +7,7 @@ const AveragePriceTable = ({ AVERAGE_PRICE_LEVELTHREE, monthlyText =false }) => 
         <thead>
           <tr className={styles.tr}>
             <th className={styles.th}>Service Area</th>
-            <th className={styles.th}>Budget Value {monthlyText && <><br /> (per month)</>}</th>
+            <th className={styles.th}>Budget Rate {monthlyText && <><br /> (per month)</>}</th>
             <th className={styles.th}>Standard Rate {monthlyText && <><br /> (per month)</>}</th>
             <th className={styles.th}>Premium Rate {monthlyText && <><br /> (per month)</>}</th>
           </tr>
