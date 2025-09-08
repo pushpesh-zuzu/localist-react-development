@@ -1513,7 +1513,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why hire fencing contractors through Localists.",
+      text: "Why hire fencing contractors through Localists",
     },
     {
       type: "p",
@@ -1776,7 +1776,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why choose patio contractors at Localists?",
+      text: "Why choose patio contractors at Localists",
     },
     {
       type: "p",
@@ -2005,7 +2005,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why hire a landscape architect or gardener on Localists?",
+      text: "Why hire a landscape architect or gardener on Localists",
     },
     {
       type: "p",
