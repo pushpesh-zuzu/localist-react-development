@@ -7,19 +7,24 @@ const AccountFindingInfoLevel3 = ({
   para1,
   para2,
   para3,
-  isNeedS=false
+  para4,
+  isNeedS = false,
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
       {/* <p className={styles.breadcrumb}> */}
       {/* {service && <span> {breadcrumb}</span>} */}
-      <Breadcrumb
-        breadcrumb={breadcrumb}
-      />
+      <Breadcrumb breadcrumb={breadcrumb} />
       {/* </p> */}
       <div className={styles.infoContainer}>
         <h2 className={styles.title}>
-              Vetted <span className={styles.highlight}> {findingHeading}{isNeedS ? "s" : ""} </span> you can trust
+          Vetted{" "}
+          <span className={styles.highlight}>
+            {" "}
+            {findingHeading}
+            {isNeedS ? "s" : ""}{" "}
+          </span>{" "}
+          you can trust
         </h2>
 
         <div className={styles.descriptionContainer}>
@@ -37,6 +42,7 @@ const AccountFindingInfoLevel3 = ({
             {para2}
           </p>
           <p>{para3}</p>
+          <p>{para4}</p>
         </div>
         {/* <button className={styles.accountantBtn}>Find an {title} today</button> */}
       </div>
