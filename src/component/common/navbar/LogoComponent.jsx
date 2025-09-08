@@ -46,9 +46,9 @@ const LogoComponent = () => {
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = megaMenu?.length || 0;
-    const { lang, country } = useParams(); 
-    const currentLang = lang || "en";
-    const currentCountry = country || "gb";
+  const { lang, country } = useParams();
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
   const [isMobile, setIsMobile] = useState(false);
 
   function getRouteForCategory(categoryName) {
@@ -123,14 +123,14 @@ const LogoComponent = () => {
   const getRedirectPath = () => {
     const status = registerData?.active_status || userToken?.active_status;
 
-  if (status == 1) {
-    return "/sellers/leads";
-  } else if (status == 2) {
-    return "/";
-  } else {
-    return "/";
-  }
-};
+    if (status == 1) {
+      return "";
+    } else if (status == 2) {
+      return "/";
+    } else {
+      return "/";
+    }
+  };
   const [placement, setPlacement] = useState("bottomLeft");
 
   useEffect(() => {
@@ -150,39 +150,39 @@ const LogoComponent = () => {
     };
   }, []);
   const handleClose = () => {
-  setShowSubMenu(false);
-  setMouseHover(false);
-  setShowbMenu(false);
-  setShowThirdLevel(false);
-  setSelectedSubcategory(null);
-  setFilterItems("");
-  setFilteRoute("");
-  setSlectedThirdLevelRoute("");
-};
-useEffect(() => {
-  let lastScrollY = window.scrollY;
-  
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-    
-    if (currentScrollY > 200 || Math.abs(currentScrollY - lastScrollY) > 50) {
-      handleClose();
-    }
-    
-    lastScrollY = currentScrollY;
+    setShowSubMenu(false);
+    setMouseHover(false);
+    setShowbMenu(false);
+    setShowThirdLevel(false);
+    setSelectedSubcategory(null);
+    setFilterItems("");
+    setFilteRoute("");
+    setSlectedThirdLevelRoute("");
   };
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, []);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-useEffect(() => {
-  handleClose();
-}, [location.pathname]);
-  
+      if (currentScrollY > 200 || Math.abs(currentScrollY - lastScrollY) > 50) {
+        handleClose();
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    handleClose();
+  }, [location.pathname]);
+
   const content = () => {
     return (
       <div
@@ -233,7 +233,11 @@ useEffect(() => {
                           onClick={() => {
                             handleClose();
                           }}
-                            to={item.path ? `/${currentLang}/${currentCountry}/${item.path}` : "#"}
+                          to={
+                            item.path
+                              ? `/${currentLang}/${currentCountry}/${item.path}`
+                              : "#"
+                          }
                         >
                           {item.name}
                         </Link>
@@ -352,7 +356,6 @@ useEffect(() => {
                     </div>
                   ))}
               </motion.div>
-              
             ) : (
               // <motion.div
               //   key="thirdLevel"
@@ -401,14 +404,14 @@ useEffect(() => {
               //       </div>
               //     ))}
               // </motion.div>
-              ''
+              ""
             )}
           </AnimatePresence>
         </div>
       </div>
     );
   };
-const redirectPath = getRedirectPath();
+  const redirectPath = getRedirectPath();
   return (
     <div className={styles.logoContainer}>
       <Link to={redirectPath}>

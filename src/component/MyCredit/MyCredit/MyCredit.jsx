@@ -295,7 +295,7 @@ const MyCredits = () => {
 
         <div className={styles.cardList}>
           {creditPlanList?.length === 0 ? (
-            <div className={styles.noPlanText}> {"No Plan Available"} </div>
+            <div className={styles.noPlanText}> {""} </div>
           ) : (
             creditPlanList?.map((item, index) => (
               <div className={styles.card} key={index}>

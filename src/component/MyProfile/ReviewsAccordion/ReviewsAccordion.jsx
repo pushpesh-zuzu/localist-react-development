@@ -84,7 +84,7 @@ const ReviewsAccordion = ({ details }) => {
         </p>
       </div> */}
 
-      <h3 className={styles.sectionTitle}>Collect More Reviews</h3>
+      <p className={styles.sectionTitle}>Collect More Reviews</p>
 
       {/* <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>
@@ -130,27 +130,42 @@ const ReviewsAccordion = ({ details }) => {
                 style={{ height: "18px", width: "18px" }}
               />
             </button>
-
           )}
         </div>
       </div>
 
-       {isShareOpen && (
+      {isShareOpen && (
         <div className={styles.shareOverlay}>
           <div className={styles.shareBox}>
             <h3>Share via</h3>
             <div className={styles.iconRow}>
               <a href={shareLinks.whatsapp} target="_blank" rel="noreferrer">
-                <img src={whatsUpIcon} alt="WhatsApp" style={{ height: "36px", width: "36px" }}  />
+                <img
+                  src={whatsUpIcon}
+                  alt="WhatsApp"
+                  style={{ height: "36px", width: "36px" }}
+                />
               </a>
               <a href={shareLinks.facebook} target="_blank" rel="noreferrer">
-                <img src={facebookIcon} alt="Facebook" style={{ height: "36px", width: "36px" }}  />
+                <img
+                  src={facebookIcon}
+                  alt="Facebook"
+                  style={{ height: "36px", width: "36px" }}
+                />
               </a>
               <a href={shareLinks.twitter} target="_blank" rel="noreferrer">
-                 <img src={twitterIcon} alt="Twitter" style={{ height: "36px", width: "36px" }}  />
+                <img
+                  src={twitterIcon}
+                  alt="Twitter"
+                  style={{ height: "36px", width: "36px" }}
+                />
               </a>
               <a href={shareLinks.linkedin} target="_blank" rel="noreferrer">
-               <img src={linkedInIcon} alt="LinkedIn" style={{ height: "36px", width: "36px" }}  />
+                <img
+                  src={linkedInIcon}
+                  alt="LinkedIn"
+                  style={{ height: "36px", width: "36px" }}
+                />
               </a>
             </div>
             <button

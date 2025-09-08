@@ -43,11 +43,11 @@ const questions = [
   // },
 ];
 
-const QandAAccordion = ({details}) => {
+const QandAAccordion = ({ details }) => {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
-  const [loadingQuestionId, setLoadingQuestionId] = useState(null)
-  console.log(details,"details")
+  const [loadingQuestionId, setLoadingQuestionId] = useState(null);
+  console.log(details, "details");
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -62,38 +62,38 @@ const QandAAccordion = ({details}) => {
     dispatch(updateSellerQandA(answers));
   };
 
-// useEffect(() => {
-//   if (details && Array.isArray(details)) {
-//     const initialAnswers = {};
-//     details.forEach((item) => {
-//       const matchingQuestion = questions.find(
-//         (q) => q.label === item.questions
-//       );
-//       if (matchingQuestion) {
-//         initialAnswers[matchingQuestion.id] = item.answer;
-//       }
-//     });
-//     setAnswers(initialAnswers);
-//   }
-// }, [details]);
-useEffect(() => {
-  if (details && Array.isArray(details)) {
-    const initialAnswers = {};
-    details.forEach((item) => {
-      console.log(item,"item")
-      const match = questions.find((q) =>
-        q.label.toLowerCase().trim() === item.questions.toLowerCase().trim()
-      );
-      if (match) {
-        initialAnswers[match.id] = item.answer;
-      } else {
-        console.warn("No match found for:", item.questions);
-      }
-    });
-    setAnswers(initialAnswers);
-  }
-}, [details]);
-
+  // useEffect(() => {
+  //   if (details && Array.isArray(details)) {
+  //     const initialAnswers = {};
+  //     details.forEach((item) => {
+  //       const matchingQuestion = questions.find(
+  //         (q) => q.label === item.questions
+  //       );
+  //       if (matchingQuestion) {
+  //         initialAnswers[matchingQuestion.id] = item.answer;
+  //       }
+  //     });
+  //     setAnswers(initialAnswers);
+  //   }
+  // }, [details]);
+  useEffect(() => {
+    if (details && Array.isArray(details)) {
+      const initialAnswers = {};
+      details.forEach((item) => {
+        console.log(item, "item");
+        const match = questions.find(
+          (q) =>
+            q.label.toLowerCase().trim() === item.questions.toLowerCase().trim()
+        );
+        if (match) {
+          initialAnswers[match.id] = item.answer;
+        } else {
+          console.warn("No match found for:", item.questions);
+        }
+      });
+      setAnswers(initialAnswers);
+    }
+  }, [details]);
 
   useEffect(() => {
     if (qnaUpdateSuccess) {
@@ -109,7 +109,9 @@ useEffect(() => {
     <div className={styles.container}>
       <h3 className={styles.heading}>Q&A - Help Customers Choose You</h3>
       <p className={styles.subheading2}>
-        Provide answers to the most common customer questions on Localists.com to build trust and make it easier for customers to hire you with confidence.
+        Provide answers to the most common customer questions on Localists.com
+        to build trust and make it easier for customers to hire you with
+        confidence.
       </p>
       {questions.map((question, index) => (
         <div className={styles.qaItem} key={question.id}>
@@ -122,17 +124,16 @@ useEffect(() => {
           />
           <div className={styles.lastBoxContainer}>
             <div className={styles.liftBoxContainer}>
-            <span className={styles.helperText}>Minimum 50 characters</span>
-             {index === 2 && (
-            <div className={styles.suggestion}>
-              {/* <a href="#" className={styles.link}>
+              <span className={styles.helperText}>Minimum 50 characters</span>
+              {index === 2 && (
+                <div className={styles.suggestion}>
+                  {/* <a href="#" className={styles.link}>
                Use our free online AI tool to help you write a great business description.
               </a> */}
-            </div>
-          )}
+                </div>
+              )}
             </div>
             <div className={styles.buttonRow}>
-
               {/* <button
         className={styles.saveBtn}
         onClick={() => dispatch(updateSellerQandA({ [question.id]: answers[question.id] }))}
@@ -140,30 +141,71 @@ useEffect(() => {
       >
         {sellerLoader ? "Saving..." : "Save"}
       </button> */}
-              <button
+              {/* <button
                 className={styles.saveBtn}
                 onClick={() => {
                   setLoadingQuestionId(question.id);
-                  dispatch(updateSellerQandA({ [question.id]: answers[question.id] }))
+                  dispatch(
+                    updateSellerQandA({ [question.id]: answers[question.id] })
+                  )
                     .then(() => setLoadingQuestionId(null))
                     .catch(() => setLoadingQuestionId(null));
                 }}
                 disabled={loadingQuestionId === question.id}
               >
-                {loadingQuestionId === question.id ? <Spin
-                  indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                /> : "Save"}
+                {loadingQuestionId === question.id ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "white" }} />
+                    }
+                  />
+                ) : (
+                  "Save"
+                )}
+              </button> */}
+              <button
+                className={styles.saveBtn}
+                onClick={() => {
+                  if (
+                    !answers[question.id] ||
+                    answers[question.id].trim() === ""
+                  ) {
+                    toast.error(
+                      "Answer cannot be empty. Please provide an answer."
+                    );
+                    return;
+                  }
+
+                  if (answers[question.id].trim().length < 50) {
+                    toast.error(
+                      "Answer should be at least 50 characters long."
+                    );
+                    return;
+                  }
+
+                  setLoadingQuestionId(question.id);
+                  dispatch(
+                    updateSellerQandA({ [question.id]: answers[question.id] })
+                  )
+                    .then(() => setLoadingQuestionId(null))
+                    .catch(() => setLoadingQuestionId(null));
+                }}
+                disabled={loadingQuestionId === question.id}
+              >
+                {loadingQuestionId === question.id ? (
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "white" }} />
+                    }
+                  />
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           </div>
-         
-
-
         </div>
       ))}
-
-
-
     </div>
   );
 };

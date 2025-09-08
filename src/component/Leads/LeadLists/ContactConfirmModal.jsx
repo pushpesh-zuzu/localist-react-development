@@ -410,7 +410,7 @@ const ContactConfirmModal = ({
                 </div>
               ))
             ) : (
-              <p className={styles.noPlanText}>No Plan Available</p>
+              <p className={styles.noPlanText}></p>
             )}
 
             <p className={styles.footerNote}>

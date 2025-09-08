@@ -1,5 +1,9 @@
 import React from "react";
-import { EyeOutlined, EyeInvisibleOutlined, LoadingOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  EyeInvisibleOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { Spin } from "antd";
 import styles from "./ChangePasswordModal.module.css"; // move related styles here or use global styles
 
@@ -13,7 +17,7 @@ const ChangePasswordModal = ({
   handleFormChange,
   handleSavePassword,
   setIsModalOpen,
-  loading
+  loading,
 }) => {
   if (!isOpen) return null;
 
@@ -61,9 +65,7 @@ const ChangePasswordModal = ({
               }`}
             />
             <span
-              onClick={() =>
-                setConfirmPasswordVisible(!confirmPasswordVisible)
-              }
+              onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
               className={styles.eyeIcon}
             >
               {confirmPasswordVisible ? (
@@ -88,7 +90,8 @@ const ChangePasswordModal = ({
             className={styles.modalSaveButton}
             onClick={handleSavePassword}
             // disabled={loading}
-          >save
+          >
+            Save
             {/* {loading ? (
               <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
             ) : (
