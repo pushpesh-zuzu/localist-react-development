@@ -19,25 +19,27 @@
   background: #fff;
   font-size: 16px;
   min-width: 600px; /* Mobile me min width fix kar diya */
+  font-size: 18px;
+
 }
 
 .table th,
 .table td {
   border: 1px solid #ccc;
-  padding: 12px;
+  padding: 8px;
   text-align: left;
   vertical-align: top;
   word-break: break-word; /* Long text wrap ho jaye */
 }
 
 .table th {
-  font-weight: 600; /* Headers bold */
+  font-weight: 700; /* Headers bold */
   background: #f5f5f5;
   text-align: center;
 }
 
 .firstCol {
-  font-weight: 600; /* First column bold */
+  /* font-weight: 600; First column bold */
   width: 150px;
 }
 
@@ -167,6 +169,9 @@
 }
 
 @media (max-width: 786px) {
+  .table {
+    font-size: 16px;
+  }
   .findAnAccountant_container {
     padding: 30px 20px;
   }
