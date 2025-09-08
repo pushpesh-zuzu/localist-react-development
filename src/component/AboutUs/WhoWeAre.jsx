@@ -5,11 +5,13 @@ import styles from "./whoweare.module.css";
 const WhoWeAre = () => {
   return (
     <div className={styles.mainContainer}>
-      <WithBlueTextBlack firstblueText="Who" secondText="we are" />
+      <div style={{ marginBottom: "10px" }} className={styles.content}>
+        <WithBlueTextBlack textalign="left" firstblueText="Who" secondText="we are" />
+      </div>
       <p className={styles.content}>
-        <Link className={styles.link} style={{ textDecoration: "none" }}>
+        <span className={styles.link} style={{ textDecoration: "none" }}>
           Localists.com
-        </Link>{" "}
+        </span>{" "}
         is one of the fastest growing local marketplaces in the UK. We are
         transforming how local consumers connect with trusted local
         professionals. We make it easier and faster to find verified local
@@ -35,30 +37,19 @@ const WhoWeAre = () => {
         standards.
       </p>
       <div className={styles.detail}>
-        <h3>
-          Setting the Standard
-        </h3>
+        <h3>Setting the Standard</h3>
         <p>
           Not just anyone can join Localists.com. Every professional is
           carefully vetted through a series of strict checks before they’re
           approved.
-          <ul>
-            <li>
-              We verify their identity and qualifications where requiredWe
-              verify their identity and qualifications where required.
-            </li>
-          </ul>
-          <ul>
-            <li>
-              We verify online reviews to verify consistent and quality reviews.
-            </li>
-          </ul>
-          <ul>
-            <li>
-              We check that they consistently provide excellent customer service
-              and quality workmanship.
-            </li>
-          </ul>
+          <p>We verify their identity and qualifications where required</p>
+          <p>
+            We verify online reviews to verify consistent and quality reviews.
+          </p>
+          <p>
+            We check that they consistently provide excellent customer service
+            and quality workmanship.
+          </p>
           We don’t cut corners. Last year alone, hundreds of Service Providers
           were turned away because they didn’t meet our standards.
         </p>
@@ -71,15 +62,13 @@ const WhoWeAre = () => {
         </p>
         <h3>Peace of Mind for Every Customer</h3>
         <p>
-          In the rare event that something doesn’t go as planned, we’re here to
-          help put things right. Your satisfaction and protection are our
-          priority, giving you confidence every time you book through Localists.
-        </p>
-        <h3> Peace of Mind for Every Customer</h3>
-        <p>
           Your satisfaction and protection are our priority, giving you
           confidence every time you book through Localists which is why we place
           such rigorous standards on our service providers.
+        </p>
+        <p>
+          With Localists, you’re not just hiring a professional—you’re choosing
+          quality, reliability, and peace of mind.
         </p>
       </div>
     </div>

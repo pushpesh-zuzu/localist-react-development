@@ -21,7 +21,11 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
 }
-
+.heading{
+    font-size: 35px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
 .iconContainer {
   width: 54px;
   height: 54px;
@@ -109,6 +113,11 @@
   .button {
     padding: 15px;
   }
+      .heading {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 14px;
+}
 }
 
 @media (max-width: 520px) {

@@ -6,15 +6,17 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
-
+.mainHeading {
+  margin-bottom: 20px !important;
+}
 .heading {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 35px;
   line-height: 52px;
-  text-align: center;
+  /* text-align: center; */
   margin: 0 0 24px 0;
 }
 .link {
@@ -34,7 +36,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 32px;
-  text-align: center;
+  /* text-align: center; */
   color: var(--text-color);
   max-width: 76.5%;
   /* max-width: 1119px; */
@@ -66,12 +68,12 @@
 .detail h3 {
   font-size: 24px;
 }
-.detail ul {
+.detail span {
   margin: 4px;
   padding-left: 50px;
 }
 .detail p {
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 @media (max-width: 1024px) {
   .content .detail {
@@ -103,7 +105,7 @@
   .mainContainer {
     margin: 16px 0;
   }
-  .detail ul {
+  .detail span {
     padding-left: 24px;
   }
 

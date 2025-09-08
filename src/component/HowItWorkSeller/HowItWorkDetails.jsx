@@ -37,7 +37,7 @@ const data = [
   },
   {
     id: 4,
-    title: "Why professionals love localists?",
+    title: "Why professionals love localists",
     paragraphs: ["When you join Localists as a seller you’ll get:"],
     list: [
       "High visibility profile that shows off your work and builds your reputation.",

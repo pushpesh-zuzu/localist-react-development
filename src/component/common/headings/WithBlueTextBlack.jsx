@@ -4,10 +4,11 @@ function WithBlueTextBlack({
   secondText = "",
   firstblue = true,
   thirdText = "",
+  textalign='center'
 }) {
   return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>
+    <div className={styles.container} style={{textAlign:textalign}}>
+      <h2 className={styles.heading} >
         {firstblue ? (
           <>
             {firstblueText && (
