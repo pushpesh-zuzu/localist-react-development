@@ -24,21 +24,21 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "p") {
               return (
-                <p key={index} className={styles.findAnAccountant_paragrap}>
+                <p key={index} style={{marginTop:block?.className=='marginTop'? '8px':'0p'}} className={styles.findAnAccountant_paragrap}>
                   {block.text}
                 </p>
               );
             }
             if (block.type === "pbold") {
               return (
-                <p key={index} className={styles.findAnAccountant_paragrap}>
+                <p key={index} style={{marginTop:'8px'}} className={styles.findAnAccountant_paragrap}>
                   <b>{block.text}</b>
                 </p>
               );
             }
             if (block.type === "uili") {
               return (
-                <ul style={{margin:'4px'}}>
+                <ul style={{marginTop:'4px', marginBottom:'0px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     <b> {block.heading}</b>
                     {block.text}
@@ -48,7 +48,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "li") {
               return (
-                <ul>
+                <ul style={{margin:'2px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     {" "}
                     {block.heading}
@@ -58,7 +58,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "libold") {
               return (
-                <ul>
+                <ul style={{margin:'4px'}}>
                   <li className={styles.findAnAccountant_paragrap}>
                     {" "}
                     <b>{block.heading}</b>

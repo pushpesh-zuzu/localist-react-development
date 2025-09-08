@@ -1350,7 +1350,7 @@ const CONTENT_CONFIG = {
   },
   "patio-layers-near-me": {
     para1:
-      "At Localists, we make it simple to find trusted patio layers who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts",
+      "At Localists, we make it simple to find trusted patio layers who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts.",
     para2:
       "Whether you’re picturing a modern porcelain patio, a classic sandstone patio, or a budget-friendly gravel patio, we’ll help you find the right patio contractors for the job. Compare fair, transparent quotes and choose a professional who shares your vision.",
     para3: "It’s free from start to finish !",
@@ -1961,12 +1961,12 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "uili",
       heading: "Local expertise: ",
-      text: "Local expertise: They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
+      text: " They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
     },
     {
       type: "uili",
       heading: "Smart, lasting design: ",
-      text: "Smart, lasting design: Bespoke layouts and materials tailored to your lifestyle can ensure a long lasting garden, and the landscapers here at Localists can advise you on such.",
+      text: " Bespoke layouts and materials tailored to your lifestyle can ensure a long lasting garden, and the landscapers here at Localists can advise you on such.",
     },
     {
       type: "uili",
@@ -2040,11 +2040,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Whether you're doing a full garden makeover or just sprucing up sections of your outdoor space, the right landscape gardener can turn ideas into reality.",
-    },
-    {
-      type: "p",
-      text: "Here's a rundown of what landscape architect or landscape garden designers commonly offer:",
+      text: "Whether you're doing a full garden makeover or just sprucing up sections of your outdoor space, the right landscape gardener can turn ideas into reality.Here's a rundown of what landscape architect or landscape garden designers commonly offer:",
     },
     {
       type: "h3",
@@ -2125,6 +2121,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "However, on average in the UK, here’s what you can expect to spend:",
+      className: "marginTop"
     },
     {
       type: "uili",

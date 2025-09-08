@@ -9,7 +9,9 @@
   align-items: center;
   justify-content: center;
 }
-
+.blueText{
+  color: var(--primary-color);
+}
 .popularcityContainer h1 {
   font-weight: 400;
   font-size: 35px;
