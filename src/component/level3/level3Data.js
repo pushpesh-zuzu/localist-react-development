@@ -657,6 +657,12 @@ const AVERAGE_PRICE = {
       Average: "£4800",
       Premium: "£7950",
     },
+    {
+      Region: "North West",
+      "Great Value": "£3500",
+      Average: "£5500",
+      Premium: "£6500",
+    },
   ],
   "patio-layers-near-me": [
     {
@@ -705,7 +711,7 @@ const AVERAGE_PRICE = {
       Average: "£1620",
       Premium: "£3850",
     },
-     {
+    {
       Region: "NORTH WEST",
       "Great Value": "",
       Average: "",
@@ -812,7 +818,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "1",
       title: "How much does it cost to install a driveway?",
       description: `
-       Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price. You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown.
+       Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price.You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown. 
   <br/>
   <p style="margin-top:12px;">
     As a general rule, the larger the driveway, the lower the cost per square metre — so it’s worth asking for quotes based on your exact dimensions. A typical full installation might cost around £4,500 across the UK and £4,800 in London.
@@ -1208,9 +1214,9 @@ const HowItWorksData = {
     {
       id: 1,
       lBreak: false,
-      title: "Search for driveway installers near you",
+      title: "Search for driveway contractors near you",
       image: WhatYouNeedIcon,
-      heading1: "Search for driveway installers near you",
+      heading1: "Search for driveway contractors near you",
       description:
         "Tell us what you need and where, and we’ll connect you with trusted local driveway contractors ready to help. Whether it’s a quick refresh or a full driveway installation, our platform makes finding the right specialist simple and fast.",
     },
@@ -1333,9 +1339,9 @@ const CONTENT_CONFIG = {
   },
   "driveway-installers-near-me": {
     para1:
-      "Looking to give your outdoor space a facelift? Localists connects you with top-rated driveway contractors near you.",
+      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or pavered driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust",
     para2:
-      "No matter your location in the UK, we match you with trusted driveway installers nearby, who specialise in all kinds of installation. From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
+      "From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
     para3: "No fees, no catch, just expert help at no cost!",
   },
   "patio-layers-near-me": {
@@ -1398,11 +1404,12 @@ const CONTENT_CONFIG_TOP = {
     avgPriceTitle: "fence & gate installation",
   },
   "driveway-installers-near-me": {
-    findingHeading: "driveway companies",
+    findingHeading: "driveway contractors",
     title: "Driveway Companies",
     mainTitle: "driveway installers",
     ctaText: "Driveway Installer",
     avgPriceTitle: "driveway installers",
+    monthlyText: true,
   },
   "patio-layers-near-me": {
     findingHeading: "patio contractors",
@@ -1428,7 +1435,7 @@ const CONTENT_CONFIG_TOP = {
     ctaText: "Artificial Installer",
     avgPriceTitle: "artificial grass installation",
     showSpeicialits: true,
-    monthlyText:true
+    monthlyText: true,
   },
 };
 
@@ -1611,7 +1618,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "p",
-      text: "We’ve helped hundreds of clients find trusted specialists for everything from minor repairs to complete driveway installation projects. Every builder on our platform is vetted for skill, reliability, and quality - so you can choose with confidence and get the perfect fit for your project fast. Here’s what you should hire at Localists:",
+      text: "We’ve helped hundreds of clients find trusted specialists for everything from minor repairs to complete driveway installation projects. Every professional on our platform is vetted for skill, reliability, and quality - so you can hire with confidence and get the perfect fit for your project - fast. Here’s why you should hire through Localists:",
     },
     {
       type: "uili",
@@ -1626,7 +1633,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "uili",
       heading: "Personalised, no-obligation quotes:\u00A0",
-      text: "You get free, tailored quotes from the best driveway builders in your local area. All that’s left is to choose the expert who best fits your needs and budget.",
+      text: "You get free, tailored quotes from the best driveway builders in your local area.All that’s left is to choose the expert who best fits your needs and budget.",
     },
     {
       type: "uili",
@@ -1636,7 +1643,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     {
       type: "uili",
       heading: "Real feedback from real clients:\u00A0",
-      text: "All reviews on Localists are 100% genuine, from clients who have transformed their properties, homes, and business premises through our trusted specialists. We’re proud to work with professionals whose results speak for themselves.",
+      text: "All reviews on Localists are 100% genuine, from clients who have transformed their properties, homes, business premises, through our trusted specialists here. We’re proud to work with professionals whose results speak for themselves.",
     },
     {
       type: "h2",
@@ -1644,11 +1651,31 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "p",
-      text: "If it’s your first time hiring a driveway installer, it’s natural to feel unsure about where to start. Even if you’ve hired before, finding someone you can fully trust these days isn’t always easy. A good place to begin is by checking for industry qualifications and memberships, such as The Association of Paving Contractors (Interlay) which offers a Seal of Approval to members who meet strict professional standards",
+      text: "If it’s your first time hiring a driveway installer, it’s natural to feel unsure about where to start. Even if you’ve hired a contractor before, finding someone you can fully trust these days isn’t always easy.",
+    },
+    {
+      type: "pbold",
+      text: "Reviews",
     },
     {
       type: "p",
-      text: "Ask to see photos of past projects so you can get a feel for their workmanship and style across different materials. Read genuine customer reviews to see how reliable and communicative they are. Before committing, always ask for a clear, written quote that outlines costs and timelines. If any local or planning rules apply, an installer who understands regional planning requirements can save you delays or headaches",
+      text: "A first point of call should be checking out their reviews. And our platform makes it even easier to check a companies reviews - as we source their reviews from multiple platforms for you to read all in one place.",
+    },
+    {
+      type: "pbold",
+      text: "Previous Projects",
+    },
+    {
+      type: "p",
+      text: "Ask to see photos of past projects so you can get a feel for their workmanship and style across different materials. Before committing, always ask for a clear, written quote that outlines costs and timelines. If any local or planning rules apply, an installer who understands regional planning requirements can save you delays or headaches.",
+    },
+    {
+      type: "pbold",
+      text: "Regulatory Bodies",
+    },
+    {
+      type: "p",
+      text: "Driveway companies that are members of certain regulatory bodies often have to adhere to strict guidelines. Check whether your driveway installer is a member of regulatory bodies such as The Asphalt Industry Alliance or Britpave can be an indicator of quality.",
     },
     {
       type: "p",
@@ -1656,7 +1683,7 @@ Whether you're securing your home, upgrading your garden, or managing a large co
     },
     {
       type: "h2",
-      text: "Bespoke driveway installation services UK",
+      text: "Bespoke driveway installation services UK.",
     },
     {
       type: "p",
