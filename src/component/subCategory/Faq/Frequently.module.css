@@ -50,6 +50,7 @@
 
 .frequently_collapse :global(.ant-collapse-item-active > .ant-collapse-header) {
   color: var(--primary-color);
+  padding: 16px 16px 0px 16px !important;
 }
 
 .frequently_collapse_description {
