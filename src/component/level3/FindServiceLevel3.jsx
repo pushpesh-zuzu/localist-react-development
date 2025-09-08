@@ -8,6 +8,8 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
         <div className={styles.findAnAccountant_content}>
           {/* {title && <h2 className={styles.findAnAccountant_heading}>{title}</h2>} */}
           {contentBlocks?.map((block, index) => {
+            const prevBlock = contentBlocks[index - 1];
+
             if (block.type === "h2") {
               return (
                 <h2 key={index} className={styles.findAnAccountant_heading}>
@@ -24,48 +26,84 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
             if (block.type === "p") {
               return (
-                <p key={index} style={{marginTop:block?.className=='marginTop'? '8px':'0p'}} className={styles.findAnAccountant_paragrap}>
+                <p
+                  key={index}
+                  className={styles.findAnAccountant_paragrap}
+                  style={{
+                    marginTop: block?.marginTop ? "12px" : "0px",
+                    marginBottom: "0px",
+                  }}
+                >
                   {block.text}
                 </p>
               );
             }
+
             if (block.type === "pbold") {
               return (
-                <p key={index} style={{marginTop:'8px'}} className={styles.findAnAccountant_paragrap}>
+                <p
+                  key={index}
+                  className={styles.findAnAccountant_paragrap}
+                  style={{
+                    marginTop: block?.marginTop ? "12px" : "0px",
+                    marginBottom: "0px",
+                  }}
+                >
                   <b>{block.text}</b>
                 </p>
               );
             }
+
             if (block.type === "uili") {
+              const isFirstUiliInGroup = prevBlock?.type !== "uili";
+
               return (
-                <ul style={{marginTop:'4px', marginBottom:'0px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
+                <ul
+                  key={index}
+                  style={{
+                    marginTop: isFirstUiliInGroup ? "8px" : "0px",
+                    marginBottom: "0px",
+                  }}
+                >
                   <li className={styles.findAnAccountant_paragrap}>
-                    <b> {block.heading}</b>
-                    {block.text}
+                    <b>{block.heading}</b> {block.text}
                   </li>
                 </ul>
               );
             }
+
             if (block.type === "li") {
               return (
-                <ul style={{margin:'2px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
+                <ul
+                  key={index}
+                  style={{
+                    marginTop: block?.marginTop ? "8px" : "0px",
+                    marginBottom: "0px",
+                  }}
+                >
                   <li className={styles.findAnAccountant_paragrap}>
-                    {" "}
                     {block.heading}
                   </li>
                 </ul>
               );
             }
+
             if (block.type === "libold") {
               return (
-                <ul style={{margin:'4px',marginTop:block?.marginTop?block?.marginTop:'0px'}}>
+                <ul
+                  key={index}
+                  style={{
+                    marginTop: block?.marginTop ? "8px" : "0px",
+                    marginBottom: "0px",
+                  }}
+                >
                   <li className={styles.findAnAccountant_paragrap}>
-                    {" "}
                     <b>{block.heading}</b>
                   </li>
                 </ul>
               );
             }
+
             if (block.type === "table") {
               return (
                 <div key={index} className={styles.tableWrapper}>
@@ -102,7 +140,7 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
       </div>
       {title && (
         <button
-          onClick={() => handleScrollToBottom()}
+          onClick={handleScrollToBottom}
           className={styles.findAnAccountant_button}
         >
           Get Quotes Now

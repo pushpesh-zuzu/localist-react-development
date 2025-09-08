@@ -758,48 +758,48 @@ const FREQUENTLY_DATA = {
 Choosing the right fencing or gate professional isn’t just about price - it’s about ensuring they’re properly qualified, experienced, and capable of delivering a safe, high-quality job that lasts. Here’s what to look for: 
 </p>
 
-        <ul style="margin:0px; padding-left:18px; margin-top:12px">
+        <ul style="margin:0px; padding-left:18px; margin-top:12px; margin-left:30px">
   <li><strong>Relevant qualifications & certifications</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   For fencing, look for professionals with a Level 2 Diploma in Fencing (NVQ) or a 
   FISS/CSCS card (Fencing Industry Skills Scheme/Construction Skills Certification Scheme). 
   For gate installation, check for qualifications like the NVQ in Specialist Installation Occupations – 
   Door, Gate and Shutter Systems, as well as accreditations such as BFT approval or Gate Safe training.
 </p>
 
-<ul style="margin:0px; padding-left:18px">
+<ul style="margin:0px; padding-left:18px; margin-left:30px">
   <li><strong>Proven track record</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   Asking to see examples of past work of previous fence and gate installations can give you a clear sense of their workmanship, style, and attention to detail.
 </p>
 
-<ul style="margin:0px; padding-left:18px">
+<ul style="margin:0px; padding-left:18px; margin-left:30px">
   <li><strong>Reviews & reputation</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   Browse through verified customer reviews, testimonials, or ratings to get a sense of how reliable and professional they are.
 </p>
 
-<ul style="margin:0px; padding-left:18px">
+<ul style="margin:0px; padding-left:18px; margin-left:30px">
   <li><strong>Transparent quotes & timelines</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   A trustworthy professional will give you a clear, itemised quote and realistic timeframes, so there are no surprises along the way.
 </p>
 
-<ul style="margin:0px; padding-left:18px">
+<ul style="margin:0px; padding-left:18px; margin-left:30px">
   <li><strong>Proper licensing & insurance</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   Make sure they’re fully insured and compliant with local regulations. This is especially important for automated gate systems.
 </p>
 
-<ul style="margin:0px; padding-left:18px">
+<ul style="margin:0px; padding-left:18px; margin-left:30px">
   <li><strong>Written agreements</strong></li>
 </ul>
-<p style="margin:0px; padding-left:18px">
+<p style="margin:0px; padding-left:18px; margin-left:30px">
   Always request a formal contract or service agreement that outlines scope, timelines, cost, and warranty (if available).
 </p>
 
@@ -1526,12 +1526,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "When you hire from Localists you get:",
+      marginTop: true,
     },
     {
       type: "uili",
       heading: "Reliable local experts:\u00A0",
       text: "We match you with local fencing contractors who are familiar with your region. That means better communication, faster service, and local insight you can rely on.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1571,7 +1572,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Wooden fence & gate Installation:\u00A0",
       text: "A classic, traditional option that adds charm and privacy.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1635,7 +1636,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Streamlined hiring process:\u00A0",
       text: "No endless searching or unanswered calls. Tell us what you need, and we’ll instantly match you with experienced people who specialise in your preferred surface. Be it resin bound, gravel, tarmac, block paving, or concrete. You call the shots.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1751,7 +1752,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Get at least three quotes –\u00A0",
       text: "Prices can vary more than you think. Having a few quotes to compare gives you a better sense of what’s fair and helps you spot anyone who’s too high or suspiciously low.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1784,7 +1785,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading: "Faster site visits and easier communication.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "li",
@@ -1822,7 +1823,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "libold",
       heading: "Can I see reviews or testimonials from recent clients?",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "libold",
@@ -1877,7 +1878,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Gravel patio ",
       text: "– £40–£60 per m² (budget-friendly)",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1910,7 +1911,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Experience and skill ",
       text: "– They should be confident in working with materials that you intend to use for your project, whether it's sandstone, gravel, or concrete, and have a portfolio to prove it.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -1965,7 +1966,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Local expertise: ",
       text: " They understand your region’s weather and soil conditions, choosing plants that thrive year after year.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -2013,7 +2014,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading: "Has local experience and a proven track record.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "li",
@@ -2126,13 +2127,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "However, on average in the UK, here’s what you can expect to spend:",
-      className: "marginTop",
+      marginTop: true,
     },
     {
       type: "uili",
       heading: "Basic garden tidy-up and planting ",
       text: " - from £800 to £1,500",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -2168,12 +2169,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "Here’s why so many trust us to find the best artificial grass installers:",
+      marginTop: true,
     },
     {
       type: "uili",
       heading: "Trusted and vetted professionals\u00A0",
       text: "– Every installer on Localists is carefully screened for skill, reliability, and customer satisfaction, so you only connect with genuine experts.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -2207,7 +2209,7 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Ground preparation\u00A0",
       text: "– It starts with groundworks. Existing grass, weeds, or soil are removed to create a clean, stable foundation. Installers may dig down and level the area, making sure it’s firm and free from obstacles, so your new lawn sits perfectly flat.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -2240,12 +2242,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "When comparing installers, it’s worth looking beyond just price. Consider asking:",
+      marginTop: true,
     },
     {
       type: "li",
       heading:
         "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "li",
@@ -2281,12 +2284,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "As a guide:",
+      marginTop: "16px",
     },
     {
       type: "uili",
       heading: "Budget installation\u00A0",
       text: "– From £60–£75 per m², including fitting. Best for smaller areas or temporary use.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "uili",
@@ -2314,7 +2318,7 @@ const FIND_SERVICE_CONTENT = {
       type: "li",
       heading:
         "Listed buildings or conservation areas – If your property is in a protected area, there may be restrictions on changes to your garden.",
-      marginTop: "12px",
+      marginTop: true,
     },
     {
       type: "li",
