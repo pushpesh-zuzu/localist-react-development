@@ -362,8 +362,8 @@ const MatchingLeadsFilter = ({ onClose }) => {
           </AccordionSection>
 
           {/* Locations */}
-          <AccordionSection title="Locations">
-            {/* All Option */}
+          {/* <AccordionSection title="Locations">
+          
             <label
               style={{ display: "flex", alignItems: "center", gap: "8px" }}
             >
@@ -377,7 +377,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
               All
             </label>
 
-            {/* Dynamic Options from getlocationData */}
+         
 
             {filterListData?.[0]?.location?.map((item) => (
               <div key={item.time}>
@@ -387,7 +387,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
                   <input
                     style={{ marginTop: "0px" }}
                     type="radio"
-                    name="location" // radio buttons ko group karne ke liye
+                    name="location"
                     checked={
                       filters.location ===
                       `${item.miles} miles from ${item.postcode}`
@@ -403,7 +403,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
                 </label>
               </div>
             ))}
-          </AccordionSection>
+          </AccordionSection> */}
 
           {/* Credits */}
           <AccordionSection title="Credits">
