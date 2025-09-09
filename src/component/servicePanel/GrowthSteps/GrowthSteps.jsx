@@ -19,7 +19,7 @@ const GrowthSteps = () => {
     <>
       <div className={styles.growContainer}>
         <div className={styles.growHeader}>
-            <div style={{textAlign:'center'}}><h2 className={styles.heading}>Your Next Client is Already Looking for You</h2></div>
+            <div style={{textAlign:'center'}}><h2 className={styles.heading}>Your next client is already looking for You</h2></div>
           <div className={styles.container}>
             {GrowthStepsData.map((item) => (
               <div className={styles.card} key={item.id}>
