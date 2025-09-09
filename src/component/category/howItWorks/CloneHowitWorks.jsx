@@ -5,7 +5,7 @@ const HowItWorks = ({ctaText,howItWorksData}) => {
       <div className={styles.container}>
         <h2 className={styles.heading}>
         How  
-        <span className={styles.highlight}> Localists Works</span>
+        <span className={styles.highlight}> Localists </span>Works
         </h2>
         <div className={styles.stepsContainer}>
           {howItWorksData.map((item, index) => (

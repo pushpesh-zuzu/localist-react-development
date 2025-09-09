@@ -142,7 +142,7 @@
 .highlight {
   color: var(--primary-color);
   font-size: var(--text-size-35);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 100%;
 }
 
