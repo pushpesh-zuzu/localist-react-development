@@ -3,11 +3,10 @@
   top: 0;
   width: 100%;
   background-color: white;
-  z-index: 1000;
+  /* z-index: 1000; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
-
 }
 .link {
   text-decoration: none;
@@ -186,10 +185,9 @@
   cursor: pointer !important;
   width: max-content;
   transition: color 0.3s ease, background-color 0.3s ease;
-  color: black;              /* default color */
-  text-decoration: none;     /* remove underline */
+  color: black; /* default color */
+  text-decoration: none; /* remove underline */
 }
-
 
 .navItem > div > img {
   cursor: pointer !important;
@@ -497,7 +495,7 @@
   .serviceText {
     display: none;
   }
-   .inputWrapper {
+  .inputWrapper {
     position: relative;
     width: 100%;
     max-width: 300px;
@@ -726,8 +724,8 @@
     flex-direction: column;
     background-color: #fff;
     position: absolute;
-   padding: 12px 16px;
-        top: 35px;
+    padding: 12px 16px;
+    top: 35px;
     right: 90px;
     width: 100px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -801,7 +799,7 @@
 }
 
 @media screen and (max-width: 480px) {
-  .nameCircleHide{
+  .nameCircleHide {
     display: none;
   }
   .popover_container {

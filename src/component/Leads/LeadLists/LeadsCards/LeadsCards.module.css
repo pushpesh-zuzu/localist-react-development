@@ -15,6 +15,7 @@
 }
 
 .card {
+  width: -webkit-fill-available;
   background: #fff;
   /* box-shadow: 0px 0px 6px 0px #0000001a; */
   margin: 21.08px auto;
@@ -298,7 +299,7 @@
   border-radius: 25px;
   display: flex;
   gap: 4px;
-  margin-left:60px;
+  margin-left: 60px;
   /* text-decoration: underline; */
   cursor: pointer !important;
 }
@@ -308,7 +309,7 @@
   align-items: center;
   padding-bottom: 0px;
   margin-right: 200px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 /* Tablet */

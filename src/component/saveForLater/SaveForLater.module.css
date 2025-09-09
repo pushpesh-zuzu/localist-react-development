@@ -11,6 +11,7 @@
 } */
 
 .card {
+  width: -webkit-fill-available;
   background: #fff;
   /* box-shadow: 0px 0px 6px 0px #0000001a; */
   margin: 21.08px auto;
