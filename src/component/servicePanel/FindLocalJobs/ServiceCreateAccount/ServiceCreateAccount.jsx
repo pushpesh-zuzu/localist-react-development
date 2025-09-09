@@ -5,60 +5,90 @@ import ServiceDetailsStep from "./ServiceDetailsStep/ServiceDetailsStep";
 import ServiceBusinessAddressStep from "./ServiceBusinessAddressStep/ServiceBusinessAddressStep";
 import OtherServiceStep from "./OtherServiceStep/OtherServiceStep";
 import { useDispatch, useSelector } from "react-redux";
-import { checkAddressApi, checkCompanyNameApi,checkCompanyNameWithoutRegApi, checkEmailIdApi, checkPhoneNumberApi, clearServiceFormData, setRegisterStep, setSelectedServiceFormData,setHasPopulatedFromCompany } from "../../../../store/FindJobs/findJobSlice";
+import {
+  checkAddressApi,
+  checkCompanyNameApi,
+  checkCompanyNameWithoutRegApi,
+  checkEmailIdApi,
+  checkPhoneNumberApi,
+  clearServiceFormData,
+  setRegisterStep,
+  setSelectedServiceFormData,
+  setHasPopulatedFromCompany,
+} from "../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../utils";
+import { useParams } from "react-router";
+import { Helmet } from "react-helmet-async";
 
 const ServiceCreateAccount = () => {
   const dispatch = useDispatch();
-  const { selectedServiceId, selectedServiceFormData } = useSelector((state) => state.findJobs);
-
+  const { selectedServiceId, selectedServiceFormData } = useSelector(
+    (state) => state.findJobs
+  );
+  const { serviceTitle } = useParams();
+  const formattedTitle = serviceTitle
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+  console.log(formattedTitle, "formattedTitle");
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
   const [emailValue, setEmailValue] = useState("");
-const [companyValue, setCompanyValue] = useState("");
-const [phoneValue, setPhoneValue] = useState("");
-const [addressValue,setAddressValue] = useState("");
-const [emailCheck, setEmailCheck] = useState(false);
-const [companyCheck, setCompanyCheck] = useState(false);
-const [phoneCheck, setPhoneCheck] = useState(false);
-const [addressCheck,setAddressCheck] = useState(false)
-const [type,setType] = useState()
-  console.log(emailCheck,companyCheck,phoneCheck,"emailCheck")
-console.log(selectedServiceFormData?.company_reg_number,"pp")
+  const [companyValue, setCompanyValue] = useState("");
+  const [phoneValue, setPhoneValue] = useState("");
+  const [addressValue, setAddressValue] = useState("");
+  const [emailCheck, setEmailCheck] = useState(false);
+  const [companyCheck, setCompanyCheck] = useState(false);
+  const [phoneCheck, setPhoneCheck] = useState(false);
+  const [addressCheck, setAddressCheck] = useState(false);
+  const [type, setType] = useState();
+  console.log(emailCheck, companyCheck, phoneCheck, "emailCheck");
+  console.log(selectedServiceFormData?.company_reg_number, "pp");
   // Validation function
   const validateStep = () => {
     let newErrors = {};
 
     if (registerStep === 1) {
-      if (!selectedServiceFormData.miles1 || !selectedServiceFormData.miles1.trim()) newErrors.miles1 = "Miles is required";
-      if (!selectedServiceFormData.postcode || !selectedServiceFormData.postcode.trim())
+      if (
+        !selectedServiceFormData.miles1 ||
+        !selectedServiceFormData.miles1.trim()
+      )
+        newErrors.miles1 = "Miles is required";
+      if (
+        !selectedServiceFormData.postcode ||
+        !selectedServiceFormData.postcode.trim()
+      )
         newErrors.postcode = "Postcode is required";
     }
 
     if (registerStep === 2) {
-      if (!selectedServiceFormData.name || !selectedServiceFormData.name.trim()) newErrors.name = "Name is required";
+      if (!selectedServiceFormData.name || !selectedServiceFormData.name.trim())
+        newErrors.name = "Name is required";
       // if (!formData.company_name.trim()) newErrors.company_name = "Company Name is required";
-      if (!selectedServiceFormData.email || !selectedServiceFormData.email.trim()) {
+      if (
+        !selectedServiceFormData.email ||
+        !selectedServiceFormData.email.trim()
+      ) {
         newErrors.email = "Email is required";
       } else if (!/\S+@\S+\.\S+/.test(selectedServiceFormData.email)) {
         newErrors.email = "Invalid email format";
       }
-     if (
-  !selectedServiceFormData.phone || 
-  !selectedServiceFormData.phone.trim()
-) {
-  newErrors.phone = "Phone number is required";
-} else if (
-  selectedServiceFormData.phone.trim().length < 10
-) {
-  newErrors.phone = "Phone number must be at least 10 digits";
-}
-const companyInput = selectedServiceFormData.company_website?.trim();
-const urlRegex = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+(\/[^\s]*)?$/;
+      if (
+        !selectedServiceFormData.phone ||
+        !selectedServiceFormData.phone.trim()
+      ) {
+        newErrors.phone = "Phone number is required";
+      } else if (selectedServiceFormData.phone.trim().length < 10) {
+        newErrors.phone = "Phone number must be at least 10 digits";
+      }
+      const companyInput = selectedServiceFormData.company_website?.trim();
+      const urlRegex =
+        /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})+(\/[^\s]*)?$/;
 
-if (companyInput && !urlRegex.test(companyInput)) {
-  newErrors.company_website = "Please enter a valid URL (e.g. https://example.com or www.example.com)";
-}
+      if (companyInput && !urlRegex.test(companyInput)) {
+        newErrors.company_website =
+          "Please enter a valid URL (e.g. https://example.com or www.example.com)";
+      }
       // if (!selectedServiceFormData.password || !selectedServiceFormData.password.trim()) {
       //   newErrors.password = "Password is required";
       // } else if (
@@ -80,228 +110,256 @@ if (companyInput && !urlRegex.test(companyInput)) {
       // }
     }
     if (registerStep === 4) {
-      if (!selectedServiceFormData.miles2 || !selectedServiceFormData.miles2.trim()) newErrors.miles2 = "Miles is required";
-      if (!selectedServiceFormData.service_id || !selectedServiceFormData.service_id.trim())
+      if (
+        !selectedServiceFormData.miles2 ||
+        !selectedServiceFormData.miles2.trim()
+      )
+        newErrors.miles2 = "Miles is required";
+      if (
+        !selectedServiceFormData.service_id ||
+        !selectedServiceFormData.service_id.trim()
+      )
         newErrors.service_id = "Service Id is required";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
-const debounceTimer = useRef({});
-const latestEmailRef = useRef("");
-const latestPhoneRef = useRef("");
 
-useEffect(() => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-  if (emailRegex.test(emailValue) && type === "email") {
-    if (debounceTimer.current.email) clearTimeout(debounceTimer.current.email);
+  const debounceTimer = useRef({});
+  const latestEmailRef = useRef("");
+  const latestPhoneRef = useRef("");
 
-    debounceTimer.current.email = setTimeout(() => {
-      const currentEmail = latestEmailRef.current;
+  useEffect(() => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      dispatch(checkEmailIdApi({ email: currentEmail })).then((result) => {
-        
-        if (latestEmailRef.current === currentEmail) {
-          if (result?.success === true) {
-           
-            setEmailCheck(true);
-            showToast("success", "Valid email");
-          } else {
-            
-            setEmailCheck(false);
-            
+    if (emailRegex.test(emailValue) && type === "email") {
+      if (debounceTimer.current.email)
+        clearTimeout(debounceTimer.current.email);
+
+      debounceTimer.current.email = setTimeout(() => {
+        const currentEmail = latestEmailRef.current;
+
+        dispatch(checkEmailIdApi({ email: currentEmail })).then((result) => {
+          if (latestEmailRef.current === currentEmail) {
+            if (result?.success === true) {
+              setEmailCheck(true);
+              showToast("success", "Valid email");
+            } else {
+              setEmailCheck(false);
+            }
           }
-        } 
-      });
-    }, 1000);
-  }
- 
+        });
+      }, 1000);
+    }
 
+    //  if (companyValue.trim().length > 1 && type === "company_name") {
 
-//  if (companyValue.trim().length > 1 && type === "company_name") {
-  
-//     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
-//     debounceTimer.current.company_name = setTimeout(() => {
-//       dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
-//         if (result) {
-//           showToast("success", result?.message);
-//           setCompanyCheck(result?.success);
-//         }
-//       });
-//     }, 1000);
-//   }
-  if (companyValue.trim().length > 1 && type === "company_name" &&  selectedServiceFormData?.company_reg_number) {
-    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
-    debounceTimer.current.company_name = setTimeout(() => {
-      dispatch(checkCompanyNameApi({
-        company_name: companyValue,
-        company_reg_number: selectedServiceFormData?.company_reg_number
-      })).then((result) => {
-        if (result) {
-          showToast("success", result?.message);
-          setCompanyCheck(result?.success);
-        }
-      });
-    }, 1000);
-  }
-  //   if (phoneValue.trim().length >= 10 && type === "phone") {
-  //   if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
-  //   debounceTimer.current.phone = setTimeout(() => {
-  //     dispatch(checkPhoneNumberApi({ phone: phoneValue, })).then((result) => {
-  //       if (result) {
-  //         showToast("success", result?.message);
-  //         setPhoneCheck(result?.success);
-  //       }
-  //     });
-  //   }, 1000);
-  // }
-
-  if (phoneValue.trim().length >= 10 && type === "phone") {
-    latestPhoneRef.current = phoneValue;
-
-    if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
-
-    debounceTimer.current.phone = setTimeout(() => {
-      const currentPhone = latestPhoneRef.current;
-
-      dispatch(checkPhoneNumberApi({ phone: currentPhone })).then((result) => {
-        if (latestPhoneRef.current === currentPhone) {
-          if (result?.success === true) {
-            setPhoneCheck(true);
-            showToast("success", "Valid Phone");
-          } else {
-            setPhoneCheck(false);
-            
+    //     if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
+    //     debounceTimer.current.company_name = setTimeout(() => {
+    //       dispatch(checkCompanyNameApi({ company_name: companyValue,company_reg_number:selectedServiceFormData?.company_reg_number })).then((result) => {
+    //         if (result) {
+    //           showToast("success", result?.message);
+    //           setCompanyCheck(result?.success);
+    //         }
+    //       });
+    //     }, 1000);
+    //   }
+    if (
+      companyValue.trim().length > 1 &&
+      type === "company_name" &&
+      selectedServiceFormData?.company_reg_number
+    ) {
+      if (debounceTimer.current.company_name)
+        clearTimeout(debounceTimer.current.company_name);
+      debounceTimer.current.company_name = setTimeout(() => {
+        dispatch(
+          checkCompanyNameApi({
+            company_name: companyValue,
+            company_reg_number: selectedServiceFormData?.company_reg_number,
+          })
+        ).then((result) => {
+          if (result) {
+            showToast("success", result?.message);
+            setCompanyCheck(result?.success);
           }
-        }
-      });
-    }, 1000);
-  }
-  //  if (addressValue.trim().length >= 4 && type === "address") {
-  //   if (debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
-  //   debounceTimer.current.address = setTimeout(() => {
-  //     dispatch(checkAddressApi({ company_location: addressValue })).then((result) => {
-  //       if (result) {
-  //         showToast("success", result?.message);
-  //         setAddressCheck(result?.success);
-  //       }
-  //     });
-  //   }, 1000);
-  // }
-  // Cleanup on unmount
-  return () => {
-        if (debounceTimer.current.email) clearTimeout(debounceTimer.current?.email);
-    if (debounceTimer.current.company_name) clearTimeout(debounceTimer.current.company_name);
-     if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
-     if(debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
-  };
-}, [emailValue,companyValue,phoneValue,addressValue,selectedServiceFormData?.company_reg_number, dispatch]);
+        });
+      }, 1000);
+    }
+    //   if (phoneValue.trim().length >= 10 && type === "phone") {
+    //   if (debounceTimer.current.phone) clearTimeout(debounceTimer.current.phone);
+    //   debounceTimer.current.phone = setTimeout(() => {
+    //     dispatch(checkPhoneNumberApi({ phone: phoneValue, })).then((result) => {
+    //       if (result) {
+    //         showToast("success", result?.message);
+    //         setPhoneCheck(result?.success);
+    //       }
+    //     });
+    //   }, 1000);
+    // }
 
+    if (phoneValue.trim().length >= 10 && type === "phone") {
+      latestPhoneRef.current = phoneValue;
+
+      if (debounceTimer.current.phone)
+        clearTimeout(debounceTimer.current.phone);
+
+      debounceTimer.current.phone = setTimeout(() => {
+        const currentPhone = latestPhoneRef.current;
+
+        dispatch(checkPhoneNumberApi({ phone: currentPhone })).then(
+          (result) => {
+            if (latestPhoneRef.current === currentPhone) {
+              if (result?.success === true) {
+                setPhoneCheck(true);
+                showToast("success", "Valid Phone");
+              } else {
+                setPhoneCheck(false);
+              }
+            }
+          }
+        );
+      }, 1000);
+    }
+    //  if (addressValue.trim().length >= 4 && type === "address") {
+    //   if (debounceTimer.current.address) clearTimeout(debounceTimer.current.address);
+    //   debounceTimer.current.address = setTimeout(() => {
+    //     dispatch(checkAddressApi({ company_location: addressValue })).then((result) => {
+    //       if (result) {
+    //         showToast("success", result?.message);
+    //         setAddressCheck(result?.success);
+    //       }
+    //     });
+    //   }, 1000);
+    // }
+    // Cleanup on unmount
+    return () => {
+      if (debounceTimer.current.email)
+        clearTimeout(debounceTimer.current?.email);
+      if (debounceTimer.current.company_name)
+        clearTimeout(debounceTimer.current.company_name);
+      if (debounceTimer.current.phone)
+        clearTimeout(debounceTimer.current.phone);
+      if (debounceTimer.current.address)
+        clearTimeout(debounceTimer.current.address);
+    };
+  }, [
+    emailValue,
+    companyValue,
+    phoneValue,
+    addressValue,
+    selectedServiceFormData?.company_reg_number,
+    dispatch,
+  ]);
 
   const handleInputChange = (e) => {
-    const { name,value, type, checked } = e.target;
-    setType(name)
- if (name === "email") {
-    setEmailValue(value);
-    latestEmailRef.current = value;  
-  }
-  if(name === "company_name") {
-    setCompanyValue(value)
-  }
-   if (name === "phone") {
+    const { name, value, type, checked } = e.target;
+    setType(name);
+    if (name === "email") {
+      setEmailValue(value);
+      latestEmailRef.current = value;
+    }
+    if (name === "company_name") {
+      setCompanyValue(value);
+    }
+    if (name === "phone") {
+      setPhoneValue(value);
+    }
+    if (name === "address") {
+      setAddressValue(value);
+    }
 
-     setPhoneValue(value);
-   }
-   if(name === "address"){
-    setAddressValue(value)
-   }
-
-    dispatch(setSelectedServiceFormData({
-      [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
-    }));
+    dispatch(
+      setSelectedServiceFormData({
+        [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
+      })
+    );
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-// const handleInputChange = (e) => {
-//   const { name, value, type, checked } = e.target;
-//   setFormData((prev) => ({
-//     ...prev,
-//     [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
-//   }));
-// };
+  // const handleInputChange = (e) => {
+  //   const { name, value, type, checked } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
+  //   }));
+  // };
 
   const nextStep = () => {
     window.scrollTo(0, 0);
-    
+
     if (validateStep()) {
       dispatch(setRegisterStep(registerStep + 1));
     }
-
   };
   const prevStep = () => {
     dispatch(setRegisterStep(registerStep - 1));
   };
   useEffect(() => {
-      dispatch(setRegisterStep(1))
+    dispatch(setRegisterStep(1));
     return () => {
       dispatch(setRegisterStep(0));
-     
-    }
-  }, [])
-
+    };
+  }, []);
 
   return (
-    <div className={styles.parentContainer}>
-      <div className={styles.container}>
-        {registerStep === 1 && (
-          <ServiceLocationStep
-            nextStep={nextStep}
-            setFormData={setSelectedServiceFormData}
-            formData={selectedServiceFormData}
-            handleInputChange={handleInputChange}
-            errors={errors}
-          />
-        )}
-        {registerStep === 2 && (
-          <ServiceDetailsStep
-            nextStep={nextStep}
-            setFormData={setSelectedServiceFormData}
-            formData={selectedServiceFormData}
-            prevStep={prevStep}
-            handleInputChange={handleInputChange}
-            errors={errors}
-            emailCheck={emailCheck}
-            companyCheck={companyCheck}
-            phoneCheck={phoneCheck}
-            companyValue={companyValue}
-          />
-        )}
-        {registerStep === 3 && (
-          <ServiceBusinessAddressStep
-            prevStep={prevStep}
-            setFormData={setSelectedServiceFormData}
-            formData={selectedServiceFormData}
-            nextStep={nextStep}
-            handleInputChange={handleInputChange}
-            errors={errors}
-            addressCheck={addressCheck}
-            setHasPopulatedFromCompany={setHasPopulatedFromCompany}
-          />
-        )}
-        {registerStep === 4 && (
-          <OtherServiceStep
-            prevStep={prevStep}
-            setFormData={setSelectedServiceFormData}
-            formData={selectedServiceFormData}
-            handleInputChange={handleInputChange}
-            errors={errors}
-          />
-        )}
+    <>
+      <Helmet>
+        <title>{formattedTitle} - Localists.com</title>
+        <meta
+          name="description"
+          content={`Find trusted ${formattedTitle} near you. Tell us where you want to find new customers, share your coverage areas, and get matched with quality local leads today.`}
+        />
+      </Helmet>
+      <div className={styles.parentContainer}>
+        <div className={styles.container}>
+          {registerStep === 1 && (
+            <ServiceLocationStep
+              nextStep={nextStep}
+              setFormData={setSelectedServiceFormData}
+              formData={selectedServiceFormData}
+              handleInputChange={handleInputChange}
+              errors={errors}
+            />
+          )}
+          {registerStep === 2 && (
+            <ServiceDetailsStep
+              nextStep={nextStep}
+              setFormData={setSelectedServiceFormData}
+              formData={selectedServiceFormData}
+              prevStep={prevStep}
+              handleInputChange={handleInputChange}
+              errors={errors}
+              emailCheck={emailCheck}
+              companyCheck={companyCheck}
+              phoneCheck={phoneCheck}
+              companyValue={companyValue}
+            />
+          )}
+          {registerStep === 3 && (
+            <ServiceBusinessAddressStep
+              prevStep={prevStep}
+              setFormData={setSelectedServiceFormData}
+              formData={selectedServiceFormData}
+              nextStep={nextStep}
+              handleInputChange={handleInputChange}
+              errors={errors}
+              addressCheck={addressCheck}
+              setHasPopulatedFromCompany={setHasPopulatedFromCompany}
+            />
+          )}
+          {registerStep === 4 && (
+            <OtherServiceStep
+              prevStep={prevStep}
+              setFormData={setSelectedServiceFormData}
+              formData={selectedServiceFormData}
+              handleInputChange={handleInputChange}
+              errors={errors}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
