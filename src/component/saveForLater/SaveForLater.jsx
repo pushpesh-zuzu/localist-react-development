@@ -242,7 +242,7 @@ const SaveForLater = () => {
   return (
     <>
       <div className={styles.maincontainer}>
-        {/* <div className={styles.container}>
+        <div className={styles.container}>
           <div className={styles.textSection}>
             <h2 className={styles.heading}>{data} matching leads</h2>
           </div>
@@ -314,7 +314,7 @@ const SaveForLater = () => {
           {isFilterModalOpen && (
             <MatchingLeadsFilter onClose={handleCloseModal} />
           )}
-        </div> */}
+        </div>
 
         <div className={styles.dualDropdownsContainers}>
           <Select
