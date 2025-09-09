@@ -179,7 +179,7 @@ export const getLeadRequestList = (leadRequestData) => {
     }
   };
 };
-export const getLeadFiterApiList = (leadFilterData) => {
+export const getLeadFiterApiList = (leadFilterData, isLeads) => {
   return async (dispatch) => {
     dispatch(setLeadListLoader(true));
     try {
@@ -187,9 +187,13 @@ export const getLeadFiterApiList = (leadFilterData) => {
         `users/sort-by-credit-value`,
         leadFilterData
       );
+      console.log(response, "setLeadRequestListData");
       if (response) {
-        console.log(response, "setLeadRequestListData");
-        dispatch(setLeadRequestListData(response?.data?.data));
+        if (isLeads) {
+          dispatch(setSaveForLaterData(response?.data?.data));
+        } else {
+          dispatch(setLeadRequestListData(response?.data?.data));
+        }
         return response.data;
       }
     } catch (error) {
@@ -1122,6 +1126,7 @@ const leadSettingSlice = createSlice({
       state.leadRequestLoader = action.payload;
     },
     setLeadRequestListData(state, action) {
+      console.log(action.payload, "action.payload");
       state.leadRequestList = action.payload;
     },
     setGetLocationData(state, action) {

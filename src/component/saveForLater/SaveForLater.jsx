@@ -53,7 +53,10 @@ const SaveForLater = () => {
   const sortOptions = ["Newest", "Oldest"];
   const data = saveForLaterDataList[0]?.savedLeads?.length;
   const [selectedFilter, setSelectedFilter] = useState("Sort by Credits");
-
+  const requiredData = saveForLaterDataList[0]?.savedLeads?.length
+    ? saveForLaterDataList[0]?.savedLeads
+    : saveForLaterDataList;
+  console.log(saveForLaterDataList);
   const filterOptions = [
     "Credit Value High",
     "Credit Value Medium",
@@ -81,7 +84,7 @@ const SaveForLater = () => {
         sort_type: getSortTypeValue(value),
         page_type: "saved_leads",
       };
-      dispatch(getLeadFiterApiList(filterData));
+      dispatch(getSaveLaterListData(filterData));
     }
   };
 
@@ -116,7 +119,7 @@ const SaveForLater = () => {
         credit_filter: getCreditFilterValue(value),
         page_type: "saved_leads",
       };
-      dispatch(getLeadFiterApiList(filterData));
+      dispatch(getLeadFiterApiList(filterData, true));
     }
   };
 
@@ -379,13 +382,15 @@ const SaveForLater = () => {
           </div>
         </div>
 
-        {saveForLaterDataList?.[0]?.savedLeads?.length === 0 && (
+        {/* {saveForLaterDataList?.[0]?.savedLeads?.length === 0 && ( */}
+        {requiredData?.length === 0 && (
           <div className={styles.noDataContainer}>
             <h2>No Saved Leads Available</h2>
           </div>
         )}
         <div className={styles.scrollContainer} ref={scrollContainerRef}>
-          {saveForLaterDataList?.[0]?.savedLeads
+          {requiredData
+            // {saveForLaterDataList?.[0]?.savedLeads
             ?.slice(0, visibleCount)
             ?.map((item) => {
               return (
