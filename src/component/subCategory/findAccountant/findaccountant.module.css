@@ -149,7 +149,7 @@
 .descriptionContainer {
   display: flex;
   flex-direction: column;
-  /* gap: 13px; */
+  gap: 13px;
 }
 
 .descriptionContainer p {

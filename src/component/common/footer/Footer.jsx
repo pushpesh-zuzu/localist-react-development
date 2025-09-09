@@ -77,7 +77,6 @@ const Footer = () => {
   };
   const { userToken } = useSelector((state) => state.auth);
 
- 
   const { registerToken } = useSelector((state) => state.findJobs);
 
   const handleJoinAsProfessional = () => {
@@ -120,7 +119,10 @@ const Footer = () => {
                 <li>Find a Professional</li>
               </Link>
 
-              <Link className={styles.link} to={`/${lang}/${country}/how-it-works-for-customers`}>
+              <Link
+                className={styles.link}
+                to={`/${lang}/${country}/how-it-works-for-customers`}
+              >
                 <li
                   onClick={() => {
                     window.scrollTo(0, 0);
@@ -131,7 +133,9 @@ const Footer = () => {
               </Link>
 
               <Link
-                to={(!userToken || !registerToken) && `/${lang}/${country}/login`}
+                to={
+                  (!userToken || !registerToken) && `/${lang}/${country}/login`
+                }
                 className={styles.link}
               >
                 <li
@@ -153,15 +157,24 @@ const Footer = () => {
           <div>
             <h4>For Professionals</h4>
             <ul>
-              <Link to={`/${lang}/${country}/how-it-works-for-sellers`} className={styles.link}>
+              <Link
+                to={`/${lang}/${country}/how-it-works-for-sellers`}
+                className={styles.link}
+              >
                 <li>How it works</li>
               </Link>
-              <Link className={styles.link} to={`/${lang}/${country}/sellers/pricing`}>
+              <Link
+                className={styles.link}
+                to={`/${lang}/${country}/sellers/pricing`}
+              >
                 <li>Pricing</li>
               </Link>
               <Link
                 className={styles.link}
-                to={(!userToken || !registerToken) && `/${lang}/${country}/sellers/create`}
+                to={
+                  (!userToken || !registerToken) &&
+                  `/${lang}/${country}/sellers/create`
+                }
               >
                 <li
                   onClick={() => {
@@ -201,7 +214,7 @@ const Footer = () => {
               </Link> */}
             </ul>
           </div>
-
+       
           <div>
               <h4>About</h4>
             <ul>
@@ -239,8 +252,13 @@ const Footer = () => {
               <Link to={`/${lang}/${country}/how-it-works-for-customers`}>
                 <li className={styles.mobileItem}>How it works</li>
               </Link>
-              <Link to={(!userToken || !registerToken) && `/${lang}/${country}/login`}>
-                <li className={styles.mobileItem}
+              <Link
+                to={
+                  (!userToken || !registerToken) && `/${lang}/${country}/login`
+                }
+              >
+                <li
+                  className={styles.mobileItem}
                   onClick={() => {
                     if (userToken || registerToken) {
                       showToast("info", "You're already logged in.");
@@ -268,8 +286,16 @@ const Footer = () => {
               <Link to={`/${lang}/${country}/sellers/pricing`}>
                 <li className={styles.mobileItem}>Pricing</li>
               </Link>
-              <Link to={(!userToken || !registerToken) && `/${lang}/${country}/sellers/create`}>
-                <li className={styles.mobileItem} onClick={handleJoinAsProfessional}>
+              <Link
+                to={
+                  (!userToken || !registerToken) &&
+                  `/${lang}/${country}/sellers/create`
+                }
+              >
+                <li
+                  className={styles.mobileItem}
+                  onClick={handleJoinAsProfessional}
+                >
                   Join as a Professional
                 </li>
               </Link>
@@ -279,13 +305,26 @@ const Footer = () => {
             </ul>
           </Panel>
 
-          <Panel className={styles.footerNavLinks} header="About" key="3">
+          {/* <Panel className={styles.footerNavLinks} header="About" key="3">
             <ul>
               <Link to={`/${lang}/${country}/about-us`}>
                 <li className={styles.mobileItem}>About Localists</li>
               </Link>
             </ul>
-          </Panel>
+          </Panel> */}
+                    <Link
+            className={styles.footerNavLinks}
+            style={{ color: "#000" }}
+            to={`/${lang}/${country}/about-us`}
+          >
+            <Panel className={styles.footerNavLinks} header="About Localists" key="3">
+              {/* <ul>
+              <Link to={`/${lang}/${country}/about-us`}>
+                <li className={styles.mobileItem}>About Localists</li>
+              </Link>
+            </ul> */}
+            </Panel>
+          </Link>
         </Collapse>
 
         {isMobile ? (
