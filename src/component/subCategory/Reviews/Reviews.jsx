@@ -92,7 +92,7 @@ const Reviews = ({ RELATED_REVIEW }) => {
                   <div className={styles.reviews_star_Image_wrap}>
                     <img src={reviewsStar} />
 
-                    <span>{reviews?.date}</span>
+                    {/* <span>{reviews?.date}</span> */}
                   </div>
                   <p className={styles.reviews_description}>
                     {reviews?.description}

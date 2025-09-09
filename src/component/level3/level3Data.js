@@ -1562,7 +1562,7 @@ const FIND_SERVICE_CONTENT = {
 
     {
       type: "h2",
-      text: "A Network of qualified professionals that can cover any type of fence installation",
+      text: "A network of qualified professionals that can cover any type of fence installation",
     },
     {
       type: "p",
