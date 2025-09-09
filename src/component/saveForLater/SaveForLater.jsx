@@ -51,11 +51,11 @@ const SaveForLater = () => {
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
-  const data = saveForLaterDataList[0]?.savedLeads?.length;
   const [selectedFilter, setSelectedFilter] = useState("Sort by Credits");
   const requiredData = saveForLaterDataList[0]?.savedLeads?.length
     ? saveForLaterDataList[0]?.savedLeads
     : saveForLaterDataList;
+  const data = requiredData?.length;
   console.log(saveForLaterDataList);
   const filterOptions = [
     "Credit Value High",
