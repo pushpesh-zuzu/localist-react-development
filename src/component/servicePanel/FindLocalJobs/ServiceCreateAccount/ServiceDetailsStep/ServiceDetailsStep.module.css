@@ -104,12 +104,11 @@
   justify-content: start;
 }
 
-
 .toggleButton,
 .optionButton {
   background: #ffffff;
   border: 1px solid #d9d9d9;
-  padding: 11px 23px;
+  padding: 11px 20px;
   border-radius: 100px !important;
   overflow: hidden;
   z-index: 1;
@@ -120,8 +119,8 @@
   color: #828282;
   text-wrap: nowrap;
 }
-.toggleButtonNo{
-   background: #ffffff;
+.toggleButtonNo {
+  background: #ffffff;
   border: 1px solid #d9d9d9;
   padding: 11px 23px;
   border-radius: 100px !important;
@@ -150,8 +149,8 @@
   transition: background 0.3s;
   text-wrap: nowrap;
 }
-.activeButtonNo{
-   background: var(--primary-color);
+.activeButtonNo {
+  background: var(--primary-color);
   border: 1px solid #d9d9d9;
   color: white;
   padding: 11px 23px;
@@ -161,7 +160,6 @@
   font-weight: 500;
   transition: background 1s;
   text-wrap: nowrap;
-   
 }
 
 .buttonContainer {
@@ -307,7 +305,7 @@
   .nextButton,
   .backButton {
     font-size: 16px;
-    padding:8px 10px;
+    padding: 8px 10px;
   }
 }
 
@@ -340,11 +338,11 @@
     min-width: 269px;
   }
   .countryLabel {
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
 
   .toggleGroup,
   .optionGroup {
@@ -363,12 +361,12 @@
     border-radius: 25px;
   }
   .activeButtonNo,
-  .toggleButtonNo{
-  border-radius: 25px;
-  text-align: center;
+  .toggleButtonNo {
+    border-radius: 25px;
+    text-align: center;
     padding: 6px 15px;
     font-size: 14px;
-}
+  }
 
   .buttonContainer {
     /* flex-direction: column; */
@@ -385,33 +383,32 @@
     font-weight: 500;
   }
 }
-@media screen and (max-width:380px) {
-    .input {
+@media screen and (max-width: 380px) {
+  .input {
     height: 16px;
     font-size: 12px;
     padding: 8px;
     min-width: 218px;
   }
   .countryLabel {
-  padding: 8px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
+    padding: 8px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
 }
 
-@media screen and (max-width:320px) {
-    .input {
+@media screen and (max-width: 320px) {
+  .input {
     height: 16px;
     font-size: 12px;
     padding: 8px;
     min-width: 163px;
   }
   .countryLabel {
-  padding: 8px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-}
-
+    padding: 8px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
 }

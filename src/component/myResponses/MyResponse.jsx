@@ -264,6 +264,7 @@ const MyResponse = () => {
               onChange={handlePurchaseChange}
               className={styles.antSelect}
               dropdownMatchSelectWidth={false}
+              style={{ width: 172, height: 42 }}
             >
               {purchaseOptions.map((option) => (
                 <Option key={option} value={option}>

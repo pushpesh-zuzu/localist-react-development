@@ -98,10 +98,10 @@
   font-size: 16px;
   outline: none;
   font-weight: 600;
-  color:#000000;
+  color: #000000;
   font-family: var(--font-Poppins);
   outline-color: var(--primary-color);
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
   /* height: 32px; */
 }
 .inputFocus {
@@ -109,11 +109,10 @@
 }
 
 .input::placeholder {
-  color: #000000;;
+  color: #000000;
   font-size: 16px;
   font-weight: 500;
 }
-
 
 .divider {
   width: 1px;
@@ -150,12 +149,15 @@
 }
 
 .searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 0;
   color: #ffffff;
-  padding: 13px 59px;
+  padding: 13px 39px;
   border-radius: 3px;
   background: var(--primary-color);
   cursor: pointer !important;
@@ -180,8 +182,8 @@
   /* overflow-y: auto; */
   z-index: 10;
   /* border-radius: 4px; */
-   box-shadow: 0px 0px 2px 0.5px #0000001a;
-   /* border-top: 2px solid var(--primary-color); */
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  /* border-top: 2px solid var(--primary-color); */
 }
 
 .searchItem {
@@ -196,36 +198,34 @@
 .searchItem:hover {
   background: #f0f0f0;
 }
-@media screen and (max-width: 2000px) and (min-width:1500px){
-  
+@media screen and (max-width: 2000px) and (min-width: 1500px) {
   .searchBox {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  background: #fff;
-  width: 39vw;
-  height: 51px;
-}
-.input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
-.searchResults {
-  position: absolute;
-  background: white;
-  /* border: 1px solid #ddd; */
-  width: 16%;
-  max-height: fit-content;
-  top: 84.8%;
-  /* overflow-y: auto; */
-  z-index: 10;
-  border-radius: 4px;
-   box-shadow: 0px 0px 2px 0.5px #0000001a;
-   /* border-top: 2px solid var(--primary-color); */
-}
-  
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    width: 39vw;
+    height: 51px;
+  }
+  .input:focus {
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
+  .searchResults {
+    position: absolute;
+    background: white;
+    /* border: 1px solid #ddd; */
+    width: 16%;
+    max-height: fit-content;
+    top: 84.8%;
+    /* overflow-y: auto; */
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    /* border-top: 2px solid var(--primary-color); */
+  }
 }
 @media screen and (min-width: 1200px) and (max-width: 1320px) {
   .input {
@@ -245,11 +245,11 @@
     /* border-top: 2px solid var(--primary-color); */
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 }
-}
-@media screen and (min-width:1321px) and (max-width:1380px) {
-   .searchResults {
+@media screen and (min-width: 1321px) and (max-width: 1380px) {
+  .searchResults {
     position: absolute;
     background: white;
     width: 26.4%;
@@ -261,10 +261,9 @@
     /* border-top: 2px solid var(--primary-color); */
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 }
-}
-
 
 @media screen and (max-width: 1200px) {
   .searchContainer {
@@ -287,9 +286,9 @@
   .input {
     padding: 12px 6px;
   }
-.input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+  .input:focus {
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
   .locationInput {
     font-size: 13px;
   }
@@ -340,8 +339,8 @@
     align-items: center;
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 }
 
 @media screen and (max-width: 920px) {
@@ -353,8 +352,8 @@
     /* border-top: 2px solid var(--primary-color); */
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 }
 
 @media screen and (max-width: 838px) {
@@ -396,8 +395,8 @@
     max-width: 150px;
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -415,8 +414,8 @@
   }
 
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
   .heading {
     font-size: 35px;
   }
@@ -485,8 +484,8 @@
     margin-top: 3px;
   }
   .input:focus {
-  border-bottom: 2px solid var(--primary-color) !important;
-}
+    border-bottom: 2px solid var(--primary-color) !important;
+  }
 
   .divider {
     display: none;
@@ -503,17 +502,17 @@
   .subText {
     font-size: 16.19px;
     line-height: 24px;
-    margin-top: 6px
+    margin-top: 6px;
   }
 
   .searchBox {
     /* height: 37px; */
     border-radius: 0px;
   }
- .input {
+  .input {
     height: 4px;
   }
-  .searchItem{
+  .searchItem {
     font-size: 14px !important;
     padding: 6px;
   }
@@ -616,7 +615,7 @@
     line-height: 15px;
     /* margin-left: 6px; */
   }
-/* .inputFocus {
+  /* .inputFocus {
   border-bottom: 2px solid var(--primary-color) !important;
 } */
 }
@@ -624,12 +623,11 @@
 @media screen and (max-width: 355px) {
   .searchResults {
     top: 68.9%;
-      
+
     /* border-top: 2px solid var(--primary-color); */
     width: 91.5%;
-  
   }
-/* .inputFocus {
+  /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
 } */
 }
@@ -642,7 +640,7 @@
   .popularExamples {
     width: 222px;
   }
-/* .inputFocus {
+  /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
 } */
 }
@@ -652,7 +650,6 @@
     top: 73%;
     width: 90%;
     /* border-top: 2px solid var(--primary-color); */
-
   }
   /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
@@ -660,5 +657,4 @@
   /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
 } */
-
 }

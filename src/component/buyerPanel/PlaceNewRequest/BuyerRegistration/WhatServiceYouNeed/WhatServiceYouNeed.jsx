@@ -88,33 +88,33 @@ const WhatServiceYouNeed = ({
   //   }
   // }, [serviceName, dispatch, service]);
   // ✅ Pre-fill from props
-useEffect(() => {
-  if (serviceName) {
-    setInput(serviceName);
-    setIsDropdownOpen(true);
-    dispatch(searchService({ search: serviceName })); // trigger API
-  }
-
-  if (pincodes) {
-    setPincode(pincodes);
-  }
-}, [serviceName, pincodes, dispatch]);
-
-// ✅ Sync when service list updates
-useEffect(() => {
-  if (serviceName && service?.length > 0) {
-    const match = service.find(
-      (s) => s.name.trim().toLowerCase() === serviceName.trim().toLowerCase()
-    );
-
-    if (match) {
-      setSelectedService(match);
-      setIsDropdownOpen(false); // close dropdown after match
-    } else {
-      setSelectedService(null);
+  useEffect(() => {
+    if (serviceName) {
+      setInput(serviceName);
+      setIsDropdownOpen(true);
+      dispatch(searchService({ search: serviceName })); // trigger API
     }
-  }
-}, [serviceName, service]);
+
+    if (pincodes) {
+      setPincode(pincodes);
+    }
+  }, [serviceName, pincodes, dispatch]);
+
+  // ✅ Sync when service list updates
+  useEffect(() => {
+    if (serviceName && service?.length > 0) {
+      const match = service.find(
+        (s) => s.name.trim().toLowerCase() === serviceName.trim().toLowerCase()
+      );
+
+      if (match) {
+        setSelectedService(match);
+        setIsDropdownOpen(false); // close dropdown after match
+      } else {
+        setSelectedService(null);
+      }
+    }
+  }, [serviceName, service]);
 
   const handleSelectService = useCallback(
     (item) => {
@@ -128,42 +128,49 @@ useEffect(() => {
     [dispatch]
   );
 
-const handleContinue = useCallback(() => {
-  let newErrors = { service: "", pincode: "" };
+  const handleContinue = useCallback(() => {
+    let newErrors = { service: "", pincode: "" };
 
-  if (!selectedService) {
-    newErrors.service = "Please select a service!";
-  }
+    if (!selectedService) {
+      newErrors.service = "Please select a service!";
+    }
 
-  if (!pincode) {
-    newErrors.pincode = "Postcode is required!";
-  } else if (pincode.length < 5 || pincode.length > 8) {
-    newErrors.pincode = "Postcode must be between  5 or 8 characters!";
-  }
+    if (!pincode) {
+      newErrors.pincode = "Postcode is required!";
+    } else if (pincode.length < 5 || pincode.length > 8) {
+      newErrors.pincode = "Postcode must be between  5 or 8 characters!";
+    }
 
-  // if (!isPincodeFromDropdown) {
-  //   showToast("error", "Please select postcodes from suggestions below"); // 🚫 block manual entry
-  //   return;
-  // }
+    if (!isPincodeFromDropdown) {
+      showToast("error", "Please select postcodes from suggestions below");
+      return;
+    }
 
-  setErrors(newErrors);
+    setErrors(newErrors);
 
-  if (!newErrors.service && !newErrors.pincode) {
-    dispatch(
-      setbuyerRequestData({
-        service_id: selectedService.id || serviceId,
-        postcode: pincode,
-        city: citySerach,
-      })
-    );
-    dispatch(
-      questionAnswerData({ service_id: selectedService.id || serviceId })
-    );
-    nextStep();
-  }
-}, [selectedService, pincode, dispatch, serviceId, citySerach, nextStep, isPincodeFromDropdown]);
+    if (!newErrors.service && !newErrors.pincode) {
+      dispatch(
+        setbuyerRequestData({
+          service_id: selectedService.id || serviceId,
+          postcode: pincode,
+          city: citySerach,
+        })
+      );
+      dispatch(
+        questionAnswerData({ service_id: selectedService.id || serviceId })
+      );
+      nextStep();
+    }
+  }, [
+    selectedService,
+    pincode,
+    dispatch,
+    serviceId,
+    citySerach,
+    nextStep,
+    isPincodeFromDropdown,
+  ]);
 
- 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
@@ -190,39 +197,38 @@ const handleContinue = useCallback(() => {
       );
 
       autocomplete.addListener("place_changed", () => {
-  const place = autocomplete.getPlace();
-  if (!place.address_components) return;
+        const place = autocomplete.getPlace();
+        if (!place.address_components) return;
 
-  const postalCode = place.address_components.find((component) =>
-    component.types.includes("postal_code")
-  )?.long_name;
+        const postalCode = place.address_components.find((component) =>
+          component.types.includes("postal_code")
+        )?.long_name;
 
-  let cityName =
-    place.address_components.find((component) =>
-      component.types.includes("postal_town")
-    )?.long_name ||
-    place.address_components.find((component) =>
-      component.types.includes("administrative_area_level_2")
-    )?.long_name;
+        let cityName =
+          place.address_components.find((component) =>
+            component.types.includes("postal_town")
+          )?.long_name ||
+          place.address_components.find((component) =>
+            component.types.includes("administrative_area_level_2")
+          )?.long_name;
 
-  if (postalCode) {
-    setPostalCodeValidate(true);
-    setPincode(postalCode);
-    inputRef.current.value = postalCode;
-    setErrors((prev) => ({ ...prev, pincode: "" }));
-    setIsPincodeFromDropdown(true); // ✅ mark as selected from dropdown
-  }
+        if (postalCode) {
+          setPostalCodeValidate(true);
+          setPincode(postalCode);
+          inputRef.current.value = postalCode;
+          setErrors((prev) => ({ ...prev, pincode: "" }));
+          setIsPincodeFromDropdown(true); // ✅ mark as selected from dropdown
+        }
 
-  if (cityName) {
-    setCity(cityName);
-    dispatch(setcitySerach(cityName));
-  }
+        if (cityName) {
+          setCity(cityName);
+          dispatch(setcitySerach(cityName));
+        }
 
-  if (!postalCode && !cityName) {
-    showToast("error", "Please select Postcode from dropdown");
-  }
-});
-
+        if (!postalCode && !cityName) {
+          showToast("error", "Please select Postcode from dropdown");
+        }
+      });
     };
 
     loadGoogleMapsScript();
@@ -286,23 +292,21 @@ const handleContinue = useCallback(() => {
     }
   }, [resetServiceTrigger]);
   const handlePincodeChange = (e) => {
-  const value = e.target.value.slice(0, 10);
-  setPincode(value);
-  setPostalCodeValidate(false);
-  setIsPincodeFromDropdown(false); // ❌ typing resets validation
-  setErrors((prev) => ({
-    ...prev,
-    pincode:
-      value.length > 0 && (value.length < 5 || value.length > 8)
-        ? "Postcode must be between 5 and 8 characters!"
-        : "",
-  }));
-};
-
+    const value = e.target.value.slice(0, 10);
+    setPincode(value);
+    setPostalCodeValidate(false);
+    setIsPincodeFromDropdown(false); // ❌ typing resets validation
+    setErrors((prev) => ({
+      ...prev,
+      pincode:
+        value.length > 0 && (value.length < 5 || value.length > 8)
+          ? "Postcode must be between 5 and 8 characters!"
+          : "",
+    }));
+  };
 
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
-      
       setShowConfirmModal(true);
       dispatch(
         setbuyerRequestData({
@@ -313,10 +317,10 @@ const handleContinue = useCallback(() => {
       );
     } else {
       setInput("");
-    setSelectedService(null);
-    setPincode("");
-    setCity("");
-      
+      setSelectedService(null);
+      setPincode("");
+      setCity("");
+
       onClose(); // close modal
     }
   };

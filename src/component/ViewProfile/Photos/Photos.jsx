@@ -1,24 +1,4 @@
-// import React from "react"
-// import styles from "./Photos.module.css"
-// import DummyImage from "../../../assets/Images/DummyImage.svg";
-// import paginationImg from "../../../assets/Icons/MyResponse/paginationImg.svg"
-// import leftpaginationImg from "../../../assets/Icons/MyResponse/rightPagenationImg.svg"
-// const Photos = ({details}) => {
-//   return (
-//     <div className={styles.photoContainer} >
-//       <h2>Photos</h2>
-//       <div className={styles.photosContainer}>
-//         <img src={DummyImage} alt="Profile" className={styles.profileImg} />
-//       </div>
-//       <div className={styles.paginationBox}>
-//         <img src={leftpaginationImg} alt="image" />
-//         <img src={paginationImg} alt="image" />
-//       </div>
-//     </div>
-//   )
-// }
-// export default Photos
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./Photos.module.css";
 import DummyImage from "../../../assets/Images/DummyImage.svg";
 import paginationImg from "../../../assets/Icons/MyResponse/paginationImg.svg";
@@ -34,27 +14,36 @@ const Photos = ({ details }) => {
   const photoString = details?.user_details?.company_photos;
   const photoArray = photoString ? photoString.split(",").filter(Boolean) : [];
 
+  const containerRef = useRef(null);
+  const [showPagination, setShowPagination] = useState(false);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const { scrollWidth, clientWidth } = containerRef.current;
+      setShowPagination(scrollWidth > clientWidth);
+    }
+  }, [photoArray]);
+
   return (
     <div className={styles.photoContainer}>
       <h2>Photos</h2>
 
       <div className={styles.photosContainer}>
-        {photoArray.length > 0 ? (
-          photoArray.map((img, index) => (
-            <img
-              key={index}
-              src={`${BASE_IMAGE}/users/${img.trim()}`}
-              alt={`Company Photo ${index + 1}`}
-              className={styles.profileImg}
-            />
-          ))
-        ) : (
-          // <img src={DummyImage} alt="Profile" className={styles.profileImg} />
-          ''
-)}
+        {photoArray.length > 0
+          ? photoArray.map((img, index) => (
+              <img
+                key={index}
+                src={`${BASE_IMAGE}/users/${img.trim()}`}
+                alt={`Company Photo ${index + 1}`}
+                className={styles.profileImg}
+              />
+            ))
+          : // <img src={DummyImage} alt="Profile" className={styles.profileImg} />
+            ""}
       </div>
 
-      {photoArray.length > 1 && (
+      {/* {photoArray.length > 1 && ( */}
+      {showPagination && (
         <div className={styles.paginationBox}>
           <img src={leftpaginationImg} alt="left" />
           <img src={paginationImg} alt="right" />
