@@ -1382,7 +1382,7 @@ const BREADCRUMB_CONFIG = {
   ],
   "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio Installation", path: "patio-layers-near-me" }, // no path
+    { title: "Patio Services", path: "patio-layers-near-me" }, // no path
   ],
   "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
