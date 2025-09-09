@@ -6,14 +6,15 @@ const WhoWeAre = () => {
   return (
     <div className={styles.mainContainer}>
       <div style={{ marginBottom: "10px" }} className={styles.content}>
-        <WithBlueTextBlack textalign="left" firstblueText="Who" secondText="we are" />
+        <WithBlueTextBlack
+          textalign="left"
+          firstblueText="Who"
+          secondText="we are"
+        />
       </div>
       <p className={styles.content}>
-        <span className={styles.link} style={{ textDecoration: "none" }}>
-          Localists.com
-        </span>{" "}
-        is one of the fastest growing local marketplaces in the UK. We are
-        transforming how local consumers connect with trusted local
+        Localists.com is one of the fastest growing local marketplaces in the
+        UK. We are transforming how local consumers connect with trusted local
         professionals. We make it easier and faster to find verified local
         service providers across home, business, and lifestyle sectors via one
         online platform.
