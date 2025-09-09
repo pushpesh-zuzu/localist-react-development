@@ -362,8 +362,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
           </AccordionSection>
 
           {/* Locations */}
-          {/* <AccordionSection title="Locations">
-          
+          <AccordionSection title="Locations">
             <label
               style={{ display: "flex", alignItems: "center", gap: "8px" }}
             >
@@ -376,8 +375,6 @@ const MatchingLeadsFilter = ({ onClose }) => {
               />
               All
             </label>
-
-         
 
             {filterListData?.[0]?.location?.map((item) => (
               <div key={item.time}>
@@ -403,7 +400,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
                 </label>
               </div>
             ))}
-          </AccordionSection> */}
+          </AccordionSection>
 
           {/* Credits */}
           <AccordionSection title="Credits">
