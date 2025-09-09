@@ -55,13 +55,13 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
 
             if (block.type === "uili") {
-              const isFirstUiliInGroup = prevBlock?.type !== "uili";
+            //  const isFirstUiliInGroup = !prevBlock || prevBlock.type !== "uili" || false;
 
               return (
                 <ul
                   key={index}
                   style={{
-                    marginTop: isFirstUiliInGroup ? "8px" : "0px",
+                    marginTop: block?.marginTop ===true ? "8px" : "0px",
                     marginBottom: "0px",
                   }}
                 >

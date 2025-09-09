@@ -1204,7 +1204,7 @@ const HowItWorksData = {
       id: 3,
       lBreak: false,
       title: "Hire your chosen local fencing contractor",
-      image: accountant, // Note: You might want to rename this variable to 'fencerIcon' or similar
+      image: accountant,
       heading1: "Hire your chosen local fencing contractor",
       description:
         "With Localists, you stay in control. There is no obligation to hire immediately. Take your time. Once you’re ready, go with the fence installers who meet your needs, preferences, and budget.",
@@ -1758,21 +1758,25 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Ask for tailored design suggestions –\u00A0",
       text: "A good local patio builder won’t just say “yes” to everything; they’ll offer creative ideas that work with your garden’s size, shape, and style.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "See real examples of past projects –\u00A0",
       text: "Photos speak volumes. Ask to see finished patios in materials you’re considering, like sandstone patios or porcelain patios, so you can judge the quality for yourself.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Avoid paying everything upfront –\u00A0",
       text: "A trusted patio installer will be happy to work with staged payments, so you only pay in full when you’re completely satisfied.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Check genuine local recommendations –\u00A0",
       text: "It’s one thing to have online reviews, but hearing from someone in your own area gives extra peace of mind that the contractor delivers on their promises.",
+      marginTop: false,
     },
     {
       type: "h2",
@@ -1790,27 +1794,33 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading: "Materials that suit your region’s weather conditions.",
+      marginTop: false,
     },
     {
       type: "li",
       heading:
         "Designs that reflect and preserve the local character of your neighbourhood.",
+      marginTop: false,
     },
     {
       type: "li",
       heading: "Designs that blend with your house style.",
+      marginTop: false,
     },
     {
       type: "li",
       heading: "Easy-to-check reputation from nearby customers.",
+      marginTop: false,
     },
     {
       type: "li",
       heading: "Support for your local economy.",
+      marginTop: false,
     },
     {
       type: "li",
       heading: "Quicker help if anything needs adjusting later.",
+      marginTop: false,
     },
     {
       type: "h3",
@@ -1828,39 +1838,48 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "libold",
       heading: "Do you have insurance in case something goes wrong?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "How long have you been building patios?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "Do you offer a guarantee for your work?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "Can I have a detailed written quote?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "How long will the installation take from start to finish?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "Are you a member of any trade organisations?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "Can we agree on a staged payment plan?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading: "When could you start the job?",
+      marginTop: false,
     },
     {
       type: "libold",
       heading:
         "Do you have photos or examples of similar projects you’ve done?",
+      marginTop: false,
     },
     {
       type: "h2",
@@ -1884,16 +1903,19 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Concrete patio ",
       text: "– £70–£90 per m²",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Sandstone patio ",
       text: "– £90–£120 per m²",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Porcelain patio ",
       text: " – £100–£140 per m² (premium, sleek look)",
+      marginTop: false,
     },
     {
       type: "p",
@@ -1917,31 +1939,37 @@ const FIND_SERVICE_CONTENT = {
       type: "uili",
       heading: "Trustworthiness ",
       text: "– Someone who communicates clearly, turns up on time, and delivers what they promise. They should also be ready to provide a written contract and clear timelines.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Knowledge ",
       text: "– They can provide expert advice on what works best for your garden, soil, climate and even any local regulations you need to adhere to.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Insurance and guarantees ",
       text: "– This protects you if anything goes wrong.",
+      marginTop: false,
     },
     {
       type: "uili ",
       heading: "Insurance and guarantees",
       text: "– This protects you if anything goes wrong.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Good reputation ",
       text: "– Positive feedback from previous clients speaks volumes. Ensure you look at testimonials from previous clients.",
+      marginTop: false,
     },
     {
       type: "uili",
       heading: "Willingness to answer questions ",
       text: "– A good contractor won’t rush you; they’ll take time to explain options, next steps and are happy to hold your hands throughout the project.",
+      marginTop: false,
     },
     {
       type: "p",
