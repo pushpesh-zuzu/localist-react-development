@@ -84,7 +84,7 @@ const SaveForLater = () => {
         sort_type: getSortTypeValue(value),
         page_type: "saved_leads",
       };
-      dispatch(getSaveLaterListData(filterData));
+      dispatch(getLeadFiterApiList(filterData, true));
     }
   };
 
