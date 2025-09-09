@@ -242,7 +242,7 @@ const SaveForLater = () => {
   return (
     <>
       <div className={styles.maincontainer}>
-        {/* <div className={styles.container}>
+        <div className={styles.container}>
           <div className={styles.textSection}>
             <h2 className={styles.heading}>{data} matching leads</h2>
           </div>
@@ -300,7 +300,7 @@ const SaveForLater = () => {
               ))}
             </Select>
 
-            <div className={styles.actionButtons}>
+            {/* <div className={styles.actionButtons}>
               <button
                 className={styles.filterButton}
                 onClick={handleFilterClick}
@@ -308,13 +308,13 @@ const SaveForLater = () => {
                 <img style={{ cursor: "pointer" }} src={FilterIcon} alt="" />{" "}
                 Filter
               </button>
-            </div>
+            </div> */}
           </div>
 
           {isFilterModalOpen && (
             <MatchingLeadsFilter onClose={handleCloseModal} />
           )}
-        </div> */}
+        </div>
 
         <div className={styles.dualDropdownsContainers}>
           <Select

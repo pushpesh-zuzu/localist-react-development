@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./PlaceNewRequest.module.css";
 import BuyerRegistration from "./BuyerRegistration/BuyerRegistration";
 import { useDispatch, useSelector } from "react-redux";
-import { getbuyerrequestList } from "../../../store/Buyer/BuyerSlice";
+import {
+  getbuyerrequestList,
+  setBuyerStep,
+} from "../../../store/Buyer/BuyerSlice";
 // import moment from "moment";
 import moment from "moment-timezone";
 import { Spin } from "antd";
@@ -14,7 +17,11 @@ const PlaceNewRequest = () => {
   const [isHiredModalOpen, setIsHiredModalOpen] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const navigate = useNavigate();
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    setIsModalOpen(true);
+
+    dispatch(setBuyerStep(1));
+  };
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedService(null); // ✅ reset selectedService when modal closes

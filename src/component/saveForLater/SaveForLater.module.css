@@ -29,7 +29,7 @@
   margin-bottom: 10px;
 }
 .maincontainer {
-  padding: 42px 42px;
+  padding: 22px 42px;
   /* height: 100%; */
 }
 
@@ -110,6 +110,12 @@
   background: #fff;
   box-shadow: 0px 0px 6px 0px #0000001a;
   padding: 28.25px 25.26px 28.25px 34px;
+}
+.noDataContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
 }
 .noDataContainer h2 {
   text-align: center;

@@ -339,7 +339,7 @@ export const verifyPhoneNumberData = (verifyData) => {
       console.log("verify number", response?.data?.data);
       if (response?.data?.success) {
         console.log("response1234", response);
-        dispatch(setQuestionAnswerData(response?.data?.data));
+        // dispatch(setQuestionAnswerData(response?.data?.data));
         // dispatch(setRequestId(response?.data?.data?.request_id));
         dispatch(setRequestData(response?.data?.data));
         dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens));

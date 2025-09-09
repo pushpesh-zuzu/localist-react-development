@@ -272,7 +272,7 @@ const BuyerRegistration = ({
   postcode,
   city,
   postalCodeValidate,
-  setSelectedService = () => {},  
+  setSelectedService = () => {},
   setFromImageModal = () => {},
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -286,6 +286,8 @@ const BuyerRegistration = ({
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
+  console.log(buyerStep, "buyerStep");
+
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader, authToken } = useSelector(
     (state) => state.findJobs
@@ -313,7 +315,7 @@ const BuyerRegistration = ({
 
   useEffect(() => {
     const initialStep = isAdminOrRemembered ? 2 : 1;
-    dispatch(setBuyerStep(initialStep));
+    // dispatch(setBuyerStep(initialStep));
   }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
@@ -334,12 +336,11 @@ const BuyerRegistration = ({
     }
   }, [shouldClose]);
 
-const handleClose = () => {
-  if (typeof setSelectedService === "function") setSelectedService(null);
-  if (typeof setFromImageModal === "function") setFromImageModal(false);
-  if (typeof closeModal === "function") closeModal();
-};
-
+  const handleClose = () => {
+    if (typeof setSelectedService === "function") setSelectedService(null);
+    if (typeof setFromImageModal === "function") setFromImageModal(false);
+    if (typeof closeModal === "function") closeModal();
+  };
 
   useEffect(() => {
     if (buyerStep === 2) {

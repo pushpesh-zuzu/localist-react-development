@@ -7,6 +7,7 @@ import {
   addDetailsRequestData,
   addImageSubmittedData,
   clearSetbuyerRequestData,
+  setBuyerStep,
   setQualityData,
   textQualityData,
 } from "../../../../../store/Buyer/BuyerSlice";
@@ -98,9 +99,12 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       dispatch(clearSetbuyerRequestData());
       dispatch(clearBuyerRegisterFormData());
       dispatch(setQualityData());
+
+      // navigate(`/bids-list/${requestId
+      setShowConfirmModal(false);
+      dispatch(setBuyerStep(0));
+
       navigate(`/conversion-redirect/${requestId}`);
-      // navigate(`/bids-list/${requestId}`);
-      setShowConfirmModal(false)
     });
 
     // .then(() => {
@@ -113,9 +117,9 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
 
   const handleCloseClick = () => {
     // setShowConfirmModal(true);
-    onClose()
-     dispatch(clearSetbuyerRequestData())
-       dispatch(clearBuyerRegisterFormData())
+    onClose();
+    dispatch(clearSetbuyerRequestData());
+    dispatch(clearBuyerRegisterFormData());
   };
 
   return (
@@ -125,7 +129,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         onClick={handleCloseClick}
         disabled={addDetailLoader}
       >
-     &times;
+        &times;
       </div>
       <div className={styles.successMessage}>
         <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
@@ -137,7 +141,8 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
 
       <p className={styles.textareaLabel}>
-        The more information you provide, the quicker and more accurately professionals can respond
+        The more information you provide, the quicker and more accurately
+        professionals can respond
       </p>
 
       {/* ✅ Textarea Validation */}
@@ -185,8 +190,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         </ul>
       )}
 
-    
-
       <div className={styles.progressContainer}>
         <span>Request quality</span>
         <div className={styles.progressBar}>
@@ -212,23 +215,23 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
  I’m happy to be contacted as soon as possible 
 
       </label> */}
-<label className={styles.checkboxContainer}>
-  <input
-    type="checkbox"
-    checked={professionalLetin}
-    onChange={handleCheckboxChange}
-    className={styles.checkbox}
-  />
-  <div style={{ marginLeft:"-4px", flexDirection: "column" }}>
-  <span className={styles.textLine1}>
-    Tick if you'd like to hear back quickly
-  </span>
-  <br />
-  <span className={styles.textLine2}>
-   I’m happy to be contacted as soon as possible
-  </span>
-  </div>
-</label>
+      <label className={styles.checkboxContainer}>
+        <input
+          type="checkbox"
+          checked={professionalLetin}
+          onChange={handleCheckboxChange}
+          className={styles.checkbox}
+        />
+        <div style={{ marginLeft: "-4px", flexDirection: "column" }}>
+          <span className={styles.textLine1}>
+            Tick if you'd like to hear back quickly
+          </span>
+          <br />
+          <span className={styles.textLine2}>
+            I’m happy to be contacted as soon as possible
+          </span>
+        </div>
+      </label>
       <div className={styles.buttonWrapper}>
         <button className={styles.viewMatchesBtn} onClick={handleSubmit}>
           {addDetailLoader ? (
@@ -240,9 +243,9 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
           )}
         </button>
       </div>
-        <div className={styles.privacyWrapper}>
+      <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
-        Your information is protected by our {" "}
+          Your information is protected by our{" "}
           {/* <a
             href="/privacy-policy"
             target="blank"
