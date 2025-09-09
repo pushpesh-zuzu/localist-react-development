@@ -129,7 +129,7 @@
   justify-content: center;
   align-items: center;
   padding: 30px 0px;
-  max-width: 1041px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
@@ -150,7 +150,7 @@
 .descriptionContainer {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  /* gap: 13px; */
 }
 
 .descriptionContainer p {
@@ -211,6 +211,9 @@
   .findAccountantContainer {
     padding: 40px 30px;
   }
+  .infoContainer {
+    padding: 30px 4px;
+  }
 
   .searchcontainer h1 {
     font-size: 38px;
@@ -220,16 +223,16 @@
     padding: 50px 30px;
   }
   .searchBoxContainer span {
-  color: var(--primary-color);
-  /* line-height: 57px; */
-}
+    color: var(--primary-color);
+    /* line-height: 57px; */
+  }
 
   .searchInputContainer button {
     width: 120px;
   }
 
   .findAccountInfoContainer {
-    padding: 27px 30px 18px 30px;
+    padding: 27px 20px 18px 20px;
   }
 
   .accountantBtn {
@@ -254,8 +257,6 @@
 
   .searchBoxContainer p {
     font-size: 18px;
-    
-    
   }
 
   .searchBoxContainer span {
@@ -274,7 +275,8 @@
   }
 
   .findAccountInfoContainer {
-    padding: 20px 20px 15px 20px;
+    padding: 20px 31px 15px 31px;
+    letter-spacing: 0.5px;
   }
 
   .breadcrumb {
@@ -288,9 +290,9 @@
 
   .title {
     font-size: 28px;
-    line-height:40px
+    line-height: 40px;
   }
-  .highlight{
+  .highlight {
     font-size: 28px;
   }
 
@@ -304,6 +306,16 @@
     font-size: 14px;
   }
 }
+@media (min-width: 426px) and (max-width: 431px) {
+  .findAccountInfoContainer {
+    padding: 20px 22px 15px 22px;
+  }
+}
+@media (min-width: 410px) and (max-width: 413px) {
+  .findAccountInfoContainer {
+    padding: 20px 23px 15px 23px;
+  }
+}
 
 @media (max-width: 400px) {
   .searchInput {
@@ -314,5 +326,16 @@
   .searchInputContainer button {
     width: 50px;
     font-size: 14px;
+  }
+}
+@media (min-width: 371px) and (max-width: 376px) {
+  .findAccountInfoContainer {
+    padding: 20px 11px 15px 11px;
+  }
+}
+
+@media (max-width: 320px) {
+  .findAccountInfoContainer {
+    padding: 20px 30px 15px 30px;
   }
 }
