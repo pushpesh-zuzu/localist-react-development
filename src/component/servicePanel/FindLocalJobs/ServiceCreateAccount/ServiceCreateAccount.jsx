@@ -30,7 +30,6 @@ const ServiceCreateAccount = () => {
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
-  console.log(formattedTitle, "formattedTitle");
   const { registerStep } = useSelector((state) => state.findJobs);
   const [errors, setErrors] = useState({});
   const [emailValue, setEmailValue] = useState("");
