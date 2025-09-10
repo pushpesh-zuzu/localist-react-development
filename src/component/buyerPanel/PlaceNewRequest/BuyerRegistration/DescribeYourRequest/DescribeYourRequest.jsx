@@ -91,21 +91,26 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       professional_letin: professionalLetin ? 1 : 0,
     };
 
-    dispatch(addDetailsRequestData(detailsData)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Create Request successfully!");
+    dispatch(addDetailsRequestData(detailsData, navigate, requestId)).then(
+      (result) => {
+        if (result?.success) {
+          showToast(
+            "success",
+            result?.message || "Create Request successfully!"
+          );
+        }
+        // onClose();
+        dispatch(clearSetbuyerRequestData());
+        dispatch(clearBuyerRegisterFormData());
+        dispatch(setQualityData());
+
+        // navigate(`/bids-list/${requestId
+        setShowConfirmModal(false);
+        dispatch(setBuyerStep(0));
+
+        navigate(`/conversion-redirect/${requestId}`);
       }
-      // onClose();
-      dispatch(clearSetbuyerRequestData());
-      dispatch(clearBuyerRegisterFormData());
-      dispatch(setQualityData());
-
-      // navigate(`/bids-list/${requestId
-      setShowConfirmModal(false);
-      dispatch(setBuyerStep(0));
-
-      navigate(`/conversion-redirect/${requestId}`);
-    });
+    );
 
     // .then(() => {
     //   navigate("/buyers/create");

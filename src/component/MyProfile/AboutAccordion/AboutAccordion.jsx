@@ -26,6 +26,7 @@ import {
   fetchCompanyDetails,
 } from "../../../store/Company/companyLookup";
 import Cropper from "react-easy-crop";
+import { usePrompt } from "../../../utils/usePrompt";
 
 const AboutAccordion = ({ details }) => {
   const dispatch = useDispatch();
@@ -159,39 +160,10 @@ const AboutAccordion = ({ details }) => {
 
   const previewFile = (file) => URL.createObjectURL(file);
 
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     setImageSrc(reader.result);
-  //     setIsCropping(true);
-  //     setZoom(1);
-  //     setCrop({ x: 0, y: 0 });
-  //   };
-  //   reader.readAsDataURL(file);
-  //   const { name, files } = e.target;
-  //   if (name === "company_photos") {
-  //     const arr = Array.from(files);
-  //     setFormState((prev) => ({
-  //       ...prev,
-  //       company_photos: arr,
-  //       company_photosPreview: arr.map(previewFile),
-  //     }));
-  //   } else {
-  //     setFormState((prev) => ({
-  //       ...prev,
-  //       [name]: files[0],
-  //       [`${name}Preview`]: previewFile(files[0]),
-  //     }));
-  //   }
-  // };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setIsDirty(true);
     if (!file) return;
-    alert("ji");
 
     const { name } = e.target;
 
@@ -253,6 +225,11 @@ const AboutAccordion = ({ details }) => {
     }
   };
   const [isDirty, setIsDirty] = useState(false);
+  const [isDirtyRedux, setIsDirtyRedux] = useState(false);
+  usePrompt(
+    "You have unsaved changes. Are you sure you want to leave?",
+    isDirty
+  );
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (isDirty) {
@@ -266,6 +243,14 @@ const AboutAccordion = ({ details }) => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isDirty]);
+
+  useEffect(() => {
+    if (isDirty === true) {
+      dispatch(setIsDirtyRedux(true));
+    } else {
+      dispatch(setIsDirtyRedux(false));
+    }
+  }, [isDirty, dispatch]);
 
   // Debounce for company_location
   useEffect(() => {
@@ -393,38 +378,6 @@ const AboutAccordion = ({ details }) => {
       image.src = url;
     });
 
-  // Generate cropped image
-  // const getCroppedImg = async (imageSrc, pixelCrop) => {
-  //   const image = await createImage(imageSrc);
-  //   const canvas = document.createElement("canvas");
-  //   const ctx = canvas.getContext("2d");
-
-  //   canvas.width = pixelCrop.width;
-  //   canvas.height = pixelCrop.height;
-
-  //   const scaleX = image.naturalWidth / image.width;
-  //   const scaleY = image.naturalHeight / image.height;
-
-  //   ctx.drawImage(
-  //     image,
-  //     pixelCrop.x * scaleX,
-  //     pixelCrop.y * scaleY,
-  //     pixelCrop.width * scaleX,
-  //     pixelCrop.height * scaleY,
-  //     0,
-  //     0,
-  //     outputSize,
-  //     outputSize
-  //   );
-
-  //   return new Promise((resolve) => {
-  //     canvas.toBlob((blob) => {
-  //       const dataUrl = canvas.toDataURL("image/jpeg");
-  //       resolve({ blob, dataUrl });
-  //     }, "image/jpeg");
-  //   });
-  // };
-
   const getCroppedImg = (imageSrc, croppedAreaPixels) => {
     return new Promise((resolve, reject) => {
       const image = new Image();
@@ -466,67 +419,6 @@ const AboutAccordion = ({ details }) => {
       image.onerror = (error) => reject(error);
     });
   };
-
-  // const handleApplyCropped = async () => {
-  //   if (!imageSrc || !croppedAreaPixels) return;
-  //   const { blob, dataUrl } = await getCroppedImg(imageSrc, croppedAreaPixels);
-  //   setCroppedPreview(dataUrl);
-  //   const croppedFile = new File([blob], "profile_image.jpg", {
-  //     type: "image/jpeg",
-  //   });
-  //   setFormState((prev) => ({
-  //     ...prev,
-  //     profile_image: croppedFile,
-  //     profile_imagePreview: dataUrl,
-  //   }));
-  //   setIsCropping(false);
-  // };
-
-  // const handleSubmit = async () => {
-  //   if (!validate()) {
-  //     alert("Fix validation errors");
-  //     return;
-  //   }
-
-  //   const allowedKeys = [
-  //     "type", // Include this if your backend expects it for `user_details`
-  //     "company_logo",
-  //     "company_name",
-  //     "profile_image",
-  //     "name",
-  //     "company_email",
-  //     "company_phone",
-  //     "company_website",
-  //     "company_location",
-  //     "company_locaion_reason",
-  //     "company_size",
-  //     "company_total_years",
-  //     "about_company",
-  //   ];
-
-  //   const body = new FormData();
-  //   allowedKeys.forEach((key) => {
-  //     const val = formState[key];
-  //     if (val != null) {
-  //       body.append(key, val);
-  //     }
-  //   });
-  //   console.log(formState)
-  // console.log(body)
-  //   try {
-  //     const response = await axiosInstance.post(apiUrl, body, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-
-  //     alert("Profile updated successfully!");
-  //     console.log(response);
-  //   } catch (err) {
-  //     console.error("Submission failed:", err);
-  //     alert("Submission failed.");
-  //   }
-  // };
 
   const handleApplyCropped = async () => {
     if (!imageSrc || !croppedAreaPixels) return;
@@ -813,30 +705,7 @@ const AboutAccordion = ({ details }) => {
           </a>
           .
         </p>
-        {/* <div className={styles.imageSection}>
-          <img src={defaultImage} alt="Default Contact" />
-          <div className={styles.buttonGroup}>
-            <button
-              className={styles.uploadBtn}
-              onClick={() => fileInputRefs.accre_image.current.click()}
-            >
-              Upload new picture
-            </button>
-            <button
-              className={styles.webcamBtn}
-              onClick={() => handleCaptureWebcam("accre_image")}
-            >
-              Upload using Webcam
-            </button>
-            <input
-              type="file"
-              name="accre_image"
-              ref={fileInputRefs.accre_image}
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-          </div>
-        </div> */}
+
         <div className={styles.formGroup}>
           <div className={styles.halfInput}>
             <label className={styles.label}>Company email address</label>

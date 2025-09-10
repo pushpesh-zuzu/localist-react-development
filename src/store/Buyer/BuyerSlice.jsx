@@ -265,7 +265,7 @@ export const getbuyerrequestList = () => {
   };
 };
 
-export const addDetailsRequestData = (addDetailsData) => {
+export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
   return async (dispatch) => {
     dispatch(setAddDetailLoader(true));
     try {
@@ -276,7 +276,13 @@ export const addDetailsRequestData = (addDetailsData) => {
 
       if (response) {
         dispatch(getbuyerrequestList());
-        return response.data;
+        navigate(`/conversion-redirect/${requestId}`);
+        console.log("before settimeout");
+
+        setTimeout(() => {
+          console.log("after settimeout");
+          return response.data;
+        }, 5000);
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
