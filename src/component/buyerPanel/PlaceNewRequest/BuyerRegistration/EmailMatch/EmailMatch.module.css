@@ -12,7 +12,8 @@
 
 .phoneWrapper {
   display: flex;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
   width: 100%;
   position: relative;
 }
@@ -20,7 +21,17 @@
 .phoneWrapper::before {
   content: "+44";
   position: absolute;
-  top: 49.5%;
+  top: 47.5%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #000;
+  pointer-events: none;
+}
+
+.error44::before {
+  content: "+44";
+  position: absolute;
+  top: 33.5%;
   left: 10px;
   transform: translateY(-50%);
   color: #000;

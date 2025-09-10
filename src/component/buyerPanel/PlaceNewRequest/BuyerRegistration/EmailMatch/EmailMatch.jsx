@@ -115,7 +115,7 @@ const EmailMatch = ({
       const updatedAnswers = buyerRequest?.questions || [];
 
       const formData = new FormData();
-      formData.append("email", email); 
+      formData.append("email", email);
       formData.append("name", name);
       formData.append("phone", phone);
 
@@ -249,7 +249,11 @@ const EmailMatch = ({
             )}
           </div> */}
 
-          <div className={styles.phoneWrapper}>
+          <div
+            className={`${styles.phoneWrapper} ${
+              errors.phone ? styles.error44 : ""
+            }`}
+          >
             <input
               type="tel"
               placeholder="Phone Number"
