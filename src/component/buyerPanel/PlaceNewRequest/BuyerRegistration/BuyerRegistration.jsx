@@ -274,7 +274,7 @@ const BuyerRegistration = ({
   postalCodeValidate,
   cancelHeading,
   cancelPara,
-  setSelectedService = () => {},  
+  setSelectedService = () => {},
   setFromImageModal = () => {},
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -317,7 +317,7 @@ const BuyerRegistration = ({
 
   useEffect(() => {
     const initialStep = isAdminOrRemembered ? 2 : 1;
-    // dispatch(setBuyerStep(initialStep));
+    dispatch(setBuyerStep(initialStep));
   }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {

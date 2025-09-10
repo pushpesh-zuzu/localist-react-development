@@ -5,7 +5,11 @@ import { setcitySerach } from "../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 
-const SearchAccountantLeve3 = ({ title = "", defaultService,isNeedS=false }) => {
+const SearchAccountantLeve3 = ({
+  title = "",
+  defaultService,
+  isNeedS = false,
+}) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
@@ -104,7 +108,13 @@ const SearchAccountantLeve3 = ({ title = "", defaultService,isNeedS=false }) => 
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-              Find <span>{title}{isNeedS ? "s" : ""}</span> Near You</h1>
+        Find{" "}
+        <span>
+          {title}
+          {isNeedS ? "s" : ""}
+        </span>{" "}
+        Near You
+      </h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <p>
           {/* Where do you need <span>{title}s</span>? */}
