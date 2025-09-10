@@ -20,11 +20,20 @@ const LandingFenceAndGate = ({}) => {
   // const isServiceAvailable = lastItem?.path === slug;
 
   // if (!isServiceAvailable) return <NotFound />;
-  console.log(LANDING_HOW_IT_WORK, "LANDING_HOW_IT_WORK");
+  const isProduction =
+    typeof window !== "undefined" &&
+    window.location.hostname === "localists.com";
+  console.log(
+    "is production",
+    isProduction,
+    "widnow.location.pathname",
+    typeof window !== "undefined" && window.location.hostname
+  );
+
   return (
     <>
-      {/* <Helmet>
-        <title>{CONTENT_CONFIG_META[slug]?.title}</title>
+      <Helmet>
+        {/* <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
           name={CONTENT_CONFIG_META[slug]?.name}
           content={CONTENT_CONFIG_META[slug]?.content}
@@ -33,8 +42,11 @@ const LandingFenceAndGate = ({}) => {
           rel="preload"
           href={CONTENT_CONFIG_BANNER[slug]?.banner}
           as="image"
-        />
-      </Helmet> */}
+        /> */}
+        {isProduction && (
+          <meta data-rh="true" name="robots" content="noindex" />
+        )}
+      </Helmet>
 
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["fencing_ppc"]?.title}
@@ -44,7 +56,7 @@ const LandingFenceAndGate = ({}) => {
         bannerImage={LANDING_DETAIL_BANNERS["fencing_ppc"]?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
-        serviceId ={ServiceId.fencing_ppc}
+        serviceId={ServiceId.fencing_ppc}
       />
 
       <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK["landscaping_ppc"]} />
