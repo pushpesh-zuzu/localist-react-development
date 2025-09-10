@@ -10,20 +10,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { clearSetbuyerRequestData, createRequestData } from "../../../store/Buyer/BuyerSlice";
+import {
+  clearSetbuyerRequestData,
+  createRequestData,
+} from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData, showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 // import { showToast } from "../../../../../utils";
 
-const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfirmModal,confirmClose,onConfirm}) => {
+const ConfirmationModal = ({
+  onCancel,
+  handleInputChange,
+  formData,
+  setShowConfirmModal,
+  confirmClose,
+  onConfirm,
+  cancelHeading = "Are you sure that you want to leave?",
+  cancelPara = `We're asking a few questions so we can find you the right pros, and
+          send you quotes fast and free!`,
+}) => {
   const [Input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer)
-  const { userToken } = useSelector((state)=> state.auth)
+  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
+  const { userToken } = useSelector((state) => state.auth);
   const { service, registerLoader, searchServiceLoader, selectedServices } =
     useSelector((state) => state.findJobs);
   useEffect(() => {
@@ -86,40 +99,40 @@ const ConfirmationModal = ({ onCancel, handleInputChange, formData,setShowConfir
       document.body.style.overflow = "auto";
     };
   }, [show]);
-console.log(buyerRequest,formData,"buyerRequest")
+  console.log(buyerRequest, formData, "buyerRequest");
   const handleSubmit = () => {
-if (!userToken) {
-        const formData = new FormData();
-        formData.append("email", buyerRequest?.email);
-        formData.append("name", buyerRequest?.name);
-        formData.append("phone", buyerRequest?.phone);
-        formData.append("service_id", buyerRequest?.service_id);
-        formData.append("postcode", buyerRequest?.postcode);
-        // formData.append("questions", JSON.stringify(buyerRequest?.questions));
-        formData.append("form_status", 0);
-        // form_status: 1,
-        // formData.append("recevive_online", consent ? 1 : 0);
+    if (!userToken) {
+      const formData = new FormData();
+      formData.append("email", buyerRequest?.email);
+      formData.append("name", buyerRequest?.name);
+      formData.append("phone", buyerRequest?.phone);
+      formData.append("service_id", buyerRequest?.service_id);
+      formData.append("postcode", buyerRequest?.postcode);
+      // formData.append("questions", JSON.stringify(buyerRequest?.questions));
+      formData.append("form_status", 0);
+      // form_status: 1,
+      // formData.append("recevive_online", consent ? 1 : 0);
 
-        dispatch(createRequestData(formData)).then((result) => {
-          if (result?.success) {
-            showToast("succes", result?.success);
-            // setShowConfirmModal(false)
-            localStorage.removeItem("barkToken");
-        localStorage.removeItem("barkUserToken");
-        localStorage.removeItem("registerDataToken");
-        localStorage.removeItem("registerTokens");
-        localStorage.removeItem("createRequestToken");
-        clearAuthData()
+      dispatch(createRequestData(formData)).then((result) => {
+        if (result?.success) {
+          showToast("succes", result?.success);
+          // setShowConfirmModal(false)
+          localStorage.removeItem("barkToken");
+          localStorage.removeItem("barkUserToken");
+          localStorage.removeItem("registerDataToken");
+          localStorage.removeItem("registerTokens");
+          localStorage.removeItem("createRequestToken");
+          clearAuthData();
           // dispatch(clearSetbuyerRequestData())
           //        dispatch(clearBuyerRegisterFormData())
 
-            onConfirm()
-          }
-          // nextStep();
-        });
-      } else {
+          onConfirm();
+        }
         // nextStep();
-      }
+      });
+    } else {
+      // nextStep();
+    }
   };
 
   const handleOpenModal = () => {
@@ -133,11 +146,8 @@ if (!userToken) {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2 className={styles.heading}>Are you sure that you want to leave?</h2>
-        <p className={styles.description}>
-          We're asking a few questions so we can find you the right pros, and
-          send you quotes fast and free!
-        </p>
+        <h2 className={styles.heading}>{cancelHeading}</h2>
+        <p className={styles.description}>{cancelPara}</p>
         <div className={styles.buttonGroup}>
           <button
             className={styles.backButton}

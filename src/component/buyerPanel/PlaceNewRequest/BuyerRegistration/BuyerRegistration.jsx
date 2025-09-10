@@ -272,7 +272,9 @@ const BuyerRegistration = ({
   postcode,
   city,
   postalCodeValidate,
-  setSelectedService = () => {},
+  cancelHeading,
+  cancelPara,
+  setSelectedService = () => {},  
   setFromImageModal = () => {},
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -511,6 +513,8 @@ const BuyerRegistration = ({
 
         {showConfirmModal && (
           <ConfirmationModal
+            cancelHeading={cancelHeading}
+            cancelPara={cancelPara}
             onConfirm={confirmClose}
             onCancel={() => setShowConfirmModal(false)}
             setShowConfirmModal={setShowConfirmModal}

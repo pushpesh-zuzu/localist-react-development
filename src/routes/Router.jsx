@@ -56,6 +56,11 @@ import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerReg
 
 import LocaleRedirect from "./LocaleRedirect";
 import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
+import LandingLandscaping from "../component/LandingPage/LandingLandscaping";
+import LandinPatioPage from "../component/LandingPage/LandinPatioPage";
+import LandingArtificialGrassInstallation from "../component/LandingPage/LandingArtificialGrassInstallation";
+import LandingFenceAndGate from "../component/LandingPage/LandingFenceAndGate";
+import LandingDriway from "../component/LandingPage/LandingDriway";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -154,7 +159,14 @@ const routes = [
       { path: "how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
       { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
       { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
+      { path: "landscaping_ppc", element: <LocaleRedirect><LandingLandscaping /></LocaleRedirect> },
+            { path: "patio_ppc", element: <LocaleRedirect><LandinPatioPage /></LocaleRedirect> },
+      { path: "artificial_grass_installation_ppc", element: <LocaleRedirect><LandingArtificialGrassInstallation /></LocaleRedirect> },
+      { path: "fencing_ppc", element: <LocaleRedirect><LandingFenceAndGate /></LocaleRedirect> },
+      { path: "driveways_ppc", element: <LocaleRedirect><LandingDriway /></LocaleRedirect> },
       { path:"conversion-redirect/:requestId", element: <ConversionRedirect /> },
+      { path: "gates_ppc", element: <LocaleRedirect><LandingFenceAndGate /></LocaleRedirect> },
+
 
     ],
   },

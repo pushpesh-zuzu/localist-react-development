@@ -1,0 +1,35 @@
+import { Helmet } from "react-helmet-async";
+import { useParams } from "react-router-dom";
+import { CANCEL_POPUP_DATA, LANDING_DETAIL_BANNERS, LANDING_DETAIL_DATA, LANDING_HOW_IT_WORK, LANDING_SERVICES, LANDING_TITLES_AND_META } from "./landingPageData";
+import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
+import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
+import NotFound from "../../pages/NotFound";
+
+
+const LandingLandscaping = ({}) => {
+  const { service } = useParams();
+  // const breadcrumb = BREADCRUMB_CONFIG[slug];
+  // const lastItem = breadcrumb?.[breadcrumb.length - 1]; // last element le lo safely
+  // const isServiceAvailable = lastItem?.path === slug;
+
+  // if (!isServiceAvailable) return <NotFound />;
+console.log(LANDING_HOW_IT_WORK,'LANDING_HOW_IT_WORK')
+  return (
+    <>
+
+      <FindDetailAndBannerWrapper
+        title={LANDING_TITLES_AND_META['landscaping_ppc']?.title}
+        paragraphs ={LANDING_DETAIL_DATA['landscaping_ppc'].paragraphs}
+        defaultService={LANDING_SERVICES['landscaping_ppc']}
+        isNeedS={false}
+        bannerImage={LANDING_DETAIL_BANNERS['landscaping_ppc']?.banner}
+        cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
+        cancelPara={CANCEL_POPUP_DATA.cancelPara}
+      />
+
+      <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK['landscaping_ppc']}/>
+    </>
+  );
+};
+
+export default LandingLandscaping;
