@@ -111,7 +111,7 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-              Compare <span>FREE QUOTES{isNeedS ? "s" : ""}</span> from local {title}!</h1>
+              Compare <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span> from local {title}!</h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
       
 
