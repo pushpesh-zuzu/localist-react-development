@@ -402,6 +402,35 @@ const LeadsCards = ({ enoughCredit }) => {
                                 {item?.category?.name}
                               </span>
                             </div>
+                            {/* <div className={styles.contactContainer}>
+                              <div className={styles.contactItem}>
+                                <img src={BluePhoneIcon} alt="" />
+                                <span>
+                                  {item?.phone
+                                    ? `${item?.phone.substring(
+                                        0,
+                                        2
+                                      )}${"*".repeat(item?.phone.length - 2)}`
+                                    : "N/A"}
+                                </span>
+                              </div>
+                              <div className={styles.contactItem}>
+                                <img src={BlueSmsIcon} alt="" />
+                                <span>
+                                  {item?.customer?.email
+                                    ? `${item?.customer?.email
+                                        .split("@")[0]
+                                        .substring(0, 2)}${"*".repeat(
+                                        Math.max(
+                                          0,
+                                          item?.customer?.email.split("@")[0]
+                                            .length - 2
+                                        )
+                                      )}@${item?.customer?.email.split("@")[1]}`
+                                    : "N/A"}
+                                </span>
+                              </div>
+                            </div> */}
                             <div className={styles.contactContainer}>
                               <div className={styles.contactItem}>
                                 <img src={BluePhoneIcon} alt="" />
