@@ -110,11 +110,11 @@ const CANCEL_POPUP_DATA = {
   cancelPara: `Simply answer a few questions about your requirement, and we will match you with local professionals in seconds! `,
 };
 const ServiceId = {
-  fencing_ppc: 52,
-  driveways_ppc: 52,
+  fencing_ppc: 49,
+  driveways_ppc: 51,
   patio_services_ppc: 52,
-  landscaping_ppc: 52,
-  artificial_grass_installation_ppc: 52,
+  landscaping_ppc: 43,
+  artificial_grass_installation_ppc: 54,
 };
 
 export {

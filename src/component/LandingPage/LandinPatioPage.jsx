@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
-import { CANCEL_POPUP_DATA, LANDING_DETAIL_BANNERS, LANDING_DETAIL_DATA, LANDING_HOW_IT_WORK, LANDING_SERVICES, LANDING_TITLES_AND_META } from "./landingPageData";
+import { CANCEL_POPUP_DATA, LANDING_DETAIL_BANNERS, LANDING_DETAIL_DATA, LANDING_HOW_IT_WORK, LANDING_SERVICES, LANDING_TITLES_AND_META, ServiceId } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
 import NotFound from "../../pages/NotFound";
@@ -36,6 +36,7 @@ const LandinPatioPage = ({}) => {
         bannerImage={LANDING_DETAIL_BANNERS['patio_services_ppc']?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
+        serviceId ={ServiceId.patio_services_ppc}
       />
 
       <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK['landscaping_ppc']}/>

@@ -234,6 +234,9 @@
   .findAccountantContainer {
     padding: 0px 100px;
   }
+  .findAccountantContainer{
+    height: 500px;
+  }
 
   .searchBoxContainer {
     width: 86%;
@@ -255,6 +258,10 @@
 @media (max-width: 768px) {
   .findAccountantContainer {
     padding: 0px 30px;
+  }
+
+  .findAccountantContainer{
+    height: 400px;
   }
 
   .searchcontainer h1 {

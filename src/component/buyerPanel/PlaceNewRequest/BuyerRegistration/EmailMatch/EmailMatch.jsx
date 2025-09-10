@@ -9,7 +9,10 @@ import {
   checkEmailIdApi,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../../../utils";
-import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
+import {
+  createRequestData,
+  setbuyerRequestData,
+} from "../../../../../store/Buyer/BuyerSlice";
 
 const EmailMatch = ({
   onClose,
@@ -18,6 +21,7 @@ const EmailMatch = ({
   setEmails,
   setShowConfirmModal,
   resetTrigger,
+  isStartWithQuestionModal,
 }) => {
   const dispatch = useDispatch();
   // const { buyerRequest, registerLoader } = useSelector((state) => state.buyer);
@@ -40,7 +44,7 @@ const EmailMatch = ({
     name: false,
     phone: false,
   });
-
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const handleEmailChange = (e) => {
     setEmail(e.target.value); // keep it simple
     setErrors((prev) => ({ ...prev, email: false }));
@@ -98,30 +102,40 @@ const EmailMatch = ({
     setErrors(newErrors);
 
     const hasError = Object.values(newErrors).some((e) => e);
-    if (hasError || !isEmailValid) {
-      setErrors((prev) => ({ ...prev, email: true }));
-      return;
-    }
+    if (hasError || !isEmailValid) return;
 
     if (setEmails) {
       setEmails(email);
     }
+
+    // save user info in redux
     dispatch(setbuyerRequestData({ name, email, phone }));
-    // If you want to dispatch the form data:
-    // const formData = new FormData();
-    // formData.append("email", email);
-    // formData.append("name", name);
-    // formData.append("phone", phone);
-    // formData.append("form_status", 1);
-    // formData.append("loggedUser", 2);
-    // formData.append("active_status", 2);
-    // formData.append("user_type", 2);
-    // dispatch(registerUserData(formData)).then((result) => {
-    //   if (result?.success) {
-    //     showToast("success", result?.message);
-    //   }
-    // });
-    nextStep();
+
+    if (isStartWithQuestionModal) {
+      const updatedAnswers = buyerRequest?.questions || [];
+
+      const formData = new FormData();
+      formData.append("email", email); 
+      formData.append("name", name);
+      formData.append("phone", phone);
+
+      formData.append("service_id", buyerRequest?.service_id || ""); // safe fallback
+      formData.append("postcode", buyerRequest?.postcode || "");
+      formData.append("city", citySerach || "");
+
+      formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("form_status", 1);
+
+      dispatch(createRequestData(formData)).then((result) => {
+        if (result) {
+          showToast("success", result?.message);
+          nextStep();
+        }
+      });
+    } else {
+      // normal flow
+      nextStep();
+    }
   };
 
   const [showError, setShowError] = useState(false);

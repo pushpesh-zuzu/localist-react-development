@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
+import BuyerRegistrationLandingPage from "../BuyerRegistrationLandingPage/BuyerRegistrationLandingPage";
 
-const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHeading,cancelPara }) => {
+const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHeading,cancelPara,serviceId }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
-
+  const [isStartWithQuestionModal, setIsStartWithQuestionModal] = useState(false)
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +22,13 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
     setShowModal(false);
     setPincode("");
     setIsPostcodeSelected(false);
+    setIsStartWithQuestionModal(false)
   };
+  useEffect(() => {
+    setShowModal(true)
+    setIsStartWithQuestionModal(true)
+  }, [])
+  
 
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
@@ -129,12 +136,14 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
       
 
       {showModal && (userToken?.active_status === 2 || !userToken) && (
-        <BuyerRegistration
+        <BuyerRegistrationLandingPage
           closeModal={handleClose}
           postcode={pincode}
           serviceName={defaultService}
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}
+          isStartWithQuestionModal={isStartWithQuestionModal}
+          serviceId={serviceId}
         />
       )}
     </div>

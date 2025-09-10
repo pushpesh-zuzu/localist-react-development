@@ -40,10 +40,10 @@
 
 .footer .quoteButton {
   background: var(--text-color);
-  padding: 12px 32px;
+  padding: 13px 39px;
   color: #ffffff;
   border: none;
-  font-size: 18px;
+  font-size: 28px;
   font-weight: bold;
   cursor: pointer !important;
   border-radius: 5px;

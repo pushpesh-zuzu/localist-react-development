@@ -21,6 +21,7 @@ const QuestionModal = ({
   previousStep,
   loading,
   setShowConfirmModal,
+  isStartWithQuestionModal
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach, questionanswerData } =
@@ -150,9 +151,19 @@ const QuestionModal = ({
     const nextQ = selectedObj?.next_question;
     if (nextQ === "last") {
       // If last question, trigger submit or move next
-      if (adminToken || registerData?.remember_tokens) {
+        if (isStartWithQuestionModal) {
+          dispatch(setbuyerRequestData({
+            service_id: service?.id || buyerRequest?.service_id,
+            serviceName: serviceName || buyerRequest?.serviceName,
+            postcode: buyerRequest?.postcode,
+            city: citySerach,
+            questions: updatedAnswers
+          }));
+          nextStep();
+        } 
+        else if (adminToken || registerData?.remember_tokens) {
         nextStep();
-      } else {
+        }  else {
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
