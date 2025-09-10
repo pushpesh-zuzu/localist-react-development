@@ -33,6 +33,7 @@ const LandingDriway = ({}) => {
   return (
     <>
       <Helmet>
+        <meta data-rh="true" name="robots" content="noindex" />
         {/* <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
           name={CONTENT_CONFIG_META[slug]?.name}
@@ -43,9 +44,6 @@ const LandingDriway = ({}) => {
           href={CONTENT_CONFIG_BANNER[slug]?.banner}
           as="image"
         /> */}
-        {isProduction && (
-          <meta data-rh="true" name="robots" content="noindex" />
-        )}
       </Helmet>
 
       <FindDetailAndBannerWrapper

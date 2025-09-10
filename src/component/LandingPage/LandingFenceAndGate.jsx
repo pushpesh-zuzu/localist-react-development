@@ -43,9 +43,7 @@ const LandingFenceAndGate = ({}) => {
           href={CONTENT_CONFIG_BANNER[slug]?.banner}
           as="image"
         /> */}
-        {isProduction && (
-          <meta data-rh="true" name="robots" content="noindex" />
-        )}
+        <meta data-rh="true" name="robots" content="noindex" />
       </Helmet>
 
       <FindDetailAndBannerWrapper
