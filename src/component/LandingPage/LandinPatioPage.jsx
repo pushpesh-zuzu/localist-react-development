@@ -13,7 +13,6 @@ const LandinPatioPage = ({}) => {
   // const isServiceAvailable = lastItem?.path === slug;
 
   // if (!isServiceAvailable) return <NotFound />;
-console.log(LANDING_HOW_IT_WORK,'LANDING_HOW_IT_WORK')
   return (
     <>
       {/* <Helmet>
@@ -30,11 +29,11 @@ console.log(LANDING_HOW_IT_WORK,'LANDING_HOW_IT_WORK')
       </Helmet> */}
 
       <FindDetailAndBannerWrapper
-        title={LANDING_TITLES_AND_META['patio_ppc']?.title}
-        paragraphs ={LANDING_DETAIL_DATA['patio_ppc'].paragraphs}
-        defaultService={LANDING_SERVICES['patio_ppc']}
+        title={LANDING_TITLES_AND_META['patio_services_ppc']?.title}
+        paragraphs ={LANDING_DETAIL_DATA['patio_services_ppc'].paragraphs}
+        defaultService={LANDING_SERVICES['patio_services_ppc']}
         isNeedS={false}
-        bannerImage={LANDING_DETAIL_BANNERS['patio_ppc']?.banner}
+        bannerImage={LANDING_DETAIL_BANNERS['patio_services_ppc']?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
       />

@@ -2,6 +2,10 @@ import LandscapingBanner from "../../assets/Images/servicesLevels/banner/landsca
 import formStep from "../../assets/Images/formStep.png";
 import quoteStep from "../../assets/Images/conactStep.png";
 import compareStep from "../../assets/Images/compareStep.svg";
+import PatioServices from "./SearchPostAndBanner/banner/PatioServices.jpg";
+import ArtificialGrass from "./SearchPostAndBanner/banner/ArtificialGrass.jpg";
+import Fence from "./SearchPostAndBanner/banner/Fence.jpg";
+import Driveways from "./SearchPostAndBanner/banner/Driveways.jpg";
 
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
@@ -14,7 +18,7 @@ const LANDING_DETAIL_DATA = {
       "Here at <strong>Localists</strong>, finding a local driveway company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local driveway specialists in seconds</strong>.",
     ],
   },
-  patio_ppc: {
+  patio_services_ppc: {
     paragraphs: [
       "Here at <strong>Localists</strong>, finding a local patio company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local patio experts in seconds</strong>.",
     ],
@@ -32,8 +36,8 @@ const LANDING_DETAIL_DATA = {
 };
 
 const LANDING_DETAIL_BANNERS = {
-   fencing_ppc: {
-    banner: LandscapingBanner,
+  fencing_ppc: {
+    banner: Fence,
     // reltatedImage: Landscaping,
   },
   landscaping_ppc: {
@@ -41,11 +45,11 @@ const LANDING_DETAIL_BANNERS = {
     // reltatedImage: Landscaping,
   },
   driveways_ppc: {
-    banner: LandscapingBanner,
+    banner: Driveways,
     // reltatedImage: Landscaping,
   },
-  patio_ppc: {
-    banner: LandscapingBanner,
+  patio_services_ppc: {
+    banner: PatioServices,
     // reltatedImage: Landscaping,
   },
   landscaping_ppc: {
@@ -53,14 +57,14 @@ const LANDING_DETAIL_BANNERS = {
     // reltatedImage: Landscaping,
   },
   artificial_grass_installation_ppc: {
-    banner: LandscapingBanner,
+    banner: ArtificialGrass,
     // reltatedImage: Landscaping,
   },
 };
 const LANDING_SERVICES = {
   fencing_ppc: "Fence & Gate Installation",
   driveways_ppc: "Driveway Installation",
-  patio_ppc: "Patio Services",
+  patio_services_ppc: "Patio Services",
   landscaping_ppc: "Landscaping",
   artificial_grass_installation_ppc: "Artificial Grass Installation",
 };
@@ -74,7 +78,7 @@ const LANDING_TITLES_AND_META = {
   driveways_ppc: {
     title: "Driveway companies now",
   },
-  patio_ppc: {
+  patio_services_ppc: {
     title: "Patio companies now",
   },
   artificial_grass_installation_ppc: {
@@ -105,6 +109,13 @@ const CANCEL_POPUP_DATA = {
   cancelHeading: "Don’t forget to check prices!",
   cancelPara: `Simply answer a few questions about your requirement, and we will match you with local professionals in seconds! `,
 };
+const ServiceId = {
+  fencing_ppc: 52,
+  driveways_ppc: 52,
+  patio_services_ppc: 52,
+  landscaping_ppc: 52,
+  artificial_grass_installation_ppc: 52,
+};
 
 export {
   LANDING_DETAIL_DATA,
@@ -112,5 +123,6 @@ export {
   LANDING_SERVICES,
   LANDING_TITLES_AND_META,
   LANDING_HOW_IT_WORK,
-  CANCEL_POPUP_DATA
+  CANCEL_POPUP_DATA,
+  ServiceId
 };

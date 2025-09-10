@@ -160,7 +160,7 @@ const routes = [
       { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
       { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
       { path: "landscaping_ppc", element: <LocaleRedirect><LandingLandscaping /></LocaleRedirect> },
-            { path: "patio_ppc", element: <LocaleRedirect><LandinPatioPage /></LocaleRedirect> },
+      { path: "patio_services_ppc", element: <LocaleRedirect><LandinPatioPage /></LocaleRedirect> },
       { path: "artificial_grass_installation_ppc", element: <LocaleRedirect><LandingArtificialGrassInstallation /></LocaleRedirect> },
       { path: "fencing_ppc", element: <LocaleRedirect><LandingFenceAndGate /></LocaleRedirect> },
       { path: "driveways_ppc", element: <LocaleRedirect><LandingDriway /></LocaleRedirect> },
