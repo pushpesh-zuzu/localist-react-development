@@ -23,13 +23,14 @@ const QuestionModal = ({
   setShowConfirmModal,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader,citySerach,questionanswerData } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader, citySerach, questionanswerData } =
+    useSelector((state) => state.buyer);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
 
-  console.log('service_name',serviceName); 
-  const { userToken,adminToken } = useSelector((state) => state.auth);
+  console.log("service_name", serviceName);
+  const { userToken, adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -42,7 +43,7 @@ const QuestionModal = ({
       setCurrentQuestion(0);
     }
   }, [questions]);
-  console.log(citySerach,questionanswerData,"citySerach")
+  console.log(citySerach, questionanswerData, "citySerach");
 
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
@@ -60,7 +61,11 @@ const QuestionModal = ({
           ans.toLowerCase() !== "no" &&
           ans.toLowerCase() !== "maybe"
       );
-      setOtherText(savedArray.includes("Something else (please describe)") ? otherVal || "" : "");
+      setOtherText(
+        savedArray.includes("Something else (please describe)")
+          ? otherVal || ""
+          : ""
+      );
     }
   }, [currentQuestion, buyerRequest, questions]);
 
@@ -80,33 +85,33 @@ const QuestionModal = ({
   //   setSelectedOption(updatedOptions);
   //   setError("");
   // };
-// const handleOptionChange = (e) => {
-//   const { value, checked, type } = e.target;
-//   const isSingle = questions[currentQuestion]?.option_type === "single";
+  // const handleOptionChange = (e) => {
+  //   const { value, checked, type } = e.target;
+  //   const isSingle = questions[currentQuestion]?.option_type === "single";
 
-//   if (isSingle) {
-//     setSelectedOption(value); // Only one option at a time
-//   } else {
-//     // Multiple checkboxes
-//     setSelectedOption((prev) =>
-//       checked ? [...prev, value] : prev.filter((opt) => opt !== value)
-//     );
-//   }
-// };
-const handleOptionChange = (e) => {
-  const { value, checked } = e.target;
-  const isSingle = questions[currentQuestion]?.option_type === "single";
+  //   if (isSingle) {
+  //     setSelectedOption(value); // Only one option at a time
+  //   } else {
+  //     // Multiple checkboxes
+  //     setSelectedOption((prev) =>
+  //       checked ? [...prev, value] : prev.filter((opt) => opt !== value)
+  //     );
+  //   }
+  // };
+  const handleOptionChange = (e) => {
+    const { value, checked } = e.target;
+    const isSingle = questions[currentQuestion]?.option_type === "single";
 
-  if (isSingle) {
-    setSelectedOption([value]); // Wrap in array
-    setError("");
-  } else {
-    setSelectedOption((prev) =>
-      checked ? [...prev, value] : prev.filter((opt) => opt !== value)
-    );
-    setError("");
-  }
-};
+    if (isSingle) {
+      setSelectedOption([value]); // Wrap in array
+      setError("");
+    } else {
+      setSelectedOption((prev) =>
+        checked ? [...prev, value] : prev.filter((opt) => opt !== value)
+      );
+      setError("");
+    }
+  };
 
   const handleNext = () => {
     if (selectedOption.length === 0) {
@@ -116,16 +121,17 @@ const handleOptionChange = (e) => {
 
     if (
       selectedOption.includes("Something else (please describe)") &&
-      (!otherText.trim() || otherText.trim().toLowerCase() === "something else (please describe)")
+      (!otherText.trim() ||
+        otherText.trim().toLowerCase() === "something else (please describe)")
     ) {
       setError("Please enter a value for 'Other' option.");
       return;
     }
 
-   const finalAnswer = selectedOption?.map((opt) =>
-  opt.toLowerCase() === "something else (please describe)" ? otherText : opt
-);
-   
+    const finalAnswer = selectedOption?.map((opt) =>
+      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
+    );
+
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
@@ -137,25 +143,23 @@ const handleOptionChange = (e) => {
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
-     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
-    (a) => a.option === selectedOption[0]
-  );
+    const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
+      (a) => a.option === selectedOption[0]
+    );
 
-  const nextQ = selectedObj?.next_question;
-  if (nextQ === "last") {
-    // If last question, trigger submit or move next
-    if (adminToken || registerData?.remember_tokens) {
-      nextStep();
-    } else {
-    
-      
+    const nextQ = selectedObj?.next_question;
+    if (nextQ === "last") {
+      // If last question, trigger submit or move next
+      if (adminToken || registerData?.remember_tokens) {
+        nextStep();
+      } else {
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postcode);
-        formData?.append("city",citySerach)
+        formData?.append("city", citySerach);
         formData.append("questions", JSON.stringify(updatedAnswers));
         formData.append("form_status", 1);
         // form_status: 1,
@@ -163,27 +167,24 @@ const handleOptionChange = (e) => {
 
         dispatch(createRequestData(formData)).then((result) => {
           if (result) {
-            
             showToast("success", result?.message);
             nextStep();
           }
         });
       }
-    }
-     else if (nextQ && questionIndexMap[nextQ]) {
+    } else if (nextQ && questionIndexMap[nextQ]) {
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
-    setCurrentQuestion(questionIndexMap[nextQ]);
-  } else {
-    // Fallback if no next_question found
-    if (currentQuestion < totalQuestions - 1) {
-      setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      nextStep();
+      // Fallback if no next_question found
+      if (currentQuestion < totalQuestions - 1) {
+        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setCurrentQuestion(currentQuestion + 1);
+      } else {
+        nextStep();
+      }
     }
-  }
   };
-  
 
   // const handleBack = () => {
   //   if (currentQuestion > 0) {
@@ -197,63 +198,56 @@ const handleOptionChange = (e) => {
   // };
 
   const handleBack = () => {
-  if (questionHistory.length > 1) {
-    const newHistory = [...questionHistory];
-    newHistory.pop(); 
-    const prevIndex = newHistory[newHistory.length - 1]; 
-    setQuestionHistory(newHistory);
-    setCurrentQuestion(prevIndex);
-  } else {
-    
-    previousStep();
-  }
-};
-
+    if (questionHistory.length > 1) {
+      const newHistory = [...questionHistory];
+      newHistory.pop();
+      const prevIndex = newHistory[newHistory.length - 1];
+      setQuestionHistory(newHistory);
+      setCurrentQuestion(prevIndex);
+    } else {
+      previousStep();
+    }
+  };
 
   const handleCloseClick = () => {
-    if(questionanswerData?.length === 0) {
-onClose()
-dispatch(clearSetbuyerRequestData())
-         dispatch(clearBuyerRegisterFormData())
-    }
-    else {
-
-    
-    if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
-      setShowConfirmModal(true);
-    } else {
+    if (questionanswerData?.length === 0) {
       onClose();
-      dispatch(clearSetbuyerRequestData())
-         dispatch(clearBuyerRegisterFormData())
+      dispatch(clearSetbuyerRequestData());
+      dispatch(clearBuyerRegisterFormData());
+    } else {
+      if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
+        setShowConfirmModal(true);
+      } else {
+        onClose();
+        dispatch(clearSetbuyerRequestData());
+        dispatch(clearBuyerRegisterFormData());
+      }
     }
-  }
   };
   useEffect(() => {
-  setSelectedOption([]);
-  setOtherText("");
-}, [currentQuestion]);
+    setSelectedOption([]);
+    setOtherText("");
+  }, [currentQuestion]);
 
-const formattedQuestions = questions.map(q => ({
-  ...q,
-  parsedAnswers: Array.isArray(q.answer)
-    ? q.answer
-    : (() => {
-        try {
-          return JSON.parse(q.answer);
-        } catch (e) {
-          return [];
-        }
-      })(),
-}));
-const questionIndexMap = {};
-formattedQuestions.forEach((q, index) => {
-  questionIndexMap[q.question_no] = index;
-});
-
-
+  const formattedQuestions = questions.map((q) => ({
+    ...q,
+    parsedAnswers: Array.isArray(q.answer)
+      ? q.answer
+      : (() => {
+          try {
+            return JSON.parse(q.answer);
+          } catch (e) {
+            return [];
+          }
+        })(),
+  }));
+  const questionIndexMap = {};
+  formattedQuestions.forEach((q, index) => {
+    questionIndexMap[q.question_no] = index;
+  });
 
   return (
-    <div className={styles.modalOverlay} >
+    <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button
           className={styles.closeButton}
@@ -269,7 +263,8 @@ formattedQuestions.forEach((q, index) => {
           </div>
         ) : questions.length > 0 ? (
           <>
-            <div className={
+            <div
+              className={
                 serviceName === "Patio Services"
                   ? styles.headerImage
                   : serviceName === "Artificial Grass Installation"
@@ -287,7 +282,8 @@ formattedQuestions.forEach((q, index) => {
                   : serviceName === "Landscaping"
                   ? styles.headerImage7
                   : styles.headerImage // default fallback
-              }>
+              }
+            >
               <h2>{questions[currentQuestion]?.questions}</h2>
               <Progress
                 percent={progressPercent}
@@ -299,51 +295,53 @@ formattedQuestions.forEach((q, index) => {
               />
             </div>
 
-
-
             <div className={styles.optionsContainer}>
-  {formattedQuestions[currentQuestion]?.parsedAnswers.map((opt, index) => (
-    <label
-      key={index}
-      className={
-        formattedQuestions[currentQuestion]?.option_type === "single"
-          ? styles.option
-          : styles.options
-      }
-    >
-      <input
-        type={
-          formattedQuestions[currentQuestion]?.option_type === "single"
-            ? "radio"
-            : "checkbox"
-        }
-        name="surveyOption"
-        value={opt.option}
-        checked={selectedOption.includes(opt.option)}
-        onChange={handleOptionChange}
-      />
-      <span>{opt.option}</span>
-    </label>
-  ))}
-{formattedQuestions[currentQuestion]?.answer
-  ?.includes("Something else (please describe)") &&
-  (formattedQuestions[currentQuestion]?.option_type === "single"
-    ? selectedOption.includes("Something else (please describe)")
-    : selectedOption.includes("Something else (please describe)")) && (
-    <input
-      type="text"
-      placeholder="Please Enter..."
-      className={styles.input}
-      value={otherText}
-      onChange={(e) => setOtherText(e.target.value)}
-    />
-)}
-  
-</div>
+              {formattedQuestions[currentQuestion]?.parsedAnswers.map(
+                (opt, index) => (
+                  <label
+                    key={index}
+                    className={
+                      formattedQuestions[currentQuestion]?.option_type ===
+                      "single"
+                        ? styles.option
+                        : styles.options
+                    }
+                  >
+                    <input
+                      type={
+                        formattedQuestions[currentQuestion]?.option_type ===
+                        "single"
+                          ? "radio"
+                          : "checkbox"
+                      }
+                      name="surveyOption"
+                      value={opt.option}
+                      checked={selectedOption.includes(opt.option)}
+                      onChange={handleOptionChange}
+                    />
+                    <span style={{ color: "#000000" }}>{opt.option}</span>
+                  </label>
+                )
+              )}
+              {formattedQuestions[currentQuestion]?.answer?.includes(
+                "Something else (please describe)"
+              ) &&
+                (formattedQuestions[currentQuestion]?.option_type === "single"
+                  ? selectedOption.includes("Something else (please describe)")
+                  : selectedOption.includes(
+                      "Something else (please describe)"
+                    )) && (
+                  <input
+                    type="text"
+                    placeholder="Please Enter..."
+                    className={styles.input}
+                    value={otherText}
+                    onChange={(e) => setOtherText(e.target.value)}
+                  />
+                )}
+            </div>
 
             {error && <p className={styles.errorMessage}>{error}</p>}
-
-     
 
             <div className={styles.buttonContainer}>
               {currentQuestion > 0 && (
@@ -374,9 +372,11 @@ formattedQuestions.forEach((q, index) => {
               </button>
             </div>
           </>
-        ) :  <div className={styles.noQuestion}>
-    <h2>No questions available</h2>
-  </div>}
+        ) : (
+          <div className={styles.noQuestion}>
+            <h2>No questions available</h2>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -384,7 +384,8 @@ formattedQuestions.forEach((q, index) => {
 
 export default QuestionModal;
 
-{/* <div className={styles.card}>
+{
+  /* <div className={styles.card}>
         <h3>Company Photos</h3>
         <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
           {formState.company_photosPreview.map((src, i) => (
@@ -412,9 +413,11 @@ export default QuestionModal;
           onChange={handleFileChange}
           multiple
         />
-      </div> */}
+      </div> */
+}
 
-      {/* <div className={styles.card}>
+{
+  /* <div className={styles.card}>
         <h3>Online Presence</h3>
         <label className={styles.label}>YouTube Video Link</label>
         <input
@@ -452,9 +455,11 @@ export default QuestionModal;
           onChange={handleInputChange}
           placeholder="Link description"
         />
-      </div> */}
+      </div> */
+}
 
-      {/* <div className={styles.card}>
+{
+  /* <div className={styles.card}>
         <h3>Accreditations & Services</h3>
         <label className={styles.label}>Accreditation Name</label>
         <input
@@ -510,4 +515,5 @@ export default QuestionModal;
           onChange={handleInputChange}
           placeholder="e.g., 16"
         />
-      </div> */}
+      </div> */
+}

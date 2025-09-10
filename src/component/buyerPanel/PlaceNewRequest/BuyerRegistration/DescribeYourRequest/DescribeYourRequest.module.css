@@ -80,6 +80,7 @@
 }
 
 .header h2 {
+  color: var(--primary-color);
   font-weight: 700;
   font-size: 24px;
   text-align: center;
@@ -336,11 +337,12 @@
   font-weight: 600;
   display: inline-block;
   margin-top: 4px;
+  color: #fff !important;
 }
 
 .textLine2 {
   font-size: 14px;
-  color: #ffffff;
+  color: #ffffff !important;
   margin-top: 2px;
   display: inline-block;
   font-style: italic !important;
