@@ -389,7 +389,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                 </div>
                                 <div
                                   className={styles.details}
-                                  onClick={() => handleViewProfile(item)}
+                                  // onClick={() => handleViewProfile(item)}
                                 >
                                   <h3>{item?.customer?.name}</h3>
                                   <p>{item?.postcode}</p>
