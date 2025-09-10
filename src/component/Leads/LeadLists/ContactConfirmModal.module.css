@@ -3,17 +3,17 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh !important;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
-  align-items: center;
+  align-items: center !important;
   justify-content: center;
   z-index: 1000;
   /* overflow-y: auto; */
-  
 }
 
 .modal {
+  height: 70vh;
   background-color: #fff;
   border-radius: 8px;
   width: 960px;
@@ -21,7 +21,6 @@
   padding: 24px;
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
- 
 }
 .modal::-webkit-scrollbar {
   display: none;
@@ -43,31 +42,29 @@
 
 .subText {
   margin-bottom: 30px;
- text-align: center;
- margin-top: 20px;
- 
+  text-align: center;
+  margin-top: 20px;
 }
 .subText h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   font-size: 24px;
-   color: #000000;
- 
+  color: #000000;
 }
 
 .subText p {
- text-align: center;
+  text-align: center;
   font-size: 16px;
-   color: #000000;
+  color: #000000;
 }
 .offerBox {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   padding: 16px;
   border-radius: 0px;
   margin-top: 30px;
-  border: 1px solid #D9D9D9;
+  border: 1px solid #d9d9d9;
 }
 
 .offerHeader {
@@ -76,7 +73,6 @@
   gap: 0px;
   margin-bottom: 12px;
   margin-top: -32px;
-
 }
 /* .discountBadge {
   position: absolute;
@@ -90,7 +86,6 @@
   border-radius: 3px;
   font-size: 16px;
   font-weight: bold;
-
 }
 
 .creditDetails {
@@ -100,7 +95,7 @@
   gap: 250px;
   margin-top: 30px;
 }
- .priceDetails p {
+.priceDetails p {
   font-size: 20px;
   font-weight: 600;
 }
@@ -108,7 +103,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap:34px
+  gap: 34px;
 }
 
 .buyButton {
@@ -133,30 +128,29 @@
   width: 24px;
   height: 24px;
 }
- .getHired {
-    display: flex;
-    gap: 0px;
-    align-items: center;
-    max-width: 880px;
-     margin-bottom: 36px;
-     margin-top: 34px;
-  }
-  .getHired img {
-    z-index: 10;
-  }
-  .gethiredText {
-    background-color: #E3F6FC;
-    font-size: 18px;
-    font-weight: 400;
-    color: #000000;
-    padding: 10px 36px;
-    margin-top: -1px;
-    margin-left: -2.8%;
-
-  }
-  .discountBadges {
-  background-color: #E3F6FC;
-  color: #00AFE3;
+.getHired {
+  display: flex;
+  gap: 0px;
+  align-items: center;
+  max-width: 880px;
+  margin-bottom: 36px;
+  margin-top: 34px;
+}
+.getHired img {
+  z-index: 10;
+}
+.gethiredText {
+  background-color: #e3f6fc;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000000;
+  padding: 10px 36px;
+  margin-top: -1px;
+  margin-left: -2.8%;
+}
+.discountBadges {
+  background-color: #e3f6fc;
+  color: #00afe3;
   padding: 4px 10px;
   font-size: 16px;
   font-weight: 500;
@@ -165,8 +159,8 @@
   left:80px; */
   border-radius: 3px;
 }
-.creditbtn{
-border: 1px solid #000000;
+.creditbtn {
+  border: 1px solid #000000;
   padding: 8px;
   border-radius: 0px;
   width: fit-content;
@@ -180,7 +174,7 @@ border: 1px solid #000000;
   margin-top: 10px;
   font-weight: 600;
 }
- /* .visaCard {
+/* .visaCard {
     background-color: #FFE4E4;
     padding: 7px 10px;
     display: flex;
@@ -196,12 +190,12 @@ border: 1px solid #000000;
     gap: 8px;
     
   } */
-  /* .visaText img {
+/* .visaText img {
     width: 22px;
     height: 7px;
   } */
-   .visaCard {
-  background-color: #FFE4E4;
+.visaCard {
+  background-color: #ffe4e4;
   padding: 10px 14px;
   display: flex;
   justify-content: space-between;
@@ -228,36 +222,35 @@ border: 1px solid #000000;
 .verticalLine {
   height: 18px;
   width: 2px;
-  background-color: #F9CACA;
+  background-color: #f9caca;
   display: inline-block;
 }
 
 .message {
   margin-left: 2px;
 }
- .changeText {
+.changeText {
   font-size: 16px;
   font-weight: 600;
   color: var(--primary-color);
   cursor: pointer !important;
- }
- .perCreditText {
-  
-  color: #BEBEBE;
+}
+.perCreditText {
+  color: #bebebe;
 }
 .footerNote {
   margin-top: 10px;
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color:#BEBEBE;
+  color: #bebebe;
 }
 .section {
   margin-bottom: 10px;
 }
 
 .accordion {
-  background-color: #E3F6FC;
+  background-color: #e3f6fc;
   color: #444;
   cursor: pointer !important;
   padding: 14px;
@@ -271,12 +264,12 @@ border: 1px solid #000000;
 }
 
 .accordion:hover {
-  background-color: #E3F6FC;
+  background-color: #e3f6fc;
 }
 
 .panel {
   padding: 10px 14px;
-  background-color: #E3F6FC;
+  background-color: #e3f6fc;
   /* border: 1px solid #ddd; */
   border-top: none;
   border-radius: 0 0 4px 4px;
@@ -323,87 +316,86 @@ border: 1px solid #000000;
 .visaCard {
   display: none;
 } */
-@media screen and (max-width:768px) {
-   .modal {
+@media screen and (max-width: 768px) {
+  .modal {
     max-width: 720px;
- margin: 0 20px;
+    margin: 0 20px;
+  }
 }
-}
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .modalOverlay {
-     overflow-x: auto;
-    align-items: unset !important;
+    overflow-x: auto;
+    /* align-items: unset !important; */
   }
   .modal {
     max-width: 350px;
- margin: 0 10px;
- height: fit-content;
-}
-.buttonGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-}
-.buyButton {
-  white-space: nowrap;
-   padding: 5px 19px;
-   font-size: 20px;
-}
-.creditDetails {
-  display: flex;
-  /* flex-direction: column; */
-  /* align-items: center; */
-  align-items: start;
-  gap: 30px;
-}
-.creditbtn{
-border: 1px solid #000000;
-  padding: 8px;
-  border-radius: 0px;
-  width: fit-content;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.creditbtn img {
- 
-  display: block;
-}
-.panel {
-  padding: 10px 14px;
-  background-color: #f2f9fc;
-  
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-}
-.paraText {
-  font-size: 10px;
-  margin-top: 10px;
-  font-weight: 600;
-}
-.offerBadge,
-.discountBadge {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 4px 9px;
-  border-radius: 0px;
-  font-size: 10px;
-  font-weight: bold;
-}
-.discountBadges {
-  background-color: #E3F6FC;
-  color: #00AFE3;
-  padding: 4px 10px;
-display: block;
-  font-size: 10px;
-  font-weight: 600;
-  /* position: absolute;
+    margin: 0 10px;
+    height: fit-content;
+  }
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+  .buyButton {
+    white-space: nowrap;
+    padding: 5px 19px;
+    font-size: 20px;
+  }
+  .creditDetails {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    align-items: start;
+    gap: 30px;
+  }
+  .creditbtn {
+    border: 1px solid #000000;
+    padding: 8px;
+    border-radius: 0px;
+    width: fit-content;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .creditbtn img {
+    display: block;
+  }
+  .panel {
+    padding: 10px 14px;
+    background-color: #f2f9fc;
+
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+  }
+  .paraText {
+    font-size: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+  .offerBadge,
+  .discountBadge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 9px;
+    border-radius: 0px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .discountBadges {
+    background-color: #e3f6fc;
+    color: #00afe3;
+    padding: 4px 10px;
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    /* position: absolute;
   top: -30px;
   left:56px; */
-}
- .getHired {
+  }
+  .getHired {
     display: flex;
     gap: 0px;
     align-items: center;
@@ -417,29 +409,28 @@ display: block;
     height: 70px;
   }
   .gethiredText {
-    background-color: #E3F6FC;
+    background-color: #e3f6fc;
     font-size: 8px;
     font-weight: 400;
     color: #000000;
     padding: 3px 23px;
     margin-top: -1px;
     margin-left: -5.8%;
-
   }
   .footerNote {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color:#BEBEBE;
-}
-.checkboxLabel {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #bebebe;
+  }
+  .checkboxLabel {
     color: #000000;
-      font-size: 12px;
-      gap: 3px;
+    font-size: 12px;
+    gap: 3px;
   }
   .visaCard {
-    background-color: #FFE4E4;
+    background-color: #ffe4e4;
     padding: 7px 10px;
     display: flex;
     justify-content: space-between;
@@ -452,89 +443,86 @@ display: block;
     display: flex;
     align-items: center;
     gap: 4px;
-    
   }
   .visaText img {
     width: 22px;
     height: 7px;
   }
- .changeText {
-  font-size: 8px;
-  font-weight: 600;
-  color: #00aaff;
- }
- .priceDetails p {
-  font-size: 12px;
-  font-weight: 600;
-}
-.perCreditText {
-  font-size: 9px;
-  font-weight: 600;
-  color: #BEBEBE;
-}
-.closeButton {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer !important;
-}
-.mainBox h2 {
-  margin-top: 6px;
-  text-align: center;
-}
+  .changeText {
+    font-size: 8px;
+    font-weight: 600;
+    color: #00aaff;
+  }
+  .priceDetails p {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .perCreditText {
+    font-size: 9px;
+    font-weight: 600;
+    color: #bebebe;
+  }
+  .closeButton {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer !important;
+  }
+  .mainBox h2 {
+    margin-top: 6px;
+    text-align: center;
+  }
 }
 
-@media screen and (max-width:370px) {
+@media screen and (max-width: 370px) {
   .creditbtn img {
- 
-    
-  display: block;
-}
-.mainBox h2 {
-  margin-top: 6px;
-  text-align: center;
-}
-.priceDetails p {
-  font-size: 10px;
-  font-weight: 600;
-}
-.perCreditText {
-  font-size: 10px;
-  font-weight: 600;
-  color: #BEBEBE;
-}
-  .creditbtn{
-border: 1px solid #000000;
-  padding: 4px;
-  border-radius: 0px;
-  width: fit-content;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.creditDetails {
-  display: flex;
-  /* flex-direction: column; */
-  /* align-items: center; */
-  align-items: start;
-  gap: 10px;
-}
+    display: block;
+  }
+  .mainBox h2 {
+    margin-top: 6px;
+    text-align: center;
+  }
+  .priceDetails p {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .perCreditText {
+    font-size: 10px;
+    font-weight: 600;
+    color: #bebebe;
+  }
+  .creditbtn {
+    border: 1px solid #000000;
+    padding: 4px;
+    border-radius: 0px;
+    width: fit-content;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .creditDetails {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    align-items: start;
+    gap: 10px;
+  }
   .discountBadges {
-  background-color: #E3F6FC;
-  color: #00AFE3;
-  padding: 4px 7px;
-display: block;
-  font-size: 10px;
-  font-weight: 600;
-  /* position: absolute;
+    background-color: #e3f6fc;
+    color: #00afe3;
+    padding: 4px 7px;
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    /* position: absolute;
   top: -30px;
   left:56px; */
-}
- .getHired {
+  }
+  .getHired {
     display: flex;
     gap: 0px;
     align-items: center;
@@ -548,22 +536,21 @@ display: block;
     height: 70px;
   }
   .gethiredText {
-                  background-color: #E3F6FC;
-        font-size: 8px;
-        font-weight: 400;
-        color: #000000;
-        padding: 1px 6px 1px 28px;
-        margin-top: -1px;
-        margin-left: -10.8%;
-
+    background-color: #e3f6fc;
+    font-size: 8px;
+    font-weight: 400;
+    color: #000000;
+    padding: 1px 6px 1px 28px;
+    margin-top: -1px;
+    margin-left: -10.8%;
   }
   .checkboxLabel {
     color: #000000;
     font-size: 12px;
-      gap: 3px;
+    gap: 3px;
   }
   .visaCard {
-    background-color: #FFE4E4;
+    background-color: #ffe4e4;
     padding: 7px 10px;
     display: flex;
     justify-content: space-between;
@@ -571,60 +558,55 @@ display: block;
     margin-bottom: 18px;
   }
   .footerNote {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  color:#BEBEBE;
-}
-.visaText {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #bebebe;
+  }
+  .visaText {
     font-size: 7px;
     font-weight: 600;
     display: flex;
     align-items: center;
     gap: 4px;
-    
   }
   .visaText img {
     width: 20px;
     height: 7px;
   }
- .changeText {
-  font-size: 8px;
-  font-weight: 600;
-  color: var(--primary-color);
- }
- .offerBadge,
-.discountBadge {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 4px 9px;
-  border-radius: 0px;
-  font-size: 10px;
-  font-weight: bold;
+  .changeText {
+    font-size: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  .offerBadge,
+  .discountBadge {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 9px;
+    border-radius: 0px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .closeButton {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer !important;
+  }
 }
-.closeButton {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  cursor: pointer !important;
-}
-
-}
-
-
 
 @media (max-height: 820px) {
- .modalOverlay{
-  align-items: unset !important;
-  height: fit-content;
-  /* overflow-y: auto; */
-  
- }
- .modal {
-  overflow-y: auto;
- }
+  .modalOverlay {
+    /* align-items: unset !important; */
+    /* height: fit-content; */
+    /* overflow-y: auto; */
+  }
+  .modal {
+    overflow-y: auto;
+  }
 }

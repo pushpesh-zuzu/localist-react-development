@@ -181,7 +181,7 @@ const ContactConfirmModal = ({
         <div className={styles.modalOverlay}>
           <div
             className={styles.modal}
-            style={{ height: customHeigth <= 820 ? customHeigth - 20 : "auto" }}
+            // style={{ height: customHeigth <= 820 ? customHeigth - 20 : "auto" }}
           >
             <button className={styles.closeButton} onClick={() => onClose()}>
               ×

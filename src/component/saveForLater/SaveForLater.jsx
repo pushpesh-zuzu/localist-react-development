@@ -52,9 +52,14 @@ const SaveForLater = () => {
   const [selectedSort, setSelectedSort] = useState("Newest");
   const sortOptions = ["Newest", "Oldest"];
   const [selectedFilter, setSelectedFilter] = useState("Sort by Credits");
-  const requiredData = saveForLaterDataList[0]?.savedLeads?.length
-    ? saveForLaterDataList[0]?.savedLeads
-    : saveForLaterDataList;
+  const requiredData =
+    Array.isArray(saveForLaterDataList) &&
+    Array.isArray(saveForLaterDataList[0]?.savedLeads)
+      ? saveForLaterDataList[0]?.savedLeads
+      : [];
+  // saveForLaterDataList[0]?.savedLeads?.length
+  //   ? saveForLaterDataList[0]?.savedLeads
+  //   : saveForLaterDataList;
   const data = requiredData?.length;
   console.log(saveForLaterDataList);
   const filterOptions = [
