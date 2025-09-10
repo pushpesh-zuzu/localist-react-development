@@ -250,7 +250,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       </div>
       <div className={styles.privacyWrapper}>
         <p className={styles.privacyText}>
-          Your information is protected by our{" "}
+          Your information is protected by our{" "}<span className={styles.privacy}>privacy policy</span>
           {/* <a
             href="/privacy-policy"
             target="blank"
