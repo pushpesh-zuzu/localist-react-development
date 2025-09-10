@@ -62,7 +62,7 @@ const ContactConfirmModal = ({
     creditPlanList && creditPlanList.length > 0
       ? creditPlanList
       : dummyCreditPlanList;
-  console.log(creditItems, "creditItems");
+  console.log(creditPlanList, "creditItems");
   const handleNavigate = () => {
     navigate("/mycredits");
   };
@@ -298,47 +298,17 @@ const ContactConfirmModal = ({
                 )}
               </div>
             </div>
-            {/* {(creditPlanList && creditPlanList.length > 0 ? creditPlanList : dummyCreditPlanList).map((item, index) => (
-  <div key={index} className={styles.offerBox}>
-    <div className={styles.offerHeader}>
-      <span className={styles.discountBadge}>{item?.description}</span>
-    </div>
 
-    <div className={styles.creditDetails}>
-      <div>
-        <p><strong>🔹 {item?.no_of_leads} credits</strong></p>
-        <p>Enough for about 10 leads</p>
-      </div>
-      <div>
-        <p><strong>${item?.price}</strong> (Excl. tax)</p>
-        <p>${item?.per_credit}/credit</p>
-      </div>
-    </div>
-
-    <div className={styles.buttonGroup}>
-      <button className={styles.buyButton} onClick={() => handleBuyNow(item)}>
-        Buy {item?.no_of_leads} credits
-      </button>
-      <label className={styles.checkboxLabel}>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        /> Auto top-up next time
-      </label>
-    </div>
-  </div>
-))} */}
             {creditPlanList && creditPlanList.length > 0 ? (
               creditPlanList.map((item, index) => (
                 <div key={index} className={styles.offerBox}>
                   <div className={styles.offerHeader}>
                     <span className={styles.discountBadge} style={{}}>
-                      {item?.description}
+                      {item?.description ? item?.description : item?.name}
                     </span>
-                    <span className={styles.discountBadges}>
+                    {/* <span className={styles.discountBadges}>
                       Your Exclusive Sign Up Offer
-                    </span>
+                    </span> */}
                   </div>
 
                   <div className={styles.creditDetails}>
