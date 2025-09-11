@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getfilterListData,
   getLeadRequestList,
+  getSaveLaterListData,
   setFilters,
 } from "../../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../../utils";
@@ -31,7 +32,7 @@ const AccordionSection = ({ title, children }) => {
   );
 };
 
-const MatchingLeadsFilter = ({ onClose }) => {
+const MatchingLeadsFilter = ({ onClose, saved_leads = false }) => {
   const dispatch = useDispatch();
   const { popularList } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
@@ -48,7 +49,9 @@ const MatchingLeadsFilter = ({ onClose }) => {
     const data = {
       user_id: userToken?.remember_tokens,
     };
-
+    if (saved_leads) {
+      data.page_type = "saved_leads";
+    }
     dispatch(getfilterListData(data));
 
     return () => {
@@ -169,6 +172,7 @@ const MatchingLeadsFilter = ({ onClose }) => {
     formData.append("name", filters.keyword || "");
     formData.append("lead_time", filters.submittedWhen || "");
     formData.append("distance_filter", filters.location || "");
+    // formData.append("page_type", filters.page_type || "");
 
     const selectedServiceIds = filters.selectedServices
       .map((serviceName) => {
@@ -187,7 +191,11 @@ const MatchingLeadsFilter = ({ onClose }) => {
     // formData.append("buyer_actions", filters.buyerActions.join(","));
     formData.append("unread", filters.unread ? 1 : 0);
 
-    dispatch(getLeadRequestList(formData)).then((result) => {
+    dispatch(
+      saved_leads
+        ? getSaveLaterListData(formData)
+        : getLeadRequestList(formData)
+    ).then((result) => {
       if (result) {
         showToast("success", result?.message);
       }

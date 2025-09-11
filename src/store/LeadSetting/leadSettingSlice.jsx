@@ -14,6 +14,7 @@ const initialState = {
   autoBidList: [],
   removeLoader: false,
   bidListLoader: false,
+  isDirty: false,
   removeLocationLoader: false,
   serviceWiseData: [],
   autoBidListData: [],
@@ -1107,6 +1108,9 @@ const leadSettingSlice = createSlice({
   name: "leadSetting",
   initialState: initialState,
   reducers: {
+    setIsDirtyRedux(state, action) {
+      state.isDirty = action.payload;
+    },
     setleadPreferencesListLoader(state, action) {
       state.preferenceLoader = action.payload;
     },
@@ -1250,6 +1254,7 @@ const leadSettingSlice = createSlice({
 });
 
 export const {
+  setIsDirtyRedux,
   setData,
   setleadPreferencesListLoader,
   setAutoBidData,

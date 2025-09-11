@@ -30,8 +30,15 @@ import { usePrompt } from "../../../utils/usePrompt";
 
 const AboutAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { sellerLoader, updateSuccess, updateError, loading, error, success } =
-    useSelector((state) => state.myProfile);
+  const {
+    sellerLoader,
+    updateSuccess,
+    updateError,
+    loading,
+    error,
+    success,
+    isDirtyRedux,
+  } = useSelector((state) => state.myProfile);
   const { userToken } = useSelector((state) => state.auth);
   const { registerData, errorCheckComanyName } = useSelector(
     (state) => state.findJobs
@@ -225,14 +232,13 @@ const AboutAccordion = ({ details }) => {
     }
   };
   const [isDirty, setIsDirty] = useState(false);
-  const [isDirtyRedux, setIsDirtyRedux] = useState(false);
   usePrompt(
     "You have unsaved changes. Are you sure you want to leave?",
     isDirty
   );
   useEffect(() => {
     const handleBeforeUnload = (e) => {
-      if (isDirty) {
+      if (isDirtyRedux) {
         e.preventDefault();
         e.returnValue = ""; // Chrome requires returnValue to be set
       }
@@ -242,15 +248,24 @@ const AboutAccordion = ({ details }) => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [isDirty]);
+  }, [isDirtyRedux]);
 
-  useEffect(() => {
-    if (isDirty === true) {
-      dispatch(setIsDirtyRedux(true));
-    } else {
-      dispatch(setIsDirtyRedux(false));
+  // useEffect(() => {
+  //   if (isDirty === true) {
+  //     dispatch((true));
+  //   } else {
+  //     dispatch((false));
+  //   }
+  // }, [isDirty, dispatch]);
+
+  const handleRedirect = () => {
+    if (isDirtyRedux) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Are you sure you want to leave?"
+      );
+      if (!confirmLeave) return;
     }
-  }, [isDirty, dispatch]);
+  };
 
   // Debounce for company_location
   useEffect(() => {

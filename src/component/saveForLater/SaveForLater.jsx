@@ -308,7 +308,7 @@ const SaveForLater = () => {
               ))}
             </Select>
 
-            {/* <div className={styles.actionButtons}>
+            <div className={styles.actionButtons}>
               <button
                 className={styles.filterButton}
                 onClick={handleFilterClick}
@@ -316,11 +316,14 @@ const SaveForLater = () => {
                 <img style={{ cursor: "pointer" }} src={FilterIcon} alt="" />{" "}
                 Filter
               </button>
-            </div> */}
+            </div>
           </div>
 
           {isFilterModalOpen && (
-            <MatchingLeadsFilter onClose={handleCloseModal} />
+            <MatchingLeadsFilter
+              onClose={handleCloseModal}
+              saved_leads={true}
+            />
           )}
         </div>
 
