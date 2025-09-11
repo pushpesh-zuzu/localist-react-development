@@ -294,6 +294,10 @@
   .inputRow {
     gap: 0px;
   }
+    .bannerTitle {
+    font-size: 38px;
+  }
+
 }
 
 @media (max-width: 576px) {
@@ -313,6 +317,6 @@
     height: 100px;
   }
   .bannerTitle {
-    font-size: 40px;
+    font-size: 32px;
   }
 }
