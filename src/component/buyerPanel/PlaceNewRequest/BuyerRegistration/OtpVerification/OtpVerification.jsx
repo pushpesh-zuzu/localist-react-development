@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import styles from "./OtpVerification.module.css";
-import { verifyPhoneNumberData } from "../../../../../store/Buyer/BuyerSlice";
+import {
+  createRequestData,
+  verifyPhoneNumberData,
+} from "../../../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,8 +11,15 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
   const dispatch = useDispatch();
-  const { requestDataList, createRequestToken, requestId, requestUserPhone } =
-    useSelector((state) => state.buyer);
+  const {
+    buyerRequest,
+    requestDataList,
+    citySerach,
+    createRequestToken,
+    requestId,
+    requestUserPhone,
+  } = useSelector((state) => state.buyer);
+
   const { requestUserId, createrequestUserId } = useSelector(
     (state) => state.buyer
   );
@@ -72,7 +82,30 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
     dispatch(verifyPhoneNumberData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
-        nextStep();
+
+        // ✅ createRequestData call after OTP successfully verified
+        const formData = new FormData();
+        formData.append("service_id", buyerRequest?.service_id || "");
+        formData.append("postcode", buyerRequest?.postcode || "");
+        formData.append("city", citySerach || "");
+        formData.append("phone", buyerRequest?.phone);
+
+        formData.append(
+          "questions",
+          JSON.stringify(buyerRequest?.questions || [])
+        );
+        formData.append("form_status", 1);
+        formData.append("request_id", requestId);
+        formData.append("user_id", requestUserId);
+
+        dispatch(createRequestData(formData)).then((res) => {
+          if (res?.success) {
+            showToast("success", res?.message);
+            nextStep();
+          } else {
+            showToast("error", res?.message || "Failed to create request");
+          }
+        });
       } else {
         showToast("error", result?.message || "OTP verification failed");
       }

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearSetbuyerRequestData,
   createRequestData,
+  registerQuoteCustomer,
   setbuyerRequestData,
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
@@ -21,7 +22,7 @@ const QuestionModal = ({
   previousStep,
   loading,
   setShowConfirmModal,
-  isStartWithQuestionModal
+  isStartWithQuestionModal,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach, questionanswerData } =
@@ -151,34 +152,51 @@ const QuestionModal = ({
     const nextQ = selectedObj?.next_question;
     if (nextQ === "last") {
       // If last question, trigger submit or move next
-        if (isStartWithQuestionModal) {
-          dispatch(setbuyerRequestData({
+      if (isStartWithQuestionModal) {
+        dispatch(
+          setbuyerRequestData({
             service_id: service?.id || buyerRequest?.service_id,
             serviceName: serviceName || buyerRequest?.serviceName,
             postcode: buyerRequest?.postcode,
             city: citySerach,
-            questions: updatedAnswers
-          }));
-          nextStep();
-        } 
-        else if (adminToken || registerData?.remember_tokens) {
+            questions: updatedAnswers,
+          })
+        );
         nextStep();
-        }  else {
+      } else if (adminToken || registerData?.remember_tokens) {
+        nextStep();
+      } else {
+        // const formData = new FormData();
+        // formData.append("email", buyerRequest?.email);
+        // formData.append("name", buyerRequest?.name);
+        // formData.append("phone", buyerRequest?.phone);
+        // formData.append("service_id", buyerRequest?.service_id);
+        // formData.append("postcode", buyerRequest?.postcode);
+        // formData?.append("city", citySerach);
+        // formData.append("questions", JSON.stringify(updatedAnswers));
+        // formData.append("form_status", 1);
+        // // form_status: 1,
+        // // formData.append("recevive_online", consent ? 1 : 0);
+
+        // dispatch(createRequestData(formData)).then((result) => {
+        //   if (result) {
+        //     showToast("success", result?.message);
+        //     nextStep();
+        //   }
+        // });
+
         const formData = new FormData();
         formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
-        formData.append("service_id", buyerRequest?.service_id);
-        formData.append("postcode", buyerRequest?.postcode);
-        formData?.append("city", citySerach);
-        formData.append("questions", JSON.stringify(updatedAnswers));
         formData.append("form_status", 1);
-        // form_status: 1,
-        // formData.append("recevive_online", consent ? 1 : 0);
 
-        dispatch(createRequestData(formData)).then((result) => {
+        dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {
-            showToast("success", result?.message);
+            showToast(
+              "success",
+              result?.message || "Customer registered successfully"
+            );
             nextStep();
           }
         });

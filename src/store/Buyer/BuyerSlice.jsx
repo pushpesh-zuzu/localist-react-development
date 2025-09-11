@@ -110,6 +110,35 @@ export const createRequestData = (requestData) => {
   };
 };
 
+export const registerQuoteCustomer = (customerData) => {
+  return async (dispatch) => {
+    dispatch(setCreateRequesLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `customer/register-quote-customer`,
+        customerData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response) {
+        console.log(response, "response");
+        dispatch(setRequestUserId(response.data.data?.user_id));
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error registering quote customer:", error?.response?.data);
+      showToast("error", error?.message);
+      throw error;
+    } finally {
+      dispatch(setCreateRequesLoader(false));
+    }
+  };
+};
+
 export const updateProfileData = () => {
   return async (dispatch) => {
     dispatch(setProfileLoader(true));

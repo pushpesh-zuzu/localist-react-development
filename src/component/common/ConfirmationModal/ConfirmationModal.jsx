@@ -13,6 +13,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   clearSetbuyerRequestData,
   createRequestData,
+  registerQuoteCustomer,
 } from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData, showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
@@ -102,36 +103,58 @@ const ConfirmationModal = ({
   console.log(buyerRequest, formData, "buyerRequest");
   const handleSubmit = () => {
     if (!userToken) {
+      // const formData = new FormData();
+      // formData.append("email", buyerRequest?.email);
+      // formData.append("name", buyerRequest?.name);
+      // formData.append("phone", buyerRequest?.phone);
+      // formData.append("service_id", buyerRequest?.service_id);
+      // formData.append("postcode", buyerRequest?.postcode);
+      // // formData.append("questions", JSON.stringify(buyerRequest?.questions));
+      // formData.append("form_status", 0);
+      // // form_status: 1,
+      // // formData.append("recevive_online", consent ? 1 : 0);
       const formData = new FormData();
       formData.append("email", buyerRequest?.email);
       formData.append("name", buyerRequest?.name);
       formData.append("phone", buyerRequest?.phone);
-      formData.append("service_id", buyerRequest?.service_id);
-      formData.append("postcode", buyerRequest?.postcode);
-      // formData.append("questions", JSON.stringify(buyerRequest?.questions));
       formData.append("form_status", 0);
-      // form_status: 1,
-      // formData.append("recevive_online", consent ? 1 : 0);
 
-      dispatch(createRequestData(formData)).then((result) => {
-        if (result?.success) {
-          showToast("succes", result?.success);
-          // setShowConfirmModal(false)
+      // dispatch(createRequestData(formData)).then((result) => {
+      //   if (result?.success) {
+      //     showToast("succes", result?.success);
+      //     // setShowConfirmModal(false)
+      //     localStorage.removeItem("barkToken");
+      //     localStorage.removeItem("barkUserToken");
+      //     localStorage.removeItem("registerDataToken");
+      //     localStorage.removeItem("registerTokens");
+      //     localStorage.removeItem("createRequestToken");
+      //     clearAuthData();
+      //     // dispatch(clearSetbuyerRequestData())
+      //     //        dispatch(clearBuyerRegisterFormData())
+
+      //     onConfirm();
+      //   }
+      //   // nextStep();
+      // });
+      dispatch(registerQuoteCustomer(formData)).then((result) => {
+        if (result) {
+          console.log(result, "resultresult");
+          showToast(
+            "success",
+            result?.message || "Customer registered successfully"
+          );
           localStorage.removeItem("barkToken");
           localStorage.removeItem("barkUserToken");
           localStorage.removeItem("registerDataToken");
           localStorage.removeItem("registerTokens");
           localStorage.removeItem("createRequestToken");
           clearAuthData();
-          // dispatch(clearSetbuyerRequestData())
-          //        dispatch(clearBuyerRegisterFormData())
-
           onConfirm();
         }
-        // nextStep();
       });
     } else {
       // nextStep();
+      showToast("error", result?.message || "Customer registered successfully");
     }
   };
 

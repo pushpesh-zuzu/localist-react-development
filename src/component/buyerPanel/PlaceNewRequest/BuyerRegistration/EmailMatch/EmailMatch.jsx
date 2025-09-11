@@ -11,6 +11,7 @@ import {
 import { showToast } from "../../../../../utils";
 import {
   createRequestData,
+  registerQuoteCustomer,
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 
@@ -114,21 +115,37 @@ const EmailMatch = ({
     if (isStartWithQuestionModal) {
       const updatedAnswers = buyerRequest?.questions || [];
 
+      // const formData = new FormData();
+      // formData.append("email", email);
+      // formData.append("name", name);
+      // formData.append("phone", phone);
+
+      // formData.append("service_id", buyerRequest?.service_id || ""); // safe fallback
+      // formData.append("postcode", buyerRequest?.postcode || "");
+      // formData.append("city", citySerach || "");
+
+      // formData.append("questions", JSON.stringify(updatedAnswers));
+      // formData.append("form_status", 1);
+
+      // dispatch(createRequestData(formData)).then((result) => {
+      //   if (result) {
+      //     showToast("success", result?.message);
+      //     nextStep();
+      //   }
+      // });
+
       const formData = new FormData();
-      formData.append("email", email);
-      formData.append("name", name);
-      formData.append("phone", phone);
-
-      formData.append("service_id", buyerRequest?.service_id || ""); // safe fallback
-      formData.append("postcode", buyerRequest?.postcode || "");
-      formData.append("city", citySerach || "");
-
-      formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("email", buyerRequest?.email);
+      formData.append("name", buyerRequest?.name);
+      formData.append("phone", buyerRequest?.phone);
       formData.append("form_status", 1);
 
-      dispatch(createRequestData(formData)).then((result) => {
+      dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          showToast("success", result?.message);
+          showToast(
+            "success",
+            result?.message || "Customer registered successfully"
+          );
           nextStep();
         }
       });
