@@ -2,147 +2,152 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance, { baseURL } from "../../Api/axiosInstance";
 import { showToast } from "../../utils";
 export const getCustomerLinkApi = () => {
-    return async (dispatch) => {
-   
-      try {
-        const response = await axiosInstance.get(
-          `review/get-customer-link`,
-          
-        );
-  
-        if (response) {
-          dispatch(setGetCustomerLinkData(response?.data?.data));
-        }
-      } catch (error) {
-       showToast("error", error?.response?.data?.message || "Something went wrong");
-      } finally {
-      
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(`review/get-customer-link`);
+
+      if (response) {
+        dispatch(setGetCustomerLinkData(response?.data?.data));
       }
-    };
+    } catch (error) {
+      showToast(
+        "error",
+        error?.response?.data?.message || "Something went wrong"
+      );
+    } finally {
+    }
   };
+};
 
-  export const addSubmitReviewApi = (ReviewData) => {
-      return async (dispatch) => {
-        dispatch(setReviewListLoader(true));
-        try {
-          const response = await axiosInstance.post(`review/submit-review`,ReviewData);
-          if (response) {
-            // dispatch(setPreferencesList(response?.data?.data));
-            return response?.data;
-          }
-        } catch (error) {
-          showToast("error", error?.response?.data?.message);
-        } finally {
-          dispatch(setReviewListLoader(false));
-        }
-      };
-    };
+export const addSubmitReviewApi = (ReviewData) => {
+  return async (dispatch) => {
+    dispatch(setReviewListLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `review/submit-review`,
+        ReviewData
+      );
+      if (response) {
+        // dispatch(setPreferencesList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setReviewListLoader(false));
+    }
+  };
+};
 
-    export const getReviewListApi = (reviewUserId) => {
-        return async (dispatch) => {
-       
-          try {
-            const response = await axiosInstance.get(
-              `review/get-reviews/${reviewUserId}`,
-              
-            );
-      
-            if (response) {
-              dispatch(setGetReviewData(response?.data?.data));
-            }
-          } catch (error) {
-        //    showToast("error", error?.response?.data?.message || "Something went wrong");
-          } finally {
-          
-          }
-        };
-      };
-      
+export const getReviewListApi = (reviewUserId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(
+        `review/get-reviews/${reviewUserId}`
+      );
 
-      export const sellerEditProfileApi = (profileData) => {
-        return async (dispatch) => {
-          dispatch(setReviewListLoader(true));
-          try {
-            const response = await axiosInstance.post(`users/edit-profile`,profileData);
-            if (response) {
-              dispatch(setEditProfileList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setReviewListLoader(false));
-          }
-        };
-      };
-      
-      export const sellerUpdateProfileApi = (profileUpdateData) => {
-        return async (dispatch) => {
-          dispatch(setSellerUpdateLoader(true));
-          try {
-            const response = await axiosInstance.post(`users/update-profile`,profileUpdateData);
-            if (response) {
-              dispatch(setEditProfileList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerUpdateLoader(false));
-          }
-        };
-      };
+      if (response) {
+        dispatch(setGetReviewData(response?.data?.data));
+      }
+    } catch (error) {
+      //    showToast("error", error?.response?.data?.message || "Something went wrong");
+    } finally {
+    }
+  };
+};
 
-      export const sellerUpdatePasswordApi = (UpdateData) => {
-        return async (dispatch) => {
-          dispatch(setSellerUpdateLoader(true));
-          try {
-            const response = await axiosInstance.post(`users/change-password`,UpdateData);
-            if (response) {
-              // dispatch(setEditProfileList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerUpdateLoader(false));
-          }
-        };
-      };
+export const sellerEditProfileApi = (profileData) => {
+  return async (dispatch) => {
+    dispatch(setReviewListLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/edit-profile`,
+        profileData
+      );
+      if (response) {
+        dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setReviewListLoader(false));
+    }
+  };
+};
 
+export const sellerUpdateProfileApi = (profileUpdateData) => {
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/update-profile`,
+        profileUpdateData
+      );
+      if (response) {
+        dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
 
-  export const sellerPhoneNumberVerifyApi = (phoneData) => {
-        return async (dispatch) => {
-          dispatch(setSellerUpdateLoader(true));
-          try {
-            const response = await axiosInstance.post(`request-otp`,phoneData);
-            if (response) {
-              // dispatch(setEditProfileList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerUpdateLoader(false));
-          }
-        };
-      };
- export const sellerPhoneNumberVerifyDataApi = (otpData) => {
-        return async (dispatch) => {
-          dispatch(setSellerUpdateLoader(true));
-          try {
-            const response = await axiosInstance.post(`verify-otp`,otpData);
-            if (response) {
-              // dispatch(setEditProfileList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerUpdateLoader(false));
-          }
-        };
-      };
+export const sellerUpdatePasswordApi = (UpdateData) => {
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/change-password`,
+        UpdateData
+      );
+      if (response) {
+        // dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
+
+export const sellerPhoneNumberVerifyApi = (phoneData) => {
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(`request-otp`, phoneData);
+      if (response) {
+        // dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
+export const sellerPhoneNumberVerifyDataApi = (otpData) => {
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(`verify-otp`, otpData);
+      if (response) {
+        // dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
 
 // Async thunk for submitting seller profile
 export const updateSellerProfile = createAsyncThunk(
@@ -150,9 +155,20 @@ export const updateSellerProfile = createAsyncThunk(
   async (formState, { rejectWithValue }) => {
     try {
       const allowedKeys = [
-        "type", "company_logo", "company_name", "profile_image", "name",
-        "company_email", "company_phone", "company_website", "company_location","company_reg_number",
-        "company_locaion_reason", "company_size", "company_total_years", "about_company",
+        "type",
+        "company_logo",
+        "company_name",
+        "profile_image",
+        "name",
+        "company_email",
+        "company_phone",
+        "company_website",
+        "company_location",
+        "company_reg_number",
+        "company_locaion_reason",
+        "company_size",
+        "company_total_years",
+        "about_company",
       ];
 
       const body = new FormData();
@@ -162,7 +178,7 @@ export const updateSellerProfile = createAsyncThunk(
           body.append(key, val);
         }
       });
-      console.log(baseURL,'baseURL')
+      console.log(baseURL, "baseURL");
       const response = await axiosInstance.post(
         `${baseURL}users/update-seller-profile`,
         body,
@@ -176,7 +192,10 @@ export const updateSellerProfile = createAsyncThunk(
       return response.data;
     } catch (error) {
       // return rejectWithValue(error.response?.data || "Unknown error");
-      showToast("error", error?.response?.data?.message || "Something went wrong");
+      showToast(
+        "error",
+        error?.response?.data?.message || "Something went wrong"
+      );
     }
   }
 );
@@ -253,8 +272,6 @@ export const updateSellerSocialLinks = createAsyncThunk(
 
 // Thunk to handle accreditations submission
 
-
-
 export const updateSellerAccreditations = createAsyncThunk(
   "myProfile/updateSellerAccreditations",
   async (accordionGroups, { rejectWithValue }) => {
@@ -262,33 +279,31 @@ export const updateSellerAccreditations = createAsyncThunk(
       const formData = new FormData();
       formData.append("type", "accreditations");
 
-accordionGroups.forEach((group,index) => {
-  // Send ID (empty if new)
-formData.append(`accre_id[${index}]`, group.id ?? ""); 
+      accordionGroups.forEach((group, index) => {
+        // Send ID (empty if new)
+        formData.append(`accre_id[${index}]`, group.id ?? "");
 
-  // Accreditation name
-  const name =
-    Array.isArray(group.accreditations) && group.accreditations.length > 0
-      ? group.accreditations[0]
-      : group.newAccreditation || "";
-  formData.append(`accre_name[${index}]`, name);
+        // Accreditation name
+        const name =
+          Array.isArray(group.accreditations) && group.accreditations.length > 0
+            ? group.accreditations[0]
+            : group.newAccreditation || "";
+        formData.append(`accre_name[${index}]`, name);
 
-  // Image (new or existing)
-  if (group.image instanceof File) {
-    formData.append(`accre_file[${index}]`, group.image); // new upload
-    formData.append(`accre_existing[${index}]`, "");      // no old
-  } else if (group.image && group.image.previewUrl) {
-    const parts = group.image.previewUrl.split("/");
-    const filename = parts[parts.length - 1];
-    formData.append(`accre_file[${index}]`, "");          // no new upload
-    formData.append(`accre_existing[${index}]`, filename); // keep old
-  } else {
-    formData.append(`accre_file[${index}]`, "");
-    formData.append(`accre_existing[${index}]`, "");
-  }
-});
-
-
+        // Image (new or existing)
+        if (group.image instanceof File) {
+          formData.append(`accre_file[${index}]`, group.image); // new upload
+          formData.append(`accre_existing[${index}]`, ""); // no old
+        } else if (group.image && group.image.previewUrl) {
+          const parts = group.image.previewUrl.split("/");
+          const filename = parts[parts.length - 1];
+          formData.append(`accre_file[${index}]`, ""); // no new upload
+          formData.append(`accre_existing[${index}]`, filename); // keep old
+        } else {
+          formData.append(`accre_file[${index}]`, "");
+          formData.append(`accre_existing[${index}]`, "");
+        }
+      });
 
       // ✅ Log FormData before sending
       for (let [key, value] of formData.entries()) {
@@ -312,7 +327,6 @@ formData.append(`accre_id[${index}]`, group.id ?? "");
   }
 );
 
-
 export const deleteSellerAccreditation = createAsyncThunk(
   "myProfile/deleteSellerAccreditation",
   async (id, { rejectWithValue }) => {
@@ -333,15 +347,6 @@ export const deleteSellerAccreditation = createAsyncThunk(
     }
   }
 );
-
-
-
-
-
-
-
-
-
 
 export const updateSellerQandA = createAsyncThunk(
   "myProfile/updateSellerQandA",
@@ -425,31 +430,29 @@ export const updateFacebookReviewLink = createAsyncThunk(
   }
 );
 
-
-
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
   reviewListData: [],
   editProfileList: [],
   sellerLoader: false,
-
+  isDirtyRedux: false,
   // NEW state for update logic
   updateSuccess: false,
   updateError: null,
-    // New for photo upload
-    photoUpdateSuccess: false,
-    photoUpdateError: null, 
+  // New for photo upload
+  photoUpdateSuccess: false,
+  photoUpdateError: null,
 
-    //New for social media links 
-    socialUpdateSuccess: false,
-  socialUpdateError: null, 
+  //New for social media links
+  socialUpdateSuccess: false,
+  socialUpdateError: null,
 
-//New for Accreditations
+  //New for Accreditations
   accreditationsUpdateSuccess: false,
-  accreditationsUpdateError: null, 
+  accreditationsUpdateError: null,
 
-//New for Q&A
+  //New for Q&A
   qnaUpdateSuccess: false,
   qnaUpdateError: null,
 
@@ -462,6 +465,9 @@ const myprofileSlice = createSlice({
   name: "myProfile",
   initialState,
   reducers: {
+    setIsDirtyRedux(state, action) {
+      state.isDirtyRedux = action.payload;
+    },
     setGetCustomerLinkData(state, action) {
       state.customerLinkData = action.payload;
     },
@@ -500,17 +506,12 @@ const myprofileSlice = createSlice({
     clearFacebookReviewStatus(state) {
       state.facebookReviewUpdateSuccess = false;
       state.facebookReviewUpdateError = null;
-    }
-    
-    
-    
-
+    },
   },
   extraReducers: (builder) => {
     builder
 
-
-    // for profile
+      // for profile
       .addCase(updateSellerProfile.pending, (state) => {
         state.sellerLoader = true;
         state.updateSuccess = false;
@@ -526,91 +527,88 @@ const myprofileSlice = createSlice({
         state.updateError = action.payload;
       })
 
-
       // for photos
-    .addCase(updateSellerPhotos.pending, (state) => {
-      state.sellerLoader = true;
-      state.photoUpdateSuccess = false;
-      state.photoUpdateError = null;
-    })
-    .addCase(updateSellerPhotos.fulfilled, (state) => {
-      state.sellerLoader = false;
-      state.photoUpdateSuccess = true;
-    })
-    .addCase(updateSellerPhotos.rejected, (state, action) => {
-      state.sellerLoader = false;
-      state.photoUpdateSuccess = false;
-      state.photoUpdateError = action.payload;
-    })
+      .addCase(updateSellerPhotos.pending, (state) => {
+        state.sellerLoader = true;
+        state.photoUpdateSuccess = false;
+        state.photoUpdateError = null;
+      })
+      .addCase(updateSellerPhotos.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.photoUpdateSuccess = true;
+      })
+      .addCase(updateSellerPhotos.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.photoUpdateSuccess = false;
+        state.photoUpdateError = action.payload;
+      })
 
+      // Social media
+      .addCase(updateSellerSocialLinks.pending, (state) => {
+        state.sellerLoader = true;
+        state.socialUpdateSuccess = false;
+        state.socialUpdateError = null;
+      })
+      .addCase(updateSellerSocialLinks.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.socialUpdateSuccess = true;
+      })
+      .addCase(updateSellerSocialLinks.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.socialUpdateSuccess = false;
+        state.socialUpdateError = action.payload;
+      })
 
-     // Social media
-     .addCase(updateSellerSocialLinks.pending, (state) => {
-      state.sellerLoader = true;
-      state.socialUpdateSuccess = false;
-      state.socialUpdateError = null;
-    })
-    .addCase(updateSellerSocialLinks.fulfilled, (state) => {
-      state.sellerLoader = false;
-      state.socialUpdateSuccess = true;
-    })
-    .addCase(updateSellerSocialLinks.rejected, (state, action) => {
-      state.sellerLoader = false;
-      state.socialUpdateSuccess = false;
-      state.socialUpdateError = action.payload;
-    })
-
-    //For Accreditations
-    .addCase(updateSellerAccreditations.pending, (state) => {
-      state.sellerLoader = true;
-      state.accreditationsUpdateSuccess = false;
-      state.accreditationsUpdateError = null;
-    })
-    .addCase(updateSellerAccreditations.fulfilled, (state) => {
-      state.sellerLoader = false;
-      state.accreditationsUpdateSuccess = true;
-    })
-    .addCase(updateSellerAccreditations.rejected, (state, action) => {
-      state.sellerLoader = false;
-      state.accreditationsUpdateSuccess = false;
-      state.accreditationsUpdateError = action.payload;
-    })
-//for Q&A
-    .addCase(updateSellerQandA.pending, (state) => {
-      state.sellerLoader = true;
-      state.qnaUpdateSuccess = false;
-      state.qnaUpdateError = null;
-    })
-    .addCase(updateSellerQandA.fulfilled, (state) => {
-      state.sellerLoader = false;
-      state.qnaUpdateSuccess = true;
-    })
-    .addCase(updateSellerQandA.rejected, (state, action) => {
-      state.sellerLoader = false;
-      state.qnaUpdateSuccess = false;
-      state.qnaUpdateError = action.payload;
-    })
-  //for Reviews
-    .addCase(updateFacebookReviewLink.pending, (state) => {
-      state.sellerLoader = true;
-      state.facebookReviewUpdateSuccess = false;
-      state.facebookReviewUpdateError = null;
-    })
-    .addCase(updateFacebookReviewLink.fulfilled, (state) => {
-      state.sellerLoader = false;
-      state.facebookReviewUpdateSuccess = true;
-    })
-    .addCase(updateFacebookReviewLink.rejected, (state, action) => {
-      state.sellerLoader = false;
-      state.facebookReviewUpdateSuccess = false;
-      state.facebookReviewUpdateError = action.payload;
-    });
-    
-    
+      //For Accreditations
+      .addCase(updateSellerAccreditations.pending, (state) => {
+        state.sellerLoader = true;
+        state.accreditationsUpdateSuccess = false;
+        state.accreditationsUpdateError = null;
+      })
+      .addCase(updateSellerAccreditations.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.accreditationsUpdateSuccess = true;
+      })
+      .addCase(updateSellerAccreditations.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.accreditationsUpdateSuccess = false;
+        state.accreditationsUpdateError = action.payload;
+      })
+      //for Q&A
+      .addCase(updateSellerQandA.pending, (state) => {
+        state.sellerLoader = true;
+        state.qnaUpdateSuccess = false;
+        state.qnaUpdateError = null;
+      })
+      .addCase(updateSellerQandA.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.qnaUpdateSuccess = true;
+      })
+      .addCase(updateSellerQandA.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.qnaUpdateSuccess = false;
+        state.qnaUpdateError = action.payload;
+      })
+      //for Reviews
+      .addCase(updateFacebookReviewLink.pending, (state) => {
+        state.sellerLoader = true;
+        state.facebookReviewUpdateSuccess = false;
+        state.facebookReviewUpdateError = null;
+      })
+      .addCase(updateFacebookReviewLink.fulfilled, (state) => {
+        state.sellerLoader = false;
+        state.facebookReviewUpdateSuccess = true;
+      })
+      .addCase(updateFacebookReviewLink.rejected, (state, action) => {
+        state.sellerLoader = false;
+        state.facebookReviewUpdateSuccess = false;
+        state.facebookReviewUpdateError = action.payload;
+      });
   },
 });
 
 export const {
+  setIsDirtyRedux,
   setGetCustomerLinkData,
   setReviewListLoader,
   setGetReviewData,
@@ -621,8 +619,7 @@ export const {
   clearSocialUpdateStatus,
   clearAccreditationsStatus,
   clearQnaStatus,
-  clearFacebookReviewStatus
+  clearFacebookReviewStatus,
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;
-

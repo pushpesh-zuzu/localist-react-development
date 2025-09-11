@@ -414,9 +414,26 @@ const LogoComponent = () => {
   const redirectPath = getRedirectPath();
   return (
     <div className={styles.logoContainer}>
-      <Link to={redirectPath}>
-        <img src={logo} alt="logo" className={styles.mainLogo} />
-      </Link>
+      {/* <Link to={redirectPath}> */}
+      <img
+        src={logo}
+        alt="logo"
+        className={styles.mainLogo}
+        onClick={(e) => {
+          e.preventDefault();
+          if (redirectPath === "/") {
+            // pehle navigate karo
+            navigate("/");
+            // fir ek bar reload karo
+            setTimeout(() => {
+              window.location.reload();
+            }, 100);
+          } else {
+            navigate(redirectPath);
+          }
+        }}
+      />
+      {/* </Link> */}
       {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
         !isAccountPage &&
         !isNotification && (

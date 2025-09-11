@@ -26,12 +26,13 @@ import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import MobileSlideInSearch from "./MobileSlideInSearch";
 import { style } from "framer-motion/client";
+import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const { lang, country } = useParams(); 
+  const { lang, country } = useParams();
   const currentLang = lang || "en";
   const currentCountry = country || "gb";
   const wrapperRef = useRef(null);
@@ -42,6 +43,7 @@ const LogSwitch = () => {
   const [inputFocused, setInputFocused] = useState(false);
   const [visible, setVisible] = useState(false);
   const [registerdata, setRegisterDatas] = useState();
+  const { isDirtyRedux } = useSelector((state) => state.myProfile);
   const { userToken, currentUser } = useSelector((state) => state.auth);
   const { createRequestToken } = useSelector((state) => state.buyer);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -59,6 +61,18 @@ const LogSwitch = () => {
   const profileId = useParams();
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const confirmNavigation = (callback) => {
+    if (isDirtyRedux) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Are you sure you want to leave?"
+      );
+      if (!confirmLeave) return false;
+      dispatch(setIsDirtyRedux(false));
+    }
+    callback();
+    return true;
+  };
 
   useEffect(() => {
     setDataSave(userToken?.active_status);
@@ -117,8 +131,10 @@ const LogSwitch = () => {
   }, [location.pathname]);
 
   const handleNavigation = (path) => {
-    navigate(path);
-    setMenuOpen(false); // close menu on navigation
+    confirmNavigation(() => {
+      navigate(path);
+      setMenuOpen(false); // close menu on navigation
+    });
   };
   const handleNavigate = () => {
     navigate("/sellers/leads/save-for-later");
@@ -139,67 +155,69 @@ const LogSwitch = () => {
     }
   };
   const handleSwitchUser = () => {
-    const newUserType = getUserType() == 1 ? 2 : 1;
+    confirmNavigation(() => {
+      const newUserType = getUserType() == 1 ? 2 : 1;
 
-    const formData = new FormData();
+      const formData = new FormData();
 
-    if (userToken?.remember_tokens) {
-      formData.append("user_id", userToken?.remember_tokens);
-    } else {
-      formData.append("user_id", registerData?.remember_tokens);
-    }
-
-    formData.append("user_type", newUserType);
-
-    dispatch(switchUser(formData)).then((result) => {
-      if (result?.success) {
-        // Remove old localStorage user data
-        localStorage.removeItem("barkUserToken");
-        // localStorage.removeItem("registerDataToken")
-        // Set new user data to localStorage
-        let updatedUser = {};
-        if (userToken?.remember_tokens) {
-          updatedUser = {
-            ...userToken,
-            active_status: newUserType,
-          };
-        } else {
-          updatedUser = {
-            ...registerData,
-            active_status: newUserType,
-          };
-        }
-        // const updateRegiater = {
-        //   ...registerData,
-        //   active_status:newUserType,
-        //   name:userToken?.name || registerData?.name || ""
-        // }
-
-        localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
-        // localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
-        dispatch(setUserToken(updatedUser));
-
-        dispatch(setRegisterData(updatedUser));
-        setDataSave(updatedUser?.active_status);
-        // setRegisterDatas(updateRegiater?.active_status)
-
-        // Update redux state if needed
-        dispatch(setCurrentUser(dataSave));
-
-        // Navigate based on previous user type
-        if (updatedUser?.active_status === 1) {
-          navigate("/sellers/leads");
-        } else {
-          navigate("/buyers/create");
-        }
-
-        showToast("success", result?.message || "Switch successful!");
+      if (userToken?.remember_tokens) {
+        formData.append("user_id", userToken?.remember_tokens);
       } else {
-        showToast(
-          "error",
-          result?.message || "Switch failed. Please try again."
-        );
+        formData.append("user_id", registerData?.remember_tokens);
       }
+
+      formData.append("user_type", newUserType);
+
+      dispatch(switchUser(formData)).then((result) => {
+        if (result?.success) {
+          // Remove old localStorage user data
+          localStorage.removeItem("barkUserToken");
+          // localStorage.removeItem("registerDataToken")
+          // Set new user data to localStorage
+          let updatedUser = {};
+          if (userToken?.remember_tokens) {
+            updatedUser = {
+              ...userToken,
+              active_status: newUserType,
+            };
+          } else {
+            updatedUser = {
+              ...registerData,
+              active_status: newUserType,
+            };
+          }
+          // const updateRegiater = {
+          //   ...registerData,
+          //   active_status:newUserType,
+          //   name:userToken?.name || registerData?.name || ""
+          // }
+
+          localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
+          // localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
+          dispatch(setUserToken(updatedUser));
+
+          dispatch(setRegisterData(updatedUser));
+          setDataSave(updatedUser?.active_status);
+          // setRegisterDatas(updateRegiater?.active_status)
+
+          // Update redux state if needed
+          dispatch(setCurrentUser(dataSave));
+
+          // Navigate based on previous user type
+          if (updatedUser?.active_status === 1) {
+            navigate("/sellers/leads");
+          } else {
+            navigate("/buyers/create");
+          }
+
+          showToast("success", result?.message || "Switch successful!");
+        } else {
+          showToast(
+            "error",
+            result?.message || "Switch failed. Please try again."
+          );
+        }
+      });
     });
   };
   const handleMyRequest = () => {
@@ -266,15 +284,17 @@ const LogSwitch = () => {
   }, [debouncedText, dispatch, userToken, registerData]);
 
   const handleLogout = async () => {
-    try {
-      const result = await dispatch(userLogout());
-      if (result) {
-        showToast("info", "Logout successful!");
-        handleNavigation("/login");
+    confirmNavigation(async () => {
+      try {
+        const result = await dispatch(userLogout());
+        if (result) {
+          showToast("info", "Logout successful!");
+          handleNavigation("/login");
+        }
+      } catch (error) {
+        console.error("Logout Error:", error);
       }
-    } catch (error) {
-      console.error("Logout Error:", error);
-    }
+    });
   };
 
   const notifications = useSelector(
@@ -401,7 +421,7 @@ const LogSwitch = () => {
             <>
               <a
                 href="/sellers/dashboard"
-                style={{ textDecoration: "none"}}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/dashboard"
                     ? styles.active
@@ -425,7 +445,7 @@ const LogSwitch = () => {
               </a>
               <a
                 href="/sellers/leads"
-                style={{ textDecoration: "none"}}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads" ? styles.active : ""
                 }`}
@@ -447,7 +467,7 @@ const LogSwitch = () => {
 
               <a
                 href="/sellers/leads/save-for-later"
-                style={{ textDecoration: "none"}}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads/save-for-later"
                     ? styles.active
@@ -495,7 +515,7 @@ const LogSwitch = () => {
 
               <a
                 href="/settings"
-                style={{ textDecoration: "none"}}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/settings" ? styles.active : ""
                 }`}
@@ -517,7 +537,7 @@ const LogSwitch = () => {
 
               <a
                 href={`/${currentLang}/${currentCountry}/contact-us`}
-                style={{ textDecoration: "none"}}
+                style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/contact-us" ? styles.active : ""
                 }`}
@@ -530,7 +550,9 @@ const LogSwitch = () => {
                     !e.altKey
                   ) {
                     e.preventDefault();
-                    handleNavigation(`/${currentLang}/${currentCountry}/contact-us`);
+                    handleNavigation(
+                      `/${currentLang}/${currentCountry}/contact-us`
+                    );
                   }
                 }}
               >
@@ -618,147 +640,144 @@ const LogSwitch = () => {
             </>
           )}
         </div>
-        {
-          getUserType() == 1 && !viewProfile && (
-            <Popover
-              trigger="click"
-              placement={
-                typeof window !== "undefined" && window.innerWidth > 540
-                  ? "bottomRight"
-                  : "top"
-              }
-              visible={popoverVisible}
-              onVisibleChange={handleVisibleChange}
-              overlayStyle={{
-                maxHeight: "60vh",
-                overflowY: "auto",
-                width: "360px",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-              }}
-              content={
+        {getUserType() == 1 && !viewProfile && (
+          <Popover
+            trigger="click"
+            placement={
+              typeof window !== "undefined" && window.innerWidth > 540
+                ? "bottomRight"
+                : "top"
+            }
+            visible={popoverVisible}
+            onVisibleChange={handleVisibleChange}
+            overlayStyle={{
+              maxHeight: "60vh",
+              overflowY: "auto",
+              width: "360px",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+            }}
+            content={
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  maxHeight: "50vh",
+                  overflow: "hidden",
+                  width: "320px",
+                }}
+              >
                 <div
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    maxHeight: "50vh",
-                    overflow: "hidden",
-                    width: "320px",
+                    flex: "1",
+                    overflowY: "auto",
+                    padding: "10px",
                   }}
                 >
-                  <div
-                    style={{
-                      flex: "1",
-                      overflowY: "auto",
-                      padding: "10px",
-                    }}
-                  >
-                    {notifications.length > 0 ? (
-                      notifications.map((noti, index) => (
-                        <div key={noti.id}>
-                          <div style={{ marginBottom: "8px" }}>
-                            <div style={{ fontWeight: "600", fontSize: "14px" }}>
-                              {noti.title}
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                gap: "12px",
-                                marginTop: "4px",
-                                fontSize: "11px",
-                              }}
-                            >
-                              <span>{noti.message}</span>
-                              <span>{formatDate(noti.created_at)}</span>
-                            </div>
+                  {notifications.length > 0 ? (
+                    notifications.map((noti, index) => (
+                      <div key={noti.id}>
+                        <div style={{ marginBottom: "8px" }}>
+                          <div style={{ fontWeight: "600", fontSize: "14px" }}>
+                            {noti.title}
                           </div>
-                          {index !== notifications.length - 1 && (
-                            <hr
-                              style={{
-                                borderTop: "1px solid #eee",
-                                margin: "8px 0",
-                              }}
-                            />
-                          )}
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "12px",
+                              marginTop: "4px",
+                              fontSize: "11px",
+                            }}
+                          >
+                            <span>{noti.message}</span>
+                            <span>{formatDate(noti.created_at)}</span>
+                          </div>
                         </div>
-                      ))
-                    ) : (
-                      <div style={{ fontSize: "12px", color: "#999" }}>
-                        No new notifications
+                        {index !== notifications.length - 1 && (
+                          <hr
+                            style={{
+                              borderTop: "1px solid #eee",
+                              margin: "8px 0",
+                            }}
+                          />
+                        )}
                       </div>
-                    )}
-                  </div>
-
-                  {/* Fixed bottom link */}
-                  {notifications.length > 0 && (
-                    <div
-                      style={{
-                        padding: "10px",
-                        borderTop: "1px solid #eee",
-                        textAlign: "right",
-                        backgroundColor: "#fff",
-                        position: "sticky",
-                        bottom: "0",
-                      }}
-                    >
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (unreadCount > 0) {
-                            const payload = {
-                              user_id: userToken?.id || registerData?.id,
-                              last_id: lastId,
-                            };
-                            dispatch(markNotificationsAsRead(payload));
-                          }
-
-                          setPopoverVisible(false);
-                        }}
-                        style={{ fontSize: "12px", color: "#1890ff" }}
-                      >
-                        Mark all as read
-                      </a>
+                    ))
+                  ) : (
+                    <div style={{ fontSize: "12px", color: "#999" }}>
+                      No new notifications
                     </div>
                   )}
                 </div>
-              }
-            >
-              <div
-                style={{
-                  position: "relative",
-                  cursor: "pointer !important",
-                  marginRight: "8px",
-                }}
-              >
-                <img src={bellIcon} alt="Notifications" width={20} height={20} />
-                {unreadCount > 0 && (
-                  <span
+
+                {/* Fixed bottom link */}
+                {notifications.length > 0 && (
+                  <div
                     style={{
-                      position: "absolute",
-                      top: "-4px",
-                      right: "-4px",
-                      backgroundColor: "red",
-                      color: "white",
-                      borderRadius: "50%",
-                      width: "16px",
-                      height: "16px",
-                      fontSize: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      padding: "10px",
+                      borderTop: "1px solid #eee",
+                      textAlign: "right",
+                      backgroundColor: "#fff",
+                      position: "sticky",
+                      bottom: "0",
                     }}
                   >
-                    {unreadCount}
-                  </span>
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (unreadCount > 0) {
+                          const payload = {
+                            user_id: userToken?.id || registerData?.id,
+                            last_id: lastId,
+                          };
+                          dispatch(markNotificationsAsRead(payload));
+                        }
+
+                        setPopoverVisible(false);
+                      }}
+                      style={{ fontSize: "12px", color: "#1890ff" }}
+                    >
+                      Mark all as read
+                    </a>
+                  </div>
                 )}
               </div>
-            </Popover>
-          )
-        }
-
+            }
+          >
+            <div
+              style={{
+                position: "relative",
+                cursor: "pointer !important",
+                marginRight: "8px",
+              }}
+            >
+              <img src={bellIcon} alt="Notifications" width={20} height={20} />
+              {unreadCount > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: "-4px",
+                    right: "-4px",
+                    backgroundColor: "red",
+                    color: "white",
+                    borderRadius: "50%",
+                    width: "16px",
+                    height: "16px",
+                    fontSize: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {unreadCount}
+                </span>
+              )}
+            </div>
+          </Popover>
+        )}
 
         {/* User Options Popover */}
         {registerToken || userToken ? (
@@ -769,7 +788,7 @@ const LogSwitch = () => {
                   <div className={styles.logoutBtn}>
                     <a
                       href="/user/notification"
-                      style={{ textDecoration: "none" ,color:"#000"}}
+                      style={{ textDecoration: "none", color: "#000" }}
                       className={`${
                         location.pathname === "/user/notification"
                           ? styles.active
@@ -797,7 +816,7 @@ const LogSwitch = () => {
                     href={
                       getUserType() == 1 ? "/buyers/create" : "/sellers/leads"
                     }
-                    style={{ textDecoration: "none" ,color:"#000" }}
+                    style={{ textDecoration: "none", color: "#000" }}
                     onClick={(e) => {
                       if (
                         e.button === 0 &&
@@ -818,7 +837,7 @@ const LogSwitch = () => {
                   <div className={styles.logoutBtn}>
                     <a
                       href="/user/settings"
-                      style={{ textDecoration: "none" ,color:"#000" }}
+                      style={{ textDecoration: "none", color: "#000" }}
                       className={`${
                         location.pathname === "/user/settings"
                           ? styles.active

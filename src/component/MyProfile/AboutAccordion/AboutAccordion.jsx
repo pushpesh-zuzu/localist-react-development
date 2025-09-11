@@ -27,6 +27,7 @@ import {
 } from "../../../store/Company/companyLookup";
 import Cropper from "react-easy-crop";
 import { usePrompt } from "../../../utils/usePrompt";
+import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
 
 const AboutAccordion = ({ details }) => {
   const dispatch = useDispatch();
@@ -118,6 +119,8 @@ const AboutAccordion = ({ details }) => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [croppedPreview, setCroppedPreview] = useState(null);
+
+  const [isDirty, setIsDirty] = useState(false);
 
   const companyError = useSelector((state) => state.companyLook?.companyError);
 
@@ -231,16 +234,29 @@ const AboutAccordion = ({ details }) => {
       setDebouncedCompanyName(value);
     }
   };
-  const [isDirty, setIsDirty] = useState(false);
-  usePrompt(
-    "You have unsaved changes. Are you sure you want to leave?",
-    isDirty
-  );
+
+  useEffect(() => {
+    dispatch(setIsDirtyRedux(isDirty));
+  }, [isDirty, dispatch]);
+
+  console.log(isDirtyRedux, "isDirtyRedux");
+
+  const handleRedirect = (path) => {
+    if (isDirtyRedux) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Are you sure you want to leave?"
+      );
+      if (!confirmLeave) return;
+    }
+    navigate(path);
+  };
+
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (isDirtyRedux) {
         e.preventDefault();
         e.returnValue = ""; // Chrome requires returnValue to be set
+        handleRedirect();
       }
     };
 
@@ -249,23 +265,6 @@ const AboutAccordion = ({ details }) => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [isDirtyRedux]);
-
-  // useEffect(() => {
-  //   if (isDirty === true) {
-  //     dispatch((true));
-  //   } else {
-  //     dispatch((false));
-  //   }
-  // }, [isDirty, dispatch]);
-
-  const handleRedirect = () => {
-    if (isDirtyRedux) {
-      const confirmLeave = window.confirm(
-        "You have unsaved changes. Are you sure you want to leave?"
-      );
-      if (!confirmLeave) return;
-    }
-  };
 
   // Debounce for company_location
   useEffect(() => {
