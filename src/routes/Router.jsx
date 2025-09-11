@@ -61,6 +61,7 @@ import LandinPatioPage from "../component/LandingPage/LandinPatioPage";
 import LandingArtificialGrassInstallation from "../component/LandingPage/LandingArtificialGrassInstallation";
 import LandingFenceAndGate from "../component/LandingPage/LandingFenceAndGate";
 import LandingDriway from "../component/LandingPage/LandingDriway";
+import LandingGatePPC from "../component/LandingPage/LandingGatePPC";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -304,7 +305,7 @@ const routes = [
         path: "gates_ppc",
         element: (
           <LocaleRedirect>
-            <LandingFenceAndGate />
+            <LandingGatePPC />
           </LocaleRedirect>
         ),
       },

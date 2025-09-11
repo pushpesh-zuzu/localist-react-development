@@ -11,7 +11,7 @@ const LandingHowItWork = ({WORK_STEPS}) => {
         How <span>We Work</span>
       </h3>
       <div className={styles.description}>
-        Get competitive home improvements quotes from leading suppliers in{" "}
+        Get competitive home improvement quotes from leading suppliers in{" "}
         <span>3 simples step!</span>
       </div>
       <div className={styles.workstepContainer}>

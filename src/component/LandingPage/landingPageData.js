@@ -10,7 +10,7 @@ import Driveways from "./SearchPostAndBanner/banner/Driveways.jpg";
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
     paragraphs: [
-      "Here at <strong>Localists</strong>, finding a local fencing or gating company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local companies in seconds</strong>.",
+      "Here at <strong>Localists</strong>, finding a local fencing company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local companies in seconds</strong>.",
     ],
   },
   driveways_ppc: {
@@ -31,6 +31,11 @@ const LANDING_DETAIL_DATA = {
   artificial_grass_installation_ppc: {
     paragraphs: [
       "Here at <strong>Localists</strong>, finding a local artificial grass company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local experts in seconds</strong>.",
+    ],
+  },
+  gates_ppc: {
+    paragraphs: [
+      "Here at <strong>Localists</strong>, finding a local gating company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local companies in seconds</strong>.",
     ],
   },
 };
@@ -73,7 +78,7 @@ const LANDING_TITLES_AND_META = {
     title: "Landscapers now",
   },
   fencing_ppc: {
-    title: "Fencing & Gating companies now",
+    title: "Fencing companies now",
   },
   driveways_ppc: {
     title: "Driveway companies now",
@@ -83,6 +88,9 @@ const LANDING_TITLES_AND_META = {
   },
   artificial_grass_installation_ppc: {
     title: "Artificial Grass companies now",
+  },
+  gates_ppc: {
+    title: "Gating companies now",
   },
 };
 const LANDING_HOW_IT_WORK = {
@@ -124,5 +132,5 @@ export {
   LANDING_TITLES_AND_META,
   LANDING_HOW_IT_WORK,
   CANCEL_POPUP_DATA,
-  ServiceId
+  ServiceId,
 };
