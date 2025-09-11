@@ -286,8 +286,9 @@ const BuyerRegistration = ({
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
+  const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
+  // const buyerStep = 7
   console.log(buyerStep, "buyerStep");
 
   const { userToken, adminToken } = useSelector((state) => state.auth);

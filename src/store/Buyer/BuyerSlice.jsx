@@ -276,7 +276,11 @@ export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
 
       if (response) {
         dispatch(getbuyerrequestList());
-        navigate(`/conversion-redirect/${requestId}`);
+        // dispatch(setBuyerStep(10));
+        // navigate(`/conversion-redirects/10`);
+        navigate(`/conversion/${requestId}`);
+        // navigate(`/contact-us/10`);
+
         console.log("before settimeout");
 
         setTimeout(() => {

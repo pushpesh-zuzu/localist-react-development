@@ -69,70 +69,127 @@ const routes = [
     path: "/:lang/:country",
     element: <MainLayout />,
     children: [
-      { index: true, element: <LocaleRedirect><Homepage /></LocaleRedirect> },
-      { path: "contact-us", element: <LocaleRedirect><ContactUs /></LocaleRedirect> },
-      { path: "about-us", element: <LocaleRedirect><AboutUs /></LocaleRedirect> },
-      { path: "login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
-      { path: "passwordless_login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
+      {
+        index: true,
+        element: (
+          <LocaleRedirect>
+            <Homepage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "conversion/:requestId",
+        element: (
+          <LocaleRedirect>
+            <ConversionRedirect />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "contact-us",
+        element: (
+          <LocaleRedirect>
+            <ContactUs />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "about-us",
+        element: (
+          <LocaleRedirect>
+            <AboutUs />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <LocaleRedirect>
+            <ProtectedLogin />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "passwordless_login",
+        element: (
+          <LocaleRedirect>
+            <ProtectedLogin />
+          </LocaleRedirect>
+        ),
+      },
       {
         path: "home",
         element: (
-          <LocaleRedirect><CloneCatrgory
-            routeName="home"
-            accountHeader="Home & Garden"
-            bestText={`It's super fast and easy!`}
-          /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneCatrgory
+              routeName="home"
+              accountHeader="Home & Garden"
+              bestText={`It's super fast and easy!`}
+            />
+          </LocaleRedirect>
         ),
       },
       {
         path: "builders/",
         element: (
-          <LocaleRedirect><CloneSubTwoCategory
-            routeName="Home & Garden / Builders"
-            accountHeader="Builders"
-            subHeader="builder"
-          /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneSubTwoCategory
+              routeName="Home & Garden / Builders"
+              accountHeader="Builders"
+              subHeader="builder"
+            />
+          </LocaleRedirect>
         ),
       },
       {
         path: "gardening-landscaping/",
         element: (
-          <LocaleRedirect><CloneSubCategoryTwoGardening
-            routeName="gardening-landscaping"
-            accountHeader="Gardening & Landscaping"
-            subHeader="Gardening & Landscaping"
-          /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneSubCategoryTwoGardening
+              routeName="gardening-landscaping"
+              accountHeader="Gardening & Landscaping"
+              subHeader="Gardening & Landscaping"
+            />
+          </LocaleRedirect>
         ),
       },
       {
         path: "business/",
         element: (
-          <LocaleRedirect><CloneCatrgory
-            routeName="business"
-            accountHeader="Business"
-            subHeader="Busines"
-          /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneCatrgory
+              routeName="business"
+              accountHeader="Business"
+              subHeader="Busines"
+            />
+          </LocaleRedirect>
         ),
       },
       {
         path: "financial-and-accounting/",
         element: (
-          <LocaleRedirect><CloneCatrgory
-            accountHeader="Financial & Accounting"
-            subHeader="Financial Accountant"
-          /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneCatrgory
+              accountHeader="Financial & Accounting"
+              subHeader="Financial Accountant"
+            />
+          </LocaleRedirect>
         ),
       },
       {
         path: "accountants/",
         element: (
-          <LocaleRedirect><CloneCatrgory accountHeader="Accountants" subHeader="Accountant" /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
+          </LocaleRedirect>
         ),
       },
       {
         path: "bookkeeping-services/",
         element: (
-          <LocaleRedirect><CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" /></LocaleRedirect>
+          <LocaleRedirect>
+            <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
+          </LocaleRedirect>
         ),
       },
       {
@@ -140,34 +197,117 @@ const routes = [
         element: (
           <LocaleRedirect>
             <CloneSubThreeCategory
-            routeName="Home & Garden / Gardening & Landscaping"
-            accountHeader="General Accounting"
-            subHeader="General Accountant"
-          />
+              routeName="Home & Garden / Gardening & Landscaping"
+              accountHeader="General Accounting"
+              subHeader="General Accountant"
+            />
           </LocaleRedirect>
         ),
       },
-      { path: ":service/:location", element: <LocaleRedirect><LocationPage /></LocaleRedirect> },
+      {
+        path: ":service/:location",
+        element: (
+          <LocaleRedirect>
+            <LocationPage />
+          </LocaleRedirect>
+        ),
+      },
       {
         path: ":service/:location/:subLocation",
-        element: <LocaleRedirect><SublocationPage /></LocaleRedirect>,
+        element: (
+          <LocaleRedirect>
+            <SublocationPage />
+          </LocaleRedirect>
+        ),
       },
       {
         path: "how-it-works-for-customers",
-        element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect>,
+        element: (
+          <LocaleRedirect>
+            <HowItWorksCustomerPage />
+          </LocaleRedirect>
+        ),
       },
-      { path: "how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
-      { path: "sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
-      { path: "sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
-      { path: "landscaping_ppc", element: <LocaleRedirect><LandingLandscaping /></LocaleRedirect> },
-      { path: "patio_services_ppc", element: <LocaleRedirect><LandinPatioPage /></LocaleRedirect> },
-      { path: "artificial_grass_installation_ppc", element: <LocaleRedirect><LandingArtificialGrassInstallation /></LocaleRedirect> },
-      { path: "fencing_ppc", element: <LocaleRedirect><LandingFenceAndGate /></LocaleRedirect> },
-      { path: "driveways_ppc", element: <LocaleRedirect><LandingDriway /></LocaleRedirect> },
-      { path:"conversion-redirect/:requestId", element: <ConversionRedirect /> },
-      { path: "gates_ppc", element: <LocaleRedirect><LandingFenceAndGate /></LocaleRedirect> },
-
-
+      {
+        path: "how-it-works-for-sellers",
+        element: (
+          <LocaleRedirect>
+            <HowItWorkSeller />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "sellers/create",
+        element: (
+          <LocaleRedirect>
+            <ServicePanelPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "sellers/create-account/:serviceTitle",
+        element: (
+          <LocaleRedirect>
+            <ServiceCreateAccount />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "landscaping_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandingLandscaping />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "patio_services_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandinPatioPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "artificial_grass_installation_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandingArtificialGrassInstallation />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "fencing_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandingFenceAndGate />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "driveways_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandingDriway />
+          </LocaleRedirect>
+        ),
+      },
+      // {
+      //   path: "conversion-redirects/:requestId",
+      //   element: (
+      //     <ProtectedRoute>
+      //       <ConversionRedirect />
+      //     </ProtectedRoute>
+      //   ),
+      // },
+      {
+        path: "gates_ppc",
+        element: (
+          <LocaleRedirect>
+            <LandingFenceAndGate />
+          </LocaleRedirect>
+        ),
+      },
     ],
   },
 
@@ -177,18 +317,96 @@ const routes = [
     element: <MainLayout />, // or another layout if needed
     children: [
       // Redirect bare homepage to localized homepage (e.g., /en/in)
-      { index: true, element: <LocaleRedirect><Homepage /></LocaleRedirect> },
+      {
+        index: true,
+        element: (
+          <LocaleRedirect>
+            <Homepage />
+          </LocaleRedirect>
+        ),
+      },
       // Localized login routes when accessed without locale prefix
-      { path: "/login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
-      { path: "/passwordless_login", element: <LocaleRedirect><ProtectedLogin /></LocaleRedirect> },
-      { path: "/contact-us", element: <LocaleRedirect><ContactUs /></LocaleRedirect> },
-      { path: "/about-us", element: <LocaleRedirect><AboutUs /></LocaleRedirect> },
-      { path: "/how-it-works-for-customers", element: <LocaleRedirect><HowItWorksCustomerPage /></LocaleRedirect> },
-      { path: "/how-it-works-for-sellers", element: <LocaleRedirect><HowItWorkSeller /></LocaleRedirect> },
-      { path: "/:lang/:country/sellers/pricing", element: <LocaleRedirect><PricingPage /></LocaleRedirect> },
-      { path: "/sellers/create", element: <LocaleRedirect><ServicePanelPage /></LocaleRedirect> },
-      { path: "/sellers/create-account/:serviceTitle", element: <LocaleRedirect><ServiceCreateAccount /></LocaleRedirect> },
- 
+      {
+        path: "/login",
+        element: (
+          <LocaleRedirect>
+            <ProtectedLogin />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/passwordless_login",
+        element: (
+          <LocaleRedirect>
+            <ProtectedLogin />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "conversion/:requestId",
+        element: (
+          <LocaleRedirect>
+            <ConversionRedirect />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "contact-us",
+        element: (
+          <LocaleRedirect>
+            <ContactUs />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/about-us",
+        element: (
+          <LocaleRedirect>
+            <AboutUs />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/how-it-works-for-customers",
+        element: (
+          <LocaleRedirect>
+            <HowItWorksCustomerPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/how-it-works-for-sellers",
+        element: (
+          <LocaleRedirect>
+            <HowItWorkSeller />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/:lang/:country/sellers/pricing",
+        element: (
+          <LocaleRedirect>
+            <PricingPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/sellers/create",
+        element: (
+          <LocaleRedirect>
+            <ServicePanelPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "/sellers/create-account/:serviceTitle",
+        element: (
+          <LocaleRedirect>
+            <ServiceCreateAccount />
+          </LocaleRedirect>
+        ),
+      },
+
       { path: "/category", element: <Category /> },
       { path: "/inprogress", element: <InProgressPage /> },
       { path: "/category/:serviceName", element: <Category /> },
@@ -292,7 +510,7 @@ const routes = [
         ),
       },
       { path: "/help-center", element: <HelpCenterPage /> },
-      
+
       {
         path: "/feedback/questions",
         element: (
@@ -393,7 +611,7 @@ const routes = [
         path: "/view-profile/:company_name/:requestId",
         element: (
           // <ProtectedRoute>
-            <ViewProfiles />
+          <ViewProfiles />
           // </ProtectedRoute>
         ),
       },

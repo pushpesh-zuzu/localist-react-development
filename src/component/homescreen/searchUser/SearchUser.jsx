@@ -329,6 +329,8 @@ const SearchProfessionals = ({ nextStep }) => {
     }, DEBOUNCE_MS);
   };
 
+  console.log("home screen redered");
+
   return (
     <div className={styles.searchContainer}>
       <div className={styles.popularExamples}>
