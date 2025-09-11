@@ -81,9 +81,9 @@ const routes = [
       {
         path: "conversion/:requestId",
         element: (
-          <LocaleRedirect>
-            <ConversionRedirect />
-          </LocaleRedirect>
+          // <LocaleRedirect>
+          <ConversionRedirect />
+          // </LocaleRedirect>
         ),
       },
       {
@@ -346,9 +346,9 @@ const routes = [
       {
         path: "conversion/:requestId",
         element: (
-          <LocaleRedirect>
-            <ConversionRedirect />
-          </LocaleRedirect>
+          // <LocaleRedirect>
+          <ConversionRedirect />
+          // </LocaleRedirect>
         ),
       },
       {
