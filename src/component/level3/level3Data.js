@@ -1293,7 +1293,7 @@ const HowItWorksData = {
       image: accountant,
       heading1: "Hire your local landscape gardener",
       description:
-        "When you find a builder or contractor that fits your project requirements, you can go ahead and hire with confidence as all contractors here on Localists are vetted for quality and reliability.",
+        "When you find a landscaper that fits your project requirements, you can go ahead and hire with confidence as all contractors here on Localists are vetted for quality and reliability.",
     },
   ],
   "artificial-grass-installers-near-me": [
@@ -1333,7 +1333,7 @@ const HowItWorksData = {
 const CONTENT_CONFIG = {
   "fencing-contractors-near-me": {
     para1:
-      "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylish fence to your own little castle? Get matched instantly with trusted fencing contractors near you who can build boundaries the right way.",
+      "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylishfence to boundary your castle? Get matched instantly with trusted fencing contractors near you who can build boundaries the right way.",
     para2:
       "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project.. So no more shopping around for the best quote, we bring the quotes to you!",
     para3: `Whether you're planning a new build, replacing an old fence, securing a commercial space or adding an automatic gate, we’ll connect you with the best fencing companies near you. From start to finish, we make the process simple. Just tell us what you need, and we’ll connect you with the best hands.`,
@@ -1350,16 +1350,16 @@ const CONTENT_CONFIG = {
   },
   "patio-layers-near-me": {
     para1:
-      "At Localists, we make it simple to find trusted patio layers who can transform your garden into the outdoor space you’ve been dreaming of. From a fresh garden patio design to a full-scale rebuild, we connect you with local experts.",
+      "Why sip your coffee on a boring patch of grass when you could lounge on a patio worthy of Instagram? We’ll connect you with local patio installers who can transform your back garden into the ultimate hangout spot, whether you’re into sunny brunches, starlit dinners, or you just want to be the envy of your Neighbours.",
     para2:
       "Whether you’re picturing a modern porcelain patio, a classic sandstone patio, or a budget-friendly gravel patio, we’ll help you find the right patio contractors for the job. Compare fair, transparent quotes and choose a professional who shares your vision.",
     para3: "It’s free from start to finish !",
   },
   "landscape-gardeners-near-me": {
     para1:
-      "Is your outdoor space looking more like a wild jungle than a pristine garden? We’ll connect you with landscapers near you who can tame the weeds, sculpt the shrubs to make your garden the envy of the neighbourhood.",
+      "Is your outdoor space looking more like a wild jungle than a pristine garden? We’ll connect you with landscapers near you who can tame the weeds and sculpt the shrubs to make your garden the envy of the neighbourhood.",
     para2:
-      "Our local landscapers give you competitive quotes to ensure you get the garden of your dreams. From sleek, modern layouts to classic cottage-style gardens bursting with greenery, our vetted garden landscapers near you blend creativity with practical know-how. We will send you free quotes to compare, read reviews and proceed to hire.",
+      "Our local landscapers give you competitive quotes to ensure you get the garden of your dreams. From sleek, modern layouts to classic cottage-style gardens bursting with greenery, we have 100's of vetted garden landscapers near you that can blend creativity with practical know-how. We will send you free quotes to compare, read reviews and proceed to hire.",
     para3: "Fast, Easy, and No-Obligation - Start Now!",
   },
   "artificial-grass-installers-near-me": {
@@ -1399,7 +1399,7 @@ const BREADCRUMB_CONFIG = {
 
 const CONTENT_CONFIG_TOP = {
   "fencing-contractors-near-me": {
-    findingHeading: " fence and gate installation experts",
+    findingHeading: "fencing companies",
     title: "Fencing Contractors",
     mainTitle: "fence & gate installation",
     ctaText: "Fencing Contractor",
@@ -1509,7 +1509,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "You can find any type of specialist you need to cover everything from : residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
+      text: "You can find any type of specialist you need to cover everything from: residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
     },
     {
       type: "h2",
@@ -1517,7 +1517,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: `When it comes to finding trusted, local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
+      text: `When it comes to finding local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
     },
     {
       type: "p",
@@ -1746,7 +1746,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Finding the right patio contractors near me isn’t just about who can start the quickest or who gives the cheapest quote. It’s about making sure your project is done right the first time. Here are a few practical tips to help you hire with confidence:",
+      text: "Finding the right patio contractor isn’t just about who can start the quickest or who gives the cheapest quote. It’s about making sure your project is done right the first time. Here are a few practical tips to help you hire with confidence:",
     },
     {
       type: "uili",
@@ -1780,46 +1780,31 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why choose patio contractors at Localists",
+      text: "Why you should hire a patio contractor through Localists",
     },
     {
       type: "p",
-      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your local area. The best part is, the local patio layers we connect you with are local to your area. So you’re safe in the knowledge that the patio company you hire knows your area’s climate, understands local planning requirements, and understands the local design trends, local character and design - which can be insisted on by many local councils. A meaning your patio will be built to last. Here’s why hiring a local patio contractor through Localists makes sense:",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your area that are verified and vetted, with all their reviews from multiple platforms in one place. And because you're hiring a patio layer near you, your safe in the knowledge that whoever you choose to take on the job will have extensive local knowledge such as climate, local planning permissions and local design trends. Here are some of the benefits of hiring through Localists",
     },
     {
       type: "li",
-      heading: "Faster site visits and easier communication.",
+      heading: "Patio contractors onthe Localist platform are vetted and verified.",
       marginTop: true,
     },
     {
       type: "li",
-      heading: "Materials that suit your region’s weather conditions.",
+      heading: "All their reviews - all in one place! We scour multiple review platforms so that you can see all of their reviews in one place.",
       marginTop: false,
     },
     {
       type: "li",
       heading:
-        "Designs that reflect and preserve the local character of your neighbourhood.",
+        "Leads come directly to you, without a penny to pay.",
       marginTop: false,
     },
     {
       type: "li",
-      heading: "Designs that blend with your house style.",
-      marginTop: false,
-    },
-    {
-      type: "li",
-      heading: "Easy-to-check reputation from nearby customers.",
-      marginTop: false,
-    },
-    {
-      type: "li",
-      heading: "Support for your local economy.",
-      marginTop: false,
-    },
-    {
-      type: "li",
-      heading: "Quicker help if anything needs adjusting later.",
+      heading: "We source local contractors, with essential knowledge of the local area, climate and building regulations.",
       marginTop: false,
     },
     {
@@ -2033,7 +2018,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why hire a landscape architect or gardener on Localists",
+      text: "Why hire a landscaper through Localists",
     },
     {
       type: "p",
