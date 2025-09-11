@@ -421,16 +421,7 @@ const LogoComponent = () => {
         className={styles.mainLogo}
         onClick={(e) => {
           e.preventDefault();
-          if (redirectPath === "/") {
-            // pehle navigate karo
-            navigate("/");
-            // fir ek bar reload karo
-            setTimeout(() => {
-              window.location.reload();
-            }, 100);
-          } else {
-            navigate(redirectPath);
-          }
+          window.location.href = "/"; // reload + homepage redirect ek sath
         }}
       />
       {/* </Link> */}
