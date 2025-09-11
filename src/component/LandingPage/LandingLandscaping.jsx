@@ -33,7 +33,7 @@ const LandingLandscaping = ({}) => {
   return (
     <>
       <Helmet>
-        <meta data-rh="true" name="robots" content="noindex" />
+        <meta name="robots" content="noindex" />
         {/* <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
           name={CONTENT_CONFIG_META[slug]?.name}
