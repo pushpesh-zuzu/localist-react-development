@@ -19,6 +19,10 @@ const SearchAccountantLeve3 = ({
   const [showModal, setShowModal] = useState(false);
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
 
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+
+  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
+
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
@@ -55,6 +59,8 @@ const SearchAccountantLeve3 = ({
 
       if (postalCode) {
         setPincode(postalCode);
+        setPostalCodeValidate(true);
+        setIsPincodeFromDropdown(true);
         inputRef.current.value = postalCode;
         setIsPostcodeSelected(true);
       } else {
@@ -97,6 +103,11 @@ const SearchAccountantLeve3 = ({
       return;
     }
 
+    if (!isPincodeFromDropdown) {
+      showToast("error", "Please select postcodes from suggestions below");
+      return;
+    }
+
     if (userToken?.active_status === 1) {
       showToast("error", "You are not a buyer.");
       return;
@@ -129,7 +140,9 @@ const SearchAccountantLeve3 = ({
             value={pincode}
             onChange={(e) => {
               setPincode(e.target.value);
-              setIsPostcodeSelected(false);
+              setIsPostcodeSelected(true);
+              setPostalCodeValidate(false);
+              setIsPincodeFromDropdown(false);
             }}
           />
 
@@ -142,6 +155,7 @@ const SearchAccountantLeve3 = ({
           closeModal={handleClose}
           postcode={pincode}
           serviceName={defaultService}
+          postalCodeValidate={postalCodeValidate}
         />
       )}
     </div>

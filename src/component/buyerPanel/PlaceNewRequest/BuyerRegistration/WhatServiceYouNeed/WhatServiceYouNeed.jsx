@@ -53,12 +53,14 @@ const WhatServiceYouNeed = ({
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
-  // useEffect(() => {
-  //   if (serviceName && serviceId) {
-  //     setInput(serviceName);
-  //     setSelectedService({ id: serviceId });
-  //   }
-  // }, [serviceName, serviceId]);
+
+  useEffect(() => {
+    if (serviceName && serviceId) {
+      setInput(serviceName);
+      setSelectedService({ id: serviceId });
+    }
+  }, [serviceName, serviceId]);
+
   // useEffect(() => {
   //   if (serviceName && serviceId) {
   //     setInput(serviceName);
@@ -99,6 +101,15 @@ const WhatServiceYouNeed = ({
       setPincode(pincodes);
     }
   }, [serviceName, pincodes, dispatch]);
+
+  useEffect(() => {
+    if (pincodes && postalCodeIsValidate) {
+      setPincode(pincodes);
+      setPostalCodeValidate(true);
+      setIsPincodeFromDropdown(true);
+      setErrors((prev) => ({ ...prev, pincode: "" }));
+    }
+  }, [pincodes, postalCodeIsValidate]);
 
   // ✅ Sync when service list updates
   useEffect(() => {

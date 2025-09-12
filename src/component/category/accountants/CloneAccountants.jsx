@@ -30,6 +30,10 @@ const CloneAccountants = ({
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
+  const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
+
   const { userToken } = useSelector((state) => state.auth);
   const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
@@ -89,6 +93,9 @@ const CloneAccountants = ({
 
   const handlePincodeChange = (e) => {
     setPincode(e.target.value);
+    setPostalCodeValidate(false);
+    setIsPostcodeSelected(false);
+    setIsPincodeFromDropdown(false);
   };
 
   const initGoogleAutocomplete = () => {
@@ -119,7 +126,10 @@ const CloneAccountants = ({
 
       if (postalCode) {
         setPincode(postalCode);
+        setPostalCodeValidate(true);
+        setIsPincodeFromDropdown(true);
         inputRef.current.value = postalCode;
+        setIsPostcodeSelected(true);
       } else {
         showToast("error", "No PIN code found! Please try again.");
       }
@@ -151,6 +161,16 @@ const CloneAccountants = ({
   const handleContinue = () => {
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
+      return;
+    }
+
+    if (!isPincodeFromDropdown) {
+      showToast("error", "Please select postcodes from suggestions below");
+      return;
+    }
+
+    if (!isPostcodeSelected) {
+      showToast("error", "Please select a postcode from the suggestions.");
       return;
     }
 
@@ -241,6 +261,7 @@ const CloneAccountants = ({
           serviceId={selectedService?.id}
           serviceName={selectedService?.name}
           postcode={pincode}
+          postalCodeValidate={postalCodeValidate}
         />
       )}
     </div>
