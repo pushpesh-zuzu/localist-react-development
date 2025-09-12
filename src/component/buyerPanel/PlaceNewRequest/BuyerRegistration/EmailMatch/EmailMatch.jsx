@@ -221,7 +221,9 @@ const EmailMatch = ({
             onChange={handleNameChange}
           />
           {errors.name && (
-            <span className={styles.errorMessage}>Name is required.</span>
+            <span style={{ color: "red" }} className={styles.errorMessage}>
+              Name is required.
+            </span>
           )}
 
           <label htmlFor="email" className={styles.label}>
@@ -238,7 +240,7 @@ const EmailMatch = ({
             onBlur={handleEmailBlur}
           />
           {errors.email && (
-            <span className={styles.errorMessage}>
+            <span style={{ color: "red" }} className={styles.errorMessage}>
               Please enter a valid email address.
             </span>
           )}
@@ -279,7 +281,7 @@ const EmailMatch = ({
               onChange={handlePhoneChange}
             />
             {errors.phone && (
-              <span className={styles.errorMessage}>
+              <span style={{ color: "red" }} className={styles.errorMessage}>
                 Please enter a valid 10-digit phone number.
               </span>
             )}

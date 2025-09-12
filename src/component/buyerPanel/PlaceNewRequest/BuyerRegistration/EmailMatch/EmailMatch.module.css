@@ -114,7 +114,7 @@
 }
 
 .errorMessage {
-  color: red;
+  color: red !important;
   font-size: 12px;
   display: block;
   text-align: left;
