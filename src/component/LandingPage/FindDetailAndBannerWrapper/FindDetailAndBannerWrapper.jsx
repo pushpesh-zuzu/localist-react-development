@@ -34,16 +34,6 @@ const FindDetailAndBannerWrapper = ({
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}
         />
-        {/* <div style={{ position: "absolute", bottom: "5%" }}>
-          <div className={styles.ratingRow}>
-            <p className={styles.mainText}>Excellent</p>
-              <img src={FiveStar} alt="star" className={styles.fiveStar} />
-
-            <p className={styles.reviews}>18,359 reviews on </p>
-            <div style={{display:'flex',alignItems:'center'}}><img src={GreenStar} alt="star" className={styles.starIcon} />
-            <p className={styles.mainText}>Trustpilot</p></div>
-          </div>
-        </div> */}
         <RatingBadge />
       </div>
       <div>
