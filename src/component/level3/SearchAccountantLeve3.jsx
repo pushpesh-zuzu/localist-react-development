@@ -120,7 +120,7 @@ const SearchAccountantLeve3 = ({
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
         Find{" "}
-        <span>
+        <span className={styles.heading}>
           {title}
           {isNeedS ? "s" : ""}
         </span>{" "}
