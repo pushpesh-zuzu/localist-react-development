@@ -310,6 +310,8 @@ const QuestionModal = ({
                   ? styles.headerImage6
                   : serviceName === "Landscaping"
                   ? styles.headerImage7
+                  : serviceName === "Gate Installation"
+                  ? styles.headerImage8
                   : styles.headerImage // default fallback
               }
             >

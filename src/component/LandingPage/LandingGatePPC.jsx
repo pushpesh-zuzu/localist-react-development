@@ -49,7 +49,7 @@ const LandingGatePPC = ({}) => {
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["gates_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["gates_ppc"].paragraphs}
-        defaultService={LANDING_SERVICES["fencing_ppc"]}
+        defaultService={LANDING_SERVICES["gates_ppc"]}
         isNeedS={false}
         bannerImage={LANDING_DETAIL_BANNERS["gates_ppc"]?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}

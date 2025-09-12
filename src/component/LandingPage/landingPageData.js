@@ -78,6 +78,7 @@ const LANDING_SERVICES = {
   patio_services_ppc: "Patio Services",
   landscaping_ppc: "Landscaping",
   artificial_grass_installation_ppc: "Artificial Grass Installation",
+  gates_ppc: "Gate Installation"
 };
 const LANDING_TITLES_AND_META = {
   landscaping_ppc: {
