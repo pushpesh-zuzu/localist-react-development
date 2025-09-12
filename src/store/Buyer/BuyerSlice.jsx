@@ -92,6 +92,7 @@ export const createRequestData = (requestData) => {
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
+        console.log(response,'response for request id')
         dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
         // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
@@ -127,6 +128,7 @@ export const registerQuoteCustomer = (customerData) => {
       if (response) {
         console.log(response, "response");
         dispatch(setRequestUserId(response.data.data?.user_id));
+        dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
       }
     } catch (error) {

@@ -25,7 +25,6 @@ const EmailMatch = ({
   isStartWithQuestionModal,
 }) => {
   const dispatch = useDispatch();
-  // const { buyerRequest, registerLoader } = useSelector((state) => state.buyer);
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
     (state) => state.findJobs
   );
