@@ -139,10 +139,10 @@ const ConfirmationModal = ({
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           console.log(result, "resultresult");
-          showToast(
-            "success",
-            result?.message || "Customer registered successfully"
-          );
+          // showToast(
+          //   "success",
+          //   result?.message || "Customer registered successfully"
+          // );
           localStorage.removeItem("barkToken");
           localStorage.removeItem("barkUserToken");
           localStorage.removeItem("registerDataToken");
@@ -154,7 +154,8 @@ const ConfirmationModal = ({
       });
     } else {
       // nextStep();
-      showToast("error", result?.message || "Customer registered successfully");
+      // showToast("error", result?.message || "Customer registered successfully");
+      console.log(errors,'error on confirm modal')
     }
   };
 

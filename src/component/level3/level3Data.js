@@ -1784,7 +1784,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your area that are verified and vetted, with all their reviews from multiple platforms in one place. And because you're hiring a patio layer near you, your safe in the knowledge that whoever you choose to take on the job will have extensive local knowledge such as climate, local planning permissions and local design trends. Here are some of the benefits of hiring through Localists",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your area that are verified and vetted, with all their reviews from multiple platforms in one place. And because you're hiring a patio layer near you, your safe in the knowledge that whoever you choose to take on the job will have extensive local knowledge such as climate, local planning permissions and local design trends. Here are some of the benefits of hiring through Localists.",
     },
     {
       type: "li",

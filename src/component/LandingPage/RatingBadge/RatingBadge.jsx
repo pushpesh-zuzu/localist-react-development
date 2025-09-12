@@ -9,7 +9,7 @@ const RatingBadge = ({
   platform = "Trustpilot",
 }) => {
   return (
-    <div style={{ position: "absolute", bottom: "5%" }}>
+    <div  className={styles.wrapper}>
       <div className={styles.ratingContainer}>
         {/* Row 1 */}
         <div className={styles.row}>
