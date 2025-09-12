@@ -132,13 +132,11 @@ const EmailMatch = ({
       //     nextStep();
       //   }
       // });
-
-      const formData = new FormData();
-      formData.append("email", buyerRequest?.email);
-      formData.append("name", buyerRequest?.name);
-      formData.append("phone", buyerRequest?.phone);
+     const formData = new FormData();
+      formData.append("email", email);
+      formData.append("name", name);
+      formData.append("phone", phone);
       formData.append("form_status", 1);
-
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           showToast(

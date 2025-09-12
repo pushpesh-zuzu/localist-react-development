@@ -23,12 +23,12 @@ const LandingGatePPC = ({}) => {
   const isProduction =
     typeof window !== "undefined" &&
     window.location.hostname === "localists.com";
-  console.log(
-    "is production",
-    isProduction,
-    "widnow.location.pathname",
-    typeof window !== "undefined" && window.location.hostname
-  );
+  // console.log(
+  //   "is production",
+  //   isProduction,
+  //   "widnow.location.pathname",
+  //   typeof window !== "undefined" && window.location.hostname
+  // );
 
   return (
     <>

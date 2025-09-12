@@ -4,7 +4,6 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 import LandingHowItWorkSteps from "./LandingHowItWorkSteps";
 
 const LandingHowItWork = ({WORK_STEPS}) => {
-  console.log(WORK_STEPS,'wwwwwwwwwwww')
   return (
     <div className={styles.workContainer}>
       <h3 className={styles.header}>
