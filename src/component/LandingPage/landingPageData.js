@@ -1,4 +1,4 @@
-import LandscapingBanner from "../../assets/Images/servicesLevels/banner/landscapingandgardeningBanner.jpg";
+import LandscapingBanner from "./SearchPostAndBanner/banner/landscapingandgardeningBanner.jpg";
 import formStep from "../../assets/Images/formStep.png";
 import quoteStep from "../../assets/Images/conactStep.png";
 import compareStep from "../../assets/Images/compareStep.svg";
@@ -6,6 +6,8 @@ import PatioServices from "./SearchPostAndBanner/banner/PatioServices.jpg";
 import ArtificialGrass from "./SearchPostAndBanner/banner/ArtificialGrass.jpg";
 import Fence from "./SearchPostAndBanner/banner/Fence.jpg";
 import Driveways from "./SearchPostAndBanner/banner/Driveways.jpg";
+import Gate from "./SearchPostAndBanner/banner/Gate.jpg";
+
 
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
@@ -65,6 +67,10 @@ const LANDING_DETAIL_BANNERS = {
     banner: ArtificialGrass,
     // reltatedImage: Landscaping,
   },
+  gates_ppc :{
+        banner: Gate,
+
+  }
 };
 const LANDING_SERVICES = {
   fencing_ppc: "Fence & Gate Installation",

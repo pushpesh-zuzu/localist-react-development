@@ -51,7 +51,7 @@ const LandingGatePPC = ({}) => {
         paragraphs={LANDING_DETAIL_DATA["gates_ppc"].paragraphs}
         defaultService={LANDING_SERVICES["fencing_ppc"]}
         isNeedS={false}
-        bannerImage={LANDING_DETAIL_BANNERS["fencing_ppc"]?.banner}
+        bannerImage={LANDING_DETAIL_BANNERS["gates_ppc"]?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
         serviceId={ServiceId.fencing_ppc}
