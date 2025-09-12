@@ -24,8 +24,8 @@
 
 }
 
-.heading {
-  color: var(--text-color);
+ .heading {
+  color: var(--primary-color);
 }
 
 .searchBoxContainer {
