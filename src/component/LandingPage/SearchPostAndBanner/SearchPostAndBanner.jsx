@@ -6,15 +6,25 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { message } from "antd";
 import BuyerRegistrationLandingPage from "../BuyerRegistrationLandingPage/BuyerRegistrationLandingPage";
 
-const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHeading,cancelPara,serviceId }) => {
+const SearchPostAndBanner = ({
+  title = "",
+  defaultService,
+  isNeedS = false,
+  cancelHeading,
+  cancelPara,
+  serviceId,
+}) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
-  const [isStartWithQuestionModal, setIsStartWithQuestionModal] = useState(false)
+  const [isStartWithQuestionModal, setIsStartWithQuestionModal] =
+    useState(false);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
 
   const showToast = (type, content) => message[type](content);
 
@@ -22,13 +32,12 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
     setShowModal(false);
     setPincode("");
     setIsPostcodeSelected(false);
-    setIsStartWithQuestionModal(false)
+    setIsStartWithQuestionModal(false);
   };
   useEffect(() => {
-    setShowModal(true)
-    setIsStartWithQuestionModal(true)
-  }, [])
-  
+    setShowModal(true);
+    setIsStartWithQuestionModal(true);
+  }, []);
 
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
@@ -60,6 +69,8 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
         setPincode(postalCode);
         inputRef.current.value = postalCode;
         setIsPostcodeSelected(true);
+        setPostalCodeValidate(true);
+        setIsPincodeFromDropdown(true);
       } else {
         showToast("error", "No PIN code found! Please try again.");
       }
@@ -105,16 +116,22 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
       return;
     }
 
+    if (!isPincodeFromDropdown) {
+      showToast("error", "Please select postcodes from suggestions below");
+      return;
+    }
+
     setShowModal(true);
   };
 
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-              Compare <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span> from local {title}!</h1>
+        Compare{" "}
+        <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span>{" "}
+        from local {title}!
+      </h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
-      
-
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
@@ -124,21 +141,21 @@ const SearchPostAndBanner = ({ title = "", defaultService,isNeedS=false,cancelHe
             onChange={(e) => {
               setPincode(e.target.value);
               setIsPostcodeSelected(false);
+              setPostalCodeValidate(false);
+              setIsPincodeFromDropdown(false);
             }}
           />
 
           <button onClick={handleContinue}>Search</button>
-          <div>
-          </div>
+          <div></div>
         </div>
-    
       </div>
-      
 
       {showModal && (userToken?.active_status === 2 || !userToken) && (
         <BuyerRegistrationLandingPage
           closeModal={handleClose}
           postcode={pincode}
+          postalCodeValidate={postalCodeValidate}
           serviceName={defaultService}
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}

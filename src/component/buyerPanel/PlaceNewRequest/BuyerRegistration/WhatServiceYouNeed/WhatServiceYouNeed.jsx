@@ -54,12 +54,12 @@ const WhatServiceYouNeed = ({
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
 
-  useEffect(() => {
-    if (serviceName && serviceId) {
-      setInput(serviceName);
-      setSelectedService({ id: serviceId });
-    }
-  }, [serviceName, serviceId]);
+  // useEffect(() => {
+  //   if (serviceName && serviceId) {
+  //     setInput(serviceName);
+  //     setSelectedService({ id: serviceId });
+  //   }
+  // }, [serviceName, serviceId]);
 
   // useEffect(() => {
   //   if (serviceName && serviceId) {
@@ -164,7 +164,7 @@ const WhatServiceYouNeed = ({
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
           postcode: pincode,
-          city: citySerach,
+          city: city,
         })
       );
       dispatch(
@@ -177,7 +177,7 @@ const WhatServiceYouNeed = ({
     pincode,
     dispatch,
     serviceId,
-    citySerach,
+    city,
     nextStep,
     isPincodeFromDropdown,
   ]);
