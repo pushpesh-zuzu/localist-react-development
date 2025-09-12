@@ -410,6 +410,7 @@ const BuyerRegistration = ({
             previousStep={previousStep}
             formData={buyerRequest}
             open={true}
+            city={city}
             // setShowConfirmModal={setShowConfirmModal}
             // onClose={handleClose}
           />

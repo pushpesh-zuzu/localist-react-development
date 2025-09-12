@@ -7,7 +7,7 @@ import {
 import { showToast } from "../../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 
-const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
+const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
   const dispatch = useDispatch();
@@ -19,6 +19,8 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep }) => {
     requestId,
     requestUserPhone,
   } = useSelector((state) => state.buyer);
+
+  console.log(city, "city in otp");
 
   const { requestUserId, createrequestUserId } = useSelector(
     (state) => state.buyer

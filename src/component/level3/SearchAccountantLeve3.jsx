@@ -46,18 +46,36 @@ const SearchAccountantLeve3 = ({
       const place = autocomplete.getPlace();
       if (!place.address_components) return;
 
-      const postalCode = place.address_components.find((c) =>
+      let postalCode = place.address_components.find((c) =>
         c.types.includes("postal_code")
       )?.long_name;
 
-      const cityName =
+      // let cityName =
+      //   place.address_components.find((c) => c.types.includes("locality"))
+      //     ?.long_name ||
+      //   place.address_components.find((c) =>
+      //     c.types.includes("administrative_area_level_3")
+      //   )?.long_name;
+
+      let cityName =
         place.address_components.find((c) => c.types.includes("locality"))
           ?.long_name ||
+        place.address_components.find((c) => c.types.includes("postal_town"))
+          ?.long_name ||
+        place.address_components.find((c) =>
+          c.types.includes("administrative_area_level_2")
+        )?.long_name ||
         place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
 
+      console.log("place full object:", place);
+      console.log("PostalCode:", postalCode);
+      console.log("City:", cityName);
+
       if (postalCode) {
+        console.log(postalCode, "postalCode");
+
         setPincode(postalCode);
         setPostalCodeValidate(true);
         setIsPincodeFromDropdown(true);
@@ -91,6 +109,8 @@ const SearchAccountantLeve3 = ({
 
     loadGoogleMapsScript();
   }, []);
+
+  console.log(pincode, "pincode");
 
   const handleContinue = () => {
     if (!pincode) {
@@ -157,6 +177,7 @@ const SearchAccountantLeve3 = ({
           postcode={pincode}
           serviceName={defaultService}
           postalCodeValidate={postalCodeValidate}
+          city={city}
         />
       )}
     </div>

@@ -113,16 +113,25 @@ const CloneAccountants = ({
       const place = autocomplete.getPlace();
       if (!place.address_components) return;
 
-      const postalCode = place.address_components.find((c) =>
+      let postalCode = place.address_components.find((c) =>
         c.types.includes("postal_code")
       )?.long_name;
 
       let cityName =
+        place.address_components.find((c) => c.types.includes("postal_town"))
+          ?.long_name ||
         place.address_components.find((c) => c.types.includes("locality"))
           ?.long_name ||
         place.address_components.find((c) =>
+          c.types.includes("administrative_area_level_2")
+        )?.long_name ||
+        place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
+
+      console.log("Full Place Object:", place);
+      console.log("Extracted Postal Code:", postalCode);
+      console.log("Extracted City:", cityName);
 
       if (postalCode) {
         setPincode(postalCode);
