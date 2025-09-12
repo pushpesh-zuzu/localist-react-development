@@ -289,13 +289,13 @@ const BuyerRegistration = ({
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
   // const buyerStep = 7
-  console.log(buyerStep, "buyerStep");
+  // console.log(buyerStep, "buyerStep");
 
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader, authToken } = useSelector(
     (state) => state.findJobs
   );
-  console.log(registerData, "registerData");
+  // console.log(registerData, "registerData");
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered

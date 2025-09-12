@@ -31,7 +31,7 @@ const QuestionModal = ({
     (state) => state.findJobs
   );
 
-  console.log("service_name", serviceName);
+  // console.log("service_name", serviceName);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -45,7 +45,7 @@ const QuestionModal = ({
       setCurrentQuestion(0);
     }
   }, [questions]);
-  console.log(citySerach, questionanswerData, "citySerach");
+  // console.log(citySerach, questionanswerData, "citySerach");
 
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
