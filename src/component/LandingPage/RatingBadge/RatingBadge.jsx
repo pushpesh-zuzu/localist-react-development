@@ -5,7 +5,7 @@ import FiveStar from "../../../assets/Icons/FiveStar.png";
 
 const RatingBadge = ({
   text = "Excellent",
-  reviewsCount = 0,
+  reviewsCount,
   platform = "Trustpilot",
 }) => {
   return (
@@ -20,7 +20,7 @@ const RatingBadge = ({
         {/* Row 2 */}
         <div className={styles.row}>
           <p className={styles.reviews}>
-            {reviewsCount.toLocaleString()} 18,359 reviews onreviews on
+             18,359 reviews onreviews on
           </p>
         </div>
         <div className={styles.row}>
