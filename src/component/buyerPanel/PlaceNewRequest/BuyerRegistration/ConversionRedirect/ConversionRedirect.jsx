@@ -10,7 +10,7 @@ const ConversionRedirect = () => {
     // Redirect after a small delay so conversion script can fire
     const timer = setTimeout(() => {
       navigate(`/bids-list/${requestId}`, { replace: true });
-    }, 300); // 300–500ms safe delay
+    }, 500); // 300–500ms safe delay
 
     return () => clearTimeout(timer);
   }, [navigate, requestId]);
