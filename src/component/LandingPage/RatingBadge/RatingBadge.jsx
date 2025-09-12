@@ -20,7 +20,7 @@ const RatingBadge = ({
         {/* Row 2 */}
         <div className={styles.row}>
           <p className={styles.reviews}>
-             18,359 reviews onreviews on
+             18,359 reviews on
           </p>
         </div>
         <div className={styles.row}>
