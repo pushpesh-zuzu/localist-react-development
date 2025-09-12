@@ -70,6 +70,7 @@ const SearchAccountantLeve3 = ({
       if (cityName) {
         setCity(cityName);
         dispatch(setcitySerach(cityName));
+        console.log(cityName, "cityName");
       }
     });
   };

@@ -117,7 +117,7 @@ const CloneAccountants = ({
         c.types.includes("postal_code")
       )?.long_name;
 
-      const cityName =
+      let cityName =
         place.address_components.find((c) => c.types.includes("locality"))
           ?.long_name ||
         place.address_components.find((c) =>
