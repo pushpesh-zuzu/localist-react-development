@@ -59,8 +59,13 @@ const SearchPostAndBanner = ({
       )?.long_name;
 
       const cityName =
+        place.address_components.find((c) => c.types.includes("postal_town"))
+          ?.long_name ||
         place.address_components.find((c) => c.types.includes("locality"))
           ?.long_name ||
+        place.address_components.find((c) =>
+          c.types.includes("administrative_area_level_2")
+        )?.long_name ||
         place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
