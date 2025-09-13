@@ -57,11 +57,19 @@
   font-size: 16px;
   text-align: center;
   color: #828282;
-  margin-bottom: 38px;
+  margin-bottom: 16px;
 }
 
 .instruction span {
   color: #000000;
+}
+
+.timerText {
+  font-family: Poppins;
+  color: #828282;
+  font-weight: 500;
+  margin-bottom: 16px;
+  font-size: 16px;
 }
 
 .submitBtn {
@@ -76,7 +84,7 @@
   margin-bottom: 0px;
    width: 100%;
   max-width: 200px;  */
-   box-shadow: 0px 0px 2px 0.5px #0000001a;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
   border-radius: 3px;
   color: white;
@@ -86,10 +94,26 @@
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
+  margin-left: 24px;
 }
 
+.resendBtn:hover,
 .submitBtn:hover {
   background-color: #0096c4;
+}
+
+.resendBtn {
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer !important;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+  margin-right: 24px;
 }
 
 /* Responsive styles */
@@ -154,7 +178,7 @@
   }
 
   .submitBtn {
-   width: 84px;
+    width: 84px;
     font-size: 14px;
     padding: 8px 10px;
     font-weight: 500;

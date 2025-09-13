@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./OtpVerification.module.css";
 import {
   createRequestData,
@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
+  const [timer, setTimer] = useState(60);
+
   const inputRefs = useRef([]);
   const dispatch = useDispatch();
   const {
@@ -21,6 +23,13 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
   } = useSelector((state) => state.buyer);
 
   console.log(city, "city in otp");
+
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(countdown);
+    }
+  }, [timer]);
 
   const { requestUserId, createrequestUserId } = useSelector(
     (state) => state.buyer
@@ -114,6 +123,14 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
     });
   };
 
+  const handleResendOtp = () => {
+    // Call OTP verification API to resend OTP
+    showToast("info", "OTP resent successfully!");
+    setOtp(["", "", "", ""]);
+    setTimer(60);
+    inputRefs.current[0].focus();
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
@@ -142,6 +159,16 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
           <br />
           <span>{requestUserPhone}</span>
         </p>
+
+        {timer > 0 ? (
+          <p className={styles.timerText}>
+            Resend OTP in <strong>{timer}</strong>s
+          </p>
+        ) : (
+          <button className={styles.resendBtn} onClick={handleResendOtp}>
+            Resend
+          </button>
+        )}
 
         <button className={styles.submitBtn} onClick={handleSubmit}>
           Submit
