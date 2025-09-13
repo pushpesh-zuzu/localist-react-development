@@ -115,7 +115,7 @@ const ViewYourMatches = ({
           </div> */}
 
           <div className={styles.phoneWrapper}>
-            <input
+            {/* <input
               type="text"
               id="phoneNumber"
               placeholder="+44 XXXXX XXXXXX"
@@ -140,7 +140,36 @@ const ViewYourMatches = ({
                 setError(false);
               }}
               style={{ borderColor: error ? "red" : "" }}
+            /> */}
+
+            <input
+              type="text"
+              id="phoneNumber"
+              placeholder="+44 XXXXX XXXXXX"
+              className={styles.input}
+              maxLength={14} // +44 + 10 digits
+              value={"+44 " + phoneNumber}
+              onChange={(e) => {
+                let value = e.target.value;
+
+                // ❌ Remove everything except numbers
+                value = value.replace(/\D/g, "");
+
+                // ✅ Agar user input "44" se start kare to ignore (kyunki prefix fix hai)
+                if (value.startsWith("44")) {
+                  value = value.slice(2);
+                }
+
+                // ✅ Sirf 10 digits allow karo
+                if (value.length <= 10) {
+                  setPhoneNumber(value);
+                }
+
+                setError(false);
+              }}
+              style={{ borderColor: error ? "red" : "" }}
             />
+
             {error && (
               <span className={styles.errorMessage}>
                 Please enter a valid 10-digit phone number.

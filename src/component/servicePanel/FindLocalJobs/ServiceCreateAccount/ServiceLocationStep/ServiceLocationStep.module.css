@@ -122,7 +122,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
- 
 }
 
 .switch {
@@ -157,7 +156,7 @@
   width: 14px;
   left: 3px;
   bottom: 2.5px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -168,8 +167,6 @@
 
 .switch input:checked + .slider::before {
   transform: translateX(16px);
-  
-
 }
 
 .switchLabel {
@@ -262,7 +259,7 @@
 
 .inputWrapper img {
   position: absolute;
-  top: 45px;
+  top: 47px;
   left: 10px;
   width: 11.59px;
   height: 16.56;
@@ -329,7 +326,7 @@
   .formHeading {
     font-size: 16px;
   }
-/* .checkboxCustom{
+  /* .checkboxCustom{
   width: 18px;
   height: 18px;
 
@@ -341,13 +338,12 @@
   top: -1px;
   left: 3px;
 } */
-.switchWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 5px;
- 
-}
+  .switchWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+  }
   .infoText {
     font-size: 10px;
   }
@@ -377,8 +373,8 @@
     width: 100%;
     padding: 10px;
   }
-   .nextButton {
-   font-weight: 700;
+  .nextButton {
+    font-weight: 700;
   }
 
   .footer {
@@ -391,31 +387,28 @@
     font-weight: 600;
   }
   .switchWrapper {
-   margin-left: 4px;
-   
+    margin-left: 4px;
   }
   .nationwideFooter {
     gap: 12px;
   }
   .nextButton {
-  background-color: #000000;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  color: white;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer !important;
-  margin-top: 15px;
-  width: 84px;
-}
+    background-color: #000000;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer !important;
+    margin-top: 15px;
+    width: 84px;
+  }
 }
 @media (max-width: 380px) {
-  
   .switchWrapper {
-   margin-left: 0px;
-   
+    margin-left: 0px;
   }
   /* .checkboxCustom{
   width: 16px;
@@ -433,62 +426,60 @@
     gap: 18px;
     flex-direction: column;
   }
-   .infoText {
+  .infoText {
     margin-top: 0px;
     margin-left: -52px;
   }
   .nextButton {
-   font-weight: 500;
+    font-weight: 500;
   }
   .switch {
-  position: relative;
-  display: inline-block;
-  width: 36px;
-  height: 18px;
-}
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 18px;
+  }
 
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
-.slider {
-  position: absolute;
-  cursor: pointer !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  border-radius: 34px;
-  transition: 0.4s;
-}
+  .slider {
+    position: absolute;
+    cursor: pointer !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+  }
 
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 3px;
-  bottom: 2.5px;
-  background-color: #FFFFFF;
-  transition: 0.4s;
-  border-radius: 50%;
-}
+  .slider::before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 2.5px;
+    background-color: #ffffff;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
 
-.switch input:checked + .slider {
-  background-color: var(--primary-color);
-}
+  .switch input:checked + .slider {
+    background-color: var(--primary-color);
+  }
 
-.switch input:checked + .slider::before {
-  transform: translateX(16px);
-  
-
-}
+  .switch input:checked + .slider::before {
+    transform: translateX(16px);
+  }
 }
 @media screen and (max-width: 320px) {
-   .infoText {
+  .infoText {
     margin-top: 0px;
     margin-left: -6px;
   }

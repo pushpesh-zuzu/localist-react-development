@@ -13,7 +13,8 @@
 
 .phoneWrapper {
   display: flex;
-  align-items: center;
+  align-items: start;
+  flex-direction: column;
 }
 
 .prefix {
@@ -26,7 +27,7 @@
 }
 
 .closeButton {
-     position: absolute;
+  position: absolute;
   top: 0;
   right: 10px;
   font-size: 24px;
@@ -159,14 +160,14 @@
     font-size: 20px;
   }
   .closeButton {
-     position: absolute;
-  top: 5px;
-  right: 10px;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer !important;
-  color: #000000;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer !important;
+    color: #000000;
   }
 
   .label {
@@ -230,20 +231,20 @@
 
   .backButton,
   .nextButton {
-   /* width: 84px; */
+    /* width: 84px; */
     font-size: 14px;
     padding: 8px 10px;
     font-weight: 500;
   }
-    .closeButton {
-     position: absolute;
-  top: 0px;
-  right: 5px;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer !important;
-  color: #000000;
+  .closeButton {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer !important;
+    color: #000000;
   }
 }
 @media screen and (max-width: 350px) {
@@ -260,7 +261,7 @@
     font-size: 12px;
     padding: 8px;
   }
-  
+
   .backButton,
   .nextButton {
     /* width: 84px; */
@@ -268,20 +269,19 @@
     padding: 8px 10px;
     font-weight: 500;
   }
-  .checkboxContainer{
+  .checkboxContainer {
     display: flex;
-  align-items: center;
-  gap: 3px;
+    align-items: center;
+    gap: 3px;
   }
-   .closeButton {
-     position: absolute;
-  top: 0px;
-  right: 5px;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer !important;
-  color: #000000;
+  .closeButton {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer !important;
+    color: #000000;
   }
-  
 }
