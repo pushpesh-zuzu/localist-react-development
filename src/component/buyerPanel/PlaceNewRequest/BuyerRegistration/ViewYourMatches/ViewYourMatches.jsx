@@ -145,7 +145,7 @@ const ViewYourMatches = ({
             <input
               type="text"
               id="phoneNumber"
-              placeholder="+44 XXXXX XXXXXX"
+              placeholder="+44 Phone Number"
               className={styles.input}
               maxLength={14} // +44 + 10 digits
               value={"+44 " + phoneNumber}
@@ -154,8 +154,8 @@ const ViewYourMatches = ({
 
                 // ❌ Remove everything except numbers
                 value = value.replace(/\D/g, "");
+                setPhoneNumber(value);
 
-                // ✅ Agar user input "44" se start kare to ignore (kyunki prefix fix hai)
                 if (value.startsWith("44")) {
                   value = value.slice(2);
                 }

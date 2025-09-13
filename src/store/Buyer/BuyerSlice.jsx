@@ -11,6 +11,7 @@ import { showToast, updateLocalStorageValue } from "../../utils";
 import { safeLocalStorage } from "../../utils/localStorage";
 
 const initialState = {
+  resendOtpLoader: false,
   questionLoader: false,
   questionanswerData: [],
   buyerStep: 1,
@@ -92,7 +93,7 @@ export const createRequestData = (requestData) => {
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
-        console.log(response,'response for request id')
+        console.log(response, "response for request id");
         dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
         // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
@@ -418,10 +419,29 @@ export const closeRequestData = (closeData) => {
   };
 };
 
+export const resendOtp = (data) => {
+  return async (dispatch) => {
+    dispatch(setResendOtpLoader(true));
+    try {
+      const response = await axiosInstance.post(`/resend-otp`, data);
+      if (response) {
+        return response.data;
+      }
+    } catch (error) {
+      //   dispatch(setAuthError(error?.response?.data?.message));
+    } finally {
+      dispatch(setResendOtpLoader(false));
+    }
+  };
+};
+
 const buyerSlice = createSlice({
   name: "buyer",
   initialState: initialState,
   reducers: {
+    setResendOtpLoader: (state, action) => {
+      state.resendOtpLoader = action.payload;
+    },
     setquestionLoader(state, action) {
       state.questionLoader = action.payload;
     },
@@ -519,6 +539,7 @@ const buyerSlice = createSlice({
 });
 
 export const {
+  setResendOtpLoader,
   setquestionLoader,
   setAddNotificationLoader,
   setcitySerach,

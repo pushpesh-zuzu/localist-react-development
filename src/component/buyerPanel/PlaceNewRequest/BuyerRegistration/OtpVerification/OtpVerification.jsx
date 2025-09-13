@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./OtpVerification.module.css";
 import {
   createRequestData,
+  resendOtp,
   verifyPhoneNumberData,
 } from "../../../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../../../utils";
@@ -20,6 +21,7 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
     createRequestToken,
     requestId,
     requestUserPhone,
+    resendOtpLoader,
   } = useSelector((state) => state.buyer);
 
   console.log(city, "city in otp");
@@ -124,11 +126,20 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
   };
 
   const handleResendOtp = () => {
-    // Call OTP verification API to resend OTP
-    showToast("info", "OTP resent successfully!");
-    setOtp(["", "", "", ""]);
-    setTimer(60);
-    inputRefs.current[0].focus();
+    const data = {
+      user_id: requestUserId,
+      phone: requestUserPhone,
+    };
+    dispatch(resendOtp(data)).then((res) => {
+      if (res?.success) {
+        showToast("success", res?.message || "OTP resent successfully!");
+        setOtp(["", "", "", ""]);
+        setTimer(60);
+        inputRefs.current[0]?.focus();
+      } else {
+        showToast("error", res?.message || "Failed to resend OTP");
+      }
+    });
   };
 
   return (
@@ -166,7 +177,7 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
           </p>
         ) : (
           <button className={styles.resendBtn} onClick={handleResendOtp}>
-            Resend
+            {resendOtpLoader ? "Resending..." : "Resend"}
           </button>
         )}
 
