@@ -2,7 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
-import { setCity, setCountry, setPostalCode, setRegisterStep, setSelectedServiceFormData } from "../../../../../store/FindJobs/findJobSlice";
+import {
+  setCity,
+  setCountry,
+  setPostalCode,
+  setRegisterStep,
+  setSelectedServiceFormData,
+} from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../../../utils";
 
@@ -16,7 +22,7 @@ const ServiceLocationStep = ({
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const [city, setCity] = useState("");
- console.log(formData,"formData")
+  console.log(formData, "formData");
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
@@ -44,11 +50,10 @@ const ServiceLocationStep = ({
         }
       );
 
-      
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
         if (!place.address_components) return;
- console.log(place,place.address_components,'place')
+        console.log(place, place.address_components, "place");
         let postalCode = "";
         place.address_components.forEach((component) => {
           if (component.types.includes("postal_code")) {
@@ -56,44 +61,42 @@ const ServiceLocationStep = ({
           }
         });
 
-        
-      //   const cityName = place.address_components.find((component) =>
-      //     component.types.includes("locality") && component.types.includes("administrative_area_level_3")
-      // )?.long_name;
-      // Try to find city by "locality" first
-let cityName =
-  place.address_components.find(component =>
-    component.types.includes("postal_town")
-  )?.long_name ||
-  place.address_components.find(component =>
-    component.types.includes("administrative_area_level_2")
-  )?.long_name;
+        //   const cityName = place.address_components.find((component) =>
+        //     component.types.includes("locality") && component.types.includes("administrative_area_level_3")
+        // )?.long_name;
+        // Try to find city by "locality" first
+        let cityName =
+          place.address_components.find((component) =>
+            component.types.includes("postal_town")
+          )?.long_name ||
+          place.address_components.find((component) =>
+            component.types.includes("administrative_area_level_2")
+          )?.long_name;
 
-    
-      
-      let countryName = place.address_components.find((component) =>
-        component.types.includes("country")
-    )?.long_name;
-    
-    console.log(countryName,"prem")
+        let countryName = place.address_components.find((component) =>
+          component.types.includes("country")
+        )?.long_name;
+
+        console.log(countryName, "prem");
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
         const coordinates = { lat, lng };
 
-
         if (postalCode) {
-          dispatch(setFormData({
-            postcode: postalCode,
-            zipcode: postalCode,
-            postcode_old: postalCode,
-            zipcode_old: postalCode,
-            city: cityName || "",
-            cities: cityName || "",
-            city_old: cityName || "",
-            country: countryName || "",
-            country_old: countryName || "",
-            coordinates: { lat, lng }
-          }));
+          dispatch(
+            setFormData({
+              postcode: postalCode,
+              zipcode: postalCode,
+              postcode_old: postalCode,
+              zipcode_old: postalCode,
+              city: cityName || "",
+              cities: cityName || "",
+              city_old: cityName || "",
+              country: countryName || "",
+              country_old: countryName || "",
+              coordinates: { lat, lng },
+            })
+          );
 
           dispatch(setCity({ city: cityName || "" }));
           dispatch(setPostalCode({ postalcode: postalCode }));
@@ -108,12 +111,10 @@ let cityName =
 
     loadGoogleMapsScript();
   }, [setFormData, formData]);
-  
-//   useEffect(()=>{
-// dispatch(setRegisterStep(1))
-//   },[])
 
-
+  //   useEffect(()=>{
+  // dispatch(setRegisterStep(1))
+  //   },[])
 
   return (
     <div className={styles.parentContainer}>
@@ -122,7 +123,8 @@ let cityName =
           Tell us where you want to find new customers!
         </h2>
         <p className={styles.subheading}>
-        Share the areas you cover, and we'll match you with leads right in your location.
+          Share the areas you cover, and we'll match you with leads right in
+          your location.
         </p>
 
         <div className={styles.card}>
@@ -131,8 +133,9 @@ let cityName =
             <div className={styles.inputWrapper}>
               <span className={styles.fromText}>Miles</span>
               <select
-                className={`${styles.dropdown} ${errors.miles1 ? styles.errorBorder : ""
-                  }`}
+                className={`${styles.dropdown} ${
+                  errors.miles1 ? styles.errorBorder : ""
+                }`}
                 name="miles1"
                 value={formData.miles1 || ""}
                 onChange={handleInputChange}
@@ -155,12 +158,13 @@ let cityName =
               <input
                 type="text"
                 placeholder="Enter your postcode"
-                className={`${styles.input} ${errors.postcode ? styles.errorBorder : ""
-                  }`}
+                className={`${styles.input} ${
+                  errors.postcode ? styles.errorBorder : ""
+                }`}
                 ref={inputRef}
                 name="postcode"
                 value={formData.postcode || ""}
-                onChange={handleInputChange ? handleInputChange : () => { }}
+                onChange={handleInputChange ? handleInputChange : () => {}}
               />
               {errors.postcode && (
                 <p className={styles.errorText}>{errors.postcode}</p>
@@ -178,9 +182,7 @@ let cityName =
                 // className={styles.checkboxInput}
               />
               {/* <span className={styles.checkboxCustom}></span>  */}
-              
               Nationwide
-
             </label>
             <div className={styles.switchWrapper}>
               <label className={styles.switch}>
@@ -201,14 +203,24 @@ let cityName =
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button className={styles.nextButton} onClick={() => {
-                if (!formData.postcode || formData.postcode.length < 5 || formData.postcode.length > 8 || !city)
-                {
-                  showToast("error", "Please  enter valid Postcode!");
+            <button
+              className={styles.nextButton}
+              onClick={() => {
+                if (
+                  !formData.postcode ||
+                  formData.postcode.length < 5 ||
+                  formData.postcode.length > 8 ||
+                  !city
+                ) {
+                  showToast(
+                    "error",
+                    "Please  select postcodes from suggestion below!"
+                  );
                   return;
                 }
                 nextStep();
-              }}>
+              }}
+            >
               Next
             </button>
           </div>
