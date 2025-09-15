@@ -33,9 +33,8 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
                     marginTop: block?.marginTop ? "12px" : "0px",
                     marginBottom: "0px",
                   }}
-                >
-                  {block.text}
-                </p>
+                  dangerouslySetInnerHTML={{ __html: block.text }}
+                ></p>
               );
             }
 
@@ -55,13 +54,13 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
 
             if (block.type === "uili") {
-            //  const isFirstUiliInGroup = !prevBlock || prevBlock.type !== "uili" || false;
+              //  const isFirstUiliInGroup = !prevBlock || prevBlock.type !== "uili" || false;
 
               return (
                 <ul
                   key={index}
                   style={{
-                    marginTop: block?.marginTop ===true ? "8px" : "0px",
+                    marginTop: block?.marginTop === true ? "8px" : "0px",
                     marginBottom: "0px",
                   }}
                 >

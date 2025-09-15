@@ -1641,22 +1641,22 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "uili",
       heading: "Vetted local professionals:\u00A0",
-      text: "Every installer we recommend is fully vetted for skills, insurance, and professionalism. Many hold respected industry credentials such as membership in The Association of Paving Contractors, ensuring they meet the highest standards.",
+      text: "Every installer we recommend is fully vetted for skills, insurance, and professionalism.",
     },
     {
       type: "uili",
       heading: "Personalised, no-obligation quotes:\u00A0",
-      text: "You get free, tailored quotes from the best driveway builders in your local area.All that’s left is to choose the expert who best fits your needs and budget.",
+      text: "You get free, tailored quotes from the best driveway builders in your local area. All that’s left is to choose the expert who best fits your needs and budget.",
     },
     {
       type: "uili",
       heading: "Expert guidance and local knowledge:\u00A0",
-      text: "Our driveway specialists offer expert advice, from determining whether your driveway project requires planning permission to recommending the most suitable materials for your property. They also provide insights on regional regulations, soil conditions, and weather patterns, ensuring your driveway is built to last.",
+      text: "Our local driveway specialists have a superb understanding of the local requirements for your job, and can provide expert advice on your property, be it local planning regulations, most suitable materials for your property and the most ideal driveway bast on the local climate – ensuring you get a driveway that’s built to last.",
     },
     {
       type: "uili",
       heading: "Real feedback from real clients:\u00A0",
-      text: "All reviews on Localists are 100% genuine, from clients who have transformed their properties, homes, business premises, through our trusted specialists here. We’re proud to work with professionals whose results speak for themselves.",
+      text: "All reviews on Localists are 100% genuine, from clients who have transformed their properties, homes and business premises, through one our trusted specialists here. We source each companies reviews from various review platforms, so you can get a true reflection of their review, all in one handy place.",
     },
     {
       type: "h2",
@@ -1688,7 +1688,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Driveway companies that are members of certain regulatory bodies often have to adhere to strict guidelines. Check whether your driveway installer is a member of regulatory bodies such as The Asphalt Industry Alliance or Britpave can be an indicator of quality.",
+      text: 'Driveway companies that are members of certain regulatory bodies often have to adhere to strict guidelines. Check whether your driveway installer is a member of regulatory bodies such as <a style="color:#00afe3"; href="https://www.asphaltuk.org/" target="_blank" rel="noopener noreferrer">The Asphalt Industry Alliance</a> or <a style="color:#00afe3"; href="https://www.britpave.org.uk/" target="_blank" rel="noopener noreferrer">Britpave</a> can be an indicator of quality.',
     },
     {
       type: "p",
@@ -1696,15 +1696,11 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Bespoke driveway installation services UK.",
+      text: "Pro’s and cons  of each driveway surface",
     },
     {
       type: "p",
-      text: "Whether you need a car park fixed, front yard redesigned, or a completely new driveway installation, we've got the right driveway specialist for the job. You will find driveway resin bound or tarmac driveway specialists offering expert installation and repair services near you. You will find experts in resin bound, tarmac, gravel, block paving, concrete, and stone driveway, to name a few. Covering both installation and repairs.",
-    },
-    {
-      type: "p",
-      text: "To help you choose the best surface for your property, here’s a quick look at the most popular driveway types available on Localists, along with their key benefits and possible considerations:",
+      text: "If you’re still unsure which type of driveway you’d like installed, our friendly driveway installers can help you decide with their expert advice, but as a rough guide, you can see the positive and negatives of each driveway surface to give you a more informed decision below:",
     },
     {
       type: "table",
@@ -1788,23 +1784,25 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "li",
-      heading: "Patio contractors onthe Localist platform are vetted and verified.",
+      heading:
+        "Patio contractors onthe Localist platform are vetted and verified.",
       marginTop: true,
     },
     {
       type: "li",
-      heading: "All their reviews - all in one place! We scour multiple review platforms so that you can see all of their reviews in one place.",
+      heading:
+        "All their reviews - all in one place! We scour multiple review platforms so that you can see all of their reviews in one place.",
+      marginTop: false,
+    },
+    {
+      type: "li",
+      heading: "Leads come directly to you, without a penny to pay.",
       marginTop: false,
     },
     {
       type: "li",
       heading:
-        "Leads come directly to you, without a penny to pay.",
-      marginTop: false,
-    },
-    {
-      type: "li",
-      heading: "We source local contractors, with essential knowledge of the local area, climate and building regulations.",
+        "We source local contractors, with essential knowledge of the local area, climate and building regulations.",
       marginTop: false,
     },
     {
@@ -2173,11 +2171,11 @@ const FIND_SERVICE_CONTENT = {
   "artificial-grass-installers-near-me": [
     {
       type: "h2",
-      text: "Artificial grass installation: hire professionals you can trust",
+      text: "Hire with confidence",
     },
     {
       type: "p",
-      text: "At Localists, hundreds of people use our platform every single day to find trusted artificial grass installers and not just for homes. Whether it’s a back garden, a school playground, a commercial outdoor space, or even an event setup, we make it simple to connect with the right experts for the job.",
+      text: "At Localists, hundreds of people use our platform every single day to find trusted artificial grass installers and not just for homes. Our experts can apply artificial turf for all sorts of spaces such as school playgrounds, commercial outdoor spaces and even events. And what’s more, you can get the best quotes Just start your search, enter the project you’d like doing – and our experts will be in touch. But why hire through Localists? Well other than it being completely free of charge to obtain quotes on your job, here are some other reasons:",
     },
     {
       type: "p",
@@ -2186,28 +2184,28 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "uili",
-      heading: "Trusted and vetted professionals\u00A0",
+      heading: "Trusted and vetted professionals",
       text: "– Every installer on Localists is carefully screened for skill, reliability, and customer satisfaction, so you only connect with genuine experts.",
       marginTop: true,
     },
     {
       type: "uili",
-      heading: "Specialisation\u00A0",
-      text: ": Find experts who handle all types of artificial grass installation, from residential lawns and pet-friendly turf to sports surfaces, commercial spaces, and roof terraces.",
+      heading: "Specialisation",
+      text: "- Our platform helps connect you with artificial grass installers who specialise in the particular installation project you need completing. If it’s a commercial space, we have expert artificial grass installers who specialise in large commercial projects, or if it’s just a back garden project – you guessed it – we have installers who specialise in just that!",
     },
     {
       type: "uili",
-      heading: "Easy from the start\u00A0",
-      text: "– Tell us what you need once, and get matched with artificial grass fitters near you ready to provide custom quotes.",
+      heading: "Free expert guidance",
+      text: "– One of the perks is that you can pick the brains of our experts completely free of charge – once they’re in touch to give you a quote, you can pick their brains on any questions you might have about your upcoming artificial grass project.",
     },
     {
       type: "uili",
-      heading: "Choice and transparency\u00A0",
+      heading: "Choice and transparency",
       text: "– Compare multiple installers, view real photos of their past work, and read genuine customer reviews before you decide.",
     },
     {
       type: "uili",
-      heading: "Local expertise\u00A0",
+      heading: "Local expertise",
       text: "– Because installers are based near you, they understand the ground conditions and drainage issues common in your area. That means your artificial lawn won’t just look amazing on day one. It will be fitted with the right base, drainage, and finish to stay smooth, safe, and durable for years, whatever the weather.",
     },
     {
@@ -2258,25 +2256,25 @@ const FIND_SERVICE_CONTENT = {
       marginTop: true,
     },
     {
-      type: "li",
-      heading:
-        "Do you have references or a portfolio?\u00A0 – Genuine examples of past work show quality and reliability. Always ask to see past work.",
+      type: "uili",
+      heading: "Do you have references or a portfolio?\u00A0",
+      text: " – Genuine examples of past work show quality and reliability. Always ask to see past work.",
       marginTop: true,
     },
     {
-      type: "li",
-      heading:
-        "What installation method will you use?\u00A0 – There are different approaches depending on soil, drainage, or intended use (lawn, pets, sports, balconies, etc.). Mentioning your intended use will allow the grass installer to give you recommendations.",
+      type: "uili",
+      heading: "What installation method will you use?\u00A0",
+      text: "– There are different approaches depending on soil, drainage, or intended use (lawn, pets, sports, balconies, etc.). Mentioning your intended use will allow the grass installer to give you recommendations.",
     },
     {
-      type: "li",
-      heading:
-        "How long will the project take?\u00A0 – Timelines can vary, so it helps to set clear expectations.",
+      type: "uili",
+      heading: "How long will the project take?\u00A0",
+      text: " – Timelines can vary, so it helps to set clear expectations.",
     },
     {
-      type: "li",
-      heading:
-        "Do you provide a guarantee?\u00A0 – A good installer should stand by their work with some form of warranty.",
+      type: "uili",
+      heading: "Do you provide a guarantee?\u00A0",
+      text: "– A good installer should stand by their work with some form of warranty.",
     },
     {
       type: "h2",
