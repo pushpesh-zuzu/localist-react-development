@@ -440,11 +440,11 @@ const SaveForLater = () => {
                               {item?.customer?.email
                                 ? `${item?.customer?.email
                                     .split("@")[0]
-                                    .substring(0, 8)}${"*".repeat(
+                                    .substring(0, 2)}${"*".repeat(
                                     Math.max(
                                       0,
                                       item?.customer?.email.split("@")[0]
-                                        .length - 8
+                                        .length - 2
                                     )
                                   )}@${item?.customer?.email.split("@")[1]}`
                                 : "N/A"}

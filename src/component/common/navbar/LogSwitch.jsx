@@ -419,54 +419,37 @@ const LogSwitch = () => {
         >
           {getUserType() == 1 && !viewProfile && (
             <>
-              <a
-                href="/sellers/dashboard"
-                style={{ textDecoration: "none" }}
+              <Link
+                to="/sellers/dashboard"
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/dashboard"
                     ? styles.active
                     : ""
                 }`}
                 onClick={(e) => {
-                  // only handle normal left-clicks
-                  if (
-                    e.button === 0 && // left click
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation("/sellers/dashboard");
-                  }
+                  e.preventDefault(); // stop native nav
+                  handleNavigation("/sellers/dashboard");
                 }}
               >
                 Dashboard
-              </a>
-              <a
-                href="/sellers/leads"
+              </Link>
+
+              <Link
+                to="/sellers/leads"
                 style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads" ? styles.active : ""
                 }`}
                 onClick={(e) => {
-                  if (
-                    e.button === 0 &&
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation("/sellers/leads");
-                  }
+                  e.preventDefault(); // native navigation roke
+                  handleNavigation("/sellers/leads"); // custom navigation + isDirty check
                 }}
               >
                 New Leads
-              </a>
+              </Link>
 
-              <a
-                href="/sellers/leads/save-for-later"
+              <Link
+                to="/sellers/leads/save-for-later"
                 style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads/save-for-later"
@@ -474,23 +457,15 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  if (
-                    e.button === 0 &&
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation("/sellers/leads/save-for-later");
-                  }
+                  e.preventDefault(); // default navigation stop
+                  handleNavigation("/sellers/leads/save-for-later"); // custom check + navigate
                 }}
               >
                 Saved Leads
-              </a>
+              </Link>
 
-              <a
-                href="/sellers/leads/my-responses"
+              <Link
+                to="/sellers/leads/my-responses"
                 style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/sellers/leads/my-responses"
@@ -498,123 +473,45 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  if (
-                    e.button === 0 &&
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation("/sellers/leads/my-responses");
-                  }
+                  e.preventDefault(); // default navigation stop karega
+                  handleNavigation("/sellers/leads/my-responses"); // custom navigate + isDirty check
                 }}
               >
                 My Responses
-              </a>
+              </Link>
 
-              <a
-                href="/settings"
+              <Link
+                to="/settings"
                 style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
                   location.pathname === "/settings" ? styles.active : ""
                 }`}
                 onClick={(e) => {
-                  if (
-                    e.button === 0 &&
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation("/settings");
-                  }
+                  e.preventDefault(); // default navigation stop
+                  handleNavigation("/settings"); // custom navigate + isDirty check
                 }}
               >
                 Settings
-              </a>
+              </Link>
 
-              <a
-                href={`/${currentLang}/${currentCountry}/contact-us`}
+              <Link
+                to={`/${currentLang}/${currentCountry}/contact-us`}
                 style={{ textDecoration: "none" }}
                 className={`${styles.navItem} ${
-                  location.pathname === "/contact-us" ? styles.active : ""
+                  location.pathname ===
+                  `/${currentLang}/${currentCountry}/contact-us`
+                    ? styles.active
+                    : ""
                 }`}
                 onClick={(e) => {
-                  if (
-                    e.button === 0 &&
-                    !e.metaKey &&
-                    !e.ctrlKey &&
-                    !e.shiftKey &&
-                    !e.altKey
-                  ) {
-                    e.preventDefault();
-                    handleNavigation(
-                      `/${currentLang}/${currentCountry}/contact-us`
-                    );
-                  }
+                  e.preventDefault(); // default navigation block
+                  handleNavigation(
+                    `/${currentLang}/${currentCountry}/contact-us`
+                  ); // custom navigation
                 }}
               >
                 Help
-              </a>
-
-              {/* <div
-                className={`${styles.navItem} ${
-                  location.pathname === "login/sellers/leads" ? styles.active : ""
-                }`}
-                onClick={() => handleNavigation("/sellers/leads")}
-              >
-                New Leads
-              </div>
-              <div
-                className={`${styles.navItem} ${
-                  location.pathname === "login/sellers/leads/save-for-later"
-                    ? styles.active
-                    : ""
-                }`}
-                onClick={() => handleNavigation("/sellers/leads/save-for-later")}
-              >
-                Saved Leads
-              </div>
-              <div
-                className={`${styles.navItem} ${
-                  location.pathname === "login/sellers/leads/my-responses"
-                    ? styles.active
-                    : ""
-                }`}
-                onClick={() => handleNavigation("/sellers/leads/my-responses")}
-              >
-                My Responses
-              </div>
-              <div
-                className={`${styles.navItem} ${
-                  location.pathname === "settings" ? styles.active : ""
-                }`}
-                onClick={() => handleNavigation("/settings")}
-              >
-                Settings
-              </div>
-              <div
-                className={`${styles.navItem} ${
-                  location.pathname === "help" ? styles.active : ""
-                }`}
-                onClick={() => handleNavigation("/help-center")}
-              >
-                Help
-              </div> */}
-              {/* <div className={`${styles.nameCircle} ${styles.nameCircleHide}`}>{userInitial}</div> */}
-
-              {/* {userData ? (
-              <Avatar
-                src={`${BASE_IMAGE}/users/${userData}`}
-                alt="Profile"
-                size={40}
-                style={{ backgroundColor: "#f0f0f0" }}
-              />
-            ) : (
-              <div className={styles.nameCircle}>{userInitial}</div>
-            )} */}
+              </Link>
             </>
           )}
 
