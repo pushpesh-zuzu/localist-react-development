@@ -160,8 +160,10 @@
 /* 🔁 Responsive Media Queries */
 @media (max-width: 768px) {
   .modalContent {
-    top: 60%;
+    top: 50%;
     max-width: 80%;
+    height: 65vh;
+    overflow-y: auto;
   }
 
   .row {
