@@ -7,6 +7,7 @@ import {
   LANDING_HOW_IT_WORK,
   LANDING_SERVICES,
   LANDING_TITLES_AND_META,
+  META_TAG_LANDING_PAGE,
   ServiceId,
 } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
@@ -33,16 +34,11 @@ const LandingGatePPC = ({}) => {
   return (
     <>
       <Helmet>
-        {/* <title>{CONTENT_CONFIG_META[slug]?.title}</title>
+        <title>{META_TAG_LANDING_PAGE["gates_ppc"]?.title}</title>
         <meta
-          name={CONTENT_CONFIG_META[slug]?.name}
-          content={CONTENT_CONFIG_META[slug]?.content}
+          name={META_TAG_LANDING_PAGE["gates_ppc"]?.name}
+          content={META_TAG_LANDING_PAGE["gates_ppc"]?.content}
         />
-        <link
-          rel="preload"
-          href={CONTENT_CONFIG_BANNER[slug]?.banner}
-          as="image"
-        /> */}
         <meta name="robots" content="noindex" />
       </Helmet>
 

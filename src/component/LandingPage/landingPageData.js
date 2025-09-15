@@ -8,7 +8,6 @@ import Fence from "./SearchPostAndBanner/banner/Fence.jpg";
 import Driveways from "./SearchPostAndBanner/banner/Driveways.jpg";
 import Gate from "./SearchPostAndBanner/banner/Gate.jpg";
 
-
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
     paragraphs: [
@@ -67,10 +66,9 @@ const LANDING_DETAIL_BANNERS = {
     banner: ArtificialGrass,
     // reltatedImage: Landscaping,
   },
-  gates_ppc :{
-        banner: Gate,
-
-  }
+  gates_ppc: {
+    banner: Gate,
+  },
 };
 const LANDING_SERVICES = {
   fencing_ppc: "Fence & Gate Installation",
@@ -78,7 +76,7 @@ const LANDING_SERVICES = {
   patio_services_ppc: "Patio Services",
   landscaping_ppc: "Landscaping",
   artificial_grass_installation_ppc: "Artificial Grass Installation",
-  gates_ppc: "Gate Installation"
+  gates_ppc: "Gate Installation",
 };
 const LANDING_TITLES_AND_META = {
   landscaping_ppc: {
@@ -131,7 +129,44 @@ const ServiceId = {
   landscaping_ppc: 43,
   artificial_grass_installation_ppc: 54,
 };
-
+const META_TAG_LANDING_PAGE = {
+  fencing_ppc: {
+    title: "Compare Free Quotes from Local Fencing Companies | Localists",
+    name: "description",
+    content:
+      "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+  driveways_ppc: {
+    title: "Compare Free Quotes from Local Driveway Companies | Localists",
+    name: "description",
+    content:
+      "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  patio_services_ppc: {
+    title: "Compare Free Quotes from Local Patio Companies | Localists",
+    name: "description",
+    content:
+      "Find trusted patio companies near you. Compare free quotes and hire the best experts for patio design, installation, and repairs – fast and easy!",
+  },
+  landscaping_ppc: {
+    title: "Compare Free Quotes from Local Landscapers | Localists",
+    name: "description",
+    content:
+      "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
+  },
+  artificial_grass_installation_ppc: {
+    title: "Compare Free Quotes from Local Artificial Grass Companies | Localists",
+    name: "description",
+    content:
+      " Find trusted artificial grass companies near you. Compare free quotes, read reviews, and hire the best professionals for your garden project today.",
+  },
+  gates_ppc: {
+    title: "Compare Free Quotes from Local Gating Companies | Localists",
+    name: "description",
+    content:
+      " Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+};
 export {
   LANDING_DETAIL_DATA,
   LANDING_DETAIL_BANNERS,
@@ -140,4 +175,5 @@ export {
   LANDING_HOW_IT_WORK,
   CANCEL_POPUP_DATA,
   ServiceId,
+  META_TAG_LANDING_PAGE,
 };
