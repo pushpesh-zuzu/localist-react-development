@@ -592,6 +592,7 @@ const LeadsCards = ({ enoughCredit }) => {
                             <button
                               className={styles.saveBtn}
                               onClick={() => handleSaveLater(item)}
+                              disabled={saveLaterLoaderId === item.id}
                             >
                               {saveLaterLoaderId === item.id ? (
                                 <Spin
