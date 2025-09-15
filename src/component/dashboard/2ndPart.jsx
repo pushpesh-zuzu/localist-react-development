@@ -4,11 +4,13 @@ import phone from "../../assets/Icons/phoneIcon.svg";
 import emailIcon1 from "../../assets/Icons/emailIcon1.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUserGeo } from "../../utils/geo";
+import { useSelector } from "react-redux";
 //redeploy work
 const DashboardCards = ({ data }) => {
   const navigate = useNavigate();
   const { country, lang } = useUserGeo();
-  
+  const { starterPackPurchased } = useSelector((state) => state.myCredit);
+
   return (
     <div className={styles["dashboard-container"]}>
       {/* First Row */}
@@ -123,10 +125,14 @@ const DashboardCards = ({ data }) => {
       <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description} Patio Service</button>
     </div> */}
 
-        <div className={styles["notification-banner"]}>
-          {/* <strong>Credit Boost Offer </strong> Respond to up to  10 customers <strong>20% OFF</strong> local customers,  <strong>a FREE 20% boost!</strong>. */}
-          Take advantage <strong>NOW</strong> and get a free{" "}
-          <strong> 20% credit boost</strong> as a new user.
+        <div
+          className={styles["notification-banner"]}
+          onClick={() => navigate("/settings/billing/my-credits")}
+          style={{ cursor: "pointer" }}
+        >
+          {starterPackPurchased
+            ? `Take advantage NOW and get a free 20% credit boost as a new user.`
+            : `Buy your next credit pack and win more jobs today!`}
         </div>
       </div>
 

@@ -378,6 +378,13 @@ const SearchProfessionals = ({ nextStep }) => {
               // setIsDropdownOpen(false);
             }}
             onChange={(e) => {
+              if (userToken?.active_status === 1) {
+                showToast(
+                  "error",
+                  "You are already logged in, please switch to buyer to proceed."
+                );
+                return; // typing block
+              }
               const value = e.target.value;
               setInput(value);
               setIsDropdownOpen(true); // keep dropdown open while typing/clearing

@@ -723,7 +723,7 @@ export const getAddHiredLeadDataApi = (AddHiredLeadData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -744,7 +744,7 @@ export const getAddSumbitLeadDataApi = (AddSubmitLeadData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setAddSubmitLeadLoader(false));
     }
@@ -764,7 +764,7 @@ export const getBuyerActivitiesApi = (ActivitiesData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -784,7 +784,7 @@ export const getBuyerViewProfieApi = (buyerProfileData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -804,7 +804,7 @@ export const getBuyerSortByLocationApi = (buyerSortByLocationData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setAutoBidListLoader(false));
     }
@@ -824,7 +824,7 @@ export const getBuyerSortByResponseApi = (buyerSortByResponseData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setAutoBidListLoader(false));
     }
@@ -844,7 +844,7 @@ export const sellerResponseStatusApi = (sellerResponseStatusData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -864,7 +864,7 @@ export const switchAutobidApi = (switchAutobidApiData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -885,7 +885,8 @@ export const getswitchAutobidApi = (switchAutobidApiData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
+      console.log(error?.response?.data?.message, "error");
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -907,7 +908,7 @@ export const addSellerNotesApi = (sellerApiData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSellerNotesLoader(false));
     }
@@ -927,7 +928,7 @@ export const getSellerNotesApi = (sellerData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -947,7 +948,7 @@ export const purchaseTypeStatusApi = (purchaseData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -967,7 +968,7 @@ export const purchaseTypeHiredStatusApi = (purchaseData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -988,7 +989,7 @@ export const getRatingFilterApi = (ratingFilterData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -1009,7 +1010,7 @@ export const ratingFilterApi = (ratingData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }

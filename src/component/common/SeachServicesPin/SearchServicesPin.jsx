@@ -1,25 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { getPopularServiceList, searchService, setService, setSelectedServiceId } from "../../../store/FindJobs/findJobSlice";
+import {
+  getPopularServiceList,
+  searchService,
+  setService,
+  setSelectedServiceId,
+} from "../../../store/FindJobs/findJobSlice";
 import { questionAnswerData } from "../../../store/Buyer/BuyerSlice";
 import { Spin } from "antd";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast, generateSlug } from "../../../utils";
-import styles from './searchservices.module.css';
+import styles from "./searchservices.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
-const SearchServicesPin = ({ 
+const SearchServicesPin = ({
   title = "",
   buttonText = "Continue",
   serviceLabel = "What service do you provide?",
   servicePlaceholder = "Driveway Installation, Gardening Services, etc...",
   className = "",
-  onCustomContinue = null // Optional custom callback
+  onCustomContinue = null, // Optional custom callback
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { lang, country } = useParams(); 
+  const { lang, country } = useParams();
   const currentLang = lang || "en";
   const currentCountry = country || "gb";
 
@@ -29,7 +34,9 @@ const SearchServicesPin = ({
   const [showModal, setShowModal] = useState(false);
 
   const { userToken } = useSelector((state) => state.auth);
-  const { service, searchServiceLoader } = useSelector((state) => state.findJobs);
+  const { service, searchServiceLoader } = useSelector(
+    (state) => state.findJobs
+  );
 
   const divRef = useRef(null);
 
@@ -84,7 +91,10 @@ const SearchServicesPin = ({
     }
 
     if (userToken?.active_status === 1) {
-      showToast("error", "You are not a buyer.");
+      showToast(
+        "error",
+        "You are already logged in, please switch to buyer to proceed."
+      );
       return;
     }
 
@@ -92,14 +102,16 @@ const SearchServicesPin = ({
     if (onCustomContinue) {
       const shouldProceed = onCustomContinue({
         selectedService,
-        input
+        input,
       });
       if (shouldProceed === false) return;
     }
 
     const slug = generateSlug(selectedService.name);
     dispatch(setSelectedServiceId(selectedService.id));
-    navigate(`/${currentLang}/${currentCountry}/sellers/create-account/${slug}`);
+    navigate(
+      `/${currentLang}/${currentCountry}/sellers/create-account/${slug}`
+    );
 
     dispatch(questionAnswerData({ service_id: selectedService.id }));
     setShowModal(true);
@@ -107,11 +119,11 @@ const SearchServicesPin = ({
 
   return (
     <>
-      <div className={`${styles?.formContainer || ''} ${className}`}>
-        <div className={styles?.innerformContainer || ''}>
+      <div className={`${styles?.formContainer || ""} ${className}`}>
+        <div className={styles?.innerformContainer || ""}>
           <p className={styles.titleContainer}>{title}</p>
-          <div className={styles?.inputGroup || ''}>
-            <div className={styles?.inputBox || ''} ref={divRef}>
+          <div className={styles?.inputGroup || ""}>
+            <div className={styles?.inputBox || ""} ref={divRef}>
               <label>{serviceLabel}</label>
               <input
                 type="text"
@@ -130,14 +142,14 @@ const SearchServicesPin = ({
                 }}
               />
               {isDropdownOpen && service?.length > 0 && (
-                <div className={styles?.searchResults || ''}>
+                <div className={styles?.searchResults || ""}>
                   {searchServiceLoader ? (
                     <Spin indicator={<LoadingOutlined spin />} />
                   ) : (
                     service.map((item) => (
                       <p
                         key={item.id}
-                        className={styles?.searchItem || ''}
+                        className={styles?.searchItem || ""}
                         onClick={() => handleSelectService(item)}
                       >
                         {item.name}
@@ -148,15 +160,12 @@ const SearchServicesPin = ({
               )}
             </div>
           </div>
-          <button 
-            className={styles?.button || ''} 
-            onClick={handleContinue}
-          >
+          <button className={styles?.button || ""} onClick={handleContinue}>
             {buttonText}
           </button>
         </div>
       </div>
-    
+
       {showModal && (userToken?.active_status === 2 || !userToken) && (
         <BuyerRegistration
           closeModal={handleClose}

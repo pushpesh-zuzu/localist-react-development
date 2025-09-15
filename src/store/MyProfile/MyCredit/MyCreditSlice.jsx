@@ -3,155 +3,144 @@ import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../../Api/axiosInstance";
 import { showToast } from "../../../utils";
 
-
-
-  export const addBuyCreditApi = (CreditData) => {
-      return async (dispatch) => {
-        dispatch(setBuyCreditLoader(true));
-        console.log(CreditData, "CreditData")
-        try {
-          const response = await axiosInstance.post(`payment/buy-credits`,CreditData);
-          if (response) {
-            // dispatch(setPreferencesList(response?.data?.data));
-            return response?.data;
-          }
-        } catch (error) {
-          showToast("error", error?.response?.data?.message);
-          return error?.response?.data
-        } finally {
-          dispatch(setBuyCreditLoader(false));
-        }
-      };
-    };
-    export const AddCoupanApi = (couponData) => {
-      return async (dispatch) => {
-        dispatch(setAddCouanLoader(true));
-        try {
-          const response = await axiosInstance.post(`users/add-coupon`,couponData);
-          if (response) {
-            dispatch(setAddCoupanData(response?.data?.data));
-            return response?.data;
-          }
-        } catch (error) {
-          showToast("error", error?.response?.data?.message);
-        } finally {
-          dispatch(setAddCouanLoader(false));
-        }
-      };
+export const addBuyCreditApi = (CreditData) => {
+  return async (dispatch) => {
+    dispatch(setBuyCreditLoader(true));
+    console.log(CreditData, "CreditData");
+    try {
+      const response = await axiosInstance.post(
+        `payment/buy-credits`,
+        CreditData
+      );
+      if (response) {
+        // dispatch(setPreferencesList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+      return error?.response?.data;
+    } finally {
+      dispatch(setBuyCreditLoader(false));
     }
-    export const AddSellerBillingDetailsApi = (billingData) => {
-        return async (dispatch) => {
-          dispatch(setSellerCardLoader(true));
-          try {
-            const response = await axiosInstance.post(`users/seller-billing-details`,billingData);
-            if (response) {
-              // dispatch(setPreferencesList(response?.data?.data));
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerCardLoader(false));
-          }
-        };
+  };
+};
+export const AddCoupanApi = (couponData) => {
+  return async (dispatch) => {
+    dispatch(setAddCouanLoader(true));
+    try {
+      const response = await axiosInstance.post(`users/add-coupon`, couponData);
+      if (response) {
+        dispatch(setAddCoupanData(response?.data?.data));
+        return response?.data;
       }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setAddCouanLoader(false));
+    }
+  };
+};
+export const AddSellerBillingDetailsApi = (billingData) => {
+  return async (dispatch) => {
+    dispatch(setSellerCardLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/seller-billing-details`,
+        billingData
+      );
+      if (response) {
+        // dispatch(setPreferencesList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerCardLoader(false));
+    }
+  };
+};
 
-    export const getSellerCardApi = () => {
-        return async (dispatch) => {
-       
-          try {
-            const response = await axiosInstance.get(
-              `users/get-seller-card`,
-              
-            );
-            console.log("response", response);
-      
-            if (response) {
-              dispatch(setGetSellerCardData(response?.data?.data ??[]));
-            }
-          } catch (error) {
-        //    showToast("error", error?.response?.data?.message || "Something went wrong");
-          } finally {
-          
-          }
-        };
-      };
-     
-      export const AddSellerCardDetailsApi = (cardData) => {
-        return async (dispatch) => {
-          dispatch(setSellerBillingLoader(true));
-          try {
-            const response = await axiosInstance.post(`users/seller-card-details`,cardData);
-            if (response) {
-             
-              return response?.data;
-            }
-          } catch (error) {
-            showToast("error", error?.response?.data?.message);
-          } finally {
-            dispatch(setSellerBillingLoader(false));
-          }
-        };
+export const getSellerCardApi = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(`users/get-seller-card`);
+      console.log("response", response);
+
+      if (response) {
+        dispatch(setGetSellerCardData(response?.data?.data ?? []));
       }
-      export const getInvoiceBillingListApi = () => {
-        return async (dispatch) => {
-       
-          try {
-            const response = await axiosInstance.get(
-              `payment/get-transaction-logs`,
-              
-            );
-            
-      
-            if (response) {
-              dispatch(setGetInoviceBillingListData(response?.data?.data ?? []));
-            }
-          } catch (error) {
-        //    showToast("error", error?.response?.data?.message || "Something went wrong");
-          } finally {
-          
-          }
-        };
-      }; 
-      export const getInvoiceListDataApi = () => {
-        return async (dispatch) => {
-       
-          try {
-            const response = await axiosInstance.get(
-              `payment/get-invoices `,
-              
-            );
-            
-      
-            if (response) {
-              dispatch(setGetInoviceListData(response?.data?.data ?? []));
-            }
-          } catch (error) {
-        //    showToast("error", error?.response?.data?.message || "Something went wrong");
-          } finally {
-          
-          }
-        };
-      }; 
-      // export const downloadInvoceApi = (invoiceData) => {
-      //   return async (dispatch) => {
-      //     dispatch(setInvoiceLoader(true));
-      //     try {
-      //       const response = await axiosInstance.post(`payment/download-invoice`,invoiceData);
-      //       console.log(response,"response")
-      //       if (response) {
-      //         // dispatch(setPreferencesList(response?.data?.data));
-      //         return response?.data;
-      //       }
-      //     } catch (error) {
-      //       showToast("error", error?.response?.data?.message);
-      //     } finally {
-      //       dispatch(setInvoiceLoader(false));
-      //     }
-      //   };
-      // }
-     
-      export const downloadInvoceApi = (invoiceData) => {
+    } catch (error) {
+      //    showToast("error", error?.response?.data?.message || "Something went wrong");
+    } finally {
+    }
+  };
+};
+
+export const AddSellerCardDetailsApi = (cardData) => {
+  return async (dispatch) => {
+    dispatch(setSellerBillingLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/seller-card-details`,
+        cardData
+      );
+      if (response) {
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerBillingLoader(false));
+    }
+  };
+};
+export const getInvoiceBillingListApi = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(`payment/get-transaction-logs`);
+
+      if (response) {
+        dispatch(setGetInoviceBillingListData(response?.data?.data ?? []));
+      }
+    } catch (error) {
+      //    showToast("error", error?.response?.data?.message || "Something went wrong");
+    } finally {
+    }
+  };
+};
+export const getInvoiceListDataApi = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.get(`payment/get-invoices `);
+
+      if (response) {
+        dispatch(setGetInoviceListData(response?.data?.data ?? []));
+      }
+    } catch (error) {
+      //    showToast("error", error?.response?.data?.message || "Something went wrong");
+    } finally {
+    }
+  };
+};
+// export const downloadInvoceApi = (invoiceData) => {
+//   return async (dispatch) => {
+//     dispatch(setInvoiceLoader(true));
+//     try {
+//       const response = await axiosInstance.post(`payment/download-invoice`,invoiceData);
+//       console.log(response,"response")
+//       if (response) {
+//         // dispatch(setPreferencesList(response?.data?.data));
+//         return response?.data;
+//       }
+//     } catch (error) {
+//       showToast("error", error?.response?.data?.message);
+//     } finally {
+//       dispatch(setInvoiceLoader(false));
+//     }
+//   };
+// }
+
+export const downloadInvoceApi = (invoiceData) => {
   return async () => {
     try {
       const response = await axiosInstance.post(
@@ -173,42 +162,34 @@ import { showToast } from "../../../utils";
       a.click();
       a.remove();
       window.URL.revokeObjectURL(url);
-
     } catch (error) {
       showToast("error", error?.response?.data?.message || "Download failed");
     }
   };
 };
 
-
-     
-
 const initialState = {
-   
-    sellerBillingLoader: false,
-    buyCreditLoader:false,
-    addCouanLoader:false,
-    getSellerCardData:[],
-    sellerCardLoader:false,
-    getInoviceBillingList:[],
-    addcoupanList:{},
-    getInvoiceList:[],
-    invoiceLoader:false
+  sellerBillingLoader: false,
+  buyCreditLoader: false,
+  addCouanLoader: false,
+  getSellerCardData: [],
+  sellerCardLoader: false,
+  getInoviceBillingList: [],
+  addcoupanList: {},
+  getInvoiceList: [],
+  invoiceLoader: false,
+  starterPackPurchased: false,
 };
-
-
-
-
-
-
-
 
 const myCreditSlice = createSlice({
   name: "myCredit",
   initialState: initialState,
   reducers: {
-    setSellerBillingLoader(state,action){
-        state.sellerBillingLoader = action.payload;
+    setStarterPackPurchased: (state, action) => {
+      state.starterPackPurchased = action.payload;
+    },
+    setSellerBillingLoader(state, action) {
+      state.sellerBillingLoader = action.payload;
     },
     setBuyCreditLoader(state, action) {
       state.buyCreditLoader = action.payload;
@@ -222,22 +203,32 @@ const myCreditSlice = createSlice({
     setSellerCardLoader(state, action) {
       state.sellerCardLoader = action.payload;
     },
-    setGetInoviceBillingListData(state,action) {
-        state.getInoviceBillingList = action.payload
+    setGetInoviceBillingListData(state, action) {
+      state.getInoviceBillingList = action.payload;
     },
-    setAddCoupanData(state,action) {
-        state.addcoupanList = action.payload
+    setAddCoupanData(state, action) {
+      state.addcoupanList = action.payload;
     },
-    setGetInoviceListData(state,action){
-        state.getInvoiceList = action.payload
+    setGetInoviceListData(state, action) {
+      state.getInvoiceList = action.payload;
     },
-    setInvoiceLoader(state,action) {
-        state.invoiceLoader = action.payload
-    }
-   
+    setInvoiceLoader(state, action) {
+      state.invoiceLoader = action.payload;
+    },
   },
 });
 
-export const {setSellerBillingLoader,setBuyCreditLoader,setInvoiceLoader,setAddCoupanData,setGetInoviceListData,setGetInoviceBillingListData,setAddCouanLoader,setGetSellerCardData,setSellerCardLoader} = myCreditSlice.actions;
+export const {
+  setStarterPackPurchased,
+  setSellerBillingLoader,
+  setBuyCreditLoader,
+  setInvoiceLoader,
+  setAddCoupanData,
+  setGetInoviceListData,
+  setGetInoviceBillingListData,
+  setAddCouanLoader,
+  setGetSellerCardData,
+  setSellerCardLoader,
+} = myCreditSlice.actions;
 
 export default myCreditSlice.reducer;

@@ -25,6 +25,7 @@ import airoImg from "../../../assets/Images/Setting/airoplaneImg.svg";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 import { useUserGeo } from "../../../utils/geo";
+import { setStarterPackPurchased } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 
 const creditOptions = [
   {
@@ -121,81 +122,6 @@ const MyCredits = () => {
   }, []);
   console.log(getInoviceBillingList, "item");
 
-  // const handleBuyNow = (item) => {
-  //   setActiveLoaderId(item?.id);
-  //   let finalPrice = item.no_of_leads;
-  // const vatTotal = item?.billing_vat_register === 0
-  // ? 0
-  // : Math.floor((item?.price * 20) / 100)
-
-  //   // ✅ Only apply discount if selectedCoupon is a string and contains '%'
-  //   if (typeof addcoupanList === 'string' && addcoupanList.includes("%")) {
-  //     const discountPercent = parseFloat(addcoupanList.replace("%", ""));
-  //     const discountAmount = (item.no_of_leads * discountPercent) / 100;
-  //     finalPrice = Math.floor(item.no_of_leads - discountAmount);
-  //   }
-
-  //   const creditData = {
-  //     amount: item?.price,
-  //     credits: item?.no_of_leads + finalPrice,
-  //     details: item?.name,
-  //     // discount:finalPrice - item?.price,
-  //     // sub_total:finalPrice,
-  //     total_amount:finalPrice + vatTotal * 100,
-  //     vat:vatTotal,
-  //     top_up: isChecked ? 1 : 0
-  //   };
-  //   console.log(creditData,finalPrice,vatTotal,"creditData")
-  //   // dispatch(addBuyCreditApi(creditData)).then((result) => {
-  //   //   if (result) {
-  //   //     showToast("success", result?.message);
-  //   //     setActiveLoaderId(null);
-  //   //     dispatch(getInvoiceBillingListApi())
-  //   //   }
-  //   // });
-  // };
-
-  //   const handleBuyNow = (item) => {
-  //   setActiveLoaderId(item?.id);
-
-  //   let finalPrice = item.no_of_leads;
-
-  //   const vatTotal =
-  //     item?.billing_vat_register === 0
-  //       ? 0
-  //       : Math.floor((item?.price * 20) / 100);
-
-  //   let credits = item.no_of_leads; // default
-
-  //   // ✅ Apply coupon logic
-  //   if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
-  //     const discountPercent = parseFloat(addcoupanList.replace('%', ''));
-  //     const discountAmount = (item.no_of_leads * discountPercent) / 100;
-  //     finalPrice = Math.floor(item.no_of_leads - discountAmount);
-
-  //     credits = item.no_of_leads + finalPrice;
-  //   }
-
-  //   const creditData = {
-  //     amount: item?.price,
-  //     credits: credits,
-  //     details: item?.name,
-  //     total_amount:  (item?.price + vatTotal) * 100,
-  //     vat: vatTotal,
-  //     top_up: isChecked ? 1 : 0,
-  //   };
-
-  //   console.log(creditData, finalPrice,item?.price, vatTotal, 'creditData');
-
-  //   // dispatch(addBuyCreditApi(creditData)).then((result) => {
-  //   //   if (result) {
-  //   //     showToast('success', result?.message);
-  //   //     setActiveLoaderId(null);
-  //   //     dispatch(getInvoiceBillingListApi());
-  //   //   }
-  //   // });
-  // };
-
   const handleBuyNow = (item) => {
     setActiveLoaderId(item?.id);
 
@@ -230,6 +156,11 @@ const MyCredits = () => {
         showToast("success", result?.message);
         setActiveLoaderId(null);
         dispatch(getInvoiceBillingListApi());
+
+        if (item?.plan_type === "starter") {
+          dispatch(setStarterPackPurchased(true));
+        }
+
         setTimeout(() => {
           window.location.reload();
         }, 1500);
