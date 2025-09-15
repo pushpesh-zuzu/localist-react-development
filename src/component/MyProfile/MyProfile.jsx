@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
+import { setIsDirtyRedux } from "../../store/MyProfile/myProfileSlice";
 // import { Collapse } from "antd";
 // import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
 
@@ -18,6 +19,8 @@ const MyProfile = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [openAccordion, setOpenAccordion] = useState(null);
+
+  const { isDirtyRedux } = useSelector((state) => state.myProfile);
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -34,33 +37,49 @@ const MyProfile = () => {
     "Q&As": useRef(null),
   };
 
-  const openAccordionHandler = (accordion) => {
-    if (accordion === openAccordion) {
-      setOpenAccordion(null);
-    } else {
-      setOpenAccordion(accordion);
-
-      // Scroll with offset to ensure title is visible
-      setTimeout(() => {
-        const el = sectionRefs[accordion]?.current;
-        if (el) {
-          const yOffset = -100; // Adjust this offset based on your header height
-          const y =
-            el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      }, 200);
+  const confirmNavigation = (callback) => {
+    if (isDirtyRedux) {
+      const confirmLeave = window.confirm(
+        "You have unsaved changes. Are you sure you want to leave?"
+      );
+      if (!confirmLeave) return false;
+      dispatch(setIsDirtyRedux(false));
     }
+    callback();
+    return true;
   };
 
-const companySlug =
-  viewProfileData?.company_name
+  const openAccordionHandler = (accordion) => {
+    const handleOpen = () => {
+      if (accordion === openAccordion) {
+        setOpenAccordion(null);
+      } else {
+        setOpenAccordion(accordion);
+
+        // Scroll with offset to ensure title is visible
+        setTimeout(() => {
+          const el = sectionRefs[accordion]?.current;
+          if (el) {
+            const yOffset = -100; // Adjust this offset based on your header height
+            const y =
+              el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
+        }, 200);
+      }
+    };
+
+    // Wrap with confirmNavigation check
+    confirmNavigation(handleOpen);
+  };
+
+  const companySlug = viewProfileData?.company_name
     ? viewProfileData.company_name.replace(/\s+/g, "-")
     : viewProfileData?.name
-      ? viewProfileData.name.replace(/\s+/g, "-")
-      : "";
+    ? viewProfileData.name.replace(/\s+/g, "-")
+    : "";
 
-const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
+  const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
 
   useEffect(() => {
     const isReview = location?.state?.review;
@@ -146,7 +165,7 @@ const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
         — a complete profile helps you stand out and win more work.
       </p>
 
-     {companySlug && (
+      {companySlug && (
         <a
           className={styles.profileLink}
           href={`/view-profile/${companySlug.toLowerCase()}/${randomKey}`}
@@ -157,7 +176,6 @@ const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
           View public profile
         </a>
       )}
-
 
       <div style={{ marginTop: "30px" }}>
         <div ref={sectionRefs["About"]}>

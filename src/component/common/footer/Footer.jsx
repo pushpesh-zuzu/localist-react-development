@@ -81,7 +81,10 @@ const Footer = () => {
 
   const handleJoinAsProfessional = () => {
     if (userToken || registerToken) {
-      showToast("info", "You're already logged in.");
+      showToast(
+        "info",
+        "You're already logged in. Please switch to seller and add your service."
+      );
     }
   };
   const handleHelpCenter = () => {
@@ -169,21 +172,19 @@ const Footer = () => {
               >
                 <li>Pricing</li>
               </Link>
-              <Link
-                className={styles.link}
-                to={
-                  (!userToken || !registerToken) &&
-                  `/${lang}/${country}/sellers/create`
-                }
+              <li
+                className={styles.mobileItem}
+                onClick={() => {
+                  if (!userToken && !registerToken) {
+                    // Not logged in → Navigate
+                    navigate(`/${lang}/${country}/sellers/create`);
+                  } else {
+                    handleJoinAsProfessional();
+                  }
+                }}
               >
-                <li
-                  onClick={() => {
-                    (userToken || registerToken) && handleJoinAsProfessional();
-                  }}
-                >
-                  Join as a Professional
-                </li>
-              </Link>
+                Join as a Professional
+              </li>
               {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>
                   <li > New Leads</li>
@@ -214,9 +215,9 @@ const Footer = () => {
               </Link> */}
             </ul>
           </div>
-       
+
           <div>
-              <h4>About</h4>
+            <h4>About</h4>
             <ul>
               <Link className={styles.link} to={`/${lang}/${country}/about-us`}>
                 <li>About Localists</li>
@@ -286,19 +287,21 @@ const Footer = () => {
               <Link to={`/${lang}/${country}/sellers/pricing`}>
                 <li className={styles.mobileItem}>Pricing</li>
               </Link>
-              <Link
-                to={
-                  (!userToken || !registerToken) &&
-                  `/${lang}/${country}/sellers/create`
-                }
+
+              <li
+                className={styles.mobileItem}
+                onClick={() => {
+                  if (!userToken && !registerToken) {
+                    // Not logged in → Navigate
+                    navigate(`/${lang}/${country}/sellers/create`);
+                  } else {
+                    handleJoinAsProfessional();
+                  }
+                }}
               >
-                <li
-                  className={styles.mobileItem}
-                  onClick={handleJoinAsProfessional}
-                >
-                  Join as a Professional
-                </li>
-              </Link>
+                Join as a Professional
+              </li>
+
               {/* <Link to="/help-center">
                 <li>Help Centre</li>
               </Link> */}
@@ -312,12 +315,16 @@ const Footer = () => {
               </Link>
             </ul>
           </Panel> */}
-                    <Link
+          <Link
             className={styles.footerNavLinks}
             style={{ color: "#000" }}
             to={`/${lang}/${country}/about-us`}
           >
-            <Panel className={styles.footerNavLinks} header="About Localists" key="3">
+            <Panel
+              className={styles.footerNavLinks}
+              header="About Localists"
+              key="3"
+            >
               {/* <ul>
               <Link to={`/${lang}/${country}/about-us`}>
                 <li className={styles.mobileItem}>About Localists</li>
