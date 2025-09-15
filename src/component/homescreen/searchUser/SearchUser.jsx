@@ -379,10 +379,7 @@ const SearchProfessionals = ({ nextStep }) => {
             }}
             onChange={(e) => {
               if (userToken?.active_status === 1) {
-                showToast(
-                  "error",
-                  "You are already logged in, please switch to buyer to proceed."
-                );
+                showToast("error", "Switch to buyer to place a new request.");
                 return; // typing block
               }
               const value = e.target.value;

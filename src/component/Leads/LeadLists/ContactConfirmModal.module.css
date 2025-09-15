@@ -331,7 +331,6 @@
   .modal {
     max-width: 350px;
     margin: 0 10px;
-    height: fit-content;
   }
   .buttonGroup {
     display: flex;
@@ -602,12 +601,13 @@
 }
 
 @media (max-height: 820px) {
-  .modalOverlay {
-    /* align-items: unset !important; */
-    /* height: fit-content; */
-    /* overflow-y: auto; */
-  }
+  /* .modalOverlay {
+    align-items: unset !important;
+    height: fit-content;
+   overflow-y: auto;
+  } */
   .modal {
     overflow-y: auto;
+    height: 70vh;
   }
 }

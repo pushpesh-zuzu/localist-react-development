@@ -17,21 +17,30 @@ import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import { clearCompanyData } from "../../../../../store/Company/companyLookup";
 
-const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }) => {
+const OtherServiceStep = ({
+  prevStep,
+  handleInputChange,
+  formData,
+  setFormData,
+}) => {
+  const [isPostcodeFromSuggestion, setIsPostcodeFromSuggestion] =
+    useState(false);
 
   const [Input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
-  const [ errors, setErrors] = useState({});
-  const [randomFallback] = useState(() => Math.floor(Math.random() * (45 - 35 + 1)) + 35)
+  const [errors, setErrors] = useState({});
+  const [randomFallback] = useState(
+    () => Math.floor(Math.random() * (45 - 35 + 1)) + 35
+  );
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const [expandedRadius, setExpandedRadius] = useState(0)
-  console.log(inputRef,'inputref')
+  const [expandedRadius, setExpandedRadius] = useState(0);
+  console.log(inputRef, "inputref");
   console.log(formData, "form");
   const {
     service,
@@ -47,7 +56,7 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
           searchService({
             search: Input,
             serviceid: formData?.service_id.toString(),
-            serviceTitle: item?.serviceTitle || ""
+            serviceTitle: item?.serviceTitle || "",
           })
         );
       }
@@ -58,20 +67,20 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
       dispatch(setService([]));
     };
   }, [Input, dispatch]);
-  const [newpost,setNewPost]=useState('')
+  const [newpost, setNewPost] = useState("");
 
   useEffect(() => {
     // Load Google Places API script dynamically
     const loadGoogleMapsScript = () => {
       // if (!window.google) {
-        if (!window.google) {
+      if (!window.google) {
         const script = document.createElement("script");
         script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
         document.body.appendChild(script);
-        console.log(script,'script...')
+        console.log(script, "script...");
       } else {
         initAutocomplete();
       }
@@ -91,9 +100,9 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
 
       autocomplete.addListener("place_changed", () => {
         const place = autocomplete.getPlace();
-        
+
         if (!place.address_components) return;
-        console.log(place,'place')
+        console.log(place, "place");
 
         let postalCode = "";
         place.address_components.forEach((component) => {
@@ -103,14 +112,16 @@ const OtherServiceStep = ({ prevStep, handleInputChange, formData, setFormData }
         });
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
-console.log(postalCode,lat,lng,'postalCode')
+        console.log(postalCode, lat, lng, "postalCode");
         if (postalCode) {
           // dispatch(setSelectedServiceFormData(postalCode));
 
           // ✅ Update Input Field with Selected Postal Code
           dispatch(setFormData({ postcode2: postalCode }));
-            dispatch(setFormData({ coordinates2: { lat, lng } }))
+          dispatch(setFormData({ coordinates2: { lat, lng } }));
           inputRef.current.value = postalCode; // Update input value
+
+          setIsPostcodeFromSuggestion(true);
         } else {
           showToast("error", "No PIN code found! Please try again.");
         }
@@ -120,37 +131,36 @@ console.log(postalCode,lat,lng,'postalCode')
     loadGoogleMapsScript();
   }, [setFormData, formData]);
   const allScripts = document.getElementsByTagName("script");
-  console.log(allScripts,'allScripts'); 
+  console.log(allScripts, "allScripts");
   const handleSelectService = (item) => {
     // Don't allow more than 2 services
     if (selectedServices?.length >= 5) {
       showToast("error", "Please add more services in Lead Settings");
       return;
     }
-  
+
     // Don't add duplicate services
     if (!selectedServices?.some((service) => service.id === item.id)) {
       dispatch(setselectedServices([...selectedServices, item]));
     }
-  
+
     setInput("");
     dispatch(setService([]));
   };
-  
+
   const handleRemoveService = (id) => {
-  const updated = selectedServices?.filter((service) => service.id !== id);
+    const updated = selectedServices?.filter((service) => service.id !== id);
 
-  dispatch(setselectedServices(updated));
+    dispatch(setselectedServices(updated));
 
-  // ✅ If no services left, reset postcode
-  if (updated.length === 0) {
-    setFormData((prev) => ({
-      ...prev,
-      postcode2: "", // clear postcode2
-    }));
-  }
-};
-
+    // ✅ If no services left, reset postcode
+    if (updated.length === 0) {
+      setFormData((prev) => ({
+        ...prev,
+        postcode2: "", // clear postcode2
+      }));
+    }
+  };
 
   // const handleRemoveService = (id) => {
   //   dispatch(
@@ -165,12 +175,12 @@ console.log(postalCode,lat,lng,'postalCode')
     // if (!formData.miles2) {
     //   newErrors.miles2 = "Please select a distance range.";
     // }
-   if (selectedServices.length > 0 && !formData.postcode2) {
-    newErrors.postcode2 = "Please enter your postcode.";
-  } 
+    if (selectedServices.length > 0 && !formData.postcode2) {
+      newErrors.postcode2 = "Please enter your postcode.";
+    }
 
     setErrors(newErrors);
-    console.log(newErrors,Object.keys(newErrors).length,"newErrors")
+    console.log(newErrors, Object.keys(newErrors).length, "newErrors");
     return Object.keys(newErrors).length === 0;
   };
   useEffect(() => {
@@ -192,9 +202,13 @@ console.log(postalCode,lat,lng,'postalCode')
   }, [show]);
 
   const handleSubmit = () => {
-  
-   let apicontion =  validateForm()
-    console.log(validateForm(),"pp")
+    if (selectedServices.length > 0 && !isPostcodeFromSuggestion) {
+      showToast("error", "Please select postcode from suggestion.");
+      return;
+    }
+
+    let apicontion = validateForm();
+    console.log(validateForm(), "pp");
     // Ensure selectedServices is an array and map IDs
     const serviceIds = Array.isArray(selectedServices)
       ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
@@ -213,7 +227,6 @@ console.log(postalCode,lat,lng,'postalCode')
     // Convert array to a comma-separated string
     const serviceCategoryData = combinedServiceIds.join(", ");
 
-    
     // Create final payload
     const payload = {
       ...formData,
@@ -225,30 +238,30 @@ console.log(postalCode,lat,lng,'postalCode')
       businessname: formData.profile_name,
       nation_wide: formData.nation_wide ? 1 : 0,
       is_online: formData.is_online ? 1 : 0,
-        miles2: selectedServices.length > 0 ? formData.miles2 : "",
-  postcode2: selectedServices.length > 0 ? formData.postcode2 : "",
-  expanded_radius: selectedServices.length > 0 ? formData.expanded_radius : "",
+      miles2: selectedServices.length > 0 ? formData.miles2 : "",
+      postcode2: selectedServices.length > 0 ? formData.postcode2 : "",
+      expanded_radius:
+        selectedServices.length > 0 ? formData.expanded_radius : "",
     };
-    payload.coordinates=JSON.stringify(payload.coordinates)
-    delete payload.password
-    delete payload.suite
-    delete payload.is_zipcode
-    delete payload.state
+    payload.coordinates = JSON.stringify(payload.coordinates);
+    delete payload.password;
+    delete payload.suite;
+    delete payload.is_zipcode;
+    delete payload.state;
     // delete payload.password
- console.log(payload,formData,"payload")
+    console.log(payload, formData, "payload");
 
-if(apicontion){
-dispatch(registerUserData(payload)).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Register successful!");
-        navigate("/settings/billing/my-credits");
-        dispatch(setService());
-        dispatch(setRegisterStep(0));
-        dispatch(clearCompanyData())
-      }
-    });
-}
-    
+    if (apicontion) {
+      dispatch(registerUserData(payload)).then((result) => {
+        if (result?.success) {
+          showToast("success", result?.message || "Register successful!");
+          navigate("/settings/billing/my-credits");
+          dispatch(setService());
+          dispatch(setRegisterStep(0));
+          dispatch(clearCompanyData());
+        }
+      });
+    }
   };
 
   const handleOpenModal = () => {
@@ -259,17 +272,18 @@ dispatch(registerUserData(payload)).then((result) => {
     setShow(false);
   };
 
-    const DEBOUNCE_MS = 250;
-    const debounceRef = useRef(null);
+  const DEBOUNCE_MS = 250;
+  const debounceRef = useRef(null);
 
   const triggerSearch = (value) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       const trimmed = value.trim();
       dispatch(
-        searchService({ search: trimmed === "" ? "" : trimmed.slice(0, 4),
-          serviceTitle: item?.serviceTitle || ""
-         })
+        searchService({
+          search: trimmed === "" ? "" : trimmed.slice(0, 4),
+          serviceTitle: item?.serviceTitle || "",
+        })
       );
     }, DEBOUNCE_MS);
   };
@@ -277,7 +291,7 @@ dispatch(registerUserData(payload)).then((result) => {
   const [leadCount, setLeadCount] = useState(0);
 
   useEffect(() => {
-    const selectedId = selectedServices.map(item => item.id)
+    const selectedId = selectedServices.map((item) => item.id);
     const serviceId = {
       service_id: [formData?.service_id[0], ...selectedId].join(","),
     };
@@ -285,24 +299,24 @@ dispatch(registerUserData(payload)).then((result) => {
     dispatch(pendingLeadData(serviceId));
   }, [selectedServices]);
 
-const disableWithService = selectedServices?.length > 0;
+  const disableWithService = selectedServices?.length > 0;
 
-const handleExpandRadius = () => {
-  setExpandedRadius((prev) => {
-    const newRadius = prev + 10;
+  const handleExpandRadius = () => {
+    setExpandedRadius((prev) => {
+      const newRadius = prev + 10;
 
-    // Dispatch the new radius to Redux store
-    dispatch(setFormData({ expanded_radius: newRadius }));
+      // Dispatch the new radius to Redux store
+      dispatch(setFormData({ expanded_radius: newRadius }));
 
-    return newRadius;
-  });
-};
+      return newRadius;
+    });
+  };
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
         <div className={styles.headerContainer}>
           <h2 className={styles.otherService_heading}>
-          Add any additional services you can provide
+            Add any additional services you can provide
           </h2>
           <p className={styles.subHeading}>Get even more great leads.</p>
         </div>
@@ -341,15 +355,19 @@ const handleExpandRadius = () => {
               placeholder="Search for more services..."
               onFocus={() => {
                 setIsFocused(true);
-                setIsDropdownOpen(true);        // open dropdown on focus
+                setIsDropdownOpen(true); // open dropdown on focus
                 // if field is empty on focus, load ALL services so dropdown isn't blank
                 if (Input.trim() === "") {
-                  dispatch(searchService({ search: "", serviceTitle: item?.serviceTitle || "" /*, serviceid*/ }));
+                  dispatch(
+                    searchService({
+                      search: "",
+                      serviceTitle: item?.serviceTitle || "" /*, serviceid*/,
+                    })
+                  );
                 }
               }}
               onBlur={() => {
                 setIsFocused(false);
-                
               }}
               onChange={(e) => {
                 const value = e.target.value;
@@ -395,7 +413,9 @@ const handleExpandRadius = () => {
             />
             <span className={styles.labelText}>Auto Bid</span>
           </label>
-          <div className={styles.newContent}>What areas do you provide these additional services in?</div>
+          <div className={styles.newContent}>
+            What areas do you provide these additional services in?
+          </div>
           <div className={styles.milesBox}>
             <div className={styles.dropdownWrapper}>
               <select
@@ -404,7 +424,7 @@ const handleExpandRadius = () => {
                 name="miles2"
                 value={formData?.miles2}
                 onChange={handleInputChange}
-                disabled = {!disableWithService}
+                disabled={!disableWithService}
               >
                 <option value="1">1 mile</option>
                 <option value="2">2 miles</option>
@@ -421,32 +441,45 @@ const handleExpandRadius = () => {
                 type="text"
                 id="autocomplete-postcode"
                 placeholder="Postcode"
-                className={`${styles.input} ${errors.postcode2 ? styles.errorBorder : ""
-                  }`}
+                className={`${styles.input} ${
+                  errors.postcode2 ? styles.errorBorder : ""
+                }`}
                 ref={inputRef}
                 name="postcode2"
                 // value={formData.postcode ||''}
                 value={formData?.postcode2 || formData?.postcode || ""}
-                onChange={handleInputChange ? handleInputChange : () => { }}
-              disabled = {!disableWithService}
-              //  readOnly={!disableWithService} 
+                // onChange={handleInputChange ? handleInputChange : () => {}}
+                onChange={(e) => {
+                  if (handleInputChange) handleInputChange(e);
+                  setIsPostcodeFromSuggestion(false);
+                }}
+                disabled={!disableWithService}
+                //  readOnly={!disableWithService}
                 // onChange={(e)=>setNewPost(e.target.value)}
               />
-            
-
             </div>
           </div>
-          {errors.postcode2 && <p className={styles.errorText}>{errors.postcode2}</p>}
+          {errors.postcode2 && (
+            <p className={styles.errorText}>{errors.postcode2}</p>
+          )}
           <div className={styles.radiusBtn}>
-            <button className={styles.expandBtn} disabled={!disableWithService} onClick={handleExpandRadius}>Expand Radius</button>
+            <button
+              className={styles.expandBtn}
+              disabled={!disableWithService}
+              onClick={handleExpandRadius}
+            >
+              Expand Radius
+            </button>
           </div>
-         {expandedRadius > 0 && (
-  <div className={styles.radiusText}>{expandedRadius} miles added</div>
-)}
+          {expandedRadius > 0 && (
+            <div className={styles.radiusText}>
+              {expandedRadius} miles added
+            </div>
+          )}
           <div className={styles.leadInfo_wrapper}>
             <div className={styles.leadInfo}>
               <h1 className={styles.leadCount}>
-                {pendingLead != 0  ? pendingLead : randomFallback}
+                {pendingLead != 0 ? pendingLead : randomFallback}
               </h1>
               <p className={styles.leadText}>current available leads</p>
             </div>
