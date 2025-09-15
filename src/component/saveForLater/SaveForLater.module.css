@@ -282,6 +282,9 @@
   line-height: 25px;
 }
 .viewDetailsBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 7px 17px;
   background-color: var(--primary-color);
   font-size: 24px;
@@ -716,6 +719,9 @@
     margin-right: 0px;
   }
   .viewDetailsBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 7px 17px;
     background-color: var(--primary-color);
     font-size: 16px;
