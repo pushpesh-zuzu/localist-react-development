@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
-import { SERVICE_CATEGORIES } from "../../../constant/Homepage";
+// import { SERVICE_CATEGORIES } from "../../../constant/Homepage";
 import styles from "./serviceCategory.module.css";
 import SingleCategory from "./SingleCategory";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllServiceList, getCategoriesList } from "../../../store/FindJobs/findJobSlice";
+import { getAllServiceList } from "../../../store/FindJobs/findJobSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { Spin } from "antd";
 
 const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch()
   const { userToken } = useSelector((state)=> state.auth)
-  const { CategoriesList,categoriesListLoader,allServiceList ,popularLoader} = useSelector((state) => state.findJobs);
+  const { allServiceList ,popularLoader} = useSelector((state) => state.findJobs);
   useEffect(()=>{
 // dispatch (getCategoriesList())
-  dispatch(getAllServiceList());
+ if (typeof window !== "undefined" && (!allServiceList || allServiceList.length === 0)) {
+      dispatch(getAllServiceList());
+    }
   },[])
 
   const handleCategoryClick = (id, name) => {

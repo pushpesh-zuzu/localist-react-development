@@ -82,10 +82,18 @@ async function createServer() {
           }
         });
       }
-
+      // Get state from render()
+      const preloadedState = rendered.state || {};
+      const stateScript = `<script>
+  window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+    /</g,
+    "\\u003c"
+  )};
+</script>`;
       const html = tpl
         .replace("<!--ssr-outlet-->", appHtml)
-        .replace("<!--css-outlet-->", `${headContent}\n${cssInline}`);
+        .replace("<!--css-outlet-->", `${headContent}\n${cssInline}`)
+        .replace("</body>", `${stateScript}</body>`);
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
@@ -99,7 +107,7 @@ async function createServer() {
   const port = isProd ? process.env.SSR_PORT || 5102 : process.env.PORT || 5100;
   const host = isProd ? process.env.SSR_HOST || '127.0.0.1' : process.env.HOST || '127.0.0.1';
   const serverType = isProd ? "SSR server" : "Server";
-  
+
   app.listen(port, host, () => {
     console.log(
       `${serverType} running at http://${host}:${port} (mode: ${isProd ? "production" : "development"})`

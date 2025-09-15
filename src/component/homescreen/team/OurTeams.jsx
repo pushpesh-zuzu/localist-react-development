@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ourteams.module.css";
-import teamMember from "../../../assets/Images/teamsMember.svg";
-import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.svg";
+import teamMember from "../../../assets/Images/teamMember.png";
+import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.png";
 import quotes from "../../../assets/Images/quote.svg";
-import rating from "../../../assets/Images/ratings.svg";
-import dotSlider from "../../../assets/Images/dotSlider.svg";
+// import rating from "../../../assets/Images/ratings.svg";
+// import dotSlider from "../../../assets/Images/dotSlider.svg";
 import { StarFilled } from '@ant-design/icons';
 
 const OurTeams = () => {

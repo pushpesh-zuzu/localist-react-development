@@ -1,9 +1,7 @@
-// Services.jsx
-
 import styles from "./services.module.css";
-import leftArrow from "../../../assets/Images/backwordArrow.svg";
-import rightArrow from "../../../assets/Images/forwordArrow.svg";
-import SpecificService from "./SpecificService";
+// import leftArrow from "../../../assets/Images/backwordArrow.svg";
+// import rightArrow from "../../../assets/Images/forwordArrow.svg";
+// import SpecificService from "./SpecificService";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllServiceList } from "../../../store/FindJobs/findJobSlice";
@@ -42,9 +40,11 @@ const Services = () => {
   const { allServiceList } = useSelector((state) => state.findJobs);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllServiceList());
-  }, [dispatch]);
+   useEffect(() => {
+    if (typeof window !== "undefined" && (!allServiceList || allServiceList.length === 0)) {
+      dispatch(getAllServiceList());
+    }
+  }, [dispatch, allServiceList]);;
 
   return (
     <>

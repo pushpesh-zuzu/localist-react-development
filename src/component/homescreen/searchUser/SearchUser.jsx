@@ -1,18 +1,20 @@
 import styles from "./search.module.css";
-import { EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import calloutArrow from "../../../assets/Images/callOutArrow.svg";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   getPopularServiceList,
   searchService,
-  setSelectedServiceId,
+  // setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { generateSlug, showToast } from "../../../utils";
+import { 
+  // generateSlug, 
+  showToast } from "../../../utils";
 import {
   questionAnswerData,
   setcitySerach,
@@ -32,7 +34,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const { service, searchServiceLoader } = useSelector(
+  const { popularList, service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
   const [selectedServiceId, setSelectedServiceId] = useState({
@@ -65,7 +67,9 @@ const SearchProfessionals = ({ nextStep }) => {
     setSelectedService("");
   };
   useEffect(() => {
-    dispatch(getPopularServiceList());
+    if (typeof window !== "undefined" && (!popularList || popularList.length === 0)) {
+      dispatch(getPopularServiceList());
+    }
     return () => {
       dispatch(setService([]));
     };

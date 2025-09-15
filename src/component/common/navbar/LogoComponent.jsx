@@ -1,32 +1,32 @@
 import styles from "./navbar.module.css";
 import logo from "../../../assets/Images/logo.svg";
 import downArrow from "../../../assets/Images/downarrow.svg";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
 import { useEffect, useState } from "react";
-import {
-  allSubMenuData,
-  getChildRoute,
-  locationData,
-  otherMenuData,
-  serviceesData,
-  subMenuData,
-} from "../../../constant/Megamenu";
+// import {
+//   allSubMenuData,
+//   getChildRoute,
+//   locationData,
+//   otherMenuData,
+//   serviceesData,
+//   subMenuData,
+// } from "../../../constant/Megamenu";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllServiceList,
-  getCategoriesList,
-  getPopularServiceList,
-} from "../../../store/FindJobs/findJobSlice";
-import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
-import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+// import {
+//   getAllServiceList,
+//   getCategoriesList,
+//   getPopularServiceList,
+// } from "../../../store/FindJobs/findJobSlice";
+// import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
+// import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
 import { megaMenu } from "../../../constant/Megamenu";
 
 const LogoComponent = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [filterRoute, setFilteRoute] = useState("");
   const [selectedThirdLevelRoute, setSlectedThirdLevelRoute] = useState("");
@@ -40,9 +40,9 @@ const LogoComponent = () => {
   const { registerData, popularList, CategoriesList, allServiceList } =
     useSelector((state) => state.findJobs);
   const location = useLocation();
-  const dispatch = useDispatch();
-  const isAccountPage = location.pathname === "/user/settings";
-  const isNotification = location.pathname === "/user/notification";
+  // const dispatch = useDispatch();
+  // const isAccountPage = location.pathname === "/user/settings";
+  // const isNotification = location.pathname === "/user/notification";
 
   const [visibleCount, setVisibleCount] = useState(5); // Start with 1
   const totalItems = megaMenu?.length || 0;
@@ -101,13 +101,13 @@ const LogoComponent = () => {
 
   //     }
   //   };
-  useEffect(() => {
-    if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
-      dispatch(getPopularServiceList());
-      dispatch(getCategoriesList());
-      dispatch(getAllServiceList());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
+  //     dispatch(getPopularServiceList());
+  //     dispatch(getCategoriesList());
+  //     dispatch(getAllServiceList());
+  //   }
+  // }, []);
   // const handleRedirectUrl = () => {
   //   const status = registerData?.active_status || userToken?.active_status;
 

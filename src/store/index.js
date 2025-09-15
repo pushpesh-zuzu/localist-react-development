@@ -10,8 +10,8 @@ import myprofileSlice from "./MyProfile/myProfileSlice";
 import myCreditSlice from "./MyProfile/MyCredit/MyCreditSlice";
 import companyLook from "./Company/companyLookup";
 import dashboardSlice from "./Dashboard/dashboardSlice";
- 
-const reducers = {
+
+export const reducers = {
   findJobs: findJobSlice,
   auth: authSlice,
   buyer: buyerSlice,
@@ -24,11 +24,15 @@ const reducers = {
   myCredit: myCreditSlice,
   dashboard: dashboardSlice,
 };
- 
-// Factory for SSR (fresh store per request)
-export const createStore = () => configureStore({ reducer: reducers });
- 
-// Default singleton for CSR
-const store = configureStore({ reducer: reducers });
- 
+
+// Factory to create a fresh store, accepts preloadedState for SSR hydration
+export const createStore = (preloadedState = {}) =>
+  configureStore({
+    reducer: reducers,
+    preloadedState,
+  });
+
+// Default singleton store for CSR (no preloadedState here)
+const store = createStore();
+
 export default store;

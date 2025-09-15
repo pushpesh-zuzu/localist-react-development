@@ -1,21 +1,14 @@
-import Accountants from "../component/category/accountants/CloneAccountants";
+// import Accountants from "../component/category/accountants/CloneAccountants";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
 import AllServicesComponent from "../component/category/allServices/CloneAllServices";
-import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
+// import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
 import GetQuotes from "../component/common/getQuotes/GetQuotes";
-import styles from "./clonecategory.module.css";
+// import styles from "./clonecategory.module.css";
 import { useLocation, Link } from "react-router-dom";
-import {
-  HowItWorksData,
-  PopularCategoriesData,
-} from "../constant/CloneCategory";
-import { AllServicesData } from "../constant/CloneCategory";
-import SocialMediaImage from "../assets/Images/SocialMediaImage.svg";
-import WebDesignImage from "../assets/Images/WebDesignImage.svg";
-import TaxPreparationImage from "../assets/Images/TaxPreparationImage.svg";
 
-import bgImage from "../assets/Images/bgImage.svg";
-import financeBg from "../assets/Images/financeImg.svg";
+import { AllServicesData } from "../constant/CloneCategory";
+
+
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import FenchandGet from "../assets/Images/FenchandGet.jpg";
