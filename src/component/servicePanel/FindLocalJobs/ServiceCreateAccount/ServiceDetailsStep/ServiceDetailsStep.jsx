@@ -1,10 +1,14 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ServiceDetailsStep.module.css";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
-import { setCompanyError,clearCompanyData,fetchCompanyDetails } from "../../../../../store/Company/companyLookup";
+import {
+  setCompanyError,
+  clearCompanyData,
+  fetchCompanyDetails,
+} from "../../../../../store/Company/companyLookup";
 
 const ServiceDetailsStep = ({
   nextStep,
@@ -15,146 +19,154 @@ const ServiceDetailsStep = ({
   errors,
   emailCheck,
   companyCheck,
-  phoneCheck,companyValue
+  phoneCheck,
+  companyValue,
 }) => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
-  const serviceParms = useParams()
-  
+  const serviceParms = useParams();
+
   const debounceTimer = useRef({ company_name: null });
-  const [hasCompanyReg, setHasCompanyReg] = useState(null); 
+  const [hasCompanyReg, setHasCompanyReg] = useState(null);
 
+  //   const handleCheck = () => {
+  //     if(emailCheck && companyCheck && phoneCheck) {
+  //       nextStep()
+  //     } else if(!emailCheck) {
+  //       showToast("error","Please Enter Correct Email")
+  //     } else if (!companyCheck) {
+  // showToast("error","Please Enter Correct Comapny Details")
+  //     } else {
+  //       showToast("error","Please Enter Correct Number")
+  //     }
+  //   }
 
-  
-//   const handleCheck = () => {
-//     if(emailCheck && companyCheck && phoneCheck) {
-//       nextStep()
-//     } else if(!emailCheck) {
-//       showToast("error","Please Enter Correct Email")
-//     } else if (!companyCheck) {
-// showToast("error","Please Enter Correct Comapny Details")
-//     } else {
-//       showToast("error","Please Enter Correct Number")
-//     }
-//   }
+  const handleCheck = () => {
+    const hasCompanyReg = formData.company_reg_number.trim().length > 0;
+    const hasCompanyName = formData.company_name.trim().length > 0;
 
-const handleCheck = () => {
+    if (!formData.profile_name || formData.profile_name.trim() === "") {
+      showToast("error", "Business Profile Name is required");
+      return;
+    }
 
-  const hasCompanyReg = formData.company_reg_number.trim().length > 0;
-  const hasCompanyName = formData.company_name.trim().length > 0;
+    if (!emailCheck) {
+      showToast("error", "Please Enter Correct Email");
+      return;
+    } else if (companyValue && companyCheck === false) {
+      showToast("error", "Please Enter Correct Company Details");
+    } else if (hasCompanyReg && !hasCompanyName) {
+      showToast("error", "Please enter company name.");
+    }
 
-   if (!formData.profile_name || formData.profile_name.trim() === "") {
-    showToast("error", "Business Profile Name is required");
-    return;
-  }
-  
-  if (!emailCheck) {
-    showToast("error", "Please Enter Correct Email");
-    return;
-  } 
-  else if (companyValue && companyCheck === false) {
-    showToast("error", "Please Enter Correct Company Details");
-  }
-   else if (hasCompanyReg && !hasCompanyName) {
-    showToast("error", "Please enter company name.");
-  } 
-   else if (!phoneCheck) {
-    showToast("error", "Please Enter Correct Number");
-  } else {
-    nextStep();
-  }
-};
+    if (formData.phone.startsWith("0")) {
+      showToast("error", "Please enter phone number without '0'");
+      errors.phone = "";
+      return;
+    } else if (!phoneCheck) {
+      showToast("error", "Please Enter Correct Number");
+    } else {
+      nextStep();
+    }
+  };
 
   console.log(serviceParms?.serviceTitle, "serviceParms");
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  const companyError = useSelector(state => state.companyLook?.companyError);
-  
-
+  const companyError = useSelector((state) => state.companyLook?.companyError);
 
   const handleToggleCompanyReg = (value) => {
-  setHasCompanyReg(value);
+    setHasCompanyReg(value);
 
-  if (value === 0) {
-    dispatch(setFormData({
-      company_reg_number: "",
-      company_name: ""
-    }));
-    // user selected "No"
-    setFormData(prev => ({
-      ...prev,
-      company_reg_number: "",
-      company_name: ""
-    }));
-    dispatch(clearCompanyData());
-  }
+    if (value === 0) {
+      dispatch(
+        setFormData({
+          company_reg_number: "",
+          company_name: "",
+        })
+      );
+      // user selected "No"
+      setFormData((prev) => ({
+        ...prev,
+        company_reg_number: "",
+        company_name: "",
+      }));
+      dispatch(clearCompanyData());
+    }
 
-  if (value === 1) {
-    // user selected "Yes" -> reset fresh
-    setFormData(prev => ({
-      ...prev,
-      company_reg_number: "",
-      company_name: ""
-    }));
-    
-    dispatch(clearCompanyData());
-  }
-};
+    if (value === 1) {
+      // user selected "Yes" -> reset fresh
+      setFormData((prev) => ({
+        ...prev,
+        company_reg_number: "",
+        company_name: "",
+      }));
 
+      dispatch(clearCompanyData());
+    }
+  };
 
-// On reg number change: reset fields and fetch if 8 digits
-useEffect(() => {
-  if (!formData.company_reg_number) {
-    dispatch(setFormData({
-      company_name: "",
-      address: ""
-    }));
-    dispatch(clearCompanyData());  // Clears redux data so it doesn't refill company_name
-    return;
-  }
+  // On reg number change: reset fields and fetch if 8 digits
+  useEffect(() => {
+    if (!formData.company_reg_number) {
+      dispatch(
+        setFormData({
+          company_name: "",
+          address: "",
+        })
+      );
+      dispatch(clearCompanyData()); // Clears redux data so it doesn't refill company_name
+      return;
+    }
 
-  if (formData.company_reg_number.length === 8) {
-    dispatch(fetchCompanyDetails(formData.company_reg_number));
-  }
-}, [formData.company_reg_number]);
+    if (formData.company_reg_number.length === 8) {
+      dispatch(fetchCompanyDetails(formData.company_reg_number));
+    }
+  }, [formData.company_reg_number]);
 
-// On API error
-useEffect(() => {
-  if (companyError && formData.company_reg_number !== "") {
-    showToast("error", companyError);
-    dispatch(setFormData({ company_reg_number: "" }));
-  }
+  // On API error
+  useEffect(() => {
+    if (companyError && formData.company_reg_number !== "") {
+      showToast("error", companyError);
+      dispatch(setFormData({ company_reg_number: "" }));
+    }
 
-  if (companyError) {
-    dispatch(setCompanyError(null)); // Always clear after handling
-  }
-}, [companyError, formData.company_reg_number, dispatch]);
+    if (companyError) {
+      dispatch(setCompanyError(null)); // Always clear after handling
+    }
+  }, [companyError, formData.company_reg_number, dispatch]);
 
-// When data fetched successfully
-useEffect(() => {
-  if (companyData?.company_name) {
-    dispatch(setFormData({
-      company_name: companyData.company_name || ""
-    }));
-  }
-}, [companyData]);
+  // When data fetched successfully
+  useEffect(() => {
+    if (companyData?.company_name) {
+      dispatch(
+        setFormData({
+          company_name: companyData.company_name || "",
+        })
+      );
+    }
+  }, [companyData]);
 
-useEffect(() => {
-  if (companyData?.company_name && hasCompanyReg === 1) {
-    setFormData(prev => ({
-      ...prev,
-      company_name: companyData.company_name || ""
-    }));
-  }
-}, [companyData, hasCompanyReg]);
+  useEffect(() => {
+    if (companyData?.company_name && hasCompanyReg === 1) {
+      setFormData((prev) => ({
+        ...prev,
+        company_name: companyData.company_name || "",
+      }));
+    }
+  }, [companyData, hasCompanyReg]);
 
   return (
     <>
       <div className={styles.pageContainer}>
         <div className={styles.container}>
           <div className={styles.headerContainer}>
-            <h2 className={styles.heading}>Let’s get to know you a little better</h2>
+            <h2 className={styles.heading}>
+              Let’s get to know you a little better
+            </h2>
             <p className={styles.subheading}>
-              Just add the information below and you will be able to see {serviceParms?.serviceTitle?.replace(/-/g, ' ')} leads for your business
+              Just add the information below and you will be able to see{" "}
+              {serviceParms?.serviceTitle?.replace(/-/g, " ")} leads for your
+              business
             </p>
           </div>
 
@@ -173,25 +185,25 @@ useEffect(() => {
                 />
               </div>
               {errors.name && <p className={styles.errorText}>{errors.name}</p>}
-              
-              {/* Business Profile Name */}
-                <div className={styles.labelInputWrapper}>
-                  <label className={styles.label}>
-                    Business Profile Name
-                  </label>
-                  <input
-                    type="text"
-                    className={`${styles.input} ${errors.profile_name ? styles.errorBorder : ""}`}
-                    name="profile_name"
-                    value={formData.profile_name}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-                {errors.profile_name && <p className={styles.errorText}>{errors.profile_name}</p>}
 
-              
-                
+              {/* Business Profile Name */}
+              <div className={styles.labelInputWrapper}>
+                <label className={styles.label}>Business Profile Name</label>
+                <input
+                  type="text"
+                  className={`${styles.input} ${
+                    errors.profile_name ? styles.errorBorder : ""
+                  }`}
+                  name="profile_name"
+                  value={formData.profile_name}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              {errors.profile_name && (
+                <p className={styles.errorText}>{errors.profile_name}</p>
+              )}
+
               {/* Do you have a company reg number? 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Do you have a company registration number?</label>
@@ -272,26 +284,34 @@ useEffect(() => {
               */}
 
               <div className={styles.labelInputWrapper}>
-  <label className={styles.label}>Do you have a company registration number?</label>
-  <div className={styles.toggleGroup}>
-    <button
-      type="button"
-      className={hasCompanyReg === 1 ? styles.activeButton : styles.toggleButton}
-      onClick={() => handleToggleCompanyReg(1)}
-    >
-      Yes
-    </button>
-    <button
-      type="button"
-      className={hasCompanyReg === 0 ? styles.activeButtonNo : styles.toggleButtonNo}
-      onClick={() => handleToggleCompanyReg(0)}
-    >
-      No
-    </button>
-  </div>
-</div>
-
-
+                <label className={styles.label}>
+                  Do you have a company registration number?
+                </label>
+                <div className={styles.toggleGroup}>
+                  <button
+                    type="button"
+                    className={
+                      hasCompanyReg === 1
+                        ? styles.activeButton
+                        : styles.toggleButton
+                    }
+                    onClick={() => handleToggleCompanyReg(1)}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    className={
+                      hasCompanyReg === 0
+                        ? styles.activeButtonNo
+                        : styles.toggleButtonNo
+                    }
+                    onClick={() => handleToggleCompanyReg(0)}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>
 
               {/* Only show registration number + company name if Yes */}
               {hasCompanyReg === 1 && (
@@ -299,18 +319,30 @@ useEffect(() => {
                   <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>
                       Company registration number
-                      <span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>
+                      <span
+                        style={{
+                          fontWeight: "normal",
+                          fontSize: "0.85em",
+                          color: "#666",
+                        }}
+                      >
                         (Optional)
                       </span>
                     </label>
                     <input
                       type="text"
-                      className={`${styles.input} ${errors.company_reg_number ? styles.errorBorder : ""}`}
+                      className={`${styles.input} ${
+                        errors.company_reg_number ? styles.errorBorder : ""
+                      }`}
                       name="company_reg_number"
                       value={formData.company_reg_number}
                       onChange={(e) => {
-                        const value = e.target.value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 8);
-                        handleInputChange({ target: { name: "company_reg_number", value } });
+                        const value = e.target.value
+                          .replace(/[^a-zA-Z0-9]/g, "")
+                          .slice(0, 8);
+                        handleInputChange({
+                          target: { name: "company_reg_number", value },
+                        });
                       }}
                       maxLength={8}
                     />
@@ -320,7 +352,9 @@ useEffect(() => {
                     <label className={styles.label}>Company name</label>
                     <input
                       type="text"
-                      className={`${styles.input} ${errors.company_name ? styles.errorBorder : ""}`}
+                      className={`${styles.input} ${
+                        errors.company_name ? styles.errorBorder : ""
+                      }`}
                       name="company_name"
                       value={formData.company_name}
                       onChange={handleInputChange}
@@ -329,7 +363,6 @@ useEffect(() => {
                   </div>
                 </>
               )}
-
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Email address</label>
@@ -381,7 +414,9 @@ useEffect(() => {
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number</label>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
                   <span
                     // style={{
                     //   padding: "4px 8px",
@@ -397,7 +432,9 @@ useEffect(() => {
                   <input
                     type="text"
                     name="phone"
-                    className={`${styles.inputs} ${errors.phone ? styles.errorBorder : ""}`}
+                    className={`${styles.inputs} ${
+                      errors.phone ? styles.errorBorder : ""
+                    }`}
                     value={formData.phone}
                     maxLength={10}
                     pattern="[0-9]*"
@@ -407,13 +444,11 @@ useEffect(() => {
                     onChange={handleInputChange}
                   />
                 </div>
-                
               </div>
 
               {errors.phone && (
                 <p className={styles.errorText}>{errors.phone}</p>
               )}
-              
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
@@ -462,7 +497,7 @@ useEffect(() => {
               {formData.is_company_website === 1 && (
                 <input
                   type="text"
-                    className={`${styles.input} ${
+                  className={`${styles.input} ${
                     errors.company_website ? styles.errorBorder : ""
                   }`}
                   name="company_website"
@@ -481,12 +516,13 @@ useEffect(() => {
                   }
                 />
               )}
- {errors.company_website && (
-                  <p className={styles.errorText}>{errors.company_website}</p>
-                )}
+              {errors.company_website && (
+                <p className={styles.errorText}>{errors.company_website}</p>
+              )}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
-                What is the estimated number of new jobs per month you would like to help grow your business?
+                  What is the estimated number of new jobs per month you would
+                  like to help grow your business?
                 </label>
                 <div className={styles.optionGroup}>
                   {["1-5", "6-10", "10-20", "20-30", "30+"].map((count) => (
@@ -560,7 +596,7 @@ useEffect(() => {
                     type="button"
                     className={
                       formData.company_sales_team === 0
-                         ? styles.activeButtonNo
+                        ? styles.activeButtonNo
                         : styles.toggleButtonNo
                     }
                     onClick={() =>

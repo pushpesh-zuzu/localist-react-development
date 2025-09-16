@@ -325,6 +325,39 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     }
   };
   console.log(getSellerNotes?.notes?.notes, "getSellerNotes");
+
+  const [phone, setPhone] = useState("");
+
+  // WhatsApp open karna
+  const handleWhatsAppClick = () => {
+    if (!phone || phone.length !== 10) {
+      showToast("error", "Please enter a valid phone number");
+      return;
+    }
+    const fullNumber = `+44${phone}`;
+    window.open(`https://wa.me/${fullNumber}`, "_blank");
+  };
+
+  // SMS open karna
+  const handleSmsClick = () => {
+    if (!phone || phone.length !== 10) {
+      showToast("error", "Please enter a valid phone number");
+      return;
+    }
+    const fullNumber = `+44${phone}`;
+    window.open(`sms:${fullNumber}`);
+  };
+
+  const handlePhoneChange = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); // sirf digits
+
+    // 10 digits hi allow
+    if (value.length <= 10) {
+      setPhone("+44" + value);
+      setErrors((prev) => ({ ...prev, phone: false }));
+    }
+  };
+
   return (
     <>
       {leadListLoader ? (
@@ -451,30 +484,36 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 {" "}
                 <img src={Mailbtn} alt="mail" /> Email
               </button>
+
               <button
                 className={styles.buttonSms}
-                onClick={() => {
-                  handleResponseChange("sms");
-                  window.location.href = `mailto:${user.email}`;
-                }}
+                // onClick={() => {
+                //   handleResponseChange("sms");
+                //   window.location.href = `mailto:${user.email}`;
+                // }}
+                onClick={handleSmsClick}
               >
                 <img src={smsBtn} alt="sms" /> SMS
               </button>
+
               <button
                 className={styles.buttonSms}
-                onClick={() => {
-                  handleResponseChange("mobile");
-                  window.location.href = `tel:${user.phoneNumber}`;
-                }}
+                // onClick={() => {
+                //   handleResponseChange("mobile");
+                //   window.location.href = `tel:${user.phoneNumber}`;
+                // }}
+                onClick={handlePhoneChange}
               >
                 <img src={phoneBtn} alt="phone" /> Call
               </button>
+
               <button
                 className={styles.buttonSms}
-                onClick={() => {
-                  handleResponseChange("Whatsapp");
-                  window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
-                }}
+                // onClick={() => {
+                //   handleResponseChange("Whatsapp");
+                //   window.open(`https://wa.me/${user.phoneNumber}`, "_blank");
+                // }}
+                onClick={handleWhatsAppClick}
               >
                 <img src={whatsappBtn} alt="whatsapp" /> WhatsApp
               </button>

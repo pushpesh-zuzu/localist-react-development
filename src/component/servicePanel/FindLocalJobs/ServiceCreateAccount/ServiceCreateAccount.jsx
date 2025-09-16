@@ -211,7 +211,7 @@ const ServiceCreateAccount = () => {
             if (latestPhoneRef.current === currentPhone) {
               if (result?.success === true) {
                 setPhoneCheck(true);
-                showToast("success", "Valid Phone");
+                // showToast("success", "Valid Phone");
               } else {
                 setPhoneCheck(false);
               }

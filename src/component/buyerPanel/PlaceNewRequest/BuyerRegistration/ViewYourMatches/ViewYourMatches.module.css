@@ -17,6 +17,25 @@
   flex-direction: column;
 }
 
+.inputWithPrefix {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.prefix {
+  position: absolute;
+  left: 10px;
+  color: #555;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.inputWithPrefix input {
+  padding-left: 40px; /* space for +44 */
+  width: 100%;
+}
+
 .prefix {
   padding: 14px;
   background: #f3f3f3;

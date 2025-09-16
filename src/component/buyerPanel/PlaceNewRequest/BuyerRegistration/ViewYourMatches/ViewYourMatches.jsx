@@ -42,6 +42,11 @@ const ViewYourMatches = ({
     setError(false);
   };
   const handleSubmit = () => {
+    if (phoneNumber.startsWith("0")) {
+      showToast("error", "Phone number should not start with '0'.");
+      return;
+    }
+
     if (phoneNumber.length !== 10) {
       setError(true);
       return;
@@ -154,11 +159,16 @@ const ViewYourMatches = ({
 
                 // ❌ Remove everything except numbers
                 value = value.replace(/\D/g, "");
-                setPhoneNumber(value);
 
                 if (value.startsWith("44")) {
                   value = value.slice(2);
                 }
+
+                if (value.length === 1 && value === "0") {
+                  showToast("error", "Phone number should not start with '0'.");
+                  return;
+                }
+                setPhoneNumber(value);
 
                 // ✅ Sirf 10 digits allow karo
                 if (value.length <= 10) {

@@ -89,6 +89,11 @@ const EmailMatch = ({
   };
 
   const handleSubmit = () => {
+    if (phone.startsWith("0")) {
+      showToast("error", "Please enter phone number without '0'");
+      return;
+    }
+
     const newErrors = {
       email: !email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email),
       name: !name.trim(),
@@ -132,7 +137,7 @@ const EmailMatch = ({
       //     nextStep();
       //   }
       // });
-     const formData = new FormData();
+      const formData = new FormData();
       formData.append("email", email);
       formData.append("name", name);
       formData.append("phone", phone);
@@ -245,7 +250,7 @@ const EmailMatch = ({
             </span>
           )}
 
-          <label className={styles.label}>Phone Numbers</label>
+          <label className={styles.label}>Phone Number</label>
           {/* <div className={styles.phoneWrapper}>
             <span className={styles.prefix}>+44</span>
             <input
