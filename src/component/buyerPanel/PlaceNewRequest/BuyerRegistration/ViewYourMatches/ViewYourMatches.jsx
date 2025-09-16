@@ -43,7 +43,7 @@ const ViewYourMatches = ({
   };
   const handleSubmit = () => {
     if (phoneNumber.startsWith("0")) {
-      showToast("error", "Phone number should not start with '0'.");
+      showToast("error", "Please enter phone number without '0'.");
       return;
     }
 
@@ -165,7 +165,7 @@ const ViewYourMatches = ({
                 }
 
                 if (value.length === 1 && value === "0") {
-                  showToast("error", "Phone number should not start with '0'.");
+                  showToast("error", "Please enter phone number without '0'.");
                   return;
                 }
                 setPhoneNumber(value);
