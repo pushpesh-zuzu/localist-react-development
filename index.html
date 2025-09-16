@@ -31,7 +31,6 @@
       gtag("js", new Date());
       gtag("config", "G-QJ5NH8NF5Q");
     </script>
-    
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
@@ -41,11 +40,11 @@
       content="width=device-width, initial-scale=1.0,  maximum-scale=1"
     />
     <!-- 1. Preconnect for Google Fonts -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- 3. Global CSS: render-blocking to prevent FOUC during SSR dev -->
-    <!-- <link rel="stylesheet" href="/src/index.css" /> -->
+    <link rel="stylesheet" href="/src/index.css" />
     <link rel="stylesheet" href="/src/App.css" />
 
     <!-- 4. Optimized Google Fonts (Single Request) -->
@@ -55,12 +54,12 @@
       media="print"
       onload="this.media='all'"
     />
-    <!-- <noscript>
+    <noscript>
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap"
       />
-    </noscript> -->
+    </noscript>
 
     <!-- 5. Preload Important JS -->
     <link rel="modulepreload" href="/src/entry-client.jsx" />
@@ -69,7 +68,7 @@
     <!--css-outlet-->
     
     <!-- Google Tag Manager -->
-    <!-- <script>
+    <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -80,21 +79,21 @@
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-TKD2TB3J");
-    </script> -->
+    </script>
     <!-- End Google Tag Manager -->
   </head>
   <body>
     <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/entry-client.jsx"></script>
     <!-- Google Tag Manager (noscript) -->
-    <noscript
+    <!-- <noscript
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J"
         height="0"
         width="0"
         style="display: none; visibility: hidden"
       ></iframe
-    ></noscript>
+    ></noscript> -->
     <!-- End Google Tag Manager (noscript) -->
   </body>
 </html>
