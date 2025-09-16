@@ -70,14 +70,9 @@ const PopularService = ({ closeModal }) => {
     setShow(false);
     setSelectedServiceId({ id: null, name: "" });
   };
- useEffect(() => {
-    if (typeof window !== "undefined" && (!popularList || popularList.length === 0)) {
-      dispatch(getPopularServiceList());
-    }
-    else{
-      setInitialLoader(false)
-    }
-  }, [dispatch, popularList]);
+  useEffect(() => {
+    dispatch(getPopularServiceList())
+  }, [])
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (slider.current) {

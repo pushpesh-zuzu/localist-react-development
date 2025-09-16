@@ -43,7 +43,7 @@ const ServiceCategory = () => {
         <h2 className={styles.ServiceCategoryheading}>
           View Our <span>Service Categories</span>
         </h2>
-      { (popularLoader || initialLoader)  ? <Spin style={{color:"white"}}/> : <div 
+      { popularLoader  ? <Spin style={{color:"white"}}/> : <div 
       // className={styles.ServiceCategory} later we uncomment this css and remove inline css inside style when more data we show more than one card
             style={{display:"flex",justifyContent:'center', maxWidth:'fit-content',margin:'auto' }}
       >
