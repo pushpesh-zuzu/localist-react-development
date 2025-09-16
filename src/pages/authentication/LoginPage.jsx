@@ -63,13 +63,9 @@ const LoginPage = () => {
         if (result?.success) {
           showToast("success", result?.message || "Login successful!");
           if (result?.data?.active_status === 1) {
-            navigate("/sellers/leads");
-            setTimeout(() => window.location.reload(), 100);
-            window.location.reload();
+            navigate("/sellers/leads", { replace: true });
           } else if (result?.data?.active_status === 2) {
-            navigate("/buyers/create");
-            setTimeout(() => window.location.reload(), 100);
-            window.location.reload();
+            navigate("/buyers/create", { replace: true });
           }
         } else {
           showToast(
