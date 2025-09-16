@@ -6,7 +6,7 @@ import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
-import { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 // import {
 //   allSubMenuData,
 //   getChildRoute,
@@ -184,6 +184,11 @@ const LogoComponent = () => {
   }, [location.pathname]);
 
   const content = () => {
+    const handleMouseEnter = useCallback((index) => setMouseHover(index), []);
+    const handleMouseLeave = useCallback(() => {
+      setMouseHover("");
+    }, []);
+
     return (
       <div
         className={styles.popover_container}
@@ -221,8 +226,8 @@ const LogoComponent = () => {
                   <div
                     key={index}
                     className={styles.popover_content}
-                    onMouseEnter={() => setMouseHover(index)}
-                    onMouseLeave={() => setMouseHover("")}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
                   >
                     <span className={styles.text_wrap}>
                       <img src={item?.icon} width={16} height={16} alt="icon" />
@@ -300,8 +305,8 @@ const LogoComponent = () => {
                     <div key={index}>
                       <div
                         className={styles.popover_content}
-                        onMouseEnter={() => setMouseHover(index)}
-                        onMouseLeave={() => setMouseHover("")}
+                        onMouseEnter={() => handleMouseEnter(index)}
+                        onMouseLeave={handleMouseLeave}
                       >
                         {/* <span className={styles.text_wrap}>
                           {item.icon && (

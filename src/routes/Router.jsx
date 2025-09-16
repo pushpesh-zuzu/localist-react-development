@@ -1,4 +1,5 @@
 import { createBrowserRouter, createMemoryRouter } from "react-router-dom";
+import React, { lazy } from "react";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
 import LoginPage from "../pages/authentication/LoginPage";
@@ -44,7 +45,9 @@ import EmailNotification from "../component/SellerNotification/EmailNotification
 import BrowserNotification from "../component/SellerNotification/BrowserNotification/BrowserNotification";
 import BuyerFirstStep from "../component/buyerPanel/buyerClose/buyerCloseStep/buyerFirstStep";
 import BuyerSecondStep from "../component/buyerPanel/buyerClose/buyerSecondStep/BuyerSecond";
-import CloneSubThreeCategory from "../pages/CloneSubThreeCategory";
+const CloneSubThreeCategory = lazy(() =>
+  import("../pages/CloneSubThreeCategory")
+);
 import CloneSubTwoCategory from "../pages/CloneSubTwoCategory";
 import CloneSubCategoryTwoGardening from "../component/Level2/CloneSubCategoryTwoGardening";
 import SublocationPage from "../pages/SublocationPage";
@@ -62,6 +65,8 @@ import LandingArtificialGrassInstallation from "../component/LandingPage/Landing
 import LandingFenceAndGate from "../component/LandingPage/LandingFenceAndGate";
 import LandingDriway from "../component/LandingPage/LandingDriway";
 import LandingGatePPC from "../component/LandingPage/LandingGatePPC";
+import { Spin } from "antd";
+import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -197,11 +202,13 @@ const routes = [
         path: ":slug/",
         element: (
           <LocaleRedirect>
-            <CloneSubThreeCategory
-              routeName="Home & Garden / Gardening & Landscaping"
-              accountHeader="General Accounting"
-              subHeader="General Accountant"
-            />
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <CloneSubThreeCategory
+                routeName="Home & Garden / Gardening & Landscaping"
+                accountHeader="General Accounting"
+                subHeader="General Accountant"
+              />
+            </React.Suspense>
           </LocaleRedirect>
         ),
       },

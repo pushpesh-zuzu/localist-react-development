@@ -603,7 +603,11 @@
   .calloutArrow img {
     width: 4rem;
   }
-
+.searchButtonPhone{
+    position: absolute;
+     /* margin-right: 20px; */
+     right: 5%;
+   }
   .exampleTitle {
     font-size: 10px;
     line-height: 15px;
@@ -640,6 +644,7 @@
   .popularExamples {
     width: 222px;
   }
+ 
   /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
 } */
