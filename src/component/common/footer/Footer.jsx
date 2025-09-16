@@ -294,6 +294,7 @@ const Footer = () => {
                   if (!userToken && !registerToken) {
                     // Not logged in → Navigate
                     navigate(`/${lang}/${country}/sellers/create`);
+                    window.scrollTo(0, 0);
                   } else {
                     handleJoinAsProfessional();
                   }
