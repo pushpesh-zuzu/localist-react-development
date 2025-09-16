@@ -11,6 +11,7 @@ import { Spin } from "antd";
 
 const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [initialLoader,setInitialLoader] = useState(true)
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   // const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -20,6 +21,9 @@ const ServiceCategory = () => {
 // dispatch (getCategoriesList())
  if (typeof window !== "undefined" && (!allServiceList || allServiceList.length === 0)) {
       dispatch(getAllServiceList());
+    }
+    else{
+      setInitialLoader(false)
     }
   },[])
 
@@ -39,7 +43,7 @@ const ServiceCategory = () => {
         <h2 className={styles.ServiceCategoryheading}>
           View Our <span>Service Categories</span>
         </h2>
-      { popularLoader ? <Spin style={{color:"white"}}/> : <div 
+      { (popularLoader || initialLoader)  ? <Spin style={{color:"white"}}/> : <div 
       // className={styles.ServiceCategory} later we uncomment this css and remove inline css inside style when more data we show more than one card
             style={{display:"flex",justifyContent:'center', maxWidth:'fit-content',margin:'auto' }}
       >

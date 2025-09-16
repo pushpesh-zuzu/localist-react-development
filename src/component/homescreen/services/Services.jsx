@@ -3,7 +3,7 @@ import styles from "./services.module.css";
 // import rightArrow from "../../../assets/Images/forwordArrow.svg";
 // import SpecificService from "./SpecificService";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllServiceList } from "../../../store/FindJobs/findJobSlice";
 import SliderComponent from "./SilderComponent";
 
@@ -38,11 +38,15 @@ const formatTitle = (title) => {
 
 const Services = () => {
   const { allServiceList } = useSelector((state) => state.findJobs);
+    const [initialLoader,setInitialLoader] = useState(true)
+  
   const dispatch = useDispatch();
 
    useEffect(() => {
     if (typeof window !== "undefined" && (!allServiceList || allServiceList.length === 0)) {
       dispatch(getAllServiceList());
+    }else{
+      setInitialLoader(false)
     }
   }, [dispatch, allServiceList]);;
 
@@ -57,6 +61,7 @@ const Services = () => {
                 <SliderComponent
                   subcategory={category?.subcategory}
                   categoryName={category.name}
+                  initialLoader={initialLoader}
                 />
               </div>
             )

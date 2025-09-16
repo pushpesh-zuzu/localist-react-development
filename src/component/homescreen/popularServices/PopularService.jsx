@@ -57,6 +57,7 @@ function AutoplayPlugin(slider) {
 const PopularService = ({ closeModal }) => {
   const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
   const [show, setShow] = useState(false)
+  const [initialLoader,setInitialLoader] = useState(true)
   const dispatch = useDispatch()
   const { popularList, popularLoader } = useSelector((state) => state.findJobs);
   const { userToken }  = useSelector((state)=> state.auth)
@@ -72,6 +73,9 @@ const PopularService = ({ closeModal }) => {
  useEffect(() => {
     if (typeof window !== "undefined" && (!popularList || popularList.length === 0)) {
       dispatch(getPopularServiceList());
+    }
+    else{
+      setInitialLoader(false)
     }
   }, [dispatch, popularList]);
   useEffect(() => {
@@ -122,7 +126,7 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={leftArrow} alt="Left" />
         </button>
-        {popularLoader ? <Spin /> : <>
+        {(popularLoader || initialLoader) ? <Spin /> : <>
           {/* Slider */}
           <div className={styles.sliderWrapper} >
             {popularList.length > 0 && (

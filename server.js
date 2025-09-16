@@ -37,8 +37,9 @@ async function createServer() {
     // Serve static assets but do NOT serve index.html so SSR can inject HTML
     app.use(
       express.static(resolve("dist/client"), {
-        maxAge: "1h",
+        maxAge: "1y",
         index: false,
+        immutable:true
       })
     );
   } else {
