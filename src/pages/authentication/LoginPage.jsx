@@ -13,6 +13,7 @@ import {
 } from "../../store/Auth/authSlice";
 import { showToast } from "../../utils";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const { Text } = Typography;
 
@@ -115,6 +116,9 @@ const LoginPage = () => {
 
   return (
     <div className="login-container">
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <div className="login-box">
         <h1 className="login-title">
           {passwordless ? (
