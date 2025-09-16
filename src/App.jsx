@@ -7,10 +7,12 @@ import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 
-function App({ initialUrl,hostname }) {
+function App({ initialUrl, hostname }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
+
+  console.log("version 1.2");
 
   const payloadRef = useRef(null);
 
@@ -49,7 +51,7 @@ function App({ initialUrl,hostname }) {
         "apartment",
         "city_old",
         "country_old",
-        "zipcode_old"
+        "zipcode_old",
       ];
 
       fields.forEach((field) => {
@@ -100,14 +102,15 @@ function App({ initialUrl,hostname }) {
 
   // Create the router once to avoid re-instantiation on every render (which can blank the Outlet on navigation in SSR/CSR)
   const router = useMemo(() => createAppRouter(initialUrl), []);
-const isDevEnvironment = typeof window !== 'undefined' 
-    ? window.location.hostname === 'dev.localists.com'
-    : hostname === 'dev.localists.com';
-                          // console.log(isDevEnvironment,'isDevEnvironment')
-                          // console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
-                          // console.log(hostname,'hostname')
+  const isDevEnvironment =
+    typeof window !== "undefined"
+      ? window.location.hostname === "dev.localists.com"
+      : hostname === "dev.localists.com";
+  // console.log(isDevEnvironment,'isDevEnvironment')
+  // console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
+  // console.log(hostname,'hostname')
   return (
-    <> 
+    <>
       {isDevEnvironment && (
         <Helmet>
           <meta name="robots" content="noindex" />
