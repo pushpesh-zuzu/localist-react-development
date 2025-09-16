@@ -8,7 +8,6 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Spin } from "antd";
 
 function AutoplayPlugin(slider) {
   let timeout;
@@ -75,7 +74,7 @@ const SliderComponent = ({ subcategory, categoryName, initialLoader }) => {
           slides: { perView: 1.4, spacing: 0 },
         },
       },
-    }
+    },
     [AutoplayPlugin]
   );
 
@@ -83,7 +82,9 @@ const SliderComponent = ({ subcategory, categoryName, initialLoader }) => {
     <>
       {subcategory?.length > 0 && (
         <>
+          {" "}
           <div>
+            {" "}
             <button
               className={styles.arrowLeft}
               onClick={() => slider.current?.prev()}
@@ -91,26 +92,20 @@ const SliderComponent = ({ subcategory, categoryName, initialLoader }) => {
               <img src={leftArrow} alt="Left" />
             </button>
             <div className={styles.sliderWrapper}>
-              {initialLoader ? (
-                <div className={styles.loaderWrapper}>
-                  <Spin />
-                </div>
-              ) : (
-                <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-                  {subcategory?.map((service, index) => (
-                    <div
-                      key={index}
-                      style={{ borderRadius: "20px" }}
-                      className={`keen-slider__slide ${styles.slide}`}
-                      onClick={() => handleOpen(service?.id, service?.name)}
-                    >
-                      <div style={{ padding: "9px", borderRadius: "20px" }}>
-                        {<SpecificService service={service} />}
-                      </div>
+              <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
+                {subcategory?.map((service, index) => (
+                  <div
+                    key={index}
+                    style={{ borderRadius: "20px" }}
+                    className={`keen-slider__slide ${styles.slide}`}
+                    onClick={() => handleOpen(service?.id, service?.name)}
+                  >
+                    <div style={{ padding: "9px", borderRadius: "20px" }}>
+                      <SpecificService service={service} />
                     </div>
-                  ))}
-                </div>
-              )}
+                  </div>
+                ))}
+              </div>
             </div>
             <button
               className={styles.arrowRight}
