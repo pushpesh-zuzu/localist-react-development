@@ -459,15 +459,19 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 {" "}
                 <img src={Mailbtn} alt="mail" /> Email
               </button>
+
               <button
                 className={styles.buttonSms}
                 onClick={() => {
                   handleResponseChange("sms");
-                  window.location.href = `tel:${formatPhoneNumber(user.sms)}`;
+                  window.location.href = `tel:${formatPhoneNumber(
+                    user.phoneNumber
+                  )}`;
                 }}
               >
                 <img src={smsBtn} alt="sms" /> SMS
               </button>
+
               <button
                 className={styles.buttonSms}
                 onClick={() => {
