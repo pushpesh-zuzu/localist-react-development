@@ -5,21 +5,21 @@ import WhatYouNeedIcon from "../../assets/Icons/WhatYouNeedIcon.png";
 import FreeQuotesIcon from "../../assets/Icons/FreeQuotesIcon.png";
 import accountant from "../../assets/Images/subcategory/accountant.png";
 import ReviewsImage from "../../assets/Images/subcategory/reviews_girl.png";
-import Driveway from "./serviceImg/Driveway-Installation.webp";
-import fenchinstal from "./serviceImg/Fence-&-Gate-Installation.webp";
-import Landscaping from "./serviceImg/Landscaping.webp";
-import Patio from "./serviceImg/Patio-Services.webp";
-import ArtificialGrass from "./serviceImg/ArtificialGrass.webp";
-import ArtificialGrassBanner from "./banners/ArtificialGrassInstallationBanner.webp";
-import LandscapingBanner from "./banners/landscapingandgardeningBanner.webp";
-import PatioServicesBanner from "./banners/PatioServicesBanner.webp";
-import DrivewayInstallationBanner from "./banners/DrivewayInstallationBanner.webp";
-import FenceGateInstallationBanner from "./banners/FenceGate-InstallationBanner.webp";
-import EllesmerePort from "./cities/EllesmerePort.webp";
-import Liverpool from "./cities/Liverpool.webp";
-import Manchester from "./cities/Manchester.webp";
-import Warrington from "./cities/Warrington.webp";
-import Chester from "./cities/Chester.webp";
+import Driveway from "../../assets/Images/servicesLevels/Driveway-Installation.jpg";
+import fenchinstal from "../../assets/Images/servicesLevels/Fence-&-Gate-Installation.jpg";
+import Landscaping from "../../assets/Images/servicesLevels/Landscaping.jpg";
+import Patio from "../../assets/Images/servicesLevels/Patio-Services.jpg";
+import ArtificialGrass from "../../assets/Images/servicesLevels/ArtificialGrass.jpg";
+import ArtificialGrassBanner from "../../assets/Images/servicesLevels/banner/ArtificialGrassInstallationBanner.jpg";
+import LandscapingBanner from "../../assets/Images/servicesLevels/banner/landscapingandgardeningBanner.jpg";
+import PatioServicesBanner from "../../assets/Images/servicesLevels/banner/PatioServicesBanner.jpg";
+import DrivewayInstallationBanner from "../../assets/Images/servicesLevels/banner/DrivewayInstallationBanner.jpg";
+import FenceGateInstallationBanner from "../../assets/banners/FenceGate-InstallationBanner.jpg";
+import EllesmerePort from "../../assets/Images/servicesLevels/cities/EllesmerePort.jpg";
+import Liverpool from "../../assets/Images/servicesLevels/cities/Liverpool.jpg";
+import Manchester from "../../assets/Images/servicesLevels/cities/Manchester.jpg";
+import Warrington from "../../assets/Images/servicesLevels/cities/Warrington.jpg";
+import Chester from "../../assets/Images/servicesLevels/cities/Chester.jpg";
 
 const POPULAR_CITIES = [
   { city_image: Liverpool, city_name: "Liverpool" },
@@ -1141,43 +1141,43 @@ const regionsData = {
   ],
 };
 
-// export const POPULARCITY = {
-//   "fencing-contractors-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: Manchester },
-//     { id: 3, city_name: "Chester", city_image: Chester },
-//     { id: 4, city_name: "Warrington", city_image: Warrington },
-//     { id: 5, city_name: "Ellesmere", city_image: EllesmerePort },
-//   ],
-//   "driveway-installers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "patio-layers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "landscape-gardeners-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "artificial-grass-installers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-// };
+export const POPULARCITY = {
+  "fencing-contractors-near-me": [
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: Manchester },
+    { id: 3, city_name: "Chester", city_image: Chester },
+    { id: 4, city_name: "Warrington", city_image: Warrington },
+    { id: 5, city_name: "Ellesmere", city_image: EllesmerePort },
+  ],
+  "driveway-installers-near-me": [
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
+  ],
+  "patio-layers-near-me": [
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
+  ],
+  "landscape-gardeners-near-me": [
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
+  ],
+  "artificial-grass-installers-near-me": [
+    { id: 1, city_name: "Liverpool", city_image: Liverpool },
+    { id: 2, city_name: "Manchester", city_image: birmingham },
+    { id: 3, city_name: "Chester", city_image: liverpool },
+    { id: 4, city_name: "Warrington", city_image: london },
+    { id: 5, city_name: "Ellesmere", city_image: london },
+  ],
+};
 
 const HowItWorksData = {
   "fencing-contractors-near-me": [
