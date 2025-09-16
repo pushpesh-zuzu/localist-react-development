@@ -156,7 +156,7 @@ const Dashboard = () => {
                     <p>
                       <b>You win new work — no hassle,</b>
                       <p>
-                        no hidden fees No hidden costs or long term commitment.
+                        No hidden fees No hidden costs or long term commitment.
                         There are no commissions or extra costs — just a clear,
                         simple way to grow your business through Localists.com.
                       </p>{" "}

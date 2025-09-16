@@ -348,7 +348,7 @@ const MyResponse = () => {
                   <div className={styles.contactItem}>
                     <img src={BluePhoneIcon} alt="" />
                     <span onClick={() => handlePhoneOpen(item)}>
-                      {item?.phone}
+                      +44{item?.phone}
                     </span>
                   </div>
                   <div className={styles.contactItem}>

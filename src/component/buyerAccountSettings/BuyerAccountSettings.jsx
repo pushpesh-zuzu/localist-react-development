@@ -15,7 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_IMAGE_URL, showToast, updateLocalStorageValue } from "../../utils";
+import {
+  BASE_IMAGE_URL,
+  showToast,
+  updateLocalStorageValue,
+} from "../../utils";
 import { setUserToken } from "../../store/Auth/authSlice";
 import { setRegisterData } from "../../store/FindJobs/findJobSlice";
 import { baseURL } from "../../Api/axiosInstance";
@@ -34,11 +38,9 @@ const BuyerAccountSettings = () => {
     phone: "",
     profile_image: "",
   });
-   const {  registerData } = useSelector(
-      (state) => state.findJobs
-    );
-    const userNameFirstLetter = userDetails?.name?.[0] || ''
-    console.log(userNameFirstLetter,"pp")
+  const { registerData } = useSelector((state) => state.findJobs);
+  const userNameFirstLetter = userDetails?.name?.[0] || "";
+  console.log(userNameFirstLetter, "pp");
 
   useEffect(() => {
     dispatch(updateProfileData());
@@ -64,9 +66,9 @@ const BuyerAccountSettings = () => {
       formData.append("image_file", file);
 
       dispatch(updateProfileImageData(formData)).then((result) => {
-        if(result){
-          showToast("success",result?.message)
-              }
+        if (result) {
+          showToast("success", result?.message);
+        }
       });
     }
   };
@@ -119,24 +121,21 @@ const BuyerAccountSettings = () => {
     };
     dispatch(updateUserIfoData(infoData)).then((result) => {
       if (result?.success) {
-         updateLocalStorageValue('barkUserToken', 'name', userDetails?.name)
-            updateLocalStorageValue("registerDataToken","name",userDetails?.name)
-             const storedData = localStorage.getItem("barkUserToken");
-             const registerData = localStorage.getItem("registerDataToken")
-        
-        
-            const parsedData = JSON.parse(storedData);
-            const registerDatas = JSON.parse(registerData)
-            if(parsedData) {
+        updateLocalStorageValue("barkUserToken", "name", userDetails?.name);
+        updateLocalStorageValue("registerDataToken", "name", userDetails?.name);
+        const storedData = localStorage.getItem("barkUserToken");
+        const registerData = localStorage.getItem("registerDataToken");
 
-              parsedData.name = userDetails?.name;
-              dispatch(setUserToken(parsedData));
-            }
-            if(registerDatas){
-
-              registerDatas.name = userDetails?.name
-              dispatch(setRegisterData(registerDatas))
-            }
+        const parsedData = JSON.parse(storedData);
+        const registerDatas = JSON.parse(registerData);
+        if (parsedData) {
+          parsedData.name = userDetails?.name;
+          dispatch(setUserToken(parsedData));
+        }
+        if (registerDatas) {
+          registerDatas.name = userDetails?.name;
+          dispatch(setRegisterData(registerDatas));
+        }
         showToast(
           "info",
           result?.message || "User Update Details successfully!"
@@ -154,7 +153,7 @@ const BuyerAccountSettings = () => {
     password_confirmation: "",
     error: "",
   });
-const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
+  const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`;
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value, error: "" });
@@ -243,21 +242,28 @@ const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
       <h2 className={styles.heading}>Account settings</h2>
 
       {/* {userToken?.active_status === 2 && registerData?.active_status === 2 && ( */}
-        <div className={styles.infoBox}>
-          <p>
-            <span>
-              <img src={iIcon} alt="Profile" />
-            </span>
+      <div className={styles.infoBox}>
+        <p>
+          <span>
+            <img src={iIcon} alt="Profile" />
+          </span>
+          <div>
+            <div style={{ fontWeight: "800", marginBottom: "10px" }}>
+              {" "}
+              Make sure your contact details are up to date so professionals can
+              reach you.
+            </div>
+
             <div>
-          <div style={{fontWeight:"800",marginBottom:"10px"}}> Make sure your contact details are up to date so professionals can reach you.</div>
-         
- <div >If you no longer need the service, please remember to close your request.</div>
-</div>
-          </p>
-          <Link className={styles.requestButton} to='/buyers/create'>
-            Go to My Requests
-          </Link>
-        </div>
+              If you no longer need the service, please remember to close your
+              request.
+            </div>
+          </div>
+        </p>
+        <Link className={styles.requestButton} to="/buyers/create">
+          Go to My Requests
+        </Link>
+      </div>
       {/* // )} */}
 
       <div className={styles.detailsBox}>
@@ -267,32 +273,31 @@ const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
             <span>
               <>
                 {profileImageLoader ? (
-  <Spin
-    indicator={
-      <LoadingOutlined spin style={{ color: "blue" }} />
-    }
-  />
-) : userDetails?.profile_image ? (
-  <img
-    src={`${BASE_IMAGE_URLs}/${userDetails.profile_image}`}
-    alt="Profile"
-    loading="lazy"
-    onError={(e) => {
-      e.target.onerror = null;
-      e.target.src = defaultImage;
-    }}
-    style={{
-      width: "62px",
-      height: "62px",
-      borderRadius: "50%",
-    }}
-  />
-) : (
-  <div className={styles.CompanyText}>
-    {userNameFirstLetter?.toUpperCase()}
-  </div>
-)}
-
+                  <Spin
+                    indicator={
+                      <LoadingOutlined spin style={{ color: "blue" }} />
+                    }
+                  />
+                ) : userDetails?.profile_image ? (
+                  <img
+                    src={`${BASE_IMAGE_URLs}/${userDetails.profile_image}`}
+                    alt="Profile"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = defaultImage;
+                    }}
+                    style={{
+                      width: "62px",
+                      height: "62px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                ) : (
+                  <div className={styles.CompanyText}>
+                    {userNameFirstLetter?.toUpperCase()}
+                  </div>
+                )}
               </>
             </span>
           </div>
@@ -432,7 +437,7 @@ const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
                   onClick={() => setNewPasswordVisible(!newPasswordVisible)}
                   className={styles.eyeIcon}
                 >
-                  {newPasswordVisible ? (
+                  {!newPasswordVisible ? (
                     <EyeInvisibleOutlined />
                   ) : (
                     <EyeOutlined />
@@ -463,7 +468,7 @@ const BASE_IMAGE_URLs = `${baseURL}storage/app/public/images/users`
                   }
                   className={styles.eyeIcon}
                 >
-                  {confirmPasswordVisible ? (
+                  {!confirmPasswordVisible ? (
                     <EyeInvisibleOutlined />
                   ) : (
                     <EyeOutlined />
