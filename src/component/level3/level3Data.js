@@ -20,7 +20,6 @@ import Liverpool from "../../assets/Images/servicesLevels/cities/Liverpool.jpg";
 import Manchester from "../../assets/Images/servicesLevels/cities/Manchester.jpg";
 import Warrington from "../../assets/Images/servicesLevels/cities/Warrington.jpg";
 import Chester from "../../assets/Images/servicesLevels/cities/Chester.jpg";
-import { title } from "framer-motion/client";
 
 const POPULAR_CITIES = [
   { city_image: Liverpool, city_name: "Liverpool" },

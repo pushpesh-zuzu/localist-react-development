@@ -121,7 +121,7 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={leftArrow} alt="Left" />
         </button>
-        {(popularLoader || initialLoader) ? <Spin /> : <>
+        {(popularLoader) ? <Spin /> : <>
           {/* Slider */}
           <div className={styles.sliderWrapper} >
             {popularList.length > 0 && (

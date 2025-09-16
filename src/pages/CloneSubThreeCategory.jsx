@@ -25,7 +25,7 @@ import {
   HowItWorksData,
   LEVEL_THIRD_SERVICES_NAME,
   OTHER_SERVICES_DATA,
-  POPULARCITY,
+  // POPULARCITY,
   regionsData,
   RELATED_PRICE_DATA,
   RELATED_SERVICES_DATA,
@@ -62,7 +62,7 @@ const LevelThreePage = ({}) => {
     return HowItWorksData[slug] || null;
   }
   const transformedData = transformFenceInstallersData(regionsData, slug);
-  const popularCity = getDataByKey(POPULARCITY, slug);
+  // const popularCity = getDataByKey(POPULARCITY, slug);
   const RELATED_PRICE = getDataByKey(RELATED_PRICE_DATA, slug);
   const RELATED_SEERVICE = getDataByKey(RELATED_SERVICES_DATA, slug);
   const RELATED_REVIEW = getDataByKey(REVIEWS_DATA, slug);
