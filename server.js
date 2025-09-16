@@ -4,13 +4,22 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import express from "express";
 import { createServer as createViteServer } from "vite";
+import compression from "compression";
+import NodeCache from "node-cache";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, p);
 
+// Initialize cache with 10 minute TTL
+const htmlCache = new NodeCache({ stdTTL: 600, checkperiod: 120 });
+const dataCache = new NodeCache({ stdTTL: 300, checkperiod: 120 });
+
 async function createServer() {
   const app = express();
   const isProd = process.env.NODE_ENV === "production";
+
+  // Enable compression for all responses
+  app.use(compression({ level: 6 }));
 
   let vite, template, render;
   let manifest = {};
@@ -39,7 +48,7 @@ async function createServer() {
       express.static(resolve("dist/client"), {
         maxAge: "1y",
         index: false,
-        immutable:true
+        immutable: true,
       })
     );
   } else {
@@ -51,9 +60,29 @@ async function createServer() {
   }
 
   app.use(async (req, res, next) => {
+    // Skip caching for non-GET requests
+    if (req.method !== "GET") {
+      return next();
+    }
+
     try {
       const url = req.originalUrl;
-      const hostname = req.hostname; // Extract hostname from request
+      const hostname = req.hostname;
+
+      // Generate cache key
+      const cacheKey = `${hostname}:${url}`;
+
+      // Check cache in production mode
+      if (isProd) {
+        const cachedHtml = htmlCache.get(cacheKey);
+        if (cachedHtml) {
+          console.log("Cache hit for:", cacheKey);
+          return res
+            .status(200)
+            .set({ "Content-Type": "text/html" })
+            .end(cachedHtml);
+        }
+      }
 
       let tpl = template;
       if (!isProd) {
@@ -96,6 +125,12 @@ async function createServer() {
         .replace("<!--css-outlet-->", `${headContent}\n${cssInline}`)
         .replace("</body>", `${stateScript}</body>`);
 
+      // Cache the response in production mode
+      if (isProd) {
+        htmlCache.set(cacheKey, html);
+        console.log("Cached response for:", cacheKey);
+      }
+
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e) {
       if (!isProd && vite) {
@@ -113,7 +148,11 @@ async function createServer() {
     console.log(
       `${serverType} running at http://${host}:${port} (mode: ${isProd ? "production" : "development"})`
     );
+    console.log("HTML caching enabled:", isProd);
   });
 }
 
-createServer();
+createServer().catch((error) => {
+  console.error("Server failed to start:", error);
+  process.exit(1);
+});
