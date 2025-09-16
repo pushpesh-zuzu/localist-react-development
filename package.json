@@ -10,7 +10,8 @@
     "build:ssr": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "serve": "cross-env NODE_ENV=production node server.js",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build:critical": "vite build && critical dist/client/index.html --base=dist/client/ --inline --css dist/client/assets/index-*.css --width 1300 --height 900"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
@@ -46,6 +47,7 @@
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "critical": "^7.2.1",
     "eslint": "^9.19.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.0.0",
