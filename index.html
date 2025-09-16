@@ -31,6 +31,47 @@
       gtag("js", new Date());
       gtag("config", "G-QJ5NH8NF5Q");
     </script> -->
+     <!-- Load tracking scripts AFTER LCP -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      function loadTrackingScripts() {
+        // Google Ads
+        const adsScript = document.createElement('script');
+        adsScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17528251553';
+        adsScript.async = true;
+        document.head.appendChild(adsScript);
+
+        // Google Analytics
+        const gaScript = document.createElement('script');
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-QJ5NH8NF5Q';
+        gaScript.async = true;
+        document.head.appendChild(gaScript);
+
+        // GTAG Configs
+        const configScript = document.createElement('script');
+        configScript.innerHTML = `
+          gtag('js', new Date());
+          gtag('config', 'AW-17528251553');
+          gtag('config', 'G-QJ5NH8NF5Q');
+        `;
+        document.head.appendChild(configScript);
+
+        // Google Tag Manager
+        const gtmScript = document.createElement('script');
+        gtmScript.async = true;
+        gtmScript.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TKD2TB3J';
+        document.head.appendChild(gtmScript);
+      }
+
+      // Delay third-party scripts to improve LCP
+      window.addEventListener('load', () => {
+        setTimeout(loadTrackingScripts, 2000);
+      });
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
