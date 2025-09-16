@@ -35,6 +35,18 @@ const ContactSuccessModal = ({
 
   if (!isOpen) return null;
 
+  const formatPhoneNumber = (number) => {
+    if (!number) return "";
+    let clean = number.toString().replace(/\D/g, "");
+    if (clean.startsWith("44")) {
+      return `+${clean}`;
+    } else if (clean.startsWith("0")) {
+      return `+44${clean.substring(1)}`;
+    } else {
+      return `+44${clean}`;
+    }
+  };
+
   const handleResponseChange = (clickName) => {
     console.log(clickName, "click");
 
@@ -68,26 +80,20 @@ const ContactSuccessModal = ({
     }
 
     let url = null;
-    const phoneNumber =
-      details?.phone || detail?.phone || repliesBtn?.phone || "";
-
-    if (phoneNumber) {
-      phoneNumber = phoneNumber.replace(/^0+/, ""); // leading zero remove
-      if (!phoneNumber.startsWith("+44")) {
-        phoneNumber = `+44${phoneNumber}`;
-      }
-    }
+    // const phoneNumber =
+    //   details?.phone || detail?.phone || repliesBtn?.phone || "";
+    const rawPhone = details?.phone || detail?.phone || repliesBtn?.phone || "";
+    const phoneNumber = formatPhoneNumber(rawPhone);
 
     const email =
       details?.customer?.email || detail?.email || repliesBtn?.email || "";
-
     console.log(phoneNumber, email, "phoneNumber");
     if (clickName?.name === "mobile") {
       responseStatus.type = "mobile";
       url = `tel:${phoneNumber}`;
     } else if (clickName?.name === "Whatsapp") {
       responseStatus.type = "Whatsapp";
-      url = `https://wa.me/${phoneNumber.replace("+", "")}`;
+      url = `https://wa.me/${phoneNumber}`;
     } else if (clickName?.name === "email") {
       responseStatus.type = "email";
       url = `mailto:${email}`;
