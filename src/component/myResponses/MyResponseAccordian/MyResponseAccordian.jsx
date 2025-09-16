@@ -464,7 +464,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
                 className={styles.buttonSms}
                 onClick={() => {
                   handleResponseChange("sms");
-                  window.location.href = `tel:${formatPhoneNumber(
+                  window.location.href = `sms:${formatPhoneNumber(
                     user.phoneNumber
                   )}`;
                 }}
