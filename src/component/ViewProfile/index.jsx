@@ -174,6 +174,8 @@ const ViewProfiles = () => {
     (service) => service?.user_services?.name
   );
 
+  console.log(viewProfileData, "viewProfileData");
+
   const expandRadiusLoader = useSelector(
     (state) => state?.leadSetting?.expandRadiusLoader
   );
@@ -186,6 +188,8 @@ const ViewProfiles = () => {
   }, []);
 
   const servicesArray = profileData?.services || [];
+  console.log(profileData, "profileData");
+
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
     .filter(Boolean);
@@ -451,7 +455,7 @@ const ViewProfiles = () => {
               <div className={styles.mailText}>
                 <img src={emailImg} alt="Email" />
                 <span>
-                  {profileData?.lead_purchased === 1
+                  {profileData?.lead_purchased === 0
                     ? profileData?.company_email || profileData?.email
                     : maskEmail(
                         profileData?.company_email || profileData?.email
@@ -461,7 +465,7 @@ const ViewProfiles = () => {
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
-                  {profileData?.lead_purchased === 1
+                  {profileData?.lead_purchased === 0
                     ? profileData?.company_phone ||
                       profileData?.phone ||
                       "0000000000"

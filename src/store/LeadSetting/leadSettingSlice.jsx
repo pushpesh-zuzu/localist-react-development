@@ -1247,9 +1247,11 @@ const leadSettingSlice = createSlice({
     },
     setViewProfileData(state, action) {
       state.viewProfileData = action.payload;
+      console.log(action.payload, "viewProfileData");
     },
     setReviewProfile(state, action) {
       state.reviewProfileData = action.payload;
+      console.log(action.payload, "viewProfileData");
     },
   },
 });
