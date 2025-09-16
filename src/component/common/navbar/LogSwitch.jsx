@@ -329,7 +329,7 @@ const LogSwitch = () => {
 
         {showHamburgerIcon ? (
           <div
-            ref={menuRef}
+            // ref={menuRef}
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -355,7 +355,7 @@ const LogSwitch = () => {
             <div
               className={`${styles.inputWrapper} ${styles.desktopOnly}`}
               style={{ position: "relative" }}
-              // ref={wrapperRef}
+              ref={wrapperRef}
             >
               <img
                 src={searchIcon}
@@ -415,7 +415,7 @@ const LogSwitch = () => {
 
         <div
           className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}
-          ref={menuRef}
+          // ref={menuRef}
         >
           {getUserType() == 1 && !viewProfile && (
             <>
