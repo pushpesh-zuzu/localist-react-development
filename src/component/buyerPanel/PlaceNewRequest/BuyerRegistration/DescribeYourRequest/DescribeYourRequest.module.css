@@ -39,7 +39,7 @@
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
-.privacy{
+.privacy {
   font-weight: 700;
   color: #000 !important;
 }
@@ -418,6 +418,14 @@
 }
 
 @media (max-width: 480px) {
+  .buttonWrapper {
+    margin-top: 10.44px;
+  }
+
+  .textLine2 {
+    font-size: 12px;
+  }
+
   .closeButton {
     position: absolute;
     top: 0px;
@@ -436,7 +444,7 @@
     text-align: start;
     font-size: 13px;
     font-weight: 600;
-    margin-top: 12px;
+    /* margin-top: 12px; */
   }
   .header {
     font-size: 18px;
@@ -445,9 +453,13 @@
     margin-top: 0px;
   }
 
+  .progressContainer {
+    margin-top: 2px;
+  }
+
   .header h2 {
     font-size: 20px;
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
   .textareaLabel {
     font-size: 14px;
