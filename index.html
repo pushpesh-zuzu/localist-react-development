@@ -6,45 +6,90 @@
     <!-- <link rel="icon" type="image/jpeg" href="./favicon.jpeg" /> -->
 
     <!-- Google tag (gtag.js) -->
-    <script
+    <!-- <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=AW-17528251553"
-    ></script>
-    <script>
+    ></script> -->
+    <!-- <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
       gtag("config", "AW-17528251553");
-    </script>
+    </script> -->
     <!-- Google tag (gtag.js) -->
-    <script
+    <!-- <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-QJ5NH8NF5Q"
-    ></script>
-    <script>
+    ></script> -->
+    <!-- <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
       gtag("config", "G-QJ5NH8NF5Q");
+    </script> -->
+    <!-- Load both scripts after LCP -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      function loadTrackingScripts() {
+        // Load AW-17528251553
+        const adScript = document.createElement("script");
+        adScript.async = true;
+        adScript.src =
+          "https://www.googletagmanager.com/gtag/js?id=AW-17528251553";
+        document.head.appendChild(adScript);
+
+        const adConfig = document.createElement("script");
+        adConfig.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17528251553');
+        `;
+        document.head.appendChild(adConfig);
+
+        // Load G-QJ5NH8NF5Q
+        const gaScript = document.createElement("script");
+        gaScript.async = true;
+        gaScript.src =
+          "https://www.googletagmanager.com/gtag/js?id=G-QJ5NH8NF5Q";
+        document.head.appendChild(gaScript);
+
+        const gaConfig = document.createElement("script");
+        gaConfig.innerHTML = `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-QJ5NH8NF5Q');
+        `;
+        document.head.appendChild(gaConfig);
+      }
+
+      window.addEventListener("load", () => {
+        setTimeout(loadTrackingScripts, 2000);
+      });
     </script>
-    <link
+    <!-- <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0,  maximum-scale=1"
     />
     <!-- 1. Preconnect for Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
 
     <!-- 3. Global CSS: render-blocking to prevent FOUC during SSR dev -->
-    <link rel="stylesheet" href="/src/index.css" />
+    <!-- <link rel="stylesheet" href="/src/index.css" /> -->
     <link rel="stylesheet" href="/src/App.css" />
 
     <!-- 4. Optimized Google Fonts (Single Request) -->
@@ -54,21 +99,21 @@
       media="print"
       onload="this.media='all'"
     />
-    <noscript>
+    <!-- <noscript>
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap"
       />
-    </noscript>
+    </noscript> -->
 
     <!-- 5. Preload Important JS -->
     <link rel="modulepreload" href="/src/entry-client.jsx" />
 
     <meta property="og:type" content="website" />
     <!--css-outlet-->
-    
+
     <!-- Google Tag Manager -->
-    <script>
+    <!-- <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -79,7 +124,7 @@
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-TKD2TB3J");
-    </script>
+    </script> -->
     <!-- End Google Tag Manager -->
   </head>
   <body>
