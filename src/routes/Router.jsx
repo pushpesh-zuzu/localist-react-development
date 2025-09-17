@@ -254,22 +254,16 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: "/:lang/:country",
-        element: <MainLayout />,
-        children: [
-          ...landingPages.map(({ path, Component }) => ({
-            path,
-            element: (
-              <LocaleRedirect>
-                <React.Suspense fallback={<FullScreenSpinner />}>
-                  <Component />
-                </React.Suspense>
-              </LocaleRedirect>
-            ),
-          })),
-        ],
-      },
+      ...landingPages.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
     ],
   },
 
