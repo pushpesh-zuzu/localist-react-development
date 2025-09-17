@@ -436,7 +436,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                 <img src={BluePhoneIcon} alt="" />
                                 <span>
                                   {item?.phone
-                                    ? `${item?.phone.substring(
+                                    ? `+44${item?.phone.substring(
                                         0,
                                         2
                                       )}${"*".repeat(item?.phone.length - 2)}`
