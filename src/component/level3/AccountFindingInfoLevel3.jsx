@@ -14,9 +14,10 @@ const AccountFindingInfoLevel3 = ({
     <div className={styles.findAccountInfoContainer}>
       {/* <p className={styles.breadcrumb}> */}
       {/* {service && <span> {breadcrumb}</span>} */}
-      <Breadcrumb breadcrumb={breadcrumb} />
+      
       {/* </p> */}
       <div className={styles.infoContainer}>
+        <Breadcrumb breadcrumb={breadcrumb} />
         <h2 className={styles.title}>
           Vetted{" "}
           <span className={styles.highlight}>

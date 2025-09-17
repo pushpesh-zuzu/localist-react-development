@@ -59,14 +59,8 @@ import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerReg
 
 import LocaleRedirect from "./LocaleRedirect";
 import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
-import LandingLandscaping from "../component/LandingPage/LandingLandscaping";
-import LandinPatioPage from "../component/LandingPage/LandinPatioPage";
-import LandingArtificialGrassInstallation from "../component/LandingPage/LandingArtificialGrassInstallation";
-import LandingFenceAndGate from "../component/LandingPage/LandingFenceAndGate";
-import LandingDriway from "../component/LandingPage/LandingDriway";
-import LandingGatePPC from "../component/LandingPage/LandingGatePPC";
-import { Spin } from "antd";
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
+import { landingPages } from "./landingPages";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -261,60 +255,20 @@ const routes = [
         ),
       },
       {
-        path: "landscaping_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandingLandscaping />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "patio_services_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandinPatioPage />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "artificial_grass_installation_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandingArtificialGrassInstallation />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "fencing_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandingFenceAndGate />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "driveways_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandingDriway />
-          </LocaleRedirect>
-        ),
-      },
-      // {
-      //   path: "conversion-redirects/:requestId",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <ConversionRedirect />
-      //     </ProtectedRoute>
-      //   ),
-      // },
-      {
-        path: "gates_ppc",
-        element: (
-          <LocaleRedirect>
-            <LandingGatePPC />
-          </LocaleRedirect>
-        ),
+        path: "/:lang/:country",
+        element: <MainLayout />,
+        children: [
+          ...landingPages.map(({ path, Component }) => ({
+            path,
+            element: (
+              <LocaleRedirect>
+                <React.Suspense fallback={<FullScreenSpinner />}>
+                  <Component />
+                </React.Suspense>
+              </LocaleRedirect>
+            ),
+          })),
+        ],
       },
     ],
   },
