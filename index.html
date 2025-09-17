@@ -89,8 +89,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
 
     <!-- 3. Global CSS: render-blocking to prevent FOUC during SSR dev -->
-    <!-- <link rel="stylesheet" href="/src/index.css" /> -->
-    <!-- <link rel="stylesheet" href="/src/App.css" /> -->
+    <!-- <link rel="stylesheet" href="/src/index.css" />
+    <link rel="stylesheet" href="/src/App.css" /> -->
+    <link
+      rel="stylesheet"
+      href="/src/index.css"
+      media="print"
+      onload="this.media='all'"
+    />
+       <noscript>
+      <link rel="stylesheet" href="/src/index.css" />
+    </noscript>
     <link
       rel="stylesheet"
       href="/src/App.css"
