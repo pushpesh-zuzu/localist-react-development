@@ -99,54 +99,8 @@ const ViewYourMatches = ({
           <label htmlFor="phoneNumber" className={styles.label}>
             Please enter your phone numbers
           </label>
-          {/* <div className={styles.phoneWrapper}>
-          <span className={styles.prefix}>+44</span>
-          <input
-            type="text"
-            id="phoneNumber"
-            placeholder="Phone Number"
-            className={styles.input}
-            maxLength={10}
-            value={phoneNumber.replace(/^\+44/, "")} 
-            onChange={handleInputChange}
-            style={{ borderColor: error ? "red" : "" }}
-            // disabled={!!userToken?.phone}
-          />
-          {error && (
-            <span className={styles.errorMessage}>
-              Please enter a valid 10-digit phone number.
-            </span>
-          )}
-          </div> */}
 
           <div className={styles.phoneWrapper}>
-            {/* <input
-              type="text"
-              id="phoneNumber"
-              placeholder="+44 XXXXX XXXXXX"
-              className={styles.input}
-              maxLength={13} // +44 + 10 digits => 13 total
-              value={"+44 " + phoneNumber}
-              onChange={(e) => {
-                let value = e.target.value;
-
-                // Remove everything except numbers
-                value = value.replace(/\D/g, "");
-
-                // If value starts with "44", remove it (to avoid double +44)
-                if (value.startsWith("44 ")) {
-                  value = value.slice(2);
-                }
-
-                // Limit to 10 digits only
-                if (value.length <= 10) {
-                  setPhoneNumber(value);
-                }
-                setError(false);
-              }}
-              style={{ borderColor: error ? "red" : "" }}
-            /> */}
-
             <input
               type="text"
               id="phoneNumber"
@@ -157,20 +111,19 @@ const ViewYourMatches = ({
               onChange={(e) => {
                 let value = e.target.value;
 
-                // ❌ Remove everything except numbers
+                //  Remove everything except numbers
                 value = value.replace(/\D/g, "");
 
                 if (value.startsWith("44")) {
                   value = value.slice(2);
                 }
 
-                if (value.length === 1 && value === "0") {
+                if (value.length === 10 && value === "0") {
                   showToast("error", "Please enter phone number without '0'.");
                   return;
                 }
                 setPhoneNumber(value);
 
-                // ✅ Sirf 10 digits allow karo
                 if (value.length <= 10) {
                   setPhoneNumber(value);
                 }

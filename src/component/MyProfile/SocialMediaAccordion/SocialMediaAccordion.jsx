@@ -201,7 +201,7 @@ const platforms = [
   {
     key: "linkedin_link",
     label: "Linkedin",
-    placeholder: "https://uk.linkedin.com/in/yourname",
+    placeholder: "https://uk.linkedin.com/yourname",
   },
 ];
 

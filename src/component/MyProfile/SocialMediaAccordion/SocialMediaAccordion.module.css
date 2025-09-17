@@ -70,6 +70,7 @@
 }
 
 .textarea {
+  font-family: "Poppins" !important;
   flex: 1;
   padding: 8px;
   width: 100%;
@@ -131,7 +132,7 @@
   width: 14px;
   left: 3px;
   bottom: 3px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   transition: 0.3s;
   border-radius: 50%;
 }
@@ -151,7 +152,7 @@
   margin-bottom: 5px;
 }
 .saveButton {
-   background-color: var(--primary-color);
+  background-color: var(--primary-color);
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   color: #fff;
   border: none;
@@ -175,29 +176,29 @@
   font-size: 20px;
   font-weight: 500;
 }
-.cancelBtn:hover{
+.cancelBtn:hover {
   background-color: #ccc;
 }
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .heading {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 11px;
-  color: #828282;
-}
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 11px;
+    color: #828282;
+  }
 }
 
-@media screen and (max-width:380px) {
+@media screen and (max-width: 380px) {
   .header {
-  display: flex;
- flex-direction: column;
-  align-items: start;
-}
-.cancelBtn,
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .cancelBtn,
   .saveButton {
     /* width: 100%; */
     width: 84px;
-     padding: 8px 10px;
-     font-size: 14px;
+    padding: 8px 10px;
+    font-size: 14px;
   }
 }

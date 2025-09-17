@@ -23,7 +23,7 @@
   cursor: pointer !important;
 }
 .leaveBtn:disabled {
-  cursor: not-allowed;
+  cursor: default !important;
 }
 .container {
   display: flex;

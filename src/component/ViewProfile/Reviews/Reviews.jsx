@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getReviewListApi } from "../../../store/MyProfile/myProfileSlice";
 import moment from "moment";
 import SubmitReviewModal from "../SubmitReviewModal";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import starImg from "../../../assets/Icons/MyResponse/StarImg.svg";
 import blueStar from "../../../assets/Icons/MyResponse/blueStarImg.svg";
 import greyStar from "../../../assets/Icons/MyResponse/grayStar.svg";
@@ -18,7 +18,12 @@ const ReviewSection = ({
   details,
   disableReviewButton = false,
   showSummary = true,
+  // isFromManualBids,
 }) => {
+  const location = useLocation();
+  const isFromManualBids =
+    new URLSearchParams(location.search).get("from") === "replies";
+  const queryParams = new URLSearchParams(location.search);
   const [isopen, setIsOpen] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams();
@@ -88,7 +93,13 @@ const ReviewSection = ({
               <button
                 className={styles.leaveBtn}
                 onClick={handleOpen}
-                disabled={disableReviewButton}
+                disabled={!isFromManualBids}
+                // style={{
+                //   cursor:
+                //     !isFromManualBids || disableReviewButton
+                //       ? "not-allowed"
+                //       : "pointer",
+                // }}
               >
                 Leave a review
               </button>

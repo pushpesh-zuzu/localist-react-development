@@ -151,6 +151,7 @@ const ViewProfiles = () => {
   const location = useLocation();
   const isFromManualBids =
     new URLSearchParams(location.search).get("from") === "replies";
+
   const queryParams = new URLSearchParams(location.search);
   const isCustomButton = queryParams.get("customBtn") === "true";
   const [activeTab, setActiveTab] = useState("About");
@@ -507,6 +508,7 @@ const ViewProfiles = () => {
               <ReviewSection
                 details={profileData}
                 disableReviewButton={shouldDisableActions}
+                isFromManualBids={isFromManualBids}
               />
             </div>
             <div ref={accrediationRef}>

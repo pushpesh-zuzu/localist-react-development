@@ -127,7 +127,7 @@
   background-color: #0096c4;
 }
 .RequestQuoteBtn:disabled {
-  cursor: not-allowed;
+  cursor: default !important;
   /* opacity: 0.6; */
 }
 .contactDetails {

@@ -9,13 +9,15 @@ import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
 import mailIcon from "../../../assets/Icons/emailIcon.svg";
 import callIcon from "../../../assets/Icons/callIcon.svg";
 import timerIcon from "../../../assets/Icons/timer.svg";
-import { Collapse } from "antd";
+import { Collapse, Select } from "antd";
 const { Panel } = Collapse;
-import { CaretRightOutlined } from "@ant-design/icons";
+import { CaretRightOutlined, DownOutlined } from "@ant-design/icons";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { showToast } from "../../../utils";
 import { useUserGeo } from "../../../utils/geo";
+
+const { Option } = Select;
 
 const FooterContent = () => (
   <>
@@ -26,11 +28,21 @@ const FooterContent = () => (
         <img src={instagramIcon} alt="Instagram" />
       </div>
       <div className={styles.countryDropdown}>
-        <select>
-          <option>🇬🇧 UK</option>
-          {/* <option>🇮🇳 India</option>
+        {/* <select> */}
+        {/* <option>🇬🇧 UK</option> */}
+        {/* <option>🇮🇳 India</option>
           <option>🇺🇸 USA</option> */}
-        </select>
+        {/* </select> */}
+        <Select
+          defaultValue="🇬🇧 UK"
+          style={{ width: 160 }}
+          className={styles.selectDropdown}
+          dropdownIcon={<DownOutlined style={{ color: "black" }} />}
+        >
+          <Option value="🇬🇧 UK">🇬🇧 UK</Option>
+          {/* <Option value="🇮🇳 India">🇮🇳 India</Option> */}
+          {/* <Option value="🇺🇸 USA">🇺🇸 USA</Option> */}
+        </Select>
       </div>
       {/* <div className={styles.trustpilot}>
         <img src={trustpilotLogo} alt="Trustpilot Rating" />

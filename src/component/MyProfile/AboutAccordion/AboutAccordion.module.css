@@ -408,7 +408,7 @@
   font-size: 14px;
   color: #828282;
   margin-bottom: 12px;
-  text-align: justify;
+  /* text-align: justify; */
 }
 
 @media (max-width: 1200px) {
