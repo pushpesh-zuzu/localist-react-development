@@ -2,6 +2,8 @@
   width: -webkit-fill-available;
   text-align: center;
   padding: 12px 88px;
+  max-width: 66.66%;
+  margin: auto;
   background-color: #f9fdff;
 }
 .tableWrapper {

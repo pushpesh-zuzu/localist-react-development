@@ -15,10 +15,11 @@ const HowItWorks = ({ctaText,howItWorksData}) => {
               </div>
               <div className={styles.content}>
                 <h3 className={styles.title}>
-                  {item.heading1} <br className={styles.lineBreak} />
-                  <span className={styles.blueText}> {item.heading2}</span>
+                  {item.heading1} 
+                  <span className={styles.blueText}>{" "} {item.heading2}</span>
                    <span className={item.heading1}> {item?.heading3}</span>
                 </h3>
+                {item.heading3 ===undefined ? <br className={styles.lineBreak} /> :''}
   
                 <p className={styles.description}>{item.description}</p>
               </div>
