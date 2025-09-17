@@ -241,6 +241,7 @@
 @media (max-width: 520px) {
   .findAnAccountant_container {
     padding: 12px 20px;
+    max-width: 90%;
   }
   .btntext {
     font-size: 28px;
@@ -280,4 +281,9 @@
     height: 240px;
   }
 }
-
+@media (max-width: 320px) {
+  .findAnAccountant_container {
+    padding: 12px 20px;
+    max-width: 85%;
+  }
+}
