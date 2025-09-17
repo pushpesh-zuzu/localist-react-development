@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import {
   updateSellerQandA,
   clearQnaStatus,
+  setIsDirtyRedux,
 } from "../../../store/MyProfile/myProfileSlice";
 import { useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -51,6 +52,7 @@ const QandAAccordion = ({ details }) => {
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
+    dispatch(setIsDirtyRedux(true));
   };
 
   const dispatch = useDispatch();

@@ -184,7 +184,10 @@ const MyProfile = () => {
             isOpen={openAccordion === "About"}
             onClick={() => openAccordionHandler("About")}
           >
-            <AboutAccordion details={viewProfileData} />
+            <AboutAccordion
+              details={viewProfileData}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+            />
           </AccordionItem>
         </div>
 
@@ -194,7 +197,10 @@ const MyProfile = () => {
             isOpen={openAccordion === "Reviews"}
             onClick={() => openAccordionHandler("Reviews")}
           >
-            <ReviewsAccordion details={viewProfileData?.reviews} />
+            <ReviewsAccordion
+              details={viewProfileData?.reviews}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+            />
           </AccordionItem>
         </div>
 
@@ -204,7 +210,10 @@ const MyProfile = () => {
             isOpen={openAccordion === "Photos"}
             onClick={() => openAccordionHandler("Photos")}
           >
-            <PhotosAccordion details={viewProfileData?.user_details} />
+            <PhotosAccordion
+              details={viewProfileData?.user_details}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+            />
           </AccordionItem>
         </div>
 
@@ -214,7 +223,10 @@ const MyProfile = () => {
             isOpen={openAccordion === "Social Media"}
             onClick={() => openAccordionHandler("Social Media")}
           >
-            <SocialMediaAccordion details={viewProfileData?.user_details} />
+            <SocialMediaAccordion
+              details={viewProfileData?.user_details}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+            />
           </AccordionItem>
         </div>
 
@@ -226,6 +238,7 @@ const MyProfile = () => {
           >
             <AccreditationsAccordion
               details={viewProfileData?.accreditations}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
             />
           </AccordionItem>
         </div>
@@ -236,7 +249,10 @@ const MyProfile = () => {
             isOpen={openAccordion === "Q&As"}
             onClick={() => openAccordionHandler("Q&As")}
           >
-            <QandAAccordion details={viewProfileData?.qa} />
+            <QandAAccordion
+              details={viewProfileData?.qa}
+              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+            />
           </AccordionItem>
         </div>
 

@@ -11,8 +11,6 @@
 // import iIcon from "../../../assets/Images/iIcon.svg";
 // import axiosInstance from "../../../Api/axiosInstance";
 
-
-
 // const platforms = [
 //   { key: "fb_link", label: "Facebook", placeholder: "www.facebook.com" },
 //   { key: "twitter_link", label: "Twitter", placeholder: "@username" },
@@ -60,9 +58,7 @@
 //   const handleSubmit = () => {
 //     dispatch(updateSellerSocialLinks(formState));
 //   };
-  
- 
-  
+
 //   // Toast notifications
 //   useEffect(() => {
 //     if (socialUpdateSuccess) {
@@ -73,7 +69,7 @@
 //       dispatch(clearSocialUpdateStatus());
 //     }
 //   }, [socialUpdateSuccess, socialUpdateError, dispatch]);
-  
+
 // useEffect(() => {
 //   if (details) {
 //     setFormState((prev) => ({
@@ -174,19 +170,39 @@ import { toast } from "react-toastify";
 import {
   updateSellerSocialLinks,
   clearSocialUpdateStatus,
+  setIsDirtyRedux,
 } from "../../../store/MyProfile/myProfileSlice";
 import { useEffect, useState } from "react";
 import styles from "./SocialMediaAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 
 const platforms = [
-  { key: "fb_link", label: "Facebook", placeholder: "https://www.facebook.com/yourpage" },
-  { key: "twitter_link", label: "Twitter", placeholder: "https://twitter.com/yourhandle" },
-  { key: "tiktok_link", label: "Tik Tok", placeholder: "https://www.tiktok.com/@yourname" },
-  { key: "insta_link", label: "Instagram", placeholder: "https://www.instagram.com/yourhandle" },
+  {
+    key: "fb_link",
+    label: "Facebook",
+    placeholder: "https://www.facebook.com/yourpage",
+  },
+  {
+    key: "twitter_link",
+    label: "Twitter",
+    placeholder: "https://twitter.com/yourhandle",
+  },
+  {
+    key: "tiktok_link",
+    label: "Tik Tok",
+    placeholder: "https://www.tiktok.com/@yourname",
+  },
+  {
+    key: "insta_link",
+    label: "Instagram",
+    placeholder: "https://www.instagram.com/yourhandle",
+  },
   // { key: "linkedin_link", label: "Linkedin", placeholder: "https://www.linkedin.com/in/yourname" },
-    { key: "linkedin_link", label: "Linkedin", placeholder: "https://uk.linkedin.com/in/yourname" },
-
+  {
+    key: "linkedin_link",
+    label: "Linkedin",
+    placeholder: "https://uk.linkedin.com/in/yourname",
+  },
 ];
 
 const urlPatterns = {
@@ -200,7 +216,9 @@ const urlPatterns = {
 
 const SocialMediaAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { socialUpdateSuccess, socialUpdateError } = useSelector((state) => state.myProfile);
+  const { socialUpdateSuccess, socialUpdateError } = useSelector(
+    (state) => state.myProfile
+  );
 
   const [formState, setFormState] = useState({
     type: "social_media",
@@ -221,11 +239,19 @@ const SocialMediaAccordion = ({ details }) => {
     linkedin_link: false,
   });
 
+  // const toggleFieldVisibility = (key) => {
+  //   setHiddenFields((prev) => ({
+  //     ...prev,
+  //     [key]: !prev[key],
+  //   }));
+  // };
+
   const toggleFieldVisibility = (key) => {
-    setHiddenFields((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+    setHiddenFields((prev) => {
+      const updatedFields = { ...prev, [key]: !prev[key] };
+      dispatch(setIsDirtyRedux(true));
+      return updatedFields;
+    });
   };
 
   const validateField = (name, value) => {
@@ -252,6 +278,7 @@ const SocialMediaAccordion = ({ details }) => {
     setFormState((prev) => ({ ...prev, [name]: value }));
     const errMsg = validateField(name, value);
     setErrors((prev) => ({ ...prev, [name]: errMsg }));
+    dispatch(setIsDirtyRedux(true));
   };
 
   const handleSubmit = () => {
@@ -291,7 +318,8 @@ const SocialMediaAccordion = ({ details }) => {
       <div className={styles.card}>
         <h3 className={styles.heading}>Social Media</h3>
         <p className={styles.subtext}>
-          Add your business’s social media profiles to help build trust. Customers often check these when deciding who to hire.
+          Add your business’s social media profiles to help build trust.
+          Customers often check these when deciding who to hire.
         </p>
 
         {platforms.map((platform, idx) => (
@@ -325,7 +353,9 @@ const SocialMediaAccordion = ({ details }) => {
                     onChange={handleChange}
                   />
                 </div>
-                {errors[platform.key] && <p className={styles.error}>{errors[platform.key]}</p>}
+                {errors[platform.key] && (
+                  <p className={styles.error}>{errors[platform.key]}</p>
+                )}
               </>
             )}
           </div>
@@ -346,7 +376,8 @@ const SocialMediaAccordion = ({ details }) => {
         </div>
         <div className={styles.labelWrapper}>
           <p className={styles.subtext}>
-            Share links to your website, articles, or other online content to help customers learn more about your services & business.
+            Share links to your website, articles, or other online content to
+            help customers learn more about your services & business.
           </p>
         </div>
         <div className={styles.inputWithToggle}>
@@ -363,7 +394,11 @@ const SocialMediaAccordion = ({ details }) => {
 
       <div className={styles.footer}>
         {/* <button className={styles.cancelBtn} type="button">Cancel</button> */}
-        <button className={styles.saveButton}  style={{ marginLeft: "auto" }} onClick={handleSubmit}>
+        <button
+          className={styles.saveButton}
+          style={{ marginLeft: "auto" }}
+          onClick={handleSubmit}
+        >
           Save
         </button>
       </div>

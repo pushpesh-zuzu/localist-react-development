@@ -276,7 +276,7 @@
   top: 85px;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 10;
 }
 
 /* Responsive styles */
@@ -413,7 +413,7 @@
     top: 70px;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 10;
   }
   .usageInfo {
     margin-top: 6px;

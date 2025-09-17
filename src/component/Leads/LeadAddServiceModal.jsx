@@ -1,11 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddServiceModal.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import iIcon from "../../assets/Images/iIcon.svg";
-import { useSelector,useDispatch } from "react-redux";
-
-
+import { useSelector, useDispatch } from "react-redux";
 
 const AddServiceModal = ({
   isModalOpen,
@@ -22,10 +20,7 @@ const AddServiceModal = ({
   handleRemoveService,
   popularList = [],
 }) => {
- 
   const dispatch = useDispatch();
-  
-
 
   if (!isModalOpen) return null;
 
@@ -48,7 +43,8 @@ const AddServiceModal = ({
           <span className={styles.infoIcon}>
             <img src={iIcon} alt="" />
           </span>{" "}
-          Start typing the name of your service to search our full directory of available options.
+          Start typing the name of your service to search our full directory of
+          available options.
         </p>
 
         <label className={styles.label}>Service</label>
@@ -96,7 +92,8 @@ const AddServiceModal = ({
         <div className={styles.suggestions}>
           <label className={styles.label}>Suggestions</label>
           <p className={styles.suggestionText}>
-        We’ve recommended some services based on your profile. Click to add them instantly:
+            We’ve recommended some services based on your profile. Click to add
+            them instantly:
           </p>
           <div className={styles.tags}>
             {popularList?.map((item, idx) => (

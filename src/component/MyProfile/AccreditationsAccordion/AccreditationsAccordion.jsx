@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from "react";
 import {
   updateSellerAccreditations,
   clearAccreditationsStatus,
-  deleteSellerAccreditation
+  deleteSellerAccreditation,
+  setIsDirtyRedux,
 } from "../../../store/MyProfile/myProfileSlice";
 
 import styles from "./AccreditationsAccordion.module.css";
@@ -31,6 +32,8 @@ const AccreditationsAccordion = ({ details }) => {
       updated[index].newAccreditation = value;
     }
     setAccordionGroups(updated);
+
+    dispatch(setIsDirtyRedux(true));
   };
 
   // Upload image
@@ -38,6 +41,8 @@ const AccreditationsAccordion = ({ details }) => {
     const updated = [...accordionGroups];
     updated[index].accreImage = file;
     setAccordionGroups(updated);
+
+    dispatch(setIsDirtyRedux(true));
   };
 
   const handleClickUpload = (index) => {
@@ -55,22 +60,21 @@ const AccreditationsAccordion = ({ details }) => {
   };
 
   // Remove accreditation
-const handleRemoveAccreditation = (index) => {
-  const updated = [...accordionGroups];
+  const handleRemoveAccreditation = (index) => {
+    const updated = [...accordionGroups];
 
-  // Capture the group being removed
-  const removedGroup = updated[index];
+    // Capture the group being removed
+    const removedGroup = updated[index];
 
-  // Remove it from UI
-  updated.splice(index, 1);
-  setAccordionGroups(updated);
+    // Remove it from UI
+    updated.splice(index, 1);
+    setAccordionGroups(updated);
 
-  // If it's an existing accreditation, dispatch an API call to delete it
-  if (removedGroup.id) {
-    dispatch(deleteSellerAccreditation(removedGroup.id));
-  }
-};
-
+    // If it's an existing accreditation, dispatch an API call to delete it
+    if (removedGroup.id) {
+      dispatch(deleteSellerAccreditation(removedGroup.id));
+    }
+  };
 
   // Save handler
   // const handleSave = () => {
@@ -89,47 +93,47 @@ const handleRemoveAccreditation = (index) => {
   // };
 
   // Save handler
-// Save handler
-const handleSave = () => {
-  // Filter out groups without a name
-  const filtered = accordionGroups.filter(
-    (g) =>
-      (Array.isArray(g.accreditations) &&
+  // Save handler
+  const handleSave = () => {
+    // Filter out groups without a name
+    const filtered = accordionGroups.filter(
+      (g) =>
+        (Array.isArray(g.accreditations) &&
+          g.accreditations[0] &&
+          g.accreditations[0].trim() !== "") ||
+        (g.newAccreditation && g.newAccreditation.trim() !== "")
+    );
+
+    if (filtered.length === 0) {
+      toast.error(
+        "Please enter at least one accreditation name before saving."
+      );
+      return;
+    }
+
+    const payload = filtered.map((g) => ({
+      id: g.id ?? "",
+      accreditations:
+        Array.isArray(g.accreditations) &&
         g.accreditations[0] &&
-        g.accreditations[0].trim() !== "") ||
-      (g.newAccreditation && g.newAccreditation.trim() !== "")
-  );
+        g.accreditations[0].trim() !== ""
+          ? [g.accreditations[0].trim()]
+          : [],
+      newAccreditation:
+        g.newAccreditation && g.newAccreditation.trim() !== ""
+          ? g.newAccreditation.trim()
+          : "",
+      image: g.accreImage || null, // File OR { previewUrl } OR null
+    }));
 
-  if (filtered.length === 0) {
-    toast.error("Please enter at least one accreditation name before saving.");
-    return;
-  }
+    if (payload.length === 0) {
+      toast.error("Accreditation name cannot be empty.");
+      return;
+    }
 
-  const payload = filtered.map((g) => ({
-    id: g.id ?? "",
-    accreditations:
-      Array.isArray(g.accreditations) &&
-      g.accreditations[0] &&
-      g.accreditations[0].trim() !== ""
-        ? [g.accreditations[0].trim()]
-        : [],
-    newAccreditation:
-      g.newAccreditation && g.newAccreditation.trim() !== ""
-        ? g.newAccreditation.trim()
-        : "",
-    image: g.accreImage || null, // File OR { previewUrl } OR null
-  }));
-
-  if (payload.length === 0) {
-    toast.error("Accreditation name cannot be empty.");
-    return;
-  }
-
-  console.log("🚀 Final payload before dispatch:", payload);
-  dispatch(updateSellerAccreditations(payload));
-};
-
-
+    console.log("🚀 Final payload before dispatch:", payload);
+    dispatch(updateSellerAccreditations(payload));
+  };
 
   // Toast messages
   useEffect(() => {

@@ -247,7 +247,7 @@
   position: relative;
   top: 0;
 
-  z-index: 99;
+  z-index: 9;
   height: 80vh;
 
   overflow-x: auto;
@@ -380,6 +380,7 @@
 
 .input,
 .textarea {
+  font-family: "Poppins";
   padding: 8px 12px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;

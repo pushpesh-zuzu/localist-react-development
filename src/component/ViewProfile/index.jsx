@@ -286,13 +286,13 @@ const ViewProfiles = () => {
     setCustomerModal(true);
   };
   const maskPhone = (phone = "") => {
-    if (!phone || phone.length < 3) return "*******";
-    const visible = phone.slice(0, 3);
+    if (!phone || phone.length < 5) return "";
+    const visible = phone.slice(0, 5);
     return `${visible}*******`;
   };
 
   const maskEmail = (email = "") => {
-    if (!email.includes("@")) return "********";
+    if (!email.includes("@")) return "";
     const [name, domain] = email.split("@");
     const visible = name.charAt(0);
     return `${visible}***@${domain}`;
@@ -465,7 +465,7 @@ const ViewProfiles = () => {
               <div className={styles.mailText}>
                 <img src={phoneImg} alt="Phone" />
                 <span>
-                  {profileData?.lead_purchased === 1 || isFromManualBids
+                  {/* {profileData?.lead_purchased === 1 || isFromManualBids
                     ? profileData?.company_phone ||
                       profileData?.phone ||
                       "0000000000"
@@ -473,7 +473,14 @@ const ViewProfiles = () => {
                         profileData?.company_phone ||
                           profileData?.phone ||
                           "0000000000"
-                      )}
+                      )} */}
+                  {profileData?.lead_purchased === 1 || isFromManualBids
+                    ? profileData?.company_phone || profileData?.phone || ""
+                    : profileData?.company_phone || profileData?.phone
+                    ? maskPhone(
+                        profileData?.company_phone || profileData?.phone
+                      )
+                    : null}
                 </span>
               </div>
             </>

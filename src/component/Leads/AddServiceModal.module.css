@@ -82,7 +82,7 @@
 
 .dropdown {
   background: #fff;
-  color:#0a0a0a;
+  color: #0a0a0a;
   border: 1px solid #d9d9d9;
   max-height: 150px;
   overflow-y: auto;
@@ -170,7 +170,7 @@
 
 .selectedTag {
   background-color: #e3f6fc;
-  color:#0a0a0a;
+  color: #0a0a0a;
   padding: 6px 10px;
   border-radius: 16px;
   display: inline-flex;
@@ -257,7 +257,7 @@
   }
 
   .actions {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 10px;
   }
 
