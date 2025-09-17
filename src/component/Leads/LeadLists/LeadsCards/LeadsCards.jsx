@@ -606,7 +606,7 @@ const LeadsCards = ({ enoughCredit }) => {
                               ) : (
                                 <>
                                   <img src={saveImg} alt="image" />
-                                  Save For Later
+                                  Save
                                 </>
                               )}
                             </button>
