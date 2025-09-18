@@ -35,8 +35,12 @@ const SearchPostAndBanner = ({
     setIsStartWithQuestionModal(false);
   };
   useEffect(() => {
-    setShowModal(true);
-    setIsStartWithQuestionModal(true);
+    const timeoutId = setTimeout(() => {
+      setShowModal(true);
+      setIsStartWithQuestionModal(true);
+    }, 2500);
+    // ✅ cleanup on unmount
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const initGoogleAutocomplete = () => {
@@ -131,7 +135,7 @@ const SearchPostAndBanner = ({
 
   return (
     <div className={styles.searchcontainer}>
-      <h1 style={{ color: "white" }}>
+      <h1 style={{ color: "white", background: "rgba(0,0,0,.5)" }}>
         Compare{" "}
         <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span>{" "}
         from local {title}!

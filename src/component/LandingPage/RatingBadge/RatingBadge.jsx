@@ -9,7 +9,7 @@ const RatingBadge = ({
   platform = "Trustpilot",
 }) => {
   return (
-    <div  className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className={styles.ratingContainer}>
         {/* Row 1 */}
         <div className={styles.row}>
@@ -19,11 +19,8 @@ const RatingBadge = ({
 
         {/* Row 2 */}
         <div className={styles.row}>
-          <p className={styles.reviews}>
-             18,359 reviews on
-          </p>
-        </div>
-        <div className={styles.row}>
+          <p className={styles.reviews}>18,359 reviews on</p>
+
           <img
             src={GreenStar}
             alt="platform logo"
