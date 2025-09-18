@@ -53,7 +53,7 @@ const LogoComponent = () => {
 
   function getRouteForCategory(categoryName) {
     const routesMap = {
-      "House & Home": "/home",
+      "Home & Garden": "/home",
       // Business: "/business",
       // "General Builders": "/builders/",
       // "Lessons & Training": "/lessons-training",
@@ -469,7 +469,7 @@ const LogoComponent = () => {
           </Popover>
           <div style={{ display: "none" }}>
             {megaMenu
-              .filter((item) => item.name === "House & Home")
+              .filter((item) => item.name === "Home & Garden")
               .map((item, i) => (
                 <div key={i}>
                   <a href={`/${currentLang}/${currentCountry}/${item.path}`}>

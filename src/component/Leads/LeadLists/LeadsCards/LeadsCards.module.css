@@ -114,19 +114,25 @@
 
 .contactContainer {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 15.43px;
 }
 
 .contactItem {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   color: black;
   font-weight: 400;
   font-size: 19px;
   vertical-align: middle;
   /* cursor: pointer !important; */
+}
+
+.contactItemNumber {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* .contactItem a {
   text-decoration: none;

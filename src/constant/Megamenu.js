@@ -45,7 +45,7 @@ export const serviceesData = [
   },
   {
     key: "house",
-    name: "House & Home",
+    name: "Home & Garden",
     icon: houseIcon,
     iconhover: houseIconBlue,
   },
@@ -227,7 +227,7 @@ export const locationData = [
 ];
 export const megaMenu = [
   {
-    name: "House & Home",
+    name: "Home & Garden",
     path: "home",
     icon: houseIcon,
     subcategory: [
@@ -243,19 +243,19 @@ export const megaMenu = [
       },
       {
         name: "Patio Services",
-        path:"patio-layers-near-me",
+        path: "patio-layers-near-me",
         children: locationData.map((loc) => `Patio Installers in ${loc}`),
       },
       {
         name: "Artificial Grass Installation",
-        path:"artificial-grass-installers-near-me",
+        path: "artificial-grass-installers-near-me",
         children: locationData.map(
           (loc) => `Artificial Grass Installers in ${loc}`
         ),
       },
       {
         name: "Landscaping",
-        path:"landscape-gardeners-near-me",
+        path: "landscape-gardeners-near-me",
         children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
       },
       // {

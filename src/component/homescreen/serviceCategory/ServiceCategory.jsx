@@ -11,21 +11,31 @@ import { Spin } from "antd";
 
 const ServiceCategory = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [initialLoader,setInitialLoader] = useState(true)
-  const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
+  const [initialLoader, setInitialLoader] = useState(true);
+  const [selectedServiceId, setSelectedServiceId] = useState({
+    id: null,
+    name: "",
+  });
   // const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const { userToken } = useSelector((state)=> state.auth)
-  const { allServiceList ,popularLoader} = useSelector((state) => state.findJobs);
-  useEffect(()=>{
-// dispatch (getCategoriesList())
- if (typeof window !== "undefined" && (!allServiceList || allServiceList.length === 0)) {
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.auth);
+  const { allServiceList, popularLoader } = useSelector(
+    (state) => state.findJobs
+  );
+
+  console.log(allServiceList, "allServiceList");
+
+  useEffect(() => {
+    // dispatch (getCategoriesList())
+    if (
+      typeof window !== "undefined" &&
+      (!allServiceList || allServiceList.length === 0)
+    ) {
       dispatch(getAllServiceList());
+    } else {
+      setInitialLoader(false);
     }
-    else{
-      setInitialLoader(false)
-    }
-  },[])
+  }, []);
 
   const handleCategoryClick = (id, name) => {
     window.scrollTo(0, 0);
@@ -35,7 +45,7 @@ const ServiceCategory = () => {
   const handleClose = () => {
     setOpenModal(false);
     setSelectedServiceId({ id: null, name: "" });
-  }
+  };
 
   return (
     <div className={styles.ServiceCategoryContainer}>
@@ -43,22 +53,35 @@ const ServiceCategory = () => {
         <h2 className={styles.ServiceCategoryheading}>
           View Our <span>Service Categories</span>
         </h2>
-      { popularLoader  ? <Spin style={{color:"white"}}/> : <div 
-      // className={styles.ServiceCategory} later we uncomment this css and remove inline css inside style when more data we show more than one card
-            style={{display:"flex",justifyContent:'center', maxWidth:'fit-content',margin:'auto' }}
-      >
-          {allServiceList?.slice(0, 1)?.map((category, index) => (
-            <SingleCategory
-              key={index}
-              category={category}
-              onClick={() => handleCategoryClick(category.id, category.name)}
-            />
-          ))}
-        </div>}
+        {popularLoader ? (
+          <Spin style={{ color: "white" }} />
+        ) : (
+          <div
+            // className={styles.ServiceCategory} later we uncomment this css and remove inline css inside style when more data we show more than one card
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              maxWidth: "fit-content",
+              margin: "auto",
+            }}
+          >
+            {allServiceList?.slice(0, 1)?.map((category, index) => (
+              <SingleCategory
+                key={index}
+                category={category}
+                onClick={() => handleCategoryClick(category.id, category.name)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {openModal && (userToken?.active_status == 2 || !userToken )  && (
-          <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
+      {openModal && (userToken?.active_status == 2 || !userToken) && (
+        <BuyerRegistration
+          closeModal={handleClose}
+          serviceId={selectedServiceId?.id}
+          serviceName={selectedServiceId.name}
+        />
       )}
     </div>
   );

@@ -434,7 +434,7 @@ const LeadsCards = ({ enoughCredit }) => {
                             <div className={styles.contactContainer}>
                               <div className={styles.contactItem}>
                                 <img src={BluePhoneIcon} alt="" />
-                                <span>
+                                <span className={styles.contactItemNumber}>
                                   {item?.phone
                                     ? `+44${item?.phone.substring(
                                         0,
