@@ -109,8 +109,10 @@ const BuyerAccountSettings = () => {
     }));
   };
 
+  console.log(userDetails?.phone, "userDetails?.phone");
+
   const handleSubmit = () => {
-    if (!/^\d{10}$/.test(userDetails?.phone)) {
+    if (!/^\+?\d{10,13}$/.test(userDetails?.phone)) {
       showToast("error", "Please enter a valid 10-digit phone number.");
       return;
     }
