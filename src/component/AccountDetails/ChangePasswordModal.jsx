@@ -45,7 +45,7 @@ const ChangePasswordModal = ({
               onClick={() => setNewPasswordVisible(!newPasswordVisible)}
               className={styles.eyeIcon}
             >
-              {newPasswordVisible ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+              {!newPasswordVisible ? <EyeInvisibleOutlined /> : <EyeOutlined />}
             </span>
           </div>
           {formData.error && <p className={styles.error}>{formData.error}</p>}
@@ -68,7 +68,7 @@ const ChangePasswordModal = ({
               onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
               className={styles.eyeIcon}
             >
-              {confirmPasswordVisible ? (
+              {!confirmPasswordVisible ? (
                 <EyeInvisibleOutlined />
               ) : (
                 <EyeOutlined />

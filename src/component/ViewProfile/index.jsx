@@ -120,8 +120,10 @@ const ViewProfiles = () => {
       const container = rightContainerRef.current;
       const targetPosition = targetRef.current.offsetTop;
 
+      const OFFSET = 70;
+
       container.scrollTo({
-        top: targetPosition,
+        top: targetPosition - OFFSET,
         behavior: "smooth",
       });
     }
@@ -143,7 +145,7 @@ const ViewProfiles = () => {
 
       for (let section of sections) {
         const offsetTop = section.ref.current?.offsetTop || 0;
-        if (scrollY >= offsetTop - 50) {
+        if (scrollY >= offsetTop - 0) {
           // Added offset for better detection
           setActiveTab(section.name);
           break;
