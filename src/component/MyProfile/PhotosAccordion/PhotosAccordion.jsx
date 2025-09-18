@@ -117,6 +117,10 @@ const PhotosAccordion = ({ details }) => {
       toast.success("Photos updated successfully!");
       dispatch(clearPhotoUpdateStatus());
       dispatch(setIsDirtyRedux(true));
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } else if (photoUpdateError) {
       toast.error(`Failed: ${photoUpdateError}`);
       dispatch(clearPhotoUpdateStatus());
@@ -162,6 +166,7 @@ const PhotosAccordion = ({ details }) => {
     }
 
     dispatch(updateSellerPhotos(body));
+    dispatch(setIsDirtyRedux(false));
   };
   //   const handleSubmit = () => {
   //   if (!validate()) {

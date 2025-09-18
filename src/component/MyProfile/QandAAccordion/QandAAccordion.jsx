@@ -101,6 +101,10 @@ const QandAAccordion = ({ details }) => {
     if (qnaUpdateSuccess) {
       toast.success("Q&A updated successfully!");
       dispatch(clearQnaStatus());
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } else if (qnaUpdateError) {
       toast.error(`Error: ${qnaUpdateError}`);
       dispatch(clearQnaStatus());

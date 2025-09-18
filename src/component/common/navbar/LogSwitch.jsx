@@ -572,36 +572,44 @@ const LogSwitch = () => {
                   }}
                 >
                   {notifications.length > 0 ? (
-                    notifications.map((noti, index) => (
-                      <div key={noti.id}>
-                        <div style={{ marginBottom: "8px" }}>
-                          <div style={{ fontWeight: "600", fontSize: "14px" }}>
-                            {noti.title}
+                    notifications
+                      .slice()
+                      .sort(
+                        (a, b) =>
+                          new Date(b.created_at) - new Date(a.created_at)
+                      )
+                      .map((noti, index) => (
+                        <div key={noti.id}>
+                          <div style={{ marginBottom: "8px" }}>
+                            <div
+                              style={{ fontWeight: "600", fontSize: "14px" }}
+                            >
+                              {noti.title}
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                gap: "12px",
+                                marginTop: "4px",
+                                fontSize: "11px",
+                              }}
+                            >
+                              <span>{noti.message}</span>
+                              <span>{formatDate(noti.created_at)}</span>
+                            </div>
                           </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              alignItems: "center",
-                              gap: "12px",
-                              marginTop: "4px",
-                              fontSize: "11px",
-                            }}
-                          >
-                            <span>{noti.message}</span>
-                            <span>{formatDate(noti.created_at)}</span>
-                          </div>
+                          {index !== notifications.length - 1 && (
+                            <hr
+                              style={{
+                                borderTop: "1px solid #eee",
+                                margin: "8px 0",
+                              }}
+                            />
+                          )}
                         </div>
-                        {index !== notifications.length - 1 && (
-                          <hr
-                            style={{
-                              borderTop: "1px solid #eee",
-                              margin: "8px 0",
-                            }}
-                          />
-                        )}
-                      </div>
-                    ))
+                      ))
                   ) : (
                     <div style={{ fontSize: "12px", color: "#999" }}>
                       No new notifications

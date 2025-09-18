@@ -140,6 +140,10 @@ const AccreditationsAccordion = ({ details }) => {
     if (accreditationsUpdateSuccess) {
       toast.success("Accreditations saved successfully!");
       dispatch(clearAccreditationsStatus());
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     } else if (accreditationsUpdateError) {
       toast.error(`Error: ${accreditationsUpdateError}`);
       dispatch(clearAccreditationsStatus());
