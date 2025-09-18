@@ -70,6 +70,10 @@
   align-items: center;
   flex-direction: column;
 }
+.headerBackground {
+  background: rgba(0, 0, 0, 0.5);
+  padding: "0px 4px";
+}
 .headerImage1 {
   background-image: url("./banner/ArtificialGrass.webp");
   background-size: cover;

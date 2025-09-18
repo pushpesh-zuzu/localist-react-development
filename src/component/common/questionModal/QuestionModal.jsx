@@ -315,7 +315,7 @@ const QuestionModal = ({
                   : styles.headerImage // default fallback
               }
             >
-              <h2>{questions[currentQuestion]?.questions}</h2>
+              <h2 className={styles.headerBackground}>{questions[currentQuestion]?.questions}</h2>
               <Progress
                 percent={progressPercent}
                 strokeColor="#00AFE3"
