@@ -35,8 +35,12 @@ const SearchPostAndBanner = ({
     setIsStartWithQuestionModal(false);
   };
   useEffect(() => {
-    setShowModal(true);
-    setIsStartWithQuestionModal(true);
+    const timeoutId = setTimeout(() => {
+      setShowModal(true);
+      setIsStartWithQuestionModal(true);
+    }, 2500);
+    // ✅ cleanup on unmount
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const initGoogleAutocomplete = () => {

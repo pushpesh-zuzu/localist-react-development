@@ -1,12 +1,12 @@
-import LandscapingBanner from "./SearchPostAndBanner/banner/landscapingandgardeningBanner.jpg";
+import LandscapingBanner from "./SearchPostAndBanner/banner/landscapingandgardeningBanner.webp";
 import formStep from "../../assets/Images/formStep.png";
 import quoteStep from "../../assets/Images/conactStep.png";
 import compareStep from "../../assets/Images/compareStep.svg";
-import PatioServices from "./SearchPostAndBanner/banner/PatioServices.jpg";
-import ArtificialGrass from "./SearchPostAndBanner/banner/ArtificialGrass.jpg";
-import Fence from "./SearchPostAndBanner/banner/Fence.jpg";
-import Driveways from "./SearchPostAndBanner/banner/Driveways.jpg";
-import Gate from "./SearchPostAndBanner/banner/Gate.jpg";
+import PatioServices from "./SearchPostAndBanner/banner/PatioServices.webp";
+import ArtificialGrass from "./SearchPostAndBanner/banner/ArtificialGrass.webp";
+import Fence from "./SearchPostAndBanner/banner/Fence.webp";
+import Driveways from "./SearchPostAndBanner/banner/Driveways.webp";
+import Gate from "./SearchPostAndBanner/banner/Gate.webp";
 
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
