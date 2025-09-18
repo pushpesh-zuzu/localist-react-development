@@ -448,3 +448,9 @@
     display: none;
   }
 }
+
+@media (max-width: 420px) {
+  .contentWrapper {
+    flex-direction: column;
+  }
+}
