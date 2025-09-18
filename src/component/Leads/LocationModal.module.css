@@ -133,8 +133,8 @@
 }
 .customSelect {
   appearance: none;
-
-  height: -webkit-fill-available;
+  height: 43px;
+  /* height: -webkit-fill-available; */
 }
 
 .cancelBtn:hover {

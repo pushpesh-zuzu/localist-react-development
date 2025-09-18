@@ -150,7 +150,7 @@ const ReviewSection = ({
                 })}
               </div>
               <div className={styles.totalReviews}>
-                {reviewLength} customer reviews1
+                {reviewLength} customer reviews
               </div>
             </div>
             <div className={styles.middleBox}></div>

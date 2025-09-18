@@ -198,7 +198,9 @@ const ViewProfiles = () => {
   return (
     <>
       <Helmet>
-        <title>{`${viewProfileData?.name} | Localists`}</title>
+        <title>{`${
+          viewProfileData?.name ? viewProfileData?.name : ""
+        } | Localists`}</title>
       </Helmet>
       <div className={styles.mainContainer}>
         <div className={styles.container}>

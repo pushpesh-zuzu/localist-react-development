@@ -821,7 +821,7 @@ const BidsList = ({ previousStep }) => {
 
                         <div className={styles.quickToRespondWrapper}>
                           <Link
-                            // to={`/view-profile/${item?.sellers?.id}?requestId=${requestId}`}
+                            to={`/view-profile/${requestId}/${seller.id}`}
                             className={styles.profileLink}
                             onClick={() => hanleViewProfile(seller)}
                           >
