@@ -171,6 +171,7 @@
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
+  min-width: 138px;
 }
 
 .nextButton:hover {

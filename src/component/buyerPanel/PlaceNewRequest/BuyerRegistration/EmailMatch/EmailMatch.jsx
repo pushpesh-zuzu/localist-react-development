@@ -44,7 +44,9 @@ const EmailMatch = ({
     name: false,
     phone: false,
   });
-  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
+  const { requestLoader, buyerRequest, citySerach } = useSelector(
+    (state) => state.buyer
+  );
   const handleEmailChange = (e) => {
     setEmail(e.target.value); // keep it simple
     setErrors((prev) => ({ ...prev, email: false }));
@@ -303,12 +305,12 @@ const EmailMatch = ({
             <button
               className={styles.nextButton}
               onClick={handleSubmit}
-              disabled={registerLoader}
+              disabled={registerLoader || requestLoader}
               style={{
                 marginLeft: "auto",
               }}
             >
-              {registerLoader ? (
+              {registerLoader || requestLoader ? (
                 <Spin
                   indicator={
                     <LoadingOutlined spin style={{ color: "white" }} />
