@@ -112,6 +112,7 @@ const CloneCategory = ({ accountHeader }) => {
           accountHeader="Home & Garden"
           level={2}
           isNeedS={false}
+          doYouNeetTitle='home & garden'
           panelImage={Home}
           title="Home & Garden"
           findAccountTitle2 ='professionals'

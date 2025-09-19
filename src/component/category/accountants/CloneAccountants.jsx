@@ -20,7 +20,8 @@ const CloneAccountants = ({
   panelImage,
   defaultServiceName = "",
   heading2,
-  placeholderText
+  placeholderText,
+  doYouNeetTitle
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -212,7 +213,7 @@ const CloneAccountants = ({
           <div className={styles.innerformContainer}>
             <span>
               Do you need trusted{" "}
-              <span className={styles.blueText}> {title.toLowerCase()} </span>
+              <span className={styles.blueText}> {doYouNeetTitle?.toLowerCase()} </span>
               professionals?
             </span>
             <div className={styles.inputGroup}>

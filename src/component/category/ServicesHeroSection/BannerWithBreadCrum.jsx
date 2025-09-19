@@ -18,7 +18,9 @@ function BannerWithBreadCrum({
   isNeedS,
   heading2,
   findAccountTitle2,
-  placeholderText
+  placeholderText,
+  doYouNeetTitle
+  
 }) {
   return (
     <>
@@ -31,6 +33,7 @@ function BannerWithBreadCrum({
           defaultServiceName={defaultServiceName}
           heading2={heading2}
           placeholderText={placeholderText}
+          doYouNeetTitle={doYouNeetTitle}
         />
       )}
 
