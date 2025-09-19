@@ -3,13 +3,13 @@ import styles from "./Frequently.module.css";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 const { Panel } = Collapse;
-const Frequently = ({ FrequentlyQuestion }) => {
+const Frequently = ({ FrequentlyQuestion,faqTitle='' }) => {
   return (
     <>
       <div className={styles.frequently_container}>
         <div className={styles.frequently_container_wrap}>
           <h2 className={styles.frequently_heading}>
-            Frequently asked <b>questions</b>
+            Frequently asked <b>questions</b> {faqTitle || ''}
           </h2>
           <div className={styles.frequently_collapse}>
             <Collapse

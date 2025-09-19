@@ -4,11 +4,11 @@ import { AVERAGE_PRICE } from "../../../constant/subCategory";
 
 const AveragePrice = ({
   title = "",
-  avg_price ,
-  RELTED_PRICE,
+  avg_price='' ,
+  RELTED_PRICE='',
   showSpeicialits=false,
   isSingular=false,
-  monthlyText
+  monthlyText=''
 }) => {
   function capitalizeEachWord(str) {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -20,7 +20,7 @@ const AveragePrice = ({
         <span></span>
       </h2>
 
-      <AveragePriceTable monthlyText={monthlyText} AVERAGE_PRICE_LEVELTHREE={RELTED_PRICE} />
+      <AveragePriceTable monthlyText={monthlyText} AVERAGE_PRICE_LEVELTHREE={RELTED_PRICE || []} />
     </div>
   );
 };

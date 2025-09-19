@@ -34,7 +34,7 @@ const FindDetailAndBannerWrapper = ({
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}
         />
-        <RatingBadge />
+        {/* <RatingBadge /> */}
       </div>
       <div>
         <FindDetail paragraphs={paragraphs} />

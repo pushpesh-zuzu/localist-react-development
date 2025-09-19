@@ -62,6 +62,7 @@ import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerReg
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
 import { landingPages } from "./landingPages";
 import Transport from "../component/Level1/Transport/Transport";
+import { levelThreePagesRoutes } from "./leverThreeRoute";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -264,6 +265,16 @@ const routes = [
         ),
       },
       ...landingPages.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
+      ...levelThreePagesRoutes.map(({ path, Component }) => ({
         path,
         element: (
           <LocaleRedirect>
