@@ -19,7 +19,7 @@ const HowItWorks = ({ctaText,howItWorksData}) => {
                   <span className={styles.blueText}>{" "} {item.heading2}</span>
                    <span className={item.heading1}> {item?.heading3}</span>
                 </h3>
-                {item.heading3 ===undefined ? <br className={styles.lineBreak} /> :''}
+                {item?.break  ? <br className={styles.lineBreak} /> :''}
   
                 <p className={styles.description}>{item.description}</p>
               </div>
