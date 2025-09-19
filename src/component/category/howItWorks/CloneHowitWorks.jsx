@@ -27,7 +27,7 @@ const HowItWorks = ({ctaText,howItWorksData}) => {
           ))}
         </div>
         <button onClick={()=>handleScrollToBottom()} className={styles.ctaButton}>
-          Get Quotes From {ctaText} Professionals Near You
+          Get Quotes From {ctaText} Near You
         </button>
       </div>
     );

@@ -9,7 +9,9 @@ const AccountFindingInfo = ({
   para1,
   para2,
   para3,
-  isNeedS=true
+  para4,
+  isNeedS=true,
+  findAccountTitle2
 }) => {
   return (
     <div className={styles.findAccountInfoContainer}>
@@ -23,7 +25,7 @@ const AccountFindingInfo = ({
         <h2 className={styles.title}>
           Find the best
           <span className={styles.highlight}> {title.toLowerCase()}{isNeedS?"s":""} </span>
-          professionals in your area
+          {findAccountTitle2 || ''} in your area
         </h2>
 
         <div className={styles.descriptionContainer}>
@@ -41,6 +43,7 @@ const AccountFindingInfo = ({
             {para2}
           </p>
           <p>{para3}</p>
+          <p>{para4}</p>
         </div>
         {/* <button className={styles.accountantBtn}>Find an {title} today</button> */}
       </div>

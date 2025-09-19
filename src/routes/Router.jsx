@@ -61,6 +61,7 @@ import LocaleRedirect from "./LocaleRedirect";
 import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
 import { landingPages } from "./landingPages";
+import Transport from "../component/Level1/Transport/Transport";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -126,6 +127,14 @@ const routes = [
               accountHeader="Home & Garden"
               bestText={`It's super fast and easy!`}
             />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "transportation-services",
+        element: (
+          <LocaleRedirect>
+            <Transport />
           </LocaleRedirect>
         ),
       },

@@ -19,6 +19,8 @@ const CloneAccountants = ({
   title,
   panelImage,
   defaultServiceName = "",
+  heading2,
+  placeholderText
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -202,7 +204,7 @@ const CloneAccountants = ({
         <div className={styles.headingContainer}>
           <h1 style={{ color: "white" }}>
             Looking For <span className={styles.blueText}>{header} </span>{" "}
-            Professionals Near You?
+            {heading2 || ""} Near You?
           </h1>
         </div>
 
@@ -218,7 +220,7 @@ const CloneAccountants = ({
                 <label>What service do you require?</label>
                 <input
                   type="text"
-                  placeholder="Driveway Installation, Gardening Services, etc..."
+                  placeholder={placeholderText}
                   value={input}
                   onChange={(e) => {
                     setInput(e.target.value);

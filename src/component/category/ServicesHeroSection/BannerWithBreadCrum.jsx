@@ -4,7 +4,7 @@ import CloneAccountants from "../accountants/CloneAccountants";
 
 function BannerWithBreadCrum({
   level,
-  LevelOneTwoTitle='',
+  LevelOneTwoTitle = "",
   defaultServiceName,
   panelImage,
   accountHeader,
@@ -14,7 +14,11 @@ function BannerWithBreadCrum({
   para1,
   para2,
   para3,
-  isNeedS
+  para4,
+  isNeedS,
+  heading2,
+  findAccountTitle2,
+  placeholderText
 }) {
   return (
     <>
@@ -25,6 +29,8 @@ function BannerWithBreadCrum({
           panelImage={panelImage}
           title={title}
           defaultServiceName={defaultServiceName}
+          heading2={heading2}
+          placeholderText={placeholderText}
         />
       )}
 
@@ -36,8 +42,10 @@ function BannerWithBreadCrum({
         para1={para1}
         para2={para2}
         para3={para3}
+        para4={para4}
         panelImage={panelImage}
         isNeedS={isNeedS}
+        findAccountTitle2={findAccountTitle2}
       />
     </>
   );
