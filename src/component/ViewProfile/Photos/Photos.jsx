@@ -17,6 +17,8 @@ const Photos = ({ details }) => {
   const containerRef = useRef(null);
   const [showPagination, setShowPagination] = useState(false);
 
+  const [previewImg, setPreviewImg] = useState(null);
+
   useEffect(() => {
     if (containerRef.current) {
       const { scrollWidth, clientWidth } = containerRef.current;
@@ -36,6 +38,9 @@ const Photos = ({ details }) => {
                 src={`${BASE_IMAGE}/users/${img.trim()}`}
                 alt={`Company Photo ${index + 1}`}
                 className={styles.profileImg}
+                onClick={() =>
+                  setPreviewImg(`${BASE_IMAGE}/users/${img.trim()}`)
+                }
               />
             ))
           : // <img src={DummyImage} alt="Profile" className={styles.profileImg} />
@@ -47,6 +52,45 @@ const Photos = ({ details }) => {
         <div className={styles.paginationBox}>
           <img src={leftpaginationImg} alt="left" />
           <img src={paginationImg} alt="right" />
+        </div>
+      )}
+
+      {/* {previewImg && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setPreviewImg(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={previewImg} alt="Preview" className={styles.previewImg} />
+            <button
+              className={styles.closeBtn}
+              onClick={() => setPreviewImg(null)}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )} */}
+      {previewImg && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setPreviewImg(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={previewImg} alt="Preview" className={styles.previewImg} />
+            <button
+              className={styles.closeBtn}
+              onClick={() => setPreviewImg(null)}
+            >
+              ✕
+            </button>
+          </div>
         </div>
       )}
     </div>
