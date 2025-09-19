@@ -31,7 +31,7 @@ function Transport() {
         para2="From squeaky-clean sedans to stretch limos, speedy airport shuttles to big group coaches—getting from A to B has never looked so good. We’ll connect you with local transport pros who know how to move you in style (and on time)"
         para3="Not sure how to find a reliable transportation service? Simply tell us what you need—whether it’s a transfer, courier delivery, removals, or local taxi hire—and where you need it. We’ll then recommend the best professionals near you. Compare services, read verified reviews, and get free, tailored quotations for your journey."
         para4={`It’s quick, easy, and stress-free!`}
-        placeholderText='Airport Transfers,Bus & Coach Hire,etc...'
+        placeholderText='Airport Transfers, Bus & Coach Hire, etc...'
       />
       <HowItWorks
         howItWorksData={TransportHowItWork}
