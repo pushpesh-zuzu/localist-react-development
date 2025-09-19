@@ -238,6 +238,7 @@
   .rightContainer,
   .container {
     padding: 15px;
+    width: -webkit-fill-available;
   }
 }
 
@@ -246,12 +247,9 @@
 .tabContainerBox {
   position: relative;
   top: 0;
-
   z-index: 9;
   height: 80vh;
-
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 .tabContainers {
   position: sticky;
@@ -299,10 +297,13 @@
 @media (max-width: 480px) {
   .tab {
     font-size: 12px;
-    padding: 6px 10px;
+    padding: 6px 8px;
   }
   .tabContainers {
-    gap: 4px;
+    gap: 0px;
+    /* flex-wrap: wrap; */
+    overflow: auto;
+    flex-wrap: unset;
   }
 }
 

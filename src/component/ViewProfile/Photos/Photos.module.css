@@ -3,6 +3,8 @@
   height: 120px;
   display: flex;
   gap: 12px;
+  width: -webkit-fill-available;
+  overflow-x: scroll;
 }
 .photoContainer h2 {
   font-size: 22px;

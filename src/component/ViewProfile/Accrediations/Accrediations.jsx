@@ -1,15 +1,15 @@
-import React from "react"
-import styles from "./Accrediations.module.css"
+import React from "react";
+import styles from "./Accrediations.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import IMG from "../../../assets/Images/Setting/newAccoredationImg.svg"
+import IMG from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import { BASE_IMAGE, BASE_IMAGE_URL } from "../../../utils";
 import { baseURL } from "../../../Api/axiosInstance";
 
 const Accrediations = ({ details }) => {
-  const data = details?.accreditations
+  const data = details?.accreditations;
   return (
     <div className={styles.accrediationsContainer}>
-      <h2>Accrediations</h2>
+      <h2 style={{ marginBottom: 20 }}>Accrediations</h2>
       {/* {data?.map((item) => {
         return (
           <>
@@ -24,46 +24,49 @@ const Accrediations = ({ details }) => {
           </>
         )
       }) } */}
-      {data && data.length > 0 ? (
-        // ✅ When accreditations data exists
-        data.map((item, index) => (
-          <div key={index} className={styles.accrediationsBoxContainer}>
-            <div>
-              <img
-                src={item?.image ? `${BASE_IMAGE}/accreditations/${item.image}` : IMG}
-                alt="accrediation"
-                className={styles.accrediationImage}
-                width={93}
-                height={93}
-              />
+      {data && data.length > 0
+        ? // ✅ When accreditations data exists
+          data.map((item, index) => (
+            <div key={index} className={styles.accrediationsBoxContainer}>
+              <div>
+                <img
+                  src={
+                    item?.image
+                      ? `${BASE_IMAGE}/accreditations/${item.image}`
+                      : IMG
+                  }
+                  alt="accrediation"
+                  className={styles.accrediationImage}
+                  width={93}
+                  height={93}
+                />
+              </div>
+              <div className={styles.accrediationsBox}>{item?.name}</div>
             </div>
-            <div className={styles.accrediationsBox}>{item?.name}</div>
-          </div>
-        ))
-      ) : (
-
-        // <div className={styles.accrediationsBoxContainer}>
-        //   <div>
-        //     <img
-        //       src={IMG}
-        //       alt="default accrediation"
-        //       className={styles.accrediationImage}
-        //       width={93}
-        //       height={93}
-        //     />
-        //   </div>
-        //   <div className={styles.accrediationsBox}>NO Text</div>
-        // </div>
-        ''
-      )}
+          ))
+        : // <div className={styles.accrediationsBoxContainer}>
+          //   <div>
+          //     <img
+          //       src={IMG}
+          //       alt="default accrediation"
+          //       className={styles.accrediationImage}
+          //       width={93}
+          //       height={93}
+          //     />
+          //   </div>
+          //   <div className={styles.accrediationsBox}>NO Text</div>
+          // </div>
+          ""}
       <div className={styles.infoBox}>
         <span className={styles.infoIcon}>
           <img src={iIcon} alt="" style={{ marginTop: "4px" }} />
         </span>
         <span>
-          Professionals report their own accrediations. Please ask them for more details if required. </span>
+          Professionals report their own accrediations. Please ask them for more
+          details if required.{" "}
+        </span>
       </div>
     </div>
-  )
-}
-export default Accrediations
+  );
+};
+export default Accrediations;

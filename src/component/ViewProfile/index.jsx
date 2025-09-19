@@ -128,7 +128,7 @@ const ViewProfiles = () => {
       const container = rightContainerRef.current;
       const targetPosition = targetRef.current.offsetTop;
 
-      const OFFSET = 70;
+      const OFFSET = 40;
 
       container.scrollTo({
         top: targetPosition - OFFSET,
@@ -157,7 +157,7 @@ const ViewProfiles = () => {
           // Added offset for better detection
           console.log(activeTab, "name123");
           {
-            !onActiveTab && setActiveTab(section.name);
+            // !onActiveTab && setActiveTab(section.name);
           }
           // setTimeout(() => {
           // }, 1000);

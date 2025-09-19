@@ -1,5 +1,5 @@
 .section {
-  padding: 40px 0;
+  padding: 16px 0;
   border-bottom: 1px solid #eee;
 }
 
@@ -74,7 +74,7 @@
 /* Mobile: max-width 480px */
 @media (max-width: 480px) {
   .section {
-    padding: 20px 0;
+    padding: 10px 0;
   }
 
   .section h2 {
