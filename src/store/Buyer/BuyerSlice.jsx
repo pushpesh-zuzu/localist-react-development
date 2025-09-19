@@ -93,7 +93,7 @@ export const createRequestData = (requestData) => {
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
-        console.log(response, "response for request id");
+        console.log(response?.data?.data, "response for request id");
         dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
         // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
@@ -105,6 +105,8 @@ export const createRequestData = (requestData) => {
         // navigate("/buyers/create");
       }
     } catch (error) {
+      console.log(error, "error123");
+
       showToast("error", error?.message);
     } finally {
       dispatch(setCreateRequesLoader(false));
@@ -134,7 +136,7 @@ export const registerQuoteCustomer = (customerData) => {
       }
     } catch (error) {
       console.error("Error registering quote customer:", error?.response?.data);
-      showToast("error", error?.message);
+      showToast("error", error?.response?.data?.message);
       throw error;
     } finally {
       dispatch(setCreateRequesLoader(false));

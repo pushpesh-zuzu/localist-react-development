@@ -209,7 +209,7 @@ const MyResponse = () => {
     const phoneNumber = item?.phone;
     if (phoneNumber) {
       const phoneUrl = `tel:${phoneNumber}`;
-      window.open(phoneUrl, "_blank");
+      window.location.href = phoneUrl;
     } else {
       showToast("error", "Phone number is not available.");
     }

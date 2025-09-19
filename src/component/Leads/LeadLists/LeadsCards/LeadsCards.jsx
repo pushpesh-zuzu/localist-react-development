@@ -449,6 +449,13 @@ const LeadsCards = ({ enoughCredit }) => {
                                   {item?.customer?.email
                                     ? `${item?.customer?.email
                                         .split("@")[0]
+                                        .substring(0, 2)}${"*".repeat(6)}@${
+                                        item?.customer?.email.split("@")[1]
+                                      }`
+                                    : "N/A"}
+                                  {/* {item?.customer?.email
+                                    ? `${item?.customer?.email
+                                        .split("@")[0]
                                         .substring(0, 2)}${"*".repeat(
                                         Math.max(
                                           0,
@@ -456,7 +463,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                             .length - 2
                                         )
                                       )}@${item?.customer?.email.split("@")[1]}`
-                                    : "N/A"}
+                                    : "N/A"} */}
                                 </span>
                               </div>
                             </div>

@@ -37,6 +37,8 @@ const ViewProfiles = () => {
   const queryParams = new URLSearchParams(location.search);
   const isCustomButton = queryParams.get("customBtn") === "true";
   const [activeTab, setActiveTab] = useState("About");
+  const [onActiveTab, setOnActiveTab] = useState(false);
+  console.log(activeTab, "activeTabactiveTab");
   const [isopen, setIsOpen] = useState(true);
   const [customerModal, setCustomerModal] = useState(false);
   const dispatch = useDispatch();
@@ -85,11 +87,17 @@ const ViewProfiles = () => {
 
   const closeModal = () => setIsOpen(false);
   const rightContainerRef = useRef(null);
+  console.log(activeTab, "activeTab");
 
   // Tab click handler function
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
+    console.log(tabName, "tabNaME");
+    setOnActiveTab(true);
 
+    setInterval(() => {
+      setOnActiveTab(false);
+    }, 1000);
     // Get the corresponding ref based on tab name
     let targetRef;
     switch (tabName) {
@@ -147,7 +155,13 @@ const ViewProfiles = () => {
         const offsetTop = section.ref.current?.offsetTop || 0;
         if (scrollY >= offsetTop - 0) {
           // Added offset for better detection
-          setActiveTab(section.name);
+          console.log(activeTab, "name123");
+          {
+            !onActiveTab && setActiveTab(section.name);
+          }
+          // setTimeout(() => {
+          // }, 1000);
+
           break;
         }
       }

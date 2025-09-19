@@ -98,7 +98,6 @@
   display: flex;
   gap: 20px;
   align-items: center;
- 
 }
 
 .logoSection {
@@ -108,6 +107,7 @@
 .logo {
   width: 104px;
   height: 69px;
+  object-fit: contain;
 }
 
 .accreditationList {
@@ -175,10 +175,10 @@
   margin-top: 28px;
   cursor: pointer !important;
 }
-.addAccreditationButton:hover{
+.addAccreditationButton:hover {
   background-color: #0096c4;
 }
-.addAccreditationButtons:hover{
+.addAccreditationButtons:hover {
   background-color: #ccc;
 }
 .footer {
@@ -232,13 +232,12 @@
   cursor: pointer !important;
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   .logoSectionWrapper {
     flex-direction: column;
     gap: 0px;
   }
   .inputGroup {
-
     flex-direction: column;
   }
   .title {
@@ -252,55 +251,52 @@
     flex-direction: column;
   }
   .addAccreditationButton {
-  background-color: var(--primary-color);
-  color: white;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 3px;
-  font-weight: 500;
-  font-size: 14px;
-  vertical-align: middle;
-  margin-top: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-top: 12px;
+  }
+  .addAccreditationButtons {
+    background-color: #000000;
+    color: white;
+    box-shadow: 0px 0px 2px 0.5px #0000001a;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-top: 0px;
+    cursor: pointer !important;
+  }
+  .card {
+    border: 1px solid #d9d9d9;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .logo {
+    width: 100%;
+    height: 100%;
+  }
 }
- .addAccreditationButtons {
-  background-color: #000000;
-  color: white;
-  box-shadow: 0px 0px 2px 0.5px #0000001a;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 3px;
-  font-weight: 500;
-  font-size: 14px;
-  vertical-align: middle;
-  margin-top: 0px;
-  cursor: pointer !important;
-}
-.card {
-  border: 1px solid #d9d9d9;
-  padding: 20px 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.logo {
-  width: 100%;
-  height: 100%;
-}
-}
-@media screen and (max-width:380px) {
+@media screen and (max-width: 380px) {
   .header {
-  display: flex;
- flex-direction: column;
-  align-items: start;
-}
-.cancel,
-.save {
-   width: 84px;
-     padding: 8px 10px;
-     font-size: 14px;
-}
-
-
-
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .cancel,
+  .save {
+    width: 84px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./ViewProfile.module.css"; // Adjust path as needed
+import styles from "./ViewProfile.module.css";
 const TabNav = ({ activeTab, onTabClick }) => {
   const tabs = [
     "About",
@@ -10,6 +10,9 @@ const TabNav = ({ activeTab, onTabClick }) => {
     "Photos",
   ];
 
+  console.log(activeTab, "activeTab");
+  console.log(onTabClick, "onTabClick");
+
   return (
     <div className={styles.tabContainers}>
       {tabs.map((tab) => (
@@ -18,7 +21,7 @@ const TabNav = ({ activeTab, onTabClick }) => {
           className={`${styles.tab} ${activeTab === tab ? styles.active : ""}`}
           onClick={() => onTabClick(tab)}
         >
-          <div>{tab}</div>
+          {tab}
         </div>
       ))}
     </div>

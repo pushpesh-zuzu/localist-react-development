@@ -10,7 +10,9 @@ const TransgationLogTable = ({ data }) => {
   };
   return (
     <div className={styles.container}>
-      <h2 onClick={handleOpen}>Credit transaction log</h2>
+      <h2 className={styles.creditTransactionLog} onClick={handleOpen}>
+        Credit transaction log
+      </h2>
       <div className={styles.scrollTable}>
         <table className={styles.table}>
           <thead>

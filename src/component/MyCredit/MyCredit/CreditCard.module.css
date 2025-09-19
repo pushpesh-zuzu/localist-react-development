@@ -1,11 +1,13 @@
 .container {
-  background-color: #e3f6fc;
+  /* background-color: #e3f6fc; */
   padding: 11px 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap; /* allows wrapping on smaller screens */
   gap: 10px;
+  width: 100%;
+  border: 1px solid #d9d9d9;
 }
 
 .visaCard {
@@ -15,6 +17,8 @@
   font-size: 18px;
   font-weight: 600;
   flex: 1; /* allows it to shrink/grow */
+  /* width: 100%; */
+  max-width: 800px;
   min-width: 250px;
 }
 

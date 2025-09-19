@@ -144,6 +144,7 @@ const AccreditationsAccordion = ({ details }) => {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
+      window.scrollTo(0, 0);
     } else if (accreditationsUpdateError) {
       toast.error(`Error: ${accreditationsUpdateError}`);
       dispatch(clearAccreditationsStatus());

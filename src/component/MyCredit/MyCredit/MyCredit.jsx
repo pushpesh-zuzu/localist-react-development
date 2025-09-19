@@ -77,13 +77,20 @@ const MyCredits = () => {
   } = useSelector((state) => state.myCredit);
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
   const [isChecked, setIsChecked] = useState(true);
+  const [checkedPlans, setCheckedPlans] = useState({});
+
   const [isAddCardModal, setIsAddCardModal] = useState(false);
   const handleOpen = () => {
     setIsOpen(true);
   };
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
+  const handleCheckboxChange = (planId) => {
+    // setIsChecked(e.target.checked);
+    setCheckedPlans((prev) => ({
+      ...prev,
+      [planId]: !prev[planId],
+    }));
   };
+
   const userId = userToken?.remember_tokens ?? registerData?.remember_tokens;
 
   // API se data aane ke baad automation state update karo
@@ -224,21 +231,70 @@ const MyCredits = () => {
           We apply a small fee for each new customer you choose to contact.
         </p>
 
+        <div className={styles.pickYourCredit}>
+          <p>
+            <span>Pick Your Credit Plan </span> & Access New Business Today
+          </p>
+        </div>
+
         <div className={styles.cardList}>
+          {creditPlanList?.length === 0 ? (
+            <div className={styles.noPlanText}></div>
+          ) : (
+            // creditPlanList?.map((item, index) => (
+            [...creditPlanList]
+              .sort((a, b) => a.price - b.price)
+              .map((item, index) => (
+                <div className={styles.card} key={index}>
+                  {/* Title */}
+                  <div className={styles.cardHeader}>
+                    <h3>{item?.name}</h3>
+                    <span className={styles.creditTag}>
+                      {item?.no_of_leads} Credits
+                    </span>
+                  </div>
+
+                  {/* Responses */}
+                  <p className={styles.responses}>
+                    About {item?.no_of_responses} Responses
+                  </p>
+
+                  {/* Price */}
+                  <div className={styles.price}>
+                    £{item?.price}
+                    <small>(Excl. tax)</small>
+                  </div>
+
+                  {/* Buy Button */}
+                  <button
+                    className={styles.buyButton}
+                    onClick={() => handleBuyNow(item)}
+                  >
+                    Buy Now
+                  </button>
+
+                  {/* Checkbox */}
+                  <div className={styles.checkboxWrap}>
+                    <input
+                      type="checkbox"
+                      // checked={isChecked}
+                      checked={!!checkedPlans[item.id]}
+                      // onChange={handleCheckboxChange}
+                      onChange={() => handleCheckboxChange(item.id)}
+                    />
+                    <label>Auto top-up next time</label>
+                  </div>
+                </div>
+              ))
+          )}
+        </div>
+
+        {/* <div className={styles.cardList}>
           {creditPlanList?.length === 0 ? (
             <div className={styles.noPlanText}> {""} </div>
           ) : (
             creditPlanList?.map((item, index) => (
               <div className={styles.card} key={index}>
-                {/* {item?.plan_type !== "normal" ? (
-                  <button className={styles.badge}>
-                    {item.description}
-                    <img src={airoImg} alt="..." />{" "}
-                  </button>
-                ) : (
-                  <button className={styles.badge}>{item.description}</button>
-                )} */}
-
                 {item?.plan_type !== "normal" ? (
                   <button className={styles.badge}>
                     {item?.description && item?.description.trim() !== ""
@@ -270,21 +326,11 @@ const MyCredits = () => {
                   </div>
 
                   <div className={styles.buttonWrap}>
-                    {/* <button className={styles.buyButton} onClick={() =>handleBuyNow(item)} >{buyCreditLoader ?  <Spin
-                         indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                       />  : "Buy Now"}</button> */}
                     <button
                       className={styles.buyButton}
                       onClick={() => handleBuyNow(item)}
                     >
                       Buy Now
-                      {/* {activeLoaderId === item.id ? (
-                      <Spin
-                        indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-                      />
-                    ) : (
-                      "Buy Now"
-                    )} */}
                     </button>
                     <div className={styles.checkboxWrap}>
                       <input
@@ -314,11 +360,29 @@ const MyCredits = () => {
               </div>
             ))
           )}
+        </div> */}
+
+        <div className={styles.parentBanner}>
+          <div className={styles.banner}>
+            {/* Title */}
+            <h2 className={styles.bannertitle}>Build Your Own Credit Plan</h2>
+
+            {/* Subtitle */}
+            <p className={styles.subtitle}>
+              If our standard Credit Packs don’t meet your growth needs, you can
+              build your own here
+            </p>
+
+            {/* Button */}
+            <button className={styles.bannerbutton} onClick={handleOpen}>
+              Build Your Credit Pack
+            </button>
+          </div>
         </div>
 
-        <div className={styles.bottomText} onClick={handleOpen}>
+        {/* <div className={styles.bottomText} onClick={handleOpen}>
           <span>BUY MORE CREDITS</span>
-        </div>
+        </div> */}
 
         {/* <ActiveFreeTrial /> */}
         <div className={styles.VisaCard}>

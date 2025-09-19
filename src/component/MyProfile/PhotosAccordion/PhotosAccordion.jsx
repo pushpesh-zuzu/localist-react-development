@@ -121,6 +121,7 @@ const PhotosAccordion = ({ details }) => {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
+      window.scrollTo(0, 0);
     } else if (photoUpdateError) {
       toast.error(`Failed: ${photoUpdateError}`);
       dispatch(clearPhotoUpdateStatus());
