@@ -1,11 +1,11 @@
 import styles from "./averageprice.module.css";
 import AveragePriceTable from "./AveragePriceTable";
-import { AVERAGE_PRICE } from "../../../constant/subCategory";
+// import { AVERAGE_PRICE } from "../../../constant/subCategory";
 
 const AveragePrice = ({
   title = "",
   avg_price='' ,
-  RELTED_PRICE='',
+  RELTED_PRICE=[],
   showSpeicialits=false,
   isSingular=false,
   monthlyText=''
