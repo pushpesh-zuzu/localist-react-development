@@ -3,35 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- <link rel="icon" type="image/jpeg" href="./favicon.jpeg" /> -->
-
-    <!-- Google tag (gtag.js) -->
-    <!-- <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=AW-17528251553"
-    ></script> -->
-    <!-- <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "AW-17528251553");
-    </script> -->
-    <!-- Google tag (gtag.js) -->
-    <!-- <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-QJ5NH8NF5Q"
-    ></script> -->
-    <!-- <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-QJ5NH8NF5Q");
-    </script> -->
-    <!-- Load both scripts after LCP -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -39,7 +10,6 @@
       }
 
       function loadTrackingScripts() {
-        // Load AW-17528251553
         const adScript = document.createElement("script");
         adScript.async = true;
         adScript.src =
@@ -54,8 +24,6 @@
           gtag('config', 'AW-17528251553');
         `;
         document.head.appendChild(adConfig);
-
-        // Load G-QJ5NH8NF5Q
         const gaScript = document.createElement("script");
         gaScript.async = true;
         gaScript.src =

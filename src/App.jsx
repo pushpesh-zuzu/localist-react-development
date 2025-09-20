@@ -113,6 +113,12 @@ function App({ initialUrl, hostname }) {
     typeof window !== "undefined"
       ? window.location.hostname === "ps1.localists.com"
       : hostname === "ps1.localists.com";
+  console.log(
+    typeof window !== "undefined" && window.location.hostname,
+    "window.location.hostname"
+  );
+  console.log(hostname, "hostname");
+
   return (
     <>
       {(isDevEnvironment || isPs1Environment) && (
