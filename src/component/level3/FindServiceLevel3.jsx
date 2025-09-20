@@ -54,8 +54,6 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
             }
 
             if (block.type === "uili") {
-              //  const isFirstUiliInGroup = !prevBlock || prevBlock.type !== "uili" || false;
-
               return (
                 <ul
                   key={index}
@@ -65,7 +63,12 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
                   }}
                 >
                   <li className={styles.findAnAccountant_paragrap}>
-                    <b>{block.heading}</b> {block.text}
+                    <b>{block.heading}</b>{" "}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: block.text, // block.text can now include <a>, <strong>, etc.
+                      }}
+                    />
                   </li>
                 </ul>
               );

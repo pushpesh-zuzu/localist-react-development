@@ -9,6 +9,7 @@ const SearchAccountantLeve3 = ({
   title = "",
   defaultService,
   isNeedS = false,
+  isSingular = false,
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -140,7 +141,7 @@ const SearchAccountantLeve3 = ({
   return (
     <div className={styles.searchcontainer}>
       <h1 style={{ color: "white" }}>
-        Find{" "}
+        Find {isSingular ? "a " : ""}
         <span className={styles.heading}>
           {title}
           {isNeedS ? "s" : ""}
