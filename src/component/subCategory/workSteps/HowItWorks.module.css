@@ -194,7 +194,7 @@
   }
 
   .lineBreak {
-    display: block;
+    display: none;
   }
 }
 

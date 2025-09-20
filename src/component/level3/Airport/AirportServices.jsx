@@ -61,7 +61,7 @@ function AirportServices() {
         title={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.ctaText}
       />
       <Frequently
-        faqTitle={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.faqTitle}
+        // faqTitle={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.faqTitle}
         FrequentlyQuestion={AIRPORT_TRANSFER_FAQ["Airport Transfers"]}
       />
       <AveragePriceTransportServices

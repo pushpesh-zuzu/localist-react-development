@@ -109,9 +109,13 @@ function App({ initialUrl, hostname }) {
   // console.log(isDevEnvironment,'isDevEnvironment')
   // console.log( typeof window !== 'undefined' && window.location.hostname,'window.location.hostname')
   // console.log(hostname,'hostname')
+  const isPs1Environment =
+    typeof window !== "undefined"
+      ? window.location.hostname === "ps1.localists.com"
+      : hostname === "ps1.localists.com";
   return (
     <>
-      {isDevEnvironment && (
+      {(isDevEnvironment || isPs1Environment) && (
         <Helmet>
           <meta name="robots" content="noindex" />
         </Helmet>
