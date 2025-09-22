@@ -15,6 +15,7 @@ export function render(url,hostname) {
       </HelmetProvider>
     </Provider>
   );
+  const state = store.getState();
 
   return {
     html: appHtml,
@@ -24,5 +25,6 @@ export function render(url,hostname) {
            ${helmetContext.helmet.link.toString()}
            ${helmetContext.helmet.script.toString()}`
       : "",
+    state,
   };
 }

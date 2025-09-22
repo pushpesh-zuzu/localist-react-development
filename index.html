@@ -52,9 +52,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0,  maximum-scale=1"
     />
-    <!-- 1. Preconnect for Google Fonts -->
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <!-- Preconnect/DNS-Prefetch to reduce connection setup for critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://dev.localists.com" crossorigin />
+    <link rel="dns-prefetch" href="https://dev.localists.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- 3. Global CSS: render-blocking to prevent FOUC during SSR dev -->
     <!-- <link rel="stylesheet" href="/src/index.css" />
@@ -93,6 +99,66 @@
 
     <!-- 5. Preload Important JS -->
     <link rel="modulepreload" href="/src/entry-client.jsx" />
+
+    <!-- Progressive image hinting to reduce LCP/TBT without visual changes -->
+    <script>
+      (function () {
+        function enhanceImage(img) {
+          if (!img) return;
+          // Always decode asynchronously to avoid main-thread blocking
+          try { img.decoding = "async"; } catch (e) {}
+          // Determine if the image is currently in the viewport
+          var rect = img.getBoundingClientRect ? img.getBoundingClientRect() : null;
+          var inView =
+            rect &&
+            rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.bottom > 0 &&
+            rect.left < (window.innerWidth || document.documentElement.clientWidth) &&
+            rect.right > 0;
+
+          // Only lazy-load offscreen images (preserves above-the-fold visuals)
+          if (!inView && !img.hasAttribute("loading")) {
+            try { img.loading = "lazy"; } catch (e) {}
+          }
+
+          // Nudge the browser on likely-LCP images
+          if (inView && !img.hasAttribute("fetchpriority")) {
+            var w = rect && rect.width ? rect.width : (img.width || 0);
+            var h = rect && rect.height ? rect.height : (img.height || 0);
+            // If reasonably large in viewport, prioritize it
+            if (w * h > 40000) {
+              try { img.fetchPriority = "high"; } catch (e) {}
+            }
+          }
+        }
+
+        function run() {
+          // Enhance all current images in the SSR DOM
+          var imgs = document.getElementsByTagName("img");
+          for (var i = 0; i < imgs.length; i++) enhanceImage(imgs[i]);
+
+          // Observe future images inserted during hydration/navigation
+          var mo = new MutationObserver(function (mutations) {
+            mutations.forEach(function (m) {
+              m.addedNodes.forEach(function (n) {
+                if (n && n.tagName === "IMG") {
+                  enhanceImage(n);
+                } else if (n && n.querySelectorAll) {
+                  n.querySelectorAll("img").forEach(enhanceImage);
+                }
+              });
+            });
+          });
+          mo.observe(document.documentElement, { childList: true, subtree: true });
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", run, { once: true });
+        } else {
+          run();
+        }
+      })();
+    </script>
 
     <meta property="og:type" content="website" />
     <!--css-outlet-->

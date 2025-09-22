@@ -1,13 +1,16 @@
 import axios from "axios";
+import React, { useEffect, useRef, useMemo } from "react";
 import { RouterProvider } from "react-router-dom";
 import createAppRouter from "./routes/Router";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect, useRef, useMemo } from "react";
+const LazyToastContainer = React.lazy(() =>
+  import("react-toastify").then((m) => ({ default: m.ToastContainer }))
+);
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
+import FullScreenSpinner from "./component/common/fullScreenSpinner/FullScreenSpinner";
 
-function App({ initialUrl, hostname }) {
+function App({ initialUrl, hostname, createRouterFactory }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
@@ -101,7 +104,8 @@ function App({ initialUrl, hostname }) {
   }, [registerStep, selectedServiceFormData]);
 
   // Create the router once to avoid re-instantiation on every render (which can blank the Outlet on navigation in SSR/CSR)
-  const router = useMemo(() => createAppRouter(initialUrl), []);
+  const routerFactory = createRouterFactory || createAppRouter;
+  const router = useMemo(() => routerFactory(initialUrl), [routerFactory, initialUrl]);
   const isDevEnvironment =
     typeof window !== "undefined"
       ? window.location.hostname === "dev.localists.com"
@@ -126,8 +130,12 @@ function App({ initialUrl, hostname }) {
           <meta name="robots" content="noindex" />
         </Helmet>
       )}
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <React.Suspense fallback={<FullScreenSpinner />}>
+        <RouterProvider router={router} />
+      </React.Suspense>
+      <React.Suspense fallback={null}>
+        <LazyToastContainer />
+      </React.Suspense>
     </>
   );
 }
