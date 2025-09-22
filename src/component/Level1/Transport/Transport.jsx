@@ -44,7 +44,7 @@ function Transport() {
         data={[
           {
             name: "Airport Transfers",
-            // path: "",
+            path: "airport-transfers-near-me",
           },
           //   {
           //     name: "Holiday transfers",

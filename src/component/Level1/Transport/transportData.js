@@ -35,6 +35,7 @@ const TransportHowItWork= [
     // availableOnline: true,
     title: "Airport Transfers",
     image: AirportTransfers,
+    path:'airport-transfers-near-me'
   },
   //  {
   //   id: 2,
