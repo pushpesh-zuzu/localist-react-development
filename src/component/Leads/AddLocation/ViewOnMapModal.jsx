@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./ViewOnMapModal.module.css";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const ViewOnMapModal = ({
   open,
@@ -18,19 +19,18 @@ const ViewOnMapModal = ({
     lat: 20.5937, // Default center (India)
     lng: 78.9629,
   });
-  console.log(locationData?.travel_time,"locationData")
+  console.log(locationData?.travel_time, "locationData");
 
- 
   const drawCircle = (center) => {
     if (!window.google || !mapInstance.current) return;
-    
+
     // Remove existing circle if any
     if (circleRef.current) {
       circleRef.current.setMap(null);
     }
-    
+
     let radiusInMeters = 0;
-    
+
     if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
       // Rough estimate to cover India (1500 km ~ 932 miles)
       radiusInMeters = 1500000;
@@ -40,16 +40,16 @@ const ViewOnMapModal = ({
       // Parse the travel time value
       let timeValue = locationData.travel_time;
       let minutes = 0;
-      
+
       if (timeValue.includes("hour") || timeValue.includes("hr")) {
         // Handle hours format (e.g., "1 hour", "1.5 hours")
-        const hourValue = parseFloat(timeValue.replace(/[^0-9.]/g, ''));
+        const hourValue = parseFloat(timeValue.replace(/[^0-9.]/g, ""));
         minutes = hourValue * 60;
       } else if (timeValue.includes("min")) {
         // Handle minutes format (e.g., "30 min", "45 min")
-        minutes = parseFloat(timeValue.replace(/[^0-9.]/g, ''));
+        minutes = parseFloat(timeValue.replace(/[^0-9.]/g, ""));
       }
-      
+
       // Calculate radius: speed (km/h) * time (h) * 1000 (to meters)
       // 30 km/h ÷ 60 min/h = 0.5 km/min
       radiusInMeters = minutes * 0.5 * 1000;
@@ -58,7 +58,7 @@ const ViewOnMapModal = ({
       const radiusInMiles = parseFloat(locationData.miles) || 1;
       radiusInMeters = radiusInMiles * 1609.34;
     }
-    
+
     // Create the circle
     circleRef.current = new window.google.maps.Circle({
       center,
@@ -71,15 +71,13 @@ const ViewOnMapModal = ({
       map: mapInstance.current,
     });
   };
-  
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       // Load Google Maps API if not already loaded
       if (!window.google) {
         const script = document.createElement("script");
-        script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,geometry";
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
         script.async = true;
         script.defer = true;
         script.onload = () => {
@@ -106,10 +104,6 @@ const ViewOnMapModal = ({
     loadGoogleMapsScript();
   }, [open]);
 
-
-
-  
-
   const getLatLngFromPincode = async (pincode) => {
     const apiKey = "AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE"; // Replace with your real API key
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${locationData?.postcode}&components=country:UK&key=${apiKey}`;
@@ -130,55 +124,50 @@ const ViewOnMapModal = ({
     }
   };
 
-//   useEffect(() => {
-//     const fetchLatLng = async () => {
-//       if (!locationData?.postcode || !mapLoaded || !window.google || !mapInstance.current) return;
+  //   useEffect(() => {
+  //     const fetchLatLng = async () => {
+  //       if (!locationData?.postcode || !mapLoaded || !window.google || !mapInstance.current) return;
 
-//       try {
-//         const coords = await getLatLngFromPincode(locationData?.postcode);
-//         const newCenter = { lat: coords.lat, lng: coords.lng };
-//         // setMapCenter(newCenter);
-//         console.log(newCenter,"new")
+  //       try {
+  //         const coords = await getLatLngFromPincode(locationData?.postcode);
+  //         const newCenter = { lat: coords.lat, lng: coords.lng };
+  //         // setMapCenter(newCenter);
+  //         console.log(newCenter,"new")
 
-//         // Center the map
-//         mapInstance.current.setCenter(newCenter);
-//         mapInstance.current.setZoom(12);
+  //         // Center the map
+  //         mapInstance.current.setCenter(newCenter);
+  //         mapInstance.current.setZoom(12);
 
-//         // Remove previous marker if exists
-//         if (markerRef.current) {
-//           markerRef.current.setMap(null);
-//         }
+  //         // Remove previous marker if exists
+  //         if (markerRef.current) {
+  //           markerRef.current.setMap(null);
+  //         }
 
-//         // Create new marker
-//         markerRef.current = new window.google.maps.Marker({
-//           position: newCenter,
-//           map: mapInstance.current,
-//         });
+  //         // Create new marker
+  //         markerRef.current = new window.google.maps.Marker({
+  //           position: newCenter,
+  //           map: mapInstance.current,
+  //         });
 
-//         // Draw the circle
-//         drawCircle(newCenter);
-//       } catch (error) {
-//         console.error("Error setting map location:", error);
-//       }
-//     };
+  //         // Draw the circle
+  //         drawCircle(newCenter);
+  //       } catch (error) {
+  //         console.error("Error setting map location:", error);
+  //       }
+  //     };
 
-//     fetchLatLng();
-//   }, [mapLoaded, locationData?.postcode]);
-
-
-
-
-
+  //     fetchLatLng();
+  //   }, [mapLoaded, locationData?.postcode]);
 
   // Effect to update map when modal opens with a postcode
- 
+
   useEffect(() => {
     const fetchLatLng = async () => {
       if (!mapLoaded || !window.google || !mapInstance.current) return;
-  
+
       let newCenter;
-  
-      if (locationData.type === "Nationwide" && locationData.nation_wide == 1){
+
+      if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
         newCenter = { lat: 22.9734, lng: 78.6569 }; // Center of India
       } else if (locationData?.postcode) {
         try {
@@ -189,53 +178,58 @@ const ViewOnMapModal = ({
           return;
         }
       }
-  
+
       if (newCenter) {
         setMapCenter(newCenter);
         mapInstance.current.setCenter(newCenter);
-        mapInstance.current.setZoom((locationData.type === "Nationwide" && locationData.nation_wide == 1) ? 2 : 12);
-  
+        mapInstance.current.setZoom(
+          locationData.type === "Nationwide" && locationData.nation_wide == 1
+            ? 2
+            : 12
+        );
+
         if (markerRef.current) {
           markerRef.current.setMap(null);
         }
-  
+
         markerRef.current = new window.google.maps.Marker({
           position: newCenter,
           map: mapInstance.current,
         });
-  
+
         drawCircle(newCenter);
       }
     };
-  
+
     fetchLatLng();
   }, [mapLoaded, locationData?.postcode, locationData?.type]);
-  
- 
- 
+
   useEffect(() => {
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode(
-        { address: locationData.postcode, componentRestrictions: { country: "UK" } },
+        {
+          address: locationData.postcode,
+          componentRestrictions: { country: "UK" },
+        },
         (results, status) => {
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng();
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
-            
+
             if (mapInstance.current) {
-                mapInstance.current.setCenter(newCenter);
-                mapInstance.current.setZoom(12);
-                
-                if (markerRef.current) markerRef.current.setMap(null);
-                
-                markerRef.current = new window.google.maps.Marker({
-                    position: newCenter,
-                    map: mapInstance.current,
+              mapInstance.current.setCenter(newCenter);
+              mapInstance.current.setZoom(12);
+
+              if (markerRef.current) markerRef.current.setMap(null);
+
+              markerRef.current = new window.google.maps.Marker({
+                position: newCenter,
+                map: mapInstance.current,
               });
-                    console.log(newCenter,"123")
+              console.log(newCenter, "123");
 
               // Draw the circle with the new center
               drawCircle(newCenter);
@@ -260,7 +254,11 @@ const ViewOnMapModal = ({
           &times;
         </button>
         <div className={styles.modalHeader}>
-          <h2>{(locationData.type === "Nationwide" && locationData.nation_wide == 1) ? locationData?.type : locationData?.city}</h2>
+          <h2>
+            {locationData.type === "Nationwide" && locationData.nation_wide == 1
+              ? locationData?.type
+              : locationData?.city}
+          </h2>
         </div>
         <div
           ref={mapRef}
@@ -284,4 +282,3 @@ const ViewOnMapModal = ({
 };
 
 export default ViewOnMapModal;
-

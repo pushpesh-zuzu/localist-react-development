@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import { Select } from "antd";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const TravelTimeModal = ({
   onClose,
@@ -99,8 +100,7 @@ const TravelTimeModal = ({
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,geometry";
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
         script.async = true;
         script.defer = true;
         script.onload = () => {

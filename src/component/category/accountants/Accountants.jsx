@@ -13,6 +13,7 @@ import {
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const Accountants = () => {
   const dispatch = useDispatch();
@@ -70,10 +71,13 @@ const Accountants = () => {
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
 
-    const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
-      types: ["geocode"],
-      componentRestrictions: { country: "UK" },
-    });
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      inputRef.current,
+      {
+        types: ["geocode"],
+        componentRestrictions: { country: "UK" },
+      }
+    );
 
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -84,9 +88,8 @@ const Accountants = () => {
       )?.long_name;
 
       const cityName =
-        place.address_components.find((c) =>
-          c.types.includes("locality")
-        )?.long_name ||
+        place.address_components.find((c) => c.types.includes("locality"))
+          ?.long_name ||
         place.address_components.find((c) =>
           c.types.includes("administrative_area_level_3")
         )?.long_name;
@@ -105,12 +108,11 @@ const Accountants = () => {
     });
   };
 
-  
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initGoogleAutocomplete;

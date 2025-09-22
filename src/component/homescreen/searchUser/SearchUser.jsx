@@ -23,6 +23,7 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
@@ -123,8 +124,7 @@ const SearchProfessionals = ({ nextStep }) => {
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places";
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;
@@ -226,113 +226,11 @@ const SearchProfessionals = ({ nextStep }) => {
     dispatch(
       setbuyerRequestData({
         postcode: pincode,
-        service_id: id || '',
+        service_id: id || "",
       })
     );
     setShow(true);
   };
-
-  // useEffect(() => {
-  //   // Load Google Places API script dynamically
-  //   const loadGoogleMapsScript = () => {
-  //     if (!window.google) {
-  //       const script = document.createElement("script");
-  //       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
-  //       script.async = true;
-  //       script.defer = true;
-  //       script.onload = initAutocomplete;
-  //       document.body.appendChild(script);
-  //     } else {
-  //       initAutocomplete();
-  //     }
-  //   };
-
-  //   // Initialize Google Autocomplete
-  //   const initAutocomplete = () => {
-  //     if (!inputRef.current) return;
-
-  //     const autocomplete = new window.google.maps.places.Autocomplete(
-  //       inputRef.current,
-  //       {
-  //         types: ["geocode"],
-  //         componentRestrictions: { country: "UK" }, // Restrict to India
-  //       }
-  //     );
-
-  //     autocomplete.addListener("place_changed", () => {
-  //       const place = autocomplete.getPlace();
-  //       if (!place.address_components) return;
-
-  //       let postalCode = "";
-  //       place.address_components.forEach((component) => {
-  //         if (component.types.includes("postal_code")) {
-  //           postalCode = component.long_name;
-  //         }
-  //       });
-  //       let cityName =
-  //         place.address_components.find((component) =>
-  //           component.types.includes("postal_town")
-  //         )?.long_name ||
-  //         place.address_components.find((component) =>
-  //           component.types.includes("administrative_area_level_2")
-  //         )?.long_name;
-  //       console.log(cityName, "cityName");
-  //       // const cityName = place.address_components.find((component) =>
-  //       //   component.types.includes("locality")
-  //       // )?.long_name;
-
-  //       const townName = place.address_components.find((component) =>
-  //         component.types.includes("administrative_area_level_3")
-  //       )?.long_name;
-
-  //       // const townName = place.formatted_address
-
-  //       if (postalCode) {
-  //         setPincode(postalCode);
-  //         setPostalCodeValidate(true);
-
-  //         inputRef.current.value = postalCode;
-  //       } else {
-  //         showToast("error", "No PIN code found! Please try again.");
-  //       }
-  //       if (cityName) {
-  //         setCity(cityName);
-  //         dispatch(setcitySerach(cityName)); // <- set city state
-  //       }
-  //     });
-  //   };
-
-  //   loadGoogleMapsScript();
-  // }, []);
-  // const handleGetStarted = (requireValidationPin) => {
-  //   // debugger;
-  //   if (!selectedService) {
-  //     showToast("error", "Please select a service from the suggestions.");
-  //     return;
-  //   }
-
-  //   if (!pincode && !!requireValidationPin) {
-  //     showToast("error", "Please enter a pincode");
-  //     return;
-  //   }
-  //   if ((pincode.length < 5 || pincode.length > 8) && !!requireValidationPin) {
-  //     showToast("error", "Pincode must be between 5 and 8 characters!");
-  //     return;
-  //   }
-
-  //   if (!city && !!requireValidationPin) {
-  //     showToast("error", "Please provide valid pincode!");
-  //     return;
-  //   }
-
-  //   const { id, name } = selectedService;
-
-  //   dispatch(questionAnswerData({ service_id: id }));
-  //   setSelectedServiceId({ id, name });
-  //   // setInput("")
-  //   // setPincode("")
-  //   setShow(true);
-  // };
 
   const triggerSearch = (value) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);

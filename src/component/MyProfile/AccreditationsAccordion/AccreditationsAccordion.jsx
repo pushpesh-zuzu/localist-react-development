@@ -78,24 +78,6 @@ const AccreditationsAccordion = ({ details }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
-  // Save handler
-  // const handleSave = () => {
-  //   const payload = accordionGroups.map((g) => ({
-  //     id: g.id ?? "",
-  //     accreditations:
-  //       Array.isArray(g.accreditations) && g.accreditations.length > 0
-  //         ? [g.accreditations[0]]
-  //         : [],
-  //     newAccreditation: g.newAccreditation || "",
-  //     image: g.accreImage || null, // File OR { previewUrl } OR null
-  //   }));
-
-  //   console.log("🚀 Final payload before dispatch:", payload);
-  //   dispatch(updateSellerAccreditations(payload));
-  // };
-
-  // Save handler
-  // Save handler
   // const handleSave = () => {
   //   // Filter out groups without a name
   //   const filtered = accordionGroups.filter(

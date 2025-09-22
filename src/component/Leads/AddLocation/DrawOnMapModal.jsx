@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import RemoveLocation from "../../../assets/Images/Leads/RemoveLocationImg.svg";
 import AddLocation from "../../../assets/Images/Leads/AddLocationImg.svg";
 import EditLocation from "../../../assets/Images/Leads/EditlocationImg.svg";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const DrawOnMapModal = ({
   onClose,
@@ -37,8 +38,7 @@ const DrawOnMapModal = ({
         !window.google.maps.drawing
       ) {
         const script = document.createElement("script");
-        script.src =
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places,drawing,geometry&callback=initMap";
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,drawing,geometry&callback=initMap`;
         script.async = true;
         script.defer = true;
 

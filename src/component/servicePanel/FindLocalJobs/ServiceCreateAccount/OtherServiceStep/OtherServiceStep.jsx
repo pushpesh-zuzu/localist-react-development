@@ -16,6 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import { clearCompanyData } from "../../../../../store/Company/companyLookup";
+import { googleAPI } from "../../../../../Api/axiosInstance";
 
 const OtherServiceStep = ({
   prevStep,
@@ -75,7 +76,7 @@ const OtherServiceStep = ({
       // if (!window.google) {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initAutocomplete;

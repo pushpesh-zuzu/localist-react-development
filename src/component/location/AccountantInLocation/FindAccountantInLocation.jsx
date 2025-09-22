@@ -3,6 +3,7 @@ import styles from "./FindAccountantInLocation.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
+import { googleAPI } from "../../../Api/axiosInstance";
 
 const FindAccountantInLocation = ({
   title,
@@ -35,7 +36,6 @@ const FindAccountantInLocation = ({
         componentRestrictions: { country: "UK" },
       }
     );
-    
 
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
@@ -70,7 +70,7 @@ const FindAccountantInLocation = ({
     const loadGoogleMapsScript = () => {
       if (!window.google) {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw&libraries=places`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
         script.async = true;
         script.defer = true;
         script.onload = initGoogleAutocomplete;
@@ -126,7 +126,6 @@ const FindAccountantInLocation = ({
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}
           />
-
 
           <button onClick={handleContinue}>Go</button>
         </div>
