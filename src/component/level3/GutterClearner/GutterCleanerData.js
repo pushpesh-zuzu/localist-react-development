@@ -18,7 +18,7 @@ const GUTTER_CLEANER_CONFIG_TOP = {
     findingHeading: "gutter cleaners",
     title: "Gutter Cleaning",
     // mainTitle: "",
-    ctaText: "Gutter Cleaner Services",
+    ctaText: "Gutter Cleaners",
     // avgPrice: "£200",
     // showSpeicialits: true,
     avgPriceTitle: "gutter cleaners",

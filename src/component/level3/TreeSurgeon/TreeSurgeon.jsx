@@ -13,7 +13,7 @@ import {
   TREE_SURGEON_REVIEWS_DATA,
   TREE_SURGEON_FAQ,
 } from "./TreeSurgeonData";
-import AirportTransfers from "../banners/AirportTransfers.webp";
+import TreeSugeon from "../banners/TreeSugeon.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 
@@ -76,7 +76,7 @@ function TreeSurgeon() {
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}
         breadcrumb={breadcrumbConfig}
-        bannerImage={AirportTransfers}
+        bannerImage={TreeSugeon}
         para1={contentConfig?.para1}
         para2={contentConfig?.para2}
         defaultService={"Tree Surgeon"}

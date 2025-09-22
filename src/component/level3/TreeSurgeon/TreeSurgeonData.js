@@ -18,7 +18,7 @@ const TREE_SURGEON_CONFIG_TOP = {
     findingHeading: "tree surgeons",
     title: "Tree Surgeon",
     // mainTitle: "",
-    ctaText: "Tree Surgeon Services",
+    ctaText: "Tree Surgeons",
     // avgPrice: "£200",
     // showSpeicialits: true,
     faqTitle: "on tree surgeons near me",
@@ -246,7 +246,7 @@ const TREE_SURGEON_FAQ = {
       key: "2",
       title: "When should you worry about a tree?",
       description: `<p>You should start to worry about a tree if you notice signs that it might be unhealthy or unstable. Things like large cracks in the trunk, branches that look dead or brittle, fungus or mushrooms growing around the base, or the tree leaning more than usual are all red flags. Roots lifting pavings, or damaging walls can also be a concern.</p>
-      <p style=margin-top:16px;>Sometimes the warning signs aren’t that obvious though. For example, rot can be hidden inside the trunk. If you’re unsure, it’s always safer to have a professional tree removal expert take a look. They can quickly tell you whether the tree just needs some pruning, or if it’s a bigger issue that requires urgent action.</p>`,
+      <p>Sometimes the warning signs aren’t that obvious though. For example, rot can be hidden inside the trunk. If you’re unsure, it’s always safer to have a professional tree removal expert take a look. They can quickly tell you whether the tree just needs some pruning, or if it’s a bigger issue that requires urgent action.</p>`,
     },
     {
       key: "3",

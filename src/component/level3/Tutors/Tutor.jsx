@@ -13,7 +13,7 @@ import {
   TUTOR_REVIEWS_DATA,
   TUTOR_FAQ,
 } from "./TutorData";
-import AirportTransfers from "../banners/AirportTransfers.webp";
+import TutorsNearMe from "../banners/TutorsNearMe.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 
@@ -61,7 +61,7 @@ function Tutor() {
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}
         breadcrumb={breadcrumbConfig}
-        bannerImage={AirportTransfers}
+        bannerImage={TutorsNearMe}
         para1={contentConfig?.para1}
         para2={contentConfig?.para2}
         defaultService={"Tutor"}

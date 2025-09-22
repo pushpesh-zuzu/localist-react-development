@@ -18,7 +18,7 @@ const TUTOR_CONFIG_TOP = {
     findingHeading: "tutors",
     title: "Tutor",
     // mainTitle: "",
-    ctaText: "Tutor Services",
+    ctaText: "Tutors",
     // avgPrice: "£200",
     // showSpeicialits: true,
     faqTitle: "on tree surgeons near me",
@@ -163,6 +163,8 @@ const TUTOR_FIND_SERVICE_CONTENT = {
     {
       type: "p",
       text: "However, with a private tutor, the sessions are built entirely around your needs, whether that means slowing down to master tricky topics, preparing for exams with a tailored plan, or pushing ahead in areas where you excel. This one-to-one support helps you build confidence, stay consistent, and make faster progress than relying on general classroom instruction alone.",
+            marginTop:true
+
     },
     {
       type: "h2",
