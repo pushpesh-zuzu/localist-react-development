@@ -346,7 +346,7 @@ const GUTTER_CLEANER_REVIEWS_DATA = {
     {
       id: 1,
       name: "Tom H.,",
-      location: "Blackburn",
+      title: "Blackburn",
       date: "12 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -355,7 +355,7 @@ const GUTTER_CLEANER_REVIEWS_DATA = {
     {
       id: 2,
       name: "Janis R.,",
-      location: "Oxford",
+      title: "Oxford",
       date: "18 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -364,7 +364,7 @@ const GUTTER_CLEANER_REVIEWS_DATA = {
     {
       id: 3,
       name: "Thomas Martin,",
-      location: "Liverpool",
+      title: "Liverpool",
       date: "05 Mar 2025",
       //   image: ReviewsImage,
       description:

@@ -328,7 +328,7 @@ const TREE_SURGEON_REVIEWS_DATA = {
     {
       id: 1,
       name: "Michael Hewitt",
-      location: "Cumbria",
+      title: "Cumbria",
       date: "12 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -337,7 +337,7 @@ const TREE_SURGEON_REVIEWS_DATA = {
     {
       id: 2,
       name: "Sarah Henshaw",
-      location: "Blackpool",
+      title: "Blackpool",
       date: "18 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -346,7 +346,7 @@ const TREE_SURGEON_REVIEWS_DATA = {
     {
       id: 3,
       name: "Tom H.,",
-      location: "Crewe",
+      title: "Crewe",
       date: "05 Mar 2025",
       //   image: ReviewsImage,
       description:

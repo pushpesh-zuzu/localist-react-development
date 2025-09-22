@@ -16,7 +16,7 @@ const TUTOR_META = {
 const TUTOR_CONFIG_TOP = {
   Tutor: {
     findingHeading: "tutors",
-    title: "Tutor",
+    title: "Tutors",
     // mainTitle: "",
     ctaText: "Tutors",
     // avgPrice: "£200",
@@ -29,7 +29,7 @@ const TUTOR_CONFIG_TOP = {
 const TUTOR_BREADCRUMB_CONFIG = {
   Tutor: [
     { title: "Lessons & Training", path: "/lesson-and-training" },
-    { title: "Tutor" },
+    { title: "Tutors" },
   ],
 };
 
@@ -172,7 +172,7 @@ const TUTOR_FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "The cost of a private tutor can vary depending on the subject, level, and location, but in the UK you can usually expect to pay £20–£40 per hour. Tutors with specialist expertise or many years of experience may charge more, especially for exam preparation or advanced subjects.",
+      text: "The cost of a private tutor can vary depending on the subject, level, and location, but in the UK you can usually expect to pay <strong>£20–£40</strong> per hour. Tutors with specialist expertise or many years of experience may charge more, especially for exam preparation or advanced subjects.",
     },
     {
       type: "p",
@@ -202,7 +202,7 @@ const TUTOR_FAQ = {
     {
       key: "4",
       title: "How much is a GCSE tutor per hour?",
-      description: `<p>A GCSE tutor in the UK typically charges £25 - £40 per hour. Prices can vary depending on the subject, for example, physics and maths tutors are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
+      description: `<p>A GCSE tutor in the UK typically charges <strong>£25 - £40</strong> per hour. Prices can vary depending on the subject, for example, physics and maths tutors are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
     },
     {
       key: "5",
@@ -293,7 +293,7 @@ const TUTOR_REVIEWS_DATA = {
     {
       id: 1,
       name: "Sarah Martins,",
-      location: "Leeds",
+      title: "Leeds",
       date: "12 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -302,7 +302,7 @@ const TUTOR_REVIEWS_DATA = {
     {
       id: 2,
       name: "Jason D,",
-      location: "Manchester",
+      title: "Manchester",
       date: "18 Feb 2025",
       //   image: ReviewsImage,
       description:
@@ -311,7 +311,7 @@ const TUTOR_REVIEWS_DATA = {
     {
       id: 3,
       name: "Priya K.,",
-      location: "Birmingham",
+      title: "Birmingham",
       date: "05 Mar 2025",
       //   image: ReviewsImage,
       description:

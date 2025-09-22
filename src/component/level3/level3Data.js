@@ -510,7 +510,7 @@ const OTHER_SERVICES_DATA = {
     // {
     //   id: 5,
     //   image: TreesugeonSlider,
-    //   description: "Tree Surgeons",
+    //   description: "Tree Surgeon",
     //   path: "tree-surgeon-near-me",
     // },
     // {
@@ -549,7 +549,7 @@ const OTHER_SERVICES_DATA = {
     // {
     //   id: 5,
     //   image: TreesugeonSlider,
-    //   description: "Tree Surgeons",
+    //   description: "Tree Surgeon",
     //   path: "tree-surgeon-near-me",
     // },
     //   {
@@ -589,7 +589,7 @@ const OTHER_SERVICES_DATA = {
     // {
     //   id: 5,
     //   image: TreesugeonSlider,
-    //   description: "Tree Surgeons",
+    //   description: "Tree Surgeon",
     //   path: "tree-surgeon-near-me",
     // },
     //   {
@@ -628,7 +628,7 @@ const OTHER_SERVICES_DATA = {
     // {
     //   id: 5,
     //   image: TreesugeonSlider,
-    //   description: "Tree Surgeons",
+    //   description: "Tree Surgeon",
     //   path: "tree-surgeon-near-me",
     // },
     //   {
@@ -668,7 +668,7 @@ const OTHER_SERVICES_DATA = {
     // {
     //   id: 5,
     //   image: TreesugeonSlider,
-    //   description: "Tree Surgeons",
+    //   description: "Tree Surgeon",
     //   path: "tree-surgeon-near-me",
     // },
     //   {
@@ -714,7 +714,7 @@ const OTHER_SERVICES_DATA = {
       {
       id: 6,
       image: GutterCleanerSlider,
-      description: "Tree Surgeons",
+      description: "Tree Surgeon",
       path: "tree-surgeon-near-me",
     },
   ],
@@ -754,7 +754,7 @@ const OTHER_SERVICES_DATA = {
       {
       id: 6,
       image: TreesugeonSlider,
-      description: "Tree Surgeons",
+      description: "Tree Surgeon",
       path: "tree-surgeon-near-me",
     },
   ],
