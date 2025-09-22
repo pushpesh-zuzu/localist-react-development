@@ -113,10 +113,13 @@ const ConfirmationModal = ({
       // formData.append("form_status", 0);
       // // form_status: 1,
       // // formData.append("recevive_online", consent ? 1 : 0);
+      const updatedAnswers = buyerRequest?.questions || [];
       const formData = new FormData();
       formData.append("email", buyerRequest?.email);
       formData.append("name", buyerRequest?.name);
       formData.append("phone", buyerRequest?.phone);
+      formData.append("questions", JSON.stringify(updatedAnswers));
+
       formData.append("form_status", 0);
 
       // dispatch(createRequestData(formData)).then((result) => {
