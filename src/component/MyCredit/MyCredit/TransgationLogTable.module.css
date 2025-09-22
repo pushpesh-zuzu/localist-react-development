@@ -96,7 +96,7 @@
   .container h2 {
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 16px !important;
+    margin-bottom: 4px !important;
   }
 
   .scrollTable::-webkit-scrollbar {
@@ -111,5 +111,12 @@
 
   .scrollTable::-webkit-scrollbar-track {
     background-color: #f1f1f1;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 16px;
+    margin-bottom: 8px;
   }
 }
