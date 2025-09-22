@@ -30,8 +30,8 @@ import ScrollToTop from "../routes/ScrollToTop";
 
 const pageTitles = {
  "/": {
-   title: "Homepage | Localists",
-   description: ""
+   title: "Localists.com: Find Trusted Local Services and Professionals",
+   description: "Connect with verified local experts through Localists.com. Find trusted professionals, compare quotes, and hire the best for your project—quick, easy, and free."
  },
  "/login": {
    title: "Localists Login | Access Your Account",
