@@ -340,6 +340,7 @@
 @media (max-width: 425px) {
   .modalOverlay {
     overflow-x: scroll;
+    background: rgba(0, 0, 0, 0.5) !important;
   }
   /* 
   .modalContent {

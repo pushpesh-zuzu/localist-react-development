@@ -74,6 +74,8 @@ const AccreditationsAccordion = ({ details }) => {
     if (removedGroup.id) {
       dispatch(deleteSellerAccreditation(removedGroup.id));
     }
+
+    dispatch(setIsDirtyRedux(true));
   };
 
   // Save handler

@@ -35,18 +35,8 @@ const PhotosAccordion = ({ details }) => {
     );
 
     setExistingPhotos((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+    dispatch(setIsDirtyRedux(true));
   };
-
-  // const handleFileChange = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   setFormState((prev) => ({
-  //     ...prev,
-  //     company_photos: files,
-  //   }));
-
-  //   const previews = files.map((file) => URL.createObjectURL(file));
-  //   setPhotoPreviews(previews);
-  // };
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -71,7 +61,7 @@ const PhotosAccordion = ({ details }) => {
   };
 
   const validate = () => {
-    return true; // Add any required validation logic here
+    return true;
   };
 
   // const handleSubmit = async () => {
@@ -169,27 +159,7 @@ const PhotosAccordion = ({ details }) => {
     dispatch(updateSellerPhotos(body));
     dispatch(setIsDirtyRedux(false));
   };
-  //   const handleSubmit = () => {
-  //   if (!validate()) {
-  //     toast.warn("Please fix validation errors");
-  //     return;
-  //   }
 
-  //   const body = new FormData();
-  //   body.append("type", formState.type);
-
-  //   // Append each YouTube link (if any)
-  //   formState.company_youtube_links.forEach((link, index) => {
-  //     body.append(`company_youtube_links[${index}]`, link);
-  //   });
-  // console.log(formState.company_youtube_links,body,"formState")
-  //   // Append photos (if any)
-  //   formState.company_photos.forEach((file) =>
-  //     body.append("company_photos[]", file)
-  //   );
-
-  //   dispatch(updateSellerPhotos(body));
-  // };
   const handleSave = () => {
     const link = formState.company_youtube_link?.trim();
 
@@ -349,46 +319,6 @@ const PhotosAccordion = ({ details }) => {
               </div>
             )}
           </div>
-
-          {/* <div className={styles.imageContainer}>
-                {photoPreviews.length > 0 ? (
-            <div className={styles.imageContainer}>
-              {photoPreviews.map((src, idx) => (
-                <img
-                  key={idx}
-                  src={src}
-                  alt={`preview-${idx}`}
-                  width="150"
-                  height="150"
-                  className={styles.previewImage}
-                />
-                
-              ))}
-            </div>
-          ) : (
-            <div className={styles.paraText}>
-              Photos you upload will be displayed on your Localists.com profile.
-            </div>
-          )} 
-          </div>  */}
-
-          {/* <input
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={handleFileChange}
-          className={styles.fileInput}
-        /> */}
-          {/* <div className={styles.previewContainer}>
-          {photoPreviews.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt={`preview-${idx}`}
-              className={styles.previewImage}
-            />
-          ))}
-        </div> */}
         </div>
 
         {/* Videos Section */}
@@ -436,27 +366,6 @@ const PhotosAccordion = ({ details }) => {
               </div>
             )}
           </div>
-          {/* {formState.company_youtube_link && getYoutubeEmbedUrl(formState.company_youtube_link) && (
-            <div className={styles.videoPreview}>
-              <iframe
-                width="50%"
-                height="275"
-                src={getYoutubeEmbedUrl(formState.company_youtube_link)}
-                title="YouTube video preview"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          )} */}
-          {/* <input
-          type="text"
-          placeholder="Enter YouTube video link"
-          name="company_youtube_link"
-          value={formState.company_youtube_link}
-          onChange={handleInputChange}
-          className={styles.youtubeInput}
-        /> */}
         </div>
 
         {/* Footer Buttons */}

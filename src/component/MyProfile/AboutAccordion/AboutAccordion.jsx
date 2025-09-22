@@ -217,6 +217,11 @@ const AboutAccordion = ({ details }) => {
     // if (name === "company_reg_number" && value.length === 8) {
     //   dispatch(fetchCompanyDetails(value));
     // }
+
+    if (name === "company_phone") {
+      newValue = value.replace(/[^0-9]/g, ""); // remove non-digits
+    }
+
     if (name === "company_reg_number") {
       setFormState((prev) => ({
         ...prev,
@@ -739,12 +744,21 @@ const AboutAccordion = ({ details }) => {
             <label className={styles.label}>Company phone number</label>
             <input
               className={styles.input}
-              type="text"
+              type="tel"
               name="company_phone"
               value={formState.company_phone}
               onChange={handleInputChange}
               placeholder="Enter company's phone number"
               maxLength={10}
+              onKeyDown={(e) => {
+                if (
+                  !/[0-9]/.test(e.key) &&
+                  e.key !== "Backspace" &&
+                  e.key !== "Tab"
+                ) {
+                  e.preventDefault();
+                }
+              }}
             />
           </div>
         </div>

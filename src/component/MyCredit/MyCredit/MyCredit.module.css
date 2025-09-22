@@ -515,6 +515,13 @@
     font-size: 12px;
   }
 }
+
+@media screen and (max-width: 425px) {
+  .VisaCard {
+    width: -webkit-fill-available;
+    max-width: 80vw;
+  }
+}
 @media screen and (max-width: 350px) {
   .gethiredText {
     background-color: #e3f6fc;
@@ -651,6 +658,10 @@
   }
   .redeemText {
     margin-top: 30px;
+  }
+
+  .redeemText input {
+    width: 55vw;
   }
   .VisaCard {
     margin-top: 15px;
