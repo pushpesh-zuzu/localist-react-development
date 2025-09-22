@@ -3,6 +3,7 @@ import {
   FreeQuotesIcon,
   WhatYouNeedIcon,
 } from "../../Level1/Transport/images/images";
+import { ArtificialGrassSlider, DrivewayInstallationSlider, GutterCleanerSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../imagesServices";
 
 const TREE_SURGEON_META = {
   "Tree Surgeon": {
@@ -283,6 +284,44 @@ const TREE_SURGEON_AVERAGE_PRICE = {
     },
   ],
 };
+const TREE_SURGEON_OTHER_SERVICES_DATA = {
+  "Tree Surgeon": [
+    {
+      id: 1,
+      image: DrivewayInstallationSlider,
+      description: "Driveway Installation",
+      availableOnline: true,
+      path: "driveway-installers-near-me",
+    },
+    {
+      id: 2,
+      image: PatioServicesSlider,
+      description: "Patio Services",
+      path: "patio-layers-near-me",
+    },
+    {
+      id: 3,
+      image: LandscapingSlider,
+      description: "Landscaping",
+      availableOnline: true,
+      path: "landscape-gardeners-near-me",
+    },
+    {
+      id: 4,
+      image: ArtificialGrassSlider,
+      description: "Artificial Grass Installation",
+      path: "artificial-grass-installers-near-me",
+    },
+     {
+      id: 5,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
+  ],
+
+ 
+};
 
 const TREE_SURGEON_REVIEWS_DATA = {
   "Tree Surgeon": [
@@ -342,4 +381,5 @@ export {
   TREE_SURGEON_AVERAGE_PRICE,
   TREE_SURGEON_REVIEWS_DATA,
   TREE_SURGEON_REGION_DATA,
+  TREE_SURGEON_OTHER_SERVICES_DATA
 };

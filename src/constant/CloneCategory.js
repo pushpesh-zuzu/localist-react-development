@@ -3,23 +3,11 @@ import WhatYouNeedIcon from "../assets/Icons/WhatYouNeedIcon.png";
 import FreeQuotesIcon from "../assets/Icons/FreeQuotesIcon.png";
 import BusinessProfessionalsIcon from "../assets/Icons/BusinessProfessionalsIcon.png";
 import AccountingImage from "../assets/Images/AccountingImage.svg";
-import general_accouting from "../assets/Images/general_accouting.svg";
 import gen_acc_img from "../assets/Images/gen_acc_img.svg";
 import BookkeepingImage from "../assets/Images/BookkeepingImage.svg";
-import DebtRecoveryImage from "../assets/Images/DebtRecoveryImage.svg";
-import MobileDevelopmentImage from "../assets/Images/MobileDevelopmentImage.svg";
-import SEOImage from "../assets/Images/SEOImage.svg";
-import SecurityServicesImage from "../assets/Images/SecurityServicesImage.svg";
 import SocialMediaImage from "../assets/Images/SocialMediaImage.svg";
-import TaxPreparationImage from "../assets/Images/TaxPreparationImage.svg";
-import WebDesignImage from "../assets/Images/WebDesignImage.svg";
 import BusinessConsulting from "../assets/Images/business_consulting.svg";
-import FenchandGet from "../assets/Images/FenchandGet.jpg";
-import PatioPatioServices from "../assets/Images/PatioServices.jpg";
-import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
-import Landscaping from "../assets/Images/servicesLevels/Landscaping.jpg";
-import ArtificialGrass from "../assets/Images/servicesLevels/ArtificialGrass.jpg";
-import { path } from "framer-motion/client";
+import { ArtificialGrassSlider, DrivewayInstallationSlider, FenceAndGateInsallationSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../component/level3/imagesServices";
 
 const CATEGORIES = [
   {
@@ -112,96 +100,61 @@ const PopularCategoriesData = [
     image: BookkeepingImage,
   },
   {
-    id: 14,
+    id: 3,
     title: "Fence & Gate Installation",
-    image: FenchandGet,
+    image: FenceAndGateInsallationSlider,
     path: "fencing-contractors-near-me",
   },
   {
-    id: 15,
+    id: 4,
     title: "Driveway Installation",
     path: "driveway-installers-near-me",
-
-    image: DrivewayInstallation, // apna image import karke lagao
+    image: DrivewayInstallationSlider, // apna image import karke lagao
   },
 
-  // {
-  //   id: 3,
-  //   availableOnline: true,
-  //   title: "Debt Recovery & Collection",
-  //   image: DebtRecoveryImage,
-  // },
-  // {
-  //   id: 4,
-  //   title: "Mobile Software Development",
-  //   image: MobileDevelopmentImage,
-  // },
-  // {
-  //   id: 5,
-  //   title: "Search Engine Optimization(SEO) Specialists",
-  //   image: SEOImage,
-  // },
-  // {
-  //   id: 6,
-  //   title: "Security Guard Services",
-  //   image: SecurityServicesImage,
-  // },
   {
-    id: 10,
+    id: 5,
     title: "Business Consulting",
     image: BusinessConsulting,
   },
   {
-    id: 7,
+    id: 6,
     title: "Social Media Marketing",
     image: SocialMediaImage,
   },
-  // {
-  //   id: 8,
-  //   availableOnline: true,
-  //   title: "Tax Preparation",
-  //   image: TaxPreparationImage,
-  // },
-  // {
-  //   id: 9,
-  //   title: "Web Design",
-  //   image: WebDesignImage,
-  // },
+
   {
-    id: 10,
+    id: 7,
     availableOnline: true,
     title: "General Accounting",
     image: gen_acc_img,
   },
-  // {
-  //   id: 11,
-  //   title: "Architectural Services",
-  //   image: BusinessConsulting,
-  // },
-  // {
-  //   id: 12,
-  //   title: "Property Extensions",
-  //   image: TaxPreparationImage,
-  // },
+
   {
-    id: 13,
+    id: 8,
     title: "Patio Services",
-    image: PatioPatioServices,
+    image: PatioServicesSlider,
     path: "patio-layers-near-me",
   },
   {
-    id: 16,
+    id: 9,
     title: "Landscaping",
     path: "landscape-gardeners-near-me",
 
-    image: Landscaping,
+    image: LandscapingSlider,
   },
   {
-    id: 17,
+    id: 10,
     title: "Artificial Grass Installation",
     path: "artificial-grass-installers-near-me",
 
-    image: ArtificialGrass,
+    image: ArtificialGrassSlider,
+  },
+    {
+    id: 11,
+    title: "Tree Surgeons",
+    image: TreesugeonSlider,
+    path: "tree-surgeon-near-me",
   },
 ];
 const categoryRoutes = {

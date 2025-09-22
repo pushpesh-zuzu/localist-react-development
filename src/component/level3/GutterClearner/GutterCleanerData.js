@@ -3,6 +3,7 @@ import {
   FreeQuotesIcon,
   WhatYouNeedIcon,
 } from "../../Level1/Transport/images/images";
+import { ArtificialGrassSlider, DrivewayInstallationSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../imagesServices";
 
 const GUTTER_CLEANER_META = {
   "Gutter Cleaner": {
@@ -260,6 +261,44 @@ const GUTTER_CLEANER_FAQ = {
     },
   ],
 };
+const GUTTER_CLEANER_OTHER_SERVICES_DATA = {
+  "Gutter Cleaner": [
+    {
+      id: 1,
+      image: DrivewayInstallationSlider,
+      description: "Driveway Installation",
+      availableOnline: true,
+      path: "driveway-installers-near-me",
+    },
+    {
+      id: 2,
+      image: PatioServicesSlider,
+      description: "Patio Services",
+      path: "patio-layers-near-me",
+    },
+    {
+      id: 3,
+      image: LandscapingSlider,
+      description: "Landscaping",
+      availableOnline: true,
+      path: "landscape-gardeners-near-me",
+    },
+    {
+      id: 4,
+      image: ArtificialGrassSlider,
+      description: "Artificial Grass Installation",
+      path: "artificial-grass-installers-near-me",
+    },
+     {
+      id: 5,
+      image: TreesugeonSlider,
+      description: "Tree Surgeons",
+      path: "tree-surgeon-near-me",
+    },
+  ],
+
+ 
+};
 
 const GUTTER_CLEANER_AVERAGE_PRICE = {
   "Gutter Cleaner": [
@@ -360,4 +399,5 @@ export {
   GUTTER_CLEANER_AVERAGE_PRICE,
   GUTTER_CLEANER_REVIEWS_DATA,
   GUTTER_CLEANER_REGION_DATA,
+  GUTTER_CLEANER_OTHER_SERVICES_DATA
 };

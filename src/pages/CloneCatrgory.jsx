@@ -1,5 +1,3 @@
-
-
 import HowItWorks from "../component/category/howItWorks/CloneHowitWorks";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
 // import AllServicesComponent from "../component/category/allServices/CloneAllServices";
@@ -28,13 +26,11 @@ const endpointCategoryMap = {
   home: [
     "General Builders",
     "Landscaping",
-    "Property Extensions",
-    "Architectural Services",
     "Fence & Gate Installation",
     "Driveway Installation",
     "Patio Services",
-    "Home Insulation",
     "Artificial Grass Installation",
+    // "Tree Surgeons",
   ],
 };
 // const endpointServiceMap = {
@@ -108,24 +104,24 @@ const CloneCategory = ({ accountHeader }) => {
       <div>
         <BannerWithBreadCrum
           header={accountHeader}
-          LevelOneTwoTitle={'Home & Garden'}
+          LevelOneTwoTitle={"Home & Garden"}
           accountHeader="Home & Garden"
           level={2}
           isNeedS={false}
-          doYouNeetTitle='home & garden'
+          doYouNeetTitle="home & garden"
           panelImage={Home}
           title="Home & Garden"
-          findAccountTitle2 ='professionals'
+          findAccountTitle2="professionals"
           para1="At Localists, we connect you with the right Home & Garden Professionals for your needs."
           para2="Not sure how to find the right Home & Garden Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Home & Garden Professionals near you. See what they offer, check out their reviews, and get free quotations for the work you require."
           para3={`It's super fast and easy!`}
-          heading2={'Professionals'}
-          placeholderText='Driveway Installation, Gardening Services, etc...'
+          heading2={"Professionals"}
+          placeholderText="Driveway Installation, Gardening Services, etc..."
         />
 
         <HowItWorks
           howItWorksData={howItWorksData}
-          ctaText={'Home & Garden Professionals'}
+          ctaText={"Home & Garden Professionals"}
         />
         <PopularCategories data={filteredCategories} />
         {/* <AllServicesComponent data={filteredAllServicesData} /> */}
@@ -135,13 +131,20 @@ const CloneCategory = ({ accountHeader }) => {
               name: "Fence & Gate Installation",
               path: "/fencing-contractors-near-me",
             },
-            { name: "Driveway Installation", path: "/driveway-installers-near-me" },
+            {
+              name: "Driveway Installation",
+              path: "/driveway-installers-near-me",
+            },
             { name: "Patio Services", path: "/patio-layers-near-me" },
             { name: "Landscaping", path: "/landscape-gardeners-near-me" },
-            { name: "Artificial Grass Installation", path: "/artificial-grass-installers-near-me" },
+            {
+              name: "Artificial Grass Installation",
+              path: "/artificial-grass-installers-near-me",
+            },
+            // { name: "Tree Surgeons", path: "/tree-surgeon-near-me" },
           ]}
         />
-        <GetQuotes ctaText={'Home & Garden'} needSString={false} />
+        <GetQuotes ctaText={"Home & Garden"} needSString={false} />
       </div>
     </>
   );

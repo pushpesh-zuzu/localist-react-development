@@ -17,6 +17,7 @@ import Liverpool from "./cities/Liverpool.webp";
 import Manchester from "./cities/Manchester.webp";
 import Warrington from "./cities/Warrington.webp";
 import Chester from "./cities/Chester.webp";
+import { GutterCleanerSlider, TreesugeonSlider } from "./imagesServices";
 
 const POPULAR_CITIES = [
   { city_image: Liverpool, city_name: "Liverpool" },
@@ -506,6 +507,18 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    // {
+    //   id: 5,
+    //   image: TreesugeonSlider,
+    //   description: "Tree Surgeons",
+    //   path: "tree-surgeon-near-me",
+    // },
+    // {
+    //   id: 6,
+    //   image: GutterCleanerSlider,
+    //   description: "Gutter Cleaners",
+    //   path: "gutter-cleaning-near-me",
+    // },
   ],
   "driveway-installers-near-me": [
     {
@@ -533,6 +546,18 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    // {
+    //   id: 5,
+    //   image: TreesugeonSlider,
+    //   description: "Tree Surgeons",
+    //   path: "tree-surgeon-near-me",
+    // },
+    //   {
+    //   id: 6,
+    //   image: GutterCleanerSlider,
+    //   description: "Gutter Cleaners",
+    //   path: "gutter-cleaning-near-me",
+    // },
   ],
   "patio-layers-near-me": [
     {
@@ -561,6 +586,18 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    // {
+    //   id: 5,
+    //   image: TreesugeonSlider,
+    //   description: "Tree Surgeons",
+    //   path: "tree-surgeon-near-me",
+    // },
+    //   {
+    //   id: 6,
+    //   image: GutterCleanerSlider,
+    //   description: "Gutter Cleaners",
+    //   path: "gutter-cleaning-near-me",
+    // },
   ],
   "landscape-gardeners-near-me": [
     {
@@ -588,6 +625,18 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    // {
+    //   id: 5,
+    //   image: TreesugeonSlider,
+    //   description: "Tree Surgeons",
+    //   path: "tree-surgeon-near-me",
+    // },
+    //   {
+    //   id: 6,
+    //   image: GutterCleanerSlider,
+    //   description: "Gutter Cleaners",
+    //   path: "gutter-cleaning-near-me",
+    // },
   ],
   "artificial-grass-installers-near-me": [
     {
@@ -615,6 +664,98 @@ const OTHER_SERVICES_DATA = {
       description: "Landscaping",
       availableOnline: true,
       path: "landscape-gardeners-near-me",
+    },
+    // {
+    //   id: 5,
+    //   image: TreesugeonSlider,
+    //   description: "Tree Surgeons",
+    //   path: "tree-surgeon-near-me",
+    // },
+    //   {
+    //   id: 6,
+    //   image: GutterCleanerSlider,
+    //   description: "Gutter Cleaners",
+    //   path: "gutter-cleaning-near-me",
+    // },
+  ],
+  "tree-surgeon-near-me": [
+    {
+      id: 1,
+      image: fenchinstal,
+      description: "Fence & Gate Installation",
+      path: "fencing-contractors-near-me",
+    },
+    {
+      id: 2,
+      image: Driveway,
+      description: "Driveway Installation",
+      availableOnline: true,
+      path: "driveway-installers-near-me",
+    },
+    {
+      id: 3,
+      image: Patio,
+      description: "Patio Services",
+      path: "patio-layers-near-me",
+    },
+    {
+      id: 4,
+      image: Landscaping,
+      description: "Landscaping",
+      availableOnline: true,
+      path: "landscape-gardeners-near-me",
+    },
+    {
+      id: 5,
+      image: ArtificialGrass,
+      description: "Artificial Grass Installation",
+      path: "artificial-grass-installers-near-me",
+    },
+      {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Tree Surgeons",
+      path: "tree-surgeon-near-me",
+    },
+  ],
+  "gutter-cleaning-near-me": [
+    {
+      id: 1,
+      image: fenchinstal,
+      description: "Fence & Gate Installation",
+      path: "fencing-contractors-near-me",
+    },
+    {
+      id: 2,
+      image: Driveway,
+      description: "Driveway Installation",
+      availableOnline: true,
+      path: "driveway-installers-near-me",
+    },
+    {
+      id: 3,
+      image: Patio,
+      description: "Patio Services",
+      path: "patio-layers-near-me",
+    },
+    {
+      id: 4,
+      image: Landscaping,
+      description: "Landscaping",
+      availableOnline: true,
+      path: "landscape-gardeners-near-me",
+    },
+    {
+      id: 5,
+      image: ArtificialGrass,
+      description: "Artificial Grass Installation",
+      path: "artificial-grass-installers-near-me",
+    },
+      {
+      id: 6,
+      image: TreesugeonSlider,
+      description: "Tree Surgeons",
+      path: "tree-surgeon-near-me",
     },
   ],
 };

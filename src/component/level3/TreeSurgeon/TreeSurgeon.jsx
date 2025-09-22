@@ -12,6 +12,7 @@ import {
   TREE_SURGEON_REGION_DATA,
   TREE_SURGEON_REVIEWS_DATA,
   TREE_SURGEON_FAQ,
+  TREE_SURGEON_OTHER_SERVICES_DATA,
 } from "./TreeSurgeonData";
 import TreeSugeon from "../banners/TreeSugeon.webp";
 import { transformData } from "../../../utils/allServicesUtils";
@@ -29,7 +30,9 @@ const GetQuotesLevel3 = lazy(() => import("../GetQuotesLevel3"));
 const RegionsComponent = lazy(() =>
   import("../../subCategory/Regions/Regions")
 );
-
+const Slider = lazy(() =>
+  import("../../common/slider/Slider")
+);
 function TreeSurgeon() {
   const transformedRegions = useMemo(
     () => transformData(TREE_SURGEON_REGION_DATA, "Tree Surgeon"),
@@ -45,6 +48,11 @@ function TreeSurgeon() {
     () => TREE_SURGEON_AVERAGE_PRICE["Tree Surgeon"],
     []
   );
+   const otherServicesData = useMemo(
+    () => TREE_SURGEON_OTHER_SERVICES_DATA["Tree Surgeon"],
+    []
+  );
+  TREE_SURGEON_OTHER_SERVICES_DATA
   const findServiceContent = useMemo(
     () => TREE_SURGEON_FIND_SERVICE_CONTENT["Tree Surgeon"],
     []
@@ -113,7 +121,11 @@ function TreeSurgeon() {
           isSingular
         />
       </Suspense>
-
+       <Slider
+        sliderdata={otherServicesData}
+        title="you may be interested in"
+        blueTitle="Other services "
+      />
       <Suspense fallback={<FullScreenSpinner />}>
         <Reviews RELATED_REVIEW={reviewData} />
       </Suspense>

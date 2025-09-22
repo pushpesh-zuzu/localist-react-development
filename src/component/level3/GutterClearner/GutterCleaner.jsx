@@ -12,8 +12,9 @@ import {
   GUTTER_CLEANER_REGION_DATA,
   GUTTER_CLEANER_REVIEWS_DATA,
   GUTTER_CLEANER_FAQ,
+  GUTTER_CLEANER_OTHER_SERVICES_DATA,
 } from "./GutterCleanerData";
-import AirportTransfers from "../banners/AirportTransfers.webp";
+import GutterCleanerBanner from "../banners/GutterCleaner.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 
@@ -29,7 +30,7 @@ const GetQuotesLevel3 = lazy(() => import("../GetQuotesLevel3"));
 const RegionsComponent = lazy(() =>
   import("../../subCategory/Regions/Regions")
 );
-
+const Slider = lazy(() => import("../../common/slider/Slider"));
 function GutterCleaner() {
   const transformedRegions = useMemo(
     () => transformData(GUTTER_CLEANER_REGION_DATA, "Gutter Cleaner"),
@@ -67,7 +68,10 @@ function GutterCleaner() {
     []
   );
   const metaConfig = useMemo(() => GUTTER_CLEANER_META["Gutter Cleaner"], []);
-
+  const otherServicesData = useMemo(
+    () => GUTTER_CLEANER_OTHER_SERVICES_DATA["Gutter Cleaner"],
+    []
+  );
   return (
     <>
       <Helmet>
@@ -79,7 +83,7 @@ function GutterCleaner() {
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}
         breadcrumb={breadcrumbConfig}
-        bannerImage={AirportTransfers}
+        bannerImage={GutterCleanerBanner}
         para1={contentConfig?.para1}
         para2={contentConfig?.para2}
         para3={contentConfig?.para3}
@@ -113,6 +117,13 @@ function GutterCleaner() {
         <AveragePrice
           title={topConfig?.avgPriceTitle}
           RELTED_PRICE={avgPriceData}
+        />
+      </Suspense>
+      <Suspense fallback={<FullScreenSpinner />}>
+        <Slider
+          sliderdata={otherServicesData}
+          title="you may be interested in"
+          blueTitle="Other services "
         />
       </Suspense>
 
