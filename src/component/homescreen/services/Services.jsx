@@ -48,7 +48,7 @@ const Services = () => {
     }else{
       setInitialLoader(false)
     }
-  }, [dispatch, allServiceList]);;
+  }, [dispatch, allServiceList]);
 
   return (
     <>
