@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./searchpostandbanner.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setcitySerach } from "../../../store/Buyer/BuyerSlice";
+import { setbuyerRequestData, setcitySerach } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 import BuyerRegistrationLandingPage from "../BuyerRegistrationLandingPage/BuyerRegistrationLandingPage";
@@ -131,6 +131,11 @@ const SearchPostAndBanner = ({
     }
 
     setShowModal(true);
+    dispatch(
+      setbuyerRequestData({
+        postcode: pincode,
+      })
+    );
   };
 
   return (

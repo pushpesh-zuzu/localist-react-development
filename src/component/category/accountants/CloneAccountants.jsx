@@ -8,6 +8,7 @@ import {
 } from "../../../store/FindJobs/findJobSlice";
 import {
   questionAnswerData,
+  setbuyerRequestData,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -21,7 +22,7 @@ const CloneAccountants = ({
   defaultServiceName = "",
   heading2,
   placeholderText,
-  doYouNeetTitle
+  doYouNeetTitle,
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -132,9 +133,9 @@ const CloneAccountants = ({
           c.types.includes("administrative_area_level_3")
         )?.long_name;
 
-      console.log("Full Place Object:", place);
-      console.log("Extracted Postal Code:", postalCode);
-      console.log("Extracted City:", cityName);
+      // console.log("Full Place Object:", place);
+      // console.log("Extracted Postal Code:", postalCode);
+      // console.log("Extracted City:", cityName);
 
       if (postalCode) {
         setPincode(postalCode);
@@ -192,6 +193,10 @@ const CloneAccountants = ({
     }
 
     dispatch(questionAnswerData({ service_id: selectedService.id }));
+    setbuyerRequestData({
+      postcode: pincode,
+      service_id: selectedService.id,
+    });
     setShowModal(true);
   };
 
@@ -213,7 +218,10 @@ const CloneAccountants = ({
           <div className={styles.innerformContainer}>
             <span>
               Do you need trusted{" "}
-              <span className={styles.blueText}> {doYouNeetTitle?.toLowerCase()} </span>
+              <span className={styles.blueText}>
+                {" "}
+                {doYouNeetTitle?.toLowerCase()}{" "}
+              </span>
               professionals?
             </span>
             <div className={styles.inputGroup}>

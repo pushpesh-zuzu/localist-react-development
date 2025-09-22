@@ -12,11 +12,13 @@ import {
 } from "../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { 
-  // generateSlug, 
-  showToast } from "../../../utils";
+import {
+  // generateSlug,
+  showToast,
+} from "../../../utils";
 import {
   questionAnswerData,
+  setbuyerRequestData,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -67,7 +69,10 @@ const SearchProfessionals = ({ nextStep }) => {
     setSelectedService("");
   };
   useEffect(() => {
-    if (typeof window !== "undefined" && (!popularList || popularList.length === 0)) {
+    if (
+      typeof window !== "undefined" &&
+      (!popularList || popularList.length === 0)
+    ) {
       dispatch(getPopularServiceList());
     }
     return () => {
@@ -218,6 +223,12 @@ const SearchProfessionals = ({ nextStep }) => {
     const { id, name } = selectedService;
     dispatch(questionAnswerData({ service_id: id }));
     setSelectedServiceId({ id, name });
+    dispatch(
+      setbuyerRequestData({
+        postcode: pincode,
+        service_id: id || '',
+      })
+    );
     setShow(true);
   };
 

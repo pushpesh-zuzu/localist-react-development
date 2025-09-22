@@ -36,7 +36,9 @@ const ConfirmationModal = ({
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestLoader, citySerach } = useSelector(
+    (state) => state.buyer
+  );
   const { userToken } = useSelector((state) => state.auth);
   const { service, registerLoader, searchServiceLoader, selectedServices } =
     useSelector((state) => state.findJobs);
@@ -119,6 +121,9 @@ const ConfirmationModal = ({
       formData.append("name", buyerRequest?.name);
       formData.append("phone", buyerRequest?.phone);
       formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("city", citySerach || "");
+      formData.append("service_id", buyerRequest?.service_id || "");
+      formData.append("postcode", buyerRequest?.postcode || "");
 
       formData.append("form_status", 0);
 
@@ -158,7 +163,7 @@ const ConfirmationModal = ({
     } else {
       // nextStep();
       // showToast("error", result?.message || "Customer registered successfully");
-      console.log(errors,'error on confirm modal')
+      console.log(errors, "error on confirm modal");
     }
   };
 

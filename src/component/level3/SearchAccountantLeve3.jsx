@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./searchAccountantLevel3.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setcitySerach } from "../../store/Buyer/BuyerSlice";
+import {
+  setbuyerRequestData,
+  setcitySerach,
+} from "../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message } from "antd";
 
@@ -70,12 +73,12 @@ const SearchAccountantLeve3 = ({
           c.types.includes("administrative_area_level_3")
         )?.long_name;
 
-      console.log("place full object:", place);
-      console.log("PostalCode:", postalCode);
-      console.log("City:", cityName);
+      // console.log("place full object:", place);
+      // console.log("PostalCode:", postalCode);
+      // console.log("City:", cityName);
 
       if (postalCode) {
-        console.log(postalCode, "postalCode");
+        // console.log(postalCode, "postalCode");
 
         setPincode(postalCode);
         setPostalCodeValidate(true);
@@ -89,7 +92,7 @@ const SearchAccountantLeve3 = ({
       if (cityName) {
         setCity(cityName);
         dispatch(setcitySerach(cityName));
-        console.log(cityName, "cityName");
+        // console.log(cityName, "cityName");
       }
     });
   };
@@ -111,7 +114,7 @@ const SearchAccountantLeve3 = ({
     loadGoogleMapsScript();
   }, []);
 
-  console.log(pincode, "pincode");
+  // console.log(pincode, "pincode");
 
   const handleContinue = () => {
     if (!pincode) {
@@ -136,6 +139,11 @@ const SearchAccountantLeve3 = ({
     }
 
     setShowModal(true);
+    dispatch(
+      setbuyerRequestData({
+        postcode: pincode,
+      })
+    );
   };
 
   return (
