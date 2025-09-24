@@ -22,9 +22,12 @@ const BuyerRegistration = ({
   cancelPara,
   setSelectedService = () => {},
   setFromImageModal = () => {},
+  service_Id,
+  service_Name,
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
+  console.log(service_Id, service_Name, "Bhabha");
 
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
@@ -130,8 +133,8 @@ const BuyerRegistration = ({
           <WhatServiceYouNeed
             nextStep={nextStep}
             formData={buyerRequest}
-            serviceId={getServiceState?.id}
-            serviceName={getServiceState?.name}
+            serviceId={getServiceState?.id || service_Id}
+            serviceName={getServiceState?.name || service_Name}
             onClose={handleClose}
             pincodes={postcode}
             setShowConfirmModal={setShowConfirmModal}
@@ -145,7 +148,7 @@ const BuyerRegistration = ({
           <QuestionModal
             ref={questionModalRef}
             questions={questionanswerData}
-            serviceName={getServiceState?.name}
+            serviceName={getServiceState?.name || service_Name}
             nextStep={nextStep}
             previousStep={previousStep}
             onClose={handleClose}

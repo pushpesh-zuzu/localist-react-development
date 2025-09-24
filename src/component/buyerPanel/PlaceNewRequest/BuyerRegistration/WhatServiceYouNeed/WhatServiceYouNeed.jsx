@@ -15,6 +15,7 @@ import {
 import CheckIcon from "../../../../../assets/Icons/greenCheckBox.jpeg";
 import { showToast } from "../../../../../utils";
 import { googleAPI } from "../../../../../Api/axiosInstance";
+import { useLocation } from "react-router";
 
 const WhatServiceYouNeed = ({
   nextStep,
@@ -31,7 +32,6 @@ const WhatServiceYouNeed = ({
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
-  console.log(selectedService, "selectedService");
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
@@ -39,6 +39,7 @@ const WhatServiceYouNeed = ({
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
+  console.log(service, "selectedService");
   const { citySerach } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -57,12 +58,22 @@ const WhatServiceYouNeed = ({
     }
   }, [input, dispatch, isDropdownOpen, serviceName]);
 
+  // const location = useLocation();
+
+  // // Split by "/" and get last part
+  // const lastSegment = location.pathname.split("/").filter(Boolean).pop();
+
+  // const cleaned = lastSegment.replace("_ppc", "");
+
+  // console.log(lastSegment, cleaned, "lastSegment");
+
   // useEffect(() => {
-  //   if (serviceName && serviceId) {
-  //     setInput(serviceName);
-  //     setSelectedService({ id: serviceId });
+  //   if (cleaned) {
+  //     setInput("Landscaping");
+  //     // setSelectedService({ id: serviceId });
+  //     dispatch(searchService({ search: "Landscaping" }));
   //   }
-  // }, [serviceName, serviceId]);
+  // }, [cleaned]);
 
   // useEffect(() => {
   //   if (serviceName && serviceId) {
@@ -144,7 +155,7 @@ const WhatServiceYouNeed = ({
 
   const handleContinue = useCallback(() => {
     let newErrors = { service: "", pincode: "" };
-    getService(selectedService);
+
     if (!selectedService) {
       newErrors.service = "Please select a service!";
     }
@@ -165,15 +176,18 @@ const WhatServiceYouNeed = ({
     if (!newErrors.service && !newErrors.pincode) {
       dispatch(
         setbuyerRequestData({
-          service_id: selectedService.id || serviceId,
+          service_id: selectedService?.id || serviceId,
           postcode: pincode,
           city: city,
         })
       );
       dispatch(
-        questionAnswerData({ service_id: selectedService.id || serviceId })
+        questionAnswerData({
+          service_id: selectedService.id || serviceId || service?.[0]?.id,
+        })
       );
       nextStep();
+      getService(selectedService);
     }
   }, [
     selectedService,

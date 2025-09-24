@@ -11,9 +11,9 @@ import { useEffect, useState } from "react";
 // import Modal from "../serviceCategory/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
-import imgBanner from "../../../assets/Images/houseCleaner.svg"
+import imgBanner from "../../../assets/Images/houseCleaner.svg";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
-import {  BASE_URL_IMAGE } from "../../../utils";
+import { BASE_URL_IMAGE } from "../../../utils";
 import { Spin } from "antd";
 // import Modal from "./Modal";
 // const serviceData = [
@@ -55,12 +55,17 @@ function AutoplayPlugin(slider) {
 }
 
 const PopularService = ({ closeModal }) => {
-  const [selectedServiceId, setSelectedServiceId] = useState({ id: null, name: "" })
-  const [show, setShow] = useState(false)
-  const [initialLoader,setInitialLoader] = useState(true)
-  const dispatch = useDispatch()
+  const [selectedServiceId, setSelectedServiceId] = useState({
+    id: null,
+    name: "",
+  });
+  console.log(selectedServiceId, "ioioioi");
+
+  const [show, setShow] = useState(false);
+  const [initialLoader, setInitialLoader] = useState(true);
+  const dispatch = useDispatch();
   const { popularList, popularLoader } = useSelector((state) => state.findJobs);
-  const { userToken }  = useSelector((state)=> state.auth)
+  const { userToken } = useSelector((state) => state.auth);
   const handleOpen = (id, name) => {
     setSelectedServiceId({ id, name });
     setShow(true);
@@ -71,8 +76,8 @@ const PopularService = ({ closeModal }) => {
     setSelectedServiceId({ id: null, name: "" });
   };
   useEffect(() => {
-    dispatch(getPopularServiceList())
-  }, [])
+    dispatch(getPopularServiceList());
+  }, []);
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (slider.current) {
@@ -96,17 +101,16 @@ const PopularService = ({ closeModal }) => {
         "(max-width: 820px)": {
           slides: { perView: 2, spacing: 5 },
         },
-         "(max-width: 540px)": {
+        "(max-width: 540px)": {
           slides: { perView: 1.7, spacing: 15 },
         },
-         "(max-width: 380px)": {
+        "(max-width: 380px)": {
           slides: { perView: 1.6, spacing: 10 },
-        }
+        },
       },
     },
     [AutoplayPlugin]
   );
-
 
   return (
     <>
@@ -121,28 +125,41 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={leftArrow} alt="Left" />
         </button>
-        {popularLoader ? <Spin /> : <>
-          {/* Slider */}
-          <div className={styles.sliderWrapper} >
-            {popularList.length > 0 && (
-              <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
-                {popularList?.map((service, index) => (
-                  <div style={{borderRadius:'20px'}} key={index}  className={`keen-slider__slide ${styles.slide}`} onClick={() => handleOpen(service?.id, service?.name)}>
-                    <div style={{padding:'9px',borderRadius:'20px'}}>
-                    <img
-                      src={service.banner_image ? `${BASE_URL_IMAGE}${service.banner_image}` : imgBanner}
-                      alt={service.name}
-                      className={styles.image}
-                      />
+        {popularLoader ? (
+          <Spin />
+        ) : (
+          <>
+            {/* Slider */}
+            <div className={styles.sliderWrapper}>
+              {popularList.length > 0 && (
+                <div ref={sliderRef} className={`keen-slider ${styles.slider}`}>
+                  {popularList?.map((service, index) => (
+                    <div
+                      style={{ borderRadius: "20px" }}
+                      key={index}
+                      className={`keen-slider__slide ${styles.slide}`}
+                      onClick={() => handleOpen(service?.id, service?.name)}
+                    >
+                      <div style={{ padding: "9px", borderRadius: "20px" }}>
+                        <img
+                          src={
+                            service.banner_image
+                              ? `${BASE_URL_IMAGE}${service.banner_image}`
+                              : imgBanner
+                          }
+                          alt={service.name}
+                          className={styles.image}
+                        />
 
-                    <p className={styles.serviceTitle}>{service.name}</p>
+                        <p className={styles.serviceTitle}>{service.name}</p>
                       </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </>}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
         {/* Right Arrow */}
         <button
           className={styles.arrowRight}
@@ -150,14 +167,16 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={rightArrow} alt="Right" />
         </button>
-        {show && (userToken?.active_status == 2 || !userToken ) && (
+        {show && (userToken?.active_status == 2 || !userToken) && (
           <>
-            <BuyerRegistration closeModal={handleClose} serviceId={selectedServiceId?.id} serviceName={selectedServiceId.name} />
+            <BuyerRegistration
+              closeModal={handleClose}
+              service_Id={selectedServiceId?.id}
+              service_Name={selectedServiceId.name}
+            />
           </>
         )}
       </div>
-
-
     </>
   );
 };
