@@ -120,7 +120,7 @@ const BuyerRegistrationLandingPage = ({
 
   useEffect(() => {
     isStartWithQuestionModal &&
-      dispatch(questionAnswerData({ service_id: getServiceState?.id }));
+      dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
 
   return (
