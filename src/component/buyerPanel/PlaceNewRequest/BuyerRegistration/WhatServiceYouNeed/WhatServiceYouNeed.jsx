@@ -25,11 +25,13 @@ const WhatServiceYouNeed = ({
   setShowConfirmModal,
   postalCodeIsValidate,
   resetServiceTrigger,
+  getService,
 }) => {
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
+  console.log(selectedService, "selectedService");
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
@@ -142,7 +144,7 @@ const WhatServiceYouNeed = ({
 
   const handleContinue = useCallback(() => {
     let newErrors = { service: "", pincode: "" };
-
+    getService(selectedService);
     if (!selectedService) {
       newErrors.service = "Please select a service!";
     }

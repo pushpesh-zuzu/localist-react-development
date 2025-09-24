@@ -5,11 +5,13 @@ import emailIcon1 from "../../assets/Icons/emailIcon1.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useUserGeo } from "../../utils/geo";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 //redeploy work
 const DashboardCards = ({ data }) => {
   const navigate = useNavigate();
   const { country, lang } = useUserGeo();
   const { starterPackPurchased } = useSelector((state) => state.myCredit);
+  const [showAll, setShowAll] = useState(false);
 
   return (
     <div className={styles["dashboard-container"]}>
@@ -67,8 +69,12 @@ const DashboardCards = ({ data }) => {
           <div className={styles["highlight-box"]}>
             You’ll receive leads in these categories
           </div>
+
           <div className={styles.tagsContainer}>
-            {(data?.services || []).slice(0, 2).map((item, index) => (
+            {(showAll
+              ? data?.services
+              : (data?.services || []).slice(0, 2)
+            ).map((item, index) => (
               <div key={index} className={styles.tags}>
                 <span className={`${styles.tag} ${styles.blue}`}>
                   {item?.name}
@@ -76,10 +82,11 @@ const DashboardCards = ({ data }) => {
               </div>
             ))}
 
-            {data?.services?.length > 2 && (
+            {!showAll && data?.services?.length > 2 && (
               <div
                 className={styles.tags2}
                 title={data?.services.map((list) => list.name)}
+                onClick={() => setShowAll(true)}
               >
                 <span className={`${styles.tag2} ${styles.gray}`}>
                   +{data.services.length - 2}
@@ -93,21 +100,7 @@ const DashboardCards = ({ data }) => {
           className={`${styles.card} ${styles["add-services"]} ${styles.oddCardBg}`}
         >
           <h3>Account Details</h3>
-          {/* <form>
-        <label>
-          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the
-        </label>
-        <label>
-          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the
-        </label>
-        <label>
-          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum has been the industry’s
-        </label>
-        <label>
-          <input type="checkbox" className={styles.checkbox} /> Lorem Ipsum
-        </label>
-        <button type="submit">Apply</button>
-      </form> */}
+
           <div className={styles["creditText"]}>
             Credit : <span>{data?.account_details?.credits}</span>
           </div>
@@ -120,11 +113,6 @@ const DashboardCards = ({ data }) => {
 
       {/* Notification Section */}
       <div className={`${styles["notification-section"]}`}>
-        {/* <div className={styles["notification-title"]}>
-     Start Winning Jobs Today : &nbsp;&nbsp;&nbsp;
-      <button className={styles["notification-button"]}  style={{ pointerEvents: "none", opacity: 1 }} disabled >{data?.plans?.[0]?.description} Patio Service</button>
-    </div> */}
-
         <div
           className={styles["notification-banner"]}
           onClick={() => navigate("/settings/billing/my-credits")}
@@ -208,7 +196,7 @@ const DashboardCards = ({ data }) => {
 
         <div className={`${styles.card} ${styles.help} ${styles.oddCardBg}`}>
           <h3 className={styles["card-title"]}>
-            <span className={styles.icon}>
+            <span style={{ display: "flex" }} className={styles.icon}>
               <img src={questionBlueIcon} />
             </span>{" "}
             Help
@@ -238,19 +226,13 @@ const DashboardCards = ({ data }) => {
               </a>
               for tips & advice.
             </p>
-            {/* <p>
-              <span className={styles.icon}>
-                <img src={emailIcon1} />
-              </span>{" "}
-              0000000000
-            </p> */}
+
             <p>
               <span className={styles.icon}>
                 <img src={phone} />
               </span>{" "}
               contact@localists.com
             </p>
-            {/* <p>(open 24 hours a day, 7 days a week)</p> */}
           </div>
         </div>
       </div>

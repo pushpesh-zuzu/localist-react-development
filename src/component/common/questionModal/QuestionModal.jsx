@@ -31,7 +31,7 @@ const QuestionModal = ({
     (state) => state.findJobs
   );
 
-  // console.log("service_name", serviceName);
+  console.log("service_name", serviceName);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -315,7 +315,9 @@ const QuestionModal = ({
                   : styles.headerImage // default fallback
               }
             >
-              <h2 className={styles.headerBackground}>{questions[currentQuestion]?.questions}</h2>
+              <h2 className={styles.headerBackground}>
+                {questions[currentQuestion]?.questions}
+              </h2>
               <Progress
                 percent={progressPercent}
                 strokeColor="#00AFE3"

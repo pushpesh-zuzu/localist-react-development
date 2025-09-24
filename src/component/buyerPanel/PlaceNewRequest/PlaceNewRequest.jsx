@@ -208,8 +208,6 @@ const PlaceNewRequest = () => {
       {isModalOpen && (
         <BuyerRegistration
           closeModal={closeModal}
-          serviceId={selectedService?.id}
-          serviceName={selectedService?.name}
           setSelectedService={setSelectedService}
           setFromImageModal={setFromImageModal}
         />
