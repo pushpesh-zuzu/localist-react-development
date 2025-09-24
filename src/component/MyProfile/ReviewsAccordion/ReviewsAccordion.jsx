@@ -22,6 +22,7 @@ import twitterIcon from "../../../assets/Icons/twitter.svg";
 import shareIcon from "../../../assets/Icons/share.svg";
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
+  const [googleLink, setGoogleLink] = useState("");
 
   const [isShareOpen, setIsShareOpen] = useState(false);
   const onCopyUrl = () => {
@@ -179,7 +180,29 @@ const ReviewsAccordion = ({ details }) => {
         </div>
       )}
 
-      {/* <div className={styles.fieldGroup}>
+      <div className={styles.fieldGroup}>
+        <label className={styles.fbLabel}>
+          <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
+          Import Google Reviews
+        </label>
+        <p className={styles.subtext}>
+          Import reviews from your business Google page.
+        </p>
+        <div className={styles.row}>
+          <input
+            type="text"
+            placeholder="e.g. https://www.google.com/en/..."
+            className={styles.input}
+            value={googleLink}
+            onChange={(e) => setGoogleLink(e.target.value)}
+          />
+          <button className={styles.importBtn} onClick={handleSubmit}>
+            Import Reviews
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
           Import Facebook & Instagram Reviews
@@ -199,7 +222,7 @@ const ReviewsAccordion = ({ details }) => {
             Import Reviews
           </button>
         </div>
-      </div> */}
+      </div>
 
       <label className={styles.reviewsLabel}>Localists.com Reviews</label>
       {/* <div className={styles.localistBox}>

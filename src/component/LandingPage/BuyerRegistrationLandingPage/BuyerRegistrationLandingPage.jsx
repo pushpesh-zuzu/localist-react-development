@@ -32,6 +32,8 @@ const BuyerRegistrationLandingPage = ({
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
 
+  const [getServiceState, setGetServiceState] = useState(null);
+
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
@@ -65,6 +67,11 @@ const BuyerRegistrationLandingPage = ({
     if (currentIndex > 0) {
       dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
     }
+  };
+
+  const getService = (service) => {
+    console.log(service, "service11");
+    setGetServiceState(service);
   };
 
   useEffect(() => {
@@ -112,7 +119,8 @@ const BuyerRegistrationLandingPage = ({
   };
 
   useEffect(() => {
-    isStartWithQuestionModal && dispatch(questionAnswerData({ service_id: serviceId }));
+    isStartWithQuestionModal &&
+      dispatch(questionAnswerData({ service_id: getServiceState?.id }));
   }, []);
 
   return (
@@ -134,13 +142,14 @@ const BuyerRegistrationLandingPage = ({
             <WhatServiceYouNeed
               nextStep={nextStep}
               formData={buyerRequest}
-              serviceId={serviceId}
-              serviceName={serviceName}
+              serviceId={getServiceState?.id}
+              serviceName={getServiceState?.name}
               onClose={handleClose}
               pincodes={postcode}
               setShowConfirmModal={setShowConfirmModal}
               postalCodeIsValidate={postalCodeValidate}
               resetServiceTrigger={resetServiceFormTrigger}
+              getService={getService}
             />
           )}
 
@@ -148,7 +157,7 @@ const BuyerRegistrationLandingPage = ({
             <QuestionModal
               ref={questionModalRef}
               questions={questionanswerData}
-              serviceName={serviceName}
+              serviceName={getServiceState?.name}
               nextStep={nextStep}
               previousStep={previousStep}
               onClose={handleClose}

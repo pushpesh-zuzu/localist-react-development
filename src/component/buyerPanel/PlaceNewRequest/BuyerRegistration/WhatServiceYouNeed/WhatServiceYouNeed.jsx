@@ -48,14 +48,23 @@ const WhatServiceYouNeed = ({
   useEffect(() => {
     setPostalCodeValidate(postalCodeIsValidate);
   }, [postalCodeIsValidate]);
+  // useEffect(() => {
+  //   if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
+  //     const delayDebounce = setTimeout(() => {
+  //       dispatch(searchService({ search: input }));
+  //     }, 500);
+  //     return () => clearTimeout(delayDebounce);
+  //   }
+  // }, [input, dispatch, isDropdownOpen, serviceName]);
+
   useEffect(() => {
-    if (isDropdownOpen && input.trim() !== "" && input !== serviceName) {
-      const delayDebounce = setTimeout(() => {
+    if (input.trim() !== "") {
+      const delay = setTimeout(() => {
         dispatch(searchService({ search: input }));
       }, 500);
-      return () => clearTimeout(delayDebounce);
+      return () => clearTimeout(delay);
     }
-  }, [input, dispatch, isDropdownOpen, serviceName]);
+  }, [input, dispatch]);
 
   // useEffect(() => {
   //   if (serviceName && serviceId) {
@@ -123,6 +132,7 @@ const WhatServiceYouNeed = ({
 
       if (match) {
         setSelectedService(match);
+        setInput(match.name);
         setIsDropdownOpen(false); // close dropdown after match
       } else {
         setSelectedService(null);
@@ -133,6 +143,7 @@ const WhatServiceYouNeed = ({
   const handleSelectService = useCallback(
     (item) => {
       // console.log(item?.name, "clicked");
+      console.log("Selected Service:", item);
       setInput(item.name);
       setSelectedService(item);
       setIsDropdownOpen(false);
@@ -359,7 +370,7 @@ const WhatServiceYouNeed = ({
           onChange={(e) => {
             setInput(e.target.value);
             setIsDropdownOpen(!!e.target.value);
-            setSelectedService(null);
+            // setSelectedService(null);
             setErrors((prev) => ({ ...prev, service: "" }));
           }}
           value={input}
