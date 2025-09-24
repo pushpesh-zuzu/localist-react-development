@@ -67,6 +67,7 @@
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   font-size: 14px;
   color: #828282;
+  width: -webkit-fill-available;
 }
 
 .textarea {

@@ -346,7 +346,8 @@ const ViewProfiles = () => {
               </button>
             ) : (
               <button
-                className={styles.RequestQuoteBtn}
+                className={styles.RequestBtn}
+                style={{ cursor: "default" }}
                 disabled={shouldDisableActions}
               >
                 Request Quote

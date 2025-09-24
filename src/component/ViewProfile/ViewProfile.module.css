@@ -113,6 +113,16 @@
   margin-top: 25px;
 }
 
+.RequestBtn {
+  background: var(--primary-color);
+  padding: 6px 33px;
+  color: #ffffff;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
 .RequestQuoteBtn {
   background: var(--primary-color);
   padding: 6px 33px;
