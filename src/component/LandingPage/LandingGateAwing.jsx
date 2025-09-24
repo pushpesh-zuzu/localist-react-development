@@ -26,11 +26,11 @@ const LandingGatePPCAwin = ({}) => {
   return (
     <>
       <Helmet>
-        <title>{META_TAG_LANDING_PAGE["gates_ppc"]?.title}</title>
+        {/* <title>{META_TAG_LANDING_PAGE["gates_ppc"]?.title}</title>
         <meta
           name={META_TAG_LANDING_PAGE["gates_ppc"]?.name}
           content={META_TAG_LANDING_PAGE["gates_ppc"]?.content}
-        />
+        /> */}
         <meta name="robots" content="noindex" />
       </Helmet>
 

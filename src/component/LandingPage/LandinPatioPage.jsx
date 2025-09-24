@@ -35,11 +35,11 @@ const LandinPatioPage = ({}) => {
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
-        <title>{META_TAG_LANDING_PAGE["patio_services_ppc"]?.title}</title>
+        {/* <title>{META_TAG_LANDING_PAGE["patio_services_ppc"]?.title}</title>
         <meta
           name={META_TAG_LANDING_PAGE["patio_services_ppc"]?.name}
           content={META_TAG_LANDING_PAGE["patio_services_ppc"]?.content}
-        />
+        /> */}
       </Helmet>
 
       <FindDetailAndBannerWrapper

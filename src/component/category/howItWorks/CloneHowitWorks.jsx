@@ -18,9 +18,9 @@ const HowItWorks = ({ctaText,howItWorksData}) => {
                   {item.heading1} 
                   <span className={styles.blueText}>{" "} {item.heading2}</span>
                    <span className={item.heading1}> {item?.heading3}</span>
-                </h3>
-                {item?.break  ? <br className={styles.lineBreak} /> :''}
-  
+                  <br className={styles.lineBreak} /> 
+                  {item?.break && <br className={styles.lineBreak} />}
+                </h3>  
                 <p className={styles.description}>{item.description}</p>
               </div>
             </div>

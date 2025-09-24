@@ -28,13 +28,13 @@ function AirportServices() {
 
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>{TRANSPORT_META["Airport Transfers"]?.title}</title>
         <meta
           name={TRANSPORT_META["Airport Transfers"]?.name}
           content={TRANSPORT_META["Airport Transfers"]?.content}
         />
-      </Helmet>
+      </Helmet> */}
       <SearchAndFindAnAccountant
         title={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.title}
         findingHeading={

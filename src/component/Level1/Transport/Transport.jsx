@@ -12,7 +12,7 @@ import { TransportBanner } from "./images/images";
 function Transport() {
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>
           Transportation Services Near Me | Find Local Professionals - Localists
         </title>
@@ -20,7 +20,7 @@ function Transport() {
           name="description"
           content="Find reliable transportation services near you. Get free quotes for removals, airport transfers, coach hire and more."
         />
-      </Helmet>
+      </Helmet> */}
       <BannerWithBreadCrum
         accountHeader="Transportation Services"
         level={2}
