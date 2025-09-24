@@ -92,7 +92,7 @@ const CloneCategory = ({ accountHeader }) => {
   const howItWorksData = HowItWorksData[endpoint1];
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <title>
           Find Trusted Home & Garden Professionals Near Me - Localists
         </title>
@@ -100,7 +100,7 @@ const CloneCategory = ({ accountHeader }) => {
           name="description"
           content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
         />
-      </Helmet>
+      </Helmet> */}
       <div>
         <BannerWithBreadCrum
           header={accountHeader}

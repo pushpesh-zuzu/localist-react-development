@@ -34,11 +34,11 @@ const LandingFenceAndGate = ({}) => {
   return (
     <>
       <Helmet>
-        <title>{META_TAG_LANDING_PAGE["fencing_ppc"]?.title}</title>
+        {/* <title>{META_TAG_LANDING_PAGE["fencing_ppc"]?.title}</title>
         <meta
           name={META_TAG_LANDING_PAGE["fencing_ppc"]?.name}
           content={META_TAG_LANDING_PAGE["fencing_ppc"]?.content}
-        />
+        /> */}
         <meta name="robots" content="noindex" />
       </Helmet>
 

@@ -150,6 +150,113 @@ const pageTitles = {
     title: "Localists.com - Remove Feedback Question",
     description: "Manage your contributions on Localists by removing feedback questions you no longer wish to share. Keep your profile and insights up to date."
   },
+   "/fencing-contractors-near-me": {
+    title: "Fencing Companies & Fencing Contractors Near Me | Localists",
+    description:
+      "Searching for secure fence and gate installation experts near you? Get matched instantly with fencing companies  in your area on localists using free quotes.",
+  },
+   "/driveway-installers-near-me": {
+    title: "Find Driveway Companies & Driveway Contractors Near Me - Localists",
+    description:
+      " Find the best local driveway installers and contractors near you. Need resin bound, gravel or tarmac driveways? Get free quotes from local specialists nearby.",
+  },
+  "/patio-layers-near-me": {
+    title: "Find Patio Contractors and Patio Layers Near me | Localists",
+    description:
+      "Looking for patio installers near you? Find trusted patio contractors and patio layers in your local area. Get free quotes and start today at Localists.",
+  },
+  
+  "/landscape-gardeners-near-me": {
+    title: "Find Landscape Gardeners Near Me - Localists",
+    description:
+      "Looking to hire expert landscape gardeners or landscape architects in your local area? Start today at Localists. Obtain free no obligation quotes.",
+  },
+  "/artificial-grass-installers-near-me": {
+    title: " Find Artificial Grass Installers Near Me - Localists",
+    description:
+      "Get instant quotes from artificial grass installation specialists near you. View their past projects and read reviews before you hire. Get started today at Localists",
+  },
+   "/home": {
+    title: "Find Trusted Home & Garden Professionals Near Me - Localists",
+    description:
+      "Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free.",
+  },
+    "/transportation-services": {
+    title: "Transportation Services Near Me | Find Local Professionals - Localists",
+    description:
+      "Find reliable transportation services near you. Get free quotes for removals, airport transfers, coach hire and more.",
+  },
+   "/airport-transfers-near-me": {
+    title: "Free Quotes on Holiday Transfers and Airport Transfers Near You",
+    description:
+      "Need airport taxi or airport transfer service? Get instant quotes from trusted transport providers to all major UK airports. Start search at Localists.",
+  },
+   "/gutter-cleaning-near-me": {
+    title: "Find Gutter Cleaning Near Me | Localists",
+    description:
+      "Find professional gutter cleaners near you who can help deal with dirt and debris in your gutters. Click to get free quotes from gutter cleaners in your area now.",
+  },
+  '/landscaping_ppc': {
+    title: "Compare Free Quotes from Local Landscapers | Localists",
+    description:
+      "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
+  },
+ '/patio_services_ppc': {
+    title: "Compare Free Quotes from Local Patio Companies | Localists",
+    description:
+      "Find trusted patio companies near you. Compare free quotes and hire the best experts for patio design, installation, and repairs – fast and easy!",
+  },
+'/artificial_grass_installation_ppc': {
+    title: "Compare Free Quotes from Local Artificial Grass Companies | Localists",
+    content:
+      "Find trusted artificial grass companies near you. Compare free quotes, read reviews, and hire the best professionals for your garden project today.",
+  },
+  '/fencing_ppc': {
+    title: "Compare Free Quotes from Local Fencing Companies | Localists",
+    description:
+      "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+  '/driveways_ppc': {
+    title: "Compare Free Quotes from Local Driveway Companies | Localists",
+    description:
+      "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/gates_ppc': {
+    title: "Compare Free Quotes from Local Gating Companies | Localists",
+    description:
+      "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+
+   '/landscaping_awin': {
+    title: "Compare Free Quotes from Local Landscapers | Localists",
+    description:
+      "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
+  },
+ '/patio_services_awin': {
+    title: "Compare Free Quotes from Local Patio Companies | Localists",
+    description:
+      "Find trusted patio companies near you. Compare free quotes and hire the best experts for patio design, installation, and repairs – fast and easy!",
+  },
+'/artificial_grass_installation_awin': {
+    title: "Compare Free Quotes from Local Artificial Grass Companies | Localists",
+    content:
+      "Find trusted artificial grass companies near you. Compare free quotes, read reviews, and hire the best professionals for your garden project today.",
+  },
+  '/fencing_awin': {
+    title: "Compare Free Quotes from Local Fencing Companies | Localists",
+    description:
+      "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+  '/driveways_awin': {
+    title: "Compare Free Quotes from Local Driveway Companies | Localists",
+    description:
+      "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/gates_awin': {
+    title: "Compare Free Quotes from Local Gating Companies | Localists",
+    description:
+      "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
 };
 
 
@@ -179,21 +286,21 @@ const MainLayout = () => {
    };
  }
 
- const { title, description } = meta || {
-   title: "Localists",
-   description: "Discover and connect with local businesses on Localists."
- };
+//  const { title, description } = meta || {
+//    title: "Localists",
+//    description: "Discover and connect with local businesses on Localists."
+//  };
 
- useEffect(() => {
-  if (typeof document !== 'undefined') {
-    document.title = title;
-  }
-}, [title]);
+//  useEffect(() => {
+//   if (typeof document !== 'undefined') {
+//     document.title = title;
+//   }
+// }, [title]);
   return (
     <div>
       <ScrollToTop />
       <Navbar />
-      <MetaHelmet title={title} description={description} />
+      <MetaHelmet title={meta?.title} description={meta?.description} />
       <main style={{ minHeight: "50vh" }}>
         <Outlet />
       </main>

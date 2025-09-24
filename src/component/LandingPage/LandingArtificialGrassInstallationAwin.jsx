@@ -36,7 +36,7 @@ const LandingArtificialGrassInstallationAwin = ({}) => {
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
-        <title>
+        {/* <title>
           {META_TAG_LANDING_PAGE["artificial_grass_installation_ppc"]?.title}
         </title>
         <meta
@@ -46,7 +46,7 @@ const LandingArtificialGrassInstallationAwin = ({}) => {
           content={
             META_TAG_LANDING_PAGE["artificial_grass_installation_ppc"]?.content
           }
-        />
+        /> */}
       </Helmet>
 
       <FindDetailAndBannerWrapper
