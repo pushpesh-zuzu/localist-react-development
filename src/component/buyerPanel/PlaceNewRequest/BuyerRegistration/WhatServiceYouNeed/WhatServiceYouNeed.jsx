@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import styles from "./WhatServiceYouNeed.module.css";
 import {
   searchService,
@@ -15,7 +21,17 @@ import {
 import CheckIcon from "../../../../../assets/Icons/greenCheckBox.jpeg";
 import { showToast } from "../../../../../utils";
 import { googleAPI } from "../../../../../Api/axiosInstance";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
+import { megaMenu } from "../../../../../constant/Megamenu";
+
+function getNameFromSlug(slug, categoryList) {
+  if (typeof slug !== "string" || !slug || !Array.isArray(categoryList)) {
+    return null;
+  }
+
+  const match = categoryList.find((item) => item?.path === slug);
+  return match ? match.name ?? null : null;
+}
 
 const WhatServiceYouNeed = ({
   nextStep,
@@ -32,6 +48,7 @@ const WhatServiceYouNeed = ({
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
+  const { slug } = useParams();
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({ service: "", pincode: "" });
@@ -39,12 +56,29 @@ const WhatServiceYouNeed = ({
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  console.log(service, "selectedService");
   const { citySerach } = useSelector((state) => state.buyer);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
+
+  const nameValue = useMemo(() => {
+    return getNameFromSlug(slug, megaMenu[0].subcategory);
+  }, [slug]);
+  const disableServiceField = !!nameValue;
+
+  useEffect(() => {
+    if (nameValue) {
+      dispatch(searchService({ search: nameValue }));
+    }
+  }, [dispatch, nameValue]);
+
+  useEffect(() => {
+    if (nameValue && service?.length === 1) {
+      setSelectedService(service[0]);
+      setInput(service[0].name);
+    }
+  }, [nameValue, service]);
 
   useEffect(() => {
     setPostalCodeValidate(postalCodeIsValidate);
@@ -64,8 +98,6 @@ const WhatServiceYouNeed = ({
   // const lastSegment = location.pathname.split("/").filter(Boolean).pop();
 
   // const cleaned = lastSegment.replace("_ppc", "");
-
-  // console.log(lastSegment, cleaned, "lastSegment");
 
   // useEffect(() => {
   //   if (cleaned) {
@@ -143,7 +175,6 @@ const WhatServiceYouNeed = ({
 
   const handleSelectService = useCallback(
     (item) => {
-      // console.log(item?.name, "clicked");
       setInput(item.name);
       setSelectedService(item);
       setIsDropdownOpen(false);
@@ -365,6 +396,7 @@ const WhatServiceYouNeed = ({
       <div className={styles.formGroup}>
         <label className={styles.label}>What service do you need?</label>
         <input
+          disabled={disableServiceField}
           type="text"
           placeholder="e.g. Personal Trainers, House Cleaning"
           className={`${styles.input} ${
