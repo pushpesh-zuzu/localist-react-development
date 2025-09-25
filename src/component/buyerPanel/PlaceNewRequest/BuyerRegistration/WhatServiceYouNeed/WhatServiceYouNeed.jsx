@@ -44,6 +44,8 @@ const WhatServiceYouNeed = ({
   resetServiceTrigger,
   getService,
 }) => {
+  console.log(pincodes, "pincodes");
+
   const [input, setInput] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [pincode, setPincode] = useState("");
@@ -396,7 +398,7 @@ const WhatServiceYouNeed = ({
       <div className={styles.formGroup}>
         <label className={styles.label}>What service do you need?</label>
         <input
-          disabled={disableServiceField}
+          disabled
           type="text"
           placeholder="e.g. Personal Trainers, House Cleaning"
           className={`${styles.input} ${

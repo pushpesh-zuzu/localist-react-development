@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./HowLoaclistsWorks.module.css";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   getPopularServiceList,
   searchService,
@@ -27,6 +27,8 @@ const HowLoaclistsWorks = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
 
   const { userToken } = useSelector((state) => state.auth);
   const { service, searchServiceLoader } = useSelector(
@@ -68,6 +70,7 @@ const HowLoaclistsWorks = () => {
 
   const handlePincodeChange = (e) => {
     setPincode(e.target.value);
+    setPostalCodeValidate(false);
   };
 
   const initGoogleAutocomplete = () => {
@@ -98,6 +101,8 @@ const HowLoaclistsWorks = () => {
 
       if (postalCode) {
         setPincode(postalCode);
+        setPostalCodeValidate(true);
+
         inputRef.current.value = postalCode;
       } else {
         showToast("error", "No PIN code found! Please try again.");
@@ -216,9 +221,11 @@ const HowLoaclistsWorks = () => {
       {showModal && (userToken?.active_status === 2 || !userToken) && (
         <BuyerRegistration
           closeModal={handleClose}
-          serviceId={selectedService?.id}
-          serviceName={selectedService?.name}
+          service_Id={selectedService?.id}
+          // serviceName={selectedService?.name}
           postcode={pincode}
+          service_Name={selectedService?.name}
+          postalCodeValidate={postalCodeValidate}
         />
       )}
     </div>

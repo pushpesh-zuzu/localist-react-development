@@ -360,8 +360,8 @@ const SearchProfessionals = ({ nextStep }) => {
         <>
           <BuyerRegistration
             closeModal={handleClose}
-            serviceId={selectedServiceId?.id}
-            serviceName={selectedServiceId.name}
+            service_Id={selectedServiceId?.id}
+            service_Name={selectedServiceId.name}
             postcode={pincode}
             postalCodeValidate={postalCodeValidate}
             // city={city}

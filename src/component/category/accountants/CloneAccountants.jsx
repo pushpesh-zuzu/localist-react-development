@@ -279,8 +279,8 @@ const CloneAccountants = ({
       {showModal && (userToken?.active_status === 2 || !userToken) && (
         <BuyerRegistration
           closeModal={handleClose}
-          serviceId={selectedService?.id}
-          serviceName={selectedService?.name}
+          service_Id={selectedService?.id}
+          service_Name={selectedService?.name}
           postcode={pincode}
           postalCodeValidate={postalCodeValidate}
         />
