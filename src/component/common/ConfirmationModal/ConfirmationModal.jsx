@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 // } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   clearSetbuyerRequestData,
   createRequestData,
@@ -103,6 +103,13 @@ const ConfirmationModal = ({
     };
   }, [show]);
   console.log(buyerRequest, formData, "buyerRequest");
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+
+  const campaignid = params.get("campaignid");
+  const keyword = params.get("keyword");
+  const gclid = params.get("gclid");
+
   const handleSubmit = () => {
     if (!userToken) {
       // const formData = new FormData();
@@ -126,6 +133,9 @@ const ConfirmationModal = ({
       formData.append("postcode", buyerRequest?.postcode || "");
 
       formData.append("form_status", 0);
+      formData.append("gclid", gclid || "");
+      formData.append("campaignid", campaignid || "");
+      formData.append("keyword", keyword || "");
 
       // dispatch(createRequestData(formData)).then((result) => {
       //   if (result?.success) {

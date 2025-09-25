@@ -14,6 +14,7 @@ import {
   registerQuoteCustomer,
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
+import { useLocation } from "react-router";
 
 const EmailMatch = ({
   onClose,
@@ -28,6 +29,12 @@ const EmailMatch = ({
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
     (state) => state.findJobs
   );
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+
+  const campaignid = params.get("campaignid");
+  const keyword = params.get("keyword");
+  const gclid = params.get("gclid");
   const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -144,6 +151,9 @@ const EmailMatch = ({
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("form_status", 1);
+      formData.append("gclid", gclid || "");
+      formData.append("campaignid", campaignid || "");
+      formData.append("keyword", keyword || "");
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           showToast(

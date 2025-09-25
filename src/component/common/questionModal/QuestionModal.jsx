@@ -13,6 +13,7 @@ import {
 import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
+import { useLocation } from "react-router";
 
 const QuestionModal = ({
   questions = [],
@@ -30,8 +31,13 @@ const QuestionModal = ({
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
 
-  console.log("service_name", serviceName);
+  const campaignid = params.get("campaignid");
+  const keyword = params.get("keyword");
+  const gclid = params.get("gclid");
+  // console.log("service_name", serviceName);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
     buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
@@ -190,6 +196,9 @@ const QuestionModal = ({
         formData.append("name", buyerRequest?.name);
         formData.append("phone", buyerRequest?.phone);
         formData.append("form_status", 1);
+        formData.append("gclid", gclid || "");
+        formData.append("campaignid", campaignid || "");
+        formData.append("keyword", keyword || "");
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {
