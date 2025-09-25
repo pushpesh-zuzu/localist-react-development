@@ -24,6 +24,7 @@ const EmailMatch = ({
   setShowConfirmModal,
   resetTrigger,
   isStartWithQuestionModal,
+  isPPCPages = false,
 }) => {
   const dispatch = useDispatch();
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
@@ -104,50 +105,32 @@ const EmailMatch = ({
     }
 
     const newErrors = {
-      email: !email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email),
+      email:!isPPCPages && (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
     };
 
-    if (newErrors.email && !emailErrorMessage) {
+    if (!isPPCPages && newErrors.email && !emailErrorMessage) {
       setEmailErrorMessage("Please enter a valid email address.");
     }
 
     setErrors(newErrors);
 
     const hasError = Object.values(newErrors).some((e) => e);
-    if (hasError || !isEmailValid) return;
+    if (hasError || (!isPPCPages && !isEmailValid)) return;
 
-    if (setEmails) {
+    if (!isPPCPages && setEmails) {
       setEmails(email);
     }
 
+    const finalEmail = isPPCPages ? buyerRequest?.email || "" : email;
+
     // save user info in redux
-    dispatch(setbuyerRequestData({ name, email, phone }));
+    dispatch(setbuyerRequestData({ name, email: finalEmail, phone }));
 
     if (isStartWithQuestionModal) {
-      const updatedAnswers = buyerRequest?.questions || [];
-
-      // const formData = new FormData();
-      // formData.append("email", email);
-      // formData.append("name", name);
-      // formData.append("phone", phone);
-
-      // formData.append("service_id", buyerRequest?.service_id || ""); // safe fallback
-      // formData.append("postcode", buyerRequest?.postcode || "");
-      // formData.append("city", citySerach || "");
-
-      // formData.append("questions", JSON.stringify(updatedAnswers));
-      // formData.append("form_status", 1);
-
-      // dispatch(createRequestData(formData)).then((result) => {
-      //   if (result) {
-      //     showToast("success", result?.message);
-      //     nextStep();
-      //   }
-      // });
       const formData = new FormData();
-      formData.append("email", email);
+      formData.append("email", finalEmail);
       formData.append("name", name);
       formData.append("phone", phone);
       formData.append("form_status", 1);
@@ -243,23 +226,27 @@ const EmailMatch = ({
             </span>
           )}
 
-          <label htmlFor="email" className={styles.label}>
-            Email
-          </label>
-          <input
-            type="email"
-            placeholder="Email"
-            className={`${styles.input} ${
-              errors.email ? styles.inputError : ""
-            }`}
-            value={email}
-            onChange={handleEmailChange}
-            onBlur={handleEmailBlur}
-          />
-          {errors.email && (
-            <span style={{ color: "red" }} className={styles.errorMessage}>
-              Please enter a valid email address.
-            </span>
+          {!isPPCPages && (
+            <>
+              <label htmlFor="email" className={styles.label}>
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                className={`${styles.input} ${
+                  errors.email ? styles.inputError : ""
+                }`}
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={handleEmailBlur}
+              />
+              {errors.email && (
+                <span style={{ color: "red" }} className={styles.errorMessage}>
+                  Please enter a valid email address.
+                </span>
+              )}
+            </>
           )}
 
           <label className={styles.label}>Phone Number</label>

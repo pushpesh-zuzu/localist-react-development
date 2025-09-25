@@ -10,13 +10,23 @@ const Homepage = () => {
   return (
     <>
       <Helmet>
-        <title>
+        {/* <title>
           Localists.com: Find Trusted Local Services and Professionals
         </title>
         <meta
           name="description"
           content="Connect with verified local experts through Localists.com. Find trusted professionals, compare quotes, and hire the best for your project—quick, easy, and free."
-        />
+        /> */}
+        {/* <!-- Event snippet for Submit lead form conversion page --> */}
+        <script>
+          {`
+              gtag('event', 'conversion', {
+                'send_to': 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
+                'value': 1.0,
+                'currency': 'GBP'
+                });
+          `}
+        </script>
       </Helmet>
 
       <SearchProfessionals />

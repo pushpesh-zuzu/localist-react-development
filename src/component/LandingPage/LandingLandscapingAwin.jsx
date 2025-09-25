@@ -7,6 +7,7 @@ import {
   LANDING_HOW_IT_WORK,
   LANDING_SERVICES,
   LANDING_TITLES_AND_META,
+  LANDING_WELCOM_MODAL_TITLE,
   META_TAG_LANDING_PAGE,
   ServiceId,
 } from "./landingPageData";
@@ -50,6 +51,7 @@ const LandingLandscapingAwin = ({}) => {
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
         serviceId={ServiceId.landscaping_ppc}
+        welcomModalTitle={LANDING_WELCOM_MODAL_TITLE["landscaping_ppc"]}     
       />
 
       <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK["landscaping_ppc"]} />

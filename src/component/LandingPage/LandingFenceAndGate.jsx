@@ -7,6 +7,7 @@ import {
   LANDING_HOW_IT_WORK,
   LANDING_SERVICES,
   LANDING_TITLES_AND_META,
+  LANDING_WELCOM_MODAL_TITLE,
   META_TAG_LANDING_PAGE,
   ServiceId,
 } from "./landingPageData";
@@ -51,6 +52,7 @@ const LandingFenceAndGate = ({}) => {
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
         serviceId={ServiceId.fencing_ppc}
+        welcomModalTitle={LANDING_WELCOM_MODAL_TITLE["fencing_ppc"]}
       />
 
       <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK["landscaping_ppc"]} />

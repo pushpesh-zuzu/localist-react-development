@@ -15,6 +15,7 @@ import BidsList from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BidsLis
 import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal";
 import OtpVerification from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/OtpVerification/OtpVerification";
 import NumberVerifiedModal from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/NumberVerified/NumberVerified";
+import WelcomeEmailModal from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/WelcomeEmailModal/WelcomeEmailModal";
 
 const BuyerRegistrationLandingPage = ({
   closeModal,
@@ -28,6 +29,7 @@ const BuyerRegistrationLandingPage = ({
   setSelectedService = () => {},
   setFromImageModal = () => {},
   isStartWithQuestionModal,
+  welcomModalTitle=''
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -53,7 +55,7 @@ const BuyerRegistrationLandingPage = ({
 
   const stepFlow = isAdminOrRemembered
     ? [2, 3, 6, 7, 8]
-    : [1, 2, 3, 4, 5, 7, 8];
+    : [0, 1, 2, 3, 4, 5, 7, 8];
 
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
@@ -75,8 +77,8 @@ const BuyerRegistrationLandingPage = ({
   };
 
   useEffect(() => {
-    const initialStep = isAdminOrRemembered ? 2 : 1;
-    // dispatch(setBuyerStep(initialStep));
+    const initialStep = isAdminOrRemembered ? 2 : isStartWithQuestionModal ? 0 : 1;
+    dispatch(setBuyerStep(initialStep));
   }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
@@ -122,11 +124,19 @@ const BuyerRegistrationLandingPage = ({
     isStartWithQuestionModal &&
       dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
-
+  console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modal}>
       {!isStartWithQuestionModal ? (
         <div className={styles.modalContent}>
+          {/* {buyerStep === 0 && (
+            <WelcomeEmailModal
+              nextStep={nextStep}
+              onClose={handleClose}
+              setShowConfirmModal={setShowConfirmModal}
+              resetTrigger={resetEmailFormTrigger}
+            />
+          )} */}
           {buyerStep === 1 && (
             <EmailMatch
               nextStep={nextStep}
@@ -142,8 +152,8 @@ const BuyerRegistrationLandingPage = ({
             <WhatServiceYouNeed
               nextStep={nextStep}
               formData={buyerRequest}
-              serviceId={getServiceState?.id}
-              serviceName={getServiceState?.name}
+              serviceId={serviceId}
+              serviceName={serviceName}
               onClose={handleClose}
               pincodes={postcode}
               setShowConfirmModal={setShowConfirmModal}
@@ -289,6 +299,15 @@ const BuyerRegistrationLandingPage = ({
         </div>
       ) : (
         <div className={styles.modalContent}>
+          {buyerStep === 0 && (
+            <WelcomeEmailModal
+              nextStep={nextStep}
+              onClose={handleClose}
+              setShowConfirmModal={setShowConfirmModal}
+              resetTrigger={resetEmailFormTrigger}
+              welcomModalTitle={welcomModalTitle}
+            />
+          )}
           {buyerStep === 1 && (
             <QuestionModal
               ref={questionModalRef}
@@ -330,6 +349,7 @@ const BuyerRegistrationLandingPage = ({
               setShowConfirmModal={setShowConfirmModal}
               resetTrigger={resetEmailFormTrigger}
               isStartWithQuestionModal={isStartWithQuestionModal}
+              isPPCPages={true}
             />
           )}
 

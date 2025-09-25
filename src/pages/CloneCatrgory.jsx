@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import HowItWorks from "../component/category/howItWorks/CloneHowitWorks";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
 // import AllServicesComponent from "../component/category/allServices/CloneAllServices";
@@ -10,7 +11,6 @@ import {
   PopularCategoriesData,
 } from "../constant/CloneCategory";
 // import { AllServicesData } from "../constant/CloneCategory";
-import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import Home from "../assets/banners/Home.jpg";
 import AllServiceLevel1 from "../component/category/allServices/AllServiceLevel1";
@@ -92,15 +92,24 @@ const CloneCategory = ({ accountHeader }) => {
   const howItWorksData = HowItWorksData[endpoint1];
   return (
     <>
-      {/* <Helmet>
-        <title>
+      <Helmet>
+        {/* <title>
           Find Trusted Home & Garden Professionals Near Me - Localists
         </title>
         <meta
           name="description"
           content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
-        />
-      </Helmet> */}
+        /> */}
+        <script>
+          {`
+              gtag('event', 'conversion', {
+                'send_to': 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
+                'value': 1.0,
+                'currency': 'GBP'
+              });
+          `}
+        </script>
+      </Helmet>
       <div>
         <BannerWithBreadCrum
           header={accountHeader}

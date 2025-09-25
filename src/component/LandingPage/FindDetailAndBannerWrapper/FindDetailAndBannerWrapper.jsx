@@ -11,6 +11,7 @@ const FindDetailAndBannerWrapper = ({
   cancelHeading,
   cancelPara,
   serviceId,
+  welcomModalTitle
 }) => {
   const style = {
     backgroundImage: `url(${bannerImage})`,
@@ -33,6 +34,7 @@ const FindDetailAndBannerWrapper = ({
           title={title}
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}
+          welcomModalTitle={welcomModalTitle}
         />
         {/* <RatingBadge /> */}
       </div>

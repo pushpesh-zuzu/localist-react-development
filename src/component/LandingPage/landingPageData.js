@@ -155,7 +155,8 @@ const META_TAG_LANDING_PAGE = {
       "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
   },
   artificial_grass_installation_ppc: {
-    title: "Compare Free Quotes from Local Artificial Grass Companies | Localists",
+    title:
+      "Compare Free Quotes from Local Artificial Grass Companies | Localists",
     name: "description",
     content:
       " Find trusted artificial grass companies near you. Compare free quotes, read reviews, and hire the best professionals for your garden project today.",
@@ -167,6 +168,15 @@ const META_TAG_LANDING_PAGE = {
       " Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
 };
+const LANDING_WELCOM_MODAL_TITLE = {
+  landscaping_ppc: "Landscapers",
+  patio_services_ppc: "Patio Installers",
+  artificial_grass_installation_ppc: "Artificial Grass ",
+  fencing_ppc: " Fencing Companies",
+  driveways_ppc:'Driveway Installers',
+  artificial_grass_installation_ppc: "Get Free Quotes",
+  gates_ppc: "Gating Companies",
+};
 export {
   LANDING_DETAIL_DATA,
   LANDING_DETAIL_BANNERS,
@@ -176,4 +186,5 @@ export {
   CANCEL_POPUP_DATA,
   ServiceId,
   META_TAG_LANDING_PAGE,
+  LANDING_WELCOM_MODAL_TITLE,
 };

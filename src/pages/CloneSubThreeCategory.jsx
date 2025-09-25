@@ -74,8 +74,8 @@ const LevelThreePage = ({}) => {
 
   return (
     <>
-      {/* <Helmet>
-        <title>{CONTENT_CONFIG_META[slug]?.title}</title>
+      <Helmet>
+        {/* <title>{CONTENT_CONFIG_META[slug]?.title}</title>
         <meta
           name={CONTENT_CONFIG_META[slug]?.name}
           content={CONTENT_CONFIG_META[slug]?.content}
@@ -84,8 +84,17 @@ const LevelThreePage = ({}) => {
           rel="preload"
           href={CONTENT_CONFIG_BANNER[slug]?.banner}
           as="image"
-        />
-      </Helmet> */}
+        /> */}
+        <script>
+          {`
+              gtag('event', 'conversion', {
+                'send_to': 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
+                'value': 1.0,
+                'currency': 'GBP'
+              });
+          `}
+        </script>
+      </Helmet>
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}
@@ -114,7 +123,11 @@ const LevelThreePage = ({}) => {
         HowItWorksData={getHowItWorksData(slug)}
         title={CONTENT_CONFIG_TOP[slug]?.ctaText}
       />
-      <PopularCity sliderdata={POPULAR_CITIES} title="Popular" blueText='Cities'/>
+      <PopularCity
+        sliderdata={POPULAR_CITIES}
+        title="Popular"
+        blueText="Cities"
+      />
 
       <RegionsComponent
         regionsData={transformedData}
