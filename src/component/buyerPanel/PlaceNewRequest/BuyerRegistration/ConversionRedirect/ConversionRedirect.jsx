@@ -7,10 +7,9 @@ const ConversionRedirect = () => {
   const { requestId } = useParams();
 
   useEffect(() => {
-    // Redirect after a small delay so conversion script can fire
     const timer = setTimeout(() => {
       navigate(`/bids-list/${requestId}`, { replace: true });
-    }, 1000); // 300–500ms safe delay
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [navigate, requestId]);
@@ -18,7 +17,6 @@ const ConversionRedirect = () => {
   return (
     <>
       <Helmet>
-       {/* <!-- Event snippet for Submit lead form conversion page --> */}
         <script>
           {`
             gtag('event', 'conversion', {
@@ -29,7 +27,6 @@ const ConversionRedirect = () => {
           `}
         </script>
       </Helmet>
-      {/* Nothing visible */}
     </>
   );
 };

@@ -23,8 +23,6 @@ const ServiceCategory = () => {
     (state) => state.findJobs
   );
 
-  console.log(allServiceList, "allServiceList");
-
   useEffect(() => {
     // dispatch (getCategoriesList())
     if (

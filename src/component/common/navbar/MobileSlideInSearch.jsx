@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./MobileSlideInSearch.css";
+import { serviceRouteMap } from "../../../utils/allServicesRoute";
+import { useNavigate, useParams } from "react-router";
 
 export default function MobileSlideInSearch({
   isOpen,
@@ -14,7 +16,8 @@ export default function MobileSlideInSearch({
   const [mobileDebouncedText, setMobileDebouncedText] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchInputRef = useRef(null);
-
+  const { lang, country } = useParams();
+  const navigate = useNavigate()
 
   const closeSearch = () => {
     setIsOpen(false);
@@ -32,6 +35,12 @@ export default function MobileSlideInSearch({
     handleServiceSelect(serviceItem);
     setMobileSearchText(serviceItem.name);
     setShowSuggestions(false);
+   
+          const matchedRoute = serviceRouteMap[serviceItem.id];
+      if (matchedRoute) {
+        navigate(`/${lang}/${country}${matchedRoute}`); 
+         closeSearch() // go to the route
+      } 
   };
 
   useEffect(() => {

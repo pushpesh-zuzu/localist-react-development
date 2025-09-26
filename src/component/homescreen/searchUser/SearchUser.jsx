@@ -19,6 +19,7 @@ import {
 import {
   questionAnswerData,
   setbuyerRequestData,
+  setBuyerStep,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -69,6 +70,28 @@ const SearchProfessionals = ({ nextStep }) => {
     setPincode("");
     setSelectedService("");
   };
+  useEffect(() => {
+    const checkPendingModal = () => {
+      const pendingModal = JSON.parse(
+        localStorage.getItem("pendingBuyerModal")
+      );
+
+      if (pendingModal?.shouldOpen) {
+        setSelectedServiceId({
+          id: pendingModal.serviceId,
+          name: pendingModal.serviceName 
+        });
+
+        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+        dispatch(setcitySerach(pendingModal.city));
+
+        setShow(true);
+        dispatch(setBuyerStep(7));
+      }
+    };
+
+    checkPendingModal();
+  }, [dispatch]);
   useEffect(() => {
     if (
       typeof window !== "undefined" &&

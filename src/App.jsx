@@ -15,8 +15,6 @@ function App({ initialUrl, hostname, createRouterFactory }) {
     (state) => state.findJobs
   );
 
-  console.log("version 1.2");
-
   const payloadRef = useRef(null);
 
   // useEffect(() => {

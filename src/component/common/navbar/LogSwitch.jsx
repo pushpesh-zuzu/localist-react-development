@@ -27,6 +27,7 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import MobileSlideInSearch from "./MobileSlideInSearch";
 import { style } from "framer-motion/client";
 import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
+import { serviceRouteMap } from "../../../utils/allServicesRoute";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -247,6 +248,12 @@ const LogSwitch = () => {
     setSearchText(item.name); // optionally update the input value
     // setShowDropdown(false);
     setSearchText(""); // hide dropdown
+    const matchedRoute = serviceRouteMap[item.id];
+    if (matchedRoute) {
+      navigate(`/${lang}/${country}${matchedRoute}`); // go to the route
+    } else {
+      setShow(true); // fallback modal if route not found
+    }
   };
 
   // 2. Debounce input value
@@ -404,6 +411,7 @@ const LogSwitch = () => {
                     key={index}
                     className={styles.dropdownItem}
                     onClick={() => handleServiceSelect(item)}
+                    onMouseDown={() => handleServiceSelect(item)} // ✅
                   >
                     {item.name}
                   </div>
@@ -814,7 +822,7 @@ const LogSwitch = () => {
           </>
         )}
       </div>
-      {show &&
+      {/* {show &&
         (userToken?.active_status == 2 || !userToken) &&
         selectedServiceIds && (
           <BuyerRegistration
@@ -824,8 +832,8 @@ const LogSwitch = () => {
             // postcode={pincode}
             // postalCodeValidate={postalCodeValidate}
           />
-        )}
-      <MobileSlideInSearch
+        )} */}
+      {showMobileSearch && <MobileSlideInSearch
         isOpen={showMobileSearch}
         setIsOpen={setShowMobileSearch}
         services={service}
@@ -834,7 +842,7 @@ const LogSwitch = () => {
         searchService={searchService}
         mobileSearchText={mobileSearchText}
         setMobileSearchText={setMobileSearchText}
-      />
+      />}
     </>
   );
 };

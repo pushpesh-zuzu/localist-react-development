@@ -3,6 +3,7 @@ import styles from "./searchpostandbanner.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
+  setBuyerStep,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -17,7 +18,7 @@ const SearchPostAndBanner = ({
   cancelHeading,
   cancelPara,
   serviceId,
-  welcomModalTitle 
+  welcomModalTitle,
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -47,6 +48,26 @@ const SearchPostAndBanner = ({
     // ✅ cleanup on unmount
     return () => clearTimeout(timeoutId);
   }, []);
+
+  useEffect(() => {
+    const checkPendingModal = () => {
+      const pendingModal = JSON.parse(
+        localStorage.getItem("pendingBuyerModal")
+      );
+
+      if (pendingModal?.shouldOpen) {
+        setTimeout(() => {
+          dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+          dispatch(setcitySerach(pendingModal.city));
+
+          setShowModal(true);
+          dispatch(setBuyerStep(7));
+        }, 200);
+      }
+    };
+
+    checkPendingModal();
+  }, [dispatch]);
 
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;

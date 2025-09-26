@@ -63,6 +63,7 @@ import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenS
 import { landingPages } from "./landingPages";
 import Transport from "../component/Level1/Transport/Transport";
 import { levelThreePagesRoutes } from "./leverThreeRoute";
+import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -300,6 +301,10 @@ const routes = [
             <Homepage />
           </LocaleRedirect>
         ),
+      },
+      {
+        path: "thank-you",
+        element: <ThankuPage />,
       },
       // Localized login routes when accessed without locale prefix
       {

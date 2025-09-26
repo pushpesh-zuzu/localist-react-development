@@ -3,6 +3,7 @@ import styles from "./searchAccountantLevel3.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
+  setBuyerStep,
   setcitySerach,
 } from "../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -35,7 +36,27 @@ const SearchAccountantLeve3 = ({
     setPincode("");
     setIsPostcodeSelected(false);
   };
+  useEffect(() => {
+    const checkPendingModal = () => {
+      const pendingModal = JSON.parse(
+        localStorage.getItem("pendingBuyerModal")
+      );
 
+      if (pendingModal?.shouldOpen) {
+        // setSelectedServiceId({
+        //   id: pendingModal.serviceId,
+        //   name: pendingModal.serviceName || "Service",
+        // });
+
+        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+        dispatch(setcitySerach(pendingModal.city));
+        setShowModal(true);
+        dispatch(setBuyerStep(7));
+      }
+    };
+
+    checkPendingModal();
+  }, [dispatch]);
   const initGoogleAutocomplete = () => {
     if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
 

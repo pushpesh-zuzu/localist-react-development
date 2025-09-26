@@ -59,7 +59,6 @@ const PopularService = ({ closeModal }) => {
     id: null,
     name: "",
   });
-  console.log(selectedServiceId, "ioioioi");
 
   const [show, setShow] = useState(false);
   const [initialLoader, setInitialLoader] = useState(true);

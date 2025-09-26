@@ -3,12 +3,20 @@ import styles from "./OtpVerification.module.css";
 import {
   createRequestData,
   resendOtp,
+  setBuyerStep,
   verifyPhoneNumberData,
 } from "../../../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
 
-const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
+const OtpVerification = ({
+  open,
+  nextStep,
+  previousStep,
+  city,
+  isThankuPageOnlyShow = false,
+}) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
 
@@ -24,8 +32,10 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
     resendOtpLoader,
   } = useSelector((state) => state.buyer);
 
-  console.log(city, "city in otp");
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/");
+  const lastSegment = pathSegments[pathSegments.length - 1];
   useEffect(() => {
     if (timer > 0) {
       const countdown = setInterval(() => setTimer((prev) => prev - 1), 1000);
@@ -36,7 +46,6 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
   const { requestUserId, createrequestUserId } = useSelector(
     (state) => state.buyer
   );
-  console.log(requestUserId, "requestDataList");
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -114,7 +123,26 @@ const OtpVerification = ({ open, onClose, nextStep, previousStep, city }) => {
         dispatch(createRequestData(formData)).then((res) => {
           if (res?.success) {
             showToast("success", res?.message);
-            nextStep();
+
+            if (isThankuPageOnlyShow) {
+              const modalData = {
+                shouldOpen: true,
+                step: 7,
+                buyerRequest: buyerRequest,
+                city: citySerach,
+                serviceId: buyerRequest?.service_id,
+                baseRedirectPath: lastSegment ? lastSegment : "root",
+                // serviceName: "" // temporarily skip
+              };
+              localStorage.setItem(
+                "pendingBuyerModal",
+                JSON.stringify(modalData)
+              );
+              // dispatch(setBuyerStep(7));
+              navigate(`/thank-you`); // ya aapka conversation route
+            } else {
+              nextStep();
+            }
           } else {
             showToast("error", res?.message || "Failed to create request");
           }

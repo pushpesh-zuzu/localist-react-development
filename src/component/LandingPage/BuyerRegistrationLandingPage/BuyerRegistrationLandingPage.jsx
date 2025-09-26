@@ -72,15 +72,28 @@ const BuyerRegistrationLandingPage = ({
   };
 
   const getService = (service) => {
-    console.log(service, "service11");
     setGetServiceState(service);
   };
 
+  // useEffect(() => {
+  //   const initialStep = isAdminOrRemembered ? 2 : isStartWithQuestionModal ? 0 : 1;
+  //   dispatch(setBuyerStep(initialStep));
+  // }, [dispatch, isAdminOrRemembered]);
   useEffect(() => {
-    const initialStep = isAdminOrRemembered ? 2 : isStartWithQuestionModal ? 0 : 1;
-    dispatch(setBuyerStep(initialStep));
+    const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+    if (pendingModal?.shouldOpen) {
+      console.log("Coming from OTP redirect");
+      // Local storage clear karo
+      localStorage.removeItem("pendingBuyerModal");
+    } else {
+      const initialStep = isAdminOrRemembered
+        ? 2
+        : isStartWithQuestionModal
+        ? 0
+        : 1;
+      dispatch(setBuyerStep(initialStep));
+    }
   }, [dispatch, isAdminOrRemembered]);
-
   useEffect(() => {
     if (buyerStep) {
       document.body.style.overflow = "hidden";
@@ -185,6 +198,7 @@ const BuyerRegistrationLandingPage = ({
               previousStep={previousStep}
               formData={buyerRequest}
               open={true}
+              isThankuPageOnlyShow={true}
               // setShowConfirmModal={setShowConfirmModal}
               // onClose={handleClose}
             />
@@ -359,6 +373,7 @@ const BuyerRegistrationLandingPage = ({
               previousStep={previousStep}
               formData={buyerRequest}
               open={true}
+              isThankuPageOnlyShow={true}
               // setShowConfirmModal={setShowConfirmModal}
               // onClose={handleClose}
             />

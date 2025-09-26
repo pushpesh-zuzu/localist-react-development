@@ -9,6 +9,7 @@ import {
 import {
   questionAnswerData,
   setbuyerRequestData,
+  setBuyerStep,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -95,7 +96,28 @@ const CloneAccountants = ({
     },
     [dispatch]
   );
+  useEffect(() => {
+    const checkPendingModal = () => {
+      const pendingModal = JSON.parse(
+        localStorage.getItem("pendingBuyerModal")
+      );
 
+      if (pendingModal?.shouldOpen) {
+        setSelectedService({
+          id: pendingModal.serviceId,
+          name: pendingModal.serviceName || "Service",
+        });
+
+        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+        dispatch(setcitySerach(pendingModal.city));
+
+        setShowModal(true);
+        dispatch(setBuyerStep(7));
+      }
+    };
+
+    checkPendingModal();
+  }, [dispatch]);
   const handlePincodeChange = (e) => {
     setPincode(e.target.value);
     setPostalCodeValidate(false);

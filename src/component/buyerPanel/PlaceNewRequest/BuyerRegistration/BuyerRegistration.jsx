@@ -24,10 +24,9 @@ const BuyerRegistration = ({
   setFromImageModal = () => {},
   service_Id,
   service_Name,
-}) => {
+  }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
-  console.log(service_Id, service_Name, "Bhabha");
 
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
@@ -71,11 +70,21 @@ const BuyerRegistration = ({
     setGetServiceState(service);
   };
 
+  // useEffect(() => {
+  //   const initialStep = isAdminOrRemembered ? 2 : 1;
+  //   dispatch(setBuyerStep(initialStep));
+  // }, [dispatch, isAdminOrRemembered]);
   useEffect(() => {
-    const initialStep = isAdminOrRemembered ? 2 : 1;
-    dispatch(setBuyerStep(initialStep));
+    const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+    if (pendingModal?.shouldOpen) {
+      console.log("Coming from OTP redirect");
+      localStorage.removeItem("pendingBuyerModal");
+    } else {
+      // Normal flow
+      const initialStep = isAdminOrRemembered ? 2 : 1;
+      dispatch(setBuyerStep(initialStep));
+    }
   }, [dispatch, isAdminOrRemembered]);
-
   useEffect(() => {
     if (buyerStep) {
       document.body.style.overflow = "hidden";
@@ -167,6 +176,7 @@ const BuyerRegistration = ({
             formData={buyerRequest}
             open={true}
             city={city}
+            isThankuPageOnlyShow={true}
             // setShowConfirmModal={setShowConfirmModal}
             // onClose={handleClose}
           />
