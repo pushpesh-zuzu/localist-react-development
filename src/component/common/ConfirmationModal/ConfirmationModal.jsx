@@ -124,18 +124,17 @@ const ConfirmationModal = ({
       // // formData.append("recevive_online", consent ? 1 : 0);
       const updatedAnswers = buyerRequest?.questions || [];
       const formData = new FormData();
-      formData.append("email", buyerRequest?.email);
       formData.append("name", buyerRequest?.name);
+      formData.append("email", buyerRequest?.email);
       formData.append("phone", buyerRequest?.phone);
       formData.append("questions", JSON.stringify(updatedAnswers));
-      formData.append("city", citySerach || "");
       formData.append("service_id", buyerRequest?.service_id || "");
+      formData.append("city", citySerach || "");
       formData.append("postcode", buyerRequest?.postcode || "");
-
-      formData.append("form_status", 0);
-      formData.append("gclid", gclid || "");
       formData.append("campaignid", campaignid || "");
+      formData.append("gclid", gclid || "");
       formData.append("keyword", keyword || "");
+      formData.append("form_status", 0);
 
       // dispatch(createRequestData(formData)).then((result) => {
       //   if (result?.success) {
@@ -156,7 +155,7 @@ const ConfirmationModal = ({
       // });
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          console.log(result, "resultresult");
+          // console.log(result, "resultresult");
           // showToast(
           //   "success",
           //   result?.message || "Customer registered successfully"

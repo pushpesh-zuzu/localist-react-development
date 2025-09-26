@@ -192,20 +192,24 @@ const QuestionModal = ({
         // });
 
         const formData = new FormData();
-        formData.append("email", buyerRequest?.email);
         formData.append("name", buyerRequest?.name);
+        formData.append("email", buyerRequest?.email);
         formData.append("phone", buyerRequest?.phone);
+        formData.append("questions", JSON.stringify(updatedAnswers));
+        formData.append("service_id", buyerRequest?.service_id);
+        formData?.append("city", citySerach);
+        formData.append("postcode", buyerRequest?.postcode);
         formData.append("form_status", 1);
-        formData.append("gclid", gclid || "");
         formData.append("campaignid", campaignid || "");
+        formData.append("gclid", gclid || "");
         formData.append("keyword", keyword || "");
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {
-            showToast(
-              "success",
-              result?.message || "Customer registered successfully"
-            );
+            // showToast(
+            //   "success",
+            //   result?.message || "Customer registered successfully"
+            // );
             nextStep();
           }
         });

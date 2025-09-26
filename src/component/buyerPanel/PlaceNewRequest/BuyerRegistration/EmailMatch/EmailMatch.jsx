@@ -127,22 +127,27 @@ const EmailMatch = ({
 
     // save user info in redux
     dispatch(setbuyerRequestData({ name, email: finalEmail, phone }));
+      const updatedAnswers = buyerRequest?.questions || [];
 
     if (isStartWithQuestionModal) {
       const formData = new FormData();
-      formData.append("email", finalEmail);
       formData.append("name", name);
+      formData.append("email", finalEmail);
       formData.append("phone", phone);
-      formData.append("form_status", 1);
-      formData.append("gclid", gclid || "");
+      formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("service_id", buyerRequest?.service_id || "");
+      formData.append("city", citySerach || "");
+      formData.append("postcode", buyerRequest?.postcode || "");
       formData.append("campaignid", campaignid || "");
+      formData.append("gclid", gclid || "");
       formData.append("keyword", keyword || "");
+      formData.append("form_status", 1);
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          showToast(
-            "success",
-            result?.message || "Customer registered successfully"
-          );
+          // showToast(
+          //   "success",
+          //   result?.message || "Customer registered successfully"
+          // );
           nextStep();
         }
       });

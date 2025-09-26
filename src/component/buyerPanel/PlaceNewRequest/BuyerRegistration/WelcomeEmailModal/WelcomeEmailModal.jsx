@@ -15,12 +15,14 @@ const WelcomeEmailModal = ({
   welcomModalTitle = "",
 }) => {
   const dispatch = useDispatch();
-  const { registerLoader } = useSelector((state) => state.findJobs);
+  const { registerLoader, searchServiceLoader } = useSelector(
+    (state) => state.findJobs
+  );
   const { userToken } = useSelector((state) => state.auth);
   const { buyerRequest } = useSelector((state) => state.buyer);
 
   const [email, setEmail] = useState(buyerRequest?.email || "");
-  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [errors, setErrors] = useState({ email: false });
 
@@ -37,30 +39,30 @@ const WelcomeEmailModal = ({
     setEmailErrorMessage("");
   };
 
-  const handleEmailBlur = async () => {
-    if (!email) return;
+  // const handleEmailBlur = async () => {
+  //   if (!email) return;
 
-    try {
-      const res = await dispatch(checkEmailIdApi({ email }));
+  //   try {
+  //     const res = await dispatch(checkEmailIdApi({ email }));
 
-      if (res?.success) {
-        setErrors((prev) => ({ ...prev, email: false }));
-        setIsEmailValid(true);
-        setEmailErrorMessage("");
-      } else {
-        setEmail("");
-        setIsEmailValid(false);
-        setEmailErrorMessage("Email is already registered.");
-      }
-    } catch (err) {
-      console.error("Error checking email:", err);
-      setErrors((prev) => ({ ...prev, email: false }));
-      setIsEmailValid(false);
-      setEmailErrorMessage("Something went wrong. Please try again.");
-    }
-  };
+  //     if (res?.success) {
+  //       setErrors((prev) => ({ ...prev, email: false }));
+  //       setIsEmailValid(true);
+  //       setEmailErrorMessage("");
+  //     } else {
+  //       setEmail("");
+  //       setIsEmailValid(false);
+  //       setEmailErrorMessage("Email is already registered.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Error checking email:", err);
+  //     setErrors((prev) => ({ ...prev, email: false }));
+  //     setIsEmailValid(false);
+  //     setEmailErrorMessage("Something went wrong. Please try again.");
+  //   }
+  // };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const newErrors = {
       email: !email || !emailRegex.test(email),
@@ -73,13 +75,19 @@ const WelcomeEmailModal = ({
       return;
     }
 
-    if (!isEmailValid) return;
+    try {
+      // call API for validation during submit
+      const res = await dispatch(checkEmailIdApi({ email }));
 
-    // Save email to Redux buyer state for pre-filling in the actual EmailMatch component
-    dispatch(setbuyerRequestData({ email }));
-
-    // Proceed to next step (which should be the QuestionModal)
-    nextStep();
+      if (res?.success) {
+        dispatch(setbuyerRequestData({ email }));
+        nextStep(); // ✅ Only when email valid
+      } else {
+        setEmailErrorMessage("Email is already registered.");
+      }
+    } catch (err) {
+      setEmailErrorMessage("Something went wrong. Please try again.");
+    }
   };
 
   const handleCloseClick = () => {
@@ -147,15 +155,15 @@ const WelcomeEmailModal = ({
             }`}
             value={email}
             onChange={handleEmailChange}
-            onBlur={handleEmailBlur}
+            // onBlur={handleEmailBlur}
           />
           {/* <div className={styles.buttonContainer}> */}
           <button
             className={styles.nextButton}
             onClick={handleSubmit}
-            disabled={registerLoader}
+            disabled={searchServiceLoader}
           >
-            {registerLoader ? (
+            {searchServiceLoader ? (
               <Spin
                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
               />
@@ -182,9 +190,9 @@ const WelcomeEmailModal = ({
           <button
             className={styles.nextButtonMobile}
             onClick={handleSubmit}
-            disabled={registerLoader}
+            disabled={searchServiceLoader}
           >
-            {registerLoader ? (
+            {searchServiceLoader ? (
               <Spin
                 indicator={<LoadingOutlined spin style={{ color: "white" }} />}
               />
