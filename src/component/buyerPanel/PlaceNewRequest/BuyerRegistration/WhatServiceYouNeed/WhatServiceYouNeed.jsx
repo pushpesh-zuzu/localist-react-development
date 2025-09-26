@@ -398,7 +398,9 @@ const WhatServiceYouNeed = ({
       <div className={styles.formGroup}>
         <label className={styles.label}>What service do you need?</label>
         <input
-          disabled
+          disabled={
+            !(userToken?.remember_tokens || registerData?.remember_tokens)
+          }
           type="text"
           placeholder="e.g. Personal Trainers, House Cleaning"
           className={`${styles.input} ${
