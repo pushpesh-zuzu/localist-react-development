@@ -36,6 +36,10 @@ const EmailMatch = ({
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
+  const campaign = params.get("Campaign");
+  const adGroup = params.get("AdGroup");
+  const targetID = params.get("TargetID");
+  const msclickid = params.get("msclickid");
   const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -105,7 +109,9 @@ const EmailMatch = ({
     }
 
     const newErrors = {
-      email:!isPPCPages && (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+      email:
+        !isPPCPages &&
+        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
     };
@@ -127,7 +133,7 @@ const EmailMatch = ({
 
     // save user info in redux
     dispatch(setbuyerRequestData({ name, email: finalEmail, phone }));
-      const updatedAnswers = buyerRequest?.questions || [];
+    const updatedAnswers = buyerRequest?.questions || [];
 
     if (isStartWithQuestionModal) {
       const formData = new FormData();
@@ -140,6 +146,10 @@ const EmailMatch = ({
       formData.append("postcode", buyerRequest?.postcode || "");
       formData.append("campaignid", campaignid || "");
       formData.append("gclid", gclid || "");
+      formData.append("campaign", campaign || "");
+      formData.append("adgroup", adGroup || "");
+      formData.append("targetid", targetID || "");
+      formData.append("msclickid", msclickid || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
       dispatch(registerQuoteCustomer(formData)).then((result) => {
