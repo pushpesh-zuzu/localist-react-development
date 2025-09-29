@@ -109,7 +109,10 @@ const ConfirmationModal = ({
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
-
+  const campaign = params.get("Campaign")
+  const adGroup = params.get("AdGroup")
+  const targetID = params.get("TargetID")
+  const msclickid = params.get("msclickid")
   const handleSubmit = () => {
     if (!userToken) {
       // const formData = new FormData();
@@ -133,6 +136,10 @@ const ConfirmationModal = ({
       formData.append("postcode", buyerRequest?.postcode || "");
       formData.append("campaignid", campaignid || "");
       formData.append("gclid", gclid || "");
+      formData.append("campaign", campaign || "");
+      formData.append("adgroup", adGroup || "");
+      formData.append("targetid", targetID || "");
+      formData.append("msclickid", msclickid || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 0);
 
