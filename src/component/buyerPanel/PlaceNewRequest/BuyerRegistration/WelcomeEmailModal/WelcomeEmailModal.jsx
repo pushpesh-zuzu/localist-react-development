@@ -128,7 +128,7 @@ const WelcomeEmailModal = ({
         </div>
         <div className={styles.welcomeTextContainer}>
           <p style={{ fontWeight: 700 }}>
-            Get Free Quotes From Specialist {welcomModalTitle} in Minutes
+            Get Free Quotes From Specialist {welcomModalTitle} In Minutes
           </p>
           {/* <p style={{ fontWeight: 600 }}>Simply Answer a Few Questions.</p> */}
         </div>
