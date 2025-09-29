@@ -257,6 +257,26 @@ const pageTitles = {
     description:
       "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
+   '/resin_driveways_ppc': {
+    title: "Compare Free Resin Driveway Quotes | Localists",
+    description:
+      "Get free quotes from trusted local resin driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/tarmac_driveways_ppc': {
+    title: "Compare Free Tarmac Driveway Quotes | Localists",
+    description:
+      "Get free quotes from trusted local tarmac driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/concrete_driveways_ppc': {
+    title: "Compare Free Concrete Driveway Quotes | Localists",
+    description:
+      "Get free quotes from trusted local concrete driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/block_paving_driveways_ppc': {
+    title: "Compare Free Block Paving Driveway Quotes | Localists",
+    description:
+      "Get free quotes from trusted local block paving driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
 };
 
 

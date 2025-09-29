@@ -7,6 +7,10 @@ import ArtificialGrass from "./SearchPostAndBanner/banner/ArtificialGrass.webp";
 import Fence from "./SearchPostAndBanner/banner/Fence.webp";
 import Driveways from "./SearchPostAndBanner/banner/Driveways.webp";
 import Gate from "./SearchPostAndBanner/banner/Gate.webp";
+import ResinDriveway from "./SearchPostAndBanner/banner/ResinDriveway.webp";
+import BlockPaving from "./SearchPostAndBanner/banner/BlockPaving.webp";
+import TarmacDriveway from "./SearchPostAndBanner/banner/TarmacDriveway.webp";
+import ImprintedConcrete from "./SearchPostAndBanner/banner/ImprintedConcrete.webp";
 
 const LANDING_DETAIL_DATA = {
   fencing_ppc: {
@@ -39,6 +43,27 @@ const LANDING_DETAIL_DATA = {
       "Here at <strong>Localists</strong>, finding a local gating company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local companies in seconds</strong>.",
     ],
   },
+  resin_driveways_ppc: {
+    paragraphs: [
+      "Here at <strong>Localists</strong>, finding a local resin driveway company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local resin driveway specialists in seconds</strong>.",
+    ],
+  },
+  tarmac_driveways_ppc: {
+    paragraphs: [
+      "Here at <strong>Localists</strong>, finding a local tarmac driveway company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local tarmac driveway specialists in seconds</strong>.",
+    ],
+  },
+  block_paving_driveways_ppc: {
+    paragraphs: [
+      "Here at <strong>Localists</strong>, finding a local block paving driveway company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local block paving driveway specialists in seconds</strong>.",
+    ],
+  },
+  concrete_driveways_ppc: {
+    paragraphs: [
+      "Here at <strong>Localists</strong>, finding a local concrete driveway company is quick and easy. Simply submit your details above and we will match you with <strong>quotes from local concrete driveway specialists in seconds</strong>.",
+      ,
+    ],
+  },
 };
 
 const LANDING_DETAIL_BANNERS = {
@@ -69,6 +94,18 @@ const LANDING_DETAIL_BANNERS = {
   gates_ppc: {
     banner: Gate,
   },
+  resin_driveways_ppc: {
+    banner: ResinDriveway,
+  },
+  block_paving_driveways_ppc: {
+    banner: BlockPaving,
+  },
+  tarmac_driveways_ppc: {
+    banner: TarmacDriveway,
+  },
+  concrete_driveways_ppc: {
+    banner: ImprintedConcrete,
+  },
 };
 const LANDING_SERVICES = {
   fencing_ppc: "Fence & Gate Installation",
@@ -96,6 +133,18 @@ const LANDING_TITLES_AND_META = {
   },
   gates_ppc: {
     title: "Gating companies now",
+  },
+  resin_driveways_ppc: {
+    title: "Resin Driveway companies now",
+  },
+  tarmac_driveways_ppc: {
+    title: "Tarmac Driveway companies now",
+  },
+  concrete_driveways_ppc: {
+    title: "Concrete Driveway companies now",
+  },
+  block_paving_driveways_ppc: {
+    title: "Block Paving Driveway companies now",
   },
 };
 const LANDING_HOW_IT_WORK = {
@@ -173,8 +222,12 @@ const LANDING_WELCOM_MODAL_TITLE = {
   patio_services_ppc: "Patio Installers",
   artificial_grass_installation_ppc: "Artificial Grass Companies",
   fencing_ppc: " Fencing Companies",
-  driveways_ppc:'Driveway Installers',
+  driveways_ppc: "Driveway Installers",
   gates_ppc: "Gating Companies",
+  resin_driveways_ppc: "Resin Driveway Companies",
+  tarmac_driveways_ppc: "Tarmac Driveway Companies",
+  concrete_driveways_ppc: "Concrete Driveway Companies",
+  block_paving_driveways_ppc: "Block Paving Driveway Companies",
 };
 export {
   LANDING_DETAIL_DATA,

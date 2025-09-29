@@ -166,7 +166,9 @@ const SearchPostAndBanner = ({
 
   return (
     <div className={styles.searchcontainer}>
-      <h1 style={{ color: "white", background: "rgba(0,0,0,.5)" }}>
+      <h1
+        style={{ color: "white", background: "rgba(0,0,0,.5)", padding: "4px" }}
+      >
         Compare{" "}
         <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span>{" "}
         from local {title}!
