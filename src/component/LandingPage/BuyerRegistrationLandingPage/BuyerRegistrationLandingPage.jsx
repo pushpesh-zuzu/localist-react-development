@@ -363,7 +363,7 @@ const BuyerRegistrationLandingPage = ({
               setShowConfirmModal={setShowConfirmModal}
               resetTrigger={resetEmailFormTrigger}
               isStartWithQuestionModal={isStartWithQuestionModal}
-              isPPCPages={true}
+              isPPCPages={false}
             />
           )}
 

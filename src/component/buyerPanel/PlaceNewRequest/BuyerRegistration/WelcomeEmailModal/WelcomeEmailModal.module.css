@@ -10,6 +10,15 @@
   justify-content: center;
 }
 
+.info {
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 40px;
+  padding-bottom: 28px;
+  padding-left: 64px;
+  padding-right: 64px;
+}
 .phoneWrapper {
   display: flex;
   align-items: start;
@@ -157,8 +166,8 @@
 
 .buttonContainer {
   margin-bottom: 0px;
-  margin-top: 24px;
-  display: none;
+  /* margin-top: 24px; */
+  /* display: none; */
 }
 
 .backButton {
@@ -208,7 +217,7 @@
 .nextButton:hover {
   background-color: #0096c4;
 }
-.nextButtonMobile {
+/* .nextButtonMobile {
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
   color: white;
@@ -220,6 +229,19 @@
   vertical-align: middle;
   min-width: 138px;
   border-radius: 24px;
+} */
+.nextButtonMobile {
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 25px;
+  border: none;
+  cursor: pointer !important;
+  font-weight: 600;
+  font-size: 16px;
+  vertical-align: middle;
+  min-width: 138px;
+  border-radius: 4px;
 }
 
 .nextButtonMobile:hover {
@@ -269,11 +291,11 @@
     padding: 8px;
   }
 
-  .buttonContainer {
+  /* .buttonContainer {
     flex-direction: row;
     gap: 10px;
     display: flex;
-  }
+  } */
 
   .checkboxContainer input {
     height: 20px;
@@ -304,6 +326,14 @@
     border: none;
     cursor: pointer !important;
     color: #000000;
+  }
+}
+@media (max-width: 540px) {
+  .info {
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 400px;
+    margin: auto;
   }
 }
 

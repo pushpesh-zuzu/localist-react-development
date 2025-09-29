@@ -128,25 +128,17 @@ const WelcomeEmailModal = ({
         </div>
         <div className={styles.welcomeTextContainer}>
           <p style={{ fontWeight: 700 }}>
-            Get Free Quotes From up to 5 Local & Highly Vetted{" "}
-            {welcomModalTitle} in minutes!
+            Get Free Quotes From Specialist {welcomModalTitle} in Minutes
           </p>
-          <p style={{ fontWeight: 600 }}>Simply Answer a Few Questions.</p>
+          {/* <p style={{ fontWeight: 600 }}>Simply Answer a Few Questions.</p> */}
         </div>
-        <div style={{}}>
-          <p
-            style={{
-              color: "#000",
-              fontSize: "18px",
-              fontWeight: 600,
-              paddingTop: "40px",
-              paddingBottom: "28px",
-            }}
-          >
-            Let’s Start With Your Email Address
+        <div>
+          <p className={styles.info}>
+            Answer a Few Quick Questions & We'll Match You With The Best Local
+            Professionals For Your Needs
           </p>
         </div>
-        <div className={styles.infoWrapper}>
+        {/* <div className={styles.infoWrapper}>
           <input
             type="email"
             placeholder="Enter your email..."
@@ -155,9 +147,8 @@ const WelcomeEmailModal = ({
             }`}
             value={email}
             onChange={handleEmailChange}
-            // onBlur={handleEmailBlur}
           />
-          {/* <div className={styles.buttonContainer}> */}
+         
           <button
             className={styles.nextButton}
             onClick={handleSubmit}
@@ -171,9 +162,8 @@ const WelcomeEmailModal = ({
               "Get Started"
             )}
           </button>
-          {/* </div> */}
-        </div>
-        <div style={{ maxWidth: "400px", margin: "auto" }}>
+        </div> */}
+        {/* <div style={{ maxWidth: "400px", margin: "auto" }}>
           {errors.email && (
             <span style={{ color: "red" }} className={styles.errorMessage}>
               {emailErrorMessage || "Please enter a valid email address."}
@@ -185,8 +175,8 @@ const WelcomeEmailModal = ({
               {emailErrorMessage}
             </span>
           )}
-        </div>
-        <div className={styles.buttonContainer}>
+        </div> */}
+        {/* <div className={styles.buttonContainer}>
           <button
             className={styles.nextButtonMobile}
             onClick={handleSubmit}
@@ -199,6 +189,11 @@ const WelcomeEmailModal = ({
             ) : (
               "Get Started"
             )}
+          </button>
+        </div> */}
+        <div className={styles.buttonContainer}>
+          <button className={styles.nextButtonMobile} onClick={nextStep}>
+            Find {welcomModalTitle}
           </button>
         </div>
       </div>

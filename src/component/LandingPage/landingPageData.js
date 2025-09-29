@@ -171,10 +171,9 @@ const META_TAG_LANDING_PAGE = {
 const LANDING_WELCOM_MODAL_TITLE = {
   landscaping_ppc: "Landscapers",
   patio_services_ppc: "Patio Installers",
-  artificial_grass_installation_ppc: "Artificial Grass ",
+  artificial_grass_installation_ppc: "Artificial Grass Companies",
   fencing_ppc: " Fencing Companies",
   driveways_ppc:'Driveway Installers',
-  artificial_grass_installation_ppc: "Get Free Quotes",
   gates_ppc: "Gating Companies",
 };
 export {
