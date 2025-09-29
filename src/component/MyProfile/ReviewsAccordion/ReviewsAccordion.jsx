@@ -14,15 +14,21 @@ import axiosInstance from "../../../Api/axiosInstance";
 import { toast } from "react-toastify";
 import { showToast } from "../../../utils";
 import ReviewSection from "../../ViewProfile/Reviews/Reviews";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import whatsUpIcon from "../../../assets/Icons/whatsup.svg";
 import linkedInIcon from "../../../assets/Icons/linkedin.svg";
 import twitterIcon from "../../../assets/Icons/twitter.svg";
 import shareIcon from "../../../assets/Icons/share.svg";
+// import { GoogleLogin } from "@react-oauth/google";
+// import { jwt_decode } from "jwt-decode";
+import jwt_decode from "jwt-decode";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
   const [googleLink, setGoogleLink] = useState("");
+  const navigate = useNavigate();
 
   const [isShareOpen, setIsShareOpen] = useState(false);
   const onCopyUrl = () => {
@@ -71,6 +77,121 @@ const ReviewsAccordion = ({ details }) => {
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
       customerLinkData
     )}`,
+  };
+
+  // const handleLogin = (credentialResponse) => {
+  //   const token = credentialResponse.credential;
+  //   const decoded = jwt_decode(token);
+  //   console.log("Google User:", decoded);
+
+  //   // Send token to backend for exchange with access token
+  //   fetch("http://localhost:5100/auth/callback", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ token }),
+  //   });
+  // };
+
+  const login = useGoogleLogin({
+    flow: "auth-code", //  important
+    scope:
+      "openid email profile https://www.googleapis.com/auth/business.manage",
+    onSuccess: async (response) => {
+      console.log("Auth code:", response.code);
+
+      // Send auth code to backend
+      //   await axiosInstance.post("/auth/callback", {
+      //     code: response.code,
+      //   });
+      // },
+      // onError: () => {
+      //   console.log("Login Failed");
+      // },
+      try {
+        const res = await axiosInstance.post("/auth/callback", {
+          code: response.code,
+        });
+        console.log("Reviews from backend:", res.data.reviews);
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    onError: () => console.log("Login failed"),
+  });
+
+  const handleSuccess = async (response) => {
+    try {
+      // response.credential contains the JWT token
+      const decoded = jwt_decode(response.credential);
+      console.log("Decoded JWT:", decoded);
+
+      // Save token locally
+      localStorage.setItem("google_access_token", response.credential);
+
+      // Send token to backend to fetch Google Reviews
+      const res = await axiosInstance.post("/auth/callback", {
+        token: response.credential,
+      });
+
+      console.log("Reviews from backend:", res.data);
+    } catch (error) {
+      console.error("Error sending token to backend:", error);
+    }
+  };
+
+  const handleError = () => {
+    console.error("Google login failed");
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const client = google.accounts.oauth2.initTokenClient({
+        client_id:
+          "http://1090455090567-4tao1nnrogtke2fgf4ad00p17en31pfc.apps.googleusercontent.com",
+        scope: "https://www.googleapis.com/auth/business.manage",
+        callback: async (tokenResponse) => {
+          // 👉 Send tokenResponse.access_token to backend
+          // backend will call Google My Business API to fetch reviews
+          console.log("Access Token:", tokenResponse.access_token);
+
+          // Send token to backend
+          await axios.post("http://localhost:5000/api/google-reviews", {
+            access_token: tokenResponse.access_token,
+          });
+        },
+      });
+
+      client.requestAccessToken();
+    } catch (err) {
+      console.error("Google login error:", err);
+    }
+  };
+
+  const handleLogin = (credentialResponse) => {
+    // const token = credentialResponse.credential;
+    // const decoded = jwt_decode(token);
+    // console.log("Google User:", decoded);
+    // // Send token to backend for exchange with access token
+    // fetch("http://localhost:5100/auth/callback", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ token }),
+    // });
+    // window.location.href = "http://localhost:5100/auth/google";
+    const popup = window.open(
+      "http://localhost:5100/auth/google",
+      "GoogleLogin",
+      "width=500,height=600"
+    );
+
+    // navigate("/sellers/leads");
+
+    // Optional: listen for message from backend if you postMessage later
+    window.addEventListener("message", (event) => {
+      console.log("Received data from popup:", event.data);
+      if (event.origin !== "http://localhost:5100") return;
+      // You can now update your UI with reviews
+    });
   };
 
   return (
@@ -196,9 +317,19 @@ const ReviewsAccordion = ({ details }) => {
             value={googleLink}
             onChange={(e) => setGoogleLink(e.target.value)}
           />
-          <button className={styles.importBtn} onClick={handleSubmit}>
+          {/* <button className={styles.importBtn} onClick={handleLogin}>
             Import Reviews
-          </button>
+          </button> */}
+          {/* <GoogleLogin
+            onSuccess={handleSuccess}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          /> */}
+          <button onClick={() => login()}>Login with Google</button>
+          {/* <button className={styles.importBtn} onClick={handleGoogleLogin}>
+            Import Reviews
+          </button> */}
         </div>
       </div>
 

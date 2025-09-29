@@ -391,8 +391,9 @@ const LeadsCards = ({ enoughCredit }) => {
                                   className={styles.details}
                                   // onClick={() => handleViewProfile(item)}
                                 >
-                                  <h3>{item?.customer?.name}</h3>
-                                  <p>{item?.postcode}</p>
+                                  {/* <h3>{item?.customer?.name}</h3> */}
+                                  <h3>{item?.customer?.name?.split(" ")[0]}</h3>
+                                  <p>{item?.postcode.split(" ")[0]}</p>
                                 </div>
                               </div>
                               <span

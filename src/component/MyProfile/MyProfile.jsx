@@ -12,6 +12,8 @@ import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
 import { setIsDirtyRedux } from "../../store/MyProfile/myProfileSlice";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { OAuth_Client_ID } from "../../Api/axiosInstance";
 // import { Collapse } from "antd";
 // import ProfileArrowUp from "../../assets/Icons/ProfileArrow.svg"
 
@@ -197,10 +199,12 @@ const MyProfile = () => {
             isOpen={openAccordion === "Reviews"}
             onClick={() => openAccordionHandler("Reviews")}
           >
-            <ReviewsAccordion
-              details={viewProfileData?.reviews}
-              setIsDirty={() => dispatch(setIsDirtyRedux(true))}
-            />
+            <GoogleOAuthProvider clientId="1090455090567-4tao1nnrogtke2fgf4ad00p17en31pfc.apps.googleusercontent.com">
+              <ReviewsAccordion
+                details={viewProfileData?.reviews}
+                setIsDirty={() => dispatch(setIsDirtyRedux(true))}
+              />
+            </GoogleOAuthProvider>
           </AccordionItem>
         </div>
 
