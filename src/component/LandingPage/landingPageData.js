@@ -224,10 +224,10 @@ const LANDING_WELCOM_MODAL_TITLE = {
   fencing_ppc: " Fencing Companies",
   driveways_ppc: "Driveway Installers",
   gates_ppc: "Gating Companies",
-  resin_driveways_ppc: "Resin Driveway Companies",
-  tarmac_driveways_ppc: "Tarmac Driveway Companies",
-  concrete_driveways_ppc: "Concrete Driveway Companies",
-  block_paving_driveways_ppc: "Block Paving Driveway Companies",
+  resin_driveways_ppc: "Resin Driveway Installers",
+  tarmac_driveways_ppc: "Tarmac Driveway Installers",
+  concrete_driveways_ppc: "Concrete Driveway Installers",
+  block_paving_driveways_ppc: "Block Paving Driveway Installers",
 };
 export {
   LANDING_DETAIL_DATA,
