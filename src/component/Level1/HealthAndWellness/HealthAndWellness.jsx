@@ -43,15 +43,16 @@ function HealthAndWellness() {
           "professionals",
         ]}
         title="health & wellness"
+        findAccountTitle2="professionals"
         para1="At Localists, we connect you with trusted health and wellness professionals who can support every aspect of your well-being."
         para2="Whether you want to get fit, relieve stress, improve your mental health, or enhance your lifestyle, we have the right experts for you. From personal trainers and massage therapists to therapists, counsellors, and nutrition professionals—our vetted specialists are here to help you achieve your goals."
         para3="Not sure how to find the right health and wellness professional? Simply share the services you need and your location, and we’ll recommend the best professionals near you. Compare services, read verified reviews, and get free, tailored quotations to start your wellness journey today."
         para4="It’s quick, easy, and stress-free!"
-        placeholderText="Tutoring, Piano Lessons, Driving Lessons etc..."
+        placeholderText="Massage Therapy, Personal Trainers etc..."
       />
       <HowItWorks
         howItWorksData={HealthAndWellnessHowItWork}
-        ctaText={"Health & Wellness Service "}
+        ctaText={"Health & Wellness Professionals"}
       />
       <PopularCategories data={HealthAndWellnessPopularCategory} />
 

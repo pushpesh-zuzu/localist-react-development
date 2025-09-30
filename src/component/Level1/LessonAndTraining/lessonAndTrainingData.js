@@ -1,5 +1,12 @@
-import { PhysicsMathsSlider, TutorsServiceSlider } from "../../level3/imagesServices";
-import { BusinessProfessionalsIcon, FreeQuotesIcon, WhatYouNeedIcon } from "../images";
+import {
+  PhysicsMathsSlider,
+  TutorsServiceSlider,
+} from "../../level3/imagesServices";
+import {
+  BusinessProfessionalsIcon,
+  FreeQuotesIcon,
+  WhatYouNeedIcon,
+} from "../images";
 
 const LessionAndTrainingHowItWork = [
   {
@@ -33,18 +40,15 @@ const LessionAndTrainingHowItWork = [
 const LessionAndTrainingPopularCategory = [
   {
     id: 1,
-    // availableOnline: true,
     title: "Tutors",
     image: TutorsServiceSlider,
     path: "tutors-near-me",
   },
-   {
-      id: 2,
-      image: PhysicsMathsSlider,
-      title: "Physics And Maths Tutors",
-      availableOnline: true,
-      path: "physics-maths-tutors-near-me",
-    },
- 
+  {
+    id: 2,
+    image: PhysicsMathsSlider,
+    title: "Physics And Maths Tutors",
+    path: "physics-maths-tutors-near-me",
+  },
 ];
 export { LessionAndTrainingHowItWork, LessionAndTrainingPopularCategory };

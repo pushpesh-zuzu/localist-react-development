@@ -13,10 +13,10 @@ function Business() {
   return (
     <>
       <Helmet>
-        <title>Health & Wellness Professionals Near Me | Localists</title>
+        <title>Find Trusted Business Professionals Near Me | Localists</title>
         <meta
           name="description"
-          content=" Find trusted health and wellness professionals near you. Get free quotes for fitness, therapy, massage, and counselling services."
+          content="Need help finding business professionals, consultants, or expert local businesses near you? Get free quotes now at Localists. It's quick, easy & free. "
         />
         <script>
           {`
@@ -36,10 +36,11 @@ function Business() {
         panelImage={BusinessBanner}
         doYouNeetTitle={["Do you need trusted", "business ", "professionals"]}
         title="Business"
+        findAccountTitle2="professionals"
         para1="At Localists, we connect you with the right Business Professionals for your needs."
         para2="Not sure how to find the right Business Professionals? Simply tell us what you need help with and where you need it, and we’ll recommend the best Business Professionals near you. See what they offer, check out their reviews, and get free quotations for the work you require."
         para3="It's super fast and easy!"
-        placeholderText="Tutoring, Piano Lessons, Driving Lessons etc..."
+        placeholderText="Business Consulting,Social Media Marketing etc..."
       />
       <HowItWorks
         howItWorksData={BusinessHowItWork}

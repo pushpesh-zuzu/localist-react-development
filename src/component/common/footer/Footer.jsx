@@ -179,24 +179,26 @@ const Footer = () => {
                 <li>How it works</li>
               </Link>
               <Link
-                className={styles.link}
+                className={`${styles.link} ${styles.mobileItem}`}
                 to={`/${lang}/${country}/sellers/pricing`}
               >
                 <li>Pricing</li>
               </Link>
-              <li
-                className={styles.mobileItem}
-                onClick={() => {
-                  if (!userToken && !registerToken) {
-                    // Not logged in → Navigate
-                    navigate(`/${lang}/${country}/sellers/create`);
-                  } else {
-                    handleJoinAsProfessional();
-                  }
-                }}
-              >
-                Join as a Professional
-              </li>
+              <Link className={styles.link}>
+                <li
+                  // className={styles.mobileItem}
+                  onClick={() => {
+                    if (!userToken && !registerToken) {
+                      // Not logged in → Navigate
+                      navigate(`/${lang}/${country}/sellers/create`);
+                    } else {
+                      handleJoinAsProfessional();
+                    }
+                  }}
+                >
+                  Join as a Professional
+                </li>
+              </Link>
               {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>
                   <li > New Leads</li>

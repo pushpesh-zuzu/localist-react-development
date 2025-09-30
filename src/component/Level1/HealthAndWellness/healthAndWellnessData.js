@@ -1,5 +1,12 @@
-import { MassageTherapySlider, PersonalTrainersSlider, PhysicsMathsSlider, TutorsServiceSlider } from "../../level3/imagesServices";
-import { BusinessProfessionalsIcon, FreeQuotesIcon, WhatYouNeedIcon } from "../images";
+import {
+  MassageTherapySlider,
+  PersonalTrainersSlider,
+} from "../../level3/imagesServices";
+import {
+  BusinessProfessionalsIcon,
+  FreeQuotesIcon,
+  WhatYouNeedIcon,
+} from "../images";
 
 const HealthAndWellnessHowItWork = [
   {
@@ -22,10 +29,10 @@ const HealthAndWellnessHowItWork = [
   },
   {
     id: 3,
-    title: "Start Your Training ",
+    title: " Book your ",
     image: BusinessProfessionalsIcon, // Same icon as business
-    heading1: "Start your  ",
-    heading2: "training ",
+    heading1: " Book your  ",
+    heading2: "wellness service ",
     description:
       "Once you’ve selected the right professional, contact them directly to discuss your goals, confirm details, and begin your path to better health with confidence.",
   },
@@ -35,15 +42,13 @@ const HealthAndWellnessPopularCategory = [
     id: 1,
     title: "Personal Trainers",
     image: PersonalTrainersSlider,
-    // path: "tutors-near-me",
+    // path: "",
   },
-   {
-      id: 2,
-      image: MassageTherapySlider,
-      title: "Massage Therapy",
-     
-    //   path: "physics-maths-tutors-near-me",
-    },
- 
+  {
+    id: 2,
+    image: MassageTherapySlider,
+    title: "Massage Therapy",
+    // path: "",
+  },
 ];
-export { HealthAndWellnessHowItWork,HealthAndWellnessPopularCategory };
+export { HealthAndWellnessHowItWork, HealthAndWellnessPopularCategory };

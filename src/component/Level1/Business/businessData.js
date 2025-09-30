@@ -1,6 +1,12 @@
-// import { PhysicsMathsSlider, TutorsServiceSlider } from "../../level3/imagesServices";
-import { AccountingSlider, BookkeepingServicesSlider } from "../../level3/imagesServices";
-import { BusinessProfessionalsIcon, FreeQuotesIcon, WhatYouNeedIcon } from "../images";
+import {
+  AccountingSlider,
+  BookkeepingServicesSlider,
+} from "../../level3/imagesServices";
+import {
+  BusinessProfessionalsIcon,
+  FreeQuotesIcon,
+  WhatYouNeedIcon,
+} from "../images";
 
 const BusinessHowItWork = [
   {
@@ -9,7 +15,7 @@ const BusinessHowItWork = [
     image: WhatYouNeedIcon, // Same icon as business
     heading1: "Find the ",
     heading2: "best match",
-    break:true,
+    break: true,
     description:
       "We will help you find quality Business Professionals in your local area. Let us know your requirements, and Localists will match you with the best service provider to help you.",
   },
@@ -19,7 +25,7 @@ const BusinessHowItWork = [
     image: FreeQuotesIcon, // Same icon as business
     heading1: "Request ",
     heading2: "free quotes",
-    break:true,
+    break: true,
     description:
       "We will send you quotes from local Business Professionals for free. You can then compare profiles from Business Professionals near you, read verified reviews, see what makes them stand out, and pick the best Business Professional for you. ",
   },
@@ -38,14 +44,13 @@ const BusinessPopularCategory = [
     id: 1,
     title: "Bookkeeping Services",
     image: BookkeepingServicesSlider,
-    // path: "tutors-near-me",
+    // path: "",
   },
-   {
-      id: 2,
-      image: AccountingSlider,
-      title: "Accounting",
-    //   path: "physics-maths-tutors-near-me",
-    },
- 
+  {
+    id: 2,
+    image: AccountingSlider,
+    title: "Accounting",
+    // path: "",
+  },
 ];
-export { BusinessHowItWork,BusinessPopularCategory };
+export { BusinessHowItWork, BusinessPopularCategory };
