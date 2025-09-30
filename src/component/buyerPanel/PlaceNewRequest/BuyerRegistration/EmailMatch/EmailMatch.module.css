@@ -286,8 +286,8 @@
 
 @media (max-width: 480px) {
   .modalContent {
-    /* width: 83%; */
-    padding: 24px 8px;
+    width: 95%;
+    padding: 24px 12px;
   }
 
   .header h2 {
