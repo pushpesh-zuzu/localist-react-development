@@ -40,14 +40,14 @@ const LessionAndTrainingHowItWork = [
 const LessionAndTrainingPopularCategory = [
   {
     id: 1,
-    title: "Tutors",
+    title: "Tutoring",
     image: TutorsServiceSlider,
     path: "tutors-near-me",
   },
   {
     id: 2,
     image: PhysicsMathsSlider,
-    title: "Physics And Maths Tutors",
+    title: "Physics and Maths",
     path: "physics-maths-tutors-near-me",
   },
 ];

@@ -340,8 +340,8 @@ const TUTOR_OTHER_SERVICES_DATA = {
     {
       id: 1,
       image: PhysicsMathsSlider,
-      description: "Physics And Maths Tutor",
-      availableOnline: true,
+      description: "Physics and Maths",
+      // availableOnline: true,
       path: "physics-maths-tutors-near-me",
     },
   ]
