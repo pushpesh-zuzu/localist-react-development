@@ -59,6 +59,7 @@ const otherServicesData = useMemo(
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex" />
         <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} />
       </Helmet>

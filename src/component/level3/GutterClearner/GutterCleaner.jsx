@@ -74,10 +74,11 @@ function GutterCleaner() {
   );
   return (
     <>
-      {/* <Helmet>
-        <title>{metaConfig?.title}</title>
-        <meta name={metaConfig?.name} content={metaConfig?.content} />
-      </Helmet> */}
+      <Helmet>
+        {/* <title>{metaConfig?.title}</title>
+        <meta name={metaConfig?.name} content={metaConfig?.content} /> */}
+        <meta name="robots" content="noindex" />
+      </Helmet>
 
       <SearchAndFindAnAccountant
         title={topConfig?.title}

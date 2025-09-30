@@ -13,6 +13,7 @@ function Business() {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex" />
         <title>Find Trusted Business Professionals Near Me | Localists</title>
         <meta
           name="description"

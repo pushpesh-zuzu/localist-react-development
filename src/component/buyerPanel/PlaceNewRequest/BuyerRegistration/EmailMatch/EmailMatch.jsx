@@ -214,7 +214,11 @@ const EmailMatch = ({
           </button>
         )}
         <div className={styles.header}>
-          <h2>Please Enter Your Details</h2>
+          <h2 >YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
+          <p style={{color:'#000'}}>
+            Your phone number and email are safe with us.
+          </p >
+          <p style={{color:'#000'}}>We'll only use them to help you connect with trusted, verified profesionals.</p>
         </div>
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>

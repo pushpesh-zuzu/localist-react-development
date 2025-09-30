@@ -13,6 +13,7 @@ function Transport() {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex" />
         <script>
           {`
               gtag('event', 'conversion', {

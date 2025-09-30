@@ -16,6 +16,7 @@ function HealthAndWellness() {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex" />
         <title>Health & Wellness Professionals Near Me | Localists</title>
         <meta
           name="description"

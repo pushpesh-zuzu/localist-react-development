@@ -60,7 +60,7 @@
 .modalContent {
   background: #ffffff;
   padding: 24px 31px 24px 31px;
-  width: 500px;
+  /* width: 500px; */
   text-align: center;
 }
 .infoWrapper {
@@ -83,7 +83,7 @@
   text-align: center;
   color: var(--text-color);
   vertical-align: middle;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .input {
@@ -215,7 +215,7 @@
   .modalContent {
     background: #ffffff;
     padding: 41px 31px;
-    width: 500px;
+    /* width: 500px; */
     text-align: center;
   }
 
@@ -286,12 +286,12 @@
 
 @media (max-width: 480px) {
   .modalContent {
-    width: 83%;
-    padding: 24px 24px;
+    /* width: 83%; */
+    padding: 24px 8px;
   }
 
   .header h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 20px;
   }
 

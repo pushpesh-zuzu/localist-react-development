@@ -16,6 +16,7 @@ function LessonAndTraining() {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex" />
         <title>Lessons & Training From Local Experts | Localists</title>
         <meta
           name="description"
