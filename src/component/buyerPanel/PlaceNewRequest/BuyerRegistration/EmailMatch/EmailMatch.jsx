@@ -218,7 +218,7 @@ const EmailMatch = ({
           <p style={{color:'#000'}}>
             Your phone number and email are safe with us.
           </p >
-          <p style={{color:'#000'}}>We'll only use them to help you connect with trusted, verified profesionals.</p>
+          <p style={{color:'#000'}}>We'll only use them to help you connect with trusted, verified professionals.</p>
         </div>
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>
