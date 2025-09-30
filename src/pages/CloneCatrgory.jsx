@@ -5,7 +5,7 @@ import PopularCategories from "../component/category/popularCategories/ClonePopu
 // import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
 import GetQuotes from "../component/common/getQuotes/GetQuotes";
 // import styles from "./clonecategory.module.css";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useParams } from "react-router-dom";
 import {
   HowItWorksData,
   PopularCategoriesData,
@@ -14,6 +14,7 @@ import {
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import Home from "../assets/banners/Home.jpg";
 import AllServiceLevel1 from "../component/category/allServices/AllServiceLevel1";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 const endpointCategoryMap = {
   "financial-and-accounting": ["Accounting", "Bookkeeping Services"],
@@ -64,7 +65,8 @@ const endpointCategoryMap = {
 
 const CloneCategory = ({ accountHeader }) => {
   const location = useLocation();
-
+  const { lang, country } = useParams();
+  console.log(lang, "l", country, "c");
   const pathSegments = location.pathname.split("/").filter(Boolean); // ['en', 'gb', 'business']
   const endpoint1 = pathSegments[pathSegments.length - 1]; // e.g., 'business'
 
@@ -100,6 +102,7 @@ const CloneCategory = ({ accountHeader }) => {
           name="description"
           content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
         /> */}
+
         <script>
           {`
               gtag('event', 'conversion', {
@@ -110,6 +113,7 @@ const CloneCategory = ({ accountHeader }) => {
           `}
         </script>
       </Helmet>
+      <CalonicalTags/>
       <div>
         <BannerWithBreadCrum
           header={accountHeader}
@@ -117,7 +121,11 @@ const CloneCategory = ({ accountHeader }) => {
           accountHeader="Home & Garden"
           level={2}
           isNeedS={false}
-          doYouNeetTitle={['Do you need trusted','home & garden','professionals']}
+          doYouNeetTitle={[
+            "Do you need trusted",
+            "home & garden",
+            "professionals",
+          ]}
           panelImage={Home}
           title="Home & Garden"
           findAccountTitle2="professionals"

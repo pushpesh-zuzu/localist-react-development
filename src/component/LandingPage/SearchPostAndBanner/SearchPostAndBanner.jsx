@@ -19,6 +19,7 @@ const SearchPostAndBanner = ({
   cancelPara,
   serviceId,
   welcomModalTitle,
+  welcomModalButtonText
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -204,6 +205,7 @@ const SearchPostAndBanner = ({
           isStartWithQuestionModal={isStartWithQuestionModal}
           serviceId={serviceId}
           welcomModalTitle={welcomModalTitle}
+          welcomModalButtonText={welcomModalButtonText}
         />
       )}
     </div>

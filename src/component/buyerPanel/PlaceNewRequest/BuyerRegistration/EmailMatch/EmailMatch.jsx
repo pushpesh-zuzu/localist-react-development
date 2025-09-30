@@ -25,6 +25,7 @@ const EmailMatch = ({
   resetTrigger,
   isStartWithQuestionModal,
   isPPCPages = false,
+  hideCloseButton = false,
 }) => {
   const dispatch = useDispatch();
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
@@ -203,13 +204,15 @@ const EmailMatch = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button
-          className={styles.closeButton}
-          onClick={handleCloseClick}
-          disabled={registerLoader}
-        >
-          &times;
-        </button>
+        {!hideCloseButton && (
+          <button
+            className={styles.closeButton}
+            onClick={handleCloseClick}
+            disabled={registerLoader}
+          >
+            &times;
+          </button>
+        )}
         <div className={styles.header}>
           <h2>Please Enter Your Details</h2>
         </div>

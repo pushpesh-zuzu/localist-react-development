@@ -229,6 +229,18 @@ const LANDING_WELCOM_MODAL_TITLE = {
   concrete_driveways_ppc: "Concrete Driveway Installers",
   block_paving_driveways_ppc: "Block Paving Driveway Installers",
 };
+const LANDING_WELCOM_MODAL_BUTTON_TITLE = {
+  landscaping_ppc: "Landscapers",
+  patio_services_ppc: "Patio Installers",
+  artificial_grass_installation_ppc: "Artificial Grass Companies",
+  fencing_ppc: " Fencing Companies",
+  driveways_ppc: "Driveway Installers",
+  gates_ppc: "Gating Companies",
+  resin_driveways_ppc: "Resin Driveway Installers",
+  tarmac_driveways_ppc: "Tarmac Driveway Installers",
+  concrete_driveways_ppc: "Concrete Driveway Installers",
+  block_paving_driveways_ppc: "Block Paving Driveway Installers",
+};
 export {
   LANDING_DETAIL_DATA,
   LANDING_DETAIL_BANNERS,
@@ -239,4 +251,5 @@ export {
   ServiceId,
   META_TAG_LANDING_PAGE,
   LANDING_WELCOM_MODAL_TITLE,
+  LANDING_WELCOM_MODAL_BUTTON_TITLE
 };

@@ -5,18 +5,16 @@ import ServiceCategory from "../component/homescreen/serviceCategory/ServiceCate
 import Services from "../component/homescreen/services/Services";
 import OurTeams from "../component/homescreen/team/OurTeams";
 import WorkStructure from "../component/homescreen/WorkOverview/WorkStructure";
+import { useParams } from "react-router";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 const Homepage = () => {
+  const { lang, country } = useParams();
   return (
     <>
       <Helmet>
-        {/* <title>
-          Localists.com: Find Trusted Local Services and Professionals
-        </title>
-        <meta
-          name="description"
-          content="Connect with verified local experts through Localists.com. Find trusted professionals, compare quotes, and hire the best for your project—quick, easy, and free."
-        /> */}
+        {/* <!-- Canonical Tag → */}
+
         {/* <!-- Event snippet for Submit lead form conversion page --> */}
         <script>
           {`
@@ -28,6 +26,7 @@ const Homepage = () => {
           `}
         </script>
       </Helmet>
+      <CalonicalTags />
 
       <SearchProfessionals />
       <PopularService />

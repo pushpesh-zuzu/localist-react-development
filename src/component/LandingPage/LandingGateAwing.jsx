@@ -6,6 +6,7 @@ import {
   LANDING_HOW_IT_WORK,
   LANDING_SERVICES,
   LANDING_TITLES_AND_META,
+  LANDING_WELCOM_MODAL_BUTTON_TITLE,
   LANDING_WELCOM_MODAL_TITLE,
   META_TAG_LANDING_PAGE,
   ServiceId,
@@ -14,24 +15,9 @@ import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailA
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
 
 const LandingGatePPCAwin = ({}) => {
-  const isProduction =
-    typeof window !== "undefined" &&
-    window.location.hostname === "localists.com";
-  // console.log(
-  //   "is production",
-  //   isProduction,
-  //   "widnow.location.pathname",
-  //   typeof window !== "undefined" && window.location.hostname
-  // );
-
   return (
     <>
       <Helmet>
-        {/* <title>{META_TAG_LANDING_PAGE["gates_ppc"]?.title}</title>
-        <meta
-          name={META_TAG_LANDING_PAGE["gates_ppc"]?.name}
-          content={META_TAG_LANDING_PAGE["gates_ppc"]?.content}
-        /> */}
         <meta name="robots" content="noindex" />
       </Helmet>
 
@@ -44,7 +30,8 @@ const LandingGatePPCAwin = ({}) => {
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
         serviceId={ServiceId.fencing_ppc}
-        welcomModalTitle={LANDING_WELCOM_MODAL_TITLE["gates_ppc"]}    
+        welcomModalTitle={LANDING_WELCOM_MODAL_TITLE["gates_ppc"]}
+        welcomModalButtonText={LANDING_WELCOM_MODAL_BUTTON_TITLE["gates_ppc"]}
       />
 
       <LandingHowItWork WORK_STEPS={LANDING_HOW_IT_WORK["landscaping_ppc"]} />

@@ -13,6 +13,7 @@ const WelcomeEmailModal = ({
   setShowConfirmModal,
   resetTrigger,
   welcomModalTitle = "",
+  welcomModalButtonText=""
 }) => {
   const dispatch = useDispatch();
   const { registerLoader, searchServiceLoader } = useSelector(
@@ -126,16 +127,16 @@ const WelcomeEmailModal = ({
             <span className={styles.headingBlueText}>Localists.com</span>
           </h2>
         </div>
-        <div className={styles.welcomeTextContainer}>
+        {/* <div className={styles.welcomeTextContainer}>
           <p style={{ fontWeight: 700 }}>
             Get Free Quotes From Specialist {welcomModalTitle} In Minutes
           </p>
-          {/* <p style={{ fontWeight: 600 }}>Simply Answer a Few Questions.</p> */}
-        </div>
+        </div> */}
         <div>
           <p className={styles.info}>
-            Answer a Few Quick Questions & We'll Match You With The Best Local
-            Professionals For Your Needs
+            {/* Answer a Few Quick Questions & We'll Match You With The Best Local
+            Professionals For Your Needs */}
+            Answer A Few Quick Questions & We’ll Match You With The Best Local {welcomModalTitle} For Your Needs
           </p>
         </div>
         {/* <div className={styles.infoWrapper}>
@@ -193,7 +194,7 @@ const WelcomeEmailModal = ({
         </div> */}
         <div className={styles.buttonContainer}>
           <button className={styles.nextButtonMobile} onClick={nextStep}>
-            Find {welcomModalTitle}
+            Find {welcomModalButtonText}
           </button>
         </div>
       </div>

@@ -29,7 +29,8 @@ const BuyerRegistrationLandingPage = ({
   setSelectedService = () => {},
   setFromImageModal = () => {},
   isStartWithQuestionModal,
-  welcomModalTitle=''
+  welcomModalTitle='',
+  welcomModalButtonText
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -159,6 +160,7 @@ const BuyerRegistrationLandingPage = ({
               setEmails={setEmails}
               setShowConfirmModal={setShowConfirmModal}
               resetTrigger={resetEmailFormTrigger}
+              hideCloseButton
             />
           )}
           {buyerStep === 2 && (
@@ -320,6 +322,7 @@ const BuyerRegistrationLandingPage = ({
               setShowConfirmModal={setShowConfirmModal}
               resetTrigger={resetEmailFormTrigger}
               welcomModalTitle={welcomModalTitle}
+              welcomModalButtonText={welcomModalButtonText}
             />
           )}
           {buyerStep === 1 && (
@@ -364,6 +367,7 @@ const BuyerRegistrationLandingPage = ({
               resetTrigger={resetEmailFormTrigger}
               isStartWithQuestionModal={isStartWithQuestionModal}
               isPPCPages={false}
+              hideCloseButton
             />
           )}
 
