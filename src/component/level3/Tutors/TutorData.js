@@ -2,7 +2,8 @@ import {
   accountant,
   FreeQuotesIcon,
   WhatYouNeedIcon,
-} from "../../Level1/Transport/images/images";
+} from "../../Level1/images";
+import { PhysicsMathsSlider } from "../imagesServices";
 
 const TUTOR_META = {
   Tutor: {
@@ -172,7 +173,7 @@ const TUTOR_FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "The cost of a private tutor can vary depending on the subject, level, and location, but in the UK you can usually expect to pay <strong>£20–£40</strong> per hour. Tutors with specialist expertise or many years of experience may charge more, especially for exam preparation or advanced subjects.",
+      text: "The cost of a private tutor can vary depending on the subject, level, and location, but in the UK you can usually expect to pay <strong>£20–£40 per hour</strong>. Tutors with specialist expertise or many years of experience may charge more, especially for exam preparation or advanced subjects.",
     },
     {
       type: "p",
@@ -202,7 +203,7 @@ const TUTOR_FAQ = {
     {
       key: "4",
       title: "How much is a GCSE tutor per hour?",
-      description: `<p>A GCSE tutor in the UK typically charges <strong>£25 - £40</strong> per hour. Prices can vary depending on the subject, for example, physics and maths tutors are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
+      description: `<p>A GCSE tutor in the UK typically charges <strong>£25 - £40 per hour</strong>. Prices can vary depending on the subject, for example, physics and maths tutors are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
     },
     {
       key: "5",
@@ -334,6 +335,17 @@ const TUTOR_REGION_DATA = {
     },
   ],
 };
+const TUTOR_OTHER_SERVICES_DATA = {
+  Tutor: [
+    {
+      id: 1,
+      image: PhysicsMathsSlider,
+      description: "Physics And Maths Tutor",
+      availableOnline: true,
+      path: "physics-maths-tutors-near-me",
+    },
+  ]
+}
 
 export {
   TUTOR_META,
@@ -346,4 +358,5 @@ export {
   TUTOR_AVERAGE_PRICE,
   TUTOR_REVIEWS_DATA,
   TUTOR_REGION_DATA,
+  TUTOR_OTHER_SERVICES_DATA
 };

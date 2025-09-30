@@ -7,33 +7,32 @@ import GetQuotes from "../../common/getQuotes/GetQuotes";
 import PopularCategories from "../../category/popularCategories/ClonePopularCategories";
 
 import AllServiceLevel1 from "../../category/allServices/AllServiceLevel1";
-import { TransportBanner } from "./images/images";
+import { TransportBanner } from "../images";
 
 function Transport() {
   return (
     <>
       <Helmet>
-        {/* <title>
-          Transportation Services Near Me | Find Local Professionals - Localists
-        </title>
-        <meta
-          name="description"
-          content="Find reliable transportation services near you. Get free quotes for removals, airport transfers, coach hire and more."
-        /> */}
-        {`
+        <script>
+          {`
               gtag('event', 'conversion', {
                 'send_to': 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
                 'value': 1.0,
                 'currency': 'GBP'
               });
           `}
+        </script>
       </Helmet>
       <BannerWithBreadCrum
         accountHeader="Transportation Services"
         level={2}
         isNeedS={false}
         panelImage={TransportBanner}
-        doYouNeetTitle="local transport"
+        doYouNeetTitle={[
+          "Do you need trusted",
+          "local transport",
+          "professionals",
+        ]}
         title="transportation services"
         para1="At Localists, we connect you with the right transport providers for your needs."
         para2="From squeaky-clean sedans to stretch limos, speedy airport shuttles to big group coaches—getting from A to B has never looked so good. We’ll connect you with local transport pros who know how to move you in style (and on time)."

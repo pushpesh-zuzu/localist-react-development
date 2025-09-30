@@ -64,6 +64,7 @@ import { landingPages } from "./landingPages";
 import Transport from "../component/Level1/Transport/Transport";
 import { levelThreePagesRoutes } from "./leverThreeRoute";
 import ThankuPage from "../component/common/ThankuPage/ThankuPage";
+import { levelOnePagesRoutes } from "./levelOneRoutes";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -164,18 +165,18 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: "business/",
-        element: (
-          <LocaleRedirect>
-            <CloneCatrgory
-              routeName="business"
-              accountHeader="Business"
-              subHeader="Busines"
-            />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "business/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneCatrgory
+      //         routeName="business"
+      //         accountHeader="Business"
+      //         subHeader="Busines"
+      //       />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "financial-and-accounting/",
         element: (
@@ -265,6 +266,16 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      ...levelOnePagesRoutes.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
       ...landingPages.map(({ path, Component }) => ({
         path,
         element: (

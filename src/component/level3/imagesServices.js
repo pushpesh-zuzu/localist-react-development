@@ -7,6 +7,12 @@ import PhysicsMathsSlider from "./serviceImg/PhysicsMaths.webp";
 import TreesugeonSlider from "./serviceImg/Treesugeon.webp";
 import TutorsServiceSlider from "./serviceImg/TutorsService.webp";
 import GutterCleanerSlider from "./serviceImg/GutterCleanerSlider.webp";
+import AccountingSlider from "./serviceImg/AccountingSlider.webp";
+import BookkeepingServicesSlider from "./serviceImg/BookkeepingServicesSlider.webp";
+import MassageTherapySlider from "./serviceImg/MassageTherapySlider.webp";
+import PersonalTrainersSlider from "./serviceImg/PersonalTrainersSlider.webp";
+
+
 
 export {
   ArtificialGrassSlider,
@@ -17,5 +23,9 @@ export {
   PhysicsMathsSlider,
   TreesugeonSlider,
   TutorsServiceSlider,
-  GutterCleanerSlider
+  GutterCleanerSlider,
+  AccountingSlider,
+  BookkeepingServicesSlider,
+  MassageTherapySlider,
+  PersonalTrainersSlider
 };

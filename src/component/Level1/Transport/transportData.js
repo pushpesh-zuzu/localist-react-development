@@ -1,4 +1,4 @@
-import { AirportTransfers, BusinessProfessionalsIcon, FreeQuotesIcon, WhatYouNeedIcon } from "./images/images"
+import { AirportTransfers, BusinessProfessionalsIcon, FreeQuotesIcon, WhatYouNeedIcon } from "../images"
 
 const TransportHowItWork= [
     {

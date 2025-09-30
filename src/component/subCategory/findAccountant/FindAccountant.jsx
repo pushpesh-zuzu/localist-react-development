@@ -1,4 +1,3 @@
-import { color } from "framer-motion";
 import AccountFindingInfo from "./AccountFindingInfo";
 import styles from "./findaccountant.module.css";
 import SearchAccountant from "./SearchAccountant";

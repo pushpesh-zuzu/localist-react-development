@@ -19,7 +19,10 @@ function BannerWithBreadCrum({
   heading2,
   findAccountTitle2,
   placeholderText,
-  doYouNeetTitle
+  doYouNeetTitle,
+  inputLable1,
+  inputLable2
+
   
 }) {
   return (
@@ -34,6 +37,8 @@ function BannerWithBreadCrum({
           heading2={heading2}
           placeholderText={placeholderText}
           doYouNeetTitle={doYouNeetTitle}
+          inputLable1={inputLable1}
+          inputLable2={inputLable2}
         />
       )}
 

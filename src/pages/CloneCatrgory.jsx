@@ -117,7 +117,7 @@ const CloneCategory = ({ accountHeader }) => {
           accountHeader="Home & Garden"
           level={2}
           isNeedS={false}
-          doYouNeetTitle="home & garden"
+          doYouNeetTitle={['Do you need trusted','home & garden','professionals']}
           panelImage={Home}
           title="Home & Garden"
           findAccountTitle2="professionals"

@@ -29,11 +29,6 @@ function AirportServices() {
   return (
     <>
       <Helmet>
-        {/* <title>{TRANSPORT_META["Airport Transfers"]?.title}</title>
-        <meta
-          name={TRANSPORT_META["Airport Transfers"]?.name}
-          content={TRANSPORT_META["Airport Transfers"]?.content}
-        /> */}
         <script>
           {`
             gtag('event', 'conversion', {
@@ -70,7 +65,6 @@ function AirportServices() {
         title={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.ctaText}
       />
       <Frequently
-        // faqTitle={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.faqTitle}
         FrequentlyQuestion={AIRPORT_TRANSFER_FAQ["Airport Transfers"]}
       />
       <AveragePriceTransportServices

@@ -2,7 +2,7 @@ import {
   accountant,
   FreeQuotesIcon,
   WhatYouNeedIcon,
-} from "../../Level1/Transport/images/images";
+} from "../../Level1/images";
 import { ArtificialGrassSlider, DrivewayInstallationSlider, GutterCleanerSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../imagesServices";
 
 const TREE_SURGEON_META = {

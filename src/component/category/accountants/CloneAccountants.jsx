@@ -24,7 +24,9 @@ const CloneAccountants = ({
   defaultServiceName = "",
   heading2,
   placeholderText,
-  doYouNeetTitle,
+  doYouNeetTitle=[],
+  inputLable1='What service do you require?',
+  inputLable2='Tell us where you need it?'
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -240,16 +242,16 @@ const CloneAccountants = ({
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
             <span>
-              Do you need trusted{" "}
+              {doYouNeetTitle[0] || ''}{" "}
               <span className={styles.blueText}>
                 {" "}
-                {doYouNeetTitle?.toLowerCase()}{" "}
+                {doYouNeetTitle[1]?.toLowerCase()}{" "}
               </span>
-              professionals?
+              {doYouNeetTitle[2] || ''}?
             </span>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>
-                <label>What service do you require?</label>
+                <label>{inputLable1}</label>
                 <input
                   type="text"
                   placeholder={placeholderText}
@@ -280,7 +282,7 @@ const CloneAccountants = ({
               </div>
 
               <div className={styles.inputBox}>
-                <label>Tell us where you need it?</label>
+                <label>{inputLable2}</label>
                 <input
                   type="text"
                   placeholder="Enter your postcode or town"

@@ -2,7 +2,7 @@ import {
   accountant,
   FreeQuotesIcon,
   WhatYouNeedIcon,
-} from "../../Level1/Transport/images/images";
+} from "../../Level1/images";
 
 const TRANSPORT_META = {
   "Airport Transfers": {
@@ -93,7 +93,7 @@ const TRANSPORT_FIND_SERVICE_CONTENT = {
     {
       type: "li",
       heading:
-        "Friendly drivers handle your luggage and adjust if your flight is delayed.",
+        "Friendly drivers handle your luggage and reschedule if your flight is delayed.",
     },
     {
       type: "li",
@@ -120,11 +120,7 @@ const TRANSPORT_FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "When it comes to choosing the right holiday taxi service, what you really want to think about is how you like to travel and who you’re traveling with. Getting this right makes the difference between a smooth, comfortable ride and a journey that feels like a hassle.",
-    },
-    {
-      type: "p",
-      text: "Here’s how to make it easy:",
+      text: "Airport transfers are just taxi’s from the airport aren’t they? Wrong! There are so many different ways to travel from the airport to your destination that’ll make your holiday even more special. Holiday taxis come in all different shapes and sizes, comprising of different styles, comfortability, accessibility and more. Check below on the different types of holiday taxis you can enjoy when you book your airport transfer through localists:",
     },
     { type: "h3", text: "Private transfers – comfort & convenience" },
     {
