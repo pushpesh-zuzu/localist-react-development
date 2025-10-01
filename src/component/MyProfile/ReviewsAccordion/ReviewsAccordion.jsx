@@ -126,7 +126,7 @@ const ReviewsAccordion = ({ details }) => {
 
       // You get access_token directly here
       const accessToken = response.access_token;
-
+      console.log("Login Success:access-token", accessToken);
       try {
         // Example: Call Google My Business API directly from frontend
         const res = await fetch(
