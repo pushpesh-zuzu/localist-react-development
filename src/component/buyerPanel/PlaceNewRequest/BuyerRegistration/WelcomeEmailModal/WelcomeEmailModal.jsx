@@ -144,8 +144,8 @@ const WelcomeEmailModal = ({
           <p>With The Best Local {welcomModalTitle}</p>
           <p>For Your Needs</p>
         </div>
-        <div className={styles.info}>
-          <p className={styles.mobileInfoText}>
+        <div className={`${styles.info} ${styles.mobileInfoText}`}>
+          <p>
             Answer A Few Quick Questions & We’ll Match You With The Best Local{" "}
             {welcomModalTitle} For Your Needs{" "}
           </p>
