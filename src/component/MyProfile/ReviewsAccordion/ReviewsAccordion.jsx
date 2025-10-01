@@ -93,7 +93,7 @@ const ReviewsAccordion = ({ details }) => {
   // };
 
   const login = useGoogleLogin({
-    flow: "auth-code", //  important
+    // flow: "auth-code", //  important
     scope:
       "openid email profile https://www.googleapis.com/auth/business.manage",
     onSuccess: async (response) => {

@@ -605,7 +605,20 @@ const LogSwitch = () => {
                               }}
                             >
                               <span>{noti.message}</span>
-                              <span>{formatDate(noti.created_at)}</span>
+                              {/* <span>{formatDate(noti.created_at)}</span> */}
+                              <span>
+                                {new Date(noti.created_at).toLocaleString(
+                                  "en-GB",
+                                  {
+                                    timeZone: "Europe/London",
+                                    day: "2-digit",
+                                    month: "2-digit",
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  }
+                                )}
+                              </span>
                             </div>
                           </div>
                           {index !== notifications.length - 1 && (
@@ -833,16 +846,18 @@ const LogSwitch = () => {
             // postalCodeValidate={postalCodeValidate}
           />
         )} */}
-      {showMobileSearch && <MobileSlideInSearch
-        isOpen={showMobileSearch}
-        setIsOpen={setShowMobileSearch}
-        services={service}
-        handleServiceSelect={handleServiceSelect}
-        dispatch={dispatch}
-        searchService={searchService}
-        mobileSearchText={mobileSearchText}
-        setMobileSearchText={setMobileSearchText}
-      />}
+      {showMobileSearch && (
+        <MobileSlideInSearch
+          isOpen={showMobileSearch}
+          setIsOpen={setShowMobileSearch}
+          services={service}
+          handleServiceSelect={handleServiceSelect}
+          dispatch={dispatch}
+          searchService={searchService}
+          mobileSearchText={mobileSearchText}
+          setMobileSearchText={setMobileSearchText}
+        />
+      )}
     </>
   );
 };

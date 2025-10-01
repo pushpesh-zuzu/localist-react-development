@@ -47,85 +47,85 @@ async function fetchWithCache(key, url, headers) {
 }
 
 // Step 1: Redirect user to Google OAuth consent screen
-app.get("/auth/google", (req, res) => {
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: "offline", // to get refresh_token
-    scope: [
-      "openid",
-      "email",
-      "profile",
-      "https://www.googleapis.com/auth/business.manage",
-    ],
-    prompt: "consent", // force consent to get refresh_token
-  });
-  res.redirect(authUrl); // user goes to Google login page
-});
+// app.get("/auth/google", (req, res) => {
+//   const authUrl = oAuth2Client.generateAuthUrl({
+//     access_type: "offline", // to get refresh_token
+//     scope: [
+//       "openid",
+//       "email",
+//       "profile",
+//       "https://www.googleapis.com/auth/business.manage",
+//     ],
+//     prompt: "consent", // force consent to get refresh_token
+//   });
+//   res.redirect(authUrl); // user goes to Google login page
+// });
 
-// Step 2: Handle callback from Google
-app.post("/auth/callback", async (req, res) => {
-  try {
-    console.log("Callback received with body:", req.body);
-    const code = req.body.code;
-    if (!code) return res.status(400).json({ error: "Missing code" });
+// // Step 2: Handle callback from Google
+// app.post("/auth/callback", async (req, res) => {
+//   try {
+//     console.log("Callback received with body:", req.body);
+//     const code = req.body.code;
+//     if (!code) return res.status(400).json({ error: "Missing code" });
 
-    // Exchange code for access_token + refresh_token
-    const { tokens } = await oAuth2Client.getToken(code);
-    oAuth2Client.setCredentials(tokens);
-    const accessToken = tokens.access_token;
-    if (!accessToken)
-      return res.status(500).json({
-        success: false,
-        error: "No access_token returned from Google",
-      });
+//     // Exchange code for access_token + refresh_token
+//     const { tokens } = await oAuth2Client.getToken(code);
+//     oAuth2Client.setCredentials(tokens);
+//     const accessToken = tokens.access_token;
+//     if (!accessToken)
+//       return res.status(500).json({
+//         success: false,
+//         error: "No access_token returned from Google",
+//       });
 
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-      Accept: "application/json",
-    };
+//     const headers = {
+//       Authorization: `Bearer ${accessToken}`,
+//       Accept: "application/json",
+//     };
 
-    // Step 3: Fetch accountId(s) (cached)
-    const accountsData = await fetchWithCache(
-      "accounts",
-      "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
-      headers
-    );
-    const accounts = accountsData.accounts || [];
-    if (!accounts.length)
-      return res.json({ message: "No Google Business accounts found" });
-    const accountId = accounts[0].name;
+//     // Step 3: Fetch accountId(s) (cached)
+//     const accountsData = await fetchWithCache(
+//       "accounts",
+//       "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
+//       headers
+//     );
+//     const accounts = accountsData.accounts || [];
+//     if (!accounts.length)
+//       return res.json({ message: "No Google Business accounts found" });
+//     const accountId = accounts[0].name;
 
-    // Step 4: Fetch locations (cached)
-    const locationsData = await fetchWithCache(
-      `locations:${accountId}`,
-      `https://mybusinessbusinessinformation.googleapis.com/v1/${accountId}/locations`,
-      headers
-    );
-    const locations = locationsData.locations || [];
-    if (!locations.length) return res.json({ message: "No locations found" });
-    const locationId = locations[0].name;
+//     // Step 4: Fetch locations (cached)
+//     const locationsData = await fetchWithCache(
+//       `locations:${accountId}`,
+//       `https://mybusinessbusinessinformation.googleapis.com/v1/${accountId}/locations`,
+//       headers
+//     );
+//     const locations = locationsData.locations || [];
+//     if (!locations.length) return res.json({ message: "No locations found" });
+//     const locationId = locations[0].name;
 
-    // Step 5: Fetch reviews (cached)
-    const reviewsData = await fetchWithCache(
-      `reviews:${locationId}`,
-      `https://mybusiness.googleapis.com/v4/${locationId}/reviews`,
-      headers
-    );
-    const reviews = reviewsData.reviews || [];
-    console.log();
+//     // Step 5: Fetch reviews (cached)
+//     const reviewsData = await fetchWithCache(
+//       `reviews:${locationId}`,
+//       `https://mybusiness.googleapis.com/v4/${locationId}/reviews`,
+//       headers
+//     );
+//     const reviews = reviewsData.reviews || [];
+//     console.log();
 
-    // Step 6: Return all data to frontend
-    res.json({
-      success: true,
-      tokens,
-      accountId,
-      locationId,
-      reviews,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+//     // Step 6: Return all data to frontend
+//     res.json({
+//       success: true,
+//       tokens,
+//       accountId,
+//       locationId,
+//       reviews,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ success: false, error: err.message });
+//   }
+// });
 
 // // Step 1: Redirect user to Google OAuth consent screen
 // app.get("/auth/google", (req, res) => {
