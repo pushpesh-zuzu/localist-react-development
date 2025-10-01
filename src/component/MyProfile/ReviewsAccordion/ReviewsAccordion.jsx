@@ -92,55 +92,28 @@ const ReviewsAccordion = ({ details }) => {
   //   });
   // };
 
-  // const login = useGoogleLogin({
-  //   // flow: "auth-code", //  important
-  //   scope:
-  //     "openid email profile https://www.googleapis.com/auth/business.manage",
-  //   onSuccess: async (response) => {
-  //     console.log("Auth code:", response.code);
-
-  //     // Send auth code to backend
-  //     //   await axiosInstance.post("/auth/callback", {
-  //     //     code: response.code,
-  //     //   });
-  //     // },
-  //     // onError: () => {
-  //     //   console.log("Login Failed");
-  //     // },
-  //     try {
-  //       const res = await axiosInstance.post("/auth/callback", {
-  //         code: response.code,
-  //       });
-  //       console.log("Reviews from backend:", res.data.reviews);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   },
-  //   onError: () => console.log("Login failed"),
-  // });
-
   const login = useGoogleLogin({
-    scope: "openid email profile https://www.googleapis.com/auth/business.manage",
+    flow: "auth-code", //  important
+    scope:
+      "openid email profile https://www.googleapis.com/auth/business.manage",
     onSuccess: async (response) => {
-      console.log("Login Success:", response);
+      console.log("Auth code:", response.code);
 
-      // You get access_token directly here
-      const accessToken = response.access_token;
-      console.log("Login Success:access-token", accessToken);
+      // Send auth code to backend
+      //   await axiosInstance.post("/auth/callback", {
+      //     code: response.code,
+      //   });
+      // },
+      // onError: () => {
+      //   console.log("Login Failed");
+      // },
       try {
-        // Example: Call Google My Business API directly from frontend
-        const res = await fetch(
-          `https://mybusiness.googleapis.com/v4/accounts`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
-        const data = await res.json();
-        console.log("Google My Business Accounts:", data);
+        const res = await axiosInstance.post("/google/get-auth-token", {
+          code: response.code,
+        });
+        console.log("Reviews from backend:", res.data.reviews);
       } catch (err) {
-        console.error("Error fetching reviews:", err);
+        console.error(err);
       }
     },
     onError: () => console.log("Login failed"),
@@ -194,32 +167,32 @@ const ReviewsAccordion = ({ details }) => {
     }
   };
 
-  // const handleLogin = (credentialResponse) => {
-  //   // const token = credentialResponse.credential;
-  //   // const decoded = jwt_decode(token);
-  //   // console.log("Google User:", decoded);
-  //   // // Send token to backend for exchange with access token
-  //   // fetch("http://localhost:5100/auth/callback", {
-  //   //   method: "POST",
-  //   //   headers: { "Content-Type": "application/json" },
-  //   //   body: JSON.stringify({ token }),
-  //   // });
-  //   // window.location.href = "http://localhost:5100/auth/google";
-  //   const popup = window.open(
-  //     "http://localhost:5100/auth/google",
-  //     "GoogleLogin",
-  //     "width=500,height=600"
-  //   );
+  const handleLogin = (credentialResponse) => {
+    // const token = credentialResponse.credential;
+    // const decoded = jwt_decode(token);
+    // console.log("Google User:", decoded);
+    // // Send token to backend for exchange with access token
+    // fetch("http://localhost:5100/auth/callback", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ token }),
+    // });
+    // window.location.href = "http://localhost:5100/auth/google";
+    const popup = window.open(
+      "http://localhost:5100/auth/google",
+      "GoogleLogin",
+      "width=500,height=600"
+    );
 
-  //   // navigate("/sellers/leads");
+    // navigate("/sellers/leads");
 
-  //   // Optional: listen for message from backend if you postMessage later
-  //   window.addEventListener("message", (event) => {
-  //     console.log("Received data from popup:", event.data);
-  //     if (event.origin !== "http://localhost:5100") return;
-  //     // You can now update your UI with reviews
-  //   });
-  // };
+    // Optional: listen for message from backend if you postMessage later
+    window.addEventListener("message", (event) => {
+      console.log("Received data from popup:", event.data);
+      if (event.origin !== "http://localhost:5100") return;
+      // You can now update your UI with reviews
+    });
+  };
 
   return (
     <div className={styles.wrapper}>
