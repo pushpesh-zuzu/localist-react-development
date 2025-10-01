@@ -167,32 +167,32 @@ const ReviewsAccordion = ({ details }) => {
     }
   };
 
-  const handleLogin = (credentialResponse) => {
-    // const token = credentialResponse.credential;
-    // const decoded = jwt_decode(token);
-    // console.log("Google User:", decoded);
-    // // Send token to backend for exchange with access token
-    // fetch("http://localhost:5100/auth/callback", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ token }),
-    // });
-    // window.location.href = "http://localhost:5100/auth/google";
-    const popup = window.open(
-      "http://localhost:5100/auth/google",
-      "GoogleLogin",
-      "width=500,height=600"
-    );
+  // const handleLogin = (credentialResponse) => {
+  //   // const token = credentialResponse.credential;
+  //   // const decoded = jwt_decode(token);
+  //   // console.log("Google User:", decoded);
+  //   // // Send token to backend for exchange with access token
+  //   // fetch("http://localhost:5100/auth/callback", {
+  //   //   method: "POST",
+  //   //   headers: { "Content-Type": "application/json" },
+  //   //   body: JSON.stringify({ token }),
+  //   // });
+  //   // window.location.href = "http://localhost:5100/auth/google";
+  //   const popup = window.open(
+  //     "http://localhost:5100/auth/google",
+  //     "GoogleLogin",
+  //     "width=500,height=600"
+  //   );
 
-    // navigate("/sellers/leads");
+  //   // navigate("/sellers/leads");
 
-    // Optional: listen for message from backend if you postMessage later
-    window.addEventListener("message", (event) => {
-      console.log("Received data from popup:", event.data);
-      if (event.origin !== "http://localhost:5100") return;
-      // You can now update your UI with reviews
-    });
-  };
+  //   // Optional: listen for message from backend if you postMessage later
+  //   window.addEventListener("message", (event) => {
+  //     console.log("Received data from popup:", event.data);
+  //     if (event.origin !== "http://localhost:5100") return;
+  //     // You can now update your UI with reviews
+  //   });
+  // };
 
   return (
     <div className={styles.wrapper}>
