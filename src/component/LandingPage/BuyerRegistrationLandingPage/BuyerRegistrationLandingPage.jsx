@@ -29,8 +29,8 @@ const BuyerRegistrationLandingPage = ({
   setSelectedService = () => {},
   setFromImageModal = () => {},
   isStartWithQuestionModal,
-  welcomModalTitle='',
-  welcomModalButtonText
+  welcomModalTitle = "",
+  welcomModalButtonText,
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -314,7 +314,14 @@ const BuyerRegistrationLandingPage = ({
           )}
         </div>
       ) : (
-        <div className={styles.modalContent}>
+        <div
+          className={styles.modalContent}
+          style={{
+            borderRadius: buyerStep === 0 ? "10px" : "",
+            boxShadow:
+              buyerStep === 0 && "10px 10px 10px 0px rgba(0, 0, 0, 0.2)",
+          }}
+        >
           {buyerStep === 0 && (
             <WelcomeEmailModal
               nextStep={nextStep}

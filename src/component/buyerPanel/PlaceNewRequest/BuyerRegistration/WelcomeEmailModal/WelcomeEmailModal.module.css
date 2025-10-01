@@ -11,6 +11,7 @@
 }
 .logo {
   padding: 6px 0px 35px 0px;
+  height: 44px;
 }
 .info {
   color: #000;
@@ -96,6 +97,7 @@
   /* width: 629px;
   max-width: 629px; */
   text-align: center;
+  border-radius: 10px;
 }
 .infoWrapper {
   margin-bottom: 8px;
@@ -247,12 +249,12 @@
   display: flex;
   align-items: center; /* vertical center */
   justify-content: center; /* optional: horizontal center */
-  gap: 8px; 
+  gap: 11px;
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   /* background: var(--primary-color); */
-  background: #f74b00;
+  background: rgba(255, 116, 31, 1);
   color: white;
-  padding: 8px 18px;
+  padding: 6.9px 16px;
   border: none;
   cursor: pointer !important;
   font-weight: 700;
@@ -264,7 +266,7 @@
 
 .nextButtonMobile:hover {
   /* background-color: #0096c4; */
-  background: #f74b0090;
+  background: rgba(255, 100, 20, 1);
 }
 @media screen and (max-width: 1024px) {
   .closeButton {
@@ -369,8 +371,12 @@
   }
   .nextButtonMobile {
     font-size: 14px;
+    padding: 6.9px 4px;
+    gap: 4px;
   }
-
+  .arrow {
+    height: 10px;
+  }
   .header h2 {
     margin-bottom: 20px;
     font-size: 20px;

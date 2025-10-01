@@ -27,7 +27,7 @@ const WelcomeEmailModal = ({
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [errors, setErrors] = useState({ email: false });
-console.log(logo,'logo',fullRightArrow,'fullRightArrow')
+  console.log(logo, "logo", fullRightArrow, "fullRightArrow");
   // Pre-fill from Redux if available
   useEffect(() => {
     if (buyerRequest?.email) {
@@ -205,8 +205,12 @@ console.log(logo,'logo',fullRightArrow,'fullRightArrow')
         </div> */}
         <div className={styles.buttonContainer}>
           <button className={styles.nextButtonMobile} onClick={nextStep}>
-            Find {welcomModalButtonText}{" "}
-            <img src={fullRightArrow} alt="arrow" />{" "}
+            Find {welcomModalButtonText} Now
+            <img
+              className={styles.arrow}
+              src={fullRightArrow}
+              alt="arrow"
+            />{" "}
           </button>
         </div>
       </div>
