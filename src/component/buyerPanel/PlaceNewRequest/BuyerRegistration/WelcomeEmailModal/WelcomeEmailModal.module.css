@@ -9,24 +9,15 @@
   align-items: center;
   justify-content: center;
 }
-.logo {
-  padding: 6px 0px 35px 0px;
-}
+
 .info {
   color: #000;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   padding-top: 0px;
   padding-bottom: 28px;
   padding-left: 64px;
   padding-right: 64px;
-}
-.mobileInfoText {
-  display: none;
-  max-width: 629px;
-}
-.desktopInfoText {
-  display: block;
 }
 .phoneWrapper {
   display: flex;
@@ -93,8 +84,8 @@
 .modalContent {
   background: #ffffff;
   padding: 32px 4px 42px 4px;
-  /* width: 629px;
-  max-width: 629px; */
+  width: 500px;
+  max-width: 500px;
   text-align: center;
 }
 .infoWrapper {
@@ -176,8 +167,6 @@
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: center;
   margin-bottom: 0px;
   /* margin-top: 24px; */
   /* display: none; */
@@ -244,10 +233,6 @@
   border-radius: 24px;
 } */
 .nextButtonMobile {
-  display: flex;
-  align-items: center; /* vertical center */
-  justify-content: center; /* optional: horizontal center */
-  gap: 8px; 
   box-shadow: 0px 0px 2px 0.5px #0000001a;
   /* background: var(--primary-color); */
   background: #f74b00;
@@ -255,7 +240,7 @@
   padding: 8px 18px;
   border: none;
   cursor: pointer !important;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
   vertical-align: middle;
   /* max-width: 138px; */
@@ -354,12 +339,6 @@
     max-width: 400px;
     margin: auto;
   }
-  .mobileInfoText {
-    display: block;
-  }
-  .desktopInfoText {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {
@@ -367,7 +346,7 @@
     width: 95%;
     padding: 32px 4px;
   }
-  .nextButtonMobile {
+  .nextButtonMobile{
     font-size: 14px;
   }
 
