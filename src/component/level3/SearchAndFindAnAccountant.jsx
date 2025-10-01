@@ -14,6 +14,7 @@ const SearchAndFindAnAccountant = ({
   defaultService,
   isNeedS = false,
   isSingular,
+  extraText
 }) => {
   const style = {
     backgroundImage: `url(${bannerImage})`,
@@ -32,6 +33,7 @@ const SearchAndFindAnAccountant = ({
           title={title}
           isNeedS={isNeedS}
           isSingular={isSingular}
+          extraText={extraText}
         />
       </div>
       <div>

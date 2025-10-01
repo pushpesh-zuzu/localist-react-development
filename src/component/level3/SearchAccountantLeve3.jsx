@@ -15,6 +15,7 @@ const SearchAccountantLeve3 = ({
   defaultService,
   isNeedS = false,
   isSingular = false,
+  extraText=''
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -176,7 +177,7 @@ const SearchAccountantLeve3 = ({
           {title}
           {isNeedS ? "s" : ""}
         </span>{" "}
-        Near You
+        Near You {extraText}
       </h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <p>

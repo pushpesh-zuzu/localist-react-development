@@ -266,16 +266,16 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      // ...levelOnePagesRoutes.map(({ path, Component }) => ({
-      //   path,
-      //   element: (
-      //     <LocaleRedirect>
-      //       <React.Suspense fallback={<FullScreenSpinner />}>
-      //         <Component />
-      //       </React.Suspense>
-      //     </LocaleRedirect>
-      //   ),
-      // })),
+      ...levelOnePagesRoutes.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
       ...landingPages.map(({ path, Component }) => ({
         path,
         element: (
@@ -286,16 +286,16 @@ const routes = [
           </LocaleRedirect>
         ),
       })),
-      // ...levelThreePagesRoutes?.map(({ path, Component }) => ({
-      //   path,
-      //   element: (
-      //     <LocaleRedirect>
-      //       <React.Suspense fallback={<FullScreenSpinner />}>
-      //         <Component />
-      //       </React.Suspense>
-      //     </LocaleRedirect>
-      //   ),
-      // })),
+      ...levelThreePagesRoutes?.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
     ],
   },
 

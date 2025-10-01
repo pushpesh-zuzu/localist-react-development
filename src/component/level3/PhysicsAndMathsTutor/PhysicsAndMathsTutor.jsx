@@ -73,6 +73,7 @@ const otherServicesData = useMemo(
         para2={contentConfig?.para2}
         defaultService={"Physics And Maths"}
         isNeedS={false}
+        extraText='or Online'
       />
 
       <Suspense fallback={<FullScreenSpinner />}>

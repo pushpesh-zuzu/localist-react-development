@@ -148,23 +148,18 @@ const Footer = () => {
               </Link>
 
               <Link
-                to={
-                  (!userToken || !registerToken) && `/${lang}/${country}/login`
-                }
+                to={`/${lang}/${country}/login`}
                 className={styles.link}
+                onClick={(e) => {
+                  if (userToken || registerToken) {
+                    e.preventDefault();
+                    showToast("info", "You're already logged in.");
+                  } else {
+                    window.scrollTo(0, 0);
+                  }
+                }}
               >
-                <li
-                  onClick={() => {
-                    if (userToken || registerToken) {
-                      showToast("info", "You're already logged in.");
-                    } else {
-                      navigate(`/${lang}/${country}/login`);
-                      window.scrollTo(0, 0);
-                    }
-                  }}
-                >
-                  Login
-                </li>
+                <li>Login</li>
               </Link>
             </ul>
           </div>
@@ -184,20 +179,22 @@ const Footer = () => {
               >
                 <li>Pricing</li>
               </Link>
-              <Link className={styles.link}>
-                <li
-                  // className={styles.mobileItem}
-                  onClick={() => {
-                    if (!userToken && !registerToken) {
-                      // Not logged in → Navigate
-                      navigate(`/${lang}/${country}/sellers/create`);
-                    } else {
-                      handleJoinAsProfessional();
-                    }
-                  }}
-                >
-                  Join as a Professional
-                </li>
+              <Link
+                to={`/${lang}/${country}/sellers/create`}
+                className={styles.link}
+                onClick={(e) => {
+                  if (userToken || registerToken) {
+                    e.preventDefault();
+                    showToast(
+                      "info",
+                      "You're already logged in. Please switch to seller and add your service."
+                    );
+                  } else {
+                    window.scrollTo(0, 0);
+                  }
+                }}
+              >
+                <li>Join as a Professional</li>
               </Link>
               {/* {userToken && (userToken?.user_type === 1 || userToken?.user_type === 3) && (
                 <Link to="/sellers/leads" className={styles.link}>

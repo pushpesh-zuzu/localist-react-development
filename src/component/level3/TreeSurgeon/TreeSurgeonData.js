@@ -257,7 +257,7 @@ const TREE_SURGEON_FAQ = {
     {
       key: "4",
       title: "How much does it cost to reduce the height of a tree in the UK?",
-      description: `<p>Reducing a tree’s height (also called crown reduction) can cost anywhere between £150 and £500, depending on the size of the tree, how much needs to be reduced, and where you live. For example, reducing a very tall oak will cost more than trimming back a medium-sized birch. Tree surgeons usually visit first to assess and give a tailored quote.</p>`,
+      description: `<p>Reducing a tree’s height (also called crown reduction) can cost anywhere between <strong>£150</strong> and <strong>£500</strong>, depending on the size of the tree, how much needs to be reduced, and where you live. For example, reducing a very tall oak will cost more than trimming back a medium-sized birch. Tree surgeons usually visit first to assess and give a tailored quote.</p>`,
     },
   ],
 };
@@ -290,7 +290,7 @@ const TREE_SURGEON_OTHER_SERVICES_DATA = {
       id: 1,
       image: DrivewayInstallationSlider,
       description: "Driveway Installation",
-      availableOnline: true,
+      // availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -303,7 +303,7 @@ const TREE_SURGEON_OTHER_SERVICES_DATA = {
       id: 3,
       image: LandscapingSlider,
       description: "Landscaping",
-      availableOnline: true,
+      // availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
