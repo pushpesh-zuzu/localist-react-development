@@ -12,6 +12,7 @@
 .logo {
   padding: 6px 0px 35px 0px;
   height: 44px;
+  width: 211px;
 }
 .info {
   color: #000;
@@ -371,7 +372,7 @@
   }
   .nextButtonMobile {
     font-size: 14px;
-    padding: 6.9px 4px;
+    padding: 6.9px 10px;
     gap: 4px;
   }
   .arrow {
@@ -420,5 +421,12 @@
     border: none;
     cursor: pointer !important;
     color: #000000;
+  }
+}
+@media (max-width: 320px) {
+   .nextButtonMobile {
+    font-size: 14px;
+    padding: 6.9px 4px;
+    gap: 4px;
   }
 }
