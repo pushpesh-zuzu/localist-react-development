@@ -12,6 +12,9 @@ const Tutor = lazy(() => import("../component/level3/Tutors/Tutor"));
 const PhysicsAndMathsTutor = lazy(() =>
   import("../component/level3/PhysicsAndMathsTutor/PhysicsAndMathsTutor")
 );
+const HouseExtensionBuilders = lazy(() =>
+  import("../component/level3/HouseExtensionBuilders/HouseExtensionBuilders")
+);
 
 const levelThreePagesRoutes = [
   { path: "airport-transfers-near-me", Component: AirportServices },
@@ -19,6 +22,7 @@ const levelThreePagesRoutes = [
   { path: "tree-surgeon-near-me", Component: TreeSurgeon },
   { path: "tutors-near-me", Component: Tutor },
   { path: "physics-maths-tutors-near-me", Component: PhysicsAndMathsTutor },
+  { path: "property-extensions-near-me", Component: HouseExtensionBuilders },
   
 ];
 export { levelThreePagesRoutes };

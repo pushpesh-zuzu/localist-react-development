@@ -277,6 +277,12 @@ const pageTitles = {
     description:
       "Get free quotes from trusted local block paving driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
   },
+  '/property-extensions-near-me': {
+    title: "House Extension Builders Near Me | Localists",
+    description:
+      " Looking for quality house extension builders near you? Start now and get free quotes in minutes for your perfect extension! ",
+  }
+
 };
 
 

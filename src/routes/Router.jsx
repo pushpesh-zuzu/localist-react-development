@@ -133,14 +133,14 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: "transportation-services",
-        element: (
-          <LocaleRedirect>
-            <Transport />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "transportation-services",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <Transport />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "builders/",
         element: (

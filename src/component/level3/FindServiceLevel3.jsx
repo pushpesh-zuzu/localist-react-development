@@ -24,6 +24,32 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
                 </h3>
               );
             }
+            if (block.type === "h3uiliWithoutStyle") {
+              return (
+                <ul
+                  key={index}
+                  style={{
+                    marginTop: block?.marginTop === true ? "8px" : "0px",
+                    marginBottom: "0px",
+                    listStyleType: "none",
+                  }}
+                >
+                  <li>
+                    {block.heading && (
+                      <h3 className={styles.findAnAccountant_h3}>
+                        {block.heading}
+                      </h3>
+                    )}
+                    <span
+                      className={styles.findAnAccountant_paragrap}
+                      dangerouslySetInnerHTML={{
+                        __html: block.text,
+                      }}
+                    />
+                  </li>
+                </ul>
+              );
+            }
             if (block.type === "p") {
               return (
                 <p

@@ -267,7 +267,6 @@ const GUTTER_CLEANER_OTHER_SERVICES_DATA = {
       id: 1,
       image: DrivewayInstallationSlider,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -280,7 +279,6 @@ const GUTTER_CLEANER_OTHER_SERVICES_DATA = {
       id: 3,
       image: LandscapingSlider,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
