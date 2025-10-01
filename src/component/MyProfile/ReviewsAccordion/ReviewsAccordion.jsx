@@ -92,28 +92,55 @@ const ReviewsAccordion = ({ details }) => {
   //   });
   // };
 
-  const login = useGoogleLogin({
-    // flow: "auth-code", //  important
-    scope:
-      "openid email profile https://www.googleapis.com/auth/business.manage",
-    onSuccess: async (response) => {
-      console.log("Auth code:", response.code);
+  // const login = useGoogleLogin({
+  //   // flow: "auth-code", //  important
+  //   scope:
+  //     "openid email profile https://www.googleapis.com/auth/business.manage",
+  //   onSuccess: async (response) => {
+  //     console.log("Auth code:", response.code);
 
-      // Send auth code to backend
-      //   await axiosInstance.post("/auth/callback", {
-      //     code: response.code,
-      //   });
-      // },
-      // onError: () => {
-      //   console.log("Login Failed");
-      // },
+  //     // Send auth code to backend
+  //     //   await axiosInstance.post("/auth/callback", {
+  //     //     code: response.code,
+  //     //   });
+  //     // },
+  //     // onError: () => {
+  //     //   console.log("Login Failed");
+  //     // },
+  //     try {
+  //       const res = await axiosInstance.post("/auth/callback", {
+  //         code: response.code,
+  //       });
+  //       console.log("Reviews from backend:", res.data.reviews);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   },
+  //   onError: () => console.log("Login failed"),
+  // });
+
+  const login = useGoogleLogin({
+    scope: "openid email profile https://www.googleapis.com/auth/business.manage",
+    onSuccess: async (response) => {
+      console.log("Login Success:", response);
+
+      // You get access_token directly here
+      const accessToken = response.access_token;
+
       try {
-        const res = await axiosInstance.post("/auth/callback", {
-          code: response.code,
-        });
-        console.log("Reviews from backend:", res.data.reviews);
+        // Example: Call Google My Business API directly from frontend
+        const res = await fetch(
+          `https://mybusiness.googleapis.com/v4/accounts`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log("Google My Business Accounts:", data);
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching reviews:", err);
       }
     },
     onError: () => console.log("Login failed"),
