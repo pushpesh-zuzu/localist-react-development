@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./WelcomeEmailModal.module.css"; // You'll need to create this CSS module
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+// import { Spin } from "antd";
+// import { LoadingOutlined } from "@ant-design/icons";
 import { checkEmailIdApi } from "../../../../../store/FindJobs/findJobSlice";
 import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
-import { showToast } from "../../../../../utils";
-
+// import { showToast } from "../../../../../utils";
+import logo from "../../../../../assets/Images/logo.svg";
+import fullRightArrow from "../../../../../assets/Icons/fullRightArrow.png"; // Capital I
 const WelcomeEmailModal = ({
   onClose,
   nextStep,
   setShowConfirmModal,
   resetTrigger,
   welcomModalTitle = "",
-  welcomModalButtonText=""
+  welcomModalButtonText = "",
 }) => {
   const dispatch = useDispatch();
   const { registerLoader, searchServiceLoader } = useSelector(
@@ -26,7 +27,7 @@ const WelcomeEmailModal = ({
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [errors, setErrors] = useState({ email: false });
-
+console.log(logo,'logo',fullRightArrow,'fullRightArrow')
   // Pre-fill from Redux if available
   useEffect(() => {
     if (buyerRequest?.email) {
@@ -122,21 +123,31 @@ const WelcomeEmailModal = ({
         </button>
 
         <div className={styles.header}>
-          <h2>
+          {/* <h2>
             Welcome to{" "}
             <span className={styles.headingBlueText}>Localists.com</span>
-          </h2>
+          </h2> */}
+          <img src={logo} className={styles.logo} alt="Localist Logo" />
         </div>
         {/* <div className={styles.welcomeTextContainer}>
           <p style={{ fontWeight: 700 }}>
             Get Free Quotes From Specialist {welcomModalTitle} In Minutes
           </p>
         </div> */}
-        <div>
+        {/* <div>
           <p className={styles.info}>
-            {/* Answer a Few Quick Questions & We'll Match You With The Best Local
-            Professionals For Your Needs */}
             Answer A Few Quick Questions & We’ll Match You With The Best Local {welcomModalTitle} For Your Needs
+          </p>
+        </div> */}
+        <div className={`${styles.info} ${styles.desktopInfoText}`}>
+          <p>Answer A Few Quick Questions & We’ll Match You</p>
+          <p>With The Best Local {welcomModalTitle}</p>
+          <p>For Your Needs</p>
+        </div>
+        <div className={styles.info}>
+          <p className={styles.mobileInfoText}>
+            Answer A Few Quick Questions & We’ll Match You With The Best Local{" "}
+            {welcomModalTitle} For Your Needs{" "}
           </p>
         </div>
         {/* <div className={styles.infoWrapper}>
@@ -194,7 +205,8 @@ const WelcomeEmailModal = ({
         </div> */}
         <div className={styles.buttonContainer}>
           <button className={styles.nextButtonMobile} onClick={nextStep}>
-            Find {welcomModalButtonText}
+            Find {welcomModalButtonText}{" "}
+            <img src={fullRightArrow} alt="arrow" />{" "}
           </button>
         </div>
       </div>
