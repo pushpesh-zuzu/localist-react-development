@@ -114,43 +114,43 @@ const TUTOR_FIND_SERVICE_CONTENT = {
     {
       type: "uili",
       heading: "Approach to teaching:\u00A0",
-      text: "Do they ask questions about your goals and learning style before starting?",
+      text: "- Do they ask questions about your goals and learning style before starting?",
       marginTop: true,
     },
     {
       type: "uili",
       heading: "Clarity of explanation:\u00A0",
-      text: "Can they break complex topics into steps you can follow?",
+      text: "- Can they break complex topics into steps you can follow?",
       marginTop: false,
     },
     {
       type: "uili",
       heading: "Patience and encouragement:\u00A0",
-      text: "Reviews often reveal whether the tutor is supportive and adaptable.",
+      text: "- Reviews often reveal whether the tutor is supportive and adaptable.",
       marginTop: false,
     },
     {
       type: "uili",
       heading: "Experience with similar learners:\u00A0",
-      text: "Have they helped students at the same level or with similar challenges?",
+      text: "- Have they helped students at the same level or with similar challenges?",
       marginTop: false,
     },
     {
       type: "uili",
       heading: "Engagement and motivation:\u00A0",
-      text: "Do past students mention that lessons are interesting and confidence-building?",
+      text: "- Do past students mention that lessons are interesting and confidence-building?",
       marginTop: false,
     },
     {
       type: "uili",
       heading: "Communication style:\u00A0",
-      text: "Can you easily reach them and feel comfortable discussing progress or concerns?",
+      text: "- Can you easily reach them and feel comfortable discussing progress or concerns?",
       marginTop: false,
     },
     {
       type: "uili",
       heading: "Safety checks (DBS):\u00A0",
-      text: "For tutors working with children, ensure they hold a valid DBS certificate for peace of mind.",
+      text: "- For tutors working with children, ensure they hold a valid DBS certificate for peace of mind.",
       marginTop: false,
     },
     {
@@ -203,7 +203,7 @@ const TUTOR_FAQ = {
     {
       key: "4",
       title: "How much is a GCSE tutor per hour?",
-      description: `<p>A GCSE tutor in the UK typically charges <strong>£25 - £40 per hour</strong>. Prices can vary depending on the subject, for example, physics and maths tutors are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
+      description: `<p>A GCSE tutor in the UK typically charges <strong>£25 - £40 per hour</strong>. Prices can vary depending on the subject, for example, <a style=color:#00afe3; href="/__LANG__/__COUNTRY__/physics-maths-tutors-near-me">physics and maths tutors</a> are often in higher demand and may cost slightly more. Tutors with lots of experience or proven exam results may also charge above average.</p>`,
     },
     {
       key: "5",

@@ -3,13 +3,18 @@ import styles from "./Frequently.module.css";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 const { Panel } = Collapse;
-const Frequently = ({ FrequentlyQuestion,faqTitle='' }) => {
+const Frequently = ({
+  FrequentlyQuestion,
+  faqTitle = "",
+  lang = "en",
+  country = "gb",
+}) => {
   return (
     <>
       <div className={styles.frequently_container}>
         <div className={styles.frequently_container_wrap}>
           <h2 className={styles.frequently_heading}>
-            Frequently asked <b>questions</b> {faqTitle || ''}
+            Frequently asked <b>questions</b> {faqTitle || ""}
           </h2>
           <div className={styles.frequently_collapse}>
             <Collapse
@@ -30,14 +35,21 @@ const Frequently = ({ FrequentlyQuestion,faqTitle='' }) => {
               )}
               expandIconPosition="end"
             >
-              {FrequentlyQuestion?.map((item) => (
-                <Panel header={<h4>{item?.title}</h4>} key={item?.key}>
-                  <div
-                    className={styles.frequently_collapse_description}
-                    dangerouslySetInnerHTML={{ __html: item?.description }}
-                  />
-                </Panel>
-              ))}
+              {FrequentlyQuestion?.map((item) => {
+                // replace __LANG__ and __COUNTRY__ dynamically
+                const updatedDescription = item?.description
+                  ?.replace(/__LANG__/g, lang)
+                  ?.replace(/__COUNTRY__/g, country);
+
+                return (
+                  <Panel header={<h4>{item?.title}</h4>} key={item?.key}>
+                    <div
+                      className={styles.frequently_collapse_description}
+                      dangerouslySetInnerHTML={{ __html: updatedDescription }}
+                    />
+                  </Panel>
+                );
+              })}
             </Collapse>
           </div>
         </div>

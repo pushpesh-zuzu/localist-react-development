@@ -18,6 +18,7 @@ import TutorsNearMe from "../banners/TutorsNearMe.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import Slider from "../../common/slider/Slider";
+import { useUserGeo } from "../../../utils/geo";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -33,6 +34,8 @@ const RegionsComponent = lazy(() =>
 );
 
 function Tutor() {
+    const { country, lang } = useUserGeo();
+  
   const transformedRegions = useMemo(
     () => transformData(TUTOR_REGION_DATA, "Tutor"),
     []
@@ -93,7 +96,7 @@ function Tutor() {
       </Suspense>
 
       <Suspense fallback={<FullScreenSpinner />}>
-        <Frequently FrequentlyQuestion={faqData} />
+        <Frequently FrequentlyQuestion={faqData} lang={lang} country={country} />
       </Suspense>
 
       <Suspense fallback={<FullScreenSpinner />}>
