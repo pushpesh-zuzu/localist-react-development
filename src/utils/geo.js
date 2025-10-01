@@ -8,7 +8,7 @@ export async function getUserCountry() {
     return data.country_code.toLowerCase(); // e.g. "in", "gb"
   } catch (error) {
     console.error("Geo lookup failed:", error);
-    return "in"; // fallback to India as requested
+    return "gb"; // fallback to India as requested
   }
 }
 
@@ -20,7 +20,7 @@ export function getUserLanguage() {
   return lang || "en";
 }
 
-export function useUserGeo(defaultCountry = "in", defaultLang = "en") {
+export function useUserGeo(defaultCountry = "gb", defaultLang = "en") {
   const [country, setCountry] = useState(defaultCountry);
   const [lang, setLang] = useState(defaultLang);
 

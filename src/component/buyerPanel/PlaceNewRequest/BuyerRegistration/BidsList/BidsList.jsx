@@ -639,7 +639,7 @@ const BidsList = ({ previousStep }) => {
                 <h1 className={styles.noBidText}>
                   {repliesListCount > 0
                     ? "Your Matches Can Be Viewed in Request Replies"
-                    : "Local services professionals are preparing to contact you now. Keep and eye out for any communications"}
+                    : "Local services professionals are preparing to contact you now. Keep an eye out for any communications"}
                 </h1>
               </div>
             ) : (
