@@ -390,8 +390,30 @@ const ContactConfirmModal = ({
                     Number(totalCredit?.total_credit)
                   } of your ${totalRemaingCredit} purchased credits to contact ${
                     details?.customer?.name
+                      ? details.customer.name
+                          .split(" ")[0]
+                          .charAt(0)
+                          .toUpperCase() +
+                        details.customer.name
+                          .split(" ")[0]
+                          .slice(1)
+                          .toLowerCase()
+                      : ""
                   }`
-                : `You will use ${details?.credit_score} of your ${totalRemaingCredit} purchased credits to contact ${details?.customer?.name}`}
+                : `You will use ${
+                    details?.credit_score
+                  } of your ${totalRemaingCredit} purchased credits to contact  ${
+                    details?.customer?.name
+                      ? details.customer.name
+                          .split(" ")[0]
+                          .charAt(0)
+                          .toUpperCase() +
+                        details.customer.name
+                          .split(" ")[0]
+                          .slice(1)
+                          .toLowerCase()
+                      : ""
+                  }`}
             </p>
           </div>
         </div>

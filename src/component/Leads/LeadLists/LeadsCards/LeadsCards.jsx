@@ -392,7 +392,20 @@ const LeadsCards = ({ enoughCredit }) => {
                                   // onClick={() => handleViewProfile(item)}
                                 >
                                   {/* <h3>{item?.customer?.name}</h3> */}
-                                  <h3>{item?.customer?.name?.split(" ")[0]}</h3>
+                                  {/* <h3>{item?.customer?.name?.split(" ")[0]}</h3> */}
+                                  <h3>
+                                    {item?.customer?.name
+                                      ? item.customer.name
+                                          .split(" ")[0]
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                        item.customer.name
+                                          .split(" ")[0]
+                                          .slice(1)
+                                          .toLowerCase()
+                                      : ""}
+                                  </h3>
+
                                   <p>{item?.postcode.split(" ")[0]}</p>
                                 </div>
                               </div>
