@@ -8,11 +8,21 @@ import NodeCache from "node-cache";
 import { createServer as createViteServer } from "vite";
 import { OAuth2Client } from "google-auth-library";
 import axios from "axios";
+import { google } from "googleapis";
+import cors from "cors";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, p);
 
 const app = express();
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+  })
+);
 app.use(express.json()); // to parse JSON request body
 app.use(express.urlencoded({ extended: true })); // to parse form data if needed
 
@@ -45,6 +55,218 @@ async function fetchWithCache(key, url, headers) {
   cache.set(key, data);
   return data;
 }
+
+// 1. Google auth token route
+app.post("/google/get-auth-token", async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    console.log("Received auth code:", code);
+
+    const tokenResponse = await axios.post(
+      "https://oauth2.googleapis.com/token",
+      {
+        code,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        redirect_uri: "http://localhost:3000",
+        grant_type: "authorization_code",
+      }
+    );
+
+    const { access_token, refresh_token, expires_in } = tokenResponse.data;
+
+    res.json({
+      success: true,
+      message: "Google authentication successful",
+      data: {
+        access_token,
+        refresh_token,
+        expires_in,
+      },
+    });
+  } catch (error) {
+    console.error(
+      "Token exchange error:",
+      error.response?.data || error.message
+    );
+    res.status(500).json({
+      success: false,
+      error: "Failed to get access token",
+      details: error.response?.data,
+    });
+  }
+});
+
+// 2. Get Business Reviews route - YAHAN SAB KUCH HANDLE HOGA
+app.post("/google/get-reviews", async (req, res) => {
+  try {
+    const { access_token } = req.body;
+
+    if (!access_token) {
+      return res.status(400).json({
+        success: false,
+        error: "Access token required",
+      });
+    }
+
+    console.log("Fetching reviews with access token...");
+
+    // OAuth2 client setup
+    const oauth2Client = new google.auth.OAuth2();
+    oauth2Client.setCredentials({
+      access_token: access_token,
+    });
+
+    // Google My Business API
+    const mybusiness = google.mybusiness({
+      version: "v4",
+      auth: oauth2Client,
+    });
+
+    // Step 1: Get accounts list
+    console.log("Fetching accounts...");
+    const accountsResponse = await mybusiness.accounts.list();
+
+    if (
+      !accountsResponse.data.accounts ||
+      accountsResponse.data.accounts.length === 0
+    ) {
+      return res.status(404).json({
+        success: false,
+        error: "No Google Business accounts found",
+      });
+    }
+
+    console.log("Accounts found:", accountsResponse.data.accounts.length);
+    const accountName = accountsResponse.data.accounts[0].name;
+    console.log("Using account:", accountName);
+
+    // Step 2: Get locations for this account
+    console.log("Fetching locations...");
+    const locationsResponse = await mybusiness.accounts.locations.list({
+      parent: accountName,
+      readMask: "name,title,locationName,metadata",
+    });
+
+    if (
+      !locationsResponse.data.locations ||
+      locationsResponse.data.locations.length === 0
+    ) {
+      return res.status(404).json({
+        success: false,
+        error: "No business locations found",
+      });
+    }
+
+    console.log("Locations found:", locationsResponse.data.locations.length);
+
+    // Step 3: Get reviews for each location
+    const allReviews = [];
+
+    for (const location of locationsResponse.data.locations) {
+      try {
+        console.log(
+          `Fetching reviews for location: ${location.title || location.name}`
+        );
+
+        const reviewsResponse =
+          await mybusiness.accounts.locations.reviews.list({
+            parent: location.name,
+          });
+
+        if (
+          reviewsResponse.data.reviews &&
+          reviewsResponse.data.reviews.length > 0
+        ) {
+          const locationReviews = reviewsResponse.data.reviews.map(
+            (review) => ({
+              ...review,
+              locationName: location.title || location.locationName,
+              locationId: location.name,
+            })
+          );
+
+          allReviews.push(...locationReviews);
+          console.log(
+            `Found ${reviewsResponse.data.reviews.length} reviews for ${location.title}`
+          );
+        }
+      } catch (error) {
+        console.error(
+          `Error fetching reviews for ${location.title}:`,
+          error.message
+        );
+        // Continue with next location
+      }
+    }
+
+    console.log(`Total reviews fetched: ${allReviews.length}`);
+
+    res.json({
+      success: true,
+      message: "Reviews fetched successfully",
+      data: {
+        reviews: allReviews,
+        totalReviews: allReviews.length,
+        totalLocations: locationsResponse.data.locations.length,
+      },
+    });
+  } catch (error) {
+    console.error("Error in get-reviews route:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to fetch reviews",
+      details: error.message,
+      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+    });
+  }
+});
+
+// 3. Refresh token route (optional)
+app.post("/google/refresh-token", async (req, res) => {
+  try {
+    const { refresh_token } = req.body;
+
+    const tokenResponse = await axios.post(
+      "https://oauth2.googleapis.com/token",
+      {
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET,
+        refresh_token: refresh_token,
+        grant_type: "refresh_token",
+      }
+    );
+
+    res.json({
+      success: true,
+      data: tokenResponse.data,
+    });
+  } catch (error) {
+    console.error(
+      "Token refresh error:",
+      error.response?.data || error.message
+    );
+    res.status(500).json({
+      success: false,
+      error: "Failed to refresh token",
+    });
+  }
+});
+
+// Test route
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Google Business Reviews API Server is running!",
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`✅ CORS enabled for all origins`);
+});
 
 // Step 1: Redirect user to Google OAuth consent screen
 // app.get("/auth/google", (req, res) => {

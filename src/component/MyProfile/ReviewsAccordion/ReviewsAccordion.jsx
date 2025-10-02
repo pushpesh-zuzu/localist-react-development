@@ -92,32 +92,88 @@ const ReviewsAccordion = ({ details }) => {
   //   });
   // };
 
+  // const login = useGoogleLogin({
+  //   flow: "auth-code", //  important
+  //   scope:
+  //     "openid email profile https://www.googleapis.com/auth/business.manage",
+  //   onSuccess: async (response) => {
+  //     console.log("Auth code:", response.code);
+
+  //     // Send auth code to backend
+  //     //   await axiosInstance.post("/auth/callback", {
+  //     //     code: response.code,
+  //     //   });
+  //     // },
+  //     // onError: () => {
+  //     //   console.log("Login Failed");
+  //     // },
+  //     try {
+  //       const res = await axiosInstance.post("/google/get-auth-token", {
+  //         code: response.code,
+  //       });
+  //       console.log("Reviews from backend:", res.data.reviews);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   },
+  //   onError: () => console.log("Login failed"),
+  // });
+
   const login = useGoogleLogin({
-    flow: "auth-code", //  important
+    flow: "auth-code",
     scope:
       "openid email profile https://www.googleapis.com/auth/business.manage",
     onSuccess: async (response) => {
       console.log("Auth code:", response.code);
 
-      // Send auth code to backend
-      //   await axiosInstance.post("/auth/callback", {
-      //     code: response.code,
-      //   });
-      // },
-      // onError: () => {
-      //   console.log("Login Failed");
-      // },
       try {
-        const res = await axiosInstance.post("/google/get-auth-token", {
+        // Step 1: Get access token from your backend
+        const tokenRes = await axiosInstance.post("/google/get-auth-token", {
           code: response.code,
         });
-        console.log("Reviews from backend:", res.data.reviews);
+
+        console.log("Token response:", tokenRes.data);
+
+        const accessToken = tokenRes.data.data.access_token;
+
+        // Step 2: Use the same access token to get reviews from YOUR backend
+        const reviewsRes = await axiosInstance.post("/google/get-reviews", {
+          access_token: accessToken,
+        });
+
+        console.log("Reviews from backend:", reviewsRes.data);
+
+        // Store token for future use
+        localStorage.setItem("google_access_token", accessToken);
+        localStorage.setItem(
+          "google_refresh_token",
+          tokenRes.data.data.refresh_token
+        );
       } catch (err) {
-        console.error(err);
+        console.error("Error:", err.response?.data || err.message);
       }
     },
-    onError: () => console.log("Login failed"),
+    onError: (error) => console.log("Login failed:", error),
   });
+
+  // Existing token se reviews fetch karne ka function
+  const fetchReviews = async () => {
+    try {
+      const accessToken = localStorage.getItem("google_access_token");
+
+      const reviewsRes = await axiosInstance.post("/google/get-reviews", {
+        access_token: accessToken,
+      });
+
+      console.log("Reviews:", reviewsRes.data);
+      return reviewsRes.data;
+    } catch (error) {
+      console.error(
+        "Error fetching reviews:",
+        error.response?.data || error.message
+      );
+    }
+  };
 
   const handleSuccess = async (response) => {
     try {
