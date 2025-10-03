@@ -4,7 +4,7 @@ import {
   WhatYouNeedIcon,
 } from "../../Level1/images";
 
-const HOUSE_EXTENSION_BUILDERS_META = {
+const HOUSE_EXTENSION_META = {
   "property-extensions-near-me": {
     title:
       " Free Quotes on Holiday Transfers and property-extensions-near-me Near You",
@@ -13,7 +13,7 @@ const HOUSE_EXTENSION_BUILDERS_META = {
       "Need airport taxi or airport transfer service? Get instant quotes from trusted transport providers to all major UK airports. Start search at Localists.",
   },
 };
-const HOUSE_EXTENSION_BUILDERS_CONFIG_TOP = {
+const HOUSE_EXTENSION_CONFIG_TOP = {
   "property-extensions-near-me": {
     findingHeading: "home extension specialists",
     title: "House Extension Builders",
@@ -25,14 +25,14 @@ const HOUSE_EXTENSION_BUILDERS_CONFIG_TOP = {
     // faqTitle: "on airport transfers",
   },
 };
-const HOUSE_EXTENSION_BUILDERS_BREADCRUMB_CONFIG = {
+const HOUSE_EXTENSION_BREADCRUMB_CONFIG = {
   "property-extensions-near-me": [
     { title: "Home & Garden", path: "/home" },
     { title: " Property Extensions" },
   ],
 };
 
-const HOUSE_EXTENSION_BUILDERS_CONTENT_CONFIG = {
+const HOUSE_EXTENSION_CONTENT_CONFIG = {
   "property-extensions-near-me": {
     para1:
       "Running out of room but not ready to move? We’ll connect you with local extension pros who can stretch your space—without stretching your patience. More room, less hassle, and way fewer fights over the bathroom.",
@@ -42,7 +42,7 @@ const HOUSE_EXTENSION_BUILDERS_CONTENT_CONFIG = {
       "No fees. No delays. Just the right property extension specialist ready to get started.",
   },
 };
-const HOUSE_EXTENSION_BUILDERS_HOW_IT_WORK = {
+const HOUSE_EXTENSION_HOW_IT_WORK = {
   "property-extensions-near-me": [
     {
       id: 1,
@@ -74,7 +74,7 @@ const HOUSE_EXTENSION_BUILDERS_HOW_IT_WORK = {
   ],
 };
 
-const HOUSE_EXTENSION_BUILDERS_FIND_SERVICE_CONTENT = {
+const HOUSE_EXTENSION_FIND_SERVICE_CONTENT = {
   "property-extensions-near-me": [
     {
       type: "h2",
@@ -237,7 +237,7 @@ const HOUSE_EXTENSION_BUILDERS_FIND_SERVICE_CONTENT = {
     },
   ],
 };
-const AIRPORTHOUSE_EXTENSION_BUILDERS__FAQ = {
+const HOUSE_EXTENSION_FAQ = {
   "property-extensions-near-me": [
     {
       key: "1",
@@ -261,7 +261,7 @@ const AIRPORTHOUSE_EXTENSION_BUILDERS__FAQ = {
     },
   ],
 };
-const HOUSE_EXTENSION_BUILDERS_AVERAGE_PRICE = {
+const HOUSE_EXTENSION_AVERAGE_PRICE = {
   "property-extensions-near-me": [
     {
       Region: "Nationwide",
@@ -284,7 +284,7 @@ const HOUSE_EXTENSION_BUILDERS_AVERAGE_PRICE = {
   ],
 };
 
-const HOUSE_EXTENSION_BUILDERS_REVIEWS_DATA = {
+const HOUSE_EXTENSION_REVIEWS_DATA = {
   "property-extensions-near-me": [
     {
       id: 1,
@@ -313,7 +313,7 @@ const HOUSE_EXTENSION_BUILDERS_REVIEWS_DATA = {
   ],
 };
 
-const HOUSE_EXTENSION_BUILDERS_REGION_DATA = {
+const HOUSE_EXTENSION_REGION_DATA = {
   "property-extensions-near-me": [
     {
       id: 3,
@@ -329,14 +329,14 @@ const HOUSE_EXTENSION_BUILDERS_REGION_DATA = {
 };
 
 export {
-  HOUSE_EXTENSION_BUILDERS_META,
-  HOUSE_EXTENSION_BUILDERS_BREADCRUMB_CONFIG,
-  HOUSE_EXTENSION_BUILDERS_CONFIG_TOP,
-  HOUSE_EXTENSION_BUILDERS_CONTENT_CONFIG,
-  HOUSE_EXTENSION_BUILDERS_HOW_IT_WORK,
-  HOUSE_EXTENSION_BUILDERS_FIND_SERVICE_CONTENT,
-  AIRPORTHOUSE_EXTENSION_BUILDERS__FAQ,
-  HOUSE_EXTENSION_BUILDERS_AVERAGE_PRICE,
-  HOUSE_EXTENSION_BUILDERS_REVIEWS_DATA,
-  HOUSE_EXTENSION_BUILDERS_REGION_DATA,
+  HOUSE_EXTENSION_META,
+  HOUSE_EXTENSION_BREADCRUMB_CONFIG,
+  HOUSE_EXTENSION_CONFIG_TOP,
+  HOUSE_EXTENSION_CONTENT_CONFIG,
+  HOUSE_EXTENSION_HOW_IT_WORK,
+  HOUSE_EXTENSION_FIND_SERVICE_CONTENT,
+  HOUSE_EXTENSION_FAQ,
+  HOUSE_EXTENSION_AVERAGE_PRICE,
+  HOUSE_EXTENSION_REVIEWS_DATA,
+  HOUSE_EXTENSION_REGION_DATA,
 };
