@@ -123,7 +123,7 @@ function App({ initialUrl, hostname, createRouterFactory }) {
   //   typeof window !== "undefined" && window.location.hostname,
   //   "window.location.hostname"
   // );
-  // console.log(hostname, "hostname");
+  console.log("version 4");
   useEffect(() => {
     if ([1, 2, 3, 4].includes(registerStep)) {
       // Prepare form data
