@@ -15,9 +15,8 @@ import {
 import HowItWorks from "../../subCategory/workSteps/HowItWorks";
 import FindServiceLevel3 from "../FindServiceLevel3";
 import Frequently from "../../subCategory/Faq/Frequently";
-import AveragePriceTransportServices from "../../subCategory/AveragePrice/AveragePriceTransportServices";
 import Reviews from "../../subCategory/Reviews/Reviews";
-import AirportTransfers from "../banners/AirportTransfers.webp";
+import PropertyExtensions from "../banners/PropertyExtensions.webp";
 import RegionsComponent from "../../subCategory/Regions/Regions";
 import { transformData } from "../../../utils/allServicesUtils";
 import GetQuotesLevel3 from "../GetQuotesLevel3";
@@ -58,7 +57,7 @@ function HouseExtensionBuilders() {
           ]
         }
         // bannerImage={CONTENT_CONFIG_BANNER["property-extensions-near-me"]?.banner}
-        bannerImage={AirportTransfers}
+        bannerImage={PropertyExtensions}
         para1={
           HOUSE_EXTENSION_BUILDERS_CONTENT_CONFIG["property-extensions-near-me"]
             ?.para1
