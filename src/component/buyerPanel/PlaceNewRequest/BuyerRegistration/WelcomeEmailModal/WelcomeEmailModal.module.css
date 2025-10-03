@@ -8,6 +8,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 629px;
+  min-width: 629px;
 }
 .logo {
   padding: 6px 0px 35px 0px;
@@ -20,8 +22,13 @@
   font-weight: 700;
   padding-top: 0px;
   padding-bottom: 28px;
-  padding-left: 64px;
-  padding-right: 64px;
+  line-height: 100%;
+  letter-spacing: 0.26px;
+  line-height: 30px;
+  /* padding-left: 55px;
+  padding-right: 55px; */
+  /* width: 100%;
+  min-width: 100%; */
 }
 .mobileInfoText {
   display: none;
@@ -94,7 +101,7 @@
 
 .modalContent {
   background: #ffffff;
-  padding: 32px 4px 42px 4px;
+  padding: 38px 4px 38px 4px;
   /* width: 629px;
   max-width: 629px; */
   text-align: center;

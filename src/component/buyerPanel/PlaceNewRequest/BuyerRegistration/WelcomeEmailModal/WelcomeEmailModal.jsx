@@ -205,7 +205,7 @@ const WelcomeEmailModal = ({
         </div> */}
         <div className={styles.buttonContainer}>
           <button className={styles.nextButtonMobile} onClick={nextStep}>
-            Find {welcomModalButtonText} Now
+            Find {welcomModalButtonText}
             <img
               className={styles.arrow}
               src={fullRightArrow}
