@@ -232,10 +232,10 @@ const LANDING_WELCOM_MODAL_TITLE = {
 const LANDING_WELCOM_MODAL_BUTTON_TITLE = {
   landscaping_ppc: "Landscapers",
   patio_services_ppc: "Patio Installers",
-  artificial_grass_installation_ppc: "Artificial Grass Companies",
-  fencing_ppc: " Fencing Companies",
+  artificial_grass_installation_ppc: "Artificial Grass Installers",
+  fencing_ppc: " Fence Installers",
   driveways_ppc: "Driveway Installers",
-  gates_ppc: "Gating Companies",
+  gates_ppc: "Gate Installers",
   resin_driveways_ppc: "Resin Driveway Installers",
   tarmac_driveways_ppc: "Tarmac Driveway Installers",
   concrete_driveways_ppc: "Concrete Driveway Installers",
