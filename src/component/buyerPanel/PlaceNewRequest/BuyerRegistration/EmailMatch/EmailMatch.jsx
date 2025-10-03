@@ -204,7 +204,7 @@ const EmailMatch = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        {!hideCloseButton && (
+        {/* {!hideCloseButton && (
           <button
             className={styles.closeButton}
             onClick={handleCloseClick}
@@ -212,7 +212,7 @@ const EmailMatch = ({
           >
             &times;
           </button>
-        )}
+        )} */}
         <div className={styles.header}>
           <h2 >YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
           <p style={{color:'#000'}}>
