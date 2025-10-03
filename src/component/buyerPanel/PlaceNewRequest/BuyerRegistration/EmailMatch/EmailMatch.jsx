@@ -37,10 +37,11 @@ const EmailMatch = ({
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
-  const campaign = params.get("Campaign");
-  const adGroup = params.get("AdGroup");
-  const targetID = params.get("TargetID");
-  const msclickid = params.get("msclickid");
+  const campaign = params.get("utm_campaign");
+  const adGroup = params.get("AgId");
+  const targetID = params.get("utm_term");
+  const msclickid = params.get("utm_msclkid");
+  const utm_source = params.get("utm_source");
   const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -151,6 +152,7 @@ const EmailMatch = ({
       formData.append("adgroup", adGroup || "");
       formData.append("targetid", targetID || "");
       formData.append("msclickid", msclickid || "");
+      formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
       dispatch(registerQuoteCustomer(formData)).then((result) => {
@@ -204,7 +206,7 @@ const EmailMatch = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        {!hideCloseButton && (
+        {/* {!hideCloseButton && (
           <button
             className={styles.closeButton}
             onClick={handleCloseClick}
@@ -212,13 +214,16 @@ const EmailMatch = ({
           >
             &times;
           </button>
-        )}
+        )} */}
         <div className={styles.header}>
-          <h2 >YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
-          <p style={{color:'#000'}}>
+          <h2>YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
+          <p style={{ color: "#000" }}>
             Your phone number and email are safe with us.
-          </p >
-          <p style={{color:'#000'}}>We'll only use them to help you connect with trusted, verified professionals.</p>
+          </p>
+          <p style={{ color: "#000" }}>
+            We'll only use them to help you connect with trusted, verified
+            professionals.
+          </p>
         </div>
         {/* {String(errorMessage).trim() && (
   <div className={styles.errorText}>{errorMessage}</div>

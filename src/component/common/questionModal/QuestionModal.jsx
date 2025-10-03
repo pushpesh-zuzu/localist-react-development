@@ -37,10 +37,11 @@ const QuestionModal = ({
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
-  const campaign = params.get("Campaign");
-  const adGroup = params.get("AdGroup");
-  const targetID = params.get("TargetID");
-  const msclickid = params.get("msclickid");
+  const campaign = params.get("utm_campaign");
+  const adGroup = params.get("AgId");
+  const targetID = params.get("utm_term");
+  const msclickid = params.get("utm_msclkid");
+  const utm_source = params.get("utm_source");
   // console.log("service_name", serviceName);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const lastQuestionIndex =
@@ -210,6 +211,7 @@ const QuestionModal = ({
         formData.append("adgroup", adGroup || "");
         formData.append("targetid", targetID || "");
         formData.append("msclickid", msclickid || "");
+        formData.append("utm_source", utm_source || "");
         formData.append("keyword", keyword || "");
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {

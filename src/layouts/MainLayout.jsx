@@ -280,7 +280,11 @@ const pageTitles = {
   '/property-extensions-near-me': {
     title: "House Extension Builders Near Me | Localists",
     description:
-      " Looking for quality house extension builders near you? Start now and get free quotes in minutes for your perfect extension! ",
+      "Looking for quality house extension builders near you? Start now and get free quotes in minutes for your perfect extension! ",
+  },
+  '/bookkeepers-near-me':{
+    title:'Bookkeepers Near Me | Local Bookkeeping Services | Localists',
+    description:'Looking for expert bookkeepers near you? Save time and find qualified bookkeepers in locally or nationwide with Localists. Get quotes in minutes at no cost.'
   }
 
 };
