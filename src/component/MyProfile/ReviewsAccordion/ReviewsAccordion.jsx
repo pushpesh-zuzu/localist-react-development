@@ -24,6 +24,7 @@ import shareIcon from "../../../assets/Icons/share.svg";
 // import { jwt_decode } from "jwt-decode";
 import jwt_decode from "jwt-decode";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
@@ -135,11 +136,27 @@ const ReviewsAccordion = ({ details }) => {
         console.log("Token response:", tokenRes.data);
 
         const accessToken = tokenRes.data.data.access_token;
+        const refreshToken = tokenRes.data.data.refresh_token;
 
         // Step 2: Use the same access token to get reviews from YOUR backend
-        const reviewsRes = await axiosInstance.post("/google/get-reviews", {
-          access_token: accessToken,
-        });
+        // const reviewsRes = await axiosInstance.post("/google/get-reviews", {
+        //   access_token: accessToken,
+        // });
+
+        // const reviewsRes = await axios.post(
+        //   "http://localhost:5100/api/admin/google/get-reviews",
+        //   {
+        //     access_token: accessToken,
+        //   }
+        // );
+
+        const reviewsRes = await axios.post(
+          "https://dev.localists.com/google/get-reviews",
+          {
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          }
+        );
 
         console.log("Reviews from backend:", reviewsRes.data);
 
@@ -147,7 +164,7 @@ const ReviewsAccordion = ({ details }) => {
         localStorage.setItem("google_access_token", accessToken);
         localStorage.setItem(
           "google_refresh_token",
-          tokenRes.data.data.refresh_token
+          tokenRes.data.data.refreshToken
         );
       } catch (err) {
         console.error("Error:", err.response?.data || err.message);
