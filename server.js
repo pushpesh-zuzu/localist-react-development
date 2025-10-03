@@ -119,8 +119,8 @@ app.post("/google/get-reviews", async (req, res) => {
     });
 
     // Google My Business API
-    const mybusiness = google.mybusiness({
-      version: "v4",
+    const mybusiness = google.businessprofile({
+      version: "v1",
       auth: oauth2Client,
     });
 
