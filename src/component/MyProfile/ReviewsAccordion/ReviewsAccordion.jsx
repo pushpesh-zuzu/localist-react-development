@@ -151,7 +151,7 @@ const ReviewsAccordion = ({ details }) => {
         // );
 
         const reviewsRes = await axios.post(
-          "https://dev.localists.com/google/get-reviews",
+          "https://dev.localists.com/api/google/get-reviews",
           {
             access_token: accessToken,
             refresh_token: refreshToken,
