@@ -285,6 +285,10 @@ const pageTitles = {
   '/bookkeepers-near-me':{
     title:'Bookkeepers Near Me | Local Bookkeeping Services | Localists',
     description:'Looking for expert bookkeepers near you? Save time and find qualified bookkeepers in locally or nationwide with Localists. Get quotes in minutes at no cost.'
+  },
+  '/accountants-near-me':{
+    title:'Accountants Near Me | Find Chartered Accountants | Localists',
+    description:'Get free quotes from certified accountants near you or nationally. Get help with tax returns, VAT and more…'
   }
 
 };

@@ -26,7 +26,7 @@ const BOOKKEEPING_SERVICE_CONFIG_TOP = {
 };
 const BOOKKEEPING_SERVICE_BREADCRUMB_CONFIG = {
   "bookkeepers-near-me": [
-    { title: "Business" },
+    { title: "Business",path:'business' },
     { title: " Bookkeeping Services" },
   ],
 };
@@ -154,31 +154,32 @@ const BOOKKEEPING_SERVICE_FIND_SERVICE_CONTENT = {
       type: "p",
       text: "The specific tasks a bookkeeper handles can vary depending on your needs and the experience of the professional. At <strong>Localists</strong>, we connect you with quality bookkeepers that typically offer support with:",
     },
-    [
-      {
-        type: "uili",
-        text: "Recording and categorising daily income and expenses",
-      },
-      {
-        type: "uili",
-        text: "Managing accounts payable and accounts receivable",
-      },
-      { type: "uili", text: "Invoicing and payment tracking" },
-      {
-        type: "uili",
-        text: "Payroll processing and maintaining payroll records for compliance",
-      },
-      { type: "uili", text: "Bank and credit card reconciliations" },
-      { type: "uili", text: "Maintaining the general ledger" },
-      { type: "uili", text: "Preparing cash flow statements" },
-      {
-        type: "uili",
-        text: "Producing basic financial reports and statements (such as balance sheets and profit & loss summaries)",
-      },
-      { type: "uili", text: "Budgeting assistance" },
-      { type: "uili", text: "Cleaning up and organising account books" },
-      { type: "uili", text: "Managing and maintaining financial records" },
-    ],
+
+    {
+      type: "uili",
+      text: "Recording and categorising daily income and expenses",
+      marginTop:true
+    },
+    {
+      type: "uili",
+      text: "Managing accounts payable and accounts receivable",
+    },
+    { type: "uili", text: "Invoicing and payment tracking" },
+    {
+      type: "uili",
+      text: "Payroll processing and maintaining payroll records for compliance",
+    },
+    { type: "uili", text: "Bank and credit card reconciliations" },
+    { type: "uili", text: "Maintaining the general ledger" },
+    { type: "uili", text: "Preparing cash flow statements" },
+    {
+      type: "uili",
+      text: "Producing basic financial reports and statements (such as balance sheets and profit & loss summaries)",
+    },
+    { type: "uili", text: "Budgeting assistance" },
+    { type: "uili", text: "Cleaning up and organising account books" },
+    { type: "uili", text: "Managing and maintaining financial records" },
+    ,
     {
       type: "li",
       heading: "Recording and categorising daily income and expenses",

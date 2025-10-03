@@ -18,6 +18,10 @@ const HouseExtensionBuilders = lazy(() =>
 const BookKeepingService = lazy(() =>
   import("../component/level3/BookKeepingService/BookKeepingService")
 );
+const Accounting = lazy(() =>
+  import("../component/level3/Accounting/Accounting")
+);
+
 
 const levelThreePagesRoutes = [
   { path: "airport-transfers-near-me", Component: AirportServices },
@@ -27,5 +31,7 @@ const levelThreePagesRoutes = [
   { path: "physics-maths-tutors-near-me", Component: PhysicsAndMathsTutor },
   { path: "property-extensions-near-me", Component: HouseExtensionBuilders },
   { path: "bookkeepers-near-me", Component: BookKeepingService },
+  { path: "accountants-near-me", Component: Accounting },
+
 ];
 export { levelThreePagesRoutes };
