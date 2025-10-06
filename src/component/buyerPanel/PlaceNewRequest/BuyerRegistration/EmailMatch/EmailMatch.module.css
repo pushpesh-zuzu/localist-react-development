@@ -286,7 +286,7 @@
 
 @media (max-width: 480px) {
   .modalOverlay{
-    max-width: 90%;
+    max-width: 100%;
   }
   .modalContent {
     width: 100%;
