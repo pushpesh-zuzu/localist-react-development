@@ -5,11 +5,11 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import styles from "./WhatServiceYouNeed.module.css";
+import styles from "./WhatServiceDoYouNeedPage.module.css";
 import {
   searchService,
   setService,
-} from "../../../../../store/FindJobs/findJobSlice";
+} from "../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -17,12 +17,12 @@ import {
   questionAnswerData,
   setbuyerRequestData,
   setcitySerach,
-} from "../../../../../store/Buyer/BuyerSlice";
-import CheckIcon from "../../../../../assets/Icons/greenCheckBox.jpeg";
-import { showToast } from "../../../../../utils";
-import { googleAPI } from "../../../../../Api/axiosInstance";
+} from "../../../store/Buyer/BuyerSlice";
+import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
+import { showToast } from "../../../utils";
+import { googleAPI } from "../../../Api/axiosInstance";
 import { useLocation, useParams } from "react-router";
-import { megaMenu } from "../../../../../constant/Megamenu";
+import { megaMenu } from "../../../constant/Megamenu";
 
 function getNameFromSlug(slug, categoryList) {
   if (typeof slug !== "string" || !slug || !Array.isArray(categoryList)) {
@@ -33,7 +33,7 @@ function getNameFromSlug(slug, categoryList) {
   return match ? match.name ?? null : null;
 }
 
-const WhatServiceYouNeed = ({
+const WhatServiceDoYouNeedPage = ({
   nextStep,
   serviceId,
   serviceName,
@@ -220,7 +220,7 @@ const WhatServiceYouNeed = ({
         })
       );
       nextStep();
-      selectedService && getService(selectedService);
+      getService(selectedService);
     }
   }, [
     selectedService,
@@ -349,7 +349,7 @@ const WhatServiceYouNeed = ({
       setCity("");
       setIsDropdownOpen("");
       setErrors(null);
-      setResetServiceFormTrigger(false);
+      // setResetServiceFormTrigger(false);
     }
   }, [resetServiceTrigger]);
   const handlePincodeChange = (e) => {
@@ -387,10 +387,11 @@ const WhatServiceYouNeed = ({
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.closeButton} onClick={handleCloseClick}>
+    <div className={styles.pageContainer} style={{ position: "relative" }}>
+      {/* <div className={styles.closeButton} onClick={handleCloseClick}>
         &times;
-      </div>
+      
+      </div> */}
 
       <h2 className={styles.title}>What service do you need?</h2>
 
@@ -404,7 +405,7 @@ const WhatServiceYouNeed = ({
           type="text"
           placeholder="e.g. Personal Trainers, House Cleaning"
           className={`${styles.input} ${
-            errors.service ? styles.errorBorder : ""
+            errors?.service ? styles?.errorBorder : ""
           }`}
           onChange={(e) => {
             setInput(e.target.value);
@@ -414,7 +415,9 @@ const WhatServiceYouNeed = ({
           }}
           value={input}
         />
-        {errors.service && <p className={styles.errorText}>{errors.service}</p>}
+        {errors?.service && (
+          <p className={styles.errorText}>{errors?.service || ""}</p>
+        )}
 
         {isDropdownOpen && service?.length > 0 && (
           <div className={styles.searchResults}>
@@ -442,7 +445,7 @@ const WhatServiceYouNeed = ({
           type="text"
           placeholder="Enter your Postcode or town"
           className={`${styles.input} ${
-            errors.pincode ? styles.errorBorder : ""
+            errors?.pincode ? styles.errorBorder : ""
           }`}
           ref={inputRef}
           name="pincode"
@@ -453,8 +456,8 @@ const WhatServiceYouNeed = ({
           <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
         )}
 
-        {errors.pincode ? (
-          <p className={styles.errorText}>{errors.pincode}</p>
+        {errors?.pincode ? (
+          <p className={styles.errorText}>{errors?.pincode}</p>
         ) : (
           <p className={styles.errorTexts}>{"."}</p>
         )}
@@ -469,4 +472,4 @@ const WhatServiceYouNeed = ({
   );
 };
 
-export default WhatServiceYouNeed;
+export default WhatServiceDoYouNeedPage;

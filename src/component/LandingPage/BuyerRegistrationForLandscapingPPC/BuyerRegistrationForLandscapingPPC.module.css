@@ -1,0 +1,28 @@
+.modalContent {
+  background: white;
+  text-align: center;
+  box-shadow: 0px 0px 10px 0px #0000000f;
+  height: fit-content;
+  max-width: 500px;
+  margin-left: auto;
+}
+@media (max-width: 820px) {
+  .modalContent {
+    margin: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    width: 96%;
+  }
+  .modal {
+    padding: 15px 0px;
+  }
+}
+
+@media (max-height: 600px) {
+  .modal {
+    align-items: unset !important;
+  }
+}
