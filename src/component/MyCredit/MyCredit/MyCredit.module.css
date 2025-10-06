@@ -88,6 +88,9 @@
   padding: 30px 27px;
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  max-width: 100%;
+  width: 700px;
+  margin: auto;
 }
 
 /* .card:hover {
@@ -395,6 +398,10 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .card {
+    padding: 15px;
+    width: 75%;
+  }
 
   .buttonWrap {
     align-items: stretch;
@@ -410,6 +417,7 @@
 @media (max-width: 768px) {
   .card {
     padding: 15px;
+    width: 100%;
   }
 
   .creditsBox {
