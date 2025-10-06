@@ -242,12 +242,12 @@ const EmailMatch = ({
             type="text"
             placeholder="Your Name"
             className={`${styles.input} ${
-              errors.name ? styles.inputError : ""
+              errors?.name ? styles.inputError : ""
             }`}
             value={name}
             onChange={handleNameChange}
           />
-          {errors.name && (
+          {errors?.name && (
             <span style={{ color: "red" }} className={styles.errorMessage}>
               Name is required.
             </span>
@@ -262,13 +262,13 @@ const EmailMatch = ({
                 type="email"
                 placeholder="Email"
                 className={`${styles.input} ${
-                  errors.email ? styles.inputError : ""
+                  errors?.email ? styles.inputError : ""
                 }`}
                 value={email}
                 onChange={handleEmailChange}
                 onBlur={handleEmailBlur}
               />
-              {errors.email && (
+              {errors?.email && (
                 <span style={{ color: "red" }} className={styles.errorMessage}>
                   Please enter a valid email address.
                 </span>
@@ -298,20 +298,20 @@ const EmailMatch = ({
 
           <div
             className={`${styles.phoneWrapper} ${
-              errors.phone ? styles.error44 : ""
+              errors?.phone ? styles.error44 : ""
             }`}
           >
             <input
               type="tel"
               placeholder="Phone Number"
               className={`${styles.phoneInput} ${
-                errors.phone ? styles.inputError : ""
+                errors?.phone ? styles.inputError : ""
               }`}
               value={phone}
               maxLength={10}
               onChange={handlePhoneChange}
             />
-            {errors.phone && (
+            {errors?.phone && (
               <span style={{ color: "red" }} className={styles.errorMessage}>
                 Please enter a valid 10-digit phone number.
               </span>

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 import { useUserGeo } from "../../../utils/geo";
 import { Helmet } from "react-helmet-async";
 
-const ThankuPage = ({ nextStep, previousStep }) => {
+const ThankuPage = () => {
   const navigate = useNavigate();
   const { country, lang } = useUserGeo();
 
@@ -15,6 +15,8 @@ const ThankuPage = ({ nextStep, previousStep }) => {
     navigate(
       `${
         pendingModal?.baseRedirectPath === "root"
+          ? "/"
+          : pendingModal?.baseRedirectPath === undefined
           ? "/"
           : `/${lang}/${country}/${pendingModal?.baseRedirectPath}`
       }`
