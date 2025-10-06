@@ -6,7 +6,6 @@ import {
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/ViewYourMatches/ViewYourMatches";
-import EmailMatch from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/EmailMatch/EmailMatch";
 import BidsList from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BidsList/BidsList";
 import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal";
 import NumberVerifiedModal from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/NumberVerified/NumberVerified";
@@ -14,6 +13,7 @@ import WhatServiceDoYouNeedPage from "../../BuyerRegistrationPages/WhatServiceDo
 import OTPVerificationPage from "../../BuyerRegistrationPages/OTPVerificationPage/OTPVerificationPage";
 import DescribeYourRequestPage from "../../BuyerRegistrationPages/DescribeYourRequestPage/DescribeYourRequestPage";
 import QuestionAnswerPage from "../../BuyerRegistrationPages/QuestionAnswerPage/QuestionAnswerPage";
+import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMatchPage";
 
 const BuyerRegistrationForLandscapingPPC = ({
   closeModal,
@@ -181,7 +181,7 @@ const BuyerRegistrationForLandscapingPPC = ({
       )}
 
       {buyerStep === 3 && (
-        <EmailMatch
+        <EmailMatchPage
           nextStep={nextStep}
           previousStep={previousStep}
           onClose={handleClose}

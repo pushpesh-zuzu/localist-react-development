@@ -94,7 +94,6 @@
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
-  margin-left: 24px;
 }
 
 .submitBtn:hover {
@@ -112,7 +111,7 @@
   font-weight: 500;
   font-size: 20px;
   vertical-align: middle;
-  margin-right: 24px;
+  /* margin-right: 24px; */
 }
 
 /* Responsive styles */

@@ -203,12 +203,12 @@ const OTPVerificationPage = ({
           Resend OTP in <strong>{timer}</strong>s
         </p>
       ) : (
-        <button className={styles.resendBtn} onClick={handleResendOtp}>
+        <button className={styles.resendBtn} style={{marginRight:!timer > 0 ?'24px':''}} onClick={handleResendOtp}>
           {resendOtpLoader ? "Resending..." : "Resend"}
         </button>
       )}
 
-      <button className={styles.submitBtn} onClick={handleSubmit}>
+      <button className={styles.submitBtn} style={{marginLeft:!timer > 0 ?'24px':''}} onClick={handleSubmit}>
         Submit
       </button>
       {/* </div> */}

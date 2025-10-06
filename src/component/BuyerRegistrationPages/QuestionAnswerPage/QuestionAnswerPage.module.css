@@ -312,7 +312,7 @@
   align-items: center;
   margin: 0 auto;
   min-height: 320px;
-  width: 320px;
+  width: 100%;
 }
 .noQuestion {
   display: flex;
