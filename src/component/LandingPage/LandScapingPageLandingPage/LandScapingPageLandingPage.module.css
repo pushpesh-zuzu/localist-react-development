@@ -1,3 +1,10 @@
+.pageContainer {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: auto;
+  flex-direction: column;
+}
+
 .logoCss {
   padding: 20px 15%;
   background-color: #fff;

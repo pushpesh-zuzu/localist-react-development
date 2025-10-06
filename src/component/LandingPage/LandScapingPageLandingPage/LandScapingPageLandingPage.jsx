@@ -9,8 +9,8 @@ import Direction from "../../../assets/Icons/Direction.png";
 const LandScapingPageLandingPage = () => {
   return (
     <>
-      <div style={{ height: "100vh", overflow: "auto" }}>
-        <div style={{ height: "20px", background: "#00afe3" }} />
+      <div className={styles.pageContainer} >
+        {/* <div style={{ height: "20px", background: "#00afe3" }} /> */}
         <div className={styles.logoCss}>
           <img
             style={{ height: "48px" }}
@@ -102,7 +102,7 @@ const LandScapingPageLandingPage = () => {
             </div>
           </div>
         </div>
-        <div style={{ height: "20px", background: "#00afe3" }} />
+        {/* <div style={{ height: "20px", background: "#00afe3" }} /> */}
       </div>
     </>
   );
