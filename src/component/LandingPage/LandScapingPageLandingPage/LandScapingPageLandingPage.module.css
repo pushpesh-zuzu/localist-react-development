@@ -142,13 +142,12 @@
   gap: 12px;
   padding: 0px 0px 16px;
 }
-.verifiedRowComplet{
+.verifiedRowComplet {
   padding: 12px 12px;
   border-radius: 12px;
   position: relative;
   background: rgba(255, 116, 31, 1);
   margin-top: 8px;
-  
 }
 
 .verifiedIcon {
@@ -159,13 +158,12 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-
 }
 .statsWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px; 
+  gap: 30px;
   padding: 20px 0;
   border-top: 3px solid #00afe3;
 }
@@ -191,7 +189,7 @@
   border-radius: 50%;
   padding: 3px;
 }
-.leftbigArrow{
+.leftbigArrow {
   background: transparent;
   position: absolute;
   left: -50px;
@@ -217,9 +215,9 @@
   .statsWrapper {
     flex-direction: column;
   }
-  .statBox {
+  /* .statBox {
     min-width: 240px;
-  }
+  } */
 
   .buttons {
     padding: 0px 20px;
@@ -240,24 +238,19 @@
     font-size: 20px;
   }
 
-  .verifiedIcon {
-    font-size: 40px;
-    min-width: 40px;
-  }
 }
 
 @media (max-width: 480px) {
   .logoCss {
     padding: 15px 10px;
   }
-.heading {
-  font-weight: 600;
-  font-size: 28px;
-}
-  /* .modaWrapperlContent {
-    padding: 15px;
-  } */
-
+  .verifiedRowComplet {
+    text-align: center;
+  }
+  .heading {
+    font-weight: 600;
+    font-size: 28px;
+  }
   .pageWrapper {
     padding: 20px 10px;
     gap: 15px;
@@ -303,7 +296,7 @@
   }
 
   .secondColumn {
-    padding: 20px 15px;
+    padding: 20px 12px;
   }
 
   .heading {
@@ -319,14 +312,21 @@
   }
 
   .verifiedRow {
-    padding: 16px 0px;
     gap: 10px;
   }
 
   .verifiedIcon {
     font-size: 32px;
-    /* min-width: 32px; */
     height: 24px;
     width: 24px;
+  }
+  .paragraph {
+    margin-bottom: 16px;
+  }
+  .verifiedRow {
+    padding: 0px 0px 12px;
+  }
+  .verifiedRowComplet {
+    padding: 8px;
   }
 }
