@@ -98,16 +98,16 @@ const BuyerRegistrationForLandscapingPPC = ({
     }
   }, [dispatch, isAdminOrRemembered]);
 
-  useEffect(() => {
-    if (buyerStep) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [buyerStep]);
+  // useEffect(() => {
+  //   if (buyerStep) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [buyerStep]);
 
   useEffect(() => {
     if (shouldClose) {

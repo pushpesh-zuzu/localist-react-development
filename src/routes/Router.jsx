@@ -99,6 +99,10 @@ const routes = [
         ),
       },
       {
+    path: "landscaping-landing-ppc",
+    element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
+  },
+      {
         path: "about-us",
         element: (
           <LocaleRedirect>
@@ -666,10 +670,6 @@ const routes = [
       },
       { path: "*", element: <NotFound /> },
     ],
-  },
-  {
-    path: "/:lang/:country/landscaping-landing-ppc",
-    element: <LandScapingPageLandingPage />,
   },
 ];
 

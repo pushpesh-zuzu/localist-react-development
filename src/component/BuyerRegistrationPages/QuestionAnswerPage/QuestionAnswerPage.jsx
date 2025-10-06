@@ -25,8 +25,13 @@ const QuestionAnswerPage = ({
   isStartWithQuestionModal,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach, questionanswerData,questionLoader } =
-    useSelector((state) => state.buyer);
+  const {
+    buyerRequest,
+    requestLoader,
+    citySerach,
+    questionanswerData,
+    questionLoader,
+  } = useSelector((state) => state.buyer);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
@@ -50,13 +55,19 @@ const QuestionAnswerPage = ({
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
   const [questionHistory, setQuestionHistory] = useState([0]);
+  const [showDelay, setShowDelay] = useState(false);
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
     }
   }, [questions]);
   // console.log(citySerach, questionanswerData, "citySerach");
-
+useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        setShowDelay(true);
+      }, 2500);
+      return () => clearTimeout(timeoutId);
+    }, []);
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -298,11 +309,12 @@ const QuestionAnswerPage = ({
   });
 
   return (
-    <div className={styles.modalOverlay}>
-      <div 
-      className={styles.modalContent}
-      style={{color:'#000',textAlign:'center'}}
-       onClick={(e) => e.stopPropagation()}>
+    <div className={styles.modalOverlay} >
+      <div
+        className={styles.modalContent}
+        style={{ color: "#000", textAlign: "center" }}
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* <button
           className={styles.closeButton}
           onClick={handleCloseClick}
@@ -431,7 +443,7 @@ const QuestionAnswerPage = ({
             </div>
           </>
         ) : (
-          <div className={styles.noQuestion}>
+          <div className={styles.noQuestion} >
             <h2>No questions available</h2>
           </div>
         )}
