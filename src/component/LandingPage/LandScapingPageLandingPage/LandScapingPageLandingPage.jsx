@@ -82,7 +82,7 @@ const LandScapingPageLandingPage = () => {
             src={VerfifiedIcon}
             alt="VerfifiedIcon"
           />
-          <div style={{ marginLeft: "auto" }}>
+          <div>
             <p style={{ textAlign: "left" }}>250,000 projects</p>
             <p>completed and counting</p>
           </div>
