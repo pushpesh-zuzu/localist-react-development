@@ -5,7 +5,7 @@ import logo from "../../../assets/Images/logo.svg";
 import VerfifiedIcon from "../../../assets/Icons/VerfifiedIcon.svg";
 import CheckRight from "../../../assets/Icons/CheckRight.svg";
 import AllUsers from "../../../assets/Icons/AllUsers.svg";
-import Direction from "../../../assets/Icons/Direction.png";
+import Direction from "../../../assets/Icons/Direction.svg";
 const LandScapingPageLandingPage = () => {
   return (
     <>

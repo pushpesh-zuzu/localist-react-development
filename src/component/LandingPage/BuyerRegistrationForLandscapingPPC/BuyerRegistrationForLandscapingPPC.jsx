@@ -140,6 +140,12 @@ const BuyerRegistrationForLandscapingPPC = ({
   useEffect(() => {
     dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
+  useEffect(() => {
+    if (questionanswerData.length > 0) {
+      setIsLoadingQuestions(false);
+    }
+  }, [questionanswerData]);
   console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modalContent}>
@@ -156,6 +162,7 @@ const BuyerRegistrationForLandscapingPPC = ({
           resetQaTrigger={resetQaFormTrigger}
           setResetQasFormTrigger={setResetQasFormTrigger}
           isStartWithQuestionModal
+          loading={questionLoader || isLoadingQuestions}
         />
       )}
       {buyerStep === 2 && (

@@ -23,6 +23,7 @@ const QuestionAnswerPage = ({
   previousStep,
   setShowConfirmModal,
   isStartWithQuestionModal,
+  loading = true
 }) => {
   const dispatch = useDispatch();
   const {
@@ -323,7 +324,7 @@ useEffect(() => {
           ✖
         </button> */}
 
-        {questionLoader ? (
+        {loading ? (
           <div className={styles.loaderContainer}>
             <Spin size="large" />
           </div>
