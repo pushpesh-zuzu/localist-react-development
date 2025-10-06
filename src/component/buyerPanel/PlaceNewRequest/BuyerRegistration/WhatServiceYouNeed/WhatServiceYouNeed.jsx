@@ -220,7 +220,7 @@ const WhatServiceYouNeed = ({
         })
       );
       nextStep();
-      selectedService && getService(selectedService);
+      getService(selectedService);
     }
   }, [
     selectedService,
