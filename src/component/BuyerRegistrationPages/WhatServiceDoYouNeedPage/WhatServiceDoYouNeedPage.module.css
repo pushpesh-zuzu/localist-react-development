@@ -168,8 +168,8 @@
 }
 
 @media (max-width: 480px) {
-  .container {
-    min-width: unset;
+  .pageContainer {
+    max-width: 90%;
     padding: 24px;
   }
   .title {
