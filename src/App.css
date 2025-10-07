@@ -7,7 +7,7 @@ body {
   height: 100%;
   margin: 0;
   scroll-behavior: smooth;
-  /* padding-top: 40px; */
+  padding-top: 40px;
 }
 
 body {
@@ -31,7 +31,7 @@ p {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 :root {
