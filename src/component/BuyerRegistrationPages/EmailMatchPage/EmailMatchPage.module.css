@@ -57,7 +57,7 @@
   color: #000000;
 }
 
-.modalContent {
+.emailPage {
   background: #ffffff;
   padding: 24px 31px 24px 31px;
   /* width: 500px; */
@@ -207,12 +207,12 @@
 }
 
 @media (max-width: 768px) {
-  /* .modalContent {
+  /* .emailPage {
     width: 70%;
     padding: 30px;
 
   } */
-  .modalContent {
+  .emailPage {
     background: #ffffff;
     padding: 41px 31px;
     /* width: 500px; */
@@ -285,11 +285,8 @@
 }
 
 @media (max-width: 480px) {
-  .modalOverlay{
-    max-width: 100%;
-  }
-  .modalContent {
-    width: 92%;
+ 
+  .emailPage {
     padding: 24px 12px;
   }
 

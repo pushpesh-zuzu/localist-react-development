@@ -15,6 +15,7 @@
 @media (max-width: 480px) {
   .modalContent {
     width: 88%;
+    max-width: 88%;
   }
   .modal {
     padding: 15px 0px;

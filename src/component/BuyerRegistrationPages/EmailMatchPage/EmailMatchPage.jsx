@@ -205,7 +205,7 @@ const EmailMatchPage = ({
 
   return (
     <div className={styles.modalOverlay}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.emailPage} onClick={(e) => e.stopPropagation()}>
         {/* {!hideCloseButton && (
           <button
             className={styles.closeButton}

@@ -215,7 +215,7 @@
 /* Responsive Design */
 @media (max-width: 820px) {
   .pageWrapper {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     padding: 30px 15px;
   }
   .leftbigArrow {
