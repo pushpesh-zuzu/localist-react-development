@@ -6,9 +6,14 @@ import VerfifiedIcon from "../../../assets/Icons/VerfifiedIcon.svg";
 import CheckRight from "../../../assets/Icons/CheckRight.svg";
 import AllUsers from "../../../assets/Icons/AllUsers.svg";
 import Direction from "../../../assets/Icons/Direction.svg";
+import { Helmet } from "react-helmet-async";
+
 const LandScapingPageLandingPage = () => {
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <div className={styles.pageWrapper}>
         <BuyerRegistrationForLandscapingPPC />
 

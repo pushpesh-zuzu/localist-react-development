@@ -289,7 +289,12 @@ const pageTitles = {
   '/accountants-near-me':{
     title:'Accountants Near Me | Find Chartered Accountants | Localists',
     description:'Get free quotes from certified accountants near you or nationally. Get help with tax returns, VAT and more…'
-  }
+  },
+  '/landscaping-landing-ppc': {
+    title: "Compare Free Quotes from Local Landscapers | Localists",
+    description:
+      "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
+  },
 
 };
 
