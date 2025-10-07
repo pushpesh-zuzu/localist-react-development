@@ -387,13 +387,13 @@ const WhatServiceDoYouNeedPage = ({
   };
 
   return (
-    <div className={styles.pageContainer} style={{ position: "relative" }}>
+    <div className={styles.pageContainer}>
       {/* <div className={styles.closeButton} onClick={handleCloseClick}>
         &times;
       
       </div> */}
 
-      <h2 className={styles.title}>What service do you need?</h2>
+      {/* <h2 className={styles.title}>What service do you need?</h2> */}
 
       {/* Service Input */}
       <div className={styles.formGroup}>
