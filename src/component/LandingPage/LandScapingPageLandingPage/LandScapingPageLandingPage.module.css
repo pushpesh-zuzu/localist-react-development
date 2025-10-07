@@ -163,11 +163,11 @@
   padding: 12px 12px;
   border-radius: 12px;
   position: relative;
-  background: rgba(255, 116, 31, 1);
+  background: #45a834;
   margin-top: 8px;
 }
 .verifiedIcon {
-  color: rgba(255, 116, 31, 1);
+  color: #45a834;
   background-color: transparent;
   border-radius: 100%;
   width: 24px;
@@ -187,7 +187,7 @@
 .statBox {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 116, 31, 1); /* green */
+  background-color: #45a834; /* green */
   color: #fff;
   font-weight: 600;
   font-size: 14px;
@@ -201,7 +201,7 @@
 .icon {
   font-size: 20px;
   background: #fff;
-  color: rgba(255, 116, 31, 1);
+  color: #45a834;
   border-radius: 50%;
   padding: 3px;
 }

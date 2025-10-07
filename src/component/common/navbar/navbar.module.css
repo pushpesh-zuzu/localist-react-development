@@ -735,12 +735,12 @@
 }
 
 @media screen and (max-width: 680px) {
-  .popover_container {
+  /* .popover_container {
     width: 550px;
-  }
+  } */
 
   .popover_wrap {
-    width: 40%;
+    width: 100%;
     padding: 0px 16px;
   }
 
