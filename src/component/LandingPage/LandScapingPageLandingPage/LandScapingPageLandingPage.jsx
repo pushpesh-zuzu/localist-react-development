@@ -10,8 +10,8 @@ const LandScapingPageLandingPage = () => {
   return (
     <>
       <div className={styles.pageWrapper}>
-          <BuyerRegistrationForLandscapingPPC />
-        </div>
+        <BuyerRegistrationForLandscapingPPC />
+
         <div className={styles.secondColumn}>
           <h1 className={styles.heading}>
             Looking for Landscaping in your area?
@@ -73,6 +73,7 @@ const LandScapingPageLandingPage = () => {
             </p>
           </div>
         </div>
+      </div>
       <div className={styles.statsWrapper}>
         <div className={styles.statBox}>
           <img
