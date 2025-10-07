@@ -443,7 +443,7 @@ const WhatServiceDoYouNeedPage = ({
         <label className={styles.label}>Where do you need it?</label>
         <input
           type="text"
-          placeholder="Enter your Postcode or town"
+          placeholder="Enter your Postcode"
           className={`${styles.input} ${
             errors?.pincode ? styles.errorBorder : ""
           }`}

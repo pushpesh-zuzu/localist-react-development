@@ -11,7 +11,7 @@
 } */
 .pageContainer {
   max-width: 600px; 
-  margin: 20px auto;
+  /* margin: 20px auto; */
   padding: 24px 31px;
   background-color: white;
 }
