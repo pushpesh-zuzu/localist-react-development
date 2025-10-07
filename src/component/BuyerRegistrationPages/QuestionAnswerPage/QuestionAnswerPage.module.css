@@ -312,7 +312,8 @@
   align-items: center;
   margin: 0 auto;
   min-height: 320px;
-  width: 100%;
+  max-width: 300px;
+  width: 300px;
 }
 .noQuestion {
   display: flex;
@@ -455,6 +456,9 @@
     /* width: 78%; */
       padding: 8px;
 
+  }
+  .loaderContainer{
+    width: 200px;
   }
   /* .option {
     text-align: start;
