@@ -5,9 +5,10 @@ import logo from "../../../assets/Images/logo.svg";
 import VerfifiedIcon from "../../../assets/Icons/VerfifiedIcon.svg";
 import CheckRight from "../../../assets/Icons/CheckRight.svg";
 import AllUsers from "../../../assets/Icons/AllUsers.svg";
-import Direction from "../../../assets/Icons/Direction.svg";
-import { Helmet } from "react-helmet-async";
+import Icon from "../../../assets/Icons/Icon.png";
+import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 
+import { Helmet } from "react-helmet-async";
 const LandScapingPageLandingPage = () => {
   return (
     <>
@@ -18,6 +19,18 @@ const LandScapingPageLandingPage = () => {
         <BuyerRegistrationForLandscapingPPC />
 
         <div className={styles.secondColumn}>
+          <div className={styles.verifiedRowCompletMobile}>
+            <img
+              className={styles.topBigArrow}
+              // style={{position:'absolute',left:'35%',bottom:'50%'}}
+              src={topBigArrow}
+              alt="leftbigArrow"
+            />
+            <p className={styles.paragraphTextMobile}>
+              Complete the form instantly to find out the right professional for
+              your requirement.
+            </p>
+          </div>
           <h1 className={styles.heading}>
             Looking for Landscaping in your area?
           </h1>
@@ -57,29 +70,19 @@ const LandScapingPageLandingPage = () => {
           <div className={styles.verifiedRowComplet}>
             <img
               className={styles.leftbigArrow}
-              src={Direction}
+              src={Icon}
               alt="leftbigArrow"
             />
 
-            <p
-              className={styles.paragraphTextDesktop}
-              style={{ fontWeight: 600 }}
-            >
+            <p className={styles.paragraphTextDesktop}>
               Complete the form instantly to find out the right professional
               <br />
               <span>for your requirement.</span>
             </p>
-            <p
-              className={styles.paragraphTextMobile}
-              style={{ fontWeight: 600 }}
-            >
-              Complete the form instantly to find out the right professional for
-              your requirement.
-            </p>
           </div>
         </div>
       </div>
-      <div className={styles.statsWrapper}>
+      {/* <div className={styles.statsWrapper}>
         <div className={styles.statBox}>
           <img
             style={{ height: "20px", width: "20px" }}
@@ -103,7 +106,7 @@ const LandScapingPageLandingPage = () => {
             <p>connected to pros everyday</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
