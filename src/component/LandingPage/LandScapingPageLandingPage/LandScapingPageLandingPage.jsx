@@ -82,7 +82,7 @@ const LandScapingPageLandingPage = () => {
           </div>
         </div>
       </div>
-      {/* <div className={styles.statsWrapper}>
+      <div className={styles.statsWrapper}>
         <div className={styles.statBox}>
           <img
             style={{ height: "20px", width: "20px" }}
@@ -106,7 +106,7 @@ const LandScapingPageLandingPage = () => {
             <p>connected to pros everyday</p>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
