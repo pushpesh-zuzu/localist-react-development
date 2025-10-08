@@ -380,17 +380,18 @@
   }
 
   .heading {
-    font-size: 22px;
+    font-size: 20px;
+    line-height: 26px;
   }
-  .paragraphDetail {
+  /* .paragraphDetail {
     font-size: 16px;
-  }
+  } */
 
   .verifiedRow {
     gap: 10px;
   }
   .paragraph {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .verifiedRow {
     padding: 0px 0px 12px;
