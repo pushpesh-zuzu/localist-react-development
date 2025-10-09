@@ -150,6 +150,7 @@ const ReviewsAccordion = ({ details }) => {
             console.log("Facebook Login Successful. User authorized app!");
 
             const userAccessToken = response.authResponse.accessToken;
+            sendTokenToBackend(userAccessToken);
 
             // TODO: Agla Kadam
             // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
@@ -171,6 +172,29 @@ const ReviewsAccordion = ({ details }) => {
     } else {
       // Agar SDK abhi tak load nahi hua hai
       showToast("error", "Facebook SDK is still loading. Please try again.");
+    }
+  };
+
+  const sendTokenToBackend = async (token) => {
+    try {
+      // Send the token to a specific backend endpoint
+      const response = await axiosInstance.post("/facebook/fetch-reviews", {
+        user_access_token: token,
+        // You might also send the Facebook Page URL/Name if the user provided it
+        // page_identifier: fbLink
+      });
+
+      if (response.data.success) {
+        console.log("Reviews successfully imported!", response.data.reviews);
+        // TODO: Update your component's state with the new reviews
+        showToast("success", "Facebook reviews imported successfully!");
+      } else {
+        // Handle error response from your server
+        showToast("error", "Error processing token on server.");
+      }
+    } catch (error) {
+      console.error("API call failed:", error);
+      showToast("error", "Failed to connect to backend for review processing.");
     }
   };
 
