@@ -1,6 +1,7 @@
 // src/routes/landingPages.js
 import React, { lazy } from "react";
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
+
 const LandingLandscaping = lazy(() =>
   import("../component/LandingPage/LandingLandscaping")
 );
@@ -50,6 +51,18 @@ const LandingConcreteDriveway = lazy(() =>
 const LandingBlockPavingDriveway = lazy(() =>
   import("../component/LandingPage/LandingBlockPavingDriveway")
 );
+const LandscapingLandingPage = lazy(() =>
+  import("../pages/LandscapingLandingPage")
+);
+const FencingLandingPagePPC = lazy(() =>
+  import("../pages/FencingLandingPagePPC")
+);
+const DriwayLandingPagePPC = lazy(() =>
+  import("../pages/DriwayLandingPagePPC")
+);
+const GateInstallationLandingPPC = lazy(() =>
+  import("../pages/GateInstallationLandingPPC")
+);
 const landingPages = [
   { path: "landscaping_ppc", Component: LandingLandscaping },
   { path: "patio_services_ppc", Component: LandinPatioPage },
@@ -73,6 +86,10 @@ const landingPages = [
   { path: "tarmac_driveways_ppc", Component: LandingTarmacDriveway },
   { path: "concrete_driveways_ppc", Component: LandingConcreteDriveway },
   { path: "block_paving_driveways_ppc", Component: LandingBlockPavingDriveway },
+  { path: "landscaping-landing-ppc", Component: LandscapingLandingPage },
+  { path: "fencing-landing-ppc", Component: FencingLandingPagePPC },
+  { path: "drivways-landing-ppc", Component: DriwayLandingPagePPC },
+  { path: "gates-landing-ppc", Component: GateInstallationLandingPPC },
 ];
 
 export { landingPages, FullScreenSpinner };

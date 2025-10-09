@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./LandScapingPageLandingPage.module.css";
+import styles from "./LandingNewPPC.module.css";
 import BuyerRegistrationForLandscapingPPC from "../BuyerRegistrationForLandscapingPPC/BuyerRegistrationForLandscapingPPC";
 import logo from "../../../assets/Images/logo.svg";
 import VerfifiedIcon from "../../../assets/Icons/VerfifiedIcon.svg";
@@ -9,14 +9,22 @@ import Icon from "../../../assets/Icons/Icon.png";
 import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 
 import { Helmet } from "react-helmet-async";
-const LandScapingPageLandingPage = () => {
+const LandingNewPPC = ({
+  title = "",
+  subHeading = "",
+  serviceId,
+  serviceName = "",
+}) => {
   return (
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
       <div className={styles.pageWrapper}>
-        <BuyerRegistrationForLandscapingPPC />
+        <BuyerRegistrationForLandscapingPPC
+          serviceId={serviceId}
+          serviceName={serviceName}
+        />
 
         <div className={styles.secondColumn}>
           <div className={styles.verifiedRowCompletMobile}>
@@ -31,11 +39,9 @@ const LandScapingPageLandingPage = () => {
               your requirements
             </p>
           </div>
-          <h1 className={styles.heading}>
-            Looking for Landscaping in your area?
-          </h1>
+          <h1 className={styles.heading}>Looking for {title} in your area?</h1>
           <p className={styles.paragraph}>
-            Find a local landscaping pro on Localists in seconds
+            Find a local {subHeading} on Localists in seconds
           </p>
           <div className={styles.verifiedRow}>
             <img
@@ -111,4 +117,4 @@ const LandScapingPageLandingPage = () => {
   );
 };
 
-export default LandScapingPageLandingPage;
+export default LandingNewPPC;

@@ -18,7 +18,7 @@ import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMat
 const BuyerRegistrationForLandscapingPPC = ({
   closeModal,
   serviceId = 43,
-  serviceName = "Landscaping",
+  serviceName = "",
   postcode,
   city,
   postalCodeValidate,

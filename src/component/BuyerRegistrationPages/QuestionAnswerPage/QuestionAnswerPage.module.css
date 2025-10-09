@@ -90,7 +90,7 @@
   flex-direction: column;
 }
 .headerImage3 {
-  background-image: url("./banner/Driveways.webp");
+  background-image: url("../banner/Driveways.webp");
   background-size: cover;
   background-position: center;
   padding: 0px 20px;
@@ -104,7 +104,7 @@
   flex-direction: column;
 }
 .headerImage4 {
-  background-image: url("./banner/Fence.webp");
+  background-image: url("../banner/Fence.webp");
   background-size: cover;
   background-position: center;
   padding: 0px 20px;
@@ -163,7 +163,7 @@
   flex-direction: column;
 }
 .headerImage8 {
-  background-image: url("./banner/Gate.webp");
+  background-image: url("../banner/Gate.webp");
   background-size: cover;
   background-position: center;
   padding: 0px 20px;

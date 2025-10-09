@@ -65,7 +65,6 @@ import Transport from "../component/Level1/Transport/Transport";
 import { levelThreePagesRoutes } from "./leverThreeRoute";
 import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 import { levelOnePagesRoutes } from "./levelOneRoutes";
-import LandScapingPageLandingPage from "../component/LandingPage/LandScapingPageLandingPage/LandScapingPageLandingPage";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -98,10 +97,10 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-    path: "landscaping-landing-ppc",
-    element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
-  },
+  //     {
+  //   path: "landscaping-landing-ppc",
+  //   element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
+  // },
       {
         path: "about-us",
         element: (
