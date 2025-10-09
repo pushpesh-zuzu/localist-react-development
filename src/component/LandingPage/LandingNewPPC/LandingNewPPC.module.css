@@ -169,6 +169,8 @@
   margin-top: 8px;
   color: #fff;
   display: block;
+      max-width: 500px;
+
 }
 .verifiedRowCompletMobile {
   padding: 12px 12px;

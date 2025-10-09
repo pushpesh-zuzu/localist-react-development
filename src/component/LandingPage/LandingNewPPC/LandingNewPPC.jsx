@@ -82,8 +82,9 @@ const LandingNewPPC = ({
 
             <p className={styles.paragraphTextDesktop}>
               Complete the form now to find the ideal local professional
-              <br />
-              <span>for your requirements</span>
+              for your requirements
+              {/* <br />
+              <span>for your requirements</span> */}
             </p>
           </div>
         </div>
