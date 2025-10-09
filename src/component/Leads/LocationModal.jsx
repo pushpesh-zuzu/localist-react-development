@@ -23,8 +23,8 @@ const LocationModal = ({
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
-    lat: 26.9556924,
-    lng: 75.6882696,
+    lat: 52.6358,
+    lng: -1.1396,
   });
 
   useEffect(() => {
