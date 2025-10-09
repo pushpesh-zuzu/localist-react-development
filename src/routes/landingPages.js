@@ -88,7 +88,7 @@ const landingPages = [
   { path: "block_paving_driveways_ppc", Component: LandingBlockPavingDriveway },
   { path: "landscaping-landing-ppc", Component: LandscapingLandingPage },
   { path: "fencing-landing-ppc", Component: FencingLandingPagePPC },
-  { path: "drivways-landing-ppc", Component: DriwayLandingPagePPC },
+  { path: "driveways-landing-ppc", Component: DriwayLandingPagePPC },
   { path: "gates-landing-ppc", Component: GateInstallationLandingPPC },
 ];
 

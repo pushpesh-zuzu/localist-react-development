@@ -295,7 +295,21 @@ const pageTitles = {
     description:
       "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
   },
-
+  '/fencing-landing-ppc': {
+    title: "Compare Free Quotes from Local Fencing Companies | Localists",
+    description:
+      "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+  '/driveways-landing-ppc': {
+   title: "Compare Free Quotes from Local Driveway Companies | Localists",
+    description:
+      "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+  '/gates-landing-ppc': {
+    title: "Compare Free Quotes from Local Gating Companies | Localists",
+    description:
+      "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
 };
 
 
