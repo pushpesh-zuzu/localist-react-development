@@ -27,8 +27,8 @@ const LandScapingPageLandingPage = () => {
               alt="leftbigArrow"
             />
             <p className={styles.paragraphTextMobile}>
-              Complete the form instantly to find out the right professional for
-              your requirement.
+              Complete the form now to find the ideal local professional for
+              your requirements
             </p>
           </div>
           <h1 className={styles.heading}>
@@ -75,9 +75,9 @@ const LandScapingPageLandingPage = () => {
             />
 
             <p className={styles.paragraphTextDesktop}>
-              Complete the form instantly to find out the right professional
+              Complete the form now to find the ideal local professional
               <br />
-              <span>for your requirement.</span>
+              <span>for your requirements</span>
             </p>
           </div>
         </div>
