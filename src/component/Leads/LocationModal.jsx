@@ -88,7 +88,7 @@ const LocationModal = ({
 
       mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center: mapCenter,
-        zoom: 10,
+        zoom: 7,
       });
 
       if (locationData.postcode && mapCenter.lat !== 20.5937) {

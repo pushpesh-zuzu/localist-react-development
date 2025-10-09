@@ -28,6 +28,7 @@ import axios from "axios";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
+  const [isFbSdkReady, setIsFbSdkReady] = useState(false);
   const [googleLink, setGoogleLink] = useState("");
   const navigate = useNavigate();
 
@@ -80,45 +81,98 @@ const ReviewsAccordion = ({ details }) => {
     )}`,
   };
 
-  // const handleLogin = (credentialResponse) => {
-  //   const token = credentialResponse.credential;
-  //   const decoded = jwt_decode(token);
-  //   console.log("Google User:", decoded);
-
-  //   // Send token to backend for exchange with access token
-  //   fetch("http://localhost:5100/auth/callback", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ token }),
-  //   });
-  // };
-
-  // const login = useGoogleLogin({
-  //   flow: "auth-code", //  important
-  //   scope:
-  //     "openid email profile https://www.googleapis.com/auth/business.manage",
-  //   onSuccess: async (response) => {
-  //     console.log("Auth code:", response.code);
-
-  //     // Send auth code to backend
-  //     //   await axiosInstance.post("/auth/callback", {
-  //     //     code: response.code,
-  //     //   });
-  //     // },
-  //     // onError: () => {
-  //     //   console.log("Login Failed");
-  //     // },
-  //     try {
-  //       const res = await axiosInstance.post("/google/get-auth-token", {
-  //         code: response.code,
+  // useEffect(() => {
+  //   // Yeh function check karega ki FB object available hai aur use ready mark karega
+  //   const checkFbSdk = () => {
+  //     if (window.FB) {
+  //       // FB object mil gaya, ab use initialize karte hain
+  //       window.FB.init({
+  //         appId: "YOUR_FACEBOOK_APP_ID", // <-- Yahan App ID use karein
+  //         cookie: true,
+  //         xfbml: true,
+  //         version: "v19.0",
   //       });
-  //       console.log("Reviews from backend:", res.data.reviews);
-  //     } catch (err) {
-  //       console.error(err);
+
+  //       setIsFbSdkReady(true); // <--- Ab component use karne ke liye ready hai
+  //     } else {
+  //       // Agar abhi tak load nahi hua, toh 100ms baad dobara check karein
+  //       setTimeout(checkFbSdk, 100);
   //     }
-  //   },
-  //   onError: () => console.log("Login failed"),
-  // });
+  //   };
+
+  //   // window.fbAsyncInit ko use karne ka behtar tareeka index.html mein hai.
+  //   // Lekin agar aapko yahan karna hai, toh is tarah se loading status track karein.
+
+  //   // Agar aap index.html mein window.fbAsyncInit use kar rahe hain,
+  //   // toh use modify karke yahan state set kar sakte hain:
+
+  //   if (window.FB) {
+  //     setIsFbSdkReady(true);
+  //   } else if (window.fbAsyncInit) {
+  //     // Agar window.fbAsyncInit already defined hai (index.html se),
+  //     // toh yeh check karein ki FB object ban gaya hai ya nahi.
+  //     // Behtar hai ki window.fbAsyncInit ke callback mein hi setIsFbSdkReady(true) set karein.
+  //   } else {
+  //     // Agar index.html mein code nahi hai, toh upar wala setTimeout logic use karein.
+  //     checkFbSdk();
+  //   }
+  // }, []); // Sirf ek baar chlega jab component mount hoga
+
+  useEffect(() => {
+    const checkSdk = () => {
+      // Check the custom flag set in index.html
+      if (window.isFacebookSdkReady) {
+        setIsFbSdkReady(true);
+      } else {
+        const timer = setTimeout(checkSdk, 200);
+        return () => clearTimeout(timer); // Cleanup
+      }
+    };
+
+    checkSdk();
+  }, []);
+
+  const handleFacebookLogin = () => {
+    // Double check karein ki FB SDK load ho gaya hai ya nahi
+    if (window.FB) {
+      // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
+      const requiredScopes = [
+        "public_profile",
+        "email",
+        "pages_show_list",
+        "pages_manage_posts", // Naye Pages ke liye yeh zaroori hai
+      ].join(",");
+
+      // Facebook Login Pop-up open karein
+      window.FB.login(
+        function (response) {
+          if (response.authResponse) {
+            console.log("Facebook Login Successful. User authorized app!");
+
+            const userAccessToken = response.authResponse.accessToken;
+
+            // TODO: Agla Kadam
+            // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
+            // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
+            // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
+
+            showToast(
+              "success",
+              "Successfully logged into Facebook. Fetching pages..."
+            );
+            // Example: sendUserTokenToBackend(userAccessToken);
+          } else {
+            console.error("Facebook Login Failed or Cancelled.");
+            showToast("error", "Facebook login was cancelled or denied.");
+          }
+        },
+        { scope: requiredScopes }
+      );
+    } else {
+      // Agar SDK abhi tak load nahi hua hai
+      showToast("error", "Facebook SDK is still loading. Please try again.");
+    }
+  };
 
   const login = useGoogleLogin({
     flow: "auth-code",
@@ -151,7 +205,7 @@ const ReviewsAccordion = ({ details }) => {
         // );
 
         const reviewsRes = await axios.post(
-          "http://localhost:5100/api/google/get-reviews",
+          "https://dev.localists.com/google/get-reviews",
           {
             access_token: accessToken,
             refresh_token: refreshToken,
@@ -399,7 +453,9 @@ const ReviewsAccordion = ({ details }) => {
               console.log("Login Failed");
             }}
           /> */}
-          <button onClick={() => login()}>Login with Google</button>
+          <button className={styles.importBtn} onClick={() => login()}>
+            Login with Google
+          </button>
           {/* <button className={styles.importBtn} onClick={handleGoogleLogin}>
             Import Reviews
           </button> */}
@@ -422,7 +478,11 @@ const ReviewsAccordion = ({ details }) => {
             value={fbLink}
             onChange={(e) => setFbLink(e.target.value)}
           />
-          <button className={styles.importBtn} onClick={handleSubmit}>
+          <button
+            className={styles.importBtn}
+            onClick={handleFacebookLogin}
+            // disabled={!isFbSdkReady}
+          >
             Import Reviews
           </button>
         </div>

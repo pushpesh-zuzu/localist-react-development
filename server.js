@@ -105,6 +105,77 @@ app.post("/google/get-auth-token", async (req, res) => {
   }
 });
 
+const fetchAccountDetails = async (accessToken) => {
+  const accountsEndpoint =
+    "https://mybusinessaccountmanagement.googleapis.com/v1/accounts";
+
+  try {
+    const response = await axios.get(accountsEndpoint, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const accounts = response.data.accounts;
+
+    if (accounts && accounts.length > 0) {
+      const accountResourceName = accounts[0].name;
+
+      // Extract the actual ID
+      const accountId = accountResourceName.split("/")[1];
+
+      console.log("Google Business Profile Account ID:", accountId);
+      return accountId;
+    } else {
+      console.log("No accounts found for this user.");
+      return null;
+    }
+  } catch (error) {
+    console.error(
+      "Error fetching Google Business Profile accounts:",
+      error.response ? error.response.data : error.message
+    );
+    throw new Error("Failed to fetch account ID from Google API.");
+  }
+};
+
+app.post("/api/google/account-id", async (req, res) => {
+  // 1. Get the access token from the request body
+  const { accessToken } = req.body;
+
+  if (!accessToken) {
+    return res
+      .status(400)
+      .json({ error: "Access token is required in the request body." });
+  }
+
+  try {
+    //  Call the function to fetch the account ID
+    const accountId = await fetchAccountDetails(accessToken);
+
+    if (accountId) {
+      // Send the successful response back to the client
+      res.json({
+        success: true,
+        accountId: accountId,
+      });
+    } else {
+      // Handle the case where the user has no business accounts
+      res.status(404).json({
+        success: false,
+        message: "No business accounts found for this user.",
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: "Internal server error while communicating with Google API.",
+      details: err.message,
+    });
+  }
+});
+
 // 2. Get Business Reviews route - YAHAN SAB KUCH HANDLE HOGA
 app.post("/api/google/get-reviews", async (req, res) => {
   console.log("Fetching accounts...");

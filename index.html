@@ -43,6 +43,32 @@
       window.addEventListener("load", () => {
         setTimeout(loadTrackingScripts, 500);
       });
+
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "2143258269781131", // <--- YE ZAROORI HAI!
+          cookie: true,
+          xfbml: true,
+          version: "v19.0",
+        });
+
+        // IMPORTANT: Yeh line ReviewsAccordion mein state set karne mein madad karegi.
+        // Agar aapne component mein loading logic dala hai, toh yeh FB object ko available karayega.
+        console.log("Facebook SDK is initialized.");
+
+        window.isFacebookSdkReady = true;
+      };
+
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "facebook-jssdk");
+      // ... (rest of the SDK loading script)
     </script>
     <!-- <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
