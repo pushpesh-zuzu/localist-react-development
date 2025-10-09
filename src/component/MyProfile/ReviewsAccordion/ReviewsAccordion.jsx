@@ -138,9 +138,9 @@ const ReviewsAccordion = ({ details }) => {
       // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
       const requiredScopes = [
         "public_profile",
-        "email",
+        // "email",
         "pages_show_list",
-        "pages_read_engagement",
+        // "pages_read_engagement",
       ].join(",");
 
       // Facebook Login Pop-up open karein
