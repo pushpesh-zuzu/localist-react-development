@@ -54,7 +54,7 @@ const LandScapingPageLandingPage = () => {
               alt="CheckRight"
             />
             <p className={styles.paragraphDetail}>
-              Compare price from multiple professionals
+              Compare prices from multiple professionals
             </p>
           </div>
           <div className={styles.verifiedRow}>
