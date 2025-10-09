@@ -140,7 +140,7 @@ const ReviewsAccordion = ({ details }) => {
         "public_profile",
         // "email",
         "pages_show_list",
-        "pages_read_user_content",
+        // "pages_read_user_content",
       ].join(",");
 
       // Facebook Login Pop-up open karein
