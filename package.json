@@ -29,6 +29,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "firebase": "^12.3.0",
     "framer-motion": "^12.4.10",
     "google-auth-library": "^10.3.0",
     "googleapis": "^161.0.0",
