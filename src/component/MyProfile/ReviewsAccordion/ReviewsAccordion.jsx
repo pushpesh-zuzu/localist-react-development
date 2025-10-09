@@ -140,7 +140,7 @@ const ReviewsAccordion = ({ details }) => {
         "public_profile",
         "email",
         "pages_show_list",
-        "pages_manage_posts", // Naye Pages ke liye yeh zaroori hai
+        "pages_read_engagement",
       ].join(",");
 
       // Facebook Login Pop-up open karein
