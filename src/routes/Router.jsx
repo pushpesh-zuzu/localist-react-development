@@ -673,7 +673,7 @@ const routes = [
     ],
   },
    {
-    path: "/:lang/:country/multistepper",
+    path: "/:lang/:country/landscaping-multi-form-ppc",
     element: (
       <LocaleRedirect>
         <MultiStepForm />
