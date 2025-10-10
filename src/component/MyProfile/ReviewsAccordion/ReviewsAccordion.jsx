@@ -42,6 +42,7 @@ const ReviewsAccordion = ({ details }) => {
   const { facebookReviewsData } = useSelector((state) => state.myProfile);
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
+  console.log(facebookReviewsData, viewProfileData, "facebookReviewsData");
 
   const dispatch = useDispatch();
   const {
@@ -598,6 +599,31 @@ const ReviewsAccordion = ({ details }) => {
               found through Localists.com. Add them today and improve new
               business wins!
             </p>
+          </>
+        )}
+
+        {/* Facebook Reviews Section */}
+        {facebookReviewsData && facebookReviewsData.length > 0 && (
+          <>
+            <label className={styles.reviewsLabel}>Facebook Reviews</label>
+            <div
+              className={`${styles.localistBox} ${
+                facebookReviewsData.length > 5 ? styles.scrollBox : ""
+              }`}
+            >
+              {facebookReviewsData.map((review, index) => (
+                <div key={index} className={styles.reviewItem}>
+                  <p>
+                    <strong>{review.reviewer?.name || "Anonymous"}</strong>
+                  </p>
+                  <p>⭐ {review.rating}</p>
+                  <p>{review.review_text || "No text provided"}</p>
+                  <p className={styles.reviewDate}>
+                    {new Date(review.created_time).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
           </>
         )}
       </div>
