@@ -149,71 +149,78 @@ const ReviewsAccordion = ({ details }) => {
   }
   console.log(mergedData, "mergedData");
 
-  // const handleFacebookLogin = () => {
-  //   // Double check karein ki FB SDK load ho gaya hai ya nahi
-  //   if (window.FB) {
-  //     // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
-  //     const requiredScopes = [
-  //       "public_profile",
-  //       // "email",
-  //       "pages_show_list",
-  //       // "pages_read_user_content",
-  //     ].join(",");
+  const handleFacebookLogin = () => {
+    // Double check karein ki FB SDK load ho gaya hai ya nahi
+    if (window.FB) {
+      // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
+      const requiredScopes = [
+        "public_profile",
+        // "email",
+        "pages_show_list",
+        // "pages_read_user_content",
+      ].join(",");
 
-  //     // Facebook Login Pop-up open karein
-  //     window.FB.login(
-  //       function (response) {
-  //         if (response.authResponse) {
-  //           console.log("Facebook Login Successful. User authorized app!");
+      // Facebook Login Pop-up open karein
+      window.FB.login(
+        function (response) {
+          if (response.authResponse) {
+            console.log("Facebook Login Successful. User authorized app!");
 
-  //           const userAccessToken = response.authResponse.accessToken;
-  //           dispatch(sendTokenToBackend(userAccessToken));
+            const userAccessToken = response.authResponse.accessToken;
+            dispatch(sendTokenToBackend(userAccessToken));
 
-  //           // TODO: Agla Kadam
-  //           // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
-  //           // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
-  //           // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
+            // TODO: Agla Kadam
+            // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
+            // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
+            // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
 
-  //           showToast(
-  //             "success",
-  //             "Successfully logged into Facebook. Fetching pages..."
-  //           );
-  //           // Example: sendUserTokenToBackend(userAccessToken);
-  //         } else {
-  //           console.error("Facebook Login Failed or Cancelled.");
-  //           showToast("error", "Facebook login was cancelled or denied.");
-  //         }
-  //       },
-  //       { scope: requiredScopes }
-  //     );
-  //   } else {
-  //     // Agar SDK abhi tak load nahi hua hai
-  //     showToast("error", "Facebook SDK is still loading. Please try again.");
-  //   }
-  // };
+            showToast(
+              "success",
+              "Successfully logged into Facebook. Fetching pages..."
+            );
+            // Example: sendUserTokenToBackend(userAccessToken);
+          } else {
+            console.error("Facebook Login Failed or Cancelled.");
+            showToast("error", "Facebook login was cancelled or denied.");
+          }
+        },
+        { scope: requiredScopes }
+      );
+    } else {
+      // Agar SDK abhi tak load nahi hua hai
+      showToast("error", "Facebook SDK is still loading. Please try again.");
+    }
+  };
 
-  // const sendTokenToBackend = async (token) => {
-  //   try {
-  //     // Send the token to a specific backend endpoint
-  //     const response = await post("https://graph.facebook.com/v20.0/me/accounts", {
-  //       user_access_token: token,
-  //       // You might also send the Facebook Page URL/Name if the user provided it
-  //       // page_identifier: fbLink
-  //     });
+  const sendTokenToBackend = async (token) => {
+    try {
+      // // Send the token to a specific backend endpoint
+      // const response = await post(
+      //   "https://graph.facebook.com/v20.0/me/accounts",
+      //   {
+      //     user_access_token: token,
+      //     // You might also send the Facebook Page URL/Name if the user provided it
+      //     // page_identifier: fbLink
+      //   }
 
-  //     if (response.data.success) {
-  //       console.log("Reviews successfully imported!", response.data.reviews);
-  //       // TODO: Update your component's state with the new reviews
-  //       showToast("success", "Facebook reviews imported successfully!");
-  //     } else {
-  //       // Handle error response from your server
-  //       showToast("error", "Error processing token on server.");
-  //     }
-  //   } catch (error) {
-  //     console.error("API call failed:", error);
-  //     showToast("error", "Failed to connect to backend for review processing.");
-  //   }
-  // };
+      const res = await fetch(
+        `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
+      );
+      const data = await res.json();
+
+      if (response.data.success) {
+        console.log("Reviews successfully imported!", response.data.reviews);
+        // TODO: Update your component's state with the new reviews
+        showToast("success", "Facebook reviews imported successfully!");
+      } else {
+        // Handle error response from your server
+        showToast("error", "Error processing token on server.");
+      }
+    } catch (error) {
+      console.error("API call failed:", error);
+      showToast("error", "Failed to connect to backend for review processing.");
+    }
+  };
 
   // const sendTokenToBackend = async (token) => {
   //   try {
@@ -276,30 +283,30 @@ const ReviewsAccordion = ({ details }) => {
   //   }
   // };
 
-  const handleFacebookLogin = () => {
-    if (window.FB) {
-      window.FB.login(
-        (response) => {
-          if (response.authResponse) {
-            const userAccessToken = response.authResponse.accessToken;
+  // const handleFacebookLogin = () => {
+  //   if (window.FB) {
+  //     window.FB.login(
+  //       (response) => {
+  //         if (response.authResponse) {
+  //           const userAccessToken = response.authResponse.accessToken;
 
-            // Backend ko bhejo, Graph API ko direct mat hit karo
-            axiosInstance
-              .post("/facebook/get-reviews", { userAccessToken })
-              .then((res) => {
-                console.log("Reviews:", res.data.reviews);
-                showToast("success", "Fetched Facebook Reviews!");
-              })
-              .catch((err) => {
-                console.error(err);
-                showToast("error", "Failed to fetch reviews");
-              });
-          }
-        },
-        { scope: "pages_show_list,pages_read_engagement" }
-      );
-    }
-  };
+  //           // Backend ko bhejo, Graph API ko direct mat hit karo
+  //           axiosInstance
+  //             .post("/facebook/get-reviews", { userAccessToken })
+  //             .then((res) => {
+  //               console.log("Reviews:", res.data.reviews);
+  //               showToast("success", "Fetched Facebook Reviews!");
+  //             })
+  //             .catch((err) => {
+  //               console.error(err);
+  //               showToast("error", "Failed to fetch reviews");
+  //             });
+  //         }
+  //       },
+  //       { scope: "pages_show_list,pages_read_engagement" }
+  //     );
+  //   }
+  // };
 
   const login = useGoogleLogin({
     flow: "auth-code",
@@ -331,15 +338,11 @@ const ReviewsAccordion = ({ details }) => {
         //   }
         // );
 
-        const reviewsRes = await axios.post(
-          "https://dev.localists.com/google/get-reviews",
-          {
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          }
+        const reviewsRes = await fetch(
+          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},review_text,rating,created_time&access_token=${pageAccessToken}`
         );
-
-        console.log("Reviews from backend:", reviewsRes.data);
+        const reviewsData = await reviewsRes.json();
+        console.log("Reviews: ", reviewsData);
 
         // Store token for future use
         localStorage.setItem("google_access_token", accessToken);
