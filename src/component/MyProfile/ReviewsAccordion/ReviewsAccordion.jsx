@@ -134,8 +134,9 @@ const ReviewsAccordion = ({ details }) => {
 
     checkSdk();
   }, []);
-
-  let mergedData = Array.isArray(viewProfileData) ? [...viewProfileData] : [];
+  let mergedData = Array.isArray(viewProfileData.reviews)
+    ? [...viewProfileData.reviews]
+    : [];
 
   if (Array.isArray(facebookReviewsData) && facebookReviewsData.length > 0) {
     const transformedFacebookReviews = facebookReviewsData.map((review) => ({
@@ -144,11 +145,8 @@ const ReviewsAccordion = ({ details }) => {
       review: review.review_text,
       ratings: "0",
     }));
-
-    mergedData = mergedData.concat(transformedFacebookReviews);
-    mergedData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    mergedData = [...mergedData, ...transformedFacebookReviews];
   }
-
   console.log(mergedData, "mergedData");
 
   const handleFacebookLogin = () => {
@@ -600,7 +598,7 @@ const ReviewsAccordion = ({ details }) => {
         </p>
         <ReviewSection details={viewProfileData} showSummary={false} />
       </div> */}
-      {/* <div
+      <div
         className={`${styles.localistBox} ${
           (viewProfileData?.reviews_count ?? 0) > 5 ? styles.scrollBox : ""
         }`}
@@ -617,26 +615,27 @@ const ReviewsAccordion = ({ details }) => {
             </p>
           </>
         )}
-      </div> */}
-
-      <div
-        className={`${styles.localistBox} ${
-          mergedData.length > 5 ? styles.scrollBox : ""
-        }`}
-      >
-        {mergedData.length > 0 ? (
-          <ReviewSection details={mergedData} showSummary={false} />
-        ) : (
-          <>
-            <strong>You don’t have any reviews yet on Localists.com</strong>
-            <p>
-              Your reviews can come from any of your customers — not just those
-              found through Localists.com. Add them today and improve new
-              business wins!
-            </p>
-          </>
-        )}
       </div>
+
+      {Array.isArray(facebookReviewsData) && facebookReviewsData.length > 0 && (
+        <>
+          <label className={styles.reviewsLabel}>Facebook Reviews</label>
+          <div
+            className={`${styles.localistBox} ${
+              facebookReviewsData.length > 5 ? styles.scrollBox : ""
+            }`}
+          >
+            {facebookReviewsData.map((review, index) => (
+              <div key={index} className={styles.reviewItem}>
+                <p className={styles.reviewText}>{review.review_text}</p>
+                <small className={styles.reviewDate}>
+                  {new Date(review.created_time).toLocaleDateString()}
+                </small>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>
