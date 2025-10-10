@@ -21,7 +21,7 @@ const MultiStepForm = () => {
     useSelector((state) => state.buyer);
 
   useEffect(() => {
-    if (location.pathname.includes("multistepper")) {
+    if (location.pathname.includes("landscaping-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     } else {
       document.body.style.paddingTop = "40px";
@@ -29,7 +29,7 @@ const MultiStepForm = () => {
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("multistepper") ? "0px" : "40px",
+      location.pathname.includes("landscaping-multi-form-ppc") ? "0px" : "40px",
       "important"
     );
   }, [location.pathname]);
