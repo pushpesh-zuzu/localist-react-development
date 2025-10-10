@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   clearFacebookReviewStatus,
   getCustomerLinkApi,
-  sendTokenToBackend,
   updateFacebookReviewLink,
 } from "../../../store/MyProfile/myProfileSlice";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
@@ -39,10 +38,8 @@ const ReviewsAccordion = ({ details }) => {
     showToast("success", "Link copied to clipboard!");
   };
   const { viewProfileData } = useSelector((state) => state.leadSetting);
-  const { facebookReviewsData } = useSelector((state) => state.myProfile);
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
-  console.log(facebookReviewsData, viewProfileData, "facebookReviewsData");
 
   const dispatch = useDispatch();
   const {
@@ -153,7 +150,7 @@ const ReviewsAccordion = ({ details }) => {
             console.log("Facebook Login Successful. User authorized app!");
 
             const userAccessToken = response.authResponse.accessToken;
-            dispatch(sendTokenToBackend(userAccessToken));
+            sendTokenToBackend(userAccessToken);
 
             // TODO: Agla Kadam
             // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
@@ -223,44 +220,44 @@ const ReviewsAccordion = ({ details }) => {
   //   }
   // };
 
-  // const sendTokenToBackend = async (userAccessToken) => {
-  //   try {
-  //     // Step 1: Get the pages connected to user
-  //     const accountsResponse = await fetch(
-  //       `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
-  //     );
+  const sendTokenToBackend = async (userAccessToken) => {
+    try {
+      // Step 1: Get the pages connected to user
+      const accountsResponse = await fetch(
+        `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
+      );
 
-  //     const accountsData = await accountsResponse.json();
+      const accountsData = await accountsResponse.json();
 
-  //     if (accountsData && accountsData.data && accountsData.data.length > 0) {
-  //       const page = accountsData.data[0]; // Take first page (or loop through if multiple)
-  //       const pageId = page.id;
-  //       const pageAccessToken = page.access_token;
+      if (accountsData && accountsData.data && accountsData.data.length > 0) {
+        const page = accountsData.data[0]; // Take first page (or loop through if multiple)
+        const pageId = page.id;
+        const pageAccessToken = page.access_token;
 
-  //       console.log("Fetched page:", page.name, pageId);
+        console.log("Fetched page:", page.name, pageId);
 
-  //       // Step 2: Get reviews from that page
-  //       const reviewsResponse = await fetch(
-  //         `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
-  //       );
+        // Step 2: Get reviews from that page
+        const reviewsResponse = await fetch(
+          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
+        );
 
-  //       const reviewsData = await reviewsResponse.json();
+        const reviewsData = await reviewsResponse.json();
 
-  //       if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
-  //         console.log("Reviews:", reviewsData.data);
-  //         showToast("success", "Facebook reviews fetched successfully!");
-  //         // You can store reviewsData.data in state or send to backend here
-  //       } else {
-  //         showToast("info", "No reviews found on this page.");
-  //       }
-  //     } else {
-  //       showToast("error", "No Facebook pages found or invalid access token.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching Facebook data:", error);
-  //     showToast("error", "Failed to fetch Facebook data.");
-  //   }
-  // };
+        if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
+          console.log("Reviews:", reviewsData.data);
+          showToast("success", "Facebook reviews fetched successfully!");
+          // You can store reviewsData.data in state or send to backend here
+        } else {
+          showToast("info", "No reviews found on this page.");
+        }
+      } else {
+        showToast("error", "No Facebook pages found or invalid access token.");
+      }
+    } catch (error) {
+      console.error("Error fetching Facebook data:", error);
+      showToast("error", "Failed to fetch Facebook data.");
+    }
+  };
 
   const login = useGoogleLogin({
     flow: "auth-code",
@@ -599,31 +596,6 @@ const ReviewsAccordion = ({ details }) => {
               found through Localists.com. Add them today and improve new
               business wins!
             </p>
-          </>
-        )}
-
-        {/* Facebook Reviews Section */}
-        {facebookReviewsData && facebookReviewsData.length > 0 && (
-          <>
-            <label className={styles.reviewsLabel}>Facebook Reviews</label>
-            <div
-              className={`${styles.localistBox} ${
-                facebookReviewsData.length > 5 ? styles.scrollBox : ""
-              }`}
-            >
-              {facebookReviewsData.map((review, index) => (
-                <div key={index} className={styles.reviewItem}>
-                  <p>
-                    <strong>{review.reviewer?.name || "Anonymous"}</strong>
-                  </p>
-                  <p>⭐ {review.rating}</p>
-                  <p>{review.review_text || "No text provided"}</p>
-                  <p className={styles.reviewDate}>
-                    {new Date(review.created_time).toLocaleDateString()}
-                  </p>
-                </div>
-              ))}
-            </div>
           </>
         )}
       </div>
