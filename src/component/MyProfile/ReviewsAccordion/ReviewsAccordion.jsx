@@ -42,7 +42,6 @@ const ReviewsAccordion = ({ details }) => {
   const { facebookReviewsData } = useSelector((state) => state.myProfile);
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
-  console.log(facebookReviewsData, viewProfileData, "facebookReviewsData");
 
   const dispatch = useDispatch();
   const {
@@ -134,20 +133,6 @@ const ReviewsAccordion = ({ details }) => {
 
     checkSdk();
   }, []);
-  let mergedData = Array.isArray(viewProfileData.reviews)
-    ? [...viewProfileData.reviews]
-    : [];
-
-  if (Array.isArray(facebookReviewsData) && facebookReviewsData.length > 0) {
-    const transformedFacebookReviews = facebookReviewsData.map((review) => ({
-      created_at: review.created_time,
-      name: "facebook",
-      review: review.review_text,
-      ratings: "0",
-    }));
-    mergedData = [...mergedData, ...transformedFacebookReviews];
-  }
-  console.log(mergedData, "mergedData");
 
   const handleFacebookLogin = () => {
     // Double check karein ki FB SDK load ho gaya hai ya nahi
@@ -192,35 +177,28 @@ const ReviewsAccordion = ({ details }) => {
     }
   };
 
-  const sendTokenToBackend = async (token) => {
-    try {
-      // // Send the token to a specific backend endpoint
-      // const response = await post(
-      //   "https://graph.facebook.com/v20.0/me/accounts",
-      //   {
-      //     user_access_token: token,
-      //     // You might also send the Facebook Page URL/Name if the user provided it
-      //     // page_identifier: fbLink
-      //   }
+  // const sendTokenToBackend = async (token) => {
+  //   try {
+  //     // Send the token to a specific backend endpoint
+  //     const response = await post("https://graph.facebook.com/v20.0/me/accounts", {
+  //       user_access_token: token,
+  //       // You might also send the Facebook Page URL/Name if the user provided it
+  //       // page_identifier: fbLink
+  //     });
 
-      const res = await fetch(
-        `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
-      );
-      const data = await res.json();
-
-      if (response.data.success) {
-        console.log("Reviews successfully imported!", response.data.reviews);
-        // TODO: Update your component's state with the new reviews
-        showToast("success", "Facebook reviews imported successfully!");
-      } else {
-        // Handle error response from your server
-        showToast("error", "Error processing token on server.");
-      }
-    } catch (error) {
-      console.error("API call failed:", error);
-      showToast("error", "Failed to connect to backend for review processing.");
-    }
-  };
+  //     if (response.data.success) {
+  //       console.log("Reviews successfully imported!", response.data.reviews);
+  //       // TODO: Update your component's state with the new reviews
+  //       showToast("success", "Facebook reviews imported successfully!");
+  //     } else {
+  //       // Handle error response from your server
+  //       showToast("error", "Error processing token on server.");
+  //     }
+  //   } catch (error) {
+  //     console.error("API call failed:", error);
+  //     showToast("error", "Failed to connect to backend for review processing.");
+  //   }
+  // };
 
   // const sendTokenToBackend = async (token) => {
   //   try {
@@ -283,31 +261,6 @@ const ReviewsAccordion = ({ details }) => {
   //   }
   // };
 
-  // const handleFacebookLogin = () => {
-  //   if (window.FB) {
-  //     window.FB.login(
-  //       (response) => {
-  //         if (response.authResponse) {
-  //           const userAccessToken = response.authResponse.accessToken;
-
-  //           // Backend ko bhejo, Graph API ko direct mat hit karo
-  //           axiosInstance
-  //             .post("/facebook/get-reviews", { userAccessToken })
-  //             .then((res) => {
-  //               console.log("Reviews:", res.data.reviews);
-  //               showToast("success", "Fetched Facebook Reviews!");
-  //             })
-  //             .catch((err) => {
-  //               console.error(err);
-  //               showToast("error", "Failed to fetch reviews");
-  //             });
-  //         }
-  //       },
-  //       { scope: "pages_show_list,pages_read_engagement" }
-  //     );
-  //   }
-  // };
-
   const login = useGoogleLogin({
     flow: "auth-code",
     scope:
@@ -338,11 +291,15 @@ const ReviewsAccordion = ({ details }) => {
         //   }
         // );
 
-        const reviewsRes = await fetch(
-          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},review_text,rating,created_time&access_token=${pageAccessToken}`
+        const reviewsRes = await axios.post(
+          "https://dev.localists.com/google/get-reviews",
+          {
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          }
         );
-        const reviewsData = await reviewsRes.json();
-        console.log("Reviews: ", reviewsData);
+
+        console.log("Reviews from backend:", reviewsRes.data);
 
         // Store token for future use
         localStorage.setItem("google_access_token", accessToken);
@@ -644,26 +601,6 @@ const ReviewsAccordion = ({ details }) => {
           </>
         )}
       </div>
-
-      {Array.isArray(facebookReviewsData) && facebookReviewsData.length > 0 && (
-        <>
-          <label className={styles.reviewsLabel}>Facebook Reviews</label>
-          <div
-            className={`${styles.localistBox} ${
-              facebookReviewsData.length > 5 ? styles.scrollBox : ""
-            }`}
-          >
-            {facebookReviewsData.map((review, index) => (
-              <div key={index} className={styles.reviewItem}>
-                <p className={styles.reviewText}>{review.review_text}</p>
-                <small className={styles.reviewDate}>
-                  {new Date(review.created_time).toLocaleDateString()}
-                </small>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
 
       {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>
