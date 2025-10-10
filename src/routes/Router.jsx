@@ -65,6 +65,7 @@ import Transport from "../component/Level1/Transport/Transport";
 import { levelThreePagesRoutes } from "./leverThreeRoute";
 import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 import { levelOnePagesRoutes } from "./levelOneRoutes";
+import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -301,8 +302,9 @@ const routes = [
         ),
       })),
     ],
+    
   },
-
+ 
   // non-localized routes
   {
     path: "/",
@@ -669,6 +671,14 @@ const routes = [
       },
       { path: "*", element: <NotFound /> },
     ],
+  },
+   {
+    path: "/:lang/:country/multistepper",
+    element: (
+      <LocaleRedirect>
+        <MultiStepForm />
+      </LocaleRedirect>
+    ),
   },
 ];
 

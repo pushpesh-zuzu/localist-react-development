@@ -1,0 +1,95 @@
+.headingH1 {
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 48px;
+  text-align: center;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #000;
+}
+.subText {
+  background: rgba(233, 248, 255, 1);
+  max-width: fit-content;
+  font-weight: 400px;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin: auto;
+  margin-bottom: 25px;
+}
+.desciption {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  line-height: normal;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 24px;
+  color: rgba(0, 0, 0, 1);
+}
+.desciption2 {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  text-align: center;
+  line-height: normal;
+  vertical-align: middle;
+  color: rgba(0, 0, 0, 1);
+  margin-bottom: 32px;
+}
+.postcodeInput {
+  width: 100%;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.postcodeInput:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 150, 196, 0.1);
+}
+
+.postcodeInput::placeholder {
+  color: #959595;
+  font-weight: 400;
+}
+.locationicon {
+  position: absolute;
+  left: 0px;
+  top: 40%;
+  right: 40px;
+  height: 12px;
+  width: 16.5px;
+  margin-left: 10px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .postcodeInput {
+    height: 52px;
+    font-size: 15px;
+  }
+  .locationicon{
+    left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .postcodeInput {
+    height: 48px;
+    width: auto;
+    font-size: 14px;
+  }
+  .headingH1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .desciption2 {
+    margin-bottom: 0px;
+  }
+}

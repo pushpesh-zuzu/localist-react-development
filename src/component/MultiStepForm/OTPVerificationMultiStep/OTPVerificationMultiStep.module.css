@@ -1,0 +1,162 @@
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  margin-bottom: 4px;
+  color: #000000;
+}
+.VerifyText {
+  margin-bottom: 12px;
+  color: #000000;
+}
+
+.otpInputs {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.otpInput {
+  width: 47px;
+  height: 40px;
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  border-radius: 4px;
+}
+
+.instruction {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 16px;
+  text-align: center;
+  color: #828282;
+  margin-bottom: 16px;
+}
+
+.instruction span {
+  color: #000000;
+}
+
+.timerText {
+  font-family: Poppins;
+  color: #828282;
+  font-weight: 500;
+  /* margin-bottom: 16px; */
+  font-size: 16px;
+}
+
+.submitBtn {
+  box-shadow: 0px 0px 2px 0.5px #0000001a;
+  background: var(--primary-color);
+  border-radius: 3px;
+  color: white;
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer !important;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+  width: 382px;
+  margin-top: 16px;
+}
+
+.submitBtn:hover {
+  background-color: #0096c4;
+}
+
+.resendBtn {
+  box-shadow: 0px 0px 2px 0.5px var(--primary-color);
+  background: #ffffff;
+  border-radius: 3px;
+  color: var(--primary-color);
+  padding: 10px 23px;
+  border: none;
+  cursor: pointer !important;
+  font-weight: 500;
+  font-size: 20px;
+  vertical-align: middle;
+  /* margin-right: 24px; */
+  width: 382px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .modalContent {
+    padding: 24px;
+    max-width: 400px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .otpInputs {
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .otpInput {
+    width: 40px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .instruction {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+
+  .submitBtn,
+  .resendBtn {
+    padding: 10px 24px;
+    font-size: 15px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalContent {
+    padding: 20px 16px;
+    max-width: 320px;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .otpInputs {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .otpInput {
+    width: 36px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .instruction {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .submitBtn {
+    width: 150px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
+  }
+
+  .resendBtn {
+    width: 150px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 500;
+  }
+}
