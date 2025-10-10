@@ -175,26 +175,48 @@ const ReviewsAccordion = ({ details }) => {
     }
   };
 
+  // const sendTokenToBackend = async (token) => {
+  //   try {
+  //     // Send the token to a specific backend endpoint
+  //     const response = await post("https://graph.facebook.com/v20.0/me/accounts", {
+  //       user_access_token: token,
+  //       // You might also send the Facebook Page URL/Name if the user provided it
+  //       // page_identifier: fbLink
+  //     });
+
+  //     if (response.data.success) {
+  //       console.log("Reviews successfully imported!", response.data.reviews);
+  //       // TODO: Update your component's state with the new reviews
+  //       showToast("success", "Facebook reviews imported successfully!");
+  //     } else {
+  //       // Handle error response from your server
+  //       showToast("error", "Error processing token on server.");
+  //     }
+  //   } catch (error) {
+  //     console.error("API call failed:", error);
+  //     showToast("error", "Failed to connect to backend for review processing.");
+  //   }
+  // };
+
   const sendTokenToBackend = async (token) => {
     try {
-      // Send the token to a specific backend endpoint
-      const response = await axiosInstance.post("/facebook/fetch-reviews", {
-        user_access_token: token,
-        // You might also send the Facebook Page URL/Name if the user provided it
-        // page_identifier: fbLink
-      });
+      const response = await fetch(
+        `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
+      );
 
-      if (response.data.success) {
-        console.log("Reviews successfully imported!", response.data.reviews);
-        // TODO: Update your component's state with the new reviews
-        showToast("success", "Facebook reviews imported successfully!");
+      const data = await response.json();
+
+      if (data && data.data && data.data.length > 0) {
+        console.log("Facebook pages:", data.data);
+        showToast("success", "Facebook pages fetched successfully!");
+        // Yahan aap data.data ko state mein daal sakte ho ya backend bhej sakte ho
       } else {
-        // Handle error response from your server
-        showToast("error", "Error processing token on server.");
+        console.warn("No pages found or invalid token:", data);
+        showToast("error", "No Facebook pages found or invalid access token.");
       }
     } catch (error) {
       console.error("API call failed:", error);
-      showToast("error", "Failed to connect to backend for review processing.");
+      showToast("error", "Failed to fetch Facebook pages.");
     }
   };
 
