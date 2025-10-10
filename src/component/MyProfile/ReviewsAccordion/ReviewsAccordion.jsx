@@ -42,7 +42,7 @@ const ReviewsAccordion = ({ details }) => {
   const { facebookReviewsData } = useSelector((state) => state.myProfile);
   const requestId = useParams();
   const shouldDisableActions = requestId?.requestId;
-  console.log(facebookReviewsData, "facebookReviewsData");
+  console.log(facebookReviewsData, viewProfileData, "facebookReviewsData");
 
   const dispatch = useDispatch();
   const {
@@ -134,6 +134,22 @@ const ReviewsAccordion = ({ details }) => {
 
     checkSdk();
   }, []);
+
+  let mergedData = Array.isArray(viewProfileData) ? [...viewProfileData] : [];
+
+  if (Array.isArray(facebookReviewsData) && facebookReviewsData.length > 0) {
+    const transformedFacebookReviews = facebookReviewsData.map((review) => ({
+      created_at: review.created_time,
+      name: "facebook",
+      review: review.review_text,
+      ratings: "0",
+    }));
+
+    mergedData = mergedData.concat(transformedFacebookReviews);
+    mergedData.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  }
+
+  console.log(mergedData, "mergedData");
 
   const handleFacebookLogin = () => {
     // Double check karein ki FB SDK load ho gaya hai ya nahi
@@ -584,13 +600,32 @@ const ReviewsAccordion = ({ details }) => {
         </p>
         <ReviewSection details={viewProfileData} showSummary={false} />
       </div> */}
-      <div
+      {/* <div
         className={`${styles.localistBox} ${
           (viewProfileData?.reviews_count ?? 0) > 5 ? styles.scrollBox : ""
         }`}
       >
         {viewProfileData?.reviews_count > 0 ? (
           <ReviewSection details={viewProfileData} showSummary={false} />
+        ) : (
+          <>
+            <strong>You don’t have any reviews yet on Localists.com</strong>
+            <p>
+              Your reviews can come from any of your customers — not just those
+              found through Localists.com. Add them today and improve new
+              business wins!
+            </p>
+          </>
+        )}
+      </div> */}
+
+      <div
+        className={`${styles.localistBox} ${
+          mergedData.length > 5 ? styles.scrollBox : ""
+        }`}
+      >
+        {mergedData.length > 0 ? (
+          <ReviewSection details={mergedData} showSummary={false} />
         ) : (
           <>
             <strong>You don’t have any reviews yet on Localists.com</strong>
