@@ -360,6 +360,7 @@ const BuyerRegistrationLandingPage = ({
               postalCodeIsValidate={postalCodeValidate}
               resetServiceTrigger={resetServiceFormTrigger}
               isStartWithQuestionModal={isStartWithQuestionModal}
+              getService={getService}
             />
           )}
 

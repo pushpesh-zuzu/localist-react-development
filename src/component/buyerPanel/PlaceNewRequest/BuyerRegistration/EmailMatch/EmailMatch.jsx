@@ -23,7 +23,7 @@ const EmailMatch = ({
   setEmails,
   setShowConfirmModal,
   resetTrigger,
-  isStartWithQuestionModal,
+  isStartWithQuestionModal=false,
   isPPCPages = false,
   hideCloseButton = false,
 }) => {

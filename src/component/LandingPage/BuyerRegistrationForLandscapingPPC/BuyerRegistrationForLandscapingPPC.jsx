@@ -177,6 +177,7 @@ const BuyerRegistrationForLandscapingPPC = ({
           postalCodeIsValidate={postalCodeValidate}
           resetServiceTrigger={resetServiceFormTrigger}
           isStartWithQuestionModal
+          getService={getService}
         />
       )}
 
