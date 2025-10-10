@@ -149,48 +149,48 @@ const ReviewsAccordion = ({ details }) => {
   }
   console.log(mergedData, "mergedData");
 
-  const handleFacebookLogin = () => {
-    // Double check karein ki FB SDK load ho gaya hai ya nahi
-    if (window.FB) {
-      // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
-      const requiredScopes = [
-        "public_profile",
-        // "email",
-        "pages_show_list",
-        // "pages_read_user_content",
-      ].join(",");
+  // const handleFacebookLogin = () => {
+  //   // Double check karein ki FB SDK load ho gaya hai ya nahi
+  //   if (window.FB) {
+  //     // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
+  //     const requiredScopes = [
+  //       "public_profile",
+  //       // "email",
+  //       "pages_show_list",
+  //       // "pages_read_user_content",
+  //     ].join(",");
 
-      // Facebook Login Pop-up open karein
-      window.FB.login(
-        function (response) {
-          if (response.authResponse) {
-            console.log("Facebook Login Successful. User authorized app!");
+  //     // Facebook Login Pop-up open karein
+  //     window.FB.login(
+  //       function (response) {
+  //         if (response.authResponse) {
+  //           console.log("Facebook Login Successful. User authorized app!");
 
-            const userAccessToken = response.authResponse.accessToken;
-            dispatch(sendTokenToBackend(userAccessToken));
+  //           const userAccessToken = response.authResponse.accessToken;
+  //           dispatch(sendTokenToBackend(userAccessToken));
 
-            // TODO: Agla Kadam
-            // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
-            // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
-            // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
+  //           // TODO: Agla Kadam
+  //           // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
+  //           // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
+  //           // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
 
-            showToast(
-              "success",
-              "Successfully logged into Facebook. Fetching pages..."
-            );
-            // Example: sendUserTokenToBackend(userAccessToken);
-          } else {
-            console.error("Facebook Login Failed or Cancelled.");
-            showToast("error", "Facebook login was cancelled or denied.");
-          }
-        },
-        { scope: requiredScopes }
-      );
-    } else {
-      // Agar SDK abhi tak load nahi hua hai
-      showToast("error", "Facebook SDK is still loading. Please try again.");
-    }
-  };
+  //           showToast(
+  //             "success",
+  //             "Successfully logged into Facebook. Fetching pages..."
+  //           );
+  //           // Example: sendUserTokenToBackend(userAccessToken);
+  //         } else {
+  //           console.error("Facebook Login Failed or Cancelled.");
+  //           showToast("error", "Facebook login was cancelled or denied.");
+  //         }
+  //       },
+  //       { scope: requiredScopes }
+  //     );
+  //   } else {
+  //     // Agar SDK abhi tak load nahi hua hai
+  //     showToast("error", "Facebook SDK is still loading. Please try again.");
+  //   }
+  // };
 
   // const sendTokenToBackend = async (token) => {
   //   try {
@@ -275,6 +275,31 @@ const ReviewsAccordion = ({ details }) => {
   //     showToast("error", "Failed to fetch Facebook data.");
   //   }
   // };
+
+  const handleFacebookLogin = () => {
+    if (window.FB) {
+      window.FB.login(
+        (response) => {
+          if (response.authResponse) {
+            const userAccessToken = response.authResponse.accessToken;
+
+            // Backend ko bhejo, Graph API ko direct mat hit karo
+            axiosInstance
+              .post("/facebook/get-reviews", { userAccessToken })
+              .then((res) => {
+                console.log("Reviews:", res.data.reviews);
+                showToast("success", "Fetched Facebook Reviews!");
+              })
+              .catch((err) => {
+                console.error(err);
+                showToast("error", "Failed to fetch reviews");
+              });
+          }
+        },
+        { scope: "pages_show_list,pages_read_engagement" }
+      );
+    }
+  };
 
   const login = useGoogleLogin({
     flow: "auth-code",
