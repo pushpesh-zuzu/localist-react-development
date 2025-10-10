@@ -30,6 +30,8 @@ const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
   const [isFbSdkReady, setIsFbSdkReady] = useState(false);
   const [googleLink, setGoogleLink] = useState("");
+
+  const [fbReviews, setFbReviews] = useState([]);
   const navigate = useNavigate();
 
   const [isShareOpen, setIsShareOpen] = useState(false);
@@ -244,6 +246,7 @@ const ReviewsAccordion = ({ details }) => {
         const reviewsData = await reviewsResponse.json();
 
         if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
+          setFbReviews(reviewsData.data);
           console.log("Reviews:", reviewsData.data);
           showToast("success", "Facebook reviews fetched successfully!");
           // You can store reviewsData.data in state or send to backend here
@@ -599,6 +602,21 @@ const ReviewsAccordion = ({ details }) => {
           </>
         )}
       </div>
+
+      {fbReviews.length > 0 && (
+        <div className={styles.localistBox}>
+          <h3>Facebook Reviews</h3>
+          {fbReviews.map((rev, idx) => (
+            <div key={idx} className={styles.reviewCard}>
+              <p>
+                <strong>{rev.reviewer?.name}</strong> ({rev.rating}⭐)
+              </p>
+              <p>{rev.review_text || "No text provided"}</p>
+              <small>{new Date(rev.created_time).toLocaleDateString()}</small>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>
