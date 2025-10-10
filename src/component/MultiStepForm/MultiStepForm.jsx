@@ -13,6 +13,7 @@ import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumb
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
 import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
+import { Helmet } from "react-helmet-async";
 
 const MultiStepForm = () => {
   const location = useLocation();
@@ -43,7 +44,7 @@ const MultiStepForm = () => {
   const [isComingFromStep3, setIsComingFromStep3] = useState(false); // ⭐ YE ADD KARO
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
-    const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -110,12 +111,11 @@ const MultiStepForm = () => {
       // const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
-  }, [dispatch,isAdminOrRemembered]);
+  }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
     dispatch(questionAnswerData({ service_id: 43 }));
   }, []);
-  console.log(questionLoader,'llllll')
   // console.log(buyerRequest,'currentStep')
   // console.log(questionanswerData,'questionanswerDataquestionanswerData')
   // Split questions into first part and last question
@@ -125,14 +125,23 @@ const MultiStepForm = () => {
   //   console.log("STEP CHANGE ->", currentStep);
   //   console.trace(); // shows call stack to see who triggered it
   // }, [currentStep]);
-    useEffect(() => {
-      if (questionanswerData.length > 0) {
-        setIsLoadingQuestions(false);
-      }
-    }, [questionanswerData]);
-    console.log(buyerStep,'bs')
+  useEffect(() => {
+    if (questionanswerData.length > 0) {
+      setIsLoadingQuestions(false);
+    }
+  }, [questionanswerData]);
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+        <title>Compare Free Quotes from Local Landscapers | Localists</title>
+
+        <meta
+          name="description"
+          content="Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!"
+        />
+      </Helmet>
+
       {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
