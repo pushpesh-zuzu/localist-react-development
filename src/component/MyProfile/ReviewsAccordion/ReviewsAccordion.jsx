@@ -198,25 +198,64 @@ const ReviewsAccordion = ({ details }) => {
   //   }
   // };
 
-  const sendTokenToBackend = async (token) => {
+  // const sendTokenToBackend = async (token) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (data && data.data && data.data.length > 0) {
+  //       console.log("Facebook pages:", data.data);
+  //       showToast("success", "Facebook pages fetched successfully!");
+  //       // Yahan aap data.data ko state mein daal sakte ho ya backend bhej sakte ho
+  //     } else {
+  //       console.warn("No pages found or invalid token:", data);
+  //       showToast("error", "No Facebook pages found or invalid access token.");
+  //     }
+  //   } catch (error) {
+  //     console.error("API call failed:", error);
+  //     showToast("error", "Failed to fetch Facebook pages.");
+  //   }
+  // };
+
+  const sendTokenToBackend = async (userAccessToken) => {
     try {
-      const response = await fetch(
-        `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
+      // Step 1: Get the pages connected to user
+      const accountsResponse = await fetch(
+        `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
       );
 
-      const data = await response.json();
+      const accountsData = await accountsResponse.json();
 
-      if (data && data.data && data.data.length > 0) {
-        console.log("Facebook pages:", data.data);
-        showToast("success", "Facebook pages fetched successfully!");
-        // Yahan aap data.data ko state mein daal sakte ho ya backend bhej sakte ho
+      if (accountsData && accountsData.data && accountsData.data.length > 0) {
+        const page = accountsData.data[0]; // Take first page (or loop through if multiple)
+        const pageId = page.id;
+        const pageAccessToken = page.access_token;
+
+        console.log("Fetched page:", page.name, pageId);
+
+        // Step 2: Get reviews from that page
+        const reviewsResponse = await fetch(
+          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
+        );
+
+        const reviewsData = await reviewsResponse.json();
+
+        if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
+          console.log("Reviews:", reviewsData.data);
+          showToast("success", "Facebook reviews fetched successfully!");
+          // You can store reviewsData.data in state or send to backend here
+        } else {
+          showToast("info", "No reviews found on this page.");
+        }
       } else {
-        console.warn("No pages found or invalid token:", data);
         showToast("error", "No Facebook pages found or invalid access token.");
       }
     } catch (error) {
-      console.error("API call failed:", error);
-      showToast("error", "Failed to fetch Facebook pages.");
+      console.error("Error fetching Facebook data:", error);
+      showToast("error", "Failed to fetch Facebook data.");
     }
   };
 
