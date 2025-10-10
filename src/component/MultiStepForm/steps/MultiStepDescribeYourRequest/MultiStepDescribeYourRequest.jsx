@@ -121,7 +121,7 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
 
   const handleCloseClick = () => {
     // setShowConfirmModal(true);
-    onClose();
+    onClose && onClose();
     dispatch(clearSetbuyerRequestData());
     dispatch(clearBuyerRegisterFormData());
   };
