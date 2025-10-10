@@ -110,7 +110,7 @@ const MultiStepForm = () => {
       // const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
-  }, [dispatch]);
+  }, [dispatch,isAdminOrRemembered]);
 
   useEffect(() => {
     dispatch(questionAnswerData({ service_id: 43 }));
@@ -130,6 +130,7 @@ const MultiStepForm = () => {
         setIsLoadingQuestions(false);
       }
     }, [questionanswerData]);
+    console.log(buyerStep,'bs')
   return (
     <>
       {/* <img className={styles.logoImg} src={logo} /> */}
