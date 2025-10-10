@@ -142,6 +142,7 @@ const ReviewsAccordion = ({ details }) => {
         "public_profile",
         // "email",
         "pages_show_list",
+        "pages_read_user_content",
         // "pages_read_user_content",
       ].join(",");
 
@@ -240,7 +241,7 @@ const ReviewsAccordion = ({ details }) => {
 
         // Step 2: Get reviews from that page
         const reviewsResponse = await fetch(
-          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
+          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{id,name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
         );
 
         const reviewsData = await reviewsResponse.json();
