@@ -133,18 +133,16 @@ export const sellerPhoneNumberVerifyApi = (phoneData) => {
   };
 };
 
-export const createUserTokenApiCall = async (userAccessToken) => {
-  console.log(userAccessToken, "userAccessToken 1");
+export const createUserTokenApiCall = (userAccessToken) => {
   return async (dispatch) => {
+    console.log(userAccessToken, "useraccesstoken");
     dispatch(setSellerUpdateLoader(true));
-    console.log(userAccessToken, "userAccessToken 2");
     try {
-      console.log(userAccessToken, "userAccessToken 3");
       const response = await axiosInstance.post(
         `https://dev.localists.com/admin/api/users/facebook/create-token`,
         { user_access_token: userAccessToken }
       );
-      console.log("hgvdge", response);
+
       if (response) {
         dispatch(setFacebookReview(response?.data));
         return response?.data;

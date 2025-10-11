@@ -154,9 +154,11 @@ const ReviewsAccordion = ({ details }) => {
             (async () => {
               try {
                 // ✅ Properly dispatch the thunk action
-                const data = dispatch(createUserTokenApiCall(userAccessToken));
+                const abcedfg = dispatch(
+                  createUserTokenApiCall(userAccessToken)
+                );
 
-                if (data) {
+                if (abcedfg) {
                   const review = await dispatch(getUserTokenApicall()); // Assuming this is also a thunk
                   console.log("Fetched review:", review);
                 }
