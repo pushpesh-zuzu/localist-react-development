@@ -161,7 +161,7 @@ export const getUserTokenApicall = (userAccessToken) => {
     dispatch(setSellerUpdateLoader(true));
     try {
       const response = await axiosInstance.post(
-        `https://dev.localists.com/admin/api/users/facebook/create-token`,
+        `https://dev.localists.com/admin/api/users/facebook/get-token`,
         {}
       );
 
