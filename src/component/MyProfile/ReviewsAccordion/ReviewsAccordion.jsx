@@ -145,28 +145,27 @@ const ReviewsAccordion = ({ details }) => {
       ].join(",");
 
       window.FB.login(
-        async (response) => {
+        function (response) {
           if (response.authResponse) {
             console.log("Facebook Login Successful. User authorized app!");
-
             const userAccessToken = response.authResponse.accessToken;
 
-            try {
-              const data = await createUserTokenApiCall(userAccessToken);
-              console.log(data, "data");
-              const reviews = await getUserTokenApicall();
-              console.log("reviews >>>>>>>> :", reviews);
-              showToast(
-                "success",
-                "Successfully logged into Facebook. Fetching pages..."
-              );
-            } catch (err) {
-              console.error("Error in API call:", err);
-              showToast(
-                "error",
-                "Error while fetching user token from backend."
-              );
-            }
+            // Define an async function and call it
+            (async () => {
+              try {
+                const data = await createUserTokenApiCall(userAccessToken);
+                showToast(
+                  "success",
+                  "Successfully logged into Facebook. Fetching pages..."
+                );
+              } catch (err) {
+                console.error("Error in API call:", err);
+                showToast(
+                  "error",
+                  "Error while fetching user token from backend."
+                );
+              }
+            })();
           } else {
             console.error("Facebook Login Failed or Cancelled.");
             showToast("error", "Facebook login was cancelled or denied.");
