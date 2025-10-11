@@ -148,21 +148,24 @@ const ReviewsAccordion = ({ details }) => {
         function (response) {
           if (response.authResponse) {
             console.log("Facebook Login Successful. User authorized app!");
-            const userAccessToken = response.authResponse.accessToken;
 
             // Define an async function inside and call it
             (async () => {
               try {
-                // ✅ Properly dispatch the thunk action
-                const abcedfg = dispatch(
-                  createUserTokenApiCall(userAccessToken)
-                );
-
-                if (abcedfg) {
-                  const review = await dispatch(getUserTokenApicall()); // Assuming this is also a thunk
-                  console.log("Fetched review:", review);
+                const review = dispatch(getUserTokenApicall()); // Assuming this is also a thunk
+                console.log("Fetched review:", review);
+                if (
+                  review.status == false ||
+                  (review.status == true && review.message.expired == "no")
+                ) {
+                  const userAccessToken = response.authResponse.accessToken;
+                  const accessToken = dispatch(
+                    createUserTokenApiCall(userAccessToken)
+                  );
+                  if (accessToken) {
+                    const review = dispatch(getUserTokenApicall());
+                  }
                 }
-
                 showToast(
                   "success",
                   "Successfully logged into Facebook. Fetching pages..."
