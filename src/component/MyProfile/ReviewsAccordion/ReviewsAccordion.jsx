@@ -154,7 +154,7 @@ const ReviewsAccordion = ({ details }) => {
             console.log("Facebook Login Successful. User authorized app!");
 
             const userAccessToken = response.authResponse.accessToken;
-            sendTokenToBackend(userAccessToken);
+            // sendTokenToBackend(userAccessToken);
             createUserTokenApiCall(userAccessToken);
             showToast(
               "success",
