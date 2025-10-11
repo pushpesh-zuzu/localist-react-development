@@ -665,6 +665,7 @@ export const {
   setReviewListLoader,
   setGetReviewData,
   setEditProfileList,
+  setFacebookReview,
   setSellerUpdateLoader,
   clearUpdateStatus,
   clearPhotoUpdateStatus,
