@@ -134,6 +134,7 @@ export const sellerPhoneNumberVerifyApi = (phoneData) => {
 };
 
 export const createUserTokenApiCall = (userAccessToken) => {
+  console.log(userAccessToken, "userAccessToken");
   return async (dispatch) => {
     dispatch(setSellerUpdateLoader(true));
     try {
