@@ -49,12 +49,15 @@ export default defineConfig(({ mode, ssrBuild }) => {
       outDir: "dist/client",
       manifest: true,
       chunkSizeWarningLimit: 2048,
+      sourcemap: true,
       rollupOptions: {
         output: {
           assetFileNames: "assets/[name]-[hash][extname]",
           chunkFileNames: "assets/[name]-[hash].js",
           // Ensure SSR bundle predictable name for server import
-          entryFileNames: ssrBuild ? "entry-server.js" : "assets/[name]-[hash].js"
+          entryFileNames: ssrBuild
+            ? "entry-server.js"
+            : "assets/[name]-[hash].js",
         },
       },
     },
