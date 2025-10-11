@@ -27,6 +27,7 @@ import shareIcon from "../../../assets/Icons/share.svg";
 import jwt_decode from "jwt-decode";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
@@ -150,14 +151,19 @@ const ReviewsAccordion = ({ details }) => {
             console.log("Facebook Login Successful. User authorized app!");
             const userAccessToken = response.authResponse.accessToken;
 
-            // Define an async function and call it
-            (() => {
+            // Define an async function inside and call it
+            (async () => {
               try {
-                const data = createUserTokenApiCall(userAccessToken);
+                // ✅ Properly dispatch the thunk action
+                const data = await dispatch(
+                  createUserTokenApiCall(userAccessToken)
+                );
+
                 if (data) {
-                  const review = getUserTokenApicall();
-                  console.log(review);
+                  const review = await dispatch(getUserTokenApicall()); // Assuming this is also a thunk
+                  console.log("Fetched review:", review);
                 }
+
                 showToast(
                   "success",
                   "Successfully logged into Facebook. Fetching pages..."
