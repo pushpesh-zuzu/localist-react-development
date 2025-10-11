@@ -136,14 +136,13 @@ const ReviewsAccordion = ({ details }) => {
     checkSdk();
   }, []);
 
-  const handleFacebookLogin = () => {
-    const review = dispatch(getUserTokenApicall());
+  const handleFacebookLogin = async () => {
+    const review = await dispatch(getUserTokenApicall());
+
     if (
-      review.status == false ||
-      (review.status == true && review.message.expired == "no")
+      review?.status === false ||
+      (review?.status === true && review?.message?.expired === "no")
     ) {
-      // Assuming this is also a thunk
-      console.log("Fetched review:", review);
       if (window.FB) {
         const requiredScopes = [
           "public_profile",
@@ -156,15 +155,17 @@ const ReviewsAccordion = ({ details }) => {
             if (response.authResponse) {
               console.log("Facebook Login Successful. User authorized app!");
 
-              // Define an async function inside and call it
               (async () => {
                 try {
                   const userAccessToken = response.authResponse.accessToken;
-                  const accessToken = dispatch(
+
+                  const accessToken = await dispatch(
                     createUserTokenApiCall(userAccessToken)
                   );
+
                   if (accessToken) {
-                    const review = dispatch(getUserTokenApicall());
+                    const updatedReview = await dispatch(getUserTokenApicall());
+                    console.log("Fetched updated review:", updatedReview);
                   }
 
                   showToast(
