@@ -137,27 +137,28 @@ const ReviewsAccordion = ({ details }) => {
   }, []);
 
   const handleFacebookLogin = () => {
-    if (window.FB) {
-      const requiredScopes = [
-        "public_profile",
-        "pages_show_list",
-        "pages_read_user_content",
-      ].join(",");
+    const review = dispatch(getUserTokenApicall());
+    if (
+      review.status == false ||
+      (review.status == true && review.message.expired == "no")
+    ) {
+      // Assuming this is also a thunk
+      console.log("Fetched review:", review);
+      if (window.FB) {
+        const requiredScopes = [
+          "public_profile",
+          "pages_show_list",
+          "pages_read_user_content",
+        ].join(",");
 
-      window.FB.login(
-        function (response) {
-          if (response.authResponse) {
-            console.log("Facebook Login Successful. User authorized app!");
+        window.FB.login(
+          function (response) {
+            if (response.authResponse) {
+              console.log("Facebook Login Successful. User authorized app!");
 
-            // Define an async function inside and call it
-            (async () => {
-              try {
-                const review = dispatch(getUserTokenApicall()); // Assuming this is also a thunk
-                console.log("Fetched review:", review);
-                if (
-                  review.status == false ||
-                  (review.status == true && review.message.expired == "no")
-                ) {
+              // Define an async function inside and call it
+              (async () => {
+                try {
                   const userAccessToken = response.authResponse.accessToken;
                   const accessToken = dispatch(
                     createUserTokenApiCall(userAccessToken)
@@ -165,26 +166,27 @@ const ReviewsAccordion = ({ details }) => {
                   if (accessToken) {
                     const review = dispatch(getUserTokenApicall());
                   }
+
+                  showToast(
+                    "success",
+                    "Successfully logged into Facebook. Fetching pages..."
+                  );
+                } catch (err) {
+                  console.error("Error in API call:", err);
+                  showToast(
+                    "error",
+                    "Error while fetching user token from backend."
+                  );
                 }
-                showToast(
-                  "success",
-                  "Successfully logged into Facebook. Fetching pages..."
-                );
-              } catch (err) {
-                console.error("Error in API call:", err);
-                showToast(
-                  "error",
-                  "Error while fetching user token from backend."
-                );
-              }
-            })();
-          } else {
-            console.error("Facebook Login Failed or Cancelled.");
-            showToast("error", "Facebook login was cancelled or denied.");
-          }
-        },
-        { scope: requiredScopes }
-      );
+              })();
+            } else {
+              console.error("Facebook Login Failed or Cancelled.");
+              showToast("error", "Facebook login was cancelled or denied.");
+            }
+          },
+          { scope: requiredScopes }
+        );
+      }
     } else {
       showToast("error", "Facebook SDK is still loading. Please try again.");
     }
