@@ -151,11 +151,11 @@ const ReviewsAccordion = ({ details }) => {
             const userAccessToken = response.authResponse.accessToken;
 
             // Define an async function and call it
-            (async () => {
+            (() => {
               try {
-                const data = await createUserTokenApiCall(userAccessToken);
+                const data = createUserTokenApiCall(userAccessToken);
                 if (data) {
-                  const review = await getUserTokenApicall();
+                  const review = getUserTokenApicall();
                   console.log(review);
                 }
                 showToast(

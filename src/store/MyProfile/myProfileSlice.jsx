@@ -142,6 +142,7 @@ export const createUserTokenApiCall = async (userAccessToken) => {
         `https://dev.localists.com/admin/api/users/facebook/create-token`,
         { user_access_token: userAccessToken }
       );
+      console.log("hgvdge", response);
       if (response) {
         dispatch(setFacebookReview(response?.data));
         return response?.data;
