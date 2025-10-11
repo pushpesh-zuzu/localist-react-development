@@ -143,7 +143,7 @@ export const createUserTokenApiCall = async (userAccessToken) => {
         { user_access_token: userAccessToken }
       );
       if (response) {
-        // dispatch(setEditProfileList(response?.data?.data));
+        dispatch(setFacebookReview(response?.data));
         return response?.data;
       }
     } catch (error) {
@@ -166,7 +166,7 @@ export const getUserTokenApicall = async (userAccessToken) => {
 
       console.log(response);
       if (response) {
-        // dispatch(setEditProfileList(response?.data?.data));
+        dispatch(setEditProfileList(response?.data?.data));
         console.log(response, "response");
         return response?.data;
       }
@@ -525,6 +525,9 @@ const myprofileSlice = createSlice({
     },
     setEditProfileList(state, action) {
       state.editProfileList = action.payload;
+    },
+    setFacebookReview(state, payload) {
+      state.facebookReviews = action.payload;
     },
     setSellerUpdateLoader(state, action) {
       state.sellerLoader = action.payload;
