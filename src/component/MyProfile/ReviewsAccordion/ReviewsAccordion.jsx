@@ -632,19 +632,21 @@ const ReviewsAccordion = ({ details }) => {
       </div>
 
       {fbReviews.length > 0 && (
-        <div className="facebook-reviews-wrapper">
-          <h3>Facebook Reviews</h3>
+        <div className={styles.localistBox}>
+          <h3 className={styles.reviewHeading}>Facebook Reviews</h3>
 
-          <div className="reviews-slider">
+          <div className={styles.reviewSlider}>
             {fbReviews.map((rev, idx) => (
-              <div key={idx} className="review-card">
-                <div className="review-header">
-                  <div className="avatar">{rev.reviewer?.name?.[0]}</div>
-                  <div className="reviewer-info">
-                    <strong className="reviewer-name">
+              <div key={idx} className={styles.reviewCard}>
+                <div className={styles.reviewHeader}>
+                  <div className={styles.avatar}>
+                    {rev.reviewer?.name?.[0] || "?"}
+                  </div>
+                  <div className={styles.reviewerInfo}>
+                    <strong className={styles.reviewerName}>
                       {rev.reviewer?.name}
                     </strong>
-                    <span className="review-date">
+                    <span className={styles.reviewDate}>
                       {new Date(rev.created_time).toLocaleDateString("en-GB", {
                         day: "2-digit",
                         month: "short",
@@ -654,22 +656,22 @@ const ReviewsAccordion = ({ details }) => {
                   </div>
                 </div>
 
-                <div className="review-stars">
+                <div className={styles.reviewStars}>
                   {Array.from({ length: rev.rating }, (_, i) => (
                     <span key={i}>⭐</span>
                   ))}
                 </div>
 
-                <p className="review-text">
+                <p className={styles.reviewText}>
                   {rev.review_text || "No text provided."}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="review-nav-buttons">
-            <button className="nav-btn prev">←</button>
-            <button className="nav-btn next">→</button>
+          <div className={styles.reviewNavButtons}>
+            <button className={styles.navBtn}>←</button>
+            <button className={`${styles.navBtn} ${styles.next}`}>→</button>
           </div>
         </div>
       )}
