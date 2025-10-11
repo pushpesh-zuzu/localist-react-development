@@ -139,6 +139,18 @@ const ReviewsAccordion = ({ details }) => {
   const handleFacebookLogin = async () => {
     const review = await dispatch(getUserTokenApicall());
 
+    if ((review.status = true)) {
+      const reviewsResponse = await fetch(
+        `https://graph.facebook.com/v20.0/${review.message.page_id}/ratings?access_token=${review.message.page_access_token}`
+      );
+
+      const reviewsData = await reviewsResponse.json();
+
+      if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
+        setFbReviews(reviewsData.data);
+        console.log("Reviews:", reviewsData.data);
+      }
+    }
     if (
       review?.status === false ||
       (review?.status === true && review?.message?.expired === "no")
