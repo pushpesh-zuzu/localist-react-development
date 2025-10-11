@@ -9,6 +9,7 @@ import {
   getCustomerLinkApi,
   updateFacebookReviewLink,
   createUserTokenApiCall,
+  getUserTokenApicall,
 } from "../../../store/MyProfile/myProfileSlice";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 import axiosInstance from "../../../Api/axiosInstance";
@@ -136,32 +137,36 @@ const ReviewsAccordion = ({ details }) => {
   }, []);
 
   const handleFacebookLogin = () => {
-    // Double check karein ki FB SDK load ho gaya hai ya nahi
     if (window.FB) {
-      // Reviews fetch karne aur Page Access Token lene ke liye zaroori permissions
       const requiredScopes = [
         "public_profile",
-        // "email",
         "pages_show_list",
         "pages_read_user_content",
-        // "pages_read_user_content",
       ].join(",");
 
-      // Facebook Login Pop-up open karein
       window.FB.login(
-        function (response) {
+        async (response) => {
           if (response.authResponse) {
             console.log("Facebook Login Successful. User authorized app!");
 
             const userAccessToken = response.authResponse.accessToken;
-            // sendTokenToBackend(userAccessToken);
-            createUserTokenApiCall(userAccessToken);
-            showToast(
-              "success",
-              "Successfully logged into Facebook. Fetching pages..."
-            );
 
-            // Example: sendUserTokenToBackend(userAccessToken);
+            try {
+              const data = await createUserTokenApiCall(userAccessToken);
+              console.log(data, "data");
+              const reviews = await getUserTokenApicall();
+              console.log("reviews >>>>>>>> :", reviews);
+              showToast(
+                "success",
+                "Successfully logged into Facebook. Fetching pages..."
+              );
+            } catch (err) {
+              console.error("Error in API call:", err);
+              showToast(
+                "error",
+                "Error while fetching user token from backend."
+              );
+            }
           } else {
             console.error("Facebook Login Failed or Cancelled.");
             showToast("error", "Facebook login was cancelled or denied.");
@@ -170,7 +175,6 @@ const ReviewsAccordion = ({ details }) => {
         { scope: requiredScopes }
       );
     } else {
-      // Agar SDK abhi tak load nahi hua hai
       showToast("error", "Facebook SDK is still loading. Please try again.");
     }
   };

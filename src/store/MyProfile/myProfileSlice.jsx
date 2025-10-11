@@ -133,7 +133,7 @@ export const sellerPhoneNumberVerifyApi = (phoneData) => {
   };
 };
 
-export const createUserTokenApiCall = (userAccessToken) => {
+export const createUserTokenApiCall = async (userAccessToken) => {
   console.log(userAccessToken, "userAccessToken");
   return async (dispatch) => {
     dispatch(setSellerUpdateLoader(true));
@@ -144,6 +144,28 @@ export const createUserTokenApiCall = (userAccessToken) => {
       );
       if (response) {
         // dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
+
+export const getUserTokenApicall = async (userAccessToken) => {
+  console.log(userAccessToken, "userAccessToken");
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `https://dev.localists.com/admin/api/users/facebook/create-token`,
+        {}
+      );
+      if (response) {
+        // dispatch(setEditProfileList(response?.data?.data));
+        console.log(response, "response");
         return response?.data;
       }
     } catch (error) {
