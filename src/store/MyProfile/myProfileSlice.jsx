@@ -526,7 +526,7 @@ const myprofileSlice = createSlice({
     setEditProfileList(state, action) {
       state.editProfileList = action.payload;
     },
-    setFacebookReview(state, payload) {
+    setFacebookReview(state, action) {
       state.facebookReviews = action.payload;
     },
     setSellerUpdateLoader(state, action) {
