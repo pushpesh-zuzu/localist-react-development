@@ -1,11 +1,12 @@
 import ReactDom from "react-dom/client";
 import { HelmetProvider } from "react-helmet-async";
-import App from "./App";
+import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { createStore } from "./store/index.js";
 
 // Rehydrate with server state to avoid extra client work and mismatches
-const preloadedState = (typeof window !== "undefined" && window.__PRELOADED_STATE__) || {};
+const preloadedState =
+  (typeof window !== "undefined" && window.__PRELOADED_STATE__) || {};
 if (typeof window !== "undefined") {
   try {
     delete window.__PRELOADED_STATE__;
