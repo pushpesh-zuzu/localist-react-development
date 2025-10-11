@@ -27,7 +27,6 @@ import shareIcon from "../../../assets/Icons/share.svg";
 import jwt_decode from "jwt-decode";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useDispatch } from "react-redux";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
