@@ -142,7 +142,7 @@ export const createUserTokenApiCall = (userAccessToken) => {
         `https://dev.localists.com/admin/api/users/facebook/create-token`,
         { user_access_token: userAccessToken }
       );
-
+      console.log(response, "response");
       if (response) {
         dispatch(setFacebookReview(response?.data));
         return response?.data;
@@ -155,9 +155,9 @@ export const createUserTokenApiCall = (userAccessToken) => {
   };
 };
 
-export const getUserTokenApicall = async (userAccessToken) => {
-  console.log(userAccessToken, "userAccessToken");
+export const getUserTokenApicall = (userAccessToken) => {
   return async (dispatch) => {
+    console.log(userAccessToken, "userAccessToken");
     dispatch(setSellerUpdateLoader(true));
     try {
       const response = await axiosInstance.post(
