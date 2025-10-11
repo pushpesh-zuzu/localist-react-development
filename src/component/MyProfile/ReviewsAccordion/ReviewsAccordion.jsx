@@ -154,6 +154,10 @@ const ReviewsAccordion = ({ details }) => {
             (async () => {
               try {
                 const data = await createUserTokenApiCall(userAccessToken);
+                if (data) {
+                  const review = await getUserTokenApicall();
+                  console.log(review);
+                }
                 showToast(
                   "success",
                   "Successfully logged into Facebook. Fetching pages..."

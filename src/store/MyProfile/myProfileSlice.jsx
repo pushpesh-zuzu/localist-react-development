@@ -163,6 +163,8 @@ export const getUserTokenApicall = async (userAccessToken) => {
         `https://dev.localists.com/admin/api/users/facebook/create-token`,
         {}
       );
+
+      console.log(response);
       if (response) {
         // dispatch(setEditProfileList(response?.data?.data));
         console.log(response, "response");
