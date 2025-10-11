@@ -632,17 +632,45 @@ const ReviewsAccordion = ({ details }) => {
       </div>
 
       {fbReviews.length > 0 && (
-        <div className={styles.localistBox}>
+        <div className="facebook-reviews-wrapper">
           <h3>Facebook Reviews</h3>
-          {fbReviews.map((rev, idx) => (
-            <div key={idx} className={styles.reviewCard}>
-              <p>
-                <strong>{rev.reviewer?.name}</strong> ({rev.rating}⭐)
-              </p>
-              <p>{rev.review_text || "No text provided"}</p>
-              <small>{new Date(rev.created_time).toLocaleDateString()}</small>
-            </div>
-          ))}
+
+          <div className="reviews-slider">
+            {fbReviews.map((rev, idx) => (
+              <div key={idx} className="review-card">
+                <div className="review-header">
+                  <div className="avatar">{rev.reviewer?.name?.[0]}</div>
+                  <div className="reviewer-info">
+                    <strong className="reviewer-name">
+                      {rev.reviewer?.name}
+                    </strong>
+                    <span className="review-date">
+                      {new Date(rev.created_time).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="review-stars">
+                  {Array.from({ length: rev.rating }, (_, i) => (
+                    <span key={i}>⭐</span>
+                  ))}
+                </div>
+
+                <p className="review-text">
+                  {rev.review_text || "No text provided."}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="review-nav-buttons">
+            <button className="nav-btn prev">←</button>
+            <button className="nav-btn next">→</button>
+          </div>
         </div>
       )}
 
