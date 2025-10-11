@@ -132,6 +132,27 @@ export const sellerPhoneNumberVerifyApi = (phoneData) => {
     }
   };
 };
+
+export const createUserTokenApiCall = (userAccessToken) => {
+  return async (dispatch) => {
+    dispatch(setSellerUpdateLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `https://dev.localists.com/admin/api/users/facebook/create-token`,
+        { user_access_token: userAccessToken }
+      );
+      if (response) {
+        // dispatch(setEditProfileList(response?.data?.data));
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerUpdateLoader(false));
+    }
+  };
+};
+
 export const sellerPhoneNumberVerifyDataApi = (otpData) => {
   return async (dispatch) => {
     dispatch(setSellerUpdateLoader(true));
@@ -430,46 +451,6 @@ export const updateFacebookReviewLink = createAsyncThunk(
   }
 );
 
-export const sendTokenToBackend = async (userAccessToken) => {
-  try {
-    // Step 1: Get the pages connected to user
-    const accountsResponse = await fetch(
-      `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
-    );
-
-    const accountsData = await accountsResponse.json();
-
-    if (accountsData && accountsData.data && accountsData.data.length > 0) {
-      const page = accountsData.data[0]; // Take first page (or loop through if multiple)
-      const pageId = page.id;
-      const pageAccessToken = page.access_token;
-
-      console.log("Fetched page:", page.name, pageId);
-
-      // Step 2: Get reviews from that page
-      const reviewsResponse = await fetch(
-        `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
-      );
-
-      const reviewsData = await reviewsResponse.json();
-
-      if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
-        // console.log("Reviews:", reviewsData.data);
-        dispatch(setFacebookReviewsData(reviewsData.data));
-        showToast("success", "Facebook reviews fetched successfully!");
-        // You can store reviewsData.data in state or send to backend here
-      } else {
-        showToast("info", "No reviews found on this page.");
-      }
-    } else {
-      showToast("error", "No Facebook pages found or invalid access token.");
-    }
-  } catch (error) {
-    console.error("Error fetching Facebook data:", error);
-    showToast("error", "Failed to fetch Facebook data.");
-  }
-};
-
 const initialState = {
   customerLinkData: [],
   reviewLoader: false,
@@ -487,7 +468,6 @@ const initialState = {
   //New for social media links
   socialUpdateSuccess: false,
   socialUpdateError: null,
-  facebookReviewsData: [],
 
   //New for Accreditations
   accreditationsUpdateSuccess: false,
@@ -506,9 +486,6 @@ const myprofileSlice = createSlice({
   name: "myProfile",
   initialState,
   reducers: {
-    setFacebookReviewsData(state, action) {
-      state.facebookReviewsData = action.payload;
-    },
     setIsDirtyRedux(state, action) {
       state.isDirtyRedux = action.payload;
     },
@@ -664,7 +641,6 @@ export const {
   clearAccreditationsStatus,
   clearQnaStatus,
   clearFacebookReviewStatus,
-  setFacebookReviewsData,
 } = myprofileSlice.actions;
 
 export default myprofileSlice.reducer;

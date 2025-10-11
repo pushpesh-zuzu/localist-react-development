@@ -8,6 +8,7 @@ import {
   clearFacebookReviewStatus,
   getCustomerLinkApi,
   updateFacebookReviewLink,
+  createUserTokenApiCall,
 } from "../../../store/MyProfile/myProfileSlice";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 import axiosInstance from "../../../Api/axiosInstance";
@@ -153,17 +154,13 @@ const ReviewsAccordion = ({ details }) => {
             console.log("Facebook Login Successful. User authorized app!");
 
             const userAccessToken = response.authResponse.accessToken;
-            sendTokenToBackend(userAccessToken);
-
-            // TODO: Agla Kadam
-            // Is userAccessToken ko apne backend API (axiosInstance) ko bhejein
-            // Taki backend Page Access Token nikaal sake aur Reviews fetch kar sake.
-            // (Send this userAccessToken to your backend API to fetch Page Access Token and Reviews.)
+            createUserTokenApiCall(userAccessToken.data);
 
             showToast(
               "success",
               "Successfully logged into Facebook. Fetching pages..."
             );
+
             // Example: sendUserTokenToBackend(userAccessToken);
           } else {
             console.error("Facebook Login Failed or Cancelled.");
@@ -226,9 +223,9 @@ const ReviewsAccordion = ({ details }) => {
   const sendTokenToBackend = async (userAccessToken) => {
     try {
       // Step 1: Get the pages connected to user
-      const accountsResponse = await fetch(
-        `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
-      );
+      // const accountsResponse = await fetch(
+      //   `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
+      // );
 
       const accountsData = await accountsResponse.json();
 
