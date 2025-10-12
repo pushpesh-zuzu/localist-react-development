@@ -631,50 +631,45 @@ const ReviewsAccordion = ({ details }) => {
         )}
       </div>
 
-      {fbReviews.length > 0 && (
-        <div className={styles.localistBox}>
-          <h3 className={styles.reviewHeading}>Facebook Reviews</h3>
-
-          <div className={styles.reviewSlider}>
-            {fbReviews.map((rev, idx) => (
-              <div key={idx} className={styles.reviewCard}>
-                <div className={styles.reviewHeader}>
-                  <div className={styles.avatar}>
-                    {rev.reviewer?.name?.[0] || "?"}
-                  </div>
-                  <div className={styles.reviewerInfo}>
-                    <strong className={styles.reviewerName}>
-                      {rev.reviewer?.name}
-                    </strong>
-                    <span className={styles.reviewDate}>
-                      {new Date(rev.created_time).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      })}
-                    </span>
-                  </div>
+      <div className={styles.reviewSlider}>
+        {fbReviews.map((rev, idx) => (
+          <div
+            key={idx}
+            className={`${styles.reviewCard} ${
+              idx === 0 ? styles.activeCard : ""
+            }`}
+          >
+            <div className={styles.reviewHeader}>
+              <div className={styles.avatarSection}>
+                <div className={styles.avatar}>
+                  {rev.reviewer?.name?.[0] || "?"}
                 </div>
-
-                <div className={styles.reviewStars}>
-                  {Array.from({ length: rev.rating }, (_, i) => (
-                    <span key={i}>⭐</span>
-                  ))}
+                <div className={styles.reviewerName}>
+                  {rev.reviewer?.name || "Test User"}
                 </div>
-
-                <p className={styles.reviewText}>
-                  {rev.review_text || "No text provided."}
-                </p>
               </div>
-            ))}
-          </div>
 
-          <div className={styles.reviewNavButtons}>
-            <button className={styles.navBtn}>←</button>
-            <button className={`${styles.navBtn} ${styles.next}`}>→</button>
+              <div className={styles.reviewDate}>
+                {new Date(rev.created_time).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+              </div>
+            </div>
+
+            <div className={styles.reviewStars}>
+              {Array.from({ length: rev.rating }, (_, i) => (
+                <span key={i}>⭐</span>
+              ))}
+            </div>
+
+            <p className={styles.reviewText}>
+              {rev.review_text || "No text provided."}
+            </p>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
 
       {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>
