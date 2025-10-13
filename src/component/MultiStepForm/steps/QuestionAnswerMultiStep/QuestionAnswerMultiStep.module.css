@@ -45,7 +45,7 @@
   flex-direction: column;
   gap: 12px;
   margin-bottom: 16px;
-  max-height: 40vh;
+  max-height: 45vh;
   overflow: auto;
   
 }
@@ -77,8 +77,10 @@
 
 .option input,
 .options input {
-  margin-top: 2px;
+  margin-top: 4px;
   flex-shrink: 0;
+  height: 14px;
+  width: 14px;
 }
 
 .option span,
@@ -89,23 +91,24 @@
 }
 
 .otherInput {
-  width: 100%;
-  height: 48px;
-  border: 2px solid #e1e5e9;
-  border-radius: 8px;
-  padding: 0 16px;
+  /* width: 95%; */
+  padding: 10.5px;
   font-size: 16px;
-  font-weight: 500;
-  color: var(--text-color);
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  margin-top: 8px;
+  border: 1px solid #d9d9d9;
+  height: 20px;
+  border-radius: 5px;
+  /* Yeh properties missing hain: */
+  /* box-sizing: border-box; ✅ Important for proper width calculation */
+  margin-top: 8px; /* ✅ Separate it from options */
+  max-width: 100%; /* ✅ Prevent overflow */
+  margin-bottom: 8px;
+
 }
 
 .otherInput:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(0, 150, 196, 0.1);
+  /* box-shadow: 0 0 0 3px rgba(0, 150, 196, 0.1); */
 }
 
 .otherInput::placeholder {
@@ -116,7 +119,7 @@
 .errorMessage {
   color: #ff4d4f;
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   margin: 8px 0 0 0;
 }
 
@@ -175,8 +178,12 @@
   }
 
   .otherInput {
-    height: 40px;
-    font-size: 14px;
+    width: 100%; /* ✅ Full width on mobile */
+    padding: 10.5px; /* ✅ Better touch targets */
+    font-size: 16px;
+    height: auto; /* ✅ Better for mobile */
+    margin-top: 12px;
+    box-sizing: border-box;
   }
   .loaderContainer {
     width: 200px;

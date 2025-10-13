@@ -24,14 +24,11 @@ const MultiStepForm = () => {
   useEffect(() => {
     if (location.pathname.includes("landscaping-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
-    } else {
-      document.body.style.paddingTop = "40px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("landscaping-multi-form-ppc") ? "0px" : "40px",
-      "important"
+      location.pathname.includes("landscaping-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
@@ -80,7 +77,7 @@ const MultiStepForm = () => {
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
-        if (stepFlow[currentIndex - 1] === 2) {
+        if (stepFlow[currentIndex - 1] === 1) {
           setIsComingFromStep3(true);
         }
         dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
@@ -130,6 +127,9 @@ const MultiStepForm = () => {
       setIsLoadingQuestions(false);
     }
   }, [questionanswerData]);
+  const showProgressSteps = JSON.parse(
+    localStorage.getItem("showProgressSteps")
+  );
   return (
     <>
       <Helmet>
@@ -145,7 +145,9 @@ const MultiStepForm = () => {
       {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
-          {progressPercentage <= 100 ? `Where - ${actualSteps}/3` : ""}
+          {progressPercentage <= 100 && buyerStep !== 7
+            ? `What - ${actualSteps}/3`
+            : ""}
         </span>{" "}
       </div>
 

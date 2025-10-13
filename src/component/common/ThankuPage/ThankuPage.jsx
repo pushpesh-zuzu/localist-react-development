@@ -12,6 +12,7 @@ const ThankuPage = () => {
 
   const handleSubmit = () => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+    localStorage.setItem("isRegistrationComplete", "false");
     navigate(
       `${
         pendingModal?.baseRedirectPath === "root"

@@ -338,7 +338,10 @@ const MainLayout = () => {
      description: `Discover more about ${companyName} on Localists. View company details, services, and connect directly.`
    };
  }
-
+  useEffect(() => {
+    document.body.style.paddingTop = "40px";
+    document.documentElement.style.setProperty("padding-top", "40px");
+  }, []);
 //  const { title, description } = meta || {
 //    title: "Localists",
 //    description: "Discover and connect with local businesses on Localists."

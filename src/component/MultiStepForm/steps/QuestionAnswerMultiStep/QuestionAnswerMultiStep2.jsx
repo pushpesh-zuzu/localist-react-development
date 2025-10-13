@@ -312,7 +312,10 @@ const QuestionAnswerMultiStep2 = ({
       onBackClick={handleBack}
       showBackButton={currentQuestion === 0 ? false : true}
       disableNextButton={
-        formattedQuestions[currentQuestion]?.option_type === "single"
+        formattedQuestions[currentQuestion]?.option_type === "single" &&
+        !buyerRequest?.questions?.some(
+          (q) => q.ques === formattedQuestions[currentQuestion]?.questions
+        )
       }
       // buttonText={
       //   currentQuestion === totalQuestions - 1 ? "Get Quotes" : "Next"
@@ -328,37 +331,46 @@ const QuestionAnswerMultiStep2 = ({
     >
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
-          (opt, index) => (
-            <label
-              key={index}
-              className={
-                formattedQuestions[currentQuestion]?.option_type === "single"
-                  ? styles.option
-                  : styles.options
-              }
-            >
-              <input
-                type={
+          (opt, index) => {
+            const isSelected = selectedOption.includes(opt.option);
+            return (
+              <label
+                key={index}
+                className={
                   formattedQuestions[currentQuestion]?.option_type === "single"
-                    ? "radio"
-                    : "checkbox"
+                    ? styles.option
+                    : styles.options
                 }
-                name="surveyOption"
-                value={opt.option}
-                checked={selectedOption.includes(opt.option)}
-                onChange={handleOptionChange}
-                onClick={(e) => {
-                  const isSingle =
-                    formattedQuestions[currentQuestion]?.option_type ===
-                    "single";
-                  if (isSingle && selectedOption.includes(opt.option)) {
-                    handleNext([e.target.value]);
-                  }
+                style={{
+                  boxShadow: isSelected
+                    ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
+                    : "none",
                 }}
-              />
-              <span>{opt.option}</span>
-            </label>
-          )
+              >
+                <input
+                  type={
+                    formattedQuestions[currentQuestion]?.option_type ===
+                    "single"
+                      ? "radio"
+                      : "checkbox"
+                  }
+                  name="surveyOption"
+                  value={opt.option}
+                  checked={selectedOption.includes(opt.option)}
+                  onChange={handleOptionChange}
+                  onClick={(e) => {
+                    const isSingle =
+                      formattedQuestions[currentQuestion]?.option_type ===
+                      "single";
+                    if (isSingle && selectedOption.includes(opt.option)) {
+                      handleNext([e.target.value]);
+                    }
+                  }}
+                />
+                <span>{opt.option}</span>
+              </label>
+            );
+          }
         )}
 
         {formattedQuestions[currentQuestion]?.answer?.includes(

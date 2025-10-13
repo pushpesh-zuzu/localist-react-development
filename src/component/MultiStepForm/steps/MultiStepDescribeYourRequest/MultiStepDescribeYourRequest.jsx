@@ -127,7 +127,7 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   };
 
   return (
-    <div style={{maxWidth:'500px',position:'relative'}} >
+    <div style={{maxWidth:'500px',position:'relative',margin:'auto'}} >
       {buyerStep === 10 ? (
         <Spin />
       ) : (

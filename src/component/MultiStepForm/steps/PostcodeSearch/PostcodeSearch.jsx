@@ -181,14 +181,14 @@ const PostcodeSearch = ({
       </p>
       <p className={styles.desciption2}>
         Simply answer a few questions about your requirements and get tailored
-        quotes in seconds
+        quotes in seconds.
       </p>
 
       <CardLayoutWrapper
         title={title}
         onButtonClick={handleNext}
         buttonText="Next"
-        disableNextButton={true}
+        disableNextButton={!buyerRequest?.postal_code}
         showBackButton
         onBackClick={handleBack}
       >

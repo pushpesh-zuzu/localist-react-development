@@ -66,6 +66,7 @@ import { levelThreePagesRoutes } from "./leverThreeRoute";
 import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 import { levelOnePagesRoutes } from "./levelOneRoutes";
 import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
+import ProtectedRoutePPC from "./ProtecteRoutePPC";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -98,10 +99,10 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-  //     {
-  //   path: "landscaping-landing-ppc",
-  //   element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
-  // },
+      //     {
+      //   path: "landscaping-landing-ppc",
+      //   element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
+      // },
       {
         path: "about-us",
         element: (
@@ -284,11 +285,13 @@ const routes = [
       ...landingPages.map(({ path, Component }) => ({
         path,
         element: (
-          <LocaleRedirect>
-            <React.Suspense fallback={<FullScreenSpinner />}>
-              <Component />
-            </React.Suspense>
-          </LocaleRedirect>
+          <ProtectedRoutePPC>
+            <LocaleRedirect>
+              <React.Suspense fallback={<FullScreenSpinner />}>
+                <Component />
+              </React.Suspense>
+            </LocaleRedirect>
+          </ProtectedRoutePPC>
         ),
       })),
       ...levelThreePagesRoutes?.map(({ path, Component }) => ({
@@ -302,9 +305,8 @@ const routes = [
         ),
       })),
     ],
-    
   },
- 
+
   // non-localized routes
   {
     path: "/",
@@ -672,12 +674,14 @@ const routes = [
       { path: "*", element: <NotFound /> },
     ],
   },
-   {
+  {
     path: "/:lang/:country/landscaping-multi-form-ppc",
     element: (
-      <LocaleRedirect>
-        <MultiStepForm />
-      </LocaleRedirect>
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepForm />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
     ),
   },
 ];
