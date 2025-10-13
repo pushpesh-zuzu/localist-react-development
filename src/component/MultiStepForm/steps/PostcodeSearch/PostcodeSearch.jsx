@@ -181,7 +181,7 @@ const PostcodeSearch = ({
       </p>
       <p className={styles.desciption2}>
         Simply answer a few questions about your requirements and get tailored
-        quotes in seconds
+        quotes in seconds.
       </p>
 
       <CardLayoutWrapper

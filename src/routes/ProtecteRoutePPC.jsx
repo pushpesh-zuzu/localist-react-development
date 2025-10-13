@@ -26,7 +26,7 @@ const ProtectedRoutePPC = ({ children }) => {
   useEffect(() => {
     setMounted(true);
   }, []);
-
+  const isRegistrationComplete = localStorage.getItem("isRegistrationComplete");
   const isAuthenticated = Boolean(userToken || registerToken);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const ProtectedRoutePPC = ({ children }) => {
     return <div style={{ minHeight: "40vh" }} />;
   }
 
-  if (isAuthenticated) {
+  if (isAuthenticated && isRegistrationComplete === "true") {
     return <Navigate to="/buyers/create" replace state={{ from: location }} />;
   }
 

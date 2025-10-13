@@ -31,6 +31,7 @@ import { Helmet } from "react-helmet-async";
 import { Select, Modal, Radio, Tabs } from "antd";
 
 const BidsList = ({ previousStep }) => {
+  localStorage.setItem("isRegistrationComplete", "true");
   const { requestId } = useParams();
   const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } =
     useSelector((state) => state.leadSetting);

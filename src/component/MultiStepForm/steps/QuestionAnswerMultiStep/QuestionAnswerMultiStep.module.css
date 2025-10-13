@@ -91,12 +91,16 @@
 }
 
 .otherInput {
-  width: 95%;
+  /* width: 95%; */
   padding: 10.5px;
   font-size: 16px;
   border: 1px solid #d9d9d9;
   height: 20px;
   border-radius: 5px;
+  /* Yeh properties missing hain: */
+  box-sizing: border-box; /* ✅ Important for proper width calculation */
+  margin-top: 8px; /* ✅ Separate it from options */
+  max-width: 100%; /* ✅ Prevent overflow */
 }
 
 .otherInput:focus {
@@ -172,8 +176,11 @@
   }
 
   .otherInput {
-    height: 40px;
-    font-size: 14px;
+    width: 100%; /* ✅ Full width on mobile */
+    padding: 10.5px; /* ✅ Better touch targets */
+    font-size: 16px;
+    height: auto; /* ✅ Better for mobile */
+    margin-top: 12px;
   }
   .loaderContainer {
     width: 200px;
