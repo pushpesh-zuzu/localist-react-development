@@ -674,16 +674,16 @@ const routes = [
       { path: "*", element: <NotFound /> },
     ],
   },
-  // {
-  //   path: "/:lang/:country/landscaping-multi-form-ppc",
-  //   element: (
-  //     <ProtectedRoutePPC>
-  //       <LocaleRedirect>
-  //         <MultiStepForm />
-  //       </LocaleRedirect>
-  //     </ProtectedRoutePPC>
-  //   ),
-  // },
+  {
+    path: "/:lang/:country/landscaping-multi-form-ppc",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepForm />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
+    ),
+  },
 ];
 
 // Create a router suitable for the current environment

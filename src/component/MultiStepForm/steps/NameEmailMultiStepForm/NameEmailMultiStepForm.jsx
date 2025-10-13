@@ -17,7 +17,6 @@ const NameEmailMultiStepForm = ({
   setEmails,
   resetTrigger,
   isPPCPages = false,
-  getProgressPercentage,
   onBack,
 }) => {
   const dispatch = useDispatch();
@@ -167,7 +166,7 @@ const NameEmailMultiStepForm = ({
     onBack();
     const firstStepProgress = (2 / 3) * 100; // 66.66%
     const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
-    getProgressPercentage(-remainingProgressPerStep);
+    // getProgressPercentage(-remainingProgressPerStep);
   };
 
   return (
@@ -223,7 +222,7 @@ const NameEmailMultiStepForm = ({
           </>
         )}
         <p className={styles.subText}>
-          This is to match you with the closest verified specialists
+          We only use this to match you with trusted professionals.
         </p>
       </div>
     </CardLayoutWrapper>

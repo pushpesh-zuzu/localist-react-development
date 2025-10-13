@@ -5,8 +5,6 @@ import {
   setbuyerRequestData,
   registerQuoteCustomer,
 } from "../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from "@ant-design/icons";
-import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
@@ -15,11 +13,10 @@ const QuestionAnswerMultiStep = ({
   questions = [],
   onNext,
   onBack,
-  loading,
   getProgressPercentage,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
+  const { buyerRequest} = useSelector(
     (state) => state.buyer
   );
   const { service, registerData } = useSelector((state) => state.findJobs);
@@ -103,15 +100,17 @@ const QuestionAnswerMultiStep = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      const newSelection = [value]; // ✅ local new state
-      setSelectedOption(newSelection);
+      setSelectedOption([value]);
       setError("");
 
-      // ✅ Use the newSelection directly for next step, not stale state
-      setTimeout(() => {
-        handleNext(newSelection);
-      }, 100);
+      // ✅ If option is NOT "Something else", move to next after short delay
+      if (value !== "Something else (please describe)") {
+        setTimeout(() => {
+          handleNext([value]);
+        }, 150);
+      }
     } else {
+      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -120,7 +119,6 @@ const QuestionAnswerMultiStep = ({
   };
 
   const handleNextCheckBox = () => {
-    debugger;
     if (selectedOption.length === 0) {
       setError("Please select at least one option.");
       return;
@@ -163,8 +161,6 @@ const QuestionAnswerMultiStep = ({
     }
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-
-    getProgressPercentage(remainingProgressPerStep);
 
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selectedOption[0]
@@ -237,8 +233,6 @@ const QuestionAnswerMultiStep = ({
     }
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-
-    getProgressPercentage(remainingProgressPerStep);
 
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
@@ -318,7 +312,8 @@ const QuestionAnswerMultiStep = ({
         formattedQuestions[currentQuestion]?.option_type === "single" &&
         !buyerRequest?.questions?.some(
           (q) => q.ques === formattedQuestions[currentQuestion]?.questions
-        )
+        ) &&
+        !selectedOption.includes("Something else (please describe)")
       }
       buttonText="Next"
       showBackButton={true}
@@ -358,7 +353,6 @@ const QuestionAnswerMultiStep = ({
                       "single";
                     if (isSingle && selectedOption.includes(opt.option)) {
                       onNext();
-                      getProgressPercentage(remainingProgressPerStep);
                     }
                   }}
                 />
@@ -374,7 +368,7 @@ const QuestionAnswerMultiStep = ({
           selectedOption.includes("Something else (please describe)") && (
             <input
               type="text"
-              placeholder="Please describe..."
+              placeholder="Please enter..."
               className={styles.otherInput}
               value={otherText}
               onChange={(e) => setOtherText(e.target.value)}
