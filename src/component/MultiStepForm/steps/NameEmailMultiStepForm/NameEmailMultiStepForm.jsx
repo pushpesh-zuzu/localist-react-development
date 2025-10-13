@@ -185,21 +185,7 @@ const NameEmailMultiStepForm = ({
     >
       <div className={styles.infoWrapper}>
         {/* <label className={styles.label}>Full Name</label> */}
-        <input
-          style={{ marginTop: "5px" }}
-          type="text"
-          placeholder="Full Name"
-          className={`${styles.input} ${errors?.name ? styles.inputError : ""}`}
-          value={name}
-          onChange={handleNameChange}
-        />
-        {errors?.name && (
-          <span style={{ color: "red" }} className={styles.errorMessage}>
-            Full name is required.
-          </span>
-        )}
-
-        {!isPPCPages && (
+         {!isPPCPages && (
           <>
             {/* <label htmlFor="email" className={styles.label}>
               Email
@@ -221,6 +207,20 @@ const NameEmailMultiStepForm = ({
             )}
           </>
         )}
+        <input
+          style={{ marginTop: "5px" }}
+          type="text"
+          placeholder="Full Name"
+          className={`${styles.input} ${errors?.name ? styles.inputError : ""}`}
+          value={name}
+          onChange={handleNameChange}
+        />
+        {errors?.name && (
+          <span style={{ color: "red" }} className={styles.errorMessage}>
+            Full name is required.
+          </span>
+        )}
+
         <p className={styles.subText}>
           We only use this to match you with trusted professionals.
         </p>
