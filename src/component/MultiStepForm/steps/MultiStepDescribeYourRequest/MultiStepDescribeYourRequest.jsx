@@ -132,13 +132,13 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         <Spin />
       ) : (
         <>
-          <div
+          {/* <div
             className={styles.closeButton}
             onClick={handleCloseClick}
             disabled={addDetailLoader}
           >
             &times;
-          </div>
+          </div> */}
           <div className={styles.successMessage}>
             <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
             <span>Your request has been submitted</span>
