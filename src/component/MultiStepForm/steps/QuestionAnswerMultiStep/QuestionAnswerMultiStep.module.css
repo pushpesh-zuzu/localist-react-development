@@ -98,7 +98,7 @@
   height: 20px;
   border-radius: 5px;
   /* Yeh properties missing hain: */
-  box-sizing: border-box; /* ✅ Important for proper width calculation */
+  /* box-sizing: border-box; ✅ Important for proper width calculation */
   margin-top: 8px; /* ✅ Separate it from options */
   max-width: 100%; /* ✅ Prevent overflow */
 }
@@ -181,6 +181,7 @@
     font-size: 16px;
     height: auto; /* ✅ Better for mobile */
     margin-top: 12px;
+    box-sizing: border-box;
   }
   .loaderContainer {
     width: 200px;
