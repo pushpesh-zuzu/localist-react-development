@@ -150,9 +150,25 @@ const QuestionModal = ({
       ans: finalAnswer.join(", "),
     };
 
+    // ✅ FIX: QUESTION-BASED STORAGE (No index conflict)
     const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
+
+    // Find if this question already exists
+    const existingIndex = previousAnswers.findIndex(
+      (item) => item?.ques === updatedAnswer.ques
+    );
+
+    let updatedAnswers;
+    if (existingIndex !== -1) {
+      // Update existing question
+      updatedAnswers = [...previousAnswers];
+      updatedAnswers[existingIndex] = updatedAnswer;
+    } else {
+      // Add new question
+      updatedAnswers = [...previousAnswers, updatedAnswer];
+    }
+
+    console.log("Updated Answers (Question-based):", updatedAnswers);
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
@@ -236,6 +252,11 @@ const QuestionModal = ({
         nextStep();
       }
     }
+
+    // Reset for next question
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   // const handleBack = () => {

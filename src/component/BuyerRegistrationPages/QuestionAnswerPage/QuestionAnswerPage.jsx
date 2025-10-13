@@ -23,7 +23,7 @@ const QuestionAnswerPage = ({
   previousStep,
   setShowConfirmModal,
   isStartWithQuestionModal,
-  loading = true
+  loading = true,
 }) => {
   const dispatch = useDispatch();
   const {
@@ -63,12 +63,12 @@ const QuestionAnswerPage = ({
     }
   }, [questions]);
   // console.log(citySerach, questionanswerData, "citySerach");
-useEffect(() => {
-      const timeoutId = setTimeout(() => {
-        setShowDelay(true);
-      }, 2500);
-      return () => clearTimeout(timeoutId);
-    }, []);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowDelay(true);
+    }, 2500);
+    return () => clearTimeout(timeoutId);
+  }, []);
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -161,9 +161,25 @@ useEffect(() => {
       ans: finalAnswer.join(", "),
     };
 
+    // ✅ FIX: QUESTION-BASED STORAGE (No index conflict)
     const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
+
+    // Find if this question already exists
+    const existingIndex = previousAnswers.findIndex(
+      (item) => item?.ques === updatedAnswer.ques
+    );
+
+    let updatedAnswers;
+    if (existingIndex !== -1) {
+      // Update existing question
+      updatedAnswers = [...previousAnswers];
+      updatedAnswers[existingIndex] = updatedAnswer;
+    } else {
+      // Add new question
+      updatedAnswers = [...previousAnswers, updatedAnswer];
+    }
+
+    console.log("Updated Answers (Question-based):", updatedAnswers);
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
@@ -247,6 +263,11 @@ useEffect(() => {
         nextStep();
       }
     }
+
+    // Reset for next question
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   // const handleBack = () => {
@@ -310,7 +331,7 @@ useEffect(() => {
   });
 
   return (
-    <div className={styles.modalOverlay} >
+    <div className={styles.modalOverlay}>
       <div
         className={styles.modalContent}
         style={{ color: "#000", textAlign: "center" }}
@@ -444,7 +465,7 @@ useEffect(() => {
             </div>
           </>
         ) : (
-          <div className={styles.noQuestion} >
+          <div className={styles.noQuestion}>
             <h2>No questions available</h2>
           </div>
         )}
