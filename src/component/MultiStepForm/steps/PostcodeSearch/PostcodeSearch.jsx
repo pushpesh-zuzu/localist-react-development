@@ -188,7 +188,7 @@ const PostcodeSearch = ({
         title={title}
         onButtonClick={handleNext}
         buttonText="Next"
-        disableNextButton={true}
+        disableNextButton={!buyerRequest?.postal_code}
         showBackButton
         onBackClick={handleBack}
       >
