@@ -415,7 +415,7 @@ const ReviewsAccordion = ({ details }) => {
         </p>
         <ReviewSection details={viewProfileData} showSummary={false} />
       </div> */}
-      {/* <div
+      <div
         className={`${styles.localistBox} ${
           (viewProfileData?.reviews_count ?? 0) > 5 ? styles.scrollBox : ""
         }`}
@@ -432,7 +432,7 @@ const ReviewsAccordion = ({ details }) => {
             </p>
           </>
         )}
-      </div> */}
+      </div>
 
       <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
