@@ -1,6 +1,6 @@
 // export default ReviewsAccordion;
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ReviewsAccordion.module.css";
 import FacebookLogo from "../../../assets/Images/FacebookLogo.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,22 +11,21 @@ import {
   createUserTokenApiCall,
   getUserTokenApicall,
 } from "../../../store/MyProfile/myProfileSlice";
-import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 import axiosInstance from "../../../Api/axiosInstance";
 import { toast } from "react-toastify";
 import { showToast } from "../../../utils";
 import ReviewSection from "../../ViewProfile/Reviews/Reviews";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import whatsUpIcon from "../../../assets/Icons/whatsup.svg";
 import linkedInIcon from "../../../assets/Icons/linkedin.svg";
 import twitterIcon from "../../../assets/Icons/twitter.svg";
 import shareIcon from "../../../assets/Icons/share.svg";
-// import { GoogleLogin } from "@react-oauth/google";
-// import { jwt_decode } from "jwt-decode";
-import jwt_decode from "jwt-decode";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import leftArrow from "../../../assets/Images/location/LeftArrow.svg";
+import rightArrow from "../../../assets/Images/location/RightArrow.svg";
+import { useKeenSlider } from "keen-slider/react";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
@@ -85,43 +84,6 @@ const ReviewsAccordion = ({ details }) => {
     )}`,
   };
 
-  // useEffect(() => {
-  //   // Yeh function check karega ki FB object available hai aur use ready mark karega
-  //   const checkFbSdk = () => {
-  //     if (window.FB) {
-  //       // FB object mil gaya, ab use initialize karte hain
-  //       window.FB.init({
-  //         appId: "YOUR_FACEBOOK_APP_ID", // <-- Yahan App ID use karein
-  //         cookie: true,
-  //         xfbml: true,
-  //         version: "v19.0",
-  //       });
-
-  //       setIsFbSdkReady(true); // <--- Ab component use karne ke liye ready hai
-  //     } else {
-  //       // Agar abhi tak load nahi hua, toh 100ms baad dobara check karein
-  //       setTimeout(checkFbSdk, 100);
-  //     }
-  //   };
-
-  //   // window.fbAsyncInit ko use karne ka behtar tareeka index.html mein hai.
-  //   // Lekin agar aapko yahan karna hai, toh is tarah se loading status track karein.
-
-  //   // Agar aap index.html mein window.fbAsyncInit use kar rahe hain,
-  //   // toh use modify karke yahan state set kar sakte hain:
-
-  //   if (window.FB) {
-  //     setIsFbSdkReady(true);
-  //   } else if (window.fbAsyncInit) {
-  //     // Agar window.fbAsyncInit already defined hai (index.html se),
-  //     // toh yeh check karein ki FB object ban gaya hai ya nahi.
-  //     // Behtar hai ki window.fbAsyncInit ke callback mein hi setIsFbSdkReady(true) set karein.
-  //   } else {
-  //     // Agar index.html mein code nahi hai, toh upar wala setTimeout logic use karein.
-  //     checkFbSdk();
-  //   }
-  // }, []); // Sirf ek baar chlega jab component mount hoga
-
   useEffect(() => {
     const checkSdk = () => {
       // Check the custom flag set in index.html
@@ -153,7 +115,7 @@ const ReviewsAccordion = ({ details }) => {
     }
     if (
       review?.status === false ||
-      (review?.status === true && review?.message?.expired === "no")
+      (review?.status === true && review?.message?.expired === "yes")
     ) {
       if (window.FB) {
         const requiredScopes = [
@@ -204,51 +166,6 @@ const ReviewsAccordion = ({ details }) => {
       showToast("error", "Facebook SDK is still loading. Please try again.");
     }
   };
-
-  // const sendTokenToBackend = async (token) => {
-  //   try {
-  //     // Send the token to a specific backend endpoint
-  //     const response = await post("https://graph.facebook.com/v20.0/me/accounts", {
-  //       user_access_token: token,
-  //       // You might also send the Facebook Page URL/Name if the user provided it
-  //       // page_identifier: fbLink
-  //     });
-
-  //     if (response.data.success) {
-  //       console.log("Reviews successfully imported!", response.data.reviews);
-  //       // TODO: Update your component's state with the new reviews
-  //       showToast("success", "Facebook reviews imported successfully!");
-  //     } else {
-  //       // Handle error response from your server
-  //       showToast("error", "Error processing token on server.");
-  //     }
-  //   } catch (error) {
-  //     console.error("API call failed:", error);
-  //     showToast("error", "Failed to connect to backend for review processing.");
-  //   }
-  // };
-
-  // const sendTokenToBackend = async (token) => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://graph.facebook.com/v20.0/me/accounts?access_token=${token}`
-  //     );
-
-  //     const data = await response.json();
-
-  //     if (data && data.data && data.data.length > 0) {
-  //       console.log("Facebook pages:", data.data);
-  //       showToast("success", "Facebook pages fetched successfully!");
-  //       // Yahan aap data.data ko state mein daal sakte ho ya backend bhej sakte ho
-  //     } else {
-  //       console.warn("No pages found or invalid token:", data);
-  //       showToast("error", "No Facebook pages found or invalid access token.");
-  //     }
-  //   } catch (error) {
-  //     console.error("API call failed:", error);
-  //     showToast("error", "Failed to fetch Facebook pages.");
-  //   }
-  // };
 
   const sendTokenToBackend = async (userAccessToken) => {
     try {
@@ -343,99 +260,11 @@ const ReviewsAccordion = ({ details }) => {
     onError: (error) => console.log("Login failed:", error),
   });
 
-  // Existing token se reviews fetch karne ka function
-  const fetchReviews = async () => {
-    try {
-      const accessToken = localStorage.getItem("google_access_token");
-
-      const reviewsRes = await axiosInstance.post("/google/get-reviews", {
-        access_token: accessToken,
-      });
-
-      console.log("Reviews:", reviewsRes.data);
-      return reviewsRes.data;
-    } catch (error) {
-      console.error(
-        "Error fetching reviews:",
-        error.response?.data || error.message
-      );
-    }
-  };
-
-  const handleSuccess = async (response) => {
-    try {
-      // response.credential contains the JWT token
-      const decoded = jwt_decode(response.credential);
-      console.log("Decoded JWT:", decoded);
-
-      // Save token locally
-      localStorage.setItem("google_access_token", response.credential);
-
-      // Send token to backend to fetch Google Reviews
-      const res = await axiosInstance.post("/auth/callback", {
-        token: response.credential,
-      });
-
-      console.log("Reviews from backend:", res.data);
-    } catch (error) {
-      console.error("Error sending token to backend:", error);
-    }
-  };
-
-  const handleError = () => {
-    console.error("Google login failed");
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const client = google.accounts.oauth2.initTokenClient({
-        client_id:
-          "http://1090455090567-4tao1nnrogtke2fgf4ad00p17en31pfc.apps.googleusercontent.com",
-        scope: "https://www.googleapis.com/auth/business.manage",
-        callback: async (tokenResponse) => {
-          // 👉 Send tokenResponse.access_token to backend
-          // backend will call Google My Business API to fetch reviews
-          console.log("Access Token:", tokenResponse.access_token);
-
-          // Send token to backend
-          await axios.post("http://localhost:5000/api/google-reviews", {
-            access_token: tokenResponse.access_token,
-          });
-        },
-      });
-
-      client.requestAccessToken();
-    } catch (err) {
-      console.error("Google login error:", err);
-    }
-  };
-
-  const handleLogin = (credentialResponse) => {
-    // const token = credentialResponse.credential;
-    // const decoded = jwt_decode(token);
-    // console.log("Google User:", decoded);
-    // // Send token to backend for exchange with access token
-    // fetch("http://localhost:5100/auth/callback", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ token }),
-    // });
-    // window.location.href = "http://localhost:5100/auth/google";
-    const popup = window.open(
-      "http://localhost:5100/auth/google",
-      "GoogleLogin",
-      "width=500,height=600"
-    );
-
-    // navigate("/sellers/leads");
-
-    // Optional: listen for message from backend if you postMessage later
-    window.addEventListener("message", (event) => {
-      console.log("Received data from popup:", event.data);
-      if (event.origin !== "http://localhost:5100") return;
-      // You can now update your UI with reviews
-    });
-  };
+  const sliderRef = useRef(null);
+  const [sliderInstanceRef, slider] = useKeenSlider({
+    loop: true,
+    slides: { perView: 1, spacing: 15 },
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -578,32 +407,6 @@ const ReviewsAccordion = ({ details }) => {
         </div>
       </div>
 
-      <div className={styles.fieldGroup}>
-        <label className={styles.fbLabel}>
-          <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
-          Import Facebook & Instagram Reviews
-        </label>
-        <p className={styles.subtext}>
-          Import reviews from your business Facebook page.
-        </p>
-        <div className={styles.row}>
-          <input
-            type="text"
-            placeholder="e.g. https://www.facebook.com/en/..."
-            className={styles.input}
-            value={fbLink}
-            onChange={(e) => setFbLink(e.target.value)}
-          />
-          <button
-            className={styles.importBtn}
-            onClick={handleFacebookLogin}
-            // disabled={!isFbSdkReady}
-          >
-            Import Reviews
-          </button>
-        </div>
-      </div>
-
       <label className={styles.reviewsLabel}>Localists.com Reviews</label>
       {/* <div className={styles.localistBox}>
         <strong>You don’t have any reviews yet on Localists.com</strong>
@@ -631,44 +434,93 @@ const ReviewsAccordion = ({ details }) => {
         )}
       </div>
 
-      <div className={styles.reviewSlider}>
-        {fbReviews.map((rev, idx) => (
-          <div
-            key={idx}
-            className={`${styles.reviewCard} ${
-              idx === 0 ? styles.activeCard : ""
-            }`}
+      <div className={styles.fieldGroup}>
+        <label className={styles.fbLabel}>
+          <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
+          Import Facebook & Instagram Reviews
+        </label>
+        <p className={styles.subtext}>
+          Import reviews from your business Facebook page.
+        </p>
+        <div className={styles.row}>
+          <input
+            type="text"
+            placeholder="e.g. https://www.facebook.com/en/..."
+            className={styles.input}
+            value={fbLink}
+            onChange={(e) => setFbLink(e.target.value)}
+          />
+          <button
+            className={styles.importBtn}
+            onClick={handleFacebookLogin}
+            // disabled={!isFbSdkReady}
           >
-            <div className={styles.reviewHeader}>
-              <div className={styles.avatarSection}>
-                <div className={styles.avatar}>
-                  {rev.reviewer?.name?.[0] || "?"}
+            Import Reviews
+          </button>
+        </div>
+      </div>
+      <div className={styles.reviewsContainer}>
+        <div className={styles.arrowIconsWrapper}>
+          <span className={styles.leftArrowWrapper}>
+            <img
+              src={leftArrow}
+              alt="Left"
+              className={styles.arrowIcon}
+              // onClick={() => slider.current?.prev()}
+              onClick={() => {
+                slider.current?.prev();
+              }}
+            />
+          </span>
+
+          <span className={styles.rightArrowWrapper}>
+            <img
+              src={rightArrow}
+              alt="Right"
+              className={styles.arrowIcon}
+              onClick={() => slider.current?.next()}
+            />
+          </span>
+        </div>
+        <div ref={sliderInstanceRef} className={styles.reviewSlider}>
+          {fbReviews.map((rev, idx) => (
+            <div
+              key={idx}
+              className={`${styles.reviewCard} ${
+                idx === 0 ? styles.activeCard : ""
+              }`}
+            >
+              <div className={styles.reviewHeader}>
+                <div className={styles.avatarSection}>
+                  <div className={styles.avatar}>
+                    {rev.reviewer?.name?.[0] || "?"}
+                  </div>
+                  <div className={styles.reviewerName}>
+                    {rev.reviewer?.name || "Test User"}
+                  </div>
                 </div>
-                <div className={styles.reviewerName}>
-                  {rev.reviewer?.name || "Test User"}
+
+                <div className={styles.reviewDate}>
+                  {new Date(rev.created_time).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </div>
               </div>
 
-              <div className={styles.reviewDate}>
-                {new Date(rev.created_time).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
+              <div className={styles.reviewStars}>
+                {Array.from({ length: rev.rating }, (_, i) => (
+                  <span key={i}>⭐</span>
+                ))}
               </div>
-            </div>
 
-            <div className={styles.reviewStars}>
-              {Array.from({ length: rev.rating }, (_, i) => (
-                <span key={i}>⭐</span>
-              ))}
+              <p className={styles.reviewText}>
+                {rev.review_text || "No text provided."}
+              </p>
             </div>
-
-            <p className={styles.reviewText}>
-              {rev.review_text || "No text provided."}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* <div className={styles.buttonRow}>
