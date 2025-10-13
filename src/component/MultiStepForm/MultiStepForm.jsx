@@ -146,7 +146,7 @@ const MultiStepForm = () => {
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {progressPercentage <= 100 && buyerStep !== 7
-            ? `Where - ${actualSteps}/3`
+            ? `What - ${actualSteps}/3`
             : ""}
         </span>{" "}
       </div>
