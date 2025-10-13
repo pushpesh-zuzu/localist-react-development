@@ -315,7 +315,10 @@ const QuestionAnswerMultiStep = ({
       onButtonClick={handleNextCheckBox}
       onBackClick={handleBack}
       disableNextButton={
-        formattedQuestions[currentQuestion]?.option_type === "single"
+        formattedQuestions[currentQuestion]?.option_type === "single" &&
+        !buyerRequest?.questions?.some(
+          (q) => q.ques === formattedQuestions[currentQuestion]?.questions
+        )
       }
       buttonText="Next"
       showBackButton={true}

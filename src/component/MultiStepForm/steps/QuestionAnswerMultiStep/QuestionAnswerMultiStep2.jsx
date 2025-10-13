@@ -312,7 +312,10 @@ const QuestionAnswerMultiStep2 = ({
       onBackClick={handleBack}
       showBackButton={currentQuestion === 0 ? false : true}
       disableNextButton={
-        formattedQuestions[currentQuestion]?.option_type === "single"
+        formattedQuestions[currentQuestion]?.option_type === "single" &&
+        !buyerRequest?.questions?.some(
+          (q) => q.ques === formattedQuestions[currentQuestion]?.questions
+        )
       }
       // buttonText={
       //   currentQuestion === totalQuestions - 1 ? "Get Quotes" : "Next"
@@ -338,11 +341,11 @@ const QuestionAnswerMultiStep2 = ({
                     ? styles.option
                     : styles.options
                 }
-                  style={{
-                    boxShadow: isSelected
-                      ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
-                      : "none",
-                  }}
+                style={{
+                  boxShadow: isSelected
+                    ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
+                    : "none",
+                }}
               >
                 <input
                   type={

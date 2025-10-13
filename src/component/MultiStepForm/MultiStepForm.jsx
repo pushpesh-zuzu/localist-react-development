@@ -80,7 +80,7 @@ const MultiStepForm = () => {
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
-        if (stepFlow[currentIndex - 1] === 2) {
+        if (stepFlow[currentIndex - 1] === 1) {
           setIsComingFromStep3(true);
         }
         dispatch(setBuyerStep(stepFlow[currentIndex - 1]));

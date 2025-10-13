@@ -20,7 +20,7 @@ const CardLayoutWrapper = ({
       <div className={styles.cardWrapper}>
                 {title && <h2 className={`${headingCenter ?styles.title:styles.leftTitle}`}>{title}</h2>}
 
-        {subtitle && <p style={{textAlign:headingCenter?'center':'left', marginBottom:'15px'}} className={styles.subtitle}>{subtitle}</p>}
+        {subtitle && <p style={{textAlign:headingCenter?'center':'left', marginBottom:'40px'}} className={styles.subtitle}>{subtitle}</p>}
 
         {children}
 
