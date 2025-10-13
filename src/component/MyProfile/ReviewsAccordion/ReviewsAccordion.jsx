@@ -167,46 +167,6 @@ const ReviewsAccordion = ({ details }) => {
     }
   };
 
-  const sendTokenToBackend = async (userAccessToken) => {
-    try {
-      // Step 1: Get the pages connected to user
-      // const accountsResponse = await fetch(
-      //   `https://graph.facebook.com/v20.0/me/accounts?access_token=${userAccessToken}`
-      // );
-
-      const accountsData = await accountsResponse.json();
-
-      if (accountsData && accountsData.data && accountsData.data.length > 0) {
-        const page = accountsData.data[0]; // Take first page (or loop through if multiple)
-        const pageId = page.id;
-        const pageAccessToken = page.access_token;
-
-        console.log("Fetched page:", page.name, pageId);
-
-        // Step 2: Get reviews from that page
-        const reviewsResponse = await fetch(
-          `https://graph.facebook.com/v20.0/${pageId}/ratings?fields=reviewer{id,name},rating,review_text,recommendation_type,created_time&access_token=${pageAccessToken}`
-        );
-
-        const reviewsData = await reviewsResponse.json();
-
-        if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
-          setFbReviews(reviewsData.data);
-          console.log("Reviews:", reviewsData.data);
-          showToast("success", "Facebook reviews fetched successfully!");
-          // You can store reviewsData.data in state or send to backend here
-        } else {
-          showToast("info", "No reviews found on this page.");
-        }
-      } else {
-        showToast("error", "No Facebook pages found or invalid access token.");
-      }
-    } catch (error) {
-      console.error("Error fetching Facebook data:", error);
-      showToast("error", "Failed to fetch Facebook data.");
-    }
-  };
-
   const login = useGoogleLogin({
     flow: "auth-code",
     scope:
@@ -265,6 +225,16 @@ const ReviewsAccordion = ({ details }) => {
     loop: true,
     slides: { perView: 1, spacing: 15 },
   });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev === 0 ? fbReviews.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === fbReviews.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -487,7 +457,7 @@ const ReviewsAccordion = ({ details }) => {
             <div
               key={idx}
               className={`${styles.reviewCard} ${
-                idx === 0 ? styles.activeCard : ""
+                idx === currentIndex ? styles.activeCard : styles.inactiveCard
               }`}
             >
               <div className={styles.reviewHeader}>
@@ -510,7 +480,7 @@ const ReviewsAccordion = ({ details }) => {
               </div>
 
               <div className={styles.reviewStars}>
-                {Array.from({ length: rev.rating }, (_, i) => (
+                {Array.from({ length: rev.rating || 5 }, (_, i) => (
                   <span key={i}>⭐</span>
                 ))}
               </div>
