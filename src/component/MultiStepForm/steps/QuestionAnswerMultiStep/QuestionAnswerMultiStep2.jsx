@@ -328,37 +328,46 @@ const QuestionAnswerMultiStep2 = ({
     >
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
-          (opt, index) => (
-            <label
-              key={index}
-              className={
-                formattedQuestions[currentQuestion]?.option_type === "single"
-                  ? styles.option
-                  : styles.options
-              }
-            >
-              <input
-                type={
+          (opt, index) => {
+            const isSelected = selectedOption.includes(opt.option);
+            return (
+              <label
+                key={index}
+                className={
                   formattedQuestions[currentQuestion]?.option_type === "single"
-                    ? "radio"
-                    : "checkbox"
+                    ? styles.option
+                    : styles.options
                 }
-                name="surveyOption"
-                value={opt.option}
-                checked={selectedOption.includes(opt.option)}
-                onChange={handleOptionChange}
-                onClick={(e) => {
-                  const isSingle =
+                  style={{
+                    boxShadow: isSelected
+                      ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
+                      : "none",
+                  }}
+              >
+                <input
+                  type={
                     formattedQuestions[currentQuestion]?.option_type ===
-                    "single";
-                  if (isSingle && selectedOption.includes(opt.option)) {
-                    handleNext([e.target.value]);
+                    "single"
+                      ? "radio"
+                      : "checkbox"
                   }
-                }}
-              />
-              <span>{opt.option}</span>
-            </label>
-          )
+                  name="surveyOption"
+                  value={opt.option}
+                  checked={selectedOption.includes(opt.option)}
+                  onChange={handleOptionChange}
+                  onClick={(e) => {
+                    const isSingle =
+                      formattedQuestions[currentQuestion]?.option_type ===
+                      "single";
+                    if (isSingle && selectedOption.includes(opt.option)) {
+                      handleNext([e.target.value]);
+                    }
+                  }}
+                />
+                <span>{opt.option}</span>
+              </label>
+            );
+          }
         )}
 
         {formattedQuestions[currentQuestion]?.answer?.includes(
