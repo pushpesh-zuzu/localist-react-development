@@ -496,7 +496,7 @@ const MyResponse = () => {
               <MyResponseAccordion
                 lead={selectedLead}
                 onBack={() => setSelectedLead(null)}
-                getPendingLeadList={data}
+                getPendingLeadList={data.filter((item)=>item.id === selectedLead)}
               />
             )}
           </div>

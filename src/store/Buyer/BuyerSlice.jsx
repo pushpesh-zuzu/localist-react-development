@@ -482,9 +482,6 @@ const buyerSlice = createSlice({
     setBuyerStep(state, action) {
       state.buyerStep = action.payload;
     },
-    setBuyerStep(state, action) {
-      state.buyerStep = action.payload;
-    },
     setProfileLoader(state, action) {
       state.profileLoader = action.payload;
     },
