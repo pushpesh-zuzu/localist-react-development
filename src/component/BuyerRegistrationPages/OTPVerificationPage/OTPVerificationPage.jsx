@@ -200,19 +200,19 @@ const OTPVerificationPage = ({
       </p>
 
       <p className={styles.instructionVerify}>
-        ***PLEASE CHECK THE ABOVE NUMBER IS CORRECTED***
+        ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
       </p>
       <p
         style={{ maxWidth: "90%", margin: "auto" }}
         className={styles.instructionVerify}
       >
-        WE CAN SEND ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT A LANDLINE{" "}
+          WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
       </p>
       <p
         style={{ marginTop: "16px", marginBottom: "24px" }}
         className={styles.instructionVerify}
       >
-        WE CANNOT VERIFY ACCOUNT WITHOUT MOBILE NUMBER
+          WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
       </p>
 
       <div
