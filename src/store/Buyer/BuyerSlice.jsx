@@ -143,6 +143,35 @@ export const registerQuoteCustomer = (customerData) => {
     }
   };
 };
+export const updateMobile = (phone) => {
+  return async (dispatch) => {
+    dispatch(setCreateRequesLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `customer/update-register-phone-number`,
+        phone,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response) {
+        console.log(response, "response Update Phone");
+        dispatch(setRequestUserId(response.data.data?.user_id));
+        dispatch(setRequestUserPhone(response.data.data?.phone));
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error registering quote customer:", error?.response?.data);
+      showToast("error", error?.response?.data?.message);
+      throw error;
+    } finally {
+      dispatch(setCreateRequesLoader(false));
+    }
+  };
+};
 
 export const updateProfileData = () => {
   return async (dispatch) => {

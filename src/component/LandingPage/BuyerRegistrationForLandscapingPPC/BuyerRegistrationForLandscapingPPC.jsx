@@ -14,6 +14,7 @@ import OTPVerificationPage from "../../BuyerRegistrationPages/OTPVerificationPag
 import DescribeYourRequestPage from "../../BuyerRegistrationPages/DescribeYourRequestPage/DescribeYourRequestPage";
 import QuestionAnswerPage from "../../BuyerRegistrationPages/QuestionAnswerPage/QuestionAnswerPage";
 import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMatchPage";
+import ReEnterMobileNumber from "../../common/ReEnterMobileNumber/ReEnterMobileNumber";
 
 const BuyerRegistrationForLandscapingPPC = ({
   closeModal,
@@ -37,6 +38,7 @@ const BuyerRegistrationForLandscapingPPC = ({
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
+  const [reEnterMobile, setReEnterMobile] = useState(2);
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
@@ -196,7 +198,7 @@ const BuyerRegistrationForLandscapingPPC = ({
         />
       )}
 
-      {buyerStep === 4 && (
+      {buyerStep === 4 && reEnterMobile === 2 && (
         <OTPVerificationPage
           nextStep={nextStep}
           previousStep={previousStep}
@@ -205,12 +207,19 @@ const BuyerRegistrationForLandscapingPPC = ({
           isThankuPageOnlyShow={true}
           // setShowConfirmModal={setShowConfirmModal}
           // onClose={handleClose}
+          setReEnterMobile={setReEnterMobile}
+        />
+      )}
+      {reEnterMobile === 1 && (
+        <ReEnterMobileNumber
+          setReEnterMobile={setReEnterMobile}
+          onClose={() => setReEnterMobile(2)}
         />
       )}
       {buyerStep === 5 && (
         <NumberVerifiedModal
           nextStep={nextStep}
-          previousStep={previousStep}
+          previousStep={presviousStep}
           open={true}
           setShowConfirmModal={setShowConfirmModal}
         />

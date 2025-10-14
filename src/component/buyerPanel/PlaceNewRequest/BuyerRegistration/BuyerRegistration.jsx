@@ -12,6 +12,7 @@ import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 import OtpVerification from "./OtpVerification/OtpVerification";
 import NumberVerifiedModal from "./NumberVerified/NumberVerified";
+import ReEnterMobileNumber from "../../../common/ReEnterMobileNumber/ReEnterMobileNumber";
 
 const BuyerRegistration = ({
   closeModal,
@@ -34,6 +35,7 @@ const BuyerRegistration = ({
   const [shouldClose, setShouldClose] = useState(false);
   const [getServiceState, setGetServiceState] = useState(null);
   const [email, setEmails] = useState("");
+  const [reEnterMobile, setReEnterMobile] = useState(2);
   const dispatch = useDispatch();
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
@@ -169,7 +171,7 @@ const BuyerRegistration = ({
           />
         )}
 
-        {buyerStep === 4 && (
+        {buyerStep === 4 && reEnterMobile === 2  && (
           <OtpVerification
             nextStep={nextStep}
             previousStep={previousStep}
@@ -177,10 +179,17 @@ const BuyerRegistration = ({
             open={true}
             city={city}
             isThankuPageOnlyShow={true}
+            setReEnterMobile={setReEnterMobile}
             // setShowConfirmModal={setShowConfirmModal}
             // onClose={handleClose}
           />
         )}
+            {reEnterMobile === 1 && (
+            <ReEnterMobileNumber
+              setReEnterMobile={setReEnterMobile}
+              onClose={() => setReEnterMobile(2)}
+            />
+          )}
         {buyerStep === 5 && (
           <NumberVerifiedModal
             nextStep={nextStep}
