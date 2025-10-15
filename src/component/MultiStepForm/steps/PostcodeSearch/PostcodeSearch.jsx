@@ -44,7 +44,7 @@ const PostcodeSearch = ({
     setError("");
 
     // Don’t call API for short inputs
-    if (value>1 && value.length < 5) {
+    if (value>1 && value.length < 3) {
       setError("Please enter a valid postcode! ");
       return;
     }
@@ -141,7 +141,7 @@ const PostcodeSearch = ({
               className={`${styles.postcodeInput} ${
                 error ? styles.errorBorder : ""
               }`}
-              placeholder="Enter Postcode Without Spaces"
+              placeholder="Enter Postcode (No Spaces)"
               ref={inputRef}
               value={pincode}
               onChange={handlePincodeChange}

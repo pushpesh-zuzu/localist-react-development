@@ -183,7 +183,7 @@ const WhatServiceYouNeed = ({
 
   // ✅ Validate postcode while typing (debounced)
   useEffect(() => {
-    if (pincode.trim().length >= 4) {
+    if (pincode.trim().length >= 3) {
       const delay = setTimeout(() => validatePostcode(pincode), 600);
       return () => clearTimeout(delay);
     } else {
@@ -221,8 +221,6 @@ const WhatServiceYouNeed = ({
         dispatch(
           setbuyerRequestData({
             service_id: selectedService?.id || serviceId,
-            postcode: pincode,
-            city: response.data.city,
           })
         );
 
@@ -258,8 +256,8 @@ const WhatServiceYouNeed = ({
       dispatch(
         setbuyerRequestData({
           service_id: selectedService?.id || serviceId,
-          postcode: pincode,
-          city: citySerach,
+          // postcode: pincode,
+          // city: citySerach,
         })
       );
     } else {
@@ -325,7 +323,7 @@ const WhatServiceYouNeed = ({
         <label className={styles.label}>Where do you need it?</label>
         <input
           type="text"
-          placeholder="Enter Postcode Without Spaces"
+          placeholder="Enter Postcode (No Spaces)"
           className={`${styles.input} ${
             errors.pincode ? styles.errorBorder : ""
           }`}

@@ -92,12 +92,12 @@ const SearchPostAndBanner = ({
         dispatch(setcitySerach(response.data.city));
 
         setShowModal(true);
-        dispatch(
-          setbuyerRequestData({
-            postcode: pincode,
-            city: response.data.city,
-          })
-        );
+        // dispatch(
+        //   setbuyerRequestData({
+        //     postcode: pincode,
+        //     city: response.data.city,
+        //   })
+        // );
       } else {
         showToast("error", "Please enter a valid postcode!");
         return;
@@ -124,7 +124,7 @@ const SearchPostAndBanner = ({
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
-            placeholder="Enter Postcode Without Spaces"
+            placeholder="Enter Postcode (No Spaces)"
             ref={inputRef}
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}

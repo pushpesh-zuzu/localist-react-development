@@ -477,11 +477,10 @@ export const getCityName = (postcodeData) => {
       });
 
       if (response) {
-        // API response ko buyerRequest me set karo
         dispatch(
           setbuyerRequestData({
             city: response?.data?.data?.city, // city name
-            postcode: postcodeData.postcode, // original postcode
+            postcode: response?.data?.data?.postcode, // original postcode
           })
         );
         return response.data;

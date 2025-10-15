@@ -151,7 +151,7 @@ const WhatServiceDoYouNeedPage = ({
     setErrors((prev) => ({ ...prev, pincode: "" }));
 
     // don’t trigger API for short values
-    if (value.length < 5) return;
+    if (value.length < 3) return;
 
     setIsCheckingPostcode(true);
 
@@ -202,8 +202,8 @@ const WhatServiceDoYouNeedPage = ({
       dispatch(
         setbuyerRequestData({
           service_id: selectedService?.id || serviceId,
-          postcode: pincode,
-          city: city,
+          // postcode: pincode,
+          // city: city,
         })
       );
       dispatch(
@@ -242,8 +242,8 @@ const WhatServiceDoYouNeedPage = ({
       dispatch(
         setbuyerRequestData({
           service_id: selectedService.id || serviceId,
-          postcode: pincode,
-          city: citySerach,
+          // postcode: pincode,
+          // city: citySerach,
         })
       );
     } else {
@@ -313,7 +313,7 @@ const WhatServiceDoYouNeedPage = ({
         <div style={{ display: "flex", alignItems: "center" }}>
           <input
             type="text"
-            placeholder="Enter Postcode Without Spaces"
+            placeholder="Enter Postcode (No Spaces)"
             className={`${styles.input} ${
               errors?.pincode ? styles.errorBorder : ""
             }`}
