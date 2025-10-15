@@ -44,8 +44,10 @@ const PostcodeSearch = ({
     setError("");
 
     // Don’t call API for short inputs
-    if (value.length < 5) return;
-
+    if (value>1 && value.length < 5) {
+      setError("Please enter a valid postcode! ");
+      return;
+    }
     setIsCheckingPostcode(true);
 
     try {
@@ -77,17 +79,17 @@ const PostcodeSearch = ({
 
   // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
-    if (!pincode) {
-      showToast("error", "Please enter a valid postcode.");
-      return;
-    }
+    // if (!pincode) {
+    //   showToast("error", "Please enter a valid postcode.");
+    //   return;
+    // }
 
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");
       return;
     }
 
-    getProgressPercentage(remainingProgressPerStep);
+    getProgressPercentage(remainingProgressPerStep - 5);
     if (onNext) {
       onNext();
       setBackButtonTriggered(false);
@@ -115,52 +117,53 @@ const PostcodeSearch = ({
         Simply answer a few questions about your requirements and get tailored
         quotes in seconds.
       </p> */}
-
-      <CardLayoutWrapper
-        title={title}
-        onButtonClick={handleNext}
-        buttonText="Next"
-        disableNextButton={!postalCodeValidate}
-        showBackButton
-        onBackClick={handleBack}
-      >
-        <p className={styles.subText}>
-          This is to match you with the closest verified specialists
-        </p>
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-          }}
+      <div style={{ maxWidth: "592px", margin: "auto" }}>
+        <CardLayoutWrapper
+          title={title}
+          onButtonClick={handleNext}
+          buttonText="Next"
+          disableNextButton={!postalCodeValidate}
+          showBackButton
+          onBackClick={handleBack}
         >
-          <input
-            className={`${styles.postcodeInput} ${
-              error ? styles.errorBorder : ""
-            }`}
-            placeholder="Enter Postcode Without Spaces"
-            ref={inputRef}
-            value={pincode}
-            onChange={handlePincodeChange}
-            onKeyPress={handleKeyPress}
-          />
-          {isCheckingPostcode ? (
-            <Spin
-              className={styles.checkIcon}
-              size="small"
-              style={{ marginLeft: 10 }}
+          <p className={styles.subText}>
+            This is to match you with the closest verified specialists
+          </p>
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <input
+              className={`${styles.postcodeInput} ${
+                error ? styles.errorBorder : ""
+              }`}
+              placeholder="Enter Postcode Without Spaces"
+              ref={inputRef}
+              value={pincode}
+              onChange={handlePincodeChange}
+              onKeyPress={handleKeyPress}
             />
-          ) : postalCodeValidate ? (
-            <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
-          ) : null}
-          <img
-            className={styles.locationicon}
-            alt="location icon"
-            src={location}
-          />
-        </div>
-        {error && <p className={styles.errorText}>{error}</p>}
-      </CardLayoutWrapper>
+            {isCheckingPostcode ? (
+              <Spin
+                className={styles.checkIcon}
+                size="small"
+                style={{ marginLeft: 10 }}
+              />
+            ) : postalCodeValidate ? (
+              <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
+            ) : null}
+            <img
+              className={styles.locationicon}
+              alt="location icon"
+              src={location}
+            />
+          </div>
+          {error && <p className={styles.errorText}>{error}</p>}
+        </CardLayoutWrapper>
+      </div>
     </div>
   );
 };

@@ -178,7 +178,7 @@ const MultiStepForm = () => {
                 </div>
               )}
               {buyerStep === 2 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                <div style={{ margin: "auto" }}>
                   <PostcodeSearch
                     getProgressPercentage={getProgressPercentage}
                     prevStep={prevStep}
@@ -191,7 +191,7 @@ const MultiStepForm = () => {
               )}
 
               {buyerStep === 3 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                <div style={{  margin: "auto" }}>
                   <QuestionAnswerMultiStep
                     questions={lastQuestion} // Sirf last question
                     onNext={nextStep} // Last question complete hone ke baad next step
