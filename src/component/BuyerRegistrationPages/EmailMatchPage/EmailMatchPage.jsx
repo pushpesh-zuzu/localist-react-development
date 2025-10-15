@@ -113,7 +113,7 @@ const EmailMatchPage = ({
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+        (!email || !/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|in|co|io|ai)$/i.test(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
     };
