@@ -65,7 +65,7 @@ const TimelineItem = ({
   </div>
 );
 
-const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
+const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
   const { Option } = Select;
   const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
@@ -87,7 +87,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList, item }) => {
     email: profileLeadViewData?.leads?.customer?.email,
   };
   const userIdActivity = userToken?.id || registerData?.id;
-  console.log(getSellerNotes, "profileLeadViewData");
   const handleResponseChange = (clickName) => {
     const responseStatus = {
       lead_id: profileLeadViewData?.leads?.id,

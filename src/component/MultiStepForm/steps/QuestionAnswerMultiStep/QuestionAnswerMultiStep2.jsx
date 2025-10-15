@@ -16,7 +16,6 @@ const QuestionAnswerMultiStep2 = ({
   onNext,
   onBack,
   getProgressPercentage,
-  isLastQuestion = false,
   isComingFromStep3 = false,
   setQuestionHistory,
   questionHistory,
@@ -46,7 +45,6 @@ const QuestionAnswerMultiStep2 = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-
   const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length || 1;
@@ -103,15 +101,18 @@ const QuestionAnswerMultiStep2 = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      const newSelection = [value]; // ✅ local new state
-      setSelectedOption(newSelection);
-      setError("");
+      // ✅ Select single option only
+      setSelectedOption([value]);
+      setError(""); // Clear error only on change
 
-      // ✅ Use the newSelection directly for next step, not stale state
-      setTimeout(() => {
-        handleNext(newSelection);
-      }, 100);
+      // ✅ If option is NOT "Something else", move to next after short delay
+      if (value !== "Something else (please describe)") {
+        setTimeout(() => {
+          handleNext([value]);
+        }, 150);
+      }
     } else {
+      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -149,12 +150,7 @@ const QuestionAnswerMultiStep2 = ({
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
     const percentage = (100 * 2) / (totalQuestions * 3);
-    if (!isLastQuestion) {
-      getProgressPercentage(percentage);
-    }
-    // else {
-    //   getProgressPercentage();
-    // }
+    getProgressPercentage(percentage);
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selectedOption[0]
     );
@@ -174,6 +170,9 @@ const QuestionAnswerMultiStep2 = ({
     }
     if (nextQ === "last") {
       onNext();
+      const firstStepProgress = (2 / 3) * 100;
+      const remainingProgressPerStep = (100 - firstStepProgress) / 2;
+      getProgressPercentage(remainingProgressPerStep);
     } else if (nextQ && questionIndexMap[nextQ]) {
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
@@ -219,7 +218,7 @@ const QuestionAnswerMultiStep2 = ({
 
     const percentage = (100 * 2) / (totalQuestions * 3);
 
-    if (!isLastQuestion) getProgressPercentage(percentage);
+    getProgressPercentage(percentage);
 
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
@@ -235,6 +234,9 @@ const QuestionAnswerMultiStep2 = ({
       return;
     } else if (nextQ === "last") {
       console.log('nextQ === "last"');
+      const firstStepProgress = (2 / 3) * 100; // 66.66%
+      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
+      getProgressPercentage(remainingProgressPerStep);
       onNext();
       return;
     } else if (nextQ && questionIndexMap[nextQ]) {
@@ -269,34 +271,20 @@ const QuestionAnswerMultiStep2 = ({
         "setProgressPercentagesetProgressPercentage"
       );
       currentQuestion > 1 && getProgressPercentage(-percentage);
-      currentQuestion === 1 && setProgressPercentage(0);
+      currentQuestion === 1 &&
+        setProgressPercentage((100 * 2) / (totalQuestions * 3));
     } else {
       onBack();
       // getProgressPercentage(-25);
     }
   };
 
-  // if (questions.length === 0) {
-  //   return (
-  //     <div className={styles.noQuestions}>
-  //       <h2>No questions available</h2>
-  //     </div>
-  //   );
-  // }
-  // useEffect(() => {
-  //   // setSelectedOption([]);
-  //   setOtherText("");
-  //   setError("");
-  // }, [currentQuestion]);
+  useEffect(() => {
+    // setSelectedOption([]);
+    setOtherText("");
+    setError("");
+  }, [currentQuestion]);
 
-  // Clear question history when component unmounts (i.e., leaving step 2)
-  // useEffect(() => {
-  //   return () => {
-  //     // Cleanup function - runs when component unmounts
-  //     setQuestionHistory([0]);
-  //     setCurrentQuestion(0);
-  //   };
-  // }, []);
   return loading ? (
     <div className={styles.loaderContainer}>
       <Spin size="large" />
@@ -315,11 +303,9 @@ const QuestionAnswerMultiStep2 = ({
         formattedQuestions[currentQuestion]?.option_type === "single" &&
         !buyerRequest?.questions?.some(
           (q) => q.ques === formattedQuestions[currentQuestion]?.questions
-        )
+        ) &&
+        !selectedOption.includes("Something else (please describe)")
       }
-      // buttonText={
-      //   currentQuestion === totalQuestions - 1 ? "Get Quotes" : "Next"
-      // }
       buttonText="Next"
       headingCenter={currentQuestion === 0 ? false : true}
       subtitle={
@@ -379,10 +365,12 @@ const QuestionAnswerMultiStep2 = ({
           selectedOption.includes("Something else (please describe)") && (
             <input
               type="text"
-              placeholder="Please describe..."
+              placeholder="Please enter...."
               className={styles.otherInput}
               value={otherText}
-              onChange={(e) => setOtherText(e.target.value)}
+              onChange={(e) => {
+                setOtherText(e.target.value);
+              }}
             />
           )}
       </div>

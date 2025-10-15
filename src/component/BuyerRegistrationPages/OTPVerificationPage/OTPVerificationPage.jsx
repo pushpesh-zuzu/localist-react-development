@@ -16,6 +16,7 @@ const OTPVerificationPage = ({
   previousStep,
   city,
   isThankuPageOnlyShow = false,
+  setReEnterMobile,
 }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
@@ -198,19 +199,57 @@ const OTPVerificationPage = ({
         <span>{requestUserPhone}</span>
       </p>
 
+      <p className={styles.instructionVerify}>
+        ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
+      </p>
+      <p
+        style={{ maxWidth: "90%", margin: "auto" }}
+        className={styles.instructionVerify}
+      >
+          WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
+      </p>
+      <p
+        style={{ marginTop: "16px", marginBottom: "24px" }}
+        className={styles.instructionVerify}
+      >
+          WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
+      </p>
+
+      <div
+        style={{
+          marginTop: "16px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "24px",
+          justifyContent: "center",
+        }}
+      >
+        <button
+          style={{ width: "180px", minWidth: "180px" }}
+          className={styles.submitBtn}
+          onClick={() => {
+            setReEnterMobile(1);
+          }}
+        >
+          RE-ENTER MOBILE NUMBER
+        </button>
+        <button
+          style={{ width: "180px", minWidth: "180px" }}
+          className={styles.submitBtn}
+          onClick={handleSubmit}
+        >
+          SUBMIT YOUR OTP CODE
+        </button>
+      </div>
       {timer > 0 ? (
         <p className={styles.timerText}>
           Resend OTP in <strong>{timer}</strong>s
         </p>
       ) : (
-        <button className={styles.resendBtn} style={{marginRight:!timer > 0 ?'24px':''}} onClick={handleResendOtp}>
+        <div className={styles.resendBtn} onClick={handleResendOtp}>
           {resendOtpLoader ? "Resending..." : "Resend"}
-        </button>
+        </div>
       )}
-
-      <button className={styles.submitBtn} style={{marginLeft:!timer > 0 ?'24px':''}} onClick={handleSubmit}>
-        Submit
-      </button>
       {/* </div> */}
     </div>
   );

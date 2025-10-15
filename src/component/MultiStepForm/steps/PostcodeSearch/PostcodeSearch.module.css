@@ -27,6 +27,12 @@
   margin-bottom: 24px;
   color: rgba(0, 0, 0, 1);
 }
+.errorText {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  text-align: left;
+}
 .desciption2 {
   font-weight: 400;
   font-size: 18px;
@@ -68,6 +74,17 @@
   width: 16.5px;
   margin-left: 10px;
 }
+
+.checkIcon {
+  position: absolute;
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+  /* pointer !important-events: none; */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .postcodeInput {

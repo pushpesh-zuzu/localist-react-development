@@ -9,6 +9,9 @@ import {
 import { showToast } from "../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+
 
 const OTPVerificationMultiStep = ({
   open,
@@ -41,7 +44,7 @@ const OTPVerificationMultiStep = ({
     }
   }, [timer]);
 
-  const { requestUserId, createrequestUserId } = useSelector(
+  const { requestUserId, verifyPhoneNumberLoader } = useSelector(
     (state) => state.buyer
   );
   if (!open) return null;
@@ -206,10 +209,17 @@ const OTPVerificationMultiStep = ({
         </button>
       )}
     <br/>
-      <button className={styles.submitBtn}  onClick={handleSubmit}>
-        Verify
+      <button className={styles.submitBtn} disabled={verifyPhoneNumberLoader}  onClick={handleSubmit}>
+        {verifyPhoneNumberLoader ? (
+                <Spin
+                  indicator={
+                    <LoadingOutlined spin style={{ color: "white" }} />
+                  }
+                />
+              ) : (
+                'Verify'
+              )}
       </button>
-      {/* </div> */}
     </div>
   );
 };

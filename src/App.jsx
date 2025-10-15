@@ -14,6 +14,8 @@ function App({ initialUrl, hostname, createRouterFactory }) {
   const { selectedServiceFormData, registerStep } = useSelector(
     (state) => state.findJobs
   );
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerToken } = useSelector((state) => state.findJobs);
 
   const payloadRef = useRef(null);
 
@@ -187,6 +189,12 @@ function App({ initialUrl, hostname, createRouterFactory }) {
     typeof window !== "undefined"
       ? window.location.hostname === "ps1.localists.com"
       : hostname === "ps1.localists.com";
+  useEffect(() => {
+    !userToken &&
+      !registerToken &&
+      localStorage.setItem("isRegistrationComplete", "false");
+  }, [userToken, registerToken]);
+
   return (
     <>
       {(isDevEnvironment || isPs1Environment) && (

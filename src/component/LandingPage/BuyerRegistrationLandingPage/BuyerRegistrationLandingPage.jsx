@@ -16,6 +16,7 @@ import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal"
 import OtpVerification from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/OtpVerification/OtpVerification";
 import NumberVerifiedModal from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/NumberVerified/NumberVerified";
 import WelcomeEmailModal from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/WelcomeEmailModal/WelcomeEmailModal";
+import ReEnterMobileNumber from "../../common/ReEnterMobileNumber/ReEnterMobileNumber";
 
 const BuyerRegistrationLandingPage = ({
   closeModal,
@@ -42,10 +43,11 @@ const BuyerRegistrationLandingPage = ({
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
   const [shouldClose, setShouldClose] = useState(false);
   const [email, setEmails] = useState("");
+  const [reEnterMobile, setReEnterMobile] = useState(2);
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  // console.log(buyerStep, "buyerStep");
+  console.log(buyerRequest, "buyerRequest registration ");
 
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader, authToken } = useSelector(
@@ -138,7 +140,6 @@ const BuyerRegistrationLandingPage = ({
     isStartWithQuestionModal &&
       dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
-  console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modal}>
       {!isStartWithQuestionModal ? (
@@ -194,17 +195,25 @@ const BuyerRegistrationLandingPage = ({
             />
           )}
 
-          {buyerStep === 4 && (
+          {buyerStep === 4 && reEnterMobile === 2 && (
             <OtpVerification
               nextStep={nextStep}
               previousStep={previousStep}
               formData={buyerRequest}
               open={true}
               isThankuPageOnlyShow={true}
+              setReEnterMobile={setReEnterMobile}
               // setShowConfirmModal={setShowConfirmModal}
               // onClose={handleClose}
             />
           )}
+          {reEnterMobile === 1 && (
+            <ReEnterMobileNumber
+              setReEnterMobile={setReEnterMobile}
+              onClose={() => setReEnterMobile(2)}
+            />
+          )}
+
           {buyerStep === 5 && (
             <NumberVerifiedModal
               nextStep={nextStep}
@@ -379,15 +388,20 @@ const BuyerRegistrationLandingPage = ({
             />
           )}
 
-          {buyerStep === 4 && (
+          {buyerStep === 4 && reEnterMobile === 2 && (
             <OtpVerification
               nextStep={nextStep}
               previousStep={previousStep}
               formData={buyerRequest}
               open={true}
               isThankuPageOnlyShow={true}
-              // setShowConfirmModal={setShowConfirmModal}
-              // onClose={handleClose}
+              setReEnterMobile={setReEnterMobile}
+            />
+          )}
+          {reEnterMobile === 1 && (
+            <ReEnterMobileNumber
+              setReEnterMobile={setReEnterMobile}
+              onClose={() => setReEnterMobile(2)}
             />
           )}
           {buyerStep === 5 && (

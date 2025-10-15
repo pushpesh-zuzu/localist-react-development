@@ -1,15 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./searchpostandbanner.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getCityName,
   setbuyerRequestData,
   setBuyerStep,
   setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
-import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
-import { message } from "antd";
+import { message, Spin } from "antd";
 import BuyerRegistrationLandingPage from "../BuyerRegistrationLandingPage/BuyerRegistrationLandingPage";
-import { googleAPI } from "../../../Api/axiosInstance";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const SearchPostAndBanner = ({
   title = "",
@@ -19,131 +19,59 @@ const SearchPostAndBanner = ({
   cancelPara,
   serviceId,
   welcomModalTitle,
-  welcomModalButtonText
+  welcomModalButtonText,
 }) => {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
   const [isStartWithQuestionModal, setIsStartWithQuestionModal] =
     useState(false);
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
-  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
-  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
-
+  const inputRef = useRef(null);
+  const { postCodeLoader } = useSelector((state) => state.buyer);
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
     setShowModal(false);
     setPincode("");
-    setIsPostcodeSelected(false);
     setIsStartWithQuestionModal(false);
   };
+
+  // Auto open modal after delay
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowModal(true);
       setIsStartWithQuestionModal(true);
     }, 2500);
-    // ✅ cleanup on unmount
     return () => clearTimeout(timeoutId);
   }, []);
 
+  // Check pending modal in localStorage
   useEffect(() => {
     const checkPendingModal = () => {
       const pendingModal = JSON.parse(
         localStorage.getItem("pendingBuyerModal")
       );
 
-      if (pendingModal?.shouldOpen) {
-        setTimeout(() => {
-          dispatch(setbuyerRequestData(pendingModal.buyerRequest));
-          dispatch(setcitySerach(pendingModal.city));
+    if (pendingModal?.shouldOpen) {
+      setTimeout(() => {
+        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+        dispatch(setcitySerach(pendingModal.city));
 
-          setShowModal(true);
-          dispatch(setBuyerStep(7));
-        }, 200);
-      }
+        setShowModal(true);
+        dispatch(setBuyerStep(7));
+      }, 200);
+    }
     };
 
     checkPendingModal();
   }, [dispatch]);
 
-  const initGoogleAutocomplete = () => {
-    if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
-
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        types: ["geocode"],
-        componentRestrictions: { country: "UK" },
-      }
-    );
-
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
-
-      const postalCode = place.address_components.find((c) =>
-        c.types.includes("postal_code")
-      )?.long_name;
-
-      const cityName =
-        place.address_components.find((c) => c.types.includes("postal_town"))
-          ?.long_name ||
-        place.address_components.find((c) => c.types.includes("locality"))
-          ?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_2")
-        )?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_3")
-        )?.long_name;
-
-      if (postalCode) {
-        setPincode(postalCode);
-        inputRef.current.value = postalCode;
-        setIsPostcodeSelected(true);
-        setPostalCodeValidate(true);
-        setIsPincodeFromDropdown(true);
-      } else {
-        showToast("error", "No PIN code found! Please try again.");
-      }
-
-      if (cityName) {
-        setCity(cityName);
-        dispatch(setcitySerach(cityName));
-      }
-    });
-  };
-
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initGoogleAutocomplete;
-        document.body.appendChild(script);
-      } else {
-        initGoogleAutocomplete();
-      }
-    };
-
-    loadGoogleMapsScript();
-  }, []);
-
-  const handleContinue = () => {
-    if (!pincode) {
+  // ✅ handle search + city API check
+  const handleContinue = async () => {
+    if (!pincode.trim()) {
       showToast("error", "Please enter a valid postcode or town.");
-      return;
-    }
-
-    if (!isPostcodeSelected) {
-      //  prevent manual typing
-      showToast("error", "Please select a postcode from the suggestions.");
       return;
     }
 
@@ -152,17 +80,34 @@ const SearchPostAndBanner = ({
       return;
     }
 
-    if (!isPincodeFromDropdown) {
-      showToast("error", "Please select postcodes from suggestions below");
+    try {
+      // ✅ call the getCityName API
+      const response =
+        (await dispatch(getCityName({ postcode: pincode })).unwrap?.()) ??
+        (await dispatch(getCityName({ postcode: pincode })));
+
+      // agar API response sahi aata hai
+      if (response?.data?.city) {
+        setCity(response.data.city);
+        dispatch(setcitySerach(response.data.city));
+
+        setShowModal(true);
+        dispatch(
+          setbuyerRequestData({
+            postcode: pincode,
+            city: response.data.city,
+          })
+        );
+      } else {
+        showToast("error", "Please enter a valid postcode!");
+        return;
+      }
+    } catch (error) {
+      // API fail hone par flow yahin ruk jaayega
+      showToast("error", "Please enter a valid postcode!");
+      console.error("City fetch failed:", error);
       return;
     }
-
-    setShowModal(true);
-    dispatch(
-      setbuyerRequestData({
-        postcode: pincode,
-      })
-    );
   };
 
   return (
@@ -174,23 +119,25 @@ const SearchPostAndBanner = ({
         <span className={styles.heading}>FREE QUOTES{isNeedS ? "s" : ""}</span>{" "}
         from local {title}!
       </h1>
+
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
-            placeholder="Postcode"
+            placeholder="Enter Postcode Without Spaces"
             ref={inputRef}
             value={pincode}
-            onChange={(e) => {
-              setPincode(e.target.value);
-              setIsPostcodeSelected(false);
-              setPostalCodeValidate(false);
-              setIsPincodeFromDropdown(false);
-            }}
+            onChange={(e) => setPincode(e.target.value)}
           />
-
-          <button onClick={handleContinue}>Search</button>
-          <div></div>
+          <button disabled={postCodeLoader} onClick={handleContinue}>
+            {postCodeLoader ? (
+              <Spin
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              />
+            ) : (
+              "Search"
+            )}
+          </button>
         </div>
       </div>
 
@@ -198,7 +145,7 @@ const SearchPostAndBanner = ({
         <BuyerRegistrationLandingPage
           closeModal={handleClose}
           postcode={pincode}
-          postalCodeValidate={postalCodeValidate}
+          postalCodeValidate={true}
           serviceName={defaultService}
           cancelHeading={cancelHeading}
           cancelPara={cancelPara}

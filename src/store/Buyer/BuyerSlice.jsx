@@ -49,6 +49,7 @@ const initialState = {
   notificationLoader: false,
   addNotificationLoader: false,
   verifyPhoneNumberLoader: false,
+  postCodeLoader:false
 };
 
 export const questionAnswerData = (questionData) => {
@@ -130,6 +131,35 @@ export const registerQuoteCustomer = (customerData) => {
 
       if (response) {
         console.log(response, "response");
+        dispatch(setRequestUserId(response.data.data?.user_id));
+        dispatch(setRequestUserPhone(response.data.data?.phone));
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error registering quote customer:", error?.response?.data);
+      showToast("error", error?.response?.data?.message);
+      throw error;
+    } finally {
+      dispatch(setCreateRequesLoader(false));
+    }
+  };
+};
+export const updateMobile = (phone) => {
+  return async (dispatch) => {
+    dispatch(setCreateRequesLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `customer/update-register-phone-number`,
+        phone,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response) {
+        console.log(response, "response Update Phone");
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
@@ -436,11 +466,43 @@ export const resendOtp = (data) => {
     }
   };
 };
+export const getCityName = (postcodeData) => {
+  return async (dispatch) => {
+    dispatch(setPostCodeLoader(true));
+    try {
+      const response = await axiosInstance.post(`get-city-name`, postcodeData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response) {
+        // API response ko buyerRequest me set karo
+        dispatch(
+          setbuyerRequestData({
+            city: response?.data?.data?.city, // city name
+            postcode: postcodeData.postcode, // original postcode
+          })
+        );
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error getting city name:", error?.response?.data);
+      // showToast("error", error?.response?.data?.message);
+      throw error;
+    } finally {
+      dispatch(setPostCodeLoader(false));
+    }
+  };
+};
 
 const buyerSlice = createSlice({
   name: "buyer",
   initialState: initialState,
   reducers: {
+     setPostCodeLoader: (state, action) => {
+      state.postCodeLoader = action.payload;
+    },
     setResendOtpLoader: (state, action) => {
       state.resendOtpLoader = action.payload;
     },
@@ -449,9 +511,6 @@ const buyerSlice = createSlice({
     },
     setQuestionAnswerData(state, action) {
       state.questionanswerData = action.payload;
-    },
-    setBuyerStep(state, action) {
-      state.buyerStep = action.payload;
     },
     setBuyerStep(state, action) {
       state.buyerStep = action.payload;
@@ -544,6 +603,7 @@ const buyerSlice = createSlice({
 });
 
 export const {
+  setPostCodeLoader,
   setResendOtpLoader,
   setquestionLoader,
   setAddNotificationLoader,

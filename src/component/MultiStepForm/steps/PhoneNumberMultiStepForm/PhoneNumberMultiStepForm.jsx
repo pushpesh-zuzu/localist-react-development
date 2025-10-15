@@ -11,10 +11,7 @@ import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PhoneNumberMultiStepForm.module.css";
 import { useLocation } from "react-router";
 
-const PhoneNumberMultiStepForm = ({
-  nextStep,
-  onBack,
-}) => {
+const PhoneNumberMultiStepForm = ({ nextStep, onBack }) => {
   const dispatch = useDispatch();
   const { requestLoader, buyerRequest } = useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
@@ -136,7 +133,7 @@ const PhoneNumberMultiStepForm = ({
             </span>
           )}
         </div>
-
+        <p style={{marginTop:'33px'}}>We can only send a passcode to a <strong>MOBILE NUMBER</strong>, not a <strong>LANDLINE</strong></p>
         <p className={styles.phoneNote}>
           We only use this to match you with trusted professionals.
         </p>

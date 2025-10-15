@@ -17,7 +17,6 @@ const NameEmailMultiStepForm = ({
   setEmails,
   resetTrigger,
   isPPCPages = false,
-  getProgressPercentage,
   onBack,
 }) => {
   const dispatch = useDispatch();
@@ -167,7 +166,7 @@ const NameEmailMultiStepForm = ({
     onBack();
     const firstStepProgress = (2 / 3) * 100; // 66.66%
     const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
-    getProgressPercentage(-remainingProgressPerStep);
+    // getProgressPercentage(-remainingProgressPerStep);
   };
 
   return (
@@ -178,34 +177,19 @@ const NameEmailMultiStepForm = ({
       buttonText="Next"
       showBackButton={true}
       disableNextButton={
-        searchServiceLoader ||
-        !name ||
-        !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+        searchServiceLoader
       }
       loader={searchServiceLoader}
     >
       <div className={styles.infoWrapper}>
         {/* <label className={styles.label}>Full Name</label> */}
-        <input
-          style={{ marginTop: "5px" }}
-          type="text"
-          placeholder="Full Name"
-          className={`${styles.input} ${errors?.name ? styles.inputError : ""}`}
-          value={name}
-          onChange={handleNameChange}
-        />
-        {errors?.name && (
-          <span style={{ color: "red" }} className={styles.errorMessage}>
-            Full name is required.
-          </span>
-        )}
-
-        {!isPPCPages && (
-          <>
+         {!isPPCPages && (
+          <div style={{marginBottom:'10px'}}>
             {/* <label htmlFor="email" className={styles.label}>
               Email
             </label> */}
             <input
+            
               type="email"
               placeholder="Email"
               className={`${styles.input} ${
@@ -220,10 +204,24 @@ const NameEmailMultiStepForm = ({
                 Please enter a valid email address.
               </span>
             )}
-          </>
+          </div>
         )}
+        <input
+          style={{ marginTop: "5px" }}
+          type="text"
+          placeholder="Full Name"
+          className={`${styles.input} ${errors?.name ? styles.inputError : ""}`}
+          value={name}
+          onChange={handleNameChange}
+        />
+        {errors?.name && (
+          <span style={{ color: "red" }} className={styles.errorMessage}>
+            Full name is required.
+          </span>
+        )}
+
         <p className={styles.subText}>
-          This is to match you with the closest verified specialists
+          We only use this to match you with trusted professionals.
         </p>
       </div>
     </CardLayoutWrapper>

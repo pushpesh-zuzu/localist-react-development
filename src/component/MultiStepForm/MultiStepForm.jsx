@@ -42,16 +42,20 @@ const MultiStepForm = () => {
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
+  const [setstepText, setStepText] = useState("What");
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
     if (buyerStep === 1) {
       setActualSteps(1);
+      setStepText("What");
     } else if (buyerStep === 2) {
       setActualSteps(2);
-    } else if (buyerStep === 4) {
+      setStepText("Where");
+    } else if (buyerStep === 3) {
       setActualSteps(3);
+      setStepText("When");
     }
   }, [buyerStep]);
   const getProgressPercentage = (per) => {
@@ -113,23 +117,23 @@ const MultiStepForm = () => {
   useEffect(() => {
     dispatch(questionAnswerData({ service_id: 43 }));
   }, []);
-  // console.log(buyerRequest,'currentStep')
-  // console.log(questionanswerData,'questionanswerDataquestionanswerData')
-  // Split questions into first part and last question
+
   const firstQuestions = questionanswerData?.slice(0, -1) || []; // All except last
   const lastQuestion = questionanswerData?.slice(-1) || []; // Only last question
-  // useEffect(() => {
-  //   console.log("STEP CHANGE ->", currentStep);
-  //   console.trace(); // shows call stack to see who triggered it
-  // }, [currentStep]);
+
   useEffect(() => {
     if (questionanswerData.length > 0) {
       setIsLoadingQuestions(false);
     }
   }, [questionanswerData]);
-  const showProgressSteps = JSON.parse(
-    localStorage.getItem("showProgressSteps")
-  );
+
+  useEffect(() => {
+    if (firstQuestions?.length > 0) {
+      const initialProgress = (100 * 2) / (firstQuestions.length * 3);
+      setProgressPercentage(initialProgress);
+    }
+  }, [questionanswerData]);
+
   return (
     <>
       <Helmet>
@@ -145,60 +149,63 @@ const MultiStepForm = () => {
       {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
-          {progressPercentage <= 100 && buyerStep !== 7
-            ? `What - ${actualSteps}/3`
-            : ""}
+          {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
         </span>{" "}
       </div>
 
       <ProgressBarLandingPage
         value={progressPercentage}
-        actualSteps={actualSteps}
+        buyerStep={buyerStep}
       />
       <div>
         <div className={styles.container}>
           <div className={styles.formContainer}>
             <div className={`${styles.slideContainer} ${animationDirection}`}>
               {buyerStep === 1 && (
-                <QuestionAnswerMultiStep2
-                  questions={firstQuestions}
-                  onNext={nextStep}
-                  onBack={prevStep}
-                  loading={isLoadingQuestions}
-                  getProgressPercentage={getProgressPercentage}
-                  isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
-                  setQuestionHistory={setQuestionHistory}
-                  questionHistory={questionHistory}
-                  setIsComingFromStep3={setIsComingFromStep3}
-                  setProgressPercentage={setProgressPercentage}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <QuestionAnswerMultiStep2
+                    questions={firstQuestions}
+                    onNext={nextStep}
+                    onBack={prevStep}
+                    loading={isLoadingQuestions}
+                    getProgressPercentage={getProgressPercentage}
+                    isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
+                    setQuestionHistory={setQuestionHistory}
+                    questionHistory={questionHistory}
+                    setIsComingFromStep3={setIsComingFromStep3}
+                    setProgressPercentage={setProgressPercentage}
+                  />
+                </div>
               )}
               {buyerStep === 2 && (
-                <PostcodeSearch
-                  getProgressPercentage={getProgressPercentage}
-                  prevStep={prevStep}
-                  onNext={nextStep}
-                  backButtonTriggered={backButtonTriggered}
-                  setBackButtonTriggered={setBackButtonTriggered}
-                  returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
-                />
+                <div style={{ margin: "auto" }}>
+                  <PostcodeSearch
+                    getProgressPercentage={getProgressPercentage}
+                    prevStep={prevStep}
+                    onNext={nextStep}
+                    backButtonTriggered={backButtonTriggered}
+                    setBackButtonTriggered={setBackButtonTriggered}
+                    returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
+                  />
+                </div>
               )}
 
               {buyerStep === 3 && (
-                <QuestionAnswerMultiStep
-                  questions={lastQuestion} // Sirf last question
-                  onNext={nextStep} // Last question complete hone ke baad next step
-                  onBack={prevStep}
-                  loading={questionLoader}
-                  getProgressPercentage={getProgressPercentage}
-                />
+                <div style={{  margin: "auto" }}>
+                  <QuestionAnswerMultiStep
+                    questions={lastQuestion} // Sirf last question
+                    onNext={nextStep} // Last question complete hone ke baad next step
+                    onBack={prevStep}
+                    loading={questionLoader}
+                    getProgressPercentage={getProgressPercentage}
+                  />
+                </div>
               )}
               {buyerStep === 4 && (
                 <NameEmailMultiStepForm
-                  nextStep={nextStep} // Name/Email complete hone ke baad step 4 pe jao
+                  nextStep={nextStep}
                   onBack={prevStep}
                   isStartWithQuestionModal={true}
-                  getProgressPercentage={getProgressPercentage}
                 />
               )}
               {buyerStep === 5 && (
