@@ -41,7 +41,12 @@
   line-height: 22px;
   text-align: center;
 }
-
+/* .titlePrimary:{
+  color: var(--primary-color) !important;
+}
+.titleBlack{
+  color: var(--text-color);
+} */
 .buttonContainer {
   display: flex;
   gap: 12px;
@@ -156,7 +161,7 @@
   }
 
   .cardWrapper {
-    padding: 16px 4px;
+    padding: 0px;
     margin: 10px 0;
   }
 

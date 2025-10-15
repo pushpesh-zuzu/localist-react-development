@@ -1,7 +1,7 @@
 import { Spin } from "antd";
 import styles from "./CardLayoutWrapper.module.css";
 import { LoadingOutlined } from "@ant-design/icons";
-import leftNormalArrow from '../../../../assets/Icons/leftNormalArrow.svg'
+import leftNormalArrow from "../../../../assets/Icons/leftNormalArrow.svg";
 const CardLayoutWrapper = ({
   children,
   title,
@@ -13,14 +13,32 @@ const CardLayoutWrapper = ({
   showBackButton = false,
   disableNextButton,
   loader = false,
-  headingCenter=true
+  headingCenter = true,
+  titlePrimary = false,
 }) => {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardWrapper}>
-                {title && <h2 className={`${headingCenter ?styles.title:styles.leftTitle}`}>{title}</h2>}
+        {title && (
+          <h2
+            style={{ color: titlePrimary ? "#00afe3" : "#000" }}
+            className={`${headingCenter ? styles.title : styles.leftTitle}`}
+          >
+            {title}
+          </h2>
+        )}
 
-        {subtitle && <p style={{textAlign:headingCenter?'center':'left', marginBottom:'40px'}} className={styles.subtitle}>{subtitle}</p>}
+        {subtitle && (
+          <p
+            style={{
+              textAlign: headingCenter ? "center" : "left",
+              marginBottom: "40px",
+            }}
+            className={styles.subtitle}
+          >
+            {subtitle}
+          </p>
+        )}
 
         {children}
 
@@ -29,7 +47,11 @@ const CardLayoutWrapper = ({
             {showBackButton && (
               <button className={styles.backButton} onClick={onBackClick}>
                 {/* &lt; */}
-                <img style={{height:'12px', width:'6px'}} alt="leftNormalArrow" src={leftNormalArrow}/>
+                <img
+                  style={{ height: "12px", width: "6px" }}
+                  alt="leftNormalArrow"
+                  src={leftNormalArrow}
+                />
               </button>
             )}
             <button

@@ -125,6 +125,7 @@ const PostcodeSearch = ({
           disableNextButton={!postalCodeValidate}
           showBackButton
           onBackClick={handleBack}
+          titlePrimary={true}
         >
           <p className={styles.subText}>
             This is to match you with the closest verified specialists
