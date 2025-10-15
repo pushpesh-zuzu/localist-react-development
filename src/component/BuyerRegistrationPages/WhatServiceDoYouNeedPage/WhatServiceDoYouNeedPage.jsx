@@ -64,6 +64,7 @@ const WhatServiceDoYouNeedPage = ({
   // ✅ Postcode validation states
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
+  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
 
   const nameValue = useMemo(() => {
     return getNameFromSlug(slug, megaMenu[0].subcategory);
@@ -111,6 +112,7 @@ const WhatServiceDoYouNeedPage = ({
     if (pincodes && postalCodeIsValidate) {
       setPincode(pincodes);
       setPostalCodeValidate(true);
+      setIsPincodeFromDropdown(true);
       setErrors((prev) => ({ ...prev, pincode: "" }));
     }
   }, [pincodes, postalCodeIsValidate]);
