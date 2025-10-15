@@ -124,7 +124,7 @@ const SearchPostAndBanner = ({
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
-            placeholder="Postcode"
+            placeholder="Enter Postcode Without Spaces"
             ref={inputRef}
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}

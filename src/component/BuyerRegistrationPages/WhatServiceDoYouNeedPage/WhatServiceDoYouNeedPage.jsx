@@ -313,7 +313,7 @@ const WhatServiceDoYouNeedPage = ({
         <div style={{ display: "flex", alignItems: "center" }}>
           <input
             type="text"
-            placeholder="Enter your Postcode"
+            placeholder="Enter Postcode Without Spaces"
             className={`${styles.input} ${
               errors?.pincode ? styles.errorBorder : ""
             }`}

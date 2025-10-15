@@ -148,7 +148,7 @@ const PostcodeSearch = ({
             className={`${styles.postcodeInput} ${
               error ? styles.errorBorder : ""
             }`}
-            placeholder="e.g: ch41 tlh"
+            placeholder="Enter Postcode Without Spaces"
             ref={inputRef}
             value={pincode}
             onChange={handlePincodeChange}

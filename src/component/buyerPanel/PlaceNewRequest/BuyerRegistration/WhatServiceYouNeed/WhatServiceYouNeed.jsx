@@ -325,7 +325,7 @@ const WhatServiceYouNeed = ({
         <label className={styles.label}>Where do you need it?</label>
         <input
           type="text"
-          placeholder="Enter your Postcode or town"
+          placeholder="Enter Postcode Without Spaces"
           className={`${styles.input} ${
             errors.pincode ? styles.errorBorder : ""
           }`}
