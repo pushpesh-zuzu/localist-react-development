@@ -153,7 +153,7 @@
 
 .image {
   width: 260.6px;
-  height: 186.8px;
+  /* height: 186.8px; */
   object-fit: cover;
   margin: 30px 0 30px 22px;
 }

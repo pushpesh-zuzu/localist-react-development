@@ -72,7 +72,11 @@ const MyProfile = () => {
     };
 
     // Wrap with confirmNavigation check
-    confirmNavigation(handleOpen);
+    if (isDirtyRedux) {
+      confirmNavigation(handleOpen);
+    } else {
+      handleOpen();
+    }
   };
 
   const companySlug = viewProfileData?.company_name

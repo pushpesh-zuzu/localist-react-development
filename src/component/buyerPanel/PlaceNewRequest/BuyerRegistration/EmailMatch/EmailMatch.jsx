@@ -23,7 +23,7 @@ const EmailMatch = ({
   setEmails,
   setShowConfirmModal,
   resetTrigger,
-  isStartWithQuestionModal=false,
+  isStartWithQuestionModal = false,
   isPPCPages = false,
   hideCloseButton = false,
 }) => {
@@ -193,6 +193,7 @@ const EmailMatch = ({
       setResetEmailFormTrigger(false);
     }
   }, [resetTrigger]);
+
   const handleCloseClick = () => {
     if (!userToken?.remember_tokens) {
       console.log(name, email, phone, "p");
@@ -202,6 +203,94 @@ const EmailMatch = ({
       onClose();
     }
   };
+
+  useEffect(() => {
+    dispatch(setbuyerRequestData({ name, email, phone }));
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (name || email || phone) {
+        // setShowConfirmModal(true);
+        e.preventDefault();
+        e.returnValue = ""; // still needed for native popup
+        dispatch(setbuyerRequestData({ name, email, phone }));
+      }
+    };
+
+    // For internal route change
+    const handleBeforeRouteChange = (event) => {
+      if (name || email || phone) {
+        event.preventDefault();
+        dispatch(setbuyerRequestData({ name, email, phone }));
+        // setShowConfirmModal(true);
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("popstate", handleBeforeRouteChange);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("popstate", handleBeforeRouteChange);
+    };
+  }, [name, email, phone]);
+
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     // Only trigger if user has partially filled the form
+  //     if (name || email || phone) {
+  //       // create a payload similar to registerQuoteCustomer API
+  //       const payload = {
+  //         name,
+  //         email,
+  //         phone,
+  //         questions: buyerRequest?.questions || [],
+  //         service_id: buyerRequest?.service_id || "",
+  //         city: citySerach || "",
+  //         postcode: buyerRequest?.postcode || "",
+  //         campaignid: campaignid || "",
+  //         gclid: gclid || "",
+  //         campaign: campaign || "",
+  //         adgroup: adGroup || "",
+  //         targetid: targetID || "",
+  //         msclickid: msclickid || "",
+  //         utm_source: utm_source || "",
+  //         keyword: keyword || "",
+  //         form_status: 1, // same as your API expects
+  //       };
+
+  //       try {
+  //         const url = `${process.env.REACT_APP_API_BASE_URL}/registerQuoteCustomer`;
+  //         const blob = new Blob([JSON.stringify(payload)], {
+  //           type: "application/json",
+  //         });
+  //         navigator.sendBeacon(url, blob);
+  //       } catch (err) {
+  //         console.error("Beacon send failed", err);
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [
+  //   name,
+  //   email,
+  //   phone,
+  //   buyerRequest,
+  //   citySerach,
+  //   campaignid,
+  //   gclid,
+  //   campaign,
+  //   adGroup,
+  //   targetID,
+  //   msclickid,
+  //   utm_source,
+  //   keyword,
+  // ]);
 
   return (
     <div className={styles.modalOverlay}>

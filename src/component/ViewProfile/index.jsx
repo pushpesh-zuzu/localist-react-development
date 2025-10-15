@@ -177,10 +177,15 @@ const ViewProfiles = () => {
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
-    // setIsFetching(true);
-    dispatch(ReviewProfile(profileId?.profileId));
-    dispatch(addViewProfileList(sellerData));
+    let token = localStorage.getItem("barkToken");
+    token = JSON.parse(token);
+    if (token) {
+      dispatch(addViewProfileList(sellerData));
+    } else {
+      dispatch(ReviewProfile(profileId.requestId));
+    }
   }, []);
+
   const handleRequestOpen = () => {
     setCustomerModal(true);
   };

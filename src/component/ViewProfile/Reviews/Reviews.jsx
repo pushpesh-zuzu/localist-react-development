@@ -42,7 +42,12 @@ const ReviewSection = ({
     (state) => state.leadSetting
   );
   const datata = useSelector((state) => state.leadSetting);
-  const reviewLength = reviewProfileData?.reviews_count || 0;
+  let token = localStorage.getItem("barkUserToken");
+  token = JSON.parse(token);
+  const reviewLength =
+    token && token.remember_tokens
+      ? viewProfileData?.reviews_count || 0
+      : reviewProfileData?.reviews_count || 0;
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
@@ -50,7 +55,7 @@ const ReviewSection = ({
     setIsOpen(true);
   };
   const totalReviews = 5;
-  console.log(reviewProfileData, "viewProfileData");
+  console.log(reviewProfileData, viewProfileData, "viewProfileData");
 
   const initialCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
@@ -110,12 +115,18 @@ const ReviewSection = ({
           <div className={styles.container}>
             <div className={styles.left}>
               <div className={styles.score}>
-                {reviewProfileData?.avg_rating ?? 0}/5
+                {token && token.remember_tokens
+                  ? viewProfileData?.avg_rating ?? 0
+                  : reviewProfileData?.avg_rating ?? 0}
+                /5
               </div>
 
               <div className={styles.stars}>
                 {Array.from({ length: 5 }).map((_, index) => {
-                  const rating = reviewProfileData?.avg_rating ?? 0;
+                  const rating =
+                    token && token.remember_tokens
+                      ? viewProfileData?.avg_rating ?? 0
+                      : reviewProfileData?.avg_rating ?? 0;
                   if (index < Math.floor(rating)) {
                     return (
                       <img

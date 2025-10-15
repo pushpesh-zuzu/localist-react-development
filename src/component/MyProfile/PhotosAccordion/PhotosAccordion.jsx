@@ -12,11 +12,12 @@ import {
 import AddYoutubeModal from "./AddYoutubeModal";
 import { baseURL } from "../../../Api/axiosInstance";
 import { BASE_IMAGE } from "../../../utils";
-const PhotosAccordion = ({ details }) => {
+const PhotosAccordion = ({ detailsData }) => {
   const dispatch = useDispatch();
   const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector(
     (state) => state.myProfile
   );
+  const [details, setDetails] = useState(detailsData);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [formState, setFormState] = useState({
     type: "photos",
@@ -107,11 +108,6 @@ const PhotosAccordion = ({ details }) => {
       toast.success("Photos updated successfully!");
       dispatch(clearPhotoUpdateStatus());
       dispatch(setIsDirtyRedux(true));
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-      window.scrollTo(0, 0);
     } else if (photoUpdateError) {
       toast.error(`Failed: ${photoUpdateError}`);
       dispatch(clearPhotoUpdateStatus());

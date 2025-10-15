@@ -219,6 +219,18 @@
   line-height: 25px;
 }
 
+.jobInfo {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.jobInfo p {
+  word-break: break-word;
+  white-space: normal;
+}
+
 .purchaseButton {
   background: #57e202;
   color: white;

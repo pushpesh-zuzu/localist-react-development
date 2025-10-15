@@ -12,6 +12,7 @@ import styles from "./AccreditationsAccordion.module.css";
 import ISSAImage from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import { BASE_IMAGE } from "../../../utils";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const AccreditationsAccordion = ({ details }) => {
   const [accordionGroups, setAccordionGroups] = useState([]);
@@ -21,6 +22,9 @@ const AccreditationsAccordion = ({ details }) => {
   const { accreditationsUpdateSuccess, accreditationsUpdateError } =
     useSelector((state) => state.myProfile);
 
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // Input change → update name
   const handleInputChange = (index, value) => {
     const updated = [...accordionGroups];
@@ -149,11 +153,10 @@ const AccreditationsAccordion = ({ details }) => {
     if (accreditationsUpdateSuccess) {
       toast.success("Accreditations saved successfully!");
       dispatch(clearAccreditationsStatus());
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-      window.scrollTo(0, 0);
+      const sellerData = {
+        seller_id: user_id,
+      };
+      dispatch(addViewProfileList(sellerData));
     } else if (accreditationsUpdateError) {
       toast.error(`Error: ${accreditationsUpdateError}`);
       dispatch(clearAccreditationsStatus());
