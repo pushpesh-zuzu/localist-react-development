@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { message } from "antd";
-import { googleAPI } from "../../../../Api/axiosInstance";
+import { message, Spin } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PostcodeSearch.module.css";
 import location from "../../../../assets/Icons/location.svg";
+import CheckIcon from "../../../../assets/Icons/greenCheckBox.jpeg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
   setcitySerach,
+  getCityName,
 } from "../../../../store/Buyer/BuyerSlice";
 
 const PostcodeSearch = ({
@@ -21,136 +22,77 @@ const PostcodeSearch = ({
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const {
-    buyerRequest,
-    requestLoader,
-    citySerach,
-    questionanswerData,
-    questionLoader,
-    postal_code,
-  } = useSelector((state) => state.buyer);
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const [pincode, setPincode] = useState(buyerRequest?.postal_code || "");
-  const [city, setCity] = useState(citySerach);
-  const [isPostcodeSelected, setIsPostcodeSelected] = useState(
-    !!buyerRequest?.postal_code
-  );
+  const [city, setCity] = useState(citySerach || "");
   const [postalCodeValidate, setPostalCodeValidate] = useState(
     !!buyerRequest?.postal_code
   );
-  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(
-    !!buyerRequest?.postal_code
-  );
+  const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
+  const [error, setError] = useState("");
+
   const firstStepProgress = (2 / 3) * 100; // 66.66%
-  const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
+  const remainingProgressPerStep = (100 - firstStepProgress) / 2; // ≈16.665%
 
   const showToast = (type, content) => message[type](content);
 
-  // ✅ Initialize Google Autocomplete
-  const initGoogleAutocomplete = () => {
-    if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
+  // ✅ Handle postcode validation (onChange)
+  const handlePincodeChange = async (e) => {
+    const value = e.target.value.slice(0, 10);
+    setPincode(value);
+    setPostalCodeValidate(false);
+    setError("");
 
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        types: ["geocode"],
-        componentRestrictions: { country: "UK" },
-      }
-    );
+    // Don’t call API for short inputs
+    if (value.length < 5) return;
 
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
+    setIsCheckingPostcode(true);
 
-      let postalCode = place.address_components.find((c) =>
-        c.types.includes("postal_code")
-      )?.long_name;
+    try {
+      const response =
+        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
+        (await dispatch(getCityName({ postcode: value })));
 
-      let cityName =
-        place.address_components.find((c) => c.types.includes("locality"))
-          ?.long_name ||
-        place.address_components.find((c) => c.types.includes("postal_town"))
-          ?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_2")
-        )?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_3")
-        )?.long_name;
-
-      if (postalCode) {
-        const isSamePostcode =
-          buyerRequest?.postal_code?.toLowerCase() === postalCode.toLowerCase();
-        onNext();
-        getProgressPercentage(remainingProgressPerStep);
-        setPincode(postalCode);
+      if (response?.data?.city) {
+        const validPostcode = response.data.postcode || value;
         setPostalCodeValidate(true);
-        setIsPincodeFromDropdown(true);
-        inputRef.current.value = postalCode;
-        setIsPostcodeSelected(true);
-        dispatch(setbuyerRequestData({ postal_code: postalCode }));
-      } else if (isSamePostcode) {
-        setTimeout(() => {
-          onNext();
-          setBackButtonTriggered(false);
-        }, 200);
-      } else {
-        showToast("error", "No postal code found! Please try again.");
-      }
+        setCity(response.data.city);
+        dispatch(setcitySerach(response.data.city));
+        dispatch(setbuyerRequestData({ postal_code: validPostcode }));
+        setError("");
 
-      if (cityName) {
-        setCity(cityName);
-        dispatch(setcitySerach(cityName));
+        // ✅ Automatically call Next when validation succeeds
+        handleNext(true);
+      } else {
+        setPostalCodeValidate(false);
+        setError("Please enter a valid postcode!");
       }
-    });
+    } catch (error) {
+      setPostalCodeValidate(false);
+      setError("Please enter a valid postcode!");
+    } finally {
+      setIsCheckingPostcode(false);
+    }
   };
-  // useEffect(() => {
-  //   !backButtonTriggered &&
-  //     pincode &&
-  //     postalCodeValidate &&
-  //     setTimeout(() => {
-  //       handleNext();
-  //     }, 200);
-  // }, [pincode]);
-
-  // ✅ Load Google Maps Script
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initGoogleAutocomplete;
-        document.body.appendChild(script);
-      } else {
-        initGoogleAutocomplete();
-      }
-    };
-    loadGoogleMapsScript();
-  }, []);
 
   // ✅ Handle Next Button
-  const handleNext = () => {
+  const handleNext = (isValid = postalCodeValidate) => {
     if (!pincode) {
       showToast("error", "Please enter a valid postcode.");
       return;
     }
 
-    if (!isPostcodeSelected) {
-      showToast("error", "Please select a postcode from the suggestions.");
+    if (!isValid) {
+      showToast("error", "Please enter a valid postcode.");
       return;
     }
 
-    if (!isPincodeFromDropdown) {
-      showToast("error", "Please select postcode from the dropdown.");
-      return;
-    }
     getProgressPercentage(remainingProgressPerStep);
     dispatch(
       setbuyerRequestData({
         postal_code: pincode,
         city: city,
-        postalCodeValidate,
+        postalCodeValidate: isValid,
       })
     );
 
@@ -188,54 +130,46 @@ const PostcodeSearch = ({
         title={title}
         onButtonClick={handleNext}
         buttonText="Next"
-        disableNextButton={!buyerRequest?.postal_code}
+        disableNextButton={!postalCodeValidate}
         showBackButton
         onBackClick={handleBack}
       >
         <p className={styles.subText}>
           This is to match you with the closest verified specialists
         </p>
-        <div style={{ position: "relative" }}>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
           <input
-            className={styles.postcodeInput}
+            className={`${styles.postcodeInput} ${
+              error ? styles.errorBorder : ""
+            }`}
             placeholder="e.g: ch41 tlh"
             ref={inputRef}
             value={pincode}
-            onChange={(e) => {
-              setPincode(e.target.value);
-              setIsPostcodeSelected(true);
-              setPostalCodeValidate(false);
-              setIsPincodeFromDropdown(false);
-              dispatch(
-                setbuyerRequestData({
-                  postal_code: e.target.value,
-                })
-              );
-            }}
+            onChange={handlePincodeChange}
             onKeyPress={handleKeyPress}
-            onBlur={() => {
-              // ✅ If same value as before and it was a valid postcode, move next
-              if (
-                pincode &&
-                buyerRequest?.postal_code?.toLowerCase() ===
-                  pincode.toLowerCase() &&
-                postalCodeValidate &&
-                !backButtonTriggered
-              ) {
-                setTimeout(() => {
-                  onNext();
-                  setBackButtonTriggered(false);
-                  // getProgressPercentage(remainingProgressPerStep);
-                }, 20);
-              }
-            }}
           />
+          {isCheckingPostcode ? (
+            <Spin
+              className={styles.checkIcon}
+              size="small"
+              style={{ marginLeft: 10 }}
+            />
+          ) : postalCodeValidate ? (
+            <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
+          ) : null}
           <img
             className={styles.locationicon}
             alt="location icon"
             src={location}
           />
         </div>
+        {error && <p className={styles.errorText}>{error}</p>}
       </CardLayoutWrapper>
     </div>
   );

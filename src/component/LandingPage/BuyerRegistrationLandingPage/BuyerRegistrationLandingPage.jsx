@@ -47,7 +47,7 @@ const BuyerRegistrationLandingPage = ({
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  // console.log(buyerStep, "buyerStep");
+  console.log(buyerRequest, "buyerRequest registration ");
 
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const { registerData, registerLoader, authToken } = useSelector(
