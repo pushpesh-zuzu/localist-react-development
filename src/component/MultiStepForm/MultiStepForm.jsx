@@ -203,7 +203,7 @@ const MultiStepForm = () => {
               )}
               {buyerStep === 4 && (
                 <NameEmailMultiStepForm
-                  nextStep={nextStep} // Name/Email complete hone ke baad step 4 pe jao
+                  nextStep={nextStep}
                   onBack={prevStep}
                   isStartWithQuestionModal={true}
                 />

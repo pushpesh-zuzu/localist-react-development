@@ -54,7 +54,7 @@ const PostcodeSearch = ({
         (await dispatch(getCityName({ postcode: value })));
 
       if (response?.data?.city) {
-        const validPostcode = response.data.postcode || value;
+        const validPostcode = response.data.postcode;
         setPostalCodeValidate(true);
         setCity(response.data.city);
         dispatch(setcitySerach(response.data.city));
@@ -88,16 +88,6 @@ const PostcodeSearch = ({
     }
 
     getProgressPercentage(remainingProgressPerStep);
-    dispatch(
-      setbuyerRequestData({
-        postal_code: pincode,
-        city: city,
-        postalCodeValidate: isValid,
-      })
-    );
-
-    dispatch(setcitySerach(city));
-
     if (onNext) {
       onNext();
       setBackButtonTriggered(false);
@@ -117,14 +107,14 @@ const PostcodeSearch = ({
       <h1 className={styles.headingH1}>
         Get quotes from verified landscaping specialists you can trust
       </h1>
-      <p className={styles.desciption}>
+      {/* <p className={styles.desciption}>
         Localists.com connects you with verified local experts quickly and
         easily.
       </p>
       <p className={styles.desciption2}>
         Simply answer a few questions about your requirements and get tailored
         quotes in seconds.
-      </p>
+      </p> */}
 
       <CardLayoutWrapper
         title={title}

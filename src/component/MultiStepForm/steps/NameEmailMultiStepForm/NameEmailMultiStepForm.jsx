@@ -177,20 +177,19 @@ const NameEmailMultiStepForm = ({
       buttonText="Next"
       showBackButton={true}
       disableNextButton={
-        searchServiceLoader ||
-        !name ||
-        !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
+        searchServiceLoader
       }
       loader={searchServiceLoader}
     >
       <div className={styles.infoWrapper}>
         {/* <label className={styles.label}>Full Name</label> */}
          {!isPPCPages && (
-          <>
+          <div style={{marginBottom:'10px'}}>
             {/* <label htmlFor="email" className={styles.label}>
               Email
             </label> */}
             <input
+            
               type="email"
               placeholder="Email"
               className={`${styles.input} ${
@@ -205,7 +204,7 @@ const NameEmailMultiStepForm = ({
                 Please enter a valid email address.
               </span>
             )}
-          </>
+          </div>
         )}
         <input
           style={{ marginTop: "5px" }}

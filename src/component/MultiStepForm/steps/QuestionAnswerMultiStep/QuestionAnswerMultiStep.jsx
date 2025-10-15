@@ -16,9 +16,7 @@ const QuestionAnswerMultiStep = ({
   getProgressPercentage,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest} = useSelector(
-    (state) => state.buyer
-  );
+  const { buyerRequest } = useSelector((state) => state.buyer);
   const { service, registerData } = useSelector((state) => state.findJobs);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const firstStepProgress = (2 / 3) * 100; // 66.66%
@@ -285,7 +283,7 @@ const QuestionAnswerMultiStep = ({
       setCurrentQuestion(prevIndex);
     } else {
       onBack();
-      getProgressPercentage(-remainingProgressPerStep);
+      getProgressPercentage(-remainingProgressPerStep + 5);
     }
   };
 
