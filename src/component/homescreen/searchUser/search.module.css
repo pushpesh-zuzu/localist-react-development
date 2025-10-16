@@ -198,6 +198,15 @@
 .searchItem:hover {
   background: #f0f0f0;
 }
+/* .checkIcon {
+  position: absolute;
+  right: 10px;
+  top: 55%;
+  transform: translateY(-50%);
+  height: 20px;
+  width: 20px;
+} */
+
 @media screen and (max-width: 2000px) and (min-width: 1500px) {
   .searchBox {
     display: flex;
@@ -603,11 +612,11 @@
   .calloutArrow img {
     width: 4rem;
   }
-.searchButtonPhone{
+  .searchButtonPhone {
     position: absolute;
-     /* margin-right: 20px; */
-     right: 5%;
-   }
+    /* margin-right: 20px; */
+    right: 5%;
+  }
   .exampleTitle {
     font-size: 10px;
     line-height: 15px;
@@ -644,7 +653,7 @@
   .popularExamples {
     width: 222px;
   }
- 
+
   /* .inputFocus {
   border-bottom: 2px solid var(--primary-color);
 } */

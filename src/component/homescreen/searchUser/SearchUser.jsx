@@ -3,28 +3,23 @@ import { SearchOutlined } from "@ant-design/icons";
 import calloutArrow from "../../../assets/Images/callOutArrow.svg";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import {
   getPopularServiceList,
   searchService,
-  // setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import {
-  // generateSlug,
-  showToast,
-} from "../../../utils";
+import { showToast } from "../../../utils";
 import {
   questionAnswerData,
   setbuyerRequestData,
   setBuyerStep,
   setcitySerach,
+  getCityName,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
-import { googleAPI } from "../../../Api/axiosInstance";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
@@ -36,6 +31,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
+  const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const { popularList, service, searchServiceLoader } = useSelector(
@@ -58,40 +54,32 @@ const SearchProfessionals = ({ nextStep }) => {
         setPlaceholder("Search service... ");
       }
     };
-
-    updatePlaceholder(); // call on first load
-    window.addEventListener("resize", updatePlaceholder); // update on resize
-
-    return () => window.removeEventListener("resize", updatePlaceholder); // cleanup
+    updatePlaceholder();
+    window.addEventListener("resize", updatePlaceholder);
+    return () => window.removeEventListener("resize", updatePlaceholder);
   }, []);
+
   const handleClose = () => {
     setShow(false);
     setInput("");
     setPincode("");
     setSelectedService("");
   };
+
   useEffect(() => {
-    const checkPendingModal = () => {
-      const pendingModal = JSON.parse(
-        localStorage.getItem("pendingBuyerModal")
-      );
-
-      if (pendingModal?.shouldOpen) {
-        setSelectedServiceId({
-          id: pendingModal.serviceId,
-          name: pendingModal.serviceName 
-        });
-
-        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
-        dispatch(setcitySerach(pendingModal.city));
-
-        setShow(true);
-        dispatch(setBuyerStep(7));
-      }
-    };
-
-    checkPendingModal();
+    const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+    if (pendingModal?.shouldOpen) {
+      setSelectedServiceId({
+        id: pendingModal.serviceId,
+        name: pendingModal.serviceName,
+      });
+      dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+      dispatch(setcitySerach(pendingModal.city));
+      setShow(true);
+      dispatch(setBuyerStep(7));
+    }
   }, [dispatch]);
+
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
@@ -103,15 +91,16 @@ const SearchProfessionals = ({ nextStep }) => {
       dispatch(setService([]));
     };
   }, []);
+
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (isDropdownOpen && Input.trim() !== "") {
         dispatch(searchService({ search: Input }));
       }
     }, 500);
-
     return () => clearTimeout(delayDebounce);
   }, [Input, dispatch, isDropdownOpen]);
+
   const handleSelectService = useCallback(
     (item) => {
       setInput(item.name);
@@ -125,135 +114,101 @@ const SearchProfessionals = ({ nextStep }) => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (divRef.current && !divRef.current.contains(event.target)) {
-        setIsDropdownOpen(false); // Close the div
+        setIsDropdownOpen(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleChange = (e) => {
-    setPincode(e.target.value);
-    setPostalCodeValidate(false);
-    setIsPostcodeSelected(false);
-    setIsPincodeFromDropdown(false); // ❌ mark as invalid if typed
-  };
+  // ✅ New: validate postcode with our API (onChange)
+const debounceTimer = useRef(null);
+const lastInvalidPinRef = useRef(""); // store last invalid postcode
 
-  // --- GOOGLE AUTOCOMPLETE ---
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initAutocomplete;
-        document.body.appendChild(script);
+const handlePostcodeChange = (e) => {
+  const value = e.target.value.trim().slice(0, 10);
+  setPincode(value);
+  setPostalCodeValidate(false);
+  setIsPostcodeSelected(false);
+  setCity("");
+
+  if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+  // ✅ Only start validation after 500ms of no typing
+  debounceTimer.current = setTimeout(async () => {
+    if (value.length < 3) return;
+
+    setIsCheckingPostcode(true);
+    try {
+      const response =
+        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
+        (await dispatch(getCityName({ postcode: value })));
+
+      if (response?.data?.city) {
+        setPostalCodeValidate(true);
+        setCity(response.data.city);
+        dispatch(setcitySerach(response.data.city));
+        dispatch(
+          setbuyerRequestData({
+            postcode: value.trim().toUpperCase(),
+            city: response.data.city,
+          })
+        );
+        setIsPostcodeSelected(true);
+        setIsPincodeFromDropdown(true);
+        lastInvalidPinRef.current = ""; // reset invalid memory
       } else {
-        initAutocomplete();
+        // ✅ Prevent repeated toast for same invalid postcode
+        if (lastInvalidPinRef.current !== value) {
+          showToast("error", "Please enter a valid postcode!");
+          lastInvalidPinRef.current = value;
+        }
+        setPostalCodeValidate(false);
       }
-    };
+    } catch (error) {
+      if (lastInvalidPinRef.current !== value) {
+        showToast("error", "Please enter a valid postcode!");
+        lastInvalidPinRef.current = value;
+      }
+      setPostalCodeValidate(false);
+    } finally {
+      setIsCheckingPostcode(false);
+    }
+  }, 500);
+};
 
-    const initAutocomplete = () => {
-      if (!inputRef.current) return;
 
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "UK" },
-        }
-      );
 
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
-
-        let postalCode = place.address_components.find((component) =>
-          component.types.includes("postal_code")
-        )?.long_name;
-
-        let cityName =
-          place.address_components.find((component) =>
-            component.types.includes("postal_town")
-          )?.long_name ||
-          place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_2")
-          )?.long_name;
-
-        if (postalCode) {
-          setPincode(postalCode);
-          setPostalCodeValidate(true);
-          setIsPincodeFromDropdown(true); // ✅ valid only when chosen
-          inputRef.current.value = postalCode;
-          setIsPostcodeSelected(true);
-        } else {
-          showToast("error", "No Postcode found! Please try again.");
-          showToast("error", "No Postcode  found! Please try again.");
-        }
-
-        if (cityName) {
-          setCity(cityName);
-          dispatch(setcitySerach(cityName));
-        }
-      });
-    };
-
-    loadGoogleMapsScript();
-  }, []);
-
-  const DEBOUNCE_MS = 250;
-  const debounceRef = useRef(null);
-  // --- VALIDATION BEFORE CONTINUE ---
+  // ✅ Validation before continue (unchanged)
   const handleGetStarted = (requireValidationPin) => {
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
       return;
     }
-
-    if (!isPostcodeSelected && !!requireValidationPin) {
-      showToast("error", "Please select a postcode from the suggestions.");
+    if (!pincode && requireValidationPin) {
+      showToast("error", "Please enter a postcode");
       return;
     }
-
-    if (!pincode && !!requireValidationPin) {
-      showToast("error", "Please enter a pincode");
-      return;
-    }
-    if ((pincode.length < 5 || pincode.length > 8) && !!requireValidationPin) {
-      showToast("error", "Pincode must be between 5 and 8 characters!");
-      return;
-    }
-
-    if (!isPincodeFromDropdown && requireValidationPin) {
-      showToast("error", "Please select postcodes from suggestions below");
-      return;
-    }
-
-    if ((pincode.length < 5 || pincode.length > 8) && requireValidationPin) {
-      showToast("error", "Postcode must be between 5 and 8 characters!");
-      return;
-    }
-
-    if (!city && requireValidationPin) {
-      showToast("error", "Please provide valid postcode!");
+    if (!postalCodeValidate && requireValidationPin) {
+      showToast("error", "Please enter a valid postcode.");
       return;
     }
 
     const { id, name } = selectedService;
     dispatch(questionAnswerData({ service_id: id }));
     setSelectedServiceId({ id, name });
-    dispatch(
-      setbuyerRequestData({
-        postcode: pincode,
-        service_id: id || "",
-      })
-    );
+    // dispatch(
+    //   setbuyerRequestData({
+    //     postcode: pincode,
+    //     service_id: id || "",
+    //     city: city,
+    //   })
+    // );
     setShow(true);
   };
+
+  const DEBOUNCE_MS = 250;
+  const debounceRef = useRef(null);
 
   const triggerSearch = (value) => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -264,8 +219,6 @@ const SearchProfessionals = ({ nextStep }) => {
       );
     }, DEBOUNCE_MS);
   };
-
-  // console.log("home screen redered");
 
   return (
     <div className={styles.searchContainer}>
@@ -300,71 +253,72 @@ const SearchProfessionals = ({ nextStep }) => {
             type="text"
             placeholder={placeholder}
             className={`${styles.input} ${isFocused ? styles.inputFocus : ""}`}
+            maxLength={8}
             onFocus={() => {
               setIsFocused(true);
-              setIsDropdownOpen(true); // open dropdown on focus
-              // if field is empty on focus, load ALL services so dropdown isn't blank
+              setIsDropdownOpen(true);
               if (Input.trim() === "") {
-                dispatch(searchService({ search: "" /*, serviceid*/ }));
+                dispatch(searchService({ search: "" }));
               }
             }}
-            onBlur={() => {
-              setIsFocused(false);
-              // optionally close dropdown here, or keep it open for clicks inside the list
-              // setIsDropdownOpen(false);
-            }}
+            onBlur={() => setIsFocused(false)}
             onChange={(e) => {
               if (userToken?.active_status === 1) {
-                showToast("error", "Switch to buyer to place a new request.");
-                return; // typing block
+                showToast("error", "Switch to buyer to place a new request.");
+                return;
               }
               const value = e.target.value;
               setInput(value);
-              setIsDropdownOpen(true); // keep dropdown open while typing/clearing
-              setSelectedService(null); // your existing line
-              triggerSearch(value); //  refresh dropdown results on every change
+              setIsDropdownOpen(true);
+              setSelectedService(null);
+              triggerSearch(value);
             }}
             value={Input}
           />
 
           <div className={styles.divider}></div>
+
           <div className={styles.locationWrapper}>
-            {/* <EnvironmentOutlined /> */}
             <img src={location} alt="..." />
             <input
               type="text"
-              placeholder="Postcode"
+              placeholder="Enter Postcode (No Spaces)"
               className={styles.locationInput}
               ref={inputRef}
               name="postcode"
               value={pincode || ""}
-              onChange={handleChange}
+              onChange={handlePostcodeChange}
             />
+            {isCheckingPostcode ? (
+              <Spin
+                className={styles.checkIcon}
+                size="small"
+                style={{ marginLeft: 10 }}
+              />
+            ) : null}
           </div>
+
           <button
             className={styles.searchButton}
-            onClick={() => {
-              handleGetStarted(true);
-            }}
+            onClick={() => handleGetStarted(true)}
           >
             Search
           </button>
+
           <button
             className={styles.searchButtonPhone}
-            onClick={() => {
-              handleGetStarted(false);
-            }}
+            onClick={() => handleGetStarted(false)}
           >
             <SearchOutlined />
           </button>
         </div>
+
         {isDropdownOpen && service?.length > 0 && (
           <div className={styles.searchResults} ref={divRef}>
             {searchServiceLoader ? (
-              <Spin indicator={<LoadingOutlined spin />} />
+              <Spin  indicator={<LoadingOutlined spin />} />
             ) : (
               <>
-                {" "}
                 {service?.map((item) => (
                   <p
                     key={item.id}
@@ -379,17 +333,15 @@ const SearchProfessionals = ({ nextStep }) => {
           </div>
         )}
       </div>
+
       {show && (userToken?.active_status == 2 || !userToken) && (
-        <>
-          <BuyerRegistration
-            closeModal={handleClose}
-            service_Id={selectedServiceId?.id}
-            service_Name={selectedServiceId.name}
-            postcode={pincode}
-            postalCodeValidate={postalCodeValidate}
-            // city={city}
-          />
-        </>
+        <BuyerRegistration
+          closeModal={handleClose}
+          service_Id={selectedServiceId?.id}
+          service_Name={selectedServiceId.name}
+          postcode={pincode}
+          postalCodeValidate={postalCodeValidate}
+        />
       )}
     </div>
   );

@@ -11,11 +11,11 @@ import {
   setbuyerRequestData,
   setBuyerStep,
   setcitySerach,
+  getCityName,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { googleAPI } from "../../../Api/axiosInstance";
 
 const CloneAccountants = ({
   header,
@@ -24,9 +24,9 @@ const CloneAccountants = ({
   defaultServiceName = "",
   heading2,
   placeholderText,
-  doYouNeetTitle=[],
-  inputLable1='What service do you require?',
-  inputLable2='Tell us where you need it?'
+  doYouNeetTitle = [],
+  inputLable1 = "What service do you require?",
+  inputLable2 = "Tell us where you need it?",
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -41,12 +41,14 @@ const CloneAccountants = ({
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
+  const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
 
   const { userToken } = useSelector((state) => state.auth);
   const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
   const showToast = (type, content) => message[type](content);
+
   useEffect(() => {
     if (defaultServiceName) {
       setInput(defaultServiceName);
@@ -54,6 +56,7 @@ const CloneAccountants = ({
       dispatch(searchService({ search: defaultServiceName }));
     }
   }, [defaultServiceName, dispatch]);
+
   useEffect(() => {
     if (service?.length > 0) {
       const match = service.find(
@@ -63,7 +66,7 @@ const CloneAccountants = ({
         setSelectedService(match);
         setIsDropdownOpen(false);
       } else {
-        setSelectedService(null); // clear if no match
+        setSelectedService(null);
       }
     }
   }, [service, input]);
@@ -73,6 +76,7 @@ const CloneAccountants = ({
     setInput("");
     setPincode("");
     setSelectedService(null);
+    setPostalCodeValidate(false)
   };
 
   useEffect(() => {
@@ -98,6 +102,7 @@ const CloneAccountants = ({
     },
     [dispatch]
   );
+
   useEffect(() => {
     const checkPendingModal = () => {
       const pendingModal = JSON.parse(
@@ -120,81 +125,49 @@ const CloneAccountants = ({
 
     checkPendingModal();
   }, [dispatch]);
-  const handlePincodeChange = (e) => {
-    setPincode(e.target.value);
+
+  // ✅ Replaced Google API with your backend postcode validation
+  const handlePincodeChange = async (e) => {
+    const value = e.target.value.trim().slice(0, 10);
+    setPincode(value);
     setPostalCodeValidate(false);
     setIsPostcodeSelected(false);
     setIsPincodeFromDropdown(false);
-  };
+    setCity("");
 
-  const initGoogleAutocomplete = () => {
-    if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
+    if (value.length < 3) return; // Only check after 5 chars
 
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        types: ["geocode"],
-        componentRestrictions: { country: "UK" },
-      }
-    );
+    setIsCheckingPostcode(true);
+    try {
+      const response =
+        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
+        (await dispatch(getCityName({ postcode: value })));
 
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
-
-      let postalCode = place.address_components.find((c) =>
-        c.types.includes("postal_code")
-      )?.long_name;
-
-      let cityName =
-        place.address_components.find((c) => c.types.includes("postal_town"))
-          ?.long_name ||
-        place.address_components.find((c) => c.types.includes("locality"))
-          ?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_2")
-        )?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_3")
-        )?.long_name;
-
-      // console.log("Full Place Object:", place);
-      // console.log("Extracted Postal Code:", postalCode);
-      // console.log("Extracted City:", cityName);
-
-      if (postalCode) {
-        setPincode(postalCode);
+      if (response?.data?.city) {
         setPostalCodeValidate(true);
-        setIsPincodeFromDropdown(true);
-        inputRef.current.value = postalCode;
         setIsPostcodeSelected(true);
+        setIsPincodeFromDropdown(true);
+        setCity(response.data.city);
+        dispatch(setcitySerach(response.data.city));
+        dispatch(
+          setbuyerRequestData({
+            postcode: value.toUpperCase(),
+            city: response.data.city,
+          })
+        );
       } else {
-        showToast("error", "No PIN code found! Please try again.");
+        setPostalCodeValidate(false);
+        showToast("error", "Please enter a valid postcode!");
       }
-
-      if (cityName) {
-        setCity(cityName);
-        dispatch(setcitySerach(cityName));
-      }
-    });
+    } catch (error) {
+      setPostalCodeValidate(false);
+      // Prevent repeated toasts
+      if (!isCheckingPostcode)
+        showToast("error", "Please enter a valid postcode!");
+    } finally {
+      setIsCheckingPostcode(false);
+    }
   };
-
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initGoogleAutocomplete;
-        document.body.appendChild(script);
-      } else {
-        initGoogleAutocomplete();
-      }
-    };
-
-    loadGoogleMapsScript();
-  }, []);
 
   const handleContinue = () => {
     if (!selectedService) {
@@ -202,13 +175,8 @@ const CloneAccountants = ({
       return;
     }
 
-    if (!isPincodeFromDropdown) {
-      showToast("error", "Please select postcodes from suggestions below");
-      return;
-    }
-
-    if (!isPostcodeSelected) {
-      showToast("error", "Please select a postcode from the suggestions.");
+    if (!postalCodeValidate) {
+      showToast("error", "Please enter a valid postcode.");
       return;
     }
 
@@ -218,10 +186,12 @@ const CloneAccountants = ({
     }
 
     dispatch(questionAnswerData({ service_id: selectedService.id }));
-    setbuyerRequestData({
-      postcode: pincode,
-      service_id: selectedService.id,
-    });
+    dispatch(
+      setbuyerRequestData({
+        postcode: pincode,
+        service_id: selectedService.id,
+      })
+    );
     setShowModal(true);
   };
 
@@ -242,12 +212,11 @@ const CloneAccountants = ({
         <div className={styles.formContainer}>
           <div className={styles.innerformContainer}>
             <span>
-              {doYouNeetTitle[0] || ''}{" "}
+              {doYouNeetTitle[0] || ""}{" "}
               <span className={styles.blueText}>
-                {" "}
                 {doYouNeetTitle[1]?.toLowerCase()}{" "}
               </span>
-              {doYouNeetTitle[2] || ''}?
+              {doYouNeetTitle[2] || ""}?
             </span>
             <div className={styles.inputGroup}>
               <div className={styles.inputBox}>
@@ -281,16 +250,30 @@ const CloneAccountants = ({
                 )}
               </div>
 
-              <div className={styles.inputBox}>
+              <div className={styles.inputBox} style={{position:'relative'}}>
                 <label>{inputLable2}</label>
-                <input
+                <input 
                   type="text"
-                  placeholder="Enter your postcode or town"
-                  ref={inputRef}
+                  placeholder="Enter Postcode (No Spaces)"
                   name="postcode"
                   value={pincode}
                   onChange={handlePincodeChange}
                 />
+                {/* Optional loader/check UI (no CSS touched) */}
+                {isCheckingPostcode ? (
+                  <Spin style={{position:'absolute',right:'12px',top:'60%'}}
+                    className={styles.checkIcon}
+                    size="small"
+                  
+                  />
+                ) : postalCodeValidate ? (
+                  <img
+                  style={{position:'absolute',right:'8px',top:'55%'}}
+                    src="/src/assets/Icons/greenCheckBox.jpeg"
+                    alt="Success"
+                    className={styles.checkIcon}
+                  />
+                ) : null}
               </div>
             </div>
             <button className={styles.button} onClick={handleContinue}>

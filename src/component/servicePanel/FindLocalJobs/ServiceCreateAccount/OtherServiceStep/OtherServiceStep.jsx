@@ -16,7 +16,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import { clearCompanyData } from "../../../../../store/Company/companyLookup";
-import { googleAPI } from "../../../../../Api/axiosInstance";
+import { getCityName } from "../../../../../store/Buyer/BuyerSlice";
 
 const OtherServiceStep = ({
   prevStep,
@@ -36,13 +36,17 @@ const OtherServiceStep = ({
   const [randomFallback] = useState(
     () => Math.floor(Math.random() * (45 - 35 + 1)) + 35
   );
+  const [isLoading, setIsLoading] = useState(false);
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const inputRef = useRef(null);
   const [expandedRadius, setExpandedRadius] = useState(0);
+  const debounceTimer = useRef(null);
+
   console.log(inputRef, "inputref");
   console.log(formData, "form");
+
   const {
     service,
     registerLoader,
@@ -68,71 +72,68 @@ const OtherServiceStep = ({
       dispatch(setService([]));
     };
   }, [Input, dispatch]);
-  const [newpost, setNewPost] = useState("");
 
-  useEffect(() => {
-    // Load Google Places API script dynamically
-    const loadGoogleMapsScript = () => {
-      // if (!window.google) {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initAutocomplete;
-        document.body.appendChild(script);
-        console.log(script, "script...");
-      } else {
-        initAutocomplete();
+  // Handle postcode input with debounce for getCityName API
+  const handlePostcode2Change = (e) => {
+    const { name, value } = e.target;
+
+    // Update form data immediately
+    if (handleInputChange) handleInputChange(e);
+    setIsPostcodeFromSuggestion(false);
+
+    // Clear previous timer
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    // Set new timer for API call
+    debounceTimer.current = setTimeout(() => {
+      if (value && value.length >= 3) {
+        fetchCityFromPostcode(value);
       }
-    };
+    }, 800);
+  };
 
-    // Initialize Google Autocomplete
-    const initAutocomplete = () => {
-      if (!inputRef.current) return;
+  // Fetch city from postcode using getCityName API
+  const fetchCityFromPostcode = async (postcode) => {
+    if (!postcode || postcode.length < 3) return;
 
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "UK" }, // Restrict to India
-        }
-      );
+    setIsLoading(true);
+    try {
+      const result = await dispatch(getCityName({ postcode: postcode }));
 
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
+      let cityName, postcodeFromApi;
+      console.log(result);
+      // Check different response structures
+      if (result?.success) {
+        cityName = result.data?.city;
+        postcodeFromApi = result.data?.postcode;
+      }
 
-        if (!place.address_components) return;
-        console.log(place, "place");
+      console.log("Extracted - City:", cityName, "Postcode:", postcodeFromApi);
 
-        let postalCode = "";
-        place.address_components.forEach((component) => {
-          if (component.types.includes("postal_code")) {
-            postalCode = component.long_name; // Extract postal code correctly
-          }
-        });
-        const lat = place.geometry.location.lat();
-        const lng = place.geometry.location.lng();
-        console.log(postalCode, lat, lng, "postalCode");
-        if (postalCode) {
-          // dispatch(setSelectedServiceFormData(postalCode));
+      if (cityName) {
+        // Update form data with the API response
+        dispatch(
+          setFormData({
+            postcode2: postcodeFromApi || postcode,
+            coordinates2: {}, // Empty coordinates since we don't have them from the API
+          })
+        );
 
-          // ✅ Update Input Field with Selected Postal Code
-          dispatch(setFormData({ postcode2: postalCode }));
-          dispatch(setFormData({ coordinates2: { lat, lng } }));
-          inputRef.current.value = postalCode; // Update input value
+        setIsPostcodeFromSuggestion(true);
+        showToast("success", "Location found successfully!");
+      } else {
+        showToast("error", "No city found for this postcode!");
+      }
+    } catch (error) {
+      console.error("Error fetching city:", error);
+      showToast("error", "No PIN code found! Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-          setIsPostcodeFromSuggestion(true);
-        } else {
-          showToast("error", "No PIN code found! Please try again.");
-        }
-      });
-    };
-
-    loadGoogleMapsScript();
-  }, [setFormData, formData]);
-  const allScripts = document.getElementsByTagName("script");
-  console.log(allScripts, "allScripts");
   const handleSelectService = (item) => {
     // Don't allow more than 2 services
     if (selectedServices?.length >= 5) {
@@ -202,9 +203,18 @@ const OtherServiceStep = ({
     };
   }, [show]);
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+    };
+  }, []);
+
   const handleSubmit = () => {
     if (selectedServices.length > 0 && !isPostcodeFromSuggestion) {
-      showToast("error", "Please select postcode from suggestion.");
+      showToast("error", "Please enter a valid postcode!");
       return;
     }
 
@@ -312,6 +322,7 @@ const OtherServiceStep = ({
       return newRadius;
     });
   };
+
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -420,7 +431,6 @@ const OtherServiceStep = ({
           <div className={styles.milesBox}>
             <div className={styles.dropdownWrapper}>
               <select
-                // className={styles.dropdown}
                 className={styles.customSelect}
                 name="miles2"
                 value={formData?.miles2}
@@ -441,23 +451,16 @@ const OtherServiceStep = ({
               <input
                 type="text"
                 id="autocomplete-postcode"
-                placeholder="Postcode"
+                placeholder="Enter Postcode (No Spaces)"
                 className={`${styles.input} ${
                   errors.postcode2 ? styles.errorBorder : ""
-                }`}
-                ref={inputRef}
+                } ${isLoading ? styles.loading : ""}`}
                 name="postcode2"
-                // value={formData.postcode ||''}
                 value={formData?.postcode2 || formData?.postcode || ""}
-                // onChange={handleInputChange ? handleInputChange : () => {}}
-                onChange={(e) => {
-                  if (handleInputChange) handleInputChange(e);
-                  setIsPostcodeFromSuggestion(false);
-                }}
-                disabled={!disableWithService}
-                //  readOnly={!disableWithService}
-                // onChange={(e)=>setNewPost(e.target.value)}
+                onChange={handlePostcode2Change}
+                disabled={!disableWithService || isLoading}
               />
+              {isLoading && <div className={styles.spinner}></div>}
             </div>
           </div>
           {errors.postcode2 && (

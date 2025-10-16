@@ -1,34 +1,31 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./searchAccountantLevel3.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
   setBuyerStep,
   setcitySerach,
+  getCityName,
 } from "../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
-import { message } from "antd";
-import { googleAPI } from "../../Api/axiosInstance";
+import { message, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const SearchAccountantLeve3 = ({
   title = "",
   defaultService,
   isNeedS = false,
   isSingular = false,
-  extraText=''
+  extraText = "",
 }) => {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
   const { userToken } = useSelector((state) => state.auth);
+  const { postCodeLoader } = useSelector((state) => state.buyer);
 
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [isPostcodeSelected, setIsPostcodeSelected] = useState(false);
-
-  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
-
-  const [isPincodeFromDropdown, setIsPincodeFromDropdown] = useState(false);
 
   const showToast = (type, content) => message[type](content);
 
@@ -37,6 +34,7 @@ const SearchAccountantLeve3 = ({
     setPincode("");
     setIsPostcodeSelected(false);
   };
+
   useEffect(() => {
     const checkPendingModal = () => {
       const pendingModal = JSON.parse(
@@ -44,11 +42,6 @@ const SearchAccountantLeve3 = ({
       );
 
       if (pendingModal?.shouldOpen) {
-        // setSelectedServiceId({
-        //   id: pendingModal.serviceId,
-        //   name: pendingModal.serviceName || "Service",
-        // });
-
         dispatch(setbuyerRequestData(pendingModal.buyerRequest));
         dispatch(setcitySerach(pendingModal.city));
         setShowModal(true);
@@ -58,101 +51,10 @@ const SearchAccountantLeve3 = ({
 
     checkPendingModal();
   }, [dispatch]);
-  const initGoogleAutocomplete = () => {
-    if (!inputRef.current || !window.google?.maps?.places?.Autocomplete) return;
 
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      {
-        types: ["geocode"],
-        componentRestrictions: { country: "UK" },
-      }
-    );
-
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.address_components) return;
-
-      let postalCode = place.address_components.find((c) =>
-        c.types.includes("postal_code")
-      )?.long_name;
-
-      // let cityName =
-      //   place.address_components.find((c) => c.types.includes("locality"))
-      //     ?.long_name ||
-      //   place.address_components.find((c) =>
-      //     c.types.includes("administrative_area_level_3")
-      //   )?.long_name;
-
-      let cityName =
-        place.address_components.find((c) => c.types.includes("locality"))
-          ?.long_name ||
-        place.address_components.find((c) => c.types.includes("postal_town"))
-          ?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_2")
-        )?.long_name ||
-        place.address_components.find((c) =>
-          c.types.includes("administrative_area_level_3")
-        )?.long_name;
-
-      // console.log("place full object:", place);
-      // console.log("PostalCode:", postalCode);
-      // console.log("City:", cityName);
-
-      if (postalCode) {
-        // console.log(postalCode, "postalCode");
-
-        setPincode(postalCode);
-        setPostalCodeValidate(true);
-        setIsPincodeFromDropdown(true);
-        inputRef.current.value = postalCode;
-        setIsPostcodeSelected(true);
-      } else {
-        showToast("error", "No PIN code found! Please try again.");
-      }
-
-      if (cityName) {
-        setCity(cityName);
-        dispatch(setcitySerach(cityName));
-        // console.log(cityName, "cityName");
-      }
-    });
-  };
-
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initGoogleAutocomplete;
-        document.body.appendChild(script);
-      } else {
-        initGoogleAutocomplete();
-      }
-    };
-
-    loadGoogleMapsScript();
-  }, []);
-
-  // console.log(pincode, "pincode");
-
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!pincode) {
       showToast("error", "Please enter a valid postcode or town.");
-      return;
-    }
-
-    if (!isPostcodeSelected) {
-      //  prevent manual typing
-      showToast("error", "Please select a postcode from the suggestions.");
-      return;
-    }
-
-    if (!isPincodeFromDropdown) {
-      showToast("error", "Please select postcodes from suggestions below");
       return;
     }
 
@@ -161,12 +63,26 @@ const SearchAccountantLeve3 = ({
       return;
     }
 
-    setShowModal(true);
-    dispatch(
-      setbuyerRequestData({
-        postcode: pincode,
-      })
-    );
+    try {
+      const response = await dispatch(getCityName({ postcode: pincode }));
+      if (response?.data?.city) {
+        const cityName = response.data.city;
+        setCity(cityName);
+        dispatch(setcitySerach(cityName));
+        // dispatch(
+        //   setbuyerRequestData({
+        //     postcode: pincode,
+        //     city: cityName,
+        //   })
+        // );
+        setIsPostcodeSelected(true);
+        setShowModal(true);
+      } else {
+        showToast("error", "Please enter a valid postcode!");
+      }
+    } catch (error) {
+      showToast("error", "Please enter a valid postcode!");
+    }
   };
 
   return (
@@ -180,26 +96,28 @@ const SearchAccountantLeve3 = ({
         Near You {extraText}
       </h1>
       <div className={styles.searchBoxContainer} style={{ margin: "auto" }}>
-        <p>
-          {/* Where do you need <span>{title}s</span>? */}
-          Tell us where you need it?
-        </p>
-
+        <p>Tell us where you need it?</p>
         <div className={styles.searchInputContainer}>
           <input
+            maxLength={8}
             className={styles.searchInput}
-            placeholder="Enter your postcode"
-            ref={inputRef}
+            placeholder="Enter Postcode (No Spaces)"
             value={pincode}
             onChange={(e) => {
               setPincode(e.target.value);
-              setIsPostcodeSelected(true);
-              setPostalCodeValidate(false);
-              setIsPincodeFromDropdown(false);
+              setIsPostcodeSelected(false);
             }}
           />
-
-          <button onClick={handleContinue}>Go</button>
+          <button onClick={handleContinue} disabled={postCodeLoader}>
+            {postCodeLoader ? (
+              <Spin
+                size="small"
+                indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              />
+            ) : (
+              "Go"
+            )}
+          </button>
         </div>
       </div>
 
@@ -208,7 +126,7 @@ const SearchAccountantLeve3 = ({
           closeModal={handleClose}
           postcode={pincode}
           serviceName={defaultService}
-          postalCodeValidate={postalCodeValidate}
+          postalCodeValidate={isPostcodeSelected}
           city={city}
         />
       )}

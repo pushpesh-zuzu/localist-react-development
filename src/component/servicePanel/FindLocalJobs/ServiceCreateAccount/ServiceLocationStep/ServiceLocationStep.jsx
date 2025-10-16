@@ -11,7 +11,9 @@ import {
 } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
 import { showToast } from "../../../../../utils";
-import { googleAPI } from "../../../../../Api/axiosInstance";
+import { getCityName } from "../../../../../store/Buyer/BuyerSlice";
+import { Spin } from "antd";
+import CheckIcon from "../../../../../assets/Icons/greenCheckBox.jpeg";
 
 const ServiceLocationStep = ({
   nextStep,
@@ -22,100 +24,107 @@ const ServiceLocationStep = ({
 }) => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const debounceTimer = useRef(null);
+  const [isValidPostCode, setIsValidPostCode] = useState(false);
   console.log(formData, "formData");
+
+  // Handle postcode input with debounce
+  const handlePostcodeChange = (e) => {
+    const { name, value } = e.target;
+
+    // Update form data immediately
+    dispatch(
+      setSelectedServiceFormData({
+        [name]: value,
+      })
+    );
+
+    // Clear previous timer
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+
+    // Set new timer for API call
+    debounceTimer.current = setTimeout(() => {
+      if (value && value.length >= 3) {
+        fetchCityFromPostcode(value);
+      }
+    }, 800);
+  };
+
+  const fetchCityFromPostcode = async (postcode) => {
+    if (!postcode || postcode.length < 3) return;
+    console.log(postcode, "dddddddd");
+    setIsLoading(true);
+    try {
+      const result =
+        (await dispatch(getCityName({ postcode: postcode })).unwrap?.()) ??
+        (await dispatch(getCityName({ postcode: postcode })));
+      if (result.success) {
+        setIsValidPostCode(true);
+        console.log(result, "result");
+        const cityName = result.data?.city;
+        const postcodeFromApi = result.data?.postcode;
+
+        // Update all form fields with the API response
+        dispatch(
+          setFormData({
+            postcode: postcodeFromApi,
+            zipcode: postcodeFromApi,
+            postcode_old: postcodeFromApi,
+            zipcode_old: postcodeFromApi,
+            city: cityName,
+            cities: cityName || "",
+            city_old: cityName || "",
+            country: "UK",
+            country_old: "UK",
+            coordinates: {},
+            validPostCode: true,
+          })
+        );
+        // cityName && dispatch(setCity({city:cityName}));
+        dispatch(setPostalCode({ postalcode: postcodeFromApi }));
+        dispatch(setCountry({ country: result.data?.country }));
+        // showToast("success", "Location found successfully!");
+      }
+    } catch (error) {
+      console.error("Error fetching city:", error);
+      setCity("");
+      dispatch(
+        setFormData({
+          validPostCode: false,
+        })
+      );
+      setIsValidPostCode(false);
+      showToast("error", "No PIN code found! Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const validateAndProceed = () => {
+    if (!formData.postcode || (formData.postcode.length < 3 && formData.city)) {
+      showToast("error", "Please enter a valid postcode");
+      return;
+    }
+    if (!formData.validPostCode) {
+      showToast("error", "Please enter a valid postcode");
+      return;
+    } else {
+      nextStep();
+    }
+  };
+
+  // Cleanup on unmount
   useEffect(() => {
-    // Load Google Places API script dynamically
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = initAutocomplete;
-        document.body.appendChild(script);
-      } else {
-        initAutocomplete();
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
       }
     };
-
-    // Initialize Google Autocomplete
-    const initAutocomplete = () => {
-      if (!inputRef.current) return;
-
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "UK" }, // Restrict to India
-        }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
-        console.log(place, place.address_components, "place");
-        let postalCode = "";
-        place.address_components.forEach((component) => {
-          if (component.types.includes("postal_code")) {
-            postalCode = component.long_name; // Extract postal code correctly
-          }
-        });
-
-        //   const cityName = place.address_components.find((component) =>
-        //     component.types.includes("locality") && component.types.includes("administrative_area_level_3")
-        // )?.long_name;
-        // Try to find city by "locality" first
-        let cityName =
-          place.address_components.find((component) =>
-            component.types.includes("postal_town")
-          )?.long_name ||
-          place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_2")
-          )?.long_name;
-
-        let countryName = place.address_components.find((component) =>
-          component.types.includes("country")
-        )?.long_name;
-
-        console.log(countryName, "prem");
-        const lat = place.geometry.location.lat();
-        const lng = place.geometry.location.lng();
-        const coordinates = { lat, lng };
-
-        if (postalCode) {
-          dispatch(
-            setFormData({
-              postcode: postalCode,
-              zipcode: postalCode,
-              postcode_old: postalCode,
-              zipcode_old: postalCode,
-              city: cityName || "",
-              cities: cityName || "",
-              city_old: cityName || "",
-              country: countryName || "",
-              country_old: countryName || "",
-              coordinates: { lat, lng },
-            })
-          );
-
-          dispatch(setCity({ city: cityName || "" }));
-          dispatch(setPostalCode({ postalcode: postalCode }));
-          dispatch(setCountry({ country: countryName || "" }));
-
-          inputRef.current.value = postalCode;
-        } else {
-          showToast("error", "No PIN code found! Please try again.");
-        }
-      });
-    };
-
-    loadGoogleMapsScript();
-  }, [setFormData, formData]);
-
-  //   useEffect(()=>{
-  // dispatch(setRegisterStep(1))
-  //   },[])
+  }, []);
 
   return (
     <div className={styles.parentContainer}>
@@ -158,15 +167,37 @@ const ServiceLocationStep = ({
               <img src={LocationIcon} alt="" />
               <input
                 type="text"
-                placeholder="Enter your postcode"
+                placeholder="Enter Postcode (No Spaces)"
                 className={`${styles.input} ${
                   errors.postcode ? styles.errorBorder : ""
-                }`}
-                ref={inputRef}
+                } ${isLoading ? styles.loading : ""}`}
                 name="postcode"
                 value={formData.postcode || ""}
-                onChange={handleInputChange ? handleInputChange : () => {}}
-              />
+                onChange={handlePostcodeChange}
+                disabled={isLoading}
+              />{" "}
+              {isLoading ? (
+                <Spin
+                  style={{ position: "absolute", right: "8px", top: "60%" }}
+                  size="small"
+                />
+              ) : isValidPostCode ? (
+                <img
+                  style={{
+                    position: "absolute",
+                    left: "92%",
+                    top: "55%",
+                    height: "20px",
+                    width: "20px",
+                  }}
+                  src={CheckIcon}
+                  alt="Success"
+                  className={styles.checkIcon}
+                />
+              ) : (
+                ""
+              )}
+              {isLoading && <div className={styles.spinner}></div>}
               {errors.postcode && (
                 <p className={styles.errorText}>{errors.postcode}</p>
               )}
@@ -180,9 +211,7 @@ const ServiceLocationStep = ({
                 checked={formData?.nation_wide === 1}
                 onChange={handleInputChange}
                 className={styles.checkbox}
-                // className={styles.checkboxInput}
               />
-              {/* <span className={styles.checkboxCustom}></span>  */}
               Nationwide
             </label>
             <div className={styles.switchWrapper}>
@@ -204,24 +233,7 @@ const ServiceLocationStep = ({
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button
-              className={styles.nextButton}
-              onClick={() => {
-                if (
-                  !formData.postcode ||
-                  formData.postcode.length < 5 ||
-                  formData.postcode.length > 8 ||
-                  !city
-                ) {
-                  showToast(
-                    "error",
-                    "Please  select postcodes from suggestion below!"
-                  );
-                  return;
-                }
-                nextStep();
-              }}
-            >
+            <button className={styles.nextButton} onClick={validateAndProceed}>
               Next
             </button>
           </div>

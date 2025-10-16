@@ -116,7 +116,7 @@ const SearchAccountant = ({ title = "", panelImage, defaultService }) => {
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
-            placeholder="Enter your postcode or town"
+            placeholder="Enter Postcode (No Spaces)"
             ref={inputRef}
             value={pincode}
             onChange={(e) => {

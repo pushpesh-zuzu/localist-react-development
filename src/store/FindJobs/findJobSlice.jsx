@@ -506,7 +506,8 @@ state.authToken = null
           service_id: [],
           auto_bid: 1,
           miles2: "30",
-          company_reg_number:""
+          company_reg_number:"",
+          validPostCode:false
     
       }
     }
@@ -538,7 +539,8 @@ export const {
   setErrorMessage,
   setAuthToken,
   setCountry,
-  setCity,setPostalCode,
+  setCity,
+  setPostalCode,
   setErrorCheckComanyName,
   setHasPopulatedFromCompany,
   clearAuthToken

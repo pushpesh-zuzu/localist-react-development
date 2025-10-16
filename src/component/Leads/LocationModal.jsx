@@ -243,7 +243,7 @@ const LocationModal = ({
               name="postcode"
               value={locationData.postcode}
               onChange={onChange}
-              placeholder="Enter Postcode or City"
+              placeholder="Enter Postcode (No Spaces)"
             />
           </div>
           <div className={styles.inputField}>
