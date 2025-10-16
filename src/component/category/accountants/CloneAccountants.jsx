@@ -16,6 +16,7 @@ import {
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { Spin, message } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
 
 const CloneAccountants = ({
   header,
@@ -269,7 +270,7 @@ const CloneAccountants = ({
                 ) : postalCodeValidate ? (
                   <img
                   style={{position:'absolute',right:'8px',top:'55%'}}
-                    src="/src/assets/Icons/greenCheckBox.jpeg"
+                    src={CheckIcon}
                     alt="Success"
                     className={styles.checkIcon}
                   />
