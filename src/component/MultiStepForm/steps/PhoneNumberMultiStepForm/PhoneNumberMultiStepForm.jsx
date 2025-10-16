@@ -133,7 +133,14 @@ const PhoneNumberMultiStepForm = ({ nextStep, onBack }) => {
             </span>
           )}
         </div>
-        <p className={styles.phoneZero}>** Enter number without leading 0**</p>
+        <p className={styles.phoneZero}>
+          ** Enter Mobile Number without the 0 **
+        </p>
+
+        <p style={{ marginTop: "29px" }}>
+          We can only send a passcode to a <strong>MOBILE NUMBER</strong>, not a{" "}
+          <strong>LANDLINE</strong>
+        </p>
         <p className={styles.phoneNote}>
           We only use this to match you with trusted professionals.
         </p>

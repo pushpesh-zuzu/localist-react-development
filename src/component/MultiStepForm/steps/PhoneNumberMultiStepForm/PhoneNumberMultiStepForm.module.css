@@ -78,7 +78,7 @@
   font-size: 16px;
   padding: 5px 10px;
   margin: auto;
-  margin-top: 42px;
+  margin-top: 29px;
 }
 .phoneZero {
   /* style={{marginTop:'16.33px',fontSize:'14px',fontWeight:'500px !important'}} */
@@ -118,14 +118,12 @@
     padding-top: 9px;
     padding-bottom: 9px;
     font-size: 14px;
-    margin-top: 31px;
+    margin-top: 27px;
     text-align: center;
   }
   .phoneZero {
     margin-top: 12px;
-    margin-right: auto;
-    margin-left: 0%;
-    text-align: left;
+    text-align: center;
     font-size: 12px;
     padding: 6.5px 10px;
     max-width: fit-content;
