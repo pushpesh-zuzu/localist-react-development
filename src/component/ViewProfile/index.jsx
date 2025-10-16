@@ -44,6 +44,7 @@ const ViewProfiles = () => {
   const dispatch = useDispatch();
   const profileId = useParams();
   const requestId = useParams();
+  console.log(profileId);
   const shouldDisableActions = requestId?.requestId;
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -190,7 +191,7 @@ const ViewProfiles = () => {
     if (token) {
       dispatch(addViewProfileList(sellerData));
     } else {
-      dispatch(ReviewProfile(profileId.requestId));
+      dispatch(ReviewProfile({ profile_uuid: profileId }));
     }
   }, []);
 

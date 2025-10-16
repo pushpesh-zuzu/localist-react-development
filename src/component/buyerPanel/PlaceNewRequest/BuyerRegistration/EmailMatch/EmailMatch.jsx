@@ -33,7 +33,7 @@ const EmailMatch = ({
   );
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-
+  console.log(buyerRegisterFormData);
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
@@ -65,6 +65,60 @@ const EmailMatch = ({
     setEmail(e.target.value); // keep it simple
     setErrors((prev) => ({ ...prev, email: false }));
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      // Only trigger if user filled something
+      if (name || email || phone) {
+        const formData = new FormData();
+        formData.append("name", name || "");
+        formData.append("email", email || "");
+        formData.append("phone", phone || "");
+        formData.append(
+          "questions",
+          JSON.stringify(buyerRequest?.questions || [])
+        );
+        formData.append("service_id", buyerRequest?.service_id || "");
+        formData.append("city", citySerach || "");
+        formData.append("postcode", buyerRequest?.postcode || "");
+        formData.append("campaignid", campaignid || "");
+        formData.append("gclid", gclid || "");
+        formData.append("campaign", campaign || "");
+        formData.append("adgroup", adGroup || "");
+        formData.append("targetid", targetID || "");
+        formData.append("msclickid", msclickid || "");
+        formData.append("utm_source", utm_source || "");
+        formData.append("keyword", keyword || "");
+        formData.append("form_status", 1);
+
+        // 🔥 Fire API before page reload
+        dispatch(registerQuoteCustomer(formData));
+
+        // Optional: show reload confirm
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [
+    name,
+    email,
+    phone,
+    buyerRequest,
+    citySerach,
+    campaignid,
+    gclid,
+    campaign,
+    adGroup,
+    targetID,
+    msclickid,
+    utm_source,
+    keyword,
+  ]);
 
   const handleEmailBlur = async () => {
     if (!email) return;
