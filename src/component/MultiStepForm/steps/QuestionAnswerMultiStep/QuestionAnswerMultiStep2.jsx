@@ -319,7 +319,7 @@ const QuestionAnswerMultiStep2 = ({
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          style={{ marginTop: "-25px" }}
+          style={{ marginTop: "-25px",marginBottom:'20px' }}
           className={
             serviceName === "Patio Services"
               ? styles.headerImage
