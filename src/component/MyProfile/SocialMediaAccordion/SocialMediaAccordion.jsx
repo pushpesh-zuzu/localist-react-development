@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import styles from "./SocialMediaAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const platforms = [
   {
@@ -53,6 +54,9 @@ const SocialMediaAccordion = ({ details }) => {
     (state) => state.myProfile
   );
 
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
   const [formState, setFormState] = useState({
     type: "social_media",
     fb_link: "",
@@ -124,12 +128,13 @@ const SocialMediaAccordion = ({ details }) => {
 
   useEffect(() => {
     if (socialUpdateSuccess) {
-      toast.success("Social media links updated successfully!");
       dispatch(clearSocialUpdateStatus());
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      const sellerData = {
+        seller_id: user_id,
+      };
+      dispatch(addViewProfileList(sellerData));
+      dispatch(setIsDirtyRedux(false));
+      toast.success("Social media links updated successfully!");
     } else if (socialUpdateError) {
       toast.error(`Error: ${socialUpdateError}`);
       dispatch(clearSocialUpdateStatus());

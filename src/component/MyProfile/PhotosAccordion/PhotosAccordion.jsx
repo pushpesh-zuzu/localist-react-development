@@ -12,12 +12,12 @@ import {
 import AddYoutubeModal from "./AddYoutubeModal";
 import { baseURL } from "../../../Api/axiosInstance";
 import { BASE_IMAGE } from "../../../utils";
-const PhotosAccordion = ({ detailsData }) => {
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
+const PhotosAccordion = ({ details }) => {
   const dispatch = useDispatch();
   const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector(
     (state) => state.myProfile
   );
-  const [details, setDetails] = useState(detailsData);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [formState, setFormState] = useState({
     type: "photos",
@@ -60,6 +60,10 @@ const PhotosAccordion = ({ detailsData }) => {
     }));
     dispatch(setIsDirtyRedux(true));
   };
+
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
 
   const validate = () => {
     return true;
@@ -105,9 +109,13 @@ const PhotosAccordion = ({ detailsData }) => {
 
   useEffect(() => {
     if (photoUpdateSuccess) {
-      toast.success("Photos updated successfully!");
       dispatch(clearPhotoUpdateStatus());
-      dispatch(setIsDirtyRedux(true));
+      const sellerData = {
+        seller_id: user_id,
+      };
+      dispatch(addViewProfileList(sellerData));
+      dispatch(setIsDirtyRedux(false));
+      toast.success("Photos updated successfully!");
     } else if (photoUpdateError) {
       toast.error(`Failed: ${photoUpdateError}`);
       dispatch(clearPhotoUpdateStatus());

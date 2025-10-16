@@ -12,6 +12,7 @@ import {
 import { useEffect } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const questions = [
   {
@@ -54,6 +55,10 @@ const QandAAccordion = ({ details }) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
     dispatch(setIsDirtyRedux(true));
   };
+
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
 
   const dispatch = useDispatch();
   const { qnaUpdateSuccess, qnaUpdateError, sellerLoader } = useSelector(
@@ -99,12 +104,13 @@ const QandAAccordion = ({ details }) => {
 
   useEffect(() => {
     if (qnaUpdateSuccess) {
-      toast.success("Q&A updated successfully!");
       dispatch(clearQnaStatus());
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      const sellerData = {
+        seller_id: user_id,
+      };
+      dispatch(addViewProfileList(sellerData));
+      dispatch(setIsDirtyRedux(false));
+      toast.success("Q&A updated successfully!");
     } else if (qnaUpdateError) {
       toast.error(`Error: ${qnaUpdateError}`);
       dispatch(clearQnaStatus());

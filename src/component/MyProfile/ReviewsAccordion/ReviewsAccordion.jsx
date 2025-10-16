@@ -26,6 +26,7 @@ import axios from "axios";
 import leftArrow from "../../../assets/Images/location/LeftArrow.svg";
 import rightArrow from "../../../assets/Images/location/RightArrow.svg";
 import { useKeenSlider } from "keen-slider/react";
+import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const ReviewsAccordion = ({ details }) => {
   const [fbLink, setFbLink] = useState("");
@@ -52,6 +53,10 @@ const ReviewsAccordion = ({ details }) => {
     sellerLoader,
   } = useSelector((state) => state.myProfile);
 
+  const { userToken } = useSelector((state) => state.auth);
+  const { registerData } = useSelector((state) => state.findJobs);
+  const user_id = userToken?.id ? userToken?.id : registerData?.id;
+
   const handleSubmit = () => {
     dispatch(updateFacebookReviewLink(fbLink));
   };
@@ -61,8 +66,12 @@ const ReviewsAccordion = ({ details }) => {
 
   useEffect(() => {
     if (facebookReviewUpdateSuccess) {
-      toast.success("Facebook review link saved successfully!");
+      const sellerData = {
+        seller_id: user_id,
+      };
+      dispatch(addViewProfileList(sellerData));
       dispatch(clearFacebookReviewStatus());
+      toast.success("Facebook review link saved successfully!");
     } else if (facebookReviewUpdateError) {
       toast.error(`Error: ${facebookReviewUpdateError}`);
       dispatch(clearFacebookReviewStatus());

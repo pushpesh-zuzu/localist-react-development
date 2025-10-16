@@ -157,6 +157,7 @@ const AccreditationsAccordion = ({ details }) => {
         seller_id: user_id,
       };
       dispatch(addViewProfileList(sellerData));
+      dispatch(setIsDirtyRedux(false));
     } else if (accreditationsUpdateError) {
       toast.error(`Error: ${accreditationsUpdateError}`);
       dispatch(clearAccreditationsStatus());
