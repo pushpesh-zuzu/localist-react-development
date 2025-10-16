@@ -51,10 +51,14 @@ const ViewProfiles = () => {
   const { reviewProfileData } = useSelector((state) => state.leadSetting);
   const { viewProfileData } = useSelector((state) => state.leadSetting);
 
-  const profileData =
-    Object.keys(viewProfileData || {}).length > 0
-      ? viewProfileData
-      : reviewProfileData;
+  let profileData = {};
+
+  if (viewProfileData && Object.keys(viewProfileData).length > 0) {
+    profileData = viewProfileData;
+  } else {
+    profileData = reviewProfileData;
+  }
+
   const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
@@ -173,7 +177,11 @@ const ViewProfiles = () => {
   useEffect(() => {
     const sellerData = {
       // seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
-      seller_id: requestId?.requestId,
+      seller_id: requestId?.requestId
+        ? requestId?.requestId
+        : userToken?.id
+        ? userToken?.id
+        : registerData?.id,
       buyer_id: userToken?.id ? userToken?.id : registerData?.id,
       lead_id: requestId?.requestId,
     };
