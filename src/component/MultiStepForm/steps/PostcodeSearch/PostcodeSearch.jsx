@@ -41,13 +41,18 @@ const PostcodeSearch = ({
     const value = e.target.value.slice(0, 10);
     setPincode(value);
     setPostalCodeValidate(false);
-    setError("");
-
-    // Don’t call API for short inputs
-    if (value>1 && value.length < 3) {
-      setError("Please enter a valid postcode! ");
+    if (!value.trim()) {
+      setError("");
+      setCity("");
+      setPostalCodeValidate(false);
       return;
     }
+    // Don’t call API for short inputs
+    if (value.length < 3) {
+      setPostalCodeValidate(false);
+      return;
+    }
+
     setIsCheckingPostcode(true);
 
     try {

@@ -22,6 +22,8 @@ const QuestionAnswerMultiStep2 = ({
   setIsComingFromStep3,
   setProgressPercentage,
   loading = true,
+  serviceName = "Landscaping",
+  isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach } = useSelector(
@@ -315,6 +317,32 @@ const QuestionAnswerMultiStep2 = ({
       }
       // showBackButton={true}
     >
+      {currentQuestion === 0 && isQuestionWithImage && (
+        <div
+          style={{ marginTop: "-25px" }}
+          className={
+            serviceName === "Patio Services"
+              ? styles.headerImage
+              : serviceName === "Artificial Grass Installation"
+              ? styles.headerImage1
+              : serviceName === "General Builders"
+              ? styles.headerImage2
+              : serviceName === "Driveway Installation"
+              ? styles.headerImage3
+              : serviceName === "Fence & Gate Installation"
+              ? styles.headerImage4
+              : serviceName === "Gardening"
+              ? styles.headerImage5
+              : serviceName === "Home and Garden"
+              ? styles.headerImage6
+              : serviceName === "Landscaping"
+              ? styles.headerImage7
+              : serviceName === "Gate Installation"
+              ? styles.headerImage8
+              : styles.headerImage // default fallback
+          }
+        />
+      )}
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
           (opt, index) => {

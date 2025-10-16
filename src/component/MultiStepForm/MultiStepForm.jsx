@@ -15,7 +15,7 @@ import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAn
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 
-const MultiStepForm = () => {
+const MultiStepForm = ({isQuestionWithImage=false}) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
@@ -174,6 +174,7 @@ const MultiStepForm = () => {
                     questionHistory={questionHistory}
                     setIsComingFromStep3={setIsComingFromStep3}
                     setProgressPercentage={setProgressPercentage}
+                    isQuestionWithImage={isQuestionWithImage}
                   />
                 </div>
               )}

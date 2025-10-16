@@ -47,9 +47,141 @@
   margin-bottom: 16px;
   max-height: 45vh;
   overflow: auto;
-  
 }
 
+.headerImage {
+  background-image: url("./banner/PatioServices.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerBackground {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+}
+.headerImage1 {
+  background-image: url("./banner/ArtificialGrass.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage2 {
+  background-image: url("../../../../assets/Images/Builders.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage3 {
+  background-image: url("./banner/Driveways.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage4 {
+  background-image: url("./banner/Fence.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.headerImage5 {
+  background-image: url("../../../../assets/Images/Gardening-&-Landscaping.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.headerImage6 {
+  background-image: url("./banner/landscapingandgardeningBanner.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.headerImage7 {
+  background-image: url("./banner/landscapingandgardeningBanner.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.headerImage8 {
+  background-image: url("./banner/Gate.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .option,
 .options {
   display: flex;
@@ -66,7 +198,7 @@
   text-align: left;
 }
 .checkedinput {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 }
 
 .option:hover,
@@ -102,7 +234,6 @@
   margin-top: 8px; /* ✅ Separate it from options */
   max-width: 100%; /* ✅ Prevent overflow */
   margin-bottom: 8px;
-
 }
 
 .otherInput:focus {

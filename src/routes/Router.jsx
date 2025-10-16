@@ -67,6 +67,7 @@ import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 import { levelOnePagesRoutes } from "./levelOneRoutes";
 import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
 import ProtectedRoutePPC from "./ProtecteRoutePPC";
+import MultiStepWithImage from "../pages/MultiStepWithImage";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -680,6 +681,16 @@ const routes = [
       <ProtectedRoutePPC>
         <LocaleRedirect>
           <MultiStepForm />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
+    ),
+  },
+   {
+    path: "/:lang/:country/landscaping-multi-form-ppc-banner",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepWithImage />
         </LocaleRedirect>
       </ProtectedRoutePPC>
     ),
