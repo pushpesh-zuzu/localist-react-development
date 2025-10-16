@@ -77,7 +77,8 @@
 .answer {
   color: #00aaff;
   font-weight: bold;
-  padding-left: 17px;
+  padding-left: 18px;
+  word-break: break-word;
 }
 
 /* Right column */

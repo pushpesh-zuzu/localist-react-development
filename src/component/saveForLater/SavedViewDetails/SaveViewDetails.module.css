@@ -78,6 +78,7 @@
   color: var(--primary-color);
   font-weight: bold;
   padding-left: 18px;
+  word-break: break-word;
 }
 
 /* Right column */
