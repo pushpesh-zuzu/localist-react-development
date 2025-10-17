@@ -6,14 +6,20 @@ import { showToast } from "../../../../utils";
 import {
   registerQuoteCustomer,
   setbuyerRequestData,
+  updateMobile,
 } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PhoneNumberMultiStepForm.module.css";
 import { useLocation } from "react-router";
 
-const PhoneNumberMultiStepForm = ({ nextStep, onBack }) => {
+const PhoneNumberMultiStepForm = ({
+  nextStep,
+  onBack,
+  updateNumberStep,
+  setUpdateNumberStep,
+}) => {
   const dispatch = useDispatch();
-  const { requestLoader, buyerRequest } = useSelector((state) => state.buyer);
+  const { requestLoader, buyerRequest,requestUserId } = useSelector((state) => state.buyer);
   const { userToken } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -25,8 +31,7 @@ const PhoneNumberMultiStepForm = ({ nextStep, onBack }) => {
   const targetID = params.get("utm_term") || "";
   const msclickid = params.get("utm_msclkid") || "";
   const utm_source = params.get("utm_source") || "";
-
-  const [phone, setPhone] = useState(buyerRequest?.phone || "");
+  const [phone, setPhone] = useState(buyerRequest?.phone);
   const [errors, setErrors] = useState({
     phone: false,
   });
@@ -61,33 +66,50 @@ const PhoneNumberMultiStepForm = ({ nextStep, onBack }) => {
     }
 
     // Save phone number in redux
-    const formData = new FormData();
-    formData.append("name", buyerRequest?.name);
-    formData.append("email", buyerRequest?.email);
-    formData.append("phone", phone);
-    formData.append("questions", JSON.stringify(updatedAnswers));
-    formData.append("service_id", buyerRequest?.service_id);
-    formData?.append("city", buyerRequest?.city);
-    formData.append("postcode", buyerRequest?.postal_code);
-    formData.append("form_status", 1);
-    formData.append("campaignid", campaignid || "");
-    formData.append("gclid", gclid || "");
-    formData.append("campaign", campaign || "");
-    formData.append("adgroup", adGroup || "");
-    formData.append("targetid", targetID || "");
-    formData.append("msclickid", msclickid || "");
-    formData.append("utm_source", utm_source || "");
-    formData.append("keyword", keyword || "");
+    if (updateNumberStep === 2) {
+      const formData = new FormData();
+      formData.append("name", buyerRequest?.name);
+      formData.append("email", buyerRequest?.email);
+      formData.append("phone", phone);
+      formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("service_id", buyerRequest?.service_id);
+      formData?.append("city", buyerRequest?.city);
+      formData.append("postcode", buyerRequest?.postal_code);
+      formData.append("form_status", 1);
+      formData.append("campaignid", campaignid || "");
+      formData.append("gclid", gclid || "");
+      formData.append("campaign", campaign || "");
+      formData.append("adgroup", adGroup || "");
+      formData.append("targetid", targetID || "");
+      formData.append("msclickid", msclickid || "");
+      formData.append("utm_source", utm_source || "");
+      formData.append("keyword", keyword || "");
 
-    dispatch(registerQuoteCustomer(formData)).then((result) => {
-      if (result) {
-        // showToast(
-        //   "success",
-        //   result?.message || "Customer registered successfully"
-        // );
-        nextStep();
-      }
-    });
+      dispatch(registerQuoteCustomer(formData)).then((result) => {
+        if (result) {
+          // showToast(
+          //   "success",
+          //   result?.message || "Customer registered successfully"
+          // );
+
+          nextStep();
+        }
+      });
+    } else {
+      const formData = new FormData();
+      formData.append("phone", phone);
+      formData.append("user_id", requestUserId);
+      dispatch(updateMobile(formData)).then((result) => {
+        if (result) {
+          showToast(
+            "success",
+            result?.message || "Phone Number updated Successfully"
+          );
+        }
+        setUpdateNumberStep(2);
+         nextStep();
+      });
+    }
 
     dispatch(
       setbuyerRequestData({

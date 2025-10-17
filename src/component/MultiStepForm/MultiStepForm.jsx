@@ -217,18 +217,22 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                 <PhoneNumberMultiStepForm
                   nextStep={nextStep}
                   onBack={prevStep}
-                />
-              )}
-              {updateNumberStep === 1 && (
-                <PhoneNumberUpdateMultiStepForm
+                  updateNumberStep={updateNumberStep}
                   setUpdateNumberStep={setUpdateNumberStep}
                 />
               )}
+              {/* {updateNumberStep === 1 && buyerStep === 5 && (
+                <PhoneNumberUpdateMultiStepForm
+                  setUpdateNumberStep={setUpdateNumberStep}
+                  onBack={prevStep}
+                />
+              )} */}
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep
                     open
                     nextStep={nextStep}
+                    onBack={prevStep}
                     isThankuPageOnlyShow
                     setUpdateNumberStep={setUpdateNumberStep}
                   />

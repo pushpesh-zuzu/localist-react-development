@@ -108,7 +108,7 @@ const NameEmailMultiStepForm = ({
     const res = await dispatch(checkEmailIdApi({ email }));
     // save user info in redux
     if (res.success) {
-      dispatch(setbuyerRequestData({ name, email: finalEmail, phone: "" }));
+      dispatch(setbuyerRequestData({ name, email: finalEmail }));
       const updatedAnswers = buyerRequest?.questions || [];
       nextStep();
     } else {

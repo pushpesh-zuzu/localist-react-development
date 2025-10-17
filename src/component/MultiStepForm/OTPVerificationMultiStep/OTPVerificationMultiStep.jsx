@@ -17,6 +17,7 @@ const OTPVerificationMultiStep = ({
   nextStep,
   isThankuPageOnlyShow = false,
   setUpdateNumberStep,
+  onBack
 }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
@@ -252,6 +253,7 @@ const OTPVerificationMultiStep = ({
           className={styles.submitBtn}
           onClick={() => {
             setUpdateNumberStep(1);
+            onBack()
           }}
         >
           RE-ENTER MOBILE NUMBER
