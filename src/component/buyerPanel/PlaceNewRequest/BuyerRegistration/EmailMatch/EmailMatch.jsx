@@ -69,50 +69,36 @@ const EmailMatch = ({
   useEffect(() => {
     const handleBeforeUnload = (e) => {
       if (name || email || phone) {
-        const formData = new FormData();
-        formData.append("name", name || "");
-        formData.append("email", email || "");
-        formData.append("phone", phone || "");
-        formData.append(
-          "questions",
-          JSON.stringify(buyerRequest?.questions || [])
-        );
-        formData.append("service_id", buyerRequest?.service_id || "");
-        formData.append("city", citySerach || "");
-        formData.append("postcode", buyerRequest?.postcode || "");
-        formData.append("campaignid", campaignid || "");
-        formData.append("gclid", gclid || "");
-        formData.append("campaign", campaign || "");
-        formData.append("adgroup", adGroup || "");
-        formData.append("targetid", targetID || "");
-        formData.append("msclickid", msclickid || "");
-        formData.append("utm_source", utm_source || "");
-        formData.append("keyword", keyword || "");
-        formData.append("form_status", 0);
+        const savedData = {
+          name: name || "",
+          email: email || "",
+          phone: phone || "",
+          questions: buyerRequest?.questions || [],
+          service_id: buyerRequest?.service_id || "",
+          city: citySerach || "",
+          postcode: buyerRequest?.postcode || "",
+          campaignid: campaignid || "",
+          gclid: gclid || "",
+          campaign: campaign || "",
+          adgroup: adGroup || "",
+          targetid: targetID || "",
+          msclickid: msclickid || "",
+          utm_source: utm_source || "",
+          keyword: keyword || "",
+          form_status: 0,
+        };
 
-        // ⚠️ Send API request
-        dispatch(registerQuoteCustomer(formData)).then((result) => {
-          if (result) {
-            // showToast(
-            //   "success",
-            //   result?.message || "Customer registered successfully"
-            // );
-            // nextStep();
-          }
-        }); // ✅ non-blocking safe method
+        // ✅ Save to localStorage
+        localStorage.setItem("unsentQuoteData", JSON.stringify(savedData));
 
-        // ⚠️ Show browser default confirmation dialog
+        // ⚠️ Show browser confirmation dialog
         e.preventDefault();
-        e.returnValue =
-          "Your progress will be saved automatically. Are you sure you want to leave?";
+        e.returnValue = "";
       }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [
     name,
     email,
@@ -128,6 +114,31 @@ const EmailMatch = ({
     utm_source,
     keyword,
   ]);
+  useEffect(() => {
+    const savedData = localStorage.getItem("unsentQuoteData");
+
+    if (savedData) {
+      const formData = JSON.parse(savedData);
+
+      const dataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "questions") {
+          dataToSend.append("questions", JSON.stringify(value || []));
+        } else {
+          dataToSend.append(key, value);
+        }
+      });
+
+      // ✅ Dispatch API call
+      dispatch(registerQuoteCustomer(dataToSend)).then((result) => {
+        if (result) {
+          console.log("Auto-saved data sent successfully after reload.");
+          // Clear after successful send
+          localStorage.removeItem("unsentQuoteData");
+        }
+      });
+    }
+  }, [dispatch]);
 
   const handleEmailBlur = async () => {
     if (!email) return;

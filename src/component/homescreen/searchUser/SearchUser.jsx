@@ -17,6 +17,7 @@ import {
   setBuyerStep,
   setcitySerach,
   getCityName,
+  registerQuoteCustomer,
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
@@ -121,63 +122,87 @@ const SearchProfessionals = ({ nextStep }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    const savedData = localStorage.getItem("unsentQuoteData");
+
+    if (savedData) {
+      const formData = JSON.parse(savedData);
+
+      const dataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === "questions") {
+          dataToSend.append("questions", JSON.stringify(value || []));
+        } else {
+          dataToSend.append(key, value);
+        }
+      });
+
+      // ✅ Dispatch API call
+      dispatch(registerQuoteCustomer(dataToSend)).then((result) => {
+        if (result) {
+          console.log("Auto-saved data sent successfully after reload.");
+          // Clear after successful send
+          localStorage.removeItem("unsentQuoteData");
+        }
+      });
+    }
+  }, [dispatch]);
+
   // ✅ New: validate postcode with our API (onChange)
-const debounceTimer = useRef(null);
-const lastInvalidPinRef = useRef(""); // store last invalid postcode
+  const debounceTimer = useRef(null);
+  const lastInvalidPinRef = useRef(""); // store last invalid postcode
 
-const handlePostcodeChange = (e) => {
-  const value = e.target.value.trim().slice(0, 10);
-  setPincode(value);
-  setPostalCodeValidate(false);
-  setIsPostcodeSelected(false);
-  setCity("");
+  const handlePostcodeChange = (e) => {
+    const value = e.target.value.trim().slice(0, 10);
+    setPincode(value);
+    setPostalCodeValidate(false);
+    setIsPostcodeSelected(false);
+    setCity("");
 
-  if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
 
-  // ✅ Only start validation after 500ms of no typing
-  debounceTimer.current = setTimeout(async () => {
-    if (value.length < 3) return;
+    // ✅ Only start validation after 500ms of no typing
+    debounceTimer.current = setTimeout(async () => {
+      if (value.length < 3) return;
 
-    setIsCheckingPostcode(true);
-    try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      setIsCheckingPostcode(true);
+      try {
+        const response =
+          (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
+          (await dispatch(getCityName({ postcode: value })));
 
-      if (response?.data?.city) {
-        setPostalCodeValidate(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
-        dispatch(
-          setbuyerRequestData({
-            postcode: value.trim().toUpperCase(),
-            city: response.data.city,
-          })
-        );
-        setIsPostcodeSelected(true);
-        setIsPincodeFromDropdown(true);
-        lastInvalidPinRef.current = ""; // reset invalid memory
-      } else {
-        // ✅ Prevent repeated toast for same invalid postcode
+        if (response?.data?.city) {
+          setPostalCodeValidate(true);
+          setCity(response.data.city);
+          dispatch(setcitySerach(response.data.city));
+          dispatch(
+            setbuyerRequestData({
+              postcode: value.trim().toUpperCase(),
+              city: response.data.city,
+            })
+          );
+          setIsPostcodeSelected(true);
+          setIsPincodeFromDropdown(true);
+          lastInvalidPinRef.current = ""; // reset invalid memory
+        } else {
+          // ✅ Prevent repeated toast for same invalid postcode
+          if (lastInvalidPinRef.current !== value) {
+            showToast("error", "Please enter a valid postcode!");
+            lastInvalidPinRef.current = value;
+          }
+          setPostalCodeValidate(false);
+        }
+      } catch (error) {
         if (lastInvalidPinRef.current !== value) {
           showToast("error", "Please enter a valid postcode!");
           lastInvalidPinRef.current = value;
         }
         setPostalCodeValidate(false);
+      } finally {
+        setIsCheckingPostcode(false);
       }
-    } catch (error) {
-      if (lastInvalidPinRef.current !== value) {
-        showToast("error", "Please enter a valid postcode!");
-        lastInvalidPinRef.current = value;
-      }
-      setPostalCodeValidate(false);
-    } finally {
-      setIsCheckingPostcode(false);
-    }
-  }, 500);
-};
-
-
+    }, 500);
+  };
 
   // ✅ Validation before continue (unchanged)
   const handleGetStarted = (requireValidationPin) => {
@@ -316,7 +341,7 @@ const handlePostcodeChange = (e) => {
         {isDropdownOpen && service?.length > 0 && (
           <div className={styles.searchResults} ref={divRef}>
             {searchServiceLoader ? (
-              <Spin  indicator={<LoadingOutlined spin />} />
+              <Spin indicator={<LoadingOutlined spin />} />
             ) : (
               <>
                 {service?.map((item) => (
