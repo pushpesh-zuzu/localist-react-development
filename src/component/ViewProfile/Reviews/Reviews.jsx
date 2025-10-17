@@ -49,8 +49,11 @@ const ReviewSection = ({
   token = JSON.parse(token);
   const reviewLength =
     token && token.remember_tokens
-      ? viewProfileData?.reviews_count || 0
-      : reviewProfileData?.reviews_count || 0;
+      ? viewProfileData?.reviews_count ??
+        reviewProfileData?.reviews_count ??
+        details?.reviews_count ??
+        0
+      : reviewProfileData?.reviews_count ?? details?.reviews_count ?? 0;
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
