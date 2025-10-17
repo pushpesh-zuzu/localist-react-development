@@ -12,11 +12,11 @@ import { useLocation, useNavigate } from "react-router";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-
 const OTPVerificationMultiStep = ({
   open,
   nextStep,
   isThankuPageOnlyShow = false,
+  setUpdateNumberStep,
 }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
@@ -108,7 +108,7 @@ const OTPVerificationMultiStep = ({
 
         // ✅ createRequestData call after OTP successfully verified
         const formData = new FormData();
-        formData.append("service_id", buyerRequest?.service_id || 43); // later remove this static service id 
+        formData.append("service_id", buyerRequest?.service_id || 43); // later remove this static service id
         formData.append("postcode", buyerRequest?.postal_code || "");
         formData.append("city", citySerach || "");
         formData.append("phone", buyerRequest?.phone);
@@ -152,7 +152,7 @@ const OTPVerificationMultiStep = ({
       }
     });
   };
-  
+
   const handleResendOtp = () => {
     const data = {
       user_id: requestUserId,
@@ -174,8 +174,10 @@ const OTPVerificationMultiStep = ({
     <div style={{ padding: "20px" }}>
       {/* <div className={styles.modalContent}> */}
       <h2 className={styles.title}>We just sent an SMS</h2>
-      <div className={styles.VerifyText}>Enter the security code we sent to</div>
-        <p style={{marginBottom:'24px'}}>{requestUserPhone}</p>
+      <div className={styles.VerifyText}>
+        Enter the security code we sent to
+      </div>
+      <p style={{ marginBottom: "24px" }}>{requestUserPhone}</p>
 
       <div className={styles.otpInputs}>
         {[0, 1, 2, 3].map((index) => (
@@ -194,32 +196,44 @@ const OTPVerificationMultiStep = ({
         ))}
       </div>
 
-      <p className={styles.instruction}>
-        {/* Please enter the code sent by SMS to
-        <br /> */}
-      </p>
+      {/* <p className={styles.instruction}>
+        Please enter the code sent by SMS to
+        <br />
+      </p> */}
 
       {timer > 0 ? (
         <p className={styles.timerText}>
           Resend OTP in <strong>{timer}</strong>s
         </p>
       ) : (
-        <button className={styles.resendBtn}  onClick={handleResendOtp}>
+        <button className={styles.resendBtn} onClick={handleResendOtp}>
           {resendOtpLoader ? "Resending..." : "Resend"}
         </button>
       )}
-    <br/>
-      <button className={styles.submitBtn} disabled={verifyPhoneNumberLoader}  onClick={handleSubmit}>
-        {verifyPhoneNumberLoader ? (
-                <Spin
-                  indicator={
-                    <LoadingOutlined spin style={{ color: "white" }} />
-                  }
-                />
-              ) : (
-                'Verify'
-              )}
-      </button>
+      <br />
+      <div className={styles.twoButtons}>
+        <button
+          className={styles.submitBtn}
+          disabled={verifyPhoneNumberLoader}
+          onClick={handleSubmit}
+        >
+          {verifyPhoneNumberLoader ? (
+            <Spin
+              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+            />
+          ) : (
+            "Verify"
+          )}
+        </button>
+        <button
+          className={styles.submitBtn}
+          onClick={() => {
+            setUpdateNumberStep(1);
+          }}
+        >
+          RE-ENTER MOBILE NUMBER
+        </button>
+      </div>
     </div>
   );
 };
