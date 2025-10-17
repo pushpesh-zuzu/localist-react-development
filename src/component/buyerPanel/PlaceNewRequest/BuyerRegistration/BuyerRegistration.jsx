@@ -25,7 +25,7 @@ const BuyerRegistration = ({
   setFromImageModal = () => {},
   service_Id,
   service_Name,
-  }) => {
+}) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
 
@@ -171,7 +171,7 @@ const BuyerRegistration = ({
           />
         )}
 
-        {buyerStep === 4 && reEnterMobile === 2  && (
+        {buyerStep === 4 && reEnterMobile === 2 && (
           <OtpVerification
             nextStep={nextStep}
             previousStep={previousStep}
@@ -184,12 +184,12 @@ const BuyerRegistration = ({
             // onClose={handleClose}
           />
         )}
-            {reEnterMobile === 1 && (
-            <ReEnterMobileNumber
-              setReEnterMobile={setReEnterMobile}
-              onClose={() => setReEnterMobile(2)}
-            />
-          )}
+        {reEnterMobile === 1 && (
+          <ReEnterMobileNumber
+            setReEnterMobile={setReEnterMobile}
+            onClose={() => setReEnterMobile(2)}
+          />
+        )}
         {buyerStep === 5 && (
           <NumberVerifiedModal
             nextStep={nextStep}
