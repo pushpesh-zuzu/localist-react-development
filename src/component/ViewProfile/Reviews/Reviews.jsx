@@ -20,6 +20,7 @@ const ReviewSection = ({
   showSummary = true,
   // isFromManualBids,
 }) => {
+  console.log(details);
   const location = useLocation();
   const isFromManualBids =
     new URLSearchParams(location.search).get("from") === "replies";
@@ -41,6 +42,8 @@ const ReviewSection = ({
   const { viewProfileData, reviewProfileData } = useSelector(
     (state) => state.leadSetting
   );
+
+  console.log(reviewProfileData);
   const datata = useSelector((state) => state.leadSetting);
   let token = localStorage.getItem("barkUserToken");
   token = JSON.parse(token);
@@ -116,8 +119,11 @@ const ReviewSection = ({
             <div className={styles.left}>
               <div className={styles.score}>
                 {token && token.remember_tokens
-                  ? viewProfileData?.avg_rating ?? 0
-                  : reviewProfileData?.avg_rating ?? 0}
+                  ? viewProfileData?.avg_rating ??
+                    reviewProfileData?.avg_rating ??
+                    details?.avg_rating ??
+                    0
+                  : reviewProfileData?.avg_rating ?? details?.avg_rating ?? 0}
                 /5
               </div>
 
@@ -125,8 +131,13 @@ const ReviewSection = ({
                 {Array.from({ length: 5 }).map((_, index) => {
                   const rating =
                     token && token.remember_tokens
-                      ? viewProfileData?.avg_rating ?? 0
-                      : reviewProfileData?.avg_rating ?? 0;
+                      ? viewProfileData?.avg_rating ??
+                        reviewProfileData?.avg_rating ??
+                        details?.avg_rating ??
+                        0
+                      : reviewProfileData?.avg_rating ??
+                        details?.avg_rating ??
+                        0;
                   if (index < Math.floor(rating)) {
                     return (
                       <img

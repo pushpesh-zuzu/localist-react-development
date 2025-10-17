@@ -38,13 +38,11 @@ const ViewProfiles = () => {
   const isCustomButton = queryParams.get("customBtn") === "true";
   const [activeTab, setActiveTab] = useState("About");
   const [onActiveTab, setOnActiveTab] = useState(false);
-  console.log(activeTab, "activeTabactiveTab");
   const [isopen, setIsOpen] = useState(true);
   const [customerModal, setCustomerModal] = useState(false);
   const dispatch = useDispatch();
   const profileId = useParams();
   const requestId = useParams();
-  console.log(profileId);
   const shouldDisableActions = requestId?.requestId;
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -176,24 +174,29 @@ const ViewProfiles = () => {
     return () => container?.removeEventListener("scroll", handleScroll);
   }, []);
   useEffect(() => {
-    const sellerData = {
-      // seller_id: profileId?.sellerId ? profileId?.sellerId : requestId?.requestId,
-      seller_id: requestId?.requestId
-        ? requestId?.requestId
-        : userToken?.id
-        ? userToken?.id
-        : registerData?.id,
-      buyer_id: userToken?.id ? userToken?.id : registerData?.id,
-      lead_id: requestId?.requestId,
-    };
-    let token = localStorage.getItem("barkToken");
-    token = JSON.parse(token);
-    if (token) {
-      dispatch(addViewProfileList(sellerData));
-    } else {
+    const path = window.location.pathname;
+    const basePath = path.split("/")[1]; // ✅ No "/" prefix now
+
+    if (basePath === "view-profile") {
+      const sellerData = {
+        seller_id: requestId?.requestId ?? userToken?.id ?? registerData?.id,
+        buyer_id: userToken?.id ?? registerData?.id,
+        lead_id: requestId?.requestId,
+      };
+
+      let token = localStorage.getItem("barkToken");
+      token = token ? JSON.parse(token) : null;
+
+      if (token) {
+        dispatch(addViewProfileList(sellerData));
+      }
+    } else if (basePath === "review") {
       dispatch(ReviewProfile({ profile_uuid: profileId }));
     }
-  }, []);
+
+    // Optional: debug log
+    console.log("Detected basePath:", basePath);
+  }, [dispatch, profileId, requestId, userToken, registerData]);
 
   const handleRequestOpen = () => {
     setCustomerModal(true);
