@@ -88,10 +88,18 @@ const EmailMatch = ({
         formData.append("msclickid", msclickid || "");
         formData.append("utm_source", utm_source || "");
         formData.append("keyword", keyword || "");
-        formData.append("form_status", 1);
+        formData.append("form_status", 0);
 
         // ⚠️ Send API request
-        navigator.sendBeacon("/api/save-form", formData); // ✅ non-blocking safe method
+        dispatch(registerQuoteCustomer(formData)).then((result) => {
+          if (result) {
+            // showToast(
+            //   "success",
+            //   result?.message || "Customer registered successfully"
+            // );
+            // nextStep();
+          }
+        }); // ✅ non-blocking safe method
 
         // ⚠️ Show browser default confirmation dialog
         e.preventDefault();
