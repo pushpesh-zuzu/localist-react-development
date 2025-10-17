@@ -171,7 +171,7 @@ const NameEmailMultiStepForm = ({
 
   return (
     <CardLayoutWrapper
-      title="You're nearly done! Just drop in your few details to get your custom quotes."
+      title="You're nearly done! Just enter a few details to get your custom quotes."
       onButtonClick={handleSubmit}
       onBackClick={handleBackClick}
       buttonText="Next"

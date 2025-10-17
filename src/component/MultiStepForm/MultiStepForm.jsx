@@ -15,6 +15,7 @@ import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAn
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
+import PhoneNumberUpdateMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberUpdateMultiStepForm";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [setstepText, setStepText] = useState("What");
+  const [updateNumberStep, setUpdateNumberStep] = useState(2);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -217,12 +219,18 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                   onBack={prevStep}
                 />
               )}
-              {buyerStep === 6 && (
+              {updateNumberStep === 1 && (
+                <PhoneNumberUpdateMultiStepForm
+                  setUpdateNumberStep={setUpdateNumberStep}
+                />
+              )}
+              {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep
                     open
                     nextStep={nextStep}
                     isThankuPageOnlyShow
+                    setUpdateNumberStep={setUpdateNumberStep}
                   />
                 </CardLayoutWrapper>
               )}
