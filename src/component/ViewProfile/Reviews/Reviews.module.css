@@ -314,6 +314,7 @@
 
 .rightContent > *:not(:last-child) {
   margin-bottom: 6px;
+  word-break: break-word;
 }
 
 .contentWrapper {
@@ -328,6 +329,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
+  width: 60vw;
 }
 
 /* For tablets (768px and below) */
