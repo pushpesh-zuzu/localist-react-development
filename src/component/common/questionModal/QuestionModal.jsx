@@ -634,7 +634,91 @@ const QuestionModal = ({
     }
   };
 
+  // const handleNext = () => {
+  //   if (selectedOption.length === 0) {
+  //     setError("Please select at least one option.");
+  //     return;
+  //   }
+
+  //   if (
+  //     selectedOption.includes("Something else (please describe)") &&
+  //     (!otherText.trim() ||
+  //       otherText.trim().toLowerCase() === "something else (please describe)")
+  //   ) {
+  //     setError("Please enter a value for 'Other' option.");
+  //     return;
+  //   }
+
+  //   const finalAnswer = selectedOption?.map((opt) =>
+  //     opt.toLowerCase() === "something else (please describe)" ? otherText : opt
+  //   );
+
+  //   const updatedAnswer = {
+  //     ques: questions[currentQuestion]?.questions,
+  //     ans: finalAnswer.join(", "),
+  //   };
+
+  //   const previousAnswers = buyerRequest?.questions || [];
+  //   const existingIndex = previousAnswers.findIndex(
+  //     (item) => item?.ques === updatedAnswer.ques
+  //   );
+
+  //   let updatedAnswers;
+  //   if (existingIndex !== -1) {
+  //     updatedAnswers = [...previousAnswers];
+  //     updatedAnswers[existingIndex] = updatedAnswer;
+  //   } else {
+  //     updatedAnswers = [...previousAnswers, updatedAnswer];
+  //   }
+
+  //   dispatch(setbuyerRequestData({ questions: updatedAnswers }));
+
+  //   const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
+  //     (a) => a.option === selectedOption[0]
+  //   );
+
+  //   const nextQ = selectedObj?.next_question;
+  //   if (nextQ === "last") {
+  //     if (isStartWithQuestionModal) {
+  //       dispatch(
+  //         setbuyerRequestData({
+  //           service_id: service?.id || buyerRequest?.service_id,
+  //           serviceName: serviceName || buyerRequest?.serviceName,
+  //           postcode: buyerRequest?.postcode,
+  //           city: citySerach,
+  //           questions: updatedAnswers,
+  //         })
+  //       );
+  //       nextStep();
+  //     } else if (adminToken || registerData?.remember_tokens) {
+  //       nextStep();
+  //     } else {
+  //       // Save final answers
+  //       saveBuyerData(updatedAnswers);
+  //     }
+  //   } else if (nextQ && questionIndexMap[nextQ]) {
+  //     setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+  //     setCurrentQuestion(questionIndexMap[nextQ]);
+  //   } else {
+  //     if (currentQuestion >= totalQuestions - 1) {
+  //       // ✅ Force move to next step on last question
+  //       nextStep();
+  //     } else {
+  //       setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+  //       setCurrentQuestion(currentQuestion + 1);
+  //     }
+  //   }
+
+  //   setSelectedOption([]);
+  //   setOtherText("");
+  //   setError("");
+  // };
+
   const handleNext = () => {
+    console.log("👉 Current Question:", currentQuestion);
+    console.log("👉 Total Questions:", totalQuestions);
+    console.log("👉 Selected Options:", selectedOption);
+
     if (selectedOption.length === 0) {
       setError("Please select at least one option.");
       return;
@@ -678,7 +762,17 @@ const QuestionModal = ({
     );
 
     const nextQ = selectedObj?.next_question;
-    if (nextQ === "last") {
+    console.log("👉 nextQ:", nextQ);
+
+    // ✅ Add this check
+    if (
+      currentQuestion === totalQuestions - 1 ||
+      nextQ === "last" ||
+      nextQ === undefined ||
+      nextQ === null ||
+      nextQ === ""
+    ) {
+      console.log("✅ Triggering nextStep()");
       if (isStartWithQuestionModal) {
         dispatch(
           setbuyerRequestData({
@@ -693,19 +787,19 @@ const QuestionModal = ({
       } else if (adminToken || registerData?.remember_tokens) {
         nextStep();
       } else {
-        // Save final answers
         saveBuyerData(updatedAnswers);
+        nextStep(); // <-- Add this to force move forward even after saving
       }
-    } else if (nextQ && questionIndexMap[nextQ]) {
+      return;
+    }
+
+    // Continue normal navigation if not last
+    if (nextQ && questionIndexMap[nextQ]) {
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      if (currentQuestion < totalQuestions - 1) {
-        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
-        setCurrentQuestion(currentQuestion + 1);
-      } else {
-        nextStep();
-      }
+      setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+      setCurrentQuestion(currentQuestion + 1);
     }
 
     setSelectedOption([]);
