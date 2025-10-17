@@ -572,7 +572,7 @@ const QuestionModal = ({
   const { search } = useLocation();
   const params = new URLSearchParams(search);
 
-  const campaignid = params.get("campaignid");
+  const campaignid = params.get("gad_campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
   const campaign = params.get("utm_campaign");
