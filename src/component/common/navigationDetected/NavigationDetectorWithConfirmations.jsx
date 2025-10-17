@@ -1,18 +1,16 @@
 // NavigationDetectorWithConfirmations.js
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { extractAllParams } from '../../../utils/decodeURLParams';
-import { useLocation } from 'react-router';
-import {
-  registerQuoteCustomer,
-} from "../../../store/Buyer/BuyerSlice";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { extractAllParams } from "../../../utils/decodeURLParams";
+import { useLocation } from "react-router";
+import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 const NavigationDetectorWithConfirmations = () => {
   const dispatch = useDispatch();
-  
+
   // Yeh values aapke actual state se le aao
-  const userToken = useSelector(state => state.auth.userToken);
- const { buyerRequest, requestLoader, citySerach, questionanswerData } =
-    useSelector((state) => state.buyer); 
+  const userToken = useSelector((state) => state.auth.userToken);
+  const { buyerRequest, requestLoader, citySerach, questionanswerData } =
+    useSelector((state) => state.buyer);
   // ... other state variables
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
@@ -31,8 +29,8 @@ const NavigationDetectorWithConfirmations = () => {
     if (!userToken) {
       const updatedAnswers = buyerRequest?.questions || [];
       const formData = new FormData();
-      
-       formData.append("name", buyerRequest?.name);
+
+      formData.append("name", buyerRequest?.name);
       formData.append("email", buyerRequest?.email);
       formData.append("phone", buyerRequest?.phone);
       formData.append("questions", JSON.stringify(updatedAnswers));
@@ -49,37 +47,39 @@ const NavigationDetectorWithConfirmations = () => {
       formData.append("keyword", keyword || "");
       formData.append("form_status", 0);
 
-      console.log('📡 API Call being made with form_status: 0');
-      
+      console.log("📡 API Call being made with form_status: 0");
+
       // API call karo - yeh aapka actual dispatch action hai
-      dispatch(registerQuoteCustomer(formData)).then((result) => {
-        if (result) {
-          console.log('✅ API Call successful - Data saved');
-          // Cleanup karo agar needed hai
-          localStorage.removeItem("barkToken");
-          localStorage.removeItem("barkUserToken");
-          localStorage.removeItem("registerDataToken");
-          localStorage.removeItem("registerTokens");
-          localStorage.removeItem("createRequestToken");
-        }
-      }).catch((error) => {
-        console.error('❌ API Call failed:', error);
-      });
+      dispatch(registerQuoteCustomer(formData))
+        .then((result) => {
+          if (result) {
+            console.log("✅ API Call successful - Data saved");
+            // Cleanup karo agar needed hai
+            localStorage.removeItem("barkToken");
+            localStorage.removeItem("barkUserToken");
+            localStorage.removeItem("registerDataToken");
+            localStorage.removeItem("registerTokens");
+            localStorage.removeItem("createRequestToken");
+          }
+        })
+        .catch((error) => {
+          console.error("❌ API Call failed:", error);
+        });
     }
   };
 
   useEffect(() => {
-    console.log('🔵 Component mounted - Setting up event listeners');
+    console.log("🔵 Component mounted - Setting up event listeners");
 
     // Back button detection with API call
     // const handlePopState = (event) => {
     //   console.log('🔴 BACK BUTTON DETECTED!');
-      
+
     //   // Confirmation dialog show karo
     //   const shouldPrevent = window.confirm(
     //     'Kya aap sachme back jana chahte hain? Unsaved changes lost ho jayenge.'
     //   );
-      
+
     //   if (shouldPrevent) {
     //     console.log('⛔ User ne back cancel kardia');
     //     // Wapas same page pe set karo
@@ -94,37 +94,42 @@ const NavigationDetectorWithConfirmations = () => {
 
     // BROWSER CLOSE DETECTION with API call
     const handleBeforeUnload = (event) => {
-      console.log('🟡 BROWSER/TAB CLOSE DETECTED - Making API Call');
-      
+      console.log("🟡 BROWSER/TAB CLOSE DETECTED - Making API Call");
+
       // API call karo browser close par
       // IMPORTANT: Ye sync way mein karna hoga kyunki page close ho raha hai
       submitFormData();
-      
+
       // Browser ka default confirmation dialog
       event.preventDefault();
       // event.returnValue = 'Kya aap sachme page leave karna chahte hain? Unsaved changes lost ho jayenge.';
     };
 
     // IMPORTANT: Pehle history state set karo
-    window.history.pushState(null, '', window.location.href);
-    console.log('📝 History state set successfully');
+    window.history.pushState(null, "", window.location.href);
+    console.log("📝 History state set successfully");
 
     // Add event listeners
     // window.addEventListener('popstate', handlePopState);
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    console.log('✅ Event listeners added for back button AND browser close');
-    window.addEventListener('pagehide', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    console.log("✅ Event listeners added for back button AND browser close");
+    window.addEventListener("pagehide", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleBeforeUnload); // Mobile Android/iOS
+    window.addEventListener("blur", handleBeforeUnload); // Mobile focus loss
+
     // Cleanup function
     return () => {
       // window.removeEventListener('popstate', handlePopState);
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-            window.removeEventListener('pagehide', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("pagehide", handleBeforeUnload);
+      window.removeEventListener("visibilitychange", handleBeforeUnload);
+      window.removeEventListener("blur", handleBeforeUnload);
 
-      console.log('🔄 Cleanup done');
+      console.log("🔄 Cleanup done");
     };
   }, [dispatch, userToken, buyerRequest, citySerach]);
 
-  return null
+  return null;
 };
 
 export default NavigationDetectorWithConfirmations;
