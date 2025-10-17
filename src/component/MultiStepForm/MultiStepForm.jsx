@@ -16,6 +16,7 @@ import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerification
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
 import PhoneNumberUpdateMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberUpdateMultiStepForm";
+import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -140,6 +141,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
 
   return (
     <>
+    <NavigationDetectorWithConfirmations/>
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>

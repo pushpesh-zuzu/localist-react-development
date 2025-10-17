@@ -15,6 +15,7 @@ import DescribeYourRequestPage from "../../BuyerRegistrationPages/DescribeYourRe
 import QuestionAnswerPage from "../../BuyerRegistrationPages/QuestionAnswerPage/QuestionAnswerPage";
 import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMatchPage";
 import ReEnterMobileNumber from "../../common/ReEnterMobileNumber/ReEnterMobileNumber";
+// import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const BuyerRegistrationForLandscapingPPC = ({
   closeModal,
@@ -151,6 +152,7 @@ const BuyerRegistrationForLandscapingPPC = ({
   console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modalContent}>
+      {/* <NavigationDetectorWithConfirmations buyerRequest={buyerRequest}/> */}
       {buyerStep === 1 && (
         <QuestionAnswerPage
           // ref={questionModalRef}

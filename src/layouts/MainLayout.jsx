@@ -4,6 +4,7 @@ import Footer from "../component/common/footer/Footer";
 import MetaHelmet from "../component/common/helmet/metaHelmet";
 import { useEffect } from "react";
 import ScrollToTop from "../routes/ScrollToTop";
+import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 
 // const pageTitles = {
 //   "/": "Homepage | Localists",
@@ -356,6 +357,7 @@ const MainLayout = () => {
     <div>
       <ScrollToTop />
       <Navbar />
+          <NavigationDetectorWithConfirmations/>
       <MetaHelmet title={meta?.title} description={meta?.description} />
       <main style={{ minHeight: "50vh" }}>
         <Outlet />

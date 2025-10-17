@@ -68,6 +68,7 @@ import { levelOnePagesRoutes } from "./levelOneRoutes";
 import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
 import ProtectedRoutePPC from "./ProtecteRoutePPC";
 import MultiStepWithImage from "../pages/MultiStepWithImage";
+import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -289,6 +290,7 @@ const routes = [
           <ProtectedRoutePPC>
             <LocaleRedirect>
               <React.Suspense fallback={<FullScreenSpinner />}>
+                <NavigationDetectorWithConfirmations />
                 <Component />
               </React.Suspense>
             </LocaleRedirect>
@@ -685,7 +687,7 @@ const routes = [
       </ProtectedRoutePPC>
     ),
   },
-   {
+  {
     path: "/:lang/:country/landscaping-multi-form-ppc-banner",
     element: (
       <ProtectedRoutePPC>
