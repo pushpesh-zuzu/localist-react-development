@@ -10,6 +10,7 @@ import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
+import { handleScrollToBottom } from "../../../../utils/scroll";
 
 const QuestionAnswerMultiStep2 = ({
   questions = [],
@@ -96,6 +97,7 @@ const QuestionAnswerMultiStep2 = ({
           : ""
       );
     }
+    handleScrollToBottom()
   }, [currentQuestion, buyerRequest, questions]);
 
   const handleOptionChange = (e) => {

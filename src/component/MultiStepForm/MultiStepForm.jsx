@@ -14,8 +14,9 @@ import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/M
 import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
+import { handleScrollToBottom } from "../../utils/scroll";
 
-const MultiStepForm = ({isQuestionWithImage=false}) => {
+const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
@@ -57,6 +58,7 @@ const MultiStepForm = ({isQuestionWithImage=false}) => {
       setActualSteps(3);
       setStepText("When");
     }
+    handleScrollToBottom();
   }, [buyerStep]);
   const getProgressPercentage = (per) => {
     setProgressPercentage((pre) => pre + per);
@@ -192,7 +194,7 @@ const MultiStepForm = ({isQuestionWithImage=false}) => {
               )}
 
               {buyerStep === 3 && (
-                <div style={{  margin: "auto" }}>
+                <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStep
                     questions={lastQuestion} // Sirf last question
                     onNext={nextStep} // Last question complete hone ke baad next step
