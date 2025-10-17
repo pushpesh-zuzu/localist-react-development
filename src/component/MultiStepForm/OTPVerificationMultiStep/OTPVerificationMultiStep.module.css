@@ -61,7 +61,7 @@
 .submitBtn {
     box-shadow: 0px 0px 2px 0.5px #0000001a;
   background: var(--primary-color);
-  border-radius: 50px;
+  border-radius: 8px;
   color: white;
   padding: 8px 23px;
   border: none;
