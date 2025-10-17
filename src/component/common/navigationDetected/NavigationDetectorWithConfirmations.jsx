@@ -113,11 +113,13 @@ const NavigationDetectorWithConfirmations = () => {
     // window.addEventListener('popstate', handlePopState);
     window.addEventListener('beforeunload', handleBeforeUnload);
     console.log('✅ Event listeners added for back button AND browser close');
-
+    window.addEventListener('pagehide', handleBeforeUnload);
     // Cleanup function
     return () => {
       // window.removeEventListener('popstate', handlePopState);
       window.removeEventListener('beforeunload', handleBeforeUnload);
+            window.removeEventListener('pagehide', handleBeforeUnload);
+
       console.log('🔄 Cleanup done');
     };
   }, [dispatch, userToken, buyerRequest, citySerach]);
