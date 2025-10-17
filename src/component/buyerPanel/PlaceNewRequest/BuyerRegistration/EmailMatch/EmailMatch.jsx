@@ -68,7 +68,6 @@ const EmailMatch = ({
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
-      // Only trigger if user filled something
       if (name || email || phone) {
         const formData = new FormData();
         formData.append("name", name || "");
@@ -91,16 +90,18 @@ const EmailMatch = ({
         formData.append("keyword", keyword || "");
         formData.append("form_status", 1);
 
-        // 🔥 Fire API before page reload
-        dispatch(registerQuoteCustomer(formData));
+        // ⚠️ Send API request
+        navigator.sendBeacon("/api/save-form", formData); // ✅ non-blocking safe method
 
-        // Optional: show reload confirm
+        // ⚠️ Show browser default confirmation dialog
         e.preventDefault();
-        e.returnValue = "";
+        e.returnValue =
+          "Your progress will be saved automatically. Are you sure you want to leave?";
       }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
