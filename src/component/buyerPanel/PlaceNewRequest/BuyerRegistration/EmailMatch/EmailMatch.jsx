@@ -591,7 +591,7 @@ const EmailMatch = ({
   const { search } = useLocation();
   // ✅ URL se parameters extract karein
   const allParams = extractAllParams(search || window.location.search);
-  
+
   // ✅ Ab saare parameters mil jayenge
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
@@ -601,7 +601,6 @@ const EmailMatch = ({
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
-
 
   // ---- Form states ----
   const [email, setEmail] = useState("");
@@ -743,8 +742,39 @@ const EmailMatch = ({
   // --------------------------------------------
   // Optional fallback: store temporarily in localStorage on reload
   // --------------------------------------------
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     if (name || email || phone) {
+  //       const savedData = {
+  //         name,
+  //         email,
+  //         phone,
+  //         questions: buyerRequest?.questions || [],
+  //         service_id: buyerRequest?.service_id || "",
+  //         city: citySerach || "",
+  //         postcode: buyerRequest?.postcode || "",
+  //         campaignid,
+  //         gclid,
+  //         campaign,
+  //         adgroup: adGroup,
+  //         targetid: targetID,
+  //         msclickid,
+  //         utm_source,
+  //         keyword,
+  //         form_status: 0,
+  //       };
+  //       localStorage.setItem("unsentQuoteData", JSON.stringify(savedData));
+  //       e.preventDefault();
+  //       e.returnValue = "";
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  // }, [name, email, phone]);
+
   useEffect(() => {
-    const handleBeforeUnload = (e) => {
+    const saveData = () => {
       if (name || email || phone) {
         const savedData = {
           name,
@@ -765,14 +795,59 @@ const EmailMatch = ({
           form_status: 0,
         };
         localStorage.setItem("unsentQuoteData", JSON.stringify(savedData));
-        e.preventDefault();
-        e.returnValue = "";
+        // Immediately attempt API call (async safe)
+        const formData = new FormData();
+        Object.entries(savedData).forEach(([key, value]) => {
+          formData.append(
+            key,
+            key === "questions" ? JSON.stringify(value) : value
+          );
+        });
+        dispatch(registerQuoteCustomer(formData));
+      }
+    };
+
+    const handleBeforeUnload = (e) => {
+      saveData();
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    const handlePageHide = () => {
+      saveData();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        saveData();
       }
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [name, email, phone]);
+    window.addEventListener("pagehide", handlePageHide);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("pagehide", handlePageHide);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [
+    name,
+    email,
+    phone,
+    buyerRequest,
+    citySerach,
+    campaignid,
+    gclid,
+    campaign,
+    adGroup,
+    targetID,
+    msclickid,
+    utm_source,
+    keyword,
+    dispatch,
+  ]);
 
   // --------------------------------------------
   // Auto resend localStorage data on reload
@@ -856,16 +931,22 @@ const EmailMatch = ({
           )}
 
           <label className={styles.label}>Phone Number</label>
-          <input
-            type="tel"
-            placeholder="Phone Number"
-            className={`${styles.input} ${
-              errors.phone ? styles.inputError : ""
+          <div
+            className={`${styles.phoneWrapper} ${
+              errors?.phone ? styles.error44 : ""
             }`}
-            value={phone}
-            maxLength={10}
-            onChange={handlePhoneChange}
-          />
+          >
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className={`${styles.phoneInput} ${
+                errors?.phone ? styles.inputError : ""
+              }`}
+              value={phone}
+              maxLength={10}
+              onChange={handlePhoneChange}
+            />
+          </div>
           {errors.phone && (
             <span className={styles.errorMessage}>
               Please enter a valid 10-digit phone number.

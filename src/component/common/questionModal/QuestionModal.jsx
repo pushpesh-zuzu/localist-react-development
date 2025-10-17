@@ -899,20 +899,94 @@ const QuestionModal = ({
   );
 
   // ✅ beforeunload event to trigger save
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     if (buyerRequest?.questions?.length > 0) {
+  //       e.preventDefault();
+  //       e.returnValue = "";
+  //       saveBuyerData(buyerRequest.questions); // save data before leaving
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [buyerRequest, saveBuyerData]);
+
   useEffect(() => {
-    const handleBeforeUnload = (e) => {
+    const saveToLocal = () => {
       if (buyerRequest?.questions?.length > 0) {
-        e.preventDefault();
-        e.returnValue = "";
-        saveBuyerData(buyerRequest.questions); // save data before leaving
+        const savedData = {
+          name: buyerRequest?.name || "",
+          email: buyerRequest?.email || "",
+          phone: buyerRequest?.phone || "",
+          questions: buyerRequest?.questions || [],
+          service_id: buyerRequest?.service_id || "",
+          city: citySerach || "",
+          postcode: buyerRequest?.postcode || "",
+          campaignid,
+          gclid,
+          campaign,
+          adgroup: adGroup,
+          targetid: targetID,
+          msclickid,
+          utm_source,
+          keyword,
+          form_status: 1,
+        };
+        localStorage.setItem("unsentQuoteData", JSON.stringify(savedData));
       }
     };
 
+    const handleBeforeUnload = () => saveToLocal();
+    const handlePageHide = () => saveToLocal();
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") saveToLocal();
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("pagehide", handlePageHide);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("pagehide", handlePageHide);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [buyerRequest, saveBuyerData]);
+  }, [
+    buyerRequest,
+    citySerach,
+    campaignid,
+    gclid,
+    campaign,
+    adGroup,
+    targetID,
+    msclickid,
+    utm_source,
+    keyword,
+  ]);
+
+  useEffect(() => {
+    const unsentData = localStorage.getItem("unsentQuoteData");
+    if (unsentData) {
+      try {
+        const parsed = JSON.parse(unsentData);
+        const formData = new FormData();
+        Object.entries(parsed).forEach(([key, value]) => {
+          formData.append(
+            key,
+            key === "questions" ? JSON.stringify(value) : value
+          );
+        });
+
+        dispatch(registerQuoteCustomer(formData));
+        localStorage.removeItem("unsentQuoteData");
+      } catch (err) {
+        console.error("Failed to resend saved data:", err);
+      }
+    }
+  }, [dispatch]);
 
   return (
     <div className={styles.modalOverlay}>

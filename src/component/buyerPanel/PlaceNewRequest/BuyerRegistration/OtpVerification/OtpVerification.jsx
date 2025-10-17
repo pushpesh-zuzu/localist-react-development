@@ -349,18 +349,55 @@ const OtpVerification = ({
     dispatch(createRequestData(formData));
   }, [buyerRequest, citySerach, requestId, requestUserId, dispatch]);
 
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e) => {
+  //     if (buyerRequest?.questions?.length > 0) {
+  //       e.preventDefault();
+  //       e.returnValue = "";
+  //       saveOtpData();
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [buyerRequest, saveOtpData]);
+
   useEffect(() => {
-    const handleBeforeUnload = (e) => {
+    const saveDataBeforeExit = () => {
       if (buyerRequest?.questions?.length > 0) {
-        e.preventDefault();
-        e.returnValue = "";
         saveOtpData();
       }
     };
 
+    const handleBeforeUnload = (e) => {
+      saveDataBeforeExit();
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        saveDataBeforeExit();
+      }
+    };
+
+    const handlePageHide = () => {
+      saveDataBeforeExit();
+    };
+
+    // ✅ Works for desktop browsers
     window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // ✅ Works for mobile browsers (Safari, Chrome, etc.)
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pagehide", handlePageHide);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pagehide", handlePageHide);
     };
   }, [buyerRequest, saveOtpData]);
 
