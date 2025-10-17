@@ -200,18 +200,22 @@ const OTPVerificationMultiStep = ({
         Please enter the code sent by SMS to
         <br />
       </p> */}
-
-      {timer > 0 ? (
-        <p className={styles.timerText}>
-          Resend OTP in <strong>{timer}</strong>s
-        </p>
-      ) : (
-        <button className={styles.resendBtn} onClick={handleResendOtp}>
-          {resendOtpLoader ? "Resending..." : "Resend"}
-        </button>
-      )}
-      <br />
-      <div className={styles.twoButtons}>
+      <p className={styles.instructionVerify}>
+        ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
+      </p>
+      <p
+        style={{ maxWidth: "79%", margin: "auto" }}
+        className={styles.instructionVerify}
+      >
+        WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
+      </p>
+      <p
+        style={{ marginTop: "16px", marginBottom: "24px" }}
+        className={styles.instructionVerify}
+      >
+        WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
+      </p>
+            {/* <div className={styles.twoButtons}>
         <button
           className={styles.submitBtn}
           disabled={verifyPhoneNumberLoader}
@@ -233,7 +237,42 @@ const OTPVerificationMultiStep = ({
         >
           RE-ENTER MOBILE NUMBER
         </button>
+      </div> */}
+      <div
+        style={{
+          marginTop: "16px",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "24px",
+          justifyContent: "center",
+        }}
+      >
+        <button
+          style={{ width: "180px", minWidth: "180px" }}
+          className={styles.submitBtn}
+          onClick={() => {
+            setUpdateNumberStep(1);
+          }}
+        >
+          RE-ENTER MOBILE NUMBER
+        </button>
+        <button
+          style={{ width: "180px", minWidth: "180px" }}
+          className={styles.submitBtn}
+          onClick={handleSubmit}
+        >
+          SUBMIT YOUR OTP CODE
+        </button>
       </div>
+      {timer > 0 ? (
+        <p className={styles.timerText} style={{marginTop:'24px'}}>
+          Resend OTP in <strong>{timer}</strong>s
+        </p>
+      ) : (
+        <div className={styles.resendBtn} onClick={handleResendOtp}>
+          {resendOtpLoader ? "Resending..." : "Resend"}
+        </div>
+      )}
     </div>
   );
 };
