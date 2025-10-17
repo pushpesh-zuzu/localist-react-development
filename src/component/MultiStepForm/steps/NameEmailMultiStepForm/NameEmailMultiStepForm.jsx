@@ -11,6 +11,7 @@ import {
 } from "../../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
+import { extractAllParams } from "../../../../utils/decodeURLParams";
 
 const NameEmailMultiStepForm = ({
   nextStep,
@@ -27,16 +28,18 @@ const NameEmailMultiStepForm = ({
     (state) => state.buyer
   );
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
+  const allParams = extractAllParams(search || window.location.search);
 
-  const campaignid = params.get("gad_campaignid");
-  const keyword = params.get("keyword");
-  const gclid = params.get("gclid");
-  const campaign = params.get("utm_campaign");
-  const adGroup = params.get("AgId");
-  const targetID = params.get("utm_term");
-  const msclickid = params.get("utm_msclkid");
-  const utm_source = params.get("utm_source");
+  // ✅ Ab saare parameters mil jayenge
+  const campaignid = allParams.gad_campaignid || "";
+  const keyword = allParams.keyword || "";
+  const gclid = allParams.gclid || "";
+  const campaign = allParams.utm_campaign || "";
+  const adGroup = allParams.AgId || "";
+  const targetID = allParams.utm_term || "";
+  const msclickid = allParams.utm_msclkid || "";
+  const utm_source = allParams.utm_source || "";
+
   const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState(buyerRequest?.email);
   const [name, setName] = useState(buyerRequest?.name);
@@ -176,20 +179,17 @@ const NameEmailMultiStepForm = ({
       onBackClick={handleBackClick}
       buttonText="Next"
       showBackButton={true}
-      disableNextButton={
-        searchServiceLoader
-      }
+      disableNextButton={searchServiceLoader}
       loader={searchServiceLoader}
     >
       <div className={styles.infoWrapper}>
         {/* <label className={styles.label}>Full Name</label> */}
-         {!isPPCPages && (
-          <div style={{marginBottom:'10px'}}>
+        {!isPPCPages && (
+          <div style={{ marginBottom: "10px" }}>
             {/* <label htmlFor="email" className={styles.label}>
               Email
             </label> */}
             <input
-            
               type="email"
               placeholder="Email"
               className={`${styles.input} ${

@@ -553,6 +553,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 import { useLocation } from "react-router";
+import { extractAllParams } from "../../../utils/decodeURLParams";
 
 const QuestionModal = ({
   questions = [],
@@ -570,16 +571,17 @@ const QuestionModal = ({
   const { service, registerData } = useSelector((state) => state.findJobs);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
+  const allParams = extractAllParams(search || window.location.search);
 
-  const campaignid = params.get("gad_campaignid");
-  const keyword = params.get("keyword");
-  const gclid = params.get("gclid");
-  const campaign = params.get("utm_campaign");
-  const adGroup = params.get("AgId");
-  const targetID = params.get("utm_term");
-  const msclickid = params.get("utm_msclkid");
-  const utm_source = params.get("utm_source");
+  // ✅ Ab saare parameters mil jayenge
+  const campaignid = allParams.gad_campaignid || "";
+  const keyword = allParams.keyword || "";
+  const gclid = allParams.gclid || "";
+  const campaign = allParams.utm_campaign || "";
+  const adGroup = allParams.AgId || "";
+  const targetID = allParams.utm_term || "";
+  const msclickid = allParams.utm_msclkid || "";
+  const utm_source = allParams.utm_source || "";
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);

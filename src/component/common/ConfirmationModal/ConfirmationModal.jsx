@@ -17,6 +17,7 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData, showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
+import { extractAllParams } from "../../../utils/decodeURLParams";
 // import { showToast } from "../../../../../utils";
 
 const ConfirmationModal = ({
@@ -104,16 +105,18 @@ const ConfirmationModal = ({
   }, [show]);
   console.log(buyerRequest, formData, "buyerRequest");
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
+  const allParams = extractAllParams(search || window.location.search);
 
-  const campaignid = params.get("gad_campaignid");
-  const keyword = params.get("keyword");
-  const gclid = params.get("gclid");
-  const campaign = params.get("utm_campaign")
-  const adGroup = params.get("AgId")
-  const targetID = params.get("utm_term")
-  const msclickid = params.get("utm_msclkid")
-  const utm_source =params.get("utm_source")
+  // ✅ Ab saare parameters mil jayenge
+  const campaignid = allParams.gad_campaignid || "";
+  const keyword = allParams.keyword || "";
+  const gclid = allParams.gclid || "";
+  const campaign = allParams.utm_campaign || "";
+  const adGroup = allParams.AgId || "";
+  const targetID = allParams.utm_term || "";
+  const msclickid = allParams.utm_msclkid || "";
+  const utm_source = allParams.utm_source || "";
+
   const handleSubmit = () => {
     if (!userToken) {
       // const formData = new FormData();
