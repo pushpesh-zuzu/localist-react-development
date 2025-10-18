@@ -889,7 +889,7 @@ const EmailMatch = ({
           </button>
         )}
 
-        <div className={styles.header}>
+        <div style={{color:'#000'}} className={styles.header}>
           <h2>YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
           <p>Your phone number and email are safe with us.</p>
           <p>We'll only use them to connect you with trusted professionals.</p>
