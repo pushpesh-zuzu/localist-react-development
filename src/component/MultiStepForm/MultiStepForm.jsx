@@ -138,10 +138,18 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
       setProgressPercentage(initialProgress);
     }
   }, [questionanswerData]);
-
+  const [hasMountedDetector, setHasMountedDetector] = useState(false);
+  console.log(buyerRequest, "br");
+  useEffect(() => {
+    if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+      setHasMountedDetector(true);
+    }
+    // ❌ Don't depend on buyerRequest.questions
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasMountedDetector]);
   return (
     <>
-    <NavigationDetectorWithConfirmations/>
+      {/* {<NavigationDetectorWithConfirmations />} */}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>

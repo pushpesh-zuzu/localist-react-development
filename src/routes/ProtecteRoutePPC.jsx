@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { showToast } from "../utils";
+import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 
 /**
  * SSR-safe ProtectedRoute
@@ -45,7 +46,12 @@ const ProtectedRoutePPC = ({ children }) => {
     return <Navigate to="/buyers/create" replace state={{ from: location }} />;
   }
 
-  return children;
+  return (
+    <>
+      <NavigationDetectorWithConfirmations />
+      {children}
+    </>
+  );
 };
 
 export default ProtectedRoutePPC;

@@ -357,7 +357,6 @@ const MainLayout = () => {
     <div>
       <ScrollToTop />
       <Navbar />
-          <NavigationDetectorWithConfirmations/>
       <MetaHelmet title={meta?.title} description={meta?.description} />
       <main style={{ minHeight: "50vh" }}>
         <Outlet />

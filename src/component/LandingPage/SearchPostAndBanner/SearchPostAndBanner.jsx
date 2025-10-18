@@ -29,7 +29,7 @@ const SearchPostAndBanner = ({
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const inputRef = useRef(null);
-  const { postCodeLoader } = useSelector((state) => state.buyer);
+  const { postCodeLoader,buyerRequest } = useSelector((state) => state.buyer);
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
@@ -109,6 +109,13 @@ const SearchPostAndBanner = ({
       return;
     }
   };
+const [hasMountedDetector, setHasMountedDetector] = useState(false);
+
+// useEffect(() => {
+//   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+//     setHasMountedDetector(true);
+//   }
+// }, [hasMountedDetector]);
 
   return (
     <div className={styles.searchcontainer}>

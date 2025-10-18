@@ -1,21 +1,16 @@
-// NavigationDetectorWithConfirmations.js
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
+
 const NavigationDetectorWithConfirmations = () => {
   const dispatch = useDispatch();
-
-  // Yeh values aapke actual state se le aao
   const userToken = useSelector((state) => state.auth.userToken);
-  const { buyerRequest, requestLoader, citySerach, questionanswerData } =
-    useSelector((state) => state.buyer);
-  // ... other state variables
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
 
-  // ✅ Ab saare parameters mil jayenge
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
   const gclid = allParams.gclid || "";
@@ -25,109 +20,90 @@ const NavigationDetectorWithConfirmations = () => {
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
 
+  // 🧠 Ref to store latest data safely
+  const latestData = useRef({
+    userToken,
+    buyerRequest,
+    citySerach,
+  });
+
+  // Keep ref updated (no re-renders)
+  useEffect(() => {
+    latestData.current = { userToken, buyerRequest, citySerach };
+  }, [userToken, buyerRequest, citySerach]);
+
+  // Prevent multiple API calls
+  const hasSent = useRef(false);
+
   const submitFormData = () => {
-    if (!userToken) {
-      const updatedAnswers = buyerRequest?.questions || [];
-      const formData = new FormData();
+    const { userToken, buyerRequest, citySerach } = latestData.current;
+    if (hasSent.current || userToken) return;
+    hasSent.current = true;
 
-      formData.append("name", buyerRequest?.name);
-      formData.append("email", buyerRequest?.email);
-      formData.append("phone", buyerRequest?.phone);
-      formData.append("questions", JSON.stringify(updatedAnswers));
-      formData.append("service_id", buyerRequest?.service_id || "");
-      formData.append("city", citySerach || "");
-      formData.append("postcode", buyerRequest?.postcode || "");
-      formData.append("campaignid", campaignid || "");
-      formData.append("gclid", gclid || "");
-      formData.append("campaign", campaign || "");
-      formData.append("adgroup", adGroup || "");
-      formData.append("targetid", targetID || "");
-      formData.append("msclickid", msclickid || "");
-      formData.append("utm_source", utm_source || "");
-      formData.append("keyword", keyword || "");
-      formData.append("form_status", 0);
+    const updatedAnswers = buyerRequest?.questions || [];
+    const formData = new FormData();
 
-      console.log("📡 API Call being made with form_status: 0");
+    formData.append("name", buyerRequest?.name);
+    formData.append("email", buyerRequest?.email);
+    formData.append("phone", buyerRequest?.phone);
+    formData.append("questions", JSON.stringify(updatedAnswers));
+    formData.append("service_id", buyerRequest?.service_id || "");
+    formData.append("city", citySerach || "");
+    formData.append("postcode", buyerRequest?.postcode || "");
+    formData.append("campaignid", campaignid || "");
+    formData.append("gclid", gclid || "");
+    formData.append("campaign", campaign || "");
+    formData.append("adgroup", adGroup || "");
+    formData.append("targetid", targetID || "");
+    formData.append("msclickid", msclickid || "");
+    formData.append("utm_source", utm_source || "");
+    formData.append("keyword", keyword || "");
+    formData.append("form_status", 0);
 
-      // API call karo - yeh aapka actual dispatch action hai
-      dispatch(registerQuoteCustomer(formData))
-        .then((result) => {
-          if (result) {
-            console.log("✅ API Call successful - Data saved");
-            // Cleanup karo agar needed hai
-            localStorage.removeItem("barkToken");
-            localStorage.removeItem("barkUserToken");
-            localStorage.removeItem("registerDataToken");
-            localStorage.removeItem("registerTokens");
-            localStorage.removeItem("createRequestToken");
-          }
-        })
-        .catch((error) => {
-          console.error("❌ API Call failed:", error);
-        });
-    }
+    console.log("📡 API Call being made once with form_status: 0");
+
+    dispatch(registerQuoteCustomer(formData))
+      .then(() => {
+        console.log("✅ API Call successful - Data saved");
+        localStorage.removeItem("barkToken");
+        localStorage.removeItem("barkUserToken");
+        localStorage.removeItem("registerDataToken");
+        localStorage.removeItem("registerTokens");
+        localStorage.removeItem("createRequestToken");
+      })
+      .catch((error) => {
+        console.error("❌ API Call failed:", error);
+      });
   };
 
   useEffect(() => {
-    console.log("🔵 Component mounted - Setting up event listeners");
+    console.log("🔵 NavigationDetector mounted once");
 
-    // Back button detection with API call
-    // const handlePopState = (event) => {
-    //   console.log('🔴 BACK BUTTON DETECTED!');
-
-    //   // Confirmation dialog show karo
-    //   const shouldPrevent = window.confirm(
-    //     'Kya aap sachme back jana chahte hain? Unsaved changes lost ho jayenge.'
-    //   );
-
-    //   if (shouldPrevent) {
-    //     console.log('⛔ User ne back cancel kardia');
-    //     // Wapas same page pe set karo
-    //     window.history.pushState(null, '', window.location.href);
-    //   } else {
-    //     console.log('✅ User ne back confirm kardia - API Call starting');
-    //     // API call karo before allowing navigation
-    //     submitFormData();
-    //     // Navigation allow karo - API call async hai but navigation nahi rukega
-    //   }
-    // };
-
-    // BROWSER CLOSE DETECTION with API call
     const handleBeforeUnload = (event) => {
-      console.log("🟡 BROWSER/TAB CLOSE DETECTED - Making API Call");
-
-      // API call karo browser close par
-      // IMPORTANT: Ye sync way mein karna hoga kyunki page close ho raha hai
+      if (hasSent.current) return; // ✅ already sent, ignore
+      console.log("🟡 Browser/Tab close detected - sending data once");
       submitFormData();
-
-      // Browser ka default confirmation dialog
+      hasSent.current = true;
       event.preventDefault();
-      // event.returnValue = 'Kya aap sachme page leave karna chahte hain? Unsaved changes lost ho jayenge.';
+      event.returnValue = "";
     };
 
-    // IMPORTANT: Pehle history state set karo
-    window.history.pushState(null, "", window.location.href);
-    console.log("📝 History state set successfully");
-
-    // Add event listeners
-    // window.addEventListener('popstate', handlePopState);
+    // ✅ Add listener once
     window.addEventListener("beforeunload", handleBeforeUnload);
-    console.log("✅ Event listeners added for back button AND browser close");
     window.addEventListener("pagehide", handleBeforeUnload);
     document.addEventListener("visibilitychange", handleBeforeUnload); // Mobile Android/iOS
-    window.addEventListener("blur", handleBeforeUnload); // Mobile focus loss
+    window.addEventListener("blur", handleBeforeUnload);
 
-    // Cleanup function
+    // ✅ Cleanup once
     return () => {
-      // window.removeEventListener('popstate', handlePopState);
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("pagehide", handleBeforeUnload);
       window.removeEventListener("visibilitychange", handleBeforeUnload);
       window.removeEventListener("blur", handleBeforeUnload);
 
-      console.log("🔄 Cleanup done");
+      console.log("🧹 Cleanup complete");
     };
-  }, [dispatch, userToken, buyerRequest, citySerach]);
+  }, []); // 🚀 NO DEPENDENCIES
 
   return null;
 };

@@ -9,14 +9,29 @@ import Icon from "../../../assets/Icons/Icon.png";
 import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 
 import { Helmet } from "react-helmet-async";
+import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
+import { useSelector } from "react-redux";
 const LandingNewPPC = ({
   title = "",
   subHeading = "",
   serviceId,
   serviceName = "",
 }) => {
+    const { buyerRequest } =
+      useSelector((state) => state.buyer);
+ const [hasMountedDetector, setHasMountedDetector] = useState(false);
+
+useEffect(() => {
+  if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+    setHasMountedDetector(true);
+  }
+  // ❌ Don't depend on buyerRequest.questions
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [hasMountedDetector]);
   return (
     <>
+     {/* {<NavigationDetectorWithConfirmations />} */}
+
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
