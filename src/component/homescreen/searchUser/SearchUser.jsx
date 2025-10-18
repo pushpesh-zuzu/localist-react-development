@@ -22,6 +22,7 @@ import {
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
+import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
