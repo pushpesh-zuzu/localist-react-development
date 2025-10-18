@@ -291,7 +291,6 @@ const routes = [
           <ProtectedRoutePPC>
             <LocaleRedirect>
               <React.Suspense fallback={<FullScreenSpinner />}>
-                {/* <NavigationDetectorWithConfirmations /> */}
                 <Component />
               </React.Suspense>
             </LocaleRedirect>
@@ -693,7 +692,6 @@ const routes = [
     element: (
       <ProtectRouteMultiPPC>
         <LocaleRedirect>
-          {/* <NavigationDetectorWithConfirmations /> */}
           <MultiStepWithImage />
         </LocaleRedirect>
       </ProtectRouteMultiPPC>

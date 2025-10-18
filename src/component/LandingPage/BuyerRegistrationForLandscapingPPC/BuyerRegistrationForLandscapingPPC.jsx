@@ -152,7 +152,6 @@ const BuyerRegistrationForLandscapingPPC = ({
   console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modalContent}>
-      {/* <NavigationDetectorWithConfirmations buyerRequest={buyerRequest}/> */}
       {buyerStep === 1 && (
         <QuestionAnswerPage
           // ref={questionModalRef}

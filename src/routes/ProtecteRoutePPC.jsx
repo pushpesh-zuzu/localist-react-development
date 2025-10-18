@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { showToast } from "../utils";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
+import NavigationDetectorDesktop from "../component/common/navigationDetected/NavigationDetectorDesktop";
 
 /**
  * SSR-safe ProtectedRoute
@@ -48,7 +49,11 @@ const ProtectedRoutePPC = ({ children }) => {
 
   return (
     <>
-      <NavigationDetectorWithConfirmations />
+      {window.innerWidth > 768  && typeof window !== "undefined"? (
+        <NavigationDetectorDesktop />
+      ) : (
+        <NavigationDetectorWithConfirmations />
+      )}
       {children}
     </>
   );

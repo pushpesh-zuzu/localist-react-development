@@ -17,6 +17,7 @@ import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
 import PhoneNumberUpdateMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberUpdateMultiStepForm";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -149,7 +150,11 @@ console.log(buyerRequest,'br')
   }, [hasMountedDetector]);
   return (
     <>
-      { <NavigationDetectorWithConfirmations />}
+      {window.innerWidth > 768  && typeof window !== "undefined"? (
+              <NavigationDetectorDesktop />
+            ) : (
+              <NavigationDetectorWithConfirmations />
+            )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>

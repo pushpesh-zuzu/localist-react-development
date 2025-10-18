@@ -30,8 +30,6 @@ const LandingNewPPC = ({
 // }, [hasMountedDetector]);
   return (
     <>
-     {/* {<NavigationDetectorWithConfirmations />} */}
-
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
