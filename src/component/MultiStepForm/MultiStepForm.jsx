@@ -139,7 +139,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
-  console.log(buyerRequest, "br");
+console.log(buyerRequest,'br')
   useEffect(() => {
     if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
       setHasMountedDetector(true);
@@ -149,7 +149,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   }, [hasMountedDetector]);
   return (
     <>
-      {/* {<NavigationDetectorWithConfirmations />} */}
+      {<NavigationDetectorWithConfirmations />}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>
