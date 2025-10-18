@@ -8,16 +8,15 @@ function MultiStepWithImage() {
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
 
-  useEffect(() => {
-    if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-      setHasMountedDetector(true);
-    }
-    // ❌ Don't depend on buyerRequest.questions
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasMountedDetector]);
+  // useEffect(() => {
+  //   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+  //     setHasMountedDetector(true);
+  //   }
+  //   // ❌ Don't depend on buyerRequest.questions
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [hasMountedDetector]);
   return (
     <div>
-      {/* {<NavigationDetectorWithConfirmations />} */}
       <MultiStepForm isQuestionWithImage />
     </div>
   );

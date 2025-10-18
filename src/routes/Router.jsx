@@ -69,6 +69,7 @@ import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
 import ProtectedRoutePPC from "./ProtecteRoutePPC";
 import MultiStepWithImage from "../pages/MultiStepWithImage";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
+import ProtectRouteMultiPPC from "./ProtectRouteMultiPPC";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -680,22 +681,22 @@ const routes = [
   {
     path: "/:lang/:country/landscaping-multi-form-ppc",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectRouteMultiPPC>
         <LocaleRedirect>
           <MultiStepForm />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectRouteMultiPPC>
     ),
   },
   {
     path: "/:lang/:country/landscaping-multi-form-ppc-banner",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectRouteMultiPPC>
         <LocaleRedirect>
           {/* <NavigationDetectorWithConfirmations /> */}
           <MultiStepWithImage />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectRouteMultiPPC>
     ),
   },
 ];
