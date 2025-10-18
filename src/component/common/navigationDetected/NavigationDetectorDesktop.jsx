@@ -42,7 +42,27 @@ const NavigationDetectorDesktop = () => {
 
     const updatedAnswers = buyerRequest?.questions || [];
     const formData = new FormData();
+    //  console.log("📡 API Call being made once with form_status: 0");
+    const isEverythingEmpty =
+      !buyerRequest?.name?.trim() &&
+      !buyerRequest?.email?.trim() &&
+      !buyerRequest?.phone?.trim() &&
+      !buyerRequest?.postcode?.trim() &&
+      buyerRequest.questions.length === 0;
 
+    if (isEverythingEmpty) {
+      console.log("🚫 Skipping API call - all fields are empty");
+      return;
+    }
+    console.log("🔍 Empty Check Details:", {
+      name: !!buyerRequest?.name?.trim(),
+      email: !!buyerRequest?.email?.trim(),
+      phone: !!buyerRequest?.phone?.trim(),
+      postcode: !!buyerRequest?.postcode?.trim(),
+      questions: buyerRequest?.questions?.length > 0,
+      city: !!citySerach?.trim(), // Just for info
+      isEverythingEmpty: isEverythingEmpty,
+    });
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
@@ -60,11 +80,9 @@ const NavigationDetectorDesktop = () => {
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
 
-    console.log("📡 API Call being made once with form_status: 0");
-
     dispatch(registerQuoteCustomer(formData))
       .then(() => {
-        console.log("✅ API Call successful - Data saved");
+        // console.log("✅ API Call successful - Data saved");
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
@@ -81,7 +99,7 @@ const NavigationDetectorDesktop = () => {
 
     const handleBeforeUnload = (event) => {
       if (hasSent.current) return; // ✅ already sent, ignore
-      console.log("🟡 Browser/Tab close detected - sending data once");
+      // console.log("🟡 Browser/Tab close detected - sending data once");
       submitFormData();
       hasSent.current = true;
       event.preventDefault();
@@ -93,7 +111,7 @@ const NavigationDetectorDesktop = () => {
     // ✅ Cleanup once
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      console.log("🧹 Cleanup complete");
+      // console.log("🧹 Cleanup complete");
     };
   }, []); // 🚀 NO DEPENDENCIES
 

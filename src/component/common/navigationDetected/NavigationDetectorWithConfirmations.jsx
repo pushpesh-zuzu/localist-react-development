@@ -42,7 +42,26 @@ const NavigationDetectorWithConfirmations = () => {
 
     const updatedAnswers = buyerRequest?.questions || [];
     const formData = new FormData();
+    const isEverythingEmpty =
+      !buyerRequest?.name?.trim() &&
+      !buyerRequest?.email?.trim() &&
+      !buyerRequest?.phone?.trim() &&
+      !buyerRequest?.postcode?.trim() &&
+      buyerRequest.questions.length === 0;
 
+    if (isEverythingEmpty) {
+      console.log("🚫 Skipping API call - all fields are empty");
+      return;
+    }
+    console.log("🔍 Empty Check Details:", {
+      name: !!buyerRequest?.name?.trim(),
+      email: !!buyerRequest?.email?.trim(),
+      phone: !!buyerRequest?.phone?.trim(),
+      postcode: !!buyerRequest?.postcode?.trim(),
+      questions: buyerRequest?.questions?.length > 0,
+      city: !!citySerach?.trim(), // Just for info
+      isEverythingEmpty: isEverythingEmpty,
+    });
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
@@ -60,7 +79,7 @@ const NavigationDetectorWithConfirmations = () => {
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
 
-    console.log("📡 API Call being made once with form_status: 0");
+    // console.log("📡 API Call being made once with form_status: 0");
 
     dispatch(registerQuoteCustomer(formData))
       .then(() => {
@@ -77,11 +96,11 @@ const NavigationDetectorWithConfirmations = () => {
   };
 
   useEffect(() => {
-    console.log("🔵 NavigationDetector mounted once");
+    // console.log("🔵 NavigationDetector mounted once");
 
     const handleBeforeUnload = (event) => {
       if (hasSent.current) return; // ✅ already sent, ignore
-      console.log("🟡 Browser/Tab close detected - sending data once");
+      // console.log("🟡 Browser/Tab close detected - sending data once");
       submitFormData();
       hasSent.current = true;
       event.preventDefault();
@@ -100,7 +119,7 @@ const NavigationDetectorWithConfirmations = () => {
       window.removeEventListener("pagehide", handleBeforeUnload);
       window.removeEventListener("visibilitychange", handleBeforeUnload);
       window.removeEventListener("blur", handleBeforeUnload);
-      console.log("🧹 Cleanup complete");
+      // console.log("🧹 Cleanup complete");
     };
   }, []); // 🚀 NO DEPENDENCIES
 
