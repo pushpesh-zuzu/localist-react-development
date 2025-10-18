@@ -15,6 +15,7 @@ import { showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 import { useLocation } from "react-router";
 import { extractAllParams } from "../../../utils/decodeURLParams";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 const QuestionAnswerPage = ({
   questions = [],
@@ -191,6 +192,7 @@ const QuestionAnswerPage = ({
     );
 
     const nextQ = selectedObj?.next_question;
+    handleScrollToBottom();
     if (nextQ === "last") {
       // If last question, trigger submit or move next
       if (isStartWithQuestionModal) {
@@ -291,8 +293,10 @@ const QuestionAnswerPage = ({
       const prevIndex = newHistory[newHistory.length - 1];
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
+      handleScrollToBottom();
     } else {
       previousStep();
+      handleScrollToBottom();
     }
   };
 

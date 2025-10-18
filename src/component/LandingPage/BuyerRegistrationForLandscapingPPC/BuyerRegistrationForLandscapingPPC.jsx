@@ -15,6 +15,7 @@ import DescribeYourRequestPage from "../../BuyerRegistrationPages/DescribeYourRe
 import QuestionAnswerPage from "../../BuyerRegistrationPages/QuestionAnswerPage/QuestionAnswerPage";
 import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMatchPage";
 import ReEnterMobileNumber from "../../common/ReEnterMobileNumber/ReEnterMobileNumber";
+import { handleScrollToBottom } from "../../../utils/scroll";
 // import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const BuyerRegistrationForLandscapingPPC = ({
@@ -57,6 +58,7 @@ const BuyerRegistrationForLandscapingPPC = ({
     : [1, 2, 3, 4, 5, 7, 8];
 
   const nextStep = () => {
+    handleScrollToBottom();
     const currentIndex = stepFlow.indexOf(buyerStep);
     if (currentIndex < stepFlow.length - 1) {
       dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
@@ -67,6 +69,7 @@ const BuyerRegistrationForLandscapingPPC = ({
     const currentIndex = stepFlow.indexOf(buyerStep);
     if (currentIndex > 0) {
       dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
+      handleScrollToBottom();
     }
   };
 
