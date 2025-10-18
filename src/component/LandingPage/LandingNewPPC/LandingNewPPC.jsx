@@ -17,17 +17,17 @@ const LandingNewPPC = ({
   serviceId,
   serviceName = "",
 }) => {
-    const { buyerRequest } =
-      useSelector((state) => state.buyer);
- const [hasMountedDetector, setHasMountedDetector] = useState(false);
+//     const { buyerRequest } =
+//       useSelector((state) => state.buyer);
+//  const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
-useEffect(() => {
-  if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-    setHasMountedDetector(true);
-  }
-  // ❌ Don't depend on buyerRequest.questions
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [hasMountedDetector]);
+// useEffect(() => {
+//   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+//     setHasMountedDetector(true);
+//   }
+//   // ❌ Don't depend on buyerRequest.questions
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+// }, [hasMountedDetector]);
   return (
     <>
      {/* {<NavigationDetectorWithConfirmations />} */}
