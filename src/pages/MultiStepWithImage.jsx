@@ -17,7 +17,7 @@ function MultiStepWithImage() {
   }, [hasMountedDetector]);
   return (
     <div>
-      {<NavigationDetectorWithConfirmations />}
+      {/* {<NavigationDetectorWithConfirmations />} */}
       <MultiStepForm isQuestionWithImage />
     </div>
   );

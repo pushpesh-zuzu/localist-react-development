@@ -149,7 +149,7 @@ console.log(buyerRequest,'br')
   }, [hasMountedDetector]);
   return (
     <>
-      {<NavigationDetectorWithConfirmations />}
+      {/* {<NavigationDetectorWithConfirmations />} */}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>
