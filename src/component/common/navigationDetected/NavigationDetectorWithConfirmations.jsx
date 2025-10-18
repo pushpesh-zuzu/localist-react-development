@@ -91,12 +91,15 @@ const NavigationDetectorWithConfirmations = () => {
     // ✅ Add listener once
     window.addEventListener("beforeunload", handleBeforeUnload);
     window.addEventListener("pagehide", handleBeforeUnload);
-    
+    document.addEventListener("visibilitychange", handleBeforeUnload); // Mobile Android/iOS
+    window.addEventListener("blur", handleBeforeUnload);
 
     // ✅ Cleanup once
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("pagehide", handleBeforeUnload);
+      window.removeEventListener("visibilitychange", handleBeforeUnload);
+      window.removeEventListener("blur", handleBeforeUnload);
       console.log("🧹 Cleanup complete");
     };
   }, []); // 🚀 NO DEPENDENCIES
