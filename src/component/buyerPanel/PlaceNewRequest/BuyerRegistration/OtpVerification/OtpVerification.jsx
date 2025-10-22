@@ -9,6 +9,7 @@ import {
 import { showToast } from "../../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import backIcon from "../../../../../assets/Icons/backIcon.svg";
 
 const OtpVerification = ({
   open,
@@ -175,8 +176,13 @@ const OtpVerification = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <h2 className={styles.title}>OTP Verification</h2>
-        <div className={styles.VerifyText}>Please verify your account</div>
-
+        {/* <div className={styles.VerifyText}>Please verify your account</div> */}
+        <p className={styles.instruction}>
+          Enter the OTP sent to <span>{requestUserPhone}</span>
+        </p>
+        <p style={{ color: "#000" }} className={styles.phoneZero}>
+          **Please check the above number is correct**
+        </p>
         <div className={styles.otpInputs}>
           {[0, 1, 2, 3].map((index) => (
             <input
@@ -193,29 +199,81 @@ const OtpVerification = ({
             />
           ))}
         </div>
+        <div className={styles.resendDescriptionText}>
+          Didn't you receive the OTP?{" "}
+          {timer > 0 ? (
+            <p className={styles.timerText}>
+              Resend OTP in <strong>{timer}</strong>s
+            </p>
+          ) : (
+            <div className={styles.resendBtn} onClick={handleResendOtp}>
+              {resendOtpLoader ? "Resending..." : "Resend OTP"}
+            </div>
+          )}
+        </div>
 
-        <p className={styles.instruction}>
-          Please enter the code sent by SMS to
-          <br />
-          <span>{requestUserPhone}</span>
-        </p>
-        <p className={styles.instructionVerify}>
-          ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
-        </p>
-        <p
-          style={{ maxWidth: "90%", margin: "auto" }}
-          className={styles.instructionVerify}
+        <button
+          // style={{ width: "180px", minWidth: "180px" }}
+          className={styles.submitBtn}
+          onClick={handleSubmit}
         >
-          WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
-        </p>
-        <p
-          style={{ marginTop: "16px", marginBottom: "24px" }}
-          className={styles.instructionVerify}
-        >
-          WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
-        </p>
+          Verify
+        </button>
 
+        <p className={styles.reenterDescription}>
+          Want to update your above number?
+        </p>
         <div
+          style={{
+            cursor: "pointer",
+            maxWidth: "fit-content",
+            margin: "auto",
+            marginBottom: "16px",
+            position: "relative",
+          }}
+          onClick={() => {
+            setReEnterMobile(1);
+          }}
+        >
+          <span className={styles.goBack}>Go Back</span>
+          <img className={styles.img} src={backIcon} alt="backIcon" />
+        </div>
+
+        {/* <p className={styles.instructionVerify}>
+          ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
+        </p> */}
+        <div
+          style={{
+            background: "rgba(245, 245, 245, 1)",
+            // maxWidth: "66%",
+            margin: "auto",
+            padding: "5px 6px",
+            borderRadius: "3px",
+          }}
+        >
+          <p
+            style={{ margin: "auto", color: "#000" }}
+            className={styles.instructionVerify}
+          >
+            WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
+          </p>
+        </div>
+
+        <p
+          style={{
+            // maxWidth: "60%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "16px",
+            marginBottom: "0px",
+            color: "rgba(163, 163, 163, 1)",
+          }}
+          className={styles.instructionVerify}
+        >
+          We cannot verify your account without a mobile number
+        </p>
+
+        {/* <div
           style={{
             marginTop: "16px",
             display: "flex",
@@ -240,8 +298,8 @@ const OtpVerification = ({
           >
             SUBMIT YOUR OTP CODE
           </button>
-        </div>
-        {timer > 0 ? (
+        </div> */}
+        {/* {timer > 0 ? (
           <p className={styles.timerText}>
             Resend OTP in <strong>{timer}</strong>s
           </p>
@@ -249,7 +307,7 @@ const OtpVerification = ({
           <div className={styles.resendBtn} onClick={handleResendOtp}>
             {resendOtpLoader ? "Resending..." : "Resend"}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
