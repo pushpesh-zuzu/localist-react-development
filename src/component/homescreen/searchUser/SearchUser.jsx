@@ -21,8 +21,8 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
-// import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
-// import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
+import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 
 const SearchProfessionals = ({ nextStep }) => {
   const [Input, setInput] = useState("");
@@ -249,11 +249,11 @@ const SearchProfessionals = ({ nextStep }) => {
 
   return (
     <div className={styles.searchContainer}>
-      {/* {typeof window !== "undefined" && window.innerWidth > 768 ? (
+      {typeof window !== "undefined" && window.innerWidth > 768 ? (
         <NavigationDetectorDesktop />
       ) : (
         <NavigationDetectorWithConfirmations />
-      )} */}
+      )}
       <div className={styles.popularExamples}>
         <div className={styles.exampleBox} style={{ minWidth: "min-content" }}>
           <p className="xl:font-bold xl:text-[18px] xl:whitespace-nowrap xl:leading-[12px] xl:tracking-[0] xl:m-0 xl:mb-[20px] xl:text-[color:var(--primary-color)]">
