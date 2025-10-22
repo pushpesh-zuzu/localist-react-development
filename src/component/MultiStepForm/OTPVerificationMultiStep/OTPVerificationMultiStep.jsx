@@ -9,15 +9,14 @@ import {
 import { showToast } from "../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
+import backIcon from "../../../assets/Icons/backIcon.svg";
 
 const OTPVerificationMultiStep = ({
   open,
   nextStep,
   isThankuPageOnlyShow = false,
   setUpdateNumberStep,
-  onBack
+  onBack,
 }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [timer, setTimer] = useState(60);
@@ -32,6 +31,9 @@ const OTPVerificationMultiStep = ({
     requestId,
     requestUserPhone,
     resendOtpLoader,
+    verifyPhoneNumberLoader,
+    requestUserId,
+    requestLoader
   } = useSelector((state) => state.buyer);
 
   const navigate = useNavigate();
@@ -45,9 +47,6 @@ const OTPVerificationMultiStep = ({
     }
   }, [timer]);
 
-  const { requestUserId, verifyPhoneNumberLoader } = useSelector(
-    (state) => state.buyer
-  );
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -172,14 +171,91 @@ const OTPVerificationMultiStep = ({
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      {/* <div className={styles.modalContent}> */}
-      <h2 className={styles.title}>We just sent an SMS</h2>
-      <div className={styles.VerifyText}>
-        Enter the security code we sent to
-      </div>
-      <p style={{ marginBottom: "24px" }}>{requestUserPhone}</p>
+    // <div style={{ padding: "20px" }}>
+    //   <h2 className={styles.title}>We just sent an SMS</h2>
+    //   <div className={styles.VerifyText}>
+    //     Enter the security code we sent to
+    //   </div>
+    //   <p style={{ marginBottom: "24px" }}>{requestUserPhone}</p>
 
+    //   <div className={styles.otpInputs}>
+    //     {[0, 1, 2, 3].map((index) => (
+    //       <input
+    //         key={index}
+    //         type="text"
+    //         maxLength="1"
+    //         className={styles.otpInput}
+    //         value={otp[index]}
+    //         onChange={(e) => handleChange(index, e.target.value)}
+    //         onKeyDown={(e) => handleKeyDown(index, e)}
+    //         onPaste={handlePaste}
+    //         ref={(el) => (inputRefs.current[index] = el)}
+    //         autoFocus={index === 0}
+    //       />
+    //     ))}
+    //   </div>
+    //   <p className={styles.instructionVerify}>
+    //     ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
+    //   </p>
+    //   <p
+    //     style={{ maxWidth: "79%", margin: "auto" }}
+    //     className={styles.instructionVerify}
+    //   >
+    //     WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
+    //   </p>
+    //   <p
+    //     style={{ marginTop: "16px", marginBottom: "24px" }}
+    //     className={styles.instructionVerify}
+    //   >
+    //     WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
+    //   </p>
+    //   <div
+    //     style={{
+    //       marginTop: "16px",
+    //       display: "flex",
+    //       flexWrap: "wrap",
+    //       gap: "24px",
+    //       justifyContent: "center",
+    //     }}
+    //   >
+    //     <button
+    //       style={{ width: "180px", minWidth: "180px" }}
+    //       className={styles.submitBtn}
+    //       onClick={() => {
+    //         setUpdateNumberStep(1);
+    //         onBack()
+    //       }}
+    //     >
+    //       RE-ENTER MOBILE NUMBER
+    //     </button>
+    //     <button
+    //       style={{ width: "180px", minWidth: "180px" }}
+    //       className={styles.submitBtn}
+    //       onClick={handleSubmit}
+    //     >
+    //       SUBMIT YOUR OTP CODE
+    //     </button>
+    //   </div>
+    //   {timer > 0 ? (
+    //     <p className={styles.timerText} style={{marginTop:'24px'}}>
+    //       Resend OTP in <strong>{timer}</strong>s
+    //     </p>
+    //   ) : (
+    //     <div className={styles.resendBtn} onClick={handleResendOtp}>
+    //       {resendOtpLoader ? "Resending..." : "Resend"}
+    //     </div>
+    //   )}
+    // </div>
+    <div className={styles.container}>
+      {/* <div className={styles.modalContent}> */}
+      <h2 className={styles.title}>OTP Verification</h2>
+      {/* <div className={styles.VerifyText}>Please verify your account</div> */}
+      <p className={styles.instruction}>
+        Enter the OTP sent to <span>{requestUserPhone}</span>
+      </p>
+      <p style={{ color: "#000" }} className={styles.phoneZero}>
+        **Please check the above number is correct**
+      </p>
       <div className={styles.otpInputs}>
         {[0, 1, 2, 3].map((index) => (
           <input
@@ -196,85 +272,81 @@ const OTPVerificationMultiStep = ({
           />
         ))}
       </div>
+      <div className={styles.resendDescriptionText}>
+        Didn't you receive the OTP?{" "}
+        {timer > 0 ? (
+          <p className={styles.timerText}>
+            Resend OTP in <strong>{timer}</strong>s
+          </p>
+        ) : (
+          <div className={styles.resendBtn} onClick={handleResendOtp}>
+            {resendOtpLoader ? "Resending..." : "Resend OTP"}
+          </div>
+        )}
+      </div>
 
-      {/* <p className={styles.instruction}>
-        Please enter the code sent by SMS to
-        <br />
-      </p> */}
-      <p className={styles.instructionVerify}>
-        ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
-      </p>
-      <p
-        style={{ maxWidth: "79%", margin: "auto" }}
-        className={styles.instructionVerify}
+      <button
+        // style={{ width: "180px", minWidth: "180px" }}
+        className={styles.submitBtn}
+        disabled={requestLoader || verifyPhoneNumberLoader}
+        onClick={handleSubmit}
       >
-        WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
+        Verify
+      </button>
+
+      <p className={styles.reenterDescription}>
+        Want to update your above number?
       </p>
-      <p
-        style={{ marginTop: "16px", marginBottom: "24px" }}
-        className={styles.instructionVerify}
-      >
-        WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
-      </p>
-            {/* <div className={styles.twoButtons}>
-        <button
-          className={styles.submitBtn}
-          disabled={verifyPhoneNumberLoader}
-          onClick={handleSubmit}
-        >
-          {verifyPhoneNumberLoader ? (
-            <Spin
-              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
-            />
-          ) : (
-            "Verify"
-          )}
-        </button>
-        <button
-          className={styles.submitBtn}
-          onClick={() => {
-            setUpdateNumberStep(1);
-          }}
-        >
-          RE-ENTER MOBILE NUMBER
-        </button>
-      </div> */}
       <div
         style={{
-          marginTop: "16px",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "24px",
-          justifyContent: "center",
+          cursor: "pointer",
+          maxWidth: "fit-content",
+          margin: "auto",
+          marginBottom: "16px",
+          position: "relative",
+        }}
+        onClick={() => {
+          setUpdateNumberStep(1);
+          onBack();
         }}
       >
-        <button
-          style={{ width: "180px", minWidth: "180px" }}
-          className={styles.submitBtn}
-          onClick={() => {
-            setUpdateNumberStep(1);
-            onBack()
-          }}
-        >
-          RE-ENTER MOBILE NUMBER
-        </button>
-        <button
-          style={{ width: "180px", minWidth: "180px" }}
-          className={styles.submitBtn}
-          onClick={handleSubmit}
-        >
-          SUBMIT YOUR OTP CODE
-        </button>
+        <span className={styles.goBack}>Go Back</span>
+        <img className={styles.img} src={backIcon} alt="backIcon" />
       </div>
-      {timer > 0 ? (
-        <p className={styles.timerText} style={{marginTop:'24px'}}>
-          Resend OTP in <strong>{timer}</strong>s
+
+      {/* <p className={styles.instructionVerify}>
+                    ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
+                  </p> */}
+      <div
+        style={{
+          background: "rgba(245, 245, 245, 1)",
+          // maxWidth: "66%",
+          margin: "auto",
+          padding: "5px 6px",
+          borderRadius: "3px",
+        }}
+      >
+        <p
+          style={{ margin: "auto", color: "#000" }}
+          className={styles.instructionVerify}
+        >
+          WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
         </p>
-      ) : (
-        <div className={styles.resendBtn} onClick={handleResendOtp}>
-          {resendOtpLoader ? "Resending..." : "Resend"}
-        </div>
-      )}
+      </div>
+
+      <p
+        style={{
+          // maxWidth: "60%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "16px",
+          marginBottom: "0px",
+          color: "rgba(163, 163, 163, 1)",
+        }}
+        className={styles.instructionVerify}
+      >
+        We cannot verify your account without a mobile number
+      </p>
     </div>
   );
 };

@@ -297,6 +297,7 @@ const LogSwitch = () => {
         if (result) {
           showToast("info", "Logout successful!");
           handleNavigation("/login");
+          localStorage.removeItem("pendingBuyerModal");
         }
       } catch (error) {
         console.error("Logout Error:", error);

@@ -33,7 +33,7 @@ const OtpVerification = ({
     requestId,
     requestUserPhone,
     resendOtpLoader,
-    verifyPhoneNumberLoader
+    verifyPhoneNumberLoader,
   } = useSelector((state) => state.buyer);
 
   const navigate = useNavigate();
