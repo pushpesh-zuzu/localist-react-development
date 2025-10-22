@@ -29,9 +29,11 @@ const OtpVerification = ({
     requestDataList,
     citySerach,
     createRequestToken,
+    requestLoader,
     requestId,
     requestUserPhone,
     resendOtpLoader,
+    verifyPhoneNumberLoader
   } = useSelector((state) => state.buyer);
 
   const navigate = useNavigate();
@@ -215,6 +217,7 @@ const OtpVerification = ({
         <button
           // style={{ width: "180px", minWidth: "180px" }}
           className={styles.submitBtn}
+          disabled={requestLoader || verifyPhoneNumberLoader}
           onClick={handleSubmit}
         >
           Verify
