@@ -70,6 +70,7 @@ import ProtectedRoutePPC from "./ProtecteRoutePPC";
 import MultiStepWithImage from "../pages/MultiStepWithImage";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 import ProtectRouteMultiPPC from "./ProtectRouteMultiPPC";
+import MultiStepFormDriveways from "../component/MultiStepForm/MultiStepFormDriveways";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -695,6 +696,16 @@ const routes = [
           <MultiStepWithImage />
         </LocaleRedirect>
       </ProtectRouteMultiPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/driveways-multi-form-ppc",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepFormDriveways />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
     ),
   },
 ];
