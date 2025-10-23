@@ -26,13 +26,13 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     useSelector((state) => state.buyer);
 
   useEffect(() => {
-    if (location.pathname.includes("landscaping-multi-form-ppc")) {
+    if (location.pathname.includes("driveways-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("landscaping-multi-form-ppc") && "0px"
+      location.pathname.includes("driveways-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
