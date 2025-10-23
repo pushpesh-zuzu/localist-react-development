@@ -14,7 +14,7 @@ const QuestionAnswerMultiStepDriveways = ({
   onNext,
   onBack,
   getProgressPercentage,
-  serviceName = "Landscaping",
+  serviceName = "Driveway Installers",
   setIsComingFromStep4,
   isComingFromStep4,
   setProgressPercentage,

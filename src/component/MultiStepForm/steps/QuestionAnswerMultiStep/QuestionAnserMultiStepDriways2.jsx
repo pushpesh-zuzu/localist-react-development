@@ -23,7 +23,7 @@ const QuestionAnserMultiStepDriways2 = ({
   setIsComingFromStep3,
   setProgressPercentage,
   loading = true,
-  serviceName = "Landscaping",
+  serviceName = "Driveway Installers",
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
@@ -345,7 +345,7 @@ const QuestionAnserMultiStepDriways2 = ({
       headingCenter={currentQuestion === 0 ? false : true}
       subtitle={
         currentQuestion === 0
-          ? "To find the ideal landscaping specialist for your project, simply complete the quick form below."
+          ? "To find the ideal driveway installers specialist for your project, simply complete the quick form below."
           : ""
       }
     >
