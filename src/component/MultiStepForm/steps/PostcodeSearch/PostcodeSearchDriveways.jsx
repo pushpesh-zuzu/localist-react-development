@@ -19,6 +19,7 @@ const PostcodeSearchDriveways = ({
   backButtonTriggered,
   setBackButtonTriggered,
   setProgressPercentage,
+  titleHeading='landscaping specialists'
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -110,7 +111,7 @@ const PostcodeSearchDriveways = ({
   return (
     <div>
       <h1 className={styles.headingH1}>
-        Get quotes from verified landscaping specialists you can trust
+        Get quotes from verified {titleHeading} you can trust
       </h1>
       <div style={{ maxWidth: "592px", margin: "auto" }}>
         <CardLayoutWrapper

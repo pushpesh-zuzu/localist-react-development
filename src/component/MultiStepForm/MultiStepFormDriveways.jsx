@@ -171,10 +171,10 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
-        <title>Compare Free Quotes from Local Landscapers | Localists</title>
+        <title>Compare Free Quotes from Local Driveway Companies | Localists</title>
         <meta
           name="description"
-          content="Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!"
+          content="Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple."
         />
       </Helmet>
 
@@ -218,6 +218,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                     setProgressPercentage={setProgressPercentage}
                     backButtonTriggered={backButtonTriggered}
                     setBackButtonTriggered={setBackButtonTriggered}
+                    titleHeading="driveway installers"
                   />
                 </div>
               )}
