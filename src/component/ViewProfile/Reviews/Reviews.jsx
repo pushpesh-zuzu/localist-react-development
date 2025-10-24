@@ -11,6 +11,10 @@ import greyStar from "../../../assets/Icons/MyResponse/grayStar.svg";
 import blackStar from "../../../assets/Icons/MyResponse/blackStarImg.svg";
 import webIconImg from "../../../assets/Images/Setting/weblogo.svg";
 import halfStar from "../../../assets/Icons/MyResponse/halfStar.svg";
+import GoogleIcon from "../../../assets/Icons/Reviews/GoogleIcon.svg";
+import FacebookIcon from "../../../assets/Icons/Reviews/FacebookIcon.svg";
+import LinkedInIcon from "../../../assets/Icons/Reviews/LinkedInIcon.svg";
+import StarIcon from "../../../assets/Icons/Reviews/StarIcon.svg";
 // import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
@@ -181,12 +185,18 @@ const ReviewSection = ({
             <div className={styles.middleBox}></div>
 
             <div className={styles.right}>
-              {[5, 4, 3, 2, 1].map((star) => {
+              <p className={styles.asReviewed}>As Reviewed On:</p>
+              <div className={styles.reviews_icons}>
+                <img src={GoogleIcon} alt="" />
+                <img src={FacebookIcon} alt="" />
+                <img src={LinkedInIcon} alt="" />
+                <img src={StarIcon} alt="" />
+              </div>
+              {/* {[5, 4, 3, 2, 1].map((star) => {
                 const count = ratingCounts[star] ?? 0;
                 return (
                   <div key={star} className={styles.row}>
                     <label className={styles.ratingLabel}>
-                      {/* <input type="radio" name="rating" disabled /> */}
                       <div className={styles.starText}>
                         <div style={{ width: "10px" }}>{star}</div>
                         <img
@@ -211,7 +221,7 @@ const ReviewSection = ({
                     <span className={styles.percent}>{count}</span>
                   </div>
                 );
-              })}
+              })} */}
             </div>
           </div>
         )}

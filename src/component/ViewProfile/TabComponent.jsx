@@ -8,6 +8,7 @@ const TabNav = ({ activeTab, onTabClick }) => {
     "Accreditations",
     "Q+A's",
     "Photos",
+    "Links",
   ];
 
   console.log(activeTab, "activeTab");

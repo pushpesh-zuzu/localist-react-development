@@ -26,6 +26,7 @@ import grayStar from "../../assets/Icons/MyResponse/grayStar.svg";
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
 import { Helmet } from "react-helmet-async";
+import Links from "./Links/Links";
 
 const ViewProfiles = () => {
   const location = useLocation();
@@ -57,6 +58,8 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
+  console.log(profileData, "profileData");
+
   const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
@@ -83,6 +86,7 @@ const ViewProfiles = () => {
   const accrediationRef = useRef(null);
   const photoRef = useRef(null);
   const quesAnsRef = useRef(null);
+  const linksRef = useRef(null);
 
   const closeModal = () => setIsOpen(false);
   const rightContainerRef = useRef(null);
@@ -116,6 +120,9 @@ const ViewProfiles = () => {
       case "Q+A's":
         targetRef = quesAnsRef;
         break;
+      case "Links":
+        targetRef = linksRef;
+        break;
       default:
         targetRef = aboutRef;
     }
@@ -146,6 +153,7 @@ const ViewProfiles = () => {
         { name: "Reviews", ref: reviewsRef },
         { name: "Services", ref: servicesRef },
         { name: "About", ref: aboutRef },
+        { name: "Links", ref: linksRef },
       ];
 
       for (let section of sections) {
@@ -433,6 +441,9 @@ const ViewProfiles = () => {
             </div>
             <div ref={photoRef}>
               <Photos details={profileData} />
+            </div>
+            <div ref={linksRef}>
+              <Links details={profileData} />
             </div>
           </div>
         </div>
