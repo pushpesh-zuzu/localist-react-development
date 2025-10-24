@@ -73,6 +73,10 @@
 
 /* Responsive for small phones (max width 480px) */
 @media (max-width: 480px) {
+  .Business_Description {
+    width: 100%;
+  }
+
   .aboutContainer {
     margin-top: 24px;
   }
