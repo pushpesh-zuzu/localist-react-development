@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./footer.module.css";
 // import logo from "../../../assets/Images/footerLogo.svg";
-import logo from "../../../assets/Images/logo.svg";
+import logo from "../../../assets/Images/logo.png";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import pinterestIcon from "../../../assets/Icons/pinterest.svg";
 import instagramIcon from "../../../assets/Icons/instagram.svg";
