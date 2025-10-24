@@ -138,10 +138,6 @@ const QuestionAnserMultiStepDriways2 = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      if (
-        value === "Business or Commercial Premises" ||
-        value === "Replace the current driveway"
-      )
         // ✅ Select single option only
         setSelectedOption([value]);
       setError(""); // Clear error only on change
