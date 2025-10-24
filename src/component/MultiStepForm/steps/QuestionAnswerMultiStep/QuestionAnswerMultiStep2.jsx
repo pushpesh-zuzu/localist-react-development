@@ -324,8 +324,8 @@ const QuestionAnswerMultiStep2 = ({
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          style={{ marginTop: "-25px", marginBottom: "20px" }}
-          className={
+          // style={{ marginTop: "-25px", marginBottom: "20px" }}
+          className={`${
             serviceName === "Patio Services"
               ? styles.headerImage
               : serviceName === "Artificial Grass Installation"
@@ -344,8 +344,8 @@ const QuestionAnswerMultiStep2 = ({
               ? styles.headerImage7
               : serviceName === "Gate Installation"
               ? styles.headerImage8
-              : styles.headerImage // default fallback
-          }
+              : styles.headerImage
+          } ${styles.bannerMargin}`}
         />
       )}
       <div className={styles.optionsContainer}>
