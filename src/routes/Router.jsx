@@ -74,6 +74,8 @@ import MultiStepFormDriveways from "../component/MultiStepForm/MultiStepFormDriv
 import MultiStepFormFencing from "../component/MultiStepForm/MultiStepFormFencing";
 import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
 import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
+import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
+import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -134,6 +136,22 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      //    {
+      //   path: "terms/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <TermsAndCondition />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "cookie-policy",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CookiePolicy />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "home",
         element: (
