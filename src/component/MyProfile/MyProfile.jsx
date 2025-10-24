@@ -27,6 +27,8 @@ const MyProfile = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const { viewProfileData } = useSelector((state) => state.leadSetting);
+  console.log(viewProfileData, "viewProfileData12");
+
   // const { Panel } = Collapse;
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // Refs for each accordion section

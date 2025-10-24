@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ViewProfile.module.css";
-import DummyImage from "../../assets/Images/Setting/ProfileWebIcon.svg";
 import phoneImg from "../../assets/Images/MyResponse/PhoneIcon.svg";
 import emailImg from "../../assets/Images/MyResponse/mailIcon.svg";
 import profileImg from "../../assets/Images/Setting/WebIcon.svg";
@@ -26,7 +25,6 @@ import starImg from "../../assets/Icons/MyResponse/StarImg.svg";
 import grayStar from "../../assets/Icons/MyResponse/grayStar.svg";
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
-import { Spin } from "antd";
 import { Helmet } from "react-helmet-async";
 
 const ViewProfiles = () => {
@@ -47,8 +45,9 @@ const ViewProfiles = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
 
-  const { reviewProfileData } = useSelector((state) => state.leadSetting);
-  const { viewProfileData } = useSelector((state) => state.leadSetting);
+  const { reviewProfileData, viewProfileData } = useSelector(
+    (state) => state.leadSetting
+  );
 
   let profileData = {};
 
@@ -62,8 +61,6 @@ const ViewProfiles = () => {
     (service) => service?.user_services?.name
   );
 
-  console.log(viewProfileData, "viewProfileData");
-
   const expandRadiusLoader = useSelector(
     (state) => state?.leadSetting?.expandRadiusLoader
   );
@@ -76,7 +73,6 @@ const ViewProfiles = () => {
   }, []);
 
   const servicesArray = profileData?.services || [];
-  console.log(profileData, "profileData");
 
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
@@ -90,12 +86,10 @@ const ViewProfiles = () => {
 
   const closeModal = () => setIsOpen(false);
   const rightContainerRef = useRef(null);
-  console.log(activeTab, "activeTab");
 
   // Tab click handler function
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
-    console.log(tabName, "tabNaME");
     setOnActiveTab(true);
 
     setInterval(() => {
@@ -158,7 +152,6 @@ const ViewProfiles = () => {
         const offsetTop = section.ref.current?.offsetTop || 0;
         if (scrollY >= offsetTop - 0) {
           // Added offset for better detection
-          console.log(activeTab, "name123");
           {
             // !onActiveTab && setActiveTab(section.name);
           }
@@ -186,10 +179,10 @@ const ViewProfiles = () => {
 
       let token = localStorage.getItem("barkToken");
       token = token ? JSON.parse(token) : null;
-
-      if (token) {
-        dispatch(addViewProfileList(sellerData));
-      }
+      // dispatch(addViewProfileList(sellerData));
+      // if (token) {
+      dispatch(addViewProfileList(sellerData));
+      // }
     } else if (basePath === "review") {
       dispatch(ReviewProfile({ profile_uuid: profileId }));
     }

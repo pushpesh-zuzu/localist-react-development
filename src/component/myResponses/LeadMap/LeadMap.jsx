@@ -68,7 +68,6 @@
 //     loadGoogleMapsScript();
 //   }, []);
 
-
 //   // Get lat/lng from postcode
 //   const getLatLngFromPincode = async (pincode) => {
 //     const apiKey = "AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE";
@@ -146,7 +145,6 @@
 //   const mapInstance = useRef(null);
 //   const markersRef = useRef([]);
 //   const circlesRef = useRef([]);
-//   console.log(getPendingLeadList,"getPendingLeadList")
 
 //   const [mapLoaded, setMapLoaded] = useState(false);
 //   const [mapCenter, setMapCenter] = useState({
@@ -309,7 +307,7 @@ const LeadMap = ({ getPendingLeadList }) => {
     };
 
     const initMap = () => {
-      if (!mapRef.current || !window.google) return;
+      if (!mapRef.current || !window.google || !window.google.maps) return;
 
       mapInstance.current = new window.google.maps.Map(mapRef.current, {
         center: mapCenter,
