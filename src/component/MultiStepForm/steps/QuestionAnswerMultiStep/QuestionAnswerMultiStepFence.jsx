@@ -5,33 +5,25 @@ import {
   setbuyerRequestData,
   registerQuoteCustomer,
 } from "../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from "@ant-design/icons";
-import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
-import { handleScrollToBottom } from "../../../../utils/scroll";
 
-const QuestionAnswerMultiStep2 = ({
+const QuestionAnswerMultiStepFence = ({
   questions = [],
   onNext,
   onBack,
   getProgressPercentage,
-  isComingFromStep3 = false,
-  setQuestionHistory,
-  questionHistory,
-  setIsComingFromStep3,
-  setProgressPercentage,
-  loading = true,
   serviceName = "Landscaping",
-  isQuestionWithImage = false,
+  setIsComingFromStep4,
+  isComingFromStep4,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
-    (state) => state.buyer
-  );
+  const { buyerRequest } = useSelector((state) => state.buyer);
   const { service, registerData } = useSelector((state) => state.findJobs);
   const { userToken, adminToken } = useSelector((state) => state.auth);
+  const firstStepProgress = (2 / 3) * 100; // 66.66%
+  const remainingProgressPerStep = (100 - firstStepProgress) / 3; // baki 2 steps ke liye ≈16.665%
 
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -48,10 +40,12 @@ const QuestionAnswerMultiStep2 = ({
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
+  const [questionHistory, setQuestionHistory] = useState([0]);
+
   const showToast = (type, content) => message[type](content);
 
-  const totalQuestions = questions?.length || 1;
-  const perQuestionProgress = (2 / 3 / totalQuestions) * 100;
+  const totalQuestions = questions?.length;
+  const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
   const formattedQuestions = questions.map((q) => ({
     ...q,
     parsedAnswers: Array.isArray(q.answer)
@@ -69,45 +63,57 @@ const QuestionAnswerMultiStep2 = ({
   formattedQuestions.forEach((q, index) => {
     questionIndexMap[q.question_no] = index;
   });
-  useEffect(() => {
-    if (isComingFromStep3 && buyerRequest?.questions?.length > 0) {
-      setCurrentQuestion(3);
-    }
-  }, [isComingFromStep3]);
+
   // Load saved answers when question changes
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
-      const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
-      const savedArray =
-        typeof savedAnswer === "string"
-          ? savedAnswer.split(",").map((a) => a.trim())
-          : savedAnswer;
+      const currentQuestionText =
+        formattedQuestions[currentQuestion]?.questions;
 
-      setSelectedOption(savedArray);
+      // Find saved answer for CURRENT question
+      const savedQuestion = buyerRequest.questions.find(
+        (q) => q?.ques === currentQuestionText
+      );
 
-      const otherVal = savedArray.find(
-        (ans) =>
-          ans.toLowerCase() !== "yes" &&
-          ans.toLowerCase() !== "no" &&
-          ans.toLowerCase() !== "maybe"
-      );
-      setOtherText(
-        savedArray.includes("Something else (please describe)")
-          ? otherVal || ""
-          : ""
-      );
+      if (savedQuestion) {
+        const savedAnswer = savedQuestion.ans || "";
+        const savedArray =
+          typeof savedAnswer === "string"
+            ? savedAnswer.split(",").map((a) => a.trim())
+            : [savedAnswer];
+
+        setSelectedOption(savedArray);
+
+        // Simple "Something else" handling
+        if (savedArray.includes("Something else (please describe)")) {
+          const otherVal = savedArray.find(
+            (val) => val !== "Something else (please describe)"
+          );
+          setOtherText(otherVal || "");
+        } else {
+          setOtherText("");
+        }
+      } else {
+        setSelectedOption([]);
+        setOtherText("");
+      }
     }
-    handleScrollToBottom();
-  }, [currentQuestion, buyerRequest, questions]);
+  }, [currentQuestion, questions]);
+
+  // Reset when question changes
+  useEffect(() => {
+    // setSelectedOption([]);
+    setOtherText("");
+    setError("");
+  }, [currentQuestion]);
 
   const handleOptionChange = (e) => {
     const { value, checked } = e.target;
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      // ✅ Select single option only
       setSelectedOption([value]);
-      setError(""); // Clear error only on change
+      setError("");
 
       // ✅ If option is NOT "Something else", move to next after short delay
       if (value !== "Something else (please describe)") {
@@ -139,7 +145,7 @@ const QuestionAnswerMultiStep2 = ({
       return;
     }
 
-    const finalAnswer = selectedOption?.map((opt) =>
+    const finalAnswer = selectedOption.map((opt) =>
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
@@ -148,48 +154,62 @@ const QuestionAnswerMultiStep2 = ({
       ans: finalAnswer.join(", "),
     };
 
+    // Copy previous answers
     const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
+
+    // Check if question already exists
+    const questionIndex = previousAnswers.findIndex(
+      (q) => q.ques === updatedAnswer.ques
+    );
+
+    let updatedAnswers;
+    if (questionIndex !== -1) {
+      // Replace only if question already exists
+      updatedAnswers = [...previousAnswers];
+      updatedAnswers[questionIndex] = updatedAnswer;
+    } else {
+      // Append new answer
+      updatedAnswers = [...previousAnswers, updatedAnswer];
+    }
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-    const percentage = (100 * 2) / (totalQuestions * 3);
-    getProgressPercentage(percentage);
+
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selectedOption[0]
     );
 
     const nextQ = selectedObj?.next_question;
+
     if (nextQ === Number(nextQ)) {
-      dispatch(
-        setbuyerRequestData({
-          service_id: service?.id || buyerRequest?.service_id,
-          // serviceName: serviceName || buyerRequest?.serviceName,
-          postcode: buyerRequest?.postcode,
-          city: citySerach,
-          questions: updatedAnswers,
-        })
-      );
       onNext();
-    }
-    if (nextQ === "last") {
+    } else if (nextQ === "last") {
       onNext();
-      const firstStepProgress = (2 / 3) * 100;
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2;
-      getProgressPercentage(remainingProgressPerStep);
-    } else if (nextQ && questionIndexMap[nextQ]) {
-      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+    } else if (nextQ && questionIndexMap[nextQ] !== undefined) {
+      setQuestionHistory((prev) => {
+        if (prev[prev.length - 1] !== questionIndexMap[nextQ]) {
+          return [...prev, questionIndexMap[nextQ]];
+        }
+        return prev;
+      });
       setCurrentQuestion(questionIndexMap[nextQ]);
+      getProgressPercentage(remainingProgressPerStep);
     } else {
-      // Fallback if no next_question found
       if (currentQuestion < totalQuestions - 1) {
-        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setQuestionHistory((prev) => {
+          if (prev[prev.length - 1] !== currentQuestion + 1) {
+            return [...prev, currentQuestion + 1];
+          }
+          return prev;
+        });
+        getProgressPercentage(remainingProgressPerStep);
+
         setCurrentQuestion(currentQuestion + 1);
       } else {
         onNext();
       }
     }
   };
+
   const handleNext = (selected) => {
     if (selected.length === 0) {
       setError("Please select at least one option.");
@@ -215,94 +235,103 @@ const QuestionAnswerMultiStep2 = ({
     };
 
     const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
+    const questionIndex = previousAnswers.findIndex(
+      (q) => q.ques === updatedAnswer.ques
+    );
+
+    let updatedAnswers;
+    if (questionIndex !== -1) {
+      updatedAnswers = [...previousAnswers];
+      updatedAnswers[questionIndex] = updatedAnswer;
+    } else {
+      updatedAnswers = [...previousAnswers, updatedAnswer];
+    }
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-
-    const percentage = (100 * 2) / (totalQuestions * 3);
-
-    getProgressPercentage(percentage);
 
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
     );
 
     const nextQ = selectedObj?.next_question;
-
-    let nextIndex = null;
-
     if (nextQ === Number(nextQ)) {
-      console.log("nextQ === Number(nextQ)");
+      // dispatch(
+      //   setbuyerRequestData({
+      //     service_id: service?.id || buyerRequest?.service_id,
+      //     serviceName: serviceName || buyerRequest?.serviceName,
+      //     postcode: buyerRequest?.postcode,
+      //     city: citySerach,
+      //     questions: updatedAnswers,
+      //   })
+      // );
       onNext();
-      return;
     } else if (nextQ === "last") {
-      console.log('nextQ === "last"');
-      const firstStepProgress = (2 / 3) * 100; // 66.66%
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
+      onNext();
+    } else if (nextQ && questionIndexMap[nextQ] !== undefined) {
+      setQuestionHistory((prev) => {
+        if (prev[prev.length - 1] !== questionIndexMap[nextQ]) {
+          return [...prev, questionIndexMap[nextQ]];
+        }
+        return prev;
+      });
+      setCurrentQuestion(questionIndexMap[nextQ]);
       getProgressPercentage(remainingProgressPerStep);
-      onNext();
-      return;
-    } else if (nextQ && questionIndexMap[nextQ]) {
-      nextIndex = questionIndexMap[nextQ];
-    } else if (currentQuestion < totalQuestions - 1) {
-      nextIndex = currentQuestion + 1;
-    }
-
-    if (nextIndex !== null) {
-      // Check if nextIndex is already in questionHistory
-      if (!questionHistory.includes(nextIndex)) {
-        setQuestionHistory((prev) => [...prev, nextIndex]);
-      }
-      setCurrentQuestion(nextIndex);
     } else {
-      console.log("next last");
-      onNext();
+      if (currentQuestion < totalQuestions - 1) {
+        setQuestionHistory((prev) => {
+          if (prev[prev.length - 1] !== currentQuestion + 1) {
+            return [...prev, currentQuestion + 1];
+          }
+          return prev;
+        });
+        setCurrentQuestion(currentQuestion + 1);
+        getProgressPercentage(remainingProgressPerStep);
+      } else {
+        onNext();
+      }
     }
   };
 
   const handleBack = () => {
-    setIsComingFromStep3(false);
+    setIsComingFromStep4(false);
     if (questionHistory.length > 1) {
       const newHistory = [...questionHistory];
       newHistory.pop();
       const prevIndex = newHistory[newHistory.length - 1];
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
-      const percentage = (100 * 2) / (totalQuestions * 3);
-      console.log(
-        currentQuestion,
-        "setProgressPercentagesetProgressPercentage"
-      );
-      currentQuestion > 1 && getProgressPercentage(-percentage);
-      currentQuestion === 1 &&
-        setProgressPercentage((100 * 2) / (totalQuestions * 3));
+      getProgressPercentage(-remainingProgressPerStep);
     } else {
       onBack();
-      // getProgressPercentage(-25);
+      getProgressPercentage(-remainingProgressPerStep);
     }
   };
 
+  if (questions.length === 0) {
+    return (
+      <div className={styles.noQuestions}>
+        <h2>No questions available</h2>
+      </div>
+    );
+  }
   useEffect(() => {
-    // setSelectedOption([]);
-    setOtherText("");
-    setError("");
-  }, [currentQuestion]);
-
-  return loading ? (
-    <div className={styles.loaderContainer}>
-      <Spin size="large" />
-    </div>
-  ) : (
+    if (isComingFromStep4 && buyerRequest?.questions?.length > 0) {
+      setCurrentQuestion(1);
+      setQuestionHistory([0, 1]);
+      // setIsFirstQuestionAnswered(true);
+    }
+  }, [isComingFromStep4]);
+  console.log(
+    isComingFromStep4,
+    "isComingFromStep4",
+    currentQuestion,
+    "ccureter"
+  );
+  return (
     <CardLayoutWrapper
-      title={
-        currentQuestion === 0
-          ? "Welcome to Localists!"
-          : formattedQuestions[currentQuestion]?.questions
-      }
+      title={formattedQuestions[currentQuestion]?.questions}
       onButtonClick={handleNextCheckBox}
       onBackClick={handleBack}
-      showBackButton={currentQuestion === 0 ? false : true}
       disableNextButton={
         formattedQuestions[currentQuestion]?.option_type === "single" &&
         !buyerRequest?.questions?.some(
@@ -311,40 +340,31 @@ const QuestionAnswerMultiStep2 = ({
         !selectedOption.includes("Something else (please describe)")
       }
       buttonText="Next"
-      headingCenter={currentQuestion === 0 ? false : true}
-      subtitle={
-        currentQuestion === 0
-          ? "To find the ideal landscaping specialist for your project, simply complete the quick form below."
-          : ""
-      }
-      // showBackButton={true}
+      showBackButton={true}
     >
-      {currentQuestion === 0 && isQuestionWithImage && (
-        <div
-          style={{ marginTop: "-25px", marginBottom: "20px" }}
-          className={
-            serviceName === "Patio Services"
-              ? styles.headerImage
-              : serviceName === "Artificial Grass Installation"
-              ? styles.headerImage1
-              : serviceName === "General Builders"
-              ? styles.headerImage2
-              : serviceName === "Driveway Installation"
-              ? styles.headerImage3
-              : serviceName === "Fence & Gate Installation"
-              ? styles.headerImage4
-              : serviceName === "Gardening"
-              ? styles.headerImage5
-              : serviceName === "Home and Garden"
-              ? styles.headerImage6
-              : serviceName === "Landscaping"
-              ? styles.headerImage7
-              : serviceName === "Gate Installation"
-              ? styles.headerImage8
-              : styles.headerImage // default fallback
-          }
-        />
-      )}
+      {/* <div
+        className={
+          serviceName === "Patio Services"
+            ? styles.headerImage
+            : serviceName === "Artificial Grass Installation"
+            ? styles.headerImage1
+            : serviceName === "General Builders"
+            ? styles.headerImage2
+            : serviceName === "Driveway Installation"
+            ? styles.headerImage3
+            : serviceName === "Fence & Gate Installation"
+            ? styles.headerImage4
+            : serviceName === "Gardening"
+            ? styles.headerImage5
+            : serviceName === "Home and Garden"
+            ? styles.headerImage6
+            : serviceName === "Landscaping"
+            ? styles.headerImage7
+            : serviceName === "Gate Installation"
+            ? styles.headerImage8
+            : styles.headerImage // default fallback
+        }
+      /> */}
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
           (opt, index) => {
@@ -395,12 +415,10 @@ const QuestionAnswerMultiStep2 = ({
           selectedOption.includes("Something else (please describe)") && (
             <input
               type="text"
-              placeholder="Please enter...."
+              placeholder="Please enter..."
               className={styles.otherInput}
               value={otherText}
-              onChange={(e) => {
-                setOtherText(e.target.value);
-              }}
+              onChange={(e) => setOtherText(e.target.value)}
             />
           )}
       </div>
@@ -410,4 +428,4 @@ const QuestionAnswerMultiStep2 = ({
   );
 };
 
-export default QuestionAnswerMultiStep2;
+export default QuestionAnswerMultiStepFence;

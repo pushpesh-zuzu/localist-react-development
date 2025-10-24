@@ -3,36 +3,33 @@ import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
-import PostcodeSearch from "./steps/PostcodeSearch/PostcodeSearch";
-import QuestionAnswerMultiStep from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep";
 import { questionAnswerData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
 import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberMultiStepForm";
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
-import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
-import QuestionAnswerMultiStepDriveways from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepDriveways";
-import QuestionAnserMultiStepDriways2 from "./steps/QuestionAnswerMultiStep/QuestionAnserMultiStepDriways2";
-import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDriveways";
+import QuestionAnswerMultiStepFence from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence";
+import PostSearchMultiStepFence from "./steps/PostcodeSearch/PostSearchMultiStepFence";
+import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence2";
 
-const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
+const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
 
   useEffect(() => {
-    if (location.pathname.includes("driveways-multi-form-ppc")) {
+    if (location.pathname.includes("landscaping-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("driveways-multi-form-ppc") && "0px"
+      location.pathname.includes("landscaping-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
@@ -42,13 +39,13 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [backButtonTriggered, setBackButtonTriggered] = useState(false);
-  const [isComingFromStep3, setIsComingFromStep3] = useState(false);
-  const [isComingFromStep4, setIsComingFromStep4] = useState(false);
+  const [isComingFromStep3, setIsComingFromStep3] = useState(false); // ⭐ YE ADD KARO
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
+  const [isComingFromStep4, setIsComingFromStep4] = useState(false);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -65,7 +62,6 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     }
     handleScrollToBottom();
   }, [buyerStep]);
-
   const getProgressPercentage = (per) => {
     setProgressPercentage((pre) => pre + per);
   };
@@ -75,34 +71,23 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     setIsComingFromStep3(false);
     setIsComingFromStep4(false);
 
+    // setAnimationDirection(styles.slideOutLeft);
+
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex < stepFlow.length - 1) {
         dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
       }
+
+      // setAnimationDirection(styles.slideInRight);
     }, 300);
   };
-
   const prevStep = () => {
     setBackButtonTriggered(true);
+    // setAnimationDirection(styles.slideOutRight);
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
-        // Progress decrease based on current step
-        if (buyerStep === 2) {
-          // Step 2 se Step 1: 80% → 70%
-          setProgressPercentage(70);
-        } else if (buyerStep === 3) {
-          // Step 3 se Step 2: 90% → 80%
-          setProgressPercentage(80);
-        } else if (buyerStep === 4) {
-          // Step 4 se Step 3: 95% → 90%
-          setProgressPercentage(90);
-        } else if (buyerStep === 5) {
-          // Step 5 se Step 4: 100% → 95%
-          setProgressPercentage(95);
-        }
-
         if (stepFlow[currentIndex - 1] === 1) {
           setIsComingFromStep3(true);
         }
@@ -112,11 +97,14 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
         dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
         setBackButtonTriggered(false);
       }
+      // setAnimationDirection(styles.slideInLeft);
     }, 300);
   };
 
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+
+    // Jab buyerStep 7 ho jaye aur pendingModal tha, tab clear karo
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
       console.log("Cleared pendingBuyerModal after reaching step 7");
@@ -126,40 +114,22 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+
     if (pendingModal?.shouldOpen) {
       console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
+      // const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
   }, [dispatch, isAdminOrRemembered]);
 
   useEffect(() => {
-    dispatch(questionAnswerData({ service_id: 51 }));
+    dispatch(questionAnswerData({ service_id: 49 }));
   }, []);
 
-  let firstQuestions = [];
-  let lastQuestion = [];
-
-  if (questionanswerData?.length) {
-    const lastIndex = questionanswerData.findIndex((q) => {
-      try {
-        const answers = JSON.parse(q.answer);
-        return answers.some((a) => a.next_question === "last");
-      } catch {
-        return false;
-      }
-    });
-
-    if (lastIndex !== -1) {
-      lastQuestion = questionanswerData.slice(lastIndex - 1, lastIndex + 1);
-      firstQuestions = questionanswerData.filter(
-        (_, i) => i < lastIndex - 1 || i > lastIndex
-      );
-    } else {
-      firstQuestions = questionanswerData;
-    }
-  }
+  const firstQuestions = questionanswerData?.slice(0, -2) || []; // All except last
+  const lastQuestion = questionanswerData?.slice(-2) || []; // Only last question
 
   useEffect(() => {
     if (questionanswerData.length > 0) {
@@ -167,19 +137,41 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
 
+  useEffect(() => {
+    if (firstQuestions?.length > 0) {
+      const initialProgress = (100 * 2) / (firstQuestions.length * 3);
+      setProgressPercentage(initialProgress);
+    }
+  }, [questionanswerData]);
+  const [hasMountedDetector, setHasMountedDetector] = useState(false);
+  console.log(buyerRequest, "br");
+  useEffect(() => {
+    if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+      setHasMountedDetector(true);
+    }
+    // ❌ Don't depend on buyerRequest.questions
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasMountedDetector]);
   return (
     <>
+      {/* {window.innerWidth > 768  && typeof window !== "undefined"? (
+              <NavigationDetectorDesktop />
+            ) : (
+              <NavigationDetectorWithConfirmations />
+            )} */}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
-          Compare Free Quotes from Local Driveway Companies | Localists
+          Compare Free Quotes from Local Fencing Companies | Localists
         </title>
+
         <meta
           name="description"
-          content="Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple."
+          content="Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free."
         />
       </Helmet>
 
+      {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -196,47 +188,45 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
             <div className={`${styles.slideContainer} ${animationDirection}`}>
               {buyerStep === 1 && (
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAnserMultiStepDriways2
+                  <QuestionAnswerMultiStepFence2
                     questions={firstQuestions}
                     onNext={nextStep}
                     onBack={prevStep}
                     loading={isLoadingQuestions}
                     getProgressPercentage={getProgressPercentage}
-                    isComingFromStep3={isComingFromStep3}
+                    isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
                     setQuestionHistory={setQuestionHistory}
                     questionHistory={questionHistory}
                     setIsComingFromStep3={setIsComingFromStep3}
                     setProgressPercentage={setProgressPercentage}
                     isQuestionWithImage={isQuestionWithImage}
-                    serviceName="Driveway Installation"
+                    serviceName="Fence & Gate Installation"
                   />
                 </div>
               )}
               {buyerStep === 2 && (
                 <div style={{ margin: "auto" }}>
-                  <PostcodeSearchDriveways
+                  <PostSearchMultiStepFence
                     getProgressPercentage={getProgressPercentage}
                     prevStep={prevStep}
                     onNext={nextStep}
-                    setProgressPercentage={setProgressPercentage}
                     backButtonTriggered={backButtonTriggered}
                     setBackButtonTriggered={setBackButtonTriggered}
-                    titleHeading="driveway installers"
+                    returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
                   />
                 </div>
               )}
 
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
-                  <QuestionAnswerMultiStepDriveways
-                    questions={lastQuestion}
-                    onNext={nextStep}
+                  <QuestionAnswerMultiStepFence
+                    questions={lastQuestion} // Sirf last question
+                    onNext={nextStep} // Last question complete hone ke baad next step
                     onBack={prevStep}
                     loading={questionLoader}
-                    getProgressPercentage={getProgressPercentage}
                     setIsComingFromStep4={setIsComingFromStep4}
+                    getProgressPercentage={getProgressPercentage}
                     isComingFromStep4={isComingFromStep4}
-                    setProgressPercentage={setProgressPercentage}
                   />
                 </div>
               )}
@@ -245,27 +235,29 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                   nextStep={nextStep}
                   onBack={prevStep}
                   isStartWithQuestionModal={true}
-                  setProgressPercentage={setProgressPercentage}
                 />
               )}
               {buyerStep === 5 && (
                 <PhoneNumberMultiStepForm
                   nextStep={nextStep}
                   onBack={prevStep}
-                  serviceId={51}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
                   updateNumberStep={updateNumberStep}
+                  setUpdateNumberStep={setUpdateNumberStep}
                 />
               )}
-              {buyerStep === 6 && (
+              {/* {updateNumberStep === 1 && buyerStep === 5 && (
+                <PhoneNumberUpdateMultiStepForm
+                  setUpdateNumberStep={setUpdateNumberStep}
+                  onBack={prevStep}
+                />
+              )} */}
+              {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep
                     open
                     nextStep={nextStep}
                     onBack={prevStep}
                     isThankuPageOnlyShow
-                    setProgressPercentage={setProgressPercentage}
                     setUpdateNumberStep={setUpdateNumberStep}
                   />
                 </CardLayoutWrapper>
@@ -284,4 +276,4 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   );
 };
 
-export default MultiStepFormDriveways;
+export default MultiStepFormFencing;
