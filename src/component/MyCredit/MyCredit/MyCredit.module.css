@@ -393,6 +393,20 @@
 .VisaCard {
   width: 70vw;
 }
+
+.offerBoxTop {
+  background: var(--primary-color);
+  max-width: 30%;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 4px;
+  margin: -50px -20px 10px -20px; /* pull it to card edges */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* ========== Responsive Breakpoints ========== */
 
 /* Tablets (≤ 1024px) */
@@ -421,6 +435,11 @@
   .card {
     padding: 15px;
     /* width: 100%; */
+  }
+
+  .offerBoxTop {
+    max-width: 60%;
+    margin: -35px -20px 10px -20px;
   }
 
   .creditsBox {
@@ -462,6 +481,11 @@
 @media (max-width: 480px) {
   .container {
     padding: 20px 16px;
+  }
+
+  .offerBoxTop {
+    max-width: 100%;
+    margin: -35px -20px 10px -20px;
   }
   .cardList {
     display: flex;

@@ -246,6 +246,12 @@ const MyCredits = () => {
               .sort((a, b) => a.price - b.price)
               .map((item, index) => (
                 <div className={styles.card} key={index}>
+                  {item?.plan_type === "starter" && (
+                    <div className={styles.offerBoxTop}>
+                      20% Boost – Your Exclusive Sign Up Offer
+                    </div>
+                  )}
+
                   {/* Title */}
                   <div className={styles.cardHeader}>
                     <h3>{item?.name}</h3>
