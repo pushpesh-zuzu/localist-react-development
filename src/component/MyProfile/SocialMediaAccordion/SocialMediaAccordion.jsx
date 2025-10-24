@@ -40,13 +40,14 @@ const platforms = [
 ];
 
 const urlPatterns = {
-  fb_link: /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9_.-]+$/,
-  twitter_link: /^(https?:\/\/)?(www\.)?twitter\.com\/[A-Za-z0-9_]+$/,
-  insta_link: /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9_.]+$/,
-  // linkedin_link: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+$/,
+  fb_link: /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9_.-]+\/?(\?.*)?$/,
+  twitter_link: /^(https?:\/\/)?(www\.)?twitter\.com\/[A-Za-z0-9_]+\/?(\?.*)?$/,
+  insta_link:
+    /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9_.-]+\/?(\?.*)?$/,
   linkedin_link:
     /^(https?:\/\/)?((www|[a-z]{2})\.)?linkedin\.com\/(in|company)\/[A-Za-z0-9_-]+\/?$/,
-  tiktok_link: /^(https?:\/\/)?(www\.)?tiktok\.com\/@[A-Za-z0-9_.-]+$/,
+  tiktok_link:
+    /^(https?:\/\/)?(www\.)?tiktok\.com\/(@[A-Za-z0-9_.-]+)\/?(\?.*)?$/,
 };
 
 const SocialMediaAccordion = ({ details }) => {

@@ -1,3 +1,8 @@
+.photoContainer {
+  border-bottom: 1px solid rgb(238, 238, 238);
+  margin-bottom: 12px;
+}
+
 .photosContainer {
   margin-top: 12px;
   height: 120px;
@@ -6,6 +11,7 @@
   width: -webkit-fill-available;
   overflow-x: scroll;
 }
+
 .photoContainer h2 {
   font-size: 22px;
   margin-bottom: 20px;
