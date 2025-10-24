@@ -35,6 +35,21 @@
   object-fit: contain;
 }
 
+.Business_Description {
+  margin-bottom: 16px;
+}
+
+.readMore {
+  color: #007bff;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.readMore:hover {
+  text-decoration: underline;
+}
+
 /* Responsive for tablets (max width 768px) */
 @media (max-width: 768px) {
   .aboutContent {

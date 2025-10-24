@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./About.module.css";
 import EliteProImg from "../../../assets/Images/Setting/eliteProImg.svg";
 import businessImg from "../../../assets/Images/Setting/businessImg.svg";
@@ -7,6 +7,12 @@ import localistHireImg from "../../../assets/Images/Setting/localistHireImg.svg"
 import responseTimeImg from "../../../assets/Images/Setting/responseTimeImg.svg";
 
 const About = ({ details }) => {
+  const [showFull, setShowFull] = useState(false);
+
+  const aboutText = details?.about_company || "";
+  const shortText =
+    aboutText.length > 300 ? aboutText.slice(0, 300) + "..." : aboutText;
+
   const data = [
     // {
     //     title: "Elite Pro",
@@ -37,11 +43,25 @@ const About = ({ details }) => {
     },
   ];
 
-  console.log(details, "details");
+  console.log(details?.about_company, "details111");
 
   return (
     <div className={styles.aboutContainer}>
       <h2>About</h2>
+      <div className={styles.Business_Description}>
+        <p>
+          {" "}
+          {showFull ? aboutText : shortText}
+          {aboutText.length > 300 && (
+            <span
+              onClick={() => setShowFull(!showFull)}
+              className={styles.readMore}
+            >
+              {showFull ? " Read less" : " Read more"}
+            </span>
+          )}
+        </p>
+      </div>
       <div className={styles.aboutContent}>
         {data.map((item, index) => (
           <div key={index} className={styles.aboutItem}>
