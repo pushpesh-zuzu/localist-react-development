@@ -71,6 +71,9 @@ import MultiStepWithImage from "../pages/MultiStepWithImage";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 import ProtectRouteMultiPPC from "./ProtectRouteMultiPPC";
 import MultiStepFormDriveways from "../component/MultiStepForm/MultiStepFormDriveways";
+import MultiStepFormFencing from "../component/MultiStepForm/MultiStepFormFencing";
+import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
+import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -703,7 +706,37 @@ const routes = [
     element: (
       <ProtectedRoutePPC>
         <LocaleRedirect>
-          <MultiStepFormDriveways />
+          <MultiStepDrivewayWithBanner />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/driveways-multi-form-ppc-banner",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepDrivewayWithBanner />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/fence-multi-form-ppc",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepFormFencing />
+        </LocaleRedirect>
+      </ProtectedRoutePPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/fence-multi-form-ppc-banner",
+    element: (
+      <ProtectedRoutePPC>
+        <LocaleRedirect>
+          <MultiStepFenchWithBanner />
         </LocaleRedirect>
       </ProtectedRoutePPC>
     ),

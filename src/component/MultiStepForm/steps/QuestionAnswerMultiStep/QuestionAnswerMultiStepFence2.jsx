@@ -12,7 +12,7 @@ import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 
-const QuestionAnswerMultiStep2 = ({
+const QuestionAnswerMultiStepFence2 = ({
   questions = [],
   onNext,
   onBack,
@@ -314,7 +314,7 @@ const QuestionAnswerMultiStep2 = ({
       headingCenter={currentQuestion === 0 ? false : true}
       subtitle={
         currentQuestion === 0
-          ? "To find the ideal landscaping specialist for your project, simply complete the quick form below."
+          ? "To find the ideal fencing companies for your project, simply complete the quick form below."
           : ""
       }
       // showBackButton={true}
@@ -410,4 +410,4 @@ const QuestionAnswerMultiStep2 = ({
   );
 };
 
-export default QuestionAnswerMultiStep2;
+export default QuestionAnswerMultiStepFence2;
