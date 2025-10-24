@@ -347,6 +347,19 @@ const QuestionAnswerMultiStep2 = ({
               : styles.headerImage
           } ${styles.bannerMargin}`}
         />
+      )}{" "}
+      {currentQuestion === 0 && (
+        <h2
+          style={{
+            textAlign: isQuestionWithImage ? "center" : "left",
+            maxWidth: "86%",
+            margin: isQuestionWithImage ? "auto" : "",
+            marginBottom: "10px",
+          }}
+          className={styles.question1}
+        >
+          {formattedQuestions[currentQuestion]?.questions}
+        </h2>
       )}
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
@@ -407,7 +420,6 @@ const QuestionAnswerMultiStep2 = ({
             />
           )}
       </div>
-
       {error && <p className={styles.errorMessage}>{error}</p>}
     </CardLayoutWrapper>
   );
