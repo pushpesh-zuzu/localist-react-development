@@ -156,19 +156,18 @@
 
 .headerImage7 {
   background-image: url("./banner/landscapingandgardeningBanner.webp");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   padding: 0px 20px;
   color: white;
   font-size: 18px;
   font-weight: bold;
-  min-height: 300px;
+  min-height: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-repeat: no-repeat;
-
 }
 .headerImage8 {
   background-image: url("./banner/Gate.webp");
@@ -261,11 +260,18 @@
   padding: 40px 20px;
   color: #666;
 }
-
+@media (max-width: 1090px) {
+  .headerImage7 {
+    min-height: 240px;
+  }
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .headingH1 {
     font-size: 28px;
+  }
+  .headerImage7 {
+    min-height: 300px;
   }
 
   .description {
@@ -289,14 +295,13 @@
   }
 }
 @media (max-width: 600px) {
-  .headerImage7{
-    background-size: contain;
-    /* min-height: 220px; */
+  .headerImage7 {
+    min-height: 240px;
   }
 }
 @media (max-width: 480px) {
-  .headerImage7{
-    min-height: 220px;
+  .headerImage7 {
+    min-height: 200px;
   }
   .headingH1 {
     font-size: 24px;
@@ -328,5 +333,10 @@
   }
   .loaderContainer {
     width: 200px;
+  }
+}
+@media (max-width: 360px) {
+  .headerImage7 {
+    min-height: 180px;
   }
 }
