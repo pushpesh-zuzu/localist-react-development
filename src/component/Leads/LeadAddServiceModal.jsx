@@ -22,10 +22,34 @@ const AddServiceModal = ({
 }) => {
   const dispatch = useDispatch();
 
+  const [localSuggestions, setLocalSuggestions] = useState([]);
+
+  useEffect(() => {
+    setLocalSuggestions(popularList);
+  }, [popularList, isModalOpen]);
+
   if (!isModalOpen) return null;
 
   const handleSelect = (item) => {
     handleSelectService(item);
+
+    setLocalSuggestions((prev) =>
+      prev.filter((suggestion) => suggestion.id !== item.id)
+    );
+  };
+
+  const handleRemove = (id) => {
+    // find removed service
+    const removedItem = selectedServices.find((s) => s.id === id);
+    if (removedItem) {
+      // add back to suggestions (only if not already there)
+      setLocalSuggestions((prev) => {
+        const alreadyExists = prev.some((s) => s.id === removedItem.id);
+        return alreadyExists ? prev : [...prev, removedItem];
+      });
+    }
+    // call parent remove handler
+    handleRemoveService(id);
   };
 
   return (
@@ -82,7 +106,7 @@ const AddServiceModal = ({
               {service.name}
               <button
                 className={styles.removeIcon}
-                onClick={() => handleRemoveService(service.id)}
+                onClick={() => handleRemove(service.id)}
               >
                 x
               </button>
@@ -96,9 +120,18 @@ const AddServiceModal = ({
             them instantly:
           </p>
           <div className={styles.tags}>
-            {popularList?.map((item, idx) => (
+            {/* {popularList?.map((item, idx) => (
               <span
                 key={idx}
+                className={styles.tag}
+                onClick={() => handleSelect(item)}
+              >
+                + {item.name}
+              </span>
+            ))} */}
+            {localSuggestions?.map((item) => (
+              <span
+                key={item.id}
                 className={styles.tag}
                 onClick={() => handleSelect(item)}
               >

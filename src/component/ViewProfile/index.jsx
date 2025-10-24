@@ -202,6 +202,31 @@ const ViewProfiles = () => {
   const handleRequestOpen = () => {
     setCustomerModal(true);
   };
+
+  const maskWebsite = (website = "") => {
+    if (!website) return "";
+
+    // Remove protocol (http/https)
+    let clean = website.replace(/(^\w+:|^)\/\//, "");
+
+    // If "www." is missing, add it for consistent display
+    if (!clean.startsWith("www.")) {
+      clean = "www." + clean;
+    }
+
+    // Extract domain part (without www.)
+    const domainPart = clean.replace(/^www\./, "").split(".")[0];
+    const rest = clean.replace(/^www\.[^.]+\./, ""); // everything after the first dot
+
+    // Mask domain except first 2 letters
+    const maskedDomain =
+      domainPart.length > 2
+        ? domainPart.slice(0, 2) + "***"
+        : domainPart.slice(0, 1) + "***";
+
+    return `www.${maskedDomain}.${rest}`;
+  };
+
   const maskPhone = (phone = "") => {
     if (!phone || phone.length < 5) return "";
     const visible = phone.slice(0, 5);
@@ -411,7 +436,11 @@ const ViewProfiles = () => {
             {profileData?.company_website && (
               <div className={styles.mailText}>
                 <img src={profileImg} alt="" />
-                <span>{profileData?.company_website}</span>
+                <span>
+                  {profileData?.lead_purchased === 1 || isFromManualBids
+                    ? profileData?.company_website
+                    : maskWebsite(profileData?.company_website)}
+                </span>
               </div>
             )}
           </div>
