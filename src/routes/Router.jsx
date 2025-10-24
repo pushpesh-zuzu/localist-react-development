@@ -724,7 +724,7 @@ const routes = [
     element: (
       <ProtectedRoutePPC>
         <LocaleRedirect>
-          <MultiStepDrivewayWithBanner />
+          <MultiStepFormDriveways />
         </LocaleRedirect>
       </ProtectedRoutePPC>
     ),

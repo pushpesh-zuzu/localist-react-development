@@ -19,6 +19,7 @@ const PostSearchMultiStepFence = ({
   backButtonTriggered,
   setBackButtonTriggered,
   returPercentage,
+  titleHeading ='fencing companies '
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -112,7 +113,7 @@ const PostSearchMultiStepFence = ({
   return (
     <div>
       <h1 className={styles.headingH1}>
-        Get quotes from verified landscaping specialists you can trust
+        Get quotes from verified {titleHeading} you can trust
       </h1>
       {/* <p className={styles.desciption}>
         Localists.com connects you with verified local experts quickly and
