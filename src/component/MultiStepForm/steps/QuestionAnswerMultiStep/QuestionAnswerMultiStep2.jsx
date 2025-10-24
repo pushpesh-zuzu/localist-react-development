@@ -297,7 +297,7 @@ const QuestionAnswerMultiStep2 = ({
     <CardLayoutWrapper
       title={
         currentQuestion === 0
-          ? "Welcome to Localists!"
+          ? ""
           : formattedQuestions[currentQuestion]?.questions
       }
       onButtonClick={handleNextCheckBox}
@@ -312,16 +312,16 @@ const QuestionAnswerMultiStep2 = ({
       }
       buttonText="Next"
       headingCenter={currentQuestion === 0 ? false : true}
-      subtitle={
-        currentQuestion === 0
-          ? "To find the ideal landscaping specialist for your project, simply complete the quick form below."
-          : ""
-      }
+      // subtitle={
+      //   currentQuestion === 0
+      //     ? "To find the ideal landscaping specialist for your project, simply complete the quick form below."
+      //     : ""
+      // }
       // showBackButton={true}
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          style={{ marginTop: "-25px", marginBottom: "20px" }}
+          // style={{ marginTop: "-25px", marginBottom: "20px" }}
           className={
             serviceName === "Patio Services"
               ? styles.headerImage
