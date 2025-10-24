@@ -37,6 +37,11 @@
 
 .Business_Description {
   margin-bottom: 16px;
+  width: 80%;
+}
+
+.Business_Description p {
+  font-size: 14px;
 }
 
 .readMore {

@@ -29,7 +29,7 @@ const Links = ({ details }) => {
   );
 
   return (
-    <div>
+    <div className={styles.Links_Container}>
       <h2>Links</h2>
       <ul className={styles.linkList}>
         {data?.linkedin_link && renderLink(data.linkedin_link, "#000000")}
