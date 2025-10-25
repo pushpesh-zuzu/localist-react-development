@@ -1,5 +1,5 @@
 import styles from "./navbar.module.css";
-import logo from "../../../assets/Images/logo.svg";
+import logo from "../../../assets/Images/logo.png";
 import downArrow from "../../../assets/Images/downarrow.svg";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Popover } from "antd";

@@ -32,7 +32,7 @@ const CardLayoutWrapper = ({
           <p
             style={{
               textAlign: headingCenter ? "center" : "left",
-              marginBottom: "40px",
+              marginBottom: "20px",
             }}
             className={styles.subtitle}
           >

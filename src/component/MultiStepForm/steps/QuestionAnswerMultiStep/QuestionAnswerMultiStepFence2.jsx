@@ -297,7 +297,9 @@ const QuestionAnswerMultiStepFence2 = ({
     <CardLayoutWrapper
       title={
         currentQuestion === 0
-          ? "Welcome to Localists!"
+          ? !isQuestionWithImage
+            ? "Welcome to Localists!"
+            : ""
           : formattedQuestions[currentQuestion]?.questions
       }
       onButtonClick={handleNextCheckBox}
@@ -314,15 +316,17 @@ const QuestionAnswerMultiStepFence2 = ({
       headingCenter={currentQuestion === 0 ? false : true}
       subtitle={
         currentQuestion === 0
-          ? "To find the ideal fencing companies for your project, simply complete the quick form below."
+          ? !isQuestionWithImage
+            ? "To find the ideal fencing companies for your project, simply complete the quick form below."
+            : ""
           : ""
       }
       // showBackButton={true}
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          style={{ marginTop: "-25px", marginBottom: "20px" }}
-          className={
+          // style={{ marginTop: "-25px", marginBottom: "20px" }}
+          className={`${
             serviceName === "Patio Services"
               ? styles.headerImage
               : serviceName === "Artificial Grass Installation"
@@ -341,9 +345,22 @@ const QuestionAnswerMultiStepFence2 = ({
               ? styles.headerImage7
               : serviceName === "Gate Installation"
               ? styles.headerImage8
-              : styles.headerImage // default fallback
-          }
+              : styles.headerImage
+          } ${styles.bannerMargin}`}
         />
+      )}
+      {currentQuestion === 0 && (
+        <h2
+          style={{
+            textAlign: isQuestionWithImage ? "center" : "left",
+            maxWidth: "86%",
+            margin: isQuestionWithImage ? "auto" : "",
+            marginBottom: "10px",
+          }}
+          className={styles.question1}
+        >
+          {formattedQuestions[currentQuestion]?.questions}
+        </h2>
       )}
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
