@@ -51,13 +51,31 @@ const ReviewSection = ({
   const datata = useSelector((state) => state.leadSetting);
   let token = localStorage.getItem("barkUserToken");
   token = JSON.parse(token);
+  // const reviewLength =
+  //   token && token.remember_tokens
+  //     ? viewProfileData?.reviews_count ??
+  //       reviewProfileData?.reviews_count ??
+  //       details?.reviews_count ??
+  //       0
+  //     : reviewProfileData?.reviews_count ?? details?.reviews_count ?? 0;
+
   const reviewLength =
-    token && token.remember_tokens
+    reviewListData?.length > 0
+      ? reviewListData.length
+      : token && token.remember_tokens
       ? viewProfileData?.reviews_count ??
         reviewProfileData?.reviews_count ??
         details?.reviews_count ??
         0
       : reviewProfileData?.reviews_count ?? details?.reviews_count ?? 0;
+
+  const avgRating = reviewListData?.length
+    ? (
+        reviewListData.reduce((sum, r) => sum + Number(r.ratings || 0), 0) /
+        reviewListData.length
+      ).toFixed(1)
+    : details?.avg_rating ?? 0;
+
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
@@ -125,12 +143,13 @@ const ReviewSection = ({
           <div className={styles.container}>
             <div className={styles.left}>
               <div className={styles.score}>
-                {token && token.remember_tokens
+                {/* {token && token.remember_tokens
                   ? viewProfileData?.avg_rating ??
                     reviewProfileData?.avg_rating ??
                     details?.avg_rating ??
                     0
-                  : reviewProfileData?.avg_rating ?? details?.avg_rating ?? 0}
+                  : reviewProfileData?.avg_rating ?? details?.avg_rating ?? 0} */}
+                {avgRating}
                 /5
               </div>
 
