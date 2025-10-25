@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding-top: 30px;
 }
 .aboutContainer h2 {
   /* font-size: 20px;
@@ -76,9 +77,9 @@
     width: 100%;
   }
 
-  /* .aboutContainer {
-    margin-top: 24px;
-  } */
+  .aboutContainer {
+    padding-top: 0px;
+  }
 
   .aboutContent {
     gap: 16px;
