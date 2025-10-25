@@ -247,7 +247,7 @@
 
   .rightContainer,
   .container {
-    padding: 15px;
+    padding: 70px 15px 15px 15px;
     width: -webkit-fill-available;
   }
 }
@@ -314,6 +314,18 @@
     /* flex-wrap: wrap; */
     overflow: auto;
     flex-wrap: unset;
+    width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .tabContainers::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabContainers::after {
+    content: "";
+    flex: 0 0 24px; /* adds visual space at end */
   }
 }
 
