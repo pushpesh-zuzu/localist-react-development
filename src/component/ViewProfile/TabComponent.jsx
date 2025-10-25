@@ -8,11 +8,9 @@ const TabNav = ({ activeTab, onTabClick }) => {
     "Accreditations",
     "Q+A's",
     "Photos",
+    "Videos",
     "Links",
   ];
-
-  console.log(activeTab, "activeTab");
-  console.log(onTabClick, "onTabClick");
 
   return (
     <div className={styles.tabContainers}>

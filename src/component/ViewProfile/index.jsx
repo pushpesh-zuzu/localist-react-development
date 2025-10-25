@@ -27,6 +27,7 @@ import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
 import { Helmet } from "react-helmet-async";
 import Links from "./Links/Links";
+import Videos from "./Videos/Videos";
 
 const ViewProfiles = () => {
   const location = useLocation();
@@ -58,8 +59,6 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
-  console.log(profileData, "profileData");
-
   const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );
@@ -85,6 +84,7 @@ const ViewProfiles = () => {
   const reviewsRef = useRef(null);
   const accrediationRef = useRef(null);
   const photoRef = useRef(null);
+  const videosRef = useRef(null);
   const quesAnsRef = useRef(null);
   const linksRef = useRef(null);
 
@@ -117,6 +117,9 @@ const ViewProfiles = () => {
       case "Photos":
         targetRef = photoRef;
         break;
+      case "Videos":
+        targetRef = videosRef;
+        break;
       case "Q+A's":
         targetRef = quesAnsRef;
         break;
@@ -148,6 +151,7 @@ const ViewProfiles = () => {
       const scrollY = container.scrollTop;
       const sections = [
         { name: "Photos", ref: photoRef },
+        { name: "Videos", ref: videosRef },
         { name: "Q+A's", ref: quesAnsRef },
         { name: "Accreditations", ref: accrediationRef },
         { name: "Reviews", ref: reviewsRef },
@@ -194,9 +198,6 @@ const ViewProfiles = () => {
     } else if (basePath === "review") {
       dispatch(ReviewProfile({ profile_uuid: profileId }));
     }
-
-    // Optional: debug log
-    console.log("Detected basePath:", basePath);
   }, [dispatch, profileId, requestId, userToken, registerData]);
 
   const handleRequestOpen = () => {
@@ -254,11 +255,16 @@ const ViewProfiles = () => {
   //     </div>
   //   );
   // }
+
+  console.log(viewProfileData, "viewProfileData");
+
   return (
     <>
       <Helmet>
         <title>{`${
-          viewProfileData?.name ? viewProfileData?.name : ""
+          viewProfileData?.company_name
+            ? viewProfileData?.company_name
+            : viewProfileData?.name
         } | Localists`}</title>
       </Helmet>
       <div className={styles.mainContainer}>
@@ -295,7 +301,11 @@ const ViewProfiles = () => {
             </div>
           </div>
           <div className={styles.viewDetails}>
-            <h2>{profileData?.company_name || profileData?.name}</h2>
+            <h2>
+              {profileData?.company_name
+                ? profileData?.company_name
+                : profileData?.name}
+            </h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
               <span>{profileData?.city} </span> | {profileData?.zipcode}
@@ -470,6 +480,9 @@ const ViewProfiles = () => {
             </div>
             <div ref={photoRef}>
               <Photos details={profileData} />
+            </div>
+            <div ref={videosRef}>
+              <Videos details={profileData} />
             </div>
             <div ref={linksRef}>
               <Links details={profileData} />
