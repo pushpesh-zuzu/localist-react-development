@@ -82,6 +82,8 @@ const ServiceLocationStep = ({
             country_old: "UK",
             coordinates: {},
             validPostCode: true,
+            validPostCode2: isValidPostCode,
+            postcode2: postcodeFromApi,
           })
         );
         // cityName && dispatch(setCity({city:cityName}));

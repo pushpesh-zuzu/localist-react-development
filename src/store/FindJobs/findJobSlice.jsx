@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { showToast } from "../../utils";
 import axiosInstance from "../../Api/axiosInstance.js";
-import { fetchCompanyDetails } from '../../../src/store/Company/companyLookup';
+import { fetchCompanyDetails } from "../../../src/store/Company/companyLookup";
 import { changeSequenceServices } from "../../utils/allservices.js";
 import { safeLocalStorage } from "../../utils/localStorage.js";
 const initialState = {
@@ -10,37 +10,38 @@ const initialState = {
   hasPopulatedFromCompany: false,
   searchServiceLoader: false,
   service: [],
-  registerData:JSON.parse(safeLocalStorage.getItem("registerDataToken")) || null,
+  registerData:
+    JSON.parse(safeLocalStorage.getItem("registerDataToken")) || null,
   registerLoader: false,
   registerStep: 0,
   registerToken: JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
   selectedServiceId: null,
-  selectedServices:[],
-  categoriesListLoader:false,
-  pendingLoader:false,
-  CategoriesList:[],
-  allServiceList:[],
-  pendingLead:[],
-  errorMessage:[],
-  errorCheckComanyName:null,
+  selectedServices: [],
+  categoriesListLoader: false,
+  pendingLoader: false,
+  CategoriesList: [],
+  allServiceList: [],
+  pendingLead: [],
+  errorMessage: [],
+  errorCheckComanyName: null,
   buyerRegisterFormData: {
-email:"",
-name:'',
-phone:""
+    email: "",
+    name: "",
+    phone: "",
   },
-  country:{},
-  city:{},
-  postalcode:{},
-  selectedServiceFormData:{
+  country: {},
+  city: {},
+  postalcode: {},
+  selectedServiceFormData: {
     miles1: "30",
     postcode: null,
-    cities:"",
-    coordinates:[],
-    is_online : 0,
+    cities: "",
+    coordinates: [],
+    is_online: 0,
     nation_wide: 0,
     name: "",
     email: "",
-    company_reg_number:"",
+    company_reg_number: "",
     // password: "",
     phone: "",
     company_name: "",
@@ -54,19 +55,20 @@ phone:""
     // state: "",
     city: "",
     country: "",
-    apartment :"",
+    apartment: "",
     zipcode: "",
     // is_zipcode: 1,
     // suite: "",
     service_id: [],
     auto_bid: 1,
     miles2: "30",
-    expanded_radius:"",
-    coordinates2:""
-
+    expanded_radius: "",
+    coordinates2: "",
+    validPostCode: false,
+    validPostCode2: false,
+    postcode2: null,
   },
-  authToken:JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
-  
+  authToken: JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
 };
 export const getPopularServiceList = () => {
   return async (dispatch) => {
@@ -88,7 +90,10 @@ export const getPopularServiceListUser = (ServiceData) => {
   return async (dispatch) => {
     dispatch(setPopularServiceListLoader(true));
     try {
-      const response = await axiosInstance.post(`users/user-available-popular-services`,ServiceData);
+      const response = await axiosInstance.post(
+        `users/user-available-popular-services`,
+        ServiceData
+      );
       if (response) {
         dispatch(setPopularList(response?.data?.data));
       }
@@ -104,7 +109,10 @@ export const searchService = (ServiceData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`users/search-services`, ServiceData);
+      const response = await axiosInstance.post(
+        `users/search-services`,
+        ServiceData
+      );
 
       if (response) {
         dispatch(setService(response?.data?.data));
@@ -115,12 +123,15 @@ export const searchService = (ServiceData) => {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
+};
 export const searchAvailableService = (ServiceData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`users/search-available-services`, ServiceData);
+      const response = await axiosInstance.post(
+        `users/search-available-services`,
+        ServiceData
+      );
 
       if (response) {
         dispatch(setAvailableService(response?.data?.data));
@@ -131,31 +142,33 @@ export const searchAvailableService = (ServiceData) => {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
+};
 export const registerUserData = (registerData) => {
   return async (dispatch) => {
     dispatch(setRegisterLoader(true));
     try {
-      
       // const response = true;
-      const response = await axiosInstance.post(`users/registration`, registerData);
+      const response = await axiosInstance.post(
+        `users/registration`,
+        registerData
+      );
 
-      console.log(response,"user")
+      console.log(response, "user");
       if (response) {
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
-        dispatch(setAuthToken(response?.data?.data?.remember_tokens))
+        dispatch(setAuthToken(response?.data?.data?.remember_tokens));
         return response.data;
-      }
-      else {
-        showToast("error", response?.message || "Register failed. Please try again.");
+      } else {
+        showToast(
+          "error",
+          response?.message || "Register failed. Please try again."
+        );
       }
     } catch (error) {
-
       const errorData = error?.response?.data?.message;
 
       if (errorData && typeof errorData === "object") {
-
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
             messages.forEach((msg) => showToast("error", msg));
@@ -164,13 +177,16 @@ export const registerUserData = (registerData) => {
           }
         });
       } else {
-        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
-        dispatch(setErrorMessage(error?.response?.data?.message))
+        showToast(
+          "error",
+          error?.response?.data?.message || "Register failed. Please try again."
+        );
+        dispatch(setErrorMessage(error?.response?.data?.message));
       }
     } finally {
       dispatch(setRegisterLoader(false));
     }
-  }
+  };
 };
 export const getCategoriesList = () => {
   return async (dispatch) => {
@@ -204,16 +220,19 @@ export const getAllServiceList = () => {
   };
 };
 
-
 export const pendingLeadData = (pendingData) => {
   return async (dispatch) => {
     dispatch(setPendingLeadLoader(true));
     try {
-      const response = await axiosInstance.post(`users/pending-leads`, pendingData, {
-        headers: {
-          Authorization: null, // or pass a valid token if needed
-        },
-      });
+      const response = await axiosInstance.post(
+        `users/pending-leads`,
+        pendingData,
+        {
+          headers: {
+            Authorization: null, // or pass a valid token if needed
+          },
+        }
+      );
 
       if (response?.data?.data) {
         dispatch(setPendingLeadData(response.data.data));
@@ -226,7 +245,7 @@ export const pendingLeadData = (pendingData) => {
       dispatch(setPendingLeadLoader(false));
     }
   };
-};  
+};
 
 export const checkEmailIdApi = (emailData) => {
   return async (dispatch) => {
@@ -236,111 +255,116 @@ export const checkEmailIdApi = (emailData) => {
 
       if (response) {
         // dispatch(setService(response?.data?.data));
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
-      showToast("error", error?.response?.data?.message)
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
-export const checkCompanyNameApi = (companyData,isapi=false) => {
+};
+export const checkCompanyNameApi = (companyData, isapi = false) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`check/company-name`, companyData);
+      const response = await axiosInstance.post(
+        `check/company-name`,
+        companyData
+      );
 
       if (response) {
         // dispatch(setService(response?.data?.data));
-        console.log(response?.data?.success,"response")
-        dispatch(setErrorCheckComanyName(response?.data?.success))
-        return response.data
+        console.log(response?.data?.success, "response");
+        dispatch(setErrorCheckComanyName(response?.data?.success));
+        return response.data;
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      dispatch(setErrorCheckComanyName(error?.response?.data?.success))
-      console.log(error?.response?.data?.success,"errorData")
+      dispatch(setErrorCheckComanyName(error?.response?.data?.success));
+      console.log(error?.response?.data?.success, "errorData");
       if (errorData && typeof errorData === "object" && !isapi) {
-        
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
-            
             messages.forEach((msg) => showToast("error", msg));
             if (companyData.company_reg_number) {
               dispatch(fetchCompanyDetails(companyData.company_reg_number));
             }
           } else {
-            
             showToast("error", messages);
           }
         });
       } else {
-        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
-        
-        dispatch(setErrorMessage(error?.response?.data?.message))
+        showToast(
+          "error",
+          error?.response?.data?.message || "Register failed. Please try again."
+        );
+
+        dispatch(setErrorMessage(error?.response?.data?.message));
       }
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
+};
 
 export const checkCompanyNameWithoutRegApi = (companyData) => {
-  
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`check/company-name-without-reg`, companyData);
-      
+      const response = await axiosInstance.post(
+        `check/company-name-without-reg`,
+        companyData
+      );
+
       if (response) {
         // dispatch(setService(response?.data?.data));
 
-        return response.data
+        return response.data;
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      
-      if (errorData && typeof errorData === "object" ) {
-        
+
+      if (errorData && typeof errorData === "object") {
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
-            
             messages.forEach((msg) => showToast("error", msg));
-            
           } else {
-            
             showToast("error", messages);
           }
         });
       } else {
-        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
-        
-        dispatch(setErrorMessage(error?.response?.data?.message))
+        showToast(
+          "error",
+          error?.response?.data?.message || "Register failed. Please try again."
+        );
+
+        dispatch(setErrorMessage(error?.response?.data?.message));
       }
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
+};
 
 export const checkPhoneNumberApi = (phoneData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`check/phone-number`, phoneData);
+      const response = await axiosInstance.post(
+        `check/phone-number`,
+        phoneData
+      );
 
       if (response) {
         // dispatch(setService(response?.data?.data));
-        return response.data
+        return response.data;
       }
     } catch (error) {
-   const errorData = error?.response?.data?.message;
-  
+      const errorData = error?.response?.data?.message;
 
       if (errorData && typeof errorData === "object") {
-
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
             messages.forEach((msg) => showToast("error", msg));
@@ -349,35 +373,39 @@ export const checkPhoneNumberApi = (phoneData) => {
           }
         });
       } else {
-        showToast("error", error?.response?.data?.message || "Register failed. Please try again.");
-        dispatch(setErrorMessage(error?.response?.data?.message))
+        showToast(
+          "error",
+          error?.response?.data?.message || "Register failed. Please try again."
+        );
+        dispatch(setErrorMessage(error?.response?.data?.message));
       }
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
+};
 
 export const checkAddressApi = (addressData) => {
   return async (dispatch) => {
     dispatch(setsearchServiceLoader(true));
     try {
-      const response = await axiosInstance.post(`check/company-location`, addressData);
+      const response = await axiosInstance.post(
+        `check/company-location`,
+        addressData
+      );
 
       if (response) {
         // dispatch(setService(response?.data?.data));
-        return response.data
+        return response.data;
       }
     } catch (error) {
       //   dispatch(setAuthError(error?.response?.data?.message));
-      showToast("error", error?.response?.data?.message)
+      showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
   };
-}
-
-
+};
 
 const findJobSlice = createSlice({
   name: "findJobs",
@@ -395,7 +423,7 @@ const findJobSlice = createSlice({
     setAvailableService(state, action) {
       state.service = action.payload;
     },
-     setHasPopulatedFromCompany: (state, action) => {
+    setHasPopulatedFromCompany: (state, action) => {
       state.hasPopulatedFromCompany = action.payload;
     },
     setsearchServiceLoader(state, action) {
@@ -409,24 +437,33 @@ const findJobSlice = createSlice({
     },
     setRegisterToken(state, action) {
       state.registerToken = action.payload;
-      safeLocalStorage.setItem("registerTokens", JSON.stringify(action.payload))
+      safeLocalStorage.setItem(
+        "registerTokens",
+        JSON.stringify(action.payload)
+      );
     },
     setSelectedServiceId(state, action) {
       state.selectedServiceId = action.payload;
-      state.selectedServiceFormData.service_id = [action.payload]
+      state.selectedServiceFormData.service_id = [action.payload];
     },
     setSelectedServiceFormData(state, action) {
-      state.selectedServiceFormData =  { ...state.selectedServiceFormData, ...action.payload };
+      state.selectedServiceFormData = {
+        ...state.selectedServiceFormData,
+        ...action.payload,
+      };
     },
     setselectedServices(state, action) {
       state.selectedServices = action.payload;
     },
-     setRegisterData(state, action) {
+    setRegisterData(state, action) {
       state.registerData = action.payload;
-      safeLocalStorage.setItem("registerDataToken", JSON.stringify(action.payload))
+      safeLocalStorage.setItem(
+        "registerDataToken",
+        JSON.stringify(action.payload)
+      );
     },
-    setErrorMessage(state,action) {
-      state.errorMessage = action.payload
+    setErrorMessage(state, action) {
+      state.errorMessage = action.payload;
     },
     setErrorCheckComanyName(state, action) {
       state.errorCheckComanyName = action.payload;
@@ -434,84 +471,82 @@ const findJobSlice = createSlice({
     setCategoriesListLoader(state, action) {
       state.categoriesListLoader = action.payload;
     },
-    setCategoriesList(state,action) {
-      state.CategoriesList = action.payload
+    setCategoriesList(state, action) {
+      state.CategoriesList = action.payload;
     },
     setAllServiceList(state, action) {
       state.allServiceList = changeSequenceServices(action.payload, 2);
     },
-    setPendingLeadLoader(state,action){
-state.pendingLoader = action.payload;
+    setPendingLeadLoader(state, action) {
+      state.pendingLoader = action.payload;
     },
-    setPendingLeadData(state,action){
-      state.pendingLead = action.payload
+    setPendingLeadData(state, action) {
+      state.pendingLead = action.payload;
     },
-    setbuyerRegisterFormData(state,action){
-      state.buyerRegisterFormData = {...state.buyerRegisterFormData,...action.payload}
+    setbuyerRegisterFormData(state, action) {
+      state.buyerRegisterFormData = {
+        ...state.buyerRegisterFormData,
+        ...action.payload,
+      };
     },
-    setCountry(state,action){
-      state.country = action.payload
+    setCountry(state, action) {
+      state.country = action.payload;
     },
-    setCity(state,action) {
-      state.city = action.payload
+    setCity(state, action) {
+      state.city = action.payload;
     },
-    setPostalCode(state,action){
-      state.postalcode = action.payload
+    setPostalCode(state, action) {
+      state.postalcode = action.payload;
     },
-    clearBuyerRegisterFormData(state,action){
-    state.buyerRegisterFormData={
-        email:"",
-        name:'',
-        phone:""
-          }
+    clearBuyerRegisterFormData(state, action) {
+      state.buyerRegisterFormData = {
+        email: "",
+        name: "",
+        phone: "",
+      };
     },
-    setAuthToken(state,action){
-    
-      if(!action.payload){
-        state.authToken=state.registerToken
-      }
-      else{
-        state.authToken=action.payload;
+    setAuthToken(state, action) {
+      if (!action.payload) {
+        state.authToken = state.registerToken;
+      } else {
+        state.authToken = action.payload;
         // safeLocalStorage.setItem("registerDataToken", JSON.stringify(action.payload))
       }
     },
     clearAuthToken(state) {
-state.authToken = null
+      state.authToken = null;
     },
-    clearServiceFormData(state,action){
-      state.selectedServiceFormData={
- 
-          miles1: "30",
-          postcode: null,
-          cities:null,
-          coordinates:[],
-          nation_wide: 0,
-          name: "",
-          email: "",
-          password: "",
-          phone: "",
-          company_name: "",
-          company_size: null,
-          company_sales_team: null,
-          company_website: "",
-          is_company_website: 1,
-          new_jobs: null,
-          social_media: null,
-          address: "",
-          state: "",
-          city: "",
-          zipcode: "",
-          is_zipcode: 1,
-          suite: "",
-          service_id: [],
-          auto_bid: 1,
-          miles2: "30",
-          company_reg_number:"",
-          validPostCode:false
-    
-      }
-    }
-
+    clearServiceFormData(state, action) {
+      state.selectedServiceFormData = {
+        miles1: "30",
+        postcode: null,
+        cities: null,
+        coordinates: [],
+        nation_wide: 0,
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+        company_name: "",
+        company_size: null,
+        company_sales_team: null,
+        company_website: "",
+        is_company_website: 1,
+        new_jobs: null,
+        social_media: null,
+        address: "",
+        state: "",
+        city: "",
+        zipcode: "",
+        is_zipcode: 1,
+        suite: "",
+        service_id: [],
+        auto_bid: 1,
+        miles2: "30",
+        company_reg_number: "",
+        validPostCode: false,
+      };
+    },
   },
 });
 
@@ -543,6 +578,6 @@ export const {
   setPostalCode,
   setErrorCheckComanyName,
   setHasPopulatedFromCompany,
-  clearAuthToken
+  clearAuthToken,
 } = findJobSlice.actions;
 export default findJobSlice.reducer;

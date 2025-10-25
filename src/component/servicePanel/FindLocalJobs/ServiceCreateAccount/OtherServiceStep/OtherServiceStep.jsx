@@ -43,9 +43,7 @@ const OtherServiceStep = ({
   const inputRef = useRef(null);
   const [expandedRadius, setExpandedRadius] = useState(0);
   const debounceTimer = useRef(null);
-
-  console.log(inputRef, "inputref");
-  console.log(formData, "form");
+  console.log(Input, "Inputtt");
 
   const {
     service,
@@ -74,12 +72,53 @@ const OtherServiceStep = ({
   }, [Input, dispatch]);
 
   // Handle postcode input with debounce for getCityName API
-  const handlePostcode2Change = (e) => {
+  const handlePostcode2Change = async (e) => {
+    const postcodeValue = e.target.value;
+    console.log(e.target.value, "e.target.value");
+
+    setFormData((prev) => ({ ...prev, postcode2: postcodeValue }));
+    // setIsPostcodeFromSuggestion(false);
+    dispatch(
+      setFormData({
+        validPostCode2: false,
+      })
+    );
+
     const { name, value } = e.target;
+
+    //   debounceTimer.current = setTimeout(() => {
+    //   if (value && value.length >= 3) {
+    //     fetchCityFromPostcode(value);
+    //   }
+    // }, 1000);
+
+    // if (postcodeValue.length >= 3) {
+    //   try {
+    //     const res = await dispatch(
+    //       fetchCityFromPostcode(postcodeValue)
+    //     ).unwrap();
+    //     if (res?.city) {
+    //       setFormData((prev) => ({ ...prev, city: res.city }));
+    //       // setIsPostcodeFromSuggestion(true);
+    //       dispatch(
+    //         setFormData({
+    //           validPostCode2: true,
+    //         })
+    //       );
+    //     }
+    //   } catch (err) {
+    //     console.error("Error fetching city:", err);
+    //   }
+    // }
 
     // Update form data immediately
     if (handleInputChange) handleInputChange(e);
-    setIsPostcodeFromSuggestion(false);
+    // setIsPostcodeFromSuggestion(false);
+    dispatch(
+      setFormData({
+        validPostCode2: false,
+      })
+    );
 
     // Clear previous timer
     if (debounceTimer.current) {
@@ -91,7 +130,7 @@ const OtherServiceStep = ({
       if (value && value.length >= 3) {
         fetchCityFromPostcode(value);
       }
-    }, 800);
+    }, 1000);
   };
 
   // Fetch city from postcode using getCityName API
@@ -103,25 +142,23 @@ const OtherServiceStep = ({
       const result = await dispatch(getCityName({ postcode: postcode }));
 
       let cityName, postcodeFromApi;
-      console.log(result);
       // Check different response structures
       if (result?.success) {
         cityName = result.data?.city;
         postcodeFromApi = result.data?.postcode;
       }
 
-      console.log("Extracted - City:", cityName, "Postcode:", postcodeFromApi);
-
       if (cityName) {
         // Update form data with the API response
         dispatch(
           setFormData({
             postcode2: postcodeFromApi || postcode,
+            validPostCode2: true,
             coordinates2: {}, // Empty coordinates since we don't have them from the API
           })
         );
 
-        setIsPostcodeFromSuggestion(true);
+        // setIsPostcodeFromSuggestion(true);
         showToast("success", "Location found successfully!");
       } else {
         showToast("error", "No city found for this postcode!");
@@ -182,7 +219,6 @@ const OtherServiceStep = ({
     }
 
     setErrors(newErrors);
-    console.log(newErrors, Object.keys(newErrors).length, "newErrors");
     return Object.keys(newErrors).length === 0;
   };
   useEffect(() => {
@@ -213,13 +249,23 @@ const OtherServiceStep = ({
   }, []);
 
   const handleSubmit = () => {
-    if (selectedServices.length > 0 && !isPostcodeFromSuggestion) {
+    const postcodeValue = formData?.postcode2?.trim();
+    // if (selectedServices.length > 0) {
+    //   showToast("error", "Please enter a valid postcode!");
+    //   return;
+    // }
+
+    if (!postcodeValue) {
+      showToast("error", "Please enter your postcode!");
+      return;
+    }
+
+    if (!formData?.validPostCode2 && postcodeValue.length < 3) {
       showToast("error", "Please enter a valid postcode!");
       return;
     }
 
     let apicontion = validateForm();
-    console.log(validateForm(), "pp");
     // Ensure selectedServices is an array and map IDs
     const serviceIds = Array.isArray(selectedServices)
       ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
@@ -260,7 +306,6 @@ const OtherServiceStep = ({
     delete payload.is_zipcode;
     delete payload.state;
     // delete payload.password
-    console.log(payload, formData, "payload");
 
     if (apicontion) {
       dispatch(registerUserData(payload)).then((result) => {
@@ -322,6 +367,17 @@ const OtherServiceStep = ({
       return newRadius;
     });
   };
+
+  useEffect(() => {
+    if (formData?.postcode2) {
+      // setIsPostcodeFromSuggestion(true);
+      dispatch(
+        setFormData({
+          validPostCode2: true,
+        })
+      );
+    }
+  }, [formData?.postcode2]);
 
   return (
     <div className={styles.parentContainer}>
@@ -456,7 +512,7 @@ const OtherServiceStep = ({
                   errors.postcode2 ? styles.errorBorder : ""
                 } ${isLoading ? styles.loading : ""}`}
                 name="postcode2"
-                value={formData?.postcode2 || formData?.postcode || ""}
+                value={formData?.postcode2 || ""}
                 onChange={handlePostcode2Change}
                 disabled={!disableWithService || isLoading}
               />
