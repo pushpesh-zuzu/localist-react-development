@@ -1,5 +1,4 @@
 .aboutContainer {
-  margin-top: 34px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -77,9 +76,9 @@
     width: 100%;
   }
 
-  .aboutContainer {
+  /* .aboutContainer {
     margin-top: 24px;
-  }
+  } */
 
   .aboutContent {
     gap: 16px;

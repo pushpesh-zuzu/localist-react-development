@@ -245,9 +245,12 @@
     font-size: 14px;
   }
 
-  .rightContainer,
+  .rightContainer {
+    padding: 15px 15px 15px 15px;
+    width: -webkit-fill-available;
+  }
   .container {
-    padding: 70px 15px 15px 15px;
+    padding-top: 70px;
     width: -webkit-fill-available;
   }
 }
