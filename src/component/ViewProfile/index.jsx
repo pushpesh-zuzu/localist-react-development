@@ -131,13 +131,25 @@ const ViewProfiles = () => {
     }
 
     // Scroll to the target section
-    if (targetRef.current && rightContainerRef.current) {
-      const container = rightContainerRef.current;
-      const targetPosition = targetRef.current.offsetTop;
+    // if (targetRef.current && rightContainerRef.current) {
+    //   const container = rightContainerRef.current;
+    //   const targetPosition = targetRef.current.offsetTop;
 
-      const OFFSET = 40;
+    //   const OFFSET = 40;
 
-      container.scrollTo({
+    //   container.scrollTo({
+    //     top: targetPosition - OFFSET,
+    //     behavior: "smooth",
+    //   });
+    // }
+
+    if (targetRef.current) {
+      const targetPosition =
+        targetRef.current.getBoundingClientRect().top + window.scrollY;
+
+      const OFFSET = 140; // adjust for sticky header if needed
+
+      window.scrollTo({
         top: targetPosition - OFFSET,
         behavior: "smooth",
       });

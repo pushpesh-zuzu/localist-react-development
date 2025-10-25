@@ -258,12 +258,12 @@
   position: relative;
   top: 0;
   z-index: 9;
-  height: 80vh;
-  overflow-x: auto;
+  /* height: 80vh;
+  overflow-x: auto; */
 }
 .tabContainers {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 100px;
   display: flex;
   flex-wrap: wrap;
   gap: 36px;

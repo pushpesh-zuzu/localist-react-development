@@ -12,8 +12,8 @@
 .aboutContent {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  margin-top: 15px;
+  gap: 16px;
+  /* margin-top: 15px; */
   /* border-bottom: 2px solid #e0e0e0; */
 }
 
