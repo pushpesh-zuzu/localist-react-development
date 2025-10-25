@@ -3,7 +3,9 @@ import styles from "./Videos.module.css";
 // import playIcon from "../../assets/Images/playIcon.svg"; // 🧩 make sure you have a play icon in assets
 
 const Videos = ({ details }) => {
-  let data = details?.photos?.company_youtube_link;
+  let data =
+    details?.photos?.company_youtube_link ||
+    details?.details?.company_youtube_link;
 
   if (typeof data === "string") {
     try {
