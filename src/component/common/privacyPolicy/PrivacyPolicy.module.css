@@ -93,9 +93,9 @@
   color: #000;
   line-height: 1.2;
   margin: 24px 0 12px;
-  display: flex;
+  /* display: flex;
   align-items: flex-start;
-  gap: 8px;
+  gap: 8px; */
 }
 
 .paraNumber {
@@ -110,9 +110,9 @@
   margin: 24px 0 12px;
   /* display: grid;
   grid-template-columns: 48px 1fr; */
-  display: flex;
+  /* display: flex;
   gap: 8px;
-  flex-direction: row;
+  flex-direction: row; */
 }
 .sectionHeadingH4 {
   font-size: 24px;
@@ -123,9 +123,9 @@
   /* display: grid;
   grid-template-columns: 32px 1fr;
   gap: 10px; */
-  display: flex;
+  /* display: flex;
   gap: 8px;
-  flex-direction: row;
+  flex-direction: row; */
 }
 
 /* .sectionHeadingH5.fullWidth {
@@ -377,7 +377,7 @@
 
   .sectionHeading {
     /* font-size: 28px; */
-    flex-direction: row;
+    /* flex-direction: row; */
     gap: 5px;
     margin: 28px 0 18px;
   }

@@ -2,7 +2,7 @@ import styles from "../PrivacyPolicy.module.css";
 export const professionalsTermsData = [
   {
     type: "p",
-    text: "This Privacy Policy was most recently updated on <strong>29 August 2025.<strong/>",
+    text: "This Privacy Policy was most recently updated on <strong>29 August 2025.</strong>",
   },
   {
     type: "p",
@@ -432,11 +432,11 @@ export const professionalsTermsData = [
   },
   {
     type: "liNonBold",
-    text: "You can review Google’s practices at: <a href='https://www.google.com/policies/privacy/partners/' style='color:#00afe3;'>https://www.google.com/policies/privacy/partners/</a>",
+    text: "You can review Google's practices at: <a href='https://www.google.com/policies/privacy/partners/' target='_blank' rel='noopener noreferrer' style='color:#00afe3;'>https://www.google.com/policies/privacy/partners/</a>",
   },
   {
     type: "liNonBold",
-    text: "You can opt out by installing the Google Analytics opt-out browser add-on available at: <a href='https://tools.google.com/dlpage/gaoptout' style='color:#00afe3;'>https://tools.google.com/dlpage/gaoptout</a>",
+    text: "You can opt out by installing the Google Analytics opt-out browser add-on available at: <a href='https://tools.google.com/dlpage/gaoptout' target='_blank' rel='noopener noreferrer' style='color:#00afe3;'>https://tools.google.com/dlpage/gaoptout</a>",
   },
   {
     type: "h5",
@@ -553,7 +553,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "5",
+    number: "5.",
     text: "Security of Your Personal Data",
   },
   {
@@ -601,7 +601,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "6",
+    number: "6.",
     text: "Third-Party Websites and Services",
   },
   {
@@ -708,7 +708,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "8",
+    number: "8.",
     text: "Marketing",
   },
   {
@@ -765,7 +765,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "9",
+    number: "9.",
     text: "Your Rights and Choices",
   },
   {
@@ -865,7 +865,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "10",
+    number: "10.",
     text: "Data Retention",
   },
   {
@@ -926,7 +926,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "11",
+    number: "11.",
     text: "Your Data Protection Rights",
   },
   {
@@ -1021,7 +1021,7 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "12",
+    number: "12.",
     text: "Call Recording",
   },
   {
@@ -1077,7 +1077,8 @@ const PrivacyContentForProfession = () => {
           case "h3":
             return (
               <h3 key={index} className={styles.sectionHeading}>
-                <span>{block?.number}</span> {block.text}
+                <span style={{ marginRight: "6px" }}>{block?.number}</span>{" "}
+                <span>{block.text}</span>
               </h3>
             );
           //   case "h3":
@@ -1102,7 +1103,7 @@ const PrivacyContentForProfession = () => {
                 }`}
                 // style={{marginTop :block?.mtZero??'0px !important',marginBottom :block?.mbZero??'0px !important'}}
               >
-                <span>{block?.number}</span>
+                <span style={{ marginRight: "6px" }}>{block?.number}</span>
                 <span>{block?.text}</span>
               </h4>
             );
@@ -1115,7 +1116,7 @@ const PrivacyContentForProfession = () => {
                 }`}
                 // style={{marginTop :block?.mtZero??'0px !important',marginBottom :block?.mbZero??'0px !important'}}
               >
-                <span>{block?.number}</span>
+                <span style={{ marginRight: "6px" }}>{block?.number}</span>
                 <span>{block?.text}</span>
               </h5>
             );
@@ -1175,9 +1176,15 @@ const PrivacyContentForProfession = () => {
               <ul
                 key={index}
                 className={styles.list}
-                style={{ paddingBottom: block?.spacing && "16px" }}
+                style={{
+                  paddingBottom: block?.spacing && "16px",
+                  wordBreak: "break-word",
+                }}
               >
-                <li dangerouslySetInnerHTML={{ __html: block.text }} />
+                <li
+                  style={{ wordBreak: "break-word" }}
+                  dangerouslySetInnerHTML={{ __html: block.text }}
+                />
               </ul>
             );
 
