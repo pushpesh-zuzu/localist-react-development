@@ -107,11 +107,11 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
-          <Link to={`/${lang}/${country}`} className={styles.link}>
-            <div className={styles.logo}>
-              <img src={logo} alt="Localist Logo" />
-            </div>
-          </Link>
+          {/* <Link to={`/${lang}/${country}`} className={styles.link}> */}
+          <div className={styles.logo}>
+            <img src={logo} alt="Localist Logo" />
+          </div>
+          {/* </Link> */}
           <p className={styles.footerDesc}>
             Localists is the world’s fastest-growing marketplace, and we have no
             intention of slowing down any time soon.

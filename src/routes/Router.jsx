@@ -297,6 +297,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      { path: "privacy-policy/", element: <PrivacyPolicy /> },
       ...levelOnePagesRoutes.map(({ path, Component }) => ({
         path,
         element: (
@@ -461,7 +462,6 @@ const routes = [
           </ProtectedRoute>
         ),
       },
-      // { path: "/privacy-policy", element: <PrivacyPolicy /> },
       {
         path: "sellers/dashboard",
         element: (
