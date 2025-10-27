@@ -173,6 +173,10 @@ export const professionalsTermsData = [
     number: "2.1.1 ",
     text: "Information you provide directly to us",
   },
+   {
+    type: "p",
+    text: "We will use personal data you submit to:",
+  },
   {
     type: "p",
     text: "2.1.1.1 Fulfil our obligations arising from the Quote Requests you respond to and provide any information you request, which may include disclosing your information to Customer so they may contact you.",
