@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./PrivacyPolicy.module.css";
 import { useLocation, Link } from "react-router-dom";
 import PrivacyContentForProfession from "./privacyContentForProfession/PrivacyContentForProfession";
-// import ContentForProfessonal from "./ContentForProfessonal";
-// import ContentForConsumers from "./ContentForConsumers";
+import PrivacyContentForCustomer from "./privacyContentForCustomer/PrivacyContentForCustomer";
 const PrivacyPolicy = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("professionals");
 
-  // Set active tab from URL hash (#customers / #professionals)
   useEffect(() => {
     if (location.hash === "#professionals") {
       setActiveTab("professionals");
@@ -46,12 +44,10 @@ const PrivacyPolicy = () => {
         </ul>
       </nav>
 
-      {/* Content Container */}
       <div className={styles.contentContainer}>
         <div className={styles.contentWrapper}>
           {activeTab === "customers" ? (
-            // <ContentForConsumers />
-            "customer"
+            <PrivacyContentForCustomer />
           ) : (
             <PrivacyContentForProfession />
           )}

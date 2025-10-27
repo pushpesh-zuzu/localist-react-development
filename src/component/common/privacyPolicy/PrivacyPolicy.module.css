@@ -150,30 +150,30 @@
   /* margin-bottom: 16px; */
 }
 
-.paragraph.withNumber {
+/* .paragraph.withNumber {
   display: grid;
   grid-template-columns: 48px 1fr;
   gap: 10px;
   align-items: start;
-}
+} */
 
-.paragraph.indented {
+/* .paragraph.indented {
   margin-left: 6.5%;
-}
+} */
 
-.list {
+/* .list {
   font-size: 18px;
   font-weight: 400;
   line-height: 32px;
   color: #333;
   margin: 0 0 0px 5.5%;
   padding: 0;
-}
+} */
 
-.list li {
-  /* margin-bottom: 8px; */
+/* .list li {
+  margin-bottom: 8px;
   margin: 0px;
-}
+} */
 
 .numberedParagraph {
   font-size: 18px;
@@ -217,16 +217,16 @@
 }
 
 /* Lists */
-.contactList {
+/* .contactList {
   margin: 16px 0;
   padding-left: 20px;
-}
+} */
 
-.contactList li {
+/* .contactList li {
   margin-bottom: 8px;
   font-size: 18px;
   line-height: 1.6;
-}
+} */
 
 /* Sub-clauses */
 .subClause {
@@ -249,68 +249,62 @@
 }
 
 /* Tables */
-.tableWrapper {
+/* .tableWrapper {
   display: flex;
-  /* justify-content: center; */
   margin: 20px 0;
   overflow-x: auto;
   width: 100%;
-}
+} */
 
-.tableWrapper {
+/* .tableWrapper {
   display: flex;
-  /* justify-content: center; */
   margin: 20px 0;
   font-family: "Poppins", sans-serif;
-  overflow-x: auto; /* Mobile me scroll allow karega */
-}
+  overflow-x: auto; 
+} */
 
-.table {
-  border-collapse: separate; /* collapse hata kar explicitly separate kar do */
+/* .table {
+  border-collapse: separate; 
   border-spacing: 12px;
   width: 100%;
-  /* max-width: 65%; Half screen on desktop */
-  /* background: #fff; */
-  min-width: 600px; /* Mobile me min width fix kar diya */
+  min-width: 600px;
   font-size: 18px;
-}
+} */
 
-.table th,
+/* .table th,
 .table td {
-  /* border: 1px solid #ccc; */
   padding: 8px;
   text-align: left;
   vertical-align: top;
   border-radius: 4px;
   background-color: #f3f3f6;
-  word-break: break-word; /* Long text wrap ho jaye */
-}
+  word-break: break-word;
+} */
 
-.table th {
-  font-weight: 700; /* Headers bold */
+/* .table th {
+  font-weight: 700;
   background: #f5f5f5;
   text-align: center;
-}
+} */
 
-.firstCol {
-  /* font-weight: 600; First column bold */
+/* .firstCol {
   width: 50%;
   font-weight: 600;
-}
+} */
 
 /* Important Notice */
-.importantNotice {
+/* .importantNotice {
   background-color: #fff3cd;
   border: 1px solid #ffeaa7;
   padding: 20px;
   margin: 20px 0;
   border-radius: 6px;
-}
+} */
 
-.important {
+/* .important {
   color: #856404;
   font-weight: 600;
-}
+} */
 
 /* Responsive Design */
 
@@ -344,18 +338,18 @@
     font-size: 20px;
   }
 
+  /* .table */
+  /* .list, */
+  /* .contactList li, */
   .paragraph,
-  .numberedParagraph,
-  .list,
-  .contactList li,
-  .table {
+  .numberedParagraph {
     font-size: 18px;
     line-height: 1.6;
   }
 
-  .paragraph.withNumber {
+  /* .paragraph.withNumber {
     grid-template-columns: 40px 1fr;
-  }
+  } */
 
   .navLink {
     padding: 20px 24px;
@@ -406,28 +400,28 @@
     margin: 16px 0 12px;
   }
 
+  /* .list, */
+  /* .contactList li, */
+  /* .table */
   .paragraph,
-  .numberedParagraph,
-  .list,
-  .contactList li,
-  .table {
+  .numberedParagraph {
     font-size: 16px;
     line-height: 1.5;
   }
 
-  .paragraph.withNumber {
+  /* .paragraph.withNumber {
     grid-template-columns: 24px 1fr;
     gap: 16px;
-  }
-
+  } */
+  /* 
   .paragraph.indented {
     margin-left: 0;
     padding-left: 40px;
-  }
+  } */
 
-  .list {
+  /* .list {
     margin-left: 20px;
-  }
+  } */
 
   .nav {
     flex-direction: column;
@@ -451,12 +445,12 @@
     padding: 0 15px;
   }
 
-  .tableWrapper {
+  /* .tableWrapper {
     margin: 16px -15px;
     width: calc(100% + 30px);
-  }
+  } */
 
-  .table {
+  /* .table {
     min-width: 500px;
     font-size: 16px;
   }
@@ -464,7 +458,7 @@
   .table th,
   .table td {
     padding: 8px 10px;
-  }
+  } */
 }
 
 /* Small Mobile (375px and below) */
@@ -489,9 +483,9 @@
   }
 
   .paragraph,
+  /* .contactList li, */
   .numberedParagraph,
-  .list,
-  .contactList li {
+  /* .list, */ {
     font-size: 16px;
   }
 
