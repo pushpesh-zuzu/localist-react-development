@@ -1,3 +1,17 @@
+.parent_container {
+  display: flex;
+  padding: 11px 15px;
+  border: 1px solid #d9d9d9;
+  justify-content: space-between;
+}
+
+.container_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 11px 15px;
+}
+
 .container {
   /* background-color: #e3f6fc; */
   padding: 11px 15px;
@@ -9,6 +23,13 @@
   width: 100%;
   max-width: 1000px;
   border: 1px solid #d9d9d9;
+}
+
+.visaCard_wrapper {
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .visaCard {
@@ -28,12 +49,53 @@
   font-size: 18px;
   font-weight: 600;
   text-align: right;
-  flex: 1;
-  min-width: 200px;
+  /* flex: 1; */
   cursor: pointer !important;
 }
 .textRight {
   font-size: 16px;
+}
+
+.remove_actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  /* margin-top: 8px; */
+  cursor: pointer;
+  font-size: 14px;
+  color: #1890ff;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  /* margin-top: 8px; */
+  cursor: pointer;
+  font-size: 14px;
+  color: #1890ff;
+}
+
+.actionText {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.actionTextRemove {
+  cursor: pointer;
+  transition: color 0.2s ease;
+  color: red !important;
+}
+
+.actionText:hover {
+  color: #40a9ff;
+  text-decoration: underline;
+}
+
+.separator {
+  color: #999;
 }
 
 /* Responsive Styles */

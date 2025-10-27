@@ -94,6 +94,44 @@ export const AddSellerCardDetailsApi = (cardData) => {
     }
   };
 };
+
+export const removeCardDetailsApi = (cardData) => {
+  return async (dispatch) => {
+    dispatch(setSellerBillingLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/seller-card-remove`,
+        cardData
+      );
+      if (response) {
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerBillingLoader(false));
+    }
+  };
+};
+export const makePrimaryApi = (cardData) => {
+  return async (dispatch) => {
+    dispatch(setSellerBillingLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/seller-card-make-primary`,
+        cardData
+      );
+      console.log(response, "response123");
+      if (response) {
+        return response?.data;
+      }
+    } catch (error) {
+      showToast("error", error?.response?.data?.message);
+    } finally {
+      dispatch(setSellerBillingLoader(false));
+    }
+  };
+};
 export const getInvoiceBillingListApi = () => {
   return async (dispatch) => {
     try {
