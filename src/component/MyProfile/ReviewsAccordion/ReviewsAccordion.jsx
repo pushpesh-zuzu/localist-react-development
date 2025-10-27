@@ -352,7 +352,7 @@ const ReviewsAccordion = ({ details }) => {
         </div>
       )}
 
-      <div className={styles.fieldGroup}>
+      {/* <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
           Import Google Reviews
@@ -368,23 +368,13 @@ const ReviewsAccordion = ({ details }) => {
             value={googleLink}
             onChange={(e) => setGoogleLink(e.target.value)}
           />
-          {/* <button className={styles.importBtn} onClick={handleLogin}>
-            Import Reviews
-          </button> */}
-          {/* <GoogleLogin
-            onSuccess={handleSuccess}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          /> */}
+         
           <button className={styles.importBtn} onClick={() => login()}>
             Login with Google
           </button>
-          {/* <button className={styles.importBtn} onClick={handleGoogleLogin}>
-            Import Reviews
-          </button> */}
+         
         </div>
-      </div>
+      </div> */}
 
       <label className={styles.reviewsLabel}>Localists.com Reviews</label>
       {/* <div className={styles.localistBox}>
@@ -413,7 +403,7 @@ const ReviewsAccordion = ({ details }) => {
         )}
       </div>
 
-      <div className={styles.fieldGroup}>
+      {/* <div className={styles.fieldGroup}>
         <label className={styles.fbLabel}>
           <img src={FacebookLogo} alt="Facebook" className={styles.fbIcon} />
           Import Facebook & Instagram Reviews
@@ -437,8 +427,8 @@ const ReviewsAccordion = ({ details }) => {
             Import Reviews
           </button>
         </div>
-      </div>
-      <div className={styles.reviewsContainer}>
+      </div> */}
+      {/* <div className={styles.reviewsContainer}>
         <div className={styles.arrowIconsWrapper}>
           <span className={styles.leftArrowWrapper}>
             <img
@@ -500,7 +490,7 @@ const ReviewsAccordion = ({ details }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* <div className={styles.buttonRow}>
         <button className={styles.cancelBtn}>Cancel</button>

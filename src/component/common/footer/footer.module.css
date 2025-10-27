@@ -32,12 +32,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  max-width: 198px;
+  max-height: 48px;
 }
 
 .footerLeft .logo img {
   width: 198px;
   height: 48px;
-  cursor: pointer !important;
+  /* cursor: pointer !important; */
 }
 
 .footerLeft img {
@@ -344,7 +346,7 @@
 
   .footerLeft .logo img {
     width: 175px;
-    cursor: pointer !important;
+    /* cursor: pointer !important; */
   }
 
   .contactMthods {
@@ -385,7 +387,7 @@
 
   .footerLeft .logo img {
     width: 185px;
-    cursor: pointer !important;
+    /* cursor: pointer !important; */
   }
 
   .contactMthods p {
@@ -425,7 +427,7 @@
   .footerLeft .logo img {
     width: 168px;
     height: 38px;
-    cursor: pointer !important;
+    /* cursor: pointer !important; */
   }
 
   .contactSection button {
