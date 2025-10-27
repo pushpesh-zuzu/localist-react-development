@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
 import PostcodeSearch from "./steps/PostcodeSearch/PostcodeSearch";
 import QuestionAnswerMultiStep from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep";
-import { questionAnswerData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
+import { questionAnswerData, setbuyerRequestData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
@@ -164,6 +164,8 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   useEffect(() => {
     if (questionanswerData.length > 0) {
       setIsLoadingQuestions(false);
+      dispatch(setbuyerRequestData({ service_id: 51 }));
+
     }
   }, [questionanswerData]);
 

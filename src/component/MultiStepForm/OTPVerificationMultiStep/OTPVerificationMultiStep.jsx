@@ -108,7 +108,7 @@ const OTPVerificationMultiStep = ({
 
         // ✅ createRequestData call after OTP successfully verified
         const formData = new FormData();
-        formData.append("service_id", buyerRequest?.service_id || 43); // later remove this static service id
+        formData.append("service_id", buyerRequest?.service_id); 
         formData.append("postcode", buyerRequest?.postal_code || "");
         formData.append("city", citySerach || "");
         formData.append("phone", buyerRequest?.phone);
