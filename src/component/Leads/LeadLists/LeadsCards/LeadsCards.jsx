@@ -600,11 +600,11 @@ const LeadsCards = ({ enoughCredit }) => {
                     </p> */}
                             <div className={styles.mainText}>
                               <div>ACT FAST</div>
-                              <span>{item?.view_count} Professionals</span>{" "}
+                              {/* <span>{item?.view_count} Professionals</span>{" "}
                               <span className={styles.desktopOnlyBreak}>
                                 <br />
                               </span>{" "}
-                              have viewed this lead
+                              have viewed this lead */}
                             </div>
                           </div>
                         </div>

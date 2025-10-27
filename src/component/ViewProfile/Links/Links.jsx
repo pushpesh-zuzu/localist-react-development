@@ -10,23 +10,28 @@ const Links = ({ details }) => {
     return link.replace(/(^\w+:|^)\/\//, "");
   };
 
-  const renderLink = (link, color) => (
-    <li className={styles.linkItem}>
-      <img src={LinkIcon} alt="link icon" className={styles.icon} />
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          color: color,
-          textDecoration: "none",
-          fontWeight: "bold",
-        }}
-      >
-        {cleanLink(link)}
-      </a>
-    </li>
-  );
+  const renderLink = (linksData, color) => {
+    if (!linksData) return null;
+    const links = linksData.split(",").map((link) => link.trim());
+
+    return links.map((link, index) => (
+      <li key={index} className={styles.linkItem}>
+        <img src={LinkIcon} alt="link icon" className={styles.icon} />
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color,
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          {cleanLink(link)}
+        </a>
+      </li>
+    ));
+  };
 
   return (
     <div className={styles.Links_Container}>

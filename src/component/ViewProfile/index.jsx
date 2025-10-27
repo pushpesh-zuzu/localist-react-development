@@ -272,14 +272,29 @@ const ViewProfiles = () => {
 
   if (profileData?.about_company) availableTabs.push("About");
   if (profileData?.services?.length > 0) availableTabs.push("Services");
-  if (profileData?.reviews?.length > 0 || profileData?.avg_rating > 0)
-    availableTabs.push("Reviews");
+
+  availableTabs.push("Reviews");
   if (profileData?.accreditations?.length > 0)
     availableTabs.push("Accreditations");
   if (profileData?.questions?.length > 0) availableTabs.push("Q+A's");
   if (profileData?.photos?.length > 0) availableTabs.push("Photos");
   if (profileData?.videos?.length > 0) availableTabs.push("Videos");
-  if (profileData?.links?.length > 0) availableTabs.push("Links");
+  if (
+    profileData?.details?.extra_links.length > 0 ||
+    (!profileData?.details?.fb_link &&
+      profileData?.details?.fb_link?.length > 0) ||
+    (!profileData?.details?.insta_link &&
+      profileData?.details?.insta_link?.length > 0) ||
+    (!profileData?.details?.linkedin_link &&
+      profileData?.details?.linkedin_link?.length > 0) ||
+    (!profileData?.details?.tiktok_link &&
+      profileData?.details?.tiktok_link?.length > 0) ||
+    (!profileData?.details?.twitter_link &&
+      profileData?.details?.twitter_link?.length > 0)
+  )
+    availableTabs.push("Links");
+
+  console.log(profileData?.details?.extra_links, "profileData?.links");
 
   return (
     <>
@@ -484,7 +499,7 @@ const ViewProfiles = () => {
             <TabNav
               activeTab={activeTab}
               onTabClick={handleTabClick}
-              tabs={availableTabs}
+              Tabs={availableTabs}
             />
             {availableTabs.includes("About") && (
               <div ref={aboutRef}>
@@ -498,15 +513,13 @@ const ViewProfiles = () => {
               </div>
             )}
 
-            {availableTabs.includes("Reviews") && (
-              <div ref={reviewsRef}>
-                <ReviewSection
-                  details={profileData}
-                  disableReviewButton={shouldDisableActions}
-                  isFromManualBids={isFromManualBids}
-                />
-              </div>
-            )}
+            <div ref={reviewsRef}>
+              <ReviewSection
+                details={profileData}
+                disableReviewButton={shouldDisableActions}
+                isFromManualBids={isFromManualBids}
+              />
+            </div>
 
             {availableTabs.includes("Accreditations") && (
               <div ref={accrediationRef}>

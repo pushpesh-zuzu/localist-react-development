@@ -344,7 +344,7 @@ const AboutAccordion = ({ details }) => {
     if (formState.company_reg_number) {
       // 2.a company_name required
       if (!formState.company_name) {
-        temp.company_name = "Company name is required";
+        temp.company_name = "Business Profile Name is required";
       }
 
       if (!formState.company_location) {
@@ -574,7 +574,7 @@ const AboutAccordion = ({ details }) => {
             onChange={handleFileChange}
           />
         </div>
-        <label className={styles.label}>Company name</label>
+        <label className={styles.label}>Business Profile Name</label>
         <input
           className={styles.input}
           type="text"

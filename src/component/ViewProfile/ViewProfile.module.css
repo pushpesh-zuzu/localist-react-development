@@ -265,6 +265,7 @@
   overflow-x: auto; */
 }
 .tabContainers {
+  /* width: 100%; */
   position: fixed;
   top: 100px;
   display: flex;
