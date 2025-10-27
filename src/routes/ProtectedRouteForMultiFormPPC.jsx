@@ -11,13 +11,12 @@ import NavigationDetectorDesktop from "../component/common/navigationDetected/Na
  * - On the client, wait until mounted before deciding to redirect.
  * - When unauthenticated, redirect to login and preserve "from" location.
  */
-const ProtectedRoutePPC = ({ children }) => {
+const ProtectedRouteForMultiFormPPC = ({ children }) => {
   const location = useLocation();
   const { userToken } = useSelector((state) => state.auth);
   const { registerToken } = useSelector((state) => state.findJobs);
-  const { requestUserId } = useSelector((state) => state.buyer);
-
   const toastShown = useRef(false);
+
   // Avoid redirecting during server render to prevent hydration mismatches
   const isServer = typeof window === "undefined";
   if (isServer) {
@@ -48,20 +47,7 @@ const ProtectedRoutePPC = ({ children }) => {
     return <Navigate to="/buyers/create" replace state={{ from: location }} />;
   }
 
-  return (
-    <>
-      {requestUserId === null && (
-        <div>
-          {window.innerWidth > 768 && typeof window !== "undefined" ? (
-            <NavigationDetectorDesktop />
-          ) : (
-            <NavigationDetectorWithConfirmations />
-          )}
-        </div>
-      )}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
-export default ProtectedRoutePPC;
+export default ProtectedRouteForMultiFormPPC;

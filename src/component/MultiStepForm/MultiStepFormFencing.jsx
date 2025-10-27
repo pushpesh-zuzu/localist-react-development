@@ -3,7 +3,11 @@ import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
-import { questionAnswerData, setbuyerRequestData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
+import {
+  questionAnswerData,
+  setbuyerRequestData,
+  setBuyerStep,
+} from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
@@ -15,6 +19,8 @@ import { handleScrollToBottom } from "../../utils/scroll";
 import QuestionAnswerMultiStepFence from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence";
 import PostSearchMultiStepFence from "./steps/PostcodeSearch/PostSearchMultiStepFence";
 import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence2";
+import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -46,6 +52,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [isComingFromStep4, setIsComingFromStep4] = useState(false);
+  const [localRequestId, setLocalRequestId] = useState(null);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -145,7 +152,6 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
-  console.log(buyerRequest, "br");
   useEffect(() => {
     if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
       setHasMountedDetector(true);
@@ -155,11 +161,15 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   }, [hasMountedDetector]);
   return (
     <>
-      {/* {window.innerWidth > 768  && typeof window !== "undefined"? (
-              <NavigationDetectorDesktop />
-            ) : (
-              <NavigationDetectorWithConfirmations />
-            )} */}
+      {localRequestId === null && (
+        <div>
+          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
@@ -244,6 +254,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
                   onBack={prevStep}
                   updateNumberStep={updateNumberStep}
                   setUpdateNumberStep={setUpdateNumberStep}
+                  setLocalRequestId={setLocalRequestId}
                 />
               )}
               {/* {updateNumberStep === 1 && buyerStep === 5 && (

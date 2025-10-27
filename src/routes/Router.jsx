@@ -76,6 +76,7 @@ import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
 import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
 import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
+import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -702,61 +703,61 @@ const routes = [
   {
     path: "/:lang/:country/landscaping-multi-form-ppc",
     element: (
-      <ProtectRouteMultiPPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepForm />
         </LocaleRedirect>
-      </ProtectRouteMultiPPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/:lang/:country/landscaping-multi-form-ppc-banner",
     element: (
-      <ProtectRouteMultiPPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepWithImage />
         </LocaleRedirect>
-      </ProtectRouteMultiPPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/:lang/:country/driveways-multi-form-ppc",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFormDriveways />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/:lang/:country/driveways-multi-form-ppc-banner",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepDrivewayWithBanner />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/:lang/:country/fence-multi-form-ppc",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFormFencing />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/:lang/:country/fence-multi-form-ppc-banner",
     element: (
-      <ProtectedRoutePPC>
+      <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFenchWithBanner />
         </LocaleRedirect>
-      </ProtectedRoutePPC>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
 ];

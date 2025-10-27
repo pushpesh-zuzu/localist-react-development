@@ -5,7 +5,11 @@ import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
 import PostcodeSearch from "./steps/PostcodeSearch/PostcodeSearch";
 import QuestionAnswerMultiStep from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep";
-import { questionAnswerData, setbuyerRequestData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
+import {
+  questionAnswerData,
+  setbuyerRequestData,
+  setBuyerStep,
+} from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
@@ -18,6 +22,8 @@ import { handleScrollToBottom } from "../../utils/scroll";
 import QuestionAnswerMultiStepDriveways from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepDriveways";
 import QuestionAnserMultiStepDriways2 from "./steps/QuestionAnswerMultiStep/QuestionAnserMultiStepDriways2";
 import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDriveways";
+import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -49,6 +55,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
+  const [localRequestId, setLocalRequestId] = useState(null);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -165,12 +172,20 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     if (questionanswerData.length > 0) {
       setIsLoadingQuestions(false);
       dispatch(setbuyerRequestData({ service_id: 51 }));
-
     }
   }, [questionanswerData]);
 
   return (
     <>
+      {localRequestId === null && (
+        <div>
+          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
@@ -258,6 +273,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                   setProgressPercentage={setProgressPercentage}
                   setUpdateNumberStep={setUpdateNumberStep}
                   updateNumberStep={updateNumberStep}
+                  setLocalRequestId={setLocalRequestId}
                 />
               )}
               {buyerStep === 6 && (

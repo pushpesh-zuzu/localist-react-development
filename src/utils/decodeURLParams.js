@@ -5,7 +5,7 @@
       
       // Pehle pure URL ko decode karein
       const decodedUrl = decodeURIComponent(searchString);
-      console.log("Decoded URL:", decodedUrl);
+      // console.log("Decoded URL:", decodedUrl);
       
       // Regex se saare key=value pairs extract karein
       const paramRegex = /([^?=&]+)=([^&]*)/g;
@@ -19,7 +19,7 @@
         allParams[key] = value;
       }
       
-      console.log("All extracted parameters:", allParams);
+      // console.log("All extracted parameters:", allParams);
       return allParams;
     } catch (error) {
       console.error("Error decoding URL:", error);

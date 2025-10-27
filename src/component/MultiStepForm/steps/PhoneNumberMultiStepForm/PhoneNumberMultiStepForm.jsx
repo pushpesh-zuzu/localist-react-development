@@ -17,9 +17,12 @@ const PhoneNumberMultiStepForm = ({
   onBack,
   updateNumberStep,
   setUpdateNumberStep,
+  setLocalRequestId,
 }) => {
   const dispatch = useDispatch();
-  const { requestLoader, buyerRequest,requestUserId } = useSelector((state) => state.buyer);
+  const { requestLoader, buyerRequest, requestUserId } = useSelector(
+    (state) => state.buyer
+  );
   const { userToken } = useSelector((state) => state.auth);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -91,7 +94,7 @@ const PhoneNumberMultiStepForm = ({
           //   "success",
           //   result?.message || "Customer registered successfully"
           // );
-
+          setLocalRequestId(result?.data?.user_id);
           nextStep();
         }
       });
@@ -107,7 +110,7 @@ const PhoneNumberMultiStepForm = ({
           );
         }
         setUpdateNumberStep(2);
-         nextStep();
+        nextStep();
       });
     }
 
