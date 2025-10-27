@@ -268,7 +268,18 @@ const ViewProfiles = () => {
   //   );
   // }
 
-  console.log(viewProfileData, "viewProfileData");
+  const availableTabs = [];
+
+  if (profileData?.about_company) availableTabs.push("About");
+  if (profileData?.services?.length > 0) availableTabs.push("Services");
+  if (profileData?.reviews?.length > 0 || profileData?.avg_rating > 0)
+    availableTabs.push("Reviews");
+  if (profileData?.accreditations?.length > 0)
+    availableTabs.push("Accreditations");
+  if (profileData?.questions?.length > 0) availableTabs.push("Q+A's");
+  if (profileData?.photos?.length > 0) availableTabs.push("Photos");
+  if (profileData?.videos?.length > 0) availableTabs.push("Videos");
+  if (profileData?.links?.length > 0) availableTabs.push("Links");
 
   return (
     <>
@@ -470,35 +481,62 @@ const ViewProfiles = () => {
 
         <div className={styles.rightContainer}>
           <div className={styles.tabContainerBox} ref={rightContainerRef}>
-            <TabNav activeTab={activeTab} onTabClick={handleTabClick} />
-            <div ref={aboutRef}>
-              <About details={profileData} />
-            </div>
-            <div ref={servicesRef}>
-              <Services details={profileData} />
-            </div>
-            <div ref={reviewsRef}>
-              <ReviewSection
-                details={profileData}
-                disableReviewButton={shouldDisableActions}
-                isFromManualBids={isFromManualBids}
-              />
-            </div>
-            <div ref={accrediationRef}>
-              <Accrediations details={profileData} />
-            </div>
-            <div ref={quesAnsRef}>
-              <QandAns details={profileData} />
-            </div>
-            <div ref={photoRef}>
-              <Photos details={profileData} />
-            </div>
-            <div ref={videosRef}>
-              <Videos details={profileData} />
-            </div>
-            <div ref={linksRef}>
-              <Links details={profileData} />
-            </div>
+            <TabNav
+              activeTab={activeTab}
+              onTabClick={handleTabClick}
+              tabs={availableTabs}
+            />
+            {availableTabs.includes("About") && (
+              <div ref={aboutRef}>
+                <About details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Services") && (
+              <div ref={servicesRef}>
+                <Services details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Reviews") && (
+              <div ref={reviewsRef}>
+                <ReviewSection
+                  details={profileData}
+                  disableReviewButton={shouldDisableActions}
+                  isFromManualBids={isFromManualBids}
+                />
+              </div>
+            )}
+
+            {availableTabs.includes("Accreditations") && (
+              <div ref={accrediationRef}>
+                <Accrediations details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Q+A's") && (
+              <div ref={quesAnsRef}>
+                <QandAns details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Photos") && (
+              <div ref={photoRef}>
+                <Photos details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Videos") && (
+              <div ref={videosRef}>
+                <Videos details={profileData} />
+              </div>
+            )}
+
+            {availableTabs.includes("Links") && (
+              <div ref={linksRef}>
+                <Links details={profileData} />
+              </div>
+            )}
           </div>
         </div>
 

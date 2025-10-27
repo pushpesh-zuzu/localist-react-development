@@ -42,6 +42,7 @@
 
 .Business_Description p {
   font-size: 14px;
+  white-space: pre-line;
 }
 
 .readMore {

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ViewProfile.module.css";
-const TabNav = ({ activeTab, onTabClick }) => {
+const TabNav = ({ activeTab, onTabClick, tabs }) => {
   const tabs = [
     "About",
     "Services",
