@@ -124,7 +124,7 @@ const SubmitReviewModal = ({
           X
         </div>
         <h2>
-          Rate your experience with {reviewProfileData?.business_profile_name}
+          1 Rate your experience with {reviewProfileData?.business_profile_name}
         </h2>
         <div className={styles.ratingSection}>
           <span>Click to rate :</span>
