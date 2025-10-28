@@ -5,7 +5,11 @@ import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
 import PostcodeSearch from "./steps/PostcodeSearch/PostcodeSearch";
 import QuestionAnswerMultiStep from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep";
-import { questionAnswerData, setbuyerRequestData, setBuyerStep } from "../../store/Buyer/BuyerSlice";
+import {
+  questionAnswerData,
+  setbuyerRequestData,
+  setBuyerStep,
+} from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
@@ -48,7 +52,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
-
+  const [localRequestId, setLocalRequestId] = useState(null);
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
@@ -141,7 +145,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
-console.log(buyerRequest,'br')
+  // console.log(buyerRequest,'br')
   useEffect(() => {
     if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
       setHasMountedDetector(true);
@@ -149,13 +153,18 @@ console.log(buyerRequest,'br')
     // ❌ Don't depend on buyerRequest.questions
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMountedDetector]);
+
   return (
     <>
-      {window.innerWidth > 768  && typeof window !== "undefined"? (
-              <NavigationDetectorDesktop />
-            ) : (
-              <NavigationDetectorWithConfirmations />
-            )}
+      {localRequestId === null && (
+        <div>
+          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>
@@ -235,6 +244,7 @@ console.log(buyerRequest,'br')
                   onBack={prevStep}
                   updateNumberStep={updateNumberStep}
                   setUpdateNumberStep={setUpdateNumberStep}
+                  setLocalRequestId={setLocalRequestId}
                 />
               )}
               {/* {updateNumberStep === 1 && buyerStep === 5 && (

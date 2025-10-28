@@ -41,7 +41,7 @@ const initialState = {
     ? JSON.parse(safeLocalStorage.getItem("createRequestToken"))
     : null,
   getuploadImg: [],
-  requestUserId: [],
+  requestUserId: null,
   infoLoader: false,
   requestLoader: false,
   submitImageLoader: false,
@@ -94,7 +94,7 @@ export const createRequestData = (requestData) => {
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         // dispatch(setQuestionAnswerData(response?.data?.data));
-        console.log(response?.data?.data, "response for request id");
+        // console.log(response?.data?.data, "response for request id");
         dispatch(setRequestId(response?.data?.data?.request_id));
         // dispatch(setRequestData(response?.data?.data))
         // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
@@ -130,7 +130,7 @@ export const registerQuoteCustomer = (customerData) => {
       );
 
       if (response) {
-        console.log(response, "response");
+        // console.log(response, "response");
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
@@ -159,7 +159,7 @@ export const updateMobile = (phone) => {
       );
 
       if (response) {
-        console.log(response, "response Update Phone");
+        // console.log(response, "response Update Phone");
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
@@ -181,7 +181,7 @@ export const updateProfileData = () => {
       const response = await axiosInstance.get(
         `customer/setting/get-profile-info`
       );
-      console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
+      // console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
 
       if (response) {
         dispatch(setGetUploadImgData(response?.data?.data));
@@ -190,7 +190,7 @@ export const updateProfileData = () => {
           "profile_image",
           response?.data?.data?.[0]?.profile_image
         );
-        console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
+        // console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
         updateLocalStorageValue(
           "registerDataToken",
           "profile_image",
@@ -345,10 +345,10 @@ export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
         navigate(`/conversion/${requestId}`);
         // navigate(`/contact-us/10`);
 
-        console.log("before settimeout");
+        // console.log("before settimeout");
 
         setTimeout(() => {
-          console.log("after settimeout");
+          // console.log("after settimeout");
           return response.data;
         }, 5000);
       }
@@ -404,15 +404,15 @@ export const addNotificationData = (addNotificationData) => {
 export const verifyPhoneNumberData = (verifyData) => {
   return async (dispatch) => {
     dispatch(setVerifyPhoneNumberLoader(true));
-    console.log(verifyData, "verifyData");
+    // console.log(verifyData, "verifyData");
     try {
       const response = await axiosInstance.post(
         `customer/verify-phone-number`,
         verifyData
       );
-      console.log("verify number", response?.data?.data);
+      // console.log("verify number", response?.data?.data);
       if (response?.data?.success) {
-        console.log("response1234", response);
+        // console.log("response1234", response);
         // dispatch(setQuestionAnswerData(response?.data?.data));
         // dispatch(setRequestId(response?.data?.data?.request_id));
         dispatch(setRequestData(response?.data?.data));

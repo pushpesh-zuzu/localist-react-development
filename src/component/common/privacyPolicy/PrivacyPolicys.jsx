@@ -3,6 +3,7 @@ import styles from "./PrivacyPolicy.module.css";
 import { useLocation, Link } from "react-router-dom";
 import PrivacyContentForProfession from "./privacyContentForProfession/PrivacyContentForProfession";
 import PrivacyContentForCustomer from "./privacyContentForCustomer/PrivacyContentForCustomer";
+import { Helmet } from "react-helmet-async";
 const PrivacyPolicy = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("professionals");
@@ -16,44 +17,53 @@ const PrivacyPolicy = () => {
   }, [location]);
 
   return (
-    <div className={styles.container}>
-      <nav className={styles.navWrapper}>
-        <ul className={styles.nav}>
-          <li className={styles.navItem}>
-            <Link
-              to="#consumers"
-              className={`${styles.navLink} ${
-                activeTab === "customers" ? styles.active : ""
-              }`}
-              onClick={() => setActiveTab("customers")}
-            >
-              Consumers
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link
-              to="#professionals"
-              className={`${styles.navLink} ${
-                activeTab === "professionals" ? styles.active : ""
-              }`}
-              onClick={() => setActiveTab("professionals")}
-            >
-              Professionals
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <>
+      <Helmet>
+        <title>Privacy Policy – Localists.com | Trusted UK Marketplace</title>
+        <meta
+          name="description"
+          content="Read the Privacy Policy of Localists.com, operated by IMG Limited, explaining how your personal data is collected, used and protected when using our UK services."
+        />
+      </Helmet>
+      <div className={styles.container}>
+        <nav className={styles.navWrapper}>
+          <ul className={styles.nav}>
+            <li className={styles.navItem}>
+              <Link
+                to="#consumers"
+                className={`${styles.navLink} ${
+                  activeTab === "customers" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("customers")}
+              >
+                Consumers
+              </Link>
+            </li>
+            <li className={styles.navItem}>
+              <Link
+                to="#professionals"
+                className={`${styles.navLink} ${
+                  activeTab === "professionals" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("professionals")}
+              >
+                Professionals
+              </Link>
+            </li>
+          </ul>
+        </nav>
 
-      <div className={styles.contentContainer}>
-        <div className={styles.contentWrapper}>
-          {activeTab === "customers" ? (
-            <PrivacyContentForCustomer />
-          ) : (
-            <PrivacyContentForProfession />
-          )}
+        <div className={styles.contentContainer}>
+          <div className={styles.contentWrapper}>
+            {activeTab === "customers" ? (
+              <PrivacyContentForCustomer />
+            ) : (
+              <PrivacyContentForProfession />
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
