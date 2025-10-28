@@ -174,7 +174,7 @@
 
 .rightContainer {
   flex: 1 1 600px;
-  padding: 0px;
+  padding: 20px;
   min-width: 300px;
 }
 
@@ -258,6 +258,9 @@
 /* <---- tab css ---> */
 
 .tabContainerBox {
+  position: relative;
+  top: 0;
+  z-index: 9;
   height: 80vh;
   overflow-x: auto;
 }
