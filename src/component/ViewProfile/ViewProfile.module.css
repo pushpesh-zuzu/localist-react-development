@@ -248,6 +248,8 @@
   .rightContainer {
     padding: 0px 15px 15px 15px;
     width: -webkit-fill-available;
+    position: relative;
+    z-index: 99 !important;
   }
   .container {
     padding-top: 70px;
