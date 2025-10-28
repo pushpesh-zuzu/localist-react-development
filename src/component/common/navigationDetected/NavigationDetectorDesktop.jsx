@@ -20,100 +20,116 @@ const NavigationDetectorDesktop = () => {
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
 
-  // 🧠 Ref to store latest data safely
-  const latestData = useRef({
-    userToken,
-    buyerRequest,
-    citySerach,
-  });
+  const latestData = useRef({ userToken, buyerRequest, citySerach });
 
-  // Keep ref updated (no re-renders)
   useEffect(() => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
 
-  // Prevent multiple API calls
-  const hasSent = useRef(false);
-
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
-    if (hasSent.current || userToken) return;
-    hasSent.current = true;
 
-    const updatedAnswers = buyerRequest?.questions || [];
-    const formData = new FormData();
-    //  console.log("📡 API Call being made once with form_status: 0");
-    const isEverythingEmpty =
-      !buyerRequest?.name?.trim() &&
-      !buyerRequest?.email?.trim() &&
-      !buyerRequest?.phone?.trim() &&
-      !buyerRequest?.postcode?.trim() &&
-      buyerRequest.questions.length === 0;
-
-    if (isEverythingEmpty) {
-      console.log("🚫 Skipping API call - all fields are empty");
+    if (userToken) {
+      console.log("🔴 User token exists, skipping");
       return;
     }
-    console.log("🔍 Empty Check Details:", {
-      name: !!buyerRequest?.name?.trim(),
-      email: !!buyerRequest?.email?.trim(),
-      phone: !!buyerRequest?.phone?.trim(),
-      postcode: !!buyerRequest?.postcode?.trim(),
-      questions: buyerRequest?.questions?.length > 0,
-      city: !!citySerach?.trim(), // Just for info
-      isEverythingEmpty: isEverythingEmpty,
-    });
-    formData.append("name", buyerRequest?.name);
-    formData.append("email", buyerRequest?.email);
-    formData.append("phone", buyerRequest?.phone);
-    formData.append("questions", JSON.stringify(updatedAnswers));
-    formData.append("service_id", buyerRequest?.service_id || "");
-    formData.append("city", citySerach || "");
-    formData.append("postcode", buyerRequest?.postcode || "");
-    formData.append("campaignid", campaignid || "");
-    formData.append("gclid", gclid || "");
-    formData.append("campaign", campaign || "");
-    formData.append("adgroup", adGroup || "");
-    formData.append("targetid", targetID || "");
-    formData.append("msclickid", msclickid || "");
-    formData.append("utm_source", utm_source || "");
-    formData.append("keyword", keyword || "");
-    formData.append("form_status", 0);
 
-    dispatch(registerQuoteCustomer(formData))
-      .then(() => {
-        // console.log("✅ API Call successful - Data saved");
+    const updatedAnswers = buyerRequest?.questions || [];
+
+    // Check if form has any meaningful data
+    const hasData =
+      (buyerRequest?.name && buyerRequest.name.trim()) ||
+      (buyerRequest?.email && buyerRequest.email.trim()) ||
+      (buyerRequest?.phone && buyerRequest.phone.trim()) ||
+      (buyerRequest?.postcode && buyerRequest.postcode.trim()) ||
+      (buyerRequest?.questions && buyerRequest.questions.length > 0);
+
+    if (!hasData) {
+      console.log("🚫 No meaningful data found, skipping API call");
+      return;
+    }
+    // Use beacon API for reliable sending during page unload
+    const beaconData = new URLSearchParams();
+    beaconData.append("name", buyerRequest?.name || "");
+    beaconData.append("email", buyerRequest?.email || "");
+    beaconData.append("phone", buyerRequest?.phone || "");
+    beaconData.append("questions", JSON.stringify(updatedAnswers));
+    beaconData.append("service_id", buyerRequest?.service_id || "");
+    beaconData.append("city", citySerach || "");
+    beaconData.append("postcode", buyerRequest?.postcode || "");
+    beaconData.append("campaignid", campaignid || "");
+    beaconData.append("gclid", gclid || "");
+    beaconData.append("campaign", campaign || "");
+    beaconData.append("adgroup", adGroup || "");
+    beaconData.append("targetid", targetID || "");
+    beaconData.append("msclickid", msclickid || "");
+    beaconData.append("utm_source", utm_source || "");
+    beaconData.append("keyword", keyword || "");
+    beaconData.append("form_status", "0");
+
+    const blob = new Blob([beaconData.toString()], {
+      type: "application/x-www-form-urlencoded",
+    });
+
+    // Try beacon first, if not available use fetch with keepalive
+    if (navigator.sendBeacon) {
+      const success = navigator.sendBeacon(
+        "https://dev.localists.com/admin/api/customer/register-quote-customer",
+        blob
+      );
+      console.log("📡 Beacon API result:", success);
+
+      if (success) {
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
         localStorage.removeItem("registerTokens");
         localStorage.removeItem("createRequestToken");
-      })
-      .catch((error) => {
-        console.error("❌ API Call failed:", error);
+      }
+    } else {
+      // Fallback to fetch with keepalive
+      fetch(
+        "https://dev.localists.com/admin/api/customer/register-quote-customer",
+        {
+          method: "POST",
+          body: blob,
+          keepalive: true,
+        }
+      ).then(() => {
+        localStorage.removeItem("barkToken");
+        localStorage.removeItem("barkUserToken");
+        localStorage.removeItem("registerDataToken");
+        localStorage.removeItem("registerTokens");
+        localStorage.removeItem("createRequestToken");
       });
+    }
   };
 
   useEffect(() => {
-    console.log("🔵 NavigationDetector mounted once");
+    console.log("🔵 NavigationDetector mounted");
 
     const handleBeforeUnload = (event) => {
-      if (hasSent.current) return; // ✅ already sent, ignore
-      // console.log("🟡 Browser/Tab close detected - sending data once");
-      submitFormData();
-      hasSent.current = true;
+      console.log("🟠 beforeunload event - showing dialog");
+
+      // Show dialog every time by preventing default and setting returnValue
       event.preventDefault();
-      event.returnValue = "";
+      event.returnValue =
+        "Are you sure you want to leave? Your data may be saved.";
     };
 
-    // ✅ Add listener once
+    const handleUnload = () => {
+      console.log("🟠 unload event - making API call");
+      submitFormData();
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
-    // ✅ Cleanup once
+    window.addEventListener("unload", handleUnload);
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      // console.log("🧹 Cleanup complete");
+      window.removeEventListener("unload", handleUnload);
     };
-  }, []); // 🚀 NO DEPENDENCIES
+  }, []);
 
   return null;
 };

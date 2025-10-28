@@ -189,10 +189,12 @@ function App({ initialUrl, hostname, createRouterFactory }) {
     typeof window !== "undefined"
       ? window.location.hostname === "ps1.localists.com"
       : hostname === "ps1.localists.com";
-      const isReactLocalist =
+
+  const isReactLocalist =
     typeof window !== "undefined"
-      ? window.location.hostname === "ps1.localists.com"
+      ? window.location.hostname === "react.localists.com"
       : hostname === "react.localists.com";
+      
   useEffect(() => {
     !userToken &&
       !registerToken &&
