@@ -6,7 +6,7 @@ import styles from "./WelcomeEmailModal.module.css"; // You'll need to create th
 import { checkEmailIdApi } from "../../../../../store/FindJobs/findJobSlice";
 import { setbuyerRequestData } from "../../../../../store/Buyer/BuyerSlice";
 // import { showToast } from "../../../../../utils";
-import logo from "../../../../../assets/Images/logo.svg";
+import logo from "../../../../../assets/Images/logo.png";
 import fullRightArrow from "../../../../../assets/Icons/fullRightArrow.png"; // Capital I
 const WelcomeEmailModal = ({
   onClose,
