@@ -50,6 +50,7 @@ const ViewProfiles = () => {
   const { reviewProfileData, viewProfileData } = useSelector(
     (state) => state.leadSetting
   );
+  console.log(reviewProfileData, "setReviewProfile");
 
   let profileData = {};
 
@@ -302,11 +303,13 @@ const ViewProfiles = () => {
   return (
     <>
       <Helmet>
-        <title>{`${
-          viewProfileData?.business_profile_name
-            ? `${viewProfileData?.business_profile_name} | `
-            : ""
-        }Localists`}</title>
+        <title>
+          {viewProfileData?.business_profile_name
+            ? `${viewProfileData.business_profile_name} | Localists`
+            : reviewProfileData?.business_profile_name
+            ? `${reviewProfileData.business_profile_name} | Localists`
+            : "Localists"}
+        </title>
       </Helmet>
       <div className={styles.mainContainer}>
         <div className={styles.container}>
