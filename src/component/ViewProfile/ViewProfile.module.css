@@ -174,7 +174,7 @@
 
 .rightContainer {
   flex: 1 1 600px;
-  padding: 20px;
+  padding: 0px;
   min-width: 300px;
 }
 
@@ -190,7 +190,7 @@
   }
 
   .rightContainer {
-    padding: 20px;
+    padding: 0px;
   }
 
   .RequestQuoteBtn {
