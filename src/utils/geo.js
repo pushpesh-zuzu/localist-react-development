@@ -5,7 +5,8 @@ export async function getUserCountry() {
   try {
     const res = await fetch("https://ipapi.co/json/");
     const data = await res.json();
-    return data.country_code.toLowerCase(); // e.g. "in", "gb"
+    // return data.country_code.toLowerCase(); // e.g. "in", "gb"
+    return 'gb'
   } catch (error) {
     console.error("Geo lookup failed:", error);
     return "gb"; // fallback to India as requested
@@ -17,7 +18,7 @@ export function getUserLanguage() {
   const lang = typeof navigator !== "undefined" && navigator.language
     ? navigator.language.split("-")[0] // e.g. "en"
     : "en";
-  return lang || "en";
+  return "en";
 }
 
 export function useUserGeo(defaultCountry = "gb", defaultLang = "en") {
@@ -27,14 +28,19 @@ export function useUserGeo(defaultCountry = "gb", defaultLang = "en") {
   useEffect(() => {
     async function fetchGeo() {
       try {
-        const detectedCountry = await getUserCountry();
-        setCountry(detectedCountry);
+        // const detectedCountry = await getUserCountry();
+        // setCountry(detectedCountry);
+        setCountry('gb');
       } catch {
-        setCountry(defaultCountry);
+        // setCountry(defaultCountry);
+        setCountry('gb');
+
       }
 
-      const detectedLang = getUserLanguage();
-      setLang(detectedLang);
+      // const detectedLang = getUserLanguage();
+      // setLang(detectedLang);
+      setLang('en');
+
     }
 
     fetchGeo();
