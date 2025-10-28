@@ -33,6 +33,10 @@ const CreditCard = () => {
     dispatch(makePrimaryApi({ card_id: data?.id, user_id: data?.user_id }));
   };
 
+  const handleChangeModal = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <div
@@ -43,47 +47,65 @@ const CreditCard = () => {
         }
       >
         {getSellerCardData && getSellerCardData.length > 0 ? (
-          getSellerCardData.map((item, index) => (
-            <div className={styles.container}>
-              <div className={styles.visaCard_wrapper} key={index}>
-                <div className={styles.visaCard}>
-                  <img src={visaImg} alt="Visa" />
-                  <div>
-                    We'll charge the card ending *
-                    {String(item.card_number)?.slice(-4)} that we have on file
-                  </div>
-                  {primaryId == index && <span>Primary</span>}
-                </div>
+          // getSellerCardData.map((item, index) => (
+          //   <div className={styles.container}>
+          //     <div className={styles.visaCard_wrapper} key={index}>
+          //       <div className={styles.visaCard}>
+          //         <img src={visaImg} alt="Visa" />
+          //         <div>
+          //           We'll charge the card ending *
+          //           {String(item.card_number)?.slice(-4)} that we have on file
+          //         </div>
+          //         {/* {primaryId == index && <span>Primary</span>} */}
+          //       </div>
 
-                {/* Uncomment if needed */}
+          //       {/* Uncomment if needed */}
 
-                <div className={styles.remove_actionButtons}>
-                  <span
-                    onClick={() => {
-                      handleRemoveCard(item);
-                    }}
-                    className={styles.rightText}
-                  >
-                    Remove
-                  </span>
-                  {primaryId != index && (
-                    <>
-                      <span className={styles.separator}>|</span>
-                      <span
-                        onClick={() => {
-                          setPrimaryId(index);
-                          handlePrimaryChange(item);
-                        }}
-                        className={styles.rightText}
-                      >
-                        Make Primary
-                      </span>
-                    </>
-                  )}
+          //       <div className={styles.remove_actionButtons}>
+          //         <span
+          //           onClick={() => {
+          //             handleRemoveCard(item);
+          //           }}
+          //           className={styles.rightText}
+          //         >
+          //           Remove
+          //         </span>
+          //         {/* {primaryId != index && (
+          //           <>
+          //             <span className={styles.separator}>|</span>
+          //             <span
+          //               onClick={() => {
+          //                 setPrimaryId(index);
+          //                 handlePrimaryChange(item);
+          //               }}
+          //               className={styles.rightText}
+          //             >
+          //               Make Primary
+          //             </span>
+          //           </>
+          //         )} */}
+          //       </div>
+          //     </div>
+          //   </div>
+          // ))
+          <div className={styles.container}>
+            <div className={styles.visaCard_wrapper}>
+              <div className={styles.visaCard}>
+                <img src={visaImg} alt="Visa" />
+                <div>
+                  We'll charge the card ending *
+                  {String(getSellerCardData[0].card_number)?.slice(-4)} that we
+                  have on file
                 </div>
+                {/* {primaryId == index && <span>Primary</span>} */}
               </div>
+              <div className={styles.rightText} onClick={handleChangeModal}>
+                {" "}
+                Change
+              </div>
+              {/* Uncomment if needed */}
             </div>
-          ))
+          </div>
         ) : (
           <>
             <div className={styles.visaCard}>
@@ -101,7 +123,7 @@ const CreditCard = () => {
           </>
         )}
       </div>
-      <div className={styles.actionButtons}>
+      {/* <div className={styles.actionButtons}>
         <span onClick={handleAddCard} className={styles.rightText}>
           Add
         </span>
@@ -109,7 +131,7 @@ const CreditCard = () => {
         <span onClick={handleRemoveCard} className={styles.rightText}>
           Remove
         </span>
-      </div>
+      </div> */}
 
       {isopen && <AddCardModal onClose={() => setIsOpen(false)} />}
     </>
