@@ -557,7 +557,7 @@ const ViewProfiles = () => {
 
         {isopen && profileId?.profileId && profileData?.name && (
           <SubmitReviewModal
-            setOpen={isopen}
+            isOpen={isopen}
             closeModal={closeModal}
             ProfileIDs={profileId?.profileId}
             reviewProfileData={profileData}
