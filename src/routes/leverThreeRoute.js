@@ -9,7 +9,7 @@ const TreeSurgeon = lazy(() =>
   import("../component/level3/TreeSurgeon/TreeSurgeon")
 );
 const TreeSurgeonImage1 = lazy(() =>
-  import("../component/level3/TreeSurgeon/TreeSurgeon")
+  import("../component/level3/TreeSurgeon/TreeSurgeonImage1")
 );
 const TreeSurgeonImage2 = lazy(() =>
   import("../component/level3/TreeSurgeon/TreeSurgeonImage2")
