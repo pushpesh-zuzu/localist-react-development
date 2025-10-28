@@ -30,6 +30,8 @@ const PhotosAccordion = ({ details }) => {
   const [photoPreviews, setPhotoPreviews] = useState([]);
   console.log(details, "details");
 
+  console.log(photoPreviews);
+
   const handleRemovePhoto = (indexToRemove) => {
     setPhotoPreviews((prevPhotos) =>
       prevPhotos.filter((_, idx) => idx !== indexToRemove)
@@ -244,6 +246,20 @@ const PhotosAccordion = ({ details }) => {
     });
     setPhotoPreviews([]);
   };
+
+  useEffect(() => {
+    if (details) {
+      const photoFilenames = details.company_photos
+        ? details.company_photos.split(",").map((item) => item.trim())
+        : [];
+
+      const previews = photoFilenames.map(
+        (filename) => `${BASE_IMAGE}/users/${filename}`
+      );
+      setExistingPhotos(photoFilenames);
+      setPhotoPreviews(previews);
+    }
+  }, [details]);
 
   // useEffect(() => {
   //   if (details) {
