@@ -81,11 +81,11 @@ const MyProfile = () => {
     }
   };
 
-  const companySlug = viewProfileData?.company_name
-    ? viewProfileData.company_name.replace(/\s+/g, "-")
-    : viewProfileData?.name
-    ? viewProfileData.name.replace(/\s+/g, "-")
-    : "";
+  const companySlug = viewProfileData?.business_profile_name
+    ? viewProfileData?.business_profile_name.replace(/\s+/g, "-")
+    : // : viewProfileData?.name
+      // ? viewProfileData.name.replace(/\s+/g, "-")
+      "";
 
   const randomKey = user_id; //Math.random().toString(36).substring(2, 8);
 

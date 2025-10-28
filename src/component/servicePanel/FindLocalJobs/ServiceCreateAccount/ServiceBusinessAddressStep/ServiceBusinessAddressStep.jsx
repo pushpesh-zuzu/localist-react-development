@@ -1,12 +1,11 @@
-import React, { useEffect, useState ,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  fetchCompanyDetails,clearCompanyData
+  fetchCompanyDetails,
+  clearCompanyData,
 } from "../../../../../store/Company/companyLookup";
 import { showToast } from "../../../../../utils";
-
-
 
 const ServiceBusinessAddressStep = ({
   nextStep,
@@ -16,90 +15,86 @@ const ServiceBusinessAddressStep = ({
   setFormData,
   errors,
   addressCheck,
-  setHasPopulatedFromCompany
-  
+  setHasPopulatedFromCompany,
+  addressValue,
 }) => {
+  const dispatch = useDispatch();
+  console.log("formdata", formData);
+  const { country, city, postalcode } = useSelector((state) => state.findJobs);
+  const companyData = useSelector((state) => state.companyLook?.companyData);
 
-const dispatch = useDispatch();
-console.log('formdata',formData);
-const { country, city, postalcode } = useSelector((state) => state.findJobs);
-const companyData = useSelector((state) => state.companyLook?.companyData);
- 
-
-const hasPopulatedFromCompany = useSelector(
+  const hasPopulatedFromCompany = useSelector(
     (state) => state.findJobs.hasPopulatedFromCompany
   );
-  
+
   const hasClearedOnce = useRef(false);
   const handleCheck = () => {
-      // if(companyData.registered_office_address?.address_line_1) {
-        
-      // } else {
-      //   showToast("error","Please Enter Correct Address")
-      // }
-      nextStep()
+    // if(companyData.registered_office_address?.address_line_1) {
+
+    // } else {
+    //   showToast("error","Please Enter Correct Address")
+    // }
+    nextStep();
+  };
+
+  useEffect(() => {
+    const reg = formData.company_reg_number?.trim();
+
+    if (
+      reg?.length === 8 &&
+      companyData?.company_name &&
+      companyData?.registered_office_address
+    ) {
+      console.log(
+        "companyData:",
+        companyData.registered_office_address?.address_line_1
+      );
+
+      const newAddress = {
+        address:
+          companyData.registered_office_address?.address_line_1 ||
+          formData.address,
+        apartment:
+          companyData.registered_office_address?.address_line_2 ||
+          formData.apartment,
+        city: companyData.registered_office_address?.locality || formData.city,
+        zipcode:
+          companyData.registered_office_address?.postal_code ||
+          formData.zipcode,
+        country:
+          companyData.registered_office_address?.country || formData.country,
+      };
+
+      dispatch(setFormData(newAddress));
+      dispatch(setHasPopulatedFromCompany(true));
     }
+  }, [companyData]);
 
+  // useEffect(() => {
+  //   const reg = formData.company_reg_number?.trim();
 
+  //   if (!reg) {
+  //     if (hasPopulatedFromCompany) {
 
+  //       // Clear only if company data was populated earlier
+  //       dispatch(clearCompanyData());
 
-
-useEffect(() => {
-  const reg = formData.company_reg_number?.trim();
-  
-
-  if (
-    reg?.length === 8 &&
-    companyData?.company_name &&
-    companyData?.registered_office_address
-  ) {
-   
-     console.log('companyData:', companyData.registered_office_address?.address_line_1);
-    
-    const newAddress = {
-      address: companyData.registered_office_address?.address_line_1 || formData.address,
-      apartment: companyData.registered_office_address?.address_line_2 || formData.apartment,
-      city: companyData.registered_office_address?.locality || formData.city,
-      zipcode: companyData.registered_office_address?.postal_code || formData.zipcode,
-      country: companyData.registered_office_address?.country || formData.country,
-    };
-
-    dispatch(setFormData(newAddress));
-    dispatch(setHasPopulatedFromCompany(true));
-
-
-    
-  }
-}, [companyData]);
-
-useEffect(() => {
-  const reg = formData.company_reg_number?.trim();
-
-  if (!reg) {
-    if (hasPopulatedFromCompany) {
-      
-      // Clear only if company data was populated earlier
-      dispatch(clearCompanyData());
-
-      dispatch(
-          setFormData({
-            address: "",
-            apartment: "",
-            city: "",
-            zipcode: "",
-            country: "",
-          })
-        );
-    //dispatch(fetchCompanyDetails(0));
-      dispatch(setHasPopulatedFromCompany(false));
-    }
-  } else if (reg.length === 8) {
-    dispatch(fetchCompanyDetails(reg));
-  }
-}, [formData.company_reg_number]);
-
-
-
+  //       dispatch(
+  //           setFormData({
+  //             address: "",
+  //             apartment: "",
+  //             city: "",
+  //             zipcode: "",
+  //             country: "",
+  //           })
+  //         );
+  //     //dispatch(fetchCompanyDetails(0));
+  //       dispatch(setHasPopulatedFromCompany(false));
+  //     }
+  //   } else if (reg.length === 8) {
+  //     dispatch(fetchCompanyDetails(reg));
+  //   }
+  // }, [formData.company_reg_number]);
 
   return (
     <div className={styles.pageContainer}>
@@ -119,17 +114,23 @@ useEffect(() => {
                 type="text"
                 className={styles.input}
                 name="address"
-                value={formData.address}
+                value={addressValue}
                 onChange={handleInputChange}
               />
             </div>
             {/* {errors.address && <p className={styles.errorText}>{errors.address}</p>} */}
 
             <div className={styles.labelInputWrapper}>
-              <label className={styles.label}>Building or House Name/Number</label>
-              <input type="text" className={styles.input} name="apartment"
-                  value={formData.apartment}
-                  onChange={handleInputChange}/>
+              <label className={styles.label}>
+                Building or House Name/Number
+              </label>
+              <input
+                type="text"
+                className={styles.input}
+                name="apartment"
+                value={formData.apartment}
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className={styles.labelInputWrapper}>
@@ -139,9 +140,9 @@ useEffect(() => {
                 className={styles.input}
                 name="city"
                 value={
-                  formData.city 
-                    || (!formData.company_reg_number ? formData.city_old : "") 
-                    || ""
+                  formData.city ||
+                  (!formData.company_reg_number ? formData.city_old : "") ||
+                  ""
                 }
                 onChange={handleInputChange}
               />
@@ -155,9 +156,9 @@ useEffect(() => {
                 className={styles.input}
                 name="country"
                 value={
-                  formData.country 
-                    || (!formData.company_reg_number ? formData.country_old : "") 
-                    || ""
+                  formData.country ||
+                  (!formData.company_reg_number ? formData.country_old : "") ||
+                  ""
                 }
                 onChange={handleInputChange}
               />
@@ -182,34 +183,37 @@ useEffect(() => {
   </button>
 </div> */}
 
-
-{/* {formData?.is_zipcode !== 0 && ( */}
-  <div className={styles.labelInputWrapper}>
-    <input
-      type="text"
-      placeholder="Postcode"
-      className={styles.input}
-      style={{
-        appearance: "textfield",
-        MozAppearance: "textfield",
-        WebkitAppearance: "none"
-      }}
-      name="zipcode"
-      value={
-        formData.postcode 
-          || (!formData.company_reg_number ? formData.zipcode_old : "") 
-          || ""
-      }
-      onChange={(e) =>
-        dispatch(setFormData({
-          ...formData, 
-          zipcode: e.target.value, 
-        }))
-      }
-    />
-  </div>
-  </div> 
-{/* )} */}
+              {/* {formData?.is_zipcode !== 0 && ( */}
+              <div className={styles.labelInputWrapper}>
+                <input
+                  type="text"
+                  placeholder="Postcode"
+                  className={styles.input}
+                  style={{
+                    appearance: "textfield",
+                    MozAppearance: "textfield",
+                    WebkitAppearance: "none",
+                  }}
+                  name="zipcode"
+                  value={
+                    formData.postcode ||
+                    (!formData.company_reg_number
+                      ? formData.zipcode_old
+                      : "") ||
+                    ""
+                  }
+                  onChange={(e) =>
+                    dispatch(
+                      setFormData({
+                        ...formData,
+                        zipcode: e.target.value,
+                      })
+                    )
+                  }
+                />
+              </div>
+            </div>
+            {/* )} */}
 
             {/* {formData?.zipcode === 1 && (
               <div className={styles.labelInputWrapper}>

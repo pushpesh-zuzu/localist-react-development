@@ -10,7 +10,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const SubmitReviewModal = ({
-  setOpen,
+  isOpen,
   closeModal,
   ProfileIDs,
   reviewsData,
@@ -42,6 +42,14 @@ const SubmitReviewModal = ({
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  useEffect(() => {
+    if (isOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+    return () => (document.body.style.overflow = "auto");
+  }, [isOpen]);
+
+  if (!isOpen) return null;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -113,7 +121,10 @@ const SubmitReviewModal = ({
         <div className={styles.closeButton} onClick={closeModal}>
           X
         </div>
-        <h2>Rate your experience with { reviewProfileData?.company_name || reviewProfileData?.name }</h2>
+        <h2>
+          Rate your experience with{" "}
+          {reviewProfileData?.company_name || reviewProfileData?.name}
+        </h2>
         <div className={styles.ratingSection}>
           <span>Click to rate :</span>
           {[...Array(5)].map((_, index) => {

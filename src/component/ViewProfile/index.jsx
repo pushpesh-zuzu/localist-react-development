@@ -67,6 +67,7 @@ const ViewProfiles = () => {
     (state) => state?.leadSetting?.expandRadiusLoader
   );
 
+  console.log(profileData?.business_profile_name, "profileDataprofileData");
   useEffect(() => {
     return () => {
       dispatch(setViewProfileData({}));
@@ -131,29 +132,29 @@ const ViewProfiles = () => {
     }
 
     // Scroll to the target section
-    // if (targetRef.current && rightContainerRef.current) {
-    //   const container = rightContainerRef.current;
-    //   const targetPosition = targetRef.current.offsetTop;
+    if (targetRef.current && rightContainerRef.current) {
+      const container = rightContainerRef.current;
+      const targetPosition = targetRef.current.offsetTop;
 
-    //   const OFFSET = 40;
+      const OFFSET = 40;
 
-    //   container.scrollTo({
-    //     top: targetPosition - OFFSET,
-    //     behavior: "smooth",
-    //   });
-    // }
-
-    if (targetRef.current) {
-      const targetPosition =
-        targetRef.current.getBoundingClientRect().top + window.scrollY;
-
-      const OFFSET = 140; // adjust for sticky header if needed
-
-      window.scrollTo({
+      container.scrollTo({
         top: targetPosition - OFFSET,
         behavior: "smooth",
       });
     }
+
+    // if (targetRef.current) {
+    //   const targetPosition =
+    //     targetRef.current.getBoundingClientRect().top + window.scrollY;
+
+    //   const OFFSET = 140; // adjust for sticky header if needed
+
+    //   window.scrollTo({
+    //     top: targetPosition - OFFSET,
+    //     behavior: "smooth",
+    //   });
+    // }
   };
 
   useEffect(() => {
@@ -268,42 +269,44 @@ const ViewProfiles = () => {
   //   );
   // }
 
-  // const availableTabs = [];
+  const availableTabs = [];
 
-  // if (profileData?.about_company) availableTabs.push("About");
-  // if (profileData?.services?.length > 0) availableTabs.push("Services");
+  if (profileData?.about_company) availableTabs.push("About");
+  if (profileData?.services?.length > 0) availableTabs.push("Services");
 
-  // availableTabs.push("Reviews");
-  // if (profileData?.accreditations?.length > 0)
-  //   availableTabs.push("Accreditations");
-  // if (profileData?.questions?.length > 0) availableTabs.push("Q+A's");
-  // if (profileData?.photos?.length > 0) availableTabs.push("Photos");
-  // if (profileData?.videos?.length > 0) availableTabs.push("Videos");
-  // if (
-  //   profileData?.details?.extra_links.length > 0 ||
-  //   (!profileData?.details?.fb_link &&
-  //     profileData?.details?.fb_link?.length > 0) ||
-  //   (!profileData?.details?.insta_link &&
-  //     profileData?.details?.insta_link?.length > 0) ||
-  //   (!profileData?.details?.linkedin_link &&
-  //     profileData?.details?.linkedin_link?.length > 0) ||
-  //   (!profileData?.details?.tiktok_link &&
-  //     profileData?.details?.tiktok_link?.length > 0) ||
-  //   (!profileData?.details?.twitter_link &&
-  //     profileData?.details?.twitter_link?.length > 0)
-  // )
-  //   availableTabs.push("Links");
+  availableTabs.push("Reviews");
+  if (profileData?.accreditations?.length > 0)
+    availableTabs.push("Accreditations");
+  if (profileData?.qa?.length > 0) availableTabs.push("Q+A's");
+  if (profileData?.photos?.company_photos?.length > 0)
+    availableTabs.push("Photos");
+  if (profileData?.details?.company_youtube_link?.length > 0)
+    availableTabs.push("Videos");
+  if (
+    profileData?.details?.extra_links?.length > 0 ||
+    (!profileData?.details?.fb_link &&
+      profileData?.details?.fb_link?.length > 0) ||
+    (!profileData?.details?.insta_link &&
+      profileData?.details?.insta_link?.length > 0) ||
+    (!profileData?.details?.linkedin_link &&
+      profileData?.details?.linkedin_link?.length > 0) ||
+    (!profileData?.details?.tiktok_link &&
+      profileData?.details?.tiktok_link?.length > 0) ||
+    (!profileData?.details?.twitter_link &&
+      profileData?.details?.twitter_link?.length > 0)
+  )
+    availableTabs.push("Links");
 
-  // console.log(profileData?.details?.extra_links, "profileData?.links");
+  console.log(profileData, "profileData?.links");
 
   return (
     <>
       <Helmet>
         <title>{`${
-          viewProfileData?.company_name
-            ? viewProfileData?.company_name
-            : viewProfileData?.name
-        } | Localists`}</title>
+          viewProfileData?.business_profile_name
+            ? `${viewProfileData?.business_profile_name} | `
+            : ""
+        }Localists`}</title>
       </Helmet>
       <div className={styles.mainContainer}>
         <div className={styles.container}>
@@ -334,16 +337,13 @@ const ViewProfiles = () => {
                   height: "140px",
                   borderRadius: "50%",
                   backgroundColor: "#fff",
+                  objectFit: "cover",
                 }}
               />
             </div>
           </div>
           <div className={styles.viewDetails}>
-            <h2>
-              {profileData?.company_name
-                ? profileData?.company_name
-                : profileData?.name}
-            </h2>
+            <h2>{profileData?.business_profile_name}</h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
               <span>{profileData?.city} </span> | {profileData?.zipcode}
@@ -496,22 +496,24 @@ const ViewProfiles = () => {
 
         <div className={styles.rightContainer}>
           <div className={styles.tabContainerBox} ref={rightContainerRef}>
-            <TabNav
-              activeTab={activeTab}
-              onTabClick={handleTabClick}
-              // Tabs={availableTabs}
-            />
-            {/* {availableTabs.includes("About") && ( */}
-            <div ref={aboutRef}>
-              <About details={profileData} />
+            <div className={styles.tab_nav}>
+              <TabNav
+                activeTab={activeTab}
+                onTabClick={handleTabClick}
+                Tabs={availableTabs}
+              />
             </div>
-            {/* )} */}
+            {availableTabs.includes("About") && (
+              <div ref={aboutRef}>
+                <About details={profileData} />
+              </div>
+            )}
 
-            {/* {availableTabs.includes("Services") && ( */}
-            <div ref={servicesRef}>
-              <Services details={profileData} />
-            </div>
-            {/* )} */}
+            {availableTabs.includes("Services") && (
+              <div ref={servicesRef}>
+                <Services details={profileData} />
+              </div>
+            )}
 
             <div ref={reviewsRef}>
               <ReviewSection
@@ -521,35 +523,35 @@ const ViewProfiles = () => {
               />
             </div>
 
-            {/* {availableTabs.includes("Accreditations") && ( */}
-            <div ref={accrediationRef}>
-              <Accrediations details={profileData} />
-            </div>
-            {/* )} */}
+            {availableTabs.includes("Accreditations") && (
+              <div ref={accrediationRef}>
+                <Accrediations details={profileData} />
+              </div>
+            )}
 
-            {/* {availableTabs.includes("Q+A's") && ( */}
-            <div ref={quesAnsRef}>
-              <QandAns details={profileData} />
-            </div>
-            {/* )} */}
+            {availableTabs.includes("Q+A's") && (
+              <div ref={quesAnsRef}>
+                <QandAns details={profileData} />
+              </div>
+            )}
 
-            {/* {availableTabs.includes("Photos") && ( */}
-            <div ref={photoRef}>
-              <Photos details={profileData} />
-            </div>
-            {/* )} */}
+            {availableTabs.includes("Photos") && (
+              <div ref={photoRef}>
+                <Photos details={profileData} />
+              </div>
+            )}
 
-            {/* {availableTabs.includes("Videos") && ( */}
-            <div ref={videosRef}>
-              <Videos details={profileData} />
-            </div>
-            {/*  )} */}
+            {availableTabs.includes("Videos") && (
+              <div ref={videosRef}>
+                <Videos details={profileData} />
+              </div>
+            )}
 
-            {/* {availableTabs.includes("Links") && ( */}
-            <div ref={linksRef}>
-              <Links details={profileData} />
-            </div>
-            {/* )} */}
+            {availableTabs.includes("Links") && (
+              <div ref={linksRef}>
+                <Links details={profileData} />
+              </div>
+            )}
           </div>
         </div>
 

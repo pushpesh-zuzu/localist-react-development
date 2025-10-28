@@ -111,7 +111,7 @@ const ServiceDetailsStep = ({
       dispatch(
         setFormData({
           company_name: "",
-          address: "",
+          // address: "",
         })
       );
       dispatch(clearCompanyData()); // Clears redux data so it doesn't refill company_name

@@ -131,33 +131,66 @@ const PhotosAccordion = ({ details }) => {
 
     body.append("type", formState.type);
 
-    if (existingPhotos.length > 0) {
-      existingPhotos.forEach((filename, index) => {
-        body.append(`existing_photos[${index}]`, filename);
-      });
-    }
-    console.log("company photos", formState.company_photos);
-    // ✅ Append new uploads
-    if (formState.company_photos.length > 0) {
-      formState.company_photos.forEach((file, index) => {
-        body.append(`company_photos[${index}]`, file);
-      });
-    }
+    // if (existingPhotos.length > 0) {
+    //   existingPhotos.forEach((filename, index) => {
+    //     body.append(`existing_photos[${index}]`, filename);
+    //   });
+    // }
+    // console.log("company photos", formState.company_photos);
+    // // ✅ Append new uploads
+    // if (formState.company_photos.length > 0) {
+    //   formState.company_photos.forEach((file, index) => {
+    //     body.append(`company_photos[${index}]`, file);
+    //   });
+    // }
 
-    // ✅ Append YouTube links
-    if (formState.company_youtube_link.length > 0) {
+    // // ✅ Append YouTube links
+    // if (formState.company_youtube_link.length > 0) {
+    //   formState.company_youtube_link.forEach((link, index) => {
+    //     body.append(`company_youtube_link[${index}]`, link);
+    //   });
+    // }
+    // console.log("setbody", body);
+
+    // for (let [key, value] of body.entries()) {
+    //   if (value instanceof File) {
+    //     console.log(`${key}: [File] ${value.name}`);
+    //   } else {
+    //     console.log(`${key}:`, value);
+    //   }
+    // }
+
+    // dispatch(updateSellerPhotos(body));
+    // dispatch(setIsDirtyRedux(false));
+
+    const uniqueExisting = [...new Set(existingPhotos)];
+    uniqueExisting.forEach((filename, index) => {
+      body.append(`existing_photos[${index}]`, filename);
+    });
+
+    // ✅ Send only *newly added* files
+    const newFiles = formState.company_photos.filter(
+      (file) => file instanceof File
+    );
+    newFiles.forEach((file, index) => {
+      body.append(`company_photos[${index}]`, file);
+    });
+
+    // ✅ YouTube links (same logic, skip empty)
+    if (formState.company_youtube_link?.length > 0) {
       formState.company_youtube_link.forEach((link, index) => {
-        body.append(`company_youtube_link[${index}]`, link);
+        if (link && link.trim()) {
+          body.append(`company_youtube_link[${index}]`, link.trim());
+        }
       });
     }
-    console.log("setbody", body);
 
+    console.log("Final FormData:");
     for (let [key, value] of body.entries()) {
-      if (value instanceof File) {
-        console.log(`${key}: [File] ${value.name}`);
-      } else {
-        console.log(`${key}:`, value);
-      }
+      console.log(
+        `${key}:`,
+        value instanceof File ? `[File: ${value.name}]` : value
+      );
     }
 
     dispatch(updateSellerPhotos(body));
@@ -212,38 +245,63 @@ const PhotosAccordion = ({ details }) => {
     setPhotoPreviews([]);
   };
 
+  // useEffect(() => {
+  //   if (details) {
+  //     // Preload YouTube link if it exists
+  //     let youtubeLinks = [];
+  //     if (details.company_youtube_link) {
+  //       try {
+  //         // Try parsing JSON (["link1", "link2"])
+  //         youtubeLinks = JSON.parse(details.company_youtube_link);
+  //       } catch (e) {
+  //         // If not JSON, treat as a single string
+  //         youtubeLinks = [details.company_youtube_link];
+  //       }
+  //     }
+
+  //     // Convert image filenames into full URLs
+  //     const photoFilenames = details.company_photos
+  //       ? details.company_photos.split(",").map((item) => item.trim())
+  //       : [];
+
+  //     const previews = photoFilenames.map(
+  //       (filename) => `${BASE_IMAGE}/users/${filename}`
+  //     );
+  //     setExistingPhotos(photoFilenames);
+  //     setPhotoPreviews(previews);
+
+  //     setFormState((prev) => ({
+  //       ...prev,
+  //       company_youtube_links: "",
+  //       company_youtube_link: youtubeLinks ? [youtubeLinks] : [],
+  //     }));
+
+  //     setPhotoPreviews(previews);
+  //   }
+  // }, [details]);
+
   useEffect(() => {
     if (details) {
-      // Preload YouTube link if it exists
       let youtubeLinks = [];
       if (details.company_youtube_link) {
         try {
-          // Try parsing JSON (["link1", "link2"])
           youtubeLinks = JSON.parse(details.company_youtube_link);
         } catch (e) {
-          // If not JSON, treat as a single string
           youtubeLinks = [details.company_youtube_link];
         }
       }
 
-      // Convert image filenames into full URLs
-      const photoFilenames = details.company_photos
-        ? details.company_photos.split(",").map((item) => item.trim())
-        : [];
-
-      const previews = photoFilenames.map(
-        (filename) => `${BASE_IMAGE}/users/${filename}`
-      );
-      setExistingPhotos(photoFilenames);
-      setPhotoPreviews(previews);
+      // Ensure it's a flat array of strings
+      if (!Array.isArray(youtubeLinks)) youtubeLinks = [youtubeLinks];
+      youtubeLinks = youtubeLinks.flat().filter(Boolean).map(String);
 
       setFormState((prev) => ({
         ...prev,
         company_youtube_links: "",
-        company_youtube_link: youtubeLinks ? [youtubeLinks] : [],
+        company_youtube_link: youtubeLinks, // already an array of strings
       }));
 
-      setPhotoPreviews(previews);
+      // ... other photo logic
     }
   }, [details]);
 

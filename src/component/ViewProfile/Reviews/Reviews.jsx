@@ -126,7 +126,7 @@ const ReviewSection = ({
               <button
                 className={styles.leaveBtn}
                 onClick={handleOpen}
-                disabled={!isFromManualBids}
+                // disabled={!isFromManualBids}
                 // style={{
                 //   cursor:
                 //     !isFromManualBids || disableReviewButton
@@ -326,7 +326,7 @@ const ReviewSection = ({
 
       {isopen && (
         <SubmitReviewModal
-          setOpen={isopen}
+          isOpen={isopen}
           closeModal={closeModal}
           ProfileIDs={profileId?.profileId}
           reviewsData={details}

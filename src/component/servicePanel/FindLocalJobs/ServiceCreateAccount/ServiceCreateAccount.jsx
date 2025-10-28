@@ -345,6 +345,7 @@ const ServiceCreateAccount = () => {
               errors={errors}
               addressCheck={addressCheck}
               setHasPopulatedFromCompany={setHasPopulatedFromCompany}
+              addressValue={addressValue}
             />
           )}
           {registerStep === 4 && (

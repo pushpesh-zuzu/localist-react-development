@@ -727,6 +727,34 @@ const AboutAccordion = ({ details }) => {
 
         <div className={styles.formGroup}>
           <div className={styles.halfInput}>
+            <label className={styles.label}>Company Name</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_name"
+              value={formState.company_name}
+              onChange={handleInputChange}
+              placeholder="Enter Company Name"
+            />
+            {errors.company_name && (
+              <p style={{ color: "red" }}>{errors.company_name}</p>
+            )}
+          </div>
+          <div className={styles.halfInput}>
+            <label className={styles.label}>Company Reg. No</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_reg_number"
+              value={formState.company_reg_number}
+              onChange={handleInputChange}
+              placeholder="Enter Company Reg. No"
+              maxLength={8}
+            />
+          </div>
+        </div>
+        <div className={styles.formGroup}>
+          <div className={styles.halfInput}>
             <label className={styles.label}>Company email address</label>
             <input
               className={styles.input}
@@ -762,28 +790,17 @@ const AboutAccordion = ({ details }) => {
             />
           </div>
         </div>
+
         <div className={styles.formGroup}>
           <div className={styles.halfInput}>
             <label className={styles.label}>Website</label>
             <input
-              className={styles.input}
+              className={styles.website_input}
               type="text"
               name="company_website"
               value={formState.company_website}
               onChange={handleInputChange}
               placeholder="Enter website url"
-            />
-          </div>
-          <div className={styles.halfInput}>
-            <label className={styles.label}>Company Reg. No</label>
-            <input
-              className={styles.input}
-              type="text"
-              name="company_reg_number"
-              value={formState.company_reg_number}
-              onChange={handleInputChange}
-              placeholder="Enter Company Reg. No"
-              maxLength={8}
             />
           </div>
         </div>
