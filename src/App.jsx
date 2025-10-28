@@ -189,6 +189,10 @@ function App({ initialUrl, hostname, createRouterFactory }) {
     typeof window !== "undefined"
       ? window.location.hostname === "ps1.localists.com"
       : hostname === "ps1.localists.com";
+      const isReactLocalist =
+    typeof window !== "undefined"
+      ? window.location.hostname === "ps1.localists.com"
+      : hostname === "react.localists.com";
   useEffect(() => {
     !userToken &&
       !registerToken &&
@@ -197,7 +201,7 @@ function App({ initialUrl, hostname, createRouterFactory }) {
 
   return (
     <>
-      {(isDevEnvironment || isPs1Environment) && (
+      {(isDevEnvironment || isPs1Environment || isReactLocalist) && (
         <Helmet>
           <meta name="robots" content="noindex" />
         </Helmet>
