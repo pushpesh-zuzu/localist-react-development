@@ -36,6 +36,8 @@ const SubmitReviewModal = ({
     // review: "",
     rating: "",
   });
+  console.log(reviewProfileData, "reviewProfileData");
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -122,8 +124,7 @@ const SubmitReviewModal = ({
           X
         </div>
         <h2>
-          Rate your experience with{" "}
-          {reviewProfileData?.company_name || reviewProfileData?.name}
+          Rate your experience with {reviewProfileData?.business_profile_name}
         </h2>
         <div className={styles.ratingSection}>
           <span>Click to rate :</span>

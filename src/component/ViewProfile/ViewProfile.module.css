@@ -521,6 +521,19 @@
     gap: 10px;
   }
 
+  .modalOverlay {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
   .cancelBtn,
   .submitBtn {
     width: 100%;
