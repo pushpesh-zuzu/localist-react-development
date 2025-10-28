@@ -248,8 +248,6 @@
   .rightContainer {
     padding: 0px 15px 15px 15px;
     width: -webkit-fill-available;
-    position: relative;
-    z-index: 999 !important;
   }
   .container {
     padding-top: 70px;
@@ -260,9 +258,6 @@
 /* <---- tab css ---> */
 
 .tabContainerBox {
-  position: relative;
-  top: 0;
-  z-index: 999 !important;
   height: 80vh;
   overflow-x: auto;
 }
