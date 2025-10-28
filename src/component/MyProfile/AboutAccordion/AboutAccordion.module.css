@@ -461,6 +461,10 @@
     font-size: 14px;
   }
 
+  .website_input {
+    width: -webkit-fill-available;
+  }
+
   .uploadBtn,
   .webcamBtn {
     font-size: 12px;
