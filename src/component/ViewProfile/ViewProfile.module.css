@@ -174,7 +174,7 @@
 
 .rightContainer {
   flex: 1 1 600px;
-  padding: 0px;
+  padding: 20px;
   min-width: 300px;
 }
 
@@ -190,7 +190,7 @@
   }
 
   .rightContainer {
-    padding: 0px;
+    padding: 20px;
   }
 
   .RequestQuoteBtn {
@@ -248,8 +248,6 @@
   .rightContainer {
     padding: 0px 15px 15px 15px;
     width: -webkit-fill-available;
-    position: relative;
-    z-index: 999 !important;
   }
   .container {
     padding-top: 70px;
@@ -262,7 +260,7 @@
 .tabContainerBox {
   position: relative;
   top: 0;
-  z-index: 99 !important;
+  z-index: 9;
   height: 80vh;
   overflow-x: auto;
 }
@@ -270,7 +268,7 @@
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 100;
+  z-index: 1000;
   padding: 10px 0;
 }
 
@@ -525,7 +523,7 @@
 
   .modalOverlay {
     position: fixed;
-    top: 20px;
+    top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -533,7 +531,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 99999 !important;
+    z-index: 9999;
   }
 
   .cancelBtn,
