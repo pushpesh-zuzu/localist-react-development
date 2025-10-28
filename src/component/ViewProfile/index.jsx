@@ -136,7 +136,7 @@ const ViewProfiles = () => {
       const container = rightContainerRef.current;
       const targetPosition = targetRef.current.offsetTop;
 
-      const OFFSET = 140;
+      const OFFSET = 40;
 
       container.scrollTo({
         top: targetPosition - OFFSET,
