@@ -249,7 +249,7 @@
     padding: 0px 15px 15px 15px;
     width: -webkit-fill-available;
     position: relative;
-    z-index: 8 !important;
+    z-index: 999999 !important;
   }
   .container {
     padding-top: 70px;
