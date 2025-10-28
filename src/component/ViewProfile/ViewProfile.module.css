@@ -260,7 +260,8 @@
 .tabContainerBox {
   position: relative;
   top: 0;
-  z-index: 9;
+  z-index: 99 !important;
+
   height: 80vh;
   overflow-x: auto;
 }
