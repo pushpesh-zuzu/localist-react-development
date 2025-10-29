@@ -7,6 +7,7 @@ import howitworkseller from "../../assets/Images/HowItWorks/howitworkseller.jpg"
 import ResigterNow from "../howItWorks/RegisterNow/RegisterNow";
 import BlueBlackTextForH1 from "../common/headings/BlueBlackTextForH1";
 import { Helmet } from "react-helmet-async";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 function HowItWorkSeller() {
   const style = {
@@ -21,6 +22,7 @@ function HowItWorkSeller() {
           content="Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
         />
       </Helmet>
+      <CalonicalTags/>
       <div className={styles.container} style={style}>
         <div className={styles.text}>
           <BlueBlackTextForH1

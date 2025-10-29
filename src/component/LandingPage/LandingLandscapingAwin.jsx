@@ -13,6 +13,7 @@ import {
 } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const LandingLandscapingAwin = ({}) => {
   return (
@@ -20,6 +21,7 @@ const LandingLandscapingAwin = ({}) => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
+      <CalonicalTags />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["landscaping_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["landscaping_ppc"].paragraphs}

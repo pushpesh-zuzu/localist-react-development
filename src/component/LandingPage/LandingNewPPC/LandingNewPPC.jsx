@@ -11,28 +11,30 @@ import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 import { Helmet } from "react-helmet-async";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import { useSelector } from "react-redux";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 const LandingNewPPC = ({
   title = "",
   subHeading = "",
   serviceId,
   serviceName = "",
 }) => {
-//     const { buyerRequest } =
-//       useSelector((state) => state.buyer);
-//  const [hasMountedDetector, setHasMountedDetector] = useState(false);
+  //     const { buyerRequest } =
+  //       useSelector((state) => state.buyer);
+  //  const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
-// useEffect(() => {
-//   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-//     setHasMountedDetector(true);
-//   }
-//   // ❌ Don't depend on buyerRequest.questions
-//   // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, [hasMountedDetector]);
+  // useEffect(() => {
+  //   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+  //     setHasMountedDetector(true);
+  //   }
+  //   // ❌ Don't depend on buyerRequest.questions
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [hasMountedDetector]);
   return (
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
+      <CalonicalTags />
       <div className={styles.pageWrapper}>
         <BuyerRegistrationForLandscapingPPC
           serviceId={serviceId}
@@ -94,8 +96,8 @@ const LandingNewPPC = ({
             />
 
             <p className={styles.paragraphTextDesktop}>
-              Complete the form now to find the ideal local professional
-              for your requirements
+              Complete the form now to find the ideal local professional for
+              your requirements
               {/* <br />
               <span>for your requirements</span> */}
             </p>

@@ -14,6 +14,7 @@ import {
 import { showToast } from "../../utils";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import CalonicalTags from "../../component/common/CalonicalTags/CalonicalTags";
 
 const { Text } = Typography;
 
@@ -119,6 +120,7 @@ const LoginPage = () => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
+      <CalonicalTags />
       <div className="login-box">
         <h1 className="login-title">
           {passwordless ? (

@@ -8,6 +8,7 @@ import LeadershipCard from "./LeaderShipCard";
 import OurInvestor from "./OurInvestor";
 import GetInTouchButton from "./GetInTouch";
 import { Helmet } from "react-helmet-async";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 function AboutUs() {
   return (
     <div>
@@ -18,6 +19,7 @@ function AboutUs() {
           content="Meet our experienced leadership team and the investors driving Localists, the world’s fastest-growing local services marketplace. Get free quotes."
         />
       </Helmet>
+      <CalonicalTags />
       <BannerWrapper headingText="About Us" image={aboutUsBanner} />
       <WhoWeAre />
       {/* <Stats /> */}

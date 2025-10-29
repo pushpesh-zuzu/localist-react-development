@@ -11,6 +11,7 @@ import {
   HealthAndWellnessHowItWork,
   HealthAndWellnessPopularCategory,
 } from "./healthAndWellnessData";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function HealthAndWellness() {
   return (
@@ -32,6 +33,7 @@ function HealthAndWellness() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags breadcrumb={[{ title: "Health", path: "/health" }]} />
       <BannerWithBreadCrum
         accountHeader="Health & Wellness"
         heading2="Professionals"

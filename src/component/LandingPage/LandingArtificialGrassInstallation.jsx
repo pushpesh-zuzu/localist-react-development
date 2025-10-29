@@ -13,6 +13,7 @@ import {
 } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const LandingArtificialGrassInstallation = ({}) => {
   return (
@@ -20,7 +21,7 @@ const LandingArtificialGrassInstallation = ({}) => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-
+      <CalonicalTags />
       <FindDetailAndBannerWrapper
         title={
           LANDING_TITLES_AND_META["artificial_grass_installation_ppc"]?.title

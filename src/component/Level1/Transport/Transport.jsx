@@ -8,6 +8,7 @@ import PopularCategories from "../../category/popularCategories/ClonePopularCate
 
 import AllServiceLevel1 from "../../category/allServices/AllServiceLevel1";
 import { TransportBanner } from "../images";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function Transport() {
   return (
@@ -24,6 +25,14 @@ function Transport() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+        breadcrumb={[
+          {
+            title: "Transportation Services",
+            path: "/transportation-services",
+          }, // no path for last item
+        ]}
+      />
       <BannerWithBreadCrum
         accountHeader="Transportation Services"
         level={2}

@@ -39,6 +39,7 @@ import NotFound from "./NotFound";
 import SearchAndFindAnAccountant from "../component/level3/SearchAndFindAnAccountant";
 import FindServiceLevel3 from "../component/level3/FindServiceLevel3";
 import GetQuotesLevel3 from "../component/level3/GetQuotesLevel3";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -71,7 +72,7 @@ const LevelThreePage = ({}) => {
   const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, slug);
   const TaxData = TAXRETURNDATA[slug];
   const contentBlocks = FIND_SERVICE_CONTENT[slug];
-
+  console.log(BREADCRUMB_CONFIG[slug], "BREADCRUMB_CONFIG[slug]");
   return (
     <>
       <Helmet>
@@ -95,6 +96,7 @@ const LevelThreePage = ({}) => {
           `}
         </script>
       </Helmet>
+      <CalonicalTags breadcrumb={BREADCRUMB_CONFIG[slug]} />
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}

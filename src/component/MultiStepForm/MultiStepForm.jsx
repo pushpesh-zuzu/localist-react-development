@@ -22,6 +22,7 @@ import { handleScrollToBottom } from "../../utils/scroll";
 import PhoneNumberUpdateMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberUpdateMultiStepForm";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -165,6 +166,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
           )}
         </div>
       )}
+      <CalonicalTags />
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>

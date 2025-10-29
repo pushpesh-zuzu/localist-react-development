@@ -6,6 +6,7 @@ import TextInput from "../customInputs/TextInput";
 import { Helmet } from "react-helmet-async";
 import axiosInstance from "../../Api/axiosInstance";
 import { showToast } from "../../utils";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const ContactUs = () => {
   const [form] = Form.useForm();
@@ -53,6 +54,7 @@ const ContactUs = () => {
 
   return (
     <>
+      <CalonicalTags />
       <Helmet>
         <title>
           Get in Touch with Localists | Customer & Professional Support
@@ -62,6 +64,7 @@ const ContactUs = () => {
           content=" Have questions or need help? Contact Localists & Speak with our team, find professionals, or join as a service provider. We’re here to help you connect."
         />
       </Helmet>
+
       <div className={styles.contactSection}>
         <div className={styles.bannerImage} style={bannerImage}>
           <h1 className={styles.bannerTitle}>Contact Us</h1>

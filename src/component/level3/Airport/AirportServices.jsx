@@ -22,6 +22,7 @@ import AirportTransfers from "../banners/AirportTransfers.webp";
 import RegionsComponent from "../../subCategory/Regions/Regions";
 import { transformData } from "../../../utils/allServicesUtils";
 import GetQuotesLevel3 from "../GetQuotesLevel3";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function AirportServices() {
   const transformed = transformData(TRANSPORT_REGION_DATA, "Airport Transfers");
@@ -40,6 +41,9 @@ function AirportServices() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+        breadcrumb={TRANSPORT_BREADCRUMB_CONFIG["Airport Transfers"]}
+      />
       <SearchAndFindAnAccountant
         title={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.title}
         findingHeading={

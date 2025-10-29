@@ -24,6 +24,7 @@ import QuestionAnserMultiStepDriways2 from "./steps/QuestionAnswerMultiStep/Ques
 import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDriveways";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -186,6 +187,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
           )}
         </div>
       )}
+      <CalonicalTags />
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>

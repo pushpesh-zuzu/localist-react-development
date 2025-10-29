@@ -21,6 +21,7 @@ import PostSearchMultiStepFence from "./steps/PostcodeSearch/PostSearchMultiStep
 import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence2";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -170,6 +171,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
           )}
         </div>
       )}
+      <CalonicalTags />
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
