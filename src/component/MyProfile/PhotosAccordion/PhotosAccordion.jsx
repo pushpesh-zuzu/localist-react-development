@@ -28,6 +28,7 @@ const PhotosAccordion = ({ details }) => {
 
   const [existingPhotos, setExistingPhotos] = useState([]);
   const [photoPreviews, setPhotoPreviews] = useState([]);
+  const [linkData, setLinkData] = useState("");
   console.log(details, "details");
 
   console.log(photoPreviews);
@@ -56,10 +57,7 @@ const PhotosAccordion = ({ details }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setLinkData(value);
     dispatch(setIsDirtyRedux(true));
   };
 
@@ -200,22 +198,19 @@ const PhotosAccordion = ({ details }) => {
   };
 
   const handleSave = () => {
-    const link = formState.company_youtube_link?.trim();
-
-    if (!link) {
+    if (!linkData) {
       toast.warn("Please enter a YouTube link.");
       return;
     }
 
-    if (!getYoutubeEmbedUrl(link)) {
+    if (!getYoutubeEmbedUrl(linkData)) {
       toast.warn("Invalid YouTube link.");
       return;
     }
 
     setFormState((prev) => ({
       ...prev,
-      company_youtube_links: "",
-      company_youtube_link: [...prev.company_youtube_links, link], // clear input
+      company_youtube_link: [...prev.company_youtube_link, linkData],
     }));
 
     setAddModalOpen(false);
@@ -424,7 +419,7 @@ const PhotosAccordion = ({ details }) => {
             {Array.isArray(formState.company_youtube_link) &&
             formState.company_youtube_link.length > 0 ? (
               <div className={styles.videoContainer}>
-                {formState.company_youtube_link?.map((link, idx) => (
+                {/* {formState.company_youtube_link?.map((link, idx) => (
                   <iframe
                     key={idx}
                     width="215"
@@ -436,6 +431,62 @@ const PhotosAccordion = ({ details }) => {
                     allowFullScreen
                     className={styles.videoPreview}
                   />
+                ))} */}
+                {formState.company_youtube_link?.map((link, idx) => (
+                  <div
+                    key={idx}
+                    className={styles.videoWrapper}
+                    style={{
+                      position: "relative",
+                      display: "inline-block",
+                      margin: "10px",
+                    }}
+                  >
+                    {/* ❌ Delete Button */}
+                    <button
+                      type="button"
+                      style={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        background: "#fff",
+                        border: "none",
+                        color: "#333",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        borderRadius: "50%",
+                        width: "22px",
+                        height: "22px",
+                        lineHeight: "20px",
+                        textAlign: "center",
+                        boxShadow: "0 0 4px rgba(0,0,0,0.2)",
+                      }}
+                      onClick={() =>
+                        setFormState((prev) => ({
+                          ...prev,
+                          company_youtube_link:
+                            prev.company_youtube_link.filter(
+                              (_, i) => i !== idx
+                            ),
+                        }))
+                      }
+                    >
+                      ×
+                    </button>
+
+                    {/* 🎥 YouTube Preview */}
+                    <iframe
+                      width="215"
+                      height="200"
+                      src={getYoutubeEmbedUrl(link)}
+                      title={`YouTube video ${idx + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className={styles.videoPreview}
+                    />
+                  </div>
                 ))}
               </div>
             ) : (
@@ -467,6 +518,7 @@ const PhotosAccordion = ({ details }) => {
             onClose={() => setAddModalOpen(false)}
             onSave={handleSave}
             formState={formState}
+            value={linkData}
             handleInputChange={handleInputChange}
           />
         </>

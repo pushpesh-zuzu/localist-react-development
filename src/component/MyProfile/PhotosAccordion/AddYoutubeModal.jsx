@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
-import styles from "./PhotosAccordion.module.css"; 
+import React, { useEffect, useState } from "react";
+import styles from "./PhotosAccordion.module.css";
 
-const AddYoutubeModal = ({ isOpen, onClose, onSave, formState, handleInputChange }) => {
+const AddYoutubeModal = ({
+  isOpen,
+  onClose,
+  onSave,
+  formState,
+  handleInputChange,
+  value,
+}) => {
   if (!isOpen) return null;
-   useEffect(() => {
-        document.body.style.overflow = 'hidden';
-        return () => {
-          document.body.style.overflow = 'auto';
-        };
-        
-      }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className={styles.modalOverlay}>
@@ -20,14 +27,18 @@ const AddYoutubeModal = ({ isOpen, onClose, onSave, formState, handleInputChange
           type="text"
           placeholder="Enter YouTube video link"
           name="company_youtube_link"
-          value={formState.company_youtube_link}
+          value={value}
           onChange={handleInputChange}
           className={styles.youtubeInput}
         />
 
         <div className={styles.buttonGroup}>
-          <button onClick={onClose} className={styles.cancelBtn}>Cancel</button>
-          <button onClick={onSave} className={styles.saveBtn}>Save</button>
+          <button onClick={onClose} className={styles.cancelBtn}>
+            Cancel
+          </button>
+          <button onClick={onSave} className={styles.saveBtn}>
+            Save
+          </button>
         </div>
       </div>
     </div>

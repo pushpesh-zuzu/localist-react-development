@@ -47,10 +47,7 @@ const AboutAccordion = ({ details }) => {
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // const companyNameData = useSelector((state)=> state.company)
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  console.log(
-    companyData?.registered_office_address?.address_line_1,
-    "companyNameData"
-  );
+  console.log(registerData?.city, registerData?.zipcode, "companyNameData");
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
@@ -99,6 +96,8 @@ const AboutAccordion = ({ details }) => {
     service_delete_id: "",
   });
 
+  console.log(formState, "formstate");
+
   const [errors, setErrors] = useState({});
   const fileInputRefs = {
     company_logo: useRef(),
@@ -121,6 +120,8 @@ const AboutAccordion = ({ details }) => {
   const [croppedPreview, setCroppedPreview] = useState(null);
 
   const [isDirty, setIsDirty] = useState(false);
+
+  const [croppingTarget, setCroppingTarget] = useState("");
 
   const companyError = useSelector((state) => state.companyLook?.companyError);
 
@@ -178,13 +179,14 @@ const AboutAccordion = ({ details }) => {
     const { name } = e.target;
 
     // For profile image, open cropper modal
-    if (name === "profile_image") {
+    if (name === "profile_image" || name === "company_logo") {
       const reader = new FileReader();
       reader.onload = () => {
         setImageSrc(reader.result);
         setIsCropping(true);
         setZoom(1);
         setCrop({ x: 0, y: 0 });
+        setCroppingTarget(name);
       };
       reader.readAsDataURL(file);
       return;
@@ -439,6 +441,39 @@ const AboutAccordion = ({ details }) => {
     });
   };
 
+  // const handleApplyCropped = async () => {
+  //   if (!imageSrc || !croppedAreaPixels) return;
+
+  //   try {
+  //     const { blob, dataUrl } = await getCroppedImg(
+  //       imageSrc,
+  //       croppedAreaPixels
+  //     );
+  //     const croppedFile = new File(
+  //       [blob],
+  //       // "profile_image.jpg",
+  //       `${croppingTarget}.jpg`,
+  //       {
+  //         type: "image/jpeg",
+  //       }
+  //     );
+
+  //     setFormState((prev) => ({
+  //       ...prev,
+  //       // profile_image: croppedFile,
+  //       // profile_imagePreview: dataUrl,
+  //       [croppingTarget]: croppedFile,
+  //       [`${croppingTarget}Preview`]: dataUrl,
+  //     }));
+
+  //     setCroppedPreview(dataUrl);
+  //     setIsCropping(false); // Close the crop modal
+  //     setCroppingTarget(""); // reset
+  //   } catch (error) {
+  //     console.error("Error while cropping image:", error);
+  //   }
+  // };
+
   const handleApplyCropped = async () => {
     if (!imageSrc || !croppedAreaPixels) return;
 
@@ -447,18 +482,26 @@ const AboutAccordion = ({ details }) => {
         imageSrc,
         croppedAreaPixels
       );
-      const croppedFile = new File([blob], "profile_image.jpg", {
+
+      // ✅ Ensure it's a valid Blob
+      const finalBlob =
+        blob instanceof Blob ? blob : new Blob([blob], { type: "image/jpeg" });
+
+      // ✅ Create a new File object safely
+      const croppedFile = new File([finalBlob], `${croppingTarget}.jpg`, {
         type: "image/jpeg",
       });
 
+      // ✅ Update formState & preview
       setFormState((prev) => ({
         ...prev,
-        profile_image: croppedFile,
-        profile_imagePreview: dataUrl,
+        [croppingTarget]: croppedFile,
+        [`${croppingTarget}Preview`]: dataUrl,
       }));
 
       setCroppedPreview(dataUrl);
-      setIsCropping(false); // Close the crop modal
+      setIsCropping(false);
+      setCroppingTarget(""); // Reset after applying
     } catch (error) {
       console.error("Error while cropping image:", error);
     }
@@ -824,7 +867,13 @@ const AboutAccordion = ({ details }) => {
               className={styles.input}
               type="text"
               name="company_location"
-              value={formState.company_location}
+              value={[
+                formState.company_location,
+                registerData?.city,
+                registerData?.zipcode,
+              ]
+                .filter(Boolean)
+                .join(", ")}
               onChange={handleInputChange}
               placeholder="Enter your business location"
             />
