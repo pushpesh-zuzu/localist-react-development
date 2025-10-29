@@ -738,7 +738,7 @@ const LogSwitch = () => {
                     </a>
                   </div>
                 )}
-                <div className={styles.logoutBtn}>
+                {/* <div className={styles.logoutBtn}>
                   <a
                     href={
                       getUserType() == 1 ? "/buyers/create" : "/sellers/leads"
@@ -759,7 +759,7 @@ const LogSwitch = () => {
                   >
                     Switch to {getUserType() == 1 ? "Buyer" : "Seller"}
                   </a>
-                </div>
+                </div> */}
                 {getUserType() == 2 && (
                   <div className={styles.logoutBtn}>
                     <a
