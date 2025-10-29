@@ -119,11 +119,9 @@ const QuestionAnswerMultiStepDriveways = ({
 
   const handleOptionChange = (e) => {
     const { value, checked } = e.target;
-    const isSingle =
-      formattedQuestions[currentQuestion]?.option_type === "single";
+    const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      // ✅ Set selected option immediately
       setSelectedOption([value]);
       setError("");
 
@@ -158,11 +156,11 @@ const QuestionAnswerMultiStepDriveways = ({
     }
 
     const finalAnswer = selectedOption.map((opt) =>
-      opt === "Something else (please describe)" ? otherText : opt
+      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
     const updatedAnswer = {
-      ques: formattedQuestions[currentQuestion]?.questions,
+      ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
     };
 
@@ -170,8 +168,8 @@ const QuestionAnswerMultiStepDriveways = ({
     const previousAnswers = buyerRequest?.questions || [];
 
     // Check if question already exists
-    const questionIndex = previousAnswers.findIndex(
-      (q) => q.ques === updatedAnswer.ques
+    const questionIndex = previousAnswers?.findIndex(
+      (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;
@@ -191,23 +189,30 @@ const QuestionAnswerMultiStepDriveways = ({
     );
 
     const nextQ = selectedObj?.next_question;
-
-    // ✅ FIRST QUESTION: 10% increase (85% → 95%)
     if (!isFirstQuestionAnswered) {
       setIsFirstQuestionAnswered(true);
       setProgressPercentage(95);
     }
-
     if (nextQ === Number(nextQ)) {
       onNext();
     } else if (nextQ === "last") {
       onNext();
     } else if (nextQ && questionIndexMap[nextQ] !== undefined) {
-      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+      setQuestionHistory((prev) => {
+        if (prev[prev.length - 1] !== questionIndexMap[nextQ]) {
+          return [...prev, questionIndexMap[nextQ]];
+        }
+        return prev;
+      });
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
       if (currentQuestion < totalQuestions - 1) {
-        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setQuestionHistory((prev) => {
+          if (prev[prev.length - 1] !== currentQuestion + 1) {
+            return [...prev, currentQuestion + 1];
+          }
+          return prev;
+        });
         setCurrentQuestion(currentQuestion + 1);
       } else {
         onNext();
@@ -231,17 +236,17 @@ const QuestionAnswerMultiStepDriveways = ({
     }
 
     const finalAnswer = selected.map((opt) =>
-      opt === "Something else (please describe)" ? otherText : opt
+      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
     const updatedAnswer = {
-      ques: formattedQuestions[currentQuestion]?.questions,
+      ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
     };
 
     const previousAnswers = buyerRequest?.questions || [];
-    const questionIndex = previousAnswers.findIndex(
-      (q) => q.ques === updatedAnswer.ques
+    const questionIndex = previousAnswers?.findIndex(
+      (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;
@@ -259,23 +264,39 @@ const QuestionAnswerMultiStepDriveways = ({
     );
 
     const nextQ = selectedObj?.next_question;
-
-    // ✅ FIRST QUESTION: 10% increase (85% → 95%)
     if (!isFirstQuestionAnswered) {
       setIsFirstQuestionAnswered(true);
       setProgressPercentage(95);
     }
-
     if (nextQ === Number(nextQ)) {
+      // dispatch(
+      //   setbuyerRequestData({
+      //     service_id: service?.id || buyerRequest?.service_id,
+      //     serviceName: serviceName || buyerRequest?.serviceName,
+      //     postcode: buyerRequest?.postcode,
+      //     city: citySerach,
+      //     questions: updatedAnswers,
+      //   })
+      // );
       onNext();
     } else if (nextQ === "last") {
       onNext();
     } else if (nextQ && questionIndexMap[nextQ] !== undefined) {
-      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+      setQuestionHistory((prev) => {
+        if (prev[prev.length - 1] !== questionIndexMap[nextQ]) {
+          return [...prev, questionIndexMap[nextQ]];
+        }
+        return prev;
+      });
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
       if (currentQuestion < totalQuestions - 1) {
-        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setQuestionHistory((prev) => {
+          if (prev[prev.length - 1] !== currentQuestion + 1) {
+            return [...prev, currentQuestion + 1];
+          }
+          return prev;
+        });
         setCurrentQuestion(currentQuestion + 1);
       } else {
         onNext();
@@ -367,18 +388,14 @@ const QuestionAnswerMultiStepDriveways = ({
                   }
                   name="surveyOption"
                   value={opt.option}
-                  checked={isSelected}
+                  checked={selectedOption.includes(opt.option)}
                   onChange={handleOptionChange}
                   onClick={(e) => {
                     const isSingle =
                       formattedQuestions[currentQuestion]?.option_type ===
                       "single";
-                    if (
-                      isSingle &&
-                      isSelected &&
-                      opt.option !== "Something else (please describe)"
-                    ) {
-                      handleNext([e.target.value]);
+                    if (isSingle && selectedOption.includes(opt.option)) {
+                      onNext();
                     }
                   }}
                 />
