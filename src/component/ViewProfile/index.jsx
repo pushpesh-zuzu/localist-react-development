@@ -60,6 +60,8 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
+  console.log("review test");
+
   const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
   );

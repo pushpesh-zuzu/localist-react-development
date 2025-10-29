@@ -92,6 +92,8 @@ const ReviewSection = ({
     }
   };
 
+  console.log("review test");
+
   const totalReviews = 5;
   console.log(reviewProfileData, viewProfileData, "viewProfileData");
 
