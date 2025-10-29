@@ -55,6 +55,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [localRequestId, setLocalRequestId] = useState(null);
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     if (buyerStep === 1) {
@@ -155,27 +156,26 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMountedDetector]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsDesktop(window.innerWidth > 768);
+      handleResize(); // initial check
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   return (
     <>
+      <CalonicalTags />
       {localRequestId === null && (
         <div>
-          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+          {isDesktop ? (
             <NavigationDetectorDesktop />
           ) : (
             <NavigationDetectorWithConfirmations />
           )}
         </div>
       )}
-      <CalonicalTags />
-      <Helmet>
-        <meta name="robots" content="noindex" />
-        <title>Compare Free Quotes from Local Landscapers | Localists</title>
-
-        <meta
-          name="description"
-          content="Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!"
-        />
-      </Helmet>
 
       {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
