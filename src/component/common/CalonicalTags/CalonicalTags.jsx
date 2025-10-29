@@ -9,7 +9,7 @@ const CalonicalTags = ({ breadcrumb = [] }) => {
   const country = parts[1] || "gb";
   const path = parts.slice(2).join("/");
 
-  const canonicalUrl = `${baseUrl}/eb/gb/${path}`;
+  const canonicalUrl = `${baseUrl}/en/gb/${path}`;
   const breadcrumbList = breadcrumb.length
     ? [
         {
