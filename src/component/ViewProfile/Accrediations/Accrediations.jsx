@@ -9,7 +9,7 @@ const Accrediations = ({ details }) => {
   const data = details?.accreditations;
   return (
     <div className={styles.accrediationsContainer}>
-      <h2 style={{ marginBottom: 20 }}>Accrediations</h2>
+      <h2 style={{ marginBottom: 20 }}>Accreditations</h2>
       {/* {data?.map((item) => {
         return (
           <>
@@ -62,8 +62,8 @@ const Accrediations = ({ details }) => {
           <img src={iIcon} alt="" style={{ marginTop: "4px" }} />
         </span>
         <span>
-          Professionals report their own accrediations. Please ask them for more
-          details if required.{" "}
+          Professionals report their own accreditations. Please ask them for
+          more details if required.{" "}
         </span>
       </div>
     </div>

@@ -955,7 +955,7 @@ const AboutAccordion = ({ details }) => {
         <label className={styles.label}>Describe Your Business</label>
         <textarea
           className={styles.textarea}
-          rows={5}
+          rows={7}
           name="about_company"
           value={formState.about_company}
           onChange={handleInputChange}

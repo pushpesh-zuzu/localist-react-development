@@ -651,8 +651,8 @@ const BidsList = ({ previousStep }) => {
                       <div className={styles.imageWrapper}>
                         <img
                           src={
-                            seller?.profile_image
-                              ? `${BASE_IMAGE}/users/${seller?.profile_image}`
+                            seller?.company_logo
+                              ? `${BASE_IMAGE}/users/${seller?.company_logo}`
                               : DEFAULT_PROFILE_IMAGE
                           }
                           alt="Profile"
@@ -666,7 +666,7 @@ const BidsList = ({ previousStep }) => {
                               {shouldShowGreenIcons && index < bidTotal && (
                                 <img src={GreenTickIcon} alt="" />
                               )}
-                              {seller?.name}
+                              {seller?.business_profile_name}
                             </h3>
                             <p>
                               <img src={AutoBidLocationIcon} alt="" />
