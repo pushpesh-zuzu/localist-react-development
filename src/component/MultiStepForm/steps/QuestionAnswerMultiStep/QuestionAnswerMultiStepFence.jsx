@@ -158,8 +158,8 @@ const QuestionAnswerMultiStepFence = ({
     const previousAnswers = buyerRequest?.questions || [];
 
     // Check if question already exists
-    const questionIndex = previousAnswers.findIndex(
-      (q) => q.ques === updatedAnswer.ques
+    const questionIndex = previousAnswers?.findIndex(
+      (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;
@@ -235,8 +235,8 @@ const QuestionAnswerMultiStepFence = ({
     };
 
     const previousAnswers = buyerRequest?.questions || [];
-    const questionIndex = previousAnswers.findIndex(
-      (q) => q.ques === updatedAnswer.ques
+    const questionIndex = previousAnswers?.findIndex(
+      (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;

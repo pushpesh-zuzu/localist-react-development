@@ -296,15 +296,15 @@ const ViewProfiles = () => {
     availableTabs.push("Videos");
   if (
     profileData?.details?.extra_links?.length > 0 ||
-    (!profileData?.details?.fb_link &&
+    (profileData?.details?.fb_link &&
       profileData?.details?.fb_link?.length > 0) ||
-    (!profileData?.details?.insta_link &&
+    (profileData?.details?.insta_link &&
       profileData?.details?.insta_link?.length > 0) ||
-    (!profileData?.details?.linkedin_link &&
+    (profileData?.details?.linkedin_link &&
       profileData?.details?.linkedin_link?.length > 0) ||
-    (!profileData?.details?.tiktok_link &&
+    (profileData?.details?.tiktok_link &&
       profileData?.details?.tiktok_link?.length > 0) ||
-    (!profileData?.details?.twitter_link &&
+    (profileData?.details?.twitter_link &&
       profileData?.details?.twitter_link?.length > 0)
   )
     availableTabs.push("Links");
