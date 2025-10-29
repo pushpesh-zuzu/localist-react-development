@@ -1,4 +1,4 @@
-name: Auto Merge React into Main
+name: Merge React into Main Branch (React)
 
 on:
   push:
