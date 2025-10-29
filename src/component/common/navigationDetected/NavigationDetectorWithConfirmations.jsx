@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
+import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorWithConfirmations = () => {
   const dispatch = useDispatch();

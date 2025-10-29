@@ -8,7 +8,7 @@ const CalonicalTags = ({ breadcrumb = [] }) => {
   const lang = parts[0] || "en";
   const country = parts[1] || "gb";
   const path = parts.slice(2).join("/");
-
+  const cleanPath = (p) => (p ? p.replace(/^\/+/, "") : "");
   const canonicalUrl = `${baseUrl}/en/gb/${path}`;
   const breadcrumbList = breadcrumb.length
     ? [
@@ -22,7 +22,9 @@ const CalonicalTags = ({ breadcrumb = [] }) => {
           "@type": "ListItem",
           position: index + 2,
           name: item?.title || "",
-          item: `${baseUrl}/en/gb/${item?.path ? item.path : `/${path}`}`,
+          item: `${baseUrl}/en/gb/${
+            item?.path ? cleanPath(item.path) : `${path}`
+          }`,
         })),
       ]
     : [];
