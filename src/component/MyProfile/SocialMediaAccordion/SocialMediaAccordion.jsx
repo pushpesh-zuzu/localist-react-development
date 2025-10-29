@@ -120,12 +120,93 @@ const SocialMediaAccordion = ({ details }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
+  // const handleSubmit = () => {
+  //   if (!validateAll()) {
+  //     toast.error("Please fix validation errors before submitting.");
+  //     return;
+  //   }
+  //   dispatch(updateSellerSocialLinks(formState));
+  // };
+
+  // const handleSubmit = () => {
+  //   if (!validateAll()) {
+  //     toast.error("Please fix validation errors before submitting.");
+  //     return;
+  //   }
+
+  //   // Clean only before dispatching
+  //   const cleanedData = {
+  //     ...formState,
+  //     extra_links: formState.extra_links
+  //       ?.replace(/[\r\n]+/g, "") // remove all newlines
+  //       .replace(/\s*,\s*/g, ",") // normalize commas (optional)
+  //       .trim(),
+  //   };
+
+  //   dispatch(updateSellerSocialLinks(cleanedData));
+  // };
+
+  // const handleSubmit = () => {
+  //   if (!validateAll()) {
+  //     toast.error("Please fix validation errors before submitting.");
+  //     return;
+  //   }
+
+  //   // Clean only before dispatching
+  //   const cleanedData = {
+  //     ...formState,
+  //     extra_links: formState.extra_links
+  //       ?.replace(/[\r\n]+/g, " ") // replace newlines with spaces
+  //       .replace(/\s+/g, " ") // collapse multiple spaces/tabs into one
+  //       .replace(/\s*,\s*/g, ",") // normalize commas (remove spaces around)
+  //       .replace(/\s+/g, ",") // convert remaining spaces between links to commas
+  //       .replace(/,+/g, ",") // collapse multiple commas
+  //       .replace(/^,|,$/g, "") // trim commas from start/end
+  //       .trim(),
+  //   };
+
+  //   dispatch(updateSellerSocialLinks(cleanedData));
+  // };
+
   const handleSubmit = () => {
     if (!validateAll()) {
       toast.error("Please fix validation errors before submitting.");
       return;
     }
-    dispatch(updateSellerSocialLinks(formState));
+
+    // Step 1: Clean input text
+    const cleanedLinksString = formState.extra_links
+      ?.replace(/[\r\n]+/g, " ") // replace newlines with spaces
+      .replace(/\s+/g, " ") // collapse multiple spaces/tabs
+      .replace(/\s*,\s*/g, ",") // normalize commas (no spaces around yet)
+      .replace(/\s+/g, ",") // convert leftover spaces to commas
+      .replace(/,+/g, ",") // collapse multiple commas
+      .replace(/^,|,$/g, "") // remove leading/trailing commas
+      .trim();
+
+    // Step 2: Split into array and validate
+    const linksArray = cleanedLinksString ? cleanedLinksString.split(",") : [];
+
+    // Only keep valid links (must contain http(s):// or www.)
+    const validLinks = linksArray.filter((link) =>
+      /^(https?:\/\/|www\.)/i.test(link.trim())
+    );
+
+    // Step 3: If any invalid links were removed, show an error toast
+    if (linksArray.length !== validLinks.length) {
+      toast.error(
+        "Please enter valid links (must start with http://, https://, or www.)"
+      );
+      return;
+    }
+
+    // Step 4: Build cleaned data (add a single space after each comma)
+    const cleanedData = {
+      ...formState,
+      extra_links: validLinks.map((link) => link.trim()).join(", "), // 👈 note the space after comma
+    };
+
+    dispatch(updateSellerSocialLinks(cleanedData));
   };
 
   useEffect(() => {
