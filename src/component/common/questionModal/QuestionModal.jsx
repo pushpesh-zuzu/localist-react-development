@@ -14,6 +14,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 import { useLocation } from "react-router";
+import useUserInfo from "../../../utils/getUserIp";
 
 const QuestionModal = ({
   questions = [],
@@ -51,6 +52,8 @@ const QuestionModal = ({
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
   const [questionHistory, setQuestionHistory] = useState([0]);
+  const { ip, url } = useUserInfo();
+
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
@@ -229,6 +232,8 @@ const QuestionModal = ({
         formData.append("msclickid", msclickid || "");
         formData.append("utm_source", utm_source || "");
         formData.append("keyword", keyword || "");
+        formData.append("entry_url", url);
+        formData.append("user_ip_address ", ip);
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {

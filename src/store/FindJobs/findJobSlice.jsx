@@ -67,6 +67,8 @@ const initialState = {
     validPostCode: false,
     validPostCode2: false,
     postcode2: null,
+    entry_url: "",
+    user_ip_address: "",
   },
   authToken: JSON.parse(safeLocalStorage.getItem("registerTokens")) || null,
 };
@@ -545,6 +547,8 @@ const findJobSlice = createSlice({
         miles2: "30",
         company_reg_number: "",
         validPostCode: false,
+        entry_url: "",
+        user_ip_address: "",
       };
     },
   },

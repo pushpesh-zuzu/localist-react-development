@@ -15,6 +15,7 @@ import {
   setbuyerRequestData,
 } from "../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
+import useUserInfo from "../../../utils/getUserIp";
 
 const EmailMatchPage = ({
   onClose,
@@ -33,6 +34,7 @@ const EmailMatchPage = ({
   );
   const { search } = useLocation();
   const params = new URLSearchParams(search);
+  const { ip, url } = useUserInfo();
 
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
@@ -113,7 +115,8 @@ const EmailMatchPage = ({
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|in|co|io|ai)$/i.test(email)),
+        (!email ||
+          !/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|in|co|io|ai)$/i.test(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
     };
@@ -155,6 +158,9 @@ const EmailMatchPage = ({
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
+
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           // showToast(

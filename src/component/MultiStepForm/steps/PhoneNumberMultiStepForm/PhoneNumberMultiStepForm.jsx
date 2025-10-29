@@ -11,6 +11,7 @@ import {
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PhoneNumberMultiStepForm.module.css";
 import { useLocation } from "react-router";
+import useUserInfo from "../../../../utils/getUserIp";
 
 const PhoneNumberMultiStepForm = ({
   nextStep,
@@ -38,6 +39,7 @@ const PhoneNumberMultiStepForm = ({
   const [errors, setErrors] = useState({
     phone: false,
   });
+  const { ip, url } = useUserInfo();
   const [mobileErrorMessage, setMobileErrorMessage] = useState("");
 
   const handlePhoneChange = (e) => {
@@ -87,6 +89,8 @@ const PhoneNumberMultiStepForm = ({
       formData.append("msclickid", msclickid || "");
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
 
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {

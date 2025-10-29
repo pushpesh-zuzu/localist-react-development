@@ -16,6 +16,7 @@ import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice
 import { useLocation } from "react-router";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import useUserInfo from "../../../utils/getUserIp";
 
 const QuestionAnswerPage = ({
   questions = [],
@@ -61,6 +62,8 @@ const QuestionAnswerPage = ({
   const [error, setError] = useState("");
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [showDelay, setShowDelay] = useState(false);
+  const { ip, url } = useUserInfo();
+
   useEffect(() => {
     if (questions.length > 0 && currentQuestion === -1) {
       setCurrentQuestion(0);
@@ -245,6 +248,8 @@ const QuestionAnswerPage = ({
         formData.append("msclickid", msclickid || "");
         formData.append("utm_source", utm_source || "");
         formData.append("keyword", keyword || "");
+        formData.append("entry_url", url);
+        formData.append("user_ip_address ", ip);
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {

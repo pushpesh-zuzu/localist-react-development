@@ -14,7 +14,7 @@ import {
   TREE_SURGEON_FAQ,
   TREE_SURGEON_OTHER_SERVICES_DATA,
 } from "./TreeSurgeonData";
-import TreeSugeon from "../banners/TreeSugeon.webp";
+import TreeSugeon from "../banners/TreeSugeon.jpg";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";

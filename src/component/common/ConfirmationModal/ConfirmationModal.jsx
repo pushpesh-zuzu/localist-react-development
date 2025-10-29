@@ -18,6 +18,7 @@ import {
 import { clearAuthData, showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 import { extractAllParams } from "../../../utils/decodeURLParams";
+import useUserInfo from "../../../utils/getUserIp";
 // import { showToast } from "../../../../../utils";
 
 const ConfirmationModal = ({
@@ -106,6 +107,7 @@ const ConfirmationModal = ({
   console.log(buyerRequest, formData, "buyerRequest");
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
+  const { ip, url } = useUserInfo();
 
   // ✅ Ab saare parameters mil jayenge
   const campaignid = allParams.gad_campaignid || "";
@@ -146,6 +148,8 @@ const ConfirmationModal = ({
       formData.append("msclickid", msclickid || "");
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
       formData.append("form_status", 0);
 
       // dispatch(createRequestData(formData)).then((result) => {

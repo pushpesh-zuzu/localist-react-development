@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
+import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorDesktop = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const NavigationDetectorDesktop = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   const latestData = useRef({ userToken, buyerRequest, citySerach });
 
@@ -66,6 +68,8 @@ const NavigationDetectorDesktop = () => {
     beaconData.append("utm_source", utm_source || "");
     beaconData.append("keyword", keyword || "");
     beaconData.append("form_status", "0");
+    formData.append("entry_url", url);
+    formData.append("user_ip_address ", ip);
 
     const blob = new Blob([beaconData.toString()], {
       type: "application/x-www-form-urlencoded",

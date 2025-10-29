@@ -15,6 +15,7 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
+import useUserInfo from "../../../../../utils/getUserIp";
 
 const EmailMatch = ({
   onClose,
@@ -33,7 +34,7 @@ const EmailMatch = ({
   );
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-  console.log(buyerRegisterFormData);
+  const { ip, url } = useUserInfo();
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
@@ -229,6 +230,9 @@ const EmailMatch = ({
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
+
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           // showToast(

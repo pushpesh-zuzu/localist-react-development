@@ -3,7 +3,6 @@ import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
-  registerQuoteCustomer,
 } from "../../../../store/Buyer/BuyerSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { message } from "antd";
