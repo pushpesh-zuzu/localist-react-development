@@ -47,7 +47,13 @@ const AboutAccordion = ({ details }) => {
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // const companyNameData = useSelector((state)=> state.company)
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  console.log(registerData?.city, registerData?.zipcode, "companyNameData");
+  console.log(
+    registerData?.city,
+    registerData?.zipcode,
+    registerData?.country,
+    registerData,
+    "companyNameData"
+  );
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
@@ -871,6 +877,7 @@ const AboutAccordion = ({ details }) => {
                 formState.company_location,
                 registerData?.city,
                 registerData?.zipcode,
+                registerData?.country,
               ]
                 .filter(Boolean)
                 .join(", ")}

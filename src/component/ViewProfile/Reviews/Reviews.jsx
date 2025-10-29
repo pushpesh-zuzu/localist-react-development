@@ -80,8 +80,18 @@ const ReviewSection = ({
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
   const handleOpen = () => {
-    setIsOpen(true);
+    let email = viewProfileData?.email || reviewProfileData?.email;
+
+    const registerDataToken = JSON.parse(
+      localStorage.getItem("registerDataToken")
+    );
+
+    // Only open if emails are different
+    if (registerDataToken?.email !== email) {
+      setIsOpen(true);
+    }
   };
+
   const totalReviews = 5;
   console.log(reviewProfileData, viewProfileData, "viewProfileData");
 

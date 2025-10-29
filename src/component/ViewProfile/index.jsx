@@ -78,6 +78,17 @@ const ViewProfiles = () => {
 
   const servicesArray = profileData?.services || [];
 
+  useEffect(() => {
+    let email = profileData.email;
+
+    const registerDataToken = JSON.parse(
+      localStorage.getItem("registerDataToken")
+    );
+    if (registerDataToken && registerDataToken?.email === email) {
+      setIsOpen(false);
+    }
+  }, [profileData]);
+
   const serviceNames = servicesArray
     .flatMap((service) => service.user_services?.map((us) => us.name))
     .filter(Boolean);

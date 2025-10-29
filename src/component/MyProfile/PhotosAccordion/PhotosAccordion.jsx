@@ -214,6 +214,7 @@ const PhotosAccordion = ({ details }) => {
     }));
 
     setAddModalOpen(false);
+    setLinkData("");
   };
 
   const handleOpen = () => {
