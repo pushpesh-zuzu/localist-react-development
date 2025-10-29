@@ -711,7 +711,7 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-      {
+    {
       id: 6,
       image: GutterCleanerSlider,
       description: "Tree Surgeon",
@@ -751,7 +751,7 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-      {
+    {
       id: 6,
       image: TreesugeonSlider,
       description: "Tree Surgeon",
@@ -1511,25 +1511,24 @@ const CONTENT_CONFIG = {
 const BREADCRUMB_CONFIG = {
   "fencing-contractors-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Fence & Gate Installation", path: "fencing-contractors-near-me" }, // no path for last item
+    { title: "Fence & Gate Installation" }, // no path for last item
   ],
   "driveway-installers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Driveway Installation", path: "driveway-installers-near-me" }, // no path
+    { title: "Driveway Installation" }, // no path
   ],
   "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio Services", path: "patio-layers-near-me" }, // no path
+    { title: "Patio Services" }, // no path
   ],
   "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Landscaping", path: "landscape-gardeners-near-me" }, // no path
+    { title: "Landscaping" }, // no path
   ],
   "artificial-grass-installers-near-me": [
     { title: "Home & Garden", path: "/home" },
     {
       title: "Artificial Grass Installation",
-      path: "artificial-grass-installers-near-me",
     }, // no path
   ],
 };
@@ -2491,6 +2490,15 @@ const LEVEL_THIRD_SERVICES_NAME = {
   "landscape-gardeners-near-me": "Landscaping",
   "artificial-grass-installers-near-me": "Artificial Grass Installation",
 };
+const CURRENT_PAGE = {
+  "fencing-contractors-near-me": { name: "fencing-contractors-near-me" }, // no path for last item
+  "driveway-installers-near-me": { name: "driveway-installers-near-me" },
+  "patio-layers-near-me": { name: "patio-layers-near-me" },
+  "landscape-gardeners-near-me": { name: "landscape-gardeners-near-me" },
+  "artificial-grass-installers-near-me": {
+    name: "artificial-grass-installers-near-me",
+  },
+};
 
 export {
   POPULAR_CITIES,
@@ -2510,4 +2518,5 @@ export {
   FIND_SERVICE_CONTENT,
   CONTENT_CONFIG_META,
   LEVEL_THIRD_SERVICES_NAME,
+  CURRENT_PAGE,
 };

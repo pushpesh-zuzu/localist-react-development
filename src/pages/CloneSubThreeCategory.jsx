@@ -32,6 +32,7 @@ import {
   REVIEWS_DATA,
   TAXRETURNDATA,
   POPULAR_CITIES,
+  CURRENT_PAGE,
 } from "../component/level3/level3Data";
 import { getDataByKey } from "../utils/databyKey";
 import { useParams } from "react-router-dom";
@@ -54,10 +55,11 @@ const transformFenceInstallersData = (rawData, id) => {
 
 const LevelThreePage = ({}) => {
   const { slug } = useParams();
-  const breadcrumb = BREADCRUMB_CONFIG[slug];
-  const lastItem = breadcrumb?.[breadcrumb.length - 1]; // last element le lo safely
-  const isServiceAvailable = lastItem?.path === slug;
-
+  // const breadcrumb = BREADCRUMB_CONFIG[slug];
+  // const lastItem = breadcrumb?.[breadcrumb.length - 1]; // last element le lo safely
+  // const isServiceAvailable = lastItem?.path === slug;
+  const pageAvailable = CURRENT_PAGE[slug];
+  const isServiceAvailable = pageAvailable?.name === slug;
   if (!isServiceAvailable) return <NotFound />;
   function getHowItWorksData(key) {
     return HowItWorksData[slug] || null;
@@ -72,7 +74,6 @@ const LevelThreePage = ({}) => {
   const FrequentlyQuestion = getDataByKey(FREQUENTLY_DATA, slug);
   const TaxData = TAXRETURNDATA[slug];
   const contentBlocks = FIND_SERVICE_CONTENT[slug];
-  console.log(BREADCRUMB_CONFIG[slug], "BREADCRUMB_CONFIG[slug]");
   return (
     <>
       <Helmet>

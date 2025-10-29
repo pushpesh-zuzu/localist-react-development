@@ -14,6 +14,9 @@ const TreeSurgeonImage1 = lazy(() =>
 const TreeSurgeonImage2 = lazy(() =>
   import("../component/level3/TreeSurgeon/TreeSurgeonImage2")
 );
+const TreeSurgeonImage3 = lazy(() =>
+  import("../component/level3/TreeSurgeon/TreeSurgeonImage3")
+);
 const Tutor = lazy(() => import("../component/level3/Tutors/Tutor"));
 const PhysicsAndMathsTutor = lazy(() =>
   import("../component/level3/PhysicsAndMathsTutor/PhysicsAndMathsTutor")
@@ -35,6 +38,7 @@ const levelThreePagesRoutes = [
   { path: "tree-surgeon-near-me", Component: TreeSurgeon },
     { path: "tree-surgeon-near-me-banner1", Component: TreeSurgeonImage1 },
   { path: "tree-surgeon-near-me-banner2", Component: TreeSurgeonImage2 },
+  { path: "tree-surgeon-near-me-banner3", Component: TreeSurgeonImage3 },
 
   { path: "tutors-near-me", Component: Tutor },
   { path: "physics-maths-tutors-near-me", Component: PhysicsAndMathsTutor },
