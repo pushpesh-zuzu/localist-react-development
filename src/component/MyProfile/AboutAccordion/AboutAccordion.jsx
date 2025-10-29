@@ -886,7 +886,7 @@ const AboutAccordion = ({ details }) => {
             />
           </>
         )}
-        <div className={styles.checkboxRow}>
+        {/* <div className={styles.checkboxRow}>
           <input
             type="checkbox"
             id="dontShow"
@@ -899,8 +899,8 @@ const AboutAccordion = ({ details }) => {
               <img src={iIcon} alt="" />
             </span>
           </label>
-        </div>
-        <hr className={styles.hrline} />
+        </div> */}
+        {/* <hr className={styles.hrline} /> */}
         <label className={styles.label}>
           Can’t provide a specific location?
         </label>
