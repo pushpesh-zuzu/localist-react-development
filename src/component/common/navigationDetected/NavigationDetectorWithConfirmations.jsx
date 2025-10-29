@@ -19,6 +19,7 @@ const NavigationDetectorWithConfirmations = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   // 🧠 Ref to store latest data safely
   const latestData = useRef({
@@ -78,6 +79,8 @@ const NavigationDetectorWithConfirmations = () => {
     formData.append("utm_source", utm_source || "");
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
+    formData.append("entry_url", url);
+    formData.append("user_ip_address ", ip);
 
     // console.log("📡 API Call being made once with form_status: 0");
 
