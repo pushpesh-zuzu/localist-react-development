@@ -44,7 +44,7 @@ const CalonicalTags = ({ breadcrumb = [] }) => {
       {/* Hreflang Tags */}
       <link rel="alternate" hreflang="en-gb" href={canonicalUrl} />
 
-      <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} />
+      {/* <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} /> */}
 
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
     </Helmet>
