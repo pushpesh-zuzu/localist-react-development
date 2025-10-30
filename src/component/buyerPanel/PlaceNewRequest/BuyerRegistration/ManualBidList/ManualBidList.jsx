@@ -151,8 +151,8 @@ const ManualBidList = () => {
                     <img
                       // src={item.profile_image ? item.profile_image : DummyImage}
                       src={
-                        item?.profile_image
-                          ? `${BASE_IMAGE}/users/${item?.profile_image}`
+                        item?.company_logo
+                          ? `${BASE_IMAGE}/users/${item?.company_logo}`
                           : DEFAULT_PROFILE_IMAGE
                       }
                       alt="Profile"
@@ -164,7 +164,7 @@ const ManualBidList = () => {
                       <div>
                         <h3>
                           <img src={GreenTickIcon} alt="" />
-                          {item.name}
+                          {item?.business_profile_name}
                         </h3>
                         <p>
                           <img src={AutoBidLocationIcon} alt="" />

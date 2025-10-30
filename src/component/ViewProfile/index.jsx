@@ -83,9 +83,16 @@ const ViewProfiles = () => {
   useEffect(() => {
     let email = profileData.email;
 
-    const registerDataToken = JSON.parse(
-      localStorage.getItem("registerDataToken")
-    );
+    let registerDataToken = null;
+
+    const storedRegisterData = localStorage.getItem("registerDataToken");
+    const storedBarkData = localStorage.getItem("barkUserToken");
+
+    if (storedRegisterData) {
+      registerDataToken = JSON.parse(storedRegisterData);
+    } else if (storedBarkData) {
+      registerDataToken = JSON.parse(storedBarkData);
+    }
     if (registerDataToken && registerDataToken?.email === email) {
       setIsOpen(false);
     }

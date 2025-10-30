@@ -31,8 +31,6 @@ const ContactSuccessModal = ({
     registerData?.user_id ||
     registerData?.id;
 
-  console.log(details, repliesBtn, "details");
-
   if (!isOpen) return null;
 
   const formatPhoneNumber = (number) => {
@@ -48,8 +46,6 @@ const ContactSuccessModal = ({
   };
 
   const handleResponseChange = (clickName) => {
-    console.log(clickName, "click");
-
     let responseStatus = {
       lead_id: null,
       seller_id: null,
@@ -87,7 +83,6 @@ const ContactSuccessModal = ({
 
     const email =
       details?.customer?.email || detail?.email || repliesBtn?.email || "";
-    console.log(phoneNumber, email, "phoneNumber");
     if (clickName?.name === "mobile") {
       responseStatus.type = "mobile";
       url = `tel:${phoneNumber}`;
@@ -127,9 +122,10 @@ const ContactSuccessModal = ({
             ready
             <br />
             to contact{" "}
-            {repliesBtn?.name
+            {/* {repliesBtn?.name
               ? repliesBtn?.name
-              : details?.customer?.name || detail?.name}
+              : details?.customer?.name || detail?.name} */}
+            {detail?.business_profile_name}
           </h2>
 
           <div className={styles.actions}>

@@ -82,12 +82,21 @@ const ReviewSection = ({
   const handleOpen = () => {
     let email = viewProfileData?.email || reviewProfileData?.email;
 
-    const registerDataToken = JSON.parse(
-      localStorage.getItem("registerDataToken")
-    );
+    let registerDataToken = null;
 
-    // Only open if emails are different
-    if (registerDataToken?.email !== email) {
+    const storedRegisterData = localStorage.getItem("registerDataToken");
+    const storedBarkData = localStorage.getItem("barkUserToken");
+
+    if (storedRegisterData) {
+      registerDataToken = JSON.parse(storedRegisterData);
+    } else if (storedBarkData) {
+      registerDataToken = JSON.parse(storedBarkData);
+    }
+    if (
+      !registerDataToken ||
+      !registerDataToken?.email ||
+      registerDataToken.email !== email
+    ) {
       setIsOpen(true);
     }
   };
