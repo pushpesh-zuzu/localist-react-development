@@ -20,6 +20,7 @@ const ContactSuccessModal = ({
   detail,
   requestId,
 }) => {
+  console.log("sbfjgeiqughoifh", repliesBtn);
   const dispatch = useDispatch();
 
   const { registerData } = useSelector((state) => state.findJobs);
@@ -75,6 +76,8 @@ const ContactSuccessModal = ({
       };
     }
 
+    console.log(detail, repliesBtn, "detailll");
+
     let url = null;
     // const phoneNumber =
     //   details?.phone || detail?.phone || repliesBtn?.phone || "";
@@ -125,7 +128,7 @@ const ContactSuccessModal = ({
             {/* {repliesBtn?.name
               ? repliesBtn?.name
               : details?.customer?.name || detail?.name} */}
-            {detail?.business_profile_name}
+            {detail?.business_profile_name || repliesBtn?.business_profile_name}
           </h2>
 
           <div className={styles.actions}>

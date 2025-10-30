@@ -30,6 +30,7 @@ const ReviewSection = ({
     new URLSearchParams(location.search).get("from") === "replies";
   const queryParams = new URLSearchParams(location.search);
   const [isopen, setIsOpen] = React.useState(false);
+  const [canOpenModal, setCanOpenModal] = React.useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams();
   const { userToken } = useSelector((state) => state.auth);
@@ -79,11 +80,10 @@ const ReviewSection = ({
   // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
-  const handleOpen = () => {
+  useEffect(() => {
     let email = viewProfileData?.email || reviewProfileData?.email;
 
     let registerDataToken = null;
-
     const storedRegisterData = localStorage.getItem("registerDataToken");
     const storedBarkData = localStorage.getItem("barkUserToken");
 
@@ -92,11 +92,20 @@ const ReviewSection = ({
     } else if (storedBarkData) {
       registerDataToken = JSON.parse(storedBarkData);
     }
+
     if (
-      !registerDataToken ||
-      !registerDataToken?.email ||
+      registerDataToken &&
+      registerDataToken?.email &&
       registerDataToken.email !== email
     ) {
+      setCanOpenModal(true);
+    } else {
+      setCanOpenModal(false);
+    }
+  }, [viewProfileData?.email, reviewProfileData?.email]);
+
+  const handleOpen = () => {
+    if (canOpenModal) {
       setIsOpen(true);
     }
   };
@@ -145,7 +154,9 @@ const ReviewSection = ({
 
             <div>
               <button
-                className={styles.leaveBtn}
+                className={
+                  canOpenModal ? styles.leaveBtn : styles.disableLeaveBtn
+                }
                 onClick={handleOpen}
                 // disabled={!isFromManualBids}
                 // style={{
