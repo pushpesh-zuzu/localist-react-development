@@ -21,10 +21,9 @@ import {
 } from "./ArtificialManchesterData";
 import PopularCity from "../../subCategory/famousCities/PopularCity";
 import GetQuotesLocation from "../../common/getQuotes/GetQuotesLocation";
-import NotFound from "../../../pages/NotFound";
-import FindServiceLevel3 from "../../level3/FindServiceLevel3";
 import RegionsComponent from "../../subCategory/Regions/Regions";
 import Slider from "../../common/slider/Slider";
+import FindServiceLevel4 from "../FindServiceLevel4/FindServiceLevel4";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -110,7 +109,7 @@ const ArtificialManchester = () => {
       />
 
       {/* <PopularAccountingServices PopularServicesData={POPULAR_SERVICE_DATA['artificial-grass-installers-near-me']} popularHeading='Fencing Services' /> */}
-      <FindServiceLevel3
+      <FindServiceLevel4
         contentBlocks={
           ARTIFICIAL_MANCHESTER_CONTENT_QUESTION_CONTENT_BLOCK[
             "artificial-grass-installers-near-me"
@@ -174,7 +173,7 @@ const ArtificialManchester = () => {
         service={
           ARTIFICIAL_MANCHESTER_CONTENT_CONFIG_LEVEL4_TOP[
             "artificial-grass-installers-near-me"
-          ]?.["manchester"]?.title
+          ]?.["manchester"]?.findAccoundTitle
         }
         needSString={false}
       />

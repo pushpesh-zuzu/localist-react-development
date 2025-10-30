@@ -10,10 +10,9 @@ const HowWeWork = ({
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        How Localists
-        <span className={styles.highlight}>
-          {/* {heading ? heading : "We"} */} Work
-        </span>
+        <h2 className={styles.heading}>
+          How <span className={styles.highlight}>Localists</span> Works
+        </h2>
       </h2>
       <div className={styles.stepsContainer}>
         {HowWeWorkLocationData?.map((item, index) => (
