@@ -21,6 +21,7 @@ import RegionsComponent from "../../subCategory/Regions/Regions";
 import { transformData } from "../../../utils/allServicesUtils";
 import GetQuotesLevel3 from "../GetQuotesLevel3";
 import AveragePrice from "../../subCategory/AveragePrice/AveragePrice";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function BookKeepingService() {
   const transformed = transformData(
@@ -42,6 +43,7 @@ function BookKeepingService() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags breadcrumb={BOOKKEEPING_SERVICE_BREADCRUMB_CONFIG["bookkeepers-near-me"]}/>
       <SearchAndFindAnAccountant
         title={BOOKKEEPING_SERVICE_CONFIG_TOP["bookkeepers-near-me"]?.title}
         findingHeading={
