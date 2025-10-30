@@ -346,7 +346,49 @@ const ViewProfiles = () => {
                 justifyContent: "center",
               }}
             >
-              <img
+              {profileData?.company_logo ? (
+                <img
+                  src={`${BASE_IMAGE}/users/${profileData.company_logo}`}
+                  alt="Company Logo"
+                  style={{
+                    width: "140px",
+                    height: "140px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : profileData?.profile_image ? (
+                <img
+                  src={`${BASE_IMAGE}/users/${profileData.profile_image}`}
+                  alt="Profile"
+                  style={{
+                    width: "140px",
+                    height: "140px",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : profileData?.business_profile_name ? (
+                <span
+                  style={{
+                    width: "140px",
+                    height: "140px",
+                    borderRadius: "50%",
+                    backgroundColor: "#ccc",
+                    color: "#000",
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "48px",
+                  }}
+                >
+                  {profileData.business_profile_name[0].toUpperCase()}
+                </span>
+              ) : (
+                ""
+              )}
+              {/* <img
                 src={
                   profileData?.company_logo
                     ? `${BASE_IMAGE}/users/${profileData?.company_logo}`
@@ -362,7 +404,7 @@ const ViewProfiles = () => {
                   backgroundColor: "#fff",
                   objectFit: "cover",
                 }}
-              />
+              /> */}
             </div>
           </div>
           <div className={styles.viewDetails}>

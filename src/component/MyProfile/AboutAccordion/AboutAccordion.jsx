@@ -54,6 +54,7 @@ const AboutAccordion = ({ details }) => {
     registerData,
     "companyNameData"
   );
+  console.log(details?.business_profile_name, "name");
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
@@ -521,9 +522,8 @@ const AboutAccordion = ({ details }) => {
     }
   };
 
-  const CompanyNameFirstLetter = details?.company_name?.[0] || "";
+  const CompanyNameFirstLetter = details?.business_profile_name || "";
   const ProfileNameFirstLetter = details?.name?.[0] || "";
-  console.log(errorCheckComanyName, "name");
 
   const handleSubmit = () => {
     if (!validate()) {
@@ -603,8 +603,8 @@ const AboutAccordion = ({ details }) => {
             />
           ) : (
             <div className={styles.CompanyText}>
-              {CompanyNameFirstLetter.toUpperCase()
-                ? CompanyNameFirstLetter.toUpperCase()
+              {CompanyNameFirstLetter?.[0]
+                ? CompanyNameFirstLetter[0].toUpperCase()
                 : "C"}
             </div>
           )}
