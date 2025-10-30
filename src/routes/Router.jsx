@@ -77,6 +77,7 @@ import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
 import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
+import { levelFourLocationRoutes } from "./levelFourRoute";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -250,22 +251,22 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: ":service/:location",
-        element: (
-          <LocaleRedirect>
-            <LocationPage />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: ":service/:location/:subLocation",
-        element: (
-          <LocaleRedirect>
-            <SublocationPage />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: ":service/:location",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <LocationPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: ":service/:location/:subLocation",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <SublocationPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "how-it-works-for-customers",
         element: (
@@ -298,6 +299,16 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      ...levelFourLocationRoutes?.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
       { path: "privacy-policy/", element: <PrivacyPolicy /> },
       ...levelOnePagesRoutes.map(({ path, Component }) => ({
         path,
@@ -331,6 +342,7 @@ const routes = [
           </LocaleRedirect>
         ),
       })),
+       
     ],
   },
 

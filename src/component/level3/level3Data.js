@@ -35,7 +35,6 @@ const RELATED_PRICE_DATA = {
       image: fenchinstal,
       description: "How much does fence installation cost?",
       price: "From £20",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -50,7 +49,6 @@ const RELATED_PRICE_DATA = {
       image: fenchinstal,
       description: "How much does chain link fence installation cost?",
       price: "From £15",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -67,7 +65,6 @@ const RELATED_PRICE_DATA = {
       image: Driveway,
       description: "2025 driveway installation cost guide",
       price: "From £50",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -82,7 +79,6 @@ const RELATED_PRICE_DATA = {
       image: Driveway,
       description: "Asphalt driveway installation costs",
       price: "From £55",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -99,7 +95,6 @@ const RELATED_PRICE_DATA = {
       image: Landscaping,
       description: "How much does landscaping cost in 2025?",
       price: "From £15",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -114,7 +109,6 @@ const RELATED_PRICE_DATA = {
       image: Patio,
       description: "Patio installation cost guide",
       price: "From £30",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -131,7 +125,6 @@ const RELATED_PRICE_DATA = {
       image: Patio,
       description: "How much does patio installation cost in 2025?",
       price: "From £30",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -162,7 +155,6 @@ const RELATED_PRICE_DATA = {
       image: ArtificialGrass,
       description: "How much does Artificial Grass Installation cost in 2025?",
       price: "From £20",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -196,7 +188,6 @@ const RELATED_SERVICES_DATA = {
       image: fenchinstal,
       description:
         "Your 2025 fence installation guide: Everything you need to know in the UK",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -209,7 +200,6 @@ const RELATED_SERVICES_DATA = {
       title: "Fence Materials",
       image: fenchinstal,
       description: "What are the best materials for fencing?",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -225,7 +215,6 @@ const RELATED_SERVICES_DATA = {
       image: Driveway,
       description:
         "Your 2025 driveway installation guide: Everything you need to know in the UK",
-      availableOnline: true,
     },
     {
       id: 2,
@@ -238,7 +227,6 @@ const RELATED_SERVICES_DATA = {
       title: "Driveway Materials",
       image: Driveway,
       description: "What are the best materials for driveways?",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -485,7 +473,6 @@ const OTHER_SERVICES_DATA = {
       id: 1,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -498,7 +485,6 @@ const OTHER_SERVICES_DATA = {
       id: 3,
       image: Landscaping,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
@@ -538,7 +524,6 @@ const OTHER_SERVICES_DATA = {
       image: Landscaping,
       description: "Landscaping",
       path: "landscape-gardeners-near-me",
-      availableOnline: true,
     },
     {
       id: 4,
@@ -570,14 +555,12 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
       id: 3,
       image: Landscaping,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
@@ -610,7 +593,6 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -649,7 +631,6 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -662,7 +643,6 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: Landscaping,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     // {
@@ -689,7 +669,6 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -702,7 +681,6 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: Landscaping,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
@@ -729,7 +707,6 @@ const OTHER_SERVICES_DATA = {
       id: 2,
       image: Driveway,
       description: "Driveway Installation",
-      availableOnline: true,
       path: "driveway-installers-near-me",
     },
     {
@@ -742,7 +719,6 @@ const OTHER_SERVICES_DATA = {
       id: 4,
       image: Landscaping,
       description: "Landscaping",
-      availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
