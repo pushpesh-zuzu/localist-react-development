@@ -11,7 +11,7 @@ const GetQuotesLocation = ({ service, needSString = true, location }) => {
 
       {service && (
         <p className={styles.text}>
-          from {service}
+          From {service}
           {needSString ? "s" : ""}
         </p>
       )}
