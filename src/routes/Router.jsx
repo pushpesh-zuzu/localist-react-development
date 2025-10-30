@@ -137,22 +137,22 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      //    {
-      //   path: "terms/",
-      //   element: (
-      //     <LocaleRedirect>
-      //       <TermsAndCondition />
-      //     </LocaleRedirect>
-      //   ),
-      // },
-      // {
-      //   path: "cookie-policy",
-      //   element: (
-      //     <LocaleRedirect>
-      //       <CookiePolicy />
-      //     </LocaleRedirect>
-      //   ),
-      // },
+         {
+        path: "terms/",
+        element: (
+          <LocaleRedirect>
+            <TermsAndCondition />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "cookie-policy",
+        element: (
+          <LocaleRedirect>
+            <CookiePolicy />
+          </LocaleRedirect>
+        ),
+      },
       {
         path: "home",
         element: (
