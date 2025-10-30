@@ -58,6 +58,7 @@ const ArtificialManchester = () => {
   return (
     <>
       <Helmet>
+         <meta name="robots" content="noindex" />
         <title>Artificial Grass Installers Manchester | Localists.com</title>
         <meta
           name="description"
