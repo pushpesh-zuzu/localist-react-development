@@ -27,12 +27,12 @@ const OtherServiceStep = ({
 }) => {
   const [isPostcodeFromSuggestion, setIsPostcodeFromSuggestion] =
     useState(false);
-    const { search } = useLocation();
-    const allParams = extractAllParams(search || window.location.search);
-    // Convert array to a comma-separated string
-    const utm_campaign = allParams.utm_campaign || "";
-    const utm_source = allParams.utm_source || "";
-    const utm_medium = allParams.utm_medium || "";
+  const { search } = useLocation();
+  const allParams = extractAllParams(search || window.location.search);
+  // Convert array to a comma-separated string
+  const utm_campaign = allParams.utm_campaign || "";
+  const utm_source = allParams.utm_source || "";
+  const utm_medium = allParams.utm_medium || "";
   const [Input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
