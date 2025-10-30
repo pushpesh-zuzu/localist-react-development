@@ -12,19 +12,20 @@ import Warrington from "../../../assets/Images/servicesLevels/cities/Warrington.
 import Runcorn from "../../../assets/Images/servicesLevels/cities/Runcorn.jpg";
 import Frodsham from "../../../assets/Images/servicesLevels/cities/Frodsham.jpg";
 import Winsford from "../../../assets/Images/servicesLevels/cities/Winsford.jpg";
-import {
-  Bolton,
-  Bury,
-  Manchester,
-  Oldham,
-  Rochdale,
-  sale,
-  Salford,
-  Stockport,
-  Wigan,
-  Wythenshawe,
-} from "../../../assets/Images/servicesLevels/cities";
-import { fence1 } from "../../../assets/Images/servicesLevels/banner/Fence";
+import ArtificialGrassInManchester from '../banner/ArtificialGrassInManchester.jpg'
+// import {
+//   Bolton,
+//   Bury,
+//   Manchester,
+//   Oldham,
+//   Rochdale,
+//   sale,
+//   Salford,
+//   Stockport,
+//   Wigan,
+//   Wythenshawe,
+// } from "../../../assets/Images/servicesLevels/cities";
+// import { fence1 } from "../../../assets/Images/servicesLevels/banner/Fence";
 import {
   DrivewayInstallationSlider,
   GutterCleanerSlider,
@@ -32,6 +33,7 @@ import {
   PatioServicesSlider,
   TreesugeonSlider,
 } from "../../level3/imagesServices";
+import { ArtificialGrass } from "../../../assets/Images/servicesLevels/services";
 
 const ARTIFICIAL_MANCHESTER_CONTENT_CONFIG_LEVEL4_TOP = {
   "artificial-grass-installers-near-me": {
@@ -196,7 +198,7 @@ const ARTIFICIAL_MANCHESTER_POPULAR_CITIES_LEVEL4 = {
 };
 const ARTIFICIAL_MANCHESTER_BANNER = {
   "artificial-grass-installers-near-me": {
-    manchester: fence1,
+    manchester: ArtificialGrassInManchester,
   },
 };
 
