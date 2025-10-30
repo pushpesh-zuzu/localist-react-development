@@ -235,7 +235,7 @@ const ServiceLocationStep = ({
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button className={styles.nextButton} onClick={validateAndProceed}>
+            <button disabled={isLoading} className={styles.nextButton} onClick={validateAndProceed}>
               Next
             </button>
           </div>
