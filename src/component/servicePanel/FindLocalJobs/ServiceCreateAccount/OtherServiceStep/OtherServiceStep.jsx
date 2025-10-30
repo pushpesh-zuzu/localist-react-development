@@ -30,7 +30,7 @@ const OtherServiceStep = ({
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
   // Convert array to a comma-separated string
-  const utm_campaign = allParams.utm_campaign || "";
+  const campaign = allParams.utm_campaign || "";
   const utm_source = allParams.utm_source || "";
   const utm_medium = allParams.utm_medium || "";
   const [Input, setInput] = useState("");
@@ -308,7 +308,7 @@ const OtherServiceStep = ({
     };
     if (utm_source) payload.utm_source = utm_source;
     if (utm_medium) payload.utm_medium = utm_medium;
-    if (utm_campaign) payload.utm_campaign = utm_campaign;
+    if (campaign) payload.campaign = campaign;
     payload.coordinates = JSON.stringify(payload.coordinates);
     delete payload.password;
     delete payload.suite;
