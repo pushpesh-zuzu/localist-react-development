@@ -12,7 +12,7 @@ import Warrington from "../../../assets/Images/servicesLevels/cities/Warrington.
 import Runcorn from "../../../assets/Images/servicesLevels/cities/Runcorn.jpg";
 import Frodsham from "../../../assets/Images/servicesLevels/cities/Frodsham.jpg";
 import Winsford from "../../../assets/Images/servicesLevels/cities/Winsford.jpg";
-import ArtificialGrassInManchester from '../banner/ArtificialGrassInManchester.jpg'
+import ArtificialGrassInManchester from "../banner/ArtificialGrassInManchester.jpg";
 // import {
 //   Bolton,
 //   Bury,
@@ -61,7 +61,7 @@ const ARTIFICIAL_MANCHESTER_BREADCRUMB_LEVEL4_CONFIG = {
 const ARTIFICIAL_MANCHESTER_FIND_CONTENT_LEVEL4_CONFIG = {
   "artificial-grass-installers-near-me": {
     manchester: {
-      para1: `We all know about the weather situation in Manchester, but just because you have grey clouds, it doesn’t mean you have to put up with muddy patches and puddles in your lawn. At Localists, we’ve hundreds of <a style=color:#00afe3; href="https://localists.com/en/gb/artificial-grass-installers-near-me" rel="noopener noreferrer">artificial grass installers</a> in Manchester who can give you a quote in minutes!`,
+      para1: `We all know about the weather situation in Manchester, but just because you have grey clouds, it doesn’t mean you have to put up with muddy patches and puddles in your lawn. At Localists, we’ve hundreds of <a style=color:#00afe3; href="/en/gb/artificial-grass-installers-near-me">artificial grass installers</a> in Manchester who can give you a quote in minutes!`,
       para2:
         "Zero Cost. Zero Obligation. Zero Fuss. Just free quotes from Manchester-based artificial grass installers in minutes!",
     },
