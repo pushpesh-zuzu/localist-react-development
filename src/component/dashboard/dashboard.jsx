@@ -38,7 +38,7 @@ const Dashboard = () => {
       month: "short",
       hour: "numeric",
       minute: "2-digit",
-      hour12: true,
+      hour12: false,
       timeZone: "Europe/London", // ✅ UK timezone
     });
   };

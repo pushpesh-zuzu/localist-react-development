@@ -13,6 +13,7 @@ import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../../../../utils";
 import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 import { Helmet } from "react-helmet-async";
 import { Tabs } from "antd";
+import moment from "moment";
 
 const ManualBidList = () => {
   const dispatch = useDispatch();
@@ -386,7 +387,12 @@ const ManualBidList = () => {
                           </div>
                         </div>
                         <div className={styles.timestamp}>
-                          {item?.activty_log?.date_time}
+                          {item?.activty_log?.date_time
+                            ? moment(
+                                item.activty_log.date_time,
+                                "DD MMM YYYY, hh:mm"
+                              ).format("DD MMM YYYY, HH:mm")
+                            : ""}
                         </div>
                       </div>
                     </div>
