@@ -331,6 +331,7 @@ const SearchProfessionals = ({ nextStep }) => {
           </div>
 
           <button
+          disabled={isCheckingPostcode}
             className={styles.searchButton}
             onClick={() => handleGetStarted(true)}
           >
@@ -338,6 +339,7 @@ const SearchProfessionals = ({ nextStep }) => {
           </button>
 
           <button
+          disabled={isCheckingPostcode}
             className={styles.searchButtonPhone}
             onClick={() => handleGetStarted(false)}
           >
