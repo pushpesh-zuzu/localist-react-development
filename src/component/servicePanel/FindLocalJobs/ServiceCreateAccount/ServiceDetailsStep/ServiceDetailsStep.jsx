@@ -422,7 +422,7 @@ const ServiceDetailsStep = ({
                   </div>
 
                   {/* Company Address */}
-                  <div className={styles.labelInputWrapper}>
+                  {/* <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>Company address</label>
                     <input
                       type="text"
@@ -435,10 +435,10 @@ const ServiceDetailsStep = ({
                       }
                       onChange={handleInputChange}
                     />
-                  </div>
+                  </div> */}
 
                   {/* Company City */}
-                  <div className={styles.labelInputWrapper}>
+                  {/* <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>Company city</label>
                     <input
                       type="text"
@@ -449,10 +449,10 @@ const ServiceDetailsStep = ({
                       value={companyData?.registered_office_address?.locality}
                       onChange={handleInputChange}
                     />
-                  </div>
+                  </div> */}
 
                   {/* Company Postcode */}
-                  <div className={styles.labelInputWrapper}>
+                  {/* <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>Company postcode</label>
                     <input
                       type="text"
@@ -473,9 +473,9 @@ const ServiceDetailsStep = ({
                       }}
                       maxLength={6}
                     />
-                  </div>
+                  </div> */}
 
-                  <div className={styles.labelInputWrapper}>
+                  {/* <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>Company country</label>
                     <input
                       type="text"
@@ -486,7 +486,7 @@ const ServiceDetailsStep = ({
                       value={companyData?.registered_office_address?.country}
                       onChange={handleInputChange}
                     />
-                  </div>
+                  </div> */}
                 </>
               )}
 
