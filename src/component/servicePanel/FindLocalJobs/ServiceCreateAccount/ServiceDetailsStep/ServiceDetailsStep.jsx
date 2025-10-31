@@ -137,11 +137,28 @@ const ServiceDetailsStep = ({
   }, [companyError, formData.company_reg_number, dispatch]);
 
   // When data fetched successfully
+  // useEffect(() => {
+  //   if (companyData?.company_name) {
+  //     dispatch(
+  //       setFormData({
+  //         company_name: formData.company_name || "",
+  //         company_address:
+  //           companyData?.registered_office_address?.address_line_1 || "",
+  //         company_city: companyData?.registered_office_address?.locality || "",
+  //         company_postcode:
+  //           companyData?.registered_office_address?.postal_code || "",
+  //         company_country:
+  //           companyData?.registered_office_address?.country || "",
+  //       })
+  //     );
+  //   }
+  // }, [companyData]);
+
   useEffect(() => {
-    if (companyData?.company_name) {
+    if (companyData) {
       dispatch(
         setFormData({
-          company_name: formData.company_name || "",
+          company_name: companyData?.company_name || "",
           company_address:
             companyData?.registered_office_address?.address_line_1 || "",
           company_city: companyData?.registered_office_address?.locality || "",
@@ -152,7 +169,7 @@ const ServiceDetailsStep = ({
         })
       );
     }
-  }, [companyData]);
+  }, [companyData, dispatch]);
 
   useEffect(() => {
     if (companyData?.company_name && hasCompanyReg === 1) {
