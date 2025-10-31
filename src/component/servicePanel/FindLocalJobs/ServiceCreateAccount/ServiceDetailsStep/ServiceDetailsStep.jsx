@@ -57,7 +57,7 @@ const ServiceDetailsStep = ({
     } else if (companyValue && companyCheck === false) {
       showToast("error", "Please Enter Correct Company Details");
     } else if (hasCompanyReg && !hasCompanyName) {
-      showToast("error", "Please enter company name.");
+      // showToast("error", "Please enter company name.");
     }
 
     if (formData.phone.startsWith("0")) {
