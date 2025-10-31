@@ -402,7 +402,7 @@ const ServiceDetailsStep = ({
                           target: { name: "company_reg_number", value },
                         });
                       }}
-                      maxLength={8}
+                      // maxLength={8}
                     />
                   </div>
 
@@ -415,7 +415,7 @@ const ServiceDetailsStep = ({
                         errors.company_name ? styles.errorBorder : ""
                       }`}
                       name="company_name"
-                      value={formData.company_name}
+                      value={companyData?.company_name}
                       onChange={handleInputChange}
                       readOnly
                     />

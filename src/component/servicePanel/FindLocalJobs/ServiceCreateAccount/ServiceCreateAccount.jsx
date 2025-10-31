@@ -46,6 +46,9 @@ const ServiceCreateAccount = () => {
   const [companyCity, setCompanyCity] = useState("");
   const [companyCountry, setCompanyCountry] = useState("");
   const [companyPostCode, setCompanyPostCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  // const
   // console.log(emailCheck, companyCheck, phoneCheck, "emailCheck");
   // console.log(selectedServiceFormData?.company_reg_number, "pp");
   // Validation function
@@ -288,6 +291,14 @@ const ServiceCreateAccount = () => {
       setCompanyCity(value);
     }
 
+    if (name == "city") {
+      setCity(value);
+    }
+
+    if (name == "country") {
+      setCountry(value);
+    }
+
     dispatch(
       setSelectedServiceFormData({
         [name]: type === "checkbox" ? (checked ? 1 : 0) : e.target.value,
@@ -366,6 +377,8 @@ const ServiceCreateAccount = () => {
               addressCheck={addressCheck}
               setHasPopulatedFromCompany={setHasPopulatedFromCompany}
               addressValue={addressValue}
+              cityvalue={city}
+              countryvalue={country}
             />
           )}
           {registerStep === 4 && (
