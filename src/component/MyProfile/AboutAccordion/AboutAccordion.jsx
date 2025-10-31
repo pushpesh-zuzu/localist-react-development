@@ -58,7 +58,7 @@ const AboutAccordion = ({ details }) => {
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
-  // const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
+  const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
     tiktok_link: "",
@@ -72,6 +72,7 @@ const AboutAccordion = ({ details }) => {
     company_photos: [],
     company_photosPreview: [],
     company_name: "",
+    business_name: "",
     name: "",
     company_email: "",
     company_phone: "",
@@ -140,6 +141,7 @@ const AboutAccordion = ({ details }) => {
         company_email: details?.company_email,
         company_phone: details?.company_phone,
         company_name: details?.company_name,
+        business_name: details?.business_profile_name,
         name: details?.name,
         company_website: details?.company_website,
         company_location: details?.address,
@@ -244,9 +246,9 @@ const AboutAccordion = ({ details }) => {
       setDebouncedCompanyLocation(value);
     }
 
-    // if (name === "company_name") {
-    //   setDebouncedCompanyName(value);
-    // }
+    if (name === "company_name") {
+      setDebouncedCompanyName(value);
+    }
   };
 
   useEffect(() => {
@@ -313,24 +315,24 @@ const AboutAccordion = ({ details }) => {
     }
   }, [companyError, formState.company_reg_number, dispatch]);
 
-  // useEffect(() => {
-  //   if (!debouncedCompanyName) return;
+  useEffect(() => {
+    if (!debouncedCompanyName) return;
 
-  //   const timeout = setTimeout(() => {
-  //     dispatch(
-  //       checkCompanyNameApi({
-  //         company_name: debouncedCompanyName,
-  //         company_reg_number: formState.company_reg_number,
-  //       })
-  //     ).then((result) => {
-  //       if (result?.success) {
-  //         showToast("success", result.message);
-  //       }
-  //     });
-  //   }, 1000);
+    const timeout = setTimeout(() => {
+      dispatch(
+        checkCompanyNameApi({
+          company_name: debouncedCompanyName,
+          company_reg_number: formState.company_reg_number,
+        })
+      ).then((result) => {
+        if (result?.success) {
+          showToast("success", result.message);
+        }
+      });
+    }, 1000);
 
-  //   return () => clearTimeout(timeout);
-  // }, [debouncedCompanyName]);
+    return () => clearTimeout(timeout);
+  }, [debouncedCompanyName]);
 
   const phoneAPI = (regNo) => {
     // const regNo = formState.company_reg_number;
@@ -349,8 +351,20 @@ const AboutAccordion = ({ details }) => {
       temp.name = "Please fill this Required";
     }
 
-    if (!formState.company_name) {
-      temp.company_name = "Company name is required";
+    // 2. If company_reg_number is filled
+    if (formState.company_reg_number) {
+      // 2.a company_name required
+      if (!formState.company_name) {
+        temp.company_name = "Company Name is required";
+      }
+
+      if (!formState.business_name) {
+        temp.business_name = "Business Name is required.";
+      }
+
+      if (!formState.company_location) {
+        temp.company_location = "Company location is required";
+      }
     }
 
     setErrors(temp);
@@ -522,10 +536,10 @@ const AboutAccordion = ({ details }) => {
       showToast("error", "Please fix validation errors");
       return;
     }
-    // if (errorCheckComanyName === false) {
-    //   showToast("error", "Company name already exists");
-    //   return;
-    // }
+    if (errorCheckComanyName === false) {
+      showToast("error", "Company name already exists");
+      return;
+    }
     dispatch(updateSellerProfile(formState)).then((result) => {
       if (result) {
         const sellerData = {
@@ -619,14 +633,14 @@ const AboutAccordion = ({ details }) => {
         <input
           className={styles.input}
           type="text"
-          name="company_name"
-          value={formState.company_name}
+          name="business_name"
+          value={formState?.business_profile_name}
           onChange={handleInputChange}
           placeholder="Enter your company name"
         />
-        {errors.company_name && (
+        {/* {errors.company_name && (
           <p style={{ color: "red" }}>{errors.company_name}</p>
-        )}
+        )} */}
       </div>
 
       <div className={styles.card}>
