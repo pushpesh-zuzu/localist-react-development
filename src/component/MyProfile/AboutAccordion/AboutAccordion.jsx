@@ -856,7 +856,14 @@ const AboutAccordion = ({ details }) => {
               className={styles.input}
               type="text"
               name="company_address"
-              value={`${formState.company_address}, ${details.company_city}, ${details?.company_postcode}, ${details?.company_country}`}
+              value={[
+                formState.company_address,
+                details.company_city,
+                details.company_postcode,
+                details.company_country,
+              ]
+                .filter(Boolean)
+                .join(", ")}
               onChange={handleInputChange}
               placeholder="Enter company address"
             />
