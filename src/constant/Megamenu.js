@@ -325,18 +325,18 @@ export const megaMenu = [
     ],
   },
   ,
-   {
-    name: "Business",
-    path: "Business",
-    icon: businessIcon,
-    subcategory:[]
-   },
-   {
-    name: "Health and Wellness",
-    path: "health",
-    icon: healthIcon,
-    subcategory:[]
-   }
+  //  {
+  //   name: "Business",
+  //   path: "Business",
+  //   icon: businessIcon,
+  //   subcategory:[]
+  //  },
+  //  {
+  //   name: "Health and Wellness",
+  //   path: "health",
+  //   icon: healthIcon,
+  //   subcategory:[]
+  //  }
   // {
   //   name: "Business",
   //   path:"",
