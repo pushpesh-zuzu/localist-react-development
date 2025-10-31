@@ -94,9 +94,8 @@ const ReviewSection = ({
     }
 
     if (
-      registerDataToken &&
-      registerDataToken?.email &&
-      registerDataToken.email !== email
+      !registerDataToken ||
+      (registerDataToken?.email && registerDataToken.email !== email)
     ) {
       setCanOpenModal(true);
     } else {
