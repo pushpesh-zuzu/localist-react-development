@@ -112,6 +112,8 @@ const ContactSuccessModal = ({
     });
   };
 
+  console.log(details?.customer?.name, "detailssss");
+
   return (
     <>
       <div className={styles.overlay}>
@@ -128,7 +130,9 @@ const ContactSuccessModal = ({
             {/* {repliesBtn?.name
               ? repliesBtn?.name
               : details?.customer?.name || detail?.name} */}
-            {detail?.business_profile_name || repliesBtn?.business_profile_name}
+            {detail?.business_profile_name ||
+              repliesBtn?.business_profile_name ||
+              details?.customer?.name}
           </h2>
 
           <div className={styles.actions}>

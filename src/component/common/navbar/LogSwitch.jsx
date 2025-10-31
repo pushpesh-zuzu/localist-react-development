@@ -49,12 +49,17 @@ const LogSwitch = () => {
   const { createRequestToken } = useSelector((state) => state.buyer);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [mobileSearchText, setMobileSearchText] = useState("");
+  const [canOpenModal, setCanOpenModal] = useState(false);
 
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
   const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
+  );
+
+  const { viewProfileData, reviewProfileData } = useSelector(
+    (state) => state.leadSetting
   );
   const [selectedServiceIds, setSelectedServiceIds] = useState(null);
   const [show, setShow] = useState(false);
@@ -78,6 +83,31 @@ const LogSwitch = () => {
   useEffect(() => {
     setDataSave(userToken?.active_status);
   }, [userToken]);
+  useEffect(() => {
+    let email = viewProfileData?.email || reviewProfileData?.email;
+
+    let registerDataToken = null;
+    const storedRegisterData = localStorage.getItem("registerDataToken");
+    const storedBarkData = localStorage.getItem("barkUserToken");
+
+    if (storedRegisterData) {
+      registerDataToken = JSON.parse(storedRegisterData);
+    } else if (storedBarkData) {
+      registerDataToken = JSON.parse(storedBarkData);
+    }
+    console.log("jwfiulfhfeiuhfiuefh", registerDataToken);
+    if (!registerDataToken || registerDataToken == null) {
+      setCanOpenModal(true);
+    } else if (
+      registerDataToken &&
+      registerDataToken?.email &&
+      registerDataToken.email !== email
+    ) {
+      setCanOpenModal(true);
+    } else {
+      setCanOpenModal(false);
+    }
+  }, [viewProfileData?.email, reviewProfileData?.email]);
   useEffect(() => {
     const payload = {
       user_id: userToken?.id || registerData?.id || "",
@@ -524,7 +554,7 @@ const LogSwitch = () => {
             </>
           )}
 
-          {(getUserType() == 2 || viewProfile) && (
+          {(getUserType() == 2 || viewProfile) && canOpenModal && (
             <>
               <div className={styles.requestBox}>
                 <div className={styles.myrequestText} onClick={handleMyRequest}>

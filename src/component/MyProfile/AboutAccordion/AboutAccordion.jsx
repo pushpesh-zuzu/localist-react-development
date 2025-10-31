@@ -58,7 +58,7 @@ const AboutAccordion = ({ details }) => {
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
-  const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
+  // const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
     type: "about", // default from given sample
     tiktok_link: "",
@@ -244,9 +244,9 @@ const AboutAccordion = ({ details }) => {
       setDebouncedCompanyLocation(value);
     }
 
-    if (name === "company_name") {
-      setDebouncedCompanyName(value);
-    }
+    // if (name === "company_name") {
+    //   setDebouncedCompanyName(value);
+    // }
   };
 
   useEffect(() => {
@@ -313,24 +313,24 @@ const AboutAccordion = ({ details }) => {
     }
   }, [companyError, formState.company_reg_number, dispatch]);
 
-  useEffect(() => {
-    if (!debouncedCompanyName) return;
+  // useEffect(() => {
+  //   if (!debouncedCompanyName) return;
 
-    const timeout = setTimeout(() => {
-      dispatch(
-        checkCompanyNameApi({
-          company_name: debouncedCompanyName,
-          company_reg_number: formState.company_reg_number,
-        })
-      ).then((result) => {
-        if (result?.success) {
-          showToast("success", result.message);
-        }
-      });
-    }, 1000);
+  //   const timeout = setTimeout(() => {
+  //     dispatch(
+  //       checkCompanyNameApi({
+  //         company_name: debouncedCompanyName,
+  //         company_reg_number: formState.company_reg_number,
+  //       })
+  //     ).then((result) => {
+  //       if (result?.success) {
+  //         showToast("success", result.message);
+  //       }
+  //     });
+  //   }, 1000);
 
-    return () => clearTimeout(timeout);
-  }, [debouncedCompanyName]);
+  //   return () => clearTimeout(timeout);
+  // }, [debouncedCompanyName]);
 
   const phoneAPI = (regNo) => {
     // const regNo = formState.company_reg_number;
@@ -349,16 +349,8 @@ const AboutAccordion = ({ details }) => {
       temp.name = "Please fill this Required";
     }
 
-    // 2. If company_reg_number is filled
-    if (formState.company_reg_number) {
-      // 2.a company_name required
-      if (!formState.company_name) {
-        temp.company_name = "Business Profile Name is required";
-      }
-
-      if (!formState.company_location) {
-        temp.company_location = "Company location is required";
-      }
+    if (!formState.company_name) {
+      temp.company_name = "Company name is required";
     }
 
     setErrors(temp);
@@ -530,10 +522,10 @@ const AboutAccordion = ({ details }) => {
       showToast("error", "Please fix validation errors");
       return;
     }
-    if (errorCheckComanyName === false) {
-      showToast("error", "Company name already exists");
-      return;
-    }
+    // if (errorCheckComanyName === false) {
+    //   showToast("error", "Company name already exists");
+    //   return;
+    // }
     dispatch(updateSellerProfile(formState)).then((result) => {
       if (result) {
         const sellerData = {
@@ -628,14 +620,9 @@ const AboutAccordion = ({ details }) => {
           className={styles.input}
           type="text"
           name="company_name"
-          value={
-            details?.business_profile_name?.trim() !== ""
-              ? details?.business_profile_name
-              : formState.company_name
-          }
+          value={formState.company_name}
           onChange={handleInputChange}
           placeholder="Enter your company name"
-          readOnly
         />
         {errors.company_name && (
           <p style={{ color: "red" }}>{errors.company_name}</p>
