@@ -124,6 +124,21 @@ const AccreditationsAccordion = ({ details }) => {
   // };
 
   const handleSave = () => {
+    const invalid = accordionGroups.some(
+      (g) =>
+        (g.accreImage && // user added image
+          (!g.accreditations[0] || g.accreditations[0].trim() === "") &&
+          (!g.newAccreditation || g.newAccreditation.trim() === "")) ||
+        // OR completely empty row (no name, no image)
+        (!g.accreImage &&
+          (!g.accreditations[0] || g.accreditations[0].trim() === "") &&
+          (!g.newAccreditation || g.newAccreditation.trim() === ""))
+    );
+
+    if (invalid) {
+      toast.error("Please enter accreditation name.");
+      return;
+    }
     const payload = accordionGroups.map((g) => ({
       id: g.id ?? "",
       accreditations:

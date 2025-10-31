@@ -23,8 +23,14 @@
   font-weight: 600;
   cursor: pointer !important;
 }
-.leaveBtn:disabled {
-  cursor: default !important;
+.disableLeaveBtn {
+  background-color: transparent;
+  color: var(--primary-color);
+  padding: 5px 13px;
+  border: 1px solid #d9d9d9;
+  font-size: 20px;
+  font-weight: 600;
+  /* cursor: default !important; */
 }
 .container {
   display: flex;

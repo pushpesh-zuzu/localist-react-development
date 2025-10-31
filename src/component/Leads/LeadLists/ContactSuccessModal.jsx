@@ -20,6 +20,7 @@ const ContactSuccessModal = ({
   detail,
   requestId,
 }) => {
+  console.log("sbfjgeiqughoifh", repliesBtn);
   const dispatch = useDispatch();
 
   const { registerData } = useSelector((state) => state.findJobs);
@@ -30,8 +31,6 @@ const ContactSuccessModal = ({
     userToken?.id ||
     registerData?.user_id ||
     registerData?.id;
-
-  console.log(details, repliesBtn, "details");
 
   if (!isOpen) return null;
 
@@ -48,8 +47,6 @@ const ContactSuccessModal = ({
   };
 
   const handleResponseChange = (clickName) => {
-    console.log(clickName, "click");
-
     let responseStatus = {
       lead_id: null,
       seller_id: null,
@@ -79,6 +76,8 @@ const ContactSuccessModal = ({
       };
     }
 
+    console.log(detail, repliesBtn, "detailll");
+
     let url = null;
     // const phoneNumber =
     //   details?.phone || detail?.phone || repliesBtn?.phone || "";
@@ -87,7 +86,6 @@ const ContactSuccessModal = ({
 
     const email =
       details?.customer?.email || detail?.email || repliesBtn?.email || "";
-    console.log(phoneNumber, email, "phoneNumber");
     if (clickName?.name === "mobile") {
       responseStatus.type = "mobile";
       url = `tel:${phoneNumber}`;
@@ -127,9 +125,10 @@ const ContactSuccessModal = ({
             ready
             <br />
             to contact{" "}
-            {repliesBtn?.name
+            {/* {repliesBtn?.name
               ? repliesBtn?.name
-              : details?.customer?.name || detail?.name}
+              : details?.customer?.name || detail?.name} */}
+            {detail?.business_profile_name || repliesBtn?.business_profile_name}
           </h2>
 
           <div className={styles.actions}>

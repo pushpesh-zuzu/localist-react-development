@@ -147,24 +147,59 @@ const ManualBidList = () => {
             {autoBidListData?.map((item) => (
               <div className={styles.card} key={item.id}>
                 <div className={styles.cardLeft}>
-                  <div className={styles.imageWrapper}>
+                  {/* <div className={styles.imageWrapper}>
                     <img
-                      // src={item.profile_image ? item.profile_image : DummyImage}
                       src={
-                        item?.profile_image
-                          ? `${BASE_IMAGE}/users/${item?.profile_image}`
+                        item?.company_logo
+                          ? `${BASE_IMAGE}/users/${item?.company_logo}`
                           : DEFAULT_PROFILE_IMAGE
                       }
                       alt="Profile"
                       className={styles.image}
                     />
+                  </div> */}
+                  <div className={styles.imageWrapper}>
+                    {item?.company_logo ? (
+                      <img
+                        src={`${BASE_IMAGE}/users/${item.company_logo}`}
+                        alt="Profile"
+                        className={styles.image}
+                        style={{
+                          width: "180px",
+                          height: "180px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    ) : (
+                      <span
+                        style={{
+                          width: "180px",
+                          height: "180px",
+                          borderRadius: "50%",
+                          backgroundColor: "#ccc",
+                          color: "#000",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontSize: "48px",
+                          fontWeight: "600",
+                          textTransform: "uppercase",
+                          overflow: "hidden",
+                        }}
+                        className={styles.firstLetterSpan}
+                      >
+                        {item?.business_profile_name?.[0]?.toUpperCase() || ""}
+                      </span>
+                    )}
                   </div>
+
                   <div className={styles.details}>
                     <div className={styles.header}>
                       <div>
                         <h3>
                           <img src={GreenTickIcon} alt="" />
-                          {item.name}
+                          {item?.business_profile_name}
                         </h3>
                         <p>
                           <img src={AutoBidLocationIcon} alt="" />
@@ -230,7 +265,7 @@ const ManualBidList = () => {
                     </div>
 
                     <div className={styles.mobileImageWrapper}>
-                      <div className={styles.imageWrapper}>
+                      {/* <div className={styles.imageWrapper}>
                         <img
                           src={
                             item?.profile_image
@@ -240,6 +275,41 @@ const ManualBidList = () => {
                           alt="Profile"
                           className={styles.images}
                         />
+                      </div> */}
+                      <div className={styles.imageWrapper}>
+                        {item?.company_logo ? (
+                          <img
+                            // src={`${BASE_IMAGE}/users/${item?.company_logo}`}
+                            alt="Profile"
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                              borderRadius: "50%",
+                            }}
+                          />
+                        ) : (
+                          <span
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              borderRadius: "50%",
+                              backgroundColor: "#ccc",
+                              color: "#000",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              fontSize: "36px",
+                              fontWeight: "500",
+                              textTransform: "uppercase",
+                              overflow: "hidden",
+                              verticalAlign: "center",
+                            }}
+                          >
+                            {item?.business_profile_name?.[0]?.toUpperCase() ||
+                              ""}
+                          </span>
+                        )}
                       </div>
                       <div className={styles.mobileHeader}>
                         <h3>

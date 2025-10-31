@@ -34,11 +34,26 @@ const PhotosAccordion = ({ details }) => {
   console.log(photoPreviews);
 
   const handleRemovePhoto = (indexToRemove) => {
+    console.log("indexToRemove", indexToRemove);
     setPhotoPreviews((prevPhotos) =>
       prevPhotos.filter((_, idx) => idx !== indexToRemove)
     );
 
+    console.log(photoPreviews);
+    // Remove from existing photos
     setExistingPhotos((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+
+    // ✅ Also remove from formState.company_photos
+    setFormState((prev) => ({
+      ...prev,
+      company_photos: prev.company_photos.filter(
+        (_, idx) => idx !== indexToRemove
+      ),
+    }));
+
+    console.log(formState.company_photos);
+
+    // Mark form as dirty
     dispatch(setIsDirtyRedux(true));
   };
 
@@ -120,6 +135,13 @@ const PhotosAccordion = ({ details }) => {
       toast.error(`Failed: ${photoUpdateError}`);
       dispatch(clearPhotoUpdateStatus());
     }
+    setFormState((prev) => ({
+      ...prev,
+      company_photos: [], // remove uploaded files
+    }));
+
+    // ✅ Clear previews for new files (keep existing photos)
+    setPhotoPreviews((prev) => prev.filter((src) => !src.startsWith("blob:")));
   }, [photoUpdateSuccess, photoUpdateError, dispatch]);
 
   const handleSubmit = () => {
@@ -130,38 +152,6 @@ const PhotosAccordion = ({ details }) => {
     const body = new FormData();
 
     body.append("type", formState.type);
-
-    // if (existingPhotos.length > 0) {
-    //   existingPhotos.forEach((filename, index) => {
-    //     body.append(`existing_photos[${index}]`, filename);
-    //   });
-    // }
-    // console.log("company photos", formState.company_photos);
-    // // ✅ Append new uploads
-    // if (formState.company_photos.length > 0) {
-    //   formState.company_photos.forEach((file, index) => {
-    //     body.append(`company_photos[${index}]`, file);
-    //   });
-    // }
-
-    // // ✅ Append YouTube links
-    // if (formState.company_youtube_link.length > 0) {
-    //   formState.company_youtube_link.forEach((link, index) => {
-    //     body.append(`company_youtube_link[${index}]`, link);
-    //   });
-    // }
-    // console.log("setbody", body);
-
-    // for (let [key, value] of body.entries()) {
-    //   if (value instanceof File) {
-    //     console.log(`${key}: [File] ${value.name}`);
-    //   } else {
-    //     console.log(`${key}:`, value);
-    //   }
-    // }
-
-    // dispatch(updateSellerPhotos(body));
-    // dispatch(setIsDirtyRedux(false));
 
     const uniqueExisting = [...new Set(existingPhotos)];
     uniqueExisting.forEach((filename, index) => {
@@ -214,6 +204,7 @@ const PhotosAccordion = ({ details }) => {
     }));
 
     setAddModalOpen(false);
+    setLinkData("");
   };
 
   const handleOpen = () => {

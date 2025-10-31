@@ -212,13 +212,15 @@
   border-bottom: 1px solid #d9d9d9;
   overflow: hidden;
   gap: 15px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .cardLeft {
   display: flex;
   gap: 25.54px;
   width: 100%;
+  align-items: center;
+  padding: 20px 0;
 }
 
 .image {
@@ -380,6 +382,7 @@
   background: #e3f6fc;
   width: 265.4px;
   flex-direction: column;
+  padding: 20px;
 }
 
 .replyBtn {
@@ -652,6 +655,13 @@
   font-weight: 600;
 }
 
+.imageWrapper {
+  width: 282px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 1393px) and (min-width: 540px) {
   .requestBtn {
     display: none;
@@ -695,7 +705,7 @@
 
   .cardLeft {
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
   }
 
   .sidebar {
@@ -780,6 +790,10 @@
     vertical-align: middle;
     margin-top: 10px;
     cursor: default;
+  }
+
+  .firstLetterSpan {
+    display: none !important;
   }
 
   .details {

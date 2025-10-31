@@ -47,7 +47,14 @@ const AboutAccordion = ({ details }) => {
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // const companyNameData = useSelector((state)=> state.company)
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  console.log(registerData?.city, registerData?.zipcode, "companyNameData");
+  console.log(
+    registerData?.city,
+    registerData?.zipcode,
+    registerData?.country,
+    registerData,
+    "companyNameData"
+  );
+  console.log(details?.business_profile_name, "name");
 
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
@@ -515,9 +522,8 @@ const AboutAccordion = ({ details }) => {
     }
   };
 
-  const CompanyNameFirstLetter = details?.company_name?.[0] || "";
+  const CompanyNameFirstLetter = details?.business_profile_name || "";
   const ProfileNameFirstLetter = details?.name?.[0] || "";
-  console.log(errorCheckComanyName, "name");
 
   const handleSubmit = () => {
     if (!validate()) {
@@ -597,8 +603,8 @@ const AboutAccordion = ({ details }) => {
             />
           ) : (
             <div className={styles.CompanyText}>
-              {CompanyNameFirstLetter.toUpperCase()
-                ? CompanyNameFirstLetter.toUpperCase()
+              {CompanyNameFirstLetter?.[0]
+                ? CompanyNameFirstLetter[0].toUpperCase()
                 : "C"}
             </div>
           )}
@@ -871,6 +877,7 @@ const AboutAccordion = ({ details }) => {
                 formState.company_location,
                 registerData?.city,
                 registerData?.zipcode,
+                registerData?.country,
               ]
                 .filter(Boolean)
                 .join(", ")}
@@ -879,7 +886,7 @@ const AboutAccordion = ({ details }) => {
             />
           </>
         )}
-        <div className={styles.checkboxRow}>
+        {/* <div className={styles.checkboxRow}>
           <input
             type="checkbox"
             id="dontShow"
@@ -892,8 +899,8 @@ const AboutAccordion = ({ details }) => {
               <img src={iIcon} alt="" />
             </span>
           </label>
-        </div>
-        <hr className={styles.hrline} />
+        </div> */}
+        {/* <hr className={styles.hrline} /> */}
         <label className={styles.label}>
           Can’t provide a specific location?
         </label>
@@ -948,7 +955,7 @@ const AboutAccordion = ({ details }) => {
         <label className={styles.label}>Describe Your Business</label>
         <textarea
           className={styles.textarea}
-          rows={5}
+          rows={7}
           name="about_company"
           value={formState.about_company}
           onChange={handleInputChange}

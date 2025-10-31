@@ -648,17 +648,54 @@ const BidsList = ({ previousStep }) => {
                 item?.sellers?.slice(0, visibleCount)?.map((seller, index) => (
                   <div className={styles.card} key={seller?.id}>
                     <div className={styles.cardLeft}>
-                      <div className={styles.imageWrapper}>
+                      {/* <div className={styles.imageWrapper}>
                         <img
                           src={
-                            seller?.profile_image
-                              ? `${BASE_IMAGE}/users/${seller?.profile_image}`
+                            seller?.company_logo
+                              ? `${BASE_IMAGE}/users/${seller?.company_logo}`
                               : DEFAULT_PROFILE_IMAGE
                           }
                           alt="Profile"
                           className={styles.image}
                         />
+                      </div> */}
+                      <div className={styles.imageWrapper}>
+                        {seller?.company_logo ? (
+                          <img
+                            src={`${BASE_IMAGE}/users/${seller?.company_logo}`}
+                            alt="Profile"
+                            className={styles.image} // ✅ image CSS applied here
+                            style={{
+                              width: "180px",
+                              height: "180px",
+                              objectFit: "cover",
+                              borderRadius: "50%",
+                            }}
+                          />
+                        ) : (
+                          <span
+                            style={{
+                              width: "180px",
+                              height: "180px",
+                              borderRadius: "50%",
+                              backgroundColor: "#ccc",
+                              color: "#000",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              fontSize: "48px",
+                              fontWeight: "500",
+                              textTransform: "uppercase",
+                              overflow: "hidden",
+                              verticalAlign: "center",
+                            }}
+                            className={styles.firstLetterSpan}
+                          >
+                            {seller?.business_profile_name?.[0]?.toUpperCase()}
+                          </span>
+                        )}
                       </div>
+
                       <div className={styles.details}>
                         <div className={styles.header}>
                           <div>
@@ -666,7 +703,7 @@ const BidsList = ({ previousStep }) => {
                               {shouldShowGreenIcons && index < bidTotal && (
                                 <img src={GreenTickIcon} alt="" />
                               )}
-                              {seller?.name}
+                              {seller?.business_profile_name}
                             </h3>
                             <p>
                               <img src={AutoBidLocationIcon} alt="" />
@@ -733,8 +770,8 @@ const BidsList = ({ previousStep }) => {
                           </div>
                         </div>
                         <div className={styles.mobileImageWrapper}>
-                          <div className={styles.imageWrapper}>
-                            <img
+                          {/* <div className={styles.imageWrapper}> */}
+                          {/* <img
                               src={
                                 seller?.profile_image
                                   ? `${BASE_IMAGE}/users/${seller?.profile_image}`
@@ -742,14 +779,48 @@ const BidsList = ({ previousStep }) => {
                               }
                               alt="Profile"
                               className={styles.images}
-                            />
+                            /> */}
+
+                          {/* </div> */}
+                          <div className={styles.imageWrapper}>
+                            {seller?.company_logo ? (
+                              <img
+                                src={
+                                  seller?.company_logo
+                                    ? `${BASE_IMAGE}/users/${seller?.company_logo}`
+                                    : DEFAULT_PROFILE_IMAGE
+                                }
+                                alt="Profile"
+                                className={styles.images}
+                              />
+                            ) : (
+                              <span
+                                style={{
+                                  width: "100px",
+                                  height: "100px",
+                                  borderRadius: "50%",
+                                  backgroundColor: "#ccc",
+                                  color: "#000",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  fontSize: "36px",
+                                  fontWeight: "500",
+                                  textTransform: "uppercase",
+                                  overflow: "hidden",
+                                  verticalAlign: "center",
+                                }}
+                              >
+                                {seller?.business_profile_name?.[0]?.toUpperCase()}
+                              </span>
+                            )}
                           </div>
                           <div className={styles.mobileHeader}>
                             <h3>
                               {shouldShowGreenIcons && index < bidTotal && (
                                 <img src={GreenTickIcon} alt="" />
                               )}
-                              {seller?.name}
+                              {seller?.business_profile_name}
                             </h3>
                             <p>
                               <img src={AutoBidLocationIcon} alt="" />
