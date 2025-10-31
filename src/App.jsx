@@ -200,7 +200,7 @@ function App({ initialUrl, hostname, createRouterFactory }) {
       !registerToken &&
       localStorage.setItem("isRegistrationComplete", "false");
   }, [userToken, registerToken]);
-
+console.log(typeof window !== "undefined" && window.location.hostname,'window.location.hostname')
   return (
     <>
       {(isDevEnvironment || isPs1Environment || isReactLocalist) && (

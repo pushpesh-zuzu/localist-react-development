@@ -10,14 +10,17 @@ import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 
 import { Helmet } from "react-helmet-async";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
+import { setbuyerRequestData } from "../../../store/Buyer/BuyerSlice";
 const LandingNewPPC = ({
   title = "",
   subHeading = "",
   serviceId,
   serviceName = "",
 }) => {
+  const dispatch = useDispatch();
+
   //     const { buyerRequest } =
   //       useSelector((state) => state.buyer);
   //  const [hasMountedDetector, setHasMountedDetector] = useState(false);
@@ -29,6 +32,10 @@ const LandingNewPPC = ({
   //   // ❌ Don't depend on buyerRequest.questions
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [hasMountedDetector]);
+  useEffect(() => {
+    dispatch(setbuyerRequestData({ service_id: serviceId }));
+  }, []);
+
   return (
     <>
       <Helmet>
