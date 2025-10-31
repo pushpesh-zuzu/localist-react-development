@@ -47,15 +47,6 @@ const AboutAccordion = ({ details }) => {
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   // const companyNameData = useSelector((state)=> state.company)
   const companyData = useSelector((state) => state.companyLook?.companyData);
-  console.log(
-    registerData?.city,
-    registerData?.zipcode,
-    registerData?.country,
-    registerData,
-    "companyNameData"
-  );
-  console.log(details?.business_profile_name, "name");
-
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
@@ -72,6 +63,7 @@ const AboutAccordion = ({ details }) => {
     company_photos: [],
     company_photosPreview: [],
     company_name: "",
+    business_profile_name: "",
     name: "",
     company_email: "",
     company_phone: "",
@@ -131,6 +123,11 @@ const AboutAccordion = ({ details }) => {
   const [croppingTarget, setCroppingTarget] = useState("");
 
   const companyError = useSelector((state) => state.companyLook?.companyError);
+  const [businessName, setBusinessName] = useState(
+    details?.business_profile_name
+  );
+
+  console.log(details);
 
   useEffect(() => {
     if (details?.id) {
@@ -140,8 +137,10 @@ const AboutAccordion = ({ details }) => {
         company_email: details?.company_email,
         company_phone: details?.company_phone,
         company_name: details?.company_name,
+        business_profile_name: details?.business_profile_name,
         name: details?.name,
         company_website: details?.company_website,
+        company_address: details?.company_address,
         company_location: details?.address,
         company_locaion_reason: details?.company_locaion_reason,
         company_size: details?.company_size,
@@ -159,6 +158,9 @@ const AboutAccordion = ({ details }) => {
       });
     }
   }, [details]);
+
+  console.log(details, "detailssssssss");
+
   useEffect(() => {
     let data = { ...formState };
 
@@ -221,16 +223,17 @@ const AboutAccordion = ({ details }) => {
   const handleInputChange = (e) => {
     setIsDirty(true);
     const { name, value } = e.target;
+
+    // Base update for all fields
     setFormState((prev) => ({ ...prev, [name]: value }));
 
-    // if (name === "company_reg_number" && value.length === 8) {
-    //   dispatch(fetchCompanyDetails(value));
-    // }
-
+    // Optional: Clean up phone input
     if (name === "company_phone") {
-      newValue = value.replace(/[^0-9]/g, ""); // remove non-digits
+      const newValue = value.replace(/[^0-9]/g, ""); // remove non-digits
+      setFormState((prev) => ({ ...prev, [name]: newValue }));
     }
 
+    // Handle company reg number — reset company name & call API
     if (name === "company_reg_number") {
       setFormState((prev) => ({
         ...prev,
@@ -240,12 +243,19 @@ const AboutAccordion = ({ details }) => {
       phoneAPI(value);
     }
 
+    // Debounced location and name handlers
     if (name === "company_location") {
       setDebouncedCompanyLocation(value);
     }
 
     if (name === "company_name") {
       setDebouncedCompanyName(value);
+    }
+
+    // Add this part to store business_profile_name in formState
+    if (name === "business_profile_name") {
+      setFormState((prev) => ({ ...prev, business_profile_name: value }));
+      setBusinessName(value);
     }
   };
 
@@ -353,7 +363,11 @@ const AboutAccordion = ({ details }) => {
     if (formState.company_reg_number) {
       // 2.a company_name required
       if (!formState.company_name) {
-        temp.company_name = "Business Profile Name is required";
+        temp.company_name = "Company Name is required";
+      }
+
+      if (!formState.business_profile_name) {
+        temp.business_profile_name = "Business Name is required.";
       }
 
       if (!formState.company_location) {
@@ -627,19 +641,14 @@ const AboutAccordion = ({ details }) => {
         <input
           className={styles.input}
           type="text"
-          name="company_name"
-          value={
-            details?.business_profile_name?.trim() !== ""
-              ? details?.business_profile_name
-              : formState.company_name
-          }
+          name="business_profile_name"
+          value={businessName}
           onChange={handleInputChange}
           placeholder="Enter your company name"
-          readOnly
         />
-        {errors.company_name && (
+        {/* {errors.company_name && (
           <p style={{ color: "red" }}>{errors.company_name}</p>
-        )}
+        )} */}
       </div>
 
       <div className={styles.card}>
@@ -842,9 +851,27 @@ const AboutAccordion = ({ details }) => {
 
         <div className={styles.formGroup}>
           <div className={styles.halfInput}>
+            <label className={styles.label}>Company Address</label>
+            <input
+              className={styles.input}
+              type="text"
+              name="company_address"
+              value={[
+                formState.company_address,
+                details.company_city,
+                details.company_postcode,
+                details.company_country,
+              ]
+                .filter(Boolean)
+                .join(", ")}
+              onChange={handleInputChange}
+              placeholder="Enter company address"
+            />
+          </div>
+          <div className={styles.halfInput}>
             <label className={styles.label}>Website</label>
             <input
-              className={styles.website_input}
+              className={styles.input}
               type="text"
               name="company_website"
               value={formState.company_website}

@@ -883,11 +883,9 @@ const BidsList = ({ previousStep }) => {
 
                         {seller?.about_company && (
                           <p className={styles.description}>
-                            {seller.about_company}
-                            {console.log(
-                              seller?.about_company,
-                              "about_company"
-                            )}
+                            {seller.about_company.length > 80
+                              ? seller.about_company.slice(0, 80) + "..."
+                              : seller.about_company}
                           </p>
                         )}
 

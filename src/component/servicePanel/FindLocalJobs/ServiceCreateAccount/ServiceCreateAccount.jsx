@@ -25,6 +25,7 @@ const ServiceCreateAccount = () => {
   const { selectedServiceId, selectedServiceFormData } = useSelector(
     (state) => state.findJobs
   );
+
   const { serviceTitle } = useParams();
   const formattedTitle = serviceTitle
     .split("-")
@@ -41,6 +42,13 @@ const ServiceCreateAccount = () => {
   const [phoneCheck, setPhoneCheck] = useState(false);
   const [addressCheck, setAddressCheck] = useState(false);
   const [type, setType] = useState();
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [companyCity, setCompanyCity] = useState("");
+  const [companyCountry, setCompanyCountry] = useState("");
+  const [companyPostCode, setCompanyPostCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  // const
   // console.log(emailCheck, companyCheck, phoneCheck, "emailCheck");
   // console.log(selectedServiceFormData?.company_reg_number, "pp");
   // Validation function
@@ -128,6 +136,8 @@ const ServiceCreateAccount = () => {
   const debounceTimer = useRef({});
   const latestEmailRef = useRef("");
   const latestPhoneRef = useRef("");
+
+  const companyData = useSelector((state) => state.companyLook?.companyData);
 
   useEffect(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -261,11 +271,32 @@ const ServiceCreateAccount = () => {
     if (name === "company_name") {
       setCompanyValue(value);
     }
+    if (name == "company_address") {
+      setCompanyAddress(value);
+    }
     if (name === "phone") {
       setPhoneValue(value);
     }
     if (name === "address") {
       setAddressValue(value);
+    }
+    if (name == "company_country") {
+      setCompanyCountry(value);
+    }
+
+    if (name == "company_postcode") {
+      setCompanyPostCode(value);
+    }
+    if (name == "company_city") {
+      setCompanyCity(value);
+    }
+
+    if (name == "city") {
+      setCity(value);
+    }
+
+    if (name == "country") {
+      setCountry(value);
     }
 
     dispatch(
@@ -346,6 +377,8 @@ const ServiceCreateAccount = () => {
               addressCheck={addressCheck}
               setHasPopulatedFromCompany={setHasPopulatedFromCompany}
               addressValue={addressValue}
+              cityvalue={city}
+              countryvalue={country}
             />
           )}
           {registerStep === 4 && (

@@ -8,7 +8,61 @@ const initialState = {
   companyError: null,
 };
 
+// export const fetchCompanyDetails = (regNumber, user_id = null) => {
+//   return async (dispatch) => {
+//     dispatch(setCompanyLoader(true));
+//     dispatch(clearCompanyData());
 
+//     try {
+
+//       let url = `users/fetch_company_details/${regNumber}`;
+//       if (user_id) {
+//         url += `?user_id=${user_id}`;
+//       }
+
+//       const response = await axiosInstance.get(url);
+
+//       if (
+//         response.data &&
+//         !response.data.error &&
+//         !response.data.body
+//       ) {
+
+//         dispatch(setCompanyData(response.data));
+
+//           dispatch(
+//                 checkCompanyNameApi({
+//                   company_name: response.data.company_name,
+//                   company_reg_number: response.data.company_number,
+//                 },true)
+//               )
+//               dispatch(checkAddressApi({ company_location: response.data.registered_office_address.address_line_1 }))
+//         return true;
+//       } else {
+//         dispatch(setCompanyError("Company not found"));
+//         return false;
+//       }
+
+//     } catch (error) {
+//       let message = "Your account is already registered with this Company Name. Please contact us if this is not correct.";
+
+//       const body = error?.response?.data?.body;
+//       if (body) {
+//         try {
+//           const parsed = JSON.parse(body);
+//           message = parsed.message || message;
+//         } catch (e) {
+
+//         }
+//       }
+
+//       dispatch(setCompanyError(message));
+//       return false;
+//     } finally {
+//       dispatch(setCompanyLoader(false));
+//     }
+//   };
+// };
 
 export const fetchCompanyDetails = (regNumber, user_id = null) => {
   return async (dispatch) => {
@@ -16,7 +70,6 @@ export const fetchCompanyDetails = (regNumber, user_id = null) => {
     dispatch(clearCompanyData());
 
     try {
-
       let url = `users/fetch_company_details/${regNumber}`;
       if (user_id) {
         url += `?user_id=${user_id}`;
@@ -24,41 +77,72 @@ export const fetchCompanyDetails = (regNumber, user_id = null) => {
 
       const response = await axiosInstance.get(url);
 
-      if (
-        response.data &&
-        !response.data.error &&
-        !response.data.body
-      ) {
-
+      // ✅ Company found and valid
+      if (response.data && !response.data.error && !response.data.body) {
         dispatch(setCompanyData(response.data));
-       
-          dispatch(
-                checkCompanyNameApi({
-                  company_name: response.data.company_name,
-                  company_reg_number: response.data.company_number,
-                },true)
-              )
-              dispatch(checkAddressApi({ company_location: response.data.registered_office_address.address_line_1 }))
+
+        dispatch(
+          checkCompanyNameApi(
+            {
+              company_name: response.data.company_name,
+              company_reg_number: response.data.company_number,
+            },
+            true
+          )
+        );
+
+        dispatch(
+          checkAddressApi({
+            company_location:
+              response.data.registered_office_address.address_line_1,
+          })
+        );
+
         return true;
       } else {
+        // ❌ Not found
         dispatch(setCompanyError("Company not found"));
+        dispatch(clearCompanyData());
+        dispatch(
+          setSelectedServiceFormData({
+            company_reg_number: "",
+            company_name: "",
+            company_address: "",
+            company_city: "",
+            company_postcode: "",
+            company_country: "",
+          })
+        );
         return false;
       }
-
     } catch (error) {
-      let message = "Your account is already registered with this Company Name. Please contact us if this is not correct.";
+      // 🧠 Already registered / API error
+      let message =
+        "Your account is already registered with this Company Name. Please contact us if this is not correct.";
 
       const body = error?.response?.data?.body;
       if (body) {
         try {
           const parsed = JSON.parse(body);
           message = parsed.message || message;
-        } catch (e) {
-
-        }
+        } catch (e) {}
       }
 
       dispatch(setCompanyError(message));
+
+      // 🧹 Clear both company data and form data (so UI inputs reset)
+      dispatch(clearCompanyData());
+      dispatch(
+        setSelectedServiceFormData({
+          company_reg_number: "",
+          company_name: "",
+          company_address: "",
+          company_city: "",
+          company_postcode: "",
+          company_country: "",
+        })
+      );
+
       return false;
     } finally {
       dispatch(setCompanyLoader(false));
@@ -80,8 +164,8 @@ const companySlice = createSlice({
       state.companyError = action.payload;
     },
     clearCompanyData(state) {
-      state.companyData = {}; 
-    }
+      state.companyData = {};
+    },
   },
 });
 

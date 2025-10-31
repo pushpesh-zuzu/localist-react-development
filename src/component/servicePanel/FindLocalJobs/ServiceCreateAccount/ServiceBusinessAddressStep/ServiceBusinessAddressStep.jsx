@@ -17,6 +17,8 @@ const ServiceBusinessAddressStep = ({
   addressCheck,
   setHasPopulatedFromCompany,
   addressValue,
+  cityvalue,
+  countryvalue,
 }) => {
   const dispatch = useDispatch();
   console.log("formdata", formData);
@@ -37,6 +39,8 @@ const ServiceBusinessAddressStep = ({
     nextStep();
   };
 
+  console.log("kbfwhe", formData);
+
   useEffect(() => {
     const reg = formData.company_reg_number?.trim();
 
@@ -51,18 +55,12 @@ const ServiceBusinessAddressStep = ({
       );
 
       const newAddress = {
-        address:
-          companyData.registered_office_address?.address_line_1 ||
-          formData.address,
-        apartment:
-          companyData.registered_office_address?.address_line_2 ||
-          formData.apartment,
-        city: companyData.registered_office_address?.locality || formData.city,
-        zipcode:
-          companyData.registered_office_address?.postal_code ||
-          formData.zipcode,
-        country:
-          companyData.registered_office_address?.country || formData.country,
+        // address:addressValue,
+        // apartment:
+        // city:
+        // zipcode:
+        //  ,
+        // country:
       };
 
       dispatch(setFormData(newAddress));
@@ -139,11 +137,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="city"
-                value={
-                  formData.city ||
-                  (!formData.company_reg_number ? formData.city_old : "") ||
-                  ""
-                }
+                value={formData.city}
                 onChange={handleInputChange}
               />
             </div>
@@ -155,11 +149,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="country"
-                value={
-                  formData.country ||
-                  (!formData.company_reg_number ? formData.country_old : "") ||
-                  ""
-                }
+                value={formData.country}
                 onChange={handleInputChange}
               />
             </div>

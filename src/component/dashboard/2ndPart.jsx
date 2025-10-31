@@ -128,7 +128,10 @@ const DashboardCards = ({ data }) => {
       <div className={styles.row}>
         <div className={`${styles.card} ${styles.profile} ${styles.oddCardBg}`}>
           <div className={styles["profile-header"]}>
-            <div className={styles.avatar}>C</div>
+            <div className={styles.avatar}>
+              {" "}
+              {data?.profile_info?.name?.[0]?.toUpperCase() || ""}
+            </div>
             <span className={styles.profilename}>
               {/* {data?.profile_info?.name} */}
               {data?.profile_info?.name?.split(" ")[0]}

@@ -29,6 +29,7 @@ const ServiceDetailsStep = ({
   const debounceTimer = useRef({ company_name: null });
   const [hasCompanyReg, setHasCompanyReg] = useState(null);
 
+  // const companyData = useSelector((state) => state.companyLook?.companyData);
   //   const handleCheck = () => {
   //     if(emailCheck && companyCheck && phoneCheck) {
   //       nextStep()
@@ -56,7 +57,7 @@ const ServiceDetailsStep = ({
     } else if (companyValue && companyCheck === false) {
       showToast("error", "Please Enter Correct Company Details");
     } else if (hasCompanyReg && !hasCompanyName) {
-      showToast("error", "Please enter company name.");
+      // showToast("error", "Please enter company name.");
     }
 
     if (formData.phone.startsWith("0")) {
@@ -136,15 +137,39 @@ const ServiceDetailsStep = ({
   }, [companyError, formData.company_reg_number, dispatch]);
 
   // When data fetched successfully
+  // useEffect(() => {
+  //   if (companyData?.company_name) {
+  //     dispatch(
+  //       setFormData({
+  //         company_name: formData.company_name || "",
+  //         company_address:
+  //           companyData?.registered_office_address?.address_line_1 || "",
+  //         company_city: companyData?.registered_office_address?.locality || "",
+  //         company_postcode:
+  //           companyData?.registered_office_address?.postal_code || "",
+  //         company_country:
+  //           companyData?.registered_office_address?.country || "",
+  //       })
+  //     );
+  //   }
+  // }, [companyData]);
+
   useEffect(() => {
-    if (companyData?.company_name) {
+    if (companyData) {
       dispatch(
         setFormData({
-          company_name: companyData.company_name || "",
+          company_name: companyData?.company_name || "",
+          company_address:
+            companyData?.registered_office_address?.address_line_1 || "",
+          company_city: companyData?.registered_office_address?.locality || "",
+          company_postcode:
+            companyData?.registered_office_address?.postal_code || "",
+          company_country:
+            companyData?.registered_office_address?.country || "",
         })
       );
     }
-  }, [companyData]);
+  }, [companyData, dispatch]);
 
   useEffect(() => {
     if (companyData?.company_name && hasCompanyReg === 1) {
@@ -314,7 +339,7 @@ const ServiceDetailsStep = ({
               </div>
 
               {/* Only show registration number + company name if Yes */}
-              {hasCompanyReg === 1 && (
+              {/* {hasCompanyReg === 1 && (
                 <>
                   <div className={styles.labelInputWrapper}>
                     <label className={styles.label}>
@@ -361,6 +386,124 @@ const ServiceDetailsStep = ({
                       readOnly
                     />
                   </div>
+                </>
+              )} */}
+              {hasCompanyReg === 1 && (
+                <>
+                  {/* Company Registration Number */}
+                  <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>
+                      Company registration number
+                      <span
+                        style={{
+                          fontWeight: "normal",
+                          fontSize: "0.85em",
+                          color: "#666",
+                        }}
+                      >
+                        (Optional)
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_reg_number ? styles.errorBorder : ""
+                      }`}
+                      name="company_reg_number"
+                      value={formData.company_reg_number}
+                      onChange={(e) => {
+                        const value = e.target.value
+                          .replace(/[^a-zA-Z0-9]/g, "")
+                          .slice(0, 8);
+                        handleInputChange({
+                          target: { name: "company_reg_number", value },
+                        });
+                      }}
+                      // maxLength={8}
+                    />
+                  </div>
+
+                  {/* Company Name */}
+                  <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company name</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_name ? styles.errorBorder : ""
+                      }`}
+                      name="company_name"
+                      value={companyData?.company_name}
+                      onChange={handleInputChange}
+                      readOnly
+                    />
+                  </div>
+
+                  {/* Company Address */}
+                  {/* <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company address</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_address ? styles.errorBorder : ""
+                      }`}
+                      name="company_address"
+                      value={
+                        companyData?.registered_office_address?.address_line_1
+                      }
+                      onChange={handleInputChange}
+                    />
+                  </div> */}
+
+                  {/* Company City */}
+                  {/* <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company city</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_city ? styles.errorBorder : ""
+                      }`}
+                      name="company_city"
+                      value={companyData?.registered_office_address?.locality}
+                      onChange={handleInputChange}
+                    />
+                  </div> */}
+
+                  {/* Company Postcode */}
+                  {/* <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company postcode</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_postcode ? styles.errorBorder : ""
+                      }`}
+                      name="company_postcode"
+                      value={
+                        companyData?.registered_office_address?.postal_code
+                      }
+                      onChange={(e) => {
+                        const value = e.target.value
+                          .replace(/[^0-9]/g, "")
+                          .slice(0, 6);
+                        handleInputChange({
+                          target: { name: "company_postcode", value },
+                        });
+                      }}
+                      maxLength={6}
+                    />
+                  </div> */}
+
+                  {/* <div className={styles.labelInputWrapper}>
+                    <label className={styles.label}>Company country</label>
+                    <input
+                      type="text"
+                      className={`${styles.input} ${
+                        errors.company_country ? styles.errorBorder : ""
+                      }`}
+                      name="company_country"
+                      value={companyData?.registered_office_address?.country}
+                      onChange={handleInputChange}
+                    />
+                  </div> */}
                 </>
               )}
 

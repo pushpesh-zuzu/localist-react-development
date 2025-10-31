@@ -350,7 +350,7 @@ const ContactConfirmModal = ({
                       <div className={styles.changeText}>Change</div>
                     </div> */}
 
-                  <div className={styles.visaCard}>
+                  {/* <div className={styles.visaCard}>
                     <div className={styles.visaText}>
                       <img src={visaImg} alt="VISA" />
                       <span className={styles.verticalLine}></span>
@@ -359,7 +359,7 @@ const ContactConfirmModal = ({
                       </span>
                     </div>
                     <div className={styles.changeText}>Change</div>
-                  </div>
+                  </div> */}
 
                   <div className={styles.buttonGroup}>
                     <button

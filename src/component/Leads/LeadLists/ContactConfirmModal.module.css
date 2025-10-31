@@ -298,6 +298,9 @@
   display: flex;
   align-items: center;
 }
+.creditbtn img {
+  padding-top: 5px;
+}
 
 .rotate {
   transform: rotate(180deg);

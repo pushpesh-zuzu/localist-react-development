@@ -276,7 +276,7 @@ export const checkCompanyNameApi = (companyData, isapi = false) => {
         companyData
       );
 
-      if (response) {
+      if (response && response?.success == true) {
         // dispatch(setService(response?.data?.data));
         console.log(response?.data?.success, "response");
         dispatch(setErrorCheckComanyName(response?.data?.success));
@@ -284,8 +284,13 @@ export const checkCompanyNameApi = (companyData, isapi = false) => {
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      dispatch(setErrorCheckComanyName(error?.response?.data?.success));
-      console.log(error?.response?.data?.success, "errorData");
+      dispatch(setErrorCheckComanyName(error?.response?.data));
+      console.log(
+        error?.response?.data.message?.company_reg_number[0],
+        "errorData"
+      );
+      // showToast("error", "Your company is already registered.");
+      showToast("error", error?.response?.data.message?.company_reg_number[0]);
       if (errorData && typeof errorData === "object" && !isapi) {
         Object.values(errorData).forEach((messages) => {
           if (Array.isArray(messages)) {
