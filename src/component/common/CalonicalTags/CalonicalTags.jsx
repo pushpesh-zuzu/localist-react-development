@@ -39,18 +39,16 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
       <link rel="canonical" href={canonicalUrl} />
 
       {/* OG URL */}
+      <meta property="og:url" content={canonicalUrl} />
+
+      <meta property="og:type" content="website" />
 
       {/* Hreflang Tags */}
       <link rel="alternate" hreflang="en-gb" href={canonicalUrl} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:type" content="website" />
       {bannerImage && (
-        <>
-          <meta property="og:image" content={`${baseUrl}${bannerImage}`} />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content={`${baseUrl}${bannerImage}`} />
-        </>
+        <meta property="og:image" content={`${baseUrl}${bannerImage}`} />
       )}
+
       {/* <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} /> */}
 
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
