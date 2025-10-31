@@ -212,13 +212,15 @@
   border-bottom: 1px solid #d9d9d9;
   overflow: hidden;
   gap: 15px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .cardLeft {
   display: flex;
   gap: 25.54px;
   width: 100%;
+  align-items: center;
+  padding: 20px 0;
 }
 
 .image {
@@ -380,6 +382,7 @@
   background: #e3f6fc;
   width: 265.4px;
   flex-direction: column;
+  padding: 20px;
 }
 
 .replyBtn {

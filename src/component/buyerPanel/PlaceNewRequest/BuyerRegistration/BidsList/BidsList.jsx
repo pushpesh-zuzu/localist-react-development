@@ -666,8 +666,8 @@ const BidsList = ({ previousStep }) => {
                             alt="Profile"
                             className={styles.image} // ✅ image CSS applied here
                             style={{
-                              width: "100%",
-                              height: "100%",
+                              width: "180px",
+                              height: "180px",
                               objectFit: "cover",
                               borderRadius: "50%",
                             }}
@@ -683,7 +683,7 @@ const BidsList = ({ previousStep }) => {
                               display: "flex",
                               justifyContent: "center",
                               alignItems: "center",
-                              fontSize: "36px",
+                              fontSize: "48px",
                               fontWeight: "500",
                               textTransform: "uppercase",
                               overflow: "hidden",
