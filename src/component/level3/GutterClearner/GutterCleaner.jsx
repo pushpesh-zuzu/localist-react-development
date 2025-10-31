@@ -78,7 +78,6 @@ function GutterCleaner() {
       <Helmet>
         {/* <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} /> */}
-        <meta name="robots" content="noindex" />
       </Helmet>
       <CalonicalTags />
       <SearchAndFindAnAccountant
