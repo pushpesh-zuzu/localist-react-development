@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 
 const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
-  const baseUrl = `https://www.dev.localists.com`;
+  const baseUrl = "https://www.localists.com";
   const location = useLocation();
   const parts = location.pathname.split("/").filter(Boolean);
   const lang = parts[0] || "en";
