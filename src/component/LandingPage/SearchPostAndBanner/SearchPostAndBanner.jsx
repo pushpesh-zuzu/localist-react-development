@@ -29,7 +29,7 @@ const SearchPostAndBanner = ({
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const inputRef = useRef(null);
-  const { postCodeLoader,buyerRequest } = useSelector((state) => state.buyer);
+  const { postCodeLoader, buyerRequest } = useSelector((state) => state.buyer);
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
@@ -54,15 +54,15 @@ const SearchPostAndBanner = ({
         localStorage.getItem("pendingBuyerModal")
       );
 
-    if (pendingModal?.shouldOpen) {
-      setTimeout(() => {
-        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
-        dispatch(setcitySerach(pendingModal.city));
+      if (pendingModal?.shouldOpen) {
+        setTimeout(() => {
+          dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+          dispatch(setcitySerach(pendingModal.city));
 
-        setShowModal(true);
-        dispatch(setBuyerStep(7));
-      }, 200);
-    }
+          setShowModal(true);
+          dispatch(setBuyerStep(7));
+        }, 200);
+      }
     };
 
     checkPendingModal();
@@ -89,8 +89,13 @@ const SearchPostAndBanner = ({
       // agar API response sahi aata hai
       if (response?.data?.city) {
         setCity(response.data.city);
+        console.log(response, "rrrrr");
         dispatch(setcitySerach(response.data.city));
-
+        setbuyerRequestData({
+          ...buyerRequest,
+          postcode: response.data.postcode,
+          city: response.data.city,
+        });
         setShowModal(true);
         // dispatch(
         //   setbuyerRequestData({
@@ -109,13 +114,13 @@ const SearchPostAndBanner = ({
       return;
     }
   };
-const [hasMountedDetector, setHasMountedDetector] = useState(false);
+  const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
-// useEffect(() => {
-//   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-//     setHasMountedDetector(true);
-//   }
-// }, [hasMountedDetector]);
+  // useEffect(() => {
+  //   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+  //     setHasMountedDetector(true);
+  //   }
+  // }, [hasMountedDetector]);
 
   return (
     <div className={styles.searchcontainer}>

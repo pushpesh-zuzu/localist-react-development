@@ -139,6 +139,7 @@ const BuyerRegistrationLandingPage = ({
     isStartWithQuestionModal &&
       dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
+  console.log(buyerRequest, "brr");
   return (
     <div className={styles.modal}>
       {!isStartWithQuestionModal ? (

@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
-import useUserInfo from "../../../utils/getUserIp";
-import { baseURL } from "../../../Api/axiosInstance";
+import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 
 const NavigationDetectorDesktop = () => {
+  const dispatch = useDispatch();
   const userToken = useSelector((state) => state.auth.userToken);
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
@@ -19,7 +19,6 @@ const NavigationDetectorDesktop = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
-  const { ip, url } = useUserInfo();
 
   // 🧠 Ref to store latest data safely
   const latestData = useRef({
@@ -36,120 +35,83 @@ const NavigationDetectorDesktop = () => {
   // Prevent multiple API calls
   const hasSent = useRef(false);
 
-  const sendBeaconData = () => {
+  const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
+    if (hasSent.current || userToken) return;
+    hasSent.current = true;
 
-    // ✅ Already sent or user is logged in
-    if (hasSent.current || userToken) {
-      console.log("🚫 Skipping - already sent or user logged in");
-      return;
-    }
-
-    // ✅ Check if all fields are empty
+    const updatedAnswers = buyerRequest?.questions || [];
+    const formData = new FormData();
+    //  console.log("📡 API Call being made once with form_status: 0");
     const isEverythingEmpty =
       !buyerRequest?.name?.trim() &&
       !buyerRequest?.email?.trim() &&
       !buyerRequest?.phone?.trim() &&
       !buyerRequest?.postcode?.trim() &&
-      (!buyerRequest?.questions || buyerRequest.questions.length === 0);
+      buyerRequest.questions.length === 0;
 
     if (isEverythingEmpty) {
-      console.log("🚫 Skipping - all fields empty");
+      console.log("🚫 Skipping API call - all fields are empty");
       return;
     }
-
-    hasSent.current = true;
-
-    const updatedAnswers = buyerRequest?.questions || [];
-
-    // ✅ Prepare data as JSON (sendBeacon works better with Blob)
-    const payload = {
-      name: buyerRequest?.name || "",
-      email: buyerRequest?.email || "",
-      phone: buyerRequest?.phone || "",
-      questions: JSON.stringify(updatedAnswers),
-      service_id: buyerRequest?.service_id || "",
-      city: citySerach || "",
-      postcode: buyerRequest?.postcode || "",
-      campaignid: campaignid,
-      gclid: gclid,
-      campaign: campaign,
-      adgroup: adGroup,
-      targetid: targetID,
-      msclickid: msclickid,
-      utm_source: utm_source,
-      keyword: keyword,
-      form_status: 0,
-      entry_url: url,
-      user_ip_address: ip,
-    };
-    const isDevEnvironment =
-      typeof window !== "undefined" &&
-      window.location.hostname === "dev.localists.com";
-    const isProduction =
-      typeof window !== "undefined" &&
-      window.location.hostname === "localists.com";
-
-    // ✅ Convert to FormData
-    const formData = new FormData();
-    Object.keys(payload).forEach((key) => {
-      formData.append(key, payload[key]);
+    console.log("🔍 Empty Check Details:", {
+      name: !!buyerRequest?.name?.trim(),
+      email: !!buyerRequest?.email?.trim(),
+      phone: !!buyerRequest?.phone?.trim(),
+      postcode: !!buyerRequest?.postcode?.trim(),
+      questions: buyerRequest?.questions?.length > 0,
+      city: !!citySerach?.trim(), // Just for info
+      isEverythingEmpty: isEverythingEmpty,
     });
+    formData.append("name", buyerRequest?.name);
+    formData.append("email", buyerRequest?.email);
+    formData.append("phone", buyerRequest?.phone);
+    formData.append("questions", JSON.stringify(updatedAnswers));
+    formData.append("service_id", buyerRequest?.service_id || "");
+    formData.append("city", citySerach || "");
+    formData.append("postcode", buyerRequest?.postcode || "");
+    formData.append("campaignid", campaignid || "");
+    formData.append("gclid", gclid || "");
+    formData.append("campaign", campaign || "");
+    formData.append("adgroup", adGroup || "");
+    formData.append("targetid", targetID || "");
+    formData.append("msclickid", msclickid || "");
+    formData.append("utm_source", utm_source || "");
+    formData.append("keyword", keyword || "");
+    formData.append("form_status", 0);
 
-    // ✅ Get your API endpoint (replace with actual endpoint)
-    // const API_ENDPOINT = `${baseURL}/customer/register-quote-customer`; // 👈 Update this
-    const API_ENDPOINT = isDevEnvironment
-      ? "https://dev.localists.com/admin/api/customer/register-quote-customer"
-      : isProduction
-      ? "https://localists.com/admin/api/customer/register-quote-customer"
-      : "https://dev.localists.com/admin/api/customer/register-quote-customer"; // 👈 Update this
-
-    try {
-      // ✅ sendBeacon returns true if queued successfully
-      const success = navigator.sendBeacon(API_ENDPOINT, formData);
-
-      if (success) {
-        console.log("✅ Beacon sent successfully");
-        // Clear localStorage
+    dispatch(registerQuoteCustomer(formData))
+      .then(() => {
+        // console.log("✅ API Call successful - Data saved");
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
         localStorage.removeItem("registerTokens");
         localStorage.removeItem("createRequestToken");
-      } else {
-        console.warn("⚠️ Beacon failed to queue");
-      }
-    } catch (error) {
-      console.error("❌ Beacon error:", error);
-    }
+      })
+      .catch((error) => {
+        console.error("❌ API Call failed:", error);
+      });
   };
 
   useEffect(() => {
-    console.log("🔵 NavigationDetector mounted");
+    console.log("🔵 NavigationDetector mounted once");
 
     const handleBeforeUnload = (event) => {
-      console.log("🟡 beforeunload triggered - sending beacon");
-      sendBeaconData();
-      // Note: Don't use event.preventDefault() or returnValue unless you want confirmation dialog
+      if (hasSent.current) return; // ✅ already sent, ignore
+      // console.log("🟡 Browser/Tab close detected - sending data once");
+      submitFormData();
+      hasSent.current = true;
+      event.preventDefault();
+      event.returnValue = "";
     };
 
-    const handleVisibilityChange = () => {
-      // ✅ Extra safety: send when tab becomes hidden (works on mobile too)
-      if (document.visibilityState === "hidden") {
-        console.log("👁️ Tab hidden - sending beacon");
-        sendBeaconData();
-      }
-    };
-
-    // ✅ Add listeners
+    // ✅ Add listener once
     window.addEventListener("beforeunload", handleBeforeUnload);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    // ✅ Cleanup
+    // ✅ Cleanup once
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      console.log("🧹 Cleanup complete");
+      // console.log("🧹 Cleanup complete");
     };
   }, []); // 🚀 NO DEPENDENCIES
 

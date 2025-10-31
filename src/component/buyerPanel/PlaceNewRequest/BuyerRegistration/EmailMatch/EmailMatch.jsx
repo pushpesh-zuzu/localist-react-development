@@ -245,6 +245,12 @@ const EmailMatch = ({
     } else {
       // normal flow
       nextStep();
+      setbuyerRequestData({
+          ...buyerRequest,
+          name: name,
+          city: email,
+          phone:phone
+        });
     }
   };
 
