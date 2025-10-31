@@ -250,18 +250,23 @@ const LogoComponent = () => {
                     </span>
                     <img
                       onClick={() => {
-                        setShowSubMenu(true);
-                        setFilterItems(item.name);
-                        setFilteRoute(item.path);
+                        if (item?.subcategory?.length > 0) {
+                          setShowSubMenu(true);
+                          setFilterItems(item.name);
+                          setFilteRoute(item.path);
+                        }
                       }}
                       src={arrowIcon}
                       width={8}
                       alt="arrow"
+                      style={{
+                        opacity: item?.subcategory?.length > 0 ? 1 : 0.5,
+                      }}
                     />
                   </div>
                 ))}
-
-                {totalItems > 5 && (
+                {/* later if need then uncomment */}
+                {/* {totalItems > 5 && (
                   <div
                     className={`${styles.popover_content} ${styles.toggleButton}`}
                     onClick={handleToggle}
@@ -270,7 +275,7 @@ const LogoComponent = () => {
                       {isAllVisible ? "Show Less ▲" : "See More ▼"}
                     </span>
                   </div>
-                )}
+                )} */}
               </motion.div>
             ) : showSubMenu && !showThirdLevel ? (
               <motion.div
@@ -324,7 +329,7 @@ const LogoComponent = () => {
                         </span> */}
                       </div>
 
-                      {item.subcategory?.map((sub, subIndex) => {
+                      {item?.subcategory?.map((sub, subIndex) => {
                         const slug = sub.name
                           .toLowerCase()
                           .replace(/\s+/g, "-");

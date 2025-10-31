@@ -672,8 +672,8 @@
 }
 
 .text_wrap:hover img {
-  background-color: #91b7f4;
-  border-radius: 4px;
+  background-color: #00afe3;
+  border-radius: 5px;
 }
 .popover_back_explore {
   display: flex;
