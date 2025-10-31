@@ -113,7 +113,7 @@ const CloneCategory = ({ accountHeader }) => {
           `}
         </script>
       </Helmet>
-      <CalonicalTags/>
+      <CalonicalTags bannerImage={Home} />
       <div>
         <BannerWithBreadCrum
           header={accountHeader}

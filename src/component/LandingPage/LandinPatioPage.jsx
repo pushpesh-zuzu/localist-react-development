@@ -21,7 +21,9 @@ const LandinPatioPage = () => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags
+        bannerImage={LANDING_DETAIL_BANNERS["patio_services_ppc"]?.banner}
+      />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["patio_services_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["patio_services_ppc"].paragraphs}

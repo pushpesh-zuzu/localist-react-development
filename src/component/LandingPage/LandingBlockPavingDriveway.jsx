@@ -21,7 +21,11 @@ const LandingBlockPavingDriveway = ({}) => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags
+        bannerImage={
+          LANDING_DETAIL_BANNERS["block_paving_driveways_ppc"]?.banner
+        }
+      />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["block_paving_driveways_ppc"]?.title}
         paragraphs={

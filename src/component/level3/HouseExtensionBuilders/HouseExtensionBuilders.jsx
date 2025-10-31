@@ -44,6 +44,7 @@ function HouseExtensionBuilders() {
         </script>
       </Helmet>
       <CalonicalTags
+      bannerImage={PropertyExtensions}
         breadcrumb={
           HOUSE_EXTENSION_BREADCRUMB_CONFIG["property-extensions-near-me"]
         }

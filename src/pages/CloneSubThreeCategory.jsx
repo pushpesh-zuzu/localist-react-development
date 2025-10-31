@@ -97,7 +97,10 @@ const LevelThreePage = ({}) => {
           `}
         </script>
       </Helmet>
-      <CalonicalTags breadcrumb={BREADCRUMB_CONFIG[slug]} />
+      <CalonicalTags
+        breadcrumb={BREADCRUMB_CONFIG[slug]}
+        bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
+      />
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}

@@ -21,8 +21,20 @@ function HowItWorkSeller() {
           name="description"
           content="Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
         />
+        <meta
+          property="og:title"
+          content="How It Works for Professionals & Businesses - Localists"
+        />
+        <meta
+          name="twitter:title"
+          content="How It Works for Professionals & Businesses - Localists"
+        />
+        <meta
+          property="og:description"
+          content="Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
+        />
       </Helmet>
-      <CalonicalTags/>
+      <CalonicalTags />
       <div className={styles.container} style={style}>
         <div className={styles.text}>
           <BlueBlackTextForH1

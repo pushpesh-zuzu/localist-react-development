@@ -18,8 +18,20 @@ function AboutUs() {
           name="description"
           content="Meet our experienced leadership team and the investors driving Localists, the world’s fastest-growing local services marketplace. Get free quotes."
         />
+        <meta
+          property="og:title"
+          content="Meet Our Leadership Team & Investors - Localists"
+        />
+        <meta
+          name="twitter:title"
+          content="Meet Our Leadership Team & Investors - Localists"
+        />
+        <meta
+          property="og:description"
+          content="Meet our experienced leadership team and the investors driving Localists, the world’s fastest-growing local services marketplace. Get free quotes."
+        />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags bannerImage={aboutUsBanner} />
       <BannerWrapper headingText="About Us" image={aboutUsBanner} />
       <WhoWeAre />
       {/* <Stats /> */}

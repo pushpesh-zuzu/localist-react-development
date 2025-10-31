@@ -42,6 +42,7 @@ function AirportServices() {
       </Helmet>
       <CalonicalTags
         breadcrumb={TRANSPORT_BREADCRUMB_CONFIG["Airport Transfers"]}
+        bannerImage={AirportTransfers}
       />
       <SearchAndFindAnAccountant
         title={TRANSPORT_CONFIG_TOP["Airport Transfers"]?.title}

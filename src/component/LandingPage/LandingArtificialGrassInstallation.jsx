@@ -21,7 +21,11 @@ const LandingArtificialGrassInstallation = ({}) => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags
+        bannerImage={
+          LANDING_DETAIL_BANNERS["artificial_grass_installation_ppc"]?.banner
+        }
+      />
       <FindDetailAndBannerWrapper
         title={
           LANDING_TITLES_AND_META["artificial_grass_installation_ppc"]?.title

@@ -64,8 +64,11 @@ function Tutor() {
       <Helmet>
         <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} />
+        <meta property="og:title" content={metaConfig?.title} />
+        <meta name="twitter:title" content={metaConfig?.title} />
+        <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
-      <CalonicalTags breadcrumb={breadcrumbConfig} />
+      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TutorsNearMe} />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

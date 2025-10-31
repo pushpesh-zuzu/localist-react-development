@@ -30,7 +30,10 @@ function Business() {
           `}
         </script>
       </Helmet>
-      <CalonicalTags breadcrumb={[{ title: "Business", path: "/business" }]} />
+      <CalonicalTags
+        breadcrumb={[{ title: "Business", path: "/business" }]}
+        bannerImage={BusinessBanner}
+      />
       <BannerWithBreadCrum
         accountHeader="Business"
         heading2="Professionals"

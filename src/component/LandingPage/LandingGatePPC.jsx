@@ -21,7 +21,9 @@ const LandingGatePPC = () => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags
+        bannerImage={LANDING_DETAIL_BANNERS["gates_ppc"]?.banner}
+      />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["gates_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["gates_ppc"].paragraphs}

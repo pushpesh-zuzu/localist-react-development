@@ -21,7 +21,9 @@ const LandingDriwayAwin = ({}) => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags
+        bannerImage={LANDING_DETAIL_BANNERS["driveways_ppc"]?.banner}
+      />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["driveways_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["driveways_ppc"].paragraphs}

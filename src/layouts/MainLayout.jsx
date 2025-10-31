@@ -383,7 +383,7 @@ const MainLayout = () => {
     <div>
       <ScrollToTop />
       <Navbar />
-      <MetaHelmet title={meta?.title} description={meta?.description} />
+      {meta?.title && <MetaHelmet title={meta?.title} description={meta?.description} />}
       <main style={{ minHeight: "50vh", position: "relative", zIndex: 9 }}>
         <Outlet />
       </main>

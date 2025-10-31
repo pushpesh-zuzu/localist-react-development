@@ -54,11 +54,23 @@ const ContactUs = () => {
 
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags bannerImage={contactUsBanner} />
       <Helmet>
         <title>
           Get in Touch with Localists | Customer & Professional Support
         </title>
+        <meta
+          property="og:title"
+          content="Get in Touch with Localists | Customer & Professional Support"
+        />
+        <meta
+          name="twitter:title"
+          content="Get in Touch with Localists | Customer & Professional Support"
+        />
+        <meta
+          property="og:description"
+          content="Have questions or need help? Contact Localists & Speak with our team, find professionals, or join as a service provider. We’re here to help you connect."
+        />
         <meta
           name="description"
           content=" Have questions or need help? Contact Localists & Speak with our team, find professionals, or join as a service provider. We’re here to help you connect."

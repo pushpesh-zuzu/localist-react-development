@@ -29,8 +29,9 @@ function Transport() {
           {
             title: "Transportation Services",
             path: "/transportation-services",
-          }, 
+          },
         ]}
+        bannerImage={TransportBanner}
       />
       <BannerWithBreadCrum
         accountHeader="Transportation Services"

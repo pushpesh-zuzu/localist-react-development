@@ -43,7 +43,12 @@ function BookKeepingService() {
           `}
         </script>
       </Helmet>
-      <CalonicalTags breadcrumb={BOOKKEEPING_SERVICE_BREADCRUMB_CONFIG["bookkeepers-near-me"]}/>
+      <CalonicalTags
+        bannerImage={BookkeepingServices}
+        breadcrumb={
+          BOOKKEEPING_SERVICE_BREADCRUMB_CONFIG["bookkeepers-near-me"]
+        }
+      />
       <SearchAndFindAnAccountant
         title={BOOKKEEPING_SERVICE_CONFIG_TOP["bookkeepers-near-me"]?.title}
         findingHeading={

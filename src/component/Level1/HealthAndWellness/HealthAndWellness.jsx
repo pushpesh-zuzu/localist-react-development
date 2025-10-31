@@ -21,7 +21,7 @@ function HealthAndWellness() {
         <title>Health & Wellness Professionals Near Me | Localists</title>
         <meta
           name="description"
-          content=" Find trusted health and wellness professionals near you. Get free quotes for fitness, therapy, massage, and counselling services."
+          content="Find trusted health and wellness professionals near you. Get free quotes for fitness, therapy, massage, and counselling services."
         />
         <script>
           {`
@@ -32,8 +32,23 @@ function HealthAndWellness() {
               });
           `}
         </script>
+        <meta
+          property="og:title"
+          content="Health & Wellness Professionals Near Me | Localists"
+        />
+        <meta
+          name="twitter:title"
+          content="Health & Wellness Professionals Near Me | Localists"
+        />
+        <meta
+          property="og:description"
+          content="Find trusted health and wellness professionals near you. Get free quotes for fitness, therapy, massage, and counselling services."
+        />
       </Helmet>
-      <CalonicalTags breadcrumb={[{ title: "Health", path: "/health" }]} />
+      <CalonicalTags
+        breadcrumb={[{ title: "Health", path: "/health" }]}
+        bannerImage={HealthandWellness}
+      />
       <BannerWithBreadCrum
         accountHeader="Health & Wellness"
         heading2="Professionals"
