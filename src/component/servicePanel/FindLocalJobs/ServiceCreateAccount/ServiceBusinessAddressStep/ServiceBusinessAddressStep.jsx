@@ -137,7 +137,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="city"
-                value={cityvalue}
+                value={formData.city}
                 onChange={handleInputChange}
               />
             </div>
@@ -149,7 +149,7 @@ const ServiceBusinessAddressStep = ({
                 type="text"
                 className={styles.input}
                 name="country"
-                value={countryvalue}
+                value={formData.country}
                 onChange={handleInputChange}
               />
             </div>
