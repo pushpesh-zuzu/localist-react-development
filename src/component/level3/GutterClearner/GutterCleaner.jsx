@@ -79,7 +79,7 @@ function GutterCleaner() {
         {/* <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} /> */}
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags breadcrumbConfig={breadcrumbConfig} />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

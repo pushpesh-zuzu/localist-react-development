@@ -29,7 +29,7 @@ function Transport() {
           {
             title: "Transportation Services",
             path: "/transportation-services",
-          }, // no path for last item
+          }, 
         ]}
       />
       <BannerWithBreadCrum

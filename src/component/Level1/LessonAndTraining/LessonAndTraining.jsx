@@ -25,7 +25,7 @@ function LessonAndTraining() {
       </Helmet>
       <CalonicalTags
         breadcrumb={[
-          { title: "Lessons & Training", path: "/lessons-training" }, // no path for last item
+          { title: "Lessons & Training", path: "/lessons-training" },
         ]}
       />
       <BannerWithBreadCrum
