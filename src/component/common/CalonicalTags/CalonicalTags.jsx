@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 
-const CalonicalTags = ({ breadcrumb = [] }) => {
-  const baseUrl = "https://www.localists.com";
+const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
+  const baseUrl = `https://www.dev.localists.com`;
   const location = useLocation();
   const parts = location.pathname.split("/").filter(Boolean);
   const lang = parts[0] || "en";
@@ -41,8 +41,13 @@ const CalonicalTags = ({ breadcrumb = [] }) => {
       {/* OG URL */}
       <meta property="og:url" content={canonicalUrl} />
 
+      <meta property="og:type" content="website" />
+
       {/* Hreflang Tags */}
       <link rel="alternate" hreflang="en-gb" href={canonicalUrl} />
+      {bannerImage && (
+        <meta property="og:image" content={`${baseUrl}${bannerImage}`} />
+      )}
 
       {/* <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} /> */}
 
