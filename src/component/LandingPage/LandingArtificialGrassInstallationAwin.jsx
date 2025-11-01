@@ -14,10 +14,46 @@ import {
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import { useEffect, useState } from "react";
 
-const LandingArtificialGrassInstallationAwin = ({}) => {
+const LandingArtificialGrassInstallationAwin = () => {
+  const [isClient, setIsClient] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Window resize
+    setIsClient(true);
+    setIsDesktop(window.innerWidth > 768);
+
+    // Window resize
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
+      {isClient && (
+        <div>
+          {isDesktop ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
+      <div>
+        {window.innerWidth > 768 && typeof window !== "undefined" ? (
+          <NavigationDetectorDesktop />
+        ) : (
+          <NavigationDetectorWithConfirmations />
+        )}
+      </div>
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
