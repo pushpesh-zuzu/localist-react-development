@@ -50,7 +50,6 @@ const ViewProfiles = () => {
   const { reviewProfileData, viewProfileData } = useSelector(
     (state) => state.leadSetting
   );
-  console.log(reviewProfileData, "setReviewProfile");
 
   let profileData = {};
 
@@ -60,7 +59,7 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
-  console.log("review test");
+  console.log(profileData, "review test");
 
   const serviceCount = profileData?.services?.filter(
     (service) => service?.user_services?.name
@@ -70,6 +69,7 @@ const ViewProfiles = () => {
     (state) => state?.leadSetting?.expandRadiusLoader
   );
 
+  console.log(reviewProfileData, profileData?.details, "setReviewProfile");
   console.log(profileData?.business_profile_name, "profileDataprofileData");
   useEffect(() => {
     return () => {
@@ -296,25 +296,37 @@ const ViewProfiles = () => {
   if (profileData?.services?.length > 0) availableTabs.push("Services");
 
   availableTabs.push("Reviews");
-  if (profileData?.accreditations?.length > 0)
+  if (
+    profileData?.accreditations?.length > 0 &&
+    profileData?.details?.has_accreditations !== 1
+  )
     availableTabs.push("Accreditations");
   if (profileData?.qa?.length > 0) availableTabs.push("Q+A's");
   if (profileData?.photos?.company_photos?.length > 0)
     availableTabs.push("Photos");
-  if (profileData?.details?.company_youtube_link?.length > 0)
+  if (
+    profileData?.details?.company_youtube_link?.length > 0 &&
+    profileData?.details?.has_youtube_link !== 1
+  )
     availableTabs.push("Videos");
   if (
-    profileData?.details?.extra_links?.length > 0 ||
+    (profileData?.details?.extra_links?.length > 0 &&
+      profileData?.details?.has_extra_links !== 1) ||
     (profileData?.details?.fb_link &&
-      profileData?.details?.fb_link?.length > 0) ||
+      profileData?.details?.fb_link?.length > 0 &&
+      profileData?.details?.has_fb_link !== 1) ||
     (profileData?.details?.insta_link &&
-      profileData?.details?.insta_link?.length > 0) ||
+      profileData?.details?.insta_link?.length > 0 &&
+      profileData?.details?.has_insta_link !== 1) ||
     (profileData?.details?.linkedin_link &&
-      profileData?.details?.linkedin_link?.length > 0) ||
+      profileData?.details?.linkedin_link?.length > 0 &&
+      profileData?.details?.has_linkedin_link !== 1) ||
     (profileData?.details?.tiktok_link &&
-      profileData?.details?.tiktok_link?.length > 0) ||
+      profileData?.details?.tiktok_link?.length > 0 &&
+      profileData?.details?.has_tiktok_link !== 1) ||
     (profileData?.details?.twitter_link &&
-      profileData?.details?.twitter_link?.length > 0)
+      profileData?.details?.twitter_link?.length > 0 &&
+      profileData?.details?.has_twitter_link !== 1)
   )
     availableTabs.push("Links");
 

@@ -37,12 +37,24 @@ const Links = ({ details }) => {
     <div className={styles.Links_Container}>
       <h2>Links</h2>
       <ul className={styles.linkList}>
-        {data?.linkedin_link && renderLink(data.linkedin_link, "#000000")}
-        {data?.tiktok_link && renderLink(data.tiktok_link, "#000000")}
-        {data?.insta_link && renderLink(data.insta_link, "#000000")}
-        {data?.fb_link && renderLink(data.fb_link, "#000000")}
-        {data?.twitter_link && renderLink(data.twitter_link, "#000000")}
-        {data?.extra_links && renderLink(data.extra_links, "#000000")}
+        {data?.linkedin_link &&
+          data?.has_linkedin_link !== 1 &&
+          renderLink(data.linkedin_link, "#000000")}
+        {data?.tiktok_link &&
+          data?.has_tiktok_link !== 1 &&
+          renderLink(data.tiktok_link, "#000000")}
+        {data?.insta_link &&
+          data?.has_insta_link !== 1 &&
+          renderLink(data.insta_link, "#000000")}
+        {data?.fb_link &&
+          data?.has_fb_link !== 1 &&
+          renderLink(data.fb_link, "#000000")}
+        {data?.twitter_link &&
+          data?.has_twitter_link !== 1 &&
+          renderLink(data.twitter_link, "#000000")}
+        {data?.extra_links &&
+          data?.has_extra_links !== 1 &&
+          renderLink(data.extra_links, "#000000")}
       </ul>
     </div>
   );

@@ -14,6 +14,7 @@ const Videos = ({ details }) => {
       data = [data];
     }
   }
+  console.log(details?.details?.has_youtube_link, "detailsssss");
 
   const [activeVideo, setActiveVideo] = useState(null);
 

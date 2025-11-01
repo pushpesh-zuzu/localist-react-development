@@ -15,27 +15,32 @@ const platforms = [
     key: "fb_link",
     label: "Facebook",
     placeholder: "https://www.facebook.com/yourpage",
+    optional: "has_fb_link",
   },
   {
     key: "twitter_link",
     label: "Twitter",
     placeholder: "https://twitter.com/yourhandle",
+    optional: "has_twitter_link",
   },
   {
     key: "tiktok_link",
     label: "Tik Tok",
     placeholder: "https://www.tiktok.com/@yourname",
+    optional: "has_tiktok_link",
   },
   {
     key: "insta_link",
     label: "Instagram",
     placeholder: "https://www.instagram.com/yourhandle",
+    optional: "has_insta_link",
   },
   // { key: "linkedin_link", label: "Linkedin", placeholder: "https://www.linkedin.com/in/yourname" },
   {
     key: "linkedin_link",
     label: "Linkedin",
     placeholder: "https://uk.linkedin.com/yourname",
+    optional: "has_linkedin_link",
   },
 ];
 
@@ -71,11 +76,12 @@ const SocialMediaAccordion = ({ details }) => {
 
   const [errors, setErrors] = useState({});
   const [hiddenFields, setHiddenFields] = useState({
-    fb_link: false,
-    twitter_link: false,
-    tiktok_link: false,
-    insta_link: false,
-    linkedin_link: false,
+    has_fb_link: details.has_fb_link || 0,
+    has_twitter_link: details.has_twitter_link || 0,
+    has_tiktok_link: details.has_tiktok_link || 0,
+    has_insta_link: details.has_insta_link || 0,
+    has_linkedin_link: details.has_linkedin_link || 0,
+    has_extra_links: details.has_extra_links || 0,
   });
 
   // const toggleFieldVisibility = (key) => {
@@ -87,7 +93,7 @@ const SocialMediaAccordion = ({ details }) => {
 
   const toggleFieldVisibility = (key) => {
     setHiddenFields((prev) => {
-      const updatedFields = { ...prev, [key]: !prev[key] };
+      const updatedFields = { ...prev, [key]: prev[key] ? 0 : 1 };
       dispatch(setIsDirtyRedux(true));
       return updatedFields;
     });
@@ -203,7 +209,8 @@ const SocialMediaAccordion = ({ details }) => {
     // Step 4: Build cleaned data (add a single space after each comma)
     const cleanedData = {
       ...formState,
-      extra_links: validLinks.map((link) => link.trim()).join(", "), // 👈 note the space after comma
+      extra_links: validLinks.map((link) => link.trim()).join(", "),
+      ...hiddenFields, // 👈 note the space after comma
     };
 
     dispatch(updateSellerSocialLinks(cleanedData));
@@ -251,22 +258,24 @@ const SocialMediaAccordion = ({ details }) => {
           <div className={styles.inputRow} key={idx}>
             <div className={styles.labelWrapper}>
               <label className={styles.label}>{platform.label}</label>
-              {platform.label !== "Linkedin" && (
-                <div className={styles.optionalToggle}>
-                  <img src={iIcon} alt="info" className={styles.icon} />
-                  <span className={styles.optionalText}>Optional</span>
-                  <label className={styles.switch}>
-                    <input
-                      type="checkbox"
-                      checked={hiddenFields[platform.key]}
-                      onChange={() => toggleFieldVisibility(platform.key)}
-                    />
-                    <span className={styles.slider}></span>
-                  </label>
-                </div>
-              )}
+              {/* {platform.label !== "Linkedin" && ( */}
+              <div className={styles.optionalToggle}>
+                <img src={iIcon} alt="info" className={styles.icon} />
+                <span className={styles.optionalText}>Optional</span>
+                <label className={styles.switch}>
+                  <input
+                    type="checkbox"
+                    checked={
+                      hiddenFields[platform.optional] == 1 ? true : false
+                    }
+                    onChange={() => toggleFieldVisibility(platform?.optional)}
+                  />
+                  <span className={styles.slider}></span>
+                </label>
+              </div>
+              {/* )} */}
             </div>
-            {!hiddenFields[platform.key] && (
+            {!hiddenFields[platform.optional] && (
               <>
                 <div className={styles.inputWithToggle}>
                   <input
@@ -293,8 +302,22 @@ const SocialMediaAccordion = ({ details }) => {
           <div className={styles.optionalToggle}>
             <img src={iIcon} alt="info" className={styles.icon} />
             <span className={styles.optionalText}>Optional</span>
+            {/* <label className={styles.switch}>
+              <input
+                type="checkbox"
+                checked={hiddenFields["has_extra_links"] == 1 ? true : false}
+                onChange={() =>
+                  toggleFieldVisibility(!hiddenFields["has_extra_links"])
+                }
+              />
+              <span className={styles.slider}></span>
+            </label> */}
             <label className={styles.switch}>
-              <input type="checkbox" defaultChecked />
+              <input
+                type="checkbox"
+                checked={hiddenFields["has_extra_links"] == 1 ? true : false}
+                onChange={() => toggleFieldVisibility("has_extra_links")}
+              />
               <span className={styles.slider}></span>
             </label>
           </div>
@@ -305,18 +328,19 @@ const SocialMediaAccordion = ({ details }) => {
             help customers learn more about your services & business.
           </p>
         </div>
-        <div className={styles.inputWithToggle}>
-          <textarea
-            className={styles.textarea}
-            rows={3}
-            placeholder="Enter one link per line"
-            name="extra_links"
-            value={formState.extra_links}
-            onChange={handleChange}
-          />
-        </div>
+        {hiddenFields["has_extra_links"] == 0 && (
+          <div className={styles.inputWithToggle}>
+            <textarea
+              className={styles.textarea}
+              rows={3}
+              placeholder="Enter one link per line"
+              name="extra_links"
+              value={formState.extra_links}
+              onChange={handleChange}
+            />
+          </div>
+        )}
       </div>
-
       <div className={styles.footer}>
         {/* <button className={styles.cancelBtn} type="button">Cancel</button> */}
         <button

@@ -248,6 +248,7 @@ const MyProfile = () => {
           >
             <AccreditationsAccordion
               details={viewProfileData?.accreditations}
+              hasAccreditations={viewProfileData?.details?.has_accreditations}
               setIsDirty={() => dispatch(setIsDirtyRedux(true))}
             />
           </AccordionItem>
