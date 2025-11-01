@@ -130,9 +130,13 @@ const ContactSuccessModal = ({
             {/* {repliesBtn?.name
               ? repliesBtn?.name
               : details?.customer?.name || detail?.name} */}
-            {detail?.business_profile_name ||
-              repliesBtn?.business_profile_name ||
-              details?.customer?.name}
+            {
+              (
+                detail?.business_profile_name ||
+                repliesBtn?.business_profile_name ||
+                details?.customer?.name
+              )?.split(" ")[0]
+            }
           </h2>
 
           <div className={styles.actions}>
