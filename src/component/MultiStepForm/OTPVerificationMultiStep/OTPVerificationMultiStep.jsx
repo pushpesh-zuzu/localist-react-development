@@ -3,7 +3,6 @@ import styles from "./OTPVerificationMultiStep.module.css";
 import {
   createRequestData,
   resendOtp,
-  setBuyerStep,
   verifyPhoneNumberData,
 } from "../../../store/Buyer/BuyerSlice";
 import { showToast } from "../../../utils";
@@ -25,15 +24,13 @@ const OTPVerificationMultiStep = ({
   const dispatch = useDispatch();
   const {
     buyerRequest,
-    requestDataList,
     citySerach,
-    createRequestToken,
     requestId,
     requestUserPhone,
     resendOtpLoader,
     verifyPhoneNumberLoader,
     requestUserId,
-    requestLoader
+    requestLoader,
   } = useSelector((state) => state.buyer);
 
   const navigate = useNavigate();
@@ -54,14 +51,12 @@ const OTPVerificationMultiStep = ({
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto focus to next input if current input is filled
     if (value && index < 3) {
       inputRefs.current[index + 1].focus();
     }
   };
 
   const handleKeyDown = (index, e) => {
-    // Handle backspace
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1].focus();
     }
@@ -80,7 +75,6 @@ const OTPVerificationMultiStep = ({
 
     setOtp(newOtp);
 
-    // Focus on the last filled input
     const lastFilledIndex = pasteData.length - 1;
     if (lastFilledIndex < 3) {
       inputRefs.current[lastFilledIndex + 1].focus();
@@ -105,10 +99,8 @@ const OTPVerificationMultiStep = ({
     dispatch(verifyPhoneNumberData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
-
-        // ✅ createRequestData call after OTP successfully verified
         const formData = new FormData();
-        formData.append("service_id", buyerRequest?.service_id); 
+        formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postal_code || "");
         formData.append("city", citySerach || "");
         formData.append("phone", buyerRequest?.phone);
@@ -133,7 +125,6 @@ const OTPVerificationMultiStep = ({
                 city: citySerach,
                 serviceId: buyerRequest?.service_id,
                 baseRedirectPath: lastSegment ? lastSegment : "root",
-                // serviceName: "" // temporarily skip
               };
               localStorage.setItem(
                 "pendingBuyerModal",
@@ -171,85 +162,8 @@ const OTPVerificationMultiStep = ({
   };
 
   return (
-    // <div style={{ padding: "20px" }}>
-    //   <h2 className={styles.title}>We just sent an SMS</h2>
-    //   <div className={styles.VerifyText}>
-    //     Enter the security code we sent to
-    //   </div>
-    //   <p style={{ marginBottom: "24px" }}>{requestUserPhone}</p>
-
-    //   <div className={styles.otpInputs}>
-    //     {[0, 1, 2, 3].map((index) => (
-    //       <input
-    //         key={index}
-    //         type="text"
-    //         maxLength="1"
-    //         className={styles.otpInput}
-    //         value={otp[index]}
-    //         onChange={(e) => handleChange(index, e.target.value)}
-    //         onKeyDown={(e) => handleKeyDown(index, e)}
-    //         onPaste={handlePaste}
-    //         ref={(el) => (inputRefs.current[index] = el)}
-    //         autoFocus={index === 0}
-    //       />
-    //     ))}
-    //   </div>
-    //   <p className={styles.instructionVerify}>
-    //     ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
-    //   </p>
-    //   <p
-    //     style={{ maxWidth: "79%", margin: "auto" }}
-    //     className={styles.instructionVerify}
-    //   >
-    //     WE CAN ONLY SEND A PASSCODE TO A MOBILE NUMBER NOT TO A LANDLINE.{" "}
-    //   </p>
-    //   <p
-    //     style={{ marginTop: "16px", marginBottom: "24px" }}
-    //     className={styles.instructionVerify}
-    //   >
-    //     WE CANNOT VERIFY YOUR ACCOUNT WITHOUT A MOBILE NUMBER
-    //   </p>
-    //   <div
-    //     style={{
-    //       marginTop: "16px",
-    //       display: "flex",
-    //       flexWrap: "wrap",
-    //       gap: "24px",
-    //       justifyContent: "center",
-    //     }}
-    //   >
-    //     <button
-    //       style={{ width: "180px", minWidth: "180px" }}
-    //       className={styles.submitBtn}
-    //       onClick={() => {
-    //         setUpdateNumberStep(1);
-    //         onBack()
-    //       }}
-    //     >
-    //       RE-ENTER MOBILE NUMBER
-    //     </button>
-    //     <button
-    //       style={{ width: "180px", minWidth: "180px" }}
-    //       className={styles.submitBtn}
-    //       onClick={handleSubmit}
-    //     >
-    //       SUBMIT YOUR OTP CODE
-    //     </button>
-    //   </div>
-    //   {timer > 0 ? (
-    //     <p className={styles.timerText} style={{marginTop:'24px'}}>
-    //       Resend OTP in <strong>{timer}</strong>s
-    //     </p>
-    //   ) : (
-    //     <div className={styles.resendBtn} onClick={handleResendOtp}>
-    //       {resendOtpLoader ? "Resending..." : "Resend"}
-    //     </div>
-    //   )}
-    // </div>
     <div className={styles.container}>
-      {/* <div className={styles.modalContent}> */}
       <h2 className={styles.title}>OTP Verification</h2>
-      {/* <div className={styles.VerifyText}>Please verify your account</div> */}
       <p className={styles.instruction}>
         Enter the OTP sent to <span>{requestUserPhone}</span>
       </p>
@@ -286,7 +200,6 @@ const OTPVerificationMultiStep = ({
       </div>
 
       <button
-        // style={{ width: "180px", minWidth: "180px" }}
         className={styles.submitBtn}
         disabled={requestLoader || verifyPhoneNumberLoader}
         onClick={handleSubmit}
@@ -313,14 +226,9 @@ const OTPVerificationMultiStep = ({
         <span className={styles.goBack}>Go Back</span>
         <img className={styles.img} src={backIcon} alt="backIcon" />
       </div>
-
-      {/* <p className={styles.instructionVerify}>
-                    ***PLEASE CHECK THE ABOVE NUMBER IS CORRECT***
-                  </p> */}
       <div
         style={{
           background: "rgba(245, 245, 245, 1)",
-          // maxWidth: "66%",
           margin: "auto",
           padding: "5px 6px",
           borderRadius: "3px",
@@ -336,7 +244,6 @@ const OTPVerificationMultiStep = ({
 
       <p
         style={{
-          // maxWidth: "60%",
           marginLeft: "auto",
           marginRight: "auto",
           marginTop: "16px",

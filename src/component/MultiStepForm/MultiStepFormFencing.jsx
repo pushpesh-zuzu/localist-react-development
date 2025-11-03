@@ -193,7 +193,6 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
         />
       </Helmet>
 
-      {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -268,12 +267,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
                   setLocalRequestId={setLocalRequestId}
                 />
               )}
-              {/* {updateNumberStep === 1 && buyerStep === 5 && (
-                <PhoneNumberUpdateMultiStepForm
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  onBack={prevStep}
-                />
-              )} */}
+
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep

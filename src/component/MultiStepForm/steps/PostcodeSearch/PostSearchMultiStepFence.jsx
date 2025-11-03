@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { message, Spin } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PostcodeSearch.module.css";
@@ -16,10 +16,9 @@ const PostSearchMultiStepFence = ({
   title = "What is your postcode",
   prevStep,
   getProgressPercentage,
-  backButtonTriggered,
   setBackButtonTriggered,
   returPercentage,
-  titleHeading ='fencing companies '
+  titleHeading = "fencing companies ",
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -36,8 +35,6 @@ const PostSearchMultiStepFence = ({
   const remainingProgressPerStep = (100 - firstStepProgress) / 3; // ≈16.665%
 
   const showToast = (type, content) => message[type](content);
-
-  // ✅ Handle postcode validation (onChange)
   const handlePincodeChange = async (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
@@ -48,7 +45,6 @@ const PostSearchMultiStepFence = ({
       setPostalCodeValidate(false);
       return;
     }
-    // Don’t call API for short inputs
     if (value.length < 3) {
       setPostalCodeValidate(false);
       return;
@@ -68,8 +64,6 @@ const PostSearchMultiStepFence = ({
         dispatch(setcitySerach(response.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
-
-        // ✅ Automatically call Next when validation succeeds
         handleNext(true);
       } else {
         setPostalCodeValidate(false);
@@ -85,11 +79,6 @@ const PostSearchMultiStepFence = ({
 
   // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
-    // if (!pincode) {
-    //   showToast("error", "Please enter a valid postcode.");
-    //   return;
-    // }
-
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");
       return;
@@ -107,7 +96,6 @@ const PostSearchMultiStepFence = ({
   };
   const handleBack = () => {
     getProgressPercentage(-returPercentage);
-
     prevStep();
   };
   return (
@@ -115,14 +103,6 @@ const PostSearchMultiStepFence = ({
       <h1 className={styles.headingH1}>
         Get quotes from verified {titleHeading} you can trust
       </h1>
-      {/* <p className={styles.desciption}>
-        Localists.com connects you with verified local experts quickly and
-        easily.
-      </p>
-      <p className={styles.desciption2}>
-        Simply answer a few questions about your requirements and get tailored
-        quotes in seconds.
-      </p> */}
       <div style={{ maxWidth: "592px", margin: "auto" }}>
         <CardLayoutWrapper
           title={title}

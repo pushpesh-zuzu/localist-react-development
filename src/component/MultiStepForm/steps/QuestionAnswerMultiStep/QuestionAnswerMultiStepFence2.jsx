@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setbuyerRequestData,
-} from "../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from "@ant-design/icons";
+import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
@@ -26,23 +23,10 @@ const QuestionAnswerMultiStepFence2 = ({
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
-    (state) => state.buyer
-  );
-  const { service, registerData } = useSelector((state) => state.findJobs);
-  const { userToken, adminToken } = useSelector((state) => state.auth);
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
+  const { service } = useSelector((state) => state.findJobs);
 
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("gad_campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -232,13 +216,11 @@ const QuestionAnswerMultiStepFence2 = ({
     let nextIndex = null;
 
     if (nextQ === Number(nextQ)) {
-      console.log("nextQ === Number(nextQ)");
       onNext();
       return;
     } else if (nextQ === "last") {
-      console.log('nextQ === "last"');
       const firstStepProgress = (2 / 3) * 100; // 66.66%
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
+      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // for remaining 2 steps ≈16.665%
       getProgressPercentage(remainingProgressPerStep);
       onNext();
       return;
@@ -249,7 +231,6 @@ const QuestionAnswerMultiStepFence2 = ({
     }
 
     if (nextIndex !== null) {
-      // Check if nextIndex is already in questionHistory
       if (!questionHistory.includes(nextIndex)) {
         setQuestionHistory((prev) => [...prev, nextIndex]);
       }
@@ -278,12 +259,10 @@ const QuestionAnswerMultiStepFence2 = ({
         setProgressPercentage((100 * 2) / (totalQuestions * 3));
     } else {
       onBack();
-      // getProgressPercentage(-25);
     }
   };
 
   useEffect(() => {
-    // setSelectedOption([]);
     setOtherText("");
     setError("");
   }, [currentQuestion]);
@@ -320,11 +299,9 @@ const QuestionAnswerMultiStepFence2 = ({
             : ""
           : ""
       }
-      // showBackButton={true}
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          // style={{ marginTop: "-25px", marginBottom: "20px" }}
           className={`${
             serviceName === "Patio Services"
               ? styles.headerImage

@@ -772,33 +772,33 @@ const routes = [
       </ProtectedRouteForMultiFormPPC>
     ),
   },
-  // {
-  //   path: "/:lang/:country/tree-surgeon-multi-form-ppc",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepAllotherServices
-  //           serviceName="Tree Surgeon"
-  //           path="tree-surgeon-multi-form-ppc"
-  //         />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
-  // {
-  //   path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepAllotherServices
-  //           isQuestionWithImage
-  //           serviceName="Tree Surgeon"
-  //           path="tree-surgeon-multi-form-ppc"
-  //         />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            isQuestionWithImage
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
 ];
 
 // Create a router suitable for the current environment

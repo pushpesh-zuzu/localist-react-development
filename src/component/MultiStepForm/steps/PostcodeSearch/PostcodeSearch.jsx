@@ -31,12 +31,11 @@ const PostcodeSearch = ({
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const [error, setError] = useState("");
 
-  const firstStepProgress = (2 / 3) * 100; // 66.66%
-  const remainingProgressPerStep = (100 - firstStepProgress) / 2; // ≈16.665%
+  const firstStepProgress = (2 / 3) * 100; 
+  const remainingProgressPerStep = (100 - firstStepProgress) / 2; 
 
   const showToast = (type, content) => message[type](content);
 
-  // ✅ Handle postcode validation (onChange)
   const handlePincodeChange = async (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
@@ -47,7 +46,6 @@ const PostcodeSearch = ({
       setPostalCodeValidate(false);
       return;
     }
-    // Don’t call API for short inputs
     if (value.length < 3) {
       setPostalCodeValidate(false);
       return;
@@ -67,8 +65,6 @@ const PostcodeSearch = ({
         dispatch(setcitySerach(response.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
-
-        // ✅ Automatically call Next when validation succeeds
         handleNext(true);
       } else {
         setPostalCodeValidate(false);
@@ -82,13 +78,7 @@ const PostcodeSearch = ({
     }
   };
 
-  // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
-    // if (!pincode) {
-    //   showToast("error", "Please enter a valid postcode.");
-    //   return;
-    // }
-
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");
       return;
@@ -114,14 +104,6 @@ const PostcodeSearch = ({
       <h1 className={styles.headingH1}>
         Get quotes from verified landscaping specialists you can trust
       </h1>
-      {/* <p className={styles.desciption}>
-        Localists.com connects you with verified local experts quickly and
-        easily.
-      </p>
-      <p className={styles.desciption2}>
-        Simply answer a few questions about your requirements and get tailored
-        quotes in seconds.
-      </p> */}
       <div style={{ maxWidth: "592px", margin: "auto" }}>
         <CardLayoutWrapper
           title={title}

@@ -71,17 +71,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
 
   const handleSubmit = () => {
     let hasError = false;
-
-    // if (text.trim() === "") {
-    //   setTextError(true);
-    //   hasError = true;
-    // }
-
-    // if (files.length === 0) {
-    //   setFileError(true);
-    //   hasError = true;
-    // }
-
     if (hasError) return;
 
     const detailsData = {
@@ -98,36 +87,16 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             result?.message || "Create Request successfully!"
           );
         }
-        // onClose();
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());
         dispatch(setQualityData());
-
-        // navigate(`/bids-list/${requestId
-        // setShowConfirmModal(false); this thing comment
         dispatch(setBuyerStep(10));
-
-        // navigate(`/conversion-redirect/${requestId}`, { replace: true });
       }
     );
-
-    // .then(() => {
-    //   navigate("/buyers/create");
-    // })
-    // .catch((error) => {
-    //   console.error("Navigation failed due to API error:", error);
-    // });
-  };
-
-  const handleCloseClick = () => {
-    // setShowConfirmModal(true);
-    onClose && onClose();
-    dispatch(clearSetbuyerRequestData());
-    dispatch(clearBuyerRegisterFormData());
   };
 
   return (
-    <div style={{maxWidth:'500px',position:'relative',margin:'auto'}} >
+    <div style={{ maxWidth: "500px", position: "relative", margin: "auto" }}>
       {buyerStep === 10 ? (
         <Spin />
       ) : (
@@ -153,13 +122,11 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             professionals can respond
           </p>
 
-          {/* ✅ Textarea Validation */}
           <textarea
             className={`${styles.textarea} ${
               textError ? styles.errorBorder : ""
             }`}
             value={text}
-            // rows={6}
             onChange={handleChange}
             placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
           />
@@ -169,7 +136,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             </span>
           )}
 
-          {/* ✅ File Upload Validation */}
           <label
             className={`${styles.fileUpload} ${
               fileError ? styles.errorBorder : ""
@@ -213,18 +179,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
           <div className={styles.addMoreDetail}>
             <p>Quality score increases as you add more detail</p>
           </div>
-
-          {/* <label className={styles.checkboxContainer}>
-        <input
-          type="checkbox"
-          checked={professionalLetin}
-          onChange={handleCheckboxChange}
-        />
-       Tick if you'd like to hear back quickly <br/>
-       
- I’m happy to be contacted as soon as possible 
-
-      </label> */}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -259,13 +213,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             <p className={styles.privacyText}>
               Your information is protected by our{" "}
               <span className={styles.privacy}>privacy policy</span>
-              {/* <a
-            href="/privacy-policy"
-            target="blank"
-            className={styles.privacyLink}
-          >
-            privacy policy
-          </a> */}
             </p>
           </div>
         </>

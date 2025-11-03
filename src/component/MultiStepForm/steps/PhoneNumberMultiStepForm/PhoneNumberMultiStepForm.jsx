@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import { showToast } from "../../../../utils";
 import {
   registerQuoteCustomer,
@@ -21,10 +19,7 @@ const PhoneNumberMultiStepForm = ({
   setLocalRequestId,
 }) => {
   const dispatch = useDispatch();
-  const { requestLoader, buyerRequest, requestUserId } = useSelector(
-    (state) => state.buyer
-  );
-  const { userToken } = useSelector((state) => state.auth);
+  const { buyerRequest, requestUserId } = useSelector((state) => state.buyer);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const campaignid = params.get("gad_campaignid") || "";
@@ -60,7 +55,7 @@ const PhoneNumberMultiStepForm = ({
     }
 
     const newErrors = {
-      phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
+      phone: !phone || !/^\d{10}$/.test(phone),
     };
 
     setErrors(newErrors);
@@ -70,7 +65,6 @@ const PhoneNumberMultiStepForm = ({
       return;
     }
 
-    // Save phone number in redux
     if (updateNumberStep === 2) {
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
@@ -94,10 +88,6 @@ const PhoneNumberMultiStepForm = ({
 
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          // showToast(
-          //   "success",
-          //   result?.message || "Customer registered successfully"
-          // );
           setLocalRequestId(result?.data?.user_id);
           nextStep();
         }
@@ -139,8 +129,6 @@ const PhoneNumberMultiStepForm = ({
       showBackButton={true}
     >
       <div className={styles.infoWrapper}>
-        {/* <label className={styles.label}>Phone Number</label> */}
-
         <div
           className={`${styles.phoneWrapper} ${
             errors?.phone ? styles.error44 : ""

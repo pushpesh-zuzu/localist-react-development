@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setbuyerRequestData,
-} from "../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from "@ant-design/icons";
+import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
@@ -26,31 +23,15 @@ const QuestionAnswerMultiStep2 = ({
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
-    (state) => state.buyer
-  );
-  const { service, registerData } = useSelector((state) => state.findJobs);
-  const { userToken, adminToken } = useSelector((state) => state.auth);
-
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("gad_campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
+  const { service } = useSelector((state) => state.findJobs);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-  const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length || 1;
-  const perQuestionProgress = (2 / 3 / totalQuestions) * 100;
   const formattedQuestions = questions.map((q) => ({
     ...q,
     parsedAnswers: Array.isArray(q.answer)
@@ -73,7 +54,7 @@ const QuestionAnswerMultiStep2 = ({
       setCurrentQuestion(3);
     }
   }, [isComingFromStep3]);
-  // Load saved answers when question changes
+
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -104,18 +85,15 @@ const QuestionAnswerMultiStep2 = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      // ✅ Select single option only
       setSelectedOption([value]);
-      setError(""); // Clear error only on change
+      setError("");
 
-      // ✅ If option is NOT "Something else", move to next after short delay
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
         }, 150);
       }
     } else {
-      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -163,7 +141,6 @@ const QuestionAnswerMultiStep2 = ({
       dispatch(
         setbuyerRequestData({
           service_id: service?.id || buyerRequest?.service_id,
-          // serviceName: serviceName || buyerRequest?.serviceName,
           postcode: buyerRequest?.postcode,
           city: citySerach,
           questions: updatedAnswers,
@@ -180,7 +157,6 @@ const QuestionAnswerMultiStep2 = ({
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      // Fallback if no next_question found
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
@@ -237,8 +213,8 @@ const QuestionAnswerMultiStep2 = ({
       return;
     } else if (nextQ === "last") {
       console.log('nextQ === "last"');
-      const firstStepProgress = (2 / 3) * 100; // 66.66%
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
+      const firstStepProgress = (2 / 3) * 100;
+      const remainingProgressPerStep = (100 - firstStepProgress) / 2;
       getProgressPercentage(remainingProgressPerStep);
       onNext();
       return;
@@ -249,7 +225,6 @@ const QuestionAnswerMultiStep2 = ({
     }
 
     if (nextIndex !== null) {
-      // Check if nextIndex is already in questionHistory
       if (!questionHistory.includes(nextIndex)) {
         setQuestionHistory((prev) => [...prev, nextIndex]);
       }
@@ -278,12 +253,10 @@ const QuestionAnswerMultiStep2 = ({
         setProgressPercentage((100 * 2) / (totalQuestions * 3));
     } else {
       onBack();
-      // getProgressPercentage(-25);
     }
   };
 
   useEffect(() => {
-    // setSelectedOption([]);
     setOtherText("");
     setError("");
   }, [currentQuestion]);
@@ -323,7 +296,6 @@ const QuestionAnswerMultiStep2 = ({
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          // style={{ marginTop: "-25px", marginBottom: "20px" }}
           className={`${
             serviceName === "Patio Services"
               ? styles.headerImage

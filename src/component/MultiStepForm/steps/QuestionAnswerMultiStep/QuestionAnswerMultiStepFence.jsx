@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 
 const QuestionAnswerMultiStepFence = ({
@@ -11,27 +9,13 @@ const QuestionAnswerMultiStepFence = ({
   onNext,
   onBack,
   getProgressPercentage,
-  serviceName = "Landscaping",
   setIsComingFromStep4,
   isComingFromStep4,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
-  const { service, registerData } = useSelector((state) => state.findJobs);
-  const { userToken, adminToken } = useSelector((state) => state.auth);
   const firstStepProgress = (2 / 3) * 100; // 66.66%
   const remainingProgressPerStep = (100 - firstStepProgress) / 3; // baki 2 steps ke liye ≈16.665%
-
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("gad_campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
@@ -42,7 +26,6 @@ const QuestionAnswerMultiStepFence = ({
   const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length;
-  const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
   const formattedQuestions = questions.map((q) => ({
     ...q,
     parsedAnswers: Array.isArray(q.answer)
@@ -81,7 +64,6 @@ const QuestionAnswerMultiStepFence = ({
 
         setSelectedOption(savedArray);
 
-        // Simple "Something else" handling
         if (savedArray.includes("Something else (please describe)")) {
           const otherVal = savedArray.find(
             (val) => val !== "Something else (please describe)"
@@ -97,9 +79,7 @@ const QuestionAnswerMultiStepFence = ({
     }
   }, [currentQuestion, questions]);
 
-  // Reset when question changes
   useEffect(() => {
-    // setSelectedOption([]);
     setOtherText("");
     setError("");
   }, [currentQuestion]);
@@ -112,14 +92,12 @@ const QuestionAnswerMultiStepFence = ({
       setSelectedOption([value]);
       setError("");
 
-      // ✅ If option is NOT "Something else", move to next after short delay
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
         }, 150);
       }
     } else {
-      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -151,21 +129,17 @@ const QuestionAnswerMultiStepFence = ({
       ans: finalAnswer.join(", "),
     };
 
-    // Copy previous answers
     const previousAnswers = buyerRequest?.questions || [];
 
-    // Check if question already exists
     const questionIndex = previousAnswers?.findIndex(
       (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;
     if (questionIndex !== -1) {
-      // Replace only if question already exists
       updatedAnswers = [...previousAnswers];
       updatedAnswers[questionIndex] = updatedAnswer;
     } else {
-      // Append new answer
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
 
@@ -252,15 +226,6 @@ const QuestionAnswerMultiStepFence = ({
 
     const nextQ = selectedObj?.next_question;
     if (nextQ === Number(nextQ)) {
-      // dispatch(
-      //   setbuyerRequestData({
-      //     service_id: service?.id || buyerRequest?.service_id,
-      //     serviceName: serviceName || buyerRequest?.serviceName,
-      //     postcode: buyerRequest?.postcode,
-      //     city: citySerach,
-      //     questions: updatedAnswers,
-      //   })
-      // );
       onNext();
     } else if (nextQ === "last") {
       onNext();
@@ -315,15 +280,9 @@ const QuestionAnswerMultiStepFence = ({
     if (isComingFromStep4 && buyerRequest?.questions?.length > 0) {
       setCurrentQuestion(1);
       setQuestionHistory([0, 1]);
-      // setIsFirstQuestionAnswered(true);
     }
   }, [isComingFromStep4]);
-  console.log(
-    isComingFromStep4,
-    "isComingFromStep4",
-    currentQuestion,
-    "ccureter"
-  );
+
   return (
     <CardLayoutWrapper
       title={formattedQuestions[currentQuestion]?.questions}
@@ -339,29 +298,6 @@ const QuestionAnswerMultiStepFence = ({
       buttonText="Next"
       showBackButton={true}
     >
-      {/* <div
-        className={
-          serviceName === "Patio Services"
-            ? styles.headerImage
-            : serviceName === "Artificial Grass Installation"
-            ? styles.headerImage1
-            : serviceName === "General Builders"
-            ? styles.headerImage2
-            : serviceName === "Driveway Installation"
-            ? styles.headerImage3
-            : serviceName === "Fence & Gate Installation"
-            ? styles.headerImage4
-            : serviceName === "Gardening"
-            ? styles.headerImage5
-            : serviceName === "Home and Garden"
-            ? styles.headerImage6
-            : serviceName === "Landscaping"
-            ? styles.headerImage7
-            : serviceName === "Gate Installation"
-            ? styles.headerImage8
-            : styles.headerImage // default fallback
-        }
-      /> */}
       <div className={styles.optionsContainer}>
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
           (opt, index) => {

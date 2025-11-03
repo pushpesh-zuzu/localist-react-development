@@ -17,9 +17,7 @@ import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumb
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
 import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
-import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
-import PhoneNumberUpdateMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberUpdateMultiStepForm";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
@@ -41,13 +39,12 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     );
   }, [location.pathname]);
 
-  const [animationDirection, setAnimationDirection] = useState("");
   const [actualSteps, setActualSteps] = useState(1);
   const [progressPercentage, setProgressPercentage] = useState(0);
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [backButtonTriggered, setBackButtonTriggered] = useState(false);
-  const [isComingFromStep3, setIsComingFromStep3] = useState(false); // ⭐ YE ADD KARO
+  const [isComingFromStep3, setIsComingFromStep3] = useState(false);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
@@ -77,19 +74,16 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const nextStep = () => {
     setBackButtonTriggered(false);
     setIsComingFromStep3(false);
-    // setAnimationDirection(styles.slideOutLeft);
 
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex < stepFlow.length - 1) {
         dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
       }
-      // setAnimationDirection(styles.slideInRight);
     }, 300);
   };
   const prevStep = () => {
     setBackButtonTriggered(true);
-    // setAnimationDirection(styles.slideOutRight);
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
@@ -99,21 +93,17 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
         dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
         setBackButtonTriggered(false);
       }
-      // setAnimationDirection(styles.slideInLeft);
     }, 300);
   };
 
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
-
-    // Jab buyerStep 7 ho jaye aur pendingModal tha, tab clear karo
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
       console.log("Cleared pendingBuyerModal after reaching step 7");
     }
   }, [buyerStep]);
 
-  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
@@ -121,7 +111,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
       console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
-      // const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
   }, [dispatch, isAdminOrRemembered]);
@@ -130,11 +119,11 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     dispatch(questionAnswerData({ service_id: 43 }));
   }, []);
 
-  const firstQuestions = questionanswerData?.slice(0, -1) || []; // All except last
-  const lastQuestion = questionanswerData?.slice(-1) || []; // Only last question
+  const firstQuestions = questionanswerData?.slice(0, -1) || [];
+  const lastQuestion = questionanswerData?.slice(-1) || [];
 
   useEffect(() => {
-    if (questionanswerData.length > 0) {
+    if (questionanswerData?.length > 0) {
       setIsLoadingQuestions(false);
       dispatch(setbuyerRequestData({ service_id: 43 }));
     }
@@ -147,19 +136,16 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
-  // console.log(buyerRequest,'br')
   useEffect(() => {
     if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
       setHasMountedDetector(true);
     }
-    // ❌ Don't depend on buyerRequest.questions
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMountedDetector]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => setIsDesktop(window.innerWidth > 768);
-      handleResize(); // initial check
+      handleResize();
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -176,8 +162,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
           )}
         </div>
       )}
-
-      {/* <img className={styles.logoImg} src={logo} /> */}
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -191,7 +175,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
       <div>
         <div className={styles.container}>
           <div className={styles.formContainer}>
-            <div className={`${styles.slideContainer} ${animationDirection}`}>
+            <div className={`${styles.slideContainer}`}>
               {buyerStep === 1 && (
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStep2
@@ -200,7 +184,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                     onBack={prevStep}
                     loading={isLoadingQuestions}
                     getProgressPercentage={getProgressPercentage}
-                    isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
+                    isComingFromStep3={isComingFromStep3}
                     setQuestionHistory={setQuestionHistory}
                     questionHistory={questionHistory}
                     setIsComingFromStep3={setIsComingFromStep3}
@@ -225,8 +209,8 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStep
-                    questions={lastQuestion} // Sirf last question
-                    onNext={nextStep} // Last question complete hone ke baad next step
+                    questions={lastQuestion} 
+                    onNext={nextStep} 
                     onBack={prevStep}
                     loading={questionLoader}
                     getProgressPercentage={getProgressPercentage}
@@ -249,12 +233,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                   setLocalRequestId={setLocalRequestId}
                 />
               )}
-              {/* {updateNumberStep === 1 && buyerStep === 5 && (
-                <PhoneNumberUpdateMultiStepForm
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  onBack={prevStep}
-                />
-              )} */}
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep
