@@ -78,6 +78,7 @@ import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
 import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
+import MultiStepAllotherServices from "../component/MultiStepForm/MultiStepAllotherServices";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -138,7 +139,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-         {
+      {
         path: "terms/",
         element: (
           <LocaleRedirect>
@@ -342,7 +343,6 @@ const routes = [
           </LocaleRedirect>
         ),
       })),
-       
     ],
   },
 
@@ -768,6 +768,33 @@ const routes = [
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFenchWithBanner />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            isQuestionWithImage
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
     ),

@@ -22,7 +22,7 @@ const QuestionAnswerMultiStepFence2 = ({
   setIsComingFromStep3,
   setProgressPercentage,
   loading = true,
-  serviceName = "Landscaping",
+  serviceName = "Fence & Gate Installation",
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
@@ -344,6 +344,8 @@ const QuestionAnswerMultiStepFence2 = ({
               ? styles.headerImage7
               : serviceName === "Gate Installation"
               ? styles.headerImage8
+              : serviceName === "Tree Surgeon"
+              ? styles.headerImage9
               : styles.headerImage
           } ${styles.bannerMargin}`}
         />
