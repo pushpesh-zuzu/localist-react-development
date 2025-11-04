@@ -29,7 +29,7 @@ const SearchPostAndBanner = ({
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const inputRef = useRef(null);
-  const { postCodeLoader,buyerRequest } = useSelector((state) => state.buyer);
+  const { postCodeLoader, buyerRequest } = useSelector((state) => state.buyer);
   const showToast = (type, content) => message[type](content);
 
   const handleClose = () => {
@@ -38,7 +38,6 @@ const SearchPostAndBanner = ({
     setIsStartWithQuestionModal(false);
   };
 
-  // Auto open modal after delay
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowModal(true);
@@ -47,28 +46,26 @@ const SearchPostAndBanner = ({
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Check pending modal in localStorage
   useEffect(() => {
     const checkPendingModal = () => {
       const pendingModal = JSON.parse(
         localStorage.getItem("pendingBuyerModal")
       );
 
-    if (pendingModal?.shouldOpen) {
-      setTimeout(() => {
-        dispatch(setbuyerRequestData(pendingModal.buyerRequest));
-        dispatch(setcitySerach(pendingModal.city));
+      if (pendingModal?.shouldOpen) {
+        setTimeout(() => {
+          dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+          dispatch(setcitySerach(pendingModal.city));
 
-        setShowModal(true);
-        dispatch(setBuyerStep(7));
-      }, 200);
-    }
+          setShowModal(true);
+          dispatch(setBuyerStep(7));
+        }, 200);
+      }
     };
 
     checkPendingModal();
   }, [dispatch]);
 
-  // ✅ handle search + city API check
   const handleContinue = async () => {
     if (!pincode.trim()) {
       showToast("error", "Please enter a valid postcode or town.");
@@ -81,23 +78,15 @@ const SearchPostAndBanner = ({
     }
 
     try {
-      // ✅ call the getCityName API
       const response =
         (await dispatch(getCityName({ postcode: pincode })).unwrap?.()) ??
         (await dispatch(getCityName({ postcode: pincode })));
 
-      // agar API response sahi aata hai
       if (response?.data?.city) {
         setCity(response.data.city);
         dispatch(setcitySerach(response.data.city));
 
         setShowModal(true);
-        // dispatch(
-        //   setbuyerRequestData({
-        //     postcode: pincode,
-        //     city: response.data.city,
-        //   })
-        // );
       } else {
         showToast("error", "Please enter a valid postcode!");
         return;
@@ -109,13 +98,6 @@ const SearchPostAndBanner = ({
       return;
     }
   };
-const [hasMountedDetector, setHasMountedDetector] = useState(false);
-
-// useEffect(() => {
-//   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-//     setHasMountedDetector(true);
-//   }
-// }, [hasMountedDetector]);
 
   return (
     <div className={styles.searchcontainer}>

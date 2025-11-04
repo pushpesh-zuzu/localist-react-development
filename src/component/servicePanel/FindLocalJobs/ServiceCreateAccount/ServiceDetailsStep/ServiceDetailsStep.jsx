@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./ServiceDetailsStep.module.css";
-import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
@@ -23,24 +22,10 @@ const ServiceDetailsStep = ({
   companyValue,
 }) => {
   const dispatch = useDispatch();
-  const [showPassword, setShowPassword] = useState(false);
   const serviceParms = useParams();
 
   const debounceTimer = useRef({ company_name: null });
   const [hasCompanyReg, setHasCompanyReg] = useState(null);
-
-  // const companyData = useSelector((state) => state.companyLook?.companyData);
-  //   const handleCheck = () => {
-  //     if(emailCheck && companyCheck && phoneCheck) {
-  //       nextStep()
-  //     } else if(!emailCheck) {
-  //       showToast("error","Please Enter Correct Email")
-  //     } else if (!companyCheck) {
-  // showToast("error","Please Enter Correct Comapny Details")
-  //     } else {
-  //       showToast("error","Please Enter Correct Number")
-  //     }
-  //   }
 
   const handleCheck = () => {
     const hasCompanyReg = formData.company_reg_number.trim().length > 0;
@@ -57,7 +42,6 @@ const ServiceDetailsStep = ({
     } else if (companyValue && companyCheck === false) {
       showToast("error", "Please Enter Correct Company Details");
     } else if (hasCompanyReg && !hasCompanyName) {
-      // showToast("error", "Please enter company name.");
     }
 
     if (formData.phone.startsWith("0")) {
@@ -71,7 +55,6 @@ const ServiceDetailsStep = ({
     }
   };
 
-  console.log(serviceParms?.serviceTitle, "serviceParms");
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const companyError = useSelector((state) => state.companyLook?.companyError);
 
@@ -85,7 +68,6 @@ const ServiceDetailsStep = ({
           company_name: "",
         })
       );
-      // user selected "No"
       setFormData((prev) => ({
         ...prev,
         company_reg_number: "",
@@ -95,7 +77,6 @@ const ServiceDetailsStep = ({
     }
 
     if (value === 1) {
-      // user selected "Yes" -> reset fresh
       setFormData((prev) => ({
         ...prev,
         company_reg_number: "",
@@ -106,16 +87,14 @@ const ServiceDetailsStep = ({
     }
   };
 
-  // On reg number change: reset fields and fetch if 8 digits
   useEffect(() => {
     if (!formData.company_reg_number) {
       dispatch(
         setFormData({
           company_name: "",
-          // address: "",
         })
       );
-      dispatch(clearCompanyData()); // Clears redux data so it doesn't refill company_name
+      dispatch(clearCompanyData());
       return;
     }
 
@@ -124,7 +103,6 @@ const ServiceDetailsStep = ({
     }
   }, [formData.company_reg_number]);
 
-  // On API error
   useEffect(() => {
     if (companyError && formData.company_reg_number !== "") {
       showToast("error", companyError);
@@ -132,27 +110,9 @@ const ServiceDetailsStep = ({
     }
 
     if (companyError) {
-      dispatch(setCompanyError(null)); // Always clear after handling
+      dispatch(setCompanyError(null));
     }
   }, [companyError, formData.company_reg_number, dispatch]);
-
-  // When data fetched successfully
-  // useEffect(() => {
-  //   if (companyData?.company_name) {
-  //     dispatch(
-  //       setFormData({
-  //         company_name: formData.company_name || "",
-  //         company_address:
-  //           companyData?.registered_office_address?.address_line_1 || "",
-  //         company_city: companyData?.registered_office_address?.locality || "",
-  //         company_postcode:
-  //           companyData?.registered_office_address?.postal_code || "",
-  //         company_country:
-  //           companyData?.registered_office_address?.country || "",
-  //       })
-  //     );
-  //   }
-  // }, [companyData]);
 
   useEffect(() => {
     if (companyData) {
@@ -211,7 +171,6 @@ const ServiceDetailsStep = ({
               </div>
               {errors.name && <p className={styles.errorText}>{errors.name}</p>}
 
-              {/* Business Profile Name */}
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Business Profile Name</label>
                 <input
@@ -228,85 +187,6 @@ const ServiceDetailsStep = ({
               {errors.profile_name && (
                 <p className={styles.errorText}>{errors.profile_name}</p>
               )}
-
-              {/* Do you have a company reg number? 
-              <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>Do you have a company registration number?</label>
-                <div className={styles.toggleGroup}>
-                  <button
-                    type="button"
-                    className={formData.has_company_reg === 1 ? styles.activeButton : styles.toggleButton}
-                    onClick={() => setFormData(prev => ({ ...prev, has_company_reg: 1 }))}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    type="button"
-                    className={formData.has_company_reg === 0 ? styles.activeButtonNo : styles.toggleButtonNo}
-                    onClick={() => setFormData(prev => ({
-                      ...prev,
-                      has_company_reg: 0,
-                      company_reg_number: "",
-                      company_name: ""
-                    }))}
-                  >
-                    No
-                  </button>
-                </div>
-              </div>
-
-              {/* If Yes → show registration number + prefilled company name 
-              {formData.has_company_reg === 1 && (
-                <>
-              <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>
-                Company registration number<span style={{ fontWeight: "normal", fontSize: "0.85em", color: "#666" }}>(Optional)</span>
-              </label>
-               <input
-                    type="text"
-                    className={`${styles.input} ${
-                      errors.company_reg_number ? styles.errorBorder : ""
-                    }`}
-                    name="company_reg_number"
-                    value={formData.company_reg_number}
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      
-                      const cleanedValue = value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 8);
-                      handleInputChange({ target: { name: "company_reg_number", value: cleanedValue } });
-                    }}
-                    maxLength={8}
-                  />
-
-              </div>
-              {errors.company_reg_number && (
-                <p className={styles.errorText}>{errors.company_reg_number}</p>
-              )}
-
-
-              <div className={styles.labelInputWrapper}>
-                <label className={styles.label}>Company name</label>
-                <input
-                  type="text"
-                  className={`${styles.input} ${
-                    errors.company_name ? styles.errorBorder : ""
-                  }`}
-                  name="company_name"
-                  value={formData.company_name}
-                  onChange={handleInputChange}
-                  readOnly
-                />
-                
-                <label className={styles.helperText}>
-                  If you aren't a business or don’t have this information, you
-                  can leave this blank
-                </label>
-               
-              </div>
-
-              </>
-            )}
-              */}
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>
@@ -338,56 +218,6 @@ const ServiceDetailsStep = ({
                 </div>
               </div>
 
-              {/* Only show registration number + company name if Yes */}
-              {/* {hasCompanyReg === 1 && (
-                <>
-                  <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>
-                      Company registration number
-                      <span
-                        style={{
-                          fontWeight: "normal",
-                          fontSize: "0.85em",
-                          color: "#666",
-                        }}
-                      >
-                        (Optional)
-                      </span>
-                    </label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_reg_number ? styles.errorBorder : ""
-                      }`}
-                      name="company_reg_number"
-                      value={formData.company_reg_number}
-                      onChange={(e) => {
-                        const value = e.target.value
-                          .replace(/[^a-zA-Z0-9]/g, "")
-                          .slice(0, 8);
-                        handleInputChange({
-                          target: { name: "company_reg_number", value },
-                        });
-                      }}
-                      maxLength={8}
-                    />
-                  </div>
-
-                  <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>Company name</label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_name ? styles.errorBorder : ""
-                      }`}
-                      name="company_name"
-                      value={formData.company_name}
-                      onChange={handleInputChange}
-                      readOnly
-                    />
-                  </div>
-                </>
-              )} */}
               {hasCompanyReg === 1 && (
                 <>
                   {/* Company Registration Number */}
@@ -437,73 +267,6 @@ const ServiceDetailsStep = ({
                       readOnly
                     />
                   </div>
-
-                  {/* Company Address */}
-                  {/* <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>Company address</label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_address ? styles.errorBorder : ""
-                      }`}
-                      name="company_address"
-                      value={
-                        companyData?.registered_office_address?.address_line_1
-                      }
-                      onChange={handleInputChange}
-                    />
-                  </div> */}
-
-                  {/* Company City */}
-                  {/* <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>Company city</label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_city ? styles.errorBorder : ""
-                      }`}
-                      name="company_city"
-                      value={companyData?.registered_office_address?.locality}
-                      onChange={handleInputChange}
-                    />
-                  </div> */}
-
-                  {/* Company Postcode */}
-                  {/* <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>Company postcode</label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_postcode ? styles.errorBorder : ""
-                      }`}
-                      name="company_postcode"
-                      value={
-                        companyData?.registered_office_address?.postal_code
-                      }
-                      onChange={(e) => {
-                        const value = e.target.value
-                          .replace(/[^0-9]/g, "")
-                          .slice(0, 6);
-                        handleInputChange({
-                          target: { name: "company_postcode", value },
-                        });
-                      }}
-                      maxLength={6}
-                    />
-                  </div> */}
-
-                  {/* <div className={styles.labelInputWrapper}>
-                    <label className={styles.label}>Company country</label>
-                    <input
-                      type="text"
-                      className={`${styles.input} ${
-                        errors.company_country ? styles.errorBorder : ""
-                      }`}
-                      name="company_country"
-                      value={companyData?.registered_office_address?.country}
-                      onChange={handleInputChange}
-                    />
-                  </div> */}
                 </>
               )}
 
@@ -522,55 +285,13 @@ const ServiceDetailsStep = ({
               {errors.email && (
                 <p className={styles.errorText}>{errors.email}</p>
               )}
-              {/* <div
-                className={styles.labelInputWrapper}
-                style={{ position: "relative" }}
-              >
-                <label className={styles.label}>Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className={`${styles.input} ${
-                    errors.password ? styles.errorBorder : ""
-                  }`}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                    top: "57%",
-                    transform: "translateY(0%)",
-                    cursor: "pointer !important",
-                    color: "#888",
-                  }}
-                >
-                  {showPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
-                </span>
-              </div>
-              {errors.password && (
-                <p className={styles.errorText}>{errors.password}</p>
-              )} */}
 
               <div className={styles.labelInputWrapper}>
                 <label className={styles.label}>Phone number</label>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
                 >
-                  <span
-                    // style={{
-                    //   padding: "4px 8px",
-                    //   border: "1px solid #ccc",
-                    //   borderRadius: "4px",
-                    //   backgroundColor: "#f9f9f9",
-                    // }}
-                    className={styles.countryLabel}
-                  >
-                    +44
-                  </span>
+                  <span className={styles.countryLabel}>+44</span>
 
                   <input
                     type="text"
@@ -797,7 +518,6 @@ const ServiceDetailsStep = ({
                   type="button"
                   className={styles.nextButton}
                   onClick={handleCheck}
-                  // disabled={emailCheck === false}
                 >
                   Next
                 </button>

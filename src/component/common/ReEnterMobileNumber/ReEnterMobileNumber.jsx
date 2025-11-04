@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ReEnterMobileNumber.module.css";
-import {  Spin } from "antd";
+import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import {
-  checkEmailIdApi,
-} from "../../../store/FindJobs/findJobSlice";
+import { checkEmailIdApi } from "../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../utils";
 import {
   setbuyerRequestData,
   updateMobile,
 } from "../../../store/Buyer/BuyerSlice";
-import { useLocation } from "react-router";
 
 const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
   const dispatch = useDispatch();
@@ -35,7 +32,7 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
   });
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value); // keep it simple
+    setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
   };
 
@@ -43,7 +40,6 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
     if (!email) return;
 
     try {
-      // no `.unwrap()` since it's not createAsyncThunk
       const res = await dispatch(checkEmailIdApi({ email }));
 
       if (res?.success) {
@@ -51,7 +47,7 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
         setIsEmailValid(true);
         setEmailErrorMessage("");
       } else {
-        setEmail(""); // clear instantly
+        setEmail("");
         if (setEmails) setEmails("");
         setIsEmailValid(false);
         setEmailErrorMessage("Email is already registered.");
@@ -70,7 +66,7 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
   };
 
   const handlePhoneChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // remove all non-digits
+    const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 10) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
@@ -86,7 +82,7 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
     const newErrors = {
       email: !email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email),
       name: !name.trim(),
-      phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
+      phone: !phone || !/^\d{10}$/.test(phone),
     };
 
     if (newErrors.email && !emailErrorMessage) {
@@ -98,7 +94,6 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
     const hasError = Object.values(newErrors).some((e) => e);
     if (hasError || !isEmailValid) return;
 
-    // save user info in redux
     dispatch(setbuyerRequestData({ name, email: email, phone }));
     const formData = new FormData();
     formData.append("phone", phone);
@@ -109,8 +104,6 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
           "success",
           result?.message || "Phone Number updated Successfully"
         );
-        // nextStep();
-        console.log(result);
       }
       setReEnterMobile(2);
     });
@@ -128,16 +121,6 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
       return () => clearTimeout(timer);
     }
   }, [errorMessage]);
-
-  //   const handleCloseClick = () => {
-  //     if (!userToken?.remember_tokens) {
-  //       console.log(name, email, phone, "p");
-  //       dispatch(setbuyerRequestData({ name, email, phone }));
-  //     //   setShowConfirmModal(true);
-  //     } else {
-  //       onClose();
-  //     }
-  //   };
 
   return (
     <div className={styles.modalOverlay}>

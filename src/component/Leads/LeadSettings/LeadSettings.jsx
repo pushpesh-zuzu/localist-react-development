@@ -1,11 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import styles from "./LeadSettings.module.css";
-import BlackRightArrow from "../../../assets/Images/Leads/BlackRightArrow.svg";
-import WhiteRightArrow from "../../../assets/Images/Leads/WhiteRightArrow.svg";
 import EditIcon from "../../../assets/Images/Leads/EditIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addLocationLead,
   addServiceLead,
   editLocationLead,
   getleadPreferencesList,
@@ -19,11 +16,9 @@ import {
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { Spin, Tooltip } from "antd";
 import {
-  searchService,
   setService,
   searchAvailableService,
   getPopularServiceListUser,
-  setPopularList,
 } from "../../../store/FindJobs/findJobSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import RemoveServiceModal from "../RemoveModal";
@@ -35,9 +30,8 @@ import AddLocationModal from "../AddLocation/AddLocationModal";
 import TravelTimeModal from "../AddLocation/TravelTimeModal";
 import DrawOnMapModal from "../AddLocation/DrawOnMapModal";
 import ViewOnMapModal from "../AddLocation/ViewOnMapModal";
-import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.svg"
-// import backArrow from "../../../assets/Images/Leads/BackArrow.svg"
-import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg"
+import CheckPrimary from "../../../assets/Icons/MyResponse/primaryServiceIcon.svg";
+import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 
 const LeadSettings = ({ setSelectedService, selectedService }) => {
   const location = useLocation();
@@ -46,21 +40,17 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [selectValue, setSelectValue] = useState(null);
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const [isEditingLocation, setIsEditingLocation] = useState(false);
   const [editLocationId, setEditLocationId] = useState(null);
-  // const [pincode, setPincode] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
 
   const {
     preferenceList,
     serviceLoader,
     getlocationData,
     removeLocationLoader,
-    sevenDays,
-    onlineRemote,
+
     sevenPausedData,
     getOnlineRemote,
   } = useSelector((state) => state.leadSetting);
@@ -81,25 +71,25 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   const [latitude, setLatitude] = useState([]);
   const { popularList } = useSelector((state) => state.findJobs);
 
-
   const type = useRef();
-  // Add this useEffect to keep the checkbox state in sync with Redux
 
   useEffect(() => {
-    dispatch(getPopularServiceListUser({ user_id: userToken?.id  ? userToken?.id  : registerData?.id }));
+    dispatch(
+      getPopularServiceListUser({
+        user_id: userToken?.id ? userToken?.id : registerData?.id,
+      })
+    );
   }, [dispatch]);
 
   useEffect(() => {
     setAutoBid(sevenPausedData?.autobidpause === 1);
     setIsOnline(getOnlineRemote?.isonline === 1);
   }, [sevenPausedData?.autobidpause, getOnlineRemote?.isonline]);
-  console.log(preferenceList, "isLocationModalOpen123");
 
   const [isMobileView, setIsMobileView] = useState(false);
   const { searchServiceLoader, service, registerData } = useSelector(
     (state) => state.findJobs
   );
-  console.log(service, "serviceservice");
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
@@ -112,7 +102,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
   const handleNavigation = (path) => {
     navigate(path);
-    setMenuOpen(false); // close menu on navigation
+    setMenuOpen(false);
   };
 
   useEffect(() => {
@@ -155,15 +145,12 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       dispatch(getLocationLead(locationData));
     }
   }, []);
-  const handleView = () => {
-    navigate("/sellers/leads");
-  };
 
   const handleServiceClick = (service, name, primaryService) => {
     setSelectedService({
       name: name,
       id: service,
-      primaryService: primaryService
+      primaryService: primaryService,
     });
     const questionData = {
       service_id: service,
@@ -172,21 +159,24 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     dispatch(leadPreferences(questionData));
   };
 
-  //  Don't render if service is selected on mobile/tablet
-
   const handleService = () => {
     setIsModalOpen(true);
-    setInput(""); // reset the input field
-    setSelectedService(null); // clear previously selected service
+    setInput("");
+    setSelectedService(null);
     dispatch(setService([]));
     setSelectedServices([]);
   };
   useEffect(() => {
     if (isDropdownOpen && input.trim() !== "") {
       const delayDebounce = setTimeout(() => {
-        dispatch(searchAvailableService({ user_id: userToken?.id  ? userToken?.id  : registerData?.id, search: input }));
+        dispatch(
+          searchAvailableService({
+            user_id: userToken?.id ? userToken?.id : registerData?.id,
+            search: input,
+          })
+        );
       }, 500);
-      
+
       return () => clearTimeout(delayDebounce);
     }
   }, [input, dispatch, isDropdownOpen]);
@@ -218,14 +208,20 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     dispatch(addServiceLead(serviceDataList)).then((result) => {
       if (result?.success) {
         dispatch(
-          getleadPreferencesList({ user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens })
+          getleadPreferencesList({
+            user_id: userToken?.remember_tokens
+              ? userToken?.remember_tokens
+              : registerData?.remember_tokens,
+          })
         );
-          const data = {
-        user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-      };
-      dispatch(getLocationLead(data))
+        const data = {
+          user_id: userToken?.remember_tokens
+            ? userToken?.remember_tokens
+            : registerData?.remember_tokens,
+        };
+        dispatch(getLocationLead(data));
         setIsModalOpen(false);
-        setSelectedServices([]); // Clear after submission
+        setSelectedServices([]);
       }
     });
   }, [selectedServices, userToken, dispatch]);
@@ -237,17 +233,13 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     show: false,
     service_id: null,
     nation_wide: null,
-    miles:null
+    miles: null,
   });
 
-  console.log(setEditLocationId, "selectedTravelLocation");
   const handleNext = () => {
-    // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
-      // message.warning("Please fill in both fields");
       return;
     }
-    // Close current modal
     setIsLocationModalOpen(false);
   };
 
@@ -257,39 +249,24 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   };
 
   const handleEditLocation = (location) => {
-    // Set edit mode
     setIsEdit(true);
     type.current = location.type;
 
-    // IMPORTANT: First, completely reset selectedServices
-
-    // Then extract services from location
-    console.log("Location data for edit:", location);
-
-    // Extract service IDs based on the location format
     if (location.service_ids) {
       try {
         let serviceIdsArray = [];
 
-        // Handle string format (comma-separated)
         if (typeof location.service_ids === "string") {
           serviceIdsArray = location.service_ids
             .split(",")
             .map((id) => id.trim())
             .filter((id) => id !== "");
-        }
-        // Handle array format
-        else if (Array.isArray(location.service_ids)) {
+        } else if (Array.isArray(location.service_ids)) {
           serviceIdsArray = location.service_ids.map((id) => id.toString());
-        }
-        // Handle single number format
-        else if (typeof location.service_ids === "number") {
+        } else if (typeof location.service_ids === "number") {
           serviceIdsArray = [location.service_ids.toString()];
         }
 
-        console.log("Extracted service IDs:", serviceIdsArray);
-
-        // Map IDs to service objects with name
         const serviceArray = serviceIdsArray.map((id) => {
           const serviceObj = preferenceList.find(
             (s) => s.id.toString() === id.toString()
@@ -300,26 +277,21 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
           };
         });
 
-        console.log("Setting services to:", serviceArray);
         setSelectedServices(serviceArray);
       } catch (error) {
         console.error("Error processing service IDs:", error);
         setSelectedServices([]);
       }
     } else {
-      console.log("No service_ids found in location data");
       setSelectedServices([]);
     }
-    console.log(location, "location123");
-    // Handle different location types
     if (location?.type === "Travel Time") {
       setLocationData({
         travel_time: location?.travel_time || "",
         travel_by: location?.travel_by || "",
         postcode: location?.postcode || "",
         coordinates: location?.coordinates || "",
-        nation_wide: location?.nation_wide
-
+        nation_wide: location?.nation_wide,
       });
       setSelectedTravelLocation(location);
       setIsTravelTimeModalOpen(true);
@@ -340,8 +312,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       setLocationData({
         postcode: location?.postcode,
         city: location?.city,
-        nation_wide: location?.nation_wide
-
+        nation_wide: location?.nation_wide,
       });
       setIsDrawTimeOpen(true);
       setEditLocationId(location.id);
@@ -354,7 +325,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
-        nation_wide: location?.nation_wide
+        nation_wide: location?.nation_wide,
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -366,8 +337,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         miles1: location.miles,
         postcode: location.postcode,
         coordinates: location?.coordinates,
-        nation_wide: location?.nation_wide
-
+        nation_wide: location?.nation_wide,
       });
       setEditLocationId(location.id);
       setIseditModalOpen(true);
@@ -381,8 +351,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         postcode: location.postcode,
         city: location?.city,
         coordinates: "",
-        nation_wide: 1
-
+        nation_wide: 1,
       });
       setIsNextModalOpen(true);
       return;
@@ -399,11 +368,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       postcode: locationData.postcode ?? previousPostcode,
       service_id: serviceIds,
       postcode_old: previousPostcode ? previousPostcode : "000000",
-      // postcode_old: locationData.postcode
-      //   ? locationData.postcode
-      //   : previousPostcode
-      //   ? previousPostcode
-      //   : "0000",
+
       travel_time: locationData?.travel_time,
       travel_by: locationData?.travel_by,
       type: typeOfTravel,
@@ -412,7 +377,6 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       coordinates: locationData?.coordinates ?? "",
       nation_wide: locationData?.nation_wide,
     };
-    console.log(locationData, "typeOfTravel")
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })
@@ -435,12 +399,11 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     });
   };
   const handleRemoveOpen = (id) => {
-    console.log(id, "id");
     setRemoveModal({
       show: true,
       service_id: id?.postcode,
       nation_wide: id?.nation_wide,
-      miles:id?.miles
+      miles: id?.miles,
     });
   };
 
@@ -457,13 +420,10 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       user_id: userToken?.remember_tokens
         ? userToken?.remember_tokens
         : registerData?.remember_tokens,
-      // service_id: ids.join(),
       postcode: removeModal?.service_id,
       nation_wide: removeModal?.nation_wide,
-      miles: removeModal?.miles
-      // user_service_id:locationRemoveId
+      miles: removeModal?.miles,
     };
-    console.log(removeData, "removeData");
 
     dispatch(removeItemLocationData(removeData)).then((result) => {
       if (result) {
@@ -478,28 +438,34 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             : registerData?.remember_tokens,
         };
         dispatch(getLocationLead(data));
-        dispatch(getleadPreferencesList(data))
+        dispatch(getleadPreferencesList(data));
       }
     });
   };
   const handleLocaltionModalOpen = () => {
-    console.log("handleLocaltionModalOpen called");
     setIsLocationModalOpen(true);
   };
-const handleBack = () =>{
-  navigate("/settings")
-}
+  const handleBack = () => {
+    navigate("/settings");
+  };
   return (
     <>
       <div className={styles.container}>
-        <div onClick={handleBack} className={styles.arrowBtn}> <img src={blackArrow} alt="..."/>  Back</div>
+        <div onClick={handleBack} className={styles.arrowBtn}>
+          {" "}
+          <img src={blackArrow} alt="..." /> Back
+        </div>
         <h1 className={styles.heading}>Lead settings</h1>
-        <p className={styles.subHeading}>Tell us what you’re looking for — we’ll send you the right leads on Localists.com.</p>
+        <p className={styles.subHeading}>
+          Tell us what you’re looking for — we’ll send you the right leads on
+          Localists.com.
+        </p>
 
         <div className={styles.section}>
           <h3 className={styles.title}>Your services</h3>
           <p className={styles.info}>
-           Customise your lead alerts to receive the most relevant opportunities.
+            Customise your lead alerts to receive the most relevant
+            opportunities.
           </p>
           {serviceLoader ? (
             <Spin />
@@ -509,11 +475,18 @@ const handleBack = () =>{
                 <div
                   key={service.id}
                   ref={(el) => (serviceRefs.current[service.id] = el)}
-                  className={`${styles.serviceItem} ${selectedService?.id === service.id
+                  className={`${styles.serviceItem} ${
+                    selectedService?.id === service.id
                       ? styles.selectedService
                       : ""
-                    }`}
-                  onClick={() => handleServiceClick(service?.id, service?.name, service?.primaryService)}
+                  }`}
+                  onClick={() =>
+                    handleServiceClick(
+                      service?.id,
+                      service?.name,
+                      service?.primaryService
+                    )
+                  }
                 >
                   <div className={styles.serviceNameWrapper}>
                     <p className={styles.serviceName}>{service.name}</p>
@@ -522,19 +495,17 @@ const handleBack = () =>{
                     </p>
                   </div>
                   <div className={styles.checkprimayBox}>
-                    {/* {service?.primaryService === service?.id && <img src={CheckPrimary} alt="..." width={19} height={19}/>} */}
                     {service?.primaryService === service?.id && (
                       <Tooltip title="Primary Service">
-                        <img src={CheckPrimary} alt="Primary Service" width={19} height={19} />
+                        <img
+                          src={CheckPrimary}
+                          alt="Primary Service"
+                          width={19}
+                          height={19}
+                        />
                       </Tooltip>
                     )}
-                    <img
-                      src={EditIcon}
-                      alt="Edit"
-                    // onClick={() =>
-                    //   handleServiceClick(service?.id, service?.name)
-                    // }
-                    />
+                    <img src={EditIcon} alt="Edit" />
                   </div>
                 </div>
               ))}
@@ -548,7 +519,7 @@ const handleBack = () =>{
         <div className={styles.section}>
           <h3 className={styles.title}>Your locations</h3>
           <p className={styles.info}>
-           Tell us what locations you want new leads from
+            Tell us what locations you want new leads from
           </p>
 
           {getlocationData?.map((item) => (
@@ -610,7 +581,6 @@ const handleBack = () =>{
 
           <button
             className={styles.addLocation}
-            // onClick={() => setIsLocationModalOpen(true)}
             onClick={() => handleLocaltionModalOpen()}
           >
             + Add a location
@@ -620,7 +590,9 @@ const handleBack = () =>{
         <div className={styles.section}>
           <h3 className={styles.title}>Online/remote leads</h3>
           <p className={styles.info}>
-           Tell us if you can provide your service remotely or online We tell you when a customer is happy to receive your service remotely or online.
+            Tell us if you can provide your service remotely or online We tell
+            you when a customer is happy to receive your service remotely or
+            online.
           </p>
           <div className={styles.toggle}>
             <span>See online/remote leads</span>
@@ -641,7 +613,7 @@ const handleBack = () =>{
                       showToast(
                         "success",
                         result?.message ||
-                        "Online/Remote status updated successfully"
+                          "Online/Remote status updated successfully"
                       );
                     }
                   });
@@ -659,10 +631,11 @@ const handleBack = () =>{
               checked={autobid_pause}
               onChange={() => {
                 const newValue = !autobid_pause;
-                
 
                 const isAutoBidPauseData = {
-                  user_id: registerData?.remember_tokens ? registerData?.remember_tokens : userToken?.remember_tokens,
+                  user_id: registerData?.remember_tokens
+                    ? registerData?.remember_tokens
+                    : userToken?.remember_tokens,
                   autobid_pause: newValue ? 1 : 0,
                 };
                 dispatch(getSevenWeekBidApi(isAutoBidPauseData)).then(
@@ -673,8 +646,7 @@ const handleBack = () =>{
                         "success",
                         result?.message || "Auto Bid updated successfully"
                       );
-                    } 
-
+                    }
                   }
                 );
               }}
@@ -684,27 +656,26 @@ const handleBack = () =>{
         </div>
 
         <a
-              href="/sellers/leads"
-              style={{ textDecoration: "none"}}
-              className={`${styles.viewLeadsLink} ${
-                location.pathname === "/sellers/leads" ? styles.active : ""
-              }`}
-              onClick={(e) => {
-                if (
-                  e.button === 0 &&
-                  !e.metaKey &&
-                  !e.ctrlKey &&
-                  !e.shiftKey &&
-                  !e.altKey
-                ) {
-                  e.preventDefault();
-                  handleNavigation("/sellers/leads");
-                }
-              }}
-            >
-              View leads
-            </a>
-
+          href="/sellers/leads"
+          style={{ textDecoration: "none" }}
+          className={`${styles.viewLeadsLink} ${
+            location.pathname === "/sellers/leads" ? styles.active : ""
+          }`}
+          onClick={(e) => {
+            if (
+              e.button === 0 &&
+              !e.metaKey &&
+              !e.ctrlKey &&
+              !e.shiftKey &&
+              !e.altKey
+            ) {
+              e.preventDefault();
+              handleNavigation("/sellers/leads");
+            }
+          }}
+        >
+          View leads
+        </a>
 
         <AddServiceModal
           isModalOpen={isModalOpen}
@@ -719,7 +690,7 @@ const handleBack = () =>{
           handleSubmitData={handleSubmitData}
           handleRemoveService={handleRemoveService}
           selectedServices={selectedServices}
-          popularList={popularList} 
+          popularList={popularList}
         />
 
         {isEditModalOpen && (
@@ -754,7 +725,6 @@ const handleBack = () =>{
         <AddLocationModal
           open={isLocationModalOpen}
           isEditing={isEditingLocation}
-          // locationData={locationData}
           onChange={handleLocationChange}
           selectedServices={selectedServices}
           previousPostcode={previousPostcode}

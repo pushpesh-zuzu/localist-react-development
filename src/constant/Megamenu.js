@@ -215,7 +215,6 @@ export const allSubMenuData = [
 ];
 
 export const locationData = [
-  // "Cheshire",
   "Warrington",
   "Chester",
   "Manchester",
@@ -258,122 +257,10 @@ export const megaMenu = [
         path: "landscape-gardeners-near-me",
         children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
       },
-      // {
-      //   name: "General Builders",
-      //   children: locationData.map((loc) => `General Builders in ${loc}`),
-      // },
-      // {
-      //   name: "Property Extensions",
-      //   children: locationData.map((loc) => `Home Extensions in ${loc}`),
-      // },
-      // {
-      //   name: "Architectural Services",
-      //   children: locationData.map((loc) => `Architectural Services in ${loc}`),
-      // },
-      // {
-      //   name: "Home Insulation",
-      //   children: locationData.map((loc) => `Insulation Installers in ${loc}`),
-      // },
     ],
   },
-  // {
-  //   name: "Business",
-  //   path:"",
-  //   icon: businessIcon,
-  //   subcategory: [
-  //     {
-  //       name: "Bookkeeping Services",
-  //       path:'',
-  //       children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
-  //     },
-  //     {
-  //       name: "Social Media Marketing",
-  //           path:"",
-  //       children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
-  //     },
-  //     {
-  //       name: "Business Consulting",
-  //       path:"",
-  //       children: locationData.map((loc) => `Business Consulting in ${loc}`),
-  //     },
-  //     {
-  //       name: "Accounting",
-  //       path:"",
-  //       children: locationData.map((loc) => `Accounting in ${loc}`),
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: "Lessons & Training",
-  //   icon: lessonsIcon,
-  //   path:"",
-  //   subcategory: [
-  //     {
-  //       name: "Business & Career Coaching",
-  //       path:"",
-  //       children: locationData.map(
-  //         (loc) => `Business & Career Coaching in ${loc}`
-  //       ),
-  //     },
-  //     {
-  //       name: "Music Lessons",
-  //       path:"",
-  //       children: locationData.map((loc) => `Music Lessons in ${loc}`),
-  //     },
-  //     {
-  //       name: "Academic Tutoring",
-  //       path:"",
-  //       children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
-  //     },
-  //     {
-  //       name: "Fitness Training",
-  //       path:"",
-  //       children: locationData.map((loc) => `Fitness Training in ${loc}`),
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: "More",
-  //   icon: moreIcon,
-  //   path:"",
-  //   subcategory: [
-  //     {
-  //       name: "Web Design",
-  //       path:"",
-  //       children: locationData.map((loc) => `Web Designer in ${loc}`),
-  //     },
-  //     {
-  //       name: "Logo Design",
-  //       path:"",
-  //       children: locationData.map((loc) => `Logo Designer in ${loc}`),
-  //     },
-  //     {
-  //       name: "Home & Domiciliary Care",
-  //       path:"",
-  //       children: locationData.map(
-  //         (loc) => `Home & Domiciliary Care in ${loc}`
-  //       ),
-  //     },
-  //   ],
-  // },
 ];
 
-// export const getChildRoute = (subPath, child) => {
-//   switch (child) {
-//     case "Fence Installers in Warrington":
-//       return `${subPath}/cheshire/warrington`;
-//     case "Fence Installers in Chester":
-//       return `${subPath}/cheshire/chester`;
-//     case "Fence Installers in Manchester":
-//       return `${subPath}/greater-manchester/manchester`;
-//     case "Fence Installers in Bolton":
-//       return `${subPath}/greater-manchester/bolton`;
-//     case "Fence Installers in Liverpool":
-//       return `${subPath}/merseyside/liverpool`;
-//     default:
-//       return "";
-//   }
-// };
 export const getChildRoute = (subPath, child) => {
   switch (child) {
     case "Fence Installers in Warrington":

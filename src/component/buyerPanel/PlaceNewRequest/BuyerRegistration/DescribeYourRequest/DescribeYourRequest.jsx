@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./DescribeYourRequest.module.css";
 import PlusIcon from "../../../../../assets/Icons/PlusIcon.svg";
 import CheckIcon from "../../../../../assets/Icons/CheckIcon.svg";
@@ -16,7 +16,6 @@ import { Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
-import { style } from "framer-motion/client";
 
 const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const [text, setText] = useState("");
@@ -73,16 +72,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const handleSubmit = () => {
     let hasError = false;
 
-    // if (text.trim() === "") {
-    //   setTextError(true);
-    //   hasError = true;
-    // }
-
-    // if (files.length === 0) {
-    //   setFileError(true);
-    //   hasError = true;
-    // }
-
     if (hasError) return;
 
     const detailsData = {
@@ -99,29 +88,17 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             result?.message || "Create Request successfully!"
           );
         }
-        // onClose();
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());
         dispatch(setQualityData());
 
-        // navigate(`/bids-list/${requestId
         setShowConfirmModal(false);
         dispatch(setBuyerStep(10));
-
-        // navigate(`/conversion-redirect/${requestId}`, { replace: true });
       }
     );
-
-    // .then(() => {
-    //   navigate("/buyers/create");
-    // })
-    // .catch((error) => {
-    //   console.error("Navigation failed due to API error:", error);
-    // });
   };
 
   const handleCloseClick = () => {
-    // setShowConfirmModal(true);
     onClose();
     dispatch(clearSetbuyerRequestData());
     dispatch(clearBuyerRegisterFormData());
@@ -154,13 +131,11 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             professionals can respond
           </p>
 
-          {/* ✅ Textarea Validation */}
           <textarea
             className={`${styles.textarea} ${
               textError ? styles.errorBorder : ""
             }`}
             value={text}
-            // rows={6}
             onChange={handleChange}
             placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
           />
@@ -170,7 +145,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             </span>
           )}
 
-          {/* ✅ File Upload Validation */}
           <label
             className={`${styles.fileUpload} ${
               fileError ? styles.errorBorder : ""
@@ -215,17 +189,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             <p>Quality score increases as you add more detail</p>
           </div>
 
-          {/* <label className={styles.checkboxContainer}>
-        <input
-          type="checkbox"
-          checked={professionalLetin}
-          onChange={handleCheckboxChange}
-        />
-       Tick if you'd like to hear back quickly <br/>
-       
- I’m happy to be contacted as soon as possible 
-
-      </label> */}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -260,13 +223,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             <p className={styles.privacyText}>
               Your information is protected by our{" "}
               <span className={styles.privacy}>privacy policy</span>
-              {/* <a
-            href="/privacy-policy"
-            target="blank"
-            className={styles.privacyLink}
-          >
-            privacy policy
-          </a> */}
             </p>
           </div>
         </>

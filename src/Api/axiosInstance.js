@@ -35,9 +35,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       clearAuthData();
-      // window.location.reload();
     }
-    console.log(error, error?.response?.status, "error");
     return Promise.reject(error);
   }
 );

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
-import { showToast, updateLocalStorageValue } from "../../utils";
 
 const initialState = {
   notificationList: [],
@@ -16,13 +15,11 @@ export const getNotificationData = (NotificationData) => {
         `notification/get-notification-settings`,
         NotificationData
       );
-      console.log("Notification API Response:", response?.data?.data);
       if (response) {
-       dispatch(setGetNotificationData(response?.data?.data));
-        return response.data
+        dispatch(setGetNotificationData(response?.data?.data));
+        return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setNotificationLoader(false));
     }
@@ -40,10 +37,9 @@ export const addNotificationData = (addNotificationData) => {
 
       if (response) {
         dispatch(setGetNotificationData(response?.data?.data));
-        return response.data
+        return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setAddNotificationLoader(false));
     }
@@ -54,20 +50,22 @@ const sellerSlice = createSlice({
   name: "seller",
   initialState: initialState,
   reducers: {
-    
-    setGetNotificationData(state, action) {   //
+    setGetNotificationData(state, action) {
       state.notificationList = action.payload;
     },
     setNotificationLoader(state, action) {
       state.notificationLoader = action.payload;
     },
-    setAddNotificationLoader(state, action) { //
+    setAddNotificationLoader(state, action) {
       state.addNotificationLoader = action.payload;
-    }
-  
+    },
   },
 });
 
-export const {setAddNotificationLoader,setNotificationLoader,setGetNotificationData } = sellerSlice.actions;
+export const {
+  setAddNotificationLoader,
+  setNotificationLoader,
+  setGetNotificationData,
+} = sellerSlice.actions;
 
 export default sellerSlice.reducer;

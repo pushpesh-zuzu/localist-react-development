@@ -6,28 +6,6 @@ import { useEffect } from "react";
 import ScrollToTop from "../routes/ScrollToTop";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 
-// const pageTitles = {
-//   "/": "Homepage | Localists",
-//   "/login": "Login | Localists",
-//   "/category": "Categories | Localists",
-//   "/sub-category": "Sub Categories | Localists",
-//   "/location": "Locations | Localists",
-//   "/how-it-works": "How It Works | Localists",
-//   "/sellers/create/": "Create Seller Account | Localists",
-//   "/buyers/create": "Create Buyer Account | Localists",
-//   "/account/setting": "Account Settings | Localists",
-//   "/user/notification": "Buyer Notifications | Localists",
-//   "/privacy-policy": "Privacy Policy | Localists",
-//   "/sellers/dashboard": "Dashboard | Localists",
-//   "/sellers/leads" : "Leads | Localists",
-//   "/settings" : "Setting | Localists",
-//  "/leads/settings" : "Lead Setting | Locallist" ,
-//  "/lead/save-for-later" : "Saved Lead | Locallist",
-//  "/lead/save-later": "My Response | Locallist",
-//  "/help-center" : "Help | Locallist",
-
-// };
-
 const pageTitles = {
   "/": {
     title: "Localists.com: Find Trusted Local Services and Professionals",
@@ -369,16 +347,7 @@ const MainLayout = () => {
     document.body.style.paddingTop = "40px";
     document.documentElement.style.setProperty("padding-top", "40px");
   }, []);
-  //  const { title, description } = meta || {
-  //    title: "Localists",
-  //    description: "Discover and connect with local businesses on Localists."
-  //  };
 
-  //  useEffect(() => {
-  //   if (typeof document !== 'undefined') {
-  //     document.title = title;
-  //   }
-  // }, [title]);
   return (
     <div>
       <ScrollToTop />

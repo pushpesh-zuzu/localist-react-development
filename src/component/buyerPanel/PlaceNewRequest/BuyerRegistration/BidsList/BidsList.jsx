@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
@@ -10,27 +10,19 @@ import {
   getAutoBid,
   getBuyerSortByLocationApi,
   getBuyerSortByResponseApi,
-  getBuyerViewProfieApi,
   getRatingFilterApi,
   ratingFilterApi,
 } from "../../../../../store/LeadSetting/leadSettingSlice";
 import {
   BASE_IMAGE,
-  BASE_IMAGE_URL,
   DEFAULT_PROFILE_IMAGE,
   showToast,
 } from "../../../../../utils";
-// import { ArrowDownIcon } from "../../../assets/Icons/arrowDown.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import DummyImage from "../../../../../assets/Images/Setting/ProfileWebIcon.svg";
-import { Spin } from "antd";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
-import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
-import { Popover } from "antd";
 import { Helmet } from "react-helmet-async";
-import { Select, Modal, Radio, Tabs } from "antd";
 
-const BidsList = ({ previousStep }) => {
+const BidsList = () => {
   localStorage.setItem("isRegistrationComplete", "true");
   const { requestId } = useParams();
   const { autoBidList, bidListLoader, manualBidLoader, ratingFilterData } =
@@ -42,19 +34,13 @@ const BidsList = ({ previousStep }) => {
   const [locationSort, setLocationSort] = useState("");
   const [responseSort, setResponseSort] = useState("");
   const [openPopover, setOpenPopover] = useState(null);
-
   const [isMobile, setIsMobile] = useState(false);
   const [openSortModal, setOpenSortModal] = useState(false);
   const [activeSortType, setActiveSortType] = useState("");
-
   const [activeTab, setActiveTab] = useState("matches");
-
   const { userToken } = useSelector((state) => state.auth);
-  const { createRequestToken } = useSelector((state) => state.buyer);
   const [index, setIndex] = useState(0);
-  const { searchServiceLoader, service, registerData } = useSelector(
-    (state) => state.findJobs
-  );
+  const { registerData } = useSelector((state) => state.findJobs);
   const { Option } = Select;
   const { TabPane } = Tabs;
 
@@ -91,7 +77,6 @@ const BidsList = ({ previousStep }) => {
     "Organizing results for clarity and impact...",
     "Preparing your personalized list of matches...",
   ];
-  // const ratingOptions = ratingFilterData?.[0] || [];
 
   const ratingOptions = useMemo(() => {
     if (!ratingFilterData || !ratingFilterData[0]) return [];
@@ -126,36 +111,15 @@ const BidsList = ({ previousStep }) => {
     { value: "Responds within 24 hours", label: "Responds within 24 hours" },
   ];
 
-  const renderOptions = (options, currentValue, onChange) => (
-    <div className={styles.popoverContent}>
-      {options.map((opt) => (
-        <div
-          key={opt.value}
-          className={`${styles.optionItem} ${
-            currentValue === opt.value ? styles.active : ""
-          }`}
-          onClick={() => {
-            onChange({ target: { value: String(opt.value) } });
-            setOpenPopover(null);
-          }}
-        >
-          {opt.label}
-        </div>
-      ))}
-    </div>
-  );
-
   useEffect(() => {
     let interval = null;
 
     if (bidListLoader) {
-      // Start rotating if loader is true
       interval = setInterval(() => {
         setIndex((prevIndex) => (prevIndex + 1) % loadingTextInfo.length);
       }, 3000);
     }
 
-    // Cleanup on component unmount or when bidListLoader becomes false
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -167,17 +131,11 @@ const BidsList = ({ previousStep }) => {
   const webdesignData = autoBidList?.map((item) => item?.service_name);
   const matchingLength = autoBidList?.map((item) => item?.sellers?.length);
   const [selectedSellers, setSelectedSellers] = useState([]);
-  console.log(
-    autoBidList?.map((item) => item?.sellers?.length),
-    "autoBidList"
-  );
-  // Get bidcount from API response
+
   const bidCount = autoBidList?.[0]?.bidcount || 0;
   const bidTotal = autoBidList?.[0]?.displayCount || 0;
   const isButtonDisabled = bidCount === bidTotal;
 
-  // Hide checkboxes if bidCount is 5 (API has been hit)
-  const showCheckboxes = selectedSellers.length < bidTotal - bidCount;
   const shouldShowGreenIcons = bidCount !== bidTotal;
 
   const handleCheckboxChange = (sellerId) => {
@@ -199,7 +157,6 @@ const BidsList = ({ previousStep }) => {
       user_id: userToken?.remember_tokens,
       lead_id: requestId,
     };
-    console.log(data, "data");
 
     dispatch(getAutoBid(data));
   }, [dispatch, userToken?.remember_tokens, requestId]);
@@ -220,15 +177,6 @@ const BidsList = ({ previousStep }) => {
   const handleReply = () => {
     navigate(`/bids-list/reply/${requestId}`);
     setActiveTab("replies");
-  };
-
-  const handleChangeMyRequest = () => {
-    navigate("/buyers/create");
-  };
-
-  const hanleViewProfile = (seller) => {
-    console.log(seller, "seller");
-    navigate(`/view-profile/${requestId}/${seller.id}`);
   };
 
   useEffect(() => {
@@ -273,14 +221,12 @@ const BidsList = ({ previousStep }) => {
           user_id: userToken?.remember_tokens,
           lead_id: requestId,
         };
-        console.log(data, "lead");
         dispatch(getAutoBid(data));
       }
     });
   };
 
   const handleMultple = () => {
-    // Use the selected checkboxes
     const bidList = autoBidList?.[0]?.sellers?.filter((seller) =>
       selectedSellers.includes(seller.id)
     );
@@ -330,7 +276,6 @@ const BidsList = ({ previousStep }) => {
   };
   const handleSortRating = (e) => {
     const selectedRating = e.target.value;
-    console.log(selectedRating, "oo");
     setRatingList(selectedRating);
     const ratingData = {
       lead_id: requestId,
@@ -384,7 +329,6 @@ const BidsList = ({ previousStep }) => {
 
                 <>
                   {isMobile ? (
-                    // ✅ Mobile view → Ant Design Tabs
                     <Tabs
                       activeKey={activeTab}
                       onChange={(key) => {
@@ -397,12 +341,8 @@ const BidsList = ({ previousStep }) => {
                       tabBarGutter={24}
                       className={styles.mobileTabs}
                     >
-                      <TabPane tab="Your Matches" key="matches">
-                        {/* Your Matches content here */}
-                      </TabPane>
-                      <TabPane tab="Replies" key="replies">
-                        {/* Replies content here */}
-                      </TabPane>
+                      <TabPane tab="Your Matches" key="matches"></TabPane>
+                      <TabPane tab="Replies" key="replies"></TabPane>
                     </Tabs>
                   ) : (
                     <div className={styles.tabs}>
@@ -430,14 +370,6 @@ const BidsList = ({ previousStep }) => {
                   )}
                 </>
               </div>
-              {/* <div className={styles.backBtnWrapper}>
-                <button
-                  className={styles.backBtn}
-                  onClick={handleChangeMyRequest}
-                >
-                  Back
-                </button>
-              </div> */}
             </div>
 
             <div className={styles.filters}>
@@ -447,11 +379,8 @@ const BidsList = ({ previousStep }) => {
                 </span>
               </div>
 
-              {/* Desktop View - Original Selects */}
               {!isMobile ? (
                 <div className={styles.selectsWrapper}>
-                  {/* Ratings */}
-
                   <Select
                     value={ratingList || "All ratings"}
                     onChange={(value) => {
@@ -474,7 +403,6 @@ const BidsList = ({ previousStep }) => {
                     ))}
                   </Select>
 
-                  {/* Location */}
                   <Select
                     value={locationSort || "Farthest to Nearest"}
                     onChange={(value) => {
@@ -491,7 +419,6 @@ const BidsList = ({ previousStep }) => {
                     ))}
                   </Select>
 
-                  {/* Response Time */}
                   <Select
                     value={responseSort || "Response time"}
                     onChange={(value) => {
@@ -510,7 +437,6 @@ const BidsList = ({ previousStep }) => {
                   </Select>
                 </div>
               ) : (
-                /* Mobile View - Sort Buttons */
                 <div className={styles.mobileSortButtons}>
                   <button
                     className={styles.sortBtn}
@@ -519,7 +445,6 @@ const BidsList = ({ previousStep }) => {
                       setOpenSortModal(true);
                     }}
                   >
-                    {/* {ratingList || "All Ratings"} */}
                     {ratingList
                       ? ratingOptions.find((opt) => opt.value === ratingList)
                           ?.label || "All Ratings"
@@ -648,23 +573,12 @@ const BidsList = ({ previousStep }) => {
                 item?.sellers?.slice(0, visibleCount)?.map((seller, index) => (
                   <div className={styles.card} key={seller?.id}>
                     <div className={styles.cardLeft}>
-                      {/* <div className={styles.imageWrapper}>
-                        <img
-                          src={
-                            seller?.company_logo
-                              ? `${BASE_IMAGE}/users/${seller?.company_logo}`
-                              : DEFAULT_PROFILE_IMAGE
-                          }
-                          alt="Profile"
-                          className={styles.image}
-                        />
-                      </div> */}
                       <div className={styles.imageWrapper}>
                         {seller?.company_logo ? (
                           <img
                             src={`${BASE_IMAGE}/users/${seller?.company_logo}`}
                             alt="Profile"
-                            className={styles.image} // ✅ image CSS applied here
+                            className={styles.image}
                             style={{
                               width: "180px",
                               height: "180px",
@@ -711,24 +625,11 @@ const BidsList = ({ previousStep }) => {
                               away
                             </p>
                           </div>
-                          {/* <div className={styles.sidebar}>
-                            <div className={styles.rating}>
-                              <span className={styles.stars}>★★★★★</span>
-                              <span className={styles.ratingCount}>{seller?.avg_rating}</span>
-                            </div>
-                          </div> */}
+
                           <div className={styles.sidebar}>
                             <div className={styles.rating}>
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
-
-                                // if (rating === 0) {
-                                //   return (
-                                //     <span className={styles.noReviews}>
-                                //       No Reviews
-                                //     </span>
-                                //   );
-                                // }
 
                                 const sellerId = item?.id;
                                 const matchedSeller = item?.sellers?.find(
@@ -740,9 +641,9 @@ const BidsList = ({ previousStep }) => {
                                     <span className={styles.stars}>
                                       {[...Array(5)].map((_, index) => {
                                         if (rating >= index + 1) {
-                                          return <span key={index}>★</span>; // Full star
+                                          return <span key={index}>★</span>;
                                         } else if (rating >= index + 0.5) {
-                                          return <span key={index}>★</span>; // Half star (or use icon)
+                                          return <span key={index}>★</span>;
                                         } else {
                                           return (
                                             <span
@@ -751,7 +652,7 @@ const BidsList = ({ previousStep }) => {
                                             >
                                               ★
                                             </span>
-                                          ); // Empty star
+                                          );
                                         }
                                       })}
                                     </span>
@@ -760,9 +661,6 @@ const BidsList = ({ previousStep }) => {
                                         {rating}
                                       </span>
                                     )}
-                                    {/* <span className={styles.ratingCount}>
-                                      {rating}
-                                    </span> */}
                                   </>
                                 );
                               })()}
@@ -770,18 +668,6 @@ const BidsList = ({ previousStep }) => {
                           </div>
                         </div>
                         <div className={styles.mobileImageWrapper}>
-                          {/* <div className={styles.imageWrapper}> */}
-                          {/* <img
-                              src={
-                                seller?.profile_image
-                                  ? `${BASE_IMAGE}/users/${seller?.profile_image}`
-                                  : DEFAULT_PROFILE_IMAGE
-                              }
-                              alt="Profile"
-                              className={styles.images}
-                            /> */}
-
-                          {/* </div> */}
                           <div className={styles.imageWrapper}>
                             {seller?.company_logo ? (
                               <img
@@ -838,22 +724,14 @@ const BidsList = ({ previousStep }) => {
                               {(() => {
                                 const rating = seller?.avg_rating || 0;
 
-                                // if (rating === 0) {
-                                //   return (
-                                //     <span className={styles.noReviews}>
-                                //       No Reviews
-                                //     </span>
-                                //   );
-                                // }
-
                                 return (
                                   <>
                                     <span className={styles.stars}>
                                       {[...Array(5)].map((_, index) => {
                                         if (rating >= index + 1) {
-                                          return <span key={index}>★</span>; // Full star
+                                          return <span key={index}>★</span>;
                                         } else if (rating >= index + 0.5) {
-                                          return <span key={index}>★</span>; // Half star (or use icon)
+                                          return <span key={index}>★</span>;
                                         } else {
                                           return (
                                             <span
@@ -862,7 +740,7 @@ const BidsList = ({ previousStep }) => {
                                             >
                                               ★
                                             </span>
-                                          ); // Empty star
+                                          );
                                         }
                                       })}
                                     </span>
@@ -925,7 +803,6 @@ const BidsList = ({ previousStep }) => {
                           className={styles.replyBtn}
                           onClick={() => {
                             setSelectedItem(seller);
-                            // setModalOpen(true);
                             handleContinue(seller);
                           }}
                         >

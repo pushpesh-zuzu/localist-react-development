@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import styles from "./BuyerAccountSettings.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import defaultImage from "../../assets/Images/DefaultProfileImage.svg";
-import Webcam from "react-webcam"; // Add this import
-
+import Webcam from "react-webcam";
 import {
   updatePasswordData,
   updateProfileData,
@@ -15,11 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  BASE_IMAGE_URL,
-  showToast,
-  updateLocalStorageValue,
-} from "../../utils";
+import { showToast, updateLocalStorageValue } from "../../utils";
 import { setUserToken } from "../../store/Auth/authSlice";
 import { setRegisterData } from "../../store/FindJobs/findJobSlice";
 import { baseURL } from "../../Api/axiosInstance";
@@ -29,18 +24,15 @@ const BuyerAccountSettings = () => {
   const navigate = useNavigate();
   const { getuploadImg, infoLoader, changePasswordLoader, profileImageLoader } =
     useSelector((state) => state.buyer);
-  const { userToken } = useSelector((state) => state.auth);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
-  const webcamRef = useRef(null); // Add webcam reference
+  const webcamRef = useRef(null);
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     phone: "",
     profile_image: "",
   });
-  const { registerData } = useSelector((state) => state.findJobs);
   const userNameFirstLetter = userDetails?.name?.[0] || "";
-  console.log(userNameFirstLetter, "pp");
 
   useEffect(() => {
     dispatch(updateProfileData());
@@ -58,7 +50,6 @@ const BuyerAccountSettings = () => {
     }
   }, [getuploadImg]);
 
-  // Handle file upload
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -73,12 +64,10 @@ const BuyerAccountSettings = () => {
     }
   };
 
-  // Handle camera capture
   const capturePhoto = () => {
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
-        // Convert base64 to file
         const byteString = atob(imageSrc.split(",")[1]);
         const mimeString = imageSrc.split(",")[0].split(":")[1].split(";")[0];
         const ab = new ArrayBuffer(byteString.length);
@@ -91,7 +80,6 @@ const BuyerAccountSettings = () => {
           type: mimeString,
         });
 
-        // Create form data and dispatch
         const formData = new FormData();
         formData.append("image_file", file);
         dispatch(updateProfileImageData(formData));
@@ -100,7 +88,6 @@ const BuyerAccountSettings = () => {
     }
   };
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserDetails((prev) => ({
@@ -108,8 +95,6 @@ const BuyerAccountSettings = () => {
       [name]: value,
     }));
   };
-
-  console.log(userDetails?.phone, "userDetails?.phone");
 
   const handleSubmit = () => {
     if (!/^\+?\d{10,13}$/.test(userDetails?.phone)) {
@@ -164,7 +149,6 @@ const BuyerAccountSettings = () => {
   const handleSavePassword = () => {
     const { password, password_confirmation } = formData;
 
-    // Validation: Check if fields are empty
     if (!password || !password_confirmation) {
       setFormData({
         ...formData,
@@ -173,7 +157,6 @@ const BuyerAccountSettings = () => {
       return;
     }
 
-    // Validation: Check if both passwords match
     if (password !== password_confirmation) {
       setFormData({
         ...formData,
@@ -182,7 +165,6 @@ const BuyerAccountSettings = () => {
       return;
     }
 
-    // Validation: Password strength regex
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>/?]).{8,}$/;
 
@@ -195,7 +177,6 @@ const BuyerAccountSettings = () => {
       return;
     }
 
-    // If everything is valid, proceed to submit
     const formDataToSend = new FormData();
     formDataToSend.append("password", password);
     formDataToSend.append("password_confirmation", password_confirmation);
@@ -236,14 +217,13 @@ const BuyerAccountSettings = () => {
   const videoConstraints = {
     width: 1280,
     height: 720,
-    facingMode: "environment", // Use rear camera if available
+    facingMode: "environment",
   };
 
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>Account settings</h2>
 
-      {/* {userToken?.active_status === 2 && registerData?.active_status === 2 && ( */}
       <div className={styles.infoBox}>
         <p>
           <span>
@@ -266,7 +246,6 @@ const BuyerAccountSettings = () => {
           Go to My Requests
         </Link>
       </div>
-      {/* // )} */}
 
       <div className={styles.detailsBox}>
         <h3 className={styles.subHeading}>My details</h3>
@@ -313,16 +292,9 @@ const BuyerAccountSettings = () => {
                 style={{ display: "none" }}
               />
             </label>
-            {/* <button
-              className={styles.uploadButton}
-              onClick={() => setIsCameraOpen(true)}
-            >
-              Take Photo
-            </button> */}
           </div>
         </div>
 
-        {/* Camera Modal */}
         {isCameraOpen && (
           <div className={styles.modalOverlay}>
             <div className={styles.cameraModal}>
@@ -451,7 +423,6 @@ const BuyerAccountSettings = () => {
               )}
             </div>
 
-            {/* Confirm New Password Field */}
             <div className={styles.formGroup}>
               <label>Confirm New Password</label>
               <div className={styles.passwordField}>

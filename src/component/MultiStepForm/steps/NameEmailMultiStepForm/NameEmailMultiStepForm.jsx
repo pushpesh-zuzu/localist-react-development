@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NameEmailMultiStepForm.module.css";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import { checkEmailIdApi } from "../../../../store/FindJobs/findJobSlice";
-import { showToast } from "../../../../utils";
-import {
-  registerQuoteCustomer,
-  setbuyerRequestData,
-} from "../../../../store/Buyer/BuyerSlice";
+import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { extractAllParams } from "../../../../utils/decodeURLParams";
@@ -21,24 +15,12 @@ const NameEmailMultiStepForm = ({
   onBack,
 }) => {
   const dispatch = useDispatch();
-  const { registerLoader, errorMessage, searchServiceLoader } = useSelector(
+  const { errorMessage, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
-  const { requestLoader, buyerRequest, citySerach } = useSelector(
-    (state) => state.buyer
-  );
+  const { buyerRequest } = useSelector((state) => state.buyer);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
-
-  // ✅ Ab saare parameters mil jayenge
-  const campaignid = allParams.gad_campaignid || "";
-  const keyword = allParams.keyword || "";
-  const gclid = allParams.gclid || "";
-  const campaign = allParams.utm_campaign || "";
-  const adGroup = allParams.AgId || "";
-  const targetID = allParams.utm_term || "";
-  const msclickid = allParams.utm_msclkid || "";
-  const utm_source = allParams.utm_source || "";
 
   const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState(buyerRequest?.email);
@@ -56,30 +38,6 @@ const NameEmailMultiStepForm = ({
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
   };
-
-  // const handleEmailBlur = async () => {
-  //   if (!email) return;
-
-  //   try {
-  //     const res = await dispatch(checkEmailIdApi({ email }));
-
-  //     if (res?.success) {
-  //       setErrors((prev) => ({ ...prev, email: false }));
-  //       setIsEmailValid(true);
-  //       setEmailErrorMessage("");
-  //     } else {
-  //       setEmail("");
-  //       if (setEmails) setEmails("");
-  //       setIsEmailValid(false);
-  //       setEmailErrorMessage("Email is already registered.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Error checking email:", err);
-  //     setErrors((prev) => ({ ...prev, email: false }));
-  //     setIsEmailValid(false);
-  //     setEmailErrorMessage("Something went wrong. Please try again.");
-  //   }
-  // };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -117,32 +75,6 @@ const NameEmailMultiStepForm = ({
     } else {
       return;
     }
-    // if (isStartWithQuestionModal) {
-    //   const formData = new FormData();
-    //   formData.append("name", name);
-    //   formData.append("email", finalEmail);
-    // //   formData.append("phone", 4567877777);
-    //   formData.append("questions", JSON.stringify(updatedAnswers));
-    //   formData.append("service_id", buyerRequest?.service_id || "");
-    //   formData.append("city", citySerach || "");
-    //   formData.append("postcode", buyerRequest?.postal_code || "");
-    //   formData.append("campaignid", campaignid || "");
-    //   formData.append("gclid", gclid || "");
-    //   formData.append("campaign", campaign || "");
-    //   formData.append("adgroup", adGroup || "");
-    //   formData.append("targetid", targetID || "");
-    //   formData.append("msclickid", msclickid || "");
-    //   formData.append("utm_source", utm_source || "");
-    //   formData.append("keyword", keyword || "");
-    //   formData.append("form_status", 1);
-    //   dispatch(registerQuoteCustomer(formData)).then((result) => {
-    //     if (result) {
-    //       nextStep(); // Yaha pe sirf nextStep call karo, final submission nahi
-    //     }
-    //   });
-    // } else {
-    //   nextStep(); // Normal flow mein bhi nextStep call karo
-    // }
   };
 
   const [showError, setShowError] = useState(false);
@@ -167,9 +99,8 @@ const NameEmailMultiStepForm = ({
 
   const handleBackClick = () => {
     onBack();
-    const firstStepProgress = (2 / 3) * 100; // 66.66%
-    const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
-    // getProgressPercentage(-remainingProgressPerStep);
+    const firstStepProgress = (2 / 3) * 100;
+    const remainingProgressPerStep = (100 - firstStepProgress) / 2;
   };
 
   return (
@@ -183,12 +114,8 @@ const NameEmailMultiStepForm = ({
       loader={searchServiceLoader}
     >
       <div className={styles.infoWrapper}>
-        {/* <label className={styles.label}>Full Name</label> */}
         {!isPPCPages && (
           <div style={{ marginBottom: "10px" }}>
-            {/* <label htmlFor="email" className={styles.label}>
-              Email
-            </label> */}
             <input
               type="email"
               placeholder="Email"
@@ -197,7 +124,6 @@ const NameEmailMultiStepForm = ({
               }`}
               value={email}
               onChange={handleEmailChange}
-              // onBlur={handleEmailBlur}
             />
             {errors?.email && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

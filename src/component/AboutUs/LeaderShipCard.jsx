@@ -3,14 +3,12 @@ import { LinkedinFilled } from "@ant-design/icons";
 import styles from "./leadershipcard.module.css";
 import WithBlueTextBlack from "../common/headings/WithBlueTextBlack";
 
-// X (Twitter) icon component
 const XIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
-// Leadership card component
 const LeadershipCard = ({ name, position, imageUrl, linkedinUrl, xUrl }) => {
   return (
     <div className={styles.card}>
@@ -19,31 +17,11 @@ const LeadershipCard = ({ name, position, imageUrl, linkedinUrl, xUrl }) => {
       </div>
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.position}>{position}</p>
-      {/* <div className={styles.socialIcons}>
-        <a
-          href={linkedinUrl}
-          className={styles.socialIcon}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <LinkedinFilled />
-        </a>
-        <a
-          href={xUrl}
-          className={styles.socialIcon}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <XIcon />
-        </a>
-      </div> */}
     </div>
   );
 };
 
-// Container component with responsive grid
 const LeadershipTeam = () => {
-  // Sample data for 6 team members
   const teamData = [
     {
       id: 1,
@@ -54,7 +32,6 @@ const LeadershipTeam = () => {
       linkedinUrl: "#",
       xUrl: "#",
     },
-    // Add 5 more team members with similar structure
     {
       id: 1,
       name: "Nathan O'Connor",
@@ -77,17 +54,15 @@ const LeadershipTeam = () => {
       id: 1,
       name: "John Driffield",
       position: "Paid Advertising Manager",
-      imageUrl:
-        "/John.jpg",
+      imageUrl: "/John.jpg",
       linkedinUrl: "#",
       xUrl: "#",
     },
- 
   ];
 
   return (
     <div className={styles.teamContainer}>
-      <div style={{marginBottom:'20px'}}>
+      <div style={{ marginBottom: "20px" }}>
         <WithBlueTextBlack firstblueText="Our Leadership" secondText="Team" />
       </div>
       <div className={styles.cardsGrid}>

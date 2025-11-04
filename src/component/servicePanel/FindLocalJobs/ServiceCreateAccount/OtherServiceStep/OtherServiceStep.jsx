@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./OtherServiceStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearServiceFormData,
   pendingLeadData,
   registerUserData,
   searchService,
@@ -24,9 +23,6 @@ const OtherServiceStep = ({
   formData,
   setFormData,
 }) => {
-  const [isPostcodeFromSuggestion, setIsPostcodeFromSuggestion] =
-    useState(false);
-
   const [Input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -40,10 +36,8 @@ const OtherServiceStep = ({
   const item = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
   const [expandedRadius, setExpandedRadius] = useState(0);
   const debounceTimer = useRef(null);
-  console.log(Input, "Inputtt");
 
   const {
     service,
@@ -71,13 +65,10 @@ const OtherServiceStep = ({
     };
   }, [Input, dispatch]);
 
-  // Handle postcode input with debounce for getCityName API
   const handlePostcode2Change = async (e) => {
     const postcodeValue = e.target.value;
-    console.log(e.target.value, "e.target.value");
 
     setFormData((prev) => ({ ...prev, postcode2: postcodeValue }));
-    // setIsPostcodeFromSuggestion(false);
     dispatch(
       setFormData({
         validPostCode2: false,
@@ -86,46 +77,17 @@ const OtherServiceStep = ({
 
     const { name, value } = e.target;
 
-    //   debounceTimer.current = setTimeout(() => {
-    //   if (value && value.length >= 3) {
-    //     fetchCityFromPostcode(value);
-    //   }
-    // }, 1000);
-
-    // if (postcodeValue.length >= 3) {
-    //   try {
-    //     const res = await dispatch(
-    //       fetchCityFromPostcode(postcodeValue)
-    //     ).unwrap();
-    //     if (res?.city) {
-    //       setFormData((prev) => ({ ...prev, city: res.city }));
-    //       // setIsPostcodeFromSuggestion(true);
-    //       dispatch(
-    //         setFormData({
-    //           validPostCode2: true,
-    //         })
-    //       );
-    //     }
-    //   } catch (err) {
-    //     console.error("Error fetching city:", err);
-    //   }
-    // }
-
-    // Update form data immediately
     if (handleInputChange) handleInputChange(e);
-    // setIsPostcodeFromSuggestion(false);
     dispatch(
       setFormData({
         validPostCode2: false,
       })
     );
 
-    // Clear previous timer
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
     }
 
-    // Set new timer for API call
     debounceTimer.current = setTimeout(() => {
       if (value && value.length >= 3) {
         fetchCityFromPostcode(value);
@@ -133,7 +95,6 @@ const OtherServiceStep = ({
     }, 1000);
   };
 
-  // Fetch city from postcode using getCityName API
   const fetchCityFromPostcode = async (postcode) => {
     if (!postcode || postcode.length < 3) return;
 
@@ -142,23 +103,20 @@ const OtherServiceStep = ({
       const result = await dispatch(getCityName({ postcode: postcode }));
 
       let cityName, postcodeFromApi;
-      // Check different response structures
       if (result?.success) {
         cityName = result.data?.city;
         postcodeFromApi = result.data?.postcode;
       }
 
       if (cityName) {
-        // Update form data with the API response
         dispatch(
           setFormData({
             postcode2: postcodeFromApi || postcode,
             validPostCode2: true,
-            coordinates2: {}, // Empty coordinates since we don't have them from the API
+            coordinates2: {},
           })
         );
 
-        // setIsPostcodeFromSuggestion(true);
         showToast("success", "Location found successfully!");
       } else {
         showToast("error", "No city found for this postcode!");
@@ -172,13 +130,11 @@ const OtherServiceStep = ({
   };
 
   const handleSelectService = (item) => {
-    // Don't allow more than 2 services
     if (selectedServices?.length >= 5) {
       showToast("error", "Please add more services in Lead Settings");
       return;
     }
 
-    // Don't add duplicate services
     if (!selectedServices?.some((service) => service.id === item.id)) {
       dispatch(setselectedServices([...selectedServices, item]));
     }
@@ -192,28 +148,17 @@ const OtherServiceStep = ({
 
     dispatch(setselectedServices(updated));
 
-    // ✅ If no services left, reset postcode
     if (updated.length === 0) {
       setFormData((prev) => ({
         ...prev,
-        postcode2: "", // clear postcode2
+        postcode2: "",
       }));
     }
   };
 
-  // const handleRemoveService = (id) => {
-  //   dispatch(
-  //     setselectedServices(
-  //       selectedServices?.filter((service) => service.id !== id)
-  //     )
-  //   );
-  // };
   const validateForm = () => {
     let newErrors = {};
 
-    // if (!formData.miles2) {
-    //   newErrors.miles2 = "Please select a distance range.";
-    // }
     if (selectedServices.length > 0 && !formData.postcode2) {
       newErrors.postcode2 = "Please enter your postcode.";
     }
@@ -239,7 +184,6 @@ const OtherServiceStep = ({
     };
   }, [show]);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (debounceTimer.current) {
@@ -250,10 +194,6 @@ const OtherServiceStep = ({
 
   const handleSubmit = () => {
     const postcodeValue = formData?.postcode2?.trim();
-    // if (selectedServices.length > 0) {
-    //   showToast("error", "Please enter a valid postcode!");
-    //   return;
-    // }
 
     if (!postcodeValue) {
       showToast("error", "Please enter your postcode!");
@@ -266,25 +206,20 @@ const OtherServiceStep = ({
     }
 
     let apicontion = validateForm();
-    // Ensure selectedServices is an array and map IDs
     const serviceIds = Array.isArray(selectedServices)
-      ? selectedServices?.map((service) => service.id).filter(Boolean) // Remove empty values
+      ? selectedServices?.map((service) => service.id).filter(Boolean)
       : [];
 
-    // Ensure formData.service_id is an array and clean it
     const existingServiceIds = Array.isArray(formData?.service_id)
-      ? formData.service_id.filter(Boolean) // Remove empty values
+      ? formData.service_id.filter(Boolean)
       : [];
 
-    // Merge both arrays and remove duplicates
     const combinedServiceIds = [
       ...new Set([...existingServiceIds, ...serviceIds]),
     ];
 
-    // Convert array to a comma-separated string
     const serviceCategoryData = combinedServiceIds.join(", ");
 
-    // Create final payload
     const payload = {
       ...formData,
       service_id: serviceCategoryData,
@@ -305,7 +240,6 @@ const OtherServiceStep = ({
     delete payload.suite;
     delete payload.is_zipcode;
     delete payload.state;
-    // delete payload.password
 
     if (apicontion) {
       dispatch(registerUserData(payload)).then((result) => {
@@ -320,10 +254,6 @@ const OtherServiceStep = ({
     }
   };
 
-  const handleOpenModal = () => {
-    if (!validateForm()) return;
-    setShow(true);
-  };
   const handleCloseModal = () => {
     setShow(false);
   };
@@ -344,8 +274,6 @@ const OtherServiceStep = ({
     }, DEBOUNCE_MS);
   };
 
-  const [leadCount, setLeadCount] = useState(0);
-
   useEffect(() => {
     const selectedId = selectedServices.map((item) => item.id);
     const serviceId = {
@@ -361,7 +289,6 @@ const OtherServiceStep = ({
     setExpandedRadius((prev) => {
       const newRadius = prev + 10;
 
-      // Dispatch the new radius to Redux store
       dispatch(setFormData({ expanded_radius: newRadius }));
 
       return newRadius;
@@ -370,7 +297,6 @@ const OtherServiceStep = ({
 
   useEffect(() => {
     if (formData?.postcode2) {
-      // setIsPostcodeFromSuggestion(true);
       dispatch(
         setFormData({
           validPostCode2: true,
@@ -423,13 +349,12 @@ const OtherServiceStep = ({
               placeholder="Search for more services..."
               onFocus={() => {
                 setIsFocused(true);
-                setIsDropdownOpen(true); // open dropdown on focus
-                // if field is empty on focus, load ALL services so dropdown isn't blank
+                setIsDropdownOpen(true);
                 if (Input.trim() === "") {
                   dispatch(
                     searchService({
                       search: "",
-                      serviceTitle: item?.serviceTitle || "" /*, serviceid*/,
+                      serviceTitle: item?.serviceTitle || "",
                     })
                   );
                 }

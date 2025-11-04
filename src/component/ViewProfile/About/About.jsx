@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./About.module.css";
-import EliteProImg from "../../../assets/Images/Setting/eliteProImg.svg";
 import businessImg from "../../../assets/Images/Setting/businessImg.svg";
 import staffImg from "../../../assets/Images/Setting/staffImg.svg";
 import localistHireImg from "../../../assets/Images/Setting/localistHireImg.svg";
@@ -14,10 +13,6 @@ const About = ({ details }) => {
     aboutText.length > 300 ? aboutText.slice(0, 300) + "..." : aboutText;
 
   const data = [
-    // {
-    //     title: "Elite Pro",
-    //     icon: EliteProImg,
-    // },
     {
       title: `${
         details?.hire_count ? details?.hire_count : "0"
@@ -42,8 +37,6 @@ const About = ({ details }) => {
       icon: responseTimeImg,
     },
   ];
-
-  console.log(details?.about_company, "details111");
 
   return (
     <div className={styles.aboutContainer}>

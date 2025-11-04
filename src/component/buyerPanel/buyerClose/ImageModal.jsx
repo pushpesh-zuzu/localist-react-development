@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./ImageModal.module.css";
-import { useNavigate, useParams } from 'react-router-dom';
-// import personalTrainers from "./images/personalTrainers.jpg"; // Replace with actual paths
-// import counselling from "./images/counselling.jpg";
-// import massage from "./images/massage.jpg";
-// import wedding from "./images/wedding.jpg";
-// import dj from "./images/dj.jpg";
-// import magician from "./images/magician.jpg";
-import DummyImage from "../../../assets/Images/DummyImage.svg"
-import RightClick from "../../../assets/Images/Setting/RightModalClick.svg"
+import { useNavigate } from "react-router-dom";
+import DummyImage from "../../../assets/Images/DummyImage.svg";
+import RightClick from "../../../assets/Images/Setting/RightModalClick.svg";
 import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL_IMAGE } from "../../../utils";
@@ -26,40 +20,46 @@ const ImageModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   if (!isOpen) return null;
   const dispatch = useDispatch();
-   const { popularList,popularLoader } =  useSelector((state) => state.findJobs);
- useEffect(()=>{
-  dispatch(getPopularServiceList())
-  },[])
+  const { popularList, popularLoader } = useSelector((state) => state.findJobs);
+  useEffect(() => {
+    dispatch(getPopularServiceList());
+  }, []);
 
   const handleSkip = () => {
-  onClose(); // close modal first
-  navigate("/buyers/create"); // go to buyers/create
-};
+    onClose();
+    navigate("/buyers/create");
+  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <div className={styles.icon}><img src={RightClick} alt="..." /></div>
+          <div className={styles.icon}>
+            <img src={RightClick} alt="..." />
+          </div>
           <h2>Your request has been closed</h2>
         </div>
         <p className={styles.subtext}>Do you need any of these services?</p>
 
         <div className={styles.grid}>
           {popularList?.slice(0, 6)?.map((service, index) => (
-            <div key={index} className={styles.card} onClick={() => {
-              navigate("/buyers/create", { state: { selectedService: service,from: "ImageModal" } });
-            }}>
-              {/* <img src={service.image} alt={service.title} /> */}
-                <img
-                        src={
-                          service.banner_image
-                            ? `${BASE_URL_IMAGE}${service.banner_image}`
-                            : imgBanner
-                        }
-                        alt={service.name}
-                        // className={styles.image}
-                      />
+            <div
+              key={index}
+              className={styles.card}
+              onClick={() => {
+                navigate("/buyers/create", {
+                  state: { selectedService: service, from: "ImageModal" },
+                });
+              }}
+            >
+              <img
+                src={
+                  service.banner_image
+                    ? `${BASE_URL_IMAGE}${service.banner_image}`
+                    : imgBanner
+                }
+                alt={service.name}
+              />
               <span>{service.name}</span>
             </div>
           ))}

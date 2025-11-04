@@ -1,13 +1,9 @@
-// import Accountants from "../component/category/accountants/CloneAccountants";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
 import AllServicesComponent from "../component/category/allServices/CloneAllServices";
-// import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
 import GetQuotes from "../component/common/getQuotes/GetQuotes";
-// import styles from "./clonecategory.module.css";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { AllServicesData } from "../constant/CloneCategory";
-
 
 import { Helmet } from "react-helmet-async";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
@@ -15,26 +11,26 @@ import FenchandGet from "../assets/Images/FenchandGet.jpg";
 import PatioPatioServices from "../assets/Images/PatioServices.jpg";
 import DrivewayInstallation from "../assets/Images/DrivewayInstallation.jpg";
 import Builders from "../assets/Images/servicesLevels/Builders.jpg";
-// This is level 2 page 
+
 const popularFilterLevelTwo = [
   {
     builders: [
       {
         id: 1,
         title: "Fence & Gate Installation",
-        path:'fence-installers',
+        path: "fence-installers",
         image: FenchandGet,
       },
       {
         id: 2,
         title: "Driveway Installation",
-        path:'driveway-installers',
+        path: "driveway-installers",
         image: DrivewayInstallation,
       },
       {
         id: 3,
         title: "Patio Services",
-        path:'patio-services',
+        path: "patio-services",
         image: PatioPatioServices,
       },
     ],
@@ -56,7 +52,6 @@ const endpointServiceMap = {
   ],
 };
 
-
 const CloneSubTwoCategory = ({
   accountHeader,
   subHeader,
@@ -65,9 +60,7 @@ const CloneSubTwoCategory = ({
 }) => {
   const location = useLocation();
   const fullPath = location.pathname;
-  const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
-  console.log(endpoint, "endpointendpointendpoint");
-
+  const endpoint = fullPath.split("/").filter(Boolean).pop();
 
   const allowedServices = endpointServiceMap[endpoint] || [];
 

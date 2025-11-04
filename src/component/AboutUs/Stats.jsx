@@ -1,7 +1,12 @@
-import React from "react";
 import styles from "./stats.module.css";
 
-const StatsCard = ({ counts, description = '', pl = "0px", pr = "0px", borderRight = "2px solid #00AFE3" }) => {
+const StatsCard = ({
+  counts,
+  description = "",
+  pl = "0px",
+  pr = "0px",
+  borderRight = "2px solid #00AFE3",
+}) => {
   return (
     <div
       className={styles.statsWrapper}
@@ -12,41 +17,37 @@ const StatsCard = ({ counts, description = '', pl = "0px", pr = "0px", borderRig
       }}
     >
       <div className={styles.numberText}>{counts}</div>
-      <div className={styles.descriptionText}>
-        {description}
-      </div>
+      <div className={styles.descriptionText}>{description}</div>
     </div>
   );
 };
 
 const Stats = () => {
-  // Dynamic data for 4 stats cards
   const statsData = [
-    { 
-      counts: '48,000+', 
+    {
+      counts: "48,000+",
       description: "Active Service Professionals",
-      pr: "50px"
+      pr: "50px",
     },
-    { 
-      counts: '13 Million+', 
+    {
+      counts: "13 Million+",
       description: "Daily Bookings",
       pr: "52px",
-      pl:'50px'
+      pl: "50px",
     },
-    { 
-      counts: '59+', 
+    {
+      counts: "59+",
       description: "Cities**",
       pr: "50px",
-            pl: "50px",
-
+      pl: "50px",
     },
-    { 
-      counts: '4', 
+    {
+      counts: "4",
       description: "Countries",
-      pl:'50px',
-      pr:'50px',
-      borderRight: "none" // Remove border for last card
-    }
+      pl: "50px",
+      pr: "50px",
+      borderRight: "none",
+    },
   ];
 
   return (

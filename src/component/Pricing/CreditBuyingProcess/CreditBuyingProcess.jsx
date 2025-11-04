@@ -1,38 +1,16 @@
-import React from "react";
 import styles from "./CreditBuyingProcess.module.css";
 import ChooseRightCreditIcon from "../../../assets/Images/Pricing/ChooseRightCreditIcon.svg";
 import CompletePurchaseIcon from "../../../assets/Images/Pricing/CompletePurchaseIcon.svg";
 import RedeemCreditsIcon from "../../../assets/Images/Pricing/RedeemCreditsIcon.svg";
 
 const CreditBuyingProcess = () => {
-  // const HowItWorksData = [
-  //   {
-  //     id: 1,
-  //     title: "ChooseRightCreditIcon",
-  //     image: ChooseRightCreditIcon,
-  //     description: "Choose the right credit package based on your needs.",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "CompletePurchaseIcon",
-  //     image: CompletePurchaseIcon,
-  //     description:
-  //       "Complete the purchase securely using your preferred payment method.",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "RedeemCreditsIcon",
-  //     image: RedeemCreditsIcon,
-  //     description:
-  //       "Redeem credits to access products, services, or subscriptions easily.",
-  //   },
-  // ];/
   const HowItWorksData = [
     {
       id: 1,
       title: "ChooseRightCreditIcon",
       image: ChooseRightCreditIcon,
-      description: " Pick a credit pack that fits your business needs. Basic or premium, there’s an option for you.",
+      description:
+        " Pick a credit pack that fits your business needs. Basic or premium, there’s an option for you.",
     },
     {
       id: 2,
@@ -52,9 +30,7 @@ const CreditBuyingProcess = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>
-        {/* Credit <span className={styles.highlight}>buying process</span> */}
-         How to Access <span className={styles.highlight}> Your Leads</span>
-
+        How to Access <span className={styles.highlight}> Your Leads</span>
       </h2>
       <div className={styles.stepsContainer}>
         {HowItWorksData.map((item, index) => (

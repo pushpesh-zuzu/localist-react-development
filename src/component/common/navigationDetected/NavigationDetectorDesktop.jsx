@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
-import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 
 const NavigationDetectorDesktop = () => {
-  const dispatch = useDispatch();
   const userToken = useSelector((state) => state.auth.userToken);
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
@@ -30,13 +28,11 @@ const NavigationDetectorDesktop = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
 
     if (userToken) {
-      console.log("🔴 User token exists, skipping");
       return;
     }
 
     const updatedAnswers = buyerRequest?.questions || [];
 
-    // Check if form has any meaningful data
     const hasData =
       (buyerRequest?.name && buyerRequest.name.trim()) ||
       (buyerRequest?.email && buyerRequest.email.trim()) ||
@@ -45,10 +41,8 @@ const NavigationDetectorDesktop = () => {
       (buyerRequest?.questions && buyerRequest.questions.length > 0);
 
     if (!hasData) {
-      console.log("🚫 No meaningful data found, skipping API call");
       return;
     }
-    // Use beacon API for reliable sending during page unload
     const beaconData = new URLSearchParams();
     beaconData.append("name", buyerRequest?.name || "");
     beaconData.append("email", buyerRequest?.email || "");
@@ -71,13 +65,11 @@ const NavigationDetectorDesktop = () => {
       type: "application/x-www-form-urlencoded",
     });
 
-    // Try beacon first, if not available use fetch with keepalive
     if (navigator.sendBeacon) {
       const success = navigator.sendBeacon(
         "https://dev.localists.com/admin/api/customer/register-quote-customer",
         blob
       );
-      console.log("📡 Beacon API result:", success);
 
       if (success) {
         localStorage.removeItem("barkToken");
@@ -87,7 +79,6 @@ const NavigationDetectorDesktop = () => {
         localStorage.removeItem("createRequestToken");
       }
     } else {
-      // Fallback to fetch with keepalive
       fetch(
         "https://dev.localists.com/admin/api/customer/register-quote-customer",
         {
@@ -106,19 +97,13 @@ const NavigationDetectorDesktop = () => {
   };
 
   useEffect(() => {
-    console.log("🔵 NavigationDetector mounted");
-
     const handleBeforeUnload = (event) => {
-      console.log("🟠 beforeunload event - showing dialog");
-
-      // Show dialog every time by preventing default and setting returnValue
       event.preventDefault();
       event.returnValue =
         "Are you sure you want to leave? Your data may be saved.";
     };
 
     const handleUnload = () => {
-      console.log("🟠 unload event - making API call");
       submitFormData();
     };
 

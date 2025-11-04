@@ -59,18 +59,6 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
-  console.log(profileData, "review test");
-
-  const serviceCount = profileData?.services?.filter(
-    (service) => service?.user_services?.name
-  );
-
-  const expandRadiusLoader = useSelector(
-    (state) => state?.leadSetting?.expandRadiusLoader
-  );
-
-  console.log(reviewProfileData, profileData?.details, "setReviewProfile");
-  console.log(profileData?.business_profile_name, "profileDataprofileData");
   useEffect(() => {
     return () => {
       dispatch(setViewProfileData({}));
@@ -164,18 +152,6 @@ const ViewProfiles = () => {
         behavior: "smooth",
       });
     }
-
-    // if (targetRef.current) {
-    //   const targetPosition =
-    //     targetRef.current.getBoundingClientRect().top + window.scrollY;
-
-    //   const OFFSET = 140; // adjust for sticky header if needed
-
-    //   window.scrollTo({
-    //     top: targetPosition - OFFSET,
-    //     behavior: "smooth",
-    //   });
-    // }
   };
 
   useEffect(() => {
@@ -274,21 +250,6 @@ const ViewProfiles = () => {
     const visible = name.charAt(0);
     return `${visible}***@${domain}`;
   };
-  // if (expandRadiusLoader === true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         height: "100vh",
-  //         alignItems: "center",
-  //         width: "100%",
-  //       }}
-  //     >
-  //       <Spin />
-  //     </div>
-  //   );
-  // }
 
   const availableTabs = [];
 
@@ -329,8 +290,6 @@ const ViewProfiles = () => {
       profileData?.details?.has_twitter_link !== 1)
   )
     availableTabs.push("Links");
-
-  console.log(profileData, "profileData?.links");
 
   return (
     <>

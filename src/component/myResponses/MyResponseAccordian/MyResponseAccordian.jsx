@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import styles from "./MyResponseAccordian.module.css";
-import UserImage from "../../../assets/Icons/MyResponse/UserImage.svg";
 import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg";
 import CallImage from "../../../assets/Icons/MyResponse/CallImage.svg";
 import EmailImage from "../../../assets/Icons/MyResponse/EmailImage.svg";
@@ -9,7 +7,6 @@ import PurchasedImage from "../../../assets/Icons/MyResponse/PurchasedImage.svg"
 import AddImage from "../../../assets/Images/MyResponse/WhatsAppIcon.svg";
 import ProfileImg from "../../../assets/Images/MyResponse/ProfileIcon.svg";
 import PhoneImg from "../../../assets/Images/MyResponse/PhoneIcon.svg";
-import MailIcon from "../../../assets/Images/MyResponse/mail-02.svg";
 import Mailbtn from "../../../assets/Images/MyResponse/mail-02.svg";
 import smsBtn from "../../../assets/Images/MyResponse/annotation.svg";
 import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
@@ -17,16 +14,12 @@ import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
 import contact from "../../../assets/Images/MyResponse/EmailIcon.svg";
 import MailImg from "../../../assets/Images/MyResponse/mailIcon.svg";
 import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
-import locallistImgs from "../../../assets/Images/Leads/localistImg.svg";
-import pendingImg from "../../../assets/Images/MyResponse/PendingBtnImg.svg";
 import SMSIcon from "../../../assets/Images/MyResponse/SMSIcon.svg";
 import bidContactIcon from "../../../assets/Images/MyResponse/bidContactIcon.svg";
-
 import {
   addSellerNotesApi,
   getAddHiredLeadDataApi,
   getBuyerActivitiesApi,
-  getLeadProfileRequestList,
   getPendingLeadDataApi,
   getSellerNotesApi,
   sellerResponseStatusApi,
@@ -35,19 +28,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../../utils";
 import moment from "moment";
 import LeadMap from "../LeadMap/LeadMap";
-
-import { LoadingOutlined } from "@ant-design/icons";
 import { Spin, Select } from "antd";
 
-const TimelineItem = ({
-  icon,
-  title,
-  description,
-  time,
-  children,
-  isLast,
-  name,
-}) => (
+const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
   <div className={styles.timelineItem}>
     <div className={styles.iconWrapper}>
       <img className={styles.icon} src={icon} alt={title} />
@@ -58,7 +41,6 @@ const TimelineItem = ({
         <span className={styles.title}>{title}</span>
         <span className={styles.time}>{time}</span>
       </div>
-      {/* <div className={styles.title}>{title}</div> */}
       {description && <p className={styles.desc}>{description}</p>}
       {children}
     </div>
@@ -74,14 +56,8 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const {
-    profileLeadViewData,
-    autobidLoader,
-    getActivies,
-    getSellerNotes,
-    sellerNotesLoader,
-    leadListLoader,
-  } = useSelector((state) => state.leadSetting);
+  const { profileLeadViewData, getActivies, getSellerNotes, leadListLoader } =
+    useSelector((state) => state.leadSetting);
   const user = {
     phoneNumber: profileLeadViewData?.leads?.phone,
     email: profileLeadViewData?.leads?.customer?.email,
@@ -131,66 +107,15 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     setEditNoteId(null);
   };
 
-  // const handleCancel = () => {
-  //   // Reset back to original note
-  //   setNote(getSellerNotes?.notes?.notes || "");
-  // };
-  // useEffect(() => {
-
-  //   const data = {
-  //     customer_id: profileLeadViewData?.leads?.customer_id,
-  //     lead_id: profileLeadViewData?.leads?.id,
-  //     user_id: userToken?.remember_tokens
-  //     ? userToken?.remember_tokens
-  //     : registerData?.remember_tokens,
-  //   };
-  //   dispatch(getLeadProfileRequestList(data));
-  // }, []);
-  // const handleSubmit = () => {
-
-  //   const notesValue = getSellerNotes?.notes;
-
-  //   const isNotesEmpty =
-  //     notesValue === undefined ||
-  //     notesValue === null ||
-  //     (typeof notesValue === "string" && notesValue.trim() === "");
-
-  //   const sellerNote = {
-  //     lead_id: profileLeadViewData?.leads?.id,
-  //     user_id: userToken?.remember_tokens
-  //       ? userToken?.remember_tokens
-  //       : registerData?.remember_tokens,
-  //     buyer_id: profileLeadViewData?.id,
-  //     note_id: isNotesEmpty ? 0 : getSellerNotes?.notes?.id || 0,
-  //     notes: note ?? getSellerNotes?.notes?.notes,
-  //   };
-
-  //   dispatch(addSellerNotesApi(sellerNote)).then((result) => {
-  //     if (result.success) {
-
-  //       showToast("success", result?.message);
-  //       setNote("")
-  //       const sellerData = {
-  //         lead_id: profileLeadViewData.leads.id,
-  //         user_id: userToken?.remember_tokens || registerData?.remember_tokens,
-  //         buyer_id: profileLeadViewData.id,
-  //       };
-
-  //       dispatch(getSellerNotesApi(sellerData))
-  //     }
-  //   });
-  // };
-  console.log(editNoteId, "editNoteId");
   const handleSubmit = (id) => {
     if (!note || note.trim() === "") {
       showToast("error", "Please give any note ");
-      return; // stop execution if note is empty
+      return;
     }
     const sellerNote = {
       lead_id: profileLeadViewData?.leads?.id,
       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
-      // note_id: editNoteId ?? 0, // 👈 use tracked note ID
       notes: note,
     };
     if (editNoteId) {
@@ -205,7 +130,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       if (result) {
         showToast("success", result?.message);
         setNote("");
-        setEditNoteId(null); // 👈 clear edit state
+        setEditNoteId(null);
 
         const sellerData = {
           lead_id: profileLeadViewData.leads.id,
@@ -223,7 +148,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       lead_id: profileLeadViewData?.leads?.id,
       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
       buyer_id: profileLeadViewData?.id,
-      // note_id: editNoteId ?? 0, // 👈 use tracked note ID
       notes: note,
     };
     if (editNoteId) {
@@ -238,7 +162,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       if (result) {
         showToast("success", "Notes Removed Successfully");
         setNote("");
-        setEditNoteId(null); // 👈 clear edit state
+        setEditNoteId(null);
 
         const sellerData = {
           lead_id: profileLeadViewData.leads.id,
@@ -249,20 +173,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
         dispatch(getSellerNotesApi(sellerData));
       }
     });
-
-    // // implement your delete logic here, example:
-    // dispatch(deleteNoteApi({ note_id: id })).then((res) => {
-    //   if (res.success) {
-    //     showToast("success", result?.message);
-    //     const sellerData = {
-    //       lead_id: profileLeadViewData.leads.id,
-    //       user_id: userToken?.remember_tokens || registerData?.remember_tokens,
-    //       buyer_id: profileLeadViewData.id,
-    //     };
-
-    //     dispatch(getSellerNotesApi(sellerData));
-    //   }
-    // });
   };
 
   useEffect(() => {
@@ -283,7 +193,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
   }, [profileLeadViewData]);
 
   const handleStatusChange = (e) => {
-    const selectedStatus = e.target.value.toLowerCase(); // ensure lowercase
+    const selectedStatus = e.target.value.toLowerCase();
     setStatus(selectedStatus);
 
     const addHiredData = {
@@ -299,8 +209,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
         if (result) {
           showToast("success", result?.message);
           const data = {
-            // customer_id: profileLeadViewData?.leads?.customer_id,
-            // lead_id: profileLeadViewData?.leads?.id,
             user_id: userToken?.remember_tokens
               ? userToken?.remember_tokens
               : registerData?.remember_tokens,
@@ -323,11 +231,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       showToast("error", "Phone number is not available.");
     }
   };
-  console.log(getSellerNotes?.notes?.notes, "getSellerNotes");
 
   const formatPhoneNumber = (phone) => {
     if (!phone) return "";
-    // agar already +44 hai to dobara na lagaye
     if (phone.startsWith("+44")) return phone;
     return `+44${phone}`;
   };
@@ -372,10 +278,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
             </div>
             <div className={styles.dropdownMoblieBox}>
               <div className={styles.dropdownMainBox}>
-                {/* // <div className={styles.lastActivityText}>
-                //   Purchase Type {" "}
-                //   <span>{profileLeadViewData?.leads?.purchase_type}</span>
-                // </div> */}
                 {profileLeadViewData?.leads?.purchase_type && (
                   <>
                     <span className={styles.currentStatusText}>
@@ -384,7 +286,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                     <select
                       className={`${styles.selectBox} ${styles.customSelects}`}
                       value={profileLeadViewData?.leads?.purchase_type}
-                      disabled // disable to make it readonly
+                      disabled
                     >
                       <option value={profileLeadViewData?.leads?.purchase_type}>
                         {profileLeadViewData?.leads?.purchase_type}
@@ -504,38 +406,11 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
               </div>
             )}
             <div className={styles.locationTag}>
-              {/* <img src={locallistImgs} alt="credit icon" /> */}
               <span className={styles.creditsAmount}>
                 {profileLeadViewData?.leads?.credit_score} credits
               </span>
             </div>
             <div className={styles.tabSection}>
-              {/* <div className={styles.tabButtons}>
-                <button
-                  className={`${styles.tabButton} ${
-                    activeTab === "activity" ? styles.activeTab : ""
-                  }`}
-                  onClick={() => setActiveTab("activity")}
-                >
-                  Activity
-                </button>
-                <button
-                  className={`${styles.tabButton} ${
-                    activeTab === "lead" ? styles.activeTab : ""
-                  }`}
-                  onClick={() => setActiveTab("lead")}
-                >
-                  Lead
-                </button>
-                <button
-                  className={`${styles.tabButton} ${
-                    activeTab === "notes" ? styles.activeTab : ""
-                  }`}
-                  onClick={() => setActiveTab("notes")}
-                >
-                  Notes
-                </button>
-              </div> */}
               <div className={styles.tabButtons}>
                 <button
                   className={styles.tabButton}
@@ -614,11 +489,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                         description={item.description}
                         time={moment(item.updated_at).format("hh:mm")}
                         isLast={index === getActivies.length - 1}
-                        // name={
-                        //   profileLeadViewData?.id === item?.from_user_id
-                        //     ? "You"
-                        //     : profileLeadViewData?.name
-                        // }
                       >
                         {item.children}
                       </TimelineItem>
@@ -654,54 +524,18 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                                 style={{ display: "flex", alignItems: "start" }}
                               >
                                 <div className={styles.bullet}>•</div>
-                                <span
-                                  className={styles.questionText}
-                                  // style={{ fontWeight: 600, marginTop: "12px",marginLeft:"12px" }}
-                                >
+                                <span className={styles.questionText}>
                                   {" "}
                                   {question}
                                 </span>
                               </div>
                               <hr className={styles.hrline} />
-                              <p
-                                // style={{ marginLeft: "20px", fontSize: "16px", fontWeight: 600, color: "#828282" }}
-                                className={styles.answerText}
-                              >
-                                {answer}
-                              </p>
+                              <p className={styles.answerText}>{answer}</p>
                             </div>
                           )
                         );
                       })()}
                     </div>
-                    {/* {(() => {
-        const uniqueQuestionsMap = new Map();
-
-        getPendingLeadList?.forEach((item) => {
-          const questionsArray = item?.questions
-            ? JSON.parse(item.questions)
-            : [];
-
-          questionsArray.forEach((qna) => {
-            if (!uniqueQuestionsMap.has(qna.ques)) {
-              uniqueQuestionsMap.set(qna.ques, qna.ans);
-            }
-          });
-        });
-
-        return Array.from(uniqueQuestionsMap.entries()).map(
-          ([question, answer], index) => (
-            <div key={index} className={styles.questionBlock}>
-              <div className={styles.questionRow}>
-                <span className={styles.bullet}>•</span>
-                <span className={styles.questionText}  style={{ fontWeight: 600, marginTop: "12px" }}>{question}</span>
-              </div>
-              <hr className={styles.hrline} />
-              <p style={{ marginLeft: "20px",fontSize:"16px",fontWeight:600,color:"#828282" }}>{answer}</p>
-            </div>
-          )
-        );
-      })()} */}
 
                     <div>
                       <LeadMap
@@ -714,62 +548,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                 )}
 
                 {activeTab === "notes" && (
-                  // <div className={styles.notesContent}>
-                  //   <div className={styles.mainNotesBox}>
-                  //     {
-                  //       getSellerNotes?.notes?.map((item, index) => {
-                  //         return (
-                  //           <>
-
-                  //             <div
-                  //               key={item?.id}
-                  //               className={styles.notesCard}
-                  //               onClick={() => {
-                  //                 setNote(item?.notes);
-                  //                 setEditNoteId(item?.id);
-                  //               }}
-                  //             >
-                  //               {item.notes}
-                  //             </div>
-                  //           </>
-                  //         )
-                  //       })
-                  //     }
-                  //   </div>
-                  //   <div className={styles.notesInner}>
-                  //     <textarea
-                  //       className={styles.textArea}
-                  //       placeholder="Enter your notes here..."
-                  //       onChange={(e) => setNote(e.target.value)}
-                  //       value={note}
-                  //     />
-                  //     <div className={styles.buttonGroup}>
-                  //       <button
-                  //         className={styles.CancelBtn}
-                  //         onClick={handleCancel}
-                  //       >
-                  //         Cancel
-                  //       </button>
-                  //       <button
-                  //         className={styles.UpdateBtn}
-                  //         onClick={handleSubmit}
-                  //       >
-                  //         {sellerNotesLoader ? (
-                  //           <Spin
-                  //             indicator={
-                  //               <LoadingOutlined
-                  //                 spin
-                  //                 style={{ color: "white" }}
-                  //               />
-                  //             }
-                  //           />
-                  //         ) : (
-                  //           "Update"
-                  //         )}
-                  //       </button>
-                  //     </div>
-                  //   </div>
-                  // </div>
                   <div className={styles.notesContent}>
                     <div className={styles.mainNotesBox}>
                       {getSellerNotes?.notes?.map((item, index) => (
@@ -819,11 +597,6 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                           className={styles.UpdateBtn}
                           onClick={() => handleSubmit()}
                         >
-                          {/* {sellerNotesLoader ? (
-          <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
-        ) : (
-          "Update"
-        )} */}
                           Update
                         </button>
                       </div>

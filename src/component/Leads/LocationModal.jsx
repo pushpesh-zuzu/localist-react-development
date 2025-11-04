@@ -5,15 +5,7 @@ import iIcon from "../../assets/Images/iIcon.svg";
 import { Select } from "antd";
 import { googleAPI } from "../../Api/axiosInstance";
 
-const LocationModal = ({
-  open,
-  isEditing,
-  locationData,
-  onChange,
-  onCancel,
-  onNext,
-  onClose,
-}) => {
+const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
   const { Option } = Select;
   const inputRef = useRef(null);
   const mapRef = useRef(null);
@@ -29,27 +21,18 @@ const LocationModal = ({
 
   useEffect(() => {
     if (locationData?.coordinates) {
-      console.log(
-        locationData,
-        JSON.parse(locationData?.coordinates),
-        mapCenter,
-        "isEditing"
-      );
-
       setMapCenter(JSON.parse(locationData?.coordinates));
     }
   }, [locationData?.coordinates]);
 
-  //  Function to draw circle based on distance
   const drawCircle = (center) => {
     if (!window.google || !mapInstance.current) return;
 
-    // Clear previous circle if exists
     if (circleRef.current) {
       circleRef.current.setMap(null);
     }
 
-    const radiusInMeters = (parseFloat(locationData.miles1) || 1) * 1609.34; // 1 mile = 1609.34 meters
+    const radiusInMeters = (parseFloat(locationData.miles1) || 1) * 1609.34;
 
     circleRef.current = new window.google.maps.Circle({
       center,
@@ -131,7 +114,6 @@ const LocationModal = ({
         if (postalCode) {
           onChange({ target: { name: "postcode", value: postalCode } });
           onChange({ target: { name: "city", value: cityName || "" } });
-          // onChange({ target: { name: "coordinates", value: "" } })
           inputRef.current.value = postalCode;
 
           if (lat && lng) {
@@ -163,7 +145,6 @@ const LocationModal = ({
     loadGoogleMapsScript();
   }, [open, mapCenter]);
 
-  // ✅ Geocode on open if postcode is present
   useEffect(() => {
     if (open && mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
@@ -176,8 +157,6 @@ const LocationModal = ({
           if (status === "OK" && results && results[0]) {
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng();
-            // const lat =mapCenter.lat;
-            // const lng = mapCenter.lng;
             const newCenter = { lat, lng };
             setMapCenter(newCenter);
 
@@ -254,7 +233,6 @@ const LocationModal = ({
                 onChange({ target: { name: "miles1", value } })
               }
               className={styles.customSelect}
-              // style={{ width: "100%" }}
               dropdownMatchSelectWidth={false}
             >
               <Option value="1">1 mile</Option>

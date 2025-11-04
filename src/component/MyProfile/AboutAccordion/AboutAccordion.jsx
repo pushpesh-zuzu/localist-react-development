@@ -1,10 +1,6 @@
-// company_logo, company_name, profile_image, name, company_email, company_phone, company_website, company_location, company_locaion_reason, company_size, company_total_years, about_company
-
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./AboutAccordion.module.css";
 import defaultImage from "../../../assets/Images/DefaultProfileImage.svg";
-import iIcon from "../../../assets/Images/iIcon.svg";
-import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateSellerProfile,
@@ -26,32 +22,23 @@ import {
   fetchCompanyDetails,
 } from "../../../store/Company/companyLookup";
 import Cropper from "react-easy-crop";
-import { usePrompt } from "../../../utils/usePrompt";
 import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
 
 const AboutAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const {
-    sellerLoader,
-    updateSuccess,
-    updateError,
-    loading,
-    error,
-    success,
-    isDirtyRedux,
-  } = useSelector((state) => state.myProfile);
+  const { updateSuccess, updateError, loading, error, success, isDirtyRedux } =
+    useSelector((state) => state.myProfile);
   const { userToken } = useSelector((state) => state.auth);
   const { registerData, errorCheckComanyName } = useSelector(
     (state) => state.findJobs
   );
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
-  // const companyNameData = useSelector((state)=> state.company)
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
   const [formState, setFormState] = useState({
-    type: "about", // default from given sample
+    type: "about",
     tiktok_link: "",
     insta_link: "",
     linkedin_link: "",
@@ -95,8 +82,6 @@ const AboutAccordion = ({ details }) => {
     service_delete_id: "",
   });
 
-  console.log(formState, "formstate");
-
   const [errors, setErrors] = useState({});
   const fileInputRefs = {
     company_logo: useRef(),
@@ -104,14 +89,8 @@ const AboutAccordion = ({ details }) => {
     accre_image: useRef(),
     company_photos: useRef(),
   };
-  console.log(
-    details?.profile_image,
-    formState.company_size,
-    details?.company_size,
-    "details"
-  );
 
-  const [imageSrc, setImageSrc] = useState(null); // Uploaded/Webcam image
+  const [imageSrc, setImageSrc] = useState(null);
   const [isCropping, setIsCropping] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -127,11 +106,8 @@ const AboutAccordion = ({ details }) => {
     details?.business_profile_name
   );
 
-  console.log(details);
-
   useEffect(() => {
     if (details?.id) {
-      // setFormState(details)
       setFormState({
         ...formState,
         company_email: details?.company_email,
@@ -150,7 +126,6 @@ const AboutAccordion = ({ details }) => {
         profile_imagePreview: details?.profile_image
           ? `${BASE_IMAGE}/users/${details?.profile_image}`
           : null,
-        // company_logoPreview:{`https://localists.zuzucodes.com/admin/storage/app/public/images/users/${details?.company_logo}`},
 
         company_logoPreview: details?.company_logo
           ? `${BASE_IMAGE}/users/${details?.company_logo}`
@@ -159,26 +134,20 @@ const AboutAccordion = ({ details }) => {
     }
   }, [details]);
 
-  console.log(details, "detailssssssss");
-
   useEffect(() => {
     let data = { ...formState };
 
     if (companyData.company_name) {
       data.company_name = companyData?.company_name;
-      // setFormState({...formState,company_name:companyData?.company_name})
     }
     if (companyData?.registered_office_address) {
       data.company_location =
         companyData?.registered_office_address?.address_line_1;
-      // setFormState({...formState,company_location:companyData?.registered_office_address?.address_line_1})
     }
     if (companyData.company_name || companyData?.registered_office_address) {
       setFormState({ ...data });
     }
   }, [companyData]);
-
-  const previewFile = (file) => URL.createObjectURL(file);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -187,7 +156,6 @@ const AboutAccordion = ({ details }) => {
 
     const { name } = e.target;
 
-    // For profile image, open cropper modal
     if (name === "profile_image" || name === "company_logo") {
       const reader = new FileReader();
       reader.onload = () => {
@@ -201,7 +169,6 @@ const AboutAccordion = ({ details }) => {
       return;
     }
 
-    // For company photos
     if (name === "company_photos") {
       const arr = Array.from(e.target.files);
       setFormState((prev) => ({
@@ -212,7 +179,6 @@ const AboutAccordion = ({ details }) => {
       return;
     }
 
-    // For company logo & accreditations
     setFormState((prev) => ({
       ...prev,
       [name]: file,
@@ -224,26 +190,22 @@ const AboutAccordion = ({ details }) => {
     setIsDirty(true);
     const { name, value } = e.target;
 
-    // Base update for all fields
     setFormState((prev) => ({ ...prev, [name]: value }));
 
-    // Optional: Clean up phone input
     if (name === "company_phone") {
-      const newValue = value.replace(/[^0-9]/g, ""); // remove non-digits
+      const newValue = value.replace(/[^0-9]/g, "");
       setFormState((prev) => ({ ...prev, [name]: newValue }));
     }
 
-    // Handle company reg number — reset company name & call API
     if (name === "company_reg_number") {
       setFormState((prev) => ({
         ...prev,
         [name]: value,
-        company_name: "", // reset company_name
+        company_name: "",
       }));
       phoneAPI(value);
     }
 
-    // Debounced location and name handlers
     if (name === "company_location") {
       setDebouncedCompanyLocation(value);
     }
@@ -252,7 +214,6 @@ const AboutAccordion = ({ details }) => {
       setDebouncedCompanyName(value);
     }
 
-    // Add this part to store business_profile_name in formState
     if (name === "business_profile_name") {
       setFormState((prev) => ({ ...prev, business_profile_name: value }));
       setBusinessName(value);
@@ -262,8 +223,6 @@ const AboutAccordion = ({ details }) => {
   useEffect(() => {
     dispatch(setIsDirtyRedux(isDirty));
   }, [isDirty, dispatch]);
-
-  console.log(isDirtyRedux, "isDirtyRedux");
 
   const handleRedirect = (path) => {
     if (isDirtyRedux) {
@@ -279,7 +238,7 @@ const AboutAccordion = ({ details }) => {
     const handleBeforeUnload = (e) => {
       if (isDirtyRedux) {
         e.preventDefault();
-        e.returnValue = ""; // Chrome requires returnValue to be set
+        e.returnValue = "";
         handleRedirect();
       }
     };
@@ -290,7 +249,6 @@ const AboutAccordion = ({ details }) => {
     };
   }, [isDirtyRedux]);
 
-  // Debounce for company_location
   useEffect(() => {
     if (debouncedCompanyLocation.length !== 10) return;
 
@@ -307,8 +265,6 @@ const AboutAccordion = ({ details }) => {
     return () => clearTimeout(timeout);
   }, [debouncedCompanyLocation]);
 
-  // Debounce for company_name
-
   useEffect(() => {
     if (companyError && formState.company_reg_number !== "") {
       showToast("error", companyError);
@@ -319,7 +275,7 @@ const AboutAccordion = ({ details }) => {
     }
 
     if (companyError) {
-      dispatch(setCompanyError(null)); // Always clear after handling
+      dispatch(setCompanyError(null));
     }
   }, [companyError, formState.company_reg_number, dispatch]);
 
@@ -343,9 +299,6 @@ const AboutAccordion = ({ details }) => {
   }, [debouncedCompanyName]);
 
   const phoneAPI = (regNo) => {
-    // const regNo = formState.company_reg_number;
-
-    // Only call API if exactly 8 characters
     if (regNo && regNo.length === 8) {
       dispatch(fetchCompanyDetails(regNo, user_id));
     }
@@ -354,14 +307,11 @@ const AboutAccordion = ({ details }) => {
   const validate = () => {
     const temp = {};
 
-    // 1. Always required
     if (!formState.name) {
       temp.name = "Please fill this Required";
     }
 
-    // 2. If company_reg_number is filled
     if (formState.company_reg_number) {
-      // 2.a company_name required
       if (!formState.company_name) {
         temp.company_name = "Company Name is required";
       }
@@ -377,10 +327,6 @@ const AboutAccordion = ({ details }) => {
 
     setErrors(temp);
     return Object.keys(temp).length === 0;
-  };
-
-  const handleCheckboxChange = (e) => {
-    setHideAddress(e.target.checked);
   };
 
   const handleCaptureWebcam = async (target) => {
@@ -408,33 +354,19 @@ const AboutAccordion = ({ details }) => {
     setCrop({ x: 0, y: 0 });
   };
 
-  const onCropComplete = (_, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  };
-  const createImage = (url) =>
-    new Promise((resolve, reject) => {
-      const image = new Image();
-      image.addEventListener("load", () => resolve(image));
-      image.addEventListener("error", (err) => reject(err));
-      image.setAttribute("crossOrigin", "anonymous");
-      image.src = url;
-    });
-
   const getCroppedImg = (imageSrc, croppedAreaPixels) => {
     return new Promise((resolve, reject) => {
       const image = new Image();
-      image.crossOrigin = "anonymous"; // Important for CORS issues
+      image.crossOrigin = "anonymous";
       image.src = imageSrc;
 
       image.onload = () => {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d");
 
-        // Set canvas size to the cropped area size
         canvas.width = croppedAreaPixels.width;
         canvas.height = croppedAreaPixels.height;
 
-        // Draw the cropped image on canvas
         ctx.drawImage(
           image,
           croppedAreaPixels.x,
@@ -447,7 +379,6 @@ const AboutAccordion = ({ details }) => {
           croppedAreaPixels.height
         );
 
-        // Generate blob + dataURL
         canvas.toBlob((blob) => {
           if (!blob) {
             reject(new Error("Canvas is empty"));
@@ -462,39 +393,6 @@ const AboutAccordion = ({ details }) => {
     });
   };
 
-  // const handleApplyCropped = async () => {
-  //   if (!imageSrc || !croppedAreaPixels) return;
-
-  //   try {
-  //     const { blob, dataUrl } = await getCroppedImg(
-  //       imageSrc,
-  //       croppedAreaPixels
-  //     );
-  //     const croppedFile = new File(
-  //       [blob],
-  //       // "profile_image.jpg",
-  //       `${croppingTarget}.jpg`,
-  //       {
-  //         type: "image/jpeg",
-  //       }
-  //     );
-
-  //     setFormState((prev) => ({
-  //       ...prev,
-  //       // profile_image: croppedFile,
-  //       // profile_imagePreview: dataUrl,
-  //       [croppingTarget]: croppedFile,
-  //       [`${croppingTarget}Preview`]: dataUrl,
-  //     }));
-
-  //     setCroppedPreview(dataUrl);
-  //     setIsCropping(false); // Close the crop modal
-  //     setCroppingTarget(""); // reset
-  //   } catch (error) {
-  //     console.error("Error while cropping image:", error);
-  //   }
-  // };
-
   const handleApplyCropped = async () => {
     if (!imageSrc || !croppedAreaPixels) return;
 
@@ -504,16 +402,13 @@ const AboutAccordion = ({ details }) => {
         croppedAreaPixels
       );
 
-      // ✅ Ensure it's a valid Blob
       const finalBlob =
         blob instanceof Blob ? blob : new Blob([blob], { type: "image/jpeg" });
 
-      // ✅ Create a new File object safely
       const croppedFile = new File([finalBlob], `${croppingTarget}.jpg`, {
         type: "image/jpeg",
       });
 
-      // ✅ Update formState & preview
       setFormState((prev) => ({
         ...prev,
         [croppingTarget]: croppedFile,
@@ -522,7 +417,7 @@ const AboutAccordion = ({ details }) => {
 
       setCroppedPreview(dataUrl);
       setIsCropping(false);
-      setCroppingTarget(""); // Reset after applying
+      setCroppingTarget("");
     } catch (error) {
       console.error("Error while cropping image:", error);
     }
@@ -562,7 +457,6 @@ const AboutAccordion = ({ details }) => {
     });
   };
 
-  // Show toast on success/failure
   useEffect(() => {
     if (updateSuccess) {
       toast.success("Profile updated successfully!");
@@ -594,7 +488,7 @@ const AboutAccordion = ({ details }) => {
         dispatch(setRegisterData(registerDatas));
       }
 
-      dispatch(clearUpdateStatus()); // reset flags
+      dispatch(clearUpdateStatus());
     } else if (updateError) {
       toast.error(`Error: ${updateError}`);
       dispatch(clearUpdateStatus());
@@ -646,9 +540,6 @@ const AboutAccordion = ({ details }) => {
           onChange={handleInputChange}
           placeholder="Enter your company name"
         />
-        {/* {errors.company_name && (
-          <p style={{ color: "red" }}>{errors.company_name}</p>
-        )} */}
       </div>
 
       <div className={styles.card}>
@@ -750,16 +641,6 @@ const AboutAccordion = ({ details }) => {
               </div>
             </div>
           )}
-
-          {/* {croppedPreview && (
-            <div className={styles.previewWrap}>
-              <img
-                src={croppedPreview}
-                alt="Cropped"
-                className={styles.previewImg}
-              />
-            </div>
-          )} */}
         </div>
         <label className={styles.label}>Name</label>
         <input
@@ -913,21 +794,7 @@ const AboutAccordion = ({ details }) => {
             />
           </>
         )}
-        {/* <div className={styles.checkboxRow}>
-          <input
-            type="checkbox"
-            id="dontShow"
-            checked={hideAddress}
-            onChange={handleCheckboxChange}
-          />
-          <label className={styles.DontLabel} htmlFor="dontShow">
-            Hide this address from my public profile{" "}
-            <span className={styles.infoIcon}>
-              <img src={iIcon} alt="" />
-            </span>
-          </label>
-        </div> */}
-        {/* <hr className={styles.hrline} /> */}
+
         <label className={styles.label}>
           Can’t provide a specific location?
         </label>
@@ -954,7 +821,6 @@ const AboutAccordion = ({ details }) => {
               className={`${styles.input} ${styles.customSelect}`}
               name="company_size"
               value={details?.company_size}
-              // value={String(formState.company_size)}
               onChange={handleInputChange}
             >
               <option value="">How many people work in your business</option>
@@ -989,13 +855,9 @@ const AboutAccordion = ({ details }) => {
           placeholder="What makes your business stand out? Tell customers why they should choose you."
         />
         <p className={styles.charLimit}>Minimum 20 characters</p>
-        {/* <a href="#!" className={styles.link}>
-         Use our free online AI tool to help you write a great business description
-        </a> */}
       </div>
 
       <div className={styles.buttonRow}>
-        {/* <button className={styles.cancelBtn} type="button">Cancel</button> */}
         <button
           className={styles.saveBtn}
           style={{ marginLeft: "auto" }}

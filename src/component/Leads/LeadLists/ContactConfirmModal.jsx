@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ContactConfirmModal.module.css";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,7 +17,6 @@ import arrowIcons from "../../../assets/Icons/arrow-down.svg";
 import AddCardModal from "../../MyCredit/MyPaymentDetails/AddCardModal";
 import localistImg from "../../../assets/Images/Leads/localistImg.svg";
 import getHired from "../../../assets/Images/Setting/newLogoCredit.svg";
-import visaImg from "../../../assets/Images/Setting/Visa.svg";
 import useWindowHeight from "../../../utils/customHeigth";
 const dummyCreditPlanList = [
   {
@@ -26,18 +25,11 @@ const dummyCreditPlanList = [
     price: 49.99,
     per_credit: 1.0,
   },
-  // {
-  //   description: 'Popular Choice',
-  //   no_of_leads: 30,
-  //   price: 34.99,
-  //   per_credit: 1.16,
-  // },
 ];
 
 const ContactConfirmModal = ({
   onClose,
   enoughCredit,
-  confirmModal,
   details,
   newLeadApi,
 }) => {
@@ -62,18 +54,13 @@ const ContactConfirmModal = ({
     creditPlanList && creditPlanList.length > 0
       ? creditPlanList
       : dummyCreditPlanList;
-  console.log(creditPlanList, "creditItems");
-  const handleNavigate = () => {
-    navigate("/mycredits");
-  };
+
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
   };
   useEffect(() => {
     dispatch(getCreditPlanList());
   }, []);
-
-  console.log(totalCredit, "12");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -83,7 +70,6 @@ const ContactConfirmModal = ({
   }, []);
 
   const addManualBidData = () => {
-    console.log(details, "sel");
     const formData = new FormData();
     formData.append("buyer_id", details?.customer_id);
     formData.append(
@@ -116,7 +102,6 @@ const ContactConfirmModal = ({
   };
 
   const handleBuyNow = (item) => {
-    console.log(item, "itemee");
     setActiveLoaderId(item?.id);
 
     let credits = item.no_of_leads;
@@ -126,7 +111,6 @@ const ContactConfirmModal = ({
         ? 0
         : Math.floor((item?.price * 20) / 100);
 
-    // ✅ If coupon exists and is percentage-based
     if (typeof addcoupanList === "string" && addcoupanList.includes("%")) {
       const discountPercent = parseFloat(addcoupanList.replace("%", ""));
       const discountAmount = Math.floor(
@@ -145,8 +129,6 @@ const ContactConfirmModal = ({
       top_up: isChecked ? 1 : 0,
     };
 
-    console.log(creditData, item?.no_of_leads, credits, vatTotal, "creditData");
-
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
@@ -155,17 +137,11 @@ const ContactConfirmModal = ({
         onClose(true);
         dispatch(getInvoiceBillingListApi());
       } else if (result?.success === false) {
-        // navigate("/payment-details");
         setCreditModal(true);
       }
     });
   };
 
-  console.log(customHeigth, "---------");
-
-  const getWidth = (des = "") => {
-    return `${des.length + 150}px`;
-  };
   return (
     <>
       {creditModal ? (
@@ -179,15 +155,11 @@ const ContactConfirmModal = ({
         />
       ) : (
         <div className={styles.modalOverlay}>
-          <div
-            className={styles.modal}
-            // style={{ height: customHeigth <= 820 ? customHeigth - 20 : "auto" }}
-          >
+          <div className={styles.modal}>
             <button className={styles.closeButton} onClick={() => onClose()}>
               ×
             </button>
             <div className={styles.mainBox}>
-              {/* <h2>{enoughCredit != 0 ? `You need ${totalCredit - details?.credit_score} credits to contact ${details?.customer?.name}` : "Please purchase a Credit Pack"}</h2> */}
               <h2>
                 {enoughCredit != 0
                   ? `You need ${
@@ -306,9 +278,6 @@ const ContactConfirmModal = ({
                     <span className={styles.discountBadge} style={{}}>
                       {item?.description ? item?.description : item?.name}
                     </span>
-                    {/* <span className={styles.discountBadges}>
-                      Your Exclusive Sign Up Offer
-                    </span> */}
                   </div>
 
                   <div className={styles.creditDetails}>
@@ -345,21 +314,6 @@ const ContactConfirmModal = ({
                       }
                     </div>
                   )}
-                  {/* <div className={styles.visaCard}>
-                      <div className={styles.visaText}><img src={visaImg} alt='img' /> Buy more credits and get a bigger discount </div>
-                      <div className={styles.changeText}>Change</div>
-                    </div> */}
-
-                  {/* <div className={styles.visaCard}>
-                    <div className={styles.visaText}>
-                      <img src={visaImg} alt="VISA" />
-                      <span className={styles.verticalLine}></span>
-                      <span className={styles.message}>
-                        Buy more credits and get a bigger discount
-                      </span>
-                    </div>
-                    <div className={styles.changeText}>Change</div>
-                  </div> */}
 
                   <div className={styles.buttonGroup}>
                     <button

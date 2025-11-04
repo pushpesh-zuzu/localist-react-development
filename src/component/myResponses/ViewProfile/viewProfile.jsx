@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BASE_IMAGE_URL, showToast } from "../../../utils";
 import styles from "./viewProfile.module.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -25,25 +25,15 @@ const ViewProfile = () => {
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const [status, setStatus] = useState("pending");
-  console.log(status, "status");
   const [activeTab, setActiveTab] = useState("tab1");
   const user = {
     phoneNumber: "918123456789",
     email: "test@example.com",
   };
-  console.log("pre-mount");
-
-  useEffect(() => {
-    console.log("mount");
-    return () => {
-      console.log("unmount");
-    };
-  }, []);
 
   const handleBack = () => {
     navigate("/sellers/leads/my-responses");
   };
-  console.log(id, profileLeadViewData?.leads?.status, "profileId");
   useEffect(() => {
     const data = {
       customer_id: profileId?.profileId,
@@ -65,7 +55,7 @@ const ViewProfile = () => {
     dispatch(getBuyerActivitiesApi(activityData));
   }, []);
   const handleStatusChange = (e) => {
-    const selectedStatus = e.target.value.toLowerCase(); // ensure lowercase
+    const selectedStatus = e.target.value.toLowerCase();
     setStatus(selectedStatus);
 
     const addHiredData = {
@@ -138,21 +128,13 @@ const ViewProfile = () => {
   return (
     <>
       <>
-        <h1>bhavya</h1>
         <div className={styles.container}>
           <div className={styles.headerWrapper}>
             <div className={styles.mainSlectBox}>
               <button className={styles.backBtn} onClick={handleBack}>
                 Back
               </button>
-              {/* <div>
-                                <span className={styles.currentStatusText}>Current Status</span>
-                                <select className={styles.selectBox} value={status} onChange={handleStatusChange}>
-                                    <option value="pending">Pending</option>
-                                    <option value="hired">Hired</option>
-                                    <option value="rejected">Rejected</option>
-                                </select>
-                            </div> */}
+
               <div>
                 <span className={styles.currentStatusText}>Current Status</span>
                 <select
@@ -163,7 +145,6 @@ const ViewProfile = () => {
                 >
                   <option value="pending">Pending</option>
                   <option value="hired">Hired</option>
-                  {/* <option value="rejected">Rejected</option> */}
                 </select>
               </div>
             </div>
@@ -182,12 +163,10 @@ const ViewProfile = () => {
             />
           ) : (
             <>
-              {/* {profileLeadViewData?.map((item) => ( */}
               <div className={styles.card} key={profileLeadViewData?.id}>
                 <div className={styles.cardLeft}>
                   <div className={styles.imageWrapper}>
                     <img
-                      // src={item.profile_image ? item.profile_image : DummyImage}
                       src={
                         profileLeadViewData?.profile_image
                           ? `${BASE_IMAGE_URL}${profileLeadViewData?.profile_image}`
@@ -200,28 +179,18 @@ const ViewProfile = () => {
                   <div className={styles.details}>
                     <div className={styles.header}>
                       <div>
-                        <h3>
-                          {/* <img src={GreenTickIcon} alt="" /> */}
-                          {profileLeadViewData?.leads?.category?.name}
-                        </h3>
-                        <p>
-                          {/* <img src={AutoBidLocationIcon} alt="" /> */}
-                          {profileLeadViewData?.email}
-                        </p>
+                        <h3>{profileLeadViewData?.leads?.category?.name}</h3>
+                        <p>{profileLeadViewData?.email}</p>
                         <p>{profileLeadViewData?.phone}</p>
                       </div>
                       <div className={styles.sidebar}>
                         <div className={styles.credits}>
-                          {/* <span className={styles.stars}>★★★★★</span> */}
-                          {/* <span className={styles.ratingCount}>125</span> */}
                           {profileLeadViewData?.leads?.credit_score} Credits
                         </div>
                       </div>
                     </div>
 
-                    <div className={styles.badges}>
-                      {/* <span>{profileLeadViewData.service_name}</span> */}
-                    </div>
+                    <div className={styles.badges}></div>
 
                     {profileLeadViewData &&
                     profileLeadViewData?.leads &&

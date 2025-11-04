@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./BuyerRegistrationForLandscapingPPC.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -16,14 +16,12 @@ import QuestionAnswerPage from "../../BuyerRegistrationPages/QuestionAnswerPage/
 import EmailMatchPage from "../../BuyerRegistrationPages/EmailMatchPage/EmailMatchPage";
 import ReEnterMobileNumber from "../../common/ReEnterMobileNumber/ReEnterMobileNumber";
 import { handleScrollToBottom } from "../../../utils/scroll";
-// import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 const BuyerRegistrationForLandscapingPPC = ({
   closeModal,
   serviceId = 43,
   serviceName = "",
   postcode,
-  city,
   postalCodeValidate,
   cancelHeading = "Don’t forget to check prices!",
   cancelPara = `Simply answer a few questions about your requirement, and we will match you with local professionals in seconds! `,
@@ -32,9 +30,7 @@ const BuyerRegistrationForLandscapingPPC = ({
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
-
   const [getServiceState, setGetServiceState] = useState(null);
-
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
@@ -44,13 +40,9 @@ const BuyerRegistrationForLandscapingPPC = ({
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
-  // console.log(buyerStep, "buyerStep");
 
-  const { userToken, adminToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader, authToken } = useSelector(
-    (state) => state.findJobs
-  );
-  // console.log(registerData, "registerData");
+  const { userToken } = useSelector((state) => state.auth);
+  const { authToken } = useSelector((state) => state.findJobs);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
@@ -77,26 +69,18 @@ const BuyerRegistrationForLandscapingPPC = ({
     setGetServiceState(service);
   };
 
-  // useEffect(() => {
-  //   const initialStep = isAdminOrRemembered ? 2 : isStartWithQuestionModal ? 0 : 1;
-  //   dispatch(setBuyerStep(initialStep));
-  // }, [dispatch, isAdminOrRemembered]);
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
-    // Jab buyerStep 7 ho jaye aur pendingModal tha, tab clear karo
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
-      console.log("Cleared pendingBuyerModal after reaching step 7");
     }
   }, [buyerStep]);
 
-  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
       const initialStep = isAdminOrRemembered ? 2 : 1;
@@ -104,21 +88,9 @@ const BuyerRegistrationForLandscapingPPC = ({
     }
   }, [dispatch, isAdminOrRemembered]);
 
-  // useEffect(() => {
-  //   if (buyerStep) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, [buyerStep]);
-
   useEffect(() => {
     if (shouldClose) {
       dispatch(setBuyerStep(1));
-      //   closeModal();
     }
   }, [shouldClose]);
 
@@ -130,7 +102,6 @@ const BuyerRegistrationForLandscapingPPC = ({
 
   useEffect(() => {
     if (buyerStep === 2) {
-      // Reset QuestionModal when it opens
       questionModalRef.current?.resetQuestions?.();
     }
   }, [buyerStep]);
@@ -140,7 +111,6 @@ const BuyerRegistrationForLandscapingPPC = ({
     setResetEmailFormTrigger(true);
     setResetServiceFormTrigger(true);
     setResetQasFormTrigger(true);
-    // closeModal();
   };
 
   useEffect(() => {
@@ -152,12 +122,10 @@ const BuyerRegistrationForLandscapingPPC = ({
       setIsLoadingQuestions(false);
     }
   }, [questionanswerData]);
-  console.log(buyerStep, "buyerStepbuyerStep");
   return (
     <div className={styles.modalContent}>
       {buyerStep === 1 && (
         <QuestionAnswerPage
-          // ref={questionModalRef}
           questions={questionanswerData}
           serviceName={serviceName}
           nextStep={nextStep}
@@ -209,8 +177,6 @@ const BuyerRegistrationForLandscapingPPC = ({
           formData={buyerRequest}
           open={true}
           isThankuPageOnlyShow={true}
-          // setShowConfirmModal={setShowConfirmModal}
-          // onClose={handleClose}
           setReEnterMobile={setReEnterMobile}
         />
       )}
@@ -234,7 +200,6 @@ const BuyerRegistrationForLandscapingPPC = ({
           previousStep={previousStep}
           onClose={handleClose}
           formData={buyerRequest}
-          // setShowConfirmModal={setShowConfirmModal}
         />
       )}
       {buyerStep === 7 && (

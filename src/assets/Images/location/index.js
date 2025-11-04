@@ -1,6 +1,3 @@
-// src/assets/Images/location/index.js
-
-
 import TaxPreparationImg from "./TaxPreparation.png";
 import TaxResolutionImg from "./TaxResolution.png";
 import PayrollServicesImg from "./PayrollServices.png";

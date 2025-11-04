@@ -139,20 +139,16 @@ const SearchProfessionals = ({ nextStep }) => {
         }
       });
 
-      // ✅ Dispatch API call
       dispatch(registerQuoteCustomer(dataToSend)).then((result) => {
         if (result) {
-          console.log("Auto-saved data sent successfully after reload.");
-          // Clear after successful send
           localStorage.removeItem("unsentQuoteData");
         }
       });
     }
   }, [dispatch]);
 
-  // ✅ New: validate postcode with our API (onChange)
   const debounceTimer = useRef(null);
-  const lastInvalidPinRef = useRef(""); // store last invalid postcode
+  const lastInvalidPinRef = useRef("");
 
   const handlePostcodeChange = (e) => {
     const value = e.target.value.trim().slice(0, 10);
@@ -163,7 +159,6 @@ const SearchProfessionals = ({ nextStep }) => {
 
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
 
-    // ✅ Only start validation after 500ms of no typing
     debounceTimer.current = setTimeout(async () => {
       if (value.length < 3) return;
 
@@ -185,9 +180,8 @@ const SearchProfessionals = ({ nextStep }) => {
           );
           setIsPostcodeSelected(true);
           setIsPincodeFromDropdown(true);
-          lastInvalidPinRef.current = ""; // reset invalid memory
+          lastInvalidPinRef.current = "";
         } else {
-          // ✅ Prevent repeated toast for same invalid postcode
           if (lastInvalidPinRef.current !== value) {
             showToast("error", "Please enter a valid postcode!");
             lastInvalidPinRef.current = value;
@@ -206,7 +200,6 @@ const SearchProfessionals = ({ nextStep }) => {
     }, 500);
   };
 
-  // ✅ Validation before continue (unchanged)
   const handleGetStarted = (requireValidationPin) => {
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
@@ -224,13 +217,7 @@ const SearchProfessionals = ({ nextStep }) => {
     const { id, name } = selectedService;
     dispatch(questionAnswerData({ service_id: id }));
     setSelectedServiceId({ id, name });
-    // dispatch(
-    //   setbuyerRequestData({
-    //     postcode: pincode,
-    //     service_id: id || "",
-    //     city: city,
-    //   })
-    // );
+
     setShow(true);
   };
 

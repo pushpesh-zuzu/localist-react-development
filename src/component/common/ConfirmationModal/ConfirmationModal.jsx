@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import styles from "./ConfirmationModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   registerUserData,
-//   searchService,
-//   setselectedServices,
-//   setService,
-// } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import {
-  clearSetbuyerRequestData,
-  createRequestData,
   registerQuoteCustomer,
 } from "../../../store/Buyer/BuyerSlice";
-import { clearAuthData, showToast } from "../../../utils";
-import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
+import { clearAuthData } from "../../../utils";
 import { extractAllParams } from "../../../utils/decodeURLParams";
-// import { showToast } from "../../../../../utils";
 
 const ConfirmationModal = ({
   onCancel,
-  handleInputChange,
   formData,
-  setShowConfirmModal,
-  confirmClose,
   onConfirm,
   cancelHeading = "Are you sure that you want to leave?",
   cancelPara = `We're asking a few questions so we can find you the right pros, and
@@ -35,13 +22,12 @@ const ConfirmationModal = ({
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
   const item = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach } = useSelector(
     (state) => state.buyer
   );
   const { userToken } = useSelector((state) => state.auth);
-  const { service, registerLoader, searchServiceLoader, selectedServices } =
+  const {  selectedServices } =
     useSelector((state) => state.findJobs);
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -57,25 +43,11 @@ const ConfirmationModal = ({
 
     return () => {
       clearTimeout(delayDebounce);
-      //   dispatch(setService([]));
     };
   }, [Input, dispatch]);
 
-  const handleSelectService = (item) => {
-    if (!selectedServices?.some((service) => service.id === item.id)) {
-      //   dispatch(setselectedServices([...selectedServices, item]));
-    }
-    setInput("");
-    // dispatch(setService([]));
-  };
+ 
 
-  //   const handleRemoveService = (id) => {
-  //     dispatch(
-  //       setselectedServices(
-  //         selectedServices?.filter((service) => service.id !== id)
-  //       )
-  //     );
-  //   };
   const validateForm = () => {
     let newErrors = {};
 
@@ -103,11 +75,9 @@ const ConfirmationModal = ({
       document.body.style.overflow = "auto";
     };
   }, [show]);
-  console.log(buyerRequest, formData, "buyerRequest");
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
 
-  // ✅ Ab saare parameters mil jayenge
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
   const gclid = allParams.gclid || "";
@@ -119,16 +89,7 @@ const ConfirmationModal = ({
 
   const handleSubmit = () => {
     if (!userToken) {
-      // const formData = new FormData();
-      // formData.append("email", buyerRequest?.email);
-      // formData.append("name", buyerRequest?.name);
-      // formData.append("phone", buyerRequest?.phone);
-      // formData.append("service_id", buyerRequest?.service_id);
-      // formData.append("postcode", buyerRequest?.postcode);
-      // // formData.append("questions", JSON.stringify(buyerRequest?.questions));
-      // formData.append("form_status", 0);
-      // // form_status: 1,
-      // // formData.append("recevive_online", consent ? 1 : 0);
+     
       const updatedAnswers = buyerRequest?.questions || [];
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
@@ -148,30 +109,10 @@ const ConfirmationModal = ({
       formData.append("keyword", keyword || "");
       formData.append("form_status", 0);
 
-      // dispatch(createRequestData(formData)).then((result) => {
-      //   if (result?.success) {
-      //     showToast("succes", result?.success);
-      //     // setShowConfirmModal(false)
-      //     localStorage.removeItem("barkToken");
-      //     localStorage.removeItem("barkUserToken");
-      //     localStorage.removeItem("registerDataToken");
-      //     localStorage.removeItem("registerTokens");
-      //     localStorage.removeItem("createRequestToken");
-      //     clearAuthData();
-      //     // dispatch(clearSetbuyerRequestData())
-      //     //        dispatch(clearBuyerRegisterFormData())
-
-      //     onConfirm();
-      //   }
-      //   // nextStep();
-      // });
+  
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          // console.log(result, "resultresult");
-          // showToast(
-          //   "success",
-          //   result?.message || "Customer registered successfully"
-          // );
+         
           localStorage.removeItem("barkToken");
           localStorage.removeItem("barkUserToken");
           localStorage.removeItem("registerDataToken");
@@ -182,19 +123,10 @@ const ConfirmationModal = ({
         }
       });
     } else {
-      // nextStep();
-      // showToast("error", result?.message || "Customer registered successfully");
-      console.log(errors, "error on confirm modal");
+     
     }
   };
 
-  const handleOpenModal = () => {
-    if (!validateForm()) return;
-    setShow(true);
-  };
-  const handleCloseModal = () => {
-    setShow(false);
-  };
 
   return (
     <div className={styles.modalOverlay}>

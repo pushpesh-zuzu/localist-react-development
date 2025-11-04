@@ -126,61 +126,12 @@ const SocialMediaAccordion = ({ details }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
-  // const handleSubmit = () => {
-  //   if (!validateAll()) {
-  //     toast.error("Please fix validation errors before submitting.");
-  //     return;
-  //   }
-  //   dispatch(updateSellerSocialLinks(formState));
-  // };
-
-  // const handleSubmit = () => {
-  //   if (!validateAll()) {
-  //     toast.error("Please fix validation errors before submitting.");
-  //     return;
-  //   }
-
-  //   // Clean only before dispatching
-  //   const cleanedData = {
-  //     ...formState,
-  //     extra_links: formState.extra_links
-  //       ?.replace(/[\r\n]+/g, "") // remove all newlines
-  //       .replace(/\s*,\s*/g, ",") // normalize commas (optional)
-  //       .trim(),
-  //   };
-
-  //   dispatch(updateSellerSocialLinks(cleanedData));
-  // };
-
-  // const handleSubmit = () => {
-  //   if (!validateAll()) {
-  //     toast.error("Please fix validation errors before submitting.");
-  //     return;
-  //   }
-
-  //   // Clean only before dispatching
-  //   const cleanedData = {
-  //     ...formState,
-  //     extra_links: formState.extra_links
-  //       ?.replace(/[\r\n]+/g, " ") // replace newlines with spaces
-  //       .replace(/\s+/g, " ") // collapse multiple spaces/tabs into one
-  //       .replace(/\s*,\s*/g, ",") // normalize commas (remove spaces around)
-  //       .replace(/\s+/g, ",") // convert remaining spaces between links to commas
-  //       .replace(/,+/g, ",") // collapse multiple commas
-  //       .replace(/^,|,$/g, "") // trim commas from start/end
-  //       .trim(),
-  //   };
-
-  //   dispatch(updateSellerSocialLinks(cleanedData));
-  // };
-
   const handleSubmit = () => {
     if (!validateAll()) {
       toast.error("Please fix validation errors before submitting.");
       return;
     }
 
-    // Step 1: Clean input text
     const cleanedLinksString = formState.extra_links
       ?.replace(/[\r\n]+/g, " ") // replace newlines with spaces
       .replace(/\s+/g, " ") // collapse multiple spaces/tabs

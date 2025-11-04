@@ -1,20 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./DrawOnMapModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import { useSelector } from "react-redux";
 import RemoveLocation from "../../../assets/Images/Leads/RemoveLocationImg.svg";
 import AddLocation from "../../../assets/Images/Leads/AddLocationImg.svg";
 import EditLocation from "../../../assets/Images/Leads/EditlocationImg.svg";
 import { googleAPI } from "../../../Api/axiosInstance";
 
-const DrawOnMapModal = ({
-  onClose,
-  onNext,
-  locationData,
-  setLocationData,
-  data,
-  isEdit,
-}) => {
+const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [drawingManager, setDrawingManager] = useState(null);
@@ -24,13 +16,9 @@ const DrawOnMapModal = ({
   const [isEditMode, setIsEditMode] = useState(false);
   const [geocoder, setGeocoder] = useState(null);
   const [polygonAddresses, setPolygonAddresses] = useState([]);
-  const { getlocationData } = useSelector((state) => state.leadSetting);
   const [isAreaRemoved, setIsAreaRemoved] = useState(false);
 
-  // const [locationData,setLocationData] = useState("");
   useEffect(() => {
-    // Load Google Maps API if not already loaded
-
     const loadGoogleMapsScript = () => {
       if (
         !window.google ||
@@ -42,10 +30,8 @@ const DrawOnMapModal = ({
         script.async = true;
         script.defer = true;
 
-        // Define the callback globally
         window.initMap = () => {
           if (mapRef.current) {
-            // initializeMap();
             addInitializeMap();
           }
         };
@@ -96,11 +82,7 @@ const DrawOnMapModal = ({
       });
 
       const centerPoint = bounds.getCenter();
-      console.log(
-        "Polygon center for geocoding:",
-        centerPoint.lat(),
-        centerPoint.lng()
-      );
+
       getGeocodeDetails(centerPoint).then(({ city, pincode }) => {
         const data = {
           city,
@@ -116,7 +98,6 @@ const DrawOnMapModal = ({
 
       locationData?.forEach((coord, index) => {
         const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
-        console.log(latLng, "latLng");
         setTimeout(() => {
           newGeocoder.geocode({ location: latLng }, (results, status) => {
             if (status === "OK" && results[0]) {
@@ -135,12 +116,6 @@ const DrawOnMapModal = ({
                   city = component.long_name;
                 }
               });
-
-              console.log(
-                `Vertex ${index} - City: ${city || "Not found"}, Pincode: ${
-                  pincode || "Not found"
-                }`
-              );
             } else {
               console.error(
                 `Geocoder failed for vertex ${index} due to: ${status}`
@@ -177,45 +152,15 @@ const DrawOnMapModal = ({
           const latLng = path.getAt(i);
           updatedCoords.push({ lat: latLng.lat(), lng: latLng.lng() });
         }
-        console.log("Updated1223", updatedCoords);
       };
 
       path.addListener("set_at", logUpdatedPath);
       path.addListener("insert_at", logUpdatedPath);
       path.addListener("remove_at", logUpdatedPath);
     };
-    const handleEditAreaMode = () => {
-      setIsEditMode(!isEditMode);
-
-      if (isEditMode) {
-        // Exiting edit mode
-        polygons.forEach((polygon) => polygon.setEditable(false));
-        deselectPolygon();
-      } else {
-        // Entering edit mode
-        if (drawingManager) {
-          drawingManager.setDrawingMode(null);
-          drawingManager.setMap(null);
-        }
-        setIsDrawingActive(false);
-
-        polygons.forEach((polygon, index) => {
-          polygon.addListener("click", () => {
-            polygons.forEach((p) => p.setEditable(false));
-            enablePolygonEditing(polygon);
-
-            console.log(polygon);
-            setSelectedPolygonIndex(index);
-            console.log(`Polygon ${index} selected for editing`);
-          });
-        });
-
-        console.log("Click on a polygon to edit it");
-      }
-    };
 
     const addInitializeMap = () => {
-      const center = { lat: 55.3781, lng: -3.436 }; // Center of India
+      const center = { lat: 55.3781, lng: -3.436 };
       const mapOptions = {
         center,
         zoom: 5,
@@ -227,14 +172,12 @@ const DrawOnMapModal = ({
       const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
       setMap(newMap);
 
-      // Initialize geocoder
       const newGeocoder = new window.google.maps.Geocoder();
       setGeocoder(newGeocoder);
 
-      // Initialize DrawingManager but don't activate it yet
       const manager = new window.google.maps.drawing.DrawingManager({
-        drawingMode: null, // Start with no drawing mode active
-        drawingControl: false, // Hide the default drawing controls
+        drawingMode: null,
+        drawingControl: false,
         polygonOptions: {
           fillColor: "#4285F4",
           fillOpacity: 0.3,
@@ -247,7 +190,6 @@ const DrawOnMapModal = ({
       });
       setDrawingManager(manager);
 
-      // Add listener for polygon completion
       window.google.maps.event.addListener(
         manager,
         "overlaycomplete",
@@ -255,10 +197,8 @@ const DrawOnMapModal = ({
           if (event.type === window.google.maps.drawing.OverlayType.POLYGON) {
             const polygon = event.overlay;
 
-            // Add this polygon to our state
             setPolygons((prev) => [...prev, polygon]);
 
-            // Extract coordinates
             const path = polygon.getPath();
             const coordinates = Array.from(
               { length: path.getLength() },
@@ -268,9 +208,6 @@ const DrawOnMapModal = ({
               }
             );
 
-            console.log("Polygon coordinates:", coordinates);
-
-            // Get the center point of the polygon for geocoding
             const bounds = new window.google.maps.LatLngBounds();
             coordinates.forEach((coord) => {
               bounds.extend(
@@ -279,24 +216,14 @@ const DrawOnMapModal = ({
             });
             const center = bounds.getCenter();
 
-            console.log(
-              "Polygon center for geocoding:",
-              center.lat(),
-              center.lng()
-            );
-
-            // Fetch address details for this polygon
             fetchAddressDetails(center, (prev) => [...prev, null]);
 
-            // Also geocode each vertex of the polygon to find pincodes and cities
             coordinates.forEach((coord, index) => {
               const latLng = new window.google.maps.LatLng(
                 coord.lat,
                 coord.lng
               );
-              // console.log(Geocoding vertex ${index}:, coord.lat, coord.lng);
 
-              // Use a timeout to avoid hitting geocoding rate limits
               setTimeout(() => {
                 geocoder?.geocode({ location: latLng }, (results, status) => {
                   if (status === "OK" && results[0]) {
@@ -304,7 +231,6 @@ const DrawOnMapModal = ({
                     let pincode = "";
                     let city = "";
 
-                    // Extract pincode and city
                     addressComponents.forEach((component) => {
                       if (component.types.includes("postal_code")) {
                         pincode = component.long_name;
@@ -316,16 +242,12 @@ const DrawOnMapModal = ({
                         city = component.long_name;
                       }
                     });
-
-                    // console.log(Vertex ${index} - City: ${city || 'Not found'}, Pincode: ${pincode || 'Not found'});
                   } else {
-                    // console.error(Geocoder failed for vertex ${index} due to: ${status});
                   }
                 });
-              }, index * 300); // Stagger requests by 300ms each
+              }, index * 300);
             });
 
-            // Turn off drawing mode after completion
             manager.setDrawingMode(null);
             setIsDrawingActive(false);
           }
@@ -335,7 +257,6 @@ const DrawOnMapModal = ({
 
     loadGoogleMapsScript();
 
-    // Cleanup function
     return () => {
       if (drawingManager) {
         drawingManager.setMap(null);
@@ -346,7 +267,6 @@ const DrawOnMapModal = ({
     };
   }, []);
 
-  // Fetch address details (city, pincode) from coordinates
   const fetchAddressDetails = (latLng, updateFunction) => {
     if (!geocoder) return;
 
@@ -357,46 +277,28 @@ const DrawOnMapModal = ({
           let pincode = "";
           let city = "";
 
-          // Log all address components for debugging
-          console.log("All address components:", latLng, addressComponents);
-
-          // Extract pincode (postal_code) and city
           addressComponents.forEach((component) => {
             if (component.types.includes("postal_code")) {
               pincode = component.long_name;
-              console.log("Found pincode:", pincode);
             }
 
-            // Check for locality (primary) or sublocality or administrative_area_level_2 (fallbacks)
             if (component.types.includes("locality")) {
               city = component.long_name;
-              console.log("Found city (locality):", city);
             } else if (component.types.includes("sublocality") && !city) {
               city = component.long_name;
-              console.log("Found city (sublocality):", city);
             } else if (
               component.types.includes("administrative_area_level_2") &&
               !city
             ) {
               city = component.long_name;
-              console.log("Found city (administrative_area_level_2):", city);
             }
           });
-
-          // Ensure we have values - log the final results
-          console.log(
-            "FINAL RESULTS - City:",
-            city || "Not found",
-            "Pincode:",
-            pincode || "Not found"
-          );
 
           const addressDetails = {
             pincode,
             city,
           };
 
-          // Update the state with the address details
           if (typeof updateFunction === "function") {
             setPolygonAddresses(updateFunction(addressDetails));
           } else {
@@ -405,13 +307,7 @@ const DrawOnMapModal = ({
         }
       } else {
         console.error("Geocoder failed due to: " + status);
-        console.log(
-          "Geocoder error for coordinates:",
-          latLng.lat(),
-          latLng.lng()
-        );
 
-        // Update with empty details on failure
         if (typeof updateFunction === "function") {
           setPolygonAddresses(updateFunction({ pincode: "", city: "" }));
         } else {
@@ -421,24 +317,19 @@ const DrawOnMapModal = ({
     });
   };
 
-  // Setup map click listener when edit mode or map changes
   useEffect(() => {
     if (!map) return;
 
-    // Create a click listener for polygon selection
     const clickListener = window.google.maps.event.addListener(
       map,
       "click",
       (event) => {
-        // If we're not in edit mode, don't do anything
         if (!isEditMode) return;
 
         let polygonClicked = false;
 
-        // Check if the click is on a polygon
         for (let i = 0; i < polygons.length; i++) {
           try {
-            // First check using point in polygon (if geometry library is available)
             if (
               window.google.maps.geometry &&
               window.google.maps.geometry.poly
@@ -454,7 +345,6 @@ const DrawOnMapModal = ({
                 break;
               }
             } else {
-              // Fallback: use bounds checking (less accurate but works without geometry library)
               const bounds = new window.google.maps.LatLngBounds();
               const path = polygons[i].getPath();
               path.forEach((point) => bounds.extend(point));
@@ -471,7 +361,6 @@ const DrawOnMapModal = ({
           }
         }
 
-        // If click wasn't on a polygon, deselect current polygon
         if (!polygonClicked && selectedPolygonIndex !== null) {
           deselectPolygon();
         }
@@ -483,10 +372,8 @@ const DrawOnMapModal = ({
     };
   }, [map, isEditMode, polygons, selectedPolygonIndex]);
 
-  // Make each polygon clickable when created
   useEffect(() => {
     polygons?.forEach((polygon, index) => {
-      // Add click listener to each polygon
       window.google.maps.event.clearListeners(polygon, "click");
 
       window.google.maps.event.addListener(polygon, "click", () => {
@@ -497,12 +384,9 @@ const DrawOnMapModal = ({
     });
   }, [polygons, isEditMode]);
 
-  // Update address details when polygons are edited
-  // Update address details when polygons are edited
   useEffect(() => {
     if (!geocoder || polygons.length === 0) return;
 
-    // Clear any existing listeners first
     polygons.forEach((polygon, index) => {
       window.google.maps.event.clearListeners(polygon.getPath(), "set_at");
       window.google.maps.event.clearListeners(polygon.getPath(), "insert_at");
@@ -518,12 +402,9 @@ const DrawOnMapModal = ({
 
         const center = bounds.getCenter();
 
-        console.log(`Polygon ${index} new center:`, center.lat(), center.lng());
-
-        // Fetch new address details
         fetchAddressDetails(center, (prevAddresses) => {
           const newAddresses = [...prevAddresses];
-          newAddresses[index] = { city: "", pincode: "" }; // Default fallback
+          newAddresses[index] = { city: "", pincode: "" };
           return newAddresses;
         });
 
@@ -550,7 +431,6 @@ const DrawOnMapModal = ({
             });
 
             const addressDetails = { pincode, city };
-            console.log(`Updated Polygon ${index} address:`, addressDetails);
 
             setPolygonAddresses((prev) => {
               const updated = [...prev];
@@ -566,30 +446,24 @@ const DrawOnMapModal = ({
         });
       };
 
-      // Listen for path changes
       polygon.getPath().addListener("set_at", handlePathChanged);
       polygon.getPath().addListener("insert_at", handlePathChanged);
       polygon.getPath().addListener("remove_at", handlePathChanged);
     });
   }, [geocoder, polygons]);
 
-  // Function to select a polygon for editing or removal
   const selectPolygon = (index) => {
-    // First deselect any currently selected polygon
     deselectPolygon();
 
-    // Then select the new one
     setSelectedPolygonIndex(index);
 
-    // Make the polygon editable
     polygons[index].setOptions({
       editable: true,
-      fillColor: "#FF5722", // Change color to indicate selection
+      fillColor: "#FF5722",
       strokeColor: "#FF5722",
     });
   };
 
-  // Function to deselect the currently selected polygon
   const deselectPolygon = () => {
     if (selectedPolygonIndex !== null && polygons[selectedPolygonIndex]) {
       polygons[selectedPolygonIndex].setOptions({
@@ -607,42 +481,30 @@ const DrawOnMapModal = ({
       return;
     }
 
-    // Exit edit mode if it was active
     if (isEditMode) {
       setIsEditMode(false);
       deselectPolygon();
     }
 
-    // Set the drawing manager on the map
     drawingManager.setMap(map);
-    // console.log(map,"sai")
     drawingManager.setDrawingMode(
       window.google.maps.drawing.OverlayType.POLYGON
     );
     setIsDrawingActive(true);
-
-    // Show instructions to the user
-    console.log("Click on the map to start drawing a polygon");
   };
 
-  // Handle Edit Area Mode
   const handleEditAreaMode = () => {
     setIsEditMode(!isEditMode);
 
     if (isEditMode) {
-      // Exiting edit mode, deselect any polygon
       deselectPolygon();
     } else {
-      // Entering edit mode
       if (drawingManager) {
         drawingManager.setDrawingMode(null);
         drawingManager.setMap(null);
       }
       setIsDrawingActive(false);
       setSelectedPolygonIndex(null);
-
-      // Show instruction to the user
-      console.log("Click on a polygon to edit it");
     }
   };
 
@@ -673,7 +535,6 @@ const DrawOnMapModal = ({
     setIsAreaRemoved(true);
     setIsEditMode(false);
 
-    // Update the locationData with the new last polygon (if any)
     if (updatedPolygons.length > 0) {
       const lastPolygonPath =
         updatedPolygons[updatedPolygons.length - 1].getPath();
@@ -702,7 +563,7 @@ const DrawOnMapModal = ({
         setLocationData(data);
       });
     } else {
-      setLocationData(null); // If no polygons remain
+      setLocationData(null);
     }
   };
 
@@ -738,22 +599,17 @@ const DrawOnMapModal = ({
     const polygonPromises = polygons.map(async (polygon) => {
       const path = polygon.getPath();
 
-      // Get bounds & center
       const bounds = new window.google.maps.LatLngBounds();
       for (let i = 0; i < path.getLength(); i++) {
         bounds.extend(path.getAt(i));
       }
       const center = bounds.getCenter();
-      // Get geocode info
       const { city, pincode } = await getGeocodeDetails(center);
-      console.log(pincode, "pincode");
 
-      // Get coordinates
       const coordinates = Array.from({ length: path.getLength() }, (_, i) => {
         const point = path.getAt(i);
         return { lat: point.lat(), lng: point.lng() };
       });
-      console.log(coordinates, "8899");
 
       return {
         coordinates,
@@ -762,10 +618,7 @@ const DrawOnMapModal = ({
         location: `${city},${pincode}`,
       };
     });
-    console.log(polygons, "all");
     const allPolygonData = await Promise.all(polygonPromises);
-    console.log(allPolygonData, "allPolygonData");
-    // const pincodeData = allPolygonData?.find(item => item?.pincode)
     const data = {
       city: allPolygonData?.[0]?.city,
       postcode: allPolygonData?.[0]?.pincode,
@@ -797,13 +650,6 @@ const DrawOnMapModal = ({
           Define Your Service Areas - Draw on a map
         </h2>
 
-        {/* <p className={styles.description}>
-          <span className={styles.infoIcon}>
-            <img src={iIcon} alt="Info" />
-          </span>
-          You can add multiple drawn areas to define the specific places you
-          provide services.
-        </p> */}
         <div className={styles.infoBox}>
           <img src={iIcon} alt="" />
           <span>
@@ -848,17 +694,11 @@ const DrawOnMapModal = ({
           style={{ width: "100%", height: "400px", margin: "20px 0" }}
         ></div>
 
-        {/* We've removed the display area details section as requested */}
-
         <div className={styles.buttonContainer}>
           <button className={styles.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button
-            className={styles.nextButton}
-            onClick={handleSubmit}
-            // disabled={polygons.length === 0}
-          >
+          <button className={styles.nextButton} onClick={handleSubmit}>
             Next
           </button>
         </div>

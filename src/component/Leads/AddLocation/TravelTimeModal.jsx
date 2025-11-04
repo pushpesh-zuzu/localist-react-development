@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import { Select } from "antd";
@@ -22,12 +22,6 @@ const TravelTimeModal = ({
     lng: 78.9629,
   });
 
-  // const [locationData, setLocationData] = useState({
-  //   postcode: "",
-  //   travel_time: "30 minutes",
-  //   travel_by: "Driving",
-  // });
-  console.log(locationData, "locationData123");
   useEffect(() => {
     if (locationData?.coordinates) {
       const parsedCoordinates = JSON.parse(locationData.coordinates);
@@ -199,7 +193,6 @@ const TravelTimeModal = ({
   };
 
   const handleNext = () => {
-    console.log("Form submitted with data:", locationData);
     onNext(locationData, "travelTime");
     onClose();
   };
@@ -220,13 +213,6 @@ const TravelTimeModal = ({
 
         <h2 className={styles.title}>Travel Time</h2>
 
-        {/* <p className={styles.description}>
-            <img src={iIcon} alt="" />
-          
-          <span>
-          Enter a Postcode or town, the maximum time you'd spend travelling, and
-          the mode of transport you'd use.</span>
-        </p> */}
         <div className={styles.infoBox}>
           <img src={iIcon} alt="" />
           <span>

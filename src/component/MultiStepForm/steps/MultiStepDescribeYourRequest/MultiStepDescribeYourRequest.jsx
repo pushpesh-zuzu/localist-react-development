@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MultiStepDescribeYourRequest.module.css";
 import PlusIcon from "../../../../assets/Icons/PlusIcon.svg";
 import CheckIcon from "../../../../assets/Icons/CheckIcon.svg";
@@ -72,16 +72,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const handleSubmit = () => {
     let hasError = false;
 
-    // if (text.trim() === "") {
-    //   setTextError(true);
-    //   hasError = true;
-    // }
-
-    // if (files.length === 0) {
-    //   setFileError(true);
-    //   hasError = true;
-    // }
-
     if (hasError) return;
 
     const detailsData = {
@@ -98,47 +88,27 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             result?.message || "Create Request successfully!"
           );
         }
-        // onClose();
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());
         dispatch(setQualityData());
 
-        // navigate(`/bids-list/${requestId
-        // setShowConfirmModal(false); this thing comment
         dispatch(setBuyerStep(10));
-
-        // navigate(`/conversion-redirect/${requestId}`, { replace: true });
       }
     );
-
-    // .then(() => {
-    //   navigate("/buyers/create");
-    // })
-    // .catch((error) => {
-    //   console.error("Navigation failed due to API error:", error);
-    // });
   };
 
   const handleCloseClick = () => {
-    // setShowConfirmModal(true);
     onClose && onClose();
     dispatch(clearSetbuyerRequestData());
     dispatch(clearBuyerRegisterFormData());
   };
 
   return (
-    <div style={{maxWidth:'500px',position:'relative',margin:'auto'}} >
+    <div style={{ maxWidth: "500px", position: "relative", margin: "auto" }}>
       {buyerStep === 10 ? (
         <Spin />
       ) : (
         <>
-          {/* <div
-            className={styles.closeButton}
-            onClick={handleCloseClick}
-            disabled={addDetailLoader}
-          >
-            &times;
-          </div> */}
           <div className={styles.successMessage}>
             <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
             <span>Your request has been submitted</span>
@@ -214,17 +184,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             <p>Quality score increases as you add more detail</p>
           </div>
 
-          {/* <label className={styles.checkboxContainer}>
-        <input
-          type="checkbox"
-          checked={professionalLetin}
-          onChange={handleCheckboxChange}
-        />
-       Tick if you'd like to hear back quickly <br/>
-       
- I’m happy to be contacted as soon as possible 
-
-      </label> */}
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"
@@ -259,13 +218,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             <p className={styles.privacyText}>
               Your information is protected by our{" "}
               <span className={styles.privacy}>privacy policy</span>
-              {/* <a
-            href="/privacy-policy"
-            target="blank"
-            className={styles.privacyLink}
-          >
-            privacy policy
-          </a> */}
             </p>
           </div>
         </>

@@ -5,13 +5,12 @@ import PolygonArrowDown from "../../assets/Icons/PolygonArrowDown.png";
 import playbtn from "../../assets/Icons/playbtn.png";
 import question from "../../assets/Icons/question.svg";
 import emailIcon1 from "../../assets/Icons/emailIcon1.svg";
-import phone from "../../assets/Icons/phoneIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { getDashboardListData } from "../../store/Dashboard/dashboardSlice";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserGeo } from "../../utils/geo";
-//PolygonArrowDown
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { dashboardData } = useSelector((state) => state.dashboard);
@@ -39,10 +38,9 @@ const Dashboard = () => {
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
-      timeZone: "Europe/London", // ✅ UK timezone
+      timeZone: "Europe/London",
     });
   };
-  console.log(currentTime, "currentTimecurrentTimecurrentTime");
   return (
     <div>
       <div className={styles["dashboard-wrapper"]}>
@@ -59,9 +57,6 @@ const Dashboard = () => {
         </div>
 
         <div className={styles["dashboard-content-parent"]}>
-          {/* <div className={`${styles["dashboard-content"]} ${showDashboardContent ? styles.show : styles.hide
-            }`}
-          > */}
           <div
             className={styles["dashboard-content"]}
             ref={contentRef}
@@ -186,17 +181,11 @@ const Dashboard = () => {
                 <div className={styles["info-box"]}>
                   <h4>
                     How much do{" "}
-                    {/* <a href="#" className={styles.textColor}>
-                      Localists.com
-                    </a>{" "} */}
                     <span className={styles.textColor}> Localists.com </span>
                     charge for leads?
                   </h4>
                   <p>
                     Getting leads on{" "}
-                    {/* <a href="#" className={styles.textColor}>
-                      Localists.com
-                    </a>{" "} */}
                     <span className={styles.textColor}>Localists.com </span>
                     is completely free — you only pay when you choose to contact
                     a customer you're interested in. All our leads are priced in
@@ -209,7 +198,6 @@ const Dashboard = () => {
                     gives you more opportunities to contact leads and win more
                     jobs.
                   </p>
-                  {/* <p>We’re so confident you’ll get hired at least once from this pack, that if you don’t we’ll give you all your credits back.</p> */}
                 </div>
 
                 <div className={styles["help-box"]}>
@@ -237,9 +225,7 @@ const Dashboard = () => {
                       <span>
                         <img src={emailIcon1} /> &nbsp; contact@localists.com{" "}
                       </span>
-                      {/* <span><img src={phone} /> &nbsp; 0000000000 </span> */}
                     </div>
-                    {/* <div>(Available 24 hours a day, 7 days a week)</div> */}
                   </div>
                 </div>
               </div>

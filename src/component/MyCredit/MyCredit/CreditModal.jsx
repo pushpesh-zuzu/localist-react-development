@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CreditModal.module.css";
-import HiredImg from "../../../assets/Images/MyResponse/HiredBtnImg.svg";
 import useWindowHeight from "../../../utils/customHeigth";
 import { addBuyCreditApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import { totalCreditData } from "../../../store/LeadSetting/leadSettingSlice";
@@ -17,7 +16,6 @@ const CreditModal = ({ onClose }) => {
   const [selectedCreditData, setSelectedCreditData] = useState(null);
   const dispatch = useDispatch();
 
-  // Mapping of credits → responses
   const responseToCreditMap = {
     50: 950,
     60: 1140,
@@ -37,16 +35,14 @@ const CreditModal = ({ onClose }) => {
     200: 3800,
   };
 
-  // Always reset credit value when modal opens
   useEffect(() => {
-    setCreditValue(50); //  Default value = 50 when modal opens
+    setCreditValue(50);
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, []);
 
-  // ✅ Restrict slider from going below 50
   const handleSliderChange = (e) => {
     let value = Number(e.target.value);
     if (value < 50) {
@@ -56,7 +52,6 @@ const CreditModal = ({ onClose }) => {
   };
 
   const customHeigth = useWindowHeight();
-  // const responseEstimate = creditToResponseMap[creditValue] || 0;
   const credits = responseToCreditMap[responseValue] || 0;
   const price = Math.trunc(credits * 1.45);
 
@@ -66,7 +61,6 @@ const CreditModal = ({ onClose }) => {
   };
 
   const handleBuyNow = (item) => {
-    console.log(item, "item");
     let Credits = item.no_of_leads;
 
     const vatTotal = Math.floor((price * 20) / 100);
@@ -142,7 +136,7 @@ const CreditModal = ({ onClose }) => {
           <div className={styles.sliderWrapper}>
             <input
               type="range"
-              min="0" // ✅ 0 is visible on slider
+              min="0"
               max="200"
               step="10"
               value={responseValue}
@@ -161,7 +155,6 @@ const CreditModal = ({ onClose }) => {
             </div>
           </div>
 
-          {/* ✅ Labels show 0 but slider can't go below 50 */}
           <div className={styles.rangeLabels}>
             <span>0</span>
             <span>50</span>
@@ -180,30 +173,6 @@ const CreditModal = ({ onClose }) => {
             your service area. The more credits you buy, the more targeted
             opportunities you can unlock.
           </div>
-
-          {/* <div className={styles.partnerSection}>
-            <div>
-              <h4>You have been selected for our Partnership Pricing</h4>
-              <p>
-                Speak to our partner success team today to get even more <br />
-                from your Localists.com membership:
-              </p>
-              <ul>
-                <li>
-                  <img src={HiredImg} alt="hire" /> Win more business
-                </li>
-                <li>
-                  <img src={HiredImg} alt="hire" /> Enjoy priority support and
-                  expert growth advice
-                </li>
-                <li>
-                  <img src={HiredImg} alt="hire" /> Access account optimisation
-                  insights from our team
-                </li>
-              </ul>
-            </div>
-            <button className={styles.callbackBtn}>Request callback</button>
-          </div> */}
         </div>
       </div>
 

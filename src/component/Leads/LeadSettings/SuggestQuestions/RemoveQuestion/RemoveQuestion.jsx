@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./RemoveQuestion.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +7,6 @@ import { suggestQuestions } from "../../../../../store/LeadSetting/SuggestQuesti
 import { showToast } from "../../../../../utils";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-
-const questions = [
-  "Which social media channels do you wish to use?",
-  "What are your goals?",
-  "Which of these are you looking to do?",
-  "What type of business are you?",
-  "What is your approximate monthly budget?",
-  "How soon would you like the project to begin?",
-  "How likely are you to make a hiring decision?",
-];
 
 const RemoveQuestion = () => {
   const [selected, setSelected] = useState("");
@@ -30,7 +20,6 @@ const RemoveQuestion = () => {
   const { suggestQuestionsLoader } = useSelector(
     (state) => state.suggestQuestion
   );
-  console.log(leadPreferenceData, "leadPreferenceData");
 
   useEffect(() => {
     const data = {

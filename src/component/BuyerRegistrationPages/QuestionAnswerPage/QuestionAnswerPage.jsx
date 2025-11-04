@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
-import { Progress, Result, Spin } from "antd";
+import { Progress, Spin } from "antd";
 import styles from "./QuestionAnswerPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearSetbuyerRequestData,
-  createRequestData,
   registerQuoteCustomer,
   setbuyerRequestData,
-  setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
-
 import { LoadingOutlined } from "@ant-design/icons";
-import { showToast } from "../../../utils";
 import { clearBuyerRegisterFormData } from "../../../store/FindJobs/findJobSlice";
 import { useLocation } from "react-router";
 import { extractAllParams } from "../../../utils/decodeURLParams";
@@ -35,13 +31,10 @@ const QuestionAnswerPage = ({
     questionanswerData,
     questionLoader,
   } = useSelector((state) => state.buyer);
-  const { searchServiceLoader, service, registerData } = useSelector(
-    (state) => state.findJobs
-  );
+  const { service, registerData } = useSelector((state) => state.findJobs);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
 
-  // ✅ Ab saare parameters mil jayenge
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
   const gclid = allParams.gclid || "";
@@ -51,10 +44,7 @@ const QuestionAnswerPage = ({
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
 
-  // console.log("service_name", serviceName);
   const { userToken, adminToken } = useSelector((state) => state.auth);
-  const lastQuestionIndex =
-    buyerRequest?.questions?.length > 0 ? buyerRequest.questions.length - 1 : 0;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -66,7 +56,6 @@ const QuestionAnswerPage = ({
       setCurrentQuestion(0);
     }
   }, [questions]);
-  // console.log(citySerach, questionanswerData, "citySerach");
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowDelay(true);
@@ -100,38 +89,12 @@ const QuestionAnswerPage = ({
   const totalQuestions = questions?.length;
   const progressPercent = ((currentQuestion + 1) / totalQuestions) * 100;
 
-  // const handleOptionChange = (e) => {
-  //   const { value, checked } = e.target;
-  //   let updatedOptions = [...selectedOption];
-
-  //   if (checked) {
-  //     updatedOptions.push(value);
-  //   } else {
-  //     updatedOptions = updatedOptions.filter((opt) => opt !== value);
-  //   }
-
-  //   setSelectedOption(updatedOptions);
-  //   setError("");
-  // };
-  // const handleOptionChange = (e) => {
-  //   const { value, checked, type } = e.target;
-  //   const isSingle = questions[currentQuestion]?.option_type === "single";
-
-  //   if (isSingle) {
-  //     setSelectedOption(value); // Only one option at a time
-  //   } else {
-  //     // Multiple checkboxes
-  //     setSelectedOption((prev) =>
-  //       checked ? [...prev, value] : prev.filter((opt) => opt !== value)
-  //     );
-  //   }
-  // };
   const handleOptionChange = (e) => {
     const { value, checked } = e.target;
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      setSelectedOption([value]); // Wrap in array
+      setSelectedOption([value]);
       setError("");
     } else {
       setSelectedOption((prev) =>
@@ -165,25 +128,19 @@ const QuestionAnswerPage = ({
       ans: finalAnswer.join(", "),
     };
 
-    // ✅ FIX: QUESTION-BASED STORAGE (No index conflict)
     const previousAnswers = buyerRequest?.questions || [];
 
-    // Find if this question already exists
     const existingIndex = previousAnswers.findIndex(
       (item) => item?.ques === updatedAnswer.ques
     );
 
     let updatedAnswers;
     if (existingIndex !== -1) {
-      // Update existing question
       updatedAnswers = [...previousAnswers];
       updatedAnswers[existingIndex] = updatedAnswer;
     } else {
-      // Add new question
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
-
-    console.log("Updated Answers (Question-based):", updatedAnswers);
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
@@ -194,7 +151,6 @@ const QuestionAnswerPage = ({
     const nextQ = selectedObj?.next_question;
     handleScrollToBottom();
     if (nextQ === "last") {
-      // If last question, trigger submit or move next
       if (isStartWithQuestionModal) {
         dispatch(
           setbuyerRequestData({
@@ -209,25 +165,6 @@ const QuestionAnswerPage = ({
       } else if (adminToken || registerData?.remember_tokens) {
         nextStep();
       } else {
-        // const formData = new FormData();
-        // formData.append("email", buyerRequest?.email);
-        // formData.append("name", buyerRequest?.name);
-        // formData.append("phone", buyerRequest?.phone);
-        // formData.append("service_id", buyerRequest?.service_id);
-        // formData.append("postcode", buyerRequest?.postcode);
-        // formData?.append("city", citySerach);
-        // formData.append("questions", JSON.stringify(updatedAnswers));
-        // formData.append("form_status", 1);
-        // // form_status: 1,
-        // // formData.append("recevive_online", consent ? 1 : 0);
-
-        // dispatch(createRequestData(formData)).then((result) => {
-        //   if (result) {
-        //     showToast("success", result?.message);
-        //     nextStep();
-        //   }
-        // });
-
         const formData = new FormData();
         formData.append("name", buyerRequest?.name);
         formData.append("email", buyerRequest?.email);
@@ -248,10 +185,6 @@ const QuestionAnswerPage = ({
 
         dispatch(registerQuoteCustomer(formData)).then((result) => {
           if (result) {
-            // showToast(
-            //   "success",
-            //   result?.message || "Customer registered successfully"
-            // );
             nextStep();
           }
         });
@@ -260,7 +193,6 @@ const QuestionAnswerPage = ({
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      // Fallback if no next_question found
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
@@ -269,22 +201,10 @@ const QuestionAnswerPage = ({
       }
     }
 
-    // Reset for next question
     setSelectedOption([]);
     setOtherText("");
     setError("");
   };
-
-  // const handleBack = () => {
-  //   if (currentQuestion > 0) {
-  //     setCurrentQuestion(currentQuestion - 1);
-  //   } else {
-  //     if (buyerRequest?.questions?.length > 0) {
-  //       setCurrentQuestion(buyerRequest.questions.length - 1);
-  //     }
-  //     previousStep();
-  //   }
-  // };
 
   const handleBack = () => {
     if (questionHistory.length > 1) {
@@ -300,21 +220,6 @@ const QuestionAnswerPage = ({
     }
   };
 
-  const handleCloseClick = () => {
-    if (questionanswerData?.length === 0) {
-      onClose();
-      dispatch(clearSetbuyerRequestData());
-      dispatch(clearBuyerRegisterFormData());
-    } else {
-      if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
-        setShowConfirmModal(true);
-      } else {
-        onClose();
-        dispatch(clearSetbuyerRequestData());
-        dispatch(clearBuyerRegisterFormData());
-      }
-    }
-  };
   useEffect(() => {
     setSelectedOption([]);
     setOtherText("");
@@ -344,14 +249,6 @@ const QuestionAnswerPage = ({
         style={{ color: "#000", textAlign: "center" }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* <button
-          className={styles.closeButton}
-          onClick={handleCloseClick}
-          disabled={questionLoader}
-        >
-          ✖
-        </button> */}
-
         {loading ? (
           <div className={styles.loaderContainer}>
             <Spin size="large" />

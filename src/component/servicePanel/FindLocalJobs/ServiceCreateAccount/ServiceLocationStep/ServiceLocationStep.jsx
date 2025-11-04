@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
@@ -6,7 +6,6 @@ import {
   setCity,
   setCountry,
   setPostalCode,
-  setRegisterStep,
   setSelectedServiceFormData,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
@@ -22,31 +21,24 @@ const ServiceLocationStep = ({
   setFormData,
   errors,
 }) => {
-  const inputRef = useRef(null);
   const dispatch = useDispatch();
-  // const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const debounceTimer = useRef(null);
   const [isValidPostCode, setIsValidPostCode] = useState(false);
-  console.log(formData, "formData");
 
-  // Handle postcode input with debounce
   const handlePostcodeChange = (e) => {
     const { name, value } = e.target;
 
-    // Update form data immediately
     dispatch(
       setSelectedServiceFormData({
         [name]: value,
       })
     );
 
-    // Clear previous timer
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
     }
 
-    // Set new timer for API call
     debounceTimer.current = setTimeout(() => {
       if (value && value.length >= 3) {
         fetchCityFromPostcode(value);
@@ -56,7 +48,6 @@ const ServiceLocationStep = ({
 
   const fetchCityFromPostcode = async (postcode) => {
     if (!postcode || postcode.length < 3) return;
-    console.log(postcode, "dddddddd");
     setIsLoading(true);
     try {
       const result =
@@ -64,11 +55,9 @@ const ServiceLocationStep = ({
         (await dispatch(getCityName({ postcode: postcode })));
       if (result.success) {
         setIsValidPostCode(true);
-        console.log(result, "result");
         const cityName = result.data?.city;
         const postcodeFromApi = result.data?.postcode;
 
-        // Update all form fields with the API response
         dispatch(
           setFormData({
             postcode: postcodeFromApi,
@@ -86,10 +75,8 @@ const ServiceLocationStep = ({
             postcode2: postcodeFromApi,
           })
         );
-        // cityName && dispatch(setCity({city:cityName}));
         dispatch(setPostalCode({ postalcode: postcodeFromApi }));
         dispatch(setCountry({ country: result.data?.country }));
-        // showToast("success", "Location found successfully!");
       }
     } catch (error) {
       console.error("Error fetching city:", error);
@@ -119,7 +106,6 @@ const ServiceLocationStep = ({
     }
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (debounceTimer.current) {

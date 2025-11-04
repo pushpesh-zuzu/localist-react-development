@@ -28,7 +28,6 @@ const ViewYourMatches = ({
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
-  console.log(createRequestToken, requestDataList?.phone, "createRequestToken");
   useEffect(() => {
     if (requestDataList?.phone) {
       setPhoneNumber(requestDataList?.phone.replace(/^\+44/, ""));
@@ -55,7 +54,6 @@ const ViewYourMatches = ({
     const formData = new FormData();
     formData.append("service_id", buyerRequest?.service_id);
     formData.append("postcode", buyerRequest?.postcode);
-    // formData.append("city",buyerRequest?.city);
     formData?.append("city", citySerach);
     formData.append("questions", JSON.stringify(buyerRequest?.questions));
     formData.append("phone", phoneNumber);
@@ -74,11 +72,7 @@ const ViewYourMatches = ({
     onClose();
     dispatch(clearSetbuyerRequestData());
     dispatch(clearBuyerRegisterFormData());
-    // if(!userToken?.remember_tokens){
-    //   setShowConfirmModal(true);
-    // } else{
-    //   onClose();
-    // }
+ 
   };
 
   return (
@@ -106,12 +100,11 @@ const ViewYourMatches = ({
               id="phoneNumber"
               placeholder="+44 Phone Number"
               className={styles.input}
-              maxLength={14} // +44 + 10 digits
+              maxLength={14} 
               value={"+44 " + phoneNumber}
               onChange={(e) => {
                 let value = e.target.value;
 
-                //  Remove everything except numbers
                 value = value.replace(/\D/g, "");
 
                 if (value.startsWith("44")) {

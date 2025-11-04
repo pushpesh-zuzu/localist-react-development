@@ -205,41 +205,6 @@ const PhotosAccordion = ({ details }) => {
     }
   }, [details]);
 
-  // useEffect(() => {
-  //   if (details) {
-  //     // Preload YouTube link if it exists
-  //     let youtubeLinks = [];
-  //     if (details.company_youtube_link) {
-  //       try {
-  //         // Try parsing JSON (["link1", "link2"])
-  //         youtubeLinks = JSON.parse(details.company_youtube_link);
-  //       } catch (e) {
-  //         // If not JSON, treat as a single string
-  //         youtubeLinks = [details.company_youtube_link];
-  //       }
-  //     }
-
-  //     // Convert image filenames into full URLs
-  //     const photoFilenames = details.company_photos
-  //       ? details.company_photos.split(",").map((item) => item.trim())
-  //       : [];
-
-  //     const previews = photoFilenames.map(
-  //       (filename) => `${BASE_IMAGE}/users/${filename}`
-  //     );
-  //     setExistingPhotos(photoFilenames);
-  //     setPhotoPreviews(previews);
-
-  //     setFormState((prev) => ({
-  //       ...prev,
-  //       company_youtube_links: "",
-  //       company_youtube_link: youtubeLinks ? [youtubeLinks] : [],
-  //     }));
-
-  //     setPhotoPreviews(previews);
-  //   }
-  // }, [details]);
-
   useEffect(() => {
     if (details) {
       let youtubeLinks = [];

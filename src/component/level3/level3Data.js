@@ -507,18 +507,6 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    // {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
   ],
   "driveway-installers-near-me": [
     {
@@ -546,18 +534,6 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
   ],
   "patio-layers-near-me": [
     {
@@ -586,18 +562,6 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
   ],
   "landscape-gardeners-near-me": [
     {
@@ -625,18 +589,6 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
   ],
   "artificial-grass-installers-near-me": [
     {
@@ -665,18 +617,6 @@ const OTHER_SERVICES_DATA = {
       availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
   ],
   "tree-surgeon-near-me": [
     {
@@ -711,7 +651,7 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-      {
+    {
       id: 6,
       image: GutterCleanerSlider,
       description: "Tree Surgeon",
@@ -751,7 +691,7 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-      {
+    {
       id: 6,
       image: TreesugeonSlider,
       description: "Tree Surgeon",
@@ -1278,44 +1218,6 @@ const regionsData = {
     },
   ],
 };
-
-// export const POPULARCITY = {
-//   "fencing-contractors-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: Manchester },
-//     { id: 3, city_name: "Chester", city_image: Chester },
-//     { id: 4, city_name: "Warrington", city_image: Warrington },
-//     { id: 5, city_name: "Ellesmere", city_image: EllesmerePort },
-//   ],
-//   "driveway-installers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "patio-layers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "landscape-gardeners-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-//   "artificial-grass-installers-near-me": [
-//     { id: 1, city_name: "Liverpool", city_image: Liverpool },
-//     { id: 2, city_name: "Manchester", city_image: birmingham },
-//     { id: 3, city_name: "Chester", city_image: liverpool },
-//     { id: 4, city_name: "Warrington", city_image: london },
-//     { id: 5, city_name: "Ellesmere", city_image: london },
-//   ],
-// };
 
 const HowItWorksData = {
   "fencing-contractors-near-me": [

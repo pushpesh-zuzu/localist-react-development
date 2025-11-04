@@ -69,12 +69,7 @@ const SearchAccountantLeve3 = ({
         const cityName = response.data.city;
         setCity(cityName);
         dispatch(setcitySerach(cityName));
-        // dispatch(
-        //   setbuyerRequestData({
-        //     postcode: pincode,
-        //     city: cityName,
-        //   })
-        // );
+
         setIsPostcodeSelected(true);
         setShowModal(true);
       } else {

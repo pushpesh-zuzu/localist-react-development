@@ -1,5 +1,5 @@
-import { createSlice, current } from "@reduxjs/toolkit";
-import axiosInstance, { baseURL } from "../../Api/axiosInstance";
+import { createSlice } from "@reduxjs/toolkit";
+import axiosInstance from "../../Api/axiosInstance";
 import {
   clearAuthToken,
   clearBuyerRegisterFormData,
@@ -10,12 +10,11 @@ import {
   setRegisterToken,
   setSelectedServiceId,
   setselectedServices,
-  setService,
 } from "../FindJobs/findJobSlice";
 import { setCreateRequestToken, setRequestData } from "../Buyer/BuyerSlice";
 import { clearCompanyData } from "../Company/companyLookup";
 import { safeLocalStorage } from "../../utils/localStorage";
-import { BASE_URL_IMAGE,BASE_IMAGE_URL } from "../../utils";
+import { BASE_IMAGE_URL } from "../../utils";
 
 const userToken = JSON.parse(safeLocalStorage.getItem("barkUserToken"));
 const initialState = {
@@ -28,7 +27,7 @@ const initialState = {
   loginLoader: false,
   logoutLoader: false,
   switchUserLoader: false,
-  passwordlessLoader: false, // ✅ Added loader for passwordless login
+  passwordlessLoader: false,
   currentUser: userToken?.active_status || null,
   profile: null,
 };
@@ -44,7 +43,6 @@ export const userLogin = (loginData) => {
         dispatch(setUserToken(response?.data?.data));
         dispatch(setCurrentUser(response?.data?.data?.user_type));
         dispatch(setAuthToken(response?.data?.data?.remember_tokens));
-         console.log('userdataallcdlogon',response.data);
         return response.data;
       } else {
         throw new Error(response?.data?.message || "Login failed");
@@ -57,65 +55,25 @@ export const userLogin = (loginData) => {
   };
 };
 
-// export const sendPasswordlessLink = (data) => {
-//   return async (dispatch) => {
-//     dispatch(setPasswordlessLoader(true));
-//     try {
-//       // Magic link send API call
-//       const response = await axiosInstance.post(
-//         `/users/create-login-magic-link`,
-//         data
-//       );
-
-//       if (!response?.data?.success) {
-//         throw new Error(response?.data?.message || "Failed to send magic link");
-//       }
-
-//       return {
-//         success: true,
-//         message: response?.data?.message || "Magic link sent successfully",
-//       };
-//     } catch (error) {
-//       console.error("sendPasswordlessLink error:", error);
-//       throw new Error(
-//         error?.response?.data?.message ||
-//           error?.message ||
-//           "An error occurred while sending magic link"
-//       );
-//     } finally {
-//       dispatch(setPasswordlessLoader(false));
-//     }
-//   };
-// };
-
 export const sendPasswordlessLink = (data) => {
   return async (dispatch) => {
     dispatch(setPasswordlessLoader(true));
 
     try {
-      // Step 1: Magic link API call
       const response = await axiosInstance.post(
         `/users/create-login-magic-link`,
         data
       );
 
-      console.log("Magic link API full response:", response?.data);
-
       if (!response?.data?.success) {
         throw new Error(response?.data?.message || "Failed to send magic link");
       }
 
-      // Agar backend magic link return kare to log karo
       if (response?.data?.data?.magic_link) {
-        console.log(
-          "Generated magic link from backend:",
-          response?.data?.data?.magic_link
-        );
       } else {
         console.warn("⚠️ Backend did not return magic link in response.");
       }
 
-      // Final return — abhi profile API call nahi kar rahe
       return {
         success: true,
         message: response?.data?.message || "Magic link sent successfully",
@@ -130,176 +88,11 @@ export const sendPasswordlessLink = (data) => {
       );
     } finally {
       dispatch(setPasswordlessLoader(false));
-      
     }
   };
 };
 
-// export const fetchProfileFromMagicLink = () => {
-//   return async (dispatch) => {
-//     try {
-//       // URL se client_id nikaalna
-//       const urlParams = new URLSearchParams(window.location.search);
-//       const clientIdBase64 = urlParams.get("client_id");
-
-//       if (!clientIdBase64) {
-//         throw new Error("client_id not found in URL");
-//       }
-
-//       // Decode helper
-//       const decodeBase64 = (str) => {
-//         try {
-//           const decodedUrlPart = decodeURIComponent(str);
-//           return atob(decodedUrlPart);
-//         } catch (err) {
-//           console.error("Base64 decode failed:", err);
-//           return null;
-//         }
-//       };
-
-//       const decodedClientId = decodeBase64(clientIdBase64);
-//       if (!decodedClientId) {
-//         throw new Error("Invalid client_id format");
-//       }
-
-//       console.log("Decoded Client ID:", decodedClientId);
-
-//       // Profile API call
-//       const profileResponse = await axiosInstance.post(
-//         `/users/get-seller-profile`,
-//         { params: { client_id: decodedClientId } }
-//       );
-
-//       if (!profileResponse?.data?.success) {
-//         throw new Error(
-//           profileResponse?.data?.message || "Failed to get seller profile"
-//         );
-//       }
-
-//       // Redux store update
-//       dispatch(setUserProfile(profileResponse.data.data));
-
-//       return {
-//         success: true,
-//         profileData: profileResponse.data.data,
-//       };
-//     } catch (error) {
-//       console.error("fetchProfileFromMagicLink error:", error);
-//       throw new Error(
-//         error?.response?.data?.message ||
-//           error?.message ||
-//           "An error occurred while fetching profile"
-//       );
-//     }
-//   };
-// };
-
-// export const sendPasswordlessLink = (data) => {
-//   return async (dispatch) => {
-//     dispatch(setPasswordlessLoader(true));
-//     try {
-//       const response = await axiosInstance.post(
-//         `/users/create-login-magic-link`,
-//         data
-//       );
-
-//       if (response?.data?.success) {
-//         // Decode base64 client_id
-//         const clientIdBase64 = response?.data?.data?.client_id;
-//         // const decodedClientId = atob(clientIdBase64);
-//         console.log("Decoded Client ID:", response);
-//         return response?.data;
-//       } else {
-//         throw new Error(response?.data?.message || "Failed to send magic link");
-//       }
-//     } catch (error) {
-//       throw error;
-//     } finally {
-//       dispatch(setPasswordlessLoader(false));
-//     }
-//   };
-// };
-
-// export const sendPasswordlessLink = (data) => {
-//   return async (dispatch) => {
-//     dispatch(setPasswordlessLoader(true));
-//     try {
-//       const response = await axiosInstance.post(
-//         `/users/create-login-magic-link`,
-//         data
-//       );
-
-//       if (response?.data?.success) {
-//         const clientIdBase64 = response?.data?.data?.client_id;
-
-//         let decodedClientId;
-//         try {
-//           decodedClientId = atob(clientIdBase64);
-//         } catch (decodeErr) {
-//           console.error("Base64 decode error:", decodeErr);
-//           throw new Error("Invalid client_id format");
-//         }
-
-//         console.log("Decoded Client ID:", decodedClientId);
-
-//         // Get seller profile
-//         const profileResponse = await axiosInstance.get(
-//           `/users/get-seller-profile`,
-//           { params: { client_id: decodedClientId } }
-//         );
-
-//         if (!profileResponse?.data?.success) {
-//           throw new Error(
-//             profileResponse?.data?.message || "Failed to get profile"
-//           );
-//         }
-
-//         // Redux me user data set
-//         dispatch(setUserProfile(profileResponse.data.data));
-
-//         return {
-//           success: true,
-//           message:
-//             response?.data?.message || "Magic link sent & profile loaded",
-//           magicLinkData: response?.data,
-//           profileData: profileResponse?.data,
-//         };
-//       } else {
-//         throw new Error(response?.data?.message || "Failed to send magic link");
-//       }
-//     } catch (error) {
-//       throw error;
-//     } finally {
-//       dispatch(setPasswordlessLoader(false));
-//     }
-//   };
-// };
-
-// export const userLogout = () => {
-//   return async (dispatch) => {
-//     dispatch(setLogoutLoader(true));
-//     try {
-//       const response = await axiosInstance.post("users/logout");
-
-//       if (response) {
-//         dispatch(setToken(null));
-//         dispatch(setUserToken(null))
-//         dispatch(setRegisterToken(null))
-//         dispatch(setRegisterData(null))
-//         dispatch(setSelectedServiceId(null))
-//         return true;
-//       }
-//     } catch (error) {
-
-//     } finally {
-//       dispatch(setLogoutLoader(false));
-//     }
-//   };
-// };
-
-let magicLinkProcessed = false; // guard to prevent multiple calls
-
-
+let magicLinkProcessed = false;
 
 export const userLogout = () => {
   return async (dispatch) => {
@@ -308,7 +101,6 @@ export const userLogout = () => {
       const response = await axiosInstance.post("users/logout");
 
       if (response) {
-        // Clear Redux states
         dispatch(setToken());
         dispatch(setUserToken());
         dispatch(setRegisterToken());
@@ -323,7 +115,6 @@ export const userLogout = () => {
         dispatch(setRegisterStep(0));
         dispatch(clearCompanyData());
 
-        // ✅ Clear relevant safeLocalStorage items
         safeLocalStorage.removeItem("barkToken");
         safeLocalStorage.removeItem("barkUserToken");
         safeLocalStorage.removeItem("registerDataToken");
@@ -386,7 +177,6 @@ const authSlice = createSlice({
       state.switchUserLoader = action.payload;
     },
     setPasswordlessLoader(state, action) {
-      // ✅ Added reducer for passwordless loader
       state.passwordlessLoader = action.payload;
     },
     setCurrentUser(state, action) {
@@ -403,21 +193,18 @@ export const {
   setSwitchUserLoader,
   setCurrentUser,
   setPasswordlessLoader,
-  setUserProfile
+  setUserProfile,
 } = authSlice.actions;
 
 export const fetchProfileFromMagicLink = (navigate) => {
   return async (dispatch, getState) => {
     try {
-      // Guard: agar pehle hi process ho chuka hai, to skip
       if (magicLinkProcessed) return;
       magicLinkProcessed = true;
 
-      // Agar profile pehle se store me hai, skip
       const { user } = getState();
       if (user?.profile) return;
 
-      // URL se client_id nikaalna
       const urlParams = new URLSearchParams(window.location.search);
       const clientIdBase64 = urlParams.get("client_id");
 
@@ -425,7 +212,6 @@ export const fetchProfileFromMagicLink = (navigate) => {
         throw new Error("client_id not found in URL");
       }
 
-      // Decode helper
       const decodeBase64 = (str) => {
         try {
           const base64Decoded = atob(str);
@@ -438,38 +224,12 @@ export const fetchProfileFromMagicLink = (navigate) => {
       };
 
       const decodedClientId = decodeBase64(clientIdBase64);
-      console.log("Decoded Client ID:", decodedClientId);
-     
+
       if (!decodedClientId) {
         throw new Error("Invalid client_id format");
       }
 
-      // Profile API call (params ko config me bhejna)
-      // const profileResponse = await axiosInstance.post(
-      //   `/users/get-seller-profile?client_id=313|uTApWD0iF7DehXBthwKPZ3NDyx7b8xRdB0mlMdt593e76905`,
-      //   undefined
-      // );
-
-      // const profileResponse = await fetch(
-      //   `${baseURL}users/get-seller-profile?client_id=312|GbIJPAipis61y2XQn4OYSZkLHsutEwo669OqVNJj8eaec68b`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       // Agar token chahiye to add:
-      //       // Authorization: `Bearer ${safeLocalStorage.getItem("auth_token")}`
-      //     },
-      //     body: null, // POST request me empty body
-      //   }
-      // );
-      // const profileResponse = await axiosInstance.post(
-      //   `users/get-seller-profile`,
-      //   {
-      //     client_id: "317|0v0XdJQVku2sWbu0N13dvWA7xKLN5DLExKqc2789050efaa2",
-      //   }
-      // );
-      const api =
-        `${BASE_IMAGE_URL}api/users/get-seller-profile`;
+      const api = `${BASE_IMAGE_URL}api/users/get-seller-profile`;
 
       const res = await fetch(api, {
         method: "POST",
@@ -484,10 +244,7 @@ export const fetchProfileFromMagicLink = (navigate) => {
         }),
       });
 
-      // Parse JSON
       const profileResponse = await res.json();
-
-      console.log("📩 Raw API response success:",  profileResponse.data);
 
       if (!profileResponse?.success) {
         throw new Error(
@@ -497,25 +254,16 @@ export const fetchProfileFromMagicLink = (navigate) => {
 
       dispatch(setUserProfile(profileResponse.data));
 
-    
-      // Agar API token bhi bhejti hai to store kar lo
       if (profileResponse.data) {
-        console.log('usersettoken',profileResponse.data);
-        console.log('usersettoken',profileResponse.data?.user_type);
-        console.log('usersettoken',profileResponse.data?.remember_tokens);
-        
         dispatch(setToken(profileResponse.data?.remember_tokens));
         dispatch(setUserToken(profileResponse.data));
         dispatch(setCurrentUser(profileResponse.data?.user_type));
         dispatch(setAuthToken(profileResponse.data?.remember_tokens));
-        
+
         axiosInstance.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${profileResponse.data?.remember_tokens}`;
-        
       }
-
-      // Redux store update
 
       return {
         success: true,

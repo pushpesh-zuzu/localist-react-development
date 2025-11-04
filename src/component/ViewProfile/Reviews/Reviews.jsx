@@ -6,28 +6,20 @@ import moment from "moment";
 import SubmitReviewModal from "../SubmitReviewModal";
 import { useLocation, useParams } from "react-router-dom";
 import starImg from "../../../assets/Icons/MyResponse/StarImg.svg";
-import blueStar from "../../../assets/Icons/MyResponse/blueStarImg.svg";
 import greyStar from "../../../assets/Icons/MyResponse/grayStar.svg";
-import blackStar from "../../../assets/Icons/MyResponse/blackStarImg.svg";
 import webIconImg from "../../../assets/Images/Setting/weblogo.svg";
 import halfStar from "../../../assets/Icons/MyResponse/halfStar.svg";
 import GoogleIcon from "../../../assets/Icons/Reviews/GoogleIcon.svg";
 import FacebookIcon from "../../../assets/Icons/Reviews/FacebookIcon.svg";
 import LinkedInIcon from "../../../assets/Icons/Reviews/LinkedInIcon.svg";
 import StarIcon from "../../../assets/Icons/Reviews/StarIcon.svg";
-// import { addViewProfileList } from "../../store/LeadSetting/leadSettingSlice";
-import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
 const ReviewSection = ({
   details,
   disableReviewButton = false,
   showSummary = true,
-  // isFromManualBids,
 }) => {
-  console.log(details);
   const location = useLocation();
-  const isFromManualBids =
-    new URLSearchParams(location.search).get("from") === "replies";
   const queryParams = new URLSearchParams(location.search);
   const [isopen, setIsOpen] = React.useState(false);
   const [canOpenModal, setCanOpenModal] = React.useState(false);
@@ -37,28 +29,16 @@ const ReviewSection = ({
   const dispatch = useDispatch();
   const { reviewListData } = useSelector((state) => state.myProfile);
   const { registerData } = useSelector((state) => state.findJobs);
-  const data = details?.reviews;
   const userId = userToken?.id ? userToken?.id : registerData?.id;
   const UUIDs = profileId?.profileId ? profileId?.profileId : details?.uuid;
-  // const reviewLength = data?.length || 0;
   const updatedReviews =
     reviewListData?.length > 0 ? reviewListData : details?.reviews;
-  // const reviewLength = updatedReviews?.length || 0;
   const { viewProfileData, reviewProfileData } = useSelector(
     (state) => state.leadSetting
   );
 
-  console.log(reviewProfileData);
-  const datata = useSelector((state) => state.leadSetting);
   let token = localStorage.getItem("barkUserToken");
   token = JSON.parse(token);
-  // const reviewLength =
-  //   token && token.remember_tokens
-  //     ? viewProfileData?.reviews_count ??
-  //       reviewProfileData?.reviews_count ??
-  //       details?.reviews_count ??
-  //       0
-  //     : reviewProfileData?.reviews_count ?? details?.reviews_count ?? 0;
 
   const reviewLength =
     reviewListData?.length > 0
@@ -77,7 +57,6 @@ const ReviewSection = ({
       ).toFixed(1)
     : details?.avg_rating ?? 0;
 
-  // const detailsData = details?.reviews?.map((item) => item?.ratings);
   const detailsData = (details?.reviews || []).map((item) => item?.ratings);
 
   useEffect(() => {
@@ -109,32 +88,6 @@ const ReviewSection = ({
     }
   };
 
-  console.log("review test");
-
-  const totalReviews = 5;
-  console.log(reviewProfileData, viewProfileData, "viewProfileData");
-
-  const initialCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-
-  const ratingCounts = detailsData?.reduce(
-    (acc, rating) => {
-      const num = parseInt(rating, 10);
-      if (acc[num] !== undefined) {
-        acc[num] += 1;
-      }
-      return acc;
-    },
-    { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
-  );
-
-  const getPercentage = (count) => {
-    return totalReviews > 0 ? Math.round((count / totalReviews) * 100) : 0;
-  };
-
-  // useEffect(()=> {
-
-  //     dispatch(getReviewListApi(UUIDs))
-  // },[UUIDs])
   const fetchReviews = () => {
     dispatch(getReviewListApi(UUIDs));
   };
@@ -148,7 +101,6 @@ const ReviewSection = ({
       <div className={styles.reviewList}>
         {showSummary && (
           <div className={styles.reviewHeader}>
-            {/* <h2>Reviews ({reviewLength})</h2> */}
             <h2>Reviews{reviewLength > 0 && ` (${reviewLength})`}</h2>
 
             <div>
@@ -157,13 +109,6 @@ const ReviewSection = ({
                   canOpenModal ? styles.leaveBtn : styles.disableLeaveBtn
                 }
                 onClick={handleOpen}
-                // disabled={!isFromManualBids}
-                // style={{
-                //   cursor:
-                //     !isFromManualBids || disableReviewButton
-                //       ? "not-allowed"
-                //       : "pointer",
-                // }}
               >
                 Leave a review
               </button>
@@ -174,12 +119,6 @@ const ReviewSection = ({
           <div className={styles.container}>
             <div className={styles.left}>
               <div className={styles.score}>
-                {/* {token && token.remember_tokens
-                  ? viewProfileData?.avg_rating ??
-                    reviewProfileData?.avg_rating ??
-                    details?.avg_rating ??
-                    0
-                  : reviewProfileData?.avg_rating ?? details?.avg_rating ?? 0} */}
                 {avgRating}
                 /5
               </div>
@@ -242,36 +181,6 @@ const ReviewSection = ({
                 <img src={LinkedInIcon} alt="" />
                 <img src={StarIcon} alt="" />
               </div>
-              {/* {[5, 4, 3, 2, 1].map((star) => {
-                const count = ratingCounts[star] ?? 0;
-                return (
-                  <div key={star} className={styles.row}>
-                    <label className={styles.ratingLabel}>
-                      <div className={styles.starText}>
-                        <div style={{ width: "10px" }}>{star}</div>
-                        <img
-                          src={count > 0 ? blueStar : greyStar}
-                          alt="star"
-                          height={23}
-                          width={23}
-                        />
-                      </div>
-                    </label>
-
-                    <div className={styles.barWrapper}>
-                      <div
-                        className={styles.bar}
-                        style={{
-                          width: `${getPercentage(count)}%`,
-                          backgroundColor: count > 0 ? "#00aaff" : "#ccc",
-                        }}
-                      />
-                    </div>
-
-                    <span className={styles.percent}>{count}</span>
-                  </div>
-                );
-              })} */}
             </div>
           </div>
         )}
@@ -324,7 +233,6 @@ const ReviewSection = ({
                 </div>
               </div>
 
-              {/* 👇 This section for desktop only */}
               <div className={styles.dateSection}>
                 <span className={styles.date}>
                   {moment(item.created_at).format("DD-MM-YYYY")}

@@ -123,8 +123,8 @@ const TRANSPORT_FIND_SERVICE_CONTENT = {
       text: "When it comes to choosing the right holiday taxi service, what you really want to think about is how you like to travel and who you’re traveling with. Getting this right makes the difference between a smooth, comfortable ride and a journey that feels like a hassle.",
     },
     {
-      type:'p',
-      text:'Here’s how to make it easy:'
+      type: "p",
+      text: "Here’s how to make it easy:",
     },
     { type: "h3", text: "Private transfers – comfort & convenience" },
     {
@@ -148,55 +148,22 @@ const TRANSPORT_FIND_SERVICE_CONTENT = {
       text: "If you are on a tighter budget and don’t mind sharing, this is the right choice for you. With a shared shuttle, you can save money. Yes, you’ll share the ride with others and might make a few stops along the way, but it’s reliable, scheduled, and still gets you where you need to be without breaking the bank.",
     },
     {
-        type: "h3",
+      type: "h3",
       text: "Group minibus",
     },
-     {
+    {
       type: "p",
       text: "Perfect for families, friends, or teams traveling together. Spacious, cost-effective, and equipped for luggage, group transfers keep everyone in one vehicle without breaking the budget.",
     },
     {
-        type: "h3",
+      type: "h3",
       text: "Special transfers",
     },
-     {
+    {
       type: "p",
       text: "Options for luxury vehicles, mobility-friendly vans, or extra luggage capacity. Customised to fit your needs.",
     },
 
-
-    // {
-    //   type: "h2",
-    //   text: "Popular airport transfer services on Localists",
-    // },
-    
-    // 
-    // {
-    //   type: "table",
-    //   tableHeaders: ["Transfer type", "Description"],
-    //   rowData: [
-    //     [
-    //       "Private transfer",
-    //       "A direct, door-to-door service in a comfortable vehicle. Ideal for solo travelers or business trips where time and privacy matter. Professional drivers track your flight, so even if you’re delayed, your ride is ready and waiting.",
-    //     ],
-    //     [
-    //       "Holiday transfers",
-    //       "Stress-free rides to and from the airport for your holiday. Whether it’s a family trip, honeymoon, or group getaway, holiday transfers ensure you start and end your break in comfort and style, no crowded buses, no hassle.",
-    //     ],
-    //     [
-    //       "Group minibus",
-    //       "Perfect for families, friends, or teams traveling together. Spacious, cost-effective, and equipped for luggage, group transfers keep everyone in one vehicle without breaking the budget.",
-    //     ],
-    //     [
-    //       "Shared shuttle",
-    //       "A budget-friendly option where you share a ride with other passengers in a shuttle van.",
-    //     ],
-    //     [
-    //       "Special transfers",
-    //       "Options for luxury vehicles, mobility-friendly vans, or extra luggage capacity. Customised to fit your needs.",
-    //     ],
-    //   ],
-    // },
     {
       type: "h2",
       text: "How to pick the right airport transfer driver",

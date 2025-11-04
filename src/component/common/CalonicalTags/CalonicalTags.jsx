@@ -10,16 +10,12 @@ const CalonicalTags = () => {
   const path = parts.slice(2).join("/");
 
   const canonicalUrl = `${baseUrl}/${lang}/${country}/${path}`;
-  // console.log(canonicalUrl,'calonical url',lang,'ll',country,'ccc')
   return (
     <Helmet>
-      {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* OG URL */}
       <meta property="og:url" content={canonicalUrl} />
 
-      {/* Hreflang Tags */}
       <link
         rel="alternate"
         hreflang="en-gb"

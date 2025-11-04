@@ -7,7 +7,6 @@ import {
   deleteSellerAccreditation,
   setIsDirtyRedux,
 } from "../../../store/MyProfile/myProfileSlice";
-
 import styles from "./AccreditationsAccordion.module.css";
 import ISSAImage from "../../../assets/Images/Setting/newAccoredationImg.svg";
 import iIcon from "../../../assets/Images/iIcon.svg";
@@ -26,16 +25,12 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
   const { registerData } = useSelector((state) => state.findJobs);
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   const [optional, setOptional] = useState(hasAccreditations || 0);
-  console.log(accordionGroups, "loppppp");
 
-  // Input change → update name
   const handleInputChange = (index, value) => {
     const updated = [...accordionGroups];
     if (updated[index].id) {
-      // existing accreditation → update accreditations[0]
       updated[index].accreditations[0] = value;
     } else {
-      // new accreditation
       updated[index].newAccreditation = value;
     }
     setAccordionGroups(updated);
@@ -43,7 +38,6 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
-  // Upload image
   const handleImageUpload = (index, file) => {
     const updated = [...accordionGroups];
     updated[index].accreImage = file;
@@ -58,7 +52,6 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     }
   };
 
-  // Add new blank accreditation
   const handleAccreditationAdd = () => {
     setAccordionGroups([
       ...accordionGroups,
@@ -66,18 +59,14 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     ]);
   };
 
-  // Remove accreditation
   const handleRemoveAccreditation = (index) => {
     const updated = [...accordionGroups];
 
-    // Capture the group being removed
     const removedGroup = updated[index];
 
-    // Remove it from UI
     updated.splice(index, 1);
     setAccordionGroups(updated);
 
-    // If it's an existing accreditation, dispatch an API call to delete it
     if (removedGroup.id) {
       dispatch(deleteSellerAccreditation(removedGroup.id));
     }
@@ -85,53 +74,12 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
-  // const handleSave = () => {
-  //   // Filter out groups without a name
-  //   const filtered = accordionGroups.filter(
-  //     (g) =>
-  //       (Array.isArray(g.accreditations) &&
-  //         g.accreditations[0] &&
-  //         g.accreditations[0].trim() !== "") ||
-  //       (g.newAccreditation && g.newAccreditation.trim() !== "")
-  //   );
-
-  //   if (filtered.length === 0) {
-  //     toast.error(
-  //       "Please enter at least one accreditation name before saving."
-  //     );
-  //     return;
-  //   }
-
-  //   const payload = filtered.map((g) => ({
-  //     id: g.id ?? "",
-  //     accreditations:
-  //       Array.isArray(g.accreditations) &&
-  //       g.accreditations[0] &&
-  //       g.accreditations[0].trim() !== ""
-  //         ? [g.accreditations[0].trim()]
-  //         : [],
-  //     newAccreditation:
-  //       g.newAccreditation && g.newAccreditation.trim() !== ""
-  //         ? g.newAccreditation.trim()
-  //         : "",
-  //     image: g.accreImage || null, // File OR { previewUrl } OR null
-  //   }));
-
-  //   if (payload.length === 0) {
-  //     toast.error("Accreditation name cannot be empty.");
-  //     return;
-  //   }
-
-  //   dispatch(updateSellerAccreditations(payload));
-  // };
-
   const handleSave = () => {
     const invalid = accordionGroups.some(
       (g) =>
-        (g.accreImage && // user added image
+        (g.accreImage &&
           (!g.accreditations[0] || g.accreditations[0].trim() === "") &&
           (!g.newAccreditation || g.newAccreditation.trim() === "")) ||
-        // OR completely empty row (no name, no image)
         (!g.accreImage &&
           (!g.accreditations[0] || g.accreditations[0].trim() === "") &&
           (!g.newAccreditation || g.newAccreditation.trim() === ""))
@@ -164,7 +112,6 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     dispatch(updateSellerAccreditations(payload));
   };
 
-  // Toast messages
   useEffect(() => {
     if (accreditationsUpdateSuccess) {
       toast.success("Accreditations saved successfully!");
@@ -180,7 +127,6 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     }
   }, [accreditationsUpdateSuccess, accreditationsUpdateError, dispatch]);
 
-  // Populate existing details
   useEffect(() => {
     if (details && Array.isArray(details)) {
       const mapped = details.map((item) => ({

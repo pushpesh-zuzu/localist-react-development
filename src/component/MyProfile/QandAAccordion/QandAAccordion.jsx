@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./QandAAccordion.module.css";
-import axios from "axios";
-import axiosInstance from "../../../Api/axiosInstance";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -27,29 +25,16 @@ const questions = [
     id: "jobLove",
     label: "What do you enjoy most about your work?",
   },
-  // {
-  //   id: "startBusiness",
-  //   label: "What inspired you to start your own business?",
-  // },
+
   {
     id: "clientChoose",
     label: "Why should Localists.com customers choose your business?",
   },
-  // {
-  //   id: "remoteServices",
-  //   label: "Can you provide your services online or remotely? If so, please add details.",
-  // },
-  // {
-  //   id: "safeFromCovid",
-  //   label: "What changes have you made to keep your customers safe from Covid-19?",
-  // },
 ];
 
 const QandAAccordion = ({ details }) => {
   const [answers, setAnswers] = useState({});
-  const [loading, setLoading] = useState(false);
   const [loadingQuestionId, setLoadingQuestionId] = useState(null);
-  console.log(details, "details");
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -69,25 +54,10 @@ const QandAAccordion = ({ details }) => {
     dispatch(updateSellerQandA(answers));
   };
 
-  // useEffect(() => {
-  //   if (details && Array.isArray(details)) {
-  //     const initialAnswers = {};
-  //     details.forEach((item) => {
-  //       const matchingQuestion = questions.find(
-  //         (q) => q.label === item.questions
-  //       );
-  //       if (matchingQuestion) {
-  //         initialAnswers[matchingQuestion.id] = item.answer;
-  //       }
-  //     });
-  //     setAnswers(initialAnswers);
-  //   }
-  // }, [details]);
   useEffect(() => {
     if (details && Array.isArray(details)) {
       const initialAnswers = {};
       details.forEach((item) => {
-        console.log(item, "item");
         const match = questions.find(
           (q) =>
             q.label.toLowerCase().trim() === item.questions.toLowerCase().trim()
@@ -146,35 +116,6 @@ const QandAAccordion = ({ details }) => {
               )}
             </div>
             <div className={styles.buttonRow}>
-              {/* <button
-        className={styles.saveBtn}
-        onClick={() => dispatch(updateSellerQandA({ [question.id]: answers[question.id] }))}
-        disabled={sellerLoader}
-      >
-        {sellerLoader ? "Saving..." : "Save"}
-      </button> */}
-              {/* <button
-                className={styles.saveBtn}
-                onClick={() => {
-                  setLoadingQuestionId(question.id);
-                  dispatch(
-                    updateSellerQandA({ [question.id]: answers[question.id] })
-                  )
-                    .then(() => setLoadingQuestionId(null))
-                    .catch(() => setLoadingQuestionId(null));
-                }}
-                disabled={loadingQuestionId === question.id}
-              >
-                {loadingQuestionId === question.id ? (
-                  <Spin
-                    indicator={
-                      <LoadingOutlined spin style={{ color: "white" }} />
-                    }
-                  />
-                ) : (
-                  "Save"
-                )}
-              </button> */}
               <button
                 className={styles.saveBtn}
                 onClick={() => {

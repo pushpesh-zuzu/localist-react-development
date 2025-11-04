@@ -1,4 +1,3 @@
-import React from "react";
 import BannerWithBreadCrum from "../../category/ServicesHeroSection/BannerWithBreadCrum";
 import { Helmet } from "react-helmet-async";
 import HowItWorks from "../../category/howItWorks/CloneHowitWorks";
@@ -53,22 +52,6 @@ function Transport() {
             name: "Airport Transfers",
             path: "/airport-transfers-near-me",
           },
-          //   {
-          //     name: "Holiday transfers",
-          //     // path: ""
-          //   },
-          //   {
-          //     name: "Group minibus",
-          //     // path: ""
-          //   },
-          //   {
-          //     name: "Shared shuttle",
-          //     //  path: ""
-          //   },
-          //   {
-          //     name: "Special transfers",
-          //     // path: ""
-          //   },
         ]}
       />
       <GetQuotes ctaText={"Transport"} needSString={false} />

@@ -74,7 +74,6 @@ export const getleadPreferencesList = (serviceId) => {
         dispatch(setPreferencesList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setServiceListLoader(false));
     }
@@ -92,10 +91,8 @@ export const leadPreferencesData = (leadPreferencesData) => {
 
       if (response) {
         return response.data;
-        //   dispatch(setLeadPreferenceData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesLoader(false));
     }
@@ -114,7 +111,6 @@ export const leadPreferences = (leadPreferencesData) => {
         dispatch(setLeadPreferenceData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -134,7 +130,6 @@ export const isOnlineRemote = (onlineData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -148,13 +143,10 @@ export const totalCreditData = (totalCreditData) => {
         `users/total-credit`,
         totalCreditData
       );
-      console.log(response, "response");
       if (response) {
         dispatch(setTotalCreditData(response?.data?.data));
-        // dispatch(setPurchasedData(response?.data?.data?.plan_purchased))
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -169,12 +161,10 @@ export const getLeadRequestList = (leadRequestData) => {
         leadRequestData
       );
       if (response) {
-        console.log(response, "setLeadRequestListData");
         dispatch(setLeadRequestListData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setLeadListLoader(false));
     }
@@ -188,7 +178,6 @@ export const getLeadFiterApiList = (leadFilterData, isLeads) => {
         `users/sort-by-credit-value`,
         leadFilterData
       );
-      console.log(response, "setLeadRequestListData");
       if (response) {
         if (isLeads) {
           dispatch(setSaveForLaterData(response?.data?.data));
@@ -198,7 +187,6 @@ export const getLeadFiterApiList = (leadFilterData, isLeads) => {
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setLeadListLoader(false));
     }
@@ -217,7 +205,6 @@ export const getLeadProfileRequestList = (leadProfileData) => {
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setLeadListProfileLoader(false));
     }
@@ -233,12 +220,10 @@ export const addServiceLead = (ServiceData) => {
       );
 
       if (response) {
-        // dispatch(setLeadPreferenceData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      console.log("Error Data:", errorData);
 
       if (errorData && typeof errorData === "object") {
         Object.values(errorData).forEach((messages) => {
@@ -256,7 +241,6 @@ export const addServiceLead = (ServiceData) => {
       }
 
       return { success: false, error: errorData };
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -275,7 +259,6 @@ export const addLocationLead = (locationData) => {
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      console.log("Error Data:", errorData);
 
       if (errorData && typeof errorData === "object") {
         Object.values(errorData).forEach((messages) => {
@@ -311,7 +294,6 @@ export const editLocationLead = (locationData) => {
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
-      console.log("Error Data:", errorData);
 
       if (errorData && typeof errorData === "object") {
         Object.values(errorData).forEach((messages) => {
@@ -348,7 +330,6 @@ export const getLocationLead = (getlocationData) => {
         dispatch(setGetLocationData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -364,7 +345,6 @@ export const getAutoBid = (bidData) => {
         dispatch(setAutoBidData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setAutoBidListLoader(false));
     }
@@ -383,7 +363,6 @@ export const getAutoBidData = (autoBidData) => {
         dispatch(setAutoBidListData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setAutoBidLoader(false));
     }
@@ -402,7 +381,6 @@ export const removeItemData = (removeData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setRemoveListLoader(false));
     }
@@ -422,7 +400,6 @@ export const getSaveLaterListData = (removeLocationData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setRemoveLocationListLoader(false));
     }
@@ -441,7 +418,6 @@ export const removeItemLocationData = (removeLocationData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setRemoveLocationListLoader(false));
     }
@@ -461,7 +437,6 @@ export const getServiceWiseLocationData = (serviceWiseLocationData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setRemoveLocationListLoader(false));
     }
@@ -483,7 +458,6 @@ export const getAddManualBidData = (manualBidData) => {
       }
     } catch (error) {
       showToast("error", error?.response?.data?.message);
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setManualBidListLoader(false));
     }
@@ -498,7 +472,6 @@ export const getCreditPlanList = () => {
         dispatch(setCreditsPlanList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setGetCreditListLoader(false));
     }
@@ -513,7 +486,6 @@ export const getCreditList = () => {
         dispatch(setCreditsList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setGetCreditListLoader(false));
     }
@@ -535,7 +507,6 @@ export const getAddMultipleManualBidData = (multiplemanualBidData) => {
       }
     } catch (error) {
       showToast("error", error?.response?.data?.message);
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setManualBidListLoader(false));
     }
@@ -556,7 +527,6 @@ export const getfilterListData = (filterData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setManualBidListLoader(false));
     }
@@ -576,7 +546,6 @@ export const saveForLaterApi = (saveForLaterData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSaveLaterListLoader(false));
     }
@@ -597,7 +566,6 @@ export const getSellerRecommendedApi = (saveForLaterData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSaveLaterListLoader(false));
     }
@@ -617,7 +585,6 @@ export const getSevenWeekBidApi = (SevenDayData) => {
         return response.data;
       }
     } catch (error) {
-      // dispatch(setAuthError(error?.response?.data?.message));
       showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
@@ -638,7 +605,6 @@ export const getSevenWeekPausedBidApi = (SevenPauseData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -658,7 +624,6 @@ export const getOnlineRemoteApi = (remoteData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -675,12 +640,10 @@ export const getPendingLeadDataApi = (remoteData) => {
       );
 
       if (response) {
-        //dispatch(setGetPendingLeadsData(response?.data?.data))
         dispatch(setData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -697,12 +660,10 @@ export const getHiredLeadDataApi = (remoteData) => {
       );
 
       if (response) {
-        // dispatch(setGetHiredLeadsData(response?.data?.data))
         dispatch(setData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -840,7 +801,6 @@ export const sellerResponseStatusApi = (sellerResponseStatusData) => {
       );
 
       if (response) {
-        // dispatch(setAutoBidData(response?.data?.data))
         return response.data;
       }
     } catch (error) {
@@ -860,7 +820,6 @@ export const switchAutobidApi = (switchAutobidApiData) => {
       );
 
       if (response) {
-        // dispatch(setAutoBidData(response?.data?.data))
         return response.data;
       }
     } catch (error) {
@@ -886,7 +845,6 @@ export const getswitchAutobidApi = (switchAutobidApiData) => {
       }
     } catch (error) {
       showToast("error", error?.response?.data?.message);
-      console.log(error?.response?.data?.message, "error");
     } finally {
       dispatch(setSevenDaysAutobidLoader(false));
     }
@@ -895,7 +853,6 @@ export const getswitchAutobidApi = (switchAutobidApiData) => {
 export const addSellerNotesApi = (sellerApiData) => {
   return async (dispatch) => {
     dispatch(setSellerNotesLoader(true));
-    console.log(sellerApiData, "sellerApiData");
     try {
       const response = await axiosInstance.post(
         `users/seller-notes`,
@@ -903,8 +860,6 @@ export const addSellerNotesApi = (sellerApiData) => {
       );
 
       if (response) {
-        console.log(response, "response");
-        // dispatch(setGetSwitchAutoBidData(response?.data?.data))
         return response.data;
       }
     } catch (error) {
@@ -1029,7 +984,6 @@ export const getleadPrimaryServiceList = (serviceId) => {
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setServiceListLoader(false));
     }
@@ -1048,7 +1002,6 @@ export const getExpandRadiusList = (RadiusId) => {
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setExpandRadiusLoader(false));
     }
@@ -1067,7 +1020,6 @@ export const addViewProfileList = (profileId) => {
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setExpandRadiusLoader(false));
     }
@@ -1080,14 +1032,12 @@ export const ReviewProfile = (profile_uuid) => {
       const response = await axiosInstance.post(`review/get-profile`, null, {
         params: { profile_uuid },
       });
-      console.warn(response?.data, "response viewprofile");
 
       if (response) {
         dispatch(setReviewProfile(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setExpandRadiusLoader(false));
     }
@@ -1131,7 +1081,6 @@ const leadSettingSlice = createSlice({
       state.leadRequestLoader = action.payload;
     },
     setLeadRequestListData(state, action) {
-      console.log(action.payload, "action.payload");
       state.leadRequestList = action.payload;
     },
     setGetLocationData(state, action) {
@@ -1247,11 +1196,9 @@ const leadSettingSlice = createSlice({
     },
     setViewProfileData(state, action) {
       state.viewProfileData = action.payload;
-      console.log(action.payload, "viewProfileData");
     },
     setReviewProfile(state, action) {
       state.reviewProfileData = action.payload;
-      console.log(action.payload, "viewProfileData");
     },
   },
 });

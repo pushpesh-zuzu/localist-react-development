@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./LeadsCards.module.css";
 import BlueSmsIcon from "../../../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../../../assets/Images/Leads/BluePhoneIcon.svg";
 import VerifiedPhoneIcon from "../../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
-import FirstToRespondImg from "../../../../assets/Images/Leads/FirstToRespondImg.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAddManualBidData,
@@ -14,7 +13,6 @@ import {
   totalCreditData,
 } from "../../../../store/LeadSetting/leadSettingSlice";
 import { Spin } from "antd";
-import CustomModal from "../ConfirmModal";
 import { showToast } from "../../../../utils";
 import saveImg from "../../../../assets/Images/Leads/saveLaterImg.svg";
 import { useNavigate } from "react-router-dom";
@@ -22,10 +20,9 @@ import { LoadingOutlined } from "@ant-design/icons";
 import ContactConfirmModal from "../ContactConfirmModal";
 import ContactSuccessModal from "../ContactSuccessModal";
 import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg";
-// import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 
-const LeadsCards = ({ enoughCredit }) => {
+const LeadsCards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setModalOpen] = useState(false);
@@ -34,19 +31,9 @@ const LeadsCards = ({ enoughCredit }) => {
   const [saveLaterLoaderId, setSaveLaterLoaderId] = useState(null);
   const [isopen, setIsOpen] = useState(false);
   const [planpurcahse, setPlanPurchase] = useState("");
-  const [leadViewDetails, setLeadViewDetails] = useState(false);
-  // const [leadRequestDatas,setLeadRequestData] = useState()
 
-  const {
-    leadRequestList,
-    leadRequestLoader,
-    manualBidLoader,
-    saveLaterLoader,
-    filters,
-    totalCredit,
-    purchasedData,
-  } = useSelector((state) => state.leadSetting);
-  console.log(leadRequestList, "leadRequestList");
+  const { leadRequestList, leadRequestLoader, filters, totalCredit } =
+    useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const data = leadRequestList?.length;
@@ -59,93 +46,12 @@ const LeadsCards = ({ enoughCredit }) => {
     };
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
-  // useEffect(() => {
-  // const leadRequestData = {
-  //   user_id: userToken?.remember_tokens
-  //     ? userToken?.remember_tokens
-  //     : registerData?.remember_tokens,
-  // };
-
-  // // Initial call
-  // dispatch(getLeadRequestList(leadRequestData));
-
-  // // Set up interval
-  // const intervalId = setInterval(() => {
-  //   dispatch(getLeadRequestList(leadRequestData));
-  // }, 60000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
 
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
   };
 
-  // const handleContinue = () => {
-  //   if (!selectedItem) return;
-  // if(totalCredit > 0) {
-
-  // }
-
-  //   const formData = new FormData();
-  //   formData.append("buyer_id", selectedItem?.customer_id);
-  //   formData.append("user_id", userToken?.remember_tokens);
-  //   formData.append("bid", selectedItem?.credit_score);
-  //   formData.append("lead_id", selectedItem?.id);
-  //   formData.append("bidtype", "purchase_leads");
-  //   formData.append("service_id", selectedItem?.service_id);
-  //   formData.append("distance", "0");
-
-  //   dispatch(getAddManualBidData(formData)).then((result) => {
-  //     if (result) {
-  //       showToast("success", result?.message)
-  //       setModalOpen(false);
-  //     }
-  //     const data = {
-  //       user_id: userToken?.remember_tokens
-  //     }
-  //     dispatch(totalCreditData(data))
-  //     dispatch(getLeadRequestList(data))
-  //   });
-  // }
-  // console.log(selectedItem, "purchasedData");
-  //   const handleContinue = () => {
-  //   if (!selectedItem) return;
-  //   if(totalCredit?.plan_purchased === 0){
-  //     setIsOpen(true)
-  //   }
-
-  //   if (totalCredit?.total_credit <= 0 && selectedItem?.credit_score <= totalCredit?.total_credit) {
-  //    setIsOpen(true)
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("buyer_id", selectedItem?.customer_id);
-  //   formData.append("user_id", userToken?.remember_tokens);
-  //   formData.append("bid", selectedItem?.credit_score);
-  //   formData.append("lead_id", selectedItem?.id);
-  //   formData.append("bidtype", "purchase_leads");
-  //   formData.append("service_id", selectedItem?.service_id);
-  //   formData.append("distance", "0");
-
-  //   dispatch(getAddManualBidData(formData)).then((result) => {
-  //     if (result) {
-  //       showToast("success", result?.message);
-  //       setModalOpen(false);
-  //     }
-
-  //     const data = {
-  //       user_id: userToken?.remember_tokens
-  //     };
-
-  //     dispatch(totalCreditData(data));
-  //     dispatch(getLeadRequestList(data));
-  //   });
-  // };
-
   const addManualBidData = (item) => {
-    console.log(item, "sel");
     const formData = new FormData();
     formData.append("buyer_id", item?.customer_id);
     formData.append(
@@ -178,16 +84,13 @@ const LeadsCards = ({ enoughCredit }) => {
   };
   const handleContinue = (item) => {
     if (!item) return;
-    console.log(item?.credit_score, totalCredit?.total_credit, "item");
     setSelectedItem(item);
     setPlanPurchase(totalCredit?.plan_purchased);
 
-    // Condition 1: Plan not purchased
     if (totalCredit?.plan_purchased === 0) {
       setIsOpen(true);
       return;
     }
-    // Condition 2: Not enough credits
     if (Number(totalCredit?.total_credit) < Number(item?.credit_score)) {
       setIsOpen(true);
       return;
@@ -196,30 +99,6 @@ const LeadsCards = ({ enoughCredit }) => {
       addManualBidData(item);
       return;
     }
-
-    // Proceed with API call if conditions are okay
-    // const formData = new FormData();
-    // formData.append("buyer_id", item?.customer_id);
-    // formData.append("user_id", userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens);
-    // formData.append("bid", item?.credit_score);
-    // formData.append("lead_id", item?.id);
-    // formData.append("bidtype", "purchase_leads");
-    // formData.append("service_id", item?.service_id);
-    // formData.append("distance", "0");
-
-    // dispatch(getAddManualBidData(formData)).then((result) => {
-    //   if (result) {
-    //     showToast("success", result?.message);
-    //     setModalOpen(false);
-    //   }
-
-    //   const data = {
-    //     user_id: userToken?.remember_tokens,
-    //   };
-
-    //   dispatch(totalCreditData(data));
-    //   dispatch(getLeadRequestList(data));
-    // });
   };
   useEffect(() => {
     const data = {
@@ -229,47 +108,12 @@ const LeadsCards = ({ enoughCredit }) => {
     };
     dispatch(totalCreditData(data));
   }, []);
-  const handleContinues = () => {
-    const formData = new FormData();
-    formData.append("buyer_id", selectedItem?.customer_id);
-    formData.append(
-      "user_id",
-      userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens
-    );
-    formData.append("bid", selectedItem?.credit_score);
-    formData.append("lead_id", selectedItem?.id);
-    formData.append("bidtype", "purchase_leads");
-    formData.append("service_id", selectedItem?.service_id);
-    formData.append("distance", "0");
 
-    dispatch(getAddManualBidData(formData)).then((result) => {
-      if (result) {
-        showToast("success", result?.message);
-        // setIsOpen(false)
-        setModalOpen(false);
-      }
-
-      const data = {
-        user_id: userToken?.remember_tokens
-          ? userToken?.remember_tokens
-          : registerData?.remember_tokens,
-      };
-
-      dispatch(totalCreditData(data));
-      dispatch(getLeadRequestList(data));
-    });
-  };
-
-  const handleViewProfile = (item) => {
-    navigate(`/lead/profile-view/${item?.customer_id}?id=${item?.id}`);
-  };
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // Optional: for smooth animation
+      behavior: "smooth",
     });
     const saveLaterData = {
       user_id: userToken?.remember_tokens
@@ -281,10 +125,7 @@ const LeadsCards = ({ enoughCredit }) => {
     dispatch(saveForLaterApi(saveLaterData)).then((result) => {
       if (result.success) {
         showToast("success", result?.message);
-        // const leadRequestData = {
-        //   user_id: userToken?.remember_tokens
-        // }
-        // dispatch(getLeadRequestList(leadRequestData))
+
         const formData = new FormData();
 
         formData.append("user_id", userToken?.remember_tokens || "");
@@ -302,16 +143,10 @@ const LeadsCards = ({ enoughCredit }) => {
         formData.append("service_id", selectedServiceIds.join(","));
 
         formData.append("credits", filters.credits.join(","));
-        // formData.append("contact_preferences", filters.contactPreferences.join(","));
         formData.append("lead_spotlights", filters.leadSpotlights.join(","));
-        // formData.append("buyer_actions", filters.buyerActions.join(","));
         formData.append("unread", filters.unread ? 1 : 0);
 
-        dispatch(getLeadRequestList(formData)).then((result) => {
-          // if (result) {
-          //   showToast("success", result?.message);
-          // }
-        });
+        dispatch(getLeadRequestList(formData)).then((result) => {});
       }
       setSaveLaterLoaderId(null);
     });
@@ -328,21 +163,13 @@ const LeadsCards = ({ enoughCredit }) => {
   const [viewDetailsOpen, setViewDetaisOpen] = useState(null);
 
   const handleViewDetais = (item) => {
-    // setClickedDetails(item);
     if (viewDetailsOpen === item?.id) {
       setViewDetaisOpen(null);
     } else {
       setViewDetaisOpen(item?.id);
     }
   };
-  // const handleViewDetais = (item) => {
-  //   // setLeadRequestData(item)
-  //   setLeadViewDetails(!leadViewDetails)
-  // }
-  // const handlePhoneCall = (item) => {
-  //   const phoneNumber = item?.phone || "";
-  //   window.open(`tel:${phoneNumber}`, "_blank");
-  // };
+
   return (
     <>
       {leadRequestLoader ? (
@@ -372,7 +199,6 @@ const LeadsCards = ({ enoughCredit }) => {
             <>
               <div>
                 {leadRequestList?.slice(0, visibleCount)?.map((item, index) => {
-                  console.log(item, "itemss");
                   return (
                     <>
                       <div className={styles.cardParent}>
@@ -387,12 +213,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                     ?.charAt(0)
                                     .toUpperCase() || "U"}
                                 </div>
-                                <div
-                                  className={styles.details}
-                                  // onClick={() => handleViewProfile(item)}
-                                >
-                                  {/* <h3>{item?.customer?.name}</h3> */}
-                                  {/* <h3>{item?.customer?.name?.split(" ")[0]}</h3> */}
+                                <div className={styles.details}>
                                   <h3>
                                     {item?.customer?.name
                                       ? item.customer.name
@@ -416,35 +237,7 @@ const LeadsCards = ({ enoughCredit }) => {
                                 {item?.category?.name}
                               </span>
                             </div>
-                            {/* <div className={styles.contactContainer}>
-                              <div className={styles.contactItem}>
-                                <img src={BluePhoneIcon} alt="" />
-                                <span>
-                                  {item?.phone
-                                    ? `${item?.phone.substring(
-                                        0,
-                                        2
-                                      )}${"*".repeat(item?.phone.length - 2)}`
-                                    : "N/A"}
-                                </span>
-                              </div>
-                              <div className={styles.contactItem}>
-                                <img src={BlueSmsIcon} alt="" />
-                                <span>
-                                  {item?.customer?.email
-                                    ? `${item?.customer?.email
-                                        .split("@")[0]
-                                        .substring(0, 2)}${"*".repeat(
-                                        Math.max(
-                                          0,
-                                          item?.customer?.email.split("@")[0]
-                                            .length - 2
-                                        )
-                                      )}@${item?.customer?.email.split("@")[1]}`
-                                    : "N/A"}
-                                </span>
-                              </div>
-                            </div> */}
+
                             <div className={styles.contactContainer}>
                               <div className={styles.contactItem}>
                                 <img src={BluePhoneIcon} alt="" />
@@ -467,23 +260,11 @@ const LeadsCards = ({ enoughCredit }) => {
                                         item?.customer?.email.split("@")[1]
                                       }`
                                     : "N/A"}
-                                  {/* {item?.customer?.email
-                                    ? `${item?.customer?.email
-                                        .split("@")[0]
-                                        .substring(0, 2)}${"*".repeat(
-                                        Math.max(
-                                          0,
-                                          item?.customer?.email.split("@")[0]
-                                            .length - 2
-                                        )
-                                      )}@${item?.customer?.email.split("@")[1]}`
-                                    : "N/A"} */}
                                 </span>
                               </div>
                             </div>
                           </div>
 
-                          {/* Middle Section - Job Details */}
                           <div className={styles.jobDetails}>
                             <div className={styles.highlightText}>
                               Highlights :
@@ -495,7 +276,6 @@ const LeadsCards = ({ enoughCredit }) => {
                               <button
                                 style={{
                                   position: "absolute",
-                                  // top: "10px",
                                   right: "0px",
                                 }}
                                 className={styles.saveBtn}
@@ -564,24 +344,14 @@ const LeadsCards = ({ enoughCredit }) => {
                                 </p>
                               )}
                             </div>
-                            {/* <p>
-                        <strong>Starting:</strong> In the next month
-                      </p> */}
                           </div>
 
-                          {/* Right Section - Lead Purchase */}
                           <div className={styles.leadActions}>
                             <button
                               className={styles.purchaseButton}
-                              // onClick={() => {
-                              //   // setSelectedItem(item);
-                              //   // setModalOpen(true);
-
-                              // }}
                               onClick={() => handleContinue(item)}
                             >
                               Contact
-                              {/* {item?.customer?.name} */}
                             </button>
                             <div
                               style={{
@@ -594,17 +364,9 @@ const LeadsCards = ({ enoughCredit }) => {
                                 {item?.credit_score} Credits
                               </span>
                             </div>
-                            {/* <p className={styles.responseStatus}>
-                      <img src={FirstToRespondImg} alt="" />
-                      1st to Responded
-                    </p> */}
+
                             <div className={styles.mainText}>
                               <div>ACT FAST</div>
-                              {/* <span>{item?.view_count} Professionals</span>{" "}
-                              <span className={styles.desktopOnlyBreak}>
-                                <br />
-                              </span>{" "}
-                              have viewed this lead */}
                             </div>
                           </div>
                         </div>
@@ -667,22 +429,14 @@ const LeadsCards = ({ enoughCredit }) => {
           )}
         </>
       )}
-      {/* <CustomModal
-        isOpen={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        onContinue={handleContinues}
-        message="Are you sure you want to continue?"
-        loading={manualBidLoader}
-      /> */}
+
       <ContactSuccessModal
         onClose={() => setModalOpen(false)}
-        //  onContinue={handleContinues}
         isOpen={isModalOpen}
         details={selectedItem}
       />
       {isopen && (
         <ContactConfirmModal
-          // onClose={() => setIsOpen(false)}
           onClose={(e) => handleOpenClose(e)}
           enoughCredit={planpurcahse}
           confirmModal={isModalOpen}

@@ -3,25 +3,14 @@ import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import leftArrow from "../../../assets/Images/backwordArrow.svg";
 import rightArrow from "../../../assets/Images/forwordArrow.svg";
-// import personalTrainers from "../../../assets/Images/personalPopularTrainer.svg";
-// import houseCleaning from "../../../assets/Images/houseCleaner.svg";
-// import webDesign from "../../../assets/Images/webDesign.svg";
-// import gardening from "../../../assets/Images/gardening.svg";
 import { useEffect, useState } from "react";
-// import Modal from "../serviceCategory/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import imgBanner from "../../../assets/Images/houseCleaner.svg";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { BASE_URL_IMAGE } from "../../../utils";
 import { Spin } from "antd";
-// import Modal from "./Modal";
-// const serviceData = [
-//   { title: "Personal Trainers", image: personalTrainers },
-//   { title: "House Cleaning", image: houseCleaning },
-//   { title: "Web Design", image: webDesign },
-//   { title: "Gardening", image: gardening },
-// ];
+
 function AutoplayPlugin(slider) {
   let timeout;
   let mouseOver = false;

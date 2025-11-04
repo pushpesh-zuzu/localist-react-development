@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./PlaceNewRequest.module.css";
 import BuyerRegistration from "./BuyerRegistration/BuyerRegistration";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,12 +6,11 @@ import {
   getbuyerrequestList,
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
-// import moment from "moment";
 import moment from "moment-timezone";
 import { Spin } from "antd";
 import { useNavigate, useLocation } from "react-router-dom";
 import HiredProfessional from "./BuyerRegistration/HiredProfessional/HiredProfessional";
-import WhatService from "./BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
+
 const PlaceNewRequest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHiredModalOpen, setIsHiredModalOpen] = useState(false);
@@ -24,7 +23,7 @@ const PlaceNewRequest = () => {
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedService(null); // ✅ reset selectedService when modal closes
+    setSelectedService(null);
   };
   const [fromImageModal, setFromImageModal] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -39,7 +38,6 @@ const PlaceNewRequest = () => {
   const { buyerRequestList, buyerrequestListLoader } = useSelector(
     (state) => state.buyer
   );
-  console.log("buyerRequestList", buyerRequestList);
   useEffect(() => {
     dispatch(getbuyerrequestList());
   }, []);
@@ -65,7 +63,6 @@ const PlaceNewRequest = () => {
         setSelectedService(null);
       }
 
-      // ✅ Clear location.state after using it
       navigate(location.pathname, { replace: true });
     }
   }, [location.state, navigate]);
@@ -73,21 +70,11 @@ const PlaceNewRequest = () => {
   useEffect(() => {
     if (selectedService) {
       if (fromImageModal) {
-        console.log("✅ Service came from ImageModal");
       } else {
-        console.log("✅ Service came from normal flow");
       }
       openModal();
     }
   }, [selectedService, fromImageModal]);
-
-  useEffect(() => {
-    console.log("🔎 Location state:", location.state);
-  }, [location.state]);
-
-  useEffect(() => {
-    console.log("🔎 SelectedService state:", selectedService);
-  }, [selectedService]);
 
   return (
     <div className={styles.container}>

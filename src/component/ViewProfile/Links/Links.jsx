@@ -1,10 +1,8 @@
-import React from "react";
 import styles from "./Links.module.css";
 import LinkIcon from "../../../assets/Icons/LinkIcon.svg";
 
 const Links = ({ details }) => {
   const data = details?.user_details;
-  console.log(data, "datadata");
 
   const cleanLink = (link) => {
     return link.replace(/(^\w+:|^)\/\//, "");

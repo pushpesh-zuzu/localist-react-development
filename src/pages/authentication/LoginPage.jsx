@@ -7,7 +7,6 @@ import PasswordInput from "../../component/customInputs/PasswordInput";
 import { useDispatch, useSelector } from "react-redux";
 import {
   userLogin,
-  setUserProfile,
   sendPasswordlessLink,
   fetchProfileFromMagicLink,
 } from "../../store/Auth/authSlice";
@@ -31,11 +30,9 @@ const LoginPage = () => {
   const { loginLoader, passwordlessLoader } = useSelector(
     (state) => state.auth
   );
-  // 🔹 Check if magic link was clicked (client_id in URL)
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const clientIdBase64 = urlParams.get("client_id");
-    console.log("set new API kol");
 
     if (clientIdBase64) {
       dispatch(fetchProfileFromMagicLink())
@@ -46,7 +43,6 @@ const LoginPage = () => {
             } else if (res?.profileData?.active_status === 2) {
               navigate("/buyers/create");
             } else {
-              //navigate("/dashboard");
             }
           }
         })
@@ -56,7 +52,6 @@ const LoginPage = () => {
     }
   }, [dispatch, navigate]);
 
-  // 🔹 Normal Login with password
   const handleLogin = (values) => {
     const { email, password } = values;
     dispatch(userLogin({ email, password }))
@@ -84,7 +79,6 @@ const LoginPage = () => {
       });
   };
 
-  // 🔹 Send magic link
   const handlePasswordlessSend = (values) => {
     dispatch(sendPasswordlessLink({ email: values.email }))
       .then((result) => {

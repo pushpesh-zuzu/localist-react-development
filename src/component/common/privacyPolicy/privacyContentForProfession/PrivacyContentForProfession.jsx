@@ -1053,10 +1053,7 @@ export const professionalsTermsData = [
     type: "p",
     text: "- Email: terms@localists.com",
   },
-  // {
-  //   type: "p",
-  //   text: "- Phone: [INSERT HERE]",
-  // },
+
   {
     type: "p",
     text: "- Post: Suite 2A Honeycomb South, Wrexham Road, Chester, CH4 9QJ",
@@ -1118,44 +1115,6 @@ const PrivacyContentForProfession = () => {
               />
             );
 
-        //   case "pNumber":
-        //     return (
-        //       <p
-        //         key={index}
-        //         className={`${styles.paragraph} ${styles.withNumber}`}
-        //         style={{ marginTop: "0px" }}
-        //       >
-        //         <span className={styles.paraNumber}>{block?.pNumber}</span>
-        //         <span dangerouslySetInnerHTML={{ __html: block.text }} />
-        //       </p>
-        //     );
-
-        //   case "pheading":
-        //     return (
-        //       <p
-        //         key={index}
-        //         className={`${styles.paragraph} ${styles.indented}`}
-        //         style={{ marginTop: "0px" }}
-        //       >
-        //         <b>{block?.heading}</b> {block.text}
-        //       </p>
-        //     );
-
-        //   case "li":
-        //     return (
-        //       <ul
-        //         key={index}
-        //         className={styles.list}
-        //         style={{ paddingBottom: block?.spacing && "16px" }}
-        //       >
-        //         <li
-        //           dangerouslySetInnerHTML={{
-        //             __html: `<b>${block?.heading}</b> ${block.text}`,
-        //           }}
-        //         />
-        //       </ul>
-        //     );
-
           case "liNonBold":
             return (
               <ul
@@ -1172,43 +1131,6 @@ const PrivacyContentForProfession = () => {
                 />
               </ul>
             );
-
-        //   case "list":
-        //     return (
-        //       <ul key={index} className={styles.contactList}>
-        //         {block.items.map((item, i) => (
-        //           <li key={i}>
-        //             {item.link ? (
-        //               <a href={item.link} className={styles.link}>
-        //                 {item.text}
-        //               </a>
-        //             ) : (
-        //               item.text
-        //             )}
-        //           </li>
-        //         ))}
-        //       </ul>
-        //     );
-        //   case "table":
-        //     return (
-        //       <div key={index} className={styles.tableWrapper}>
-        //         <table className={styles.table}>
-        //           <tbody>
-        //             {block.rows.map((row, rowIndex) => (
-        //               <tr key={rowIndex}>
-        //                 {row.map((cell, colIndex) => (
-        //                   <td
-        //                     key={colIndex}
-        //                     className={colIndex === 0 ? styles.firstCol : ""}
-        //                     dangerouslySetInnerHTML={{ __html: cell }}
-        //                   />
-        //                 ))}
-        //               </tr>
-        //             ))}
-        //           </tbody>
-        //         </table>
-        //       </div>
-        //     );
 
           default:
             return null;

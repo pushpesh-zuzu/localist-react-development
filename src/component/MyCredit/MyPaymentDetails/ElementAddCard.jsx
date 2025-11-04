@@ -30,7 +30,6 @@
 //             payment_method_id: paymentMethod.id, // Stripe payment method ID
 //         };
 
-//         console.log(data,"data")
 //     }
 
 //     return (

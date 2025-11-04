@@ -1,11 +1,5 @@
-import React from "react";
-import {
-  EyeOutlined,
-  EyeInvisibleOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
-import { Spin } from "antd";
-import styles from "./ChangePasswordModal.module.css"; // move related styles here or use global styles
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import styles from "./ChangePasswordModal.module.css";
 
 const ChangePasswordModal = ({
   isOpen,
@@ -17,7 +11,6 @@ const ChangePasswordModal = ({
   handleFormChange,
   handleSavePassword,
   setIsModalOpen,
-  loading,
 }) => {
   if (!isOpen) return null;
 
@@ -28,7 +21,6 @@ const ChangePasswordModal = ({
           <h3>Change Password</h3>
         </div>
 
-        {/* New Password Field */}
         <div className={styles.formGroup}>
           <label>New Password</label>
           <div className={styles.passwordField}>
@@ -51,7 +43,6 @@ const ChangePasswordModal = ({
           {formData.error && <p className={styles.error}>{formData.error}</p>}
         </div>
 
-        {/* Confirm New Password Field */}
         <div className={styles.formGroup}>
           <label>Confirm New Password</label>
           <div className={styles.passwordField}>
@@ -82,21 +73,14 @@ const ChangePasswordModal = ({
           <button
             className={styles.modalCancelButton}
             onClick={() => setIsModalOpen(false)}
-            // disabled={loading}
           >
             Cancel
           </button>
           <button
             className={styles.modalSaveButton}
             onClick={handleSavePassword}
-            // disabled={loading}
           >
             Save
-            {/* {loading ? (
-              <Spin indicator={<LoadingOutlined spin style={{ color: "white" }} />} />
-            ) : (
-              "Save"
-            )} */}
           </button>
         </div>
       </div>
