@@ -2,7 +2,7 @@ import styles from "./CookiePolicy.module.css";
 export const professionalsTermsData = [
   {
     type: "p",
-    text: "This Cookies Policy explains what Cookies are and how We use them. You should read this policy so you can understand what type of cookies We use, or the information We collect using Cookies and how that information is used",
+    text: "This Cookies Policy explains what Cookies are and how We use them. You should read this policy so you can understand what type of cookies We use, or the information We collect using Cookies and how that information is used.",
   },
   {
     type: "p",

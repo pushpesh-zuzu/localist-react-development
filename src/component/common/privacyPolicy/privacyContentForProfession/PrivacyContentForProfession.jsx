@@ -658,7 +658,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "(b) the operators of websites to which the Services link;",
+    text: "(b) the operators of websites to which the Services link; and",
     marginL: "10px",
   },
   {
@@ -799,7 +799,7 @@ export const professionalsTermsData = [
   {
     type: "p",
     marginL: "10px",
-    text: "(d) request deletion of your personal data, including permanent closure of your Account;",
+    text: "(d) request deletion of your personal data, including permanent closure of your Account.",
   },
   {
     type: "p",
