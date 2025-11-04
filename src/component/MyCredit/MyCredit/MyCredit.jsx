@@ -23,6 +23,7 @@ import AddCardModal from "../MyPaymentDetails/AddCardModal";
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 import { useUserGeo } from "../../../utils/geo";
 import { setStarterPackPurchased } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import NewBusiness from "../../../assets/Images/NewBusiness.svg";
 
 const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
@@ -185,11 +186,13 @@ const MyCredits = () => {
           We apply a small fee for each new customer you choose to contact.
         </p>
 
-        <div className={styles.pickYourCredit}>
-          <p>
-            <span>Pick Your Credit Plan </span> & Access New Business Today
-          </p>
-        </div>
+        {creditPlanList?.[0]?.plan_type !== "starter" && (
+          <div className={styles.pickYourCredit}>
+            <p>
+              <span>Pick Your Credit Plan </span> & Access New Business Today
+            </p>
+          </div>
+        )}
 
         <div className={styles.cardList}>
           {creditPlanList?.length === 0 ? (
@@ -198,44 +201,88 @@ const MyCredits = () => {
             [...creditPlanList]
               .sort((a, b) => a.price - b.price)
               .map((item, index) => (
-                <div className={styles.card} key={index}>
+                <div
+                  className={`${styles.card} ${
+                    item?.plan_type === "starter" && styles.cardPadding
+                  }`}
+                  key={index}
+                >
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
-                      20% Boost – Your Exclusive Sign Up Offer
+                      <span>20% Boost 🚀</span>{" "}
+                      <div>Your Exclusive Sign Up Offer</div>
+                      <b>Exclusive Offer</b>
                     </div>
                   )}
+                  {item?.plan_type === "starter" && (
+                    <>
+                      <div
+                        className={`${styles.cardHeader} ${styles.removeBorder}`}
+                      >
+                        <p className={styles.responses}>
+                          About {item?.no_of_responses} Responses
+                        </p>
+                        <span
+                          className={`${styles.creditTag} ${styles.creditpadding}`}
+                        >
+                          <span className={styles.diagonal_price}>220</span>
+                          {item?.no_of_leads} Credits
+                        </span>
+                        <h3>
+                          £320 <span>(Excl. tax)</span>
+                        </h3>
+                        <button
+                          className={`${styles.buyButton} ${styles.buttonWidth}`}
+                          onClick={() => handleBuyNow(item)}
+                        >
+                          Buy Now
+                        </button>
+                      </div>
+                      <div className={styles.new_business_card}>
+                        <img src={NewBusiness} alt="..." />
+                        <div>
+                          Get new local business enquiries - fast. Guaranteed
+                          with our New Business Promise.
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {item?.plan_type !== "starter" && (
+                    <div className={styles.cardHeader}>
+                      <h3>{item?.name}</h3>
+                      <span className={styles.creditTag}>
+                        {item?.no_of_leads} Credits
+                      </span>
+                    </div>
+                  )}
+                  {item?.plan_type !== "starter" && (
+                    <>
+                      <p className={styles.responses}>
+                        About {item?.no_of_responses} Responses
+                      </p>
 
-                  <div className={styles.cardHeader}>
-                    <h3>{item?.name}</h3>
-                    <span className={styles.creditTag}>
-                      {item?.no_of_leads} Credits
-                    </span>
-                  </div>
+                      <div className={styles.price}>
+                        £{item?.price}
+                        <small>(Excl. tax)</small>
+                      </div>
 
-                  <p className={styles.responses}>
-                    About {item?.no_of_responses} Responses
-                  </p>
+                      <button
+                        className={styles.buyButton}
+                        onClick={() => handleBuyNow(item)}
+                      >
+                        Buy Now
+                      </button>
 
-                  <div className={styles.price}>
-                    £{item?.price}
-                    <small>(Excl. tax)</small>
-                  </div>
-
-                  <button
-                    className={styles.buyButton}
-                    onClick={() => handleBuyNow(item)}
-                  >
-                    Buy Now
-                  </button>
-
-                  <div className={styles.checkboxWrap}>
-                    <input
-                      type="checkbox"
-                      checked={!!checkedPlans[item.id]}
-                      onChange={() => handleCheckboxChange(item.id)}
-                    />
-                    <label>Auto top-up next time</label>
-                  </div>
+                      <div className={styles.checkboxWrap}>
+                        <input
+                          type="checkbox"
+                          checked={!!checkedPlans[item.id]}
+                          onChange={() => handleCheckboxChange(item.id)}
+                        />
+                        <label>Auto top-up next time</label>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))
           )}
