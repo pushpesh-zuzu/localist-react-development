@@ -21,6 +21,7 @@ import RegionsComponent from "../../subCategory/Regions/Regions";
 import { transformData } from "../../../utils/allServicesUtils";
 import GetQuotesLevel3 from "../GetQuotesLevel3";
 import AveragePrice from "../../subCategory/AveragePrice/AveragePrice";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function Accounting() {
   const transformed = transformData(
@@ -42,14 +43,16 @@ function Accounting() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+        breadcrumb={ACCOUNTING_BREADCRUMB_CONFIG["accountants-near-me"]}
+        bannerImage={AccountingBanner}
+      />
       <SearchAndFindAnAccountant
         title={ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.title}
         findingHeading={
           ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.findingHeading
         }
-        breadcrumb={
-          ACCOUNTING_BREADCRUMB_CONFIG["accountants-near-me"]
-        }
+        breadcrumb={ACCOUNTING_BREADCRUMB_CONFIG["accountants-near-me"]}
         // bannerImage={CONTENT_CONFIG_BANNER["accountants-near-me"]?.banner}
         bannerImage={AccountingBanner}
         para1={ACCOUNTING_CONTENT_CONFIG["accountants-near-me"]?.para1}
@@ -67,18 +70,12 @@ function Accounting() {
         //   category={slug} // Optional: if you need to know the category
       />
       <FindServiceLevel3
-        contentBlocks={
-          ACCOUNTING_FIND_SERVICE_CONTENT["accountants-near-me"]
-        }
+        contentBlocks={ACCOUNTING_FIND_SERVICE_CONTENT["accountants-near-me"]}
         title={ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.ctaText}
       />
-      <Frequently
-        FrequentlyQuestion={ACCOUNTING_FAQ["accountants-near-me"]}
-      />
+      <Frequently FrequentlyQuestion={ACCOUNTING_FAQ["accountants-near-me"]} />
       <AveragePrice
-        title={
-          ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.avgPriceTitle
-        }
+        title={ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.avgPriceTitle}
         RELTED_PRICE={ACCOUNTING_AVERAGE_PRICE["accountants-near-me"]}
         // avg_price={ACCOUNTING_CONFIG_TOP["accountants-near-me"]?.showSpeicialits}
         // showSpeicialits={

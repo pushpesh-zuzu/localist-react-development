@@ -8,12 +8,13 @@ import {
   setSelectedServiceId,
   setService,
 } from "../../../store/FindJobs/findJobSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
 import { generateSlug } from "../../../utils";
 import { Spin } from "antd";
 import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
 import rightArrow from "../../../assets/Images/ServicePanel/rightArrow.svg";
+import { extractAllParams } from "../../../utils/decodeURLParams";
 
 const FindLocalJobs = () => {
   const [Input, setInput] = useState("");
@@ -22,14 +23,16 @@ const FindLocalJobs = () => {
   const [isMobile, setIsMobile] = useState(false); // ✅ State में move किया
   const [isFocused, setIsFocused] = useState(false);
   const dispatch = useDispatch();
-        const { lang, country } = useParams(); 
-        const currentLang = lang || "en";
-        const currentCountry = country || "gb";
+  const { lang, country } = useParams();
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
   const divRef = useRef(null);
   const { popularList, service, popularLoader, searchServiceLoader } =
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
-
+  const { search } = useLocation();
+  const allParams = extractAllParams(search || window.location.search);
+  console.log(allParams, "allParams");
   // const handleServiceClick = (service) => {
   //   const slug = generateSlug(service.name);
   //   dispatch(setSelectedServiceId(service.id));
@@ -94,12 +97,32 @@ const FindLocalJobs = () => {
 
   const DEBOUNCE_MS = 250;
   const debounceRef = useRef(null);
+  // const buildQueryString = (params) => {
+  //   const query = new URLSearchParams(params).toString();
+  //   return query ? `?${query}` : "";
+  // };
+  const buildQueryString = (params = {}) => {
+    const utm_source = params.utm_source || "";
+    const utm_medium = params.utm_medium || "";
+    const utm_campaign = params.utm_campaign || "";
 
+    // Build only these 3 params
+    const query = new URLSearchParams({
+      ...(utm_source && { utm_source }),
+      ...(utm_medium && { utm_medium }),
+      ...(utm_campaign && { utm_campaign }),
+    }).toString();
+
+    return query ? `?${query}` : "";
+  };
   const handleGetStarted = () => {
     if (selectedService) {
       const slug = generateSlug(selectedService.name);
       dispatch(setSelectedServiceId(selectedService.id));
-      navigate(`/${currentLang}/${currentCountry}/sellers/create-account/${slug}`);
+      const queryString = buildQueryString(allParams);
+      navigate(
+        `/${currentLang}/${currentCountry}/sellers/create-account/${slug}${queryString}`
+      );
     }
   };
 
@@ -118,16 +141,14 @@ const FindLocalJobs = () => {
       {/* Left Section */}
       <div className={styles.leftSection}>
         <h1>Connect with Clients Who Need You Now </h1>
-        <p>
-          Get matched with 1000s of local customers who need your services
-        </p>
+        <p>Get matched with 1000s of local customers who need your services</p>
         <div className={styles.searchInputContainer}>
           <input
             className={styles.searchInput}
             placeholder="What service do you provide?"
             onFocus={() => {
               setIsFocused(true);
-              setIsDropdownOpen(true);        // open dropdown on focus
+              setIsDropdownOpen(true); // open dropdown on focus
               // if field is empty on focus, load ALL services so dropdown isn't blank
               if (Input.trim() === "") {
                 dispatch(searchService({ search: "" /*, serviceid*/ }));
@@ -135,7 +156,6 @@ const FindLocalJobs = () => {
             }}
             onBlur={() => {
               setIsFocused(false);
-              
             }}
             onChange={(e) => {
               const value = e.target.value;
@@ -194,29 +214,30 @@ const FindLocalJobs = () => {
           />
         ) : (
           <div className={styles.servicesList}>
-          {popularList?.map((service) => {
-            const slug = generateSlug(service.name);
-            const path = `/${currentLang}/${currentCountry}/sellers/create-account/${slug}`;
+            {popularList?.map((service) => {
+              const slug = generateSlug(service.name);
+              const queryString = buildQueryString(allParams);
+              const path = `/${currentLang}/${currentCountry}/sellers/create-account/${slug}${queryString}`;
 
-            return (
-              <Link
-                key={service.id}
-                to={path}
-                style={{textDecoration:'none'}}
-                className={styles.serviceItem}
-                onClick={() => dispatch(setSelectedServiceId(service.id))}
-              >
-                <img
-                  src={
-                    service?.category_icon
-                      ? `${service?.baseurl}/${service?.category_icon}`
-                      : hiring
-                  }
-                  alt={service.title}
-                />
-                <span className={styles.serviceName}>{service.name}</span>
-              </Link>
-            );
+              return (
+                <Link
+                  key={service.id}
+                  to={path}
+                  style={{ textDecoration: "none" }}
+                  className={styles.serviceItem}
+                  onClick={() => dispatch(setSelectedServiceId(service.id))}
+                >
+                  <img
+                    src={
+                      service?.category_icon
+                        ? `${service?.baseurl}/${service?.category_icon}`
+                        : hiring
+                    }
+                    alt={service.title}
+                  />
+                  <span className={styles.serviceName}>{service.name}</span>
+                </Link>
+              );
             })}
           </div>
         )}

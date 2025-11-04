@@ -13,14 +13,46 @@ import {
 } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
 import LandingHowItWork from "./LandingHowItWork/LandingHowItWork";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import { useEffect, useState } from "react";
 
 const LandingFenceAndGateAwin = ({}) => {
+  const [isClient, setIsClient] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    //only client side execution
+    setIsClient(true);
+    setIsDesktop(window.innerWidth > 768);
+
+    // Window resize
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
+      {isClient && (
+        <div>
+          {isDesktop ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-
+      <CalonicalTags
+        bannerImage={LANDING_DETAIL_BANNERS["fencing_ppc"]?.banner}
+      />
       <FindDetailAndBannerWrapper
         title={LANDING_TITLES_AND_META["fencing_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["fencing_ppc"].paragraphs}

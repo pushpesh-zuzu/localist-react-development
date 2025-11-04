@@ -17,6 +17,7 @@ import {
 import GutterCleanerBanner from "../banners/GutterCleaner.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -77,9 +78,11 @@ function GutterCleaner() {
       <Helmet>
         {/* <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} /> */}
-        <meta name="robots" content="noindex" />
       </Helmet>
-
+      <CalonicalTags
+        breadcrumb={breadcrumbConfig}
+        bannerImage={GutterCleanerBanner}
+      />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

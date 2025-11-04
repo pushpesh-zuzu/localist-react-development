@@ -23,6 +23,7 @@ import privateicon from "../assets/Icons/megamenu/private.svg";
 import privateBlue from "../assets/Icons/megamenu/private-blue.svg";
 import willsicon from "../assets/Icons/megamenu/wills.svg";
 import willsBlue from "../assets/Icons/megamenu/wills-blue.svg";
+import airport from "../assets/Icons/megamenu/airport.svg";
 
 export const serviceesData = [
   {
@@ -231,21 +232,25 @@ export const megaMenu = [
     icon: houseIcon,
     subcategory: [
       {
+        id: 49,
         name: "Fence & Gate Installation",
         path: "fencing-contractors-near-me",
         children: locationData.map((loc) => `Fence Installers in ${loc}`),
       },
       {
+        id: 51,
         name: "Driveway Installation",
         path: "driveway-installers-near-me",
         children: locationData.map((loc) => `Driveway Installers in ${loc}`),
       },
       {
+        id: 52,
         name: "Patio Services",
         path: "patio-layers-near-me",
         children: locationData.map((loc) => `Patio Installers in ${loc}`),
       },
       {
+        id: 54,
         name: "Artificial Grass Installation",
         path: "artificial-grass-installers-near-me",
         children: locationData.map(
@@ -253,12 +258,169 @@ export const megaMenu = [
         ),
       },
       {
+        id: 43,
         name: "Landscaping",
         path: "landscape-gardeners-near-me",
         children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
       },
+<<<<<<< HEAD
     ],
   },
+=======
+      {
+        id: 43,
+        name: "Tree Surgeon",
+        path: "tree-surgeon-near-me",
+      },
+      {
+        id: 43,
+        name: "Gutter Cleaning",
+        path: "gutter-cleaning-near-me",
+      },
+      // {
+      //   name: "General Builders",
+      //   children: locationData.map((loc) => `General Builders in ${loc}`),
+      // },
+      // {
+      //   name: "Property Extensions",
+      //   children: locationData.map((loc) => `Home Extensions in ${loc}`),
+      // },
+      // {
+      //   name: "Architectural Services",
+      //   children: locationData.map((loc) => `Architectural Services in ${loc}`),
+      // },
+      // {
+      //   name: "Home Insulation",
+      //   children: locationData.map((loc) => `Insulation Installers in ${loc}`),
+      // },
+    ],
+  },
+  {
+    name: "Transport",
+    path: "transportation-services",
+    icon: airport,
+    subcategory: [
+      {
+        // id:,
+        name: "Airport Transfers",
+        path: "airport-transfers-near-me",
+        // children: locationData.map((loc) => `Fence Installers in ${loc}`),
+      },
+    ],
+  },
+   {
+    name: "Lessons & Training",
+    path: "lessons-training",
+    icon: lessonsIcon,
+    subcategory: [
+      {
+        // id:,
+        name: "Physics and Maths",
+        path: "physics-maths-tutors-near-me",
+        // children: locationData.map((loc) => `Fence Installers in ${loc}`),
+      },
+      {
+        // id:,
+        name: "Tutoring",
+        path: "tutors-near-me",
+        // children: locationData.map((loc) => `Fence Installers in ${loc}`),
+      },
+    ],
+  },
+  ,
+  //  {
+  //   name: "Business",
+  //   path: "Business",
+  //   icon: businessIcon,
+  //   subcategory:[]
+  //  },
+  //  {
+  //   name: "Health and Wellness",
+  //   path: "health",
+  //   icon: healthIcon,
+  //   subcategory:[]
+  //  }
+  // {
+  //   name: "Business",
+  //   path:"",
+  //   icon: businessIcon,
+  //   subcategory: [
+  //     {
+  //       name: "Bookkeeping Services",
+  //       path:'',
+  //       children: locationData.map((loc) => `Bookkeeping Services in ${loc}`),
+  //     },
+  //     {
+  //       name: "Social Media Marketing",
+  //           path:"",
+  //       children: locationData.map((loc) => `Social Media Marketing in ${loc}`),
+  //     },
+  //     {
+  //       name: "Business Consulting",
+  //       path:"",
+  //       children: locationData.map((loc) => `Business Consulting in ${loc}`),
+  //     },
+  //     {
+  //       name: "Accounting",
+  //       path:"",
+  //       children: locationData.map((loc) => `Accounting in ${loc}`),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "Lessons & Training",
+  //   icon: lessonsIcon,
+  //   path:"",
+  //   subcategory: [
+  //     {
+  //       name: "Business & Career Coaching",
+  //       path:"",
+  //       children: locationData.map(
+  //         (loc) => `Business & Career Coaching in ${loc}`
+  //       ),
+  //     },
+  //     {
+  //       name: "Music Lessons",
+  //       path:"",
+  //       children: locationData.map((loc) => `Music Lessons in ${loc}`),
+  //     },
+  //     {
+  //       name: "Academic Tutoring",
+  //       path:"",
+  //       children: locationData.map((loc) => `Academic Tutoring in ${loc}`),
+  //     },
+  //     {
+  //       name: "Fitness Training",
+  //       path:"",
+  //       children: locationData.map((loc) => `Fitness Training in ${loc}`),
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: "More",
+  //   icon: moreIcon,
+  //   path:"",
+  //   subcategory: [
+  //     {
+  //       name: "Web Design",
+  //       path:"",
+  //       children: locationData.map((loc) => `Web Designer in ${loc}`),
+  //     },
+  //     {
+  //       name: "Logo Design",
+  //       path:"",
+  //       children: locationData.map((loc) => `Logo Designer in ${loc}`),
+  //     },
+  //     {
+  //       name: "Home & Domiciliary Care",
+  //       path:"",
+  //       children: locationData.map(
+  //         (loc) => `Home & Domiciliary Care in ${loc}`
+  //       ),
+  //     },
+  //   ],
+  // },
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 ];
 
 export const getChildRoute = (subPath, child) => {

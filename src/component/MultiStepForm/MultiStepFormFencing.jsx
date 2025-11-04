@@ -21,6 +21,7 @@ import PostSearchMultiStepFence from "./steps/PostcodeSearch/PostSearchMultiStep
 import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence2";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -53,6 +54,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [isComingFromStep4, setIsComingFromStep4] = useState(false);
   const [localRequestId, setLocalRequestId] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -146,11 +148,20 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
       setHasMountedDetector(true);
     }
   }, [hasMountedDetector]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsDesktop(window.innerWidth > 768);
+      handleResize(); // initial check
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   return (
     <>
+      <CalonicalTags />
       {localRequestId === null && (
         <div>
-          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+          {isDesktop ? (
             <NavigationDetectorDesktop />
           ) : (
             <NavigationDetectorWithConfirmations />

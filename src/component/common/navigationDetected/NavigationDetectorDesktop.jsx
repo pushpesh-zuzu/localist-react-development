@@ -18,21 +18,44 @@ const NavigationDetectorDesktop = () => {
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
 
-  const latestData = useRef({ userToken, buyerRequest, citySerach });
+  // 🧠 Ref to store latest data safely
+  const latestData = useRef({
+    userToken,
+    buyerRequest,
+    citySerach,
+  });
 
+  // Keep ref updated (no re-renders)
   useEffect(() => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
 
+  // Prevent multiple API calls
+  const hasSent = useRef(false);
+
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
+<<<<<<< HEAD
 
     if (userToken) {
       return;
     }
+=======
+    if (hasSent.current || userToken) return;
+    hasSent.current = true;
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
     const updatedAnswers = buyerRequest?.questions || [];
+    const formData = new FormData();
+    //  console.log("📡 API Call being made once with form_status: 0");
+    const isEverythingEmpty =
+      !buyerRequest?.name?.trim() &&
+      !buyerRequest?.email?.trim() &&
+      !buyerRequest?.phone?.trim() &&
+      !buyerRequest?.postcode?.trim() &&
+      buyerRequest.questions.length === 0;
 
+<<<<<<< HEAD
     const hasData =
       (buyerRequest?.name && buyerRequest.name.trim()) ||
       (buyerRequest?.email && buyerRequest.email.trim()) ||
@@ -63,8 +86,39 @@ const NavigationDetectorDesktop = () => {
 
     const blob = new Blob([beaconData.toString()], {
       type: "application/x-www-form-urlencoded",
+=======
+    if (isEverythingEmpty) {
+      console.log("🚫 Skipping API call - all fields are empty");
+      return;
+    }
+    console.log("🔍 Empty Check Details:", {
+      name: !!buyerRequest?.name?.trim(),
+      email: !!buyerRequest?.email?.trim(),
+      phone: !!buyerRequest?.phone?.trim(),
+      postcode: !!buyerRequest?.postcode?.trim(),
+      questions: buyerRequest?.questions?.length > 0,
+      city: !!citySerach?.trim(), // Just for info
+      isEverythingEmpty: isEverythingEmpty,
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     });
+    formData.append("name", buyerRequest?.name);
+    formData.append("email", buyerRequest?.email);
+    formData.append("phone", buyerRequest?.phone);
+    formData.append("questions", JSON.stringify(updatedAnswers));
+    formData.append("service_id", buyerRequest?.service_id || "");
+    formData.append("city", citySerach || "");
+    formData.append("postcode", buyerRequest?.postcode || "");
+    formData.append("campaignid", campaignid || "");
+    formData.append("gclid", gclid || "");
+    formData.append("campaign", campaign || "");
+    formData.append("adgroup", adGroup || "");
+    formData.append("targetid", targetID || "");
+    formData.append("msclickid", msclickid || "");
+    formData.append("utm_source", utm_source || "");
+    formData.append("keyword", keyword || "");
+    formData.append("form_status", 0);
 
+<<<<<<< HEAD
     if (navigator.sendBeacon) {
       const success = navigator.sendBeacon(
         "https://dev.localists.com/admin/api/customer/register-quote-customer",
@@ -87,16 +141,24 @@ const NavigationDetectorDesktop = () => {
           keepalive: true,
         }
       ).then(() => {
+=======
+    dispatch(registerQuoteCustomer(formData))
+      .then(() => {
+        // console.log("✅ API Call successful - Data saved");
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
         localStorage.removeItem("registerTokens");
         localStorage.removeItem("createRequestToken");
+      })
+      .catch((error) => {
+        console.error("❌ API Call failed:", error);
       });
-    }
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     const handleBeforeUnload = (event) => {
       event.preventDefault();
       event.returnValue =
@@ -104,17 +166,27 @@ const NavigationDetectorDesktop = () => {
     };
 
     const handleUnload = () => {
+=======
+    console.log("🔵 NavigationDetector mounted once");
+
+    const handleBeforeUnload = (event) => {
+      if (hasSent.current) return; // ✅ already sent, ignore
+      // console.log("🟡 Browser/Tab close detected - sending data once");
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       submitFormData();
+      hasSent.current = true;
+      event.preventDefault();
+      event.returnValue = "";
     };
 
+    // ✅ Add listener once
     window.addEventListener("beforeunload", handleBeforeUnload);
-    window.addEventListener("unload", handleUnload);
-
+    // ✅ Cleanup once
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
-      window.removeEventListener("unload", handleUnload);
+      // console.log("🧹 Cleanup complete");
     };
-  }, []);
+  }, []); // 🚀 NO DEPENDENCIES
 
   return null;
 };

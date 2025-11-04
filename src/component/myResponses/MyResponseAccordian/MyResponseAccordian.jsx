@@ -487,7 +487,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                         }
                         title={item.activity_name}
                         description={item.description}
-                        time={moment(item.updated_at).format("hh:mm")}
+                        time={moment(item.updated_at).format("HH:mm")}
                         isLast={index === getActivies.length - 1}
                       >
                         {item.children}
@@ -558,7 +558,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                               {item?.created_at
                                 ? moment
                                     .tz(item.created_at, "Europe/London")
-                                    .format("YYYY-MM-DD hh:mm:ss A")
+                                    .format("YYYY-MM-DD HH:mm:ss")
                                 : ""}
                             </span>
                             |

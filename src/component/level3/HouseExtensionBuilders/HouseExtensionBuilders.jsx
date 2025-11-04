@@ -21,6 +21,7 @@ import RegionsComponent from "../../subCategory/Regions/Regions";
 import { transformData } from "../../../utils/allServicesUtils";
 import GetQuotesLevel3 from "../GetQuotesLevel3";
 import AveragePrice from "../../subCategory/AveragePrice/AveragePrice";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function HouseExtensionBuilders() {
   const transformed = transformData(
@@ -42,6 +43,12 @@ function HouseExtensionBuilders() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+      bannerImage={PropertyExtensions}
+        breadcrumb={
+          HOUSE_EXTENSION_BREADCRUMB_CONFIG["property-extensions-near-me"]
+        }
+      />
       <SearchAndFindAnAccountant
         title={HOUSE_EXTENSION_CONFIG_TOP["property-extensions-near-me"]?.title}
         findingHeading={

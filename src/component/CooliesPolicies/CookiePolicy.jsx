@@ -335,7 +335,10 @@ const CookiePolicy = () => {
 
                 case "li":
                   return (
-                    <ul key={index} className={styles.list}>
+                    <ul key={index} className={styles.list} style={{
+                  paddingBottom: block?.spacing && "16px",
+                  wordBreak: "break-word",
+                }}>
                       <li>
                         <b>{block?.heading}</b>{" "}
                         <span

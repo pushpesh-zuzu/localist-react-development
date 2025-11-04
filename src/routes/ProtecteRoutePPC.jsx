@@ -50,7 +50,7 @@ const ProtectedRoutePPC = ({ children }) => {
 
   return (
     <>
-      {requestUserId === null && (
+      {/* {requestUserId === null && (
         <div>
           {window.innerWidth > 768 && typeof window !== "undefined" ? (
             <NavigationDetectorDesktop />
@@ -58,7 +58,7 @@ const ProtectedRoutePPC = ({ children }) => {
             <NavigationDetectorWithConfirmations />
           )}
         </div>
-      )}
+      )} */}
       {children}
     </>
   );

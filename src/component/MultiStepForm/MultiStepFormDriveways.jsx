@@ -21,6 +21,7 @@ import QuestionAnserMultiStepDriways2 from "./steps/QuestionAnswerMultiStep/Ques
 import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDriveways";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -53,6 +54,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [localRequestId, setLocalRequestId] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -164,11 +166,21 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     }
   }, [questionanswerData]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsDesktop(window.innerWidth > 768);
+      handleResize(); // initial check
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   return (
     <>
+      <CalonicalTags />
+
       {localRequestId === null && (
         <div>
-          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+          {isDesktop ? (
             <NavigationDetectorDesktop />
           ) : (
             <NavigationDetectorWithConfirmations />

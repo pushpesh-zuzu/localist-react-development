@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../../../utils";
 import {
@@ -18,7 +18,7 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
   const [mobileErrorMessage, setMobileErrorMessage] = useState("");
 
   const handlePhoneChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // remove all non-digits
+    const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 10) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
@@ -34,7 +34,7 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
     }
 
     const newErrors = {
-      phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
+      phone: !phone || !/^\d{10}$/.test(phone),
     };
 
     setErrors(newErrors);
@@ -44,7 +44,6 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
       return;
     }
 
-    // Save phone number in redux
     const formData = new FormData();
     formData.append("phone", phone);
     formData.append("user_id", requestUserId);
@@ -79,8 +78,6 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
       showBackButton={true}
     >
       <div className={styles.infoWrapper}>
-        {/* <label className={styles.label}>Phone Number</label> */}
-
         <div
           className={`${styles.phoneWrapper} ${
             errors?.phone ? styles.error44 : ""

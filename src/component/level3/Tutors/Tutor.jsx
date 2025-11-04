@@ -19,6 +19,7 @@ import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import Slider from "../../common/slider/Slider";
 import { useUserGeo } from "../../../utils/geo";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -34,8 +35,8 @@ const RegionsComponent = lazy(() =>
 );
 
 function Tutor() {
-    const { country, lang } = useUserGeo();
-  
+  const { country, lang } = useUserGeo();
+
   const transformedRegions = useMemo(
     () => transformData(TUTOR_REGION_DATA, "Tutor"),
     []
@@ -54,18 +55,20 @@ function Tutor() {
   const contentConfig = useMemo(() => TUTOR_CONTENT_CONFIG["Tutor"], []);
   const breadcrumbConfig = useMemo(() => TUTOR_BREADCRUMB_CONFIG["Tutor"], []);
   const metaConfig = useMemo(() => TUTOR_META["Tutor"], []);
- const otherServicesData = useMemo(
+  const otherServicesData = useMemo(
     () => TUTOR_OTHER_SERVICES_DATA["Tutor"],
     []
   );
   return (
     <>
       <Helmet>
-        <meta name="robots" content="noindex" />
         <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} />
+        <meta property="og:title" content={metaConfig?.title} />
+        <meta name="twitter:title" content={metaConfig?.title} />
+        <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
-
+      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TutorsNearMe} />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}
@@ -96,7 +99,11 @@ function Tutor() {
       </Suspense>
 
       <Suspense fallback={<FullScreenSpinner />}>
-        <Frequently FrequentlyQuestion={faqData} lang={lang} country={country} />
+        <Frequently
+          FrequentlyQuestion={faqData}
+          lang={lang}
+          country={country}
+        />
       </Suspense>
 
       <Suspense fallback={<FullScreenSpinner />}>

@@ -1,14 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LandingNewPPC from "../component/LandingPage/LandingNewPPC/LandingNewPPC";
+import NavigationDetectorDesktop from "../component/common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
 
 function DriwayLandingPagePPC() {
+  const [isClient, setIsClient] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    //only client side execution
+    setIsClient(true);
+    setIsDesktop(window.innerWidth > 768);
+
+    // Window resize
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <LandingNewPPC
-      title="Driveway installers"
-      subHeading="driveway pro"
-      serviceId={51}
-      serviceName="Driveway Installation"
-    />
+    <>
+      {isClient && (
+        <div>
+          {isDesktop ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
+      )}
+      <LandingNewPPC
+        title="Driveway installers"
+        subHeading="driveway pro"
+        serviceId={51}
+        serviceName="Driveway Installation"
+      />
+    </>
   );
 }
 

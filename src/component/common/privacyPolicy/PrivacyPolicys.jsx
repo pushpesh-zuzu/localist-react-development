@@ -4,6 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import PrivacyContentForProfession from "./privacyContentForProfession/PrivacyContentForProfession";
 import PrivacyContentForCustomer from "./privacyContentForCustomer/PrivacyContentForCustomer";
 import { Helmet } from "react-helmet-async";
+import CalonicalTags from "../CalonicalTags/CalonicalTags";
 const PrivacyPolicy = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("professionals");
@@ -24,7 +25,20 @@ const PrivacyPolicy = () => {
           name="description"
           content="Read the Privacy Policy of Localists.com, operated by IMG Limited, explaining how your personal data is collected, used and protected when using our UK services."
         />
+        <meta
+          property="og:title"
+          content="Privacy Policy – Localists.com | Trusted UK Marketplace"
+        />
+        <meta
+          name="twitter:title"
+          content="Privacy Policy – Localists.com | Trusted UK Marketplace"
+        />
+        <meta
+          property="og:description"
+          content="Read the Privacy Policy of Localists.com, operated by IMG Limited, explaining how your personal data is collected, used and protected when using our UK services."
+        />
       </Helmet>
+      <CalonicalTags />
       <div className={styles.container}>
         <nav className={styles.navWrapper}>
           <ul className={styles.nav}>

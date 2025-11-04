@@ -70,6 +70,8 @@ import MultiStepFormFencing from "../component/MultiStepForm/MultiStepFormFencin
 import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
 import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
+import { levelFourLocationRoutes } from "./levelFourRoute";
+import MultiStepAllotherServices from "../component/MultiStepForm/MultiStepAllotherServices";
 
 const routes = [
   {
@@ -118,7 +120,26 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+<<<<<<< HEAD
 
+=======
+      {
+        path: "terms/",
+        element: (
+          <LocaleRedirect>
+            <TermsAndCondition />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "cookie-policy",
+        element: (
+          <LocaleRedirect>
+            <CookiePolicy />
+          </LocaleRedirect>
+        ),
+      },
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       {
         path: "home",
         element: (
@@ -198,22 +219,22 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: ":service/:location",
-        element: (
-          <LocaleRedirect>
-            <LocationPage />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: ":service/:location/:subLocation",
-        element: (
-          <LocaleRedirect>
-            <SublocationPage />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: ":service/:location",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <LocationPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: ":service/:location/:subLocation",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <SublocationPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "how-it-works-for-customers",
         element: (
@@ -246,6 +267,16 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      ...levelFourLocationRoutes?.map(({ path, Component }) => ({
+        path,
+        element: (
+          <LocaleRedirect>
+            <React.Suspense fallback={<FullScreenSpinner />}>
+              <Component />
+            </React.Suspense>
+          </LocaleRedirect>
+        ),
+      })),
       { path: "privacy-policy/", element: <PrivacyPolicy /> },
       ...levelOnePagesRoutes.map(({ path, Component }) => ({
         path,
@@ -701,6 +732,33 @@ const routes = [
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFenchWithBanner />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepAllotherServices
+            isQuestionWithImage
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+          />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
     ),

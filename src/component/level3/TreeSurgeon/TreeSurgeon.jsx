@@ -14,9 +14,10 @@ import {
   TREE_SURGEON_FAQ,
   TREE_SURGEON_OTHER_SERVICES_DATA,
 } from "./TreeSurgeonData";
-import TreeSugeon from "../banners/TreeSugeon.webp";
+import TreeSugeon from "../banners/TreeSugeon.jpg";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -30,9 +31,7 @@ const GetQuotesLevel3 = lazy(() => import("../GetQuotesLevel3"));
 const RegionsComponent = lazy(() =>
   import("../../subCategory/Regions/Regions")
 );
-const Slider = lazy(() =>
-  import("../../common/slider/Slider")
-);
+const Slider = lazy(() => import("../../common/slider/Slider"));
 function TreeSurgeon() {
   const transformedRegions = useMemo(
     () => transformData(TREE_SURGEON_REGION_DATA, "Tree Surgeon"),
@@ -48,11 +47,11 @@ function TreeSurgeon() {
     () => TREE_SURGEON_AVERAGE_PRICE["Tree Surgeon"],
     []
   );
-   const otherServicesData = useMemo(
+  const otherServicesData = useMemo(
     () => TREE_SURGEON_OTHER_SERVICES_DATA["Tree Surgeon"],
     []
   );
-  TREE_SURGEON_OTHER_SERVICES_DATA
+  TREE_SURGEON_OTHER_SERVICES_DATA;
   const findServiceContent = useMemo(
     () => TREE_SURGEON_FIND_SERVICE_CONTENT["Tree Surgeon"],
     []
@@ -76,10 +75,13 @@ function TreeSurgeon() {
   return (
     <>
       <Helmet>
-        <meta name="robots" content="noindex" />
         <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} />
+        <meta property="og:title" content={metaConfig?.title} />
+        <meta name="twitter:title" content={metaConfig?.title} />
+        <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
+      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TreeSugeon} />
 
       <SearchAndFindAnAccountant
         title={topConfig?.title}
@@ -122,7 +124,7 @@ function TreeSurgeon() {
           isSingular
         />
       </Suspense>
-       <Slider
+      <Slider
         sliderdata={otherServicesData}
         title="you may be interested in"
         blueTitle="Other services "

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 
 const QuestionAnswerMultiStepFence = ({
@@ -18,9 +17,12 @@ const QuestionAnswerMultiStepFence = ({
   const firstStepProgress = (2 / 3) * 100; // 66.66%
   const remainingProgressPerStep = (100 - firstStepProgress) / 3;
 
+<<<<<<< HEAD
   const { search } = useLocation();
   const params = new URLSearchParams(search);
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");

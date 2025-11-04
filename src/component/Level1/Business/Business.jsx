@@ -8,6 +8,7 @@ import PopularCategories from "../../category/popularCategories/ClonePopularCate
 import AllServiceLevel1 from "../../category/allServices/AllServiceLevel1";
 import { BusinessBanner } from "../images";
 import { BusinessHowItWork, BusinessPopularCategory } from "./businessData";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function Business() {
   return (
@@ -29,6 +30,10 @@ function Business() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+        breadcrumb={[{ title: "Business", path: "/business" }]}
+        bannerImage={BusinessBanner}
+      />
       <BannerWithBreadCrum
         accountHeader="Business"
         heading2="Professionals"

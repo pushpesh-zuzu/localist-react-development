@@ -84,8 +84,13 @@ const SearchPostAndBanner = ({
 
       if (response?.data?.city) {
         setCity(response.data.city);
+        console.log(response, "rrrrr");
         dispatch(setcitySerach(response.data.city));
-
+        setbuyerRequestData({
+          ...buyerRequest,
+          postcode: response.data.postcode,
+          city: response.data.city,
+        });
         setShowModal(true);
       } else {
         showToast("error", "Please enter a valid postcode!");
@@ -98,6 +103,16 @@ const SearchPostAndBanner = ({
       return;
     }
   };
+<<<<<<< HEAD
+=======
+  const [hasMountedDetector, setHasMountedDetector] = useState(false);
+
+  // useEffect(() => {
+  //   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
+  //     setHasMountedDetector(true);
+  //   }
+  // }, [hasMountedDetector]);
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
   return (
     <div className={styles.searchcontainer}>

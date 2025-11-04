@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import styles from "./GetQuotes.module.css";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
-const GetQuotesLocation = ({ service,needSString=true,location }) => {
+const GetQuotesLocation = ({ service, needSString = true, location }) => {
   return (
     <div className={styles.container}>
       <button onClick={() => handleScrollToBottom()} className={styles.button}>
@@ -11,7 +11,8 @@ const GetQuotesLocation = ({ service,needSString=true,location }) => {
 
       {service && (
         <p className={styles.text}>
-          from {service}{needSString?'s':''} in {location}
+          From {service}
+          {needSString ? "s" : ""}
         </p>
       )}
     </div>

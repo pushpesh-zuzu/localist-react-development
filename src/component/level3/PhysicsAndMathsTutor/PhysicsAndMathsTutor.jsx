@@ -19,6 +19,7 @@ import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import AveragePrice from "../../subCategory/AveragePrice/AveragePrice";
 import Slider from "../../common/slider/Slider";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -39,31 +40,60 @@ function PhysicsAndMathsTutor() {
     []
   );
 
-  const faqData = useMemo(() => PHYSICS_MATHS_TUTOR_FAQ["Physics And Maths"], []);
-  const reviewData = useMemo(() => PHYSICS_MATHS_TUTOR_REVIEWS_DATA["Physics And Maths"], []);
-  const avgPriceData = useMemo(() => PHYSICS_MATHS_TUTOR_AVERAGE_PRICE["Physics And Maths"], []);
+  const faqData = useMemo(
+    () => PHYSICS_MATHS_TUTOR_FAQ["Physics And Maths"],
+    []
+  );
+  const reviewData = useMemo(
+    () => PHYSICS_MATHS_TUTOR_REVIEWS_DATA["Physics And Maths"],
+    []
+  );
+  const avgPriceData = useMemo(
+    () => PHYSICS_MATHS_TUTOR_AVERAGE_PRICE["Physics And Maths"],
+    []
+  );
   const findServiceContent = useMemo(
     () => PHYSICS_MATHS_TUTOR_FIND_SERVICE_CONTENT["Physics And Maths"],
     []
   );
-  const howItWorksData = useMemo(() => PHYSICS_MATHS_TUTOR_HOW_IT_WORK["Physics And Maths"], []);
+  const howItWorksData = useMemo(
+    () => PHYSICS_MATHS_TUTOR_HOW_IT_WORK["Physics And Maths"],
+    []
+  );
 
-  const topConfig = useMemo(() => PHYSICS_MATHS_TUTOR_CONFIG_TOP["Physics And Maths"], []);
-  const contentConfig = useMemo(() => PHYSICS_MATHS_TUTOR_CONTENT_CONFIG["Physics And Maths"], []);
-  const breadcrumbConfig = useMemo(() => PHYSICS_MATHS_TUTOR_BREADCRUMB_CONFIG["Physics And Maths"], []);
-  const metaConfig = useMemo(() => PHYSICS_MATHS_TUTOR_META["Physics And Maths"], []);
-const otherServicesData = useMemo(
+  const topConfig = useMemo(
+    () => PHYSICS_MATHS_TUTOR_CONFIG_TOP["Physics And Maths"],
+    []
+  );
+  const contentConfig = useMemo(
+    () => PHYSICS_MATHS_TUTOR_CONTENT_CONFIG["Physics And Maths"],
+    []
+  );
+  const breadcrumbConfig = useMemo(
+    () => PHYSICS_MATHS_TUTOR_BREADCRUMB_CONFIG["Physics And Maths"],
+    []
+  );
+  const metaConfig = useMemo(
+    () => PHYSICS_MATHS_TUTOR_META["Physics And Maths"],
+    []
+  );
+  const otherServicesData = useMemo(
     () => PHYSICS_MATHS_TUTOR_OTHER_SERVICES_DATA["Physics And Maths"],
     []
   );
   return (
     <>
       <Helmet>
-        <meta name="robots" content="noindex" />
         <title>{metaConfig?.title}</title>
         <meta name={metaConfig?.name} content={metaConfig?.content} />
+        <meta property="og:title" content={metaConfig?.title} />
+        <meta name="twitter:title" content={metaConfig?.title} />
+        <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
-
+      <CalonicalTags
+        breadcrumb={breadcrumbConfig}
+        bannerImage={PhysicsAndMaths}
+      />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}
@@ -73,7 +103,7 @@ const otherServicesData = useMemo(
         para2={contentConfig?.para2}
         defaultService={"Physics And Maths"}
         isNeedS={false}
-        extraText='or Online'
+        extraText="or Online"
       />
 
       <Suspense fallback={<FullScreenSpinner />}>
@@ -105,7 +135,7 @@ const otherServicesData = useMemo(
           isSingular
         />
       </Suspense>
-         <Suspense fallback={<FullScreenSpinner />}>
+      <Suspense fallback={<FullScreenSpinner />}>
         <Slider
           sliderdata={otherServicesData}
           title="you may be interested in"

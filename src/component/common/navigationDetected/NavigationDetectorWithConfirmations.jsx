@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
+import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorWithConfirmations = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const NavigationDetectorWithConfirmations = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   const latestData = useRef({
     userToken,
@@ -66,6 +68,8 @@ const NavigationDetectorWithConfirmations = () => {
     formData.append("utm_source", utm_source || "");
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
+    formData.append("entry_url", url);
+    formData.append("user_ip_address ", ip);
 
     dispatch(registerQuoteCustomer(formData))
       .then(() => {

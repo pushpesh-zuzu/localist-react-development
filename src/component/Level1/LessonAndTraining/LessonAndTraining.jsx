@@ -11,18 +11,36 @@ import PopularCategories from "../../category/popularCategories/ClonePopularCate
 
 import AllServiceLevel1 from "../../category/allServices/AllServiceLevel1";
 import { LessonsAndTraining } from "../images";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function LessonAndTraining() {
   return (
     <>
       <Helmet>
-        <meta name="robots" content="noindex" />
         <title>Lessons & Training From Local Experts | Localists</title>
         <meta
           name="description"
           content="Develop a skill, and get lessons in anything from driving to academics with trusted local tutors and trainers. Get your free quote now!"
         />
+        <meta
+          property="og:title"
+          content="Lessons & Training From Local Experts | Localists"
+        />
+        <meta
+          name="twitter:title"
+          content="Lessons & Training From Local Experts | Localists"
+        />
+        <meta
+          property="og:description"
+          content="Develop a skill, and get lessons in anything from driving to academics with trusted local tutors and trainers. Get your free quote now!"
+        />
       </Helmet>
+      <CalonicalTags
+        breadcrumb={[
+          { title: "Lessons & Training", path: "/lessons-training" },
+        ]}
+        bannerImage={LessonsAndTraining}
+      />
       <BannerWithBreadCrum
         accountHeader=" Lessons & Training Services"
         level={2}

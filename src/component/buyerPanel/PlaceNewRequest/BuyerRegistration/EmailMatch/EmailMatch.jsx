@@ -10,6 +10,7 @@ import {
   setbuyerRequestData,
 } from "../../../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
+import useUserInfo from "../../../../../utils/getUserIp";
 
 const EmailMatch = ({
   onClose,
@@ -26,6 +27,10 @@ const EmailMatch = ({
   const { errorMessage } = useSelector((state) => state.findJobs);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
+<<<<<<< HEAD
+=======
+  const { ip, url } = useUserInfo();
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
@@ -210,6 +215,9 @@ const EmailMatch = ({
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
+
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
           nextStep();
@@ -217,6 +225,12 @@ const EmailMatch = ({
       });
     } else {
       nextStep();
+      setbuyerRequestData({
+          ...buyerRequest,
+          name: name,
+          city: email,
+          phone:phone
+        });
     }
   };
 

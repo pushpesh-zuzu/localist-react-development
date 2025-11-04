@@ -9,6 +9,11 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData } from "../../../utils";
 import { extractAllParams } from "../../../utils/decodeURLParams";
+<<<<<<< HEAD
+=======
+import useUserInfo from "../../../utils/getUserIp";
+// import { showToast } from "../../../../../utils";
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
 const ConfirmationModal = ({
   onCancel,
@@ -77,6 +82,7 @@ const ConfirmationModal = ({
   }, [show]);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
+  const { ip, url } = useUserInfo();
 
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
@@ -107,6 +113,8 @@ const ConfirmationModal = ({
       formData.append("msclickid", msclickid || "");
       formData.append("utm_source", utm_source || "");
       formData.append("keyword", keyword || "");
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
       formData.append("form_status", 0);
 
   

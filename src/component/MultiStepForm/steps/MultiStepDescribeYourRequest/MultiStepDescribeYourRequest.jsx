@@ -71,7 +71,10 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
 
   const handleSubmit = () => {
     let hasError = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     if (hasError) return;
 
     const detailsData = {
@@ -91,6 +94,7 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());
         dispatch(setQualityData());
+<<<<<<< HEAD
 
         dispatch(setBuyerStep(10));
       }
@@ -101,6 +105,11 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
     onClose && onClose();
     dispatch(clearSetbuyerRequestData());
     dispatch(clearBuyerRegisterFormData());
+=======
+        dispatch(setBuyerStep(10));
+      }
+    );
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   };
 
   return (
@@ -123,13 +132,11 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             professionals can respond
           </p>
 
-          {/* ✅ Textarea Validation */}
           <textarea
             className={`${styles.textarea} ${
               textError ? styles.errorBorder : ""
             }`}
             value={text}
-            // rows={6}
             onChange={handleChange}
             placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
           />
@@ -139,7 +146,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             </span>
           )}
 
-          {/* ✅ File Upload Validation */}
           <label
             className={`${styles.fileUpload} ${
               fileError ? styles.errorBorder : ""
@@ -183,7 +189,10 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
           <div className={styles.addMoreDetail}>
             <p>Quality score increases as you add more detail</p>
           </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
           <label className={styles.checkboxContainer}>
             <input
               type="checkbox"

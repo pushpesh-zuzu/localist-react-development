@@ -17,10 +17,10 @@ import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumb
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
 import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
-import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -39,13 +39,12 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     );
   }, [location.pathname]);
 
-  const [animationDirection, setAnimationDirection] = useState("");
   const [actualSteps, setActualSteps] = useState(1);
   const [progressPercentage, setProgressPercentage] = useState(0);
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [backButtonTriggered, setBackButtonTriggered] = useState(false);
-  const [isComingFromStep3, setIsComingFromStep3] = useState(false); // ⭐ YE ADD KARO
+  const [isComingFromStep3, setIsComingFromStep3] = useState(false);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
@@ -53,6 +52,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [localRequestId, setLocalRequestId] = useState(null);
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     if (buyerStep === 1) {
@@ -98,7 +98,10 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
 
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
     }
@@ -122,7 +125,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const lastQuestion = questionanswerData?.slice(-1) || [];
 
   useEffect(() => {
-    if (questionanswerData.length > 0) {
+    if (questionanswerData?.length > 0) {
       setIsLoadingQuestions(false);
       dispatch(setbuyerRequestData({ service_id: 43 }));
     }
@@ -141,17 +144,27 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     }
   }, [hasMountedDetector]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const handleResize = () => setIsDesktop(window.innerWidth > 768);
+      handleResize();
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
   return (
     <>
+      <CalonicalTags />
       {localRequestId === null && (
         <div>
-          {window.innerWidth > 768 && typeof window !== "undefined" ? (
+          {isDesktop ? (
             <NavigationDetectorDesktop />
           ) : (
             <NavigationDetectorWithConfirmations />
           )}
         </div>
       )}
+<<<<<<< HEAD
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>Compare Free Quotes from Local Landscapers | Localists</title>
@@ -162,6 +175,8 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
         />
       </Helmet>
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -175,7 +190,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
       <div>
         <div className={styles.container}>
           <div className={styles.formContainer}>
-            <div className={`${styles.slideContainer} ${animationDirection}`}>
+            <div className={`${styles.slideContainer}`}>
               {buyerStep === 1 && (
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStep2
@@ -209,8 +224,13 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStep
+<<<<<<< HEAD
                     questions={lastQuestion}
                     onNext={nextStep}
+=======
+                    questions={lastQuestion} 
+                    onNext={nextStep} 
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
                     onBack={prevStep}
                     loading={questionLoader}
                     getProgressPercentage={getProgressPercentage}
@@ -233,7 +253,10 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                   setLocalRequestId={setLocalRequestId}
                 />
               )}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep

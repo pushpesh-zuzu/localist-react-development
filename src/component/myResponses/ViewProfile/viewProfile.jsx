@@ -287,7 +287,7 @@ const ViewProfile = () => {
                             <p>{profileLeadViewData?.name}</p>
                             <p>{item?.activity_name}</p>
                           </div>
-                          <p>{moment(item?.created_at).format("hh:mm")}</p>
+                          <p>{moment(item?.created_at).format("HH:mm")}</p>
                         </div>
                       ))
                     ) : (

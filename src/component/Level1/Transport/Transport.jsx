@@ -7,12 +7,12 @@ import PopularCategories from "../../category/popularCategories/ClonePopularCate
 
 import AllServiceLevel1 from "../../category/allServices/AllServiceLevel1";
 import { TransportBanner } from "../images";
+import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 
 function Transport() {
   return (
     <>
       <Helmet>
-        <meta name="robots" content="noindex" />
         <script>
           {`
               gtag('event', 'conversion', {
@@ -23,6 +23,15 @@ function Transport() {
           `}
         </script>
       </Helmet>
+      <CalonicalTags
+        breadcrumb={[
+          {
+            title: "Transportation Services",
+            path: "/transportation-services",
+          },
+        ]}
+        bannerImage={TransportBanner}
+      />
       <BannerWithBreadCrum
         accountHeader="Transportation Services"
         level={2}

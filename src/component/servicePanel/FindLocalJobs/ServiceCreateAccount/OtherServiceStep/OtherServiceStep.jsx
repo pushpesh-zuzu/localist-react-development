@@ -11,11 +11,12 @@ import {
 } from "../../../../../store/FindJobs/findJobSlice";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
 import { clearCompanyData } from "../../../../../store/Company/companyLookup";
 import { getCityName } from "../../../../../store/Buyer/BuyerSlice";
+import { extractAllParams } from "../../../../../utils/decodeURLParams";
 
 const OtherServiceStep = ({
   prevStep,
@@ -23,6 +24,17 @@ const OtherServiceStep = ({
   formData,
   setFormData,
 }) => {
+<<<<<<< HEAD
+=======
+  const [isPostcodeFromSuggestion, setIsPostcodeFromSuggestion] =
+    useState(false);
+  const { search } = useLocation();
+  const allParams = extractAllParams(search || window.location.search);
+  // Convert array to a comma-separated string
+  const campaign = allParams.utm_campaign || "";
+  const utm_source = allParams.utm_source || "";
+  const utm_medium = allParams.utm_medium || "";
+>>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [Input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
@@ -235,6 +247,9 @@ const OtherServiceStep = ({
       expanded_radius:
         selectedServices.length > 0 ? formData.expanded_radius : "",
     };
+    if (utm_source) payload.utm_source = utm_source;
+    if (utm_medium) payload.utm_medium = utm_medium;
+    if (campaign) payload.campaign = campaign;
     payload.coordinates = JSON.stringify(payload.coordinates);
     delete payload.password;
     delete payload.suite;
