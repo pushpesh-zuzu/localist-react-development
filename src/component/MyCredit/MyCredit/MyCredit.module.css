@@ -56,6 +56,14 @@
   font-size: 14px;
 }
 
+.starter_note {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 64px;
+  font-weight: 600;
+  margin-left: 29px;
+}
+
 .pickYourCredit {
   display: flex;
   justify-content: center;

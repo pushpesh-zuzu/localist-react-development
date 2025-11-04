@@ -59,7 +59,7 @@ const CreditCard = () => {
 
             <div className={styles.actionButtons}>
               <span onClick={handleAddCard} className={styles.actionText}>
-                Add
+                Add Card
               </span>
             </div>
           </>

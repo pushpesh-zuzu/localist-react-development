@@ -53,7 +53,8 @@
   cursor: pointer !important;
 }
 .textRight {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .remove_actionButtons {
@@ -75,12 +76,13 @@
   /* margin-top: 8px; */
   cursor: pointer;
   font-size: 14px;
-  color: #1890ff;
+  color: var(--primary-color);
 }
 
 .actionText {
   cursor: pointer;
   transition: color 0.2s ease;
+  font-weight: 600;
 }
 
 .actionTextRemove {

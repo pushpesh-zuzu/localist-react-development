@@ -24,6 +24,7 @@ import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 import { useUserGeo } from "../../../utils/geo";
 import { setStarterPackPurchased } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import NewBusiness from "../../../assets/Images/NewBusiness.svg";
+import shuttle from "../../../assets/Images/shuttle.svg";
 
 const MyCredits = () => {
   const [automation, setAutomation] = useState(false);
@@ -181,10 +182,16 @@ const MyCredits = () => {
             .
           </p>
         </div>
-
-        <p className={styles.note}>
-          We apply a small fee for each new customer you choose to contact.
-        </p>
+        {creditPlanList?.[0]?.plan_type === "starter" ? (
+          <p className={styles.starter_note}>
+            We charge a small fee for each customer you contact on Localists.
+            Buy a pack of 265 credits and get 20% OFF
+          </p>
+        ) : (
+          <p className={styles.note}>
+            We apply a small fee for each new customer you choose to contact.
+          </p>
+        )}
 
         {creditPlanList?.[0]?.plan_type !== "starter" && (
           <div className={styles.pickYourCredit}>
@@ -209,7 +216,12 @@ const MyCredits = () => {
                 >
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
-                      <span>20% Boost 🚀</span>{" "}
+                      <span>
+                        20% Boost{" "}
+                        <div>
+                          <img src={shuttle} alt="" />
+                        </div>
+                      </span>{" "}
                       <div>Your Exclusive Sign Up Offer</div>
                       <b>Exclusive Offer</b>
                     </div>
@@ -288,20 +300,22 @@ const MyCredits = () => {
           )}
         </div>
 
-        <div className={styles.parentBanner}>
-          <div className={styles.banner}>
-            <h2 className={styles.bannertitle}>Build Your Own Credit Plan</h2>
+        {creditPlanList?.[0]?.plan_type !== "starter" && (
+          <div className={styles.parentBanner}>
+            <div className={styles.banner}>
+              <h2 className={styles.bannertitle}>Build Your Own Credit Plan</h2>
 
-            <p className={styles.subtitle}>
-              If our standard Credit Packs don’t meet your growth needs, you can
-              build your own here
-            </p>
+              <p className={styles.subtitle}>
+                If our standard Credit Packs don’t meet your growth needs, you
+                can build your own here
+              </p>
 
-            <button className={styles.bannerbutton} onClick={handleOpen}>
-              Build Your Credit Pack
-            </button>
+              <button className={styles.bannerbutton} onClick={handleOpen}>
+                Build Your Credit Pack
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className={styles.VisaCard}>
           <CreditCard />
