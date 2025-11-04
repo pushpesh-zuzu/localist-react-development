@@ -3,6 +3,7 @@ import styles from "./TermsConditions.module.css";
 import { useLocation, Link } from "react-router-dom";
 import ContentForProfessonal from "./ContentForProfessonal";
 import ContentForConsumers from "./ContentForConsumers";
+
 const TermsAndCondition = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("professionals");

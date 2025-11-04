@@ -35,15 +35,8 @@ const NavigationDetectorDesktop = () => {
 
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
-<<<<<<< HEAD
-
-    if (userToken) {
-      return;
-    }
-=======
     if (hasSent.current || userToken) return;
     hasSent.current = true;
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
     const updatedAnswers = buyerRequest?.questions || [];
     const formData = new FormData();
@@ -55,38 +48,6 @@ const NavigationDetectorDesktop = () => {
       !buyerRequest?.postcode?.trim() &&
       buyerRequest.questions.length === 0;
 
-<<<<<<< HEAD
-    const hasData =
-      (buyerRequest?.name && buyerRequest.name.trim()) ||
-      (buyerRequest?.email && buyerRequest.email.trim()) ||
-      (buyerRequest?.phone && buyerRequest.phone.trim()) ||
-      (buyerRequest?.postcode && buyerRequest.postcode.trim()) ||
-      (buyerRequest?.questions && buyerRequest.questions.length > 0);
-
-    if (!hasData) {
-      return;
-    }
-    const beaconData = new URLSearchParams();
-    beaconData.append("name", buyerRequest?.name || "");
-    beaconData.append("email", buyerRequest?.email || "");
-    beaconData.append("phone", buyerRequest?.phone || "");
-    beaconData.append("questions", JSON.stringify(updatedAnswers));
-    beaconData.append("service_id", buyerRequest?.service_id || "");
-    beaconData.append("city", citySerach || "");
-    beaconData.append("postcode", buyerRequest?.postcode || "");
-    beaconData.append("campaignid", campaignid || "");
-    beaconData.append("gclid", gclid || "");
-    beaconData.append("campaign", campaign || "");
-    beaconData.append("adgroup", adGroup || "");
-    beaconData.append("targetid", targetID || "");
-    beaconData.append("msclickid", msclickid || "");
-    beaconData.append("utm_source", utm_source || "");
-    beaconData.append("keyword", keyword || "");
-    beaconData.append("form_status", "0");
-
-    const blob = new Blob([beaconData.toString()], {
-      type: "application/x-www-form-urlencoded",
-=======
     if (isEverythingEmpty) {
       console.log("🚫 Skipping API call - all fields are empty");
       return;
@@ -99,7 +60,6 @@ const NavigationDetectorDesktop = () => {
       questions: buyerRequest?.questions?.length > 0,
       city: !!citySerach?.trim(), // Just for info
       isEverythingEmpty: isEverythingEmpty,
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     });
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
@@ -118,34 +78,9 @@ const NavigationDetectorDesktop = () => {
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
 
-<<<<<<< HEAD
-    if (navigator.sendBeacon) {
-      const success = navigator.sendBeacon(
-        "https://dev.localists.com/admin/api/customer/register-quote-customer",
-        blob
-      );
-
-      if (success) {
-        localStorage.removeItem("barkToken");
-        localStorage.removeItem("barkUserToken");
-        localStorage.removeItem("registerDataToken");
-        localStorage.removeItem("registerTokens");
-        localStorage.removeItem("createRequestToken");
-      }
-    } else {
-      fetch(
-        "https://dev.localists.com/admin/api/customer/register-quote-customer",
-        {
-          method: "POST",
-          body: blob,
-          keepalive: true,
-        }
-      ).then(() => {
-=======
     dispatch(registerQuoteCustomer(formData))
       .then(() => {
         // console.log("✅ API Call successful - Data saved");
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
@@ -158,21 +93,11 @@ const NavigationDetectorDesktop = () => {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue =
-        "Are you sure you want to leave? Your data may be saved.";
-    };
-
-    const handleUnload = () => {
-=======
     console.log("🔵 NavigationDetector mounted once");
 
     const handleBeforeUnload = (event) => {
       if (hasSent.current) return; // ✅ already sent, ignore
       // console.log("🟡 Browser/Tab close detected - sending data once");
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       submitFormData();
       hasSent.current = true;
       event.preventDefault();

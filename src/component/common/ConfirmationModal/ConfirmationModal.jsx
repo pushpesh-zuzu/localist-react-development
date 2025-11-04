@@ -1,19 +1,14 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ConfirmationModal.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useLocation, useParams } from "react-router-dom";
-import {
-  registerQuoteCustomer,
-} from "../../../store/Buyer/BuyerSlice";
+import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 import { clearAuthData } from "../../../utils";
 import { extractAllParams } from "../../../utils/decodeURLParams";
-<<<<<<< HEAD
-=======
 import useUserInfo from "../../../utils/getUserIp";
 // import { showToast } from "../../../../../utils";
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
 const ConfirmationModal = ({
   onCancel,
@@ -32,8 +27,7 @@ const ConfirmationModal = ({
     (state) => state.buyer
   );
   const { userToken } = useSelector((state) => state.auth);
-  const {  selectedServices } =
-    useSelector((state) => state.findJobs);
+  const { selectedServices } = useSelector((state) => state.findJobs);
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (Input.trim() !== "") {
@@ -50,8 +44,6 @@ const ConfirmationModal = ({
       clearTimeout(delayDebounce);
     };
   }, [Input, dispatch]);
-
- 
 
   const validateForm = () => {
     let newErrors = {};
@@ -95,7 +87,6 @@ const ConfirmationModal = ({
 
   const handleSubmit = () => {
     if (!userToken) {
-     
       const updatedAnswers = buyerRequest?.questions || [];
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
@@ -117,10 +108,8 @@ const ConfirmationModal = ({
       formData.append("user_ip_address ", ip);
       formData.append("form_status", 0);
 
-  
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-         
           localStorage.removeItem("barkToken");
           localStorage.removeItem("barkUserToken");
           localStorage.removeItem("registerDataToken");
@@ -131,10 +120,8 @@ const ConfirmationModal = ({
         }
       });
     } else {
-     
     }
   };
-
 
   return (
     <div className={styles.modalOverlay}>

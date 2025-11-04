@@ -8,10 +8,6 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
   const lang = parts[0] || "en";
   const country = parts[1] || "gb";
   const path = parts.slice(2).join("/");
-<<<<<<< HEAD
-
-  const canonicalUrl = `${baseUrl}/${lang}/${country}/${path}`;
-=======
   const cleanPath = (p) => (p ? p.replace(/^\/+/, "") : "");
   const canonicalUrl = `${baseUrl}/en/gb/${path}`;
   const breadcrumbList = breadcrumb.length
@@ -37,56 +33,12 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
     "@type": "BreadcrumbList",
     itemListElement: breadcrumbList || [],
   };
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   return (
     <Helmet>
       <link rel="canonical" href={canonicalUrl} />
 
       <meta property="og:url" content={canonicalUrl} />
 
-<<<<<<< HEAD
-      <link
-        rel="alternate"
-        hreflang="en-gb"
-        href={`${baseUrl}/en/gb/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-au"
-        href={`${baseUrl}/en/au/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-ca"
-        href={`${baseUrl}/en/ca/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-ie"
-        href={`${baseUrl}/en/ie/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-nz"
-        href={`${baseUrl}/en/nz/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-sg"
-        href={`${baseUrl}/en/sg/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-za"
-        href={`${baseUrl}/en/za/${path}`}
-      />
-      <link
-        rel="alternate"
-        hreflang="en-us"
-        href={`${baseUrl}/en/us/${path}`}
-      />
-      <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} />
-=======
       <meta property="og:type" content="website" />
 
       {/* Hreflang Tags */}
@@ -98,7 +50,6 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
       {/* <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} /> */}
 
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     </Helmet>
   );
 };

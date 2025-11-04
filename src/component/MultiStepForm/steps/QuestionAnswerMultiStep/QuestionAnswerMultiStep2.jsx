@@ -23,18 +23,8 @@ const QuestionAnswerMultiStep2 = ({
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
-<<<<<<< HEAD
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
-    (state) => state.buyer
-  );
-  const { service } = useSelector((state) => state.findJobs);
-
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-=======
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { service } = useSelector((state) => state.findJobs);
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
@@ -64,10 +54,6 @@ const QuestionAnswerMultiStep2 = ({
       setCurrentQuestion(3);
     }
   }, [isComingFromStep3]);
-<<<<<<< HEAD
-=======
-
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -224,10 +210,7 @@ const QuestionAnswerMultiStep2 = ({
       onNext();
       return;
     } else if (nextQ === "last") {
-<<<<<<< HEAD
-=======
       console.log('nextQ === "last"');
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       const firstStepProgress = (2 / 3) * 100;
       const remainingProgressPerStep = (100 - firstStepProgress) / 2;
       getProgressPercentage(remainingProgressPerStep);

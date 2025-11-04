@@ -13,26 +13,13 @@ const QuestionAnswerMultiStep = ({
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
-<<<<<<< HEAD
-  const firstStepProgress = (2 / 3) * 100;
-  const remainingProgressPerStep = (100 - firstStepProgress) / 2;
-
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-
-=======
   const firstStepProgress = (2 / 3) * 100; // 66.66%
   const remainingProgressPerStep = (100 - firstStepProgress) / 2; // baki 2 steps ke liye ≈16.665%
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
   const [questionHistory, setQuestionHistory] = useState([0]);
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const totalQuestions = questions?.length;
   const formattedQuestions = questions.map((q) => ({
     ...q,

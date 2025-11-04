@@ -263,10 +263,6 @@ export const megaMenu = [
         path: "landscape-gardeners-near-me",
         children: locationData.map((loc) => `Landscape Gardeners in ${loc}`),
       },
-<<<<<<< HEAD
-    ],
-  },
-=======
       {
         id: 43,
         name: "Tree Surgeon",
@@ -308,7 +304,7 @@ export const megaMenu = [
       },
     ],
   },
-   {
+  {
     name: "Lessons & Training",
     path: "lessons-training",
     icon: lessonsIcon,
@@ -327,7 +323,6 @@ export const megaMenu = [
       },
     ],
   },
-  ,
   //  {
   //   name: "Business",
   //   path: "Business",
@@ -420,7 +415,7 @@ export const megaMenu = [
   //     },
   //   ],
   // },
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
+  ,
 ];
 
 export const getChildRoute = (subPath, child) => {

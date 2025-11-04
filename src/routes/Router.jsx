@@ -72,6 +72,8 @@ import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepAllotherServices from "../component/MultiStepForm/MultiStepAllotherServices";
+import CookiePolicy from "../../src/component/CooliesPolicies/CookiePolicy";
+import TermsAndCondition from "../../src/component/TermsAndCondition/TermAndCondition";
 
 const routes = [
   {
@@ -120,9 +122,6 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-<<<<<<< HEAD
-
-=======
       {
         path: "terms/",
         element: (
@@ -139,7 +138,6 @@ const routes = [
           </LocaleRedirect>
         ),
       },
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       {
         path: "home",
         element: (

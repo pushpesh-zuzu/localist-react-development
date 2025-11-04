@@ -3,10 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./NameEmailMultiStepForm.module.css";
 import { checkEmailIdApi } from "../../../../store/FindJobs/findJobSlice";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
-<<<<<<< HEAD
-import { useLocation } from "react-router";
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 
 const NameEmailMultiStepForm = ({
@@ -21,13 +17,6 @@ const NameEmailMultiStepForm = ({
     (state) => state.findJobs
   );
   const { buyerRequest } = useSelector((state) => state.buyer);
-<<<<<<< HEAD
-  const { search } = useLocation();
-  const allParams = extractAllParams(search || window.location.search);
-
-  const { userToken } = useSelector((state) => state.auth);
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [email, setEmail] = useState(buyerRequest?.email);
   const [name, setName] = useState(buyerRequest?.name);
 
@@ -102,11 +91,6 @@ const NameEmailMultiStepForm = ({
 
   const handleBackClick = () => {
     onBack();
-<<<<<<< HEAD
-    const firstStepProgress = (2 / 3) * 100;
-    const remainingProgressPerStep = (100 - firstStepProgress) / 2;
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   };
 
   return (

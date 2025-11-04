@@ -98,10 +98,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
 
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
     }
@@ -164,19 +160,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
           )}
         </div>
       )}
-<<<<<<< HEAD
-      <Helmet>
-        <meta name="robots" content="noindex" />
-        <title>Compare Free Quotes from Local Landscapers | Localists</title>
-
-        <meta
-          name="description"
-          content="Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!"
-        />
-      </Helmet>
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -224,13 +207,8 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStep
-<<<<<<< HEAD
                     questions={lastQuestion}
                     onNext={nextStep}
-=======
-                    questions={lastQuestion} 
-                    onNext={nextStep} 
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
                     onBack={prevStep}
                     loading={questionLoader}
                     getProgressPercentage={getProgressPercentage}
@@ -253,10 +231,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                   setLocalRequestId={setLocalRequestId}
                 />
               )}
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep

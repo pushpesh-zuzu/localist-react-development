@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
-<<<<<<< HEAD
-=======
 import { message } from "antd";
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
@@ -30,10 +27,6 @@ const QuestionAnswerMultiStepFence2 = ({
   const { service } = useSelector((state) => state.findJobs);
 
   const { search } = useLocation();
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -218,13 +211,8 @@ const QuestionAnswerMultiStepFence2 = ({
       onNext();
       return;
     } else if (nextQ === "last") {
-<<<<<<< HEAD
-      const firstStepProgress = (2 / 3) * 100;
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2;
-=======
       const firstStepProgress = (2 / 3) * 100; // 66.66%
       const remainingProgressPerStep = (100 - firstStepProgress) / 2; // for remaining 2 steps ≈16.665%
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       getProgressPercentage(remainingProgressPerStep);
       onNext();
       return;

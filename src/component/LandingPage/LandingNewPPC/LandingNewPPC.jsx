@@ -6,21 +6,16 @@ import AllUsers from "../../../assets/Icons/AllUsers.svg";
 import Icon from "../../../assets/Icons/Icon.png";
 import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 import { Helmet } from "react-helmet-async";
-<<<<<<< HEAD
-=======
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import { useDispatch, useSelector } from "react-redux";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 import { setbuyerRequestData } from "../../../store/Buyer/BuyerSlice";
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 const LandingNewPPC = ({
   title = "",
   subHeading = "",
   serviceId,
   serviceName = "",
 }) => {
-<<<<<<< HEAD
-=======
   const dispatch = useDispatch();
 
   //     const { buyerRequest } =
@@ -38,7 +33,6 @@ const LandingNewPPC = ({
     dispatch(setbuyerRequestData({ service_id: serviceId }));
   }, []);
 
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   return (
     <>
       <Helmet>

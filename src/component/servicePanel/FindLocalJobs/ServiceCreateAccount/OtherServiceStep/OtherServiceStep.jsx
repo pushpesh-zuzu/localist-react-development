@@ -24,8 +24,6 @@ const OtherServiceStep = ({
   formData,
   setFormData,
 }) => {
-<<<<<<< HEAD
-=======
   const [isPostcodeFromSuggestion, setIsPostcodeFromSuggestion] =
     useState(false);
   const { search } = useLocation();
@@ -34,7 +32,6 @@ const OtherServiceStep = ({
   const campaign = allParams.utm_campaign || "";
   const utm_source = allParams.utm_source || "";
   const utm_medium = allParams.utm_medium || "";
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const [Input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [selectedService, setSelectedService] = useState(null);

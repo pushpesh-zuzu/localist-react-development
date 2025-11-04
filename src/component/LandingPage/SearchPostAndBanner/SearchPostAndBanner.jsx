@@ -103,8 +103,6 @@ const SearchPostAndBanner = ({
       return;
     }
   };
-<<<<<<< HEAD
-=======
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
   // useEffect(() => {
@@ -112,7 +110,6 @@ const SearchPostAndBanner = ({
   //     setHasMountedDetector(true);
   //   }
   // }, [hasMountedDetector]);
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
 
   return (
     <div className={styles.searchcontainer}>

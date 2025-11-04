@@ -27,10 +27,7 @@ const EmailMatch = ({
   const { errorMessage } = useSelector((state) => state.findJobs);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-<<<<<<< HEAD
-=======
   const { ip, url } = useUserInfo();
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
   const campaignid = params.get("campaignid");
   const keyword = params.get("keyword");
   const gclid = params.get("gclid");
@@ -226,11 +223,11 @@ const EmailMatch = ({
     } else {
       nextStep();
       setbuyerRequestData({
-          ...buyerRequest,
-          name: name,
-          city: email,
-          phone:phone
-        });
+        ...buyerRequest,
+        name: name,
+        city: email,
+        phone: phone,
+      });
     }
   };
 

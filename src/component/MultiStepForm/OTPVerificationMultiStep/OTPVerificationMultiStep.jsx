@@ -99,10 +99,6 @@ const OTPVerificationMultiStep = ({
     dispatch(verifyPhoneNumberData(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
         const formData = new FormData();
         formData.append("service_id", buyerRequest?.service_id);
         formData.append("postcode", buyerRequest?.postal_code || "");
@@ -230,10 +226,6 @@ const OTPVerificationMultiStep = ({
         <span className={styles.goBack}>Go Back</span>
         <img className={styles.img} src={backIcon} alt="backIcon" />
       </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 2ea0b020843e2730ffc2629097d440d8ad15502c
       <div
         style={{
           background: "rgba(245, 245, 245, 1)",
