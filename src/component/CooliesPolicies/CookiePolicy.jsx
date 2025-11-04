@@ -159,23 +159,6 @@ export const professionalsTermsData = [
   },
   {
     type: "h3",
-    number: "Functionality Cookies",
-    fullWidth: true,
-  },
-  {
-    type: "paraWithoutMargin",
-    text: "<span><strong>Type</strong>: Persistent Cookies</span>",
-  },
-  {
-    type: "paraWithoutMargin",
-    text: '<div style="margin-top:8px; margin-bottom:8px;"><strong>Administered by</strong>: Us</div>',
-  },
-  {
-    type: "p",
-    text: "<strong>Purpose</strong>: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website.",
-  },
-  {
-    type: "h3",
     number: "Tracking and Performance Cookies",
     fullWidth: true,
   },
