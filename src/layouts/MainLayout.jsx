@@ -60,11 +60,11 @@ const pageTitles = {
     title: "Locations | Localists",
     description: "",
   },
-  "/how-it-works": {
-    title: "How It Works | Localists",
-    description: "",
-  },
-
+  // "/how-it-works": {
+  //   title: "How It Works | Localists",
+  //   description: "",
+  // },
+  
   "/sellers/create": {
     title: "Join Localists for Professionals | Free Sign-Up",
     description:
