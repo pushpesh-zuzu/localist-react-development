@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
+import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorDesktop = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ const NavigationDetectorDesktop = () => {
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
-
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";
   const gclid = allParams.gclid || "";
@@ -19,6 +19,7 @@ const NavigationDetectorDesktop = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   // 🧠 Ref to store latest data safely
   const latestData = useRef({
@@ -63,6 +64,7 @@ const NavigationDetectorDesktop = () => {
       city: !!citySerach?.trim(), // Just for info
       isEverythingEmpty: isEverythingEmpty,
     });
+    debugger;
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
@@ -78,6 +80,8 @@ const NavigationDetectorDesktop = () => {
     formData.append("msclickid", msclickid || "");
     formData.append("utm_source", utm_source || "");
     formData.append("keyword", keyword || "");
+    formData.append("entry_url", url || "");
+    formData.append("user_ip_address", ip || "");
     formData.append("form_status", 0);
 
     dispatch(registerQuoteCustomer(formData))
