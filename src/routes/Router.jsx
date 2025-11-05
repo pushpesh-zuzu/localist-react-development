@@ -78,7 +78,7 @@ import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
 import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
-import MultiStepAllotherServices from "../component/MultiStepForm/MultiStepAllotherServices";
+import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -772,33 +772,35 @@ const routes = [
       </ProtectedRouteForMultiFormPPC>
     ),
   },
-  // {
-  //   path: "/:lang/:country/tree-surgeon-multi-form-ppc",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepAllotherServices
-  //           serviceName="Tree Surgeon"
-  //           path="tree-surgeon-multi-form-ppc"
-  //         />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
-  // {
-  //   path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepAllotherServices
-  //           isQuestionWithImage
-  //           serviceName="Tree Surgeon"
-  //           path="tree-surgeon-multi-form-ppc"
-  //         />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
+  {
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepTreeSurgeon
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+            serviceId={112}
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+{
+    path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepTreeSurgeon
+            serviceName="Tree Surgeon"
+            path="tree-surgeon-multi-form-ppc"
+            serviceId={112}
+            isQuestionWithImage
+          />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
 ];
 
 // Create a router suitable for the current environment

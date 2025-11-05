@@ -49,7 +49,7 @@ const initialState = {
   notificationLoader: false,
   addNotificationLoader: false,
   verifyPhoneNumberLoader: false,
-  postCodeLoader:false
+  postCodeLoader: false,
 };
 
 export const questionAnswerData = (questionData) => {
@@ -76,6 +76,33 @@ export const questionAnswerData = (questionData) => {
     }
   };
 };
+
+export const getProgressPercentageAPI = (progressData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.post(
+        `get-progress-percentage`,
+        progressData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response?.data?.data?.percentage !== undefined) {
+        // dispatch(setProgressPercentage(response.data.data.percentage));
+        return response.data.data;
+      }
+    } catch (error) {
+      console.error(
+        "Error getting progress percentage:",
+        error?.response?.data
+      );
+    }
+  };
+};
+
 export const createRequestData = (requestData) => {
   return async (dispatch) => {
     dispatch(setCreateRequesLoader(true));
@@ -499,7 +526,7 @@ const buyerSlice = createSlice({
   name: "buyer",
   initialState: initialState,
   reducers: {
-     setPostCodeLoader: (state, action) => {
+    setPostCodeLoader: (state, action) => {
       state.postCodeLoader = action.payload;
     },
     setResendOtpLoader: (state, action) => {
