@@ -246,13 +246,25 @@ const SearchProfessionals = ({ nextStep }) => {
       );
     }, DEBOUNCE_MS);
   };
+  const [isClientReady, setIsClientReady] = useState(false);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsClientReady(true);
+    }, 3000);
+
+    return () => clearTimeout(timer); // cleanup
+  }, []);
   return (
     <div className={styles.searchContainer}>
-      {typeof window !== "undefined" && window.innerWidth > 768 ? (
-        <NavigationDetectorDesktop />
-      ) : (
-        <NavigationDetectorWithConfirmations />
+      {isClientReady && (
+        <div>
+          {typeof window !== "undefined" && window.innerWidth > 768 ? (
+            <NavigationDetectorDesktop />
+          ) : (
+            <NavigationDetectorWithConfirmations />
+          )}
+        </div>
       )}
       <div className={styles.popularExamples}>
         <div className={styles.exampleBox} style={{ minWidth: "min-content" }}>
@@ -331,7 +343,7 @@ const SearchProfessionals = ({ nextStep }) => {
           </div>
 
           <button
-          disabled={isCheckingPostcode}
+            disabled={isCheckingPostcode}
             className={styles.searchButton}
             onClick={() => handleGetStarted(true)}
           >
@@ -339,7 +351,7 @@ const SearchProfessionals = ({ nextStep }) => {
           </button>
 
           <button
-          disabled={isCheckingPostcode}
+            disabled={isCheckingPostcode}
             className={styles.searchButtonPhone}
             onClick={() => handleGetStarted(false)}
           >
