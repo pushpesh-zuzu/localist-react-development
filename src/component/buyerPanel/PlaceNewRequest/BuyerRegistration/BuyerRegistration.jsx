@@ -25,6 +25,7 @@ const BuyerRegistration = ({
   setFromImageModal = () => {},
   service_Id,
   service_Name,
+  serviceName
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
@@ -145,7 +146,7 @@ const BuyerRegistration = ({
             nextStep={nextStep}
             formData={buyerRequest}
             serviceId={getServiceState?.id || service_Id}
-            serviceName={getServiceState?.name || service_Name}
+            serviceName={getServiceState?.name || service_Name || serviceName}
             onClose={handleClose}
             pincodes={postcode}
             setShowConfirmModal={setShowConfirmModal}
