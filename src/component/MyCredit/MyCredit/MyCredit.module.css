@@ -615,6 +615,12 @@
   }
   .new_business_card > div {
     font-size: 14px;
+    background: linear-gradient(
+      90deg,
+      rgba(227, 246, 252, 0) 12.55%,
+      #e3f6fc 44.03%,
+      #e3f6fc 100%
+    );
   }
 
   .new_business_card > img {
@@ -629,6 +635,12 @@
 
   .new_business_card {
     padding: 20px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(227, 246, 252, 0) 12.55%,
+      #e3f6fc 44.03%,
+      #e3f6fc 100%
+    );
   }
   .offerBoxTop b {
     padding: 4px;
