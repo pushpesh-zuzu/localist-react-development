@@ -29,8 +29,8 @@ const initialState = {
     recevive_online: "",
     email: "",
     name: "",
-    ip:"",
-    entryUrl:""
+    ip: "",
+    entryUrl: "",
   },
   qualityData: {},
   addDetailLoader: false,
@@ -52,6 +52,7 @@ const initialState = {
   addNotificationLoader: false,
   verifyPhoneNumberLoader: false,
   postCodeLoader: false,
+  redirectFromHome: false,
 };
 
 export const questionAnswerData = (questionData) => {
@@ -624,6 +625,9 @@ const buyerSlice = createSlice({
     setVerifyPhoneNumberLoader(state, action) {
       state.verifyPhoneNumberLoader = action.payload;
     },
+    setRedirectFromHome(state, action) {
+      state.redirectFromHome = action.payload;
+    },
     setcitySerach(state, action) {
       state.citySerach = action.payload;
     },
@@ -659,6 +663,7 @@ export const {
   setCreateRequesLoader,
   setGetNotificationData,
   setRequestUserPhone,
+  setRedirectFromHome,
 } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

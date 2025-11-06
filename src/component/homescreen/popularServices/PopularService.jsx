@@ -15,6 +15,9 @@ import imgBanner from "../../../assets/Images/houseCleaner.svg";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { BASE_URL_IMAGE } from "../../../utils";
 import { Spin } from "antd";
+import { serviceRouteMap } from "../../../utils/allServicesRoute";
+import { useNavigate, useParams } from "react-router";
+import { setRedirectFromHome } from "../../../store/Buyer/BuyerSlice";
 // import Modal from "./Modal";
 // const serviceData = [
 //   { title: "Personal Trainers", image: personalTrainers },
@@ -59,6 +62,10 @@ const PopularService = ({ closeModal }) => {
     id: null,
     name: "",
   });
+  const { lang, country } = useParams();
+  const currentLang = lang || "en";
+  const currentCountry = country || "gb";
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
   const [initialLoader, setInitialLoader] = useState(true);
@@ -66,8 +73,13 @@ const PopularService = ({ closeModal }) => {
   const { popularList, popularLoader } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const handleOpen = (id, name) => {
-    setSelectedServiceId({ id, name });
-    setShow(true);
+    // setSelectedServiceId({ id, name });
+    // setShow(true);
+    const matchedRoute = serviceRouteMap[id];
+    if (matchedRoute) {
+      navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); // go to the route
+      dispatch(setRedirectFromHome(true));
+    }
   };
 
   const handleClose = () => {
@@ -166,7 +178,7 @@ const PopularService = ({ closeModal }) => {
         >
           <img src={rightArrow} alt="Right" />
         </button>
-        {show && (userToken?.active_status == 2 || !userToken) && (
+        {/* {show && (userToken?.active_status == 2 || !userToken) && (
           <>
             <BuyerRegistration
               closeModal={handleClose}
@@ -174,7 +186,7 @@ const PopularService = ({ closeModal }) => {
               service_Name={selectedServiceId.name}
             />
           </>
-        )}
+        )} */}
       </div>
     </>
   );
