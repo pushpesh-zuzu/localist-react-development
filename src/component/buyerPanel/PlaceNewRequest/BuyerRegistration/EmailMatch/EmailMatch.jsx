@@ -24,7 +24,9 @@ const EmailMatch = ({
   hideCloseButton = false,
 }) => {
   const dispatch = useDispatch();
-  const { errorMessage } = useSelector((state) => state.findJobs);
+  const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
+    (state) => state.findJobs
+  );
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const { ip, url } = useUserInfo();
