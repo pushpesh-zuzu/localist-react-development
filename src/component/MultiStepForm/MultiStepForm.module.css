@@ -111,4 +111,7 @@
   .container {
     width: 90%;
   }
+  .containerNameEmail {
+    width: 100%;
+  }
 }
