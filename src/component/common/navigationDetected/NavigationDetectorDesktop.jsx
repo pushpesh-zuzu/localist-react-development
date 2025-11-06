@@ -64,7 +64,7 @@ const NavigationDetectorDesktop = () => {
       city: !!citySerach?.trim(), // Just for info
       isEverythingEmpty: isEverythingEmpty,
     });
-    debugger;
+
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
