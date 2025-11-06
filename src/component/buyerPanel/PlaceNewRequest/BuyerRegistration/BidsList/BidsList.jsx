@@ -21,6 +21,7 @@ import {
 import { Link, useNavigate, useParams } from "react-router-dom";
 import CustomModal from "../../../../Leads/LeadLists/ConfirmModal";
 import { Helmet } from "react-helmet-async";
+import { Modal, Radio, Select, Spin, Tabs } from "antd";
 
 const BidsList = () => {
   localStorage.setItem("isRegistrationComplete", "true");
