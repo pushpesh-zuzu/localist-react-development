@@ -113,7 +113,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
         setOtherText("");
       }
     }
-  }, [currentQuestion, buyerRequest, formattedQuestions]); // ✅ Removed unnecessary dependencies
+  }, [currentQuestion]); // ✅ Removed unnecessary dependencies
 
   // Reset when question changes
   useEffect(() => {
@@ -221,6 +221,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
         onNext();
       }
     }
+    setSelectedOption([]);
   };
 
   const handleNext = async (selected) => {
@@ -318,6 +319,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
         onNext();
       }
     }
+    setSelectedOption([]);
   };
 
   const handleBack = async () => {
@@ -365,7 +367,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
       }
     } else {
       onBack();
-      setIsStepFrom4(false)
+      setIsStepFrom4(false);
       const updatedBuyerRequest = {
         ...buyerRequest,
         questions: [...buyerRequest.questions].slice(0, -1), // remove last
@@ -445,7 +447,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
         console.error("Error updating progress on back:", err);
       }
     } else {
-        setProgressPercentage((pre)=>pre-10)
+      setProgressPercentage((pre) => pre - 10);
       onBack();
     }
   };
@@ -478,13 +480,7 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
       title={formattedQuestions[currentQuestion]?.questions}
       onButtonClick={handleNextCheckBox}
       onBackClick={isStepFrom4 ? handleBack : handleBack2}
-      disableNextButton={
-        formattedQuestions[currentQuestion]?.option_type === "single" &&
-        !buyerRequest?.questions?.some(
-          (q) => q?.ques === formattedQuestions[currentQuestion]?.questions
-        ) &&
-        !selectedOption.includes("Something else (please describe)")
-      }
+      disableNextButton={false}
       buttonText="Next"
       showBackButton={true}
     >
