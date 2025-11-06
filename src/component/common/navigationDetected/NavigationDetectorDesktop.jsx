@@ -36,7 +36,6 @@ const NavigationDetectorDesktop = () => {
 
   // Prevent multiple API calls
   const hasSent = useRef(false);
-console.log(ip,url,'ipurllllllllllllll')
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
     if (hasSent.current || userToken) return;
