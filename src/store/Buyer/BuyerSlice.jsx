@@ -29,6 +29,8 @@ const initialState = {
     recevive_online: "",
     email: "",
     name: "",
+    ip:"",
+    entryUrl:""
   },
   qualityData: {},
   addDetailLoader: false,
