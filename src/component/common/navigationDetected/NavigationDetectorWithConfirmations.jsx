@@ -20,6 +20,7 @@ const NavigationDetectorWithConfirmations = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   // 🧠 Ref to store latest data safely
   const latestData = useRef({

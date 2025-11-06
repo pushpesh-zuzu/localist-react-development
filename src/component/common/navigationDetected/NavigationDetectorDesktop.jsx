@@ -19,6 +19,7 @@ const NavigationDetectorDesktop = () => {
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
+  const { ip, url } = useUserInfo();
 
   // 🧠 Ref to store latest data safely
   const latestData = useRef({
@@ -32,9 +33,10 @@ const NavigationDetectorDesktop = () => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
 
+
   // Prevent multiple API calls
   const hasSent = useRef(false);
-
+console.log(ip,url,'ipurllllllllllllll')
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
     if (hasSent.current || userToken) return;
