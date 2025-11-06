@@ -237,7 +237,13 @@ const MyCredits = () => {
                           <span className={styles.diagonal_price}>220</span>
                           {item?.no_of_leads} Credits
                         </span>
-                        <h3 style={{ display: "flex", alignItems: "center" }}>
+                        <h3
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
                           £320{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
@@ -261,7 +267,13 @@ const MyCredits = () => {
                         </span>
                       </div>
                       <div className={styles.cardHeaderWraps}>
-                        <h3 style={{ display: "flex", alignItems: "center" }}>
+                        <h3
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
                           £320{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
@@ -298,7 +310,11 @@ const MyCredits = () => {
 
                       <div
                         className={styles.price}
-                        style={{ display: "flex", alignItems: "center" }}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
                       >
                         £{item?.price}
                         <small className={styles.excl_tax}>(Excl. tax)</small>
