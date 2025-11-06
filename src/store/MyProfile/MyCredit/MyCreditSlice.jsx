@@ -89,7 +89,6 @@ export const AddSellerCardDetailsApi = (cardData) => {
     }
   };
 };
-
 export const removeCardDetailsApi = (cardData) => {
   return async (dispatch) => {
     dispatch(setSellerBillingLoader(true));
@@ -108,6 +107,7 @@ export const removeCardDetailsApi = (cardData) => {
     }
   };
 };
+
 export const makePrimaryApi = (cardData) => {
   return async (dispatch) => {
     dispatch(setSellerBillingLoader(true));

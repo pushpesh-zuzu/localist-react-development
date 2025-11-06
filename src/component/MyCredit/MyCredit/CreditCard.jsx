@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "./CreditCard.module.css";
 import visaImg from "../../../assets/Images/Setting/Visa.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { getSellerCardApi } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
+import {
+  getSellerCardApi,
+  removeCardDetailsApi,
+  makePrimaryApi,
+} from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
 
 const CreditCard = () => {
   const [isopen, setIsOpen] = useState(false);
+  const [primaryId, setPrimaryId] = useState(0);
   const dispatch = useDispatch();
   const { getSellerCardData } = useSelector((state) => state.myCredit);
 
@@ -22,6 +27,32 @@ const CreditCard = () => {
     setIsOpen(true);
   };
 
+  const handleRemoveCard = async (data) => {
+    try {
+      const result = await dispatch(
+        removeCardDetailsApi({ card_id: data?.id })
+      );
+      if (result) {
+        await dispatch(getSellerCardApi());
+      }
+    } catch (error) {
+      console.error("Error removing card:", error);
+    }
+  };
+
+  const handlePrimaryChange = async (data) => {
+    try {
+      const result = await dispatch(
+        makePrimaryApi({ card_id: data?.id, user_id: data?.user_id })
+      );
+      if (result) {
+        await dispatch(getSellerCardApi());
+      }
+    } catch (err) {
+      console.error("Error removing card:", error);
+    }
+  };
+
   return (
     <>
       <div
@@ -32,23 +63,75 @@ const CreditCard = () => {
         }
       >
         {getSellerCardData && getSellerCardData.length > 0 ? (
-          <div className={styles.container}>
-            <div className={styles.visaCard_wrapper}>
-              <div className={styles.visaCard}>
-                <img src={visaImg} alt="Visa" />
-                <div className={styles.separator}></div>
-                <div>
-                  We'll charge the card ending *
-                  {String(getSellerCardData[0].card_number)?.slice(-4)} that we
-                  have on file
+          <>
+            {getSellerCardData.map((item, index) => (
+              <div className={styles.container} key={index}>
+                <div className={styles.visaCard_wrapper}>
+                  <div className={styles.visaCard}>
+                    <img src={visaImg} alt="Visa" />
+                    <div className={styles.separator}></div>
+                    <div>
+                      We'll charge the card ending *
+                      {String(item.card_number)?.slice(-4)} that we have on file{" "}
+                      {item.is_primary == 1 && (
+                        <span
+                          className={styles.primary_text}
+                          style={{
+                            fontWeight: "normal",
+                            fontSize: "16px",
+                          }}
+                        >
+                          (Primary)
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className={styles.remove_actionButtons}>
+                    {item.is_primary == 0 && (
+                      <>
+                        <span
+                          onClick={() => {
+                            setPrimaryId(index);
+                            handlePrimaryChange(item);
+                          }}
+                          className={styles.leftText}
+                          style={{
+                            color: "black",
+                            fontWeight: "normal",
+                            fontSize: "14px",
+                          }}
+                        >
+                          Make Primary
+                        </span>
+                        <span className={styles.separator}></span>
+                      </>
+                    )}
+
+                    <span
+                      onClick={() => handleRemoveCard(item)}
+                      className={styles.rightText}
+                      style={{
+                        color: "black",
+                        fontWeight: "normal",
+                        fontSize: "14px",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      Remove
+                    </span>
+                  </div>
                 </div>
               </div>
-              <div className={styles.rightText} onClick={handleChangeModal}>
-                {" "}
-                Change
-              </div>
+            ))}
+
+            {/* ✅ Add Card only once, below the last card */}
+            <div className={styles.actionButtons}>
+              <span onClick={handleAddCard} className={styles.actionText}>
+                Add Card
+              </span>
             </div>
-          </div>
+          </>
         ) : (
           <>
             <div className={styles.visaCard}>

@@ -88,9 +88,17 @@
 }
 
 .actionText {
+  color: var(--primary-color);
+  text-align: end;
   cursor: pointer;
   transition: color 0.2s ease;
   font-weight: 600;
+  padding-right: 16px;
+  font-size: 18px;
+}
+
+.primary_text {
+  color: var(--primary-color);
 }
 
 .actionTextRemove {
