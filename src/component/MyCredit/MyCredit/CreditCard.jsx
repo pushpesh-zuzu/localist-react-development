@@ -36,6 +36,7 @@ const CreditCard = () => {
             <div className={styles.visaCard_wrapper}>
               <div className={styles.visaCard}>
                 <img src={visaImg} alt="Visa" />
+                <div className={styles.separator}></div>
                 <div>
                   We'll charge the card ending *
                   {String(getSellerCardData[0].card_number)?.slice(-4)} that we
@@ -52,8 +53,9 @@ const CreditCard = () => {
           <>
             <div className={styles.visaCard}>
               <img src={visaImg} alt="Visa" />
+              <div className={styles.separator}></div>
               <div className={styles.textRight}>
-                Buy more credits and get a bigger discount
+                Buy credits and avail the Exclusive Sign Up Offer now!
               </div>
             </div>
 

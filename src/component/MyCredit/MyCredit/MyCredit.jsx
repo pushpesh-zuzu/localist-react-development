@@ -221,7 +221,6 @@ const MyCredits = () => {
                         </div>
                       </span>{" "}
                       <div>Your Exclusive Sign Up Offer</div>
-                      <b>Exclusive Offer</b>
                     </div>
                   )}
                   {item?.plan_type === "starter" && (
@@ -238,8 +237,9 @@ const MyCredits = () => {
                           <span className={styles.diagonal_price}>220</span>
                           {item?.no_of_leads} Credits
                         </span>
-                        <h3>
-                          £320 <span>(Excl. tax)</span>
+                        <h3 style={{ display: "flex", alignItems: "center" }}>
+                          £320{" "}
+                          <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
                         <button
                           className={`${styles.buyButton} ${styles.buttonWidth}`}
@@ -248,6 +248,31 @@ const MyCredits = () => {
                           Buy Now
                         </button>
                       </div>
+
+                      <div className={styles.cardHeaderWrap}>
+                        <p className={styles.responses}>
+                          About {item?.no_of_responses} Responses
+                        </p>
+                        <span
+                          className={`${styles.creditTag} ${styles.creditpadding}`}
+                        >
+                          <span className={styles.diagonal_price}>220</span>
+                          {item?.no_of_leads} Credits
+                        </span>
+                      </div>
+                      <div className={styles.cardHeaderWraps}>
+                        <h3 style={{ display: "flex", alignItems: "center" }}>
+                          £320{" "}
+                          <span className={styles.excl_tax}>(Excl. tax)</span>
+                        </h3>
+                        <button
+                          className={`${styles.buyButton} ${styles.buttonWidth}`}
+                          onClick={() => handleBuyNow(item)}
+                        >
+                          Buy Now
+                        </button>
+                      </div>
+
                       <div className={styles.new_business_card}>
                         <img src={NewBusiness} alt="..." />
                         <div>
@@ -271,9 +296,12 @@ const MyCredits = () => {
                         About {item?.no_of_responses} Responses
                       </p>
 
-                      <div className={styles.price}>
+                      <div
+                        className={styles.price}
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
                         £{item?.price}
-                        <small>(Excl. tax)</small>
+                        <small className={styles.excl_tax}>(Excl. tax)</small>
                       </div>
 
                       <button

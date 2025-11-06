@@ -44,6 +44,12 @@
   min-width: 250px;
 }
 
+.separator {
+  width: 2px;
+  height: 27px;
+  background-color: #d9d9d9;
+}
+
 .rightText {
   color: var(--primary-color);
   font-size: 18px;
@@ -53,8 +59,8 @@
   cursor: pointer !important;
 }
 .textRight {
-  border-left: 2px solid #d9d9d9;
-  padding-left: 20px;
+  /* border-left: 2px solid #d9d9d9;
+  padding-left: 20px; */
   font-size: 18px;
   font-weight: 600;
 }
@@ -121,18 +127,30 @@
 }
 
 @media (max-width: 480px) {
-  .visaCard {
+  .parent_container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
+    gap: 5px;
+  }
+  .visaCard {
+    align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .visaCard img {
+    width: 51px;
   }
 
   .rightText {
     font-size: 14px;
   }
 
+  .actionText {
+    padding-left: 72px;
+  }
+
   .textRight {
-    border-left: none;
+    font-size: 12px;
   }
 }
