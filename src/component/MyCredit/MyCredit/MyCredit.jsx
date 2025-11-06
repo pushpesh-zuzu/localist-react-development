@@ -172,10 +172,8 @@ const MyCredits = () => {
             <img src={iIcon} alt="iIcon" />
           </span>
           <p className={styles.description}>
-            Credits are used to connect with potential customers on
-            Localists.com. They let you respond to high-quality, high intent,
-            local leads in your area. Learn more about how credits work and our
-            pricing in the{" "}
+            Credits are used to contact customers on Localists. You can find out
+            more about credits and how we charge for our service in the{" "}
             <Link to={`/${lang}/${country}/contact-us`} className={styles.link}>
               Help Center
             </Link>
@@ -324,7 +322,7 @@ const MyCredits = () => {
           <label>Redeem coupon</label>
           <input
             type="text"
-            placeholder="Redeem a code"
+            placeholder="Coupon Code"
             onChange={handleRedeem}
           />
           <button className={styles.redeemButton} onClick={handleApply}>
