@@ -6,8 +6,10 @@ import rightArrow from "../../../assets/Images/forwordArrow.svg";
 import SpecificService from "./SpecificService";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { setRedirectFromHome } from "../../../store/Buyer/BuyerSlice";
+import { serviceRouteMap } from "../../../utils/allServicesRoute";
 
 function AutoplayPlugin(slider) {
   let timeout;
@@ -45,6 +47,8 @@ const SliderComponent = ({ subcategory, categoryName, initialLoader }) => {
   const { lang, country } = useParams();
   const currentLang = lang || "en";
   const currentCountry = country || "gb";
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [selectedServiceId, setSelectedServiceId] = useState({
     id: null,
@@ -53,8 +57,13 @@ const SliderComponent = ({ subcategory, categoryName, initialLoader }) => {
   const [show, setShow] = useState(false);
   const { userToken } = useSelector((state) => state.auth);
   const handleOpen = (id, name) => {
-    setSelectedServiceId({ id, name });
-    setShow(true);
+    // setSelectedServiceId({ id, name });
+    // setShow(true);
+     const matchedRoute = serviceRouteMap[id];
+        if (matchedRoute) {
+          navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); // go to the route
+          dispatch(setRedirectFromHome(true));
+        }
   };
   const handleClose = () => {
     setShow(false);
