@@ -101,17 +101,23 @@
     opacity: 1;
   }
 }
+@media (max-width: 1020px) {
+  .containerNameEmail {
+    width: 60%;
+  }
+}
 @media (max-width: 768px) {
   .container {
     width: 80%;
     margin: 10px auto;
+  }
+   .containerNameEmail {
+    width: 100%;
   }
 }
 @media (max-width: 400px) {
   .container {
     width: 90%;
   }
-  .containerNameEmail {
-    width: 100%;
-  }
+ 
 }

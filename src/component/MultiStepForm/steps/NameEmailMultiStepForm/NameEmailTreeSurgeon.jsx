@@ -7,6 +7,7 @@ import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/LoaderWithTextMultiStepForm";
 import nameEmailBanner from "../nameEmailBanner.webp";
 import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmailMultiForm/BackgroundWrapperNameEmailMultiForm";
+import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
 const NameEmailTreeSurgeon = ({
   nextStep,
   isPPCPages = false,
@@ -29,7 +30,7 @@ const NameEmailTreeSurgeon = ({
     name: false,
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
-
+  const [isBannerText, setIsBannerText] = useState(false);
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
@@ -83,12 +84,18 @@ const NameEmailTreeSurgeon = ({
     onBack();
     setIsStepFrom4(true);
   };
-
+  const handleBannerText = () => {
+    setIsBannerText(false);
+  };
   return (
     <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
       <CardLayoutWrapper
-        title="You're nearly done! Just enter a few details to get your custom quotes."
-        onButtonClick={handleSubmit}
+        title={
+          isBannerText
+            ? ""
+            : `You're nearly done! Just enter a few details to get your custom quotes.`
+        }
+        onButtonClick={isBannerText ? handleBannerText : handleSubmit}
         onBackClick={handleBackClick}
         buttonText="Next"
         showBackButton={true}
@@ -99,7 +106,22 @@ const NameEmailTreeSurgeon = ({
         {isInitialLoading ? (
           <LoaderWithTextMultiStepForm
             setIsInitialLoading={setIsInitialLoading}
+            setIsBannerText={setIsBannerText}
           />
+        ) : isBannerText && !isInitialLoading ? (
+          <div className={styles.bannerContainer}>
+            <img
+              className={styles.bannerImage}
+              src={CheckStartCircle}
+              alt="CheckIcon"
+            />
+            <h3 className={styles.bannerHeading}>
+              Perfect! We’ve found you some great local matches
+            </h3>
+            <p className={styles.bannerPara}>
+              One more thing, we need your details just to send you quotes only”
+            </p>
+          </div>
         ) : (
           <div className={styles.infoWrapper}>
             {!isPPCPages && (

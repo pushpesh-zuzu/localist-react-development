@@ -35,7 +35,31 @@
 .inputError {
   border: 1px solid red !important;
 }
-
+.bannerContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: -25px;
+}
+.bannerImage{
+  height: 80px;
+  width: 80px;
+  margin: auto;
+}
+.bannerHeading{
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 32px;
+  max-width: 90%;
+  margin: auto;
+}
+.bannerPara{
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  line-height: 20px;
+}
 .errorMessage {
   color: red !important;
   font-size: 12px;
@@ -68,6 +92,16 @@
   .input {
     font-size: 14px;
     padding: 10px;
+  }
+  .bannerHeading{
+    font-size: 20px;
+  }
+  .bannerImage{
+    height: 60px;
+    width: 60px;
+  }
+  .bannerPara{
+    font-size: 16px;
   }
 }
 

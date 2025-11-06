@@ -10,12 +10,14 @@ const LoaderWithTextMultiStepForm = ({
   intervalTime = 1000,
   totalLoadingTime = 3000,
   setIsInitialLoading,
+  setIsBannerText,
 }) => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsInitialLoading(false);
+      setIsBannerText(true);
     }, 3000);
 
     return () => {
