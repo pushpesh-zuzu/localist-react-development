@@ -211,7 +211,11 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
         buyerStep={buyerStep}
       />
       <div>
-        <div className={styles.container}>
+        <div
+          className={`${
+            buyerStep === 4 ? styles.containerNameEmail : styles.container
+          }`}
+        >
           <div className={styles.formContainer}>
             <div className={`${styles.slideContainer} ${animationDirection}`}>
               {buyerStep === 1 && (

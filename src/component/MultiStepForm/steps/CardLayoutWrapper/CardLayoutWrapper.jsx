@@ -15,9 +15,16 @@ const CardLayoutWrapper = ({
   loader = false,
   headingCenter = true,
   titlePrimary = false,
+  NameEmailContainer = false,
 }) => {
   return (
-    <div className={styles.cardContainer}>
+    <div
+      className={`${
+        NameEmailContainer
+          ? styles.cardContainerNameEmail
+          : styles.cardContainer
+      }`}
+    >
       <div className={styles.cardWrapper}>
         {title && (
           <h2

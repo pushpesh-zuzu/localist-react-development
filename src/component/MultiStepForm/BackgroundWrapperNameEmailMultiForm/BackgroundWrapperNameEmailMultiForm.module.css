@@ -1,0 +1,14 @@
+.backgroundContainer {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  align-items: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .backgroundContainer {
+    min-height: 60vh;
+  }
+}

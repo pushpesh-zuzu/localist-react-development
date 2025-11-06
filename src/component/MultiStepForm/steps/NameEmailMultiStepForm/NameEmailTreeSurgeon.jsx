@@ -4,7 +4,9 @@ import styles from "./NameEmailMultiStepForm.module.css";
 import { checkEmailIdApi } from "../../../../store/FindJobs/findJobSlice";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-
+import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/LoaderWithTextMultiStepForm";
+import nameEmailBanner from "../nameEmailBanner.webp";
+import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmailMultiForm/BackgroundWrapperNameEmailMultiForm";
 const NameEmailTreeSurgeon = ({
   nextStep,
   isPPCPages = false,
@@ -26,6 +28,7 @@ const NameEmailTreeSurgeon = ({
     email: false,
     name: false,
   });
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -82,53 +85,67 @@ const NameEmailTreeSurgeon = ({
   };
 
   return (
-    <CardLayoutWrapper
-      title="You're nearly done! Just enter a few details to get your custom quotes."
-      onButtonClick={handleSubmit}
-      onBackClick={handleBackClick}
-      buttonText="Next"
-      showBackButton={true}
-      disableNextButton={searchServiceLoader}
-      loader={searchServiceLoader}
-    >
-      <div className={styles.infoWrapper}>
-        {!isPPCPages && (
-          <div style={{ marginBottom: "10px" }}>
+    <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
+      <CardLayoutWrapper
+        title="You're nearly done! Just enter a few details to get your custom quotes."
+        onButtonClick={handleSubmit}
+        onBackClick={handleBackClick}
+        buttonText="Next"
+        showBackButton={true}
+        disableNextButton={searchServiceLoader || isInitialLoading}
+        loader={searchServiceLoader}
+        NameEmailContainer={true}
+      >
+        {isInitialLoading ? (
+          <LoaderWithTextMultiStepForm
+            setIsInitialLoading={setIsInitialLoading}
+          />
+        ) : (
+          <div className={styles.infoWrapper}>
+            {!isPPCPages && (
+              <div style={{ marginBottom: "10px" }}>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className={`${styles.input} ${
+                    errors?.email ? styles.inputError : ""
+                  }`}
+                  value={email}
+                  onChange={handleEmailChange}
+                />
+                {errors?.email && (
+                  <span
+                    style={{ color: "red" }}
+                    className={styles.errorMessage}
+                  >
+                    Please enter a valid email address.
+                  </span>
+                )}
+              </div>
+            )}
             <input
-              type="email"
-              placeholder="Email"
+              style={{ marginTop: "5px" }}
+              type="text"
+              placeholder="Full Name"
               className={`${styles.input} ${
-                errors?.email ? styles.inputError : ""
+                errors?.name ? styles.inputError : ""
               }`}
-              value={email}
-              onChange={handleEmailChange}
+              value={name}
+              onChange={handleNameChange}
             />
-            {errors?.email && (
+            {errors?.name && (
               <span style={{ color: "red" }} className={styles.errorMessage}>
-                Please enter a valid email address.
+                Full name is required.
               </span>
             )}
+
+            <p className={styles.subText}>
+              We only use this to match you with trusted professionals.
+            </p>
           </div>
         )}
-        <input
-          style={{ marginTop: "5px" }}
-          type="text"
-          placeholder="Full Name"
-          className={`${styles.input} ${errors?.name ? styles.inputError : ""}`}
-          value={name}
-          onChange={handleNameChange}
-        />
-        {errors?.name && (
-          <span style={{ color: "red" }} className={styles.errorMessage}>
-            Full name is required.
-          </span>
-        )}
-
-        <p className={styles.subText}>
-          We only use this to match you with trusted professionals.
-        </p>
-      </div>
-    </CardLayoutWrapper>
+      </CardLayoutWrapper>
+    </BackgroundWrapperNameEmailMultiForm>
   );
 };
 
