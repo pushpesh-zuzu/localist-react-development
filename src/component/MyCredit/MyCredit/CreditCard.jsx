@@ -84,11 +84,10 @@ const CreditCard = () => {
       >
         {getSellerCardData && getSellerCardData.length > 0 ? (
           <>
-            {getSellerCardData.map((item, index) => (
+            {/* {getSellerCardData.map((item, index) => (
               <div className={styles.container} key={index}>
                 <div className={styles.visaCard_wrapper}>
                   <div className={styles.visaCard}>
-                    {/* <img src={visaImg} alt="Visa" /> */}
                     <div className={styles.card_brand}>
                       <span>
                         {item?.brand?.charAt(0).toUpperCase() +
@@ -143,7 +142,69 @@ const CreditCard = () => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
+            {getSellerCardData &&
+              getSellerCardData
+                // 🟢 Sort so that primary cards come first
+                .slice() // make a shallow copy to avoid mutating Redux data
+                .sort((a, b) => b.is_primary - a.is_primary)
+                .map((item, index) => (
+                  <div className={styles.container} key={index}>
+                    <div className={styles.visaCard_wrapper}>
+                      <div className={styles.visaCard}>
+                        <div className={styles.card_brand}>
+                          <span>
+                            {item?.brand?.charAt(0).toUpperCase() +
+                              item?.brand?.slice(1).toLowerCase() || ""}
+                          </span>
+                        </div>
+                        <div className={styles.separator}></div>
+                        <div>
+                          We'll charge the card ending *
+                          {String(item.card_number)?.slice(-4)} that we have on
+                          file{" "}
+                          {item.is_primary == 1 && (
+                            <span
+                              style={{
+                                textDecoration: "none",
+                                color: "#00AFE3",
+                              }}
+                              className={styles.primary_text}
+                            >
+                              (Primary)
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className={styles.remove_actionButtons}>
+                        {item.is_primary == 0 && (
+                          <>
+                            <span
+                              onClick={() => {
+                                setPrimaryId(index);
+                                handlePrimaryChange(item);
+                              }}
+                              className={styles.primary_text}
+                              style={{ color: "black" }}
+                            >
+                              Make Primary
+                            </span>
+                            <span className={styles.separator}></span>
+                          </>
+                        )}
+
+                        <span
+                          onClick={() => handleRemoveCard(item)}
+                          className={styles.primary_text}
+                          style={{ color: "black", marginLeft: "auto" }}
+                        >
+                          Remove
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
 
             {/* ✅ Add Card only once, below the last card */}
             <div className={styles.actionButtons}>

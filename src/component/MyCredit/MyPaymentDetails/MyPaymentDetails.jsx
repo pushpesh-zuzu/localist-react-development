@@ -153,30 +153,34 @@ const MyPaymentDetails = () => {
         <div className={styles.cardGrid}>
           {getSellerCardData &&
             getSellerCardData.length > 0 &&
-            getSellerCardData.map((item, index) => {
-              let brandName =
-                item?.brand?.charAt(0).toUpperCase() +
-                  item?.brand?.slice(1).toLowerCase() || "";
+            [...getSellerCardData]
+              .sort((a, b) => b.is_primary - a.is_primary)
+              .map((item, index) => {
+                let brandName =
+                  item?.brand?.charAt(0).toUpperCase() +
+                    item?.brand?.slice(1).toLowerCase() || "";
 
-              return (
-                <div key={index} className={styles.cardWrapper}>
-                  {/* ---- Card ---- */}
-                  <div className={styles.card}>
-                    <div className={styles.cardTop}>
-                      <span className={styles.cardBrand}>{brandName}</span>
-                      {item.is_primary == 1 && (
-                        <span className={styles.primaryBadge}>Primary</span>
-                      )}
+                return (
+                  <div key={index} className={styles.cardWrapper}>
+                    {/* ---- Card ---- */}
+                    <div className={styles.card}>
+                      <div className={styles.cardTop}>
+                        <span className={styles.cardBrand}>{brandName}</span>
+                        {item.is_primary == 1 && (
+                          <span className={styles.primaryBadge}>Primary</span>
+                        )}
+                      </div>
+
+                      <div className={styles.cardNumber}>
+                        {`•••• •••• •••• ${item?.card_number}`}
+                      </div>
+                      <div className={styles.cardExpiry}>
+                        {item.expiry_date}
+                      </div>
                     </div>
 
-                    <div className={styles.cardNumber}>
-                      {`•••• •••• •••• ${item?.card_number}`}
-                    </div>
-                    <div className={styles.cardExpiry}>{item.expiry_date}</div>
-                  </div>
-
-                  {/* ---- Buttons below card ---- */}
-                  {/* <div className={styles.cardActions}>
+                    {/* ---- Buttons below card ---- */}
+                    {/* <div className={styles.cardActions}>
                     {item.is_primary == 0 && (
                       <button
                         onClick={() => {
@@ -195,39 +199,39 @@ const MyPaymentDetails = () => {
                       Remove
                     </button>
                   </div> */}
-                  {/* ---- Buttons below card ---- */}
-                  <div className={styles.cardActions}>
-                    {item.is_primary == 0 ? (
-                      <>
-                        <span
-                          onClick={() => {
-                            setPrimaryId(index);
-                            handlePrimaryChange(item);
-                          }}
-                          className={styles.linkText}
-                        >
-                          Make Primary
-                        </span>
-                        <span className={styles.separator}></span>
+                    {/* ---- Buttons below card ---- */}
+                    <div className={styles.cardActions}>
+                      {item.is_primary == 0 ? (
+                        <>
+                          <span
+                            onClick={() => {
+                              setPrimaryId(index);
+                              handlePrimaryChange(item);
+                            }}
+                            className={styles.linkText}
+                          >
+                            Make Primary
+                          </span>
+                          <span className={styles.separator}></span>
+                          <span
+                            onClick={() => handleRemoveCard(item)}
+                            className={`${styles.linkText} ${styles.removeLink}`}
+                          >
+                            Remove
+                          </span>
+                        </>
+                      ) : (
                         <span
                           onClick={() => handleRemoveCard(item)}
                           className={`${styles.linkText} ${styles.removeLink}`}
                         >
                           Remove
                         </span>
-                      </>
-                    ) : (
-                      <span
-                        onClick={() => handleRemoveCard(item)}
-                        className={`${styles.linkText} ${styles.removeLink}`}
-                      >
-                        Remove
-                      </span>
-                    )}
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
 
         {getSellerCardData?.length === 0 && (
