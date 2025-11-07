@@ -12,6 +12,7 @@ import {
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import { showToast } from "../../../utils";
 
 const MyPaymentDetails = () => {
   const [showModal, setShowModal] = useState(false);
@@ -40,9 +41,11 @@ const MyPaymentDetails = () => {
 
       if (result) {
         await dispatch(getSellerCardApi());
+        showToast("success", "Card removed successfully!");
       }
     } catch (error) {
       console.error("Error removing card:", error);
+      showToast("error", "Failed to remove card. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -56,9 +59,11 @@ const MyPaymentDetails = () => {
       );
       if (result) {
         await dispatch(getSellerCardApi());
+        showToast("success", "Primary card updated successfully!");
       }
     } catch (err) {
       console.error("Error removing card:", error);
+      showToast("error", "Failed to update primary card. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -11,6 +11,7 @@ import AddCardModal from "../MyPaymentDetails/AddCardModal";
 
 import { LoadingOutlined } from "@ant-design/icons";
 import { Flex, Spin } from "antd";
+import { showToast } from "../../../utils";
 
 const CreditCard = () => {
   const [isopen, setIsOpen] = useState(false);
@@ -39,9 +40,11 @@ const CreditCard = () => {
       );
       if (result) {
         await dispatch(getSellerCardApi());
+        showToast("success", "Card removed successfully!");
       }
     } catch (error) {
       console.error("Error removing card:", error);
+      showToast("error", "Failed to remove card. Please try again.");
     }
   };
 
@@ -52,9 +55,11 @@ const CreditCard = () => {
       );
       if (result) {
         await dispatch(getSellerCardApi());
+        showToast("success", "Primary card updated successfully!");
       }
     } catch (err) {
       console.error("Error removing card:", error);
+      showToast("error", "Failed to update primary card. Please try again.");
     }
   };
 
