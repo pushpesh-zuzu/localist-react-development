@@ -91,7 +91,7 @@ export const AddSellerCardDetailsApi = (cardData) => {
 };
 export const removeCardDetailsApi = (cardData) => {
   return async (dispatch) => {
-    dispatch(setSellerBillingLoader(true));
+    dispatch(setCreditCardLoader(true));
     try {
       const response = await axiosInstance.post(
         `users/seller-card-remove`,
@@ -103,14 +103,14 @@ export const removeCardDetailsApi = (cardData) => {
     } catch (error) {
       showToast("error", error?.response?.data?.message);
     } finally {
-      dispatch(setSellerBillingLoader(false));
+      dispatch(setCreditCardLoader(false));
     }
   };
 };
 
 export const makePrimaryApi = (cardData) => {
   return async (dispatch) => {
-    dispatch(setSellerBillingLoader(true));
+    dispatch(setCreditCardLoader(true));
     try {
       const response = await axiosInstance.post(
         `users/seller-card-make-primary`,
@@ -122,7 +122,7 @@ export const makePrimaryApi = (cardData) => {
     } catch (error) {
       showToast("error", error?.response?.data?.message);
     } finally {
-      dispatch(setSellerBillingLoader(false));
+      dispatch(setCreditCardLoader(false));
     }
   };
 };
@@ -191,6 +191,7 @@ const initialState = {
   getInvoiceList: [],
   invoiceLoader: false,
   starterPackPurchased: false,
+  creditCardLoader: false,
 };
 
 const myCreditSlice = createSlice({
@@ -202,6 +203,9 @@ const myCreditSlice = createSlice({
     },
     setSellerBillingLoader(state, action) {
       state.sellerBillingLoader = action.payload;
+    },
+    setCreditCardLoader(state, action) {
+      state.creditCardLoader = action.payload;
     },
     setBuyCreditLoader(state, action) {
       state.buyCreditLoader = action.payload;
@@ -241,6 +245,7 @@ export const {
   setAddCouanLoader,
   setGetSellerCardData,
   setSellerCardLoader,
+  setCreditCardLoader,
 } = myCreditSlice.actions;
 
 export default myCreditSlice.reducer;

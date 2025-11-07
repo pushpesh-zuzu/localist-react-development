@@ -72,6 +72,8 @@ import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
+import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
+import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 
 const routes = [
   {

@@ -9,11 +9,18 @@ import {
 } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import AddCardModal from "../MyPaymentDetails/AddCardModal";
 
+import { LoadingOutlined } from "@ant-design/icons";
+import { Flex, Spin } from "antd";
+
 const CreditCard = () => {
   const [isopen, setIsOpen] = useState(false);
   const [primaryId, setPrimaryId] = useState(0);
   const dispatch = useDispatch();
-  const { getSellerCardData } = useSelector((state) => state.myCredit);
+  const { getSellerCardData, creditCardLoader } = useSelector(
+    (state) => state.myCredit
+  );
+
+  console.log(creditCardLoader, "fdghufvbfrbhrerjfbhfjgibnribn");
 
   useEffect(() => {
     dispatch(getSellerCardApi());
@@ -55,6 +62,16 @@ const CreditCard = () => {
 
   return (
     <>
+      {creditCardLoader && (
+        <div className={styles.loaderOverlay}>
+          <Spin
+            indicator={<LoadingOutlined spin />}
+            size="large"
+            tip="Loading..."
+          />
+        </div>
+      )}
+
       <div
         className={
           !getSellerCardData || getSellerCardData.length < 1

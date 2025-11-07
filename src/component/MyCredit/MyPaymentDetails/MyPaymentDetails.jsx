@@ -10,6 +10,8 @@ import {
   makePrimaryApi,
 } from "../../../store/MyProfile/MyCredit/MyCreditSlice";
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const MyPaymentDetails = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +19,7 @@ const MyPaymentDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getSellerCardData } = useSelector((state) => state.myCredit);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // if (getSellerCardData?.length) {
@@ -30,6 +33,7 @@ const MyPaymentDetails = () => {
 
   const handleRemoveCard = async (data) => {
     try {
+      setLoading(true);
       const result = await dispatch(
         removeCardDetailsApi({ card_id: data?.id })
       );
@@ -39,11 +43,14 @@ const MyPaymentDetails = () => {
       }
     } catch (error) {
       console.error("Error removing card:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handlePrimaryChange = async (data) => {
     try {
+      setLoading(true);
       const result = await dispatch(
         makePrimaryApi({ card_id: data?.id, user_id: data?.user_id })
       );
@@ -52,6 +59,8 @@ const MyPaymentDetails = () => {
       }
     } catch (err) {
       console.error("Error removing card:", error);
+    } finally {
+      setLoading(false);
     }
   };
   const handleBack = () => {
@@ -59,6 +68,17 @@ const MyPaymentDetails = () => {
   };
   return (
     <>
+      {loading && (
+        <div className={styles.loaderOverlay}>
+          <Spin
+            indicator={
+              <LoadingOutlined style={{ color: "white", fontSize: 36 }} spin />
+            }
+            size="large"
+            tip="Processing..."
+          />
+        </div>
+      )}
       <div className={styles.container}>
         <div className={styles.backText} onClick={handleBack}>
           <img src={blackArrow} alt="..." /> Settings
