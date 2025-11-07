@@ -148,45 +148,81 @@ const MyPaymentDetails = () => {
         <div className={styles.cardGrid}>
           {getSellerCardData &&
             getSellerCardData.length > 0 &&
-            getSellerCardData.map((item, index) => (
-              <div key={index} className={styles.cardWrapper}>
-                {/* ---- Card ---- */}
-                <div className={styles.card}>
-                  <div className={styles.cardTop}>
-                    <span className={styles.cardBrand}>VISA</span>
-                    {item.is_primary == 1 && (
-                      <span className={styles.primaryBadge}>Primary</span>
+            getSellerCardData.map((item, index) => {
+              let brandName =
+                item?.brand?.charAt(0).toUpperCase() +
+                  item?.brand?.slice(1).toLowerCase() || "";
+
+              return (
+                <div key={index} className={styles.cardWrapper}>
+                  {/* ---- Card ---- */}
+                  <div className={styles.card}>
+                    <div className={styles.cardTop}>
+                      <span className={styles.cardBrand}>{brandName}</span>
+                      {item.is_primary == 1 && (
+                        <span className={styles.primaryBadge}>Primary</span>
+                      )}
+                    </div>
+
+                    <div className={styles.cardNumber}>
+                      {`•••• •••• •••• ${item?.card_number}`}
+                    </div>
+                    <div className={styles.cardExpiry}>{item.expiry_date}</div>
+                  </div>
+
+                  {/* ---- Buttons below card ---- */}
+                  {/* <div className={styles.cardActions}>
+                    {item.is_primary == 0 && (
+                      <button
+                        onClick={() => {
+                          setPrimaryId(index);
+                          handlePrimaryChange(item);
+                        }}
+                        className={styles.primaryBtn}
+                      >
+                        Make Primary
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleRemoveCard(item)}
+                      className={styles.removeBtn}
+                    >
+                      Remove
+                    </button>
+                  </div> */}
+                  {/* ---- Buttons below card ---- */}
+                  <div className={styles.cardActions}>
+                    {item.is_primary == 0 ? (
+                      <>
+                        <span
+                          onClick={() => {
+                            setPrimaryId(index);
+                            handlePrimaryChange(item);
+                          }}
+                          className={styles.linkText}
+                        >
+                          Make Primary
+                        </span>
+                        <span className={styles.separator}></span>
+                        <span
+                          onClick={() => handleRemoveCard(item)}
+                          className={`${styles.linkText} ${styles.removeLink}`}
+                        >
+                          Remove
+                        </span>
+                      </>
+                    ) : (
+                      <span
+                        onClick={() => handleRemoveCard(item)}
+                        className={`${styles.linkText} ${styles.removeLink}`}
+                      >
+                        Remove
+                      </span>
                     )}
                   </div>
-
-                  <div className={styles.cardNumber}>
-                    {`•••• •••• •••• ${item?.card_number}`}
-                  </div>
-                  <div className={styles.cardExpiry}>{item.expiry_date}</div>
                 </div>
-
-                {/* ---- Buttons below card ---- */}
-                <div className={styles.cardActions}>
-                  {item.is_primary == 0 && (
-                    <button
-                      onClick={() => {
-                        setPrimaryId(index);
-                        handlePrimaryChange(item);
-                      }}
-                      className={styles.primaryBtn}
-                    >
-                      Make Primary
-                    </button>
-                  )}
-                  <button
-                    onClick={() => handleRemoveCard(item)}
-                    className={styles.removeBtn}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
         </div>
 
         {getSellerCardData?.length === 0 && (

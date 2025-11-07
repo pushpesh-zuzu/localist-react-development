@@ -62,9 +62,16 @@
   min-width: 250px;
 }
 
+.card_brand {
+  background: linear-gradient(to bottom right, #0d74ff, #0a5bd3);
+  padding: 8px 12px;
+  color: #fff;
+  border-radius: 6px;
+}
+
 .separator {
   width: 2px;
-  height: 27px;
+  height: 20px;
   background-color: #d9d9d9;
 }
 
@@ -117,6 +124,11 @@
 
 .primary_text {
   color: var(--primary-color);
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-underline-offset: 3px;
 }
 
 .actionTextRemove {
@@ -134,11 +146,21 @@
   color: #999;
 }
 
+@media (max-width: 1024px) {
+  .visaCard_wrapper {
+    flex-direction: column;
+  }
+  .primary_text {
+    font-size: 14px;
+  }
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: flex-start;
+    width: -webkit-fill-available;
   }
 
   .visaCard {
@@ -179,5 +201,11 @@
   .textRight {
     font-size: 14px;
     padding-right: 10px;
+  }
+  .primary_text {
+    font-size: 12px;
+  }
+  .remove_actionButtons {
+    font-size: 11px;
   }
 }

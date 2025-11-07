@@ -20,8 +20,6 @@ const CreditCard = () => {
     (state) => state.myCredit
   );
 
-  console.log(creditCardLoader, "fdghufvbfrbhrerjfbhfjgibnribn");
-
   useEffect(() => {
     dispatch(getSellerCardApi());
   }, []);
@@ -85,18 +83,21 @@ const CreditCard = () => {
               <div className={styles.container} key={index}>
                 <div className={styles.visaCard_wrapper}>
                   <div className={styles.visaCard}>
-                    <img src={visaImg} alt="Visa" />
+                    {/* <img src={visaImg} alt="Visa" /> */}
+                    <div className={styles.card_brand}>
+                      <span>
+                        {item?.brand?.charAt(0).toUpperCase() +
+                          item?.brand?.slice(1).toLowerCase() || ""}
+                      </span>
+                    </div>
                     <div className={styles.separator}></div>
                     <div>
                       We'll charge the card ending *
                       {String(item.card_number)?.slice(-4)} that we have on file{" "}
                       {item.is_primary == 1 && (
                         <span
+                          style={{ textDecoration: "none", color: "#00AFE3" }}
                           className={styles.primary_text}
-                          style={{
-                            fontWeight: "normal",
-                            fontSize: "16px",
-                          }}
                         >
                           (Primary)
                         </span>
@@ -112,11 +113,9 @@ const CreditCard = () => {
                             setPrimaryId(index);
                             handlePrimaryChange(item);
                           }}
-                          className={styles.leftText}
+                          className={styles.primary_text}
                           style={{
                             color: "black",
-                            fontWeight: "normal",
-                            fontSize: "14px",
                           }}
                         >
                           Make Primary
@@ -127,11 +126,10 @@ const CreditCard = () => {
 
                     <span
                       onClick={() => handleRemoveCard(item)}
-                      className={styles.rightText}
+                      className={styles.primary_text}
                       style={{
                         color: "black",
-                        fontWeight: "normal",
-                        fontSize: "14px",
+
                         marginLeft: "auto",
                       }}
                     >
