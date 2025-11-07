@@ -28,6 +28,8 @@ const initialState = {
     recevive_online: "",
     email: "",
     name: "",
+    ip: "",
+    entryUrl: "",
   },
   qualityData: {},
   addDetailLoader: false,
@@ -49,6 +51,7 @@ const initialState = {
   addNotificationLoader: false,
   verifyPhoneNumberLoader: false,
   postCodeLoader: false,
+  redirectFromHome: false,
 };
 
 export const questionAnswerData = (questionData) => {
@@ -74,6 +77,33 @@ export const questionAnswerData = (questionData) => {
     }
   };
 };
+
+export const getProgressPercentageAPI = (progressData) => {
+  return async (dispatch) => {
+    try {
+      const response = await axiosInstance.post(
+        `get-progress-percentage`,
+        progressData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response?.data?.data?.percentage !== undefined) {
+        // dispatch(setProgressPercentage(response.data.data.percentage));
+        return response.data.data;
+      }
+    } catch (error) {
+      console.error(
+        "Error getting progress percentage:",
+        error?.response?.data
+      );
+    }
+  };
+};
+
 export const createRequestData = (requestData) => {
   return async (dispatch) => {
     dispatch(setCreateRequesLoader(true));
@@ -548,6 +578,9 @@ const buyerSlice = createSlice({
     setVerifyPhoneNumberLoader(state, action) {
       state.verifyPhoneNumberLoader = action.payload;
     },
+    setRedirectFromHome(state, action) {
+      state.redirectFromHome = action.payload;
+    },
     setcitySerach(state, action) {
       state.citySerach = action.payload;
     },
@@ -583,6 +616,7 @@ export const {
   setCreateRequesLoader,
   setGetNotificationData,
   setRequestUserPhone,
+  setRedirectFromHome,
 } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

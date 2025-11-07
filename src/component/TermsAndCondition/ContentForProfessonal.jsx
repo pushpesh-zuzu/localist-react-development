@@ -1297,7 +1297,7 @@ const ContentForProfessonal = () => {
     <>
       <h1 className={styles.mainHeading}>
         Terms & Conditions <br />
-        For Service Professionals
+        For Service Professionals - Localists.com
       </h1>
       <div className={styles.lastUpdated}>
         <p>(Marketplace Introductions)</p>

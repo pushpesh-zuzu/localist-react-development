@@ -2,7 +2,7 @@ import styles from "./CookiePolicy.module.css";
 export const professionalsTermsData = [
   {
     type: "p",
-    text: "This Cookies Policy explains what Cookies are and how We use them. You should read this policy so you can understand what type of cookies We use, or the information We collect using Cookies and how that information is used",
+    text: "This Cookies Policy explains what Cookies are and how We use them. You should read this policy so you can understand what type of cookies We use, or the information We collect using Cookies and how that information is used.",
   },
   {
     type: "p",
@@ -139,23 +139,6 @@ export const professionalsTermsData = [
   {
     type: "p",
     text: "<strong>Purpose</strong>: These Cookies identify if users have accepted the use of cookies on the Website.",
-  },
-  {
-    type: "h3",
-    number: "Functionality Cookies",
-    fullWidth: true,
-  },
-  {
-    type: "paraWithoutMargin",
-    text: "<span><strong>Type</strong>: Persistent Cookies</span>",
-  },
-  {
-    type: "paraWithoutMargin",
-    text: '<div style="margin-top:8px; margin-bottom:8px;"><strong>Administered by</strong>: Us</div>',
-  },
-  {
-    type: "p",
-    text: "<strong>Purpose</strong>: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website.",
   },
   {
     type: "h3",

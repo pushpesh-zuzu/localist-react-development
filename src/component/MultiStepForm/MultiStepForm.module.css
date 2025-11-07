@@ -1,4 +1,3 @@
-
 .tab {
   background-color: var(--primary-color);
   height: 44px;
@@ -21,7 +20,11 @@
   width: 45%;
   margin: 20px auto;
   /* padding: 20px; */
-  font-family: Arial, sans-serif;
+}
+.containerNameEmail {
+  width: 45%;
+  margin: 0px auto;
+  /* padding: 20px; */
 }
 
 .formContainer {
@@ -98,15 +101,23 @@
     opacity: 1;
   }
 }
+@media (max-width: 1020px) {
+  .containerNameEmail {
+    width: 60%;
+  }
+}
 @media (max-width: 768px) {
   .container {
     width: 80%;
-      margin: 10px auto;
-
+    margin: 10px auto;
+  }
+   .containerNameEmail {
+    width: 100%;
   }
 }
 @media (max-width: 400px) {
   .container {
     width: 90%;
   }
+ 
 }

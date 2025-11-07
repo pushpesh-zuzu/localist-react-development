@@ -265,7 +265,7 @@ export const megaMenu = [
       },
       {
         id: 43,
-        name: "Tree Surgeon",
+        name: "Tree Surgery",
         path: "tree-surgeon-near-me",
       },
       {

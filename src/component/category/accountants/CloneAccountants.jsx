@@ -253,6 +253,7 @@ const CloneAccountants = ({
 
               <div className={styles.inputBox} style={{position:'relative'}}>
                 <label>{inputLable2}</label>
+                <div className={styles.marginForLable}/>
                 <input 
                   type="text"
                   placeholder="Enter Postcode (No Spaces)"

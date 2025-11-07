@@ -6,11 +6,21 @@
   border-radius: 10px;
   width: 100%;
 }
+.cardContainerNameEmail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  width: 85%;
+  margin: auto;
+  height: fit-content;
+}
 
 .cardWrapper {
   background: white;
   border-radius: 12px;
-  /* padding: 44px 64px; */
+  padding: 20px 20px;
   text-align: center;
   width: 100%;
 }
@@ -162,10 +172,14 @@
     /* padding: 10px; */
     align-items: flex-start;
   }
+  .cardContainerNameEmail{
+    align-items: flex-start;
+    width: 82%;
+  }
 
   .cardWrapper {
-    padding: 0px;
-    margin: 10px 0;
+    /* padding: 0px; */
+    /* margin: 10px 0; */
   }
 
   /* .title {

@@ -267,6 +267,15 @@ const WhatServiceYouNeed = ({
       onClose();
     }
   };
+useEffect(() => {
+  if (selectedService?.id) {
+    dispatch(
+      setbuyerRequestData({
+        service_id: selectedService.id || serviceId,
+      })
+    );
+  }
+}, [selectedService, dispatch]);
 
   return (
     <div className={styles.container}>

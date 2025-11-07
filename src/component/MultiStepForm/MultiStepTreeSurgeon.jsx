@@ -9,39 +9,34 @@ import {
   setBuyerStep,
 } from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
 import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberMultiStepForm";
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
-import QuestionAnswerMultiStepFence from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence";
-import PostSearchMultiStepFence from "./steps/PostcodeSearch/PostSearchMultiStepFence";
-import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepFence2";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import NameEmailTreeSurgeon from "./steps/NameEmailMultiStepForm/NameEmailTreeSurgeon";
+import PostCodeSearchTreeSurgeon from "./steps/PostcodeSearch/PostCodeSearchTreeSurgeon";
+import QuestionAsnwerMultiStepTreeSurgeon2 from "./steps/QuestionAnswerMultiStep/QuestionAsnwerMultiStepTreeSurgeon2";
+import QuestionAnswerMultiStepTreeSurgeon from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepTreeSurgeon";
 
-const MultiStepAllotherServices = ({
-  isQuestionWithImage = false,
-  serviceName,
-  path = "",
-  serviceId = 49,
-}) => {
+const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
 
   useEffect(() => {
-    if (location.pathname.includes(path)) {
+    if (location.pathname.includes("tree-surgeon-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes(path) && "0px"
+      location.pathname.includes("tree-surgeon-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
@@ -51,15 +46,19 @@ const MultiStepAllotherServices = ({
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [backButtonTriggered, setBackButtonTriggered] = useState(false);
-  const [isComingFromStep3, setIsComingFromStep3] = useState(false); // ⭐ YE ADD KARO
+  const [isComingFromStep3, setIsComingFromStep3] = useState(false);
+  const [isComingFromStep4, setIsComingFromStep4] = useState(false);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [setstepText, setStepText] = useState("What");
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
-  const [isComingFromStep4, setIsComingFromStep4] = useState(false);
   const [localRequestId, setLocalRequestId] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [question2History, setQuestion2History] = useState([0]);
+  const [questionAnswereForApi, setQuestionAnswereForApi] = useState([]);
+  const [selectedOption, setSelectedOption] = useState([]);
+  const [isStepFrom4, setIsStepFrom4] = useState(false);
 
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
@@ -76,6 +75,7 @@ const MultiStepAllotherServices = ({
     }
     handleScrollToBottom();
   }, [buyerStep]);
+
   const getProgressPercentage = (per) => {
     setProgressPercentage((pre) => pre + per);
   };
@@ -92,11 +92,18 @@ const MultiStepAllotherServices = ({
       }
     }, 300);
   };
+
   const prevStep = () => {
     setBackButtonTriggered(true);
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
+        if (buyerStep === 2) {
+        } else if (buyerStep === 3) {
+        } else if (buyerStep === 4) {
+        } else if (buyerStep === 5) {
+        }
+
         if (stepFlow[currentIndex - 1] === 1) {
           setIsComingFromStep3(true);
         }
@@ -108,7 +115,6 @@ const MultiStepAllotherServices = ({
       }
     }, 300);
   };
-
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
@@ -117,9 +123,9 @@ const MultiStepAllotherServices = ({
     }
   }, [buyerStep]);
 
+  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
-
     if (pendingModal?.shouldOpen) {
       console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
@@ -132,8 +138,28 @@ const MultiStepAllotherServices = ({
     dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
 
-  const firstQuestions = questionanswerData?.slice(0, -2) || [];
-  const lastQuestion = questionanswerData?.slice(-2) || [];
+  let firstQuestions = [];
+  let lastQuestion = [];
+
+  if (questionanswerData?.length) {
+    const lastIndex = questionanswerData.findIndex((q) => {
+      try {
+        const answers = JSON.parse(q.answer);
+        return answers.some((a) => a.next_question === "last");
+      } catch {
+        return false;
+      }
+    });
+
+    if (lastIndex !== -1) {
+      lastQuestion = questionanswerData.slice(lastIndex - 1, lastIndex + 1);
+      firstQuestions = questionanswerData.filter(
+        (_, i) => i < lastIndex - 1 || i > lastIndex
+      );
+    } else {
+      firstQuestions = questionanswerData;
+    }
+  }
 
   useEffect(() => {
     if (questionanswerData.length > 0) {
@@ -143,21 +169,9 @@ const MultiStepAllotherServices = ({
   }, [questionanswerData]);
 
   useEffect(() => {
-    if (firstQuestions?.length > 0) {
-      const initialProgress = (100 * 2) / (firstQuestions.length * 3);
-      setProgressPercentage(initialProgress);
-    }
-  }, [questionanswerData]);
-  const [hasMountedDetector, setHasMountedDetector] = useState(false);
-  useEffect(() => {
-    if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-      setHasMountedDetector(true);
-    }
-  }, [hasMountedDetector]);
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => setIsDesktop(window.innerWidth > 768);
-      handleResize();
+      handleResize(); // initial check
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -165,6 +179,7 @@ const MultiStepAllotherServices = ({
   return (
     <>
       <CalonicalTags />
+
       {localRequestId === null && (
         <div>
           {isDesktop ? (
@@ -177,12 +192,11 @@ const MultiStepAllotherServices = ({
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
-          Compare Free Quotes from Local Fencing Companies | Localists
+          Compare Free Quotes from Local Driveway Companies | Localists
         </title>
-
         <meta
           name="description"
-          content="Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free."
+          content="Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple."
         />
       </Helmet>
 
@@ -193,80 +207,94 @@ const MultiStepAllotherServices = ({
       </div>
 
       <ProgressBarLandingPage
-        value={progressPercentage}
+        value={5 + progressPercentage}
         buyerStep={buyerStep}
       />
       <div>
-        <div className={styles.container}>
+        <div
+          className={`${
+            buyerStep === 4 ? styles.containerNameEmail : styles.container
+          }`}
+        >
           <div className={styles.formContainer}>
             <div className={`${styles.slideContainer} ${animationDirection}`}>
               {buyerStep === 1 && (
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAnswerMultiStepFence2
+                  <QuestionAsnwerMultiStepTreeSurgeon2
                     questions={firstQuestions}
                     onNext={nextStep}
                     onBack={prevStep}
                     loading={isLoadingQuestions}
-                    getProgressPercentage={getProgressPercentage}
-                    isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
+                    isComingFromStep3={isComingFromStep3}
                     setQuestionHistory={setQuestionHistory}
                     questionHistory={questionHistory}
                     setIsComingFromStep3={setIsComingFromStep3}
                     setProgressPercentage={setProgressPercentage}
                     isQuestionWithImage={isQuestionWithImage}
-                    serviceName={serviceName}
+                    serviceName="Tree Surgeon"
+                    setQuestion2History={setQuestion2History}
+                    question2History={question2History}
+                    setSelectedOption={setSelectedOption}
+                    selectedOption={selectedOption}
                   />
                 </div>
               )}
               {buyerStep === 2 && (
                 <div style={{ margin: "auto" }}>
-                  <PostSearchMultiStepFence
-                    getProgressPercentage={getProgressPercentage}
+                  <PostCodeSearchTreeSurgeon
                     prevStep={prevStep}
                     onNext={nextStep}
-                    backButtonTriggered={backButtonTriggered}
+                    setProgressPercentage={setProgressPercentage}
                     setBackButtonTriggered={setBackButtonTriggered}
-                    returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
+                    titleHeading="tree surgeon specialists"
+                    setSelectedOption={setSelectedOption}
                   />
                 </div>
               )}
 
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
-                  <QuestionAnswerMultiStepFence
-                    questions={lastQuestion} 
-                    onNext={nextStep} 
+                  <QuestionAnswerMultiStepTreeSurgeon
+                    questions={lastQuestion}
+                    onNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}
                     setIsComingFromStep4={setIsComingFromStep4}
-                    getProgressPercentage={getProgressPercentage}
                     isComingFromStep4={isComingFromStep4}
+                    setProgressPercentage={setProgressPercentage}
+                    setSelectedOption={setSelectedOption}
+                    selectedOption={selectedOption}
+                    isStepFrom4={isStepFrom4}
+                    setIsStepFrom4={setIsStepFrom4}
                   />
                 </div>
               )}
               {buyerStep === 4 && (
-                <NameEmailMultiStepForm
+                <NameEmailTreeSurgeon
                   nextStep={nextStep}
                   onBack={prevStep}
-                  isStartWithQuestionModal={true}
+                  setIsStepFrom4={setIsStepFrom4}
                 />
               )}
               {buyerStep === 5 && (
                 <PhoneNumberMultiStepForm
                   nextStep={nextStep}
                   onBack={prevStep}
-                  updateNumberStep={updateNumberStep}
+                  serviceId={51}
+                  setProgressPercentage={setProgressPercentage}
                   setUpdateNumberStep={setUpdateNumberStep}
+                  updateNumberStep={updateNumberStep}
                   setLocalRequestId={setLocalRequestId}
                 />
               )}
-              {buyerStep === 6 && updateNumberStep === 2 && (
+              {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>
                   <OTPVerificationMultiStep
                     open
                     nextStep={nextStep}
                     onBack={prevStep}
                     isThankuPageOnlyShow
+                    setProgressPercentage={setProgressPercentage}
                     setUpdateNumberStep={setUpdateNumberStep}
                   />
                 </CardLayoutWrapper>
@@ -285,4 +313,4 @@ const MultiStepAllotherServices = ({
   );
 };
 
-export default MultiStepAllotherServices;
+export default MultiStepTreeSurgeon;

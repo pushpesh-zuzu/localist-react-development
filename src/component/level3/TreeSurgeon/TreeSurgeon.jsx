@@ -90,7 +90,7 @@ function TreeSurgeon() {
         bannerImage={TreeSugeon}
         para1={contentConfig?.para1}
         para2={contentConfig?.para2}
-        defaultService={"Tree Surgeon"}
+        defaultService={"Tree Surgery"}
         isNeedS={false}
         isSingular={true}
       />

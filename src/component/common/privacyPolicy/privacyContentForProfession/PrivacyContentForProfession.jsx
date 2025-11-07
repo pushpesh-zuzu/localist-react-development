@@ -138,7 +138,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "1.4.2.1 Use the Services respond to a Quote Request, respond to a Customer communication, or provide feedback on other users; or",
+    text: "1.4.2.1 Use the Services to post a Quote Request, respond to a Service Professional, or provide feedback on other users or Service Professionals; or",
     marginL: "10px",
   },
   {
@@ -601,7 +601,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "5.3.3 You acknowledge and accept that any transmission of personal data to IMG is at your own risk.",
+    text: "5.3.3 Any transmission of personal information to IMG is undertaken at your own risk.",
   },
   {
     type: "h3",
@@ -658,7 +658,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "(b) the operators of websites to which the Services link;",
+    text: "(b) the operators of websites to which the Services link; and",
     marginL: "10px",
   },
   {
@@ -794,12 +794,12 @@ export const professionalsTermsData = [
   {
     type: "p",
     marginL: "10px",
-    text: "(c) restrict or object to certain types of processing;",
+    text: "(c) restrict or object to certain types of processing; and",
   },
   {
     type: "p",
     marginL: "10px",
-    text: "(d) request deletion of your personal data, including permanent closure of your Account;",
+    text: "(d) request deletion of your personal data, including permanent closure of your Account.",
   },
   {
     type: "p",
@@ -1034,7 +1034,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "Please note all our calls may be recorded for training purposes and to monitor customer service and regulatory compliance. We may also share such recordings with our Service Professionals for service and regulatory monitoring and you consent to such sharing by using the Website, submitting any form on the Website, submitting a Quote Request or submitting your details through any social media or other online advertising channel.",
+    text: "Please note all our calls may be recorded for training purposes and to monitor customer service and regulatory compliance. We may also share such recordings with our Service Professionals for service and regulatory monitoring and you consent to such sharing by using the Website, submitting any form on the Website, submitting a Quote Request or submit your details through any social media or other online advertising channel.",
   },
   {
     type: "h3",
@@ -1115,6 +1115,44 @@ const PrivacyContentForProfession = () => {
               />
             );
 
+          //   case "pNumber":
+          //     return (
+          //       <p
+          //         key={index}
+          //         className={`${styles.paragraph} ${styles.withNumber}`}
+          //         style={{ marginTop: "0px" }}
+          //       >
+          //         <span className={styles.paraNumber}>{block?.pNumber}</span>
+          //         <span dangerouslySetInnerHTML={{ __html: block.text }} />
+          //       </p>
+          //     );
+
+          //   case "pheading":
+          //     return (
+          //       <p
+          //         key={index}
+          //         className={`${styles.paragraph} ${styles.indented}`}
+          //         style={{ marginTop: "0px" }}
+          //       >
+          //         <b>{block?.heading}</b> {block.text}
+          //       </p>
+          //     );
+
+          //   case "li":
+          //     return (
+          //       <ul
+          //         key={index}
+          //         className={styles.list}
+          //         style={{ paddingBottom: block?.spacing && "16px" }}
+          //       >
+          //         <li
+          //           dangerouslySetInnerHTML={{
+          //             __html: `<b>${block?.heading}</b> ${block.text}`,
+          //           }}
+          //         />
+          //       </ul>
+          //     );
+
           case "liNonBold":
             return (
               <ul
@@ -1131,6 +1169,43 @@ const PrivacyContentForProfession = () => {
                 />
               </ul>
             );
+
+          //   case "list":
+          //     return (
+          //       <ul key={index} className={styles.contactList}>
+          //         {block.items.map((item, i) => (
+          //           <li key={i}>
+          //             {item.link ? (
+          //               <a href={item.link} className={styles.link}>
+          //                 {item.text}
+          //               </a>
+          //             ) : (
+          //               item.text
+          //             )}
+          //           </li>
+          //         ))}
+          //       </ul>
+          //     );
+          //   case "table":
+          //     return (
+          //       <div key={index} className={styles.tableWrapper}>
+          //         <table className={styles.table}>
+          //           <tbody>
+          //             {block.rows.map((row, rowIndex) => (
+          //               <tr key={rowIndex}>
+          //                 {row.map((cell, colIndex) => (
+          //                   <td
+          //                     key={colIndex}
+          //                     className={colIndex === 0 ? styles.firstCol : ""}
+          //                     dangerouslySetInnerHTML={{ __html: cell }}
+          //                   />
+          //                 ))}
+          //               </tr>
+          //             ))}
+          //           </tbody>
+          //         </table>
+          //       </div>
+          //     );
 
           default:
             return null;

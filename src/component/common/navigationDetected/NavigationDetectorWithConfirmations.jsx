@@ -68,8 +68,8 @@ const NavigationDetectorWithConfirmations = () => {
     formData.append("utm_source", utm_source || "");
     formData.append("keyword", keyword || "");
     formData.append("form_status", 0);
-    formData.append("entry_url", url);
-    formData.append("user_ip_address ", ip);
+    formData.append("entry_url", buyerRequest.url || "");
+    formData.append("user_ip_address", buyerRequest.ip || "");
 
     dispatch(registerQuoteCustomer(formData))
       .then(() => {

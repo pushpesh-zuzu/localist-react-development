@@ -6,6 +6,7 @@ import {
   setBuyerStep,
   setcitySerach,
   getCityName,
+  setRedirectFromHome,
 } from "../../store/Buyer/BuyerSlice";
 import BuyerRegistration from "../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import { message, Spin } from "antd";
@@ -20,8 +21,10 @@ const SearchAccountantLeve3 = ({
 }) => {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
-  const { postCodeLoader } = useSelector((state) => state.buyer);
-
+  const { postCodeLoader, redirectFromHome } = useSelector(
+    (state) => state.buyer
+  );
+  console.log(redirectFromHome, "redirectFromHome");
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -52,6 +55,15 @@ const SearchAccountantLeve3 = ({
     checkPendingModal();
   }, [dispatch]);
 
+  useEffect(() => {
+    if (redirectFromHome) {
+      setTimeout(() => {
+        dispatch(setRedirectFromHome(false));
+        setShowModal(true);
+      }, 30000);
+    }
+  }, [redirectFromHome]);
+
   const handleContinue = async () => {
     if (!pincode) {
       showToast("error", "Please enter a valid postcode or town.");
@@ -72,6 +84,7 @@ const SearchAccountantLeve3 = ({
 
         setIsPostcodeSelected(true);
         setShowModal(true);
+        dispatch(setRedirectFromHome(false));
       } else {
         showToast("error", "Please enter a valid postcode!");
       }

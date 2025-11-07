@@ -71,9 +71,7 @@ import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
 import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
-import MultiStepAllotherServices from "../component/MultiStepForm/MultiStepAllotherServices";
-import CookiePolicy from "../../src/component/CooliesPolicies/CookiePolicy";
-import TermsAndCondition from "../../src/component/TermsAndCondition/TermAndCondition";
+import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
 
 const routes = [
   {
@@ -739,9 +737,10 @@ const routes = [
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
-          <MultiStepAllotherServices
+          <MultiStepTreeSurgeon
             serviceName="Tree Surgeon"
             path="tree-surgeon-multi-form-ppc"
+            serviceId={112}
           />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
@@ -752,10 +751,11 @@ const routes = [
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
-          <MultiStepAllotherServices
-            isQuestionWithImage
+          <MultiStepTreeSurgeon
             serviceName="Tree Surgeon"
             path="tree-surgeon-multi-form-ppc"
+            serviceId={112}
+            isQuestionWithImage
           />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
