@@ -39,9 +39,9 @@
 }
 
 .addCardBtnRight {
-  background-color: transparent;
+  background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  color: white;
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
