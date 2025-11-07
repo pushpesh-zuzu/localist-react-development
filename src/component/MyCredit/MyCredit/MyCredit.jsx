@@ -31,6 +31,7 @@ const MyCredits = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [activeLoaderId, setActiveLoaderId] = useState(null);
+  const [notChecked, setNotChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
@@ -109,15 +110,27 @@ const MyCredits = () => {
 
       credits = item.no_of_leads + discountAmount;
     }
+    let creditData = {};
 
-    const creditData = {
-      amount: item?.price,
-      credits: credits,
-      details: item?.name,
-      total_amount: (item?.price + vatTotal) * 100,
-      vat: vatTotal,
-      top_up: isChecked ? 1 : 0,
-    };
+    if (item?.plan_type === "starter") {
+      creditData = {
+        amount: item?.price,
+        credits: credits,
+        details: item?.name,
+        total_amount: (item?.price + vatTotal) * 100,
+        vat: vatTotal,
+        top_up: 0,
+      };
+    } else {
+      creditData = {
+        amount: item?.price,
+        credits: credits,
+        details: item?.name,
+        total_amount: (item?.price + vatTotal) * 100,
+        vat: vatTotal,
+        top_up: checkedPlans?.[item?.id] === true ? 0 : 1,
+      };
+    }
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
@@ -330,7 +343,7 @@ const MyCredits = () => {
                       <div className={styles.checkboxWrap}>
                         <input
                           type="checkbox"
-                          checked={!!checkedPlans[item.id]}
+                          defaultChecked={true}
                           onChange={() => handleCheckboxChange(item.id)}
                         />
                         <label>Auto top-up next time</label>
