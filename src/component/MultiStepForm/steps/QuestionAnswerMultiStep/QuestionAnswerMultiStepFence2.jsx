@@ -319,7 +319,7 @@ const QuestionAnswerMultiStepFence2 = ({
               : serviceName === "Tree Surgeon"
               ? styles.headerImage9
               : serviceName === "Roofing"
-              ? styles.headerImage9
+              ? styles.headerImage10
               : styles.headerImage
           } ${styles.bannerMargin}`}
         />
