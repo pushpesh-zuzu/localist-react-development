@@ -84,7 +84,7 @@ import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeo
 const routes = [
   // localized routes
   {
-    path: "/:lang/:country",
+    path: "/en/gb",
     element: <MainLayout />,
     children: [
       {
@@ -175,30 +175,30 @@ const routes = [
       //     </LocaleRedirect>
       //   ),
       // },
-      {
-        path: "builders/",
-        element: (
-          <LocaleRedirect>
-            <CloneSubTwoCategory
-              routeName="Home & Garden / Builders"
-              accountHeader="Builders"
-              subHeader="builder"
-            />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "gardening-landscaping/",
-        element: (
-          <LocaleRedirect>
-            <CloneSubCategoryTwoGardening
-              routeName="gardening-landscaping"
-              accountHeader="Gardening & Landscaping"
-              subHeader="Gardening & Landscaping"
-            />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "builders/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneSubTwoCategory
+      //         routeName="Home & Garden / Builders"
+      //         accountHeader="Builders"
+      //         subHeader="builder"
+      //       />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "gardening-landscaping/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneSubCategoryTwoGardening
+      //         routeName="gardening-landscaping"
+      //         accountHeader="Gardening & Landscaping"
+      //         subHeader="Gardening & Landscaping"
+      //       />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       // {
       //   path: "business/",
       //   element: (
@@ -211,33 +211,33 @@ const routes = [
       //     </LocaleRedirect>
       //   ),
       // },
-      {
-        path: "financial-and-accounting/",
-        element: (
-          <LocaleRedirect>
-            <CloneCatrgory
-              accountHeader="Financial & Accounting"
-              subHeader="Financial Accountant"
-            />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "accountants/",
-        element: (
-          <LocaleRedirect>
-            <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "bookkeeping-services/",
-        element: (
-          <LocaleRedirect>
-            <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "financial-and-accounting/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneCatrgory
+      //         accountHeader="Financial & Accounting"
+      //         subHeader="Financial Accountant"
+      //       />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "accountants/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneCatrgory accountHeader="Accountants" subHeader="Accountant" />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "bookkeeping-services/",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <CloneCatrgory accountHeader="Bookkeepers" subHeader="Bookkeeper" />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: ":slug/",
         element: (
@@ -343,6 +343,22 @@ const routes = [
           </LocaleRedirect>
         ),
       })),
+      {
+        path: "sellers/pricing",
+        element: (
+          <LocaleRedirect>
+            <PricingPage />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "sellers/create",
+        element: (
+          <LocaleRedirect>
+            <ServicePanelPage />
+          </LocaleRedirect>
+        ),
+      },
     ],
   },
 
@@ -365,22 +381,22 @@ const routes = [
         element: <ThankuPage />,
       },
       // Localized login routes when accessed without locale prefix
-      {
-        path: "/login",
-        element: (
-          <LocaleRedirect>
-            <ProtectedLogin />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/passwordless_login",
-        element: (
-          <LocaleRedirect>
-            <ProtectedLogin />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "/login",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <ProtectedLogin />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/passwordless_login",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <ProtectedLogin />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "conversion/:requestId",
         element: (
@@ -389,46 +405,46 @@ const routes = [
           // </LocaleRedirect>
         ),
       },
-      {
-        path: "contact-us",
-        element: (
-          <LocaleRedirect>
-            <ContactUs />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/about-us",
-        element: (
-          <LocaleRedirect>
-            <AboutUs />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/how-it-works-for-customers",
-        element: (
-          <LocaleRedirect>
-            <HowItWorksCustomerPage />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/how-it-works-for-sellers",
-        element: (
-          <LocaleRedirect>
-            <HowItWorkSeller />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/:lang/:country/sellers/pricing",
-        element: (
-          <LocaleRedirect>
-            <PricingPage />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "contact-us",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <ContactUs />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/about-us",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <AboutUs />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/how-it-works-for-customers",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <HowItWorksCustomerPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/how-it-works-for-sellers",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <HowItWorkSeller />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/en/gb/sellers/pricing",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <PricingPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "/sellers/create",
         element: (
@@ -446,11 +462,11 @@ const routes = [
         ),
       },
 
-      { path: "/category", element: <Category /> },
-      { path: "/inprogress", element: <InProgressPage /> },
-      { path: "/category/:serviceName", element: <Category /> },
-      { path: "/sub-category", element: <SubCategoryPage /> },
-      { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
+      // { path: "/category", element: <Category /> },
+      // { path: "/inprogress", element: <InProgressPage /> },
+      // { path: "/category/:serviceName", element: <Category /> },
+      // { path: "/sub-category", element: <SubCategoryPage /> },
+      // { path: "/sub-category/:serviceSubName", element: <SubCategoryPage /> },
       {
         path: "/buyers/create",
         element: (
@@ -713,7 +729,7 @@ const routes = [
     ],
   },
   {
-    path: "/:lang/:country/landscaping-multi-form-ppc",
+    path: "/en/gb/landscaping-multi-form-ppc",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -723,7 +739,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/landscaping-multi-form-ppc-banner",
+    path: "/en/gb/landscaping-multi-form-ppc-banner",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -733,7 +749,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/driveways-multi-form-ppc",
+    path: "/en/gb/driveways-multi-form-ppc",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -743,7 +759,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/driveways-multi-form-ppc-banner",
+    path: "/en/gb/driveways-multi-form-ppc-banner",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -753,7 +769,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/fence-multi-form-ppc",
+    path: "/en/gb/fence-multi-form-ppc",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -763,7 +779,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/fence-multi-form-ppc-banner",
+    path: "/en/gb/fence-multi-form-ppc-banner",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -773,7 +789,7 @@ const routes = [
     ),
   },
   {
-    path: "/:lang/:country/tree-surgeon-multi-form-ppc",
+    path: "/en/gb/tree-surgeon-multi-form-ppc",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
@@ -786,8 +802,8 @@ const routes = [
       </ProtectedRouteForMultiFormPPC>
     ),
   },
-{
-    path: "/:lang/:country/tree-surgeon-multi-form-ppc-banner",
+  {
+    path: "/en/gb/tree-surgeon-multi-form-ppc-banner",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
