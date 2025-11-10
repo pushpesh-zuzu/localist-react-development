@@ -6,6 +6,7 @@ import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
 import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const ContactSuccessModal = ({
   isOpen,
@@ -14,6 +15,7 @@ const ContactSuccessModal = ({
   repliesBtn,
   detail,
   requestId,
+  setCallInitialApi,
 }) => {
   const dispatch = useDispatch();
 
@@ -38,7 +40,9 @@ const ContactSuccessModal = ({
       return `+44${clean}`;
     }
   };
-
+  useEffect(() => {
+    setCallInitialApi(true);
+  }, []);
   const handleResponseChange = (clickName) => {
     let responseStatus = {
       lead_id: null,

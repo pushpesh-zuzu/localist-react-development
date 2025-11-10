@@ -187,11 +187,10 @@ const AboutAccordion = ({ details }) => {
   };
 
   const handleInputChange = (e) => {
-    setIsDirty(true);
     const { name, value } = e.target;
+    setIsDirty(true);
 
     setFormState((prev) => ({ ...prev, [name]: value }));
-
     if (name === "company_phone") {
       const newValue = value.replace(/[^0-9]/g, "");
       setFormState((prev) => ({ ...prev, [name]: newValue }));
@@ -443,18 +442,34 @@ const AboutAccordion = ({ details }) => {
       showToast("error", "Company name already exists");
       return;
     }
-    dispatch(updateSellerProfile(formState)).then((result) => {
-      if (result) {
-        const sellerData = {
-          seller_id: user_id,
-        };
-        dispatch(addViewProfileList(sellerData))?.then((res) => {
-          if (res?.success) {
-            setIsDirty(false);
+    if (
+      isDirty &&
+      formState.business_profile_name &&
+      formState.business_profile_name.length > 0 &&
+      formState.name &&
+      formState.name.length > 0
+    ) {
+      if (formState.about_company && formState.about_company.length < 20) {
+        showToast(
+          "error",
+          "Business Description should be at least 20 characters long"
+        );
+        return;
+      } else {
+        dispatch(updateSellerProfile(formState)).then((result) => {
+          if (result) {
+            const sellerData = {
+              seller_id: user_id,
+            };
+            dispatch(addViewProfileList(sellerData))?.then((res) => {
+              if (res?.success) {
+                setIsDirty(false);
+              }
+            });
           }
         });
       }
-    });
+    }
   };
 
   useEffect(() => {

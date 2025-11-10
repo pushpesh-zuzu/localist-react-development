@@ -208,7 +208,7 @@ const ViewProfiles = () => {
     } else if (basePath === "review") {
       dispatch(ReviewProfile({ profile_uuid: profileId }));
     }
-  }, [dispatch, profileId, requestId, userToken, registerData]);
+  }, [dispatch, registerData]);
 
   const handleRequestOpen = () => {
     setCustomerModal(true);

@@ -57,7 +57,7 @@ const urlPatterns = {
 
 const SocialMediaAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { socialUpdateSuccess, socialUpdateError } = useSelector(
+  const { socialUpdateSuccess, socialUpdateError, isDirtyRedux } = useSelector(
     (state) => state.myProfile
   );
 
@@ -161,10 +161,9 @@ const SocialMediaAccordion = ({ details }) => {
     const cleanedData = {
       ...formState,
       extra_links: validLinks.map((link) => link.trim()).join(", "),
-      ...hiddenFields, // 👈 note the space after comma
+      ...hiddenFields,
     };
-
-    dispatch(updateSellerSocialLinks(cleanedData));
+    if (isDirtyRedux) dispatch(updateSellerSocialLinks(cleanedData));
   };
 
   useEffect(() => {

@@ -88,13 +88,13 @@ const ReviewSection = ({
     }
   };
 
-  const fetchReviews = () => {
-    dispatch(getReviewListApi(UUIDs));
-  };
+  // const fetchReviews = () => {
+  //   dispatch(getReviewListApi(UUIDs));
+  // };
 
-  useEffect(() => {
-    fetchReviews();
-  }, [UUIDs]);
+  // useEffect(() => {
+  //   fetchReviews();
+  // }, [UUIDs]);
 
   return (
     <>

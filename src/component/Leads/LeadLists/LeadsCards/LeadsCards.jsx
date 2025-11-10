@@ -100,14 +100,14 @@ const LeadsCards = () => {
       return;
     }
   };
-  useEffect(() => {
-    const data = {
-      user_id: userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens,
-    };
-    dispatch(totalCreditData(data));
-  }, []);
+  // useEffect(() => {
+  //   const data = {
+  //     user_id: userToken?.remember_tokens
+  //       ? userToken?.remember_tokens
+  //       : registerData?.remember_tokens,
+  //   };
+  //   dispatch(totalCreditData(data));
+  // }, []);
 
   const handleSaveLater = (item) => {
     setSaveLaterLoaderId(item.id);

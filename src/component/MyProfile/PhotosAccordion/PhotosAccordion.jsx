@@ -15,9 +15,8 @@ import { BASE_IMAGE } from "../../../utils";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 const PhotosAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector(
-    (state) => state.myProfile
-  );
+  const { photoUpdateSuccess, photoUpdateError, sellerLoader, isDirtyRedux } =
+    useSelector((state) => state.myProfile);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [formState, setFormState] = useState({
     type: "photos",
@@ -141,8 +140,10 @@ const PhotosAccordion = ({ details }) => {
       body.append("has_youtube_link", formState.has_youtube_link);
     }
 
-    dispatch(updateSellerPhotos(body));
-    dispatch(setIsDirtyRedux(false));
+    if (isDirtyRedux) {
+      dispatch(updateSellerPhotos(body));
+      dispatch(setIsDirtyRedux(false));
+    }
   };
 
   const handleSave = () => {
@@ -325,6 +326,7 @@ const PhotosAccordion = ({ details }) => {
                       ...prev,
                       has_youtube_link: hasytLink ? 0 : 1,
                     }));
+                    dispatch(setIsDirtyRedux(true));
                   }}
                 />
                 <span className={styles.slider}></span>

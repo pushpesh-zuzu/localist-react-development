@@ -18,8 +18,11 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
 
   const fileInputRefs = useRef([]);
   const dispatch = useDispatch();
-  const { accreditationsUpdateSuccess, accreditationsUpdateError } =
-    useSelector((state) => state.myProfile);
+  const {
+    accreditationsUpdateSuccess,
+    accreditationsUpdateError,
+    isDirtyRedux,
+  } = useSelector((state) => state.myProfile);
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -109,7 +112,10 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
     }
 
     payload = { ...payload, has_accreditations: optional };
-    dispatch(updateSellerAccreditations(payload));
+    if (isDirtyRedux) {
+      dispatch(updateSellerAccreditations(payload));
+      dispatch(setIsDirtyRedux(false));
+    }
   };
 
   useEffect(() => {
@@ -155,6 +161,7 @@ const AccreditationsAccordion = ({ details, hasAccreditations }) => {
                 checked={optional == 1 ? true : false}
                 onChange={() => {
                   setOptional((prev) => (prev ? 0 : 1));
+                  dispatch(setIsDirtyRedux(true));
                 }}
               />
               <span className={styles.slider}></span>

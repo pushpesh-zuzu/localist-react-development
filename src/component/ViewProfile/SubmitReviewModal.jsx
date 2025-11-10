@@ -16,6 +16,7 @@ const SubmitReviewModal = ({
   reviewsData,
   onReviewSubmit,
   reviewProfileData,
+  setCallInitialApi,
 }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -61,7 +62,7 @@ const SubmitReviewModal = ({
 
   const handleSubmit = () => {
     const { name, email, review } = formData;
-
+    setCallInitialApi(true);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const newErrors = {
