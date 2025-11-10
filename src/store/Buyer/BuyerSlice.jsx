@@ -359,7 +359,12 @@ export const getbuyerrequestList = () => {
   };
 };
 
-export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
+export const addDetailsRequestData = (
+  addDetailsData,
+  navigate,
+  requestId,
+  cData
+) => {
   return async (dispatch) => {
     dispatch(setAddDetailLoader(true));
     try {
@@ -372,7 +377,13 @@ export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
         dispatch(getbuyerrequestList());
         // dispatch(setBuyerStep(10));
         // navigate(`/conversion-redirects/10`);
-        navigate(`/conversion/${requestId}`);
+        navigate(`/conversion/${requestId}`, {
+          state: {
+            email: cData.email,
+            phone: cData?.phone,
+          },
+        });
+
         // navigate(`/contact-us/10`);
 
         // console.log("before settimeout");

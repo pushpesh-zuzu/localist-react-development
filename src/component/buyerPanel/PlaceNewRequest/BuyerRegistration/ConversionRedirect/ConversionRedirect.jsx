@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const ConversionRedirect = () => {
   const navigate = useNavigate();
   const { requestId } = useParams();
+  const location = useLocation();
+  const conversionData = location.state;
+  console.log(conversionData, "conversionData");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,6 +28,17 @@ const ConversionRedirect = () => {
               'currency': 'GBP'
             });
           `}
+          <script>
+            {`
+            window.uetq = window.uetq || [];
+            window.uetq.push('set', {
+              'pid': {
+                'em': '${conversionData?.email || ""}',
+                'ph': '${conversionData?.phone || ""}'
+              }
+            });
+            `}
+          </script>
         </script>
       </Helmet>
     </>
