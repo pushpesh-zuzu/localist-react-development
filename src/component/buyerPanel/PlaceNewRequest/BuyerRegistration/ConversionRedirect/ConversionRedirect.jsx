@@ -28,8 +28,10 @@ const ConversionRedirect = () => {
               'currency': 'GBP'
             });
           `}
-          <script>
-            {`
+        </script>
+
+        <script>
+          {`
             window.uetq = window.uetq || [];
             window.uetq.push('set', {
               'pid': {
@@ -38,7 +40,6 @@ const ConversionRedirect = () => {
               }
             });
             `}
-          </script>
         </script>
       </Helmet>
     </>
