@@ -4,6 +4,7 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import StepsBox from "./StepsBox";
 import styles from "./workstructure.module.css";
 import { useSelector } from "react-redux";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 const WorkStructure = () => {
   const [show,setShow] = useState(false)
@@ -29,13 +30,13 @@ const WorkStructure = () => {
         ))}
       </div>
       <div className={styles.footer}>
-        <button className={styles.quoteButton} onClick={handleOpen}>Get a Free Quote</button>
+        <button className={styles.quoteButton} onClick={()=>{handleScrollToBottom()}}>Get a Free Quote</button>
       </div>
-      {show && (userToken?.active_status == 2 || !userToken )  && (
+      {/* {show && (userToken?.active_status == 2 || !userToken )  && (
           <>
             <BuyerRegistration closeModal={handleClose}  />
           </>
-        )}
+        )} */}
     </div>
   );
 };
