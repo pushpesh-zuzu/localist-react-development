@@ -352,14 +352,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      {
-        path: "sellers/create",
-        element: (
-          <LocaleRedirect>
-            <ServicePanelPage />
-          </LocaleRedirect>
-        ),
-      },
+    
     ],
   },
 
