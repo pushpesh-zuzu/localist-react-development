@@ -1,12 +1,16 @@
+import React, { useEffect } from "react";
 import styles from "./ContactSuccessModal.module.css";
+import EstimateIcon from "../../../assets/Images/MyResponse/lucideCalculator.png";
+
 import Mailbtn from "../../../assets/Images/MyResponse/mail-02.svg";
 import smsBtn from "../../../assets/Images/MyResponse/annotation.svg";
 import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
 import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
+import locallistImgs from "../../../assets/Images/Setting/newLogoCredit.svg";
+import locallistImg from "../../../assets/Images/Leads/localistImg.svg";
 import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 const ContactSuccessModal = ({
   isOpen,
@@ -15,12 +19,13 @@ const ContactSuccessModal = ({
   repliesBtn,
   detail,
   requestId,
-  setCallInitialApi,
 }) => {
+  console.log("sbfjgeiqughoifh", repliesBtn);
   const dispatch = useDispatch();
 
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
+  // const userData = userToken?.user_id ? userToken?.user_id : userToken?.id ? userToken?.id : registerData?.user_id ? registerData?.user_id : registerData?.id
   const userData =
     userToken?.user_id ||
     userToken?.id ||
@@ -40,9 +45,7 @@ const ContactSuccessModal = ({
       return `+44${clean}`;
     }
   };
-  useEffect(() => {
-    setCallInitialApi(true);
-  }, []);
+
   const handleResponseChange = (clickName) => {
     let responseStatus = {
       lead_id: null,
@@ -73,7 +76,11 @@ const ContactSuccessModal = ({
       };
     }
 
+    console.log(detail, repliesBtn, "detailll");
+
     let url = null;
+    // const phoneNumber =
+    //   details?.phone || detail?.phone || repliesBtn?.phone || "";
     const rawPhone = details?.phone || detail?.phone || repliesBtn?.phone || "";
     const phoneNumber = formatPhoneNumber(rawPhone);
 
@@ -97,12 +104,15 @@ const ContactSuccessModal = ({
       if (result) {
         showToast("success", result?.message);
         if (url) {
+          // window.open(url);
           window.location.href = url;
         }
         onClose();
       }
     });
   };
+
+  console.log(details?.customer?.name, "detailssss");
 
   return (
     <>
@@ -117,13 +127,12 @@ const ContactSuccessModal = ({
             ready
             <br />
             to contact{" "}
-            {
-              (
-                detail?.business_profile_name ||
-                repliesBtn?.business_profile_name ||
-                details?.customer?.name
-              )?.split(" ")[0]
-            }
+            {/* {repliesBtn?.name
+              ? repliesBtn?.name
+              : details?.customer?.name || detail?.name} */}
+            {detail?.business_profile_name ||
+              repliesBtn?.business_profile_name ||
+              details?.customer?.name}
           </h2>
 
           <div className={styles.actions}>
