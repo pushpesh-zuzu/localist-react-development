@@ -22,9 +22,8 @@ const PostSearchMultiStepFence = ({
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
+  const { buyerRequest } = useSelector((state) => state.buyer);
   const [pincode, setPincode] = useState(buyerRequest?.postal_code || "");
-  const [city, setCity] = useState(citySerach || "");
   const [postalCodeValidate, setPostalCodeValidate] = useState(
     !!buyerRequest?.postal_code
   );
@@ -41,7 +40,6 @@ const PostSearchMultiStepFence = ({
     setPostalCodeValidate(false);
     if (!value.trim()) {
       setError("");
-      setCity("");
       setPostalCodeValidate(false);
       return;
     }
@@ -60,7 +58,6 @@ const PostSearchMultiStepFence = ({
       if (response?.data?.city) {
         const validPostcode = response.data.postcode;
         setPostalCodeValidate(true);
-        setCity(response.data.city);
         dispatch(setcitySerach(response.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
@@ -77,7 +74,6 @@ const PostSearchMultiStepFence = ({
     }
   };
 
-  // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");

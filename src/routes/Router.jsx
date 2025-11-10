@@ -79,6 +79,7 @@ import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
+import MultiStepFormRoofing from "../component/MultiStepForm/MultiStepFormRoofing";
 
 // Build routes once and reuse for both client and server routers
 const routes = [
@@ -774,6 +775,16 @@ const routes = [
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
           <MultiStepFormFencing />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/en/gb/roofing-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepFormRoofing isQuestionWithImage />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
     ),

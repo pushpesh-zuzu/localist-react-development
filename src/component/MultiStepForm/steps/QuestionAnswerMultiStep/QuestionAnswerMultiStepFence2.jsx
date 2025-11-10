@@ -21,20 +21,18 @@ const QuestionAnswerMultiStepFence2 = ({
   loading = true,
   serviceName = "Fence & Gate Installation",
   isQuestionWithImage = false,
+  OutOfTotal=100
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { service } = useSelector((state) => state.findJobs);
 
-  const { search } = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
-  const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length || 1;
-  const perQuestionProgress = (2 / 3 / totalQuestions) * 100;
   const formattedQuestions = questions.map((q) => ({
     ...q,
     parsedAnswers: Array.isArray(q.answer)
@@ -57,7 +55,7 @@ const QuestionAnswerMultiStepFence2 = ({
       setCurrentQuestion(3);
     }
   }, [isComingFromStep3]);
-  // Load saved answers when question changes
+
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -88,11 +86,9 @@ const QuestionAnswerMultiStepFence2 = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      // ✅ Select single option only
       setSelectedOption([value]);
       setError(""); // Clear error only on change
 
-      // ✅ If option is NOT "Something else", move to next after short delay
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
@@ -136,7 +132,7 @@ const QuestionAnswerMultiStepFence2 = ({
     updatedAnswers[currentQuestion] = updatedAnswer;
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-    const percentage = (100 * 2) / (totalQuestions * 3);
+    const percentage = (OutOfTotal * 2) / (totalQuestions * 3);
     getProgressPercentage(percentage);
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selectedOption[0]
@@ -147,7 +143,6 @@ const QuestionAnswerMultiStepFence2 = ({
       dispatch(
         setbuyerRequestData({
           service_id: service?.id || buyerRequest?.service_id,
-          // serviceName: serviceName || buyerRequest?.serviceName,
           postcode: buyerRequest?.postcode,
           city: citySerach,
           questions: updatedAnswers,
@@ -203,7 +198,7 @@ const QuestionAnswerMultiStepFence2 = ({
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
-    const percentage = (100 * 2) / (totalQuestions * 3);
+    const percentage = (OutOfTotal * 2) / (totalQuestions * 3);
 
     getProgressPercentage(percentage);
 
@@ -322,6 +317,8 @@ const QuestionAnswerMultiStepFence2 = ({
               : serviceName === "Gate Installation"
               ? styles.headerImage8
               : serviceName === "Tree Surgeon"
+              ? styles.headerImage9
+              : serviceName === "Roofing"
               ? styles.headerImage9
               : styles.headerImage
           } ${styles.bannerMargin}`}
