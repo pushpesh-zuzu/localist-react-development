@@ -18,7 +18,7 @@ const PostSearchMultiStepFence = ({
   getProgressPercentage,
   setBackButtonTriggered,
   returPercentage,
-  titleHeading = "fencing companies ",
+  titleHeading = "fencing companies",
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);

@@ -30,13 +30,13 @@ const MultiStepFormRoofing = ({ isQuestionWithImage = false }) => {
     useSelector((state) => state.buyer);
 
   useEffect(() => {
-    if (location.pathname.includes("fence-multi-form-ppc")) {
+    if (location.pathname.includes("roofing-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("fence-multi-form-ppc") && "0px"
+      location.pathname.includes("roofing-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
@@ -172,12 +172,12 @@ console.log(progressPercentage,'pppp')
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
-          Compare Free Quotes from Local Fencing Companies | Localists
+          Compare Free Quotes from Local Roofing Companies | Localists
         </title>
 
         <meta
           name="description"
-          content="Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free."
+          content="Get free quotes from top roofing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free."
         />
       </Helmet>
 
@@ -223,6 +223,7 @@ console.log(progressPercentage,'pppp')
                     backButtonTriggered={backButtonTriggered}
                     setBackButtonTriggered={setBackButtonTriggered}
                     returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
+                    titleHeading="roofing companies"
                   />
                 </div>
               )}

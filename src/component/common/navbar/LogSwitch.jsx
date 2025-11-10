@@ -280,7 +280,7 @@ const LogSwitch = () => {
     setSearchText(""); // hide dropdown
     const matchedRoute = serviceRouteMap[item.id];
     if (matchedRoute) {
-      navigate(`/${lang}/${country}${matchedRoute}`); // go to the route
+      navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); // go to the route
     } else {
       setShow(true); // fallback modal if route not found
     }

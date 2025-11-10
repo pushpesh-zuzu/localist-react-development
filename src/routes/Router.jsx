@@ -446,22 +446,22 @@ const routes = [
       //     </LocaleRedirect>
       //   ),
       // },
-      {
-        path: "/sellers/create",
-        element: (
-          <LocaleRedirect>
-            <ServicePanelPage />
-          </LocaleRedirect>
-        ),
-      },
-      {
-        path: "/sellers/create-account/:serviceTitle",
-        element: (
-          <LocaleRedirect>
-            <ServiceCreateAccount />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "/sellers/create",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <ServicePanelPage />
+      //     </LocaleRedirect>
+      //   ),
+      // },
+      // {
+      //   path: "/sellers/create-account/:serviceTitle",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <ServiceCreateAccount />
+      //     </LocaleRedirect>
+      //   ),
+      // },
 
       // { path: "/category", element: <Category /> },
       // { path: "/inprogress", element: <InProgressPage /> },
@@ -779,8 +779,18 @@ const routes = [
       </ProtectedRouteForMultiFormPPC>
     ),
   },
-  {
+   {
     path: "/en/gb/roofing-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepFormRoofing />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/en/gb/roofing-multi-form-ppc-banner",
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
