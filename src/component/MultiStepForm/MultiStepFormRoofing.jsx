@@ -213,6 +213,7 @@ console.log(progressPercentage,'pppp')
                     isQuestionWithImage={isQuestionWithImage}
                     serviceName="Roofing"
                     OutOfTotal={90}
+                    currentQuesntionWhenBack={4}
                   />
                 </div>
               )}
@@ -224,7 +225,7 @@ console.log(progressPercentage,'pppp')
                     onNext={nextStep}
                     backButtonTriggered={backButtonTriggered}
                     setBackButtonTriggered={setBackButtonTriggered}
-                    returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
+                    returPercentage={(90 * 2) / (firstQuestions?.length * 3)}
                     titleHeading="roofing companies"
                   />
                 </div>

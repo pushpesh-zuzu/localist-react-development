@@ -21,7 +21,8 @@ const QuestionAnswerMultiStepFence2 = ({
   loading = true,
   serviceName = "Fence & Gate Installation",
   isQuestionWithImage = false,
-  OutOfTotal=100
+  OutOfTotal=100,
+  currentQuesntionWhenBack=3
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
@@ -52,7 +53,7 @@ const QuestionAnswerMultiStepFence2 = ({
   });
   useEffect(() => {
     if (isComingFromStep3 && buyerRequest?.questions?.length > 0) {
-      setCurrentQuestion(3);
+      setCurrentQuestion(currentQuesntionWhenBack);
     }
   }, [isComingFromStep3]);
 
