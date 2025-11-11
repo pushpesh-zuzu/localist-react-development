@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./MultiStepForm.module.css";
+import styles from "../MultiStepForm/MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
@@ -22,10 +22,12 @@ import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDe
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 import NameEmailMultiStepRoofing from "./steps/NameEmailMultiStepForm/NameEmailMultiStepRoofing";
+import useClientReady from "../../utils/useClientReady";
 
 const MultiStepFormRoofing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const {isClientReady} = useClientReady()
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
 
@@ -160,7 +162,7 @@ console.log(progressPercentage,'pppp')
   return (
     <>
       <CalonicalTags />
-      {localRequestId === null && (
+      {localRequestId === null && isClientReady && (
         <div>
           {isDesktop ? (
             <NavigationDetectorDesktop />
