@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../MultiStepForm/MultiStepForm.module.css";
+import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
@@ -162,7 +162,7 @@ console.log(progressPercentage,'pppp')
   return (
     <>
       <CalonicalTags />
-      {localRequestId === null && isClientReady && (
+      {localRequestId === null && (
         <div>
           {isDesktop ? (
             <NavigationDetectorDesktop />
