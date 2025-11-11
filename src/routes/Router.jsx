@@ -145,6 +145,14 @@ const routes = [
         ),
       },
       {
+        path: "passwordless_login",
+        element: (
+          <LocaleRedirect>
+            <ProtectedLogin />
+          </LocaleRedirect>
+        ),
+      },
+      {
         path: "terms/",
         element: (
           <LocaleRedirect>
@@ -378,14 +386,10 @@ const routes = [
         element: <ThankuPage />,
       },
       // Localized login routes when accessed without locale prefix
-      // {
-      //   path: "/login",
-      //   element: (
-      //     <LocaleRedirect>
-      //       <ProtectedLogin />
-      //     </LocaleRedirect>
-      //   ),
-      // },
+      {
+        path: "/login",
+        element: <ProtectedLogin />,
+      },
       // {
       //   path: "/passwordless_login",
       //   element: (
@@ -791,11 +795,11 @@ const routes = [
     path: "/en/gb/roofing-multi-form-ppc-banner",
     element: (
       <React.Suspense fallback={<FullScreenSpinner />}>
-      <ProtectedRouteForMultiFormPPC>
-        <LocaleRedirect>
-          <MultiStepRoofingBanner />
-        </LocaleRedirect>
-      </ProtectedRouteForMultiFormPPC>
+        <ProtectedRouteForMultiFormPPC>
+          <LocaleRedirect>
+            <MultiStepRoofingBanner />
+          </LocaleRedirect>
+        </ProtectedRouteForMultiFormPPC>
       </React.Suspense>
     ),
   },

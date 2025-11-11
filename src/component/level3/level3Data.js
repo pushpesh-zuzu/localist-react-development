@@ -1194,24 +1194,24 @@ const TAXRETURNDATA = {
 
 const regionsData = {
   "fencing-contractors-near-me": [
-    {
-      id: 1,
-      title: "East Midlands",
-      items: [
-        { name: "Derbyshire", path: "" },
-        { name: "Nottinghamshire", path: "" },
-        { name: "Lioncolnshire ", path: "" },
-      ],
-    },
-    {
-      id: 2,
-      title: "North East",
-      items: [
-        { name: "Tyne and Wear", path: "" },
-        { name: "County Durham", path: "" },
-        { name: "Northumberland", path: "" },
-      ],
-    },
+    // {
+    //   id: 1,
+    //   title: "East Midlands",
+    //   items: [
+    //     { name: "Derbyshire", path: "" },
+    //     { name: "Nottinghamshire", path: "" },
+    //     { name: "Lioncolnshire ", path: "" },
+    //   ],
+    // },
+    // {
+    //   id: 2,
+    //   title: "North East",
+    //   items: [
+    //     { name: "Tyne and Wear", path: "" },
+    //     { name: "County Durham", path: "" },
+    //     { name: "Northumberland", path: "" },
+    //   ],
+    // },
     {
       id: 3,
       title: "North West England",
@@ -1224,21 +1224,21 @@ const regionsData = {
       ],
     },
 
-    {
-      id: 4,
-      title: "West Midlands",
-      items: [{ name: "Staffordshire", path: "" }],
-    },
-    {
-      id: 5,
-      title: "Yorkshire and the Humber ",
-      items: [
-        { name: "North Yorkshire", path: "" },
-        { name: "South Yorkshire", path: "" },
-        { name: "West Yorkshire", path: "" },
-        { name: "East Riding of Yorkshire", path: "" },
-      ],
-    },
+    // {
+    //   id: 4,
+    //   title: "West Midlands",
+    //   items: [{ name: "Staffordshire", path: "" }],
+    // },
+    // {
+    //   id: 5,
+    //   title: "Yorkshire and the Humber ",
+    //   items: [
+    //     { name: "North Yorkshire", path: "" },
+    //     { name: "South Yorkshire", path: "" },
+    //     { name: "West Yorkshire", path: "" },
+    //     { name: "East Riding of Yorkshire", path: "" },
+    //   ],
+    // },
   ],
   "driveway-installers-near-me": [
     {
