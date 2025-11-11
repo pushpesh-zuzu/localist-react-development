@@ -1,5 +1,4 @@
 import { Collapse } from "antd";
-// import { regionsData? } from "../../../constant/subCategory";
 import styles from "./Regions.module.css";
 const { Panel } = Collapse;
 import { DownOutlined } from "@ant-design/icons";
@@ -7,9 +6,16 @@ import mapIcon from "../../../assets/Icons/map-pin.svg";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowIcon from "../../../assets/Images/subcategory/arrowicon.svg";
 import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
+import { useEffect, useState } from "react";
 
 const RegionsComponent = ({ regionsData, heading = "" }) => {
-  const allPanelKeys = regionsData?.map((panel) => panel.key);
+  const [activeKey, setActiveKey] = useState(regionsData?.[0]?.key || []);
+
+  useEffect(() => {
+    if (regionsData && regionsData.length > 0) {
+      setActiveKey([regionsData[0].key]);
+    }
+  }, [regionsData]);
 
   return (
     <div className={styles.container}>
@@ -23,11 +29,10 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
       {regionsData?.map((category, index) => {
         const categoryName = category.title;
         const services = category.items;
-        const isNorthWestEngland = categoryName === "North West England";
 
         return (
           <Collapse
-            defaultActiveKey={allPanelKeys}
+            activeKey={activeKey}
             bordered={false}
             key={index}
             expandIcon={({ isActive }) => (
@@ -39,29 +44,21 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
                   height: "17px",
                   transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
                   transition: "transform 0.3s ease",
-                  visibility: isNorthWestEngland ? "hidden" : "visible",
                 }}
               />
             )}
             expandIconPosition="end"
             className={styles.subcategory_collapse}
-            activeKey={allPanelKeys.filter(
-              (key) => key !== "north-west-england" // prevent this from opening
-            )}
             onChange={(keys) => {
-              // prevent "North West England" panel from opening
-              const filteredKeys = keys.filter(
-                (key) => key !== "north-west-england"
-              );
+              // Accordion behavior - only one panel open at a time
+              setActiveKey(keys.length > 0 ? [keys[keys.length - 1]] : []);
             }}
           >
             <Panel
-              className={`${styles.categoryTitle} ${
-                isNorthWestEngland ? styles.nonInteractive : ""
-              }`}
+              className={styles.categoryTitle}
               header={heading ? "" : categoryName}
               key={category?.key}
-              showArrow={!isNorthWestEngland}
+              showArrow={true}
             >
               <div key={index} className={styles.categoryContainer}>
                 <div className={styles.servicesContainer}>
