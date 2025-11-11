@@ -28,7 +28,6 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
   const { requestId, qualityData, addDetailLoader, buyerStep } = useSelector(
     (state) => state.buyer
   );
-  const registerData = JSON.parse(localStorage.getItem("registerDataToken"));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -91,27 +90,27 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
       details: text,
       professional_letin: professionalLetin ? 1 : 0,
     };
-    const cData = {
-      email: registerData?.email || "",
-      phone: registerData?.phone || "",
-    };
-    dispatch(
-      addDetailsRequestData(detailsData, navigate, requestId, cData)
-    ).then((result) => {
-      if (result?.success) {
-        showToast("success", result?.message || "Create Request successfully!");
+
+    dispatch(addDetailsRequestData(detailsData, navigate, requestId)).then(
+      (result) => {
+        if (result?.success) {
+          showToast(
+            "success",
+            result?.message || "Create Request successfully!"
+          );
+        }
+        // onClose();
+        dispatch(clearSetbuyerRequestData());
+        dispatch(clearBuyerRegisterFormData());
+        dispatch(setQualityData());
+
+        // navigate(`/bids-list/${requestId
+        setShowConfirmModal(false);
+        dispatch(setBuyerStep(10));
+
+        // navigate(`/conversion-redirect/${requestId}`, { replace: true });
       }
-      // onClose();
-      dispatch(clearSetbuyerRequestData());
-      dispatch(clearBuyerRegisterFormData());
-      dispatch(setQualityData());
-
-      // navigate(`/bids-list/${requestId
-      setShowConfirmModal(false);
-      dispatch(setBuyerStep(10));
-
-      // navigate(`/conversion-redirect/${requestId}`, { replace: true });
-    });
+    );
 
     // .then(() => {
     //   navigate("/buyers/create");
