@@ -1207,14 +1207,6 @@ const regionsData = {
     },
     {
       id: 2,
-      title: "Wales",
-      items: [
-        { name: "Wrexham", path: "" },
-        { name: "Flintshire", path: "" },
-      ],
-    },
-    {
-      id: 3,
       title: "Yorkshire and the Humber ",
       items: [
         { name: "North Yorkshire", path: "" },
@@ -1224,12 +1216,20 @@ const regionsData = {
       ],
     },
     {
-      id: 4,
+      id: 3,
       title: "North East",
       items: [
         { name: "Tyne and Wear", path: "" },
         { name: "County Durham", path: "" },
         { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
       ],
     },
     {

@@ -42,7 +42,7 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
                 style={{
                   width: "17px",
                   height: "17px",
-                  transform: isActive ? "rotate(180deg)" : "rotate(0deg)",
+                  transform: isActive ? "rotate(0deg)" : "rotate(180deg)",
                   transition: "transform 0.3s ease",
                 }}
               />
