@@ -1223,9 +1223,9 @@ const regionsData = {
         { name: "Cumbria", path: "" },
       ],
     },
-    
+
     {
-      id: 3,
+      id: 4,
       title: "West Midlands",
       items: [{ name: "Staffordshire", path: "" }],
     },
