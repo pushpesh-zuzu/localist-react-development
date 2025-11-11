@@ -772,26 +772,26 @@ const routes = [
       </ProtectedRouteForMultiFormPPC>
     ),
   },
-  //  {
-  //   path: "/en/gb/roofing-multi-form-ppc",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepFormRoofing />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
-  // {
-  //   path: "/en/gb/roofing-multi-form-ppc-banner",
-  //   element: (
-  //     <ProtectedRouteForMultiFormPPC>
-  //       <LocaleRedirect>
-  //         <MultiStepFormRoofing isQuestionWithImage />
-  //       </LocaleRedirect>
-  //     </ProtectedRouteForMultiFormPPC>
-  //   ),
-  // },
+   {
+    path: "/en/gb/roofing-multi-form-ppc",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepFormRoofing />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
+  {
+    path: "/en/gb/roofing-multi-form-ppc-banner",
+    element: (
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepFormRoofing isQuestionWithImage />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
+    ),
+  },
   {
     path: "/en/gb/fence-multi-form-ppc-banner",
     element: (
