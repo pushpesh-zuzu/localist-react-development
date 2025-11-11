@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
 import styles from "./ContactSuccessModal.module.css";
-import EstimateIcon from "../../../assets/Images/MyResponse/lucideCalculator.png";
-
 import Mailbtn from "../../../assets/Images/MyResponse/mail-02.svg";
 import smsBtn from "../../../assets/Images/MyResponse/annotation.svg";
 import phoneBtn from "../../../assets/Images/MyResponse/phone.svg";
 import whatsappBtn from "../../../assets/Images/MyResponse/WhatsappBtn.svg";
-import locallistImgs from "../../../assets/Images/Setting/newLogoCredit.svg";
-import locallistImg from "../../../assets/Images/Leads/localistImg.svg";
 import { showToast } from "../../../utils";
 import { sellerResponseStatusApi } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,8 +71,6 @@ const ContactSuccessModal = ({
     }
 
     let url = null;
-    // const phoneNumber =
-    //   details?.phone || detail?.phone || repliesBtn?.phone || "";
     const rawPhone = details?.phone || detail?.phone || repliesBtn?.phone || "";
     const phoneNumber = formatPhoneNumber(rawPhone);
 
