@@ -12,6 +12,8 @@ import RightClick from "../../../assets/Images/Setting/RightModalClick.svg"
 import { getPopularServiceList } from "../../../store/FindJobs/findJobSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL_IMAGE } from "../../../utils";
+import imgBanner from "../../../assets/Images/houseCleaner.svg";
+
 
 const services = [
   { title: "Personal Trainers", image: DummyImage },
