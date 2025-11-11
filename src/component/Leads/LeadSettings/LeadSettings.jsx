@@ -116,22 +116,22 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
   }, []);
 
   useEffect(() => {
+    let data = {};
     if (userToken?.active_status == 1) {
-      const data = {
+      data = {
         user_id: userToken?.remember_tokens,
       };
-      dispatch(getleadPreferencesList(data));
-      dispatch(getSevenWeekPausedBidApi(data));
-      dispatch(getOnlineRemoteApi(data));
     } else {
-      const data = {
+      data = {
         user_id: registerData?.remember_tokens,
       };
-      dispatch(getleadPreferencesList(data));
-      dispatch(getSevenWeekPausedBidApi(data));
-      dispatch(getOnlineRemoteApi(data));
     }
+
+    dispatch(getleadPreferencesList(data));
+    dispatch(getSevenWeekPausedBidApi(data));
+    dispatch(getOnlineRemoteApi(data));
   }, []);
+
   useEffect(() => {
     if (userToken?.active_status == 1) {
       const data = {
@@ -152,11 +152,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       id: service,
       primaryService: primaryService,
     });
-    const questionData = {
-      service_id: service,
-      user_id: userToken?.remember_tokens,
-    };
-    dispatch(leadPreferences(questionData));
+
+    if (service) {
+      const questionData = {
+        service_id: service,
+        user_id: userToken?.remember_tokens,
+      };
+
+      dispatch(leadPreferences(questionData));
+    }
   };
 
   const handleService = () => {

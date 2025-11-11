@@ -20,7 +20,6 @@ const ContactSuccessModal = ({
   detail,
   requestId,
 }) => {
-  console.log("sbfjgeiqughoifh", repliesBtn);
   const dispatch = useDispatch();
 
   const { registerData } = useSelector((state) => state.findJobs);
@@ -76,8 +75,6 @@ const ContactSuccessModal = ({
       };
     }
 
-    console.log(detail, repliesBtn, "detailll");
-
     let url = null;
     // const phoneNumber =
     //   details?.phone || detail?.phone || repliesBtn?.phone || "";
@@ -111,8 +108,6 @@ const ContactSuccessModal = ({
       }
     });
   };
-
-  console.log(details?.customer?.name, "detailssss");
 
   return (
     <>
