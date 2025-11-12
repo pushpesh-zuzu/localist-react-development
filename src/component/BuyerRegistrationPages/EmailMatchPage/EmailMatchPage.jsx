@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./EmailMatchPage.module.css";
-import { Alert, Spin } from "antd";
+import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import {
-  registerUserData,
-  setbuyerRegisterFormData,
-  checkEmailIdApi,
-} from "../../../store/FindJobs/findJobSlice";
+import { checkEmailIdApi } from "../../../store/FindJobs/findJobSlice";
 import { showToast } from "../../../utils";
 import {
-  createRequestData,
   registerQuoteCustomer,
   setbuyerRequestData,
 } from "../../../store/Buyer/BuyerSlice";
@@ -18,15 +13,11 @@ import { useLocation } from "react-router";
 import useUserInfo from "../../../utils/getUserIp";
 
 const EmailMatchPage = ({
-  onClose,
   nextStep,
-  previousStep,
   setEmails,
-  setShowConfirmModal,
   resetTrigger,
   isStartWithQuestionModal,
   isPPCPages = false,
-  hideCloseButton = false,
 }) => {
   const dispatch = useDispatch();
   const { registerLoader, buyerRegisterFormData, errorMessage } = useSelector(
@@ -44,16 +35,11 @@ const EmailMatchPage = ({
   const targetID = params.get("utm_term");
   const msclickid = params.get("utm_msclkid");
   const utm_source = params.get("utm_source");
-  const { userToken } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
-
-  const [isMobileValid, setIsMobileValid] = useState(true);
-  const [mobileErrorMessage, setMobileErrorMessage] = useState("");
 
   const [errors, setErrors] = useState({
     email: false,
@@ -64,7 +50,7 @@ const EmailMatchPage = ({
     (state) => state.buyer
   );
   const handleEmailChange = (e) => {
-    setEmail(e.target.value); // keep it simple
+    setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
   };
 
@@ -72,7 +58,6 @@ const EmailMatchPage = ({
     if (!email) return;
 
     try {
-      // no `.unwrap()` since it's not createAsyncThunk
       const res = await dispatch(checkEmailIdApi({ email }));
 
       if (res?.success) {
@@ -80,7 +65,7 @@ const EmailMatchPage = ({
         setIsEmailValid(true);
         setEmailErrorMessage("");
       } else {
-        setEmail(""); // clear instantly
+        setEmail("");
         if (setEmails) setEmails("");
         setIsEmailValid(false);
         setEmailErrorMessage("Email is already registered.");
@@ -99,7 +84,7 @@ const EmailMatchPage = ({
   };
 
   const handlePhoneChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // remove all non-digits
+    const value = e.target.value.replace(/\D/g, "");
     if (value.length <= 10) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
@@ -118,7 +103,7 @@ const EmailMatchPage = ({
         (!email ||
           !/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|in|co|io|ai)$/i.test(email)),
       name: !name.trim(),
-      phone: !phone || !/^\d{10}$/.test(phone), // 10-digit phone validation
+      phone: !phone || !/^\d{10}$/.test(phone),
     };
 
     if (!isPPCPages && newErrors.email && !emailErrorMessage) {
@@ -136,7 +121,6 @@ const EmailMatchPage = ({
 
     const finalEmail = isPPCPages ? buyerRequest?.email || "" : email;
 
-    // save user info in redux
     dispatch(setbuyerRequestData({ name, email: finalEmail, phone }));
     const updatedAnswers = buyerRequest?.questions || [];
 
@@ -163,15 +147,10 @@ const EmailMatchPage = ({
 
       dispatch(registerQuoteCustomer(formData)).then((result) => {
         if (result) {
-          // showToast(
-          //   "success",
-          //   result?.message || "Customer registered successfully"
-          // );
           nextStep();
         }
       });
     } else {
-      // normal flow
       nextStep();
     }
   };
@@ -191,7 +170,6 @@ const EmailMatchPage = ({
 
   useEffect(() => {
     if (resetTrigger) {
-      // Clear form values
       setName("");
       setPhone("");
       setEmail("");
@@ -199,28 +177,10 @@ const EmailMatchPage = ({
       setResetEmailFormTrigger(false);
     }
   }, [resetTrigger]);
-  const handleCloseClick = () => {
-    if (!userToken?.remember_tokens) {
-      console.log(name, email, phone, "p");
-      dispatch(setbuyerRequestData({ name, email, phone }));
-      setShowConfirmModal(true);
-    } else {
-      onClose();
-    }
-  };
 
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.emailPage} onClick={(e) => e.stopPropagation()}>
-        {/* {!hideCloseButton && (
-          <button
-            className={styles.closeButton}
-            onClick={handleCloseClick}
-            disabled={registerLoader}
-          >
-            &times;
-          </button>
-        )} */}
         <div className={styles.header}>
           <h2>YOU ARE ONLY ONE STEP FROM COMPARING FREE QUOTES!</h2>
           <p style={{ color: "#000" }}>
@@ -231,17 +191,7 @@ const EmailMatchPage = ({
             professionals.
           </p>
         </div>
-        {/* {String(errorMessage).trim() && (
-  <div className={styles.errorText}>{errorMessage}</div>
-)} */}
-        {/* {showError && String(errorMessage).trim() && (
-          <Alert
-            message={errorMessage}
-            type="error"
-            showIcon
-            style={{ marginBottom: "16px" }}
-          />
-        )} */}
+
         <div className={styles.infoWrapper}>
           <label className={styles.label}>Name</label>
           <input
@@ -283,24 +233,6 @@ const EmailMatchPage = ({
           )}
 
           <label className={styles.label}>Phone Number</label>
-          {/* <div className={styles.phoneWrapper}>
-            <span className={styles.prefix}>+44</span>
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className={`${styles.input} ${
-                errors.phone ? styles.inputError : ""
-              }`}
-              value={phone}
-              maxLength={10}
-              onChange={handlePhoneChange}
-            />
-            {errors.phone && (
-              <span className={styles.errorMessage}>
-                Please enter a valid 10-digit phone number.
-              </span>
-            )}
-          </div> */}
 
           <div
             className={`${styles.phoneWrapper} ${
@@ -325,13 +257,6 @@ const EmailMatchPage = ({
           </div>
 
           <div className={styles.buttonContainer}>
-            {/* <button
-              className={styles.backButton}
-              onClick={previousStep}
-              disabled={registerLoader}
-            >
-              Back
-            </button> */}
             <button
               className={styles.nextButton}
               onClick={handleSubmit}

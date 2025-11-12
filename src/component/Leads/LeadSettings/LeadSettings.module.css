@@ -6,7 +6,7 @@
   max-width: 543px;
   min-width: 250px;
   height: 77.2vh;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .container::-webkit-scrollbar {
@@ -18,16 +18,16 @@
   border-radius: 0px;
 }
 .arrowBtn {
-   color: #000000;
- display: flex;
- align-items: center;
+  color: #000000;
+  display: flex;
+  align-items: center;
   font-weight: 400;
   font-size: 16px;
-   vertical-align: middle;
-   cursor: pointer !important;
-   margin-bottom: 36px;
-   display: flex;
-   gap: 8px;
+  vertical-align: middle;
+  cursor: pointer !important;
+  margin-bottom: 36px;
+  display: flex;
+  gap: 8px;
 }
 .heading {
   font-weight: 600;
@@ -221,7 +221,6 @@
   line-height: 100%;
 }
 
-
 .viewLeadsLink {
   background: var(--primary-color);
   color: white;
@@ -232,9 +231,9 @@
   cursor: pointer !important;
   padding: 3px 10.5px;
   margin-top: 36.1px;
-  display: inline-block;     /* make <a> behave like button */
-  text-decoration: none;     /* remove underline */
-  text-align: center;        /* center text */
+  display: inline-block; /* make <a> behave like button */
+  text-decoration: none; /* remove underline */
+  text-align: center; /* center text */
 }
 
 .viewLeads:hover {
@@ -284,7 +283,7 @@ input:checked + .slider {
 
 input:checked + .slider::before {
   transform: translateX(14px);
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 /* .title {
@@ -377,13 +376,13 @@ input:checked + .slider::before {
     margin-top: 10px;
   }
   .toggle span {
-  font-weight: 600;
-  font-size: 12px;
-}
+    font-weight: 600;
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
-   .container {
+  .container {
     padding: 16px;
     max-width: 100%;
     width: -webkit-fill-available;
@@ -403,14 +402,14 @@ input:checked + .slider::before {
   .viewLeads {
     font-size: 16px;
   }
-   .addService,
+  .addService,
   .addLocation {
     padding: 0px;
   }
-  .section{
+  .section {
     margin-top: 17px;
   }
-   .info {
+  .info {
     margin-bottom: 12px;
   }
 }

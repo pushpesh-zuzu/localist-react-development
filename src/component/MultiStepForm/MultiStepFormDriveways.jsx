@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
 import ProgressBarLandingPage from "../common/ProgressBarLandingPage/ProgressBarLandingPage";
-import PostcodeSearch from "./steps/PostcodeSearch/PostcodeSearch";
-import QuestionAnswerMultiStep from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep";
 import {
   questionAnswerData,
   setbuyerRequestData,
@@ -15,7 +13,6 @@ import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMult
 import CardLayoutWrapper from "./steps/CardLayoutWrapper/CardLayoutWrapper";
 import PhoneNumberMultiStepForm from "./steps/PhoneNumberMultiStepForm/PhoneNumberMultiStepForm";
 import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/MultiStepDescribeYourRequest";
-import QuestionAnswerMultiStep2 from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStep2";
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
@@ -97,18 +94,13 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
-        // Progress decrease based on current step
         if (buyerStep === 2) {
-          // Step 2 se Step 1: 80% → 70%
           setProgressPercentage(70);
         } else if (buyerStep === 3) {
-          // Step 3 se Step 2: 90% → 80%
           setProgressPercentage(80);
         } else if (buyerStep === 4) {
-          // Step 4 se Step 3: 95% → 90%
           setProgressPercentage(90);
         } else if (buyerStep === 5) {
-          // Step 5 se Step 4: 100% → 95%
           setProgressPercentage(95);
         }
 
@@ -128,15 +120,12 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
-      console.log("Cleared pendingBuyerModal after reaching step 7");
     }
   }, [buyerStep]);
 
-  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
       dispatch(setBuyerStep(1));

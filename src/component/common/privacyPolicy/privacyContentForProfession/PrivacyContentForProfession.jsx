@@ -1053,10 +1053,7 @@ export const professionalsTermsData = [
     type: "p",
     text: "- Email: terms@localists.com",
   },
-  // {
-  //   type: "p",
-  //   text: "- Phone: [INSERT HERE]",
-  // },
+
   {
     type: "p",
     text: "- Post: Suite 2A Honeycomb South, Wrexham Road, Chester, CH4 9QJ",

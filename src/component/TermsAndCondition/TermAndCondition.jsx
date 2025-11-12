@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./TermsConditions.module.css";
 import { useLocation, Link } from "react-router-dom";
 import ContentForProfessonal from "./ContentForProfessonal";
 import ContentForConsumers from "./ContentForConsumers";
+
 const TermsAndCondition = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState("professionals");
 
-  // Set active tab from URL hash (#customers / #professionals)
   useEffect(() => {
     if (location.hash === "#professionals") {
       setActiveTab("professionals");
@@ -15,10 +15,8 @@ const TermsAndCondition = () => {
       setActiveTab("customers");
     }
   }, [location]);
-  console.log(location, "locationlocation");
 
   return (
-    // 'hello'
     <div className={styles.container}>
       {/* Navigation Tabs */}
       <nav className={styles.navWrapper}>

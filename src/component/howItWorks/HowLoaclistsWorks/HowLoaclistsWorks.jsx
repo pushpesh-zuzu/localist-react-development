@@ -43,13 +43,11 @@ const HowLoaclistsWorks = () => {
     setSelectedService(null);
   };
 
-  // ✅ Fetch popular services
   useEffect(() => {
     dispatch(getPopularServiceList());
     return () => dispatch(setService([]));
   }, [dispatch]);
 
-  // ✅ Search services debounce
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       if (isDropdownOpen && input.trim()) {
@@ -69,7 +67,6 @@ const HowLoaclistsWorks = () => {
     [dispatch]
   );
 
-  // ✅ Postcode validation logic (same as SearchProfessionals)
   const debounceTimer = useRef(null);
   const lastInvalidPinRef = useRef("");
 
@@ -83,16 +80,18 @@ const HowLoaclistsWorks = () => {
 
     debounceTimer.current = setTimeout(async () => {
       if (value.length < 3) return;
+
       setIsCheckingPostcode(true);
       try {
-        const response =
-          (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-          (await dispatch(getCityName({ postcode: value })));
+        const response = await dispatch(getCityName({ postcode: value }));
+        const newResponse = response?.unwrap
+          ? await response.unwrap()
+          : response;
 
-        if (response?.data?.city) {
+        if (newResponse?.data?.city) {
           setPostalCodeValidate(true);
-          setCity(response.data.city);
-          dispatch(setcitySerach(response.data.city));
+          setCity(newResponse.data.city);
+          dispatch(setcitySerach(newResponse.data.city));
           lastInvalidPinRef.current = "";
         } else {
           if (lastInvalidPinRef.current !== value) {

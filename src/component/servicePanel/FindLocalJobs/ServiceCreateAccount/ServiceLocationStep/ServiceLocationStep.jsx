@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ServiceLocationStep.module.css";
 import iIcon from "../../../../../assets/Images/iIcon.svg";
 import LocationIcon from "../../../../../assets/Images/HowItWorks/locationImg.svg";
@@ -6,7 +6,6 @@ import {
   setCity,
   setCountry,
   setPostalCode,
-  setRegisterStep,
   setSelectedServiceFormData,
 } from "../../../../../store/FindJobs/findJobSlice";
 import { useDispatch } from "react-redux";
@@ -22,31 +21,24 @@ const ServiceLocationStep = ({
   setFormData,
   errors,
 }) => {
-  const inputRef = useRef(null);
   const dispatch = useDispatch();
-  // const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const debounceTimer = useRef(null);
   const [isValidPostCode, setIsValidPostCode] = useState(false);
-  console.log(formData, "formData");
 
-  // Handle postcode input with debounce
   const handlePostcodeChange = (e) => {
     const { name, value } = e.target;
 
-    // Update form data immediately
     dispatch(
       setSelectedServiceFormData({
         [name]: value,
       })
     );
 
-    // Clear previous timer
     if (debounceTimer.current) {
       clearTimeout(debounceTimer.current);
     }
 
-    // Set new timer for API call
     debounceTimer.current = setTimeout(() => {
       if (value && value.length >= 3) {
         fetchCityFromPostcode(value);
@@ -56,19 +48,18 @@ const ServiceLocationStep = ({
 
   const fetchCityFromPostcode = async (postcode) => {
     if (!postcode || postcode.length < 3) return;
-    console.log(postcode, "dddddddd");
-    setIsLoading(true);
-    try {
-      const result =
-        (await dispatch(getCityName({ postcode: postcode })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: postcode })));
-      if (result.success) {
-        setIsValidPostCode(true);
-        console.log(result, "result");
-        const cityName = result.data?.city;
-        const postcodeFromApi = result.data?.postcode;
 
-        // Update all form fields with the API response
+    setIsLoading(true);
+
+    try {
+      const response = await dispatch(getCityName({ postcode }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
+
+      if (newResponse?.success) {
+        setIsValidPostCode(true);
+        const cityName = newResponse.data?.city;
+        const postcodeFromApi = newResponse.data?.postcode;
+
         dispatch(
           setFormData({
             postcode: postcodeFromApi,
@@ -86,19 +77,14 @@ const ServiceLocationStep = ({
             postcode2: postcodeFromApi,
           })
         );
-        // cityName && dispatch(setCity({city:cityName}));
+
         dispatch(setPostalCode({ postalcode: postcodeFromApi }));
-        dispatch(setCountry({ country: result.data?.country }));
-        // showToast("success", "Location found successfully!");
+        dispatch(setCountry({ country: newResponse.data?.country }));
       }
     } catch (error) {
       console.error("Error fetching city:", error);
       setCity("");
-      dispatch(
-        setFormData({
-          validPostCode: false,
-        })
-      );
+      dispatch(setFormData({ validPostCode: false }));
       setIsValidPostCode(false);
       showToast("error", "No PIN code found! Please try again.");
     } finally {
@@ -119,7 +105,6 @@ const ServiceLocationStep = ({
     }
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (debounceTimer.current) {
@@ -149,14 +134,14 @@ const ServiceLocationStep = ({
                   errors.miles1 ? styles.errorBorder : ""
                 }`}
                 name="miles1"
-                value={formData.miles1 || ""}
+                value={formData.miles1 || "20"}
                 onChange={handleInputChange}
               >
                 <option value="1">1 mile</option>
                 <option value="2">2 miles</option>
                 <option value="5">5 miles</option>
                 <option value="10">10 miles</option>
-                <option value="30">30 miles</option>
+                <option value="20">20 miles</option>
                 <option value="50">50 miles</option>
                 <option value="100">100 miles</option>
               </select>
@@ -235,7 +220,11 @@ const ServiceLocationStep = ({
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button disabled={isLoading} className={styles.nextButton} onClick={validateAndProceed}>
+            <button
+              disabled={isLoading}
+              className={styles.nextButton}
+              onClick={validateAndProceed}
+            >
               Next
             </button>
           </div>

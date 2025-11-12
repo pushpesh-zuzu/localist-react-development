@@ -19,7 +19,7 @@ const PostcodeSearchDriveways = ({
   backButtonTriggered,
   setBackButtonTriggered,
   setProgressPercentage,
-  titleHeading='landscaping specialists'
+  titleHeading = "landscaping specialists",
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -34,23 +34,22 @@ const PostcodeSearchDriveways = ({
 
   const showToast = (type, content) => message[type](content);
 
-  // ✅ Initialize progress to 80% when component mounts
   useEffect(() => {
     setProgressPercentage(75);
   }, [setProgressPercentage]);
 
-  // ✅ Handle postcode validation (onChange)
   const handlePincodeChange = async (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
     setPostalCodeValidate(false);
+
     if (!value.trim()) {
       setError("");
       setCity("");
       setPostalCodeValidate(false);
       return;
     }
-    // Don’t call API for short inputs
+
     if (value.length < 3) {
       setPostalCodeValidate(false);
       return;
@@ -59,19 +58,17 @@ const PostcodeSearchDriveways = ({
     setIsCheckingPostcode(true);
 
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
-        const validPostcode = response.data.postcode;
+      if (newResponse?.data?.city) {
+        const validPostcode = newResponse.data.postcode;
         setPostalCodeValidate(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
+        setCity(newResponse.data.city);
+        dispatch(setcitySerach(newResponse.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
 
-        // ✅ Automatically call Next when validation succeeds
         handleNext(true);
       } else {
         setPostalCodeValidate(false);
@@ -85,14 +82,12 @@ const PostcodeSearchDriveways = ({
     }
   };
 
-  // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");
       return;
     }
 
-    // Set progress to 90% before moving to next step
     setProgressPercentage(85);
     if (onNext) {
       onNext();

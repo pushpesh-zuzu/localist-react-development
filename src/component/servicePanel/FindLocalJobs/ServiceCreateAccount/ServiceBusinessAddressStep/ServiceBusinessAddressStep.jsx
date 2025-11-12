@@ -1,11 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./ServiceBusinessAddressStep.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCompanyDetails,
-  clearCompanyData,
-} from "../../../../../store/Company/companyLookup";
-import { showToast } from "../../../../../utils";
 
 const ServiceBusinessAddressStep = ({
   nextStep,
@@ -13,15 +8,10 @@ const ServiceBusinessAddressStep = ({
   handleInputChange,
   formData,
   setFormData,
-  errors,
-  addressCheck,
   setHasPopulatedFromCompany,
   addressValue,
-  cityvalue,
-  countryvalue,
 }) => {
   const dispatch = useDispatch();
-  console.log("formdata", formData);
   const { country, city, postalcode } = useSelector((state) => state.findJobs);
   const companyData = useSelector((state) => state.companyLook?.companyData);
 
@@ -31,15 +21,8 @@ const ServiceBusinessAddressStep = ({
 
   const hasClearedOnce = useRef(false);
   const handleCheck = () => {
-    // if(companyData.registered_office_address?.address_line_1) {
-
-    // } else {
-    //   showToast("error","Please Enter Correct Address")
-    // }
     nextStep();
   };
-
-  console.log("kbfwhe", formData);
 
   useEffect(() => {
     const reg = formData.company_reg_number?.trim();
@@ -49,50 +32,12 @@ const ServiceBusinessAddressStep = ({
       companyData?.company_name &&
       companyData?.registered_office_address
     ) {
-      console.log(
-        "companyData:",
-        companyData.registered_office_address?.address_line_1
-      );
-
-      const newAddress = {
-        // address:addressValue,
-        // apartment:
-        // city:
-        // zipcode:
-        //  ,
-        // country:
-      };
+      const newAddress = {};
 
       dispatch(setFormData(newAddress));
       dispatch(setHasPopulatedFromCompany(true));
     }
   }, [companyData]);
-
-  // useEffect(() => {
-  //   const reg = formData.company_reg_number?.trim();
-
-  //   if (!reg) {
-  //     if (hasPopulatedFromCompany) {
-
-  //       // Clear only if company data was populated earlier
-  //       dispatch(clearCompanyData());
-
-  //       dispatch(
-  //           setFormData({
-  //             address: "",
-  //             apartment: "",
-  //             city: "",
-  //             zipcode: "",
-  //             country: "",
-  //           })
-  //         );
-  //     //dispatch(fetchCompanyDetails(0));
-  //       dispatch(setHasPopulatedFromCompany(false));
-  //     }
-  //   } else if (reg.length === 8) {
-  //     dispatch(fetchCompanyDetails(reg));
-  //   }
-  // }, [formData.company_reg_number]);
 
   return (
     <div className={styles.pageContainer}>
@@ -116,7 +61,6 @@ const ServiceBusinessAddressStep = ({
                 onChange={handleInputChange}
               />
             </div>
-            {/* {errors.address && <p className={styles.errorText}>{errors.address}</p>} */}
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>
@@ -141,7 +85,6 @@ const ServiceBusinessAddressStep = ({
                 onChange={handleInputChange}
               />
             </div>
-            {/* {errors.city && <p className={styles.errorText}>{errors.city}</p>} */}
 
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Country</label>
@@ -153,27 +96,9 @@ const ServiceBusinessAddressStep = ({
                 onChange={handleInputChange}
               />
             </div>
-            {/* {errors.state && <p className={styles.errorText}>{errors.state}</p>} */}
             <div className={styles.labelInputWrapper}>
               <label className={styles.label}>Postcode</label>
-              {/* <div className={styles.toggleGroup}>
-  <button
-    type="button"
-    className={formData?.is_zipcode == 1 ? styles.activeButton : styles.toggleButton}
-    onClick={() => dispatch(setFormData({ is_zipcode: 1, zipcode: "" }))}
-  >
-    Yes
-  </button>
-  <button
-    type="button"
-    className={formData?.is_zipcode == 0 ? styles.activeButton : styles.toggleButton}
-    onClick={() => dispatch(setFormData({ is_zipcode: 0, zipcode: "" }))}
-  >
-    No
-  </button>
-</div> */}
 
-              {/* {formData?.is_zipcode !== 0 && ( */}
               <div className={styles.labelInputWrapper}>
                 <input
                   type="text"
@@ -203,25 +128,6 @@ const ServiceBusinessAddressStep = ({
                 />
               </div>
             </div>
-            {/* )} */}
-
-            {/* {formData?.zipcode === 1 && (
-              <div className={styles.labelInputWrapper}>
-                <input
-                  type="text"
-                  placeholder="Zip Code"
-                  className={styles.input}
-                  name="is_zipcode"
-                  value={formData.is_zipcode || ""}
-                  onChange={(e) =>
-                    dispatch(setFormData({
-                      ...formData, 
-                      is_zipcode: e.target.value, 
-                    }))
-                  }
-                />
-              </div>
-            )} */}
 
             <div className={styles.buttonContainer}>
               <button

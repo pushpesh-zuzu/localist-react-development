@@ -1,56 +1,8 @@
-// import React from "react"
-// import styles from "./SaveViewDetails.module.css"
-// import LeadMap from "../../myResponses/LeadMap/LeadMap"
-
-// const SavedViewDetails = ({saveForLaterDataList}) => {
-//     console.log(saveForLaterDataList,"saveForLaterDataList")
-//     return(
-//         <>
-//         <div className={styles.maincontainer}>
-//             <div className={styles.viewDetailsBox}>
-//                 <div>
-//                     <div>
-//           {saveForLaterDataList?.[0]?.savedLeads?.map((item, index) => {
-//             const parsedQuestions = item?.questions ? JSON.parse(item.questions) : [];
-
-//             return (
-//               <div key={index} className={styles.questionBlock}>
-//                 {parsedQuestions.map((qa, idx) => (
-//                   <div key={idx} className={styles.questionItem}>
-//                     <strong>.</strong> {qa.ques}
-//                     <br />
-//                      <p>{qa.ans}</p>
-//                     <hr />
-//                   </div>
-//                 ))}
-//               </div>
-//             );
-//           })}
-//         </div>
-
-//                 </div>
-//                 <div>
-//                     <LeadMap
-//                     // getPendingLeadList={getPendingLeadList}
-
-//                     />
-//                 </div>
-//             </div>
-//         </div>
-//         </>
-//     )
-// }
-
-// export default SavedViewDetails
-
-import React from "react";
 import styles from "./SaveViewDetails.module.css";
 import LeadMap from "../../myResponses/LeadMap/LeadMap";
 import VerifiedPhoneIcon from "../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../../assets/Images/Leads/FrequentUserIcon.svg";
-import UrgentIcon from "../../../assets/Images/Leads/UrgentIcon.svg";
-import IntentIcon from "../../../assets/Images/Leads/IntentIcon.svg";
 import DotIcon from "../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../assets/Images/Leads/UpdateIcon.svg";
 import { useNavigate } from "react-router-dom";
@@ -58,11 +10,6 @@ import { useNavigate } from "react-router-dom";
 const SavedViewDetails = ({ saveForLaterDataList }) => {
   const savedLeads = saveForLaterDataList || {};
 
-  const navigate = useNavigate()
-    const handleNavigate =()=>{
-      navigate("/settings/leads/my-services")
-    }
-  console.log(savedLeads, "savedLeads");
   let parsedQuestions = [];
   if (savedLeads?.questions) {
     try {
@@ -82,7 +29,6 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               {parsedQuestions.map((qa, idx) => (
                 <div key={idx} className={styles.questionItem}>
                   <p className={styles.question}>
-                    {/* <span className={styles.dotStyle}>•</span> */}
                     <img src={DotIcon} alt="" />
                     {qa.ques}
                   </p>
@@ -101,13 +47,7 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
         <div className={styles.rightColumn}>
           <div className={styles.highlights}>
             <p className={styles.highlightsTitle}>Highlights:</p>
-            {/* <div className={styles.tags}>
-              <span className={`${styles.tag} ${styles.pink}`}>📞 Verified Phone</span>
-              <span className={`${styles.tag} ${styles.blue}`}>📝 Additional details</span>
-              <span className={`${styles.tag} ${styles.sky}`}>🔁 Frequent user</span>
-              <span className={`${styles.tag} ${styles.yellow}`}>⚠️ Urgent</span>
-              <span className={`${styles.tag} ${styles.green}`}>✨ High hiring intent</span>
-            </div> */}
+
             <div className={styles.badges}>
               {savedLeads?.is_phone_verified == 1 && (
                 <span className={styles.verified}>
@@ -156,11 +96,12 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
               Stop seeing leads with specific answers by customising your
               settings.
             </p>
-            {/* <span className={styles.updateIcon}>⚙️</span> */}
-            <div className={styles.updateContainer} >
+            <div className={styles.updateContainer}>
               <img src={UpdateIcon} alt="" />
-               <a href="/settings/leads/my-services" className={styles.updateLink}>
-
+              <a
+                href="/settings/leads/my-services"
+                className={styles.updateLink}
+              >
                 {" "}
                 Update lead settings
               </a>

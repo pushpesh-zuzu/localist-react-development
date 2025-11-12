@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./BuyerFirstStep.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,9 +7,7 @@ import { showToast } from "../../../../utils";
 
 const BuyerFirstStep = () => {
   const navigate = useNavigate();
-  const { autoBidList, autoBidListData, addSubmitLeadLoader } = useSelector(
-    (state) => state.leadSetting
-  );
+  const { autoBidListData } = useSelector((state) => state.leadSetting);
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
   const [options, setOptions] = useState([]);
@@ -17,7 +15,6 @@ const BuyerFirstStep = () => {
   const id = useParams();
   const dispatch = useDispatch();
   const leadIdData = autoBidListData?.[0]?.lead_id;
-  console.log(autoBidListData, options, leadIdData, "autoBidListData");
   const userData =
     userToken?.user_id ||
     userToken?.id ||
@@ -31,7 +28,6 @@ const BuyerFirstStep = () => {
     dispatch(getAutoBidData(data));
   }, []);
   useEffect(() => {
-    // Set options based on API data (autoBidList)
     if (autoBidListData && Array.isArray(autoBidListData)) {
       const formattedOptions = autoBidListData?.map((item) => ({
         id: item.id,
@@ -45,7 +41,7 @@ const BuyerFirstStep = () => {
   const handleNext = () => {
     if (!selected && selected !== "someone_else") {
       showToast("error", "Please select option");
-      return; // stop submit
+      return;
     }
 
     navigate("/buyer-second-step", {

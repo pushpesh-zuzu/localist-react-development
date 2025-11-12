@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./NameMatch.module.css";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -9,10 +9,8 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [consent, setConsent] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { registerLoader } = useSelector((state) => state.findJobs);
-  console.log(registerLoader, "registerLoader");
   const handleNameChange = (e) => {
     setName(e.target.value);
     setError(false);
@@ -35,11 +33,6 @@ const NameMatch = ({ onClose, nextStep, previousStep, email }) => {
         nextStep();
       }
     });
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   nextStep();
-    // }, 1000);
   };
 
   return (

@@ -6,14 +6,12 @@ import { showToast } from "../../../utils";
 export const addBuyCreditApi = (CreditData) => {
   return async (dispatch) => {
     dispatch(setBuyCreditLoader(true));
-    console.log(CreditData, "CreditData");
     try {
       const response = await axiosInstance.post(
         `payment/buy-credits`,
         CreditData
       );
       if (response) {
-        // dispatch(setPreferencesList(response?.data?.data));
         return response?.data;
       }
     } catch (error) {
@@ -49,7 +47,6 @@ export const AddSellerBillingDetailsApi = (billingData) => {
         billingData
       );
       if (response) {
-        // dispatch(setPreferencesList(response?.data?.data));
         return response?.data;
       }
     } catch (error) {
@@ -64,13 +61,11 @@ export const getSellerCardApi = () => {
   return async (dispatch) => {
     try {
       const response = await axiosInstance.get(`users/get-seller-card`);
-      console.log("response", response);
 
       if (response) {
         dispatch(setGetSellerCardData(response?.data?.data ?? []));
       }
     } catch (error) {
-      //    showToast("error", error?.response?.data?.message || "Something went wrong");
     } finally {
     }
   };
@@ -94,10 +89,9 @@ export const AddSellerCardDetailsApi = (cardData) => {
     }
   };
 };
-
 export const removeCardDetailsApi = (cardData) => {
   return async (dispatch) => {
-    dispatch(setSellerBillingLoader(true));
+    dispatch(setCreditCardLoader(true));
     try {
       const response = await axiosInstance.post(
         `users/seller-card-remove`,
@@ -109,26 +103,26 @@ export const removeCardDetailsApi = (cardData) => {
     } catch (error) {
       showToast("error", error?.response?.data?.message);
     } finally {
-      dispatch(setSellerBillingLoader(false));
+      dispatch(setCreditCardLoader(false));
     }
   };
 };
+
 export const makePrimaryApi = (cardData) => {
   return async (dispatch) => {
-    dispatch(setSellerBillingLoader(true));
+    dispatch(setCreditCardLoader(true));
     try {
       const response = await axiosInstance.post(
         `users/seller-card-make-primary`,
         cardData
       );
-      console.log(response, "response123");
       if (response) {
         return response?.data;
       }
     } catch (error) {
       showToast("error", error?.response?.data?.message);
     } finally {
-      dispatch(setSellerBillingLoader(false));
+      dispatch(setCreditCardLoader(false));
     }
   };
 };
@@ -141,7 +135,6 @@ export const getInvoiceBillingListApi = () => {
         dispatch(setGetInoviceBillingListData(response?.data?.data ?? []));
       }
     } catch (error) {
-      //    showToast("error", error?.response?.data?.message || "Something went wrong");
     } finally {
     }
   };
@@ -155,28 +148,10 @@ export const getInvoiceListDataApi = () => {
         dispatch(setGetInoviceListData(response?.data?.data ?? []));
       }
     } catch (error) {
-      //    showToast("error", error?.response?.data?.message || "Something went wrong");
     } finally {
     }
   };
 };
-// export const downloadInvoceApi = (invoiceData) => {
-//   return async (dispatch) => {
-//     dispatch(setInvoiceLoader(true));
-//     try {
-//       const response = await axiosInstance.post(`payment/download-invoice`,invoiceData);
-//       console.log(response,"response")
-//       if (response) {
-//         // dispatch(setPreferencesList(response?.data?.data));
-//         return response?.data;
-//       }
-//     } catch (error) {
-//       showToast("error", error?.response?.data?.message);
-//     } finally {
-//       dispatch(setInvoiceLoader(false));
-//     }
-//   };
-// }
 
 export const downloadInvoceApi = (invoiceData) => {
   return async () => {
@@ -185,17 +160,16 @@ export const downloadInvoceApi = (invoiceData) => {
         `payment/download-invoice`,
         invoiceData,
         {
-          responseType: "blob", // 👈 IMPORTANT: ensures we get file blob
+          responseType: "blob",
         }
       );
 
-      // Create blob and download
-      const blob = new Blob([response.data], { type: "application/pdf" }); // Change type if needed
+      const blob = new Blob([response.data], { type: "application/pdf" });
       const url = window.URL.createObjectURL(blob);
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = `Invoice-${invoiceData.invoice_id}.pdf`; // Customize file name if needed
+      a.download = `Invoice-${invoiceData.invoice_id}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -217,6 +191,7 @@ const initialState = {
   getInvoiceList: [],
   invoiceLoader: false,
   starterPackPurchased: false,
+  creditCardLoader: false,
 };
 
 const myCreditSlice = createSlice({
@@ -228,6 +203,9 @@ const myCreditSlice = createSlice({
     },
     setSellerBillingLoader(state, action) {
       state.sellerBillingLoader = action.payload;
+    },
+    setCreditCardLoader(state, action) {
+      state.creditCardLoader = action.payload;
     },
     setBuyCreditLoader(state, action) {
       state.buyCreditLoader = action.payload;
@@ -267,6 +245,7 @@ export const {
   setAddCouanLoader,
   setGetSellerCardData,
   setSellerCardLoader,
+  setCreditCardLoader,
 } = myCreditSlice.actions;
 
 export default myCreditSlice.reducer;

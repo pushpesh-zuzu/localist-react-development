@@ -224,47 +224,47 @@ export const professionalsTermsData = [
     type: "p",
     text: "<strong>If You’d like to delete Cookies or instruct your web browser to delete or refuse Cookies, please visit the help pages of your web browser;</strong>",
   },
-{
-  type: "li",
-  text: `For the Chrome web browser, please visit this page <br/>from Google: <a href="https://support.google.com/accounts/answer/32050" target="_blank" style="color:#00afe3;">https://support.google.com/accounts/answer/32050</a>`,
-},
-{
-  type: "li",
-  text: `For the Internet Explorer web browser, please visit this page from Microsoft: <a href="http://support.microsoft.com/kb/278835" target="_blank" style="color:#00afe3;">http://support.microsoft.com/kb/278835</a>`,
-},
-{
-  type: "li",
-  text: `For the Firefox web browser, please visit this page from Mozilla: <a href="https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored" target="_blank" style="color:#00afe3;">https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored</a>`,
-},
-{
-  type: "li",
-  text: `For the Safari web browser, please visit this page from Apple: <a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank" style="color:#00afe3;">https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac</a>`,
-},
-{
-  type:'li',
-  text:`For any other web browser, please visit your web browser’s official web pages.`
-},
-{
-  type:'h2',
-  text:'More Information about Cookies'
-},
-{
-  type: 'p',
-  text: 'You can learn more about cookies here: <a href="https://www.termsfeed.com/blog/cookies/" target="_blank" style="color:#00afe3;">All About Cookies by TermsFeed</a> .'
-},
-{
-  type:'h2',
-  text:'Contact Us'
-},
-{
-  type:'p',
-  text:'If you have any questions about this Cookies Policy, You can contact us:'
-},
-{
-  type:'li',
-  heading:'By email:',
-  text:'privacy@localists.com'
-}
+  {
+    type: "li",
+    text: `For the Chrome web browser, please visit this page <br/>from Google: <a href="https://support.google.com/accounts/answer/32050" target="_blank" style="color:#00afe3;">https://support.google.com/accounts/answer/32050</a>`,
+  },
+  {
+    type: "li",
+    text: `For the Internet Explorer web browser, please visit this page from Microsoft: <a href="http://support.microsoft.com/kb/278835" target="_blank" style="color:#00afe3;">http://support.microsoft.com/kb/278835</a>`,
+  },
+  {
+    type: "li",
+    text: `For the Firefox web browser, please visit this page from Mozilla: <a href="https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored" target="_blank" style="color:#00afe3;">https://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored</a>`,
+  },
+  {
+    type: "li",
+    text: `For the Safari web browser, please visit this page from Apple: <a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank" style="color:#00afe3;">https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac</a>`,
+  },
+  {
+    type: "li",
+    text: `For any other web browser, please visit your web browser’s official web pages.`,
+  },
+  {
+    type: "h2",
+    text: "More Information about Cookies",
+  },
+  {
+    type: "p",
+    text: 'You can learn more about cookies here: <a href="https://www.termsfeed.com/blog/cookies/" target="_blank" style="color:#00afe3;">All About Cookies by TermsFeed</a> .',
+  },
+  {
+    type: "h2",
+    text: "Contact Us",
+  },
+  {
+    type: "p",
+    text: "If you have any questions about this Cookies Policy, You can contact us:",
+  },
+  {
+    type: "li",
+    heading: "By email:",
+    text: "privacy@localists.com",
+  },
 ];
 
 const CookiePolicy = () => {
@@ -297,7 +297,7 @@ const CookiePolicy = () => {
                       <span>{block?.text}</span>
                     </h3>
                   );
-                  
+
                 case "p":
                   return (
                     <p
@@ -312,7 +312,6 @@ const CookiePolicy = () => {
                     <div
                       key={index}
                       className={styles.paragraphWithoutMargin}
-                      // style={{ marginTop: block?.marginTB || "0px" }}
                       dangerouslySetInnerHTML={{ __html: block.text }}
                     />
                   );

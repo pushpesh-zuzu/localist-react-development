@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CustomerQuestions.module.css";
-
 import CustomerQuestionsImg from "../../../assets/Images/Leads/CustomerQuestionsImg.svg";
 import UpArrowIcon from "../../../assets/Images/Leads/UpArrowIcon.svg";
 import DownArrowIcon from "../../../assets/Images/Leads/DownArrowIcon.svg";
@@ -8,7 +7,6 @@ import LocationIcon from "../../../assets/Images/HowItWorks/locationImg.svg";
 import TickIcon from "../../../assets/Images/Leads/TickIcon.svg";
 import TrashIcon from "../../../assets/Images/Leads/TrashIcon.svg";
 import blackArrow from "../../../assets/Images/Leads/blackArrowRight.svg";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   addLocationLead,
@@ -22,12 +20,12 @@ import {
   removeItemData,
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { showToast } from "../../../utils";
-import { Button, Modal, Spin } from "antd";
+import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import RemoveServiceModal from "../RemoveModal";
 import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CustomerQuestions = ({ selectedService, setSelectedService }) => {
   const dispatch = useDispatch();
@@ -46,30 +44,17 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
   const {
     leadPreferenceData,
     leadPreferenceLoader,
-    getlocationData,
     removeLoader,
     serviceWiseData,
   } = useSelector((state) => state.leadSetting);
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
-  console.log(leadPreferenceData, selectedService, "leadPreferenceData");
   const [locationData, setLocationData] = useState({
     miles1: "1",
     postcode: "",
   });
   const nationwideShow = serviceWiseData?.map((item) => item?.type);
 
-  const checkedNationWideShow = serviceWiseData?.map(
-    (item) => item?.nation_wide == 1
-  );
-  const locationId = serviceWiseData?.map((item) => item?.id);
-  const locationTypes = nationwideShow?.some((item) => item === "Distance");
-  console.log(
-    locationId?.[0],
-    locationTypes,
-    nationwideShow,
-    "serviceWiseData"
-  );
   const handleUpdateService = () => {
     const data = {
       service_id: selectedService?.id,
@@ -100,18 +85,15 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
     if (leadPreferenceData?.length) {
       const initialAnswers = {};
 
-      // This variable will track if the user has already saved preferences for this service
       const hasUserSavedData = leadPreferenceData?.some(
         (item) => item.answers !== item.answer
       );
 
       leadPreferenceData?.forEach((item) => {
         if (hasUserSavedData && item.answers) {
-          // If user has saved answers, use the "answers" key
           const savedOptions = item.answers.split(",").map((a) => a.trim());
           initialAnswers[item.id] = savedOptions;
         } else if (item.answer) {
-          // For first time visit, use "answer" key
           const options = item.answer.split(",").map((a) => a.trim());
           initialAnswers[item.id] = options;
         }
@@ -159,7 +141,6 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
       if (result?.success) {
         showToast("success", result?.message || "Data submitted successfully");
 
-        // Reload the leadPreferenceData to get updated "answers" values
         dispatch(
           leadPreferences({
             user_id: userToken?.remember_tokens,
@@ -173,19 +154,14 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
   const [isNextModalOpen, setIsNextModalOpen] = useState(false);
   const [selectedServices, setSelectedServices] = useState([]);
   const handleNext = () => {
-    // Optional: Validate the locationData here
     if (!locationData.postcode || !locationData.miles1) {
       message.warning("Please fill in both fields");
       return;
     }
 
-    // Close current modal
     setIsLocationModalOpen(false);
 
-    // Open next modal
-    setIsNextModalOpen(true); // make sure you have this state defined
-
-    // You can pass data as props or store in shared state
+    setIsNextModalOpen(true);
   };
 
   const handleLocationChange = (e) => {
@@ -221,21 +197,6 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
     });
 
     setIsNextModalOpen(false);
-  };
-  const handleLocationSubmit = () => {
-    const data = {
-      user_id: userToken?.remember_tokens,
-      miles: locationData.miles1,
-      postcode: locationData.postcode,
-      service_id: selectedService?.id,
-    };
-
-    dispatch(addLocationLead(data)).then((result) => {
-      if (result?.success) {
-        dispatch(getLocationLead({ user_id: userToken?.remember_tokens }));
-        setIsLocationModalOpen(false);
-      }
-    });
   };
 
   const handleRemove = () => {
@@ -279,7 +240,6 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
     });
   };
   const handleExpandRadius = (item) => {
-    console.log(item, "item");
     const radiusData = {
       location_id: item?.id,
     };
@@ -354,11 +314,9 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
                     <label className={styles.optionSelect}>
                       <input
                         type="checkbox"
-                        checked={
-                          options.every((opt) =>
-                            selectedAnswers[item.id]?.includes(opt)
-                          ) // All selected
-                        }
+                        checked={options.every((opt) =>
+                          selectedAnswers[item.id]?.includes(opt)
+                        )}
                         onChange={(e) => {
                           const isChecked = e.target.checked;
                           setSelectedAnswers((prev) => ({
@@ -442,7 +400,6 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
                           <img src={TickIcon} alt="" /> Within
                         </span>{" "}
                         <span>
-                          {/* <p className=""><b>{item?.miles} miles </b> of <b>{item?.postcode ? item?.postcode : item?.city}</b> </p> */}
                           <strong>{item?.miles} miles </strong> of{" "}
                           <strong>
                             {item?.postcode ? item?.postcode : item?.city}
@@ -507,17 +464,13 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
                         className={styles.addLocation}
                         onClick={() => handleExpandRadius(item)}
                       >
-                        {/* Change Your Radius */} Expand Radius
+                        Expand Radius
                       </a>
                     ) : null}
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* {serviceWiseData?.map((item)=> {return <>
-           
-           </>})} */}
           </div>
         </div>
         <div className={styles.footers}>
@@ -549,7 +502,6 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
       {isLocationModalOpen && (
         <LocationModal
           open={isLocationModalOpen}
-          // isEditing={isEditingLocation}
           locationData={locationData}
           onChange={handleLocationChange}
           onClose={() => {

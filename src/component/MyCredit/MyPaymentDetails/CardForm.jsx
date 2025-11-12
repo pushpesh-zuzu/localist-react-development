@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -54,14 +54,10 @@ const CardPaymentForm = ({
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const { sellerBillingLoader } = useSelector((state) => state.myCredit);
-  console.log(data, "data");
   const item = data?.map((item) => item)[0] || {};
-  // const items = newLeadData?.map((item) => item)[0] || {};
   const items = newLeadData?.[0] || {};
-  console.log(item, details, items, newLeadData, "88");
 
   const addManualBidData = () => {
-    console.log(details, "sel");
     const formData = new FormData();
     formData.append("buyer_id", details?.customer_id);
     formData.append(
@@ -79,7 +75,6 @@ const CardPaymentForm = ({
     dispatch(getAddManualBidData(formData)).then((result) => {
       if (result) {
         showToast("success", result?.message);
-        // onClose(true)
       }
 
       const data = {
@@ -93,64 +88,7 @@ const CardPaymentForm = ({
     });
   };
 
-  //     const handleBuyNow = () => {
-  //       console.log(item, "item")
-
-  //       let credits = items.no_of_leads ?  items.no_of_leads : item?.no_of_leads;
-
-  //       const vatTotal =
-  //         items?.billing_vat_register === 0
-  //           ? 0
-  //           : Math.floor((items?.price * 20) / 100);
-
-  //       // ✅ If coupon exists and is percentage-based
-  //       if (typeof addcoupanList === 'string' && addcoupanList.includes('%')) {
-  //         const discountPercent = parseFloat(addcoupanList.replace('%', ''));
-  //         const discountAmount = Math.floor((items.no_of_leads * discountPercent) / 100);
-
-  //         credits = items.no_of_leads + discountAmount;
-  //       }
-
-  //       const creditData = {
-  //         amount: items?.price ? items?.price : item?.price,
-  //         credits: credits,
-  //         details: items?.name ? items?.name : item?.name,
-  //         total_amount: (items?.price + vatTotal) * 100 ? (items?.price + vatTotal) * 100 : (item?.price + vatTotal) * 100,
-  //         vat: vatTotal,
-  //         top_up: topup ? 1 : 0,
-  //       };
-
-  //       console.log(creditData, items?.no_of_leads, credits, vatTotal, 'creditData');
-  //       dispatch(addBuyCreditApi(creditData)).then((result) => {
-
-  //         if (result?.success) {
-  //           showToast('success', result?.message);
-  //           // setActiveLoaderId(null);
-
-  //           // onClose(false)
-  //           closeModal()
-  //           dispatch(getInvoiceBillingListApi());
-  //           if(!noLeadApiCall) {
-
-  //   addManualBidData()
-  // }
-  //           const data = {
-  //             user_id: userToken?.remember_tokens ? userToken?.remember_tokens : registerData?.remember_tokens,
-  //           };
-
-  //           dispatch(totalCreditData(data));
-
-  //         } else if (result?.success === false) {
-
-  //           // navigate("/payment-details");
-  //           setCreditModal(true)
-  //         }
-  //       });
-  //     };
-
   const handleBuyNow = () => {
-    console.log(item, "item");
-
     let credits = items?.no_of_leads ? items.no_of_leads : item?.no_of_leads;
 
     const price = items?.price ? items.price : item?.price;
@@ -179,8 +117,6 @@ const CardPaymentForm = ({
       vat: vatTotal,
       top_up: topup ? 1 : 0,
     };
-
-    console.log(creditData, no_of_leads, credits, vatTotal, "creditData");
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {

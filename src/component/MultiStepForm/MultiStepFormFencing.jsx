@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
@@ -80,20 +80,15 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     setIsComingFromStep3(false);
     setIsComingFromStep4(false);
 
-    // setAnimationDirection(styles.slideOutLeft);
-
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex < stepFlow.length - 1) {
         dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
       }
-
-      // setAnimationDirection(styles.slideInRight);
     }, 300);
   };
   const prevStep = () => {
     setBackButtonTriggered(true);
-    // setAnimationDirection(styles.slideOutRight);
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex > 0) {
@@ -106,29 +101,23 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
         dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
         setBackButtonTriggered(false);
       }
-      // setAnimationDirection(styles.slideInLeft);
     }, 300);
   };
 
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
-    // Jab buyerStep 7 ho jaye aur pendingModal tha, tab clear karo
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
-      console.log("Cleared pendingBuyerModal after reaching step 7");
     }
   }, [buyerStep]);
 
-  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
-      // const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
   }, [dispatch, isAdminOrRemembered]);
@@ -137,8 +126,8 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     dispatch(questionAnswerData({ service_id: 49 }));
   }, []);
 
-  const firstQuestions = questionanswerData?.slice(0, -2) || []; // All except last
-  const lastQuestion = questionanswerData?.slice(-2) || []; // Only last question
+  const firstQuestions = questionanswerData?.slice(0, -2) || [];
+  const lastQuestion = questionanswerData?.slice(-2) || [];
 
   useEffect(() => {
     if (questionanswerData.length > 0) {
@@ -158,8 +147,6 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
       setHasMountedDetector(true);
     }
-    // ❌ Don't depend on buyerRequest.questions
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasMountedDetector]);
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -215,7 +202,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
                     onBack={prevStep}
                     loading={isLoadingQuestions}
                     getProgressPercentage={getProgressPercentage}
-                    isComingFromStep3={isComingFromStep3} // ⭐ YE PROP ADD KARO
+                    isComingFromStep3={isComingFromStep3}
                     setQuestionHistory={setQuestionHistory}
                     questionHistory={questionHistory}
                     setIsComingFromStep3={setIsComingFromStep3}
@@ -241,8 +228,8 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStepFence
-                    questions={lastQuestion} // Sirf last question
-                    onNext={nextStep} // Last question complete hone ke baad next step
+                    questions={lastQuestion}
+                    onNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}
                     setIsComingFromStep4={setIsComingFromStep4}

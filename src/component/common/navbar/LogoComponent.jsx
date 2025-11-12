@@ -6,27 +6,11 @@ import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
-import React, { useCallback, useEffect, useState } from "react";
-// import {
-//   allSubMenuData,
-//   getChildRoute,
-//   locationData,
-//   otherMenuData,
-//   serviceesData,
-//   subMenuData,
-// } from "../../../constant/Megamenu";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getAllServiceList,
-//   getCategoriesList,
-//   getPopularServiceList,
-// } from "../../../store/FindJobs/findJobSlice";
-// import hiring from "../../../assets/Images/ServicePanel/hiring.svg";
-// import { BASE_IMAGE_URL, BASE_URL_IMAGE } from "../../../utils";
+import { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { megaMenu } from "../../../constant/Megamenu";
 
 const LogoComponent = () => {
-  // const navigate = useNavigate();
   const [filterItems, setFilterItems] = useState("");
   const [filterRoute, setFilteRoute] = useState("");
   const [selectedThirdLevelRoute, setSlectedThirdLevelRoute] = useState("");
@@ -40,11 +24,8 @@ const LogoComponent = () => {
   const { registerData, popularList, CategoriesList, allServiceList } =
     useSelector((state) => state.findJobs);
   const location = useLocation();
-  // const dispatch = useDispatch();
-  // const isAccountPage = location.pathname === "/user/settings";
-  // const isNotification = location.pathname === "/user/notification";
 
-  const [visibleCount, setVisibleCount] = useState(5); // Start with 1
+  const [visibleCount, setVisibleCount] = useState(5);
   const totalItems = megaMenu?.length || 0;
   const { lang, country } = useParams();
   const currentLang = lang || "en";
@@ -54,21 +35,10 @@ const LogoComponent = () => {
   function getRouteForCategory(categoryName) {
     const routesMap = {
       "Home & Garden": "/home",
-      // Business: "/business",
-      // "General Builders": "/builders/",
-      // "Lessons & Training": "/lessons-training",
     };
 
     return routesMap[categoryName] || "#";
   }
-  // Sample location data
-  // const locationData = [
-  //   "Cheshire",
-  //   "Cumbria",
-  //   "Manchester",
-  //   "Lancashire",
-  //   "Merseyside",
-  // ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -89,36 +59,6 @@ const LogoComponent = () => {
   };
 
   const isAllVisible = visibleCount >= totalItems;
-  //   const handleRedirectUrl = () => {
-  //     if (userToken?.active_status  == 1 ) {
-  //       navigate("/settings");
-  //     }
-  //     else if(userToken?.active_status  == 2){
-  // navigate("/buyers/create")
-  //     }
-  //     else {
-  //       navigate("/")
-
-  //     }
-  //   };
-  // useEffect(() => {
-  //   if (!userToken?.remember_tokens && !registerData?.remember_tokens) {
-  //     dispatch(getPopularServiceList());
-  //     dispatch(getCategoriesList());
-  //     dispatch(getAllServiceList());
-  //   }
-  // }, []);
-  // const handleRedirectUrl = () => {
-  //   const status = registerData?.active_status || userToken?.active_status;
-
-  //   if (status == 1) {
-  //     navigate("/sellers/leads");
-  //   } else if (status == 2) {
-  //     navigate("/buyers/create");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
 
   const getRedirectPath = () => {
     const status = registerData?.active_status || userToken?.active_status;
@@ -142,7 +82,7 @@ const LogoComponent = () => {
       }
     };
 
-    handleResize(); // Initial call to set the placement
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -312,22 +252,7 @@ const LogoComponent = () => {
                         className={styles.popover_content}
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
-                      >
-                        {/* <span className={styles.text_wrap}>
-                          {item.icon && (
-                            <img
-                              src={
-                                item?.iconhover && mouseHover === index
-                                  ? item?.iconhover
-                                  : item.icon
-                              }
-                              width={18}
-                              height={18}
-                              alt="icon"
-                            />
-                          )}
-                        </span> */}
-                      </div>
+                      ></div>
 
                       {item?.subcategory?.map((sub, subIndex) => {
                         const slug = sub.name
@@ -350,16 +275,6 @@ const LogoComponent = () => {
                                 {sub.name}
                               </Link>
                             </span>
-                            {/* <img
-                              onClick={() => {
-                                setSelectedSubcategory(sub.name);
-                                setShowThirdLevel(true);
-                                setSlectedThirdLevelRoute(sub.path);
-                              }}
-                              src={arrowIcon}
-                              width={8}
-                              alt="arrow"
-                            /> */}
                           </div>
                         );
                       })}
@@ -367,53 +282,6 @@ const LogoComponent = () => {
                   ))}
               </motion.div>
             ) : (
-              // <motion.div
-              //   key="thirdLevel"
-              //   initial={{ opacity: 0, x: 20 }}
-              //   animate={{ opacity: 1, x: 0 }}
-              //   exit={{ opacity: 0, x: 20 }}
-              //   transition={{ duration: 0.2 }}
-              // >
-              //   <div
-              //     className={styles.popover_back_explore}
-              //     onClick={() => setShowThirdLevel(false)}
-              //   >
-              //     <img src={arrowLeft} width={24} alt="back" />
-              //     {filterItems}
-              //   </div>
-              //   <hr />
-
-              //   <div className={styles.popover_header}>
-              //     <Link
-              //       className={styles.clickableLink}
-              //       to={`/${currentLang}/${currentCountry}/${selectedThirdLevelRoute}`}
-              //     >
-              //       <span>{selectedSubcategory}</span>
-              //     </Link>
-              //   </div>
-
-              //   {megaMenu
-              //     .find((item) => item.name === filterItems)
-              //     ?.subcategory?.find((sub) => sub.name === selectedSubcategory)
-              //     ?.children?.map((child, index) => (
-              //       <div key={index} className={styles.popover_content}>
-              //         <span className={styles.text_wrap}>
-              //           <Link
-              //             onClick={() => {
-              //               handleClose();
-              //             }}
-              //             to={
-              //               child === "Fence Installers in Warrington"
-              //                 ? `/${currentLang}/${currentCountry}/fence-installers/cheshire/warrington`
-              //                 : "#"
-              //             }
-              //           >
-              //             {child}
-              //           </Link>
-              //         </span>
-              //       </div>
-              //     ))}
-              // </motion.div>
               ""
             )}
           </AnimatePresence>
@@ -424,7 +292,6 @@ const LogoComponent = () => {
   const redirectPath = getRedirectPath();
   return (
     <div className={styles.logoContainer}>
-      {/* <Link to={redirectPath}> */}
       <img
         src={logo}
         alt="logo"
@@ -434,30 +301,12 @@ const LogoComponent = () => {
           window.location.href = "/en/gb/"; // reload + homepage redirect ek sath
         }}
       />
-      {/* </Link> */}
-      {/* {location.pathname !== "/buyers/create" &&  userToken?.active_status !== 1 &&  userToken?.active_status !== 2 &&
-        !isAccountPage &&
-        !isNotification && (
-          <Popover
-            placement={placement}
-            content={content}
-            arrow={false}
-            trigger="hover"
-            className="popover_wrap"
-          >
-            <div className={styles.serviceContainer}>
-              <h2 className={styles.serviceText}>Explore Our Services</h2>
-              <h2 className={styles.serviceTextMobile}>Our Services</h2>
-              <img src={downArrow} alt="down-arrow" />
-            </div>
-          </Popover>
-        )} */}
+
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <>
           <Popover
             onMouseEnter={() => setShowbMenu(true)}
             placement={placement}
-            // open={isMobile ? showMenu : null}
             open={showMenu}
             content={content}
             arrow={false}
@@ -486,22 +335,6 @@ const LogoComponent = () => {
                       <a href={`/${currentLang}/${currentCountry}/${sub.path}`}>
                         {sub.name}
                       </a>
-
-                      {/* {sub.children?.map((child, k) => {
-                      const childRoute = getChildRoute(sub.path, child);
-                      return (
-                        <a
-                          key={k}
-                          href={
-                            childRoute
-                              ? `/${currentLang}/${currentCountry}/${childRoute}`
-                              : "#"
-                          }
-                        >
-                          {child}
-                        </a>
-                      );
-                    })} */}
                     </div>
                   ))}
                 </div>

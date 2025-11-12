@@ -22,20 +22,27 @@ const notificationSlice = createSlice({
   },
 });
 
-export const { setNotificationList, setNotificationLoader } = notificationSlice.actions;
+export const { setNotificationList, setNotificationLoader } =
+  notificationSlice.actions;
 export default notificationSlice.reducer;
 
 export const getNotificationList = (payload) => {
   return async (dispatch) => {
     dispatch(setNotificationLoader(true));
     try {
-      const response = await axiosInstance.post("notification/fetch-all-notifications", payload);
+      const response = await axiosInstance.post(
+        "notification/fetch-all-notifications",
+        payload
+      );
       const data = response?.data?.data || [];
-      const lastId  =  response?.data?.last_id || [];
+      const lastId = response?.data?.last_id || [];
       dispatch(setNotificationList({ data, lastId }));
       return data;
     } catch (err) {
-      console.error("Notification fetch failed:", err?.response?.data?.message || err.message);
+      console.error(
+        "Notification fetch failed:",
+        err?.response?.data?.message || err.message
+      );
     } finally {
       dispatch(setNotificationLoader(false));
     }
@@ -47,8 +54,6 @@ export const markNotificationsAsRead = (payload) => {
     try {
       await axiosInstance.post(`notification/mark-all-read`, payload);
       dispatch(getNotificationList(payload));
-    } catch (error) {
-      console.log("Failed to mark notifications as read", error);
-    }
+    } catch (error) {}
   };
 };

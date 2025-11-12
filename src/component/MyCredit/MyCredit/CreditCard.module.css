@@ -12,6 +12,24 @@
   padding: 11px 15px;
 }
 
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.ant-spin-text {
+  color: #fff !important;
+  font-size: 16px;
+}
+
 .container {
   /* background-color: #e3f6fc; */
   padding: 11px 15px;
@@ -35,13 +53,26 @@
 .visaCard {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 20px;
   font-size: 18px;
   font-weight: 600;
   flex: 1; /* allows it to shrink/grow */
   /* width: 100%; */
   max-width: 800px;
   min-width: 250px;
+}
+
+.card_brand {
+  background: linear-gradient(to bottom right, #0d74ff, #0a5bd3);
+  padding: 8px 12px;
+  color: #fff;
+  border-radius: 6px;
+}
+
+.separator {
+  width: 2px;
+  height: 20px;
+  background-color: #d9d9d9;
 }
 
 .rightText {
@@ -53,7 +84,10 @@
   cursor: pointer !important;
 }
 .textRight {
-  font-size: 16px;
+  /* border-left: 2px solid #d9d9d9;
+  padding-left: 20px; */
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .remove_actionButtons {
@@ -75,12 +109,26 @@
   /* margin-top: 8px; */
   cursor: pointer;
   font-size: 14px;
-  color: #1890ff;
+  color: var(--primary-color);
 }
 
 .actionText {
+  color: var(--primary-color);
+  text-align: end;
   cursor: pointer;
   transition: color 0.2s ease;
+  font-weight: 600;
+  padding-right: 16px;
+  font-size: 18px;
+}
+
+.primary_text {
+  color: var(--primary-color);
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-underline-offset: 3px;
 }
 
 .actionTextRemove {
@@ -98,11 +146,22 @@
   color: #999;
 }
 
+@media (max-width: 1024px) {
+  .visaCard_wrapper {
+    flex-direction: column;
+    align-items: end;
+  }
+  .primary_text {
+    font-size: 14px;
+  }
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
     align-items: flex-start;
+    width: -webkit-fill-available;
   }
 
   .visaCard {
@@ -117,14 +176,38 @@
 }
 
 @media (max-width: 480px) {
-  .visaCard {
+  .parent_container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: start;
+    gap: 5px;
+  }
+  .visaCard {
+    align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .visaCard img {
+    width: 51px;
   }
 
   .rightText {
     font-size: 14px;
+  }
+
+  .actionText {
+    padding-left: 72px;
+    padding-right: 0;
+  }
+
+  .textRight {
+    font-size: 14px;
+    padding-right: 10px;
+  }
+  .primary_text {
+    font-size: 12px;
+  }
+  .remove_actionButtons {
+    font-size: 11px;
   }
 }

@@ -1,17 +1,13 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "../buyerPanel/PlaceNewRequest/BuyerRegistration/OtpVerification/OtpVerification.module.css";
-import { verifyPhoneNumberData } from "../../store/Buyer/BuyerSlice";
-
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../utils";
 import { sellerPhoneNumberVerifyDataApi } from "../../store/MyProfile/myProfileSlice";
 
-const OtpModal = ({ open, onClose ,nextStep, previousStep,phoneData}) => {
+const OtpModal = ({ open, onClose, phoneData }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputRefs = useRef([]);
-  const dispatch = useDispatch()
-  const { requestDataList,createRequestToken } = useSelector((state)=> state.buyer)
-console.log(phoneData,"data")
+  const dispatch = useDispatch();
   if (!open) return null;
 
   const handleChange = (index, value) => {
@@ -19,14 +15,12 @@ console.log(phoneData,"data")
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Auto focus to next input if current input is filled
     if (value && index < 3) {
       inputRefs.current[index + 1].focus();
     }
   };
 
   const handleKeyDown = (index, e) => {
-    // Handle backspace
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1].focus();
     }
@@ -45,7 +39,6 @@ console.log(phoneData,"data")
 
     setOtp(newOtp);
 
-    // Focus on the last filled input
     const lastFilledIndex = pasteData.length - 1;
     if (lastFilledIndex < 3) {
       inputRefs.current[lastFilledIndex + 1].focus();
@@ -54,29 +47,27 @@ console.log(phoneData,"data")
     }
   };
   const handleSubmit = () => {
-    const enteredOtp = otp.join(""); 
-  
+    const enteredOtp = otp.join("");
+
     if (enteredOtp.length < 4) {
       showToast("error", "Please enter a valid 4-digit OTP.");
       return;
     }
-  
+
     const data = {
       phone_number: phoneData,
       otp: enteredOtp,
     };
-  
+
     dispatch(sellerPhoneNumberVerifyDataApi(data)).then((result) => {
       if (result?.success) {
         showToast("success", result?.message);
-onClose()
-       
+        onClose();
       } else {
         showToast("error", result?.message || "OTP verification failed");
       }
     });
   };
-  
 
   return (
     <div className={styles.modalOverlay}>
@@ -102,12 +93,14 @@ onClose()
         </div>
 
         <p className={styles.instruction}>
-          Please enter the code sent by SMS to 
+          Please enter the code sent by SMS to
           <br />
           <span>{phoneData}</span>
         </p>
 
-        <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
+        <button className={styles.submitBtn} onClick={handleSubmit}>
+          Submit
+        </button>
       </div>
     </div>
   );

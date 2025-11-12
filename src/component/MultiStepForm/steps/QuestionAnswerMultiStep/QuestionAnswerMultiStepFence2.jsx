@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
-import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 
@@ -21,8 +19,8 @@ const QuestionAnswerMultiStepFence2 = ({
   loading = true,
   serviceName = "Fence & Gate Installation",
   isQuestionWithImage = false,
-  OutOfTotal=100,
-  currentQuesntionWhenBack=3
+  OutOfTotal = 100,
+  currentQuesntionWhenBack = 3,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
@@ -56,7 +54,6 @@ const QuestionAnswerMultiStepFence2 = ({
       setCurrentQuestion(currentQuesntionWhenBack);
     }
   }, [isComingFromStep3]);
-
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -96,7 +93,6 @@ const QuestionAnswerMultiStepFence2 = ({
         }, 150);
       }
     } else {
-      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -160,7 +156,6 @@ const QuestionAnswerMultiStepFence2 = ({
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      // Fallback if no next_question found
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
@@ -232,7 +227,6 @@ const QuestionAnswerMultiStepFence2 = ({
       }
       setCurrentQuestion(nextIndex);
     } else {
-      console.log("next last");
       onNext();
     }
   };
@@ -246,10 +240,7 @@ const QuestionAnswerMultiStepFence2 = ({
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
       const percentage = (100 * 2) / (totalQuestions * 3);
-      console.log(
-        currentQuestion,
-        "setProgressPercentagesetProgressPercentage"
-      );
+
       currentQuestion > 1 && getProgressPercentage(-percentage);
       currentQuestion === 1 &&
         setProgressPercentage((100 * 2) / (totalQuestions * 3));

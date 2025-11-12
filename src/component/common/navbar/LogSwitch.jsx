@@ -3,29 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import searchIcon from "../../../assets/Icons/MyResponse/searchIcon.svg";
 import styles from "./navbar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  searchService,
-  setRegisterData,
-  setRegisterStep,
-} from "../../../store/FindJobs/findJobSlice";
-import { Avatar, Popover } from "antd";
+import { searchService } from "../../../store/FindJobs/findJobSlice";
+import { Popover } from "antd";
 import {
   getNotificationList,
   markNotificationsAsRead,
 } from "../../../store/Seller/notificationService";
-import moment from "moment";
 import bellIcon from "../../../assets/Icons/bell.svg";
-import {
-  setCurrentUser,
-  setUserToken,
-  switchUser,
-  userLogout,
-} from "../../../store/Auth/authSlice";
-import { BASE_COMPLETE, BASE_IMAGE, showToast } from "../../../utils";
+import { userLogout } from "../../../store/Auth/authSlice";
+import { showToast } from "../../../utils";
 import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg";
-import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import MobileSlideInSearch from "./MobileSlideInSearch";
-import { style } from "framer-motion/client";
 import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
 import { serviceRouteMap } from "../../../utils/allServicesRoute";
 
@@ -42,11 +30,8 @@ const LogSwitch = () => {
   const [searchText, setSearchText] = useState("");
   const [debouncedText, setDebouncedText] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
-  const [visible, setVisible] = useState(false);
-  const [registerdata, setRegisterDatas] = useState();
   const { isDirtyRedux } = useSelector((state) => state.myProfile);
-  const { userToken, currentUser } = useSelector((state) => state.auth);
-  const { createRequestToken } = useSelector((state) => state.buyer);
+  const { userToken } = useSelector((state) => state.auth);
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [mobileSearchText, setMobileSearchText] = useState("");
   const [canOpenModal, setCanOpenModal] = useState(false);
@@ -54,9 +39,7 @@ const LogSwitch = () => {
   const { selectedServiceId, registerToken, registerData } = useSelector(
     (state) => state.findJobs
   );
-  const { service, searchServiceLoader } = useSelector(
-    (state) => state.findJobs
-  );
+  const { service } = useSelector((state) => state.findJobs);
 
   const { viewProfileData, reviewProfileData } = useSelector(
     (state) => state.leadSetting
@@ -95,7 +78,6 @@ const LogSwitch = () => {
     } else if (storedBarkData) {
       registerDataToken = JSON.parse(storedBarkData);
     }
-    console.log("jwfiulfhfeiuhfiuefh", registerDataToken);
     if (!registerDataToken || registerDataToken == null) {
       setCanOpenModal(true);
     } else if (
@@ -124,22 +106,18 @@ const LogSwitch = () => {
   }, [dispatch, userToken, registerData]);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menus when clicking outside or scrolling
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Close search dropdown
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setShowDropdown(false);
       }
 
-      // Close hamburger menu
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
     };
 
     const handleScroll = () => {
-      // Close all menus on scroll
       setMenuOpen(false);
       setShowDropdown(false);
       setUserDropdownOpen(false);
@@ -154,7 +132,6 @@ const LogSwitch = () => {
     };
   }, []);
 
-  // Close menus when route changes
   useEffect(() => {
     setMenuOpen(false);
     setShowDropdown(false);
@@ -164,7 +141,7 @@ const LogSwitch = () => {
   const handleNavigation = (path) => {
     confirmNavigation(() => {
       navigate(path);
-      setMenuOpen(false); // close menu on navigation
+      setMenuOpen(false);
     });
   };
   const handleNavigate = () => {
@@ -175,9 +152,7 @@ const LogSwitch = () => {
       <p onClick={handleNavigate}>Save For Later</p>
     </div>
   );
-  const userData = userToken?.profile_image
-    ? userToken?.profile_image
-    : registerData?.profile_image;
+
   const getUserType = () => {
     if (userToken?.remember_tokens) {
       return userToken?.active_status;
@@ -185,128 +160,37 @@ const LogSwitch = () => {
       return registerData?.active_status;
     }
   };
-  const handleSwitchUser = () => {
-    confirmNavigation(() => {
-      const newUserType = getUserType() == 1 ? 2 : 1;
 
-      const formData = new FormData();
-
-      if (userToken?.remember_tokens) {
-        formData.append("user_id", userToken?.remember_tokens);
-      } else {
-        formData.append("user_id", registerData?.remember_tokens);
-      }
-
-      formData.append("user_type", newUserType);
-
-      dispatch(switchUser(formData)).then((result) => {
-        if (result?.success) {
-          // Remove old localStorage user data
-          localStorage.removeItem("barkUserToken");
-          // localStorage.removeItem("registerDataToken")
-          // Set new user data to localStorage
-          let updatedUser = {};
-          if (userToken?.remember_tokens) {
-            updatedUser = {
-              ...userToken,
-              active_status: newUserType,
-            };
-          } else {
-            updatedUser = {
-              ...registerData,
-              active_status: newUserType,
-            };
-          }
-          // const updateRegiater = {
-          //   ...registerData,
-          //   active_status:newUserType,
-          //   name:userToken?.name || registerData?.name || ""
-          // }
-
-          localStorage.setItem("barkUserToken", JSON.stringify(updatedUser));
-          // localStorage.setItem("registerDataToken", JSON.stringify(updateRegiater));
-          dispatch(setUserToken(updatedUser));
-
-          dispatch(setRegisterData(updatedUser));
-          setDataSave(updatedUser?.active_status);
-          // setRegisterDatas(updateRegiater?.active_status)
-
-          // Update redux state if needed
-          dispatch(setCurrentUser(dataSave));
-
-          // Navigate based on previous user type
-          if (updatedUser?.active_status === 1) {
-            navigate("/sellers/leads");
-          } else {
-            navigate("/buyers/create");
-          }
-
-          showToast("success", result?.message || "Switch successful!");
-        } else {
-          showToast(
-            "error",
-            result?.message || "Switch failed. Please try again."
-          );
-        }
-      });
-    });
-  };
   const handleMyRequest = () => {
     navigate("/buyers/create");
   };
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-  //       setShowDropdown(false);
 
-  //     }
-  //   };
-
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("mousedown", handleClickOutside);
-  //   };
-  // }, []);
   const handleSearch = (e) => {
     const value = e.target.value;
-    setSearchText(value); // Store current text
+    setSearchText(value);
     setShowDropdown(true);
   };
   const handleServiceSelect = (item) => {
-    setSelectedServiceIds(item); // store selected service (has id & name)
-    setShow(true); // show the modal
-    setSearchText(item.name); // optionally update the input value
-    // setShowDropdown(false);
-    setSearchText(""); // hide dropdown
+    setSelectedServiceIds(item);
+    setShow(true);
+    setSearchText(item.name);
+    setSearchText("");
     const matchedRoute = serviceRouteMap[item.id];
     if (matchedRoute) {
       navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); // go to the route
     } else {
-      setShow(true); // fallback modal if route not found
+      setShow(true);
     }
   };
 
-  // 2. Debounce input value
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       setDebouncedText(searchText);
-    }, 300); // 300ms debounce
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [searchText]);
 
-  // 3. Dispatch search API
-  //   useEffect(() => {
-  //     if(!userToken?.remember_tokens && !registerData?.remember_tokens){
-  //  if (debouncedText.trim() !== "") {
-  //       dispatch(searchService({ search: debouncedText }));
-  //     } else {
-  //       // Optionally: clear search results if input is empty
-  //       dispatch(searchService({ search: "" }));
-  //     }
-  //     }
-
-  //   }, [debouncedText, dispatch]);
   useEffect(() => {
     const isUserLoggedIn =
       userToken?.remember_tokens || registerData?.remember_tokens;
@@ -343,31 +227,21 @@ const LogSwitch = () => {
   ).length;
   const lastId = useSelector((state) => state.notification.lastId);
   const [popoverVisible, setPopoverVisible] = useState(false);
-  const isBuyerPage = location.pathname === "/buyers/create";
-  const isAccountPage = location.pathname === "/user/settings";
-  const isNotification = location.pathname === "/user/notification";
   const viewProfile = location.pathname === `/review/${profileId?.profileId}`;
-  // path: "admin/review/:profileId",
 
   const userName = userToken?.name || registerData?.name || "";
 
-  const userInitial = userName.charAt(0).toUpperCase();
   const showHamburgerIcon =
     userToken?.remember_tokens || registerData?.remember_tokens;
-  const formatDate = (dateString) => {
-    return moment(dateString).format("Do MMM, YYYY h:mm A");
-  };
+
   const handleVisibleChange = (visible) => {
     setPopoverVisible(visible);
   };
   return (
     <>
       <div className={styles.logSwitchContainer}>
-        {/* Hamburger Icon */}
-
         {showHamburgerIcon ? (
           <div
-            // ref={menuRef}
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -442,7 +316,7 @@ const LogSwitch = () => {
                     key={index}
                     className={styles.dropdownItem}
                     onClick={() => handleServiceSelect(item)}
-                    onMouseDown={() => handleServiceSelect(item)} // ✅
+                    onMouseDown={() => handleServiceSelect(item)}
                   >
                     {item.name}
                   </div>
@@ -454,7 +328,6 @@ const LogSwitch = () => {
 
         <div
           className={`${styles.navMenu} ${menuOpen ? styles.activeMenu : ""}`}
-          // ref={menuRef}
         >
           {getUserType() == 1 && !viewProfile && (
             <>
@@ -466,7 +339,7 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // stop native nav
+                  e.preventDefault();
                   handleNavigation("/sellers/dashboard");
                 }}
               >
@@ -480,8 +353,8 @@ const LogSwitch = () => {
                   location.pathname === "/sellers/leads" ? styles.active : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // native navigation roke
-                  handleNavigation("/sellers/leads"); // custom navigation + isDirty check
+                  e.preventDefault();
+                  handleNavigation("/sellers/leads");
                 }}
               >
                 New Leads
@@ -496,8 +369,8 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // default navigation stop
-                  handleNavigation("/sellers/leads/save-for-later"); // custom check + navigate
+                  e.preventDefault();
+                  handleNavigation("/sellers/leads/save-for-later");
                 }}
               >
                 Saved Leads
@@ -512,8 +385,8 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // default navigation stop karega
-                  handleNavigation("/sellers/leads/my-responses"); // custom navigate + isDirty check
+                  e.preventDefault();
+                  handleNavigation("/sellers/leads/my-responses");
                 }}
               >
                 My Responses
@@ -526,8 +399,8 @@ const LogSwitch = () => {
                   location.pathname === "/settings" ? styles.active : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // default navigation stop
-                  handleNavigation("/settings"); // custom navigate + isDirty check
+                  e.preventDefault();
+                  handleNavigation("/settings");
                 }}
               >
                 Settings
@@ -543,10 +416,10 @@ const LogSwitch = () => {
                     : ""
                 }`}
                 onClick={(e) => {
-                  e.preventDefault(); // default navigation block
+                  e.preventDefault();
                   handleNavigation(
                     `/${currentLang}/${currentCountry}/contact-us`
-                  ); // custom navigation
+                  );
                 }}
               >
                 Help
@@ -561,18 +434,6 @@ const LogSwitch = () => {
                   My Request
                 </div>
               </div>
-              {/* <div className={`${styles.nameCircle} ${styles.nameCircleHide}`}>{userInitial}</div> */}
-
-              {/* {userData ? (
-                <Avatar
-                  src={`${BASE_COMPLETE}/${userData}`}
-                  alt="Profile"
-                  size={40}
-                  style={{ backgroundColor: "#f0f0f0" }}
-                />
-              ) : (
-                <div className={styles.nameCircle}>{userInitial}</div>
-              )} */}
             </>
           )}
         </div>
@@ -636,7 +497,6 @@ const LogSwitch = () => {
                               }}
                             >
                               <span>{noti.message}</span>
-                              {/* <span>{formatDate(noti.created_at)}</span> */}
                               <span>
                                 {new Date(noti.created_at).toLocaleString(
                                   "en-GB",
@@ -670,7 +530,6 @@ const LogSwitch = () => {
                   )}
                 </div>
 
-                {/* Fixed bottom link */}
                 {notifications.length > 0 && (
                   <div
                     style={{
@@ -737,7 +596,6 @@ const LogSwitch = () => {
           </Popover>
         )}
 
-        {/* User Options Popover */}
         {registerToken || userToken ? (
           <Popover
             content={
@@ -769,28 +627,7 @@ const LogSwitch = () => {
                     </a>
                   </div>
                 )}
-                {/* <div className={styles.logoutBtn}>
-                  <a
-                    href={
-                      getUserType() == 1 ? "/buyers/create" : "/sellers/leads"
-                    }
-                    style={{ textDecoration: "none", color: "#000" }}
-                    onClick={(e) => {
-                      if (
-                        e.button === 0 &&
-                        !e.metaKey &&
-                        !e.ctrlKey &&
-                        !e.shiftKey &&
-                        !e.altKey
-                      ) {
-                        e.preventDefault();
-                        handleSwitchUser();
-                      }
-                    }}
-                  >
-                    Switch to {getUserType() == 1 ? "Buyer" : "Seller"}
-                  </a>
-                </div> */}
+
                 {getUserType() == 2 && (
                   <div className={styles.logoutBtn}>
                     <a
@@ -824,7 +661,6 @@ const LogSwitch = () => {
                 </div>
               </>
             }
-            // trigger="hover"
             trigger="click"
             open={userDropdownOpen}
             onVisibleChange={setUserDropdownOpen}
@@ -855,8 +691,6 @@ const LogSwitch = () => {
                   to={`/${currentLang}/${currentCountry}/sellers/create`}
                   className={styles.professionalBtn}
                   onClick={() => {
-                    // dispatch(setRegisterStep(1));
-                    // handleNavigation("/sellers/create/");
                     setMenuOpen(false);
                   }}
                 >
@@ -867,17 +701,7 @@ const LogSwitch = () => {
           </>
         )}
       </div>
-      {/* {show &&
-        (userToken?.active_status == 2 || !userToken) &&
-        selectedServiceIds && (
-          <BuyerRegistration
-            closeModal={() => setShow(false)}
-            serviceId={selectedServiceIds?.id}
-            serviceName={selectedServiceIds?.name}
-            // postcode={pincode}
-            // postalCodeValidate={postalCodeValidate}
-          />
-        )} */}
+
       {showMobileSearch && (
         <MobileSlideInSearch
           isOpen={showMobileSearch}

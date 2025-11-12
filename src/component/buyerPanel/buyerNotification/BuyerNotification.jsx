@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./BuyerNotification.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import {
@@ -10,8 +10,10 @@ import { Spin } from "antd";
 
 const BuyerNotification = () => {
   const dispatch = useDispatch();
-  const { notificationList, notificationLoader } = useSelector((state) => state.buyer);
-  const [loadingNoti, setLoadingNoti] = useState(""); // 👈 track loading switch
+  const { notificationList, notificationLoader } = useSelector(
+    (state) => state.buyer
+  );
+  const [loadingNoti, setLoadingNoti] = useState("");
 
   useEffect(() => {
     const data = {
@@ -23,7 +25,7 @@ const BuyerNotification = () => {
 
   const handleSwitch = (notiName) => async (e) => {
     const isChecked = e.target.checked;
-    setLoadingNoti(notiName); // 👈 mark loading
+    setLoadingNoti(notiName);
 
     const data = {
       noti_name: notiName,
@@ -38,7 +40,7 @@ const BuyerNotification = () => {
       })
     );
 
-    setLoadingNoti(""); // 👈 reset loader
+    setLoadingNoti("");
   };
 
   return (
@@ -48,9 +50,19 @@ const BuyerNotification = () => {
         <span className={styles.infoIcon}>
           <img src={iIcon} alt="" />
         </span>
-        <span>Please select what you would like to receive Notifications about </span>
+        <span>
+          Please select what you would like to receive Notifications about{" "}
+        </span>
       </div>
-      {notificationLoader ? <Spin style={{ display: "flex", justifyContent: "center", alignItems: "center" }} /> :
+      {notificationLoader ? (
+        <Spin
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      ) : (
         <div className={styles.notificationList}>
           {notificationList.map((notification, index) => {
             let notiName = "";
@@ -62,16 +74,18 @@ const BuyerNotification = () => {
             return (
               <div
                 key={index}
-                // className={`${styles.notificationItem} ${index >= 0 ? styles.shadow : ""
-                //   }`}
-                className={`${styles.notificationItem} ${styles[`item${index}`]} ${index >= 0 ? styles.shadow : ""}`}
+                className={`${styles.notificationItem} ${
+                  styles[`item${index}`]
+                } ${index >= 0 ? styles.shadow : ""}`}
               >
                 <span>
-                  {notification?.noti_name === "customer_email_change_in_request"
+                  {notification?.noti_name ===
+                  "customer_email_change_in_request"
                     ? "Changes to my requests"
-                    : notification?.noti_name === "customer_email_reminder_to_reply"
-                      ? "Reminders to reply to Professionals"
-                      : "Updates about new features on Localists"}
+                    : notification?.noti_name ===
+                      "customer_email_reminder_to_reply"
+                    ? "Reminders to reply to Professionals"
+                    : "Updates about new features on Localists"}
                 </span>
                 {loadingNoti === notiName ? (
                   <Spin size="small" />
@@ -89,7 +103,7 @@ const BuyerNotification = () => {
             );
           })}
         </div>
-      }
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MyResponse.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -39,45 +39,19 @@ const MyResponse = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [popoverOpen, setPopoverOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState("pending");
   const [selectedLead, setSelectedLead] = useState(null);
-  const [popoverOpenTop, setPopoverOpenTop] = useState(false);
-  const [popoverOpenMobile, setPopoverOpenMobile] = useState(false);
   const [purchaseType, setPurchaseType] = useState("All Purchase Types");
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
-  const {
-    sellerRecommended,
-    getPendingLeadList,
-    getHiredLeadList,
-    purchasePendingList,
-    data,
-  } = useSelector((state) => state.leadSetting);
+  const { data } = useSelector((state) => state.leadSetting);
 
   const user_id = userToken?.remember_tokens || registerData?.remember_tokens;
 
   const handleProfieView = (item) => {
     navigate(`/pending/view-profile/${item?.customer_id}?id=${item?.id}`);
   };
-
-  const popoverContent = (
-    <div className={styles.popoverMenu}>
-      {purchaseOptions.map((option) => (
-        <div
-          key={option}
-          className={styles.popoverItem}
-          onClick={() => {
-            handlePurchaseChange(option);
-            setPopoverOpen(false);
-          }}
-        >
-          {option}
-        </div>
-      ))}
-    </div>
-  );
 
   useEffect(() => {
     dispatch(getSellerRecommendedApi({ user_id }));
@@ -88,7 +62,6 @@ const MyResponse = () => {
     setSelectedTab("pending");
     dispatch(getPendingLeadDataApi({ user_id })).then((result) => {
       if (result.success) {
-        // showToast("success",result?.message)
       }
     });
   };
@@ -110,11 +83,6 @@ const MyResponse = () => {
   };
 
   const getLeadsToDisplay = () => {
-    /** if (selectedTab === "pending") return getPendingLeadList || [];
-     if (selectedTab === "hired") return getHiredLeadList || [];
-     if (purchaseType && selectedTab === "pending") return purchasePendingList || []; 
-     return []; */
-
     return data;
   };
 
@@ -159,31 +127,6 @@ const MyResponse = () => {
     });
   };
 
-  const renderPopoverContent = (closeSetter) => (
-    <div className={styles.popoverMenu}>
-      {purchaseOptions.map((option) => (
-        <div
-          key={option}
-          role="button"
-          tabIndex={0}
-          className={styles.popoverItem}
-          onClick={() => {
-            handlePurchaseChange(option);
-            closeSetter(false);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              handlePurchaseChange(option);
-              closeSetter(false);
-            }
-          }}
-        >
-          {option}
-        </div>
-      ))}
-    </div>
-  );
-
   const handlePurchaseChange = (value) => {
     setPurchaseType(value);
     if (selectedTab === "pending") {
@@ -216,7 +159,6 @@ const MyResponse = () => {
   };
   const handleEmailOpen = (item) => {
     const email = item?.customer?.email;
-    console.log(item, email, "item");
     if (email) {
       const mailtoUrl = `mailto:${email}`;
       window.location.href = mailtoUrl;
@@ -258,7 +200,6 @@ const MyResponse = () => {
             style={{ display: "flex", marginRight: 20, gap: 10 }}
             className={styles.purchaseSelect}
           >
-            {/* <label className={styles.purchaseText}>Purchase Type</label> */}
             <Select
               value={purchaseType}
               onChange={handlePurchaseChange}
@@ -301,7 +242,6 @@ const MyResponse = () => {
         </div>
 
         <div style={{ display: "flex" }} className={styles.purchaseSelect}>
-          {/* <label className={styles.purchaseText}>Purchase Type</label> */}
           <Select
             value={purchaseType}
             onChange={handlePurchaseChange}
@@ -324,18 +264,10 @@ const MyResponse = () => {
               <div className={styles.infoContainer}>
                 <div className={styles.userInfo}>
                   <div className={styles.userDetails}>
-                    <div
-                      className={styles.avatar}
-                      // style={{
-
-                      // }}
-                    >
+                    <div className={styles.avatar}>
                       {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
                     </div>
-                    <div
-                      className={styles.details}
-                      // onClick={() => handleProfieView(item)}
-                    >
+                    <div className={styles.details}>
                       <h3>{item?.customer?.name}</h3>
                       <p>{item?.postcode}</p>
                     </div>
@@ -353,9 +285,7 @@ const MyResponse = () => {
                   </div>
                   <div className={styles.contactItem}>
                     <img src={BlueSmsIcon} alt="" />
-                    {/* <a href={`mailto:${item?.customer?.email}`} target="_blank"> */}
                     {item?.customer?.email}
-                    {/* </a> */}
                   </div>
                 </div>
                 {item?.profile_view && item?.profile_view_time && (
@@ -496,7 +426,9 @@ const MyResponse = () => {
               <MyResponseAccordion
                 lead={selectedLead}
                 onBack={() => setSelectedLead(null)}
-                getPendingLeadList={data.filter((item)=>item.id === selectedLead)}
+                getPendingLeadList={data.filter(
+                  (item) => item.id === selectedLead
+                )}
               />
             )}
           </div>

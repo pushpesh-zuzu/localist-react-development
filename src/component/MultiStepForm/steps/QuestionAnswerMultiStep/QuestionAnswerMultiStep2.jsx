@@ -54,7 +54,6 @@ const QuestionAnswerMultiStep2 = ({
       setCurrentQuestion(3);
     }
   }, [isComingFromStep3]);
-
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -208,7 +207,6 @@ const QuestionAnswerMultiStep2 = ({
     let nextIndex = null;
 
     if (nextQ === Number(nextQ)) {
-      console.log("nextQ === Number(nextQ)");
       onNext();
       return;
     } else if (nextQ === "last") {
@@ -230,7 +228,6 @@ const QuestionAnswerMultiStep2 = ({
       }
       setCurrentQuestion(nextIndex);
     } else {
-      console.log("next last");
       onNext();
     }
   };
@@ -244,10 +241,7 @@ const QuestionAnswerMultiStep2 = ({
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
       const percentage = (100 * 2) / (totalQuestions * 3);
-      console.log(
-        currentQuestion,
-        "setProgressPercentagesetProgressPercentage"
-      );
+
       currentQuestion > 1 && getProgressPercentage(-percentage);
       currentQuestion === 1 &&
         setProgressPercentage((100 * 2) / (totalQuestions * 3));

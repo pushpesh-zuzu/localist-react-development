@@ -1,8 +1,5 @@
-// export default ReviewsAccordion;
-
 import { useEffect, useRef, useState } from "react";
 import styles from "./ReviewsAccordion.module.css";
-import FacebookLogo from "../../../assets/Images/FacebookLogo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearFacebookReviewStatus,
@@ -23,8 +20,6 @@ import twitterIcon from "../../../assets/Icons/twitter.svg";
 import shareIcon from "../../../assets/Icons/share.svg";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import leftArrow from "../../../assets/Images/location/LeftArrow.svg";
-import rightArrow from "../../../assets/Images/location/RightArrow.svg";
 import { useKeenSlider } from "keen-slider/react";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 
@@ -50,7 +45,6 @@ const ReviewsAccordion = ({ details }) => {
     customerLinkData,
     facebookReviewUpdateSuccess,
     facebookReviewUpdateError,
-    sellerLoader,
   } = useSelector((state) => state.myProfile);
 
   const { userToken } = useSelector((state) => state.auth);
@@ -95,12 +89,11 @@ const ReviewsAccordion = ({ details }) => {
 
   useEffect(() => {
     const checkSdk = () => {
-      // Check the custom flag set in index.html
       if (window.isFacebookSdkReady) {
         setIsFbSdkReady(true);
       } else {
         const timer = setTimeout(checkSdk, 200);
-        return () => clearTimeout(timer); // Cleanup
+        return () => clearTimeout(timer);
       }
     };
 
@@ -119,7 +112,6 @@ const ReviewsAccordion = ({ details }) => {
 
       if (reviewsData && reviewsData.data && reviewsData.data.length > 0) {
         setFbReviews(reviewsData.data);
-        console.log("Reviews:", reviewsData.data);
       }
     }
     if (
@@ -136,8 +128,6 @@ const ReviewsAccordion = ({ details }) => {
         window.FB.login(
           function (response) {
             if (response.authResponse) {
-              console.log("Facebook Login Successful. User authorized app!");
-
               (async () => {
                 try {
                   const userAccessToken = response.authResponse.accessToken;
@@ -148,7 +138,6 @@ const ReviewsAccordion = ({ details }) => {
 
                   if (accessToken) {
                     const updatedReview = await dispatch(getUserTokenApicall());
-                    console.log("Fetched updated review:", updatedReview);
                   }
 
                   showToast(
@@ -181,30 +170,13 @@ const ReviewsAccordion = ({ details }) => {
     scope:
       "openid email profile https://www.googleapis.com/auth/business.manage",
     onSuccess: async (response) => {
-      console.log("Auth code:", response.code);
-
       try {
-        // Step 1: Get access token from your backend
         const tokenRes = await axiosInstance.post("/google/get-auth-token", {
           code: response.code,
         });
 
-        console.log("Token response:", tokenRes.data);
-
         const accessToken = tokenRes.data.data.access_token;
         const refreshToken = tokenRes.data.data.refresh_token;
-
-        // Step 2: Use the same access token to get reviews from YOUR backend
-        // const reviewsRes = await axiosInstance.post("/google/get-reviews", {
-        //   access_token: accessToken,
-        // });
-
-        // const reviewsRes = await axios.post(
-        //   "http://localhost:5100/api/admin/google/get-reviews",
-        //   {
-        //     access_token: accessToken,
-        //   }
-        // );
 
         const reviewsRes = await axios.post(
           "https://dev.localists.com/google/get-reviews",
@@ -214,9 +186,6 @@ const ReviewsAccordion = ({ details }) => {
           }
         );
 
-        console.log("Reviews from backend:", reviewsRes.data);
-
-        // Store token for future use
         localStorage.setItem("google_access_token", accessToken);
         localStorage.setItem(
           "google_refresh_token",
@@ -247,31 +216,7 @@ const ReviewsAccordion = ({ details }) => {
 
   return (
     <div className={styles.wrapper}>
-      {/* <p className={styles.overAllText}>Your Review Rating</p> */}
-      {/* <div className={styles.alertBox}>
-        <span>
-          you don’t have a rating because you haven’t collected any customer reviews. Start collecting or uploading reviews to improve your score.
-        </span>
-        <p>
-          studies show 90% of customers trust online feedback as much as personal recommendations.
-        </p>
-      </div> */}
-
       <p className={styles.sectionTitle}>Collect More Reviews</p>
-
-      {/* <div className={styles.fieldGroup}>
-        <label className={styles.reviewsLabel}>
-          Invite your customers to leave a review
-        </label>
-        <div className={styles.row}>
-          <input
-            type="text"
-            placeholder="Separate email addresses using commas"
-            className={styles.input}
-          />
-          <button className={styles.primaryBtn}>Invite</button>
-        </div>
-      </div> */}
 
       <div className={styles.fieldGroup}>
         <label className={styles.reviewsLabel}>Share your review link</label>
@@ -292,7 +237,7 @@ const ReviewsAccordion = ({ details }) => {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px", // space between text and icon
+                gap: "8px",
                 justifyContent: "center",
               }}
             >
@@ -493,7 +438,6 @@ const ReviewsAccordion = ({ details }) => {
       </div> */}
 
       {/* <div className={styles.buttonRow}>
-        <button className={styles.cancelBtn}>Cancel</button>
         <button className={styles.saveBtn} onClick={handleSubmit}>
           Save
         </button>

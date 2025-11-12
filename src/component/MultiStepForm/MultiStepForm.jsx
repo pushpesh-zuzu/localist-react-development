@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MultiStepForm.module.css";
 import Footer from "../common/footer/Footer";
 import { useLocation } from "react-router";
@@ -100,7 +100,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (buyerStep === 7 && pendingModal?.shouldOpen) {
       localStorage.removeItem("pendingBuyerModal");
-      console.log("Cleared pendingBuyerModal after reaching step 7");
     }
   }, [buyerStep]);
 
@@ -108,7 +107,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
       dispatch(setBuyerStep(7));
     } else {
       dispatch(setBuyerStep(1));
@@ -209,8 +207,8 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStep
-                    questions={lastQuestion} 
-                    onNext={nextStep} 
+                    questions={lastQuestion}
+                    onNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}
                     getProgressPercentage={getProgressPercentage}

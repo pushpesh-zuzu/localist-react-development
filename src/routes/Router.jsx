@@ -2,7 +2,6 @@ import { createBrowserRouter, createMemoryRouter } from "react-router-dom";
 import React, { lazy } from "react";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
-import LoginPage from "../pages/authentication/LoginPage";
 import Homepage from "../pages/Homepage";
 import Category from "../pages/Category";
 import InProgressPage from "../pages/InProgressPage";
@@ -14,7 +13,6 @@ import ServiceCreateAccount from "../component/servicePanel/FindLocalJobs/Servic
 import Dashboard from "../component/dashboard/dashboard";
 import ProtectedRoute from "./Protected";
 import BuyerPanelPage from "../pages/BuyerPanelPage";
-import BuyerRegistration from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
 import BuyerAccountSettings from "../component/buyerAccountSettings/BuyerAccountSettings";
 import BuyerNotification from "../component/buyerPanel/buyerNotification/BuyerNotification";
 import PrivacyPolicy from "../component/common/privacyPolicy/PrivacyPolicys";
@@ -56,26 +54,22 @@ import AboutUs from "../component/AboutUs/AboutUs";
 import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
-
+import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
+import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import LocaleRedirect from "./LocaleRedirect";
 import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
 import { landingPages } from "./landingPages";
-import Transport from "../component/Level1/Transport/Transport";
 import { levelThreePagesRoutes } from "./leverThreeRoute";
 import ThankuPage from "../component/common/ThankuPage/ThankuPage";
 import { levelOnePagesRoutes } from "./levelOneRoutes";
 import MultiStepForm from "../component/MultiStepForm/MultiStepForm";
 import ProtectedRoutePPC from "./ProtecteRoutePPC";
 import MultiStepWithImage from "../pages/MultiStepWithImage";
-import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
-import ProtectRouteMultiPPC from "./ProtectRouteMultiPPC";
 import MultiStepFormDriveways from "../component/MultiStepForm/MultiStepFormDriveways";
 import MultiStepFormFencing from "../component/MultiStepForm/MultiStepFormFencing";
 import MultiStepFenchWithBanner from "../pages/MultiStepFenchWithBanner";
 import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
-import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
-import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
@@ -87,7 +81,6 @@ const MultiStepRoofingBanner = lazy(() =>
 );
 // Build routes once and reuse for both client and server routers
 const routes = [
-  // localized routes
   {
     path: "/en/gb",
     element: <MainLayout />,
@@ -100,14 +93,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      // {
-      //   path: "conversion/:requestId",
-      //   element: (
-      //     // <LocaleRedirect>
-      //     <ConversionRedirect />
-      //     // </LocaleRedirect>
-      //   ),
-      // },
+
       {
         path: "contact-us",
         element: (
@@ -116,10 +102,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
-      //     {
-      //   path: "landscaping-landing-ppc",
-      //   element: (<LocaleRedirect><LandScapingPageLandingPage /></LocaleRedirect>),
-      // },
+
       {
         path: "about-us",
         element: (
@@ -367,12 +350,10 @@ const routes = [
     ],
   },
 
-  // non-localized routes
   {
     path: "/",
-    element: <MainLayout />, // or another layout if needed
+    element: <MainLayout />,
     children: [
-      // Redirect bare homepage to localized homepage (e.g., /en/in)
       {
         index: true,
         element: (
@@ -385,7 +366,6 @@ const routes = [
         path: "thank-you",
         element: <ThankuPage />,
       },
-      // Localized login routes when accessed without locale prefix
       {
         path: "/login",
         element: <ProtectedLogin />,

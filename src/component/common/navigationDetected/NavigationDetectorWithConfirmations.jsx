@@ -22,19 +22,16 @@ const NavigationDetectorWithConfirmations = () => {
   const utm_source = allParams.utm_source || "";
   const { ip, url } = useUserInfo();
 
-  // 🧠 Ref to store latest data safely
   const latestData = useRef({
     userToken,
     buyerRequest,
     citySerach,
   });
 
-  // Keep ref updated (no re-renders)
   useEffect(() => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
 
-  // Prevent multiple API calls
   const hasSent = useRef(false);
 
   const submitFormData = () => {
@@ -52,18 +49,9 @@ const NavigationDetectorWithConfirmations = () => {
       buyerRequest.questions.length === 0;
 
     if (isEverythingEmpty) {
-      console.log("🚫 Skipping API call - all fields are empty");
       return;
     }
-    console.log("🔍 Empty Check Details:", {
-      name: !!buyerRequest?.name?.trim(),
-      email: !!buyerRequest?.email?.trim(),
-      phone: !!buyerRequest?.phone?.trim(),
-      postcode: !!buyerRequest?.postcode?.trim(),
-      questions: buyerRequest?.questions?.length > 0,
-      city: !!citySerach?.trim(), // Just for info
-      isEverythingEmpty: isEverythingEmpty,
-    });
+
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
@@ -83,11 +71,8 @@ const NavigationDetectorWithConfirmations = () => {
     formData.append("entry_url", buyerRequest.url || "");
     formData.append("user_ip_address", buyerRequest.ip || "");
 
-    // console.log("📡 API Call being made once with form_status: 0");
-
     dispatch(registerQuoteCustomer(formData))
       .then(() => {
-        console.log("✅ API Call successful - Data saved");
         localStorage.removeItem("barkToken");
         localStorage.removeItem("barkUserToken");
         localStorage.removeItem("registerDataToken");
@@ -100,33 +85,26 @@ const NavigationDetectorWithConfirmations = () => {
   };
 
   useEffect(() => {
-    // console.log("🔵 NavigationDetector mounted once");
-
     const handleBeforeUnload = (event) => {
-      if (hasSent.current) return; // ✅ already sent, ignore
-      // console.log("🟡 Browser/Tab close detected - sending data once");
+      if (hasSent.current) return;
       submitFormData();
       hasSent.current = true;
       event.preventDefault();
       event.returnValue = "";
     };
 
-    // ✅ Add listener once
     window.addEventListener("beforeunload", handleBeforeUnload);
     window.addEventListener("pagehide", handleBeforeUnload);
-    document.addEventListener("visibilitychange", handleBeforeUnload); // Mobile Android/iOS
+    document.addEventListener("visibilitychange", handleBeforeUnload);
     window.addEventListener("blur", handleBeforeUnload);
 
-    // ✅ Cleanup once
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("pagehide", handleBeforeUnload);
       window.removeEventListener("visibilitychange", handleBeforeUnload);
       window.removeEventListener("blur", handleBeforeUnload);
-      // console.log("🧹 Cleanup complete");
     };
-  }, []); // 🚀 NO DEPENDENCIES
-
+  }, []);
   return null;
 };
 

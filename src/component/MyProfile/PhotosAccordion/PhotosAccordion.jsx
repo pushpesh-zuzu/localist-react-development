@@ -15,31 +15,27 @@ import { BASE_IMAGE } from "../../../utils";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 const PhotosAccordion = ({ details }) => {
   const dispatch = useDispatch();
-  const { photoUpdateSuccess, photoUpdateError, sellerLoader } = useSelector(
-    (state) => state.myProfile
-  );
+  const { photoUpdateSuccess, photoUpdateError, sellerLoader, isDirtyRedux } =
+    useSelector((state) => state.myProfile);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [formState, setFormState] = useState({
     type: "photos",
     company_photos: [],
     company_youtube_link: [],
     company_youtube_links: [],
+    has_youtube_link: 0,
   });
 
   const [existingPhotos, setExistingPhotos] = useState([]);
   const [photoPreviews, setPhotoPreviews] = useState([]);
   const [linkData, setLinkData] = useState("");
-  console.log(details, "details");
-
-  console.log(photoPreviews);
+  const [hasytLink, setHasytLink] = useState(details?.has_youtube_link || 0);
 
   const handleRemovePhoto = (indexToRemove) => {
-    console.log("indexToRemove", indexToRemove);
     setPhotoPreviews((prevPhotos) =>
       prevPhotos.filter((_, idx) => idx !== indexToRemove)
     );
 
-    console.log(photoPreviews);
     // Remove from existing photos
     setExistingPhotos((prev) => prev.filter((_, idx) => idx !== indexToRemove));
 
@@ -50,8 +46,6 @@ const PhotosAccordion = ({ details }) => {
         (_, idx) => idx !== indexToRemove
       ),
     }));
-
-    console.log(formState.company_photos);
 
     // Mark form as dirty
     dispatch(setIsDirtyRedux(true));
@@ -84,44 +78,6 @@ const PhotosAccordion = ({ details }) => {
     return true;
   };
 
-  // const handleSubmit = async () => {
-  //   if (!validate()) {
-  //     alert("Fix validation errors");
-  //     return;
-  //   }
-
-  //   const body = new FormData();
-  //   body.append("type", formState.type);
-
-  //   if (formState.company_youtube_link) {
-  //     body.append("company_youtube_link", formState.company_youtube_link);
-  //   }
-
-  //   formState.company_photos.forEach((file) =>
-  //     body.append("company_photos[]", file)
-  //   );
-  //   for (let pair of body.entries()) {
-  //     console.log(pair[0], pair[1]);
-  //   }
-
-  //   try {
-  //     const token = localStorage.getItem("accessToken"); // Adjust the key if needed
-
-  //     const response = await axiosInstance.post(apiUrl, body);
-
-  //     alert("Profile updated successfully!");
-  //     console.log(response.data);
-  //   } catch (err) {
-  //     console.error("Submission failed:", err);
-  //     alert("Submission failed.");
-  //   }
-
-  // };
-
-  // Inside component
-
-  // useEffect for toast
-
   useEffect(() => {
     if (photoUpdateSuccess) {
       dispatch(clearPhotoUpdateStatus());
@@ -149,6 +105,7 @@ const PhotosAccordion = ({ details }) => {
       toast.warn("Please fix validation errors");
       return;
     }
+
     const body = new FormData();
 
     body.append("type", formState.type);
@@ -158,7 +115,7 @@ const PhotosAccordion = ({ details }) => {
       body.append(`existing_photos[${index}]`, filename);
     });
 
-    // ✅ Send only *newly added* files
+    // ✅ Only new files
     const newFiles = formState.company_photos.filter(
       (file) => file instanceof File
     );
@@ -166,7 +123,7 @@ const PhotosAccordion = ({ details }) => {
       body.append(`company_photos[${index}]`, file);
     });
 
-    // ✅ YouTube links (same logic, skip empty)
+    // ✅ YouTube links
     if (formState.company_youtube_link?.length > 0) {
       formState.company_youtube_link.forEach((link, index) => {
         if (link && link.trim()) {
@@ -175,16 +132,18 @@ const PhotosAccordion = ({ details }) => {
       });
     }
 
-    console.log("Final FormData:");
-    for (let [key, value] of body.entries()) {
-      console.log(
-        `${key}:`,
-        value instanceof File ? `[File: ${value.name}]` : value
-      );
+    // ✅ Add has_youtube_link to body
+    if (
+      formState.has_youtube_link !== undefined &&
+      formState.has_youtube_link !== null
+    ) {
+      body.append("has_youtube_link", formState.has_youtube_link);
     }
 
-    dispatch(updateSellerPhotos(body));
-    dispatch(setIsDirtyRedux(false));
+    if (isDirtyRedux) {
+      dispatch(updateSellerPhotos(body));
+      dispatch(setIsDirtyRedux(false));
+    }
   };
 
   const handleSave = () => {
@@ -246,41 +205,6 @@ const PhotosAccordion = ({ details }) => {
       setPhotoPreviews(previews);
     }
   }, [details]);
-
-  // useEffect(() => {
-  //   if (details) {
-  //     // Preload YouTube link if it exists
-  //     let youtubeLinks = [];
-  //     if (details.company_youtube_link) {
-  //       try {
-  //         // Try parsing JSON (["link1", "link2"])
-  //         youtubeLinks = JSON.parse(details.company_youtube_link);
-  //       } catch (e) {
-  //         // If not JSON, treat as a single string
-  //         youtubeLinks = [details.company_youtube_link];
-  //       }
-  //     }
-
-  //     // Convert image filenames into full URLs
-  //     const photoFilenames = details.company_photos
-  //       ? details.company_photos.split(",").map((item) => item.trim())
-  //       : [];
-
-  //     const previews = photoFilenames.map(
-  //       (filename) => `${BASE_IMAGE}/users/${filename}`
-  //     );
-  //     setExistingPhotos(photoFilenames);
-  //     setPhotoPreviews(previews);
-
-  //     setFormState((prev) => ({
-  //       ...prev,
-  //       company_youtube_links: "",
-  //       company_youtube_link: youtubeLinks ? [youtubeLinks] : [],
-  //     }));
-
-  //     setPhotoPreviews(previews);
-  //   }
-  // }, [details]);
 
   useEffect(() => {
     if (details) {
@@ -393,7 +317,18 @@ const PhotosAccordion = ({ details }) => {
               <img src={iIcon} alt="info" className={styles.icon} />
               <span className={styles.optionalText}>Optional</span>
               <label className={styles.switch}>
-                <input type="checkbox" defaultChecked />
+                <input
+                  type="checkbox"
+                  checked={hasytLink == 1 ? true : false}
+                  onChange={() => {
+                    setHasytLink(!hasytLink);
+                    setFormState((prev) => ({
+                      ...prev,
+                      has_youtube_link: hasytLink ? 0 : 1,
+                    }));
+                    dispatch(setIsDirtyRedux(true));
+                  }}
+                />
                 <span className={styles.slider}></span>
               </label>
             </div>
@@ -403,14 +338,16 @@ const PhotosAccordion = ({ details }) => {
             videos. Share past projects, events, or examples of your work to
             help customers see your expertise in action.
           </p>
-          <button className={styles.uploadBtn} onClick={handleOpen}>
-            Add YouTube Video Links
-          </button>
-          <div className={styles.imageContainer}>
-            {Array.isArray(formState.company_youtube_link) &&
-            formState.company_youtube_link.length > 0 ? (
-              <div className={styles.videoContainer}>
-                {/* {formState.company_youtube_link?.map((link, idx) => (
+          {hasytLink == 0 && (
+            <>
+              <button className={styles.uploadBtn} onClick={handleOpen}>
+                Add YouTube Video Links
+              </button>
+              <div className={styles.imageContainer}>
+                {Array.isArray(formState.company_youtube_link) &&
+                formState.company_youtube_link.length > 0 ? (
+                  <div className={styles.videoContainer}>
+                    {/* {formState.company_youtube_link?.map((link, idx) => (
                   <iframe
                     key={idx}
                     width="215"
@@ -423,69 +360,72 @@ const PhotosAccordion = ({ details }) => {
                     className={styles.videoPreview}
                   />
                 ))} */}
-                {formState.company_youtube_link?.map((link, idx) => (
-                  <div
-                    key={idx}
-                    className={styles.videoWrapper}
-                    style={{
-                      position: "relative",
-                      display: "inline-block",
-                      margin: "10px",
-                    }}
-                  >
-                    {/* ❌ Delete Button */}
-                    <button
-                      type="button"
-                      style={{
-                        position: "absolute",
-                        top: "5px",
-                        right: "5px",
-                        background: "#fff",
-                        border: "none",
-                        color: "#333",
-                        fontSize: "16px",
-                        fontWeight: "bold",
-                        cursor: "pointer",
-                        borderRadius: "50%",
-                        width: "22px",
-                        height: "22px",
-                        lineHeight: "20px",
-                        textAlign: "center",
-                        boxShadow: "0 0 4px rgba(0,0,0,0.2)",
-                      }}
-                      onClick={() =>
-                        setFormState((prev) => ({
-                          ...prev,
-                          company_youtube_link:
-                            prev.company_youtube_link.filter(
-                              (_, i) => i !== idx
-                            ),
-                        }))
-                      }
-                    >
-                      ×
-                    </button>
+                    {formState.company_youtube_link?.map((link, idx) => (
+                      <div
+                        key={idx}
+                        className={styles.videoWrapper}
+                        style={{
+                          position: "relative",
+                          display: "inline-block",
+                          margin: "10px",
+                        }}
+                      >
+                        {/* ❌ Delete Button */}
+                        <button
+                          type="button"
+                          style={{
+                            position: "absolute",
+                            top: "5px",
+                            right: "5px",
+                            background: "#fff",
+                            border: "none",
+                            color: "#333",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            cursor: "pointer",
+                            borderRadius: "50%",
+                            width: "22px",
+                            height: "22px",
+                            lineHeight: "20px",
+                            textAlign: "center",
+                            boxShadow: "0 0 4px rgba(0,0,0,0.2)",
+                          }}
+                          onClick={() =>
+                            setFormState((prev) => ({
+                              ...prev,
+                              company_youtube_link:
+                                prev.company_youtube_link.filter(
+                                  (_, i) => i !== idx
+                                ),
+                            }))
+                          }
+                        >
+                          ×
+                        </button>
 
-                    {/* 🎥 YouTube Preview */}
-                    <iframe
-                      width="215"
-                      height="200"
-                      src={getYoutubeEmbedUrl(link)}
-                      title={`YouTube video ${idx + 1}`}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className={styles.videoPreview}
-                    />
+                        {/* 🎥 YouTube Preview */}
+                        <iframe
+                          width="215"
+                          height="200"
+                          src={getYoutubeEmbedUrl(link)}
+                          title={`YouTube video ${idx + 1}`}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className={styles.videoPreview}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div className={styles.paraText}>
+                    Your videos will appear directly on your Localists.com
+                    profile.
+                  </div>
+                )}
               </div>
-            ) : (
-              <div className={styles.paraText}>
-                Your videos will appear directly on your Localists.com profile.
-              </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
 
         {/* Footer Buttons */}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./contactus.module.css";
 import { contactUsBanner, contactUsMap } from "../../assets/Images/MainBanners";
 import { Form } from "antd";
@@ -20,8 +20,6 @@ const ContactUs = () => {
 
   const onFinish = async (values) => {
     try {
-      console.log("Form values:", values);
-
       const userType = values.customerType === "customer" ? 1 : 2;
 
       const payload = {
@@ -113,7 +111,7 @@ const ContactUs = () => {
                   name="phoneNumber"
                   label="Phone Number"
                   required
-                  maxLength={10} // ✅ now works
+                  maxLength={10}
                   prefix="+44"
                   onInput={(e) => {
                     e.target.value = e.target.value
@@ -207,9 +205,7 @@ const ContactUs = () => {
         <div
           className={styles.mapSection}
           style={{ backgroundImage: `url(${contactUsMap})` }}
-        >
-          {/* <span className={styles.mapText}>Contact Us Map</span> */}
-        </div>
+        ></div>
       </div>
     </>
   );

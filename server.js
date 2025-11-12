@@ -26,12 +26,12 @@ app.use(
 
 app.use(
   cors({
-    origin: "http://localhost:5100", // your frontend URL
+    origin: "http://localhost:5100",
     credentials: true,
   })
 );
-app.use(express.json()); // to parse JSON request body
-app.use(express.urlencoded({ extended: true })); // to parse form data if needed
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
@@ -46,14 +46,12 @@ const oAuth2Client = new OAuth2Client(
   process.env.GOOGLE_REDIRECT_URI
 );
 
-const cache = new NodeCache({ stdTTL: 60 }); // cache valid for 60 seconds
+const cache = new NodeCache({ stdTTL: 60 });
 
 async function fetchWithCache(key, url, headers) {
   if (cache.has(key)) {
-    console.log(`Cache hit for ${key}`);
     return cache.get(key);
   }
-  console.log(`Fetching fresh data for ${key}`);
   const res = await fetch(url, { headers });
   if (!res.ok) {
     throw new Error(`HTTP ${res.status} - ${await res.text()}`);
@@ -63,12 +61,9 @@ async function fetchWithCache(key, url, headers) {
   return data;
 }
 
-// 1. Google auth token route
 app.post("/google/get-auth-token", async (req, res) => {
   try {
     const { code } = req.body;
-
-    console.log("Received auth code:", code);
 
     const tokenResponse = await axios.post(
       "https://oauth2.googleapis.com/token",
@@ -122,13 +117,10 @@ const fetchAccountDetails = async (accessToken) => {
     if (accounts && accounts.length > 0) {
       const accountResourceName = accounts[0].name;
 
-      // Extract the actual ID
       const accountId = accountResourceName.split("/")[1];
 
-      console.log("Google Business Profile Account ID:", accountId);
       return accountId;
     } else {
-      console.log("No accounts found for this user.");
       return null;
     }
   } catch (error) {
@@ -141,7 +133,6 @@ const fetchAccountDetails = async (accessToken) => {
 };
 
 app.post("/api/google/account-id", async (req, res) => {
-  // 1. Get the access token from the request body
   const { accessToken } = req.body;
 
   if (!accessToken) {
@@ -151,17 +142,14 @@ app.post("/api/google/account-id", async (req, res) => {
   }
 
   try {
-    //  Call the function to fetch the account ID
     const accountId = await fetchAccountDetails(accessToken);
 
     if (accountId) {
-      // Send the successful response back to the client
       res.json({
         success: true,
         accountId: accountId,
       });
     } else {
-      // Handle the case where the user has no business accounts
       res.status(404).json({
         success: false,
         message: "No business accounts found for this user.",
@@ -176,9 +164,7 @@ app.post("/api/google/account-id", async (req, res) => {
   }
 });
 
-// 2. Get Business Reviews route - YAHAN SAB KUCH HANDLE HOGA
 app.post("/api/google/get-reviews", async (req, res) => {
-  console.log("Fetching accounts...");
   try {
     const { access_token, refresh_token } = req.body;
 
@@ -229,126 +215,6 @@ app.post("/api/google/get-reviews", async (req, res) => {
   }
 });
 
-//   if (!access_token) {
-//     return res.status(400).json({
-//       success: false,
-//       error: "Access token required",
-//     });
-//   }
-
-//   console.log("Fetching reviews with access token...");
-
-//   // OAuth2 client setup
-//   const oauth2Client = new google.auth.OAuth2();
-//   oauth2Client.setCredentials({
-//     access_token: access_token,
-//   });
-
-//   // Google My Business API
-//   const mybusiness = google.businessprofile({
-//     version: "v1",
-//     auth: oauth2Client,
-//   });
-
-//   // Step 1: Get accounts list
-//   console.log("Fetching accounts...");
-//   const accountsResponse = await mybusiness.accounts.list();
-
-//   if (
-//     !accountsResponse.data.accounts ||
-//     accountsResponse.data.accounts.length === 0
-//   ) {
-//     return res.status(404).json({
-//       success: false,
-//       error: "No Google Business accounts found",
-//     });
-//   }
-
-//   console.log("Accounts found:", accountsResponse.data.accounts.length);
-//   const accountName = accountsResponse.data.accounts[0].name;
-//   console.log("Using account:", accountName);
-
-//   // Step 2: Get locations for this account
-//   console.log("Fetching locations...");
-//   const locationsResponse = await mybusiness.accounts.locations.list({
-//     parent: accountName,
-//     readMask: "name,title,locationName,metadata",
-//   });
-
-//   if (
-//     !locationsResponse.data.locations ||
-//     locationsResponse.data.locations.length === 0
-//   ) {
-//     return res.status(404).json({
-//       success: false,
-//       error: "No business locations found",
-//     });
-//   }
-
-//   console.log("Locations found:", locationsResponse.data.locations.length);
-
-//   // Step 3: Get reviews for each location
-//   const allReviews = [];
-
-//   for (const location of locationsResponse.data.locations) {
-//     try {
-//       console.log(
-//         `Fetching reviews for location: ${location.title || location.name}`
-//       );
-
-//       const reviewsResponse =
-//         await mybusiness.accounts.locations.reviews.list({
-//           parent: location.name,
-//         });
-
-//       if (
-//         reviewsResponse.data.reviews &&
-//         reviewsResponse.data.reviews.length > 0
-//       ) {
-//         const locationReviews = reviewsResponse.data.reviews.map(
-//           (review) => ({
-//             ...review,
-//             locationName: location.title || location.locationName,
-//             locationId: location.name,
-//           })
-//         );
-
-//         allReviews.push(...locationReviews);
-//         console.log(
-//           `Found ${reviewsResponse.data.reviews.length} reviews for ${location.title}`
-//         );
-//       }
-//     } catch (error) {
-//       console.error(
-//         `Error fetching reviews for ${location.title}:`,
-//         error.message
-//       );
-//       // Continue with next location
-//     }
-//   }
-
-//   console.log(`Total reviews fetched: ${allReviews.length}`);
-
-//   res.json({
-//     success: true,
-//     message: "Reviews fetched successfully",
-//     data: {
-//       reviews: allReviews,
-//       totalReviews: allReviews.length,
-//       totalLocations: locationsResponse.data.locations.length,
-//     },
-//   });
-// } catch (error) {
-//   console.error("Error in get-reviews route:", error);
-//   res.status(500).json({
-//     success: false,
-//     error: "Failed to fetch reviews",
-//     details: error.message,
-//     stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
-//   });
-// }
-// });
-
 // 3. Refresh token route (optional)
 app.post("/google/refresh-token", async (req, res) => {
   try {
@@ -380,220 +246,16 @@ app.post("/google/refresh-token", async (req, res) => {
   }
 });
 
-// Test route
-// app.get("/", (req, res) => {
-//   res.json({
-//     success: true,
-//     message: "Google Business Reviews API Server is running!",
-//   });
-// });
-
 const PORT = process.env.PORT || 5100;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`✅ CORS enabled for all origins`);
-});
-
-// Step 1: Redirect user to Google OAuth consent screen
-// app.get("/auth/google", (req, res) => {
-//   const authUrl = oAuth2Client.generateAuthUrl({
-//     access_type: "offline", // to get refresh_token
-//     scope: [
-//       "openid",
-//       "email",
-//       "profile",
-//       "https://www.googleapis.com/auth/business.manage",
-//     ],
-//     prompt: "consent", // force consent to get refresh_token
-//   });
-//   res.redirect(authUrl); // user goes to Google login page
-// });
-
-// // Step 2: Handle callback from Google
-// app.post("/auth/callback", async (req, res) => {
-//   try {
-//     console.log("Callback received with body:", req.body);
-//     const code = req.body.code;
-//     if (!code) return res.status(400).json({ error: "Missing code" });
-
-//     // Exchange code for access_token + refresh_token
-//     const { tokens } = await oAuth2Client.getToken(code);
-//     oAuth2Client.setCredentials(tokens);
-//     const accessToken = tokens.access_token;
-//     if (!accessToken)
-//       return res.status(500).json({
-//         success: false,
-//         error: "No access_token returned from Google",
-//       });
-
-//     const headers = {
-//       Authorization: `Bearer ${accessToken}`,
-//       Accept: "application/json",
-//     };
-
-//     // Step 3: Fetch accountId(s) (cached)
-//     const accountsData = await fetchWithCache(
-//       "accounts",
-//       "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
-//       headers
-//     );
-//     const accounts = accountsData.accounts || [];
-//     if (!accounts.length)
-//       return res.json({ message: "No Google Business accounts found" });
-//     const accountId = accounts[0].name;
-
-//     // Step 4: Fetch locations (cached)
-//     const locationsData = await fetchWithCache(
-//       `locations:${accountId}`,
-//       `https://mybusinessbusinessinformation.googleapis.com/v1/${accountId}/locations`,
-//       headers
-//     );
-//     const locations = locationsData.locations || [];
-//     if (!locations.length) return res.json({ message: "No locations found" });
-//     const locationId = locations[0].name;
-
-//     // Step 5: Fetch reviews (cached)
-//     const reviewsData = await fetchWithCache(
-//       `reviews:${locationId}`,
-//       `https://mybusiness.googleapis.com/v4/${locationId}/reviews`,
-//       headers
-//     );
-//     const reviews = reviewsData.reviews || [];
-//     console.log();
-
-//     // Step 6: Return all data to frontend
-//     res.json({
-//       success: true,
-//       tokens,
-//       accountId,
-//       locationId,
-//       reviews,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ success: false, error: err.message });
-//   }
-// });
-
-// // Step 1: Redirect user to Google OAuth consent screen
-// app.get("/auth/google", (req, res) => {
-//   const authUrl = oAuth2Client.generateAuthUrl({
-//     access_type: "offline", // to get refresh_token
-//     scope: [
-//       "openid",
-//       "email",
-//       "profile",
-//       "https://www.googleapis.com/auth/business.manage",
-//     ],
-//     prompt: "consent", // force consent to get refresh_token
-//   });
-//   res.redirect(authUrl); // user goes to Google login page
-// });
-
-// // Step 2: Handle callback from Google
-// app.get("/auth/callback", async (req, res) => {
-//   try {
-//     const code = req.query.code;
-//     if (!code) return res.status(400).json({ error: "Missing code" });
-
-//     // Exchange code for access_token + refresh_token
-//     const { tokens } = await oAuth2Client.getToken(code);
-//     oAuth2Client.setCredentials(tokens);
-//     const accessToken = tokens.access_token;
-
-//     // Step 3: Fetch accountId(s) the user manages
-//     const accountsRes = await axios.get(
-//       "https://mybusinessaccountmanagement.googleapis.com/v1/accounts",
-//       { headers: { Authorization: `Bearer ${accessToken}` } }
-//     );
-//     const accounts = accountsRes.data.accounts || [];
-//     if (!accounts.length)
-//       return res.json({ message: "No Google Business accounts found" });
-//     const accountId = accounts[0].name; // e.g., "accounts/1234567890"
-
-//     // Step 4: Fetch locations
-//     const locationsRes = await axios.get(
-//       `https://mybusinessbusinessinformation.googleapis.com/v1/${accountId}/locations`,
-//       { headers: { Authorization: `Bearer ${accessToken}` } }
-//     );
-//     const locations = locationsRes.data.locations || [];
-//     if (!locations.length) return res.json({ message: "No locations found" });
-//     const locationId = locations[0].name; // e.g., "accounts/1234567890/locations/9876543210"
-
-//     // Step 5: Fetch reviews
-//     const reviewsRes = await axios.get(
-//       `https://mybusiness.googleapis.com/v4/${locationId}/reviews`,
-//       { headers: { Authorization: `Bearer ${accessToken}` } }
-//     );
-//     const reviews = reviewsRes.data.reviews || [];
-
-//     // Step 6: Return all data to frontend
-//     res.json({
-//       success: true,
-//       tokens,
-//       accountId,
-//       locationId,
-//       reviews,
-//     });
-//   } catch (err) {
-//     console.error(err.response?.data || err.message);
-//     console.error(err.response?.data || err.message);
-//     res.status(500).json({ success: false, error: err.message, data: "error" });
-//   }
-// });
-
-// const PORT = process.env.PORT || 5100;
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// Step 1: Route to exchange ID token from frontend login
-// app.get("/auth/callback", async (req, res) => {
-//   try {
-//     console.log("Received token:", req.query);
-//     const { token } = req.query; // token from GoogleLogin in React
-//     const ticket = await oAuth2Client.verifyIdToken({
-//       idToken: token,
-//       audience: process.env.VITE_GOOGLE_CLIENT_ID,
-//     });
-//     const payload = ticket.getPayload(); // contains email, name, sub (user id)
-
-//     // You can generate a server session or just return payload
-//     res.json({ success: true, user: payload });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(400).json({ success: false, message: "Invalid token" });
-//   }
-// });
-
-// // Step 2: Route to fetch Google My Business reviews
-// app.get("/reviews", async (req, res) => {
-//   try {
-//     res.json({ message: "Fetching reviews..." });
-//     const accessToken = req.query.access_token; // send access token from frontend or server-side
-//     const accountId = "accounts/YOUR_ACCOUNT_ID"; // replace with real Google Business account id
-//     const locationId = "locations/YOUR_LOCATION_ID"; // replace with location id
-
-//     const response = await axios.get(
-//       `https://mybusiness.googleapis.com/v4/${accountId}/${locationId}/reviews`,
-//       {
-//         headers: { Authorization: `Bearer ${accessToken}` },
-//       }
-//     );
-//     res.json(response.data);
-//   } catch (err) {
-//     console.error(err.response?.data || err.message);
-//     res.status(500).json({ success: false, error: err.message });
-//   }
-// });
+app.listen(PORT, () => {});
 
 async function createServer() {
-  // Enable HTTP compression and ETags to reduce payload size and improve TTFB/LCP
   app.set("etag", "strong");
   app.use(compression({ threshold: 1024 }));
   const isProd = process.env.NODE_ENV === "production";
 
   let vite, template, render;
   let manifest = {};
-  // Micro-cache SSR HTML per URL+hostname to reduce TTFB during PSI runs (60s TTL)
   const ssrCache = new NodeCache({ stdTTL: 60, checkperiod: 120 });
 
   if (isProd) {
@@ -623,7 +285,6 @@ async function createServer() {
           serverEntryFile = resolve(path.join("dist/server", mapped.file));
         }
       } else {
-        // Fallback: find hashed entry-server*.js in dist/server/assets
         const assetsDir = resolve("dist/server/assets");
         if (fs.existsSync(assetsDir)) {
           const files = fs.readdirSync(assetsDir);
@@ -633,9 +294,7 @@ async function createServer() {
           }
         }
       }
-    } catch (_) {
-      // keep default serverEntryFile if lookup fails
-    }
+    } catch (_) {}
 
     const mod = await import(pathToFileURL(serverEntryFile).href);
     render = mod.render;
@@ -647,7 +306,6 @@ async function createServer() {
         immutable: true,
       })
     );
-    // Serve static assets but do NOT serve index.html so SSR can inject HTML
     app.use(
       express.static(resolve("dist/client"), {
         maxAge: "1y",
@@ -666,9 +324,8 @@ async function createServer() {
   app.use(async (req, res, next) => {
     try {
       const url = req.originalUrl;
-      const hostname = req.hostname; // Extract hostname from request
+      const hostname = req.hostname;
 
-      // Serve cached SSR HTML for GET HTML requests in production
       const accept = req.headers.accept || "";
       if (isProd && req.method === "GET" && accept.includes("text/html")) {
         const cacheKey = `${hostname}|${url}`;
@@ -691,7 +348,6 @@ async function createServer() {
         render = devRender;
       }
 
-      // Pass hostname to the render function
       const rendered = await render(url, hostname);
       const appHtml =
         typeof rendered === "string" ? rendered : rendered.html || "";
@@ -713,7 +369,6 @@ async function createServer() {
           }
         });
       }
-      // Get state from render()
       const preloadedState = rendered.state || {};
       const stateScript = `<script>
   window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
@@ -722,11 +377,9 @@ async function createServer() {
   )};
 </script>`;
 
-      // In production, strip dev-only tags and inject built client entry from manifest
       let processedTpl = tpl;
       let clientScripts = "";
       if (isProd) {
-        // Remove dev-only css and module scripts in built template if present
         processedTpl = processedTpl
           .replace(/<link[^>]+href="\/src\/index\.css"[^>]*>\s*/g, "")
           .replace(/<link[^>]+href="\/src\/App\.css"[^>]*>\s*/g, "")
@@ -747,7 +400,6 @@ async function createServer() {
             ""
           );
 
-        // Add built client entry tags based on manifest
         const entries = Object.values(manifest).filter(
           (e) =>
             e &&
@@ -765,7 +417,6 @@ async function createServer() {
         .replace("<!--css-outlet-->", `${headContent}\n${cssInline}`)
         .replace("</body>", `${stateScript}\n${clientScripts}</body>`);
 
-      // Store SSR HTML in cache (production only)
       if (isProd) {
         const cacheKey = `${hostname}|${url}`;
         ssrCache.set(cacheKey, html);

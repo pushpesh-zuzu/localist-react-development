@@ -50,7 +50,6 @@ const ViewProfiles = () => {
   const { reviewProfileData, viewProfileData } = useSelector(
     (state) => state.leadSetting
   );
-  console.log(reviewProfileData, "setReviewProfile");
 
   let profileData = {};
 
@@ -60,17 +59,6 @@ const ViewProfiles = () => {
     profileData = reviewProfileData;
   }
 
-  console.log("review test");
-
-  const serviceCount = profileData?.services?.filter(
-    (service) => service?.user_services?.name
-  );
-
-  const expandRadiusLoader = useSelector(
-    (state) => state?.leadSetting?.expandRadiusLoader
-  );
-
-  console.log(profileData?.business_profile_name, "profileDataprofileData");
   useEffect(() => {
     return () => {
       dispatch(setViewProfileData({}));
@@ -164,18 +152,6 @@ const ViewProfiles = () => {
         behavior: "smooth",
       });
     }
-
-    // if (targetRef.current) {
-    //   const targetPosition =
-    //     targetRef.current.getBoundingClientRect().top + window.scrollY;
-
-    //   const OFFSET = 140; // adjust for sticky header if needed
-
-    //   window.scrollTo({
-    //     top: targetPosition - OFFSET,
-    //     behavior: "smooth",
-    //   });
-    // }
   };
 
   useEffect(() => {
@@ -232,7 +208,7 @@ const ViewProfiles = () => {
     } else if (basePath === "review") {
       dispatch(ReviewProfile({ profile_uuid: profileId }));
     }
-  }, [dispatch, profileId, requestId, userToken, registerData]);
+  }, [dispatch, registerData]);
 
   const handleRequestOpen = () => {
     setCustomerModal(true);
@@ -274,21 +250,6 @@ const ViewProfiles = () => {
     const visible = name.charAt(0);
     return `${visible}***@${domain}`;
   };
-  // if (expandRadiusLoader === true) {
-  //   return (
-  //     <div
-  //       style={{
-  //         display: "flex",
-  //         justifyContent: "center",
-  //         height: "100vh",
-  //         alignItems: "center",
-  //         width: "100%",
-  //       }}
-  //     >
-  //       <Spin />
-  //     </div>
-  //   );
-  // }
 
   const availableTabs = [];
 
@@ -296,29 +257,39 @@ const ViewProfiles = () => {
   if (profileData?.services?.length > 0) availableTabs.push("Services");
 
   availableTabs.push("Reviews");
-  if (profileData?.accreditations?.length > 0)
+  if (
+    profileData?.accreditations?.length > 0 &&
+    profileData?.details?.has_accreditations !== 1
+  )
     availableTabs.push("Accreditations");
   if (profileData?.qa?.length > 0) availableTabs.push("Q+A's");
   if (profileData?.photos?.company_photos?.length > 0)
     availableTabs.push("Photos");
-  if (profileData?.details?.company_youtube_link?.length > 0)
+  if (
+    profileData?.details?.company_youtube_link?.length > 0 &&
+    profileData?.details?.has_youtube_link !== 1
+  )
     availableTabs.push("Videos");
   if (
-    profileData?.details?.extra_links?.length > 0 ||
+    (profileData?.details?.extra_links?.length > 0 &&
+      profileData?.details?.has_extra_links !== 1) ||
     (profileData?.details?.fb_link &&
-      profileData?.details?.fb_link?.length > 0) ||
+      profileData?.details?.fb_link?.length > 0 &&
+      profileData?.details?.has_fb_link !== 1) ||
     (profileData?.details?.insta_link &&
-      profileData?.details?.insta_link?.length > 0) ||
+      profileData?.details?.insta_link?.length > 0 &&
+      profileData?.details?.has_insta_link !== 1) ||
     (profileData?.details?.linkedin_link &&
-      profileData?.details?.linkedin_link?.length > 0) ||
+      profileData?.details?.linkedin_link?.length > 0 &&
+      profileData?.details?.has_linkedin_link !== 1) ||
     (profileData?.details?.tiktok_link &&
-      profileData?.details?.tiktok_link?.length > 0) ||
+      profileData?.details?.tiktok_link?.length > 0 &&
+      profileData?.details?.has_tiktok_link !== 1) ||
     (profileData?.details?.twitter_link &&
-      profileData?.details?.twitter_link?.length > 0)
+      profileData?.details?.twitter_link?.length > 0 &&
+      profileData?.details?.has_twitter_link !== 1)
   )
     availableTabs.push("Links");
-
-  console.log(profileData, "profileData?.links");
 
   return (
     <>

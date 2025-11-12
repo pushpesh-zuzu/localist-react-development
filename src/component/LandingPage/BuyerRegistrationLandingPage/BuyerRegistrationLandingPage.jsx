@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./buyerregistrationlandingpage.module.css";
 import QuestionModal from "../../common/questionModal/QuestionModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,6 @@ import {
   questionAnswerData,
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
-// import NameMatch from "./NameMatch/NameMatch";
 import ViewYourMatches from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/DescribeYourRequest/DescribeYourRequest";
 import WhatServiceYouNeed from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
@@ -23,7 +22,6 @@ const BuyerRegistrationLandingPage = ({
   serviceId = 52,
   serviceName,
   postcode,
-  city,
   postalCodeValidate,
   cancelHeading,
   cancelPara,
@@ -35,9 +33,7 @@ const BuyerRegistrationLandingPage = ({
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const questionModalRef = useRef();
-
   const [getServiceState, setGetServiceState] = useState(null);
-
   const [resetEmailFormTrigger, setResetEmailFormTrigger] = useState(false);
   const [resetServiceFormTrigger, setResetServiceFormTrigger] = useState(false);
   const [resetQaFormTrigger, setResetQasFormTrigger] = useState(false);
@@ -49,10 +45,7 @@ const BuyerRegistrationLandingPage = ({
     useSelector((state) => state.buyer);
 
   const { userToken, adminToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader, authToken } = useSelector(
-    (state) => state.findJobs
-  );
-  // console.log(registerData, "registerData");
+  const { authToken } = useSelector((state) => state.findJobs);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
@@ -77,15 +70,9 @@ const BuyerRegistrationLandingPage = ({
     setGetServiceState(service);
   };
 
-  // useEffect(() => {
-  //   const initialStep = isAdminOrRemembered ? 2 : isStartWithQuestionModal ? 0 : 1;
-  //   dispatch(setBuyerStep(initialStep));
-  // }, [dispatch, isAdminOrRemembered]);
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
-      // Local storage clear karo
       localStorage.removeItem("pendingBuyerModal");
     } else {
       const initialStep = isAdminOrRemembered
@@ -122,7 +109,6 @@ const BuyerRegistrationLandingPage = ({
 
   useEffect(() => {
     if (buyerStep === 2) {
-      // Reset QuestionModal when it opens
       questionModalRef.current?.resetQuestions?.();
     }
   }, [buyerStep]);
@@ -144,14 +130,6 @@ const BuyerRegistrationLandingPage = ({
     <div className={styles.modal}>
       {!isStartWithQuestionModal ? (
         <div className={styles.modalContent}>
-          {/* {buyerStep === 0 && (
-            <WelcomeEmailModal
-              nextStep={nextStep}
-              onClose={handleClose}
-              setShowConfirmModal={setShowConfirmModal}
-              resetTrigger={resetEmailFormTrigger}
-            />
-          )} */}
           {buyerStep === 1 && (
             <EmailMatch
               nextStep={nextStep}
@@ -203,8 +181,6 @@ const BuyerRegistrationLandingPage = ({
               open={true}
               isThankuPageOnlyShow={true}
               setReEnterMobile={setReEnterMobile}
-              // setShowConfirmModal={setShowConfirmModal}
-              // onClose={handleClose}
             />
           )}
           {reEnterMobile === 1 && (
@@ -228,7 +204,6 @@ const BuyerRegistrationLandingPage = ({
               previousStep={previousStep}
               onClose={handleClose}
               formData={buyerRequest}
-              // setShowConfirmModal={setShowConfirmModal}
             />
           )}
           {buyerStep === 7 && (
@@ -246,71 +221,6 @@ const BuyerRegistrationLandingPage = ({
               onClose={handleClose}
             />
           )}
-
-          {/* {buyerStep === 1 && (
-          <WhatServiceYouNeed
-            nextStep={nextStep}
-            formData={buyerRequest}
-            serviceId={serviceId}
-            serviceName={serviceName}
-            onClose={handleClose}
-            pincodes={postcode}
-          />
-        )}
-
-        {buyerStep === 2 && (
-          <QuestionModal
-            questions={questionanswerData}
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-            loading={questionLoader}
-            formData={buyerRequest}
-          />
-        )}
-
-        {buyerStep === 3 && (
-          <EmailMatch
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-            formData={buyerRequest}
-            setEmails={setEmails}
-          />
-        )}
-
-        {/* {buyerStep === 4 && (
-          <NameMatch
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-            formData={buyerRequest}
-            email={email}
-            // loading={registerLoader}
-          />
-        )} 
-
-        {buyerStep === 4 && (
-          <ViewYourMatches
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-            formData={buyerRequest}
-          />
-        )}
-
-        {buyerStep === 5 && (
-          <DescribeYourRequest nextStep={nextStep} onClose={handleClose} />
-        )}
-
-        {buyerStep === 6 && (
-          <BidsList
-            nextStep={nextStep}
-            previousStep={previousStep}
-            onClose={handleClose}
-          />
-        )}
-      </div> */}
 
           {showConfirmModal && (
             <ConfirmationModal
@@ -418,7 +328,6 @@ const BuyerRegistrationLandingPage = ({
               previousStep={previousStep}
               onClose={handleClose}
               formData={buyerRequest}
-              // setShowConfirmModal={setShowConfirmModal}
             />
           )}
           {buyerStep === 7 && (

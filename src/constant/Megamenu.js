@@ -216,7 +216,6 @@ export const allSubMenuData = [
 ];
 
 export const locationData = [
-  // "Cheshire",
   "Warrington",
   "Chester",
   "Manchester",
@@ -305,7 +304,7 @@ export const megaMenu = [
       },
     ],
   },
-   {
+  {
     name: "Lessons & Training",
     path: "lessons-training",
     icon: lessonsIcon,
@@ -324,7 +323,6 @@ export const megaMenu = [
       },
     ],
   },
-  ,
   //  {
   //   name: "Business",
   //   path: "Business",
@@ -417,24 +415,9 @@ export const megaMenu = [
   //     },
   //   ],
   // },
+  ,
 ];
 
-// export const getChildRoute = (subPath, child) => {
-//   switch (child) {
-//     case "Fence Installers in Warrington":
-//       return `${subPath}/cheshire/warrington`;
-//     case "Fence Installers in Chester":
-//       return `${subPath}/cheshire/chester`;
-//     case "Fence Installers in Manchester":
-//       return `${subPath}/greater-manchester/manchester`;
-//     case "Fence Installers in Bolton":
-//       return `${subPath}/greater-manchester/bolton`;
-//     case "Fence Installers in Liverpool":
-//       return `${subPath}/merseyside/liverpool`;
-//     default:
-//       return "";
-//   }
-// };
 export const getChildRoute = (subPath, child) => {
   switch (child) {
     case "Fence Installers in Warrington":

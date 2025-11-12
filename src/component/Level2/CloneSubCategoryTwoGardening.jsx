@@ -11,7 +11,7 @@ import { AllServicesData } from "../../constant/CloneCategory";
 import LandscapingGardeningBanner from "../../assets/Images/servicesLevels/banner/landscapingandgardeningBanner.jpg";
 import Landscaping from "../../assets/Images/servicesLevels/Landscaping.jpg";
 import ArtificialGrass from "../../assets/Images/servicesLevels/ArtificialGrass.jpg";
-//  this is level 2 page
+
 const popularFilterLevelTwo = [
   {
     builders: [
@@ -37,16 +37,15 @@ const popularFilterLevelTwo = [
       {
         id: 1,
         title: "Landscaping",
-        path:'landscaping',
+        path: "landscaping",
         image: Landscaping,
       },
       {
         id: 2,
-        path:'artificial-grass-installation',
+        path: "artificial-grass-installation",
         title: "Artificial Grass Installation",
         image: ArtificialGrass,
       },
-    
     ],
   },
 ];
@@ -87,8 +86,7 @@ const breadcrumbHierarchy = {
 const CloneSubCategoryTwoGardening = ({ accountHeader, subHeader }) => {
   const location = useLocation();
   const fullPath = location.pathname;
-  const endpoint = fullPath.split("/").filter(Boolean).pop(); // e.g., 'accountants'
-  console.log(endpoint, "endpointendpointendpoint");
+  const endpoint = fullPath.split("/").filter(Boolean).pop();
   const breadcrumbItems = breadcrumbHierarchy[endpoint] || [];
 
   const allowedServices = endpointServiceMap[endpoint] || [];

@@ -42,7 +42,6 @@ const initialState = {
     name: "",
     email: "",
     company_reg_number: "",
-    // password: "",
     phone: "",
     company_name: "",
     company_size: null,
@@ -52,13 +51,10 @@ const initialState = {
     new_jobs: null,
     social_media: null,
     address: "",
-    // state: "",
     city: "",
     country: "",
     apartment: "",
     zipcode: "",
-    // is_zipcode: 1,
-    // suite: "",
     service_id: [],
     auto_bid: 1,
     miles2: "30",
@@ -81,7 +77,6 @@ export const getPopularServiceList = () => {
         dispatch(setPopularList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setPopularServiceListLoader(false));
     }
@@ -100,7 +95,6 @@ export const getPopularServiceListUser = (ServiceData) => {
         dispatch(setPopularList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setPopularServiceListLoader(false));
     }
@@ -120,7 +114,6 @@ export const searchService = (ServiceData) => {
         dispatch(setService(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
@@ -139,7 +132,6 @@ export const searchAvailableService = (ServiceData) => {
         dispatch(setAvailableService(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
@@ -149,13 +141,11 @@ export const registerUserData = (registerData) => {
   return async (dispatch) => {
     dispatch(setRegisterLoader(true));
     try {
-      // const response = true;
       const response = await axiosInstance.post(
         `users/registration`,
         registerData
       );
 
-      console.log(response, "user");
       if (response) {
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
@@ -199,7 +189,6 @@ export const getCategoriesList = () => {
         dispatch(setCategoriesList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setCategoriesListLoader(false));
     }
@@ -215,7 +204,6 @@ export const getAllServiceList = () => {
         dispatch(setAllServiceList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setPopularServiceListLoader(false));
     }
@@ -231,7 +219,7 @@ export const pendingLeadData = (pendingData) => {
         pendingData,
         {
           headers: {
-            Authorization: null, // or pass a valid token if needed
+            Authorization: null,
           },
         }
       );
@@ -240,9 +228,6 @@ export const pendingLeadData = (pendingData) => {
         dispatch(setPendingLeadData(response.data.data));
       }
     } catch (error) {
-      // Optional: handle error properly
-      // dispatch(setAuthError(error?.response?.data?.message));
-      // console.error("Error fetching pending leads:", error);
     } finally {
       dispatch(setPendingLeadLoader(false));
     }
@@ -256,11 +241,9 @@ export const checkEmailIdApi = (emailData) => {
       const response = await axiosInstance.post(`check/email-id`, emailData);
 
       if (response) {
-        // dispatch(setService(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
       showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setsearchServiceLoader(false));
@@ -277,19 +260,12 @@ export const checkCompanyNameApi = (companyData, isapi = false) => {
       );
 
       if (response && response?.success == true) {
-        // dispatch(setService(response?.data?.data));
-        console.log(response?.data?.success, "response");
         dispatch(setErrorCheckComanyName(response?.data?.success));
         return response.data;
       }
     } catch (error) {
       const errorData = error?.response?.data?.message;
       dispatch(setErrorCheckComanyName(error?.response?.data));
-      console.log(
-        error?.response?.data.message?.company_reg_number[0],
-        "errorData"
-      );
-      // showToast("error", "Your company is already registered.");
       showToast("error", error?.response?.data.message?.company_reg_number[0]);
       if (errorData && typeof errorData === "object" && !isapi) {
         Object.values(errorData).forEach((messages) => {
@@ -326,8 +302,6 @@ export const checkCompanyNameWithoutRegApi = (companyData) => {
       );
 
       if (response) {
-        // dispatch(setService(response?.data?.data));
-
         return response.data;
       }
     } catch (error) {
@@ -365,7 +339,6 @@ export const checkPhoneNumberApi = (phoneData) => {
       );
 
       if (response) {
-        // dispatch(setService(response?.data?.data));
         return response.data;
       }
     } catch (error) {
@@ -402,11 +375,9 @@ export const checkAddressApi = (addressData) => {
       );
 
       if (response) {
-        // dispatch(setService(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
       showToast("error", error?.response?.data?.message);
     } finally {
       dispatch(setsearchServiceLoader(false));
@@ -517,7 +488,6 @@ const findJobSlice = createSlice({
         state.authToken = state.registerToken;
       } else {
         state.authToken = action.payload;
-        // safeLocalStorage.setItem("registerDataToken", JSON.stringify(action.payload))
       }
     },
     clearAuthToken(state) {

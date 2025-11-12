@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./MultiStepDescribeYourRequest.module.css";
 import PlusIcon from "../../../../assets/Icons/PlusIcon.svg";
 import CheckIcon from "../../../../assets/Icons/CheckIcon.svg";
@@ -101,13 +101,6 @@ const MultiStepDescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
         <Spin />
       ) : (
         <>
-          {/* <div
-            className={styles.closeButton}
-            onClick={handleCloseClick}
-            disabled={addDetailLoader}
-          >
-            &times;
-          </div> */}
           <div className={styles.successMessage}>
             <img src={CheckIcon} alt="Success" className={styles.checkIcon} />
             <span>Your request has been submitted</span>

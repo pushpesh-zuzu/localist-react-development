@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorDesktop = () => {
-  const dispatch = useDispatch();
   const userToken = useSelector((state) => state.auth.userToken);
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
@@ -32,7 +31,6 @@ const NavigationDetectorDesktop = () => {
   useEffect(() => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
-
 
   // Prevent multiple API calls
   const hasSent = useRef(false);

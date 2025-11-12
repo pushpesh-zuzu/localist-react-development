@@ -1,29 +1,17 @@
-import React from "react";
 import styles from "./LeadViewDetails.module.css";
-
 import VerifiedPhoneIcon from "../../../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../../../assets/Images/Leads/FrequentUserIcon.svg";
-// import UrgentIcon from "../../../../assets/Images/Leads/UrgentIcon.svg";
-// import IntentIcon from "../../../../assets/Images/Leads/IntentIcon.svg";
 import DotIcon from "../../../../assets/Images/Leads/DotIcon.svg";
 import UpdateIcon from "../../../../assets/Images/Leads/UpdateIcon.svg";
 import LeadMap from "../../../myResponses/LeadMap/LeadMap";
-import { useNavigate } from "react-router-dom";
 
 const LeadViewDetails = ({ leadRequestDatas }) => {
-
   const leadRequest = leadRequestDatas || {};
-const navigate = useNavigate()
-  const handleNavigate =()=>{
-    navigate("/settings/leads/my-services")
-  }
 
-  console.log(leadRequest, "leadRequestDatas");
   return (
     <div className={styles.maincontainer}>
       <div className={styles.viewDetailsBox}>
-        {/* Left: Q&A Section */}
         <div className={styles.leftColumn}>
           {leadRequest && leadRequest.questions ? (
             <div className={styles.questionBlock}>
@@ -42,48 +30,9 @@ const navigate = useNavigate()
             <p>No saved leads available.</p>
           )}
         </div>
-        {/* Right: Map and Highlights */}
         <div className={styles.rightColumn}>
           <div className={styles.highlights}>
             <p className={styles.highlightsTitle}>Highlights:</p>
-
-            {/* <div className={styles.badges}>
-              {leadRequest?.is_phone_verified == 1 && (
-                <span className={styles.verified}>
-                  <img src={VerifiedPhoneIcon} alt="" />
-                  Verified Phone
-                </span>
-              )}
-
-              {leadRequest?.has_additional_details == 1 && (
-                <span className={styles.additional}>
-                  {" "}
-                  <img src={AdditionalDetailsIcon} alt="" />
-                  Additional details
-                </span>
-              )}
-              {leadRequest?.is_frequent_user == 1 && (
-                <span className={styles.frequent}>
-                  {" "}
-                  <img src={FrequentUserIcon} alt="" />
-                  Frequent user
-                </span>
-              )}
-              {leadRequest?.is_urgent == 1 && (
-                <span className={styles.urgent}>
-                  {" "}
-                  <img src={FrequentUserIcon} alt="" />
-                  Urgent
-                </span>
-              )}
-              {leadRequest?.is_high_hiring == 1 && (
-                <span className={styles.intent}>
-                  {" "}
-                  <img src={FrequentUserIcon} alt="" />
-                  High hiring intent
-                </span>
-              )}
-            </div> */}
 
             <div className={styles.badges}>
               {leadRequest?.is_phone_verified == 1 && (
@@ -136,7 +85,10 @@ const navigate = useNavigate()
 
             <div className={styles.updateContainer}>
               <img src={UpdateIcon} alt="" />
-              <a href="/settings/leads/my-services" className={styles.updateLink}>
+              <a
+                href="/settings/leads/my-services"
+                className={styles.updateLink}
+              >
                 {" "}
                 Update lead settings
               </a>

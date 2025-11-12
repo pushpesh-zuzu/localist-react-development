@@ -38,7 +38,6 @@ const SearchPostAndBanner = ({
     setIsStartWithQuestionModal(false);
   };
 
-  // Auto open modal after delay
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowModal(true);
@@ -47,7 +46,6 @@ const SearchPostAndBanner = ({
     return () => clearTimeout(timeoutId);
   }, []);
 
-  // Check pending modal in localStorage
   useEffect(() => {
     const checkPendingModal = () => {
       const pendingModal = JSON.parse(
@@ -68,7 +66,6 @@ const SearchPostAndBanner = ({
     checkPendingModal();
   }, [dispatch]);
 
-  // ✅ handle search + city API check
   const handleContinue = async () => {
     if (!pincode.trim()) {
       showToast("error", "Please enter a valid postcode or town.");
@@ -81,39 +78,30 @@ const SearchPostAndBanner = ({
     }
 
     try {
-      // ✅ call the getCityName API
-      const response =
-        (await dispatch(getCityName({ postcode: pincode })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: pincode })));
+      const response = await dispatch(getCityName({ postcode: pincode }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      // agar API response sahi aata hai
-      if (response?.data?.city) {
-        setCity(response.data.city);
-        console.log(response, "rrrrr");
-        dispatch(setcitySerach(response.data.city));
+      if (newResponse?.data?.city) {
+        setCity(newResponse.data.city);
+        console.log(newResponse, "rrrrr");
+        dispatch(setcitySerach(newResponse.data.city));
         setbuyerRequestData({
           ...buyerRequest,
-          postcode: response.data.postcode,
-          city: response.data.city,
+          postcode: newResponse.data.postcode,
+          city: newResponse.data.city,
         });
         setShowModal(true);
-        // dispatch(
-        //   setbuyerRequestData({
-        //     postcode: pincode,
-        //     city: response.data.city,
-        //   })
-        // );
       } else {
         showToast("error", "Please enter a valid postcode!");
         return;
       }
     } catch (error) {
-      // API fail hone par flow yahin ruk jaayega
       showToast("error", "Please enter a valid postcode!");
       console.error("City fetch failed:", error);
       return;
     }
   };
+
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
   // useEffect(() => {

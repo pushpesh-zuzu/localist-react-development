@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ManualBidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
 import QuickToRespond from "../../../../../assets/Images/QuickToRespond.svg";
 import starImg from "../../../../../assets/Icons/MyResponse/StarImg.svg";
-import grayStar from "../../../../../assets/Icons/MyResponse/grayStar.svg";
 import { getAutoBidData } from "../../../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spin } from "antd";
-import { BASE_IMAGE, DEFAULT_PROFILE_IMAGE } from "../../../../../utils";
+import { BASE_IMAGE } from "../../../../../utils";
 import ContactSuccessModal from "../../../../Leads/LeadLists/ContactSuccessModal";
 import { Helmet } from "react-helmet-async";
 import { Tabs } from "antd";
@@ -23,7 +22,6 @@ const ManualBidList = () => {
     (state) => state.leadSetting
   );
   const { userToken } = useSelector((state) => state.auth);
-  const { registerData } = useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const [isopen, setIsOpen] = useState(false);
 
@@ -99,7 +97,6 @@ const ManualBidList = () => {
         </div>
         <>
           {isMobile ? (
-            //  Mobile view → Ant Design Tabs
             <Tabs
               activeKey={activeTab}
               onChange={(key) => {
@@ -112,12 +109,8 @@ const ManualBidList = () => {
               tabBarGutter={24}
               className={styles.mobileTabs}
             >
-              <TabPane tab="Your Matches" key="matches">
-                {/* Your Matches content here */}
-              </TabPane>
-              <TabPane tab="Replies" key="replies">
-                {/* Replies content here */}
-              </TabPane>
+              <TabPane tab="Your Matches" key="matches"></TabPane>
+              <TabPane tab="Replies" key="replies"></TabPane>
             </Tabs>
           ) : (
             <div className={styles.tabs}>
@@ -148,17 +141,6 @@ const ManualBidList = () => {
             {autoBidListData?.map((item) => (
               <div className={styles.card} key={item.id}>
                 <div className={styles.cardLeft}>
-                  {/* <div className={styles.imageWrapper}>
-                    <img
-                      src={
-                        item?.company_logo
-                          ? `${BASE_IMAGE}/users/${item?.company_logo}`
-                          : DEFAULT_PROFILE_IMAGE
-                      }
-                      alt="Profile"
-                      className={styles.image}
-                    />
-                  </div> */}
                   <div className={styles.imageWrapper}>
                     {item?.company_logo ? (
                       <img
@@ -212,14 +194,6 @@ const ManualBidList = () => {
                           {(() => {
                             const rating = item?.avg_rating || 0;
 
-                            // if (rating === 0) {
-                            //   return (
-                            //     <span className={styles.noReviews}>
-                            //       No Reviews
-                            //     </span>
-                            //   );
-                            // }
-
                             return (
                               <>
                                 <span className={styles.stars}>
@@ -266,21 +240,9 @@ const ManualBidList = () => {
                     </div>
 
                     <div className={styles.mobileImageWrapper}>
-                      {/* <div className={styles.imageWrapper}>
-                        <img
-                          src={
-                            item?.profile_image
-                              ? `${BASE_IMAGE}/users/${item?.profile_image}`
-                              : DEFAULT_PROFILE_IMAGE
-                          }
-                          alt="Profile"
-                          className={styles.images}
-                        />
-                      </div> */}
                       <div className={styles.imageWrapper}>
                         {item?.company_logo ? (
                           <img
-                            // src={`${BASE_IMAGE}/users/${item?.company_logo}`}
                             alt="Profile"
                             style={{
                               width: "100px",
@@ -333,14 +295,6 @@ const ManualBidList = () => {
                             {(() => {
                               const rating = item?.avg_rating || 0;
 
-                              // if (rating === 0) {
-                              //   return (
-                              //     <span className={styles.noReviews}>
-                              //       No Reviews
-                              //     </span>
-                              //   );
-                              // }
-
                               return (
                                 <>
                                   <span className={styles.stars}>
@@ -350,7 +304,7 @@ const ManualBidList = () => {
                                           <span key={index}>
                                             <img src={starImg} alt="..." />
                                           </span>
-                                        ); // Full star
+                                        );
                                       } else if (rating >= index + 0.5) {
                                         return <span key={index}>★</span>;
                                       } else {
@@ -361,7 +315,7 @@ const ManualBidList = () => {
                                           >
                                             ★
                                           </span>
-                                        ); // Empty star
+                                        );
                                       }
                                     })}
                                   </span>

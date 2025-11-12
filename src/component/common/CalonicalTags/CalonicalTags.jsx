@@ -35,10 +35,8 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
   };
   return (
     <Helmet>
-      {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
 
-      {/* OG URL */}
       <meta property="og:url" content={canonicalUrl} />
 
       <meta property="og:type" content="website" />

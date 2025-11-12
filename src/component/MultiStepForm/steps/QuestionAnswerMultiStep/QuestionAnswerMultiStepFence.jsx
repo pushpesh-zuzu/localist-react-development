@@ -15,7 +15,7 @@ const QuestionAnswerMultiStepFence = ({
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
   const firstStepProgress = (2 / 3) * 100; // 66.66%
-  const remainingProgressPerStep = (100 - firstStepProgress) / 3; // baki 2 steps ke liye ≈16.665%
+  const remainingProgressPerStep = (100 - firstStepProgress) / 3;
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ViewProfile.module.css";
 import { showToast } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ const SubmitReviewModal = ({
   reviewsData,
   onReviewSubmit,
   reviewProfileData,
+  setCallInitialApi,
 }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
@@ -33,10 +34,8 @@ const SubmitReviewModal = ({
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    // review: "",
     rating: "",
   });
-  console.log(reviewProfileData, "reviewProfileData");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -61,33 +60,9 @@ const SubmitReviewModal = ({
     }));
   };
 
-  // const handleSubmit = () => {
-  //     const { name, email, review } = formData;
-  //     const newErrors = {
-  //         name: !name.trim() ? "Name is required." : "",
-  //         email: !email.trim() ? "Email is required." : "",
-  //         review: !review.trim() ? "Review is required." : "",
-  //         rating: !rating ? "Rating is required." : ""
-  //     };
-
-  //     setErrors(newErrors);
-  //     const hasErrors = Object.values(newErrors).some((err) => err !== "");
-  //     if (hasErrors) return;
-
-  //     const data = { ...formData, ratings: rating, uuid:UUIDs };
-
-  //     dispatch(addSubmitReviewApi(data)).then((result) => {
-  //         if (result) {
-  //             showToast("success", result?.message);
-  //             closeModal();
-  //             dispatch(getReviewListApi(UUIDs))
-  //             onReviewSubmit?.()
-  //         }
-  //     });
-  // };
   const handleSubmit = () => {
     const { name, email, review } = formData;
-
+    setCallInitialApi(true);
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const newErrors = {
@@ -97,7 +72,6 @@ const SubmitReviewModal = ({
         : !emailRegex.test(email)
         ? "Enter a valid email."
         : "",
-      // review: !review.trim() ? "Review is required." : "",SS
       rating: !rating ? "Rating is required." : "",
     };
 
@@ -187,7 +161,6 @@ const SubmitReviewModal = ({
               value={formData.review}
               onChange={handleChange}
             />
-            {/* {errors.review && <p className={styles.error}>{errors.review}</p>}SSS */}
           </div>
         </div>
         <div className={styles.buttonRow}>

@@ -18,8 +18,8 @@ const PostCodeSearchTreeSurgeon = ({
   prevStep,
   setBackButtonTriggered,
   setProgressPercentage,
-  titleHeading='landscaping specialists',
-  setSelectedOption
+  titleHeading = "landscaping specialists",
+  setSelectedOption,
 }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -34,23 +34,18 @@ const PostCodeSearchTreeSurgeon = ({
 
   const showToast = (type, content) => message[type](content);
 
-  // ✅ Initialize progress to 80% when component mounts
-  // useEffect(() => {
-  //   setProgressPercentage(75);
-  // }, [setProgressPercentage]);
-
-  // ✅ Handle postcode validation (onChange)
   const handlePincodeChange = async (e) => {
     const value = e.target.value.slice(0, 10);
     setPincode(value);
     setPostalCodeValidate(false);
+
     if (!value.trim()) {
       setError("");
       setCity("");
       setPostalCodeValidate(false);
       return;
     }
-    // Don’t call API for short inputs
+
     if (value.length < 3) {
       setPostalCodeValidate(false);
       return;
@@ -59,19 +54,17 @@ const PostCodeSearchTreeSurgeon = ({
     setIsCheckingPostcode(true);
 
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
-        const validPostcode = response.data.postcode;
+      if (newResponse?.data?.city) {
+        const validPostcode = newResponse.data.postcode;
         setPostalCodeValidate(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
+        setCity(newResponse.data.city);
+        dispatch(setcitySerach(newResponse.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
 
-        // ✅ Automatically call Next when validation succeeds
         handleNext(true);
       } else {
         setPostalCodeValidate(false);
@@ -85,19 +78,17 @@ const PostCodeSearchTreeSurgeon = ({
     }
   };
 
-  // ✅ Handle Next Button
   const handleNext = (isValid = postalCodeValidate) => {
     if (!isValid) {
       showToast("error", "Please enter a valid postcode.");
       return;
     }
 
-    // Set progress to 90% before moving to next step
-    setProgressPercentage((pre)=>pre+10);
+    setProgressPercentage((pre) => pre + 10);
     if (onNext) {
       onNext();
       setBackButtonTriggered(false);
-      setSelectedOption([])
+      setSelectedOption([]);
     }
   };
 
@@ -105,34 +96,31 @@ const PostCodeSearchTreeSurgeon = ({
     if (e.key === "Enter") handleNext();
   };
 
-  const handleBack = async() => {
+  const handleBack = async () => {
     prevStep();
     const lastQuestionsArray = buyerRequest.questions;
 
-    // Check if array is not empty  
-      const lastAnswer = lastQuestionsArray[lastQuestionsArray.length - 1].ans;
-      setSelectedOption([lastAnswer])
-       const updatedBuyerRequest = {
-          ...buyerRequest,
-          questions: [...buyerRequest.questions].slice(0, -1), // remove last
-        };
-    
-        dispatch(setbuyerRequestData(updatedBuyerRequest));
-    
-        // ✅ Send updated questions to API for progress calculation
-        try {
-          const formData = new FormData();
-          formData.append(
-            "questions",
-            JSON.stringify(updatedBuyerRequest.questions)
-          );
-          formData.append("service_id", updatedBuyerRequest.service_id);
-          const response = await dispatch(getProgressPercentageAPI(formData));
-            setProgressPercentage(response.percentage);
-          
-        } catch (err) {
-          console.error("Error updating progress on back:", err);
-        }
+    const lastAnswer = lastQuestionsArray[lastQuestionsArray.length - 1].ans;
+    setSelectedOption([lastAnswer]);
+    const updatedBuyerRequest = {
+      ...buyerRequest,
+      questions: [...buyerRequest.questions].slice(0, -1),
+    };
+
+    dispatch(setbuyerRequestData(updatedBuyerRequest));
+
+    try {
+      const formData = new FormData();
+      formData.append(
+        "questions",
+        JSON.stringify(updatedBuyerRequest.questions)
+      );
+      formData.append("service_id", updatedBuyerRequest.service_id);
+      const response = await dispatch(getProgressPercentageAPI(formData));
+      setProgressPercentage(response.percentage);
+    } catch (err) {
+      console.error("Error updating progress on back:", err);
+    }
   };
 
   return (

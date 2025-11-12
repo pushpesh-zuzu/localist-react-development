@@ -8,13 +8,11 @@ const SingleCategory = ({ category, onClick }) => {
   const { country, lang } = useUserGeo();
   return (
     <Link
-    to={`/${lang}/${country}/home`}
+      to={`/${lang}/${country}/home`}
       className={styles.singleCategory}
-      // onClick={() => onClick(category.name)}
-      style={{ cursor: "pointer !important",textDecoration:'none' }}
+      style={{ cursor: "pointer !important", textDecoration: "none" }}
     >
       <div className={styles.imageContainer}>
-        {/* <img src={category.icon} alt={category.name} className={styles.image} /> */}
         <img
           alt={category.name}
           src={

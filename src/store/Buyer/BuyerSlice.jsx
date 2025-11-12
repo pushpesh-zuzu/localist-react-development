@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../Api/axiosInstance";
-import axios from "axios";
 import {
   setAuthToken,
   setRegisterData,
   setRegisterToken,
 } from "../FindJobs/findJobSlice";
-import { setToken, setUserToken } from "../Auth/authSlice";
+import { setToken } from "../Auth/authSlice";
 import { showToast, updateLocalStorageValue } from "../../utils";
 import { safeLocalStorage } from "../../utils/localStorage";
 
@@ -73,7 +72,6 @@ export const questionAnswerData = (questionData) => {
         dispatch(setQuestionAnswerData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setquestionLoader(false));
     }
@@ -123,21 +121,11 @@ export const createRequestData = (requestData) => {
       if (response) {
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
-        // dispatch(setQuestionAnswerData(response?.data?.data));
-        // console.log(response?.data?.data, "response for request id");
         dispatch(setRequestId(response?.data?.data?.request_id));
-        // dispatch(setRequestData(response?.data?.data))
-        // dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens))
-        // dispatch(setRegisterData(response?.data?.data))
-        // dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
-        // dispatch(setToken(response?.data?.data?.remember_tokens))
 
         return response.data;
-        // navigate("/buyers/create");
       }
     } catch (error) {
-      console.log(error, "error123");
-
       showToast("error", error?.message);
     } finally {
       dispatch(setCreateRequesLoader(false));
@@ -160,7 +148,6 @@ export const registerQuoteCustomer = (customerData) => {
       );
 
       if (response) {
-        // console.log(response, "response");
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
@@ -189,7 +176,6 @@ export const updateMobile = (phone) => {
       );
 
       if (response) {
-        // console.log(response, "response Update Phone");
         dispatch(setRequestUserId(response.data.data?.user_id));
         dispatch(setRequestUserPhone(response.data.data?.phone));
         return response.data;
@@ -211,7 +197,6 @@ export const updateProfileData = () => {
       const response = await axiosInstance.get(
         `customer/setting/get-profile-info`
       );
-      // console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
 
       if (response) {
         dispatch(setGetUploadImgData(response?.data?.data));
@@ -220,7 +205,6 @@ export const updateProfileData = () => {
           "profile_image",
           response?.data?.data?.[0]?.profile_image
         );
-        // console.log(response?.data?.data?.[0]?.profile_image, "profile_image");
         updateLocalStorageValue(
           "registerDataToken",
           "profile_image",
@@ -228,7 +212,6 @@ export const updateProfileData = () => {
         );
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setProfileLoader(false));
     }
@@ -253,7 +236,6 @@ export const updateProfileImageData = (profileImageData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setProfileImageLoader(false));
     }
@@ -272,7 +254,6 @@ export const updatePasswordData = (changeData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setChangePasswordLoader(false));
     }
@@ -291,7 +272,6 @@ export const updateUserIfoData = (userData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setChangeInfoLoader(false));
     }
@@ -312,10 +292,8 @@ export const addImageSubmittedData = (ImageData) => {
       );
 
       if (response) {
-        // dispatch(setQuestionAnswerData(response?.data?.data));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setSubmitImageLoader(false));
     }
@@ -324,7 +302,6 @@ export const addImageSubmittedData = (ImageData) => {
 
 export const textQualityData = (qualityData) => {
   return async (dispatch) => {
-    // dispatch(setChangePasswordLoader(true));
     try {
       const response = await axiosInstance.post(
         `customer/my-request/check-paragraph-quality`,
@@ -335,9 +312,7 @@ export const textQualityData = (qualityData) => {
         dispatch(setQualityData(response?.data?.data?.quality_score));
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
-      // dispatch(setChangePasswordLoader(false));
     }
   };
 };
@@ -352,7 +327,6 @@ export const getbuyerrequestList = () => {
         dispatch(setbuyerRequestList(response?.data?.data));
       }
     } catch (error) {
-      console.log("error", error?.response?.data?.message);
     } finally {
       dispatch(setbuyerrequestListLoader(false));
     }
@@ -370,20 +344,12 @@ export const addDetailsRequestData = (addDetailsData, navigate, requestId) => {
 
       if (response) {
         dispatch(getbuyerrequestList());
-        // dispatch(setBuyerStep(10));
-        // navigate(`/conversion-redirects/10`);
         navigate(`/conversion/${requestId}`);
-        // navigate(`/contact-us/10`);
-
-        // console.log("before settimeout");
-
         setTimeout(() => {
-          // console.log("after settimeout");
           return response.data;
         }, 5000);
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setAuthToken());
       dispatch(setAddDetailLoader(false));
@@ -404,7 +370,6 @@ export const getNotificationData = (NotificationData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setNotificationLoader(false));
     }
@@ -421,11 +386,9 @@ export const addNotificationData = (addNotificationData) => {
       );
 
       if (response) {
-        //  dispatch(setGetNotificationData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setAddNotificationLoader(false));
     }
@@ -434,27 +397,20 @@ export const addNotificationData = (addNotificationData) => {
 export const verifyPhoneNumberData = (verifyData) => {
   return async (dispatch) => {
     dispatch(setVerifyPhoneNumberLoader(true));
-    // console.log(verifyData, "verifyData");
     try {
       const response = await axiosInstance.post(
         `customer/verify-phone-number`,
         verifyData
       );
-      // console.log("verify number", response?.data?.data);
       if (response?.data?.success) {
-        // console.log("response1234", response);
-        // dispatch(setQuestionAnswerData(response?.data?.data));
-        // dispatch(setRequestId(response?.data?.data?.request_id));
         dispatch(setRequestData(response?.data?.data));
         dispatch(setCreateRequestToken(response?.data?.data?.remember_tokens));
         dispatch(setRegisterData(response?.data?.data));
         dispatch(setRegisterToken(response?.data?.data?.remember_tokens));
         dispatch(setToken(response?.data?.data?.remember_tokens));
-        //dispatch(setGetNotificationData(response?.data?.data));
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setVerifyPhoneNumberLoader(false));
     }
@@ -474,7 +430,6 @@ export const closeRequestData = (closeData) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setChangeInfoLoader(false));
     }
@@ -490,7 +445,6 @@ export const resendOtp = (data) => {
         return response.data;
       }
     } catch (error) {
-      //   dispatch(setAuthError(error?.response?.data?.message));
     } finally {
       dispatch(setResendOtpLoader(false));
     }
@@ -509,15 +463,14 @@ export const getCityName = (postcodeData) => {
       if (response) {
         dispatch(
           setbuyerRequestData({
-            city: response?.data?.data?.city, // city name
-            postcode: response?.data?.data?.postcode, // original postcode
+            city: response?.data?.data?.city,
+            postcode: response?.data?.data?.postcode,
           })
         );
         return response.data;
       }
     } catch (error) {
       console.error("Error getting city name:", error?.response?.data);
-      // showToast("error", error?.response?.data?.message);
       throw error;
     } finally {
       dispatch(setPostCodeLoader(false));

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./BuyerRegistration.module.css";
 import WhatServiceYouNeed from "./WhatServiceYouNeed/WhatServiceYouNeed";
 import QuestionModal from "../../../common/questionModal/QuestionModal";
@@ -7,7 +7,6 @@ import { setBuyerStep } from "../../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "./ViewYourMatches/ViewYourMatches";
 import DescribeYourRequest from "./DescribeYourRequest/DescribeYourRequest";
 import EmailMatch from "./EmailMatch/EmailMatch";
-import NameMatch from "./NameMatch/NameMatch";
 import BidsList from "./BidsList/BidsList";
 import ConfirmationModal from "../../../common/ConfirmationModal/ConfirmationModal";
 import OtpVerification from "./OtpVerification/OtpVerification";
@@ -40,14 +39,9 @@ const BuyerRegistration = ({
   const dispatch = useDispatch();
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
-  // const buyerStep = 7
-  // console.log(buyerStep, "buyerStep");
 
-  const { userToken, adminToken } = useSelector((state) => state.auth);
-  const { registerData, registerLoader, authToken } = useSelector(
-    (state) => state.findJobs
-  );
-  // console.log(registerData, "registerData");
+  const { userToken } = useSelector((state) => state.auth);
+  const { authToken } = useSelector((state) => state.findJobs);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
 
   const stepFlow = isAdminOrRemembered
@@ -69,21 +63,14 @@ const BuyerRegistration = ({
   };
 
   const getService = (service) => {
-    console.log(service, "service11");
     setGetServiceState(service);
   };
 
-  // useEffect(() => {
-  //   const initialStep = isAdminOrRemembered ? 2 : 1;
-  //   dispatch(setBuyerStep(initialStep));
-  // }, [dispatch, isAdminOrRemembered]);
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (pendingModal?.shouldOpen) {
-      console.log("Coming from OTP redirect");
       localStorage.removeItem("pendingBuyerModal");
     } else {
-      // Normal flow
       const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(initialStep));
     }
@@ -114,7 +101,6 @@ const BuyerRegistration = ({
 
   useEffect(() => {
     if (buyerStep === 2) {
-      // Reset QuestionModal when it opens
       questionModalRef.current?.resetQuestions?.();
     }
   }, [buyerStep]);
@@ -181,8 +167,6 @@ const BuyerRegistration = ({
             city={city}
             isThankuPageOnlyShow={true}
             setReEnterMobile={setReEnterMobile}
-            // setShowConfirmModal={setShowConfirmModal}
-            // onClose={handleClose}
           />
         )}
         {reEnterMobile === 1 && (
@@ -205,7 +189,6 @@ const BuyerRegistration = ({
             previousStep={previousStep}
             onClose={handleClose}
             formData={buyerRequest}
-            // setShowConfirmModal={setShowConfirmModal}
           />
         )}
         {buyerStep === 7 && (

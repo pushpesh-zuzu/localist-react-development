@@ -24,7 +24,7 @@ import location from "../../../assets/Images/HowItWorks/locationImg.svg";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 
-const SearchProfessionals = ({ nextStep }) => {
+const SearchProfessionals = ({ nextStep, popularList = [], popularLoader }) => {
   const [Input, setInput] = useState("");
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
@@ -37,7 +37,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const { popularList, service, searchServiceLoader } = useSelector(
+  const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
   const [selectedServiceId, setSelectedServiceId] = useState({
@@ -83,17 +83,17 @@ const SearchProfessionals = ({ nextStep }) => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      (!popularList || popularList.length === 0)
-    ) {
-      dispatch(getPopularServiceList());
-    }
-    return () => {
-      dispatch(setService([]));
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (
+  //     typeof window !== "undefined" &&
+  //     (!popularList || popularList.length === 0)
+  //   ) {
+  //     dispatch(getPopularServiceList());
+  //   }
+  //   return () => {
+  //     dispatch(setService([]));
+  //   };
+  // }, []);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -139,20 +139,16 @@ const SearchProfessionals = ({ nextStep }) => {
         }
       });
 
-      // ✅ Dispatch API call
       dispatch(registerQuoteCustomer(dataToSend)).then((result) => {
         if (result) {
-          console.log("Auto-saved data sent successfully after reload.");
-          // Clear after successful send
           localStorage.removeItem("unsentQuoteData");
         }
       });
     }
   }, [dispatch]);
 
-  // ✅ New: validate postcode with our API (onChange)
   const debounceTimer = useRef(null);
-  const lastInvalidPinRef = useRef(""); // store last invalid postcode
+  const lastInvalidPinRef = useRef("");
 
   const handlePostcodeChange = (e) => {
     const value = e.target.value.trim().slice(0, 10);
@@ -163,31 +159,31 @@ const SearchProfessionals = ({ nextStep }) => {
 
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
 
-    // ✅ Only start validation after 500ms of no typing
     debounceTimer.current = setTimeout(async () => {
       if (value.length < 3) return;
 
       setIsCheckingPostcode(true);
       try {
-        const response =
-          (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-          (await dispatch(getCityName({ postcode: value })));
+        const response = await dispatch(getCityName({ postcode: value }));
+        // ✅ safely unwrap if available
+        const newResponse = response?.unwrap
+          ? await response.unwrap()
+          : response;
 
-        if (response?.data?.city) {
+        if (newResponse?.data?.city) {
           setPostalCodeValidate(true);
-          setCity(response.data.city);
-          dispatch(setcitySerach(response.data.city));
+          setCity(newResponse.data.city);
+          dispatch(setcitySerach(newResponse.data.city));
           dispatch(
             setbuyerRequestData({
               postcode: value.trim().toUpperCase(),
-              city: response.data.city,
+              city: newResponse.data.city,
             })
           );
           setIsPostcodeSelected(true);
           setIsPincodeFromDropdown(true);
-          lastInvalidPinRef.current = ""; // reset invalid memory
+          lastInvalidPinRef.current = "";
         } else {
-          // ✅ Prevent repeated toast for same invalid postcode
           if (lastInvalidPinRef.current !== value) {
             showToast("error", "Please enter a valid postcode!");
             lastInvalidPinRef.current = value;
@@ -206,7 +202,6 @@ const SearchProfessionals = ({ nextStep }) => {
     }, 500);
   };
 
-  // ✅ Validation before continue (unchanged)
   const handleGetStarted = (requireValidationPin) => {
     if (!selectedService) {
       showToast("error", "Please select a service from the suggestions.");
@@ -224,13 +219,7 @@ const SearchProfessionals = ({ nextStep }) => {
     const { id, name } = selectedService;
     dispatch(questionAnswerData({ service_id: id }));
     setSelectedServiceId({ id, name });
-    // dispatch(
-    //   setbuyerRequestData({
-    //     postcode: pincode,
-    //     service_id: id || "",
-    //     city: city,
-    //   })
-    // );
+
     setShow(true);
   };
 
@@ -253,7 +242,7 @@ const SearchProfessionals = ({ nextStep }) => {
       setIsClientReady(true);
     }, 3000);
 
-    return () => clearTimeout(timer); // cleanup
+    return () => clearTimeout(timer);
   }, []);
   return (
     <div className={styles.searchContainer}>

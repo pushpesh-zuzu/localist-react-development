@@ -1,16 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import HowItWorks from "../component/category/howItWorks/CloneHowitWorks";
 import PopularCategories from "../component/category/popularCategories/ClonePopularCategories";
-// import AllServicesComponent from "../component/category/allServices/CloneAllServices";
-// import FindingBusinessProfessionals from "../component/category/findingBusinessProfessionals/CloneFindingBusinessProfessionals";
 import GetQuotes from "../component/common/getQuotes/GetQuotes";
-// import styles from "./clonecategory.module.css";
-import { useLocation, Link, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   HowItWorksData,
   PopularCategoriesData,
 } from "../constant/CloneCategory";
-// import { AllServicesData } from "../constant/CloneCategory";
 import BannerWithBreadCrum from "../component/category/ServicesHeroSection/BannerWithBreadCrum";
 import Home from "../assets/banners/Home.jpg";
 import AllServiceLevel1 from "../component/category/allServices/AllServiceLevel1";
@@ -88,7 +84,6 @@ const CloneCategory = ({ accountHeader }) => {
           ctaText={"Home & Garden Professionals"}
         />
         <PopularCategories data={filteredCategories} />
-        {/* <AllServicesComponent data={filteredAllServicesData} /> */}
         <AllServiceLevel1
           data={[
             {

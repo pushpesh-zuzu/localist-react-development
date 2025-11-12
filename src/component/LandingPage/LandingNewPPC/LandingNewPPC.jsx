@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
 import styles from "./LandingNewPPC.module.css";
 import BuyerRegistrationForLandscapingPPC from "../BuyerRegistrationForLandscapingPPC/BuyerRegistrationForLandscapingPPC";
-import logo from "../../../assets/Images/logo.svg";
 import VerfifiedIcon from "../../../assets/Icons/VerfifiedIcon.svg";
 import CheckRight from "../../../assets/Icons/CheckRight.svg";
 import AllUsers from "../../../assets/Icons/AllUsers.svg";
 import Icon from "../../../assets/Icons/Icon.png";
 import topBigArrow from "../../../assets/Icons/topBigArrow.png";
-
 import { Helmet } from "react-helmet-async";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import { useDispatch, useSelector } from "react-redux";

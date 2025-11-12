@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AccountDetails.module.css";
 import iIcon from "../../assets/Images/iIcon.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,14 +9,9 @@ import {
   sellerUpdateProfileApi,
 } from "../../store/MyProfile/myProfileSlice";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  EyeInvisibleOutlined,
-  EyeOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { showToast } from "../../utils";
-import { updatePasswordData } from "../../store/Buyer/BuyerSlice";
 import ChangePasswordModal from "./ChangePasswordModal";
 import blackArrow from "../../assets/Images/Leads/blackArrowRight.svg";
 import OtpModal from "./OtpModal";
@@ -81,7 +76,6 @@ const AccountDetails = () => {
       return;
     }
 
-    // ✅ Only send password
     const formDataToSend = new FormData();
     formDataToSend.append("password", password);
 
@@ -270,7 +264,6 @@ const AccountDetails = () => {
         </div>
       </div>
       {isModalOpen && (
-        // Inside your parent component's return:
         <ChangePasswordModal
           isOpen={isModalOpen}
           formData={formData}
@@ -281,7 +274,7 @@ const AccountDetails = () => {
           handleFormChange={handleFormChange}
           handleSavePassword={handleSavePassword}
           setIsModalOpen={setIsModalOpen}
-          loading={true} // or a loading state from Redux/local state
+          loading={true}
         />
       )}
 
