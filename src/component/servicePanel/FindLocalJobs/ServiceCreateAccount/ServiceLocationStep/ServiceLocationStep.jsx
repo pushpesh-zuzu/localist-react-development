@@ -48,15 +48,17 @@ const ServiceLocationStep = ({
 
   const fetchCityFromPostcode = async (postcode) => {
     if (!postcode || postcode.length < 3) return;
+
     setIsLoading(true);
+
     try {
-      const result =
-        (await dispatch(getCityName({ postcode: postcode })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: postcode })));
-      if (result.success) {
+      const response = await dispatch(getCityName({ postcode }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
+
+      if (newResponse?.success) {
         setIsValidPostCode(true);
-        const cityName = result.data?.city;
-        const postcodeFromApi = result.data?.postcode;
+        const cityName = newResponse.data?.city;
+        const postcodeFromApi = newResponse.data?.postcode;
 
         dispatch(
           setFormData({
@@ -75,17 +77,14 @@ const ServiceLocationStep = ({
             postcode2: postcodeFromApi,
           })
         );
+
         dispatch(setPostalCode({ postalcode: postcodeFromApi }));
-        dispatch(setCountry({ country: result.data?.country }));
+        dispatch(setCountry({ country: newResponse.data?.country }));
       }
     } catch (error) {
       console.error("Error fetching city:", error);
       setCity("");
-      dispatch(
-        setFormData({
-          validPostCode: false,
-        })
-      );
+      dispatch(setFormData({ validPostCode: false }));
       setIsValidPostCode(false);
       showToast("error", "No PIN code found! Please try again.");
     } finally {
@@ -142,7 +141,7 @@ const ServiceLocationStep = ({
                 <option value="2">2 miles</option>
                 <option value="5">5 miles</option>
                 <option value="10">10 miles</option>
-                <option value="30">30 miles</option>
+                <option value="20">20 miles</option>
                 <option value="50">50 miles</option>
                 <option value="100">100 miles</option>
               </select>
@@ -221,7 +220,11 @@ const ServiceLocationStep = ({
               <img src={iIcon} alt="" /> You can change your location at any
               time
             </p>
-            <button disabled={isLoading} className={styles.nextButton} onClick={validateAndProceed}>
+            <button
+              disabled={isLoading}
+              className={styles.nextButton}
+              onClick={validateAndProceed}
+            >
               Next
             </button>
           </div>

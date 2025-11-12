@@ -247,7 +247,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>220</span>
+                          <span className={styles.diagonal_price}>221</span>
                           {item?.no_of_leads} Credits
                         </span>
                         <h3
@@ -275,7 +275,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>220</span>
+                          <span className={styles.diagonal_price}>221</span>
                           {item?.no_of_leads} Credits
                         </span>
                       </div>

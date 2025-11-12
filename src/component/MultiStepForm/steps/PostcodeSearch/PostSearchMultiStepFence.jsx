@@ -38,11 +38,13 @@ const PostSearchMultiStepFence = ({
     const value = e.target.value.slice(0, 10);
     setPincode(value);
     setPostalCodeValidate(false);
+
     if (!value.trim()) {
       setError("");
       setPostalCodeValidate(false);
       return;
     }
+
     if (value.length < 3) {
       setPostalCodeValidate(false);
       return;
@@ -51,14 +53,13 @@ const PostSearchMultiStepFence = ({
     setIsCheckingPostcode(true);
 
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
-        const validPostcode = response.data.postcode;
+      if (newResponse?.data?.city) {
+        const validPostcode = newResponse.data.postcode;
         setPostalCodeValidate(true);
-        dispatch(setcitySerach(response.data.city));
+        dispatch(setcitySerach(newResponse.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
         handleNext(true);

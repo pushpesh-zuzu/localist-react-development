@@ -52,7 +52,7 @@ function AutoplayPlugin(slider) {
   slider.on("updated", start);
 }
 
-const PopularService = ({ closeModal }) => {
+const PopularService = ({ closeModal, popularList = [], popularLoader }) => {
   const [selectedServiceId, setSelectedServiceId] = useState({
     id: null,
     name: "",
@@ -65,7 +65,6 @@ const PopularService = ({ closeModal }) => {
   const [show, setShow] = useState(false);
   const [initialLoader, setInitialLoader] = useState(true);
   const dispatch = useDispatch();
-  const { popularList, popularLoader } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const handleOpen = (id, name) => {
     // setSelectedServiceId({ id, name });
@@ -81,9 +80,7 @@ const PopularService = ({ closeModal }) => {
     setShow(false);
     setSelectedServiceId({ id: null, name: "" });
   };
-  useEffect(() => {
-    dispatch(getPopularServiceList());
-  }, []);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (slider.current) {

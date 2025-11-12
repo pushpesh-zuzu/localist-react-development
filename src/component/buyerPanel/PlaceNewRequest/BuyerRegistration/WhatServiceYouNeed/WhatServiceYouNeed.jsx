@@ -68,7 +68,6 @@ const WhatServiceYouNeed = ({
   );
   const disableServiceField = !!nameValue;
 
-  // ✅ Prefill logic
   useEffect(() => {
     if (nameValue) {
       dispatch(searchService({ search: nameValue }));
@@ -95,7 +94,7 @@ const WhatServiceYouNeed = ({
     if (serviceName) {
       setInput(serviceName);
       setIsDropdownOpen(true);
-      dispatch(searchService({ search: serviceName })); // trigger API
+      dispatch(searchService({ search: serviceName }));
     }
 
     if (pincodes) {
@@ -111,7 +110,6 @@ const WhatServiceYouNeed = ({
     }
   }, [pincodes, postalCodeIsValidate]);
 
-  // ✅ Match service name if already known
   useEffect(() => {
     if (serviceName && service?.length > 0) {
       const match = service.find(
@@ -120,7 +118,7 @@ const WhatServiceYouNeed = ({
 
       if (match) {
         setSelectedService(match);
-        setIsDropdownOpen(false); // close dropdown after match
+        setIsDropdownOpen(false);
       } else {
         setSelectedService(null);
       }
@@ -138,7 +136,6 @@ const WhatServiceYouNeed = ({
     [dispatch]
   );
 
-  // ✅ API-based postcode validation (called both onChange and Continue)
   const validatePostcode = useCallback(
     async (value) => {
       if (!value) {
@@ -149,14 +146,15 @@ const WhatServiceYouNeed = ({
 
       setCheckingPostcode(true);
       try {
-        const response =
-          (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-          (await dispatch(getCityName({ postcode: value })));
+        const response = await dispatch(getCityName({ postcode: value }));
+        const newResponse = response?.unwrap
+          ? await response.unwrap()
+          : response;
 
-        if (response?.data?.city) {
+        if (newResponse?.data?.city) {
           setPostalCodeValidate(true);
-          setCity(response.data.city);
-          dispatch(setcitySerach(response.data.city));
+          setCity(newResponse.data.city);
+          dispatch(setcitySerach(newResponse.data.city));
           setErrors((prev) => ({ ...prev, pincode: "" }));
         } else {
           setPostalCodeValidate(false);
@@ -196,7 +194,6 @@ const WhatServiceYouNeed = ({
     setPincode(value);
   };
 
-  // ✅ Continue logic with final validation
   const handleContinue = useCallback(async () => {
     let newErrors = { service: "", pincode: "" };
 
@@ -208,14 +205,13 @@ const WhatServiceYouNeed = ({
 
     setLoading(true);
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: pincode })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: pincode })));
+      const response = await dispatch(getCityName({ postcode: pincode }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
+      if (newResponse?.data?.city) {
         setPostalCodeValidate(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
+        setCity(newResponse.data.city);
+        dispatch(setcitySerach(newResponse.data.city));
 
         dispatch(
           setbuyerRequestData({
@@ -230,7 +226,7 @@ const WhatServiceYouNeed = ({
         );
 
         nextStep();
-        selectedService && getService(selectedService);
+        if (selectedService) getService(selectedService);
       } else {
         showToast("error", "Please enter a valid postcode!");
       }
@@ -267,15 +263,15 @@ const WhatServiceYouNeed = ({
       onClose();
     }
   };
-useEffect(() => {
-  if (selectedService?.id) {
-    dispatch(
-      setbuyerRequestData({
-        service_id: selectedService.id || serviceId,
-      })
-    );
-  }
-}, [selectedService, dispatch]);
+  useEffect(() => {
+    if (selectedService?.id) {
+      dispatch(
+        setbuyerRequestData({
+          service_id: selectedService.id || serviceId,
+        })
+      );
+    }
+  }, [selectedService, dispatch]);
 
   return (
     <div className={styles.container}>

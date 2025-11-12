@@ -24,7 +24,7 @@ import location from "../../../assets/Images/HowItWorks/locationImg.svg";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 
-const SearchProfessionals = ({ nextStep }) => {
+const SearchProfessionals = ({ nextStep, popularList = [], popularLoader }) => {
   const [Input, setInput] = useState("");
   const [pincode, setPincode] = useState("");
   const [city, setCity] = useState("");
@@ -37,7 +37,7 @@ const SearchProfessionals = ({ nextStep }) => {
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
-  const { popularList, service, searchServiceLoader } = useSelector(
+  const { service, searchServiceLoader } = useSelector(
     (state) => state.findJobs
   );
   const [selectedServiceId, setSelectedServiceId] = useState({
@@ -83,17 +83,17 @@ const SearchProfessionals = ({ nextStep }) => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      (!popularList || popularList.length === 0)
-    ) {
-      dispatch(getPopularServiceList());
-    }
-    return () => {
-      dispatch(setService([]));
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (
+  //     typeof window !== "undefined" &&
+  //     (!popularList || popularList.length === 0)
+  //   ) {
+  //     dispatch(getPopularServiceList());
+  //   }
+  //   return () => {
+  //     dispatch(setService([]));
+  //   };
+  // }, []);
 
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
@@ -164,18 +164,20 @@ const SearchProfessionals = ({ nextStep }) => {
 
       setIsCheckingPostcode(true);
       try {
-        const response =
-          (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-          (await dispatch(getCityName({ postcode: value })));
+        const response = await dispatch(getCityName({ postcode: value }));
+        // ✅ safely unwrap if available
+        const newResponse = response?.unwrap
+          ? await response.unwrap()
+          : response;
 
-        if (response?.data?.city) {
+        if (newResponse?.data?.city) {
           setPostalCodeValidate(true);
-          setCity(response.data.city);
-          dispatch(setcitySerach(response.data.city));
+          setCity(newResponse.data.city);
+          dispatch(setcitySerach(newResponse.data.city));
           dispatch(
             setbuyerRequestData({
               postcode: value.trim().toUpperCase(),
-              city: response.data.city,
+              city: newResponse.data.city,
             })
           );
           setIsPostcodeSelected(true);
@@ -240,7 +242,7 @@ const SearchProfessionals = ({ nextStep }) => {
       setIsClientReady(true);
     }, 3000);
 
-    return () => clearTimeout(timer); // cleanup
+    return () => clearTimeout(timer);
   }, []);
   return (
     <div className={styles.searchContainer}>

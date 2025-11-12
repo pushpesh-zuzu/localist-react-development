@@ -31,8 +31,8 @@ const PostcodeSearch = ({
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const [error, setError] = useState("");
 
-  const firstStepProgress = (2 / 3) * 100; 
-  const remainingProgressPerStep = (100 - firstStepProgress) / 2; 
+  const firstStepProgress = (2 / 3) * 100;
+  const remainingProgressPerStep = (100 - firstStepProgress) / 2;
 
   const showToast = (type, content) => message[type](content);
 
@@ -54,15 +54,14 @@ const PostcodeSearch = ({
     setIsCheckingPostcode(true);
 
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
-        const validPostcode = response.data.postcode;
+      if (newResponse?.data?.city) {
+        const validPostcode = newResponse.data.postcode;
         setPostalCodeValidate(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
+        setCity(newResponse.data.city);
+        dispatch(setcitySerach(newResponse.data.city));
         dispatch(setbuyerRequestData({ postal_code: validPostcode }));
         setError("");
         handleNext(true);

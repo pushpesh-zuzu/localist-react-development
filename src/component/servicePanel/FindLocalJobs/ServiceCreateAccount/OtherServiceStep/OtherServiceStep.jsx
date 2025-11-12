@@ -299,7 +299,7 @@ const OtherServiceStep = ({
 
   const handleExpandRadius = () => {
     setExpandedRadius((prev) => {
-      const newRadius = prev + 10;
+      const newRadius = prev + 20;
 
       dispatch(setFormData({ expanded_radius: newRadius }));
 
@@ -434,7 +434,7 @@ const OtherServiceStep = ({
                 <option value="2">2 miles</option>
                 <option value="5">5 miles</option>
                 <option value="10">10 miles</option>
-                <option value="30">30 miles</option>
+                <option value="20">20 miles</option>
                 <option value="50">50 miles</option>
                 <option value="100">100 miles</option>
               </select>

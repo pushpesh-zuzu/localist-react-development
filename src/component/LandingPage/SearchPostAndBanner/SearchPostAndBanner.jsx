@@ -78,18 +78,17 @@ const SearchPostAndBanner = ({
     }
 
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: pincode })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: pincode })));
+      const response = await dispatch(getCityName({ postcode: pincode }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
-        setCity(response.data.city);
-        console.log(response, "rrrrr");
-        dispatch(setcitySerach(response.data.city));
+      if (newResponse?.data?.city) {
+        setCity(newResponse.data.city);
+        console.log(newResponse, "rrrrr");
+        dispatch(setcitySerach(newResponse.data.city));
         setbuyerRequestData({
           ...buyerRequest,
-          postcode: response.data.postcode,
-          city: response.data.city,
+          postcode: newResponse.data.postcode,
+          city: newResponse.data.city,
         });
         setShowModal(true);
       } else {
@@ -97,12 +96,12 @@ const SearchPostAndBanner = ({
         return;
       }
     } catch (error) {
-      // API fail hone par flow yahin ruk jaayega
       showToast("error", "Please enter a valid postcode!");
       console.error("City fetch failed:", error);
       return;
     }
   };
+
   const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
   // useEffect(() => {

@@ -77,7 +77,7 @@ const CloneAccountants = ({
     setInput("");
     setPincode("");
     setSelectedService(null);
-    setPostalCodeValidate(false)
+    setPostalCodeValidate(false);
   };
 
   useEffect(() => {
@@ -127,7 +127,6 @@ const CloneAccountants = ({
     checkPendingModal();
   }, [dispatch]);
 
-  // ✅ Replaced Google API with your backend postcode validation
   const handlePincodeChange = async (e) => {
     const value = e.target.value.trim().slice(0, 10);
     setPincode(value);
@@ -136,24 +135,24 @@ const CloneAccountants = ({
     setIsPincodeFromDropdown(false);
     setCity("");
 
-    if (value.length < 3) return; // Only check after 5 chars
+    if (value.length < 3) return;
 
     setIsCheckingPostcode(true);
     try {
-      const response =
-        (await dispatch(getCityName({ postcode: value })).unwrap?.()) ??
-        (await dispatch(getCityName({ postcode: value })));
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (response?.data?.city) {
+      if (newResponse?.data?.city) {
         setPostalCodeValidate(true);
         setIsPostcodeSelected(true);
         setIsPincodeFromDropdown(true);
-        setCity(response.data.city);
-        dispatch(setcitySerach(response.data.city));
+        setCity(newResponse.data.city);
+
+        dispatch(setcitySerach(newResponse.data.city));
         dispatch(
           setbuyerRequestData({
             postcode: value.toUpperCase(),
-            city: response.data.city,
+            city: newResponse.data.city,
           })
         );
       } else {
@@ -162,9 +161,7 @@ const CloneAccountants = ({
       }
     } catch (error) {
       setPostalCodeValidate(false);
-      // Prevent repeated toasts
-      if (!isCheckingPostcode)
-        showToast("error", "Please enter a valid postcode!");
+      showToast("error", "Please enter a valid postcode!");
     } finally {
       setIsCheckingPostcode(false);
     }
@@ -251,10 +248,10 @@ const CloneAccountants = ({
                 )}
               </div>
 
-              <div className={styles.inputBox} style={{position:'relative'}}>
+              <div className={styles.inputBox} style={{ position: "relative" }}>
                 <label>{inputLable2}</label>
-                <div className={styles.marginForLable}/>
-                <input 
+                <div className={styles.marginForLable} />
+                <input
                   type="text"
                   placeholder="Enter Postcode (No Spaces)"
                   name="postcode"
@@ -263,14 +260,14 @@ const CloneAccountants = ({
                 />
                 {/* Optional loader/check UI (no CSS touched) */}
                 {isCheckingPostcode ? (
-                  <Spin style={{position:'absolute',right:'12px',top:'60%'}}
+                  <Spin
+                    style={{ position: "absolute", right: "12px", top: "60%" }}
                     className={styles.checkIcon}
                     size="small"
-                  
                   />
                 ) : postalCodeValidate ? (
                   <img
-                  style={{position:'absolute',right:'8px',top:'55%'}}
+                    style={{ position: "absolute", right: "8px", top: "55%" }}
                     src={CheckIcon}
                     alt="Success"
                     className={styles.checkIcon}

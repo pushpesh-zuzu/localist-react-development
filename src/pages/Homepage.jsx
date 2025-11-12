@@ -7,15 +7,44 @@ import OurTeams from "../component/homescreen/team/OurTeams";
 import WorkStructure from "../component/homescreen/WorkOverview/WorkStructure";
 import { useParams } from "react-router";
 import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  getAllServiceList,
+  getPopularServiceList,
+} from "../store/FindJobs/findJobSlice";
 
 const Homepage = () => {
   const { lang, country } = useParams();
+  const dispatch = useDispatch();
+  const { allServiceList, popularList, popularLoader } = useSelector(
+    (state) => state.findJobs
+  );
+
+  const [initialLoader, setInitialLoader] = useState(true);
+  const [popularInitialLoader, setPopularInitialLoader] = useState(true);
+
+  useEffect(() => {
+    if (!allServiceList || allServiceList.length === 0) {
+      dispatch(getAllServiceList()).finally(() => setInitialLoader(false));
+    } else {
+      setInitialLoader(false);
+    }
+  }, [dispatch, allServiceList]);
+
+  useEffect(() => {
+    if (!popularList || popularList.length === 0) {
+      dispatch(getPopularServiceList()).finally(() =>
+        setPopularInitialLoader(false)
+      );
+    } else {
+      setPopularInitialLoader(false);
+    }
+  }, [dispatch, popularList]);
+
   return (
     <>
       <Helmet>
-        {/* <!-- Canonical Tag → */}
-
-        {/* <!-- Event snippet for Submit lead form conversion page --> */}
         <script>
           {`
               gtag('event', 'conversion', {
@@ -28,10 +57,20 @@ const Homepage = () => {
       </Helmet>
       <CalonicalTags />
 
-      <SearchProfessionals />
-      <PopularService />
-      <ServiceCategory />
-      <Services />
+      <SearchProfessionals
+        popularList={popularList}
+        popularLoader={popularLoader || popularInitialLoader}
+      />
+      <PopularService
+        popularList={popularList}
+        popularLoader={popularLoader || popularInitialLoader}
+      />
+      <ServiceCategory
+        allServiceList={allServiceList}
+        popularLoader={popularLoader}
+        initialLoader={initialLoader}
+      />
+      <Services allServiceList={allServiceList} initialLoader={initialLoader} />
       <WorkStructure />
       <OurTeams />
     </>
