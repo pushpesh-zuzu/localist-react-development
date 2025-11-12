@@ -134,7 +134,7 @@ const ServiceLocationStep = ({
                   errors.miles1 ? styles.errorBorder : ""
                 }`}
                 name="miles1"
-                value={formData.miles1 || ""}
+                value={formData.miles1 || "20"}
                 onChange={handleInputChange}
               >
                 <option value="1">1 mile</option>
