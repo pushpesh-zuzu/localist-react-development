@@ -33,7 +33,7 @@ const initialState = {
   city: {},
   postalcode: {},
   selectedServiceFormData: {
-    miles1: "30",
+    miles1: "20",
     postcode: null,
     cities: "",
     coordinates: [],
