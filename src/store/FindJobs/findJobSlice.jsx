@@ -495,7 +495,7 @@ const findJobSlice = createSlice({
     },
     clearServiceFormData(state, action) {
       state.selectedServiceFormData = {
-        miles1: "30",
+        miles1: "20",
         postcode: null,
         cities: null,
         coordinates: [],

@@ -112,7 +112,10 @@ const ServiceLocationStep = ({
       }
     };
   }, []);
-
+  console.log(formData.miles1, "miless");
+  // useEffect(() => {
+  //   handleInputChange();
+  // }, []);
   return (
     <div className={styles.parentContainer}>
       <div className={styles.container}>
@@ -134,7 +137,7 @@ const ServiceLocationStep = ({
                   errors.miles1 ? styles.errorBorder : ""
                 }`}
                 name="miles1"
-                value={formData.miles1 || "20"}
+                value={formData.miles1 || ""}
                 onChange={handleInputChange}
               >
                 <option value="1">1 mile</option>

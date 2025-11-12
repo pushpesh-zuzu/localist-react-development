@@ -15,13 +15,15 @@ const LeadSetting = () => {
     <>
       <div className={styles.leadsOverlay}>
         <>
-          <div
-            className={`${
-              !selectedService
-                ? styles.leadSettingsTabView
-                : styles.leadSettingsOverlay
-            }`}
-          >
+          {!selectedService && (
+            <div className={styles.leadSettingsTabView}>
+              <LeadSettings
+                setSelectedService={handleServiceClick}
+                selectedService={selectedService}
+              />
+            </div>
+          )}
+          <div className={styles.leadSettingsOverlay}>
             <LeadSettings
               setSelectedService={handleServiceClick}
               selectedService={selectedService}
