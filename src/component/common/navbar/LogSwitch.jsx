@@ -177,7 +177,7 @@ const LogSwitch = () => {
     setSearchText("");
     const matchedRoute = serviceRouteMap[item.id];
     if (matchedRoute) {
-      navigate(`/${lang}/${country}${matchedRoute}`);
+      navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); // go to the route
     } else {
       setShow(true);
     }
@@ -210,7 +210,7 @@ const LogSwitch = () => {
         const result = await dispatch(userLogout());
         if (result) {
           showToast("info", "Logout successful!");
-          handleNavigation("/login");
+          handleNavigation("/en/gb/login");
           localStorage.removeItem("pendingBuyerModal");
         }
       } catch (error) {

@@ -200,7 +200,22 @@
   flex-direction: column;
 }
 .headerImage9 {
-  background-image: url("./banner/TreeSurgeonMultiStep.webp");
+  background-image: url("./banner/TreeSurgeonMultiStepBanner.webp");
+  background-size: contain;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-repeat: no-repeat;
+}
+.headerImage10 {
+  background-image: url("./banner/Roofing.webp");
   background-size: contain;
   background-position: center;
   padding: 0px 20px;
@@ -295,7 +310,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 190px;
   }
 }
@@ -303,7 +319,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 200px;
   }
   .bannerMargin {
@@ -319,7 +336,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 250px;
   }
   .question1 {
@@ -354,7 +372,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 200px;
   }
   .bannerMargin {
@@ -366,7 +385,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 160px;
   }
   .bannerMargin {
@@ -409,7 +429,8 @@
   .headerImage7,
   .headerImage4,
   .headerImage3,
-  .headerImage9 {
+  .headerImage9,
+  .headerImage10 {
     min-height: 132px;
   }
 }

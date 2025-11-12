@@ -187,7 +187,7 @@ const LoginPage = () => {
                   className="btnLink"
                   onClick={() => {
                     setPasswordless(true);
-                    navigate("/passwordless_login");
+                    navigate("/en/gb/passwordless_login");
                   }}
                 >
                   Send me a link to log in

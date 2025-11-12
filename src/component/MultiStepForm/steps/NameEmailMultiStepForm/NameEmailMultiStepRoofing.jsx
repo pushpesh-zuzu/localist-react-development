@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NameEmailMultiStepForm.module.css";
 import { checkEmailIdApi } from "../../../../store/FindJobs/findJobSlice";
@@ -9,9 +9,15 @@ import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/Loade
 import nameEmailBanner from "../nameEmailBanner.webp";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
 
-const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
+const NameEmailMultiStepRoofing = ({
+  nextStep,
+  isPPCPages = false,
+  onBack,
+}) => {
   const dispatch = useDispatch();
-  const { searchServiceLoader } = useSelector((state) => state.findJobs);
+  const { searchServiceLoader } = useSelector(
+    (state) => state.findJobs
+  );
   const { buyerRequest } = useSelector((state) => state.buyer);
   const [email, setEmail] = useState(buyerRequest?.email);
   const [name, setName] = useState(buyerRequest?.name);
@@ -151,4 +157,4 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   );
 };
 
-export default NameEmailMultiStepForm;
+export default NameEmailMultiStepRoofing;

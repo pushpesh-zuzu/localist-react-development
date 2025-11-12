@@ -119,7 +119,7 @@ const NameEmailTreeSurgeon = ({
               Perfect! We’ve found you some great local matches
             </h3>
             <p className={styles.bannerPara}>
-              One more thing, we need your details just to send you quotes only”
+              One more thing, we need your details just to send you quotes only
             </p>
           </div>
         ) : (

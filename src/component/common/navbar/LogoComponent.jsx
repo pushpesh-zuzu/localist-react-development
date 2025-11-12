@@ -298,7 +298,7 @@ const LogoComponent = () => {
         className={styles.mainLogo}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = "/";
+          window.location.href = "/en/gb/"; // reload + homepage redirect ek sath
         }}
       />
 

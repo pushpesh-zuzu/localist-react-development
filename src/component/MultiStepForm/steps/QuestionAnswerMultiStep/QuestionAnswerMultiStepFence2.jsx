@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
-import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 
@@ -21,12 +19,13 @@ const QuestionAnswerMultiStepFence2 = ({
   loading = true,
   serviceName = "Fence & Gate Installation",
   isQuestionWithImage = false,
+  OutOfTotal = 100,
+  currentQuesntionWhenBack = 3,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { service } = useSelector((state) => state.findJobs);
 
-  const { search } = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -52,7 +51,7 @@ const QuestionAnswerMultiStepFence2 = ({
   });
   useEffect(() => {
     if (isComingFromStep3 && buyerRequest?.questions?.length > 0) {
-      setCurrentQuestion(3);
+      setCurrentQuestion(currentQuesntionWhenBack);
     }
   }, [isComingFromStep3]);
   useEffect(() => {
@@ -86,7 +85,8 @@ const QuestionAnswerMultiStepFence2 = ({
 
     if (isSingle) {
       setSelectedOption([value]);
-      setError("");
+      setError(""); // Clear error only on change
+
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
@@ -129,7 +129,7 @@ const QuestionAnswerMultiStepFence2 = ({
     updatedAnswers[currentQuestion] = updatedAnswer;
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-    const percentage = (100 * 2) / (totalQuestions * 3);
+    const percentage = (OutOfTotal * 2) / (totalQuestions * 3);
     getProgressPercentage(percentage);
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selectedOption[0]
@@ -140,7 +140,6 @@ const QuestionAnswerMultiStepFence2 = ({
       dispatch(
         setbuyerRequestData({
           service_id: service?.id || buyerRequest?.service_id,
-          // serviceName: serviceName || buyerRequest?.serviceName,
           postcode: buyerRequest?.postcode,
           city: citySerach,
           questions: updatedAnswers,
@@ -195,7 +194,7 @@ const QuestionAnswerMultiStepFence2 = ({
 
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
-    const percentage = (100 * 2) / (totalQuestions * 3);
+    const percentage = (OutOfTotal * 2) / (totalQuestions * 3);
 
     getProgressPercentage(percentage);
 
@@ -311,6 +310,8 @@ const QuestionAnswerMultiStepFence2 = ({
               ? styles.headerImage8
               : serviceName === "Tree Surgeon"
               ? styles.headerImage9
+              : serviceName === "Roofing"
+              ? styles.headerImage10
               : styles.headerImage
           } ${styles.bannerMargin}`}
         />

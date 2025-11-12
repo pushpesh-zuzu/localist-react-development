@@ -119,7 +119,6 @@ const QuestionAnswerMultiStepFence = ({
     const finalAnswer = selectedOption.map((opt) =>
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
-
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
@@ -127,14 +126,14 @@ const QuestionAnswerMultiStepFence = ({
 
     const previousAnswers = buyerRequest?.questions || [];
 
-    const questionIndex = previousAnswers?.findIndex(
-      (q) => q?.ques === updatedAnswer?.ques
+    const existingIndex = previousAnswers.findIndex(
+      (item) => item?.ques === updatedAnswer.ques
     );
 
     let updatedAnswers;
-    if (questionIndex !== -1) {
+    if (existingIndex !== -1) {
       updatedAnswers = [...previousAnswers];
-      updatedAnswers[questionIndex] = updatedAnswer;
+      updatedAnswers[existingIndex] = updatedAnswer;
     } else {
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
@@ -195,21 +194,20 @@ const QuestionAnswerMultiStepFence = ({
     const finalAnswer = selected.map((opt) =>
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
-
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
     };
-
     const previousAnswers = buyerRequest?.questions || [];
-    const questionIndex = previousAnswers?.findIndex(
-      (q) => q?.ques === updatedAnswer?.ques
+
+    const existingIndex = previousAnswers.findIndex(
+      (item) => item?.ques === updatedAnswer.ques
     );
 
     let updatedAnswers;
-    if (questionIndex !== -1) {
+    if (existingIndex !== -1) {
       updatedAnswers = [...previousAnswers];
-      updatedAnswers[questionIndex] = updatedAnswer;
+      updatedAnswers[existingIndex] = updatedAnswer;
     } else {
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }

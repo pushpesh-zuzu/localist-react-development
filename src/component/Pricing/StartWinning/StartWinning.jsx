@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const StartWinning = () => {
   const navigate = useNavigate()
   const onSubmitPageChange = () => {
-    navigate("/sellers/create")
+    navigate("/en/gb/sellers/create")
   }
   
   return (
