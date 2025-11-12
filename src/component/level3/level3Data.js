@@ -1035,7 +1035,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: "What’s the best patio on a budget?",
       description: `
   <p>
-    If you're keeping costs down, gravel patios are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable patio installers, Localists can connect you with specialists who'll ofer budget-friendly advice tailored to your site., Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
+    If you're keeping costs down, gravel patios are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable patio installers, Localists can connect you with specialists who'll ofer budget-friendly advice tailored to your site.
   </p>
 `,
     },
