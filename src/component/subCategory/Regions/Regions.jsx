@@ -1,21 +1,25 @@
-import { Collapse } from "antd";
 import styles from "./Regions.module.css";
-const { Panel } = Collapse;
-import { DownOutlined } from "@ant-design/icons";
 import mapIcon from "../../../assets/Icons/map-pin.svg";
 import arrowDownIcon from "../../../assets/Icons/arrow-down.svg";
 import arrowIcon from "../../../assets/Images/subcategory/arrowicon.svg";
-import arrowDownIconBlue from "../../../assets/Icons/arrow-down-blue.svg";
 import { useEffect, useState } from "react";
 
 const RegionsComponent = ({ regionsData, heading = "" }) => {
-  const [activeKey, setActiveKey] = useState(regionsData?.[0]?.key || []);
+  const [activeKey, setActiveKey] = useState(regionsData?.[0]?.key || "");
 
   useEffect(() => {
     if (regionsData && regionsData.length > 0) {
-      setActiveKey([regionsData[0].key]);
+      setActiveKey(regionsData[0].key);
     }
   }, [regionsData]);
+
+  const handlePanelClick = (key) => {
+    if (activeKey === key) {
+      setActiveKey(""); // Close if already open
+    } else {
+      setActiveKey(key); // Open new one
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -29,42 +33,30 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
       {regionsData?.map((category, index) => {
         const categoryName = category.title;
         const services = category.items;
+        const isActive = activeKey === category.key;
 
         return (
-          <Collapse
-            activeKey={activeKey}
-            bordered={false}
-            key={index}
-            expandIcon={({ isActive }) => (
+         <div key={index} className={`${styles.customCollapse} ${isActive ? styles.active : ''}`}>
+            <div 
+              className={`${styles.customPanelHeader} ${isActive ? styles.active : ''}`}
+              onClick={() => handlePanelClick(category.key)}
+            >
+              <span className={styles.categoryTitle}>
+                {heading ? "" : categoryName}
+              </span>
               <img
                 src={arrowIcon}
-                alt="Custom Icon"
-                style={{
-                  width: "17px",
-                  height: "17px",
-                  transform: isActive ? "rotate(0deg)" : "rotate(180deg)",
-                  transition: "transform 0.3s ease",
-                }}
+                alt="Toggle"
+                className={`${styles.arrowIcon} ${isActive ? "" : styles.arrowRotated}`}
               />
-            )}
-            expandIconPosition="end"
-            className={styles.subcategory_collapse}
-            onChange={(keys) => {
-              // Accordion behavior - only one panel open at a time
-              setActiveKey(keys.length > 0 ? [keys[keys.length - 1]] : []);
-            }}
-          >
-            <Panel
-              className={styles.categoryTitle}
-              header={heading ? "" : categoryName}
-              key={category?.key}
-              showArrow={true}
-            >
-              <div key={index} className={styles.categoryContainer}>
+            </div>
+            
+            <div className={`${styles.customPanelContent} ${isActive ? styles.contentOpen : styles.contentClosed}`}>
+              <div className={styles.categoryContainer}>
                 <div className={styles.servicesContainer}>
                   {services?.map((service, idx) => (
                     <span key={idx} className={styles.serviceItem}>
-                      <img src={mapIcon} width={24} />
+                      <img src={mapIcon} width={24} alt="" />
                       {service.path ? (
                         <a style={{ color: "#000" }} href={service.path}>
                           {service.name}
@@ -76,8 +68,8 @@ const RegionsComponent = ({ regionsData, heading = "" }) => {
                   ))}
                 </div>
               </div>
-            </Panel>
-          </Collapse>
+            </div>
+          </div>
         );
       })}
     </div>

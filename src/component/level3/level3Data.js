@@ -839,7 +839,7 @@ const FREQUENTLY_DATA = {
       description: `
       When looking for a fencing company, it’s important to find one that’s well-reviewed, fully insured and one that has wide portfolio of projects. Reviews can be a good indicator as to what kind of professional you’re going to get - and with Localists you get all their reviews in one place! Though it’s not completely necessary, looking at whether your fencing contractor is a member of regulatory bodies such as the 
       <a href="https://afiorg.uk/" style="text-decoration:none; color:#00afe3;" target="_blank" rel="noopener noreferrer">association of fencing industries</a> 
-      might also be an indicator of their quality. Rather than spending hours searching the internet, we bring the best fencing contractors near you - straight to your inbox. So you can get the best fencing companies for the best price!
+      might also be an indicator of their quality. Rather than spending hours searching the internet, We bring all of the best fencing contractors to you.  So you can get the best fencing companies for the best price!
      `,
     },
     {
@@ -929,7 +929,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       key: "1",
       title: "How much does it cost to install a driveway?",
       description: `
-       Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price.You can get free quotes from specialists here on Localists once you start your search. Depending on what you nee, you’ll be provided a cost breakdown. 
+       Driveway installation costs can vary widely depending on the surface material, size of your driveway, your location, and any extra features you’d like. For example, adding drainage, decorative edging, lighting, or electric gates will affect the total price. You can get free quotes from specialists here on Localists once you start your search. Depending on what you need, you’ll be provided a cost breakdown. 
   <br/>
   <p style="margin-top:8px;">
     As a general rule, the larger the driveway, the lower the cost per square metre — so it’s worth asking for quotes based on your exact dimensions. A typical full installation might cost around £4,500 across the UK and £4,800 in London.
@@ -1035,7 +1035,7 @@ Choosing the right fencing or gate professional isn’t just about price - it’
       title: "What’s the best patio on a budget?",
       description: `
   <p>
-    If you're keeping costs down, gravel patios are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable patio construction near me, Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
+    If you're keeping costs down, gravel patios are often the most affordable option. They use inexpensive materials and are quick to install. That said, they do need some upkeep, like topping up stones and tackling weeds. If you’re looking for reliable patio installers, Localists can connect you with specialists who'll ofer budget-friendly advice tailored to your site., Localists can connect you with specialists who’ll offer budget-friendly advice tailored to your site.
   </p>
 `,
     },
@@ -1616,17 +1616,17 @@ const HowItWorksData = {
 const CONTENT_CONFIG = {
   "fencing-contractors-near-me": {
     para1:
-      "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylishfence to boundary your castle? Get matched instantly with trusted fencing contractors near you who can build boundaries the right way.",
+      "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylishfence to boundary your castle?.",
     para2:
       "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project.. So no more shopping around for the best quote, we bring the quotes to you!",
-    para3: `Whether you're planning a new build, replacing an old fence, securing a commercial space or adding an automatic gate, we’ll connect you with the best fencing companies near you. From start to finish, we make the process simple. Just tell us what you need, and we’ll connect you with the best hands.`,
+    para3: `No cost. no obligation. Just free quotes straight in your inbox!`,
     para4:
       "Professional fence installers - qualified, reviewed, and ready to go!",
   },
 
   "driveway-installers-near-me": {
     para1:
-      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or pavered driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust.",
+      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or block paved driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust.",
     para2:
       "From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
     para3: "No fees, no catch, just expert help at no cost!",
@@ -1795,15 +1795,11 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "h2",
-      text: "Why hire fencing contractors through Localists",
+      text: "Why you should hire a fencing contractor through Localists",
     },
     {
       type: "p",
-      text: `When it comes to finding local fencing contractors, homeowners, property managers, and businesses alike turn to Localists first. Hundreds of customers use our platform daily to connect with top-rated, fully insured, and vetted fence installers in their local area.`,
-    },
-    {
-      type: "p",
-      text: "Whether you're securing your home, upgrading your garden, or managing a large commercial project, we make it simple to find the right expert for the job. All professionals we recommend are checked, approved, and reviewed, so you can hire with complete peace of mind. ",
+      text: `Thousands of property managers, businesses and homeowners alike use localists to source the best fencing contractors in their area. All of our  contractors have to pass rigerous tests to become an approved service provider on localists - because getting our customers the best people for the job is paramount to us.`,
     },
     {
       type: "p",
@@ -1823,18 +1819,13 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "uili",
-      heading: "Durable, premium materials:\u00A0",
-      text: `From wood to metal to vinyl, we’ll connect you with contractors who use durable, high-quality materials—perfect for long-term peace of mind.`,
-    },
-    {
-      type: "uili",
       heading: "Quick turnaround time:\u00A0",
       text: `Want your project completed within a timeframe? Once you're matched, many professionals are ready to begin promptly and work within your preferred timeline.`,
     },
     {
       type: "uili",
       heading: "Design flexibility:\u00A0",
-      text: ` Have something specific in mind? Whether you're after inspiration or already know exactly what you want, the right fence and gate installation specialist is just a few clicks away.`,
+      text: `Have something specific in mind? Just fill in our form and we'll onnect you with the right fencing contractors for the job.`,
     },
     {
       type: "uili",
@@ -2062,12 +2053,12 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your area that are verified and vetted, with all their reviews from multiple platforms in one place. And because you're hiring a patio layer near you, your safe in the knowledge that whoever you choose to take on the job will have extensive local knowledge such as climate, local planning permissions and local design trends. Here are some of the benefits of hiring through Localists.",
+      text: "Hiring through Localists isn’t just convenient, it’s smart. We connect you with the best specialists in your area that are verified and vetted, with all their reviews from multiple platforms in one place. And because you're hiring a patio layer near you, you're safe in the knowledge that whoever you choose to take on the job will have extensive local knowledge such as climate, local planning permissions and local design trends. Here are some of the benefits of hiring through Localists.",
     },
     {
       type: "li",
       heading:
-        "Patio contractors onthe Localist platform are vetted and verified.",
+        "Patio contractors on the Localist platform are vetted and verified.",
       marginTop: true,
     },
     {
@@ -2093,7 +2084,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "If you are hiring a Local patio designer or installer for the first time, and you don’t know where to start, we have put together a few questions below. Even if you’ve done it before, having a few key questions prepared makes sure you get clear answers and avoid surprises later. When you receive your quote from a specialist here on Localists, try asking:",
+      text: "Even if you’ve hired for a fencing job before, having a few key questions prepared ensures you get clear answers and avoid surprises later. When you receive your quote from a specialist here on Localists, try asking:",
     },
     {
       type: "libold",

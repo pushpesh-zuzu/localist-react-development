@@ -4,77 +4,82 @@
   padding: 24px 91px 28px 91px;
 }
 
-/* .disabledPanel {
-  cursor: pointer !important; 
-} */
-.subcategory_collapse :global(.ant-collapse-header) {
-  color: black !important;
-}
-.disabledPanel .ant-collapse-header {
-  color: inherit !important; /* Keeps original text color */
-  cursor: pointer !important; /* Shows pointer cursor */
-}
-.nonInteractive {
-  pointer-events: none;
-  cursor: default !important;
-  background-color: inherit; /* optional: avoid hover effects */
-}
-.subcategory_collapse {
-  margin-bottom: 25px;
-  background-color: transparent;
+.customCollapse {
+  border-bottom: 1px solid #c8c8c8;
 }
 
-.subcategory_collapse:last-child {
+/* Active (open) panel ki border hatayenge */
+.customCollapse.active {
+  border-bottom: none;
+}
+
+.customCollapse:last-child {
   margin-bottom: 0;
+  /* Last child ki border bhi hatayenge agar active nahi hai to rehne denge */
 }
 
-.subcategory_collapse :global(.ant-collapse-header),
-.subcategory_collapse :global(.ant-collapse-content-box) {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  padding-top: 0 !important;
+.customPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 
-.subcategory_collapse :global(.ant-collapse-header) {
-  padding-top: 0 !important;
-  border-bottom: none !important;
-}
-.subcategory_collapse :global(.ant-collapse-item) {
-  border-bottom: 1px solid #c8c8c8 !important;
-}
-.subcategory_collapse :global(.ant-collapse-content) {
-  margin-top: 20px;
-}
-.subcategory_collapse :global(.ant-collapse-item-active) {
-  border-bottom: none !important;
+/* Active panel ke header par border-bottom dikhayenge */
+.customCollapse.active .customPanelHeader {
+  border-bottom: 1px solid #c8c8c8;
 }
 
-.subcategory_collapse :global(.ant-collapse-item-active .ant-collapse-header) {
-  border-bottom: 1px solid #c8c8c8 !important;
+.customPanelHeader:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.categoryTitle {
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+}
+
+.arrowIcon {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arrowRotated {
+  transform: rotate(180deg);
+}
+
+.customPanelContent {
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contentClosed {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.contentOpen {
+  max-height: 1000px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .categoryContainer {
   display: flex;
   flex-direction: column;
   gap: 21px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   background-color: #ffffff;
+  padding: 20px 0;
 }
 
-.categoryContainer:last-child {
-  margin-bottom: 4px;
-}
-
-.categoryTitle {
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.separator {
-  width: 100%;
-  margin: auto;
-  max-width: 100%;
-  border-top: 1px solid #c8c8c8;
+.customCollapse:last-child .categoryContainer {
+  margin-bottom: 0px;
 }
 
 .servicesContainer {
@@ -116,26 +121,6 @@
   color: var(--primary-color);
 }
 
-.ant-collapse-content-box {
-  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out !important;
-  overflow: hidden;
-}
-
-.ant-collapse-content {
-  animation: fadeIn 0.5s ease-in-out !important;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 1280px) {
   .container {
     padding: 24px 41px 28px 41px;
@@ -167,8 +152,8 @@
     height: 24px;
   }
 
-  .subcategory_collapse {
-    margin-bottom: 36px;
+  .customCollapse {
+    margin-bottom: 0px;
   }
 
   .serviceItem {
@@ -177,7 +162,11 @@
   }
 
   .categoryContainer {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+  }
+
+  .customCollapse:last-child .categoryContainer {
+    margin-bottom: 0px;
   }
 }
 
@@ -198,8 +187,8 @@
     width: 14px;
   }
 
-  .subcategory_collapse {
-    margin-bottom: 26px;
+  .customCollapse {
+    margin-bottom: 0px;
   }
 
   .categoryTitle {
@@ -207,7 +196,11 @@
   }
 
   .categoryContainer {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+  }
+
+  .customCollapse:last-child .categoryContainer {
+    margin-bottom: 0px;
   }
 
   .serviceItem {
