@@ -62,7 +62,7 @@ const SubmitReviewModal = ({
 
   const handleSubmit = () => {
     const { name, email, review } = formData;
-    setCallInitialApi(true);
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const newErrors = {

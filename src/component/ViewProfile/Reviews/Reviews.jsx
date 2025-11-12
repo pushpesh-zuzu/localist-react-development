@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Reviews.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getReviewListApi } from "../../../store/MyProfile/myProfileSlice";
@@ -21,8 +21,8 @@ const ReviewSection = ({
 }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const [isopen, setIsOpen] = React.useState(false);
-  const [canOpenModal, setCanOpenModal] = React.useState(false);
+  const [isopen, setIsOpen] = useState(false);
+  const [canOpenModal, setCanOpenModal] = useState(false);
   const closeModal = () => setIsOpen(false);
   const profileId = useParams();
   const { userToken } = useSelector((state) => state.auth);
