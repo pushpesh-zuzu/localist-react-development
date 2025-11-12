@@ -57,7 +57,7 @@ const initialState = {
     zipcode: "",
     service_id: [],
     auto_bid: 1,
-    miles2: "30",
+    miles2: "20",
     expanded_radius: "",
     coordinates2: "",
     validPostCode: false,
