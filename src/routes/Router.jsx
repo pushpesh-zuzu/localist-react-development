@@ -54,7 +54,8 @@ import AboutUs from "../component/AboutUs/AboutUs";
 import HowItWorkSeller from "../component/HowItWorkSeller/HowItWorkSeller";
 import HowItWorksCustomerPage from "../pages/HowItWorksPageCustomers";
 import WhatServiceYouNeed from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/WhatServiceYouNeed/WhatServiceYouNeed";
-
+import TermsAndCondition from "../component/TermsAndCondition/TermAndCondition";
+import CookiePolicy from "../component/CooliesPolicies/CookiePolicy";
 import LocaleRedirect from "./LocaleRedirect";
 import ConversionRedirect from "../component/buyerPanel/PlaceNewRequest/BuyerRegistration/ConversionRedirect/ConversionRedirect";
 import FullScreenSpinner from "../component/common/fullScreenSpinner/FullScreenSpinner";
