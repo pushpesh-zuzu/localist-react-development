@@ -13,6 +13,7 @@ import {
   TREE_SURGEON_REVIEWS_DATA,
   TREE_SURGEON_FAQ,
   TREE_SURGEON_OTHER_SERVICES_DATA,
+  TREE_SURGEON_POPULAR_CITIES,
 } from "./TreeSurgeonData";
 import TreeSugeon from "../banners/TreeSugeon.jpg";
 import { transformData } from "../../../utils/allServicesUtils";
@@ -32,6 +33,10 @@ const RegionsComponent = lazy(() =>
   import("../../subCategory/Regions/Regions")
 );
 const Slider = lazy(() => import("../../common/slider/Slider"));
+const PopularCity = lazy(() =>
+  import("../../subCategory/famousCities/PopularCity")
+);
+
 function TreeSurgeon() {
   const transformedRegions = useMemo(
     () => transformData(TREE_SURGEON_REGION_DATA, "Tree Surgeon"),
@@ -71,6 +76,7 @@ function TreeSurgeon() {
     []
   );
   const metaConfig = useMemo(() => TREE_SURGEON_META["Tree Surgeon"], []);
+  const POPULAR_CITIES = useMemo(() => TREE_SURGEON_POPULAR_CITIES, []);
 
   return (
     <>
@@ -101,7 +107,13 @@ function TreeSurgeon() {
           title={topConfig?.ctaText}
         />
       </Suspense>
-
+      <Suspense fallback={<FullScreenSpinner />}>
+        <PopularCity
+          sliderdata={POPULAR_CITIES}
+          title="Popular"
+          blueText="Cities"
+        />
+      </Suspense>
       <Suspense fallback={<FullScreenSpinner />}>
         <RegionsComponent regionsData={transformedRegions} />
       </Suspense>

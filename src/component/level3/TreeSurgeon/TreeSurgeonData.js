@@ -1,9 +1,23 @@
 import {
+  Chester,
+  EllesmerePort,
+  Liverpool,
+  Manchester,
+  Warrington,
+} from "../../../assets/Images/servicesLevels/cities";
+import {
   accountant,
   FreeQuotesIcon,
   WhatYouNeedIcon,
 } from "../../Level1/images";
-import { ArtificialGrassSlider, DrivewayInstallationSlider, GutterCleanerSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../imagesServices";
+import {
+  ArtificialGrassSlider,
+  DrivewayInstallationSlider,
+  FenceAndGateInsallationSlider,
+  GutterCleanerSlider,
+  LandscapingSlider,
+  PatioServicesSlider,
+} from "../imagesServices";
 
 const TREE_SURGEON_META = {
   "Tree Surgeon": {
@@ -13,7 +27,13 @@ const TREE_SURGEON_META = {
       "Find fully qualified tree surgeons near me. Certified and skilled arborists. Safe tree removal & pruning. Get free quotes from local experts in your area.",
   },
 };
-
+const TREE_SURGEON_POPULAR_CITIES = [
+  { city_image: Liverpool, city_name: "Liverpool" },
+  { city_image: Manchester, city_name: "Manchester" },
+  { city_image: Chester, city_name: "Chester" },
+  { city_image: Warrington, city_name: "Warrington" },
+  { city_image: EllesmerePort, city_name: "Ellesmere" },
+];
 const TREE_SURGEON_CONFIG_TOP = {
   "Tree Surgeon": {
     findingHeading: "tree surgeons",
@@ -288,39 +308,41 @@ const TREE_SURGEON_OTHER_SERVICES_DATA = {
   "Tree Surgeon": [
     {
       id: 1,
-      image: DrivewayInstallationSlider,
-      description: "Driveway Installation",
-      // availableOnline: true,
-      path: "driveway-installers-near-me",
+      image: FenceAndGateInsallationSlider,
+      description: "Fence & Gate Installation",
+      path: "fencing-contractors-near-me",
     },
     {
       id: 2,
+      image: DrivewayInstallationSlider,
+      description: "Driveway Installation",
+      path: "driveway-installers-near-me",
+    },
+    {
+      id: 3,
       image: PatioServicesSlider,
       description: "Patio Services",
       path: "patio-layers-near-me",
     },
     {
-      id: 3,
+      id: 4,
       image: LandscapingSlider,
       description: "Landscaping",
-      // availableOnline: true,
       path: "landscape-gardeners-near-me",
     },
     {
-      id: 4,
+      id: 5,
       image: ArtificialGrassSlider,
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-     {
-      id: 5,
+    {
+      id: 6,
       image: GutterCleanerSlider,
       description: "Gutter Cleaners",
       path: "gutter-cleaning-near-me",
     },
   ],
-
- 
 };
 
 const TREE_SURGEON_REVIEWS_DATA = {
@@ -358,19 +380,62 @@ const TREE_SURGEON_REVIEWS_DATA = {
 const TREE_SURGEON_REGION_DATA = {
   "Tree Surgeon": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
 };
 
 export {
+  TREE_SURGEON_POPULAR_CITIES,
   TREE_SURGEON_META,
   TREE_SURGEON_BREADCRUMB_CONFIG,
   TREE_SURGEON_CONFIG_TOP,
@@ -381,5 +446,5 @@ export {
   TREE_SURGEON_AVERAGE_PRICE,
   TREE_SURGEON_REVIEWS_DATA,
   TREE_SURGEON_REGION_DATA,
-  TREE_SURGEON_OTHER_SERVICES_DATA
+  TREE_SURGEON_OTHER_SERVICES_DATA,
 };

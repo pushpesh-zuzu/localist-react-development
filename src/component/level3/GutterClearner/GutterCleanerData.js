@@ -1,10 +1,31 @@
 import {
+  Chester,
+  EllesmerePort,
+  Liverpool,
+  Manchester,
+  Warrington,
+} from "../../../assets/Images/servicesLevels/cities";
+import {
   accountant,
   FreeQuotesIcon,
   WhatYouNeedIcon,
 } from "../../Level1/images";
-import { ArtificialGrassSlider, DrivewayInstallationSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../imagesServices";
+import {
+  ArtificialGrassSlider,
+  DrivewayInstallationSlider,
+  FenceAndGateInsallationSlider,
+  LandscapingSlider,
+  PatioServicesSlider,
+  TreeSurgeonSlider,
+} from "../imagesServices";
 
+const GUTTER_CLEANER_POPULAR_CITIES = [
+  { city_image: Liverpool, city_name: "Liverpool" },
+  { city_image: Manchester, city_name: "Manchester" },
+  { city_image: Chester, city_name: "Chester" },
+  { city_image: Warrington, city_name: "Warrington" },
+  { city_image: EllesmerePort, city_name: "Ellesmere" },
+];
 const GUTTER_CLEANER_META = {
   "Gutter Cleaner": {
     title: "Find Gutter Cleaning Near Me | Localists",
@@ -265,37 +286,41 @@ const GUTTER_CLEANER_OTHER_SERVICES_DATA = {
   "Gutter Cleaner": [
     {
       id: 1,
+      image: FenceAndGateInsallationSlider,
+      description: "Fence & Gate Installation",
+      path: "fencing-contractors-near-me",
+    },
+    {
+      id: 2,
       image: DrivewayInstallationSlider,
       description: "Driveway Installation",
       path: "driveway-installers-near-me",
     },
     {
-      id: 2,
+      id: 3,
       image: PatioServicesSlider,
       description: "Patio Services",
       path: "patio-layers-near-me",
     },
     {
-      id: 3,
+      id: 4,
       image: LandscapingSlider,
       description: "Landscaping",
       path: "landscape-gardeners-near-me",
     },
     {
-      id: 4,
+      id: 5,
       image: ArtificialGrassSlider,
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-     {
-      id: 5,
-      image: TreesugeonSlider,
-      description: "Tree Surgeons",
+    {
+      id: 6,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
   ],
-
- 
 };
 
 const GUTTER_CLEANER_AVERAGE_PRICE = {
@@ -374,19 +399,62 @@ const GUTTER_CLEANER_REVIEWS_DATA = {
 const GUTTER_CLEANER_REGION_DATA = {
   "Gutter Cleaner": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
 };
 
 export {
+  GUTTER_CLEANER_POPULAR_CITIES,
   GUTTER_CLEANER_META,
   GUTTER_CLEANER_BREADCRUMB_CONFIG,
   GUTTER_CLEANER_CONFIG_TOP,
@@ -397,5 +465,5 @@ export {
   GUTTER_CLEANER_AVERAGE_PRICE,
   GUTTER_CLEANER_REVIEWS_DATA,
   GUTTER_CLEANER_REGION_DATA,
-  GUTTER_CLEANER_OTHER_SERVICES_DATA
+  GUTTER_CLEANER_OTHER_SERVICES_DATA,
 };

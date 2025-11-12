@@ -27,13 +27,15 @@ const endpointCategoryMap = {
     "Driveway Installation",
     "Patio Services",
     "Artificial Grass Installation",
+    "Tree Surgery",
+    "Gutter Cleaning",
   ],
 };
 
 const CloneCategory = ({ accountHeader }) => {
   const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const endpoint1 = pathSegments[pathSegments.length - 1];
+  const pathSegments = location.pathname.split("/").filter(Boolean); // ['en', 'gb', 'business']
+  const endpoint1 = pathSegments[pathSegments.length - 1]; // e.g., 'business'
 
   const allowedTitles = endpointCategoryMap[endpoint1] || [];
   const filteredCategories = PopularCategoriesData.filter((item) =>
@@ -98,6 +100,8 @@ const CloneCategory = ({ accountHeader }) => {
               name: "Artificial Grass Installation",
               path: "/artificial-grass-installers-near-me",
             },
+            { name: "Tree Surgery", path: "/tree-surgeon-near-me" },
+            { name: "Gutter Cleaning", path: "/gutter-cleaning-near-me" },
           ]}
         />
         <GetQuotes ctaText={"Home & Garden"} needSString={false} />

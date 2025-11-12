@@ -13,6 +13,7 @@ import {
   GUTTER_CLEANER_REVIEWS_DATA,
   GUTTER_CLEANER_FAQ,
   GUTTER_CLEANER_OTHER_SERVICES_DATA,
+  GUTTER_CLEANER_POPULAR_CITIES,
 } from "./GutterCleanerData";
 import GutterCleanerBanner from "../banners/GutterCleaner.webp";
 import { transformData } from "../../../utils/allServicesUtils";
@@ -32,6 +33,10 @@ const RegionsComponent = lazy(() =>
   import("../../subCategory/Regions/Regions")
 );
 const Slider = lazy(() => import("../../common/slider/Slider"));
+const PopularCity = lazy(() =>
+  import("../../subCategory/famousCities/PopularCity")
+);
+
 function GutterCleaner() {
   const transformedRegions = useMemo(
     () => transformData(GUTTER_CLEANER_REGION_DATA, "Gutter Cleaner"),
@@ -73,6 +78,8 @@ function GutterCleaner() {
     () => GUTTER_CLEANER_OTHER_SERVICES_DATA["Gutter Cleaner"],
     []
   );
+  const POPULAR_CITIES = useMemo(() => GUTTER_CLEANER_POPULAR_CITIES, []);
+
   return (
     <>
       <Helmet>
@@ -101,7 +108,13 @@ function GutterCleaner() {
           title={topConfig?.ctaText}
         />
       </Suspense>
-
+      <Suspense fallback={<FullScreenSpinner />}>
+        <PopularCity
+          sliderdata={POPULAR_CITIES}
+          title="Popular"
+          blueText="Cities"
+        />
+      </Suspense>
       <Suspense fallback={<FullScreenSpinner />}>
         <RegionsComponent regionsData={transformedRegions} />
       </Suspense>

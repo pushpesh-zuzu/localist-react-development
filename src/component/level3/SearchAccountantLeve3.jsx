@@ -109,7 +109,7 @@ const SearchAccountantLeve3 = ({
           <input
             maxLength={8}
             className={styles.searchInput}
-            placeholder="Enter Postcode (No Spaces)"
+            placeholder="Enter Postcode"
             value={pincode}
             onChange={(e) => {
               setPincode(e.target.value);
