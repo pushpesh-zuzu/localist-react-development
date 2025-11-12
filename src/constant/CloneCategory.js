@@ -2,12 +2,15 @@ import businessProfessionals from "../../src/assets/Images/BusinessProfessionals
 import WhatYouNeedIcon from "../assets/Icons/WhatYouNeedIcon.png";
 import FreeQuotesIcon from "../assets/Icons/FreeQuotesIcon.png";
 import BusinessProfessionalsIcon from "../assets/Icons/BusinessProfessionalsIcon.png";
-import AccountingImage from "../assets/Images/AccountingImage.svg";
-import gen_acc_img from "../assets/Images/gen_acc_img.svg";
-import BookkeepingImage from "../assets/Images/BookkeepingImage.svg";
-import SocialMediaImage from "../assets/Images/SocialMediaImage.svg";
-import BusinessConsulting from "../assets/Images/business_consulting.svg";
-import { ArtificialGrassSlider, DrivewayInstallationSlider, FenceAndGateInsallationSlider, LandscapingSlider, PatioServicesSlider, TreesugeonSlider } from "../component/level3/imagesServices";
+import {
+  ArtificialGrassSlider,
+  DrivewayInstallationSlider,
+  FenceAndGateInsallationSlider,
+  GutterCleanerSlider,
+  LandscapingSlider,
+  PatioServicesSlider,
+  TreeSurgeonSlider,
+} from "../component/level3/imagesServices";
 
 const CATEGORIES = [
   {
@@ -89,72 +92,48 @@ const HowItWorksData = {
 const PopularCategoriesData = [
   {
     id: 1,
-    availableOnline: true,
-    title: "Accounting",
-    image: AccountingImage,
-  },
-
-  {
-    id: 2,
-    title: "Bookkeeping Services",
-    image: BookkeepingImage,
-  },
-  {
-    id: 3,
     title: "Fence & Gate Installation",
     image: FenceAndGateInsallationSlider,
     path: "fencing-contractors-near-me",
   },
   {
-    id: 4,
+    id: 2,
     title: "Driveway Installation",
     path: "driveway-installers-near-me",
-    image: DrivewayInstallationSlider, // apna image import karke lagao
+    image: DrivewayInstallationSlider,
   },
 
   {
-    id: 5,
-    title: "Business Consulting",
-    image: BusinessConsulting,
-  },
-  {
-    id: 6,
-    title: "Social Media Marketing",
-    image: SocialMediaImage,
-  },
-
-  {
-    id: 7,
-    availableOnline: true,
-    title: "General Accounting",
-    image: gen_acc_img,
-  },
-
-  {
-    id: 8,
+    id: 3,
     title: "Patio Services",
     image: PatioServicesSlider,
     path: "patio-layers-near-me",
   },
   {
-    id: 9,
+    id: 4,
     title: "Landscaping",
     path: "landscape-gardeners-near-me",
 
     image: LandscapingSlider,
   },
   {
-    id: 10,
+    id: 5,
     title: "Artificial Grass Installation",
     path: "artificial-grass-installers-near-me",
 
     image: ArtificialGrassSlider,
   },
-    {
-    id: 11,
-    title: "Tree Surgeons",
-    image: TreesugeonSlider,
+  {
+    id: 6,
+    title: "Tree Surgery",
+    image: TreeSurgeonSlider,
     path: "tree-surgeon-near-me",
+  },
+  {
+    id: 7,
+    title: "Gutter Cleaning",
+    image: GutterCleanerSlider,
+    path: "gutter-cleaning-near-me",
   },
 ];
 const categoryRoutes = {

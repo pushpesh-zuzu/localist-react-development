@@ -11,8 +11,7 @@ import AccountingSlider from "./serviceImg/AccountingSlider.webp";
 import BookkeepingServicesSlider from "./serviceImg/BookkeepingServicesSlider.webp";
 import MassageTherapySlider from "./serviceImg/MassageTherapySlider.webp";
 import PersonalTrainersSlider from "./serviceImg/PersonalTrainersSlider.webp";
-
-
+import TreeSurgeonSlider from "./serviceImg/TreeSurgeon.webp";
 
 export {
   ArtificialGrassSlider,
@@ -27,5 +26,6 @@ export {
   AccountingSlider,
   BookkeepingServicesSlider,
   MassageTherapySlider,
-  PersonalTrainersSlider
+  PersonalTrainersSlider,
+  TreeSurgeonSlider,
 };

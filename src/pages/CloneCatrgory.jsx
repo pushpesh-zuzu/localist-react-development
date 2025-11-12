@@ -31,42 +31,13 @@ const endpointCategoryMap = {
     "Driveway Installation",
     "Patio Services",
     "Artificial Grass Installation",
-    // "Tree Surgeons",
+    "Tree Surgery",
+    "Gutter Cleaning",
   ],
 };
-// const endpointServiceMap = {
-//   // "financial-and-accounting": ["general Accounting"],
-//   "financial-and-accounting": ["Accounting", "Bookkeeping Services"],
-//   // "general-accounting": ["Accounting", "Bookkeeping Services"],
-//   business: [
-//     "Accounting",
-//     "Bookkeeping Services",
-//     "Business Consulting",
-//     "Social Media Marketing",
-//   ],
-//   home: [
-//     "Fence & Gate Installation",
-//     "Driveway Installation",
-//     "Patio Services",
-//     "Landscaping",
-//     "Artificial Grass Installation",
-//   ],
-// };
-
-// const AllServicesNewData = {
-//   home: [
-//     "Fence & Gate Installation",
-//     "Driveway Installation",
-//     "Patio Services",
-//     "Landscaping",
-//     "Artificial Grass Installation",
-//   ],
-// };
 
 const CloneCategory = ({ accountHeader }) => {
   const location = useLocation();
-  const { lang, country } = useParams();
-  console.log(lang, "l", country, "c");
   const pathSegments = location.pathname.split("/").filter(Boolean); // ['en', 'gb', 'business']
   const endpoint1 = pathSegments[pathSegments.length - 1]; // e.g., 'business'
 
@@ -75,34 +46,10 @@ const CloneCategory = ({ accountHeader }) => {
     allowedTitles.includes(item.title)
   );
 
-  // const allowedServices = endpointServiceMap[endpoint] || [];
-
-  // const filteredAllServicesData = AllServicesData.map((categoryObj) => {
-  //   const [category, services] = Object.entries(categoryObj)[1]
-  //     ? Object.entries(categoryObj)[1]
-  //     : [null, []];
-
-  //   const filteredServices = services.filter((service) =>
-  //     allowedServices.includes(service)
-  //   );
-
-  //   if (filteredServices.length > 0) {
-  //     return { key: categoryObj.key, [category]: filteredServices };
-  //   }
-  //   return null;
-  // }).filter(Boolean);
   const howItWorksData = HowItWorksData[endpoint1];
   return (
     <>
       <Helmet>
-        {/* <title>
-          Find Trusted Home & Garden Professionals Near Me - Localists
-        </title>
-        <meta
-          name="description"
-          content="Need help finding Home & Garden professionals, consultants, or expert local services near you? Get free quotes now at Localists. It's quick, easy & free."
-        /> */}
-
         <script>
           {`
               gtag('event', 'conversion', {
@@ -158,7 +105,8 @@ const CloneCategory = ({ accountHeader }) => {
               name: "Artificial Grass Installation",
               path: "/artificial-grass-installers-near-me",
             },
-            // { name: "Tree Surgeons", path: "/tree-surgeon-near-me" },
+            { name: "Tree Surgery", path: "/tree-surgeon-near-me" },
+            { name: "Gutter Cleaning", path: "/gutter-cleaning-near-me" },
           ]}
         />
         <GetQuotes ctaText={"Home & Garden"} needSString={false} />

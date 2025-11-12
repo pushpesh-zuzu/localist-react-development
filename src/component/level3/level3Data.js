@@ -17,7 +17,11 @@ import Liverpool from "./cities/Liverpool.webp";
 import Manchester from "./cities/Manchester.webp";
 import Warrington from "./cities/Warrington.webp";
 import Chester from "./cities/Chester.webp";
-import { GutterCleanerSlider, TreesugeonSlider } from "./imagesServices";
+import {
+  GutterCleanerSlider,
+  TreesugeonSlider,
+  TreeSurgeonSlider,
+} from "./imagesServices";
 
 const POPULAR_CITIES = [
   { city_image: Liverpool, city_name: "Liverpool" },
@@ -493,12 +497,12 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
+    {
+      id: 5,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
+      path: "tree-surgeon-near-me",
+    },
     // {
     //   id: 6,
     //   image: GutterCleanerSlider,
@@ -531,13 +535,13 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    {
+      id: 5,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
+      path: "tree-surgeon-near-me",
+    },
     // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
     //   id: 6,
     //   image: GutterCleanerSlider,
     //   description: "Gutter Cleaners",
@@ -569,13 +573,13 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
+    {
+      id: 5,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
+      path: "tree-surgeon-near-me",
+    },
     // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
-    //   {
     //   id: 6,
     //   image: GutterCleanerSlider,
     //   description: "Gutter Cleaners",
@@ -607,12 +611,12 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
+    {
+      id: 5,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
+      path: "tree-surgeon-near-me",
+    },
     //   {
     //   id: 6,
     //   image: GutterCleanerSlider,
@@ -645,12 +649,12 @@ const OTHER_SERVICES_DATA = {
       description: "Landscaping",
       path: "landscape-gardeners-near-me",
     },
-    // {
-    //   id: 5,
-    //   image: TreesugeonSlider,
-    //   description: "Tree Surgeon",
-    //   path: "tree-surgeon-near-me",
-    // },
+    {
+      id: 5,
+      image: TreeSurgeonSlider,
+      description: "Tree Surgery",
+      path: "tree-surgeon-near-me",
+    },
     //   {
     //   id: 6,
     //   image: GutterCleanerSlider,
@@ -689,12 +693,6 @@ const OTHER_SERVICES_DATA = {
       description: "Artificial Grass Installation",
       path: "artificial-grass-installers-near-me",
     },
-    {
-      id: 6,
-      image: GutterCleanerSlider,
-      description: "Tree Surgeon",
-      path: "tree-surgeon-near-me",
-    },
   ],
   "gutter-cleaning-near-me": [
     {
@@ -730,7 +728,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 6,
       image: TreesugeonSlider,
-      description: "Tree Surgeon",
+      description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
   ],

@@ -320,7 +320,7 @@ const OtherServiceStep = ({
       dispatch(registerUserData(payload)).then((result) => {
         if (result?.success) {
           showToast("success", result?.message || "Register successful!");
-          navigate("/settings/billing/my-credits");
+          navigate("/sellers/leads");
           dispatch(setService());
           dispatch(setRegisterStep(0));
           dispatch(clearCompanyData());
