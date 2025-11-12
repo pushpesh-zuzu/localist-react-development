@@ -256,7 +256,7 @@ const CloneAccountants = ({
                 <div className={styles.marginForLable}/>
                 <input 
                   type="text"
-                  placeholder="Enter Postcode (No Spaces)"
+                  placeholder="Enter Postcode"
                   name="postcode"
                   value={pincode}
                   onChange={handlePincodeChange}
