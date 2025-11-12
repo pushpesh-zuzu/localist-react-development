@@ -503,12 +503,12 @@ const OTHER_SERVICES_DATA = {
       description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
-    // {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
+    {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
   ],
   "driveway-installers-near-me": [
     {
@@ -541,12 +541,12 @@ const OTHER_SERVICES_DATA = {
       description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
-    // {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
+    {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
   ],
   "patio-layers-near-me": [
     {
@@ -579,12 +579,12 @@ const OTHER_SERVICES_DATA = {
       description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
-    // {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
+    {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
   ],
   "landscape-gardeners-near-me": [
     {
@@ -617,12 +617,12 @@ const OTHER_SERVICES_DATA = {
       description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
+    {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
   ],
   "artificial-grass-installers-near-me": [
     {
@@ -655,12 +655,12 @@ const OTHER_SERVICES_DATA = {
       description: "Tree Surgery",
       path: "tree-surgeon-near-me",
     },
-    //   {
-    //   id: 6,
-    //   image: GutterCleanerSlider,
-    //   description: "Gutter Cleaners",
-    //   path: "gutter-cleaning-near-me",
-    // },
+    {
+      id: 6,
+      image: GutterCleanerSlider,
+      description: "Gutter Cleaners",
+      path: "gutter-cleaning-near-me",
+    },
   ],
   "tree-surgeon-near-me": [
     {
@@ -1247,50 +1247,218 @@ const regionsData = {
   ],
   "driveway-installers-near-me": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
   "patio-layers-near-me": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
   "landscape-gardeners-near-me": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
   "artificial-grass-installers-near-me": [
     {
-      id: 3,
+      id: 1,
       title: "North West England",
       items: [
         { name: "Cheshire", path: "" },
         { name: "Greater Manchester", path: "" },
         { name: "Lancashire", path: "" },
         { name: "Merseyside", path: "" },
+        { name: "Cumbria", path: "" },
       ],
+    },
+    {
+      id: 2,
+      title: "Yorkshire and the Humber ",
+      items: [
+        { name: "North Yorkshire", path: "" },
+        { name: "South Yorkshire", path: "" },
+        { name: "West Yorkshire", path: "" },
+        { name: "East Riding of Yorkshire", path: "" },
+      ],
+    },
+    {
+      id: 3,
+      title: "North East",
+      items: [
+        { name: "Tyne and Wear", path: "" },
+        { name: "County Durham", path: "" },
+        { name: "Northumberland", path: "" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Wales",
+      items: [
+        { name: "Wrexham", path: "" },
+        { name: "Flintshire", path: "" },
+      ],
+    },
+    {
+      id: 5,
+      title: "East Midlands",
+      items: [
+        { name: "Derbyshire", path: "" },
+        { name: "Nottinghamshire", path: "" },
+        { name: "Lioncolnshire ", path: "" },
+      ],
+    },
+    {
+      id: 6,
+      title: "West Midlands",
+      items: [{ name: "Staffordshire", path: "" }],
     },
   ],
 };
