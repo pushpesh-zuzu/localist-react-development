@@ -47,7 +47,7 @@ const SaveForLater = () => {
     Array.isArray(saveForLaterDataList) &&
     Array.isArray(saveForLaterDataList[0]?.savedLeads)
       ? saveForLaterDataList[0]?.savedLeads
-      : [];
+      : saveForLaterDataList;
 
   const data = requiredData?.length;
   const filterOptions = [

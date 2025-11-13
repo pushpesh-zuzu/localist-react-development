@@ -83,7 +83,6 @@ const SearchPostAndBanner = ({
 
       if (newResponse?.data?.city) {
         setCity(newResponse.data.city);
-        console.log(newResponse, "rrrrr");
         dispatch(setcitySerach(newResponse.data.city));
         setbuyerRequestData({
           ...buyerRequest,

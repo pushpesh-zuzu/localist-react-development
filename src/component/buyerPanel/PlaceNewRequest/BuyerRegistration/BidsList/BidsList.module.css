@@ -705,7 +705,7 @@
 
   .cardLeft {
     flex-direction: column;
-    /* align-items: center; */
+    align-items: start;
   }
 
   .sidebar {
