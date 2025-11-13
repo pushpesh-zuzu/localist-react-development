@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { extractAllParams } from "../../../utils/decodeURLParams";
 import { useLocation } from "react-router";
 import { registerQuoteCustomer } from "../../../store/Buyer/BuyerSlice";
 import useUserInfo from "../../../utils/getUserIp";
 
 const NavigationDetectorDesktop = () => {
+  const dispatch = useDispatch();
   const userToken = useSelector((state) => state.auth.userToken);
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
@@ -20,19 +21,16 @@ const NavigationDetectorDesktop = () => {
   const utm_source = allParams.utm_source || "";
   const { ip, url } = useUserInfo();
 
-  // 🧠 Ref to store latest data safely
   const latestData = useRef({
     userToken,
     buyerRequest,
     citySerach,
   });
 
-  // Keep ref updated (no re-renders)
   useEffect(() => {
     latestData.current = { userToken, buyerRequest, citySerach };
   }, [userToken, buyerRequest, citySerach]);
 
-  // Prevent multiple API calls
   const hasSent = useRef(false);
   const submitFormData = () => {
     const { userToken, buyerRequest, citySerach } = latestData.current;
@@ -41,7 +39,6 @@ const NavigationDetectorDesktop = () => {
 
     const updatedAnswers = buyerRequest?.questions || [];
     const formData = new FormData();
-    //  console.log("📡 API Call being made once with form_status: 0");
     const isEverythingEmpty =
       !buyerRequest?.name?.trim() &&
       !buyerRequest?.email?.trim() &&
@@ -53,15 +50,6 @@ const NavigationDetectorDesktop = () => {
       console.log("🚫 Skipping API call - all fields are empty");
       return;
     }
-    console.log("🔍 Empty Check Details:", {
-      name: !!buyerRequest?.name?.trim(),
-      email: !!buyerRequest?.email?.trim(),
-      phone: !!buyerRequest?.phone?.trim(),
-      postcode: !!buyerRequest?.postcode?.trim(),
-      questions: buyerRequest?.questions?.length > 0,
-      city: !!citySerach?.trim(), // Just for info
-      isEverythingEmpty: isEverythingEmpty,
-    });
 
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
