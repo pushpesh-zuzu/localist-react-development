@@ -4,7 +4,7 @@ import styles from "./LoaderWithTextMultiStepForm.module.css";
 const LoaderWithTextMultiStepForm = ({
   loadingTexts = [
     "Evaluating your requirements",
-    "Sorting through tree surgeon specialist",
+    "Sorting best local matches",
     "Curating top matches",
   ],
   intervalTime = 1000,
