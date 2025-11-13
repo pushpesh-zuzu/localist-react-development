@@ -736,24 +736,24 @@ const OTHER_SERVICES_DATA = {
 
 const AVERAGE_PRICE = {
   "fencing-contractors-near-me": [
-    {
-      Region: "Nationwide",
-      "Great Value": "£300",
-      Average: "£975",
-      Premium: "£2300",
-    },
-    {
-      Region: "London",
-      "Great Value": "£240",
-      Average: "£1000",
-      Premium: "£2300",
-    },
-    {
-      Region: "South West England",
-      "Great Value": "£350",
-      Average: "£950",
-      Premium: "£2550",
-    },
+    // {
+    //   Region: "Nationwide",
+    //   "Great Value": "£300",
+    //   Average: "£975",
+    //   Premium: "£2300",
+    // },
+    // {
+    //   Region: "London",
+    //   "Great Value": "£240",
+    //   Average: "£1000",
+    //   Premium: "£2300",
+    // },
+    // {
+    //   Region: "South West England",
+    //   "Great Value": "£350",
+    //   Average: "£950",
+    //   Premium: "£2550",
+    // },
   ],
   "driveway-installers-near-me": [
     {
@@ -845,10 +845,12 @@ const FREQUENTLY_DATA = {
     {
       key: "2",
       title: "How much does fence and gate installation cost?",
-      description: `<p>The cost of installing fences and gates can vary based on several factors - the size of your project, the materials you choose, and the type of fencing or gate you need (manual or automated, wooden or metal, decorative or security-focused).</p>
+      description: `<p>On average, a 250ft gate installation will cost around £2000</p>
+      <p>The cost of installing fences and gates can vary based on several factors - the size of your project, the materials you choose, and the type of fencing or gate you need (manual or automated, wooden or metal, decorative or security-focused).</p>
       <p>Naturally, more complex or custom installations will cost more, and the number of fences or gates you want to install will affect the final price too.</p>
       <p>When you connect with a professional through Localists, you’ll get clear, tailored quotes based on your specific needs. Your local fence installer can walk you through your options and help you choose the best solution to fit your budget and style.</p>
-      <p>Want an accurate quote? With Localists, you can quickly get free, no-obligation estimates from qualified fencing contractors nearby, so you know exactly what to expect before committing.</p>`,
+      
+      `,
     },
     {
       key: "3",
@@ -1620,8 +1622,6 @@ const CONTENT_CONFIG = {
     para2:
       "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project.. So no more shopping around for the best quote, we bring the quotes to you!",
     para3: `No cost. no obligation. Just free quotes straight in your inbox!`,
-    para4:
-      "Professional fence installers - qualified, reviewed, and ready to go!",
   },
 
   "driveway-installers-near-me": {
