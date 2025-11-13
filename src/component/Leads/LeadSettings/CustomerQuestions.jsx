@@ -27,7 +27,12 @@ import ServiceSelectionModal from "./ServiceModal";
 import LocationModal from "../LocationModal";
 import { useNavigate } from "react-router-dom";
 
-const CustomerQuestions = ({ selectedService, setSelectedService }) => {
+const CustomerQuestions = ({
+  selectedService,
+  setSelectedService,
+  // setIsRemoved,
+  onBack,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -262,7 +267,7 @@ const CustomerQuestions = ({ selectedService, setSelectedService }) => {
   return (
     <>
       <div className={styles.modal}>
-        <div onClick={handleBack} className={styles.arrowBtn}>
+        <div onClick={onBack} className={styles.arrowBtn}>
           {" "}
           <img src={blackArrow} alt="..." /> Back
         </div>

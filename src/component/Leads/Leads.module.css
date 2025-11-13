@@ -2,14 +2,9 @@
   background: #f9f9fa;
   padding: 25px 88px;
   display: flex;
-  /* justify-content: space-between; */
 }
 .leadSettingsOverlay {
   display: flex !important;
-}
-
-.leadSettingsTabView {
-  display: none;
 }
 
 @media (max-width: 1120px) {
@@ -24,7 +19,6 @@
     flex-direction: column;
   }
   .leadSettingsOverlay {
-    display: none !important;
     width: -webkit-fill-available;
   }
 

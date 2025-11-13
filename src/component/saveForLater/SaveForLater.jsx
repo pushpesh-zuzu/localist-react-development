@@ -67,8 +67,6 @@ const SaveForLater = () => {
     }
   };
 
-  console.log("jdcuygduygyu ", requiredData);
-
   const handleSortChange = (value) => {
     setSelectedSort(value);
     if (userToken?.remember_tokens || registerData?.remember_tokens) {
