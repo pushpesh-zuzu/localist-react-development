@@ -1620,7 +1620,7 @@ const CONTENT_CONFIG = {
     para1:
       "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylishfence to boundary your castle?.",
     para2:
-      "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project.. So no more shopping around for the best quote, we bring the quotes to you!",
+      "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project. So no more shopping around for the best quote, we bring the quotes to you!",
     para3: `No cost. no obligation. Just free quotes straight in your inbox!`,
   },
 
