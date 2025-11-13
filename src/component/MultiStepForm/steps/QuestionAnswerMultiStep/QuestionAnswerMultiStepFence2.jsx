@@ -5,6 +5,7 @@ import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
+import BannerImagesQuestion from "../BannerImagesQuestion/BannerImagesQuestion";
 
 const QuestionAnswerMultiStepFence2 = ({
   questions = [],
@@ -287,33 +288,7 @@ const QuestionAnswerMultiStepFence2 = ({
       }
     >
       {currentQuestion === 0 && isQuestionWithImage && (
-        <div
-          className={`${
-            serviceName === "Patio Services"
-              ? styles.headerImage
-              : serviceName === "Artificial Grass Installation"
-              ? styles.headerImage1
-              : serviceName === "General Builders"
-              ? styles.headerImage2
-              : serviceName === "Driveway Installation"
-              ? styles.headerImage3
-              : serviceName === "Fence & Gate Installation"
-              ? styles.headerImage4
-              : serviceName === "Gardening"
-              ? styles.headerImage5
-              : serviceName === "Home and Garden"
-              ? styles.headerImage6
-              : serviceName === "Landscaping"
-              ? styles.headerImage7
-              : serviceName === "Gate Installation"
-              ? styles.headerImage8
-              : serviceName === "Tree Surgeon"
-              ? styles.headerImage9
-              : serviceName === "Roofing"
-              ? styles.headerImage10
-              : styles.headerImage
-          } ${styles.bannerMargin}`}
-        />
+        <BannerImagesQuestion serviceName={serviceName} />
       )}
       {currentQuestion === 0 && (
         <h2

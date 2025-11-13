@@ -26,8 +26,9 @@ import QuestionAnswerMultiStepTreeSurgeon from "./steps/QuestionAnswerMultiStep/
 const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep, questionLoader } =
-    useSelector((state) => state.buyer);
+  const { questionanswerData, buyerStep, questionLoader } = useSelector(
+    (state) => state.buyer
+  );
 
   useEffect(() => {
     if (location.pathname.includes("tree-surgeon-multi-form-ppc")) {
@@ -74,7 +75,6 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
     }
     handleScrollToBottom();
   }, [buyerStep]);
-
 
   const nextStep = () => {
     setBackButtonTriggered(false);
@@ -235,7 +235,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
                 </div>
               )}
               {buyerStep === 2 && (
-                <div style={{ margin: "auto" }}>
+                <div className={styles.postcode} style={{ margin: "auto" }}>
                   <PostCodeSearchTreeSurgeon
                     prevStep={prevStep}
                     onNext={nextStep}
@@ -248,10 +248,10 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
               )}
 
               {buyerStep === 3 && (
-                <div style={{ margin: "auto" }}>
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStepTreeSurgeon
                     questions={lastQuestion}
-                    onNext={nextStep}
+                    osnNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}
                     setIsComingFromStep4={setIsComingFromStep4}

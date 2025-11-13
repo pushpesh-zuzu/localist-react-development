@@ -27,7 +27,6 @@ import useClientReady from "../../utils/useClientReady";
 const MultiStepFormRoofing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const {isClientReady} = useClientReady()
   const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
     useSelector((state) => state.buyer);
 
@@ -131,7 +130,6 @@ const MultiStepFormRoofing = ({ isQuestionWithImage = false }) => {
 
   const firstQuestions = questionanswerData?.slice(0, -2) || [];
   const lastQuestion = questionanswerData?.slice(-2) || [];
-console.log(progressPercentage,'pppp')
   useEffect(() => {
     if (questionanswerData.length > 0) {
       setIsLoadingQuestions(false);
@@ -218,7 +216,7 @@ console.log(progressPercentage,'pppp')
                 </div>
               )}
               {buyerStep === 2 && (
-                <div style={{ margin: "auto" }}>
+                <div className={styles.postcode} style={{ margin: "auto" }}>
                   <PostSearchMultiStepFence
                     getProgressPercentage={getProgressPercentage}
                     prevStep={prevStep}
@@ -232,7 +230,7 @@ console.log(progressPercentage,'pppp')
               )}
 
               {buyerStep === 3 && (
-                <div style={{ margin: "auto" }}>
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStepFence
                     questions={lastQuestion} // Sirf last question
                     onNext={nextStep} // Last question complete hone ke baad next step
