@@ -6,10 +6,10 @@ import AllUsers from "../../../assets/Icons/AllUsers.svg";
 import Icon from "../../../assets/Icons/Icon.png";
 import topBigArrow from "../../../assets/Icons/topBigArrow.png";
 import { Helmet } from "react-helmet-async";
-import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
 import { setbuyerRequestData } from "../../../store/Buyer/BuyerSlice";
+import { useEffect } from "react";
 const LandingNewPPC = ({
   title = "",
   subHeading = "",
@@ -18,17 +18,7 @@ const LandingNewPPC = ({
 }) => {
   const dispatch = useDispatch();
 
-  //     const { buyerRequest } =
-  //       useSelector((state) => state.buyer);
-  //  const [hasMountedDetector, setHasMountedDetector] = useState(false);
 
-  // useEffect(() => {
-  //   if (!hasMountedDetector && buyerRequest?.questions?.length > 0) {
-  //     setHasMountedDetector(true);
-  //   }
-  //   // ❌ Don't depend on buyerRequest.questions
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [hasMountedDetector]);
   useEffect(() => {
     dispatch(setbuyerRequestData({ service_id: serviceId }));
   }, []);
@@ -102,8 +92,6 @@ const LandingNewPPC = ({
             <p className={styles.paragraphTextDesktop}>
               Complete the form now to find the ideal local professional for
               your requirements
-              {/* <br />
-              <span>for your requirements</span> */}
             </p>
           </div>
         </div>
