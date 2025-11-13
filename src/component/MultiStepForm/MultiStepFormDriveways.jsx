@@ -219,7 +219,6 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                     onNext={nextStep}
                     onBack={prevStep}
                     loading={isLoadingQuestions}
-                    getProgressPercentage={getProgressPercentage}
                     isComingFromStep3={isComingFromStep3}
                     setQuestionHistory={setQuestionHistory}
                     questionHistory={questionHistory}
@@ -249,9 +248,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                   <QuestionAnswerMultiStepDriveways
                     questions={lastQuestion}
                     onNext={nextStep}
-                    onBack={prevStep}
-                    loading={questionLoader}
-                    getProgressPercentage={getProgressPercentage}
+                    onBack={prevStep} 
                     setIsComingFromStep4={setIsComingFromStep4}
                     isComingFromStep4={isComingFromStep4}
                     setProgressPercentage={setProgressPercentage}

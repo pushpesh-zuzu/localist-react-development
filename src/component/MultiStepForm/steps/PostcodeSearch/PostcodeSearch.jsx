@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { message, Spin } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PostcodeSearch.module.css";
@@ -16,7 +16,6 @@ const PostcodeSearch = ({
   title = "What is your postcode",
   prevStep,
   getProgressPercentage,
-  backButtonTriggered,
   setBackButtonTriggered,
   returPercentage,
 }) => {

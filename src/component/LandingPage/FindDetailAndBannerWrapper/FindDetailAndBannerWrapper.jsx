@@ -1,7 +1,6 @@
 import styles from "../SearchPostAndBanner/searchpostandbanner.module.css";
 import FindDetail from "../FindDetail/FindDetail";
 import SearchPostAndBanner from "../SearchPostAndBanner/SearchPostAndBanner";
-import RatingBadge from "../RatingBadge/RatingBadge";
 
 const FindDetailAndBannerWrapper = ({
   title,
@@ -19,7 +18,6 @@ const FindDetailAndBannerWrapper = ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    // height: "539px",
     color: "white",
   };
 
@@ -38,7 +36,6 @@ const FindDetailAndBannerWrapper = ({
           welcomModalTitle={welcomModalTitle}
           welcomModalButtonText={welcomModalButtonText}
         />
-        {/* <RatingBadge /> */}
       </div>
       <div>
         <FindDetail paragraphs={paragraphs} />

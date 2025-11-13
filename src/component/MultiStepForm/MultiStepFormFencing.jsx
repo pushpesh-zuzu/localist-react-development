@@ -79,7 +79,6 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     setBackButtonTriggered(false);
     setIsComingFromStep3(false);
     setIsComingFromStep4(false);
-
     setTimeout(() => {
       const currentIndex = stepFlow.indexOf(buyerStep);
       if (currentIndex < stepFlow.length - 1) {
@@ -126,8 +125,8 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
     dispatch(questionAnswerData({ service_id: 49 }));
   }, []);
 
-  const firstQuestions = questionanswerData?.slice(0, -2) || [];
-  const lastQuestion = questionanswerData?.slice(-2) || [];
+  const firstQuestions = questionanswerData?.slice(0, -2) || []; 
+  const lastQuestion = questionanswerData?.slice(-2) || []; 
 
   useEffect(() => {
     if (questionanswerData.length > 0) {
@@ -151,7 +150,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => setIsDesktop(window.innerWidth > 768);
-      handleResize(); // initial check
+      handleResize(); 
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -228,7 +227,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
               {buyerStep === 3 && (
                 <div style={{ margin: "auto" }}>
                   <QuestionAnswerMultiStepFence
-                    questions={lastQuestion}
+                    questions={lastQuestion} 
                     onNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}

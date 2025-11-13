@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
-import { message } from "antd";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 
@@ -210,7 +208,6 @@ const QuestionAnswerMultiStep2 = ({
       onNext();
       return;
     } else if (nextQ === "last") {
-      console.log('nextQ === "last"');
       const firstStepProgress = (2 / 3) * 100;
       const remainingProgressPerStep = (100 - firstStepProgress) / 2;
       getProgressPercentage(remainingProgressPerStep);
@@ -241,7 +238,6 @@ const QuestionAnswerMultiStep2 = ({
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
       const percentage = (100 * 2) / (totalQuestions * 3);
-
       currentQuestion > 1 && getProgressPercentage(-percentage);
       currentQuestion === 1 &&
         setProgressPercentage((100 * 2) / (totalQuestions * 3));

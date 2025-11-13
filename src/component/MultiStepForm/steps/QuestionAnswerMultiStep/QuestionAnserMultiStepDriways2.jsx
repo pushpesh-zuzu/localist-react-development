@@ -1,13 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setbuyerRequestData,
-} from "../../../../store/Buyer/BuyerSlice";
-import { LoadingOutlined } from "@ant-design/icons";
-import { message } from "antd";
+import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
-import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 
@@ -15,7 +10,6 @@ const QuestionAnserMultiStepDriways2 = ({
   questions = [],
   onNext,
   onBack,
-  getProgressPercentage,
   isComingFromStep3 = false,
   setQuestionHistory,
   questionHistory,
@@ -26,38 +20,21 @@ const QuestionAnserMultiStepDriways2 = ({
   isQuestionWithImage = false,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, requestLoader, citySerach } = useSelector(
-    (state) => state.buyer
-  );
-  const { service, registerData } = useSelector((state) => state.findJobs);
-  const { userToken, adminToken } = useSelector((state) => state.auth);
+  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
+  const { service } = useSelector((state) => state.findJobs);
   const [specialFlowPercentage, SpecialFlowPercentage] = useState(70);
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
   const [totalQuestionsAnswered, setTotalQuestionsAnswered] = useState(1);
-  const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length || 1;
 
-  // ✅ SMART PROGRESS CALCULATION: 90% total for 7 questions
   const calculateProgress = () => {
-    // 7 questions ke liye 90% distribute karo
-    // Har question approximately 12.85% progress
     const progress = (totalQuestionsAnswered / 7) * specialFlowPercentage;
-    return Math.min(progress, specialFlowPercentage); // Maximum 90% tak hi jaye
+    return Math.min(progress, specialFlowPercentage);
   };
 
   const progressPercent = calculateProgress();
@@ -87,10 +64,9 @@ const QuestionAnserMultiStepDriways2 = ({
   useEffect(() => {
     if (isComingFromStep3 && buyerRequest?.questions?.length > 0) {
       setCurrentQuestion(4);
-      setTotalQuestionsAnswered(5); // Q1, Q2, Q3, Q4, Q8 (commercial flow)
+      setTotalQuestionsAnswered(5);
     }
   }, [isComingFromStep3]);
-  // Load saved answers when question changes
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
@@ -117,7 +93,6 @@ const QuestionAnserMultiStepDriways2 = ({
   }, [currentQuestion, buyerRequest, questions]);
   useEffect(() => {
     if (buyerRequest && Array.isArray(buyerRequest.questions)) {
-      // check answers
       const hasSpecialAnswer = buyerRequest.questions.some(
         (q) =>
           q?.ans === "Replace the current driveway" ||
@@ -137,18 +112,14 @@ const QuestionAnserMultiStepDriways2 = ({
     const isSingle = questions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      // ✅ Select single option only
       setSelectedOption([value]);
-      setError(""); // Clear error only on change
-
-      // ✅ If option is NOT "Something else", move to next after short delay
+      setError("");
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
         }, 150);
       }
     } else {
-      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -191,11 +162,7 @@ const QuestionAnserMultiStepDriways2 = ({
     );
 
     const nextQ = selectedObj?.next_question;
-
-    // ✅ Update questions answered count (but don't exceed 7)
     setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
-
-    // ✅ MAINTAINED: Question 6 skip functionality
     if (nextQ === "6") {
       dispatch(
         setbuyerRequestData({
@@ -205,15 +172,12 @@ const QuestionAnserMultiStepDriways2 = ({
           questions: updatedAnswers,
         })
       );
-      // ✅ FIXED: Set progress to 75% before moving to next step
       setProgressPercentage(75);
       onNext();
       return;
     }
 
-    // ✅ MAINTAINED: Question 6 skip functionality
     if (nextQ === "6") {
-      // ✅ FIXED: Set progress to 75% before moving to next step
       setProgressPercentage(75);
       onNext();
       return;
@@ -221,12 +185,10 @@ const QuestionAnserMultiStepDriways2 = ({
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
     } else {
-      // Fallback if no next_question found
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
       } else {
-        // ✅ FIXED: Set progress to 75% before moving to next step
         setProgressPercentage(75);
         onNext();
       }
@@ -268,18 +230,14 @@ const QuestionAnserMultiStepDriways2 = ({
     );
 
     const nextQ = selectedObj?.next_question;
-
-    // ✅ Update questions answered count (but don't exceed 7)
     setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
 
     let nextIndex = null;
     if (nextQ === Number(nextQ)) {
-      // ✅ FIXED: Set progress to 75% before moving to next step
       setProgressPercentage(75);
       onNext();
       return;
     } else if (nextQ === "last") {
-      // ✅ FIXED: Set progress to 75% before moving to next step
       setProgressPercentage(75);
       onNext();
       return;
@@ -290,13 +248,11 @@ const QuestionAnserMultiStepDriways2 = ({
     }
 
     if (nextIndex !== null) {
-      // Check if nextIndex is already in questionHistory
       if (!questionHistory.includes(nextIndex)) {
         setQuestionHistory((prev) => [...prev, nextIndex]);
       }
       setCurrentQuestion(nextIndex);
     } else {
-      // ✅ FIXED: Set progress to 75% before moving to next step
       setProgressPercentage(75);
       onNext();
     }
@@ -310,7 +266,6 @@ const QuestionAnserMultiStepDriways2 = ({
       const prevIndex = newHistory[newHistory.length - 1];
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
-      // ✅ FIXED: Decrease questions answered count (minimum 1)
       setTotalQuestionsAnswered((prev) => Math.max(1, prev - 1));
     } else {
       onBack();
@@ -350,7 +305,6 @@ const QuestionAnserMultiStepDriways2 = ({
     >
       {currentQuestion === 0 && isQuestionWithImage && (
         <div
-          // style={{ marginTop: "-25px", marginBottom: "20px" }}
           className={`${
             serviceName === "Patio Services"
               ? styles.headerImage

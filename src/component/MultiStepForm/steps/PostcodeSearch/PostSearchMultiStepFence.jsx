@@ -30,8 +30,8 @@ const PostSearchMultiStepFence = ({
   const [isCheckingPostcode, setIsCheckingPostcode] = useState(false);
   const [error, setError] = useState("");
 
-  const firstStepProgress = (2 / 3) * 100; // 66.66%
-  const remainingProgressPerStep = (100 - firstStepProgress) / 3; // ≈16.665%
+  const firstStepProgress = (2 / 3) * 100; 
+  const remainingProgressPerStep = (100 - firstStepProgress) / 3;
 
   const showToast = (type, content) => message[type](content);
   const handlePincodeChange = async (e) => {

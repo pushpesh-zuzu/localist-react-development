@@ -210,7 +210,6 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                     questions={lastQuestion}
                     onNext={nextStep}
                     onBack={prevStep}
-                    loading={questionLoader}
                     getProgressPercentage={getProgressPercentage}
                   />
                 </div>

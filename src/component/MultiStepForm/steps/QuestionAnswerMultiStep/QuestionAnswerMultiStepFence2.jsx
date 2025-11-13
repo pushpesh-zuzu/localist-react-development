@@ -210,8 +210,8 @@ const QuestionAnswerMultiStepFence2 = ({
       onNext();
       return;
     } else if (nextQ === "last") {
-      const firstStepProgress = (2 / 3) * 100; // 66.66%
-      const remainingProgressPerStep = (100 - firstStepProgress) / 2; // for remaining 2 steps ≈16.665%
+      const firstStepProgress = (2 / 3) * 100;
+      const remainingProgressPerStep = (100 - firstStepProgress) / 2;
       getProgressPercentage(remainingProgressPerStep);
       onNext();
       return;
@@ -240,7 +240,6 @@ const QuestionAnswerMultiStepFence2 = ({
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
       const percentage = (100 * 2) / (totalQuestions * 3);
-
       currentQuestion > 1 && getProgressPercentage(-percentage);
       currentQuestion === 1 &&
         setProgressPercentage((100 * 2) / (totalQuestions * 3));

@@ -26,7 +26,7 @@ import QuestionAnswerMultiStepTreeSurgeon from "./steps/QuestionAnswerMultiStep/
 const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
+  const { questionanswerData, buyerStep, questionLoader } =
     useSelector((state) => state.buyer);
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
     );
   }, [location.pathname]);
 
-  const [animationDirection, setAnimationDirection] = useState("");
   const [actualSteps, setActualSteps] = useState(1);
   const [progressPercentage, setProgressPercentage] = useState(0);
   const { userToken } = useSelector((state) => state.auth);
@@ -76,9 +75,6 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
     handleScrollToBottom();
   }, [buyerStep]);
 
-  const getProgressPercentage = (per) => {
-    setProgressPercentage((pre) => pre + per);
-  };
 
   const nextStep = () => {
     setBackButtonTriggered(false);
@@ -123,7 +119,6 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
     }
   }, [buyerStep]);
 
-  // Main initialization useEffect
   useEffect(() => {
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
     if (pendingModal?.shouldOpen) {
@@ -171,7 +166,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => setIsDesktop(window.innerWidth > 768);
-      handleResize(); // initial check
+      handleResize();
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -217,7 +212,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
           }`}
         >
           <div className={styles.formContainer}>
-            <div className={`${styles.slideContainer} ${animationDirection}`}>
+            <div className={`${styles.slideContainer}`}>
               {buyerStep === 1 && (
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAsnwerMultiStepTreeSurgeon2

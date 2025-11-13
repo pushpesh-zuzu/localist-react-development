@@ -8,7 +8,6 @@ import {
   LANDING_TITLES_AND_META,
   LANDING_WELCOM_MODAL_BUTTON_TITLE,
   LANDING_WELCOM_MODAL_TITLE,
-  META_TAG_LANDING_PAGE,
   ServiceId,
 } from "./landingPageData";
 import FindDetailAndBannerWrapper from "./FindDetailAndBannerWrapper/FindDetailAndBannerWrapper";
@@ -23,7 +22,6 @@ const LandingLandscaping = ({}) => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    //only client side execution
     setIsClient(true);
     setIsDesktop(window.innerWidth > 768);
 
@@ -57,14 +55,13 @@ const LandingLandscaping = ({}) => {
         title={LANDING_TITLES_AND_META["landscaping_ppc"]?.title}
         paragraphs={LANDING_DETAIL_DATA["landscaping_ppc"].paragraphs}
         defaultService={LANDING_SERVICES["landscaping_ppc"]}
-        isNeedS={false}
         bannerImage={LANDING_DETAIL_BANNERS["landscaping_ppc"]?.banner}
         cancelHeading={CANCEL_POPUP_DATA.cancelHeading}
         cancelPara={CANCEL_POPUP_DATA.cancelPara}
         serviceId={ServiceId.landscaping_ppc}
         welcomModalTitle={LANDING_WELCOM_MODAL_TITLE["landscaping_ppc"]}
         welcomModalButtonText={
-          LANDING_WELCOM_MODAL_BUTTON_TITLE["landscaping_ppc"]
+        LANDING_WELCOM_MODAL_BUTTON_TITLE["landscaping_ppc"]
         }
       />
 

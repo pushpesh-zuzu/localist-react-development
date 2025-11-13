@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
@@ -12,28 +11,12 @@ const QuestionAnswerMultiStepDriveways = ({
   questions = [],
   onNext,
   onBack,
-  getProgressPercentage,
-  serviceName = "Driveway Installers",
   setIsComingFromStep4,
   isComingFromStep4,
   setProgressPercentage,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
-  const { service, registerData } = useSelector((state) => state.findJobs);
-  const { userToken, adminToken } = useSelector((state) => state.auth);
-
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("gad_campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -41,16 +24,13 @@ const QuestionAnswerMultiStepDriveways = ({
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isFirstQuestionAnswered, setIsFirstQuestionAnswered] = useState(false);
 
-  const showToast = (type, content) => message[type](content);
 
   const totalQuestions = questions?.length;
 
-  // ✅ Initialize progress to 85% when component mounts
   useEffect(() => {
     setProgressPercentage(85);
   }, [setProgressPercentage]);
 
-  // ✅ FIXED: useMemo se formattedQuestions ko memoize karo
   const formattedQuestions = useMemo(() => {
     return questions.map((q) => ({
       ...q,
@@ -64,9 +44,8 @@ const QuestionAnswerMultiStepDriveways = ({
             }
           })(),
     }));
-  }, [questions]); // ✅ Only re-calculate when questions change
+  }, [questions]); 
 
-  // ✅ FIXED: useMemo se questionIndexMap ko memoize karo
   const questionIndexMap = useMemo(() => {
     const map = {};
     formattedQuestions.forEach((q, index) => {
@@ -75,13 +54,11 @@ const QuestionAnswerMultiStepDriveways = ({
     return map;
   }, [formattedQuestions]);
 
-  // ✅ FIXED: Simplified saved answers loading
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
       const currentQuestionText =
         formattedQuestions[currentQuestion]?.questions;
 
-      // Find saved answer for CURRENT question
       const savedQuestion = buyerRequest.questions.find(
         (q) => q?.ques === currentQuestionText
       );
@@ -95,7 +72,6 @@ const QuestionAnswerMultiStepDriveways = ({
 
         setSelectedOption(savedArray);
 
-        // Simple "Something else" handling
         if (savedArray.includes("Something else (please describe)")) {
           const otherVal = savedArray.find(
             (val) => val !== "Something else (please describe)"
@@ -109,9 +85,8 @@ const QuestionAnswerMultiStepDriveways = ({
         setOtherText("");
       }
     }
-  }, [currentQuestion, buyerRequest, formattedQuestions]); // ✅ Removed unnecessary dependencies
+  }, [currentQuestion, buyerRequest, formattedQuestions]);
 
-  // Reset when question changes
   useEffect(() => {
     setError("");
   }, [currentQuestion]);
@@ -124,14 +99,12 @@ const QuestionAnswerMultiStepDriveways = ({
       setSelectedOption([value]);
       setError("");
 
-      // ✅ If option is NOT "Something else", move to next after short delay
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
           handleNext([value]);
         }, 150);
       }
     } else {
-      // ✅ For checkboxes
       setSelectedOption((prev) =>
         checked ? [...prev, value] : prev.filter((opt) => opt !== value)
       );
@@ -163,21 +136,17 @@ const QuestionAnswerMultiStepDriveways = ({
       ans: finalAnswer.join(", "),
     };
 
-    // Copy previous answers
     const previousAnswers = buyerRequest?.questions || [];
 
-    // Check if question already exists
     const questionIndex = previousAnswers?.findIndex(
       (q) => q?.ques === updatedAnswer?.ques
     );
 
     let updatedAnswers;
     if (questionIndex !== -1) {
-      // Replace only if question already exists
       updatedAnswers = [...previousAnswers];
       updatedAnswers[questionIndex] = updatedAnswer;
     } else {
-      // Append new answer
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
 
@@ -268,15 +237,6 @@ const QuestionAnswerMultiStepDriveways = ({
       setProgressPercentage(95);
     }
     if (nextQ === Number(nextQ)) {
-      // dispatch(
-      //   setbuyerRequestData({
-      //     service_id: service?.id || buyerRequest?.service_id,
-      //     serviceName: serviceName || buyerRequest?.serviceName,
-      //     postcode: buyerRequest?.postcode,
-      //     city: citySerach,
-      //     questions: updatedAnswers,
-      //   })
-      // );
       onNext();
     } else if (nextQ === "last") {
       onNext();
@@ -312,7 +272,6 @@ const QuestionAnswerMultiStepDriveways = ({
       setQuestionHistory(newHistory);
       setCurrentQuestion(prevIndex);
 
-      // ✅ Reset first question flag and progress when going back to first question
       if (prevIndex === 0) {
         setIsFirstQuestionAnswered(false);
         setProgressPercentage(85);
@@ -330,11 +289,6 @@ const QuestionAnswerMultiStepDriveways = ({
     );
   }
 
-  useEffect(() => {
-    return () => {
-      // Cleanup function - runs when component unmounts
-    };
-  }, []);
 
   useEffect(() => {
     if (isComingFromStep4 && buyerRequest?.questions?.length > 0) {
