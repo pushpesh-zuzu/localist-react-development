@@ -275,7 +275,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>221</span>
+                          {/* <span className={styles.diagonal_price}>221</span> */}
                           {item?.no_of_leads} Credits
                         </span>
                       </div>
@@ -287,7 +287,7 @@ const MyCredits = () => {
                             justifyContent: "center",
                           }}
                         >
-                          £320{" "}
+                          £160{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
                         <button
