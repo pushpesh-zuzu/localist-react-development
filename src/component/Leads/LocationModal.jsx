@@ -239,6 +239,7 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
               <Option value="5">5 miles</Option>
               <Option value="10">10 miles</Option>
               <Option value="20">20 miles</Option>
+              <Option value="30">30 miles</Option>
               <Option value="50">50 miles</Option>
               <Option value="100">100 miles</Option>
             </Select>

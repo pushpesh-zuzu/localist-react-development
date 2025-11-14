@@ -55,7 +55,7 @@ const CustomerQuestions = ({
   const { registerData } = useSelector((state) => state.findJobs);
   const { userToken } = useSelector((state) => state.auth);
   const [locationData, setLocationData] = useState({
-    miles1: "1",
+    miles1: "20",
     postcode: "",
   });
   const nationwideShow = serviceWiseData?.map((item) => item?.type);

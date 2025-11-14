@@ -91,7 +91,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     (state) => state.findJobs
   );
   const [locationData, setLocationData] = useState({
-    miles1: "1",
+    miles1: "20",
     postcode: "",
   });
 

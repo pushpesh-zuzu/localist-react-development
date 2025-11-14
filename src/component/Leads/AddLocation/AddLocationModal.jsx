@@ -46,7 +46,7 @@ const AddLocationModal = ({
     }
   };
   const [locationData, setLocationData] = useState({
-    miles1: "1",
+    miles1: "20",
     postcode: "",
     travel_time: "",
     travel_by: "",
