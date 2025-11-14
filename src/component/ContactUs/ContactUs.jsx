@@ -52,7 +52,7 @@ const ContactUs = () => {
 
   return (
     <>
-      <CalonicalTags bannerImage={contactUsBanner} />
+      <CalonicalTags bannerImage={contactUsBanner} isRequiredjsonLd={false} />
       <Helmet>
         <title>
           Get in Touch with Localists | Customer & Professional Support

@@ -20,7 +20,7 @@ const HowItWorksPageCustomers = () => {
           content="Find trusted local professionals fast with Localists.com. Enter your details, get up to 5 free quotes, compare, and save – no commission or hidden fees."
         />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
       <HowItWorks />
     </>
   );

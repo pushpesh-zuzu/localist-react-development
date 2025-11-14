@@ -31,7 +31,7 @@ function AboutUs() {
           content="Meet our experienced leadership team and the investors driving Localists, the world’s fastest-growing local services marketplace. Get free quotes."
         />
       </Helmet>
-      <CalonicalTags bannerImage={aboutUsBanner} />
+      <CalonicalTags bannerImage={aboutUsBanner} isRequiredjsonLd={false}/>
       <BannerWrapper headingText="About Us" image={aboutUsBanner} />
       <WhoWeAre />
       {/* <Stats /> */}

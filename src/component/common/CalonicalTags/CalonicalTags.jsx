@@ -1,7 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 
-const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
+const CalonicalTags = ({
+  breadcrumb = [],
+  bannerImage,
+  isRequiredjsonLd = true,
+  isRequiredBaseUrlinBreadcrum=true
+}) => {
   const baseUrl = "https://www.localists.com";
   const location = useLocation();
   const parts = location.pathname.split("/").filter(Boolean);
@@ -12,7 +17,7 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
   const canonicalUrl = `${baseUrl}/en/gb/${path}`;
   const breadcrumbList = breadcrumb.length
     ? [
-        {
+        isRequiredBaseUrlinBreadcrum && {
           "@type": "ListItem",
           position: 1,
           name: "Home",
@@ -20,7 +25,7 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
         },
         ...breadcrumb.map((item, index) => ({
           "@type": "ListItem",
-          position: index + 2,
+          position: isRequiredBaseUrlinBreadcrum ? index + 2 : index + 1,
           name: item?.title || "",
           item: `${baseUrl}/en/gb/${
             item?.path ? cleanPath(item.path) : `${path}`
@@ -49,7 +54,7 @@ const CalonicalTags = ({ breadcrumb = [], bannerImage }) => {
 
       {/* <link rel="alternate" hreflang="x-default" href={`${baseUrl}/${path}`} /> */}
 
-      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      {isRequiredjsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
     </Helmet>
   );
 };

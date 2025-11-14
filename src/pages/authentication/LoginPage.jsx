@@ -114,7 +114,7 @@ const LoginPage = () => {
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false}/>
       <div className="login-box">
         <h1 className="login-title">
           {passwordless ? (

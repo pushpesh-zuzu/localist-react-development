@@ -34,7 +34,7 @@ function HowItWorkSeller() {
           content="Learn how Localists connect you with ready-to-hire customers in your area. Get quality leads, grow your business, and boost your visibility online today."
         />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false}/>
       <div className={styles.container} style={style}>
         <div className={styles.text}>
           <BlueBlackTextForH1

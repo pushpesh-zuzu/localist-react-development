@@ -100,6 +100,7 @@ const LevelThreePage = ({}) => {
       <CalonicalTags
         breadcrumb={BREADCRUMB_CONFIG[slug]}
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
+        isRequiredBaseUrlinBreadcrum={false}
       />
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}

@@ -55,7 +55,7 @@ const Homepage = () => {
           `}
         </script>
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
 
       <SearchProfessionals
         popularList={popularList}
