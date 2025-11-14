@@ -396,7 +396,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         setIsLocationModalOpen(false);
         setEditLocationId(null);
         setLocationData({
-          miles1: "1",
+          miles1: "20",
           postcode: "",
         });
       }

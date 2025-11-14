@@ -107,7 +107,7 @@ const AddLocationModal = ({
           setIsLocationModalOpen(false);
           setEditLocationId(null);
           setLocationData({
-            miles1: "1",
+            miles1: "20",
             postcode: "",
           });
           setSelectedServices([]);
@@ -123,7 +123,7 @@ const AddLocationModal = ({
           setLocationType("");
           setIsLocationModalOpen(false);
           setLocationData({
-            miles1: "1",
+            miles1: "20",
             postcode: "",
           });
           setIsNextModalOpen(false);
