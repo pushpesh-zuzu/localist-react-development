@@ -195,9 +195,11 @@ const MyCredits = () => {
         </div>
         {creditPlanList?.[0]?.plan_type === "starter" ? (
           <p className={styles.starter_note}>
-            We charge a small fee for each customer you contact on Localists.
-            Buy a pack of 265 credits and get 20% OFF
+            {/* We charge a small fee for each customer you contact on Localists.
+            Buy a pack of 265 credits and get 20% OFF */}
+            {''}
           </p>
+          
         ) : (
           <p className={styles.note}>
             We apply a small fee for each new customer you choose to contact.
