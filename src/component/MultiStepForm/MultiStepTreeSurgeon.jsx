@@ -251,7 +251,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
                 <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStepTreeSurgeon
                     questions={lastQuestion}
-                    osnNext={nextStep}
+                    onNext={nextStep}
                     onBack={prevStep}
                     loading={questionLoader}
                     setIsComingFromStep4={setIsComingFromStep4}
