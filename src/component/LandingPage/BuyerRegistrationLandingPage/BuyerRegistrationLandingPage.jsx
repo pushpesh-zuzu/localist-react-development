@@ -4,6 +4,7 @@ import QuestionModal from "../../common/questionModal/QuestionModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   questionAnswerData,
+  setbuyerRequestData,
   setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
 import ViewYourMatches from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/ViewYourMatches/ViewYourMatches";
@@ -125,7 +126,11 @@ const BuyerRegistrationLandingPage = ({
     isStartWithQuestionModal &&
       dispatch(questionAnswerData({ service_id: serviceId }));
   }, []);
-  console.log(buyerRequest, "brr");
+
+  useEffect(() => {
+    dispatch(setbuyerRequestData({ service_id: serviceId }));
+  }, []);
+
   return (
     <div className={styles.modal}>
       {!isStartWithQuestionModal ? (

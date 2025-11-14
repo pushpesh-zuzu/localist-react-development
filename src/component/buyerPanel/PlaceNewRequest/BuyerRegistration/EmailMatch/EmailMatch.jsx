@@ -56,6 +56,14 @@ const EmailMatch = ({
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        name,
+        email: e.target.value,
+        phone,
+      })
+    );
   };
 
   useEffect(() => {
@@ -154,6 +162,14 @@ const EmailMatch = ({
   const handleNameChange = (e) => {
     setName(e.target.value);
     setErrors((prev) => ({ ...prev, name: false }));
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        name: e.target.value,
+        email,
+        phone,
+      })
+    );
   };
 
   const handlePhoneChange = (e) => {
@@ -161,6 +177,9 @@ const EmailMatch = ({
     if (value.length <= 10) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
+      dispatch(
+        setbuyerRequestData({ ...buyerRequest, name, email, phone: value })
+      );
     }
   };
 

@@ -192,7 +192,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                 </div>
               )}
               {buyerStep === 2 && (
-                <div style={{ margin: "auto" }}>
+                <div className={styles.postcode} style={{ margin: "auto" }}>
                   <PostcodeSearch
                     getProgressPercentage={getProgressPercentage}
                     prevStep={prevStep}
@@ -205,7 +205,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
               )}
 
               {buyerStep === 3 && (
-                <div style={{ margin: "auto" }}>
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStep
                     questions={lastQuestion}
                     onNext={nextStep}

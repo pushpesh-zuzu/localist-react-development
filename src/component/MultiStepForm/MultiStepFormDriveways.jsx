@@ -225,12 +225,12 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                     setIsComingFromStep3={setIsComingFromStep3}
                     setProgressPercentage={setProgressPercentage}
                     isQuestionWithImage={isQuestionWithImage}
-                    serviceName="Driveway Installation"
+                    serviceName="Driveway Installers"
                   />
                 </div>
               )}
               {buyerStep === 2 && (
-                <div style={{ margin: "auto" }}>
+                <div className={styles.postcode} style={{ margin: "auto" }}>
                   <PostcodeSearchDriveways
                     getProgressPercentage={getProgressPercentage}
                     prevStep={prevStep}
@@ -244,11 +244,11 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
               )}
 
               {buyerStep === 3 && (
-                <div style={{ margin: "auto" }}>
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
                   <QuestionAnswerMultiStepDriveways
                     questions={lastQuestion}
                     onNext={nextStep}
-                    onBack={prevStep} 
+                    onBack={prevStep}
                     setIsComingFromStep4={setIsComingFromStep4}
                     isComingFromStep4={isComingFromStep4}
                     setProgressPercentage={setProgressPercentage}
