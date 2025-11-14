@@ -228,10 +228,10 @@ const MyCredits = () => {
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
                       <span>
-                        20% Boost{" "}
-                        <div>
+                        50% Discount{" "}
+                        {/* <div>
                           <img src={shuttle} alt="" />
-                        </div>
+                        </div> */}
                       </span>{" "}
                       <div>Your Exclusive Sign Up Offer</div>
                     </div>
@@ -247,7 +247,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>221</span>
+                          {/* <span className={styles.diagonal_price}>221</span> */}
                           {item?.no_of_leads} Credits
                         </span>
                         <h3
