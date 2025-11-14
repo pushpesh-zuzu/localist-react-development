@@ -96,9 +96,11 @@ function App({ initialUrl, hostname, createRouterFactory }) {
       <React.Suspense fallback={<FullScreenSpinner />}>
         <RouterProvider router={router} />
       </React.Suspense>
-      <React.Suspense fallback={null}>
-        <LazyToastContainer />
-      </React.Suspense>
+      {typeof window !== "undefined" && (
+        <React.Suspense fallback={null}>
+          <LazyToastContainer />
+        </React.Suspense>
+      )}
     </>
   );
 }
