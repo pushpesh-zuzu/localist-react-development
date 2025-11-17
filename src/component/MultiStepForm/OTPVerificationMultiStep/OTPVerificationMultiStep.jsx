@@ -232,6 +232,7 @@ const OTPVerificationMultiStep = ({
           margin: "auto",
           padding: "5px 6px",
           borderRadius: "3px",
+          maxWidth: "450px",
         }}
       >
         <p
