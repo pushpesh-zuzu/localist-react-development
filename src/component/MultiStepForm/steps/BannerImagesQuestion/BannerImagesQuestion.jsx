@@ -12,13 +12,20 @@ const bannerMap = {
   "Tree Surgeon": treeSurgeonBanner,
   Roofing: roofingBanner,
 };
+const altTag = {
+  "Driveway Installers": "driveway installation",
+  "Fence & Gate Installation": "garden fence installation",
+  Landscaping: "landscapers near me",
+  "Tree Surgeon": "tree surgeons near me",
+  Roofing: "roofing specialist",
+};
 
 const BannerImagesQuestion = ({ serviceName = "Landscaping" }) => {
   return (
     <div className={styles.bannerMargin}>
       <img
         src={bannerMap[serviceName] || landscapingBanner}
-        alt={`${serviceName} banner`}
+        alt={`${altTag[serviceName]}`}
         className={styles.bannerImage}
       />
     </div>

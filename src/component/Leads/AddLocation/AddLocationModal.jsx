@@ -46,7 +46,7 @@ const AddLocationModal = ({
     }
   };
   const [locationData, setLocationData] = useState({
-    miles1: "1",
+    miles1: "20",
     postcode: "",
     travel_time: "",
     travel_by: "",
@@ -107,7 +107,7 @@ const AddLocationModal = ({
           setIsLocationModalOpen(false);
           setEditLocationId(null);
           setLocationData({
-            miles1: "1",
+            miles1: "20",
             postcode: "",
           });
           setSelectedServices([]);
@@ -123,7 +123,7 @@ const AddLocationModal = ({
           setLocationType("");
           setIsLocationModalOpen(false);
           setLocationData({
-            miles1: "1",
+            miles1: "20",
             postcode: "",
           });
           setIsNextModalOpen(false);

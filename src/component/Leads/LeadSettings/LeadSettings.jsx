@@ -91,7 +91,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     (state) => state.findJobs
   );
   const [locationData, setLocationData] = useState({
-    miles1: "1",
+    miles1: "20",
     postcode: "",
   });
 
@@ -396,7 +396,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
         setIsLocationModalOpen(false);
         setEditLocationId(null);
         setLocationData({
-          miles1: "1",
+          miles1: "20",
           postcode: "",
         });
       }

@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
+import {
+  setbuyerRequestData,
+  setBuyerRequestInternalQuestion,
+  setQuestionsForProgress,
+} from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./QuestionAnswerMultiStep.module.css";
 import { handleScrollToBottom } from "../../../../utils/scroll";
 import BannerImagesQuestion from "../BannerImagesQuestion/BannerImagesQuestion";
 
-const QuestionAnserMultiStepDriways2 = ({
+const QuestionAnserMultiStepRoofingNew2 = ({
   questions = [],
   onNext,
   onBack,
@@ -15,39 +19,24 @@ const QuestionAnserMultiStepDriways2 = ({
   setQuestionHistory,
   questionHistory,
   setIsComingFromStep3,
-  setProgressPercentage,
   loading = true,
   serviceName = "Driveway Installers",
   isQuestionWithImage = false,
+  removeQuestionByNumber,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
-  const { service } = useSelector((state) => state.findJobs);
-  const [specialFlowPercentage, SpecialFlowPercentage] = useState(70);
-
+  const { buyerRequest, questionsForProgress, buyerRequestInternalQuestion } =
+    useSelector((state) => state.buyer);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
   const [totalQuestionsAnswered, setTotalQuestionsAnswered] = useState(1);
-
   const totalQuestions = questions?.length || 1;
-
-  const calculateProgress = () => {
-    const progress = (totalQuestionsAnswered / 7) * specialFlowPercentage;
-    return Math.min(progress, specialFlowPercentage);
-  };
-
-  const progressPercent = calculateProgress();
-
-  useEffect(() => {
-    setProgressPercentage(progressPercent);
-  }, [progressPercent, setProgressPercentage]);
-
   const formattedQuestions = questions.map((q) => ({
     ...q,
     parsedAnswers: Array.isArray(q.answer)
-      ? q.answer
+      ? q?.answer
       : (() => {
           try {
             return JSON.parse(q.answer);
@@ -64,13 +53,26 @@ const QuestionAnserMultiStepDriways2 = ({
 
   useEffect(() => {
     if (isComingFromStep3 && buyerRequest?.questions?.length > 0) {
-      setCurrentQuestion(4);
+      setCurrentQuestion(5);
       setTotalQuestionsAnswered(5);
+      const lastQuestion =
+        questionsForProgress[questionsForProgress.length - 1];
+      const lastQuestionNo = lastQuestion.number;
+      removeQuestionByNumber(lastQuestionNo);
     }
   }, [isComingFromStep3]);
+
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
-      const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
+      const currentQuestionNo =
+        formattedQuestions[currentQuestion]?.question_no;
+
+      const savedAnswerObj = buyerRequest.questions.find(
+        (item) => item.question_no === currentQuestionNo
+      );
+
+      const savedAnswer = savedAnswerObj?.ans || [];
+
       const savedArray =
         typeof savedAnswer === "string"
           ? savedAnswer.split(",").map((a) => a.trim())
@@ -78,128 +80,55 @@ const QuestionAnserMultiStepDriways2 = ({
 
       setSelectedOption(savedArray);
 
-      const otherVal = savedArray.find(
-        (ans) =>
-          ans.toLowerCase() !== "yes" &&
-          ans.toLowerCase() !== "no" &&
-          ans.toLowerCase() !== "maybe"
-      );
-      setOtherText(
-        savedArray.includes("Something else (please describe)")
-          ? otherVal || ""
-          : ""
-      );
+      const otherVal = savedArray.find((ans) => {
+        const lowerAns = ans.toLowerCase();
+        return (
+          lowerAns !== "yes" &&
+          lowerAns !== "no" &&
+          lowerAns !== "maybe" &&
+          lowerAns !== "i own the property" &&
+          lowerAns !== "i am buying the property" &&
+          lowerAns !== "i am renting the property" &&
+          !lowerAns.includes("something else")
+        );
+      });
+
+      setOtherText(otherVal || "");
+    } else {
+      setSelectedOption([]);
+      setOtherText("");
     }
     handleScrollToBottom();
   }, [currentQuestion, buyerRequest, questions]);
-  useEffect(() => {
-    if (buyerRequest && Array.isArray(buyerRequest.questions)) {
-      const hasSpecialAnswer = buyerRequest.questions.some(
-        (q) =>
-          q?.ans === "Replace the current driveway" ||
-          q?.ans === "Business or Commercial Premises"
-      );
-
-      if (hasSpecialAnswer) {
-        SpecialFlowPercentage(70);
-      } else {
-        SpecialFlowPercentage(90);
-      }
-    }
-  }, [buyerRequest]);
 
   const handleOptionChange = (e) => {
     const { value, checked } = e.target;
-    const isSingle = questions[currentQuestion]?.option_type === "single";
+    const isSingle =
+      formattedQuestions[currentQuestion]?.option_type === "single";
 
     if (isSingle) {
-      setSelectedOption([value]);
+      const newSelected = [value];
+      setSelectedOption(newSelected);
       setError("");
       if (value !== "Something else (please describe)") {
         setTimeout(() => {
-          handleNext([value]);
+          handleNext(newSelected);
         }, 150);
       }
     } else {
-      setSelectedOption((prev) =>
-        checked ? [...prev, value] : prev.filter((opt) => opt !== value)
-      );
+      const newSelected = checked
+        ? [...selectedOption, value]
+        : selectedOption.filter((opt) => opt !== value);
+
+      setSelectedOption(newSelected);
       setError("");
     }
   };
 
-  const handleNextCheckBox = () => {
-    if (selectedOption.length === 0) {
-      setError("Please select at least one option.");
-      return;
-    }
-
-    if (
-      selectedOption.includes("Something else (please describe)") &&
-      (!otherText.trim() ||
-        otherText.trim().toLowerCase() === "something else (please describe)")
-    ) {
-      setError("Please enter a value for 'Other' option.");
-      return;
-    }
-
-    const finalAnswer = selectedOption?.map((opt) =>
-      opt.toLowerCase() === "something else (please describe)" ? otherText : opt
-    );
-
-    const updatedAnswer = {
-      ques: questions[currentQuestion]?.questions,
-      ans: finalAnswer.join(", "),
-    };
-
-    const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
-
-    dispatch(setbuyerRequestData({ questions: updatedAnswers }));
-
-    const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
-      (a) => a.option === selectedOption[0]
-    );
-
-    const nextQ = selectedObj?.next_question;
-    setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
-    if (nextQ === "6") {
-      dispatch(
-        setbuyerRequestData({
-          service_id: service?.id || buyerRequest?.service_id,
-          postcode: buyerRequest?.postcode,
-          city: citySerach,
-          questions: updatedAnswers,
-        })
-      );
-      setProgressPercentage(75);
-      onNext();
-      return;
-    }
-
-    if (nextQ === "6") {
-      setProgressPercentage(75);
-      onNext();
-      return;
-    } else if (nextQ && questionIndexMap[nextQ]) {
-      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
-      setCurrentQuestion(questionIndexMap[nextQ]);
-    } else {
-      if (currentQuestion < totalQuestions - 1) {
-        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
-        setCurrentQuestion(currentQuestion + 1);
-      } else {
-        setProgressPercentage(75);
-        onNext();
-      }
-    }
-  };
-
-  const handleNext = (selected) => {
+  const validateAndProceed = (selected) => {
     if (selected.length === 0) {
       setError("Please select at least one option.");
-      return;
+      return false;
     }
 
     if (
@@ -208,70 +137,180 @@ const QuestionAnserMultiStepDriways2 = ({
         otherText.trim().toLowerCase() === "something else (please describe)")
     ) {
       setError("Please enter a value for 'Other' option.");
-      return;
+      return false;
     }
 
+    return true;
+  };
+  const saveAnswerToStore = (selected) => {
     const finalAnswer = selected.map((opt) =>
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
     const updatedAnswer = {
-      ques: questions[currentQuestion]?.questions,
+      ques: formattedQuestions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
+      question_no: formattedQuestions[currentQuestion]?.question_no,
     };
 
     const previousAnswers = buyerRequest?.questions || [];
 
     const existingIndex = previousAnswers.findIndex(
-      (item) => item?.ques === updatedAnswer.ques
+      (item) => item.question_no === updatedAnswer.question_no
     );
 
     let updatedAnswers;
+
     if (existingIndex !== -1) {
-      updatedAnswers = [...previousAnswers];
-      updatedAnswers[existingIndex] = updatedAnswer;
+      const oldAnswer = previousAnswers[existingIndex].ans;
+      const newAnswer = updatedAnswer.ans;
+
+      if (oldAnswer !== newAnswer) {
+        const selectedObj = formattedQuestions[
+          currentQuestion
+        ]?.parsedAnswers.find((a) => a.option === selected[0]);
+        const oldSelectedObj = formattedQuestions[
+          currentQuestion
+        ]?.parsedAnswers.find((a) => a.option === oldAnswer);
+
+        const oldNextQ = oldSelectedObj?.next_question;
+        const newNextQ = selectedObj?.next_question;
+
+        if (oldNextQ !== newNextQ) {
+          updatedAnswers = [...previousAnswers];
+          updatedAnswers[existingIndex] = updatedAnswer;
+
+          const oldNextIndex = updatedAnswers.findIndex(
+            (item) => item.question_no === oldNextQ
+          );
+          if (oldNextIndex !== -1) {
+            updatedAnswers.splice(oldNextIndex, 1);
+          }
+        } else {
+          updatedAnswers = [...previousAnswers];
+          updatedAnswers[existingIndex] = updatedAnswer;
+        }
+      } else {
+        updatedAnswers = [...previousAnswers];
+        updatedAnswers[existingIndex] = updatedAnswer;
+      }
     } else {
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
 
-    dispatch(setbuyerRequestData({ questions: updatedAnswers }));
+    const answersWithoutQno = updatedAnswers.map(
+      ({ question_no, ...rest }) => rest
+    );
 
+    dispatch(setbuyerRequestData({ questions: updatedAnswers }));
+    // dispatch(setBuyerRequestInternalQuestion({ questions: updatedAnswers }));
+
+    return { updatedAnswer, finalAnswer };
+  };
+  const getNextQuestionIndex = (selected) => {
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
     );
 
     const nextQ = selectedObj?.next_question;
-    setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
-
     let nextIndex = null;
-    if (nextQ === Number(nextQ)) {
-      setProgressPercentage(75);
-      onNext();
-      return;
-    } else if (nextQ === "last") {
-      setProgressPercentage(75);
-      onNext();
-      return;
-    } else if (nextQ && questionIndexMap[nextQ]) {
+
+    if (nextQ === "7" || nextQ === "last") {
+      return "last";
+    } else if (nextQ && questionIndexMap[nextQ] !== undefined) {
       nextIndex = questionIndexMap[nextQ];
     } else if (currentQuestion < totalQuestions - 1) {
       nextIndex = currentQuestion + 1;
     }
 
-    if (nextIndex !== null) {
+    return nextIndex;
+  };
+
+  const handleNextCheckBox = () => {
+    if (!validateAndProceed(selectedOption)) {
+      return;
+    }
+
+    const { updatedAnswer } = saveAnswerToStore(selectedOption);
+
+    const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
+      (a) => a.option === selectedOption[0]
+    );
+    const nextQ = selectedObj?.next_question;
+
+    setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
+
+    const UpdateQuestionWithNumber = {
+      ...updatedAnswer,
+      number: formattedQuestions[currentQuestion]?.question_no,
+    };
+
+    dispatch(
+      setQuestionsForProgress([
+        ...questionsForProgress,
+        UpdateQuestionWithNumber,
+      ])
+    );
+
+    const nextIndex = getNextQuestionIndex(selectedOption);
+
+    if (nextIndex === "last") {
+      onNext();
+      return;
+    } else if (nextIndex !== null) {
+      setQuestionHistory((prev) => [...prev, nextIndex]);
+      setCurrentQuestion(nextIndex);
+    } else {
+      onNext();
+    }
+  };
+
+  const handleNext = (selected) => {
+    if (!validateAndProceed(selected)) {
+      return;
+    }
+
+    const { updatedAnswer } = saveAnswerToStore(selected);
+
+    setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
+    const UpdateQuestionWithNumber = {
+      ...updatedAnswer,
+      number: formattedQuestions[currentQuestion]?.question_no, // Use current question number
+    };
+
+    dispatch(
+      setQuestionsForProgress([
+        ...questionsForProgress,
+        UpdateQuestionWithNumber,
+      ])
+    );
+
+    const nextIndex = getNextQuestionIndex(selected);
+
+    if (nextIndex === "last") {
+      onNext();
+      return;
+    } else if (nextIndex !== null) {
       if (!questionHistory.includes(nextIndex)) {
         setQuestionHistory((prev) => [...prev, nextIndex]);
       }
       setCurrentQuestion(nextIndex);
     } else {
-      setProgressPercentage(75);
       onNext();
     }
   };
 
   const handleBack = () => {
     setIsComingFromStep3(false);
+
     if (questionHistory.length > 1) {
+      if (questionsForProgress.length > 0) {
+        const lastQuestion =
+          questionsForProgress[questionsForProgress.length - 1];
+        const lastQuestionNo = lastQuestion.number;
+        removeQuestionByNumber(lastQuestionNo);
+      }
+
       const newHistory = [...questionHistory];
       newHistory.pop();
       const prevIndex = newHistory[newHistory.length - 1];
@@ -279,6 +318,17 @@ const QuestionAnserMultiStepDriways2 = ({
       setCurrentQuestion(prevIndex);
       setTotalQuestionsAnswered((prev) => Math.max(1, prev - 1));
     } else {
+      if (questionsForProgress.length > 0) {
+        const firstQuestion = questionsForProgress[0];
+        const firstQuestionNo = firstQuestion.number;
+        removeQuestionByNumber(firstQuestionNo);
+      }
+
+      setCurrentQuestion(0);
+      setTotalQuestionsAnswered(1);
+      setSelectedOption([]);
+      setOtherText("");
+
       onBack();
     }
   };
@@ -335,14 +385,13 @@ const QuestionAnserMultiStepDriways2 = ({
         {formattedQuestions[currentQuestion]?.parsedAnswers.map(
           (opt, index) => {
             const isSelected = selectedOption.includes(opt.option);
+            const isSingle =
+              formattedQuestions[currentQuestion]?.option_type === "single";
+
             return (
               <label
                 key={index}
-                className={
-                  formattedQuestions[currentQuestion]?.option_type === "single"
-                    ? styles.option
-                    : styles.options
-                }
+                className={isSingle ? styles.option : styles.options}
                 style={{
                   boxShadow: isSelected
                     ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
@@ -350,12 +399,7 @@ const QuestionAnserMultiStepDriways2 = ({
                 }}
               >
                 <input
-                  type={
-                    formattedQuestions[currentQuestion]?.option_type ===
-                    "single"
-                      ? "radio"
-                      : "checkbox"
-                  }
+                  type={isSingle ? "radio" : "checkbox"}
                   name="surveyOption"
                   value={opt.option}
                   checked={selectedOption.includes(opt.option)}
@@ -395,4 +439,4 @@ const QuestionAnserMultiStepDriways2 = ({
   );
 };
 
-export default QuestionAnserMultiStepDriways2;
+export default QuestionAnserMultiStepRoofingNew2;

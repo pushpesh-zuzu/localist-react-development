@@ -31,7 +31,9 @@ const FindLocalJobs = () => {
     useSelector((state) => state.findJobs);
   const navigate = useNavigate();
   const { search } = useLocation();
-  const allParams = extractAllParams(search || window.location.search);
+  const allParams =
+    typeof window !== "undefined" &&
+    extractAllParams(search || window.location.search);
   console.log(allParams, "allParams");
   // const handleServiceClick = (service) => {
   //   const slug = generateSlug(service.name);

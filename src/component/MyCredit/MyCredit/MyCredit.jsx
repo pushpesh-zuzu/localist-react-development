@@ -193,8 +193,9 @@ const MyCredits = () => {
         </div>
         {creditPlanList?.[0]?.plan_type === "starter" ? (
           <p className={styles.starter_note}>
-            We charge a small fee for each customer you contact on Localists.
-            Buy a pack of 265 credits and get 20% OFF
+            {/* We charge a small fee for each customer you contact on Localists.
+            Buy a pack of 265 credits and get 20% OFF */}
+            {""}
           </p>
         ) : (
           <p className={styles.note}>
@@ -226,10 +227,10 @@ const MyCredits = () => {
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
                       <span>
-                        20% Boost{" "}
-                        <div>
+                        50% Discount{" "}
+                        {/* <div>
                           <img src={shuttle} alt="" />
-                        </div>
+                        </div> */}
                       </span>{" "}
                       <div>Your Exclusive Sign Up Offer</div>
                     </div>
@@ -245,7 +246,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>221</span>
+                          {/* <span className={styles.diagonal_price}>221</span> */}
                           {item?.no_of_leads} Credits
                         </span>
                         <h3
@@ -273,7 +274,7 @@ const MyCredits = () => {
                         <span
                           className={`${styles.creditTag} ${styles.creditpadding}`}
                         >
-                          <span className={styles.diagonal_price}>221</span>
+                          {/* <span className={styles.diagonal_price}>221</span> */}
                           {item?.no_of_leads} Credits
                         </span>
                       </div>
@@ -285,7 +286,7 @@ const MyCredits = () => {
                             justifyContent: "center",
                           }}
                         >
-                          £320{" "}
+                          £160{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
                         <button

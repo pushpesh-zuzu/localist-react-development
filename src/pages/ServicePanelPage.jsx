@@ -36,7 +36,7 @@ const ServicePanelPage = () => {
           content="Join Localists free as a professional. Get verified leads with no hidden fees. Pay only for the customers you want and keep all your earnings."
         />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
       <ServicePanel />
     </>
   );

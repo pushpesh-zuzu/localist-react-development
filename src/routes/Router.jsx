@@ -73,12 +73,13 @@ import MultiStepDrivewayWithBanner from "../pages/MultiStepDrivewayWithBanner";
 import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
-const MultiStepRoofingPage = lazy(() =>
-  import("../pages/MultiStepRoofingPage")
-);
-const MultiStepRoofingBanner = lazy(() =>
-  import("../pages/MultiStepRoofingBanner")
-);
+import MultiStepRoofingNew from "../component/MultiStepForm/MultiStepRoofingNew";
+// const MultiStepRoofingPage = lazy(() =>
+//   import("../pages/MultiStepRoofingPage")
+// );
+// const MultiStepRoofingBanner = lazy(() =>
+//   import("../pages/MultiStepRoofingBanner")
+// );
 // Build routes once and reuse for both client and server routers
 const routes = [
   {
@@ -762,25 +763,21 @@ const routes = [
   {
     path: "/en/gb/roofing-multi-form-ppc",
     element: (
-      <React.Suspense fallback={<FullScreenSpinner />}>
-        <ProtectedRouteForMultiFormPPC>
-          <LocaleRedirect>
-            <MultiStepRoofingPage />
-          </LocaleRedirect>
-        </ProtectedRouteForMultiFormPPC>
-      </React.Suspense>
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+          <MultiStepRoofingNew serviceId={113} />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {
     path: "/en/gb/roofing-multi-form-ppc-banner",
     element: (
-      <React.Suspense fallback={<FullScreenSpinner />}>
-        <ProtectedRouteForMultiFormPPC>
-          <LocaleRedirect>
-            <MultiStepRoofingBanner />
-          </LocaleRedirect>
-        </ProtectedRouteForMultiFormPPC>
-      </React.Suspense>
+      <ProtectedRouteForMultiFormPPC>
+        <LocaleRedirect>
+           <MultiStepRoofingNew serviceName="Roofing" isQuestionWithImage serviceId={113} />
+        </LocaleRedirect>
+      </ProtectedRouteForMultiFormPPC>
     ),
   },
   {

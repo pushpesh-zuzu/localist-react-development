@@ -38,7 +38,7 @@ const PrivacyPolicy = () => {
           content="Read the Privacy Policy of Localists.com, operated by IMG Limited, explaining how your personal data is collected, used and protected when using our UK services."
         />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
       <div className={styles.container}>
         <nav className={styles.navWrapper}>
           <ul className={styles.nav}>

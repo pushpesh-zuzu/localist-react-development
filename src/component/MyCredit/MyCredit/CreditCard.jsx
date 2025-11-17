@@ -219,7 +219,7 @@ const CreditCard = () => {
               <img src={visaImg} alt="Visa" />
               <div className={styles.separator}></div>
               <div className={styles.textRight}>
-                Buy credits and avail the Exclusive Sign Up Offer now!
+                Buy credits and take advantage of the exclusive sign up offer now!
               </div>
             </div>
 

@@ -87,7 +87,7 @@ function TreeSurgeon() {
         <meta name="twitter:title" content={metaConfig?.title} />
         <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
-      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TreeSugeon} />
+      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TreeSugeon} isRequiredBaseUrlinBreadcrum={false} />
 
       <SearchAndFindAnAccountant
         title={topConfig?.title}
