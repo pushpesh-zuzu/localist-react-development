@@ -101,8 +101,9 @@
 }
 
 .input {
-  width: 100%;
+  width: -webkit-fill-available;
   max-width: -webkit-fill-available;
+  min-width: -moz-available;
   padding: 10px 8px;
   margin-top: 4px;
   border: 1px solid #d9d9d9;
@@ -235,8 +236,9 @@
 }
 
 .textarea {
-  width: 100%;
+  width: -webkit-fill-available;
   max-width: -webkit-fill-available;
+  min-width: -moz-available;
   padding: 8px;
   border: 1px solid #ccc;
   color: #828282;

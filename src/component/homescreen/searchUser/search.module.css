@@ -92,6 +92,7 @@
 }
 
 .input {
+  width: 100%;
   flex: 1;
   padding: 12px;
   border: none;
@@ -157,7 +158,7 @@
   line-height: 30px;
   letter-spacing: 0;
   color: #ffffff;
-  padding: 13px 39px;
+  padding: 13px 20px;
   border-radius: 3px;
   background: var(--primary-color);
   cursor: pointer !important;
@@ -342,7 +343,7 @@
 
   .searchButton {
     font-size: 1rem;
-    padding: 10px 39px;
+    padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;

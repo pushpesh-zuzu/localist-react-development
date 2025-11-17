@@ -31,7 +31,6 @@ const MyCredits = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [activeLoaderId, setActiveLoaderId] = useState(null);
-  const [notChecked, setNotChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
@@ -43,7 +42,6 @@ const MyCredits = () => {
     (state) => state.myCredit
   );
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-  const [isChecked, setIsChecked] = useState(true);
   const [checkedPlans, setCheckedPlans] = useState({});
 
   const [isAddCardModal, setIsAddCardModal] = useState(false);
