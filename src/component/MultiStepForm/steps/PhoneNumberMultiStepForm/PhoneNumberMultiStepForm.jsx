@@ -45,7 +45,21 @@ const PhoneNumberMultiStepForm = ({
       setMobileErrorMessage("");
     }
   };
-  const updatedAnswers = buyerRequest?.questions || [];
+  const updatedAnswers = Array.isArray(buyerRequest?.questions)
+    ? buyerRequest.questions.filter(Boolean) // remove undefined/null items
+    : [];
+
+  const hasQuestionNo = updatedAnswers.some(
+    (q) => q && typeof q === "object" && "question_no" in q
+  );
+
+  const answersToSend = hasQuestionNo
+    ? updatedAnswers.map((q) => {
+        if (!q || typeof q !== "object") return q;
+        const { question_no, ...rest } = q;
+        return rest;
+      })
+    : updatedAnswers;
 
   const handleSubmit = () => {
     if (phone.startsWith("0")) {
@@ -70,7 +84,7 @@ const PhoneNumberMultiStepForm = ({
       formData.append("name", buyerRequest?.name);
       formData.append("email", buyerRequest?.email);
       formData.append("phone", phone);
-      formData.append("questions", JSON.stringify(updatedAnswers));
+      formData.append("questions", JSON.stringify(answersToSend));
       formData.append("service_id", buyerRequest?.service_id);
       formData?.append("city", buyerRequest?.city);
       formData.append("postcode", buyerRequest?.postal_code);

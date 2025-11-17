@@ -37,7 +37,21 @@ const NavigationDetectorDesktop = () => {
     if (hasSent.current || userToken) return;
     hasSent.current = true;
 
-    const updatedAnswers = buyerRequest?.questions || [];
+    const updatedAnswers = Array.isArray(buyerRequest?.questions)
+      ? buyerRequest.questions.filter(Boolean) // remove undefined/null items
+      : [];
+
+    const hasQuestionNo = updatedAnswers.some(
+      (q) => q && typeof q === "object" && "question_no" in q
+    );
+
+    const answersToSend = hasQuestionNo
+      ? updatedAnswers.map((q) => {
+          if (!q || typeof q !== "object") return q;
+          const { question_no, ...rest } = q;
+          return rest;
+        })
+      : updatedAnswers;
     const formData = new FormData();
     const isEverythingEmpty =
       !buyerRequest?.name?.trim() &&
@@ -54,7 +68,7 @@ const NavigationDetectorDesktop = () => {
     formData.append("name", buyerRequest?.name);
     formData.append("email", buyerRequest?.email);
     formData.append("phone", buyerRequest?.phone);
-    formData.append("questions", JSON.stringify(updatedAnswers));
+    formData.append("questions", JSON.stringify(answersToSend));
     formData.append("service_id", buyerRequest?.service_id || "");
     formData.append("city", citySerach || "");
     formData.append("postcode", buyerRequest?.postcode || "");

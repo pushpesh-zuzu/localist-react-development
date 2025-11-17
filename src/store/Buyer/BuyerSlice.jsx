@@ -31,6 +31,10 @@ const initialState = {
     ip: "",
     entryUrl: "",
   },
+  buyerRequestInternalQuestion: {
+    questions: [],
+  },
+  questionsForProgress: [],
   qualityData: {},
   addDetailLoader: false,
   buyerrequestListLoader: false,
@@ -509,6 +513,12 @@ const buyerSlice = createSlice({
     setbuyerRequestData(state, action) {
       state.buyerRequest = { ...state.buyerRequest, ...action.payload };
     },
+    setBuyerRequestInternalQuestion(state, action) {
+      state.buyerRequestInternalQuestion = {
+        ...state.buyerRequestInternalQuestion,
+        ...action.payload,
+      };
+    },
     setRequestId(state, action) {
       state.requestId = action.payload;
     },
@@ -564,6 +574,11 @@ const buyerSlice = createSlice({
         JSON.stringify(action.payload)
       );
     },
+    clearSetBuyerRequestInternalQuestion(state, action) {
+      state.buyerRequestInternalQuestion = {
+        questions: [],
+      };
+    },
     clearSetbuyerRequestData(state, action) {
       state.buyerRequest = {
         service_id: "",
@@ -583,6 +598,9 @@ const buyerSlice = createSlice({
     },
     setcitySerach(state, action) {
       state.citySerach = action.payload;
+    },
+    setQuestionsForProgress(state, action) {
+      state.questionsForProgress = action.payload;
     },
   },
 });
@@ -617,6 +635,8 @@ export const {
   setGetNotificationData,
   setRequestUserPhone,
   setRedirectFromHome,
+  setQuestionsForProgress,
+  setBuyerRequestInternalQuestion
 } = buyerSlice.actions;
 
 export default buyerSlice.reducer;
