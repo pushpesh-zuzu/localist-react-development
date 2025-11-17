@@ -255,7 +255,7 @@ const MyCredits = () => {
                             justifyContent: "center",
                           }}
                         >
-                          £320{" "}
+                          {item.price}{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
                         <button

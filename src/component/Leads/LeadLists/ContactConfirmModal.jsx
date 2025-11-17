@@ -287,7 +287,7 @@ const ContactConfirmModal = ({
                         <strong>{item?.no_of_leads} credits</strong>
                       </p>
                       <p className={styles.paraText}>
-                        Enough for about 10 leads
+                        Enough for about {item.no_of_responses} leads
                       </p>
                     </div>
                     <div className={styles.priceDetails}>
