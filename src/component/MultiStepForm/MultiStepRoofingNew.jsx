@@ -252,15 +252,17 @@ const MultiStepRoofingNew = ({
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  serviceId={serviceId}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  updateNumberStep={updateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    serviceId={serviceId}
+                    setProgressPercentage={setProgressPercentage}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    updateNumberStep={updateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>

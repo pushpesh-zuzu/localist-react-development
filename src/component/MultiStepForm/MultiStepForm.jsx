@@ -235,13 +235,15 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  updateNumberStep={updateNumberStep}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    updateNumberStep={updateNumberStep}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>

@@ -266,15 +266,17 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  serviceId={51}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  updateNumberStep={updateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    serviceId={51}
+                    setProgressPercentage={setProgressPercentage}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    updateNumberStep={updateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>

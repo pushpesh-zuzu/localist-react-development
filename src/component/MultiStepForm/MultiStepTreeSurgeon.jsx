@@ -188,9 +188,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
       )}
       <Helmet>
         <meta name="robots" content="noindex" />
-        <title>
-         Find Quality Tree Surgeons Near Me | Localists
-        </title>
+        <title>Find Quality Tree Surgeons Near Me | Localists</title>
         <meta
           name="description"
           content="Find fully qualified tree surgeons near me. Certified and skilled arborists. Safe tree removal & pruning. Get free quotes from local experts in your area."
@@ -274,15 +272,17 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  serviceId={51}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  updateNumberStep={updateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    serviceId={51}
+                    setProgressPercentage={setProgressPercentage}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    updateNumberStep={updateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>
