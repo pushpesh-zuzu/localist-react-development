@@ -3,7 +3,6 @@ import { Spin } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setbuyerRequestData,
-  setBuyerRequestInternalQuestion,
   setQuestionsForProgress,
 } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
@@ -25,8 +24,9 @@ const QuestionAnserMultiStepRoofingNew2 = ({
   removeQuestionByNumber,
 }) => {
   const dispatch = useDispatch();
-  const { buyerRequest, questionsForProgress, buyerRequestInternalQuestion } =
-    useSelector((state) => state.buyer);
+  const { buyerRequest, questionsForProgress } = useSelector(
+    (state) => state.buyer
+  );
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");
@@ -86,9 +86,6 @@ const QuestionAnserMultiStepRoofingNew2 = ({
           lowerAns !== "yes" &&
           lowerAns !== "no" &&
           lowerAns !== "maybe" &&
-          lowerAns !== "i own the property" &&
-          lowerAns !== "i am buying the property" &&
-          lowerAns !== "i am renting the property" &&
           !lowerAns.includes("something else")
         );
       });
@@ -106,6 +103,9 @@ const QuestionAnserMultiStepRoofingNew2 = ({
     const isSingle =
       formattedQuestions[currentQuestion]?.option_type === "single";
 
+    if (value === "Something else (please describe)") {
+      setOtherText("");
+    }
     if (isSingle) {
       const newSelected = [value];
       setSelectedOption(newSelected);
@@ -389,50 +389,54 @@ const QuestionAnserMultiStepRoofingNew2 = ({
               formattedQuestions[currentQuestion]?.option_type === "single";
 
             return (
-              <label
-                key={index}
-                className={isSingle ? styles.option : styles.options}
-                style={{
-                  boxShadow: isSelected
-                    ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
-                    : "none",
-                }}
-              >
-                <input
-                  type={isSingle ? "radio" : "checkbox"}
-                  name="surveyOption"
-                  value={opt.option}
-                  checked={selectedOption.includes(opt.option)}
-                  onChange={handleOptionChange}
-                  onClick={(e) => {
-                    const isSingle =
-                      formattedQuestions[currentQuestion]?.option_type ===
-                      "single";
-                    if (isSingle && selectedOption.includes(opt.option)) {
-                      handleNext([e.target.value]);
-                    }
+              <>
+                <label
+                  key={index}
+                  className={isSingle ? styles.option : styles.options}
+                  style={{
+                    boxShadow: isSelected
+                      ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
+                      : "none",
                   }}
-                />
-                <span>{opt.option}</span>
-              </label>
+                >
+                  <input
+                    type={isSingle ? "radio" : "checkbox"}
+                    name="surveyOption"
+                    value={opt.option}
+                    checked={selectedOption.includes(opt.option)}
+                    onChange={handleOptionChange}
+                    onClick={(e) => {
+                      const isSingle =
+                        formattedQuestions[currentQuestion]?.option_type ===
+                        "single";
+                      if (isSingle && selectedOption.includes(opt.option)) {
+                        handleNext([e.target.value]);
+                      }
+                    }}
+                  />
+                  <span>{opt.option}</span>
+                </label>
+                {formattedQuestions[currentQuestion]?.answer?.includes(
+                  "Something else (please describe)"
+                ) &&
+                  opt.option === "Something else (please describe)" &&
+                  selectedOption.includes(
+                    "Something else (please describe)"
+                  ) && (
+                    <input
+                      type="text"
+                      placeholder="Please enter...."
+                      className={styles.otherInput}
+                      value={otherText}
+                      onChange={(e) => {
+                        setOtherText(e.target.value);
+                      }}
+                    />
+                  )}
+              </>
             );
           }
         )}
-
-        {formattedQuestions[currentQuestion]?.answer?.includes(
-          "Something else (please describe)"
-        ) &&
-          selectedOption.includes("Something else (please describe)") && (
-            <input
-              type="text"
-              placeholder="Please enter...."
-              className={styles.otherInput}
-              value={otherText}
-              onChange={(e) => {
-                setOtherText(e.target.value);
-              }}
-            />
-          )}
       </div>
       {error && <p className={styles.errorMessage}>{error}</p>}
     </CardLayoutWrapper>

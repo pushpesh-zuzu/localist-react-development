@@ -17,7 +17,7 @@ const altTag = {
   "Fence & Gate Installation": "garden fence installation",
   Landscaping: "landscapers near me",
   "Tree Surgeon": "tree surgeons near me",
-  Roofing: "roofing specialist",
+  Roofing: "Roofers near me",
 };
 
 const BannerImagesQuestion = ({ serviceName = "Landscaping" }) => {

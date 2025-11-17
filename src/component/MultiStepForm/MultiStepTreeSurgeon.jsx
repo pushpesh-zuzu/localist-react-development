@@ -173,25 +173,27 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   }, []);
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
 
       {localRequestId === null && (
         <div>
-          {isDesktop ? (
+          {typeof window !== "undefined" && isDesktop ? (
             <NavigationDetectorDesktop />
-          ) : (
+          ) : typeof window !== "undefined" ? (
             <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
           )}
         </div>
       )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
-          Compare Free Quotes from Local Driveway Companies | Localists
+         Find Quality Tree Surgeons Near Me | Localists
         </title>
         <meta
           name="description"
-          content="Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple."
+          content="Find fully qualified tree surgeons near me. Certified and skilled arborists. Safe tree removal & pruning. Get free quotes from local experts in your area."
         />
       </Helmet>
 

@@ -157,13 +157,16 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   }, []);
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
+
       {localRequestId === null && (
         <div>
-          {isDesktop ? (
+          {typeof window !== "undefined" && isDesktop ? (
             <NavigationDetectorDesktop />
-          ) : (
+          ) : typeof window !== "undefined" ? (
             <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
           )}
         </div>
       )}

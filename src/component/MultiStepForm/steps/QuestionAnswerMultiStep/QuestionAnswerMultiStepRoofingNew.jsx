@@ -1,8 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setbuyerRequestData,
-} from "../../../../store/Buyer/BuyerSlice";
+import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
@@ -13,7 +11,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
   onBack,
   setIsComingFromStep4,
   isComingFromStep4,
-  setPercetangForPost
+  setPercetangForPost,
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
@@ -24,9 +22,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
   const [questionHistory, setQuestionHistory] = useState([0]);
   const [isFirstQuestionAnswered, setIsFirstQuestionAnswered] = useState(false);
 
-
   const totalQuestions = questions?.length;
-
 
   const formattedQuestions = useMemo(() => {
     return questions.map((q) => ({
@@ -41,7 +37,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
             }
           })(),
     }));
-  }, [questions]); 
+  }, [questions]);
 
   const questionIndexMap = useMemo(() => {
     const map = {};
@@ -130,7 +126,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
-      question_no: formattedQuestions[currentQuestion]?.question_no
+      question_no: formattedQuestions[currentQuestion]?.question_no,
     };
 
     const previousAnswers = buyerRequest?.questions || [];
@@ -206,7 +202,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
-      question_no: formattedQuestions[currentQuestion]?.question_no
+      question_no: formattedQuestions[currentQuestion]?.question_no,
     };
 
     const previousAnswers = buyerRequest?.questions || [];
@@ -273,7 +269,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
       }
     } else {
       onBack();
-      setPercetangForPost(0)
+      setPercetangForPost(0);
     }
   };
 
@@ -284,7 +280,6 @@ const QuestionAnswerMultiStepRoofingNew = ({
       </div>
     );
   }
-
 
   useEffect(() => {
     if (isComingFromStep4 && buyerRequest?.questions?.length > 0) {
@@ -314,57 +309,59 @@ const QuestionAnswerMultiStepRoofingNew = ({
           (opt, index) => {
             const isSelected = selectedOption.includes(opt.option);
             return (
-              <label
-                key={index}
-                className={
-                  formattedQuestions[currentQuestion]?.option_type === "single"
-                    ? styles.option
-                    : styles.options
-                }
-                style={{
-                  boxShadow: isSelected
-                    ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
-                    : "none",
-                }}
-              >
-                <input
-                  type={
+              <>
+                <label
+                  key={index}
+                  className={
                     formattedQuestions[currentQuestion]?.option_type ===
                     "single"
-                      ? "radio"
-                      : "checkbox"
+                      ? styles.option
+                      : styles.options
                   }
-                  name="surveyOption"
-                  value={opt.option}
-                  checked={selectedOption.includes(opt.option)}
-                  onChange={handleOptionChange}
-                  onClick={(e) => {
-                    const isSingle =
-                      formattedQuestions[currentQuestion]?.option_type ===
-                      "single";
-                    if (isSingle && selectedOption.includes(opt.option)) {
-                      onNext();
-                    }
+                  style={{
+                    boxShadow: isSelected
+                      ? "0px 4px 4px 0px rgba(0, 0, 0, 0.15)"
+                      : "none",
                   }}
-                />
-                <span>{opt.option}</span>
-              </label>
+                >
+                  <input
+                    type={
+                      formattedQuestions[currentQuestion]?.option_type ===
+                      "single"
+                        ? "radio"
+                        : "checkbox"
+                    }
+                    name="surveyOption"
+                    value={opt.option}
+                    checked={selectedOption.includes(opt.option)}
+                    onChange={handleOptionChange}
+                    onClick={(e) => {
+                      const isSingle =
+                        formattedQuestions[currentQuestion]?.option_type ===
+                        "single";
+                      if (isSingle && selectedOption.includes(opt.option)) {
+                        onNext();
+                      }
+                    }}
+                  />
+                  <span>{opt.option}</span>
+                </label>
+                {opt.option === "Something else (please describe)" &&
+                  selectedOption.includes(
+                    "Something else (please describe)"
+                  ) && (
+                    <input
+                      type="text"
+                      placeholder="Please enter..."
+                      className={styles.otherInput}
+                      value={otherText}
+                      onChange={(e) => setOtherText(e.target.value)}
+                    />
+                  )}
+              </>
             );
           }
         )}
-
-        {formattedQuestions[currentQuestion]?.answer?.includes(
-          "Something else (please describe)"
-        ) &&
-          selectedOption.includes("Something else (please describe)") && (
-            <input
-              type="text"
-              placeholder="Please enter..."
-              className={styles.otherInput}
-              value={otherText}
-              onChange={(e) => setOtherText(e.target.value)}
-            />
-          )}
       </div>
 
       {error && <p className={styles.errorMessage}>{error}</p>}
