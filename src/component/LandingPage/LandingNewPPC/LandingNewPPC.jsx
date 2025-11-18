@@ -28,7 +28,7 @@ const LandingNewPPC = ({
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false}/>
       <div className={styles.pageWrapper}>
         <BuyerRegistrationForLandscapingPPC
           serviceId={serviceId}

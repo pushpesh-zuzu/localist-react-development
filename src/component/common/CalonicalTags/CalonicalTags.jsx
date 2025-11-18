@@ -17,15 +17,15 @@ const CalonicalTags = ({
   const canonicalUrl = `${baseUrl}/en/gb/${path}`;
   const breadcrumbList = breadcrumb.length
     ? [
-        isRequiredBaseUrlinBreadcrum && {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: `${baseUrl}/en/gb`,
-        },
+        // isRequiredBaseUrlinBreadcrum && {
+        //   "@type": "ListItem",
+        //   position: 1,
+        //   name: "Home",
+        //   item: `${baseUrl}/en/gb`,
+        // },
         ...breadcrumb.map((item, index) => ({
           "@type": "ListItem",
-          position: isRequiredBaseUrlinBreadcrum ? index + 2 : index + 1,
+          position: index + 1,
           name: item?.title || "",
           item: `${baseUrl}/en/gb/${
             item?.path ? cleanPath(item.path) : `${path}`
