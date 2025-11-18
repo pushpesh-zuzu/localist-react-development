@@ -16,7 +16,7 @@ const LogoComponent = () => {
   const [selectedThirdLevelRoute, setSlectedThirdLevelRoute] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showMenu, setShowbMenu] = useState(false);
-  const [showThirdLevel, setShowThirdLevel] = useState(false);
+  const [showThirdLevel, setShowThirdLevel] = useState(true);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
 
@@ -190,6 +190,13 @@ const LogoComponent = () => {
                     </span>
                     <img
                       onClick={() => {
+                        if (item?.subcategory?.length > 0) {
+                          setShowSubMenu(true);
+                          setFilterItems(item.name);
+                          setFilteRoute(item.path);
+                        }
+                      }}
+                      onMouseEnter={() => {
                         if (item?.subcategory?.length > 0) {
                           setShowSubMenu(true);
                           setFilterItems(item.name);
