@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import styles from "./SocialMediaAccordion.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Flex, Spin } from "antd";
 
 const platforms = [
   {
@@ -75,6 +77,7 @@ const SocialMediaAccordion = ({ details }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [showLoader, setShowLoader] = useState(false);
   const [hiddenFields, setHiddenFields] = useState({
     has_fb_link: details.has_fb_link || 0,
     has_twitter_link: details.has_twitter_link || 0,
@@ -126,7 +129,7 @@ const SocialMediaAccordion = ({ details }) => {
     dispatch(setIsDirtyRedux(true));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateAll()) {
       toast.error("Please fix validation errors before submitting.");
       return;
@@ -163,7 +166,14 @@ const SocialMediaAccordion = ({ details }) => {
       extra_links: validLinks.map((link) => link.trim()).join(", "),
       ...hiddenFields,
     };
-    if (isDirtyRedux) dispatch(updateSellerSocialLinks(cleanedData));
+    if (isDirtyRedux) {
+      setShowLoader(true);
+      const data = await dispatch(updateSellerSocialLinks(cleanedData));
+      dispatch(setIsDirtyRedux(false));
+      setShowLoader(false);
+    } else {
+      toast.error("No data found to save");
+    }
   };
 
   useEffect(() => {
@@ -292,14 +302,22 @@ const SocialMediaAccordion = ({ details }) => {
         )}
       </div>
       <div className={styles.footer}>
-        {/* <button className={styles.cancelBtn} type="button">Cancel</button> */}
-        <button
-          className={styles.saveButton}
-          style={{ marginLeft: "auto" }}
-          onClick={handleSubmit}
-        >
-          Save
-        </button>
+        {showLoader ? (
+          <Flex style={{ marginLeft: "auto" }}>
+            <Spin
+              indicator={<LoadingOutlined spin />}
+              className={styles.saveButton}
+            />
+          </Flex>
+        ) : (
+          <button
+            className={styles.saveButton}
+            style={{ marginLeft: "auto" }}
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
+        )}
       </div>
     </div>
   );

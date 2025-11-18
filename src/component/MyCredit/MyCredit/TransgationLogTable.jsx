@@ -28,7 +28,10 @@ const TransgationLogTable = ({ data }) => {
               <tr key={index}>
                 <td className={styles.bold}>{tx.id}</td>
                 <td>{tx.details}</td>
-                <td className={styles.negative}>{Math.abs(tx.credits)}</td>
+                <td className={styles.negative}>
+                  {tx.payment_type == 1 ? "-" : ""}
+                  {Math.abs(tx.credits)}
+                </td>
                 <td>{tx.purchase_date}</td>
               </tr>
             ))}

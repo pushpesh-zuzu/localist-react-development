@@ -9,10 +9,13 @@ import {
   clearPhotoUpdateStatus,
   setIsDirtyRedux,
 } from "../../../store/MyProfile/myProfileSlice";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Flex, Spin } from "antd";
 import AddYoutubeModal from "./AddYoutubeModal";
 import { baseURL } from "../../../Api/axiosInstance";
 import { BASE_IMAGE } from "../../../utils";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
+
 const PhotosAccordion = ({ details }) => {
   const dispatch = useDispatch();
   const { photoUpdateSuccess, photoUpdateError, sellerLoader, isDirtyRedux } =
@@ -30,6 +33,7 @@ const PhotosAccordion = ({ details }) => {
   const [photoPreviews, setPhotoPreviews] = useState([]);
   const [linkData, setLinkData] = useState("");
   const [hasytLink, setHasytLink] = useState(details?.has_youtube_link || 0);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleRemovePhoto = (indexToRemove) => {
     setPhotoPreviews((prevPhotos) =>
@@ -100,7 +104,7 @@ const PhotosAccordion = ({ details }) => {
     setPhotoPreviews((prev) => prev.filter((src) => !src.startsWith("blob:")));
   }, [photoUpdateSuccess, photoUpdateError, dispatch]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validate()) {
       toast.warn("Please fix validation errors");
       return;
@@ -141,8 +145,15 @@ const PhotosAccordion = ({ details }) => {
     }
 
     if (isDirtyRedux) {
-      dispatch(updateSellerPhotos(body));
+      setShowLoader(true);
+
+      const res = await dispatch(updateSellerPhotos(body)); // <-- this works
+      console.log("RES:", res);
+
       dispatch(setIsDirtyRedux(false));
+      setShowLoader(false);
+    } else {
+      toast.error("No data found to save");
     }
   };
 
@@ -430,16 +441,22 @@ const PhotosAccordion = ({ details }) => {
 
         {/* Footer Buttons */}
         <div className={styles.footer}>
-          {/* <button className={styles.cancelButton} onClick={handleCancel}>
-            Cancel
-          </button> */}
-          <button
-            className={styles.saveButton}
-            style={{ marginLeft: "auto" }}
-            onClick={handleSubmit}
-          >
-            Save
-          </button>
+          {showLoader ? (
+            <Flex style={{ marginLeft: "auto" }}>
+              <Spin
+                indicator={<LoadingOutlined spin />}
+                className={styles.saveButton}
+              />
+            </Flex>
+          ) : (
+            <button
+              className={styles.saveButton}
+              style={{ marginLeft: "auto" }}
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+          )}
         </div>
       </div>
       {addModalOpen && (
