@@ -16,7 +16,7 @@ const LogoComponent = () => {
   const [selectedThirdLevelRoute, setSlectedThirdLevelRoute] = useState("");
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [showMenu, setShowbMenu] = useState(false);
-  const [showThirdLevel, setShowThirdLevel] = useState(true);
+  const [showThirdLevel, setShowThirdLevel] = useState(false);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [mouseHover, setMouseHover] = useState("");
 
@@ -127,8 +127,21 @@ const LogoComponent = () => {
     const handleMouseEnter = useCallback((index) => setMouseHover(index), []);
     const handleMouseLeave = useCallback(() => {
       setMouseHover("");
+      setShowSubMenu(false);
+      setFilterItems("");
+      setFilteRoute("");
     }, []);
 
+    const handleMouseEnterParent = (item) => {
+      const time = setTimeout(() => {
+        if (item?.subcategory?.length > 0) {
+          setShowSubMenu(true);
+          setFilterItems(item.name);
+          setFilteRoute(item.path);
+        }
+      }, 1500);
+      return () => clearTimeout(time);
+    };
     return (
       <div
         className={styles.popover_container}
@@ -177,6 +190,9 @@ const LogoComponent = () => {
                         <Link
                           onClick={() => {
                             handleClose();
+                          }}
+                          onMouseEnter={() => {
+                            handleMouseEnterParent(item);
                           }}
                           to={
                             item.path
@@ -312,7 +328,12 @@ const LogoComponent = () => {
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <>
           <Popover
-            onMouseEnter={() => setShowbMenu(true)}
+            onMouseEnter={() => {
+              setShowbMenu(true);
+              setShowSubMenu(false);
+              setFilterItems("");
+              setFilteRoute("");
+            }}
             placement={placement}
             open={showMenu}
             content={content}
