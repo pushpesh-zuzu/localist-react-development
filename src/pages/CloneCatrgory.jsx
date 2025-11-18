@@ -56,7 +56,10 @@ const CloneCategory = ({ accountHeader }) => {
           `}
         </script>
       </Helmet>
-      <CalonicalTags bannerImage={Home} />
+      <CalonicalTags
+        bannerImage={Home}
+        breadcrumb={[{ title: "Home & Garden", path: "/home" }]}
+      />
       <div>
         <BannerWithBreadCrum
           header={accountHeader}
