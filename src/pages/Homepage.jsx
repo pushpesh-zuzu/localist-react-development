@@ -62,12 +62,15 @@ const Homepage = () => {
             "logo": "https://www.localists.com/assets/logo-CQuAsOMd.png",
             "sameAs": [
               "https://www.facebook.com/localistsuk/",
+              “https://www.instagram.com/localists_official”,
               "https://www.linkedin.com/company/localistsuk/",
               "https://x.com/LocalistsUK"
             ]`}
         </script>
+
         <script type="application/ld+json">
-          {`"@context": "https://schema.org",
+          {`
+            "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Localists",
             "url": "https://www.localists.com/en/gb/",
@@ -79,43 +82,44 @@ const Homepage = () => {
         </script>
         <script type="application/ld+json">
           {`"@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "Localists",
-              "image": "https://www.localists.com/assets/logo-CQuAsOMd.png",
-              "@id": "",
-              "url": "https://www.localists.com/en/gb/",
-              "telephone": "01544 303 020",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Chester Business Park",
-                "addressLocality": "Chester",
-                "postalCode": "CH4 9QJ",
-                "addressCountry": "GB"
-              },
-              "geo": {
-                "@type": "GeoCoordinates",
-                "latitude": 53.1630694,
-                "longitude": -2.9000889
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                  "Sunday"
-                ],
-                "opens": "00:00",
-                "closes": "23:59"
-              },
-              "sameAs": [
-                “https://www.facebook.com/localistsuk/”,
-                "https://x.com/LocalistsUK",
-                "https://www.linkedin.com/company/localistsuk/"
-              ] `}
+          "@type": "LocalBusiness",
+          "name": "Localists",
+          "image": "https://www.localists.com/assets/logo-CQuAsOMd.png",
+          "@id": "",
+          "url": "https://www.localists.com/en/gb/",
+          "telephone": "01544 303 020",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Chester Business Park",
+            "addressLocality": "Chester",
+            "postalCode": "CH4 9QJ",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 53.1630694,
+            "longitude": -2.9000889
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "sameAs": [
+            “https://www.facebook.com/localistsuk/”,
+            “https://www.instagram.com/localists_official”,
+            "https://x.com/LocalistsUK",
+            "https://www.linkedin.com/company/localistsuk/"
+          ] `}
         </script>
       </Helmet>
       <CalonicalTags isRequiredjsonLd={false} />
