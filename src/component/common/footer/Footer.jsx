@@ -360,7 +360,7 @@ const Footer = () => {
           © 2025 Localists. Terms & Conditions / Cookie policy /{" "}
           <Link
             style={{ textDecoration: "none", color: "#000" }}
-            to={`/${lang}/${country}/privacy-policy/`}
+            to={`/${lang}/${country}/privacy-policy`}
           >
             Privacy policy
           </Link>

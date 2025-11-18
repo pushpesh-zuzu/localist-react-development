@@ -41,6 +41,7 @@ import SearchAndFindAnAccountant from "../component/level3/SearchAndFindAnAccoun
 import FindServiceLevel3 from "../component/level3/FindServiceLevel3";
 import GetQuotesLevel3 from "../component/level3/GetQuotesLevel3";
 import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
+import FAQScript from "../component/common/FAQScript/FAQScript";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -102,6 +103,11 @@ const LevelThreePage = ({}) => {
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
         isRequiredBaseUrlinBreadcrum={false}
       />
+      {slug === "fencing-contractors-near-me" ? (
+        <FAQScript FAQ={FrequentlyQuestion} />
+      ) : (
+        ""
+      )}
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}
