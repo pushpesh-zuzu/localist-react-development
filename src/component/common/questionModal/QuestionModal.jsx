@@ -282,6 +282,10 @@ const QuestionModal = ({
                   ? styles.headerImage7
                   : serviceName === "Gate Installation"
                   ? styles.headerImage8
+                   : serviceName === "Roofing"
+                  ? styles.headerImage9
+                   : serviceName === "Tree Surgery"
+                  ? styles.headerImage10
                   : styles.headerImage // default fallback
               }
             >
