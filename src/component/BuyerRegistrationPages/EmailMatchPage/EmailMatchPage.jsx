@@ -11,6 +11,7 @@ import {
 } from "../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
 import useUserInfo from "../../../utils/getUserIp";
+import { validateEmail } from "../../../utils/validateEmail";
 
 const EmailMatchPage = ({
   nextStep,
@@ -101,7 +102,7 @@ const EmailMatchPage = ({
       email:
         !isPPCPages &&
         (!email ||
-          !/^[^\s@]+@[^\s@]+\.(com|org|net|edu|gov|in|co|io|ai)$/i.test(email)),
+          !validateEmail(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone),
     };

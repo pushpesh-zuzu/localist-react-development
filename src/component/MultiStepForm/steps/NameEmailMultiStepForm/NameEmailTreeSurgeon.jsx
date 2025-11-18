@@ -8,6 +8,7 @@ import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/Loade
 import nameEmailBanner from "../nameEmailBanner.webp";
 import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmailMultiForm/BackgroundWrapperNameEmailMultiForm";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
+import { validateEmail } from "../../../../utils/validateEmail";
 const NameEmailTreeSurgeon = ({
   nextStep,
   isPPCPages = false,
@@ -45,7 +46,7 @@ const NameEmailTreeSurgeon = ({
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+        (!email || !validateEmail(email)),
       name: !name.trim(),
     };
 

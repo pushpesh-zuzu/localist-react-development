@@ -8,6 +8,7 @@ import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmai
 import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/LoaderWithTextMultiStepForm";
 import nameEmailBanner from "../nameEmailBanner.webp";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
+import { validateEmail } from "../../../../utils/validateEmail";
 
 const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const dispatch = useDispatch();
@@ -38,9 +39,10 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+        (!email || !validateEmail(email)),
       name: !name.trim(),
     };
+    // !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
 
     if (!isPPCPages && newErrors.email && !emailErrorMessage) {
       setEmailErrorMessage("Please enter a valid email address.");
