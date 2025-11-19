@@ -103,11 +103,7 @@ const LevelThreePage = ({}) => {
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
         isRequiredBaseUrlinBreadcrum={false}
       />
-      {slug === "fencing-contractors-near-me" ? (
-        <FAQScript FAQ={FrequentlyQuestion} />
-      ) : (
-        ""
-      )}
+      <FAQScript FAQ={FrequentlyQuestion} />
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}
