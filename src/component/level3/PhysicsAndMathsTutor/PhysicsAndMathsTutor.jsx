@@ -20,6 +20,7 @@ import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner"
 import AveragePrice from "../../subCategory/AveragePrice/AveragePrice";
 import Slider from "../../common/slider/Slider";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
+import FAQScript from "../../common/FAQScript/FAQScript";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -94,6 +95,7 @@ function PhysicsAndMathsTutor() {
         breadcrumb={breadcrumbConfig}
         bannerImage={PhysicsAndMaths}
       />
+      <FAQScript FAQ={faqData}/>
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

@@ -482,7 +482,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 2,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -520,7 +520,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 2,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -602,7 +602,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -640,7 +640,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -678,7 +678,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -710,7 +710,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -1666,7 +1666,7 @@ const BREADCRUMB_CONFIG = {
   ],
   "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio Services" }, // no path
+    { title: "Patio Laying" }, // no path
   ],
   "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
