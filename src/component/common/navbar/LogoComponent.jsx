@@ -139,16 +139,23 @@ const LogoComponent = () => {
           setFilterItems(item.name);
           setFilteRoute(item.path);
         }
+      }, 1000);
+      return () => clearTimeout(time);
+    };
+    const handleCloseMouseLeve = () => {
+      const time = setTimeout(() => {
+        setShowSubMenu(false);
+        setShowThirdLevel(false);
+        setShowbMenu(false);
       }, 1500);
       return () => clearTimeout(time);
     };
+
     return (
       <div
         className={styles.popover_container}
         onMouseLeave={() => {
-          setShowSubMenu(false);
-          setShowThirdLevel(false);
-          setShowbMenu(false);
+          handleCloseMouseLeve();
         }}
       >
         <div className={styles.popover_wrap}>
@@ -213,11 +220,7 @@ const LogoComponent = () => {
                         }
                       }}
                       onMouseEnter={() => {
-                        if (item?.subcategory?.length > 0) {
-                          setShowSubMenu(true);
-                          setFilterItems(item.name);
-                          setFilteRoute(item.path);
-                        }
+                        handleMouseEnterParent(item);
                       }}
                       src={arrowIcon}
                       width={8}
