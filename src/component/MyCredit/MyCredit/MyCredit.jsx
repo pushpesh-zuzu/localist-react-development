@@ -132,6 +132,11 @@ const MyCredits = () => {
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
+        console.log(result, "result");
+        window.dataLayer.push({
+          event: "payment_success",
+          paymentId: result?.data?.invoice_number, // paymentId from backend
+        });
         showToast("success", result?.message);
         setActiveLoaderId(null);
         dispatch(getInvoiceBillingListApi());
@@ -139,10 +144,7 @@ const MyCredits = () => {
         if (item?.plan_type === "starter") {
           dispatch(setStarterPackPurchased(true));
         }
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        console.log(window.dataLayer);
       } else if (result?.success === false) {
         setIsAddCardModal(true);
       }

@@ -81,7 +81,7 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
 
   useEffect(() => {
     if (locationData?.coordinates) {
-      setMapCenter(JSON.parse(locationData?.coordinates));
+      setMapCenter(locationData?.coordinates);
     }
   }, [locationData?.coordinates]);
 

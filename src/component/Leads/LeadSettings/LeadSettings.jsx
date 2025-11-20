@@ -306,7 +306,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
 
     if (location?.type === "Draw on Map") {
       try {
-        const data = JSON.parse(location.coordinates);
+        // const data = JSON.parse(location.coordinates);
+        const data = location.coordinates;
         setLatitude(data);
       } catch (error) {
         console.error("Error parsing coordinates:", error);

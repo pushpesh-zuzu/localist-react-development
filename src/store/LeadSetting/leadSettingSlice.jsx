@@ -247,6 +247,7 @@ export const addServiceLead = (ServiceData) => {
   };
 };
 export const addLocationLead = (locationData) => {
+  console.log(locationData);
   return async (dispatch) => {
     dispatch(setleadPreferencesListLoader(true));
     try {

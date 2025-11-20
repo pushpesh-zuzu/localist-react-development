@@ -24,7 +24,8 @@ const TravelTimeModal = ({
 
   useEffect(() => {
     if (locationData?.coordinates) {
-      const parsedCoordinates = JSON.parse(locationData.coordinates);
+      console.log(locationData?.coordinates, "fjbfu");
+      const parsedCoordinates = locationData.coordinates;
       if (Array.isArray(parsedCoordinates) && parsedCoordinates.length > 0) {
         setMapCenter(parsedCoordinates[0]);
       }

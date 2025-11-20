@@ -24,7 +24,7 @@ const TransgationLogTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((tx, index) => (
+            {[...data].reverse().map((tx, index) => (
               <tr key={index}>
                 <td className={styles.bold}>{tx.id}</td>
                 <td>{tx.details}</td>

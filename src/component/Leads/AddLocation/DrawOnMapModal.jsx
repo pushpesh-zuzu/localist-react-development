@@ -74,7 +74,9 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
         map: newMap,
       });
 
-      setPolygons((prev) => [...prev, polygon]);
+      console.log(window.google.maps.Polygon, "polygons");
+      console.log(polygon, "polygonss");
+      setPolygons((prev) => [...(prev || []), polygon]);
 
       const bounds = new window.google.maps.LatLngBounds();
       locationData?.forEach((coord) => {
@@ -265,7 +267,9 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
         polygons.forEach((polygon) => polygon.setMap(null));
       }
     };
-  }, []);
+  }, [window.google]);
+
+  console.log(polygons, "polygons");
 
   const fetchAddressDetails = (latLng, updateFunction) => {
     if (!geocoder) return;
@@ -386,8 +390,13 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
 
   useEffect(() => {
     if (!geocoder || polygons.length === 0) return;
+    console.log(polygons);
 
-    polygons.forEach((polygon, index) => {
+    polygons?.forEach((polygon, index) => {
+      const path = polygon?.getPath?.(); // safe optional chaining
+      if (!path) return;
+
+      console.log(polygon);
       window.google.maps.event.clearListeners(polygon.getPath(), "set_at");
       window.google.maps.event.clearListeners(polygon.getPath(), "insert_at");
       window.google.maps.event.clearListeners(polygon.getPath(), "remove_at");
@@ -619,13 +628,15 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
       };
     });
     const allPolygonData = await Promise.all(polygonPromises);
+    // let coordinatesData = [];
+    let coordinatesData = allPolygonData.map((polygon) => polygon.coordinates);
+    console.log(coordinatesData);
+
     const data = {
       city: allPolygonData?.[0]?.city,
       postcode: allPolygonData?.[0]?.pincode,
       miles: 0,
-      coordinates: JSON.stringify(
-        allPolygonData?.[allPolygonData?.length - 1]?.coordinates
-      ),
+      coordinates: JSON.stringify(coordinatesData),
     };
 
     setLocationData(data);
@@ -634,7 +645,7 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    // document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "auto";
     };
