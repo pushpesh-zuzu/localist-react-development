@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./TravelTimeModal.module.css";
 import iIcon from "../../../assets/Images/iIcon.svg";
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import { googleAPI } from "../../../Api/axiosInstance";
+import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
+import { getCityName, setcitySerach } from "../../../store/Buyer/BuyerSlice";
+import { useDispatch } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const TravelTimeModal = ({
   onClose,
@@ -10,6 +14,7 @@ const TravelTimeModal = ({
   locationData,
   setLocationData,
 }) => {
+  const dispatch = useDispatch();
   const { Option } = Select;
   const inputRef = useRef(null);
   const mapRef = useRef(null);
@@ -17,14 +22,16 @@ const TravelTimeModal = ({
   const markerRef = useRef(null);
   const circleRef = useRef(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [city, setCity] = useState("");
   const [mapCenter, setMapCenter] = useState({
-    lat: 20.5937,
-    lng: 78.9629,
+    lat: 52.6358,
+    lng: -1.1396,
   });
-
+  const [checkingPostcode, setCheckingPostcode] = useState(false);
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  const [errors, setErrors] = useState({ postcode: "" });
   useEffect(() => {
     if (locationData?.coordinates) {
-      console.log(locationData?.coordinates, "fjbfu");
       const parsedCoordinates = locationData.coordinates;
       if (Array.isArray(parsedCoordinates) && parsedCoordinates.length > 0) {
         setMapCenter(parsedCoordinates[0]);
@@ -101,13 +108,13 @@ const TravelTimeModal = ({
         script.onload = () => {
           setMapLoaded(true);
           initMap();
-          initAutocomplete();
+          // initAutocomplete();
         };
         document.body.appendChild(script);
       } else {
         setMapLoaded(true);
         initMap();
-        initAutocomplete();
+        // initAutocomplete();
       }
     };
 
@@ -124,69 +131,141 @@ const TravelTimeModal = ({
       }
     };
 
-    const initAutocomplete = () => {
-      if (!inputRef.current || !window.google) return;
-
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "UK" },
-        }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
-
-        let postalCode = "";
-        let placeName = place.formatted_address || place.name || "";
-        let lat = place.geometry?.location?.lat();
-        let lng = place.geometry?.location?.lng();
-
-        place.address_components.forEach((component) => {
-          if (component.types.includes("postal_code")) {
-            postalCode = component.long_name;
-          }
-        });
-        let cityName =
-          place.address_components.find((component) =>
-            component.types.includes("locality")
-          )?.long_name ||
-          place.address_components.find((component) =>
-            component.types.includes("administrative_area_level_3")
-          )?.long_name;
-
-        if (lat && lng) {
-          const finalLocation = postalCode || placeName;
-          setMapCenter({ lat, lng });
-          setLocationData((prev) => ({
-            ...prev,
-            postcode: finalLocation,
-            city: cityName || "",
-            coordinates: JSON.stringify([{ lat, lng }]),
-          }));
-
-          setTimeout(() => {
-            mapInstance.current?.setCenter({ lat, lng });
-            mapInstance.current?.setZoom(12);
-            updateMarkerAndCircle();
-          }, 100);
-        }
-      });
-    };
-
     loadGoogleMapsScript();
   }, [mapCenter]);
 
-  useEffect(() => {
-    if (mapLoaded && locationData?.postcode && mapCenter.lat !== 20.5937) {
-      updateMarkerAndCircle();
+  const validatePostcode = async (value) => {
+    if (!value) {
+      setPostalCodeValidate(false);
+      setCity("");
+      setErrors({ postcode: "" });
+
+      setLocationData((prev) => ({
+        ...prev,
+        coordinates: null,
+      }));
+
+      return;
     }
-  }, [locationData?.travel_time, locationData?.travel_by]);
+
+    setCheckingPostcode(true);
+
+    try {
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
+
+      // Case 1: city is returned
+      if (newResponse?.data?.city) {
+        setPostalCodeValidate(true);
+        setCity(newResponse.data.city);
+
+        dispatch(setcitySerach(newResponse.data.city));
+
+        setErrors((prev) => ({ ...prev, postcode: "" }));
+
+        setLocationData((prev) => ({
+          ...prev,
+          postcode: value,
+          city: newResponse.data.city,
+        }));
+      }
+
+      // Case 2: coordinates are returned
+      else if (newResponse?.data?.latitude && newResponse?.data?.longitude) {
+        const newCenter = {
+          lat: parseFloat(newResponse.data.latitude),
+          lng: parseFloat(newResponse.data.longitude),
+        };
+
+        setPostalCodeValidate(true);
+        setCity("");
+
+        setLocationData((prev) => ({
+          ...prev,
+          postcode: value,
+          coordinates: [newCenter],
+        }));
+
+        setMapCenter(newCenter);
+
+        if (mapInstance.current) {
+          mapInstance.current.setCenter(newCenter);
+          mapInstance.current.setZoom(12);
+
+          if (markerRef.current) markerRef.current.setMap(null);
+
+          markerRef.current = new window.google.maps.Marker({
+            position: newCenter,
+            map: mapInstance.current,
+          });
+
+          drawCircle(newCenter);
+        }
+      }
+
+      // Invalid postcode
+      else {
+        throw new Error("Invalid Postcode");
+      }
+    } catch (error) {
+      setPostalCodeValidate(false);
+      setCity("");
+
+      setErrors((prev) => ({
+        ...prev,
+        postcode: "Please enter a valid postcode!",
+      }));
+    } finally {
+      setCheckingPostcode(false);
+    }
+  };
+
+  useEffect(() => {
+    if (mapLoaded && locationData.postcode && window.google) {
+      const geocoder = new window.google.maps.Geocoder();
+      geocoder.geocode(
+        {
+          address: locationData.postcode,
+          componentRestrictions: { country: "UK" },
+        },
+        (results, status) => {
+          if (status === "OK" && results && results[0]) {
+            const lat = results[0].geometry.location.lat();
+            const lng = results[0].geometry.location.lng();
+            const newCenter = { lat, lng };
+            setMapCenter(newCenter);
+
+            if (mapInstance.current) {
+              mapInstance.current.setCenter(newCenter);
+              mapInstance.current.setZoom(12);
+
+              if (markerRef.current) markerRef.current.setMap(null);
+
+              markerRef.current = new window.google.maps.Marker({
+                position: newCenter,
+                map: mapInstance.current,
+              });
+
+              drawCircle(newCenter);
+            }
+          } else {
+            console.error("Geocode was not successful: ", status);
+            showToast("Could not fetch location from the postcode.");
+          }
+        }
+      );
+    }
+  }, [open, mapLoaded, locationData.postcode, locationData]);
+
+  useEffect(() => {
+    if (mapLoaded && mapCenter.lat !== 20.5937) {
+      drawCircle(mapCenter);
+    }
+  }, [locationData.miles1, mapLoaded]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
+
     setLocationData((prev) => ({
       ...prev,
       [name]: value,
@@ -204,6 +283,15 @@ const TravelTimeModal = ({
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  useEffect(() => {
+    if (mapLoaded && mapInstance.current) {
+      setTimeout(() => {
+        window.google.maps.event.trigger(mapInstance.current, "resize");
+        mapInstance.current.setCenter(mapCenter);
+      }, 300);
+    }
+  }, [mapLoaded, mapCenter]);
 
   return (
     <div className={styles.modalOverlay}>
@@ -231,10 +319,48 @@ const TravelTimeModal = ({
               type="text"
               name="postcode"
               value={locationData?.postcode}
-              onChange={onChange}
+              onChange={(e) => {
+                onChange(e);
+                validatePostcode(e.target.value);
+              }}
               placeholder="Enter postcode or city"
               autoComplete="off"
+              className={`${errors.postcode ? styles.errorBorder : ""}`}
             />
+
+            {checkingPostcode ? (
+              <Spin
+                indicator={<LoadingOutlined spin />}
+                size="small"
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "70%",
+                  transform: "translateY(-50%)",
+                }}
+              />
+            ) : postalCodeValidate ? (
+              <img
+                src={CheckIcon}
+                alt="valid"
+                style={{
+                  width: "18px",
+                  position: "absolute",
+                  right: "10px",
+                  top: "70%",
+                  transform: "translateY(-50%)",
+                }}
+              />
+            ) : null}
+
+            {errors.postcode && (
+              <p
+                style={{ color: "red", fontSize: "14px" }}
+                className={styles.errorText}
+              >
+                {errors.postcode}
+              </p>
+            )}
           </div>
 
           <div className={styles.inputGroup}>
@@ -278,23 +404,7 @@ const TravelTimeModal = ({
           </div>
         </div>
 
-        <div
-          ref={mapRef}
-          className={styles.mapContainer}
-          style={{
-            width: "100%",
-            height: "250px",
-            marginTop: "16px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-          }}
-        />
-
-        {!mapLoaded && (
-          <div style={{ textAlign: "center", marginTop: "10px" }}>
-            Loading map...
-          </div>
-        )}
+        <div ref={mapRef} className={styles.mapContainer} />
 
         <div className={styles.buttonContainer}>
           <button className={styles.cancelButton} onClick={onClose}>

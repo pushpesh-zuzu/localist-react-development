@@ -275,7 +275,6 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
                 onChange({ target: { name: "miles1", value } })
               }
               className={styles.customSelect}
-              dropdownMatchSelectWidth={false}
             >
               <Option value="1">1 mile</Option>
               <Option value="5">5 miles</Option>
