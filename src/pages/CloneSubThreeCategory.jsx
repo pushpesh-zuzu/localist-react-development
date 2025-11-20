@@ -121,10 +121,10 @@ const LevelThreePage = ({}) => {
         findingHeading={CONTENT_CONFIG_TOP[slug]?.findingHeading}
         breadcrumb={BREADCRUMB_CONFIG[slug]}
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
-        para1={CONTENT_CONFIG[slug]?.para1}
-        para2={CONTENT_CONFIG[slug]?.para2}
-        para3={CONTENT_CONFIG[slug]?.para3}
-        para4={CONTENT_CONFIG[slug]?.para4}
+        para1={CONTENT_CONFIG[slug]?.para1 || ''}
+        para2={CONTENT_CONFIG[slug]?.para2 || ''}
+        para3={CONTENT_CONFIG[slug]?.para3 || ''}
+        para4={CONTENT_CONFIG[slug]?.para4 || ''}
         defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
         isNeedS={false}
       />

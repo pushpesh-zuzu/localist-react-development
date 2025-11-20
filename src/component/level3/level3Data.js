@@ -1626,11 +1626,9 @@ const CONTENT_CONFIG = {
 
   "driveway-installers-near-me": {
     para1:
-      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or block paved driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust.",
+      "Bumps in life? inevitable. Bumps in your driveway? fixable. If you're looking to smooth things over with your driveway and give your car the VIP treatment, then ditch the red carpet for a brand new tarmac, resin or block paved driveway.",
     para2:
-      "All of our driveway installers are vetted by our team, and need to pass our rigorous internal assessments, to ensure that our customers only get the best driveway companies money can buy. Just enter your details, and we'll send you up to 5 free quotes from local driveway companies in your area - completely free of charge.",
-    para3:
-      "And if you're not happy with the quoted you've received, you can request replies from other driveway contractors on our database. No cost, no obligation, no fuss.",
+      "At localists, we connect you with local driveway contractors who can pamper your neglected driveway back to shape. Just give us a few details, and we'll get you up to 5 free quotes straight into your inbox. No cost. No obligation. No fuss. Just sit back and let us do the leg work for you. ",
   },
   "patio-layers-near-me": {
     para1:
@@ -1692,7 +1690,7 @@ const CONTENT_CONFIG_TOP = {
   },
   "driveway-installers-near-me": {
     findingHeading: "driveway contractors",
-    title: "Driveway Companies",
+    title: "Driveway Installers",
     mainTitle: "driveway installers",
     ctaText: "Driveway Installer",
     avgPriceTitle: "driveway installers",
