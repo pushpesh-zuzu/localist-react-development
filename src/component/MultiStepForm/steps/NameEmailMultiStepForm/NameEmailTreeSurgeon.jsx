@@ -9,6 +9,7 @@ import nameEmailBanner from "../nameEmailBanner.webp";
 import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmailMultiForm/BackgroundWrapperNameEmailMultiForm";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
 import { validateEmail } from "../../../../utils/validateEmail";
+import { useEmailCheck } from "../../../../utils/emailExist";
 const NameEmailTreeSurgeon = ({
   nextStep,
   isPPCPages = false,
@@ -25,6 +26,7 @@ const NameEmailTreeSurgeon = ({
 
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -88,6 +90,18 @@ const NameEmailTreeSurgeon = ({
   const handleBannerText = () => {
     setIsBannerText(false);
   };
+  useEffect(() => {
+      if (!isEmailAvailable) {
+        setEmail("");
+        dispatch(
+          setbuyerRequestData({
+            ...buyerRequest,
+            name,
+            email: "",
+          })
+        );
+      }
+    }, [isEmailAvailable]);
   return (
     <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
       <CardLayoutWrapper
@@ -135,6 +149,7 @@ const NameEmailTreeSurgeon = ({
                   }`}
                   value={email}
                   onChange={handleEmailChange}
+                  autoComplete="email"
                 />
                 {errors?.email && (
                   <span
@@ -155,6 +170,7 @@ const NameEmailTreeSurgeon = ({
               }`}
               value={name}
               onChange={handleNameChange}
+              autoComplete="name"
             />
             {errors?.name && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

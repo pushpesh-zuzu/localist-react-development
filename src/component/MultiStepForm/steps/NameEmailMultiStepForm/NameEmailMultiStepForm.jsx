@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./NameEmailMultiStepForm.module.css";
 import { checkEmailIdApi } from "../../../../store/FindJobs/findJobSlice";
@@ -9,6 +9,7 @@ import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/Loade
 import nameEmailBanner from "../nameEmailBanner.webp";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
 import { validateEmail } from "../../../../utils/validateEmail";
+import { useEmailCheck } from "../../../../utils/emailExist";
 
 const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isBannerText, setIsBannerText] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -69,6 +71,20 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const handleBannerText = () => {
     setIsBannerText(false);
   };
+
+  useEffect(() => {
+    console.log(isEmailAvailable, "sss");
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+        })
+      );
+    }
+  }, [isEmailAvailable]);
   return (
     <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
       <CardLayoutWrapper
@@ -116,6 +132,7 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
                   }`}
                   value={email}
                   onChange={handleEmailChange}
+                  autoComplete="email"
                 />
                 {errors?.email && (
                   <span
@@ -135,6 +152,7 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
                 errors?.name ? styles.inputError : ""
               }`}
               value={name}
+              autoComplete="name"
               onChange={handleNameChange}
             />
             {errors?.name && (

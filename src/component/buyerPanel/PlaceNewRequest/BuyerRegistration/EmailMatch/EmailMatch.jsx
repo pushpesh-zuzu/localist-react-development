@@ -12,6 +12,7 @@ import {
 import { useLocation } from "react-router";
 import useUserInfo from "../../../../../utils/getUserIp";
 import { validateEmail } from "../../../../../utils/validateEmail";
+import { useEmailCheck } from "../../../../../utils/emailExist";
 
 const EmailMatch = ({
   onClose,
@@ -45,6 +46,7 @@ const EmailMatch = ({
   const [phone, setPhone] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -66,6 +68,20 @@ const EmailMatch = ({
       })
     );
   };
+
+  useEffect(() => {
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+          phone,
+        })
+      );
+    }
+  }, [isEmailAvailable]);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -369,6 +385,7 @@ const EmailMatch = ({
           <input
             type="text"
             placeholder="Your Name"
+            autoComplete="name"
             className={`${styles.input} ${
               errors?.name ? styles.inputError : ""
             }`}
@@ -395,6 +412,7 @@ const EmailMatch = ({
                 value={email}
                 onChange={handleEmailChange}
                 onBlur={handleEmailBlur}
+                autoComplete="email"
               />
               {errors?.email && (
                 <span style={{ color: "red" }} className={styles.errorMessage}>
@@ -420,6 +438,7 @@ const EmailMatch = ({
               value={phone}
               maxLength={10}
               onChange={handlePhoneChange}
+              autoComplete="phone"
             />
             {errors?.phone && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

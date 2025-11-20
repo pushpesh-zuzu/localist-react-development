@@ -12,6 +12,7 @@ import {
 import { useLocation } from "react-router";
 import useUserInfo from "../../../utils/getUserIp";
 import { validateEmail } from "../../../utils/validateEmail";
+import { useEmailCheck } from "../../../utils/emailExist";
 
 const EmailMatchPage = ({
   nextStep,
@@ -41,6 +42,7 @@ const EmailMatchPage = ({
   const [phone, setPhone] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -179,6 +181,20 @@ const EmailMatchPage = ({
     }
   }, [resetTrigger]);
 
+  useEffect(() => {
+    console.log(isEmailAvailable, "sss");
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+          phone,
+        })
+      );
+    }
+  }, [isEmailAvailable]);
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.emailPage} onClick={(e) => e.stopPropagation()}>
@@ -198,6 +214,7 @@ const EmailMatchPage = ({
           <input
             type="text"
             placeholder="Your Name"
+            autoComplete="name"
             className={`${styles.input} ${
               errors?.name ? styles.inputError : ""
             }`}
@@ -218,6 +235,7 @@ const EmailMatchPage = ({
               <input
                 type="email"
                 placeholder="Email"
+                autoComplete="email"
                 className={`${styles.input} ${
                   errors?.email ? styles.inputError : ""
                 }`}
@@ -247,6 +265,7 @@ const EmailMatchPage = ({
                 errors?.phone ? styles.inputError : ""
               }`}
               value={phone}
+              autoComplete="phone"
               maxLength={10}
               onChange={handlePhoneChange}
             />
