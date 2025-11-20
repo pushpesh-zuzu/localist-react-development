@@ -37,6 +37,8 @@ const EmailMatchPage = ({
   const targetID = params.get("utm_term");
   const msclickid = params.get("utm_msclkid");
   const utm_source = params.get("utm_source");
+    const [inputType, setInputType] = useState("text");
+  
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -52,12 +54,15 @@ const EmailMatchPage = ({
   const { requestLoader, buyerRequest, citySerach } = useSelector(
     (state) => state.buyer
   );
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    setErrors((prev) => ({ ...prev, email: false }));
+  const handleEmailFocus = () => {
+    setInputType("email");
   };
 
   const handleEmailBlur = async () => {
+    if (!email) {
+      setInputType("text");
+    }
+    
     if (!email) return;
 
     try {
@@ -79,6 +84,11 @@ const EmailMatchPage = ({
       setIsEmailValid(false);
       setEmailErrorMessage("Something went wrong. Please try again.");
     }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    setErrors((prev) => ({ ...prev, email: false }));
   };
 
   const handleNameChange = (e) => {
@@ -210,16 +220,34 @@ const EmailMatchPage = ({
         </div>
 
         <div className={styles.infoWrapper}>
+          {/* Hidden trap fields for auto-fill prevention */}
+          <input 
+            type="text" 
+            name="username" 
+            style={{ display: 'none', position: 'absolute', left: '-9999px' }} 
+            autoComplete="new-password"
+            tabIndex="-1"
+          />
+          <input 
+            type="password" 
+            name="password" 
+            style={{ display: 'none', position: 'absolute', left: '-9999px' }} 
+            autoComplete="new-password"
+            tabIndex="-1"
+          />
+          
           <label className={styles.label}>Name</label>
           <input
             type="text"
             placeholder="Your Name"
-            autoComplete="name"
+            autoComplete="new-password"
             className={`${styles.input} ${
               errors?.name ? styles.inputError : ""
             }`}
             value={name}
             onChange={handleNameChange}
+            name="user_full_name"
+            id="user_full_name"
           />
           {errors?.name && (
             <span style={{ color: "red" }} className={styles.errorMessage}>
@@ -229,19 +257,22 @@ const EmailMatchPage = ({
 
           {!isPPCPages && (
             <>
-              <label htmlFor="email" className={styles.label}>
+              <label htmlFor="user_email_address" className={styles.label}>
                 Email
               </label>
               <input
-                type="email"
+                type={inputType}
                 placeholder="Email"
-                autoComplete="email"
+                autoComplete="new-password"
                 className={`${styles.input} ${
                   errors?.email ? styles.inputError : ""
                 }`}
                 value={email}
                 onChange={handleEmailChange}
+                onFocus={handleEmailFocus}
                 onBlur={handleEmailBlur}
+                name="user_email_address"
+                id="user_email_address"
               />
               {errors?.email && (
                 <span style={{ color: "red" }} className={styles.errorMessage}>
@@ -265,9 +296,11 @@ const EmailMatchPage = ({
                 errors?.phone ? styles.inputError : ""
               }`}
               value={phone}
-              autoComplete="phone"
+              autoComplete="new-password"
               maxLength={10}
               onChange={handlePhoneChange}
+              name="user_contact_number"
+              id="user_contact_number"
             />
             {errors?.phone && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

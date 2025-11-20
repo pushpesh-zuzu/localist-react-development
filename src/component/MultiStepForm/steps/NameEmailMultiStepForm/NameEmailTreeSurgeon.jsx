@@ -34,6 +34,9 @@ const NameEmailTreeSurgeon = ({
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isBannerText, setIsBannerText] = useState(false);
+
+  const [inputType, setInputType] = useState("text"); // Initially text to avoid email detection
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
@@ -42,6 +45,15 @@ const NameEmailTreeSurgeon = ({
   const handleNameChange = (e) => {
     setName(e.target.value);
     setErrors((prev) => ({ ...prev, name: false }));
+  };
+
+  const handleEmailFocus = () => {
+    setInputType("email");
+  };
+  const handleEmailBlur = () => {
+    if (!email) {
+      setInputType("text");
+    }
   };
 
   const handleSubmit = async () => {
@@ -91,17 +103,17 @@ const NameEmailTreeSurgeon = ({
     setIsBannerText(false);
   };
   useEffect(() => {
-      if (!isEmailAvailable) {
-        setEmail("");
-        dispatch(
-          setbuyerRequestData({
-            ...buyerRequest,
-            name,
-            email: "",
-          })
-        );
-      }
-    }, [isEmailAvailable]);
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+        })
+      );
+    }
+  }, [isEmailAvailable]);
   return (
     <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
       <CardLayoutWrapper
@@ -139,17 +151,37 @@ const NameEmailTreeSurgeon = ({
           </div>
         ) : (
           <div className={styles.infoWrapper}>
+            {/* Hidden trap fields for auto-fill prevention */}
+            <input
+              type="text"
+              name="username"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+            <input
+              type="password"
+              name="password"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+
             {!isPPCPages && (
               <div style={{ marginBottom: "10px" }}>
                 <input
-                  type="email"
+                  type={inputType}
                   placeholder="Email"
                   className={`${styles.input} ${
                     errors?.email ? styles.inputError : ""
                   }`}
                   value={email}
                   onChange={handleEmailChange}
-                  autoComplete="email"
+                  onFocus={handleEmailFocus}
+                  onBlur={handleEmailBlur}
+                  autoComplete="new-password"
+                  name="user_email_address"
+                  id="user_email_address"
                 />
                 {errors?.email && (
                   <span
@@ -170,7 +202,9 @@ const NameEmailTreeSurgeon = ({
               }`}
               value={name}
               onChange={handleNameChange}
-              autoComplete="name"
+              autoComplete="new-password"
+              name="user_full_name"
+              id="user_full_name"
             />
             {errors?.name && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

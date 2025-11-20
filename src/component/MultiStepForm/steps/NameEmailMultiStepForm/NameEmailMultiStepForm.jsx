@@ -21,6 +21,7 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const [isBannerText, setIsBannerText] = useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const { isEmailAvailable } = useEmailCheck(email);
+  const [inputType, setInputType] = useState("text"); // Initially text to avoid email detection
 
   const [errors, setErrors] = useState({
     email: false,
@@ -35,6 +36,15 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const handleNameChange = (e) => {
     setName(e.target.value);
     setErrors((prev) => ({ ...prev, name: false }));
+  };
+
+  const handleEmailFocus = () => {
+    setInputType("email");
+  };
+  const handleEmailBlur = () => {
+    if (!email) {
+      setInputType("text");
+    }
   };
 
   const handleSubmit = async () => {
@@ -122,17 +132,37 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
           </div>
         ) : (
           <div className={styles.infoWrapper}>
+            {/* Hidden trap fields for auto-fill prevention */}
+            <input
+              type="text"
+              name="username"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+            <input
+              type="password"
+              name="password"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+
             {!isPPCPages && (
               <div style={{ marginBottom: "10px" }}>
                 <input
-                  type="email"
+                  type={inputType}
                   placeholder="Email"
                   className={`${styles.input} ${
                     errors?.email ? styles.inputError : ""
                   }`}
                   value={email}
                   onChange={handleEmailChange}
-                  autoComplete="email"
+                  onFocus={handleEmailFocus}
+                  onBlur={handleEmailBlur}
+                  autoComplete="new-password"
+                  name="user_email_address"
+                  id="user_email_address"
                 />
                 {errors?.email && (
                   <span
@@ -152,7 +182,9 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
                 errors?.name ? styles.inputError : ""
               }`}
               value={name}
-              autoComplete="name"
+              autoComplete="new-password"
+              name="user_full_name"
+              id="user_full_name"
               onChange={handleNameChange}
             />
             {errors?.name && (
