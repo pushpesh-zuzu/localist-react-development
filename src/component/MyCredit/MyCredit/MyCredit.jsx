@@ -136,6 +136,10 @@ const MyCredits = () => {
         window.dataLayer.push({
           event: "payment_success",
           paymentId: result?.data?.invoice_number, // paymentId from backend
+          currency: "GBP",
+          value: item?.price,
+          item_Name: item?.name,
+          item_id: item?.id,
         });
         showToast("success", result?.message);
         setActiveLoaderId(null);
