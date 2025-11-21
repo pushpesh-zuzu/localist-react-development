@@ -4,6 +4,7 @@ import { setbuyerRequestData } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import { useLocation } from "react-router";
 import styles from "./QuestionAnswerMultiStep.module.css";
+import { handleScrollToBottom } from "../../../../utils/scroll";
 
 const QuestionAnswerMultiStepRoofingNew = ({
   questions = [],
@@ -78,6 +79,7 @@ const QuestionAnswerMultiStepRoofingNew = ({
         setOtherText("");
       }
     }
+    handleScrollToBottom()
   }, [currentQuestion, buyerRequest, formattedQuestions]);
 
   useEffect(() => {
