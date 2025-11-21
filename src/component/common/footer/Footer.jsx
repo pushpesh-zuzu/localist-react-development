@@ -165,7 +165,7 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <Link to={`/${lang}/${country}`} className={styles.link}>
+              <Link to={`/${lang}/${country}/`} className={styles.link}>
                 <li>Find a Professional</li>
               </Link>
 
