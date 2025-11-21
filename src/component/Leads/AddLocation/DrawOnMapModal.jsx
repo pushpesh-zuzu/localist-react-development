@@ -19,36 +19,37 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
   const [isAreaRemoved, setIsAreaRemoved] = useState(false);
 
   useEffect(() => {
+    let scriptTag;
+
     const loadGoogleMapsScript = () => {
       if (
         !window.google ||
         !window.google.maps ||
         !window.google.maps.drawing
       ) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,drawing,geometry&callback=initMap`;
-        script.async = true;
-        script.defer = true;
+        scriptTag = document.createElement("script");
+        scriptTag.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,drawing,geometry&callback=initMap`;
+        scriptTag.async = true;
+        scriptTag.defer = true;
 
         window.initMap = () => {
-          if (mapRef.current) {
+          if (isEdit) {
+            editInitializeMap();
+          } else {
             addInitializeMap();
           }
         };
 
-        document.body.appendChild(script);
+        document.body.appendChild(scriptTag);
       } else {
-        if (isEdit) {
-          editInitializeMap();
-        } else {
-          addInitializeMap();
-        }
+        // Already loaded
+        isEdit ? editInitializeMap() : addInitializeMap();
       }
     };
-    const locationData = data;
 
     const editInitializeMap = () => {
       const center = { lat: 55.3781, lng: -3.436 };
+
       const mapOptions = {
         center,
         zoom: 5,
@@ -63,68 +64,43 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
       const newGeocoder = new window.google.maps.Geocoder();
       setGeocoder(newGeocoder);
 
-      const polygon = new window.google.maps.Polygon({
-        paths: locationData,
-        fillColor: "red",
-        fillOpacity: 0.3,
-        strokeWeight: 2,
-        strokeColor: "red",
-        clickable: true,
-        editable: false,
-        map: newMap,
-      });
-
-      console.log(window.google.maps.Polygon, "polygons");
-      console.log(polygon, "polygonss");
-      setPolygons((prev) => [...(prev || []), polygon]);
+      let parsedLocations = [];
+      try {
+        parsedLocations = JSON.parse(data);
+      } catch (err) {
+        console.error("Invalid location JSON", err);
+      }
 
       const bounds = new window.google.maps.LatLngBounds();
-      locationData?.forEach((coord) => {
-        bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+
+      parsedLocations?.forEach((polyArr) => {
+        const polygon = new window.google.maps.Polygon({
+          paths: polyArr,
+          fillColor: "red",
+          fillOpacity: 0.3,
+          strokeWeight: 2,
+          strokeColor: "red",
+          clickable: true,
+          editable: false,
+          map: newMap,
+        });
+
+        setPolygons((prev) => [...prev, polygon]);
+
+        polyArr.forEach((coord) => {
+          bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+        });
       });
 
       const centerPoint = bounds.getCenter();
 
       getGeocodeDetails(centerPoint).then(({ city, pincode }) => {
-        const data = {
+        setLocationData({
           city,
           postcode: pincode,
           miles: 0,
-          coordinates: JSON.stringify(locationData),
-        };
-
-        setLocationData(data);
-      });
-
-      fetchAddressDetails(centerPoint, (prev) => [...prev, null]);
-
-      locationData?.forEach((coord, index) => {
-        const latLng = new window.google.maps.LatLng(coord.lat, coord.lng);
-        setTimeout(() => {
-          newGeocoder.geocode({ location: latLng }, (results, status) => {
-            if (status === "OK" && results[0]) {
-              const addressComponents = results[0].address_components;
-              let pincode = "";
-              let city = "";
-
-              addressComponents.forEach((component) => {
-                if (component.types.includes("postal_code")) {
-                  pincode = component.long_name;
-                }
-                if (
-                  component.types.includes("locality") ||
-                  component.types.includes("administrative_area_level_2")
-                ) {
-                  city = component.long_name;
-                }
-              });
-            } else {
-              console.error(
-                `Geocoder failed for vertex ${index} due to: ${status}`
-              );
-            }
-          });
-        }, index * 300);
+          coordinates: JSON.stringify(parsedLocations),
+        });
       });
 
       const manager = new window.google.maps.drawing.DrawingManager({
@@ -137,41 +113,23 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
           strokeColor: "red",
           clickable: true,
           editable: false,
-          zIndex: 1,
         },
       });
 
       setDrawingManager(manager);
     };
-    const enablePolygonEditing = (polygon) => {
-      polygon.setEditable(true);
-
-      const path = polygon.getPath();
-
-      const logUpdatedPath = () => {
-        const updatedCoords = [];
-        for (let i = 0; i < path.getLength(); i++) {
-          const latLng = path.getAt(i);
-          updatedCoords.push({ lat: latLng.lat(), lng: latLng.lng() });
-        }
-      };
-
-      path.addListener("set_at", logUpdatedPath);
-      path.addListener("insert_at", logUpdatedPath);
-      path.addListener("remove_at", logUpdatedPath);
-    };
 
     const addInitializeMap = () => {
       const center = { lat: 55.3781, lng: -3.436 };
-      const mapOptions = {
+
+      const newMap = new window.google.maps.Map(mapRef.current, {
         center,
         zoom: 5,
         mapTypeControl: true,
         streetViewControl: false,
         fullscreenControl: true,
-      };
+      });
 
-      const newMap = new window.google.maps.Map(mapRef.current, mapOptions);
       setMap(newMap);
 
       const newGeocoder = new window.google.maps.Geocoder();
@@ -187,9 +145,9 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
           strokeColor: "#4285F4",
           clickable: true,
           editable: false,
-          zIndex: 1,
         },
       });
+
       setDrawingManager(manager);
 
       window.google.maps.event.addListener(
@@ -198,57 +156,16 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
         (event) => {
           if (event.type === window.google.maps.drawing.OverlayType.POLYGON) {
             const polygon = event.overlay;
-
             setPolygons((prev) => [...prev, polygon]);
 
             const path = polygon.getPath();
-            const coordinates = Array.from(
-              { length: path.getLength() },
-              (_, i) => {
-                const point = path.getAt(i);
-                return { lat: point.lat(), lng: point.lng() };
-              }
-            );
+            const coords = [...Array(path.getLength())].map((_, i) => {
+              const p = path.getAt(i);
+              return { lat: p.lat(), lng: p.lng() };
+            });
 
             const bounds = new window.google.maps.LatLngBounds();
-            coordinates.forEach((coord) => {
-              bounds.extend(
-                new window.google.maps.LatLng(coord.lat, coord.lng)
-              );
-            });
-            const center = bounds.getCenter();
-
-            fetchAddressDetails(center, (prev) => [...prev, null]);
-
-            coordinates.forEach((coord, index) => {
-              const latLng = new window.google.maps.LatLng(
-                coord.lat,
-                coord.lng
-              );
-
-              setTimeout(() => {
-                geocoder?.geocode({ location: latLng }, (results, status) => {
-                  if (status === "OK" && results[0]) {
-                    const addressComponents = results[0].address_components;
-                    let pincode = "";
-                    let city = "";
-
-                    addressComponents.forEach((component) => {
-                      if (component.types.includes("postal_code")) {
-                        pincode = component.long_name;
-                      }
-                      if (
-                        component.types.includes("locality") ||
-                        component.types.includes("administrative_area_level_2")
-                      ) {
-                        city = component.long_name;
-                      }
-                    });
-                  } else {
-                  }
-                });
-              }, index * 300);
-            });
+            coords.forEach((c) => bounds.extend(c));
 
             manager.setDrawingMode(null);
             setIsDrawingActive(false);
@@ -260,14 +177,11 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
     loadGoogleMapsScript();
 
     return () => {
-      if (drawingManager) {
-        drawingManager.setMap(null);
-      }
-      if (polygons.length > 0) {
-        polygons.forEach((polygon) => polygon.setMap(null));
-      }
+      if (drawingManager) drawingManager.setMap(null);
+      polygons.forEach((p) => p.setMap(null));
+      if (scriptTag) scriptTag.remove();
     };
-  }, [window.google]);
+  }, []); // <- IMPORTANT: empty dependency array
 
   console.log(polygons, "polygons");
 
