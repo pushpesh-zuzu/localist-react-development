@@ -86,7 +86,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: -webkit-fill-available;
+  width: 100%;
 }
 
 .inputGroup label {
@@ -134,7 +134,14 @@
   font-size: 20px;
 }
 .customSelect {
-  height: -webkit-fill-available;
+  height: 48px !important;
+  width: 100% !important;
+  max-width: -webkit-fill-available;
+  min-width: -moz-available;
+}
+
+.customSelect > div {
+  border-radius: 2px !important;
 }
 
 /* 💻 Laptops & small desktops (max-width: 1024px) */

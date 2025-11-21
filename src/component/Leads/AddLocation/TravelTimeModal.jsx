@@ -352,6 +352,7 @@ const TravelTimeModal = ({
                   travel_time: value,
                 }))
               }
+              size="large"
               className={styles.customSelect}
               dropdownMatchSelectWidth={false}
             >
@@ -372,6 +373,7 @@ const TravelTimeModal = ({
                   travel_by: value,
                 }))
               }
+              size="large"
               className={styles.customSelect}
               dropdownMatchSelectWidth={false}
             >
