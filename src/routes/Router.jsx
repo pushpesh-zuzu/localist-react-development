@@ -367,10 +367,10 @@ const routes = [
         path: "thank-you",
         element: <ThankuPage />,
       },
-      {
-        path: "/login",
-        element: <ProtectedLogin />,
-      },
+      // {
+      //   path: "/login",
+      //   element: <ProtectedLogin />,
+      // },
       // {
       //   path: "/passwordless_login",
       //   element: (
