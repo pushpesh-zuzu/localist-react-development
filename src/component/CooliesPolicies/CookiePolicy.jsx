@@ -250,7 +250,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: 'You can learn more about cookies here: <a href="https://www.termsfeed.com/blog/cookies/" target="_blank" style="color:#00afe3;">All About Cookies by TermsFeed</a> .',
+    text: 'You can learn more about cookies here: <a href="https://www.termsfeed.com/blog/cookies/" target="_blank" style="color:#00afe3;">All About Cookies by TermsFeed</a>.',
   },
   {
     type: "h2",

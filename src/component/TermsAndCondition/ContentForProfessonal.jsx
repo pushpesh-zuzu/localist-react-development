@@ -91,7 +91,7 @@ export const professionalsTermsData = [
   {
     type: "li",
     heading: "“Request Replies”",
-    text: " - a Contact Customer provided by a Marketplace Introduction that is initiated by a Potential Customer that requests specific Service Professionals after a Quote Request that meets the Preferences, following the automatic redemption of Credits, such that the Potential Customer becomes a Contact Customer;",
+    text: "a Contact Customer provided by a Marketplace Introduction that is initiated by a Potential Customer that requests specific Service Professionals after a Quote Request that meets the Preferences, following the automatic redemption of Credits, such that the Potential Customer becomes a Contact Customer;",
   },
   {
     type: "li",
@@ -116,7 +116,7 @@ export const professionalsTermsData = [
   {
     type: "li",
     heading: "“Website”",
-    text: ` - <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.`,
+    text: ` - <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com/en/gb" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.`,
   },
   {
     type: "li",
@@ -1163,7 +1163,7 @@ export const professionalsTermsData = [
       ["EU SCC term", "Amendment / Selected option"],
       [
         "Module",
-        "For transfers from IMG to Service Professional: Module 1 (Controller to Controller) For transfers from Service Professional to Subprocessor: Module 2 (Controller to Processor)",
+        `For transfers from IMG to Service <p>Professional: Module 1 (Controller to Controller)</> For transfers from Service <p>Professional to Subprocessor: Module 2 (Controller to Processor)</p>`,
       ],
       ["Clause 7 (Docking clause)", "Not included"],
       [
@@ -1296,7 +1296,7 @@ const ContentForProfessonal = () => {
   return (
     <>
       <h1 className={styles.mainHeading}>
-        Terms & Conditions <br />
+        Terms and Conditions <br />
         For Service Professionals - Localists.com
       </h1>
       <div className={styles.lastUpdated}>
@@ -1323,8 +1323,8 @@ const ContentForProfessonal = () => {
                   block?.fullWidth ? styles.fullWidth : ""
                 }`}
               >
-                <span>{block?.number}</span>
-                <span>{block?.text}</span>
+                <span >{block?.number}</span>
+                <span className={styles.h3Number}>{block?.text}</span>
               </h3>
             );
           case "h4":
