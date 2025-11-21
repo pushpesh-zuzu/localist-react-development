@@ -5,7 +5,7 @@ import logo from "../../../assets/Images/logo.png";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import linkedinsocialicon from "../../../assets/Icons/linkedinsocialicon.png";
 import Xsocialicon from "../../../assets/Icons/Xsocialicon.png";
-
+import UKFlag from "../../../assets/Icons/UKFlag.png";
 // import pinterestIcon from "../../../assets/Icons/pinterest.svg";
 import instagramIcon from "../../../assets/Icons/instagram.svg";
 // import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
@@ -56,20 +56,26 @@ const FooterContent = () => (
         </Link>
       </div>
       <div className={styles.countryDropdown}>
-        {/* <select> */}
-        {/* <option>🇬🇧 UK</option> */}
-        {/* <option>🇮🇳 India</option>
-          <option>🇺🇸 USA</option> */}
-        {/* </select> */}
         <Select
           defaultValue="🇬🇧 UK"
           style={{ width: 160 }}
           className={styles.selectDropdown}
-          dropdownIcon={<DownOutlined style={{ color: "black" }} />}
+          suffixIcon={null} // 👈 arrow remove
         >
-          <Option value="🇬🇧 UK">🇬🇧 UK</Option>
-          {/* <Option value="🇮🇳 India">🇮🇳 India</Option> */}
-          {/* <Option value="🇺🇸 USA">🇺🇸 USA</Option> */}
+          <Option value="🇬🇧 UK">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>UK</span>
+              <img
+                style={{
+                  height: "16px",
+                  marginTop: "auto",
+                  marginBottom: "auto",
+                }}
+                src={UKFlag}
+                alt="UK Flag"
+              />
+            </div>
+          </Option>
         </Select>
       </div>
       {/* <div className={styles.trustpilot}>
@@ -286,7 +292,7 @@ const Footer = () => {
             key="1"
           >
             <ul>
-              <Link to="/">
+              <Link to={`${lang}/${country}/`}>
                 <li className={styles.mobileItem}>Find a Professional</li>
               </Link>
               <Link to={`/${lang}/${country}/how-it-works-for-customers`}>
@@ -385,7 +391,20 @@ const Footer = () => {
 
       <div className={styles.footerBottom}>
         <p>
-          © 2025 Localists. Terms & Conditions / Cookie policy /{" "}
+          © 2025 Localists.{" "}
+          <Link
+            style={{ textDecoration: "none", color: "#000" }}
+            to={`/${lang}/${country}/terms`}
+          >
+            Terms & Conditions{" "}
+          </Link>
+          /{" "}
+          <Link
+            style={{ textDecoration: "none", color: "#000" }}
+            to={`/${lang}/${country}/cookie-policy`}
+          >
+            Cookie policy /{" "}
+          </Link>
           <Link
             style={{ textDecoration: "none", color: "#000" }}
             to={`/${lang}/${country}/privacy-policy`}

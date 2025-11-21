@@ -11,6 +11,7 @@
 }
 .link {
   text-decoration: none;
+  color:#000
 }
 
 .footerContainer {
@@ -223,7 +224,7 @@
   line-height: 23.7px;
   letter-spacing: 0px;
   color: #000;
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .contactMthods {
@@ -450,7 +451,7 @@
   }
 
   .contactMthods {
-    gap: 15px;
+    gap: 8px;
   }
 
   .contactMthods p {
@@ -462,6 +463,8 @@
 
   .contactMthods:last-child {
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .contactMthods img {
