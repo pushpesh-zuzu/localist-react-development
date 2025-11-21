@@ -302,7 +302,7 @@ const TravelTimeModal = ({
                 onChange(e);
                 validatePostcode(e.target.value);
               }}
-              placeholder="Enter postcode or city"
+              placeholder="Enter postcode (No Spaces)"
               autoComplete="off"
               className={`${errors.postcode ? styles.errorBorder : ""}`}
             />
