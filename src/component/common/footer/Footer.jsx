@@ -3,12 +3,15 @@ import styles from "./footer.module.css";
 // import logo from "../../../assets/Images/footerLogo.svg";
 import logo from "../../../assets/Images/logo.png";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
-import pinterestIcon from "../../../assets/Icons/pinterest.svg";
+import linkedinsocialicon from "../../../assets/Icons/linkedinsocialicon.png";
+import Xsocialicon from "../../../assets/Icons/Xsocialicon.png";
+
+// import pinterestIcon from "../../../assets/Icons/pinterest.svg";
 import instagramIcon from "../../../assets/Icons/instagram.svg";
-import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
+// import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
 import mailIcon from "../../../assets/Icons/emailIcon.svg";
-import callIcon from "../../../assets/Icons/callIcon.svg";
-import timerIcon from "../../../assets/Icons/timer.svg";
+// import callIcon from "../../../assets/Icons/callIcon.svg";
+// import timerIcon from "../../../assets/Icons/timer.svg";
 import { Collapse, Select } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined, DownOutlined } from "@ant-design/icons";
@@ -23,9 +26,34 @@ const FooterContent = () => (
   <>
     <div className={styles.footerRight}>
       <div className={styles.socialIcons}>
-        <img src={facebookIcon} alt="Facebook" />
-        <img src={pinterestIcon} alt="Pinterest" />
-        <img src={instagramIcon} alt="Instagram" />
+        <Link
+          to={"https://www.facebook.com/localistsuk/"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={facebookIcon} alt="Facebook" />
+        </Link>
+        <Link
+          to={"https://www.linkedin.com/company/localistsuk/"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={linkedinsocialicon} alt="linkedinsocialicon" />
+        </Link>
+        <Link
+          to={"https://x.com/LocalistsUK"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={Xsocialicon} alt="Xsocialicon" />
+        </Link>
+        <Link
+          to={"https://www.instagram.com/localists_official"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={instagramIcon} alt="Instagram" />
+        </Link>
       </div>
       <div className={styles.countryDropdown}>
         {/* <select> */}

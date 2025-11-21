@@ -215,7 +215,7 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
 
         <div className={styles.inputRow}>
           <div className={styles.inputField}>
-            <label>Postcode / City</label>
+            <label>Postcode</label>
             <input
               ref={inputRef}
               type="text"

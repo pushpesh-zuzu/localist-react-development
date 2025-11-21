@@ -25,7 +25,7 @@ const endpointCategoryMap = {
     "Landscaping",
     "Fence & Gate Installation",
     "Driveway Installation",
-    "Patio Services",
+    "Patio Laying",
     "Artificial Grass Installation",
     "Tree Surgery",
     "Gutter Cleaning",
