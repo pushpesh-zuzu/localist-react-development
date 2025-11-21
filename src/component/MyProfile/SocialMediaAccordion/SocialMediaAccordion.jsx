@@ -21,8 +21,8 @@ const platforms = [
   },
   {
     key: "twitter_link",
-    label: "Twitter",
-    placeholder: "https://twitter.com/yourhandle",
+    label: "X",
+    placeholder: "https://x.com/yourhandle",
     optional: "has_twitter_link",
   },
   {
@@ -48,7 +48,7 @@ const platforms = [
 
 const urlPatterns = {
   fb_link: /^(https?:\/\/)?(www\.)?facebook\.com\/[A-Za-z0-9_.-]+\/?(\?.*)?$/,
-  twitter_link: /^(https?:\/\/)?(www\.)?twitter\.com\/[A-Za-z0-9_]+\/?(\?.*)?$/,
+  twitter_link: /^(https?:\/\/)?(www\.)?x\.com\/[A-Za-z0-9_]+\/?(\?.*)?$/,
   insta_link:
     /^(https?:\/\/)?(www\.)?instagram\.com\/[A-Za-z0-9_.-]+\/?(\?.*)?$/,
   linkedin_link:

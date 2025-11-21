@@ -274,7 +274,7 @@ const ReviewsAccordion = ({ details }) => {
               <a href={shareLinks.twitter} target="_blank" rel="noreferrer">
                 <img
                   src={twitterIcon}
-                  alt="Twitter"
+                  alt="X"
                   style={{ height: "36px", width: "36px" }}
                 />
               </a>
