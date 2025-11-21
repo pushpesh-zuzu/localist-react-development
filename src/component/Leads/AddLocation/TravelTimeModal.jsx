@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const TravelTimeModal = ({
+  open,
   onClose,
   onNext,
   locationData,
@@ -30,14 +31,6 @@ const TravelTimeModal = ({
   const [checkingPostcode, setCheckingPostcode] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [errors, setErrors] = useState({ postcode: "" });
-  useEffect(() => {
-    if (locationData?.coordinates) {
-      const parsedCoordinates = locationData.coordinates;
-      if (Array.isArray(parsedCoordinates) && parsedCoordinates.length > 0) {
-        setMapCenter(parsedCoordinates[0]);
-      }
-    }
-  }, [locationData?.coordinates]);
 
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
@@ -55,96 +48,14 @@ const TravelTimeModal = ({
     return speedMap[mode] * minutes;
   };
 
-  const drawCircle = (center) => {
-    if (!window.google || !mapInstance.current) return;
-
-    const radiusInMeters = calculateTravelRadius(
-      locationData?.travel_time,
-      locationData?.travel_by
-    );
-
-    if (circleRef.current) {
-      circleRef.current.setMap(null);
-    }
-
-    circleRef.current = new window.google.maps.Circle({
-      center,
-      radius: radiusInMeters,
-      fillColor: "#4285F4",
-      fillOpacity: 0.15,
-      strokeColor: "#4285F4",
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      map: mapInstance.current,
-    });
-
-    mapInstance.current.fitBounds(circleRef.current.getBounds());
-  };
-
-  const updateMarkerAndCircle = () => {
-    if (!mapInstance.current) return;
-
-    // Update marker
-    if (markerRef.current) {
-      markerRef.current.setMap(null);
-    }
-
-    markerRef.current = new window.google.maps.Marker({
-      position: mapCenter,
-      map: mapInstance.current,
-    });
-
-    // Update circle
-    drawCircle(mapCenter);
-  };
-
-  useEffect(() => {
-    const loadGoogleMapsScript = () => {
-      if (!window.google) {
-        const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
-        script.async = true;
-        script.defer = true;
-        script.onload = () => {
-          setMapLoaded(true);
-          initMap();
-          // initAutocomplete();
-        };
-        document.body.appendChild(script);
-      } else {
-        setMapLoaded(true);
-        initMap();
-        // initAutocomplete();
-      }
-    };
-
-    const initMap = () => {
-      if (!mapRef.current || !window.google) return;
-
-      mapInstance.current = new window.google.maps.Map(mapRef.current, {
-        center: mapCenter,
-        zoom: 10,
-      });
-
-      if (locationData?.postcode && mapCenter.lat !== 20.5937) {
-        updateMarkerAndCircle();
-      }
-    };
-
-    loadGoogleMapsScript();
-  }, [mapCenter]);
+  // useEffect(() => {
+  //   setLocationData();
+  // }, []);
 
   const validatePostcode = async (value) => {
     if (!value) {
       setPostalCodeValidate(false);
       setCity("");
-      setErrors({ postcode: "" });
-
-      setLocationData((prev) => ({
-        ...prev,
-        coordinates: null,
-      }));
-
       return;
     }
 
@@ -154,24 +65,17 @@ const TravelTimeModal = ({
       const response = await dispatch(getCityName({ postcode: value }));
       const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      // Case 1: city is returned
       if (newResponse?.data?.city) {
         setPostalCodeValidate(true);
         setCity(newResponse.data.city);
-
         dispatch(setcitySerach(newResponse.data.city));
-
         setErrors((prev) => ({ ...prev, postcode: "" }));
-
         setLocationData((prev) => ({
           ...prev,
           postcode: value,
           city: newResponse.data.city,
         }));
-      }
-
-      // Case 2: coordinates are returned
-      else if (newResponse?.data?.latitude && newResponse?.data?.longitude) {
+      } else if (newResponse?.data?.latitude && newResponse?.data?.longitude) {
         const newCenter = {
           lat: parseFloat(newResponse.data.latitude),
           lng: parseFloat(newResponse.data.longitude),
@@ -220,6 +124,46 @@ const TravelTimeModal = ({
     }
   };
 
+  console.log(locationData, "location data");
+
+  const drawCircle = (center) => {
+    if (!window.google || !mapInstance.current) return;
+
+    const radiusInMeters = calculateTravelRadius(
+      locationData?.travel_time,
+      locationData?.travel_by,
+      locationData?.postcode
+    );
+
+    if (circleRef.current) {
+      circleRef.current.setMap(null);
+    }
+
+    circleRef.current = new window.google.maps.Circle({
+      center,
+      radius: radiusInMeters,
+      fillColor: "#4285F4",
+      fillOpacity: 0.15,
+      strokeColor: "#4285F4",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      map: mapInstance.current,
+    });
+
+    mapInstance.current.fitBounds(circleRef.current.getBounds());
+  };
+
+  useEffect(() => {
+    setLocationData({
+      miles1: "20",
+      postcode: "",
+      travel_by: "Driving",
+      travel_time: "30 minutes",
+    });
+  }, []);
+
+  console.log(locationData);
+
   useEffect(() => {
     if (mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
@@ -255,7 +199,7 @@ const TravelTimeModal = ({
         }
       );
     }
-  }, [open, mapLoaded, locationData.postcode, locationData]);
+  }, [open, mapLoaded, locationData]);
 
   useEffect(() => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
@@ -284,14 +228,49 @@ const TravelTimeModal = ({
     };
   }, []);
 
+  // Load Google Maps script only once
   useEffect(() => {
-    if (mapLoaded && mapInstance.current) {
-      setTimeout(() => {
-        window.google.maps.event.trigger(mapInstance.current, "resize");
-        mapInstance.current.setCenter(mapCenter);
-      }, 300);
+    if (window.google) {
+      setMapLoaded(true);
+      return;
     }
-  }, [mapLoaded, mapCenter]);
+
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
+    script.async = true;
+    script.onload = () => setMapLoaded(true);
+
+    document.body.appendChild(script);
+  }, []);
+
+  // Initialize map once after Google is loaded
+  useEffect(() => {
+    if (!mapLoaded || !mapRef.current || mapInstance.current) return;
+
+    mapInstance.current = new window.google.maps.Map(mapRef.current, {
+      center: mapCenter,
+      zoom: 7,
+    });
+  }, [mapLoaded]);
+
+  // Fix map not displaying on first modal open
+  useEffect(() => {
+    if (!open || !mapInstance.current) return;
+
+    setTimeout(() => {
+      window.google.maps.event.trigger(mapInstance.current, "resize");
+      mapInstance.current.setCenter(mapCenter);
+    }, 300);
+  }, [open]);
+
+  useEffect(() => {
+    if (locationData?.coordinates) {
+      const parsedCoordinates = locationData.coordinates;
+      if (Array.isArray(parsedCoordinates) && parsedCoordinates.length > 0) {
+        setMapCenter(parsedCoordinates[0]);
+      }
+    }
+  }, [locationData?.coordinates]);
 
   return (
     <div className={styles.modalOverlay}>
@@ -313,7 +292,7 @@ const TravelTimeModal = ({
 
         <div className={styles.form}>
           <div className={styles.inputGroup}>
-            <label>Postcode / City</label>
+            <label>Postcode</label>
             <input
               ref={inputRef}
               type="text"

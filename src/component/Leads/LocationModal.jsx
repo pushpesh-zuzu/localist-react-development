@@ -137,7 +137,6 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
         zoom: 7,
       });
 
-      // if already have postcode + coordinates
       if (locationData.postcode && mapCenter.lat !== 52.6358) {
         markerRef.current = new window.google.maps.Marker({
           position: mapCenter,
