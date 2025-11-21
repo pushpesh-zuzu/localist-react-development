@@ -60,7 +60,8 @@ const FooterContent = () => (
           defaultValue="🇬🇧 UK"
           style={{ width: 160 }}
           className={styles.selectDropdown}
-          suffixIcon={null} // 👈 arrow remove
+          suffixIcon={null}
+          open={false}
         >
           <Option value="🇬🇧 UK">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
