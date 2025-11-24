@@ -181,6 +181,11 @@
     position: relative;
     height: 84vh;
   } */
+
+  .modalContent {
+    top: 55%;
+    height: 70vh;
+  }
   .cancelBtn {
     background: #c6c6c6;
     color: white;
