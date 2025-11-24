@@ -20,7 +20,7 @@
   width: 100%;
   max-width: 700px;
   max-height: fit-content;
-  
+
   text-align: center;
   position: relative;
   box-sizing: border-box;
@@ -107,10 +107,8 @@
 /* 🔻 Tablet and below */
 @media (max-width: 768px) {
   .modal {
-   margin: 0px 10px;
+    margin: 0px 10px;
   }
-
- 
 
   .header h2 {
     margin-top: -20px;
@@ -139,6 +137,9 @@
   .modal {
     /* padding: 20px 16px; */
     margin: 10px 0px;
+    overflow: auto;
+    height: 65vh;
+    top: 10%;
   }
   .overlay {
     padding: 0px;
