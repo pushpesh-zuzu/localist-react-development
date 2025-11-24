@@ -145,7 +145,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "1.3 References to a <strong>“person”</strong> include any individual, company, partnership, association, trust, or other body (whether or not having separate legal personality).",
+    text: "1.3 References to a “person” include any individual, company, partnership, association, trust, or other body (whether or not having separate legal personality).",
   },
   {
     type: "p",
@@ -153,11 +153,11 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: "1.5 Words such as <strong>“include”</strong>, <strong>“including”</strong> or similar expressions are illustrative only and shall not limit the general meaning of the words preceding them.",
+    text: "1.5 Words such as “include”, “including” or similar expressions are illustrative only and shall not limit the general meaning of the words preceding them.",
   },
   {
     type: "p",
-    text: "1.6 References to <strong>“in writing”</strong> or <strong>“written”</strong> include electronic communications such as email.",
+    text: "1.6 References to “in writing” or “written” include electronic communications such as email.",
   },
   {
     type: "h3",

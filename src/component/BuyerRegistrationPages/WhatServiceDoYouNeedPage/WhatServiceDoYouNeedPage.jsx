@@ -272,7 +272,7 @@ const WhatServiceDoYouNeedPage = ({
             !(userToken?.remember_tokens || registerData?.remember_tokens)
           }
           type="text"
-          placeholder="e.g. Personal Trainers, House Cleaning"
+          placeholder="e.g. Landscaping, Driveway Installation"
           className={`${styles.input} ${
             errors?.service ? styles?.errorBorder : ""
           }`}
