@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import styles from "./CookiePolicy.module.css";
 export const professionalsTermsData = [
   {
@@ -270,6 +271,15 @@ export const professionalsTermsData = [
 const CookiePolicy = () => {
   return (
     <>
+      <Helmet>
+        <title>Cookies Policy | Localists.com</title>
+        {
+          <meta
+            name="description"
+            content=" Learn how Localists uses cookies to improve your browsing experience. See details on cookie types, tracking technologies, consent settings, and your privacy rights."
+          />
+        }
+      </Helmet>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.contentWrapper}>
@@ -319,8 +329,8 @@ const CookiePolicy = () => {
                 case "li":
                   return (
                     <ul key={index} className={styles.list} style={{
-                  paddingBottom: block?.spacing && "16px",
-                  wordBreak: "break-word",
+                        paddingBottom: block?.spacing && "16px",
+                        wordBreak: "break-word",
                 }}>
                       <li>
                         <b>{block?.heading}</b>{" "}

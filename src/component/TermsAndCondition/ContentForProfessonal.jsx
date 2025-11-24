@@ -116,7 +116,7 @@ export const professionalsTermsData = [
   {
     type: "li",
     heading: "“Website”",
-    text: ` - <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com/en/gb" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.`,
+    text: ` - <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com/en/gb/" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.`,
   },
   {
     type: "li",

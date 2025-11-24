@@ -3,6 +3,7 @@ import styles from "./TermsConditions.module.css";
 import { useLocation, Link } from "react-router-dom";
 import ContentForProfessonal from "./ContentForProfessonal";
 import ContentForConsumers from "./ContentForConsumers";
+import { Helmet } from "react-helmet-async";
 
 const TermsAndCondition = () => {
   const location = useLocation();
@@ -18,6 +19,15 @@ const TermsAndCondition = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Terms & Conditions | Localists.com</title>
+        {
+          <meta
+            name="description"
+            content="Read the full Terms & Conditions for using Localists in the UK. Learn about user responsibilities, service professional rules, data policies, and legal guidelines."
+          />
+        }
+      </Helmet>
       {/* Navigation Tabs */}
       <nav className={styles.navWrapper}>
         <ul className={styles.nav}>
