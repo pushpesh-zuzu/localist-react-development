@@ -2,12 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./ViewOnMapModal.module.css";
 import { googleAPI } from "../../../Api/axiosInstance";
 
-const ViewOnMapModal = ({
-  open,
-  locationData,
-
-  onClose,
-}) => {
+const ViewOnMapModal = ({ open, locationData, onClose }) => {
+  console.log("hseewygryrgyergfryyt");
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
@@ -15,8 +11,8 @@ const ViewOnMapModal = ({
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
-    lat: 20.5937,
-    lng: 78.9629,
+    lat: 52.6358,
+    lng: -1.1396,
   });
 
   const drawCircle = (center) => {
@@ -26,26 +22,7 @@ const ViewOnMapModal = ({
       circleRef.current.setMap(null);
     }
 
-    let radiusInMeters = 0;
-
-    if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
-      radiusInMeters = 1500000;
-    } else if (locationData?.travel_time) {
-      let timeValue = locationData.travel_time;
-      let minutes = 0;
-
-      if (timeValue.includes("hour") || timeValue.includes("hr")) {
-        const hourValue = parseFloat(timeValue.replace(/[^0-9.]/g, ""));
-        minutes = hourValue * 60;
-      } else if (timeValue.includes("min")) {
-        minutes = parseFloat(timeValue.replace(/[^0-9.]/g, ""));
-      }
-
-      radiusInMeters = minutes * 0.5 * 1000;
-    } else {
-      const radiusInMiles = parseFloat(locationData.miles) || 1;
-      radiusInMeters = radiusInMiles * 1609.34;
-    }
+    const radiusInMeters = (parseFloat(locationData.miles1) || 1) * 1609.34;
 
     circleRef.current = new window.google.maps.Circle({
       center,
@@ -57,12 +34,19 @@ const ViewOnMapModal = ({
       strokeWeight: 2,
       map: mapInstance.current,
     });
+
+    const bounds = circleRef.current.getBounds();
+    if (bounds) {
+      mapInstance.current.fitBounds(bounds);
+    }
   };
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
+      // console.log("jhdygygfygfygfgy");
       if (!window.google) {
         const script = document.createElement("script");
+
         script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
         script.async = true;
         script.defer = true;
@@ -89,26 +73,6 @@ const ViewOnMapModal = ({
     loadGoogleMapsScript();
   }, [open]);
 
-  const getLatLngFromPincode = async (pincode) => {
-    const apiKey = "AIzaSyDwAeV7juA_VpzLHqmKXACBtcZxR52TwoE";
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${locationData?.postcode}&components=country:UK&key=${apiKey}`;
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (data.status === "OK" && data.results.length > 0) {
-        const { lat, lng } = data.results[0].geometry.location;
-        return { lat, lng };
-      } else {
-        throw new Error("Location not found for the given postcode");
-      }
-    } catch (error) {
-      console.error("Geocoding error:", error.message);
-      return null;
-    }
-  };
-
   useEffect(() => {
     const fetchLatLng = async () => {
       if (!mapLoaded || !window.google || !mapInstance.current) return;
@@ -117,15 +81,18 @@ const ViewOnMapModal = ({
 
       if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
         newCenter = { lat: 22.9734, lng: 78.6569 };
-      } else if (locationData?.postcode) {
-        try {
-          const coords = await getLatLngFromPincode(locationData.postcode);
-          newCenter = { lat: coords.lat, lng: coords.lng };
-        } catch (error) {
-          console.error("Error fetching location:", error);
-          return;
-        }
       }
+
+      // else if (locationData?.postcode) {
+      //   try {
+      //     const coords = await getLatLngFromPincode(locationData.postcode);
+      //     console.log(coords, locationData.postcode);
+      //     newCenter = { lat: coords.lat, lng: coords.lng };
+      //   } catch (error) {
+      //     console.error("Error fetching location:", error);
+      //     return;
+      //   }
+      // }
 
       if (newCenter) {
         setMapCenter(newCenter);
@@ -153,7 +120,7 @@ const ViewOnMapModal = ({
   }, [mapLoaded, locationData?.postcode, locationData?.type]);
 
   useEffect(() => {
-    if (open && mapLoaded && locationData.postcode && window.google) {
+    if (mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode(
         {
@@ -184,13 +151,13 @@ const ViewOnMapModal = ({
         }
       );
     }
-  }, [open, mapLoaded]);
+  }, [open, mapLoaded, locationData.postcode, locationData]);
 
   useEffect(() => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
       drawCircle(mapCenter);
     }
-  }, [locationData.miles]);
+  }, [locationData.miles1, mapLoaded]);
 
   return (
     <div className={styles.modalOverlay}>
