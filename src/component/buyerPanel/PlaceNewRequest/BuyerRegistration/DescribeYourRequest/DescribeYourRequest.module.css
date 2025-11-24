@@ -31,12 +31,12 @@
 
   /* Fixed center */
   position: fixed;
-  top: 55%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   /* Overflow handling */
-  overflow-y: auto;
+  overflow: auto;
   -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
 .privacy {
@@ -436,9 +436,9 @@
     cursor: pointer !important;
     color: #000000;
   }
-  /* .container {
-    padding: 16px;
-  } */
+  .container {
+    height: 80vh;
+  }
   .successMessage {
     align-items: start;
     text-align: start;
