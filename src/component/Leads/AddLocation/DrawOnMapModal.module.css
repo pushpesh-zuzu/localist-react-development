@@ -213,7 +213,7 @@
 
   .modalContainer {
     background: #fff;
-
+    top: 12%;
     max-width: 847px;
     position: relative;
     padding: 20px 16px;
