@@ -20,10 +20,12 @@
   width: 100%;
   max-width: 700px;
   max-height: fit-content;
-
+  height: 80vh;
   text-align: center;
   position: relative;
+  top: 20px;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .header {
@@ -50,6 +52,7 @@
 
 .subtext {
   margin-bottom: 20px;
+  margin-left: 33px;
   font-size: 16px;
   color: #555;
 }
@@ -165,5 +168,11 @@
 
   .actions {
     justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .subtext {
+    margin-left: 0px;
   }
 }
