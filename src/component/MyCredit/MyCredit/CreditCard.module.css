@@ -45,6 +45,7 @@
 
 .visaCard_wrapper {
   width: -webkit-fill-available;
+  min-width: -moz-available;
   display: flex;
   justify-content: space-between;
   align-items: center;

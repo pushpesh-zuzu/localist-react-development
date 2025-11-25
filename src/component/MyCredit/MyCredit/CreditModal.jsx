@@ -62,9 +62,7 @@ const CreditModal = ({ onClose }) => {
 
   const handleBuyNow = (item) => {
     let Credits = item.no_of_leads;
-
     const vatTotal = Math.floor((price * 20) / 100);
-
     if (typeof addcoupanList === "string" && addcoupanList.includes("%")) {
       const discountPercent = parseFloat(addcoupanList.replace("%", ""));
       const discountAmount = Math.floor(
@@ -72,7 +70,6 @@ const CreditModal = ({ onClose }) => {
       );
       Credits = item.no_of_leads + discountAmount;
     }
-
     const creditData = {
       amount: price,
       credits: credits,
@@ -81,11 +78,17 @@ const CreditModal = ({ onClose }) => {
       vat: vatTotal,
       top_up: 1,
     };
-
     setSelectedCreditData(creditData);
-
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
+        window.dataLayer.push({
+          event: "payment_success",
+          paymentId: result?.data?.invoice_number, // paymentId from backend
+          currency: "GBP",
+          value: price,
+          item_Name: "custom",
+          item_id: null,
+        });
         showToast("success", result?.message);
         const data = {
           user_id: userToken?.remember_tokens
@@ -94,9 +97,6 @@ const CreditModal = ({ onClose }) => {
         };
         dispatch(totalCreditData(data));
         onClose();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1200);
       } else if (result?.success === false) {
         setIsAddModalOpen(true);
       }

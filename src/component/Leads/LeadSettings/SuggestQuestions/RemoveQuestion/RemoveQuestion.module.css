@@ -71,6 +71,7 @@
 
 .textarea {
   width: -webkit-fill-available;
+  min-width: -moz-available;
   height: 100px;
   padding: 12px;
   border: 1px solid #ddd;

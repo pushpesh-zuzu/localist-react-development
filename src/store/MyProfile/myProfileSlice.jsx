@@ -242,12 +242,10 @@ export const updateSellerProfile = createAsyncThunk(
   }
 );
 
-// Thunk to upload photos and YouTube link
 export const updateSellerPhotos = createAsyncThunk(
   "myProfile/updateSellerPhotos",
   async (body, { rejectWithValue }) => {
     try {
-      // 🔎 Log FormData contents
       for (let [key, value] of body.entries()) {
         if (value instanceof File) {
         } else {

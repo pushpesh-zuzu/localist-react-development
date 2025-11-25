@@ -15,7 +15,7 @@ import {
   setRegisterData,
 } from "../../../store/FindJobs/findJobSlice";
 import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import { Flex, Spin } from "antd";
 import { addViewProfileList } from "../../../store/LeadSetting/leadSettingSlice";
 import {
   setCompanyError,
@@ -37,6 +37,7 @@ const AboutAccordion = ({ details }) => {
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
   const [hideAddress, setHideAddress] = useState(false);
   const [debouncedCompanyName, setDebouncedCompanyName] = useState("");
+  const [showLoader, setShowLoader] = useState(false);
   const [formState, setFormState] = useState({
     type: "about",
     tiktok_link: "",
@@ -434,6 +435,7 @@ const AboutAccordion = ({ details }) => {
   const ProfileNameFirstLetter = details?.name?.[0] || "";
 
   const handleSubmit = () => {
+    console.log(formState);
     if (!validate()) {
       showToast("error", "Please fix validation errors");
       return;
@@ -455,7 +457,9 @@ const AboutAccordion = ({ details }) => {
           "Business Description should be at least 20 characters long"
         );
         return;
-      } else {
+      } else if (formState && isDirty) {
+        console.log("dcsjhbh");
+        setShowLoader(true);
         dispatch(updateSellerProfile(formState)).then((result) => {
           if (result) {
             const sellerData = {
@@ -465,10 +469,13 @@ const AboutAccordion = ({ details }) => {
               if (res?.success) {
                 setIsDirty(false);
               }
+              setShowLoader(false);
             });
           }
         });
       }
+    } else {
+      showToast("error", "No Data Found to Save");
     }
   };
 
@@ -873,21 +880,22 @@ const AboutAccordion = ({ details }) => {
       </div>
 
       <div className={styles.buttonRow}>
-        <button
-          className={styles.saveBtn}
-          style={{ marginLeft: "auto" }}
-          type="button"
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          {loading ? (
+        {showLoader ? (
+          <Flex style={{ marginLeft: "auto" }}>
             <Spin
-              indicator={<LoadingOutlined spin style={{ color: "white" }} />}
+              indicator={<LoadingOutlined spin />}
+              className={styles.saveBtn}
             />
-          ) : (
-            "Save"
-          )}
-        </button>
+          </Flex>
+        ) : (
+          <button
+            className={styles.saveBtn}
+            style={{ marginLeft: "auto" }}
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
+        )}
       </div>
       {success && (
         <p style={{ color: "green" }}>Profile updated successfully!</p>

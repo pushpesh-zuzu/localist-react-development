@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./AddLocationModal.module.css";
 import DistanceIcon from "../../../assets/Icons/DistanceIcon.svg";
+import TravelTimeIcon from "../../../assets/Icons/DistanceIcon.svg";
+import DrawOnMapIcon from "../../../assets/Icons/DistanceIcon.svg";
 import NationwideIcon from "../../../assets/Icons/NationwideIcon.svg";
 import TravelTimeModal from "./TravelTimeModal";
 import DrawOnMapModal from "./DrawOnMapModal";
@@ -174,6 +176,43 @@ const AddLocationModal = ({
                   <p className={styles.optionDescription}>
                     Enter a postcode or town, then set how far you’re willing to
                     travel from that point (straight-line radius).
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={styles.option}
+                onClick={() => handleOptionClick("travelTime")}
+              >
+                <img
+                  src={TravelTimeIcon}
+                  alt="Travel Time"
+                  className={styles.icon}
+                />
+                <div className={styles.textContainer}>
+                  <h3 className={styles.optionTitle}>Travel Time</h3>
+                  <p className={styles.optionDescription}>
+                    Let us know your starting point and the maximum time you're
+                    happy to travel—perfect for service zones based on real
+                    driving time.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={styles.option}
+                onClick={() => handleOptionClick("drawOnMap")}
+              >
+                <img
+                  src={DrawOnMapIcon}
+                  alt="Draw on a Map"
+                  className={styles.icon}
+                />
+                <div className={styles.textContainer}>
+                  <h3 className={styles.optionTitle}>Draw on a Map</h3>
+                  <p className={styles.optionDescription}>
+                    Custom-draw one or more specific areas directly on the map
+                    to define your exact service boundaries.
                   </p>
                 </div>
               </div>

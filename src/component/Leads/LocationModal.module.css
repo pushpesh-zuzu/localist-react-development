@@ -19,7 +19,7 @@
   flex-direction: column;
   position: fixed;
   background-color: white;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -80,6 +80,7 @@
 
 .inputField {
   flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: -webkit-fill-available;
@@ -180,6 +181,11 @@
     position: relative;
     height: 84vh;
   } */
+
+  .modalContent {
+    top: 55%;
+    height: 70vh;
+  }
   .cancelBtn {
     background: #c6c6c6;
     color: white;

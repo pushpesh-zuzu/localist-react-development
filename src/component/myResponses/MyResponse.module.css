@@ -43,6 +43,7 @@
   background-color: #000000;
   padding: 14px 0;
   width: -webkit-fill-available;
+  min-width: -moz-available;
   display: flex;
   justify-content: space-between;
   align-items: center;

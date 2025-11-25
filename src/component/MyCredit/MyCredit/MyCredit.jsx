@@ -31,7 +31,6 @@ const MyCredits = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
   const [activeLoaderId, setActiveLoaderId] = useState(null);
-  const [notChecked, setNotChecked] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { creditPlanList } = useSelector((state) => state.leadSetting);
@@ -43,7 +42,6 @@ const MyCredits = () => {
     (state) => state.myCredit
   );
   const { getSwitcgAutoBidData } = useSelector((state) => state.leadSetting);
-  const [isChecked, setIsChecked] = useState(true);
   const [checkedPlans, setCheckedPlans] = useState({});
 
   const [isAddCardModal, setIsAddCardModal] = useState(false);
@@ -134,6 +132,15 @@ const MyCredits = () => {
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
+        console.log(result, "result");
+        window.dataLayer.push({
+          event: "payment_success",
+          paymentId: result?.data?.invoice_number, // paymentId from backend
+          currency: "GBP",
+          value: item?.price,
+          item_Name: item?.name,
+          item_id: item?.id,
+        });
         showToast("success", result?.message);
         setActiveLoaderId(null);
         dispatch(getInvoiceBillingListApi());
@@ -141,10 +148,7 @@ const MyCredits = () => {
         if (item?.plan_type === "starter") {
           dispatch(setStarterPackPurchased(true));
         }
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        console.log(window.dataLayer);
       } else if (result?.success === false) {
         setIsAddCardModal(true);
       }
@@ -197,9 +201,8 @@ const MyCredits = () => {
           <p className={styles.starter_note}>
             {/* We charge a small fee for each customer you contact on Localists.
             Buy a pack of 265 credits and get 20% OFF */}
-            {''}
+            {""}
           </p>
-          
         ) : (
           <p className={styles.note}>
             We apply a small fee for each new customer you choose to contact.
@@ -259,7 +262,7 @@ const MyCredits = () => {
                             justifyContent: "center",
                           }}
                         >
-                          £160{" "}
+                          {item.price}{" "}
                           <span className={styles.excl_tax}>(Excl. tax)</span>
                         </h3>
                         <button

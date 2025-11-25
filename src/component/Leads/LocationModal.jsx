@@ -4,6 +4,11 @@ import { showToast } from "../../utils";
 import iIcon from "../../assets/Images/iIcon.svg";
 import { Select } from "antd";
 import { googleAPI } from "../../Api/axiosInstance";
+import { useDispatch } from "react-redux";
+import { getCityName, setcitySerach } from "../../store/Buyer/BuyerSlice";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
+import CheckIcon from "../../assets/Icons/greenCheckBox.jpeg";
 
 const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
   const { Option } = Select;
@@ -12,6 +17,11 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
   const circleRef = useRef(null);
+  const [checkingPostcode, setCheckingPostcode] = useState(false);
+  const [postalCodeValidate, setPostalCodeValidate] = useState(false);
+  const [city, setCity] = useState("");
+  const [errors, setErrors] = useState({ postcode: "" });
+  const dispatch = useDispatch();
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
@@ -19,9 +29,59 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
     lng: -1.1396,
   });
 
+  const validatePostcode = async (value) => {
+    if (!value) {
+      setPostalCodeValidate(false);
+      setCity("");
+      return;
+    }
+
+    setCheckingPostcode(true);
+    try {
+      const response = await dispatch(getCityName({ postcode: value }));
+      const newResponse = response?.unwrap ? await response.unwrap() : response;
+
+      if (newResponse?.data?.city) {
+        setPostalCodeValidate(true);
+        setCity(newResponse.data.city);
+        dispatch(setcitySerach(newResponse.data.city));
+        setErrors((prev) => ({ ...prev, postcode: "" }));
+      } else if (newResponse?.data?.latitude && newResponse?.data?.longitude) {
+        const newCenter = {
+          lat: parseFloat(newResponse.data.latitude),
+          lng: parseFloat(newResponse.data.longitude),
+        };
+        setMapCenter(newCenter);
+
+        if (mapInstance.current) {
+          mapInstance.current.setCenter(newCenter);
+          mapInstance.current.setZoom(12);
+
+          if (markerRef.current) markerRef.current.setMap(null);
+
+          markerRef.current = new window.google.maps.Marker({
+            position: newCenter,
+            map: mapInstance.current,
+          });
+
+          drawCircle(newCenter);
+        }
+      }
+    } catch (error) {
+      setPostalCodeValidate(false);
+      setCity("");
+      setErrors((prev) => ({
+        ...prev,
+        postcode: "Please enter a valid postcode!",
+      }));
+    } finally {
+      setCheckingPostcode(false);
+    }
+  };
+
   useEffect(() => {
     if (locationData?.coordinates) {
-      setMapCenter(JSON.parse(locationData?.coordinates));
+      setMapCenter(locationData?.coordinates);
     }
   }, [locationData?.coordinates]);
 
@@ -44,6 +104,11 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
       strokeWeight: 2,
       map: mapInstance.current,
     });
+
+    const bounds = circleRef.current.getBounds();
+    if (bounds) {
+      mapInstance.current.fitBounds(bounds);
+    }
   };
 
   useEffect(() => {
@@ -55,13 +120,11 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
         script.defer = true;
         script.onload = () => {
           setMapLoaded(true);
-          initAutocomplete();
           initMap();
         };
         document.body.appendChild(script);
       } else {
         setMapLoaded(true);
-        initAutocomplete();
         initMap();
       }
     };
@@ -74,7 +137,7 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
         zoom: 7,
       });
 
-      if (locationData.postcode && mapCenter.lat !== 20.5937) {
+      if (locationData.postcode && mapCenter.lat !== 52.6358) {
         markerRef.current = new window.google.maps.Marker({
           position: mapCenter,
           map: mapInstance.current,
@@ -83,70 +146,11 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
       }
     };
 
-    const initAutocomplete = () => {
-      if (!inputRef.current || !window.google) return;
-
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          types: ["geocode"],
-          componentRestrictions: { country: "UK" },
-        }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (!place.address_components) return;
-
-        let postalCode = "";
-        let lat = place.geometry?.location?.lat();
-        let lng = place.geometry?.location?.lng();
-
-        place.address_components.forEach((component) => {
-          if (component.types.includes("postal_code")) {
-            postalCode = component.long_name;
-          }
-        });
-        const cityName = place.address_components.find((component) =>
-          component.types.includes("locality")
-        )?.long_name;
-
-        if (postalCode) {
-          onChange({ target: { name: "postcode", value: postalCode } });
-          onChange({ target: { name: "city", value: cityName || "" } });
-          inputRef.current.value = postalCode;
-
-          if (lat && lng) {
-            const coordinates = JSON.stringify({ lat, lng });
-            onChange({ target: { name: "coordinates", value: coordinates } });
-            const newCenter = { lat, lng };
-            setMapCenter(newCenter);
-
-            if (mapInstance.current) {
-              mapInstance.current.setCenter(newCenter);
-              mapInstance.current.setZoom(12);
-
-              if (markerRef.current) markerRef.current.setMap(null);
-
-              markerRef.current = new window.google.maps.Marker({
-                position: newCenter,
-                map: mapInstance.current,
-              });
-
-              drawCircle(newCenter);
-            }
-          }
-        } else {
-          showToast("No PIN code found! Please try again.");
-        }
-      });
-    };
-
     loadGoogleMapsScript();
-  }, [open, mapCenter]);
+  }, [open]);
 
   useEffect(() => {
-    if (open && mapLoaded && locationData.postcode && window.google) {
+    if (mapLoaded && locationData.postcode && window.google) {
       const geocoder = new window.google.maps.Geocoder();
       geocoder.geocode(
         {
@@ -180,7 +184,7 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
         }
       );
     }
-  }, [open, mapLoaded, locationData.postcode]);
+  }, [open, mapLoaded, locationData.postcode, locationData]);
 
   useEffect(() => {
     if (mapLoaded && mapCenter.lat !== 20.5937) {
@@ -221,9 +225,46 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
               type="text"
               name="postcode"
               value={locationData.postcode}
-              onChange={onChange}
+              onChange={(e) => {
+                onChange(e);
+                validatePostcode(e.target.value);
+              }}
               placeholder="Enter Postcode (No Spaces)"
+              autoComplete="off"
+              className={`${errors.postcode ? styles.errorBorder : ""}`}
             />
+            {checkingPostcode ? (
+              <Spin
+                indicator={<LoadingOutlined spin />}
+                size="small"
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "70%",
+                  transform: "translateY(-50%)",
+                }}
+              />
+            ) : postalCodeValidate ? (
+              <img
+                src={CheckIcon}
+                alt="valid"
+                style={{
+                  width: "18px",
+                  position: "absolute",
+                  right: "10px",
+                  top: "70%",
+                  transform: "translateY(-50%)",
+                }}
+              />
+            ) : null}
+            {errors.postcode && (
+              <p
+                style={{ color: "red", fontSize: "14px" }}
+                className={styles.errorText}
+              >
+                {errors.postcode}
+              </p>
+            )}
           </div>
           <div className={styles.inputField}>
             <label>Distance</label>
@@ -233,7 +274,6 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
                 onChange({ target: { name: "miles1", value } })
               }
               className={styles.customSelect}
-              dropdownMatchSelectWidth={false}
             >
               <Option value="1">1 mile</Option>
               <Option value="5">5 miles</Option>
