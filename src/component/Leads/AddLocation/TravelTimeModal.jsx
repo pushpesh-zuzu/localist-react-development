@@ -393,7 +393,9 @@ const TravelTimeModal = ({
           </button>
           <button
             className={styles.nextButton}
-            onClick={() => handleNext("travelTime")}
+            onClick={() => {
+              if (postalCodeValidate) handleNext("travelTime");
+            }}
           >
             Next
           </button>

@@ -569,7 +569,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     Remove
                   </span>{" "}
                   |{" "}
-                  <span className={styles.link}>
+                  <span className={styles.serviceLink}>
                     {item?.total_services} services
                   </span>
                 </p>
