@@ -13,7 +13,7 @@ import {
 } from "../../../../../store/Buyer/BuyerSlice";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { showToast } from "../../../../../utils";
 import { clearBuyerRegisterFormData } from "../../../../../store/FindJobs/findJobSlice";
 
@@ -222,7 +222,7 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
           <div className={styles.privacyWrapper}>
             <p className={styles.privacyText}>
               Your information is protected by our{" "}
-              <span className={styles.privacy}>privacy policy</span>
+              <Link to={'/en/gb/privacy-policy'} className={styles.privacyLink}>privacy policy</Link>
             </p>
           </div>
         </>
