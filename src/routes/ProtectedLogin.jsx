@@ -17,7 +17,7 @@ const ProtectedLogin = () => {
   // }, [userToken, registerToken]);
 
   if (userToken || registerToken) {
-    return <Navigate to="/en/gb/login" state={{ from: location }} replace />;
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 
   return <LoginPage />;

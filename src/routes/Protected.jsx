@@ -42,7 +42,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    return <Navigate to="/en/gb/login" state={{ from: location }} replace />;
   }
 
   return children;
