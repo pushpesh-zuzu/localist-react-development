@@ -5,7 +5,7 @@ import ServiceCategory from "../component/homescreen/serviceCategory/ServiceCate
 import Services from "../component/homescreen/services/Services";
 import OurTeams from "../component/homescreen/team/OurTeams";
 import WorkStructure from "../component/homescreen/WorkOverview/WorkStructure";
-import { useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -13,9 +13,10 @@ import {
   getAllServiceList,
   getPopularServiceList,
 } from "../store/FindJobs/findJobSlice";
+import { toast } from "react-toastify";
 
 const Homepage = () => {
-  const { lang, country } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { allServiceList, popularList, popularLoader } = useSelector(
     (state) => state.findJobs
@@ -41,6 +42,23 @@ const Homepage = () => {
       setPopularInitialLoader(false);
     }
   }, [dispatch, popularList]);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const status = queryParams.get("status");
+  const message = queryParams.get("message");
+
+  useEffect(() => {
+    if (message && status !== null) {
+      if (status === "true") {
+        toast.success(message);
+        navigate("/en/gb/");
+      } else if (status === "false") {
+        toast.error(message);
+        navigate("/en/gb/");
+      }
+    }
+  }, [status, message]);
 
   return (
     <>
