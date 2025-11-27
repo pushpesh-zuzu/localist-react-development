@@ -1,4 +1,4 @@
-import { createBrowserRouter, createMemoryRouter } from "react-router-dom";
+import { createBrowserRouter, createMemoryRouter, Navigate } from "react-router-dom";
 import React, { lazy } from "react";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound";
