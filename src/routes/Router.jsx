@@ -363,6 +363,7 @@ const routes = [
           </LocaleRedirect>
         ),
       },
+      { path: "/login", element: <Navigate to="/en/gb/login" replace /> },
       {
         path: "thank-you",
         element: <ThankuPage />,
