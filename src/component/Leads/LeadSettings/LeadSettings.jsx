@@ -416,6 +416,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setRemoveModal({ show: false, service_id: null, nation_wide: null });
   };
   const handleViewMap = (item) => {
+    item = { ...item, miles1: item.miles };
     setLocationData(item);
     setIsOpenViewModal(true);
   };
