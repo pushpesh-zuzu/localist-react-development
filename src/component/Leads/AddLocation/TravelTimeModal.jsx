@@ -14,7 +14,9 @@ const TravelTimeModal = ({
   onNext,
   locationData,
   setLocationData,
+  previousPostcodeprops,
 }) => {
+  console.log(locationData);
   const dispatch = useDispatch();
   const { Option } = Select;
   const inputRef = useRef(null);
@@ -31,6 +33,9 @@ const TravelTimeModal = ({
   const [checkingPostcode, setCheckingPostcode] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [errors, setErrors] = useState({ postcode: "" });
+  const [previousPostCode, setPreviousPostcode] = useState(
+    previousPostcodeprops
+  );
 
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
@@ -47,11 +52,6 @@ const TravelTimeModal = ({
 
     return speedMap[mode] * minutes;
   };
-
-  // useEffect(() => {
-  //   setLocationData();
-  // }, []);
-
   const validatePostcode = async (value) => {
     if (!value) {
       setPostalCodeValidate(false);
@@ -127,12 +127,15 @@ const TravelTimeModal = ({
   console.log(locationData, "location data");
 
   const drawCircle = (center) => {
-    if (!window.google || !mapInstance.current) return;
+    if (!window.google || !mapInstance.current) {
+      setTimeout(() => drawCircle(center), 200);
+      return;
+    }
 
     const radiusInMeters = calculateTravelRadius(
       locationData?.travel_time,
       locationData?.travel_by,
-      locationData?.postcode
+      locationData?.postcode ? locationData?.postcode : previousPostCode
     );
 
     if (circleRef.current) {
@@ -214,6 +217,7 @@ const TravelTimeModal = ({
       ...prev,
       [name]: value,
     }));
+    setPreviousPostcode("");
   };
 
   const handleNext = () => {
@@ -297,7 +301,11 @@ const TravelTimeModal = ({
               ref={inputRef}
               type="text"
               name="postcode"
-              value={locationData?.postcode}
+              value={
+                locationData?.postcode
+                  ? locationData?.postcode
+                  : previousPostCode
+              }
               onChange={(e) => {
                 onChange(e);
                 validatePostcode(e.target.value);

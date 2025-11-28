@@ -293,7 +293,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       setLocationData({
         travel_time: location?.travel_time || "",
         travel_by: location?.travel_by || "",
-        postcode: location?.postcode || "",
+        postcode: location?.postcode || previousPostcode || "",
         coordinates: location?.coordinates || "",
         nation_wide: location?.nation_wide,
       });
@@ -762,6 +762,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             locationData={locationData}
             setLocationData={setLocationData}
             onNext={handleLocationNext}
+            previousPostcodeprops={previousPostcode}
           />
         )}
         {isDrawTimeOpen && (
