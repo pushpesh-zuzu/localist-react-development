@@ -311,7 +311,7 @@ const AboutAccordion = ({ details }) => {
 
   const validate = () => {
     const temp = {};
-    console.log(formState);
+    // console.log(formState);
     if (!formState.name) {
       temp.name = "Please fill this Required";
     }
@@ -440,7 +440,7 @@ const AboutAccordion = ({ details }) => {
   const ProfileNameFirstLetter = details?.name?.[0] || "";
 
   const handleSubmit = () => {
-    console.log(formState);
+    // console.log(formState);
     if (!validate()) {
       showToast("error", "Please fix validation errors");
       return;
