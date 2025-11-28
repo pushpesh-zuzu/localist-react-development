@@ -28,6 +28,18 @@
       })(window, document, "script", "//bat.bing.com/bat.js", "uetq");
     </script>
     <script>
+      window.uetq = window.uetq || [];
+      window.uetq.push("consent", "default", {
+        ad_storage: "denied",
+      });
+    </script>
+    <script>
+      window.uetq = window.uetq || [];
+      window.uetq.push("consent", "update", {
+        ad_storage: "granted",
+      });
+    </script>
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
