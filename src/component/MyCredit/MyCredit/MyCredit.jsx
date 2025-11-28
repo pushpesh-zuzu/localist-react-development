@@ -233,7 +233,7 @@ const MyCredits = () => {
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
                       <span>
-                        50% Discount{" "}
+                        45% Discount{" "}
                         {/* <div>
                           <img src={shuttle} alt="" />
                         </div> */}
