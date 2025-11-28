@@ -32,6 +32,9 @@ const AboutAccordion = ({ details }) => {
   const { registerData, errorCheckComanyName } = useSelector(
     (state) => state.findJobs
   );
+
+  const { viewProfileData } = useSelector((state) => state.leadSetting);
+  console.log(viewProfileData);
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
@@ -82,6 +85,8 @@ const AboutAccordion = ({ details }) => {
     accr_delete_id: "",
     service_delete_id: "",
   });
+
+  console.log(formState);
 
   const [errors, setErrors] = useState({});
   const fileInputRefs = {
@@ -306,7 +311,7 @@ const AboutAccordion = ({ details }) => {
 
   const validate = () => {
     const temp = {};
-
+    console.log(formState);
     if (!formState.name) {
       temp.name = "Please fill this Required";
     }
@@ -320,9 +325,9 @@ const AboutAccordion = ({ details }) => {
         temp.business_profile_name = "Business Name is required.";
       }
 
-      if (!formState.company_location) {
-        temp.company_location = "Company location is required";
-      }
+      // if (!formState.company_location) {
+      //   temp.company_location = "Company location is required";
+      // }
     }
 
     setErrors(temp);
@@ -804,10 +809,10 @@ const AboutAccordion = ({ details }) => {
               type="text"
               name="company_location"
               value={[
-                formState.company_location,
-                registerData?.city,
-                registerData?.zipcode,
-                registerData?.country,
+                // viewProfileData.company_location,
+                viewProfileData?.city,
+                viewProfileData?.zipcode,
+                viewProfileData?.country,
               ]
                 .filter(Boolean)
                 .join(", ")}
