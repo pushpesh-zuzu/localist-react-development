@@ -180,7 +180,7 @@ const AddLocationModal = ({
                 </div>
               </div>
 
-              {/* <div
+              <div
                 className={styles.option}
                 onClick={() => handleOptionClick("travelTime")}
               >
@@ -215,7 +215,7 @@ const AddLocationModal = ({
                     to define your exact service boundaries.
                   </p>
                 </div>
-              </div> */}
+              </div>
 
               {!isNationWide() && (
                 <div
