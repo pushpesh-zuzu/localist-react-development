@@ -3,11 +3,11 @@ import styles from "./ViewOnMapModal.module.css";
 import { googleAPI } from "../../../Api/axiosInstance";
 
 const ViewOnMapModal = ({ open, locationData, onClose }) => {
-  console.log("hseewygryrgyergfryyt");
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
   const circleRef = useRef(null);
+  const polygonRefs = useRef([]);
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter, setMapCenter] = useState({
@@ -41,19 +41,49 @@ const ViewOnMapModal = ({ open, locationData, onClose }) => {
     }
   };
 
+  // ---------------------- DRAW POLYGON ----------------------
+  const drawPolygons = (coordsArray) => {
+    if (!window.google || !mapInstance.current) return;
+
+    // Clear old polygons
+    polygonRefs.current.forEach((poly) => poly.setMap(null));
+    polygonRefs.current = [];
+
+    const bounds = new window.google.maps.LatLngBounds();
+
+    coordsArray.forEach((coords) => {
+      const polygon = new window.google.maps.Polygon({
+        paths: coords,
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#FF0000",
+        fillOpacity: 0.25,
+        map: mapInstance.current,
+      });
+
+      polygonRefs.current.push(polygon);
+
+      coords.forEach((pt) => bounds.extend(pt));
+    });
+
+    mapInstance.current.fitBounds(bounds);
+  };
+
+  // ---------------------- LOAD SCRIPT ----------------------
   useEffect(() => {
     const loadGoogleMapsScript = () => {
-      // console.log("jhdygygfygfygfgy");
       if (!window.google) {
         const script = document.createElement("script");
-
         script.src = `https://maps.googleapis.com/maps/api/js?key=${googleAPI}&libraries=places,geometry`;
         script.async = true;
         script.defer = true;
+
         script.onload = () => {
           setMapLoaded(true);
           initMap();
         };
+
         document.body.appendChild(script);
       } else {
         setMapLoaded(true);
@@ -73,27 +103,28 @@ const ViewOnMapModal = ({ open, locationData, onClose }) => {
     loadGoogleMapsScript();
   }, [open]);
 
+  // ---------------- CALCULATE LOCATION (Nationwide / Coordinates / Center) ----------------
   useEffect(() => {
     const fetchLatLng = async () => {
       if (!mapLoaded || !window.google || !mapInstance.current) return;
 
+      if (
+        locationData.coordinates &&
+        Array.isArray(locationData.coordinates) &&
+        locationData.coordinates.length > 0
+      ) {
+        drawPolygons(locationData.coordinates);
+        return;
+      }
+
       let newCenter;
 
+      // 2️⃣ Nationwide case
       if (locationData.type === "Nationwide" && locationData.nation_wide == 1) {
         newCenter = { lat: 22.9734, lng: 78.6569 };
       }
 
-      // else if (locationData?.postcode) {
-      //   try {
-      //     const coords = await getLatLngFromPincode(locationData.postcode);
-      //     console.log(coords, locationData.postcode);
-      //     newCenter = { lat: coords.lat, lng: coords.lng };
-      //   } catch (error) {
-      //     console.error("Error fetching location:", error);
-      //     return;
-      //   }
-      // }
-
+      // 3️⃣ Set map center + circle
       if (newCenter) {
         setMapCenter(newCenter);
         mapInstance.current.setCenter(newCenter);
@@ -112,7 +143,15 @@ const ViewOnMapModal = ({ open, locationData, onClose }) => {
           map: mapInstance.current,
         });
 
-        drawCircle(newCenter);
+        if (
+          locationData.coordinates &&
+          Array.isArray(locationData.coordinates) &&
+          locationData.coordinates.length > 0
+        ) {
+          drawPolygons(locationData.coordinates);
+        } else {
+          drawCircle(newCenter);
+        }
       }
     };
 
@@ -120,58 +159,86 @@ const ViewOnMapModal = ({ open, locationData, onClose }) => {
   }, [mapLoaded, locationData?.postcode, locationData?.type]);
 
   useEffect(() => {
-    if (mapLoaded && locationData.postcode && window.google) {
-      const geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode(
-        {
-          address: locationData.postcode,
-          componentRestrictions: { country: "UK" },
-        },
-        (results, status) => {
-          if (status === "OK" && results && results[0]) {
-            const lat = results[0].geometry.location.lat();
-            const lng = results[0].geometry.location.lng();
-            const newCenter = { lat, lng };
-            setMapCenter(newCenter);
+    if (!mapLoaded || !window.google || !locationData.postcode) return;
 
-            if (mapInstance.current) {
-              mapInstance.current.setCenter(newCenter);
-              mapInstance.current.setZoom(12);
+    if (
+      locationData.coordinates &&
+      Array.isArray(locationData.coordinates) &&
+      locationData.coordinates.length > 0
+    ) {
+      drawPolygons(locationData.coordinates);
+      return;
+    }
 
-              if (markerRef.current) markerRef.current.setMap(null);
+    const geocoder = new window.google.maps.Geocoder();
 
-              markerRef.current = new window.google.maps.Marker({
-                position: newCenter,
-                map: mapInstance.current,
-              });
+    geocoder.geocode(
+      {
+        address: locationData.postcode,
+        componentRestrictions: { country: "UK" },
+      },
+      (results, status) => {
+        if (status === "OK" && results && results[0]) {
+          const lat = results[0].geometry.location.lat();
+          const lng = results[0].geometry.location.lng();
+          const newCenter = { lat, lng };
 
+          setMapCenter(newCenter);
+
+          if (mapInstance.current) {
+            mapInstance.current.setCenter(newCenter);
+            mapInstance.current.setZoom(12);
+
+            if (markerRef.current) markerRef.current.setMap(null);
+
+            markerRef.current = new window.google.maps.Marker({
+              position: newCenter,
+              map: mapInstance.current,
+            });
+
+            if (
+              locationData.coordinates &&
+              Array.isArray(locationData.coordinates) &&
+              locationData.coordinates.length > 0
+            ) {
+              drawPolygons(locationData.coordinates);
+            } else {
               drawCircle(newCenter);
             }
           }
         }
-      );
-    }
-  }, [open, mapLoaded, locationData.postcode, locationData]);
+      }
+    );
+  }, [open, mapLoaded, locationData.postcode]);
 
   useEffect(() => {
-    if (mapLoaded && mapCenter.lat !== 20.5937) {
+    if (
+      locationData.coordinates &&
+      Array.isArray(locationData.coordinates) &&
+      locationData.coordinates.length > 0
+    ) {
+      drawPolygons(locationData.coordinates);
+    } else if (mapLoaded && locationData.miles1 && mapCenter.lat !== 20.5937) {
       drawCircle(mapCenter);
     }
   }, [locationData.miles1, mapLoaded]);
 
+  // ---------------------- UI ----------------------
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={onClose}>
           &times;
         </button>
+
         <div className={styles.modalHeader}>
           <h2>
             {locationData.type === "Nationwide" && locationData.nation_wide == 1
-              ? locationData?.type
-              : locationData?.city}
+              ? locationData.type
+              : locationData.city}
           </h2>
         </div>
+
         <div
           ref={mapRef}
           className={styles.mapContainer}
