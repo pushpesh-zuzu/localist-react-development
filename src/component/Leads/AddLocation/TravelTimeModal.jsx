@@ -157,12 +157,12 @@ const TravelTimeModal = ({
   };
 
   useEffect(() => {
-    setLocationData({
-      miles1: "20",
-      postcode: "",
-      travel_by: "Driving",
-      travel_time: "30 minutes",
-    });
+    setLocationData((prev) => ({
+      miles1: prev?.miles1 || "20",
+      postcode: prev?.postcode || "",
+      travel_by: prev?.travel_by || "Driving",
+      travel_time: prev?.travel_time || "30 minutes",
+    }));
   }, []);
 
   console.log(locationData);
@@ -301,11 +301,7 @@ const TravelTimeModal = ({
               ref={inputRef}
               type="text"
               name="postcode"
-              value={
-                locationData?.postcode
-                  ? locationData?.postcode
-                  : previousPostCode
-              }
+              value={locationData?.postcode ? locationData?.postcode : ""}
               onChange={(e) => {
                 onChange(e);
                 validatePostcode(e.target.value);
@@ -402,7 +398,21 @@ const TravelTimeModal = ({
           <button
             className={styles.nextButton}
             onClick={() => {
-              if (postalCodeValidate) handleNext("travelTime");
+              if (
+                locationData?.travel_by &&
+                locationData?.travel_time &&
+                locationData?.postcode
+              ) {
+                handleNext("travelTime");
+              } else if (
+                !locationData?.postcode ||
+                locationData?.postcode === ""
+              ) {
+                setErrors((prev) => ({
+                  ...prev,
+                  postcode: "Please enter a valid postcode!",
+                }));
+              }
             }}
           >
             Next

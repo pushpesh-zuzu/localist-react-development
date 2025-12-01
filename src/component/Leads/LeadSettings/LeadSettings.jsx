@@ -367,10 +367,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     const serviceIds = data.join(",");
 
     const typeOfTravel = type.current;
+    console.log(locationData.postcode, "jfhfiuhiu");
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
-      postcode: locationData.postcode ?? previousPostcode,
+      postcode:
+        locationData.postcode && locationData.postcode.trim() !== ""
+          ? locationData.postcode
+          : previousPostcode || "000000",
+
       service_id: serviceIds,
       postcode_old: previousPostcode ? previousPostcode : "000000",
 
@@ -382,6 +387,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       coordinates: locationData?.coordinates ?? "",
       nation_wide: locationData?.nation_wide,
     };
+
+    console.log("locationdata", locationdata);
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })

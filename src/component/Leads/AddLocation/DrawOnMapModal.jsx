@@ -7,6 +7,7 @@ import EditLocation from "../../../assets/Images/Leads/EditlocationImg.svg";
 import { googleAPI } from "../../../Api/axiosInstance";
 
 const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
+  console.log(data);
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [drawingManager, setDrawingManager] = useState(null);
@@ -66,7 +67,7 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
 
       let parsedLocations = [];
       try {
-        parsedLocations = JSON.parse(data);
+        parsedLocations = data;
       } catch (err) {
         console.error("Invalid location JSON", err);
       }

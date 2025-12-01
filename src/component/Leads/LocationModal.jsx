@@ -304,7 +304,8 @@ const LocationModal = ({ open, locationData, onChange, onNext, onClose }) => {
           <button
             className={styles.nextBtn}
             onClick={() => {
-              if (postalCodeValidate) onNext("distance");
+              if (locationData.miles1 && locationData.postcode)
+                onNext("distance");
             }}
           >
             Next
