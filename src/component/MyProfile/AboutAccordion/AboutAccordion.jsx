@@ -822,7 +822,7 @@ const AboutAccordion = ({ details }) => {
           </>
         )}
 
-        <label className={styles.label}>
+        <label style={{ marginTop: "16px" }} className={styles.label}>
           Can’t provide a specific location?
         </label>
         <select

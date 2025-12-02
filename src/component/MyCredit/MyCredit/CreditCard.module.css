@@ -212,3 +212,9 @@
     font-size: 11px;
   }
 }
+
+@media (max-width: 345px) {
+  .container_wrapper {
+    padding: 0;
+  }
+}

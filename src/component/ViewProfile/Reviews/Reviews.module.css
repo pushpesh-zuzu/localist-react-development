@@ -171,6 +171,7 @@
   font-size: 14px;
   margin-top: 2px;
   margin-left: 18px;
+  word-break: auto-phrase;
 }
 
 /* .dateSection {

@@ -551,8 +551,8 @@
   .dualDropdownsContainers {
     background-color: #e3f6fc;
     display: flex;
-    flex-direction: row; /* horizontal layout */
-    /* flex-wrap: wrap;  */
+    flex-direction: row;
+    /* flex-wrap: wrap; */
     gap: 4px;
     justify-content: space-between;
     align-items: center;
@@ -795,10 +795,12 @@
     list-style: none;
   }
 }
-/* 
-@media screen and (max-width: 385px) {
+
+@media screen and (max-width: 345px) {
   .dualDropdownsContainers {
-    flex-direction: column;
     flex-wrap: wrap;
   }
-} */
+  .heading {
+    white-space: nowrap;
+  }
+}
