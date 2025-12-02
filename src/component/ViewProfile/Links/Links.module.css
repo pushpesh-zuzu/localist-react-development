@@ -6,7 +6,7 @@
 
 .linkItem {
   display: flex;
-  align-items: start;
+  align-items: center;
   gap: 8px;
   margin-bottom: 8px;
 }
