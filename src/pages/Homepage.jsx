@@ -73,7 +73,8 @@ const Homepage = () => {
           `}
         </script>
         <script type="application/ld+json">
-          {`"@context": "https://schema.org",
+          {`{
+            "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Localists",
             "url": "https://www.localists.com/en/gb/",
@@ -83,11 +84,13 @@ const Homepage = () => {
               “https://www.instagram.com/localists_official”,
               "https://www.linkedin.com/company/localistsuk/",
               "https://x.com/LocalistsUK"
-            ]`}
+            ]
+          }`}
         </script>
 
         <script type="application/ld+json">
           {`
+          {
             "@context": "https://schema.org",
             "@type": "WebSite",
             "name": "Localists",
@@ -96,10 +99,14 @@ const Homepage = () => {
               "@type": "SearchAction",
               "target": "https://www.google.com/search?q={search_term_string}+site:localists.com",
               "query-input": "required name=search_term_string"
-            },`}
+            },
+          }
+          `}
         </script>
+        
         <script type="application/ld+json">
-          {`"@context": "https://schema.org",
+          {`{
+          "@context": "https://schema.org",
           "@type": "LocalBusiness",
           "name": "Localists",
           "image": "https://www.localists.com/assets/logo-CQuAsOMd.png",
@@ -137,7 +144,9 @@ const Homepage = () => {
             “https://www.instagram.com/localists_official”,
             "https://x.com/LocalistsUK",
             "https://www.linkedin.com/company/localistsuk/"
-          ] `}
+          ] 
+        }
+        `}
         </script>
       </Helmet>
       <CalonicalTags isRequiredjsonLd={false} />
