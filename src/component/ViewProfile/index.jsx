@@ -340,20 +340,7 @@ const ViewProfiles = () => {
                   }}
                 />
               ) : profileData?.business_profile_name ? (
-                <span
-                  style={{
-                    width: "140px",
-                    height: "140px",
-                    borderRadius: "50%",
-                    backgroundColor: "#ccc",
-                    color: "#000",
-                    textAlign: "center",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontSize: "48px",
-                  }}
-                >
+                <span className={styles.business_profile_img}>
                   {profileData.business_profile_name[0].toUpperCase()}
                 </span>
               ) : (

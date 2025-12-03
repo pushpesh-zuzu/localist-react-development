@@ -131,19 +131,21 @@ const DescribeYourRequest = ({ onClose, setShowConfirmModal }) => {
             professionals can respond
           </p>
 
-          <textarea
-            className={`${styles.textarea} ${
-              textError ? styles.errorBorder : ""
-            }`}
-            value={text}
-            onChange={handleChange}
-            placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
-          />
-          {textError && (
-            <span className={styles.errorMessage}>
-              Please fill this input field.
-            </span>
-          )}
+          <span className={styles.textarea_span}>
+            <textarea
+              className={`${styles.textarea} ${
+                textError ? styles.errorBorder : ""
+              }`}
+              value={text}
+              onChange={handleChange}
+              placeholder="What should the professional know to better understand your request? (Provide any relevant details here.)"
+            />
+            {textError && (
+              <span className={styles.errorMessage}>
+                Please fill this input field.
+              </span>
+            )}
+          </span>
 
           <label
             className={`${styles.fileUpload} ${

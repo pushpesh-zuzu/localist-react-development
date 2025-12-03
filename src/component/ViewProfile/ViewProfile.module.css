@@ -29,6 +29,19 @@
   font-weight: 600;
 }
 
+.business_profile_img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #000;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+}
+
 .locationText {
   margin-top: 5px;
   font-size: 12px;
@@ -329,6 +342,12 @@
     width: 100%;
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  .business_profile_img {
+    width: 100px;
+    height: 100px;
+    font-size: 36px;
   }
 
   .tabContainers::-webkit-scrollbar {

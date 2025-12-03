@@ -440,7 +440,6 @@ const AboutAccordion = ({ details }) => {
   const ProfileNameFirstLetter = details?.name?.[0] || "";
 
   const handleSubmit = () => {
-    // console.log(formState);
     if (!validate()) {
       showToast("error", "Please fix validation errors");
       return;

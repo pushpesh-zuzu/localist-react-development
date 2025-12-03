@@ -464,6 +464,10 @@
   .textareaLabel {
     font-size: 14px;
   }
+
+  .textarea_span {
+    height: fit-content;
+  }
   .textarea {
     font-size: 12px;
     padding: 10px 10px;

@@ -74,6 +74,7 @@ import ProtectedRouteForMultiFormPPC from "./ProtectedRouteForMultiFormPPC";
 import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
 import MultiStepRoofingNew from "../component/MultiStepForm/MultiStepRoofingNew";
+import Blog from "../component/Blog/Blog";
 // const MultiStepRoofingPage = lazy(() =>
 //   import("../pages/MultiStepRoofingPage")
 // );
@@ -149,6 +150,14 @@ const routes = [
         element: (
           <LocaleRedirect>
             <CookiePolicy />
+          </LocaleRedirect>
+        ),
+      },
+      {
+        path: "blog",
+        element: (
+          <LocaleRedirect>
+            <Blog />
           </LocaleRedirect>
         ),
       },
@@ -776,7 +785,11 @@ const routes = [
     element: (
       <ProtectedRouteForMultiFormPPC>
         <LocaleRedirect>
-           <MultiStepRoofingNew serviceName="Roofing" isQuestionWithImage serviceId={113} />
+          <MultiStepRoofingNew
+            serviceName="Roofing"
+            isQuestionWithImage
+            serviceId={113}
+          />
         </LocaleRedirect>
       </ProtectedRouteForMultiFormPPC>
     ),

@@ -55,8 +55,8 @@
 
 .card {
   background: #fff;
-  /* border-radius: 8px; */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 0px #00000033;
   padding: 12px 24px 13px 24px;
   flex: 0 1 calc(32% - 0px);
   box-sizing: border-box;
@@ -154,7 +154,7 @@
   font-weight: normal;
 }
 .leads .lead-circle {
-  background: #e1f6fc;
+  background: #acebff;
   border-radius: 50%;
   width: 135px;
   height: 135px;
@@ -249,7 +249,7 @@
 }
 .hintButton {
   /* margin-top: 12px; */
-  background-color: #00bfff;
+  background-color: var(--primary-color);
   color: white;
   padding: 7px 18px;
   font-size: 14px;
@@ -290,15 +290,14 @@
 
 .notification-banner {
   width: 100%;
-  background: #fbe8e6;
+  background: var(--primary-color);
   text-align: center;
   padding: 16px;
-  font-size: 16px;
-  /* border-radius: 6px; */
-  font-weight: 500;
-  color: #000;
+  font-size: 28px;
+  border-radius: 5px;
+  font-weight: 600;
+  color: #fff;
   margin: 10px auto 30px;
-  /* border: 1px solid #f4d2d0; */
 }
 
 .notification-banner strong {
@@ -310,7 +309,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background-color: #00afe3;
+  background-color: #acebff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -445,7 +444,7 @@
 }
 
 .card > .help-box {
-  background-color: #e6f7fc;
+  background-color: #e3f6fc;
   padding: 14px 16px;
   border-radius: 6px;
   font-size: 14px;
