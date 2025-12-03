@@ -117,7 +117,7 @@ const Dashboard = () => {
                       </p>
                     </p>
                   </li>
-                  <hr className={styles.breaker} />
+                  {/* <hr className={styles.breaker} /> */}
                   <li className={styles["setpPara"]}>
                     <strong>2</strong>{" "}
                     <p>
@@ -129,7 +129,7 @@ const Dashboard = () => {
                       </p>{" "}
                     </p>
                   </li>
-                  <hr className={styles.breaker} />
+                  {/* <hr className={styles.breaker} /> */}
                   <li className={styles["setpPara"]}>
                     <strong>3</strong>{" "}
                     <p>
@@ -141,7 +141,7 @@ const Dashboard = () => {
                       </p>{" "}
                     </p>
                   </li>
-                  <hr className={styles.breaker} />
+                  {/* <hr className={styles.breaker} /> */}
                   <li className={styles["setpPara"]}>
                     <strong>4</strong>{" "}
                     <p>
@@ -152,7 +152,7 @@ const Dashboard = () => {
                       </p>{" "}
                     </p>
                   </li>
-                  <hr className={styles.breaker} />
+                  {/* <hr className={styles.breaker} /> */}
                   <li className={styles["setpPara"]}>
                     <strong>5</strong>{" "}
                     <p>
@@ -164,7 +164,7 @@ const Dashboard = () => {
                       </p>{" "}
                     </p>
                   </li>
-                  <hr className={styles.breaker} />
+                  {/* <hr className={styles.breaker} /> */}
                 </ul>
               </div>
 
