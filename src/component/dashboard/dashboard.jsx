@@ -70,24 +70,31 @@ const Dashboard = () => {
               margin: "0px",
             }}
           >
-            <div className={styles["dashboard-title"]}>
-              <p>
-                Your dashboard is ready. Access everything you need to manage
-                your business and grow with Localists.
-              </p>
-              <div className={styles.arrowMain}>
-                <span>
-                  <img
-                    style={{ cursor: "pointer" }}
-                    src={polygon}
-                    onClick={() =>
-                      setShowDashboardContent(!showDashboardContent)
-                    }
-                    className={showDashboardContent ? "" : styles.rotate}
-                  />
-                </span>
-              </div>
+            <footer className={styles["dashboard-footer"]}>
+              No commissions, no hidden fees—just a straight forward process.
+            </footer>
+
+            <div
+              className={styles.hideIcon}
+              onClick={() => setShowDashboardContent(!showDashboardContent)}
+            >
+              <span>{showDashboardContent ? "Hide" : "Show"}</span>
+              <img
+                style={{ cursor: "pointer" }}
+                src={PolygonArrowDown}
+                className={showDashboardContent ? "" : styles.rotate}
+              />
             </div>
+            {/* <div className={styles.arrowMain}>
+              <span>
+                <img
+                  style={{ cursor: "pointer" }}
+                  src={polygon}
+                  onClick={() => setShowDashboardContent(!showDashboardContent)}
+                  className={showDashboardContent ? "" : styles.rotate}
+                />
+              </span>
+            </div> */}
 
             <div className={styles["main-section"]}>
               <div className={styles["left-column"]}>

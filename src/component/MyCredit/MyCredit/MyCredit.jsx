@@ -132,10 +132,9 @@ const MyCredits = () => {
 
     dispatch(addBuyCreditApi(creditData)).then((result) => {
       if (result?.success) {
-        console.log(result, "result");
         window.dataLayer.push({
           event: "payment_success",
-          paymentId: result?.data?.invoice_number, // paymentId from backend
+          paymentId: result?.data?.invoice_number,
           currency: "GBP",
           value: item?.price,
           item_Name: item?.name,
