@@ -245,7 +245,10 @@ const ReviewsAccordion = ({ details }) => {
               <img
                 src={shareIcon}
                 alt="Share"
-                style={{ height: "18px", width: "18px" }}
+                style={{
+                  height: "18px",
+                  width: "18px",
+                }}
               />
             </button>
           )}

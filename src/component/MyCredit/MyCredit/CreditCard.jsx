@@ -145,8 +145,7 @@ const CreditCard = () => {
             ))} */}
             {getSellerCardData &&
               getSellerCardData
-                // 🟢 Sort so that primary cards come first
-                .slice() // make a shallow copy to avoid mutating Redux data
+                .slice()
                 .sort((a, b) => b.is_primary - a.is_primary)
                 .map((item, index) => (
                   <div className={styles.container} key={index}>
@@ -219,7 +218,8 @@ const CreditCard = () => {
               <img src={visaImg} alt="Visa" />
               <div className={styles.separator}></div>
               <div className={styles.textRight}>
-                Buy credits and take advantage of the exclusive sign up offer now!
+                Buy credits and take advantage of the exclusive sign up offer
+                now!
               </div>
             </div>
 

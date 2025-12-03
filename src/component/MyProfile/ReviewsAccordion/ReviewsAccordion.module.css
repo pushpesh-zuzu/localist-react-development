@@ -255,6 +255,10 @@
     color: #ffffff;
     background-color: var(--primary-color);
   }
+
+  .secondaryBtn img {
+    filter: brightness(0) invert(1);
+  }
   .row {
     gap: 5px;
     flex-direction: column;

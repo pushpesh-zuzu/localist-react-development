@@ -83,7 +83,7 @@
   }
 
   .aboutContent {
-    gap: 16px;
+    gap: 8px;
   }
 
   .aboutItem {
@@ -92,6 +92,7 @@
 
   .aboutItem h3 {
     font-size: 12px;
+    margin-top: -5px;
   }
 
   .aboutItem img {

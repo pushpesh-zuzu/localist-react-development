@@ -7,6 +7,7 @@ import EditLocation from "../../../assets/Images/Leads/EditlocationImg.svg";
 import { googleAPI } from "../../../Api/axiosInstance";
 
 const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
+  console.log(data);
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
   const [drawingManager, setDrawingManager] = useState(null);
@@ -66,7 +67,7 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
 
       let parsedLocations = [];
       try {
-        parsedLocations = JSON.parse(data);
+        parsedLocations = data;
       } catch (err) {
         console.error("Invalid location JSON", err);
       }
@@ -92,31 +93,10 @@ const DrawOnMapModal = ({ onClose, onNext, setLocationData, data, isEdit }) => {
         });
       });
 
-      const centerPoint = bounds.getCenter();
-
-      getGeocodeDetails(centerPoint).then(({ city, pincode }) => {
-        setLocationData({
-          city,
-          postcode: pincode,
-          miles: 0,
-          coordinates: JSON.stringify(parsedLocations),
-        });
-      });
-
-      const manager = new window.google.maps.drawing.DrawingManager({
-        drawingMode: null,
-        drawingControl: false,
-        polygonOptions: {
-          fillColor: "red",
-          fillOpacity: 0.3,
-          strokeWeight: 2,
-          strokeColor: "red",
-          clickable: true,
-          editable: false,
-        },
-      });
-
-      setDrawingManager(manager);
+      // ⭐ Add this to auto-zoom to polygon(s)
+      if (!bounds.isEmpty()) {
+        newMap.fitBounds(bounds);
+      }
     };
 
     const addInitializeMap = () => {

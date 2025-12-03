@@ -983,6 +983,7 @@
   }
   .mobileImageWrapper {
     display: flex;
+    flex-direction: column;
     gap: 20px;
   }
   .image {
@@ -1092,6 +1093,7 @@
     vertical-align: middle;
     display: flex;
     gap: 7px;
+    white-space: nowrap;
   }
 
   .lineBreak {

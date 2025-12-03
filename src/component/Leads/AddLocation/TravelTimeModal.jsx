@@ -14,7 +14,9 @@ const TravelTimeModal = ({
   onNext,
   locationData,
   setLocationData,
+  previousPostcodeprops,
 }) => {
+  console.log(locationData);
   const dispatch = useDispatch();
   const { Option } = Select;
   const inputRef = useRef(null);
@@ -31,6 +33,9 @@ const TravelTimeModal = ({
   const [checkingPostcode, setCheckingPostcode] = useState(false);
   const [postalCodeValidate, setPostalCodeValidate] = useState(false);
   const [errors, setErrors] = useState({ postcode: "" });
+  const [previousPostCode, setPreviousPostcode] = useState(
+    previousPostcodeprops
+  );
 
   const calculateTravelRadius = (time, mode) => {
     const speedMap = {
@@ -47,11 +52,6 @@ const TravelTimeModal = ({
 
     return speedMap[mode] * minutes;
   };
-
-  // useEffect(() => {
-  //   setLocationData();
-  // }, []);
-
   const validatePostcode = async (value) => {
     if (!value) {
       setPostalCodeValidate(false);
@@ -127,12 +127,15 @@ const TravelTimeModal = ({
   console.log(locationData, "location data");
 
   const drawCircle = (center) => {
-    if (!window.google || !mapInstance.current) return;
+    if (!window.google || !mapInstance.current) {
+      setTimeout(() => drawCircle(center), 200);
+      return;
+    }
 
     const radiusInMeters = calculateTravelRadius(
       locationData?.travel_time,
       locationData?.travel_by,
-      locationData?.postcode
+      locationData?.postcode ? locationData?.postcode : previousPostCode
     );
 
     if (circleRef.current) {
@@ -154,12 +157,12 @@ const TravelTimeModal = ({
   };
 
   useEffect(() => {
-    setLocationData({
-      miles1: "20",
-      postcode: "",
-      travel_by: "Driving",
-      travel_time: "30 minutes",
-    });
+    setLocationData((prev) => ({
+      miles1: prev?.miles1 || "20",
+      postcode: prev?.postcode || "",
+      travel_by: prev?.travel_by || "Driving",
+      travel_time: prev?.travel_time || "30 minutes",
+    }));
   }, []);
 
   console.log(locationData);
@@ -214,6 +217,7 @@ const TravelTimeModal = ({
       ...prev,
       [name]: value,
     }));
+    setPreviousPostcode("");
   };
 
   const handleNext = () => {
@@ -297,7 +301,7 @@ const TravelTimeModal = ({
               ref={inputRef}
               type="text"
               name="postcode"
-              value={locationData?.postcode}
+              value={locationData?.postcode ? locationData?.postcode : ""}
               onChange={(e) => {
                 onChange(e);
                 validatePostcode(e.target.value);
@@ -393,7 +397,23 @@ const TravelTimeModal = ({
           </button>
           <button
             className={styles.nextButton}
-            onClick={() => handleNext("travelTime")}
+            onClick={() => {
+              if (
+                locationData?.travel_by &&
+                locationData?.travel_time &&
+                locationData?.postcode
+              ) {
+                handleNext("travelTime");
+              } else if (
+                !locationData?.postcode ||
+                locationData?.postcode === ""
+              ) {
+                setErrors((prev) => ({
+                  ...prev,
+                  postcode: "Please enter a valid postcode!",
+                }));
+              }
+            }}
           >
             Next
           </button>

@@ -293,7 +293,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       setLocationData({
         travel_time: location?.travel_time || "",
         travel_by: location?.travel_by || "",
-        postcode: location?.postcode || "",
+        postcode: location?.postcode || previousPostcode || "",
         coordinates: location?.coordinates || "",
         nation_wide: location?.nation_wide,
       });
@@ -367,10 +367,15 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     const serviceIds = data.join(",");
 
     const typeOfTravel = type.current;
+    console.log(locationData.postcode, "jfhfiuhiu");
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationData.miles1 ? locationData.miles1 : 0,
-      postcode: locationData.postcode ?? previousPostcode,
+      postcode:
+        locationData.postcode && locationData.postcode.trim() !== ""
+          ? locationData.postcode
+          : previousPostcode || "000000",
+
       service_id: serviceIds,
       postcode_old: previousPostcode ? previousPostcode : "000000",
 
@@ -382,6 +387,8 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
       coordinates: locationData?.coordinates ?? "",
       nation_wide: locationData?.nation_wide,
     };
+
+    console.log("locationdata", locationdata);
 
     dispatch(
       editLocationLead({ ...locationdata, location_id: editLocationId })
@@ -416,6 +423,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
     setRemoveModal({ show: false, service_id: null, nation_wide: null });
   };
   const handleViewMap = (item) => {
+    item = { ...item, miles1: item.miles };
     setLocationData(item);
     setIsOpenViewModal(true);
   };
@@ -569,7 +577,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
                     Remove
                   </span>{" "}
                   |{" "}
-                  <span className={styles.link}>
+                  <span className={styles.serviceLink}>
                     {item?.total_services} services
                   </span>
                 </p>
@@ -761,6 +769,7 @@ const LeadSettings = ({ setSelectedService, selectedService }) => {
             locationData={locationData}
             setLocationData={setLocationData}
             onNext={handleLocationNext}
+            previousPostcodeprops={previousPostcode}
           />
         )}
         {isDrawTimeOpen && (

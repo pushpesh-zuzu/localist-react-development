@@ -84,7 +84,10 @@ const AddLocationModal = ({
     const locationdata = {
       user_id: userToken?.remember_tokens,
       miles: locationType === "Nationwide" ? 0 : locationData.miles1 ?? 0,
-      postcode: locationData.postcode ? locationData.postcode : "000000",
+      postcode:
+        locationData.postcode && locationData.postcode != ""
+          ? locationData.postcode
+          : "000000",
 
       city: locationData?.city ?? "",
       travel_time: locationData?.travel_time,
@@ -95,7 +98,7 @@ const AddLocationModal = ({
       postcode_old: locationData.postcode ? locationData.postcode : "000000",
       coordinates: locationData?.coordinates ?? "",
     };
-
+    console.log("jhdbfufg", locationData);
     if (isEditingLocation && editLocationId) {
       dispatch(
         editLocationLead({ ...locationdata, location_id: editLocationId })

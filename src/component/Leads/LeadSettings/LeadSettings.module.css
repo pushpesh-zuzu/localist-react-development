@@ -175,6 +175,12 @@
   color: #828282;
 }
 
+.serviceLink {
+  color: inherit;
+  cursor: default !important;
+  color: #828282;
+}
+
 .link:hover {
   color: var(--primary-color);
   text-decoration: underline;

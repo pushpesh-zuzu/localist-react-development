@@ -418,6 +418,7 @@
     justify-content: space-between;
     width: 100%;
     margin-top: 5px;
+    flex-wrap: wrap;
   }
 
   .replyBtnWrapper {
@@ -645,6 +646,7 @@
     vertical-align: middle;
     display: flex;
     gap: 7px;
+    white-space: nowrap;
   }
   .images {
     width: 130px;
@@ -652,6 +654,7 @@
   }
   .mobileImageWrapper {
     display: flex;
+    flex-direction: column;
   }
   .image {
     display: none;
