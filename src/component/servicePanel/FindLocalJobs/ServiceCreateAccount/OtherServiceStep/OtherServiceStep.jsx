@@ -139,7 +139,7 @@ const OtherServiceStep = ({
   };
 
   const handleSelectService = (item) => {
-    if (selectedServices?.length >= 5) {
+    if (selectedServices?.length >= 5000) {
       showToast("error", "Please add more services in Lead Settings");
       return;
     }

@@ -1,7 +1,10 @@
 import TreeImg from "../../../assets/Images/TreeImg.jpg";
+import TreePreservation from "../../../assets/Images/TreePreservation.jpg";
 
 export const TreePreservationData = {
   title: "A guide to Tree Preservation Orders",
+  service: "Tree Surgery",
+  imgSrc: TreePreservation,
   description: `Trees can be protected in different ways depending on age, size, location, and risk of development. Whether you’re interested...`,
 
   sections: [

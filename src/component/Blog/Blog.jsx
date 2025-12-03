@@ -4,10 +4,41 @@ import styles from "./Blog.module.css";
 const Blog = () => {
   return (
     <div className={styles.blogContainer}>
-      <header className={styles.blogHeader}>
-        <h1>{TreePreservationData.title}</h1>
-        <p>{TreePreservationData.description}</p>
+      <header
+        className={styles.blogHeader}
+        style={{
+          backgroundImage: `
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 175, 227, 0.9) 74.73%
+      ),
+      url(${TreePreservationData.imgSrc})
+    `,
+        }}
+      >
+        <div className={styles.overlay}>
+          <div className={styles.headerContent}>
+            <h1>{TreePreservationData.title}</h1>
+          </div>
+          <div className={styles.authorInfo}>
+            <p>
+              <strong>Written by:</strong> Joe Bloggs
+            </p>
+            <p>
+              <strong>Reviewed by:</strong> Richard Jones
+            </p>
+            <p>
+              <strong>Published:</strong> 24.08.24
+            </p>
+            <p>
+              <strong>Updated:</strong> 28.10.25
+            </p>
+          </div>
+        </div>
       </header>
+
+      <p>{TreePreservationData.description}</p>
 
       {TreePreservationData.sections.map((section, index) => (
         <section key={index} className={styles.blogSection}>
