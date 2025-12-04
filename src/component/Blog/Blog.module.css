@@ -33,7 +33,7 @@
   align-items: end;
   flex-wrap: wrap;
   gap: 24px;
-  padding: 46px 120px;
+  padding: 66px 120px;
   text-align: center;
 }
 
@@ -137,9 +137,8 @@
 }
 
 .descriptionText {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 38px;
+  font-size: 24px;
+  line-height: 30px;
   font-family: inter;
   text-align: initial;
 }

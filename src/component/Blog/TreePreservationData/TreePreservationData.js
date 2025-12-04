@@ -13,6 +13,9 @@ export const TreePreservationData = {
   imgSrc: ECO4,
   description1: `98% of customers asking for insulation hope to use the Eco 4 Scheme (Localists data)`,
   description2: `Insulation installers represent 39% of the energy efficiency businesses and will suffer most.`,
+  citbLink:
+    "https://www.citb.co.uk/media/3b1fggu3/trustmark-research-summary-final-version-v2.pdf",
+
   description3: `Expert predicts 38% of energy efficiency businesses will cease to exist by 2027`,
   description4: `Eco4 axe will put the poorest in society under fuel poverty.`,
   detailTitle: "Chester:",
@@ -50,6 +53,9 @@ export const TreePreservationData = {
         "Josh also highlighted that with the raise in minimum wage, SMEs are going to struggle with an increase in costs and demand for their services plummeting.  “With the increase in minimum wage too, SMEs are just going to get squeezed out of the market.” Josh also expects that many will be placed into fuel poverty because of the lack of funding.",
       content3:
         "The government’s own data reveals that the most deprived areas of the UK are in the North West, Yorkshire and the West Midlands – and these are precisely the regions that have seen the largest uptake of ECO4 within the first quarter of 2025. Ordinary families cannot afford a complete retrofit or £10,000 for a heat pump, so they will be placed in fuel poverty.",
+      govData:
+        "https://www.gov.uk/government/statistics/english-indices-of-deprivation-2025/english-indices-of-deprivation-2025-statistical-release#:~:text=2.-,Main%20findings,England%20according%20to%20the%20IMD25%20.",
+
       extraImage: blog_graph,
       // extra: "Veteran and ancient trees and woods",
       extraContent1: `Michael Marshall, Sales Director of the lead generation business Localists.com stated that he sensed a growing anxiousness in the industry with a surge in demand for insulation and renewable energy leads`,
