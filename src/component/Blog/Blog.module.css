@@ -108,7 +108,7 @@
 }
 
 .GreenBar {
-  width: 260px;
+  width: 18%;
   height: 16px;
   background-color: #03d17b;
 }
@@ -116,6 +116,7 @@
 .social_Icons {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 16px;
 }
@@ -137,13 +138,17 @@
   font-weight: 500;
   line-height: 38px;
   font-family: inter;
+  text-align: initial;
 }
 
 .blogSection h2 {
   font-size: 48px;
   font-weight: 600;
+  word-wrap: break-word;
+  word-break: break-all;
   width: max-content;
   color: #253238;
+  width: 100%;
 }
 
 .blogSection h3,
@@ -165,7 +170,121 @@ h4 {
 }
 
 @media screen and (max-width: 768px) {
+  .blogHeader {
+    height: 420px;
+  }
   .overlayWrap {
-    padding: 40px;
+    padding: 30px;
+  }
+  .headerContent h1 {
+    font-size: 32px;
+    font-weight: 800;
+    text-align: start;
+    line-height: 40px;
+    margin-top: 16px;
+    width: 100%;
+  }
+
+  .header_service {
+    font-size: 16px !important;
+    padding: 6px 16px;
+  }
+  .descriptionText {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    font-family: inter;
+    text-align: initial;
+  }
+
+  .profileInner > div > p {
+    font-size: 14px;
+  }
+  .blogSection h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #253238;
+    width: 100%;
+  }
+
+  .blogSection h3,
+  h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #253238;
+    text-align: initial;
+  }
+  .blogSection p {
+    font-size: 20px;
+    line-height: 30px;
+    color: #253238;
+    text-align: initial;
+
+    /* font-weight: 500; */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .blogHeader {
+    height: 320px;
+  }
+  .headerContent h1 {
+    font-size: 24px;
+    font-weight: 800;
+    text-align: start;
+    line-height: 30px;
+    margin-top: 16px;
+    width: 100%;
+  }
+  .descriptionText {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    font-family: inter;
+    text-align: initial;
+  }
+
+  .social_Icons img {
+    width: 60px;
+  }
+
+  .header_service {
+    font-size: 14px !important;
+    padding: 6px 16px;
+  }
+
+  .profileInner > div > p {
+    font-size: 12px;
+  }
+
+  .blogSection h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #253238;
+    width: 100%;
+  }
+
+  .blogSection h3,
+  h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #253238;
+    text-align: initial;
+  }
+  .blogSection p {
+    font-size: 16px;
+    line-height: 30px;
+    color: #253238;
+    text-align: initial;
+
+    /* font-weight: 500; */
+  }
+
+  .timeWrap {
+    text-align: end;
+    margin: 12px 0;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 25px;
   }
 }

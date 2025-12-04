@@ -2,6 +2,7 @@ import TreeImg from "../../../assets/Images/TreeImg.jpg";
 import TreePreservation from "../../../assets/Images/TreePreservation.jpg";
 import SingleTree from "../../../assets/Images/SingleTree.png";
 import VeteranTreeImg from "../../../assets/Images/VeteranTreeImg.png";
+import PostCode from "../PostCodeContainer/PostCode";
 
 export const TreePreservationData = {
   title: "A guide to Tree Preservation Orders",
@@ -21,7 +22,9 @@ export const TreePreservationData = {
       extraContent1: `Conservation Areas protect places of historic and architectural value. These are also designated by local planning authorities. Removing trees in a Conservation Area requires permission from the relevant authority, subject to certain exclusions.`,
       extraContent2:
         "Before any work begins, a tree surgeon assesses the overall health and stability of your trees. They’re trained to spot early signs of disease, pest infestations, cracks, or hidden rot that most of us would overlook.",
+      postcode: PostCode,
     },
+
     {
       subtitle: "Planning Policies",
       content1: `Trees and woods are recognised in planning policies throughout the UK for their benefits to people and nature. Planning applications should include details of any trees affected by the proposed development. All trees should be evaluated by an arboricultural consultant according to the current British Standard BS5837 (2012). This aims to reduce the impact of development on trees.`,

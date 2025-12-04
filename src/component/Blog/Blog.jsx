@@ -93,7 +93,7 @@ const Blog = () => {
             <p>{section.extraContent1}</p>
             <p>{section.extraContent2}</p>
             <p>{section.extraContent3}</p>
-            <PostCode />
+            {section.postcode && <PostCode />}
           </section>
         ))}
       </div>
