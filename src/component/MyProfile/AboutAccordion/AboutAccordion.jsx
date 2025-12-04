@@ -34,7 +34,6 @@ const AboutAccordion = ({ details }) => {
   );
 
   const { viewProfileData } = useSelector((state) => state.leadSetting);
-  console.log(viewProfileData);
   const user_id = userToken?.id ? userToken?.id : registerData?.id;
   const companyData = useSelector((state) => state.companyLook?.companyData);
   const [debouncedCompanyLocation, setDebouncedCompanyLocation] = useState("");
@@ -61,6 +60,7 @@ const AboutAccordion = ({ details }) => {
     company_website: "",
     company_location: "",
     company_locaion_reason: "",
+
     company_size: "",
     company_total_years: "",
     company_reg_number: "",
@@ -85,8 +85,6 @@ const AboutAccordion = ({ details }) => {
     accr_delete_id: "",
     service_delete_id: "",
   });
-
-  console.log(formState);
 
   const [errors, setErrors] = useState({});
   const fileInputRefs = {
@@ -122,7 +120,7 @@ const AboutAccordion = ({ details }) => {
         business_profile_name: details?.business_profile_name,
         name: details?.name,
         company_website: details?.company_website,
-        company_address: details?.company_address,
+        company_address: companyData?.company_address,
         company_location: details?.address,
         company_locaion_reason: details?.company_locaion_reason,
         company_size: details?.company_size,
@@ -150,6 +148,11 @@ const AboutAccordion = ({ details }) => {
       data.company_location =
         companyData?.registered_office_address?.address_line_1;
     }
+
+    if (companyData.company_address) {
+      data.company_address = companyData?.company_address;
+    }
+
     if (companyData.company_name || companyData?.registered_office_address) {
       setFormState({ ...data });
     }
@@ -311,7 +314,6 @@ const AboutAccordion = ({ details }) => {
 
   const validate = () => {
     const temp = {};
-    console.log(formState);
     if (!formState.name) {
       temp.name = "Please fill this Required";
     }
@@ -462,7 +464,6 @@ const AboutAccordion = ({ details }) => {
         );
         return;
       } else if (formState && isDirty) {
-        console.log("dcsjhbh");
         setShowLoader(true);
         dispatch(updateSellerProfile(formState)).then((result) => {
           if (result) {
@@ -763,14 +764,7 @@ const AboutAccordion = ({ details }) => {
               className={styles.input}
               type="text"
               name="company_address"
-              value={[
-                formState.company_address,
-                details.company_city,
-                details.company_postcode,
-                details.company_country,
-              ]
-                .filter(Boolean)
-                .join(", ")}
+              value={formState?.company_address}
               onChange={handleInputChange}
               placeholder="Enter company address"
             />
@@ -808,7 +802,8 @@ const AboutAccordion = ({ details }) => {
               type="text"
               name="company_location"
               value={[
-                // viewProfileData.company_location,
+                viewProfileData?.apartment,
+                viewProfileData?.address,
                 viewProfileData?.city,
                 viewProfileData?.zipcode,
                 viewProfileData?.country,

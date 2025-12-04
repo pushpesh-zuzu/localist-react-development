@@ -393,7 +393,7 @@ const OtherServiceStep = ({
                   <Spin />
                 ) : (
                   <>
-                    {service.map((item) => (
+                    {/* {service.map((item) => (
                       <p
                         key={item.id}
                         className={styles.searchItem}
@@ -401,7 +401,22 @@ const OtherServiceStep = ({
                       >
                         {item.name}
                       </p>
-                    ))}
+                    ))} */}
+                    {service
+                      ?.filter(
+                        (s) =>
+                          s.name?.toLowerCase() !==
+                          item?.serviceTitle?.replace(/-/g, " ")?.toLowerCase()
+                      )
+                      .map((item) => (
+                        <p
+                          key={item.id}
+                          className={styles.searchItem}
+                          onClick={() => handleSelectService(item)}
+                        >
+                          {item.name}
+                        </p>
+                      ))}
                   </>
                 )}
               </div>
