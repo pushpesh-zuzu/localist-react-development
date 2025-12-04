@@ -26,10 +26,17 @@ export const fetchCompanyDetails = (regNumber, user_id = null) => {
         dispatch(setCompanyData(response.data));
 
         dispatch(
-          checkCompanyNameApi(
+          setCompanyData(
             {
               company_name: response.data.company_name,
               company_reg_number: response.data.company_number,
+              company_address: `${
+                response.data.registered_office_address.address_line_1
+              }, ${
+                response.data.registered_office_address.address_line_2 || ""
+              }, ${response.data.registered_office_address.locality || ""}, ${
+                response.data.registered_office_address.postal_code || ""
+              }`,
             },
             true
           )

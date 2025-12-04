@@ -8,8 +8,8 @@ const LeadMap = ({ getPendingLeadList }) => {
 
   const [mapLoaded, setMapLoaded] = useState(false);
   const [mapCenter] = useState({
-    lat: 20.5937, // Default center (India)
-    lng: 78.9629,
+    lat: 52.6358,
+    lng: -1.1396,
   });
 
   const apiKey = "AIzaSyB1I_cRCeZ13mKqYKhsO5e3aOMgxtD7Irw";
@@ -97,7 +97,7 @@ const LeadMap = ({ getPendingLeadList }) => {
       markersRef.current = [];
       circlesRef.current = [];
 
-      const pincode = getPendingLeadList; // Direct pincode string like "303014"
+      const pincode = getPendingLeadList;
       const coords = await getLatLngFromPincode(pincode);
       if (!coords) return;
 
