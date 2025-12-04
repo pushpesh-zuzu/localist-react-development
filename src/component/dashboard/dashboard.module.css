@@ -9,9 +9,10 @@
   margin-bottom: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  max-width: 175px;
+  justify-content: start;
+  max-width: 100%;
   margin-left: -8px;
+  gap: 16px;
 }
 
 .help-box p {
