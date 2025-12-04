@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import styles from "./CookieConsent.module.css";
 
 const CookieConsent = () => {
   const [show, setShow] = useState(false);
@@ -30,63 +31,49 @@ const CookieConsent = () => {
 
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          background: "rgba(0,0,0,0.4)",
-          zIndex: 99998,
-        }}
-      />
+      <div className={styles.overlay} />
 
-      <div
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "90%",
-          maxWidth: "350px",
-          padding: "15px",
-          background: "#fff",
-          borderRadius: "10px",
-          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-          zIndex: 99999,
-          textAlign: "center",
-        }}
-      >
-        <p style={{ marginBottom: "12px", fontSize: "14px" }}>
-          We use cookies for analytics and ads.
-        </p>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.content}>
+            <div className={styles.leftSection}>
+              <h3 className={styles.title}>
+                Tailor my experience with cookies
+              </h3>
+              <p className={styles.text}>
+                Localists uses cookies and similar technologies to personalise
+                my experience, serve me relevant content, and improve Localists
+                products and services. By clicking ‘Accept’ I agree to this, as
+                further described in the Localists Cookie Policy. I can reject
+                non-essential cookies by clicking ‘Decline’.
+                {/* <a 
+                  href="http://localists.com/en/gb/cookie-policy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Localists Cookie Policy
+                </a>
+                . */}
+              </p>
+            </div>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-          <button
-            onClick={() => handleConsent("granted")}
-            style={{
-              padding: "8px 14px",
-              background: "#00afe3",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Accept
-          </button>
+            <div className={styles.rightSection}>
+              <button
+                onClick={() => handleConsent("denied")}
+                className={styles.rejectButton}
+              >
+                Declined
+              </button>
 
-          <button
-            onClick={() => handleConsent("denied")}
-            style={{
-              padding: "8px 14px",
-              background: "rgb(157 148 148)",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Reject
-          </button>
+              <button
+                onClick={() => handleConsent("granted")}
+                className={styles.acceptButton}
+              >
+                Accept All Cookies
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>
