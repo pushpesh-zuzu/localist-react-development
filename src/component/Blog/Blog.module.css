@@ -21,7 +21,7 @@
   height: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: end !important;
 }
 .overlayWrap {
   width: 100%;
