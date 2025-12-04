@@ -1,5 +1,5 @@
 import TreeImg from "../../../assets/Images/TreeImg.jpg";
-import TreePreservation from "../../../assets/Images/TreePreservation.jpg";
+import blog_graph from "../../../assets/Images/blog_graph.png";
 import SingleTree from "../../../assets/Images/SingleTree.png";
 import VeteranTreeImg from "../../../assets/Images/VeteranTreeImg.png";
 import PostCode from "../PostCodeContainer/PostCode";
@@ -50,44 +50,44 @@ export const TreePreservationData = {
         "Josh also highlighted that with the raise in minimum wage, SMEs are going to struggle with an increase in costs and demand for their services plummeting.  “With the increase in minimum wage too, SMEs are just going to get squeezed out of the market.” Josh also expects that many will be placed into fuel poverty because of the lack of funding.",
       content3:
         "The government’s own data reveals that the most deprived areas of the UK are in the North West, Yorkshire and the West Midlands – and these are precisely the regions that have seen the largest uptake of ECO4 within the first quarter of 2025. Ordinary families cannot afford a complete retrofit or £10,000 for a heat pump, so they will be placed in fuel poverty.",
-      extraImage: VeteranTreeImg,
-      extra: "Veteran and ancient trees and woods",
-      extraContent1: `Ancient woodland and ancient and veteran trees need special considerations. In 2018, the Trust successfully lobbied the Government to change English policy so that development affecting these habitats can only go ahead in wholly exceptional circumstances.`,
+      extraImage: blog_graph,
+      // extra: "Veteran and ancient trees and woods",
+      extraContent1: `Michael Marshall, Sales Director of the lead generation business Localists.com stated that he sensed a growing anxiousness in the industry with a surge in demand for insulation and renewable energy leads`,
       extraContent2:
-        "In England and Wales, planning policy instructs developers to consult the Ancient Tree Inventory. This prompts them to reduce the impact of development on any ancient or veteran trees.",
-      extraContent3:
-        "Proposals involving ancient trees and woods will often need to go beyond the current British Standard to avoid harm, particularly around root protection area.",
+        "He said: “There has been a growing tension in the industry on the run up to the budget, and the demand for insulation and renewable energy leads has skyrocketed because of this. But this will undoubtedly fall off a cliff in 2026 when the ECO4 scheme ends. Our own data shows that 98% of those requesting insulation are requiring funding under ECO4.”",
+      // extraContent3:
+      //   "Proposals involving ancient trees and woods will often need to go beyond the current British Standard to avoid harm, particularly around root protection area.",
     },
-    {
-      subtitle: "5. Planting & conservation",
-      content: `Tree surgeons don’t just remove trees. They help plant them too. They can recommend the right species for your soil, plant them correctly and even transplant existing trees when needed.`,
-    },
-    {
-      subtitle: "6. Disease & pest management",
-      content: `Trees can suffer from pests, fungi, and decay. Tree surgeons identify these problems early and recommend treatments or interventions to prevent further spread.`,
-    },
-    {
-      subtitle: "7. Emergency response",
-      content: `Storm damage or fallen branches can pose immediate risks. Tree surgeons are often called out in emergencies to make trees safe, clear debris, and restore access quickly.`,
-    },
-    {
-      subtitle: "8. Surveys & reports",
-      content: `For planning applications, insurance, or legal compliance, a tree surgeon (or arborist) can provide formal surveys and written reports to assess safety, preservation needs, or risks.`,
-    },
+    // {
+    //   subtitle: "5. Planting & conservation",
+    //   content: `Tree surgeons don’t just remove trees. They help plant them too. They can recommend the right species for your soil, plant them correctly and even transplant existing trees when needed.`,
+    // },
+    // {
+    //   subtitle: "6. Disease & pest management",
+    //   content: `Trees can suffer from pests, fungi, and decay. Tree surgeons identify these problems early and recommend treatments or interventions to prevent further spread.`,
+    // },
+    // {
+    //   subtitle: "7. Emergency response",
+    //   content: `Storm damage or fallen branches can pose immediate risks. Tree surgeons are often called out in emergencies to make trees safe, clear debris, and restore access quickly.`,
+    // },
+    // {
+    //   subtitle: "8. Surveys & reports",
+    //   content: `For planning applications, insurance, or legal compliance, a tree surgeon (or arborist) can provide formal surveys and written reports to assess safety, preservation needs, or risks.`,
+    // },
   ],
 
-  additionalInfo: [
-    {
-      title: "How to remove a tree stump",
-      imgSrc: TreeImg,
-    },
-    {
-      title: "How to tell if a tree is dying",
-      imgSrc: TreeImg,
-    },
-    {
-      title: "Other blog topics",
-      imgSrc: TreeImg,
-    },
-  ],
+  // additionalInfo: [
+  //   {
+  //     title: "How to remove a tree stump",
+  //     imgSrc: TreeImg,
+  //   },
+  //   {
+  //     title: "How to tell if a tree is dying",
+  //     imgSrc: TreeImg,
+  //   },
+  //   {
+  //     title: "Other blog topics",
+  //     imgSrc: TreeImg,
+  //   },
+  // ],
 };

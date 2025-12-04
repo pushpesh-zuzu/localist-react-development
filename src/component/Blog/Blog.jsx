@@ -72,6 +72,7 @@ const Blog = () => {
             <li>{TreePreservationData.description3}</li>
             <li>{TreePreservationData.description4}</li>
             <p>
+              <br />
               <strong>{TreePreservationData.detailTitle} </strong>
               <span>{TreePreservationData.detailDescription1}</span>
               <a href="https://www.localists.com/en/gb/">
@@ -112,8 +113,9 @@ const Blog = () => {
             )}
             <h4>{section.extra}</h4>
             <p>{section.extraContent1}</p>
+            <br />
             <p>{section.extraContent2}</p>
-            <p>{section.extraContent3}</p>
+            {/* <p>{section.extraContent3}</p> */}
             {section.postcode && <PostCode />}
           </section>
         ))}
