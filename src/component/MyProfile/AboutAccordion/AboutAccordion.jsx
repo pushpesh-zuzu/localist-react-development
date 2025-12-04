@@ -111,51 +111,94 @@ const AboutAccordion = ({ details }) => {
   );
 
   useEffect(() => {
+    if (companyError && formState.company_reg_number !== "") {
+      showToast("error", companyError);
+      setFormState((prev) => ({
+        ...prev,
+        company_reg_number: "",
+      }));
+    }
+
+    if (companyError) {
+      dispatch(setCompanyError(null));
+    }
+  }, [companyError, formState.company_reg_number, dispatch]);
+  useEffect(() => {
     if (details?.id) {
-      setFormState({
-        ...formState,
-        company_email: details?.company_email,
-        company_phone: details?.company_phone,
-        company_name: details?.company_name,
-        business_profile_name: details?.business_profile_name,
-        name: details?.name,
-        company_website: details?.company_website,
-        company_address: companyData?.company_address,
-        company_location: details?.address,
-        company_locaion_reason: details?.company_locaion_reason,
-        company_size: details?.company_size,
-        company_total_years: details?.company_total_years,
-        company_reg_number: details?.company_reg_number,
-        about_company: details?.about_company,
+      // setFormState({
+      //   ...formState,
+      //   company_email: details?.company_email,
+      //   company_phone: details?.company_phone,
+      //   company_name: details?.company_name,
+      //   business_profile_name: details?.business_profile_name,
+      //   name: details?.name,
+      //   company_website: details?.company_website,
+      //   company_address: companyData?.company_address,
+      //   company_location: details?.address,
+      //   company_locaion_reason: details?.company_locaion_reason,
+      //   company_size: details?.company_size,
+      //   company_total_years: details?.company_total_years,
+      //   company_reg_number: details?.company_reg_number,
+      //   about_company: details?.about_company,
+      //   profile_imagePreview: details?.profile_image
+      //     ? `${BASE_IMAGE}/users/${details?.profile_image}`
+      //     : null,
+      //   company_logoPreview: details?.company_logo
+      //     ? `${BASE_IMAGE}/users/${details?.company_logo}`
+      //     : null,
+      // });
+      setFormState((prev) => ({
+        ...prev,
+        company_email: details?.company_email || prev.company_email,
+        company_phone: details?.company_phone || prev.company_phone,
+        company_name: details?.company_name || prev.company_name,
+        business_profile_name:
+          details?.business_profile_name || prev.business_profile_name,
+        name: details?.name || prev.name,
+        company_website: details?.company_website || prev.company_website,
+        company_address: companyData?.company_address || prev.company_address,
+        company_location: details?.address || prev.company_location,
+        company_locaion_reason:
+          details?.company_locaion_reason || prev.company_locaion_reason,
+        company_size: details?.company_size || prev.company_size,
+        company_total_years:
+          details?.company_total_years || prev.company_total_years,
+        company_reg_number:
+          details?.company_reg_number || prev.company_reg_number,
+        about_company: details?.about_company || prev.about_company,
         profile_imagePreview: details?.profile_image
           ? `${BASE_IMAGE}/users/${details?.profile_image}`
-          : null,
-
+          : prev.profile_imagePreview,
         company_logoPreview: details?.company_logo
           ? `${BASE_IMAGE}/users/${details?.company_logo}`
-          : null,
-      });
+          : prev.company_logoPreview,
+      }));
     }
   }, [details]);
 
   useEffect(() => {
-    let data = { ...formState };
-
-    if (companyData.company_name) {
-      data.company_name = companyData?.company_name;
-    }
-    if (companyData?.registered_office_address) {
-      data.company_location =
-        companyData?.registered_office_address?.address_line_1;
-    }
-
-    if (companyData.company_address) {
-      data.company_address = companyData?.company_address;
-    }
-
-    if (companyData.company_name || companyData?.registered_office_address) {
-      setFormState({ ...data });
-    }
+    // let data = { ...formState };
+    // if (companyData.company_name) {
+    //   data.company_name = companyData?.company_name;
+    // }
+    // if (companyData?.registered_office_address) {
+    //   data.company_location =
+    //     companyData?.registered_office_address?.address_line_1;
+    // }
+    // if (companyData.company_address) {
+    //   data.company_address = companyData?.company_address;
+    // }
+    // if (companyData.company_name || companyData?.registered_office_address) {
+    //   setFormState({ ...data });
+    // }
+    setFormState((prev) => ({
+      ...prev,
+      company_name: companyData?.company_name || prev.company_name,
+      company_location:
+        companyData?.registered_office_address?.address_line_1 ||
+        prev.company_location,
+      company_address: companyData?.company_address || prev.company_address,
+    }));
   }, [companyData]);
 
   const handleFileChange = (e) => {
@@ -272,20 +315,6 @@ const AboutAccordion = ({ details }) => {
 
     return () => clearTimeout(timeout);
   }, [debouncedCompanyLocation]);
-
-  useEffect(() => {
-    if (companyError && formState.company_reg_number !== "") {
-      showToast("error", companyError);
-      setFormState((prev) => ({
-        ...prev,
-        company_reg_number: "",
-      }));
-    }
-
-    if (companyError) {
-      dispatch(setCompanyError(null));
-    }
-  }, [companyError, formState.company_reg_number, dispatch]);
 
   useEffect(() => {
     if (!debouncedCompanyName) return;
@@ -454,8 +483,8 @@ const AboutAccordion = ({ details }) => {
       isDirty &&
       formState.business_profile_name &&
       formState.business_profile_name.length > 0 &&
-      formState.name &&
-      formState.name.length > 0
+      formState?.name &&
+      formState?.name.length > 0
     ) {
       if (formState.about_company && formState.about_company.length < 20) {
         showToast(
@@ -521,6 +550,7 @@ const AboutAccordion = ({ details }) => {
       dispatch(clearUpdateStatus());
     }
   }, [updateSuccess, updateError, dispatch]);
+  console.log(formState?.name, "name");
 
   return (
     <div className={styles.wrapper}>
@@ -674,7 +704,7 @@ const AboutAccordion = ({ details }) => {
           className={styles.input}
           type="text"
           name="name"
-          value={formState.name}
+          value={formState?.name}
           onChange={handleInputChange}
           placeholder="Enter your full name"
         />

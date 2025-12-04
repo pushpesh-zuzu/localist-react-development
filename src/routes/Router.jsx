@@ -154,7 +154,7 @@ const routes = [
         ),
       },
       {
-        path: "blog/news/tree-surgery",
+        path: "blog/news/eco4-axe-business-collapse-warning",
         element: (
           <LocaleRedirect>
             <Blog />

@@ -33,7 +33,7 @@
   align-items: end;
   flex-wrap: wrap;
   gap: 24px;
-  padding: 46px 120px;
+  padding: 66px 120px;
   text-align: center;
 }
 
@@ -107,7 +107,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 60%;
 }
 
 .GreenBar {
@@ -137,9 +137,8 @@
 }
 
 .descriptionText {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 38px;
+  font-size: 24px;
+  line-height: 30px;
   font-family: inter;
   text-align: initial;
 }
@@ -178,7 +177,7 @@ h4 {
   }
 
   .overlayWrap {
-    padding: 30px;
+    padding: 28px;
   }
   .headerContent h1 {
     font-size: 32px;
@@ -195,7 +194,6 @@ h4 {
   }
   .descriptionText {
     font-size: 20px;
-    font-weight: 500;
     line-height: 30px;
     font-family: inter;
     text-align: initial;
@@ -246,8 +244,7 @@ h4 {
   }
   .descriptionText {
     font-size: 16px;
-    font-weight: 500;
-    line-height: 26px;
+    line-height: 30px;
     font-family: inter;
     text-align: initial;
   }
