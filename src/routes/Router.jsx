@@ -154,7 +154,7 @@ const routes = [
         ),
       },
       {
-        path: "blog",
+        path: "blog/tree-surgery",
         element: (
           <LocaleRedirect>
             <Blog />
