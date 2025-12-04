@@ -212,6 +212,7 @@ export const updateSellerProfile = createAsyncThunk(
         "company_total_years",
         "about_company",
         "business_profile_name",
+        "company_address",
       ];
 
       const body = new FormData();

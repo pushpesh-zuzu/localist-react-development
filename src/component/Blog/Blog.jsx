@@ -36,15 +36,15 @@ const Blog = () => {
                 <div className={styles.profileInner}>
                   <div>
                     <p>
-                      Written by <a href="#">Joe Bloggs</a>
+                      Written by <a href="#">Michael Marshall</a>
                     </p>
                     <p>
                       <a href="#">Reviewed</a> by <a href="#">Richard Jones</a>
                     </p>
                   </div>
                   <div>
-                    <p>Published: 24.08.24</p>
-                    <p>Updated: 28.10.25</p>
+                    <p>Published: 28 November 2025</p>
+                    <p>Updated: 28 November 2025</p>
                   </div>
                 </div>
               </div>
@@ -67,21 +67,42 @@ const Blog = () => {
           </div>
           <p className={styles.timeWrap}>10 mins read time</p>
           <p className={styles.descriptionText}>
-            {TreePreservationData.description}
+            <li>{TreePreservationData.description1}</li>
+            <li>{TreePreservationData.description2}</li>
+            <li>{TreePreservationData.description3}</li>
+            <li>{TreePreservationData.description4}</li>
+            <p>
+              <strong>{TreePreservationData.detailTitle} </strong>
+              <span>{TreePreservationData.detailDescription1}</span>
+              <a href="https://www.localists.com/en/gb/">
+                {TreePreservationData.detailDescription2}
+              </a>
+              <span>{TreePreservationData.detailDescription3}</span>
+            </p>
+            <p>{TreePreservationData.detailDescription4}</p>
+            <p>{TreePreservationData.detailDescription5}</p>
           </p>
           <img
-            src={TreePreservationData.treeImg}
+            src={TreePreservationData.HeatPump}
             alt=""
             className={styles.single_tree_img}
           />
         </section>
         {TreePreservationData.sections.map((section, index) => (
           <section key={index} className={styles.blogSection}>
-            <h2>{section.title}</h2>
-            <h3>{section.subtitle}</h3>
+            {/* <h2>{section.title}</h2>
+            <h3>{section.subtitle}</h3> */}
             <p>{section.content}</p>
-            <p>{section.content1}</p>
+            <p>
+              {section.content1}{" "}
+              <a href="https://www.citb.co.uk/media/3b1fggu3/trustmark-research-summary-final-version-v2.pdf">
+                CITB.
+              </a>{" "}
+            </p>
+            <br />
             <p>{section.content2}</p>
+            <br />
+            <p>{section.content3}</p>
             {section.extraImage && (
               <img
                 src={section.extraImage}
