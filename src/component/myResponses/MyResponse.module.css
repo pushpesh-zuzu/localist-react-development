@@ -259,13 +259,19 @@
   /* text-wrap: nowrap; */
   text-align: center;
 }
+.saveBtnBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 24px;
+}
 .saveBtnBox img {
   margin-right: 4px;
 }
 .saveBtn {
   background-color: var(--primary-color);
   color: #ffffff;
-  padding: 7px 15px;
+  padding: 5px 10px;
   border-radius: 20px;
   border: none;
   cursor: pointer !important;

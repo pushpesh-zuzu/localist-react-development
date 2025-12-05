@@ -201,6 +201,7 @@
   border: none;
   cursor: pointer !important;
   margin-bottom: 17.5px;
+  white-space: nowrap;
 }
 .requestBtnMatchBox:hover {
   background-color: #f74b0090;
@@ -1230,5 +1231,6 @@
     z-index: 999;
     border-radius: 8;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
   }
 }

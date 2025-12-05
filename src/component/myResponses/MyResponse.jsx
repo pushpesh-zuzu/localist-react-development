@@ -335,8 +335,6 @@ const MyResponse = () => {
                   <button
                     style={{
                       position: "absolute",
-                      right: "0px",
-                      top: "-16px",
                     }}
                     className={styles.saveBtn}
                     onClick={() => handleArchive(item)}
