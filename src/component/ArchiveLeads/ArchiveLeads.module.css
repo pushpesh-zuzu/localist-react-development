@@ -206,6 +206,14 @@
   vertical-align: middle;
   text-wrap: nowrap;
 }
+
+.saveBtnBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 24px;
+  top: -5px;
+}
 .saveBtnBox img {
   margin-right: 4px;
 }
@@ -344,6 +352,11 @@
 
 .purchaseButton:hover {
   background-color: #4ecf00;
+}
+
+.credits_wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .credits {
@@ -581,6 +594,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 9px 13px;
+  }
+
+  .saveBtnBox {
+    padding-bottom: 30px;
+    padding-top: 6px;
   }
 
   .filterButtons {

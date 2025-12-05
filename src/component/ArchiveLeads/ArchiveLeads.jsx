@@ -8,14 +8,19 @@ import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
 import viewDetailsArrow from "../../assets/Images/Setting/viewDetailsArrow.svg";
-import { getArchivedLeads } from "../../store/LeadSetting/leadSettingSlice";
+import {
+  unarchivePendingLead,
+  getArchivedLeads,
+} from "../../store/LeadSetting/leadSettingSlice";
 import SavedViewDetails from "../saveForLater/SavedViewDetails/SaveViewDetails";
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const ArchiveLeads = () => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
   const [visibleCount, setVisibleCount] = useState(5);
-
+  const [unarchiveLoader, setUnarchiveLoader] = useState(null);
   const [viewDetailsOpen, setViewDetaisOpen] = useState(null);
 
   const { archivedLeads } = useSelector((state) => state?.leadSetting);
@@ -35,6 +40,26 @@ const ArchiveLeads = () => {
 
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
+  };
+
+  const handleUnArchive = async (item) => {
+    const payload = {
+      lead_id: item?.id,
+      customer_id: item?.customer_id,
+    };
+
+    setUnarchiveLoader(item?.id);
+
+    try {
+      await dispatch(unarchivePendingLead(payload));
+
+      // refresh archived list
+      dispatch(getArchivedLeads());
+    } catch (err) {
+      console.error("Unarchive error:", err);
+    } finally {
+      setUnarchiveLoader(null);
+    }
   };
 
   return (
@@ -166,9 +191,35 @@ const ArchiveLeads = () => {
                   >
                     Contact
                   </button>
-                  <span className={styles.credits}>
-                    {item?.credit_score} Credits
-                  </span>
+
+                  <div
+                    className={styles.saveBtnBox}
+                    style={{ position: "relative" }}
+                  >
+                    <button
+                      style={{
+                        position: "absolute",
+                      }}
+                      className={styles.saveBtn}
+                      onClick={() => handleUnArchive(item)}
+                    >
+                      {unarchiveLoader === item.id ? (
+                        <Spin
+                          indicator={
+                            <LoadingOutlined spin style={{ color: "white" }} />
+                          }
+                          size="small"
+                        />
+                      ) : (
+                        "Unarchive"
+                      )}
+                    </button>
+                  </div>
+                  <div className={styles.credits_wrapper}>
+                    <span className={styles.credits}>
+                      {item?.credit_score} Credits
+                    </span>
+                  </div>
 
                   <div className={styles.mainText}>
                     <div>ACT FAST</div>{" "}

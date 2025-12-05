@@ -13,6 +13,7 @@ const initialState = {
   getlocationData: [],
   archivedLeadData: [],
   archivedLeads: [],
+  unArchivedLeads: [],
   autoBidList: [],
   removeLoader: false,
   bidListLoader: false,
@@ -353,6 +354,26 @@ export const archivePendingLead = (archiveData) => {
       }
     } catch (error) {
       console.error("Archive lead error:", error);
+    } finally {
+      dispatch(setleadPreferencesListLoader(false));
+    }
+  };
+};
+
+export const unarchivePendingLead = (unarchiveData) => {
+  return async (dispatch) => {
+    dispatch(setleadPreferencesListLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/unarchive-pending-lead`,
+        unarchiveData
+      );
+
+      if (response) {
+        dispatch(setUnarchivedLeadData(response?.data?.data));
+      }
+    } catch (error) {
+      console.error("Unarchive lead error:", error);
     } finally {
       dispatch(setleadPreferencesListLoader(false));
     }
@@ -1135,6 +1156,9 @@ const leadSettingSlice = createSlice({
     },
     setArchivedLeadList: (state, action) => {
       state.archivedLeads = action.payload;
+    },
+    setUnarchivedLeadData: (state, action) => {
+      state.unArchivedLeads = action.payload;
     },
 
     setAutoBidData(state, action) {
