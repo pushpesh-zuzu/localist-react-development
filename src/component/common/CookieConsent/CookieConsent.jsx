@@ -30,7 +30,7 @@ const CookieConsent = () => {
   // Save Preferences
   const handleSavePreferences = ({ essential, nonEssential }) => {
     const finalValue = nonEssential ? "granted" : "denied";
-
+    if (typeof window === "undefined") return;
     localStorage.setItem("user-consent", finalValue);
     window.uetq.push("consent", "update", { ad_storage: finalValue });
 
@@ -56,7 +56,7 @@ const CookieConsent = () => {
                 my experience, serve me relevant content, and improve Localists
                 products and services. By clicking ‘Accept’ I agree to this, as
                 further described in the Localists Cookie Policy. I can reject
-                non-essential cookies by clicking ‘Decline’.
+                non-essential cookies by clicking ‘Manage Preferences’.
                 {/* <a 
                   href="http://localists.com/en/gb/cookie-policy" 
                   target="_blank" 
