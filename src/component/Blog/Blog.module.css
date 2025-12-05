@@ -1,6 +1,5 @@
 .blogContainer {
   font-family: "Inter", sans-serif;
-  font-weight: 900;
 }
 
 .blogHeader {
@@ -65,7 +64,7 @@
 
 .headerContent h1 {
   font-size: 50px;
-  font-weight: 800;
+  font-weight: 900;
   text-align: start;
   line-height: 50px;
   margin-top: 16px;
@@ -186,7 +185,7 @@ h4 {
   }
   .headerContent h1 {
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 900;
     text-align: start;
     line-height: 40px;
     margin-top: 16px;
@@ -241,7 +240,7 @@ h4 {
   }
   .headerContent h1 {
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 900;
     text-align: start;
     line-height: 30px;
     margin-top: 16px;
