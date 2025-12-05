@@ -328,30 +328,6 @@ const MyResponse = () => {
               </div>
 
               <div className={styles.jobDetails}>
-                <div
-                  className={styles.saveBtnBox}
-                  style={{ position: "relative" }}
-                >
-                  <button
-                    style={{
-                      position: "absolute",
-                    }}
-                    className={styles.saveBtn}
-                    onClick={() => handleArchive(item)}
-                  >
-                    {archiveLoader === item.id ? (
-                      <Spin
-                        indicator={
-                          <LoadingOutlined spin style={{ color: "white" }} />
-                        }
-                        size="small"
-                      />
-                    ) : (
-                      "Archive"
-                    )}
-                  </button>
-                </div>
-
                 <div className={styles.badges}>
                   {item?.is_phone_verified == 1 && (
                     <span className={styles.verified}>
@@ -414,6 +390,30 @@ const MyResponse = () => {
                   </>
                 )}
 
+                <div
+                  className={styles.saveBtnBox}
+                  style={{ position: "relative" }}
+                >
+                  <button
+                    style={{
+                      position: "absolute",
+                    }}
+                    className={styles.saveBtn}
+                    onClick={() => handleArchive(item)}
+                  >
+                    {archiveLoader === item.id ? (
+                      <Spin
+                        indicator={
+                          <LoadingOutlined spin style={{ color: "white" }} />
+                        }
+                        size="small"
+                      />
+                    ) : (
+                      "Archive"
+                    )}
+                  </button>
+                </div>
+
                 <div className={styles.responseStatus}>
                   Responded {moment().diff(moment(item?.created_at), "days")}d
                   ago
@@ -434,6 +434,29 @@ const MyResponse = () => {
               </div>
 
               <div className={styles.leadAction}>
+                <div
+                  className={styles.saveBtnBox}
+                  style={{ position: "relative", paddingBottom: "30px" }}
+                >
+                  <button
+                    style={{
+                      position: "absolute",
+                    }}
+                    className={styles.saveBtn}
+                    onClick={() => handleArchive(item)}
+                  >
+                    {archiveLoader === item.id ? (
+                      <Spin
+                        indicator={
+                          <LoadingOutlined spin style={{ color: "white" }} />
+                        }
+                        size="small"
+                      />
+                    ) : (
+                      "Archive"
+                    )}
+                  </button>
+                </div>
                 <div className={styles.responseStatus}>
                   Responded {moment().diff(moment(item?.created_at), "days")}d
                   ago

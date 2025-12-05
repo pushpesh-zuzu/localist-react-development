@@ -89,7 +89,7 @@
   border-left: 1px solid #d9d9d9;
   border-right: 1px solid #d9d9d9;
   padding: 0 40px;
-  justify-content: center;
+  justify-content: start;
   /* padding: 0 73px 0 44px; */
 }
 .selectBox {
@@ -263,7 +263,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding-bottom: 24px;
+  padding-bottom: 12px;
 }
 .saveBtnBox img {
   margin-right: 4px;
@@ -271,7 +271,7 @@
 .saveBtn {
   background-color: var(--primary-color);
   color: #ffffff;
-  padding: 5px 10px;
+  padding: 7px 15px;
   border-radius: 20px;
   border: none;
   cursor: pointer !important;
