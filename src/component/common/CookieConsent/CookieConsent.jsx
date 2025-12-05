@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./CookieConsent.module.css";
+import CookiesConsentPreference from "./CookiesConsentPreference";
 
 const CookieConsent = () => {
-  const [show, setShow] = useState(false);
+  const [showBanner, setShowBanner] = useState(false);
+  const [showPreferences, setShowPreferences] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -10,24 +12,33 @@ const CookieConsent = () => {
     const userConsent = localStorage.getItem("user-consent");
 
     if (!userConsent) {
-      setShow(true);
+      setShowBanner(true);
     }
+
     window.uetq = window.uetq || [];
     window.uetq.push("consent", "default", { ad_storage: "denied" });
   }, []);
 
-  const handleConsent = (value) => {
+  const handleAcceptAll = () => {
     if (typeof window === "undefined") return;
-
-    localStorage.setItem("user-consent", value);
-
-    window.uetq = window.uetq || [];
-    window.uetq.push("consent", "update", { ad_storage: value });
-
-    setShow(false);
+    localStorage.setItem("user-consent", "granted");
+    window.uetq.push("consent", "update", { ad_storage: "granted" });
+    setShowBanner(false);
+    setShowPreferences(false);
   };
 
-  if (!show) return null;
+  // Save Preferences
+  const handleSavePreferences = ({ essential, nonEssential }) => {
+    const finalValue = nonEssential ? "granted" : "denied";
+
+    localStorage.setItem("user-consent", finalValue);
+    window.uetq.push("consent", "update", { ad_storage: finalValue });
+
+    setShowPreferences(false);
+    setShowBanner(false);
+  };
+
+  if (!showBanner) return null;
 
   return (
     <>
@@ -59,14 +70,12 @@ const CookieConsent = () => {
             </div>
 
             <div className={styles.rightSection}>
-              <button
-                onClick={() => handleConsent("granted")}
-                className={styles.acceptButton}
-              >
+              <button onClick={handleAcceptAll} className={styles.acceptButton}>
                 Accept All Cookies
               </button>
+
               <button
-                onClick={() => handleConsent("denied")}
+                onClick={() => setShowPreferences(true)}
                 className={styles.rejectButton}
               >
                 Manage Preferences
@@ -75,6 +84,14 @@ const CookieConsent = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {showPreferences && (
+        <CookiesConsentPreference
+          onClose={() => setShowPreferences(false)}
+          onSave={handleSavePreferences}
+        />
+      )}
     </>
   );
 };
