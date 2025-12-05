@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./BidsList.module.css";
 import GreenTickIcon from "../../../../../assets/Images/GreenTickIcon.svg";
 import AutoBidLocationIcon from "../../../../../assets/Images/AutoBidLocationIcon.svg";
@@ -285,6 +285,31 @@ const BidsList = () => {
     dispatch(ratingFilterApi(ratingData));
   };
 
+  const titleRef = useRef(null);
+  const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth > 480) return; // mobile only
+
+    const handleScroll = () => {
+      if (!titleRef.current) return;
+
+      // element ki position get karo
+      const elementTop = titleRef.current.getBoundingClientRect().top;
+
+      // Jab element top se 70px par pahunch jaye → fixed
+      if (elementTop <= 70) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -549,10 +574,19 @@ const BidsList = () => {
                 )}
               </div>
             </div>
-            <div className={styles.requestMatchBox}>
+            <div ref={titleRef} className={styles.requestMatchBox}>
               {matchingLength > 0 && (
+                // <button
+                //   className={styles.requestBtnMatchBox}
+                //   onClick={handleMultple}
+                //   disabled={isButtonDisabled}
+                // >
+                //   Request Your 5 Top Matches Here
+                // </button>
                 <button
-                  className={styles.requestBtnMatchBox}
+                  className={`${styles.requestBtnMatchBox} ${
+                    isFixed ? styles.fixedRequestBtn : ""
+                  }`}
                   onClick={handleMultple}
                   disabled={isButtonDisabled}
                 >

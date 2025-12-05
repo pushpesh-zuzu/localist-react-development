@@ -11,23 +11,25 @@ import {
   purchaseTypeStatusApi,
   setLeadListProfileLoader,
   getSellerNotesApi,
+  archivePendingLead,
 } from "../../store/LeadSetting/leadSettingSlice";
 import BlueSmsIcon from "../../assets/Images/Leads/BlueSmsIcon.svg";
 import BluePhoneIcon from "../../assets/Images/Leads/BluePhoneIcon.svg";
 import VerifiedPhoneIcon from "../../assets/Images/Leads/VerifiedPhoneIcon.svg";
 import AdditionalDetailsIcon from "../../assets/Images/Leads/AdditionalDetailsIcon.svg";
 import FrequentUserIcon from "../../assets/Images/Leads/FrequentUserIcon.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import HiredImg from "../../assets/Images/MyResponse/HiredBtnImg.svg";
 import HiredClickImg from "../../assets/Images/MyResponse/RightClickHiredImg.svg";
 import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
-import { Select } from "antd";
+import { Select, Spin } from "antd";
 import moment from "moment";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const purchaseOptions = [
   "All Purchase Types",
@@ -42,6 +44,8 @@ const MyResponse = () => {
   const [selectedTab, setSelectedTab] = useState("pending");
   const [selectedLead, setSelectedLead] = useState(null);
   const [purchaseType, setPurchaseType] = useState("All Purchase Types");
+
+  const [archiveLoader, setArchiveLoader] = useState(null);
 
   const { userToken } = useSelector((state) => state.auth);
   const { registerData } = useSelector((state) => state.findJobs);
@@ -167,6 +171,22 @@ const MyResponse = () => {
     }
   };
 
+  const handleArchive = (item) => {
+    setArchiveLoader(item.id);
+
+    const payload = {
+      lead_id: item?.id,
+      customer_id: item?.customer_id,
+    };
+
+    dispatch(archivePendingLead(payload)).then((res) => {
+      showToast("success", "Lead archived successfully!");
+
+      setArchiveLoader(null);
+      dispatch(getPendingLeadDataApi({ user_id }));
+    });
+  };
+
   return (
     <div className={styles.maincontainer}>
       <div className={styles.mainTextBox}>
@@ -257,6 +277,10 @@ const MyResponse = () => {
         </div>
       </div>
 
+      <Link to="/sellers/leads/archive-leads" className={styles.archive_leads}>
+        Archive Leads
+      </Link>
+
       {getLeadsToDisplay()?.length ? (
         getLeadsToDisplay()?.map((item, idx) => (
           <div key={idx}>
@@ -304,6 +328,32 @@ const MyResponse = () => {
               </div>
 
               <div className={styles.jobDetails}>
+                <div
+                  className={styles.saveBtnBox}
+                  style={{ position: "relative" }}
+                >
+                  <button
+                    style={{
+                      position: "absolute",
+                      right: "0px",
+                      top: "-16px",
+                    }}
+                    className={styles.saveBtn}
+                    onClick={() => handleArchive(item)}
+                  >
+                    {archiveLoader === item.id ? (
+                      <Spin
+                        indicator={
+                          <LoadingOutlined spin style={{ color: "white" }} />
+                        }
+                        size="small"
+                      />
+                    ) : (
+                      "Archive"
+                    )}
+                  </button>
+                </div>
+
                 <div className={styles.badges}>
                   {item?.is_phone_verified == 1 && (
                     <span className={styles.verified}>

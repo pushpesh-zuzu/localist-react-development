@@ -792,6 +792,18 @@
     cursor: default;
   }
 
+  .fixedTitle {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
   .firstLetterSpan {
     display: none !important;
   }
@@ -1192,5 +1204,31 @@
     background-color: #ffffff;
     color: #000000;
     font-size: 8px;
+  }
+}
+
+/* Normal button */
+
+/* Jab scroll karte hi 70px par aaye → fixed ho jaye */
+@media (max-width: 480px) {
+  .requestBtnMatchBox {
+    width: 100%;
+    padding: 12px 14px;
+    /* background: #2165ec; */
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    /* transition: all 0.2s ease; */
+  }
+  .fixedRequestBtn {
+    position: fixed;
+    top: 70px;
+    left: 5%;
+    width: 90%;
+    z-index: 999;
+    border-radius: 8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   }
 }

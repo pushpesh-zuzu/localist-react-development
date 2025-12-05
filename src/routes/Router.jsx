@@ -75,6 +75,7 @@ import { levelFourLocationRoutes } from "./levelFourRoute";
 import MultiStepTreeSurgeon from "../component/MultiStepForm/MultiStepTreeSurgeon";
 import MultiStepRoofingNew from "../component/MultiStepForm/MultiStepRoofingNew";
 import Blog from "../component/Blog/Blog";
+import ArchiveLeads from "../component/ArchiveLeads/ArchiveLeads";
 // const MultiStepRoofingPage = lazy(() =>
 //   import("../pages/MultiStepRoofingPage")
 // );
@@ -601,6 +602,14 @@ const routes = [
         element: (
           <ProtectedRoute>
             <MyResponse />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/sellers/leads/archive-leads",
+        element: (
+          <ProtectedRoute>
+            <ArchiveLeads />
           </ProtectedRoute>
         ),
       },

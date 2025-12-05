@@ -11,6 +11,8 @@ const initialState = {
   leadRequestLoader: false,
   leadRequestList: [],
   getlocationData: [],
+  archivedLeadData: [],
+  archivedLeads: [],
   autoBidList: [],
   removeLoader: false,
   bidListLoader: false,
@@ -336,6 +338,47 @@ export const getLocationLead = (getlocationData) => {
     }
   };
 };
+
+export const archivePendingLead = (archiveData) => {
+  return async (dispatch) => {
+    dispatch(setleadPreferencesListLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/archive-pending-lead`,
+        archiveData
+      );
+
+      if (response) {
+        dispatch(setArchivedLeadData(response?.data?.data));
+      }
+    } catch (error) {
+      console.error("Archive lead error:", error);
+    } finally {
+      dispatch(setleadPreferencesListLoader(false));
+    }
+  };
+};
+
+export const getArchivedLeads = (archiveData) => {
+  return async (dispatch) => {
+    dispatch(setleadPreferencesListLoader(true));
+    try {
+      const response = await axiosInstance.post(
+        `users/get-archive-leads`,
+        archiveData
+      );
+
+      if (response) {
+        dispatch(setArchivedLeadList(response?.data?.data));
+      }
+    } catch (error) {
+      console.error("Get archived leads error:", error);
+    } finally {
+      dispatch(setleadPreferencesListLoader(false));
+    }
+  };
+};
+
 export const getAutoBid = (bidData) => {
   return async (dispatch) => {
     dispatch(setAutoBidListLoader(true));
@@ -1087,6 +1130,13 @@ const leadSettingSlice = createSlice({
     setGetLocationData(state, action) {
       state.getlocationData = action.payload;
     },
+    setArchivedLeadData(state, action) {
+      state.archivedLeadData = action.payload;
+    },
+    setArchivedLeadList: (state, action) => {
+      state.archivedLeads = action.payload;
+    },
+
     setAutoBidData(state, action) {
       state.autoBidList = action.payload;
     },
@@ -1236,6 +1286,7 @@ export const {
   setSaveLaterListLoader,
   setCreditsPlanList,
   setFilterWiseData,
+  setArchivedLeadList,
   setProfileLeadRequestListData,
   setGetCreditListLoader,
   setAutoBidLoader,
