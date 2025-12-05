@@ -60,17 +60,16 @@ const CookieConsent = () => {
 
             <div className={styles.rightSection}>
               <button
-                onClick={() => handleConsent("denied")}
-                className={styles.rejectButton}
-              >
-                Declined
-              </button>
-
-              <button
                 onClick={() => handleConsent("granted")}
                 className={styles.acceptButton}
               >
                 Accept All Cookies
+              </button>
+              <button
+                onClick={() => handleConsent("denied")}
+                className={styles.rejectButton}
+              >
+                Manage Preferences
               </button>
             </div>
           </div>
