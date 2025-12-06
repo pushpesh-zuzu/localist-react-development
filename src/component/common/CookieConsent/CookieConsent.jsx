@@ -16,12 +16,17 @@ const CookieConsent = () => {
 
     const userConsent = localStorage.getItem("user-consent");
 
+    let timer;
+
     if (!userConsent) {
-      setShowBanner(true);
+      timer = setTimeout(() => {
+        setShowBanner(true);
+      }, 500); // Delay to avoid LCP
     }
 
     window.uetq = window.uetq || [];
     window.uetq.push("consent", "default", { ad_storage: "denied" });
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAcceptAll = () => {
