@@ -1,8 +1,3 @@
-/**
- * PERFORMANCE NOTE:
- * This component is position:fixed and shouldn't affect LCP or CLS.
- * Keep it simple - show immediately when no consent is found.
- */
 import { useEffect, useState } from "react";
 import styles from "./CookieConsent.module.css";
 import CookiesConsentPreference from "./CookiesConsentPreference";
@@ -16,17 +11,12 @@ const CookieConsent = () => {
 
     const userConsent = localStorage.getItem("user-consent");
 
-    let timer;
-
     if (!userConsent) {
-      timer = setTimeout(() => {
-        setShowBanner(true);
-      }, 500); // Delay to avoid LCP
+      setShowBanner(true);
     }
 
     window.uetq = window.uetq || [];
     window.uetq.push("consent", "default", { ad_storage: "denied" });
-    return () => clearTimeout(timer);
   }, []);
 
   const handleAcceptAll = () => {
