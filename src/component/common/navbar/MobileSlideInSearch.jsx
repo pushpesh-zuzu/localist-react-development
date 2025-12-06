@@ -17,6 +17,9 @@ export default function MobileSlideInSearch({
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchInputRef = useRef(null);
   const { lang, country } = useParams();
+    const currentLang = lang || "en";
+  const currentCountry = country || "gb";
+
   const navigate = useNavigate()
 
   const closeSearch = () => {
@@ -38,7 +41,7 @@ export default function MobileSlideInSearch({
    
           const matchedRoute = serviceRouteMap[serviceItem.id];
       if (matchedRoute) {
-        navigate(`/${lang}/${country}${matchedRoute}`); 
+        navigate(`/${currentLang}/${currentCountry}${matchedRoute}`); 
          closeSearch() // go to the route
       } 
   };

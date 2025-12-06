@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./footer.module.css";
 // import logo from "../../../assets/Images/footerLogo.svg";
-import logo from "../../../assets/Images/logo.png";
+import logo from "../../../assets/Images/logo.webp";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import linkedinsocialicon from "../../../assets/Icons/linkedinsocialicon.png";
 import Xsocialicon from "../../../assets/Icons/Xsocialicon.png";
@@ -144,7 +144,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           {/* <Link to={`/${lang}/${country}`} className={styles.link}> */}
           <div className={styles.logo}>
-            <img src={logo} alt="Localist Logo" />
+            <img src={logo} alt="Localist Logo" loading="eager" />
           </div>
           {/* </Link> */}
           <p className={styles.footerDesc}>
