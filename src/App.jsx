@@ -114,7 +114,7 @@ function App({ initialUrl, hostname, createRouterFactory }) {
           <LazyToastContainer />
         </React.Suspense>
       )}
-      {typeof window !== undefined && showCookieBanner && <CookieConsent />}{" "}
+      {typeof window !== "undefined" && showCookieBanner && <CookieConsent />}{" "}
     </>
   );
 }
