@@ -1,3 +1,8 @@
+/**
+ * PERFORMANCE NOTE:
+ * This component is position:fixed and shouldn't affect LCP or CLS.
+ * Keep it simple - show immediately when no consent is found.
+ */
 import { useEffect, useState } from "react";
 import styles from "./CookieConsent.module.css";
 import CookiesConsentPreference from "./CookiesConsentPreference";

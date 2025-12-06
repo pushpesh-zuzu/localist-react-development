@@ -1,3 +1,30 @@
+/**
+ * COMPONENT OPTIMIZATION GUIDE - Tree-shakeable imports
+ *
+ * ANTD (Ant Design):
+ * Instead of: import { Button, Input } from "antd";
+ * Use: import Button from "antd/es/button";
+ *      import Input from "antd/es/input";
+ * This enables tree-shaking and reduces bundle size by ~60%.
+ *
+ * FRAMER-MOTION:
+ * Instead of: import { motion, AnimatePresence } from "framer-motion";
+ * Use: import { LazyMotion, domAnimation, m } from "framer-motion";
+ *      <LazyMotion features={domAnimation}>
+ *        <m.div animate={{ opacity: 1 }} />
+ *      </LazyMotion>
+ * This reduces framer-motion bundle from ~70KB to ~15KB.
+ *
+ * DAYJS (replacement for moment):
+ * Import from: import dayjs from '../utils/dayjs';
+ * The utils/dayjs.js file has all necessary plugins pre-configured.
+ * dayjs is ~2KB vs moment's ~70KB.
+ *
+ * SLIDER LIBRARY:
+ * Using keen-slider (lightweight) instead of react-slick.
+ * slick-carousel CSS is kept for backward compatibility with existing styles.
+ */
+
 /* Fonts are loaded via index.html to avoid duplication and FOUC */
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";

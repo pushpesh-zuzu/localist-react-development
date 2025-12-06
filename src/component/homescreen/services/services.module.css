@@ -35,16 +35,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+/* PERFORMANCE: Added min-height to prevent CLS */
 .card {
   width: 285px;
   height: 208px;
   position: relative;
+  min-height: 208px;
 }
 
 .image {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  aspect-ratio: 285 / 200;
 }
 
 .title {

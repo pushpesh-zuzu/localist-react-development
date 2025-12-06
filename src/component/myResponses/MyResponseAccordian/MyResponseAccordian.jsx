@@ -1,3 +1,7 @@
+/**
+ * DEPENDENCY OPTIMIZATION: moment → dayjs
+ * dayjs is ~2KB vs moment's ~70KB, significantly reducing bundle size.
+ */
 import { useEffect, useState } from "react";
 import styles from "./MyResponseAccordian.module.css";
 import hirImg from "../../../assets/Images/MyResponse/hiringIcon.svg";
@@ -26,7 +30,7 @@ import {
 } from "../../../store/LeadSetting/leadSettingSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "../../../utils";
-import moment from "moment";
+import dayjs from "../../../utils/dayjs";
 import LeadMap from "../LeadMap/LeadMap";
 import { Spin, Select } from "antd";
 
@@ -219,9 +223,9 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
       });
     }
   };
-  const createdDate = moment(profileLeadViewData?.created_at);
-  const today = moment();
-  const daysAgo = today.diff(createdDate, "days");
+  const createdDate = dayjs(profileLeadViewData?.created_at);
+  const today = dayjs();
+  const daysAgo = today.diff(createdDate, "day");
   const handlePhoneOpen = (item) => {
     const phoneNumber = item?.phone;
     if (phoneNumber) {
@@ -457,10 +461,10 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                   <div className={styles.container}>
                     <div className={styles.date}>
                       {getActivies?.length > 0
-                        ? moment(
+                        ? dayjs(
                             getActivies[getActivies.length - 1]?.created_at
                           ).format("ddd D, MMMM")
-                        : moment(profileLeadViewData?.created_at).format(
+                        : dayjs(profileLeadViewData?.created_at).format(
                             "ddd D, MMMM"
                           )}
                     </div>
@@ -487,7 +491,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                         }
                         title={item.activity_name}
                         description={item.description}
-                        time={moment(item.updated_at).format("HH:mm")}
+                        time={dayjs(item.updated_at).format("HH:mm")}
                         isLast={index === getActivies.length - 1}
                       >
                         {item.children}
@@ -556,7 +560,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                           <div className={styles.noteActions}>
                             <span>
                               {item?.created_at
-                                ? moment
+                                ? dayjs
                                     .tz(item.created_at, "Europe/London")
                                     .format("YYYY-MM-DD HH:mm:ss")
                                 : ""}

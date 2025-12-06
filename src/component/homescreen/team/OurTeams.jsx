@@ -92,15 +92,25 @@ const OurTeams = () => {
       </div>
 
       <div className={styles.teamsRightCotainer}>
+        {/*
+         * PERFORMANCE: Added explicit width/height to prevent CLS.
+         * The aspect ratio matches the actual image dimensions.
+         */}
         <img
           src={teamMember}
           alt="team members"
           className={styles.teamMemberPic}
+          width={500}
+          height={600}
+          loading="lazy"
         />
         <img
           src={teamMemberPhone}
           alt="teamMemberPhone"
           className={styles.teamMemberPhone}
+          width={388}
+          height={388}
+          loading="lazy"
         />
       </div>
     </div>

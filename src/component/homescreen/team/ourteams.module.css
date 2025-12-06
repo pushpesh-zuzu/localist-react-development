@@ -64,14 +64,18 @@
 }
 
 
+/* PERFORMANCE: Added aspect-ratio to prevent CLS */
 .teamsRightCotainer img {
-    width: -webkit-fill-available;
+    width: 100%;
+    max-width: 500px;
     height: auto;
-
+    aspect-ratio: 500 / 600;
+    object-fit: cover;
 }
 
 .teamMemberPhone {
     display: none;
+    aspect-ratio: 388 / 388;
 }
 
 @media (max-width: 1080px) {
