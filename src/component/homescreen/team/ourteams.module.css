@@ -146,7 +146,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
     .start {
         font-size: 30px;
     }
@@ -171,7 +171,8 @@
     }
 
     .teamsRightCotainer {
-        height: auto;
+        width: 380px;
+        height: 450px;
         margin: 0;
         padding: 0;
     }
@@ -191,7 +192,8 @@
     }
 
     .teamsRightCotainer img {
-        width: 100%;
+         width: 380px;
+        height: 450px;
     }
 
     .teamsRightCotainer .teamMemberPic {
@@ -202,5 +204,18 @@
         display: block;
         width: 100%;
         height: auto;
+    }
+}
+
+@media (max-width: 420px) {
+     .teamsRightCotainer {
+        width: 180px;
+        height: 200px;
+        margin: 0;
+        padding: 0;
+    }
+    .teamsRightCotainer img {
+         width: 180px;
+        height: 180px;
     }
 }

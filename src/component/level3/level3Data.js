@@ -1,5 +1,5 @@
 import WhatYouNeedIcon from "./icon/WhatYouNeedIcon.jpg";
-import FreeQuotesIcon from "../../assets/Icons/FreeQuotesIcon.png";
+import FreeQuotesIcon from "../../assets/Icons/FreeQuotesIcon.webp";
 import accountant from "../../assets/Images/subcategory/accountant.png";
 import ReviewsImage from "../../assets/Images/subcategory/reviews_girl.png";
 import Driveway from "./serviceImg/Driveway-Installation.webp";

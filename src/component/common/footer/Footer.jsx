@@ -65,7 +65,7 @@ const FooterContent = () => (
         >
           <Option value="🇬🇧 UK">
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span>UK</span>
+              <span style={{ height: "28px", width: "16px" }}>UK</span>
               <img
                 src={UKFlag}
                 alt="UK Flag"
@@ -73,6 +73,7 @@ const FooterContent = () => (
                 height={24}
                 style={{
                   height: "16px",
+                  width: "24px",
                   marginTop: "auto",
                   marginBottom: "auto",
                 }}

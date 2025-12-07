@@ -13,6 +13,15 @@ import { Spin } from "antd";
 import { serviceRouteMap } from "../../../utils/allServicesRoute";
 import { useNavigate, useParams } from "react-router";
 import { setRedirectFromHome } from "../../../store/Buyer/BuyerSlice";
+import {
+  ArtificialGrassSlider,
+  DrivewayInstallationSlider,
+  FenceAndGateInsallationSlider,
+  LandscapingSlider,
+  PatioServicesSlider,
+  RoofingSlider,
+  TreeSurgeryHomeSlider,
+} from "../../level3/imagesServices";
 // import Modal from "./Modal";
 // const serviceData = [
 //   { title: "Personal Trainers", image: personalTrainers },
@@ -114,7 +123,29 @@ const PopularService = ({ closeModal, popularList = [], popularLoader }) => {
     },
     [AutoplayPlugin]
   );
+  const OPTIMIZED_IMAGES = {
+    // Replace these IDs with your actual service IDs
+    52: PatioServicesSlider,
+    54: ArtificialGrassSlider,
+    49: FenceAndGateInsallationSlider,
+    51: DrivewayInstallationSlider,
+    112: TreeSurgeryHomeSlider,
+    43: LandscapingSlider,
+    113: RoofingSlider,
+  };
+  const getOptimizedImage = (service) => {
+    const serviceKey = service.id;
 
+    // Check if optimized image exists
+    if (OPTIMIZED_IMAGES[serviceKey]) {
+      return OPTIMIZED_IMAGES[serviceKey];
+    }
+
+    // Fallback to API image or default banner
+    return service.banner_image
+      ? `${BASE_URL_IMAGE}${service.banner_image}`
+      : imgBanner;
+  };
   return (
     <>
       <div className={styles.container}>
@@ -145,11 +176,7 @@ const PopularService = ({ closeModal, popularList = [], popularLoader }) => {
                     >
                       <div style={{ padding: "9px", borderRadius: "20px" }}>
                         <img
-                          src={
-                            service.banner_image
-                              ? `${BASE_URL_IMAGE}${service.banner_image}`
-                              : imgBanner
-                          }
+                          src={getOptimizedImage(service)}
                           alt={service.name}
                           className={styles.image}
                         />

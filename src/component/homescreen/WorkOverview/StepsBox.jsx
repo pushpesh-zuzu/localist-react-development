@@ -5,7 +5,7 @@ const StepsBox = ({ step }) => {
   return (
     <div className={styles.stepContainer}>
       <div className={styles.descriptionIcon}>
-        <img src={step.icon} width={45} height={45} loading="eager" alt="Step Icon" />
+        <img src={step.icon} width={45} height={45} loading="lazy" alt="Step Icon" />
       </div>
       <div className={styles.stepDescription}>{step.description}</div>
     </div>

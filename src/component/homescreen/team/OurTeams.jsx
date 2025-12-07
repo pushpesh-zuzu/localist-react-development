@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ourteams.module.css";
 import teamMember from "../../../assets/Images/teamMember.png";
-import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.png";
+import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.webp";
 import quotes from "../../../assets/Images/quote.svg";
 // import rating from "../../../assets/Images/ratings.svg";
 // import dotSlider from "../../../assets/Images/dotSlider.svg";
@@ -110,7 +110,7 @@ const OurTeams = () => {
           className={styles.teamMemberPhone}
           width={388}
           height={388}
-          loading="lazy"
+          loading="eager"
         />
       </div>
     </div>

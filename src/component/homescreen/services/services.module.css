@@ -159,8 +159,12 @@
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5); 
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-    
-  
+  transition: opacity 0.3s ease-in-out;
+  background-color: #f0f0f0;
+
+}
+.serviceImage.loaded {
+  opacity: 1;
 }
 .serviceCard {
   transition: transform 0.3s ease;
@@ -201,6 +205,7 @@
 
 .categoryTitleText {
   color: var(--primary-color);
+  text-align: center;
 }
 
 .blackText {
@@ -285,6 +290,11 @@
   .container {
     margin-bottom: 25px;
   }
+   .serviceImage {
+  min-width: 180PX;
+    height: 150px;
+  }
+
   .sliderWrapper {
     height: 165px;
   }
@@ -377,6 +387,7 @@
     height: 170px;
   }
  .serviceImage {
+  min-width: 140PX;
     height: 117px;
   }
   .card {
