@@ -8,7 +8,6 @@ const LazyToastContainer = React.lazy(() =>
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet-async";
 import FullScreenSpinner from "./component/common/fullScreenSpinner/FullScreenSpinner";
-import CookieConsent from "./component/common/CookieConsent/CookieConsent";
 
 function App({ initialUrl, hostname, createRouterFactory }) {
   const { selectedServiceFormData, registerStep } = useSelector(
@@ -16,18 +15,6 @@ function App({ initialUrl, hostname, createRouterFactory }) {
   );
   const { userToken } = useSelector((state) => state.auth);
   const { registerToken } = useSelector((state) => state.findJobs);
-  const [showCookieBanner, setShowCookieBanner] = useState(false);
-  useEffect(() => {
-    let timer;
-
-    timer = setTimeout(() => {
-      setShowCookieBanner(true);
-    }, 4000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
 
   useEffect(() => {
     if ([1, 2, 3, 4].includes(registerStep)) {
@@ -114,7 +101,6 @@ function App({ initialUrl, hostname, createRouterFactory }) {
           <LazyToastContainer />
         </React.Suspense>
       )}
-      {typeof window !== "undefined" && showCookieBanner && <CookieConsent />}{" "}
     </>
   );
 }

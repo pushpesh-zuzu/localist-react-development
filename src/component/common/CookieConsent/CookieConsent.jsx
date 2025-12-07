@@ -12,7 +12,9 @@ const CookieConsent = () => {
     const userConsent = localStorage.getItem("user-consent");
 
     if (!userConsent) {
-      setShowBanner(true);
+      setTimeout(() => {
+        setShowBanner(true);
+      }, 4000);
     }
 
     window.uetq = window.uetq || [];
@@ -44,7 +46,7 @@ const CookieConsent = () => {
     <>
       <div className={styles.overlay} />
 
-      <div className={styles.container}>
+      <div className={`${styles.container} ${showBanner ? styles.show : ""}`}>
         <div className={styles.wrapper}>
           <div className={styles.content}>
             <div className={styles.leftSection}>

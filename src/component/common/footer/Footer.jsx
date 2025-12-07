@@ -67,13 +67,15 @@ const FooterContent = () => (
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <span>UK</span>
               <img
+                src={UKFlag}
+                alt="UK Flag"
+                width={16}
+                height={24}
                 style={{
                   height: "16px",
                   marginTop: "auto",
                   marginBottom: "auto",
                 }}
-                src={UKFlag}
-                alt="UK Flag"
               />
             </div>
           </Option>
