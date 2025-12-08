@@ -245,7 +245,7 @@ export const megaMenu = [
       },
       {
         id: 52,
-        name: "Patio Services",
+        name: "Patio Laying",
         path: "patio-layers-near-me",
         children: locationData.map((loc) => `Patio Installers in ${loc}`),
       },

@@ -16,8 +16,8 @@ import weddingIcon from "../assets/Images/wine.png";
 import businessIcon from "../assets/Images/building.png";
 import lessionIcon from "../assets/Images/ideas.png";
 import otherIcon from "../assets/Images/box.png";
-import formStep from "../assets/Images/formStep.png";
-import quoteStep from "../assets/Images/conactStep.png";
+import formStep from "../assets/Images/formStep.webp";
+import quoteStep from "../assets/Images/conactStep.webp";
 import compareStep from "../assets/Images/compareStep.svg";
 
 const services = [

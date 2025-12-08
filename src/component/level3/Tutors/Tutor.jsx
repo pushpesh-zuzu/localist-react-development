@@ -20,6 +20,7 @@ import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner"
 import Slider from "../../common/slider/Slider";
 import { useUserGeo } from "../../../utils/geo";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
+import FAQScript from "../../common/FAQScript/FAQScript";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -69,6 +70,7 @@ function Tutor() {
         <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
       <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TutorsNearMe} />
+      <FAQScript FAQ={faqData}/>
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

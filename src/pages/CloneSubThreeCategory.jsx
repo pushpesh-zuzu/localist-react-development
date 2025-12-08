@@ -41,6 +41,7 @@ import SearchAndFindAnAccountant from "../component/level3/SearchAndFindAnAccoun
 import FindServiceLevel3 from "../component/level3/FindServiceLevel3";
 import GetQuotesLevel3 from "../component/level3/GetQuotesLevel3";
 import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
+import FAQScript from "../component/common/FAQScript/FAQScript";
 
 const transformFenceInstallersData = (rawData, id) => {
   return rawData[id]?.map((region) => ({
@@ -102,6 +103,7 @@ const LevelThreePage = ({}) => {
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
         isRequiredBaseUrlinBreadcrum={false}
       />
+      <FAQScript FAQ={FrequentlyQuestion} />
       {/* <ServiceBannerWithBreadcrumb
         accountHeader={CONTENT_CONFIG_TOP[slug]?.accountHeader}
         title={CONTENT_CONFIG_TOP[slug]?.title}
@@ -119,10 +121,10 @@ const LevelThreePage = ({}) => {
         findingHeading={CONTENT_CONFIG_TOP[slug]?.findingHeading}
         breadcrumb={BREADCRUMB_CONFIG[slug]}
         bannerImage={CONTENT_CONFIG_BANNER[slug]?.banner}
-        para1={CONTENT_CONFIG[slug]?.para1}
-        para2={CONTENT_CONFIG[slug]?.para2}
-        para3={CONTENT_CONFIG[slug]?.para3}
-        para4={CONTENT_CONFIG[slug]?.para4}
+        para1={CONTENT_CONFIG[slug]?.para1 || ""}
+        para2={CONTENT_CONFIG[slug]?.para2 || ""}
+        para3={CONTENT_CONFIG[slug]?.para3 || ""}
+        para4={CONTENT_CONFIG[slug]?.para4 || ""}
         defaultService={LEVEL_THIRD_SERVICES_NAME[slug]}
         isNeedS={false}
       />
@@ -153,7 +155,7 @@ const LevelThreePage = ({}) => {
         title={CONTENT_CONFIG_TOP[slug]?.mainTitle}
       /> */}
       <Frequently FrequentlyQuestion={FrequentlyQuestion} />
-      {RELTED_PRICE?.length && (
+      {RELTED_PRICE?.length ? (
         <AveragePrice
           title={CONTENT_CONFIG_TOP[slug]?.avgPriceTitle}
           RELTED_PRICE={RELTED_PRICE}
@@ -162,6 +164,8 @@ const LevelThreePage = ({}) => {
           isSingular={CONTENT_CONFIG_TOP[slug]?.isSingular}
           monthlyText={CONTENT_CONFIG_TOP[slug]?.monthlyText}
         />
+      ) : (
+        ""
       )}
       <Slider
         sliderdata={RELATED_OTHER}

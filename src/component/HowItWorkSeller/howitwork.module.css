@@ -95,12 +95,10 @@
 .stepTitle {
   /* color: var(--primary-color); */
   font-size: 35px;
-  font-weight: 400;
   margin-bottom: 3.04px;
   position: relative;
   display: inline-block;
-  font-weight: 400;
-  font-style: Regular;
+  font-weight: 500;
   vertical-align: middle;
 }
 
@@ -243,7 +241,7 @@
   }
 
   .stepTitle {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .popover {

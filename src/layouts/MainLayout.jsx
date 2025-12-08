@@ -5,6 +5,7 @@ import MetaHelmet from "../component/common/helmet/metaHelmet";
 import { useEffect } from "react";
 import ScrollToTop from "../routes/ScrollToTop";
 import NavigationDetectorWithConfirmations from "../component/common/navigationDetected/NavigationDetectorWithConfirmations";
+import CookieConsent from "../component/common/CookieConsent/CookieConsent";
 
 const pageTitles = {
   "/": {
@@ -42,7 +43,7 @@ const pageTitles = {
   //   title: "How It Works | Localists",
   //   description: "",
   // },
-  
+
   "/sellers/create": {
     title: "Join Localists for Professionals | Free Sign-Up",
     description:
@@ -352,11 +353,14 @@ const MainLayout = () => {
     <div>
       <ScrollToTop />
       <Navbar />
-      {meta?.title && <MetaHelmet title={meta?.title} description={meta?.description} />}
+      {meta?.title && (
+        <MetaHelmet title={meta?.title} description={meta?.description} />
+      )}
       <main style={{ minHeight: "50vh", position: "relative", zIndex: 9 }}>
         <Outlet />
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

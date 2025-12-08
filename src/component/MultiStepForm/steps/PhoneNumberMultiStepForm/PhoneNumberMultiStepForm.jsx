@@ -157,6 +157,7 @@ const PhoneNumberMultiStepForm = ({
             value={phone}
             maxLength={10}
             onChange={handlePhoneChange}
+            autoComplete="off"
           />
           {errors?.phone && (
             <span style={{ color: "red" }} className={styles.errorMessage}>

@@ -25,7 +25,7 @@ const endpointCategoryMap = {
     "Landscaping",
     "Fence & Gate Installation",
     "Driveway Installation",
-    "Patio Services",
+    "Patio Laying",
     "Artificial Grass Installation",
     "Tree Surgery",
     "Gutter Cleaning",
@@ -56,7 +56,10 @@ const CloneCategory = ({ accountHeader }) => {
           `}
         </script>
       </Helmet>
-      <CalonicalTags bannerImage={Home} />
+      <CalonicalTags
+        bannerImage={Home}
+        breadcrumb={[{ title: "Home & Garden", path: "/home" }]}
+      />
       <div>
         <BannerWithBreadCrum
           header={accountHeader}
@@ -94,7 +97,7 @@ const CloneCategory = ({ accountHeader }) => {
               name: "Driveway Installation",
               path: "/driveway-installers-near-me",
             },
-            { name: "Patio Services", path: "/patio-layers-near-me" },
+            { name: "Patio Laying", path: "/patio-layers-near-me" },
             { name: "Landscaping", path: "/landscape-gardeners-near-me" },
             {
               name: "Artificial Grass Installation",

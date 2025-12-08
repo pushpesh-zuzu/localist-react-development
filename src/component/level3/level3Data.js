@@ -1,5 +1,5 @@
 import WhatYouNeedIcon from "./icon/WhatYouNeedIcon.jpg";
-import FreeQuotesIcon from "../../assets/Icons/FreeQuotesIcon.png";
+import FreeQuotesIcon from "../../assets/Icons/FreeQuotesIcon.webp";
 import accountant from "../../assets/Images/subcategory/accountant.png";
 import ReviewsImage from "../../assets/Images/subcategory/reviews_girl.png";
 import Driveway from "./serviceImg/Driveway-Installation.webp";
@@ -482,7 +482,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 2,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -520,7 +520,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 2,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -602,7 +602,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -640,7 +640,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -678,7 +678,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -710,7 +710,7 @@ const OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: Patio,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
@@ -1626,10 +1626,9 @@ const CONTENT_CONFIG = {
 
   "driveway-installers-near-me": {
     para1:
-      "Looking to give your car the VIP treatment? Then ditch the red carpet for a brand new concrete, asphalt or block paved driveway. From sleek style to solid strength - Localists connects you with vetted and verified driveway companies you can trust.",
+      "Bumps in life? inevitable. Bumps in your driveway? fixable. If you're looking to smooth things over with your driveway and give your car the VIP treatment, then ditch the red carpet for a brand new tarmac, resin or block paved driveway.",
     para2:
-      "From classic block paved driveways to modern resin driveway surfaces, we’ll only connect you with professionals who understand the job. No more endless scrolling or calling around. Just tell us your requirements, and we’ll do the rest.",
-    para3: "No fees, no catch, just expert help at no cost!",
+      "At localists, we connect you with local driveway contractors who can pamper your neglected driveway back to shape. Just give us a few details, and we'll get you up to 5 free quotes straight into your inbox. No cost. No obligation. No fuss. Just sit back and let us do the leg work for you. ",
   },
   "patio-layers-near-me": {
     para1:
@@ -1665,7 +1664,7 @@ const BREADCRUMB_CONFIG = {
   ],
   "patio-layers-near-me": [
     { title: "Home & Garden", path: "/home" },
-    { title: "Patio Services" }, // no path
+    { title: "Patio Laying" }, // no path
   ],
   "landscape-gardeners-near-me": [
     { title: "Home & Garden", path: "/home" },
@@ -1691,7 +1690,7 @@ const CONTENT_CONFIG_TOP = {
   },
   "driveway-installers-near-me": {
     findingHeading: "driveway contractors",
-    title: "Driveway Companies",
+    title: "Driveway Installers",
     mainTitle: "driveway installers",
     ctaText: "Driveway Installer",
     avgPriceTitle: "driveway installers",
@@ -1887,24 +1886,24 @@ const FIND_SERVICE_CONTENT = {
   "driveway-installers-near-me": [
     {
       type: "h2",
-      text: "Qualified driveway installers near you",
+      text: "Driveway Installers you can trust",
     },
     {
       type: "p",
-      text: "Whether it’s your first time planning a driveway, you’re upgrading an old design, or you’ve been let down by installers in the past, Localists is the right place for you. We connect you with trusted driveway contractors who deliver quality results every time. In just a few clicks, you’ll be matched with the best qualified specialists in your local area.",
+      text: "Getting work done on your property can massively increase it's value, but getting the wrong driveway contractor can do the opposite and leave you out of pocket. And the last thing you need is Dominic Littlewood or Rogue Traders on your doorstep! That's why with Localists, we only connect you with vetted and trusted driveway contractors. With all of their reviews from multiple platforms in one place, we make it easy for you to make the right decision for you and your driveway. With just a few details - we'll connect you with the highest quality, local driveway installers. ",
     },
     {
       type: "h2",
-      text: "Why hire driveway contractors through Localists",
+      text: "Why hire a driveway installer through Localists",
     },
     {
       type: "p",
-      text: "Hiring the right driveway professional shouldn’t be a guessing game. At Localists, we make the process simple by connecting you directly with local driveway contractors who are proven experts.",
+      text: "Hiring the right driveway installer can be risky business. But with Localists, we aim to eliminate that risk for you, by bringing vetted and verified driveway contractors to you. All of the driveway installers on our database undergo a rigerous internal assesment, and have to meet our quality criteria to get listed on our database.  So you're safe in the knowledge that any quotes you get are from legitimate driveway contractors. With Localists, we make it easy for you to check out each companies reviews too - collating each driveway companies reviews from multiple platforms, so no need to trapse across TrustPilot, Google Reviews or anywhere else as it's right here in one place.  In a nutshell, here are the key reasons you should get your new driveway through a company on Localists:",
     },
-    {
-      type: "p",
-      text: "We’ve helped hundreds of clients find trusted specialists for everything from minor repairs to complete driveway installation projects. Every professional on our platform is vetted for skill, reliability, and quality - so you can hire with confidence and get the perfect fit for your project - fast. Here’s why you should hire through Localists:",
-    },
+    // {
+    //   type: "p",
+    //   text: "We’ve helped hundreds of clients find trusted specialists for everything from minor repairs to complete driveway installation projects. Every professional on our platform is vetted for skill, reliability, and quality - so you can hire with confidence and get the perfect fit for your project - fast. Here’s why you should hire through Localists:",
+    // },
     {
       type: "uili",
       heading: "Streamlined hiring process:\u00A0",

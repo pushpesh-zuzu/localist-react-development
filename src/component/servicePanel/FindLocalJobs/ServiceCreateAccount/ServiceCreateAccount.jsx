@@ -275,6 +275,7 @@ const ServiceCreateAccount = () => {
           name="description"
           content={`Find trusted ${formattedTitle} near you. Tell us where you want to find new customers, share your coverage areas, and get matched with quality local leads today.`}
         />
+         <meta name="robots" content="noindex" />
       </Helmet>
       <div className={styles.parentContainer}>
         <div className={styles.container}>

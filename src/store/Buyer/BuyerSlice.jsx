@@ -602,6 +602,9 @@ const buyerSlice = createSlice({
     setQuestionsForProgress(state, action) {
       state.questionsForProgress = action.payload;
     },
+    resetProgress(state) {
+      state.questionsForProgress = [];
+    },
   },
 });
 
@@ -636,7 +639,8 @@ export const {
   setRequestUserPhone,
   setRedirectFromHome,
   setQuestionsForProgress,
-  setBuyerRequestInternalQuestion
+  setBuyerRequestInternalQuestion,
+  resetProgress
 } = buyerSlice.actions;
 
 export default buyerSlice.reducer;

@@ -176,14 +176,16 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   }, []);
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
 
       {localRequestId === null && (
         <div>
-          {isDesktop ? (
+          {typeof window !== "undefined" && isDesktop ? (
             <NavigationDetectorDesktop />
-          ) : (
+          ) : typeof window !== "undefined" ? (
             <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
           )}
         </div>
       )}
@@ -264,15 +266,17 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  serviceId={51}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  updateNumberStep={updateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    serviceId={51}
+                    setProgressPercentage={setProgressPercentage}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    updateNumberStep={updateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>

@@ -68,7 +68,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: '<strong>-- “the Website” –</strong> <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.',
+    text: '<strong>-- “the Website” –</strong> <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com/en/gb/" target="_blank" rel="noopener noreferrer">www.localists.com</a> or any successor platform operated by IMG.',
   },
   {
     type: "p",
@@ -457,7 +457,7 @@ const ContentForConsumers = () => {
   return (
     <>
       <h1 className={styles.mainHeading}>
-        Terms & Conditions <br />
+        Terms and Conditions <br />
         For Consumers
       </h1>
 

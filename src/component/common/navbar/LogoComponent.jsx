@@ -1,12 +1,12 @@
 import styles from "./navbar.module.css";
-import logo from "../../../assets/Images/logo.png";
+import logo from "../../../assets/Images/logo.webp";
 import downArrow from "../../../assets/Images/downarrow.svg";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Popover } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import arrowLeft from "../../../assets/Icons/megamenu/arrow-left.svg";
 import arrowIcon from "../../../assets/Icons/megamenu/arrow-right.svg";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { megaMenu } from "../../../constant/Megamenu";
 
@@ -32,6 +32,11 @@ const LogoComponent = () => {
   const currentCountry = country || "gb";
   const [isMobile, setIsMobile] = useState(false);
 
+  const closeTimeoutRef = useRef(null);
+  const openTimeoutRef = useRef(null);
+  const popoverRef = useRef(null);
+  const scrollCloseTimeoutRef = useRef(null);
+
   function getRouteForCategory(categoryName) {
     const routesMap = {
       "Home & Garden": "/home",
@@ -42,7 +47,7 @@ const LogoComponent = () => {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(typeof window !==undefined && window.innerWidth <= 768);
     };
 
     checkMobile();
@@ -75,7 +80,7 @@ const LogoComponent = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1020) {
+      if (typeof window !==undefined && window.innerWidth >= 1020) {
         setPlacement("bottomLeft");
       } else {
         setPlacement("bottom");
@@ -89,9 +94,15 @@ const LogoComponent = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   const handleClose = () => {
+    // Clear all timeouts
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+    if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+
     setShowSubMenu(false);
-    setMouseHover(false);
+    setMouseHover("");
     setShowbMenu(false);
     setShowThirdLevel(false);
     setSelectedSubcategory(null);
@@ -99,6 +110,67 @@ const LogoComponent = () => {
     setFilteRoute("");
     setSlectedThirdLevelRoute("");
   };
+
+  const handleOpen = () => {
+    // Clear close timeout when opening
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+    setShowbMenu(true);
+  };
+
+  const handleMouseEnterMenu = () => {
+    // Clear any pending close timeouts
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+    handleOpen();
+  };
+
+  const handleMouseLeaveMenu = () => {
+    // Set close timeout after 2.5 seconds
+    closeTimeoutRef.current = setTimeout(() => {
+      handleClose();
+    }, 2500); // 2.5 seconds
+  };
+
+  const handleSubMenuOpen = (item) => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+
+    if (item?.subcategory?.length > 0) {
+      setShowSubMenu(true);
+      setFilterItems(item.name);
+      setFilteRoute(item.path);
+    }
+  };
+
+  const handleSubMenuMouseEnter = (item) => {
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+    if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+
+    openTimeoutRef.current = setTimeout(() => {
+      handleSubMenuOpen(item);
+    }, 800);
+  };
+
+  const handleSubMenuMouseLeave = () => {
+    if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+    setMouseHover("");
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -106,7 +178,10 @@ const LogoComponent = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > 200 || Math.abs(currentScrollY - lastScrollY) > 50) {
-        handleClose();
+        if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);  
+        scrollCloseTimeoutRef.current = setTimeout(() => {
+          handleClose();
+        }, 2500);
       }
 
       lastScrollY = currentScrollY;
@@ -116,12 +191,21 @@ const LogoComponent = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
     };
   }, []);
 
   useEffect(() => {
     handleClose();
   }, [location.pathname]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+      if (openTimeoutRef.current) clearTimeout(openTimeoutRef.current);
+      if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+    };
+  }, []);
 
   const content = () => {
     const handleMouseEnter = useCallback((index) => setMouseHover(index), []);
@@ -131,12 +215,10 @@ const LogoComponent = () => {
 
     return (
       <div
+        ref={popoverRef}
         className={styles.popover_container}
-        onMouseLeave={() => {
-          setShowSubMenu(false);
-          setShowThirdLevel(false);
-          setShowbMenu(false);
-        }}
+        onMouseEnter={handleMouseEnterMenu}
+        onMouseLeave={handleMouseLeaveMenu}
       >
         <div className={styles.popover_wrap}>
           <AnimatePresence mode="wait">
@@ -166,8 +248,11 @@ const LogoComponent = () => {
                   <div
                     key={index}
                     className={styles.popover_content}
-                    onMouseEnter={() => handleMouseEnter(index)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={() => {
+                      handleMouseEnter(index);
+                      handleSubMenuMouseEnter(item);
+                    }}
+                    onMouseLeave={handleSubMenuMouseLeave}
                   >
                     <span className={styles.text_wrap}>
                       <img src={item?.icon} width={16} height={16} alt="icon" />
@@ -190,32 +275,19 @@ const LogoComponent = () => {
                     </span>
                     <img
                       onClick={() => {
-                        if (item?.subcategory?.length > 0) {
-                          setShowSubMenu(true);
-                          setFilterItems(item.name);
-                          setFilteRoute(item.path);
-                        }
+                        handleSubMenuOpen(item);
                       }}
                       src={arrowIcon}
                       width={8}
                       alt="arrow"
                       style={{
                         opacity: item?.subcategory?.length > 0 ? 1 : 0.5,
+                        cursor:
+                          item?.subcategory?.length > 0 ? "pointer" : "default",
                       }}
                     />
                   </div>
                 ))}
-                {/* later if need then uncomment */}
-                {/* {totalItems > 5 && (
-                  <div
-                    className={`${styles.popover_content} ${styles.toggleButton}`}
-                    onClick={handleToggle}
-                  >
-                    <span className={styles.text_wrap}>
-                      {isAllVisible ? "Show Less ▲" : "See More ▼"}
-                    </span>
-                  </div>
-                )} */}
               </motion.div>
             ) : showSubMenu && !showThirdLevel ? (
               <motion.div
@@ -227,7 +299,11 @@ const LogoComponent = () => {
               >
                 <div
                   className={styles.popover_back_explore}
-                  onClick={() => setShowSubMenu(false)}
+                  onClick={() => {
+                    setShowSubMenu(false);
+                    setFilterItems("");
+                    setFilteRoute("");
+                  }}
                 >
                   <img src={arrowLeft} width={24} alt="back" />
                   Back to Explore
@@ -262,8 +338,15 @@ const LogoComponent = () => {
                           <div
                             key={subIndex}
                             className={styles.popover_content}
-                            onMouseEnter={() => setMouseHover(subIndex)}
-                            onMouseLeave={() => setMouseHover("")}
+                            onMouseEnter={() => {
+                              setMouseHover(subIndex);
+                              if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+                              if (scrollCloseTimeoutRef.current) clearTimeout(scrollCloseTimeoutRef.current);
+                            }}
+                            onMouseLeave={() => {
+                              setMouseHover("");
+                              handleMouseLeaveMenu();
+                            }}
                           >
                             <span className={styles.text_wrap}>
                               <Link
@@ -295,27 +378,36 @@ const LogoComponent = () => {
       <img
         src={logo}
         alt="logo"
+        loading="eager"
         className={styles.mainLogo}
         onClick={(e) => {
           e.preventDefault();
-          window.location.href = "/en/gb/"; // reload + homepage redirect ek sath
+          window.location.href = "/en/gb/";
         }}
       />
 
       {!userToken?.remember_tokens && !registerData?.remember_tokens && (
         <>
           <Popover
-            onMouseEnter={() => setShowbMenu(true)}
+            onMouseEnter={handleMouseEnterMenu}
+            onMouseLeave={handleMouseLeaveMenu}
             placement={placement}
             open={showMenu}
             content={content}
             arrow={false}
             trigger="hover"
             className="popover_wrap"
-            onClick={() => setShowbMenu(true)}
             getPopupContainer={(trigger) => trigger.parentNode}
           >
-            <div className={styles.serviceContainer}>
+            <div 
+              className={styles.serviceContainer}
+              onClick={() => {
+                // Toggle on click for mobile
+                if (isMobile) {
+                  setShowbMenu(!showMenu);
+                }
+              }}
+            >
               <span className={styles.serviceText}>Explore Our Services</span>
               <span className={styles.serviceTextMobile}>Our Services</span>
               <img src={downArrow} alt="down-arrow" />

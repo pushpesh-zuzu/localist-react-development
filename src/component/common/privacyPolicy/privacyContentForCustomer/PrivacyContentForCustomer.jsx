@@ -14,7 +14,7 @@ export const professionalsTermsData = [
   },
   {
     type: "p",
-    text: `By accessing <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com" target="_blank" rel="noopener noreferrer">www.localists.com</a> or using our mobile application (together referred to as the “Services”), you agree to be bound by our Terms of Service, which include this Privacy Policy, our Terms of Use, and our Cookie Policy. You also acknowledge that your personal data may be collected, processed, and disclosed in line with this Privacy Policy. Unless otherwise defined within this Privacy Policy, any capitalized terms shall have the same meaning as provided in the Terms of Service. Please note that, in accordance with IMG’s Terms and Conditions, the Services must not be used by individuals under the age of 18.`,
+    text: `By accessing <a style="text-decoration:none; color:#00afe3;" href="https://www.localists.com/en/gb/" target="_blank" rel="noopener noreferrer">www.localists.com</a> or using our mobile application (together referred to as the “Services”), you agree to be bound by our Terms of Service, which include this Privacy Policy, our Terms of Use, and our Cookie Policy. You also acknowledge that your personal data may be collected, processed, and disclosed in line with this Privacy Policy. Unless otherwise defined within this Privacy Policy, any capitalized terms shall have the same meaning as provided in the Terms of Service. Please note that, in accordance with IMG’s Terms and Conditions, the Services must not be used by individuals under the age of 18.`,
   },
   {
     type: "p",

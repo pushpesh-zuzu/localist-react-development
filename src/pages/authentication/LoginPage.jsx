@@ -226,7 +226,7 @@ const LoginPage = () => {
           <br />
           <Text className="text">
             Looking for a service?{" "}
-            <Link to={`/${currentLang}/${currentCountry}`} className="linkText">
+            <Link to={`/${currentLang}/${currentCountry}/`} className="linkText">
               Get started
             </Link>
           </Text>

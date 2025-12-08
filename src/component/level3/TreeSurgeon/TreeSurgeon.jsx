@@ -19,6 +19,7 @@ import TreeSugeon from "../banners/TreeSugeon.jpg";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
+import FAQScript from "../../common/FAQScript/FAQScript";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -87,8 +88,12 @@ function TreeSurgeon() {
         <meta name="twitter:title" content={metaConfig?.title} />
         <meta property="og:description" content={metaConfig?.content} />
       </Helmet>
-      <CalonicalTags breadcrumb={breadcrumbConfig} bannerImage={TreeSugeon} isRequiredBaseUrlinBreadcrum={false} />
-
+      <CalonicalTags
+        breadcrumb={breadcrumbConfig}
+        bannerImage={TreeSugeon}
+        isRequiredBaseUrlinBreadcrum={false}
+      />
+      <FAQScript FAQ={faqData} />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

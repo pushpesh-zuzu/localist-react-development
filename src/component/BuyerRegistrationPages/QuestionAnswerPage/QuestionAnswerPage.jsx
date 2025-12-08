@@ -34,7 +34,9 @@ const QuestionAnswerPage = ({
   } = useSelector((state) => state.buyer);
   const { service, registerData } = useSelector((state) => state.findJobs);
   const { search } = useLocation();
-  const allParams = extractAllParams(search || window.location.search);
+  const allParams =
+    typeof window !== "undefined" &&
+    extractAllParams(search || window.location.search);
 
   const campaignid = allParams.gad_campaignid || "";
   const keyword = allParams.keyword || "";

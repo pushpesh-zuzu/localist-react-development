@@ -82,6 +82,22 @@ const OTPVerificationMultiStep = ({
       inputRefs.current[3].focus();
     }
   };
+  const updatedAnswers = Array.isArray(buyerRequest?.questions)
+    ? buyerRequest.questions.filter(Boolean) // remove undefined/null items
+    : [];
+
+  const hasQuestionNo = updatedAnswers.some(
+    (q) => q && typeof q === "object" && "question_no" in q
+  );
+
+  const answersToSend = hasQuestionNo
+    ? updatedAnswers.map((q) => {
+        if (!q || typeof q !== "object") return q;
+        const { question_no, ...rest } = q;
+        return rest;
+      })
+    : updatedAnswers;
+
   const handleSubmit = () => {
     const enteredOtp = otp.join("");
 
@@ -105,10 +121,7 @@ const OTPVerificationMultiStep = ({
         formData.append("city", citySerach || "");
         formData.append("phone", buyerRequest?.phone);
 
-        formData.append(
-          "questions",
-          JSON.stringify(buyerRequest?.questions || [])
-        );
+        formData.append("questions", JSON.stringify(answersToSend || []));
         formData.append("form_status", 1);
         formData.append("request_id", requestId);
         formData.append("user_id", requestUserId);
@@ -232,6 +245,7 @@ const OTPVerificationMultiStep = ({
           margin: "auto",
           padding: "5px 6px",
           borderRadius: "3px",
+          maxWidth: "450px",
         }}
       >
         <p

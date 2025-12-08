@@ -19,6 +19,7 @@ import GutterCleanerBanner from "../banners/GutterCleaner.webp";
 import { transformData } from "../../../utils/allServicesUtils";
 import FullScreenSpinner from "../../common/fullScreenSpinner/FullScreenSpinner";
 import CalonicalTags from "../../common/CalonicalTags/CalonicalTags";
+import FAQScript from "../../common/FAQScript/FAQScript";
 
 // Lazy-load heavy components
 const HowItWorks = lazy(() => import("../../subCategory/workSteps/HowItWorks"));
@@ -90,6 +91,7 @@ function GutterCleaner() {
         breadcrumb={breadcrumbConfig}
         bannerImage={GutterCleanerBanner}
       />
+      <FAQScript FAQ={faqData} />
       <SearchAndFindAnAccountant
         title={topConfig?.title}
         findingHeading={topConfig?.findingHeading}

@@ -101,7 +101,10 @@
   line-height: 32px;
   margin: 28px 0 20px;
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: auto 1fr;
+}
+.h3Number {
+  margin-left: 5px;
 }
 .sectionHeadingH4 {
   font-size: 20px;
@@ -259,7 +262,6 @@
   /* background: #fff; */
   min-width: 600px; /* Mobile me min width fix kar diya */
   font-size: 18px;
-
 }
 
 .table th,
@@ -268,7 +270,7 @@
   padding: 8px;
   text-align: left;
   vertical-align: top;
-  border-radius:4px ;
+  border-radius: 4px;
   background-color: #f3f3f6;
   word-break: break-word; /* Long text wrap ho jaye */
 }
@@ -306,17 +308,17 @@
   .mainHeading {
     font-size: 38px;
   }
-  
+
   .sectionHeading {
     font-size: 28px;
     margin: 36px 0 20px;
   }
-  
+
   .sectionHeadingH3 {
     font-size: 20px;
     line-height: 1.4;
     margin: 24px 0 16px;
-    grid-template-columns: 24px 1fr;
+    grid-template-columns: auto 1fr;
   }
   .sectionHeadingH4 {
     font-size: 20px;
@@ -324,11 +326,11 @@
     /* margin: 24px 0 16px; */
     grid-template-columns: 40px 1fr;
   }
-  
+
   .subHeading {
     font-size: 20px;
   }
-  
+
   .paragraph,
   .numberedParagraph,
   .list,
@@ -337,16 +339,16 @@
     font-size: 18px;
     line-height: 1.6;
   }
-  
+
   .paragraph.withNumber {
     grid-template-columns: 40px 1fr;
   }
-  
+
   .navLink {
     padding: 20px 24px;
     font-size: 14px;
   }
-  
+
   .contentContainer {
     padding: 0 20px;
   }
@@ -359,17 +361,17 @@
     line-height: 1.2;
     margin: 0 0 16px 0;
   }
-  
+
   .sectionHeading {
     font-size: 28px;
     flex-direction: column;
     gap: 5px;
     margin: 28px 0 18px;
   }
-  
+
   .sectionHeadingH3 {
     font-size: 20px;
-    grid-template-columns: 24px 1fr;
+    grid-template-columns: auto 1fr;
     margin: 20px 0 14px;
   }
   .sectionHeadingH4 {
@@ -378,19 +380,19 @@
     gap: 5px;
     /* margin: 20px 0 14px; */
   }
-  
+
   .sectionHeadingH3 span:first-child {
     display: inline;
   }
   .sectionHeadingH4 span:first-child {
     display: inline;
   }
-  
+
   .subHeading {
     font-size: 18px;
     margin: 16px 0 12px;
   }
-  
+
   .paragraph,
   .numberedParagraph,
   .list,
@@ -399,31 +401,31 @@
     font-size: 16px;
     line-height: 1.5;
   }
-  
+
   .paragraph.withNumber {
     grid-template-columns: 24px 1fr;
     gap: 16px;
   }
-  
+
   .paragraph.indented {
     margin-left: 0;
     padding-left: 40px;
   }
-  
+
   .list {
     margin-left: 20px;
   }
-  
+
   .nav {
     flex-direction: column;
     gap: 0;
     width: 100%;
   }
-  
+
   .navItem {
     width: 100%;
   }
-  
+
   .navLink {
     display: block;
     text-align: center;
@@ -431,21 +433,21 @@
     width: 100%;
     box-sizing: border-box;
   }
-  
+
   .contentContainer {
     padding: 0 15px;
   }
-  
+
   .tableWrapper {
     margin: 16px -15px;
     width: calc(100% + 30px);
   }
-  
+
   .table {
     min-width: 500px;
     font-size: 16px;
   }
-  
+
   .table th,
   .table td {
     padding: 8px 10px;
@@ -457,34 +459,34 @@
   .mainHeading {
     font-size: 28px;
   }
-  
+
   .sectionHeading {
     font-size: 24px;
   }
-  
+
   .sectionHeadingH3 {
     font-size: 18px;
   }
   .sectionHeadingH4 {
     font-size: 18px;
   }
-  
+
   .subHeading {
     font-size: 16px;
   }
-  
+
   .paragraph,
   .numberedParagraph,
   .list,
   .contactList li {
     font-size: 16px;
   }
-  
+
   .navLink {
     padding: 14px 16px;
     font-size: 13px;
   }
-  
+
   .contentContainer {
     padding: 0 12px;
   }

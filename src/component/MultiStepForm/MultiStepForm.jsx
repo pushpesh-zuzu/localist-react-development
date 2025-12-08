@@ -21,6 +21,7 @@ import { handleScrollToBottom } from "../../utils/scroll";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import { Helmet } from "react-helmet-async";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -150,16 +151,28 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
   }, []);
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
+
       {localRequestId === null && (
         <div>
-          {isDesktop ? (
+          {typeof window !== "undefined" && isDesktop ? (
             <NavigationDetectorDesktop />
-          ) : (
+          ) : typeof window !== "undefined" ? (
             <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
           )}
         </div>
       )}
+      <Helmet>
+        <meta name="robots" content="noindex" />
+        <title>Compare Free Quotes from Local Landscapers | Localists</title>
+
+        <meta
+          name="description"
+          content="Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!"
+        />
+      </Helmet>
       <div className={styles.tab}>
         <span className={styles.tabText}>
           {buyerStep <= 3 ? `${setstepText} - ${actualSteps}/3` : ""}
@@ -222,13 +235,15 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  updateNumberStep={updateNumberStep}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    updateNumberStep={updateNumberStep}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && updateNumberStep === 2 && (
                 <CardLayoutWrapper showButton={false}>

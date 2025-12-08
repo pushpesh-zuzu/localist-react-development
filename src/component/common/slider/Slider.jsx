@@ -119,7 +119,7 @@ const Slider = ({ sliderdata, blueTitle, title, ImageLink = true }) => {
                     <img src={service.image} alt={service.title} />
                   </Link>
                 ) : (
-                  <img src={service.image} alt={service.title} />
+                  <img src={service.image} alt={service.title} loading="eager" />
                 )}
                 {service?.path ? (
                   <p>

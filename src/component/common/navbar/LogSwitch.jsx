@@ -16,6 +16,7 @@ import downarrowIcon from "../../../assets/Icons/downArrowIcon.svg";
 import MobileSlideInSearch from "./MobileSlideInSearch";
 import { setIsDirtyRedux } from "../../../store/MyProfile/myProfileSlice";
 import { serviceRouteMap } from "../../../utils/allServicesRoute";
+import { resetProgress } from "../../../store/Buyer/BuyerSlice";
 
 const LogSwitch = () => {
   const navigate = useNavigate();
@@ -212,6 +213,7 @@ const LogSwitch = () => {
           showToast("info", "Logout successful!");
           handleNavigation("/en/gb/login");
           localStorage.removeItem("pendingBuyerModal");
+          dispatch(resetProgress());
         }
       } catch (error) {
         console.error("Logout Error:", error);

@@ -1,3 +1,7 @@
+/**
+ * DEPENDENCY OPTIMIZATION: moment → dayjs
+ * dayjs is ~2KB vs moment's ~70KB, significantly reducing bundle size.
+ */
 import { useEffect, useState } from "react";
 import styles from "./MyResponse.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,6 +30,8 @@ import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
 import { Select, Spin } from "antd";
 import moment from "moment";
+import { Select } from "antd";
+import dayjs from "../../utils/dayjs";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
@@ -415,8 +421,7 @@ const MyResponse = () => {
                 </div>
 
                 <div className={styles.responseStatus}>
-                  Responded {moment().diff(moment(item?.created_at), "days")}d
-                  ago
+                  Responded {dayjs().diff(dayjs(item?.created_at), "day")}d ago
                 </div>
                 <div
                   className={styles.moreDetails}
@@ -458,8 +463,7 @@ const MyResponse = () => {
                   </button>
                 </div>
                 <div className={styles.responseStatus}>
-                  Responded {moment().diff(moment(item?.created_at), "days")}d
-                  ago
+                  Responded {dayjs().diff(dayjs(item?.created_at), "day")}d ago
                 </div>
                 {selectedTab === "pending" ? (
                   <>

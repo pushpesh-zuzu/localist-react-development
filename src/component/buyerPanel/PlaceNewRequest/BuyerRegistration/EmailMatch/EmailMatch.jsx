@@ -11,11 +11,12 @@ import {
 } from "../../../../../store/Buyer/BuyerSlice";
 import { useLocation } from "react-router";
 import useUserInfo from "../../../../../utils/getUserIp";
+import { validateEmail } from "../../../../../utils/validateEmail";
+import { useEmailCheck } from "../../../../../utils/emailExist";
 
 const EmailMatch = ({
   onClose,
   nextStep,
-
   setEmails,
   setShowConfirmModal,
   resetTrigger,
@@ -39,11 +40,15 @@ const EmailMatch = ({
   const msclickid = params.get("utm_msclkid");
   const utm_source = params.get("utm_source");
   const { userToken } = useSelector((state) => state.auth);
+
+  const [inputType, setInputType] = useState("text");
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -53,6 +58,9 @@ const EmailMatch = ({
   const { requestLoader, buyerRequest, citySerach } = useSelector(
     (state) => state.buyer
   );
+  const handleEmailFocus = () => {
+    setInputType("email");
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
@@ -65,6 +73,20 @@ const EmailMatch = ({
       })
     );
   };
+
+  useEffect(() => {
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+          phone,
+        })
+      );
+    }
+  }, [isEmailAvailable]);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -136,6 +158,10 @@ const EmailMatch = ({
   }, [dispatch]);
 
   const handleEmailBlur = async () => {
+    if (!email) {
+      setInputType("text");
+    }
+
     if (!email) return;
 
     try {
@@ -192,7 +218,7 @@ const EmailMatch = ({
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+        (!email || !validateEmail(email)),
       name: !name.trim(),
       phone: !phone || !/^\d{10}$/.test(phone),
     };
@@ -364,15 +390,34 @@ const EmailMatch = ({
         </div>
 
         <div className={styles.infoWrapper}>
+          {/* Hidden trap fields for auto-fill prevention - ADDED THESE */}
+          <input
+            type="text"
+            name="username"
+            style={{ display: "none", position: "absolute", left: "-9999px" }}
+            autoComplete="new-password"
+            tabIndex="-1"
+          />
+          <input
+            type="password"
+            name="password"
+            style={{ display: "none", position: "absolute", left: "-9999px" }}
+            autoComplete="new-password"
+            tabIndex="-1"
+          />
+
           <label className={styles.label}>Name</label>
           <input
             type="text"
             placeholder="Your Name"
+            autoComplete="new-password"
             className={`${styles.input} ${
               errors?.name ? styles.inputError : ""
             }`}
             value={name}
             onChange={handleNameChange}
+            name="user_full_name" 
+            id="user_full_name"
           />
           {errors?.name && (
             <span style={{ color: "red" }} className={styles.errorMessage}>
@@ -382,18 +427,22 @@ const EmailMatch = ({
 
           {!isPPCPages && (
             <>
-              <label htmlFor="email" className={styles.label}>
+              <label htmlFor="user_email_address" className={styles.label}>
                 Email
               </label>
               <input
-                type="email"
+                type={inputType}
                 placeholder="Email"
                 className={`${styles.input} ${
                   errors?.email ? styles.inputError : ""
                 }`}
                 value={email}
                 onChange={handleEmailChange}
-                onBlur={handleEmailBlur}
+                onFocus={handleEmailFocus} 
+                onBlur={handleEmailBlur} 
+                autoComplete="new-password" 
+                name="user_email_address" 
+                id="user_email_address"
               />
               {errors?.email && (
                 <span style={{ color: "red" }} className={styles.errorMessage}>
@@ -419,6 +468,9 @@ const EmailMatch = ({
               value={phone}
               maxLength={10}
               onChange={handlePhoneChange}
+              autoComplete="new-password" 
+              name="user_contact_number" 
+              id="user_contact_number"
             />
             {errors?.phone && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

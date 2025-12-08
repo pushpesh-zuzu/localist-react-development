@@ -59,7 +59,7 @@ const QuestionAnserMultiStepDriways2 = ({
 
   const questionIndexMap = {};
   formattedQuestions.forEach((q, index) => {
-    questionIndexMap[q.question_no] = index;
+    questionIndexMap[q?.question_no] = index;
   });
 
   useEffect(() => {
@@ -70,7 +70,13 @@ const QuestionAnserMultiStepDriways2 = ({
   }, [isComingFromStep3]);
   useEffect(() => {
     if (questions.length > 0 && buyerRequest?.questions?.length > 0) {
-      const savedAnswer = buyerRequest.questions[currentQuestion]?.ans || [];
+      const currentQuestionText = questions[currentQuestion]?.questions;
+
+      const savedQuestion = buyerRequest?.questions.find(
+        (q) => q?.ques === currentQuestionText
+      );
+
+      const savedAnswer = savedQuestion?.ans || [];
       const savedArray =
         typeof savedAnswer === "string"
           ? savedAnswer.split(",").map((a) => a.trim())
@@ -147,15 +153,24 @@ const QuestionAnserMultiStepDriways2 = ({
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
-    const updatedAnswer = {
+     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
     };
 
     const previousAnswers = buyerRequest?.questions || [];
-    const updatedAnswers = [...previousAnswers];
-    updatedAnswers[currentQuestion] = updatedAnswer;
 
+    const existingIndex = previousAnswers.findIndex(
+      (item) => item?.ques === updatedAnswer?.ques
+    );
+
+    let updatedAnswers;
+    if (existingIndex !== -1) {
+      updatedAnswers = [...previousAnswers];
+      updatedAnswers[existingIndex] = updatedAnswer;
+    } else {
+      updatedAnswers = [...previousAnswers, updatedAnswer];
+    }
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
@@ -309,7 +324,7 @@ const QuestionAnserMultiStepDriways2 = ({
       subtitle={
         currentQuestion === 0
           ? !isQuestionWithImage
-            ? "To find the ideal driveway installers specialist for your project, simply complete the quick form below."
+            ? "To find the ideal Driveway Installation specialist for your project, simply complete the quick form below."
             : ""
           : ""
       }

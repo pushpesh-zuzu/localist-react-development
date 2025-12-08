@@ -8,6 +8,8 @@ import LoaderWithTextMultiStepForm from "../../LoaderWithTextMultiStepForm/Loade
 import nameEmailBanner from "../nameEmailBanner.webp";
 import BackgroundWrapperNameEmailMultiForm from "../../BackgroundWrapperNameEmailMultiForm/BackgroundWrapperNameEmailMultiForm";
 import CheckStartCircle from "../../../../assets/Icons/CheckStartCircle.png";
+import { validateEmail } from "../../../../utils/validateEmail";
+import { useEmailCheck } from "../../../../utils/emailExist";
 const NameEmailTreeSurgeon = ({
   nextStep,
   isPPCPages = false,
@@ -24,6 +26,7 @@ const NameEmailTreeSurgeon = ({
 
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
+  const { isEmailAvailable } = useEmailCheck(email);
 
   const [errors, setErrors] = useState({
     email: false,
@@ -31,6 +34,9 @@ const NameEmailTreeSurgeon = ({
   });
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isBannerText, setIsBannerText] = useState(false);
+
+  const [inputType, setInputType] = useState("text"); // Initially text to avoid email detection
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
@@ -41,11 +47,20 @@ const NameEmailTreeSurgeon = ({
     setErrors((prev) => ({ ...prev, name: false }));
   };
 
+  const handleEmailFocus = () => {
+    setInputType("email");
+  };
+  const handleEmailBlur = () => {
+    if (!email) {
+      setInputType("text");
+    }
+  };
+
   const handleSubmit = async () => {
     const newErrors = {
       email:
         !isPPCPages &&
-        (!email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)),
+        (!email || !validateEmail(email)),
       name: !name.trim(),
     };
 
@@ -87,6 +102,18 @@ const NameEmailTreeSurgeon = ({
   const handleBannerText = () => {
     setIsBannerText(false);
   };
+  useEffect(() => {
+    if (!isEmailAvailable) {
+      setEmail("");
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          name,
+          email: "",
+        })
+      );
+    }
+  }, [isEmailAvailable]);
   return (
     <BackgroundWrapperNameEmailMultiForm backgroundImage={nameEmailBanner}>
       <CardLayoutWrapper
@@ -124,16 +151,37 @@ const NameEmailTreeSurgeon = ({
           </div>
         ) : (
           <div className={styles.infoWrapper}>
+            {/* Hidden trap fields for auto-fill prevention */}
+            <input
+              type="text"
+              name="username"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+            <input
+              type="password"
+              name="password"
+              style={{ display: "none", position: "absolute", left: "-9999px" }}
+              autoComplete="new-password"
+              tabIndex="-1"
+            />
+
             {!isPPCPages && (
               <div style={{ marginBottom: "10px" }}>
                 <input
-                  type="email"
+                  type={inputType}
                   placeholder="Email"
                   className={`${styles.input} ${
                     errors?.email ? styles.inputError : ""
                   }`}
                   value={email}
                   onChange={handleEmailChange}
+                  onFocus={handleEmailFocus}
+                  onBlur={handleEmailBlur}
+                  autoComplete="new-password"
+                  name="user_email_address"
+                  id="user_email_address"
                 />
                 {errors?.email && (
                   <span
@@ -154,6 +202,9 @@ const NameEmailTreeSurgeon = ({
               }`}
               value={name}
               onChange={handleNameChange}
+              autoComplete="new-password"
+              name="user_full_name"
+              id="user_full_name"
             />
             {errors?.name && (
               <span style={{ color: "red" }} className={styles.errorMessage}>

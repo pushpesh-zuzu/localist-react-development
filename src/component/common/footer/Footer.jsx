@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import styles from "./footer.module.css";
 // import logo from "../../../assets/Images/footerLogo.svg";
-import logo from "../../../assets/Images/logo.png";
+import logo from "../../../assets/Images/logo.webp";
 import facebookIcon from "../../../assets/Icons/facebook.svg";
-import pinterestIcon from "../../../assets/Icons/pinterest.svg";
+import linkedinsocialicon from "../../../assets/Icons/linkedinsocialicon.png";
+import Xsocialicon from "../../../assets/Icons/Xsocialicon.png";
+import UKFlag from "../../../assets/Icons/UKFlag.png";
+// import pinterestIcon from "../../../assets/Icons/pinterest.svg";
 import instagramIcon from "../../../assets/Icons/instagram.svg";
-import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
+// import trustpilotLogo from "../../../assets/Icons/trustpilot.svg";
 import mailIcon from "../../../assets/Icons/emailIcon.svg";
-import callIcon from "../../../assets/Icons/callIcon.svg";
-import timerIcon from "../../../assets/Icons/timer.svg";
+// import callIcon from "../../../assets/Icons/callIcon.svg";
+// import timerIcon from "../../../assets/Icons/timer.svg";
 import { Collapse, Select } from "antd";
 const { Panel } = Collapse;
 import { CaretRightOutlined, DownOutlined } from "@ant-design/icons";
@@ -23,25 +26,60 @@ const FooterContent = () => (
   <>
     <div className={styles.footerRight}>
       <div className={styles.socialIcons}>
-        <img src={facebookIcon} alt="Facebook" />
-        <img src={pinterestIcon} alt="Pinterest" />
-        <img src={instagramIcon} alt="Instagram" />
+        <Link
+          to={"https://www.facebook.com/localistsuk/"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={facebookIcon} alt="Facebook" />
+        </Link>
+        <Link
+          to={"https://www.linkedin.com/company/localistsuk/"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={linkedinsocialicon} alt="linkedinsocialicon" />
+        </Link>
+        <Link
+          to={"https://x.com/LocalistsUK"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={Xsocialicon} alt="Xsocialicon" />
+        </Link>
+        <Link
+          to={"https://www.instagram.com/localists_official"}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={instagramIcon} alt="Instagram" />
+        </Link>
       </div>
       <div className={styles.countryDropdown}>
-        {/* <select> */}
-        {/* <option>🇬🇧 UK</option> */}
-        {/* <option>🇮🇳 India</option>
-          <option>🇺🇸 USA</option> */}
-        {/* </select> */}
         <Select
           defaultValue="🇬🇧 UK"
           style={{ width: 160 }}
           className={styles.selectDropdown}
-          dropdownIcon={<DownOutlined style={{ color: "black" }} />}
+          suffixIcon={null}
+          open={false}
         >
-          <Option value="🇬🇧 UK">🇬🇧 UK</Option>
-          {/* <Option value="🇮🇳 India">🇮🇳 India</Option> */}
-          {/* <Option value="🇺🇸 USA">🇺🇸 USA</Option> */}
+          <Option value="🇬🇧 UK">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ height: "28px", width: "16px" }}>UK</span>
+              <img
+                src={UKFlag}
+                alt="UK Flag"
+                width={16}
+                height={24}
+                style={{
+                  height: "16px",
+                  width: "24px",
+                  marginTop: "auto",
+                  marginBottom: "auto",
+                }}
+              />
+            </div>
+          </Option>
         </Select>
       </div>
       {/* <div className={styles.trustpilot}>
@@ -109,7 +147,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           {/* <Link to={`/${lang}/${country}`} className={styles.link}> */}
           <div className={styles.logo}>
-            <img src={logo} alt="Localist Logo" />
+            <img src={logo} alt="Localist Logo" loading="eager" />
           </div>
           {/* </Link> */}
           <p className={styles.footerDesc}>
@@ -130,7 +168,7 @@ const Footer = () => {
           <div>
             <h4>For Customers</h4>
             <ul>
-              <Link to={`/${lang}/${country}`} className={styles.link}>
+              <Link to={`/${lang}/${country}/`} className={styles.link}>
                 <li>Find a Professional</li>
               </Link>
 
@@ -258,7 +296,7 @@ const Footer = () => {
             key="1"
           >
             <ul>
-              <Link to="/">
+              <Link to={`${lang}/${country}/`}>
                 <li className={styles.mobileItem}>Find a Professional</li>
               </Link>
               <Link to={`/${lang}/${country}/how-it-works-for-customers`}>
@@ -357,10 +395,23 @@ const Footer = () => {
 
       <div className={styles.footerBottom}>
         <p>
-          © 2025 Localists. Terms & Conditions / Cookie policy /{" "}
+          © 2025 Localists.{" "}
           <Link
             style={{ textDecoration: "none", color: "#000" }}
-            to={`/${lang}/${country}/privacy-policy/`}
+            to={`/${lang}/${country}/terms`}
+          >
+            Terms & Conditions{" "}
+          </Link>
+          /{" "}
+          <Link
+            style={{ textDecoration: "none", color: "#000" }}
+            to={`/${lang}/${country}/cookie-policy`}
+          >
+            Cookie policy /{" "}
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "#000" }}
+            to={`/${lang}/${country}/privacy-policy`}
           >
             Privacy policy
           </Link>

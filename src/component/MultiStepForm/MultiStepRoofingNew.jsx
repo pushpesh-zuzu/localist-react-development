@@ -7,8 +7,6 @@ import {
   questionAnswerData,
   setbuyerRequestData,
   setBuyerStep,
-  getProgressPercentageAPI,
-  setQuestionsForProgress,
 } from "../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NameEmailMultiStepForm from "./steps/NameEmailMultiStepForm/NameEmailMultiStepForm";
@@ -18,9 +16,6 @@ import MultiStepDescribeYourRequest from "./steps/MultiStepDescribeYourRequest/M
 import OTPVerificationMultiStep from "./OTPVerificationMultiStep/OTPVerificationMultiStep";
 import { Helmet } from "react-helmet-async";
 import { handleScrollToBottom } from "../../utils/scroll";
-import QuestionAnswerMultiStepDriveways from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepDriveways";
-import QuestionAnserMultiStepDriways2 from "./steps/QuestionAnswerMultiStep/QuestionAnserMultiStepDriways2";
-import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDriveways";
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
@@ -36,24 +31,22 @@ const MultiStepRoofingNew = ({
 }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { questionanswerData, buyerStep, questionLoader, buyerRequest } =
-    useSelector((state) => state.buyer);
-  const { questionsForProgress, progressPercentage, removeQuestionByNumber,setProgressPercentage } =
+  const { questionanswerData, buyerStep } = useSelector((state) => state.buyer);
+  const { progressPercentage, removeQuestionByNumber, setProgressPercentage } =
     useProgress(serviceId);
   useEffect(() => {
-    if (location.pathname.includes("driveways-multi-form-ppc")) {
+    if (location.pathname.includes("roofing-multi-form-ppc")) {
       document.body.style.paddingTop = "0px";
     }
 
     document.documentElement.style.setProperty(
       "padding-top",
-      location.pathname.includes("driveways-multi-form-ppc") && "0px"
+      location.pathname.includes("roofing-multi-form-ppc") && "0px"
     );
   }, [location.pathname]);
 
   const [animationDirection, setAnimationDirection] = useState("");
   const [actualSteps, setActualSteps] = useState(1);
-  // const [progressPercentage, setProgressPercentage] = useState(0);
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [backButtonTriggered, setBackButtonTriggered] = useState(false);
@@ -66,7 +59,7 @@ const MultiStepRoofingNew = ({
   const [updateNumberStep, setUpdateNumberStep] = useState(2);
   const [localRequestId, setLocalRequestId] = useState(null);
   const [isDesktop, setIsDesktop] = useState(false);
-const [percetangForPost, setPercetangForPost] = useState(0)
+  const [percetangForPost, setPercetangForPost] = useState(0);
   const stepFlow = [1, 2, 3, 4, 5, 6, 7];
 
   useEffect(() => {
@@ -82,11 +75,6 @@ const [percetangForPost, setPercetangForPost] = useState(0)
     }
     handleScrollToBottom();
   }, [buyerStep]);
-
-  // Remove manual progress percentage updates - now handled by API
-  const getProgressPercentage = (per) => {
-    // This function can be removed or kept for other purposes
-  };
 
   const nextStep = () => {
     setBackButtonTriggered(false);
@@ -171,69 +159,31 @@ const [percetangForPost, setPercetangForPost] = useState(0)
       return () => window.removeEventListener("resize", handleResize);
     }
   }, []);
-  //   const removeQuestionByNumber = (questionNo) => {
-  //     const cleanedNo = Number(String(questionNo).trim());
-  //     console.log(
-  //       "Question Number to Remove:",
-  //       questionNo,
-  //       "Cleaned:",
-  //       cleanedNo
-  //     );
 
-  //     const updatedList = questionsForProgress.filter((item, index) => {
-  //       const rawItemNumber = item?.number;
-  //       const cleanedItemNo = Number(String(rawItemNumber).trim());
-
-  //       // keep only those that are NOT equal
-  //       return cleanedItemNo !== cleanedNo;
-  //     });
-
-  //     console.log("FINAL UPDATED LIST:", updatedList);
-
-  //     dispatch(setQuestionsForProgress(updatedList));
-  //   };
-
-  //   const getProgress = async (updatedAnswers) => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("questions", JSON.stringify(updatedAnswers));
-  //     formData.append("service_id", serviceId);
-
-  //     const response = await dispatch(getProgressPercentageAPI(formData));
-
-  //     console.log("Progress Response:", response);
-
-  //     if (response?.percentage !== undefined) {
-  //       setProgressPercentage(response.percentage);
-  //     }
-  //   } catch (error) {
-  //     console.log("Error while fetching progress:", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getProgress(questionsForProgress)
-  // }, [questionsForProgress])
   return (
     <>
-      <CalonicalTags />
+      <CalonicalTags isRequiredjsonLd={false} />
 
       {localRequestId === null && (
         <div>
-          {isDesktop ? (
+          {typeof window !== "undefined" && isDesktop ? (
             <NavigationDetectorDesktop />
-          ) : (
+          ) : typeof window !== "undefined" ? (
             <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
           )}
         </div>
       )}
       <Helmet>
         <meta name="robots" content="noindex" />
         <title>
-          Compare Free Quotes from Local Driveway Companies | Localists
+          Compare Free Quotes from Local Roofing Companies | Localists
         </title>
+
         <meta
           name="description"
-          content="Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple."
+          content="Get free quotes from top roofing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free."
         />
       </Helmet>
 
@@ -275,7 +225,7 @@ const [percetangForPost, setPercetangForPost] = useState(0)
                   <PostcodeSearchRoofing
                     prevStep={prevStep}
                     onNext={nextStep}
-                    titleHeading="driveway installers"
+                    titleHeading="roofing companies"
                     setPercetangForPost={setPercetangForPost}
                   />
                 </div>
@@ -299,19 +249,20 @@ const [percetangForPost, setPercetangForPost] = useState(0)
                   onBack={prevStep}
                   isStartWithQuestionModal={true}
                   // setProgressPercentage={setProgressPercentage}
-                  
                 />
               )}
               {buyerStep === 5 && (
-                <PhoneNumberMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  serviceId={serviceId}
-                  setProgressPercentage={setProgressPercentage}
-                  setUpdateNumberStep={setUpdateNumberStep}
-                  updateNumberStep={updateNumberStep}
-                  setLocalRequestId={setLocalRequestId}
-                />
+                <div style={{ maxWidth: "592px", margin: "auto" }}>
+                  <PhoneNumberMultiStepForm
+                    nextStep={nextStep}
+                    onBack={prevStep}
+                    serviceId={serviceId}
+                    setProgressPercentage={setProgressPercentage}
+                    setUpdateNumberStep={setUpdateNumberStep}
+                    updateNumberStep={updateNumberStep}
+                    setLocalRequestId={setLocalRequestId}
+                  />
+                </div>
               )}
               {buyerStep === 6 && (
                 <CardLayoutWrapper showButton={false}>

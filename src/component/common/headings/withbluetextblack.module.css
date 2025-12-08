@@ -1,5 +1,6 @@
-.container {
+.containerh {
   text-align: center;
+  padding: 0px 16px;
 }
 .container h2{
   font-size: 35px;

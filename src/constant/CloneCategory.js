@@ -105,7 +105,7 @@ const PopularCategoriesData = [
 
   {
     id: 3,
-    title: "Patio Services",
+    title: "Patio Laying",
     image: PatioServicesSlider,
     path: "patio-layers-near-me",
   },

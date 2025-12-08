@@ -155,7 +155,7 @@ const HowLoaclistsWorks = () => {
                 <label>What service do you need?</label>
                 <input
                   type="text"
-                  placeholder="Driveway Installation, Gardening Services, etc..."
+                  placeholder="Landscaping, Driveway Installation, etc..."
                   value={input}
                   onChange={(e) => {
                     setInput(e.target.value);

@@ -95,11 +95,13 @@
 }
 
 .descriptionIcon img {
-  object-fit: cover;
-  position: relative;
-  width: 60%;
-  /* cursor: pointer !important; */
+  width: 45px !important;  /* Fixed width */
+  height: 45px !important; /* Fixed height */
+  max-width: 100%;
+  object-fit: contain !important; /* Important - cover से contain */
 }
+
+
 
 @media screen and (max-width: 1100px) {
   .workContainer {
@@ -152,6 +154,10 @@
   .stepDescription {
     font-size: 18px;
     line-height: 27px;
+  }
+   .descriptionIcon img {
+    width: 45px !important;
+    height: 45px !important;
   }
 }
 
@@ -246,9 +252,9 @@
   }
 
   .descriptionIcon img {
-    width: 44.99px;
-    height: 44.99px;
-    object-fit: contain;
+    width: 45px;
+    height: 45px;
+    object-fit: contain !important; 
   }
 
   .stepDescription {
@@ -321,10 +327,9 @@
   }
 
   .descriptionIcon img {
-    width: 36.99px;
-    height: 36.99px;
-    object-fit: contain;
-  }
+   width: 37px !important;
+    height: 37px !important;
+    object-fit: contain !important;   }
     .stepDescription {
     font-size: 14px;
     line-height: 22px;

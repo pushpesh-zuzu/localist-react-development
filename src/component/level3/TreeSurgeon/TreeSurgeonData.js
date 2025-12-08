@@ -321,7 +321,7 @@ const TREE_SURGEON_OTHER_SERVICES_DATA = {
     {
       id: 3,
       image: PatioServicesSlider,
-      description: "Patio Services",
+      description: "Patio Laying",
       path: "patio-layers-near-me",
     },
     {
