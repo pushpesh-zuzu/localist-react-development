@@ -4,7 +4,7 @@
 
 .blogHeader {
   position: relative;
-  height: 707px;
+  height: 450px;
   background-size: cover;
   background-position: center;
   color: white;
@@ -295,5 +295,11 @@ h4 {
     font-weight: bold;
     font-size: 12px;
     line-height: 25px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .overlayWrap {
+    padding: 20px;
   }
 }

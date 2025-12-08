@@ -30,7 +30,6 @@ import MyResponseAccordion from "./MyResponseAccordian/MyResponseAccordian";
 import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
 import { Select, Spin } from "antd";
 import moment from "moment";
-import { Select } from "antd";
 import dayjs from "../../utils/dayjs";
 import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";

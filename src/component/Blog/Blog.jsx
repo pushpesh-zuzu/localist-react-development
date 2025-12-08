@@ -102,37 +102,28 @@ const Blog = () => {
           <section className={styles.blogSectionDes}>
             <div className={styles.social_wrap}>
               <span>Share</span>
-              {/* <div className={styles.social_Icons}>
-              <img src={blog_linkedin} alt="" />
-              <img src={blog_x} alt="" />
-              <img src={blog_fb} alt="" />
-              <img src={blog_link} alt="" />
-            </div> */}
+
               <div className={styles.social_Icons}>
                 <img
                   src={blog_linkedin}
-                  alt="Share on LinkedIn"
                   onClick={shareOnLinkedIn}
                   style={{ cursor: "pointer" }}
                 />
 
                 <img
                   src={blog_x}
-                  alt="Share on Twitter/X"
                   onClick={shareOnTwitter}
                   style={{ cursor: "pointer" }}
                 />
 
                 <img
                   src={blog_fb}
-                  alt="Share on Facebook"
                   onClick={shareOnFacebook}
                   style={{ cursor: "pointer" }}
                 />
 
                 <img
                   src={blog_link}
-                  alt="Copy blog link"
                   onClick={copyLink}
                   style={{ cursor: "pointer" }}
                 />
