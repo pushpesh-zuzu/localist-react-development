@@ -248,6 +248,7 @@ const ManualBidList = () => {
                         {item?.company_logo ? (
                           <img
                             alt="Profile"
+                            src={`${BASE_IMAGE}/users/${item.company_logo}`}
                             style={{
                               width: "100px",
                               height: "100px",
