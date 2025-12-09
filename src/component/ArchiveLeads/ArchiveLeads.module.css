@@ -351,9 +351,9 @@
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
-  cursor: pointer !important;
   font-size: 20px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .credits_wrapper {
