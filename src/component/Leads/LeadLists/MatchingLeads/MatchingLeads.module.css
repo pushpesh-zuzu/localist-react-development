@@ -467,6 +467,7 @@
     display: flex;
     align-items: center;
     gap: 13px;
+    margin-left: auto;
   }
   .editButtons {
     display: flex;
@@ -600,7 +601,7 @@
   }
 
   .filterButtons {
-    width: 100%;
+    /* width: 100%; */
     padding: 8px;
     font-size: 13px;
 
@@ -609,7 +610,7 @@
     justify-content: center;
     align-items: center;
     gap: 4px;
-    margin-right: 12px;
+    /* margin-right: 12px; */
   }
 
   .dropdownMenu,
@@ -628,12 +629,13 @@
     width: 50%;
   }
 
-  .actionButton {
+  /* .actionButton {
     width: 100%;
-  }
+  } */
 
   .filterButtons {
-    width: 100%;
+    /* width: 100%; */
+    margin-left: auto;
   }
   .heading {
     font-size: 20px;

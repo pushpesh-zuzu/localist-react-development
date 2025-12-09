@@ -602,7 +602,7 @@
   }
 
   .filterButtons {
-    width: 100%;
+    /* width: 100%; */
     padding: 8px;
     font-size: 13px;
 
@@ -798,6 +798,7 @@
     display: flex;
     align-items: center;
     gap: 13px;
+    margin-left: auto;
   }
 }
 
@@ -807,7 +808,8 @@
   }
 
   .filterButtons {
-    width: 100%;
+    /* width: 100%; */
+    margin-left: auto;
   }
 
   .actionButton {
