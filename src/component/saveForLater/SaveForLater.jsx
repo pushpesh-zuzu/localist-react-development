@@ -358,7 +358,7 @@ const SaveForLater = () => {
               className={styles.filterButtons}
               onClick={handleFilterClick}
             >
-              <img src={FilterBlackIcon} alt="" /> Filter
+              <img src={FilterBlackIcon} alt="" /> <span>Filter</span>
             </button>
           </div>
         </div>

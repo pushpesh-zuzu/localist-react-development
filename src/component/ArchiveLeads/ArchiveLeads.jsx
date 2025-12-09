@@ -69,171 +69,177 @@ const ArchiveLeads = () => {
           <h2>No Archived Leads Available</h2>
         </div>
       )} */}
+      <div className={styles.ArchiveLeadsContainer}>
+        {archivedLeads?.slice(0, visibleCount)?.map((item) => {
+          return (
+            <>
+              <div className={styles.cardParent}>
+                <div className={styles.card}>
+                  {/* Left Section - User Info */}
+                  <div className={styles.infoContainer}>
+                    <div className={styles.userInfo}>
+                      <div className={styles.userDetails}>
+                        <div className={styles.avatar}>
+                          {" "}
+                          {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+                        </div>
+                        <div className={styles.details}>
+                          <h3>
+                            {item?.customer?.name
+                              ? item.customer.name
+                                  .split(" ")[0]
+                                  .charAt(0)
+                                  .toUpperCase() +
+                                item.customer.name
+                                  .split(" ")[0]
+                                  .slice(1)
+                                  .toLowerCase()
+                              : ""}
+                          </h3>
 
-      {archivedLeads?.slice(0, visibleCount)?.map((item) => {
-        return (
-          <>
-            <div className={styles.cardParent}>
-              <div className={styles.card}>
-                {/* Left Section - User Info */}
-                <div className={styles.infoContainer}>
-                  <div className={styles.userInfo}>
-                    <div className={styles.userDetails}>
-                      <div className={styles.avatar}>
-                        {" "}
-                        {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+                          <p>{item?.postcode?.split(" ")[0]}</p>
+                        </div>
                       </div>
-                      <div className={styles.details}>
-                        <h3>
-                          {item?.customer?.name
-                            ? item.customer.name
-                                .split(" ")[0]
-                                .charAt(0)
-                                .toUpperCase() +
-                              item.customer.name
-                                .split(" ")[0]
-                                .slice(1)
-                                .toLowerCase()
-                            : ""}
-                        </h3>
+                      <span className={styles.category}>
+                        {item?.category?.name}
+                      </span>
+                    </div>
+                    <div className={styles.contactContainer}>
+                      <div className={styles.contactItem}>
+                        <img src={BluePhoneIcon} alt="" />
+                        <span>{item?.phone ? `+44${item?.phone}` : "N/A"}</span>
+                      </div>
 
-                        <p>{item?.postcode?.split(" ")[0]}</p>
+                      <div className={styles.contactItem}>
+                        <img src={BlueSmsIcon} alt="" />
+                        <span>
+                          {item?.customer?.email
+                            ? item?.customer?.email
+                            : "N/A"}
+                        </span>
                       </div>
                     </div>
-                    <span className={styles.category}>
-                      {item?.category?.name}
-                    </span>
                   </div>
-                  <div className={styles.contactContainer}>
-                    <div className={styles.contactItem}>
-                      <img src={BluePhoneIcon} alt="" />
-                      <span>{item?.phone ? `+44${item?.phone}` : "N/A"}</span>
-                    </div>
 
-                    <div className={styles.contactItem}>
-                      <img src={BlueSmsIcon} alt="" />
-                      <span>
-                        {item?.customer?.email ? item?.customer?.email : "N/A"}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Middle Section - Job Details */}
-                <div className={styles.jobDetails}>
-                  <div className={styles.highlightText}>Highlights :</div>
-                  <div className={styles.badges}>
-                    {item?.is_phone_verified == 1 && (
-                      <span className={styles.verified}>
-                        <img src={VerifiedPhoneIcon} alt="" />
-                        Verified Phone
-                      </span>
-                    )}
-                    {item?.has_additional_details == 1 && (
-                      <span className={styles.additional}>
-                        {" "}
-                        <img src={AdditionalDetailsIcon} alt="" />
-                        Additional details
-                      </span>
-                    )}
-                    {item?.is_frequent_user == 1 && (
-                      <span className={styles.frequent}>
-                        {" "}
-                        <img src={FrequentUserIcon} alt="" />
-                        Frequent user
-                      </span>
-                    )}
-                    {item?.is_urgent == 1 && (
-                      <span className={styles.frequent}>
-                        {" "}
-                        <img src={FrequentUserIcon} alt="" />
-                        Urgent
-                      </span>
-                    )}
-                    {item?.is_high_hiring == 1 && (
-                      <span className={styles.frequent}>
-                        {" "}
-                        <img src={FrequentUserIcon} alt="" />
-                        High hiring
-                      </span>
-                    )}
-                  </div>
-                  <div className={styles.jobInfo}>
-                    {item?.questions && (
-                      <p>
-                        {JSON.parse(item?.questions)
-                          .map((qa) => qa?.ans)
-                          .join("/")}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right Section - Lead Purchase */}
-                <div className={styles.leadActions}>
-                  <button
-                    className={styles.purchaseButton}
-                    onClick={() => handleContinue(item)}
-                  >
-                    Contact
-                  </button>
-
-                  <div
-                    className={styles.saveBtnBox}
-                    style={{ position: "relative" }}
-                  >
-                    <button
-                      style={{
-                        position: "absolute",
-                      }}
-                      className={styles.saveBtn}
-                      onClick={() => handleUnArchive(item)}
-                    >
-                      {unarchiveLoader === item.id ? (
-                        <Spin
-                          indicator={
-                            <LoadingOutlined spin style={{ color: "white" }} />
-                          }
-                          size="small"
-                        />
-                      ) : (
-                        "Unarchive"
+                  {/* Middle Section - Job Details */}
+                  <div className={styles.jobDetails}>
+                    <div className={styles.highlightText}>Highlights :</div>
+                    <div className={styles.badges}>
+                      {item?.is_phone_verified == 1 && (
+                        <span className={styles.verified}>
+                          <img src={VerifiedPhoneIcon} alt="" />
+                          Verified Phone
+                        </span>
                       )}
-                    </button>
-                  </div>
-                  <div className={styles.credits_wrapper}>
-                    <span className={styles.credits}>
-                      {item?.credit_score} Credits
-                    </span>
+                      {item?.has_additional_details == 1 && (
+                        <span className={styles.additional}>
+                          {" "}
+                          <img src={AdditionalDetailsIcon} alt="" />
+                          Additional details
+                        </span>
+                      )}
+                      {item?.is_frequent_user == 1 && (
+                        <span className={styles.frequent}>
+                          {" "}
+                          <img src={FrequentUserIcon} alt="" />
+                          Frequent user
+                        </span>
+                      )}
+                      {item?.is_urgent == 1 && (
+                        <span className={styles.frequent}>
+                          {" "}
+                          <img src={FrequentUserIcon} alt="" />
+                          Urgent
+                        </span>
+                      )}
+                      {item?.is_high_hiring == 1 && (
+                        <span className={styles.frequent}>
+                          {" "}
+                          <img src={FrequentUserIcon} alt="" />
+                          High hiring
+                        </span>
+                      )}
+                    </div>
+                    <div className={styles.jobInfo}>
+                      {item?.questions && (
+                        <p>
+                          {JSON.parse(item?.questions)
+                            .map((qa) => qa?.ans)
+                            .join("/")}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
-                  <div className={styles.mainText}>
-                    <div>ACT FAST</div>{" "}
+                  {/* Right Section - Lead Purchase */}
+                  <div className={styles.leadActions}>
+                    <button
+                      className={styles.purchaseButton}
+                      onClick={() => handleContinue(item)}
+                    >
+                      Contact
+                    </button>
+
+                    <div
+                      className={styles.saveBtnBox}
+                      style={{ position: "relative" }}
+                    >
+                      <button
+                        style={{
+                          position: "absolute",
+                        }}
+                        className={styles.saveBtn}
+                        onClick={() => handleUnArchive(item)}
+                      >
+                        {unarchiveLoader === item.id ? (
+                          <Spin
+                            indicator={
+                              <LoadingOutlined
+                                spin
+                                style={{ color: "white" }}
+                              />
+                            }
+                            size="small"
+                          />
+                        ) : (
+                          "Unarchive"
+                        )}
+                      </button>
+                    </div>
+                    <div className={styles.credits_wrapper}>
+                      <span className={styles.credits}>
+                        {item?.credit_score} Credits
+                      </span>
+                    </div>
+
+                    <div className={styles.mainText}>
+                      <div>ACT FAST</div>{" "}
+                    </div>
                   </div>
                 </div>
+                <div className={styles.viewDetailsBtnWrapper}>
+                  <button
+                    className={styles.viewDetailsBtn}
+                    onClick={() => handleViewDetais(item)}
+                  >
+                    View Details{" "}
+                    <img
+                      src={viewDetailsArrow}
+                      alt="..."
+                      className={`${styles.arrowIcon} ${
+                        viewDetailsOpen == item?.id ? "" : styles.rotated
+                      }`}
+                    />
+                  </button>
+                </div>
               </div>
-              <div className={styles.viewDetailsBtnWrapper}>
-                <button
-                  className={styles.viewDetailsBtn}
-                  onClick={() => handleViewDetais(item)}
-                >
-                  View Details{" "}
-                  <img
-                    src={viewDetailsArrow}
-                    alt="..."
-                    className={`${styles.arrowIcon} ${
-                      viewDetailsOpen == item?.id ? "" : styles.rotated
-                    }`}
-                  />
-                </button>
-              </div>
-            </div>
-            {viewDetailsOpen == item?.id && (
-              <SavedViewDetails saveForLaterDataList={item} />
-            )}
-          </>
-        );
-      })}
+              {viewDetailsOpen == item?.id && (
+                <SavedViewDetails saveForLaterDataList={item} />
+              )}
+            </>
+          );
+        })}
+      </div>
 
       {archivedLeads?.length > visibleCount && (
         <div className={styles.viewMoreBtnWrapper}>

@@ -191,7 +191,7 @@ const MatchingLeads = () => {
   };
 
   const handleEdit = () => {
-    navigate("/settings/leads/my-services");
+    navigate("/settings/billing/my-credits");
   };
 
   const handleFilterClick = () => {
@@ -413,7 +413,7 @@ const MatchingLeads = () => {
 
         <div className={styles.actionButton}>
           <button className={styles.filterButtons} onClick={handleFilterClick}>
-            <img src={FilterBlackIcon} alt="" /> Filter
+            <img src={FilterBlackIcon} alt="" /> <span>Filter</span>
           </button>
         </div>
       </div>

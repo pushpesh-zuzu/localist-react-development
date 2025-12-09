@@ -1,3 +1,7 @@
+.ArchiveLeadsContainer {
+  padding: 24px 88px;
+}
+
 .card {
   width: -webkit-fill-available;
   background: #fff;

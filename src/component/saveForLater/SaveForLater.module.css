@@ -595,7 +595,8 @@
   .dualDropdownsContainers {
     background-color: #e3f6fc;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    gap: 12px;
     align-items: center;
     padding: 9px 13px;
   }
@@ -611,6 +612,14 @@
     align-items: center;
     gap: 4px;
     margin-right: 12px;
+  }
+
+  .filterButtons span {
+    display: none !important; /* hides the text */
+  }
+
+  .filterButtons {
+    gap: 0; /* optional: closes extra space */
   }
 
   .details h3 {
@@ -778,7 +787,6 @@
   .dualDropdownsContainers {
     background-color: #e3f6fc;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
     gap: 4px;
     justify-content: space-between;
@@ -810,10 +818,6 @@
 }
 
 @media screen and (max-width: 345px) {
-  .dualDropdownsContainers {
-    flex-wrap: wrap;
-  }
-
   .heading {
     white-space: nowrap;
   }
@@ -851,5 +855,11 @@
 
   .actionButton {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 330px) {
+  .dualDropdownsContainers {
+    flex-wrap: wrap;
   }
 }
