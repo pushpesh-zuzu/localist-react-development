@@ -179,8 +179,8 @@
   </script>
 
   <!-- SINGLE TIMEOUT FOR BOTH GTM SCRIPTS (centralized) -->
-  <script>
-    
+  <!-- <script>
+    setTimeout(function () {
       // Load GTM script (original code preserved)
       (function(w,d,s,l,i){
         w[l]=w[l]||[];
@@ -198,7 +198,19 @@
       ns.innerHTML =
         '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J" height="0" width="0" style="display:none;visibility:hidden"></iframe>';
       document.body.appendChild(ns);
-  </script>
+    }, 6000);
+  </script> -->
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-TKD2TB3J');</script>
+<!-- End Google Tag Manager -->
+
 
   <!--css-outlet-->
 </head>
@@ -207,5 +219,9 @@
   <body>
     <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/entry-client.jsx"></script>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
   </body>
 </html>
