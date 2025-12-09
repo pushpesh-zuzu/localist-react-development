@@ -14,7 +14,7 @@ const CookieConsent = () => {
     if (!userConsent) {
       setTimeout(() => {
         setShowBanner(true);
-      }, 4000);
+      }, 6000);
     }
 
     window.uetq = window.uetq || [];
