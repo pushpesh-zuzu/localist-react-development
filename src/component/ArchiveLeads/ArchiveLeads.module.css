@@ -184,17 +184,23 @@
   display: flex;
   align-items: center;
   gap: 15.43px;
+  flex-wrap: wrap;
 }
 
 .contactItem {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
   color: black;
   font-weight: 400;
   font-size: 19px;
+  word-break: break-all;
   vertical-align: middle;
   /* cursor: pointer !important; */
+}
+
+.contactItem img {
+  margin-top: 5px;
 }
 /* .contactItem a {
   text-decoration: none;

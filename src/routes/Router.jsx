@@ -251,14 +251,14 @@ const routes = [
         path: "cookie-policy",
         element: <LocaleRedirect>{withSuspense(CookiePolicy)}</LocaleRedirect>,
       },
-      {
-        path: "blog/news/eco4-axe-business-collapse-warning",
-        element: (
-          <LocaleRedirect>
-            <Blog />
-          </LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "blog/news/eco4-axe-business-collapse-warning",
+      //   element: (
+      //     <LocaleRedirect>
+      //       <Blog />
+      //     </LocaleRedirect>
+      //   ),
+      // },
       {
         path: "home",
         element: (
