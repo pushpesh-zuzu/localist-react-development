@@ -144,9 +144,10 @@
 
 .userInfo {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  gap: 72px;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 .desktopOnlyBreak {
   display: inline;
@@ -194,7 +195,7 @@
   color: black;
   font-weight: 400;
   font-size: 19px;
-  word-break: break-all;
+  word-break: break-all !important;
   vertical-align: middle;
   /* cursor: pointer !important; */
 }
