@@ -98,6 +98,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
   }
 
   return {
+    base: env.VITE_CDN_BASE || '/',
     plugins,
     resolve: {
       alias: {
@@ -161,8 +162,7 @@ export default defineConfig(({ mode, isSsrBuild }) => {
         "react-redux",
         "axios",
         "dayjs",
-      ],
-      exclude: ["@builder.io/partytown"],
+      ]
     },
     server: {
       host: env.HOST,
