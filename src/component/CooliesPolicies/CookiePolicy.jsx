@@ -285,6 +285,7 @@ const CookiePolicy = () => {
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.contentWrapper}>
+            <h1 className={styles.mainHeading}>Cookie Policy</h1>
             <div className={styles.lastUpdated}>
               <b>Last Updated: </b>
               <span>29 August 2025</span>

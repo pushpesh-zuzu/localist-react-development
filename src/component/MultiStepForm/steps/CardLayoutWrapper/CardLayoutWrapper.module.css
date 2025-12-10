@@ -67,7 +67,8 @@
 .actionButton {
   flex: 1;
   height: 50px;
-  background: var(--primary-color);
+  /* background: var(--primary-color); */
+  background-color: #008cc0;
   color: white;
   border: none;
   border-radius: 8px;
@@ -86,19 +87,18 @@
 .actionButton:active {
   transform: translateY(1px);
 }
-.actionButton:disabled {
+/* .actionButton:disabled {
   background-color: rgba(
     0,
     175,
     227,
     0.6
-  ); /* lighter version of --primary-color */
+  ); 
   color: white;
   opacity: 0.9;
-  /* cursor: not-allowed; */
   transform: none;
   box-shadow: none;
-}
+} */
 
 /* .actionButton:disabled {
   background-color: #ccc;
