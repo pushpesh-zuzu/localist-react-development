@@ -1,3 +1,7 @@
+.ArchiveLeadsContainer {
+  padding: 24px 88px;
+}
+
 .card {
   width: -webkit-fill-available;
   background: #fff;
@@ -14,6 +18,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  margin-top: 12px;
 }
 .maincontainer {
   padding: 22px 42px;
@@ -139,9 +144,10 @@
 
 .userInfo {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
-  gap: 72px;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 .desktopOnlyBreak {
   display: inline;
@@ -179,17 +185,23 @@
   display: flex;
   align-items: center;
   gap: 15.43px;
+  flex-wrap: wrap;
 }
 
 .contactItem {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
   color: black;
   font-weight: 400;
   font-size: 19px;
+  word-break: break-all !important;
   vertical-align: middle;
   /* cursor: pointer !important; */
+}
+
+.contactItem img {
+  margin-top: 5px;
 }
 /* .contactItem a {
   text-decoration: none;
@@ -318,6 +330,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 0px;
+  margin-bottom: 20px;
   margin-right: 136px;
 }
 .mainText div {
@@ -340,18 +353,14 @@
   transform: rotate(180deg);
 }
 .purchaseButton {
-  background: #57e202;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
-  cursor: pointer !important;
   font-size: 20px;
   font-weight: 600;
-}
-
-.purchaseButton:hover {
-  background-color: #4ecf00;
+  white-space: nowrap;
 }
 
 .credits_wrapper {
@@ -552,6 +561,9 @@
 }
 
 @media (max-width: 512px) {
+  .ArchiveLeadsContainer {
+    padding: 24px;
+  }
   .container {
     align-items: start;
     padding: 20px;

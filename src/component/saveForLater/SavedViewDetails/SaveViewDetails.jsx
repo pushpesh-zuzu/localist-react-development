@@ -88,13 +88,13 @@ const SavedViewDetails = ({ saveForLaterDataList }) => {
           </div>
           <div className={styles.mapContainer}>
             {/* <LeadMap getPendingLeadList={savedLeads?.postcode} /> */}
-            {!savedLeads?.postcode ? (
+            {!savedLeads?.postcode && (
               <div className={styles.mapLoader}>
                 <Spin size="large" />
               </div>
-            ) : (
-              <LeadMap getPendingLeadList={savedLeads?.postcode} />
             )}
+
+            <LeadMap getPendingLeadList={savedLeads?.postcode} />
           </div>
           <div className={styles.leadFooter}>
             <p className={styles.leadFooterTitle}>

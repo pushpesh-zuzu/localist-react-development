@@ -127,7 +127,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* gap: 50px; */
+  gap: 22px;
+  flex-wrap: wrap;
 }
 /* width: "60px",
     height: "60px",
@@ -215,18 +216,25 @@
   display: flex;
   align-items: center;
   gap: 15.43px;
+  flex-wrap: wrap;
 }
 
 .contactItem {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 5px;
   color: black;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 19px;
+  word-break: break-all !important;
   vertical-align: middle;
   /* cursor: pointer !important; */
 }
+
+.contactItem img {
+  margin-top: 5px;
+}
+
 .contactItem a {
   list-style: none;
   text-decoration: none;
@@ -329,6 +337,7 @@
   flex-direction: column;
   gap: 8px;
   background-color: #e3f6fc;
+  line-height: 25px;
   padding: 10px 16px;
 }
 
