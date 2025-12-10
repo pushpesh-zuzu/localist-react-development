@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./footer.module.css";
 // import logo from "../../../assets/Images/footerLogo.svg";
-import logo from "../../../assets/Images/logo.webp";
+import logodesktop from "../../../assets/Images/logodesktop.svg";
+import logomobile from "../../../assets/Images/logomobile.svg";
+
 import facebookIcon from "../../../assets/Icons/facebook.svg";
 import linkedinsocialicon from "../../../assets/Icons/linkedinsocialicon.png";
 import Xsocialicon from "../../../assets/Icons/Xsocialicon.png";
@@ -48,7 +50,7 @@ const FooterContent = () => (
           <img src={Xsocialicon} alt="Xsocialicon" />
         </Link>
         <Link
-          to={"https://www.instagram.com/localists_official"}
+          to={"https://www.instagram.com/localists_official/"}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -147,7 +149,15 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           {/* <Link to={`/${lang}/${country}`} className={styles.link}> */}
           <div className={styles.logo}>
-            <img src={logo} alt="Localist Logo" loading="eager" />
+            <img
+              src={
+                typeof window !== "undefined" && window.innerWidth > 640
+                  ? logodesktop
+                  : logomobile
+              }
+              alt="Localist Logo"
+              loading="eager"
+            />
           </div>
           {/* </Link> */}
           <p className={styles.footerDesc}>

@@ -1,5 +1,6 @@
 import styles from "./navbar.module.css";
-import logo from "../../../assets/Images/logo.webp";
+import logodesktop from "../../../assets/Images/logodesktop.svg";
+import logomobile from "../../../assets/Images/logomobile.svg";
 import downArrow from "../../../assets/Images/downarrow.svg";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Popover } from "antd";
@@ -376,7 +377,7 @@ const LogoComponent = () => {
   return (
     <div className={styles.logoContainer}>
       <img
-        src={logo}
+        src={typeof window !=='undefined' && window.innerWidth>640 ? logodesktop :logomobile}
         alt="logo"
         loading="eager"
         className={styles.mainLogo}

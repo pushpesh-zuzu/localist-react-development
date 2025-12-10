@@ -225,7 +225,7 @@
   }
 
   .singleCategory {
-    width: auto;
+    max-width: 132px;
   }
 }
 

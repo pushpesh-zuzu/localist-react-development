@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  
-  <!-- PERFORMANCE: Critical resource hints -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://dev.localists.com" crossorigin />
-  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-  <link rel="preconnect" href="https://js.stripe.com" crossorigin />
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-  <link rel="dns-prefetch" href="https://dev.localists.com" />
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-  <link rel="dns-prefetch" href="https://js.stripe.com" />
+    <meta charset="UTF-8" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
-  <!-- PERFORMANCE: Preload critical fonts to prevent FOUT/CLS -->
-  <!-- *Fixed*: removed the invalid double-rel and used the non-blocking pattern below -->
-  <!-- Preload the Google Fonts stylesheet non-blocking (switch to stylesheet onload) -->
-  <link
-    rel="preload"
-    as="style"
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    onload="this.rel='stylesheet'"
-  />
-  <noscript>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"
     />
-  </noscript>
+    <!-- PERFORMANCE: Critical resource hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://dev.localists.com" crossorigin />
+    <link rel="preconnect" href="https://js.stripe.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://dev.localists.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://connect.facebook.net" />
+    <link rel="dns-prefetch" href="https://js.stripe.com" />
 
-  <!-- Preload actual woff2 binaries (fonts.gstatic.com) so glyph bytes download ASAP -->
-  <link
-    rel="preload"
-    href="https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJbecmNE.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  />
-  <link
-    rel="preload"
-    href="https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2"
-    as="font"
-    type="font/woff2"
-    crossorigin
-  />
+    <!-- PERFORMANCE: Preload critical fonts to prevent FOUT/CLS -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" 
+      rel="stylesheet" />
+    
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJbecmNE.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
   <!-- Your Poppins / Rubik stylesheet (non-blocking load via media trick — preserved) -->
   <link
@@ -178,50 +167,21 @@
     })();
   </script>
 
-  <!-- SINGLE TIMEOUT FOR BOTH GTM SCRIPTS (centralized) -->
-  <!-- <script>
-    setTimeout(function () {
-      // Load GTM script (original code preserved)
-      (function(w,d,s,l,i){
-        w[l]=w[l]||[];
-        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),
-            dl=l!='dataLayer'?'&l='+l:'';
-        j.async=true;
-        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-        f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TKD2TB3J');
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X51GE15BSM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      // Insert GTM noscript iframe after delay so it doesn't block initial render
-      var ns = document.createElement("noscript");
-      ns.innerHTML =
-        '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J" height="0" width="0" style="display:none;visibility:hidden"></iframe>';
-      document.body.appendChild(ns);
-    }, 6000);
-  </script> -->
-<!-- Google Tag Manager -->
-<script>(function (w, d, s, l, i) {
-    w[l] = w[l] || []; w[l].push({
-      'gtm.start':
-        new Date().getTime(), event: 'gtm.js'
-    }); var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-TKD2TB3J');</script>
-<!-- End Google Tag Manager -->
-
-
-  <!--css-outlet-->
-</head>
-
-
+    gtag('config', 'G-X51GE15BSM');
+  </script>
+    <!--css-outlet-->
+  </head>
   <body>
     <div id="root"><!--ssr-outlet--></div>
     <script type="module" src="/src/entry-client.jsx"></script>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+
+    
   </body>
 </html>

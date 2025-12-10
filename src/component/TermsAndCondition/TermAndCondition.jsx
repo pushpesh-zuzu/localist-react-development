@@ -4,6 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import ContentForProfessonal from "./ContentForProfessonal";
 import ContentForConsumers from "./ContentForConsumers";
 import { Helmet } from "react-helmet-async";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 
 const TermsAndCondition = () => {
   const location = useLocation();
@@ -28,6 +29,7 @@ const TermsAndCondition = () => {
           />
         }
       </Helmet>
+      <CalonicalTags/>
       {/* Navigation Tabs */}
       <nav className={styles.navWrapper}>
         <ul className={styles.nav}>

@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import styles from "./CookiePolicy.module.css";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 export const professionalsTermsData = [
   {
     type: "p",
@@ -280,6 +281,7 @@ const CookiePolicy = () => {
           />
         }
       </Helmet>
+      <CalonicalTags/>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.contentWrapper}>
