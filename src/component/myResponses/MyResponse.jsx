@@ -395,29 +395,33 @@ const MyResponse = () => {
                   </>
                 )}
 
-                <div
-                  className={styles.saveBtnBox}
-                  style={{ position: "relative" }}
-                >
-                  <button
-                    style={{
-                      position: "absolute",
-                    }}
-                    className={styles.saveBtn}
-                    onClick={() => handleArchive(item)}
+                {selectedTab !== "hired" ? (
+                  <div
+                    className={styles.saveBtnBox}
+                    style={{ position: "relative" }}
                   >
-                    {archiveLoader === item.id ? (
-                      <Spin
-                        indicator={
-                          <LoadingOutlined spin style={{ color: "white" }} />
-                        }
-                        size="small"
-                      />
-                    ) : (
-                      "Archive"
-                    )}
-                  </button>
-                </div>
+                    <button
+                      style={{
+                        position: "absolute",
+                      }}
+                      className={styles.saveBtn}
+                      onClick={() => handleArchive(item)}
+                    >
+                      {archiveLoader === item.id ? (
+                        <Spin
+                          indicator={
+                            <LoadingOutlined spin style={{ color: "white" }} />
+                          }
+                          size="small"
+                        />
+                      ) : (
+                        "Archive"
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
 
                 <div className={styles.responseStatus}>
                   Responded {dayjs().diff(dayjs(item?.created_at), "day")}d ago

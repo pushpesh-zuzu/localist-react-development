@@ -341,6 +341,16 @@ const AboutAccordion = ({ details }) => {
     }
   };
 
+  useEffect(() => {
+    if (
+      details?.company_reg_number &&
+      (details?.company_reg_number.length === 8 ||
+        details?.company_reg_number.length === "8")
+    ) {
+      dispatch(fetchCompanyDetails(details?.company_reg_number, user_id));
+    }
+  }, []);
+
   const validate = () => {
     const temp = {};
     if (!formState.name) {
