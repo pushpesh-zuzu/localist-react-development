@@ -423,7 +423,7 @@ const MatchingLeads = () => {
 
         <div className={styles.actionButton}>
           <button className={styles.filterButtons} onClick={handleFilterClick}>
-            <img src={blackfilter} style={{ width: "20px" }} alt="" />{" "}
+            <img src={blackfilter} style={{ width: "20px" }} alt="filter" />{" "}
             <span>Filter</span>
           </button>
         </div>

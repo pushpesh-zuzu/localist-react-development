@@ -26,7 +26,7 @@
 }
 
 .wrapper {
-  padding: 20px 0px;  
+  padding: 10px 0px;
 }
 
 @media (min-width: 768px) {
@@ -44,8 +44,8 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 16px;  
-  padding: 0 16px;  
+  gap: 12px;
+  padding: 0 12px;  
 }
 
 @media (min-width: 768px) {
@@ -84,16 +84,19 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   padding: 0;
-  justify-content: end;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 768px) {
   .rightSection {
     width: 30%;
     padding: 0 16px;  
+    gap: 10px;
+    justify-content: end;
+    align-items: end;
   }
 }
 
@@ -108,7 +111,7 @@
   font-size: 16px; 
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 12px;  
+  margin-bottom: 6px;
   margin-left: auto;
 }
 
@@ -127,10 +130,10 @@
 }
 
 .text {
-  font-size: 13px; 
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 1.4;
   color: #888888;
-  margin-bottom: 12px;  
+  margin-bottom: 8px;
 }
 
 @media (min-width: 768px) {
@@ -163,9 +166,10 @@
 
 .rejectButton {
   width: 100%;
-  padding: 10px 20px; 
-  font-size: 14px;  
-  line-height: 20px;  
+  max-width: 250px;
+  padding: 4px 16px;
+  font-size: 13px;
+  line-height: 18px;
   font-weight: 500;
   color: hsl(0, 0%, 10%);
   background: white;
@@ -175,10 +179,18 @@
   transition: all 0.2s ease;
 }
 
+@media (min-width: 500px) {
+  .rejectButton {
+    width: 100%;
+  }
+}
+
 @media (min-width: 768px) {
   .rejectButton {
     max-width: 265px;
     padding: 11px 22px;  
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
@@ -188,15 +200,15 @@
   }
 }
 
-.rejectButton:hover {
+/* .rejectButton:hover {
   background: rgba(223, 218, 206, 0.1);
-}
+} */
 
 .acceptButton {
   width: 100%;
-  padding: 10px 20px;
-  font-size: 14px;  
-  line-height: 20px;  
+  padding: 8px 16px;
+  font-size: 12px;
+  line-height: 18px;
   font-weight: 500;
   color: #ffffff;
   background: #222222;
@@ -206,10 +218,24 @@
   transition: all 0.2s ease;
 }
 
+@media (max-width: 499px) {
+  .acceptButton {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 767px) {
+  .acceptButton {
+    max-width: 250px;
+  }
+}
+
 @media (min-width: 768px) {
   .acceptButton {
     max-width: 265px;
     padding: 11px 22px;
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
