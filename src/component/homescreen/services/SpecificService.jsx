@@ -30,8 +30,6 @@ const OPTIMIZED_IMAGES = {
 };
 
 const SpecificService = ({ service }) => {
-  console.log(service,'')
-  console.log(service, "ssss");
   const getOptimizedImage = () => {
     const serviceKey =service.id
 

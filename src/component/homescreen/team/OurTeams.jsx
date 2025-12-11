@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ourteams.module.css";
 import teamMember from "../../../assets/Images/teamMember.png";
-import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.webp";
+// import teamMemberPhone from "../../../assets/Images/teamsMemberPhone.webp";
 import quotes from "../../../assets/Images/quote.svg";
 // import rating from "../../../assets/Images/ratings.svg";
 // import dotSlider from "../../../assets/Images/dotSlider.svg";
@@ -104,14 +104,14 @@ const OurTeams = () => {
           height={600}
           loading="lazy"
         />
-        <img
+        {/* <img
           src={teamMemberPhone}
           alt="teamMemberPhone"
           className={styles.teamMemberPhone}
           width={388}
           height={388}
           loading="eager"
-        />
+        /> */}
       </div>
     </div>
   );
