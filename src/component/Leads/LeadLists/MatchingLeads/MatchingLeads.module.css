@@ -807,7 +807,8 @@
 
 @media screen and (max-width: 330px) {
   .dualDropdownsContainers {
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    padding: 8px;
   }
   .heading {
     white-space: nowrap;

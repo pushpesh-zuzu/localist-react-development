@@ -26,33 +26,39 @@
 }
 
 .wrapper {
-  padding: 28px 0px;
+  padding: 20px 0px;  
 }
 
 @media (min-width: 768px) {
   .wrapper {
-    padding: 28px 75px;
+    padding: 24px 50px;  
   }
 }
 
 @media (min-width: 1024px) {
   .wrapper {
-    padding: 28px 150px;
+    padding: 28px 150px;  
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 0 20px;
+  gap: 16px;  
+  padding: 0 16px;  
 }
 
 @media (min-width: 768px) {
   .content {
     flex-direction: row;
-    gap: 32px;
+    gap: 24px;  
     padding: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    gap: 32px;  
   }
 }
 
@@ -64,7 +70,13 @@
 @media (min-width: 768px) {
   .leftSection {
     width: 66.666667%;
-    padding: 0 20px;
+    padding: 0 16px;  
+  }
+}
+
+@media (min-width: 1024px) {
+  .leftSection {
+    padding: 0 20px; 
   }
 }
 
@@ -72,7 +84,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   padding: 0;
   justify-content: end;
   align-items: end;
@@ -81,29 +93,58 @@
 @media (min-width: 768px) {
   .rightSection {
     width: 30%;
+    padding: 0 16px;  
+  }
+}
+
+@media (min-width: 1024px) {
+  .rightSection {
+    gap: 12px;  
     padding: 0 20px;
   }
 }
 
 .title {
-  font-size: 20px;
+  font-size: 16px; 
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 16px;
+  margin-bottom: 12px;  
   margin-left: auto;
 }
 
 @media (min-width: 768px) {
   .title {
-    font-size: 24px;
+    font-size: 18px; 
+    margin-bottom: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: 20px;  
+    margin-bottom: 16px;
   }
 }
 
 .text {
-  font-size: 15px;
+  font-size: 13px; 
   line-height: 1.6;
   color: #888888;
-  margin-bottom: 16px;
+  margin-bottom: 12px;  
+}
+
+@media (min-width: 768px) {
+  .text {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text {
+    font-size: 15px; 
+    margin-bottom: 16px;
+  }
 }
 
 .text:last-child {
@@ -122,9 +163,9 @@
 
 .rejectButton {
   width: 100%;
-  padding: 12px 24px;
-  font-size: 14px;
-  line-height: 24px;
+  padding: 10px 20px; 
+  font-size: 14px;  
+  line-height: 20px;  
   font-weight: 500;
   color: hsl(0, 0%, 10%);
   background: white;
@@ -137,6 +178,13 @@
 @media (min-width: 768px) {
   .rejectButton {
     max-width: 265px;
+    padding: 11px 22px;  
+  }
+}
+
+@media (min-width: 1024px) {
+  .rejectButton {
+    padding: 12px 24px; 
   }
 }
 
@@ -146,9 +194,9 @@
 
 .acceptButton {
   width: 100%;
-  padding: 12px 24px;
-  font-size: 16px;
-  line-height: 24px;
+  padding: 10px 20px;
+  font-size: 14px;  
+  line-height: 20px;  
   font-weight: 500;
   color: #ffffff;
   background: #222222;
@@ -161,6 +209,13 @@
 @media (min-width: 768px) {
   .acceptButton {
     max-width: 265px;
+    padding: 11px 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .acceptButton {
+    padding: 12px 24px; 
   }
 }
 

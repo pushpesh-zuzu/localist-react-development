@@ -21,6 +21,7 @@ import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
 import ContactConfirmModal from "../Leads/LeadLists/ContactConfirmModal";
 import { showToast } from "../../utils";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
+import { Helmet } from "react-helmet-async";
 
 const ArchiveLeads = () => {
   const dispatch = useDispatch();
@@ -147,6 +148,10 @@ const ArchiveLeads = () => {
           <h2>No Archived Leads Available</h2>
         </div>
       )} */}
+      <Helmet>
+        <title> Localists.com - Archive Leads</title>
+        <meta name="desciption" content="Localists.com - Archive Leads" />
+      </Helmet>
       <div className={styles.ArchiveLeadsContainer}>
         {archivedLeads?.slice(0, visibleCount)?.map((item) => {
           return (
