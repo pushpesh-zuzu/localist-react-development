@@ -423,7 +423,7 @@ const TREE_SURGEON_REGION_DATA = {
       items: [
         { name: "Derbyshire", path: "" },
         { name: "Nottinghamshire", path: "" },
-        { name: "Lioncolnshire ", path: "" },
+        { name: "Lincolnshire ", path: "" },
       ],
     },
     {
