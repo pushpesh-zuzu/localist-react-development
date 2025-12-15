@@ -1621,7 +1621,7 @@ const CONTENT_CONFIG = {
       "Looking for a sturdy gate to keep things in (or out)? Or simply looking for a stylish fence to boundary your castle?",
     para2:
       "At Localists, we have a myriad of local fencing contractors that can deal with almost any fence and gate related request. Whether it's part of a new build property, you’re installing an automatic gate or just replacing an old fence. We have 100’s of experts that are vetted and verified, ready to deliver competitive quotes on your next fencing project. So no more shopping around for the best quote, we bring the quotes to you!",
-    para3: `No cost. no obligation. Just free quotes straight in your inbox!`,
+    para3: `No cost. No obligation. Just free quotes straight in your inbox!`,
   },
 
   "driveway-installers-near-me": {
@@ -1782,7 +1782,7 @@ const FIND_SERVICE_CONTENT = {
   "fencing-contractors-near-me": [
     {
       type: "h2",
-      text: "Find top rated fencing companies near you",
+      text: "Find top-rated fencing companies near you.",
     },
     {
       type: "p",
@@ -1790,7 +1790,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "You can find any type of specialist you need to cover everything from: residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
+      text: "You can find any type of specialist you need to cover everything from residential fencing, commercial fencing, agricultural fencing, and even custom-built solutions. Whatever the style or scale of your project, you’ll find professionals who combine craftsmanship with quality to deliver impeccable results, wherever you are.",
     },
     {
       type: "h2",
@@ -1798,7 +1798,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: `Thousands of property managers, businesses and homeowners alike use localists to source the best fencing contractors in their area. All of our  contractors have to pass rigerous tests to become an approved service provider on localists - because getting our customers the best people for the job is paramount to us.`,
+      text: `Every day, hundreds of customers use Localists to source fencing contractors for their projects. Property managers, business owners, and homeowners use Localists to ensure they're getting the best quote, from someone who can do the job they want - when they want. All from professionals that have been vetted and verified through our own rigorous approval process.`,
     },
     {
       type: "p",
@@ -1808,13 +1808,13 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "uili",
       heading: "Reliable local experts:\u00A0",
-      text: "We match you with local fencing contractors who are familiar with your region. That means better communication, faster service, and local insight you can rely on.",
+      text: "We match you with local fencing contractors who are familiar with your region. That means you get a faster service, local insight on regional building regulations, and better communication – for those with an accent that fellow Brits struggle to understand!",
       marginTop: true,
     },
     {
       type: "uili",
       heading: "Quotes tailored to you:\u00A0",
-      text: `No more one-size-fits-all pricing. Once you tell us what you're looking for, we’ll connect you with fence installers who provide custom quotes, helping you compare options and make the best choice.`,
+      text: `No more one-size-fits-all pricing. Once you tell us what you're looking for, we’ll connect you with fence installers who provide custom quotes, helping you compare options, and always get the best price!`,
     },
     {
       type: "uili",
@@ -1824,7 +1824,7 @@ const FIND_SERVICE_CONTENT = {
     {
       type: "uili",
       heading: "Design flexibility:\u00A0",
-      text: `Have something specific in mind? Just fill in our form and we'll onnect you with the right fencing contractors for the job.`,
+      text: `Have something specific in mind? just enter a few quick details about your project and we'll connect you with the right fencing contractors for the job.`,
     },
     {
       type: "uili",
@@ -1838,11 +1838,11 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Localists works with a wide network of professionals, covering every type of fence and gate installation. Whether you prefer to hire a trusted fencing company near you or independent fence builders, we’ll match you with the right local expert. Just tell us what you need - our system does the rest. No matter where you’re based in the UK, you’ll find qualified, nearby fencing contractors who can help with:",
+      text: "Localists works with a wide network of professionals, covering every type of fence and gate installation. Whether you prefer to hire a trusted fencing company near you or independent fence builders, we’ll match you with the right local expert. Just tell us what you need – and we'll do the rest. No matter where you’re based in the UK, you’ll find qualified, nearby fencing contractors who can help with:",
     },
     {
       type: "uili",
-      heading: "Wooden fence & gate Installation:\u00A0",
+      heading: "Wooden fence & gate installation:\u00A0",
       text: "A classic, traditional option that adds charm and privacy.",
       marginTop: true,
     },
