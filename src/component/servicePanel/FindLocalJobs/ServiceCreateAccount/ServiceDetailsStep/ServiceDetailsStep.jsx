@@ -44,10 +44,16 @@ const ServiceDetailsStep = ({
     } else if (hasCompanyReg && !hasCompanyName) {
     }
 
-    if (formData.phone.startsWith("0")) {
-      showToast("error", "Please enter phone number without '0'");
+    if (!formData.phone.startsWith("0")) {
+      showToast("error", "Please enter phone number startwith '0'");
       errors.phone = "";
       return;
+    } else if (formData.phone.startsWith("00")) {
+      showToast("error", "Phone number should start with only one '0'");
+      errors.phone = "";
+      return;
+    } else if (formData.phone.length < 11) {
+      showToast("error", "Please Enter at least 11 number");
     } else if (!phoneCheck) {
       showToast("error", "Please Enter Correct Number");
     } else {
@@ -291,7 +297,7 @@ const ServiceDetailsStep = ({
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
                 >
-                  <span className={styles.countryLabel}>+44</span>
+                  {/* <span className={styles.countryLabel}>+44</span> */}
 
                   <input
                     type="text"
@@ -300,7 +306,7 @@ const ServiceDetailsStep = ({
                       errors.phone ? styles.errorBorder : ""
                     }`}
                     value={formData.phone}
-                    maxLength={10}
+                    maxLength={11}
                     pattern="[0-9]*"
                     onInput={(e) => {
                       e.target.value = e.target.value.replace(/\D/g, "");

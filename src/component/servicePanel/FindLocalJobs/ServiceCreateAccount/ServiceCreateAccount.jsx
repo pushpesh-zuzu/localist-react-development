@@ -161,7 +161,7 @@ const ServiceCreateAccount = () => {
       }, 1000);
     }
 
-    if (phoneValue.trim().length >= 10 && type === "phone") {
+    if (phoneValue.trim().length >= 11 && type === "phone") {
       latestPhoneRef.current = phoneValue;
 
       if (debounceTimer.current.phone)
@@ -170,7 +170,11 @@ const ServiceCreateAccount = () => {
       debounceTimer.current.phone = setTimeout(() => {
         const currentPhone = latestPhoneRef.current;
 
-        dispatch(checkPhoneNumberApi({ phone: currentPhone })).then(
+        const phoneWithoutZero = currentPhone.startsWith("0")
+          ? currentPhone.slice(1)
+          : currentPhone;
+
+        dispatch(checkPhoneNumberApi({ phone: phoneWithoutZero })).then(
           (result) => {
             if (latestPhoneRef.current === currentPhone) {
               if (result?.success === true) {
@@ -275,7 +279,7 @@ const ServiceCreateAccount = () => {
           name="description"
           content={`Find trusted ${formattedTitle} near you. Tell us where you want to find new customers, share your coverage areas, and get matched with quality local leads today.`}
         />
-         <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex" />
       </Helmet>
       <div className={styles.parentContainer}>
         <div className={styles.container}>
