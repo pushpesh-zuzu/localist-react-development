@@ -28,6 +28,7 @@ import halfStar from "../../assets/Icons/MyResponse/halfStar.svg";
 import { Helmet } from "react-helmet-async";
 import Links from "./Links/Links";
 import Videos from "./Videos/Videos";
+import { formatUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
 
 const ViewProfiles = () => {
   const location = useLocation();
@@ -240,7 +241,8 @@ const ViewProfiles = () => {
 
   const maskPhone = (phone = "") => {
     if (!phone || phone.length < 5) return "";
-    const visible = phone.slice(0, 5);
+    const phoneWithZero = formatUKPhoneNumber(phone);
+    const visible = phoneWithZero.slice(0, 5);
     return `${visible}*******`;
   };
 

@@ -22,6 +22,7 @@ import ContactConfirmModal from "../Leads/LeadLists/ContactConfirmModal";
 import { showToast } from "../../utils";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import { Helmet } from "react-helmet-async";
+import { formatUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
 
 const ArchiveLeads = () => {
   const dispatch = useDispatch();
@@ -190,7 +191,7 @@ const ArchiveLeads = () => {
                     <div className={styles.contactContainer}>
                       <div className={styles.contactItem}>
                         <img src={BluePhoneIcon} alt="" />
-                        <span>{item?.phone ? `+44${item?.phone}` : "N/A"}</span>
+                        <span>{item?.phone ? `${formatUKPhoneNumber(item?.phone)}` : "N/A"}</span>
                       </div>
 
                       <div className={styles.contactItem}>

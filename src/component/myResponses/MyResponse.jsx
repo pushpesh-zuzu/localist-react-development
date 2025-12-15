@@ -35,6 +35,7 @@ import HireUserIcon from "../../assets/Images/MyResponse/hiringbadge.svg";
 import { showToast } from "../../utils";
 import FeelingStuckFooter from "../Leads/LeadLists/FeelingStuckFooter/FeelingStuckFooter";
 import { LoadingOutlined } from "@ant-design/icons";
+import { formatUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
 
 const purchaseOptions = [
   "All Purchase Types",
@@ -309,7 +310,7 @@ const MyResponse = () => {
                   <div className={styles.contactItem}>
                     <img src={BluePhoneIcon} alt="" />
                     <span onClick={() => handlePhoneOpen(item)}>
-                      +44{item?.phone}
+                      {formatUKPhoneNumber(item?.phone)}
                     </span>
                   </div>
                   <div className={styles.contactItem}>

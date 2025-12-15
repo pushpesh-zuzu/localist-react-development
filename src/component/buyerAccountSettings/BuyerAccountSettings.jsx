@@ -101,6 +101,18 @@ const BuyerAccountSettings = () => {
       showToast("error", "Please enter a valid 10-digit phone number.");
       return;
     }
+    if (!userDetails?.phone.startsWith("0")) {
+      showToast("error", "Please enter phone number startwith '0'");
+      errors.phone = "";
+      return;
+    } else if (userDetails?.phone.startsWith("00")) {
+      showToast("error", "Phone number should start with only one '0'");
+      errors.phone = "";
+      return;
+    } else if (userDetails?.phone.length < 11) {
+      showToast("error", "Please Enter at least 11 number");
+      return
+    }
     const infoData = {
       name: userDetails.name,
       email: userDetails.email,
@@ -344,7 +356,7 @@ const BuyerAccountSettings = () => {
             value={userDetails.phone}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^\d*$/.test(value) && value.length <= 10) {
+              if (/^\d*$/.test(value) && value.length <= 11) {
                 handleChange(e);
               }
             }}

@@ -23,6 +23,7 @@ import FilterBlackIcon from "../../assets/Icons/blackfilter.svg";
 import { Select } from "antd";
 import { SwapOutlined } from "@ant-design/icons";
 import MatchingLeadsFilter from "../Leads/LeadLists/MatchingLeads/MatchingLeadsFilter";
+import { formatUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
 
 const SaveForLater = () => {
   const { Option } = Select;
@@ -409,7 +410,7 @@ const SaveForLater = () => {
                           <img src={BluePhoneIcon} alt="" />
                           <span>
                             {item?.phone
-                              ? `+44${item?.phone.substring(0, 2)}${"*".repeat(
+                              ? `${formatUKPhoneNumber(item?.phone.substring(0, 3))}${"*".repeat(
                                   item?.phone.length - 2
                                 )}`
                               : "N/A"}

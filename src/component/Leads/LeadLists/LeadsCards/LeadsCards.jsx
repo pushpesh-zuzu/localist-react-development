@@ -21,6 +21,7 @@ import ContactConfirmModal from "../ContactConfirmModal";
 import ContactSuccessModal from "../ContactSuccessModal";
 import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg";
 import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
+import { formatUKPhoneNumber } from "../../../../utils/formatUKPhoneNumber";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
@@ -243,9 +244,8 @@ const LeadsCards = () => {
                                 <img src={BluePhoneIcon} alt="" />
                                 <span className={styles.contactItemNumber}>
                                   {item?.phone
-                                    ? `+44${item?.phone.substring(
-                                        0,
-                                        2
+                                    ? `${formatUKPhoneNumber(
+                                        item?.phone.substring(0, 3)
                                       )}${"*".repeat(item?.phone.length - 2)}`
                                     : "N/A"}
                                 </span>
