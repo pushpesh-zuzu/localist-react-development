@@ -33,6 +33,7 @@ import { showToast } from "../../../utils";
 import dayjs from "../../../utils/dayjs";
 import LeadMap from "../LeadMap/LeadMap";
 import { Spin, Select } from "antd";
+import { formatUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 
 const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
   <div className={styles.timelineItem}>
@@ -335,7 +336,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
               <span>
                 <img src={PhoneImg} alt="phone" />
               </span>
-              {profileLeadViewData?.phone}{" "}
+              {formatUKPhoneNumber(profileLeadViewData?.phone)}{" "}
               {profileLeadViewData?.leads?.is_phone_verified == 1 && (
                 <sapn className={styles.verifiedText}>
                   <img src={HiredImg} alt="verified" />
@@ -369,7 +370,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                 className={styles.buttonSms}
                 onClick={() => {
                   handleResponseChange("sms");
-                  window.location.href = `sms:${formatPhoneNumber(
+                  window.location.href = `sms:${formatUKPhoneNumber(
                     user.phoneNumber
                   )}`;
                 }}
@@ -381,7 +382,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                 className={styles.buttonSms}
                 onClick={() => {
                   handleResponseChange("mobile");
-                  window.location.href = `tel:${formatPhoneNumber(
+                  window.location.href = `tel:${formatUKPhoneNumber(
                     user.phoneNumber
                   )}`;
                 }}
@@ -393,7 +394,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
                 onClick={() => {
                   handleResponseChange("Whatsapp");
                   window.open(
-                    `https://wa.me/${formatPhoneNumber(user.phoneNumber)}`,
+                    `https://wa.me/${formatUKPhoneNumber(user.phoneNumber)}`,
                     "_blank"
                   );
                 }}
