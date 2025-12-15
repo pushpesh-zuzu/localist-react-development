@@ -10,6 +10,7 @@ import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PhoneNumberMultiStepForm.module.css";
 import { useLocation } from "react-router";
 import useUserInfo from "../../../../utils/getUserIp";
+import { validateUKPhoneNumber } from "../../../../utils/formatUKPhoneNumber";
 
 const PhoneNumberMultiStepForm = ({
   nextStep,
@@ -39,7 +40,7 @@ const PhoneNumberMultiStepForm = ({
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, ""); // remove all non-digits
-    if (value.length <= 10) {
+    if (value.length <= 11) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
       setMobileErrorMessage("");
@@ -62,23 +63,25 @@ const PhoneNumberMultiStepForm = ({
     : updatedAnswers;
 
   const handleSubmit = () => {
-    if (phone.startsWith("0")) {
-      setMobileErrorMessage("Please enter phone number without '0'");
+    if (!phone) {
+      setMobileErrorMessage("Phone number is required");
       setErrors((prev) => ({ ...prev, phone: true }));
       return;
     }
 
     const newErrors = {
-      phone: !phone || !/^\d{10}$/.test(phone),
+      phone: !phone || !/^\d{11}$/.test(phone),
     };
 
     setErrors(newErrors);
 
     if (newErrors.phone) {
-      setMobileErrorMessage("Please enter a valid 10-digit phone number.");
+      setMobileErrorMessage("Please enter a valid 11-digit phone number.");
       return;
     }
-
+     if (!validateUKPhoneNumber(phone)) {
+          return;
+        }
     if (updateNumberStep === 2) {
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
@@ -155,7 +158,7 @@ const PhoneNumberMultiStepForm = ({
               errors?.phone ? styles.inputError : ""
             }`}
             value={phone}
-            maxLength={10}
+            maxLength={11}
             onChange={handlePhoneChange}
             autoComplete="off"
           />
@@ -166,7 +169,7 @@ const PhoneNumberMultiStepForm = ({
           )}
         </div>
         <p className={styles.phoneZero}>
-          ** Enter Mobile Number without the 0 **
+          ** Enter Mobile Number with the 0 **
         </p>
 
         <p style={{ marginTop: "29px" }}>

@@ -496,8 +496,8 @@ const ViewProfiles = () => {
                           "0000000000"
                       )} */}
                   {profileData?.lead_purchased === 1 || isFromManualBids
-                    ? profileData?.company_phone || profileData?.phone || ""
-                    : profileData?.company_phone || profileData?.phone
+                    ? formatUKPhoneNumber(profileData?.company_phone) || formatUKPhoneNumber(profileData?.phone) || ""
+                    : formatUKPhoneNumber(profileData?.company_phone) || formatUKPhoneNumber(profileData?.phone)
                     ? maskPhone(
                         profileData?.company_phone || profileData?.phone
                       )

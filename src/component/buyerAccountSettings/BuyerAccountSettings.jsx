@@ -18,6 +18,7 @@ import { showToast, updateLocalStorageValue } from "../../utils";
 import { setUserToken } from "../../store/Auth/authSlice";
 import { setRegisterData } from "../../store/FindJobs/findJobSlice";
 import { baseURL } from "../../Api/axiosInstance";
+import { formatUKPhoneNumber, validateUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
 
 const BuyerAccountSettings = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const BuyerAccountSettings = () => {
       setUserDetails({
         name: userData.name || "",
         email: userData.email || "",
-        phone: userData.phone || "",
+        phone: formatUKPhoneNumber(userData.phone) || "",
         profile_image: userData.profile_image || "",
       });
     }
@@ -98,25 +99,16 @@ const BuyerAccountSettings = () => {
 
   const handleSubmit = () => {
     if (!/^\+?\d{10,13}$/.test(userDetails?.phone)) {
-      showToast("error", "Please enter a valid 10-digit phone number.");
+      showToast("error", "Please enter a valid 11-digit phone number.");
       return;
     }
-    if (!userDetails?.phone.startsWith("0")) {
-      showToast("error", "Please enter phone number startwith '0'");
-      errors.phone = "";
-      return;
-    } else if (userDetails?.phone.startsWith("00")) {
-      showToast("error", "Phone number should start with only one '0'");
-      errors.phone = "";
-      return;
-    } else if (userDetails?.phone.length < 11) {
-      showToast("error", "Please Enter at least 11 number");
+    if(!validateUKPhoneNumber(userDetails?.phone)){
       return
     }
     const infoData = {
       name: userDetails.name,
       email: userDetails.email,
-      phone: userDetails.phone,
+      phone: formatUKPhoneNumber(userDetails.phone),
     };
     dispatch(updateUserIfoData(infoData)).then((result) => {
       if (result?.success) {

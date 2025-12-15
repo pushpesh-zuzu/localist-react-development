@@ -7,6 +7,7 @@ import {
 } from "../../../../store/Buyer/BuyerSlice";
 import CardLayoutWrapper from "../CardLayoutWrapper/CardLayoutWrapper";
 import styles from "./PhoneNumberMultiStepForm.module.css";
+import { validateUKPhoneNumber } from "../../../../utils/formatUKPhoneNumber";
 
 const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
   const dispatch = useDispatch();
@@ -27,20 +28,23 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
   };
 
   const handleSubmit = () => {
-    if (phone.startsWith("0")) {
-      setMobileErrorMessage("Please enter phone number without '0'");
+   if (!phone) {
+      setMobileErrorMessage("Phone number is required");
       setErrors((prev) => ({ ...prev, phone: true }));
       return;
     }
 
     const newErrors = {
-      phone: !phone || !/^\d{10}$/.test(phone),
+      phone: !phone || !/^\d{11}$/.test(phone),
     };
 
     setErrors(newErrors);
 
     if (newErrors.phone) {
-      setMobileErrorMessage("Please enter a valid 10-digit phone number.");
+      setMobileErrorMessage("Please enter a valid 11-digit phone number.");
+      return;
+    }
+    if (!validateUKPhoneNumber(phone)) {
       return;
     }
 
@@ -100,7 +104,7 @@ const PhoneNumberUpdateMultiStepForm = ({ setUpdateNumberStep }) => {
           )}
         </div>
         <p className={styles.phoneZero}>
-          ** Enter Mobile Number without the 0 **
+          ** Enter Mobile Number with the 0 **
         </p>
 
         <p style={{ marginTop: "29px" }}>

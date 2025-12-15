@@ -9,6 +9,7 @@ import {
   setbuyerRequestData,
   updateMobile,
 } from "../../../store/Buyer/BuyerSlice";
+import { validateUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 
 const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
   const dispatch = useDispatch();
@@ -67,22 +68,17 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
 
   const handlePhoneChange = (e) => {
     const value = e.target.value.replace(/\D/g, "");
-    if (value.length <= 10) {
+    if (value.length <= 11) {
       setPhone(value);
       setErrors((prev) => ({ ...prev, phone: false }));
     }
   };
 
   const handleSubmit = () => {
-    if (phone.startsWith("0")) {
-      showToast("error", "Please enter phone number without '0'");
-      return;
-    }
-
     const newErrors = {
       email: !email || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email),
       name: !name.trim(),
-      phone: !phone || !/^\d{10}$/.test(phone),
+      phone: !phone || !/^\d{11}$/.test(phone),
     };
 
     if (newErrors.email && !emailErrorMessage) {
@@ -94,6 +90,9 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
     const hasError = Object.values(newErrors).some((e) => e);
     if (hasError || !isEmailValid) return;
 
+    if (!validateUKPhoneNumber(phone)) {
+      return;
+    }
     dispatch(setbuyerRequestData({ name, email: email, phone }));
     const formData = new FormData();
     formData.append("phone", phone);
@@ -198,12 +197,12 @@ const ReEnterMobileNumber = ({ onClose, setReEnterMobile }) => {
                 errors?.phone ? styles.inputError : ""
               }`}
               value={phone}
-              maxLength={10}
+              maxLength={11}
               onChange={handlePhoneChange}
             />
             {errors?.phone && (
               <span style={{ color: "red" }} className={styles.errorMessage}>
-                Please enter a valid 10-digit phone number.
+                Please enter a valid 11-digit phone number.
               </span>
             )}
           </div>
