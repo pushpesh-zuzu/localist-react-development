@@ -168,9 +168,9 @@ const PhoneNumberMultiStepForm = ({
             </span>
           )}
         </div>
-        <p className={styles.phoneZero}>
+        {/* <p className={styles.phoneZero}>
           ** Enter Mobile Number with the 0 **
-        </p>
+        </p> */}
 
         <p style={{ marginTop: "29px" }}>
           We can only send a passcode to a <strong>MOBILE NUMBER</strong>, not a{" "}
