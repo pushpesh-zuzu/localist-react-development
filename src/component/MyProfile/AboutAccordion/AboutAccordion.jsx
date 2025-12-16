@@ -512,10 +512,10 @@ const AboutAccordion = ({ details }) => {
             showToast("error", "Please enter phone number start with '0'");
             return;
           }
-          // else if (formState.company_phone.length < 11) {
-          //   showToast("error", "Please enter at least 11 digits");
-          //   return;
-          // }
+          else if (formState.company_phone.length < 11) {
+            showToast("error", "Please enter at least 11 digits");
+            return;
+          }
         }
         setShowLoader(true);
         dispatch(updateSellerProfile(formState)).then((result) => {

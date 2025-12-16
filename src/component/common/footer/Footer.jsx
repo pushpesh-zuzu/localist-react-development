@@ -417,13 +417,14 @@ const Footer = () => {
             style={{ textDecoration: "none", color: "#000" }}
             to={`/${lang}/${country}/cookie-policy`}
           >
-            Cookie policy /{" "}
+            Cookie policy {" "}
           </Link>
+          /
           <Link
             style={{ textDecoration: "none", color: "#000" }}
             to={`/${lang}/${country}/privacy-policy`}
           >
-            Privacy policy
+           {" "} Privacy policy
           </Link>
         </p>
 
