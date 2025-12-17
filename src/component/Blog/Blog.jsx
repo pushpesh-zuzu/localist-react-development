@@ -11,6 +11,7 @@ import blog_link from "../../assets/Icons/blog_link.png";
 import PostCode from "./PostCodeContainer/PostCode";
 import { Helmet } from "react-helmet-async";
 import BlogContent from "./BlogContent";
+import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 const Blog = () => {
   const blogUrl = typeof window !== "undefined" && window.location.href;
 
@@ -51,6 +52,10 @@ const Blog = () => {
           content="Energy expert Josh Wilson warns that axing the ECO4 scheme will spark major business closures, job losses, and rising fuel poverty across the UK."
         />
       </Helmet>
+      <CalonicalTags
+        bannerImage={TreePreservationData.imgSrc}
+        isRequiredjsonLd={false}
+      />
       <div className={styles.blogContainer}>
         <header
           className={styles.blogHeader}
