@@ -1,4 +1,7 @@
-import { TreePreservationData } from "./TreePreservationData/TreePreservationData";
+import {
+  FIND_SERVICE_CONTENT_BLOG,
+  TreePreservationData,
+} from "./TreePreservationData/TreePreservationData";
 import styles from "./Blog.module.css";
 import profile_blog from "../../assets/Images/profile_blog.png";
 import blog_fb from "../../assets/Icons/blog_fb.png";
@@ -7,6 +10,7 @@ import blog_linkedin from "../../assets/Icons/blog_linkedin.png";
 import blog_link from "../../assets/Icons/blog_link.png";
 import PostCode from "./PostCodeContainer/PostCode";
 import { Helmet } from "react-helmet-async";
+import BlogContent from "./BlogContent";
 const Blog = () => {
   const blogUrl = window.location.href;
 
@@ -71,7 +75,7 @@ const Blog = () => {
               </div>
               <div className={styles.authorInfo}>
                 <div className={styles.profileWrap}>
-                  <img src={profile_blog} alt="" />
+                  {/* <img src={profile_blog} alt="" /> */}
                   <div className={styles.profileInner}>
                     <div>
                       <p>
@@ -89,7 +93,7 @@ const Blog = () => {
                     </div>
                     <div>
                       <p>Published: 28 November 2025</p>
-                      <p>Updated: 28 November 2025</p>
+                      <p>Updated: 17 December 2025</p>
                     </div>
                   </div>
                 </div>
@@ -129,100 +133,11 @@ const Blog = () => {
                 />
               </div>
             </div>
-            <p className={styles.timeWrap}>10 mins read time</p>
-            <p className={styles.descriptionText}>
-              <li>{TreePreservationData.description1}</li>
-              {/* <li>{TreePreservationData.description2}</li> */}
-              <li>
-                {TreePreservationData.description2.split("39%")[0]}
-                <a
-                  href={TreePreservationData.citbLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  39%
-                </a>
-                {TreePreservationData.description2.split("39%")[1]}
-              </li>
-
-              <li>{TreePreservationData.description3}</li>
-              <li>{TreePreservationData.description4}</li>
-              <p>
-                <br />
-                <strong>{TreePreservationData.detailTitle} </strong>
-                <span>{TreePreservationData.detailDescription1}</span>
-                <a href="https://www.localists.com/en/gb/">
-                  {TreePreservationData.detailDescription2}
-                </a>
-                <span>{TreePreservationData.detailDescription3}</span>
-              </p>
-              <br />
-              <p>{TreePreservationData.detailDescription4}</p>
-              <br />
-              <p>{TreePreservationData.detailDescription5}</p>
-            </p>
-            <img
-              src={TreePreservationData.HeatPump}
-              alt="Heat Pump"
-              className={styles.single_tree_img}
-            />
           </section>
-          {TreePreservationData.sections.map((section, index) => (
-            <section key={index} className={styles.blogSection}>
-              {/* <h2>{section.title}</h2>
-            <h3>{section.subtitle}</h3> */}
-              {/* <p>{section.content}</p> */}
-              <p>
-                {section.content1}{" "}
-                {index === 1 && (
-                  <a
-                    href={TreePreservationData.sections[1].CITB}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    CITB.
-                  </a>
-                )}
-              </p>
-              <br />
-              <p>{section.content2}</p>
-              <br />
-              {/* <p>{section.content3}</p> */}
-              <p>
-                {section.content3.includes("own data") && section.govData ? (
-                  <>
-                    {section.content3.split("own data")[0]}
-                    <a
-                      href={section.govData}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      own data
-                    </a>
-                    {section.content3.split("own data")[1]}
-                  </>
-                ) : (
-                  section.content3
-                )}
-              </p>
-
-              {section.extraImage && (
-                <img
-                  src={section.extraImage}
-                  alt="Extra section visual"
-                  className={styles.single_tree_img}
-                />
-              )}
-              <h4>{section.extra}</h4>
-              <p>{section.extraContent1}</p>
-              <br />
-              <p>{section.extraContent2}</p>
-              {/* <p>{section.extraContent3}</p> */}
-              {/* {section.postcode && <PostCode />} */}
-            </section>
-          ))}
         </div>
       </div>
+
+      <BlogContent contentBlocks={FIND_SERVICE_CONTENT_BLOG["blog1"]} />
     </>
   );
 };
