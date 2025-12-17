@@ -111,6 +111,15 @@ const FindServiceLevel3 = ({ title, contentBlocks, buttonText }) => {
                 >
                   <li className={styles.findAnAccountant_paragrap}>
                     {block.heading}
+                    {block?.text ? (
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: block?.text,
+                        }}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </li>
                 </ul>
               );

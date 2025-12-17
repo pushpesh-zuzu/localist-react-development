@@ -1512,7 +1512,7 @@ const HowItWorksData = {
       image: FreeQuotesIcon,
       heading1: "Get free quotes from driveway installers near you",
       description:
-        "Once you submit your project details, we’ll send you free, no-obligation quotes from the best driveway contractors near you. Compare offers, review profiles, explore previous work - all at no cost until you’re ready to decide.",
+        "Once you submit your project details, we’ll send you free, no-obligation quotes from the best driveway contractors near you. Compare offers, review profiles, and explore previous work – all at no cost until you’re ready to decide.",
     },
     {
       id: 3,
@@ -1626,9 +1626,9 @@ const CONTENT_CONFIG = {
 
   "driveway-installers-near-me": {
     para1:
-      "Bumps in life? inevitable. Bumps in your driveway? fixable. If you're looking to smooth things over with your driveway and give your car the VIP treatment, then ditch the red carpet for a brand new tarmac, resin or block paved driveway.",
+      "Bumps in life? inevitable. Bumps in your driveway? fixable. If you're looking to smooth things over with your driveway and give your car the VIP treatment, then ditch the red carpet for a brand new tarmac, resin or block-paved driveway.",
     para2:
-      "At localists, we connect you with local driveway contractors who can pamper your neglected driveway back to shape. Just give us a few details, and we'll get you up to 5 free quotes straight into your inbox. No cost. No obligation. No fuss. Just sit back and let us do the leg work for you. ",
+      "At Localists, we connect you with local driveway contractors who can pamper your neglected driveway back into shape. Just give us a few details, and we'll get you up to 5 free quotes straight into your inbox. No cost. No obligation. No fuss. Just sit back and let us do the legwork for you. ",
   },
   "patio-layers-near-me": {
     para1:
@@ -1886,49 +1886,60 @@ const FIND_SERVICE_CONTENT = {
   "driveway-installers-near-me": [
     {
       type: "h2",
-      text: "Driveway Installers you can trust",
+      text: "Your shortcut to vetted and verified driveway installers",
     },
     {
       type: "p",
-      text: "Getting work done on your property can massively increase it's value, but getting the wrong driveway contractor can do the opposite and leave you out of pocket. And the last thing you need is Dominic Littlewood or Rogue Traders on your doorstep! That's why with Localists, we only connect you with vetted and trusted driveway contractors. With all of their reviews from multiple platforms in one place, we make it easy for you to make the right decision for you and your driveway. With just a few details - we'll connect you with the highest quality, local driveway installers. ",
+      text: "Getting work done on your property can significantly increase its value, but choosing the wrong driveway contractor can do the opposite and leave you out of pocket. And the last thing you need is Dominic Littlewood or Rogue Traders on your doorstep! That’s why, with Localists, we only connect you with vetted and trusted driveway contractors. With all their reviews from multiple platforms in one place, we make it easy for you to make the right decision for you and your driveway. With just a few details, we’ll connect you with high-quality, local driveway installers. ",
+    },
+    {
+      type: "pbold",
+      text: "Hiring through Localists just makes sense.",
+      marginTop: true,
     },
     {
       type: "h2",
-      text: "Why hire a driveway installer through Localists",
+      text: "Why You Should Hire a Driveway Installer Through Localists",
     },
     {
       type: "p",
-      text: "Hiring the right driveway installer can be risky business. But with Localists, we aim to eliminate that risk for you, by bringing vetted and verified driveway contractors to you. All of the driveway installers on our database undergo a rigerous internal assesment, and have to meet our quality criteria to get listed on our database.  So you're safe in the knowledge that any quotes you get are from legitimate driveway contractors. With Localists, we make it easy for you to check out each companies reviews too - collating each driveway companies reviews from multiple platforms, so no need to trapse across TrustPilot, Google Reviews or anywhere else as it's right here in one place.  In a nutshell, here are the key reasons you should get your new driveway through a company on Localists:",
+      text: "Every day, hundreds of people turn to Localists to find trusted driveway installers for their latest projects. Property managers, business owners, and homeowners rely on us to secure the best quotes from skilled professionals who can deliver exactly what they need—right when they need it. All installers on our database are fully vetted and verified through our rigorous approval process.",
     },
     // {
     //   type: "p",
     //   text: "We’ve helped hundreds of clients find trusted specialists for everything from minor repairs to complete driveway installation projects. Every professional on our platform is vetted for skill, reliability, and quality - so you can hire with confidence and get the perfect fit for your project - fast. Here’s why you should hire through Localists:",
     // },
     {
-      type: "uili",
-      heading: "Streamlined hiring process:\u00A0",
-      text: "No endless searching or unanswered calls. Tell us what you need, and we’ll instantly match you with experienced people who specialise in your preferred surface. Be it resin bound, gravel, tarmac, block paving, or concrete. You call the shots.",
+      type: "pbold",
+      text: "When you hire through Localists, you get:",
+      marginTop: true,
+    },
+
+    {
+      type: "li",
+      heading: "Reliable local specialists:\u00A0",
+      text: "We match you with driveway installers who know your area inside and out. That means quicker service, helpful insight into regional building regulations, and smoother communication—even with the most unique local accents!",
       marginTop: true,
     },
     {
-      type: "uili",
-      heading: "Vetted local professionals:\u00A0",
-      text: "Every installer we recommend is fully vetted for skills, insurance, and professionalism.",
+      type: "li",
+      heading: "Personalised quotes:\u00A0",
+      text: "Say goodbye to generic pricing. Tell us what you're looking for, and we'll connect you with installers who provide custom quotes, making it easy to compare options and secure the best value.",
     },
     {
-      type: "uili",
-      heading: "Personalised, no-obligation quotes:\u00A0",
-      text: "You get free, tailored quotes from the best driveway builders in your local area. All that’s left is to choose the expert who best fits your needs and budget.",
+      type: "li",
+      heading: "Fast turnaround:\u00A0",
+      text: "Working to a specific schedule? Once matched, many professionals are ready to get started quickly and complete the project within your preferred timeframe.",
     },
     {
-      type: "uili",
-      heading: "Expert guidance and local knowledge:\u00A0",
-      text: "Our local driveway specialists have a superb understanding of the local requirements for your job, and can provide expert advice on your property, be it local planning regulations, most suitable materials for your property and the most ideal driveway bast on the local climate – ensuring you get a driveway that’s built to last.",
+      type: "li",
+      heading: "Flexible design options:\u00A0",
+      text: "Have a particular look or layout in mind? Share a few details about your project, and we’ll link you with the right contractors who can bring your vision to life.",
     },
     {
-      type: "uili",
-      heading: "Real feedback from real clients:\u00A0",
-      text: "All reviews on Localists are 100% genuine, from clients who have transformed their properties, homes and business premises, through one our trusted specialists here. We source each companies reviews from various review platforms, so you can get a true reflection of their review, all in one handy place.",
+      type: "li",
+      heading: "Ongoing maintenance support:\u00A0",
+      text: "Many installers offer more than just installation—they can handle repairs, upgrades, and ongoing maintenance to keep your driveway looking its best.",
     },
     {
       type: "h2",
@@ -1944,7 +1955,7 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "A first point of call should be checking out their reviews. And our platform makes it even easier to check a companies reviews - as we source their reviews from multiple platforms for you to read all in one place.",
+      text: "A first point of call should be checking out their reviews. And our platform makes it even easier to check a company's reviews – as we source their reviews from multiple platforms for you to read all in one place.",
     },
     {
       type: "pbold",
@@ -1964,15 +1975,15 @@ const FIND_SERVICE_CONTENT = {
     },
     {
       type: "p",
-      text: "Fortunately, with Localists, that legwork is already done. Every professional in our network is pre-vetted, reviewed, insured, and trained. You don’t need to spend hours comparing credentials, just tell us what you need, and we’ll match you with trusted driveway specialists nearby.",
+      text: "Fortunately, with Localists, that legwork is already done. Every professional in our network is pre-vetted, reviewed, insured, and trained. You don’t need to spend hours comparing credentials; just tell us what you need, and we’ll match you with trusted driveway specialists nearby.",
     },
     {
       type: "h2",
-      text: "Pro’s and cons  of each driveway surface",
+      text: "Pro’s and cons of each driveway surface",
     },
     {
       type: "p",
-      text: "If you’re still unsure which type of driveway you’d like installed, our friendly driveway installers can help you decide with their expert advice, but as a rough guide, you can see the positive and negatives of each driveway surface to give you a more informed decision below:",
+      text: "All of the driveway installers on our platform are able to give you advice on which driveway surface you should opt for. But if you want some quick pros and cons, check out the table below:",
     },
     {
       type: "table",
@@ -1980,28 +1991,28 @@ const FIND_SERVICE_CONTENT = {
       rowData: [
         [
           "Resin bound driveway",
-          "Stylish, wide choice of colours and textures, permeable (reduces puddles), prevents weed growth, quick to install",
-          "May need upkeep in high-traffic areas, quality depends on expert installation",
+          "Stylish, wide choice of colours and textures, permeable (reduces puddles), prevents weed growth, quick to install.",
+          "May need upkeep in high-traffic areas, quality depends on expert installation.",
         ],
         [
           "Tarmac driveway",
-          "Fast and simple to lay, very durable, low maintenance, cost-effective, handles heavy traffic",
-          "Fewer design options, can soften in extreme heat",
+          "Fast and simple to lay, very durable, low maintenance, cost-effective, handles heavy traffic.",
+          "Fewer design options, can soften in extreme heat.",
         ],
         [
           "Block paving / stone driveway",
-          "Premium look, versatile patterns, great for small or unusual shapes, frost-resistant surface",
-          "Longer installation time, higher cost, freeze-thaw can affect joints",
+          "Premium look, versatile patterns, great for small or unusual shapes, frost-resistant surface.",
+          "Longer installation time, higher cost, freeze-thaw can affect joints.",
         ],
         [
           "Gravel driveway",
-          "Budget-friendly, great for long driveways, wide colour options, easy to replenish",
-          "Needs regular raking and topping up, harder to clear snow, weeds without membrane",
+          "Budget-friendly, great for long driveways, wide colour options, easy to replenish.",
+          "Needs regular raking and topping up, harder to clear snow, weeds without membrane.",
         ],
         [
           "Concrete driveway",
-          "Strong, long-lasting, low maintenance, can be coloured or patterned",
-          "Can crack over time, repairs may be visible, less permeable unless modified",
+          "Strong, long-lasting, low maintenance, can be coloured or patterned.",
+          "Can crack over time, repairs may be visible, less permeable unless modified.",
         ],
       ],
     },
