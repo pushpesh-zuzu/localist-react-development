@@ -261,6 +261,9 @@
     padding: 12px 20px;
     max-width: 90%;
   }
+  .timeWrap{
+    font-size: 12px;
+  }
   .btntext {
     font-size: 28px;
     line-height: 27px;
