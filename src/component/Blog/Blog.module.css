@@ -17,7 +17,7 @@
   max-width: 45%;
   margin: auto;
   text-align: justify;
-  padding: 30px 0;
+  padding: 30px 0 0;
 }
 
 .overlay {
@@ -90,7 +90,7 @@
 }
 
 .blogSectionDes {
-  padding: 40px 20px 0px;
+  padding: 16px 0px 0px;
 }
 
 .blogSection {
@@ -121,11 +121,14 @@
 
 .social_Icons {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 16px;
+  /* margin-top: 16px; */
 }
+.social_Icons img {
+    width: 60px;
+  }
 .social_wrap > span {
   font-size: 16px;
   font-weight: 700;
@@ -183,6 +186,7 @@ h4 {
   .blogHeader {
     height: 420px;
   }
+  
 .innerContainer{
   max-width: 70%;
 }
@@ -197,7 +201,9 @@ h4 {
     margin-top: 16px;
     width: 100%;
   }
-
+.social_Icons img {
+    width: 60px;
+  }
   .header_service {
     font-size: 16px !important;
     padding: 6px 16px;
@@ -237,8 +243,8 @@ h4 {
 }
 @media screen and (max-width: 640px) {
   .innerContainer{
-  max-width: 80%;
-  padding: 16px;
+  max-width: 88%;
+  padding: 16px 16px 0px;
 }
 }
 
@@ -269,7 +275,7 @@ h4 {
   }
 
   .social_Icons img {
-    width: 60px;
+    width: 45px;
   }
 
   .header_service {

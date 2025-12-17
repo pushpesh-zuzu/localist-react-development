@@ -105,9 +105,8 @@ const Blog = () => {
         <div className={styles.innerContainer}>
           <section className={styles.blogSectionDes}>
             <div className={styles.social_wrap}>
-              <span>Share</span>
-
               <div className={styles.social_Icons}>
+                <span>Share</span>
                 <img
                   src={blog_linkedin}
                   onClick={shareOnLinkedIn}
