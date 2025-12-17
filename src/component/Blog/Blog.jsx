@@ -12,7 +12,7 @@ import PostCode from "./PostCodeContainer/PostCode";
 import { Helmet } from "react-helmet-async";
 import BlogContent from "./BlogContent";
 const Blog = () => {
-  const blogUrl = window.location.href;
+  const blogUrl = typeof window !== "undefined" && window.location.href;
 
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
@@ -80,13 +80,13 @@ const Blog = () => {
                     <div>
                       <p>
                         Written by{" "}
-                        <a href="https://www.linkedin.com/in/josh-wilson-a2120535a?trk=universal-search-cluster">
+                        <a href=" https://www.linkedin.com/in/josh-wilson-a2120535a?trk=universal-search-cluster">
                           Josh Wilson
                         </a>
                       </p>
                       <p>
                         Reviewed by{" "}
-                        <a href="https://www.linkedin.com/in/josh-wilson- a2120535a?trk=universal-search-cluster">
+                        <a href="https://uk.linkedin.com/in/michael-marshall-aaab3023">
                           Michael Marshall
                         </a>
                       </p>
