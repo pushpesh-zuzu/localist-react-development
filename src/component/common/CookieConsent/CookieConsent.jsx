@@ -9,7 +9,7 @@ const CookieConsent = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const userConsent = localStorage.getItem("user-consent");
+    const userConsent = sessionStorage.getItem("user-consent");
 
     if (!userConsent) {
       setTimeout(() => {
@@ -23,17 +23,21 @@ const CookieConsent = () => {
 
   const handleAcceptAll = () => {
     if (typeof window === "undefined") return;
-    localStorage.setItem("user-consent", "granted");
+
+    sessionStorage.setItem("user-consent", "granted");
     window.uetq.push("consent", "update", { ad_storage: "granted" });
+
     setShowBanner(false);
     setShowPreferences(false);
   };
 
-  // Save Preferences
+
   const handleSavePreferences = ({ essential, nonEssential }) => {
-    const finalValue = nonEssential ? "granted" : "denied";
     if (typeof window === "undefined") return;
-    localStorage.setItem("user-consent", finalValue);
+
+    const finalValue = nonEssential ? "granted" : "denied";
+
+    sessionStorage.setItem("user-consent", finalValue);
     window.uetq.push("consent", "update", { ad_storage: finalValue });
 
     setShowPreferences(false);
