@@ -210,6 +210,13 @@
         fbq("track", "PageView");
       })();
 
+      gtag('event', 'conversion', {
+        send_to: 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
+        value: 1.0,
+        currency: 'GBP'
+      });
+    }
+
     window.addEventListener("load", () => {
       setTimeout(loadAllTrackingScripts, 500);
     });

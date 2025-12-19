@@ -63,15 +63,6 @@ const Homepage = () => {
   return (
     <>
       <Helmet>
-        <script>
-          {`
-              gtag('event', 'conversion', {
-                'send_to': 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
-                'value': 1.0,
-                'currency': 'GBP'
-                });
-          `}
-        </script>
       <script type="application/ld+json">
         {
           `{
