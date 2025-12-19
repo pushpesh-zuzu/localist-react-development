@@ -93,6 +93,137 @@
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rubik:wght@300;400;500;700&display=swap"
     media="print" onload="this.media='all'" />
 
+  <script type="7dd2d6e4ec87e124d93a9b28-text/javascript">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    window.uetq = window.uetq || [];
+
+    function loadAllTrackingScripts() {
+
+      (function loadBingUET() {
+        const o = { ti: "97207664", enableAutoSpaTracking: true };
+        window.uetq.push("pageLoad");
+
+        const script = document.createElement("script");
+        script.src = "//bat.bing.com/bat.js";
+        script.async = true;
+        script.onload = function () {
+          window.uetq = new UET(o);
+          window.uetq.push("pageLoad");
+        };
+        document.head.appendChild(script);
+
+        window.uetq.push("consent", "default", { ad_storage: "denied" });
+        window.uetq.push("consent", "update", { ad_storage: "granted" });
+      })();
+
+
+      (function loadGoogleTracking() {
+        const adsScript = document.createElement("script");
+        adsScript.async = true;
+        adsScript.src = "https://www.googletagmanager.com/gtag/js?id=AW-17528251553";
+        document.head.appendChild(adsScript);
+
+        const adsCfg = document.createElement("script");
+        adsCfg.innerHTML = `
+        gtag('js', new Date());
+        gtag('config', 'AW-17528251553');
+      `;
+        document.head.appendChild(adsCfg);
+
+        const gaScript = document.createElement("script");
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-QJ5NH8NF5Q";
+        document.head.appendChild(gaScript);
+
+        const gaCfg = document.createElement("script");
+        gaCfg.innerHTML = `
+        gtag('js', new Date());
+        gtag('config', 'G-QJ5NH8NF5Q');
+      `;
+        document.head.appendChild(gaCfg);
+      })();
+
+
+      (function loadGTM() {
+        const gtmScript = document.createElement("script");
+        gtmScript.async = true;
+        gtmScript.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TKD2TB3J";
+        document.head.appendChild(gtmScript);
+
+        window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+      })();
+
+
+      (function loadFacebookSDK() {
+        window.fbAsyncInit = function () {
+          FB.init({
+            appId: "2143258269781131",
+            cookie: true,
+            xfbml: true,
+            version: "v19.0",
+          });
+          window.isFacebookSdkReady = true;
+        };
+
+        const fb = document.createElement("script");
+        fb.id = "facebook-jssdk";
+        fb.async = true;
+        fb.src = "https://connect.facebook.net/en_US/sdk.js";
+        document.head.appendChild(fb);
+      })();
+
+
+      (function loadHotjar() {
+        (function (h, o, t, j, a, r) {
+          h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments); };
+          h._hjSettings = { hjid: 6526155, hjsv: 6 };
+          a = o.getElementsByTagName("head")[0];
+          r = o.createElement("script");
+          r.async = 1;
+          r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+          a.appendChild(r);
+        })(window, document, "https://static.hotjar.com/c/hotjar-", ".js?sv=");
+      })();
+
+
+      (function loadMetaPixel() {
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = true;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = true;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+        fbq("init", "2857559571119727");
+        fbq("track", "PageView");
+      })();
+
+
+      gtag('event', 'conversion', {
+        send_to: 'AW-17528251553/iVB9CJjZsZMbEKHJj6ZB',
+        value: 1.0,
+        currency: 'GBP'
+      });
+    }
+
+
+    window.addEventListener("load", () => {
+      setTimeout(loadAllTrackingScripts, 500);
+    });
+  </script>
+
   <!-- Image optimization script (kept as main thread - UI critical) -->
   <script>
     (function () {
@@ -159,7 +290,7 @@
     })();
   </script>
 
-  
+
 
   <!--css-outlet-->
 </head>
@@ -167,8 +298,10 @@
 <body>
   <div id="root"><!--ssr-outlet--></div>
   <script type="module" src="/src/entry-client.jsx"></script>
-
-  
-
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKD2TB3J" height="0" width="0"
+      style="display: none; visibility: hidden"></iframe></noscript>
+  <noscript><img height="1" width="1" style="display: none"
+      src="https://www.facebook.com/tr?id=2857559571119727&ev=PageView&noscript=1" /></noscript>
 </body>
+
 </html>
