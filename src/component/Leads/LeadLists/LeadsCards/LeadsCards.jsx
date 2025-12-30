@@ -22,6 +22,7 @@ import ContactSuccessModal from "../ContactSuccessModal";
 import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg";
 import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 import { formatUKPhoneNumber } from "../../../../utils/formatUKPhoneNumber";
+import Expired from "../../../../assets/Images/Leads/expired1.jpg";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,6 @@ const LeadsCards = () => {
     };
     dispatch(getLeadRequestList(leadRequestData));
   }, []);
-
   const handleMouseEnter = () => {
     setVisibleCount((prev) => prev + 5);
   };
@@ -347,9 +347,20 @@ const LeadsCards = () => {
                           </div>
 
                           <div className={styles.leadActions}>
+                            {item?.is_expired === 1 ? (
+                              <img
+                                className={styles.expired}
+                                src={Expired}
+                                alt="Expired image"
+                              />
+                            ) : (
+                              ""
+                            )}
+
                             <button
                               className={styles.purchaseButton}
                               onClick={() => handleContinue(item)}
+                              disabled={item?.is_expired === 1}
                             >
                               Contact
                             </button>

@@ -37,6 +37,10 @@
   overflow: hidden;
   word-break: break-word; /* Optional, breaks long text */
 }
+.expired {
+  height: 50px;
+  width: 140px;
+}
 
 .jobDetails {
   grid-area: job;
@@ -230,13 +234,18 @@
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
-  cursor: pointer !important;
+  cursor: pointer;
   font-size: 20px;
   font-weight: 600;
 }
 
 .purchaseButton:hover {
   background-color: #4ecf00;
+}
+.purchaseButton:disabled {
+  background-color: rgb(225, 223, 223);
+  color: black;
+  cursor: auto;
 }
 .desktopOnlyBreak {
   display: inline;
