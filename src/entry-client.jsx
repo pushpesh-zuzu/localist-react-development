@@ -3,7 +3,12 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { createStore } from "./store/index.js";
-
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/inter/900.css";
+import "./index.css";
 // Rehydrate with server state to avoid extra client work and mismatches
 const preloadedState =
   (typeof window !== "undefined" && window.__PRELOADED_STATE__) || {};

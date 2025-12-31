@@ -24,6 +24,7 @@ import { levelFourLocationRoutes } from "./levelFourRoute";
 // import MultiStepRoofingNew from "../component/MultiStepForm/MultiStepRoofingNew";
 // import Blog from "../component/Blog/Blog";
 import ArchiveLeads from "../component/ArchiveLeads/ArchiveLeads";
+const NewDrivewaysPPCPage = lazy(() => import("../pages/NewDrivewaysPPCPage"));
 
 // ============================================================
 // LAZY-LOADED PAGES - reduces main bundle by ~200KB
@@ -245,6 +246,12 @@ const routes = [
         path: "terms/",
         element: (
           <LocaleRedirect>{withSuspense(TermsAndCondition)}</LocaleRedirect>
+        ),
+      },
+      {
+        path: "new-ppc-driveways",
+        element: (
+          <LocaleRedirect>{withSuspense(NewDrivewaysPPCPage)}</LocaleRedirect>
         ),
       },
       {
