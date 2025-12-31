@@ -1,0 +1,83 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+}
+
+/* Desktop default */
+.base {
+  font-size: 18px;
+  padding: 8px 28px;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .base {
+    font-size: 16px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .base {
+    font-size: 16px;
+  }
+}
+
+/* ---------------- VARIANTS ---------------- */
+
+.primary {
+  background: #00afe3;
+  color: #fff;
+}
+
+.secondary {
+  background: #000;
+  color: #fff;
+}
+
+.danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+/* Small paddings */
+.primary2 {
+  background: #00afe3;
+  color: #fff;
+  padding: 8px 20px;
+}
+
+/* Outlined */
+.outlined {
+  background: transparent;
+  color: #828282;
+  outline: 1px solid #828282;
+}
+
+.darkoutlined {
+  background: transparent;
+  color: #253238;
+  outline: 4px solid #000;
+}
+
+.darkoutlinedPrimary {
+  background: transparent;
+  color: #00afe3;
+  outline: 3.5px solid #00afe3;
+}
+
+/* Disabled */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
