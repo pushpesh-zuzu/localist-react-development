@@ -1,4 +1,6 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
+
 import HeroSectionNewPPC from "../component/NewPPPpage/HeroSection/HeroSectionNewPPC";
 import HowItWorkNewPPC from "../component/NewPPPpage/HowItWorkNewPPC/HowItWorkNewPPC";
 import PopularServicesTypes from "../component/NewPPPpage/PopularServicesTypes/PopularServicesTypes";
@@ -22,7 +24,12 @@ import ResinBoundSmallIcon from "../assets/ReactIcons/ResinBoundSmallIcon";
 import GravelDriveaysSmallIcon from "../assets/ReactIcons/GravelDriveaysSmallIcon";
 import ProfessionalServiceInstallation from "../component/NewPPPpage/ProffessionalServiceInstallation/ProfessionalServiceInstallation";
 import SettingIcon from "../assets/ReactIcons/SettingIcon";
-import { Helmet } from "react-helmet-async";
+import DriveWayInstallationProcessFirst from "../component/NewPPPpage/DriveWayInstallationProcessFirst/DriveWayInstallationProcessFirst";
+import RegionalGuide from "../component/NewPPPpage/RegionalGuide/RegionalGuide";
+import CompareDriveWay from "../component/NewPPPpage/CompareDriveWay/CompareDriveWay";
+import DriveMainTrip from "../component/NewPPPpage/DriveMainTrip/DriveMainTrip";
+import PlanPermReg from "../component/NewPPPpage/PlanPermiReg/PlanPermReg";
+import FAQSection from "../component/NewPPPpage/FAQSection/FAQSection";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -191,9 +198,6 @@ export const PSI_TOP = [
     title: "Expert Installation",
     text: "Qualified professionals...",
   },
-  // { icon: <ShieldIcon />, title: "Guaranteed Work", text: "5–10 year guarantees..." },
-  // { icon: <PriceIcon />, title: "Competitive Pricing", text: "Compare vetted installers..." },
-  // { icon: <ClockIcon />, title: "Quick Turnaround", text: "Completed on schedule..." },
 ];
 
 export const PSI_INCLUDED = {
@@ -244,6 +248,13 @@ function NewDrivewaysPPCPage() {
         avoid={PSI_AVOID}
         included={PSI_INCLUDED}
       />
+
+      {/* <DriveWayInstallationProcessFirst /> */}
+      <CompareDriveWay />
+      <RegionalGuide />
+      <DriveMainTrip />
+      <PlanPermReg />
+      <FAQSection />
     </>
   );
 }

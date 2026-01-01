@@ -1,0 +1,60 @@
+.RegGuideContainer {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+  text-align: center;
+  padding-top: 56px;
+  padding-bottom: 72px;
+}
+
+.RegGuideHeading {
+  color: #253538;
+}
+
+.RegGuideHeading span {
+  color: var(--primary-color);
+}
+
+.ParaText {
+  color: #253538;
+  padding: 0 25px;
+  margin-top: 12px;
+}
+
+
+.primaryBtn {
+  font-family: Inter;
+  background: #FF9933;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50.63px;
+  border: none;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -0.03px;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin-top: 48px;
+}
+
+.banner {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  padding: 33px 102px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 48px;
+}
+
+.price {
+  margin: 18px 0;
+}

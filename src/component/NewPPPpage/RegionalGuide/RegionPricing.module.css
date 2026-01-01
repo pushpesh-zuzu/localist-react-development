@@ -1,0 +1,53 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 48px;
+}
+
+/* Card */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 25px 24px 25px 20px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+  width: 385px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.header h5 {
+  font-size: 22px;
+  color: var(--primary-color);
+}
+
+/* List */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  color: #253238;
+}
+
+/* .label {
+  font-weight: 500;
+} */
+
+/* .value {
+  font-weight: 600;
+} */
+
+.icon {
+  margin-top: 6px;
+}
