@@ -22,6 +22,7 @@ import ResinBoundSmallIcon from "../assets/ReactIcons/ResinBoundSmallIcon";
 import GravelDriveaysSmallIcon from "../assets/ReactIcons/GravelDriveaysSmallIcon";
 import ProfessionalServiceInstallation from "../component/NewPPPpage/ProffessionalServiceInstallation/ProfessionalServiceInstallation";
 import SettingIcon from "../assets/ReactIcons/SettingIcon";
+import { Helmet } from "react-helmet-async";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -227,6 +228,9 @@ export const PSI_AVOID = {
 function NewDrivewaysPPCPage() {
   return (
     <>
+      <Helmet>
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <HeroSectionNewPPC />
       <HowItWorkNewPPC />
       <PopularServicesTypes data={NEW_PPC_POPULUAR_SERVICE_TYPE} />
