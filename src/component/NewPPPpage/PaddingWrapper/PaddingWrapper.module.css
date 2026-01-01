@@ -1,0 +1,10 @@
+.wrapper {
+  padding: 56px 120px 72px;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .wrapper {
+    padding: 31px 40px;
+  }
+}

@@ -1,3 +1,4 @@
+import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import H3 from "../UITypography/H3";
 import Paragraph from "../UITypography/Paragrah";
 import styles from "./NewPPCForm.module.css";
@@ -30,7 +31,7 @@ function NewPPCForm() {
         <label>Where Do You Need It? *</label>
         <input placeholder="Enter your Pin Code" />
 
-        <button className={` Arial ${styles.submitBtn}`}>Continue ➜</button>
+        <button className={` Arial ${styles.submitBtn}`}>Continue <GetQuotesIcon color="#fff"/></button>
 
         <small
           className={styles.disclaimer}

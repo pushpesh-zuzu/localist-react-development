@@ -1,0 +1,144 @@
+@media (max-width: 600px) {
+  .container {
+    padding: 40px 24px;
+  }
+}
+
+.headingWrap {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.subText {
+  margin-top: 12px;
+  color: #253238;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left pricing */
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.priceCard {
+  background: white;
+  color: #253238;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: 0px 0px 20px 0px #0000001A;
+  text-align: left;
+}
+
+.priceHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.priceTitle {
+  display: flex;
+  align-items: center;
+  /* gap: 12px; */
+}
+
+
+.price {
+  color: #00aef0;
+  font-weight: 900;
+}
+.factorPrice{
+  margin-bottom: 8px;
+}
+.priceDesc {
+  color: #253238;
+  font-weight: 400;
+}
+
+/* Right factors */
+.right {
+  background: #f4fbff;
+  border-radius: 20px;
+  padding: 30px 40px;
+  color: #253238;
+  text-align: left;
+}
+
+.factorTitle {
+  margin-bottom: 30px;
+}
+
+.factorList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.factorItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.factorIcon {
+  width: 52px;
+  height: 52px;
+  background: #00aef0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.cta {
+  margin-top: 48px;
+     display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+ .priceHeader{
+  flex-direction: column;
+  gap: 8px;
+ }
+ .priceDesc{
+  text-align: center;
+ }
+ .factorItem{
+  flex-direction: column;
+  align-items: center;
+ }
+ .factorPrice{
+  text-align: center;
+ }
+}
+

@@ -14,6 +14,7 @@
   align-items: center;
 }
 
+
 /* LEFT */
 .left {
   flex: 1;
@@ -86,6 +87,9 @@
   letter-spacing: -0.03px;
   text-align: center;
   vertical-align: middle;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .secondaryBtn {
@@ -101,6 +105,9 @@
   letter-spacing: -0.03px;
   text-align: center;
   vertical-align: middle;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Responsive */

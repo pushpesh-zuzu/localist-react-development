@@ -72,6 +72,10 @@
   letter-spacing: -0.03px;
   text-align: center;
   margin-top: 27px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
 }
 
 .disclaimer {

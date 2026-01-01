@@ -1,0 +1,60 @@
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.active {
+  background: #00afe3;
+  color: white;
+}
+
+.active * {
+  color: white !important;
+}
+
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #00afe3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 38px;
+}
+
+.active .iconWrap {
+  background: white;
+}
+
+.title {
+  margin-bottom: 12px;
+}
+
+.desc {
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}

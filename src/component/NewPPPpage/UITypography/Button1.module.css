@@ -16,7 +16,7 @@
 /* Desktop default */
 .base {
   font-size: 18px;
-  padding: 8px 28px;
+  padding: 12px 22px;
 }
 
 /* Tablet */
@@ -74,6 +74,11 @@
   background: transparent;
   color: #00afe3;
   outline: 3.5px solid #00afe3;
+}
+.green {
+  background: #10c87b;
+  color: white;
+  outline: none;
 }
 
 /* Disabled */
