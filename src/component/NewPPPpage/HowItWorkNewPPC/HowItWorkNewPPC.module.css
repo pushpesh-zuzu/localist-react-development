@@ -100,3 +100,11 @@
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  .videoWrapper{
+    max-height: 350px;
+  }
+  .videoImg {
+    margin: 0px;
+  }
+}
