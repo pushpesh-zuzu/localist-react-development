@@ -1,0 +1,105 @@
+.customWapper {
+  padding: 56px 83px 56px 83px;
+}
+
+.headingWrap {
+  text-align: center;
+  margin: 0 auto 48px;
+}
+
+.subText {
+  margin-top: 12px;
+  color: #253238;
+  font-weight: 400;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.primaryBtn {
+  font-family: Inter;
+  background: #FF9933;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50.63px;
+  border: none;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: -0.03px;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.bannerWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.banner {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  padding: 33px 102px;
+  text-align: center;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+.banner h4 {
+  color: #ffffff;
+}
+
+.price {
+  margin: 18px 0;
+}
+
+.banner h2 {
+  margin: 10px 0;
+}
+
+@media (min-width: 1px) and (max-width: 767px) {
+  .customWapper {
+    padding: 40px 10px;
+  }
+
+  .headingWrap {
+    text-align: center;
+    margin: 0 auto 40px;
+  }
+
+  .banner {
+    padding: 27px 0px;
+  }
+
+  .banner h2 {
+    margin: 10px 0;
+  }
+
+  .bannerWrapper {
+    margin-top: 40px;
+  }
+
+  .btnWrapper {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 600px) {
+  .banner {
+    padding: 27px 50px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .banner {
+    width: 100%;
+  }
+}

@@ -1,0 +1,89 @@
+/* ProcessSteps.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 48px;
+}
+
+/* Card layout */
+.cardWrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+}
+
+/* Step circle */
+.stepCircle {
+    font-size: 48px;
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card */
+.card {
+    flex: 1;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 20px;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Text */
+.title {
+    color: #253238;
+    text-align: left;
+}
+
+.description {
+    color: #253538;
+    text-align: left;
+    margin-top: 16px;
+}
+
+.badgeRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+
+/* Mobile */
+@media screen and (min-width:1px) and (max-width: 1024px) {
+    .container {
+        margin-top: 60px;
+        padding: 0 20px;
+    }
+
+    .stepCircle {
+        font-size: 24px;
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+    }
+}
+
+/* Mobile */
+/* @media screen and (min-width:769px) and (max-width: 1024px) {
+    .container {
+        margin-top: 60px;
+        padding: 0 20px;
+    }
+
+    .stepCircle {
+        font-size: 24px;
+        width: 64px;
+        height: 64px;
+        min-width: 64px;
+    }
+} */

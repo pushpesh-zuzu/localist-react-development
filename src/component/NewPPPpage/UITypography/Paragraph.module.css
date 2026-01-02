@@ -25,7 +25,7 @@
 }
 
 .medium {
-  font-size: 18px;
+  font-size: 20px;
   line-height: 24px;
 }
 
@@ -61,7 +61,7 @@
 @media (max-width: 600px) {
   .primary {
     font-size: 18px;
-    line-height: 18px;
+    line-height: 22px;
   }
 
   .secondary {
@@ -70,7 +70,7 @@
   }
 
   .medium {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 22px;
   }
 

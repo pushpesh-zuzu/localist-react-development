@@ -1,0 +1,19 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  background-color: #e3f6fc;
+  color: #253238;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  line-height: 1;
+  text-align: left;
+}

@@ -20,6 +20,7 @@ const QuestionModalNewPPC = ({
   serviceName,
   nextStep,
   loading = true,
+  setLocalRequestId
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach, questionLoader } =
@@ -201,6 +202,7 @@ const QuestionModalNewPPC = ({
           dispatch(registerQuoteCustomer(formData)).then((result) => {
             if (result) {
               nextStep();
+              setLocalRequestId(result?.data?.user_id);
             }
           });
         }

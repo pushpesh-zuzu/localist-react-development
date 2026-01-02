@@ -281,7 +281,7 @@ const CookiePolicy = () => {
           />
         }
       </Helmet>
-      <CalonicalTags/>
+      <CalonicalTags isRequiredjsonLd={false}/>
       <div className={styles.container}>
         <div className={styles.contentContainer}>
           <div className={styles.contentWrapper}>

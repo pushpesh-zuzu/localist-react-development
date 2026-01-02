@@ -1,0 +1,17 @@
+.cta {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 640px) {
+  .cta {
+    margin-top: 40px;
+  }
+}

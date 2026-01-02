@@ -17,13 +17,18 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 22px;
 }
 
 .cta {
   margin-top: 50px;
   display: flex;
   justify-content: center;
+}
+.button{
+  display: flex;
+    gap: 5px;
+
 }
 
 @media (max-width: 1024px) {
@@ -36,4 +41,9 @@
   .grid {
     grid-template-columns: 1fr;
   }
+  .headingWrap {
+  text-align: center;
+  margin: 0 auto 30px;
+
+}
 }

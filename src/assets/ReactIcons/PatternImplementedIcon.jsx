@@ -1,42 +1,63 @@
 import React from "react";
 
-function PatternImplementedIcon({className=""}) {
+function PatternImplementedIcon({
+  className = "",
+  bgColor = "#00AFE3",
+  strokeColor = "white",
+  fillColor = "white",
+  width = "76",
+  height = "76",
+  strokeWidth = "4"
+}) {
   return (
     <svg
-      width="76"
-      height="76"
+      width={width}
+      height={height}
       viewBox="0 0 76 76"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <rect width="75.4286" height="75.4286" rx="37.7143" fill="#00AFE3" />
+      {/* Background circle */}
+      <rect width="75.4286" height="75.4286" rx="37.7143" fill={bgColor} />
+      
+      {/* Main cloud/pattern shape */}
       <path
         d="M39.0591 49.6992C44.3451 49.6992 61.2925 64.9277 61.2925 44.5095C61.2925 31.6421 50.8614 21.2109 37.9939 21.2109C25.1265 21.2109 14.6953 31.6421 14.6953 44.5095C14.6953 64.7891 33.1387 49.6992 39.0591 49.6992Z"
-        stroke="white"
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={strokeColor}
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
+      
+      {/* First dot */}
       <path
         d="M27.5182 37.5208C29.4483 37.5208 31.013 35.9562 31.013 34.026C31.013 32.0959 29.4483 30.5312 27.5182 30.5312C25.5881 30.5312 24.0234 32.0959 24.0234 34.026C24.0234 35.9562 25.5881 37.5208 27.5182 37.5208Z"
-        fill="white"
+        fill={fillColor}
       />
+      
+      {/* Second dot */}
       <path
         d="M22.862 46.8411C24.7921 46.8411 26.3568 45.2765 26.3568 43.3464C26.3568 41.4162 24.7921 39.8516 22.862 39.8516C20.9319 39.8516 19.3672 41.4162 19.3672 43.3464C19.3672 45.2765 20.9319 46.8411 22.862 46.8411Z"
-        fill="white"
+        fill={fillColor}
       />
+      
+      {/* Third dot */}
       <path
         d="M38.0026 32.8646C39.9327 32.8646 41.4974 31.2999 41.4974 29.3698C41.4974 27.4397 39.9327 25.875 38.0026 25.875C36.0725 25.875 34.5078 27.4397 34.5078 29.3698C34.5078 31.2999 36.0725 32.8646 38.0026 32.8646Z"
-        fill="white"
+        fill={fillColor}
       />
+      
+      {/* Fourth dot */}
       <path
         d="M48.487 37.5208C50.4171 37.5208 51.9818 35.9562 51.9818 34.026C51.9818 32.0959 50.4171 30.5312 48.487 30.5312C46.5569 30.5312 44.9922 32.0959 44.9922 34.026C44.9922 35.9562 46.5569 37.5208 48.487 37.5208Z"
-        fill="white"
+        fill={fillColor}
       />
+      
+      {/* Fifth dot */}
       <path
         d="M53.1432 46.8411C55.0733 46.8411 56.638 45.2765 56.638 43.3464C56.638 41.4162 55.0733 39.8516 53.1432 39.8516C51.2131 39.8516 49.6484 41.4162 49.6484 43.3464C49.6484 45.2765 51.2131 46.8411 53.1432 46.8411Z"
-        fill="white"
+        fill={fillColor}
       />
     </svg>
   );

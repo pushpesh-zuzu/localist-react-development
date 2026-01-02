@@ -146,7 +146,7 @@
 @media (max-width: 768px) {
   .container {
     padding: 24px;
-    max-width: 400px;
+    /* max-width: 400px; */
   }
 
   .title {
@@ -174,7 +174,7 @@
 @media (max-width: 480px) {
   .container {
     padding: 20px 16px;
-    max-width: 320px;
+    /* max-width: 320px; */
   }
 
   .title {
