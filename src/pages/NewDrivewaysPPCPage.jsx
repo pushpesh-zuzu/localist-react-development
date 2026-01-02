@@ -293,7 +293,7 @@ function NewDrivewaysPPCPage() {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      {/* <HeroSectionNewPPC />
+      <HeroSectionNewPPC />
       <HowItWorkNewPPC />
       <PopularServicesTypes data={NEW_PPC_POPULUAR_SERVICE_TYPE} />
       <CostGuide
@@ -305,7 +305,7 @@ function NewDrivewaysPPCPage() {
         topCards={PSI_TOP}
         avoid={PSI_AVOID}
         included={PSI_INCLUDED}
-      /> */}
+      />
 
       {/* <DriveWayInstallationProcessFirst /> */}
       <CompareDriveWay />
