@@ -39,7 +39,7 @@
 }
 .expired {
   height: 50px;
-  width: 140px;
+  width: 157px;
 }
 
 .jobDetails {
@@ -379,6 +379,10 @@
     width: 100%;
     align-items: flex-start;
     gap: 20px;
+  }
+  .expired{
+    width: 104px;
+    height: 39px;
   }
 }
 

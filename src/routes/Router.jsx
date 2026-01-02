@@ -248,12 +248,12 @@ const routes = [
           <LocaleRedirect>{withSuspense(TermsAndCondition)}</LocaleRedirect>
         ),
       },
-      {
-        path: "new-ppc-driveways",
-        element: (
-          <LocaleRedirect>{withSuspense(NewDrivewaysPPCPage)}</LocaleRedirect>
-        ),
-      },
+      // {
+      //   path: "new-ppc-driveways",
+      //   element: (
+      //     <LocaleRedirect>{withSuspense(NewDrivewaysPPCPage)}</LocaleRedirect>
+      //   ),
+      // },
       {
         path: "cookie-policy",
         element: <LocaleRedirect>{withSuspense(CookiePolicy)}</LocaleRedirect>,

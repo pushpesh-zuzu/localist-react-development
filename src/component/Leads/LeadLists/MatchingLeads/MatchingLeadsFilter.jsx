@@ -277,7 +277,7 @@ const MatchingLeadsFilter = ({ onClose, saved_leads = false }) => {
             )}
           </AccordionSection>
 
-          <AccordionSection title="Lead Type">
+          <AccordionSection title="Lead status">
             <label
               style={{ display: "flex", alignItems: "center", gap: "8px" }}
             >
