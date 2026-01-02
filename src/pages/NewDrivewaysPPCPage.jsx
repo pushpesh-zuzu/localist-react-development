@@ -301,7 +301,7 @@ function NewDrivewaysPPCPage() {
         factors={COST_FACTORS}
         icons={COST_ICONS}
       />
-      <ProfessionalServiceInstallation
+      {/* <ProfessionalServiceInstallation
         topCards={PSI_TOP}
         avoid={PSI_AVOID}
         included={PSI_INCLUDED}
