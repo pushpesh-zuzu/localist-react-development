@@ -107,7 +107,8 @@ const FooterContent = () => (
   </>
 );
 
-const Footer = () => {
+const Footer = ({floatingMargin=false}) => {
+console.log(  floatingMargin ,'floatingMargin')
   const { country, lang } = useUserGeo();
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(
@@ -144,7 +145,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${floatingMargin ? styles.flotingMargin:''}`}>
       <div className={styles.footerContainer}>
         <div className={styles.footerLeft}>
           {/* <Link to={`/${lang}/${country}`} className={styles.link}> */}

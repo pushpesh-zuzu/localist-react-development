@@ -38,12 +38,15 @@ import CheckSquareIcon from "../assets/ReactIcons/CheckSquareIcon";
 import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
+import Button1 from "../component/NewPPPpage/UITypography/Button1";
+import { handleScrollToBottom } from "../utils/scroll";
 
 // import { DRIVE_MAIN_TRIP } from "./externalData";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
     icon: <BlockPalvingIcon />,
+    inActiveIcon: <BlockPalvingIcon bgColor="#00AFE3" strokeColor="white" />,
     title: "Block Paving",
     description:
       "Durable and versatile block paving offers endless design possibilities with various colors, patterns, and textures. Perfect for creating unique driveways that enhance property value.",
@@ -58,7 +61,17 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <TarmacIcon />,
+    icon: (
+      <TarmacIcon bgColor="white" fillColor="#00AFE3" dashColor="#FFFFFF" />
+    ),
+    inActiveIcon: (
+      <TarmacIcon
+        bgColor="#00AFE3"
+        fillColor="#00AFE3"
+        strokeColor="white"
+        dashColor="#FFFFFF"
+      />
+    ),
     title: "Tarmac Driveways",
     description:
       "Cost-effective and quick to install, tarmac driveways provide a smooth, durable surface that requires minimal maintenance. Ideal for those seeking practical solutions.",
@@ -69,7 +82,8 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <ResinBoundIcon />,
+    icon: <ResinBoundIcon bgColor="white" strokeColor="#00AFE3"/>,
+    inActiveIcon: <ResinBoundIcon bgColor="#00AFE3" strokeColor="white" />,
     title: "Resin Bound",
     description:
       "Modern and stylish resin bound driveways offer excellent drainage, smooth finish, and UV stability. Low maintenance solution for contemporary homes.",
@@ -80,7 +94,8 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <GravelDrivewaysIcon />,
+    icon: <GravelDrivewaysIcon bgColor="white" fillColor="#00AFE3" strokeColor="#00AFE3" />,
+    inActiveIcon: <GravelDrivewaysIcon />,
     title: "Gravel Driveways",
     description:
       "Affordable and charming gravel driveways provide excellent drainage and a distinctive crunchy texture. Perfect for rural and traditional properties.",
@@ -94,7 +109,20 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <ExpertInstallationIcon />,
+    icon: (
+      <ExpertInstallationIcon
+        bgColor="white"
+        strokeColor="#00aef0"
+        fillColor="white"
+      />
+    ),
+    inActiveIcon: (
+      <ExpertInstallationIcon
+        bgColor="#00aef0"
+        strokeColor="white"
+        fillColor="#00aef0"
+      />
+    ),
     title: "Expert Installation",
     description:
       "Durable and versatile block paving offers endless design possibilities with various colors, patterns, and textures. Perfect for creating unique driveways that enhance property value.",
@@ -105,7 +133,16 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <PatternImplementedIcon />,
+    icon: (
+      <PatternImplementedIcon
+        bgColor="white"
+        strokeColor="#00aef0"
+        fillColor="#00aef0"
+      />
+    ),
+    inActiveIcon: (
+      <PatternImplementedIcon strokeColor="white" fillColor="white" />
+    ),
     title: "Pattern Imprinted",
     description:
       "Decorative pattern imprinted concrete mimics natural stone, brick, or slate at a fraction of the cost. Stunning aesthetics with excellent durability.",
@@ -135,7 +172,7 @@ export const COST_PRICING = [
     price: "£50–£100/m²",
     description:
       "Premium quality with extensive design options. Installation typically takes 5–7 days.",
-    prop: { background: "white", color: "00AFE3", strokColor: "00AFE3" },
+    prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
   },
 
   {
@@ -143,7 +180,7 @@ export const COST_PRICING = [
     title: "Tarmac",
     price: "£40–£70/m²",
     description: "Cost-effective and durable. Quick installation in 2–3 days.",
-    prop: { background: "white", color: "00AFE3", strokColor: "00AFE3" },
+    prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
   },
   {
     icon: "resin",
@@ -151,7 +188,7 @@ export const COST_PRICING = [
     price: "£60–£120/m²",
     description:
       "Premium quality with extensive design options. Installation typically takes 5-7 days.",
-    prop: { background: "white", color: "00AFE3", strokColor: "00AFE3" },
+    prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
   },
   {
     icon: "gravel",
@@ -159,7 +196,7 @@ export const COST_PRICING = [
     price: "£25–£50/m²",
     description:
       "Most affordable option with good drainage. 1–2 days to complete.",
-    prop: { background: "white", color: "00AFE3", strokColor: "00AFE3" },
+    prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
   },
 ];
 
@@ -202,17 +239,17 @@ export const PSI_TOP = [
     title: "Expert Installation",
     text: "Qualified professionals with years of experience use industry-grade tools and machinery to ensure a flawless, long-lasting driveway finish.",
   },
-   {
+  {
     icon: <VettedProffessionIcon />,
     title: "Guaranteed Work",
     text: "Most professionals offer up 5 -10 year guarantees on workmanship, giving you peace of mind long after installation is complete.",
   },
-   {
+  {
     icon: <CompetitivePricingIcon />,
     title: "Competitive Pricing",
     text: "Get fair, transparent pricing from vetted local installers, allowing you to compare quotes and choose the best value for your budget.",
   },
-   {
+  {
     icon: <QuicAlarmIcon />,
     title: "Quick Turnaround",
     text: "Projects are completed on schedule without compromising quality, so you get a beautiful new driveway with minimal disruption",
@@ -315,9 +352,7 @@ function NewDrivewaysPPCPage() {
         factors={COST_FACTORS}
         icons={COST_ICONS}
       />
-      <ProfessionalServiceInstallation
-        topCards={PSI_TOP}
-      />
+      <ProfessionalServiceInstallation topCards={PSI_TOP} />
 
       {/* <DriveWayInstallationProcessFirst /> */}
       <CompareDriveWay />
@@ -325,6 +360,18 @@ function NewDrivewaysPPCPage() {
       {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
       <FAQSection />
+      <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
+        <Button1
+          onClick={() => {
+            handleScrollToBottom();
+          }}
+          className="button"
+          variant="primary"
+        >
+          Get A Free Quotes Now{" "}
+          <GetQuotesIcon style={{ marginLeft: "5px" }} color="white" />
+        </Button1>
+      </div>
     </>
   );
 }

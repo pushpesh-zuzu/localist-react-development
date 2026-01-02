@@ -319,6 +319,7 @@ const pageTitles = {
   },
 };
 
+const floatingPath = ['/new-ppc-driveways']
 const MainLayout = () => {
   const location = useLocation();
 
@@ -334,7 +335,7 @@ const MainLayout = () => {
 
   const lookupPath = stripLocalePrefix(location.pathname);
   let meta = pageTitles[lookupPath];
-
+console.log(lookupPath,'lookupPath')
   // Handle dynamic route for /view-profile/:companyName/:id
   if (!meta && lookupPath.startsWith("/view-profile")) {
     const parts = lookupPath.split("/");
@@ -359,7 +360,7 @@ const MainLayout = () => {
       <main style={{ minHeight: "50vh", position: "relative", zIndex: 9 }}>
         <Outlet />
       </main>
-      <Footer />
+      <Footer floatingMargin={floatingPath.includes(lookupPath)}/>
       <CookieConsent />
     </div>
   );

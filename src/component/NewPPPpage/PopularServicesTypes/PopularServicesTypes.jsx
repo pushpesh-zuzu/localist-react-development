@@ -10,7 +10,6 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 
 function PopularServicesTypes({ data = [] }) {
   const [active, setActive] = useState(0);
-  console.log(data, "datadata");
   return (
     <PaddingWrapper background="#FCFCFC">
       <div className={styles.headingWrap}>
