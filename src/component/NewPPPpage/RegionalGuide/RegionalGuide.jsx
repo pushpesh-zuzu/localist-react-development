@@ -11,7 +11,7 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 
 const RegionalGuide = () => {
   return (
-    <PaddingWrapper className={styles.customWapper}>
+    <PaddingWrapper background="#FCFCFC" className={styles.customWapper}>
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading blueText="Regional" blackText="Pricing Guide" />
 

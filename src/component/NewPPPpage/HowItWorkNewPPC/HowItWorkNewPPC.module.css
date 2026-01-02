@@ -1,8 +1,11 @@
-.container {
+/* .container {
   color: #fff;
   padding: 56px 120px 120px 72px;
   text-align: center;
-}
+} */
+ .container{
+  text-align: center;
+ }
 .wordText{
     max-width: 88%;
     margin: auto;
@@ -110,9 +113,9 @@
 }
 
 @media (max-width: 600px) {
-  .container {
+  /* .container {
     padding: 30px 10px 48px;
-  }
+  } */
   /* .heading{
     margin-bottom: 10px;
   } */

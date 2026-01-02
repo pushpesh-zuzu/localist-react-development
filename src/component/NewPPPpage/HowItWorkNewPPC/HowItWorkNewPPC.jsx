@@ -12,12 +12,13 @@ import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PlayIcon from "../../../assets/ReactIcons/PlayIcon";
 import ThreeBusinessPerson from "./three-business-people-meeting.webp";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 function HowItWorkNewPPC({
   heading = "What to Expect From a Professional Driveway Installation",
   description = `Get competitive home improvements quotes from leading suppliers in 3 simples step!`,
 }) {
   return (
-    <section className={styles.container}>
+    <PaddingWrapper className={styles.container} >
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading
           blueText="How it"
@@ -46,7 +47,9 @@ function HowItWorkNewPPC({
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <SettingIcon className={styles.icon} />
-          <H5 className={styles.wordText}>Fill in your details for your project</H5>
+          <H5 className={styles.wordText}>
+            Fill in your details for your project
+          </H5>
         </div>
 
         <div className={styles.featureCard}>
@@ -56,17 +59,25 @@ function HowItWorkNewPPC({
 
         <div className={styles.featureCard}>
           <FastTimeIcon className={styles.icon} />
-          <H5 className={styles.wordTextLast}>Compare your quotes and enjoy great savings</H5>
+          <H5 className={styles.wordTextLast}>
+            Compare your quotes and enjoy great savings
+          </H5>
         </div>
       </div>
 
       {/* CTA */}
       <div className={styles.cta}>
-        <Button1 onClick={()=>{handleScrollToBottom()}} variant="warning" className={styles.button}>
+        <Button1
+          onClick={() => {
+            handleScrollToBottom();
+          }}
+          variant="warning"
+          className={styles.button}
+        >
           Get A Free Quotes Now <GetQuotesIcon color="white" />{" "}
         </Button1>
       </div>
-    </section>
+    </PaddingWrapper>
   );
 }
 
