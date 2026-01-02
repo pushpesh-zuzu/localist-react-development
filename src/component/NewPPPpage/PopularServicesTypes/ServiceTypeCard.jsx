@@ -9,7 +9,7 @@ function ServiceTypeCard({ data, active, onClick }) {
 
   return (
     <div
-      // onClick={onClick}
+      onClick={onClick}
       className={`${styles.card} ${active ? styles.active : ""}`}
     >
       <div className={styles.iconWrap}>{icon}</div>
