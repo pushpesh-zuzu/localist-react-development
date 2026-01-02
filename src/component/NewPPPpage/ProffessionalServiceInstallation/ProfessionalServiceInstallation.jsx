@@ -26,7 +26,7 @@ function ProfessionalServiceInstallation({
     //       regulations
     //     </Paragraph>
     //   </div>
-    <PaddingWrapper background="#FCFCFC">
+    <PaddingWrapper background="#FAFAFA">
       {/* Heading */}
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading

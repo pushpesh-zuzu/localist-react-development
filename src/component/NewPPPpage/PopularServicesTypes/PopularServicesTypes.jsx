@@ -11,7 +11,7 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 function PopularServicesTypes({ data = [] }) {
   const [active, setActive] = useState(0);
   return (
-    <PaddingWrapper background="#FCFCFC">
+    <PaddingWrapper background="#FAFAFA">
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading blueText="Popular" blackText="Driveway Types" />
 

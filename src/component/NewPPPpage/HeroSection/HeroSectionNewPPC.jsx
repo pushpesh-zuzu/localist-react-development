@@ -16,11 +16,14 @@ import OTPVerificationNewPPC from "./OTPVerificationNewPPC/OTPVerificationNewPPC
 import ReEnterMobileNumberNewPPC from "./ReEnterMobileNumberNewPPC/ReEnterMobileNumberNewPPC";
 import FormWrapper from "./RegistrationForm/FormWrapper";
 import DescribeYourRequestNewPPC from "./DescribeYourRequestNewPPC/DescribeYourRequestNewPPC";
+import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
+import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 function HeroSectionNewPPC({ title = "Driveway" }) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
+  const [localRequestId, setLocalRequestId] = useState(null);
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
   const nextStep = () => {
@@ -58,6 +61,17 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
 
   return (
     <section className={styles.heroWrapper}>
+      {localRequestId === null && (
+        <div>
+          {typeof window !== "undefined" && window.innerWidth > 768 ? (
+            <NavigationDetectorDesktop />
+          ) : typeof window !== "undefined" ? (
+            <NavigationDetectorWithConfirmations />
+          ) : (
+            ""
+          )}
+        </div>
+      )}
       <div className={styles.container}>
         {/* LEFT CONTENT */}
         <div className={styles.left}>
@@ -70,28 +84,27 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
             Services Near You
           </H1>
 
-          <div className={styles.desktopfirstSection} >
-          <div className={styles.features}>
-            <div className={styles.feature}>
-              <VettedProffessionIcon className={styles.icon} />
-              <p>Vetted Professionals</p>
+          <div className={styles.desktopfirstSection}>
+            <div className={styles.features}>
+              <div className={styles.feature}>
+                <VettedProffessionIcon className={styles.icon} />
+                <p>Vetted Professionals</p>
+              </div>
+              <div className={styles.feature}>
+                <FreeQuoteIcon className={styles.icon} />
+                <p>Free Quotes</p>
+              </div>
+              <div className={styles.feature}>
+                <FastResponseIcon className={styles.icon} />
+                <p>Fast Response</p>
+              </div>
             </div>
-            <div className={styles.feature}>
-              <FreeQuoteIcon className={styles.icon} />
-              <p>Free Quotes</p>
-            </div>
-            <div className={styles.feature} >
-              <FastResponseIcon  className={styles.icon}/>
-              <p>Fast Response</p>
-            </div>
-          </div>
 
-          <div className={styles.ctaRow}>
-            <button className={`${styles.primaryBtn} `}>
-              Get A Free Quotes Now <GetQuotesIcon color="white" />
-            </button>
-            
-          </div>
+            <div className={styles.ctaRow}>
+              <button className={`${styles.primaryBtn} `}>
+                Get A Free Quotes Now <GetQuotesIcon color="white" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -104,6 +117,7 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
             loading={questionLoader}
             serviceName={buyerRequest.service_name}
             nextStep={nextStep}
+            setLocalRequestId={setLocalRequestId}
           />
         )}
         {buyerStep === 3 && reEnterMobile === 2 && (
@@ -124,7 +138,7 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
           </FormWrapper>
         )}
 
-        <div className={styles.mobilefirstSection} >
+        <div className={styles.mobilefirstSection}>
           <div className={styles.features}>
             <div className={styles.feature}>
               <VettedProffessionIcon className={styles.icon} />
@@ -134,8 +148,8 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
               <FreeQuoteIcon className={styles.icon} />
               <p>Free Quotes</p>
             </div>
-            <div className={styles.feature} >
-              <FastResponseIcon  className={styles.icon}/>
+            <div className={styles.feature}>
+              <FastResponseIcon className={styles.icon} />
               <p>Fast Response</p>
             </div>
           </div>
@@ -144,9 +158,8 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
             <button className={`${styles.primaryBtn} `}>
               Get A Free Quotes Now <GetQuotesIcon color="white" />
             </button>
-            
           </div>
-          </div>
+        </div>
       </div>
     </section>
   );
