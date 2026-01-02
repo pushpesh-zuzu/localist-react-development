@@ -15,9 +15,9 @@ export default function InfoListCard({ title, icon, listIcon, items, theme = "pr
           <li key={index} className={styles.listItem}>
             <span className={styles.headerIcon}>{listIcon}</span>
             <div>
-              {item.title && <H5>{title}</H5>}
+              {item.title && <H5>{item.title}</H5>}
               {item.description && <Paragrah bold={false}>{item.description}</Paragrah>}
-              {item.text && <p>{item.text}</p>}
+              {item.text && <Paragrah bold={false}>{item.text}</Paragrah>}
             </div>
           </li>
         ))}

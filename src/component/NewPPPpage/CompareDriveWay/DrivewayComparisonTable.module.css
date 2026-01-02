@@ -36,7 +36,7 @@
 
 table tr td:first-child {
   background-color: #E3F6FC;
-} 
+}
 
 /* Highlight cost */
 .cost p {
@@ -61,4 +61,52 @@ table tr td:first-child {
   align-items: center;
   gap: 4px;
   margin-top: 48px;
+}
+
+@media (min-width: 1px) and (max-width: 1024px) {
+
+  /* styles for mobile & small tablets */
+  .tableWrapper {
+    width: 90%;
+    margin-top: 40px;
+    overflow-x: auto;
+  }
+
+  .tableWrapper h5 {
+    font-size: 24px;
+  }
+
+  /* Freeze first column */
+  th:nth-child(1),
+  td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    background: var(--primary-color);
+  }
+
+  /* Header first column above body */
+  th:nth-child(1) {
+    z-index: 5;
+  }
+
+  td:nth-child(1) {
+    z-index: 0;
+  }
+
+  /* th:nth-child(1),
+  td:nth-child(1) {
+    width: 156px;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 184px;
+  } */
+}
+
+@media (min-width: 768px) {
+  .tableWrapper p {
+    font-size: 16px;
+    line-height: 16px;
+  }
 }

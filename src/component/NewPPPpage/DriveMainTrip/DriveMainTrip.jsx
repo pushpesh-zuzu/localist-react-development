@@ -8,25 +8,33 @@ import {
   commonMistakesData,
 } from "./InfoListGrid/infoListCardData";
 
-const DriveMainTrip = () => {
+import PaddingWrapper from '../PaddingWrapper/PaddingWrapper';
+import BlueBlackH2Heading from '../UITypography/BlueBlackH2Heading';
+
+const DriveMainTrip = ({ data }) => {
   return (
-    <div className={`${styles.Container}`}>
-      <H2 className={`Inter ${styles.Heading}`}>
-        <span>Driveway</span> Maintenance Tips
-      </H2>
 
-      <Paragraph className={`${styles.ParaText}`} bold={false}>Extend the life of your driveway with proper maintenance</Paragraph>
+    <PaddingWrapper className={styles.customSettings} background="#FCFCFC">
+      <div className={styles.headingWrap}>
+        <BlueBlackH2Heading blueText={data.blueText} blackText={data.blackText} />
 
-      <div className={`${styles.gridTwoColumn}`}>
-        <InfoListCard {...maintenanceScheduleData} />
-        <InfoListCard {...commonMistakesData} />
+        <Paragraph className={styles.subText}>
+          {data.subHeading}
+        </Paragraph>
       </div>
 
-      <button className={`${styles.primaryBtn}`}>
-        <span>Get A Free Quotes Now</span>
-        <SendArrowIcon size={18} />
-      </button>
-    </div>
+      <div className={`${styles.gridTwoColumn}`}>
+        <InfoListCard {...(data.maintenanceScheduleData)} />
+        <InfoListCard {...(data.commonMistakesData)} />
+      </div>
+
+      <div className={styles.btnWrapper}>
+        <button className={`${styles.primaryBtn}`}>
+          <span>Get A Free Quotes Now</span>
+          <SendArrowIcon size={18} />
+        </button>
+      </div>
+    </PaddingWrapper>
   )
 }
 

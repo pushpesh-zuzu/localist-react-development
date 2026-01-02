@@ -11,7 +11,6 @@
   border-radius: 20px;
   padding: 25px 24px 25px 20px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  width: 385px;
 }
 
 /* Header */
@@ -40,14 +39,59 @@
   color: #253238;
 }
 
-/* .label {
-  font-weight: 500;
-} */
-
-/* .value {
-  font-weight: 600;
-} */
-
 .icon {
   margin-top: 6px;
+}
+
+.grid {
+  padding: 0 237px;
+}
+
+.grid>* {
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1px) and (max-width: 768px) {
+  
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
 }

@@ -139,3 +139,10 @@
   }
 
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+   /* styles for mobile & small tablets */
+  .frequently_container {
+    padding: 0;
+  }
+}

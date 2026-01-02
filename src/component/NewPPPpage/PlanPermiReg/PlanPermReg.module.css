@@ -1,5 +1,5 @@
 .customSettings {
-    padding: 56px 328px 72px;
+    padding: 56px 272px 72px;
 }
 
 .headingWrap {
@@ -62,4 +62,25 @@
     align-items: center;
     gap: 4px;
     margin-top: 48px;
+}
+
+@media (min-width: 1px) and (max-width: 767px) {
+    .customSettings {
+        padding: 40px 10px 72px 10px;
+    }
+
+    .gridTwoColumn {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .banner {
+        padding: 27px 7px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .customSettings {
+        padding: 40px 10px 72px 10px;
+    }
 }

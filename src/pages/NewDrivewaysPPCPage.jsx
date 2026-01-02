@@ -31,6 +31,13 @@ import DriveMainTrip from "../component/NewPPPpage/DriveMainTrip/DriveMainTrip";
 import PlanPermReg from "../component/NewPPPpage/PlanPermiReg/PlanPermReg";
 import FAQSection from "../component/NewPPPpage/FAQSection/FAQSection";
 
+import InfoOctagonIcon from "../assets/ReactIcons/InfoOctagonIcon";
+import CalendarCheckIcon from "../assets/ReactIcons/CalendarCheckIcon";
+import CloseSquareIcon from "../assets/ReactIcons/CloseSquareIcon";
+import CheckSquareIcon from "../assets/ReactIcons/CheckSquareIcon";
+
+// import { DRIVE_MAIN_TRIP } from "./externalData";
+
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
     icon: <BlockPalvingIcon />,
@@ -229,13 +236,64 @@ export const PSI_AVOID = {
   ],
 };
 
+export const DRIVE_MAIN_TRIP = {
+  heading: "Driveway",
+  blueText: "Driveway",
+  blackText:"Maintenance Tips",
+  subHeading: "Extend the life of your driveway with proper maintenance",
+  maintenanceScheduleData: {
+    theme: "primary",
+    title: "Regular Maintenance Schedule",
+    icon: <CalendarCheckIcon size={50} />,
+    listIcon: <CheckSquareIcon size={20} color="#fff" />,
+    items: [
+      {
+        title: "Weekly: Clean Surface",
+        description: "Remove debris, leaves, and dirt to prevent staining",
+      },
+      {
+        title: "Monthly: Weed Control",
+        description: "Remove weeds from joints and edges promptly",
+      },
+      {
+        title: "Quarterly: Deep Clean",
+        description: "Pressure wash to remove stubborn stains and moss",
+      },
+      {
+        title: "Annually: Professional Seal",
+        description: "Resealing protects against weather and wear",
+      },
+      {
+        title: "Bi-annually: Drainage Check",
+        description: "Ensure water drains properly to prevent damage",
+      },
+    ],
+  },
+  commonMistakesData: {
+    theme: "dark",
+    title: "Avoid These Common Mistakes",
+    icon: <InfoOctagonIcon size={50} />,
+    listIcon: <CloseSquareIcon size={26} />,
+    items: [
+      { text: "Using de-icing salt in winter – damages surface materials" },
+      { text: "Parking heavy vehicles regularly on block paving edges" },
+      { text: "Allowing oil spills to sit – clean immediately to prevent staining" },
+      { text: "Using harsh chemical cleaners not designed for driveways" },
+      { text: "Ignoring small cracks – repair quickly to prevent spreading" },
+      { text: "Power washing at too high pressure – can damage surfaces" },
+      { text: "Neglecting edge restraints – causes material spreading" },
+    ],
+  }
+}
+
 function NewDrivewaysPPCPage() {
   return (
     <>
       <Helmet>
         <meta name="robots" content="noindex" />
       </Helmet>
-      <HeroSectionNewPPC />
+
+      {/* <HeroSectionNewPPC />
       <HowItWorkNewPPC />
       <PopularServicesTypes data={NEW_PPC_POPULUAR_SERVICE_TYPE} />
       <CostGuide
@@ -247,12 +305,12 @@ function NewDrivewaysPPCPage() {
         topCards={PSI_TOP}
         avoid={PSI_AVOID}
         included={PSI_INCLUDED}
-      />
+      /> */}
 
       {/* <DriveWayInstallationProcessFirst /> */}
       <CompareDriveWay />
       <RegionalGuide />
-      <DriveMainTrip />
+      <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg />
       <FAQSection />
     </>

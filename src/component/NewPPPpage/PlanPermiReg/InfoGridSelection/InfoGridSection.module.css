@@ -42,3 +42,21 @@
 .section:nth-child(2) .card {
     background-color: #F4FCFF;
 }
+
+
+@media (min-width: 1px) and (max-width: 1193px) {
+    .header h5 {
+        font-size: 24px;
+        line-height: 26px;
+    }
+
+    .listItem h5 {
+        font-size: 24px;
+        line-height: 26px;
+    }
+
+    .card h5 {
+        font-size: 24px;
+        line-height: 26px;
+    }
+}

@@ -11,7 +11,7 @@ const CompareDriveWay = () => {
                 Comparing Driveway <span>Materials</span>
             </H2>
 
-            <Paragraph className={`${styles.ParaText}`} bold={false}>Average driveway installation costs across different UK regions</Paragraph>
+            <Paragraph className={`${styles.ParaText}`} bold={false}>Make an informed decision with our comprehensive material comparison guide</Paragraph>
 
             <DrivewayComparisonTable />
 
