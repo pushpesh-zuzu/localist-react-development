@@ -15,7 +15,7 @@ function ServiceTypeCard({ data, active, onClick }) {
       <div className={styles.iconWrap}>{icon}</div>
 
       <H4 className={styles.title}>{title}</H4>
-
+    
       <Paragraph className={styles.desc}>{description}</Paragraph>
 
       <div className={styles.points}>

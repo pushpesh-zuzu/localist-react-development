@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
   margin-top: 48px;
+  max-width: 1200px;
 }
 
 /* Card */
@@ -43,9 +44,7 @@
   margin-top: 6px;
 }
 
-.grid {
-  padding: 0 237px;
-}
+
 
 .grid>* {
   min-width: 0;
