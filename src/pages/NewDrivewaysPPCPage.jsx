@@ -310,8 +310,8 @@ function NewDrivewaysPPCPage() {
       {/* <DriveWayInstallationProcessFirst /> */}
       <CompareDriveWay />
       <RegionalGuide />
-      <DriveMainTrip data={DRIVE_MAIN_TRIP} />
-      <PlanPermReg />
+      {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
+      <PlanPermReg /> */}
       <FAQSection />
     </>
   );
