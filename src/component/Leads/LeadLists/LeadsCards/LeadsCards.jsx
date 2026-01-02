@@ -22,7 +22,7 @@ import ContactSuccessModal from "../ContactSuccessModal";
 import viewDetailsArrow from "../../../../assets/Images/Setting/viewDetailsArrow.svg";
 import LeadViewDetails from "../LeadViewDetails/LeadViewDetails";
 import { formatUKPhoneNumber } from "../../../../utils/formatUKPhoneNumber";
-import Expired from "../../../../assets/Images/Leads/expired1.jpg";
+import Expired from "../../../../assets/Images/Leads/expired.png";
 
 const LeadsCards = () => {
   const dispatch = useDispatch();
@@ -345,8 +345,7 @@ const LeadsCards = () => {
                               )}
                             </div>
                           </div>
-
-                          <div className={styles.leadActions}>
+                          <div className={styles.leadActionWrapper}>
                             {item?.is_expired === 1 ? (
                               <img
                                 className={styles.expired}
@@ -356,28 +355,29 @@ const LeadsCards = () => {
                             ) : (
                               ""
                             )}
+                            <div className={styles.leadActions}>
+                              <button
+                                className={styles.purchaseButton}
+                                onClick={() => handleContinue(item)}
+                                disabled={item?.is_expired === 1}
+                              >
+                                Contact
+                              </button>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <span className={styles.credits}>
+                                  {item?.credit_score} Credits
+                                </span>
+                              </div>
 
-                            <button
-                              className={styles.purchaseButton}
-                              onClick={() => handleContinue(item)}
-                              disabled={item?.is_expired === 1}
-                            >
-                              Contact
-                            </button>
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <span className={styles.credits}>
-                                {item?.credit_score} Credits
-                              </span>
-                            </div>
-
-                            <div className={styles.mainText}>
-                              <div>ACT FAST</div>
+                              <div className={styles.mainText}>
+                                <div>ACT FAST</div>
+                              </div>
                             </div>
                           </div>
                         </div>
