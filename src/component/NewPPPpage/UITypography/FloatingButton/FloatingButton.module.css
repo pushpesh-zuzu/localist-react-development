@@ -1,0 +1,23 @@
+/* ================= FLOATING BUTTON ================= */
+
+.floating {
+  /* base + primary ke saath use hoga */
+  font-size: 20px;
+  padding: 16px 20px;
+  background: #00afe3;
+  border: 2px solid white;
+  color: #fff;
+}
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-family: Inter;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}

@@ -38,8 +38,7 @@ import CheckSquareIcon from "../assets/ReactIcons/CheckSquareIcon";
 import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
-import Button1 from "../component/NewPPPpage/UITypography/Button1";
-import { handleScrollToBottom } from "../utils/scroll";
+import FloatingButton from "../component/NewPPPpage/UITypography/FloatingButton/FloatingButton";
 
 // import { DRIVE_MAIN_TRIP } from "./externalData";
 
@@ -82,7 +81,7 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <ResinBoundIcon bgColor="white" strokeColor="#00AFE3"/>,
+    icon: <ResinBoundIcon bgColor="white" strokeColor="#00AFE3" />,
     inActiveIcon: <ResinBoundIcon bgColor="#00AFE3" strokeColor="white" />,
     title: "Resin Bound",
     description:
@@ -94,7 +93,13 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <GravelDrivewaysIcon bgColor="white" fillColor="#00AFE3" strokeColor="#00AFE3" />,
+    icon: (
+      <GravelDrivewaysIcon
+        bgColor="white"
+        fillColor="#00AFE3"
+        strokeColor="#00AFE3"
+      />
+    ),
     inActiveIcon: <GravelDrivewaysIcon />,
     title: "Gravel Driveways",
     description:
@@ -361,16 +366,7 @@ function NewDrivewaysPPCPage() {
       <PlanPermReg /> */}
       <FAQSection />
       <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
-        <Button1
-          onClick={() => {
-            handleScrollToBottom();
-          }}
-          className="button"
-          variant="primary"
-        >
-          Get A Free Quotes Now{" "}
-          <GetQuotesIcon style={{ marginLeft: "5px" }} color="white" />
-        </Button1>
+        <FloatingButton />
       </div>
     </>
   );
