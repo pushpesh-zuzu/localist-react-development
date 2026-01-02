@@ -5,6 +5,8 @@ import Paragraph from "../UITypography/Paragrah";
 import Button1 from "../UITypography/Button1";
 import ServiceTypeCard from "./ServiceTypeCard";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
+import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 function PopularServicesTypes({ data = [] }) {
   const [active, setActive] = useState(0);
@@ -14,7 +16,7 @@ function PopularServicesTypes({ data = [] }) {
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading blueText="Popular" blackText="Driveway Types" />
 
-        <Paragraph className={styles.subText}>
+        <Paragraph variant="medium" className={styles.subText}>
           Explore our comprehensive range of driveway installation options to
           find the perfect solution for your property
         </Paragraph>
@@ -35,7 +37,9 @@ function PopularServicesTypes({ data = [] }) {
 
       {/* CTA */}
       <div className={styles.cta}>
-        <Button1 variant="primary">Get Quotes Now {data[0]?.ctaIcon}</Button1>
+        <Button1 onClick={()=>{handleScrollToBottom()}} className={styles.button} variant="warning">
+          Get a Free Quotes Now <GetQuotesIcon color="white" />
+        </Button1>
       </div>
     </PaddingWrapper>
   );

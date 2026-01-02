@@ -8,6 +8,7 @@ import H5 from "../UITypography/H5";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 import H4 from "../UITypography/H4";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 function CostGuide({ pricing = [], factors = [], icons = {} }) {
   const renderIcon = (key, className = "") => {
@@ -25,7 +26,7 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
           blackText="Cost Guide"
         />
 
-        <Paragraph variant="secondary" className={styles.subText}>
+        <Paragraph variant="medium" className={styles.subText}>
           Understanding the costs involved in driveway installation helps you
           budget effectively. Prices vary based on material, size, and
           complexity.
@@ -64,7 +65,7 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
                 </div>
                 <div>
                   <H5 className={styles.factorPrice}>{item.title}</H5>
-                  <Paragraph variant="secondary" className={styles.priceDesc}>{item.description}</Paragraph>
+                  <Paragraph variant="medium" className={styles.priceDesc}>{item.description}</Paragraph>
                 </div>
               </div>
             ))}
@@ -74,8 +75,8 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
 
       {/* CTA */}
       <div className={styles.cta}>
-        <Button1 className={styles.button} variant="secondary">
-          Get Quotes Now <GetQuotesIcon color="white" />
+        <Button1 onClick={()=>{handleScrollToBottom()}} className={styles.button} variant="warning">
+          Get A Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
       </div>
     </PaddingWrapper>

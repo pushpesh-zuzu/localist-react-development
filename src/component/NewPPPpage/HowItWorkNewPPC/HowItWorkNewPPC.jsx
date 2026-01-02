@@ -11,10 +11,10 @@ import FastTimeIcon from "../../../assets/ReactIcons/FastTimeIcon";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PlayIcon from "../../../assets/ReactIcons/PlayIcon";
 import ThreeBusinessPerson from "./three-business-people-meeting.webp";
+import { handleScrollToBottom } from "../../../utils/scroll";
 function HowItWorkNewPPC({
   heading = "What to Expect From a Professional Driveway Installation",
-  description = `Watch expert installers transform driveways from start to finish with
-          precision and quality`,
+  description = `Get competitive home improvements quotes from leading suppliers in 3 simples step!`,
 }) {
   return (
     <section className={styles.container}>
@@ -24,46 +24,46 @@ function HowItWorkNewPPC({
           blackText="works"
           className={styles.heading}
         />
-        <H3
+        {/* <H3
           className={styles.topLabel}
           style={{ color: "#253238", marginBottom: "12px" }}
         >
           {heading}
-        </H3>
+        </H3> */}
 
-        <Paragraph variant="secondary" className={styles.subText}>
+        <Paragraph variant="medium" className={styles.subText}>
           {description}
         </Paragraph>
       </div>
 
       {/* Video */}
-      <div className={styles.videoWrapper}>
+      {/* <div className={styles.videoWrapper}>
         <img src={ThreeBusinessPerson} className={styles.videoImg} />
         <PlayIcon className={styles.playBtn} />
-      </div>
+      </div> */}
 
       {/* Features */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
           <SettingIcon className={styles.icon} />
-          <H5>Expert Installation</H5>
+          <H5 className={styles.wordText}>Fill in your details for your project</H5>
         </div>
 
         <div className={styles.featureCard}>
           <VettedProffessionIcon className={styles.icon} />
-          <H5>Up to 15-Year Guarantee</H5>
+          <H5 className={styles.wordText}>Receive quotes from professionals</H5>
         </div>
 
         <div className={styles.featureCard}>
           <FastTimeIcon className={styles.icon} />
-          <H5>Fast Completion</H5>
+          <H5 className={styles.wordTextLast}>Compare your quotes and enjoy great savings</H5>
         </div>
       </div>
 
       {/* CTA */}
       <div className={styles.cta}>
-        <Button1 variant="green" className={styles.button}>
-          Get Quotes Now <GetQuotesIcon color="white" />{" "}
+        <Button1 onClick={()=>{handleScrollToBottom()}} variant="warning" className={styles.button}>
+          Get A Free Quotes Now <GetQuotesIcon color="white" />{" "}
         </Button1>
       </div>
     </section>

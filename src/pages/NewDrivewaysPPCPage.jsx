@@ -35,6 +35,9 @@ import InfoOctagonIcon from "../assets/ReactIcons/InfoOctagonIcon";
 import CalendarCheckIcon from "../assets/ReactIcons/CalendarCheckIcon";
 import CloseSquareIcon from "../assets/ReactIcons/CloseSquareIcon";
 import CheckSquareIcon from "../assets/ReactIcons/CheckSquareIcon";
+import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
+import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
+import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 
 // import { DRIVE_MAIN_TRIP } from "./externalData";
 
@@ -53,7 +56,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
 
       { icon: <CheckCircleIcon />, text: "25+ years lifespan" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
   {
     icon: <TarmacIcon />,
@@ -65,7 +67,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Weather resistant" },
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Budget-friendly" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
   {
     icon: <ResinBoundIcon />,
@@ -77,7 +78,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Weed resistant" },
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Smooth finish" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
   {
     icon: <GravelDrivewaysIcon />,
@@ -92,7 +92,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Good drainage" },
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Easy to install" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
   {
     icon: <ExpertInstallationIcon />,
@@ -104,7 +103,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Low maintenance" },
       { icon: <CheckCircleIcon color="#00aef0" />, text: "30+ years lifespan" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
   {
     icon: <PatternImplementedIcon />,
@@ -116,7 +114,6 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Cost-effective" },
       { icon: <CheckCircleIcon color="#00aef0" />, text: "Low maintenance" },
     ],
-    ctaIcon: <GetQuotesIcon />,
   },
 ];
 export const COST_ICONS = {
@@ -203,7 +200,22 @@ export const PSI_TOP = [
   {
     icon: <SettingIcon />,
     title: "Expert Installation",
-    text: "Qualified professionals...",
+    text: "Qualified professionals with years of experience use industry-grade tools and machinery to ensure a flawless, long-lasting driveway finish.",
+  },
+   {
+    icon: <VettedProffessionIcon />,
+    title: "Guaranteed Work",
+    text: "Most professionals offer up 5 -10 year guarantees on workmanship, giving you peace of mind long after installation is complete.",
+  },
+   {
+    icon: <CompetitivePricingIcon />,
+    title: "Competitive Pricing",
+    text: "Get fair, transparent pricing from vetted local installers, allowing you to compare quotes and choose the best value for your budget.",
+  },
+   {
+    icon: <QuicAlarmIcon />,
+    title: "Quick Turnaround",
+    text: "Projects are completed on schedule without compromising quality, so you get a beautiful new driveway with minimal disruption",
   },
 ];
 
@@ -239,7 +251,7 @@ export const PSI_AVOID = {
 export const DRIVE_MAIN_TRIP = {
   heading: "Driveway",
   blueText: "Driveway",
-  blackText:"Maintenance Tips",
+  blackText: "Maintenance Tips",
   subHeading: "Extend the life of your driveway with proper maintenance",
   maintenanceScheduleData: {
     theme: "primary",
@@ -277,14 +289,16 @@ export const DRIVE_MAIN_TRIP = {
     items: [
       { text: "Using de-icing salt in winter – damages surface materials" },
       { text: "Parking heavy vehicles regularly on block paving edges" },
-      { text: "Allowing oil spills to sit – clean immediately to prevent staining" },
+      {
+        text: "Allowing oil spills to sit – clean immediately to prevent staining",
+      },
       { text: "Using harsh chemical cleaners not designed for driveways" },
       { text: "Ignoring small cracks – repair quickly to prevent spreading" },
       { text: "Power washing at too high pressure – can damage surfaces" },
       { text: "Neglecting edge restraints – causes material spreading" },
     ],
-  }
-}
+  },
+};
 
 function NewDrivewaysPPCPage() {
   return (
@@ -301,10 +315,8 @@ function NewDrivewaysPPCPage() {
         factors={COST_FACTORS}
         icons={COST_ICONS}
       />
-      {/* <ProfessionalServiceInstallation
+      <ProfessionalServiceInstallation
         topCards={PSI_TOP}
-        avoid={PSI_AVOID}
-        included={PSI_INCLUDED}
       />
 
       {/* <DriveWayInstallationProcessFirst /> */}

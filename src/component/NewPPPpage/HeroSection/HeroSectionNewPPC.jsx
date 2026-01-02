@@ -70,28 +70,28 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
             Services Near You
           </H1>
 
+          <div className={styles.desktopfirstSection} >
           <div className={styles.features}>
             <div className={styles.feature}>
-              <VettedProffessionIcon />
+              <VettedProffessionIcon className={styles.icon} />
               <p>Vetted Professionals</p>
             </div>
             <div className={styles.feature}>
-              <FreeQuoteIcon />
+              <FreeQuoteIcon className={styles.icon} />
               <p>Free Quotes</p>
             </div>
-            <div className={styles.feature}>
-              <FastResponseIcon />
+            <div className={styles.feature} >
+              <FastResponseIcon  className={styles.icon}/>
               <p>Fast Response</p>
             </div>
           </div>
 
           <div className={styles.ctaRow}>
             <button className={`${styles.primaryBtn} `}>
-              Find Professionals <SearchWhiteIcon />
+              Get A Free Quotes Now <GetQuotesIcon color="white" />
             </button>
-            <button className={`${styles.secondaryBtn}`}>
-              Get Quotes Now <GetQuotesIcon />
-            </button>
+            
+          </div>
           </div>
         </div>
 
@@ -123,6 +123,30 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
             <DescribeYourRequestNewPPC />
           </FormWrapper>
         )}
+
+        <div className={styles.mobilefirstSection} >
+          <div className={styles.features}>
+            <div className={styles.feature}>
+              <VettedProffessionIcon className={styles.icon} />
+              <p>Vetted Professionals</p>
+            </div>
+            <div className={styles.feature}>
+              <FreeQuoteIcon className={styles.icon} />
+              <p>Free Quotes</p>
+            </div>
+            <div className={styles.feature} >
+              <FastResponseIcon  className={styles.icon}/>
+              <p>Fast Response</p>
+            </div>
+          </div>
+
+          <div className={styles.ctaRow}>
+            <button className={`${styles.primaryBtn} `}>
+              Get A Free Quotes Now <GetQuotesIcon color="white" />
+            </button>
+            
+          </div>
+          </div>
       </div>
     </section>
   );

@@ -2,21 +2,30 @@
   padding: 80px 120px;
   text-align: center;
 }
-
+.textdescription {
+  padding: 0px 34px;
+}
 @media (max-width: 600px) {
   .container {
     padding: 40px 24px;
   }
 }
+.button {
+  display: flex;
+  gap: 5px;
+}
 
 .headingWrap {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto 48px;
+  text-align: center;
 }
 
 .subText {
   margin-top: 12px;
   color: #253238;
+  text-align: center;
+  font-weight: 400;
 }
 
 /* Top 4 cards */
@@ -107,7 +116,16 @@
 
 /* CTA */
 .cta {
-  margin-top: 40px;
+  margin-top: 48px;
   display: flex;
   justify-content: center;
+}
+@media (max-width: 640px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .cta {
+    margin-top: 40px;
+  }
 }
