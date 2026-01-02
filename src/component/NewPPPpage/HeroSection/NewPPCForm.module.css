@@ -1,10 +1,11 @@
 /* FORM */
+
 .formCard {
   width: 550px;
   background: white;
   border-radius: 24px;
-  box-shadow: 0px 0px 16px 0px #3DA4C380;
-
+  box-shadow: 0px 0px 16px 0px #3da4c380;
+  overflow: hidden;
 }
 
 .formTitle {
@@ -49,6 +50,8 @@
   font-size: 16px;
   line-height: 18px;
   letter-spacing: -0.03px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form input::placeholder {
@@ -59,6 +62,21 @@
   line-height: 18px;
   letter-spacing: -0.03px;
 }
+
+.input {
+  padding: 14px 16px;
+  border-radius: 3px;
+  color: #253238;
+  border: 1px solid #d9d9d9;
+  font-family: Arial;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.03px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .submitBtn {
   background: #00afe3;
   color: white;
@@ -76,6 +94,12 @@
   align-items: center;
   gap: 5px;
   justify-content: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
 }
 
 .disclaimer {
@@ -89,9 +113,81 @@
   margin-top: 16px;
 }
 
+/* Error styles */
+.errorBorder {
+  border-color: #ff4d4f !important;
+}
+
+.errorText {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+  min-height: 16px;
+}
+
+.cityText {
+  font-size: 12px;
+  color: #52c41a;
+  margin-top: 4px;
+  display: block;
+  min-height: 16px;
+}
+
+/* Postcode container */
+.postcodeContainer {
+  position: relative;
+}
+
+.validationIcon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.checkIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* React Select Customization */
+.form > div:has(.react-select__control) {
+  margin-bottom: 8px;
+}
+
+.react-select__control {
+  border-color: #d9d9d9 !important;
+  font-family: Arial !important;
+}
+
+.react-select__control--is-focused {
+  border-color: #40a9ff !important;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important;
+}
+
+.react-select__placeholder {
+  color: #d9d9d9 !important;
+  font-family: Arial !important;
+}
+
+.react-select__menu {
+  z-index: 1000 !important;
+  font-family: Arial !important;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .formCard {
     width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .form {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
