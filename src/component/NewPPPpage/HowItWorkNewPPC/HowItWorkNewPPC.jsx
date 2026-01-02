@@ -10,55 +10,61 @@ import VettedProffessionIcon from "../../../assets/ReactIcons/VettedProffessionI
 import FastTimeIcon from "../../../assets/ReactIcons/FastTimeIcon";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PlayIcon from "../../../assets/ReactIcons/PlayIcon";
-import ThreeBusinessPerson from './three-business-people-meeting.webp'
-function HowItWorkNewPPC() {
+import ThreeBusinessPerson from "./three-business-people-meeting.webp";
+function HowItWorkNewPPC({
+  heading = "What to Expect From a Professional Driveway Installation",
+  description = `Watch expert installers transform driveways from start to finish with
+          precision and quality`,
+}) {
   return (
     <section className={styles.container}>
-      {/* Heading */}
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading
           blueText="How it"
           blackText="works"
           className={styles.heading}
         />
-        <H3 className={styles.topLabel} style={{ color: "#253238", marginBottom: "12px" }}>What to Expect From a Professional Driveway Installation</H3>
+        <H3
+          className={styles.topLabel}
+          style={{ color: "#253238", marginBottom: "12px" }}
+        >
+          {heading}
+        </H3>
 
         <Paragraph variant="secondary" className={styles.subText}>
-          Watch expert installers transform driveways from start to finish with
-          precision and quality
+          {description}
         </Paragraph>
       </div>
 
       {/* Video */}
       <div className={styles.videoWrapper}>
-        <img
-          src={ThreeBusinessPerson}
-          className={styles.videoImg}
-        />
-        <PlayIcon className={styles.playBtn}/>
+        <img src={ThreeBusinessPerson} className={styles.videoImg} />
+        <PlayIcon className={styles.playBtn} />
       </div>
 
       {/* Features */}
       <div className={styles.features}>
         <div className={styles.featureCard}>
-          <SettingIcon className={styles.icon}/>
+          <SettingIcon className={styles.icon} />
           <H5>Expert Installation</H5>
         </div>
 
         <div className={styles.featureCard}>
-          <VettedProffessionIcon className={styles.icon}/>
+          <VettedProffessionIcon className={styles.icon} />
           <H5>Up to 15-Year Guarantee</H5>
         </div>
 
         <div className={styles.featureCard}>
-          <FastTimeIcon className={styles.icon}/>
+          <FastTimeIcon className={styles.icon} />
           <H5>Fast Completion</H5>
         </div>
       </div>
 
       {/* CTA */}
       <div className={styles.cta}>
-        <Button1 variant="green" className={styles.button}>Get Quotes Now <GetQuotesIcon color="white"/> </Button1>
+        <Button1 variant="green" className={styles.button}>
+          Get Quotes Now <GetQuotesIcon color="white" />{" "}
+        </Button1>
       </div>
     </section>
   );

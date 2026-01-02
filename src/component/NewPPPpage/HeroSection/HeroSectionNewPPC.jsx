@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import styles from "./HeroSectionNewPPC.module.css";
 import NewPPCForm from "./NewPPCForm";
 import H1 from "../UITypography/H1";
@@ -7,48 +9,120 @@ import FreeQuoteIcon from "../../../assets/ReactIcons/FreeQuoteIcon";
 import FastResponseIcon from "../../../assets/ReactIcons/FastResponseIcon";
 import SearchWhiteIcon from "../../../assets/ReactIcons/SearchWhiteIcon";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
+import { setBuyerStep } from "../../../store/Buyer/BuyerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import QuestionModalNewPPC from "./QuestionModalNewPPC/QuestionModalNewPPC";
+import OTPVerificationNewPPC from "./OTPVerificationNewPPC/OTPVerificationNewPPC";
+import ReEnterMobileNumberNewPPC from "./ReEnterMobileNumberNewPPC/ReEnterMobileNumberNewPPC";
+import FormWrapper from "./RegistrationForm/FormWrapper";
+import DescribeYourRequestNewPPC from "./DescribeYourRequestNewPPC/DescribeYourRequestNewPPC";
 
-function HeroSectionNewPPC() {
+function HeroSectionNewPPC({ title = "Driveway" }) {
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state.auth);
+  const { authToken } = useSelector((state) => state.findJobs);
+  const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
+    useSelector((state) => state.buyer);
+  const nextStep = () => {
+    const currentIndex = stepFlow.indexOf(buyerStep);
+    if (currentIndex < stepFlow.length - 1) {
+      dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
+    }
+  };
+  const [reEnterMobile, setReEnterMobile] = useState(2);
+  const isAdminOrRemembered = authToken || userToken?.remember_tokens;
+
+  const stepFlow = [1, 2, 3, 4];
+  // ? [2, 3, 6, 7, 8]
+  // : [1, 2, 3, 4];
+  // useEffect(() => {
+  //   const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+  //   if (pendingModal?.shouldOpen) {
+  //     localStorage.removeItem("pendingBuyerModal");
+  //   } else {
+  //     const initialStep = isAdminOrRemembered ? 2 : 1;
+  //     dispatch(setBuyerStep(initialStep));
+  //   }
+  // }, [dispatch, isAdminOrRemembered]);
+
+  useEffect(() => {
+    const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
+
+    if (pendingModal?.shouldOpen) {
+      dispatch(setBuyerStep(4));
+    } else {
+      const initialStep = isAdminOrRemembered ? 2 : 1;
+      dispatch(setBuyerStep(1));
+    }
+  }, [dispatch, isAdminOrRemembered]);
+
   return (
     <section className={styles.heroWrapper}>
       <div className={styles.container}>
         {/* LEFT CONTENT */}
         <div className={styles.left}>
           <div className={styles.badge}>
-            <TrustedIcon/> Trusted Driveway Specialists
+            <TrustedIcon /> Trusted Driveway Specialists
           </div>
 
           <H1 className={`Inter ${styles.heading}`}>
-            Local Expert <span>Driveway Installation</span> {""}
+            Local Expert <span>{title} Installation</span> {""}
             Services Near You
           </H1>
 
           <div className={styles.features}>
             <div className={styles.feature}>
-              {/* <div className={styles.icon}>✓</div> */}
-              <VettedProffessionIcon/>
+              <VettedProffessionIcon />
               <p>Vetted Professionals</p>
             </div>
             <div className={styles.feature}>
-              {/* <div className={styles.icon}>₹</div> */}
-              <FreeQuoteIcon/>
+              <FreeQuoteIcon />
               <p>Free Quotes</p>
             </div>
             <div className={styles.feature}>
-              <FastResponseIcon/>
+              <FastResponseIcon />
               <p>Fast Response</p>
             </div>
           </div>
 
           <div className={styles.ctaRow}>
-            <button className={`${styles.primaryBtn} `}>Find Professionals <SearchWhiteIcon /></button>
-            <button className={`${styles.secondaryBtn}`} >Get Quotes Now <GetQuotesIcon/></button>
+            <button className={`${styles.primaryBtn} `}>
+              Find Professionals <SearchWhiteIcon />
+            </button>
+            <button className={`${styles.secondaryBtn}`}>
+              Get Quotes Now <GetQuotesIcon />
+            </button>
           </div>
         </div>
 
         {/* RIGHT FORM */}
 
-        <NewPPCForm />
+        {buyerStep === 1 && <NewPPCForm nextStep={nextStep} />}
+        {buyerStep === 2 && (
+          <QuestionModalNewPPC
+            questions={questionanswerData}
+            loading={questionLoader}
+            serviceName={buyerRequest.service_name}
+            nextStep={nextStep}
+          />
+        )}
+        {buyerStep === 3 && reEnterMobile === 2 && (
+          <OTPVerificationNewPPC
+            setReEnterMobile={setReEnterMobile}
+            isThankuPageOnlyShow
+          />
+        )}
+        {reEnterMobile === 1 && buyerStep === 3 && (
+          <ReEnterMobileNumberNewPPC
+            setReEnterMobile={setReEnterMobile}
+            onClose={() => setReEnterMobile(2)}
+          />
+        )}
+        {buyerStep === 4 && (
+          <FormWrapper>
+            <DescribeYourRequestNewPPC />
+          </FormWrapper>
+        )}
       </div>
     </section>
   );
