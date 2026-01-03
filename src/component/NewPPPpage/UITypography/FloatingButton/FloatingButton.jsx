@@ -5,7 +5,7 @@ import styles from './FloatingButton.module.css'
 function FloatingButton() {
   return (
     <button onClick={()=>{handleScrollToBottom()}} className={`${styles.base} ${styles.floating}`}>
-      Get A Free Quotes Now{" "}
+      Get Free Quotes Now{" "}
       <GetQuotesIcon style={{ marginLeft: "5px" }} color="white" />
     </button>
   );
