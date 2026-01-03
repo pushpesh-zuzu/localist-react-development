@@ -22,13 +22,14 @@ import { useEmailCheck } from "../../../utils/emailExist";
 
 function NewPPCForm({ nextStep }) {
   const dispatch = useDispatch();
+  const { buyerRequest } = useSelector((state) => state.buyer);
 
   const [formData, setFormData] = useState({
-    fullName: "",
-    phoneNumber: "",
+    name: "",
+    phone: "",
     email: "",
-    service: null,
-    serviceId: "",
+    service_name: null,
+    service_id: "",
     postcode: "",
   });
 
@@ -167,23 +168,58 @@ function NewPPCForm({ nextStep }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Update buyerRequest in Redux
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        [name]: value
+      })
+    );
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   const handleServiceChange = (selectedOption) => {
+    // Create service object for formData
+    const serviceObj = selectedOption ? {
+      value: selectedOption.value,
+      label: selectedOption.label
+    } : null;
+
+    // Update formData
     setFormData((prev) => ({
       ...prev,
-      service: selectedOption,
-      serviceId: selectedOption?.value || "",
+      service_name: serviceObj,
+      service_id: selectedOption?.value || "",
     }));
+    
+    // Update buyerRequest in Redux
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        service_id: selectedOption?.value || "",
+        service_name: selectedOption?.label || ""
+      })
+    );
+    
     setErrors((prev) => ({ ...prev, service: "" }));
   };
 
   const handlePostcodeChange = (e) => {
     const value = e.target.value.replace(/\s/g, "").slice(0, 10);
     setFormData((prev) => ({ ...prev, postcode: value }));
+    
+    // Update buyerRequest in Redux
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        postcode: value
+      })
+    );
+    
     setErrors((prev) => ({ ...prev, pincode: "" }));
   };
 
@@ -310,20 +346,20 @@ function NewPPCForm({ nextStep }) {
       padding: "12px 16px",
     }),
   };
-
+console.log(buyerRequest,'bbb')
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Full name is required";
-    } else if (formData.fullName.trim().length < 2) {
-      newErrors.fullName = "Full name must be at least 2 characters";
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Full name must be at least 2 characters";
     }
 
-    if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = "Phone number is required";
-    } else if (!/^[0-9]{11}$/.test(formData.phoneNumber.replace(/\s/g, ""))) {
-      newErrors.phoneNumber = "Please enter a valid 11-digit phone number";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^[0-9]{11}$/.test(formData.phone.replace(/\s/g, ""))) {
+      newErrors.phone = "Please enter a valid 11-digit phone number";
     }
 
     if (!formData.email.trim()) {
@@ -335,7 +371,7 @@ function NewPPCForm({ nextStep }) {
       }
     }
 
-    if (!formData.service || !formData.serviceId) {
+    if (!formData.service_name || !formData.service_id) {
       newErrors.service = "Please select a service!";
     }
 
@@ -358,7 +394,7 @@ function NewPPCForm({ nextStep }) {
       setErrors(formErrors);
       return;
     }
-    if (!validateUKPhoneNumber(formData.phoneNumber)) {
+    if (!validateUKPhoneNumber(formData.phone)) {
       return;
     }
     setLoading(true);
@@ -376,29 +412,22 @@ function NewPPCForm({ nextStep }) {
 
         dispatch(
           setbuyerRequestData({
-            name: formData.fullName,
-            phone: formData.phoneNumber,
+            name: formData.name,
+            phone: formData.phone,
             email: formData.email,
-            service_id: formData.serviceId,
-            service_name: formData.service,
+            service_id: formData.service_id,
+            service_name: formData.service_name?.label || "",
             postcode: formData.postcode,
             city: newResponse.data.city,
           })
         );
 
-        // showToast("success", "Form submitted successfully!");
-
-        // console.log("Form submitted successfully:", {
-        //   ...formData,
-        //   city: newResponse.data.city,
-        // });
-
         setFormData({
-          fullName: "",
-          phoneNumber: "",
+          name: "",
+          phone: "",
           email: "",
-          service: null,
-          serviceId: "",
+          service_name: null,
+          service_id: "",
           postcode: "",
         });
         setCity("");
@@ -421,17 +450,18 @@ function NewPPCForm({ nextStep }) {
       setLoading(false);
     }
   };
+  
   useEffect(() => {
-    if (formData.serviceId) {
-      dispatch(questionAnswerData({ service_id: formData.serviceId }));
+    if (formData.service_id) {
+      dispatch(questionAnswerData({ service_id: formData.service_id }));
     }
-  }, [formData.serviceId]);
+  }, [formData.service_id]);
 
-  const { questionLoader, buyerRequest } = useSelector((state) => state.buyer);
+  const { questionLoader } = useSelector((state) => state.buyer);
 
   useEffect(() => {
     if (!isEmailAvailable) {
-      setFormData({ ...formData, email: "" });
+      setFormData(prev => ({ ...prev, email: "" }));
       dispatch(
         setbuyerRequestData({
           ...buyerRequest,
@@ -440,33 +470,7 @@ function NewPPCForm({ nextStep }) {
       );
     }
   }, [isEmailAvailable]);
-  // const handleEmailBlur = async () => {
-  //   if (!email) {
-  //     setInputType("text");
-  //   }
 
-  //   if (!email) return;
-
-  //   try {
-  //     const res = await dispatch(checkEmailIdApi({ email }));
-
-  //     if (res?.success) {
-  //       setErrors((prev) => ({ ...prev, email: false }));
-  //       setIsEmailValid(true);
-  //       setEmailErrorMessage("");
-  //     } else {
-  //       setEmail("");
-  //       if (setEmails) setEmails("");
-  //       setIsEmailValid(false);
-  //       setEmailErrorMessage("Email is already registered.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Error checking email:", err);
-  //     setErrors((prev) => ({ ...prev, email: false }));
-  //     setIsEmailValid(false);
-  //     setEmailErrorMessage("Something went wrong. Please try again.");
-  //   }
-  // };
   return (
     <FormWrapper>
       <div className={styles.titleContainer}>
@@ -479,41 +483,50 @@ function NewPPCForm({ nextStep }) {
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>Full Name *</label>
         <input
-          name="fullName"
+          name="name"
           placeholder="Enter your full name"
-          value={formData.fullName}
+          value={formData.name}
           onChange={handleInputChange}
           className={`${styles.input} ${
-            errors.fullName ? styles.errorBorder : ""
+            errors.name ? styles.errorBorder : ""
           }`}
         />
-        {errors.fullName && (
-          <span className={styles.errorText}>{errors.fullName}</span>
+        {errors.name && (
+          <span className={styles.errorText}>{errors.name}</span>
         )}
 
         <label>Phone Number *</label>
         <input
-          name="phoneNumber"
+          name="phone"
           placeholder="Enter your phone number"
-          value={formData.phoneNumber}
+          value={formData.phone}
           onChange={(e) => {
             const onlyNumbers = e.target.value.replace(/\D/g, "");
             setFormData((prev) => ({
               ...prev,
-              phoneNumber: onlyNumbers,
+              phone: onlyNumbers,
             }));
-            if (errors.phoneNumber) {
-              setErrors((prev) => ({ ...prev, phoneNumber: "" }));
+            
+            // Update phone in buyerRequest
+            dispatch(
+              setbuyerRequestData({
+                ...buyerRequest,
+                phone: onlyNumbers
+              })
+            );
+            
+            if (errors.phone) {
+              setErrors((prev) => ({ ...prev, phone: "" }));
             }
           }}
           maxLength={11}
           type="tel"
           className={`${styles.input} ${
-            errors.phoneNumber ? styles.errorBorder : ""
+            errors.phone ? styles.errorBorder : ""
           }`}
         />
-        {errors.phoneNumber && (
-          <span className={styles.errorText}>{errors.phoneNumber}</span>
+        {errors.phone && (
+          <span className={styles.errorText}>{errors.phone}</span>
         )}
 
         <label>Email Address *</label>
@@ -523,7 +536,6 @@ function NewPPCForm({ nextStep }) {
           placeholder="Enter your email"
           value={formData.email}
           onChange={handleInputChange}
-          // onBlur={handleEmailBlur}
           className={`${styles.input} ${
             errors.email ? styles.errorBorder : ""
           }`}
@@ -539,7 +551,7 @@ function NewPPCForm({ nextStep }) {
           defaultOptions={serviceOptions}
           options={serviceOptions}
           onChange={handleServiceChange}
-          value={formData.service}
+          value={formData.service_name}
           placeholder="Search for a service..."
           noOptionsMessage={({ inputValue }) =>
             searchServiceLoader ? "Searching..." : "No services found"

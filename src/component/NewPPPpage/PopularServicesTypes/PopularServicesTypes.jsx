@@ -34,7 +34,7 @@ function PopularServicesTypes({
               key={index}
               data={item}
               active={index === active}
-              onClick={() => setActive(index)}
+              onMouseEnter={() => setActive(index)}
             />
           ))}
       </div>
