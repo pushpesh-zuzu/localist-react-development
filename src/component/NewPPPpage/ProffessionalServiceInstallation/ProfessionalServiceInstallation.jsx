@@ -14,6 +14,7 @@ function ProfessionalServiceInstallation({
   heading = "Driveway Installation",
   description = `Expert installation ensures quality, durability, and compliance with regulations`,
 }) {
+  const gridClass = styles[`topGridsLength${topCards.length}`];
   return (
     // <div className={styles.container}>
     //   {/* Heading */}
@@ -40,7 +41,7 @@ function ProfessionalServiceInstallation({
         </Paragraph>
       </div>
       {/* Top 4 cards */}
-      <div className={styles.topGrid}>
+      <div className={`${styles.topGrid} ${gridClass}`}>
         {topCards.map((item, i) => (
           <div key={i} className={styles.topCard}>
             <div className={styles.topIcon}>{item.icon}</div>

@@ -346,7 +346,6 @@ function NewPPCForm({ nextStep }) {
       padding: "12px 16px",
     }),
   };
-console.log(buyerRequest,'bbb')
   const validateForm = () => {
     const newErrors = {};
 

@@ -20,10 +20,20 @@ function CostGuide({
           complexity.`,
   heading1 = "Driveway Installation",
 }) {
-  const renderIcon = (key, className = "") => {
+  const renderIcon = (key, props = {}, className = "") => {
     const Icon = icons[key];
     if (!Icon) return null;
-    return <Icon className={className} />;
+
+    return (
+      <Icon
+        className={className}
+        width={props.size || props.width || "24px"}
+        height={props.size || props.height || "24px"}
+        bgColor={props.background}
+        fillColor={props.color}
+        strokeColor={props.strokColor}
+      />
+    );
   };
 
   return (
@@ -58,25 +68,27 @@ function CostGuide({
         </div>
 
         {/* Right - Factors */}
-        <div className={styles.right}>
-          <H4 className={styles.factorTitle}>Cost Factors to Consider</H4>
+        {factors.length ? (
+          <div className={styles.right}>
+            <H4 className={styles.factorTitle}>Cost Factors to Consider</H4>
 
-          <div className={styles.factorList}>
-            {factors.map((item, index) => (
-              <div key={index} className={styles.factorItem}>
-                <div className={styles.factorIcon}>
-                  {renderIcon(item.icon, styles.factorIconSvg)}
+            <div className={styles.factorList}>
+              {factors.map((item, index) => (
+                <div key={index} className={styles.factorItem}>
+                  <div className={styles.factorIcon}>
+                    {renderIcon(item.icon, styles.factorIconSvg)}
+                  </div>
+                  <div>
+                    <H5 className={styles.factorPrice}>{item.title}</H5>
+                    <Paragraph variant="medium" className={styles.priceDesc}>
+                      {item.description}
+                    </Paragraph>
+                  </div>
                 </div>
-                <div>
-                  <H5 className={styles.factorPrice}>{item.title}</H5>
-                  <Paragraph variant="medium" className={styles.priceDesc}>
-                    {item.description}
-                  </Paragraph>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
       {/* CTA */}

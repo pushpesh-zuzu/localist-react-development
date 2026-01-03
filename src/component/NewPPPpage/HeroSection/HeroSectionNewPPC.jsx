@@ -20,8 +20,12 @@ import NavigationDetectorDesktop from "../../common/navigationDetected/Navigatio
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
 function HeroSectionNewPPC({
-  title = "Driveway Installation",
+  heading1 = "Driveway Installation",
+  heading2="Services Near You",
   trustedText = "Trusted Driveway Specialists",
+  text1="Vetted Professionals",
+  text2="Free Quotes",
+  text3="Fast Response"
 }) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
@@ -83,23 +87,23 @@ function HeroSectionNewPPC({
           </div>
 
           <H1 className={`Inter ${styles.heading}`}>
-            Local Expert <span>{title}</span> {""}
-            Services Near You
+            Local Expert <span>{heading1}</span> {""}
+            {heading2}
           </H1>
 
           <div className={styles.desktopfirstSection}>
             <div className={styles.features}>
               <div className={styles.feature}>
                 <VettedProffessionIcon className={styles.icon} />
-                <p>Vetted Professionals</p>
+                <p>{text1}</p>
               </div>
               <div className={styles.feature}>
                 <FreeQuoteIcon className={styles.icon} />
-                <p>Free Quotes</p>
+                <p>{text2}</p>
               </div>
               <div className={styles.feature}>
                 <FastResponseIcon className={styles.icon} />
-                <p>Fast Response</p>
+                <p>{text3}</p>
               </div>
             </div>
 
@@ -145,15 +149,15 @@ function HeroSectionNewPPC({
           <div className={styles.features}>
             <div className={styles.feature}>
               <VettedProffessionIcon className={styles.icon} />
-              <p>Vetted Professionals</p>
+              <p>{text1}</p>
             </div>
             <div className={styles.feature}>
               <FreeQuoteIcon className={styles.icon} />
-              <p>Free Quotes</p>
+              <p>{text2}</p>
             </div>
             <div className={styles.feature}>
               <FastResponseIcon className={styles.icon} />
-              <p>Fast Response</p>
+              <p>{text3}</p>
             </div>
           </div>
 

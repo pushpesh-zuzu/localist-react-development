@@ -31,13 +31,23 @@
 /* Top 4 cards */
 .topGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
   margin-bottom: 80px;
 }
+.topGridsLength4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.topGridsLength3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.topGridsLength2 {
+  grid-template-columns: repeat(2, 1fr);
+}
 
 @media (max-width: 900px) {
-  .topGrid {
+  .topGridsLength4,
+  .topGridsLength3,
+  .topGridsLength2 {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -121,7 +131,9 @@
   justify-content: center;
 }
 @media (max-width: 640px) {
-  .topGrid {
+  .topGridsLength4,
+  .topGridsLength3,
+  .topGridsLength2 {
     grid-template-columns: 1fr;
     gap: 40px;
   }
