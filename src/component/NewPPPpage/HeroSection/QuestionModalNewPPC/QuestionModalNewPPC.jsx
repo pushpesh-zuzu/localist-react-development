@@ -301,6 +301,7 @@ const QuestionModalNewPPC = ({
           dispatch(registerQuoteCustomer(formData)).then((result) => {
             if (result) {
               nextStep();
+              setLocalRequestId(result?.data?.user_id);
             }
           });
         }
@@ -459,7 +460,7 @@ const QuestionModalNewPPC = ({
                         value={opt.option}
                         checked={selectedOption.includes(opt.option)}
                         onChange={handleOptionChange}
-                        disabled={isAnimating}
+                        disabled={isAnimating || requestLoader}
                       />
                       <span style={{ color: "#000000" }}>{opt.option}</span>
                     </label>
@@ -506,7 +507,7 @@ const QuestionModalNewPPC = ({
 
                 <Button1
                   onClick={handleNextCheckBox}
-                  disabled={questionLoader || isAnimating}
+                  disabled={questionLoader || isAnimating || requestLoader}
                   className={styles.nextButton}
                 >
                   {requestLoader ? (
