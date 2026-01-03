@@ -10,6 +10,12 @@ import GetCTAButton from "../UITypography/GetCTAButton";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
 const RegionalGuide = ({
+  // description = "Average driveway installation costs across different UK regions",
+  // regionPricingData = [],
+  // bannerHeading = "UK Average for Standard Driveway (50m²)",
+  // bannerPrice = "£4,500",
+  // budget = "Budget: £3,800 | Premium: £8,800",
+
   description = "Average driveway installation costs across different UK regions",
   regionPricingData = [],
   bannerHeading = "UK Average for Standard Driveway (50m²)",

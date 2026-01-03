@@ -409,7 +409,11 @@ function NewDrivewaysPPCPage() {
       <RegionalGuide regionPricingData={regionPricingData} />
       {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
-      <FAQSection FrequentlyQuestion={FrequentlyQuestion} />
+
+      <div style={{ marginBottom: "40px" }}>
+        <FAQSection FrequentlyQuestion={FrequentlyQuestion} style={{ marginBottom: "40px" }} />
+      </div>
+
       <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
         <FloatingButton />
       </div>

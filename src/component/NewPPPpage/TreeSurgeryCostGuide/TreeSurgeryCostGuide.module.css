@@ -1,0 +1,60 @@
+.heading {
+  max-width: 720px;
+  margin: 0 auto 36px auto;
+  text-align: center;
+}
+
+.description {
+  margin-top: 12px;
+  color: #253238;
+  font-weight: 400;
+}
+
+.tableWrapper {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 16px 22px;
+  background: #f2fbff;
+  font-weight: 900;
+  color: #00afe3;
+  font-size: 25px;
+
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 18px 22px;
+  border-top: 1px solid #eef2f6;
+  align-items: center;
+}
+
+.service {
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.price {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .price {
+    color: #00afe3;
+    font-weight: 700;
+  }
+}

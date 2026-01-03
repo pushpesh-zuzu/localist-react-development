@@ -317,9 +317,29 @@ const pageTitles = {
     description:
       "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
+
+   "/new-ppc-driveways": {
+    title: "Compare Free Quotes from Local Driveway Companies | Localists",
+    description:
+      "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
+  },
+
+  "/new-ppc-roofing": {
+    title: "Compare Free Quotes from Local Roofing Companies | Localists",
+    description:
+      "Get free quotes from top roofing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
+
+  "/new-ppc-tree-surgery": {
+    title: "Find Quality Tree Surgeons Near Me | Localists",
+    description:
+      "Find fully qualified tree surgeons near me. Certified and skilled arborists. Safe tree removal & pruning. Get free quotes from local experts in your area.",
+  },
+
 };
 
-const floatingPath = ['/new-ppc-driveways']
+const floatingPath = ['/new-ppc-driveways'];
+const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing"];
 const MainLayout = () => {
   const location = useLocation();
 
@@ -335,7 +355,7 @@ const MainLayout = () => {
 
   const lookupPath = stripLocalePrefix(location.pathname);
   let meta = pageTitles[lookupPath];
-console.log(lookupPath,'lookupPath')
+  console.log(lookupPath, 'lookupPath')
   // Handle dynamic route for /view-profile/:companyName/:id
   if (!meta && lookupPath.startsWith("/view-profile")) {
     const parts = lookupPath.split("/");
@@ -345,22 +365,32 @@ console.log(lookupPath,'lookupPath')
       description: `Discover more about ${companyName} on Localists. View company details, services, and connect directly.`,
     };
   }
+
   useEffect(() => {
-    document.body.style.paddingTop = "40px";
-    document.documentElement.style.setProperty("padding-top", "40px");
-  }, []);
+    if (noLayoutPaths.includes(lookupPath)) {
+      document.body.style.paddingTop = "0px";
+      document.documentElement.style.setProperty("padding-top", "0px");
+    } else {
+      document.body.style.paddingTop = "40px";
+      document.documentElement.style.setProperty("padding-top", "40px");
+    }
+  }, [lookupPath]);
+
 
   return (
     <div>
       <ScrollToTop />
-      <Navbar />
+      {!noLayoutPaths.includes(lookupPath) && <Navbar />}
       {meta?.title && (
         <MetaHelmet title={meta?.title} description={meta?.description} />
       )}
       <main style={{ minHeight: "50vh", position: "relative", zIndex: 9 }}>
         <Outlet />
       </main>
-      <Footer floatingMargin={floatingPath.includes(lookupPath)}/>
+
+      {!noLayoutPaths.includes(lookupPath) && (
+        <Footer floatingMargin={floatingPath.includes(lookupPath)} />
+      )}
       <CookieConsent />
     </div>
   );

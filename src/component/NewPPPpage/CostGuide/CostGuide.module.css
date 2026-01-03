@@ -151,3 +151,53 @@
     margin-top: 40px;
   }
 }
+
+/* ============================= */
+/* TREE SURGERY COST TABLE */
+/* ============================= */
+
+.tableCard {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 14px 24px;
+  background: #f3fbff;
+  font-weight: 600;
+  color: #00aef0;
+  border-radius: 8px;
+  margin: 0 12px 6px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 16px 24px;
+  border-bottom: 1px solid #eef2f5;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.serviceName {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.servicePrice {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+}
+.singleColumn {
+  grid-template-columns: 1fr;
+}
+

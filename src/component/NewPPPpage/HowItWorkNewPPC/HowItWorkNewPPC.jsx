@@ -17,7 +17,26 @@ import GetCTAButton from "../UITypography/GetCTAButton";
 function HowItWorkNewPPC({
   heading = "What to Expect From a Professional Driveway Installation",
   description = `Get competitive home improvements quotes from leading suppliers in 3 simples step!`,
+  steps,
 }) {
+
+  const defaultSteps = [
+    {
+      icon: <SettingIcon className={styles.icon} />,
+      text: "Fill in your details for your project",
+    },
+    {
+      icon: <VettedProffessionIcon className={styles.icon} />,
+      text: "Receive quotes from professionals",
+    },
+    {
+      icon: <FastTimeIcon className={styles.icon} />,
+      text: "Compare your quotes and enjoy great savings",
+    },
+  ];
+
+  const stepsToRender = steps && steps.length ? steps : defaultSteps;
+
   return (
     <PaddingWrapper className={styles.container}>
       <div className={styles.headingWrap}>
@@ -45,7 +64,7 @@ function HowItWorkNewPPC({
       </div> */}
 
       {/* Features */}
-      <div className={styles.features}>
+      {/* <div className={styles.features}>
         <div className={styles.featureCard}>
           <SettingIcon className={styles.icon} />
           <H5 className={styles.wordText}>
@@ -64,6 +83,15 @@ function HowItWorkNewPPC({
             Compare your quotes and enjoy great savings
           </H5>
         </div>
+      </div> */}
+
+      <div className={styles.features}>
+        {stepsToRender.map((step, index) => (
+          <div key={index} className={styles.featureCard}>
+            {step.icon}
+            <H5 className={styles.wordText}>{step.text}</H5>
+          </div>
+        ))}
       </div>
 
       {/* CTA */}

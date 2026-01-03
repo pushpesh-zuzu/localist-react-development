@@ -26,6 +26,7 @@ import { levelFourLocationRoutes } from "./levelFourRoute";
 import ArchiveLeads from "../component/ArchiveLeads/ArchiveLeads";
 const NewDrivewaysPPCPage = lazy(() => import("../pages/NewDrivewaysPPCPage"));
 const NewRoofingPPCPage = lazy(() => import("../pages/NewRoofingPPCPage"));
+const NewTreeSurgeryPPC = lazy(() => import("../pages/NewTreeSurgeryPPC"));
 
 // ============================================================
 // LAZY-LOADED PAGES - reduces main bundle by ~200KB
@@ -259,6 +260,13 @@ const routes = [
         path: "new-ppc-roofing",
         element: (
           <LocaleRedirect>{withSuspense(NewRoofingPPCPage)}</LocaleRedirect>
+        ),
+      },
+
+      {
+        path: "new-ppc-tree-surgery",
+        element: (
+          <LocaleRedirect>{withSuspense(NewTreeSurgeryPPC)}</LocaleRedirect>
         ),
       },
       {
