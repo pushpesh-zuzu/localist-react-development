@@ -7,19 +7,29 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import GetCTAButton from "../UITypography/GetCTAButton";
 
-const CompareDriveWay = () => {
+const CompareDriveWay = ({
+  heading1 = "Comparing Driveway",
+  heading2 = "Materials",
+  description = `Make an informed decision with our comprehensive material comparison
+        guide`,
+  drivewayTableData = [],
+  drivewayTableHeaders = [],
+}) => {
   return (
     <div className={`${styles.CompareDriveWayContainer}`}>
       <H2 className={`Inter ${styles.CompDriveWayInstHeading}`}>
-        Comparing Driveway <span>Materials</span>
+        {heading1}
+        <span>{heading2}</span>
       </H2>
 
       <Paragraph className={`${styles.ParaText}`} bold={false}>
-        Make an informed decision with our comprehensive material comparison
-        guide
+        {description}
       </Paragraph>
 
-      <DrivewayComparisonTable />
+      <DrivewayComparisonTable
+        drivewayTableData={drivewayTableData}
+        drivewayTableHeaders={drivewayTableHeaders}
+      />
 
       {/* <button className={`${styles.primaryBtn}`}>
                 <span>Get A Free Quotes Now</span>
@@ -32,7 +42,7 @@ const CompareDriveWay = () => {
       </div> */}
       <GetCTAButton
         onClick={() => {
-          handleScrollToBottom()
+          handleScrollToBottom();
         }}
       />
     </div>

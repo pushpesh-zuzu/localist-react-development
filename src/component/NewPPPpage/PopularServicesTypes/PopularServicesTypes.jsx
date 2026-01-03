@@ -5,19 +5,24 @@ import Paragraph from "../UITypography/Paragrah";
 import Button1 from "../UITypography/Button1";
 import ServiceTypeCard from "./ServiceTypeCard";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
-import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import GetCTAButton from "../UITypography/GetCTAButton";
 
-function PopularServicesTypes({ data = [] }) {
+function PopularServicesTypes({
+  heading1 = "Popular",
+  heading2 = "Driveway Types",
+  data = [],
+  description = `Explore our comprehensive range of driveway installation options to
+          find the perfect solution for your property`,
+}) {
   const [active, setActive] = useState(0);
   return (
     <PaddingWrapper background="#FAFAFA">
       <div className={styles.headingWrap}>
-        <BlueBlackH2Heading blueText="Popular" blackText="Driveway Types" />
+        <BlueBlackH2Heading blueText={heading1} blackText={heading2} />
 
         <Paragraph variant="medium" className={styles.subText}>
-          Explore our comprehensive range of driveway installation options to
-          find the perfect solution for your property
+          {description}
         </Paragraph>
       </div>
 
@@ -35,11 +40,16 @@ function PopularServicesTypes({ data = [] }) {
       </div>
 
       {/* CTA */}
-      <div className={styles.cta}>
+      {/* <div className={styles.cta}>
         <Button1 onClick={()=>{handleScrollToBottom()}} className={styles.button} variant="warning">
           Get a Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
-      </div>
+      </div> */}
+      <GetCTAButton
+        onClick={() => {
+          handleScrollToBottom();
+        }}
+      />
     </PaddingWrapper>
   );
 }

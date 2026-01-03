@@ -19,7 +19,10 @@ import DescribeYourRequestNewPPC from "./DescribeYourRequestNewPPC/DescribeYourR
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
-function HeroSectionNewPPC({ title = "Driveway" }) {
+function HeroSectionNewPPC({
+  title = "Driveway Installation",
+  trustedText = "Trusted Driveway Specialists",
+}) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
@@ -76,11 +79,11 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
         {/* LEFT CONTENT */}
         <div className={styles.left}>
           <div className={styles.badge}>
-            <TrustedIcon /> Trusted Driveway Specialists
+            <TrustedIcon /> {trustedText}
           </div>
 
           <H1 className={`Inter ${styles.heading}`}>
-            Local Expert <span>{title} Installation</span> {""}
+            Local Expert <span>{title}</span> {""}
             Services Near You
           </H1>
 
@@ -102,7 +105,7 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
 
             <div className={styles.ctaRow}>
               <button className={`${styles.primaryBtn} `}>
-                Get A Free Quotes Now <GetQuotesIcon color="white" />
+                Get Free Quotes Now <GetQuotesIcon color="white" />
               </button>
             </div>
           </div>

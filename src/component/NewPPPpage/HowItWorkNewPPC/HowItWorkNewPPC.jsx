@@ -13,12 +13,13 @@ import PlayIcon from "../../../assets/ReactIcons/PlayIcon";
 import ThreeBusinessPerson from "./three-business-people-meeting.webp";
 import { handleScrollToBottom } from "../../../utils/scroll";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
+import GetCTAButton from "../UITypography/GetCTAButton";
 function HowItWorkNewPPC({
   heading = "What to Expect From a Professional Driveway Installation",
   description = `Get competitive home improvements quotes from leading suppliers in 3 simples step!`,
 }) {
   return (
-    <PaddingWrapper className={styles.container} >
+    <PaddingWrapper className={styles.container}>
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading
           blueText="How it"
@@ -66,7 +67,7 @@ function HowItWorkNewPPC({
       </div>
 
       {/* CTA */}
-      <div className={styles.cta}>
+      {/* <div className={styles.cta}>
         <Button1
           onClick={() => {
             handleScrollToBottom();
@@ -76,7 +77,12 @@ function HowItWorkNewPPC({
         >
           Get A Free Quotes Now <GetQuotesIcon color="white" />{" "}
         </Button1>
-      </div>
+      </div> */}
+      <GetCTAButton
+        onClick={() => {
+          handleScrollToBottom();
+        }}
+      />
     </PaddingWrapper>
   );
 }

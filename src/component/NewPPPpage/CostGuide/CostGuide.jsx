@@ -9,8 +9,17 @@ import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 import H4 from "../UITypography/H4";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import GetCTAButton from "../UITypography/GetCTAButton";
 
-function CostGuide({ pricing = [], factors = [], icons = {} }) {
+function CostGuide({
+  pricing = [],
+  factors = [],
+  icons = {},
+  description = `Understanding the costs involved in driveway installation helps you
+          budget effectively. Prices vary based on material, size, and
+          complexity.`,
+  heading1 = "Driveway Installation",
+}) {
   const renderIcon = (key, className = "") => {
     const Icon = icons[key];
     if (!Icon) return null;
@@ -21,15 +30,10 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
     <PaddingWrapper>
       {/* Heading */}
       <div className={styles.headingWrap}>
-        <BlueBlackH2Heading
-          blueText="Driveway Installation"
-          blackText="Cost Guide"
-        />
+        <BlueBlackH2Heading blueText={heading1} blackText="Cost Guide" />
 
         <Paragraph variant="medium" className={styles.subText}>
-          Understanding the costs involved in driveway installation helps you
-          budget effectively. Prices vary based on material, size, and
-          complexity.
+          {description}
         </Paragraph>
       </div>
 
@@ -65,7 +69,9 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
                 </div>
                 <div>
                   <H5 className={styles.factorPrice}>{item.title}</H5>
-                  <Paragraph variant="medium" className={styles.priceDesc}>{item.description}</Paragraph>
+                  <Paragraph variant="medium" className={styles.priceDesc}>
+                    {item.description}
+                  </Paragraph>
                 </div>
               </div>
             ))}
@@ -74,11 +80,16 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
       </div>
 
       {/* CTA */}
-      <div className={styles.cta}>
+      {/* <div className={styles.cta}>
         <Button1 onClick={()=>{handleScrollToBottom()}} className={styles.button} variant="warning">
           Get A Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
-      </div>
+      </div> */}
+      <GetCTAButton
+        onClick={() => {
+          handleScrollToBottom();
+        }}
+      />
     </PaddingWrapper>
   );
 }

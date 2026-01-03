@@ -167,7 +167,6 @@ function NewPPCForm({ nextStep }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -380,8 +379,8 @@ function NewPPCForm({ nextStep }) {
             name: formData.fullName,
             phone: formData.phoneNumber,
             email: formData.email,
-            service_id: formData.service.value,
-            service_name: formData.service.label,
+            service_id: formData.serviceId,
+            service_name: formData.service,
             postcode: formData.postcode,
             city: newResponse.data.city,
           })

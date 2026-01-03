@@ -12,6 +12,7 @@ import GetCTAButton from "../UITypography/GetCTAButton";
 function ProfessionalServiceInstallation({
   topCards,
   heading = "Driveway Installation",
+  description = `Expert installation ensures quality, durability, and compliance with regulations`,
 }) {
   return (
     // <div className={styles.container}>
@@ -35,7 +36,7 @@ function ProfessionalServiceInstallation({
         />
 
         <Paragraph variant="medium" className={styles.subText}>
-          Expert installation ensures quality, durability, and compliance with regulations
+          {description}
         </Paragraph>
       </div>
       {/* Top 4 cards */}
@@ -44,9 +45,11 @@ function ProfessionalServiceInstallation({
           <div key={i} className={styles.topCard}>
             <div className={styles.topIcon}>{item.icon}</div>
             <H5>{item.title}</H5>
-           <div className={styles.textdescription}>
-             <Paragraph className={styles.subText} variant="medium">{item.text}</Paragraph>
-           </div>
+            <div className={styles.textdescription}>
+              <Paragraph className={styles.subText} variant="medium">
+                {item.text}
+              </Paragraph>
+            </div>
           </div>
         ))}
       </div>
@@ -83,7 +86,7 @@ function ProfessionalServiceInstallation({
       {/* CTA */}
       <GetCTAButton
         onClick={() => {
-          handleScrollToBottom()
+          handleScrollToBottom();
         }}
       />
     </PaddingWrapper>
