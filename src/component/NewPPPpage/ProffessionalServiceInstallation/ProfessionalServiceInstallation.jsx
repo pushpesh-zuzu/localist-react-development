@@ -33,7 +33,7 @@ function ProfessionalServiceInstallation({
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading
           blueText="Why Choose"
-          blackText={`Professional ${heading}?`}
+          blackText={`Professional ${heading} ?`}
         />
 
         <Paragraph variant="medium" className={styles.subText}>
