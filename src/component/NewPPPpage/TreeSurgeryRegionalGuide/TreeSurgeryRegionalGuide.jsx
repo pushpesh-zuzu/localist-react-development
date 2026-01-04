@@ -1,10 +1,11 @@
 import styles from "./TreeSurgeryRegionalGuide.module.css";
 import BlueBlackH2Heading from "../UITypography/BlueBlackH2Heading";
-import Paragraph from "../UITypography/Paragrah";
+import Paragrah from '../UITypography/Paragrah';
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
-import H4 from "../UITypography/H4";
+import H5 from '../UITypography/H5';
 import GetCTAButton from "../UITypography/GetCTAButton";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import TreeLocationPinIcon from "../../../assets/ReactIcons/TreeLocationPinIcon";
 
 const TreeSurgeryRegionalGuide = ({
   pricingData = [],
@@ -18,21 +19,23 @@ const TreeSurgeryRegionalGuide = ({
           blackText="Tree Surgery Costs"
         />
       </div>
-
-      {/* CARDS */}
-      <div className={styles.cardGrid}>
+      <div className={styles.grid}>
         {pricingData.map((item, index) => (
           <div key={index} className={styles.card}>
-            <Paragraph
-              className={styles.region}
-              title={item.region}
-            >
-              {item.region}
-            </Paragraph>
+            <div className={styles.header}>
+              <span className={styles.icon}>
+                <TreeLocationPinIcon clipPathId="clip1" size={18} />
+              </span>
+              <H5>{item.region}</H5>
+            </div>
 
-            <div className={styles.rateRow}>
-              <Paragraph className={styles.label}>Standard Rate</Paragraph>
-              <H4 className={styles.price}>{item.price}</H4>
+            <div className={styles.list}>
+              {item.prices.map((price, i) => (
+                <div key={i} className={styles.row}>
+                  <Paragrah className={styles.label}>{price.label}</Paragrah>
+                  <Paragrah className={styles.value} bold={false}>{price.value}</Paragrah>
+                </div>
+              ))}
             </div>
           </div>
         ))}

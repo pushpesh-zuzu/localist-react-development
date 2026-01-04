@@ -3,52 +3,115 @@
   margin-bottom: 40px;
 }
 
-.cardGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px 22px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.region {
-  font-weight: 900;
-  color: #00afe3;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.rateRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.label {
-  font-size: 20px;
-  font-weight: 700;
-  color: #253238;
-}
-
-.price {
-  font-weight: 700;
-  color: #253238;
-}
-
 .ctaWrap {
   margin-top: 10px;
   display: flex;
   justify-content: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin: 48px auto;
+  max-width: 1200px;
+}
+
+/* Card */
+.card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 25px 24px 25px 20px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-weight: 900;
+}
+
+.header h5 {
+  font-size: 22px;
+  color: var(--primary-color);
+}
+
+/* List */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  color: #253238;
+}
+
+.icon {
+  margin-top: 6px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.value {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+
+.grid>* {
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1px) and (max-width: 768px) {
+
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 40px;
+    width: 100%;
+    padding: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
 }

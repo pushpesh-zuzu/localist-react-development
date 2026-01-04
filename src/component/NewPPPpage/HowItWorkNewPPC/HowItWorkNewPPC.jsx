@@ -42,7 +42,7 @@ function HowItWorkNewPPC({
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading
           blueText="How it"
-          blackText="works"
+          blackText="Works"
           className={styles.heading}
         />
         {/* <H3

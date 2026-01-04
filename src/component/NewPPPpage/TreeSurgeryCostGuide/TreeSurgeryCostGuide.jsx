@@ -35,7 +35,8 @@ function TreeSurgeryCostGuide() {
             <div className={styles.heading}>
                 <BlueBlackH2Heading
                     blueText="Tree Surgery Services"
-                    blackText="Cost Guide"
+                    blackText=" Cost Guide"
+                    className={styles.headingText1}
                 />
 
                 <Paragraph className={styles.description}>
@@ -45,7 +46,7 @@ function TreeSurgeryCostGuide() {
 
             <div className={styles.tableWrapper}>
                 <div className={styles.tableHeader}>
-                    <span>Service</span>
+                    <span className={styles.tableHeaderSpan}>Service</span>
                     <span>Average Price</span>
                 </div>
 

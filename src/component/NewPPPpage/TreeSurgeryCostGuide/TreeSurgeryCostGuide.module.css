@@ -39,14 +39,37 @@
 .service {
   color: #0f172a;
   font-weight: 900;
+  font-size: 18px;
 }
 
 .price {
   color: #0f172a;
   font-weight: 700;
+  font-size: 23px;
+}
+
+.headingText1 {
+  font-weight: 900;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
 
 @media (max-width: 768px) {
+  .headingText1 {
+    white-space: normal;
+    display: block;
+  }
+
+  .tableHeaderSpan {
+    color: black;
+  }
+}
+
+@media (max-width: 768px) {
+
   .tableHeader,
   .tableRow {
     grid-template-columns: 1fr;

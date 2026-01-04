@@ -1,27 +1,22 @@
 export const treeSurgeryRegionalPricing = [
   {
     region: "Nationwide",
-    label: "Standard Rate",
-    price: "£480",
+    prices: [{ label: "Standard Rate", value: "£480" }],
   },
   {
     region: "London",
-    label: "Standard Rate",
-    price: "£600",
+    prices: [{ label: "Standard Rate", value: "£600" }],
   },
   {
     region: "South East / South West",
-    label: "Standard Rate",
-    price: "£552",
+    prices: [{ label: "Standard Rate", value: "£552" }],
   },
   {
     region: "East Midlands",
-    label: "Standard Rate",
-    price: "£528",
+    prices: [{ label: "Standard Rate", value: "£528" }],
   },
   {
     region: "North West / Scotland / Wales",
-    label: "Standard Rate",
-    price: "£480",
+    prices: [{ label: "Standard Rate", value: "£480" }],
   },
-];
+]

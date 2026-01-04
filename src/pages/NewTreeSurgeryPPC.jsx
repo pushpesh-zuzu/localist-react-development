@@ -147,12 +147,12 @@ export const PSI_TOP = [
     {
         icon: <TreeBadgeIcon />,
         title: "Plant Knowledge",
-        text: "Expert selection of plants suited to your soil, climate, and maintenance preferences",
+        text: "Expert selection of plants suited to your soil, climate, and maintenance preferences.",
     },
     {
         icon: <TreeCareComplexIcon />,
         title: "Professional Tools",
-        text: "Specialized equipment ensures quality results impossible with DIY approaches",
+        text: "Specialized equipment ensures quality results impossible with DIY approaches.",
     },
     {
         icon: <SettingsCheckIcon />,
@@ -220,19 +220,18 @@ function NewTreeSurgeryPPC() {
             />
 
             <PopularServicesTypes
-                heading1="Tree"
-                heading2="Surgery Services"
+                heading1="Tree Surgery"
+                heading2="Services"
                 description="Local comprehensive tree care services tailored to your needs:"
                 data={NEW_PPC_POPULUAR_SERVICE_TYPE}
             />
 
             <TreeSurgeryCostGuide />
-            <ProfessionalServiceInstallation heading="Tree surgery?" topCards={PSI_TOP} />
+            <ProfessionalServiceInstallation heading="Tree Surgery" topCards={PSI_TOP} />
 
             <TreeSurgeryRegionalGuide
                 pricingData={treeSurgeryRegionalPricing}
             />
-
 
             <div style={{ marginBottom: "40px" }}>
                 <FAQSection FrequentlyQuestion={FrequentlyQuestion} />
