@@ -3,7 +3,6 @@ import HeroSectionNewPPC from "../component/NewPPPpage/HeroSection/HeroSectionNe
 import HowItWorkNewPPC from "../component/NewPPPpage/HowItWorkNewPPC/HowItWorkNewPPC";
 import PopularServicesTypes from "../component/NewPPPpage/PopularServicesTypes/PopularServicesTypes";
 import { Helmet } from "react-helmet-async";
-import CostGuide from "../component/NewPPPpage/CostGuide/CostGuide";
 import ProfessionalServiceInstallation from "../component/NewPPPpage/ProffessionalServiceInstallation/ProfessionalServiceInstallation";
 import RegionalGuide from "../component/NewPPPpage/RegionalGuide/RegionalGuide";
 import FAQSection from "../component/NewPPPpage/FAQSection/FAQSection";
@@ -17,6 +16,7 @@ import RoofInspections from "../assets/ReactIcons/RoofInspections";
 import DesignExpertsIcon from "../assets/ReactIcons/DesignExpertsIcon";
 import ProffesionalToolsIcon from "../assets/ReactIcons/ProffesionalToolsIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
+import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/TreeSurgeryCostGuide";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -104,52 +104,29 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
 ];
-export const COST_PRICING = [
-  {
-    icon: "minor",
-    title: "Minor leak repairs",
-    price: "£120 - £450",
-    // description:
-    prop: { size: "18px" },
-  },
 
+const CostGuidData = [
   {
-    icon: "tileslate",
-    title: "Tile/slate replacement",
-    price: " £200 - £1,000",
-    // description:
-    prop: { size: "18px" },
+    service: "Minor leak repairs",
+    price: "£120 - £450",
   },
   {
-    icon: "flatroof",
-    title: "Flat roof repairs",
-    price: " £250 - £1,500",
-    // description:
-    prop: { size: "18px" },
+    service: "Tile/slate replacement",
+    price: "£200 - £1,000",
   },
   {
-    icon: "gutter",
-    title: "Gutter & drainage repairs",
+    service: "Flat roof repairs",
+    price: "£250 - £1,500",
+  },
+  {
+    service: "Gutter & drainage repairs",
     price: "£80 - £400",
-    // description:
-    prop: { size: "18px" },
   },
   {
-    icon: "emergency",
-    title: "Emergency roof repairs",
+    service: "Emergency roof repairs",
     price: "£300 - £1,500+",
-    // description:
-    prop: { size: "18px" },
   },
 ];
-
-const COST_ICONS = {
-  emergency: EmergencyRoofRepairsIcon,
-  gutter: GutterRepairsIcon,
-  flatroof: RoofFlatIcon,
-  tileslate: RoofTilesIcon,
-  minor: LeakRepairIcon,
-};
 export const PSI_TOP = [
   {
     icon: <DesignExpertsIcon />,
@@ -247,16 +224,23 @@ function NewRoofingPPCPage() {
         description="Explore our comprehensive range of roofing installation options to
           find the perfect solution for your property"
       />
-      <CostGuide
+      {/* <CostGuide
         heading1="Roofing Installation"
         description="Understanding the costs involved in roofing installation helps you
           budget effectively. Prices vary based on material, size, and
           complexity."
         pricing={COST_PRICING}
         icons={COST_ICONS}
+      /> */}
+      <TreeSurgeryCostGuide
+        CostGuidData={CostGuidData}
+        heading1="Roofing Installation"
+        description="Understanding the costs involved in roofing installation helps you
+          budget effectively. Prices vary based on material, size, and
+          complexity."
       />
       <ProfessionalServiceInstallation
-        heading="Roofing Expert"
+        heading="Roofing Experts"
         topCards={PSI_TOP}
       />
       <RegionalGuide

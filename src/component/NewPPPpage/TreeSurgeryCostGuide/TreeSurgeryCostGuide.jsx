@@ -6,21 +6,24 @@ import Paragraph from "../UITypography/Paragrah";
 import GetCTAButton from "../UITypography/GetCTAButton";
 import H5 from "../UITypography/H5";
 
-function TreeSurgeryCostGuide({ CostGuidData = [] }) {
+function TreeSurgeryCostGuide({
+  CostGuidData = [],
+  heading1 = "Tree Surgery Services",
+  headding2 = "Cost Guide",
+  description = `Understanding the costs involved in driveway installation helps you
+          budget effectively. Prices vary based on material, size, and
+          complexity.`,
+}) {
   return (
     <PaddingWrapper>
       <div className={styles.heading}>
         <BlueBlackH2Heading
-          blueText="Tree Surgery Services"
-          blackText=" Cost Guide"
+          blueText={heading1}
+          blackText={headding2}
           className={styles.headingText1}
         />
 
-        <Paragraph className={styles.description}>
-          Understanding the costs involved in driveway installation helps you
-          budget effectively. Prices vary based on material, size, and
-          complexity.
-        </Paragraph>
+        <Paragraph className={styles.description}>{description}</Paragraph>
       </div>
 
       <div className={styles.tableWrapper}>
