@@ -189,7 +189,28 @@ const FrequentlyQuestion = [
         description: `Tree surgery can take a few hours to a full day, depending on the tree’s size, condition, and the type of work needed. Smaller jobs may be completed quickly, while large or complex trees can take longer.`,
     }
 ];
-
+   const CostGuidData = [
+        {
+            service: "Tree pruning / crown reduction",
+            price: "£150–£800 per tree",
+        },
+        {
+            service: "Tree removal (small / medium)",
+            price: "£250–£1,200+",
+        },
+        {
+            service: "Stump grinding",
+            price: "£60–£300 per stump",
+        },
+        {
+            service: "Hedge trimming",
+            price: "£40–£500 depending on size",
+        },
+        {
+            service: "Emergency tree work",
+            price: "£300–£1,500+",
+        },
+    ];
 function NewTreeSurgeryPPC() {
     return (
         <>
@@ -226,16 +247,14 @@ function NewTreeSurgeryPPC() {
                 data={NEW_PPC_POPULUAR_SERVICE_TYPE}
             />
 
-            <TreeSurgeryCostGuide />
+            <TreeSurgeryCostGuide CostGuidData={CostGuidData} />
             <ProfessionalServiceInstallation heading="Tree Surgery" topCards={PSI_TOP} />
 
             <TreeSurgeryRegionalGuide
                 pricingData={treeSurgeryRegionalPricing}
             />
 
-            <div style={{ marginBottom: "40px" }}>
                 <FAQSection FrequentlyQuestion={FrequentlyQuestion} />
-            </div>
 
             <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
                 <FloatingButton />
