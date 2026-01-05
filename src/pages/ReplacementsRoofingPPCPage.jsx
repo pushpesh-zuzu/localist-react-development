@@ -275,7 +275,7 @@ function ReplacementsRoofingPPCPage() {
                 <meta name="robots" content="noindex" />
             </Helmet>
             <HeroSectionNewPPC
-                trustedText="Trusted Roofing Specialists"
+                trustedText="Trusted New Roof Installation & Replacement Specialists"
                 heading1="New Roof Installation & Replacement "
                 heading2="Near You"
                 text1="Vetted Contractors"
