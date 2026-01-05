@@ -22,10 +22,11 @@ const RegionalGuide = ({
   bannerPrice = "£4,500",
   budget = "Budget: £3,800 | Premium: £8,800",
   heading1="Regional",
-  heading2="Pricing Guide"
+  heading2="Pricing Guide",
+  background="#FAFAFA"
 }) => {
   return (
-    <PaddingWrapper background="#FAFAFA" className={styles.customWapper}>
+    <PaddingWrapper background={background} className={styles.customWapper}>
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading blueText={heading1} blackText={heading2} />
 

@@ -406,10 +406,10 @@ function NewDrivewaysPPCPage() {
         drivewayTableData={drivewayTableData}
         drivewayTableHeaders={drivewayTableHeaders}
       /> */}
-      <RegionalGuide regionPricingData={regionPricingData} />
+      <RegionalGuide background="white"  regionPricingData={regionPricingData} />
       {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
-        <FAQSection FrequentlyQuestion={FrequentlyQuestion} style={{ marginBottom: "40px" }} />
+        <FAQSection   background="#FAFAFA" FrequentlyQuestion={FrequentlyQuestion} style={{ marginBottom: "40px" }} />
       <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
         <FloatingButton />
       </div>
