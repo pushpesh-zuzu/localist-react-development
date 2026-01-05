@@ -402,8 +402,13 @@ const QuestionModalNewPPC = ({
                     : serviceName === "Landscaping"
                     ? styles.headerImage7
                     : serviceName === "Gate Installation"
+                    ? styles.headerImage9
+                    : serviceName === "Roofing"
                     ? styles.headerImage8
+                    : serviceName === "Tree Surgery"
+                    ? styles.headerImage9
                     : styles.headerImage
+
                 } ${
                   isAnimating
                     ? animationDirection === "next"

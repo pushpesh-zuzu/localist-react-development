@@ -291,7 +291,7 @@
   flex-direction: column;
 }
 .headerImage8 {
-  background-image: url("./banner/Gate.webp");
+  background-image: url("./banner/Roofing.webp");
   background-size: cover;
   background-position: center;
   padding: 0px 20px;
@@ -304,7 +304,20 @@
   align-items: center;
   flex-direction: column;
 }
-
+.headerImage9 {
+  background-image: url("./banner/TreeSurgeon.webp");
+  background-size: cover;
+  background-position: center;
+  padding: 0px 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 158px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .headerImage h2 {
   font-family: Poppins;
   font-weight: 700;
@@ -355,6 +368,12 @@
   margin-bottom: 0px;
 }
 .headerImage8 h2 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.headerImage9 h2 {
   font-family: Poppins;
   font-weight: 700;
   font-size: 20px;
@@ -559,6 +578,10 @@
     padding: 40px 15px;
   }
   .headerImage8 {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 40px 15px;
+  }
+    .headerImage9 {
     font-size: clamp(16px, 4vw, 20px);
     padding: 40px 15px;
   }
