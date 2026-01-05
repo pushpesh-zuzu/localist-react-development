@@ -95,16 +95,6 @@ const QuestionModalNewPPC = ({
 
     setIsAnimating(true);
     setAnimationDirection(direction);
-
-    setTimeout(() => {
-      if (typeof callback === "function") {
-        callback();
-      }
-
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 100);
-    }, 300);
   };
 
   const handleOptionChange = (e) => {
@@ -146,15 +136,16 @@ const QuestionModalNewPPC = ({
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
-    const updatedAnswer = {
+     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
+      question_no: formattedQuestions[currentQuestion]?.question_no,
     };
 
     const previousAnswers = buyerRequest?.questions || [];
 
     const existingIndex = previousAnswers.findIndex(
-      (item) => item?.ques === updatedAnswer.ques
+      (item) => item?.question_no === updatedAnswer.question_no
     );
 
     let updatedAnswers;
@@ -172,66 +163,60 @@ const QuestionModalNewPPC = ({
     );
 
     const nextQ = selectedObj?.next_question;
-    handleScrollToBottom();
+    console.log(nextQ, "nextQnextQ");
+    if (nextQ === "last") {
+      const hasQuestionNo = updatedAnswers.some(
+    (q) => q && typeof q === "object" && "question_no" in q
+  );
+       const answersToSend = hasQuestionNo
+          ? updatedAnswers.map((q) => {
+              if (!q || typeof q !== "object") return q;
+              const { question_no, ...rest } = q;
+              return rest;
+            })
+          : updatedAnswers;
+      const formData = new FormData();
+      formData.append("name", buyerRequest?.name);
+      formData.append("email", buyerRequest?.email);
+      formData.append("phone", buyerRequest?.phone);
+      formData.append("questions", JSON.stringify(answersToSend));
+      formData.append("service_id", buyerRequest?.service_id);
+      formData?.append("city", citySerach);
+      formData.append("postcode", buyerRequest?.postcode);
+      formData.append("form_status", 1);
+      formData.append("campaignid", campaignid || "");
+      formData.append("gclid", gclid || "");
+      formData.append("campaign", campaign || "");
+      formData.append("adgroup", adGroup || "");
+      formData.append("targetid", targetID || "");
+      formData.append("msclickid", msclickid || "");
+      formData.append("utm_source", utm_source || "");
+      formData.append("keyword", keyword || "");
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
 
-    const isLastQuestion =
-      nextQ === "last" || currentQuestion === totalQuestions - 1;
+      dispatch(registerQuoteCustomer(formData)).then((result) => {
+        if (result) {
+          nextStep();
+        }
+      });
+    } else if (nextQ && questionIndexMap[nextQ]) {
+      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+      setCurrentQuestion(questionIndexMap[nextQ]);
+    } else {
+      if (currentQuestion < totalQuestions - 1) {
+        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setCurrentQuestion(currentQuestion + 1);
+                animateQuestionChange("next");
 
-    if (isLastQuestion) {
-      if (adminToken || registerData?.remember_tokens) {
-        nextStep();
       } else {
-        const formData = new FormData();
-        formData.append("name", buyerRequest?.name);
-        formData.append("email", buyerRequest?.email);
-        formData.append("phone", buyerRequest?.phone);
-        formData.append("questions", JSON.stringify(updatedAnswers));
-        formData.append("service_id", buyerRequest?.service_id);
-        formData?.append("city", citySerach);
-        formData.append("postcode", buyerRequest?.postcode);
-        formData.append("form_status", 1);
-        formData.append("campaignid", campaignid || "");
-        formData.append("gclid", gclid || "");
-        formData.append("campaign", campaign || "");
-        formData.append("adgroup", adGroup || "");
-        formData.append("targetid", targetID || "");
-        formData.append("msclickid", msclickid || "");
-        formData.append("utm_source", utm_source || "");
-        formData.append("keyword", keyword || "");
-        formData.append("entry_url", url);
-        formData.append("user_ip_address ", ip);
-
-        dispatch(registerQuoteCustomer(formData)).then((result) => {
-          if (result) {
-            nextStep();
-            setLocalRequestId(result?.data?.user_id);
-          }
-        });
+        nextStep();
       }
-
-      setSelectedOption([]);
-      setOtherText("");
-      setError("");
-      return; 
     }
 
-    const proceedToNext = () => {
-      if (nextQ && questionIndexMap[nextQ]) {
-        setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
-        setCurrentQuestion(questionIndexMap[nextQ]);
-      } else {
-        if (currentQuestion < totalQuestions - 1) {
-          setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
-          setCurrentQuestion(currentQuestion + 1);
-        }
-      }
-
-      setSelectedOption([]);
-      setOtherText("");
-      setError("");
-    };
-
-    animateQuestionChange("next", proceedToNext);
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   const handleNext = (selected) => {
@@ -249,19 +234,20 @@ const QuestionModalNewPPC = ({
       return;
     }
 
-    const finalAnswer = selected.map((opt) =>
+    const finalAnswer = selected?.map((opt) =>
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
-    const updatedAnswer = {
+     const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
+      question_no: formattedQuestions[currentQuestion]?.question_no,
     };
 
     const previousAnswers = buyerRequest?.questions || [];
 
     const existingIndex = previousAnswers.findIndex(
-      (item) => item?.ques === updatedAnswer.ques
+      (item) => item?.question_no === updatedAnswer.question_no
     );
 
     let updatedAnswers;
@@ -277,87 +263,79 @@ const QuestionModalNewPPC = ({
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
     );
-
+    console.log(selectedObj, "selectedObj");
     const nextQ = selectedObj?.next_question;
-    handleScrollToBottom();
+    console.log(nextQ, "nextQnextQnextQnextQ next");
+    if (nextQ === "last") {
+      const hasQuestionNo = updatedAnswers.some(
+    (q) => q && typeof q === "object" && "question_no" in q
+  );
+      const answersToSend = hasQuestionNo
+          ? updatedAnswers.map((q) => {
+              if (!q || typeof q !== "object") return q;
+              const { question_no, ...rest } = q;
+              return rest;
+            })
+          : updatedAnswers;
+      const formData = new FormData();
+      formData.append("name", buyerRequest?.name);
+      formData.append("email", buyerRequest?.email);
+      formData.append("phone", buyerRequest?.phone);
+      formData.append("questions", JSON.stringify(answersToSend));
+      formData.append("service_id", buyerRequest?.service_id);
+      formData?.append("city", citySerach);
+      formData.append("postcode", buyerRequest?.postcode);
+      formData.append("form_status", 1);
+      formData.append("campaignid", campaignid || "");
+      formData.append("gclid", gclid || "");
+      formData.append("campaign", campaign || "");
+      formData.append("adgroup", adGroup || "");
+      formData.append("targetid", targetID || "");
+      formData.append("msclickid", msclickid || "");
+      formData.append("utm_source", utm_source || "");
+      formData.append("keyword", keyword || "");
+      formData.append("entry_url", url);
+      formData.append("user_ip_address ", ip);
 
-    const isLastQuestion =
-      nextQ === "last" || currentQuestion === totalQuestions - 1;
+      dispatch(registerQuoteCustomer(formData)).then((result) => {
+        if (result) {
+          nextStep();
+        }
+      });
+    } else if (nextQ && questionIndexMap[nextQ]) {
+      setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
+      setCurrentQuestion(questionIndexMap[nextQ]);
+      
+    } else {
+      if (currentQuestion < totalQuestions - 1) {
+        setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
+        setCurrentQuestion(currentQuestion + 1);
+                animateQuestionChange("next");
 
-    if (isLastQuestion) {
-      if (adminToken || registerData?.remember_tokens) {
-        nextStep();
       } else {
-        const formData = new FormData();
-        formData.append("name", buyerRequest?.name);
-        formData.append("email", buyerRequest?.email);
-        formData.append("phone", buyerRequest?.phone);
-        formData.append("questions", JSON.stringify(updatedAnswers));
-        formData.append("service_id", buyerRequest?.service_id);
-        formData?.append("city", citySerach);
-        formData.append("postcode", buyerRequest?.postcode);
-        formData.append("form_status", 1);
-        formData.append("campaignid", campaignid || "");
-        formData.append("gclid", gclid || "");
-        formData.append("campaign", campaign || "");
-        formData.append("adgroup", adGroup || "");
-        formData.append("targetid", targetID || "");
-        formData.append("msclickid", msclickid || "");
-        formData.append("utm_source", utm_source || "");
-        formData.append("keyword", keyword || "");
-        formData.append("entry_url", url);
-        formData.append("user_ip_address ", ip);
-
-        dispatch(registerQuoteCustomer(formData)).then((result) => {
-          if (result) {
-            nextStep();
-            setLocalRequestId(result?.data?.user_id);
-          }
-        });
+        nextStep();
       }
-
-      setSelectedOption([]);
-      setOtherText("");
-      setError("");
-      return;
     }
 
-    const proceedToNext = () => {
-      if (nextQ && questionIndexMap[nextQ]) {
-        setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
-        setCurrentQuestion(questionIndexMap[nextQ]);
-      } else {
-        if (currentQuestion < totalQuestions - 1) {
-          setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
-          setCurrentQuestion(currentQuestion + 1);
-        }
-      }
-
-      setSelectedOption([]);
-      setOtherText("");
-      setError("");
-    };
-
-    animateQuestionChange("next", proceedToNext);
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   const handleBack = () => {
-    const goBack = () => {
-      if (questionHistory.length > 1) {
-        const newHistory = [...questionHistory];
-        newHistory.pop();
-        const prevIndex = newHistory[newHistory.length - 1];
-        setQuestionHistory(newHistory);
-        setCurrentQuestion(prevIndex);
-        // handleScrollToBottom();
-        setError("");
-      } else {
-        // previousStep();
-        handleScrollToBottom();
-      }
-    };
-
-    animateQuestionChange("back", goBack);
+    if (questionHistory.length > 1) {
+      const newHistory = [...questionHistory];
+      newHistory.pop();
+      const prevIndex = newHistory[newHistory.length - 1];
+      setQuestionHistory(newHistory);
+      setCurrentQuestion(prevIndex);
+      // handleScrollToBottom();
+      setError("");
+    } else {
+      // previousStep();
+      handleScrollToBottom();
+    }
+// animateQuestionChange("back");
   };
 
   useEffect(() => {
