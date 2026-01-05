@@ -13,6 +13,7 @@ function TreeSurgeryCostGuide({
   description = `Understanding the costs involved in driveway installation helps you
           budget effectively. Prices vary based on material, size, and
           complexity.`,
+  maxWidth = "800px",
 }) {
   return (
     <PaddingWrapper>
@@ -26,7 +27,7 @@ function TreeSurgeryCostGuide({
         <Paragraph className={styles.description}>{description}</Paragraph>
       </div>
 
-      <div className={styles.tableWrapper}>
+      <div className={styles.tableWrapper} style={{ maxWidth: maxWidth }}>
         <div className={styles.tableHeader}>
           <H5 className={styles.tableHeaderSpan}>Service</H5>
           <H5 className={styles.tableHeaderSpan}>Average Price</H5>
@@ -35,7 +36,10 @@ function TreeSurgeryCostGuide({
         {CostGuidData?.map((item, index) => (
           <div key={index} className={styles.tableRow}>
             <Paragraph variant="secondary" className={styles.service}>
-              {item.service}
+              {item.service}{" "}
+              {item.description && (
+                <span className={styles.description}>{item.description}</span>
+              )}
             </Paragraph>
             <Paragraph variant="secondary" className={styles.price}>
               {item.price}

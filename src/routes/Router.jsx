@@ -27,6 +27,7 @@ import ArchiveLeads from "../component/ArchiveLeads/ArchiveLeads";
 const NewDrivewaysPPCPage = lazy(() => import("../pages/NewDrivewaysPPCPage"));
 const NewRoofingPPCPage = lazy(() => import("../pages/NewRoofingPPCPage"));
 const NewTreeSurgeryPPC = lazy(() => import("../pages/NewTreeSurgeryPPC"));
+const NewLandscapingPPCPage = lazy(() => import("../pages/NewLandscapingPPCPage"));
 
 // ============================================================
 // LAZY-LOADED PAGES - reduces main bundle by ~200KB
@@ -267,6 +268,12 @@ const routes = [
         path: "new-ppc-tree-surgery",
         element: (
           <LocaleRedirect>{withSuspense(NewTreeSurgeryPPC)}</LocaleRedirect>
+        ),
+      },
+      {
+        path: "new-ppc-landscaping",
+        element: (
+          <LocaleRedirect>{withSuspense(NewLandscapingPPCPage)}</LocaleRedirect>
         ),
       },
       {
