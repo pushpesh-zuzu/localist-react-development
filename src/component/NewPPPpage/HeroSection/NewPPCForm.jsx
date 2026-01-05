@@ -169,11 +169,10 @@ function NewPPCForm({ nextStep }) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     
-    // Update buyerRequest in Redux
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
-        [name]: value
+        [name]: value,
       })
     );
 
@@ -184,42 +183,42 @@ function NewPPCForm({ nextStep }) {
 
   const handleServiceChange = (selectedOption) => {
     // Create service object for formData
-    const serviceObj = selectedOption ? {
-      value: selectedOption.value,
-      label: selectedOption.label
-    } : null;
+    const serviceObj = selectedOption
+      ? {
+          value: selectedOption.value,
+          label: selectedOption.label,
+        }
+      : null;
 
-    // Update formData
     setFormData((prev) => ({
       ...prev,
       service_name: serviceObj,
       service_id: selectedOption?.value || "",
     }));
-    
-    // Update buyerRequest in Redux
+
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
         service_id: selectedOption?.value || "",
-        service_name: selectedOption?.label || ""
+        service_name: selectedOption?.label || "",
       })
     );
-    
+
     setErrors((prev) => ({ ...prev, service: "" }));
   };
 
   const handlePostcodeChange = (e) => {
     const value = e.target.value.replace(/\s/g, "").slice(0, 10);
     setFormData((prev) => ({ ...prev, postcode: value }));
-    
+
     // Update buyerRequest in Redux
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
-        postcode: value
+        postcode: value,
       })
     );
-    
+
     setErrors((prev) => ({ ...prev, pincode: "" }));
   };
 
@@ -302,11 +301,28 @@ function NewPPCForm({ nextStep }) {
       boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
       marginTop: "4px",
       zIndex: 1000,
+      overflow: "hidden",
     }),
     menuList: (base) => ({
       ...base,
       padding: 0,
-      maxHeight: "300px",
+      maxHeight: "200px",
+      overflowY: "auto",
+      WebkitOverflowScrolling: "touch",
+      scrollbarWidth: "thin",
+      "&::-webkit-scrollbar": {
+        width: "6px",
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#f5f5f5",
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "#c1c1c1",
+        borderRadius: "3px",
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "#a8a8a8",
+      },
     }),
     option: (base, state) => ({
       ...base,
@@ -449,7 +465,7 @@ function NewPPCForm({ nextStep }) {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     if (formData.service_id) {
       dispatch(questionAnswerData({ service_id: formData.service_id }));
@@ -460,7 +476,7 @@ function NewPPCForm({ nextStep }) {
 
   useEffect(() => {
     if (!isEmailAvailable) {
-      setFormData(prev => ({ ...prev, email: "" }));
+      setFormData((prev) => ({ ...prev, email: "" }));
       dispatch(
         setbuyerRequestData({
           ...buyerRequest,
@@ -486,13 +502,9 @@ function NewPPCForm({ nextStep }) {
           placeholder="Enter your full name"
           value={formData.name}
           onChange={handleInputChange}
-          className={`${styles.input} ${
-            errors.name ? styles.errorBorder : ""
-          }`}
+          className={`${styles.input} ${errors.name ? styles.errorBorder : ""}`}
         />
-        {errors.name && (
-          <span className={styles.errorText}>{errors.name}</span>
-        )}
+        {errors.name && <span className={styles.errorText}>{errors.name}</span>}
 
         <label>Phone Number *</label>
         <input
@@ -506,14 +518,13 @@ function NewPPCForm({ nextStep }) {
               phone: onlyNumbers,
             }));
             
-            // Update phone in buyerRequest
             dispatch(
               setbuyerRequestData({
                 ...buyerRequest,
-                phone: onlyNumbers
+                phone: onlyNumbers,
               })
             );
-            
+
             if (errors.phone) {
               setErrors((prev) => ({ ...prev, phone: "" }));
             }

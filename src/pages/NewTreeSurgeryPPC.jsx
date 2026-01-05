@@ -7,9 +7,6 @@ import TreeEditIcon from "../assets/ReactIcons/TreeEditIcon";
 import TreeUserIcon from "../assets/ReactIcons/TreeUserIcon";
 import TreeDocumentSearchIcon from "../assets/ReactIcons/TreeDocumentSearchIcon";
 import CheckCircleIcon from "../assets/ReactIcons/CheckCircleIcon";
-import PatternImplementedIcon from "../assets/ReactIcons/PatternImplementedIcon";
-import SettingIcon from "../assets/ReactIcons/SettingIcon";
-import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import ProfessionalServiceInstallation from "../component/NewPPPpage/ProffessionalServiceInstallation/ProfessionalServiceInstallation";
@@ -25,9 +22,7 @@ import CloudSupportIcon from "../assets/ReactIcons/CloudSupportIcon";
 import SearchDocumentIcon from "../assets/ReactIcons/SearchDocumentIcon";
 import ComplexServiceIcon from "../assets/ReactIcons/ComplexServiceIcon";
 import CuttingToolIcon from "../assets/ReactIcons/CuttingToolIcon";
-import TreeBadgeIcon from "../assets/ReactIcons/TreeBadgeIcon";
-import TreeCareComplexIcon from "../assets/ReactIcons/TreeCareComplexIcon";
-import SettingsCheckIcon from "../assets/ReactIcons/SettingsCheckIcon";
+import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
@@ -141,25 +136,26 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
 export const PSI_TOP = [
     {
         icon: <CuttingToolIcon />,
-        title: "Design Expertise",
-        text: "Professional designers create beautiful, functional spaces maximizing your property potential.",
+        title: "Expertise & Safety",
+        text: "Qualified tree surgeons with years of hands-on experience use professional climbing equipment and industry-approved techniques to carry out safe, precise tree work.",
     },
     {
-        icon: <TreeBadgeIcon />,
-        title: "Plant Knowledge",
-        text: "Expert selection of plants suited to your soil, climate, and maintenance preferences.",
-    },
-    {
-        icon: <TreeCareComplexIcon />,
-        title: "Professional Tools",
-        text: "Specialized equipment ensures quality results impossible with DIY approaches.",
-    },
-    {
-        icon: <SettingsCheckIcon />,
+        icon: <GuaranteedWorkIcon />,
         title: "Guaranteed Work",
-        text: "5–10 year guarantees on plants, materials, and workmanship provide peace of mind.",
+        text: "Most professionals offer up to 10-year guarantees on workmanship where applicable, giving you long-term peace of mind after the work is complete.",
     },
-];
+    {
+        icon: <CompetitivePricingIcon />,
+        title: "Competitive Pricing",
+        text: "Receive fair, transparent pricing from vetted local tree surgeons, allowing you to compare quotes and choose the best value for your budget.",
+    },
+    {
+        icon: <QuicAlarmIcon />,
+        title: "Quick Turnaround",
+        text: "Tree work is completed efficiently and safely, minimising disruption while ensuring high standards are maintained.",
+    },
+    ];
+
 
 const FrequentlyQuestion = [
     {
@@ -223,7 +219,7 @@ function NewTreeSurgeryPPC() {
                 trustedText="Trusted Tree Surgery"
             />
             <HowItWorkNewPPC
-                description="Get competitive home improvements quotes from leading suppliers in 3 simples step!"
+            
                 steps={[
                     {
                         icon: <TreeEditIcon />,

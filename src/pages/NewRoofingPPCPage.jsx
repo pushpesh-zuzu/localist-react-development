@@ -17,6 +17,9 @@ import DesignExpertsIcon from "../assets/ReactIcons/DesignExpertsIcon";
 import ProffesionalToolsIcon from "../assets/ReactIcons/ProffesionalToolsIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/TreeSurgeryCostGuide";
+import SettingIcon from "../assets/ReactIcons/SettingIcon";
+import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
+import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -130,25 +133,26 @@ const CostGuidData = [
 export const PSI_TOP = [
   {
     icon: <DesignExpertsIcon />,
-    title: "Design Expertise",
-    text: "Professional designers create beautiful, functional spaces that maximise your property’s potential.",
-  },
-  // {
-  //   icon: <SettingIcon />,
-  //   title: "Plant Knowledge",
-  //   text: "Expert selection of plants suited to your soil, climate, and maintenance preferences.",
-  // },
-  {
-    icon: <ProffesionalToolsIcon />,
-    title: "Professional Tools",
-    text: "Specialised equipment ensures quality results that are not possible with DIY approaches.",
+    title: "Expertise & Safety",
+    text: "Qualified roofing contractors with years of experience use industry-approved techniques to carry out safe, precise repairs.",
   },
   {
     icon: <GuaranteedWorkIcon />,
     title: "Guaranteed Work",
-    text: "5–10 year guarantees on plants, materials, and workmanship provide peace of mind.",
+    text: "Most professionals offer up to 10-year guarantees on workmanship and materials where applicable, giving long-term peace of mind.",
+  },
+  {
+    icon: <CompetitivePricingIcon />,
+    title: "Competitive Pricing",
+    text: "Receive fair, transparent pricing from vetted local roofers, allowing you to compare quotes and choose the best value.",
+  },
+  {
+    icon: <QuicAlarmIcon />,
+    title: "Quick Turnaround",
+    text: "Roofing repairs are completed efficiently and safely, minimising disruption while maintaining high standards.",
   },
 ];
+
 export const regionPricingData = [
   {
     region: "Nationwide",
@@ -214,9 +218,8 @@ function NewRoofingPPCPage() {
         trustedText="Trusted Roofing Specialists"
         heading1=" Roofing Repairs"
         heading2="Near You"
-        text1="Vetted Contractors"
       />
-      <HowItWorkNewPPC description="Get matched quickly with trusted local roofing contractors who specialise in all types of roof repairs - from minor leak fixes to roof tiles or full roof replacement. Receive up to 5 free quotes from local experts, compare experience and pricing, and choose the option that works best for your project. No obligation, no pressure." />
+      <HowItWorkNewPPC />
       <PopularServicesTypes
         data={NEW_PPC_POPULUAR_SERVICE_TYPE}
         heading1="Roofing"

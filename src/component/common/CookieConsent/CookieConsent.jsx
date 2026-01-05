@@ -48,7 +48,7 @@ const CookieConsent = () => {
 
   return (
     <>
-      <div className={styles.overlay} />
+      {/* <div className={styles.overlay} /> */}
 
       <div className={`${styles.container} ${showBanner ? styles.show : ""}`}>
         <div className={styles.wrapper}>
