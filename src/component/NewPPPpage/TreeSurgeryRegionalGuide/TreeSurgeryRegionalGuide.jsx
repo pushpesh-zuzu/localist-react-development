@@ -10,10 +10,11 @@ import TreeLocationPinIcon from "../../../assets/ReactIcons/TreeLocationPinIcon"
 const TreeSurgeryRegionalGuide = ({
   pricingData = [],
   heading1="Regional",
-  heading2 ="Tree Surgery Costs"
+  heading2 ="Tree Surgery Costs",
+  background="#FAFAFA"
 }) => {
   return (
-    <PaddingWrapper background="#FAFAFA">
+    <PaddingWrapper background={background}>
       {/* HEADING */}
       <div className={styles.headingWrap}>
         <BlueBlackH2Heading

@@ -248,9 +248,10 @@ function NewTreeSurgeryPPC() {
 
             <TreeSurgeryRegionalGuide
                 pricingData={treeSurgeryRegionalPricing}
+                background="white"
             />
 
-                <FAQSection FrequentlyQuestion={FrequentlyQuestion} />
+                <FAQSection FrequentlyQuestion={FrequentlyQuestion} background="#FAFAFA" />
 
             <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
                 <FloatingButton />
