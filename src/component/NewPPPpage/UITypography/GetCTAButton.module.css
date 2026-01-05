@@ -9,7 +9,9 @@
   align-items: center;
   gap: 5px;
 }
-
+.button:hover {
+  background: #00aef0;
+}
 @media (max-width: 640px) {
   .cta {
     margin-top: 40px;

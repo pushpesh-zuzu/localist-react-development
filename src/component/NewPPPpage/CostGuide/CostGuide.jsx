@@ -9,27 +9,41 @@ import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 import H4 from "../UITypography/H4";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import GetCTAButton from "../UITypography/GetCTAButton";
 
-function CostGuide({ pricing = [], factors = [], icons = {} }) {
-  const renderIcon = (key, className = "") => {
+function CostGuide({
+  pricing = [],
+  factors = [],
+  icons = {},
+  description = `Understanding the costs involved in driveway installation helps you
+          budget effectively. Prices vary based on material, size, and
+          complexity.`,
+  heading1 = "Driveway Installation",
+}) {
+  const renderIcon = (key, props = {}, className = "") => {
     const Icon = icons[key];
     if (!Icon) return null;
-    return <Icon className={className} />;
+
+    return (
+      <Icon
+        className={className}
+        width={props.size || props.width || "24px"}
+        height={props.size || props.height || "24px"}
+        bgColor={props.background}
+        fillColor={props.color}
+        strokeColor={props.strokColor}
+      />
+    );
   };
 
   return (
     <PaddingWrapper>
       {/* Heading */}
       <div className={styles.headingWrap}>
-        <BlueBlackH2Heading
-          blueText="Driveway Installation"
-          blackText="Cost Guide"
-        />
+        <BlueBlackH2Heading blueText={heading1} blackText="Cost Guide" />
 
         <Paragraph variant="medium" className={styles.subText}>
-          Understanding the costs involved in driveway installation helps you
-          budget effectively. Prices vary based on material, size, and
-          complexity.
+          {description}
         </Paragraph>
       </div>
 
@@ -54,31 +68,40 @@ function CostGuide({ pricing = [], factors = [], icons = {} }) {
         </div>
 
         {/* Right - Factors */}
-        <div className={styles.right}>
-          <H4 className={styles.factorTitle}>Cost Factors to Consider</H4>
+        {factors.length ? (
+          <div className={styles.right}>
+            <H4 className={styles.factorTitle}>Cost Factors to Consider</H4>
 
-          <div className={styles.factorList}>
-            {factors.map((item, index) => (
-              <div key={index} className={styles.factorItem}>
-                <div className={styles.factorIcon}>
-                  {renderIcon(item.icon, styles.factorIconSvg)}
+            <div className={styles.factorList}>
+              {factors.map((item, index) => (
+                <div key={index} className={styles.factorItem}>
+                  <div className={styles.factorIcon}>
+                    {renderIcon(item.icon, styles.factorIconSvg)}
+                  </div>
+                  <div>
+                    <H5 className={styles.factorPrice}>{item.title}</H5>
+                    <Paragraph variant="medium" className={styles.priceDesc}>
+                      {item.description}
+                    </Paragraph>
+                  </div>
                 </div>
-                <div>
-                  <H5 className={styles.factorPrice}>{item.title}</H5>
-                  <Paragraph variant="medium" className={styles.priceDesc}>{item.description}</Paragraph>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
 
       {/* CTA */}
-      <div className={styles.cta}>
+      {/* <div className={styles.cta}>
         <Button1 onClick={()=>{handleScrollToBottom()}} className={styles.button} variant="warning">
           Get A Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
-      </div>
+      </div> */}
+      <GetCTAButton
+        onClick={() => {
+          handleScrollToBottom();
+        }}
+      />
     </PaddingWrapper>
   );
 }

@@ -1,0 +1,88 @@
+.heading {
+  max-width: 720px;
+  margin: 0 auto 36px auto;
+  text-align: center;
+}
+
+.description {
+  margin-top: 12px;
+  color: #253238;
+  font-weight: 400;
+}
+
+.tableWrapper {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  margin: auto;
+  max-width: 800px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f2fbff;
+  font-weight: 900;
+  color: #00afe3;
+  font-size: 25px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #f7f7f7;
+  align-items: center;
+}
+
+.service {
+  font-weight: 900;
+  padding: 11px 20px;
+  border-right: 1px solid #f7f7f7;
+  font-family: Inter;
+}
+
+.price {
+  font-weight: 900;
+  padding: 11px 20px;
+  font-family: Inter;
+}
+
+.headingText1 {
+  font-weight: 900;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.tableHeaderSpan {
+  padding: 11px 20px;
+  border: 1px solid #f7f7f7;
+  font-weight: 900;
+  font-family: Inter;
+}
+@media (max-width: 768px) {
+  .headingText1 {
+    white-space: normal;
+    display: block;
+  }
+
+  .tableHeaderSpan {
+    color: black;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .price {
+    color: #00afe3;
+    font-weight: 700;
+  }
+}

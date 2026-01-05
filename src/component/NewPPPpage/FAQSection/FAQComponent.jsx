@@ -7,7 +7,6 @@ import H5 from "../UITypography/H5";
 const { Panel } = Collapse;
 const FAQComponent = ({
     FrequentlyQuestion,
-    faqTitle = "",
     lang = "en",
     country = "gb",
 }) => {
@@ -18,7 +17,7 @@ const FAQComponent = ({
 
                     <div className={styles.frequently_collapse}>
                         <Collapse
-                            //   defaultActiveKey={["1"]}
+                              defaultActiveKey={["1"]}
                             accordion
                             bordered={false}
                             expandIcon={({ isActive }) => (

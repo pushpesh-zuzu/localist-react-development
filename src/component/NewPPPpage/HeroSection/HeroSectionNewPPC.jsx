@@ -19,7 +19,14 @@ import DescribeYourRequestNewPPC from "./DescribeYourRequestNewPPC/DescribeYourR
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 
-function HeroSectionNewPPC({ title = "Driveway" }) {
+function HeroSectionNewPPC({
+  heading1 = "Driveway Installation",
+  heading2="Services Near You",
+  trustedText = "Trusted Driveway Specialists",
+  text1="Vetted Professionals",
+  text2="Free Quotes",
+  text3="Fast Response"
+}) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
@@ -76,33 +83,33 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
         {/* LEFT CONTENT */}
         <div className={styles.left}>
           <div className={styles.badge}>
-            <TrustedIcon /> Trusted Driveway Specialists
+            <TrustedIcon /> {trustedText}
           </div>
 
           <H1 className={`Inter ${styles.heading}`}>
-            Local Expert <span>{title} Installation</span> {""}
-            Services Near You
+            Local Expert <span>{heading1}</span> {""}
+            {heading2}
           </H1>
 
           <div className={styles.desktopfirstSection}>
             <div className={styles.features}>
               <div className={styles.feature}>
                 <VettedProffessionIcon className={styles.icon} />
-                <p>Vetted Professionals</p>
+                <p>{text1}</p>
               </div>
               <div className={styles.feature}>
                 <FreeQuoteIcon className={styles.icon} />
-                <p>Free Quotes</p>
+                <p>{text2}</p>
               </div>
               <div className={styles.feature}>
                 <FastResponseIcon className={styles.icon} />
-                <p>Fast Response</p>
+                <p>{text3}</p>
               </div>
             </div>
 
             <div className={styles.ctaRow}>
               <button className={`${styles.primaryBtn} `}>
-                Get A Free Quotes Now <GetQuotesIcon color="white" />
+                Get Free Quotes Now <GetQuotesIcon color="white" />
               </button>
             </div>
           </div>
@@ -142,15 +149,15 @@ function HeroSectionNewPPC({ title = "Driveway" }) {
           <div className={styles.features}>
             <div className={styles.feature}>
               <VettedProffessionIcon className={styles.icon} />
-              <p>Vetted Professionals</p>
+              <p>{text1}</p>
             </div>
             <div className={styles.feature}>
               <FreeQuoteIcon className={styles.icon} />
-              <p>Free Quotes</p>
+              <p>{text2}</p>
             </div>
             <div className={styles.feature}>
               <FastResponseIcon className={styles.icon} />
-              <p>Fast Response</p>
+              <p>{text3}</p>
             </div>
           </div>
 

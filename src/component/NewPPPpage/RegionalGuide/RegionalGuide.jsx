@@ -9,30 +9,42 @@ import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 import GetCTAButton from "../UITypography/GetCTAButton";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
-const RegionalGuide = () => {
+const RegionalGuide = ({
+  // description = "Average driveway installation costs across different UK regions",
+  // regionPricingData = [],
+  // bannerHeading = "UK Average for Standard Driveway (50m²)",
+  // bannerPrice = "£4,500",
+  // budget = "Budget: £3,800 | Premium: £8,800",
+
+  description = "Average driveway installation costs across different UK regions",
+  regionPricingData = [],
+  bannerHeading = "UK Average for Standard Driveway (50m²)",
+  bannerPrice = "£4,500",
+  budget = "Budget: £3,800 | Premium: £8,800",
+  heading1="Regional",
+  heading2="Pricing Guide"
+}) => {
   return (
     <PaddingWrapper background="#FAFAFA" className={styles.customWapper}>
       <div className={styles.headingWrap}>
-        <BlueBlackH2Heading blueText="Regional" blackText="Pricing Guide" />
+        <BlueBlackH2Heading blueText={heading1} blackText={heading2} />
 
-        <Paragraph className={styles.subText}>
-          Average driveway installation costs across different UK regionss
-        </Paragraph>
+        <Paragraph className={styles.subText}>{description}</Paragraph>
       </div>
 
-      <RegionPricing />
+      <RegionPricing regionPricingData={regionPricingData} />
 
       <div className={styles.bannerWrapper}>
         <div className={styles.banner}>
-          <H4>UK Average for Standard Driveway (50m²)</H4>
-          <H2 lassName={styles.price}>£4,500</H2>
-          <Paragraph bold={true}>Budget: £3,800 | Premium: £8,800</Paragraph>
+          {bannerHeading && <H4>{bannerHeading}</H4>}
+          {bannerPrice && <H2 lassName={styles.price}>{bannerPrice}</H2>}
+          {budget && <Paragraph bold={true}>{budget}</Paragraph>}
         </div>
       </div>
 
       <GetCTAButton
         onClick={() => {
-          handleScrollToBottom()
+          handleScrollToBottom();
         }}
       />
     </PaddingWrapper>

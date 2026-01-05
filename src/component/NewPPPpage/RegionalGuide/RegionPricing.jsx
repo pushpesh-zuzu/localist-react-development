@@ -1,10 +1,9 @@
 import styles from "./RegionPricing.module.css";
-import { regionPricingData } from "./regionPricingData";
 import LocationPinIcon from "../../../assets/ReactIcons/LocationPinIcon";
 import H5 from '../UITypography/H5';
 import Paragrah from '../UITypography/Paragrah';
 
-export default function RegionPricing() {
+export default function RegionPricing({regionPricingData}) {
   return (
     <div className={styles.grid}>
       {regionPricingData.map((item, index) => (

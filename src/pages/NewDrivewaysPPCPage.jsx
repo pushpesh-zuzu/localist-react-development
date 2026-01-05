@@ -39,7 +39,15 @@ import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import FloatingButton from "../component/NewPPPpage/UITypography/FloatingButton/FloatingButton";
-
+import { regionPricingData } from "../component/NewPPPpage/RegionalGuide/regionPricingData";
+import {
+  drivewayTableData,
+  drivewayTableHeaders,
+} from "../component/NewPPPpage/drivewayTableData";
+// import {
+//   drivewayTableHeaders,
+//   drivewayTableData,
+// } from "../component./";
 // import { DRIVE_MAIN_TRIP } from "./externalData";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
@@ -257,7 +265,7 @@ export const PSI_TOP = [
   {
     icon: <QuicAlarmIcon />,
     title: "Quick Turnaround",
-    text: "Projects are completed on schedule without compromising quality, so you get a beautiful new driveway with minimal disruption",
+    text: "Projects are completed on schedule without compromising quality, so you get a beautiful new driveway with minimal disruption.",
   },
 ];
 
@@ -342,6 +350,40 @@ export const DRIVE_MAIN_TRIP = {
   },
 };
 
+const FrequentlyQuestion = [
+  {
+    key: "1",
+    title: "How long does driveway installation take?",
+    description: `Installation time varies by material and size. Tarmac driveways typically take 2-3 days, block paving 4-7 days, and resin bound 3-4 days. This includes excavation, base preparation, and surface installation. Weather conditions and ground complexity can affect timelines.`,
+  },
+  {
+    key: "2",
+    title: "What is the best material for a driveway?",
+    description: `The best material depends on your budget, aesthetic preferences, and usage. Block paving offers versatility and easy repairs. Tarmac is cost-effective and durable. Resin bound provides modern aesthetics and excellent drainage. Gravel is budget-friendly but requires more maintenance. Consider your property style, budget, and long-term maintenance willingness.`,
+  },
+  {
+    key: "3",
+    title: "How much does it cost to install a driveway?",
+    description:
+      "For an average 50m² driveway, expect to pay £2,500-£5,000 for tarmac, £2,500-£5,000 for block paving, £3,000-£6,000 for resin bound, and £1,250-£2,500 for gravel. Total costs depend on size, material choice, ground conditions, and location. Always get multiple quotes for accurate pricing.",
+  },
+  {
+    key: "4",
+    title: "Do I need planning permission for a new driveway?",
+    description: `Generally, you don't need planning permission if using permeable materials or if water drains to a lawn/border. Non-permeable surfaces over 5m² in front gardens require proper drainage systems. Listed buildings and conservation areas have stricter rules. Your installer should advise on local requirements.`,
+  },
+  {
+    key: "5",
+    title: "How long will my new driveway last?",
+    description: `With proper installation and maintenance: block paving lasts 25-30 years, tarmac 15-20 years, concrete 30-40 years, resin bound 20-25 years, and gravel 10-15 years with regular topping up. Professional installation and regular maintenance significantly extend lifespan.`,
+  },
+  {
+    key: "6",
+    title: "Can I install a driveway myself?",
+    description: `While possible, DIY driveway installation is challenging and risky. Poor drainage, inadequate base preparation, or incorrect installation can lead to costly repairs. Professional installers have the expertise, equipment, and experience to ensure quality results with warranties. The investment in professional installation typically saves money long-term`,
+  },
+];
+
 function NewDrivewaysPPCPage() {
   return (
     <>
@@ -360,11 +402,14 @@ function NewDrivewaysPPCPage() {
       <ProfessionalServiceInstallation topCards={PSI_TOP} />
 
       {/* <DriveWayInstallationProcessFirst /> */}
-      <CompareDriveWay />
-      <RegionalGuide />
+      <CompareDriveWay
+        drivewayTableData={drivewayTableData}
+        drivewayTableHeaders={drivewayTableHeaders}
+      />
+      <RegionalGuide regionPricingData={regionPricingData} />
       {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
-      <FAQSection />
+        <FAQSection FrequentlyQuestion={FrequentlyQuestion} style={{ marginBottom: "40px" }} />
       <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
         <FloatingButton />
       </div>
