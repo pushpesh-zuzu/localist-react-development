@@ -318,7 +318,7 @@ const pageTitles = {
       "Get free quotes from top gating companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
 
-   "/new-ppc-driveways": {
+  "/new-ppc-driveways": {
     title: "Compare Free Quotes from Local Driveway Companies | Localists",
     description:
       "Get free quotes from trusted local driveway companies. Compare prices, read reviews, and hire top-rated professionals near you – quick and simple.",
@@ -329,7 +329,6 @@ const pageTitles = {
     description:
       "Get free quotes from top roofing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
-
   "/new-ppc-tree-surgery": {
     title: "Find Quality Tree Surgeons Near Me | Localists",
     description:
@@ -339,7 +338,7 @@ const pageTitles = {
 };
 
 const floatingPath = ['/new-ppc-driveways'];
-const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing"];
+const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing", "/roof-new-and-replacements"];
 const MainLayout = () => {
   const location = useLocation();
 
