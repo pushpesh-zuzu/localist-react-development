@@ -457,7 +457,7 @@ function NewLandscapingPPCPage() {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <HeroSectionNewPPC heading1="Landscaping" heading2="Services" />
+      <HeroSectionNewPPC trustedText="Trusted Landscaping Specialists" heading1="Landscaping" heading2="Services" />
       <HowItWorkNewPPC />
       <PopularServicesTypes
         heading1="Landscaping"
