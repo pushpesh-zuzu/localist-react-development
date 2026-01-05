@@ -2,6 +2,11 @@
   padding: 56px 120px 56px;
 }
 
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 30px 56px 48px;
+  }
+}
 /* Mobile */
 @media (max-width: 600px) {
   .wrapper {

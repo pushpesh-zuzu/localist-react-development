@@ -43,7 +43,13 @@
 .topGridsLength2 {
   grid-template-columns: repeat(2, 1fr);
 }
-
+@media (max-width: 1200px) {
+  .topGridsLength4,
+  .topGridsLength3,
+  .topGridsLength2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 @media (max-width: 900px) {
   .topGridsLength4,
   .topGridsLength3,
