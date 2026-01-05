@@ -13,7 +13,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
-  margin: 48px auto;
+  margin: 0px auto;
   max-width: 1200px;
 }
 
@@ -78,7 +78,7 @@
   .grid {
     grid-template-columns: repeat(1, 1fr);
     gap: 22px;
-    margin-top: 40px;
+    margin-top: 0px;
     width: 100%;
     padding: 0;
   }
@@ -92,7 +92,7 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 22px;
-    margin-top: 40px;
+    margin-top: 0px;
     width: 100%;
     padding: 0;
   }
@@ -106,7 +106,7 @@
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 22px;
-    margin-top: 40px;
+    margin: 0px;
     width: 100%;
     padding: 0;
   }

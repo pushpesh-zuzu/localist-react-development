@@ -188,23 +188,23 @@ const FrequentlyQuestion = [
    const CostGuidData = [
         {
             service: "Tree pruning / crown reduction",
-            price: "£150–£800 per tree",
+            price: "£150 – £800 per tree",
         },
         {
             service: "Tree removal (small / medium)",
-            price: "£250–£1,200+",
+            price: "£250 – £1,200+",
         },
         {
             service: "Stump grinding",
-            price: "£60–£300 per stump",
+            price: "£60 – £300 per stump",
         },
         {
             service: "Hedge trimming",
-            price: "£40–£500 depending on size",
+            price: "£40 – £500 depending on size",
         },
         {
             service: "Emergency tree work",
-            price: "£300–£1,500+",
+            price: "£300 – £1,500+",
         },
     ];
 function NewTreeSurgeryPPC() {

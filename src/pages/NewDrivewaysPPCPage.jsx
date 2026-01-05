@@ -182,7 +182,7 @@ export const COST_PRICING = [
   {
     icon: "block",
     title: "Block Paving",
-    price: "£50–£100/m²",
+    price: "£50 – £100/m²",
     description:
       "Premium quality with extensive design options. Installation typically takes 5–7 days.",
     prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
@@ -191,14 +191,14 @@ export const COST_PRICING = [
   {
     icon: "tarmac",
     title: "Tarmac",
-    price: "£40–£70/m²",
+    price: "£40 – £70/m²",
     description: "Cost-effective and durable. Quick installation in 2–3 days.",
     prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
   },
   {
     icon: "resin",
     title: "Resin Bound",
-    price: "£60–£120/m²",
+    price: "£60 – £120/m²",
     description:
       "Premium quality with extensive design options. Installation typically takes 5-7 days.",
     prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
@@ -206,7 +206,7 @@ export const COST_PRICING = [
   {
     icon: "gravel",
     title: "Gravel",
-    price: "£25–£50/m²",
+    price: "£25 – £50/m²",
     description:
       "Most affordable option with good drainage. 1–2 days to complete.",
     prop: { background: "white", color: "#00AFE3", strokColor: "#00AFE3" },
@@ -402,10 +402,10 @@ function NewDrivewaysPPCPage() {
       <ProfessionalServiceInstallation topCards={PSI_TOP} />
 
       {/* <DriveWayInstallationProcessFirst /> */}
-      <CompareDriveWay
+      {/* <CompareDriveWay
         drivewayTableData={drivewayTableData}
         drivewayTableHeaders={drivewayTableHeaders}
-      />
+      /> */}
       <RegionalGuide regionPricingData={regionPricingData} />
       {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}

@@ -8,18 +8,16 @@ import RegionalGuide from "../component/NewPPPpage/RegionalGuide/RegionalGuide";
 import FAQSection from "../component/NewPPPpage/FAQSection/FAQSection";
 import FloatingButton from "../component/NewPPPpage/UITypography/FloatingButton/FloatingButton";
 import LeakRepairIcon from "../assets/ReactIcons/LeakRepairIcon";
-import RoofTilesIcon from "../assets/ReactIcons/RoofTilesIcon";
 import RoofFlatIcon from "../assets/ReactIcons/RoofFlatIcon";
 import GutterRepairsIcon from "../assets/ReactIcons/GutterRepairsIcon";
 import EmergencyRoofRepairsIcon from "../assets/ReactIcons/EmergencyRoofRepairsIcon";
 import RoofInspections from "../assets/ReactIcons/RoofInspections";
 import DesignExpertsIcon from "../assets/ReactIcons/DesignExpertsIcon";
-import ProffesionalToolsIcon from "../assets/ReactIcons/ProffesionalToolsIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/TreeSurgeryCostGuide";
-import SettingIcon from "../assets/ReactIcons/SettingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
+import RoofTilesSlateIcon from "../assets/ReactIcons/RoofTilesIcon";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -35,8 +33,8 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     ],
   },
   {
-    icon: <RoofTilesIcon bgColor="white" fillColor="#00AFE3" />,
-    inActiveIcon: <RoofTilesIcon bgColor="#00AFE3" fillColor="white" />,
+    icon: <RoofTilesSlateIcon bgColor="white" fillColor="#00AFE3" />,
+    inActiveIcon: <RoofTilesSlateIcon bgColor="#00AFE3" fillColor="white" />,
     title: "Roof Tile & Slate Replacement",
     description:
       "Professional replacement of damaged or missing tiles and slates to restore roof integrity.",
