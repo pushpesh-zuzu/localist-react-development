@@ -388,14 +388,16 @@ const FrequentlyQuestion = [
 function NewDrivewaysPPCPage() {
   return (
     <FloatingButtonWrapper>
-      {(howItWorksRef) => (
+      {(heroRef, sectionsStartRef) => (
         <>
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
-          <HeroSectionNewPPC quoteText="Find Driveway Installation Experts Near You" />
+          <div ref={heroRef}>
+            <HeroSectionNewPPC quoteText="Find Driveway Installation Experts Near You" />
+          </div>
 
-          <div ref={howItWorksRef}>
+          <div ref={sectionsStartRef}>
             <HowItWorkNewPPC />
           </div>
 

@@ -454,19 +454,20 @@ const landscapingQuotesStep = [
 function NewLandscapingPPCPage() {
   return (
     <FloatingButtonWrapper>
-      {(howItWorksRef) => (
+      {(heroRef, sectionsStartRef) => (
         <>
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
-
-          <HeroSectionNewPPC
-            trustedText="Trusted Landscaping Specialists"
-            heading1="Landscaping"
-            heading2="Services"
-            quoteText="Find Expert Landscaping Installation Near You"
-          />
-          <div ref={howItWorksRef}>
+          <div ref={heroRef}>
+            <HeroSectionNewPPC
+              trustedText="Trusted Landscaping Specialists"
+              heading1="Landscaping"
+              heading2="Services"
+              quoteText="Find Expert Landscaping Installation Near You"
+            />
+          </div>
+          <div ref={sectionsStartRef}>
             <HowItWorkNewPPC />
           </div>
           <PopularServicesTypes

@@ -216,18 +216,20 @@ const CostGuidData = [
 function NewTreeSurgeryPPC() {
   return (
     <FloatingButtonWrapper>
-      {(howItWorksRef) => (
+      {(heroRef, sectionsStartRef) => (
         <>
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <div ref={heroRef}>
 
           <HeroSectionNewPPC
             heading1="Tree Surgeon"
             trustedText="Trusted Tree Surgery"
             quoteText="Find Expert Tree Surgeons Near You"
           />
-          <div ref={howItWorksRef}>
+          </div>
+          <div ref={sectionsStartRef}>
             <HowItWorkNewPPC
               steps={[
                 {

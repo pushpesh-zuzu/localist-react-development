@@ -1,40 +1,51 @@
-// components/FloatingButtonWrapper.jsx
 import { useEffect, useRef, useState } from "react";
 import FloatingButton from "./UITypography/FloatingButton/FloatingButton";
 
 export default function FloatingButtonWrapper({ children }) {
-  const howItWorksRef = useRef(null);
+  const heroRef = useRef(null);
+  const sectionsStartRef = useRef(null);
   const [showFloating, setShowFloating] = useState(false);
 
   useEffect(() => {
-    if (!howItWorksRef.current) return;
+    if (!heroRef.current || !sectionsStartRef.current) return;
 
-    const observer = new IntersectionObserver(
+    // Hero section observer
+    const heroObserver = new IntersectionObserver(
       ([entry]) => {
-        setShowFloating(entry.isIntersecting);
+        // Agar Hero visible hai (top par hai) → Button hide
+        if (entry.isIntersecting) {
+          setShowFloating(false);
+        }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.5 } // 50% hero visible → button hide
     );
 
-    observer.observe(howItWorksRef.current);
+    // How It Works section observer
+    const sectionsObserver = new IntersectionObserver(
+      ([entry]) => {
+        // Agar How It Works visible hai → Button show
+        if (entry.isIntersecting) {
+          setShowFloating(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    return () => observer.disconnect();
+    heroObserver.observe(heroRef.current);
+    sectionsObserver.observe(sectionsStartRef.current);
+
+    return () => {
+      heroObserver.disconnect();
+      sectionsObserver.disconnect();
+    };
   }, []);
 
   return (
     <>
-      {children(howItWorksRef)}
+      {children(heroRef, sectionsStartRef)}
 
       {showFloating && (
-        <div
-          className="floating"
-          style={{
-            position: "fixed",
-            bottom: "1%",
-          }}
-        >
+        <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
           <FloatingButton />
         </div>
       )}
