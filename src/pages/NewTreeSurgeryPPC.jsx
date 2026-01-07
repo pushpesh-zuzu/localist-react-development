@@ -215,9 +215,9 @@ const CostGuidData = [
 function NewTreeSurgeryPPC() {
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <meta name="robots" content="noindex" />
-      </Helmet> */}
+      </Helmet>
 
       <HeroSectionNewPPC
         heading1="Tree Surgeons"

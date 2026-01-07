@@ -209,9 +209,9 @@ const FrequentlyQuestion = [
 function NewRoofingPPCPage() {
   return (
     <>
-      {/* <Helmet>
+      <Helmet>
         <meta name="robots" content="noindex" />
-      </Helmet> */}
+      </Helmet>
       <HeroSectionNewPPC
         trustedText="Trusted Roofing Specialists"
         heading1=" Roofing Repairs"
