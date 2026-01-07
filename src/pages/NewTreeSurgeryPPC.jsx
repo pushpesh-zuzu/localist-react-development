@@ -23,6 +23,7 @@ import SearchDocumentIcon from "../assets/ReactIcons/SearchDocumentIcon";
 import ComplexServiceIcon from "../assets/ReactIcons/ComplexServiceIcon";
 import CuttingToolIcon from "../assets/ReactIcons/CuttingToolIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
+import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -214,59 +215,62 @@ const CostGuidData = [
 ];
 function NewTreeSurgeryPPC() {
   return (
-    <>
-      {/* <Helmet>
-        <meta name="robots" content="noindex" />
-      </Helmet> */}
+    <FloatingButtonWrapper>
+      {(howItWorksRef) => (
+        <>
+          <Helmet>
+            <meta name="robots" content="noindex" />
+          </Helmet>
 
-      <HeroSectionNewPPC
-        heading1="Tree Surgeons"
-        trustedText="Trusted Tree Surgery"
-      />
-      <HowItWorkNewPPC
-        steps={[
-          {
-            icon: <TreeEditIcon />,
-            text: "Fill in your details for your project",
-          },
-          {
-            icon: <TreeUserIcon />,
-            text: "Receive quotes from professionals",
-          },
-          {
-            icon: <TreeDocumentSearchIcon />,
-            text: "Compare your quotes and enjoy great savings",
-          },
-        ]}
-      />
+          <HeroSectionNewPPC
+            heading1="Tree Surgeon"
+            trustedText="Trusted Tree Surgery"
+            quoteText="Find Expert Tree Surgeons Near You"
+          />
+          <div ref={howItWorksRef}>
+            <HowItWorkNewPPC
+              steps={[
+                {
+                  icon: <TreeEditIcon />,
+                  text: "Fill in your details for your project",
+                },
+                {
+                  icon: <TreeUserIcon />,
+                  text: "Receive quotes from professionals",
+                },
+                {
+                  icon: <TreeDocumentSearchIcon />,
+                  text: "Compare your quotes and enjoy great savings",
+                },
+              ]}
+            />
+          </div>
 
-      <PopularServicesTypes
-        heading1="Tree Surgery"
-        heading2="Services"
-        description="Local comprehensive tree care services tailored to your needs:"
-        data={NEW_PPC_POPULUAR_SERVICE_TYPE}
-      />
+          <PopularServicesTypes
+            heading1="Tree Surgery"
+            heading2="Services"
+            description="Local comprehensive tree care services tailored to your needs:"
+            data={NEW_PPC_POPULUAR_SERVICE_TYPE}
+          />
 
-      <TreeSurgeryCostGuide CostGuidData={CostGuidData} />
-      <ProfessionalServiceInstallation
-        heading="Tree Surgery"
-        topCards={PSI_TOP}
-      />
+          <TreeSurgeryCostGuide CostGuidData={CostGuidData} />
+          <ProfessionalServiceInstallation
+            heading="Tree Surgery"
+            topCards={PSI_TOP}
+          />
 
-      <TreeSurgeryRegionalGuide
-        pricingData={treeSurgeryRegionalPricing}
-        background="white"
-      />
+          <TreeSurgeryRegionalGuide
+            pricingData={treeSurgeryRegionalPricing}
+            background="white"
+          />
 
-      <FAQSection
-        FrequentlyQuestion={FrequentlyQuestion}
-        background="#FAFAFA"
-      />
-
-      <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
-        <FloatingButton />
-      </div>
-    </>
+          <FAQSection
+            FrequentlyQuestion={FrequentlyQuestion}
+            background="#FAFAFA"
+          />
+        </>
+      )}
+    </FloatingButtonWrapper>
   );
 }
 export default NewTreeSurgeryPPC;
