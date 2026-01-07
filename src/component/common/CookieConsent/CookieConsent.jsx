@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./CookieConsent.module.css";
 import CookiesConsentPreference from "./CookiesConsentPreference";
+import { getCookie, setCookie } from "../../../utils/helperCookies";
 
 const CookieConsent = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -9,7 +10,7 @@ const CookieConsent = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const userConsent = sessionStorage.getItem("user-consent");
+    const userConsent = getCookie("user-consent");
 
     if (!userConsent) {
       setTimeout(() => {
@@ -22,23 +23,26 @@ const CookieConsent = () => {
   }, []);
 
   const handleAcceptAll = () => {
-    if (typeof window === "undefined") return;
+    setCookie("user-consent", "granted", 365);
 
-    sessionStorage.setItem("user-consent", "granted");
-    window.uetq.push("consent", "update", { ad_storage: "granted" });
+    window.uetq.push("consent", "update", {
+      ad_storage: "granted",
+    });
 
     setShowBanner(false);
     setShowPreferences(false);
   };
-
 
   const handleSavePreferences = ({ essential, nonEssential }) => {
     if (typeof window === "undefined") return;
 
     const finalValue = nonEssential ? "granted" : "denied";
 
-    sessionStorage.setItem("user-consent", finalValue);
-    window.uetq.push("consent", "update", { ad_storage: finalValue });
+    setCookie("user-consent", finalValue, 365);
+
+    window.uetq.push("consent", "update", {
+      ad_storage: finalValue,
+    });
 
     setShowPreferences(false);
     setShowBanner(false);

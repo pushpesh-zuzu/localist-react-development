@@ -387,9 +387,9 @@ const FrequentlyQuestion = [
 function NewDrivewaysPPCPage() {
   return (
     <>
-      <Helmet>
+      {/* <Helmet>
         <meta name="robots" content="noindex" />
-      </Helmet>
+      </Helmet> */}
 
       <HeroSectionNewPPC />
       <HowItWorkNewPPC />
