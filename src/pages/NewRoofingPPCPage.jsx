@@ -221,6 +221,8 @@ function NewRoofingPPCPage() {
               heading1=" Roofing Repairs"
               heading2="Near You"
               quoteText="Find Roofing Repair Experts Near You"
+              questionDescription="To find the ideal Roofers for your project, simply complete the quick form below."
+              serviceId={113}
             />
           </div>
           <div ref={sectionsStartRef}>

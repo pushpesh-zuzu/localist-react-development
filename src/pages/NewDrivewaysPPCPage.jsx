@@ -394,7 +394,11 @@ function NewDrivewaysPPCPage() {
             <meta name="robots" content="noindex" />
           </Helmet>
           <div ref={heroRef}>
-            <HeroSectionNewPPC quoteText="Find Driveway Installation Experts Near You" />
+            <HeroSectionNewPPC
+              quoteText="Find Driveway Installation Experts Near You"
+              questionDescription="To find the ideal Driveway Installation specialist for your project, simply complete the quick form below."
+              serviceId={51}
+            />
           </div>
 
           <div ref={sectionsStartRef}>

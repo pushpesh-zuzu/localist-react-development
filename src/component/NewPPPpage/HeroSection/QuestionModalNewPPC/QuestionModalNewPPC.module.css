@@ -383,7 +383,7 @@
 .optionsContainer {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 12px;
   overflow: auto;
   max-height: 40vh;
 }
@@ -499,10 +499,11 @@
   display: flex;
   align-items: center; /* ensures input aligns to the top of the text */
   gap: 8px;
-  border: 1px solid #dedede;
-  padding: 10px;
+  border: 2px solid #e1e5e9;
+  padding: 10px 15px;
   cursor: pointer !important;
-  font-size: 14px;
+  font-size: 16px;
+  font-family: Inter;
   font-weight: 500;
 
   border-radius: 3px;
@@ -587,8 +588,8 @@
   }
 
   .option {
-    font-size: 12px;
-    padding: 20px 8px;
+    font-size: 14px;
+    padding: 10px 15px;
   }
 
   /* .buttonContainer {
@@ -653,12 +654,12 @@
   }
 
   .option {
-    font-size: 12px;
-    padding: 7px;
+    font-size: 14px;
+    padding: 12px;
   }
   .options {
-    font-size: 12px;
-    padding: 7px;
+    font-size: 14px;
+    padding: 12px;
   }
   .nextButton {
     padding: 8px 23px;
