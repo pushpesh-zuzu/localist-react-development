@@ -391,7 +391,7 @@ const MainLayout = () => {
       {!noLayoutPaths.includes(lookupPath) && (
         <Footer floatingMargin={floatingPath.includes(lookupPath)} />
       )}
-      {/* <CookieConsent /> */}
+      <CookieConsent />
     </div>
   );
 };
