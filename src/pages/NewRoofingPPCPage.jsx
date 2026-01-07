@@ -18,6 +18,7 @@ import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/T
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import RoofTilesSlateIcon from "../assets/ReactIcons/RoofTilesIcon";
+import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -208,24 +209,29 @@ const FrequentlyQuestion = [
 
 function NewRoofingPPCPage() {
   return (
-    <>
-      <Helmet>
-        <meta name="robots" content="noindex" />
-      </Helmet>
-      <HeroSectionNewPPC
-        trustedText="Trusted Roofing Specialists"
-        heading1=" Roofing Repairs"
-        heading2="Near You"
-      />
-      <HowItWorkNewPPC />
-      <PopularServicesTypes
-        data={NEW_PPC_POPULUAR_SERVICE_TYPE}
-        heading1="Roofing"
-        heading2="Repair Services"
-        description="Explore our comprehensive range of roofing installation options to
+    <FloatingButtonWrapper>
+      {(howItWorksRef) => (
+        <>
+          <Helmet>
+            <meta name="robots" content="noindex" />
+          </Helmet>
+          <HeroSectionNewPPC
+            trustedText="Trusted Roofing Specialists"
+            heading1=" Roofing Repairs"
+            heading2="Near You"
+            quoteText="Find Roofing Repair Experts Near You"
+          />
+          <div ref={howItWorksRef}>
+            <HowItWorkNewPPC />
+          </div>
+          <PopularServicesTypes
+            data={NEW_PPC_POPULUAR_SERVICE_TYPE}
+            heading1="Roofing"
+            heading2="Repair Services"
+            description="Explore our comprehensive range of roofing installation options to
           find the perfect solution for your property"
-      />
-      {/* <CostGuide
+          />
+          {/* <CostGuide
         heading1="Roofing Installation"
         description="Understanding the costs involved in roofing installation helps you
           budget effectively. Prices vary based on material, size, and
@@ -233,33 +239,32 @@ function NewRoofingPPCPage() {
         pricing={COST_PRICING}
         icons={COST_ICONS}
       /> */}
-      <TreeSurgeryCostGuide
-        CostGuidData={CostGuidData}
-        heading1="Roofing Installation"
-        description="Understanding the costs involved in roofing installation helps you
+          <TreeSurgeryCostGuide
+            CostGuidData={CostGuidData}
+            heading1="Roofing Installation"
+            description="Understanding the costs involved in roofing installation helps you
           budget effectively. Prices vary based on material, size, and
           complexity."
-      />
-      <ProfessionalServiceInstallation
-        heading="Roofing Experts"
-        topCards={PSI_TOP}
-      />
-      <RegionalGuide
-        heading2="Roofing Repairs Costs"
-        description="Average roofing installation costs across different UK regions"
-        regionPricingData={regionPricingData}
-        bannerHeading="Note: Prices are averages for guidance. Final costs may vary depending on roof size, type, access, and specific work required."
-        bannerPrice=""
-        budget=""
-      />
-      <FAQSection
-        description="Get answers to common roofing installation questions"
-        FrequentlyQuestion={FrequentlyQuestion}
-      />
-      <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
-        <FloatingButton />
-      </div>
-    </>
+          />
+          <ProfessionalServiceInstallation
+            heading="Roofing Experts"
+            topCards={PSI_TOP}
+          />
+          <RegionalGuide
+            heading2="Roofing Repairs Costs"
+            description="Average roofing installation costs across different UK regions"
+            regionPricingData={regionPricingData}
+            bannerHeading="Note: Prices are averages for guidance. Final costs may vary depending on roof size, type, access, and specific work required."
+            bannerPrice=""
+            budget=""
+          />
+          <FAQSection
+            description="Get answers to common roofing installation questions"
+            FrequentlyQuestion={FrequentlyQuestion}
+          />
+        </>
+      )}
+    </FloatingButtonWrapper>
   );
 }
 

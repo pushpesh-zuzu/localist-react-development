@@ -609,7 +609,7 @@ function NewPPCForm({ nextStep }) {
         <div className={styles.postcodeContainer}>
           <input
             name="postcode"
-            placeholder="Enter your Pin Code"
+            placeholder="Enter your postcode"
             value={formData.postcode}
             onChange={handlePostcodeChange}
             className={`${styles.input} ${
