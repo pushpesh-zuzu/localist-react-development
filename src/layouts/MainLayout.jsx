@@ -335,10 +335,16 @@ const pageTitles = {
       "Find fully qualified tree surgeons near me. Certified and skilled arborists. Safe tree removal & pruning. Get free quotes from local experts in your area.",
   },
 
+  "/new-ppc-landscaping": {
+    title: "Compare Free Quotes from Local Landscapers | Localists",
+    description:
+      "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
+  },
+
 };
 
 const floatingPath = ['/new-ppc-driveways'];
-const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing", "/roof-new-and-replacements"];
+const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing", "/new-ppc-landscaping"];
 const MainLayout = () => {
   const location = useLocation();
 

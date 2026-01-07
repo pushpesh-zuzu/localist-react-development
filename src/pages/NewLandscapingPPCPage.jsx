@@ -4,18 +4,10 @@ import { Helmet } from "react-helmet-async";
 import HeroSectionNewPPC from "../component/NewPPPpage/HeroSection/HeroSectionNewPPC";
 import HowItWorkNewPPC from "../component/NewPPPpage/HowItWorkNewPPC/HowItWorkNewPPC";
 import PopularServicesTypes from "../component/NewPPPpage/PopularServicesTypes/PopularServicesTypes";
-import BlockPalvingIcon from "../assets/ReactIcons/BlockPalvingIcon";
-import CheckCircleIcon from "../assets/ReactIcons/CheckCircleIcon";
-import GetQuotesIcon from "../assets/ReactIcons/GetQuotesIcon";
 import TarmacIcon from "../assets/ReactIcons/TarmacIcon";
-import ResinBoundIcon from "../assets/ReactIcons/ResinBoundIcon";
-import GravelDrivewaysIcon from "../assets/ReactIcons/GravelDrivewaysIcon";
-import ExpertInstallationIcon from "../assets/ReactIcons/ExpertInstallationIcon";
-import PatternImplementedIcon from "../assets/ReactIcons/PatternImplementedIcon";
 import ThrashIcon from "../assets/ReactIcons/ThrashIcon";
 import DesignComplecityIcon from "../assets/ReactIcons/DesignComplecityIcon";
 import DriveWaysSize from "../assets/ReactIcons/DriveWaysSize";
-import CostGuide from "../component/NewPPPpage/CostGuide/CostGuide";
 import GroundPreparationIcon from "../assets/ReactIcons/GroundPreparationIcon";
 import LocationIcon from "../assets/ReactIcons/LocationIcon";
 import BlockPalvingSmallIcon from "../assets/ReactIcons/BlockPalvingSmallIcon";
@@ -24,34 +16,25 @@ import ResinBoundSmallIcon from "../assets/ReactIcons/ResinBoundSmallIcon";
 import GravelDriveaysSmallIcon from "../assets/ReactIcons/GravelDriveaysSmallIcon";
 import ProfessionalServiceInstallation from "../component/NewPPPpage/ProffessionalServiceInstallation/ProfessionalServiceInstallation";
 import SettingIcon from "../assets/ReactIcons/SettingIcon";
-import DriveWayInstallationProcessFirst from "../component/NewPPPpage/DriveWayInstallationProcessFirst/DriveWayInstallationProcessFirst";
-import RegionalGuide from "../component/NewPPPpage/RegionalGuide/RegionalGuide";
-import CompareDriveWay from "../component/NewPPPpage/CompareDriveWay/CompareDriveWay";
-import DriveMainTrip from "../component/NewPPPpage/DriveMainTrip/DriveMainTrip";
-import PlanPermReg from "../component/NewPPPpage/PlanPermiReg/PlanPermReg";
 import FAQSection from "../component/NewPPPpage/FAQSection/FAQSection";
 
 import InfoOctagonIcon from "../assets/ReactIcons/InfoOctagonIcon";
 import CalendarCheckIcon from "../assets/ReactIcons/CalendarCheckIcon";
 import CloseSquareIcon from "../assets/ReactIcons/CloseSquareIcon";
 import CheckSquareIcon from "../assets/ReactIcons/CheckSquareIcon";
-import VettedProffessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import FloatingButton from "../component/NewPPPpage/UITypography/FloatingButton/FloatingButton";
-import { regionPricingData } from "../component/NewPPPpage/RegionalGuide/regionPricingData";
-import {
-  drivewayTableData,
-  drivewayTableHeaders,
-} from "../component/NewPPPpage/drivewayTableData";
 import TreeSurgeryRegionalGuide from "../component/NewPPPpage/TreeSurgeryRegionalGuide/TreeSurgeryRegionalGuide";
 import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/TreeSurgeryCostGuide";
+import FullLandscapingRedesignIcon from "../assets/ReactIcons/FullLandscapingRedesignIcon ";
 import PatioPavingIcon from "../assets/ReactIcons/PatioPalvingIcon";
+import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 import DrivewaysAccess from "../assets/ReactIcons/DrivewaysAccess";
 import StepEdgingGardeningIcon from "../assets/ReactIcons/StepEdgingGardeningIcon";
 import DrainageAndLandIcon from "../assets/ReactIcons/DrainageAndLandIcon";
 import RetailWallIcon from "../assets/ReactIcons/RetailWallIcon";
-import FullLandscapingRedesignIcon from "../assets/ReactIcons/FullLandscapingRedesignIcon ";
+import VotedProfessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import LandscapingQuotesGuid from "../component/NewPPPpage/LandscapingQuotesGuid/LandscapingQuotesGuid";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 // import {
@@ -66,11 +49,11 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     inActiveIcon: <PatioPavingIcon bgColor="#00AFE3" strokeColor="white" />,
     title: "Patios & Paving",
     description:
-      "Professional installation of patios and paved areas using porcelain, natural stone, or concrete. Each surface is built on a solid sub-base to ensure long-term durability and a clean, level finish.",
+      "Installation of durable patio and paving surfaces using porcelain, natural stone, or concrete. Proper sub-base preparation ensures a level, weather-resistant finish designed to last.",
     points: [
-      { text: "Wide range of paving materials" },
-      { text: "Solid sub-base and foundations" },
-      { text: "Long-lasting, weather-resistant finish" },
+      { text: "Durable surface materials" },
+      { text: "Proper sub-base preparation" },
+      { text: "Weather-resistant finish" },
     ],
   },
   {
@@ -84,11 +67,11 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     inActiveIcon: <DrivewaysAccess bgColor="#00AFE3" fillColor="white" />,
     title: "Driveways & Access Paths",
     description:
-      "Design and construction of driveways and access paths built to handle daily use. Correct drainage, strong foundations, and neat edging ensure both functionality and kerb appeal.",
+      "Construction of functional and attractive driveways and walkways with correct drainage, load-bearing foundations, and clean edging for everyday use.",
     points: [
-      { text: "Effective drainage solutions" },
-      { text: "Strong load-bearing base" },
-      { text: "Smart, defined edging" },
+      { text: "Correct drainage design" },
+      { text: "Load-bearing foundations" },
+      { text: "Clean, defined edging" },
     ],
   },
   {
@@ -96,11 +79,11 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     inActiveIcon: <RetailWallIcon bgColor="#00AFE3" strokeColor="white" />,
     title: "Retaining Walls & Raised Beds",
     description:
-      "Construction of retaining walls and raised beds to manage changes in ground level, improve stability, and create structured planting areas within your garden.",
+      "Structural walls and raised planting areas built to manage changes in ground levels, improve drainage, and add definition to outdoor spaces.",
     points: [
-      { text: "Ground level control" },
-      { text: "Improved drainage support" },
-      { text: "Defined planting areas" },
+      { text: "Structural ground support" },
+      { text: "Improved water management" },
+      { text: " Clear space definition" },
     ],
   },
   {
@@ -114,25 +97,25 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     inActiveIcon: <DrainageAndLandIcon />,
     title: "Drainage & Land Levelling",
     description:
-      "Solutions for water pooling, poor drainage, and uneven ground. Proper levelling, falls, and drainage systems help protect your property and outdoor spaces.",
+      "Correction of poor drainage, water pooling, and uneven ground using proper falls, soakaways, and levelling techniques to protect your property.",
     points: [
-      { text: "Controlled water runoff" },
-      { text: "Corrected ground levels" },
-      { text: "Reduced risk of water damage" },
+      { text: "Effective water runoff" },
+      { text: "Even ground correction" },
+      { text: " Property protection" },
     ],
   },
   {
-    icon: <StepEdgingGardeningIcon bgColor="#00aef0" fillColor="white" />,
+    icon: <StepEdgingGardeningIcon bgColor="white" fillColor="#00AFE3" />,
     inActiveIcon: (
-      <StepEdgingGardeningIcon bgColor="#00aef0" fillColor="white" />
+      <StepEdgingGardeningIcon bgColor="#00AFE3" fillColor="white" />
     ),
     title: "Steps, Edging & Garden Structures",
     description:
-      "Installation of steps, edging, sleepers, and structural garden features designed to improve access, safety, and the overall flow of your outdoor space.",
+      "Installation of steps, borders, sleepers, and structural features that improve access, safety, and visual flow throughout the landscape.",
     points: [
-      { text: "Safe and practical access" },
-      { text: "Strong structural detailing" },
-      { text: "Clean and cohesive design" },
+      { text: "Improved access & safety" },
+      { text: "Strong structural features" },
+      { text: "Enhanced visual flow" },
     ],
   },
   {
@@ -146,13 +129,13 @@ export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
     inActiveIcon: (
       <FullLandscapingRedesignIcon strokeColor="white" fillColor="white" />
     ),
-    title: "Pattern Imprinted Concrete",
+    title: "Full Landscape Redesign & Rebuilds",
     description:
-      "Decorative pattern imprinted concrete designed to replicate stone, brick, or slate. A cost-effective solution offering strong durability and modern visual appeal.",
+      "Complete transformation projects combining groundworks, hard landscaping, and structural features to rebuild outdoor spaces from the ground up.",
     points: [
-      { text: "Decorative concrete finishes" },
-      { text: "Durable, low-maintenance surface" },
-      { text: "Cost-effective alternative to paving" },
+      { text: "Complete groundworks" },
+      { text: "Integrated hard landscaping" },
+      { text: "End-to-end transformation" },
     ],
   },
 ];
@@ -239,24 +222,24 @@ export const COST_FACTORS = [
 
 export const PSI_TOP = [
   {
-    icon: <SettingIcon />,
+    icon: <VotedProfessionIcon />,
     title: "Qualified & Experienced",
-    text: "Expert knowledge across all types of landscaping projects including patios, paving, drainage, retaining walls, and full groundworks, delivered by skilled professionals using industry-grade tools.",
+    text: "Expert knowledge of all kinds of landscaping projects including patios, paving, drainage, retaining walls, and full groundworks etc.",
   },
   {
-    icon: <VettedProffessionIcon />,
+    icon: <GuaranteedWorkIcon />,
     title: "Guaranteed Work",
-    text: "Up to 10-year guarantees on workmanship and materials where applicable, giving you long-term confidence in the quality and durability of the finished result.",
+    text: "Up to price10-year guarantees on workmanship and materials where applicable, giving you long-term confidence in the finished result.",
   },
   {
     icon: <CompetitivePricingIcon />,
     title: "Competitive Pricing",
-    text: "Clear, itemised, and competitive quotes from vetted local landscaping experts near you, allowing easy comparison to find the best value for your project and budget.",
+    text: "Clear, itemised, competitive quotes from vetted local experts near you, so you can compare properly and choose the best value for your project and budget.",
   },
   {
     icon: <QuicAlarmIcon />,
     title: "Quick Turnaround",
-    text: "Work completed to agreed timelines with minimal disruption, all while maintaining high standards of quality and professional delivery.",
+    text: "Work completed with clear timelines, minimum disruption, all without compromising the quality and standard of delivery.",
   },
 ];
 
@@ -345,33 +328,33 @@ const FrequentlyQuestion = [
   {
     key: "1",
     title: "What does a professional landscaping expert do?",
-    description: `A professional landscaping expert focuses on the construction and structural elements of outdoor spaces. This includes patios, pathways, retaining walls, drainage systems, ground preparation, levelling, and full landscape builds. They go beyond basic gardening by managing water flow, foundations, and long-lasting hard landscaping features.`,
+    description: `A landscaping expert handles the construction-focused parts of outdoor projects -  like patios, paths, retaining walls, groundworks, drainage, and full landscape builds. They go beyond simple gardening by preparing the ground, installing hard surfaces, managing levels and water flow, and delivering long-lasting outdoor structures.`,
   },
   {
     key: "2",
     title: "How do I find reliable landscaping experts near me?",
-    description: `Start by comparing multiple local landscaping specialists. Check online reviews, view past project photos, and ask for detailed written quotes. Always confirm insurance, experience, and guarantees. Getting at least three quotes and discussing each contractor’s approach helps ensure quality workmanship and peace of mind.`,
+    description: `Start by comparing multiple local professionals. Check reviews and past project photos, ask for detailed written quotes, and confirm insurance and experience. Getting at least three quotes and speaking to each specialist about their approach helps ensure quality and peace of mind before work begins. You can start now to get free quotes here on Get 24/7.`,
   },
   {
     key: "3",
     title: "How much do landscaping projects cost?",
-    description: `Landscaping costs vary depending on project size, materials, and complexity. Small jobs may cost a few hundred pounds, while full garden design and build projects often run into several thousand. Ground conditions, drainage work, and structural features can also affect pricing. Getting tailored quotes ensures clarity on total costs.`,
+    description: `Landscaping costs vary widely based on project size, materials, and complexity — small jobs might be a few hundred pounds, while full design and build for a medium outdoor space often runs into several thousand. It’s best to get multiple tailored quotes so you know exactly what’s included.`,
   },
   {
     key: "4",
     title: "Do landscaping experts handle permits and planning?",
-    description: `Many landscaping experts can assist with permits, council approvals, and compliance checks—especially for structural work like retaining walls, raised patios, or drainage systems. Responsibilities can vary, so it’s important to confirm during your consultation who will manage permissions and inspections.`,
+    description: `Many landscaping specialists can help with regulatory requirements like council permits or compliance checks, especially when your project involves structural work (e.g., retaining walls). Always ask during your consultation so you’re clear who arranges what.`,
   },
   {
     key: "5",
     title: "When is the best time to start a landscaping project?",
-    description: `Spring and autumn are often ideal times for landscaping because soil conditions are easier to work with and plants establish well. However, many landscaping projects can be completed year-round depending on weather, scope, and preparation. Planning early helps secure your preferred start date.`,
+    description: `Spring and autumn are often ideal because the soil is easier to work with and plants establish well. However, landscaping experts can work year-round depending on weather, scope, and readiness of your project plan. Planning ahead helps secure your preferred schedule.`,
   },
-  {
-    key: "6",
-    title: "Why hire a professional instead of doing landscaping yourself?",
-    description: `DIY landscaping can be challenging and costly if mistakes occur with drainage, foundations, or levels. Professional landscapers have the experience, tools, and technical knowledge to deliver durable, safe, and visually appealing results. Hiring an expert often saves time, money, and future repair costs.`,
-  },
+  // {
+  //   key: "6",
+  //   title: "Why hire a professional instead of doing landscaping yourself?",
+  //   description: `DIY landscaping can be challenging and costly if mistakes occur with drainage, foundations, or levels. Professional landscapers have the experience, tools, and technical knowledge to deliver durable, safe, and visually appealing results. Hiring an expert often saves time, money, and future repair costs.`,
+  // },
 ];
 export const landscapingRegionalPricing = [
   {
@@ -460,37 +443,30 @@ function NewLandscapingPPCPage() {
             <meta name="robots" content="noindex" />
           </Helmet>
 
-          <HeroSectionNewPPC
-            trustedText="Trusted Landscaping Specialists"
-            heading1="Landscaping"
-            heading2="Services"
-            quoteText="Find Expert Landscaping Installation Near You"
-          />
-          <div ref={howItWorksRef}>
-            <HowItWorkNewPPC />
-          </div>
-          <PopularServicesTypes
-            heading1="Landscaping"
-            heading2="Services"
-            description="Experts on hard landscaping and structural outdoor work, for both residential and commercial proje"
-            data={NEW_PPC_POPULUAR_SERVICE_TYPE}
-          />
-          <TreeSurgeryCostGuide
-            description=""
-            heading1="Landscaping Services  "
-            headding2="Cost Guide"
-            CostGuidData={CostGuidData}
-            maxWidth="1200px"
-          />
-          <LandscapingQuotesGuid
-            heading1="What’s Included in"
-            heading2="Landscaping Quotes"
-            description=""
-          />
-          <ProfessionalServiceInstallation
-            heading="Landscape Gardeners"
-            topCards={PSI_TOP}
-          />
+      <HeroSectionNewPPC trustedText="Trusted Landscaping Specialists" heading1="Landscaping" />
+      <HowItWorkNewPPC />
+      <PopularServicesTypes
+        heading1="Landscaping"
+        heading2="Services"
+        description="Experts on hard landscaping and structural outdoor work, for both residential and commercial projects"
+        data={NEW_PPC_POPULUAR_SERVICE_TYPE}
+      />
+      <TreeSurgeryCostGuide
+        description=""
+        heading1="Landscaping Services"
+        headding2="Cost Guide"
+        CostGuidData={CostGuidData}
+        maxWidth="1200px"
+      />
+      <LandscapingQuotesGuid
+        heading1="What’s Included in"
+        heading2="Landscaping Quotes"
+        description=""
+      />
+      <ProfessionalServiceInstallation
+        heading="Landscape Gardeners"
+        topCards={PSI_TOP}
+      />
 
           <TreeSurgeryRegionalGuide
             heading2="Landscaping Costs"
