@@ -267,7 +267,11 @@ function NewFenceInstallationPPCPage() {
             data={NEW_PPC_POPULUAR_SERVICE_TYPE}
           />
 
-          <TreeSurgeryCostGuide CostGuidData={CostGuidData} />
+          <TreeSurgeryCostGuide
+            heading1="Fence Installation"
+            description="Understanding the costs involved in fence installation helps you budget effectively. Prices vary based on material, size, and complexity."
+            CostGuidData={CostGuidData}
+          />
           <ProfessionalServiceInstallation
             heading="Fence Installation"
             topCards={PSI_TOP}
