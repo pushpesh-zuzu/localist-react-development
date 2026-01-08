@@ -291,7 +291,7 @@ function ReplacementsRoofingPPCPage() {
             />
           </div>
           <div ref={sectionsStartRef}>
-            <HowItWorkNewPPC description="Get matched quickly with trusted local roofing contractors who specialise in all types of roof repairs - from minor leak fixes to roof tiles or full roof replacement. Receive up to 5 free quotes from local experts, compare experience and pricing, and choose the option that works best for your project. No obligation, no pressure." />
+            <HowItWorkNewPPC />
           </div>
           <PopularServicesTypes
             data={NEW_PPC_POPULUAR_SERVICE_TYPE}

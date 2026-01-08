@@ -180,31 +180,31 @@ const FrequentlyQuestion = [
     key: "1",
     title: "What are common signs that my roof needs repairing?",
     description:
-      "Look for slipped or missing tiles, cracked flashing, water stains on ceilings or walls, blocked gutters, or moss and algae growth. These are common signs of roof damage that should be inspected by a professional.",
+      "Look for slipped or missing tiles, cracked flashing, water stains on ceilings or walls, blocked gutters, or moss and algae growth - these often indicate roof damage that needs professional attention.",
   },
   {
     key: "2",
     title: "How much do roof repairs cost in the UK?",
     description:
-      "Roof repair costs vary depending on the type of work, access, and materials. Small jobs like replacing a few tiles may cost a few hundred pounds, while larger repairs such as flashing or flat roof patches can be higher. Getting multiple local quotes is the best way to understand your exact cost.",
+      "Roof repair costs vary by job type, access, and materials. Small fixes like replacing a few tiles can cost a few hundred pounds, while larger jobs, including flashing repairs or flat roof patches, can range higher. Getting multiple local quotes is the best way to understand your exact cost.",
   },
   {
     key: "3",
     title: "Do I need permission for roof work?",
     description:
-      "Planning permission is usually not required unless your property is listed, in a conservation area, or you are changing the height or structure of the roof.",
+      "Planning permission is usually not required unless your property is listed, in a conservation area, or changing roof height.",
   },
   {
     key: "4",
     title: "How long does roof repair take?",
     description:
-      "Minor roof repairs can often be completed within a few hours, while larger repairs or full roof replacements may take several days depending on the scope of work.",
+      "Minor repairs can be completed in a few hours, while full replacements may take several days",
   },
   {
     key: "5",
     title: "Will I need scaffolding for roof repairs?",
     description:
-      "Scaffolding is often required for safe access during external roof repairs, especially on pitched roofs. Minor internal fixes may not require it, but your roofer will assess safety needs during the site survey.",
+      "Scaffolding is often required for safe access during external roof repairs, especially on pitched roofs. Minor internal fixes might not need it, but your roofer will assess safety requirements during the site survey. ",
   },
 ];
 
