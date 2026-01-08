@@ -19,7 +19,7 @@ function ServiceTypeCard({ data, active, onMouseEnter }) {
 
       <Paragraph className={styles.desc}>{description}</Paragraph>
 
-      <div className={styles.points}>
+      {points && <div className={styles.points}>
         {points.map((p, i) => (
           <div key={i} className={styles.point}>
             {active ? (
@@ -30,7 +30,7 @@ function ServiceTypeCard({ data, active, onMouseEnter }) {
             <span>{p.text}</span>
           </div>
         ))}
-      </div>
+      </div>}
     </div>
   );
 }
