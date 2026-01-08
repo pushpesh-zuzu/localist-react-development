@@ -340,11 +340,17 @@ const pageTitles = {
     description:
       "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
   },
-
 };
 
-const floatingPath = ['/new-ppc-driveways'];
-const noLayoutPaths = ["/new-ppc-tree-surgery", "/new-ppc-driveways", "/new-ppc-roofing", "/new-ppc-landscaping"];
+const floatingPath = ["/new-ppc-driveways"];
+const noLayoutPaths = [
+  "/new-ppc-tree-surgery",
+  "/new-ppc-driveways",
+  "/new-ppc-roofing",
+  "/new-ppc-landscaping",
+  "/new-ppc-fence-and-gate",
+  "/new-ppc-roof-and-replacements"
+];
 const MainLayout = () => {
   const location = useLocation();
 
@@ -379,7 +385,6 @@ const MainLayout = () => {
       document.documentElement.style.setProperty("padding-top", "40px");
     }
   }, [lookupPath]);
-
 
   return (
     <div>
