@@ -99,7 +99,7 @@ function HeroSectionNewPPC({
           <div className={styles.desktopfirstSection}>
             <div className={styles.features}>
               <div className={styles.feature}>
-                <VettedProffessionIcon className={styles.icon} />
+                <VettedProffessionIcon/>
                 <p>{text1}</p>
               </div>
               <div className={styles.feature}>

@@ -265,7 +265,7 @@ const routes = [
         ),
       },
       {
-        path: "roof-new-and-replacements",
+        path: "new-ppc-roof-and-replacements",
         element: (
           <LocaleRedirect>{withSuspense(ReplacementsRoofingPPCPage)}</LocaleRedirect>
         ),
