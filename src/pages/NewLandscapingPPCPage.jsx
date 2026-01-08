@@ -448,9 +448,10 @@ function NewLandscapingPPCPage() {
           <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
-              trustedText="Trusted Landscaping Specialists"
+             heading0="Find"
               heading1="Landscaping Installation"
-              quoteText="Find Expert Landscaping Installation Near You"
+              heading2="Experts Near You"
+              quoteText="Find Landscaping Installation Experts Near You"
               questionDescription="To find the ideal landscaping specialist for your project, simply complete the quick form below."
               serviceId={43}
             />
