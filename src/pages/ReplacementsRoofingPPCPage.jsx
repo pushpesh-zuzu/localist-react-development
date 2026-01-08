@@ -22,6 +22,7 @@ import TreeSurgeryCostGuide from "../component/NewPPPpage/TreeSurgeryCostGuide/T
 import FlatRoofRepairs from "./FlatRoofRepairs";
 import RoofReplacement from "./RoofReplacement";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
+import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -270,6 +271,7 @@ const CostGuidData = [
 ];
 
 function ReplacementsRoofingPPCPage() {
+    useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (
@@ -283,6 +285,7 @@ function ReplacementsRoofingPPCPage() {
               heading1="New Roof Installation & Replacement "
               heading2="Near You"
               text1="Vetted Contractors"
+              quoteText="Find Roof Installation & Replacement Experts Near You"
               questionDescription="To find the ideal Roof Installation & Replacement Specialist for your project, simply complete the quick form below."
               serviceId={113}
             />

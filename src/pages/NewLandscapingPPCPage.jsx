@@ -37,6 +37,7 @@ import RetailWallIcon from "../assets/ReactIcons/RetailWallIcon";
 import VotedProfessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import LandscapingQuotesGuid from "../component/NewPPPpage/LandscapingQuotesGuid/LandscapingQuotesGuid";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
+import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -435,6 +436,7 @@ const landscapingQuotesStep = [
   },
 ];
 function NewLandscapingPPCPage() {
+  useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (

@@ -19,6 +19,7 @@ import QuicAlarmIcon from "../assets/ReactIcons/QuicAlarmIcon";
 import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon";
 import RoofTilesSlateIcon from "../assets/ReactIcons/RoofTilesIcon";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
+import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -208,6 +209,7 @@ const FrequentlyQuestion = [
 ];
 
 function NewRoofingPPCPage() {
+    useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (

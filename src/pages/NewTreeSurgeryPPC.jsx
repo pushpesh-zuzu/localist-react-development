@@ -24,6 +24,7 @@ import ComplexServiceIcon from "../assets/ReactIcons/ComplexServiceIcon";
 import CuttingToolIcon from "../assets/ReactIcons/CuttingToolIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
+import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -214,6 +215,7 @@ const CostGuidData = [
   },
 ];
 function NewTreeSurgeryPPC() {
+  useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (
@@ -222,14 +224,13 @@ function NewTreeSurgeryPPC() {
             <meta name="robots" content="noindex" />
           </Helmet>
           <div ref={heroRef}>
-
-          <HeroSectionNewPPC
-            heading1="Tree Surgeon"
-            trustedText="Trusted Tree Surgery"
-            quoteText="Find Expert Tree Surgeons Near You"
-            questionDescription="To find the ideal Tree Surgeon for your project, simply complete the quick form below"
-            serviceId={112}
-          />
+            <HeroSectionNewPPC
+              heading1="Tree Surgeon"
+              trustedText="Trusted Tree Surgery"
+              quoteText="Find Expert Tree Surgeons Near You"
+              questionDescription="To find the ideal Tree Surgeon for your project, simply complete the quick form below"
+              serviceId={112}
+            />
           </div>
           <div ref={sectionsStartRef}>
             <HowItWorkNewPPC

@@ -88,6 +88,7 @@ const DescribeYourRequestNewPPC = () => {
             "success",
             result?.message || "Create Request successfully!"
           );
+           localStorage.setItem("isRegistrationComplete", "true");
         }
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());

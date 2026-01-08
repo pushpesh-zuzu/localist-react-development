@@ -360,7 +360,6 @@ const MainLayout = () => {
 
   const lookupPath = stripLocalePrefix(location.pathname);
   let meta = pageTitles[lookupPath];
-  console.log(lookupPath, 'lookupPath')
   // Handle dynamic route for /view-profile/:companyName/:id
   if (!meta && lookupPath.startsWith("/view-profile")) {
     const parts = lookupPath.split("/");

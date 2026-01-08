@@ -45,6 +45,7 @@ import {
   drivewayTableHeaders,
 } from "../component/NewPPPpage/drivewayTableData";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
+import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -386,6 +387,7 @@ const FrequentlyQuestion = [
 ];
 
 function NewDrivewaysPPCPage() {
+  useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (

@@ -108,7 +108,6 @@ const FooterContent = () => (
 );
 
 const Footer = ({floatingMargin=false}) => {
-console.log(  floatingMargin ,'floatingMargin')
   const { country, lang } = useUserGeo();
   const [activeKeys, setActiveKeys] = useState("");
   const [isMobile, setIsMobile] = useState(
