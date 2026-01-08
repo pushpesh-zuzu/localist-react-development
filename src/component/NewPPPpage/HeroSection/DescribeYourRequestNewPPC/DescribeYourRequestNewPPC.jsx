@@ -88,12 +88,12 @@ const DescribeYourRequestNewPPC = () => {
             "success",
             result?.message || "Create Request successfully!"
           );
-           localStorage.setItem("isRegistrationComplete", "true");
+          localStorage.setItem("isRegistrationComplete", "true");
         }
         dispatch(clearSetbuyerRequestData());
         dispatch(clearBuyerRegisterFormData());
         dispatch(setQualityData());
-        dispatch(setBuyerStep(10));
+        localStorage.removeItem("pendingBuyerModal");
       }
     );
   };
