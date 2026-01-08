@@ -155,11 +155,11 @@ export const FenceInstallationRegionalPricing = [
   },
   {
     region: "East Midlands",
-    prices: [{ label: "Standard Rate", value: "£1,600–£2,000" }],
+    prices: [{ label: "Standard Rate", value: "£1,600 – £2,000" }],
   },
   {
     region: "North West / Scotland / Wales",
-    prices: [{ label: "Standard Rate", value: "£1,500–£1,900" }],
+    prices: [{ label: "Standard Rate", value: "£1,500 – £1,900" }],
   },
 ];
 
@@ -217,23 +217,23 @@ const FrequentlyQuestion = [
 const CostGuidData = [
   {
     service: "Fence Panel Installation (per panel)",
-    price: "£50–£120",
+    price: "£50 – £120",
   },
   {
     service: "Metal Security Fencing (per metre)",
-    price: "£80–£200",
+    price: "£80 – £200",
   },
   {
     service: "Composite Fencing (per panel)",
-    price: "£120–£250",
+    price: "£120 – £250",
   },
   {
     service: "Picket Fence (per metre)",
-    price: "£40–£100",
+    price: "£40 – £100",
   },
   {
     service: "Gate Installation (manual or automated)",
-    price: "£200–£1,200",
+    price: "£200 – £1,200",
   },
 ];
 function NewFenceInstallationPPCPage() {
