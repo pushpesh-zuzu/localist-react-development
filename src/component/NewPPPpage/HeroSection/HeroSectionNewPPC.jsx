@@ -27,7 +27,9 @@ function HeroSectionNewPPC({
   text1 = "Local Vetted Experts",
   text2 = "Free Quotes",
   text3 = "Fast Response",
-  quoteText="Get Free Quotes Now"
+  quoteText="Get Free Quotes Now",
+  questionDescription="",
+  serviceId=51
 }) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
@@ -120,7 +122,7 @@ function HeroSectionNewPPC({
 
         {/* RIGHT FORM */}
 
-        {buyerStep === 1 && <NewPPCForm nextStep={nextStep} />}
+        {buyerStep === 1 && <NewPPCForm nextStep={nextStep} serviceId={serviceId}/>}
         {buyerStep === 2 && (
           <QuestionModalNewPPC
             questions={questionanswerData}
@@ -128,6 +130,7 @@ function HeroSectionNewPPC({
             serviceName={buyerRequest.service_name}
             nextStep={nextStep}
             setLocalRequestId={setLocalRequestId}
+            description={questionDescription}
           />
         )}
         {buyerStep === 3 && reEnterMobile === 2 && (

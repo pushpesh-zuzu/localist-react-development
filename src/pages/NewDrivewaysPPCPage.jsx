@@ -388,14 +388,20 @@ const FrequentlyQuestion = [
 function NewDrivewaysPPCPage() {
   return (
     <FloatingButtonWrapper>
-      {(howItWorksRef) => (
+      {(heroRef, sectionsStartRef) => (
         <>
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
-          <HeroSectionNewPPC quoteText="Find Driveway Installation Experts Near You" />
+          <div ref={heroRef}>
+            <HeroSectionNewPPC
+              quoteText="Find Driveway Installation Experts Near You"
+              questionDescription="To find the ideal Driveway Installation specialist for your project, simply complete the quick form below."
+              serviceId={51}
+            />
+          </div>
 
-          <div ref={howItWorksRef}>
+          <div ref={sectionsStartRef}>
             <HowItWorkNewPPC />
           </div>
 

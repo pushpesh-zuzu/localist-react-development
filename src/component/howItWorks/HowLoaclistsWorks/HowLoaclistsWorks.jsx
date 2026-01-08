@@ -10,6 +10,8 @@ import {
   questionAnswerData,
   setcitySerach,
   getCityName,
+  setbuyerRequestData,
+  setBuyerStep,
 } from "../../../store/Buyer/BuyerSlice";
 import { Spin } from "antd";
 import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistration/BuyerRegistration";
@@ -137,6 +139,25 @@ const HowLoaclistsWorks = () => {
     setShowModal(true);
   };
 
+  useEffect(() => {
+      const checkPendingModal = () => {
+        const pendingModal = JSON.parse(
+          localStorage.getItem("pendingBuyerModal")
+        );
+  
+        if (pendingModal?.shouldOpen) {
+          setTimeout(() => {
+            dispatch(setbuyerRequestData(pendingModal.buyerRequest));
+            dispatch(setcitySerach(pendingModal.city));
+  
+            setShowModal(true);
+            dispatch(setBuyerStep(7));
+          }, 200);
+        }
+      };
+  
+      checkPendingModal();
+    }, [dispatch]);
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
