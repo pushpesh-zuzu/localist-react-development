@@ -44,6 +44,7 @@ import {
   drivewayTableData,
   drivewayTableHeaders,
 } from "../component/NewPPPpage/drivewayTableData";
+import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -386,35 +387,52 @@ const FrequentlyQuestion = [
 
 function NewDrivewaysPPCPage() {
   return (
-    <>
-      {/* <Helmet>
-        <meta name="robots" content="noindex" />
-      </Helmet> */}
+    <FloatingButtonWrapper>
+      {(heroRef, sectionsStartRef) => (
+        <>
+          <Helmet>
+            <meta name="robots" content="noindex" />
+          </Helmet>
+          <div ref={heroRef}>
+            <HeroSectionNewPPC
+              quoteText="Find Driveway Installation Experts Near You"
+              questionDescription="To find the ideal Driveway Installation specialist for your project, simply complete the quick form below."
+              serviceId={51}
+            />
+          </div>
 
-      <HeroSectionNewPPC />
-      <HowItWorkNewPPC />
-      <PopularServicesTypes data={NEW_PPC_POPULUAR_SERVICE_TYPE} />
-      <CostGuide
-        pricing={COST_PRICING}
-        factors={COST_FACTORS}
-        icons={COST_ICONS}
-      />
-      <ProfessionalServiceInstallation topCards={PSI_TOP} />
+          <div ref={sectionsStartRef}>
+            <HowItWorkNewPPC />
+          </div>
 
-      {/* <DriveWayInstallationProcessFirst /> */}
-      {/* <CompareDriveWay
+          <PopularServicesTypes data={NEW_PPC_POPULUAR_SERVICE_TYPE} />
+
+          <CostGuide
+            pricing={COST_PRICING}
+            factors={COST_FACTORS}
+            icons={COST_ICONS}
+          />
+
+          <ProfessionalServiceInstallation topCards={PSI_TOP} />
+          {/* <DriveWayInstallationProcessFirst /> */}
+          {/* <CompareDriveWay
         drivewayTableData={drivewayTableData}
         drivewayTableHeaders={drivewayTableHeaders}
       /> */}
-      <RegionalGuide background="white"  regionPricingData={regionPricingData} />
-      {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
+          <RegionalGuide
+            background="white"
+            regionPricingData={regionPricingData}
+          />
+          {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
-        <FAQSection   background="#FAFAFA" FrequentlyQuestion={FrequentlyQuestion} style={{ marginBottom: "40px" }} />
-      <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
-        <FloatingButton />
-      </div>
-    </>
+          <FAQSection
+            background="#FAFAFA"
+            FrequentlyQuestion={FrequentlyQuestion}
+            style={{ marginBottom: "40px" }}
+          />
+        </>
+      )}
+    </FloatingButtonWrapper>
   );
 }
-
 export default NewDrivewaysPPCPage;

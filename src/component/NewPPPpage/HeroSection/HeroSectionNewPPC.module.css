@@ -18,6 +18,11 @@
 .left {
   flex: 1;
 }
+.logo {
+  height: 38px;
+  width: 195px;
+  margin-bottom: 24px;
+}
 
 .badge {
   display: inline-flex;
@@ -75,7 +80,7 @@
 .primaryBtn {
   background: #ff9933;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 22px;
   border-radius: 50.63px;
   border: none;
   font-family: Inter;
@@ -122,10 +127,15 @@
     flex-direction: column;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1250px) {
   .container {
     padding: 30px 56px 48px;
     gap: 20px;
+  }
+  .logo {
+    height: 28px;
+    width: 125px;
+    margin-bottom: 24px;
   }
 }
 
@@ -151,10 +161,7 @@
     line-height: 6.96px;
     margin-bottom: 16px;
   }
-  .icon {
-    height: 28px;
-    width: 28px;
-  }
+ 
   .features {
     display: flex;
     flex-wrap: wrap; /* 🔑 ye change sabse important */
@@ -162,6 +169,7 @@
   }
   .feature {
     gap: 7px;
+    height: 40px;
   }
   .ctaRow {
     flex-direction: column;
@@ -170,5 +178,10 @@
   }
   .primaryBtn {
     font-size: 16px;
+  }
+  .logo {
+    height: 20px;
+    width: 120px;
+    margin-bottom: 16px;
   }
 }

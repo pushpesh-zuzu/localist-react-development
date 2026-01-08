@@ -53,6 +53,7 @@ import DrainageAndLandIcon from "../assets/ReactIcons/DrainageAndLandIcon";
 import RetailWallIcon from "../assets/ReactIcons/RetailWallIcon";
 import FullLandscapingRedesignIcon from "../assets/ReactIcons/FullLandscapingRedesignIcon ";
 import LandscapingQuotesGuid from "../component/NewPPPpage/LandscapingQuotesGuid/LandscapingQuotesGuid";
+import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -452,53 +453,64 @@ const landscapingQuotesStep = [
 ];
 function NewLandscapingPPCPage() {
   return (
-    <>
-      <Helmet>
-        <meta name="robots" content="noindex" />
-      </Helmet>
+    <FloatingButtonWrapper>
+      {(heroRef, sectionsStartRef) => (
+        <>
+          <Helmet>
+            <meta name="robots" content="noindex" />
+          </Helmet>
+          <div ref={heroRef}>
+            <HeroSectionNewPPC
+              trustedText="Trusted Landscaping Specialists"
+              heading1="Landscaping"
+              heading2="Services"
+              quoteText="Find Expert Landscaping Installation Near You"
+              questionDescription="To find the ideal landscaping specialist for your project, simply complete the quick form below."
+              serviceId={43}
+            />
+          </div>
+          <div ref={sectionsStartRef}>
+            <HowItWorkNewPPC />
+          </div>
+          <PopularServicesTypes
+            heading1="Landscaping"
+            heading2="Services"
+            description="Experts on hard landscaping and structural outdoor work, for both residential and commercial proje"
+            data={NEW_PPC_POPULUAR_SERVICE_TYPE}
+          />
+          <TreeSurgeryCostGuide
+            description=""
+            heading1="Landscaping Services  "
+            headding2="Cost Guide"
+            CostGuidData={CostGuidData}
+            maxWidth="1200px"
+          />
+          <LandscapingQuotesGuid
+            heading1="What’s Included in"
+            heading2="Landscaping Quotes"
+            description=""
+          />
+          <ProfessionalServiceInstallation
+            heading="Landscape Gardeners"
+            topCards={PSI_TOP}
+          />
 
-      <HeroSectionNewPPC trustedText="Trusted Landscaping Specialists" heading1="Landscaping" heading2="Services" />
-      <HowItWorkNewPPC />
-      <PopularServicesTypes
-        heading1="Landscaping"
-        heading2="Services"
-        description="Experts on hard landscaping and structural outdoor work, for both residential and commercial proje"
-        data={NEW_PPC_POPULUAR_SERVICE_TYPE}
-      />
-      <TreeSurgeryCostGuide
-        description=""
-        heading1="Landscaping Services  "
-        headding2="Cost Guide"
-        CostGuidData={CostGuidData}
-        maxWidth="1200px"
-      />
-      <LandscapingQuotesGuid
-        heading1="What’s Included in"
-        heading2="Landscaping Quotes"
-        description=""
-      />
-      <ProfessionalServiceInstallation
-        heading="Landscape Gardeners"
-        topCards={PSI_TOP}
-      />
+          <TreeSurgeryRegionalGuide
+            heading2="Landscaping Costs"
+            pricingData={landscapingRegionalPricing}
+          />
+          {/* <DriveWayInstallationProcessFirst /> */}
 
-      <TreeSurgeryRegionalGuide
-        heading2="Landscaping Costs"
-        pricingData={landscapingRegionalPricing}
-      />
-      {/* <DriveWayInstallationProcessFirst /> */}
-
-      {/* <RegionalGuide heading2="Landscaping Costs" regionPricingData={regionPricingData} /> */}
-      {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
+          {/* <RegionalGuide heading2="Landscaping Costs" regionPricingData={regionPricingData} /> */}
+          {/* <DriveMainTrip data={DRIVE_MAIN_TRIP} />
       <PlanPermReg /> */}
-      <FAQSection
-        FrequentlyQuestion={FrequentlyQuestion}
-        style={{ marginBottom: "40px" }}
-      />
-      <div className="floating" style={{ position: "fixed", bottom: "1%" }}>
-        <FloatingButton />
-      </div>
-    </>
+          <FAQSection
+            FrequentlyQuestion={FrequentlyQuestion}
+            style={{ marginBottom: "40px" }}
+          />
+        </>
+      )}
+    </FloatingButtonWrapper>
   );
 }
 

@@ -14,6 +14,7 @@ import useUserInfo from "../../../../utils/getUserIp";
 import FormWrapper from "../../../NewPPPpage/HeroSection/RegistrationForm/FormWrapper";
 import Button1 from "../../UITypography/Button1";
 import H5 from "../../UITypography/H5";
+import CardLayoutWrapper from "../../../MultiStepForm/steps/CardLayoutWrapper/CardLayoutWrapper";
 
 const QuestionModalNewPPC = ({
   questions = [],
@@ -21,6 +22,9 @@ const QuestionModalNewPPC = ({
   nextStep,
   loading = true,
   setLocalRequestId,
+  isQuestionWithImage = false,
+  description=""
+
 }) => {
   const dispatch = useDispatch();
   const { buyerRequest, requestLoader, citySerach, questionLoader } =
@@ -136,7 +140,7 @@ const QuestionModalNewPPC = ({
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
-     const updatedAnswer = {
+    const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
       question_no: formattedQuestions[currentQuestion]?.question_no,
@@ -166,15 +170,15 @@ const QuestionModalNewPPC = ({
     console.log(nextQ, "nextQnextQ");
     if (nextQ === "last") {
       const hasQuestionNo = updatedAnswers.some(
-    (q) => q && typeof q === "object" && "question_no" in q
-  );
-       const answersToSend = hasQuestionNo
-          ? updatedAnswers.map((q) => {
-              if (!q || typeof q !== "object") return q;
-              const { question_no, ...rest } = q;
-              return rest;
-            })
-          : updatedAnswers;
+        (q) => q && typeof q === "object" && "question_no" in q
+      );
+      const answersToSend = hasQuestionNo
+        ? updatedAnswers.map((q) => {
+            if (!q || typeof q !== "object") return q;
+            const { question_no, ...rest } = q;
+            return rest;
+          })
+        : updatedAnswers;
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
       formData.append("email", buyerRequest?.email);
@@ -207,8 +211,7 @@ const QuestionModalNewPPC = ({
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
-                animateQuestionChange("next");
-
+        animateQuestionChange("next");
       } else {
         nextStep();
       }
@@ -238,7 +241,7 @@ const QuestionModalNewPPC = ({
       opt.toLowerCase() === "something else (please describe)" ? otherText : opt
     );
 
-     const updatedAnswer = {
+    const updatedAnswer = {
       ques: questions[currentQuestion]?.questions,
       ans: finalAnswer.join(", "),
       question_no: formattedQuestions[currentQuestion]?.question_no,
@@ -263,20 +266,18 @@ const QuestionModalNewPPC = ({
     const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
       (a) => a.option === selected[0]
     );
-    console.log(selectedObj, "selectedObj");
     const nextQ = selectedObj?.next_question;
-    console.log(nextQ, "nextQnextQnextQnextQ next");
     if (nextQ === "last") {
       const hasQuestionNo = updatedAnswers.some(
-    (q) => q && typeof q === "object" && "question_no" in q
-  );
+        (q) => q && typeof q === "object" && "question_no" in q
+      );
       const answersToSend = hasQuestionNo
-          ? updatedAnswers.map((q) => {
-              if (!q || typeof q !== "object") return q;
-              const { question_no, ...rest } = q;
-              return rest;
-            })
-          : updatedAnswers;
+        ? updatedAnswers.map((q) => {
+            if (!q || typeof q !== "object") return q;
+            const { question_no, ...rest } = q;
+            return rest;
+          })
+        : updatedAnswers;
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
       formData.append("email", buyerRequest?.email);
@@ -305,13 +306,11 @@ const QuestionModalNewPPC = ({
     } else if (nextQ && questionIndexMap[nextQ]) {
       setQuestionHistory((prev) => [...prev, questionIndexMap[nextQ]]);
       setCurrentQuestion(questionIndexMap[nextQ]);
-      
     } else {
       if (currentQuestion < totalQuestions - 1) {
         setQuestionHistory((prev) => [...prev, currentQuestion + 1]);
         setCurrentQuestion(currentQuestion + 1);
-                animateQuestionChange("next");
-
+        animateQuestionChange("next");
       } else {
         nextStep();
       }
@@ -335,7 +334,7 @@ const QuestionModalNewPPC = ({
       // previousStep();
       handleScrollToBottom();
     }
-// animateQuestionChange("back");
+    // animateQuestionChange("back");
   };
 
   useEffect(() => {
@@ -360,6 +359,11 @@ const QuestionModalNewPPC = ({
   formattedQuestions.forEach((q, index) => {
     questionIndexMap[q.question_no] = index;
   });
+  useEffect(() => {
+    typeof window !== "undefined" &&
+      window.innerWidth < 768 &&
+      handleScrollToBottom();
+  }, []);
 
   return (
     <FormWrapper>
@@ -383,7 +387,7 @@ const QuestionModalNewPPC = ({
             </div>
           ) : questions.length > 0 ? (
             <>
-              <div
+              {/* <div
                 className={`${
                   serviceName === "Patio Services"
                     ? styles.headerImage
@@ -408,7 +412,6 @@ const QuestionModalNewPPC = ({
                     : serviceName === "Tree Surgery"
                     ? styles.headerImage9
                     : styles.headerImage
-
                 } ${
                   isAnimating
                     ? animationDirection === "next"
@@ -417,9 +420,7 @@ const QuestionModalNewPPC = ({
                     : ""
                 }`}
               >
-                {/* <h2 className={styles.headerBackground}>
-                  {questions[currentQuestion]?.questions}
-                </h2> */}
+                
                 <H5 className={`Inter ${styles.headerBackground}`}>
                   {questions[currentQuestion]?.questions}
                 </H5>
@@ -431,8 +432,43 @@ const QuestionModalNewPPC = ({
                   showInfo={false}
                   className={styles.customProgress}
                 />
-              </div>
-
+              </div> */}
+            <CardLayoutWrapper
+               loader={requestLoader}
+                  title={
+                    currentQuestion === 0
+                      ? !isQuestionWithImage
+                        ? "Welcome to Localists!"
+                        : ""
+                      : questions[currentQuestion]?.questions
+                  }
+                  onButtonClick={handleNextCheckBox}
+                  onBackClick={handleBack}
+                  showBackButton={currentQuestion === 0 ? false : true}
+                 
+                  buttonText="Next"
+                  headingCenter={currentQuestion === 0 ? false : true}
+                  subtitle={
+                    currentQuestion === 0
+                      ? !isQuestionWithImage
+                        ? description
+                        : ""
+                      : ""
+                  }>
+                    
+                    {currentQuestion === 0 && (
+                            <h2
+                              style={{
+                                textAlign: isQuestionWithImage ? "center" : "left",
+                                maxWidth: "86%",
+                                margin: isQuestionWithImage ? "auto" : "",
+                                marginBottom: "10px",
+                              }}
+                              className={styles.question1}
+                            >
+                              {formattedQuestions[currentQuestion]?.questions}
+                            </h2>
+                          )}
               <div
                 className={`${styles.optionsContainer} ${
                   isAnimating ? styles.fadeContent : ""
@@ -489,7 +525,7 @@ const QuestionModalNewPPC = ({
 
               {error && <p className={styles.errorMessage}>{error}</p>}
 
-              <div
+              {/* <div
                 className={`${styles.buttonContainer} ${
                   isAnimating ? styles.fadeContent : ""
                 }`}
@@ -522,7 +558,8 @@ const QuestionModalNewPPC = ({
                     "Next"
                   )}
                 </Button1>
-              </div>
+              </div> */}
+              </CardLayoutWrapper>
             </>
           ) : (
             <div className={styles.noQuestion}>

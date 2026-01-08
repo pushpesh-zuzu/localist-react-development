@@ -20,7 +20,7 @@ import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
 import { validateUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 import { useEmailCheck } from "../../../utils/emailExist";
 
-function NewPPCForm({ nextStep }) {
+function NewPPCForm({ nextStep, serviceId = 51 }) {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
 
@@ -40,6 +40,7 @@ function NewPPCForm({ nextStep }) {
   const [city, setCity] = useState("");
   const [serviceOptions, setServiceOptions] = useState([]);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [initialServiceLoaded, setInitialServiceLoaded] = useState(false);
 
   const postcodeValidationTimeout = useRef(null);
   const searchTimeout = useRef(null);
@@ -58,10 +59,19 @@ function NewPPCForm({ nextStep }) {
         ...serviceItem,
       }));
       setServiceOptions(options);
+
+      // Automatically select service based on serviceId prop
+      if (!initialServiceLoaded && serviceId) {
+        const selectedService = options.find(option => option.value === serviceId);
+        if (selectedService) {
+          handleServiceChange(selectedService, true);
+          setInitialServiceLoaded(true);
+        }
+      }
     } else if (service && Array.isArray(service) && service.length === 0) {
       setServiceOptions([]);
     }
-  }, [service]);
+  }, [service, serviceId, initialServiceLoaded]);
 
   useEffect(() => {
     dispatch(searchService({ search: "" }));
@@ -181,7 +191,7 @@ function NewPPCForm({ nextStep }) {
     }
   };
 
-  const handleServiceChange = (selectedOption) => {
+  const handleServiceChange = (selectedOption, isAutoSelect = false) => {
     // Create service object for formData
     const serviceObj = selectedOption
       ? {
@@ -205,6 +215,11 @@ function NewPPCForm({ nextStep }) {
     );
 
     setErrors((prev) => ({ ...prev, service: "" }));
+
+    // If it's auto-selected, don't trigger the question loader immediately
+    if (!isAutoSelect && selectedOption?.value) {
+      dispatch(questionAnswerData({ service_id: selectedOption.value }));
+    }
   };
 
   const handlePostcodeChange = (e) => {
@@ -447,6 +462,7 @@ function NewPPCForm({ nextStep }) {
         });
         setCity("");
         setPostcodeValid(false);
+        setInitialServiceLoaded(false);
         nextStep();
       } else {
         showToast("error", "Please enter a valid postcode!");
@@ -467,10 +483,10 @@ function NewPPCForm({ nextStep }) {
   };
 
   useEffect(() => {
-    if (formData.service_id) {
+    if (formData.service_id && initialServiceLoaded) {
       dispatch(questionAnswerData({ service_id: formData.service_id }));
     }
-  }, [formData.service_id]);
+  }, [formData.service_id, initialServiceLoaded, dispatch]);
 
   const { questionLoader } = useSelector((state) => state.buyer);
 
@@ -609,7 +625,7 @@ function NewPPCForm({ nextStep }) {
         <div className={styles.postcodeContainer}>
           <input
             name="postcode"
-            placeholder="Enter your Pin Code"
+            placeholder="Enter your postcode"
             value={formData.postcode}
             onChange={handlePostcodeChange}
             className={`${styles.input} ${
