@@ -46,6 +46,7 @@ import {
 } from "../component/NewPPPpage/drivewayTableData";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -395,6 +396,7 @@ function NewDrivewaysPPCPage() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false}/>
           <div ref={heroRef}>
             <HeroSectionNewPPC
               heading0="Find"

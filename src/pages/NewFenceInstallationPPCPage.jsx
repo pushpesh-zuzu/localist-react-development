@@ -18,6 +18,7 @@ import CompositeFenceIcon from "../assets/ReactIcons/CompositeFenceIcon";
 import MetalFenceIcon from "../assets/ReactIcons/MetalFenceIcon";
 import TimberFenceIcon from "../assets/ReactIcons/TimberFenceIcon";
 import SecurityFencingIcon from "../assets/ReactIcons/SecurityFencingIcon";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -244,12 +245,13 @@ function NewFenceInstallationPPCPage() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
-            heading0="Find"
-              heading1="Fence"
+              heading0="Find"
+              heading1="Fence Installation"
               heading2="Experts Near You"
-              quoteText="Find Fencing Experts Near You"
+              quoteText="Find Fence Installation Experts Near You"
               questionDescription="To find the ideal Fence Installation for your project, simply complete the quick form below"
               serviceId={49}
             />

@@ -23,6 +23,7 @@ import FlatRoofRepairs from "./FlatRoofRepairs";
 import RoofReplacement from "./RoofReplacement";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -271,7 +272,7 @@ const CostGuidData = [
 ];
 
 function ReplacementsRoofingPPCPage() {
-    useRegistrationRedirect();
+  useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (
@@ -279,6 +280,7 @@ function ReplacementsRoofingPPCPage() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
               trustedText="Trusted New Roof Installation & Replacement Specialists"

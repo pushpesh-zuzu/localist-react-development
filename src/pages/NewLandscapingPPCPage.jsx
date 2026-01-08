@@ -38,6 +38,7 @@ import VotedProfessionIcon from "../assets/ReactIcons/VettedProffessionIcon";
 import LandscapingQuotesGuid from "../component/NewPPPpage/LandscapingQuotesGuid/LandscapingQuotesGuid";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 // import {
 //   drivewayTableHeaders,
 //   drivewayTableData,
@@ -444,6 +445,7 @@ function NewLandscapingPPCPage() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
               trustedText="Trusted Landscaping Specialists"

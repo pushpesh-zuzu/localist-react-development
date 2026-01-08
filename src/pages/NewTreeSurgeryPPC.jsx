@@ -25,6 +25,7 @@ import CuttingToolIcon from "../assets/ReactIcons/CuttingToolIcon";
 import GuaranteedWorkIcon from "../assets/ReactIcons/GuaranteedWorkIcon";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -223,6 +224,7 @@ function NewTreeSurgeryPPC() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
               heading1="Tree Surgeons"

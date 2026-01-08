@@ -340,6 +340,15 @@ const pageTitles = {
     description:
       "Compare free quotes from trusted local landscapers in seconds. Submit your details and get matched with top-rated landscapers near you – quick, easy, and hassle-free!",
   },
+  "/new-ppc-roof-and-replacements": {
+    title: "Find Roof Installation & Replacement Experts Near You",
+    description: "Find Roof Installation & Replacement Experts Near You",
+  },
+  "/new-ppc-fence-and-gate": {
+    title: "Compare Free Quotes from Local Fencing Companies | Localists",
+    description:
+      "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
+  },
 };
 
 const floatingPath = ["/new-ppc-driveways"];
@@ -349,7 +358,7 @@ const noLayoutPaths = [
   "/new-ppc-roofing",
   "/new-ppc-landscaping",
   "/new-ppc-fence-and-gate",
-  "/new-ppc-roof-and-replacements"
+  "/new-ppc-roof-and-replacements",
 ];
 const MainLayout = () => {
   const location = useLocation();

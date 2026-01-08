@@ -20,6 +20,7 @@ import CompetitivePricingIcon from "../assets/ReactIcons/CompetitivePricingIcon"
 import RoofTilesSlateIcon from "../assets/ReactIcons/RoofTilesIcon";
 import FloatingButtonWrapper from "../component/NewPPPpage/FloatingButtonWrapper";
 import useRegistrationRedirect from "../hooks/useRegistrationRedirect";
+import CalonicalTags from "../component/common/CalonicalTags/CalonicalTags";
 
 export const NEW_PPC_POPULUAR_SERVICE_TYPE = [
   {
@@ -217,6 +218,7 @@ function NewRoofingPPCPage() {
           <Helmet>
             <meta name="robots" content="noindex" />
           </Helmet>
+          <CalonicalTags isRequiredjsonLd={false} />
           <div ref={heroRef}>
             <HeroSectionNewPPC
               heading0="Find"
