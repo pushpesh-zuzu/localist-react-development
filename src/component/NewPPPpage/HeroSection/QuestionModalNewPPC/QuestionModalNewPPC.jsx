@@ -363,8 +363,7 @@ const QuestionModalNewPPC = ({
     typeof window !== "undefined" &&
       window.innerWidth < 768 &&
       handleScrollToBottom();
-  }, []);
-
+  }, [currentQuestion]);
   return (
     <FormWrapper>
       <div className={styles.modalOverlay}>

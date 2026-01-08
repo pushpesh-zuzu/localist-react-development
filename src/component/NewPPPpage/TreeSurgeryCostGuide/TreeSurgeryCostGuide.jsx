@@ -5,6 +5,7 @@ import BlueBlackH2Heading from "../UITypography/BlueBlackH2Heading";
 import Paragraph from "../UITypography/Paragrah";
 import GetCTAButton from "../UITypography/GetCTAButton";
 import H5 from "../UITypography/H5";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 function TreeSurgeryCostGuide({
   CostGuidData = [],
