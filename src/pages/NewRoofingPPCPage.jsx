@@ -209,7 +209,7 @@ const FrequentlyQuestion = [
 ];
 
 function NewRoofingPPCPage() {
-    useRegistrationRedirect();
+  useRegistrationRedirect();
   return (
     <FloatingButtonWrapper>
       {(heroRef, sectionsStartRef) => (
@@ -219,9 +219,9 @@ function NewRoofingPPCPage() {
           </Helmet>
           <div ref={heroRef}>
             <HeroSectionNewPPC
-              trustedText="Trusted Roofing Specialists"
-              heading1=" Roofing Repairs"
-              heading2="Near You"
+              heading0="Find"
+              heading1=" Roofing Repair"
+              heading2="Experts Near You"
               quoteText="Find Roofing Repair Experts Near You"
               questionDescription="To find the ideal Roofing Specialists for your project, simply complete the quick form below."
               serviceId={113}

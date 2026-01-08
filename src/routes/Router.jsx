@@ -29,6 +29,7 @@ const NewRoofingPPCPage = lazy(() => import("../pages/NewRoofingPPCPage"));
 const NewTreeSurgeryPPC = lazy(() => import("../pages/NewTreeSurgeryPPC"));
 const NewLandscapingPPCPage = lazy(() => import("../pages/NewLandscapingPPCPage"));
 const ReplacementsRoofingPPCPage = lazy(() => import("../pages/ReplacementsRoofingPPCPage"));
+const NewFenceInstallationPPCPage = lazy(() => import("../pages/NewFenceInstallationPPCPage"));
 
 // ============================================================
 // LAZY-LOADED PAGES - reduces main bundle by ~200KB
@@ -280,6 +281,12 @@ const routes = [
         path: "new-ppc-landscaping",
         element: (
           <LocaleRedirect>{withSuspense(NewLandscapingPPCPage)}</LocaleRedirect>
+        ),
+      },
+       {
+        path: "new-ppc-fence-and-gate",
+        element: (
+          <LocaleRedirect>{withSuspense(NewFenceInstallationPPCPage)}</LocaleRedirect>
         ),
       },
       {

@@ -397,6 +397,9 @@ function NewDrivewaysPPCPage() {
           </Helmet>
           <div ref={heroRef}>
             <HeroSectionNewPPC
+              heading0="Find"
+              heading1="Driveway Installation"
+              heading2="Experts Near You"
               quoteText="Find Driveway Installation Experts Near You"
               questionDescription="To find the ideal Driveway Installation specialist for your project, simply complete the quick form below."
               serviceId={51}

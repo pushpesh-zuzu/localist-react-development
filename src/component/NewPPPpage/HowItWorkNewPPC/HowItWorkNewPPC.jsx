@@ -3,12 +3,12 @@ import styles from "./HowItWorkNewPPC.module.css";
 import BlueBlackH2Heading from "../UITypography/BlueBlackH2Heading";
 import Paragraph from "../UITypography/Paragrah";
 import H5 from "../UITypography/H5";
-import SettingIcon from "../../../assets/ReactIcons/SettingIcon";
-import VettedProffessionIcon from "../../../assets/ReactIcons/VettedProffessionIcon";
-import FastTimeIcon from "../../../assets/ReactIcons/FastTimeIcon";
 import { handleScrollToBottom } from "../../../utils/scroll";
 import PaddingWrapper from "../PaddingWrapper/PaddingWrapper";
 import GetCTAButton from "../UITypography/GetCTAButton";
+import TreeEditIcon from "../../../assets/ReactIcons/TreeEditIcon";
+import TreeUserIcon from "../../../assets/ReactIcons/TreeUserIcon";
+import TreeDocumentSearchIcon from "../../../assets/ReactIcons/TreeDocumentSearchIcon";
 function HowItWorkNewPPC({
   heading1 = "How it",
   heading2 = "Works",
@@ -18,15 +18,15 @@ function HowItWorkNewPPC({
 }) {
   const defaultSteps = [
     {
-      icon: <SettingIcon className={styles.icon} />,
+      icon: <TreeEditIcon />,
       text: "Fill in your details for your project",
     },
     {
-      icon: <VettedProffessionIcon className={styles.icon} />,
+      icon: <TreeUserIcon />,
       text: "Receive quotes from professionals",
     },
     {
-      icon: <FastTimeIcon className={styles.icon} />,
+      icon: <TreeDocumentSearchIcon />,
       text: "Compare your quotes and enjoy great savings",
     },
   ];
@@ -84,7 +84,7 @@ function HowItWorkNewPPC({
       <div className={styles.features}>
         {stepsToRender.map((step, index) => (
           <div key={index} className={styles.featureCard}>
-            {step.icon}
+            <div style={{ marginBottom: "15px" }}> {step.icon}</div>
             <H5 className={styles.wordText}>{step.text}</H5>
           </div>
         ))}

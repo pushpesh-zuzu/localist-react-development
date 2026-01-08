@@ -21,15 +21,16 @@ import NavigationDetectorWithConfirmations from "../../common/navigationDetected
 import Logo from "../../../assets/ReactIcons/Logo";
 
 function HeroSectionNewPPC({
+  heading0 = "Find Expert",
   heading1 = "Driveway Installation",
-  heading2 = "Services Near You",
+  heading2 = "Near You",
   trustedText = "Trusted Driveway Specialists",
   text1 = "Local Vetted Experts",
   text2 = "Free Quotes",
   text3 = "Fast Response",
-  quoteText="Get Free Quotes Now",
-  questionDescription="",
-  serviceId=51
+  quoteText = "Get Free Quotes Now",
+  questionDescription = "",
+  serviceId = 51,
 }) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
@@ -89,17 +90,17 @@ function HeroSectionNewPPC({
           {/* <div className={styles.badge}>
             <TrustedIcon /> {trustedText}
           </div> */}
-            <Logo className={styles.logo}/>
+          <Logo className={styles.logo} />
 
           <H1 className={`Inter ${styles.heading}`}>
-            Local Expert <span>{heading1}</span> {""}
+            {heading0} <span>{heading1}</span> {""}
             {heading2}
           </H1>
 
           <div className={styles.desktopfirstSection}>
             <div className={styles.features}>
               <div className={styles.feature}>
-                <VettedProffessionIcon/>
+                <VettedProffessionIcon />
                 <p>{text1}</p>
               </div>
               <div className={styles.feature}>
@@ -122,7 +123,9 @@ function HeroSectionNewPPC({
 
         {/* RIGHT FORM */}
 
-        {buyerStep === 1 && <NewPPCForm nextStep={nextStep} serviceId={serviceId}/>}
+        {buyerStep === 1 && (
+          <NewPPCForm nextStep={nextStep} serviceId={serviceId} />
+        )}
         {buyerStep === 2 && (
           <QuestionModalNewPPC
             questions={questionanswerData}
