@@ -260,7 +260,7 @@ function NewTreeSurgeryPPC() {
             data={NEW_PPC_POPULUAR_SERVICE_TYPE}
           />
 
-          <TreeSurgeryCostGuide CostGuidData={CostGuidData} />
+          <TreeSurgeryCostGuide description="Understanding the costs involved in tree surgeon helps you budget effectively. Prices vary based on material, size, and complexity." CostGuidData={CostGuidData} />
           <ProfessionalServiceInstallation
             heading="Tree Surgery"
             topCards={PSI_TOP}
@@ -274,6 +274,7 @@ function NewTreeSurgeryPPC() {
           <FAQSection
             FrequentlyQuestion={FrequentlyQuestion}
             background="#FAFAFA"
+            description="Get answers to common tree surgery questions"
           />
         </>
       )}

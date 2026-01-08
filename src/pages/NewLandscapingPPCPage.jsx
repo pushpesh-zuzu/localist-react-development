@@ -493,6 +493,7 @@ function NewLandscapingPPCPage() {
           <FAQSection
             FrequentlyQuestion={FrequentlyQuestion}
             style={{ marginBottom: "40px" }}
+            description="Get answers to common landscaping installation questions"
           />
         </>
       )}

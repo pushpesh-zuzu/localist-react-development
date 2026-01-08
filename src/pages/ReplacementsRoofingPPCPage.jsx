@@ -287,7 +287,6 @@ function ReplacementsRoofingPPCPage() {
               heading0="Find"
               heading1="Roof Installation & Replacement"
               heading2="Experts Near You"
-              text1="Vetted Contractors"
               quoteText="Find Roof Installation & Replacement Experts Near You"
               questionDescription="To find the ideal Roof Installation & Replacement Specialist for your project, simply complete the quick form below."
               serviceId={113}
@@ -322,7 +321,7 @@ function ReplacementsRoofingPPCPage() {
             budget=""
           />
           <FAQSection
-            description="Get answers to common roofing installation questions"
+            description="Get answers to common roofing replacement questions"
             FrequentlyQuestion={FrequentlyQuestion}
           />
         </>

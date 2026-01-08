@@ -9,7 +9,7 @@ import { handleScrollToBottom } from "../../../utils/scroll";
 
 const FAQSection = ({
   FrequentlyQuestion = [],
-  description = ` Get answers to common driveway installation questions`,
+  description = `Get answers to common driveway installation questions`,
   background = "white",
 }) => {
   return (
