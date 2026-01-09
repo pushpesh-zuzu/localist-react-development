@@ -115,8 +115,13 @@ function HeroSectionNewPPC({
             </div>
 
             <div className={styles.ctaRow}>
-              <button onClick={()=>{handleScrollToBottom()}} className={`${styles.primaryBtn} `}>
-                {quoteText} <GetQuotesIcon color="white" />
+              <button
+                onClick={() => {
+                  handleScrollToBottom();
+                }}
+                className={`${styles.primaryBtn} `}
+              >
+                {quoteText}
               </button>
             </div>
           </div>
@@ -172,8 +177,13 @@ function HeroSectionNewPPC({
           </div>
 
           <div className={styles.ctaRow}>
-            <button onClick={()=>{handleScrollToBottom()}} className={`${styles.primaryBtn} `}>
-              {quoteText} <GetQuotesIcon color="white" />
+            <button
+              onClick={() => {
+                handleScrollToBottom();
+              }}
+              className={`${styles.primaryBtn} `}
+            >
+              {quoteText}{" "}
             </button>
           </div>
         </div>
