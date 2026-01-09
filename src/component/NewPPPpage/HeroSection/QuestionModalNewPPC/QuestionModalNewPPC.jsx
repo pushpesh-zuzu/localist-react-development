@@ -440,7 +440,7 @@ const QuestionModalNewPPC = ({
                   title={
                     currentQuestion === 0
                       ? !isQuestionWithImage
-                        ? "Welcome to Localists!"
+                        ? ""
                         : ""
                       : questions[currentQuestion]?.questions
                   }
@@ -453,7 +453,7 @@ const QuestionModalNewPPC = ({
                   subtitle={
                     currentQuestion === 0
                       ? !isQuestionWithImage
-                        ? description
+                        ? ""
                         : ""
                       : ""
                   }>

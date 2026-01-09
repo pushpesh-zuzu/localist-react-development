@@ -19,6 +19,7 @@ import DescribeYourRequestNewPPC from "./DescribeYourRequestNewPPC/DescribeYourR
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import Logo from "../../../assets/ReactIcons/Logo";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 function HeroSectionNewPPC({
   heading0 = "Find Expert",
@@ -114,7 +115,7 @@ function HeroSectionNewPPC({
             </div>
 
             <div className={styles.ctaRow}>
-              <button className={`${styles.primaryBtn} `}>
+              <button onClick={()=>{handleScrollToBottom()}} className={`${styles.primaryBtn} `}>
                 {quoteText} <GetQuotesIcon color="white" />
               </button>
             </div>
@@ -171,7 +172,7 @@ function HeroSectionNewPPC({
           </div>
 
           <div className={styles.ctaRow}>
-            <button className={`${styles.primaryBtn} `}>
+            <button onClick={()=>{handleScrollToBottom()}} className={`${styles.primaryBtn} `}>
               {quoteText} <GetQuotesIcon color="white" />
             </button>
           </div>

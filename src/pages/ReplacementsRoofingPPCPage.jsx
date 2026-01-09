@@ -285,9 +285,9 @@ function ReplacementsRoofingPPCPage() {
             <HeroSectionNewPPC
               trustedText="Trusted New Roof Installation & Replacement Specialists"
               heading0="Find"
-              heading1="Roof Installation & Replacement"
+              heading1="Roof Installation"
               heading2="Experts Near You"
-              quoteText="Find Roof Installation & Replacement Experts Near You"
+              quoteText="Find Roof Installation Experts Near You"
               questionDescription="To find the ideal Roof Installation & Replacement Specialist for your project, simply complete the quick form below."
               serviceId={113}
             />

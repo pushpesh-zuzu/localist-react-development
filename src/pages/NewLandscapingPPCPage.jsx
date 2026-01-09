@@ -449,9 +449,9 @@ function NewLandscapingPPCPage() {
           <div ref={heroRef}>
             <HeroSectionNewPPC
              heading0="Find"
-              heading1="Landscaping Installation"
+              heading1="Landscaping"
               heading2="Experts Near You"
-              quoteText="Find Landscaping Installation Experts Near You"
+              quoteText="Find Landscaping Experts Near You"
               questionDescription="To find the ideal landscaping specialist for your project, simply complete the quick form below."
               serviceId={43}
             />
