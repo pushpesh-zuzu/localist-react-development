@@ -244,7 +244,8 @@ export const checkEmailIdApi = (emailData) => {
         return response.data;
       }
     } catch (error) {
-      showToast("error", error?.response?.data?.message);
+      // showToast("error", error?.response?.data?.message);
+      showToast("error", "Your account is already registered, please login.");
     } finally {
       dispatch(setsearchServiceLoader(false));
     }

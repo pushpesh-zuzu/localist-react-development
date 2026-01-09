@@ -669,9 +669,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           className={styles.disclaimer}
           style={{ maxWidth: "408px", marginLeft: "auto", marginRight: "auto" }}
         >
-          By submitting this form, you agree to receive emails, WhatsApp
-          messages, and other communications from us and our service partners,
-          even if you are on the Do Not Disturb (DND) registry.
+         By submitting this form you agree to our Privacy Policy and Terms of Service
         </small>
       </form>
     </FormWrapper>
