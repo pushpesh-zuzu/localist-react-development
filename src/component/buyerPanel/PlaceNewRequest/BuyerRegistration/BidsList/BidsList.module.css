@@ -663,7 +663,7 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 1393px) and (min-width: 540px) {
+@media screen and (max-width: 1393px) and (min-width: 480px) {
   .requestBtn {
     display: none;
   }
@@ -830,9 +830,12 @@
     font-size: 10px;
   }
 
-  .recommendBar {
+  /* .recommendBar {
     display: none !important;
-  }
+  } */
+   .recommendBar{
+      padding: 10px;
+   }
   .filters {
     flex-direction: column;
     align-items: flex-start;

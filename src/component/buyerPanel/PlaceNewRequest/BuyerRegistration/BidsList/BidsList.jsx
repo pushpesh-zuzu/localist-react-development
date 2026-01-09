@@ -346,10 +346,9 @@ const BidsList = () => {
                   </div>
                 ) : (
                   <div className={styles.middleText}>
-                    Your Top 5 local professional matches are below. You can
-                    contact any of the <br className={styles.lineBreak} />{" "}
-                    professionals to get more information using the contact
-                    button.
+                    You can contact any of the professionals to
+                    <br className={styles.lineBreak} /> get more information
+                    using the contact button.
                   </div>
                 )}
 
@@ -399,11 +398,11 @@ const BidsList = () => {
             </div>
 
             <div className={styles.filters}>
-              <div className={styles.matchCountWrapper}>
+              {/* <div className={styles.matchCountWrapper}>
                 <span className={styles.matchCount}>
                   {matchingLength} matches
                 </span>
-              </div>
+              </div> */}
 
               {!isMobile ? (
                 <div className={styles.selectsWrapper}>
@@ -430,7 +429,7 @@ const BidsList = () => {
                   </Select>
 
                   <Select
-                    value={locationSort || "Farthest to Nearest"}
+                    value={locationSort || "Sort by Distance"}
                     onChange={(value) => {
                       setLocationSort(value);
                       handelChangeSort({ target: { value } });
@@ -590,7 +589,8 @@ const BidsList = () => {
                   onClick={handleMultple}
                   disabled={isButtonDisabled}
                 >
-                  Request Your 5 Top Matches Here
+                  {/* Request Your 5 Top Matches Here */}
+                  Request Free Quotes Now
                 </button>
               )}
             </div>
@@ -841,7 +841,7 @@ const BidsList = () => {
                             handleContinue(seller);
                           }}
                         >
-                          Contact the Professional Now
+                          Request A Free Quote Now
                         </button>
                       </div>
                     </div>
