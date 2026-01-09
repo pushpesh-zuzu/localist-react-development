@@ -22,13 +22,10 @@ export const showToastWithLink = (
   const parts = message.split(linkText);
 
   const styledMessage =
-    parts[0] +
-    `<a 
+    parts[0] + `&nbsp;<a 
         href="${redirectUrl}"
-        style="color:#4A90E2;text-decoration:underline; cursor:pointer;font-weight:600;"
-      >
-        ${linkText}
-     </a>` +
+        style="color:#4A90E2; text-decoration:underline; font-weight:600;"
+      >${linkText}</a>&nbsp;` + 
     (lastTest || "");
 
   const ToastContent = () => (

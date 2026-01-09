@@ -250,7 +250,7 @@ export const checkEmailIdApi = (emailData) => {
         "error",
         "Your account is already registered.Please",
         "/en/gb/login",
-        " click here",
+        "click here",
         "to login",
         false
       );
