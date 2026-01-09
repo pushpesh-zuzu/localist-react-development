@@ -341,8 +341,7 @@ const BidsList = () => {
 
                 {isMobile ? (
                   <div className={styles.mobileMiddleText}>
-                    Your Top 5 local professional matches are below. Request
-                    replies from your top matches to hear back faster
+                    Request replies from your top matches to hear back faster
                   </div>
                 ) : (
                   <div className={styles.middleText}>
