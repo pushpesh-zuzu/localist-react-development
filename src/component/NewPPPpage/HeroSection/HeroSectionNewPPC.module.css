@@ -76,6 +76,9 @@
   gap: 20px;
   margin-top: 40px;
 }
+.clickable {
+  cursor: pointer;
+}
 
 .primaryBtn {
   background: #ff9933;
@@ -93,7 +96,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
 }
 .primaryBtn:hover {
   background: #00aef0;
@@ -162,7 +164,7 @@
     line-height: 6.96px;
     margin-bottom: 16px;
   }
- 
+
   .features {
     display: flex;
     flex-wrap: wrap; /* 🔑 ye change sabse important */

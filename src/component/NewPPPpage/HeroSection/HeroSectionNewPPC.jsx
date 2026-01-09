@@ -115,7 +115,7 @@ function HeroSectionNewPPC({
             </div>
 
             <div className={styles.ctaRow}>
-              <button className={`${styles.primaryBtn} `}>{quoteText}</button>
+              <button className={`${styles.primaryBtn}`}>{quoteText}</button>
             </div>
           </div>
         </div>
@@ -174,7 +174,7 @@ function HeroSectionNewPPC({
               onClick={() => {
                 handleScrollToBottom();
               }}
-              className={`${styles.primaryBtn} `}
+              className={`${styles.primaryBtn} ${styles.clickable}`}
             >
               {quoteText}{" "}
             </button>
