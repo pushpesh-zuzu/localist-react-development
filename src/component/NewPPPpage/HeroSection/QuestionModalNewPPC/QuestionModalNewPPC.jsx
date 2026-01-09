@@ -43,7 +43,7 @@ const QuestionModalNewPPC = ({
   const targetID = allParams.utm_term || "";
   const msclickid = allParams.utm_msclkid || "";
   const utm_source = allParams.utm_source || "";
-
+  const optionsContainerRef = useRef(null);
   const { userToken, adminToken } = useSelector((state) => state.auth);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState([]);
@@ -363,6 +363,9 @@ const QuestionModalNewPPC = ({
     typeof window !== "undefined" &&
       window.innerWidth < 768 &&
       handleScrollToBottom();
+      if (optionsContainerRef.current) {
+      optionsContainerRef.current.scrollTop = 0;
+    }
   }, [currentQuestion]);
   return (
     <FormWrapper>
@@ -468,7 +471,7 @@ const QuestionModalNewPPC = ({
                               {formattedQuestions[currentQuestion]?.questions}
                             </h2>
                           )}
-              <div
+              <div ref={optionsContainerRef}
                 className={`${styles.optionsContainer} ${
                   isAnimating ? styles.fadeContent : ""
                 }`}
