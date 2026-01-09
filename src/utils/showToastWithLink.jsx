@@ -6,7 +6,8 @@ export const showToastWithLink = (
   message,
   redirectUrl,
   linkText,
-  autoClose = true 
+  lastTest,
+  autoClose = true
 ) => {
   const options = {
     position: "top-right",
@@ -22,8 +23,13 @@ export const showToastWithLink = (
 
   const styledMessage =
     parts[0] +
-    `<span style="color:#4A90E2;text-decoration:underline;cursor:pointer;font-weight:600;">${linkText}</span>` +
-    (parts[1] || "");
+    `<a 
+        href="${redirectUrl}"
+        style="color:#4A90E2;text-decoration:underline; cursor:pointer;font-weight:600;"
+      >
+        ${linkText}
+     </a>` +
+    (lastTest || "");
 
   const ToastContent = () => (
     <div

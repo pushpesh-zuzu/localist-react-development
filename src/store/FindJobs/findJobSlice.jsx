@@ -248,9 +248,10 @@ export const checkEmailIdApi = (emailData) => {
       // showToast("error", error?.response?.data?.message);
       showToastWithLink(
         "error",
-        "Your account is already registered.",
+        "Your account is already registered.Please",
         "/en/gb/login",
-        "Please click here to login",
+        " click here",
+        "to login",
         false
       );
     } finally {
