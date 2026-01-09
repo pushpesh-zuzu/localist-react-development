@@ -4,7 +4,7 @@ import Button1 from "../UITypography/Button1";
 import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 
 const GetCTAButton = ({
-  text='Get Free Quotes Now',
+  text = "Get Free Quotes Now",
   onClick,
   variant = "warning",
   buttonClassName = "",
@@ -17,7 +17,6 @@ const GetCTAButton = ({
         className={`${styles.button} ${buttonClassName}`}
       >
         {text}
-        <GetQuotesIcon color="white" />
       </Button1>
     </div>
   );

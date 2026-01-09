@@ -4,6 +4,7 @@ import axiosInstance from "../../Api/axiosInstance.js";
 import { fetchCompanyDetails } from "../../../src/store/Company/companyLookup";
 import { changeSequenceServices } from "../../utils/allservices.js";
 import { safeLocalStorage } from "../../utils/localStorage.js";
+import { showToastWithLink } from "../../utils/showToastWithLink.jsx";
 const initialState = {
   popularList: [],
   popularLoader: false,
@@ -245,7 +246,13 @@ export const checkEmailIdApi = (emailData) => {
       }
     } catch (error) {
       // showToast("error", error?.response?.data?.message);
-      showToast("error", "Your account is already registered, please login.");
+      showToastWithLink(
+        "error",
+        "Your account is already registered.",
+        "/en/gb/login",
+        "Please click here to login",
+        false
+      );
     } finally {
       dispatch(setsearchServiceLoader(false));
     }
