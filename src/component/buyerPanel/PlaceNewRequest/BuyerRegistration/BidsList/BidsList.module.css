@@ -835,6 +835,8 @@
   } */
    .recommendBar{
       padding: 10px;
+      font-size: 13px;
+
    }
   .filters {
     flex-direction: column;
