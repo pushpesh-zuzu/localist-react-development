@@ -22,6 +22,7 @@ import NameEmailTreeSurgeon from "./steps/NameEmailMultiStepForm/NameEmailTreeSu
 import PostCodeSearchTreeSurgeon from "./steps/PostcodeSearch/PostCodeSearchTreeSurgeon";
 import QuestionAsnwerMultiStepTreeSurgeon2 from "./steps/QuestionAnswerMultiStep/QuestionAsnwerMultiStepTreeSurgeon2";
 import QuestionAnswerMultiStepTreeSurgeon from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepTreeSurgeon";
+import CookieConsent from "../common/CookieConsent/CookieConsent";
 
 const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   const location = useLocation();
@@ -305,6 +306,7 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
           </div>
         </div>
       </div>
+      <CookieConsent />
       <Footer />
     </>
   );

@@ -22,6 +22,7 @@ import QuestionAnswerMultiStepFence2 from "./steps/QuestionAnswerMultiStep/Quest
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import CookieConsent from "../common/CookieConsent/CookieConsent";
 
 const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -279,6 +280,7 @@ const MultiStepFormFencing = ({ isQuestionWithImage = false }) => {
           </div>
         </div>
       </div>
+      <CookieConsent />
       <Footer />
     </>
   );

@@ -19,6 +19,7 @@ import { showToast } from "../../../utils";
 import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
 import { validateUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 import { useEmailCheck } from "../../../utils/emailExist";
+import { handleScrollToBottom } from "../../../utils/scroll";
 
 function NewPPCForm({ nextStep, serviceId = 51 }) {
   const dispatch = useDispatch();
@@ -499,6 +500,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           email: "",
         })
       );
+      handleScrollToBottom()
     }
   }, [isEmailAvailable]);
 

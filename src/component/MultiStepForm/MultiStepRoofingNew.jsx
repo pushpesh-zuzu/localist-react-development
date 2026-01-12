@@ -23,6 +23,7 @@ import { useProgress } from "../../utils/useProgress";
 import PostcodeSearchRoofing from "./steps/PostcodeSearch/PostcodeSearchRoofing";
 import QuestionAnserMultiStepRoofingNew2 from "./steps/QuestionAnswerMultiStep/QuestionAnserMultiStepRoofingNew2";
 import QuestionAnswerMultiStepRoofingNew from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepRoofingNew";
+import CookieConsent from "../common/CookieConsent/CookieConsent";
 
 const MultiStepRoofingNew = ({
   isQuestionWithImage = false,
@@ -285,7 +286,9 @@ const MultiStepRoofingNew = ({
           </div>
         </div>
       </div>
+      <CookieConsent />
       <Footer />
+      
     </>
   );
 };

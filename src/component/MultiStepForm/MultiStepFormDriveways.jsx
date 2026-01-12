@@ -22,6 +22,7 @@ import PostcodeSearchDriveways from "./steps/PostcodeSearch/PostcodeSearchDrivew
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import NavigationDetectorWithConfirmations from "../common/navigationDetected/NavigationDetectorWithConfirmations";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
+import CookieConsent from "../common/CookieConsent/CookieConsent";
 
 const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -299,6 +300,7 @@ const MultiStepFormDriveways = ({ isQuestionWithImage = false }) => {
           </div>
         </div>
       </div>
+      <CookieConsent />
       <Footer />
     </>
   );

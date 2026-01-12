@@ -22,6 +22,7 @@ import NavigationDetectorWithConfirmations from "../common/navigationDetected/Na
 import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDetectorDesktop";
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 import { Helmet } from "react-helmet-async";
+import CookieConsent from "../common/CookieConsent/CookieConsent";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -265,6 +266,7 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
           </div>
         </div>
       </div>
+      <CookieConsent />
       <Footer />
     </>
   );
