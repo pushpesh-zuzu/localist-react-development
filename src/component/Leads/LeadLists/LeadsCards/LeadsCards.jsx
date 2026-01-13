@@ -269,7 +269,7 @@ const LeadsCards = () => {
                             <div className={styles.highlightText}>
                               Highlights :
                             </div>
-                            <div
+                            {item?.is_expired !== 1  && <div
                               className={styles.saveBtnBox}
                               style={{ position: "relative" }}
                             >
@@ -297,7 +297,7 @@ const LeadsCards = () => {
                                   </>
                                 )}
                               </button>
-                            </div>
+                            </div>}
 
                             <div className={styles.badges}>
                               {item?.is_phone_verified == 1 && (
@@ -370,18 +370,18 @@ const LeadsCards = () => {
                                   justifyContent: "center",
                                 }}
                               >
-                                <span className={styles.credits}>
+                               {item?.is_expired !== 1 && <span className={styles.credits}>
                                   {item?.credit_score} Credits
-                                </span>
+                                </span>}
                               </div>
 
-                              <div className={styles.mainText}>
+                              {item?.is_expired !== 1 && <div className={styles.mainText}>
                                 <div>ACT FAST</div>
-                              </div>
+                              </div>}
                             </div>
                           </div>
                         </div>
-                        <div>
+                       {item?.is_expired !== 1  &&<div>
                           <div className={styles.saveBtnBoxs}>
                             <button
                               className={styles.saveBtn}
@@ -405,7 +405,7 @@ const LeadsCards = () => {
                               )}
                             </button>
                           </div>
-                        </div>
+                        </div>}
                         <div className={styles.viewDetailsBtnWrapper}>
                           <button
                             className={styles.viewDetailsBtn}
