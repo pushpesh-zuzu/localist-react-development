@@ -98,6 +98,7 @@ const QuestionAnserMultiStepDriways2 = ({
     }
     handleScrollToBottom();
   }, [currentQuestion, buyerRequest, questions]);
+  
   useEffect(() => {
     if (buyerRequest && Array.isArray(buyerRequest.questions)) {
       const hasSpecialAnswer = buyerRequest.questions.some(
@@ -171,15 +172,26 @@ const QuestionAnserMultiStepDriways2 = ({
     } else {
       updatedAnswers = [...previousAnswers, updatedAnswer];
     }
+    
     dispatch(setbuyerRequestData({ questions: updatedAnswers }));
 
-    const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
-      (a) => a.option === selectedOption[0]
-    );
+    // FIX 1: Handle multiple selections properly
+    let nextQ = null;
+    for (const option of selectedOption) {
+      const selectedObj = formattedQuestions[currentQuestion]?.parsedAnswers.find(
+        (a) => a.option === option
+      );
+      if (selectedObj?.next_question) {
+        nextQ = selectedObj.next_question;
+        break; // Take first valid next_question
+      }
+    }
 
-    const nextQ = selectedObj?.next_question;
     setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
+    
+    // FIX 2: Remove duplicate code and follow original component logic
     if (nextQ === "6") {
+      // If isStartWithQuestionModal logic from original component
       dispatch(
         setbuyerRequestData({
           service_id: service?.id || buyerRequest?.service_id,
@@ -188,12 +200,6 @@ const QuestionAnserMultiStepDriways2 = ({
           questions: updatedAnswers,
         })
       );
-      setProgressPercentage(75);
-      onNext();
-      return;
-    }
-
-    if (nextQ === "6") {
       setProgressPercentage(75);
       onNext();
       return;
@@ -209,6 +215,10 @@ const QuestionAnserMultiStepDriways2 = ({
         onNext();
       }
     }
+    
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   const handleNext = (selected) => {
@@ -258,30 +268,33 @@ const QuestionAnserMultiStepDriways2 = ({
     const nextQ = selectedObj?.next_question;
     setTotalQuestionsAnswered((prev) => Math.min(prev + 1, 7));
 
-    let nextIndex = null;
-    if (nextQ === Number(nextQ)) {
-      setProgressPercentage(75);
-      onNext();
-      return;
-    } else if (nextQ === "last") {
+    // FIX 3: Follow original component logic
+    if (nextQ === "6") {
       setProgressPercentage(75);
       onNext();
       return;
     } else if (nextQ && questionIndexMap[nextQ]) {
-      nextIndex = questionIndexMap[nextQ];
-    } else if (currentQuestion < totalQuestions - 1) {
-      nextIndex = currentQuestion + 1;
-    }
-
-    if (nextIndex !== null) {
+      const nextIndex = questionIndexMap[nextQ];
       if (!questionHistory.includes(nextIndex)) {
         setQuestionHistory((prev) => [...prev, nextIndex]);
       }
       setCurrentQuestion(nextIndex);
     } else {
-      setProgressPercentage(75);
-      onNext();
+      if (currentQuestion < totalQuestions - 1) {
+        const nextIndex = currentQuestion + 1;
+        if (!questionHistory.includes(nextIndex)) {
+          setQuestionHistory((prev) => [...prev, nextIndex]);
+        }
+        setCurrentQuestion(nextIndex);
+      } else {
+        setProgressPercentage(75);
+        onNext();
+      }
     }
+    
+    setSelectedOption([]);
+    setOtherText("");
+    setError("");
   };
 
   const handleBack = () => {
@@ -379,7 +392,8 @@ const QuestionAnserMultiStepDriways2 = ({
                     const isSingle =
                       formattedQuestions[currentQuestion]?.option_type ===
                       "single";
-                    if (isSingle && selectedOption.includes(opt.option)) {
+                    // FIX 4: Only call handleNext if not "Something else"
+                    if (isSingle && selectedOption.includes(opt.option) && opt.option !== "Something else (please describe)") {
                       handleNext([e.target.value]);
                     }
                   }}

@@ -306,7 +306,7 @@ const Footer = ({floatingMargin=false}) => {
             key="1"
           >
             <ul>
-              <Link to={`${lang}/${country}/`}>
+              <Link to={`/${lang}/${country}/`}>
                 <li className={styles.mobileItem}>Find a Professional</li>
               </Link>
               <Link to={`/${lang}/${country}/how-it-works-for-customers`}>
@@ -405,7 +405,7 @@ const Footer = ({floatingMargin=false}) => {
 
       <div className={styles.footerBottom}>
         <p>
-          © 2025 Localists.{" "}
+          © 2026 Localists.{" "}
           <Link
             style={{ textDecoration: "none", color: "#000" }}
             to={`/${lang}/${country}/terms`}
