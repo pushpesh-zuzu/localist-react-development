@@ -40,11 +40,23 @@ const NameEmailTreeSurgeon = ({
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        email: e.target.value,
+      })
+    );
   };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
     setErrors((prev) => ({ ...prev, name: false }));
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        name: e.target.value,
+      })
+    );
   };
 
   const handleEmailFocus = () => {
@@ -58,9 +70,7 @@ const NameEmailTreeSurgeon = ({
 
   const handleSubmit = async () => {
     const newErrors = {
-      email:
-        !isPPCPages &&
-        (!email || !validateEmail(email)),
+      email: !isPPCPages && (!email || !validateEmail(email)),
       name: !name.trim(),
     };
 
