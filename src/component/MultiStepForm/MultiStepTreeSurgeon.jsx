@@ -23,6 +23,9 @@ import PostCodeSearchTreeSurgeon from "./steps/PostcodeSearch/PostCodeSearchTree
 import QuestionAsnwerMultiStepTreeSurgeon2 from "./steps/QuestionAnswerMultiStep/QuestionAsnwerMultiStepTreeSurgeon2";
 import QuestionAnswerMultiStepTreeSurgeon from "./steps/QuestionAnswerMultiStep/QuestionAnswerMultiStepTreeSurgeon";
 import CookieConsent from "../common/CookieConsent/CookieConsent";
+import HowItWorkNewPPC from "../NewPPPpage/HowItWorkNewPPC/HowItWorkNewPPC";
+import Logo from "../../assets/ReactIcons/Logo";
+import FloatingButtonWrapper from "../NewPPPpage/FloatingButtonWrapper";
 
 const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
   const location = useLocation();
@@ -206,108 +209,122 @@ const MultiStepTreeSurgeon = ({ isQuestionWithImage = false, serviceId }) => {
         value={5 + progressPercentage}
         buyerStep={buyerStep}
       />
-      <div>
-        <div
-          className={`${
-            buyerStep === 4 ? styles.containerNameEmail : styles.container
-          }`}
-        >
-          <div className={styles.formContainer}>
-            <div className={`${styles.slideContainer}`}>
-              {buyerStep === 1 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAsnwerMultiStepTreeSurgeon2
-                    questions={firstQuestions}
-                    onNext={nextStep}
-                    onBack={prevStep}
-                    loading={isLoadingQuestions}
-                    isComingFromStep3={isComingFromStep3}
-                    setQuestionHistory={setQuestionHistory}
-                    questionHistory={questionHistory}
-                    setIsComingFromStep3={setIsComingFromStep3}
-                    setProgressPercentage={setProgressPercentage}
-                    isQuestionWithImage={isQuestionWithImage}
-                    serviceName="Tree Surgeon"
-                    setQuestion2History={setQuestion2History}
-                    question2History={question2History}
-                    setSelectedOption={setSelectedOption}
-                    selectedOption={selectedOption}
-                  />
-                </div>
-              )}
-              {buyerStep === 2 && (
-                <div className={styles.postcode} style={{ margin: "auto" }}>
-                  <PostCodeSearchTreeSurgeon
-                    prevStep={prevStep}
-                    onNext={nextStep}
-                    setProgressPercentage={setProgressPercentage}
-                    setBackButtonTriggered={setBackButtonTriggered}
-                    titleHeading="tree surgeon specialists"
-                    setSelectedOption={setSelectedOption}
-                  />
-                </div>
-              )}
+      <FloatingButtonWrapper>
+        {(heroRef, sectionsStartRef) => (
+          <>
+            <Logo className={styles.logo} />
+            <div
+              className={`${
+                buyerStep === 4 ? styles.containerNameEmail : styles.container
+              }`}
+              ref={heroRef}
+            >
+              <div className={styles.formContainer}>
+                <div className={`${styles.slideContainer}`}>
+                  {buyerStep === 1 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <QuestionAsnwerMultiStepTreeSurgeon2
+                        questions={firstQuestions}
+                        onNext={nextStep}
+                        onBack={prevStep}
+                        loading={isLoadingQuestions}
+                        isComingFromStep3={isComingFromStep3}
+                        setQuestionHistory={setQuestionHistory}
+                        questionHistory={questionHistory}
+                        setIsComingFromStep3={setIsComingFromStep3}
+                        setProgressPercentage={setProgressPercentage}
+                        isQuestionWithImage={isQuestionWithImage}
+                        serviceName="Tree Surgeon"
+                        setQuestion2History={setQuestion2History}
+                        question2History={question2History}
+                        setSelectedOption={setSelectedOption}
+                        selectedOption={selectedOption}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 2 && (
+                    <div className={styles.postcode} style={{ margin: "auto" }}>
+                      <PostCodeSearchTreeSurgeon
+                        prevStep={prevStep}
+                        onNext={nextStep}
+                        setProgressPercentage={setProgressPercentage}
+                        setBackButtonTriggered={setBackButtonTriggered}
+                        titleHeading="tree surgeon specialists"
+                        setSelectedOption={setSelectedOption}
+                      />
+                    </div>
+                  )}
 
-              {buyerStep === 3 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAnswerMultiStepTreeSurgeon
-                    questions={lastQuestion}
-                    onNext={nextStep}
-                    onBack={prevStep}
-                    loading={questionLoader}
-                    setIsComingFromStep4={setIsComingFromStep4}
-                    isComingFromStep4={isComingFromStep4}
-                    setProgressPercentage={setProgressPercentage}
-                    setSelectedOption={setSelectedOption}
-                    selectedOption={selectedOption}
-                    isStepFrom4={isStepFrom4}
-                    setIsStepFrom4={setIsStepFrom4}
-                  />
+                  {buyerStep === 3 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <QuestionAnswerMultiStepTreeSurgeon
+                        questions={lastQuestion}
+                        onNext={nextStep}
+                        onBack={prevStep}
+                        loading={questionLoader}
+                        setIsComingFromStep4={setIsComingFromStep4}
+                        isComingFromStep4={isComingFromStep4}
+                        setProgressPercentage={setProgressPercentage}
+                        setSelectedOption={setSelectedOption}
+                        selectedOption={selectedOption}
+                        isStepFrom4={isStepFrom4}
+                        setIsStepFrom4={setIsStepFrom4}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 4 && (
+                    <NameEmailTreeSurgeon
+                      nextStep={nextStep}
+                      onBack={prevStep}
+                      setIsStepFrom4={setIsStepFrom4}
+                    />
+                  )}
+                  {buyerStep === 5 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <PhoneNumberMultiStepForm
+                        nextStep={nextStep}
+                        onBack={prevStep}
+                        serviceId={51}
+                        setProgressPercentage={setProgressPercentage}
+                        setUpdateNumberStep={setUpdateNumberStep}
+                        updateNumberStep={updateNumberStep}
+                        setLocalRequestId={setLocalRequestId}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 6 && (
+                    <CardLayoutWrapper showButton={false}>
+                      <OTPVerificationMultiStep
+                        open
+                        nextStep={nextStep}
+                        onBack={prevStep}
+                        isThankuPageOnlyShow
+                        setProgressPercentage={setProgressPercentage}
+                        setUpdateNumberStep={setUpdateNumberStep}
+                      />
+                    </CardLayoutWrapper>
+                  )}
+                  {buyerStep === 7 && (
+                    <CardLayoutWrapper
+                      showBackButton={false}
+                      showButton={false}
+                    >
+                      <MultiStepDescribeYourRequest />
+                    </CardLayoutWrapper>
+                  )}
                 </div>
-              )}
-              {buyerStep === 4 && (
-                <NameEmailTreeSurgeon
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  setIsStepFrom4={setIsStepFrom4}
-                />
-              )}
-              {buyerStep === 5 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <PhoneNumberMultiStepForm
-                    nextStep={nextStep}
-                    onBack={prevStep}
-                    serviceId={51}
-                    setProgressPercentage={setProgressPercentage}
-                    setUpdateNumberStep={setUpdateNumberStep}
-                    updateNumberStep={updateNumberStep}
-                    setLocalRequestId={setLocalRequestId}
-                  />
-                </div>
-              )}
-              {buyerStep === 6 && (
-                <CardLayoutWrapper showButton={false}>
-                  <OTPVerificationMultiStep
-                    open
-                    nextStep={nextStep}
-                    onBack={prevStep}
-                    isThankuPageOnlyShow
-                    setProgressPercentage={setProgressPercentage}
-                    setUpdateNumberStep={setUpdateNumberStep}
-                  />
-                </CardLayoutWrapper>
-              )}
-              {buyerStep === 7 && (
-                <CardLayoutWrapper showBackButton={false} showButton={false}>
-                  <MultiStepDescribeYourRequest />
-                </CardLayoutWrapper>
-              )}
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <CookieConsent />
-      <Footer />
+            <div ref={sectionsStartRef}>
+              <HowItWorkNewPPC />
+            </div>
+            <CookieConsent />
+            <div className={styles.footer}>
+              <Footer />
+            </div>
+          </>
+        )}
+      </FloatingButtonWrapper>
     </>
   );
 };

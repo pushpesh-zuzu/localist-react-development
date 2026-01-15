@@ -8,6 +8,20 @@
   justify-content: center;
   align-items: center;
 }
+
+.logo {
+  height: 38px;
+  width: 195px;
+  margin-top: 24px;
+  margin-left: 2%;
+}
+@media (max-width: 1250px) {
+  .logo {
+    height: 28px;
+    width: 125px;
+    /* margin-top: 24px; */
+  }
+}
 .tabText {
   color: #fff;
   font-weight: 600;
@@ -120,10 +134,19 @@
   .postcode {
     max-width: 100%;
   }
+  .logo {
+    height: 20px;
+    width: 120px;
+    margin-top: 16px;
+  }
+}
+@media (max-width: 640px) {
+  .footer {
+    margin-bottom: 80px;
+  }
 }
 @media (max-width: 400px) {
   .container {
     width: 90%;
   }
- 
 }

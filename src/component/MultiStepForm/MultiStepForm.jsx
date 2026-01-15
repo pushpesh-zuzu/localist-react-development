@@ -23,6 +23,9 @@ import NavigationDetectorDesktop from "../common/navigationDetected/NavigationDe
 import CalonicalTags from "../common/CalonicalTags/CalonicalTags";
 import { Helmet } from "react-helmet-async";
 import CookieConsent from "../common/CookieConsent/CookieConsent";
+import HowItWorkNewPPC from "../NewPPPpage/HowItWorkNewPPC/HowItWorkNewPPC";
+import Logo from "../../assets/ReactIcons/Logo";
+import FloatingButtonWrapper from "../NewPPPpage/FloatingButtonWrapper";
 
 const MultiStepForm = ({ isQuestionWithImage = false }) => {
   const location = useLocation();
@@ -184,90 +187,106 @@ const MultiStepForm = ({ isQuestionWithImage = false }) => {
         value={progressPercentage}
         buyerStep={buyerStep}
       />
-      <div>
-        <div className={styles.container}>
-          <div className={styles.formContainer}>
-            <div className={`${styles.slideContainer}`}>
-              {buyerStep === 1 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAnswerMultiStep2
-                    questions={firstQuestions}
-                    onNext={nextStep}
-                    onBack={prevStep}
-                    loading={isLoadingQuestions}
-                    getProgressPercentage={getProgressPercentage}
-                    isComingFromStep3={isComingFromStep3}
-                    setQuestionHistory={setQuestionHistory}
-                    questionHistory={questionHistory}
-                    setIsComingFromStep3={setIsComingFromStep3}
-                    setProgressPercentage={setProgressPercentage}
-                    isQuestionWithImage={isQuestionWithImage}
-                  />
-                </div>
-              )}
-              {buyerStep === 2 && (
-                <div className={styles.postcode} style={{ margin: "auto" }}>
-                  <PostcodeSearch
-                    getProgressPercentage={getProgressPercentage}
-                    prevStep={prevStep}
-                    onNext={nextStep}
-                    backButtonTriggered={backButtonTriggered}
-                    setBackButtonTriggered={setBackButtonTriggered}
-                    returPercentage={(100 * 2) / (firstQuestions?.length * 3)}
-                  />
-                </div>
-              )}
+      <FloatingButtonWrapper>
+        {(heroRef, sectionsStartRef) => (
+          <>
+            <Logo className={styles.logo} />
+            <div className={styles.container} ref={heroRef}>
+              <div className={styles.formContainer}>
+                <div className={`${styles.slideContainer}`}>
+                  {buyerStep === 1 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <QuestionAnswerMultiStep2
+                        questions={firstQuestions}
+                        onNext={nextStep}
+                        onBack={prevStep}
+                        loading={isLoadingQuestions}
+                        getProgressPercentage={getProgressPercentage}
+                        isComingFromStep3={isComingFromStep3}
+                        setQuestionHistory={setQuestionHistory}
+                        questionHistory={questionHistory}
+                        setIsComingFromStep3={setIsComingFromStep3}
+                        setProgressPercentage={setProgressPercentage}
+                        isQuestionWithImage={isQuestionWithImage}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 2 && (
+                    <div className={styles.postcode} style={{ margin: "auto" }}>
+                      <PostcodeSearch
+                        getProgressPercentage={getProgressPercentage}
+                        prevStep={prevStep}
+                        onNext={nextStep}
+                        backButtonTriggered={backButtonTriggered}
+                        setBackButtonTriggered={setBackButtonTriggered}
+                        returPercentage={
+                          (100 * 2) / (firstQuestions?.length * 3)
+                        }
+                      />
+                    </div>
+                  )}
 
-              {buyerStep === 3 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <QuestionAnswerMultiStep
-                    questions={lastQuestion}
-                    onNext={nextStep}
-                    onBack={prevStep}
-                    getProgressPercentage={getProgressPercentage}
-                  />
+                  {buyerStep === 3 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <QuestionAnswerMultiStep
+                        questions={lastQuestion}
+                        onNext={nextStep}
+                        onBack={prevStep}
+                        getProgressPercentage={getProgressPercentage}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 4 && (
+                    <NameEmailMultiStepForm
+                      nextStep={nextStep}
+                      onBack={prevStep}
+                      isStartWithQuestionModal={true}
+                    />
+                  )}
+                  {buyerStep === 5 && (
+                    <div style={{ maxWidth: "592px", margin: "auto" }}>
+                      <PhoneNumberMultiStepForm
+                        nextStep={nextStep}
+                        onBack={prevStep}
+                        updateNumberStep={updateNumberStep}
+                        setUpdateNumberStep={setUpdateNumberStep}
+                        setLocalRequestId={setLocalRequestId}
+                      />
+                    </div>
+                  )}
+                  {buyerStep === 6 && updateNumberStep === 2 && (
+                    <CardLayoutWrapper showButton={false}>
+                      <OTPVerificationMultiStep
+                        open
+                        nextStep={nextStep}
+                        onBack={prevStep}
+                        isThankuPageOnlyShow
+                        setUpdateNumberStep={setUpdateNumberStep}
+                      />
+                    </CardLayoutWrapper>
+                  )}
+                  {buyerStep === 7 && (
+                    <CardLayoutWrapper
+                      showBackButton={false}
+                      showButton={false}
+                    >
+                      <MultiStepDescribeYourRequest />
+                    </CardLayoutWrapper>
+                  )}
                 </div>
-              )}
-              {buyerStep === 4 && (
-                <NameEmailMultiStepForm
-                  nextStep={nextStep}
-                  onBack={prevStep}
-                  isStartWithQuestionModal={true}
-                />
-              )}
-              {buyerStep === 5 && (
-                <div style={{ maxWidth: "592px", margin: "auto" }}>
-                  <PhoneNumberMultiStepForm
-                    nextStep={nextStep}
-                    onBack={prevStep}
-                    updateNumberStep={updateNumberStep}
-                    setUpdateNumberStep={setUpdateNumberStep}
-                    setLocalRequestId={setLocalRequestId}
-                  />
-                </div>
-              )}
-              {buyerStep === 6 && updateNumberStep === 2 && (
-                <CardLayoutWrapper showButton={false}>
-                  <OTPVerificationMultiStep
-                    open
-                    nextStep={nextStep}
-                    onBack={prevStep}
-                    isThankuPageOnlyShow
-                    setUpdateNumberStep={setUpdateNumberStep}
-                  />
-                </CardLayoutWrapper>
-              )}
-              {buyerStep === 7 && (
-                <CardLayoutWrapper showBackButton={false} showButton={false}>
-                  <MultiStepDescribeYourRequest />
-                </CardLayoutWrapper>
-              )}
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <CookieConsent />
-      <Footer />
+
+            <div ref={sectionsStartRef}>
+              <HowItWorkNewPPC />
+            </div>
+            <CookieConsent />
+            <div className={styles.footer}>
+              <Footer />
+            </div>
+          </>
+        )}
+      </FloatingButtonWrapper>
     </>
   );
 };
