@@ -28,7 +28,7 @@ export default function FloatingButtonWrapper({ children }) {
           setShowFloating(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: .35 }
     );
 
     heroObserver.observe(heroRef.current);

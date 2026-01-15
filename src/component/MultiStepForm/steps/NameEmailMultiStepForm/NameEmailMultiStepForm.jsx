@@ -31,11 +31,23 @@ const NameEmailMultiStepForm = ({ nextStep, isPPCPages = false, onBack }) => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     setErrors((prev) => ({ ...prev, email: false }));
+     dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        email: e.target.value,
+      })
+    );
   };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
     setErrors((prev) => ({ ...prev, name: false }));
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        name: e.target.value,
+      })
+    );
   };
 
   const handleEmailFocus = () => {

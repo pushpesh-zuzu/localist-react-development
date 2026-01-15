@@ -45,6 +45,12 @@ const PhoneNumberMultiStepForm = ({
       setErrors((prev) => ({ ...prev, phone: false }));
       setMobileErrorMessage("");
     }
+    dispatch(
+      setbuyerRequestData({
+        ...buyerRequest,
+        phone: value,
+      })
+    );
   };
   const updatedAnswers = Array.isArray(buyerRequest?.questions)
     ? buyerRequest.questions.filter(Boolean) // remove undefined/null items
