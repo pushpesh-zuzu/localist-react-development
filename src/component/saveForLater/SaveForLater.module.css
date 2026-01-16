@@ -274,7 +274,7 @@
   gap: 8px;
   background-color: #e3f6fc;
   padding: 10px 16px;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   word-wrap: break-word;
   overflow-wrap: break-word;

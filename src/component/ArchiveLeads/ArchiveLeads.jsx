@@ -13,8 +13,11 @@ import {
   getArchivedLeads,
   getAddManualBidData,
   totalCreditData,
+  getBuyerActivitiesApi,
+  getLeadProfileRequestList,
+  getSellerNotesApi,
+  setLeadListProfileLoader,
 } from "../../store/LeadSetting/leadSettingSlice";
-import SavedViewDetails from "../saveForLater/SavedViewDetails/SaveViewDetails";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import ContactSuccessModal from "../Leads/LeadLists/ContactSuccessModal";
@@ -23,15 +26,19 @@ import { showToast } from "../../utils";
 import pendingImg from "../../assets/Images/MyResponse/PendingBtnImg.svg";
 import { Helmet } from "react-helmet-async";
 import { formatUKPhoneNumber } from "../../utils/formatUKPhoneNumber";
+import MyResponseAccordion from "../myResponses/MyResponseAccordian/MyResponseAccordian";
+import pendingArrowIcon from "../../assets/Images/Leads/arrowLeadImg.svg";
+import dayjs from "../../utils/dayjs";
 
 const ArchiveLeads = () => {
   const dispatch = useDispatch();
   const scrollContainerRef = useRef(null);
   const [visibleCount, setVisibleCount] = useState(5);
   const [unarchiveLoader, setUnarchiveLoader] = useState(null);
-  const [viewDetailsOpen, setViewDetaisOpen] = useState(null);
+  const [selectedLead, setSelectedLead] = useState(null); // Changed from viewDetailsOpen
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isChangePendingStatus, setisChangePendingStatus] = useState(false);
 
   const [isopen, setIsOpen] = useState(false);
   const [planpurcahse, setPlanPurchase] = useState("");
@@ -42,16 +49,48 @@ const ArchiveLeads = () => {
   const { archivedLeads } = useSelector((state) => state?.leadSetting);
   console.log(archivedLeads, "item");
 
+  const pendingArchivedLeads = archivedLeads?.filter(
+    (lead) => lead?.status !== "hired"
+  );
   useEffect(() => {
     dispatch(getArchivedLeads());
-  }, [dispatch]);
+  }, [dispatch, isChangePendingStatus]);
 
-  const handleViewDetais = (item) => {
-    if (viewDetailsOpen === item?.id) {
-      setViewDetaisOpen(null);
+  // Updated handleOpen function - same as MyResponse
+  const handleOpen = (item) => {
+    if (item?.id == selectedLead) {
+      setSelectedLead(null);
     } else {
-      setViewDetaisOpen(item?.id);
+      dispatch(setLeadListProfileLoader(true));
+      setSelectedLead(item?.id);
     }
+
+    const activityData = {
+      buyer_id: item?.customer_id,
+      user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+      lead_id: item?.id,
+    };
+
+    dispatch(getBuyerActivitiesApi(activityData)).then((result) => {
+      if (result) {
+        const data = {
+          customer_id: item?.customer_id,
+          lead_id: item?.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+        };
+        dispatch(getLeadProfileRequestList(data));
+      }
+    });
+
+    dispatch(getSellerNotesApi(activityData)).then((result) => {
+      if (result) {
+        const data = {
+          customer_id: item?.customer_id,
+          lead_id: item?.id,
+          user_id: userToken?.remember_tokens || registerData?.remember_tokens,
+        };
+      }
+    });
   };
 
   const addManualBidData = (item) => {
@@ -59,9 +98,7 @@ const ArchiveLeads = () => {
     formData.append("buyer_id", item?.customer_id);
     formData.append(
       "user_id",
-      userToken?.remember_tokens
-        ? userToken?.remember_tokens
-        : registerData?.remember_tokens
+      userToken?.remember_tokens || registerData?.remember_tokens
     );
     formData.append("bid", item?.credit_score);
     formData.append("lead_id", item?.id);
@@ -76,9 +113,7 @@ const ArchiveLeads = () => {
       }
 
       const data = {
-        user_id: userToken?.remember_tokens
-          ? userToken?.remember_tokens
-          : registerData?.remember_tokens,
+        user_id: userToken?.remember_tokens || registerData?.remember_tokens,
         page_type: "archived_leads",
       };
 
@@ -123,8 +158,6 @@ const ArchiveLeads = () => {
 
     try {
       await dispatch(unarchivePendingLead(payload));
-
-      // refresh archived list
       dispatch(getArchivedLeads());
     } catch (err) {
       console.error("Unarchive error:", err);
@@ -144,189 +177,207 @@ const ArchiveLeads = () => {
 
   return (
     <>
-      {/* {requestData?.length === 0 && (
-        <div className={styles.noDataContainer}>
-          <h2>No Archived Leads Available</h2>
-        </div>
-      )} */}
       <Helmet>
         <title> Localists.com - Archive Leads</title>
         <meta name="desciption" content="Localists.com - Archive Leads" />
       </Helmet>
       <div className={styles.ArchiveLeadsContainer}>
-        {archivedLeads?.slice(0, visibleCount)?.map((item) => {
-          return (
-            <>
-              <div className={styles.cardParent}>
-                <div className={styles.card}>
-                  {/* Left Section - User Info */}
-                  <div className={styles.infoContainer}>
-                    <div className={styles.userInfo}>
-                      <div className={styles.userDetails}>
-                        <div className={styles.avatar}>
-                          {" "}
-                          {item?.customer?.name?.charAt(0).toUpperCase() || "U"}
+        {pendingArchivedLeads?.length ? (
+          pendingArchivedLeads?.slice(0, visibleCount)?.map((item) => {
+            return (
+              <div key={item?.id}>
+                <div className={styles.cardParent}>
+                  <div className={styles.card}>
+                    {/* Left Section - User Info */}
+                    <div className={styles.infoContainer}>
+                      <div className={styles.userInfo}>
+                        <div className={styles.userDetails}>
+                          <div className={styles.avatar}>
+                            {item?.customer?.name?.charAt(0).toUpperCase() ||
+                              "U"}
+                          </div>
+                          <div className={styles.details}>
+                            <h3>
+                              {item?.customer?.name
+                                ? item.customer.name
+                                    .split(" ")[0]
+                                    .charAt(0)
+                                    .toUpperCase() +
+                                  item.customer.name
+                                    .split(" ")[0]
+                                    .slice(1)
+                                    .toLowerCase()
+                                : ""}
+                            </h3>
+
+                            <p>{item?.postcode}</p>
+                          </div>
                         </div>
-                        <div className={styles.details}>
-                          <h3>
-                            {item?.customer?.name
-                              ? item.customer.name
-                                  .split(" ")[0]
-                                  .charAt(0)
-                                  .toUpperCase() +
-                                item.customer.name
-                                  .split(" ")[0]
-                                  .slice(1)
-                                  .toLowerCase()
-                              : ""}
-                          </h3>
+                        <span className={styles.category}>
+                          {item?.category?.name}
+                        </span>
+                      </div>
+                      <div className={styles.contactContainer}>
+                        <div className={styles.contactItem}>
+                          <img src={BluePhoneIcon} alt="" />
+                          <span>
+                            {item?.phone
+                              ? `${formatUKPhoneNumber(item?.phone)}`
+                              : "N/A"}
+                          </span>
+                        </div>
 
-                          <p>{item?.postcode?.split(" ")[0]}</p>
+                        <div className={styles.contactItem}>
+                          <img src={BlueSmsIcon} alt="" />
+                          <span>{item?.customer?.email || "N/A"}</span>
                         </div>
                       </div>
-                      <span className={styles.category}>
-                        {item?.category?.name}
-                      </span>
                     </div>
-                    <div className={styles.contactContainer}>
-                      <div className={styles.contactItem}>
-                        <img src={BluePhoneIcon} alt="" />
-                        <span>{item?.phone ? `${formatUKPhoneNumber(item?.phone)}` : "N/A"}</span>
-                      </div>
 
-                      <div className={styles.contactItem}>
-                        <img src={BlueSmsIcon} alt="" />
-                        <span>
-                          {item?.customer?.email
-                            ? item?.customer?.email
-                            : "N/A"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Middle Section - Job Details */}
-                  <div className={styles.jobDetails}>
-                    <div className={styles.highlightText}>Highlights :</div>
-                    <div className={styles.badges}>
-                      {item?.is_phone_verified == 1 && (
-                        <span className={styles.verified}>
-                          <img src={VerifiedPhoneIcon} alt="" />
-                          Verified Phone
-                        </span>
-                      )}
-                      {item?.has_additional_details == 1 && (
-                        <span className={styles.additional}>
-                          {" "}
-                          <img src={AdditionalDetailsIcon} alt="" />
-                          Additional details
-                        </span>
-                      )}
-                      {item?.is_frequent_user == 1 && (
-                        <span className={styles.frequent}>
-                          {" "}
-                          <img src={FrequentUserIcon} alt="" />
-                          Frequent user
-                        </span>
-                      )}
-                      {item?.is_urgent == 1 && (
-                        <span className={styles.frequent}>
-                          {" "}
-                          <img src={FrequentUserIcon} alt="" />
-                          Urgent
-                        </span>
-                      )}
-                      {item?.is_high_hiring == 1 && (
-                        <span className={styles.frequent}>
-                          {" "}
-                          <img src={FrequentUserIcon} alt="" />
-                          High hiring
-                        </span>
-                      )}
-                    </div>
-                    <div className={styles.jobInfo}>
-                      {item?.questions && (
-                        <p>
-                          {JSON.parse(item?.questions)
-                            .map((qa) => qa?.ans)
-                            .join("/")}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Right Section - Lead Purchase */}
-                  <div className={styles.leadActions}>
-                    {/* <button
-                      className={styles.purchaseButton}
-                      onClick={() => handleContinue(item)}
-                    >
-                      Contact
-                    </button> */}
-                    <button className={styles.purchaseButton}>
-                      <img src={pendingImg} alt="pendingImg" />{" "}
-                      {item?.status === "pending" ? "Pending" : "Pending"}
-                    </button>
-
-                    <div
-                      className={styles.saveBtnBox}
-                      style={{ position: "relative" }}
-                    >
-                      <button
-                        style={{
-                          position: "absolute",
-                        }}
-                        className={styles.saveBtn}
-                        onClick={() => handleUnArchive(item)}
-                      >
-                        {unarchiveLoader === item.id ? (
-                          <Spin
-                            indicator={
-                              <LoadingOutlined
-                                spin
-                                style={{ color: "white" }}
-                              />
-                            }
-                            size="small"
-                          />
-                        ) : (
-                          "Unarchive"
+                    {/* Middle Section - Job Details */}
+                    <div className={styles.jobDetails}>
+                      <div className={styles.highlightText}>Highlights :</div>
+                      <div className={styles.badges}>
+                        {item?.is_phone_verified == 1 && (
+                          <span className={styles.verified}>
+                            <img src={VerifiedPhoneIcon} alt="" />
+                            Verified Phone
+                          </span>
                         )}
-                      </button>
+                        {item?.has_additional_details == 1 && (
+                          <span className={styles.additional}>
+                            <img src={AdditionalDetailsIcon} alt="" />
+                            Additional details
+                          </span>
+                        )}
+                        {item?.is_frequent_user == 1 && (
+                          <span className={styles.frequent}>
+                            <img src={FrequentUserIcon} alt="" />
+                            Frequent user
+                          </span>
+                        )}
+                        {item?.is_urgent == 1 && (
+                          <span className={styles.frequent}>
+                            <img src={FrequentUserIcon} alt="" />
+                            Urgent
+                          </span>
+                        )}
+                        {item?.is_high_hiring == 1 && (
+                          <span className={styles.frequent}>
+                            <img src={FrequentUserIcon} alt="" />
+                            High hiring
+                          </span>
+                        )}
+                      </div>
+                      <div className={styles.jobInfo}>
+                        {item?.questions && (
+                          <p>
+                            {JSON.parse(item?.questions)
+                              .map((qa) => qa?.ans)
+                              .join("/")}
+                          </p>
+                        )}
+                        {item?.details && (
+                          <p>
+                            <strong>Additional Details:</strong> {item?.details}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <div className={styles.credits_wrapper}>
+
+                    {/* Right Section - Lead Purchase */}
+                    <div className={styles.leadActions}>
+                      <button className={styles.purchaseButton}>
+                        <img src={pendingImg} alt="pendingImg" />
+                        {item?.status === "pending" ? "Pending" : "Pending"}
+                      </button>
+
+                      <div
+                        className={styles.saveBtnBox}
+                        style={{ position: "relative" }}
+                      >
+                        <button
+                          style={{ position: "absolute" }}
+                          className={styles.saveBtn}
+                          onClick={() => handleUnArchive(item)}
+                        >
+                          {unarchiveLoader === item.id ? (
+                            <Spin
+                              indicator={
+                                <LoadingOutlined
+                                  spin
+                                  style={{ color: "white" }}
+                                />
+                              }
+                              size="small"
+                            />
+                          ) : (
+                            "Unarchive"
+                          )}
+                        </button>
+                      </div>
+                      {/* <div className={styles.credits_wrapper}>
                       <span className={styles.credits}>
                         {item?.credit_score} Credits
                       </span>
-                    </div>
+                    </div> */}
 
-                    <div className={styles.mainText}>
-                      <div>ACT FAST</div>{" "}
+                      {/* <div className={styles.mainText}>
+                      <div>ACT FAST</div>
+                    </div> */}
+                      <div className={styles.responseStatus}>
+                        Responded {dayjs().diff(dayjs(item?.created_at), "day")}
+                        d ago
+                      </div>
+                      <div
+                        className={styles.moreDetails}
+                        onClick={() => handleOpen(item)}
+                      >
+                        More Details
+                        <img
+                          src={pendingArrowIcon}
+                          alt="Response"
+                          className={`${styles.arrowIcon} ${
+                            selectedLead === item.id ? "" : styles.rotated
+                          }`}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className={styles.viewDetailsBtnWrapper}>
+                  {/* <div className={styles.viewDetailsBtnWrapper}>
                   <button
                     className={styles.viewDetailsBtn}
-                    onClick={() => handleViewDetais(item)}
+                    onClick={() => handleOpen(item)}
                   >
                     View Details{" "}
                     <img
                       src={viewDetailsArrow}
                       alt="..."
                       className={`${styles.arrowIcon} ${
-                        viewDetailsOpen == item?.id ? "" : styles.rotated
+                        selectedLead === item?.id ? "" : styles.rotated
                       }`}
                     />
                   </button>
+                </div> */}
                 </div>
+
+                {/* MyResponseAccordion - same as MyResponse component */}
+                {selectedLead === item?.id && (
+                  <MyResponseAccordion
+                    lead={selectedLead}
+                    onBack={() => setSelectedLead(null)}
+                    getPendingLeadList={archivedLeads.filter(
+                      (lead) => lead.id === selectedLead
+                    )}
+                    setisChangePendingStatus={setisChangePendingStatus}
+                  />
+                )}
               </div>
-              {viewDetailsOpen == item?.id && (
-                <SavedViewDetails saveForLaterDataList={item} />
-              )}
-            </>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className={styles.NoDataText}>No Archive Data Available</div>
+        )}
       </div>
 
       {archivedLeads?.length > visibleCount && (

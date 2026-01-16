@@ -52,7 +52,7 @@ const TimelineItem = ({ icon, title, description, time, children, isLast }) => (
   </div>
 );
 
-const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
+const MyResponseAccordion = ({ lead, onBack, getPendingLeadList,setisChangePendingStatus }) => {
   const { Option } = Select;
   const [note, setNote] = useState("");
   const [activeTab, setActiveTab] = useState("activity");
@@ -212,6 +212,7 @@ const MyResponseAccordion = ({ lead, onBack, getPendingLeadList }) => {
     if (addHiredData.lead_id) {
       dispatch(getAddHiredLeadDataApi(addHiredData)).then((result) => {
         if (result) {
+          setisChangePendingStatus && setisChangePendingStatus(true)
           showToast("success", result?.message);
           const data = {
             user_id: userToken?.remember_tokens

@@ -482,6 +482,7 @@ const SaveForLater = () => {
                               .join("/")}
                           </p>
                         )}
+                        {item?.details && <p><strong>Additional Details:</strong> {item?.details}</p>}
                       </div>
                     </div>
 
