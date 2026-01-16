@@ -61,7 +61,7 @@ const PostcodeSearchDriveways = ({
       const response = await dispatch(getCityName({ postcode: value }));
       const newResponse = response?.unwrap ? await response.unwrap() : response;
 
-      if (newResponse?.data?.city) {
+      if (newResponse?.data?.valid) {
         const validPostcode = newResponse.data.postcode;
         setPostalCodeValidate(true);
         setCity(newResponse.data.city);

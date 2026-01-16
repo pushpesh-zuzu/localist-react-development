@@ -228,7 +228,7 @@ const LeadsCards = () => {
                                       : ""}
                                   </h3>
 
-                                  <p>{item?.postcode.split(" ")[0]}</p>
+                                  <p>{item?.postcode?.replace(/\s/g, '').slice(0, 2).toUpperCase()}</p>
                                 </div>
                               </div>
                               <span

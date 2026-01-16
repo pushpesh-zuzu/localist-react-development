@@ -77,7 +77,7 @@ const SearchAccountantLeve3 = ({
 
     try {
       const response = await dispatch(getCityName({ postcode: pincode }));
-      if (response?.data?.city) {
+      if (response?.data?.valid) {
         const cityName = response.data.city;
         setCity(cityName);
         dispatch(setcitySerach(cityName));

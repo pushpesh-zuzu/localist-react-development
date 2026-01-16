@@ -119,7 +119,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           ? await response.unwrap()
           : response;
 
-        if (newResponse?.data?.city) {
+        if (newResponse?.data?.valid) {
           setPostcodeValid(true);
           setCity(newResponse.data.city);
           dispatch(setcitySerach(newResponse.data.city));
@@ -435,8 +435,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
         getCityName({ postcode: formData.postcode })
       );
       const newResponse = response?.unwrap ? await response.unwrap() : response;
-
-      if (newResponse?.data?.city) {
+     if (newResponse?.data?.valid) {
         setPostcodeValid(true);
         setCity(newResponse.data.city);
         dispatch(setcitySerach(newResponse.data.city));

@@ -23,6 +23,7 @@ import BuyerRegistration from "../../buyerPanel/PlaceNewRequest/BuyerRegistratio
 import location from "../../../assets/Images/HowItWorks/locationImg.svg";
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import NavigationDetectorDesktop from "../../common/navigationDetected/NavigationDetectorDesktop";
+import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
 
 const SearchProfessionals = ({ nextStep, popularList = [], popularLoader }) => {
   const [Input, setInput] = useState("");
@@ -170,7 +171,7 @@ const SearchProfessionals = ({ nextStep, popularList = [], popularLoader }) => {
           ? await response.unwrap()
           : response;
 
-        if (newResponse?.data?.city) {
+        if (newResponse?.data?.valid) {
           setPostalCodeValidate(true);
           setCity(newResponse.data.city);
           dispatch(setcitySerach(newResponse.data.city));
@@ -328,6 +329,10 @@ const SearchProfessionals = ({ nextStep, popularList = [], popularLoader }) => {
                 size="small"
                 style={{ marginLeft: 10 }}
               />
+            ) : postalCodeValidate ? (
+              <div style={{marginTop:'8px'}} className={styles.validationIcon}>
+                <img src={CheckIcon} alt="Valid" className={styles.checkIcon} />
+              </div>
             ) : null}
           </div>
 
