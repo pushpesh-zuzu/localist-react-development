@@ -398,7 +398,7 @@ const SaveForLater = () => {
                                 : ""}
                             </h3>
 
-                            <p>{item?.postcode?.replace(/\s/g, '').slice(0, 2).toUpperCase()}</p>
+                            <p>{item?.postcode?.replace(/\s/g, '').slice(0, 4).toUpperCase()}</p>
                           </div>
                         </div>
                         <span className={styles.category}>

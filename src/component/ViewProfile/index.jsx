@@ -371,7 +371,7 @@ const ViewProfiles = () => {
             <h2>{profileData?.business_profile_name}</h2>
             <div className={styles.locationText}>
               <img src={LocationIcon} alt="" />
-              <span>{profileData?.city} </span> | {!!isFromManualBids ? profileData?.zipcode : profileData?.zipcode?.replace(/\s/g, '').slice(0, 2).toUpperCase()}
+              <span>{profileData?.city} </span> | {!!isFromManualBids ? profileData?.zipcode : profileData?.zipcode?.replace(/\s/g, '').slice(0, 4).toUpperCase()}
             </div>
 
             <div className={styles.sidebar}>
