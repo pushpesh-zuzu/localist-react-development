@@ -6,29 +6,26 @@ export default function FloatingButtonWrapper({ children }) {
   const sectionsStartRef = useRef(null);
   const [showFloating, setShowFloating] = useState(false);
 
-  useEffect(() => {
-    if (!heroRef.current || !sectionsStartRef.current) return;
+ useEffect(() => {
+    // Wait until refs are available
+    // if (!heroRef.current || !sectionsStartRef.current) return;
 
-    // Hero section observer
     const heroObserver = new IntersectionObserver(
       ([entry]) => {
-        // Agar Hero visible hai (top par hai) → Button hide
         if (entry.isIntersecting) {
           setShowFloating(false);
         }
       },
-      { threshold: 0.5 } // 50% hero visible → button hide
+      { threshold: 0.5 },
     );
 
-    // How It Works section observer
     const sectionsObserver = new IntersectionObserver(
       ([entry]) => {
-        // Agar How It Works visible hai → Button show
         if (entry.isIntersecting) {
           setShowFloating(true);
         }
       },
-      { threshold: .35 }
+      { threshold: 0.35 },
     );
 
     heroObserver.observe(heroRef.current);
@@ -38,7 +35,7 @@ export default function FloatingButtonWrapper({ children }) {
       heroObserver.disconnect();
       sectionsObserver.disconnect();
     };
-  }, []);
+  }, [heroRef.current, sectionsStartRef.current]);
 
   return (
     <>
