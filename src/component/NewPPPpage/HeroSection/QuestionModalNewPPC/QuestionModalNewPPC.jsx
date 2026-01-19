@@ -456,7 +456,9 @@ const QuestionModalNewPPC = ({
                         ? ""
                         : ""
                       : ""
-                  }>
+                  }
+                  disableNextButton={requestLoader}
+                  >
                     
                     {currentQuestion === 0 && (
                             <h2

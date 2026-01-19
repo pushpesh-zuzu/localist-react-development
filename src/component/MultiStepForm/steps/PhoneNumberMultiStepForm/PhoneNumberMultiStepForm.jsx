@@ -19,8 +19,11 @@ const PhoneNumberMultiStepForm = ({
   setUpdateNumberStep,
   setLocalRequestId,
 }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const { buyerRequest, requestUserId } = useSelector((state) => state.buyer);
+  const { buyerRequest, requestUserId, requestLoader } = useSelector(
+    (state) => state.buyer,
+  );
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const campaignid = params.get("gad_campaignid") || "";
@@ -49,7 +52,7 @@ const PhoneNumberMultiStepForm = ({
       setbuyerRequestData({
         ...buyerRequest,
         phone: value,
-      })
+      }),
     );
   };
   const updatedAnswers = Array.isArray(buyerRequest?.questions)
@@ -57,7 +60,7 @@ const PhoneNumberMultiStepForm = ({
     : [];
 
   const hasQuestionNo = updatedAnswers.some(
-    (q) => q && typeof q === "object" && "question_no" in q
+    (q) => q && typeof q === "object" && "question_no" in q,
   );
 
   const answersToSend = hasQuestionNo
@@ -85,9 +88,11 @@ const PhoneNumberMultiStepForm = ({
       setMobileErrorMessage("Please enter a valid 11-digit phone number.");
       return;
     }
-     if (!validateUKPhoneNumber(phone)) {
-          return;
-        }
+    if (!validateUKPhoneNumber(phone)) {
+      return;
+    }
+    setIsSubmitting(true);
+
     if (updateNumberStep === 2) {
       const formData = new FormData();
       formData.append("name", buyerRequest?.name);
@@ -109,40 +114,48 @@ const PhoneNumberMultiStepForm = ({
       formData.append("entry_url", url);
       formData.append("user_ip_address ", ip);
 
-      dispatch(registerQuoteCustomer(formData)).then((result) => {
-        if (result) {
-          setLocalRequestId(result?.data?.user_id);
-          nextStep();
-        }
-      });
+      dispatch(registerQuoteCustomer(formData))
+        .then((result) => {
+          if (result) {
+            setLocalRequestId(result?.data?.user_id);
+            nextStep();
+          }
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
     } else {
       const formData = new FormData();
       formData.append("phone", phone);
       formData.append("user_id", requestUserId);
-      dispatch(updateMobile(formData)).then((result) => {
-        if (result) {
-          showToast(
-            "success",
-            result?.message || "Phone Number updated Successfully"
-          );
-        }
-        setUpdateNumberStep(2);
-        nextStep();
-      });
+      dispatch(updateMobile(formData))
+        .then((result) => {
+          if (result) {
+            showToast(
+              "success",
+              result?.message || "Phone Number updated Successfully",
+            );
+          }
+          setUpdateNumberStep(2);
+          nextStep();
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
     }
 
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
         phone: phone,
-      })
+      }),
     );
   };
 
   const handleBackClick = () => {
     onBack();
   };
-
+  console.log(requestLoader, "requestLoader");
   return (
     <CardLayoutWrapper
       title="Just one more thing…"
@@ -150,6 +163,8 @@ const PhoneNumberMultiStepForm = ({
       onBackClick={handleBackClick}
       buttonText="Compare quotes now"
       showBackButton={true}
+      disableNextButton={requestLoader || isSubmitting}
+      loader={requestLoader || isSubmitting}
     >
       <div className={styles.infoWrapper}>
         <div
