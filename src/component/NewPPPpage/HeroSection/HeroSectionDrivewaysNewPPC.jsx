@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styles from "./HeroSectionDrivewaysNewPPC.module.css";
+import styles from "./HeroSectionNewPPC.module.css";
 import NewPPCForm from "./NewPPCForm";
 import H1 from "../UITypography/H1";
 import VettedProffessionIcon from "../../../assets/ReactIcons/VettedProffessionIcon";
@@ -38,13 +38,13 @@ function HeroSectionDrivewaysNewPPC({
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [localRequestId, setLocalRequestId] = useState(null);
-  const [backButtonTriggered, setBackButtonTriggered] = useState(false);
+  const [backButtonTriggered, setBackButtonTriggered] = useState(false)
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
     if (currentIndex < stepFlow.length - 1) {
-      setBackButtonTriggered(false);
+      setBackButtonTriggered(false)
       dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
     }
   };
@@ -106,7 +106,7 @@ function HeroSectionDrivewaysNewPPC({
             {heading2}
           </H1>
 
-          <div>
+          <div >
             <div className={styles.features}>
               <div className={styles.feature}>
                 <VettedProffessionIcon className={styles.icon} />
@@ -117,7 +117,7 @@ function HeroSectionDrivewaysNewPPC({
                 <p>{text2}</p>
               </div>
               <div className={styles.feature}>
-                <FastResponseIcon className={styles.icon} />
+                <FastResponseIcon className={styles.icon}/>
                 <p>{text3}</p>
               </div>
             </div>
@@ -168,7 +168,7 @@ function HeroSectionDrivewaysNewPPC({
           </FormWrapper>
         )}
 
-        {/* <div className={styles.mobilefirstSection}> */}
+        <div className={styles.mobilefirstSection}>
           {/* <div className={`${styles.features} ${styles.fetureDesktop} `} >
             <div className={`${styles.feature}`}>
               <VettedProffessionIcon className={styles.icon} />
@@ -194,7 +194,7 @@ function HeroSectionDrivewaysNewPPC({
               {quoteText}{" "}
             </button>
           </div> */}
-        {/* </div> */}
+        </div>
       </div>
     </section>
   );
