@@ -16,6 +16,7 @@ const CardLayoutWrapper = ({
   headingCenter = true,
   titlePrimary = false,
   NameEmailContainer = false,
+  titleHeading = "",
 }) => {
   return (
     <div
@@ -26,6 +27,11 @@ const CardLayoutWrapper = ({
       }`}
     >
       <div className={styles.cardWrapper}>
+        {titleHeading && (
+          <h1 style={{ marginBottom: "12px" }} className={styles.headingH1}>
+            {titleHeading}
+          </h1>
+        )}
         {title && (
           <h2
             style={{ color: titlePrimary ? "#00afe3" : "#000" }}

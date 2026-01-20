@@ -9,34 +9,28 @@ import Paragraph from "../UITypography/Paragrah";
 import styles from "./NewPPCForm.module.css";
 import FormWrapper from "./RegistrationForm/FormWrapper";
 import {
-  getCityName,
   questionAnswerData,
   setbuyerRequestData,
-  setcitySerach,
 } from "../../../store/Buyer/BuyerSlice";
 import { searchService } from "../../../store/FindJobs/findJobSlice";
-import { showToast } from "../../../utils";
-import CheckIcon from "../../../assets/Icons/greenCheckBox.jpeg";
 import { validateUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 import { useEmailCheck } from "../../../utils/emailExist";
 import { handleScrollToBottom } from "../../../utils/scroll";
 
-function NewPPCForm({ nextStep, serviceId = 51 }) {
+function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
 
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    email: "",
     service_name: null,
     service_id: "",
-    postcode: "",
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [postcodeValidating, setPostcodeValidating] = useState(false);
+  // const [postcodeValidating, setPostcodeValidating] = useState(false);
   const [postcodeValid, setPostcodeValid] = useState(false);
   const [city, setCity] = useState("");
   const [serviceOptions, setServiceOptions] = useState([]);
@@ -48,9 +42,9 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
   const lastSearchValue = useRef("");
 
   const { searchServiceLoader, service } = useSelector(
-    (state) => state.findJobs
+    (state) => state.findJobs,
   );
-  const { isEmailAvailable ,isChecking} = useEmailCheck(formData.email);
+  const { isEmailAvailable } = useEmailCheck(formData.email);
 
   useEffect(() => {
     if (service && Array.isArray(service) && service.length > 0) {
@@ -61,9 +55,10 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
       }));
       setServiceOptions(options);
 
-      // Automatically select service based on serviceId prop
       if (!initialServiceLoaded && serviceId) {
-        const selectedService = options.find(option => option.value === serviceId);
+        const selectedService = options.find(
+          (option) => option.value === serviceId,
+        );
         if (selectedService) {
           handleServiceChange(selectedService, true);
           setInitialServiceLoaded(true);
@@ -98,75 +93,75 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
         }, 100);
       }, 300);
     },
-    [dispatch, serviceOptions]
+    [dispatch, serviceOptions],
   );
 
-  const validatePostcode = useCallback(
-    async (postcodeValue) => {
-      if (!postcodeValue || postcodeValue.trim().length < 3) {
-        setPostcodeValid(false);
-        setCity("");
-        setErrors((prev) => ({ ...prev, pincode: "" }));
-        return;
-      }
+  // const validatePostcode = useCallback(
+  //   async (postcodeValue) => {
+  //     if (!postcodeValue || postcodeValue.trim().length < 3) {
+  //       setPostcodeValid(false);
+  //       setCity("");
+  //       setErrors((prev) => ({ ...prev, pincode: "" }));
+  //       return;
+  //     }
 
-      setPostcodeValidating(true);
-      try {
-        const response = await dispatch(
-          getCityName({ postcode: postcodeValue })
-        );
-        const newResponse = response?.unwrap
-          ? await response.unwrap()
-          : response;
+  //     setPostcodeValidating(true);
+  //     try {
+  //       const response = await dispatch(
+  //         getCityName({ postcode: postcodeValue })
+  //       );
+  //       const newResponse = response?.unwrap
+  //         ? await response.unwrap()
+  //         : response;
 
-        if (newResponse?.data?.valid) {
-          setPostcodeValid(true);
-          setCity(newResponse.data.city);
-          dispatch(setcitySerach(newResponse.data.city));
-          setErrors((prev) => ({ ...prev, pincode: "" }));
-        } else {
-          setPostcodeValid(false);
-          setCity("");
-          setErrors((prev) => ({
-            ...prev,
-            pincode: "Please enter a valid postcode!",
-          }));
-        }
-      } catch (error) {
-        setPostcodeValid(false);
-        setCity("");
-        setErrors((prev) => ({
-          ...prev,
-          pincode: "Please enter a valid postcode!",
-        }));
-      } finally {
-        setPostcodeValidating(false);
-      }
-    },
-    [dispatch]
-  );
+  //       if (newResponse?.data?.valid) {
+  //         setPostcodeValid(true);
+  //         setCity(newResponse.data.city);
+  //         dispatch(setcitySerach(newResponse.data.city));
+  //         setErrors((prev) => ({ ...prev, pincode: "" }));
+  //       } else {
+  //         setPostcodeValid(false);
+  //         setCity("");
+  //         setErrors((prev) => ({
+  //           ...prev,
+  //           pincode: "Please enter a valid postcode!",
+  //         }));
+  //       }
+  //     } catch (error) {
+  //       setPostcodeValid(false);
+  //       setCity("");
+  //       setErrors((prev) => ({
+  //         ...prev,
+  //         pincode: "Please enter a valid postcode!",
+  //       }));
+  //     } finally {
+  //       setPostcodeValidating(false);
+  //     }
+  //   },
+  //   [dispatch]
+  // );
 
-  useEffect(() => {
-    if (formData.postcode.trim().length >= 3) {
-      if (postcodeValidationTimeout.current) {
-        clearTimeout(postcodeValidationTimeout.current);
-      }
+  // useEffect(() => {
+  //   if (formData.postcode.trim().length >= 3) {
+  //     if (postcodeValidationTimeout.current) {
+  //       clearTimeout(postcodeValidationTimeout.current);
+  //     }
 
-      postcodeValidationTimeout.current = setTimeout(() => {
-        validatePostcode(formData.postcode);
-      }, 600);
-    } else {
-      setPostcodeValid(false);
-      setCity("");
-      setErrors((prev) => ({ ...prev, pincode: "" }));
-    }
+  //     postcodeValidationTimeout.current = setTimeout(() => {
+  //       validatePostcode(formData.postcode);
+  //     }, 600);
+  //   } else {
+  //     setPostcodeValid(false);
+  //     setCity("");
+  //     setErrors((prev) => ({ ...prev, pincode: "" }));
+  //   }
 
-    return () => {
-      if (postcodeValidationTimeout.current) {
-        clearTimeout(postcodeValidationTimeout.current);
-      }
-    };
-  }, [formData.postcode, validatePostcode]);
+  //   return () => {
+  //     if (postcodeValidationTimeout.current) {
+  //       clearTimeout(postcodeValidationTimeout.current);
+  //     }
+  //   };
+  // }, [formData.postcode, validatePostcode]);
 
   useEffect(() => {
     return () => {
@@ -179,12 +174,12 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    
+
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
         [name]: value,
-      })
+      }),
     );
 
     if (errors[name]) {
@@ -212,7 +207,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
         ...buyerRequest,
         service_id: selectedOption?.value || "",
         service_name: selectedOption?.label || "",
-      })
+      }),
     );
 
     setErrors((prev) => ({ ...prev, service: "" }));
@@ -223,20 +218,20 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
     }
   };
 
-  const handlePostcodeChange = (e) => {
-    const value = e.target.value.replace(/\s/g, "").slice(0, 10);
-    setFormData((prev) => ({ ...prev, postcode: value }));
+  // const handlePostcodeChange = (e) => {
+  //   const value = e.target.value.replace(/\s/g, "").slice(0, 10);
+  //   setFormData((prev) => ({ ...prev, postcode: value }));
 
-    // Update buyerRequest in Redux
-    dispatch(
-      setbuyerRequestData({
-        ...buyerRequest,
-        postcode: value,
-      })
-    );
+  //   // Update buyerRequest in Redux
+  //   dispatch(
+  //     setbuyerRequestData({
+  //       ...buyerRequest,
+  //       postcode: value,
+  //     })
+  //   );
 
-    setErrors((prev) => ({ ...prev, pincode: "" }));
-  };
+  //   setErrors((prev) => ({ ...prev, pincode: "" }));
+  // };
 
   const customStyles = {
     control: (base, state) => ({
@@ -345,8 +340,8 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
       backgroundColor: state.isSelected
         ? "#00aef0"
         : state.isFocused
-        ? "#f5f5f5"
-        : "white",
+          ? "#f5f5f5"
+          : "white",
       color: state.isSelected ? "white" : "#253238",
       padding: "12px 16px",
       fontFamily: "Arial",
@@ -393,24 +388,24 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
       newErrors.phone = "Please enter a valid 11-digit phone number";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        newErrors.email = "Please enter a valid email address";
-      }
-    }
+    // if (!formData.email.trim()) {
+    //   newErrors.email = "Email is required";
+    // } else {
+    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   if (!emailRegex.test(formData.email)) {
+    //     newErrors.email = "Please enter a valid email address";
+    //   }
+    // }
 
     if (!formData.service_name || !formData.service_id) {
       newErrors.service = "Please select a service!";
     }
 
-    if (!formData.postcode.trim()) {
-      newErrors.pincode = "Postcode is required!";
-    } else if (!postcodeValid) {
-      newErrors.pincode = "Please enter a valid postcode!";
-    }
+    // if (!formData.postcode.trim()) {
+    //   newErrors.pincode = "Postcode is required!";
+    // } else if (!postcodeValid) {
+    //   newErrors.pincode = "Please enter a valid postcode!";
+    // }
 
     return newErrors;
   };
@@ -428,58 +423,77 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
     if (!validateUKPhoneNumber(formData.phone)) {
       return;
     }
-    setLoading(true);
+    // setLoading(true);
 
-    try {
-      const response = await dispatch(
-        getCityName({ postcode: formData.postcode })
-      );
-      const newResponse = response?.unwrap ? await response.unwrap() : response;
-     if (newResponse?.data?.valid) {
-        setPostcodeValid(true);
-        setCity(newResponse.data.city);
-        dispatch(setcitySerach(newResponse.data.city));
+    // try {
+    //   const response = await dispatch(
+    //     getCityName({ postcode: formData.postcode })
+    //   );
+    //   const newResponse = response?.unwrap ? await response.unwrap() : response;
+    //  if (newResponse?.data?.valid) {
+    //     setPostcodeValid(true);
+    //     setCity(newResponse.data.city);
+    //     dispatch(setcitySerach(newResponse.data.city));
 
-        dispatch(
-          setbuyerRequestData({
-            name: formData.name,
-            phone: formData.phone,
-            email: formData.email,
-            service_id: formData.service_id,
-            service_name: formData.service_name?.label || "",
-            postcode: formData.postcode,
-            city: newResponse.data.city,
-          })
-        );
+    //     dispatch(
+    //       setbuyerRequestData({
+    //         name: formData.name,
+    //         phone: formData.phone,
+    //         email: formData.email,
+    //         service_id: formData.service_id,
+    //         service_name: formData.service_name?.label || "",
+    //         postcode: formData.postcode,
+    //         city: newResponse.data.city,
+    //       })
+    //     );
 
-        setFormData({
-          name: "",
-          phone: "",
-          email: "",
-          service_name: null,
-          service_id: "",
-          postcode: "",
-        });
-        setCity("");
-        setPostcodeValid(false);
-        setInitialServiceLoaded(false);
-        nextStep();
-      } else {
-        showToast("error", "Please enter a valid postcode!");
-        setErrors((prev) => ({
-          ...prev,
-          pincode: "Please enter a valid postcode!",
-        }));
-      }
-    } catch (error) {
-      showToast("error", "Please enter a valid postcode!");
-      setErrors((prev) => ({
-        ...prev,
-        pincode: "Please enter a valid postcode!",
-      }));
-    } finally {
-      setLoading(false);
-    }
+    //     setFormData({
+    //       name: "",
+    //       phone: "",
+    //       email: "",
+    //       service_name: null,
+    //       service_id: "",
+    //       postcode: "",
+    //     });
+    //     setCity("");
+    //     setPostcodeValid(false);
+    //     setInitialServiceLoaded(false);
+    //     nextStep();
+    //   } else {
+    //     showToast("error", "Please enter a valid postcode!");
+    //     setErrors((prev) => ({
+    //       ...prev,
+    //       pincode: "Please enter a valid postcode!",
+    //     }));
+    //   }
+    // } catch (error) {
+    //   showToast("error", "Please enter a valid postcode!");
+    //   setErrors((prev) => ({
+    //     ...prev,
+    //     pincode: "Please enter a valid postcode!",
+    //   }));
+    // } finally {
+    //   setLoading(false);
+    // }
+    dispatch(
+      setbuyerRequestData({
+        name: formData.name,
+        phone: formData.phone,
+        service_id: formData.service_id,
+        service_name: formData.service_name?.label || "",
+      }),
+    );
+
+    setFormData({
+      name: "",
+      phone: "",
+      service_name: null,
+      service_id: "",
+    });
+    setCity("");
+    setPostcodeValid(false);
+    setInitialServiceLoaded(false);
+    nextStep();
   };
 
   useEffect(() => {
@@ -497,17 +511,18 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
         setbuyerRequestData({
           ...buyerRequest,
           email: "",
-        })
+        }),
       );
-      handleScrollToBottom()
+      handleScrollToBottom();
     }
   }, [isEmailAvailable]);
+
   return (
     <FormWrapper>
       <div className={styles.titleContainer}>
-        <H3 className={`Inter ${styles.formTitle}`}>Get Quotes Now</H3>
+        <H3 className={`Inter ${styles.formTitle}`}>Get Your Free Customised Quote Today</H3>
         <Paragraph className={styles.description}>
-          Fill out the form and receive quotes from local professionals
+          Fill out the form to get free estimates from trusted and verified local professionals
         </Paragraph>
       </div>
 
@@ -533,12 +548,12 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
               ...prev,
               phone: onlyNumbers,
             }));
-            
+
             dispatch(
               setbuyerRequestData({
                 ...buyerRequest,
                 phone: onlyNumbers,
-              })
+              }),
             );
 
             if (errors.phone) {
@@ -555,7 +570,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           <span className={styles.errorText}>{errors.phone}</span>
         )}
 
-        <label>Email Address *</label>
+        {/* <label>Email Address *</label>
         <input
           name="email"
           type="email"
@@ -568,7 +583,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
         />
         {errors.email && (
           <span className={styles.errorText}>{errors.email}</span>
-        )}
+        )} */}
 
         <label>What Service Do You Need? *</label>
         <AsyncSelect
@@ -621,7 +636,7 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           <span className={styles.errorText}>{errors.service}</span>
         )}
 
-        <label>What Is Your Postcode? *</label>
+        {/* <label>What Is Your Postcode? *</label>
         <div className={styles.postcodeContainer}>
           <input
             name="postcode"
@@ -647,12 +662,12 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           <span className={styles.errorText}>{errors.pincode}</span>
         ) : (
           ""
-        )}
+        )} */}
 
         <button
           type="submit"
           className={`Arial ${styles.submitBtn}`}
-          disabled={loading || !!questionLoader || isChecking}
+          disabled={loading || !!questionLoader}
         >
           {loading ? (
             <Spin
@@ -669,11 +684,12 @@ function NewPPCForm({ nextStep, serviceId = 51 }) {
           className={styles.disclaimer}
           style={{ maxWidth: "408px", marginLeft: "auto", marginRight: "auto" }}
         >
-         By submitting this form you agree to our Privacy Policy and Terms of Service
+          By submitting this form you agree to our Privacy Policy and Terms of
+          Service
         </small>
       </form>
     </FormWrapper>
   );
 }
 
-export default NewPPCForm;
+export default NewPPCFormDriveways;
