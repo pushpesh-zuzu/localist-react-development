@@ -145,7 +145,7 @@
 @media (max-width: 600px) {
   .container {
     padding: 30px 10px 48px;
-    gap: 20px;
+    gap: 16px;
   }
   .description {
     max-width: 98%;
@@ -176,7 +176,7 @@
     column-gap: 11px;
     row-gap: 0px; 
     justify-content: center;
-    margin-top: 16px;
+    margin-top: 4px;
   }
   .feature:first-child {
     flex: 0 0 100%;
@@ -202,6 +202,6 @@
   .logo {
     height: 20px;
     width: 120px;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
 }

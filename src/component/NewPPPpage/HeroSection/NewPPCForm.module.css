@@ -197,7 +197,7 @@
 @media (max-width: 640px) {
   .titleContainer {
     padding-top: 14px;
-    padding-bottom: 14px;
+    padding-bottom: 0px;
   }
   .description{
     max-width: 98%;
