@@ -13,7 +13,7 @@ function HowItWorkNewPPC({
   heading1 = "How it",
   heading2 = "Works",
   heading = "What to Expect From a Professional Driveway Installation",
-  description = `Get competitive home improvements quotes from leading suppliers in 3 simples step!`,
+  description = `Get Competitive Home Improvement Quotes From Leading Suppliers in 3 Simple Steps!`,
   steps,
 }) {
   const defaultSteps = [
