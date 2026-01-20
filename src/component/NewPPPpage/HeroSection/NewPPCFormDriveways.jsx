@@ -676,7 +676,7 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
             />
           ) : (
             <>
-              Continue <GetQuotesIcon color="#fff" />
+              Continue 
             </>
           )}
         </button>
