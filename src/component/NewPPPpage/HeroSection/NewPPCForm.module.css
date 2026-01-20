@@ -12,6 +12,8 @@
 .formTitle {
   color: #00aef0;
   text-align: center;
+  padding-left: 7px;
+  padding-right: 7px;
 }
 .description {
   text-align: center;

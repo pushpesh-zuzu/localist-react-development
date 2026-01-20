@@ -16,6 +16,7 @@ import { searchService } from "../../../store/FindJobs/findJobSlice";
 import { validateUKPhoneNumber } from "../../../utils/formatUKPhoneNumber";
 import { useEmailCheck } from "../../../utils/emailExist";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import H4 from "../UITypography/H4";
 
 function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
   const dispatch = useDispatch();
@@ -520,8 +521,8 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
   return (
     <FormWrapper>
       <div className={styles.titleContainer}>
-        <H3 className={`Inter ${styles.formTitle}`}>Get Your Free Customised Quote Today</H3>
-        <Paragraph className={styles.description}>
+        <H4  className={`Inter ${styles.formTitle}`}>Get Free Customised Quotes</H4>
+        <Paragraph variant="small" className={styles.description}>
           Fill out the form to get free estimates from trusted and verified local professionals
         </Paragraph>
       </div>

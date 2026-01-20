@@ -29,7 +29,7 @@ const FAQSection = ({
         ""
       )}
 
-      <GetCTAButton
+      <GetCTAButton text="Get Free Estimates"
         onClick={() => {
           handleScrollToBottom();
         }}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styles from "./HeroSectionNewPPC.module.css";
+import styles from "./HeroSectionDrivewaysNewPPC.module.css";
 import NewPPCForm from "./NewPPCForm";
 import H1 from "../UITypography/H1";
 import VettedProffessionIcon from "../../../assets/ReactIcons/VettedProffessionIcon";
@@ -38,13 +38,13 @@ function HeroSectionDrivewaysNewPPC({
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [localRequestId, setLocalRequestId] = useState(null);
-  const [backButtonTriggered, setBackButtonTriggered] = useState(false)
+  const [backButtonTriggered, setBackButtonTriggered] = useState(false);
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
     if (currentIndex < stepFlow.length - 1) {
-      setBackButtonTriggered(false)
+      setBackButtonTriggered(false);
       dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
     }
   };
@@ -106,23 +106,23 @@ function HeroSectionDrivewaysNewPPC({
             {heading2}
           </H1>
 
-          <div className={styles.desktopfirstSection}>
+          <div>
             <div className={styles.features}>
               <div className={styles.feature}>
-                <VettedProffessionIcon />
+                <VettedProffessionIcon className={styles.icon} />
                 <p>{text1}</p>
               </div>
               <div className={styles.feature}>
-                <FreeQuoteIcon />
+                <FreeQuoteIcon className={styles.icon} />
                 <p>{text2}</p>
               </div>
               <div className={styles.feature}>
-                <FastResponseIcon />
+                <FastResponseIcon className={styles.icon} />
                 <p>{text3}</p>
               </div>
             </div>
 
-            <div className={styles.ctaRow}>
+            <div className={`${styles.ctaRow} ${styles.desktopfirstSection}`}>
               <button className={`${styles.primaryBtn}`}>{quoteText}</button>
             </div>
           </div>
@@ -168,9 +168,9 @@ function HeroSectionDrivewaysNewPPC({
           </FormWrapper>
         )}
 
-        <div className={styles.mobilefirstSection}>
-          <div className={styles.features}>
-            <div className={styles.feature}>
+        {/* <div className={styles.mobilefirstSection}> */}
+          {/* <div className={`${styles.features} ${styles.fetureDesktop} `} >
+            <div className={`${styles.feature}`}>
               <VettedProffessionIcon className={styles.icon} />
               <p>{text1}</p>
             </div>
@@ -182,9 +182,9 @@ function HeroSectionDrivewaysNewPPC({
               <FastResponseIcon className={styles.icon} />
               <p>{text3}</p>
             </div>
-          </div>
+          </div> */}
 
-          <div className={styles.ctaRow}>
+          {/* <div className={styles.ctaRow}>
             <button
               onClick={() => {
                 handleScrollToBottom();
@@ -193,8 +193,8 @@ function HeroSectionDrivewaysNewPPC({
             >
               {quoteText}{" "}
             </button>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
     </section>
   );

@@ -97,7 +97,7 @@ function CostGuide({
           Get A Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
       </div> */}
-      <GetCTAButton
+      <GetCTAButton text="Hire a Tradesperson"
         onClick={() => {
           handleScrollToBottom();
         }}

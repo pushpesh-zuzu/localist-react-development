@@ -45,7 +45,7 @@ const TreeSurgeryRegionalGuide = ({
       </div>
 
       <div className={styles.ctaWrap}>
-        <GetCTAButton onClick={handleScrollToBottom} />
+        <GetCTAButton text="Hire a Tradesperson" onClick={handleScrollToBottom} />
       </div>
     </PaddingWrapper>
   );

@@ -49,7 +49,7 @@ function TreeSurgeryCostGuide({
         ))}
       </div>
 
-      <GetCTAButton
+      <GetCTAButton text="Hire a Tradesperson"
         onClick={() => {
           handleScrollToBottom();
         }}

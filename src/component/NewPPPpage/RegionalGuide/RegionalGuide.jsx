@@ -43,7 +43,7 @@ const RegionalGuide = ({
         </div>
       </div>
 
-      <GetCTAButton
+      <GetCTAButton text="Want a Custom Price?"
         onClick={() => {
           handleScrollToBottom();
         }}

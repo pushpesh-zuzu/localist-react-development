@@ -45,7 +45,7 @@ function PopularServicesTypes({
           Get a Free Quotes Now <GetQuotesIcon color="white" />
         </Button1>
       </div> */}
-      <GetCTAButton
+      <GetCTAButton text="Get Free Estimates"
         onClick={() => {
           handleScrollToBottom();
         }}
