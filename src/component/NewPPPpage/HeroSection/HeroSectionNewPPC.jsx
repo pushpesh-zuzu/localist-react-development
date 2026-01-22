@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 import styles from "./HeroSectionNewPPC.module.css";
 import NewPPCForm from "./NewPPCForm";
 import H1 from "../UITypography/H1";
-import TrustedIcon from "../../../assets/ReactIcons/TrustedIcon";
 import VettedProffessionIcon from "../../../assets/ReactIcons/VettedProffessionIcon";
 import FreeQuoteIcon from "../../../assets/ReactIcons/FreeQuoteIcon";
 import FastResponseIcon from "../../../assets/ReactIcons/FastResponseIcon";
-import SearchWhiteIcon from "../../../assets/ReactIcons/SearchWhiteIcon";
-import GetQuotesIcon from "../../../assets/ReactIcons/GetQuotesIcon";
 import { setBuyerStep } from "../../../store/Buyer/BuyerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import QuestionModalNewPPC from "./QuestionModalNewPPC/QuestionModalNewPPC";
@@ -20,6 +17,10 @@ import NavigationDetectorDesktop from "../../common/navigationDetected/Navigatio
 import NavigationDetectorWithConfirmations from "../../common/navigationDetected/NavigationDetectorWithConfirmations";
 import Logo from "../../../assets/ReactIcons/Logo";
 import { handleScrollToBottom } from "../../../utils/scroll";
+import PostCodeNewPPC from "./PostCodeNewPPC/PostCodeNewPPC";
+import EmailNewPPC from "./EmailNewFormPPC/EmailNewPPC";
+import NewPPCFormDriveways from "./NewPPCFormDriveways";
+import QuestionModalDrivewaysNewPPC from "./QuestionModalNewPPC/QuestionModalDrivewaysNewPPC";
 
 function HeroSectionNewPPC({
   heading0 = "Find Expert",
@@ -37,18 +38,26 @@ function HeroSectionNewPPC({
   const { userToken } = useSelector((state) => state.auth);
   const { authToken } = useSelector((state) => state.findJobs);
   const [localRequestId, setLocalRequestId] = useState(null);
+  const [backButtonTriggered, setBackButtonTriggered] = useState(false);
   const { questionanswerData, questionLoader, buyerRequest, buyerStep } =
     useSelector((state) => state.buyer);
   const nextStep = () => {
     const currentIndex = stepFlow.indexOf(buyerStep);
     if (currentIndex < stepFlow.length - 1) {
+      setBackButtonTriggered(false);
       dispatch(setBuyerStep(stepFlow[currentIndex + 1]));
+    }
+  };
+  const prevStep = () => {
+    setBackButtonTriggered(true);
+    const currentIndex = stepFlow.indexOf(buyerStep);
+    if (currentIndex > 0) {
+      dispatch(setBuyerStep(stepFlow[currentIndex - 1]));
     }
   };
   const [reEnterMobile, setReEnterMobile] = useState(2);
   const isAdminOrRemembered = authToken || userToken?.remember_tokens;
-
-  const stepFlow = [1, 2, 3, 4];
+  const stepFlow = [1, 2, 3, 4, 5, 6];
   // ? [2, 3, 6, 7, 8]
   // : [1, 2, 3, 4];
   // useEffect(() => {
@@ -65,12 +74,15 @@ function HeroSectionNewPPC({
     const pendingModal = JSON.parse(localStorage.getItem("pendingBuyerModal"));
 
     if (pendingModal?.shouldOpen) {
-      dispatch(setBuyerStep(4));
+      dispatch(setBuyerStep(6));
     } else {
       const initialStep = isAdminOrRemembered ? 2 : 1;
       dispatch(setBuyerStep(1));
     }
   }, [dispatch, isAdminOrRemembered]);
+  useEffect(() => {
+    handleScrollToBottom();
+  }, [buyerStep]);
 
   return (
     <section className={styles.heroWrapper}>
@@ -98,23 +110,23 @@ function HeroSectionNewPPC({
             {heading2}
           </H1>
 
-          <div className={styles.desktopfirstSection}>
+          <div>
             <div className={styles.features}>
               <div className={styles.feature}>
-                <VettedProffessionIcon />
+                <VettedProffessionIcon className={styles.icon} />
                 <p>{text1}</p>
               </div>
               <div className={styles.feature}>
-                <FreeQuoteIcon />
+                <FreeQuoteIcon className={styles.icon} />
                 <p>{text2}</p>
               </div>
               <div className={styles.feature}>
-                <FastResponseIcon />
+                <FastResponseIcon className={styles.icon} />
                 <p>{text3}</p>
               </div>
             </div>
 
-            <div className={styles.ctaRow}>
+            <div className={`${styles.ctaRow} ${styles.desktopfirstSection}`}>
               <button className={`${styles.primaryBtn}`}>{quoteText}</button>
             </div>
           </div>
@@ -123,39 +135,46 @@ function HeroSectionNewPPC({
         {/* RIGHT FORM */}
 
         {buyerStep === 1 && (
-          <NewPPCForm nextStep={nextStep} serviceId={serviceId} />
+          <NewPPCFormDriveways nextStep={nextStep} serviceId={serviceId} />
         )}
         {buyerStep === 2 && (
-          <QuestionModalNewPPC
+          <QuestionModalDrivewaysNewPPC
             questions={questionanswerData}
             loading={questionLoader}
             serviceName={buyerRequest.service_name}
             nextStep={nextStep}
             setLocalRequestId={setLocalRequestId}
             description={questionDescription}
+            backButtonTriggered={backButtonTriggered}
           />
         )}
-        {buyerStep === 3 && reEnterMobile === 2 && (
+        {buyerStep == 3 && (
+          <PostCodeNewPPC prevStep={prevStep} onNext={nextStep} />
+        )}
+        {buyerStep === 4 && (
+          <EmailNewPPC onBack={prevStep} nextStep={nextStep} />
+        )}
+        {buyerStep === 5 && reEnterMobile === 2 && (
           <OTPVerificationNewPPC
             setReEnterMobile={setReEnterMobile}
             isThankuPageOnlyShow
           />
         )}
-        {reEnterMobile === 1 && buyerStep === 3 && (
+        {reEnterMobile === 1 && buyerStep === 5 && (
           <ReEnterMobileNumberNewPPC
             setReEnterMobile={setReEnterMobile}
             onClose={() => setReEnterMobile(2)}
           />
         )}
-        {buyerStep === 4 && (
+        {buyerStep === 6 && (
           <FormWrapper>
             <DescribeYourRequestNewPPC />
           </FormWrapper>
         )}
 
         <div className={styles.mobilefirstSection}>
-          <div className={styles.features}>
-            <div className={styles.feature}>
+          {/* <div className={`${styles.features} ${styles.fetureDesktop} `} >
+            <div className={`${styles.feature}`}>
               <VettedProffessionIcon className={styles.icon} />
               <p>{text1}</p>
             </div>
@@ -167,9 +186,9 @@ function HeroSectionNewPPC({
               <FastResponseIcon className={styles.icon} />
               <p>{text3}</p>
             </div>
-          </div>
+          </div> */}
 
-          <div className={styles.ctaRow}>
+          {/* <div className={styles.ctaRow}>
             <button
               onClick={() => {
                 handleScrollToBottom();
@@ -178,7 +197,7 @@ function HeroSectionNewPPC({
             >
               {quoteText}{" "}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
