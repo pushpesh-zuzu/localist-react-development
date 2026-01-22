@@ -30,6 +30,8 @@ const NewTreeSurgeryPPC = lazy(() => import("../pages/NewTreeSurgeryPPC"));
 const NewLandscapingPPCPage = lazy(() => import("../pages/NewLandscapingPPCPage"));
 const ReplacementsRoofingPPCPage = lazy(() => import("../pages/ReplacementsRoofingPPCPage"));
 const NewFenceInstallationPPCPage = lazy(() => import("../pages/NewFenceInstallationPPCPage"));
+const NewGlobalFormPPC = lazy(() => import("../pages/NewGlobalFormPPC"));
+
 
 // ============================================================
 // LAZY-LOADED PAGES - reduces main bundle by ~200KB
@@ -287,6 +289,12 @@ const routes = [
         path: "new-ppc-fence-and-gate",
         element: (
           <LocaleRedirect>{withSuspense(NewFenceInstallationPPCPage)}</LocaleRedirect>
+        ),
+      },
+      {
+        path: "hire-home-improvement-experts-near-you-ppc",
+        element: (
+          <LocaleRedirect>{withSuspense(NewGlobalFormPPC)}</LocaleRedirect>
         ),
       },
       {

@@ -32,7 +32,7 @@ function HeroSectionDrivewaysNewPPC({
   text3 = "Fast Response",
   quoteText = "Get Free Quotes Now",
   questionDescription = "",
-  serviceId = 51,
+  serviceId,
 }) {
   const dispatch = useDispatch();
   const { userToken } = useSelector((state) => state.auth);
@@ -146,6 +146,7 @@ function HeroSectionDrivewaysNewPPC({
             setLocalRequestId={setLocalRequestId}
             description={questionDescription}
             backButtonTriggered={backButtonTriggered}
+            serviceId={serviceId}
           />
         )}
         {buyerStep == 3 && (

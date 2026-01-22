@@ -18,7 +18,7 @@ import { useEmailCheck } from "../../../utils/emailExist";
 import { handleScrollToBottom } from "../../../utils/scroll";
 import H4 from "../UITypography/H4";
 
-function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
+function NewPPCFormDriveways({ nextStep, serviceId  }) {
   const dispatch = useDispatch();
   const { buyerRequest } = useSelector((state) => state.buyer);
 
@@ -31,7 +31,6 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  // const [postcodeValidating, setPostcodeValidating] = useState(false);
   const [postcodeValid, setPostcodeValid] = useState(false);
   const [city, setCity] = useState("");
   const [serviceOptions, setServiceOptions] = useState([]);
@@ -46,6 +45,10 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
     (state) => state.findJobs,
   );
   const { isEmailAvailable } = useEmailCheck(formData.email);
+
+  useEffect(() => {
+    console.log('Service options updated:', serviceOptions);
+  }, [serviceOptions]);
 
   useEffect(() => {
     if (service && Array.isArray(service) && service.length > 0) {
@@ -189,50 +192,54 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
   };
 
   const handleServiceChange = (selectedOption, isAutoSelect = false) => {
-    // Create service object for formData
-    const serviceObj = selectedOption
-      ? {
-          value: selectedOption.value,
-          label: selectedOption.label,
-        }
-      : null;
+   
+
+    if (!selectedOption) {
+      setFormData((prev) => ({
+        ...prev,
+        service_name: null,
+        service_id: "",
+      }));
+      
+      dispatch(
+        setbuyerRequestData({
+          ...buyerRequest,
+          service_id: "",
+          service_name: "",
+        }),
+      );
+      
+      setErrors((prev) => ({ ...prev, service: "" }));
+      return;
+    }
+
+    const serviceObj = {
+      value: selectedOption.value,
+      label: selectedOption.label,
+    };
 
     setFormData((prev) => ({
       ...prev,
       service_name: serviceObj,
-      service_id: selectedOption?.value || "",
+      service_id: selectedOption.value,
     }));
+
+    dispatch(questionAnswerData({ service_id: selectedOption.value }));
 
     dispatch(
       setbuyerRequestData({
         ...buyerRequest,
-        service_id: selectedOption?.value || "",
-        service_name: selectedOption?.label || "",
+        service_id: selectedOption.value,
+        service_name: selectedOption.label,
       }),
     );
 
     setErrors((prev) => ({ ...prev, service: "" }));
 
-    // If it's auto-selected, don't trigger the question loader immediately
-    if (!isAutoSelect && selectedOption?.value) {
-      dispatch(questionAnswerData({ service_id: selectedOption.value }));
+    if (isAutoSelect) {
+      setInitialServiceLoaded(true);
     }
   };
-
-  // const handlePostcodeChange = (e) => {
-  //   const value = e.target.value.replace(/\s/g, "").slice(0, 10);
-  //   setFormData((prev) => ({ ...prev, postcode: value }));
-
-  //   // Update buyerRequest in Redux
-  //   dispatch(
-  //     setbuyerRequestData({
-  //       ...buyerRequest,
-  //       postcode: value,
-  //     })
-  //   );
-
-  //   setErrors((prev) => ({ ...prev, pincode: "" }));
-  // };
 
   const customStyles = {
     control: (base, state) => ({
@@ -497,11 +504,11 @@ function NewPPCFormDriveways({ nextStep, serviceId = 51 }) {
     nextStep();
   };
 
-  useEffect(() => {
-    if (formData.service_id && initialServiceLoaded) {
+  useEffect(() => {  
+    if (formData.service_id) {
       dispatch(questionAnswerData({ service_id: formData.service_id }));
     }
-  }, [formData.service_id, initialServiceLoaded, dispatch]);
+  }, [formData.service_id, dispatch]);
 
   const { questionLoader } = useSelector((state) => state.buyer);
 

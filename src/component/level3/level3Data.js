@@ -1716,7 +1716,7 @@ const CONTENT_CONFIG_TOP = {
     title: "Artificial Grass Installers",
     mainTitle: "Artificial Installer",
     findingHeading: "artificial grass installers",
-    ctaText: "Artificial Installer",
+    ctaText: "Artificial Grass Installer",
     avgPriceTitle: "artificial grass installation",
     showSpeicialits: true,
     // monthlyText: true,

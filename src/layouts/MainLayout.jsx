@@ -349,6 +349,11 @@ const pageTitles = {
     description:
       "Get free quotes from top fencing companies. Compare local professionals, read reviews, and hire trusted experts – quick and hassle-free.",
   },
+  "/hire-home-improvement-experts-near-you-ppc": {
+    title: "  Hire Trusted Home Improvement Experts Near You | Get Free Quotes",
+    description:
+      "Hire trusted & experienced home improvement experts near you. Get free online quotes from local, verified professionals for your home projects.",
+  },
 };
 
 const floatingPath = ["/new-ppc-driveways"];
@@ -359,6 +364,7 @@ const noLayoutPaths = [
   "/new-ppc-landscaping",
   "/new-ppc-fence-and-gate",
   "/new-ppc-roof-and-replacements",
+  "/hire-home-improvement-experts-near-you-ppc"
 ];
 const MainLayout = () => {
   const location = useLocation();
