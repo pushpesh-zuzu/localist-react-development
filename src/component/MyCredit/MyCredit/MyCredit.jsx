@@ -232,12 +232,12 @@ const MyCredits = () => {
                   {item?.plan_type === "starter" && (
                     <div className={styles.offerBoxTop}>
                       <span>
-                        45% Discount{" "}
+                        Bronze{" "}
                         {/* <div>
                           <img src={shuttle} alt="" />
                         </div> */}
                       </span>{" "}
-                      <div>Your Exclusive Sign Up Offer</div>
+                      {/* <div>Your Exclusive Sign Up Offer</div> */}
                     </div>
                   )}
                   {item?.plan_type === "starter" && (
