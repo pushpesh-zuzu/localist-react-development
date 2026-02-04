@@ -25,9 +25,9 @@ const QuestionModalDrivewaysNewPPC = ({
   const { buyerRequest, requestLoader } =
     useSelector((state) => state.buyer);
   const { search } = useLocation();
-  const allParams =
-    typeof window !== "undefined" &&
-    extractAllParams(search || window.location.search);
+  // const allParams =
+  //   typeof window !== "undefined" &&
+  //   extractAllParams(search || window.location.search);
 
   const optionsContainerRef = useRef(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);

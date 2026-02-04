@@ -11,16 +11,19 @@ const NavigationDetectorDesktop = () => {
   const { buyerRequest, citySerach } = useSelector((state) => state.buyer);
   const { search } = useLocation();
   const allParams = extractAllParams(search || window.location.search);
-  const campaignid = allParams.gad_campaignid || "";
+  const campaignid = allParams.campaign_id || "";
   const keyword = allParams.keyword || "";
   const gclid = allParams.gclid || "";
-  const campaign = allParams.utm_campaign || "";
-  const adGroup = allParams.AgId || "";
-  const targetID = allParams.utm_term || "";
-  const msclickid = allParams.utm_msclkid || "";
-  const utm_source = allParams.utm_source || "";
+  const msclkid = allParams.msclkid || "";
+  const adgroup_id = allParams.adgroup_id;
+  const platform_source = allParams.source || "";
+  const campaign = allParams.campaign || "";
+  const adgroup = allParams.adgroup || "";
+  const matchtype = allParams.matchtype || "";
+  const device = allParams.device || "";
+  const loc_physical_ms = allParams.loc_physical_ms || "";
+  const utm_search_term = allParams.utm_search_term || "";
   const { ip, url } = useUserInfo();
-
   const latestData = useRef({
     userToken,
     buyerRequest,
@@ -75,10 +78,14 @@ const NavigationDetectorDesktop = () => {
     formData.append("campaignid", campaignid || "");
     formData.append("gclid", gclid || "");
     formData.append("campaign", campaign || "");
-    formData.append("adgroup", adGroup || "");
-    formData.append("targetid", targetID || "");
-    formData.append("msclickid", msclickid || "");
-    formData.append("utm_source", utm_source || "");
+    formData.append("adgroup", adgroup || "");
+    formData.append("msclickid", msclkid || "");
+    formData.append("adgroup_id", adgroup_id || "");
+    formData.append("matchtype", matchtype || "");
+    formData.append("device", device || "");
+    formData.append("loc_physical_ms", loc_physical_ms || "");
+    formData.append("utm_search_term", utm_search_term || "");
+    formData.append("platform_source", platform_source);
     formData.append("keyword", keyword || "");
     formData.append("entry_url", buyerRequest.url || "");
     formData.append("user_ip_address", buyerRequest.ip || "");
