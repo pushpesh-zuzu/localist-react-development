@@ -27,17 +27,6 @@ const QuestionAnswerMultiStepTreeSurgeon = ({
   const { service, registerData } = useSelector((state) => state.findJobs);
   const { userToken, adminToken } = useSelector((state) => state.auth);
 
-  const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const campaignid = params.get("gad_campaignid") || "";
-  const keyword = params.get("keyword") || "";
-  const gclid = params.get("gclid") || "";
-  const campaign = params.get("utm_campaign") || "";
-  const adGroup = params.get("AgId") || "";
-  const targetID = params.get("utm_term") || "";
-  const msclickid = params.get("utm_msclkid") || "";
-  const utm_source = params.get("utm_source") || "";
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // const [selectedOption, setSelectedOption] = useState([]);
   const [otherText, setOtherText] = useState("");

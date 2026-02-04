@@ -14,6 +14,7 @@ import useUserInfo from "../../../../../utils/getUserIp";
 import { validateEmail } from "../../../../../utils/validateEmail";
 import { useEmailCheck } from "../../../../../utils/emailExist";
 import { validateUKPhoneNumber } from "../../../../../utils/formatUKPhoneNumber";
+import { extractAllParams } from "../../../../../utils/decodeURLParams";
 
 const EmailMatch = ({
   onClose,
@@ -30,16 +31,19 @@ const EmailMatch = ({
     (state) => state.findJobs
   );
   const { search } = useLocation();
-  const params = new URLSearchParams(search);
-  const { ip, url } = useUserInfo();
-  const campaignid = params.get("campaignid");
-  const keyword = params.get("keyword");
-  const gclid = params.get("gclid");
-  const campaign = params.get("utm_campaign");
-  const adGroup = params.get("AgId");
-  const targetID = params.get("utm_term");
-  const msclickid = params.get("utm_msclkid");
-  const utm_source = params.get("utm_source");
+   const allParams = extractAllParams(search || window.location.search);
+    const campaignid = allParams.campaign_id || "";
+    const keyword = allParams.keyword || "";
+    const gclid = allParams.gclid || "";
+    const msclkid = allParams.msclkid || "";
+    const adgroup_id = allParams.adgroup_id;
+    const platform_source = allParams.source || "";
+    const campaign = allParams.campaign || "";
+    const adgroup = allParams.adgroup || "";
+    const matchtype = allParams.matchtype || "";
+    const device = allParams.device || "";
+    const loc_physical_ms = allParams.loc_physical_ms || "";
+    const utm_search_term = allParams.utm_search_term || "";
   const { userToken } = useSelector((state) => state.auth);
 
   const [inputType, setInputType] = useState("text");
@@ -250,10 +254,14 @@ const EmailMatch = ({
       formData.append("campaignid", campaignid || "");
       formData.append("gclid", gclid || "");
       formData.append("campaign", campaign || "");
-      formData.append("adgroup", adGroup || "");
-      formData.append("targetid", targetID || "");
-      formData.append("msclickid", msclickid || "");
-      formData.append("utm_source", utm_source || "");
+      formData.append("adgroup", adgroup || "");
+      formData.append("msclickid", msclkid || "");
+      formData.append("adgroup_id", adgroup_id || "");
+      formData.append("matchtype", matchtype || "");
+      formData.append("device", device || "");
+      formData.append("loc_physical_ms", loc_physical_ms || "");
+      formData.append("utm_search_term", utm_search_term || "");
+      formData.append("platform_source", platform_source);
       formData.append("keyword", keyword || "");
       formData.append("form_status", 1);
       formData.append("entry_url", url);
