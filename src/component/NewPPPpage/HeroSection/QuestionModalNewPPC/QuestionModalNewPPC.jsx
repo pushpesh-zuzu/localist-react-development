@@ -195,10 +195,14 @@ const QuestionModalNewPPC = ({
       formData.append("campaignid", campaignid || "");
       formData.append("gclid", gclid || "");
       formData.append("campaign", campaign || "");
-      formData.append("adgroup", adGroup || "");
-      formData.append("targetid", targetID || "");
-      formData.append("msclickid", msclickid || "");
-      formData.append("utm_source", utm_source || "");
+      formData.append("adgroup", adgroup || "");
+      formData.append("msclickid", msclkid || "");
+      formData.append("adgroup_id", adgroup_id || "");
+      formData.append("matchtype", matchtype || "");
+      formData.append("device", device || "");
+      formData.append("loc_physical_ms", loc_physical_ms || "");
+      formData.append("utm_search_term", utm_search_term || "");
+      formData.append("platform_source", platform_source);
       formData.append("keyword", keyword || "");
       formData.append("entry_url", url);
       formData.append("user_ip_address ", ip);

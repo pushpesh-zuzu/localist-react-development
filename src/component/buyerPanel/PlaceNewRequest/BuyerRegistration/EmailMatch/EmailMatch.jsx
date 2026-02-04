@@ -93,74 +93,6 @@ const EmailMatch = ({
     }
   }, [isEmailAvailable]);
 
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      if (name || email || phone) {
-        const savedData = {
-          name: name || "",
-          email: email || "",
-          phone: phone || "",
-          questions: buyerRequest?.questions || [],
-          service_id: buyerRequest?.service_id || "",
-          city: citySerach || "",
-          postcode: buyerRequest?.postcode || "",
-          campaignid: campaignid || "",
-          gclid: gclid || "",
-          campaign: campaign || "",
-          adgroup: adGroup || "",
-          targetid: targetID || "",
-          msclickid: msclickid || "",
-          utm_source: utm_source || "",
-          keyword: keyword || "",
-          form_status: 0,
-        };
-
-        localStorage.setItem("unsentQuoteData", JSON.stringify(savedData));
-
-        e.preventDefault();
-        e.returnValue = "";
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [
-    name,
-    email,
-    phone,
-    buyerRequest,
-    citySerach,
-    campaignid,
-    gclid,
-    campaign,
-    adGroup,
-    targetID,
-    msclickid,
-    utm_source,
-    keyword,
-  ]);
-  useEffect(() => {
-    const savedData = localStorage.getItem("unsentQuoteData");
-
-    if (savedData) {
-      const formData = JSON.parse(savedData);
-
-      const dataToSend = new FormData();
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key === "questions") {
-          dataToSend.append("questions", JSON.stringify(value || []));
-        } else {
-          dataToSend.append(key, value);
-        }
-      });
-
-      dispatch(registerQuoteCustomer(dataToSend)).then((result) => {
-        if (result) {
-          localStorage.removeItem("unsentQuoteData");
-        }
-      });
-    }
-  }, [dispatch]);
 
   const handleEmailBlur = async () => {
     if (!email) {
@@ -315,32 +247,7 @@ const EmailMatch = ({
     }
   };
 
-  const handleLeave = () => {
-    const formData = new FormData();
-    formData.append("name", name || "");
-    formData.append("email", email || "");
-    formData.append("phone", phone || "");
-    formData.append("questions", JSON.stringify(buyerRequest?.questions || []));
-    formData.append("service_id", buyerRequest?.service_id || "");
-    formData.append("city", citySerach || "");
-    formData.append("postcode", buyerRequest?.postcode || "");
-    formData.append("campaignid", campaignid || "");
-    formData.append("gclid", gclid || "");
-    formData.append("campaign", campaign || "");
-    formData.append("adgroup", adGroup || "");
-    formData.append("targetid", targetID || "");
-    formData.append("msclickid", msclickid || "");
-    formData.append("utm_source", utm_source || "");
-    formData.append("keyword", keyword || "");
-    formData.append("form_status", 0);
 
-    dispatch(registerQuoteCustomer(formData)).then((res) => {
-      if (res?.success) {
-        localStorage.removeItem("unsentQuoteData");
-        window.location.reload();
-      }
-    });
-  };
 
   useEffect(() => {
     dispatch(setbuyerRequestData({ name, email, phone }));
